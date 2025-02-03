@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Скасувати',
         selectAllCheckboxLabel: 'Вибрати все',
         deselectAllCheckboxLabel: 'Скасувати вибір',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Для скасування вибору рядка натисніть клавішу пробілу',
         selectSingleRow: 'Для вибору рядка натисніть клавішу пробілу',
         loadMore: 'Завантажити більше',
-        filteredBy: 'Фільтрувати за'
+        filteredBy: 'Фільтрувати за',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'

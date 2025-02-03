@@ -1,13 +1,15 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogModule } from '../dialog.module';
 import { DialogService } from './dialog.service';
 
 @Component({
-    template: ``
+    template: ``,
+    standalone: true,
+    imports: [CommonModule, DialogModule]
 })
 class DialogServiceTestComponent {
     constructor(public dialogService: DialogService) {}
@@ -18,7 +20,9 @@ class DialogServiceTestComponent {
         <ng-template let-dialogRef let-dialogConfig="dialogConfig" #testTemplate>
             <fd-dialog [dialogRef]="dialogRef" [dialogConfig]="dialogConfig"></fd-dialog>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, DialogModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;
@@ -32,8 +36,13 @@ describe('DialogService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TemplateTestComponent, DialogServiceTestComponent],
-            imports: [CommonModule, DialogModule, NoopAnimationsModule]
+            imports: [
+                CommonModule,
+                OverlayModule,
+                NoopAnimationsModule,
+                TemplateTestComponent,
+                DialogServiceTestComponent
+            ]
         }).compileComponents();
     });
 
@@ -50,56 +59,46 @@ describe('DialogService', () => {
         expect(service.hasOpenDialogs()).toBe(false);
     });
 
-    it('should open dialog from template', fakeAsync(async () => {
+    it('should open dialog from template', fakeAsync(() => {
         const destroyDialogSpy = jest.spyOn(service as any, '_destroyDialog');
         const templateRef = component.templateRef;
         const dialogRef = service.open(templateRef);
 
         fixture.detectChanges();
-
-        await fixture.whenRenderingDone();
-
+        tick();
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
-
         fixture.detectChanges();
-
-        tick(200);
-
+        tick(200); // Wait for the closing animation or processing
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
 
-    it('should open dialog from component', fakeAsync(async () => {
+    it('should open dialog from component', fakeAsync(() => {
         const destroyDialogSpy = jest.spyOn(service as any, '_destroyDialog');
         const dialogRef = service.open(TemplateTestComponent);
 
         fixture.detectChanges();
-
-        await fixture.whenRenderingDone();
-
+        tick();
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
-
         fixture.detectChanges();
-
-        tick(200);
-
+        tick(200); // Wait for the closing animation or processing
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
 
-    it('should dismiss all modals', () => {
+    it('should dismiss all dialogs', fakeAsync(() => {
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
 
         expect(service.hasOpenDialogs()).toBe(true);
-
         service.dismissAll();
-
+        fixture.detectChanges();
+        tick(); // Wait for the closing animation or processing
         expect(service.hasOpenDialogs()).toBe(false);
-    });
+    }));
 });

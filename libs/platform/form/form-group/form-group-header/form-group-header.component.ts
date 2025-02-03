@@ -16,7 +16,6 @@ import { FieldGroup } from '../../models/field.model';
     host: {
         '[class.fd-form-group__header]': 'true'
     },
-    standalone: true,
     imports: [NgTemplateOutlet, LinkComponent, IconComponent, InlineHelpDirective]
 })
 export class FormGroupHeaderComponent {

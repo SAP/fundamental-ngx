@@ -28,7 +28,6 @@ const checkboxWrappingTsCode = 'checkbox-label-wrapping-example.component.ts';
 @Component({
     selector: 'app-input',
     templateUrl: './checkbox-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

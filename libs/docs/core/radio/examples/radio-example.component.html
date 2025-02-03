@@ -254,5 +254,95 @@
                 Information Option
             </fd-radio-button>
         </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-27'"
+                value="val5"
+                state="information"
+                [disabled]="true"
+                [(ngModel)]="optionSixVariable"
+            >
+                Read Only Option
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio button States in read only mode</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-22'"
+                value="val0"
+                state="default"
+                [readOnly]="true"
+                [(ngModel)]="optionSevenVariable"
+            >
+                Default Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-23'"
+                state="success"
+                value="val1"
+                [readOnly]="true"
+                [(ngModel)]="optionSevenVariable"
+            >
+                Valid(Success) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-24'"
+                value="val2"
+                state="warning"
+                [readOnly]="true"
+                [(ngModel)]="optionSevenVariable"
+            >
+                Warning Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-25'"
+                value="val3"
+                state="error"
+                [readOnly]="true"
+                [(ngModel)]="optionSevenVariable"
+            >
+                Invalid(Error) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-26'"
+                value="val4"
+                state="information"
+                [readOnly]="true"
+                [(ngModel)]="optionSevenVariable"
+            >
+                Information Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-27'"
+                value="val5"
+                state="information"
+                [readOnly]="true"
+                [(ngModel)]="optionSevenVariable"
+            >
+                Read Only Option
+            </fd-radio-button>
+        </div>
     </fd-form-group>
 </fieldset>

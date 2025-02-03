@@ -23,6 +23,8 @@ import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-
         <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
         <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
     </fd-dynamic-page-header>`,
+    standalone: true,
+    imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
     providers: [DynamicPageService]
 })
 class TestComponent {
@@ -57,6 +59,8 @@ class TestComponent {
             <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
         </fd-dynamic-page-header>
     `,
+    standalone: true,
+    imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DynamicPageService]
 })
@@ -74,8 +78,7 @@ describe('DynamicPageTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestComponent],
+            imports: [TestComponent],
             providers: [DynamicPageService]
         }).compileComponents();
     }));
@@ -126,8 +129,7 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestWithSubtitleTemplateComponent],
+            imports: [TestWithSubtitleTemplateComponent],
             providers: [DynamicPageService]
         }).compileComponents();
     });

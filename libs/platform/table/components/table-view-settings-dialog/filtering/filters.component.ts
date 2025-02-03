@@ -8,7 +8,8 @@ import {
     OnInit,
     output,
     signal,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
 
@@ -42,7 +43,7 @@ import { FiltersListStepComponent, SelectableFilter } from './filters-list-step.
     selector: 'fdp-filters',
     templateUrl: './filters.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+    encapsulation: ViewEncapsulation.None,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

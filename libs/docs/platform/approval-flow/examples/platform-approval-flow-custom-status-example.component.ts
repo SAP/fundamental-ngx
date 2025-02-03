@@ -30,7 +30,6 @@ import { cloneDeep } from 'lodash-es';
 @Component({
     selector: 'fdp-platform-approval-flow-custom-status-example',
     templateUrl: './platform-approval-flow-custom-status-example.component.html',
-    standalone: true,
     imports: [
         PlatformApprovalFlowModule,
         FormsModule,

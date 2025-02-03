@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-avatar-group-legacy-header',
     templateUrl: './avatar-group-legacy-header.component.html',
-    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent],
-    standalone: true
+    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class AvatarGroupLegacyHeaderComponent {}

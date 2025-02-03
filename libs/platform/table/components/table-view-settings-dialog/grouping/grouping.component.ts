@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, OnInit, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit, output, signal, ViewEncapsulation } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
 
 import {
@@ -44,7 +44,7 @@ let groupOrderHeaderUniqueId = 0;
     selector: 'fdp-grouping',
     templateUrl: './grouping.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+    encapsulation: ViewEncapsulation.None,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

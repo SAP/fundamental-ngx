@@ -39,7 +39,6 @@ export interface SelectTypeDialogFormData {
     host: {
         class: 'fdp-approval-flow-dialog fdp-approval-flow-select-type'
     },
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

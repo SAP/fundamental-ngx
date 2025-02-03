@@ -513,10 +513,14 @@ export default {
         sortDialogCancelBtnLabel: 'Batal',
         selectAllCheckboxLabel: 'Pilih semua',
         deselectAllCheckboxLabel: 'Nyahpilih semua',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Untuk nyahpilih baris, tekan BAR RUANG',
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
         loadMore: 'Muatkan lebih lagi',
-        filteredBy: 'Ditapis mengikut'
+        filteredBy: 'Ditapis mengikut',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

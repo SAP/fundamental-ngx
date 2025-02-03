@@ -515,10 +515,14 @@ export default {
         sortDialogCancelBtnLabel: 'Ακύρωση',
         selectAllCheckboxLabel: 'Επιλογή όλων',
         deselectAllCheckboxLabel: 'Κατάργηση επιλογής όλων',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
         selectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
         loadMore: 'Φόρτωση περισσότερων',
-        filteredBy: 'Φιλτράρισμα κατά'
+        filteredBy: 'Φιλτράρισμα κατά',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Επεξεργασία'

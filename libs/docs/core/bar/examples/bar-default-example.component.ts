@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'fd-bar-default-example',
     templateUrl: './bar-default-example.component.html',
-    standalone: true,
     imports: [BarModule, AvatarComponent, AsyncPipe]
 })
 export class BarDefaultExampleComponent implements OnInit {

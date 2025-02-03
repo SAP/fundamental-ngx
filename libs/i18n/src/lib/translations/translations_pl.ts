@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Anuluj',
         selectAllCheckboxLabel: 'Zaznacz wszystko',
         deselectAllCheckboxLabel: 'Odznacz wszystko',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Aby odznaczyć linię, naciśnij SPACJĘ',
         selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
         loadMore: 'Załaduj więcej',
-        filteredBy: 'Odfiltrowane wg'
+        filteredBy: 'Odfiltrowane wg',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'

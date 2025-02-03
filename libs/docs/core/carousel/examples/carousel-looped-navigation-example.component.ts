@@ -5,7 +5,6 @@ import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/
     selector: 'fd-carousel-looped-navigation-example',
     templateUrl: './carousel-looped-navigation-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CarouselComponent, CarouselItemComponent]
 })
 export class CarouselLoopedNavigationExampleComponent {}

@@ -11,7 +11,9 @@ import { NestedLinkDirective } from './nested-link.directive';
             <span fd-nested-list-icon [glyph]="'settings'"></span>
             <span fd-nested-list-title>Link 1</span>
         </a>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListModule]
 })
 class TestNestedContainerComponent {
     @ViewChild('directiveElement', { static: true, read: NestedLinkDirective })
@@ -25,8 +27,7 @@ describe('NestedLinkDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));

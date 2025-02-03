@@ -37,7 +37,6 @@ const multiComboboxLoadingTs = 'multi-combobox-loading/multi-combobox-loading-ex
 @Component({
     selector: 'platform-multi-combobox-docs',
     templateUrl: './platform-multi-combobox-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

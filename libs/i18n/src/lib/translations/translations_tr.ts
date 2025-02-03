@@ -515,10 +515,14 @@ export default {
         sortDialogCancelBtnLabel: 'İptal',
         selectAllCheckboxLabel: 'Tümünü seç',
         deselectAllCheckboxLabel: 'Tümünün seçimini kaldır',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Satırın seçimi kaldırmak için boşluk tuşuna basın',
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
         loadMore: 'Daha fazla yükle',
-        filteredBy: 'Filtre ölçütü'
+        filteredBy: 'Filtre ölçütü',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'

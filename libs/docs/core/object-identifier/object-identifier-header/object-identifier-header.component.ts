@@ -11,7 +11,6 @@ import {
     selector: 'app-object-status-header',
     templateUrl: './object-identifier-header.component.html',
     styleUrls: ['./object-identifier-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ObjectIdentifierHeaderComponent {}

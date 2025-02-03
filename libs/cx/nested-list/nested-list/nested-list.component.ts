@@ -31,6 +31,7 @@ import { NestedListInterface } from './nested-list.interface';
     template: ` <ng-content></ng-content> `,
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[cxNestedList], [fdx-nested-list], ul[fdx-nested-list]',
+    standalone: true,
     providers: [contentDensityObserverProviders()]
 })
 export class NestedListComponent implements AfterContentInit, NestedListInterface {

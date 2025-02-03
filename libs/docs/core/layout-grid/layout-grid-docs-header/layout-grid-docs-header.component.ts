@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-panel-docs-header',
     templateUrl: './layout-grid-docs-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class LayoutGridDocsHeaderComponent {}

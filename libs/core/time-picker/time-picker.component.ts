@@ -80,7 +80,6 @@ let timePickerCounter = 0;
     styleUrl: './time-picker.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,
@@ -458,6 +457,7 @@ export class TimePickerComponent<D>
                 return '';
             }
             formattedTime = this._dateTimeAdapter.format(time!, this.getDisplayFormat());
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {}
 
         return formattedTime;

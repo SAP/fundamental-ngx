@@ -12,7 +12,6 @@ import { SplitterComponent } from '../splitter.component';
         class: 'fd-splitter__pagination',
         '[attr.role]': '"radiogroup"'
     },
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
 export class SplitterPaginationComponent {

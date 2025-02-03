@@ -512,10 +512,14 @@ export default {
         sortDialogCancelBtnLabel: 'בטל',
         selectAllCheckboxLabel: 'בחר הכול',
         deselectAllCheckboxLabel: 'בטל בחירה של הכול',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'על מנת לבטל בחירת שורה, הקש על מקש הרווח',
         selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
         loadMore: 'טען עוד',
-        filteredBy: 'מסונן לפי'
+        filteredBy: 'מסונן לפי',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'ערוך'

@@ -512,10 +512,14 @@ export default {
         sortDialogCancelBtnLabel: '취소',
         selectAllCheckboxLabel: '모두 선택',
         deselectAllCheckboxLabel: '모두 선택 취소',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: '행 선택을 취소하려면 스페이스바를 누르십시오.',
         selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
         loadMore: '추가 로드',
-        filteredBy: '필터링 기준'
+        filteredBy: '필터링 기준',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '편집'

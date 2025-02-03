@@ -25,7 +25,6 @@ import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-inpu
     styleUrl: './multi-input-mobile.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [DialogModule, TemplateDirective, BarModule, NgTemplateOutlet, CdkScrollable, ScrollbarDirective]
 })
 export class PlatformMultiInputMobileComponent extends MobileModeBase<PlatformMultiInputInterface> implements OnInit {

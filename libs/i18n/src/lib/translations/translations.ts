@@ -517,6 +517,9 @@ export default {
         sortDialogCancelBtnLabel: 'Cancel',
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
         loadMore: 'Show more',
@@ -524,7 +527,8 @@ export default {
         settingsDialogHeader: 'Settings',
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Cancel',
-        filteredBy: 'Filtered by'
+        filteredBy: 'Filtered by',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

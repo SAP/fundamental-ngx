@@ -15,7 +15,6 @@ import { ToolLayoutTabletExampleComponent } from './examples/tablet-example/tool
 
 @Component({
     templateUrl: './tool-layout-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

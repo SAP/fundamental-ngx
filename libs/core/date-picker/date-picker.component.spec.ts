@@ -483,6 +483,8 @@ describe('DatePickerComponent Accessibility', () => {
         template: `
             <fd-date-picker [type]="type" [message]="message" [state]="state" [required]="required"></fd-date-picker>
         `,
+        standalone: true,
+        imports: [FdDatetimeModule, DatePickerModule],
         providers: [
             {
                 provide: FD_LANGUAGE,
@@ -512,8 +514,7 @@ describe('DatePickerComponent Accessibility', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [HostComponent],
-            imports: [FdDatetimeModule, DatePickerModule],
+            imports: [HostComponent],
             providers: []
         }).compileComponents();
     }));
@@ -591,7 +592,9 @@ describe('DatePickerComponent Accessibility', () => {
 });
 
 @Component({
-    template: `<fd-date-picker></fd-date-picker>`
+    template: `<fd-date-picker></fd-date-picker>`,
+    standalone: true,
+    imports: [DatePickerModule, FdDatetimeModule]
 })
 class DateTimePickerHostComponent {
     @ViewChild(DatePickerComponent) picker: DatePickerComponent<FdDate>;
@@ -601,8 +604,7 @@ runValueAccessorTests<DatePickerComponent<FdDate>, DateTimePickerHostComponent>(
     component: DatePickerComponent,
     name: 'Date picker',
     testModuleMetadata: {
-        imports: [DatePickerModule, FdDatetimeModule],
-        declarations: [DateTimePickerHostComponent]
+        imports: [DateTimePickerHostComponent]
     },
     hostTemplate: {
         getTestingComponent: (fixture) => fixture.componentInstance.picker,

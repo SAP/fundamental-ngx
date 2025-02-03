@@ -1,5 +1,5 @@
 @use '@angular/cdk';
-@import 'fundamental-styles/dist/scrollbar';
+@import 'fundamental-styles/dist/scrollbar.css';
 
 @include cdk.a11y-visually-hidden();
 
@@ -565,6 +565,14 @@ fdk-dynamic-portal {
                 flex-direction: column;
                 width: 100%;
             }
+        }
+    }
+
+    &__growing-button-total {
+        border-top: var(--fdList_Item_Action_Border) !important;
+
+        .fd-list__title {
+            line-height: 2.75rem;
         }
     }
 

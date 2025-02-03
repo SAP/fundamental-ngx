@@ -20,7 +20,6 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         InitialFocusDirective,

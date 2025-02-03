@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Peruuta',
         selectAllCheckboxLabel: 'Valitse kaikki',
         deselectAllCheckboxLabel: 'Poista kaikki valinnat',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Poista rivin valinta painamalla välilyöntinäppäintä',
         selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä',
         loadMore: 'Lataa enemmän',
-        filteredBy: 'Suodatusperuste'
+        filteredBy: 'Suodatusperuste',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Muokkaa'

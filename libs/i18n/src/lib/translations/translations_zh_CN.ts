@@ -511,10 +511,14 @@ export default {
         sortDialogCancelBtnLabel: '取消',
         selectAllCheckboxLabel: '全选',
         deselectAllCheckboxLabel: '取消全选',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: '要取消选择行，请按空格键',
         selectSingleRow: '要选择行，请按空格键',
         loadMore: '加载更多',
-        filteredBy: '过滤条件'
+        filteredBy: '过滤条件',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'

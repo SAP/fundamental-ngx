@@ -5,7 +5,9 @@ import { PlatformSmartFilterBarModule } from '../smart-filter-bar.module';
 import { SmartFilterBarFieldDefinitionDirective } from './smart-filter-bar-field-definition.directive';
 
 @Component({
-    template: `<div fdp-smart-filter-bar-field-definition smartFilterBarFilterable="false" required="true"></div>`
+    template: `<div fdp-smart-filter-bar-field-definition smartFilterBarFilterable="false" required="true"></div>`,
+    standalone: true,
+    imports: [PlatformSmartFilterBarModule]
 })
 class TestComponent {
     @ViewChild(SmartFilterBarFieldDefinitionDirective)
@@ -18,8 +20,7 @@ describe('SmartFilterBarFieldDefinitionDirective', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformSmartFilterBarModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     });
 

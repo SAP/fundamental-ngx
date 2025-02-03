@@ -9,7 +9,6 @@ import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/
     styleUrls: ['./platform-select-custom-trigger.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformSelectModule, IconComponent]
 })
 export class PlatformSelectCustomTriggerComponent {

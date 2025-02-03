@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Odustani',
         selectAllCheckboxLabel: 'Odaberi sve',
         deselectAllCheckboxLabel: 'Poništi sve odabire',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Za poništenje odabira retka pritisnite RAZMAKNICU',
         selectSingleRow: 'Za odabir retka pritisnite RAZMAKNICU',
         loadMore: 'Učitaj više',
-        filteredBy: 'Filtrirano po'
+        filteredBy: 'Filtrirano po',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'

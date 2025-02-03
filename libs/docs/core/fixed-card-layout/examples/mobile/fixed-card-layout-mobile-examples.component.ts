@@ -17,7 +17,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-fixed-card-layout-mobile-examples',
     templateUrl: './fixed-card-layout-mobile-examples.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         DialogModule,

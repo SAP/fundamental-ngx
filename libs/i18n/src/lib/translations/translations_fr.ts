@@ -516,10 +516,14 @@ export default {
         sortDialogCancelBtnLabel: 'Annuler',
         selectAllCheckboxLabel: 'Sélectionner tout',
         deselectAllCheckboxLabel: 'Tout désélectionner',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: "Pour désélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
         selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
         loadMore: 'Charger plus',
-        filteredBy: 'Filtré par'
+        filteredBy: 'Filtré par',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifier'

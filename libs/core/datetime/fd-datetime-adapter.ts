@@ -160,6 +160,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
                 ?.value;
 
             return am && pm ? [am, pm] : DEFAULT_PERIODS;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
             const dayPeriodRegexp = new RegExp(`(${LETTERS_UNICODE_RANGE}+\\.*)+`, 'g');
             const amRegExpMatch = formatter.format(new Date(2020, 0, 1, 6)).match(dayPeriodRegexp);

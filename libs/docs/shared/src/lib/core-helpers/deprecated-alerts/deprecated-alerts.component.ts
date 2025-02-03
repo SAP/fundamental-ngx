@@ -15,7 +15,6 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
             }
         `
     ],
-    standalone: true,
     imports: [MessageStripComponent, LinkComponent, RouterLink]
 })
 export class DeprecatedAlertsComponent {

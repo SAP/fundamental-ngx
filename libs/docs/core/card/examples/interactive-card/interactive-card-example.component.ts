@@ -6,7 +6,6 @@ import { CardModule } from '@fundamental-ngx/core/card';
     selector: 'fd-interactive-card-example',
     templateUrl: './interactive-card-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, AvatarComponent, ButtonComponent, TextComponent]
 })
 export class InteractiveCardExampleComponent {}

@@ -514,9 +514,13 @@ export default {
         sortDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         selectAllCheckboxLabel: '[[[Ŝēĺēċţ ąĺĺ∙∙∙∙]]]',
         deselectAllCheckboxLabel: '[[[Ďēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙]]]',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: '[[[Ţŏ ƌēşēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
-        loadMore: '[[[Ļŏąƌ ɱŏŗē∙∙∙∙∙]]]'
+        loadMore: '[[[Ļŏąƌ ɱŏŗē∙∙∙∙∙]]]',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '[[[Ĕƌįţ]]]'

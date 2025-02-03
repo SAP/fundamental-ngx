@@ -515,10 +515,14 @@ export default {
         sortDialogCancelBtnLabel: 'Avbryt',
         selectAllCheckboxLabel: 'Merk alle',
         deselectAllCheckboxLabel: 'Opphev merking av alle',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Trykk på mellomromstast for å oppheve merkingen',
         selectSingleRow: 'Trykk på mellomromstast for å merke rad',
         loadMore: 'Last inn mer',
-        filteredBy: 'Filtrert etter'
+        filteredBy: 'Filtrert etter',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'

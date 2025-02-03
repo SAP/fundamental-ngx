@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-fixed-card-layout-docs-header',
     templateUrl: './fixed-card-layout-docs-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FixedCardLayoutDocsHeaderComponent {}

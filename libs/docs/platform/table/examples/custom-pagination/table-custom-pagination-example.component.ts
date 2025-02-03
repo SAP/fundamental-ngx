@@ -16,7 +16,6 @@ import { Observable, delay, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-table-custom-pagination-example',
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

@@ -30,7 +30,6 @@ import 'dayjs/locale/fr';
             useClass: DayjsDatetimeAdapter
         }
     ],
-    standalone: true,
     imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonComponent, DatePickerComponent]
 })
 export class DatePickerDayjsAdapterExampleComponent {

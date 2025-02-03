@@ -40,7 +40,6 @@ export class Fruit {
             useValue: DEFAULT_NEW_BREAKPOINTS_CONFIG
         }
     ],
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,

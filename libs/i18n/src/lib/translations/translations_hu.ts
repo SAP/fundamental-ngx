@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Mégse',
         selectAllCheckboxLabel: 'Összes kiválasztása',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'A sor kijelölésének megszüntetéséhez nyomja meg a „szóköz” billentyűt',
         selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
         loadMore: 'Továbbiak betöltése',
-        filteredBy: 'Alkalmazott szűrő:'
+        filteredBy: 'Alkalmazott szűrő:',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Szerkesztés'

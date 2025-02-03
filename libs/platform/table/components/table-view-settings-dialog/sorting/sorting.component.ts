@@ -46,7 +46,6 @@ let sortDialogSortByHeaderUniqueId = 0;
     templateUrl: './sorting.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

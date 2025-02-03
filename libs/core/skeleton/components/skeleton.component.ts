@@ -20,7 +20,6 @@ let skeletonUniqueId = 0;
     styleUrl: './skeleton.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class SkeletonComponent implements OnChanges {

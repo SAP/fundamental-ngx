@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Annuller',
         selectAllCheckboxLabel: 'Vælg alle',
         deselectAllCheckboxLabel: 'Fravælg alle',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Tryk på mellemrumstasten for at slette markering af række',
         selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
         loadMore: 'Indlæs mere',
-        filteredBy: 'Filtreret efter'
+        filteredBy: 'Filtreret efter',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'

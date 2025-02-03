@@ -58,7 +58,6 @@ const selectNoWrapTs = 'platform-select-nowrap/platform-select-nowrap-example.co
             }
         `
     ],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -29,7 +29,6 @@ const platformTableFiSettingsSrc = 'platform-table-settings-dialog-example.compo
     templateUrl: './settings-dialog-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fd-message-toast-header',
     templateUrl: './message-toast-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

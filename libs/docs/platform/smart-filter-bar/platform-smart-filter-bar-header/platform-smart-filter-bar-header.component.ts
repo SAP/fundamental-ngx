@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-smart-filter-bar-header',
     templateUrl: './platform-smart-filter-bar-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformSmartFilterBarHeaderComponent {}

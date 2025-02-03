@@ -54,7 +54,6 @@ const layoutGridNoGapSrc = 'layout-grid-no-gap-example.component.html';
             }
         `
     ],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

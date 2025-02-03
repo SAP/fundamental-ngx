@@ -14,7 +14,6 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
     templateUrl: './platform-dynamic-page-non-collapsible-example.component.html',
     styleUrls: ['./platform-dynamic-page-non-collapsible-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         PlatformDynamicPageModule,

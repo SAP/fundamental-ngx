@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Отменить',
         selectAllCheckboxLabel: 'Выбрать все',
         deselectAllCheckboxLabel: 'Отменить выделение',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Для отмены выбора нажмите пробел',
         selectSingleRow: 'Для выбора строки нажмите пробел',
         loadMore: 'Загрузить еще',
-        filteredBy: 'Отфильтровано по'
+        filteredBy: 'Отфильтровано по',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Изменить'

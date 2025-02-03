@@ -16,7 +16,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-dialog-configuration-example',
     templateUrl: './dialog-configuration-example.component.html',
     styleUrls: ['./dialog-configuration-example.component.scss'],
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

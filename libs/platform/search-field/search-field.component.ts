@@ -113,7 +113,6 @@ type Appearance = SearchComponent['appearance'] | undefined;
             useExisting: SearchFieldComponent
         }
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         MenuTriggerDirective,
@@ -292,9 +291,7 @@ export class SearchFieldComponent
         };
     }
     /** @hidden Focus state */
-    get isFocused(): boolean {
-        return this._document?.activeElement === this.inputField?.nativeElement;
-    }
+    _isFocused = false;
 
     /**
      * Observable list of string values taken from `suggestions` to populate dropdown menu.

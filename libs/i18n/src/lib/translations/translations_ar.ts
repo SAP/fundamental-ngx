@@ -513,10 +513,14 @@ export default {
         sortDialogCancelBtnLabel: 'إلغاء',
         selectAllCheckboxLabel: 'تحديد الكل',
         deselectAllCheckboxLabel: 'إلغاء تحديد الكل',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'لإلغاء تحديد الصف، اضغط مفتاح المسافة',
         selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
         loadMore: 'تحميل المزيد',
-        filteredBy: 'تمت التصفية حسب'
+        filteredBy: 'تمت التصفية حسب',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'تحرير'

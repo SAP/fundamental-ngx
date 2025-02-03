@@ -11,7 +11,6 @@ import { TimelinePositionControlService } from '../../services/timeline-position
     host: {
         class: 'fd-timeline__post-content'
     },
-    standalone: true,
     imports: [TextComponent]
 })
 export class TimelineNodeBodyComponent {

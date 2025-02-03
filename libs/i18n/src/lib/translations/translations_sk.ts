@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Zrušiť',
         selectAllCheckboxLabel: 'Vybrať všetko',
         deselectAllCheckboxLabel: 'Zrušiť výber všetkého',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Pre zrušenie výberu stlačte MEDZERNÍK',
         selectSingleRow: 'Ak chcete vybrať riadok, stlačte MEDZERNÍK',
         loadMore: 'Načítať ďalšie',
-        filteredBy: 'Filtrované podľa'
+        filteredBy: 'Filtrované podľa',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upraviť'

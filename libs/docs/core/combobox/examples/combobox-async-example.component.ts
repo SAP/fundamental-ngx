@@ -7,7 +7,6 @@ import { Observable, of } from 'rxjs';
 @Component({
     selector: 'fd-combobox-async-example',
     templateUrl: './combobox-async-example.component.html',
-    standalone: true,
     imports: [ComboboxComponent, FormsModule, AsyncPipe]
 })
 export class ComboboxAsyncExampleComponent implements OnInit {

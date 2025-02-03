@@ -58,7 +58,6 @@ export class NavigationListItemMarkerDirective implements HasElementRef {
 
 @Component({
     selector: 'fdb-navigation-list-item',
-    standalone: true,
     imports: [
         CommonModule,
         NgTemplateOutlet,
@@ -326,21 +325,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         });
 
         // We need to track child directives change and set list items based on that.
-        effect(
-            () => {
-                if (!this._parentNavigationListItemDirective?.childDirectives()) {
-                    return;
-                }
-
-                const children = this._parentNavigationListItemDirective.childDirectives();
-                const mappedItems = Array.from(children).map((child) => child._item);
-
-                this.listItems$.set(mappedItems);
-            },
-            {
-                allowSignalWrites: true
+        effect(() => {
+            if (!this._parentNavigationListItemDirective?.childDirectives()) {
+                return;
             }
-        );
+
+            const children = this._parentNavigationListItemDirective.childDirectives();
+            const mappedItems = Array.from(children).map((child) => child._item);
+
+            this.listItems$.set(mappedItems);
+        });
 
         this._parentNavigationListItemDirective?.registerItem(this);
 

@@ -513,10 +513,14 @@ export default {
         sortDialogCancelBtnLabel: 'キャンセル',
         selectAllCheckboxLabel: 'すべて選択',
         deselectAllCheckboxLabel: 'すべて選択解除',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: '行を選択解除するにはスペースキーを押します。',
         selectSingleRow: '行を選択するにはスペースキーを押します。',
         loadMore: 'さらにロード',
-        filteredBy: 'フィルタ基準'
+        filteredBy: 'フィルタ基準',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編集'

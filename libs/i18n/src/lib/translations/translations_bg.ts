@@ -514,10 +514,14 @@ export default {
         sortDialogCancelBtnLabel: 'Отказ',
         selectAllCheckboxLabel: 'Избиране на всички',
         deselectAllCheckboxLabel: 'Отмяна на избора на всички',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'За премахване на ред от избраните, натиснете ИНТЕРВАЛ',
         selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
         loadMore: 'Зареждане на повече',
-        filteredBy: 'Филтрирано по'
+        filteredBy: 'Филтрирано по',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактиране'

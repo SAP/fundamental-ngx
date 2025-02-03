@@ -5,7 +5,6 @@ import { ProgressIndicatorComponent } from '@fundamental-ngx/core/progress-indic
 @Component({
     selector: 'fd-progress-indicator-animation',
     templateUrl: './progress-indicator-animation.component.html',
-    standalone: true,
     imports: [ProgressIndicatorComponent, ButtonComponent]
 })
 export class ProgressIndicatorAnimationComponent {
