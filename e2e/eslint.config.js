@@ -27,7 +27,7 @@ module.exports = [
             ],
             'jsdoc/require-jsdoc': 'off',
             'grouped-accessor-pairs': 'off'
-        },
+        }
     },
     {
         files: ['**/*.html'],
