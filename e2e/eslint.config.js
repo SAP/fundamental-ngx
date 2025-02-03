@@ -7,7 +7,6 @@ module.exports = [
     ...nx.configs['flat/angular-template'],
     {
         files: ['*.ts'],
-        extends: ['plugin:@nx/angular', 'plugin:@angular-eslint/template/process-inline-templates'],
         rules: {
             '@angular-eslint/no-host-metadata-property': 'off',
             '@angular-eslint/directive-selector': [
@@ -29,7 +28,6 @@ module.exports = [
             'jsdoc/require-jsdoc': 'off',
             'grouped-accessor-pairs': 'off'
         },
-        plugins: ['@angular-eslint/eslint-plugin', '@typescript-eslint']
     },
     {
         files: ['**/*.html'],

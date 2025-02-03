@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const tsConfig = require('../tsconfig.base.json');
 const tsNode = require('ts-node');
 const dns = require('node:dns');
