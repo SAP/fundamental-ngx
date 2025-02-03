@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.2...v0.55.0-rc.3) (2025-02-03)
+
+
+### Bug Fixes
+
+* **core:** popover escape key to close should not bubble to dialog ([#12957](https://github.com/SAP/fundamental-ngx/issues/12957)) ([474428e](https://github.com/SAP/fundamental-ngx/commit/474428ec3bc5e563ad2f2d1ae55c9ad409064c63))
+
+
+
+
+
 # [0.55.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.1...v0.55.0-rc.2) (2025-02-03)
 
 **Note:** Version bump only for package @fundamental-ngx/core
