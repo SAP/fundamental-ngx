@@ -26,7 +26,6 @@ const OPTIONS = [
     selector: 'fd-multi-combobox-loading-example',
     templateUrl: './multi-combobox-loading-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [BusyIndicatorComponent, CvaDirective, DataSourceDirective, MultiComboboxComponent, JsonPipe]
 })
 export class MultiComboboxLoadingExampleComponent {

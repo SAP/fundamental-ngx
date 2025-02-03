@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IllustratedMessageModule } from '../../illustrated-message.module';
 
 @Component({
-    template: ` <h3 #directiveElement fd-illustrated-message-title>Illustrated Message Title</h3> `
+    template: ` <h3 #directiveElement fd-illustrated-message-title>Illustrated Message Title</h3> `,
+    standalone: true,
+    imports: [IllustratedMessageModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -15,8 +17,7 @@ describe('IllustratedMessageTitleDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [IllustratedMessageModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

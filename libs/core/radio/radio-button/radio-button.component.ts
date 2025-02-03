@@ -45,7 +45,6 @@ let uniqueId = 0;
     host: {
         '(focusout)': 'onTouched()'
     },
-    standalone: true,
     imports: [FormsModule]
 })
 export class RadioButtonComponent<T = any>

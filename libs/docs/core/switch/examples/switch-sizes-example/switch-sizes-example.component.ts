@@ -8,7 +8,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     selector: 'fd-switch-sizes-example',
     templateUrl: './switch-sizes-example.component.html',
     styleUrls: ['./switch-sizes-example.component.scss'],
-    standalone: true,
     imports: [FormLabelComponent, SwitchComponent, ContentDensityDirective, FormsModule]
 })
 export class SwitchSizesExampleComponent {

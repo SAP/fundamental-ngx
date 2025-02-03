@@ -87,7 +87,9 @@ describe('TimeComponent', () => {
 });
 
 @Component({
-    template: `<fd-time></fd-time>`
+    template: `<fd-time></fd-time>`,
+    standalone: true,
+    imports: [TimeModule, FdDatetimeModule]
 })
 class TimePickerHostComponent {
     @ViewChild(TimeComponent) picker: TimeComponent<FdDate>;
@@ -96,8 +98,7 @@ runValueAccessorTests<TimeComponent<FdDate>, TimePickerHostComponent>({
     component: TimeComponent,
     name: 'Time',
     testModuleMetadata: {
-        imports: [TimeModule, FdDatetimeModule],
-        declarations: [TimePickerHostComponent]
+        imports: [TimePickerHostComponent]
     },
     supportsOnBlur: true,
     hostTemplate: {

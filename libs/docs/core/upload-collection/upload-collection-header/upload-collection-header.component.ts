@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-upload-collection-header',
     templateUrl: './upload-collection-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class UploadCollectionHeaderComponent {}

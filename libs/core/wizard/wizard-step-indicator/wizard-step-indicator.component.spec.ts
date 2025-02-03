@@ -6,7 +6,9 @@ import { WizardStepIndicatorComponent } from './wizard-step-indicator.component'
 
 @Component({
     selector: 'fd-test-indicator',
-    template: ` <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator> `
+    template: ` <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator> `,
+    standalone: true,
+    imports: [WizardModule]
 })
 class TestWrapperComponent {
     @ViewChild(WizardStepIndicatorComponent)
@@ -19,8 +21,7 @@ describe('WizardStepIndicatorComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [WizardModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     }));
 

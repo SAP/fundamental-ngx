@@ -45,18 +45,24 @@ import {
     PopoverFormMessageService,
     registerFormItemControl
 } from '@fundamental-ngx/core/form';
-import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
+import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import {
+    PopoverBodyComponent,
+    PopoverBodyFooterDirective,
+    PopoverComponent,
+    PopoverControlComponent,
+    PopoverService
+} from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
-import { TimeModule } from '@fundamental-ngx/core/time';
+import { TimeComponent } from '@fundamental-ngx/core/time';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { DatetimePickerMobileComponent } from './datetime-picker-mobile/datetime-picker-mobile.component';
 import { DateTimePicker } from './datetime-picker.model';
@@ -100,19 +106,24 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
     host: {
         class: 'fd-datetime'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
-        PopoverModule,
-        InputGroupModule,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        PopoverBodyFooterDirective,
+        PopoverComponent,
+        InputGroupComponent,
+        InputGroupInputDirective,
         FormsModule,
         FormMessageComponent,
         SegmentedButtonComponent,
         ButtonComponent,
         CalendarComponent,
         NgClass,
-        TimeModule,
-        BarModule,
+        TimeComponent,
+        BarComponent,
+        BarRightDirective,
+        BarElementDirective,
         FdTranslatePipe,
         TranslateDayPeriodPipe
     ]

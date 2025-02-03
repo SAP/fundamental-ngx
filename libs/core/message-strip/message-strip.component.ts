@@ -43,7 +43,6 @@ let messageStripUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent]
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {

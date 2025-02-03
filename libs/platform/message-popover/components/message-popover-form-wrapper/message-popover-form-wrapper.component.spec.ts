@@ -27,7 +27,9 @@ import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapp
             <input fdpMessagePopoverFormItem="pattern" formControlName="pattern" />
             <input fdpMessagePopoverFormItem="email" formControlName="email" />
         </form>
-    </fdp-message-popover-form-wrapper>`
+    </fdp-message-popover-form-wrapper>`,
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, PlatformMessagePopoverModule]
 })
 export class ReactiveFormTestComponent {
     @ViewChild('form', { read: FormGroupDirective })
@@ -59,8 +61,7 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [FormsModule, ReactiveFormsModule, PlatformMessagePopoverModule, NoopAnimationsModule],
-            declarations: [ReactiveFormTestComponent]
+            imports: [ReactiveFormTestComponent, NoopAnimationsModule]
         }).compileComponents();
 
         fixture = TestBed.createComponent(ReactiveFormTestComponent);
@@ -121,7 +122,9 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
             />
             <input fdpMessagePopoverFormItem="email" type="email" [(ngModel)]="formGroup.email" email name="email" />
         </form>
-    </fdp-message-popover-form-wrapper>`
+    </fdp-message-popover-form-wrapper>`,
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, PlatformMessagePopoverModule]
 })
 export class TemplateFormTestComponent {
     @ViewChild(NgForm)
@@ -149,8 +152,7 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [FormsModule, ReactiveFormsModule, PlatformMessagePopoverModule, NoopAnimationsModule],
-            declarations: [TemplateFormTestComponent]
+            imports: [TemplateFormTestComponent, NoopAnimationsModule]
         }).compileComponents();
 
         fixture = TestBed.createComponent(TemplateFormTestComponent);
@@ -162,9 +164,7 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should collect errors on form submit', fakeAsync(async () => {
-        tick(1000);
-
+    it('should collect errors on form submit', fakeAsync(() => {
         component.formGroup.max = 11;
         component.formGroup.min = 9;
         component.formGroup.true = false;
@@ -175,10 +175,8 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
 
         fixture.detectChanges();
 
-        await fixture.whenStable();
-
-        tick(100);
-
+        tick(); 
+        
         component.form.onSubmit(new Event('submit'));
 
         tick(500);

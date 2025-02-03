@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-text-header',
     templateUrl: './text-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TextHeaderComponent {}

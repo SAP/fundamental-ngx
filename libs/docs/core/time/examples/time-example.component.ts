@@ -7,7 +7,6 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     selector: 'fd-time-example',
     templateUrl: './time-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimeModule, FormsModule]
 })
 export class TimeExampleComponent {

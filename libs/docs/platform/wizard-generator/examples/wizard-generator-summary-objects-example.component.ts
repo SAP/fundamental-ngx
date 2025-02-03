@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-summary-objects-example',
     templateUrl: './wizard-generator-summary-objects-example.component.html',
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorSummaryObjectsExampleComponent {

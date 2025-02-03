@@ -81,7 +81,6 @@ const cardLinkListHtml = 'link-list-card/card-link-list-example.component.html';
 
 @Component({
     templateUrl: './card-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

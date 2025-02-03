@@ -22,7 +22,6 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [DatetimePickerComponent, FormsModule]
 })
 export class DatetimeDisabledExampleComponent {

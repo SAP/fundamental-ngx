@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-busy-indicator-header',
     templateUrl: './busy-indicator-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class BusyIndicatorHeaderComponent {}

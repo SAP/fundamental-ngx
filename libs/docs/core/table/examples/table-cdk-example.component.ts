@@ -24,7 +24,6 @@ const CELL_DATA: CellData[] = [
     selector: 'fd-table-cdk-example',
     templateUrl: './table-cdk-example.component.html',
     styleUrls: ['table-cdk-example.component.scss'],
-    standalone: true,
     imports: [TableModule, CdkTableModule, CdkDropList, CdkDragHandle, LinkComponent, IconComponent, CdkDrag]
 })
 export class TableCdkExampleComponent {

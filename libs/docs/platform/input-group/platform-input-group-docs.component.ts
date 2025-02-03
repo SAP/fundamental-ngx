@@ -23,7 +23,6 @@ const inputGroupFormExampleTs = 'platform-input-group-form-example.component.ts'
 @Component({
     selector: 'app-input-group',
     templateUrl: './platform-input-group-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

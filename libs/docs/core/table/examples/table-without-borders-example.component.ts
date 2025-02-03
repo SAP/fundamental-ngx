@@ -7,7 +7,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-table-without-borders-example',
     templateUrl: './table-without-borders-example.component.html',
-    standalone: true,
     imports: [FocusableGridDirective, TableModule, LinkComponent, IconComponent]
 })
 export class TableWithoutBordersExampleComponent implements OnInit {

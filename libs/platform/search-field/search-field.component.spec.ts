@@ -78,7 +78,9 @@ function mouseClickOnElement(el: Element): void {
         >
         </fdp-search-field>
         <button #outsideButton>Outside</button>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformSearchFieldModule]
 })
 class TestComponent {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
@@ -119,8 +121,7 @@ describe('SearchFieldComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [PlatformSearchFieldModule],
+            imports: [TestComponent],
             providers: [RtlService]
         }).compileComponents();
 
@@ -710,7 +711,9 @@ describe('SearchFieldComponent', () => {
         >
         </fdp-search-field>
         <button #outsideButton>Outside</button>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformSearchFieldModule]
 })
 class DataSourceTestComponent implements OnInit {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
@@ -757,8 +760,7 @@ describe('SearchFieldComponent with DataSource', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DataSourceTestComponent],
-            imports: [PlatformSearchFieldModule],
+            imports: [DataSourceTestComponent],
             providers: [RtlService]
         }).compileComponents();
 

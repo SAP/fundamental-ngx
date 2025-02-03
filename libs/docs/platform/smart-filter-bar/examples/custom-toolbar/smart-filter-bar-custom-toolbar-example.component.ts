@@ -22,7 +22,6 @@ import {
 
 @Component({
     selector: 'fdp-smart-filter-bar-custom-toolbar-example',
-    standalone: true,
     imports: [
         ButtonComponent,
         SmartFilterBarComponent,

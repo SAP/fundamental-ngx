@@ -19,7 +19,9 @@ import { ListModule } from '../list.module';
                 </li>
             </ul>
         </li>
-    `
+    `,
+    standalone: true,
+    imports: [ListModule, IconModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -40,8 +42,7 @@ describe('ListNavigationItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule, IconModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

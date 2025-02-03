@@ -35,7 +35,6 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
     selector: 'fd-message-box-header',
     templateUrl: './message-box-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         BarComponent,
         ContentDensityDirective,

@@ -31,7 +31,6 @@ export interface TablePreset {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [
         VariantManagementModule,
         TableDataSourceDirective,

@@ -5,7 +5,6 @@ import { FD_CARD_MAIN_HEADER } from '../token';
     selector: 'fd-card-header',
     template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [],
     host: {
         role: 'group',

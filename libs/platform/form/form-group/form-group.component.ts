@@ -174,7 +174,6 @@ let formGroupUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [formGroupProvider, FormFieldLayoutService, contentDensityObserverProviders()],
-    standalone: true,
     imports: [
         FormsModule,
         NgTemplateOutlet,

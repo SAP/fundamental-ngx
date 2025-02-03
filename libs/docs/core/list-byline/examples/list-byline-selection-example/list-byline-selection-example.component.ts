@@ -8,7 +8,6 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 @Component({
     selector: 'fd-list-byline-selection-example',
     templateUrl: './list-byline-selection-example.component.html',
-    standalone: true,
     imports: [ListModule, CheckboxComponent, FormsModule, IconComponent, RadioModule]
 })
 export class ListBylineSelectionExampleComponent {

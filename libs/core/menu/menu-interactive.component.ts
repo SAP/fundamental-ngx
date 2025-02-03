@@ -14,8 +14,7 @@ import { MenuItemInputDirective } from './directives/menu-item-input.directive';
     host: {
         role: 'menuitem'
     },
-    imports: [PortalModule],
-    standalone: true
+    imports: [PortalModule]
 })
 export class MenuInteractiveComponent implements HasElementRef {
     /** @hidden */

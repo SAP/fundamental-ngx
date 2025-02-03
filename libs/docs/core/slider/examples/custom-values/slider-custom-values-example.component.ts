@@ -7,7 +7,6 @@ import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider
     selector: 'fd-slider-custom-values-example',
     templateUrl: './slider-custom-values-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SliderComponent, FormsModule, JsonPipe]
 })
 export class SliderCustomValuesExampleComponent {
