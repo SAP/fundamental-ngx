@@ -118,7 +118,7 @@
         "conventional-recommended-bump": "7.0.1",
         "coveralls": "3.1.1",
         "dependency-tree": "10.0.9",
-        "eslint": "8.57.0",
+        "eslint": "^9.19.0",
         "eslint-config-prettier": "9.0.0",
         "eslint-plugin-import": "2.26.0",
         "eslint-plugin-jsdoc": "46.9.0",
@@ -165,7 +165,7 @@
             "yarn nx format:write --uncommitted"
         ],
         "*.{js,ts,html,md,json,yml}": [
-            "yarn eslint --fix"
+            "eslint --fix --flag unstable_config_lookup_from_file"
         ],
         "*.properties": [
             "yarn nx run i18n:transform-translations"
