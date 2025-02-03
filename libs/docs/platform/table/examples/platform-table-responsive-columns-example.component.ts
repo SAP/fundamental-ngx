@@ -37,7 +37,6 @@ import { Observable, of } from 'rxjs';
     templateUrl: './platform-table-responsive-columns-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

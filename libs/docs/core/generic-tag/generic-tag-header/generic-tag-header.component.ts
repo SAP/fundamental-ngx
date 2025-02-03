@@ -9,7 +9,6 @@ import {
 @Component({
     selector: 'fd-generic-tag-header',
     templateUrl: './generic-tag-header.component.html',
-    imports: [DocPageComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent],
-    standalone: true
+    imports: [DocPageComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class GenericTagHeaderComponent {}

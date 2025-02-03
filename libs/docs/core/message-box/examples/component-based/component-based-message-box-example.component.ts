@@ -22,7 +22,6 @@ export interface TextData {
         // We do it at the component level here, due to the limitations of our example generation script.
         MessageBoxService
     ],
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class ComponentBasedMessageBoxExampleComponent {

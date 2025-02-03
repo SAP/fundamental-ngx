@@ -6,7 +6,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-layout-panel-edge-bleed-example',
     templateUrl: './layout-panel-edge-bleed-example.component.html',
-    standalone: true,
     imports: [LayoutPanelModule, FocusableGridDirective, TableModule]
 })
 export class LayoutPanelEdgeBleedExampleComponent {

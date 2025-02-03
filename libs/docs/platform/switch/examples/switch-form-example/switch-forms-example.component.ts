@@ -7,7 +7,6 @@ import { FdpFormGroupModule, PlatformSwitchModule } from '@fundamental-ngx/platf
 @Component({
     selector: 'fdp-switch-forms-example',
     templateUrl: './switch-forms-example.component.html',
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,

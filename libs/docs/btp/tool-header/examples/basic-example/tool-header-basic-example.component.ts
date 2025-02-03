@@ -63,8 +63,7 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         ButtonBadgeDirective,
         ToolHeaderActionButtonDirective,
         ToolHeaderButtonDirective
-    ],
-    standalone: true
+    ]
 })
 export class ToolHeaderBasicExampleComponent {
     @ViewChild('notificationsPopover')

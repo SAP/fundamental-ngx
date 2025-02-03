@@ -93,7 +93,9 @@ class TableDataProviderMock extends ArrayTableDataProvider<SourceItem> {
             defaultSelected="true"
         >
         </fdp-column>
-    </fdp-table>`
+    </fdp-table>`,
+    standalone: true,
+    imports: [PlatformTableModule, PlatformSmartFilterBarModule]
 })
 class TestComponent {
     @ViewChild(SmartFilterBarSubjectDirective)
@@ -112,8 +114,7 @@ describe('SmartFilterBarSubjectDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule, PlatformSmartFilterBarModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }), 10000);
 

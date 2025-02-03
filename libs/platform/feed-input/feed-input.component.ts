@@ -28,7 +28,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     styleUrl: './feed-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [AvatarComponent, FormsModule, FormControlComponent, ButtonComponent, FdTranslatePipe]
 })
 export class FeedInputComponent implements AfterViewInit {

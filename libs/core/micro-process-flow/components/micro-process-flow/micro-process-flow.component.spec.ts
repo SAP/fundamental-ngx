@@ -14,7 +14,9 @@ import { MicroProcessFlowComponent } from './micro-process-flow.component';
                 </fd-micro-process-flow-item>
             }
         </fd-micro-process-flow>
-    `
+    `,
+    standalone: true,
+    imports: [MicroProcessFlowModule]
 })
 class TestWrapperComponent {
     @ViewChild('microProcessFlow') microProcessFlow: MicroProcessFlowComponent;
@@ -28,8 +30,7 @@ describe('MicroProcessFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [MicroProcessFlowModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

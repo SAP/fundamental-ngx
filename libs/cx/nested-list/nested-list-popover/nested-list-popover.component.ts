@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
@@ -23,6 +23,8 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     selector: 'fdx-nested-list-popover',
     templateUrl: './nested-list-popover.component.html',
     styleUrl: './nested-list-popover.component.scss',
+    imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent],
+    standalone: true,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformSwitchModule } from '@fundamental-ngx/platf
 @Component({
     selector: 'fdp-disabled-switch-example',
     templateUrl: './disabled-switch-example.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformSwitchModule, ContentDensityDirective]
 })
 export class DisabledSwitchExampleComponent {

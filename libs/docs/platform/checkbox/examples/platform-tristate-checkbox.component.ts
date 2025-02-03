@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'fdp-platform-tristate-checkbox',
     templateUrl: 'platform-tristate-checkbox.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxComponent, JsonPipe]
 })
 export class PlatformChekboxTristateComponent implements AfterViewInit {

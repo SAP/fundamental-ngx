@@ -25,7 +25,6 @@ import { of, tap } from 'rxjs';
     selector: 'fdb-search-field',
     templateUrl: './search-field.component.html',
     styleUrls: ['../../../../node_modules/fundamental-styles/dist/search-field.css'],
-    standalone: true,
     hostDirectives: [CvaDirective],
     providers: [CvaControl],
     imports: [IconComponent, FormsModule, FdTranslatePipe, ButtonComponent, NestedButtonDirective],

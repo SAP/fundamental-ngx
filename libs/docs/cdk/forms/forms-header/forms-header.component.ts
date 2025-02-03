@@ -12,7 +12,6 @@ import {
     selector: 'app-forms-header',
     templateUrl: './forms-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class FormsHeaderComponent {}

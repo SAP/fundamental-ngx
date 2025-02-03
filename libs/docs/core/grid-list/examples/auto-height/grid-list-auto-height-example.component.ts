@@ -11,7 +11,6 @@ import { GridListModule } from '@fundamental-ngx/core/grid-list';
     styleUrls: ['./grid-list-auto-height-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [GridListModule, ButtonComponent, ContentDensityDirective, AvatarComponent]
 })
 export class GridListAutoHeightExampleComponent {

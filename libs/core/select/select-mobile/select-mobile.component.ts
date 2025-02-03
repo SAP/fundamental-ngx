@@ -12,13 +12,17 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
 
@@ -30,9 +34,19 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
     selector: 'fd-select-mobile',
     templateUrl: './select-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     providers: [DynamicComponentService],
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ButtonBarComponent]
+    imports: [
+        ButtonBarComponent,
+        TitleComponent,
+        TitleComponent,
+        NgTemplateOutlet,
+        ButtonBarComponent,
+        DialogComponent,
+        DialogHeaderComponent,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogCloseButtonComponent
+    ]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */

@@ -21,7 +21,6 @@ const avatarGroupDataServiceTs = 'avatar-group-legacy-data-example.service.ts';
 @Component({
     selector: 'app-avatar-group-legacy',
     templateUrl: './avatar-group-legacy-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

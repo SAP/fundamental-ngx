@@ -58,7 +58,6 @@ let groupOrderHeaderUniqueId = 0;
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => GroupingComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

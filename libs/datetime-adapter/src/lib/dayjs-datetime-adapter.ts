@@ -402,7 +402,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
                 /(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,
                 (_, a, b) => a || formats[b] || displayFormat
             );
-        } catch (e) {
+        } catch {
             return displayFormat;
         }
     }

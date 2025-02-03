@@ -101,7 +101,6 @@ let vhiUniqueId = 0;
             useExisting: PlatformValueHelpDialogComponent
         }
     ],
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

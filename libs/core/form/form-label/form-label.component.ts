@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
@@ -34,7 +34,7 @@ let formLabelIdCount = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [LinkComponent, IconComponent, InlineHelpModule, NgTemplateOutlet]
+    imports: [LinkComponent, IconComponent, InlineHelpDirective, NgTemplateOutlet]
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required. */

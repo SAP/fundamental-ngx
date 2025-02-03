@@ -33,7 +33,9 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
         [userDataSource]="userDataSource"
         [watcherDataSource]="watcherDataSource"
         [teamDataSource]="teamDataSource"
-    ></fdp-approval-flow>`
+    ></fdp-approval-flow>`,
+    standalone: true,
+    imports: [PlatformApprovalFlowModule],
 })
 class TestPlatformApprovalFlowComponent {
     @ViewChild('approvalFlowComponent', { static: true }) component: ApprovalFlowComponent;
@@ -51,8 +53,7 @@ describe('ApprovalFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
-            declarations: [TestPlatformApprovalFlowComponent],
+            imports: [TestPlatformApprovalFlowComponent, NoopAnimationsModule],
             providers: [RtlService]
         }).compileComponents();
     });

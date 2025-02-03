@@ -5,7 +5,6 @@ import { DescriptionComponent, HeaderComponent } from '@fundamental-ngx/docs/sha
 @Component({
     selector: 'app-i18n-header',
     templateUrl: './platform-i18n-header.component.html',
-    standalone: true,
     imports: [HeaderComponent, DescriptionComponent, RouterOutlet]
 })
 export class PlatformI18nHeaderComponent {}

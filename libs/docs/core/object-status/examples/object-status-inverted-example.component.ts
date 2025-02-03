@@ -6,7 +6,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     selector: 'fd-object-status-inverted-example',
     templateUrl: './object-status-inverted-example.component.html',
     styleUrls: ['./object-status-examples.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class ObjectStatusInvertedExampleComponent {

@@ -7,7 +7,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-popover-dropdown-example',
     templateUrl: './popover-dropdown.component.html',
     styleUrls: ['./popover-dropdown.component.scss'],
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, AvatarComponent]
 })
 export class PopoverDropdownExampleComponent {}

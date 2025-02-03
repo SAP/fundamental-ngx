@@ -5,7 +5,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
 @Component({
     selector: 'fd-select-mode-example',
     templateUrl: './select-mode-example.component.html',
-    standalone: true,
     imports: [SelectModule, ContentDensityDirective]
 })
 export class SelectModeExampleComponent {

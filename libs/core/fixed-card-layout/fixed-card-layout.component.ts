@@ -6,7 +6,8 @@ import {
     CdkDragPlaceholder,
     CdkDragStart,
     CdkDropList,
-    CdkDropListGroup
+    CdkDropListGroup,
+    DragDropModule
 } from '@angular/cdk/drag-drop';
 import {
     AfterViewInit,
@@ -41,7 +42,8 @@ import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-    DragAndDropModule,
+    DndKeyboardGroupDirective,
+    DndKeyboardItemDirective,
     Nullable,
     RtlService,
     getDocumentFontSize,
@@ -115,7 +117,9 @@ type CardColumn = CardDefinitionDirective[];
     standalone: true,
     imports: [
         CdkDropListGroup,
-        DragAndDropModule,
+        DragDropModule,
+        DndKeyboardGroupDirective,
+        DndKeyboardItemDirective,
         CdkDropList,
         CdkDrag,
         FixedCardLayoutItemComponent,

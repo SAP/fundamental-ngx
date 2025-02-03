@@ -34,7 +34,6 @@ import { PlatformDatePickerUpdateOnBlurExampleComponent } from './examples/platf
 @Component({
     selector: 'app-datepicker',
     templateUrl: './platform-date-picker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

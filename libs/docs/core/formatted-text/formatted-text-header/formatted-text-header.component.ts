@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-formatted-text-header',
     templateUrl: './formatted-text-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FormattedTextHeaderComponent {}

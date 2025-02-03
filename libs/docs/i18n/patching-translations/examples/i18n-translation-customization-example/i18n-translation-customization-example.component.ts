@@ -9,7 +9,6 @@ import { TranslationWrapper2Component } from './translation-wrapper-2.component'
     selector: 'app-i18n-translation-customization-example',
     templateUrl: './i18n-translation-customization-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FormLabelComponent,
         PlatformTextAreaModule,

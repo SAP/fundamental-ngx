@@ -23,7 +23,6 @@ import { delay } from 'rxjs/operators';
             }
         `
     ],
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

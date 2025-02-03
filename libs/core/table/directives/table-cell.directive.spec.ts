@@ -13,7 +13,9 @@ import { TableCellDirective } from './table-cell.directive';
         </td>
         <td fd-table-cell [key]="key">{{ key }}</td>
     </tr>
-    `
+    `,
+    standalone: true,
+    imports: [TableModule, CheckboxModule]
 })
 class TestComponent {
     @ViewChild(TableCellDirective)
@@ -28,8 +30,7 @@ describe('TableCellDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule, CheckboxModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

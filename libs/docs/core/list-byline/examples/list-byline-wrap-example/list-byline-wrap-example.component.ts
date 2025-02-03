@@ -5,7 +5,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-list-byline-wrap-example',
     templateUrl: './list-byline-wrap-example.component.html',
-    standalone: true,
     imports: [ListModule, IconComponent]
 })
 export class ListBylineWrapExampleComponent {}

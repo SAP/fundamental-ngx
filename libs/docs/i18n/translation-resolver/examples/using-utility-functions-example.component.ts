@@ -67,7 +67,6 @@ import { BehaviorSubject } from 'rxjs';
             </span>
         </div>
     `,
-    standalone: true,
     imports: [AsyncPipe],
     providers: [
         {

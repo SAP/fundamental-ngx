@@ -15,7 +15,6 @@ import { Observable, of } from 'rxjs';
     templateUrl: './platform-table-wrap-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

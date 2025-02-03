@@ -28,7 +28,6 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     styleUrl: './nested-list-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,
