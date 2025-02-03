@@ -447,10 +447,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             event.preventDefault();
 
             this._chooseOtherItem(-1);
-        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
-            event.stopPropagation();
-
-            this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
         }
