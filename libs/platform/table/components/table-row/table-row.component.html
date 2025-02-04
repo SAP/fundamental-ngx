@@ -142,6 +142,13 @@
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
         (keydown.space)="_handleCellSpaceKey($index, tableCellElement, $event)"
+        [attr.title]="
+            _isTreeRowFirstCell($index, row) && row.expanded
+                ? ('platformTable.collapseRowButtonTitle' | fdTranslate)
+                : _isTreeRowFirstCell($index, row) && !row.expanded
+                  ? ('platformTable.expandRowButtonTitle' | fdTranslate)
+                  : null
+        "
     >
         <div
             [class.fd-table__text]="column.applyText"
@@ -205,6 +212,7 @@
                 [navigation]="true"
                 [glyph]="_rtl$() ? 'slim-arrow-left' : 'slim-arrow-right'"
                 class="fdp-table__navigation-indicator"
+                [attr.title]="'platformTable.rowNavigateButtonTitle' | fdTranslate"
             ></fd-icon>
         }
     </td>
