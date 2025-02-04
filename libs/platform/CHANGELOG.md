@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.4...v0.55.0-rc.5) (2025-02-04)
+
+
+### Bug Fixes
+
+* **platform:** colon when no description is present for popping columns ([#12981](https://github.com/SAP/fundamental-ngx/issues/12981)) ([7bc90e0](https://github.com/SAP/fundamental-ngx/commit/7bc90e0b766c58d572ff27e3260c148c01e5e2be))
+
+
+
+
+
 # [0.55.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.3...v0.55.0-rc.4) (2025-02-04)
 
 
