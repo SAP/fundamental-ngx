@@ -24,7 +24,6 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, MessageToastModule]
 })
 export class MessageToastPositionExampleComponent {

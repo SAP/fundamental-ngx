@@ -21,7 +21,6 @@ const platformFooterWithMultipleLineHtml = 'platform-page-footer-multiple-line-e
 @Component({
     selector: 'fdp-platform-page-footer-docs',
     templateUrl: './platform-page-footer-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

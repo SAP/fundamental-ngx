@@ -88,7 +88,6 @@ export class NestedListTitleDirective {
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [IconComponent]
 })
 export class NestedListExpandIconComponent {

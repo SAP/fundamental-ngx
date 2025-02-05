@@ -68,7 +68,16 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
                 ></fdp-checkbox-group>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormModule,
+        PlatformCheckboxGroupModule,
+        PlatformCheckboxModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 class TestReactiveCheckboxGroupComponent {
     @ViewChildren(CheckboxComponent)
@@ -105,15 +114,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                FormModule,
-                PlatformCheckboxGroupModule,
-                PlatformCheckboxModule,
-                FormsModule,
-                ReactiveFormsModule
-            ],
-            declarations: [TestReactiveCheckboxGroupComponent]
+            imports: [TestReactiveCheckboxGroupComponent]
         }).compileComponents();
     }));
 
@@ -321,7 +322,9 @@ describe('CheckboxGroup component Reactive Form Test', () => {
                 ></fdp-checkbox-group>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormModule, PlatformCheckboxGroupModule, PlatformCheckboxModule, FormsModule]
 })
 class TestTemplateDrivenCheckboxGroupComponent {
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
@@ -354,8 +357,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformCheckboxGroupModule, PlatformCheckboxModule, FormsModule],
-            declarations: [TestTemplateDrivenCheckboxGroupComponent]
+            imports: [TestTemplateDrivenCheckboxGroupComponent]
         }).compileComponents();
     }));
 
@@ -566,7 +568,16 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
                 </fdp-checkbox-group>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormModule,
+        PlatformCheckboxGroupModule,
+        PlatformCheckboxModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 class TestReactiveCheckboxGroupWithDataComponent {
     @ViewChildren(CheckboxComponent)
@@ -597,15 +608,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                FormModule,
-                PlatformCheckboxGroupModule,
-                PlatformCheckboxModule,
-                FormsModule,
-                ReactiveFormsModule
-            ],
-            declarations: [TestReactiveCheckboxGroupWithDataComponent]
+            imports: [TestReactiveCheckboxGroupWithDataComponent]
         }).compileComponents();
     }));
 

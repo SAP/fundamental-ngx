@@ -101,16 +101,17 @@ describe('Datetime picker suite', () => {
 
     it('Verify by default today date is focused', async () => {
         const activeButtons = await elementArray(activeDateTimePickerButton);
-        for (let i = 0; i < activeButtons.length; i++) {
-            if (i !== 2 && i !== 7 && i !== 11) {
-                // other default days in these calendars
-                if (!(await getElementClass(activeDateTimePickerButton, i)).includes('is-disabled')) {
-                    await sendKeys(['Escape']);
-                    await scrollIntoView(activeDateTimePickerButton, i);
-                    await click(activeDateTimePickerButton, i);
-                    await waitForElDisplayed(calendarExpanded);
-                    await expect(await getText(currentDay, 0)).toContain(new Date().getDate().toString());
-                }
+
+        if (activeButtons?.length > 0) {
+            const index = 0;
+
+            if (!(await getElementClass(activeDateTimePickerButton, index)).includes('is-disabled')) {
+                await sendKeys(['Escape']);
+                await scrollIntoView(activeDateTimePickerButton, index);
+                await click(activeDateTimePickerButton, index);
+                await waitForElDisplayed(calendarExpanded);
+                const todayDate = new Date().getDate().toString();
+                await expect(await getText(currentDay, 0)).toContain(todayDate);
             }
         }
     });

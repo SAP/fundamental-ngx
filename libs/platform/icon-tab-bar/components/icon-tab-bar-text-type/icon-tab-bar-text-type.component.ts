@@ -28,7 +28,6 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
 @Component({
     selector: 'fdp-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
-    standalone: true,
     providers: [
         {
             provide: IconTabBarBase,

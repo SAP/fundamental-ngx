@@ -27,7 +27,6 @@ const feedInputMaxHeightH =
 @Component({
     selector: 'app-feed-input',
     templateUrl: './platform-feed-input-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

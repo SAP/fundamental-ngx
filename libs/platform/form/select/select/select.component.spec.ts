@@ -35,7 +35,16 @@ import { SelectComponent } from '../select/select.component';
                 <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        FdpFormGroupModule,
+        FormModule,
+        PlatformSelectModule,
+        ContentDensityModule,
+        CommonModule
+    ]
 })
 class SelectStandardComponent {
     @ViewChild(SelectComponent)
@@ -73,16 +82,7 @@ describe('Select Component default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                FormModule,
-                FormsModule,
-                ReactiveFormsModule,
-                CommonModule,
-                PlatformSelectModule,
-                ContentDensityModule
-            ],
-            declarations: [SelectStandardComponent],
+            imports: [SelectStandardComponent],
             providers: [DynamicComponentService, MenuKeyboardService]
         }).compileComponents();
     }));
@@ -120,15 +120,15 @@ describe('Select Component default values', () => {
     it('should select the options with label', waitForAsync(() => {
         fixture.detectChanges();
         fixture.whenRenderingDone().then(() => {
-          const fdpOptionElems = select._optionItems;
-          expect(fdpOptionElems[0].label).toEqual('Apple');
-          expect(fdpOptionElems[0].value).toEqual('A');
-          expect(fdpOptionElems[1].label).toEqual('Banana');
-          expect(fdpOptionElems[1].value).toEqual('B');
-          expect(fdpOptionElems[2].label).toEqual('Pineapple');
-          expect(fdpOptionElems[2].value).toEqual('C');
+            const fdpOptionElems = select._optionItems;
+            expect(fdpOptionElems[0].label).toEqual('Apple');
+            expect(fdpOptionElems[0].value).toEqual('A');
+            expect(fdpOptionElems[1].label).toEqual('Banana');
+            expect(fdpOptionElems[1].value).toEqual('B');
+            expect(fdpOptionElems[2].label).toEqual('Pineapple');
+            expect(fdpOptionElems[2].value).toEqual('C');
         });
-      }));
+    }));
 });
 
 @Component({
@@ -153,7 +153,9 @@ describe('Select Component default values', () => {
                 <p>Selected Item: {{ selectedItem }}</p>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformSelectModule]
 })
 class TestReactiveSelectComponent {
     @ViewChild(SelectComponent)
@@ -195,16 +197,8 @@ describe('Select component Reactive Form Test', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                FormModule,
-                FormsModule,
-                ReactiveFormsModule,
-                CommonModule,
-                PlatformSelectModule
-            ],
-            providers: [DynamicComponentService, MenuKeyboardService],
-            declarations: [TestReactiveSelectComponent]
+            imports: [TestReactiveSelectComponent],
+            providers: [DynamicComponentService, MenuKeyboardService]
         }).compileComponents();
     }));
 

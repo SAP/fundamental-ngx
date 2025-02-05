@@ -60,7 +60,9 @@ import { SwitchChangeEvent, SwitchComponent } from './switch.component';
                 </fdp-switch>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule]
 })
 class TestSwitchComponent {
     @ViewChildren(SwitchComponent)
@@ -85,8 +87,7 @@ describe('SwitchComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule],
-            declarations: [TestSwitchComponent]
+            imports: [TestSwitchComponent]
         }).compileComponents();
     }));
 

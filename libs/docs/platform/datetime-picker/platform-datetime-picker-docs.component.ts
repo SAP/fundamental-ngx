@@ -33,7 +33,6 @@ import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/p
 @Component({
     selector: 'app-datetime-picker',
     templateUrl: './platform-datetime-picker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

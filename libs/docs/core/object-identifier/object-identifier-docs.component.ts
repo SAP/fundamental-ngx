@@ -26,7 +26,6 @@ const ObjectIdentifierTableExampleTs = 'object-identifier-table-example.componen
 @Component({
     selector: 'app-object-identifier',
     templateUrl: './object-identifier-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

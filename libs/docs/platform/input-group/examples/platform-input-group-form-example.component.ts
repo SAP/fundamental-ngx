@@ -8,7 +8,6 @@ import { FdpFormGroupModule, PlatformInputGroupModule } from '@fundamental-ngx/p
     selector: 'fdp-platform-input-group-form-example',
     templateUrl: './platform-input-group-form-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         PlatformInputGroupModule,

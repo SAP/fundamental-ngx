@@ -32,6 +32,7 @@ let sideNavigationItemUniqueId = 0;
     selector: '[cxNestedItem], [fdx-nested-list-item], li[fdx-nested-list-item]',
     template: ` <ng-content></ng-content> `,
     providers: [NestedItemService],
+    standalone: true,
     host: {
         role: 'treeitem'
     }

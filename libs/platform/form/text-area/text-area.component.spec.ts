@@ -53,7 +53,9 @@ import { PlatformTextAreaModule } from './text-area.module';
             </fdp-form-group>
             <button type="submit" #submitButton>Submit</button>
         </form>
-    `
+    `,
+    standalone: true,
+    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule, ContentDensityModule]
 })
 class BasicTextareaTestWrapperComponent {
     @ViewChild(TextAreaComponent)
@@ -82,8 +84,7 @@ describe('Basic Textarea', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule, ContentDensityModule],
-            declarations: [BasicTextareaTestWrapperComponent]
+            imports: [BasicTextareaTestWrapperComponent]
         }).compileComponents();
     }));
 
@@ -152,8 +153,7 @@ describe('Advanced Textarea', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule, ContentDensityModule],
-            declarations: [BasicTextareaTestWrapperComponent]
+            imports: [BasicTextareaTestWrapperComponent]
         }).compileComponents();
     }));
 

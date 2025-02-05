@@ -4,7 +4,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 @Component({
     selector: 'fd-popover-c-fill',
     templateUrl: './popover-c-fill.component.html',
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class PopoverCFillComponent {}

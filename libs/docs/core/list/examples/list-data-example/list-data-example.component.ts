@@ -32,7 +32,6 @@ export class SortByPipe implements PipeTransform {
     selector: 'fd-list-data-example',
     templateUrl: './list-data-example.component.html',
     styleUrls: ['./list-data-example.component.scss'],
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarLabelDirective,

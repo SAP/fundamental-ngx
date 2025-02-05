@@ -15,7 +15,6 @@ import { BaseListItem } from '../base-list-item';
     templateUrl: './display-list-item.component.html',
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => DisplayListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         role: 'none'
     },

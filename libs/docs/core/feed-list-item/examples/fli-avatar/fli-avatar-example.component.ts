@@ -5,7 +5,6 @@ import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 @Component({
     selector: 'fd-fli-avatar-example',
     templateUrl: './fli-avatar-example.component.html',
-    standalone: true,
     imports: [FeedListItemModule, AvatarComponent]
 })
 export class FliAvatarExampleComponent {}

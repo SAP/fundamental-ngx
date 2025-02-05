@@ -28,7 +28,6 @@ let randomTitleId = 0;
     host: {
         '[class.fd-facet]': 'true'
     },
-    standalone: true,
     imports: [NgTemplateOutlet, TitleComponent, FormLabelComponent]
 })
 export class FacetComponent implements AfterViewInit {

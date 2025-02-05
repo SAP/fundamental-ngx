@@ -26,7 +26,9 @@ import { DynamicPageModule } from './dynamic-page.module';
                 <div [style.height.vh]="150"></div>
             </fd-dynamic-page-content>
         }
-    </fd-dynamic-page>`
+    </fd-dynamic-page>`,
+    standalone: true,
+    imports: [CommonModule, DynamicPageModule, TabsModule]
 })
 class TestComponent {
     @ViewChild(DynamicPageComponent)
@@ -41,8 +43,7 @@ describe('DynamicPageComponent default values', () => {
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicPageModule, TabsModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         })
             .overrideComponent(DynamicPageComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

@@ -3,6 +3,101 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.4...v0.55.0-rc.5) (2025-02-04)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.3...v0.55.0-rc.4) (2025-02-04)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.2...v0.55.0-rc.3) (2025-02-03)
+
+
+### Bug Fixes
+
+* **core:** popover escape key to close should not bubble to dialog ([#12957](https://github.com/SAP/fundamental-ngx/issues/12957)) ([474428e](https://github.com/SAP/fundamental-ngx/commit/474428ec3bc5e563ad2f2d1ae55c9ad409064c63))
+
+
+
+
+
+# [0.55.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.1...v0.55.0-rc.2) (2025-02-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.0...v0.55.0-rc.1) (2025-02-02)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.2...v0.55.0-rc.0) (2025-02-02)
+
+
+### Features
+
+* ng 19 ([#12883](https://github.com/SAP/fundamental-ngx/issues/12883)) ([2b6f375](https://github.com/SAP/fundamental-ngx/commit/2b6f375c79a0040e9564e79edb6372405e4ce878))
+
+
+### BREAKING CHANGES
+
+* angular 19
+
+
+
+
+
+## [0.54.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.15...v0.54.2) (2025-01-31)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.54.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.14...v0.54.2-rc.15) (2025-01-30)
+
+
+### Features
+
+* **core:** added readonly to radio buttons ([#12961](https://github.com/SAP/fundamental-ngx/issues/12961)) ([9178b74](https://github.com/SAP/fundamental-ngx/commit/9178b74e6b5edc497f30354e5d5bb18781882255))
+* **core:** lazy load popover body ([#12955](https://github.com/SAP/fundamental-ngx/issues/12955)) ([ee126e2](https://github.com/SAP/fundamental-ngx/commit/ee126e202d73886f350f2c65bd229669ccd95ac3))
+
+
+
+
+
+## [0.54.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.13...v0.54.2-rc.14) (2025-01-29)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.54.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.12...v0.54.2-rc.13) (2025-01-29)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.54.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.11...v0.54.2-rc.12) (2025-01-28)
 
 

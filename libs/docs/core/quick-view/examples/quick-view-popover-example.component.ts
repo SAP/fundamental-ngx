@@ -19,7 +19,6 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
             }
         `
     ],
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

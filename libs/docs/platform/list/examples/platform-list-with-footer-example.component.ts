@@ -9,7 +9,6 @@ export interface Name {
 @Component({
     selector: 'fdp-platform-list-with-footer-example',
     templateUrl: './platform-list-with-footer-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformListWithFooterExampleComponent {

@@ -12,7 +12,6 @@ import {
 @Component({
     selector: 'app-datetime-picker-header',
     templateUrl: './platform-datetime-picker-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

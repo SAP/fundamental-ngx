@@ -9,7 +9,6 @@ import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core
     selector: 'fd-popover-mobile-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './popover-mobile-example.component.html',
-    standalone: true,
     imports: [
         ButtonComponent,
         PopoverTriggerDirective,

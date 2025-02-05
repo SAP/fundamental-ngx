@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
     selector: 'fd-using-translation-pipe-example',
     template: `Resolved with pipe: {{ 'coreDatePicker.dateInputLabel' | fdTranslate }}`,
-    standalone: true,
     imports: [FdTranslatePipe],
     providers: [
         {

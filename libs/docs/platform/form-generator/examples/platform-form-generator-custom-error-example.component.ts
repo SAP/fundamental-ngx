@@ -12,7 +12,6 @@ import {
 @Component({
     selector: 'fdp-platform-form-generator-custom-error-example',
     templateUrl: './platform-form-generator-custom-error-example.component.html',
-    standalone: true,
     imports: [PlatformFormGeneratorModule, PlatformButtonModule]
 })
 export class PlatformFormGeneratorCustomErrorExampleComponent {

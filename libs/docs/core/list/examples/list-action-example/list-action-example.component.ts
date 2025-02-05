@@ -9,7 +9,6 @@ import { delay } from 'rxjs/operators';
     selector: 'fd-list-action-example',
     templateUrl: './list-action-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ListModule, BusyIndicatorComponent]
 })
 export class ListActionExampleComponent {

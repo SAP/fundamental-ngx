@@ -6,7 +6,6 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
     selector: 'fd-slider-ticks-and-labels-example',
     templateUrl: './slider-ticks-and-labels-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SliderComponent, FormsModule]
 })
 export class SliderTicksAndLabelsExampleComponent {

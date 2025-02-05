@@ -19,7 +19,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     host: {
         class: 'fd-wizard-mobile-docs'
     },
-    standalone: true,
     imports: [WizardModule, ButtonComponent, BarModule]
 })
 export class WizardMobileExampleComponent {

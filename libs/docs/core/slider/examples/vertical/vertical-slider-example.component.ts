@@ -8,7 +8,6 @@ import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider
     templateUrl: './vertical-slider-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SliderComponent, FormsModule, JsonPipe, NgStyle]
 })
 export class VerticalSliderExampleComponent {

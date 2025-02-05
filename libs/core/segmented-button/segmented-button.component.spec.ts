@@ -18,7 +18,9 @@ const isSelectedClass = 'fd-button--toggled';
             <button #second fd-button label="Button" value="second"></button>
             <button #third fd-button label="Button" value="third"></button>
         </fd-segmented-button>
-    `
+    `,
+    standalone: true,
+    imports: [ButtonModule, SegmentedButtonModule]
 })
 export class HostComponent {
     @ViewChild('first', { read: ElementRef })
@@ -42,9 +44,8 @@ describe('SegmentedButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [HostComponent],
             providers: [RtlService],
-            imports: [SegmentedButtonModule, ButtonModule]
+            imports: [HostComponent]
         }).compileComponents();
     }));
 
@@ -168,19 +169,18 @@ describe('Segmented button component CVA', () => {
             });
         },
         testModuleMetadata: {
-            declarations: [HostComponent],
-            providers: [RtlService],
-            imports: [SegmentedButtonModule, ButtonModule] // <= importing the module for app-select
+            imports: [SegmentedButtonModule, ButtonModule, HostComponent], // Fixing to import standalone components
+            providers: [RtlService]
         },
         hostTemplate: {
-            // specify that "AppSelectComponent" should not be tested directly
+            // Specify that "SegmentedButtonComponent" should not be tested directly
             hostComponent: HostComponent,
-            // specify the way to access "AppSelectComponent" from the host template
+            // Specify the way to access "SegmentedButtonComponent" from the host template
             getTestingComponent: (fixture) => fixture.componentInstance.segmentedButton
         },
         supportsOnBlur: false,
         internalValueChangeSetter: null,
         getComponentValue: (fixture) => (fixture.componentInstance.segmentedButton as any)._currentValue,
-        getValues: () => [1, 2, 3] // <= setting the same values as select options in host template
+        getValues: () => [1, 2, 3] // Setting the same values as select options in host template
     });
 });

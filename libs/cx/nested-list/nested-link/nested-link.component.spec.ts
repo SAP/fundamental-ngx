@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListIconComponent, NestedListTitleDirective } from '../nested-list-directives';
 import { NestedListStateService } from '../nested-list-state.service';
-import { CxNestedListModule } from '../nested-list.module';
 import { NestedLinkComponent } from './nested-link.component';
 
 @Component({
@@ -11,7 +12,9 @@ import { NestedLinkComponent } from './nested-link.component';
             <span fdx-nested-list-icon [glyph]="'settings'"></span>
             <span fdx-nested-list-title>Link 1</span>
         </a>
-    `
+    `,
+    standalone: true,
+    imports: [NestedLinkComponent, CommonModule, NestedListIconComponent, NestedListTitleDirective]
 })
 class TestNestedContainerComponent {
     @ViewChild('directiveElement', { static: true, read: NestedLinkComponent })
@@ -25,8 +28,7 @@ describe('NestedLinkDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent, CommonModule],
             providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));
