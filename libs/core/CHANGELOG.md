@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.6](https://github.com/SAP/fundamental-ngx/compare/v0.52.5...v0.52.6) (2025-02-05)
+
+
+### Features
+
+* **core:** lazy load popover body ([#12955](https://github.com/SAP/fundamental-ngx/issues/12955)) ([db11bc2](https://github.com/SAP/fundamental-ngx/commit/db11bc2ad0f57b55a31e0bf7617dfef9943c3c41))
+
+
+
+
+
 ## [0.52.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.4...v0.52.5) (2024-12-03)
 
 
