@@ -11,7 +11,7 @@ export abstract class TitleToken {
 @Component({
     // eslint-disable-next-line
     selector: '[fd-title], [fdTitle]',
-    // eslint-disable-next-line
+
     exportAs: 'fd-title',
     template: '<ng-content></ng-content>',
     host: {

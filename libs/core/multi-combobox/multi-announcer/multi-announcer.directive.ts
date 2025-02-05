@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ContentChildren, Directive, HostListener, inject, Input, QueryList } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';

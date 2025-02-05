@@ -741,8 +741,7 @@ export class SliderComponent
                 },
                 (_, i) => Number((this.min + i * this.step).toFixed(2))
             );
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (e) {}
+        } catch {}
     }
 
     /** @hidden */
