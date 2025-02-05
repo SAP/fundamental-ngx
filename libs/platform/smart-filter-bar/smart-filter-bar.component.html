@@ -2,9 +2,11 @@
     <fd-toolbar [shouldOverflow]="true" fdType="transparent">
         @if (_toolbarItems) {
             @for (template of _toolbarItems; track template) {
-                <ng-template [ngTemplateOutlet]="template"></ng-template>
-                <fd-toolbar-separator></fd-toolbar-separator>
+                <div fd-toolbar-item>
+                    <ng-template [ngTemplateOutlet]="template"></ng-template>
+                </div>
             }
+            <fd-toolbar-separator></fd-toolbar-separator>
         }
         <fdp-search-field
             fd-toolbar-item

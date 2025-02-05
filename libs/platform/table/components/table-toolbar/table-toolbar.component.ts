@@ -108,7 +108,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
     @Input()
-    shouldOverflow = false;
+    shouldOverflow = true;
 
     /** Table title. */
     @Input()
