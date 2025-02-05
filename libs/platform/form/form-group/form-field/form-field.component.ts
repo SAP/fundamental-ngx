@@ -880,8 +880,7 @@ export class FormFieldComponent
             this._mdColumnNumber = normalized['M'];
             this._lgColumnNumber = normalized['L'];
             this._xlColumnNumber = normalized['XL'];
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
+        } catch {
             this._isColumnLayoutEnabled = false;
         }
     }

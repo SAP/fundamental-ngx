@@ -88,7 +88,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
      * Emitted event when menu closes
      */
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
     close: EventEmitter<MenuCloseMethod> = new EventEmitter();
 
     /** Menu direction */
