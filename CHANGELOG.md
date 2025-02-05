@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.51](https://github.com/SAP/fundamental-ngx/compare/v0.43.50...v0.43.51) (2025-02-05)
+
+
+### Bug Fixes
+
+* **platform:** autocomplete should support japanese keyboard input source ([#12989](https://github.com/SAP/fundamental-ngx/issues/12989)) ([88d889c](https://github.com/SAP/fundamental-ngx/commit/88d889c686402bad673c028ed367c547a5dc74ad))
+* **platform:** do not focus list combobox item on space keydown from input ([#13008](https://github.com/SAP/fundamental-ngx/issues/13008)) ([5883b6d](https://github.com/SAP/fundamental-ngx/commit/5883b6d72842f667cb9d8161f4298c5a816a35e3))
+
+
+
+
+
 ## [0.43.50](https://github.com/SAP/fundamental-ngx/compare/v0.43.49...v0.43.50) (2025-01-29)
 
 
