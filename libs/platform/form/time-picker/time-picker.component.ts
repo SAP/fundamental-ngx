@@ -54,7 +54,6 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      */
     @Input()
     set meridian(value: boolean) {
-        // eslint-disable-next-line max-len
         warnOnce(
             'Property meridian is deprecated.' +
                 ' Use Meridian is deprecated.' +

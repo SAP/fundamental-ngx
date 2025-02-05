@@ -37,7 +37,7 @@ import {
         </fdp-table>
     `,
     standalone: true,
-    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
+    imports: [PlatformTableModule, RouterModule, RouterTestingModule]
 })
 class TableHostComponent {
     @ViewChild(TableComponent) table: TableComponent;

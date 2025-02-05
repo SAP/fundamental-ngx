@@ -1,6 +1,6 @@
 import { DragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common'; 
-import { Component, ViewChild, ViewChildren, QueryList, ElementRef, Renderer2 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { ElementChord } from '../dnd.interfaces';
@@ -77,7 +77,9 @@ describe('DndListDirective', () => {
         fixture.detectChanges();
 
         // Create and assign mock DndItemDirectives
-        mockDndItems = component.list.map(() => new MockDndItemDirective(new ElementRef(document.createElement('div')), dragDrop, renderer));
+        mockDndItems = component.list.map(
+            () => new MockDndItemDirective(new ElementRef(document.createElement('div')), dragDrop, renderer)
+        );
         component.dndItems = new QueryList<DndItemDirective<string>>();
         (component.dndItems as any)._results = mockDndItems;
         (component.dndItems as any)._dirty = false;

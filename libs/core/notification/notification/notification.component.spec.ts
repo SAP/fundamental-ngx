@@ -1,12 +1,12 @@
+import { CommonModule } from '@angular/common';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NotificationService } from '../notification-service/notification.service';
 import { NotificationModule } from '../notification.module';
 import { NotificationComponent } from './notification.component';
-import { CommonModule } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     template: `

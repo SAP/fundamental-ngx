@@ -75,12 +75,8 @@ describe('DatePickerComponent', () => {
         component.allowMultipleSelection = true;
         jest.spyOn(component, 'onChange');
         jest.spyOn(component.selectedMultipleDatesChange, 'emit');
-        const dates = [
-            new FdDate(2000, 10, 10),
-            new FdDate(2000, 10, 11),
-            new FdDate(2000, 10, 12)
-        ];
-        const datesStr = dates.map(date => (<any>component)._formatDate(date)).join(', ');
+        const dates = [new FdDate(2000, 10, 10), new FdDate(2000, 10, 11), new FdDate(2000, 10, 12)];
+        const datesStr = dates.map((date) => (<any>component)._formatDate(date)).join(', ');
         component._inputFieldDate = '';
         component.handleMultipleDatesChange(dates);
         expect(component._inputFieldDate).toEqual(datesStr);
@@ -138,12 +134,8 @@ describe('DatePickerComponent', () => {
 
     it('should handle correct write value for multiple dates mode', () => {
         component.allowMultipleSelection = true;
-        const dates = [
-            new FdDate(2000, 10, 10),
-            new FdDate(2000, 10, 11),
-            new FdDate(2000, 10, 12)
-        ];
-        const datesStr = dates.map(date => (<any>component)._formatDate(date)).join(', ');
+        const dates = [new FdDate(2000, 10, 10), new FdDate(2000, 10, 11), new FdDate(2000, 10, 12)];
+        const datesStr = dates.map((date) => (<any>component)._formatDate(date)).join(', ');
         component.writeValue(dates);
         expect(component.selectedMultipleDates).toEqual(dates);
         expect(component._inputFieldDate).toBe(datesStr);
@@ -199,7 +191,9 @@ describe('DatePickerComponent', () => {
         component.dateStringUpdate('hello');
         expect(component._isInvalidDateInput).toBe(true);
         // Ensure that the array passed to the emit method contains only valid FdDate instances
-        expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith([invalidDate].filter(date => date instanceof FdDate));
+        expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(
+            [invalidDate].filter((date) => date instanceof FdDate)
+        );
         expect(component.isModelValid()).toBe(false);
     });
 
@@ -403,8 +397,12 @@ describe('DatePickerComponent', () => {
             { start: dateStart1, end: dateEnd1 },
             { start: dateStart2, end: dateEnd2 }
         ];
-        const dateStr1 = `${(<any>component)._formatDate(dateStart1)}${component._rangeDelimiter}${(<any>component)._formatDate(dateEnd1)}`;
-        const dateStr2 = `${(<any>component)._formatDate(dateStart2)}${component._rangeDelimiter}${(<any>component)._formatDate(dateEnd2)}`;
+        const dateStr1 = `${(<any>component)._formatDate(dateStart1)}${component._rangeDelimiter}${(<any>(
+            component
+        ))._formatDate(dateEnd1)}`;
+        const dateStr2 = `${(<any>component)._formatDate(dateStart2)}${component._rangeDelimiter}${(<any>(
+            component
+        ))._formatDate(dateEnd2)}`;
         component._inputFieldDate = '';
         component.handleMultipleDateRangesChange(dateRanges);
         expect(component._inputFieldDate).toBe(`${dateStr1}, ${dateStr2}`);
@@ -469,9 +467,11 @@ describe('DatePickerComponent', () => {
 
     it('should toggle the calendar with the f4 key', () => {
         jest.spyOn(component, 'toggleCalendar');
-        component._inputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {
-            key: 'f4'
-        }));
+        component._inputElement.nativeElement.dispatchEvent(
+            new KeyboardEvent('keydown', {
+                key: 'f4'
+            })
+        );
         expect(component.toggleCalendar).toHaveBeenCalled();
     });
 });

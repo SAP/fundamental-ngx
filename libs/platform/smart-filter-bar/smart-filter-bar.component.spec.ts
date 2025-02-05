@@ -71,8 +71,8 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
                 label="Verified"
             ></fdp-column>
         </fdp-table>`,
-        standalone: true,
-        imports: [PlatformTableModule, PlatformSmartFilterBarModule]
+    standalone: true,
+    imports: [PlatformTableModule, PlatformSmartFilterBarModule]
 })
 class TestComponent {
     @ViewChild(SmartFilterBarComponent) smartFilterBar: SmartFilterBarComponent;

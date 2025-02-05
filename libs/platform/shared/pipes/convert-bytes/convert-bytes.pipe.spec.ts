@@ -46,7 +46,6 @@ describe('Pipe: ConvertBytesPipe', () => {
         expect(result).toEqual('7 PB');
     });
 
-
     it('should convert bytes to exabyte label', () => {
         const result = pipe.transform(Number(4684567346346346345n));
         expect(result).toEqual('4.06 EB');

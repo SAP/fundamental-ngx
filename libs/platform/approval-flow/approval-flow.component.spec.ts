@@ -35,7 +35,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
         [teamDataSource]="teamDataSource"
     ></fdp-approval-flow>`,
     standalone: true,
-    imports: [PlatformApprovalFlowModule],
+    imports: [PlatformApprovalFlowModule]
 })
 class TestPlatformApprovalFlowComponent {
     @ViewChild('approvalFlowComponent', { static: true }) component: ApprovalFlowComponent;

@@ -46,7 +46,14 @@ import { ComboboxComponent, ComboboxSelectionChangeEvent } from './combobox.comp
         </fdp-form-group>
     `,
     standalone: true,
-    imports: [PlatformComboboxModule, FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, ContentDensityModule]
+    imports: [
+        PlatformComboboxModule,
+        FdpFormGroupModule,
+        FormModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ContentDensityModule
+    ]
 })
 class ComboboxStandardComponent {
     @ViewChild(ComboboxComponent)
@@ -85,9 +92,7 @@ describe('ComboboxComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                ComboboxStandardComponent
-            ],
+            imports: [ComboboxStandardComponent],
             providers: [
                 DynamicComponentService,
                 MenuKeyboardService,

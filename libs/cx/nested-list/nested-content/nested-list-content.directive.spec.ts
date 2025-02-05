@@ -1,20 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NestedItemService } from '../nested-item/nested-item.service';
-import { NestedListButtonDirective, NestedListExpandIconComponent, NestedListHeaderDirective, NestedListIconComponent, NestedListTitleDirective } from '../nested-list-directives';
-import { NestedListStateService } from '../nested-list-state.service';
-import { CommonModule } from '@angular/common';
-import { NestedListContentDirective } from './nested-list-content.directive';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedItemComponent } from '../nested-item/nested-item.component';
+import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
+import {
+    NestedListButtonDirective,
+    NestedListExpandIconComponent,
+    NestedListHeaderDirective,
+    NestedListIconComponent,
+    NestedListTitleDirective
+} from '../nested-list-directives';
 import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
+import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListComponent } from '../nested-list/nested-list.component';
 import { PreparedNestedListComponent } from '../prepared-nested-list/prepared-nested-list.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NestedListContentDirective } from './nested-list-content.directive';
 
 @Component({
     template: `
@@ -27,7 +33,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
         </div>
     `,
     standalone: true,
-    imports: [ 
+    imports: [
         CommonModule,
         NestedListComponent,
         NestedLinkComponent,

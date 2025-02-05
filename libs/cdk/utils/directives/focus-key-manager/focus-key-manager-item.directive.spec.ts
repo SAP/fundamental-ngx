@@ -26,7 +26,7 @@ describe('FocusKeyManagerItem', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestComponent] 
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -1,12 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
+import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
+import { TimelineNodeDefDirective } from './directives/timeline-node-def.directive';
+import { TimelinePositionControlService } from './services/timeline-position-control.service';
 import { TimelineComponent } from './timeline.component';
 import { TimelineModule } from './timeline.module';
-import { TimelinePositionControlService } from './services/timeline-position-control.service';
 import { TimelineAxis, TimelineSidePosition } from './types';
-import { TimelineNodeDefDirective } from './directives/timeline-node-def.directive';
-import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
 
 describe('TimelineComponent', () => {
     let component: TimelineTestComponent;

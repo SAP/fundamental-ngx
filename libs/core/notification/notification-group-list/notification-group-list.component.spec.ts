@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationModule } from '../notification.module';
 import { By } from '@angular/platform-browser';
+import { NotificationModule } from '../notification.module';
 
 @Component({
     selector: 'fd-notification-group-list-test',

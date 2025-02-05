@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { CommonModule } from '@angular/common';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 import { SelectComponent } from '../select.component';
 import { SelectModule } from '../select.module';
 import { SelectMobileModule } from './select-mobile.module';
-import { CommonModule } from '@angular/common';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
@@ -24,12 +24,7 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
         </fd-select>
     `,
     standalone: true,
-    imports: [
-        CommonModule,
-        SelectModule,
-        SelectMobileModule,
-        RouterTestingModule
-    ]
+    imports: [CommonModule, SelectModule, SelectMobileModule, RouterTestingModule]
 })
 class TestWrapperComponent {
     @ViewChild(SelectComponent, { static: true })

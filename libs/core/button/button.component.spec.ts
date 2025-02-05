@@ -29,8 +29,7 @@ export class DisabledTestComponent {}
 export class AriaDisabledTestComponent {}
 
 describe('ButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        debugElement: DebugElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
     let component, componentInstance: ButtonComponent;
 
     beforeEach(waitForAsync(() => {

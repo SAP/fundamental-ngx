@@ -114,9 +114,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                TestReactiveCheckboxGroupComponent
-            ]
+            imports: [TestReactiveCheckboxGroupComponent]
         }).compileComponents();
     }));
 
@@ -610,9 +608,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                TestReactiveCheckboxGroupWithDataComponent
-            ]
+            imports: [TestReactiveCheckboxGroupWithDataComponent]
         }).compileComponents();
     }));
 

@@ -261,10 +261,9 @@ describe('PopoverService', () => {
         document.body.click();
 
         expect(service.close).not.toHaveBeenCalled();
-        
     });
 
-    it ("shouldn't close on escape keydown from popover body", () => {
+    it("shouldn't close on escape keydown from popover body", () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
         service.closeOnEscapeKey = false;
 
@@ -280,7 +279,7 @@ describe('PopoverService', () => {
         expect(service.close).not.toHaveBeenCalled();
     });
 
-    it("should contain the appropriate classes when checkModalBackground is called and applyOverlay is true", () => {
+    it('should contain the appropriate classes when checkModalBackground is called and applyOverlay is true', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
         service.closeOnOutsideClick = false;
         service.applyOverlay = true;

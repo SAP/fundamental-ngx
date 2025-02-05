@@ -1,8 +1,8 @@
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { MessageBoxModule } from '../message-box.module';
 import { MessageBoxService } from './message-box.service';
 
@@ -66,7 +66,7 @@ describe('MessageBoxService', () => {
 
         fixture.detectChanges();
         tick();
-        
+
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();

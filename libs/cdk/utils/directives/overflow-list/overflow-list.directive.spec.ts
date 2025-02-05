@@ -1,7 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser'; 
+import { By } from '@angular/platform-browser';
 
 import { ViewportRuler } from '@angular/cdk/overlay';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
@@ -89,15 +89,15 @@ describe('OverflowItemsDirective', () => {
     beforeEach(async () => {
         Object.defineProperty(global.window.HTMLElement.prototype, 'clientWidth', {
             configurable: true,
-            value: 500,
+            value: 500
         });
         Object.defineProperty(global.window.HTMLElement.prototype, 'offsetWidth', {
             configurable: true,
-            value: 100,
+            value: 100
         });
         Object.defineProperty(global.window.HTMLElement.prototype, 'offsetLeft', {
             configurable: true,
-            value: 0,
+            value: 0
         });
 
         fixture = TestBed.createComponent(WrapperComponent);
@@ -110,12 +110,14 @@ describe('OverflowItemsDirective', () => {
         items.forEach((item) => {
             Object.defineProperty(item.nativeElement, 'offsetWidth', {
                 configurable: true,
-                value: 120, // Ensure an overflow
+                value: 120 // Ensure an overflow
             });
         });
 
         // Trigger initial overflow calculation
-        const overflowListDir = fixture.debugElement.query(By.directive(OverflowListDirective)).injector.get(OverflowListDirective);
+        const overflowListDir = fixture.debugElement
+            .query(By.directive(OverflowListDirective))
+            .injector.get(OverflowListDirective);
         overflowListDir.calculateOverflow();
     });
 
@@ -129,7 +131,9 @@ describe('OverflowItemsDirective', () => {
         tick(100); // Simulate time for calculations
 
         // Re-trigger calculation to ensure it happens
-        const overflowListDir = fixture.debugElement.query(By.directive(OverflowListDirective)).injector.get(OverflowListDirective);
+        const overflowListDir = fixture.debugElement
+            .query(By.directive(OverflowListDirective))
+            .injector.get(OverflowListDirective);
         overflowListDir.calculateOverflow();
 
         fixture.detectChanges();
