@@ -150,7 +150,7 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     it('should hide elements to overflow by group and priority', (doneFn) => {
         fixture.whenRenderingDone().then(() => {
             const expectedOverflownItems: `${number} / ${OverflowPriority}`[] = [
-                '1 / high', 
+                '1 / high',
                 '2 / low',
                 '2 / low',
                 '1 / low',

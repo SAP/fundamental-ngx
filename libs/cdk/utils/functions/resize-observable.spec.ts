@@ -50,17 +50,16 @@ class MockDOMRectReadOnly implements DOMRectReadOnly {
         this.right = x + width;
         this.bottom = y + height;
         this.left = x;
-        this.toJSON = () => (
-            { 
-                x: this.x, 
-                y: this.y, 
-                idth: this.width, 
-                height: this.height, 
-                top: this.top, 
-                right: this.right, 
-                bottom: this.bottom, 
-                left: this.left 
-            });
+        this.toJSON = () => ({
+            x: this.x,
+            y: this.y,
+            idth: this.width,
+            height: this.height,
+            top: this.top,
+            right: this.right,
+            bottom: this.bottom,
+            left: this.left
+        });
     }
 }
 

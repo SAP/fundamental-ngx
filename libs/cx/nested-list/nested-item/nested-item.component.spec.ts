@@ -3,17 +3,21 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
-import { NestedListExpandIconComponent, NestedListIconComponent, NestedListTitleDirective } from '../nested-list-directives';
+import {
+    NestedListExpandIconComponent,
+    NestedListIconComponent,
+    NestedListTitleDirective
+} from '../nested-list-directives';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemComponent } from './nested-item.component';
 import { NestedItemService } from './nested-item.service';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
 import { CommonModule } from '@angular/common';
-import { NestedListComponent } from '../nested-list/nested-list.component';
-import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
+import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
 import { I18nModule } from '@fundamental-ngx/i18n';
+import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
+import { NestedListComponent } from '../nested-list/nested-list.component';
 
 @Component({
     template: `
@@ -64,19 +68,19 @@ import { I18nModule } from '@fundamental-ngx/i18n';
     `,
     standalone: true,
     imports: [
-            CommonModule, 
-            PopoverModule, 
-            SideNavigationComponent,
-            SideNavigationMainComponent,
-            NestedListComponent,
-            NestedItemComponent,
-            NestedListPopoverComponent,
-            NestedLinkComponent,
-            NestedListIconComponent,
-            NestedListTitleDirective,
-            NestedListExpandIconComponent,
-            I18nModule
-        ]
+        CommonModule,
+        PopoverModule,
+        SideNavigationComponent,
+        SideNavigationMainComponent,
+        NestedListComponent,
+        NestedItemComponent,
+        NestedListPopoverComponent,
+        NestedLinkComponent,
+        NestedListIconComponent,
+        NestedListTitleDirective,
+        NestedListExpandIconComponent,
+        I18nModule
+    ]
 })
 class TestNestedContainerComponent {
     @ViewChild('listNestedItemElement', { read: NestedItemComponent })

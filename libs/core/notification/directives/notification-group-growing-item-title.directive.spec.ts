@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `<span #directiveElement fd-notification-group-growing-item-title>Notification Group Growing Item Title Test</span> `,
+    template: `<span #directiveElement fd-notification-group-growing-item-title
+        >Notification Group Growing Item Title Test</span
+    > `,
     standalone: true,
     imports: [NotificationModule]
 })

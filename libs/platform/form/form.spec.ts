@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
+import { CommonModule } from '@angular/common';
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormGroupComponent } from './form-group/form-group.component';
 import { PlatformInputModule } from './input/fdp-input.module';
 import { InputComponent } from './input/input.component';
-import { CommonModule } from '@angular/common';
 
 interface TestUser {
     firstName: string;
@@ -347,7 +347,6 @@ describe('Nested Form Groups', () => {
     });
 });
 
-
 describe('fdp-form-field out of fdp-form-group', () => {
     @Component({
         template: `
@@ -377,11 +376,11 @@ describe('fdp-form-field out of fdp-form-group', () => {
         `,
         standalone: true,
         imports: [
-            ReactiveFormsModule, 
-            FdpFormGroupModule, 
-            PlatformInputModule, 
-            FormFieldComponent, 
-            FormGroupComponent, 
+            ReactiveFormsModule,
+            FdpFormGroupModule,
+            PlatformInputModule,
+            FormFieldComponent,
+            FormGroupComponent,
             InputComponent,
             CommonModule
         ]

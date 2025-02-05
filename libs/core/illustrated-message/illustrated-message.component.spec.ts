@@ -1,12 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IllustratedMessageComponent, IllustratedMessageType, SvgConfig } from './illustrated-message.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { IllustratedMessageComponent, IllustratedMessageType, SvgConfig } from './illustrated-message.component';
 
 // Mock component for testing
 @Component({
     template: `
-        <figure fd-illustrated-message [type]="type" [svgConfig]="svgConfig" [svgAriaLabel]="svgAriaLabel" [noSvg]="noSvg">
+        <figure
+            fd-illustrated-message
+            [type]="type"
+            [svgConfig]="svgConfig"
+            [svgAriaLabel]="svgAriaLabel"
+            [noSvg]="noSvg"
+        >
             <figcaption fd-illustrated-message-figcaption>
                 <h3 fd-illustrated-message-title>Unable to load data</h3>
                 <p fd-illustrated-message-text>
@@ -59,19 +65,25 @@ describe('IllustratedMessageComponent', () => {
     it('Should add dialog type', () => {
         testComponent.type = 'dialog';
         fixture.detectChanges();
-        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--dialog')).toBe(true);
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--dialog')).toBe(
+            true
+        );
     });
 
     it('Should add spot type', () => {
         testComponent.type = 'spot';
         fixture.detectChanges();
-        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')).toBe(true);
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')).toBe(
+            true
+        );
     });
 
     it('Should add base type', () => {
         testComponent.type = 'base';
         fixture.detectChanges();
-        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--base')).toBe(true);
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--base')).toBe(
+            true
+        );
     });
 
     it('Should update href when svgConfig changes', () => {

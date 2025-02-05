@@ -13,9 +13,7 @@ import { TruncateDirective } from './truncate.directive';
         <span id="truncate-false" fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
             Not truncated
         </span>
-        <span id="retain-color" [style.color]="'red'" fdkTruncate [fdkTruncateState]="true">
-            Retain color
-        </span>
+        <span id="retain-color" [style.color]="'red'" fdkTruncate [fdkTruncateState]="true"> Retain color </span>
     `
 })
 class TestComponent {

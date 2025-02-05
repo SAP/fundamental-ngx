@@ -74,9 +74,7 @@ describe('PlatformDatetimePickerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                TestDatetimePickerComponent
-            ]
+            imports: [TestDatetimePickerComponent]
         }).compileComponents();
     }));
 

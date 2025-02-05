@@ -270,7 +270,6 @@ describe('ComboboxComponent', () => {
         expect(component.isSelected(preselected)).toBe(false);
     });
 
-
     describe('communicateByObject', () => {
         const enum Category {
             Fruit = 'Fruit',

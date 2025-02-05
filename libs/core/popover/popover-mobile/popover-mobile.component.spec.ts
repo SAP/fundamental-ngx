@@ -31,7 +31,7 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
         </fd-popover>
     `,
     standalone: true,
-    imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule],
+    imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule]
 })
 class TestPopoverWrapperComponent {
     @ViewChild(PopoverComponent) popoverComponent: PopoverComponent;
