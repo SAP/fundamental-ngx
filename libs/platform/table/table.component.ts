@@ -818,6 +818,9 @@ export class TableComponent<T = any>
     private _appliedFilterNames = signal<TableAppliedFilter[]>([]);
     /** @hidden */
     private readonly _isShownColumnSettingsInToolbar$ = signal(false);
+    /** @hidden */
+    private readonly _isShownSettingsInToolbar$ = signal(false);
+
     /**
      * @hidden
      * Indicates when all items are checked
@@ -887,12 +890,14 @@ export class TableComponent<T = any>
             filterable: this._isShownFilterSettingsInToolbar$,
             groupable: this._isShownGroupSettingsInToolbar$,
             columns: this._isShownColumnSettingsInToolbar$,
+            settings: this._isShownSettingsInToolbar$,
             hasAnyActions: computed(
                 () =>
                     this._isShownSortSettingsInToolbar$() ||
                     this._isShownFilterSettingsInToolbar$() ||
                     this._isShownGroupSettingsInToolbar$() ||
-                    this._isShownColumnSettingsInToolbar$()
+                    this._isShownColumnSettingsInToolbar$() ||
+                    this._isShownSettingsInToolbar$()
             ),
             appliedFilters: this._appliedFilterNames
         };
@@ -1213,6 +1218,11 @@ export class TableComponent<T = any>
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
         this._isShownColumnSettingsInToolbar$.set(showColumnSettings);
+    }
+
+    /** Toolbar Settings button visibility */
+    showSettingsInToolbar(showSettings: boolean): void {
+        this._isShownSettingsInToolbar$.set(showSettings);
     }
 
     /** Disable filter from column heder menu */

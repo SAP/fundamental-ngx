@@ -149,7 +149,6 @@ describe('Table component test suite', () => {
             elem.click();
             await expect((await getText(tableCellStatusColor, 2)).trim()).withContext('negative');
         });
-
         it('should check filtering by status', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
@@ -165,14 +164,18 @@ describe('Table component test suite', () => {
 
         it('should check on filter by price reset button is clickable', async () => {
             await scrollIntoView(tableFilterableExample);
-            await click(tableFilterableExample + buttonFilter);
+            await click(tableFilterableExample + toolbarButton);
+            const elem = $('li:nth-child(2)');
+            elem.click();
+            const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
+            for (let i = 0; i < rowLength; i++) {
+                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).withContext(
+                    'Out of stock'
+                );
+            }
             await click(dialogFilters);
             await setValue(filterInput, '10');
             await setValue(filterInput, '40', 1);
-            await click(filterButtonOk);
-            await pause(500);
-            await click(tableFilterableExample + buttonFilter);
-            await click(dialogFilters);
             await expect(await isElementClickable(filterResetButton)).withContext(true, 'reset button not clickable');
         });
     });

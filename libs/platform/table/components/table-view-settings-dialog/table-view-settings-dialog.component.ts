@@ -3,15 +3,16 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     forwardRef,
+    inject,
     Input,
-    OnDestroy,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     CollectionFilter,
@@ -21,22 +22,21 @@ import {
     TableDialogCommonData,
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
-import { FiltersComponent, FiltersDialogData, FiltersDialogResultData } from './filtering/filters.component';
-import {
-    GroupingComponent,
-    SettingsGroupDialogData,
-    SettingsGroupDialogResultData
-} from './grouping/grouping.component';
-import { SettingsSortDialogData, SettingsSortDialogResultData, SortingComponent } from './sorting/sorting.component';
+import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
+import { FiltersDialogData, SettingsGroupDialogData, SettingsSortDialogData } from './table-view-settings.model';
 
 export const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
-    minWidth: '30%',
-    /** 88px it's the header + footer height */
-    bodyMinHeight: 'calc(50vh - 88px)'
+    width: '340px'
 };
+
+export interface CombinedTableDialogData {
+    sortingData: SettingsSortDialogData | null;
+    filteringData: FiltersDialogData | null;
+    groupingData: SettingsGroupDialogData | null;
+}
 
 /**
  * View settings dialog component.
@@ -63,7 +63,7 @@ export const dialogConfig: DialogConfig = {
     encapsulation: ViewEncapsulation.None,
     standalone: true
 })
-export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestroy {
+export class TableViewSettingsDialogComponent implements AfterViewInit {
     /** Reference to table component. */
     @Input()
     set table(table: Table) {
@@ -86,13 +86,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     _table: Table;
 
     /** @hidden */
-    _dialogRef: DialogRef<TableDialogCommonData, any>;
+    _dialogRef: DialogRef<TableDialogCommonData | CombinedTableDialogData, any>;
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _tableSubscriptions = new Subscription();
+    private readonly destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
@@ -102,122 +98,77 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         this._listenToFilters();
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-        this._unsubscribeFromTable();
-    }
-
     /** Open Sort Settings Dialog */
-    showSortingSettings(): void {
+    showViewSettingsDialog(): void {
         const state = this._getTableState();
         const columns = this._getTableColumns();
-        const sortBy = state.sortBy?.[0];
-        const dialogData: SettingsSortDialogData = {
+
+        const sortData: SettingsSortDialogData = {
             columns: columns.filter(({ sortable }) => sortable),
-            direction: sortBy?.direction,
-            field: sortBy?.field,
+            direction: state.sortBy?.[0]?.direction,
+            field: state.sortBy?.[0]?.field,
             allowDisablingSorting: this.allowDisablingSorting
         };
 
-        // dismiss any open dialog, before opening a new one
-        if (this._dialogRef) {
-            this._dialogRef.dismiss();
-        }
-
-        this._dialogRef = this._dialogService.open(
-            SortingComponent,
-            {
-                ...dialogConfig,
-                data: dialogData
-            },
-            this.table.injector
-        );
-
-        this._subscriptions.add(
-            this._dialogRef.afterClosed
-                .pipe(filter((result) => !!result))
-                .subscribe(({ field, direction }: SettingsSortDialogResultData) => {
-                    this._applySorting(field, direction);
-                })
-        );
-    }
-
-    /** Open Filtering Settings Dialog */
-    showFilteringSettings(): void {
-        const state = this._getTableState();
-        const columns = this._getTableColumns();
-        const dialogData: FiltersDialogData = {
+        const filterData: FiltersDialogData = {
             columns,
             viewSettingsFilters: this.filters.toArray(),
             filterBy: state?.filterBy
         };
 
-        // dismiss any open dialog, before opening a new one
-        if (this._dialogRef) {
-            this._dialogRef.dismiss();
-        }
-
-        this._dialogRef = this._dialogService.open(
-            FiltersComponent,
-            {
-                ...dialogConfig,
-                data: dialogData
-            },
-            this.table.injector
-        );
-
-        this._subscriptions.add(
-            this._dialogRef.afterClosed
-                .pipe(filter((result) => !!result))
-                .subscribe(({ filterBy }: FiltersDialogResultData) => this._applyFiltering(filterBy))
-        );
-    }
-
-    /** Open Grouping Settings Dialog */
-    showGroupingSettings(): void {
-        const state = this._getTableState();
-        const columns = this._getTableColumns();
-        const dialogData: SettingsGroupDialogData = {
+        const groupData: SettingsGroupDialogData = {
             columns: columns.filter(({ groupable }) => groupable),
             direction: state.groupBy?.[0]?.direction,
             field: state.groupBy?.[0]?.field
         };
 
-        // dismiss any open dialog, before opening a new one
         if (this._dialogRef) {
             this._dialogRef.dismiss();
         }
 
         this._dialogRef = this._dialogService.open(
-            GroupingComponent,
+            SettingsDialogComponent,
             {
                 ...dialogConfig,
-                data: dialogData
+                data: {
+                    sortingData: sortData.columns.length > 0 ? sortData : null,
+                    filteringData: filterData.viewSettingsFilters.length > 0 ? filterData : null,
+                    groupingData: groupData.columns.length > 0 ? groupData : null
+                }
             },
             this.table.injector
         );
 
-        this._subscriptions.add(
-            this._dialogRef.afterClosed
-                .pipe(filter((result) => !!result))
-                .subscribe(({ field, direction }: SettingsGroupDialogResultData) => {
-                    this._applyGrouping(field, direction);
-                })
-        );
+        this._dialogRef.afterClosed
+            .pipe(
+                filter((result) => !!result),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe(({ sortingData, filteringData, groupingData }) => {
+                if (sortingData) {
+                    this._applySorting(sortingData.field, sortingData.direction);
+                }
+                if (filteringData) {
+                    this._applyFiltering(filteringData.filterBy);
+                }
+                if (groupingData) {
+                    this._applyGrouping(groupingData.field, groupingData.direction);
+                }
+            });
     }
 
     /** @hidden */
     private _listenToFilters(): void {
-        this.filters.changes.pipe(startWith(null)).subscribe(() => {
-            this._table?.showFilterSettingsInToolbar(this.filters.toArray().length > 0);
+        this.filters.changes.pipe(startWith(null), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            if (this.filters.toArray().length > 0) {
+                this._table?.showSettingsInToolbar(true);
+            }
         });
     }
 
     /** @hidden */
     private _setTable(table: Table): void {
         this._table = table;
-        this._unsubscribeFromTable();
         this._subscribeToTable();
     }
 
@@ -227,26 +178,22 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             return;
         }
 
-        this._listenToTableTriggersToOpenDialogs();
+        this._table.openTableSortSettings
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.showViewSettingsDialog());
 
-        this._listenToTableColumns();
-    }
+        this._table.openTableFilterSettings
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.showViewSettingsDialog());
 
-    /** @hidden */
-    private _listenToTableTriggersToOpenDialogs(): void {
-        this._tableSubscriptions.add(this._table.openTableSortSettings.subscribe(() => this.showSortingSettings()));
-        this._tableSubscriptions.add(this._table.openTableFilterSettings.subscribe(() => this.showFilteringSettings()));
-        this._tableSubscriptions.add(this._table.openTableGroupSettings.subscribe(() => this.showGroupingSettings()));
-    }
+        this._table.openTableGroupSettings
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.showViewSettingsDialog());
 
-    /** @hidden */
-    private _listenToTableColumns(): void {
-        this._tableSubscriptions.add(
-            this._table.tableColumnsStream.subscribe((columns: TableColumn[]) => {
-                this._table?.showSortSettingsInToolbar(columns.some(({ sortable }) => sortable));
-                this._table?.showGroupSettingsInToolbar(columns.some(({ groupable }) => groupable));
-            })
-        );
+        this._table.tableColumnsStream.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((columns: TableColumn[]) => {
+            const show = columns.some(({ sortable }) => sortable) || columns.some(({ groupable }) => groupable);
+            this._table?.showSettingsInToolbar(show);
+        });
     }
 
     /** @hidden */
@@ -272,11 +219,5 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     /** @hidden */
     private _applyGrouping(field: string | null, direction: SortDirection): void {
         this._table?.group(field ? [{ field, direction, showAsColumn: true }] : []);
-    }
-
-    /** @hidden */
-    private _unsubscribeFromTable(): void {
-        this._tableSubscriptions.unsubscribe();
-        this._tableSubscriptions = new Subscription();
     }
 }

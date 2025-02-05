@@ -46,6 +46,7 @@ export interface ToolbarContext {
     filterable: Signal<boolean>;
     groupable: Signal<boolean>;
     columns: Signal<boolean>;
+    settings: Signal<boolean>;
     hasAnyActions: Signal<boolean>;
     appliedFilters: Signal<TableAppliedFilter[]>;
 }

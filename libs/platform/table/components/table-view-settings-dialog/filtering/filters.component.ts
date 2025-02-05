@@ -3,64 +3,45 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    forwardRef,
+    input,
+    Input,
+    OnInit,
+    output,
     signal,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgTemplateOutlet } from '@angular/common';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import {
-    BarElementDirective,
-    BarLeftDirective,
-    BarRightDirective,
-    ButtonBarComponent
-} from '@fundamental-ngx/core/bar';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     DialogBodyComponent,
     DialogComponent,
     DialogFooterComponent,
     DialogHeaderComponent
 } from '@fundamental-ngx/core/dialog';
+
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import {
-    CollectionFilter,
-    FilterType,
-    Table,
-    TableColumn,
-    TableDialogCommonData
-} from '@fundamental-ngx/platform/table-helpers';
-import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { CollectionFilter, FilterType, TableColumn } from '@fundamental-ngx/platform/table-helpers';
+import { ResetButtonComponent } from '../../reset-button/reset-button.component';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
+import { ACTIVE_STEP, FiltersDialogData, FiltersDialogResultData } from '../table-view-settings.model';
 import { FilterStepComponent } from './filter-step.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 import { FiltersListStepComponent, SelectableFilter } from './filters-list-step.component';
 
-export interface FiltersDialogData extends TableDialogCommonData {
-    filterBy: CollectionFilter[];
-    columns: TableColumn[];
-    viewSettingsFilters: TableViewSettingsFilterComponent[];
-}
-
-export interface FiltersDialogResultData {
-    filterBy: CollectionFilter[];
-}
-
-export enum ACTIVE_STEP {
-    SELECT_FILTER = 'SELECT_FILTER',
-    FILTER = 'FILTER'
-}
-
 @Component({
+    selector: 'fdp-filters',
     templateUrl: './filters.component.html',
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => FiltersComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
@@ -82,141 +63,140 @@ export enum ACTIVE_STEP {
         FdTranslatePipe
     ]
 })
-export class FiltersComponent implements Resettable, AfterViewInit {
-    /**
-     * Current FiltersViewStep component to render.
-     * The fd-dialog component relies on named projected content.
-     * It means we must define all projected dialog options in the same view withing fd-dialog.
-     * In order to keep filters steps as separate components
-     * and do not break dialog content we are using this ViewChild hook
-     * keeping reference to the conditionally rendered active step.
-     * Each "FilterStepView" has template refs for dialog.title and dialog.body template
-     * */
-    @ViewChild(FILTERS_VIEW_STEP_TOKEN)
-    set setActiveFilterStepView(view: FiltersViewStep) {
-        this.activeFilterStepView = view;
-        this._cd.detectChanges();
+export class FiltersComponent implements AfterViewInit, OnInit {
+    /** Data for the filtering dialog */
+    @Input() set filteringData(value: FiltersDialogData) {
+        this._initializeFilterData(value);
     }
+
+    /** Initial set of filters applied */
+    initialFilters = input<CollectionFilter[]>([]);
+
+    /** Emits when the active filter step view changes */
+    activeFilterStepViewChange = output<FiltersViewStep>();
+
+    /** Emits the final result of filter changes */
+    filterChange = output<FiltersDialogResultData>();
+
+    /** Emits whether the reset button should be enabled */
+    resetAvailabilityChange = output<boolean>();
+
+    /** Signal to hold currently applied filter rules */
+    filterBy = signal<CollectionFilter[]>([]);
+
+    /** Signal for table columns, used to retrieve the column key */
+    columns = signal<TableColumn[]>([]);
+
+    /** Signal for declared filter options */
+    viewSettingsFilters = signal<TableViewSettingsFilterComponent[]>([]);
+
+    /** Signal to track the currently selected filter step */
+    activeStep = signal<ACTIVE_STEP>(ACTIVE_STEP.SELECT_FILTER);
+
+    /** Signal to track the currently selected filter */
+    activeFilter = signal<Nullable<TableViewSettingsFilterComponent>>(null);
+
+    /** Signal to track the column key associated with the active filter */
+    activeFilterColumnKey = signal<Nullable<string>>(null);
+
+    /** Signal for the currently active filter step view */
+    activeFilterStepView = signal<Nullable<FiltersViewStep>>(null);
 
     /** Reference to the available steps */
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
-    /** Currently applied filters rules */
-    filterBy: CollectionFilter[];
+    /** hidden */
+    constructor(private readonly _cd: ChangeDetectorRef) {}
 
-    /** Table columns. Used to retrieve a column key */
-    columns: TableColumn[];
-
-    /** Declared filters options */
-    viewSettingsFilters: TableViewSettingsFilterComponent[];
-
-    /** Currently selected step */
-    activeStep: ACTIVE_STEP = ACTIVE_STEP.SELECT_FILTER;
-
-    /** Currently selected filter to drill down */
-    activeFilter: TableViewSettingsFilterComponent | null = null;
-
-    /** Table column key associated with the currently selected filter  */
-    activeFilterColumnKey: Nullable<string> = null;
-
-    /** Indicates when reset command is available */
-    readonly isResetAvailable$ = signal(false);
-
-    /** Current step component to render */
-    activeFilterStepView: FiltersViewStep;
-
-    /** @hidden */
-    private _initialFilters: CollectionFilter[] = [];
-
-    /** @hidden */
-    constructor(
-        public readonly dialogRef: DialogRef<FiltersDialogData>,
-        private readonly _cd: ChangeDetectorRef,
-        private readonly _table: Table
-    ) {
-        const dialogData = this.dialogRef.data;
-        this.filterBy = [...dialogData.filterBy];
-        this.viewSettingsFilters = dialogData.viewSettingsFilters;
-        this.columns = dialogData.columns;
-
-        this._setInitialFilters();
+    /** hidden */
+    ngOnInit(): void {
         this._compareSelectedFilters();
     }
 
-    /** Need it to keep activeFilterStepView rendering up to date */
+    /** hidden */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
     }
 
-    /** Select filter to drill down */
-    selectFilter(filter: SelectableFilter): void {
-        this.activeStep = ACTIVE_STEP.FILTER;
-        this.activeFilter = filter as TableViewSettingsFilterComponent;
-        this.activeFilterColumnKey = this.columns.find(
-            ({ name }) => name === (<TableViewSettingsFilterComponent>filter).column
-        )?.key;
+    /** Setter for the active filter step view to trigger updates */
+    @ViewChild(FILTERS_VIEW_STEP_TOKEN)
+    set setActiveFilterStepView(view: FiltersViewStep) {
+        this.activeFilterStepView.set(view);
+        this.activeFilterStepViewChange.emit(view);
         this._cd.detectChanges();
     }
 
-    /** Go back to the top filters list */
-    goToFilters(): void {
-        this.activeStep = ACTIVE_STEP.SELECT_FILTER;
-        this.activeFilter = null;
+    /**
+     * Select a filter to drill down and update the active filter step.
+     * @param filter The filter to be selected and applied.
+     */
+    selectFilter(filter: SelectableFilter): void {
+        this.activeStep.set(ACTIVE_STEP.FILTER);
+        const selectedFilter = filter as TableViewSettingsFilterComponent;
+        this.activeFilter.set(selectedFilter);
+        const columnKey = this.columns().find(({ name }) => name === selectedFilter.column)?.key || null;
+        this.activeFilterColumnKey.set(columnKey);
+        this._cd.detectChanges();
     }
 
-    /** Apply filter rule changes and emit the event */
-    applyFilter(filter: CollectionFilter, { type }: TableViewSettingsFilterComponent): void {
+    /** Navigate back to the top-level filters list */
+    goToFilters(): void {
+        this.activeStep.set(ACTIVE_STEP.SELECT_FILTER);
+        this.activeFilter.set(null);
+    }
+
+    /**
+     * Apply changes to the selected filter and emit the filter change event.
+     * @param filter The filter to apply
+     * @param filterComponent The component for the filter (provides type info)
+     */
+    applyFilter(filter: CollectionFilter, filterComponent: Nullable<TableViewSettingsFilterComponent>): void {
         if (!filter) {
             return;
         }
-        // exclude this filter from filters list
-        this.filterBy = this.filterBy.filter(({ field }) => field !== filter.field);
 
+        // Update the filter by removing the previous filter for the field
+        this.filterBy.set(this.filterBy().filter(({ field }) => field !== filter.field));
+
+        if (!filterComponent) {
+            return;
+        }
         const filterIsNotEmpty =
-            type === FilterType.CUSTOM ||
-            (type === FilterType.MULTI && filter.value?.length) ||
-            (type === FilterType.SINGLE && filter.value?.length);
+            filterComponent.type === FilterType.CUSTOM ||
+            (filterComponent.type === FilterType.MULTI && filter.value?.length) ||
+            (filterComponent.type === FilterType.SINGLE && filter.value?.length);
 
-        // if filter is not empty add it to the list
+        // Add the new filter if it has a value
         if (filterIsNotEmpty) {
-            this.filterBy.push(filter);
+            this.filterBy.set([...this.filterBy(), filter]);
         }
 
         this._compareSelectedFilters();
-
-        // To fix "Expression has changed after it was checked"
+        this.filterChange.emit({ filterBy: this.filterBy() });
         this._cd.detectChanges();
     }
 
-    /** Reset changes to the initial state */
-    reset(): void {
-        this.filterBy = this._initialFilters;
-        this.isResetAvailable$.set(false);
-        this._cd.detectChanges();
-    }
-
-    /** Close dialog */
-    cancel(): void {
-        this.dialogRef.close(null);
-    }
-
-    /** Confirm changes and close dialog */
-    confirm(): void {
-        const result: FiltersDialogResultData = { filterBy: this.filterBy };
-        this.dialogRef.close(result);
-    }
-
-    /** @hidden */
-    private _setInitialFilters(): void {
-        this._initialFilters = this._table.initialState?.initialFilterBy ?? [];
-    }
-
-    /** @hidden */
-    private _compareSelectedFilters(): void {
-        if (equal(this._initialFilters, this.filterBy)) {
-            return;
+    /**
+     * Private method to initialize filter data on component initialization.
+     * Extracts the initial filter values and table column data.
+     */
+    private _initializeFilterData(filteringData: FiltersDialogData): void {
+        if (filteringData) {
+            this.filterBy.set([...filteringData.filterBy]);
+            this.viewSettingsFilters.set(filteringData.viewSettingsFilters);
+            this.columns.set(filteringData.columns);
         }
+    }
 
-        this.isResetAvailable$.set(true);
+    /**
+     * Private method to compare the current selected filters against the initial state.
+     * Enables or disables the reset button based on filter state comparison.
+     */
+    private _compareSelectedFilters(): void {
+        if (!equal(this.initialFilters(), this.filterBy())) {
+            this.resetAvailabilityChange.emit(true);
+        } else {
+            this.resetAvailabilityChange.emit(false);
+        }
     }
 }
