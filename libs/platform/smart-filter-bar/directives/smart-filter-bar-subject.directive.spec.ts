@@ -112,11 +112,14 @@ describe('SmartFilterBarSubjectDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestComponent]
-        }).compileComponents();
-    }), 10000);
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TestComponent]
+            }).compileComponents();
+        }),
+        10000
+    );
 
     beforeEach(waitForAsync(async () => {
         fixture = TestBed.createComponent(TestComponent);

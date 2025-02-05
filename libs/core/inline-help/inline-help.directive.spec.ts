@@ -24,7 +24,7 @@ describe('InlineHelpDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestComponent],
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

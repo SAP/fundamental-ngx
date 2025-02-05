@@ -57,7 +57,7 @@ const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalConten
         <fd-slider class="example-6" [(ngModel)]="value6" fdCozy></fd-slider>
     `,
     standalone: true,
-    imports: [SliderModule, FormsModule, ContentDensityModule],
+    imports: [SliderModule, FormsModule, ContentDensityModule]
 })
 class TestSliderComponent {
     @ViewChildren(SliderComponent)

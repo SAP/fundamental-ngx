@@ -178,9 +178,11 @@ describe('DatetimePickerComponent', () => {
 
     it('should toggle the popover with the f4 key', () => {
         jest.spyOn(component, 'togglePopover');
-        component._inputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {
-            key: 'f4'
-        }));
+        component._inputElement.nativeElement.dispatchEvent(
+            new KeyboardEvent('keydown', {
+                key: 'f4'
+            })
+        );
         expect(component.togglePopover).toHaveBeenCalled();
     });
 });

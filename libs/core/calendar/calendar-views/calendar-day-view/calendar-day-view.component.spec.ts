@@ -2,10 +2,9 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { first } from 'rxjs/operators';
 
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
+import { CalendarDay } from '../../models/calendar-day';
 import { CalendarDayViewComponent } from './calendar-day-view.component';
-
 
 describe('CalendarDayViewComponent', () => {
     let component: CalendarDayViewComponent<FdDate>;
@@ -75,10 +74,7 @@ describe('CalendarDayViewComponent', () => {
     it('Should mark selected multi date', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.allowMultipleSelection.set(true);
-        component.selectedMultipleDates = [
-            new FdDate(2018, 10, 20),
-            new FdDate(2018, 10, 21)
-        ];
+        component.selectedMultipleDates = [new FdDate(2018, 10, 20), new FdDate(2018, 10, 21)];
         component.ngOnInit();
         const calendarDays: CalendarDay<FdDate>[] = component._dayViewGrid.reduce(
             (a: CalendarDay<FdDate>[], b: CalendarDay<FdDate>[]) => {
@@ -88,7 +84,7 @@ describe('CalendarDayViewComponent', () => {
                 return b.concat(a);
             }
         );
-        const selected = calendarDays.filter((cell) => cell.selected).map(d => d.date);
+        const selected = calendarDays.filter((cell) => cell.selected).map((d) => d.date);
         expect(selected).toEqual(component.selectedMultipleDates);
     });
 
@@ -304,9 +300,7 @@ describe('CalendarDayViewComponent', () => {
         // Initialize with specific start and end dates
         const startDate = new FdDate(2018, 10, 20);
         const endDate = new FdDate(2018, 10, 21);
-        component.selectedMultipleDateRanges = [
-            { start: startDate, end: endDate }
-        ];
+        component.selectedMultipleDateRanges = [{ start: startDate, end: endDate }];
 
         component.ngOnInit();
 
@@ -335,11 +329,11 @@ describe('CalendarDayViewComponent', () => {
         const firstRangeDays = component._calendarDayList.slice(0, 5);
         const secondRangeDays = component._calendarDayList.slice(9, 15);
 
-        firstRangeDays.forEach(day => {
+        firstRangeDays.forEach((day) => {
             expect(day.selected).toBeTruthy();
         });
 
-        secondRangeDays.forEach(day => {
+        secondRangeDays.forEach((day) => {
             expect(day.selected).toBeTruthy();
         });
     });
@@ -376,7 +370,6 @@ describe('CalendarDayViewComponent', () => {
 
         expect(component._calendarDayList.filter((_day) => _day.hoverRange).length).toBeGreaterThan(0);
     });
-
 
     it('should put additional property select on single day in multiple ranges', () => {
         component.currentlyDisplayed.year = 2020;

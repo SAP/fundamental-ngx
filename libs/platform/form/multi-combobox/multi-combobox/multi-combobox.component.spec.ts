@@ -37,13 +37,7 @@ import { MultiComboboxComponent } from './multi-combobox.component';
         </fdp-form-group>
     `,
     standalone: true,
-    imports: [
-        FdpFormGroupModule,
-        FormModule,
-        ReactiveFormsModule,
-        PlatformMultiComboboxModule,
-        ContentDensityModule
-    ]
+    imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule, ContentDensityModule]
 })
 class MultiComboboxStandardComponent {
     @ViewChild(MultiComboboxComponent)
@@ -92,9 +86,7 @@ describe('MultiComboboxComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                MultiComboboxStandardComponent
-            ],
+            imports: [MultiComboboxStandardComponent],
             providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
         }).compileComponents();
 

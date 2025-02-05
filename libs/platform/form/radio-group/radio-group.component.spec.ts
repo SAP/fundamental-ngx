@@ -340,7 +340,7 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestRadioGroupTemplateDrivenFdpGroupComponent],
+            imports: [TestRadioGroupTemplateDrivenFdpGroupComponent]
         }).compileComponents();
     }));
 

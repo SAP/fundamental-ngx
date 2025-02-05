@@ -7,12 +7,12 @@ import { TableCellDirective } from './table-cell.directive';
 
 @Component({
     template: `
-    <tr tabindex="-1">
-        <td fd-table-cell>
-            <fd-checkbox></fd-checkbox>
-        </td>
-        <td fd-table-cell [key]="key">{{ key }}</td>
-    </tr>
+        <tr tabindex="-1">
+            <td fd-table-cell>
+                <fd-checkbox></fd-checkbox>
+            </td>
+            <td fd-table-cell [key]="key">{{ key }}</td>
+        </tr>
     `,
     standalone: true,
     imports: [TableModule, CheckboxModule]

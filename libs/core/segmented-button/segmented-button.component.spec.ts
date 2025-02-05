@@ -170,7 +170,7 @@ describe('Segmented button component CVA', () => {
         },
         testModuleMetadata: {
             imports: [SegmentedButtonModule, ButtonModule, HostComponent], // Fixing to import standalone components
-            providers: [RtlService],
+            providers: [RtlService]
         },
         hostTemplate: {
             // Specify that "SegmentedButtonComponent" should not be tested directly

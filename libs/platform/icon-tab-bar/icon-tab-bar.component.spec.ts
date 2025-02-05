@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { IconTabBarTabComponent } from './components/icon-tab-bar-tab/icon-tab-bar-tab.component';
 import { FdDnDEvent } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
-import { IconTabBarTabComponent } from './components/icon-tab-bar-tab/icon-tab-bar-tab.component';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { generateTestConfig } from './tests-helper';
 import { IconTabBarSize, TabType } from './types';
@@ -119,7 +119,7 @@ describe('IconTabBarComponent', () => {
     it('should handle dynamic tab selection', () => {
         const selectedTabEventSpy = jest.spyOn(component, 'selected');
         fixture.detectChanges();
-        
+
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__tab');
 
@@ -128,7 +128,7 @@ describe('IconTabBarComponent', () => {
         fixture.detectChanges();
 
         expect(selectedTabEventSpy).toHaveBeenCalled();
-        
+
         // verify aria-selected attribute
         const selectedTab = hostEl.querySelector('.fd-icon-tab-bar__tab[aria-selected="true"]');
         expect(selectedTab).toBe(tabs[1]);
@@ -281,7 +281,7 @@ describe('IconTabBarComponent', () => {
     it('should handle dynamic tab selection', () => {
         const selectedTabEventSpy = jest.spyOn(component, 'selected');
         fixture.detectChanges();
-        
+
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__tab');
 
@@ -290,7 +290,7 @@ describe('IconTabBarComponent', () => {
         fixture.detectChanges();
 
         expect(selectedTabEventSpy).toHaveBeenCalled();
-        
+
         // verify aria-selected attribute
         const selectedTab = hostEl.querySelector('.fd-icon-tab-bar__tab[aria-selected="true"]');
         expect(selectedTab).toBe(tabs[1]);

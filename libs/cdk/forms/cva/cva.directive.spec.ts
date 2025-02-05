@@ -88,9 +88,7 @@ describe('CvaDirective', () => {
          */
         testModuleMetadata: {
             imports: [TestComponent, CvaDirective],
-            providers: [
-                { provide: ElementRef, useValue: mockElementRef }
-            ]
+            providers: [{ provide: ElementRef, useValue: mockElementRef }]
         },
         /** Whether component is able to track "onBlur" events separately */
         supportsOnBlur: true,

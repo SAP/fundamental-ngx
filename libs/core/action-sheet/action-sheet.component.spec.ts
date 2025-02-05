@@ -6,7 +6,7 @@ import { ActionSheetModule } from './action-sheet.module';
 @Component({
     template: ` <div #componentElement fd-action-sheet>Action Sheet Parent Test Text</div> `,
     standalone: true,
-    imports: [ActionSheetModule, ButtonModule ]
+    imports: [ActionSheetModule, ButtonModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })

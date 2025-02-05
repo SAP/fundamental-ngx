@@ -36,7 +36,15 @@ import { FacetComponent } from './facet.component';
         </fd-facet>
     `,
     standalone: true,
-    imports: [CommonModule, IconModule, LinkModule, TextComponent, RouterTestingModule, FacetContentComponent, FacetComponent]
+    imports: [
+        CommonModule,
+        IconModule,
+        LinkModule,
+        TextComponent,
+        RouterTestingModule,
+        FacetContentComponent,
+        FacetComponent
+    ]
 })
 class TestFormFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -97,19 +105,25 @@ class TestKeyValueFacetComponent {
 @Component({
     template: `
         <fd-facet type="key-value" facetTitle="Pricing" id="kvFacet24" [alignEnd]="true">
-            <fd-object-number [number]="100.88" [large]="true" unit="EUR" status="informative" [decimal]="2"></fd-object-number>
+            <fd-object-number
+                [number]="100.88"
+                [large]="true"
+                unit="EUR"
+                status="informative"
+                [decimal]="2"
+            ></fd-object-number>
         </fd-facet>
     `,
     standalone: true,
     imports: [
-        CommonModule, 
-        ObjectStatusComponent, 
-        ObjectNumberModule, 
-        AvatarComponent, 
-        FacetComponent, 
-        FacetContentComponent, 
-        IconModule, 
-        LinkModule, 
+        CommonModule,
+        ObjectStatusComponent,
+        ObjectNumberModule,
+        AvatarComponent,
+        FacetComponent,
+        FacetContentComponent,
+        IconModule,
+        LinkModule,
         TextComponent
     ]
 })
@@ -146,7 +160,9 @@ describe('FacetComponent Tests', () => {
             expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet--form')).toBeTruthy();
             expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
             expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
-            expect(component.facetContentComponent.elementRef.nativeElement.classList.contains('fd-facet__container')).toBeTruthy();
+            expect(
+                component.facetContentComponent.elementRef.nativeElement.classList.contains('fd-facet__container')
+            ).toBeTruthy();
         });
 
         it('should add tiny margin for form facet with link', () => {
@@ -217,14 +233,20 @@ describe('FacetComponent Tests', () => {
         it('should add correct classes to rating indicator facet by default', () => {
             fixture.detectChanges();
             expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet')).toBeTruthy();
-            expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet--rating-indicator')).toBeTruthy();
+            expect(
+                facetComponent.elementRef.nativeElement.classList.contains('fd-facet--rating-indicator')
+            ).toBeTruthy();
             expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
             expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
-            expect(component.facetContentComponent.elementRef.nativeElement.classList.contains('fd-facet__container')).toBeTruthy();
+            expect(
+                component.facetContentComponent.elementRef.nativeElement.classList.contains('fd-facet__container')
+            ).toBeTruthy();
         });
 
         it('should add correct classes to rating indicator component', () => {
-            const ratingIndicatorContainerElement = fixture.debugElement.query(By.css('.fd-rating-indicator__container'));
+            const ratingIndicatorContainerElement = fixture.debugElement.query(
+                By.css('.fd-rating-indicator__container')
+            );
             fixture.detectChanges();
             expect(
                 ratingIndicatorContainerElement.nativeElement.classList.contains(
@@ -276,7 +298,9 @@ describe('FacetComponent Tests', () => {
         it('should add correct classes to key value component', () => {
             const objectStatusElement = fixture.debugElement.query(By.css('.fd-object-status'));
             fixture.detectChanges();
-            expect(objectStatusElement.nativeElement.classList.contains(FACET_CLASS_NAME.facetObjectStatus)).toBeTruthy();
+            expect(
+                objectStatusElement.nativeElement.classList.contains(FACET_CLASS_NAME.facetObjectStatus)
+            ).toBeTruthy();
 
             const objectStatusTextElement = fixture.debugElement.query(By.css('.fd-object-status__text'));
             fixture.detectChanges();
@@ -286,7 +310,9 @@ describe('FacetComponent Tests', () => {
             const objectStatusIconElement = fixture.debugElement.query(By.css('.fd-object-status__icon'));
             fixture.detectChanges();
             expect(objectStatusIconElement.nativeElement.classList.contains(FACET_CLASS_NAME.paddingNone)).toBeTruthy();
-            expect(objectStatusIconElement.nativeElement.classList.contains(FACET_CLASS_NAME.marginEndTiny)).toBeTruthy();
+            expect(
+                objectStatusIconElement.nativeElement.classList.contains(FACET_CLASS_NAME.marginEndTiny)
+            ).toBeTruthy();
         });
     });
 

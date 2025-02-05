@@ -175,8 +175,8 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
 
         fixture.detectChanges();
 
-        tick(); 
-        
+        tick();
+
         component.form.onSubmit(new Event('submit'));
 
         tick(500);

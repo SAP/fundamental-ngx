@@ -1,20 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
+    ContentDensityDirective,
     ContentDensityGlobalKeyword,
     ContentDensityMode,
     LocalContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListStateService } from '../nested-list-state.service';
-import { NestedListHeaderDirective, NestedListTitleDirective } from '../nested-list-directives';
-import { NestedListComponent } from './nested-list.component';
 import { NestedItemComponent } from '../nested-item/nested-item.component';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { CommonModule } from '@angular/common';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NestedListHeaderDirective, NestedListTitleDirective } from '../nested-list-directives';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListStateService } from '../nested-list-state.service';
+import { NestedListComponent } from './nested-list.component';
 
 @Component({
     template: `
@@ -50,12 +50,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     standalone: true,
     imports: [
         CommonModule,
-        NestedListHeaderDirective, 
-        NestedItemComponent, 
-        NestedLinkComponent, 
-        NestedListTitleDirective, 
+        NestedListHeaderDirective,
+        NestedItemComponent,
+        NestedLinkComponent,
+        NestedListTitleDirective,
         ContentDensityDirective,
-        NestedListComponent]
+        NestedListComponent
+    ]
 })
 class TestNestedContainerComponent {
     @ViewChild('level4List', { static: true, read: NestedListComponent })

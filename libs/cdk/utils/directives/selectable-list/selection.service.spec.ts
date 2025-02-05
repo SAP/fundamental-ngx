@@ -88,7 +88,7 @@ describe('SelectionService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HostComponent, TestDirective], // Use imports instead of declarations
+            imports: [HostComponent, TestDirective] // Use imports instead of declarations
         }).compileComponents();
     });
 

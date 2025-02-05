@@ -131,7 +131,12 @@ describe('SelectComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent, NoopAnimationsModule]
+            imports: [
+                TestWrapperComponent,
+                TestFilteringWrapperComponent,
+                ValueCompareWithSelectComponent,
+                NoopAnimationsModule
+            ]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

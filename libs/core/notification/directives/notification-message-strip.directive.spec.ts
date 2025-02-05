@@ -5,7 +5,7 @@ import { NotificationModule } from '../notification.module';
 @Component({
     template: `<div #directiveElement fd-notification-message-strip>Notification Message Strip Test</div> `,
     standalone: true,
-    imports: [ NotificationModule ]
+    imports: [NotificationModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
