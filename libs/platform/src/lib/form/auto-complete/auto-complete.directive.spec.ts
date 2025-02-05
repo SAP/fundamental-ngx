@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 import { AutoCompleteDirective } from './auto-complete.directive';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     template: '<input [options]="options" fdp-auto-complete>'
@@ -42,7 +43,8 @@ describe('AutoCompleteDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AutoCompleteDirective, TestComponent]
+            declarations: [AutoCompleteDirective, TestComponent],
+            providers: [DestroyedService]
         }).compileComponents();
     }));
 
