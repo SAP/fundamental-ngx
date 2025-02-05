@@ -18,6 +18,7 @@ import {
     NUMPAD_ZERO,
     RIGHT_ARROW,
     SHIFT,
+    SPACE,
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
@@ -485,6 +486,7 @@ export abstract class BaseCombobox
             }
             const acceptedKeys =
                 !KeyUtil.isKeyCode(event, BACKSPACE) &&
+                !KeyUtil.isKeyCode(event, SPACE) &&
                 !KeyUtil.isKeyType(event, 'alphabetical') &&
                 !KeyUtil.isKeyType(event, 'numeric') &&
                 !KeyUtil.isKeyCode(event, this._numberPadNumberKeys);
