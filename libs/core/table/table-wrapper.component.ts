@@ -22,7 +22,6 @@ import {
  * ```
  */
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-table-wrapper',
     template: `<ng-content></ng-content>`,
     styleUrl: './table.component.scss',

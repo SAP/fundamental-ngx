@@ -215,7 +215,7 @@ let tableUniqueId = 0;
         {
             directive: TableDataSourceDirective,
             inputs: ['dataSource', 'childDataSource'],
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+
             outputs: [
                 'childDataSourceChanged',
                 // eslint-disable-next-line @angular-eslint/no-output-on-prefix

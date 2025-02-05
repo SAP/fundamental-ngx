@@ -3,7 +3,6 @@ import { Component, ElementRef, HostBinding, Input, ViewChild, inject } from '@a
 import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-menu-addon',
     template: ` <ng-template cdkPortalOutlet></ng-template> `,
     hostDirectives: [{ directive: GlyphMenuAddonDirective, inputs: ['glyph'] }],
