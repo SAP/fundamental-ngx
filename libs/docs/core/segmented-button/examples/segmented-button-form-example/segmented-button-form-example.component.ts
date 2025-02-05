@@ -17,4 +17,13 @@ export class SegmentedButtonFormExampleComponent {
             disabled: true
         })
     });
+
+    constructor() {
+        setTimeout(() => {
+            this.customForm.controls['basic'].disable();
+        }, 1000);
+        setTimeout(() => {
+            this.customForm.controls['basic'].enable();
+        }, 2000);
+    }
 }
