@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, Type, ViewChild } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogButtonClass, DialogFooterComponent } from './dialog-footer.component';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `

@@ -1,6 +1,6 @@
+import { DragDrop, DragDropModule, DragRef } from '@angular/cdk/drag-drop';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { DragDropModule, DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { Component, ViewChild, Renderer2 } from '@angular/core';
 import { DndItemDirective } from './dnd-item.directive';
 
 // Mocking DragDrop to avoid actual DragDrop logic in tests
@@ -103,7 +103,7 @@ describe('DndItemDirective', () => {
     it('should create a proper horizontal line', () => {
         directive.createLine('before', false);
         expect(directive['_lineElement']).not.toBeFalsy();
-        
+
         if (directive['_lineElement']) {
             const classes: string[] = Array.from(directive['_lineElement'].classList); // Convert DOMTokenList to string[]
             expect(classes).toContain('drop-area__line');
@@ -133,7 +133,7 @@ describe('DndItemDirective', () => {
 
     it('should set the disabled state correctly', () => {
         directive.setDisabledState(true);
-        const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');        
+        const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');
         expect(element.classList).toContain('fd-dnd-item--disabled');
         directive.setDisabledState(false);
         expect(element.classList).not.toContain('fd-dnd-item--disabled');
@@ -142,9 +142,9 @@ describe('DndItemDirective', () => {
     it('should clean up correctly on destroy', () => {
         const unsubscribeSpy = jest.spyOn(directive['_subscriptions'], 'unsubscribe');
         const disposeSpy = jest.spyOn(directive['_dragRef'], 'dispose');
-        
+
         fixture.destroy();
-        
+
         expect(unsubscribeSpy).toHaveBeenCalled();
         expect(disposeSpy).toHaveBeenCalled();
     });

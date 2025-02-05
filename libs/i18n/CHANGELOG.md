@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.5...v0.55.0-rc.6) (2025-02-05)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.55.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.4...v0.55.0-rc.5) (2025-02-04)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.55.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.3...v0.55.0-rc.4) (2025-02-04)
+
+
+### Bug Fixes
+
+* **platform:** table icons missing title attributes ([#12982](https://github.com/SAP/fundamental-ngx/issues/12982)) ([98f0e40](https://github.com/SAP/fundamental-ngx/commit/98f0e406917bce136ef653f4c659dd77c99b7105))
+
+
+
+
+
 # [0.55.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.2...v0.55.0-rc.3) (2025-02-03)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

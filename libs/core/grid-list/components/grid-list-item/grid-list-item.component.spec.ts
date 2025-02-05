@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { GridListModule } from '../../grid-list.module';
-import { GridListItemComponent } from './grid-list-item.component';
 import { GridListComponent } from '../grid-list/grid-list.component';
+import { GridListItemComponent } from './grid-list-item.component';
 
 @Component({
     template: `

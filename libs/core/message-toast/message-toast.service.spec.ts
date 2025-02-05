@@ -1,24 +1,18 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @angular-eslint/component-class-suffix */
-import { OverlayContainer } from '@angular/cdk/overlay';
+ 
+ 
+ 
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
-import { MessageToastService } from './message-toast.service';
-import { Overlay } from '@angular/cdk/overlay';
-import { MESSAGE_TOAST_CONFIG } from './constants/message-toast.token';
-import { MessageToastConfig } from './config/message-toast.config';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MessageToastConfig } from './config/message-toast.config';
+import { MESSAGE_TOAST_CONFIG } from './constants/message-toast.token';
+import { MessageToastService } from './message-toast.service';
 
 // Minimal Component Setup
 @Component({
-    template: `
-        <ng-template #template>
-            Template Content
-        </ng-template>
-    `,
+    template: ` <ng-template #template> Template Content </ng-template> `,
     standalone: true,
     imports: [CommonModule]
 })

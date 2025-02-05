@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Table, TableDataSource, TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
-import { PlatformTableModule } from './table.module';
 import { TableComponent } from './table.component';
+import { PlatformTableModule } from './table.module';
 import { TableDataProviderMock } from './tests/helpers';
 
 describe('TableComponent', () => {
@@ -12,9 +12,7 @@ describe('TableComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            providers: [
-                { provide: Table, useValue: {} },
-            ],
+            providers: [{ provide: Table, useValue: {} }],
             imports: [PlatformTableModule, NoopAnimationsModule, TableDataSourceDirective]
         }).compileComponents();
     }));
@@ -30,7 +28,6 @@ describe('TableComponent', () => {
     it('should create sucessfully', () => {
         expect(component).toBeTruthy();
     });
-
 
     describe('isBodyHeightValid', () => {
         it('should return true when valid body height is passed in pixels', () => {
@@ -64,38 +61,36 @@ describe('TableComponent', () => {
         });
     });
 
-    describe('tableBodyHeight', ()=> {
-        it('should return body height of the table when its valid',()=> {
+    describe('tableBodyHeight', () => {
+        it('should return body height of the table when its valid', () => {
             const mockBodyHeight = '750px';
             component.bodyHeight = mockBodyHeight;
 
             expect(component.tableBodyHeight).toEqual(mockBodyHeight);
         });
 
-
-        it('should return default body height(100%) when its in-valid case 1(seventyFivepx)',()=> {
+        it('should return default body height(100%) when its in-valid case 1(seventyFivepx)', () => {
             const mockBodyHeight = 'seventyFivepx';
             component.bodyHeight = mockBodyHeight;
 
             expect(component.tableBodyHeight).toEqual('100%');
         });
 
-        it('should return default body height(100%) when its in-valid case 2(thirty%)',()=> {
+        it('should return default body height(100%) when its in-valid case 2(thirty%)', () => {
             const mockBodyHeight = 'thirty%';
             component.bodyHeight = mockBodyHeight;
 
             expect(component.tableBodyHeight).toEqual('100%');
         });
 
-        it('should return default body height(100%) when its in-valid case 3(blank string)',()=> {
+        it('should return default body height(100%) when its in-valid case 3(blank string)', () => {
             const mockBodyHeight = '';
             component.bodyHeight = mockBodyHeight;
 
             expect(component.tableBodyHeight).toEqual('100%');
         });
 
-        it('should return default body height(100%) when its in-valid case 3(undefined)',()=> {
-
+        it('should return default body height(100%) when its in-valid case 3(undefined)', () => {
             expect(component.tableBodyHeight).toEqual('100%');
         });
     });

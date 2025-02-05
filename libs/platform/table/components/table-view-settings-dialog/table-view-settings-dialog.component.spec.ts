@@ -58,16 +58,18 @@ describe('TableViewSettingsDialogComponent', () => {
     let dialogServiceStub: Partial<DialogService>;
     const dialogRef = new DialogRef();
 
-
     beforeEach(waitForAsync(() => {
         dialogServiceStub = {
             open: jest.fn(),
             dismissAll: jest.fn()
-          };
+        };
 
         TestBed.configureTestingModule({
             imports: [TableViewSettingsDialogComponent],
-            providers: [ { provide: DialogService, useValue: dialogServiceStub }, { provide: DialogRef, useValue: dialogRef }],
+            providers: [
+                { provide: DialogService, useValue: dialogServiceStub },
+                { provide: DialogRef, useValue: dialogRef }
+            ]
         }).compileComponents();
     }));
 
@@ -99,7 +101,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsSortDialogResultData) => {
             expect(result).toEqual(mockSortDialogResultData);
-          });
+        });
     });
 
     it('should listen to table "open sort settings" event and call showViewSettingsDialog(dismiss any already opened dialog)', () => {
@@ -120,12 +122,13 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsSortDialogResultData) => {
             expect(result).toEqual(mockSortDialogResultData);
-          });
+        });
     });
 
     it('should listen to table "open group settings" event and call showViewSettingsDialog', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const mockGroupDialogResultData: SettingsGroupDialogData = { direction: SortDirection.ASC,
+        const mockGroupDialogResultData: SettingsGroupDialogData = {
+            direction: SortDirection.ASC,
             field: 'name',
             columns: [{ label: 'Name', key: 'name' }]
         };
@@ -142,13 +145,13 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsGroupDialogData) => {
             expect(result).toEqual(mockGroupDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to table "open group settings" event and call showViewSettingsDialog (dismiss any already opened dialog)', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const mockGroupDialogResultData: SettingsGroupDialogData = { direction: SortDirection.ASC,
+        const mockGroupDialogResultData: SettingsGroupDialogData = {
+            direction: SortDirection.ASC,
             field: 'name',
             columns: [{ label: 'Name', key: 'name' }]
         };
@@ -165,8 +168,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsGroupDialogData) => {
             expect(result).toEqual(mockGroupDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to table "open filter settings" event and call showViewSettingsDialog', () => {
@@ -202,8 +204,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: FiltersDialogData) => {
             expect(result).toEqual(mockFilterDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to table "open filter settings" event and call showViewSettingsDialog (dismiss any already opened dialog)', () => {
@@ -239,8 +240,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: FiltersDialogData) => {
             expect(result).toEqual(mockFilterDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to filters options and notify table if "filter settings" is available', () => {

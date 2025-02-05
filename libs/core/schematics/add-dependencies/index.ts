@@ -4,7 +4,7 @@ import { compare } from 'compare-versions';
 import { SemVer, coerce, major, valid } from 'semver';
 import { Schema } from '../models/schema';
 import { addPackageDependency } from '../utils/package-utils';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+
 const libraryPackageJson = require('@fundamental-ngx/core/package.json');
 
 const desiredVersions = {

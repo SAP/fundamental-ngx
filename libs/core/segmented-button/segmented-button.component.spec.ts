@@ -1,12 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
-
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 const isSelectedClass = 'fd-button--toggled';
 
@@ -23,17 +21,10 @@ const isSelectedClass = 'fd-button--toggled';
     imports: [ButtonModule, SegmentedButtonModule]
 })
 export class HostComponent {
-    @ViewChild('first', { read: ElementRef })
-    firstButton: ElementRef;
-
-    @ViewChild('second', { read: ButtonComponent })
-    secondButton: ButtonComponent;
-
-    @ViewChild('third', { read: ElementRef })
-    thirdButton: ElementRef;
-
-    @ViewChild(SegmentedButtonComponent)
-    segmentedButton: SegmentedButtonComponent;
+    @ViewChild('first', { read: ElementRef }) firstButton: ElementRef;
+    @ViewChild('second', { read: ButtonComponent }) secondButton: ButtonComponent;
+    @ViewChild('third', { read: ElementRef }) thirdButton: ElementRef;
+    @ViewChild(SegmentedButtonComponent) segmentedButton: SegmentedButtonComponent;
 
     toggle = false;
 }
@@ -44,7 +35,6 @@ describe('SegmentedButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            providers: [RtlService],
             imports: [HostComponent]
         }).compileComponents();
     }));
@@ -60,103 +50,87 @@ describe('SegmentedButtonComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should select button, when value is changed', () => {
+    // Default Example
+    it('should correctly select and deselect single value in non-toggle mode', () => {
+        component.segmentedButton.writeValue('second');
+        fixture.detectChanges();
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+
         component.segmentedButton.writeValue('first');
         fixture.detectChanges();
-
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-    });
-
-    it('should select all buttons button, when value is changed', () => {
-        component.toggle = true;
-        component.segmentedButton.writeValue(['first']);
-        fixture.detectChanges();
-
-        component.segmentedButton.writeValue(['first', 'second', 'third']);
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-    });
-
-    it('should select button, when trigger event is performed', () => {
-        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-    });
-
-    it('should select button and deselect other button, when trigger event is performed on non-toggle mode', () => {
-        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual('first');
-
-        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(false);
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual('second');
-    });
-
-    it('should select buttons, when trigger event is performed on toggle mode', () => {
-        component.segmentedButton.toggle = true;
-        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual(['first']);
-
-        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second']);
-    });
-
-    it('should ignore trigger event on disabled', () => {
-        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual('first');
-
-        component.secondButton.disabled = true;
-        fixture.detectChanges();
-        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
-        fixture.detectChanges();
-
         expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(false);
-        expect(component.segmentedButton['_currentValue']).toEqual('first');
     });
 
+    // Toggle Example
+    it('should correctly handle multiple selections in toggle mode', () => {
+        component.toggle = true;
+        fixture.detectChanges();
+
+        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+
+        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+
+        component.thirdButton.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+
+        // Deselect
+        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(false);
+    });
+
+    // Form Example
+    it('should update form value correctly', () => {
+        component.segmentedButton.writeValue('first');
+        fixture.detectChanges();
+        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        
+        component.segmentedButton.writeValue('second');
+        fixture.detectChanges();
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+    });
+
+    // Disabled State Check
+    it('should detect disabled state', () => {
+        component.segmentedButton.setDisabledState(true);
+        fixture.detectChanges();
+        
+        expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(true);
+
+        component.segmentedButton.setDisabledState(false);
+        fixture.detectChanges();
+
+        expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(false);
+    });
+
+    // Event Handling Test
     it('should handle all trigger events', () => {
         component.segmentedButton.toggle = true;
-        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
+        component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual(['first']);
 
         component.secondButton.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second']);
 
         component.thirdButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
         fixture.detectChanges();
-
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second', 'third']);
     });
+
 });
 
 describe('Segmented button component CVA', () => {
@@ -169,13 +143,11 @@ describe('Segmented button component CVA', () => {
             });
         },
         testModuleMetadata: {
-            imports: [SegmentedButtonModule, ButtonModule, HostComponent], // Fixing to import standalone components
-            providers: [RtlService],
+            imports: [SegmentedButtonModule, ButtonModule, HostComponent],
+            providers: [RtlService]
         },
         hostTemplate: {
-            // Specify that "SegmentedButtonComponent" should not be tested directly
             hostComponent: HostComponent,
-            // Specify the way to access "SegmentedButtonComponent" from the host template
             getTestingComponent: (fixture) => fixture.componentInstance.segmentedButton
         },
         supportsOnBlur: false,

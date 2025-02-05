@@ -53,11 +53,7 @@ describe('DialogHeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [],
-            imports: [
-                DialogHeaderComponent,
-                CustomHeaderTestComponent,
-                DefaultHeaderTestComponent
-            ],
+            imports: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
             providers: [DialogConfig]
         }).overrideComponent(DialogHeaderComponent, {
             set: {

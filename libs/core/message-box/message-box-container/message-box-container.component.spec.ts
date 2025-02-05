@@ -10,7 +10,7 @@ import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContainerComponent } from './message-box-container.component';
 
-@Component({ 
+@Component({
     template: '<ng-template #template></ng-template>',
     standalone: true,
     imports: [MessageBoxModule]
