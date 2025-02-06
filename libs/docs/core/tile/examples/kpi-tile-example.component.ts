@@ -12,7 +12,6 @@ import { TileModule } from '@fundamental-ngx/core/tile';
             padding-bottom: 1rem;
         `
     ],
-    standalone: true,
     imports: [TileModule]
 })
 export class KpiTileExampleComponent {

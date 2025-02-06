@@ -8,7 +8,6 @@ import { BaseSmartFilterBarConditionField } from './base-smart-filter-bar-condit
     selector: 'fdp-smart-filter-bar-condition-field',
     templateUrl: './smart-filter-bar-condition-field.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformMultiInputComponent, FdTranslatePipe]
 })
 export class SmartFilterBarConditionFieldComponent extends BaseSmartFilterBarConditionField {}

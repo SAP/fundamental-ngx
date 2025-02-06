@@ -21,7 +21,6 @@ import { TimelineNodeComponentInterface } from './timeline-node-component.interf
         class: 'fd-timeline__node-wrapper',
         '[class.fd-timeline__node-wrapper--icon]': '!!glyph'
     },
-    standalone: true,
     imports: [IconComponent]
 })
 export class TimelineNodeComponent implements TimelineNodeComponentInterface, OnInit, OnDestroy {

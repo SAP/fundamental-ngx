@@ -39,7 +39,6 @@ import { StepInputIncrementDirective } from '../step-input-increment.directive';
         { provide: StepInputComponent, useExisting: NumberStepInputComponent },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         FormInputMessageGroupComponent,
         ButtonComponent,

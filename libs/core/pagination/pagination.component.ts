@@ -71,7 +71,6 @@ let paginationUniqueId = 0;
     styleUrl: './pagination.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: true,
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         FocusKeyManagerListDirective,

@@ -11,7 +11,6 @@ import {
     selector: 'app-tabbable-header',
     templateUrl: './tabbable-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TabbableHeaderComponent {}

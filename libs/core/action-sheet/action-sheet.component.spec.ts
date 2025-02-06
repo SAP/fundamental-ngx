@@ -4,7 +4,9 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ActionSheetModule } from './action-sheet.module';
 
 @Component({
-    template: ` <div #componentElement fd-action-sheet>Action Sheet Parent Test Text</div> `
+    template: ` <div #componentElement fd-action-sheet>Action Sheet Parent Test Text</div> `,
+    standalone: true,
+    imports: [ActionSheetModule, ButtonModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -17,8 +19,7 @@ describe('Action Sheet Parent Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ActionSheetModule, ButtonModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

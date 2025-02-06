@@ -6,7 +6,6 @@ import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/t
     selector: 'fd-theming-example',
     templateUrl: './theming-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class ThemingExampleComponent {

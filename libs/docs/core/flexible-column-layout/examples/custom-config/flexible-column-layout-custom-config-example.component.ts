@@ -32,7 +32,6 @@ const CustomFlexibleCardLayoutConfig: FlexibleLayoutConfig = {
             useValue: CustomFlexibleCardLayoutConfig
         }
     ],
-    standalone: true,
     imports: [ButtonComponent, FlexibleColumnLayoutModule]
 })
 export class FlexibleColumnLayoutCustomConfigExampleComponent {

@@ -1,2 +1,11 @@
-throw new Error('Do not import anything from the `@fundamental-ngx/btp`, use secondary entrypoint exports instead!');
-export default 'noop';
+export * from '@fundamental-ngx/btp/button';
+export * from '@fundamental-ngx/btp/navigation';
+export * from '@fundamental-ngx/btp/navigation-menu';
+export * from '@fundamental-ngx/btp/search-field';
+export * from '@fundamental-ngx/btp/shared';
+export * from '@fundamental-ngx/btp/splitter';
+export * from '@fundamental-ngx/btp/tool-header';
+export * from '@fundamental-ngx/btp/tool-layout';
+export * from '@fundamental-ngx/core/button';
+export * from '@fundamental-ngx/core/icon';
+export * from './fundamental-ngx.module';

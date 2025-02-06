@@ -17,7 +17,6 @@ import {
             }
         `
     ],
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

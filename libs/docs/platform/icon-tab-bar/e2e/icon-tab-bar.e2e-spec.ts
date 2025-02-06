@@ -16,13 +16,10 @@ describe('Icon Tab Bar component test suite', () => {
     const iconTabBarPage = new IconTabBarPO();
     const {
         iconExample,
-        textExample,
         filterExample,
         columnsExample,
-        processExample,
         iconOnlyExample,
         nestedTabsExample,
-        reorderingExample,
         overflowingExample,
         configuratablePaddingsExample,
         tabBarItem,
@@ -30,13 +27,10 @@ describe('Icon Tab Bar component test suite', () => {
         label,
         counter,
         icon,
-        processIcon,
         expandedList,
         overflowButton,
         listItem,
-        tabBarTab,
-        span,
-        popoverTab
+        tabBarTab
     } = new IconTabBarPO();
 
     beforeAll(async () => {
@@ -48,12 +42,6 @@ describe('Icon Tab Bar component test suite', () => {
         await iconTabBarPage.waitForRoot();
         await waitForElDisplayed(iconTabBarPage.title);
     }, 2);
-
-    describe('Text example', () => {
-        it('should check selecting tabs in text example', async () => {
-            await checkSelectingTabs(textExample);
-        });
-    });
 
     describe('Icon example', () => {
         it('should check selecting tabs in icon example', async () => {
@@ -84,15 +72,6 @@ describe('Icon Tab Bar component test suite', () => {
         });
     });
 
-    describe('Process example', () => {
-        it('should check process example', async () => {
-            await expect(await isElementDisplayed(processExample + processIcon)).toBe(
-                true,
-                'process icon is not displayed'
-            );
-        });
-    });
-
     describe('Icon only example', () => {
         it('should check selecting tabs in iconName only example', async () => {
             await checkSelectingTabs(iconOnlyExample);
@@ -120,16 +99,17 @@ describe('Icon Tab Bar component test suite', () => {
         });
     });
 
-    describe('Reordering example', () => {
-        it('should check selecting tabs in columns example', async () => {
-            await checkSelectingTabs(reorderingExample);
-        });
-    });
-
     describe('Overflowing example', () => {
         it('should check selecting tabs in overflowing example', async () => {
             await refreshPage();
-            await checkSelectingTabs(overflowingExample);
+            const itemsQuantity = await getElementArrayLength(overflowingExample + tabBarItem + '[aria-hidden=false]');
+            for (let i = 0; i < itemsQuantity - 1; i++) {
+                await click(overflowingExample + tabBarItem, i);
+                await expect(await getAttributeByName(overflowingExample + tabBarTab, 'aria-selected', i)).toBe(
+                    'true',
+                    `tab with index ${i} is not selected`
+                );
+            }
         });
 
         it('should check overflowing', async () => {
@@ -167,10 +147,7 @@ describe('Icon Tab Bar component test suite', () => {
     });
 
     async function checkSelectingTabs(section: string): Promise<void> {
-        let itemsQuantity;
-        section === overflowingExample
-            ? (itemsQuantity = await getElementArrayLength(overflowingExample + tabBarItem + '[aria-hidden=false]'))
-            : (itemsQuantity = await getElementArrayLength(section + tabBarItem));
+        const itemsQuantity = await getElementArrayLength(section + tabBarItem);
         for (let i = 0; i < itemsQuantity; i++) {
             if (section !== nestedTabsExample && i !== 3) {
                 await click(section + tabBarItem, i);

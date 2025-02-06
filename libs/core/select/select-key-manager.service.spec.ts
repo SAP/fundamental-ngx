@@ -14,6 +14,8 @@ import { SelectModule } from './select.module';
             <li fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</li>
         </fd-select>
     `,
+    standalone: true,
+    imports: [SelectModule],
     providers: [SelectKeyManagerService]
 })
 class SelectTestComponent {
@@ -45,8 +47,7 @@ describe('SelectKeyManagerService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [SelectModule],
-            declarations: [SelectTestComponent],
+            imports: [SelectTestComponent],
             providers: [SelectKeyManagerService]
         }).compileComponents();
 

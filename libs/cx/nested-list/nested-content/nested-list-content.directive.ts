@@ -19,6 +19,7 @@ import { NestedListExpandIconComponent } from '../nested-list-directives';
 
 @Directive({
     selector: '[cxNestedListContent], [fdx-nested-list-content]',
+    standalone: true,
     host: {
         tabindex: '0'
     }

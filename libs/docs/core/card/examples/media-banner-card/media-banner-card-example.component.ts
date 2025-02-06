@@ -6,7 +6,6 @@ import { CardModule } from '@fundamental-ngx/core/card';
     selector: 'fd-media-banner-card-example',
     templateUrl: './media-banner-card-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, AvatarComponent, ButtonComponent, TextComponent]
 })
 export class MediaBannerCardExampleComponent {}

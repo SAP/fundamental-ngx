@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-feed-list-item-header',
     templateUrl: './feed-list-item-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FeedListItemHeaderComponent {}

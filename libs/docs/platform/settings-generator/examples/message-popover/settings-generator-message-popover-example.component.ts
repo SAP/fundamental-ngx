@@ -81,7 +81,6 @@ class ExampleUserService {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ExampleUserService],
-    standalone: true,
     imports: [
         TitleComponent,
         MessagePopoverFormWrapperComponent,

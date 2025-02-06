@@ -10,7 +10,6 @@ import { OptionItem } from '@fundamental-ngx/platform/shared';
     templateUrl: './platform-select-forms.component.html',
     styleUrls: ['platform-select-forms.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformSelectModule, JsonPipe]
 })
 export class PlatformSelectFormsComponent {

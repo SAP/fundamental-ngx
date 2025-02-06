@@ -21,7 +21,6 @@ const panelFixedHeightSrc = 'panel-fixed-height-example.component.html';
 @Component({
     selector: 'app-panel',
     templateUrl: './panel-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

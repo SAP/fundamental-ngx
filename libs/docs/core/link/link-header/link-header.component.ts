@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-link-header',
     templateUrl: './link-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class LinkHeaderComponent {}

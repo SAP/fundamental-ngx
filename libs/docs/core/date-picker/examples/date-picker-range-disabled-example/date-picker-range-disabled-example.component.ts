@@ -25,7 +25,6 @@ const DATE = new FdDate(2022, 1, 10);
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, DatePickerComponent, FdDatetimeModule]
 })
 export class DatePickerRangeDisabledExampleComponent {

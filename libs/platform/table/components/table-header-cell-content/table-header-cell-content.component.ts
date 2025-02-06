@@ -23,7 +23,6 @@ import { SortDirection, TableColumn, TableService } from '@fundamental-ngx/platf
             }
         `
     ],
-    standalone: true,
     imports: [NgTemplateOutlet, IconComponent, TableIconDirective, AsyncPipe, NgStyle]
 })
 export class TableHeaderCellContentComponent {

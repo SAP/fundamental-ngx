@@ -8,7 +8,6 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 @Component({
     selector: 'fd-list-byline-loading-example',
     templateUrl: './list-byline-loading-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, ListModule, RepeatDirective, IconComponent, SkeletonModule]
 })
 export class ListBylineLoadingExampleComponent {

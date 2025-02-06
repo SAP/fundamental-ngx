@@ -1,5 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { GridListFilterBarComponent } from './components/grid-list-filter-bar/grid-list-filter-bar.component';
 import { GridListFooterComponent } from './components/grid-list-footer/grid-list-footer.component';
 import { GridListGroupHeaderComponent } from './components/grid-list-group-header/grid-list-group-header.component';
@@ -14,24 +18,40 @@ import { GridListComponent } from './components/grid-list/grid-list.component';
 import { GridListItemBodyDirective } from './directives/grid-list-item-body.directive';
 import { GridListItemImageDirective } from './directives/grid-list-item-image.directive';
 
-const components = [
-    GridListComponent,
-    GridListItemComponent,
-    GridListTitleBarComponent,
-    GridListFilterBarComponent,
-    GridListMoreBtnComponent,
-    GridListFooterComponent,
-    GridListItemFooterBarComponent,
-    GridListItemToolbarComponent,
-    GridListGroupHeaderComponent,
-    GridListTitleBarSpacerComponent,
-    GridListTitleBarAdditionalTitleItemDirective,
-    GridListItemImageDirective,
-    GridListItemBodyDirective
-];
-
 @NgModule({
-    imports: [...components],
-    exports: [...components]
+    imports: [
+        CommonModule,
+        ToolbarModule,
+        ButtonModule,
+        AvatarModule,
+        GridListComponent,
+        GridListItemComponent,
+        GridListTitleBarComponent,
+        GridListFilterBarComponent,
+        GridListMoreBtnComponent,
+        GridListFooterComponent,
+        GridListItemFooterBarComponent,
+        GridListItemToolbarComponent,
+        GridListGroupHeaderComponent,
+        GridListTitleBarSpacerComponent,
+        GridListTitleBarAdditionalTitleItemDirective,
+        GridListItemImageDirective,
+        GridListItemBodyDirective
+    ],
+    exports: [
+        GridListComponent,
+        GridListItemComponent,
+        GridListTitleBarComponent,
+        GridListFilterBarComponent,
+        GridListMoreBtnComponent,
+        GridListFooterComponent,
+        GridListItemFooterBarComponent,
+        GridListItemToolbarComponent,
+        GridListGroupHeaderComponent,
+        GridListTitleBarSpacerComponent,
+        GridListTitleBarAdditionalTitleItemDirective,
+        GridListItemImageDirective,
+        GridListItemBodyDirective
+    ]
 })
 export class GridListModule {}

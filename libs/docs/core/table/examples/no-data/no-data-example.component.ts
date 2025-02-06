@@ -7,7 +7,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fdp-platform-table-no-data-example',
     templateUrl: './no-data-example.component.html',
-    standalone: true,
     imports: [TableModule, LinkComponent, IconComponent, IllustratedMessageModule]
 })
 export class NoDataExampleComponent {

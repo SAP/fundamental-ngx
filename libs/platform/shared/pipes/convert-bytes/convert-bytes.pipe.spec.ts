@@ -47,20 +47,17 @@ describe('Pipe: ConvertBytesPipe', () => {
     });
 
     it('should convert bytes to exabyte label', () => {
-        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-        const result = pipe.transform(4684567346346346345);
+        const result = pipe.transform(Number(4684567346346346345n));
         expect(result).toEqual('4.06 EB');
     });
 
     it('should convert bytes to zettabyte label', () => {
-        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-        const result = pipe.transform(5685685673452523537484);
+        const result = pipe.transform(Number(5685685673452523537484n));
         expect(result).toEqual('4.82 ZB');
     });
 
     it('should convert bytes to yottabyte label', () => {
-        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-        const result = pipe.transform(5685685673452523537484568);
+        const result = pipe.transform(Number(5685685673452523537484568n));
         expect(result).toEqual('4.7 YB');
     });
 });

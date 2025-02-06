@@ -12,7 +12,6 @@ import {
     selector: 'app-time-picker-header',
     templateUrl: './time-picker-header.component.html',
     styleUrls: ['./time-picker-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

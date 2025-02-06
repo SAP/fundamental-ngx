@@ -8,7 +8,12 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
+import {
+    ActionSheetBodyComponent,
+    ActionSheetComponent,
+    ActionSheetControlComponent,
+    ActionSheetItemComponent
+} from '@fundamental-ngx/core/action-sheet';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
@@ -19,7 +24,14 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ActionSheetModule, ButtonComponent, FdTranslatePipe]
+    imports: [
+        ActionSheetComponent,
+        ActionSheetControlComponent,
+        ActionSheetItemComponent,
+        ActionSheetBodyComponent,
+        ButtonComponent,
+        FdTranslatePipe
+    ]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */

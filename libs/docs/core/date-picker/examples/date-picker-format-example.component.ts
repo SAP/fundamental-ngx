@@ -86,7 +86,6 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             useValue: CUSTOM_FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [DatePickerComponent, FormsModule, FdDatetimePipesModule, FdDatetimeModule]
 })
 export class DatePickerFormatExampleComponent {

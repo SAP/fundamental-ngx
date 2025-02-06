@@ -11,7 +11,6 @@ import {
     selector: 'app-token-header',
     templateUrl: './token-header.component.html',
     styleUrls: ['./token-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TokenHeaderComponent {}

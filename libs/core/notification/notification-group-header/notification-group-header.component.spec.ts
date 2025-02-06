@@ -1,14 +1,18 @@
 import { Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationModule } from '../notification.module';
 import { By } from '@angular/platform-browser';
+import { NotificationModule } from '../notification.module';
 import { NotificationGroupHeaderComponent } from './notification-group-header.component';
 
 @Component({
     selector: 'fd-notification-group-header-test',
-    template: ` <fd-notification-group-header #notificationGroupHeader>
-        <span fd-notification-group-header-title [id]="'fd-notification-group-header-title-1'">Today</span>
-    </fd-notification-group-header> `
+    template: `
+        <fd-notification-group-header #notificationGroupHeader>
+            <span fd-notification-group-header-title [id]="'fd-notification-group-header-title-1'">Today</span>
+        </fd-notification-group-header>
+    `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {
     notificationGroupHeader = viewChild<NotificationGroupHeaderComponent>('notificationGroupHeader');
@@ -20,8 +24,7 @@ describe('NotificationGroupHeaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 
@@ -57,7 +60,7 @@ describe('NotificationGroupHeaderComponent', () => {
 
     it('should have expanded set to false by default', () => {
         const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-header'));
-        expect(attributeElement.nativeElement.getAttribute('aria-expanded')).toBe("false");
+        expect(attributeElement.nativeElement.getAttribute('aria-expanded')).toBe('false');
     });
 
     it('should have an arrow', () => {
@@ -69,6 +72,6 @@ describe('NotificationGroupHeaderComponent', () => {
         const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-header'));
         component.notificationGroupHeader()?.toggleExpand();
         fixture.detectChanges();
-        expect(attributeElement.nativeElement.getAttribute('aria-expanded')).toBe("true");
+        expect(attributeElement.nativeElement.getAttribute('aria-expanded')).toBe('true');
     });
 });

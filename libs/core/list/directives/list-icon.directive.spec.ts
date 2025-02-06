@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ListModule } from '../list.module';
 
 @Component({
-    template: ` <span #componentElement fd-list-icon [glyph]="glyph"> </span> `
+    template: ` <span #componentElement fd-list-icon [glyph]="glyph"> </span> `,
+    standalone: true,
+    imports: [ListModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -18,8 +20,7 @@ describe('ListTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

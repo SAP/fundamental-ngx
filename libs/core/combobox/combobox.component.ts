@@ -46,8 +46,6 @@ import {
     TruncatedTitleDirective
 } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
-import { FD_LIST_MESSAGE_DIRECTIVE, ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -64,8 +62,15 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import {
+    FD_LIST_MESSAGE_DIRECTIVE,
+    ListComponent,
+    ListGroupHeaderDirective,
+    ListItemComponent,
+    ListMessageDirective,
+    ListTitleDirective
+} from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ComboboxItem } from './combobox-item';
@@ -116,14 +121,17 @@ let comboboxUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        ListModule,
-        InputGroupModule,
+        ListComponent,
+        ListItemComponent,
+        ListTitleDirective,
+        ListGroupHeaderDirective,
+        InputGroupComponent,
+        InputGroupInputDirective,
         FormsModule,
         AutoCompleteDirective,
         ButtonComponent,
@@ -406,9 +414,6 @@ export class ComboboxComponent<T = any>
         SHIFT
     ];
 
-    /** Keys, that will close popover's body, when dispatched on search input */
-    readonly closingKeys: number[] = [ESCAPE];
-
     /** @hidden */
     readonly _repositionScrollStrategy: RepositionScrollStrategy;
 
@@ -525,9 +530,6 @@ export class ComboboxComponent<T = any>
             } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
                 this._chooseOtherItem(-1);
                 event.preventDefault();
-            } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
-                this.isOpenChangeHandle(false);
-                event.stopPropagation();
             } else if (
                 this.openOnKeyboardEvent &&
                 !event.ctrlKey &&

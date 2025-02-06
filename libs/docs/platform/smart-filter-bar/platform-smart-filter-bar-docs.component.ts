@@ -19,7 +19,6 @@ import { PlatformSmartFilterBarObservableExampleComponent } from './examples/pla
 @Component({
     selector: 'app-smart-filter-bar',
     templateUrl: './platform-smart-filter-bar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

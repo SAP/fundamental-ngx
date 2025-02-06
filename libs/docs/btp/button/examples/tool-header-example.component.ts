@@ -16,7 +16,6 @@ import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/but
             </button>
         </div>
     `,
-    imports: [ButtonComponent, NgStyle, ButtonBadgeDirective, ToolHeaderButtonDirective],
-    standalone: true
+    imports: [ButtonComponent, NgStyle, ButtonBadgeDirective, ToolHeaderButtonDirective]
 })
 export class ToolHeaderExampleComponent {}

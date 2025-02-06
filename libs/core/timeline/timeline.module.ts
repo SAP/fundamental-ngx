@@ -11,19 +11,6 @@ import { TimelineNodeHeaderInfoTitleDirective } from './directives/class-binding
 import { TimelineNodeDefDirective } from './directives/timeline-node-def.directive';
 import { TimelineComponent } from './timeline.component';
 
-const components = [
-    TimelineComponent,
-    TimelineNodeDefDirective,
-    TimelineNodeHeaderDirective,
-    TimelineNodeHeaderInfoDirective,
-    TimelineNodeBodyComponent,
-    TimelineNodeFooterComponent,
-    TimelineNodeComponent,
-    TimelineNodeHeaderInfoTitleDirective,
-    TimelineNodeHeaderInfoTextDirective,
-    TimelineHeaderInfoSubTitleDirective
-];
-
 /**
  * @deprecated
  * Use direct imports of `TimelineComponent`,
@@ -38,7 +25,29 @@ const components = [
     `TimelineHeaderInfoSubTitleDirective`
  */
 @NgModule({
-    imports: [...components],
-    exports: [...components]
+    imports: [
+        TimelineComponent,
+        TimelineNodeDefDirective,
+        TimelineNodeHeaderDirective,
+        TimelineNodeHeaderInfoDirective,
+        TimelineNodeBodyComponent,
+        TimelineNodeFooterComponent,
+        TimelineNodeComponent,
+        TimelineNodeHeaderInfoTitleDirective,
+        TimelineNodeHeaderInfoTextDirective,
+        TimelineHeaderInfoSubTitleDirective
+    ],
+    exports: [
+        TimelineComponent,
+        TimelineNodeDefDirective,
+        TimelineNodeHeaderDirective,
+        TimelineNodeHeaderInfoDirective,
+        TimelineNodeBodyComponent,
+        TimelineNodeFooterComponent,
+        TimelineNodeComponent,
+        TimelineNodeHeaderInfoTitleDirective,
+        TimelineNodeHeaderInfoTextDirective,
+        TimelineHeaderInfoSubTitleDirective
+    ]
 })
 export class TimelineModule {}

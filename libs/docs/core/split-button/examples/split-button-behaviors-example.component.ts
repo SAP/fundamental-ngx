@@ -13,7 +13,6 @@ import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
             }
         `
     ],
-    standalone: true,
     imports: [FormLabelComponent, SplitButtonModule, MenuModule]
 })
 export class ButtonSplitBehaviorsComponent {

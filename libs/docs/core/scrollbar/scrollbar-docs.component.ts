@@ -20,7 +20,6 @@ const noVerticalScrollExampleTs = 'scrollbar-no-vertical-example.component.ts';
 @Component({
     selector: 'app-scrollbar',
     templateUrl: './scrollbar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

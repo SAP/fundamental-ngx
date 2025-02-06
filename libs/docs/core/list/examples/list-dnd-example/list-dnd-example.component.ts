@@ -6,7 +6,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     selector: 'fd-list-dnd-example',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './list-dnd-example.component.html',
-    standalone: true,
     imports: [ListModule, DragAndDropModule]
 })
 export class ListDndExampleComponent {
