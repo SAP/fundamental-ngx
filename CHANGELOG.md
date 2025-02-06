@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.9...v0.55.0-rc.10) (2025-02-06)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.8...v0.55.0-rc.9) (2025-02-06)
+
+
+### Bug Fixes
+
+* **platform:** variant management/table toolbar overflow fixes ([#12977](https://github.com/SAP/fundamental-ngx/issues/12977)) ([9e500b9](https://github.com/SAP/fundamental-ngx/commit/9e500b982e29cd7f74f0f6f45876e61670843f5c))
+
+
+
+
+
+# [0.55.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.7...v0.55.0-rc.8) (2025-02-06)
+
+
+### Bug Fixes
+
+* **platform:** aria-label for vhd clear button ([#12979](https://github.com/SAP/fundamental-ngx/issues/12979)) ([e149102](https://github.com/SAP/fundamental-ngx/commit/e1491020bf45245ac5cf02a2d7edeb1e7d35e6e6))
+
+
+
+
+
+# [0.55.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.6...v0.55.0-rc.7) (2025-02-06)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.55.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.5...v0.55.0-rc.6) (2025-02-05)
 
 
