@@ -248,7 +248,7 @@ describe('TableViewSettingsDialogComponent', () => {
         const queryList = new QueryList<TableViewSettingsFilterComponent>();
         const mockTable = new TableComponentMock();
         const setViewSettingsFiltersSpy = jest
-            .spyOn(mockTable, 'showFilterSettingsInToolbar')
+            .spyOn(mockTable, 'showSettingsInToolbar')
             .mockImplementation(() => {});
 
         queryList.reset([mockFilterComponent]);
@@ -260,20 +260,19 @@ describe('TableViewSettingsDialogComponent', () => {
 
         component.ngAfterViewInit();
 
-        expect(setViewSettingsFiltersSpy).toHaveBeenCalledTimes(1);
+        expect(setViewSettingsFiltersSpy).toHaveBeenCalledTimes(2);
         expect(setViewSettingsFiltersSpy).toHaveBeenCalledWith(true);
 
         queryList.reset([]);
         component.filters.notifyOnChanges();
 
-        expect(setViewSettingsFiltersSpy).toHaveBeenCalledTimes(2);
-        expect(setViewSettingsFiltersSpy).toHaveBeenCalledWith(false);
+        expect(setViewSettingsFiltersSpy).toHaveBeenCalledTimes(2); // not called again because the filters array length must be > 0
     });
 
     it('should listen to table columns stream and notify table if "sort settings" is available', () => {
         const mockTable = new TableComponentMock();
         const showSortSettingsInToolbarSpy = jest
-            .spyOn(mockTable, 'showSortSettingsInToolbar')
+            .spyOn(mockTable, 'showSettingsInToolbar')
             .mockImplementation(() => {});
 
         component.table = mockTable as any;
@@ -292,7 +291,7 @@ describe('TableViewSettingsDialogComponent', () => {
     it('should listen to table columns stream and notify table if "group settings" is available', () => {
         const mockTable = new TableComponentMock();
         const showGroupSettingsInToolbarSpy = jest
-            .spyOn(mockTable, 'showGroupSettingsInToolbar')
+            .spyOn(mockTable, 'showSettingsInToolbar')
             .mockImplementation(() => {});
 
         component.table = mockTable as any;
