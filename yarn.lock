@@ -641,19 +641,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/platform-browser@npm:19.0.3":
-  version: 19.0.3
-  resolution: "@angular/platform-browser@npm:19.0.3"
+"@angular/platform-browser@npm:19.1.5":
+  version: 19.1.5
+  resolution: "@angular/platform-browser@npm:19.1.5"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/animations": 19.0.3
-    "@angular/common": 19.0.3
-    "@angular/core": 19.0.3
+    "@angular/animations": 19.1.5
+    "@angular/common": 19.1.5
+    "@angular/core": 19.1.5
   peerDependenciesMeta:
     "@angular/animations":
       optional: true
-  checksum: 10/0cdc31761b0b5fb0dc0e28c51b5bad7cb460084c12cd4ed355a5aed67cc0e7e885b6d5cbd1b69fe8036511cce99d32e313ee47d61821f00697b444add4d115ba
+  checksum: 10/17a18ada3e1b7d3c3e2364c6bbf5cfbe53561075b33fda458836fd4d6b5031bb16e1d771ea07c12e1fe328b09f4cce167e16137a55eae3e2f324b1f2ea8781db
   languageName: node
   linkType: hard
 
@@ -14899,7 +14899,7 @@ __metadata:
     "@angular/core": "npm:19.0.3"
     "@angular/forms": "npm:19.0.3"
     "@angular/language-service": "npm:19.0.3"
-    "@angular/platform-browser": "npm:19.0.3"
+    "@angular/platform-browser": "npm:19.1.5"
     "@angular/platform-browser-dynamic": "npm:19.0.3"
     "@angular/router": "npm:19.0.3"
     "@commitlint/cli": "npm:18.6.1"
