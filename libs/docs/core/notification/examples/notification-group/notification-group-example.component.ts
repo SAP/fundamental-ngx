@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { TitleComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -37,7 +38,8 @@ export type Notification = {
         MessageStripModule,
         ToolbarModule,
         ObjectStatusComponent,
-        IconComponent
+        IconComponent,
+        TitleComponent
     ]
 })
 export class NotificationGroupExampleComponent {
