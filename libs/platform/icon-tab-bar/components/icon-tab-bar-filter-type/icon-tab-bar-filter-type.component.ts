@@ -11,7 +11,6 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
 @Component({
     selector: 'fdp-icon-tab-bar-filter-type',
     templateUrl: './icon-tab-bar-filter-type.component.html',
-    standalone: true,
     providers: [
         {
             provide: IconTabBarBase,

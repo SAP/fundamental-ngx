@@ -16,7 +16,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     templateUrl: './resizable-card-layout-example.component.html',
     styleUrls: ['./resizable-card-layout-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         DynamicPageModule,

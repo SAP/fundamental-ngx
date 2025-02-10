@@ -4,7 +4,6 @@ import { DisplayListItemModule, PlatformListModule } from '@fundamental-ngx/plat
 @Component({
     selector: 'fdp-display-list-item-example',
     templateUrl: './platform-display-list-item-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, DisplayListItemModule]
 })
 export class PlatformDisplayListItemExampleComponent {}

@@ -50,7 +50,6 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
     host: {
         '(blur)': 'onTouched()'
     },
-    standalone: true,
     imports: [DatePickerComponent, FormsModule, CalendarDayViewComponent, CalendarComponent]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
@@ -313,14 +312,12 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * Function used to disable certain dates in the calendar for the range start selection.
      */
     @Input()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     disableRangeStartFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      */
     @Input()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     disableRangeEndFunction: (value: D) => boolean = () => false;
 
     /** @hidden */

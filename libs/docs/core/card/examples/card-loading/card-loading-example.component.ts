@@ -9,7 +9,6 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
     templateUrl: './card-loading-example.component.html',
     styleUrls: ['./card-loading-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, SkeletonModule, ListModule, RepeatDirective]
 })
 export class CardLoadingExampleComponent {}

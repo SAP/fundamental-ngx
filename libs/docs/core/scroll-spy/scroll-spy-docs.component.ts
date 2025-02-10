@@ -25,7 +25,6 @@ const customT = 'scroll-spy-custom-example/scroll-spy-custom-example.component.t
     selector: 'app-scroll-spy-docs',
     templateUrl: './scroll-spy-docs.component.html',
     styleUrls: ['./scroll-spy-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

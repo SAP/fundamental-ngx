@@ -10,7 +10,6 @@ const LIST_ELEMENTS: Address[] = new Array(6).fill(undefined).map((_, i) => ({ n
 @Component({
     selector: 'fdp-platform-list-border-less-example',
     templateUrl: './platform-list-border-less-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformListBorderLessExampleComponent {

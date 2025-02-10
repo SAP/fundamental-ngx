@@ -16,7 +16,6 @@ import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-standard-pagination-example',
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

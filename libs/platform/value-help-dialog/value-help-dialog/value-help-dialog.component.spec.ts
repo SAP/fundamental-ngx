@@ -41,6 +41,8 @@ import { PlatformValueHelpDialogComponent } from './value-help-dialog.component'
             ></fdp-value-help-dialog-filter>
         </fdp-value-help-dialog>
     `,
+    standalone: true,
+    imports: [PlatformValueHelpDialogModule],
     providers: [
         {
             provide: FD_LANGUAGE,
@@ -77,8 +79,7 @@ describe('PlatformValueHelpDialogComponent', () => {
 
     beforeEach(async () => {
         TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, PlatformValueHelpDialogModule],
-            declarations: [TestWrapperComponent],
+            imports: [NoopAnimationsModule, TestWrapperComponent],
             providers: [RtlService]
         }).overrideComponent(PlatformValueHelpDialogComponent, {
             set: {

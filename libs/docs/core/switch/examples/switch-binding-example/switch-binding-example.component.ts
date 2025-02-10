@@ -8,7 +8,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     selector: 'fd-switch-binding-example',
     templateUrl: './switch-binding-example.component.html',
     styleUrls: ['./switch-binding-example.component.scss'],
-    standalone: true,
     imports: [FormLabelComponent, SwitchComponent, FormsModule, ButtonComponent]
 })
 export class SwitchBindingExampleComponent {

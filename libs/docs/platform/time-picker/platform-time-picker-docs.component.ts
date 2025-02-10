@@ -22,7 +22,6 @@ const timePickerTemplateTs = 'platform-time-picker-template-example.component.ts
 @Component({
     selector: 'app-time-picker',
     templateUrl: './platform-time-picker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

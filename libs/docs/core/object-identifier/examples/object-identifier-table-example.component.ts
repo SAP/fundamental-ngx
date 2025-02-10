@@ -6,7 +6,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-object-identifier-table-example',
     templateUrl: './object-identifier-table-example.component.html',
-    standalone: true,
     imports: [FocusableGridDirective, TableModule, ObjectIdentifierComponent]
 })
 export class ObjectIdentifierTableExampleComponent {

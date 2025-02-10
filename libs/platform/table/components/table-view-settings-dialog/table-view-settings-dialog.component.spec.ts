@@ -2,13 +2,13 @@ import { EventEmitter, QueryList } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject, of } from 'rxjs';
 
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SortDirection, Table, TableColumn, TableState } from '@fundamental-ngx/platform/table-helpers';
+import { FiltersDialogData } from './filtering/filters.component';
+import { SettingsGroupDialogData } from './grouping/grouping.component';
+import { SettingsSortDialogResultData } from './sorting/sorting.component';
 import { TableViewSettingsDialogComponent } from './table-view-settings-dialog.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
-import { SettingsSortDialogResultData } from './sorting/sorting.component';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { SettingsGroupDialogData } from './grouping/grouping.component';
-import { FiltersDialogData } from './filtering/filters.component';
 
 class TableComponentMock
     implements
@@ -50,7 +50,7 @@ class TableComponentMock
     }
     getTableColumns(): TableColumn[] {
         return [];
-    } 
+    }
 }
 
 describe('TableViewSettingsDialogComponent', () => {
@@ -59,16 +59,18 @@ describe('TableViewSettingsDialogComponent', () => {
     let dialogServiceStub: Partial<DialogService>;
     const dialogRef = new DialogRef();
 
-
     beforeEach(waitForAsync(() => {
         dialogServiceStub = {
             open: jest.fn(),
             dismissAll: jest.fn()
-          };
+        };
 
         TestBed.configureTestingModule({
             imports: [TableViewSettingsDialogComponent],
-            providers: [ { provide: DialogService, useValue: dialogServiceStub }, { provide: DialogRef, useValue: dialogRef }],
+            providers: [
+                { provide: DialogService, useValue: dialogServiceStub },
+                { provide: DialogRef, useValue: dialogRef }
+            ]
         }).compileComponents();
     }));
 
@@ -84,11 +86,12 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should listen to table "open sort settings" event and call showSortingSettings', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const mockSortDialogResultData: SettingsSortDialogResultData = { direction: SortDirection.ASC,
-            field: 'name',
-        };
-        
-        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockSortDialogResultData }), dismiss: jest.fn() } as any);
+        const mockSortDialogResultData: SettingsSortDialogResultData = { direction: SortDirection.ASC, field: 'name' };
+
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({ ...mockSortDialogResultData }),
+            dismiss: jest.fn()
+        } as any);
         jest.spyOn(component, 'showSortingSettings');
         jest.spyOn(dialogRef, 'dismiss');
 
@@ -100,16 +103,17 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsSortDialogResultData) => {
             expect(result).toEqual(mockSortDialogResultData);
-          });
+        });
     });
 
     it('should listen to table "open sort settings" event and call showSortingSettings(dismiss any already opened dialog)', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const mockSortDialogResultData: SettingsSortDialogResultData = { direction: SortDirection.ASC,
-            field: 'name',
-        };
-        
-        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockSortDialogResultData }), dismiss: jest.fn() } as any);
+        const mockSortDialogResultData: SettingsSortDialogResultData = { direction: SortDirection.ASC, field: 'name' };
+
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({ ...mockSortDialogResultData }),
+            dismiss: jest.fn()
+        } as any);
         jest.spyOn(component, 'showSortingSettings');
         jest.spyOn(dialogRef, 'dismiss');
 
@@ -121,17 +125,21 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsSortDialogResultData) => {
             expect(result).toEqual(mockSortDialogResultData);
-          });
+        });
     });
 
     it('should listen to table "open group settings" event and call showGroupingSettings', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const mockGroupDialogResultData: SettingsGroupDialogData = { direction: SortDirection.ASC,
+        const mockGroupDialogResultData: SettingsGroupDialogData = {
+            direction: SortDirection.ASC,
             field: 'name',
             columns: [{ label: 'Name', key: 'name' }]
         };
 
-        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockGroupDialogResultData }), dismiss: jest.fn() } as any);
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({ ...mockGroupDialogResultData }),
+            dismiss: jest.fn()
+        } as any);
         jest.spyOn(component, 'showGroupingSettings');
         jest.spyOn(dialogRef, 'dismiss');
 
@@ -143,18 +151,21 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsGroupDialogData) => {
             expect(result).toEqual(mockGroupDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to table "open group settings" event and call showGroupingSettings (dismiss any already opened dialog)', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const mockGroupDialogResultData: SettingsGroupDialogData = { direction: SortDirection.ASC,
+        const mockGroupDialogResultData: SettingsGroupDialogData = {
+            direction: SortDirection.ASC,
             field: 'name',
             columns: [{ label: 'Name', key: 'name' }]
         };
 
-        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockGroupDialogResultData }), dismiss: jest.fn() } as any);
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({ ...mockGroupDialogResultData }),
+            dismiss: jest.fn()
+        } as any);
         jest.spyOn(component, 'showGroupingSettings');
         jest.spyOn(dialogRef, 'dismiss');
 
@@ -166,8 +177,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: SettingsGroupDialogData) => {
             expect(result).toEqual(mockGroupDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to table "open filter settings" event and call showFilteringSettings', () => {
@@ -182,16 +192,16 @@ describe('TableViewSettingsDialogComponent', () => {
             name = 'name';
             filterable = true;
         }
-        const mockFilterDialogResultData: FiltersDialogData = {  
-            filterBy: [
-                { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false }
-            ],
-            columns: [
-                new MockTableColumn() as TableColumn
-            ],
-            viewSettingsFilters: [] };
+        const mockFilterDialogResultData: FiltersDialogData = {
+            filterBy: [{ field: 'status', value: 'valid', strategy: 'equalTo', exclude: false }],
+            columns: [new MockTableColumn() as TableColumn],
+            viewSettingsFilters: []
+        };
 
-        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockFilterDialogResultData }), dismiss: jest.fn() } as any);
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({ ...mockFilterDialogResultData }),
+            dismiss: jest.fn()
+        } as any);
         jest.spyOn(component, 'showFilteringSettings');
         jest.spyOn(dialogRef, 'dismiss');
 
@@ -203,8 +213,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: FiltersDialogData) => {
             expect(result).toEqual(mockFilterDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to table "open filter settings" event and call showFilteringSettings (dismiss any already opened dialog)', () => {
@@ -219,16 +228,16 @@ describe('TableViewSettingsDialogComponent', () => {
             name = 'name';
             filterable = true;
         }
-        const mockFilterDialogResultData: FiltersDialogData = {  
-            filterBy: [
-                { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false }
-            ],
-            columns: [
-                new MockTableColumn() as TableColumn
-            ],
-            viewSettingsFilters: [] };
+        const mockFilterDialogResultData: FiltersDialogData = {
+            filterBy: [{ field: 'status', value: 'valid', strategy: 'equalTo', exclude: false }],
+            columns: [new MockTableColumn() as TableColumn],
+            viewSettingsFilters: []
+        };
 
-        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockFilterDialogResultData }), dismiss: jest.fn() } as any);
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({ ...mockFilterDialogResultData }),
+            dismiss: jest.fn()
+        } as any);
         jest.spyOn(component, 'showFilteringSettings');
         jest.spyOn(dialogRef, 'dismiss');
 
@@ -240,8 +249,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
         dialogRef.afterClosed.subscribe((result: FiltersDialogData) => {
             expect(result).toEqual(mockFilterDialogResultData);
-          });
-
+        });
     });
 
     it('should listen to filters options and notify table if "filter settings" is available', () => {

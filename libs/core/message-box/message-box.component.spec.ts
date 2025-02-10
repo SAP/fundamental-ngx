@@ -1,6 +1,5 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -23,15 +22,16 @@ import { MessageBoxRef } from './utils/message-box-ref.class';
                 <button></button>
             </fd-message-box-footer>
         </fd-message-box>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, MessageBoxModule]
 })
 class TemplateTestComponent {
     @ViewChild(MessageBoxComponent) messageBox: MessageBoxComponent;
 }
 
 @NgModule({
-    declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, MessageBoxModule, NoopAnimationsModule]
+    imports: [TemplateTestComponent]
 })
 class TestModule {}
 
@@ -48,7 +48,7 @@ describe('MessageBoxComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule, RouterModule, RouterTestingModule],
+            imports: [TestModule, RouterModule, RouterTestingModule, NoopAnimationsModule],
             providers: [
                 { provide: MessageBoxRef, useValue: messageBoxRef },
                 { provide: MessageBoxConfig, useValue: messageBoxConfig },

@@ -5,7 +5,6 @@ import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 @Component({
     selector: 'fd-inline-help-trigger-example',
     templateUrl: './inline-help-trigger-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, InlineHelpModule]
 })
 export class InlineHelpTriggerExampleComponent {}

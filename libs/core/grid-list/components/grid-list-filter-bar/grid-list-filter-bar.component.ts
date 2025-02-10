@@ -10,12 +10,10 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
         class: 'fd-col fd-col--12'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ToolbarComponent, ToolbarSpacerDirective, IconComponent, FdTranslatePipe]
 })
 export class GridListFilterBarComponent {
     /** Event is thrown, when the control button is clicked */
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly close = new EventEmitter<void>();
 }

@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-slider-header',
     templateUrl: './slider-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class SliderHeaderComponent {}

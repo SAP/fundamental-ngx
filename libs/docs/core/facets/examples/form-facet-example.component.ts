@@ -22,7 +22,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         FacetComponent,

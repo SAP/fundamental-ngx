@@ -25,7 +25,7 @@ import {
 } from '@angular/core';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject, Subscription, debounceTime, filter, first, fromEvent, startWith } from 'rxjs';
 import { OverflowItemContainerRefDirective } from './directives/overflow-item-container-ref.directive';
@@ -55,7 +55,6 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
         },
         OverflowLayoutService
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         OverflowLayoutItemContainerDirective,
@@ -63,7 +62,7 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
         PopoverComponent,
         PopoverControlComponent,
         ButtonComponent,
-        PopoverBodyComponent,
+        PopoverBodyDirective,
         OverflowLayoutPopoverContentDirective,
         FdTranslatePipe
     ]

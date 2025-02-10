@@ -9,7 +9,6 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
     templateUrl: './multi-combobox-states-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, CvaDirective, DataSourceDirective, MultiComboboxComponent]
 })
 export class MultiComboboxStatesExampleComponent {

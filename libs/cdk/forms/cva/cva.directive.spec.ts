@@ -7,6 +7,7 @@ let UNIQUE_ID = 0;
 
 @Component({
     selector: 'fdk-cva-test-control',
+    standalone: true,
     template: `
         <input
             #comboboxInput
@@ -16,9 +17,10 @@ let UNIQUE_ID = 0;
             autocomplete="off"
             (input)="onInput($event)"
             (blur)="onBlur()"
+            fdkCva
         />
     `,
-    hostDirectives: [CvaDirective]
+    providers: [CvaDirective]
 })
 export class TestComponent implements ControlValueAccessor, AfterViewInit {
     @ViewChild('comboboxInput') comboboxInput: ElementRef<HTMLInputElement>;
@@ -72,6 +74,10 @@ export class TestComponent implements ControlValueAccessor, AfterViewInit {
     }
 }
 
+const mockElementRef = {
+    nativeElement: document.createElement('input')
+};
+
 describe('CvaDirective', () => {
     runValueAccessorTests({
         /** Component, that is being tested */
@@ -81,7 +87,8 @@ describe('CvaDirective', () => {
          * Under the hood calls TestBed.configureTestingModule with provided config.
          */
         testModuleMetadata: {
-            declarations: [TestComponent]
+            imports: [TestComponent, CvaDirective],
+            providers: [{ provide: ElementRef, useValue: mockElementRef }]
         },
         /** Whether component is able to track "onBlur" events separately */
         supportsOnBlur: true,

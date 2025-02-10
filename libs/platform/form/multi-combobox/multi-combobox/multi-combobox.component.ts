@@ -69,7 +69,6 @@ let deprecationWarningShown = false;
         },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,
@@ -279,7 +278,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
-            this.close();
         } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(false);

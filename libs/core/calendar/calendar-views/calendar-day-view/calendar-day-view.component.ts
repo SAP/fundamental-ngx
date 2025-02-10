@@ -44,7 +44,6 @@ import { CalendarType, CalendarTypeEnum, DaysOfWeek } from '../../types';
         class: 'fd-calendar__dates'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FdTranslatePipe, NgClass]
 })
 export class CalendarDayViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {

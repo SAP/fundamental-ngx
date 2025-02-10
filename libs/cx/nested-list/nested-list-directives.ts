@@ -17,7 +17,8 @@ import { NestedItemService } from './nested-item/nested-item.service';
 let uniqueId = 0;
 
 @Directive({
-    selector: '[cxNestedDirectivesHeader], [fdx-nested-list-header]'
+    selector: '[cxNestedDirectivesHeader], [fdx-nested-list-header]',
+    standalone: true
 })
 export class NestedListHeaderDirective {
     /** Id of the element. */

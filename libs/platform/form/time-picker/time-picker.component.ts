@@ -22,7 +22,6 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
     templateUrl: './time-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformTimePickerComponent, multi: true }],
-    standalone: true,
     imports: [TimePickerComponent, FormsModule]
 })
 export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
@@ -55,7 +54,6 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      */
     @Input()
     set meridian(value: boolean) {
-        // eslint-disable-next-line max-len
         warnOnce(
             'Property meridian is deprecated.' +
                 ' Use Meridian is deprecated.' +

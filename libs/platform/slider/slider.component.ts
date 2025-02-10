@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
@@ -24,7 +23,6 @@ export class SliderChangeEvent<T extends SliderControlValue = any> {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SliderComponent, multi: true }],
-    standalone: true,
     imports: [CoreSliderComponent, FormsModule]
 })
 export class SliderComponent extends BaseInput {

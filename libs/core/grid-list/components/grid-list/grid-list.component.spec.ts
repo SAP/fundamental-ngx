@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    NO_ERRORS_SCHEMA,
+    ViewChild
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GridListModule } from '../../grid-list.module';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { GridListSelectionMode } from '../../models/grid-list-selection.models';
-import { GridListItemType } from '../grid-list-item/grid-list-item.component';
+import { GridListItemComponent, GridListItemType } from '../grid-list-item/grid-list-item.component';
+import { GridListTitleBarComponent } from '../grid-list-title-bar/grid-list-title-bar.component';
 import { GridListComponent } from './grid-list.component';
 
 @Component({
@@ -37,7 +47,16 @@ import { GridListComponent } from './grid-list.component';
             </fd-grid-list-item>
         </fd-grid-list>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        GridListTitleBarComponent,
+        GridListItemComponent,
+        GridListComponent,
+        AvatarComponent,
+        TitleComponent,
+        CommonModule
+    ]
 })
 class TestComponent {
     @ViewChild(GridListComponent)
@@ -83,7 +102,10 @@ class TestComponent {
         }
     ];
 
-    constructor(private readonly _cd: ChangeDetectorRef, public elRef: ElementRef) {}
+    constructor(
+        private readonly _cd: ChangeDetectorRef,
+        public elRef: ElementRef
+    ) {}
 
     setMode(mode: GridListSelectionMode): void {
         this.selectionMode = mode;
@@ -114,8 +136,7 @@ describe('GridListComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [GridListModule],
+            imports: [TestComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
@@ -294,7 +315,6 @@ describe('GridListComponent', () => {
     });
 
     describe('Keyboard Grid List Tests', () => {
-
         it('should handle arrow key focus changes', () => {
             fixture.detectChanges();
             const itemsArray = component.gridListComponent.gridListItems.toArray();
@@ -306,9 +326,13 @@ describe('GridListComponent', () => {
 
             // Mock getBoundingClientRect for consistent behavior
             component.gridListComponent.gridListItems.forEach((item) => {
-                jest.spyOn(item._gridListItem.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 270 } as DOMRect);
+                jest.spyOn(item._gridListItem.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                    width: 270
+                } as DOMRect);
             });
-            jest.spyOn(component.gridListElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1144 } as DOMRect);
+            jest.spyOn(component.gridListElement.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1144
+            } as DOMRect);
 
             const firstItem = itemsArray[0]._gridListItem.nativeElement;
             firstItem.focus();
@@ -349,7 +373,6 @@ describe('GridListComponent', () => {
             expect(document.activeElement).toBe(firstItem);
         });
 
-
         it('should handle selection when shift+arrow keys are pressed', () => {
             component.setMode('multiSelect');
             jest.spyOn(component, 'selectionChange');
@@ -358,13 +381,15 @@ describe('GridListComponent', () => {
             const checkboxButtonOne = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-checkbox'))[0];
             checkboxButtonOne.nativeElement.click();
             itemsArray[0]._gridListItem.nativeElement.focus();
-            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true }));
+            component.gridListComponent.handleKeydown(
+                new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true })
+            );
             fixture.detectChanges();
             const selectedItemEvent = {
-                added: [ 'Title 2' ],
-                index: [ 1 ],
+                added: ['Title 2'],
+                index: [1],
                 removed: [],
-                selection: [ 'Title 1', 'Title 2' ]
+                selection: ['Title 1', 'Title 2']
             };
             expect(component.selectionChange).toHaveBeenCalledWith(selectedItemEvent);
             expect(component.gridListComponent.gridListItems.toArray()[1]._selectedItem).toBeTruthy();
@@ -379,7 +404,7 @@ describe('GridListComponent', () => {
             itemsArray[0]._gridListItem.nativeElement.focus();
             component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'End', shiftKey: true }));
             fixture.detectChanges();
-            component.gridListComponent.gridListItems.toArray().forEach(item => {
+            component.gridListComponent.gridListItems.toArray().forEach((item) => {
                 expect(item._selectedItem).toBeTruthy();
             });
         });

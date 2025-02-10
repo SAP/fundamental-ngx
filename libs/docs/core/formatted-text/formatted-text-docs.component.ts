@@ -24,7 +24,6 @@ const scriptFormattedTextTs = 'script/formatted-text-script-example.component.ts
 @Component({
     selector: 'app-input',
     templateUrl: './formatted-text-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

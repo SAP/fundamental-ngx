@@ -4,7 +4,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-text-max-lines',
     templateUrl: './text-max-lines.component.html',
-    standalone: true,
     imports: [TextComponent]
 })
 export class TextMaxLinesComponent {

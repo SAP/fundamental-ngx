@@ -18,7 +18,6 @@ import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [OverflowLayoutModule, InfoLabelComponent, ButtonComponent]
 })
 export class OverflowLayoutDefaultExampleComponent {

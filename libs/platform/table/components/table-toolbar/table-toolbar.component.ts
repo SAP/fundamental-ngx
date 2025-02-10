@@ -88,7 +88,6 @@ export class TableToolbarTemplateDirective {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }],
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarItemDirective,
@@ -109,7 +108,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
     @Input()
-    shouldOverflow = false;
+    shouldOverflow = true;
 
     /** Table title. */
     @Input()

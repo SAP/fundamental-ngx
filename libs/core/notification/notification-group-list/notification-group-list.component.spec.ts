@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationModule } from '../notification.module';
 import { By } from '@angular/platform-browser';
+import { NotificationModule } from '../notification.module';
 
 @Component({
     selector: 'fd-notification-group-list-test',
-    template: ` <fd-notification-group-list>Notification Group List Test</fd-notification-group-list> `
+    template: ` <fd-notification-group-list>Notification Group List Test</fd-notification-group-list> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {}
 
@@ -15,8 +17,7 @@ describe('NotificationGroupListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

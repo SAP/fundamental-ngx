@@ -7,7 +7,6 @@ import { PlatformInputModule } from '@fundamental-ngx/platform/form';
     selector: 'fdp-platform-input-auto-complete-validation-example',
     templateUrl: './platform-input-auto-complete-validation-example.component.html',
     styleUrls: ['./platform-input-auto-complete-validation-example.component.scss'],
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, PlatformInputModule, FormsModule, PopoverBodyComponent]
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {

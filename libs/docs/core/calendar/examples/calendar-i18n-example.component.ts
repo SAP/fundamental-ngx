@@ -41,7 +41,6 @@ import { patchLanguage } from '@fundamental-ngx/i18n';
             }
         })
     ],
-    standalone: true,
     imports: [CalendarComponent, FormsModule, FdDatetimeModule]
 })
 export class CalendarI18nExampleComponent {

@@ -13,7 +13,6 @@ import { I18nDocsLoaderService } from './i18n-docs-loader.service';
     selector: 'fd-i18n-docs',
     templateUrl: './i18n-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [BusyIndicatorComponent, FocusableGridDirective, TableModule, AsyncPipe]
 })
 export class I18nDocsComponent {

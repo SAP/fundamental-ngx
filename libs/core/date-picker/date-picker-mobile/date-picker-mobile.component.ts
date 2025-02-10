@@ -1,14 +1,18 @@
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { TitleModule } from '@fundamental-ngx/core/title';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { DatePicker } from '../date-picker.model';
 import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from '../tokens';
 
@@ -17,14 +21,15 @@ import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from '../token
     templateUrl: './date-picker-mobile.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-        DialogModule,
-        TitleModule,
-        CdkScrollable,
-        ScrollbarDirective,
+        TitleComponent,
         NgTemplateOutlet,
-        BarModule,
+        DialogFooterComponent,
+        DialogComponent,
+        DialogBodyComponent,
+        DialogCloseButtonComponent,
+        DialogHeaderComponent,
+        ButtonBarComponent,
         InitialFocusDirective
     ]
 })

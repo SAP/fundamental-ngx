@@ -659,6 +659,9 @@ export interface FdLanguage {
         deselectSingleRow: FdLanguageKey;
         selectSingleRow: FdLanguageKey;
         showingBlankOfBlank: FdLanguageKey;
+        collapseRowButtonTitle: FdLanguageKey;
+        expandRowButtonTitle: FdLanguageKey;
+        rowNavigateButtonTitle: FdLanguageKey;
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;

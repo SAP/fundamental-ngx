@@ -66,7 +66,6 @@ const comboboxBylineTs = 'combobox-byline-example.component.ts';
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

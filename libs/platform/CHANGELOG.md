@@ -3,6 +3,152 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.9...v0.55.0-rc.10) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.55.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.8...v0.55.0-rc.9) (2025-02-06)
+
+
+### Bug Fixes
+
+* **platform:** variant management/table toolbar overflow fixes ([#12977](https://github.com/SAP/fundamental-ngx/issues/12977)) ([9e500b9](https://github.com/SAP/fundamental-ngx/commit/9e500b982e29cd7f74f0f6f45876e61670843f5c))
+
+
+
+
+
+# [0.55.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.7...v0.55.0-rc.8) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.55.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.6...v0.55.0-rc.7) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.55.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.5...v0.55.0-rc.6) (2025-02-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.55.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.4...v0.55.0-rc.5) (2025-02-04)
+
+
+### Bug Fixes
+
+* **platform:** colon when no description is present for popping columns ([#12981](https://github.com/SAP/fundamental-ngx/issues/12981)) ([7bc90e0](https://github.com/SAP/fundamental-ngx/commit/7bc90e0b766c58d572ff27e3260c148c01e5e2be))
+
+
+
+
+
+# [0.55.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.3...v0.55.0-rc.4) (2025-02-04)
+
+
+### Bug Fixes
+
+* **platform:** table icons missing title attributes ([#12982](https://github.com/SAP/fundamental-ngx/issues/12982)) ([98f0e40](https://github.com/SAP/fundamental-ngx/commit/98f0e406917bce136ef653f4c659dd77c99b7105))
+
+
+
+
+
+# [0.55.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.2...v0.55.0-rc.3) (2025-02-03)
+
+
+### Bug Fixes
+
+* **core:** popover escape key to close should not bubble to dialog ([#12957](https://github.com/SAP/fundamental-ngx/issues/12957)) ([474428e](https://github.com/SAP/fundamental-ngx/commit/474428ec3bc5e563ad2f2d1ae55c9ad409064c63))
+
+
+
+
+
+# [0.55.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.1...v0.55.0-rc.2) (2025-02-03)
+
+
+### Bug Fixes
+
+* **platform:** autocomplete should support japanese keyboard input source ([#12988](https://github.com/SAP/fundamental-ngx/issues/12988)) ([1d0f985](https://github.com/SAP/fundamental-ngx/commit/1d0f9854ff3bf030da20b6a5c2176679c43e463e))
+
+
+
+
+
+# [0.55.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.0...v0.55.0-rc.1) (2025-02-02)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.55.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.2...v0.55.0-rc.0) (2025-02-02)
+
+
+### Features
+
+* ng 19 ([#12883](https://github.com/SAP/fundamental-ngx/issues/12883)) ([2b6f375](https://github.com/SAP/fundamental-ngx/commit/2b6f375c79a0040e9564e79edb6372405e4ce878))
+
+
+### BREAKING CHANGES
+
+* angular 19
+
+
+
+
+
+## [0.54.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.15...v0.54.2) (2025-01-31)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.54.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.14...v0.54.2-rc.15) (2025-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.54.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.13...v0.54.2-rc.14) (2025-01-29)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.54.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.12...v0.54.2-rc.13) (2025-01-29)
+
+
+### Bug Fixes
+
+* **platform:** bug where vertical blue resizing line stays after horizontal scrolling platform table ([#12935](https://github.com/SAP/fundamental-ngx/issues/12935)) ([03f3166](https://github.com/SAP/fundamental-ngx/commit/03f3166bcf9d667677b57269b00247d3f046e858))
+
+
+
+
+
 ## [0.54.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.11...v0.54.2-rc.12) (2025-01-28)
 
 

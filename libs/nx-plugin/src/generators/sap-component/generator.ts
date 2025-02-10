@@ -1,7 +1,6 @@
 import { strings } from '@angular-devkit/core';
 import { SchematicsException } from '@angular-devkit/schematics';
-import { readCachedProjectGraph } from '@nrwl/devkit';
-import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
+import { formatFiles, generateFiles, names, readCachedProjectGraph, Tree } from '@nx/devkit';
 import { join } from 'path';
 import { addEntryToApiFiles } from './add-entry-to-api-files';
 import { addEntryToDocsRoutes } from './add-entry-to-docs-routes';

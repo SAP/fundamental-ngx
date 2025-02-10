@@ -27,7 +27,6 @@ const platformAutogrowTextareaTsCode = 'platform-textarea-autogrow-example.compo
 @Component({
     selector: 'app-textarea',
     templateUrl: './platform-textarea-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

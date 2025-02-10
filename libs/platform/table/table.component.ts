@@ -215,7 +215,7 @@ let tableUniqueId = 0;
         {
             directive: TableDataSourceDirective,
             inputs: ['dataSource', 'childDataSource'],
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+
             outputs: [
                 'childDataSourceChanged',
                 // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -236,7 +236,6 @@ let tableUniqueId = 0;
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
         '[class.fd-table--group]': '_isGroupTable$()'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         BusyIndicatorComponent,
@@ -561,6 +560,7 @@ export class TableComponent<T = any>
     readonly save = new EventEmitter<SaveRowsEvent<T>>();
     /** Event fired when cancel button pressed. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly cancel = new EventEmitter<void>();
     /** Event emitted when table body being scrolled. */
     @Output()

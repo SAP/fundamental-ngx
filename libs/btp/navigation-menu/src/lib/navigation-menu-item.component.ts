@@ -28,7 +28,6 @@ import { fromEvent, Observable } from 'rxjs';
         }
         <ng-content></ng-content>
     `,
-    standalone: true,
     imports: [IconComponent],
     hostDirectives: [IndirectFocusableItemDirective],
     providers: [

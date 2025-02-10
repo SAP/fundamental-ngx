@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
     displayName: 'core-schematics',
     preset: '../../../jest.preset.js',

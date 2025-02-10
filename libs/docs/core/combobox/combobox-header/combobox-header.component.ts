@@ -13,7 +13,6 @@ import {
     selector: 'fd-combobox-input-header',
     templateUrl: './combobox-header.component.html',
     styleUrls: ['./combobox-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

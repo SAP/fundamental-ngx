@@ -16,7 +16,6 @@ import { PaginationModule } from '@fundamental-ngx/core/pagination';
             From {{ showing.from }} to {{ showing.to }}. Total items {{ showing.totalCount }}
         </ng-template>
     `,
-    standalone: true,
     imports: [PaginationModule]
 })
 export class PaginationShowingExampleComponent {

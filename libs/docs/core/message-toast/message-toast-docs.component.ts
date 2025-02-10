@@ -23,7 +23,6 @@ const messageToastPositionExampleHtml = 'message-toast-position-example.componen
 @Component({
     selector: 'app-message-toast',
     templateUrl: './message-toast-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

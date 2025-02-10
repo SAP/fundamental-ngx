@@ -35,7 +35,6 @@ import { SaveDialogContext } from '../../models/save-dialog.model';
     templateUrl: './manage-variant-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

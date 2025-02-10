@@ -7,7 +7,6 @@ import { TabColorAssociations } from '../../interfaces/tab-color-associations.in
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdp-icon-tab-bar-text-type-tab-item]',
-    standalone: true,
     imports: [AsyncOrSyncPipe, NgTemplateOutlet],
     templateUrl: './icon-tab-bar-text-type-tab-item.component.html',
     encapsulation: ViewEncapsulation.None,

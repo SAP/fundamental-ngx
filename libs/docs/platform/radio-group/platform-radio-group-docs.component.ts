@@ -25,7 +25,6 @@ import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform
 @Component({
     selector: 'app-radio-group',
     templateUrl: './platform-radio-group-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

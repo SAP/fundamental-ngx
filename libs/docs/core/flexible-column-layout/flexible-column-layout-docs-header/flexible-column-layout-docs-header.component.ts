@@ -17,7 +17,6 @@ import {
             }
         `
     ],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FlexibleColumnLayoutDocsHeaderComponent {}
