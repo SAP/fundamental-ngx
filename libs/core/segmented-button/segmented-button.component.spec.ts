@@ -4,7 +4,6 @@ import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
-import { SimpleChange } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 const isSelectedClass = 'fd-button--toggled';

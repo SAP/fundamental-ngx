@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.9...v0.55.0-rc.10) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.8...v0.55.0-rc.9) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.7...v0.55.0-rc.8) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.6...v0.55.0-rc.7) (2025-02-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.55.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.5...v0.55.0-rc.6) (2025-02-05)
+
+
+### Bug Fixes
+
+* **core:** enable segmented button ([#12808](https://github.com/SAP/fundamental-ngx/issues/12808)) ([059be7f](https://github.com/SAP/fundamental-ngx/commit/059be7f384ea3cc26d55d5d665682cb2acd34aa1))
+
+
+
+
+
 # [0.55.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.4...v0.55.0-rc.5) (2025-02-04)
 
 **Note:** Version bump only for package @fundamental-ngx/core
