@@ -76,10 +76,6 @@
 
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-        <fd-dialog-header>
-            <h1 id="fd-dialog-header-10" fd-title>The History of Pineapple</h1>
-        </fd-dialog-header>
-
         <fd-dialog-body>
             <fdp-message-popover-form-wrapper #messagePopoverWrapper>
                 <fdp-settings-generator #settingsGenerator [settings]="schema"></fdp-settings-generator>
