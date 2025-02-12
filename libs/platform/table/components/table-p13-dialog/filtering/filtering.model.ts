@@ -11,6 +11,7 @@ export interface FilterableColumn {
     key: string;
     dataType: FilterableColumnDataType;
     filterable?: boolean;
+    filterValuesOptions?: string[]; // add optional filterValuesOptions
 }
 
 export interface FilterDialogData extends TableDialogCommonData {
@@ -39,6 +40,9 @@ export class FilterRule<T = any> {
     /** Data type */
     dataType?: FilterableColumnDataType;
 
+    /** Available filter Options */
+    filterValuesOptions: string[] = [];
+
     /** returns whether filter rule has value */
     get hasValue(): boolean {
         return this.valueExists(this.value) || this.valueExists(this.value2);
@@ -64,6 +68,9 @@ export class FilterRule<T = any> {
         }
         if (this.strategies.length === 0) {
             this.setStrategiesByColumnKey(this.columnKey);
+        }
+        if (this.filterValuesOptions.length === 0) {
+            this.setFilterValuesOptionsByColumnKey(this.columnKey);
         }
     }
 
@@ -121,6 +128,9 @@ export class FilterRule<T = any> {
         // update data type
         this.setDataTypeByColumnKey(columnKey);
 
+        // update available Filter options
+        this.setFilterValuesOptionsByColumnKey(columnKey);
+
         // update available strategies list
         this.setStrategiesByColumnKey(columnKey);
     }
@@ -132,12 +142,25 @@ export class FilterRule<T = any> {
         if (dataType === this.dataType) {
             return;
         }
-
         this.dataType = dataType;
+    }
+
+    /** @hidden */
+    setFilterValuesOptionsByColumnKey(columnKey?: string): void {
+        const filterValuesOptions = this.columns.find((column) => column.key === columnKey)?.filterValuesOptions;
+        if (this.areArraysEqual(filterValuesOptions, this.filterValuesOptions)) {
+            return;
+        }
+        this.filterValuesOptions = filterValuesOptions ? filterValuesOptions : [];
     }
 
     /** @hidden */
     private valueExists(value: any): boolean {
         return !!value || value === 0 || typeof value === 'boolean';
+    }
+
+    /** @hidden */
+    private areArraysEqual(arr1: undefined | string[], arr2: undefined | string[]): boolean {
+        return JSON.stringify(arr1) === JSON.stringify(arr2);
     }
 }

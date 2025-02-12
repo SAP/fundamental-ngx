@@ -47,6 +47,7 @@ export class AdvancedScrollingExampleComponent {
     childSource: ChildTableDataSource<ExampleItem>;
     readonly filterTypeEnum = FilterType;
     readonly dataTypeEnum = FilterableColumnDataType;
+    readonly options_demo = ['Laptops 1 (Level 1)', 'Laptops 12 (Level 1)'];
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
