@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FD_SHELLBAR_SUBTITLE_COMPONENT } from '../tokens';
 
 /**
+ * @deprecated
+ * This component has been deprecated as of 0.54.2. A shellbar subtitle should no longer be provided.
+ *
  * The component that represents a shellbar subtitle.
  * The subtitle is optional and should be used rarely.
  * ```html
