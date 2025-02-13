@@ -3708,10 +3708,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "@fundamental-styles/cx@npm:0.38.0":
   version: 0.38.0
   resolution: "@fundamental-styles/cx@npm:0.38.0"
   checksum: 10/f3ad7e8f886849260670a08b1b3a8576bacee6f4eeea1ee8363021f5a554ecd20ddaeebc2fe6e880785acc70ca6b511941bc9fe54e6c6058854317f8d7e53dfe
+=======
+"@fundamental-styles/cx@npm:0.39.0-rc.59":
+  version: 0.39.0-rc.59
+  resolution: "@fundamental-styles/cx@npm:0.39.0-rc.59"
+  checksum: 10/818d908d16f583b0b47911c8b76eb828e39a881cec2d14188a7ad4434913615255fa4b7570c213ce853a4daf3040311e00df602def8bdf35e562edcc4f721ffd
+>>>>>>> d214aba39e (feat(core) user settings)
   languageName: node
   linkType: hard
 
@@ -15101,7 +15108,11 @@ __metadata:
     "@angular/router": "npm:19.0.7"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
+<<<<<<< HEAD
     "@fundamental-styles/cx": "npm:0.38.0"
+=======
+    "@fundamental-styles/cx": "npm:0.39.0-rc.59"
+>>>>>>> d214aba39e (feat(core) user settings)
     "@jsdevtools/npm-publish": "npm:3.0.1"
     "@nx/angular": "npm:20.4.4"
     "@nx/devkit": "npm:20.4.4"
@@ -15157,7 +15168,7 @@ __metadata:
     fast-glob: "npm:3.3.1"
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
-    fundamental-styles: "npm:0.39.0-rc.57"
+    fundamental-styles: "npm:0.39.0-rc.59"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -15205,13 +15216,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.39.0-rc.57":
-  version: 0.39.0-rc.57
-  resolution: "fundamental-styles@npm:0.39.0-rc.57"
+"fundamental-styles@npm:0.39.0-rc.59":
+  version: 0.39.0-rc.59
+  resolution: "fundamental-styles@npm:0.39.0-rc.59"
   peerDependencies:
-    "@sap-theming/theming-base-content": ^11.24.0
-    "@sap-ui/common-css": 0.39.0-rc.57
-  checksum: 10/c1074c1f6cd28c43e42a1a3fa097f4adef1fc96093b9056354e37c426718346582ac190a82357e9552eb7b8070464373da918b3497ca9a7017c33df2aeffd969
+    "@sap-theming/theming-base-content": ^11.25.0
+    "@sap-ui/common-css": 0.39.0-rc.59
+  checksum: 10/34363fc9c03d081a2bbf3bbda4cad6d4088497752915b34530ba5fb2c214de667a632263eb43920a9d43d047d4cdf0ac9c25010f9eea3ecebb01ba4e3ceb0929
   languageName: node
   linkType: hard
 

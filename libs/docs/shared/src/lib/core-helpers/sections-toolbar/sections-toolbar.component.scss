@@ -17,6 +17,7 @@
     white-space: nowrap;
     overflow: hidden;
     flex-grow: 1;
+    border-right: var(--sapList_BorderWidth) solid var(--sapGroup_ContentBorderColor);
 }
 
 .fd-docs-sidebar-content {
@@ -87,10 +88,7 @@
 .fd-docs-search {
     flex: 0 0 auto;
     padding: 15px 15px 15px 30px;
-    margin: 0 15px 0 0;
-
-    border-right: var(--sapList_BorderWidth) solid;
-    border-right-color: var(--sapGroup_ContentBorderColor);
+    margin: 0;
     background-color: var(--sapList_Background);
 }
 

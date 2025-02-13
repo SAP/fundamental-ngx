@@ -15,7 +15,6 @@ export class SettingsContentDirective {
      * Whether the content should be without paddings.
      * Default value is false.
      */
-
     noPadding = input(false, { transform: booleanAttribute });
 
     /**
