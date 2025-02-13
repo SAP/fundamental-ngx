@@ -3766,10 +3766,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.38.0":
-  version: 0.38.0
-  resolution: "@fundamental-styles/cx@npm:0.38.0"
-  checksum: 10/f3ad7e8f886849260670a08b1b3a8576bacee6f4eeea1ee8363021f5a554ecd20ddaeebc2fe6e880785acc70ca6b511941bc9fe54e6c6058854317f8d7e53dfe
+"@fundamental-styles/cx@npm:0.39.0-rc.57":
+  version: 0.39.0-rc.57
+  resolution: "@fundamental-styles/cx@npm:0.39.0-rc.57"
+  checksum: 10/ecfbd4922a911992643f2cc2721e79cb2df5be27a86094c09d0fa654e5b658e10af4eb64ed7f448b264eb7937fd5cc2bc33ddcc637d163b4e465ceeef60f7103
   languageName: node
   linkType: hard
 
@@ -15431,7 +15431,7 @@ __metadata:
     "@angular/router": "npm:19.0.3"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/cx": "npm:0.38.0"
+    "@fundamental-styles/cx": "npm:0.39.0-rc.57"
     "@jsdevtools/npm-publish": "npm:3.0.1"
     "@nx/angular": "npm:20.3.1"
     "@nx/devkit": "npm:20.3.2"
@@ -15487,7 +15487,7 @@ __metadata:
     fast-glob: "npm:3.3.1"
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
-    fundamental-styles: "npm:0.38.0"
+    fundamental-styles: "npm:0.39.0-rc.57"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -15535,13 +15535,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.38.0":
-  version: 0.38.0
-  resolution: "fundamental-styles@npm:0.38.0"
+"fundamental-styles@npm:0.39.0-rc.57":
+  version: 0.39.0-rc.57
+  resolution: "fundamental-styles@npm:0.39.0-rc.57"
   peerDependencies:
-    "@sap-theming/theming-base-content": ^11.18.0
-    "@sap-ui/common-css": 0.38.0
-  checksum: 10/5df9e1bc5590ba9af9cdb9c4f6d32507267f4d5f9c985535aac23bddcff32bf23707a64ed367f0b16f80134775afcd432f03fe6d12ed654d64a32d7517f40e7e
+    "@sap-theming/theming-base-content": ^11.24.0
+    "@sap-ui/common-css": 0.39.0-rc.57
+  checksum: 10/c1074c1f6cd28c43e42a1a3fa097f4adef1fc96093b9056354e37c426718346582ac190a82357e9552eb7b8070464373da918b3497ca9a7017c33df2aeffd969
   languageName: node
   linkType: hard
 
@@ -17340,11 +17340,11 @@ __metadata:
   linkType: hard
 
 "is-ssh@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "is-ssh@npm:1.4.0"
+  version: 1.4.1
+  resolution: "is-ssh@npm:1.4.1"
   dependencies:
     protocols: "npm:^2.0.1"
-  checksum: 10/e2d17d74a19b4368cc06ce5c76d4f625952442da337098d670a9840e1db5334c646aa0a6ed3a01e9d396901e22c755174ce64e74c3139bb10e5df03d5a6fb3fa
+  checksum: 10/f60910cd83fa94e9874655a672c3849312c12af83c0fe3dbff9945755fe838a73985d8f94e32ebf5626ba4148ee10eef51b7240b0218dbb6e9a43a06899b0529
   languageName: node
   linkType: hard
 
