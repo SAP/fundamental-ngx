@@ -13,6 +13,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { PlatformTableFilterableExampleComponent } from '../../examples/platform-table-filterable-example.component';
 import { PlatformTableGroupableExampleComponent } from '../../examples/platform-table-groupable-example.component';
+import { PlatformTableSettingsDialogExampleComponent } from '../../examples/platform-table-settings-dialog-example.component';
 import { PlatformTableSortableExampleComponent } from '../../examples/platform-table-sortable-example.component';
 
 const platformTableSortableSrc = 'platform-table-sortable-example.component.html';
@@ -21,12 +22,13 @@ const platformTableGroupableSrc = 'platform-table-groupable-example.component.ht
 const platformTableGroupableTsSrc = 'platform-table-groupable-example.component.ts';
 const platformTableFilterableSrc = 'platform-table-filterable-example.component.html';
 const platformTableFilterableTsSrc = 'platform-table-filterable-example.component.ts';
+const platformTableSettingsSrc = 'platform-table-settings-dialog-example.component.html';
+const platformTableFiSettingsSrc = 'platform-table-settings-dialog-example.component.ts';
 @Component({
     selector: 'fd-settings-dialog-docs',
     templateUrl: './settings-dialog-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
@@ -37,7 +39,8 @@ const platformTableFilterableTsSrc = 'platform-table-filterable-example.componen
         SeparatorComponent,
         PlatformTableFilterableExampleComponent,
         PlatformTableGroupableExampleComponent,
-        FdDatetimeModule
+        FdDatetimeModule,
+        PlatformTableSettingsDialogExampleComponent
     ]
 })
 export class SettingsDialogDocsComponent {
@@ -87,6 +90,22 @@ export class SettingsDialogDocsComponent {
             code: getAssetFromModuleAssets(platformTableGroupableTsSrc),
             fileName: 'platform-table-groupable-example',
             component: 'PlatformTableGroupableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    settingsTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableSettingsSrc),
+            fileName: 'platform-table-settings-dialog-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableFiSettingsSrc),
+            fileName: 'platform-table-settings-dialog-example',
+            component: 'PlatformTableSettingsDialogExampleComponent',
             name: 'platform-table-example.component.ts'
         }
     ];

@@ -27,7 +27,9 @@ import { ObjectListItemModule } from './object-list-item.module';
                 </fdp-object-list-item-row>
             </fdp-object-list-item>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule]
 })
 class ObjectListItemTestComponent {
     @ViewChild(ObjectListItemComponent, { read: ElementRef, static: true })
@@ -40,8 +42,7 @@ describe('ObjectListItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
-            declarations: [ObjectListItemTestComponent]
+            imports: [ObjectListItemTestComponent]
         }).compileComponents();
     }));
 
@@ -355,7 +356,9 @@ export class ListDataProvider extends DataProvider<Product> {
                 ></fdp-object-list-item-row>
             </fdp-object-list-item>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule]
 })
 class ObjectListItemDataSourceTestComponent {
     @ViewChild(ListComponent, { static: true }) component: ListComponent<Product>;
@@ -369,8 +372,7 @@ describe('Object  List Item Component with DataSource', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
-            declarations: [ObjectListItemDataSourceTestComponent]
+            imports: [ObjectListItemDataSourceTestComponent]
         }).compileComponents();
     }));
 

@@ -23,7 +23,6 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
             useExisting: ProductSwitchComponent
         }
     ],
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

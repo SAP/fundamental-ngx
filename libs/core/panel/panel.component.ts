@@ -27,14 +27,12 @@ let panelExpandUniqueId = 0;
  * Modes: Tablet/Mobile (default) and Desktop (compact)
  */
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-panel',
     templateUrl: './panel.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrl: './panel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class PanelComponent {

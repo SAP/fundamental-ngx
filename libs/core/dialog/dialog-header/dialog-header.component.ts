@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { BarComponent, BarElementDirective, BarLeftDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -21,8 +21,14 @@ import { DialogConfig } from '../utils/dialog-config.class';
     templateUrl: './dialog-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
+    imports: [
+        BarComponent,
+        BarLeftDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ContentDensityDirective,
+        NgTemplateOutlet
+    ]
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
     /** @hidden */

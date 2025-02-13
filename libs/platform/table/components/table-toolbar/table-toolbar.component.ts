@@ -4,7 +4,9 @@ import {
     ContentChild,
     DestroyRef,
     Directive,
+    EventEmitter,
     Input,
+    Output,
     Signal,
     TemplateRef,
     ViewChild,
@@ -44,6 +46,7 @@ export interface ToolbarContext {
     filterable: Signal<boolean>;
     groupable: Signal<boolean>;
     columns: Signal<boolean>;
+    settings: Signal<boolean>;
     hasAnyActions: Signal<boolean>;
     appliedFilters: Signal<TableAppliedFilter[]>;
 }
@@ -86,7 +89,6 @@ export class TableToolbarTemplateDirective {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }],
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarItemDirective,
@@ -107,7 +109,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
     @Input()
-    shouldOverflow = false;
+    shouldOverflow = true;
 
     /** Table title. */
     @Input()
@@ -150,6 +152,20 @@ export class TableToolbarComponent implements TableToolbarInterface {
     @Input()
     headingLevel: HeadingLevel = 2;
 
+    /** Search field input text. */
+    @Input()
+    set searchFieldInputText(text: string) {
+        this._searchInputText = text;
+        this.submitSearch({ text, category: null });
+    }
+    get searchFieldInputText(): string {
+        return this._searchInputText;
+    }
+
+    /** Event emitted when the search field input is changed. */
+    @Output()
+    searchFieldInputChange = new EventEmitter<string>();
+
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
@@ -191,6 +207,11 @@ export class TableToolbarComponent implements TableToolbarInterface {
     }
 
     /** @hidden */
+    searchInputChanged(event: SearchInput): void {
+        this.searchFieldInputChange.emit(event.text);
+    }
+
+    /** @hidden */
     openSorting(): void {
         this._table.openTableSortSettings.emit();
     }
@@ -228,6 +249,16 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** @hidden */
     _expandAll(): void {
         this._table.expandAll();
+    }
+
+    /** @hidden */
+    _formatAppliedFilters(appliedFilters: { columnName: string; params: string }[]): string {
+        return appliedFilters
+            .map((filter, index) => {
+                const separator = index < appliedFilters.length - 1 ? ', ' : '';
+                return `${filter.columnName} (${filter.params})${separator}`;
+            })
+            .join('');
     }
 
     /** @hidden */

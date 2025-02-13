@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Období',
         decreasePeriodLabel: 'Snížit období',
         navigationInstruction:
-            'Mezi položkami v seznamu přecházíte klávesami se šipkami nahoru a dolů. Přepínat mezi seznamy můžete šipkami doleva a doprava.'
+            'Mezi položkami v seznamu přecházíte klávesami se šipkami nahoru a dolů. Přepínat mezi seznamy můžete šipkami doleva a doprava.',
+        nightLabel: 'v noci',
+        morningLabel: 'ráno',
+        afternoonLabel: 'odpoledne',
+        eveningLabel: 'večer'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zadání výběru času',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Průvodce'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Více'
+        overflowTitleMore: 'Více',
+        breadcrumbTrailLabel: 'Navigační cesta'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Sledující',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sloupce',
         toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
         toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Přejít zpět',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
         filterDialogFilterByLabel: 'Filtrovat podle: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Zrušit',
         selectAllCheckboxLabel: 'Vybrat vše',
         deselectAllCheckboxLabel: 'Zrušit celý výběr',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Výběr řádky zrušíte stisknutím mezerníku',
         selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
-        loadMore: 'Načíst další'
+        loadMore: 'Načíst další',
+        filteredBy: 'Filtrováno podle',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Tlačítko menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Rozbalit/sbalit',
+        groupAriaDescription: 'Skupina oznámení',
+        groupAriaDescriptionExpanded: 'rozbaleno',
+        groupAriaDescriptionCollapsed: 'sbaleno'
     }
 };

@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     selector: 'fd-card-numeric-header',
     template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [],
     host: {
         role: 'group',

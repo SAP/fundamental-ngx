@@ -90,7 +90,7 @@ describe('MultiComboBox component', () => {
         expect(toggleButton.length).toBe(0);
     });
 
-    it('should list all elements when limitless is true', ()=>{
+    it('should list all elements when limitless is true', () => {
         component._setLimitless(true);
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
@@ -108,7 +108,6 @@ describe('MultiComboBox component', () => {
         } else {
             expect(component._suggestions.length).toBe(dsLength);
         }
-        
     });
 
     it('should be able to see Secondary Column', () => {
@@ -164,7 +163,7 @@ describe('MultiComboBox component', () => {
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(selectEvent);
-    
+
         fixture.detectChanges();
 
         const dsLength = (component.dataSourceDirective.dataSource as any[]).length;

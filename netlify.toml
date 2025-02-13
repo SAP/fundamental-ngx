@@ -11,7 +11,7 @@
   command = "NODE_OPTIONS=--max_old_space_size=8192 npx nx run docs:compile:production-unoptimized --base-href=\"/\""
 
 [build.environment]
-  NODE_VERSION = "20.15.1"
+  NODE_VERSION = "22.12.0"
   YARN_FLAGS = "--frozen-lockfile"
   YARN_VERSION = "4.4.1"
   PYTHON_VERSION = "3.8"

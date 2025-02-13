@@ -17,8 +17,7 @@ import { NavigationMenuPopoverControlDirective } from './navigation-menu-popover
     `,
     styleUrls: ['./navigation-menu-popover.component.scss'],
     imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, NgTemplateOutlet],
-    encapsulation: ViewEncapsulation.None,
-    standalone: true
+    encapsulation: ViewEncapsulation.None
 })
 export class NavigationMenuPopoverComponent {
     /** @hidden */

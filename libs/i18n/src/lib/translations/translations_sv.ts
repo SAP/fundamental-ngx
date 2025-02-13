@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Period',
         decreasePeriodLabel: 'Minska period',
         navigationInstruction:
-            'Tryck på pilen högst upp eller längst ner för att flytta mellan artiklar. Tryck på vänster- eller högerpilen för att växla mellan listor.'
+            'Tryck på pilen högst upp eller längst ner för att flytta mellan artiklar. Tryck på vänster- eller högerpilen för att växla mellan listor.',
+        nightLabel: 'på natten',
+        morningLabel: 'på morgonen',
+        afternoonLabel: 'på eftermiddagen',
+        eveningLabel: 'på kvällen'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Inmatning för val av klockslag',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Guide'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Fler'
+        overflowTitleMore: 'Fler',
+        breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Bevakare',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolumner',
         toolbarActionExpandAllButtonTitle: 'Expandera alla',
         toolbarActionCollapseAllButtonTitle: 'Komprimera alla',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Gå tillbaka',
         filterDialogNotFilteredLabel: '(Ej filtrerat)',
         filterDialogFilterByLabel: 'Filtrera efter: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Avbryt',
         selectAllCheckboxLabel: 'Välj alla',
         deselectAllCheckboxLabel: 'Avmarkera alla',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Tryck på BLANKSTEG för att avmarkera rad',
         selectSingleRow: 'Tryck på BLANKSTEG för att välja rad',
-        loadMore: 'Läs in fler'
+        loadMore: 'Läs in fler',
+        filteredBy: 'Filtrerat efter',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redigera'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menyknapp'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Expandera/komprimera',
+        groupAriaDescription: 'Aviseringsgrupp',
+        groupAriaDescriptionExpanded: 'expandera',
+        groupAriaDescriptionCollapsed: 'komprimera'
     }
 };

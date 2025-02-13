@@ -37,6 +37,7 @@
             [attr.aria-valuenow]="value"
             [attr.aria-valuemax]="max"
             [attr.aria-valuemin]="min"
+            role="spinbutton"
             [attr.aria-describedby]="canDisplayLabel ? inputId + '__description' : ''"
             [attr.aria-required]="required"
             [attr.aria-roledescription]="ariaRoleDescription || ('coreStepInput.ariaRoleDescription' | fdTranslate)"

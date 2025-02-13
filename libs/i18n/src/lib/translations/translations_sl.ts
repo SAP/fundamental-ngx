@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Obdobje',
         decreasePeriodLabel: 'Zmanjšanje obdobja',
         navigationInstruction:
-            'Če se želite premikati med elementi na tem seznamu, pritisnite puščico zgoraj ali puščico spodaj. Za preklapljanje med seznami pritisnite levo puščico ali desno puščico.'
+            'Če se želite premikati med elementi na tem seznamu, pritisnite puščico zgoraj ali puščico spodaj. Za preklapljanje med seznami pritisnite levo puščico ali desno puščico.',
+        nightLabel: 'ponoči',
+        morningLabel: 'zjutraj',
+        afternoonLabel: 'popoldne',
+        eveningLabel: 'zvečer'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Vnos izbirnika časa',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Čarovnik'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Več'
+        overflowTitleMore: 'Več',
+        breadcrumbTrailLabel: 'Sled poti'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Opazovalci',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stolpci',
         toolbarActionExpandAllButtonTitle: 'Razširi vse',
         toolbarActionCollapseAllButtonTitle: 'Skrči vse',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Nazaj',
         filterDialogNotFilteredLabel: '(Brez filtriranja)',
         filterDialogFilterByLabel: 'Filtriraj po: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Prekliči',
         selectAllCheckboxLabel: 'Izberi vse',
         deselectAllCheckboxLabel: 'Preklic izbire vseh',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Za preklic izbire pritisnite preslednico',
         selectSingleRow: 'Za izbiro vrstice pritisnite preslednico',
-        loadMore: 'Naloži več'
+        loadMore: 'Naloži več',
+        filteredBy: 'Filtrirano po',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menijski gumb'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Razširitev/strnitev',
+        groupAriaDescription: 'Skupina obvestil',
+        groupAriaDescriptionExpanded: 'razširjeno',
+        groupAriaDescriptionCollapsed: 'strnjeno'
     }
 };

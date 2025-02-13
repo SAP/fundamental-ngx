@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Kausi',
         decreasePeriodLabel: 'Vähennä kautta',
         navigationInstruction:
-            'Voit liikkua tämän luettelon kohteiden välillä painamalla ylä- tai alanuolinäppäintä. Voit vaihdella luetteloita painamalla vasenta tai oikeaa nuolinäppäintä.'
+            'Voit liikkua tämän luettelon kohteiden välillä painamalla ylä- tai alanuolinäppäintä. Voit vaihdella luetteloita painamalla vasenta tai oikeaa nuolinäppäintä.',
+        nightLabel: 'yöllä',
+        morningLabel: 'aamulla',
+        afternoonLabel: 'iltapäivällä',
+        eveningLabel: 'illalla'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Aikavalitsimen syöttö',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Avustaja'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Enemmän'
+        overflowTitleMore: 'Enemmän',
+        breadcrumbTrailLabel: 'Navigointipolku'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Tarkkailijat',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sarakkeet',
         toolbarActionExpandAllButtonTitle: 'Laajenna kaikki',
         toolbarActionCollapseAllButtonTitle: 'Tiivistä kaikki',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Navigoi takaisin',
         filterDialogNotFilteredLabel: '(Ei suodatettu)',
         filterDialogFilterByLabel: 'Suodatusperuste: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Peruuta',
         selectAllCheckboxLabel: 'Valitse kaikki',
         deselectAllCheckboxLabel: 'Poista kaikki valinnat',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Poista rivin valinta painamalla välilyöntinäppäintä',
         selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä',
-        loadMore: 'Lataa enemmän'
+        loadMore: 'Lataa enemmän',
+        filteredBy: 'Suodatusperuste',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Muokkaa'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Valikko-painike'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Laajenna/tiivistä',
+        groupAriaDescription: 'Ilmoitusryhmä',
+        groupAriaDescriptionExpanded: 'laajennettu',
+        groupAriaDescriptionCollapsed: 'tiivistetty'
     }
 };

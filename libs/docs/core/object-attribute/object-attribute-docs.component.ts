@@ -23,7 +23,6 @@ const objectAttributeLinkTs = 'object-attribute-link-example.component.ts';
 @Component({
     selector: 'app-object-attribute',
     templateUrl: './object-attribute-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

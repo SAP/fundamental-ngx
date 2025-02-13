@@ -25,7 +25,6 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [WizardGeneratorService, FormGeneratorService],
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

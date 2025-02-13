@@ -102,11 +102,7 @@ describe('CalendarComponent', () => {
 
     it('Should handle write value for multiple mode when correct', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
-        const dates = [
-            new FdDate(2000, 10, 10),
-            new FdDate(2000, 10, 11),
-            new FdDate(2000, 10, 12),
-        ];
+        const dates = [new FdDate(2000, 10, 10), new FdDate(2000, 10, 11), new FdDate(2000, 10, 12)];
         component.allowMultipleSelection = true;
         component.writeValue(dates);
         expect(component.selectedMultipleDates).toEqual(dates);

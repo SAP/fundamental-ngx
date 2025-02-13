@@ -10,7 +10,6 @@ import { TIMELINE_EXAMPLE_DATA } from './timeline-example-data';
     selector: 'fd-timeline-basic-example',
     templateUrl: './timeline-basic-example.component.html',
     styleUrls: ['./timeline-basic-example.component.scss'],
-    standalone: true,
     imports: [TimelineModule, AvatarComponent, ButtonComponent, ContentDensityDirective, DatePipe]
 })
 export class TimelineBasicExampleComponent {

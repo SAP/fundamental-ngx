@@ -28,7 +28,6 @@ import { Observable, delay, of } from 'rxjs';
     templateUrl: './message-popover-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         MessagePopoverFormWrapperComponent,
         FormsModule,

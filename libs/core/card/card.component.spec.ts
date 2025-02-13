@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardContentComponent } from './content/card-content.component';
-import { CardTitleDirective } from './header-elements/card-title.directive';
 import { CardComponent } from './card.component';
 import { CardModule } from './card.module';
 import { CardType } from './constants';
+import { CardContentComponent } from './content/card-content.component';
+import { CardTitleDirective } from './header-elements/card-title.directive';
 
 import { CLASS_NAME } from './constants';
 
@@ -20,7 +20,9 @@ import { CLASS_NAME } from './constants';
 
             <fd-card-loader>{{ loaderText }}</fd-card-loader>
         </fd-card>
-    `
+    `,
+    standalone: true,
+    imports: [CardModule]
 })
 class CardHostTestComponent {
     @ViewChild(CardComponent) card: CardComponent;
@@ -42,8 +44,7 @@ describe('CardComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CardModule],
-            declarations: [CardHostTestComponent]
+            imports: [CardHostTestComponent]
         }).compileComponents();
     }));
 

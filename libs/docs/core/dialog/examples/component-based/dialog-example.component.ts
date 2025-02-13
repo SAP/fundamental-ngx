@@ -49,7 +49,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             </fd-dialog-footer>
         </fd-dialog>
     `,
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

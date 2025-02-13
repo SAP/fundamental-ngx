@@ -1,16 +1,15 @@
-import { APP_INITIALIZER, FactoryProvider, inject } from '@angular/core';
+import { EnvironmentProviders, inject, provideAppInitializer } from '@angular/core';
 import { ThemingService } from './theming.service';
 
 /**
  * Initializes theming service
  */
-export function themingInitializer(): FactoryProvider {
-    return {
-        provide: APP_INITIALIZER,
-        useFactory: () => {
+export function themingInitializer(): EnvironmentProviders {
+    return provideAppInitializer(() => {
+        const initializerFn = (() => {
             const themingService = inject(ThemingService);
             return () => themingService.init();
-        },
-        multi: true
-    };
+        })();
+        return initializerFn();
+    });
 }

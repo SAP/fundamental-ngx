@@ -21,7 +21,6 @@ const DEFAULT_NEW_BREAKPOINTS_CONFIG = {
             useValue: DEFAULT_NEW_BREAKPOINTS_CONFIG
         }
     ],
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule, CheckboxGroupComponent]
 })
 export class PlatformFieldColumnChangeExampleComponent {

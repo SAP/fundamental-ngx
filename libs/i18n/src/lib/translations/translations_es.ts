@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Periodo',
         decreasePeriodLabel: 'Disminuir período',
         navigationInstruction:
-            'Para desplazarse entre elementos de esta lista, pulse la flecha hacia arriba o hacia abajo situadas arriba. Para cambiar entre listas, pulse la flecha izquierda o la flecha derecha.'
+            'Para desplazarse entre elementos de esta lista, pulse la flecha hacia arriba o hacia abajo situadas arriba. Para cambiar entre listas, pulse la flecha izquierda o la flecha derecha.',
+        nightLabel: 'por la noche',
+        morningLabel: 'por la mañana',
+        afternoonLabel: 'por la tarde',
+        eveningLabel: 'por la tarde-noche'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Entrada de selector de tiempo',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Asistente'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Más'
+        overflowTitleMore: 'Más',
+        breadcrumbTrailLabel: 'Ruta de navegación'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Examinadores',
@@ -485,6 +490,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Columnas',
         toolbarActionExpandAllButtonTitle: 'Expandir todo',
         toolbarActionCollapseAllButtonTitle: 'Contraer todo',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Volver atrás',
         filterDialogNotFilteredLabel: '(No filtrado)',
         filterDialogFilterByLabel: 'Filtrar por: {filterLabel}',
@@ -510,9 +518,14 @@ export default {
         sortDialogCancelBtnLabel: 'Cancelar',
         selectAllCheckboxLabel: 'Seleccionar todos',
         deselectAllCheckboxLabel: 'Deseleccionar todo',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Pulse la barra de espaciado para anular la selección',
         selectSingleRow: 'Pulse la barra de espaciado para seleccionar líneas',
-        loadMore: 'Cargar más'
+        loadMore: 'Cargar más',
+        filteredBy: 'Filtrado por',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'
@@ -571,5 +584,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Botón Menú'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Expandir/Contraer',
+        groupAriaDescription: 'Grupo de notificaciones',
+        groupAriaDescriptionExpanded: 'expandido',
+        groupAriaDescriptionCollapsed: 'contraído'
     }
 };

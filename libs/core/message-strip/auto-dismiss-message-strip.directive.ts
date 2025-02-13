@@ -78,7 +78,6 @@ export class AutoDismissMessageStripDirective {
 
     /** @hidden */
     private startAutoDismiss(): void {
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         const startAutoDismissTimer$ = new Observable((res) => {
             this.autoDismissTimeout = setTimeout(() => {
                 this.dismiss();

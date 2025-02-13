@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platfo
 @Component({
     selector: 'fdp-platform-input-reactive-validation-example',
     templateUrl: './platform-input-reactive-validation-example.component.html',
-    standalone: true,
     imports: [FormsModule, FdpFormGroupModule, ReactiveFormsModule, PlatformInputModule, PlatformButtonModule]
 })
 export class PlatformInputReactiveValidationExampleComponent implements OnInit {

@@ -1,9 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { NestedItemComponent } from '../nested-item/nested-item.component';
 import { NestedItemService } from '../nested-item/nested-item.service';
-import { NestedListExpandIconComponent } from '../nested-list-directives';
+import { NestedLinkComponent } from '../nested-link/nested-link.component';
+import {
+    NestedListButtonDirective,
+    NestedListExpandIconComponent,
+    NestedListHeaderDirective,
+    NestedListIconComponent,
+    NestedListTitleDirective
+} from '../nested-list-directives';
+import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
 import { NestedListStateService } from '../nested-list-state.service';
-import { CxNestedListModule } from '../nested-list.module';
+import { NestedListComponent } from '../nested-list/nested-list.component';
+import { PreparedNestedListComponent } from '../prepared-nested-list/prepared-nested-list.component';
 import { NestedListContentDirective } from './nested-list-content.directive';
 
 @Component({
@@ -15,7 +31,26 @@ import { NestedListContentDirective } from './nested-list-content.directive';
             </a>
             <a fdx-nested-list-expand-icon></a>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [
+        CommonModule,
+        NestedListComponent,
+        NestedLinkComponent,
+        NestedItemComponent,
+        NestedListIconComponent,
+        NestedListTitleDirective,
+        NestedListHeaderDirective,
+        NestedListPopoverComponent,
+        PreparedNestedListComponent,
+        NestedListExpandIconComponent,
+        NestedListButtonDirective,
+        PopoverModule,
+        RouterModule,
+        IconComponent,
+        ContentDensityModule,
+        NestedListContentDirective
+    ]
 })
 class TestNestedContainerComponent {
     @ViewChild(NestedListContentDirective)
@@ -33,8 +68,7 @@ describe('NestedContentDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent, NoopAnimationsModule],
             providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));

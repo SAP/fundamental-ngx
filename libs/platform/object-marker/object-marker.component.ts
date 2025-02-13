@@ -11,7 +11,6 @@ import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 @Component({
     selector: 'fdp-object-marker',
     templateUrl: './object-marker.component.html',
-    standalone: true,
     imports: [ObjectMarkerComponent]
 })
 export class PlatformObjectMarkerComponent {

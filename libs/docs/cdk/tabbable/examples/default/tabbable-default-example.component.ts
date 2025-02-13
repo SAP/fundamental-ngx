@@ -5,7 +5,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 @Component({
     selector: 'fdk-tabbable-default-example',
     templateUrl: './tabbable-default-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, DisabledBehaviorDirective]
 })
 export class TabbableDefaultExampleComponent {

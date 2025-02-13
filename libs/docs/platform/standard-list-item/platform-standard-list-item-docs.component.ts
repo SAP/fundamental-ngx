@@ -44,7 +44,6 @@ const sli = 'platform-non-byline-standard-list-item-example.component.html';
 @Component({
     selector: 'app-standard-list-item',
     templateUrl: './platform-standard-list-item-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

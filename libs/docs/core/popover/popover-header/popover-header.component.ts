@@ -13,7 +13,6 @@ import {
     selector: 'app-popover-header',
     templateUrl: './popover-header.component.html',
     styleUrls: ['./popover-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

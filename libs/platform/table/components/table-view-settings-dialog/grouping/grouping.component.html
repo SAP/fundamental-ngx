@@ -1,99 +1,57 @@
-<fd-dialog>
-    <fd-dialog-header>
-        <ng-template fdkTemplate="header">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    <h4 fd-title [headerSize]="4">{{ 'platformTable.groupDialogHeader' | fdTranslate }}</h4>
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <fdp-table-reset-button></fdp-table-reset-button>
-                </fd-bar-element>
-            </div>
-        </ng-template>
-    </fd-dialog-header>
+<ul fd-list [selection]="true">
+    <li fd-list-group-header>
+        <span fd-list-title [attr.id]="groupOrderHeaderId">
+            {{ 'platformTable.groupDialogGroupOrderHeader' | fdTranslate }}
+        </span>
+    </li>
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="groupOrderHeaderId">
+        <fd-radio-button
+            name="sort-order"
+            value="asc"
+            state="default"
+            [ngModel]="direction()"
+            (ngModelChange)="_groupOrderChange($event)"
+        ></fd-radio-button>
+        <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderAsc' | fdTranslate }}</span>
+    </li>
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="groupOrderHeaderId">
+        <fd-radio-button
+            name="sort-order"
+            value="desc"
+            state="default"
+            [ngModel]="direction()"
+            (ngModelChange)="_groupOrderChange($event)"
+        ></fd-radio-button>
+        <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderDesc' | fdTranslate }}</span>
+    </li>
+</ul>
 
-    <fd-dialog-body disablePaddings>
-        <ul fd-list [selection]="true">
-            <li fd-list-group-header>
-                <span fd-list-title [attr.id]="groupOrderHeaderId">{{
-                    'platformTable.groupDialogGroupOrderHeader' | fdTranslate
-                }}</span>
-            </li>
-            <li fd-list-item [selected]="direction === SORT_DIRECTION.ASC" [attr.aria-describedby]="groupOrderHeaderId">
-                <fd-radio-button
-                    name="sort-order"
-                    value="asc"
-                    state="default"
-                    [ngModel]="direction"
-                    (ngModelChange)="_groupOrderChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderAsc' | fdTranslate }}</span>
-            </li>
-            <li
-                fd-list-item
-                [selected]="direction === SORT_DIRECTION.DESC"
-                [attr.aria-describedby]="groupOrderHeaderId"
-            >
-                <fd-radio-button
-                    name="sort-order"
-                    value="desc"
-                    state="default"
-                    [ngModel]="direction"
-                    (ngModelChange)="_groupOrderChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderDesc' | fdTranslate }}</span>
-            </li>
-        </ul>
-
-        <ul fd-list [selection]="true">
-            <li fd-list-group-header>
-                <span fd-list-title [attr.id]="groupOrderHeaderId">{{
-                    'platformTable.groupDialogGroupByHeader' | fdTranslate
-                }}</span>
-            </li>
-            <li
-                fd-list-item
-                [selected]="NOT_GROUPED_OPTION_VALUE === field"
-                [attr.aria-describedby]="groupOrderHeaderId"
-            >
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="NOT_GROUPED_OPTION_VALUE"
-                    state="default"
-                    [ngModel]="field"
-                    (ngModelChange)="_groupFieldChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ 'platformTable.groupDialogNotGroupedLabel' | fdTranslate }}</span>
-            </li>
-            @for (column of columns; track column) {
-                <li fd-list-item [selected]="column.key === field" [attr.aria-describedby]="groupOrderHeaderId">
-                    <fd-radio-button
-                        name="sort-by"
-                        [value]="column.key"
-                        state="default"
-                        [ngModel]="field"
-                        (ngModelChange)="_groupFieldChange($event)"
-                    ></fd-radio-button>
-                    <span fd-list-title>{{ column.label }}</span>
-                </li>
-            }
-        </ul>
-    </fd-dialog-body>
-
-    <fd-dialog-footer>
-        <fd-button-bar
-            fdType="emphasized"
-            [label]="'platformTable.groupDialogConfirmBtnLabel' | fdTranslate"
-            (click)="confirm()"
-        >
-        </fd-button-bar>
-        <fd-button-bar
-            [label]="'platformTable.groupDialogCancelBtnLabel' | fdTranslate"
-            fdkInitialFocus
-            (click)="cancel()"
-        >
-        </fd-button-bar>
-    </fd-dialog-footer>
-</fd-dialog>
+<ul fd-list [selection]="true">
+    <li fd-list-group-header>
+        <span fd-list-title [attr.id]="groupOrderHeaderId">
+            {{ 'platformTable.groupDialogGroupByHeader' | fdTranslate }}
+        </span>
+    </li>
+    <li fd-list-item [selected]="NOT_GROUPED_OPTION_VALUE === field()" [attr.aria-describedby]="groupOrderHeaderId">
+        <fd-radio-button
+            name="sort-by"
+            [value]="NOT_GROUPED_OPTION_VALUE"
+            state="default"
+            [ngModel]="field()"
+            (ngModelChange)="_groupFieldChange($event)"
+        ></fd-radio-button>
+        <span fd-list-title>{{ 'platformTable.groupDialogNotGroupedLabel' | fdTranslate }}</span>
+    </li>
+    @for (column of columns(); track column) {
+        <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="groupOrderHeaderId">
+            <fd-radio-button
+                name="sort-by"
+                [value]="column.key"
+                state="default"
+                [ngModel]="field()"
+                (ngModelChange)="_groupFieldChange($event)"
+            ></fd-radio-button>
+            <span fd-list-title>{{ column.label }}</span>
+        </li>
+    }
+</ul>

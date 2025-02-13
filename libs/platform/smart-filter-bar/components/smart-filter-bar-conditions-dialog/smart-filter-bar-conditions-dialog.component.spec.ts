@@ -118,6 +118,6 @@ describe('SmartFilterBarConditionsDialogComponent', () => {
 
         expect(spy).toHaveBeenCalled();
         expect(dialogSpy).toHaveBeenCalledTimes(1);
-        expect(dialogSpy).toHaveBeenLastCalledWith(formValue);
+        expect(dialogSpy).toHaveBeenCalledWith(formValue);
     });
 });

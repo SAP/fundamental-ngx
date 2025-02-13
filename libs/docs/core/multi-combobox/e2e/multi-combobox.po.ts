@@ -16,7 +16,7 @@ export class MultiComboboxPo extends CoreBaseComponentPo {
     listItem = this.list + ' li.fd-list__item[role="option"]';
     selectedListItem = `${this.list} .fd-list__item.is-selected .fd-list__title`;
 
-    dialog = '[role="dialog"]';
+    dialog = '.fd-dialog';
     dialogButton = this.dialog + ' .fd-button';
     dialogListItem = this.dialog + ' .fd-list__item[role="option"]';
     selectedDialogItem = this.dialog + ' .fd-list__item.is-selected .fd-list__title';

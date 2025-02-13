@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-dynamic-page-header',
     templateUrl: './dynamic-page-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class DynamicPageDocsHeaderComponent {}

@@ -30,11 +30,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     CalendarComponent,
-    CalendarDayViewComponent,
     CalendarType,
     CalendarTypeEnum,
     CalendarYearGrid,
@@ -51,7 +50,7 @@ import {
     PopoverFormMessageService,
     registerFormItemControl
 } from '@fundamental-ngx/core/form';
-import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
@@ -106,18 +105,19 @@ let datePickerCounter = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverModule,
         FormMessageComponent,
-        InputGroupModule,
+        InputGroupComponent,
+        InputGroupInputDirective,
         FormsModule,
         CalendarComponent,
-        BarModule,
+        BarComponent,
+        BarRightDirective,
+        BarElementDirective,
         ButtonComponent,
-        FdTranslatePipe,
-        CalendarDayViewComponent
+        FdTranslatePipe
     ]
 })
 export class DatePickerComponent<D>

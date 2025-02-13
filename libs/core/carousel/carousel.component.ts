@@ -71,7 +71,6 @@ class CarouselActiveSlides {
     host: {
         '[style.width]': 'width'
     },
-    standalone: true,
     imports: [NgTemplateOutlet, NgClass, ButtonComponent, FdTranslatePipe]
 })
 export class CarouselComponent implements AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges {
@@ -374,7 +373,6 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
 
     /** @hidden */
     get screenReaderLabel(): string {
-        // eslint-disable-next-line max-len
         return `${this.resourceStrings.fd_carousel_reader} ${this.currentActiveSlidesStartIndex + 1} ${
             this.resourceStrings.fd_carousel_of
         } ${this.pageIndicatorsCountArray.length}`;

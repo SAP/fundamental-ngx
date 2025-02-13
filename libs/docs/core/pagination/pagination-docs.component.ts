@@ -30,7 +30,6 @@ const paginationMobileTs = 'pagination-mobile/pagination-mobile-example.componen
 @Component({
     selector: 'app-pagination',
     templateUrl: './pagination-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

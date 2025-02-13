@@ -14,7 +14,6 @@ import { MomentDatetimeFormatsExampleComponent } from './examples/moment-datetim
 @Component({
     selector: 'app-moment-datetime-adapter',
     templateUrl: './moment-datetime-adapter-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

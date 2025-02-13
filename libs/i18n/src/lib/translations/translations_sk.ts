@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Obdobie',
         decreasePeriodLabel: 'Zníženie - obdobie',
         navigationInstruction:
-            'Ak sa chcete presúvať medzi položkami v tomto zozname, stlačte šípku hore alebo šípku dole. Ak chcete prepínať medzi zoznamami, stlačte šípku doľava alebo šípku doprava.'
+            'Ak sa chcete presúvať medzi položkami v tomto zozname, stlačte šípku hore alebo šípku dole. Ak chcete prepínať medzi zoznamami, stlačte šípku doľava alebo šípku doprava.',
+        nightLabel: 'v noci',
+        morningLabel: 'ráno',
+        afternoonLabel: 'poobede',
+        eveningLabel: 'večer'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zadanie pre výber času',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Sprievodca'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Ďalšie'
+        overflowTitleMore: 'Ďalšie',
+        breadcrumbTrailLabel: 'Navigačná cesta'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Pozorovatelia',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stĺpce',
         toolbarActionExpandAllButtonTitle: 'Rozbaliť všetko',
         toolbarActionCollapseAllButtonTitle: 'Zbaliť všetko',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Prejsť späť',
         filterDialogNotFilteredLabel: '(nefiltrované)',
         filterDialogFilterByLabel: 'Filtrovať podľa: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Zrušiť',
         selectAllCheckboxLabel: 'Vybrať všetko',
         deselectAllCheckboxLabel: 'Zrušiť výber všetkého',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Pre zrušenie výberu stlačte MEDZERNÍK',
         selectSingleRow: 'Ak chcete vybrať riadok, stlačte MEDZERNÍK',
-        loadMore: 'Načítať ďalšie'
+        loadMore: 'Načítať ďalšie',
+        filteredBy: 'Filtrované podľa',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upraviť'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Tlačidlo ponuky'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Rozbaliť/zbaliť',
+        groupAriaDescription: 'Skupina oznámení',
+        groupAriaDescriptionExpanded: 'rozbalené',
+        groupAriaDescriptionCollapsed: 'zbalené'
     }
 };

@@ -67,7 +67,6 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
             }
         })
     ],
-    standalone: true,
     imports: [
         ButtonComponent,
         TokenComponent,

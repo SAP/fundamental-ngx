@@ -1,52 +1,19 @@
-<fd-dialog>
-    <fd-dialog-header>
-        <ng-template fdkTemplate="header">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    @if (activeFilterStepView?.titleTemplateRef) {
-                        <ng-container [ngTemplateOutlet]="activeFilterStepView.titleTemplateRef"></ng-container>
-                    }
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <fdp-table-reset-button></fdp-table-reset-button>
-                </fd-bar-element>
-            </div>
-        </ng-template>
-    </fd-dialog-header>
-    <fd-dialog-body disablePaddings>
-        @if (activeFilterStepView?.bodyTemplateRef) {
-            <ng-container [ngTemplateOutlet]="activeFilterStepView.bodyTemplateRef"></ng-container>
-        }
-    </fd-dialog-body>
-    <fd-dialog-footer>
-        <fd-button-bar
-            fdType="emphasized"
-            [label]="'platformTable.filterDialogConfirmBtnLabel' | fdTranslate"
-            (click)="confirm()"
-        >
-        </fd-button-bar>
-        <fd-button-bar
-            [label]="'platformTable.filterDialogCancelBtnLabel' | fdTranslate"
-            fdkInitialFocus
-            (click)="cancel()"
-        >
-        </fd-button-bar>
-    </fd-dialog-footer>
-</fd-dialog>
+@if (activeFilterStepView()?.bodyTemplateRef) {
+    <ng-container [ngTemplateOutlet]="activeFilterStepView()?.bodyTemplateRef ?? null"></ng-container>
+}
 <!-- Keep active step component  -->
-@if (activeStep === ACTIVE_STEP.SELECT_FILTER) {
+@if (activeStep() === ACTIVE_STEP.SELECT_FILTER) {
     <fdp-filters-list-step
-        [filters]="viewSettingsFilters"
+        [filters]="viewSettingsFilters()"
         (selectFilter)="selectFilter($event)"
     ></fdp-filters-list-step>
-} @else if (activeStep === ACTIVE_STEP.FILTER) {
+} @else if (activeStep() === ACTIVE_STEP.FILTER) {
     <fdp-filter-step
-        [columnKey]="activeFilterColumnKey!"
-        [filter]="activeFilter!"
-        [filterBy]="filterBy"
+        [columnKey]="activeFilterColumnKey()!"
+        [columnName]="activeFilter()!.label"
+        [filter]="activeFilter()!"
+        [filterBy]="filterBy()"
         (back)="goToFilters()"
-        (valueChange)="applyFilter($event, activeFilter!)"
+        (valueChange)="applyFilter($event, activeFilter())"
     ></fdp-filter-step>
 }

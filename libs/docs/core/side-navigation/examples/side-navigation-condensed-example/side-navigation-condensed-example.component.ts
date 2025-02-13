@@ -5,7 +5,6 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 @Component({
     selector: 'fd-side-navigation-condensed-example,',
     templateUrl: 'side-navigation-condensed-example.component.html',
-    standalone: true,
     imports: [SideNavigationModule, NestedListModule]
 })
 export class SideNavigationCondensedExampleComponent {}

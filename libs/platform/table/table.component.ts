@@ -215,7 +215,7 @@ let tableUniqueId = 0;
         {
             directive: TableDataSourceDirective,
             inputs: ['dataSource', 'childDataSource'],
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+
             outputs: [
                 'childDataSourceChanged',
                 // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -236,7 +236,6 @@ let tableUniqueId = 0;
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
         '[class.fd-table--group]': '_isGroupTable$()'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         BusyIndicatorComponent,
@@ -561,6 +560,7 @@ export class TableComponent<T = any>
     readonly save = new EventEmitter<SaveRowsEvent<T>>();
     /** Event fired when cancel button pressed. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly cancel = new EventEmitter<void>();
     /** Event emitted when table body being scrolled. */
     @Output()
@@ -610,6 +610,9 @@ export class TableComponent<T = any>
 
     /** Total loaded items. */
     loadedRows$ = signal(0);
+
+    /** @hidden */
+    hoveredRowIndex$ = signal<Nullable<number>>(null);
 
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
@@ -815,6 +818,9 @@ export class TableComponent<T = any>
     private _appliedFilterNames = signal<TableAppliedFilter[]>([]);
     /** @hidden */
     private readonly _isShownColumnSettingsInToolbar$ = signal(false);
+    /** @hidden */
+    private readonly _isShownSettingsInToolbar$ = signal(false);
+
     /**
      * @hidden
      * Indicates when all items are checked
@@ -884,12 +890,14 @@ export class TableComponent<T = any>
             filterable: this._isShownFilterSettingsInToolbar$,
             groupable: this._isShownGroupSettingsInToolbar$,
             columns: this._isShownColumnSettingsInToolbar$,
+            settings: this._isShownSettingsInToolbar$,
             hasAnyActions: computed(
                 () =>
                     this._isShownSortSettingsInToolbar$() ||
                     this._isShownFilterSettingsInToolbar$() ||
                     this._isShownGroupSettingsInToolbar$() ||
-                    this._isShownColumnSettingsInToolbar$()
+                    this._isShownColumnSettingsInToolbar$() ||
+                    this._isShownSettingsInToolbar$()
             ),
             appliedFilters: this._appliedFilterNames
         };
@@ -1210,6 +1218,11 @@ export class TableComponent<T = any>
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
         this._isShownColumnSettingsInToolbar$.set(showColumnSettings);
+    }
+
+    /** Toolbar Settings button visibility */
+    showSettingsInToolbar(showSettings: boolean): void {
+        this._isShownSettingsInToolbar$.set(showSettings);
     }
 
     /** Disable filter from column heder menu */
@@ -1710,6 +1723,16 @@ export class TableComponent<T = any>
         });
     }
 
+    /** @hidden */
+    handleMouseEnter(rowIndex: number): void {
+        this.hoveredRowIndex$.set(rowIndex);
+    }
+
+    /** @hidden */
+    handleMouseLeave(): void {
+        this.hoveredRowIndex$.set(null);
+    }
+
     /** Manually update index after we add new items to the main array */
     private _reIndexTableRows(): void {
         this._tableRows.map((row, index) => (row.index = index));
@@ -1862,7 +1885,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private _setAppliedFilterNames(filters: CollectionFilter[]): void {
         const formattedFilters = filters.map((f) => ({
-            columnName: this._formatColumnName(f.field),
+            columnName: this._formatColumnName(f.fieldName || ''),
+
             params: this._formatParams(f.value)
         }));
 
@@ -1873,6 +1897,11 @@ export class TableComponent<T = any>
     private _formatParams(value: any): string {
         if (typeof value !== 'object' || value === null) {
             return String(value); // Handle non-object values
+        }
+
+        // handle array
+        if (Array.isArray(value)) {
+            return value.map((val) => this._formatParams(val)).join(', ');
         }
 
         return Object.entries(value)

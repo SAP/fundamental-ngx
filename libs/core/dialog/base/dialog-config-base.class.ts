@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-
 import { DynamicComponentConfig, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';

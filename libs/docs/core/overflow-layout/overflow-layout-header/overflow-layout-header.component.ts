@@ -11,7 +11,6 @@ import {
     selector: 'app-overflow-layout-header',
     templateUrl: './overflow-layout-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })
 export class OverflowLayoutHeaderComponent {}

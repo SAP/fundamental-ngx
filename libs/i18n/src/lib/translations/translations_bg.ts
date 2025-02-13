@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Период',
         decreasePeriodLabel: 'Намаляване на периода',
         navigationInstruction:
-            'За да се движите между позициите в този списък, натиснете стрелките нагоре или надолу. За да превключвате между списъците, натиснете стрелките наляво или надясно.'
+            'За да се движите между позициите в този списък, натиснете стрелките нагоре или надолу. За да превключвате между списъците, натиснете стрелките наляво или надясно.',
+        nightLabel: 'през нощта',
+        morningLabel: 'сутринта',
+        afternoonLabel: 'следобед',
+        eveningLabel: 'вечерта'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Въвеждане на средство за избор на време',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Асистент'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Повече'
+        overflowTitleMore: 'Повече',
+        breadcrumbTrailLabel: 'Навигационен път'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Колони',
         toolbarActionExpandAllButtonTitle: 'Разгръщане на всички',
         toolbarActionCollapseAllButtonTitle: 'Свиване на всички',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Назад',
         filterDialogNotFilteredLabel: '(Без филтриране)',
         filterDialogFilterByLabel: 'Филтриране по: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Отказ',
         selectAllCheckboxLabel: 'Избиране на всички',
         deselectAllCheckboxLabel: 'Отмяна на избора на всички',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'За премахване на ред от избраните, натиснете ИНТЕРВАЛ',
         selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
-        loadMore: 'Зареждане на повече'
+        loadMore: 'Зареждане на повече',
+        filteredBy: 'Филтрирано по',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактиране'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Бутон за меню'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Разгъване/свиване',
+        groupAriaDescription: 'Група за известия',
+        groupAriaDescriptionExpanded: 'разгърнато',
+        groupAriaDescriptionCollapsed: 'свито'
     }
 };

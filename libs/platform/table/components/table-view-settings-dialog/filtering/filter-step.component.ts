@@ -36,7 +36,6 @@ import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step'
     encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
     providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FilterStepComponent) }],
-    standalone: true,
     imports: [
         ButtonComponent,
         TitleComponent,
@@ -65,6 +64,10 @@ export class FilterStepComponent implements FiltersViewStep {
         this._filterBy = filterByList.find(({ field }) => field === this.columnKey);
     }
 
+    /** Column name to display in the filter */
+    @Input()
+    columnName: string;
+
     /** Go back event */
     @Output()
     back: EventEmitter<void> = new EventEmitter<void>();
@@ -92,6 +95,7 @@ export class FilterStepComponent implements FiltersViewStep {
         const filterBy: CollectionFilter = this._filterBy || {
             field: this.columnKey,
             value: null,
+            fieldName: this.columnName,
             strategy: FILTER_STRATEGY.EQ,
             exclude: false
         };

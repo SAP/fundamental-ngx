@@ -1,24 +1,23 @@
-import { ChangeDetectionStrategy, Component, forwardRef, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit, output, signal, ViewEncapsulation } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
 
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-
-import { CdkScrollable } from '@angular/cdk/overlay';
-
-import { FormsModule } from '@angular/forms';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import {
-    BarElementDirective,
-    BarLeftDirective,
-    BarRightDirective,
-    ButtonBarComponent
-} from '@fundamental-ngx/core/bar';
 import {
     DialogBodyComponent,
     DialogComponent,
     DialogFooterComponent,
     DialogHeaderComponent
 } from '@fundamental-ngx/core/dialog';
+
+import { CdkScrollable } from '@angular/cdk/overlay';
+
+import { FormsModule } from '@angular/forms';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
 import {
     ListComponent,
     ListGroupHeaderDirective,
@@ -29,38 +28,24 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { CollectionSort, SortDirection, Table, TableDialogCommonData } from '@fundamental-ngx/platform/table-helpers';
-import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-
-export interface SettingsSortDialogColumn {
-    label: string;
-    key: string;
-}
-
-export interface SettingsSortDialogData extends TableDialogCommonData {
-    direction: SortDirection;
-    field: string | null;
-    columns: SettingsSortDialogColumn[];
-    allowDisablingSorting: boolean;
-}
-
-export interface SettingsSortDialogResultData {
-    field: string | null;
-    direction: SortDirection;
-}
-
-const NOT_SORTED_OPTION_VALUE = null;
-const INITIAL_DIRECTION = SortDirection.ASC;
+import { CollectionSort, SortDirection } from '@fundamental-ngx/platform/table-helpers';
+import { ResetButtonComponent } from '../../reset-button/reset-button.component';
+import {
+    INITIAL_DIRECTION,
+    NOT_SORTED_OPTION_VALUE,
+    SettingsSortDialogColumn,
+    SettingsSortDialogData,
+    SettingsSortDialogResultData
+} from '../table-view-settings.model';
 
 let sortOrderHeaderUniqueId = 0;
 let sortDialogSortByHeaderUniqueId = 0;
 
 @Component({
+    selector: 'fdp-sorting',
     templateUrl: './sorting.component.html',
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,
@@ -84,15 +69,30 @@ let sortDialogSortByHeaderUniqueId = 0;
         FdTranslatePipe
     ]
 })
-export class SortingComponent implements Resettable {
-    /** Current selected direction */
-    direction: SortDirection;
+export class SortingComponent implements OnInit {
+    /** Input data for sorting */
+    sortingData = input<SettingsSortDialogData>();
 
-    /** Current selected field */
-    field: string | null;
+    /** @hidden Initial sorting state */
+    initialSorting = input<Nullable<CollectionSort>>();
 
-    /** Whether to allow selecting '(Not sorted)' option in sorting dialog. */
-    allowDisablingSorting: boolean;
+    /** Event emitter for sort changes */
+    sortChange = output<SettingsSortDialogResultData>();
+
+    /** Event emitter for reset availability changes */
+    resetAvailabilityChange = output<boolean>();
+
+    /** Current selected sorting direction */
+    direction = signal<SortDirection>(INITIAL_DIRECTION);
+
+    /** Current selected sorting field */
+    field = signal<string | null>(NOT_SORTED_OPTION_VALUE);
+
+    /** Whether disabling sorting is allowed */
+    allowDisablingSorting = signal<boolean>(false);
+
+    /** Available table columns for sorting */
+    columns = signal<SettingsSortDialogColumn[]>([]);
 
     /** @hidden */
     sortOrderHeaderId = `fdp-table-sort-order-header-${sortOrderHeaderUniqueId++}`;
@@ -100,104 +100,81 @@ export class SortingComponent implements Resettable {
     /** @hidden */
     sortDialogSortByHeaderId = `fdp-table-sort-dialog-sort-by-header-${sortDialogSortByHeaderUniqueId++}`;
 
-    /** Table columns */
-    readonly columns: SettingsSortDialogColumn[] = [];
-
-    /** Indicates when reset command is available */
-    readonly isResetAvailable$ = signal(false);
-
-    /** @hidden */
+    /** @hidden Constants for sort direction */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
+    /** @hidden Constant for 'Not sorted' option value */
     readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
-    /** @hidden */
-    private _initialSorting: CollectionSort;
-
-    /** @hidden */
-    constructor(
-        public dialogRef: DialogRef<SettingsSortDialogData>,
-        private _table: Table
-    ) {
-        const data = this.dialogRef.data;
-
-        this.columns = data.columns || [];
-
-        this.direction = data.direction ?? INITIAL_DIRECTION;
-        this.field = data.field ?? NOT_SORTED_OPTION_VALUE;
-        this.allowDisablingSorting = data.allowDisablingSorting;
-
-        this._setInitialSorting();
+    /** hidden */
+    ngOnInit(): void {
+        const sortingData = this.sortingData();
+        if (sortingData) {
+            this._initSortingData(sortingData);
+        }
 
         this._compareInitialSorting();
     }
 
-    /** Reset changes to the initial state */
-    reset(): void {
-        this.direction = this._initialSorting.direction;
-        this.field = this._initialSorting.field;
-        this.isResetAvailable$.set(false);
-    }
-
-    /** Close dialog */
-    cancel(): void {
-        this.dialogRef.close(null);
-    }
-
-    /** Confirm changes and close dialog */
-    confirm(): void {
-        const result: SettingsSortDialogResultData = { direction: this.direction, field: this.field };
-        this.dialogRef.close(result);
-    }
-
-    /** @hidden */
-    _sortDirectionChange(direction: SortDirection): void {
-        this.direction = direction;
-        this._onModelChange();
-    }
-
-    /** @hidden */
-    _sortFieldChange(field: string): void {
-        this.field = field;
-        this._onModelChange();
-    }
-
-    /** @hidden */
-    _onModelChange(): void {
-        // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
-        const isInitialDiffers =
-            this.direction !== this._initialSorting.direction || this.field !== this._initialSorting.field;
-        this.isResetAvailable$.set(isInitialDiffers);
-    }
-
     /**
-     * @hidden
-     * Since view settings dialog supports only one sorting, get the first one if available.
+     * Handle sort direction changes.
+     * @param direction New sorting direction.
      */
-    private _setInitialSorting(): void {
-        const initialSorting = (this._table.initialState?.initialSortBy || [])[0];
-
-        this._initialSorting = {
-            field: initialSorting?.field ?? NOT_SORTED_OPTION_VALUE,
-            direction: initialSorting?.direction ?? INITIAL_DIRECTION
-        };
+    _sortDirectionChange(direction: SortDirection): void {
+        this.direction.set(direction);
+        this._onModelChange();
     }
 
     /**
+     * Handle sort field changes.
+     * @param field New sorting field.
+     */
+    _sortFieldChange(field: string): void {
+        this.field.set(field);
+        this._onModelChange();
+    }
+
+    /**
+     * Initialize sorting data and signals.
+     * @param sortingData Input sorting data.
      * @hidden
-     * Compare initial sorting with selected one and set reset button if needed.
+     */
+    private _initSortingData(sortingData: SettingsSortDialogData): void {
+        this.columns.set(sortingData.columns || []);
+        this.direction.set(sortingData.direction ?? INITIAL_DIRECTION);
+        this.field.set(sortingData.field ?? NOT_SORTED_OPTION_VALUE);
+        this.allowDisablingSorting.set(sortingData.allowDisablingSorting);
+    }
+
+    /**
+     * Emit changes to the model and compare with initial sorting.
+     * @hidden
+     */
+    private _onModelChange(): void {
+        const initialSorting = this.initialSorting();
+        if (!initialSorting) {
+            return;
+        }
+        const isInitialDiffers = this.direction() !== initialSorting.direction || this.field() !== initialSorting.field;
+
+        this.resetAvailabilityChange.emit(isInitialDiffers);
+        this.sortChange.emit({ direction: this.direction(), field: this.field() });
+    }
+
+    /**
+     * Compare the current sorting state with the initial state.
+     * Emit reset availability if the sorting has changed.
+     * @hidden
      */
     private _compareInitialSorting(): void {
         const appliedSorting: CollectionSort = {
-            field: this.field,
-            direction: this.direction
+            field: this.field(),
+            direction: this.direction()
         };
 
-        if (equal(this._initialSorting, appliedSorting)) {
-            return;
+        const isEqual = equal(this.initialSorting(), appliedSorting);
+        if (!isEqual) {
+            this.resetAvailabilityChange.emit(true);
         }
-
-        this.isResetAvailable$.set(true);
     }
 }

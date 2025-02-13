@@ -63,8 +63,7 @@ import {
         ButtonComponent,
         AvatarComponent,
         MenuTriggerDirective
-    ],
-    standalone: true
+    ]
 })
 export class CustomUserMenuExampleComponent {
     settingsCallback($event: MouseEvent): void {

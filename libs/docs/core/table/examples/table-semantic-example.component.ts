@@ -8,7 +8,6 @@ import { TableModule, TableStatuses } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-table-semantic-example',
     templateUrl: './table-semantic-example.component.html',
-    standalone: true,
     imports: [FocusableGridDirective, TableModule, CheckboxComponent, FormsModule, LinkComponent]
 })
 export class TableSemanticExampleComponent {

@@ -1,8 +1,21 @@
+import { DragDrop, DragDropModule, DragRef } from '@angular/cdk/drag-drop';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { Component, ViewChild } from '@angular/core';
 import { DndItemDirective } from './dnd-item.directive';
+
+// Mocking DragDrop to avoid actual DragDrop logic in tests
+class MockDragDrop {
+    createDrag(): DragRef {
+        return {
+            moved: { subscribe: jest.fn() } as any,
+            released: { subscribe: jest.fn() } as any,
+            started: { subscribe: jest.fn() } as any,
+            disabled: false,
+            dispose: jest.fn(),
+            reset: jest.fn()
+        } as unknown as DragRef;
+    }
+}
 
 @Component({
     template: `
@@ -13,7 +26,9 @@ import { DndItemDirective } from './dnd-item.directive';
                 </div>
             </div>
         </span>
-    `
+    `,
+    standalone: true,
+    imports: [DragDropModule, DndItemDirective]
 })
 class TestDndContainerComponent {
     @ViewChild('directiveElement', { static: true, read: DndItemDirective })
@@ -27,8 +42,11 @@ describe('DndItemDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DragDropModule],
-            declarations: [TestDndContainerComponent, DndItemDirective]
+            providers: [
+                Renderer2,
+                { provide: DragDrop, useClass: MockDragDrop } // Use mock DragDrop
+            ],
+            imports: [TestDndContainerComponent] // Import the standalone TestDndContainerComponent
         }).compileComponents();
     }));
 
@@ -41,40 +59,93 @@ describe('DndItemDirective', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+        expect(directive).toBeTruthy();
     });
 
-    it('should react to start drag', () => {
+    it('should apply the default class when applyDragItemClass is true', () => {
+        directive.applyDragItemClass = true;
+        fixture.detectChanges();
+        const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');
+        expect(element.classList).toContain('fd-dnd-item');
+    });
+
+    it('should not apply the default class when applyDragItemClass is false', () => {
+        directive.applyDragItemClass = false;
+        fixture.detectChanges();
+        const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');
+        expect(element.classList).not.toContain('fd-dnd-item');
+    });
+
+    it('should create proper placeholder and emit started event on drag start', () => {
         const spy = jest.spyOn(directive.started, 'emit');
-        expect((directive as any)._placeholderElement).toBeFalsy();
+        expect(directive['_placeholderElement']).toBeFalsy();
         directive.onCdkDragStart();
-        expect((directive as any)._placeholderElement).not.toBeFalsy();
+        expect(directive['_placeholderElement']).not.toBeFalsy();
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should react to drag release', () => {
+    it('should remove placeholder and emit released event on drag release', () => {
         const spy = jest.spyOn(directive.released, 'emit');
-        (directive as any)._placeholderElement = document.createElement('div');
-        directive.elementRef.nativeElement.appendChild((directive as any)._placeholderElement);
+        directive['_placeholderElement'] = document.createElement('div');
+        directive.elementRef.nativeElement.appendChild(directive['_placeholderElement']);
         directive.onCdkDragReleased();
-        expect((directive as any)._placeholderElement).toBeFalsy();
+        expect(directive['_placeholderElement']).toBeFalsy();
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should create proper horizontal line', () => {
-        directive.createLine('before', false);
-        expect((directive as any)._lineElement).not.toBeFalsy();
-        const classes: string[] = (directive as any)._lineElement.classList;
-        expect(classes).toContain('drop-area__line');
-        expect(classes).toContain('drop-area__line--horizontal');
-        expect(classes).toContain('before');
+    it('should emit moved event on CdkMove', () => {
+        const spy = jest.spyOn(directive.moved, 'emit');
+        const mockPosition = { x: 100, y: 100 };
+        directive.onCdkMove(mockPosition);
+        expect(spy).toHaveBeenCalledWith(mockPosition);
     });
 
-    it('should create proper vertical line', () => {
+    it('should create a proper horizontal line', () => {
+        directive.createLine('before', false);
+        expect(directive['_lineElement']).not.toBeFalsy();
+
+        if (directive['_lineElement']) {
+            const classes: string[] = Array.from(directive['_lineElement'].classList); // Convert DOMTokenList to string[]
+            expect(classes).toContain('drop-area__line');
+            expect(classes).toContain('drop-area__line--horizontal');
+            expect(classes).toContain('before');
+        }
+    });
+
+    it('should create a proper vertical line', () => {
         directive.createLine('before', true);
-        expect((directive as any)._lineElement).not.toBeFalsy();
-        const classes: string[] = (directive as any)._lineElement.classList;
-        expect(classes).toContain('drop-area__line');
-        expect(classes).toContain('drop-area__line--vertical');
-        expect(classes).toContain('before');
+        expect(directive['_lineElement']).not.toBeFalsy();
+
+        if (directive['_lineElement']) {
+            const classes: string[] = Array.from(directive['_lineElement'].classList); // Convert DOMTokenList to string[]
+            expect(classes).toContain('drop-area__line');
+            expect(classes).toContain('drop-area__line--vertical');
+            expect(classes).toContain('before');
+        }
+    });
+
+    it('should set the draggable state correctly', () => {
+        directive.draggable = false;
+        expect(directive['_dragRef'].disabled).toBe(true);
+        directive.draggable = true;
+        expect(directive['_dragRef'].disabled).toBe(false);
+    });
+
+    it('should set the disabled state correctly', () => {
+        directive.setDisabledState(true);
+        const element = fixture.debugElement.nativeElement.querySelector('[fd-dnd-item]');
+        expect(element.classList).toContain('fd-dnd-item--disabled');
+        directive.setDisabledState(false);
+        expect(element.classList).not.toContain('fd-dnd-item--disabled');
+    });
+
+    it('should clean up correctly on destroy', () => {
+        const unsubscribeSpy = jest.spyOn(directive['_subscriptions'], 'unsubscribe');
+        const disposeSpy = jest.spyOn(directive['_dragRef'], 'dispose');
+
+        fixture.destroy();
+
+        expect(unsubscribeSpy).toHaveBeenCalled();
+        expect(disposeSpy).toHaveBeenCalled();
     });
 });

@@ -32,7 +32,6 @@ const platformObjectMarkerTextOnlyExampleTs =
 @Component({
     selector: 'fdp-platform-object-marker',
     templateUrl: './platform-object-marker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

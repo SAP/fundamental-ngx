@@ -1,6 +1,7 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -44,7 +45,6 @@ let uniqueId = 0;
     host: {
         '(focusout)': 'onTouched()'
     },
-    standalone: true,
     imports: [FormsModule]
 })
 export class RadioButtonComponent<T = any>
@@ -96,6 +96,10 @@ export class RadioButtonComponent<T = any>
     @Input()
     disabled = false;
 
+    /** The field is used to tell if radio button should be read only */
+    @Input()
+    readOnly = false;
+
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
      * The field is mandatory when working with reactive forms
@@ -131,6 +135,12 @@ export class RadioButtonComponent<T = any>
     /** Whether the control is a standalone. */
     @Input()
     standalone = false;
+
+    /** Whether input label should be wrapped */
+    @Input({ transform: booleanAttribute }) wrapLabel: boolean;
+
+    /** Vertical position of the label compared to the radio button */
+    @Input() valignLabel: 'top' | 'middle' = 'middle';
 
     /** Whether the radio button is checked. */
     get checked(): boolean {
@@ -204,6 +214,12 @@ export class RadioButtonComponent<T = any>
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectionRef.detectChanges();
+    }
+
+    /** @hidden */
+    setReadonlyState(isReadonly: boolean): void {
+        this.readOnly = isReadonly;
         this.changeDetectionRef.detectChanges();
     }
 

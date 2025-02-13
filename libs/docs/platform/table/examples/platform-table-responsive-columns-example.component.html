@@ -6,10 +6,12 @@
     <button fd-button label="Full width" value="100%"></button>
 </fd-segmented-button>
 <fdp-table
+    (rowNavigate)="handleNavigate()"
     #table
     [style.width]="tableWidth"
     [dataSource]="source"
     [trackBy]="trackBy"
+    [rowNavigatable]="true"
     selectionMode="multiple"
     [rowsActivable]="true"
     emptyTableMessage="No data found"

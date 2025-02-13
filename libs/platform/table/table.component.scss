@@ -1,5 +1,5 @@
 @use '@angular/cdk';
-@import 'fundamental-styles/dist/scrollbar';
+@import 'fundamental-styles/dist/scrollbar.css';
 
 @include cdk.a11y-visually-hidden();
 
@@ -132,6 +132,12 @@ fdk-dynamic-portal {
                 margin-left: 0;
                 margin-right: 0.5rem;
             }
+        }
+    }
+
+    .fdp-table__applied-filters-toolbar {
+        label {
+            flex-shrink: 1;
         }
     }
 
@@ -499,6 +505,10 @@ fdk-dynamic-portal {
                         white-space: nowrap !important;
                     }
                 }
+
+                &:hover {
+                    background-color: var(--sapList_Hover_Background);
+                }
             }
 
             .#{$block} {
@@ -555,6 +565,14 @@ fdk-dynamic-portal {
                 flex-direction: column;
                 width: 100%;
             }
+        }
+    }
+
+    &__growing-button-total {
+        border-top: var(--fdList_Item_Action_Border) !important;
+
+        .fd-list__title {
+            line-height: 2.75rem;
         }
     }
 
@@ -647,4 +665,8 @@ fdk-dynamic-portal {
 
 th.fd-table__cell .fd-table__inner {
     font-weight: 700;
+}
+
+.fd-tr-hovered {
+    background-color: var(--sapList_Hover_Background) !important;
 }

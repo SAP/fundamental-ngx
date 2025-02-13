@@ -41,7 +41,9 @@ import { DndKeyboardGroupDirective } from '../dnd-keyboard-group/dnd-keyboard-gr
  *      ];
  *   }
  */
-@Directive({ selector: '[fdkDndKeyboardItem], [fdDndKeyboardItem]' })
+@Directive({
+    selector: '[fdkDndKeyboardItem], [fdDndKeyboardItem]'
+})
 export class DndKeyboardItemDirective implements OnInit, OnDestroy {
     /** item index in group(column) */
     @Input()

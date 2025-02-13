@@ -105,7 +105,6 @@ function rankTransformer(v: string | number): number {
     styleUrl: './form-field.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
-    standalone: true,
     imports: [
         CommonModule,
         FormItemComponent,
@@ -881,7 +880,7 @@ export class FormFieldComponent
             this._mdColumnNumber = normalized['M'];
             this._lgColumnNumber = normalized['L'];
             this._xlColumnNumber = normalized['XL'];
-        } catch (error) {
+        } catch {
             this._isColumnLayoutEnabled = false;
         }
     }

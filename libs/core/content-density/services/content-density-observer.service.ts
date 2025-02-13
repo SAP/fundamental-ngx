@@ -190,7 +190,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
                                 );
                             }
                             return this._alternativeTo[density]();
-                        } catch (e) {
+                        } catch {
                             throw new Error(`ContentDensityObserver: density ${density} is not supported`);
                         }
                     }
@@ -252,7 +252,10 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
             if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
                 return;
             }
-
+            const modifierClass = modifiers[this.value];
+            if (modifierClass) {
+                this._renderer?.addClass(element?.nativeElement, modifierClass);
+            }
             this._renderer?.addClass(element?.nativeElement, modifiers[this.value]!);
         });
     }

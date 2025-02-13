@@ -5,7 +5,6 @@ import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.com
 @Component({
     selector: 'fd-layout-grid-growing-example',
     templateUrl: './layout-grid-growing-example.component.html',
-    standalone: true,
     imports: [LayoutGridModule, ExampleLayoutGridBlockComponent]
 })
 export class LayoutGridGrowingExampleComponent {}

@@ -92,7 +92,6 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
 @Component({
     selector: 'app-dialog',
     templateUrl: './dialog-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

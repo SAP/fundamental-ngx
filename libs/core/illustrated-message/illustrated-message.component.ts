@@ -12,19 +12,21 @@ import {
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CssClassBuilder, Nullable, RequireOnlyOne, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { Subscription, debounceTime, fromEvent } from 'rxjs';
 
 export interface SvgConfig {
-    scene?: RequireOnlyOne<SvgItemConfig, 'url'>;
-    dialog?: RequireOnlyOne<SvgItemConfig, 'url'>;
-    spot?: RequireOnlyOne<SvgItemConfig, 'url'>;
-    dot?: RequireOnlyOne<SvgItemConfig, 'url'>;
+    scene?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    dialog?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    spot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    dot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
 }
 
 export interface SvgItemConfig {
     url: string;
     id: string;
+    file: string;
 }
 
 export type IllustratedMessageType = 'scene' | 'dialog' | 'spot' | 'dot' | 'base';
@@ -46,7 +48,6 @@ let illustratedMessageUniqueId = 0;
     styleUrl: './illustrated-message.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class IllustratedMessageComponent implements AfterContentChecked, OnChanges, OnDestroy, OnInit, CssClassBuilder {
@@ -97,12 +98,16 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
     _isSmallScreen: boolean;
 
     /** @hidden */
+    _inlineSvg: SafeHtml | undefined;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
-        private _cdRef: ChangeDetectorRef
+        private _cdRef: ChangeDetectorRef,
+        private _sanitizer: DomSanitizer
     ) {}
 
     /**
@@ -147,10 +152,15 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
 
     /** @hidden */
     private _constructHref(): void {
+        this._inlineSvg = undefined;
         const containerWidth = this.elementRef.nativeElement.offsetWidth;
         let tempType = this.type;
         if (!this.type && containerWidth > 0) {
             tempType = this._determineIllustratedMessageType(containerWidth);
+        }
+        const inlineSvg = this.svgConfig?.[tempType]?.file;
+        if (inlineSvg) {
+            this._inlineSvg = this._sanitizer.bypassSecurityTrustHtml(inlineSvg);
         }
 
         this._href = this.svgConfig ? this._getHrefByType(tempType, this.svgConfig) : '';

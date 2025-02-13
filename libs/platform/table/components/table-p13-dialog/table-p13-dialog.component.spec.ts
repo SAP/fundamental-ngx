@@ -1,13 +1,21 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TableP13DialogComponent } from './table-p13-dialog.component';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { CollectionFilter, CollectionGroup, CollectionSort, SortDirection, Table, TableColumn, TableState } from '@fundamental-ngx/platform/table-helpers';
 import { EventEmitter } from '@angular/core';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    CollectionFilter,
+    CollectionGroup,
+    CollectionSort,
+    SortDirection,
+    Table,
+    TableColumn,
+    TableState
+} from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, of } from 'rxjs';
-import { SortDialogResultData } from './sorting/sorting.component';
 import { FilterDialogResultData } from './filtering/filtering.model';
 import { GroupDialogResultData } from './grouping/grouping.component';
+import { SortDialogResultData } from './sorting/sorting.component';
+import { TableP13DialogComponent } from './table-p13-dialog.component';
 
 describe('TableP13DialogComponent', () => {
     let component: TableP13DialogComponent;
@@ -19,10 +27,13 @@ describe('TableP13DialogComponent', () => {
         dialogServiceStub = {
             open: jest.fn(),
             dismissAll: jest.fn()
-          };
+        };
         TestBed.configureTestingModule({
             imports: [TableP13DialogComponent],
-            providers: [ { provide: DialogService, useValue: dialogServiceStub }, { provide: DialogRef, useValue: dialogRef },]
+            providers: [
+                { provide: DialogService, useValue: dialogServiceStub },
+                { provide: DialogRef, useValue: dialogRef }
+            ]
         }).compileComponents();
     }));
 
@@ -79,8 +90,7 @@ describe('TableP13DialogComponent', () => {
             }
             getTableColumns(): TableColumn[] {
                 return [];
-            } 
-            
+            }
         }
 
         fixture = TestBed.createComponent(TableP13DialogComponent);
@@ -97,11 +107,15 @@ describe('TableP13DialogComponent', () => {
         it('should show sorting settings dialog', () => {
             const mockCollectionSort: CollectionSort[] = [
                 { field: 'status', direction: SortDirection.ASC },
-             { field: 'name', direction: SortDirection.DESC },
-             { field: 'grp', direction: SortDirection.ASC },];
+                { field: 'name', direction: SortDirection.DESC },
+                { field: 'grp', direction: SortDirection.ASC }
+            ];
             const mockSortDialogResultData: SortDialogResultData = { collectionSort: mockCollectionSort };
-            
-            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockSortDialogResultData }), dismiss: jest.fn() } as any);
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of({ ...mockSortDialogResultData }),
+                dismiss: jest.fn()
+            } as any);
 
             jest.spyOn(dialogRef, 'dismiss');
 
@@ -112,17 +126,21 @@ describe('TableP13DialogComponent', () => {
 
             dialogRef.afterClosed.subscribe((result: SortDialogResultData) => {
                 expect(result).toEqual(mockSortDialogResultData);
-              });
+            });
         });
 
         it('should show sorting settings dialog by dimissing already initialized sortings dialog', () => {
             const mockCollectionSort: CollectionSort[] = [
                 { field: 'status', direction: SortDirection.ASC },
-             { field: 'name', direction: SortDirection.DESC },
-             { field: 'grp', direction: SortDirection.ASC },];
+                { field: 'name', direction: SortDirection.DESC },
+                { field: 'grp', direction: SortDirection.ASC }
+            ];
             const mockSortDialogResultData: SortDialogResultData = { collectionSort: mockCollectionSort };
-            
-            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockSortDialogResultData }), dismiss: jest.fn() } as any);
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of({ ...mockSortDialogResultData }),
+                dismiss: jest.fn()
+            } as any);
             jest.spyOn(dialogRef, 'dismiss');
 
             component._dialogRef = { dismiss: jest.fn() } as any;
@@ -133,18 +151,22 @@ describe('TableP13DialogComponent', () => {
 
             dialogRef.afterClosed.subscribe((result: SortDialogResultData) => {
                 expect(result).toEqual(mockSortDialogResultData);
-              });
+            });
         });
     });
 
     describe('showFilteringSettings', () => {
         it('should show filter settings dialog', () => {
             const mockCollectionFilter: CollectionFilter[] = [
-                { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false } ,
-              { field: 'name', value: 'valid', strategy: 'equalTo', exclude: false }];
+                { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false },
+                { field: 'name', value: 'valid', strategy: 'equalTo', exclude: false }
+            ];
             const mockFilterDialogResultData: FilterDialogResultData = { collectionFilter: mockCollectionFilter };
-            
-            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockFilterDialogResultData }), dismiss: jest.fn() } as any);
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of({ ...mockFilterDialogResultData }),
+                dismiss: jest.fn()
+            } as any);
             jest.spyOn(dialogRef, 'dismiss');
 
             component.showFilteringSettings();
@@ -154,16 +176,20 @@ describe('TableP13DialogComponent', () => {
 
             dialogRef.afterClosed.subscribe((result: FilterDialogResultData) => {
                 expect(result).toEqual(mockFilterDialogResultData);
-              });
+            });
         });
 
         it('should show filter settings dialog by dimissing already initialized sortings dialog', () => {
             const mockCollectionFilter: CollectionFilter[] = [
-                { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false } ,
-              { field: 'name', value: 'valid', strategy: 'equalTo', exclude: false }];
+                { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false },
+                { field: 'name', value: 'valid', strategy: 'equalTo', exclude: false }
+            ];
             const mockFilterDialogResultData: FilterDialogResultData = { collectionFilter: mockCollectionFilter };
-            
-            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockFilterDialogResultData }), dismiss: jest.fn() } as any);
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of({ ...mockFilterDialogResultData }),
+                dismiss: jest.fn()
+            } as any);
             jest.spyOn(dialogRef, 'dismiss');
 
             component._dialogRef = { dismiss: jest.fn() } as any;
@@ -173,18 +199,22 @@ describe('TableP13DialogComponent', () => {
 
             dialogRef.afterClosed.subscribe((result: FilterDialogResultData) => {
                 expect(result).toEqual(mockFilterDialogResultData);
-              });
+            });
         });
     });
 
     describe('showGroupingSettings', () => {
         it('should show group settings dialog', () => {
             const mockCollectionGroup: CollectionGroup[] = [
-                 { field: 'status', direction: SortDirection.ASC, showAsColumn: true },
-                   { field: 'name', direction: SortDirection.DESC, showAsColumn: true }];
+                { field: 'status', direction: SortDirection.ASC, showAsColumn: true },
+                { field: 'name', direction: SortDirection.DESC, showAsColumn: true }
+            ];
             const mockGroupDialogResultData: GroupDialogResultData = { collectionGroup: mockCollectionGroup };
-            
-            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({ afterClosed: of({ ...mockGroupDialogResultData }), dismiss: jest.fn() } as any);
+
+            jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+                afterClosed: of({ ...mockGroupDialogResultData }),
+                dismiss: jest.fn()
+            } as any);
             jest.spyOn(dialogRef, 'dismiss');
 
             component.showGroupingSettings();
@@ -194,7 +224,7 @@ describe('TableP13DialogComponent', () => {
 
             dialogRef.afterClosed.subscribe((result: GroupDialogResultData) => {
                 expect(result).toEqual(mockGroupDialogResultData);
-              });
+            });
         });
     });
 });

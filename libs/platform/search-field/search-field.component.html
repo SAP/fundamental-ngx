@@ -54,7 +54,7 @@
         <div
             #inputGroup
             class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
-            [class.is-focus]="isFocused"
+            [class.is-focus]="_isFocused"
         >
             @if (_showCategoryDropdown) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
@@ -66,6 +66,8 @@
             <input
                 #inputField
                 type="search"
+                (focus)="_isFocused = true"
+                (blur)="_isFocused = false; (null)"
                 [attr.placeholder]="placeholder"
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
                 [attr.id]="_inputId"

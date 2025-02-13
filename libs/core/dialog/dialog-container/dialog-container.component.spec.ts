@@ -1,21 +1,18 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
-import { DialogConfig } from '../utils/dialog-config.class';
-import { DialogDefaultContent } from '../utils/dialog-default-content.class';
-import { DialogRef } from '../utils/dialog-ref.class';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { PortalModule } from '@angular/cdk/portal';
-import { whenStable } from '@fundamental-ngx/core/tests';
-import { DialogModule } from '../dialog.module';
-
-const TEXT_CONTENT = 'Hello there';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
+import { DialogContentType, DialogDefaultContent } from '../dialog.types';
+import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 
 @Component({
     selector: 'fd-content-test-component',
-    template: TEXT_CONTENT
+    template: 'Hello there',
+    standalone: true,
+    imports: [CommonModule, PortalModule]
 })
 class ContentTestComponent {}
 
@@ -24,42 +21,52 @@ describe('DialogContainerComponent', () => {
     let fixture: ComponentFixture<DialogContainerComponent>;
     const dialogConfig = { ...new DialogConfig(), componentClass: 'test-class' };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, PortalModule, DialogModule],
-            declarations: [ContentTestComponent],
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [
+                CommonModule,
+                PortalModule,
+                NoopAnimationsModule, // Properly imported
+                ContentTestComponent,
+                DialogContainerComponent
+            ],
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useClass: DialogRef }
             ]
-        });
-    }));
+        }).compileComponents();
+    });
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(DialogContainerComponent);
         component = fixture.componentInstance;
         component.childContent = ContentTestComponent;
-    }));
+    });
 
     it('should create', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
 
-    it('should create embedded content', async () => {
-        await whenStable(fixture);
+    it('should create embedded content', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
 
         const childComponentEl = fixture.nativeElement.querySelector('fd-content-test-component');
         expect(childComponentEl).toBeTruthy();
-        expect(childComponentEl.textContent).toContain(TEXT_CONTENT);
-    });
+        expect(childComponentEl.textContent).toContain('Hello there');
+    }));
 
-    it('should create component from object', async () => {
-        component.childContent = { title: TEXT_CONTENT } as DialogDefaultContent;
+    it('should create component from object', fakeAsync(() => {
+        const content: DialogDefaultContent = { title: 'Hello there' };
+        component.childContent = content as DialogContentType;
         const embedContentSpy = jest.spyOn(component as any, '_createFromDefaultDialog');
 
-        await whenStable(fixture);
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
 
         expect(embedContentSpy).toHaveBeenCalled();
-    });
+    }));
 });

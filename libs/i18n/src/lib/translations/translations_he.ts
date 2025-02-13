@@ -167,7 +167,11 @@ export default {
         periodLabel: 'תקופה',
         decreasePeriodLabel: 'הקטן תקופה',
         navigationInstruction:
-            'כדי לעבור בין פריטים ברשימה זו, הקש על החץ העליון או החץ התחתון. כדי לעבור בין רשימות לחץ על חץ שמאלה או חץ ימינה.'
+            'כדי לעבור בין פריטים ברשימה זו, הקש על החץ העליון או החץ התחתון. כדי לעבור בין רשימות לחץ על חץ שמאלה או חץ ימינה.',
+        nightLabel: 'בלילה',
+        morningLabel: 'בבוקר',
+        afternoonLabel: 'בצוהריים',
+        eveningLabel: 'בערב'
     },
     coreTimePicker: {
         timePickerInputLabel: 'קלט בוחר שעות',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'אשף'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'עוד'
+        overflowTitleMore: 'עוד',
+        breadcrumbTrailLabel: 'שביל ניווט'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'צופים',
@@ -482,6 +487,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'עמודות',
         toolbarActionExpandAllButtonTitle: 'הרחב הכול',
         toolbarActionCollapseAllButtonTitle: 'צמצם הכול',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'נווט חזרה',
         filterDialogNotFilteredLabel: '(לא מסונן)',
         filterDialogFilterByLabel: 'סנן לפי: {filterLabel}',
@@ -507,9 +515,14 @@ export default {
         sortDialogCancelBtnLabel: 'בטל',
         selectAllCheckboxLabel: 'בחר הכול',
         deselectAllCheckboxLabel: 'בטל בחירה של הכול',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'על מנת לבטל בחירת שורה, הקש על מקש הרווח',
         selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
-        loadMore: 'טען עוד'
+        loadMore: 'טען עוד',
+        filteredBy: 'מסונן לפי',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'ערוך'
@@ -568,5 +581,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'לחצן תפריט'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'הרחבה/כיווץ',
+        groupAriaDescription: 'קבוצת הודעות',
+        groupAriaDescriptionExpanded: 'מורחב',
+        groupAriaDescriptionCollapsed: 'מצומצם'
     }
 };

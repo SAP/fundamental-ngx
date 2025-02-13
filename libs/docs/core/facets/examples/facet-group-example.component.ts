@@ -13,7 +13,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     selector: 'fd-facet-group-example',
     templateUrl: './facet-group-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         FacetComponent,

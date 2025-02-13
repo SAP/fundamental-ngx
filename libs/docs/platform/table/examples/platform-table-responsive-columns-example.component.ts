@@ -37,7 +37,6 @@ import { Observable, of } from 'rxjs';
     templateUrl: './platform-table-responsive-columns-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,
@@ -90,6 +89,10 @@ export class PlatformTableResponsiveColumnsExampleComponent implements AfterView
     setTableWidth(value: string): void {
         this.tableWidth = value;
         this._cdr.detectChanges();
+    }
+
+    handleNavigate(): void {
+        alert('Navigation event');
     }
 }
 

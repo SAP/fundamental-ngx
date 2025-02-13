@@ -39,8 +39,8 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrl: './popover-body.component.scss',
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
-    standalone: true,
-    imports: [A11yModule, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ResizeHandleDirective, ResizeDirective]
+    imports: [A11yModule, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ResizeHandleDirective, ResizeDirective],
+    standalone: true
 })
 export class PopoverBodyComponent implements AfterViewInit {
     /** Minimum width of the popover body element. */
@@ -98,7 +98,7 @@ export class PopoverBodyComponent implements AfterViewInit {
     _closeOnEscapeKey = false;
 
     /** @hidden Aria role for the popover body. */
-    _bodyRole: Nullable<string> = null;
+    _bodyRole: Nullable<string> = 'dialog';
 
     /** @hidden Aria role for the popover body. */
     _bodyId: Nullable<string> = null;

@@ -8,7 +8,9 @@ import { PlatformLinkModule } from './link.module';
 /** Standard link functionality tests */
 @Component({
     selector: 'fdp-link-test',
-    template: ` <fdp-link [href]="'https://www.google.com/'" [linkType]="'standard'">StandardLink</fdp-link> `
+    template: ` <fdp-link [href]="'https://www.google.com/'" [linkType]="'standard'">StandardLink</fdp-link> `,
+    standalone: true,
+    imports: [PlatformLinkModule]
 })
 class TestComponent {
     constructor() {}
@@ -20,8 +22,7 @@ describe('LinkComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformLinkModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -47,7 +48,9 @@ describe('LinkComponent', () => {
 /** Disabled link test */
 @Component({
     selector: 'fdp-disabled-link',
-    template: ` <fdp-link [href]="href" [linkType]="'emphasized'" [disabled]="true">DisabledLink</fdp-link> `
+    template: ` <fdp-link [href]="href" [linkType]="'emphasized'" [disabled]="true">DisabledLink</fdp-link> `,
+    standalone: true,
+    imports: [PlatformLinkModule]
 })
 class DisabledLinkComponent {
     @ViewChild(LinkComponent)
@@ -65,8 +68,7 @@ describe('LinkComponent Disabled', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformLinkModule],
-            declarations: [DisabledLinkComponent]
+            imports: [DisabledLinkComponent]
         }).compileComponents();
     }));
 

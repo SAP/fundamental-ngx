@@ -167,7 +167,11 @@ export default {
         periodLabel: 'الفترة',
         decreasePeriodLabel: 'تقليل الفترة',
         navigationInstruction:
-            'للتنقل بين العناصر في هذه القائمة، اضغط السهم المتجه لأعلى أو السهم المتجه لأسفل. وللتبديل بين القوائم، اضغط السهم الأيسر أو السهم الأيمن.'
+            'للتنقل بين العناصر في هذه القائمة، اضغط السهم المتجه لأعلى أو السهم المتجه لأسفل. وللتبديل بين القوائم، اضغط السهم الأيسر أو السهم الأيمن.',
+        nightLabel: 'في الليل',
+        morningLabel: 'في الصباح',
+        afternoonLabel: 'بعد الظهر',
+        eveningLabel: 'في المساء'
     },
     coreTimePicker: {
         timePickerInputLabel: 'إدخال أداة انتقاء الوقت',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'المعالج'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'المزيد'
+        overflowTitleMore: 'المزيد',
+        breadcrumbTrailLabel: 'مسار التنقل'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'المُراقبون',
@@ -483,6 +488,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'الأعمدة',
         toolbarActionExpandAllButtonTitle: 'توسيع الكل',
         toolbarActionCollapseAllButtonTitle: 'طي الكل',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogNotFilteredLabel: '(لم تتم تصفيته)',
         filterDialogFilterByLabel: 'تصفية حسب: {filterLabel}',
@@ -508,9 +516,14 @@ export default {
         sortDialogCancelBtnLabel: 'إلغاء',
         selectAllCheckboxLabel: 'تحديد الكل',
         deselectAllCheckboxLabel: 'إلغاء تحديد الكل',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'لإلغاء تحديد الصف، اضغط مفتاح المسافة',
         selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
-        loadMore: 'تحميل المزيد'
+        loadMore: 'تحميل المزيد',
+        filteredBy: 'تمت التصفية حسب',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'تحرير'
@@ -569,5 +582,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'زر القائمة'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'توسيع/طي',
+        groupAriaDescription: 'مجموعة الإشعارات',
+        groupAriaDescriptionExpanded: 'موسَّع',
+        groupAriaDescriptionCollapsed: 'تم طيه'
     }
 };

@@ -116,7 +116,9 @@
                                         [main]="true"
                                         [class.fd-table__row--draggable]="isDraggable"
                                         fdp-table-row
+                                        [attr.aria-rowindex]="rowIndex + 1"
                                         [rowId]="id"
+                                        [class.fd-tr-hovered]="!row.checked && hoveredRowIndex$() === rowIndex"
                                         [index]="rowIndex"
                                         [row]="row"
                                         [selectionMode]="_selectionMode"
@@ -131,8 +133,12 @@
                             }
                             @if (row.type === 'item' && _tableService.poppingColumns$().length > 0) {
                                 <tr
+                                    (keydown.enter)="_onRowClick(row, $event)"
+                                    (keydown.space)="_onRowClick(row, $event)"
+                                    (click)="_onRowClick(row, $event)"
                                     fdp-table-popping-row
                                     [secondary]="true"
+                                    [style.cursor]="rowsActivable || !!row.navigatable ? 'pointer' : 'auto'"
                                     [style.height.px]="secondaryRowHeight"
                                     [selectionMode]="selectionMode"
                                     [row]="row"
@@ -140,6 +146,8 @@
                                     [class]="row | rowClasses: rowsClass"
                                     (toggleGroupRow)="_toggleGroupRow($event)"
                                     (cellClicked)="_onCellClick($event.index, $event.row)"
+                                    (mouseenter)="handleMouseEnter(rowIndex)"
+                                    (mouseleave)="handleMouseLeave()"
                                 ></tr>
                             }
                             @if (row.children.length === 0 && (row.childItemsLoading$ | async)) {

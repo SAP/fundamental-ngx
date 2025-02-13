@@ -45,7 +45,6 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [
         ButtonComponent,
         TableDataSourceDirective,
