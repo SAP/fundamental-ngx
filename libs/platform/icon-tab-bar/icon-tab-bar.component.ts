@@ -305,9 +305,6 @@ export class IconTabBarComponent implements OnInit, TabList {
         if (this.layoutMode() === 'column') {
             styles.push('fd-icon-tab-bar--counters');
         }
-        // if (this.settings()) {
-        //     styles.push('fd-settings__tab-bar');
-        // }
 
         return styles;
     }
