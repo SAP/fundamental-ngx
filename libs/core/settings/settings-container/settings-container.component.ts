@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     HostListener,
@@ -9,7 +10,7 @@ import {
     contentChild,
     contentChildren,
     inject,
-    signal, AfterViewInit
+    signal
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
@@ -25,7 +26,6 @@ export enum VIEW_MODE {
 }
 
 @Component({
-     
     selector: 'fd-settings-container',
     template: `
         @if (this.showListArea()) {
@@ -42,16 +42,7 @@ export enum VIEW_MODE {
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    styles: [
-        `
-            .fd-settings__container {
-                display: flex;
-                width: 100%;
-                height: 100%;
-            }
-        `
-    ]
+    standalone: true
 })
 export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /** @hidden */
@@ -132,7 +123,9 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /** @hidden */
     private _setupHeaderButton(): void {
         const button = this.headerButton()?.elementRef.nativeElement;
-        if (!button) {return;}
+        if (!button) {
+            return;
+        }
 
         this._eventUnlisteners.push(
             this._renderer.listen(button, 'click', () => {
@@ -149,7 +142,9 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /** @hidden */
     private _updateHeaderButtonVisibility(): void {
         const button = this.headerButton()?.elementRef.nativeElement;
-        if (!button) {return;}
+        if (!button) {
+            return;
+        }
 
         this._renderer.setStyle(button, 'display', this.viewMode() === VIEW_MODE.LG ? 'none' : 'block');
     }
@@ -165,12 +160,16 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
             this._eventUnlisteners.push(
                 this._renderer.listen(item.elementRef.nativeElement, 'click', () => {
                     const currentActiveItem = this.activeListItem();
-                    if (currentActiveItem) {currentActiveItem.selected = false;}
+                    if (currentActiveItem) {
+                        currentActiveItem.selected = false;
+                    }
 
                     this.activeListItem.set(item);
 
                     const newActiveItem = this.activeListItem();
-                    if (newActiveItem) {newActiveItem.selected = true;}
+                    if (newActiveItem) {
+                        newActiveItem.selected = true;
+                    }
 
                     if (this.viewMode() !== VIEW_MODE.LG) {
                         this.showListArea.set(false);

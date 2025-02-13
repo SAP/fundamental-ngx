@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsDetailAreaDirective } from '../index';
+import { SettingsDetailAreaDirective } from '@fundamental-ngx/core/settings';
 
 @Component({
     template: ` <div #directiveElement fd-settings-detail-area>Settings Detail Test Text</div> `,

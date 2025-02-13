@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsListContainerDirective } from '../index';
+import { SettingsListContainerDirective } from '@fundamental-ngx/core/settings';
 
 @Component({
     template: ` <div #directiveElement fd-settings-list-container>Settings List Test Text</div> `,
