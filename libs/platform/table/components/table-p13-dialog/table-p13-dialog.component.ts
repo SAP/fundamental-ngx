@@ -166,7 +166,14 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
-            columns: columns.map(({ label, key, dataType, filterable }) => ({ label, key, dataType, filterable })),
+            // add filterSelectOptions to be sent with the data
+            columns: columns.map(({ label, key, dataType, filterable, filterSelectOptions }) => ({
+                label,
+                key,
+                dataType,
+                filterable,
+                filterSelectOptions
+            })),
             collectionFilter: filterBy
         };
 
