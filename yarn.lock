@@ -14995,7 +14995,7 @@ __metadata:
     nx: "npm:20.3.2"
     postcss-preset-env: "npm:9.3.0"
     postcss-url: "npm:10.1.3"
-    prettier: "npm:3.1.0"
+    prettier: "npm:3.5.1"
     prettier-plugin-organize-imports: "npm:3.2.4"
     rxjs: "npm:7.8.1"
     semver: "npm:7.6.3"
@@ -22642,12 +22642,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.1.0":
-  version: 3.1.0
-  resolution: "prettier@npm:3.1.0"
+"prettier@npm:3.5.1":
+  version: 3.5.1
+  resolution: "prettier@npm:3.5.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10/e95e8f93c6b9aea2ac1e86bebe329bee90c8c50d9a23d1f593eba8d7f39b33b3641eb28785001505b6723c47895a5322ad12a2fb855b289cb7bae450ffc34425
+  checksum: 10/09ab168e651e50c2c79804d65f17a68129ce1c573830b2fb08c988b585add8076b8d995789034d66a14338d6b8835e8c591e0fc1bc90f4344af9645738636d01
   languageName: node
   linkType: hard
 
