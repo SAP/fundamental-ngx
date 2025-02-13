@@ -11,7 +11,7 @@ export interface FilterableColumn {
     key: string;
     dataType: FilterableColumnDataType;
     filterable?: boolean;
-    filterValuesOptions?: string[]; // add optional filterValuesOptions
+    filterValueSelectOptions?: string[]; // add optional filterValueSelectOptions
 }
 
 export interface FilterDialogData extends TableDialogCommonData {
@@ -40,8 +40,11 @@ export class FilterRule<T = any> {
     /** Data type */
     dataType?: FilterableColumnDataType;
 
-    /** Available filter Options */
-    filterValuesOptions: string[] = [];
+    /**
+     * Optional array of available filter options.
+     * Providing values to this input will cause the filter to change from a text-type input to a select-type input.
+     * */
+    filterValueSelectOptions: string[] = [];
 
     /** returns whether filter rule has value */
     get hasValue(): boolean {
@@ -69,8 +72,8 @@ export class FilterRule<T = any> {
         if (this.strategies.length === 0) {
             this.setStrategiesByColumnKey(this.columnKey);
         }
-        if (this.filterValuesOptions.length === 0) {
-            this.setFilterValuesOptionsByColumnKey(this.columnKey);
+        if (this.filterValueSelectOptions.length === 0) {
+            this.setfilterValueSelectOptionsByColumnKey(this.columnKey);
         }
     }
 
@@ -129,7 +132,7 @@ export class FilterRule<T = any> {
         this.setDataTypeByColumnKey(columnKey);
 
         // update available Filter options
-        this.setFilterValuesOptionsByColumnKey(columnKey);
+        this.setfilterValueSelectOptionsByColumnKey(columnKey);
 
         // update available strategies list
         this.setStrategiesByColumnKey(columnKey);
@@ -146,12 +149,13 @@ export class FilterRule<T = any> {
     }
 
     /** @hidden */
-    setFilterValuesOptionsByColumnKey(columnKey?: string): void {
-        const filterValuesOptions = this.columns.find((column) => column.key === columnKey)?.filterValuesOptions;
-        if (this.areArraysEqual(filterValuesOptions, this.filterValuesOptions)) {
+    setfilterValueSelectOptionsByColumnKey(columnKey?: string): void {
+        const filterValueSelectOptions = this.columns.find((column) => column.key === columnKey)
+            ?.filterValueSelectOptions;
+        if (this.areArraysEqual(filterValueSelectOptions, this.filterValueSelectOptions)) {
             return;
         }
-        this.filterValuesOptions = filterValuesOptions ? filterValuesOptions : [];
+        this.filterValueSelectOptions = filterValueSelectOptions ? filterValueSelectOptions : [];
     }
 
     /** @hidden */
