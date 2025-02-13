@@ -14978,7 +14978,7 @@ __metadata:
     lerna: "npm:^8.1.8"
     lint-staged: "npm:15.1.0"
     lodash-es: "npm:4.17.21"
-    marked: "npm:9.0.0"
+    marked: "npm:15.0.7"
     moment: "npm:2.29.4"
     ng-packagr: "npm:19.0.1"
     ngx-cva-test-suite: "npm:2.0.0"
@@ -19231,12 +19231,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:9.0.0":
-  version: 9.0.0
-  resolution: "marked@npm:9.0.0"
+"marked@npm:15.0.7":
+  version: 15.0.7
+  resolution: "marked@npm:15.0.7"
   bin:
     marked: bin/marked.js
-  checksum: 10/21f602f280aaf95ffcdaaad96676b64e4c19bcf23a317ffeccc785d7c5fedb0141bd30d2e216761f1a93b2337d80a6351aac3eb449831e15d1c5b859f577dc0e
+  checksum: 10/df4c3e91420bfa76250390813ce6881a3dad73b40d51d14cece1aff63a2828a171e7f1d3d99cdca70088cb305215ba79fce31bb9ce38cd03c360c788e2994a6a
   languageName: node
   linkType: hard
 
