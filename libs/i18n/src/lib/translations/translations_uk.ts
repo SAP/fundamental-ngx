@@ -5,7 +5,7 @@ export default {
         yearSelectionLabel: 'Виберіть рік',
         yearsRangeSelectionLabel: 'Виберіть діапазон років',
         monthSelectionLabel: 'Виберіть місяць',
-        dateSelectionLabel: 'Виберіть дату',
+        dateSelectionLabel: 'Вибрати дату',
         previousYearLabel: 'Попередній рік',
         nextYearLabel: 'Наступний рік',
         previousMonthLabel: 'Попередній місяць',
@@ -72,7 +72,7 @@ export default {
     },
     coreMultiInput: {
         countListResultsSingular: '1 елемент списку результатів.',
-        countListResultsPlural: '{count} елементів списку результатів.',
+        countListResultsPlural: 'Елементів списку результатів: {count}.',
         multiInputAriaLabel: 'Багатозначне введення',
         noResults: 'Жодних результатів.',
         navigateSelectionsWithArrows: 'Переміщайтеся між виділеними елементами за допомогою стрілок вгору та вниз.',
@@ -102,7 +102,7 @@ export default {
         nextLabel: 'Далі',
         lastLabel: 'Останній',
         ariaLabel: 'Нумерація сторінок',
-        totalResultsLabel: 'Результатів: {totalCount}'
+        totalResultsLabel: '{totalCount} результатів'
     },
     coreProductSwitch: {
         ariaLabel: 'Перемикач продуктів'
@@ -156,7 +156,7 @@ export default {
         hoursLabel: 'Години',
         decreaseHoursLabel: 'Зменшення годин',
         increaseMinutesLabel: 'Збільшення хвилин',
-        minLabel: 'Хв',
+        minLabel: 'Мін.',
         minutesLabel: 'Хвилини',
         decreaseMinutesLabel: 'Зменшення хвилин',
         increaseSecondsLabel: 'Збільшення секунд',
@@ -167,11 +167,15 @@ export default {
         periodLabel: 'Період',
         decreasePeriodLabel: 'Зменшення періоду',
         navigationInstruction:
-            'Для переходу між пунктами цього списку натисніть стрілку вгору або вниз. Для перемикання між списками натискайте стрілку вліво або вправо.'
+            'Для переходу між пунктами цього списку натисніть стрілку вгору або вниз. Для перемикання між списками натискайте стрілку вліво або вправо.',
+        nightLabel: 'вночі',
+        morningLabel: 'вранці',
+        afternoonLabel: 'у другій половині дня',
+        eveningLabel: 'у вечірній час'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Введення для селектора часу',
-        timePickerButtonLabel: 'Відкрити селектор'
+        timePickerButtonLabel: 'Відкрити комплектувальник'
     },
     coreToken: {
         deleteButtonLabel: 'Може бути видалено',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Майстер'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Більше'
+        overflowTitleMore: 'Більше',
+        breadcrumbTrailLabel: 'Навігаційна стежка'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Спостерігачі',
@@ -264,7 +269,7 @@ export default {
         userListSelectedItemsCountSingular: '1 елемент вибрано',
         userListSelectedItemsCountPlural: '{count} елементів вибрано',
         addNodeButtonTitle: 'Додати вузол',
-        nodeMenuButtonTitle: 'Меню',
+        nodeMenuButtonTitle: 'Menu',
         statusApproved: 'затверджено',
         statusRejected: 'відхилено',
         statusInProgress: 'виконується',
@@ -323,7 +328,7 @@ export default {
     },
     platformCombobox: {
         countListResultsSingular: '1 елемент списку результатів',
-        countListResultsPlural: '{count} елементів списку результатів'
+        countListResultsPlural: 'Елементів списку результатів: {count}.'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Вибрати опції',
@@ -395,7 +400,7 @@ export default {
         filterConditionValuePlaceholder: 'значення',
         filterConditionValueFromPlaceholder: 'від',
         filterConditionValueToPlaceholder: 'до',
-        settingsCategoryAll: 'Усе',
+        settingsCategoryAll: 'Все',
         settingsCategoryVisible: 'Видимі',
         settingsCategoryActive: 'Активно',
         settingsCategoryVisibleAndActive: 'Видимі та активні',
@@ -416,7 +421,7 @@ export default {
         defaultEmptyMessage: 'Даних не знайдено',
         emptyCell: 'Порожнє',
         noVisibleColumnsMessage:
-            'Наразі у таблиці немає видимих стовпців. Виберіть потрібні стовпці в налаштуваннях таблиці.',
+            'Наразі у таблиці немає видимих стовпців. Виберіть потрібні стовпці у налаштуваннях таблиці.',
         resetChangesButtonLabel: 'Скинути',
         editableCellNumberPlaceholder: 'Введіть значення',
         editableCellDatePlaceholder: 'Введіть значення',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Стовпці',
         toolbarActionExpandAllButtonTitle: 'Розгорнути все',
         toolbarActionCollapseAllButtonTitle: 'Згорнути все',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogNotFilteredLabel: '(Не відфільтровано)',
         filterDialogFilterByLabel: 'Фільтрувати за: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Скасувати',
         selectAllCheckboxLabel: 'Вибрати все',
         deselectAllCheckboxLabel: 'Скасувати вибір',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Для скасування вибору рядка натисніть клавішу пробілу',
         selectSingleRow: 'Для вибору рядка натисніть клавішу пробілу',
-        loadMore: 'Завантажити більше'
+        loadMore: 'Завантажити більше',
+        filteredBy: 'Фільтрувати за',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Кнопка меню'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Розгорнути/згорнути',
+        groupAriaDescription: 'Група сповіщень',
+        groupAriaDescriptionExpanded: 'розгорнуто',
+        groupAriaDescriptionCollapsed: 'згорнуто'
     }
 };

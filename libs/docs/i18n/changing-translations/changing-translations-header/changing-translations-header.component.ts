@@ -4,7 +4,6 @@ import { DescriptionComponent, HeaderComponent } from '@fundamental-ngx/docs/sha
 
 @Component({
     templateUrl: './changing-translations-header.component.html',
-    standalone: true,
     imports: [HeaderComponent, DescriptionComponent, RouterOutlet]
 })
 export class ChangingTranslationsHeaderComponent {}

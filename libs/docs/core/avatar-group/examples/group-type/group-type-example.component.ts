@@ -12,7 +12,6 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
 @Component({
     selector: 'fd-avatar-group-group-type-example',
     templateUrl: './group-type-example.component.html',
-    standalone: true,
     imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
 })
 export class GroupTypeExampleComponent {

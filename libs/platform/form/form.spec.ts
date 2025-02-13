@@ -3,10 +3,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
+import { CommonModule } from '@angular/common';
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormGroupComponent } from './form-group/form-group.component';
 import { PlatformInputModule } from './input/fdp-input.module';
+import { InputComponent } from './input/input.component';
 
 interface TestUser {
     firstName: string;
@@ -63,7 +65,9 @@ describe('Platform Form', () => {
                 </fdp-form-group>
                 <button type="submit" #submitButton>Submit</button>
             </form>
-        `
+        `,
+        standalone: true,
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, FormFieldComponent]
     })
     class SimpleFormTestComponent {
         @ViewChild('userForm') userFormGroupCmp: FormGroupComponent;
@@ -95,8 +99,7 @@ describe('Platform Form', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-            declarations: [SimpleFormTestComponent]
+            imports: [SimpleFormTestComponent]
         }).compileComponents();
     }));
 
@@ -228,7 +231,9 @@ describe('Nested Form Groups', () => {
                 </fdp-form-group>
                 <button type="submit" #submitButton>Submit</button>
             </form>
-        `
+        `,
+        standalone: true,
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, FormFieldComponent]
     })
     class NestedFormGroupsTestComponent {
         @ViewChild('userForm') userGroup: FormGroupComponent;
@@ -272,8 +277,7 @@ describe('Nested Form Groups', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-            declarations: [NestedFormGroupsTestComponent]
+            imports: [NestedFormGroupsTestComponent]
         }).compileComponents();
     }));
 
@@ -369,7 +373,17 @@ describe('fdp-form-field out of fdp-form-group', () => {
                     <fdp-input name="firstName" [formControl]="formFieldFirstName.formControl"></fdp-input>
                 </fdp-form-field>
             </ng-template>
-        `
+        `,
+        standalone: true,
+        imports: [
+            ReactiveFormsModule,
+            FdpFormGroupModule,
+            PlatformInputModule,
+            FormFieldComponent,
+            FormGroupComponent,
+            InputComponent,
+            CommonModule
+        ]
     })
     class HostFormComponent {
         @ViewChild('fdpUserFormGroup') fdpFormGroupUser: FormGroupComponent;
@@ -393,23 +407,26 @@ describe('fdp-form-field out of fdp-form-group', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-            declarations: [HostFormComponent]
+            imports: [HostFormComponent]
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(HostFormComponent);
         host = fixture.componentInstance;
 
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should be created', () => {
         expect(host).toBeDefined();
     });
 
-    it('should link formField to given formGroup through [formGroupContainer] input', () => {
+    it('should link formField to given formGroup through [formGroupContainer] input', async () => {
+        fixture.detectChanges();
+        await fixture.whenStable();
+
         const fdpFormGroup: FormGroupComponent = host.fdpFormGroupUser;
         const fdpFormField: FormFieldComponent = host.fdpFormFieldFirstName;
 
@@ -422,7 +439,9 @@ describe('fdp-form-field out of fdp-form-group', () => {
 describe('FdpFormField with Wrapper', () => {
     @Component({
         selector: 'fdp-wrapper',
-        template: ''
+        template: '',
+        standalone: true,
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, CommonModule]
     })
     class WrapperComponent {}
 
@@ -445,7 +464,9 @@ describe('FdpFormField with Wrapper', () => {
                     </fdp-wrapper>
                 </ng-template>
             </fdp-form-group>
-        `
+        `,
+        standalone: true,
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, CommonModule]
     })
     class HostFormComponent {}
 
@@ -454,8 +475,7 @@ describe('FdpFormField with Wrapper', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-            declarations: [WrapperComponent, HostFormComponent]
+            imports: [WrapperComponent, HostFormComponent]
         }).compileComponents();
     }));
 
@@ -471,9 +491,13 @@ describe('FdpFormField with Wrapper', () => {
         expect(host).toBeDefined();
     });
 
-    it('should render form control when formField is wrapped in', () => {
+    it('should render form control when formField is wrapped in', async () => {
+        fixture.detectChanges();
+        await fixture.whenStable();
+
         // Label
         const label = fixture.debugElement.query(By.css('.fd-form-label'));
+        expect(label).toBeTruthy();
         expect(label.nativeElement.textContent).toEqual('Default Input Field');
 
         // Input

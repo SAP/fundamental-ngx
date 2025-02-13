@@ -31,7 +31,6 @@ import { delay } from 'rxjs/operators';
     templateUrl: './advanced-scrolling-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

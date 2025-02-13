@@ -14,7 +14,6 @@ import { PlatformI18nTranslationCustomizationExampleComponent } from './examples
 @Component({
     templateUrl: './patching-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

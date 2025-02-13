@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Periodo',
         decreasePeriodLabel: 'Diminuisci periodo',
         navigationInstruction:
-            "Per spostarsi tra le voci dell'elenco, premere la freccia su o la freccia giù. Per passare da un elenco all'altro, premere la freccia destra o la freccia sinistra."
+            "Per spostarsi tra le voci dell'elenco, premere la freccia su o la freccia giù. Per passare da un elenco all'altro, premere la freccia destra o la freccia sinistra.",
+        nightLabel: 'di notte',
+        morningLabel: 'di mattina',
+        afternoonLabel: 'di pomeriggio',
+        eveningLabel: 'di sera'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Immissione selettore ora',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Procedura guidata'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Di più'
+        overflowTitleMore: 'Di più',
+        breadcrumbTrailLabel: 'Percorso di navigazione'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Osservatori',
@@ -485,6 +490,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colonne',
         toolbarActionExpandAllButtonTitle: 'Espandi tutto',
         toolbarActionCollapseAllButtonTitle: 'Comprimi tutto',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Indietro',
         filterDialogNotFilteredLabel: '(Non filtrato)',
         filterDialogFilterByLabel: 'Filtra per: {filterLabel}',
@@ -510,9 +518,14 @@ export default {
         sortDialogCancelBtnLabel: 'Annulla',
         selectAllCheckboxLabel: 'Seleziona tutto',
         deselectAllCheckboxLabel: 'Deseleziona tutto',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Per deselezionare la riga, premere la BARRA SPAZIATRICE',
         selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE',
-        loadMore: 'Carica di più'
+        loadMore: 'Carica di più',
+        filteredBy: 'Filtrato in base a',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifica'
@@ -571,5 +584,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Pulsante menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Espandi/comprimi',
+        groupAriaDescription: 'Gruppo di notifiche',
+        groupAriaDescriptionExpanded: 'espanso',
+        groupAriaDescriptionCollapsed: 'compresso'
     }
 };

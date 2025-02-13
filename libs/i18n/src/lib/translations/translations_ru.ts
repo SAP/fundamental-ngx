@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Период',
         decreasePeriodLabel: 'Уменьшить период',
         navigationInstruction:
-            'Перемещаться между позициями списка можно с помощью стрелок вверх и вниз. Переключаться между списками можно с помощью стрелок влево и вправо.'
+            'Перемещаться между позициями списка можно с помощью стрелок вверх и вниз. Переключаться между списками можно с помощью стрелок влево и вправо.',
+        nightLabel: 'ночью',
+        morningLabel: 'утром',
+        afternoonLabel: 'днем',
+        eveningLabel: 'вечером'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Ввод средства выбора времени',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Ассистент'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Больше'
+        overflowTitleMore: 'Больше',
+        breadcrumbTrailLabel: 'Путь навигации'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Столбцы',
         toolbarActionExpandAllButtonTitle: 'Развернуть все',
         toolbarActionCollapseAllButtonTitle: 'Свернуть все',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogNotFilteredLabel: '(не отфильтровано)',
         filterDialogFilterByLabel: 'Фильтр по: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Отменить',
         selectAllCheckboxLabel: 'Выбрать все',
         deselectAllCheckboxLabel: 'Отменить выделение',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Для отмены выбора нажмите пробел',
         selectSingleRow: 'Для выбора строки нажмите пробел',
-        loadMore: 'Загрузить еще'
+        loadMore: 'Загрузить еще',
+        filteredBy: 'Отфильтровано по',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Изменить'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Кнопка меню'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Развернуть/свернуть',
+        groupAriaDescription: 'Группа уведомлений',
+        groupAriaDescriptionExpanded: 'развернуто',
+        groupAriaDescriptionCollapsed: 'свернуто'
     }
 };

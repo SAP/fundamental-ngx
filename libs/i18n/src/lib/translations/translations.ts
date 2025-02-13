@@ -492,6 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Columns',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Navigate back',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filter by: {filterLabel}',
@@ -517,10 +520,14 @@ export default {
         sortDialogCancelBtnLabel: 'Cancel',
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
         loadMore: 'Show more',
-        filteredBy: 'Filtered by'
+        filteredBy: 'Filtered by',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

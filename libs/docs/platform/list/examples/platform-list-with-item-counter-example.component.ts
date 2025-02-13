@@ -10,7 +10,6 @@ export interface Counter {
 @Component({
     selector: 'fdp-platform-list-with-item-counter-example',
     templateUrl: './platform-list-with-item-counter-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformListWithItemCounterExampleComponent {

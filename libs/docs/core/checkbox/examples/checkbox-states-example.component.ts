@@ -80,7 +80,6 @@ import { FormHeaderComponent } from '@fundamental-ngx/core/form';
             <fd-checkbox [(ngModel)]="checkboxValue10" fdCompact label="Compact label"></fd-checkbox>
         </div>
     `,
-    standalone: true,
     imports: [FormHeaderComponent, CheckboxComponent, FormsModule, ContentDensityDirective, ButtonComponent]
 })
 export class CheckboxStatesExampleComponent {

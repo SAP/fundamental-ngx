@@ -11,7 +11,6 @@ import { TokenComponent } from '@fundamental-ngx/core/token';
             }
         `
     ],
-    standalone: true,
     imports: [TokenComponent]
 })
 export class TokenReadOnlyExampleComponent {}

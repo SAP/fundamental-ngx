@@ -20,7 +20,6 @@ const stateMenuButtonTsCode = 'platform-menu-button-state-example.component.ts';
 @Component({
     selector: 'app-link',
     templateUrl: './platform-menu-button-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

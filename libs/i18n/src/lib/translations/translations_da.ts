@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Periode',
         decreasePeriodLabel: 'Reducer periode',
         navigationInstruction:
-            'Tryk på pil op eller pil ned for at bevæge dig mellem elementer i denne liste. Tryk på venstre piletast eller højre piletast for at skifte mellem lister.'
+            'Tryk på pil op eller pil ned for at bevæge dig mellem elementer i denne liste. Tryk på venstre piletast eller højre piletast for at skifte mellem lister.',
+        nightLabel: 'om natten',
+        morningLabel: 'om morgenen',
+        afternoonLabel: 'om eftermiddagen',
+        eveningLabel: 'om aftenen'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Input for tidsvælger',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Guide'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Flere'
+        overflowTitleMore: 'Flere',
+        breadcrumbTrailLabel: 'Brødkrummespor'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Observatører',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Udvid alle',
         toolbarActionCollapseAllButtonTitle: 'Minimer alle',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Naviger tilbage',
         filterDialogNotFilteredLabel: '(Ikke filtreret)',
         filterDialogFilterByLabel: 'Filtrér efter: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Annuller',
         selectAllCheckboxLabel: 'Vælg alle',
         deselectAllCheckboxLabel: 'Fravælg alle',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Tryk på mellemrumstasten for at slette markering af række',
         selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
-        loadMore: 'Indlæs mere'
+        loadMore: 'Indlæs mere',
+        filteredBy: 'Filtreret efter',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menuknap'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Udvid/minimer',
+        groupAriaDescription: 'Meddelelsesgruppe',
+        groupAriaDescriptionExpanded: 'udvidet',
+        groupAriaDescriptionCollapsed: 'minimeret'
     }
 };

@@ -1,12 +1,14 @@
 import { Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationModule } from '../notification.module';
 import { By } from '@angular/platform-browser';
+import { NotificationModule } from '../notification.module';
 import { NotificationLinkComponent } from './notification-link.component';
 
 @Component({
     selector: 'fd-notification-link-test',
-    template: ` <fd-notification-link #notificationLink></fd-notification-link> `
+    template: ` <fd-notification-link #notificationLink></fd-notification-link> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {
     notificationLink = viewChild<NotificationLinkComponent>('notificationLink');
@@ -18,8 +20,7 @@ describe('NotificationLinkComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

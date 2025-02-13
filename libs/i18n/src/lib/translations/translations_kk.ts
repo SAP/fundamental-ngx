@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Кезең',
         decreasePeriodLabel: 'Кезеңді азайту',
         navigationInstruction:
-            'Осы тізімдегі тармақтар арасында жылжу үшін жоғары немесе төмен көрсеткісін басыңыз. Тізімдер арасында ауысу үшін сол жақ немесе оң жақ көрсеткіні басыңыз.'
+            'Осы тізімдегі тармақтар арасында жылжу үшін жоғары немесе төмен көрсеткісін басыңыз. Тізімдер арасында ауысу үшін сол жақ немесе оң жақ көрсеткіні басыңыз.',
+        nightLabel: 'түнде',
+        morningLabel: 'таңертең',
+        afternoonLabel: 'түстен кейін',
+        eveningLabel: 'кешке'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Уақыт таңдау құралын енгізу',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Шебер'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Қосымша'
+        overflowTitleMore: 'Қосымша',
+        breadcrumbTrailLabel: 'Өту тізбегінің жолы'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Бақылаушылар',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Бағандар',
         toolbarActionExpandAllButtonTitle: 'Барлығын жаю',
         toolbarActionCollapseAllButtonTitle: 'Барлығын жию',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Артқа өту',
         filterDialogNotFilteredLabel: '(Сүзгіленбеген)',
         filterDialogFilterByLabel: 'Сүзгілеу шарты: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Болдырмау',
         selectAllCheckboxLabel: 'Барлығын таңдау',
         deselectAllCheckboxLabel: 'Барлығының таңдауын алу',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Қатардың таңадауын алу үшін бос жол пернесін басыңыз',
         selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз',
-        loadMore: 'Көбірек жүктеу'
+        loadMore: 'Көбірек жүктеу',
+        filteredBy: 'Сүзгілеу шарты',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Өңдеу'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Мәзір түймесі'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Жаю/жию',
+        groupAriaDescription: 'Хабарландыру тобы',
+        groupAriaDescriptionExpanded: 'жайылған',
+        groupAriaDescriptionCollapsed: 'жиылған'
     }
 };

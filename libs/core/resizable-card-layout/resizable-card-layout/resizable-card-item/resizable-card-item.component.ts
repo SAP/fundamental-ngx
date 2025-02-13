@@ -47,7 +47,6 @@ let cardUniqueId = 0;
     styleUrl: './resizable-card-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class ResizableCardItemComponent implements FocusableOption, OnDestroy {

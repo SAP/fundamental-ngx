@@ -41,7 +41,6 @@ import { take } from 'rxjs/operators';
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl<SliderDynamicFormControl> {
@@ -64,7 +63,6 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
     templateUrl: './settings-generator-custom-control-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SettingsGeneratorModule, BarModule]
 })
 export class SettingsGeneratorCustomControlExampleComponent {
@@ -82,10 +80,18 @@ export class SettingsGeneratorCustomControlExampleComponent {
         this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElementComponent, ['slider']);
         this.schema = {
             appearance: 'sidebar',
-            sidebarWidth: '20rem',
+            sidebarWidth: {
+                minWidth: '20rem',
+                width: '20rem',
+                maxWidth: '20rem',
+                wrapSidebarTitle: true,
+                wrapSidebarDescription: true
+            },
             items: [
                 {
-                    title: 'First list item',
+                    title: 'First list item with long title text that wraps rather than truncates at certain screen sizes due to custom properties in the sidebar configuration',
+                    description:
+                        'This is an example of a description with long text that wraps rather than truncates due to custom properties in the sidebar width configuration',
                     id: 'sliderExample',
                     thumbnail: {
                         icon: {
@@ -111,7 +117,8 @@ export class SettingsGeneratorCustomControlExampleComponent {
                                 showTicksLabels: true
                             }
                         }
-                    ]
+                    ],
+                    wrapSectionTitle: true
                 }
             ]
         };

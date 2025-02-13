@@ -27,7 +27,6 @@ const shellbarOptionsTSSrc = 'shellbar-options-example.component.ts';
 @Component({
     selector: 'app-shellbar',
     templateUrl: './shellbar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

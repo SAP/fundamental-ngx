@@ -23,7 +23,6 @@ const platformTableMultipleRowSelectionTsSrc = 'platform-table-multiple-row-sele
     templateUrl: './row-selection-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

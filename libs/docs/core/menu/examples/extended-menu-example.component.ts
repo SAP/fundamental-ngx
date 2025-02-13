@@ -85,8 +85,7 @@ import {
         FormControlComponent,
         MenuItemInputDirective,
         FormsModule
-    ],
-    standalone: true
+    ]
 })
 export class ExtendedMenuExampleComponent {
     toggleValue = false;

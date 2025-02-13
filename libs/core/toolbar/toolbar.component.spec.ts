@@ -30,8 +30,7 @@ describe('ToolbarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ToolbarTestComponent],
-            imports: [ToolbarModule],
+            imports: [ToolbarTestComponent],
             providers: [
                 {
                     provide: ResizeObserverService,
@@ -76,8 +75,7 @@ describe('ToolbarComponent - Prioritization', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ToolbarModule],
-            declarations: [ToolbarOverflowPriorityTestComponent],
+            imports: [ToolbarOverflowPriorityTestComponent],
             providers: [
                 {
                     provide: ResizeObserverService,
@@ -124,8 +122,7 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ToolbarModule],
-            declarations: [ToolbarOverflowGroupingTestComponent],
+            imports: [ToolbarOverflowGroupingTestComponent],
             providers: [
                 {
                     provide: ResizeObserverService,
@@ -153,7 +150,7 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     it('should hide elements to overflow by group and priority', (doneFn) => {
         fixture.whenRenderingDone().then(() => {
             const expectedOverflownItems: `${number} / ${OverflowPriority}`[] = [
-                '1 / high', 
+                '1 / high',
                 '2 / low',
                 '2 / low',
                 '1 / low',
@@ -210,7 +207,9 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
             </fd-toolbar>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [ToolbarModule]
 })
 class ToolbarTestComponent {
     @ViewChild('toolbar') toolbar: ToolbarComponent;
@@ -233,7 +232,9 @@ class ToolbarTestComponent {
                 <button fd-toolbar-item>Button Last</button>
             </fd-toolbar>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [ToolbarModule]
 })
 class ToolbarOverflowPriorityTestComponent {
     @ViewChild('toolbar') toolbar: ToolbarComponent;
@@ -257,7 +258,9 @@ class ToolbarOverflowPriorityTestComponent {
                 <button fd-toolbar-item fdOverflowPriority="high" [fdOverflowGroup]="1">Gr 1 / High</button>
             </fd-toolbar>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [ToolbarModule]
 })
 class ToolbarOverflowGroupingTestComponent {
     @ViewChild('toolbar') toolbar: ToolbarComponent;

@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component } from '@angular/core';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
@@ -6,7 +6,9 @@ import { PopoverFormMessageService } from './popover-form-message.service';
 
 @Component({
     template: ``,
-    providers: [PopoverService, PopoverFormMessageService]
+    providers: [PopoverService, PopoverFormMessageService],
+    standalone: true,
+    imports: [PopoverModule]
 })
 class PopoverFormMessageTestComponent {
     constructor(public formService: PopoverFormMessageService) {}
@@ -17,8 +19,7 @@ describe('PopoverFormMessageService', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [PopoverFormMessageTestComponent],
-            imports: [PopoverModule]
+            imports: [PopoverFormMessageTestComponent]
         }).compileComponents();
     }));
 

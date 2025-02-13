@@ -19,7 +19,6 @@ let nextListGrpHeaderId = 0;
         <ng-content></ng-content>
     </div>`,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }],
-    standalone: true,
     host: {
         role: 'none'
     },

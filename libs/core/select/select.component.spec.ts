@@ -24,7 +24,9 @@ import { SelectModule } from './select.module';
             <li fd-option id="option-3" [value]="'value-3'">Test3</li>
             <li fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</li>
         </fd-select>
-    `
+    `,
+    standalone: true,
+    imports: [SelectModule, ContentDensityModule]
 })
 class TestWrapperComponent {
     @ViewChild(SelectComponent, { static: true })
@@ -55,7 +57,9 @@ class TestWrapperComponent {
             <li fd-option id="option-3" [value]="'ccc'">cccc</li>
             <li fd-option id="option-4" [value]="'ddd'">dddd</li>
         </fd-select>
-    `
+    `,
+    standalone: true,
+    imports: [SelectModule, ContentDensityModule]
 })
 class TestFilteringWrapperComponent {
     @ViewChild(SelectComponent, { static: true })
@@ -81,7 +85,9 @@ type CarType = { id: string; name: string };
                 <fd-option [value]="carType">{{ carType.name }}</fd-option>
             }
         </fd-select>
-    `
+    `,
+    standalone: true,
+    imports: [SelectModule, ContentDensityModule]
 })
 class ValueCompareWithSelectComponent {
     @ViewChild(SelectComponent)
@@ -125,8 +131,12 @@ describe('SelectComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent],
-            imports: [SelectModule, NoopAnimationsModule, ContentDensityModule]
+            imports: [
+                TestWrapperComponent,
+                TestFilteringWrapperComponent,
+                ValueCompareWithSelectComponent,
+                NoopAnimationsModule
+            ]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

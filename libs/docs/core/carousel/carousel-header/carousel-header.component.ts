@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-carousel-header',
     templateUrl: './carousel-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class CarouselHeaderComponent {}

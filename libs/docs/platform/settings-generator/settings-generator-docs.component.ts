@@ -21,7 +21,6 @@ import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/mess
 @Component({
     selector: 'app-settings-generator',
     templateUrl: './settings-generator-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

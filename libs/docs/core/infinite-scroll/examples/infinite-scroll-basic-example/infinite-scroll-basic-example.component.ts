@@ -4,7 +4,6 @@ import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 @Component({
     selector: 'fd-infinite-scroll-basic-example',
     templateUrl: './infinite-scroll-basic-example.component.html',
-    standalone: true,
     imports: [InfiniteScrollModule]
 })
 export class InfiniteScrollBasicExampleComponent implements OnInit {

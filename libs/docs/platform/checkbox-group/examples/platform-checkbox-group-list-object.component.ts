@@ -8,7 +8,6 @@ import { SelectItem } from '@fundamental-ngx/platform/shared';
 @Component({
     selector: 'fdp-platform-checkbox-group-list-object',
     templateUrl: './platform-checkbox-group-list-object.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxGroupComponent, ContentDensityDirective]
 })
 export class PlatformCheckboxGroupListObjectComponent {

@@ -40,7 +40,6 @@ const PlatformObjectStatusLargeExampleTs = 'platform-object-status-large-example
     templateUrl: './platform-object-status-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

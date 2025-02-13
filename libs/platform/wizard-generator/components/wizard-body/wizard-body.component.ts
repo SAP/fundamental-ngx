@@ -37,7 +37,6 @@ export interface WizardStepChange {
     templateUrl: './wizard-body.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         WizardModule,
         WizardGeneratorStepComponent,
@@ -178,17 +177,17 @@ export class WizardBodyComponent implements OnInit {
     /**
      * @description Array of visible Wizard Steps.
      */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+
     set visibleItems(items: PreparedWizardGeneratorItem[]) {
         this._visibleItems = items;
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+
     get visibleItems(): PreparedWizardGeneratorItem[] {
         return this._visibleItems || this._wizardGeneratorService.items;
     }
 
     /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+
     constructor(
         private _wizardGeneratorService: WizardGeneratorService,
         private _cd: ChangeDetectorRef

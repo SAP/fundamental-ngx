@@ -57,7 +57,6 @@ import {
             useExisting: ShellbarComponent
         }
     ],
-    standalone: true,
     imports: [PortalModule, FdTranslatePipe]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {

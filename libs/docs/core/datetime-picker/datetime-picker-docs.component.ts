@@ -50,7 +50,6 @@ const dateTimeMobileTs = 'datetime-mobile/datetime-mobile-example.component.ts';
     selector: 'app-datetime-picker-docs',
     templateUrl: './datetime-picker-docs.component.html',
     styleUrls: ['./datetime-picker-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

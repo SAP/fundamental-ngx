@@ -21,7 +21,6 @@ const advancedExampleCustomDirTs = 'advanced-usage/custom-selectable-item.direct
     selector: 'app-tabs',
     templateUrl: './selectable-list-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

@@ -17,7 +17,6 @@ import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@
             useValue: { themeQueryParam: 'customQueryParam' }
         }
     ],
-    standalone: true,
     imports: [ButtonComponent, FormLabelComponent, JsonPipe]
 })
 export class ThemingUrlExampleComponent {

@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Időszak',
         decreasePeriodLabel: 'Időszak értékének csökkentése',
         navigationInstruction:
-            'A le és a fel nyíllal navigálhat a lista elemei között. A jobb és a bal nyíllal válthat a listák között.'
+            'A le és a fel nyíllal navigálhat a lista elemei között. A jobb és a bal nyíllal válthat a listák között.',
+        nightLabel: 'éjszaka',
+        morningLabel: 'reggel',
+        afternoonLabel: 'délután',
+        eveningLabel: 'este'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Időpontválasztó szerinti bevitel',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Varázsló'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Továbbiak'
+        overflowTitleMore: 'Továbbiak',
+        breadcrumbTrailLabel: 'Útkövetési napló'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Megfigyelők',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Oszlopok',
         toolbarActionExpandAllButtonTitle: 'Összes kibontása',
         toolbarActionCollapseAllButtonTitle: 'Összes visszazárása',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Visszalépés',
         filterDialogNotFilteredLabel: '(Nincs szűrve)',
         filterDialogFilterByLabel: 'Szűrés alapja: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'Mégse',
         selectAllCheckboxLabel: 'Összes kiválasztása',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'A sor kijelölésének megszüntetéséhez nyomja meg a „szóköz” billentyűt',
         selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
-        loadMore: 'Továbbiak betöltése'
+        loadMore: 'Továbbiak betöltése',
+        filteredBy: 'Alkalmazott szűrő:',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Szerkesztés'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menügomb'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Kibontás/visszazárás',
+        groupAriaDescription: 'Értesítési csoport',
+        groupAriaDescriptionExpanded: 'kibontva',
+        groupAriaDescriptionCollapsed: 'visszazárva'
     }
 };

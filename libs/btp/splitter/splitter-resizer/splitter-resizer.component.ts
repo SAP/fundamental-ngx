@@ -39,7 +39,6 @@ import {
         '[class.is-active]': '_start != null || _isInFocus',
         '[tabindex]': '0'
     },
-    standalone: true,
     imports: [ButtonComponent, IconComponent, NestedButtonDirective]
 })
 export class SplitterResizerComponent implements OnDestroy {

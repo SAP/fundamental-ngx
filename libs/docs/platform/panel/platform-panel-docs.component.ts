@@ -26,7 +26,6 @@ const panelConfigTsExample = 'platform-panel-config-example.component.ts';
 @Component({
     selector: 'app-panel',
     templateUrl: './platform-panel-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

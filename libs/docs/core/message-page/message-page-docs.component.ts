@@ -28,7 +28,6 @@ const messagePageNoIconExample = 'message-page-no-icon-example.component.html';
 @Component({
     selector: 'app-message-page',
     templateUrl: './message-page-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

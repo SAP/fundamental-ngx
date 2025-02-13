@@ -2,7 +2,9 @@ import { DefaultThemeRenderContext, JSX, Reflection } from 'typedoc';
 import { fixedMarkdown } from '../utils';
 
 export function commentSummary(context: DefaultThemeRenderContext, props: Reflection) {
-    if (!props.comment?.summary.some((part) => part.text)) return;
+    if (!props.comment?.summary.some((part) => part.text)) {
+        return;
+    }
 
     return (
         <>

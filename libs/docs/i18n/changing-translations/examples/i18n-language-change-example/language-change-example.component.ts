@@ -21,7 +21,6 @@ import { BehaviorSubject } from 'rxjs';
             useFactory: () => new BehaviorSubject(inject(LOCALE_ID))
         }
     ],
-    standalone: true,
     imports: [SegmentedButtonModule, FormsModule, ButtonComponent, FormLabelComponent, PlatformTextAreaModule]
 })
 export class LanguageChangeExampleComponent {

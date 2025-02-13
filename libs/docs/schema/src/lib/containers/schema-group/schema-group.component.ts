@@ -16,7 +16,6 @@ import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pip
     selector: 'schema-group',
     templateUrl: 'schema-group.component.html',
     styleUrls: ['schema-group.component.scss'],
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

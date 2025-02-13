@@ -482,6 +482,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'कॉलम',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogNotFilteredLabel: '(फ़िल्टर नहीं किया गया)',
         filterDialogFilterByLabel: 'के द्वारा छनित: {filterLabel}',
         filterDialogFilterTitle: 'फ़िल्टर',
@@ -506,8 +509,12 @@ export default {
         sortDialogCancelBtnLabel: 'रद्द करें',
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR'
+        selectSingleRow: 'To select row, press SPACEBAR',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'संपादित करें'

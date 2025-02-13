@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-object-page-header',
     templateUrl: './object-page-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ObjectPageDocsHeaderComponent {}

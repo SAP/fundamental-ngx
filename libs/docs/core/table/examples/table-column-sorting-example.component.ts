@@ -103,7 +103,6 @@ interface ExampleRow {
     selector: 'fd-table-column-sorting-example',
     templateUrl: './table-column-sorting-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarSpacerDirective,

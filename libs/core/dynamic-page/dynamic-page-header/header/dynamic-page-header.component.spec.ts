@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { CommonModule } from '@angular/common';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
@@ -23,6 +23,8 @@ import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-
         <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
         <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
     </fd-dynamic-page-header>`,
+    standalone: true,
+    imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
     providers: [DynamicPageService]
 })
 class TestComponent {
@@ -57,6 +59,8 @@ class TestComponent {
             <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
         </fd-dynamic-page-header>
     `,
+    standalone: true,
+    imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DynamicPageService]
 })
@@ -74,8 +78,7 @@ describe('DynamicPageTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestComponent],
+            imports: [TestComponent],
             providers: [DynamicPageService]
         }).compileComponents();
     }));
@@ -126,8 +129,7 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestWithSubtitleTemplateComponent],
+            imports: [TestWithSubtitleTemplateComponent],
             providers: [DynamicPageService]
         }).compileComponents();
     });
@@ -135,14 +137,14 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
     beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(TestWithSubtitleTemplateComponent);
         component = fixture.componentInstance;
-      
+
         fixture.detectChanges();
-      
+
         fixture.whenRenderingDone().then(() => {
-          fixture.detectChanges();
-          header = component.header;
+            fixture.detectChanges();
+            header = component.header;
         });
-      }));
+    }));
 
     it('should create', () => {
         expect(fixture).toBeTruthy();
@@ -161,24 +163,23 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
     it('should set subtitle template properties correctly', waitForAsync(() => {
         fixture.detectChanges();
         fixture.whenRenderingDone().then(() => {
-      
-          component.dynamicPageService.collapsed.set(false);
-          fixture.detectChanges();
-      
-          const subtitle = fixture.nativeElement.querySelector('.my-custom-subtitle');
-          const title = fixture.nativeElement.querySelector('.my-custom-title');
-      
-          expect(subtitle).toBeDefined();
-          expect(subtitle.textContent).toEqual(`Subtitle expanded`);
-          expect(title.textContent).toEqual('Title expanded');
-      
-          component.dynamicPageService.collapsed.set(true);
-          fixture.detectChanges();
-      
-          expect(fixture.nativeElement.querySelector('.my-custom-subtitle').textContent)
-            .toEqual(`Subtitle collapsed`);
-          expect(fixture.nativeElement.querySelector('.my-custom-title').textContent)
-            .toEqual('Title collapsed');
+            component.dynamicPageService.collapsed.set(false);
+            fixture.detectChanges();
+
+            const subtitle = fixture.nativeElement.querySelector('.my-custom-subtitle');
+            const title = fixture.nativeElement.querySelector('.my-custom-title');
+
+            expect(subtitle).toBeDefined();
+            expect(subtitle.textContent).toEqual(`Subtitle expanded`);
+            expect(title.textContent).toEqual('Title expanded');
+
+            component.dynamicPageService.collapsed.set(true);
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.my-custom-subtitle').textContent).toEqual(
+                `Subtitle collapsed`
+            );
+            expect(fixture.nativeElement.querySelector('.my-custom-title').textContent).toEqual('Title collapsed');
         });
-      }));
+    }));
 });

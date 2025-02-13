@@ -45,7 +45,6 @@ import { delay, of } from 'rxjs';
             }
         `
     ],
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

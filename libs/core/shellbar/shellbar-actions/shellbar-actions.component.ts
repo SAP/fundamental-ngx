@@ -63,7 +63,6 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         '[class.fd-shellbar__group]': 'true',
         '[class.fd-shellbar__group--actions]': 'true'
     },
-    standalone: true,
     imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent],
     providers: [
         {

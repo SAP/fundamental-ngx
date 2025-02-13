@@ -9,7 +9,6 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
     selector: 'fd-card-footer-example',
     templateUrl: './card-footer-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, ListModule, ButtonComponent, MenuModule, LinkComponent]
 })
 export class CardFooterExampleComponent {}

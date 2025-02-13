@@ -10,7 +10,9 @@ import { PlatformListModule } from '../list.module';
                 <span id="projected_span">Title</span>
             </li>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformListModule]
 })
 class FreeContentListItemTestComponent {
     @ViewChild('StandardListItemComponent', { read: ElementRef, static: true })
@@ -23,8 +25,7 @@ describe('FreeContentListItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FreeContentListItemTestComponent],
-            imports: [PlatformListModule]
+            imports: [FreeContentListItemTestComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(FreeContentListItemTestComponent);

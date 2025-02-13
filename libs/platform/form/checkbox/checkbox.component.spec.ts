@@ -65,7 +65,16 @@ import { PlatformCheckboxModule } from './checkbox.module';
                 ></fdp-checkbox>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformCheckboxModule,
+        ContentDensityModule
+    ]
 })
 class TestCheckboxComponent {
     @ViewChildren(CheckboxComponent)
@@ -86,15 +95,7 @@ describe('Checkbox test Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                FormModule,
-                FormsModule,
-                ReactiveFormsModule,
-                PlatformCheckboxModule,
-                ContentDensityModule
-            ],
-            declarations: [TestCheckboxComponent]
+            imports: [TestCheckboxComponent]
         }).compileComponents();
     }));
 

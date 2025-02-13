@@ -49,7 +49,6 @@ export class FdOptionSelectionChange {
  * Used to represent an option of the select component.
  */
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-option], fd-option',
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -79,7 +78,6 @@ export class FdOptionSelectionChange {
             }
         `
     ],
-    standalone: true,
     imports: [ListTitleDirective, NgTemplateOutlet]
 })
 export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {

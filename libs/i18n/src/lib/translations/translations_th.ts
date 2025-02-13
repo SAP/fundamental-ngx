@@ -167,7 +167,11 @@ export default {
         periodLabel: 'ช่วงเวลา',
         decreasePeriodLabel: 'ลดช่วงเวลา',
         navigationInstruction:
-            'เมื่อต้องการย้ายระหว่างไอเท็มในรายการนี้ ให้กดลูกศรบนหรือลูกศรล่าง เมื่อต้องการสลับระหว่างรายการ ให้กดลูกศรซ้ายหรือลูกศรขวา'
+            'เมื่อต้องการย้ายระหว่างไอเท็มในรายการนี้ ให้กดลูกศรบนหรือลูกศรล่าง เมื่อต้องการสลับระหว่างรายการ ให้กดลูกศรซ้ายหรือลูกศรขวา',
+        nightLabel: 'กลางคืน',
+        morningLabel: 'ตอนเช้า',
+        afternoonLabel: 'ตอนบ่าย',
+        eveningLabel: 'ตอนเย็น'
     },
     coreTimePicker: {
         timePickerInputLabel: 'อินพุทของตัวเลือกเวลา',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'เพิ่มเติม'
+        overflowTitleMore: 'เพิ่มเติม',
+        breadcrumbTrailLabel: 'เมนูนำทาง'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'ผู้เฝ้าดู',
@@ -484,6 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'คอลัมน์',
         toolbarActionExpandAllButtonTitle: 'ขยายทั้งหมด',
         toolbarActionCollapseAllButtonTitle: 'ยุบรวมทั้งหมด',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'ย้อนกลับ',
         filterDialogNotFilteredLabel: '(ไม่ได้กรอง)',
         filterDialogFilterByLabel: 'กรองตาม: {filterLabel}',
@@ -509,9 +517,14 @@ export default {
         sortDialogCancelBtnLabel: 'ยกเลิก',
         selectAllCheckboxLabel: 'เลือกทั้งหมด',
         deselectAllCheckboxLabel: 'ยกเลิกการเลือกทั้งหมด',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'เมื่อต้องการยกเลิกการเลือกแถว ให้กด SPACEBAR',
         selectSingleRow: 'เมื่อต้องการเลือกแถว ให้กด SPACEBAR',
-        loadMore: 'โหลดเพิ่มเติม'
+        loadMore: 'โหลดเพิ่มเติม',
+        filteredBy: 'กรองตาม',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'แก้ไข'
@@ -570,5 +583,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'ปุ่มเมนู'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'ขยาย/ยุบรวม',
+        groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
+        groupAriaDescriptionExpanded: 'ขยาย',
+        groupAriaDescriptionCollapsed: 'ยุบรวม'
     }
 };

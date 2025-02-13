@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Zeitraum',
         decreasePeriodLabel: 'Zeitraum verringern',
         navigationInstruction:
-            'Um zwischen Elementen in dieser Liste zu wechseln, drücken Sie die Pfeile nach oben oder unten. Um zwischen Listen zu wechseln, drücken Sie die Pfeile nach links oder rechts.'
+            'Um zwischen Elementen in dieser Liste zu wechseln, drücken Sie die Pfeile nach oben oder unten. Um zwischen Listen zu wechseln, drücken Sie die Pfeile nach links oder rechts.',
+        nightLabel: 'nachts',
+        morningLabel: 'morgens',
+        afternoonLabel: 'nachmittags',
+        eveningLabel: 'abends'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zeitauswahleingabe',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Assistent'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mehr'
+        overflowTitleMore: 'Mehr',
+        breadcrumbTrailLabel: 'Navigationspfad'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Beobachter',
@@ -485,6 +490,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Spalten',
         toolbarActionExpandAllButtonTitle: 'Alle erweitern',
         toolbarActionCollapseAllButtonTitle: 'Alle komprimieren',
+        expandRowButtonTitle: 'Expand row',
+        collapseRowButtonTitle: 'Collapse row',
+        rowNavigateButtonTitle: 'Navigate',
         filterDialogBackToColumns: 'Zurück navigieren',
         filterDialogNotFilteredLabel: '(Nicht gefiltert)',
         filterDialogFilterByLabel: 'Filtern nach: {filterLabel}',
@@ -510,9 +518,14 @@ export default {
         sortDialogCancelBtnLabel: 'Abbrechen',
         selectAllCheckboxLabel: 'Alle auswählen',
         deselectAllCheckboxLabel: 'Alle abwählen',
+        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
+        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
+        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'Um Zeilenauswahl aufzuheben, Leertaste drücken',
         selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken',
-        loadMore: 'Weitere laden'
+        loadMore: 'Weitere laden',
+        filteredBy: 'Gefiltert nach',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bearbeiten'
@@ -571,5 +584,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menüdrucktaste'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Erweitern/reduzieren',
+        groupAriaDescription: 'Benachrichtigungsgruppe',
+        groupAriaDescriptionExpanded: 'erweitert',
+        groupAriaDescriptionCollapsed: 'reduziert'
     }
 };

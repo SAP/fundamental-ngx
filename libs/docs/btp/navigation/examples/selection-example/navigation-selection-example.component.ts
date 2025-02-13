@@ -13,7 +13,6 @@ interface ExampleNavigationItem {
 
 @Component({
     selector: 'fdb-navigation-selection-example',
-    standalone: true,
     imports: [FDB_NAVIGATION],
     templateUrl: './navigation-selection-example.component.html',
     encapsulation: ViewEncapsulation.None,

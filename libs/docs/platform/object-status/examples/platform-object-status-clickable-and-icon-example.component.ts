@@ -6,7 +6,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
     selector: 'fdp-platform-object-status-clickable-and-icon-example',
     templateUrl: './platform-object-status-clickable-and-icon-example.component.html',
     styleUrls: ['./platform-object-status-clickable-and-icon-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusClickableAndIconExampleComponent {

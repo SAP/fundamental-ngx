@@ -51,7 +51,9 @@ import { NestedItemService } from './nested-item.service';
                 <span fd-nested-list-title>Link 1</span>
             </a>
         </li>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListModule, PopoverModule]
 })
 class TestNestedContainerComponent {
     @ViewChild('listNestedItemElement', { read: NestedItemDirective })
@@ -91,8 +93,7 @@ describe('NestedItemDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule, PopoverModule],
-            declarations: [TestNestedContainerComponent]
+            imports: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

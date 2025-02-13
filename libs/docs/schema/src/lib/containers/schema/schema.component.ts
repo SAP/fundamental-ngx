@@ -9,7 +9,6 @@ import { SchemaGroupComponent } from '../schema-group/schema-group.component';
     selector: 'schema',
     templateUrl: 'schema.component.html',
     styleUrls: ['schema.component.scss'],
-    standalone: true,
     imports: [SchemaGroupComponent]
 })
 export class SchemaComponent implements OnInit, OnChanges, OnDestroy {

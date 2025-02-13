@@ -25,7 +25,6 @@ import { toastAnimation } from './constants/message-toast.animation';
         tabindex: '-1',
         class: 'fd-message-toast'
     },
-    standalone: true,
     imports: [PortalModule]
 })
 export class MessageToastComponent extends BaseToastDurationDismissibleContainerComponent<MessageToastConfig> {

@@ -88,7 +88,6 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
     host: {
         class: 'fdp-approval-flow-dialog fdp-approval-flow-add-node'
     },
-    standalone: true,
     imports: [
         DialogComponent,
         ContentDensityDirective,
