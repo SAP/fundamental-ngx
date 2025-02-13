@@ -128,7 +128,7 @@ jobs:
         if: ${{ always() }}
         needs:
             - build_test
-            - e2e_test
+            # - e2e_test
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
         steps:
