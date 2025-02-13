@@ -125,6 +125,9 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Toolbar Columns Settings button visibility */
     abstract showColumnSettingsInToolbar(showColumnSettings: boolean): void;
 
+    /** Toolbar Settings button visibility */
+    abstract showSettingsInToolbar(showSettings: boolean): void;
+
     /** Disable filtering by header column menu */
     abstract setHeaderColumnFilteringDisabled(disabled: boolean): void;
 
