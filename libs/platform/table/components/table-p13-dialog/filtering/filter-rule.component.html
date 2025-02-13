@@ -85,7 +85,7 @@
                             {{ 'platformTable.P13FilterBooleanOptionFalse' | fdTranslate }}
                         </li>
                     </fd-select>
-                } @else if (rule.dataType === DATA_TYPE.ARRAY && rule.filterSelectOptions?.length) {
+                } @else if (rule.filterSelectOptions?.length) {
                     <!-- Filter options dropdown menu -->
                     <fd-select
                         [ngModel]="rule[valueKey]"

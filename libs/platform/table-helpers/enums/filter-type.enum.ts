@@ -10,6 +10,5 @@ export enum FilterableColumnDataType {
     STRING = 'string',
     NUMBER = 'number',
     BOOLEAN = 'boolean',
-    DATE = 'date',
-    ARRAY = 'array'
+    DATE = 'date'
 }

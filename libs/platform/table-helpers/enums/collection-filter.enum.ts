@@ -114,7 +114,6 @@ export const getFilterStrategiesBasedOnDataType = (
     dataType: FilterableColumnDataType
 ): readonly FilterStringStrategy[] | readonly FilterDateStrategy[] => {
     switch (dataType) {
-        case FilterableColumnDataType.ARRAY:
         case FilterableColumnDataType.STRING:
             return FILTER_STRING_STRATEGIES;
         case FilterableColumnDataType.NUMBER:
