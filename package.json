@@ -45,7 +45,7 @@
         "@angular/core": "19.0.3",
         "@angular/forms": "19.0.3",
         "@angular/platform-browser": "19.0.3",
-        "@angular/platform-browser-dynamic": "19.0.3",
+        "@angular/platform-browser-dynamic": "19.1.6",
         "@angular/router": "19.0.3",
         "@fundamental-styles/cx": "0.38.0",
         "@nx/angular": "20.3.1",
