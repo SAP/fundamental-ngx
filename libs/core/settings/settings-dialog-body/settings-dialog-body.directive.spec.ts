@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsDialogBodyDirective } from '../index';
+import { SettingsDialogBodyDirective } from '@fundamental-ngx/core/settings';
 
 @Component({
     template: ` <div #directiveElement fd-settings-dialog-body>Settings Dialog Body Test Text</div> `,
