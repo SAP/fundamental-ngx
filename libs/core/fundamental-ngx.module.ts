@@ -68,6 +68,7 @@ import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { SettingsModule } from '@fundamental-ngx/core/settings';
 import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
@@ -189,7 +190,8 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
         ContentDensityModule,
         SkeletonModule,
         MultiComboboxModule,
-        ObjectAttributeModule
+        ObjectAttributeModule,
+        SettingsModule
     ]
 })
 export class FundamentalNgxCoreModule {}

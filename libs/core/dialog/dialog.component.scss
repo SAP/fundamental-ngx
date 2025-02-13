@@ -1,4 +1,5 @@
 @import 'fundamental-styles/dist/dialog.css';
+@import 'fundamental-styles/dist/settings.css';
 
 .fd-dialog {
     z-index: 999;
@@ -40,4 +41,52 @@
 
 .fd-dialog__footer {
     overflow: hidden;
+}
+
+.fd-settings__dialog-content {
+    height: 42.5rem;
+}
+
+.fd-settings {
+    &:has(.fd-settings__container--sm) {
+        --fdSettings_List_Area_Width: 100%;
+        --fdSettings_Header_Margin_Top: 0;
+        --fdSettings_List_Nav_Indicator_Content: '\e1ed';
+        --fdSettings_Dialog_Content_Min_Width: 100%;
+        --fdSettings_Dialog_Content_Min_Height: 100%;
+        --fdSettings_Dialog_Content_Max_Width: 100%;
+        --fdSettings_Dialog_Content_Max_Height: 100%;
+        --fdSettings_List_Area_Border: none;
+
+        .fd-settings__dialog-content {
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .fd-settings__dialog-body {
+            border-radius: 0;
+        }
+    }
+
+    &:has(.fd-settings__container--md) {
+        --fdSettings_List_Area_Width: 100%;
+        --fdSettings_Header_Margin_Top: 0;
+        --fdSettings_List_Nav_Indicator_Content: '\e1ed';
+        --fdSettings_Dialog_Content_Min_Width: 80%;
+        --fdSettings_Dialog_Content_Min_Height: 88%;
+        --fdSettings_Dialog_Content_Max_Width: 40rem;
+        --fdSettings_Dialog_Content_Max_Height: 42.5rem;
+        --fdSettings_List_Area_Border: none;
+    }
+
+    &:has(.fd-settings__container--lg),
+    &:has(.fd-settings__container--xl) {
+        --fdSettings_List_Area_Width: 20rem;
+        --fdSettings_Header_Margin_Top: 1rem;
+        --fdSettings_List_Nav_Indicator_Content: none;
+        --fdSettings_Dialog_Content_Min_Width: 60rem;
+        --fdSettings_Dialog_Content_Min_Height: 42.5rem;
+        --fdSettings_Dialog_Content_Max_Width: 60rem;
+        --fdSettings_Dialog_Content_Max_Height: 42.5rem;
+    }
 }

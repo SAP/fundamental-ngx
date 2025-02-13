@@ -173,6 +173,7 @@ export class DialogComponent
             this.dialogConfig.hasBackdrop ? 'fd-dialog' : 'fd-dialog--no-backdrop',
             this.dialogConfig.container !== 'body' || this.dialogConfig.position ? 'fd-dialog--targeted' : '',
             this.showDialogWindow ? 'fd-dialog--active' : '',
+            this.dialogConfig.settings ? 'fd-settings' : '',
             this._class,
             this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
         ];
