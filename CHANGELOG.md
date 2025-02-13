@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.14...v0.55.0-rc.15) (2025-02-13)
+
+
+### Bug Fixes
+
+* **platform:** Combine Sorting, Filtering, and Grouping Settings into a Single Dialog ([#12502](https://github.com/SAP/fundamental-ngx/issues/12502)) ([be873f3](https://github.com/SAP/fundamental-ngx/commit/be873f3623a129523aa5c3adc7520a9beb64c1bd))
+
+
+
+
+
 # [0.55.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.13...v0.55.0-rc.14) (2025-02-13)
 
 **Note:** Version bump only for package fundamental-ngx
