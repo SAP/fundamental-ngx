@@ -31,10 +31,11 @@ import { DialogRef } from '../utils/dialog-ref.class';
     templateUrl: 'dialog-body.component.html',
     host: {
         '[class.fd-dialog__body]': 'true',
+        '[class.fd-settings__dialog-body]': 'dialogConfig.settings',
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
         '[class.fd-dialog__body--no-horizontal-padding]': '!dialogConfig.horizontalPadding',
         '[style.min-height]': 'dialogConfig.bodyMinHeight',
-        '[style.padding]': 'dialogConfig.disablePaddings || disablePaddings() ? 0 : "1rem"'
+        '[style.padding]': 'dialogConfig.disablePaddings || disablePaddings() || dialogConfig.settings ? 0 : "1rem"'
     },
     providers: [
         {
