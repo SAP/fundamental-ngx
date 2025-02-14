@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.17...v0.55.0-rc.18) (2025-02-14)
+
+
+### Bug Fixes
+
+* **core:** illustrated messages responsiveness ([#13025](https://github.com/SAP/fundamental-ngx/issues/13025)) ([5ab8110](https://github.com/SAP/fundamental-ngx/commit/5ab81100fbd7f79604746012ace752148144992c))
+
+
+
+
+
 # [0.55.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.16...v0.55.0-rc.17) (2025-02-13)
 
 **Note:** Version bump only for package @fundamental-ngx/core
