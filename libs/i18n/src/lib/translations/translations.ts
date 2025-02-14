@@ -526,6 +526,10 @@ export default {
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
         loadMore: 'Show more',
+        toolbarActionButtonTitle: 'Settings',
+        settingsDialogHeader: 'Settings',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Cancel',
         filteredBy: 'Filtered by',
         showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
