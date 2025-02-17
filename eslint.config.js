@@ -303,5 +303,11 @@ module.exports = [
         files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
         // Override or add rules here
         rules: {}
+    },
+    {
+        files: ['**/*.html'],
+        rules: {
+            '@angular-eslint/template/prefer-control-flow': 'error',
+        }
     }
 ];
