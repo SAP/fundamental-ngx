@@ -180,3 +180,13 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
