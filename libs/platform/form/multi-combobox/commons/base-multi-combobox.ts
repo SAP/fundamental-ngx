@@ -569,10 +569,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             this._chooseOtherItem(-1);
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this.toggleSelectionByInputText();
-        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
-            event.stopPropagation();
-
-            this.showList(false);
         } else if (!KeyUtil.isKeyCode(event, [...this._nonOpeningKeys, CONTROL])) {
             this.showList(true);
             const acceptedKeys = !KeyUtil.isKeyType(event, 'alphabetical') && !KeyUtil.isKeyType(event, 'numeric');

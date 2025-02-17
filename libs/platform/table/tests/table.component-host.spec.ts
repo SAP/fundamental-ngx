@@ -41,7 +41,9 @@ import { SourceItem, TableDataProviderMock } from './helpers';
             <fdp-column name="status" key="status" label="Status"></fdp-column>
             <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
         </fdp-table>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule]
 })
 class TableHostComponent {
     @ViewChild(TableComponent) table: TableComponent;
@@ -62,8 +64,7 @@ describe('TableComponent Host', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule],
-            declarations: [TableHostComponent],
+            imports: [TableHostComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

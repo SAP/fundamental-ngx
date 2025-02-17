@@ -5,10 +5,11 @@ import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive
 import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
 
 @Component({
+    standalone: true,
+    imports: [FocusKeyManagerItemDirective, FocusKeyManagerListDirective],
     template: `
         <ul fdkFocusKeyManagerList>
             <li #item fdkFocusKeyManagerItem></li>
-
             <li #initialFocus fdkFocusKeyManagerItem initialFocus></li>
         </ul>
     `
@@ -25,8 +26,7 @@ describe('FocusKeyManagerItem', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [FocusKeyManagerItemDirective, FocusKeyManagerListDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -38,7 +38,6 @@ describe('FocusKeyManagerItem', () => {
 
     it('should set tabindex for initialFocus elements', () => {
         fixture.detectChanges();
-
         expect(component.initialFocusItem.nativeElement.tabIndex).toBe(0);
         expect(component.item.nativeElement.tabIndex).toBe(-1);
     });

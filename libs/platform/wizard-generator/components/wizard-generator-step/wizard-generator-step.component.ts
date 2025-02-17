@@ -43,7 +43,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     templateUrl: './wizard-generator-step.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [TitleComponent, FormGeneratorComponent]
 })
 export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit, OnDestroy, OnChanges {

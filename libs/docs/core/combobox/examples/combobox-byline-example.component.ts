@@ -16,7 +16,6 @@ export interface ExampleItem {
     selector: 'fd-combobox-byline-example',
     templateUrl: './combobox-byline-example.component.html',
     styleUrls: ['combobox-example.component.scss'],
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

@@ -26,7 +26,6 @@ import { FormItemComponent } from '@fundamental-ngx/core/form';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, FormItemComponent, CalendarComponent, ButtonComponent, FdDatetimeModule]
 })
 export class CalendarFormExamplesComponent {

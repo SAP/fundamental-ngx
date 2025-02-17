@@ -14,7 +14,6 @@ import { BreakpointDirective } from '@fundamental-ngx/cdk/utils';
             <div>Will be visible on screen width less than 1900px</div>
         </ng-template>
     `,
-    standalone: true,
     imports: [BreakpointDirective]
 })
 export class AliasNamesExampleComponent {}

@@ -184,7 +184,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
             this._mdIsInline = !!inlineLayout['M'];
             this._lgIsInline = !!inlineLayout['L'];
             this._xlIsInline = !!inlineLayout['XL'];
-        } catch (error) {
+        } catch {
             this._isInLineLayoutEnabled = false;
         }
     }

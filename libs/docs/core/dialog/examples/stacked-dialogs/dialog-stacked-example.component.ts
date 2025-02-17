@@ -6,7 +6,6 @@ import { FirstDialogExampleComponent } from './first-dialog-example.component';
 @Component({
     selector: 'fd-dialog-stacked-example',
     template: '<button fd-button label="Open First Dialog" (click)="openDialog()"></button>',
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class DialogStackedExampleComponent {

@@ -7,7 +7,6 @@ import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-n
     selector: 'fd-flexible-column-layout-example',
     templateUrl: './flexible-column-layout-example.component.html',
     styleUrls: ['flexible-column-layout-example.component.scss'],
-    standalone: true,
     imports: [ButtonComponent, FlexibleColumnLayoutModule]
 })
 export class FlexibleColumnLayoutExampleComponent {

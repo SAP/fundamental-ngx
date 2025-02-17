@@ -23,7 +23,6 @@ import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    standalone: true,
     imports: [FormLabelComponent, PlatformDatePickerComponent, FormsModule]
 })
 export class PlatformDatePickerUpdateOnBlurExampleComponent {

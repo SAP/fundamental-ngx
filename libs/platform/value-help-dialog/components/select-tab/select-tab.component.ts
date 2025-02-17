@@ -50,7 +50,6 @@ let titleUniqueId = 0;
     styleUrl: './select-tab.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,
@@ -129,7 +128,6 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
 
     /** Event emitted when row was selected. */
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
     select = new EventEmitter<T[]>();
 
     /** @hidden */

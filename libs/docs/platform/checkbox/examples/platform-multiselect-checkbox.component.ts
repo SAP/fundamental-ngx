@@ -7,7 +7,6 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
 @Component({
     selector: 'fdp-platform-multiselect-checkbox',
     templateUrl: 'platform-multiselect-checkbox.component.html',
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         CheckboxComponent,

@@ -23,7 +23,6 @@ const dialogQuickViewTs = 'quick-view-dialog-example.component.ts';
 @Component({
     selector: 'app-quick-view',
     templateUrl: './quick-view-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

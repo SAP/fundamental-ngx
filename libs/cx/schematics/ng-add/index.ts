@@ -105,6 +105,7 @@ function addStylePathToConfig(options: any): Rule {
                 return tree;
             }
         } catch (e) {
+            console.error('Error:', e);
             throw new SchematicsException(
                 `Unable to find angular.json project styles. Please manually configure your styles array.`
             );
@@ -143,6 +144,7 @@ function addFontsToStyles(options: any): Rule {
                     return tree;
                 }
             } catch (e) {
+                console.error('Error:', e);
                 console.warn(
                     // eslint-disable-next-line max-len
                     `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.app/?path=/docs/docs-introduction--docs#getting-started`

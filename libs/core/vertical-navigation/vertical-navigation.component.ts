@@ -31,7 +31,6 @@ import { VerticalNavigationMainNavigationComponent } from './vertical-navigation
     styleUrl: './vertical-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [VerticalNavigationMainNavigationComponent, ListComponent]
 })
 export class VerticalNavigationComponent implements AfterContentInit, OnDestroy {
@@ -77,22 +76,17 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
 
     /** @hidden */
     constructor() {
-        effect(
-            () => {
-                if (!this._contentInited()) {
-                    return;
-                }
-
-                const isCondensed = this._condensed();
-
-                this._mainNavItems().forEach((item) => {
-                    item._condensed.set(isCondensed);
-                });
-            },
-            {
-                allowSignalWrites: true
+        effect(() => {
+            if (!this._contentInited()) {
+                return;
             }
-        );
+
+            const isCondensed = this._condensed();
+
+            this._mainNavItems().forEach((item) => {
+                item._condensed.set(isCondensed);
+            });
+        });
     }
 
     /** @hidden */

@@ -1,8 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { GridListModule } from '../../grid-list.module';
 import { GridListComponent } from '../grid-list/grid-list.component';
+import { GridListItemComponent } from './grid-list-item.component';
 
 @Component({
     template: `
@@ -39,7 +41,9 @@ import { GridListComponent } from '../grid-list/grid-list.component';
             </fd-grid-list-item>
         </fd-grid-list>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CommonModule, GridListModule, GridListItemComponent]
 })
 class TestComponent {
     @ViewChild(GridListComponent)
@@ -107,8 +111,7 @@ describe('GridListItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [GridListModule],
+            imports: [CommonModule, TestComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
@@ -127,6 +130,7 @@ describe('GridListItemComponent', () => {
 
     it('should display 6 items', () => {
         const itemsLength = fixture.debugElement.queryAll(By.css('fd-grid-list-item')).length;
+        console.log('1 itemsLength: ', itemsLength);
 
         expect((gridListComponent as any)._gridListItems.length).toEqual(6);
         expect(itemsLength).toEqual(6);

@@ -37,7 +37,9 @@ class TableDataProviderWithPaging extends TableDataProvider<SourceItem> {
             <fdp-column name="description" key="description" label="Description"></fdp-column>
             <fdp-column name="status" key="status" label="Status"></fdp-column>
         </fdp-table>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformTableModule, RouterModule, RouterTestingModule]
 })
 class TableHostComponent {
     @ViewChild(TableComponent) table: TableComponent;
@@ -52,8 +54,7 @@ describe('TableComponent Page Scrolling', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule, RouterModule, RouterTestingModule],
-            declarations: [TableHostComponent],
+            imports: [TableHostComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

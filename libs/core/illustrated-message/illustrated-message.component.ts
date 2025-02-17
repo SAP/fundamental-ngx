@@ -48,7 +48,6 @@ let illustratedMessageUniqueId = 0;
     styleUrl: './illustrated-message.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class IllustratedMessageComponent implements AfterContentChecked, OnChanges, OnDestroy, OnInit, CssClassBuilder {
@@ -102,6 +101,9 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
     _inlineSvg: SafeHtml | undefined;
 
     /** @hidden */
+    _tempType: IllustratedMessageType;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -121,7 +123,7 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
     buildComponentCssClass(): string[] {
         return [
             'fd-illustrated-message',
-            this.type ? `fd-illustrated-message--${this.type}` : '',
+            this._tempType ? `fd-illustrated-message--${this._tempType}` : '',
             this.class || ''
         ].filter(Boolean);
     }
@@ -155,16 +157,16 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
     private _constructHref(): void {
         this._inlineSvg = undefined;
         const containerWidth = this.elementRef.nativeElement.offsetWidth;
-        let tempType = this.type;
+        this._tempType = this.type;
         if (!this.type && containerWidth > 0) {
-            tempType = this._determineIllustratedMessageType(containerWidth);
+            this._tempType = this._determineIllustratedMessageType(containerWidth);
         }
-        const inlineSvg = this.svgConfig?.[tempType]?.file;
+        const inlineSvg = this.svgConfig?.[this._tempType]?.file;
         if (inlineSvg) {
             this._inlineSvg = this._sanitizer.bypassSecurityTrustHtml(inlineSvg);
         }
 
-        this._href = this.svgConfig ? this._getHrefByType(tempType, this.svgConfig) : '';
+        this._href = this.svgConfig ? this._getHrefByType(this._tempType, this.svgConfig) : '';
         this.buildComponentCssClass();
 
         this._cdRef.markForCheck();

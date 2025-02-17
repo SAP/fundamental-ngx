@@ -65,7 +65,6 @@ const loadingTsExample = 'loading/wizard-generator-loading-example.component.ts'
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -36,7 +36,15 @@ import { PlatformMultiInputModule } from './multi-input.module';
                 </fdp-multi-input>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        FdpFormGroupModule,
+        PlatformMultiInputModule,
+        StandardListItemModule,
+        RouterTestingModule
+    ]
 })
 class PlatformMulitiInputTestComponent {
     @ViewChild(PlatformMultiInputComponent)
@@ -55,14 +63,7 @@ describe('PlatformMultiInputComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [PlatformMulitiInputTestComponent],
-            imports: [
-                PlatformMultiInputModule,
-                ReactiveFormsModule,
-                FdpFormGroupModule,
-                StandardListItemModule,
-                RouterTestingModule
-            ],
+            imports: [PlatformMulitiInputTestComponent],
             providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
         }).compileComponents();
     });

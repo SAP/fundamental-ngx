@@ -24,7 +24,6 @@ import { CSS_CLASS_NAME } from '../../constants';
     styleUrl: './feed-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet, FormattedTextComponent, LinkComponent, SafePipe, TruncatePipe, FdTranslatePipe]
 })
 export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder {

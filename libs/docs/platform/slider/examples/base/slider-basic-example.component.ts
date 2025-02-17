@@ -8,7 +8,6 @@ import { SliderChangeEvent, SliderComponent } from '@fundamental-ngx/platform/sl
     templateUrl: './slider-basic-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [SliderComponent, FormsModule]
 })
 export class SliderBasicExampleComponent {

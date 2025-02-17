@@ -13,8 +13,7 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
     selector: 'fd-message-box-semantic-icon',
     template: `<fd-icon [glyph]="_getIcon" [font]="glyphFont" role="presentation"></fd-icon>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IconComponent],
-    standalone: true
+    imports: [IconComponent]
 })
 export class MessageBoxSemanticIconComponent {
     /** Custom semantic icon */

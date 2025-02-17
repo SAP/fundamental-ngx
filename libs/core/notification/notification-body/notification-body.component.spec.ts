@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: ` <fd-notification-body #notificationBodyRef></fd-notification-body> `
+    template: ` <fd-notification-body #notificationBodyRef></fd-notification-body> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestComponent {
     @ViewChild('notificationBodyRef', { read: ElementRef })
@@ -16,8 +18,7 @@ describe('NotificationBodyComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [NotificationModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

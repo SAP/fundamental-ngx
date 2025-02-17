@@ -39,7 +39,6 @@ const semanticSwitchExampleTs = 'semantic-switch-example/semantic-switch-example
 @Component({
     selector: 'app-switch',
     templateUrl: './switch-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

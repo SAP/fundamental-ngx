@@ -11,8 +11,7 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
             </fdb-tool-header-product-switch>
         </fdb-tool-header>
     `,
-    imports: [ToolHeaderComponent, ProductSwitchBodyComponent, ToolHeaderProductSwitchComponent],
-    standalone: true
+    imports: [ToolHeaderComponent, ProductSwitchBodyComponent, ToolHeaderProductSwitchComponent]
 })
 export class ProductSwitchExampleComponent {
     productSwitcher: ProductSwitchItem[] = [

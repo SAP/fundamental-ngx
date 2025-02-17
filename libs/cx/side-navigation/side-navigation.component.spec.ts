@@ -1,9 +1,14 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
+import { NestedListTitleDirective } from '@fundamental-ngx/core/nested-list';
+import { NestedItemComponent } from '../nested-list/nested-item/nested-item.component';
+import { NestedLinkComponent } from '../nested-list/nested-link/nested-link.component';
+import { NestedListComponent } from '../nested-list/nested-list/nested-list.component';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationComponent } from './side-navigation.component';
 
@@ -79,7 +84,18 @@ import { SideNavigationComponent } from './side-navigation.component';
                 </ul>
             </div>
         </fdx-side-nav>
-    `
+    `,
+    standalone: true,
+    imports: [
+        I18nModule,
+        CommonModule,
+        SideNavigationComponent,
+        SideNavigationMainComponent,
+        NestedListComponent,
+        NestedItemComponent,
+        NestedLinkComponent,
+        NestedListTitleDirective
+    ]
 })
 class TestNestedContainerComponent {
     @ViewChild(SideNavigationComponent)
@@ -94,8 +110,7 @@ describe('SideNavigationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule, I18nModule],
-            declarations: [SideNavigationComponent, SideNavigationMainComponent, TestNestedContainerComponent],
+            imports: [CommonModule, SideNavigationComponent, SideNavigationMainComponent, TestNestedContainerComponent],
             providers: [MenuKeyboardService]
         }).compileComponents();
     }));

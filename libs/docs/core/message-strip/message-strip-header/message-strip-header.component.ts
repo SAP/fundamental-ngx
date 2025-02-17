@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fd-message-strip-header',
     templateUrl: './message-strip-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

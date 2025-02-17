@@ -50,6 +50,8 @@ class TestDirective implements SelectableItemToken<HTMLElement, string> {
 }
 
 @Component({
+    standalone: true,
+    imports: [TestDirective],
     template: `
         <div testDirective="1" id="value1" tabindex="0"></div>
         <div testDirective="2" id="value2" tabindex="0"></div>
@@ -86,7 +88,7 @@ describe('SelectionService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [HostComponent, TestDirective]
+            imports: [HostComponent, TestDirective] // Use imports instead of declarations
         }).compileComponents();
     });
 

@@ -170,7 +170,11 @@ export default {
         periodLabel: '[[[Ƥēŗįŏƌ∙∙∙∙∙∙∙∙]]]',
         decreasePeriodLabel: '[[[Ďēċŗēąşē ρēŗįŏƌ∙∙∙∙]]]',
         navigationInstruction:
-            '[[[Ţŏ ɱŏʋē ƃēţŵēēŋ įţēɱş įŋ ţĥįş ĺįşţ, ρŗēşş ţŏρ ąŗŗŏŵ ŏŗ ƃŏţţŏɱ ąŗŗŏŵ. Ţŏ şŵįţċĥ ƃēţŵēēŋ ĺįşţş ρŗēşş ĺēƒţ ąŗŗŏŵ ŏŗ ŗįğĥţ ąŗŗŏŵ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+            '[[[Ţŏ ɱŏʋē ƃēţŵēēŋ įţēɱş įŋ ţĥįş ĺįşţ, ρŗēşş ţŏρ ąŗŗŏŵ ŏŗ ƃŏţţŏɱ ąŗŗŏŵ. Ţŏ şŵįţċĥ ƃēţŵēēŋ ĺįşţş ρŗēşş ĺēƒţ ąŗŗŏŵ ŏŗ ŗįğĥţ ąŗŗŏŵ.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        nightLabel: '[[[ąţ ŋįğĥţ∙∙∙∙∙∙]]]',
+        morningLabel: '[[[įŋ ţĥē ɱŏŗŋįŋğ∙∙∙∙∙]]]',
+        afternoonLabel: '[[[įŋ ţĥē ąƒţēŗŋŏŏŋ∙∙∙∙∙∙∙∙]]]',
+        eveningLabel: '[[[įŋ ţĥē ēʋēŋįŋğ∙∙∙∙∙]]]'
     },
     coreTimePicker: {
         timePickerInputLabel: '[[[Ţįɱē ρįċķēŗ įŋρűţ∙∙∙∙∙∙∙]]]',
@@ -197,7 +201,8 @@ export default {
         ariaLabel: '[[[Ŵįžąŗƌ∙∙∙∙∙∙∙∙]]]'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '[[[Μŏŗē]]]'
+        overflowTitleMore: '[[[Μŏŗē]]]',
+        breadcrumbTrailLabel: '[[[Ɓŗēąƌċŗűɱƃ Ţŗąįĺ∙∙∙∙∙∙∙∙]]]'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: '[[[Ŵąţċĥēŗş∙∙∙∙∙∙]]]',
@@ -364,6 +369,10 @@ export default {
         searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
+    platformSettingsGenerator: {
+        settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
+        searchLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
+    },
     platformSwitch: {
         ariaLabel: '[[[Ŝŵįţċĥ įŋρűţ∙∙∙∙∙∙∙]]]'
     },
@@ -489,6 +498,9 @@ export default {
         toolbarActionColumnsButtonTitle: '[[[Ĉŏĺűɱŋş∙∙∙∙∙∙∙]]]',
         toolbarActionExpandAllButtonTitle: '[[[Ĕχρąŋƌ ąĺĺ∙∙∙∙]]]',
         toolbarActionCollapseAllButtonTitle: '[[[Ĉŏĺĺąρşē ąĺĺ∙∙∙∙∙∙∙]]]',
+        expandRowButtonTitle: '[[[Ĕχρąŋƌ ŗŏŵ∙∙∙∙]]]',
+        collapseRowButtonTitle: '[[[Ĉŏĺĺąρşē ŗŏŵ∙∙∙∙∙∙∙]]]',
+        rowNavigateButtonTitle: '[[[Ńąʋįğąţē∙∙∙∙∙∙]]]',
         filterDialogBackToColumns: '[[[Ńąʋįğąţē ƃąċķ∙∙∙∙∙∙]]]',
         filterDialogNotFilteredLabel: '[[[(Ńŏţ Ƒįĺţēŗēƌ)∙∙∙∙∙]]]',
         filterDialogFilterByLabel: '[[[Ƒįĺţēŗ ƃŷ: {ƒįĺţēŗĻąƃēĺ}∙∙∙∙∙∙]]]',
@@ -514,10 +526,15 @@ export default {
         sortDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         selectAllCheckboxLabel: '[[[Ŝēĺēċţ ąĺĺ∙∙∙∙]]]',
         deselectAllCheckboxLabel: '[[[Ďēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙]]]',
+        selectAllCheckboxLongLabel: '[[[Ĉĥēċķƃŏχ, űŋċĥēċķēƌ, ċĺįċķ ţŏ şēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        selectAllCheckboxMixedLongLabel: '[[[Ĉĥēċķƃŏχ, ɱįχēƌ, ċĺįċķ ţŏ şēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        deselectAllCheckboxLongLabel: '[[[Ĉĥēċķƃŏχ, ċĥēċķēƌ, ċĺįċķ ţŏ ƌēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         deselectSingleRow: '[[[Ţŏ ƌēşēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
-        loadMore: '[[[Ļŏąƌ ɱŏŗē∙∙∙∙∙]]]',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        loadMore: '[[[Ŝĥŏŵ ɱŏŗē∙∙∙∙∙]]]',
+        filteredBy: '[[[Ƒįĺţēŗēƌ ƃŷ∙∙∙∙∙∙∙∙]]]',
+        showingBlankOfBlank:
+            '[[[Ŝĥŏŵįŋğ {ţŏţąĺĢŗŏŵįŋğĬţēɱşĈŏűŋţ} ŏƒ {ţŏţąĺĢŗŏŵįŋğĬţēɱşĈŏűŋţ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '[[[Ĕƌįţ]]]'
@@ -577,5 +594,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: '[[[Μēŋű ƃűţţŏŋ∙∙∙∙∙∙∙∙]]]'
+    },
+    coreNotification: {
+        groupHeaderTitle: '[[[Ĕχρąŋƌ/Ĉŏĺĺąρşē∙∙∙∙]]]',
+        groupAriaDescription: '[[[Ńŏţįƒįċąţįŏŋ Ģŗŏűρ∙∙∙∙∙∙]]]',
+        groupAriaDescriptionExpanded: '[[[ēχρąŋƌēƌ∙∙∙∙∙∙]]]',
+        groupAriaDescriptionCollapsed: '[[[ċŏĺĺąρşēƌ∙∙∙∙∙]]]'
     }
 };

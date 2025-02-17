@@ -14,7 +14,8 @@ import { AvatarGroupItemDirective } from './avatar-group-item.directive';
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: AvatarGroupItemRendererDirective
-        }
+        },
+        CdkPortalOutlet
     ]
 })
 export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {

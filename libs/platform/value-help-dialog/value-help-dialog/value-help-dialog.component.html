@@ -28,14 +28,20 @@
                         class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row"
                         [attr.aria-label]="'platformVHD.selectedAndConditionLabel' | fdTranslate"
                     >
-                        <h5 fd-title class="selected-and-condition-title" [id]="id + '-selected-item'">
+                        <span
+                            role="heading"
+                            [attr.aria-level]="_headingLevel()"
+                            fd-title
+                            class="selected-and-condition-title"
+                            [id]="id + '-selected-item'"
+                        >
                             @if (hasSelectedAndConditions) {
                                 {{ 'platformVHD.selectedAndConditionLabel' | fdTranslate }}
                                 ({{ selectedItems.length + validConditions.length }})
                             } @else {
                                 {{ 'platformVHD.selectedEmptyLabel' | fdTranslate }}
                             }
-                        </h5>
+                        </span>
                         <div class="fdp-value-help-dialog__tokens-wrapper">
                             <div class="fdp-value-help-dialog__tokens">
                                 <!-- Selected items -->
@@ -81,7 +87,7 @@
                                 fdType="transparent"
                                 [title]="'platformVHD.footerClearSelectedTitle' | fdTranslate"
                                 glyph="decline"
-                                [attr.aria-label]="'platformVHD.footerClearSelectedAriaLabel' | fdTranslate"
+                                [ariaLabel]="'platformVHD.footerClearSelectedAriaLabel' | fdTranslate"
                             ></button>
                         </div>
                     </div>
@@ -284,7 +290,7 @@
     </div>
 </ng-template>
 <ng-template #dialogTitleText>
-    <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
+    <span role="heading" [attr.aria-level]="_headingLevel()" [attr.id]="headerId" fd-title>{{ dialogTitle }}</span>
 </ng-template>
 <ng-template #tabLink let-title="title" let-type="type">
     @if (selectedTab === type && showSelectionTab && showDefineTab) {
@@ -295,7 +301,7 @@
             (click)="switchTab()"
             [title]="'platformVHD.selectMobileTabBackBtnTitle' | fdTranslate"
         ></button>
-        <h5 fd-title>{{ title }}</h5>
+        <span role="heading" [attr.aria-level]="_headingLevel()" fd-title>{{ title }}</span>
     }
     @if (selectedTab !== type) {
         <a
@@ -310,7 +316,9 @@
 </ng-template>
 <ng-template #advancedHeader>
     <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
-    <h5 fd-title>{{ 'platformVHD.searchAdvancedSearchLabel' | fdTranslate }}</h5>
+    <span role="heading" [attr.aria-level]="_headingLevel()" fd-title>{{
+        'platformVHD.searchAdvancedSearchLabel' | fdTranslate
+    }}</span>
 </ng-template>
 <ng-template #desktopDialogTitle>
     <ng-template [ngTemplateOutlet]="dialogTitleText"></ng-template>
@@ -321,7 +329,9 @@
         @if (hasSelectedTab) {
             <ng-template [ngTemplateOutlet]="selectedTabHeader"></ng-template>
         } @else {
-            <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
+            <span role="heading" [attr.aria-level]="_headingLevel()" [attr.id]="headerId" fd-title>{{
+                dialogTitle
+            }}</span>
         }
     </div>
     <ng-template [ngTemplateOutlet]="mobileTabs"></ng-template>

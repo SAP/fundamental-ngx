@@ -8,7 +8,6 @@ import { ContentDensityUserComponent } from './content-density-user/content-dens
 @Component({
     selector: 'fd-content-density-example',
     templateUrl: './content-density-example.component.html',
-    standalone: true,
     imports: [SelectModule, FormsModule, ContentDensityUserComponent, AsyncPipe],
     providers: [GlobalContentDensityService, provideContentDensity()]
 })

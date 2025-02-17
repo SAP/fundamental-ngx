@@ -24,7 +24,6 @@ import { BaseSelect } from '../commons/base-select';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicComponentService, { provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }],
-    standalone: true,
     imports: [SelectModule, FormsModule, IconComponent, NgTemplateOutlet, NgClass, ListSecondaryDirective]
 })
 export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {

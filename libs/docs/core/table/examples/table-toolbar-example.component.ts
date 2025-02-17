@@ -18,7 +18,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '
     selector: 'fd-table-toolbar-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './table-toolbar-example.component.html',
-    standalone: true,
     imports: [
         ToolbarComponent,
         TitleComponent,

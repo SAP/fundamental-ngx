@@ -15,7 +15,6 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
         ></fd-checkbox>
         Value: {{ checkboxValue }}
     `,
-    standalone: true,
     imports: [FormLabelComponent, CheckboxComponent, FormsModule]
 })
 export class CheckboxDefaultExampleComponent {

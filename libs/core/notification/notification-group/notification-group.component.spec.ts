@@ -1,21 +1,25 @@
 import { Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationModule } from '../notification.module';
 import { By } from '@angular/platform-browser';
-import { NotificationGroupComponent } from './notification-group.component';
-import { NotificationGroupListComponent } from '../notification-group-list/notification-group-list.component';
 import { NotificationGroupHeaderComponent } from '../notification-group-header/notification-group-header.component';
+import { NotificationGroupListComponent } from '../notification-group-list/notification-group-list.component';
+import { NotificationModule } from '../notification.module';
+import { NotificationGroupComponent } from './notification-group.component';
 
 @Component({
     selector: 'fd-notification-group-test',
-    template: ` <fd-notification-group #notificationGroup [expanded]="true" ariaLabel="Notification Group Test Aria Label">
-    <fd-notification-group-header #notificationGroupHeader>
-        <span fd-notification-group-header-title id="fd-notification-group-header-title-test-1">Today</span>
-    </fd-notification-group-header>
-    <fd-notification-group-list #notificationGroupList id="fd-notification-group-list-1">
-        Notifications
-    </fd-notification-group-list>
-</fd-notification-group> `
+    template: `
+        <fd-notification-group #notificationGroup [expanded]="true" ariaLabel="Notification Group Test Aria Label">
+            <fd-notification-group-header #notificationGroupHeader>
+                <span fd-notification-group-header-title id="fd-notification-group-header-title-test-1">Today</span>
+            </fd-notification-group-header>
+            <fd-notification-group-list #notificationGroupList id="fd-notification-group-list-1">
+                Notifications
+            </fd-notification-group-list>
+        </fd-notification-group>
+    `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {
     notificationGroup = viewChild<NotificationGroupComponent>('notificationGroup');
@@ -29,8 +33,7 @@ describe('NotificationGroupComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 
@@ -76,11 +79,15 @@ describe('NotificationGroupComponent', () => {
 
     it('should set aria-labelledby from fd-notification-group-header-title child element', () => {
         const attributeElement = fixture.debugElement.query(By.css('fd-notification-group'));
-        expect(attributeElement.nativeElement.getAttribute('aria-labelledby')).toBe('fd-notification-group-header-title-test-1');
+        expect(attributeElement.nativeElement.getAttribute('aria-labelledby')).toBe(
+            'fd-notification-group-header-title-test-1'
+        );
     });
 
     it('should set aria-controls of fd-notification-group-header', () => {
         const attributeElement = fixture.debugElement.query(By.css('fd-notification-group'));
-        expect(attributeElement.nativeElement.getAttribute('aria-labelledby')).toBe('fd-notification-group-header-title-test-1');
+        expect(attributeElement.nativeElement.getAttribute('aria-labelledby')).toBe(
+            'fd-notification-group-header-title-test-1'
+        );
     });
 });

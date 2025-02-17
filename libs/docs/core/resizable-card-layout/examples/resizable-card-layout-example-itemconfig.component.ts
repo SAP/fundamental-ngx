@@ -18,7 +18,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     selector: 'fd-resizable-card-layout-example-itemconfig',
     templateUrl: './resizable-card-layout-example-itemconfig.component.html',
     styleUrls: ['./resizable-card-layout-example.component.scss'],
-    standalone: true,
     imports: [
         ButtonComponent,
         DynamicPageModule,

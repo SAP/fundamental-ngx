@@ -17,7 +17,6 @@ import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundam
         </fd-message-strip>
         <button fd-button (click)="messageStripComponent.open()">Open message strip</button>
     `,
-    standalone: true,
     imports: [MessageStripComponent, AutoDismissMessageStripDirective, ButtonComponent]
 })
 export class MessageStripAutoDismissExampleComponent {}

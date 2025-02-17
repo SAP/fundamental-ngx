@@ -7,7 +7,6 @@ import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
     selector: 'fdp-input-group-disabled-example',
     templateUrl: './platform-input-group-disabled-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormLabelComponent, PlatformInputGroupModule, PlatformButtonModule]
 })
 export class PlatformInputGroupDisabledExampleComponent {}

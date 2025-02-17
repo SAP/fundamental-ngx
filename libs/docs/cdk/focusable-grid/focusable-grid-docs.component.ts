@@ -20,7 +20,6 @@ const shortRowsExampleTs = 'short-rows-example/short-rows-example.component.ts';
     selector: 'app-tabs',
     templateUrl: './focusable-grid-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

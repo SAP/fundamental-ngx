@@ -9,7 +9,6 @@ const MIN_VALUE = 5;
 @Component({
     selector: 'fdp-platform-input-reactive-min-max-validation-example',
     templateUrl: './platform-input-reactive-min-max-validation-example.component.html',
-    standalone: true,
     imports: [FormsModule, FdpFormGroupModule, PlatformInputModule, ReactiveFormsModule, JsonPipe]
 })
 export class PlatformInputReactiveMinMaxValidationExampleComponent implements AfterViewInit {

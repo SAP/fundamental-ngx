@@ -5,6 +5,7 @@
     let-filterable="filterable"
     let-groupable="groupable"
     let-columns="columns"
+    let-settings="settings"
     let-hasAnyActions="hasAnyActions"
     let-appliedFilters="appliedFilters"
 >
@@ -16,7 +17,7 @@
         [headingLevel]="headingLevel"
     >
         @if (_tableToolbarLeftActionsComponent) {
-            <span fd-toolbar-item fdOverflowPriority="never">
+            <span fd-toolbar-item>
                 @if (!!title || !hideItemCount) {
                     <fd-toolbar-separator></fd-toolbar-separator>
                 }
@@ -46,7 +47,6 @@
             <button
                 fd-button
                 fd-toolbar-item
-                fdOverflowPriority="never"
                 [label]="'platformTable.toolbarActionCreateButtonLabel' | fdTranslate"
                 (click)="_addRow()"
             ></button>
@@ -55,7 +55,6 @@
                     <button
                         fd-button
                         fd-toolbar-item
-                        fdOverflowPriority="never"
                         [label]="'platformTable.toolbarActionSaveButtonLabel' | fdTranslate"
                         (click)="_saveRows()"
                     ></button>
@@ -64,14 +63,13 @@
                 <button
                     fd-button
                     fd-toolbar-item
-                    fdOverflowPriority="never"
                     [label]="'platformTable.toolbarActionCancelButtonLabel' | fdTranslate"
                     (click)="_cancelEditing()"
                     fdType="transparent"
                 ></button>
             }
             @if (tableToolbarActionsComponent || hasAnyActions()) {
-                <fd-toolbar-separator fd-toolbar-item fdOverflowPriority="never"></fd-toolbar-separator>
+                <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
             }
         }
         @if (tableToolbarActionsComponent) {
@@ -81,13 +79,12 @@
         }
         @if (showExpandCollapseButtons || hasAnyActions()) {
             @if (tableToolbarActionsComponent) {
-                <fd-toolbar-separator fd-toolbar-item fdOverflowPriority="never"></fd-toolbar-separator>
+                <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
             }
             @if (showExpandCollapseButtons) {
                 <button
                     fd-button
                     fd-toolbar-item
-                    fdOverflowPriority="never"
                     glyph="expand-all"
                     (click)="_expandAll()"
                     [title]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
@@ -97,7 +94,6 @@
                 <button
                     fd-button
                     fd-toolbar-item
-                    fdOverflowPriority="never"
                     glyph="collapse-all"
                     (click)="_collapseAll()"
                     [title]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
@@ -105,11 +101,23 @@
                     fdType="transparent"
                 ></button>
             }
-            @if (sortable()) {
+            @if (settings()) {
                 <button
                     fd-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
+                    glyph="action-settings"
+                    [title]="'platformTable.toolbarActionButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionButtonTitle' | fdTranslate"
+                    fdType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openSorting()"
+                ></button>
+            }
+            @if (sortable()) {
+                <button
+                    fd-button
+                    fd-toolbar-item
                     glyph="sort"
                     [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
                     [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
@@ -122,7 +130,6 @@
                 <button
                     fd-button
                     fd-toolbar-item
-                    fdOverflowPriority="never"
                     glyph="filter"
                     [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
                     [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
@@ -135,7 +142,6 @@
                 <button
                     fd-button
                     fd-toolbar-item
-                    fdOverflowPriority="never"
                     glyph="group-2"
                     [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
                     [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"

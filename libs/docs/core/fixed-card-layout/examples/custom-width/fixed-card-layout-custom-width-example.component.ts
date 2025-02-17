@@ -18,7 +18,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     templateUrl: './fixed-card-layout-custom-width-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

@@ -9,8 +9,7 @@ describe('TimelineNodeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimeLineNodeTestComponent],
-            imports: [TimelineModule]
+            imports: [TimeLineNodeTestComponent]
         }).compileComponents();
     });
 
@@ -38,7 +37,9 @@ describe('TimelineNodeComponent', () => {
                 <fd-timeline-node *fdTimelineNodeDef="let node" [glyph]="node.glyph"></fd-timeline-node>
             </fd-timeline>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [TimelineModule]
 })
 class TimeLineNodeTestComponent {
     data = [{ glyph: 'key' }];

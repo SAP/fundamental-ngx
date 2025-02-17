@@ -20,7 +20,6 @@ const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.htm
 @Component({
     selector: 'app-breadcrumb',
     templateUrl: './breadcrumb-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

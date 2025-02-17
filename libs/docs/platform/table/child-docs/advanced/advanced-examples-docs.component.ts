@@ -17,7 +17,6 @@ import { AdvancedScrollingExampleComponent } from '../../examples/advanced-scrol
     templateUrl: './advanced-examples-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -1,13 +1,17 @@
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { TitleModule } from '@fundamental-ngx/core/title';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { DateTimePicker } from '../datetime-picker.model';
 import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '../tokens';
 
@@ -16,14 +20,15 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
     templateUrl: './datetime-picker-mobile.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-        DialogModule,
-        TitleModule,
-        CdkScrollable,
-        ScrollbarDirective,
+        TitleComponent,
         NgTemplateOutlet,
-        BarModule,
+        DialogComponent,
+        DialogBodyComponent,
+        DialogFooterComponent,
+        DialogHeaderComponent,
+        DialogCloseButtonComponent,
+        ButtonBarComponent,
         InitialFocusDirective
     ]
 })

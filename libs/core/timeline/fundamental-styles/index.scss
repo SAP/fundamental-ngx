@@ -1,6 +1,6 @@
-@import 'mixins';
+@use 'mixins.scss';
 
-$block: #{$fd-namespace}-timeline;
+$block: #{mixins.$fd-namespace}-timeline;
 $fd-timeline-arrow-offset: 1rem !default;
 $fd-timeline-group-height: 1.625rem !default;
 $fd-timeline-post-arrow-size: 0.8rem !default;
@@ -65,20 +65,20 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
 }
 
 .#{$block} {
-    @include fd-reset();
+    @include mixins.fd-reset();
 
     &--double-sided {
         max-width: 57.5rem;
     }
 
     &__container {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         margin-top: 1rem;
     }
 
     &__group {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         margin-bottom: 1rem;
         list-style-type: none;
@@ -89,8 +89,8 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__group-header-container {
-        @include fd-reset();
-        @include fd-flex-vertical-center();
+        @include mixins.fd-reset();
+        @include mixins.fd-flex-vertical-center();
 
         &--horizontal {
             width: auto;
@@ -99,8 +99,8 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
             align-items: flex-start;
 
             .#{$block}__group-header-bar {
-                @include fd-reset-margins();
-                @include fd-set-margin-left(1.25rem);
+                @include mixins.fd-reset-margins();
+                @include mixins.fd-set-margin-left(1.25rem);
 
                 margin-top: $fd-timeline-group-header-bar-offset;
             }
@@ -108,10 +108,10 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__group-header {
-        @include fd-reset();
-        @include fd-flex-vertical-center();
+        @include mixins.fd-reset();
+        @include mixins.fd-flex-vertical-center();
         @include fd-timeline-fake-outline();
-        @include fd-set-margin-right($fd-timeline-group-header-bar-offset);
+        @include mixins.fd-set-margin-right($fd-timeline-group-header-bar-offset);
 
         cursor: pointer;
         width: fit-content;
@@ -121,12 +121,12 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         border-radius: var(--sapElement_BorderCornerRadius);
         border: 0.0625rem solid var(--sapButton_Selected_BorderColor);
 
-        @include fd-hover() {
+        @include mixins.fd-hover() {
             background: var(--sapButton_Selected_Hover_Background);
             border-color: var(--sapButton_Selected_Hover_BorderColor);
         }
 
-        @include fd-active() {
+        @include mixins.fd-active() {
             background: var(--sapButton_Selected_Background);
             border-color: var(--sapButton_Selected_BorderColor);
         }
@@ -137,7 +137,7 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
                 right: $fd-timeline-group-offset-double;
             }
 
-            @include fd-rtl() {
+            @include mixins.fd-rtl() {
                 @include fd-timeline-fake-outline-overwrite() {
                     right: $fd-timeline-group-offset;
                     left: $fd-timeline-group-offset-double;
@@ -150,7 +150,7 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
             .#{$block}__group-header-icon {
                 @include fd-timeline-group-icon(var(--sapButton_TextColor));
 
-                @include fd-rtl() {
+                @include mixins.fd-rtl() {
                     transform: rotate(180deg);
                 }
             }
@@ -159,11 +159,11 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
                 color: var(--sapButton_Hover_TextColor);
             }
 
-            @include fd-hover() {
+            @include mixins.fd-hover() {
                 background: var(--sapButton_Hover_Background);
                 border-color: var(--sapButton_Hover_BorderColor);
 
-                @include fd-after() {
+                @include mixins.fd-after() {
                     background: var(--sapButton_Hover_Background);
                     border-color: var(--sapButton_Hover_BorderColor);
                 }
@@ -177,11 +177,11 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
                 }
             }
 
-            @include fd-active() {
+            @include mixins.fd-active() {
                 background: var(--sapButton_Active_Background);
                 border-color: var(--sapButton_Active_BorderColor);
 
-                @include fd-after() {
+                @include mixins.fd-after() {
                     background: var(--sapButton_Active_Background);
                     border-color: var(--sapButton_Active_BorderColor);
                 }
@@ -195,8 +195,8 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
                 }
             }
 
-            @include fd-after() {
-                @include fd-reset();
+            @include mixins.fd-after() {
+                @include mixins.fd-reset();
                 @include fd-timeline-arrow-rotate(45deg);
 
                 content: '';
@@ -209,7 +209,7 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
                 border-right: $fd-timeline-group-arrow-border;
             }
 
-            @include fd-after-rtl() {
+            @include mixins.fd-after-rtl() {
                 @include fd-timeline-arrow-rotate(225deg);
 
                 right: auto;
@@ -223,20 +223,20 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
                 bottom: $fd-timeline-group-offset-double;
             }
 
-            @include fd-rtl() {
+            @include mixins.fd-rtl() {
                 @include fd-timeline-fake-outline-overwrite() {
                     left: $fd-timeline-group-offset;
                     right: $fd-timeline-group-offset;
                 }
             }
 
-            @include fd-after() {
+            @include mixins.fd-after() {
                 transform: rotate(135deg);
                 left: $fd-timeline-arrow-offset;
                 bottom: $fd-timeline-group-arrow-offset;
             }
 
-            @include fd-after-rtl() {
+            @include mixins.fd-after-rtl() {
                 left: auto;
                 transform: rotate(135deg);
                 right: $fd-timeline-arrow-offset;
@@ -245,8 +245,8 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__group-header-icon {
-        @include fd-reset();
-        @include fd-set-margins-x-equal(0.5rem);
+        @include mixins.fd-reset();
+        @include mixins.fd-set-margins-x-equal(0.5rem);
 
         @include fd-timeline-group-icon(var(--sapButton_Selected_TextColor)) {
             font-size: 1rem;
@@ -256,8 +256,8 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__group-header-text {
-        @include fd-reset();
-        @include fd-set-margin-right(1rem);
+        @include mixins.fd-reset();
+        @include mixins.fd-set-margin-right(1rem);
 
         cursor: inherit;
         color: var(--sapButton_Selected_TextColor);
@@ -268,28 +268,28 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
             flex-direction: row;
 
             .#{$block}__node {
-                @include fd-reset-margins-y();
-                @include fd-set-margins-x-equal(0.25rem);
+                @include mixins.fd-reset-margins-y();
+                @include mixins.fd-set-margins-x-equal(0.25rem);
 
                 &--grouping {
-                    @include fd-reset-margins();
+                    @include mixins.fd-reset-margins();
                 }
 
                 &--icon {
-                    @include fd-reset-margins-y();
-                    @include fd-set-margins-x-equal(0.5rem);
+                    @include mixins.fd-reset-margins-y();
+                    @include mixins.fd-set-margins-x-equal(0.5rem);
                 }
             }
         }
     }
 
     &__node {
-        @include fd-reset();
+        @include mixins.fd-reset();
         @include fd-timeline-set-node-size(0.375rem);
         background: var(--sapContent_ForegroundBorderColor);
 
         &--grouping {
-            @include fd-reset-margins-y();
+            @include mixins.fd-reset-margins-y();
             @include fd-timeline-set-border();
             @include fd-timeline-set-node-size(0.5rem);
 
@@ -297,7 +297,7 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         }
 
         &--icon {
-            @include fd-set-margins-y-equal(0.5rem);
+            @include mixins.fd-set-margins-y-equal(0.5rem);
             @include fd-timeline-set-node-size(auto);
 
             background: transparent;
@@ -313,31 +313,31 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__group-header-bar {
-        @include fd-reset();
-        @include fd-set-margin-right(0.375rem);
+        @include mixins.fd-reset();
+        @include mixins.fd-set-margin-right(0.375rem);
         @include fd-timeline-set-border($type: dashed);
 
         flex: 1;
     }
 
     &__connecting-line {
-        @include fd-reset();
+        @include mixins.fd-reset();
         @include fd-timeline-set-border();
     }
 
     &__posts {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         list-style-type: none;
     }
 
     &__post-container {
-        @include fd-reset();
-        @include fd-flex();
+        @include mixins.fd-reset();
+        @include mixins.fd-flex();
     }
 
     &__post {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         height: auto;
         padding: 0.5rem;
@@ -346,8 +346,8 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         border: $fd-timeline-post-border;
         background: $fd-timeline-post-background;
 
-        @include fd-after() {
-            @include fd-reset();
+        @include mixins.fd-after() {
+            @include mixins.fd-reset();
 
             content: '';
             position: absolute;
@@ -360,32 +360,32 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__post-header-container {
-        @include fd-reset();
-        @include fd-flex-vertical-center();
+        @include mixins.fd-reset();
+        @include mixins.fd-flex-vertical-center();
 
         margin-bottom: 0.5rem;
     }
 
     &__post-header {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         &:not(:first-child) {
-            @include fd-set-margin-left(0.3125rem);
+            @include mixins.fd-set-margin-left(0.3125rem);
         }
     }
 
     &__post-header-title {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         font-weight: bold;
     }
 
     &__post-header-text {
-        @include fd-reset();
+        @include mixins.fd-reset();
     }
 
     &__post-subheader {
-        @include fd-reset();
+        @include mixins.fd-reset();
 
         margin-top: 0.125rem;
         font-size: var(--sapFontSmallSize);
@@ -393,14 +393,14 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__post-content {
-        @include fd-reset();
+        @include mixins.fd-reset();
     }
 
     .#{$block}__post-actions {
         margin-top: 0.5rem;
 
         button:not(:first-child) {
-            @include fd-set-margin-left(0.5rem);
+            @include mixins.fd-set-margin-left(0.5rem);
         }
     }
 }

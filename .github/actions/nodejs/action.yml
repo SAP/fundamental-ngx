@@ -5,7 +5,7 @@ inputs:
     node-version:
         description: Node.js version
         required: false
-        default: 20.x
+        default: 22.x
     frozen-lockfile:
         description: Install dependencies from lock file
         required: false
@@ -15,7 +15,7 @@ runs:
     using: composite
     steps:
         - name: Use Node.js ${{ inputs.node-version }}
-          uses: actions/setup-node@v4.1.0
+          uses: actions/setup-node@v4.2.0
           with:
               node-version: ${{ inputs.node-version }}
 
@@ -23,17 +23,26 @@ runs:
           shell: bash
           run: npm install -g corepack
 
-        - name: Enable Corepack for Yarn 4.5.1
+        - name: Enable Corepack for Yarn 4.6.0
           shell: bash
           run: |
-              corepack enable yarn && yarn
+              corepack enable yarn
 
-        - name: Install Yarn 4.5.1 (if not available)
+        - name: Run Yarn
           shell: bash
           run: |
-              if ! yarn --version | grep -q "4.5.1"; then
-                npm install -g yarn@4.5.1
+              yarn
+
+        - name: Install Yarn 4.6.0 (if not available)
+          shell: bash
+          run: |
+              if ! yarn --version | grep -q "4.6.0"; then
+                npm install -g yarn@4.6.0
               fi
+
+        - name: Print Node.js version
+          shell: bash
+          run: node --version
 
         - name: Get yarn cache directory path
           id: yarn-cache-dir-path
@@ -41,14 +50,14 @@ runs:
           shell: bash
 
         - name: Use the global Yarn cache if available
-          uses: actions/cache@v4.1.2
+          uses: actions/cache@v4.2.0
           with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
               key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
                   ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
 
-        - uses: actions/cache@v4.1.2
+        - uses: actions/cache@v4.2.0
           id: node_modules
           name: Use project node_modules cache if available
           with:

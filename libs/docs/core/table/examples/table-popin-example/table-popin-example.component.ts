@@ -19,7 +19,6 @@ import { map } from 'rxjs/operators';
             }
         `
     ],
-    standalone: true,
     imports: [
         FocusableGridDirective,
         TableModule,

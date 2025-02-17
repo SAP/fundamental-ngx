@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { CheckboxModule } from '../checkbox.module';
 import { CheckboxComponent } from './checkbox.component';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): HTMLInputElement {
     return fixture.nativeElement.querySelector('input');
@@ -124,7 +124,7 @@ describe('CheckboxComponent', () => {
 
     it('should check states', async () => {
         const states = ['information', 'success', 'error', 'warning'];
-        
+
         for (let i = 0; i < states.length; i++) {
             checkbox.setStyleState(states[i] as FormStates);
             checkboxDetectChanges(checkbox);
@@ -292,7 +292,9 @@ describe('CheckboxComponent', () => {
 });
 
 @Component({
-    template: ` <fd-checkbox [value]="checked" (click)="onClicked()"></fd-checkbox> `
+    template: ` <fd-checkbox [value]="checked" (click)="onClicked()"></fd-checkbox> `,
+    standalone: true,
+    imports: [FormsModule, CheckboxModule]
 })
 class TestCheckboxWrapper2Component {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
@@ -310,8 +312,7 @@ describe('CheckboxComponent with external listeners', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, CheckboxModule],
-            declarations: [TestCheckboxWrapper2Component]
+            imports: [TestCheckboxWrapper2Component]
         }).compileComponents();
     }));
 

@@ -56,7 +56,6 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [TimeColumnComponent, FdTranslatePipe]
 })
 export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {

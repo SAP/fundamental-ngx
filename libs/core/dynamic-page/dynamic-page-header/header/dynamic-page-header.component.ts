@@ -49,7 +49,6 @@ let dynamicPageTitleId = 0;
             useExisting: DynamicPageHeaderComponent
         }
     ],
-    standalone: true,
     imports: [NgTemplateOutlet, IgnoreClickOnSelectionDirective]
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
