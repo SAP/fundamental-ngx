@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
@@ -30,7 +29,6 @@ const platformTableCorePaginationTsSrc = 'standard-pagination/platform-table-sta
 @Component({
     selector: 'fdp-doc-table-pagination-docs',
     imports: [
-        CommonModule,
         PlatformTableStandardPaginationComponent,
         DocsSectionTitleComponent,
         DescriptionComponent,
@@ -39,7 +37,7 @@ const platformTableCorePaginationTsSrc = 'standard-pagination/platform-table-sta
         SeparatorComponent,
         FdDatetimeModule,
         TableCustomPaginationExampleComponent,
-        TableCustomPaginationOuterScrollExampleComponent
+        TableCustomPaginationOuterScrollExampleComponent,
     ],
     templateUrl: './table-pagination-docs.component.html',
     encapsulation: ViewEncapsulation.None,

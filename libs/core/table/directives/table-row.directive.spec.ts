@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
@@ -8,11 +7,13 @@ import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
 @Component({
     template: `
         <tr #directiveElement fd-table-row id="row">
-            <td *ngFor="let key of keys" fd-table-cell [key]="key">{{ key }}</td>
+            @for (key of keys; track key) {
+                <td fd-table-cell [key]="key">{{ key }}</td>
+            }
         </tr>
     `,
     standalone: true,
-    imports: [TableModule, CommonModule]
+    imports: [TableModule]
 })
 class TestComponent {
     @ViewChild(TableRowDirective)

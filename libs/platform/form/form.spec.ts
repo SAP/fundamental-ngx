@@ -2,8 +2,6 @@ import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
-import { CommonModule } from '@angular/common';
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormGroupComponent } from './form-group/form-group.component';
@@ -381,8 +379,7 @@ describe('fdp-form-field out of fdp-form-group', () => {
             PlatformInputModule,
             FormFieldComponent,
             FormGroupComponent,
-            InputComponent,
-            CommonModule
+            InputComponent
         ]
     })
     class HostFormComponent {
@@ -441,7 +438,7 @@ describe('FdpFormField with Wrapper', () => {
         selector: 'fdp-wrapper',
         template: '',
         standalone: true,
-        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, CommonModule]
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule]
     })
     class WrapperComponent {}
 
@@ -466,7 +463,7 @@ describe('FdpFormField with Wrapper', () => {
             </fdp-form-group>
         `,
         standalone: true,
-        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, CommonModule]
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule]
     })
     class HostFormComponent {}
 

@@ -1,5 +1,4 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DndItemDirective } from './dnd-item/dnd-item.directive';
 import { DndKeyboardGroupDirective } from './dnd-keyboard-group/dnd-keyboard-group.directive';
@@ -8,7 +7,6 @@ import { DndListDirective } from './dnd-list/dnd-list.directive';
 
 @NgModule({
     imports: [
-        CommonModule,
         DragDropModule,
         DndItemDirective,
         DndListDirective,

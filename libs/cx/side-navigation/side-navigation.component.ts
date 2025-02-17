@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -49,12 +49,12 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     encapsulation: ViewEncapsulation.None,
     imports: [
         I18nModule,
-        CommonModule,
+        NgTemplateOutlet,
         SideNavigationMainComponent,
         PreparedNestedListComponent,
         ButtonComponent,
         SideNavigationUtilityDirective,
-        SideNavigationButtonDirective
+        SideNavigationButtonDirective,
     ],
     standalone: true,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]

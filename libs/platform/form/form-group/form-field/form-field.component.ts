@@ -35,7 +35,7 @@ import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
@@ -106,7 +106,6 @@ function rankTransformer(v: string | number): number {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
     imports: [
-        CommonModule,
         FormItemComponent,
         NgTemplateOutlet,
         InputMessageGroupWithTemplate,

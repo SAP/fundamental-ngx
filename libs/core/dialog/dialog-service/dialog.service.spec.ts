@@ -1,5 +1,4 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +8,7 @@ import { DialogService } from './dialog.service';
 @Component({
     template: ``,
     standalone: true,
-    imports: [CommonModule, DialogModule]
+    imports: [DialogModule]
 })
 class DialogServiceTestComponent {
     constructor(public dialogService: DialogService) {}
@@ -22,7 +21,7 @@ class DialogServiceTestComponent {
         </ng-template>
     `,
     standalone: true,
-    imports: [CommonModule, DialogModule]
+    imports: [DialogModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;
@@ -37,7 +36,6 @@ describe('DialogService', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                CommonModule,
                 OverlayModule,
                 NoopAnimationsModule,
                 TemplateTestComponent,

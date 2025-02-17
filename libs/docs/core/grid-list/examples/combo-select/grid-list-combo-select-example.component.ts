@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
-
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -35,7 +32,6 @@ interface GridListItem {
     encapsulation: ViewEncapsulation.None,
     imports: [
         ButtonComponent,
-        CommonModule,
         FormsModule,
         FocusableItemDirective,
         SegmentedButtonComponent,
