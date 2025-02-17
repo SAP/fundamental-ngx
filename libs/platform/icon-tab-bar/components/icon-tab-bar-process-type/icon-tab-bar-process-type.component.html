@@ -39,6 +39,7 @@
                 #tabItem
                 [attr.tabindex]="idx === 0 ? 0 : -1"
                 role="tab"
+                [attr.aria-level]="tabHeadingLevel"
             >
                 @if (item?.titleTemplate) {
                     <ng-container [ngTemplateOutlet]="item.titleTemplate || null"></ng-container>

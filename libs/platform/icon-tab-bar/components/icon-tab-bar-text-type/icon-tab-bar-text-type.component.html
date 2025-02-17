@@ -33,9 +33,9 @@
                         [colorAssociations]="colorAssociations()"
                         [attr.tabindex]="idx === 0 ? 0 : -1"
                         [attr.aria-selected]="item.uId === selectedUid"
-                        [attr.aria-level]="3"
                         (click)="_selectItem(item, $event)"
                         (keydown)="_keyDownHandler($event, item, idx)"
+                        [attr.aria-level]="tabHeadingLevel"
                     >
                     </a>
                 }
@@ -53,6 +53,7 @@
                         (keydown)="_keyDownHandler($event, item, idx, itemPopover)"
                         (closeTab)="_closeTab($event)"
                         (selectedItem)="_selectItem(item)"
+                        [attr.aria-level]="tabHeadingLevel"
                     >
                     </fdp-text-type-popover>
                 }
