@@ -70,10 +70,10 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     readonly showDetailArea = signal<boolean>(true);
 
     /** @hidden */
-    private _renderer = inject(Renderer2);
+    private _eventUnlisteners: (() => void)[] = [];
 
     /** @hidden */
-    private _eventUnlisteners: (() => void)[] = [];
+    private _renderer = inject(Renderer2);
 
     /** @hidden */
     constructor() {
