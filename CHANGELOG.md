@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.20...v0.55.0-rc.21) (2025-02-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.19...v0.55.0-rc.20) (2025-02-14)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.18...v0.55.0-rc.19) (2025-02-14)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.55.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.17...v0.55.0-rc.18) (2025-02-14)
 
 
