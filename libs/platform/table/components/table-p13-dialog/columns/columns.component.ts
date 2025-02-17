@@ -104,7 +104,7 @@ const INITIAL_SHOW_ALL_ITEMS = true;
         ButtonBarComponent,
         AsyncPipe,
         FdTranslatePipe,
-        InitialFocusDirective,
+        InitialFocusDirective
     ]
 })
 export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy {

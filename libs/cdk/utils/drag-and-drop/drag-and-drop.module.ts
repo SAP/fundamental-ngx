@@ -6,13 +6,7 @@ import { DndKeyboardItemDirective } from './dnd-keyboard-item/dnd-keyboard-item.
 import { DndListDirective } from './dnd-list/dnd-list.directive';
 
 @NgModule({
-    imports: [
-        DragDropModule,
-        DndItemDirective,
-        DndListDirective,
-        DndKeyboardGroupDirective,
-        DndKeyboardItemDirective
-    ],
+    imports: [DragDropModule, DndItemDirective, DndListDirective, DndKeyboardGroupDirective, DndKeyboardItemDirective],
     exports: [DndItemDirective, DndListDirective, DndKeyboardGroupDirective, DndKeyboardItemDirective]
 })
 export class DragAndDropModule {}

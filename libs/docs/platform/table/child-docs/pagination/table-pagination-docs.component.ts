@@ -37,7 +37,7 @@ const platformTableCorePaginationTsSrc = 'standard-pagination/platform-table-sta
         SeparatorComponent,
         FdDatetimeModule,
         TableCustomPaginationExampleComponent,
-        TableCustomPaginationOuterScrollExampleComponent,
+        TableCustomPaginationOuterScrollExampleComponent
     ],
     templateUrl: './table-pagination-docs.component.html',
     encapsulation: ViewEncapsulation.None,

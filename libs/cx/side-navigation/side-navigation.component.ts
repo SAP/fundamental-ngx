@@ -54,7 +54,7 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
         PreparedNestedListComponent,
         ButtonComponent,
         SideNavigationUtilityDirective,
-        SideNavigationButtonDirective,
+        SideNavigationButtonDirective
     ],
     standalone: true,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]

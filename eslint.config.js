@@ -307,7 +307,7 @@ module.exports = [
     {
         files: ['**/*.html'],
         rules: {
-            '@angular-eslint/template/prefer-control-flow': 'error',
+            '@angular-eslint/template/prefer-control-flow': 'error'
         }
     }
 ];

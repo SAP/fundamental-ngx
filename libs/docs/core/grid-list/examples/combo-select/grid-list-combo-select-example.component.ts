@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { RouterLink } from '@angular/router';
+import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     GridListComponent,
@@ -14,6 +13,7 @@ import {
     GridListSelectionEvent
 } from '@fundamental-ngx/core/grid-list';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
 interface GridListItem {
     id: number;

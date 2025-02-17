@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { PortalModule } from '@angular/cdk/portal';
+import { NgModule } from '@angular/core';
 import { DynamicComponentService, InitialFocusModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
