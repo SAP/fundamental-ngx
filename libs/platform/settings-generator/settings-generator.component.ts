@@ -48,7 +48,7 @@ import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens'
     host: {
         '[style.width]': 'width()',
         '[style.height]': 'height()'
-    },
+    }
 })
 export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy, HasElementRef {
     /** @hidden */
@@ -76,6 +76,10 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         this._setLayout();
     }
 
+    get settings(): Nullable<SettingsModel> {
+        return this._settings;
+    }
+
     /**
      * Container height.
      */
@@ -85,10 +89,6 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
      * Container width.
      */
     width = input<string>();
-
-    get settings(): Nullable<SettingsModel> {
-        return this._settings;
-    }
 
     /** @hidden */
     private _settings: Nullable<SettingsModel>;
@@ -180,13 +180,3 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
