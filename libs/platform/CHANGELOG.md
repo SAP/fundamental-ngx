@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.24...v0.55.0-rc.25) (2025-02-19)
+
+
+### Bug Fixes
+
+* **platform:** add visual improvements to Settings Generator ([#13046](https://github.com/SAP/fundamental-ngx/issues/13046)) ([65ea013](https://github.com/SAP/fundamental-ngx/commit/65ea0131669e7785fe34c1e1cba9ae4f357ba142))
+
+
+
+
+
 # [0.55.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.23...v0.55.0-rc.24) (2025-02-19)
 
 
