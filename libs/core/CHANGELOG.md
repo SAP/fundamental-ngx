@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.22...v0.55.0-rc.23) (2025-02-19)
+
+
+### Bug Fixes
+
+* **core:** removed up&down keys from tokens to fix rtl key handling ([#13044](https://github.com/SAP/fundamental-ngx/issues/13044)) ([52b25fa](https://github.com/SAP/fundamental-ngx/commit/52b25fa6d3993be425a5e79fa9afe68578333f68))
+
+
+
+
+
 # [0.55.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.21...v0.55.0-rc.22) (2025-02-17)
 
 **Note:** Version bump only for package @fundamental-ngx/core
