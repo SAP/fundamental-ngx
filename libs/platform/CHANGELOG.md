@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.23...v0.55.0-rc.24) (2025-02-19)
+
+
+### Bug Fixes
+
+* **platform:** fixed visual bug in select docs ([#13053](https://github.com/SAP/fundamental-ngx/issues/13053)) ([5032cfb](https://github.com/SAP/fundamental-ngx/commit/5032cfb3cb302e8c96345bd266324b893b6fdab2))
+
+
+
+
+
+# [0.55.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.22...v0.55.0-rc.23) (2025-02-19)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.55.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.21...v0.55.0-rc.22) (2025-02-17)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.55.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.20...v0.55.0-rc.21) (2025-02-17)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
