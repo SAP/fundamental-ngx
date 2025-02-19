@@ -1,13 +1,13 @@
-<h3 fd-title [wrap]="!!settings?.wrapSectionTitle" class="fdp-settings-generator__title">
+<h5 fd-title [wrap]="!!settings?.wrapSectionTitle" class="fdp-settings-generator__title">
     @if (mobile) {
-        <button fd-button glyph="menu2" fdType="transparent" (click)="goBack.emit()"></button>
+        <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="goBack.emit()"></button>
     }
     @if (settings?.title | fdkAsyncOrSync; as settingsTitle) {
         {{ settingsTitle }}
     } @else {
         <fd-skeleton height="40px" type="rectangle" width="40%" textLines="1" [style.margin]="'auto 0'"></fd-skeleton>
     }
-</h3>
+</h5>
 <ng-template #tabbedLayout>
     <fdp-icon-tab-bar
         class="fdp-settings-generator__tabs-container"
@@ -15,7 +15,7 @@
         (iconTabSelected)="changeTab($event)"
     ></fdp-icon-tab-bar>
     @for (group of _groups$(); track group) {
-        <div [attr.hidden]="$index === _activeTab$() ? null : true">
+        <div [attr.hidden]="$index === _activeTab$() ? null : true" class="fdp-settings-generator__content-container">
             <fdp-settings-generator-section
                 [groupName]="$any(settings).id"
                 [items]="group"
