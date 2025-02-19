@@ -90,6 +90,7 @@
         "@nx/plugin": "20.4.4",
         "@nx/workspace": "20.4.4",
         "@sap-ui/common-css": "0.38.0",
+        "@sap/eslint-config": "0.4.0",
         "@schematics/angular": "19.0.7",
         "@swc-node/register": "1.9.2",
         "@swc/cli": "0.3.12",

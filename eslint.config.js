@@ -1,6 +1,8 @@
 const nx = require('@nx/eslint-plugin');
+const { configs } = require('@sap/eslint-config');
 
 module.exports = [
+    ...configs.recommended,
     ...nx.configs['flat/base'],
     ...nx.configs['flat/typescript'],
     ...nx.configs['flat/javascript'],
