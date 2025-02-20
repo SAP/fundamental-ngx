@@ -7,6 +7,7 @@ import { FormFieldComponent } from './form-group/form-field/form-field.component
 import { FormGroupComponent } from './form-group/form-group.component';
 import { PlatformInputModule } from './input/fdp-input.module';
 import { InputComponent } from './input/input.component';
+import { NgTemplateOutlet } from '@angular/common';
 
 interface TestUser {
     firstName: string;
@@ -379,7 +380,8 @@ describe('fdp-form-field out of fdp-form-group', () => {
             PlatformInputModule,
             FormFieldComponent,
             FormGroupComponent,
-            InputComponent
+            InputComponent,
+            NgTemplateOutlet
         ]
     })
     class HostFormComponent {
@@ -463,7 +465,7 @@ describe('FdpFormField with Wrapper', () => {
             </fdp-form-group>
         `,
         standalone: true,
-        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule]
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, NgTemplateOutlet]
     })
     class HostFormComponent {}
 

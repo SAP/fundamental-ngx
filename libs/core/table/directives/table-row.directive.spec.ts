@@ -72,7 +72,7 @@ describe('TableRowDirective', () => {
 
         expect(getInnerTextFromNodes()).toEqual(keys);
 
-        keys = component.keys.reverse();
+        keys = [...component.keys].reverse();
 
         (<any>component.tableRow)._resetCells(keys);
 
