@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.27...v0.55.0-rc.28) (2025-02-21)
+
+
+### Bug Fixes
+
+* **cx:** nested link component import bug ([#13061](https://github.com/SAP/fundamental-ngx/issues/13061)) ([784a5b6](https://github.com/SAP/fundamental-ngx/commit/784a5b6d190a5e8bf855e4a1dd85bf160e0d0c1a))
+
+
+
+
+
 # [0.55.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.26...v0.55.0-rc.27) (2025-02-21)
 
 **Note:** Version bump only for package fundamental-ngx
