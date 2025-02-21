@@ -1,4 +1,10 @@
-<div class="fd-panel" [class.fd-panel--fixed]="fixed" [class]="class">
+<div
+    class="fd-panel"
+    [class.fd-panel--fixed]="fixed"
+    [class.fd-panel--transparent]="transparent()"
+    [class.fd-panel--no-radius]="noRadius()"
+    [class]="class"
+>
     <div class="fd-panel__header">
         @if (!fixed) {
             <div class="fd-panel__expand">
