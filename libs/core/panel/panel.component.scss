@@ -1,1 +1,33 @@
 @import 'fundamental-styles/dist/panel.css';
+
+.fd-panel--transparent {
+    .fd-panel__header,
+    .fd-panel__content {
+        background: transparent;
+    }
+}
+
+.fd-panel--no-radius {
+    .fd-panel__header,
+    .fd-panel__content {
+        border-radius: 0;
+
+        ul {
+            border-radius: 0;
+
+            li:first-child,
+            li:last-child {
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+.fd-panel__content--no-padding {
+    padding-block: 0;
+    padding-inline: 0;
+}
+
+.fd-panel__content--transparent {
+    background: transparent;
+}

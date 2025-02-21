@@ -15410,6 +15410,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+<<<<<<< HEAD
 "fundamental-styles@npm:0.39.0":
   version: 0.39.0
   resolution: "fundamental-styles@npm:0.39.0"
@@ -15417,6 +15418,15 @@ __metadata:
     "@sap-theming/theming-base-content": ^11.26.0
     "@sap-ui/common-css": 0.39.0
   checksum: 10/755bafafea67f5a4a7318e7212334337a874e8b3f7cfe95484dbd23c4f8878a7ffa9cd34e909afddf7c40d11dd4f6844facb4db14b97d3572afcb30042fb1c10
+=======
+"fundamental-styles@npm:0.39.0-rc.65":
+  version: 0.39.0-rc.65
+  resolution: "fundamental-styles@npm:0.39.0-rc.65"
+  peerDependencies:
+    "@sap-theming/theming-base-content": ^11.25.0
+    "@sap-ui/common-css": 0.39.0-rc.65
+  checksum: 10/1fb920dbac5f9621cd9c4caac088662f6ee07af5844035faf49709abd2de6d9e4d262154c4926442bd21885fa7ca5d118689b46dff93109757c9e8a295af7cb6
+>>>>>>> ccebca92e5 (feat(core): user menu)
   languageName: node
   linkType: hard
 
