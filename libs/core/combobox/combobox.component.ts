@@ -831,10 +831,7 @@ export class ComboboxComponent<T = any>
             } else if (values.length === 0) {
                 this.setValue(this.inputText);
             }
-            const thisValue = this.getValue();
-            if (typeof thisValue === 'object') {
-                this.onChange(thisValue);
-            }
+            this.onChange(this.getValue());
         } else {
             this.onChange(this.inputText);
         }
