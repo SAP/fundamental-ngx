@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicPageHeaderComponent } from '@fundamental-ngx/core/dynamic-page';
@@ -10,8 +9,6 @@ import { DynamicPageGlobalActionsComponent } from '../../dynamic-page-header/act
 import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../../dynamic-page-header/key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleComponent } from '../../dynamic-page-header/title/dynamic-page-title.component';
-
-import { CommonModule } from '@angular/common';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageComponent } from '../../dynamic-page.component';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
@@ -56,7 +53,7 @@ import { PlatformDynamicPageModule } from '../../dynamic-page.module';
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule]
+    imports: [PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule]
 })
 class TestComponent implements AfterViewInit {
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;

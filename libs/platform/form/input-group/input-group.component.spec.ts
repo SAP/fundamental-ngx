@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Type, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ControlValueAccessor, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,7 @@ const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
         </fdp-input-group>
     `,
     standalone: true,
-    imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule]
+    imports: [PlatformButtonModule, PlatformInputGroupModule]
 })
 class InputGroupHostComponent {
     @ViewChild(InputGroupComponent) inputGroupComponent: InputGroupComponent;
@@ -121,7 +120,7 @@ describe('InputGroup component', () => {
         </fdp-form-group>
     `,
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule]
+    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule]
 })
 class InputGroupFormTestWrapperComponent {
     @ViewChild(InputGroupComponent)

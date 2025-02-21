@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -36,15 +35,7 @@ import { FacetComponent } from './facet.component';
         </fd-facet>
     `,
     standalone: true,
-    imports: [
-        CommonModule,
-        IconModule,
-        LinkModule,
-        TextComponent,
-        RouterTestingModule,
-        FacetContentComponent,
-        FacetComponent
-    ]
+    imports: [IconModule, LinkModule, TextComponent, RouterTestingModule, FacetContentComponent, FacetComponent]
 })
 class TestFormFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -59,7 +50,7 @@ class TestFormFacetComponent {
         </fd-facet>
     `,
     standalone: true,
-    imports: [CommonModule, AvatarComponent, FacetComponent]
+    imports: [AvatarComponent, FacetComponent]
 })
 class TestImageFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -74,7 +65,7 @@ class TestImageFacetComponent {
         </fd-facet>
     `,
     standalone: true,
-    imports: [CommonModule, RatingIndicatorModule, FacetComponent, FacetContentComponent]
+    imports: [RatingIndicatorModule, FacetComponent, FacetContentComponent]
 })
 class TestRatingIndicatorFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -96,7 +87,7 @@ class TestRatingIndicatorFacetComponent {
         </fd-facet>
     `,
     standalone: true,
-    imports: [CommonModule, ObjectStatusComponent, FacetComponent, FacetContentComponent, IconModule]
+    imports: [ObjectStatusComponent, FacetComponent, FacetContentComponent, IconModule]
 })
 class TestKeyValueFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -116,7 +107,6 @@ class TestKeyValueFacetComponent {
     `,
     standalone: true,
     imports: [
-        CommonModule,
         ObjectStatusComponent,
         ObjectNumberModule,
         AvatarComponent,

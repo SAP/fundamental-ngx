@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
     booleanAttribute,
     ChangeDetectionStrategy,
@@ -39,7 +38,7 @@ export class IconTabBarTabContentDirective implements HasElementRef {
 
 @Component({
     selector: 'fdp-icon-tab-bar-tab',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './icon-tab-bar-tab.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })

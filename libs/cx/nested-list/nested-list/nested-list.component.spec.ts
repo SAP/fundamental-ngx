@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,7 +48,6 @@ import { NestedListComponent } from './nested-list.component';
     `,
     standalone: true,
     imports: [
-        CommonModule,
         NestedListHeaderDirective,
         NestedItemComponent,
         NestedLinkComponent,

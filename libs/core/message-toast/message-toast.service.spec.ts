@@ -1,8 +1,4 @@
- 
- 
- 
 import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +10,7 @@ import { MessageToastService } from './message-toast.service';
 @Component({
     template: ` <ng-template #template> Template Content </ng-template> `,
     standalone: true,
-    imports: [CommonModule]
+    imports: []
 })
 export class TestComponent {
     @ViewChild('template') template!: TemplateRef<any>;
@@ -27,7 +23,7 @@ describe('MessageToastService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CommonModule, NoopAnimationsModule, TestComponent],
+            imports: [NoopAnimationsModule, TestComponent],
             providers: [
                 MessageToastService,
                 Overlay,

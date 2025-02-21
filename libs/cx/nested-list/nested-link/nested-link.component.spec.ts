@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedItemService } from '../nested-item/nested-item.service';
@@ -14,7 +13,7 @@ import { NestedLinkComponent } from './nested-link.component';
         </a>
     `,
     standalone: true,
-    imports: [NestedLinkComponent, CommonModule, NestedListIconComponent, NestedListTitleDirective]
+    imports: [NestedLinkComponent, NestedListIconComponent, NestedListTitleDirective]
 })
 class TestNestedContainerComponent {
     @ViewChild('directiveElement', { static: true, read: NestedLinkComponent })
@@ -28,7 +27,7 @@ describe('NestedLinkDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestNestedContainerComponent, CommonModule],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));

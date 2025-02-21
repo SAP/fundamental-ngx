@@ -147,10 +147,13 @@ export class SettingsGeneratorSidebarLayoutComponent
                 .pipe(startWith(null), debounceTime(30), distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     const { width } = this._settingsGenerator.elementRef.nativeElement.getBoundingClientRect();
+
                     const isMobile = width <= this._config.sidebar.mobileBreakpoint;
+
                     if (this._isMobile === isMobile) {
                         return;
                     }
+
                     this._settingsGeneratorService.setMobileState(isMobile);
                     this._isMobile = isMobile;
 
@@ -164,6 +167,11 @@ export class SettingsGeneratorSidebarLayoutComponent
                         this._setSelectedIndex(this._selectedIndex > -1 ? this._selectedIndex : 0);
                         this._initialSelectedItemSet = true;
                     }
+
+                    if (!this._isMobile && this._selectedIndex === -1) {
+                        this._setSelectedIndex(0);
+                    }
+
                     this._cdr.detectChanges();
                 });
         }

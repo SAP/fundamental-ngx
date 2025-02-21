@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -59,7 +58,7 @@ describe('IconTabBarComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HostComponent, CommonModule]
+            imports: [HostComponent]
         }).compileComponents();
     });
 
@@ -221,7 +220,7 @@ describe('IconTabBarComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HostComponent, CommonModule]
+            imports: [HostComponent]
         }).compileComponents();
     });
 

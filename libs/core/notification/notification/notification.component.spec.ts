@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -17,7 +16,7 @@ import { NotificationComponent } from './notification.component';
         </ng-template>
     `,
     standalone: true,
-    imports: [CommonModule, NotificationModule, ButtonModule]
+    imports: [NotificationModule, ButtonModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
@@ -30,7 +29,6 @@ describe('NotificationComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
-                CommonModule,
                 NotificationModule,
                 RouterTestingModule.withRoutes([]),
                 ButtonModule,

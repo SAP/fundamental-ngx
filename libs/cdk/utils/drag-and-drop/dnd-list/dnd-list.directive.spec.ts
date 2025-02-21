@@ -1,5 +1,4 @@
 import { DragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
 import { Component, ElementRef, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DndItemDirective } from '../dnd-item/dnd-item.directive';
@@ -16,13 +15,15 @@ class MockDndItemDirective extends DndItemDirective<any> {
 @Component({
     template: `
         <div #directiveElement fd-dnd-list>
-            <div *ngFor="let item of list" fd-dnd-item>
-                <div>{{ item }}</div>
-            </div>
+            @for (item of list; track item) {
+                <div fd-dnd-item>
+                    <div>{{ item }}</div>
+                </div>
+            }
         </div>
     `,
     standalone: true,
-    imports: [DndListDirective, DndItemDirective, CommonModule]
+    imports: [DndListDirective, DndItemDirective]
 })
 class TestDndListComponent {
     @ViewChild('directiveElement', { static: true, read: DndListDirective })
@@ -44,7 +45,7 @@ describe('DndListDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DragDropModule, TestDndListComponent, CommonModule],
+            imports: [DragDropModule, TestDndListComponent],
             providers: [
                 DragDrop,
                 {

@@ -7,8 +7,10 @@ import { PlatformTableModule } from '../../../table.module';
 import { SettingsDialogComponent } from './settings-dialog.component';
 import {
     ActiveTab,
-    FiltersDialogData, FiltersDialogResultData,
-    SettingsGroupDialogData, SettingsGroupDialogResultData,
+    FiltersDialogData,
+    FiltersDialogResultData,
+    SettingsGroupDialogData,
+    SettingsGroupDialogResultData,
     SettingsSortDialogData,
     SettingsSortDialogResultData
 } from '../table-view-settings.model';
@@ -47,10 +49,9 @@ describe('SettingsDialogComponent', () => {
 
     it('should set initial sorting data from dialog data', () => {
         const expectedSortingData = {
-                field: 'name',
-                direction: SortDirection.ASC
-            } as SettingsSortDialogData
-        ;
+            field: 'name',
+            direction: SortDirection.ASC
+        } as SettingsSortDialogData;
         expect(component.sortingData()).toEqual(expectedSortingData);
     });
 
@@ -120,7 +121,6 @@ describe('SettingsDialogComponent', () => {
         } as any);
     });
 
-
     it('should reset filtering data to initial values', () => {
         component.filteringData.set({ filterBy: [{ field: 'someField', value: 'someValue' }] } as any);
         component._initialFilters.set([{ field: 'initialField', value: 'initialValue' }] as any);
@@ -145,7 +145,7 @@ describe('SettingsDialogComponent', () => {
         component.onSortChange(newSortData);
         expect(component.sortingData()).toEqual({
             field: 'newField',
-            direction: SortDirection.ASC,
+            direction: SortDirection.ASC
         } as any);
     });
 

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -13,7 +12,9 @@ import { OverflowListDirective } from './overflow-list.directive';
     standalone: true,
     template: `
         <div #dirRoot class="list" fdkOverflowList (overflowChanged)="onOverflowed($event)">
-            <div *ngFor="let item of items" fdkOverflowListItem class="list-item">{{ item }}</div>
+            @for (item of items; track item) {
+                <div fdkOverflowListItem class="list-item">{{ item }}</div>
+            }
         </div>
     `,
     styles: [
@@ -32,7 +33,7 @@ import { OverflowListDirective } from './overflow-list.directive';
             }
         `
     ],
-    imports: [CommonModule, OverflowListDirective, OverflowListItemDirective]
+    imports: [OverflowListDirective, OverflowListItemDirective]
 })
 class TestComponent {
     @Input()

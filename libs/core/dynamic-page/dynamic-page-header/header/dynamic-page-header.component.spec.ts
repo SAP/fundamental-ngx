@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-
-import { CommonModule } from '@angular/common';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
@@ -24,7 +22,7 @@ import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-
         <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
     </fd-dynamic-page-header>`,
     standalone: true,
-    imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
+    imports: [DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
     providers: [DynamicPageService]
 })
 class TestComponent {
@@ -60,7 +58,7 @@ class TestComponent {
         </fd-dynamic-page-header>
     `,
     standalone: true,
-    imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
+    imports: [DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DynamicPageService]
 })

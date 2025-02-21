@@ -24,7 +24,7 @@ import { Observable, Subject, Subscription, filter, isObservable, of, take, tap 
 
 import { Direction } from '@angular/cdk/bidi';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgForOf, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -143,8 +143,7 @@ let vhiUniqueId = 0;
         ButtonBarComponent,
         SlicePipe,
         FdTranslatePipe,
-        DisplayFnPipe,
-        NgForOf
+        DisplayFnPipe
     ]
 })
 export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent implements OnChanges, OnDestroy {

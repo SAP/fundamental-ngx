@@ -1,5 +1,4 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +8,7 @@ import { MessageBoxService } from './message-box.service';
 @Component({
     template: ``,
     standalone: true,
-    imports: [CommonModule, MessageBoxModule]
+    imports: [MessageBoxModule]
 })
 class MessageBoxServiceTestComponent {
     constructor(public messageBoxService: MessageBoxService) {}
@@ -22,7 +21,7 @@ class MessageBoxServiceTestComponent {
         </ng-template>
     `,
     standalone: true,
-    imports: [CommonModule, MessageBoxModule]
+    imports: [MessageBoxModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;
@@ -37,7 +36,6 @@ describe('MessageBoxService', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                CommonModule,
                 OverlayModule,
                 NoopAnimationsModule,
                 TemplateTestComponent,

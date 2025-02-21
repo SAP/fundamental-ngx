@@ -1,4 +1,4 @@
-import { CommonModule, formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -28,7 +28,7 @@ export class DateUtil {
 
 @Component({
     selector: 'fd-ngx-date-picker-special-day-example',
-    imports: [CommonModule, DatePickerComponent, ReactiveFormsModule, FormsModule, FdDatetimeModule, CalendarComponent],
+    imports: [DatePickerComponent, ReactiveFormsModule, FormsModule, FdDatetimeModule, CalendarComponent],
     templateUrl: './date-picker-special-day-example.component.html',
     styleUrl: './date-picker-special-day-example.component.scss'
 })

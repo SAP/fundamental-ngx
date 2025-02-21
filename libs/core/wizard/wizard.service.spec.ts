@@ -10,7 +10,7 @@ import { WizardService } from './wizard.service';
         <a fd-wizard-step href="#" #testTemplate3>test</a>
     `,
     standalone: true,
-    imports: [WizardService]
+    imports: []
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate1', { static: true }) anchor1: WizardStepComponent;

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -22,41 +21,34 @@ import { GridListComponent } from './grid-list.component';
         <fd-grid-list #gridListElement [selectionMode]="selectionMode" (selectionChange)="selectionChange($event)">
             <fd-grid-list-title-bar title="Products"></fd-grid-list-title-bar>
 
-            <fd-grid-list-item
-                *ngFor="let item of list"
-                [type]="item.type"
-                [value]="item.title"
-                [counter]="item.counter"
-                (navigate)="navigate($event)"
-                (delete)="delete($event)"
-            >
-                <div class="fd-grid-list-item-body--container">
-                    <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-                    <div class="fd-grid-list-item-body--content">
-                        <h4 class="fd-title fd-title--h4">{{ item.title }}</h4>
-                        <p>{{ item.description }}</p>
-                        <div class="fd-grid-list-item-body--content-address">
-                            <p>781 Main Street</p>
-                            <p>Anytown, SD 57401</p>
-                            <p>USA</p>
+            @for (item of list; track item) {
+                <fd-grid-list-item
+                    [type]="item.type"
+                    [value]="item.title"
+                    [counter]="item.counter"
+                    (navigate)="navigate($event)"
+                    (delete)="delete($event)"
+                >
+                    <div class="fd-grid-list-item-body--container">
+                        <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+                        <div class="fd-grid-list-item-body--content">
+                            <h4 class="fd-title fd-title--h4">{{ item.title }}</h4>
+                            <p>{{ item.description }}</p>
+                            <div class="fd-grid-list-item-body--content-address">
+                                <p>781 Main Street</p>
+                                <p>Anytown, SD 57401</p>
+                                <p>USA</p>
+                            </div>
+                            <a href="#" class="fd-link" tabindex="0">john_li&#64;example.com</a>
                         </div>
-
-                        <a href="#" class="fd-link" tabindex="0">john_li&#64;example.com</a>
                     </div>
-                </div>
-            </fd-grid-list-item>
+                </fd-grid-list-item>
+            }
         </fd-grid-list>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [
-        GridListTitleBarComponent,
-        GridListItemComponent,
-        GridListComponent,
-        AvatarComponent,
-        TitleComponent,
-        CommonModule
-    ]
+    imports: [GridListTitleBarComponent, GridListItemComponent, GridListComponent, AvatarComponent, TitleComponent]
 })
 class TestComponent {
     @ViewChild(GridListComponent)

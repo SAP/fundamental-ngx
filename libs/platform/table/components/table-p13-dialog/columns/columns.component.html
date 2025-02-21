@@ -71,50 +71,54 @@
                     </span>
 
                     <!-- Active Button Movement -->
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        glyph="collapse-group"
-                        [disabled]="_moveUpDisabled"
-                        [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
-                        [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
-                        (click)="_moveActiveToTop($event)"
-                        (keydown.enter)="_moveActiveToTop($event)"
-                        *ngIf="_isReorderColumnButtonShowable(item)"
-                    ></button>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        glyph="slim-arrow-up"
-                        [disabled]="_moveUpDisabled"
-                        [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
-                        [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
-                        (click)="_moveActiveUp($event)"
-                        (keydown.enter)="_moveActiveUp($event)"
-                        *ngIf="_isReorderColumnButtonShowable(item)"
-                    ></button>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        glyph="slim-arrow-down"
-                        [disabled]="_moveDownDisabled"
-                        [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
-                        [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
-                        (click)="_moveActiveDown($event)"
-                        (keydown.enter)="_moveActiveDown($event)"
-                        *ngIf="_isReorderColumnButtonShowable(item)"
-                    ></button>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        glyph="expand-group"
-                        [disabled]="_moveDownDisabled"
-                        [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
-                        [title]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
-                        (click)="_moveActiveToBottom($event)"
-                        (keydown.enter)="_moveActiveToBottom($event)"
-                        *ngIf="_isReorderColumnButtonShowable(item)"
-                    ></button>
+                    @if (_isReorderColumnButtonShowable(item)) {
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="collapse-group"
+                            [disabled]="_moveUpDisabled"
+                            [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
+                            [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
+                            (click)="_moveActiveToTop($event)"
+                            (keydown.enter)="_moveActiveToTop($event)"
+                        ></button>
+                    }
+                    @if (_isReorderColumnButtonShowable(item)) {
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="slim-arrow-up"
+                            [disabled]="_moveUpDisabled"
+                            [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
+                            [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
+                            (click)="_moveActiveUp($event)"
+                            (keydown.enter)="_moveActiveUp($event)"
+                        ></button>
+                    }
+                    @if (_isReorderColumnButtonShowable(item)) {
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="slim-arrow-down"
+                            [disabled]="_moveDownDisabled"
+                            [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
+                            [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
+                            (click)="_moveActiveDown($event)"
+                            (keydown.enter)="_moveActiveDown($event)"
+                        ></button>
+                    }
+                    @if (_isReorderColumnButtonShowable(item)) {
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="expand-group"
+                            [disabled]="_moveDownDisabled"
+                            [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
+                            [title]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
+                            (click)="_moveActiveToBottom($event)"
+                            (keydown.enter)="_moveActiveToBottom($event)"
+                        ></button>
+                    }
                 </li>
             }
         </ul>

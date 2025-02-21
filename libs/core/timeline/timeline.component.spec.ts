@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
@@ -128,7 +127,7 @@ describe('TimelineComponentWithTrackBy', () => {
         </div>
     `,
     standalone: true,
-    imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent, TimelineTestComponent, CommonModule]
+    imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent, TimelineTestComponent]
 })
 class TimelineTestComponent {
     data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
@@ -148,7 +147,7 @@ class TimelineTestComponent {
         </div>
     `,
     standalone: true,
-    imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent, TimelineTestComponent, CommonModule]
+    imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent, TimelineTestComponent]
 })
 class TimelineTestWithTrackByComponent extends TimelineTestComponent {
     enableTrackBy = false;

@@ -12,8 +12,6 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemComponent } from './nested-item.component';
 import { NestedItemService } from './nested-item.service';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { CommonModule } from '@angular/common';
 import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
@@ -68,7 +66,6 @@ import { NestedListComponent } from '../nested-list/nested-list.component';
     `,
     standalone: true,
     imports: [
-        CommonModule,
         PopoverModule,
         SideNavigationComponent,
         SideNavigationMainComponent,
@@ -122,7 +119,7 @@ describe('NestedItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestNestedContainerComponent, CommonModule],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
         }).compileComponents();
     }));

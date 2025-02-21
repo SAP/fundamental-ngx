@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { CommonModule } from '@angular/common';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { DynamicPageComponent } from './dynamic-page.component';
 import { DynamicPageModule } from './dynamic-page.module';
@@ -28,7 +27,7 @@ import { DynamicPageModule } from './dynamic-page.module';
         }
     </fd-dynamic-page>`,
     standalone: true,
-    imports: [CommonModule, DynamicPageModule, TabsModule]
+    imports: [DynamicPageModule, TabsModule]
 })
 class TestComponent {
     @ViewChild(DynamicPageComponent)

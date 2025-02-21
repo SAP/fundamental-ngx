@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -61,7 +61,6 @@ import {
         DialogFooterComponent,
         FdTranslatePipe,
         FormsModule,
-        NgIf,
         ButtonComponent,
         SortingComponent,
         FiltersComponent,

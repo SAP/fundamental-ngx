@@ -2,8 +2,6 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarouselItemDirective } from './carousel-item.directive';
 import { CarouselDirective } from './carousel.directive';
-
-import { CommonModule } from '@angular/common';
 import { CarouselConfig, CarouselService } from './carousel.service';
 
 @Component({
@@ -19,7 +17,7 @@ import { CarouselConfig, CarouselService } from './carousel.service';
         </div>
     `,
     standalone: true,
-    imports: [CommonModule, CarouselItemDirective, CarouselDirective]
+    imports: [CarouselItemDirective, CarouselDirective]
 })
 class VerticalCarouselComponent {
     @ViewChild(CarouselDirective)
@@ -44,7 +42,7 @@ class VerticalCarouselComponent {
         </div>
     `,
     standalone: true,
-    imports: [CommonModule, CarouselItemDirective, CarouselDirective]
+    imports: [CarouselItemDirective, CarouselDirective]
 })
 class HorizontalCarouselComponent {
     @ViewChild(CarouselDirective)

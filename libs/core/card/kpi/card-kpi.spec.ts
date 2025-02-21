@@ -11,7 +11,6 @@ import { CardKpiScaleIconDirective } from './card-kpi-scale-icon.directive';
 import { CardKpiScaleTextDirective } from './card-kpi-scale-text.directive';
 import { CardKpiValueDirective } from './card-kpi-value.directive';
 
-import { CommonModule } from '@angular/common';
 import { CLASS_NAME } from '../constants';
 
 @Component({
@@ -32,7 +31,7 @@ import { CLASS_NAME } from '../constants';
         </fd-card-kpi-header>
     `,
     standalone: true,
-    imports: [CommonModule, CardModule]
+    imports: [CardModule]
 })
 class CardKpiHeaderHostTestComponent {}
 

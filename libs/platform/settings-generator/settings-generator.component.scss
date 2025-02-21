@@ -18,9 +18,16 @@ $block: fdp-settings-generator;
 
         &-section {
             display: block;
+            height: 100%;
             &[hidden] {
                 display: none;
             }
+        }
+
+        &-container {
+            display: block;
+            height: 100%;
+            overflow-y: auto;
         }
     }
 
@@ -32,7 +39,11 @@ $block: fdp-settings-generator;
 
         .#{$block}__title {
             background: var(--sapObjectHeader_Background);
-            padding: 1.5rem 1rem 1rem;
+            padding: 1rem 1rem;
+
+            &:not(:has(+ .#{$block}__tabs-container)) {
+                box-shadow: var(--sapContent_HeaderShadow);
+            }
         }
         .#{$block}__search-header {
             .#{$block}__search-input {

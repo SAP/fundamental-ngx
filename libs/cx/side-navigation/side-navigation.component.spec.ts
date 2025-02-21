@@ -1,8 +1,6 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { I18nModule } from '@fundamental-ngx/i18n';
-
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedListTitleDirective } from '@fundamental-ngx/core/nested-list';
@@ -88,7 +86,6 @@ import { SideNavigationComponent } from './side-navigation.component';
     standalone: true,
     imports: [
         I18nModule,
-        CommonModule,
         SideNavigationComponent,
         SideNavigationMainComponent,
         NestedListComponent,
@@ -110,7 +107,7 @@ describe('SideNavigationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, SideNavigationComponent, SideNavigationMainComponent, TestNestedContainerComponent],
+            imports: [SideNavigationComponent, SideNavigationMainComponent, TestNestedContainerComponent],
             providers: [MenuKeyboardService]
         }).compileComponents();
     }));

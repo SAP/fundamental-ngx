@@ -1,12 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-
-import { CommonModule } from '@angular/common';
 import { IconTabBarTabContentDirective } from '@fundamental-ngx/platform/icon-tab-bar';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
@@ -46,7 +43,7 @@ import { PlatformDynamicPageModule } from './dynamic-page.module';
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule]
+    imports: [PlatformDynamicPageModule, ToolbarModule, ButtonModule]
 })
 class TestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -152,7 +149,7 @@ describe('DynamicPageComponent default values', () => {
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [CommonModule, PlatformDynamicPageModule, TabsModule]
+    imports: [PlatformDynamicPageModule, TabsModule]
 })
 class TestTabbedComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -213,7 +210,7 @@ describe('DynamicPageComponent tabbed values', () => {
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [CommonModule, PlatformDynamicPageModule, TabsModule]
+    imports: [PlatformDynamicPageModule, TabsModule]
 })
 class TestNonCollapsibleComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -299,7 +296,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule]
+    imports: [PlatformDynamicPageModule, ToolbarModule, ButtonModule]
 })
 class HostTestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;

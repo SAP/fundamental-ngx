@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -33,7 +32,6 @@ import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nes
         PreparedNestedListComponent,
         NestedListExpandIconComponent,
         NestedListButtonDirective,
-        CommonModule,
         PopoverModule,
         RouterModule,
         IconComponent,

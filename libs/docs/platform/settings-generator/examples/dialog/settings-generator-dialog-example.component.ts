@@ -88,6 +88,7 @@ export class ExampleUserService {
         `
             .fd-dialog__body fdp-message-popover-form-wrapper {
                 min-height: 100%;
+                height: 100%;
                 display: flex;
                 align-items: stretch;
             }
@@ -140,7 +141,7 @@ export class SettingsGeneratorDialogExampleComponent {
     openDialog(dialog: TemplateRef<any>): void {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: false,
-            minWidth: '55rem',
+            minWidth: '0',
             width: '80vw',
             maxWidth: '75rem',
             minHeight: '40rem',
