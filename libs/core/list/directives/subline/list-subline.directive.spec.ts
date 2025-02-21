@@ -1,19 +1,18 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UserMenuModule } from '../user-menu.module';
+import { ListSublineDirective } from '@fundamental-ngx/core/list';
 
 @Component({
-    template: ` <fd-bar-element #directiveElement [fullWidth]="fullWidth"> Bar Element Test </fd-bar-element> `,
+    template: ` <div #componentElement fd-list-subline>List Subline Test Text</div> `,
     standalone: true,
-    imports: [UserMenuModule]
+    imports: [ListSublineDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement')
-    ref: ElementRef;
-    fullWidth = false;
+    @ViewChild('directiveElement', { static: true })
+    ref!: ElementRef;
 }
 
-describe('UserMenuDirective', () => {
+describe('ListSublineDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -34,13 +33,6 @@ describe('UserMenuDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-bar__element');
-    });
-
-    it('should take into account the fullWidth input property', () => {
-        expect(component.ref.nativeElement.className).not.toContain('fd-bar__element--full-width');
-        component.fullWidth = true;
-        fixture.detectChanges();
-        expect(component.ref.nativeElement.className).toContain('fd-bar__element--full-width');
+        expect(component.ref.nativeElement.classList.contains('fd-list__subline')).toBeTrue();
     });
 });

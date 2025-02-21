@@ -24,7 +24,7 @@
 
 <fd-docs-section-title id="fixed-height" componentName="panel"> Fixed Height Content Panel </fd-docs-section-title>
 <description>
-    When the height of the panel’s content is set to a fixed size, the content area can be scrolled through. To set the
+    When the height of the panel's content is set to a fixed size, the content area can be scrolled through. To set the
     height of the panel's content use the <code>height</code> property. Available options are: <code>height</code>,
     <code>minHeight</code> and <code>maxHeight</code>.
 </description>
@@ -32,3 +32,15 @@
     <fd-panel-fixed-height-example></fd-panel-fixed-height-example>
 </component-example>
 <code-example [exampleFiles]="panelFixedHeight"></code-example>
+
+<fd-docs-section-title id="transparent" componentName="panel"> Customizable Panel </fd-docs-section-title>
+<description>
+    To remove the background color of the panel (both header and content), add <code>[transparent]="true"</code> to the
+    Panel. Additionally, you can remove the border radius with the <code>[noRadius]="true"</code> property. <br />The
+    padding can be removed from the content area by adding the <code>[noPadding]="true"</code> property. For transparent
+    content area, add <code>[transparent]="true"</code> property to <code>fd-panel-content</code>.
+</description>
+<component-example>
+    <fd-panel-transparent-example></fd-panel-transparent-example>
+</component-example>
+<code-example [exampleFiles]="panelTransparent"></code-example>
