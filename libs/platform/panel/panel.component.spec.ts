@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-
-import { CommonModule } from '@angular/common';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { PanelActionsComponent } from './panel-actions.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
@@ -16,7 +13,7 @@ import { PlatformPanelModule } from './panel.module';
         <fdp-panel-content>Panel Content Text</fdp-panel-content>
     </fdp-panel>`,
     standalone: true,
-    imports: [CommonModule, PlatformPanelModule]
+    imports: [PlatformPanelModule]
 })
 class PanelWithDefaultValuesComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
@@ -76,7 +73,7 @@ describe('PanelComponent default values', () => {
         <fdp-panel-content [contentHeight]="contentHeight">Panel Content Text</fdp-panel-content>
     </fdp-panel>`,
     standalone: true,
-    imports: [CommonModule, PlatformPanelModule, PlatformButtonModule]
+    imports: [PlatformPanelModule, PlatformButtonModule]
 })
 class SimplePanelComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;

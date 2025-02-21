@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
     AutoCompleteModule,
@@ -25,7 +24,6 @@ import { RtlService } from './services/rtl.service';
 
 @NgModule({
     imports: [
-        CommonModule,
         FocusableItemModule,
         FocusableListModule,
         FocusableGridModule,

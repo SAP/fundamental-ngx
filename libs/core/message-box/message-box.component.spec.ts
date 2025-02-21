@@ -3,10 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { Subject } from 'rxjs';
-
-import { CommonModule } from '@angular/common';
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { MessageBoxComponent } from './message-box.component';
 import { MessageBoxModule } from './message-box.module';
@@ -24,7 +21,7 @@ import { MessageBoxRef } from './utils/message-box-ref.class';
         </fd-message-box>
     `,
     standalone: true,
-    imports: [CommonModule, MessageBoxModule]
+    imports: [MessageBoxModule]
 })
 class TemplateTestComponent {
     @ViewChild(MessageBoxComponent) messageBox: MessageBoxComponent;

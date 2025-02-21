@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
@@ -95,7 +93,7 @@ import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigat
 import { WizardModule } from '@fundamental-ngx/core/wizard';
 
 @NgModule({
-    imports: [CommonModule, FormsModule],
+    imports: [FormsModule],
     exports: [
         ActionBarModule,
         ActionSheetModule,

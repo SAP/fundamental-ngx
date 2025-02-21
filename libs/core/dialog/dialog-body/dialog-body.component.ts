@@ -10,7 +10,7 @@ import {
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 
 import { PortalModule } from '@angular/cdk/portal';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -46,7 +46,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [ScrollbarDirective],
     standalone: true,
-    imports: [DynamicPortalComponent, BusyIndicatorComponent, AsyncPipe, CommonModule, PortalModule]
+    imports: [DynamicPortalComponent, BusyIndicatorComponent, AsyncPipe, PortalModule]
 })
 export class DialogBodyComponent {
     /**
