@@ -14,7 +14,7 @@ import {
     inject
 } from '@angular/core';
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
-import { BarComponent, BarElementDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { BarComponent, BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
 import { Subscription, map, merge, startWith } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
@@ -32,7 +32,8 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
         PopoverBodyHeaderDirective,
         BarComponent,
         ButtonBarComponent,
-        BarElementDirective
+        BarElementDirective,
+        BarLeftDirective
     ],
     host: {
         class: 'fd-popover__wrapper',
