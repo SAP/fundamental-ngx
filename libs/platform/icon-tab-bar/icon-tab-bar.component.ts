@@ -76,6 +76,9 @@ export class IconTabBarComponent implements OnInit, TabList {
     @Input({ transform: booleanAttribute })
     stackContent = false;
 
+    /** Heading level of the tab. */
+    tabHeadingLevel = input<number | null>(null);
+
     /** @description Type of tab bar view. */
     iconTabType = input<TabType>('text');
 

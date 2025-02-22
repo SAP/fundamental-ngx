@@ -49,6 +49,7 @@
         [densityMode]="densityMode()"
         [colorAssociations]="colorAssociations()"
         (selected)="_selectItem($event)"
+        [tabHeadingLevel]="tabHeadingLevel()"
     ></fdp-icon-tab-bar-process-type>
 </ng-template>
 <ng-template #filterType>
@@ -61,6 +62,7 @@
         [densityMode]="densityMode()"
         [colorAssociations]="colorAssociations()"
         (selected)="_selectItem($event)"
+        [tabHeadingLevel]="tabHeadingLevel()"
     ></fdp-icon-tab-bar-filter-type>
 </ng-template>
 <ng-template #iconType>
@@ -74,6 +76,7 @@
         [colorAssociations]="colorAssociations()"
         (selected)="_selectItem($event)"
         (closeTab)="_closeTab($event)"
+        [tabHeadingLevel]="tabHeadingLevel()"
     ></fdp-icon-tab-bar-icon-type>
 </ng-template>
 <ng-template #textType>
@@ -90,5 +93,6 @@
         (reordered)="_onReorder($event)"
         (selected)="_selectItem($event)"
         (closeTab)="_closeTab($event)"
+        [tabHeadingLevel]="tabHeadingLevel()"
     ></fdp-icon-tab-bar-text-type>
 </ng-template>
