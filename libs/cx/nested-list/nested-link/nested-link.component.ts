@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -38,7 +38,7 @@ import {
             <ng-content select="[fdx-nested-list-expand-icon]"></ng-content>
         </ng-template>
     `,
-    imports: [CommonModule],
+    imports: [NgTemplateOutlet],
     standalone: true,
     selector:
         // eslint-disable-next-line @angular-eslint/component-selector

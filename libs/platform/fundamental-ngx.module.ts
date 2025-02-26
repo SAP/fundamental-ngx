@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
@@ -50,7 +48,7 @@ import { VariantManagementModule } from '@fundamental-ngx/platform/variant-manag
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
 @NgModule({
-    imports: [CommonModule, FormsModule],
+    imports: [FormsModule],
     exports: [
         PlatformPipeModule,
         PlatformApprovalFlowModule,

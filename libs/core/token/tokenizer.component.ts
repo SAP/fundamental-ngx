@@ -1,14 +1,4 @@
-import {
-    A,
-    BACKSPACE,
-    DELETE,
-    DOWN_ARROW,
-    ENTER,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    SPACE,
-    UP_ARROW
-} from '@angular/cdk/keycodes';
+import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -482,7 +472,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
      * Check whether user intends to go back to the previous token
      **/
     private _goBackRequested($event: KeyboardEvent, rtl: boolean): boolean {
-        const backKeys = rtl ? [RIGHT_ARROW, DOWN_ARROW] : [LEFT_ARROW, UP_ARROW];
+        const backKeys = rtl ? [RIGHT_ARROW] : [LEFT_ARROW];
         return KeyUtil.isKeyCode($event, backKeys);
     }
 
@@ -491,7 +481,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
      * Check whether user intends to go forward to the next token
      **/
     private _goForwardRequested($event: KeyboardEvent, rtl: boolean): boolean {
-        const forwardKeys = rtl ? [LEFT_ARROW, UP_ARROW] : [RIGHT_ARROW, DOWN_ARROW];
+        const forwardKeys = rtl ? [LEFT_ARROW] : [RIGHT_ARROW];
         return KeyUtil.isKeyCode($event, forwardKeys);
     }
 

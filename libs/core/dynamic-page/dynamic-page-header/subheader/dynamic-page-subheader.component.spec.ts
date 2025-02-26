@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { DynamicPageModule } from '../../dynamic-page.module';
@@ -11,7 +9,7 @@ import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.componen
     template: ` <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,
     providers: [DynamicPageService],
     standalone: true,
-    imports: [CommonModule, DynamicPageModule]
+    imports: [DynamicPageModule]
 })
 class TestComponent {
     @ViewChild(DynamicPageSubheaderComponent) subHeader: DynamicPageSubheaderComponent;

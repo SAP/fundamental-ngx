@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ThemingConfig } from './interfaces/theming-config.interface';
 import { provideTheming } from './provide-theming';
 import { ThemingService } from './theming.service';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [],
     providers: [ThemingService]
 })
 export class ThemingModule {
