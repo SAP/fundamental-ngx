@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { I18nModule } from '@fundamental-ngx/i18n';
@@ -11,7 +9,6 @@ import { SideNavigationComponent } from './side-navigation.component';
 
 @NgModule({
     imports: [
-        CommonModule,
         ButtonComponent,
         ScrollbarModule,
         I18nModule,
