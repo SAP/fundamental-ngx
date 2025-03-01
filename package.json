@@ -94,7 +94,7 @@
         "@sap-ui/common-css": "0.38.0",
         "@schematics/angular": "19.0.7",
         "@swc-node/register": "1.9.2",
-        "@swc/cli": "0.3.12",
+        "@swc/cli": "0.6.0",
         "@swc/core": "1.5.7",
         "@types/google.visualization": "0.0.71",
         "@types/jasmine": "5.1.3",
