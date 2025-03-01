@@ -7836,10 +7836,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jasmine@npm:5.1.3":
-  version: 5.1.3
-  resolution: "@types/jasmine@npm:5.1.3"
-  checksum: 10/56bac41b694d79f93ec384a3192667f0461b9834a9040383b18fb1248f688650e2d82720632604f474140b2d91550054a1aea641f560aaa00134828c7085e726
+"@types/jasmine@npm:5.1.7":
+  version: 5.1.7
+  resolution: "@types/jasmine@npm:5.1.7"
+  checksum: 10/ce117e3dea932d8f7d643ef30a39dd1e95a97f26073ab1b697871570cbe7071fca6cf53501710998c429062dbd35c916edd0e75015b1328fc0a6d7a28ef7fef0
   languageName: node
   linkType: hard
 
@@ -15320,7 +15320,7 @@ __metadata:
     "@swc/core": "npm:1.5.7"
     "@swc/helpers": "npm:0.5.11"
     "@types/google.visualization": "npm:0.0.71"
-    "@types/jasmine": "npm:5.1.3"
+    "@types/jasmine": "npm:5.1.7"
     "@types/jest": "npm:29.5.14"
     "@types/lodash-es": "npm:4.17.6"
     "@types/marked": "npm:5.0.2"
