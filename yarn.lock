@@ -15385,7 +15385,7 @@ __metadata:
     postcss-url: "npm:10.1.3"
     prettier: "npm:3.5.1"
     prettier-plugin-organize-imports: "npm:3.2.4"
-    rxjs: "npm:7.8.1"
+    rxjs: "npm:7.8.2"
     semver: "npm:7.6.3"
     standard-version: "npm:9.5.0"
     through2: "npm:4.0.2"
@@ -24169,7 +24169,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.2.0, rxjs@npm:^7.5.4, rxjs@npm:^7.5.5, rxjs@npm:^7.8.0, rxjs@npm:^7.8.1":
+"rxjs@npm:7.8.2, rxjs@npm:^7.2.0, rxjs@npm:^7.5.4, rxjs@npm:^7.5.5, rxjs@npm:^7.8.0, rxjs@npm:^7.8.1":
   version: 7.8.2
   resolution: "rxjs@npm:7.8.2"
   dependencies:
