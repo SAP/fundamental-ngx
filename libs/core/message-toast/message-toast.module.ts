@@ -1,6 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { MessageToastTextComponent } from './components/message-toast-text.component';
 import { MessageToastConfig } from './config/message-toast.config';
@@ -10,7 +9,7 @@ import { MessageToastService } from './message-toast.service';
 import { provideMessageToastConfig } from './provide-config';
 
 @NgModule({
-    imports: [CommonModule, PortalModule, OverlayModule, MessageToastComponent, MessageToastTextComponent],
+    imports: [PortalModule, OverlayModule, MessageToastComponent, MessageToastTextComponent],
     exports: [MessageToastComponent],
     providers: [MessageToastService, { provide: MESSAGE_TOAST_CONFIG, useValue: new MessageToastConfig() }]
 })

@@ -3,6 +3,195 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.31...v0.55.0-rc.32) (2025-02-28)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.30...v0.55.0-rc.31) (2025-02-28)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.29...v0.55.0-rc.30) (2025-02-26)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.28...v0.55.0-rc.29) (2025-02-26)
+
+
+### Bug Fixes
+
+* dependencies, minor visual bugs, lint rule ([#13066](https://github.com/SAP/fundamental-ngx/issues/13066)) ([38af4ee](https://github.com/SAP/fundamental-ngx/commit/38af4ee6927f5321c2659cb243ab12726d36f97a))
+
+
+
+
+
+# [0.55.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.27...v0.55.0-rc.28) (2025-02-21)
+
+
+### Bug Fixes
+
+* **cx:** nested link component import bug ([#13061](https://github.com/SAP/fundamental-ngx/issues/13061)) ([784a5b6](https://github.com/SAP/fundamental-ngx/commit/784a5b6d190a5e8bf855e4a1dd85bf160e0d0c1a))
+
+
+
+
+
+# [0.55.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.26...v0.55.0-rc.27) (2025-02-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.25...v0.55.0-rc.26) (2025-02-20)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.24...v0.55.0-rc.25) (2025-02-19)
+
+
+### Bug Fixes
+
+* **platform:** add visual improvements to Settings Generator ([#13046](https://github.com/SAP/fundamental-ngx/issues/13046)) ([65ea013](https://github.com/SAP/fundamental-ngx/commit/65ea0131669e7785fe34c1e1cba9ae4f357ba142))
+
+
+
+
+
+# [0.55.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.23...v0.55.0-rc.24) (2025-02-19)
+
+
+### Bug Fixes
+
+* **platform:** fixed visual bug in select docs ([#13053](https://github.com/SAP/fundamental-ngx/issues/13053)) ([5032cfb](https://github.com/SAP/fundamental-ngx/commit/5032cfb3cb302e8c96345bd266324b893b6fdab2))
+
+
+
+
+
+# [0.55.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.22...v0.55.0-rc.23) (2025-02-19)
+
+
+### Bug Fixes
+
+* **core:** removed up&down keys from tokens to fix rtl key handling ([#13044](https://github.com/SAP/fundamental-ngx/issues/13044)) ([52b25fa](https://github.com/SAP/fundamental-ngx/commit/52b25fa6d3993be425a5e79fa9afe68578333f68))
+
+
+
+
+
+# [0.55.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.21...v0.55.0-rc.22) (2025-02-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.20...v0.55.0-rc.21) (2025-02-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.19...v0.55.0-rc.20) (2025-02-14)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.18...v0.55.0-rc.19) (2025-02-14)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.17...v0.55.0-rc.18) (2025-02-14)
+
+
+### Bug Fixes
+
+* **core:** illustrated messages responsiveness ([#13025](https://github.com/SAP/fundamental-ngx/issues/13025)) ([5ab8110](https://github.com/SAP/fundamental-ngx/commit/5ab81100fbd7f79604746012ace752148144992c))
+
+
+
+
+
+# [0.55.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.16...v0.55.0-rc.17) (2025-02-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.15...v0.55.0-rc.16) (2025-02-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.14...v0.55.0-rc.15) (2025-02-13)
+
+
+### Bug Fixes
+
+* **platform:** Combine Sorting, Filtering, and Grouping Settings into a Single Dialog ([#12502](https://github.com/SAP/fundamental-ngx/issues/12502)) ([be873f3](https://github.com/SAP/fundamental-ngx/commit/be873f3623a129523aa5c3adc7520a9beb64c1bd))
+
+
+
+
+
+# [0.55.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.13...v0.55.0-rc.14) (2025-02-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.12...v0.55.0-rc.13) (2025-02-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.55.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.11...v0.55.0-rc.12) (2025-02-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.55.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.10...v0.55.0-rc.11) (2025-02-12)
 
 **Note:** Version bump only for package fundamental-ngx

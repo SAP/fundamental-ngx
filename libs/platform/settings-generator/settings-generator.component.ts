@@ -10,6 +10,7 @@ import {
     Inject,
     inject,
     Injector,
+    input,
     Input,
     OnDestroy,
     ViewChild,
@@ -43,7 +44,11 @@ import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens'
             useExisting: SettingsGeneratorComponent
         }
     ],
-    standalone: true
+    standalone: true,
+    host: {
+        '[style.width]': 'width()',
+        '[style.height]': 'height()'
+    }
 })
 export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy, HasElementRef {
     /** @hidden */
@@ -74,6 +79,16 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
     get settings(): Nullable<SettingsModel> {
         return this._settings;
     }
+
+    /**
+     * Container height.
+     */
+    height = input<string>();
+
+    /**
+     * Container width.
+     */
+    width = input<string>();
 
     /** @hidden */
     private _settings: Nullable<SettingsModel>;

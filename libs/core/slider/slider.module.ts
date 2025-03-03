@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -12,7 +11,7 @@ import { SliderComponent } from './slider.component';
 const EXPORTS = [SliderComponent, SliderPositionDirective];
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule, ...EXPORTS],
+    imports: [PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule, ...EXPORTS],
     exports: [...EXPORTS]
 })
 export class SliderModule {}

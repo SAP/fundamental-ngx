@@ -4,6 +4,8 @@ module.exports = [
     ...nx.configs['flat/base'],
     ...nx.configs['flat/typescript'],
     ...nx.configs['flat/javascript'],
+    ...nx.configs['flat/angular'],
+    ...nx.configs['flat/angular-template'],
     {
         ignores: ['**/dist']
     },
@@ -303,5 +305,11 @@ module.exports = [
         files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
         // Override or add rules here
         rules: {}
+    },
+    {
+        files: ['**/*.html'],
+        rules: {
+            '@angular-eslint/template/prefer-control-flow': 'error'
+        }
     }
 ];

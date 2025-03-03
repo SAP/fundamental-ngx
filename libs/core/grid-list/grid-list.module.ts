@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
@@ -20,7 +18,6 @@ import { GridListItemImageDirective } from './directives/grid-list-item-image.di
 
 @NgModule({
     imports: [
-        CommonModule,
         ToolbarModule,
         ButtonModule,
         AvatarModule,

@@ -5,7 +5,7 @@ on:
 
 env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
-    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 8
+    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 1
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
     NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
@@ -16,24 +16,26 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    # nx_agents:
-    #     name: Nx Cloud Agent ${{ matrix.agent }}
-    #     runs-on: ubuntu-latest
-    #     strategy:
-    #         matrix:
-    #             agent: [1, 2, 3, 4, 5, 6, 7, 8]
-    #             node-version: [22.x]
-    #     steps:
-    #         - uses: actions/checkout@v4.2.2
-    #         - uses: ./.github/actions/nodejs
-    #         - name: set up xvfb
-    #           run: |
-    #               export DISPLAY=:99
-    #               sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
-    #         - name: Start Nx Cloud Agent
-    #           run: npx nx-cloud start-agent
-    #           env:
-    #               NX_AGENT_NAME: ${{matrix.agent}}
+    nx_agents:
+        name: Nx Cloud Agent ${{ matrix.agent }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                agent: [1, 2, 3]
+                node-version: [22.x]
+        steps:
+            - uses: actions/checkout@v4.2.2
+            - name: Sleep before running CI
+              run: sleep $(( $RANDOM % 30 + 3 ))
+            - uses: ./.github/actions/nodejs
+            - name: set up xvfb
+              run: |
+                  export DISPLAY=:99
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+            - name: Start Nx Cloud Agent
+              run: npx nx-cloud start-agent
+              env:
+                  NX_AGENT_NAME: ${{matrix.agent}}
 
     build_test:
         runs-on: ubuntu-latest
@@ -56,6 +58,9 @@ jobs:
 
             - uses: ./.github/actions/nodejs
 
+            - name: Sleep before running CI
+              run: sleep 35
+
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
@@ -71,9 +76,9 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=3
-                      npx nx run-many --target=test --all --skip-nx-cache --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
-                      npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=3
+                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=1
+                      npx nx run-many --target=test --all --skip-nx-cache --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=1
+                      npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=1
 
             - name: Text workspace tags
               run: npx nx run nx-plugin:test --skip-nx-cache
@@ -124,15 +129,17 @@ jobs:
     #           run: |
     #               NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app --skip-nx-cache
 
-    # stop_agents:
-    #     if: ${{ always() }}
-    #     needs:
-    #         - build_test
-    #         - e2e_test
-    #     name: Nx Cloud - Stop Agents
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - uses: actions/checkout@v4.2.2
-    #         - uses: ./.github/actions/nodejs
-    #         - name: Stop all running agents for this CI run
-    #           run: npx nx-cloud stop-all-agents
+    stop_agents:
+        if: ${{ always() }}
+        needs:
+            - build_test
+            # - e2e_test
+        name: Nx Cloud - Stop Agents
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4.2.2
+            - name: Sleep before running CI
+              run: sleep 25
+            - uses: ./.github/actions/nodejs
+            - name: Stop all running agents for this CI run
+              run: npx nx-cloud stop-all-agents

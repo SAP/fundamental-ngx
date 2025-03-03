@@ -77,18 +77,18 @@
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "buildTarget": "fundamental-ngx-example:build"
+                    },
                     "configurations": {
                         "production": {
-                            "browserTarget": "fundamental-ngx-example:build:production"
+                            "buildTarget": "fundamental-ngx-example:build:production"
                         },
                         "development": {
-                            "browserTarget": "fundamental-ngx-example:build:development"
+                            "buildTarget": "fundamental-ngx-example:build:development"
                         }
                     },
-                    "defaultConfiguration": "development",
-                    "options": {
-                        "browserTarget": "fundamental-ngx-example:build"
-                    }
+                    "defaultConfiguration": "development"
                 }
             },
             "prefix": "app",
