@@ -30,6 +30,12 @@ export abstract class TableColumn {
     /** Data type the column represents. */
     abstract dataType: FilterableColumnDataType;
 
+    /**
+     * Optional array of available filter options.
+     * Providing values to this input will cause the filter to change from a text-type input to a select-type input.
+     * */
+    abstract filterSelectOptions: string[];
+
     /** Width of the column cells. */
     abstract width: string;
 
