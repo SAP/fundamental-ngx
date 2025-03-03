@@ -366,6 +366,10 @@ export default {
         searchSuggestionMessage: '{count} suggerimenti trovati.',
         searchSuggestionNavigateMessage: 'utilizzare le frecce su e giù per navigare'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Impostazioni',
+        searchLabel: 'Cerca'
+    },
     platformSwitch: {
         ariaLabel: 'Immissione Passaggio'
     },
@@ -490,9 +494,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colonne',
         toolbarActionExpandAllButtonTitle: 'Espandi tutto',
         toolbarActionCollapseAllButtonTitle: 'Comprimi tutto',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Espandi riga',
+        collapseRowButtonTitle: 'Comprimi riga',
+        rowNavigateButtonTitle: 'Esplora',
         filterDialogBackToColumns: 'Indietro',
         filterDialogNotFilteredLabel: '(Non filtrato)',
         filterDialogFilterByLabel: 'Filtra per: {filterLabel}',
@@ -518,14 +522,18 @@ export default {
         sortDialogCancelBtnLabel: 'Annulla',
         selectAllCheckboxLabel: 'Seleziona tutto',
         deselectAllCheckboxLabel: 'Deseleziona tutto',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Casella di controllo, deselezionata, fare clic per selezionare tutto',
+        selectAllCheckboxMixedLongLabel: 'Casella di controllo, mista, fare clic per selezionare tutto',
+        deselectAllCheckboxLongLabel: 'Casella di controllo, selezionata, fare clic per deselezionare tutto',
         deselectSingleRow: 'Per deselezionare la riga, premere la BARRA SPAZIATRICE',
         selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE',
-        loadMore: 'Carica di più',
+        loadMore: 'Espandi',
+        toolbarActionButtonTitle: 'Impostazioni',
+        settingsDialogHeader: 'Impostazioni',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Annulla',
         filteredBy: 'Filtrato in base a',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Voci visualizzate: {totalGrowingItemsCount} di {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifica'

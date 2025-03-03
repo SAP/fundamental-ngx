@@ -365,6 +365,10 @@ export default {
         searchSuggestionMessage: '{count} nájdených návrhov.',
         searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Nastavenia',
+        searchLabel: 'Vyhľadať'
+    },
     platformSwitch: {
         ariaLabel: 'Prepínač - zadanie'
     },
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stĺpce',
         toolbarActionExpandAllButtonTitle: 'Rozbaliť všetko',
         toolbarActionCollapseAllButtonTitle: 'Zbaliť všetko',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Rozbaliť riadok',
+        collapseRowButtonTitle: 'Zbaliť riadok',
+        rowNavigateButtonTitle: 'Navigovať',
         filterDialogBackToColumns: 'Prejsť späť',
         filterDialogNotFilteredLabel: '(nefiltrované)',
         filterDialogFilterByLabel: 'Filtrovať podľa: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Zrušiť',
         selectAllCheckboxLabel: 'Vybrať všetko',
         deselectAllCheckboxLabel: 'Zrušiť výber všetkého',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Začiarkavacie políčko, nezačiarknuté, kliknutím vyberte všetko',
+        selectAllCheckboxMixedLongLabel: 'Začiarkavacie políčko, zmiešané, kliknutím vyberte všetko',
+        deselectAllCheckboxLongLabel: 'Začiarkavacie políčko, začiarknuté, kliknutím zrušte výber všetkého',
         deselectSingleRow: 'Pre zrušenie výberu stlačte MEDZERNÍK',
         selectSingleRow: 'Ak chcete vybrať riadok, stlačte MEDZERNÍK',
-        loadMore: 'Načítať ďalšie',
+        loadMore: 'Zobraziť viac',
+        toolbarActionButtonTitle: 'Nastavenia',
+        settingsDialogHeader: 'Nastavenia',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Zrušiť',
         filteredBy: 'Filtrované podľa',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Zobrazuje sa {totalGrowingItemsCount} z {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upraviť'

@@ -365,6 +365,10 @@ export default {
         searchSuggestionMessage: '{count} forslag blev fundet.',
         searchSuggestionNavigateMessage: 'brug pil op og pil ned til at navigere'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Indstillinger',
+        searchLabel: 'Søg'
+    },
     platformSwitch: {
         ariaLabel: 'Skift input'
     },
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Udvid alle',
         toolbarActionCollapseAllButtonTitle: 'Minimer alle',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Udvid række',
+        collapseRowButtonTitle: 'Minimer række',
+        rowNavigateButtonTitle: 'Naviger',
         filterDialogBackToColumns: 'Naviger tilbage',
         filterDialogNotFilteredLabel: '(Ikke filtreret)',
         filterDialogFilterByLabel: 'Filtrér efter: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Annuller',
         selectAllCheckboxLabel: 'Vælg alle',
         deselectAllCheckboxLabel: 'Fravælg alle',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Afkrydsningsfelt, ikke-markeret, klik for at markere alle',
+        selectAllCheckboxMixedLongLabel: 'Afkrydsningsfelt, blandet, klik for at markere alle',
+        deselectAllCheckboxLongLabel: 'Afkrydsningsfelt, markeret, klik for at fravælge alle',
         deselectSingleRow: 'Tryk på mellemrumstasten for at slette markering af række',
         selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
-        loadMore: 'Indlæs mere',
+        loadMore: 'Vis flere',
+        toolbarActionButtonTitle: 'Indstillinger',
+        settingsDialogHeader: 'Indstillinger',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Annuller',
         filteredBy: 'Filtreret efter',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'

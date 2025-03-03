@@ -367,6 +367,10 @@ export default {
         searchSuggestionMessage: '{count} suggestions trouvées',
         searchSuggestionNavigateMessage: 'utiliser les flèches pointant vers le haut ou le bas pour naviguer'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Paramètres',
+        searchLabel: 'Rechercher'
+    },
     platformSwitch: {
         ariaLabel: 'Entrée de commutateur'
     },
@@ -491,9 +495,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colonnes',
         toolbarActionExpandAllButtonTitle: 'Tout développer',
         toolbarActionCollapseAllButtonTitle: 'Tout réduire',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Développer la ligne',
+        collapseRowButtonTitle: 'Réduire la ligne',
+        rowNavigateButtonTitle: 'Naviguer',
         filterDialogBackToColumns: 'Revenir à la page précédente',
         filterDialogNotFilteredLabel: '(Non filtré)',
         filterDialogFilterByLabel: 'Filtrer par : {filterLabel}',
@@ -519,14 +523,18 @@ export default {
         sortDialogCancelBtnLabel: 'Annuler',
         selectAllCheckboxLabel: 'Sélectionner tout',
         deselectAllCheckboxLabel: 'Tout désélectionner',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Case à cocher, décochée, cliquer pour tout sélectionner',
+        selectAllCheckboxMixedLongLabel: 'Case à cocher, mixte, cliquer pour tout sélectionner',
+        deselectAllCheckboxLongLabel: 'Case à cocher, cochée, cliquer pour tout désélectionner',
         deselectSingleRow: "Pour désélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
         selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
-        loadMore: 'Charger plus',
+        loadMore: 'Afficher plus',
+        toolbarActionButtonTitle: 'Paramètres',
+        settingsDialogHeader: 'Paramètres',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Annuler',
         filteredBy: 'Filtré par',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Affichage {totalGrowingItemsCount} sur {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifier'

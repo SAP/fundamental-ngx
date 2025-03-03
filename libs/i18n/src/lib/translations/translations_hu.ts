@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: '{count} javaslat található.',
         searchSuggestionNavigateMessage: 'a le és a fel nyíllal navigálhat'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Beállítások',
+        searchLabel: 'Keresés'
+    },
     platformSwitch: {
         ariaLabel: 'Bemenetváltás'
     },
@@ -489,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Oszlopok',
         toolbarActionExpandAllButtonTitle: 'Összes kibontása',
         toolbarActionCollapseAllButtonTitle: 'Összes visszazárása',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Sor kibontása',
+        collapseRowButtonTitle: 'Sor összecsukása',
+        rowNavigateButtonTitle: 'Navigálás',
         filterDialogBackToColumns: 'Visszalépés',
         filterDialogNotFilteredLabel: '(Nincs szűrve)',
         filterDialogFilterByLabel: 'Szűrés alapja: {filterLabel}',
@@ -517,14 +520,18 @@ export default {
         sortDialogCancelBtnLabel: 'Mégse',
         selectAllCheckboxLabel: 'Összes kiválasztása',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Jelölőnégyzet, nincs bejelölve, kattintson az összes kijelöléséhez',
+        selectAllCheckboxMixedLongLabel: 'Jelölőnégyzet, vegyes, kattintson az összes kijelöléséhez',
+        deselectAllCheckboxLongLabel: 'Jelölőnégyzet, bejelölve, kattintson az összes kijelölés megszüntetéséhez',
         deselectSingleRow: 'A sor kijelölésének megszüntetéséhez nyomja meg a „szóköz” billentyűt',
         selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
-        loadMore: 'Továbbiak betöltése',
+        loadMore: 'Több megjelenítése',
+        toolbarActionButtonTitle: 'Beállítások',
+        settingsDialogHeader: 'Beállítások',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Mégse',
         filteredBy: 'Alkalmazott szűrő:',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'totalGrowingItemsCount} megjelenítve ennyiből: {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Szerkesztés'

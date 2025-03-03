@@ -365,6 +365,10 @@ export default {
         searchSuggestionMessage: 'Намерени са {count} предложения.',
         searchSuggestionNavigateMessage: 'за придвижване, използвайте стрелките нагоре и надолу'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Настройки',
+        searchLabel: 'Търсене'
+    },
     platformSwitch: {
         ariaLabel: 'Въвеждане на превключвател'
     },
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Колони',
         toolbarActionExpandAllButtonTitle: 'Разгръщане на всички',
         toolbarActionCollapseAllButtonTitle: 'Свиване на всички',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Разгръщане на реда',
+        collapseRowButtonTitle: 'Свиване на реда',
+        rowNavigateButtonTitle: 'Навигация',
         filterDialogBackToColumns: 'Назад',
         filterDialogNotFilteredLabel: '(Без филтриране)',
         filterDialogFilterByLabel: 'Филтриране по: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Отказ',
         selectAllCheckboxLabel: 'Избиране на всички',
         deselectAllCheckboxLabel: 'Отмяна на избора на всички',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Поле за отметка: без отметка. Кликнете, за да изберете всичко',
+        selectAllCheckboxMixedLongLabel: 'Поле за отметка: смесено. Кликнете, за да изберете всичко',
+        deselectAllCheckboxLongLabel: 'Поле за отметка: с отметка. Кликнете, за да отмените избора на всичко',
         deselectSingleRow: 'За премахване на ред от избраните, натиснете ИНТЕРВАЛ',
         selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
-        loadMore: 'Зареждане на повече',
+        loadMore: 'Виж повече',
+        toolbarActionButtonTitle: 'Настройки',
+        settingsDialogHeader: 'Настройки',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Отмяна',
         filteredBy: 'Филтрирано по',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показване: {totalGrowingItemsCount} от {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактиране'

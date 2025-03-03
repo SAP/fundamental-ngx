@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
     coreCalendar: {
@@ -363,6 +362,10 @@ export default {
         searchSuggestionMessage: '找到 {count} 个建议。',
         searchSuggestionNavigateMessage: '使用向上和向下箭头进行导航'
     },
+    platformSettingsGenerator: {
+        settingsLabel: '设置',
+        searchLabel: '搜索'
+    },
     platformSwitch: {
         ariaLabel: '切换输入'
     },
@@ -486,9 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: '列',
         toolbarActionExpandAllButtonTitle: '全部展开',
         toolbarActionCollapseAllButtonTitle: '全部折叠',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: '展开行',
+        collapseRowButtonTitle: '折叠行',
+        rowNavigateButtonTitle: '导航',
         filterDialogBackToColumns: '向后导航',
         filterDialogNotFilteredLabel: '（未筛选）',
         filterDialogFilterByLabel: '筛选条件：{filterLabel}',
@@ -514,14 +517,18 @@ export default {
         sortDialogCancelBtnLabel: '取消',
         selectAllCheckboxLabel: '全选',
         deselectAllCheckboxLabel: '取消全选',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: '复选框，未选中，单击以全部选中',
+        selectAllCheckboxMixedLongLabel: '复选框，混合，单击以全部选中',
+        deselectAllCheckboxLongLabel: '复选框，已选中，单击以全部取消选中',
         deselectSingleRow: '要取消选择行，请按空格键',
         selectSingleRow: '要选择行，请按空格键',
-        loadMore: '加载更多',
+        loadMore: '显示更多',
+        toolbarActionButtonTitle: '设置',
+        settingsDialogHeader: '设置',
+        confirmBtnLabel: '确定',
+        cancelBtnLabel: '取消',
         filteredBy: '过滤条件',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '显示 {totalGrowingItemsCount}/{totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'

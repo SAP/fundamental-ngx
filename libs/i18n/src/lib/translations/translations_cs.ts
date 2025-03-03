@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: 'Nalezené návrhy: {count}.',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Nastavení',
+        searchLabel: 'Hledat'
+    },
     platformSwitch: {
         ariaLabel: 'Přepnout zadání'
     },
@@ -489,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sloupce',
         toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
         toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Rozbalit řádek',
+        collapseRowButtonTitle: 'Sbalit řádek',
+        rowNavigateButtonTitle: 'Přejít',
         filterDialogBackToColumns: 'Přejít zpět',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
         filterDialogFilterByLabel: 'Filtrovat podle: {filterLabel}',
@@ -517,14 +520,18 @@ export default {
         sortDialogCancelBtnLabel: 'Zrušit',
         selectAllCheckboxLabel: 'Vybrat vše',
         deselectAllCheckboxLabel: 'Zrušit celý výběr',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Zaškrtávací pole, nezaškrtnuto, kliknutím vyberete vše',
+        selectAllCheckboxMixedLongLabel: 'Zaškrtávací pole, kombinované, kliknutím vyberete vše',
+        deselectAllCheckboxLongLabel: 'Zaškrtávací pole, zaškrtnuto, kliknutím zrušíte celý výběr',
         deselectSingleRow: 'Výběr řádky zrušíte stisknutím mezerníku',
         selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
-        loadMore: 'Načíst další',
+        loadMore: 'Zobrazit více',
+        toolbarActionButtonTitle: 'Nastavení',
+        settingsDialogHeader: 'Nastavení',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Zrušit',
         filteredBy: 'Filtrováno podle',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Zobrazení {totalGrowingItemsCount} z {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'

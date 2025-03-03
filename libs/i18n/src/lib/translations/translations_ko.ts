@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreCalendar: {
@@ -364,6 +363,10 @@ export default {
         searchSuggestionMessage: '{count}개의 제안을 찾았습니다.',
         searchSuggestionNavigateMessage: '위쪽 및 아래쪽 화살표를 사용하여 탐색'
     },
+    platformSettingsGenerator: {
+        settingsLabel: '설정',
+        searchLabel: '검색'
+    },
     platformSwitch: {
         ariaLabel: '스위치 입력'
     },
@@ -487,9 +490,9 @@ export default {
         toolbarActionColumnsButtonTitle: '열',
         toolbarActionExpandAllButtonTitle: '모두 펼치기',
         toolbarActionCollapseAllButtonTitle: '모두 접기',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: '행 펼치기',
+        collapseRowButtonTitle: '행 접기',
+        rowNavigateButtonTitle: '탐색',
         filterDialogBackToColumns: '뒤로 이동',
         filterDialogNotFilteredLabel: '(필터링 안 함)',
         filterDialogFilterByLabel: '필터링 기준: {filterLabel}',
@@ -515,14 +518,18 @@ export default {
         sortDialogCancelBtnLabel: '취소',
         selectAllCheckboxLabel: '모두 선택',
         deselectAllCheckboxLabel: '모두 선택 취소',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: '확인란, 선택 취소됨, 클릭하여 모두 선택',
+        selectAllCheckboxMixedLongLabel: '확인란, 혼합됨, 클릭하여 모두 선택',
+        deselectAllCheckboxLongLabel: '확인란, 선택됨, 클릭하여 모두 선택 취소',
         deselectSingleRow: '행 선택을 취소하려면 스페이스바를 누르십시오.',
         selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
-        loadMore: '추가 로드',
+        loadMore: '자세히 표시',
+        toolbarActionButtonTitle: '설정',
+        settingsDialogHeader: '설정',
+        confirmBtnLabel: '확인',
+        cancelBtnLabel: '취소',
         filteredBy: '필터링 기준',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '{totalGrowingItemsCount}개 중 {totalGrowingItemsCount}개 표시 중'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '편집'

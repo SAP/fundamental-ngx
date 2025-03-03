@@ -110,7 +110,7 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Zwinięte menu pozycji',
         cancel: 'Anuluj',
-        search: 'Szukaj'
+        search: 'Wyszukiwanie'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
@@ -225,7 +225,7 @@ export default {
         addNodeDialogUserOrTeam: 'Użytkownik/zespół',
         addNodeDialogAddToNext: 'Dodaj do następnego węzła szeregowego',
         addNodeDialogDueDate: 'Termin',
-        addNodeSearchPlaceholder: 'Szukaj',
+        addNodeSearchPlaceholder: 'Wyszukiwanie',
         addNodeAddActionBtnLabel: 'Dodaj',
         addNodeCancelActionBtnLabel: 'Anuluj',
         addNodeSelectApproverActionBtnLabel: 'Wybierz',
@@ -286,7 +286,7 @@ export default {
         successButtonLabel: 'OK',
         cancelButtonLabel: 'Anuluj',
         selectedEmptyLabel: 'Nie wybrano pozycji ani warunków',
-        searchPlaceholder: 'Szukaj',
+        searchPlaceholder: 'Wyszukiwanie',
         searchAdvancedSearchLabel: 'Filtry',
         searchShowAdvancedSearchLabel: 'Wyświetl filtry',
         searchHideAdvancedSearchLabel: 'Ukryj filtry',
@@ -359,17 +359,21 @@ export default {
     },
     platformSearchField: {
         clearButtonTitle: 'Wyczyść',
-        submitButtonTitle: 'Szukaj',
-        searchInputLabel: 'Szukaj',
+        submitButtonTitle: 'Wyszukiwanie',
+        searchInputLabel: 'Wyszukiwanie',
         synchronizeButtonTitle: 'Synchronizuj',
         searchSuggestionMessage: 'Liczba znalezionych podpowiedzi: {count}.',
         searchSuggestionNavigateMessage: 'użyj strzałek w górę i w dół do nawigacji'
+    },
+    platformSettingsGenerator: {
+        settingsLabel: 'Ustawienia',
+        searchLabel: 'Wyszukiwanie'
     },
     platformSwitch: {
         ariaLabel: 'Przełącz dane wejściowe'
     },
     platformSmartFilterBar: {
-        searchPlaceholder: 'Szukaj',
+        searchPlaceholder: 'Wyszukiwanie',
         submitButtonLabel: 'Przejdź',
         filtersButtonLabel: 'Filtry ({filtersCount})',
         showFiltersButtonLabel: 'Wyświetl filtry',
@@ -427,7 +431,7 @@ export default {
         editableCellDatePlaceholder: 'Wprowadź wartość',
         editableCellStringPlaceholder: 'Wprowadź wartość',
         P13ColumnsDialogHeader: 'Kolumny',
-        P13ColumnsDialogSearchPlaceholder: 'Szukaj',
+        P13ColumnsDialogSearchPlaceholder: 'Wyszukiwanie',
         P13ColumnsDialogsShowSelected: 'Wyświetl wybrane',
         P13ColumnsDialogShowAll: 'Wyświetl wszystko',
         P13ColumnsDialogSelectAll: 'Wybierz wszystkie ({selectedColumnsCount}/{selectableColumnsCount})',
@@ -479,7 +483,7 @@ export default {
         P13SortDialogAddNewSortBtnTitle: 'Dodaj nowe',
         P13SortDialogConfirmationBtnLabel: 'OK',
         P13SortDialogCancelBtnLabel: 'Anuluj',
-        toolbarSearchPlaceholder: 'Szukaj',
+        toolbarSearchPlaceholder: 'Wyszukiwanie',
         toolbarActionCreateButtonLabel: 'Utwórz',
         toolbarActionSaveButtonLabel: 'Zapisz',
         toolbarActionCancelButtonLabel: 'Anuluj',
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolumny',
         toolbarActionExpandAllButtonTitle: 'Rozwiń wszystko',
         toolbarActionCollapseAllButtonTitle: 'Zwiń wszystko',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Rozwiń wiersz',
+        collapseRowButtonTitle: 'Zwiń wiersz',
+        rowNavigateButtonTitle: 'Nawigacja',
         filterDialogBackToColumns: 'Przejdź wstecz',
         filterDialogNotFilteredLabel: '(Nieprzefiltrowane)',
         filterDialogFilterByLabel: 'Filtruj wg: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Anuluj',
         selectAllCheckboxLabel: 'Zaznacz wszystko',
         deselectAllCheckboxLabel: 'Odznacz wszystko',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Pole wyboru, niezaznaczone, kliknij, aby zaznaczyć wszystko',
+        selectAllCheckboxMixedLongLabel: 'Pole wyboru, mieszane, kliknij, aby zaznaczyć wszystko',
+        deselectAllCheckboxLongLabel: 'Pole wyboru, zaznaczone, kliknij, aby odznaczyć wszystko',
         deselectSingleRow: 'Aby odznaczyć linię, naciśnij SPACJĘ',
         selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
-        loadMore: 'Załaduj więcej',
+        loadMore: 'Pokaż więcej',
+        toolbarActionButtonTitle: 'Ustawienia',
+        settingsDialogHeader: 'Ustawienia',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Anuluj',
         filteredBy: 'Odfiltrowane wg',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Wyświetla {totalGrowingItemsCount} z {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'
@@ -561,7 +569,7 @@ export default {
         default: 'Domyślne',
         createdBy: 'Utworzone przez',
         removeVariant: 'Usuwanie widoku',
-        search: 'Szukaj',
+        search: 'Wyszukiwanie',
         access: {
             public: 'Publiczne',
             private: 'Prywatne'
@@ -576,10 +584,10 @@ export default {
         noData: 'Brak danych'
     },
     btpSearchField: {
-        searchButtonLabel: 'Szukaj',
+        searchButtonLabel: 'Wyszukiwanie',
         clearButtonLabel: 'Wyczyść',
-        searchInputPlaceholder: 'Szukaj',
-        searchInputAriaLabel: 'Szukaj'
+        searchInputPlaceholder: 'Wyszukiwanie',
+        searchInputAriaLabel: 'Wyszukiwanie'
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Przycisk menu'

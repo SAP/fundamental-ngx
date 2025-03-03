@@ -366,6 +366,10 @@ export default {
         searchSuggestionMessage: '{count} Vorschläge gefunden.',
         searchSuggestionNavigateMessage: 'Pfeile nach oben und unten für Navigation verwenden'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Einstellungen',
+        searchLabel: 'Suchen'
+    },
     platformSwitch: {
         ariaLabel: 'Eingabe wechseln'
     },
@@ -490,9 +494,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Spalten',
         toolbarActionExpandAllButtonTitle: 'Alle erweitern',
         toolbarActionCollapseAllButtonTitle: 'Alle komprimieren',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Zeile erweitern',
+        collapseRowButtonTitle: 'Zeile komprimieren',
+        rowNavigateButtonTitle: 'Navigieren',
         filterDialogBackToColumns: 'Zurück navigieren',
         filterDialogNotFilteredLabel: '(Nicht gefiltert)',
         filterDialogFilterByLabel: 'Filtern nach: {filterLabel}',
@@ -518,14 +522,18 @@ export default {
         sortDialogCancelBtnLabel: 'Abbrechen',
         selectAllCheckboxLabel: 'Alle auswählen',
         deselectAllCheckboxLabel: 'Alle abwählen',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Ankreuzfeld, nicht markiert, zur Auswahl aller Zeilen klicken',
+        selectAllCheckboxMixedLongLabel: 'Ankreuzfeld, gemischt, zur Auswahl aller Zeilen klicken',
+        deselectAllCheckboxLongLabel: 'Ankreuzfeld, markiert, klicken, zum Aufheben der gesamten Auswahl klicken',
         deselectSingleRow: 'Um Zeilenauswahl aufzuheben, Leertaste drücken',
         selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken',
-        loadMore: 'Weitere laden',
+        loadMore: 'Mehr anzeigen',
+        toolbarActionButtonTitle: 'Einstellungen',
+        settingsDialogHeader: 'Einstellungen',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Abbrechen',
         filteredBy: 'Gefiltert nach',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Anzeige von {totalGrowingItemsCount} von {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bearbeiten'

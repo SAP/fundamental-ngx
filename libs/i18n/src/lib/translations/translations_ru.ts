@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: 'Найдено предложений: {count}',
         searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Настройки',
+        searchLabel: 'Поиск'
+    },
     platformSwitch: {
         ariaLabel: 'Ввод переключателя'
     },
@@ -489,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Столбцы',
         toolbarActionExpandAllButtonTitle: 'Развернуть все',
         toolbarActionCollapseAllButtonTitle: 'Свернуть все',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Развернуть строку',
+        collapseRowButtonTitle: 'Свернуть строку',
+        rowNavigateButtonTitle: 'Перейти',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogNotFilteredLabel: '(не отфильтровано)',
         filterDialogFilterByLabel: 'Фильтр по: {filterLabel}',
@@ -517,14 +520,18 @@ export default {
         sortDialogCancelBtnLabel: 'Отменить',
         selectAllCheckboxLabel: 'Выбрать все',
         deselectAllCheckboxLabel: 'Отменить выделение',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Флажок, не выбрано, щелкнуть, чтобы выбрать все',
+        selectAllCheckboxMixedLongLabel: 'Флажок, смешанный статус, щелкнуть, чтобы выбрать все',
+        deselectAllCheckboxLongLabel: 'Флажок, выбрано, щелкнуть, чтобы отменить выбор всех',
         deselectSingleRow: 'Для отмены выбора нажмите пробел',
         selectSingleRow: 'Для выбора строки нажмите пробел',
-        loadMore: 'Загрузить еще',
+        loadMore: 'Показать больше',
+        toolbarActionButtonTitle: 'Настройки',
+        settingsDialogHeader: 'Настройки',
+        confirmBtnLabel: 'ОК',
+        cancelBtnLabel: 'Отменить',
         filteredBy: 'Отфильтровано по',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Изменить'

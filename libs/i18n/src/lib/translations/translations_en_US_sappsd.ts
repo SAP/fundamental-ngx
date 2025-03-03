@@ -532,6 +532,10 @@ export default {
         deselectSingleRow: '[[[Ţŏ ƌēşēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
         loadMore: '[[[Ŝĥŏŵ ɱŏŗē∙∙∙∙∙]]]',
+        toolbarActionButtonTitle: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
+        settingsDialogHeader: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
+        confirmBtnLabel: '[[[ŎĶ∙∙]]]',
+        cancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         filteredBy: '[[[Ƒįĺţēŗēƌ ƃŷ∙∙∙∙∙∙∙∙]]]',
         showingBlankOfBlank:
             '[[[Ŝĥŏŵįŋğ {ţŏţąĺĢŗŏŵįŋğĬţēɱşĈŏűŋţ} ŏƒ {ţŏţąĺĢŗŏŵįŋğĬţēɱşĈŏűŋţ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'

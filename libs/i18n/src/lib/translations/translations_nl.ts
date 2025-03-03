@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     coreCalendar: {
@@ -366,6 +365,10 @@ export default {
         searchSuggestionMessage: '{count} suggesties gevonden',
         searchSuggestionNavigateMessage: 'gebruik pijl-omhoog en pijl-omlaag om te bladeren'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Instellingen',
+        searchLabel: 'Zoeken'
+    },
     platformSwitch: {
         ariaLabel: 'Schakelen tussen invoer'
     },
@@ -490,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolommen',
         toolbarActionExpandAllButtonTitle: 'Alles uitvouwen',
         toolbarActionCollapseAllButtonTitle: 'Alles samenvouwen',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Rij uitvouwen',
+        collapseRowButtonTitle: 'Rij samenvouwen',
+        rowNavigateButtonTitle: 'Navigeren',
         filterDialogBackToColumns: 'Terug',
         filterDialogNotFilteredLabel: '(niet gefilterd)',
         filterDialogFilterByLabel: 'Filteren op: {filterLabel}',
@@ -518,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Annuleren',
         selectAllCheckboxLabel: 'Alles selecteren',
         deselectAllCheckboxLabel: 'Alle selecties opheffen',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Selectievakje, uitgeschakeld, klik om alles te selecteren',
+        selectAllCheckboxMixedLongLabel: 'Selectievakje, gemengd, klik om alles te selecteren',
+        deselectAllCheckboxLongLabel: 'Selectievakje, ingeschakeld, klik om alle selecties ongedaan te maken',
         deselectSingleRow: 'Druk op de spatiebalk om de selectie van de rij op te heffen',
         selectSingleRow: 'Druk op de spatiebalk om de rij te selecteren',
-        loadMore: 'Meer laden',
+        loadMore: 'Meer weergeven',
+        toolbarActionButtonTitle: 'Instellingen',
+        settingsDialogHeader: 'Instellingen',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Annuleren',
         filteredBy: 'Gefilterd op',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergegeven'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bewerken'

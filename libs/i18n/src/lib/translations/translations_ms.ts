@@ -364,6 +364,10 @@ export default {
         searchSuggestionMessage: '{count} cadangan ditemui.',
         searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Tetapan',
+        searchLabel: 'Carian'
+    },
     platformSwitch: {
         ariaLabel: 'Input suis'
     },
@@ -488,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Lajur',
         toolbarActionExpandAllButtonTitle: 'Kembangkan semua',
         toolbarActionCollapseAllButtonTitle: 'Runtuhkan semua',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Kembangkan baris',
+        collapseRowButtonTitle: 'Runtuhkan baris',
+        rowNavigateButtonTitle: 'Navigasi',
         filterDialogBackToColumns: 'Navigasi kembali',
         filterDialogNotFilteredLabel: '(Tidak Ditapis)',
         filterDialogFilterByLabel: 'Tapis mengikut: {filterLabel}',
@@ -516,14 +520,18 @@ export default {
         sortDialogCancelBtnLabel: 'Batal',
         selectAllCheckboxLabel: 'Pilih semua',
         deselectAllCheckboxLabel: 'Nyahpilih semua',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Kotak semak, dinyahtanda, klik untuk memilih semua',
+        selectAllCheckboxMixedLongLabel: 'Kotak semak, bercampur, klik untuk memilih semua',
+        deselectAllCheckboxLongLabel: 'Kotak semak, ditanda, klik untuk nyahpilih semua',
         deselectSingleRow: 'Untuk nyahpilih baris, tekan BAR RUANG',
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
-        loadMore: 'Muatkan lebih lagi',
+        loadMore: 'Tunjukkan selanjutnya',
+        toolbarActionButtonTitle: 'Tetapan',
+        settingsDialogHeader: 'Tetapan',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Batal',
         filteredBy: 'Ditapis mengikut',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

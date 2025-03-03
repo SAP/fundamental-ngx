@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: '{count}件の候補が見つかりました。',
         searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。'
     },
+    platformSettingsGenerator: {
+        settingsLabel: '設定',
+        searchLabel: '検索'
+    },
     platformSwitch: {
         ariaLabel: '入力を切り替えます。'
     },
@@ -488,9 +491,9 @@ export default {
         toolbarActionColumnsButtonTitle: '列',
         toolbarActionExpandAllButtonTitle: 'すべて展開',
         toolbarActionCollapseAllButtonTitle: 'すべて圧縮',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: '行を展開',
+        collapseRowButtonTitle: '行を圧縮',
+        rowNavigateButtonTitle: '移動',
         filterDialogBackToColumns: '戻る',
         filterDialogNotFilteredLabel: '(フィルタなし)',
         filterDialogFilterByLabel: 'フィルタ基準: {filterLabel}',
@@ -516,14 +519,19 @@ export default {
         sortDialogCancelBtnLabel: 'キャンセル',
         selectAllCheckboxLabel: 'すべて選択',
         deselectAllCheckboxLabel: 'すべて選択解除',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'チェックボックス: チェックが外れています。クリックするとすべて選択します。',
+        selectAllCheckboxMixedLongLabel:
+            'チェックボックス: チェックの有無が混在しています。クリックするとすべて選択します。',
+        deselectAllCheckboxLongLabel: 'チェックボックス: チェックが付いています。クリックするとすべて選択解除します。',
         deselectSingleRow: '行を選択解除するにはスペースキーを押します。',
         selectSingleRow: '行を選択するにはスペースキーを押します。',
-        loadMore: 'さらにロード',
+        loadMore: '表示を増やす',
+        toolbarActionButtonTitle: '設定',
+        settingsDialogHeader: '設定',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'キャンセル',
         filteredBy: 'フィルタ基準',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount}件を表示中'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編集'

@@ -365,6 +365,10 @@ export default {
         searchSuggestionMessage: '{count} sugestões encontradas.',
         searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Configurações',
+        searchLabel: 'Pesquisar'
+    },
     platformSwitch: {
         ariaLabel: 'Alternar entrada'
     },
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colunas',
         toolbarActionExpandAllButtonTitle: 'Expandir tudo',
         toolbarActionCollapseAllButtonTitle: 'Recolher tudo',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Expandir linha',
+        collapseRowButtonTitle: 'Recolher linha',
+        rowNavigateButtonTitle: 'Navegar',
         filterDialogBackToColumns: 'Voltar',
         filterDialogNotFilteredLabel: '(Não filtrado)',
         filterDialogFilterByLabel: 'Filtrar por: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Cancelar',
         selectAllCheckboxLabel: 'Selecionar tudo',
         deselectAllCheckboxLabel: 'Desmarcar tudo',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Caixa de seleção, desmarcado, clicar para selecionar tudo',
+        selectAllCheckboxMixedLongLabel: 'Caixa de seleção, misto, clicar para selecionar tudo',
+        deselectAllCheckboxLongLabel: 'Caixa de seleção, marcado, clicar para desmarcar tudo',
         deselectSingleRow: 'Pressione a BARRA DE ESPAÇOS para desmarcar a linha',
         selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha',
-        loadMore: 'Carregar mais',
+        loadMore: 'Mostrar mais',
+        toolbarActionButtonTitle: 'Configurações',
+        settingsDialogHeader: 'Configurações',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Cancelar',
         filteredBy: 'Filtrado por',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'

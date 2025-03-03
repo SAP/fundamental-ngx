@@ -366,6 +366,10 @@ export default {
         searchSuggestionMessage: '{count} forslag funnet.',
         searchSuggestionNavigateMessage: 'bruk oppover og nedover piler til å navigere'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Innstillinger',
+        searchLabel: 'Søk'
+    },
     platformSwitch: {
         ariaLabel: 'Bytt inndata'
     },
@@ -490,9 +494,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Utvid alle',
         toolbarActionCollapseAllButtonTitle: 'Skjul alle',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Utvid rad',
+        collapseRowButtonTitle: 'Komprimer rad',
+        rowNavigateButtonTitle: 'Naviger',
         filterDialogBackToColumns: 'Naviger tilbake',
         filterDialogNotFilteredLabel: '(Ikke filtrert)',
         filterDialogFilterByLabel: 'Filtrer etter: {filterLabel}',
@@ -518,14 +522,18 @@ export default {
         sortDialogCancelBtnLabel: 'Avbryt',
         selectAllCheckboxLabel: 'Merk alle',
         deselectAllCheckboxLabel: 'Opphev merking av alle',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Avmerkingsboks, ikke merket av, klikk for å velge alle',
+        selectAllCheckboxMixedLongLabel: 'Avmerkingsboks, blandet, klikk for å velge alle',
+        deselectAllCheckboxLongLabel: 'Avmerkingsboks, merket av, klikk for å oppheve merkingen av alle',
         deselectSingleRow: 'Trykk på mellomromstast for å oppheve merkingen',
         selectSingleRow: 'Trykk på mellomromstast for å merke rad',
-        loadMore: 'Last inn mer',
+        loadMore: 'Vis mer',
+        toolbarActionButtonTitle: 'Innstillinger',
+        settingsDialogHeader: 'Innstillinger',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Avbryt',
         filteredBy: 'Filtrert etter',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} av {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'
