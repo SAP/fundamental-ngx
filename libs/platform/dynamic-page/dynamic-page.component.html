@@ -13,7 +13,7 @@
             [titleWrap]="titleComponent.titleWrap"
             [subtitle]="titleComponent.subtitle"
             [subtitleWrap]="titleComponent.subtitleWrap"
-            [headingLevel]="headingLevel"
+            [headingLevel]="headingLevel()"
         >
             @if (titleComponent.breadcrumbComponent) {
                 <fd-dynamic-page-breadcrumb>

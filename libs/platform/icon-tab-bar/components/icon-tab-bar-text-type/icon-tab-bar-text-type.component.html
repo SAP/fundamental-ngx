@@ -35,7 +35,7 @@
                         [attr.aria-selected]="item.uId === selectedUid"
                         (click)="_selectItem(item, $event)"
                         (keydown)="_keyDownHandler($event, item, idx)"
-                        [attr.aria-level]="tabHeadingLevel"
+                        [attr.aria-level]="tabHeadingLevel()"
                     >
                     </a>
                 }
@@ -53,7 +53,7 @@
                         (keydown)="_keyDownHandler($event, item, idx, itemPopover)"
                         (closeTab)="_closeTab($event)"
                         (selectedItem)="_selectItem(item)"
-                        [attr.aria-level]="tabHeadingLevel"
+                        [attr.aria-level]="tabHeadingLevel()"
                     >
                     </fdp-text-type-popover>
                 }

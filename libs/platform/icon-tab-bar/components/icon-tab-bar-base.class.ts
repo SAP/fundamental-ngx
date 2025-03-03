@@ -78,10 +78,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     @Input()
     selectedUid: string | undefined;
 
-    /** @hidden Heading level of the tab. */
-    @Input()
-    tabHeadingLevel: number | null;
-
     /**
      * @description Emits when some tab is selected.
      */
@@ -110,6 +106,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden */
     _extraItems$ = signal(false);
+
+    /** @hidden Heading level of the tab. */
+    tabHeadingLevel = input<number | null>(null);
 
     /**
      * @description Associations for colors of the tabs.

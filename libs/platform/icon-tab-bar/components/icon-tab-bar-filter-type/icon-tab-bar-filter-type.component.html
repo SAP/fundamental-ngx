@@ -18,7 +18,7 @@
                 tabindex="0"
                 #tabItem
                 role="tab"
-                [attr.aria-level]="tabHeadingLevel"
+                [attr.aria-level]="tabHeadingLevel()"
             >
                 <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
                     @if (_totalTab?.counter) {
@@ -45,7 +45,7 @@
                 [attr.tabindex]="showTotalTab ? -1 : idx > 0 ? -1 : 0"
                 (keydown)="_keyDownHandler($event, item, idx + (showTotalTab ? 1 : 0))"
                 role="tab"
-                [attr.aria-level]="tabHeadingLevel"
+                [attr.aria-level]="tabHeadingLevel()"
             >
                 @if (item?.titleTemplate) {
                     <ng-container [ngTemplateOutlet]="item.titleTemplate || null"></ng-container>

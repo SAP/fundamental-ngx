@@ -12,6 +12,7 @@ import {
     EventEmitter,
     HostBinding,
     inject,
+    input,
     Input,
     OnDestroy,
     Optional,
@@ -163,12 +164,6 @@ export class DynamicPageComponent
     expandContent = true;
 
     /**
-     * Heading level of the dynamic page header title.
-     */
-    @Input()
-    headingLevel: HeadingLevel = 2;
-
-    /**
      * Tab Change event
      */
     @Output()
@@ -224,6 +219,11 @@ export class DynamicPageComponent
      * holds the tab content
      */
     _tabs: DynamicPageContentComponent[] = [];
+
+    /**
+     * Heading level of the dynamic page header title.
+     */
+    headingLevel = input<HeadingLevel>(2);
 
     /** @hidden */
     _headingLevel = computed(() => Number.parseInt(`${this.headingLevel}`.replace(/\D/g, ''), 10));
