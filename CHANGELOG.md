@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.33...v0.55.0-rc.34) (2025-03-03)
+
+
+### Features
+
+* **platform:** allow developer to pass array for table filter options to allow from select options ([#13040](https://github.com/SAP/fundamental-ngx/issues/13040)) ([e733479](https://github.com/SAP/fundamental-ngx/commit/e733479c02455d06b5205c6ec15c2b0ab3015681))
+
+
+
+
+
+# [0.55.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.32...v0.55.0-rc.33) (2025-03-03)
+
+
+### Bug Fixes
+
+* **platform:** do not focus list combobox item on space keydown from input ([#13007](https://github.com/SAP/fundamental-ngx/issues/13007)) ([afe3a65](https://github.com/SAP/fundamental-ngx/commit/afe3a65fad00dd6ff656daf90073d47f19de53ba))
+
+
+
+
+
 # [0.55.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.31...v0.55.0-rc.32) (2025-02-28)
 
 **Note:** Version bump only for package fundamental-ngx
