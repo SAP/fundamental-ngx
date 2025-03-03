@@ -11,6 +11,7 @@ export interface FilterableColumn {
     key: string;
     dataType: FilterableColumnDataType;
     filterable?: boolean;
+    filterSelectOptions?: string[]; // add optional filterSelectOptions
 }
 
 export interface FilterDialogData extends TableDialogCommonData {
@@ -39,6 +40,12 @@ export class FilterRule<T = any> {
     /** Data type */
     dataType?: FilterableColumnDataType;
 
+    /**
+     * Optional array of available filter options.
+     * Providing values to this input will cause the filter to change from a text-type input to a select-type input.
+     * */
+    filterSelectOptions: string[] = [];
+
     /** returns whether filter rule has value */
     get hasValue(): boolean {
         return this.valueExists(this.value) || this.valueExists(this.value2);
@@ -64,6 +71,9 @@ export class FilterRule<T = any> {
         }
         if (this.strategies.length === 0) {
             this.setStrategiesByColumnKey(this.columnKey);
+        }
+        if (this.filterSelectOptions.length === 0) {
+            this.setFilterSelectOptionsByColumnKey(this.columnKey);
         }
     }
 
@@ -121,6 +131,9 @@ export class FilterRule<T = any> {
         // update data type
         this.setDataTypeByColumnKey(columnKey);
 
+        // update available Filter options
+        this.setFilterSelectOptionsByColumnKey(columnKey);
+
         // update available strategies list
         this.setStrategiesByColumnKey(columnKey);
     }
@@ -128,12 +141,13 @@ export class FilterRule<T = any> {
     /** @hidden */
     setDataTypeByColumnKey(columnKey?: string): void {
         const dataType = this.columns.find((column) => column.key === columnKey)?.dataType;
-
-        if (dataType === this.dataType) {
-            return;
-        }
-
         this.dataType = dataType;
+    }
+
+    /** @hidden */
+    setFilterSelectOptionsByColumnKey(columnKey?: string): void {
+        const filterSelectOptions = this.columns.find((column) => column.key === columnKey)?.filterSelectOptions;
+        this.filterSelectOptions = filterSelectOptions ? filterSelectOptions : [];
     }
 
     /** @hidden */

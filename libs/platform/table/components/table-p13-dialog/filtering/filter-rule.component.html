@@ -85,6 +85,19 @@
                             {{ 'platformTable.P13FilterBooleanOptionFalse' | fdTranslate }}
                         </li>
                     </fd-select>
+                } @else if (rule.filterSelectOptions?.length) {
+                    <!-- Filter options dropdown menu -->
+                    <fd-select
+                        [ngModel]="rule[valueKey]"
+                        (ngModelChange)="rule.setValue($event); _onModelChange()"
+                        [required]="true"
+                        [name]="valueKey"
+                        class="filter-row__select"
+                    >
+                        @for (option of rule.filterSelectOptions; track $index) {
+                            <li fd-option [value]="option">{{ option }}</li>
+                        }
+                    </fd-select>
                 } @else {
                     <input
                         type="text"

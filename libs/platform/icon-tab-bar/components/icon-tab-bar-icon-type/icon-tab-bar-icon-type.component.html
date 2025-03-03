@@ -25,6 +25,7 @@
                 [attr.aria-selected]="item.uId === selectedUid"
                 (click)="_selectItem(item)"
                 (keydown)="_keyDownHandler($event, item, idx)"
+                [attr.aria-level]="tabHeadingLevel()"
             >
                 @if (item?.titleTemplate) {
                     <ng-template [ngTemplateOutlet]="item.titleTemplate || null"></ng-template>

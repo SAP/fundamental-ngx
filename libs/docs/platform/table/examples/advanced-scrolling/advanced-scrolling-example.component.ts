@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import {
     ChildTableDataSource,
-    CollectionBooleanFilter,
-    CollectionDateFilter,
     CollectionNumberFilter,
     CollectionStringFilter,
     FdpTableDataSource,
@@ -46,6 +44,7 @@ export class AdvancedScrollingExampleComponent {
     childSource: ChildTableDataSource<ExampleItem>;
     readonly filterTypeEnum = FilterType;
     readonly dataTypeEnum = FilterableColumnDataType;
+    readonly selectOptions = ['Laptops 1 (Level 1)', 'Laptops 12 (Level 1)'];
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
@@ -125,6 +124,23 @@ class ChildTableProviderExample extends TableChildrenDataProvider<ExampleItem> {
         return of(itemsMap).pipe(delay(1000));
     }
 
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+        const searchText = searchInput?.text || '';
+        const keysToSearchBy = columnKeys;
+
+        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            return valuesForSearch
+                .filter((value) => !!value)
+                .map((value): string => value.toString())
+                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+        });
+    }
+
     private filter(items: ExampleItem[], { filterBy }: TableState): ExampleItem[] {
         filterBy
             .filter(({ field }) => !!field)
@@ -145,23 +161,6 @@ class ChildTableProviderExample extends TableChildrenDataProvider<ExampleItem> {
             });
 
         return items;
-    }
-
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
-        const searchText = searchInput?.text || '';
-        const keysToSearchBy = columnKeys;
-
-        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
-            return items;
-        }
-
-        return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
-            return valuesForSearch
-                .filter((value) => !!value)
-                .map((value): string => value.toString())
-                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
-        });
     }
 
     private sort(items: ExampleItem[], { sortBy }: TableState): ExampleItem[] {
@@ -224,6 +223,23 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items).pipe(delay(1000));
     }
 
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+        const searchText = searchInput?.text || '';
+        const keysToSearchBy = columnKeys;
+
+        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            return valuesForSearch
+                .filter((value) => !!value)
+                .map((value): string => value.toString())
+                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+        });
+    }
+
     private filter(items: ExampleItem[], { filterBy }: TableState): ExampleItem[] {
         filterBy
             .filter(({ field }) => !!field)
@@ -244,23 +260,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
             });
 
         return items;
-    }
-
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
-        const searchText = searchInput?.text || '';
-        const keysToSearchBy = columnKeys;
-
-        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
-            return items;
-        }
-
-        return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
-            return valuesForSearch
-                .filter((value) => !!value)
-                .map((value): string => value.toString())
-                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
-        });
     }
 
     private sort({ sortBy }: TableState): ExampleItem[] {
@@ -375,56 +374,6 @@ const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter): bool
         case 'between':
             result = itemValue >= filterValue && itemValue <= filterValue2;
             break;
-        case 'equalTo':
-        default:
-            result = itemValue === filterValue;
-    }
-
-    return filter.exclude ? !result : result;
-};
-
-const filterByDate = <D = FdDate>(
-    item: ExampleItem,
-    filter: CollectionDateFilter,
-    adapter: DatetimeAdapter<D>
-): boolean => {
-    const filterValue = filter.value;
-    const filterValue2 = filter.value2;
-    const itemValue = getNestedValue(filter.field, item);
-    const diff = adapter.compareDate(itemValue, filterValue);
-    let result = false;
-
-    switch (filter.strategy) {
-        case 'after':
-            result = diff > 0;
-            break;
-        case 'onOrAfter':
-            result = diff >= 0;
-            break;
-        case 'before':
-            result = diff < 0;
-            break;
-        case 'beforeOrOn':
-            result = diff <= 0;
-            break;
-        case 'between':
-            result = adapter.isBetween(itemValue, filterValue, filterValue2);
-            break;
-
-        case 'equalTo':
-        default:
-            result = adapter.dateTimesEqual(itemValue, filterValue);
-    }
-
-    return filter.exclude ? !result : result;
-};
-
-const filterByBoolean = (item: ExampleItem, filter: CollectionBooleanFilter): boolean => {
-    const filterValue = filter.value;
-    const itemValue = getNestedValue(filter.field, item);
-    let result = false;
-
-    switch (filter.strategy) {
         case 'equalTo':
         default:
             result = itemValue === filterValue;
