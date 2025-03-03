@@ -1,8 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { CommonModule } from '@angular/common';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { DYNAMIC_SIDE_CONTENT_CLASS_NAME, DynamicSideContentPosition, DynamicSideContentSize } from './constants';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
@@ -23,7 +21,7 @@ import { DynamicSideContentModule } from './dynamic-side-content.module';
         </fd-dynamic-side-content>
     `,
     standalone: true,
-    imports: [CommonModule, DynamicSideContentModule]
+    imports: [DynamicSideContentModule]
 })
 class TestHostComponent {
     @ViewChild(DynamicSideContentComponent) dynamicSideContent: DynamicSideContentComponent;

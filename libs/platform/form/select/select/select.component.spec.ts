@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -43,7 +42,7 @@ import { SelectComponent } from '../select/select.component';
         FormModule,
         PlatformSelectModule,
         ContentDensityModule,
-        CommonModule
+        JsonPipe
     ]
 })
 class SelectStandardComponent {
@@ -155,7 +154,7 @@ describe('Select Component default values', () => {
         </fdp-form-group>
     `,
     standalone: true,
-    imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformSelectModule]
+    imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, PlatformSelectModule]
 })
 class TestReactiveSelectComponent {
     @ViewChild(SelectComponent)

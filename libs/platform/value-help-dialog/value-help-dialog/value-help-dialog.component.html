@@ -46,36 +46,40 @@
                             <div class="fdp-value-help-dialog__tokens">
                                 <!-- Selected items -->
                                 <fd-tokenizer>
-                                    <fd-token
-                                        *ngFor="
-                                            let item of selectedItems;
-                                            trackBy: _trackBySelectedFn;
-                                            index as selectedIndex
-                                        "
-                                        fd-toolbar-item
-                                        fdOverflowPriority="high"
-                                        class="fdp-value-help-dialog__selection-token"
-                                        (onCloseClick)="removeSelected(selectedIndex)"
-                                        >{{
-                                            !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField]
-                                        }}
-                                    </fd-token>
-                                    <fd-token
-                                        *ngFor="
-                                            let item of validConditions;
-                                            trackBy: _trackByConditionFn;
-                                            index as conditionIndex
-                                        "
-                                        fd-toolbar-item
-                                        fdOverflowPriority="high"
-                                        class="fdp-value-help-dialog__selection-token"
-                                        (onCloseClick)="removeCondition(conditionIndex)"
-                                    >
-                                        <ng-template
-                                            [ngTemplateOutlet]="conditionValue"
-                                            [ngTemplateOutletContext]="{ item: item }"
-                                        ></ng-template>
-                                    </fd-token>
+                                    @for (
+                                        item of selectedItems;
+                                        track _trackBySelectedFn(selectedIndex, item);
+                                        let selectedIndex = $index
+                                    ) {
+                                        <fd-token
+                                            fd-toolbar-item
+                                            fdOverflowPriority="high"
+                                            class="fdp-value-help-dialog__selection-token"
+                                            (onCloseClick)="removeSelected(selectedIndex)"
+                                            >{{
+                                                !!tokenizerFn
+                                                    ? (item | displayFnPipe: tokenizerFn)
+                                                    : item[tokenViewField]
+                                            }}
+                                        </fd-token>
+                                    }
+                                    @for (
+                                        item of validConditions;
+                                        track _trackByConditionFn(conditionIndex, item);
+                                        let conditionIndex = $index
+                                    ) {
+                                        <fd-token
+                                            fd-toolbar-item
+                                            fdOverflowPriority="high"
+                                            class="fdp-value-help-dialog__selection-token"
+                                            (onCloseClick)="removeCondition(conditionIndex)"
+                                        >
+                                            <ng-template
+                                                [ngTemplateOutlet]="conditionValue"
+                                                [ngTemplateOutletContext]="{ item: item }"
+                                            ></ng-template>
+                                        </fd-token>
+                                    }
                                     <input fd-form-control fd-tokenizer-input [disabled]="!hasSelectedAndConditions" />
                                 </fd-tokenizer>
                             </div>

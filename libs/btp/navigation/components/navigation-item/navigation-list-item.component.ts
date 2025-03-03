@@ -1,6 +1,6 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { CommonModule, NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -59,7 +59,6 @@ export class NavigationListItemMarkerDirective implements HasElementRef {
 @Component({
     selector: 'fdb-navigation-list-item',
     imports: [
-        CommonModule,
         NgTemplateOutlet,
         NavigationListComponent,
         PopoverComponent,
