@@ -3,6 +3,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ContentChild,
     ContentChildren,
     DestroyRef,
@@ -11,6 +12,7 @@ import {
     EventEmitter,
     HostBinding,
     inject,
+    input,
     Input,
     OnDestroy,
     Optional,
@@ -44,7 +46,7 @@ import {
     patchHeaderI18nTexts
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
-import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
+import { FD_TABLIST, HeadingLevel, TabList } from '@fundamental-ngx/core/shared';
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
@@ -217,6 +219,14 @@ export class DynamicPageComponent
      * holds the tab content
      */
     _tabs: DynamicPageContentComponent[] = [];
+
+    /**
+     * Heading level of the dynamic page header title.
+     */
+    headingLevel = input<HeadingLevel>(2);
+
+    /** @hidden */
+    _headingLevel = computed(() => Number.parseInt(`${this.headingLevel}`.replace(/\D/g, ''), 10));
 
     /** @hidden */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

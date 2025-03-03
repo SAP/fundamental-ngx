@@ -107,6 +107,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     /** @hidden */
     _extraItems$ = signal(false);
 
+    /** @hidden Heading level of the tab. */
+    tabHeadingLevel = input<number | null>(null);
+
     /**
      * @description Associations for colors of the tabs.
      * If any of the color associations provided, they'll be read by screenreader instead of the actual color
