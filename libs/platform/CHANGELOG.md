@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.34...v0.55.0-rc.35) (2025-03-03)
+
+
+### Bug Fixes
+
+* **platform:** add headingLevel input to platform dynamic page ([#13051](https://github.com/SAP/fundamental-ngx/issues/13051)) ([a538b67](https://github.com/SAP/fundamental-ngx/commit/a538b67854b03c7706f9aa7944556b2e63051304)), closes [#12791](https://github.com/SAP/fundamental-ngx/issues/12791)
+
+
+
+
+
 # [0.55.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.33...v0.55.0-rc.34) (2025-03-03)
 
 
