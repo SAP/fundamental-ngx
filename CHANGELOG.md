@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.33...v0.55.0-rc.34) (2025-03-03)
+
+
+### Features
+
+* **platform:** allow developer to pass array for table filter options to allow from select options ([#13040](https://github.com/SAP/fundamental-ngx/issues/13040)) ([e733479](https://github.com/SAP/fundamental-ngx/commit/e733479c02455d06b5205c6ec15c2b0ab3015681))
+
+
+
+
+
 # [0.55.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.32...v0.55.0-rc.33) (2025-03-03)
 
 
