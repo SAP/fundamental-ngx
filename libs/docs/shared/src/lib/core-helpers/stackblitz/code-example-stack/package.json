@@ -1,5 +1,5 @@
 {
-    "name": "example-app",
+    "name": "fundamental-ngx-app",
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
@@ -8,6 +8,11 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },
+    "engines": {
+        "yarn": ">= 4.6.0",
+        "node": ">= 18"
+    },
+    "packageManager": "yarn@4.6.0",
     "private": true,
     "dependencies": {}
 }

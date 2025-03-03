@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.31...v0.55.0-rc.32) (2025-02-28)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.55.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.30...v0.55.0-rc.31) (2025-02-28)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.55.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.29...v0.55.0-rc.30) (2025-02-26)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.55.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.28...v0.55.0-rc.29) (2025-02-26)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
 # [0.55.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.27...v0.55.0-rc.28) (2025-02-21)
 
 **Note:** Version bump only for package @fundamental-ngx/datetime-adapter
