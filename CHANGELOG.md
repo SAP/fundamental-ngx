@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.35...v0.55.0-rc.36) (2025-03-04)
+
+
+### Bug Fixes
+
+* changes after running build ([#13086](https://github.com/SAP/fundamental-ngx/issues/13086)) ([8ececbb](https://github.com/SAP/fundamental-ngx/commit/8ececbb9c5e738323045fbe8ca8f1b27d886fdb4))
+
+
+
+
+
 # [0.55.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.34...v0.55.0-rc.35) (2025-03-03)
 
 
