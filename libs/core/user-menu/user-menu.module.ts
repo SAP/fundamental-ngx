@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 
 // Components
 import { UserMenuBodyComponent } from './components/user-menu-body.component';
+import { UserMenuControlComponent } from './components/user-menu-control.component';
+import { UserMenuFooterComponent } from './components/user-menu-footer.component';
+import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
 import { UserMenuListComponent } from './components/user-menu-list.component';
+import { UserMenuSublistComponent } from './components/user-menu-sublist.component';
 import { UserMenuComponent } from './user-menu.component';
 
 // Directives
@@ -15,8 +19,12 @@ import { UserMenuUserNameDirective } from './directives/user-menu-user-name.dire
 const components = [
     UserMenuComponent,
     UserMenuBodyComponent,
+    UserMenuControlComponent,
+    UserMenuFooterComponent,
     UserMenuListComponent,
+    UserMenuSublistComponent,
     UserMenuContentContainerComponent,
+    UserMenuListItemComponent,
     UserMenuHeaderContainerDirective,
     UserMenuHeaderDirective,
     UserMenuSublineDirective,

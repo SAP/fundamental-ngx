@@ -1,1 +1,46 @@
-<div></div>
+@if (hasSubmenu()) {
+    @if (mobile()) {
+        <a #linkEl class="fd-menu__link" (click)="onShowDetailsView()">
+            @if (icon()) {
+                <span class="fd-menu__addon-before">
+                    <i [class]="'sap-icon--' + icon()" role="presentation"></i>
+                </span>
+            }
+            <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+            <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
+        </a>
+    } @else {
+        <fd-popover
+            style="width: 100%"
+            placement="left-start"
+            [noArrow]="true"
+            #popover
+            [isOpen]="popoverOpen$()"
+            (isOpenChange)="onPopoverOpen($event, popover)"
+        >
+            <fd-popover-control>
+                <a #linkElPopover class="fd-menu__link" tabindex="-1">
+                    @if (icon()) {
+                        <span class="fd-menu__addon-before">
+                            <i [class]="'sap-icon--' + icon()" role="presentation"></i>
+                        </span>
+                    }
+                    <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+                    <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
+                </a>
+            </fd-popover-control>
+            <fd-popover-body>
+                <ng-container *ngTemplateOutlet="submenu()"></ng-container>
+            </fd-popover-body>
+        </fd-popover>
+    }
+} @else {
+    <a #linkEl class="fd-menu__link">
+        @if (icon()) {
+            <span class="fd-menu__addon-before">
+                <i [class]="'sap-icon--' + icon()" role="presentation"></i>
+            </span>
+        }
+        <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+    </a>
+}
