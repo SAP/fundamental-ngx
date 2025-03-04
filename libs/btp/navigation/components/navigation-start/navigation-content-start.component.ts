@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { PortalModule } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {

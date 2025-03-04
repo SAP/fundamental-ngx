@@ -14,6 +14,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 })
 export class GridListFilterBarComponent {
     /** Event is thrown, when the control button is clicked */
-    @Output()
-    readonly close = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-native
+    @Output() readonly close = new EventEmitter<void>();
 }
