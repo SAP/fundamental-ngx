@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
     coreCalendar: {
@@ -364,6 +363,10 @@ export default {
         searchSuggestionMessage: 'נמצאו {count} הצעות.',
         searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'הגדרות',
+        searchLabel: 'חפש'
+    },
     platformSwitch: {
         ariaLabel: 'החלף קלט'
     },
@@ -487,9 +490,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'עמודות',
         toolbarActionExpandAllButtonTitle: 'הרחב הכול',
         toolbarActionCollapseAllButtonTitle: 'צמצם הכול',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'הרחב שורה',
+        collapseRowButtonTitle: 'צמצם שורה',
+        rowNavigateButtonTitle: 'נווט',
         filterDialogBackToColumns: 'נווט חזרה',
         filterDialogNotFilteredLabel: '(לא מסונן)',
         filterDialogFilterByLabel: 'סנן לפי: {filterLabel}',
@@ -515,14 +518,18 @@ export default {
         sortDialogCancelBtnLabel: 'בטל',
         selectAllCheckboxLabel: 'בחר הכול',
         deselectAllCheckboxLabel: 'בטל בחירה של הכול',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'תיבת סימון, לא סומנה, לחץ כדי לבחור הכול',
+        selectAllCheckboxMixedLongLabel: 'תיבת סימון, מעורבת, לחץ כדי לבחור הכול',
+        deselectAllCheckboxLongLabel: 'תיבת סימון, סומנה, לחץ כדי לבטל את הבחירה של כולם',
         deselectSingleRow: 'על מנת לבטל בחירת שורה, הקש על מקש הרווח',
         selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
-        loadMore: 'טען עוד',
+        loadMore: 'הצג יותר',
+        toolbarActionButtonTitle: 'הגדרות',
+        settingsDialogHeader: 'הגדרות',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'בטל',
         filteredBy: 'מסונן לפי',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'מציג {totalGrowingItemsCount} של {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'ערוך'

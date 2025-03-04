@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: 'Знайдено пропозицій: {count}.',
         searchSuggestionNavigateMessage: 'використовуйте стрілки вгору і вниз для навігації'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Налаштування',
+        searchLabel: 'Пошук'
+    },
     platformSwitch: {
         ariaLabel: 'Введення перемикача'
     },
@@ -489,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Стовпці',
         toolbarActionExpandAllButtonTitle: 'Розгорнути все',
         toolbarActionCollapseAllButtonTitle: 'Згорнути все',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Розгорнути рядок',
+        collapseRowButtonTitle: 'Згорнути рядок',
+        rowNavigateButtonTitle: 'Перейти',
         filterDialogBackToColumns: 'Перейти назад',
         filterDialogNotFilteredLabel: '(Не відфільтровано)',
         filterDialogFilterByLabel: 'Фільтрувати за: {filterLabel}',
@@ -517,14 +520,19 @@ export default {
         sortDialogCancelBtnLabel: 'Скасувати',
         selectAllCheckboxLabel: 'Вибрати все',
         deselectAllCheckboxLabel: 'Скасувати вибір',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Поле для прапорця, прапорець знято, натисніть, щоб вибрати все',
+        selectAllCheckboxMixedLongLabel: 'Поле для прапорця, не всі прапорці встановлено, натисніть, щоб вибрати все',
+        deselectAllCheckboxLongLabel:
+            'Поле для прапорця, всі прапорці встановлено, натисніть, щоб скасувати вибір всіх полів',
         deselectSingleRow: 'Для скасування вибору рядка натисніть клавішу пробілу',
         selectSingleRow: 'Для вибору рядка натисніть клавішу пробілу',
-        loadMore: 'Завантажити більше',
+        loadMore: 'Показати більше',
+        toolbarActionButtonTitle: 'Налаштування',
+        settingsDialogHeader: 'Налаштування',
+        confirmBtnLabel: 'ОК',
+        cancelBtnLabel: 'Скасувати',
         filteredBy: 'Фільтрувати за',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} з {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'

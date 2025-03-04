@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: '{count} förslag hittades.',
         searchSuggestionNavigateMessage: 'använd upp- och nedpilarna för att navigera'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Inställningar',
+        searchLabel: 'Sök'
+    },
     platformSwitch: {
         ariaLabel: 'Växla inmatning'
     },
@@ -489,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolumner',
         toolbarActionExpandAllButtonTitle: 'Expandera alla',
         toolbarActionCollapseAllButtonTitle: 'Komprimera alla',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Expandera rad',
+        collapseRowButtonTitle: 'Komprimera rad',
+        rowNavigateButtonTitle: 'Navigera',
         filterDialogBackToColumns: 'Gå tillbaka',
         filterDialogNotFilteredLabel: '(Ej filtrerat)',
         filterDialogFilterByLabel: 'Filtrera efter: {filterLabel}',
@@ -517,14 +520,18 @@ export default {
         sortDialogCancelBtnLabel: 'Avbryt',
         selectAllCheckboxLabel: 'Välj alla',
         deselectAllCheckboxLabel: 'Avmarkera alla',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Kryssruta ej, markerad, klicka för att markera alla',
+        selectAllCheckboxMixedLongLabel: 'Kryssruta, blandad, klicka för att markera alla',
+        deselectAllCheckboxLongLabel: 'Kryssruta, markerad, klicka för att markera alla',
         deselectSingleRow: 'Tryck på BLANKSTEG för att avmarkera rad',
         selectSingleRow: 'Tryck på BLANKSTEG för att välja rad',
-        loadMore: 'Läs in fler',
+        loadMore: 'Visa mer',
+        toolbarActionButtonTitle: 'Inställningar',
+        settingsDialogHeader: 'Inställningar',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Avbryt',
         filteredBy: 'Filtrerat efter',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '{totalGrowingItemsCount} av {totalGrowingItemsCount} visas'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redigera'

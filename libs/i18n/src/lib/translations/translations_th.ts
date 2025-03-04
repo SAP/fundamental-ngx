@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreCalendar: {
@@ -365,6 +364,10 @@ export default {
         searchSuggestionMessage: 'พบคำแนะนำ {count} รายการ',
         searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'การตั้งค่า',
+        searchLabel: 'ค้นหา'
+    },
     platformSwitch: {
         ariaLabel: 'อินพุทการสลับ'
     },
@@ -489,9 +492,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'คอลัมน์',
         toolbarActionExpandAllButtonTitle: 'ขยายทั้งหมด',
         toolbarActionCollapseAllButtonTitle: 'ยุบรวมทั้งหมด',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'ขยายแถว',
+        collapseRowButtonTitle: 'ยุบรวมแถว',
+        rowNavigateButtonTitle: 'เนวิเกต',
         filterDialogBackToColumns: 'ย้อนกลับ',
         filterDialogNotFilteredLabel: '(ไม่ได้กรอง)',
         filterDialogFilterByLabel: 'กรองตาม: {filterLabel}',
@@ -517,14 +520,18 @@ export default {
         sortDialogCancelBtnLabel: 'ยกเลิก',
         selectAllCheckboxLabel: 'เลือกทั้งหมด',
         deselectAllCheckboxLabel: 'ยกเลิกการเลือกทั้งหมด',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'เช็คบ็อกซ์, ยกเลิกการเลือกแล้ว, คลิกเพื่อเลือกทั้งหมด',
+        selectAllCheckboxMixedLongLabel: 'เช็คบ็อกซ์, แบบผสม, คลิกเพื่อเลือกทั้งหมด',
+        deselectAllCheckboxLongLabel: 'เช็คบ็อกซ์, เลือกแล้ว, คลิกเพื่อยกเลิกการเลือกทั้งหมด',
         deselectSingleRow: 'เมื่อต้องการยกเลิกการเลือกแถว ให้กด SPACEBAR',
         selectSingleRow: 'เมื่อต้องการเลือกแถว ให้กด SPACEBAR',
-        loadMore: 'โหลดเพิ่มเติม',
+        loadMore: 'แสดงเพิ่มเติม',
+        toolbarActionButtonTitle: 'การตั้งค่า',
+        settingsDialogHeader: 'การตั้งค่า',
+        confirmBtnLabel: 'ตกลง',
+        cancelBtnLabel: 'ยกเลิก',
         filteredBy: 'กรองตาม',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'แก้ไข'

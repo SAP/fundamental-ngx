@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreCalendar: {
@@ -364,6 +363,10 @@ export default {
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
         searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'الإعدادات',
+        searchLabel: 'بحث'
+    },
     platformSwitch: {
         ariaLabel: 'تبديل الإدخال'
     },
@@ -488,9 +491,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'الأعمدة',
         toolbarActionExpandAllButtonTitle: 'توسيع الكل',
         toolbarActionCollapseAllButtonTitle: 'طي الكل',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'توسيع الصف',
+        collapseRowButtonTitle: 'طي الصف',
+        rowNavigateButtonTitle: 'انتقال',
         filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogNotFilteredLabel: '(لم تتم تصفيته)',
         filterDialogFilterByLabel: 'تصفية حسب: {filterLabel}',
@@ -516,14 +519,18 @@ export default {
         sortDialogCancelBtnLabel: 'إلغاء',
         selectAllCheckboxLabel: 'تحديد الكل',
         deselectAllCheckboxLabel: 'إلغاء تحديد الكل',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'خانة الاختيار، غير محددة، انقر لتحديد الكل',
+        selectAllCheckboxMixedLongLabel: 'خانة الاختيار، مختلطة، انقر لتحديد الكل',
+        deselectAllCheckboxLongLabel: 'خانة الاختيار، محددة، انقر لإلغاء تحديد الكل',
         deselectSingleRow: 'لإلغاء تحديد الصف، اضغط مفتاح المسافة',
         selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
-        loadMore: 'تحميل المزيد',
+        loadMore: 'إظهار المزيد',
+        toolbarActionButtonTitle: 'الإعدادات',
+        settingsDialogHeader: 'الإعدادات',
+        confirmBtnLabel: 'موافق',
+        cancelBtnLabel: 'إلغاء',
         filteredBy: 'تمت التصفية حسب',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'تحرير'

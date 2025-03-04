@@ -366,6 +366,10 @@ export default {
         searchSuggestionMessage: '{count} sugestii găsite.',
         searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Setări',
+        searchLabel: 'Căutare'
+    },
     platformSwitch: {
         ariaLabel: 'Comutare intrare'
     },
@@ -490,9 +494,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Coloane',
         toolbarActionExpandAllButtonTitle: 'Extindere tot',
         toolbarActionCollapseAllButtonTitle: 'Restrângere tot',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Expandare linie',
+        collapseRowButtonTitle: 'Comprimare linie',
+        rowNavigateButtonTitle: 'Navigare',
         filterDialogBackToColumns: 'Navigare înapoi',
         filterDialogNotFilteredLabel: '(Nefiltrat)',
         filterDialogFilterByLabel: 'Filtrare după: {filterLabel}',
@@ -518,14 +522,18 @@ export default {
         sortDialogCancelBtnLabel: 'Anulare',
         selectAllCheckboxLabel: 'Selectare toate',
         deselectAllCheckboxLabel: 'Deselectare toate',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Casetă de selectare, debifată, efectuați click pentru a selecta tot',
+        selectAllCheckboxMixedLongLabel: 'Casetă de selectare, mixtă, efectuați click pentru a selecta tot',
+        deselectAllCheckboxLongLabel: 'Casetă de selectare, bifată, efectuați click pentru a deselecta tot',
         deselectSingleRow: 'Pentru a deselecta linia, apăsați pe BARA DE SPAȚIU',
         selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU',
-        loadMore: 'Încărcare mai multe',
+        loadMore: 'Afișare mai mult',
+        toolbarActionButtonTitle: 'Setări',
+        settingsDialogHeader: 'Setări',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Anulare',
         filteredBy: 'Filtrat după',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Afișare {totalGrowingItemsCount} din {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modificare'

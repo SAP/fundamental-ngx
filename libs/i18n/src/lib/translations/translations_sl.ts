@@ -365,6 +365,10 @@ export default {
         searchSuggestionMessage: '{count} predlogov najdenih.',
         searchSuggestionNavigateMessage: 'za krmarjenje uporabite puščici navzgor in navzdol'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Nastavitve',
+        searchLabel: 'Iskanje'
+    },
     platformSwitch: {
         ariaLabel: 'Preklop vnosa'
     },
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stolpci',
         toolbarActionExpandAllButtonTitle: 'Razširi vse',
         toolbarActionCollapseAllButtonTitle: 'Skrči vse',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Razširi vrstico',
+        collapseRowButtonTitle: 'Skrči vrstico',
+        rowNavigateButtonTitle: 'Navigacija',
         filterDialogBackToColumns: 'Nazaj',
         filterDialogNotFilteredLabel: '(Brez filtriranja)',
         filterDialogFilterByLabel: 'Filtriraj po: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Prekliči',
         selectAllCheckboxLabel: 'Izberi vse',
         deselectAllCheckboxLabel: 'Preklic izbire vseh',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Potrditveno polje, neoznačeno, kliknite za izbiro vseh',
+        selectAllCheckboxMixedLongLabel: 'Potrditveno polje, mešano, kliknite za izbiro vseh',
+        deselectAllCheckboxLongLabel: 'Potrditveno polje, označeno, kliknite za preklic izbire vseh',
         deselectSingleRow: 'Za preklic izbire pritisnite preslednico',
         selectSingleRow: 'Za izbiro vrstice pritisnite preslednico',
-        loadMore: 'Naloži več',
+        loadMore: 'Prikaži več',
+        toolbarActionButtonTitle: 'Nastavitve',
+        settingsDialogHeader: 'Nastavitve',
+        confirmBtnLabel: 'V redu',
+        cancelBtnLabel: 'Prekliči',
         filteredBy: 'Filtrirano po',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Prikazano {totalGrowingItemsCount} od {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'

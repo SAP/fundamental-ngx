@@ -365,6 +365,10 @@ export default {
         searchSuggestionMessage: 'Löytyi {count} ehdotusta.',
         searchSuggestionNavigateMessage: 'navigoi ylä- ja alanuolilla'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Asetukset',
+        searchLabel: 'Haku'
+    },
     platformSwitch: {
         ariaLabel: 'Vaihda syöttö'
     },
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sarakkeet',
         toolbarActionExpandAllButtonTitle: 'Laajenna kaikki',
         toolbarActionCollapseAllButtonTitle: 'Tiivistä kaikki',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Laajenna rivi',
+        collapseRowButtonTitle: 'Tiivistä rivi',
+        rowNavigateButtonTitle: 'Navigoi',
         filterDialogBackToColumns: 'Navigoi takaisin',
         filterDialogNotFilteredLabel: '(Ei suodatettu)',
         filterDialogFilterByLabel: 'Suodatusperuste: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Peruuta',
         selectAllCheckboxLabel: 'Valitse kaikki',
         deselectAllCheckboxLabel: 'Poista kaikki valinnat',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Valintaruutu, ei valittu, valitse kaikki napsauttamalla',
+        selectAllCheckboxMixedLongLabel: 'Valintaruutu, yhdistelmä, valitse kaikki napsauttamalla',
+        deselectAllCheckboxLongLabel: 'Valintaruutu, valittu, poista kaikkien valinta napsauttamalla',
         deselectSingleRow: 'Poista rivin valinta painamalla välilyöntinäppäintä',
         selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä',
-        loadMore: 'Lataa enemmän',
+        loadMore: 'Näytä enemmän',
+        toolbarActionButtonTitle: 'Asetukset',
+        settingsDialogHeader: 'Asetukset',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Peruuta',
         filteredBy: 'Suodatusperuste',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Näytetään {totalGrowingItemsCount} / {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Muokkaa'

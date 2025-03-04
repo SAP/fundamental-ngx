@@ -363,10 +363,14 @@ export default {
         searchInputLabel: 'Іздеу',
         synchronizeButtonTitle: 'Синхрондау',
         searchSuggestionMessage: '{count} ұсыныс табылды.',
-        searchSuggestionNavigateMessage: 'навигациялау үшін жоғары және төмен көрсеткілерді пайдаланыңыз'
+        searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз'
+    },
+    platformSettingsGenerator: {
+        settingsLabel: 'Параметрлер',
+        searchLabel: 'Іздеу'
     },
     platformSwitch: {
-        ariaLabel: 'Ауыстырып-қосқыщты енгізу'
+        ariaLabel: 'Кірісті ауыстырып қосу'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Іздеу',
@@ -489,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Бағандар',
         toolbarActionExpandAllButtonTitle: 'Барлығын жаю',
         toolbarActionCollapseAllButtonTitle: 'Барлығын жию',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Жолды жаю',
+        collapseRowButtonTitle: 'Жолды жию',
+        rowNavigateButtonTitle: 'Өту',
         filterDialogBackToColumns: 'Артқа өту',
         filterDialogNotFilteredLabel: '(Сүзгіленбеген)',
         filterDialogFilterByLabel: 'Сүзгілеу шарты: {filterLabel}',
@@ -517,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'Болдырмау',
         selectAllCheckboxLabel: 'Барлығын таңдау',
         deselectAllCheckboxLabel: 'Барлығының таңдауын алу',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Құсбелгі ұяшығы, құсбелгі қойылмаған, барлығын таңдау үшін басыңыз',
+        selectAllCheckboxMixedLongLabel: 'Құсбелгі ұяшығы, аралас, барлығын таңдау үшін басыңыз',
+        deselectAllCheckboxLongLabel: 'Құсбелгі ұяшығы, құсбелгі қойылған, барлығының таңдауын алу үшін басыңыз',
         deselectSingleRow: 'Қатардың таңадауын алу үшін бос жол пернесін басыңыз',
         selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз',
-        loadMore: 'Көбірек жүктеу',
+        loadMore: 'Көбірек көрсету',
+        toolbarActionButtonTitle: 'Параметрлер',
+        settingsDialogHeader: 'Параметрлер',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Болдырмау',
         filteredBy: 'Сүзгілеу шарты',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} көрсетілуде'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Өңдеу'

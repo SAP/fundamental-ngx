@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
     coreCalendar: {
@@ -363,6 +362,10 @@ export default {
         searchSuggestionMessage: '找到 {count} 個建議。',
         searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽'
     },
+    platformSettingsGenerator: {
+        settingsLabel: '設定',
+        searchLabel: '搜尋'
+    },
     platformSwitch: {
         ariaLabel: '切換輸入'
     },
@@ -486,9 +489,9 @@ export default {
         toolbarActionColumnsButtonTitle: '欄',
         toolbarActionExpandAllButtonTitle: '全部展開',
         toolbarActionCollapseAllButtonTitle: '全部摺疊',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: '展開列',
+        collapseRowButtonTitle: '摺疊列',
+        rowNavigateButtonTitle: '瀏覽',
         filterDialogBackToColumns: '返回',
         filterDialogNotFilteredLabel: '(未篩選)',
         filterDialogFilterByLabel: '篩選依據：{filterLabel}',
@@ -514,14 +517,18 @@ export default {
         sortDialogCancelBtnLabel: '取消',
         selectAllCheckboxLabel: '全選',
         deselectAllCheckboxLabel: '取消全選',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: '核取方塊、未勾選、按一下以全選',
+        selectAllCheckboxMixedLongLabel: '核取方塊、混合、按一下以全選',
+        deselectAllCheckboxLongLabel: '核取方塊、已勾選、按一下以取消全選',
         deselectSingleRow: '若要取消選擇列，請按空白鍵',
         selectSingleRow: '若要選擇列，請按空白鍵',
-        loadMore: '載入更多',
+        loadMore: '顯示更多',
+        toolbarActionButtonTitle: '設定',
+        settingsDialogHeader: '設定',
+        confirmBtnLabel: '確定',
+        cancelBtnLabel: '取消',
         filteredBy: '篩選依據',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '顯示 {totalGrowingItemsCount}/{totalGrowingItemsCount} 個'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編輯'

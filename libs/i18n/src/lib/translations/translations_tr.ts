@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreCalendar: {
@@ -366,6 +365,10 @@ export default {
         searchSuggestionMessage: '{count} öneri bulundu.',
         searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Ayarlar',
+        searchLabel: 'Ara'
+    },
     platformSwitch: {
         ariaLabel: 'Geçiş girişi'
     },
@@ -490,9 +493,9 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sütunlar',
         toolbarActionExpandAllButtonTitle: 'Tümünü genişlet',
         toolbarActionCollapseAllButtonTitle: 'Tümünü daralt',
-        expandRowButtonTitle: 'Expand row',
-        collapseRowButtonTitle: 'Collapse row',
-        rowNavigateButtonTitle: 'Navigate',
+        expandRowButtonTitle: 'Satırı genişlet',
+        collapseRowButtonTitle: 'Satırı daralt',
+        rowNavigateButtonTitle: 'Git',
         filterDialogBackToColumns: 'Geri git',
         filterDialogNotFilteredLabel: '(Filtrelenmemiş)',
         filterDialogFilterByLabel: 'Filtreleme ölçütü: {filterLabel}',
@@ -518,14 +521,18 @@ export default {
         sortDialogCancelBtnLabel: 'İptal',
         selectAllCheckboxLabel: 'Tümünü seç',
         deselectAllCheckboxLabel: 'Tümünün seçimini kaldır',
-        selectAllCheckboxLongLabel: 'Checkbox, unchecked, click to select all',
-        selectAllCheckboxMixedLongLabel: 'Checkbox, mixed, click to select all',
-        deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
+        selectAllCheckboxLongLabel: 'Onay kutusu, seçim kaldırıldı, tümünü seçmek için tıklayın',
+        selectAllCheckboxMixedLongLabel: 'Onay kutusu, karışık, tümünü seçmek için tıklayın',
+        deselectAllCheckboxLongLabel: 'Onay kutusu, seçildi, tümünün seçimini kaldırmak için tıklayın',
         deselectSingleRow: 'Satırın seçimi kaldırmak için boşluk tuşuna basın',
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
-        loadMore: 'Daha fazla yükle',
+        loadMore: 'Daha fazlasını göster',
+        toolbarActionButtonTitle: 'Ayarlar',
+        settingsDialogHeader: 'Ayarlar',
+        confirmBtnLabel: 'Tamam',
+        cancelBtnLabel: 'İptal',
         filteredBy: 'Filtre ölçütü',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} gösteriliyor'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'
