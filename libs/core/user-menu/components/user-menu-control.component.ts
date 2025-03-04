@@ -1,14 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fd-user-menu-content-container]',
+    selector: 'fd-user-menu-control',
     template: `<ng-content></ng-content>`,
     host: {
-        class: 'fd-user-menu__content-container'
+        class: ''
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    imports: [CommonModule]
 })
-export class UserMenuContentContainerComponent {}
+export class UserMenuControlComponent {}

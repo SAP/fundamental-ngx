@@ -7,29 +7,31 @@ import {
     ContentChildren,
     HostListener,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute,
+    input
 } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
 @Component({
-    selector: 'fd-user-menu-list',
-    template: `
-        <nav class="fd-menu fd-menu--icons fd-user-menu__menu">
-            <ul class="fd-menu__list fd-user-menu__menu-list" role="menu">
-                <ng-content></ng-content>
-            </ul>
-        </nav>
-    `,
-    host: {},
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[fd-user-menu-sublist]',
+    template: `<ul class="fd-menu__list fd-user-menu__menu-list" role="menu">
+        <ng-content></ng-content>
+    </ul> `,
+    host: {
+        class: 'fd-menu fd-user-menu__menu',
+        '[class.fd-menu--icons]': 'hasIcons()'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [ListModule]
+    standalone: true
 })
-export class UserMenuListComponent implements AfterViewInit {
+export class UserMenuSublistComponent implements AfterViewInit {
     @ContentChildren(UserMenuListItemComponent) private _menuItems: QueryList<UserMenuListItemComponent>;
+
+    hasIcons = input(false, { transform: booleanAttribute });
 
     private _keyManager: FocusKeyManager<UserMenuListItemComponent>;
 

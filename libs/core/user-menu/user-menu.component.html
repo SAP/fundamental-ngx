@@ -1,1 +1,47 @@
-<ng-content></ng-content>
+@if (!mobile()) {
+    <fd-popover [focusAutoCapture]="true" [restoreFocusOnClose]="false" [focusTrapped]="true">
+        <fd-popover-control>
+            <ng-container *ngTemplateOutlet="control"></ng-container>
+        </fd-popover-control>
+        <fd-popover-body>
+            <ng-container *ngTemplateOutlet="body"></ng-container>
+
+            <div fd-popover-body-footer>
+                <ng-container *ngTemplateOutlet="footer"></ng-container>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+} @else {
+    <span (click)="openDialog(dialogTemplate)">
+        <ng-container *ngTemplateOutlet="control"></ng-container>
+    </span>
+
+    <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+        <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+            <fd-dialog-body style="padding: 0">
+                @if (userMenuBody()?.bodyHeader()) {
+                    <ng-container
+                        *ngTemplateOutlet="userMenuBody()?.bodyHeader() ?? null; context: { dialogRef: dialog }"
+                    >
+                    </ng-container>
+                }
+                <ng-container *ngTemplateOutlet="body"></ng-container>
+            </fd-dialog-body>
+            <fd-dialog-footer>
+                <ng-container *ngTemplateOutlet="footer"></ng-container>
+            </fd-dialog-footer>
+        </fd-dialog>
+    </ng-template>
+}
+
+<ng-template #control>
+    <ng-content select="fd-user-menu-control"></ng-content>
+</ng-template>
+
+<ng-template #body>
+    <ng-content select="fd-user-menu-body"></ng-content>
+</ng-template>
+
+<ng-template #footer>
+    <ng-content select="fd-user-menu-footer"></ng-content>
+</ng-template>
