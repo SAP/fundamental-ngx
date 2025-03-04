@@ -164,8 +164,8 @@ export class InputGroupComponent implements AfterViewInit, FormItemControl, OnIn
      * Event emitted when the native clear button is clicked, or when native search is executed.
      * Works only for native search for input[type="search"]
      */
-    @Output()
-    search = new EventEmitter<Event>();
+    // eslint-disable-next-line @angular-eslint/no-output-native
+    @Output() search = new EventEmitter<Event>();
 
     /** @hidden */
     @ContentChild(InputGroupInputDirective)

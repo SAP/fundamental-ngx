@@ -35,6 +35,7 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
     @Input() placeholder: string;
 
     /** Event emitted when the search button is clicked. */
+    // eslint-disable-next-line @angular-eslint/no-output-native
     @Output() search = new EventEmitter<string>();
 
     /** @hidden */
