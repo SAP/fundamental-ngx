@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
-import { UserMenuListItemComponent } from '@fundamental-ngx/core/user-menu';
 import { Subject, merge, startWith, takeUntil } from 'rxjs';
+import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
