@@ -15410,7 +15410,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-<<<<<<< HEAD
 "fundamental-styles@npm:0.39.0":
   version: 0.39.0
   resolution: "fundamental-styles@npm:0.39.0"
@@ -15427,6 +15426,15 @@ __metadata:
     "@sap-ui/common-css": 0.39.0-rc.65
   checksum: 10/1fb920dbac5f9621cd9c4caac088662f6ee07af5844035faf49709abd2de6d9e4d262154c4926442bd21885fa7ca5d118689b46dff93109757c9e8a295af7cb6
 >>>>>>> ccebca92e5 (feat(core): user menu)
+=======
+"fundamental-styles@npm:0.39.0-rc.70":
+  version: 0.39.0-rc.70
+  resolution: "fundamental-styles@npm:0.39.0-rc.70"
+  peerDependencies:
+    "@sap-theming/theming-base-content": ^11.26.0
+    "@sap-ui/common-css": 0.39.0-rc.70
+  checksum: 10/1dfe2bc10ff64660157d12a2c2ae74ba49302b336fc21fa6a3bc6985a02c46f9fc154969deb1eb85368f26a76c37c8b0b551f788840cbe2e28d8a02c9f8dbaf5
+>>>>>>> 351c313bf6 (feat(core): fix circular dep error)
   languageName: node
   linkType: hard
 
