@@ -54,3 +54,27 @@
 .fd-menu__item:is(:focus, :focus-within, :focus-visible) {
     outline: none;
 }
+
+.fd-user-menu__user-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.4rem;
+    max-height: 2.8rem;
+}
+
+.fd-panel__title,
+.fd-user-menu__subline {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fd-user-menu__header-container {
+    max-width: 100%;
+}

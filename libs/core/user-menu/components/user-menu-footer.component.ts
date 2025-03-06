@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+
 @Component({
     selector: 'fd-user-menu-footer',
-    template: `<ng-content></ng-content>`,
-    host: {
-        class: ''
-    },
+    template: `<ng-content />`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

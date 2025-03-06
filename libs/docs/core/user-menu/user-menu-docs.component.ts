@@ -12,8 +12,13 @@ import {
 
 import { UserMenuDefaultExampleComponent } from './examples/user-menu-default-example.component';
 
+import { UserMenuMobileExampleComponent } from './examples/user-menu-mobile-example.component';
+
 const userMenuDefaultExampleHtml = 'user-menu-default-example.component.html';
 const userMenuDefaultExampleTs = 'user-menu-default-example.component.ts';
+
+const userMenuMobileExampleHtml = 'user-menu-mobile-example.component.html';
+const userMenuMobileExampleTs = 'user-menu-mobile-example.component.ts';
 
 @Component({
     selector: 'app-user-menu',
@@ -22,9 +27,10 @@ const userMenuDefaultExampleTs = 'user-menu-default-example.component.ts';
         DocsSectionTitleComponent,
         DescriptionComponent,
         ComponentExampleComponent,
-        UserMenuDefaultExampleComponent,
         CodeExampleComponent,
-        SeparatorComponent
+        SeparatorComponent,
+        UserMenuDefaultExampleComponent,
+        UserMenuMobileExampleComponent
     ]
 })
 export class UserMenuDocsComponent {
@@ -39,6 +45,20 @@ export class UserMenuDocsComponent {
             code: getAssetFromModuleAssets(userMenuDefaultExampleTs),
             fileName: 'user-menu-default-example',
             component: 'UserMenuDefaultExampleComponent'
+        }
+    ];
+
+    userMenuMobileExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'user-menu-mobile-example',
+            code: getAssetFromModuleAssets(userMenuMobileExampleHtml)
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(userMenuMobileExampleTs),
+            fileName: 'user-menu-mobile-example',
+            component: 'UserMenuMobileExampleComponent'
         }
     ];
 }

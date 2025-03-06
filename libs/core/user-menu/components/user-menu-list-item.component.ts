@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
@@ -11,22 +12,16 @@ import {
     TemplateRef,
     ViewEncapsulation,
     booleanAttribute,
-    computed,
     inject,
     input,
     signal,
     viewChild
 } from '@angular/core';
-
-import { FocusableOption } from '@angular/cdk/a11y';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { UserMenuBodyComponent } from '@fundamental-ngx/core/user-menu';
 import { Observable, Subject, asyncScheduler, observeOn, startWith, take } from 'rxjs';
-import { UserMenuBodyComponent } from './user-menu-body.component';
 
 let uniqueId = 0;
 let uniqueTextId = 0;
@@ -37,21 +32,25 @@ let uniqueTextId = 0;
     templateUrl: './user-menu-list-item.component.html',
     host: {
         class: 'fd-menu__item',
-        role: 'menuitem',
-        '[attr.aria-labelledby]': 'textId()',
-        '[attr.tabindex]': '_normalizedTabIndex$()',
-        '[attr.id]': 'uniqueId()'
+        role: 'none',
+        '[attr.id]': 'uniqueId()',
+        '[attr.aria-labelledby]': 'textId()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [PopoverBodyComponent, PopoverComponent, PopoverControlComponent, CommonModule]
 })
-export class UserMenuListItemComponent implements FocusableOption, AfterViewInit {
-    /** Emits when key is pressed */
-    @Output() keyDown = new EventEmitter<KeyboardEvent>();
+export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
+    /** Event emitter for keyDown event */
+    @Output()
+    keyDown = new EventEmitter<KeyboardEvent>();
 
-    /** Unique id for the menu list item */
+    /** Event emitter for isOpenChange event that controls the submenu popover body */
+    @Output()
+    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Unique id for the menu list item. Default is provided. */
     uniqueId = input(`fd-menu-list-item-${++uniqueId}`);
 
     /** Icon name for the menu list item (optional) */
@@ -60,7 +59,7 @@ export class UserMenuListItemComponent implements FocusableOption, AfterViewInit
     /** Required text for the menu list item */
     text = input.required<string>();
 
-    /** Unique id for the title */
+    /** Unique id for the title. Default is provided. */
     textId = input(`fd-menu-list-item-title-${++uniqueTextId}`);
 
     /** Whether the item has a submenu */
@@ -72,145 +71,43 @@ export class UserMenuListItemComponent implements FocusableOption, AfterViewInit
     /** Whether the item is selected */
     selected = input(false, { transform: booleanAttribute });
 
+    /** Whether the item's submenu is open */
+    isOpen = signal(false);
+
     /** Whether the item is in mobile mode */
     mobile = signal(false);
 
-    /** Whether the popover is open */
-    isOpen = signal(false);
+    /** Reference to the popover */
+    popover = viewChild(PopoverComponent);
 
-    /** Link element reference */
-    popover = viewChild('popover', { read: ElementRef });
+    /** @hidden */
+    readonly focused = new Subject<UserMenuListItemComponent>();
 
-    /** Link element reference */
-    link = viewChild('linkEl', { read: ElementRef });
+    /** Item's tabindex */
+    readonly _tabIndex$ = signal<number | null>(null);
 
-    /** Link element reference */
-    linkPopover = viewChild('linkElPopover', { read: ElementRef });
+    /** @hidden */
+    readonly _elementRef = inject(ElementRef);
 
-    linkEl = computed(() => this.link()?.nativeElement);
-
-    linkPopoverEl = computed(() => this.linkPopover()?.nativeElement);
-
-    set tabindex(value: number) {
-        this._tabIndex$.set(coerceNumberProperty(value, -1));
-    }
-    get tabindex(): number {
-        return this._normalizedTabIndex$();
-    }
-
-    /** Normalized tab index computation */
-    _normalizedTabIndex$ = computed(() => {
-        if (this._isFirstItem$() && this._tabIndex$() === undefined) {
-            return 0;
-        }
-        return this._tabIndex$() ?? -1;
-    });
-
-    /** Emits when the item is focused */
-    readonly _focused$ = new Subject<{ focusedWithin: boolean }>();
-
-    /** Emits when the item is clicked */
-    readonly _clicked$ = new Subject<MouseEvent>();
-
-    /** Whether popover is open. Applicable for snapped navigation state. */
-    readonly popoverOpen$ = signal(false);
-
+    /** @hidden */
     private _userMenuBody = inject(UserMenuBodyComponent);
 
-    private _elementRef = inject(ElementRef);
-
-    /** Determines if this is the first item */
-    private _isFirstItem$ = signal(false);
-
-    /** Stores the tab index */
-    private _tabIndex$ = signal<number | undefined>(undefined);
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
-
-    /** Handle focus events */
-    @HostListener('focusin', ['$event'])
-    onFocus(event: FocusEvent): void {
-        this._focused$.next({ focusedWithin: event.target !== this._elementRef.nativeElement });
-
-        const link = this.linkEl() || this.linkPopoverEl();
-
-        if (link) {
-            link.classList.add('is-focus');
-            link.focus();
-        }
-    }
-
-    @HostListener('focusout', ['$event'])
-    onFocusOut(): void {
-        const link = this.linkEl() || this.linkPopoverEl();
-
-        if (link) {
-            link.classList.remove('is-focus');
-        }
-    }
+    private _changeDetectionRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            const link = this.linkEl() || this.linkPopoverEl();
-
-            if (link) {
-                link.classList.add('is-active');
-                this._muteEvent(event);
-            }
-        }
-
-        this.keyDown.emit(event);
+    @HostListener('focusin')
+    focusHandler(): void {
+        this.focused.next(this);
     }
 
-    @HostListener('keyup', ['$event'])
-    keyupHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            const link = this.linkEl();
-            const linkPopover = this.linkPopoverEl();
-
-            if (link) {
-                link.classList.remove('is-active');
-                link.click();
-                this._muteEvent(event);
-            }
-
-            if (linkPopover) {
-                event.stopPropagation();
-                linkPopover.classList.remove('is-active');
-            }
-        }
-    }
-
-    /** Lifecycle hook: Perform actions after view initialization */
-    ngAfterViewInit(): void {
-        const link = this.link();
-        if (link) {
-            // console.log("Link element:", link.nativeElement);
-        }
-    }
-
-    /** Simulate a click on the native element */
-    click(): void {
-        this._elementRef.nativeElement?.click();
-    }
-
-    /** Focus the native element */
-    focus(): void {
-        this._elementRef.nativeElement?.focus();
-    }
-
-    /** Mark this as the first item */
-    setIsFirst(value: boolean): void {
-        this._isFirstItem$.set(value);
-    }
-
-    /** Handle submenu selection in mobile mode */
+    /** Handles submenu selection in mobile mode */
     onShowDetailsView(): void {
         if (this.submenu() && this.mobile()) {
             this._userMenuBody.selectItem(this.submenu());
@@ -218,31 +115,43 @@ export class UserMenuListItemComponent implements FocusableOption, AfterViewInit
         }
     }
 
-    onPopoverOpen(isOpen: boolean, popover: PopoverComponent): void {
-        this.popoverOpen$.set(isOpen);
-        if (!isOpen) {
-            return;
-        }
-
-        this._onZoneStable().subscribe(() => {
-            // popover.popoverBody._focusFirstTabbableElement(true);
-
-            const firstListItem = popover.popoverBody._elementRef.nativeElement.querySelector('li.fd-menu__item');
-
-            if (firstListItem) {
-                firstListItem.focus();
-            }
-        });
-
-        console.log('Inside onPopoverOpen');
-        console.log('isOpen', isOpen);
-        console.log('popover', popover?.popoverBody._elementRef.nativeElement);
+    /** @hidden Support for KeyboardSupportItemInterface */
+    click(): void {
+        const linkElement: HTMLButtonElement = this._elementRef.nativeElement.querySelector('.fd-menu__link');
+        linkElement.click();
     }
 
     /** @hidden */
-    _muteEvent(event: Event): void {
-        event.stopPropagation();
-        event.preventDefault();
+    focus(): void {
+        const linkElement: HTMLButtonElement = this._elementRef.nativeElement.querySelector('.fd-menu__link');
+        linkElement.focus();
+    }
+
+    /** @hidden */
+    isOpenChangeHandle(isOpen: boolean, popover: PopoverComponent): void {
+        const firstTabbableElement: HTMLButtonElement =
+            popover.popoverBody._elementRef.nativeElement.querySelector('.fd-menu__link');
+
+        const linkElement: HTMLButtonElement = this._elementRef.nativeElement.querySelector('.fd-menu__link');
+
+        if (this.isOpen() === isOpen) {
+            return;
+        }
+
+        this.isOpen.set(isOpen);
+
+        this.isOpenChange.emit(isOpen);
+
+        this._onZoneStable().subscribe(() => {
+            this.isOpen() ? linkElement.classList.add('is-active') : linkElement.classList.remove('is-active');
+            firstTabbableElement.focus();
+        });
+
+        if (!this.isOpen()) {
+            linkElement.focus();
+        }
+
+        this._changeDetectionRef.detectChanges();
     }
 
     /** @hidden */
