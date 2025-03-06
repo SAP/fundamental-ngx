@@ -115,6 +115,21 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
         this._listItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._setupInteractionListeners();
         });
+
+        this._listItems.changes
+            .pipe(startWith(this._listItems), takeUntilDestroyed(this._destroyRef))
+            .subscribe((listItems) => {
+                listItems.forEach((item: UserMenuListItemComponent) => {
+                    item.showSubmenu
+                        .pipe(takeUntilDestroyed(this._destroyRef))
+                        .subscribe((submenuTpl: TemplateRef<any> | null) => {
+                            this.selectItem(submenuTpl);
+                        });
+                    item.updateTitle.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((title: string | null) => {
+                        this.updateTitle(title);
+                    });
+                });
+            });
     }
 
     /**

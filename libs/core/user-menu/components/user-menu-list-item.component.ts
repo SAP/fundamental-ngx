@@ -20,7 +20,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { UserMenuBodyComponent } from '@fundamental-ngx/core/user-menu';
 import { Observable, Subject, asyncScheduler, observeOn, startWith, take } from 'rxjs';
 
 let uniqueId = 0;
@@ -49,6 +48,12 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** Event emitter for isOpenChange event that controls the submenu popover body */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Event emitter for showSubmenu event */
+    @Output() showSubmenu: EventEmitter<TemplateRef<any> | null> = new EventEmitter();
+
+    /** Event emitter for updateTitle event */
+    @Output() updateTitle: EventEmitter<string | null> = new EventEmitter();
 
     /** Unique id for the menu list item. Default is provided. */
     uniqueId = input(`fd-menu-list-item-${++uniqueId}`);
@@ -90,9 +95,6 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
-    private _userMenuBody = inject(UserMenuBodyComponent);
-
-    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -110,8 +112,8 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** Handles submenu selection in mobile mode */
     onShowDetailsView(): void {
         if (this.submenu() && this.mobile()) {
-            this._userMenuBody.selectItem(this.submenu());
-            this._userMenuBody.updateTitle(this.text());
+            this.showSubmenu.emit(this.submenu());
+            this.updateTitle.emit(this.text());
         }
     }
 
