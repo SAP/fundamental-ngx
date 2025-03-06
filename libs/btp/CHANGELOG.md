@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.37...v0.55.0-rc.38) (2025-03-06)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
 # [0.55.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.36...v0.55.0-rc.37) (2025-03-06)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
