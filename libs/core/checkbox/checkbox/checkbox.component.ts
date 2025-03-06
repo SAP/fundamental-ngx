@@ -358,7 +358,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         // This is needed in order to set the value to the component before any external listeners will receive it.
         // Otherwise checkbox might be out of sync.
         event.stopPropagation();
-        if (this.displayOnly) {
+        if (this.displayOnly || this.readonly) {
             return;
         }
         this.nextValue();
