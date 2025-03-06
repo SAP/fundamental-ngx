@@ -25,8 +25,8 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { UserMenuListItemComponent } from '@fundamental-ngx/core/user-menu';
 import { Observable, Subject, map, merge, startWith, takeUntil } from 'rxjs';
+import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
 @Component({
     selector: 'fd-user-menu-body',

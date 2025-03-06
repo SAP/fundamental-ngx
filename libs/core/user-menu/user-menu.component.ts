@@ -35,11 +35,9 @@ import {
 
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
-import {
-    UserMenuBodyComponent,
-    UserMenuControlComponent,
-    UserMenuListItemComponent
-} from '@fundamental-ngx/core/user-menu';
+import { UserMenuBodyComponent } from './components/user-menu-body.component';
+import { UserMenuControlComponent } from './components/user-menu-control.component';
+import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
 
 @Component({
     selector: 'fd-user-menu',
