@@ -10,6 +10,7 @@ import {
     Host,
     HostListener,
     Input,
+    NgZone,
     OnChanges,
     OnDestroy,
     Optional,
@@ -20,7 +21,6 @@ import {
     effect,
     forwardRef
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
     FocusableItemDirective,
@@ -31,7 +31,7 @@ import {
     destroyObservable
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
-import { Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
+import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
 export type SegmentedButtonValue = string | (string | null)[] | null;
@@ -101,11 +101,14 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
+    private readonly _onDestroy$ = new Subject<void>();
+
     /** @hidden */
     constructor(
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _destroyRef: DestroyRef,
+        private readonly _ngZone: NgZone,
         @Optional() @Host() private _focusableList: FocusableListDirective,
         @Optional() private _rtlService: RtlService
     ) {
@@ -144,6 +147,10 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     ngOnDestroy(): void {
         this._onRefresh$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+        this._buttons = null as any;
+        this._focusableItems = null as any;
     }
 
     /** @hidden */
@@ -176,15 +183,33 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         this._isDisabled = isDisabled;
         this._toggleDisableButtons(isDisabled);
         this._onRefresh$.next();
+
+        if (!isDisabled) {
+            this._ngZone.run(() => {
+                if (this._buttons) {
+                    this._listenToButtonChanges();
+                    this._pickButtonsByValues(this._currentValue);
+                } else {
+                    setTimeout(() => this._listenToButtonChanges(), 0);
+                }
+            });
+        }
         this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
     private _listenToButtonChanges(): void {
-        merge(this._buttons.changes, this._focusableItems.changes)
-            .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
+        if (!this._buttons || !this._focusableItems) {
+            return;
+        }
+
+        merge(this._buttons.changes ?? EMPTY, this._focusableItems.changes ?? EMPTY)
+            .pipe(startWith(1), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
             .subscribe(() => {
-                this._onRefresh$.next();
+                if (!this._buttons || !this._focusableItems) {
+                    return;
+                }
+
                 this._toggleDisableButtons(this._isDisabled);
                 this._pickButtonsByValues(this._currentValue);
                 this._buttons.forEach((button) => {
