@@ -1,26 +1,9 @@
 @import 'fundamental-styles/dist/user-menu.css';
 
+// Specific to Angular Implementation (composite components)
 .fd-user-menu__menu.fd-menu {
     width: 100%;
     margin-block-start: 0.25rem;
-}
-
-.fd-user-menu__menu-list.fd-user-menu__menu-list {
-    box-shadow: none;
-    border-radius: 0;
-
-    & > *:first-child,
-    & > *:last-child {
-        border-radius: 0;
-    }
-}
-
-.fd-user-menu__body {
-    position: relative;
-}
-
-.fd-user-menu__body:has(.fd-user-menu__details-view) {
-    padding: 0;
 }
 
 .fd-menu__list.fd-user-menu__menu-list > .fd-menu__item {
@@ -53,6 +36,25 @@
 
 .fd-menu__item:is(:focus, :focus-within, :focus-visible) {
     outline: none;
+}
+
+// To be removed with the latest version of fundamental-styles
+.fd-user-menu__menu-list.fd-user-menu__menu-list {
+    box-shadow: none;
+    border-radius: 0;
+
+    & > *:first-child,
+    & > *:last-child {
+        border-radius: 0;
+    }
+}
+
+.fd-user-menu__body {
+    position: relative;
+}
+
+.fd-user-menu__body:has(.fd-user-menu__details-view) {
+    padding: 0;
 }
 
 .fd-user-menu__user-name {

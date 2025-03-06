@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
 import { UserMenuContentContainerComponent } from './user-menu-content-container.component';
+import { Component } from '@angular/core';
 
 @Component({
-    template: `<div fd-user-menu-content-container><p>Content Container Content</p></div>`
+    template: `<div fd-user-menu-content-container>Content</div>`
 })
 class TestHostComponent {}
 
@@ -22,13 +22,13 @@ describe('UserMenuContentContainerComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create the component', () => {
-        const contentContainerEl = fixture.nativeElement.querySelector('[fd-user-menu-content-container]');
-        expect(contentContainerEl).toBeTruthy();
+    it('should apply the correct class', () => {
+        const element = fixture.nativeElement.querySelector('div');
+        expect(element.classList.contains('fd-user-menu__content-container')).toBeTruthy();
     });
 
-    it('should project content inside', () => {
-        const contentContainerEl = fixture.nativeElement.querySelector('[fd-user-menu-content-container]');
-        expect(contentContainerEl.textContent).toContain('Content Container Content');
+    it('should project content inside the component', () => {
+        const element = fixture.nativeElement.querySelector('div');
+        expect(element.textContent.trim()).toBe('Content');
     });
 });
