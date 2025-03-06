@@ -3,9 +3,10 @@ import {
     AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ContentChild,
     contentChild,
-    ContentChildren,
     contentChildren,
     effect,
     EventEmitter,
@@ -13,23 +14,32 @@ import {
     input,
     OnInit,
     Output,
-    QueryList,
+    signal,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusEscapeDirection, KeyboardSupportService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { KeyboardSupportService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+
 import {
     DialogBodyComponent,
     DialogComponent,
     DialogFooterComponent,
+    DialogRef,
     DialogService
 } from '@fundamental-ngx/core/dialog';
+
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { UserMenuBodyComponent, UserMenuListItemComponent } from '@fundamental-ngx/core/user-menu';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
+import {
+    UserMenuBodyComponent,
+    UserMenuControlComponent,
+    UserMenuListItemComponent
+} from '@fundamental-ngx/core/user-menu';
 
 @Component({
     selector: 'fd-user-menu',
@@ -42,36 +52,53 @@ import { map } from 'rxjs/operators';
         class: 'fd-user-menu'
     },
     imports: [
+        CommonModule,
         PopoverComponent,
         PopoverBodyComponent,
         PopoverControlComponent,
-        DialogBodyComponent,
         DialogComponent,
-        DialogFooterComponent,
-        CommonModule
+        DialogBodyComponent,
+        DialogFooterComponent
     ],
     providers: [KeyboardSupportService, contentDensityObserverProviders()]
 })
 export class UserMenuComponent implements OnInit, AfterViewInit {
-    @ContentChildren(UserMenuListItemComponent)
-    _focusItems: QueryList<UserMenuListItemComponent>;
-
-    /** Event thrown, when focus escapes the list */
+    /** Event thrown, when the user menu is opened or closed */
     @Output()
-    focusEscapeList = new EventEmitter<FocusEscapeDirection>();
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    mobile = input(false, { transform: booleanAttribute });
+    /** @hidden */
+    @ContentChild(UserMenuControlComponent)
+    userMenuControl: UserMenuControlComponent;
 
+    /** @hidden */
     listItems = contentChildren(UserMenuListItemComponent, { descendants: true });
 
+    /** @hidden */
     userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
 
-    navigationArrow$: Observable<string>;
+    /** Whether the user menu is in mobile mode */
+    mobile = input(false, { transform: booleanAttribute });
 
-    _rtlService = inject(RtlService);
+    /** Whether the user menu is open */
+    isOpen = signal(false);
 
-    _dialogService = inject(DialogService);
+    /** @hidden */
+    protected navigationArrow$: Observable<string>;
 
+    /** @hidden */
+    private _rtlService = inject(RtlService);
+
+    /** @hidden */
+    private _dialogService = inject(DialogService);
+
+    /** @hidden */
+    private _changeDetectionRef = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private _dialogRef: DialogRef | undefined;
+
+    /** @hidden */
     constructor() {
         effect(() => {
             const isMobile = this.mobile();
@@ -79,38 +106,83 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
         });
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.navigationArrow$ = this._rtlService.rtl.pipe(
             map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
         );
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         const isMobile = this.mobile();
         this.listItems()?.forEach((item) => item.mobile.set(isMobile));
     }
 
+    /** Method that opens the user menu */
+    open(): void {
+        this.isOpenChangeHandle(true);
+    }
+
+    /** Method that closes the user menu */
+    close(): void {
+        this.isOpenChangeHandle(false);
+
+        if (this.listItems().length > 0) {
+            this.listItems().forEach((item) => {
+                item.isOpen.set(false);
+                item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
+            });
+
+            this.listItems()[0]?._tabIndex$.set(0);
+        }
+
+        this._clearSubmenu();
+        this._dialogRef?.close();
+    }
+
+    /** Method that opens the user menu in dialog (for mobile mode) */
     openDialog(dialogTemplate: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialogTemplate, {
+        this._dialogRef = this._dialogService.open(dialogTemplate, {
             mobile: true,
             verticalPadding: false,
             horizontalPadding: false,
-            ariaLabelledBy: 'fd-dialog-header-5',
-            ariaDescribedBy: 'fd-dialog-body-5',
+            ariaLabelledBy: 'fd-user-menu-header',
+            ariaDescribedBy: 'fd-user-menu-body',
             contentDensity: ContentDensityMode.COZY
         });
 
-        const refSub = dialogRef.afterClosed.subscribe({
+        const refSub = this._dialogRef.afterClosed.subscribe({
             error: (type) => {
                 if (type === 'escape') {
-                    const userMenuBody = this.userMenuBody();
-                    if (userMenuBody) {
-                        userMenuBody.clearSubmenu();
-                    }
-
+                    this._clearSubmenu();
                     refSub.unsubscribe();
                 }
             }
         });
+    }
+
+    /** @hidden */
+    isOpenChangeHandle(isOpen: boolean): void {
+        if (this.isOpen() === isOpen) {
+            return;
+        }
+
+        this.isOpen.set(isOpen);
+        this.isOpenChange.emit(isOpen);
+
+        if (!this.isOpen()) {
+            this.userMenuControl._focus();
+        }
+
+        this._changeDetectionRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _clearSubmenu(): void {
+        const userMenuBody = this.userMenuBody();
+        if (userMenuBody) {
+            userMenuBody.clearSubmenu();
+        }
     }
 }

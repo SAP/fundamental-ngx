@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserMenuHeaderContainerDirective } from './user-menu-header-container.directive';
 
 @Component({
-    template: `<div fd-user-menu-header-container #directiveElement> User Menu Header Test </div>`,
+    template: `<div fd-user-menu-header-container #directiveElement>User Menu Header Test</div>`,
     standalone: true,
     imports: [UserMenuHeaderContainerDirective]
 })

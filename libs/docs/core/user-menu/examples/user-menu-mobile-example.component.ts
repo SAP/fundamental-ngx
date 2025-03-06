@@ -24,8 +24,8 @@ import {
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
-    selector: 'fd-user-menu-default-example',
-    templateUrl: './user-menu-default-example.component.html',
+    selector: 'fd-user-menu-mobile-example',
+    templateUrl: './user-menu-mobile-example.component.html',
     imports: [
         UserMenuComponent,
         UserMenuBodyComponent,
@@ -50,7 +50,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         MessageToastModule
     ]
 })
-export class UserMenuDefaultExampleComponent {
+export class UserMenuMobileExampleComponent {
     @ViewChild(UserMenuComponent)
     userMenuComponent: UserMenuComponent;
 

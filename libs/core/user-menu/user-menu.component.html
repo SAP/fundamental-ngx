@@ -1,5 +1,11 @@
 @if (!mobile()) {
-    <fd-popover [focusAutoCapture]="true" [restoreFocusOnClose]="false" [focusTrapped]="true">
+    <fd-popover
+        [isOpen]="isOpen()"
+        (isOpenChange)="isOpenChangeHandle($event)"
+        [focusAutoCapture]="true"
+        [restoreFocusOnClose]="true"
+        [focusTrapped]="true"
+    >
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="control"></ng-container>
         </fd-popover-control>
@@ -35,13 +41,13 @@
 }
 
 <ng-template #control>
-    <ng-content select="fd-user-menu-control"></ng-content>
+    <ng-content select="fd-user-menu-control" />
 </ng-template>
 
 <ng-template #body>
-    <ng-content select="fd-user-menu-body"></ng-content>
+    <ng-content select="fd-user-menu-body" />
 </ng-template>
 
 <ng-template #footer>
-    <ng-content select="fd-user-menu-footer"></ng-content>
+    <ng-content select="fd-user-menu-footer" />
 </ng-template>
