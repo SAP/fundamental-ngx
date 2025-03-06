@@ -4,7 +4,7 @@
     class="fd-checkbox"
     [id]="inputId"
     [name]="name"
-    [disabled]="disabled || displayOnly || readonly"
+    [disabled]="disabled || displayOnly"
     [readonly]="readonly"
     [indeterminate]="isIndeterminate"
     [checked]="isChecked"
@@ -17,10 +17,7 @@
     [attr.aria-disabled]="disabled"
     [attr.aria-readonly]="readonly"
     [attr.aria-required]="required"
-    [ngClass]="[
-        displayOnly ? 'is-display' : readonly ? 'is-readonly' : disabled ? 'is-disabled' : '',
-        state ? 'is-' + state : ''
-    ]"
+    [ngClass]="[displayOnly ? 'is-display' : disabled ? 'is-disabled' : '', state ? 'is-' + state : '']"
     (click)="_onInputClick($event)"
     (blur)="_onBlur()"
     (focus)="_onFocus()"
