@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.36...v0.55.0-rc.37) (2025-03-06)
+
+
+### Bug Fixes
+
+* **core:** fix segmenten btn in reactive forms ([#13085](https://github.com/SAP/fundamental-ngx/issues/13085)) ([6361378](https://github.com/SAP/fundamental-ngx/commit/6361378833f95b3fcb75a77bd35449610c471258))
+
+
+
+
+
 # [0.55.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.55.0-rc.35...v0.55.0-rc.36) (2025-03-04)
 
 
