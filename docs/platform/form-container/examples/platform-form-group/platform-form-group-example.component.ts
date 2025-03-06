@@ -13,7 +13,6 @@ import {
     templateUrl: './platform-form-group-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         PlatformInputModule,

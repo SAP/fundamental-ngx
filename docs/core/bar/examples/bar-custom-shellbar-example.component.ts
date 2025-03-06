@@ -11,7 +11,6 @@ import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
     selector: 'fd-bar-custom-shellbar-example',
     templateUrl: './bar-custom-shellbar-example.component.html',
     styleUrls: ['./bar-custom-shellbar-example.component.scss'],
-    standalone: true,
     imports: [BarModule, ComboboxComponent, ContentDensityDirective, FormsModule, ButtonComponent, AvatarComponent]
 })
 export class BarCustomShellbarExampleComponent {

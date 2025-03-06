@@ -4,7 +4,6 @@ import { PanelComponent, PanelContentDirective, PanelTitleDirective } from '@fun
 @Component({
     selector: 'fd-panel-fixed-height-example',
     templateUrl: './panel-fixed-height-example.component.html',
-    standalone: true,
     imports: [PanelComponent, PanelContentDirective, PanelTitleDirective]
 })
 export class PanelFixedHeightExampleComponent {}

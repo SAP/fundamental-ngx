@@ -12,7 +12,6 @@ import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
 @Component({
     selector: 'fd-popover-cdk-placement-example',
     templateUrl: './popover-cdk-placement-example.component.html',
-    standalone: true,
     imports: [
         FormLabelComponent,
         SegmentedButtonModule,

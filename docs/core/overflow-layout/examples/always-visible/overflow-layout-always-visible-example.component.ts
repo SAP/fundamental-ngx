@@ -8,7 +8,6 @@ import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
     templateUrl: './overflow-layout-always-visible-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [OverflowLayoutModule, InfoLabelComponent, ButtonComponent]
 })
 export class OverflowLayoutAlwaysVisibleExampleComponent {

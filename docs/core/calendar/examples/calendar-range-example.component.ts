@@ -35,7 +35,6 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [CalendarComponent, FormsModule, DatePipe, FdDatetimeModule]
 })
 export class CalendarRangeExampleComponent {

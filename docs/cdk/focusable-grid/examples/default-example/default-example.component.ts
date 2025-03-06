@@ -41,7 +41,6 @@ import {
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FocusableGridDirective, FocusableListDirective, FocusableItemDirective]
 })
 export class DefaultExampleComponent {

@@ -18,7 +18,6 @@ import {
     templateUrl: './shellbar-growing-group-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ShellbarComponent,
         ShellbarLogoComponent,

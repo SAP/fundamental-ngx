@@ -6,7 +6,6 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
     selector: 'fd-adding-tab-example',
     templateUrl: './adding-tab-example.component.html',
     styleUrls: ['./adding-tab-example.component.scss'],
-    standalone: true,
     imports: [TabsModule, ButtonComponent]
 })
 export class AddingTabExampleComponent {

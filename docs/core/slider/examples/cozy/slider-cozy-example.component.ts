@@ -7,7 +7,6 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
     selector: 'fd-slider-cozy-example',
     templateUrl: './slider-cozy-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SliderComponent, ContentDensityDirective, FormsModule]
 })
 export class SliderCozyExampleComponent {

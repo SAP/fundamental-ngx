@@ -6,7 +6,6 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 @Component({
     selector: 'fdb-splitter-api-example',
     templateUrl: './splitter-api-example.component.html',
-    standalone: true,
     imports: [BarModule, SplitterModule]
 })
 export class SplitterApiExampleComponent {

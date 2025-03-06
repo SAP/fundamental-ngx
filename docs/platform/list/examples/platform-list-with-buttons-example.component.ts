@@ -5,7 +5,6 @@ import { ModifyItemEvent, PlatformListModule, StandardListItemModule } from '@fu
 @Component({
     selector: 'fdp-platform-list-with-buttons-example',
     templateUrl: './platform-list-with-buttons-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformListWithButtonsExampleComponent {
