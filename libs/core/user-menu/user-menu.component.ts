@@ -47,7 +47,6 @@ import {
     styleUrl: './user-menu.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         class: 'fd-user-menu'
     },

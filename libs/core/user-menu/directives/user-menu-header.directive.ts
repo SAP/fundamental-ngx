@@ -5,7 +5,6 @@ import { Directive } from '@angular/core';
     selector: '[fd-user-menu-header]',
     host: {
         class: 'fd-user-menu__header'
-    },
-    standalone: true
+    }
 })
 export class UserMenuHeaderDirective {}

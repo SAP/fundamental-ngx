@@ -5,7 +5,6 @@ import { Directive } from '@angular/core';
     selector: '[fd-user-menu-subline]',
     host: {
         class: 'fd-user-menu__subline'
-    },
-    standalone: true
+    }
 })
 export class UserMenuSublineDirective {}

@@ -10,7 +10,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         </nav>
     `,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMenuListComponent {}

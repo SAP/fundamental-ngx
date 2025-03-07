@@ -1,20 +1,19 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { UserMenuSublineDirective } from './user-menu-subline.directive';
 
 @Component({
-    template: `<div fd-user-menu-subline #directiveElement> User Menu Subline Test </div>`,
+    template: `<span fd-user-menu-subline>User Menu Subline Test</span>`,
     standalone: true,
     imports: [UserMenuSublineDirective]
 })
-class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
-}
+class TestComponent {}
 
 describe('UserMenuSublineDirective', () => {
-    let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
+    let debugElement: DebugElement;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -24,15 +23,17 @@ describe('UserMenuSublineDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
+
         fixture.detectChanges();
+
+        debugElement = fixture.debugElement.query(By.directive(UserMenuSublineDirective));
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(fixture).toBeTruthy();
     });
 
-    it('should assign base class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-user-menu__subline')).toBeTrue();
+    it('should add class to host', () => {
+        expect(debugElement.nativeElement.className.includes('fd-user-menu__subline')).toBe(true);
     });
 });

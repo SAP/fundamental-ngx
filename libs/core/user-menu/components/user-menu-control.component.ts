@@ -14,7 +14,6 @@ import {
     template: `<ng-content />`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CommonModule]
 })
 export class UserMenuControlComponent {

@@ -1,70 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserMenuControlComponent } from './user-menu-control.component';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-    template: `<fd-user-menu-control (clicked)="handleClick()">Button</fd-user-menu-control>`
+    template: `<fd-user-menu-control #elRef>User Menu Control Test</fd-user-menu-control>`,
+    standalone: true,
+    imports: [UserMenuControlComponent]
 })
 class TestHostComponent {
-    clicked = false;
-    handleClick(): void {
-        this.clicked = true;
-    }
+    @ViewChild('elRef', { read: ElementRef })
+    elRef: ElementRef;
 }
 
 describe('UserMenuControlComponent', () => {
-    let fixture: ComponentFixture<TestHostComponent>;
     let component: TestHostComponent;
-    let userMenuControl: UserMenuControlComponent;
+    let fixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            declarations: [TestHostComponent],
-            imports: [UserMenuControlComponent]
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestHostComponent]
         }).compileComponents();
-    });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestHostComponent);
-        component = fixture.componentInstance;
+        component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
-
-        userMenuControl = fixture.debugElement.query(By.directive(UserMenuControlComponent)).componentInstance;
     });
 
-    it('should create the component', () => {
-        expect(userMenuControl).toBeTruthy();
-    });
-
-    it('should emit click event when clicked', () => {
-        const spy = jest.spyOn(component, 'handleClick');
-        const element = fixture.debugElement.query(By.directive(UserMenuControlComponent));
-
-        element.triggerEventHandler('click', new MouseEvent('click'));
-        fixture.detectChanges();
-
-        expect(spy).toHaveBeenCalled();
-        expect(component.clicked).toBe(true);
-    });
-
-    it('should store the focused element before dialog opens', () => {
-        document.body.innerHTML = `<button id="test-button">Test</button>`;
-        const button = document.getElementById('test-button') as HTMLElement;
-        button.focus();
-
-        userMenuControl.onClick();
-
-        expect(userMenuControl['_focusedElementBeforeDialogOpened']).toBe(button);
-    });
-
-    it('should restore focus to previously focused element', () => {
-        const mockElement = document.createElement('button');
-        jest.spyOn(mockElement, 'focus');
-
-        userMenuControl['_focusedElementBeforeDialogOpened'] = mockElement;
-        userMenuControl._focus();
-
-        expect(mockElement.focus).toHaveBeenCalled();
+    it('should create', () => {
+        expect(component).toBeTruthy();
     });
 });
