@@ -142,7 +142,8 @@ export const API_FILES = {
         'ListMessageDirective',
         'ListNavigationItemArrowDirective',
         'ListNavigationItemTextDirective',
-        'ListNavigationItemComponent'
+        'ListNavigationItemComponent',
+        'ListSublineDirective'
     ],
     menu: [
         'MenuAddonDirective',
@@ -420,5 +421,6 @@ export const API_FILES = {
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
     ],
-    genericTag: ['GenericTagComponent']
+    genericTag: ['GenericTagComponent'],
+    userMenu: ['UserMenuComponent']
 };
