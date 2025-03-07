@@ -10,10 +10,7 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import {
-    MenuComponent,
-    MenuModule
-} from '@fundamental-ngx/core/menu';
+import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';

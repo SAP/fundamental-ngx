@@ -5,7 +5,7 @@ export interface ShellbarMenuItem {
     /**
      *  Callback function that will be called on selecting this shellbar menu item from dropdown
      */
-    callback?: (event: MouseEvent) => void;
+    callback?: (event: Event) => void;
 
     /**
      * The link, that user will be redirected to, after clicking item. When this value is set, element will become

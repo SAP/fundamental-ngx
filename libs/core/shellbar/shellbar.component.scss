@@ -9,6 +9,14 @@
     }
 }
 
+fd-shellbar {
+    .fd-toolbar {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: 3.25rem;
+    }
+}
+
 .fd-shellbar--cx-side-nav {
     box-shadow: var(--sapContent_Shadow0);
     padding-left: 0.5rem;
@@ -38,6 +46,15 @@
 
 .fd-shellbar__group--context-area > * {
     flex-shrink: 0;
+}
+
+.fd-shellbar__context-area-wrapper {
+    margin-right: auto;
+
+    @include rtl() {
+        margin-right: 0;
+        margin-left: auto;
+    }
 }
 
 .fd-shellbar.fd-shellbar--s {

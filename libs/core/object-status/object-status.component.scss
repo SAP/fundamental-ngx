@@ -1,1 +1,7 @@
 @import 'fundamental-styles/dist/object-status.css';
+
+.fd-object-status--truncated {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+}

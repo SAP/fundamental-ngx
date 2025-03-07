@@ -16,7 +16,6 @@ import {
 } from '@angular/core';
 
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
-import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -25,7 +24,6 @@ import { ShellbarSizes } from '../model/shellbar-sizes';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
 import {
     FD_SHELLBAR_ACTIONS_COMPONENT,
     FD_SHELLBAR_ACTION_COMPONENT,
@@ -39,8 +37,7 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
  * It is a container wrapper for all product actions and links (required element).
  * ```html
  * <fd-shellbar-actions [user]="user"
- *                      [userMenu]="userMenu"
- *                      [productSwitcher]="productSwitcher">
+ *                      [userMenu]="userMenu">
  *        <button fd-button fdType="standard">Custom Button</button>
  *
  *        <fd-shellbar-action *ngFor="let action of actions"
@@ -63,7 +60,7 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         '[class.fd-shellbar__group]': 'true',
         '[class.fd-shellbar__group--actions]': 'true'
     },
-    imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent],
+    imports: [PortalModule, ShellbarActionComponent, ShellbarUserMenuComponent],
     providers: [
         {
             provide: FD_SHELLBAR_ACTIONS_COMPONENT,
@@ -105,10 +102,6 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     @ContentChild(FD_COMBOBOX_COMPONENT)
     comboboxComponent: ComboboxInterface;
-
-    /** @hidden */
-    @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false })
-    productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
     @ViewChild(CdkPortalOutlet)

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
@@ -28,7 +28,7 @@ import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
             useExisting: ShellbarActionComponent
         }
     ],
-    imports: [ButtonComponent, ContentDensityDirective]
+    imports: [ButtonComponent, ContentDensityDirective, ClickedDirective]
 })
 export class ShellbarActionComponent {
     /** The glyph (icon) name */
@@ -41,7 +41,7 @@ export class ShellbarActionComponent {
 
     /** Callback that hanldles the response to clicks on any of the actions. */
     @Input()
-    callback: Nullable<(event: MouseEvent) => void>;
+    callback: Nullable<(event: Event) => void>;
 
     /** The action label. */
     @Input()

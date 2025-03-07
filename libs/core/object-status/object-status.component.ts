@@ -31,12 +31,14 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
             </fd-icon>
         }
         @if (textTemplate) {
-            <span class="fd-object-status__text" [class]="_textClass">
+            <span class="fd-object-status__text" [class.fd-object-status--truncated]="truncate" [class]="_textClass">
                 <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
             </span>
         }
         @if (label) {
-            <span class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
+            <span class="fd-object-status__text" [class.fd-object-status--truncated]="truncate" [class]="_textClass">{{
+                label
+            }}</span>
         }
     `,
     styleUrl: './object-status.component.scss',
@@ -115,6 +117,10 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      */
     @Input()
     textTemplate: Nullable<TemplateRef<any>>;
+
+    /** Whether to apply an ellipsis to the object status. */
+    @Input()
+    truncate = false;
 
     /** @hidden */
     _textClass: string;
