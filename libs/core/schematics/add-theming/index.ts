@@ -69,7 +69,7 @@ Try to replace theme in application manually, or use ThemingService to manage mu
             }
         }
 
-        const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts', 'sap_belize_fonts'];
+        const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts'];
 
         let stylesUpdated = false;
 

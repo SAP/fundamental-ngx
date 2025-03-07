@@ -2,12 +2,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import {
-    FocusableItemDirective,
-    InitialFocusDirective,
-    TemplateDirective
-} from '@fundamental-ngx/cdk/utils/directives';
+import { FocusableItemDirective, InitialFocusDirective, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
