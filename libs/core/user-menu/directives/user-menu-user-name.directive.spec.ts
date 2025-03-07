@@ -1,20 +1,19 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { UserMenuUserNameDirective } from './user-menu-user-name.directive';
 
 @Component({
-    template: `<div fd-user-menu-user-name #directiveElement> User Menu User Name Test </div>`,
+    template: `<span fd-user-menu-user-name>User Menu User Name Test</span>`,
     standalone: true,
     imports: [UserMenuUserNameDirective]
 })
-class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
-}
+class TestComponent {}
 
 describe('UserMenuUserNameDirective', () => {
-    let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
+    let debugElement: DebugElement;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -24,15 +23,17 @@ describe('UserMenuUserNameDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
+
         fixture.detectChanges();
+
+        debugElement = fixture.debugElement.query(By.directive(UserMenuUserNameDirective));
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(fixture).toBeTruthy();
     });
 
-    it('should assign base class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-user-menu__user-name')).toBeTrue();
+    it('should add class to host', () => {
+        expect(debugElement.nativeElement.className.includes('fd-user-menu__user-name')).toBe(true);
     });
 });

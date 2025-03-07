@@ -37,7 +37,6 @@ let uniqueTextId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PopoverBodyComponent, PopoverComponent, PopoverControlComponent, CommonModule]
 })
 export class UserMenuListItemComponent implements KeyboardSupportItemInterface {

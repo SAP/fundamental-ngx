@@ -28,7 +28,6 @@ import { Subject, merge, startWith, takeUntil } from 'rxjs';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     styles: [
         `
             [fd-user-menu-sublist] {

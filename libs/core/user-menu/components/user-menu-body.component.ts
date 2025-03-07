@@ -36,7 +36,6 @@ import { Observable, Subject, map, merge, startWith, takeUntil } from 'rxjs';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         BarComponent,
         CommonModule,

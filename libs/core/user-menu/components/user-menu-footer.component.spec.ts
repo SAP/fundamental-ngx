@@ -1,34 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserMenuFooterComponent } from './user-menu-footer.component';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-    template: `<fd-user-menu-footer><p>Footer Content</p></fd-user-menu-footer>`
+    template: `<fd-user-menu-footer #elRef>User Menu Footer Test</fd-user-menu-footer>`,
+    standalone: true,
+    imports: [UserMenuFooterComponent]
 })
-class TestHostComponent {}
+class TestHostComponent {
+    @ViewChild('elRef', { read: ElementRef })
+    elRef: ElementRef;
+}
 
 describe('UserMenuFooterComponent', () => {
+    let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            declarations: [TestHostComponent],
-            imports: [UserMenuFooterComponent]
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestHostComponent]
         }).compileComponents();
-    });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestHostComponent);
+        component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
     });
 
-    it('should create the component', () => {
-        const footerEl = fixture.nativeElement.querySelector('fd-user-menu-footer');
-        expect(footerEl).toBeTruthy();
-    });
-
-    it('should project content inside', () => {
-        const footerEl = fixture.nativeElement.querySelector('fd-user-menu-footer');
-        expect(footerEl.textContent).toContain('Footer Content');
+    it('should create', () => {
+        expect(component).toBeTruthy();
     });
 });

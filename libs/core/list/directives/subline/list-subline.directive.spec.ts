@@ -1,15 +1,15 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ListSublineDirective } from '@fundamental-ngx/core/list';
+import { ListSublineDirective } from './list-subline.directive';
 
 @Component({
-    template: ` <div #componentElement fd-list-subline>List Subline Test Text</div> `,
+    template: ` <li #componentElement fd-list-subline>List Subline Directive Test</li> `,
     standalone: true,
     imports: [ListSublineDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
+    @ViewChild('componentElement', { read: ElementRef })
+    ref: ElementRef;
 }
 
 describe('ListSublineDirective', () => {
@@ -33,6 +33,6 @@ describe('ListSublineDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-list__subline')).toBeTrue();
+        expect(component.ref.nativeElement.className).toBe('fd-list__subline');
     });
 });

@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         class: 'fd-user-menu__content-container'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMenuContentContainerComponent {}

@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     template: `<ng-content />`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CommonModule]
 })
 export class UserMenuFooterComponent {}

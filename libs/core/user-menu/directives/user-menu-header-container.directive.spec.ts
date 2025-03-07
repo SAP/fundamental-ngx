@@ -1,20 +1,19 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { UserMenuHeaderContainerDirective } from './user-menu-header-container.directive';
 
 @Component({
-    template: `<div fd-user-menu-header-container #directiveElement>User Menu Header Test</div>`,
+    template: `<span fd-user-menu-header-container>User Menu Header Container Test</span>`,
     standalone: true,
     imports: [UserMenuHeaderContainerDirective]
 })
-class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
-}
+class TestComponent {}
 
 describe('UserMenuHeaderContainerDirective', () => {
-    let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
+    let debugElement: DebugElement;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -24,15 +23,17 @@ describe('UserMenuHeaderContainerDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
+
         fixture.detectChanges();
+
+        debugElement = fixture.debugElement.query(By.directive(UserMenuHeaderContainerDirective));
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(fixture).toBeTruthy();
     });
 
-    it('should assign base class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-user-menu__header-container')).toBeTrue();
+    it('should add class to host', () => {
+        expect(debugElement.nativeElement.className.includes('fd-user-menu__header-container')).toBe(true);
     });
 });
