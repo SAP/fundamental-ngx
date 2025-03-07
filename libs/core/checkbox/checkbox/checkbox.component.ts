@@ -339,7 +339,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         event.stopPropagation();
 
         // If we have display-only mode, stop any possible actions by label click event.
-        this._handleDisplayOnlyMode(event);
+        this._handleDisplayAndReadOnly(event);
     }
 
     /**
@@ -349,7 +349,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
      */
     _onLabelKeydown(event: Event): void {
         // If we have display-only mode, stop any possible actions by label click event.
-        this._handleDisplayOnlyMode(event);
+        this._handleDisplayAndReadOnly(event);
     }
 
     /** @hidden handles click on the native checkbox input */
@@ -358,7 +358,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         // This is needed in order to set the value to the component before any external listeners will receive it.
         // Otherwise checkbox might be out of sync.
         event.stopPropagation();
-        if (this.displayOnly) {
+        if (this.displayOnly || this.readonly) {
             return;
         }
         this.nextValue();
@@ -366,12 +366,16 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     }
 
     /** @hidden */
-    private _handleDisplayOnlyMode(event: Event): void {
-        if (!this.displayOnly) {
+    private _handleDisplayAndReadOnly(event: Event): void {
+        if (!this.displayOnly && !this.readonly) {
             return;
         }
         event.preventDefault();
         event.stopImmediatePropagation();
+
+        if (this.readonly) {
+            this.inputElement.nativeElement.focus();
+        }
     }
 
     /** @hidden Based on current control value sets new control state. */

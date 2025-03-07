@@ -5710,7 +5710,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:20.4.6, @nx/devkit@npm:>=17.1.2 < 21":
+"@nx/devkit@npm:20.4.6":
   version: 20.4.6
   resolution: "@nx/devkit@npm:20.4.6"
   dependencies:
@@ -5725,6 +5725,24 @@ __metadata:
   peerDependencies:
     nx: ">= 19 <= 21"
   checksum: 10/b2a4b3bf8f9f286fa772fb0ad1a76d120299678cd113262357067bbd105339186f41325bf7eead35fb5e08e0be3dc83751392b2b804720dbde8eb316cb46acb7
+  languageName: node
+  linkType: hard
+
+"@nx/devkit@npm:>=17.1.2 < 21":
+  version: 20.5.0
+  resolution: "@nx/devkit@npm:20.5.0"
+  dependencies:
+    ejs: "npm:^3.1.7"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    minimatch: "npm:9.0.3"
+    semver: "npm:^7.5.3"
+    tmp: "npm:~0.2.1"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  peerDependencies:
+    nx: ">= 19 <= 21"
+  checksum: 10/c782cb56178c835665ea12ccc17748dc85f4d0b3f2372e372f239e2fe8468a5d1a1fe91e31d74fe591b3629c1c5f3bc2f6fd5ee454b8b49c373fb2abf9926e48
   languageName: node
   linkType: hard
 
@@ -6737,26 +6755,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sap-theming/theming-base-content@npm:11.24.0":
-  version: 11.24.0
-  resolution: "@sap-theming/theming-base-content@npm:11.24.0"
-  checksum: 10/788ac676599e5782f433b8437892c4324d550ad9fb8e3aaf9b846f969c2dd665bfb06960235572e79598c8e4490b9e4168912370d94fcc3d09b53aa62a3e43af
-  languageName: node
-  linkType: hard
-
-"@sap-theming/theming-base-content@npm:^11.18.0":
+"@sap-theming/theming-base-content@npm:11.26.0, @sap-theming/theming-base-content@npm:^11.26.0":
   version: 11.26.0
   resolution: "@sap-theming/theming-base-content@npm:11.26.0"
   checksum: 10/963db2058c149cbe4e280e2e52a53aac24e3eebc95dea8dd0fb41f02b652777e288098f31f506e764840e96ba8413bf5a2334f91f7ec65d12ad3a8e1fbb32ab8
   languageName: node
   linkType: hard
 
-"@sap-ui/common-css@npm:0.38.0":
-  version: 0.38.0
-  resolution: "@sap-ui/common-css@npm:0.38.0"
+"@sap-ui/common-css@npm:0.39.0":
+  version: 0.39.0
+  resolution: "@sap-ui/common-css@npm:0.39.0"
   dependencies:
-    "@sap-theming/theming-base-content": "npm:^11.18.0"
-  checksum: 10/1ae2dc1f5c5f867c06d7026288fd59d7237d18d8f4312e4afb1f279029765cf3ff0ca83fc6e0920c03da21036c127b574526cf0ecb50365856a38e45a29fedc6
+    "@sap-theming/theming-base-content": "npm:^11.26.0"
+  checksum: 10/eb8a4d0503f75695fc959171311457908d0c1983c5b0a6b50eca526f17399601dd0d8cd53f217b848396e3f61e9967993009072f19850642cbce861457568b93
   languageName: node
   linkType: hard
 
@@ -9634,13 +9645,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.7.4":
-  version: 1.8.1
-  resolution: "axios@npm:1.8.1"
+  version: 1.8.2
+  resolution: "axios@npm:1.8.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/5a09a2b39e724e018bc94d0424bb1a6042e71864039fbcc8c8d9dd50f3acd9d01f81b895994c9b46bc82c026afa3dfd1ec343a27bfe4723b70841f3b3dd6edfa
+  checksum: 10/d4328758128d0602cc809a8e7627622cb7839b379eae5e4d6b9d603dd4d5fb89159985630243ec107cf5c675cd8825dba737a319dff9499f3b7688d9a69ec9ed
   languageName: node
   linkType: hard
 
@@ -13361,9 +13372,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.73":
-  version: 1.5.112
-  resolution: "electron-to-chromium@npm:1.5.112"
-  checksum: 10/3d67bf774e65415ca74d39b7b280916d3afbaa96375458c9dc4eb321937adcb8f9bc1350fae398e6c6fc1ad58c2a198caf033442b8cb5d9e5c8a1ca88a68504d
+  version: 1.5.113
+  resolution: "electron-to-chromium@npm:1.5.113"
+  checksum: 10/65d09ca095df24e30f2b0ecdb59d8553816fe062dd5edda483520be7037143f8c776bb3657fc0c83ee6df4ddefdbface17c166097a1b53f26a646495c9bbc946
   languageName: node
   linkType: hard
 
@@ -15305,8 +15316,8 @@ __metadata:
     "@nx/js": "npm:20.4.6"
     "@nx/plugin": "npm:20.4.6"
     "@nx/workspace": "npm:20.4.6"
-    "@sap-theming/theming-base-content": "npm:11.24.0"
-    "@sap-ui/common-css": "npm:0.38.0"
+    "@sap-theming/theming-base-content": "npm:11.26.0"
+    "@sap-ui/common-css": "npm:0.39.0"
     "@schematics/angular": "npm:19.0.7"
     "@stackblitz/sdk": "npm:1.9.0"
     "@swc-node/register": "npm:1.9.2"
@@ -20410,11 +20421,11 @@ __metadata:
   linkType: hard
 
 "nanoid@npm:^3.3.7, nanoid@npm:^3.3.8":
-  version: 3.3.8
-  resolution: "nanoid@npm:3.3.8"
+  version: 3.3.9
+  resolution: "nanoid@npm:3.3.9"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 10/2d1766606cf0d6f47b6f0fdab91761bb81609b2e3d367027aff45e6ee7006f660fb7e7781f4a34799fe6734f1268eeed2e37a5fdee809ade0c2d4eb11b0f9c40
+  checksum: 10/80ec0f2f7fe0f472f459fbeab6afd88f6739e3da94cf2c2307bc83ef0203ec3b72e6113a9e3196ac4be79540440184136ee96e77c10a965e37d8347f43b265fa
   languageName: node
   linkType: hard
 

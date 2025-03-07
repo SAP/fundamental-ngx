@@ -152,46 +152,35 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe(false);
     });
 
-    it('should be readonly when unchecked', async () => {
-        // For unchecked state
-
+    it('should focus on readonly checkbox', async () => {
         checkbox.setReadOnlyState(true);
-        hostComponent.value = false;
-
         await whenStable(fixture);
-
+    
         const input = getCheckboxInput(fixture);
-        const checkboxLabel = getCheckboxLabel(fixture);
-
-        jest.spyOn(checkbox, 'nextValue');
-        checkboxLabel.click();
-
-        expect(input.checked).toBe(false);
-        expect(input.disabled).toBe(true);
-        expect(hostComponent.value).toBe(false);
-        expect(checkbox.checkboxValue).toBe(false);
-        expect(input.classList.contains('is-readonly')).toBe(true);
+    
+        // Check if the checkbox can be focused
+        input.focus();
+        expect(document.activeElement).toBe(input);
+    
+        // Ensuring that it maintains its readonly nature
+        expect(input.getAttribute('readonly')).not.toBeNull();
     });
 
-    it('should be readonly when checked', async () => {
-        // For checked state
-
+    it('should not toggle state on click when readonly', async () => {
         checkbox.setReadOnlyState(true);
-        hostComponent.value = true;
-
+        hostComponent.value = false;
         await whenStable(fixture);
-
+    
         const input = getCheckboxInput(fixture);
-        const checkboxLabel = getCheckboxLabel(fixture);
-
+    
+        // Spy on the nextValue method to ensure it is not being called
         jest.spyOn(checkbox, 'nextValue');
-        checkboxLabel.click();
-
-        expect(input.checked).toBe(true);
-        expect(input.disabled).toBe(true);
-        expect(hostComponent.value).toBe(true);
-        expect(checkbox.checkboxValue).toBe(true);
-        expect(input.classList.contains('is-readonly')).toBe(true);
+    
+        // Click the input and check that the value does not change
+        input.click();
+        expect(checkbox.nextValue).not.toHaveBeenCalled();
+        expect(checkbox.checkboxValue).toBe(false);
+        expect(hostComponent.value).toBe(false);
     });
 
     it('should use custom values', async () => {

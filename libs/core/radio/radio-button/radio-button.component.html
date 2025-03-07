@@ -28,7 +28,7 @@
     [class.fd-radio__label--wrap-top-aligned]="wrapLabel && valignLabel === 'top'"
     [attr.title]="title"
     [for]="id"
-    (click)="readOnly ? null : labelClicked($event)"
+    (click)="labelClicked($event)"
 >
     <span class="fd-radio__text">
         <ng-content></ng-content>
