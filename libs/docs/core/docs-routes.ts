@@ -413,6 +413,10 @@ const componentRoutes = [
     {
         path: 'avatar-group',
         loadChildren: () => import('@fundamental-ngx/docs/core/avatar-group').then(configureLibRoutes)
+    },
+    {
+        path: 'settings-dialog',
+        loadChildren: () => import('@fundamental-ngx/docs/core/settings-dialog').then(configureLibRoutes)
     }
 ];
 export const ROUTES: Routes = [
