@@ -17,7 +17,7 @@ describe('add-theming schematic', () => {
         });
         afterEach(clearWorkspaceCache);
         it('should add icon font styles', async () => {
-            const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts', 'sap_belize_fonts'];
+            const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts'];
             tree = await runner.runSchematic('add-theming', { project: 'test' }, tree);
             const styles = (tree.readJson('./angular.json') as Record<string, any>).projects.test.architect.build
                 .options.styles;
