@@ -11,3 +11,9 @@ fdk-dynamic-portal {
         }
     }
 }
+
+.fd-toolbar__overflow {
+    fd-shellbar-separator, fd-shellbar-spacer, .fd-object-status {
+        display: none;
+    }
+}

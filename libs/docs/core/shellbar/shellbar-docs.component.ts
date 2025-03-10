@@ -12,17 +12,18 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { CustomUserMenuExampleComponent } from './examples/custom-user-menu-example.component';
 import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
+import { ShellbarBrandingContextAreaExampleComponent } from './examples/shellbar-branding-context-area-example/shellbar-branding-context-area-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
-import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
-import { ShellbarOptionsExampleComponent } from './examples/shellbar-options-example/shellbar-options-example.component';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 
 const shellbarBasicHTMLSrc = 'shellbar-basic-example.component.html';
 const shellbarBasicTSSrc = 'shellbar-basic-example.component.ts';
 const shellbarCollapsibleHTMLSrc = 'shellbar-collapsible-example.component.html';
 const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
-const shellbarOptionsHTMLSrc = 'shellbar-options-example.component.html';
-const shellbarOptionsTSSrc = 'shellbar-options-example.component.ts';
+const shellbarBrandingContextAreaHTMLSrc =
+    'shellbar-branding-context-area-example/shellbar-branding-context-area-example.component.html';
+const shellbarBrandingContextAreaTSSrc =
+    'shellbar-branding-context-area-example/shellbar-branding-context-area-example.component.ts';
 
 @Component({
     selector: 'app-shellbar',
@@ -36,9 +37,8 @@ const shellbarOptionsTSSrc = 'shellbar-options-example.component.ts';
         CodeExampleComponent,
         ShellbarCollapsibleExampleComponent,
         ShellbarResponsiveExampleComponent,
-        ShellbarGrowingGroupExampleComponent,
         CustomUserMenuExampleComponent,
-        ShellbarOptionsExampleComponent
+        ShellbarBrandingContextAreaExampleComponent
     ]
 })
 export class ShellbarDocsComponent {
@@ -84,17 +84,6 @@ export class ShellbarDocsComponent {
         }
     ];
 
-    shellbarGrowingGroupExampleFiles: ExampleFile[] = [
-        getExampleFile('shellbar-growing-group-example/shellbar-growing-group-example.component.ts', {
-            selector: 'shellbar-growing-group-example',
-            component: 'ShellbarGrowingGroupExampleComponent',
-            name: 'shellbar-growing-group-example.ts'
-        }),
-        getExampleFile('shellbar-growing-group-example/shellbar-growing-group-example.component.html', {
-            name: 'shellbar-growing-group-example.html'
-        })
-    ];
-
     shellbarCustomUserMenuExample: ExampleFile[] = [
         getExampleFile('custom-user-menu-example.component.ts', {
             selector: 'shellbar-custom-user-menu-example',
@@ -102,17 +91,17 @@ export class ShellbarDocsComponent {
         })
     ];
 
-    shellbarOptionsExample: ExampleFile[] = [
+    shellbarBrandingContextAreaExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(shellbarOptionsHTMLSrc),
-            fileName: 'shellbar-options-example'
+            code: getAssetFromModuleAssets(shellbarBrandingContextAreaHTMLSrc),
+            fileName: 'shellbar-branding-context-area-example'
         },
         {
             language: 'typescript',
-            component: 'ShellbarOptionsExampleComponent',
-            code: getAssetFromModuleAssets(shellbarOptionsTSSrc),
-            fileName: 'shellbar-options-example'
+            component: 'ShellbarBrandingContextAreaExampleComponent',
+            code: getAssetFromModuleAssets(shellbarBrandingContextAreaTSSrc),
+            fileName: 'shellbar-branding-context-area-example'
         }
     ];
 }

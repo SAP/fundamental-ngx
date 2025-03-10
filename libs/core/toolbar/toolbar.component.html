@@ -8,7 +8,9 @@
     @if (!spacerUsed()) {
         <fd-toolbar-spacer></fd-toolbar-spacer>
     }
-    <fd-toolbar-separator></fd-toolbar-separator>
+    @if (showSeparator) {
+        <fd-toolbar-separator></fd-toolbar-separator>
+    }
     <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
         <fd-popover-control>
             <button fd-button title="More" aria-label="More" aria-haspopup="true" fdType="transparent" glyph="overflow">

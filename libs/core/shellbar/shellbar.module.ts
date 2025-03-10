@@ -9,7 +9,6 @@ import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle
 import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.component';
 
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 
@@ -19,7 +18,6 @@ import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.compon
         ProductMenuComponent,
         ShellbarSubtitleComponent,
         ShellbarActionsComponent,
-        ShellbarActionsMobileComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
@@ -31,7 +29,6 @@ import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.compon
         ProductMenuComponent,
         ShellbarSubtitleComponent,
         ShellbarActionsComponent,
-        ShellbarActionsMobileComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,

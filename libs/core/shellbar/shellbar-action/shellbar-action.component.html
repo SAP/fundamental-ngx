@@ -6,7 +6,7 @@
         fdCozy
         [glyph]="glyph"
         [glyphFont]="glyphFont"
-        (click)="callback ? callback($event) : ''"
+        (fdkClicked)="callback ? callback($event) : ''"
     >
         @if (notificationCount) {
             <span class="fd-button__badge" [attr.aria-label]="notificationLabel">

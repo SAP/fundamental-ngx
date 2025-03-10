@@ -5,13 +5,6 @@
 }
 <!-- If portal outlet placed outside div, it will be added to the end of the root container. So this div actually keeps outlet in desired place. -->
 <div class="fd-shellbar__action" cdkPortalOutlet></div>
-<div class="fd-shellbar__action fd-shellbar__action--mobile">
-    <fd-shellbar-actions-mobile
-        [shellbarActions]="shellbarActions"
-        [searchExists]="!!_searchPortal"
-        (showSearch)="_toggleSearch()"
-    ></fd-shellbar-actions-mobile>
-</div>
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
     <ng-content></ng-content>
 </div>
@@ -19,20 +12,3 @@
     <fd-shellbar-action glyph="search" [callback]="_toggleSearch"></fd-shellbar-action>
 }
 <ng-content select="fd-shellbar-action"></ng-content>
-@if (userComponent || userItem) {
-    @if (!userComponent) {
-        <fd-shellbar-user-menu
-            placement="bottom-end"
-            [user]="user"
-            [userMenu]="userMenu"
-            (itemClicked)="_triggerItems()"
-        ></fd-shellbar-user-menu>
-    } @else {
-        <ng-content select="fd-shellbar-user-menu"></ng-content>
-    }
-}
-@if (productSwitchComponent) {
-    <div class="fd-shellbar__action">
-        <ng-content select="fd-product-switch"></ng-content>
-    </div>
-}

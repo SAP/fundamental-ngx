@@ -1,55 +1,64 @@
-<div
+<fd-toolbar
     class="fd-shellbar"
     [class]="'fd-shellbar--' + _currentSize + _getSideNavClass()"
     [class.fd-shellbar--side-nav]="sideNav === true"
     #shellbar
+    [shouldOverflow]="true"
+    [showSeparator]="false"
 >
     @if (!_hideAllComponents) {
         <div
-            class="fd-shellbar__group fd-shellbar__group--product"
+            class="fd-shellbar__group"
             [class.fd-shellbar__group--shrink]="groupFlex?.product?.shrink"
             [class.fd-shellbar__group--basis-auto]="groupFlex?.product?.flexBasisAuto"
         >
-            <ng-content select="[fd-shellbar-side-nav]"></ng-content>
-
-            @if (brandingComponent) {
-                <ng-content select="fd-shellbar-branding"></ng-content>
-            } @else {
-                <ng-content select="fd-shellbar-logo"></ng-content>
+            <span fd-toolbar-item>
+                <ng-content select="[fd-shellbar-side-nav]"></ng-content>
+            </span>
+            <div class="fd-shellbar__branding" [class.fd-shellbar__branding--non-interactive]="!interactiveBranding">
+                <span fd-toolbar-item fdOverflowPriority="never">
+                    <ng-content select="fd-shellbar-logo"></ng-content>
+                </span>
+    
                 @if (!_hideTitleComponents) {
-                    <ng-content select="fd-shellbar-title"></ng-content>
                     <div class="fd-shellbar__product">
-                        <ng-content select="fd-product-menu"></ng-content>
+                        <span fd-toolbar-item>
+                            <ng-content select="fd-shellbar-title"></ng-content>
+                        </span>
+                        <span td-toolbar-item>
+                            <ng-content select="fd-product-menu"></ng-content>
+                        </span>
                     </div>
                 }
-            }
+            </div>
         </div>
+        <span fd-toolbar-item class="fd-shellbar__context-area-wrapper">
+            <ng-content select="fd-shellbar-context-area"></ng-content>
+        </span>
+        <span hidden fd-toolbar-item>
+            <ng-content></ng-content>
+        </span>
+        <span fd-toolbar-item>
+            <ng-content select="fd-shellbar-actions"></ng-content>
+        </span>
     }
-    @if (!_hideAllComponents) {
-        <ng-content select="fd-shellbar-context-area"></ng-content>
+    @if (productSwitchComponent) {
+        <span class="fd-shellbar__action" fd-toolbar-item fdOverflowPriority="never">
+            <ng-content select="fd-product-switch"></ng-content>
+        </span>
     }
-    <div hidden>
-        <ng-content></ng-content>
-    </div>
-    <!--    @if (searchComponent) {-->
-    <!--        <div-->
-    <!--            class="fd-shellbar__group fd-shellbar__group&#45;&#45;center fd-shellbar__group&#45;&#45;mobile-flex"-->
-    <!--            [class.fd-shellbar__group&#45;&#45;shrink]="groupFlex?.search?.shrink"-->
-    <!--            [class.fd-shellbar__group&#45;&#45;basis-auto]="groupFlex?.search?.flexBasisAuto"-->
-    <!--        >-->
-    <!--            <div class="fd-shellbar__action fd-shellbar__action&#45;&#45;grow">-->
-    <!--                <ng-container cdkPortalOutlet #searchPortalOutlet></ng-container>-->
-    <!--            </div>-->
-    <!--            @if (_currentSize === 'xl' || _hideAllComponents) {-->
-    <!--                <div class="fd-shellbar__action fd-shellbar__action&#45;&#45;mobile fd-shellbar__action&#45;&#45;shrink">-->
-    <!--                    <button class="fd-button fd-button&#45;&#45;transparent" (click)="_closeMobileSearch()">-->
-    <!--                        {{ 'coreShellbar.cancel' | fdTranslate }}-->
-    <!--                    </button>-->
-    <!--                </div>-->
-    <!--            }-->
-    <!--        </div>-->
-    <!--    }-->
-    @if (!_hideAllComponents) {
-        <ng-content select="fd-shellbar-actions"></ng-content>
+    @if (_actions?.userComponent || _actions?.userItem) {
+        <span fd-toolbar-item fdOverflowPriority="never" style="order: 1">
+            @if (!_actions?.userComponent && _actions && _actions?.user && _actions?.userMenu) {
+                <fd-shellbar-user-menu
+                    placement="bottom-end"
+                    [user]="_actions.user"
+                    [userMenu]="_actions.userMenu"
+                    (itemClicked)="_actions._triggerItems()"
+                ></fd-shellbar-user-menu>
+            } @else {
+                <ng-content select="fd-shellbar-user-menu"></ng-content>
+            }
+        </span>
     }
-</div>
+</fd-toolbar>

@@ -25,7 +25,7 @@ describe('ShellbarComponent', () => {
     it('should apply class modifiers', async () => {
         await fixture.whenStable();
         let productElementClass =
-            fixture.debugElement.nativeElement.querySelector('.fd-shellbar__group--product')?.classList;
+            fixture.debugElement.nativeElement.querySelector('.fd-shellbar__:not(.fd-shellbar__group--actions)')?.classList;
         expect(productElementClass).not.toContain('fd-shellbar__group--shrink');
         expect(productElementClass).not.toContain('fd-shellbar__group--basis-auto');
         component.groupFlex = {
@@ -38,7 +38,7 @@ describe('ShellbarComponent', () => {
         await fixture.whenStable();
 
         productElementClass =
-            fixture.debugElement.nativeElement.querySelector('.fd-shellbar__group--product')?.classList;
+            fixture.debugElement.nativeElement.querySelector('.fd-shellbar__:not(.fd-shellbar__group--actions)')?.classList;
 
         expect(productElementClass).toContain('fd-shellbar__group--shrink');
         expect(productElementClass).toContain('fd-shellbar__group--basis-auto');

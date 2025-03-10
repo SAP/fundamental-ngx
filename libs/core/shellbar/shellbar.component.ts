@@ -1,7 +1,6 @@
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import {
     AfterContentInit,
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -14,27 +13,29 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    inject
+    inject, AfterViewInit,
+    ViewChildren
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
+import { ToolbarComponent, ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
-import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
 import {
     FD_SHELLBAR_ACTIONS_COMPONENT,
-    FD_SHELLBAR_BRANDING_COMPONENT,
     FD_SHELLBAR_COMPONENT,
     FD_SHELLBAR_SEARCH_COMPONENT
 } from './tokens';
+import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '../product-switch';
+import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -57,9 +58,9 @@ import {
             useExisting: ShellbarComponent
         }
     ],
-    imports: [PortalModule, FdTranslatePipe]
+    imports: [PortalModule, FdTranslatePipe, ToolbarComponent, ToolbarItemDirective, ButtonComponent, ShellbarUserMenuComponent]
 })
-export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class ShellbarComponent implements AfterContentInit, OnDestroy, AfterViewInit {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     set size(value: ShellbarSizes | undefined) {
@@ -88,7 +89,11 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     @Input()
     sideNav: boolean | SideNavigationInterface = false;
 
+    /** Whether the logo is interactive. */
+    @Input() interactiveBranding = false;
+
     /**
+     * @deprecated The groupFlex input has been deprecated as of 0.54.2.
      * Shellbar group flex configuration.
      */
     @Input()
@@ -169,29 +174,25 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return this._searchComponent;
     }
 
-    /**
-     * branding component
-     */
-    @ContentChild(FD_SHELLBAR_BRANDING_COMPONENT, { descendants: true, static: false })
-    set brandingComponent(component: Nullable<ShellbarBrandingComponent>) {
-        this._brandingComponent = component;
-    }
-
-    get brandingComponent(): Nullable<ShellbarBrandingComponent> {
-        return this._brandingComponent;
-    }
-
     /** @hidden */
     @ContentChild(FD_SHELLBAR_ACTIONS_COMPONENT)
-    private _actions?: ShellbarActionsComponent;
+    _actions?: ShellbarActionsComponent;
+
+    /** @hidden */
+    @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false })
+    productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
     @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
     private readonly _searchPortalOutlet: CdkPortalOutlet;
 
     /** @hidden */
-    @ViewChild('shellbar')
+    @ViewChild('shellbar', { read: ElementRef })
     private readonly _shellbar: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild(ToolbarComponent)
+    toolbar: ToolbarComponent;
 
     /** @hidden */
     get _hideTitleComponents(): boolean {
@@ -210,9 +211,6 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _showMobileSearch = false;
-
-    /** @hidden */
-    private _brandingComponent: Nullable<ShellbarBrandingComponent>;
 
     /** @hidden */
     private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
@@ -338,6 +336,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _setCurrentBreakpoint(): void {
+        console.log(this._actions);
         if (this._shellbar) {
             const { width } = this._shellbar.nativeElement.getBoundingClientRect();
 

@@ -3,8 +3,7 @@ import { FormsModule } from '@angular/forms';
 import {
     GenericTagComponent,
     IconComponent,
-    ObjectStatusComponent,
-    ToolbarSpacerDirective
+    ObjectStatusComponent
 } from '@fundamental-ngx/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -14,10 +13,8 @@ import {
     ProductMenuComponent,
     ShellbarActionComponent,
     ShellbarActionsComponent,
-    ShellbarBrandingComponent,
     ShellbarComponent,
     ShellbarContextAreaComponent,
-    ShellbarHidePriorityDirective,
     ShellbarLogoComponent,
     ShellbarMenuItem,
     ShellbarSeparatorComponent,
@@ -29,16 +26,11 @@ import {
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import {
-    PlatformSearchFieldModule,
-    SearchInput,
-    SuggestionItem,
-    ValueLabelItem
-} from '@fundamental-ngx/platform/search-field';
+import { PlatformSearchFieldModule, SearchInput, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 
 @Component({
-    selector: 'fd-shellbar-options-example',
-    templateUrl: './shellbar-options-example.component.html',
+    selector: 'fd-shellbar-branding-context-area-example',
+    templateUrl: './shellbar-branding-context-area-example.component.html',
     standalone: true,
     imports: [
         SegmentedButtonModule,
@@ -54,19 +46,16 @@ import {
         ShellbarActionComponent,
         ProductSwitchModule,
         ShellbarTitleComponent,
-        ShellbarBrandingComponent,
         ShellbarContextAreaComponent,
         ShellbarSeparatorComponent,
         ShellbarSpacerComponent,
-        ShellbarHidePriorityDirective,
         GenericTagComponent,
         ObjectStatusComponent,
         FdTranslatePipe,
-        IconComponent,
-        ToolbarSpacerDirective
+        IconComponent
     ]
 })
-export class ShellbarOptionsExampleComponent {
+export class ShellbarBrandingContextAreaExampleComponent {
     currentSize: ShellbarSizes = 'xl';
 
     showSearch = true;
@@ -112,45 +101,6 @@ export class ShellbarOptionsExampleComponent {
         {
             value: 'violet',
             label: 'Violet'
-        }
-    ];
-
-    suggestions: SuggestionItem[] = [
-        {
-            value: 'Apple'
-        },
-        {
-            value: 'Banana'
-        },
-        {
-            value: 'Blueberry'
-        },
-        {
-            value: 'Cherry'
-        },
-        {
-            value: 'Grape'
-        },
-        {
-            value: 'Lemon'
-        },
-        {
-            value: 'Lime'
-        },
-        {
-            value: 'Orange'
-        },
-        {
-            value: 'Peach'
-        },
-        {
-            value: 'Pineapple'
-        },
-        {
-            value: 'Plum'
-        },
-        {
-            value: 'Raspberry'
         }
     ];
 

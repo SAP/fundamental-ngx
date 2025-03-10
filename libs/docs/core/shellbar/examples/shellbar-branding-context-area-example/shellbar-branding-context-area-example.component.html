@@ -5,35 +5,29 @@
     <button fd-button value="xl">XL</button>
 </fd-segmented-button>
 <div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
-    <h3>Custom reverse context area hiding ordering</h3>
-    <fd-shellbar [size]="currentSize">
-        <fd-shellbar-branding [callback]="brandingCallback" [ariaLabel]="productMenuControl">
-            <fd-shellbar-logo
-                src="//unpkg.com/fundamental-styles/dist/images/sap-logo.png"
-                [srcset]="
-                    '//unpkg.com/fundamental-styles/dist/images/sap-logo@2x.png 1x, //unpkg.com/fundamental-styles/dist/images/sap-logo@3x.png 2x, //unpkg.com/fundamental-styles/dist/images/sap-logo@4x.png 3x'
-                "
-                width="48"
-                height="24"
-                alt="SAP"
-            ></fd-shellbar-logo>
-            <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
-        </fd-shellbar-branding>
+    <h3>Custom reverse context area</h3>
+    <fd-shellbar [size]="currentSize" [interactiveBranding]="true">
+        <fd-shellbar-logo
+            src="//unpkg.com/fundamental-styles/dist/images/sap-logo.png"
+            [srcset]="
+                '//unpkg.com/fundamental-styles/dist/images/sap-logo@2x.png 1x, //unpkg.com/fundamental-styles/dist/images/sap-logo@3x.png 2x, //unpkg.com/fundamental-styles/dist/images/sap-logo@4x.png 3x'
+            "
+            width="48"
+            height="24"
+            alt="SAP"
+            (click)="brandingCallback"
+        ></fd-shellbar-logo>
+        <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
 
         <fd-shellbar-context-area>
-            <fd-shellbar-separator fdShellbarHidePriority="6"></fd-shellbar-separator>
-            <fd-product-menu
-                [control]="'EMEA'"
-                [closePopoverOnSelect]="true"
-                [items]="productMenuItems"
-                fdShellbarHidePriority="5"
-            >
+            <fd-shellbar-separator></fd-shellbar-separator>
+            <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems">
             </fd-product-menu>
-            <fd-shellbar-separator fdShellbarHidePriority="4"></fd-shellbar-separator>
-            <button fd-button fdShellbarHidePriority="3">
+            <fd-shellbar-separator></fd-shellbar-separator>
+            <button fd-button>
                 <fd-icon glyph="globe"></fd-icon>
             </button>
-            <fd-shellbar-spacer fdShellbarHidePriority="2"></fd-shellbar-spacer>
+            <fd-shellbar-spacer></fd-shellbar-spacer>
             <span
                 fd-object-status
                 [indicationColor]="5"
@@ -41,7 +35,7 @@
                 label="Environment"
                 title="Environment"
                 aria-label="Object status Environment Inverted"
-                fdShellbarHidePriority="1"
+                [truncate]="true"
             ></span>
         </fd-shellbar-context-area>
 
@@ -49,7 +43,6 @@
             <fdp-search-field
                 placeholder="Search"
                 fdCozy
-                [suggestions]="suggestions"
                 [categories]="categories"
                 (searchSubmit)="onSearchSubmit($event)"
                 (inputChange)="onInputChange($event)"
@@ -74,20 +67,17 @@
 </div>
 
 <div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
-    <h3>Default context area hiding ordering</h3>
+    <h3>Default non-interactive context area</h3>
     <fd-shellbar [size]="currentSize">
-        <fd-shellbar-branding [callback]="brandingCallback" [ariaLabel]="productMenuControl">
-            <fd-shellbar-logo>
-                <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
-            </fd-shellbar-logo>
-            <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
-        </fd-shellbar-branding>
+        <fd-shellbar-logo>
+            <span class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></span>
+        </fd-shellbar-logo>
+        <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
 
         @if (showSearch) {
             <fdp-search-field
                 placeholder="Search"
                 fdCozy
-                [suggestions]="suggestions"
                 [categories]="categories"
                 (searchSubmit)="onSearchSubmit($event)"
                 (inputChange)="onInputChange($event)"

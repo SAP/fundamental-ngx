@@ -147,6 +147,10 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     tabindex = -1;
 
+    /** Whether to show the separator when items are overflowing. */
+    @Input()
+    showSeparator = true;
+
     /**
      * Heading level of the toolbar title.
      */
@@ -181,7 +185,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     titleElement: ElementRef<HTMLHeadElement>;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => ToolbarItem))
+    @ContentChildren(forwardRef(() => ToolbarItem), { descendants: true })
     toolbarItems: QueryList<ToolbarItem>;
 
     /** @hidden */
@@ -211,10 +215,10 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     spacerUsed = signal(false);
 
     /** @hidden */
-    spacerDirectives = contentChildren(ToolbarSpacerDirective);
+    spacerDirectives = contentChildren(ToolbarSpacerDirective, { descendants: true });
 
     /** @hidden */
-    separatorDirectives = contentChildren(ToolbarSeparatorComponent);
+    separatorDirectives = contentChildren(ToolbarSeparatorComponent, { descendants: true });
 
     /** @hidden */
     _headingLevel = 2;
