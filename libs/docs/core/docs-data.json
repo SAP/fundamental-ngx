@@ -324,6 +324,10 @@
             "name": "Slider"
         },
         {
+            "url": "core/settings-dialog",
+            "name": "Settings Dialog"
+        },
+        {
             "url": "core/timeline",
             "name": "Timeline"
         },
