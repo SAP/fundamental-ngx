@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, HostBinding, Input, booleanAttribute, input } from '@angular/core';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
@@ -14,13 +14,14 @@ let panelContentUniqueId = 0;
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-panel-content]',
+    host: {
+        class: 'fd-panel__content',
+        '[class.fd-panel__content--no-padding]': 'noPadding()',
+        '[class.fd-panel__content--transparent]': 'transparent()'
+    },
     standalone: true
 })
 export class PanelContentDirective {
-    /** @hidden */
-    @HostBinding('class.fd-panel__content')
-    readonly fdPanelContentClass: boolean = true;
-
     /** Custom height of the content container. */
     @Input()
     @HostBinding('style.height')
@@ -50,6 +51,12 @@ export class PanelContentDirective {
     @Input()
     @HostBinding('attr.role')
     role = 'region';
+
+    /** Whether the content should have no padding. */
+    noPadding = input(false, { transform: booleanAttribute });
+
+    /** Whether the content has transparent background. */
+    transparent = input(false, { transform: booleanAttribute });
 
     /** Id of the host element. */
     @Input()
