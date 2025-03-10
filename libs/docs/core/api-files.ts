@@ -420,5 +420,17 @@ export const API_FILES = {
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
     ],
-    genericTag: ['GenericTagComponent']
+    genericTag: ['GenericTagComponent'],
+    settingsDialog: [
+        'SettingsComponent',
+        'SettingsContainerComponent',
+        'SettingsContentDirective',
+        'SettingsDetailAreaDirective',
+        'SettingsDialogBodyDirective',
+        'SettingsDialogContentDirective',
+        'SettingsHeaderDirective',
+        'SettingsHeaderButtonDirective',
+        'SettingsListAreaDirective',
+        'SettingsListContainerDirective'
+    ]
 };

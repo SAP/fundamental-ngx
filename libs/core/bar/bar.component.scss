@@ -1,1 +1,5 @@
 @import 'fundamental-styles/dist/bar.css';
+
+.fd-bar__left:has(.fd-bar__element > *:is(:empty, [style*='display: none'])) {
+    gap: 0;
+}

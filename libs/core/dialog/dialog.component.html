@@ -21,6 +21,7 @@
     [class.fd-dialog__content--draggable-grab]="dialogConfig.draggable && !isDragged"
     [class.fd-dialog__content--draggable-grabbing]="dialogConfig.draggable && isDragged"
     [class.fd-dialog__content-full-screen]="_fullScreen"
+    [class.fd-settings__dialog-content]="dialogConfig.settings"
     [cdkDragDisabled]="!dialogConfig.draggable"
     [fdkResizeDisabled]="!dialogConfig.resizable"
     [attr.id]="dialogConfig.id"
