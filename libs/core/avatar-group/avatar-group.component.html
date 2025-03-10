@@ -43,12 +43,12 @@
                     [ngTemplateOutletContext]="{ $implicit: hiddenItems }"
                 ></ng-template>
             </fd-popover-control>
-            <fd-popover-body>
+            <ng-template fdPopoverBody>
                 <ng-template
                     [ngTemplateOutlet]="avatarGroupOverflowBodyTemplate"
                     [ngTemplateOutletContext]="{ $implicit: hiddenItems }"
                 ></ng-template>
-            </fd-popover-body>
+            </ng-template>
         </fd-popover>
     </fd-avatar-group-host>
 } @else {
@@ -81,12 +81,12 @@
                 </ng-template>
             </fd-avatar-group-host>
         </fd-popover-control>
-        <fd-popover-body>
+        <ng-template fdPopoverBody>
             <ng-template
                 [ngTemplateOutlet]="avatarGroupOverflowBodyTemplate"
                 [ngTemplateOutletContext]="{ $implicit: _avatarRenderers }"
             ></ng-template>
-        </fd-popover-body>
+        </ng-template>
     </fd-popover>
 }
 <ng-template #overflowButtonTemplate let-hiddenItems>
