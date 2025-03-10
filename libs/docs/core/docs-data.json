@@ -152,6 +152,10 @@
                 {
                     "url": "core/list-byline",
                     "name": "List with Byline"
+                },
+                {
+                    "url": "core/list-subline",
+                    "name": "List with Subline"
                 }
             ]
         },
@@ -286,6 +290,10 @@
         {
             "url": "core/tree",
             "name": "Tree"
+        },
+        {
+            "url": "core/user-menu",
+            "name": "User Menu"
         },
         {
             "url": "core/switch",
