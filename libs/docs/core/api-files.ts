@@ -142,7 +142,8 @@ export const API_FILES = {
         'ListMessageDirective',
         'ListNavigationItemArrowDirective',
         'ListNavigationItemTextDirective',
-        'ListNavigationItemComponent'
+        'ListNavigationItemComponent',
+        'ListSublineDirective'
     ],
     menu: [
         'MenuAddonDirective',
@@ -432,5 +433,6 @@ export const API_FILES = {
         'SettingsHeaderButtonDirective',
         'SettingsListAreaDirective',
         'SettingsListContainerDirective'
-    ]
+    ],
+    userMenu: ['UserMenuComponent']
 };

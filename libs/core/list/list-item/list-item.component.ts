@@ -94,6 +94,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @Input()
     counter: number;
 
+    /** Whether list item shows active indicator. Used only in List with Subline. */
+    @Input()
+    active = false;
+
     /** Whether list item should contain additional unRead styles */
     @Input()
     @HostBinding('class.fd-list__item--unread')
