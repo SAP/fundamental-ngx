@@ -71,6 +71,7 @@ export * from '@fundamental-ngx/core/scroll-spy';
 export * from '@fundamental-ngx/core/scrollbar';
 export * from '@fundamental-ngx/core/segmented-button';
 export * from '@fundamental-ngx/core/select';
+export * from '@fundamental-ngx/core/settings';
 export * from '@fundamental-ngx/core/shared';
 export * from '@fundamental-ngx/core/shellbar';
 export * from '@fundamental-ngx/core/side-navigation';
