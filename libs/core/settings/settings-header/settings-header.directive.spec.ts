@@ -1,17 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsHeaderDirective } from '@fundamental-ngx/core/settings';
+import { SettingsHeaderDirective } from './settings-header.directive';
 
 @Component({
-    template: ` <div #directiveElement fd-settings-header>Settings Header Test Text</div> `,
+    template: `<div #directiveElement fd-settings-header>Settings Header Directive Test</div>`,
     standalone: true,
     imports: [SettingsHeaderDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
+    @ViewChild('directiveElement')
+    ref: ElementRef;
 }
-
 describe('SettingsHeaderDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -33,6 +32,6 @@ describe('SettingsHeaderDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-settings__header')).toBeTrue();
+        expect(component.ref.nativeElement.className).toContain('fd-settings__header');
     });
 });

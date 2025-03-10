@@ -1,29 +1,19 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsComponent } from './index';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { SettingsComponent } from './settings.component';
 
-@Component({
-    template: ` <div #componentElement fd-settings>Settings Component Test Text</div> `,
-    standalone: true,
-    imports: [SettingsComponent]
-})
-class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef, static: true })
-    ref!: ElementRef;
-}
-
-describe('SettingsComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+describe('SettingsContainerComponent', () => {
+    let component: SettingsComponent;
+    let fixture: ComponentFixture<SettingsComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestComponent]
+            imports: [SettingsComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(SettingsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -32,7 +22,9 @@ describe('SettingsComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should assign class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-settings')).toBeTrue();
+    it('should apply proper css classes', async () => {
+        await whenStable(fixture);
+
+        expect(fixture.nativeElement.classList.contains('fd-settings')).toBe(true);
     });
 });

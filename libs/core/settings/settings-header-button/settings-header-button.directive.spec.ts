@@ -1,17 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsHeaderButtonDirective } from '@fundamental-ngx/core/settings';
+import { SettingsHeaderButtonDirective } from './settings-header-button.directive';
 
 @Component({
-    template: ` <div #directiveElement fd-settings-header-button>Settings Header Button Test Text</div> `,
+    template: `<div #directiveElement fd-settings-header-button>Settings Header Button Directive Test</div>`,
     standalone: true,
     imports: [SettingsHeaderButtonDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
+    @ViewChild('directiveElement')
+    ref: ElementRef;
 }
-
 describe('SettingsHeaderButtonDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;

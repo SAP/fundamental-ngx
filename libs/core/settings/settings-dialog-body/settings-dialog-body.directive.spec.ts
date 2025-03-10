@@ -1,17 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsDialogBodyDirective } from '@fundamental-ngx/core/settings';
+import { SettingsDialogBodyDirective } from './settings-dialog-body.directive';
 
 @Component({
-    template: ` <div #directiveElement fd-settings-dialog-body>Settings Dialog Body Test Text</div> `,
+    template: `<div #directiveElement fd-settings-dialog-body>Settings Dialog Body Directive Test</div>`,
     standalone: true,
     imports: [SettingsDialogBodyDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
+    @ViewChild('directiveElement')
+    ref: ElementRef;
 }
-
 describe('SettingsDialogBodyDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -33,6 +32,6 @@ describe('SettingsDialogBodyDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-settings__dialog-body')).toBeTrue();
+        expect(component.ref.nativeElement.className).toContain('fd-settings__dialog-body');
     });
 });

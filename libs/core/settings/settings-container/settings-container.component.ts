@@ -97,7 +97,6 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /** @hidden */
     ngOnDestroy(): void {
         this._eventUnlisteners.forEach((unlistener) => unlistener());
-        this._eventUnlisteners = [];
     }
 
     /** @hidden */

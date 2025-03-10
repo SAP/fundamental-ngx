@@ -1,17 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsListAreaDirective } from '@fundamental-ngx/core/settings';
+import { SettingsListAreaDirective } from './settings-list-area.directive';
 
 @Component({
-    template: ` <div #directiveElement fd-settings-list-area>Settings List Area Test Text</div> `,
+    template: `<div #directiveElement fd-settings-list-area>Settings List Area Directive Test</div>`,
     standalone: true,
     imports: [SettingsListAreaDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: true })
-    ref!: ElementRef;
+    @ViewChild('directiveElement')
+    ref: ElementRef;
 }
-
 describe('SettingsListAreaDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -33,6 +32,6 @@ describe('SettingsListAreaDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-settings__list-area')).toBeTrue();
+        expect(component.ref.nativeElement.className).toContain('fd-settings__list-area');
     });
 });
