@@ -6,7 +6,7 @@
             (click)="stepContainerKeypress()"
             (keypress)="stepContainerKeypress($event)"
             [style.cursor]="visited ? 'pointer' : 'auto'"
-            [style.pointer-events]="visited ? 'auto' : 'none'"
+            [style.pointer-events]="['completed', 'current'].includes(status) || (visited && _isValidated) ? 'auto' : 'none'"
             [attr.tabindex]="status === 'current' ? 0 : -1"
             role="navigation"
         >

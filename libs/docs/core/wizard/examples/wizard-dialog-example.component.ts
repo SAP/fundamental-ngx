@@ -83,6 +83,10 @@ export class WizardDialogExampleComponent {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 
+    validateStep = (): boolean | Promise<boolean> => {
+        return (this.fullName != '' && this.addressLine1 != '');
+      };
+
     goToStep(step: number): void {
         switch (step) {
             case 1: {
