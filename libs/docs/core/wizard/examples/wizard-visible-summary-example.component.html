@@ -105,6 +105,7 @@
                         <li
                             fd-wizard-step
                             [status]="step3status"
+                            [stepClickValidator]="validateStep"
                             (statusChange)="statusChanged(3, $event)"
                             label="Additional Information"
                             optionalText="(Optional)"
