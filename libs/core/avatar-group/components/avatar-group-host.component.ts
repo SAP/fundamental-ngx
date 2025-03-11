@@ -33,7 +33,8 @@ import { AvatarGroupHostConfig } from '../types';
     template: '<ng-content></ng-content>',
     imports: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrl: './avatar-group-host.component.scss'
 })
 export class AvatarGroupHostComponent
     implements OnInit, AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig, CssClassBuilder
