@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
+ * @deprecated The shellbar subtitle component has been deprecated as of 0.54.2.
+ * 
  * The component that represents a shellbar subtitle.
  * The subtitle is optional and should be used rarely.
  * ```html

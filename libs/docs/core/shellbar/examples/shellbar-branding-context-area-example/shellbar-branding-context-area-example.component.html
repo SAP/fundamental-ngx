@@ -1,0 +1,71 @@
+<fd-toolbar [isShellbar]="true" [shouldOverflow]="true">
+    <button fd-button fd-toolbar-item fdOverflowPriority="never" fdType="transparent" glyph="menu2"></button>
+    <fd-shellbar-branding [interactiveBranding]="true" (fdkClicked)="brandingClicked($event)">
+        <fd-shellbar-logo fd-toolbar-item fdOverflowPriority="never">
+            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-shellbar-logo>
+        <fd-shellbar-title fd-toolbar-item fdOverflowPriority="disappear"> Corporate Portal </fd-shellbar-title>
+    </fd-shellbar-branding>
+
+    <fd-shellbar-separator fd-toolbar-item fdOverflowPriority="disappear"></fd-shellbar-separator>
+
+    <fd-shellbar-context-area fd-toolbar-item>
+        <fd-product-menu
+        [control]="'EMEA'"
+        [closePopoverOnSelect]="true"
+        [items]="productMenuItems"
+        >
+        </fd-product-menu>
+    </fd-shellbar-context-area>
+
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+
+    <button fd-button fd-toolbar-item fdOverflowPriority="always" label="always"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="never" label="never"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="low" label="low"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="high" label="high"></button>
+    <button fd-button fd-toolbar-item [fdOverflowPriority]="7" label="7"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="2" label="2"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="9" label="9"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="4" label="4"></button>
+    <button fd-button fd-toolbar-item [fdOverflowPriority]="5" label="5"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="1" label="1"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="6" label="6"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="8" label="8"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="10" label="10"></button>
+    <button fd-button fd-toolbar-item fdOverflowPriority="3" label="3"></button>
+
+    @for (action of actions; track action) {
+        <fd-shellbar-action
+            [glyph]="action.glyph"
+            [callback]="action.callback"
+            [label]="action.label"
+            [notificationCount]="action.notificationCount"
+            [notificationLabel]="action.notificationLabel"
+            fd-toolbar-item
+        ></fd-shellbar-action>
+    }
+    <fd-product-switch fd-toolbar-item>
+        <fd-product-switch-body [products]="productSwitcher">
+        </fd-product-switch-body>
+    </fd-product-switch>
+
+    <fd-shellbar-user-menu fd-toolbar-item fdOverflowPriority="never">
+        <button fd-button fdShellbarUserMenuButton [fdMenuTrigger]="menu">
+            <fd-avatar size="xs" [colorAccent]="$any(6)" [circle]="true" label="William Willson">
+            </fd-avatar>
+        </button>
+        <fd-menu #menu>
+            <li fd-menu-item (click)="settingsCallback($event)">
+                <div fd-menu-interactive>
+                    <span fd-menu-title>Settings</span>
+                </div>
+            </li>
+            <li fd-menu-item (click)="signOutCallback($event)">
+                <div fd-menu-interactive>
+                    <span fd-menu-title>Sign Out</span>
+                </div>
+            </li>
+        </fd-menu>
+    </fd-shellbar-user-menu>
+</fd-toolbar>
