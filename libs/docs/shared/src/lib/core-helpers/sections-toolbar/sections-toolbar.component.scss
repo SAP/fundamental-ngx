@@ -24,6 +24,12 @@
     overflow-y: auto;
 }
 
+.fd-docs-sidebar-content,
+.fd-docs-search {
+    border-right: var(--sapList_BorderWidth) solid;
+    border-right-color: var(--sapGroup_ContentBorderColor);
+}
+
 .nav {
     list-style: none;
     padding-left: 0;

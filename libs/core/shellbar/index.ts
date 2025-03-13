@@ -16,3 +16,6 @@ export * from './shellbar.module';
 export * from './tokens';
 export * from './user-menu/shellbar-user-menu-button.directive';
 export * from './user-menu/shellbar-user-menu.component';
+export * from './shellbar-branding/shellbar-branding.component';
+export * from './shellbar-context-area/shellbar-context-area.component';
+export * from './shellbar-separator/shellbar-separator.component';
