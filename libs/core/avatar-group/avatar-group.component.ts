@@ -15,7 +15,6 @@ import {
     inject
 } from '@angular/core';
 import {
-    DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
     ResizeObserverDirective,
@@ -51,7 +50,6 @@ import { AvatarGroupHostConfig } from './types';
         PopoverModule,
         NgTemplateOutlet,
         FocusableItemDirective,
-        DynamicPortalComponent,
         FocusableListDirective,
         DialogModule,
         AvatarGroupItemRendererDirective,

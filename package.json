@@ -163,6 +163,9 @@
     "wdio-chromedriver-service": "6.0.4",
     "webdriverio": "7.27.0"
   },
+  "resolutions": {
+    "nx": "19.2.3"
+  },
   "lint-staged": {
     "*": [
       "yarn nx format:write --uncommitted"

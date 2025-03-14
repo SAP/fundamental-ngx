@@ -34,7 +34,8 @@ import { AvatarGroupHostConfig } from '../types';
     standalone: true,
     imports: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrl: './avatar-group-host.component.scss'
 })
 export class AvatarGroupHostComponent
     implements OnInit, AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig, CssClassBuilder
