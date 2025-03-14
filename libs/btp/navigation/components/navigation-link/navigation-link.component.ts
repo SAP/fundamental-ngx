@@ -12,6 +12,7 @@ import {
     Signal,
     TemplateRef,
     ViewEncapsulation,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -34,7 +35,7 @@ export class NavigationLinkRefDirective {
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'a[fdb-navigation-link]',
+    selector: 'a[fdb-navigation-link], button[fdb-navigation-link]',
     imports: [IconComponent, NgTemplateOutlet],
     hostDirectives: [RouterLinkActive],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,7 +48,7 @@ export class NavigationLinkRefDirective {
     ],
     host: {
         class: 'fd-navigation__link',
-        role: 'link'
+        '[role]': 'quickCreate ? "button" : "link"'
     },
     templateUrl: './navigation-link.component.html'
 })
@@ -67,6 +68,10 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** Whether the link is for the external resource. */
     @Input()
     external = false;
+
+    /** Whether it's a quick create button. */
+    @Input({ transform: booleanAttribute })
+    quickCreate = false;
 
     /** @hidden */
     @HostBinding('attr.tabindex')
