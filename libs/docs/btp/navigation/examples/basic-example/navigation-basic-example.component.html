@@ -110,6 +110,17 @@
         </fdb-navigation-list-item>
     </fdb-navigation-content-start>
     <fdb-navigation-content-end>
+        <fdb-navigation-list-item quickCreate>
+            <button
+                fdb-navigation-link
+                quickCreate
+                glyph="write-new"
+                *fdbNavigationLinkRef
+                (click)="onQuickCreateClick()"
+            >
+                Quick Create
+            </button>
+        </fdb-navigation-list-item>
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="sys-help">Help</a>
         </fdb-navigation-list-item>

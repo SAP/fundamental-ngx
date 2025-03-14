@@ -3,6 +3,7 @@
     @if (!separator) {
         <div
             class="fd-navigation__item"
+            [class.fd-navigation__item--create]="quickCreate$()"
             [class.fd-navigation__item--group]="isGroup$()"
             [class.fd-navigation__item--child]="normalizedLevel$() > 2"
             [class.fd-navigation__item--overflow]="isOverflow$()"
@@ -63,10 +64,13 @@
 <!-- Generic link renderer. -->
 <ng-template #linkRenderer let-showToggleButton>
     <ng-template [ngTemplateOutlet]="linkRef?.templateRef || null"></ng-template>
-    @if (!!showToggleButton && !!link$()?.routerLink && hasChildren$()) {
-        <button (click)="toggleExpanded()" fd-button fdbNestedButton class="fd-navigation__expander">
-            <fd-icon [glyph]="_toggleIcon$()"></fd-icon>
-        </button>
+    @if (!!link$()?.routerLink && hasChildren$()) {
+        <span
+            class="fd-navigation__has-children-indicator"
+            role="button"
+            aria-label="expand/collapse children"
+            (click)="toggleExpanded()"
+        ></span>
     }
 </ng-template>
 <!-- Generic list renderer. Used when navigation is not snapped. -->

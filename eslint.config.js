@@ -311,5 +311,11 @@ module.exports = [
         rules: {
             '@angular-eslint/template/prefer-control-flow': 'error'
         }
+    },
+    {
+        files: ['**/*.html'],
+        rules: {
+            '@angular-eslint/template/elements-content': 'off'
+        }
     }
 ];
