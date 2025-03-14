@@ -152,6 +152,10 @@
                 {
                     "url": "core/list-byline",
                     "name": "List with Byline"
+                },
+                {
+                    "url": "core/list-subline",
+                    "name": "List with Subline"
                 }
             ]
         },
@@ -288,6 +292,10 @@
             "name": "Tree"
         },
         {
+            "url": "core/user-menu",
+            "name": "User Menu"
+        },
+        {
             "url": "core/switch",
             "name": "Switch"
         },
@@ -322,6 +330,10 @@
         {
             "url": "core/slider",
             "name": "Slider"
+        },
+        {
+            "url": "core/settings-dialog",
+            "name": "Settings Dialog"
         },
         {
             "url": "core/timeline",

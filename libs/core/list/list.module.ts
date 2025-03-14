@@ -13,6 +13,7 @@ import { ListNavigationItemTextDirective } from './directives/list-navigation-it
 import { ListSecondaryDirective } from './directives/list-secondary.directive';
 import { ListTitleTextDirective } from './directives/list-title-text.directive';
 import { ListTitleDirective } from './directives/list-title.directive';
+import { ListSublineDirective } from './directives/subline/list-subline.directive';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListMessageDirective } from './list-message.directive';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
@@ -36,7 +37,8 @@ const components = [
     ListTitleTextDirective,
     ListNavigationItemComponent,
     ListNavigationItemArrowDirective,
-    ListNavigationItemTextDirective
+    ListNavigationItemTextDirective,
+    ListSublineDirective
 ];
 
 @NgModule({
