@@ -107,6 +107,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return this._home$();
     }
 
+    /** Whether the list item represents "Quick create" button. */
+    @Input({ transform: booleanAttribute })
+    set quickCreate(value: boolean) {
+        this.quickCreate$.set(value);
+    }
+
+    get quickCreate(): boolean {
+        return this.quickCreate$();
+    }
+
     /** Whether the list item should be rendered as a separator */
     @Input({ transform: booleanAttribute })
     set separator(value: boolean) {
@@ -243,6 +253,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** Selected Signal. */
     readonly selected$ = signal(false);
+
+    /** @hidden */
+    readonly quickCreate$ = signal(false);
 
     /**
      * @hidden

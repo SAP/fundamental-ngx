@@ -16,4 +16,8 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
 export class NavigationParentItemLinkComponent {
     state: FdbNavigationState = 'expanded';
     mode: FdbViewMode = '';
+
+    onQuickCreateClick(): void {
+        alert('Quick create!');
+    }
 }
