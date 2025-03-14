@@ -80,6 +80,14 @@ export class WizardVisibleSummaryExampleComponent {
         });
     }
 
+    validateStep = (): boolean | Promise<boolean> => {
+        if (this.fullName === '' || this.addressLine1 === '') {
+            return false;
+        }
+
+        return true;
+      };
+
     goToStep(step: number): void {
         switch (step) {
             case 1: {
