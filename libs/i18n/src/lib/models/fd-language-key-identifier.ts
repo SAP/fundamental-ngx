@@ -441,6 +441,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.confirmBtnLabel'
     | 'platformTable.cancelBtnLabel'
     | 'platformTable.filteredBy'
+    | 'platformTable.clearFilters'
     | 'platformTable.showingBlankOfBlank'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'platformMessagePopover.allErrors'
