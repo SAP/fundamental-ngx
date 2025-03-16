@@ -65,7 +65,7 @@ jobs:
               run: npx nx-cloud start-ci-run
 
             - name: Format Check
-              run: npx prettier --check
+              run: npx prettier . --check
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
