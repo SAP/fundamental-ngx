@@ -35,12 +35,7 @@ describe('DialogService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                OverlayModule,
-                NoopAnimationsModule,
-                TemplateTestComponent,
-                DialogServiceTestComponent
-            ]
+            imports: [OverlayModule, NoopAnimationsModule, TemplateTestComponent, DialogServiceTestComponent]
         }).compileComponents();
     });
 

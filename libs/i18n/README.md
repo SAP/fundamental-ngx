@@ -8,13 +8,13 @@
 
 ## Content
 
--   [1. Description](#1-description)
--   [2. Requirements](#2-requirements)
--   [3. Versioning](#3-versioning)
--   [4. Known Issues](#4-known-issues)
--   [5. Support](#5-support)
--   [6. Contributing](#6-contributing)
--   [7. License](https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt)
+- [1. Description](#1-description)
+- [2. Requirements](#2-requirements)
+- [3. Versioning](#3-versioning)
+- [4. Known Issues](#4-known-issues)
+- [5. Support](#5-support)
+- [6. Contributing](#6-contributing)
+- [7. License](https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt)
 
 ## 1. Description
 
