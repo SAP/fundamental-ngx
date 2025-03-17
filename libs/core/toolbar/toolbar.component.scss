@@ -11,3 +11,11 @@ fdk-dynamic-portal {
         }
     }
 }
+
+.fd-toolbar.fd-shellbar {
+    height: 3.25rem;
+
+    .fd-toolbar__shellbar-overflow {
+        --fdButtonColor: var(--sapShell_TextColor);
+    }
+}

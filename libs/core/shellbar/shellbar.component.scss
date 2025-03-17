@@ -20,16 +20,41 @@
     }
 }
 
-fd-shellbar-actions {
-    .fd-shellbar__search-field {
-        min-width: 15rem;
-    }
-}
-
 .fd-shellbar__action.fd-shellbar__action--desktop:empty {
     display: none;
 }
 
 .fd-shellbar .fd-shellbar__group .fd-shellbar__button.fd-shellbar__button--menu {
     --fdButtonColor: var(--sapShell_TextColor);
+}
+
+.fd-shellbar--s, .fd-shellbar--m {
+    .fd-shellbar__search-field {
+        min-width: auto;
+    }
+}
+
+.fd-shellbar.fd-shellbar--s {
+    .fd-shellbar__group--actions {
+        gap: 0.25rem;
+    }
+        .fd-shellbar__search-field {
+            max-width: 12.5rem;
+        }
+}
+
+.fd-shellbar.fd-shellbar--m {
+    fd-shellbar-actions {
+        .fd-shellbar__search-field {
+            max-width: 15rem;
+
+            .fd-shellbar__search-field-input {
+                max-width: 6rem;
+            }
+        }
+    }
+}
+
+.fd-button.fd-shellbar__button.fd-shellbar__button--user-menu {
+    padding: 0 !important;
 }

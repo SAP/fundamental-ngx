@@ -8,7 +8,9 @@
     @if (!spacerUsed()) {
         <fd-toolbar-spacer></fd-toolbar-spacer>
     }
-    <fd-toolbar-separator></fd-toolbar-separator>
+    @if (!isShellbar) {
+        <fd-toolbar-separator></fd-toolbar-separator>
+    }
     <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
         <fd-popover-control>
             <button
@@ -18,6 +20,7 @@
                 aria-haspopup="true"
                 fdType="transparent"
                 glyph="overflow"
+                [class.fd-toolbar__shellbar-overflow]="isShellbar"
             ></button>
         </fd-popover-control>
         <fd-popover-body>

@@ -56,6 +56,14 @@ const MAX_CONTENT_SIZE = 99999999;
 
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
 
+export function _getOverflowPriorityScore(priority: OverflowPriority): number {
+    if (typeof priority === 'number') {
+        return priority;
+    } else {
+        return OVERFLOW_PRIORITY_SCORE.get(priority) ?? 1;
+    }
+}
+
 export const enum OverflowPriorityEnum {
     ALWAYS = 'always',
     NEVER = 'never',
@@ -166,12 +174,17 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string;
 
+    /** Whether the toolbar is a shellbar. Applies shellbar-specific styling and behavior. */
+    @Input()
+    @HostBinding('class.fd-shellbar')
+    isShellbar = false;
+
     /** @hidden */
     @ViewChild('titleElement', { read: ElementRef })
     titleElement: ElementRef<HTMLHeadElement>;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => ToolbarItem))
+    @ContentChildren(forwardRef(() => ToolbarItem), { descendants: true })
     toolbarItems: QueryList<ToolbarItem>;
 
     /** @hidden */
@@ -369,7 +382,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         groupedCollectionPriority?: Record<number, OverflowPriority>
     ): number {
         const priority = groupedCollectionPriority;
-        if (!priority || !OVERFLOW_PRIORITY_SCORE.get(priority[itemGroup])) {
+        if (!priority || !_getOverflowPriorityScore(priority[itemGroup])) {
             return itemGroup;
         }
 
@@ -379,7 +392,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             const lowestGroupPriority = priority[lowestGroup];
             const currentGroupPriority = priority[currentGroup];
             if (
-                OVERFLOW_PRIORITY_SCORE.get(currentGroupPriority)! < OVERFLOW_PRIORITY_SCORE.get(lowestGroupPriority)!
+                _getOverflowPriorityScore(currentGroupPriority)! < _getOverflowPriorityScore(lowestGroupPriority)!
             ) {
                 return +currentGroup;
             }
@@ -455,7 +468,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden Sort priorities of elements/groups. */
     private _sortPriorities(a: OverflowPriority, b: OverflowPriority): number {
-        return OVERFLOW_PRIORITY_SCORE.get(b)! - OVERFLOW_PRIORITY_SCORE.get(a)!;
+        return _getOverflowPriorityScore(b)! - _getOverflowPriorityScore(a)!;
     }
 
     /** @hidden Sort by group and priority and initial position */
@@ -490,7 +503,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                     minIndex = Math.min(minIndex, item.index);
                     maxPriority = Math.max(
                         maxPriority,
-                        OVERFLOW_PRIORITY_SCORE.get(item.element.priority) ?? -Infinity
+                        _getOverflowPriorityScore(item.element.priority) ?? -Infinity
                     );
                 }
 
@@ -501,11 +514,12 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                     ? []
                     : groups[0].map((item) => ({
                           group: [item.element],
-                          maxPriority: OVERFLOW_PRIORITY_SCORE.get(item.element.priority),
+                          maxPriority: _getOverflowPriorityScore(item.element.priority),
                           minIndex: item.index
                       }))
             )
             .sort((a, b) => b.maxPriority - a.maxPriority || a.minIndex - b.minIndex)
-            .reduce((arr, i) => arr.concat(i.group), []);
+            .reduce((arr, i) => arr.concat(i.group), [])
+            .reverse(); // need to reverse as the ordering presented to the developer has lower numbers as higher priorities
     }
 }

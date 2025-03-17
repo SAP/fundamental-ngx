@@ -1,44 +1,36 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
+import { ClickedDirective } from '@fundamental-ngx/cdk';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import {
-    ProductMenuComponent,
-    ShellbarActionComponent,
-    ShellbarActionsComponent,
-    ShellbarComponent,
-    ShellbarGroupFlexOptions,
-    ShellbarLogoComponent,
     ShellbarMenuItem,
-    ShellbarUser,
-    ShellbarUserMenu
+    ShellbarModule
 } from '@fundamental-ngx/core/shellbar';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 @Component({
-    selector: 'fd-shellbar-growing-group-example',
-    templateUrl: './shellbar-growing-group-example.component.html',
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ShellbarComponent,
-        ShellbarLogoComponent,
-        ProductMenuComponent,
-        ShellbarActionsComponent,
-        ShellbarActionComponent,
-        ProductSwitchModule
-    ]
+    selector: 'fd-shellbar-branding-context-area-example',
+    templateUrl: './shellbar-branding-context-area-example.component.html',
+    imports: [ToolbarModule, ShellbarModule, MenuModule, AvatarComponent, ClickedDirective, ButtonComponent, ProductSwitchModule]
 })
-export class ShellbarGrowingGroupExampleComponent {
-    groupConfig: ShellbarGroupFlexOptions = {
-        product: {
-            shrink: true,
-            flexBasisAuto: true
-        },
-        actions: {
-            shrink: true,
-            flexBasisAuto: true
-        }
-    };
+export class ShellbarBrandingContextAreaExampleComponent {
+    showSearch = false;
 
-    productMenuControl = 'Corporate Portal';
+    brandingClicked($event: Event): void {
+        console.log($event);
+        alert('Branding clicked');
+    }
+    settingsCallback($event: MouseEvent): void {
+        console.log({ $event });
+        alert('Settings Clicked');
+    }
+
+    signOutCallback($event: MouseEvent): void {
+        console.log({ $event });
+        alert('Sign Out Clicked');
+    }
 
     productMenuItems: ShellbarMenuItem[] = [
         {
@@ -65,16 +57,6 @@ export class ShellbarGrowingGroupExampleComponent {
                 alert('Application D Clicked');
             }
         }
-    ];
-
-    user: ShellbarUser = {
-        fullName: 'William Willson',
-        colorAccent: 1
-    };
-
-    userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: this.settingsCallback },
-        { text: 'Sign Out', callback: this.signOutCallback }
     ];
 
     actions = [
@@ -155,16 +137,6 @@ export class ShellbarGrowingGroupExampleComponent {
             icon: 'batch-payments'
         }
     ];
-
-    settingsCallback($event): void {
-        console.log($event);
-        alert('Settings Clicked');
-    }
-
-    signOutCallback($event): void {
-        console.log($event);
-        alert('Sign Out Clicked');
-    }
 
     actionNotificationCallback($event): void {
         console.log($event);

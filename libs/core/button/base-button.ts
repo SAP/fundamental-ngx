@@ -61,7 +61,7 @@ export class BaseButton implements HasElementRef {
      * Text rendered inside button component
      */
     @Input()
-    label: string;
+    label: Nullable<string>;
 
     /** Whether to apply menu mode to the button.
      * Default value is set to false

@@ -7,6 +7,7 @@
         [glyph]="glyph"
         [glyphFont]="glyphFont"
         (click)="callback ? callback($event) : ''"
+        [label]="!glyph ? label : null"
     >
         @if (notificationCount) {
             <span class="fd-button__badge" [attr.aria-label]="notificationLabel">

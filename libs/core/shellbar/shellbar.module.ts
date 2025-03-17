@@ -12,6 +12,10 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
+import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
+import { ShellbarUserMenuButtonDirective } from './user-menu/shellbar-user-menu-button.directive';
+import { ShellbarContextAreaComponent } from './shellbar-context-area/shellbar-context-area.component';
+import { ShellbarSeparatorComponent } from './shellbar-separator/shellbar-separator.component';
 
 @NgModule({
     imports: [
@@ -24,7 +28,11 @@ import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.compon
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective
+        ShellbarUserMenuButtonDirective,
+        ShellbarSidenavDirective,
+        ShellbarBrandingComponent,
+        ShellbarContextAreaComponent,
+        ShellbarSeparatorComponent
     ],
     exports: [
         ShellbarComponent,
@@ -36,7 +44,11 @@ import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.compon
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
+        ShellbarUserMenuButtonDirective,
         ShellbarSidenavDirective,
+        ShellbarBrandingComponent,
+        ShellbarContextAreaComponent,
+        ShellbarSeparatorComponent,
         ContentDensityModule
     ]
 })

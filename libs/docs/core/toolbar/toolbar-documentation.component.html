@@ -41,27 +41,34 @@
 </fd-docs-section-title>
 <description>
     Individual child elements can be "prioritized" for the overflow behavior using the
-    <code class="code-snippet">fdOverflowPriority</code> attribute directive. The values for prioritization are as
-    follows:
+    <code class="code-snippet">fdOverflowPriority</code> attribute directive. This directive accepts input in the form
+    of some strings, or the numbers 1 through 10. The string options behave as follows:
     <ul>
-        <li><code class="code-snippet">always</code> - This element will always be positioned in the overflow menu.</li>
         <li>
-            <code class="code-snippet">never</code> - This element will never be added to the overflow. It will always
-            be visible in the toolbar.
+            <code class="code-snippet">always</code> - This element will always be positioned in the overflow menu.
+        </li>
+        <li>
+            <code class="code-snippet">never</code> - This element will never be added to the overflow.
         </li>
         <li>
             <code class="code-snippet">low</code> - The element has low priority and will be consider first for moving
-            to overflow menu.
+            to overflow menu. This is the same behavior as using the number 10.
         </li>
         <li>
             <code class="code-snippet">high</code> - This element has high priority and will be considered last for
-            moving to overflow menu.
+            moving to overflow menu. This is the same behavior as using the number 1.
         </li>
         <li>
             <code class="code-snippet">disappear</code> - This element is not important and will be removed from the
             toolbar, and will not be added to the overflow menu.
         </li>
     </ul>
+
+    If numbers are provided instead of strings, items with larger numbers will be moved to the overflow menu before
+    those with smaller numbers. For example, an item with <code>fdOverflowPriority="7"</code> will be moved to the
+    overflow before an item with <code>fdOverflowPriority="2"</code>. Items with <code>fdOverflowPriority="high"</code>
+    are equivalent to <code>fdOverflowPriority="1"</code> and items with <code>fdOverflowPriority="low"</code>
+    are equivalent to <code>fdOverflowPriority="10"</code>.
 </description>
 <component-example>
     <fd-toolbar-overflow-priority-example></fd-toolbar-overflow-priority-example>
