@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UserMenuComponent } from './user-menu.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { UserMenuComponent } from './user-menu.component';
 
 @Component({
     template: `<fd-user-menu #elRef>User Menu Test</fd-user-menu>`,
@@ -13,7 +13,7 @@ class TestHostComponent {
     @ViewChild('elRef', { read: ElementRef })
     elRef: ElementRef;
 
-     hasIcons = false;
+    hasIcons = false;
 }
 
 describe('UserMenuComponent', () => {

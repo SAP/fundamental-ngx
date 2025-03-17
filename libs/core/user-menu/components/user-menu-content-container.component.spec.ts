@@ -1,6 +1,6 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserMenuContentContainerComponent } from './user-menu-content-container.component';
-import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     template: `<div fd-user-menu-content-container #elRef>Content</div>`,

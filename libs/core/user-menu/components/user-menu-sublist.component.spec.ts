@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UserMenuSublistComponent } from './user-menu-sublist.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
+import { UserMenuSublistComponent } from './user-menu-sublist.component';
 
 @Component({
     template: `<div fd-user-menu-sublist #elRef [hasIcons]="hasIcons">User Menu Sublist Test</div>`,
@@ -40,7 +40,7 @@ describe('UserMenuSublistComponent', () => {
         expect(component.elRef.nativeElement.classList).toContain('fd-menu');
         expect(component.elRef.nativeElement.classList).toContain('fd-user-menu__menu');
     });
-    
+
     it('should add modifier class', () => {
         component.hasIcons = true;
         fixture.detectChanges();

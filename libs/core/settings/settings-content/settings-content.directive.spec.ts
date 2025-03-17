@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SettingsContentDirective } from './settings-content.directive';
 
 @Component({
-    template: `<div #directiveElement fd-settings-content [noPadding]="noPadding" [noBackground]="noBackground">Settings Content Directive Test</div>`,
+    template: `<div #directiveElement fd-settings-content [noPadding]="noPadding" [noBackground]="noBackground">
+        Settings Content Directive Test
+    </div>`,
     standalone: true,
     imports: [SettingsContentDirective]
 })
