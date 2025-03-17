@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { UserMenuBodyComponent } from './user-menu-body.component';
 import { UserMenuHeaderDirective } from '../directives/user-menu-header.directive';
+import { UserMenuBodyComponent } from './user-menu-body.component';
 import { UserMenuContentContainerComponent } from './user-menu-content-container.component';
 
 @Component({
@@ -45,4 +45,3 @@ describe('UserMenuBodyComponent', () => {
         expect(component.elRef.nativeElement.classList).toContain('fd-user-menu__body');
     });
 });
-
