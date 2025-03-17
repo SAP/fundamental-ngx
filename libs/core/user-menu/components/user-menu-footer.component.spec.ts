@@ -1,6 +1,6 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserMenuFooterComponent } from './user-menu-footer.component';
-import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     template: `<fd-user-menu-footer #elRef>User Menu Footer Test</fd-user-menu-footer>`,
