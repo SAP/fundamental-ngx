@@ -65,7 +65,7 @@ jobs:
               run: npx nx-cloud start-ci-run
 
             - name: Format Check
-              run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
+              run: npx prettier . --check
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 

@@ -32,15 +32,7 @@ let randomId = 0;
     standalone: true
 })
 export class CvaDirective<T = any>
-    implements
-        HasElementRef,
-        BaseCVA,
-        FormFieldControl,
-        OnInit,
-        DoCheck,
-        AfterViewInit,
-        OnDestroy,
-        ControlValueAccessor
+    implements HasElementRef, BaseCVA, FormFieldControl, OnInit, DoCheck, AfterViewInit, OnDestroy, ControlValueAccessor
 {
     /** Input placeholder */
     @Input()

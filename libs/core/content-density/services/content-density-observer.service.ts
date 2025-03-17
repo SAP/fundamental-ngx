@@ -174,7 +174,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
             contentDensityDirective: this._contentDensityDirective ?? undefined,
             contentDensityService: this._globalContentDensityService ?? undefined,
             parentContentDensityService: this.config.restrictChildContentDensity
-                ? this._parentContentDensityObserver?.asObservable() ?? undefined
+                ? (this._parentContentDensityObserver?.asObservable() ?? undefined)
                 : undefined
         })
             .pipe(

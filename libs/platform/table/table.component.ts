@@ -2346,7 +2346,7 @@ export class TableComponent<T = any>
     /** @hidden */
     private _setSelectionColumnWidth(): void {
         this._selectionColumnWidth = this.isSelectionColumnShown
-            ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
+            ? (SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0)
             : 0;
     }
 

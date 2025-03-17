@@ -35,12 +35,7 @@ describe('MessageBoxService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                OverlayModule,
-                NoopAnimationsModule,
-                TemplateTestComponent,
-                MessageBoxServiceTestComponent
-            ]
+            imports: [OverlayModule, NoopAnimationsModule, TemplateTestComponent, MessageBoxServiceTestComponent]
         }).compileComponents();
     });
 

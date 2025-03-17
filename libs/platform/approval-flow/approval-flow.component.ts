@@ -981,7 +981,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         const isParentParallelStart = this._graphMetadata[parent?.id]?.parallelStart;
         const isTargetParallelEnd = this._graphMetadata[target]?.parallelEnd;
         const targets =
-            (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : currNode?.targets ?? [];
+            (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : (currNode?.targets ?? []);
 
         this._replaceTargets(nodeToDelete.id, targets);
 
