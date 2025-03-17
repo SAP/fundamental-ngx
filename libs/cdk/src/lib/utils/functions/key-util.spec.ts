@@ -113,7 +113,7 @@ describe('KeyUtil', () => {
     describe('isKeyType', () => {
         interface TestValue {
             event: KeyboardEvent;
-            keyType: 'numeric' | 'alphabetical' | null | undefined;
+            keyType: 'numeric' | 'alphabetical' | 'ime' | null | undefined;
         }
 
         const positiveTestValues: TestValue[] = [
@@ -160,6 +160,20 @@ describe('KeyUtil', () => {
                     keyCode: 57
                 },
                 keyType: 'numeric'
+            },
+            {
+                event: {
+                    ...new KeyboardEvent('Space', { code: 'Space' }),
+                    key: 'Process'
+                },
+                keyType: 'ime'
+            },
+            {
+                event: {
+                    ...new KeyboardEvent('Space', { code: 'Space' }),
+                    keyCode: 229
+                },
+                keyType: 'ime'
             }
         ];
 
@@ -191,6 +205,20 @@ describe('KeyUtil', () => {
                     keyCode: 48
                 },
                 keyType: 'alphabetical'
+            },
+            {
+                event: {
+                    ...new KeyboardEvent('Space', { code: 'Space' }),
+                    keyCode: 48
+                },
+                keyType: 'ime'
+            },
+            {
+                event: {
+                    ...new KeyboardEvent('Space', { code: 'Space' }),
+                    key: ' '
+                },
+                keyType: 'ime'
             }
         ];
 
