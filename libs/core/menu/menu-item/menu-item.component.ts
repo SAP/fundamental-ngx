@@ -194,8 +194,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     /** @hidden Creates click listener on menu item interactive element */
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
-            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click').subscribe(
-                () => this.menuService?.setActive(true, this)
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click').subscribe(() =>
+                this.menuService?.setActive(true, this)
             )
         );
     }

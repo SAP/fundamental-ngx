@@ -5,11 +5,11 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicPageHeaderComponent } from '@fundamental-ngx/core/dynamic-page';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageGlobalActionsComponent } from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../../dynamic-page-header/key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleComponent } from '../../dynamic-page-header/title/dynamic-page-title.component';
-import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageComponent } from '../../dynamic-page.component';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 

@@ -525,12 +525,11 @@ export class FormGroupComponent
 
     /** @hidden */
     private _listenFormFieldColumnChange(): void {
-        this.formGroupChildren.forEach(
-            (field: FormGroupField) =>
-                (<FormFieldComponent>field).onColumnChange?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                    this._updateFieldByColumn();
-                    this._cd.markForCheck();
-                })
+        this.formGroupChildren.forEach((field: FormGroupField) =>
+            (<FormFieldComponent>field).onColumnChange?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+                this._updateFieldByColumn();
+                this._cd.markForCheck();
+            })
         );
     }
 

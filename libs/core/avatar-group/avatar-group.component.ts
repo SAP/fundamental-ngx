@@ -19,12 +19,7 @@ import {
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
-import {
-    PopoverBodyComponent,
-    PopoverBodyDirective,
-    PopoverComponent,
-    PopoverControlComponent
-} from '@fundamental-ngx/core/popover';
+import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -52,7 +47,6 @@ import { AvatarGroupHostConfig } from './types';
         AvatarGroupHostComponent,
         PopoverComponent,
         PopoverControlComponent,
-        PopoverBodyComponent,
         PopoverBodyDirective,
         NgTemplateOutlet,
         FocusableItemDirective,

@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.1...v0.55.2-rc.0) (2025-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.55.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.1-rc.1...v0.55.1) (2025-03-10)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.55.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.1-rc.0...v0.55.1-rc.1) (2025-03-10)
+
+
+### Bug Fixes
+
+* remove belize from schematics, update cdk imports in platform table ([#13099](https://github.com/SAP/fundamental-ngx/issues/13099)) ([5a5795c](https://github.com/SAP/fundamental-ngx/commit/5a5795c5b204fe8850335a42491bf098dea47053))
+
+
+
+
+
 ## [0.55.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.0...v0.55.1-rc.0) (2025-03-07)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
