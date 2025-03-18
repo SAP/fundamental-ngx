@@ -670,6 +670,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._changeDetRef.detectChanges();
         });
         this._subscriptions.add(sub);
+        if (isListItem) {
+            this.openChangeHandle(false);
+            this.searchInputElement?.nativeElement.focus();
+        } else {
+            event.stopPropagation();
+        }
     }
 
     /** @hidden */
