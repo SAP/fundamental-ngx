@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.1...v0.55.2-rc.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* **core:** checkbox clicking in multi input ([#13124](https://github.com/SAP/fundamental-ngx/issues/13124)) ([566d6f6](https://github.com/SAP/fundamental-ngx/commit/566d6f68704aa8003f7d9ebf8d09f2475aea0a31))
+
+
+
+
+
+## [0.55.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.0...v0.55.2-rc.1) (2025-03-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.1...v0.55.2-rc.0) (2025-03-14)
+
+
+### Features
+
+* lazy load popover body in all cases for the avatar group ([#13090](https://github.com/SAP/fundamental-ngx/issues/13090)) ([2797e4c](https://github.com/SAP/fundamental-ngx/commit/2797e4c3bac2ce08154565fa5de70e65444a49ad))
+
+
+
+
+
 ## [0.55.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.1-rc.1...v0.55.1) (2025-03-10)
 
 **Note:** Version bump only for package fundamental-ngx

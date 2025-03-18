@@ -139,8 +139,8 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
 
     /** @hidden */
     private _sortNativeElements(): void {
-        this.cells.forEach(
-            (cell) => cell.elementRef.nativeElement.parentNode?.appendChild(cell.elementRef.nativeElement)
+        this.cells.forEach((cell) =>
+            cell.elementRef.nativeElement.parentNode?.appendChild(cell.elementRef.nativeElement)
         );
     }
 

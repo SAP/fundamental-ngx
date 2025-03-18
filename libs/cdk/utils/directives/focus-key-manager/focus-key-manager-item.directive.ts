@@ -20,7 +20,7 @@ export class FocusKeyManagerItemDirective implements FocusableOption {
     @Input()
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
-        return this.initialFocus ? 0 : this.nativeElement?.tabIndex ?? -1;
+        return this.initialFocus ? 0 : (this.nativeElement?.tabIndex ?? -1);
     }
 
     /** Native element of the item */

@@ -3,26 +3,26 @@
 We're excited that you're interested in contributing to Fundamental Library for Angular! Your contribution can make this library even better.
 As a contributor, here are the guidelines we would like you to follow:
 
--   [Issues and Bugs](#issues-and-bugs)
--   [Feature Requests](#feature-requests)
--   [Contribute Code](#contribute-code)
--   [Submission Guidelines](#submit)
--   [Commit Message Guidelines](#commit)
--   [Create PR Title Guidelines](#pr)
--   [Submitting a Pull Request ](#submit-pr)
--   [CI PipeLine Description](#ci-pipeline)
--   [Coding Rules](#rules)
--   [Signing the CLA](#cla)
+- [Issues and Bugs](#issues-and-bugs)
+- [Feature Requests](#feature-requests)
+- [Contribute Code](#contribute-code)
+- [Submission Guidelines](#submit)
+- [Commit Message Guidelines](#commit)
+- [Create PR Title Guidelines](#pr)
+- [Submitting a Pull Request ](#submit-pr)
+- [CI PipeLine Description](#ci-pipeline)
+- [Coding Rules](#rules)
+- [Signing the CLA](#cla)
 
 ## Issues and Bugs
 
 If you find a bug or some other issue with any part of the library, please [submit an issue](https://github.com/SAP/fundamental-ngx/issues). Before doing so, please make sure that:
 
--   The issue is not a duplicate issue.
--   The issue has not been fixed in a newer release of the library.
--   The issue is reproducible.
--   Your explanation is clear and complete.
--   You provide example code and/or screenshots (recommended).
+- The issue is not a duplicate issue.
+- The issue has not been fixed in a newer release of the library.
+- The issue is reproducible.
+- Your explanation is clear and complete.
+- You provide example code and/or screenshots (recommended).
 
 If you meet the above criteria, you can submit issues with our [GitHub issue tracker](https://github.com/SAP/fundamental-ngx/issues/new). Please use [labels](#usage-of-labels) to categorize your issue.
 
@@ -36,25 +36,25 @@ GitHub offers labels to categorize issues. You can use the following labels:
 
 Labels for issue categories:
 
--   bug: Issues in the code.
--   documentation: Issues with the documentation.
--   enhancement: Enhancement requests.
+- bug: Issues in the code.
+- documentation: Issues with the documentation.
+- enhancement: Enhancement requests.
 
 Status of open issues:
 
--   (no label): The default status.
--   unconfirmed: The issue needs to be confirmed as being a bug or future enhancement.
--   approved: The issue is confirmed as being a bug to be fixed or enhancement to be developed.
--   author action: The issue's creator needs to provide additional information.
--   contribution welcome: The fix or enhancement is approved and you are invited to contribute to it.
+- (no label): The default status.
+- unconfirmed: The issue needs to be confirmed as being a bug or future enhancement.
+- approved: The issue is confirmed as being a bug to be fixed or enhancement to be developed.
+- author action: The issue's creator needs to provide additional information.
+- contribution welcome: The fix or enhancement is approved and you are invited to contribute to it.
 
 Status of closed issues:
 
--   fixed: A fix for the issue was provided.
--   duplicate: The issue is also reported in a different ticket and is being managed there.
--   invalid: The reported issue will not be addressed.
--   works: The issue cannot be reproduced, or the feature is working as expected.
--   wontfix: The issue will not be fixed.
+- fixed: A fix for the issue was provided.
+- duplicate: The issue is also reported in a different ticket and is being managed there.
+- invalid: The reported issue will not be addressed.
+- works: The issue cannot be reproduced, or the feature is working as expected.
+- wontfix: The issue will not be fixed.
 
 ## <a name="contribute-code"></a> Contribute Code
 
@@ -130,14 +130,14 @@ If the commit reverts a previous commit, it should begin with `revert: `, follow
 
 Must be one of the following:
 
--   **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
--   **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
--   **docs**: Documentation only changes
--   **feat**: A new feature
--   **fix**: A bug fix
--   **refactor**: A code change that neither fixes a bug nor adds a feature
--   **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
--   **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
 
 ### Scope
 
@@ -146,32 +146,32 @@ generated from commit messages).
 
 The following is the list of supported scopes:
 
--   **core**
--   **platform**
--   **docs**
--   **e2e**
--   **cdk**
--   **cx**
+- **core**
+- **platform**
+- **docs**
+- **e2e**
+- **cdk**
+- **cx**
 
 There are currently a few exceptions to the "use package name" rule:
 
--   **changelog**: used for updating the release notes in CHANGELOG.md
--   **docs**: used for docs-app (angular.io) related changes within the /aio directory of the
-    repo
--   **shared**: changes across documentation shared by several modules
--   **ci**: changes to CI tooling
--   **release**: release commits (auto-generated)
--   **deps**: changes to dependencies (auto-generated)
--   **deps-dev**: changes to dev dependencies (auto-generated)
--   **changelog**
+- **changelog**: used for updating the release notes in CHANGELOG.md
+- **docs**: used for docs-app (angular.io) related changes within the /aio directory of the
+  repo
+- **shared**: changes across documentation shared by several modules
+- **ci**: changes to CI tooling
+- **release**: release commits (auto-generated)
+- **deps**: changes to dependencies (auto-generated)
+- **deps-dev**: changes to dev dependencies (auto-generated)
+- **changelog**
 
 ### Multiple scopes
 
 To use multiple scopes need to follow those delimiter options are:
 
--   "/"
--   "\\"
--   ","
+- "/"
+- "\\"
+- ","
 
 Samples:
 
@@ -185,9 +185,9 @@ fix(core/platform): message
 
 The subject contains a succinct description of the change:
 
--   use the imperative, present tense: "change" not "changed" nor "changes"
--   don't capitalize the first letter
--   no dot (.) at the end
+- use the imperative, present tense: "change" not "changed" nor "changes"
+- don't capitalize the first letter
+- no dot (.) at the end
 
 ### Body
 
@@ -245,19 +245,19 @@ generated from commit messages). Capitalize the first letter.
 
 The following is the list of supported scopes:
 
--   **core**
--   **platform**
--   **docs**
--   **e2e**
+- **core**
+- **platform**
+- **docs**
+- **e2e**
 
 Here are following rules behind the PR title message:
 
--   Bump up PATCH version -` fix:` or `feat:`
-    -   Here goes all the features and fixes commits
--   To bump up the MINOR version (the feature):
-    -   We run script to change the middle number.
--   To bump the MAJOR
-    -   Run script as well. The process was adjusted to work only with Patch and Minor versions at the moment
+- Bump up PATCH version -` fix:` or `feat:`
+    - Here goes all the features and fixes commits
+- To bump up the MINOR version (the feature):
+    - We run script to change the middle number.
+- To bump the MAJOR
+    - Run script as well. The process was adjusted to work only with Patch and Minor versions at the moment
 
 ## <a name="submit-issue"></a> Submitting an Issue
 
@@ -310,11 +310,11 @@ There should not be any Merge commits. When they are you haven't properly rebase
 
 1. In GitHub, Create Pull Request.
 
--   If we suggest changes then:
+- If we suggest changes then:
 
-    -   Make the required updates.
-    -   Re-run the test suites to ensure tests are still passing.
-    -   Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
+    - Make the required updates.
+    - Re-run the test suites to ensure tests are still passing.
+    - Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
 
         ```shell
         git rebase main -i
@@ -328,25 +328,25 @@ That's it! Thank you for your contribution!
 After your pull request is merged, you can safely delete your branch and pull the changes
 from the main (upstream) repository:
 
--   Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
+- Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
 
     ```shell
     git push origin --delete my-fix-branch
     ```
 
--   Check out the main branch:
+- Check out the main branch:
 
     ```shell
     git checkout main -f
     ```
 
--   Delete the local branch:
+- Delete the local branch:
 
     ```shell
     git branch -D my-fix-branch
     ```
 
--   Update your main with the latest upstream version:
+- Update your main with the latest upstream version:
 
     ```shell
     git pull --ff upstream main
@@ -360,29 +360,29 @@ Full description of current CI PipeLine can be found [here](docs/CI.md).
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
--   All features or bug fixes **must be tested** by one or more specs (unit-tests).
--   All public API methods **must be documented**. [Documentation Guideline](https://github.com/SAP/fundamental-ngx/wiki/Documenting-Code)
--   We follow [Google's JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html). An automated formatter is available, see
-    [developer readme](docs/README.md#formatting).
--   Rules are also mentioned in our [Code Contribution Guideline](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline)
+- All features or bug fixes **must be tested** by one or more specs (unit-tests).
+- All public API methods **must be documented**. [Documentation Guideline](https://github.com/SAP/fundamental-ngx/wiki/Documenting-Code)
+- We follow [Google's JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html). An automated formatter is available, see
+  [developer readme](docs/README.md#formatting).
+- Rules are also mentioned in our [Code Contribution Guideline](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline)
 
 ## <a name="cla"></a> Signing the CLA
 
 Please sign our Contributor License Agreement (CLA) before sending pull requests. For any code
 changes to be accepted, the CLA must be signed. It's a quick process, we promise!
 
--   For individuals we have a [simple click-through form][individual-cla].
--   For corporations we'll need you to
-    [print, sign and one of scan+email, fax or mail the form][corporate-cla].
+- For individuals we have a [simple click-through form][individual-cla].
+- For corporations we'll need you to
+  [print, sign and one of scan+email, fax or mail the form][corporate-cla].
 
 <hr>
 
 If you have more than one Git identity, you must make sure that you sign the CLA using the primary email address associated with the ID that has been granted access to the Angular repository. Git identities can be associated with more than one email address, and only one is primary. Here are some links to help you sort out multiple Git identities and email addresses:
 
--   https://help.github.com/articles/setting-your-commit-email-address-in-git/
--   https://stackoverflow.com/questions/37245303/what-does-usera-committed-with-userb-13-days-ago-on-github-mean
--   https://help.github.com/articles/about-commit-email-addresses/
--   https://help.github.com/articles/blocking-command-line-pushes-that-expose-your-personal-email-address/
+- https://help.github.com/articles/setting-your-commit-email-address-in-git/
+- https://stackoverflow.com/questions/37245303/what-does-usera-committed-with-userb-13-days-ago-on-github-mean
+- https://help.github.com/articles/about-commit-email-addresses/
+- https://help.github.com/articles/blocking-command-line-pushes-that-expose-your-personal-email-address/
 
 Note that if you have more than one Git identity, it is important to verify that you are logged in with the same ID with which you signed the CLA, before you commit changes. If not, your PR will fail the CLA check.
 

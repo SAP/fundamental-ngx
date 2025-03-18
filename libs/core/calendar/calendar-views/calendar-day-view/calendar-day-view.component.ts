@@ -79,8 +79,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     set selectedMultipleDates(dates: Array<D>) {
         this._selectedMultipleDates = dates;
         if (dates && this._dayViewGrid) {
-            const formattedDates = this._calendarDayList.filter(
-                (day) => dates?.some((date) => this._isSameDay(day.date, date))
+            const formattedDates = this._calendarDayList.filter((day) =>
+                dates?.some((date) => this._isSameDay(day.date, date))
             );
             this._changeSelectedMultipleDays(formattedDates, this._calendarDayList);
         }
@@ -634,8 +634,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         if (this.allowMultipleSelection()) {
             if (this.calType() === CalendarTypeEnum.Single && this._selectedMultipleDates) {
-                const _days = calendar.filter(
-                    (day) => this._selectedMultipleDates?.some((date) => this._isSameDay(day.date, date))
+                const _days = calendar.filter((day) =>
+                    this._selectedMultipleDates?.some((date) => this._isSameDay(day.date, date))
                 );
                 this._changeSelectedMultipleDays(_days, calendar);
             }
