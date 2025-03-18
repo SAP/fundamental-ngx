@@ -408,7 +408,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         if (errorDirective?.directive) {
             errorTextObj.message =
                 section === 'heading'
-                    ? errorDirective.directive._headingTemplateRef ?? errorDirective.directive._descriptionTemplateRef
+                    ? (errorDirective.directive._headingTemplateRef ?? errorDirective.directive._descriptionTemplateRef)
                     : errorDirective.directive._descriptionTemplateRef;
             return errorTextObj;
         }

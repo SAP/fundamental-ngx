@@ -55,9 +55,10 @@ export function resolveTranslationObservableFn(
     };
 }
 
-type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
-    ? [Key] | [Key, ResolveTranslationsObservableOptions]
-    : [Key, FdLanguageKeyCtx<Key>] | [Key, FdLanguageKeyCtx<Key>, ResolveTranslationsObservableOptions];
+type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> =
+    FdLanguageKeyCtx<Key> extends undefined
+        ? [Key] | [Key, ResolveTranslationsObservableOptions]
+        : [Key, FdLanguageKeyCtx<Key>] | [Key, FdLanguageKeyCtx<Key>, ResolveTranslationsObservableOptions];
 
 /**
  * Helper utility function for getting translations observable

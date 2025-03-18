@@ -155,13 +155,13 @@ describe('CheckboxComponent', () => {
     it('should focus on readonly checkbox', async () => {
         checkbox.setReadOnlyState(true);
         await whenStable(fixture);
-    
+
         const input = getCheckboxInput(fixture);
-    
+
         // Check if the checkbox can be focused
         input.focus();
         expect(document.activeElement).toBe(input);
-    
+
         // Ensuring that it maintains its readonly nature
         expect(input.getAttribute('readonly')).not.toBeNull();
     });
@@ -170,12 +170,12 @@ describe('CheckboxComponent', () => {
         checkbox.setReadOnlyState(true);
         hostComponent.value = false;
         await whenStable(fixture);
-    
+
         const input = getCheckboxInput(fixture);
-    
+
         // Spy on the nextValue method to ensure it is not being called
         jest.spyOn(checkbox, 'nextValue');
-    
+
         // Click the input and check that the value does not change
         input.click();
         expect(checkbox.nextValue).not.toHaveBeenCalled();

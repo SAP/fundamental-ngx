@@ -670,6 +670,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._changeDetRef.detectChanges();
         });
         this._subscriptions.add(sub);
+        // stop propagation on the checkbox so event doesn't reach the list item
+        event.stopPropagation();
     }
 
     /** @hidden */

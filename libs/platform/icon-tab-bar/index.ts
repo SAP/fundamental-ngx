@@ -5,6 +5,7 @@ export * from './directives/dnd/icon-bar-dnd-container.directive';
 export * from './directives/dnd/icon-bar-dnd-item.directive';
 export * from './directives/dnd/icon-bar-dnd-list.directive';
 export * from './directives/icon-tab-bar-free-content.directive';
+export * from './directives/icon-tab-title.directive';
 export * from './icon-tab-bar.component';
 export * from './icon-tab-bar.module';
 export * from './interfaces/icon-tab-bar-item.interface';

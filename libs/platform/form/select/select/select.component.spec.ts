@@ -36,14 +36,7 @@ import { SelectComponent } from '../select/select.component';
         </fdp-form-group>
     `,
     standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        FdpFormGroupModule,
-        FormModule,
-        PlatformSelectModule,
-        ContentDensityModule,
-        JsonPipe
-    ]
+    imports: [ReactiveFormsModule, FdpFormGroupModule, FormModule, PlatformSelectModule, ContentDensityModule, JsonPipe]
 })
 class SelectStandardComponent {
     @ViewChild(SelectComponent)

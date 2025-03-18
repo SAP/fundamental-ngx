@@ -1,9 +1,9 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { I18nModule } from '@fundamental-ngx/i18n';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedListTitleDirective } from '@fundamental-ngx/core/nested-list';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { NestedItemComponent } from '../nested-list/nested-item/nested-item.component';
 import { NestedLinkComponent } from '../nested-list/nested-link/nested-link.component';
 import { NestedListComponent } from '../nested-list/nested-list/nested-list.component';

@@ -39,9 +39,10 @@ export function resolveTranslationSyncFn(
     };
 }
 
-type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
-    ? [Key] | [Key, ResolveTranslationsSyncOptions]
-    : [Key, FdLanguageKeyCtx<Key>] | [Key, FdLanguageKeyCtx<Key>, ResolveTranslationsSyncOptions];
+type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> =
+    FdLanguageKeyCtx<Key> extends undefined
+        ? [Key] | [Key, ResolveTranslationsSyncOptions]
+        : [Key, FdLanguageKeyCtx<Key>] | [Key, FdLanguageKeyCtx<Key>, ResolveTranslationsSyncOptions];
 
 /**
  * Helper utility function for getting translations

@@ -485,7 +485,7 @@ export class TableService {
     /** @hidden */
     private _getFieldName(field: string, fieldName: Nullable<string>): string {
         const column = this.tableColumns$.getValue().find((col) => col.key === field);
-        return column ? column.name : fieldName ?? field;
+        return column ? column.name : (fieldName ?? field);
     }
 }
 

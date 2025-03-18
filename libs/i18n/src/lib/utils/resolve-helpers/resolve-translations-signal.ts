@@ -6,9 +6,10 @@ import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
 
 type CanBeSignal<T> = T | Signal<T>;
-type ResolveTranslationSignalFnArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
-    ? [CanBeSignal<Key>]
-    : [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>];
+type ResolveTranslationSignalFnArgs<Key extends FdLanguageKeyIdentifier> =
+    FdLanguageKeyCtx<Key> extends undefined
+        ? [CanBeSignal<Key>]
+        : [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>];
 type ResolveSignalFn<ReturnType> = <Key extends FdLanguageKeyIdentifier>(
     ...args: ResolveTranslationSignalFnArgs<Key>
 ) => Signal<ReturnType>;
@@ -57,11 +58,12 @@ export function resolveTranslationSignalFn(options?: ResolveTranslationsSignalOp
     };
 }
 
-type TranslationSignalArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
-    ? [CanBeSignal<Key>] | [CanBeSignal<Key>, ResolveTranslationsSignalOptions]
-    :
-          | [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>]
-          | [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>, ResolveTranslationsSignalOptions];
+type TranslationSignalArgs<Key extends FdLanguageKeyIdentifier> =
+    FdLanguageKeyCtx<Key> extends undefined
+        ? [CanBeSignal<Key>] | [CanBeSignal<Key>, ResolveTranslationsSignalOptions]
+        :
+              | [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>]
+              | [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>, ResolveTranslationsSignalOptions];
 
 /**
  * Helper utility which gives you the signal for translation resolving.

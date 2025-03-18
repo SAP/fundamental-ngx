@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { DisabledBehaviorDirective, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 
@@ -7,7 +7,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
     templateUrl: './tabbable-default-example.component.html',
     imports: [ButtonComponent, DisabledBehaviorDirective]
 })
-export class TabbableDefaultExampleComponent {
+export class TabbableDefaultExampleComponent implements AfterViewInit {
     @ViewChild('section')
     section: ElementRef<HTMLElement>;
 
@@ -16,7 +16,8 @@ export class TabbableDefaultExampleComponent {
     tabbableElementService = inject(TabbableElementService);
 
     ngAfterViewInit(): void {
-        this.tabbableElementClass = this.tabbableElementService.getTabbableElement(this.section.nativeElement)
-            ?.className;
+        this.tabbableElementClass = this.tabbableElementService.getTabbableElement(
+            this.section.nativeElement
+        )?.className;
     }
 }

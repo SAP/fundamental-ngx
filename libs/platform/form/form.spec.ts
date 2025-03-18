@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -7,7 +8,6 @@ import { FormFieldComponent } from './form-group/form-field/form-field.component
 import { FormGroupComponent } from './form-group/form-group.component';
 import { PlatformInputModule } from './input/fdp-input.module';
 import { InputComponent } from './input/input.component';
-import { NgTemplateOutlet } from '@angular/common';
 
 interface TestUser {
     firstName: string;

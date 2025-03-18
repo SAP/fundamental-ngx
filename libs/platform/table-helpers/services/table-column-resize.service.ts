@@ -367,8 +367,9 @@ export class TableColumnResizeService implements OnDestroy {
      * @private
      */
     private _updateHeaderOverflowState(updatedWidth: number): void {
-        const element = this._columnsCellMap.get(this._resizedColumn)?.find((c) => c?.nativeElement.tagName === 'TH')
-            ?.nativeElement;
+        const element = this._columnsCellMap
+            .get(this._resizedColumn)
+            ?.find((c) => c?.nativeElement.tagName === 'TH')?.nativeElement;
         const visibleColumn = this._tableRef.getVisibleTableColumns().find((c) => c.name === this._resizedColumn);
         const headerTextElem = element?.querySelector(`#${this._tableRef.id}-header-cell-${this._resizedColumn}`);
 

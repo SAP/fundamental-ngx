@@ -102,9 +102,9 @@ tag will be moved to the new build and the `@ng16` tag will be added to the late
 
 In `fundamental-ngx` are multiple methods for creating a release. In general there are few release types:
 
--   stable release
--   prerelease
--   hotfix release
+- stable release
+- prerelease
+- hotfix release
 
 ### Stable releases
 
@@ -167,6 +167,6 @@ then it will use `ng${version}` tag, where `${version}` is the Angular version o
 
 To create a `hotfix`, there are few requirements, which need to be met:
 
--   The version from which you are creating a hotfix should not be a `prerelease` version
--   The git tree should be clean
--   The changes which go into the source of the hotfix should not contain breaking changes, otherwise it's not a hotfix
+- The version from which you are creating a hotfix should not be a `prerelease` version
+- The git tree should be clean
+- The changes which go into the source of the hotfix should not contain breaking changes, otherwise it's not a hotfix

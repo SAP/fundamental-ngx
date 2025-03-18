@@ -4,7 +4,6 @@ import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/di
 import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 
 import { PlatformTableModule } from '../../../table.module';
-import { SettingsDialogComponent } from './settings-dialog.component';
 import {
     ActiveTab,
     FiltersDialogData,
@@ -14,6 +13,7 @@ import {
     SettingsSortDialogData,
     SettingsSortDialogResultData
 } from '../table-view-settings.model';
+import { SettingsDialogComponent } from './settings-dialog.component';
 
 describe('SettingsDialogComponent', () => {
     let component: SettingsDialogComponent;

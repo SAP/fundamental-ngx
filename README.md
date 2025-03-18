@@ -12,13 +12,13 @@ The Fundamental Library for Angular is an SAP Design System Angular component li
 
 This repository contains 2 libraries(npm packages),
 
--   [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
-    The Fundamental-NGX core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
-    they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
+- [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
+  The Fundamental-NGX core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
+  they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
 
--   [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
-    The Fundamental-NGX platform is built on top of the core to both enhance existing functionality with additional features
-    which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
+- [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
+  The Fundamental-NGX platform is built on top of the core to both enhance existing functionality with additional features
+  which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
 
 ## <a name="2"></a>2. Requirements
 
@@ -30,8 +30,8 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Known Issues
 
--   Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
--   Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)
+- Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
+- Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)
 
 ## <a name="4"></a>4. Support
 
@@ -39,9 +39,9 @@ If you encounter an issue, you can [create a ticket](https://github.com/SAP/fund
 
 Angular Versions Support: Our versions offer Angular support. More information can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support).
 
--   Features and enhancements are developed to the latest version of fundamental-ngx.
+- Features and enhancements are developed to the latest version of fundamental-ngx.
 
--   Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.
+- Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.
 
 ## <a name="5"></a>5. Contributing
 

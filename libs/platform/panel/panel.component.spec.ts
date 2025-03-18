@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PanelActionsComponent } from './panel-actions.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
 import { PanelComponent, PanelExpandChangeEvent } from './panel.component';

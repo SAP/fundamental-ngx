@@ -30,9 +30,9 @@
         "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
         "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
         "nx": "nx",
-        "postinstall": "node ./decorate-angular-cli.js",
-        "prepare": "husky install",
-        "pre-commit": "lint-staged"
+        "postinstall": "husky install",
+        "pre-commit": "lint-staged",
+        "format": "prettier . --write --list-different"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"

@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 const isSelectedClass = 'fd-button--toggled';
 
@@ -90,7 +90,7 @@ describe('SegmentedButtonComponent', () => {
         component.segmentedButton.writeValue('first');
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        
+
         component.segmentedButton.writeValue('second');
         fixture.detectChanges();
         expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
@@ -100,7 +100,7 @@ describe('SegmentedButtonComponent', () => {
     it('should detect disabled state', () => {
         component.segmentedButton.setDisabledState(true);
         fixture.detectChanges();
-        
+
         expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(true);
         expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(true);
         expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(true);
@@ -130,7 +130,6 @@ describe('SegmentedButtonComponent', () => {
         fixture.detectChanges();
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
     });
-
 });
 
 describe('Segmented button component CVA', () => {

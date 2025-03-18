@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
 import {
     NestedListExpandIconComponent,
@@ -9,13 +11,11 @@ import {
     NestedListTitleDirective
 } from '../nested-list-directives';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
 import { NestedListStateService } from '../nested-list-state.service';
+import { NestedListComponent } from '../nested-list/nested-list.component';
 import { NestedItemComponent } from './nested-item.component';
 import { NestedItemService } from './nested-item.service';
-import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
-import { NestedListComponent } from '../nested-list/nested-list.component';
 
 @Component({
     template: `

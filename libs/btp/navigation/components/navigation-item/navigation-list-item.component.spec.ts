@@ -8,8 +8,6 @@ import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationListItemComponent } from './navigation-list-item.component';
 
- 
-
 class NavigationComponentMock extends FdbNavigation {
     closeAllPopups = new Subject<void>();
     classList$ = signal([]);
