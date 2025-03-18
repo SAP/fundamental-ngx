@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.3](https://github.com/SAP/fundamental-ngx/compare/v0.54.2...v0.54.3) (2025-03-18)
+
+
+### Features
+
+* lazy load popover body in all cases for the avatar group ([#13090](https://github.com/SAP/fundamental-ngx/issues/13090)) ([eb80e17](https://github.com/SAP/fundamental-ngx/commit/eb80e17704a1037a0c52e344e0c2a129f66e20a5))
+
+
+
+
+
 ## [0.54.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.15...v0.54.2) (2025-01-31)
 
 **Note:** Version bump only for package fundamental-ngx
