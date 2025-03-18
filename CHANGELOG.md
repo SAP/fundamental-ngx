@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.2...v0.55.2-rc.3) (2025-03-18)
+
+
+### Bug Fixes
+
+* **core:** footer height not substracted ([#13110](https://github.com/SAP/fundamental-ngx/issues/13110)) ([874b629](https://github.com/SAP/fundamental-ngx/commit/874b629e0276a2a62472d19ee7234ec6e053e522))
+
+
+
+
+
 ## [0.55.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.1...v0.55.2-rc.2) (2025-03-18)
 
 
