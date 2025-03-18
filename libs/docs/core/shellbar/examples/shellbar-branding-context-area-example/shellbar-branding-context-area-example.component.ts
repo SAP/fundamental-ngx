@@ -1,44 +1,125 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ClickedDirective } from '@fundamental-ngx/cdk';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
-    ProductMenuComponent,
-    ShellbarActionComponent,
-    ShellbarActionsComponent,
-    ShellbarComponent,
-    ShellbarGroupFlexOptions,
-    ShellbarLogoComponent,
     ShellbarMenuItem,
+    ShellbarModule,
+    ShellbarSizes,
     ShellbarUser,
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
+import {
+    SearchFieldComponent,
+    SearchInput,
+    SuggestionItem,
+    ValueLabelItem
+} from '@fundamental-ngx/platform/search-field';
 
 @Component({
-    selector: 'fd-shellbar-growing-group-example',
-    templateUrl: './shellbar-growing-group-example.component.html',
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fd-shellbar-branding-context-area-example',
+    templateUrl: './shellbar-branding-context-area-example.component.html',
     imports: [
-        ShellbarComponent,
-        ShellbarLogoComponent,
-        ProductMenuComponent,
-        ShellbarActionsComponent,
-        ShellbarActionComponent,
-        ProductSwitchModule
+        ShellbarModule,
+        MenuModule,
+        AvatarComponent,
+        ClickedDirective,
+        ButtonComponent,
+        FormsModule,
+        ProductSwitchModule,
+        SearchFieldComponent,
+        SegmentedButtonComponent
     ]
 })
-export class ShellbarGrowingGroupExampleComponent {
-    groupConfig: ShellbarGroupFlexOptions = {
-        product: {
-            shrink: true,
-            flexBasisAuto: true
-        },
-        actions: {
-            shrink: true,
-            flexBasisAuto: true
-        }
+export class ShellbarBrandingContextAreaExampleComponent {
+    searchTerm = '';
+
+    inputText = '';
+
+    currentSize: ShellbarSizes = 'm';
+
+    sizesWidth = {
+        s: 320,
+        m: 600,
+        l: 1024,
+        xl: 1900
     };
 
-    productMenuControl = 'Corporate Portal';
+    suggestions: SuggestionItem[] = [
+        {
+            value: 'Apple'
+        },
+        {
+            value: 'Banana'
+        },
+        {
+            value: 'Blueberry'
+        },
+        {
+            value: 'Cherry'
+        },
+        {
+            value: 'Grape'
+        },
+        {
+            value: 'Lemon'
+        },
+        {
+            value: 'Lime'
+        },
+        {
+            value: 'Orange'
+        },
+        {
+            value: 'Peach'
+        },
+        {
+            value: 'Pineapple'
+        },
+        {
+            value: 'Plum'
+        },
+        {
+            value: 'Raspberry'
+        }
+    ];
+
+    searchTerms = ['Apple', 'Banana', 'Kiwi', 'Strawberry'];
+
+    categories: ValueLabelItem[] = [
+        {
+            value: 'red',
+            label: 'Red'
+        },
+        {
+            value: 'orange',
+            label: 'Orange'
+        },
+        {
+            value: 'yellow',
+            label: 'Yellow'
+        },
+        {
+            value: 'green',
+            label: 'Green'
+        },
+        {
+            value: 'blue',
+            label: 'Blue'
+        },
+        {
+            value: 'indigo',
+            label: 'Indigo'
+        },
+        {
+            value: 'violet',
+            label: 'Violet'
+        }
+    ];
 
     productMenuItems: ShellbarMenuItem[] = [
         {
@@ -67,16 +148,6 @@ export class ShellbarGrowingGroupExampleComponent {
         }
     ];
 
-    user: ShellbarUser = {
-        fullName: 'William Willson',
-        colorAccent: 1
-    };
-
-    userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: this.settingsCallback },
-        { text: 'Sign Out', callback: this.signOutCallback }
-    ];
-
     actions = [
         {
             glyph: 'pool',
@@ -99,7 +170,7 @@ export class ShellbarGrowingGroupExampleComponent {
             title: 'Home',
             subtitle: 'Central Home',
             icon: 'home',
-            callback: () => this.productSwitcherCallback('Home '),
+            callback: () => this.productSwitcherCallback('Home'),
             disabledDragAndDrop: true,
             stickToPosition: true
         },
@@ -156,13 +227,28 @@ export class ShellbarGrowingGroupExampleComponent {
         }
     ];
 
-    settingsCallback($event): void {
+    user: ShellbarUser = {
+        fullName: 'William Willson',
+        colorAccent: 6
+    };
+
+    userMenu: ShellbarUserMenu[] = [
+        { text: 'Settings', callback: this.settingsCallback },
+        { text: 'Sign Out', callback: this.signOutCallback }
+    ];
+
+    brandingClicked($event: Event): void {
         console.log($event);
+        alert('Branding clicked');
+    }
+
+    settingsCallback($event: MouseEvent): void {
+        console.log({ $event });
         alert('Settings Clicked');
     }
 
-    signOutCallback($event): void {
-        console.log($event);
+    signOutCallback($event: MouseEvent): void {
+        console.log({ $event });
         alert('Sign Out Clicked');
     }
 
@@ -178,5 +264,13 @@ export class ShellbarGrowingGroupExampleComponent {
 
     productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
+    }
+
+    onSearchSubmit($event: SearchInput): void {
+        this.searchTerm = $event.text;
+    }
+
+    onInputChange($event: SearchInput): void {
+        this.inputText = $event.text;
     }
 }

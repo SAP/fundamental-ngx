@@ -20,16 +20,54 @@
     }
 }
 
-fd-shellbar-actions {
-    .fd-shellbar__search-field {
-        min-width: 15rem;
-    }
-}
-
 .fd-shellbar__action.fd-shellbar__action--desktop:empty {
     display: none;
 }
 
 .fd-shellbar .fd-shellbar__group .fd-shellbar__button.fd-shellbar__button--menu {
     --fdButtonColor: var(--sapShell_TextColor);
+}
+
+.fd-shellbar--s,
+.fd-shellbar--m {
+    .fd-shellbar__branding {
+        gap: 0;
+        .fd-shellbar__title {
+            display: none; // TODO: this should be handled via toolbar resize if/when shellbar uses toolbar
+        }
+    }
+    .fd-shellbar__separator {
+        display: none; // TODO: this should be handled via toolbar resize if/when shellbar uses toolbar
+    }
+    .fd-shellbar__search-field {
+        min-width: auto;
+    }
+}
+
+.fd-shellbar.fd-shellbar--s {
+    .fd-shellbar__group--actions {
+        gap: 0.25rem;
+    }
+    .fd-shellbar__search-field {
+        max-width: 12.5rem;
+    }
+}
+
+.fd-shellbar.fd-shellbar--m {
+    .fd-shellbar__group--context-area-content-container {
+        max-width: 10rem; // TODO: added this because it is easy for the context area to break the width of the medium container
+    }
+    fd-shellbar-actions {
+        .fd-shellbar__search-field {
+            max-width: 15rem;
+
+            .fd-shellbar__search-field-input {
+                max-width: 6rem;
+            }
+        }
+    }
+}
+
+.fd-button.fd-shellbar__button.fd-shellbar__button--user-menu {
+    padding: 0 !important;
 }

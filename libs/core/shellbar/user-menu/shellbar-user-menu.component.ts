@@ -41,7 +41,10 @@ import { ShellbarUserMenuButtonDirective } from './shellbar-user-menu-button.dir
         MenuTriggerDirective,
         AvatarComponent,
         ShellbarUserMenuButtonDirective
-    ]
+    ],
+    host: {
+        '[style.order]': '1' // ensures the user menu is placed at the end of the shellbar
+    }
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */
