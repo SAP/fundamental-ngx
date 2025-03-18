@@ -1,0 +1,23 @@
+<fdp-icon-tab-bar
+    [tabsConfig]="items"
+    [layoutMode]="textTypeLayoutMode"
+    [enableTabReordering]="enableTabReordering"
+    (iconTabSelected)="onTabSelected($event)"
+></fdp-icon-tab-bar>
+@for (element of list; track $index) {
+    <span>{{element}}&nbsp;</span>
+}
+<br>
+<fdp-icon-tab-bar
+    [tabsConfig]="items"
+    [layoutMode]="textTypeLayoutMode"
+    [enableTabReordering]="enableTabReordering"
+    (iconTabSelected)="onTabSelected($event)"
+></fdp-icon-tab-bar>
+<br>
+<fdp-icon-tab-bar
+    [tabsConfig]="items"
+    [layoutMode]="textTypeLayoutMode"
+    [enableTabReordering]="enableTabReordering"
+    (iconTabSelected)="onTabSelected($event)"
+></fdp-icon-tab-bar>

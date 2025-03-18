@@ -19,6 +19,7 @@ import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platf
 import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component';
 import { PlatformIconTabBarProcessTypeExampleComponent } from './examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component';
 import { PlatformIconTabBarTextTypeExampleComponent } from './examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component';
+import { PlatformIconTabBarEventsTypeExampleComponent } from './examples/events-tabs/platform-icon-tab-bar-events-tabs-example.component';
 import { IconTabBarTabsContentExampleComponent } from './examples/tabs-content/icon-tab-bar-tabs-content-example.component';
 import { IconTabBarTwoClickAreaExampleComponent } from './examples/two-click-area/icon-tab-bar-two-click-area-example.component';
 
@@ -41,6 +42,9 @@ const iconTabBarFilterTypeHtml =
     'platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component.html';
 const iconTabBarFilterTypeTs =
     'platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component.ts';
+
+const iconTabBarEventsTypeHtml = 'events-tabs/platform-icon-tab-bar-events-tabs-example.component.html';
+const iconTabBarEventsTypeTs = 'events-tabs/platform-icon-tab-bar-events-tabs-example.component.ts';
 
 const iconTabBarProcessTypeHtml =
     'platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.html';
@@ -98,7 +102,8 @@ export interface IconTabBarItem extends TabConfig {
         IconTabBarClosableTabsExampleComponent,
         IconTabBarTabsContentExampleComponent,
         IconTabBarTwoClickAreaExampleComponent,
-        IconTabBarAsyncTabsExampleComponent
+        IconTabBarAsyncTabsExampleComponent,
+        PlatformIconTabBarEventsTypeExampleComponent
     ]
 })
 export class PlatformIconTabBarDocsComponent {
@@ -315,6 +320,22 @@ export class PlatformIconTabBarDocsComponent {
             fileName: 'text-type.config',
             path: 'config-for-examples',
             pure: true
+        }
+    ];
+
+    iconTabBarEventsTypeFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarEventsTypeHtml),
+            fileName: 'platform-icon-tab-bar-events-tabs-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarEventsTypeTs),
+            fileName: 'platform-icon-tab-bar-events-tabs-example',
+            component: 'PlatformIconTabBarEventsTypeExampleComponent',
+            path: 'example'
         }
     ];
 }
