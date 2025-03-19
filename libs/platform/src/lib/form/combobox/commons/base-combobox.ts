@@ -508,6 +508,7 @@ export abstract class BaseCombobox
                 !KeyUtil.isKeyCode(event, SPACE) &&
                 !KeyUtil.isKeyType(event, 'alphabetical') &&
                 !KeyUtil.isKeyType(event, 'numeric') &&
+                !KeyUtil.isKeyType(event, 'ime') &&
                 !KeyUtil.isKeyCode(event, this._numberPadNumberKeys);
 
             if (this.isEmptyValue && acceptedKeys) {

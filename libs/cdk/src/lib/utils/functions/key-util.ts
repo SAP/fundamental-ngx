@@ -109,7 +109,7 @@ export class KeyUtil {
      * @param event     - KeyboardEvent
      * @param keyType   - Type of key
      * */
-    static isKeyType(event: KeyboardEvent, keyType: 'alphabetical' | 'numeric' | 'control'): boolean {
+    static isKeyType(event: KeyboardEvent, keyType: 'alphabetical' | 'numeric' | 'control' | 'ime'): boolean {
         if (event && keyType) {
             switch (keyType) {
                 case 'numeric':
@@ -123,6 +123,8 @@ export class KeyUtil {
                 // some service commands as alt, ctr, insert, print, f4 etc. All except letters, numbers and symbols
                 case 'control':
                     return event.keyCode < 48 || (event.keyCode >= 112 && event.keyCode <= 123);
+                case 'ime':
+                    return event.key?.toLowerCase() === 'process' || event.keyCode === 229;
             }
         }
 
