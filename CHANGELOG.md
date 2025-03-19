@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.3...v0.55.2-rc.4) (2025-03-19)
+
+
+### Bug Fixes
+
+* **platform:** incorrect tooltip label ([#13111](https://github.com/SAP/fundamental-ngx/issues/13111)) ([d5cded3](https://github.com/SAP/fundamental-ngx/commit/d5cded31e836837054e1c3fe75b342feece938c1))
+
+
+
+
+
 ## [0.55.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.2...v0.55.2-rc.3) (2025-03-18)
 
 
