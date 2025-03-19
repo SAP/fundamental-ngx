@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.4...v0.55.2-rc.5) (2025-03-19)
+
+
+### Bug Fixes
+
+* **platform:** do not set focus on list when there is IME processing ([#13122](https://github.com/SAP/fundamental-ngx/issues/13122)) ([dcecb69](https://github.com/SAP/fundamental-ngx/commit/dcecb69c99ea6b4bc3bc74963cbdeff445c1cb65))
+
+
+
+
+
 ## [0.55.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.3...v0.55.2-rc.4) (2025-03-19)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
