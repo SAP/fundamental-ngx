@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
     coreCalendar: {
@@ -531,7 +530,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Cancel',
         filteredBy: 'Filtered by',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
