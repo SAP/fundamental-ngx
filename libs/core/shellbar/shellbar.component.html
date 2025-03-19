@@ -11,13 +11,14 @@
             [class.fd-shellbar__group--basis-auto]="groupFlex?.product?.flexBasisAuto"
         >
             <ng-content select="[fd-shellbar-side-nav]"></ng-content>
+            <ng-content select="fd-shellbar-branding"></ng-content>
             <ng-content select="fd-shellbar-logo"></ng-content>
             @if (!_hideTitleComponents) {
                 <ng-content select="fd-shellbar-title"></ng-content>
-                <div class="fd-shellbar__product">
-                    <ng-content select="fd-product-menu"></ng-content>
-                </div>
+                <ng-content select="fd-product-menu"></ng-content>
                 <ng-content select="fd-shellbar-subtitle"></ng-content>
+                <ng-content select="fd-shellbar-separator"></ng-content>
+                <ng-content select="fd-shellbar-context-area"></ng-content>
             }
         </div>
     }
