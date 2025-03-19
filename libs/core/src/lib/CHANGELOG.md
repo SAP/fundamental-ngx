@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.52](https://github.com/SAP/fundamental-ngx/compare/v0.43.51...v0.43.52) (2025-03-19)
+
+
+### Bug Fixes
+
+* **platform:** do not set focus on list when there is IME processing ([#13123](https://github.com/SAP/fundamental-ngx/issues/13123)) ([87a2392](https://github.com/SAP/fundamental-ngx/commit/87a2392cf80cd6be8a2f18427c2909a4c9639d6d))
+
+
+
+
+
 ## [0.43.51](https://github.com/SAP/fundamental-ngx/compare/v0.43.50...v0.43.51) (2025-02-05)
 
 **Note:** Version bump only for package @fundamental-ngx/core
