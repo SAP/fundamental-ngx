@@ -85,7 +85,7 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx run-many --target=lint --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp --parallel=2
+                      npx nx run-many --target=lint --skip-nx-cache --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp --parallel=1
                       npx nx run-many --target=build --all --parallel=1
 
             - name: Pack libraries
