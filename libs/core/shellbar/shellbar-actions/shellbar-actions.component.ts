@@ -21,6 +21,7 @@ import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '@fundamenta
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarSizes } from '../model/shellbar-sizes';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
@@ -58,7 +59,13 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         '[class.fd-shellbar__group]': 'true',
         '[class.fd-shellbar__group--actions]': 'true'
     },
-    imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
+    imports: [
+        PortalModule,
+        ShellbarActionsMobileComponent,
+        ShellbarActionComponent,
+        ShellbarUserMenuComponent,
+        FdTranslatePipe
+    ]
 })
 export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */
@@ -72,6 +79,14 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** When set to true, popover list will be closed after selecting the option */
     @Input()
     closePopoverOnSelect = false;
+
+    /** Whether to show the assistive tools icon. */
+    @Input()
+    assistiveTools = false;
+
+    /** @hidden */
+    @Input()
+    assistiveToolsCallback: Nullable<(event: MouseEvent) => void>;
 
     /**
      * Event emitted when search opened.

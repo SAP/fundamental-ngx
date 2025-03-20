@@ -16,6 +16,7 @@
         <fd-shellbar-separator></fd-shellbar-separator>
 
         <fd-shellbar-context-area>
+            <span fd-object-status status="informative" [inverted]="true" label="Test System"></span>
             <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems">
             </fd-product-menu>
         </fd-shellbar-context-area>
@@ -29,7 +30,12 @@
             (inputChange)="onInputChange($event)"
         ></fdp-search-field>
 
-        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+        <fd-shellbar-actions
+            [user]="user"
+            [userMenu]="userMenu"
+            [assistiveTools]="true"
+            [assistiveToolsCallback]="assistiveToolsCallback"
+        >
             @for (action of actions; track action) {
                 <fd-shellbar-action
                     [glyph]="action.glyph"

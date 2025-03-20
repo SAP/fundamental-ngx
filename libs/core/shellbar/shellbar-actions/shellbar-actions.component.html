@@ -10,6 +10,7 @@
         [shellbarActions]="shellbarActions"
         [searchExists]="!!_searchPortal"
         (showSearch)="_toggleSearch()"
+        [assistiveToolsCallback]="assistiveToolsCallback"
     ></fd-shellbar-actions-mobile>
 </div>
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
@@ -35,4 +36,14 @@
     <div class="fd-shellbar__action">
         <ng-content select="fd-product-switch"></ng-content>
     </div>
+}
+@if (assistiveTools) {
+    <fd-shellbar-action
+        glyph="sys-help"
+        label="{{ 'coreShellbar.assistiveTools' | fdTranslate }}"
+        [notificationCount]="0"
+        notificationLabel="{{ 'coreShellbar.assistiveTools' | fdTranslate }}"
+        [callback]="assistiveToolsCallback"
+    >
+    </fd-shellbar-action>
 }

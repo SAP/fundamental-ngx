@@ -4,6 +4,7 @@ import { ClickedDirective } from '@fundamental-ngx/cdk';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
@@ -32,7 +33,8 @@ import {
         FormsModule,
         ProductSwitchModule,
         SearchFieldComponent,
-        SegmentedButtonComponent
+        SegmentedButtonComponent,
+        ObjectStatusComponent
     ]
 })
 export class ShellbarBrandingContextAreaExampleComponent {
@@ -264,6 +266,10 @@ export class ShellbarBrandingContextAreaExampleComponent {
 
     productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
+    }
+
+    assistiveToolsCallback(): void {
+        alert('Assistive Tools Clicked');
     }
 
     onSearchSubmit($event: SearchInput): void {
