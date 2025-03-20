@@ -62,3 +62,17 @@
         padding: 0.25rem 0 !important; // needed to override fd-scrollbar padding
     }
 }
+
+.fdx-side-nav__popover-body.fdx-nested-list--text-only .fdx-nested-list:first-child {
+    padding: 0.5rem;
+
+    .fdx-nested-list__title {
+        font-family: var(--sapFontFamily);
+    }
+}
+
+.fdx-side-nav__popover-body.fdx-nested-list--text-only .fdx-nested-list:not(:first-child) {
+    margin-block-start: 0.5rem;
+
+    --fdNestedList_Start_Offset: 3rem;
+}
