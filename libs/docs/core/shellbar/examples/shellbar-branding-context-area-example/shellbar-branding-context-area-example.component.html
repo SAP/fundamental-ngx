@@ -5,12 +5,22 @@
     <button fd-button value="xl">XL</button>
 </fd-segmented-button>
 <div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
-    <fd-shellbar>
-        <fd-shellbar-logo>
-            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
-        </fd-shellbar-logo>
-        <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
-        </fd-product-menu>
+    <fd-shellbar [size]="currentSize">
+        <fd-shellbar-branding [interactiveBranding]="true" (fdkClicked)="brandingClicked($event)">
+            <fd-shellbar-logo>
+                <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+            </fd-shellbar-logo>
+            <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
+        </fd-shellbar-branding>
+
+        <fd-shellbar-separator></fd-shellbar-separator>
+
+        <fd-shellbar-context-area>
+            <span fd-object-status status="informative" [inverted]="true" label="Test System"></span>
+            <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems">
+            </fd-product-menu>
+        </fd-shellbar-context-area>
+
         <fdp-search-field
             placeholder="Search"
             fdCozy
@@ -19,7 +29,13 @@
             (searchSubmit)="onSearchSubmit($event)"
             (inputChange)="onInputChange($event)"
         ></fdp-search-field>
-        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+
+        <fd-shellbar-actions
+            [user]="user"
+            [userMenu]="userMenu"
+            [assistiveTools]="true"
+            [assistiveToolsCallback]="assistiveToolsCallback"
+        >
             @for (action of actions; track action) {
                 <fd-shellbar-action
                     [glyph]="action.glyph"
@@ -30,8 +46,7 @@
                 ></fd-shellbar-action>
             }
             <fd-product-switch>
-                <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
-                </fd-product-switch-body>
+                <fd-product-switch-body [products]="productSwitcher"> </fd-product-switch-body>
             </fd-product-switch>
         </fd-shellbar-actions>
     </fd-shellbar>

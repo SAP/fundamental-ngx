@@ -181,6 +181,11 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
+    get _hideContextArea(): boolean {
+        return this._currentSize !== 'xl' && this._showMobileSearch;
+    }
+
+    /** @hidden */
     get _hideAllComponents(): boolean {
         return this._currentSize === 's' && this._showMobileSearch;
     }
