@@ -191,7 +191,7 @@ export class NavigationComponent
             [
                 this.class,
                 'fd-navigation',
-                this.mode ? `fd-navigation--${this.mode}` : '',
+                this.mode === '' ? 'fd-navigation--compact' : '',
                 `fd-navigation--${this.state}`
             ].filter((k) => !!k)
         );
