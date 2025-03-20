@@ -121,3 +121,7 @@ $block: fd-navigation;
         max-width: none;
     }
 }
+
+.fd-navigation__item.fd-navigation__item--title .fd-navigation__has-children-indicator {
+    display: none;
+}
