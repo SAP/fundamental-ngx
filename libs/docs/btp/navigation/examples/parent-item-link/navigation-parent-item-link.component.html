@@ -1,4 +1,5 @@
 <p>Set navigation state</p>
+<!-- eslint-disable @angular-eslint/template/elements-content -->
 <fd-segmented-button [(ngModel)]="state">
     <button fd-button label="Expanded" value="expanded"></button>
     <button fd-button label="Snapped" value="snapped"></button>
@@ -11,6 +12,7 @@
     <button fd-button label="Mobile" value="phone"></button>
 </fd-segmented-button>
 <p>&nbsp;</p>
+<!-- eslint-enable @angular-eslint/template/elements-content -->
 
 <fdb-navigation
     [state]="state"
@@ -112,6 +114,17 @@
         </fdb-navigation-list-item>
     </fdb-navigation-content-start>
     <fdb-navigation-content-end>
+        <fdb-navigation-list-item quickCreate>
+            <button
+                fdb-navigation-link
+                quickCreate
+                glyph="write-new"
+                *fdbNavigationLinkRef
+                (click)="onQuickCreateClick()"
+            >
+                Quick Create
+            </button>
+        </fdb-navigation-list-item>
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="sys-help">Help</a>
         </fdb-navigation-list-item>
