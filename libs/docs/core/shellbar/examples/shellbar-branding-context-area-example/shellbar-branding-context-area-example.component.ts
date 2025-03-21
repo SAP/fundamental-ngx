@@ -4,15 +4,10 @@ import { ClickedDirective } from '@fundamental-ngx/cdk';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
-import {
-    ShellbarMenuItem,
-    ShellbarModule,
-    ShellbarSizes,
-    ShellbarUser,
-    ShellbarUserMenu
-} from '@fundamental-ngx/core/shellbar';
+import { ShellbarMenuItem, ShellbarModule, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
 import {
     SearchFieldComponent,
     SearchInput,
@@ -32,22 +27,14 @@ import {
         FormsModule,
         ProductSwitchModule,
         SearchFieldComponent,
-        SegmentedButtonComponent
+        SegmentedButtonComponent,
+        ObjectStatusComponent
     ]
 })
 export class ShellbarBrandingContextAreaExampleComponent {
     searchTerm = '';
 
     inputText = '';
-
-    currentSize: ShellbarSizes = 'm';
-
-    sizesWidth = {
-        s: 320,
-        m: 600,
-        l: 1024,
-        xl: 1900
-    };
 
     suggestions: SuggestionItem[] = [
         {
@@ -264,6 +251,10 @@ export class ShellbarBrandingContextAreaExampleComponent {
 
     productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
+    }
+
+    assistiveToolsCallback(): void {
+        alert('Assistive Tools Clicked');
     }
 
     onSearchSubmit($event: SearchInput): void {

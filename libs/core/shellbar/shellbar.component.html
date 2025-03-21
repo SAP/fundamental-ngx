@@ -18,7 +18,9 @@
                 <ng-content select="fd-product-menu"></ng-content>
                 <ng-content select="fd-shellbar-subtitle"></ng-content>
                 <ng-content select="fd-shellbar-separator"></ng-content>
-                <ng-content select="fd-shellbar-context-area"></ng-content>
+                @if (!_hideContextArea) {
+                    <ng-content select="fd-shellbar-context-area"></ng-content>
+                }
             }
         </div>
     }

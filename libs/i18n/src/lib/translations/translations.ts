@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
     coreCalendar: {
@@ -110,7 +110,8 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
         cancel: 'Cancel',
-        search: 'Search'
+        search: 'Search',
+        assistiveTools: 'Assistive Tools'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',

@@ -1,47 +1,44 @@
-<fd-segmented-button [(ngModel)]="currentSize">
-    <button fd-button value="s">S</button>
-    <button fd-button value="m">M</button>
-    <button fd-button value="l">L</button>
-    <button fd-button value="xl">XL</button>
-</fd-segmented-button>
-<div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
-    <fd-shellbar [size]="currentSize">
-        <fd-shellbar-branding [interactiveBranding]="true" (fdkClicked)="brandingClicked($event)">
-            <fd-shellbar-logo>
-                <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
-            </fd-shellbar-logo>
-            <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
-        </fd-shellbar-branding>
+<fd-shellbar>
+    <fd-shellbar-branding [interactiveBranding]="true" (fdkClicked)="brandingClicked($event)">
+        <fd-shellbar-logo>
+            <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-shellbar-logo>
+        <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
+    </fd-shellbar-branding>
 
-        <fd-shellbar-separator></fd-shellbar-separator>
+    <fd-shellbar-separator></fd-shellbar-separator>
 
-        <fd-shellbar-context-area>
-            <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems">
-            </fd-product-menu>
-        </fd-shellbar-context-area>
+    <fd-shellbar-context-area>
+        <span fd-object-status status="informative" [inverted]="true" label="Test System"></span>
+        <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems"> </fd-product-menu>
+    </fd-shellbar-context-area>
 
-        <fdp-search-field
-            placeholder="Search"
-            fdCozy
-            [suggestions]="suggestions"
-            [categories]="categories"
-            (searchSubmit)="onSearchSubmit($event)"
-            (inputChange)="onInputChange($event)"
-        ></fdp-search-field>
+    <fdp-search-field
+        placeholder="Search"
+        fdCozy
+        [suggestions]="suggestions"
+        [categories]="categories"
+        (searchSubmit)="onSearchSubmit($event)"
+        (inputChange)="onInputChange($event)"
+    ></fdp-search-field>
 
-        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
-            @for (action of actions; track action) {
-                <fd-shellbar-action
-                    [glyph]="action.glyph"
-                    [callback]="action.callback"
-                    [label]="action.label"
-                    [notificationCount]="action.notificationCount"
-                    [notificationLabel]="action.notificationLabel"
-                ></fd-shellbar-action>
-            }
-            <fd-product-switch>
-                <fd-product-switch-body [products]="productSwitcher"> </fd-product-switch-body>
-            </fd-product-switch>
-        </fd-shellbar-actions>
-    </fd-shellbar>
-</div>
+    <fd-shellbar-actions
+        [user]="user"
+        [userMenu]="userMenu"
+        [assistiveTools]="true"
+        [assistiveToolsCallback]="assistiveToolsCallback"
+    >
+        @for (action of actions; track action) {
+            <fd-shellbar-action
+                [glyph]="action.glyph"
+                [callback]="action.callback"
+                [label]="action.label"
+                [notificationCount]="action.notificationCount"
+                [notificationLabel]="action.notificationLabel"
+            ></fd-shellbar-action>
+        }
+        <fd-product-switch>
+            <fd-product-switch-body [products]="productSwitcher"> </fd-product-switch-body>
+        </fd-product-switch>
+    </fd-shellbar-actions>
+</fd-shellbar>
