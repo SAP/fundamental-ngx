@@ -10,10 +10,10 @@
         "url": "https://github.com/SAP/fundamental-ngx"
     },
     "engines": {
-        "yarn": ">= 4.6.0",
+        "yarn": ">= 4.7.0",
         "node": ">= 18"
     },
-    "packageManager": "yarn@4.6.0",
+    "packageManager": "yarn@4.7.0",
     "scripts": {
         "preinstall": "npx only-allow yarn",
         "build": "echo Building default app && nx compile",
