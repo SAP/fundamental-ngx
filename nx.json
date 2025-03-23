@@ -64,7 +64,7 @@
             "cache": true
         },
         "lint": {
-            "cache": false
+            "cache": true
         },
         "@nx/jest:jest": {
             "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
