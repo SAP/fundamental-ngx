@@ -5,9 +5,6 @@
     "sourceRoot": "libs/schema/src",
     "prefix": "fundamental-ngx",
     "tags": ["type:lib", "scope:docs"],
-    "targets": {
-        "lint": {
-            "executor": "@nx/eslint:lint"
-        }
-    }
+    "// targets": "to see all targets run: nx show project docs-core-schema --web",
+    "targets": {}
 }
