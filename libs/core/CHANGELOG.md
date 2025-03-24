@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.1...v0.55.4-rc.2) (2025-03-24)
+
+
+### Bug Fixes
+
+* **core:** remove Dynamic page shadow when used with Icon Tab Bar ([#13137](https://github.com/SAP/fundamental-ngx/issues/13137)) ([80f6f55](https://github.com/SAP/fundamental-ngx/commit/80f6f558c979d06d2418e49596b79b5aa08eb972))
+
+
+
+
+
 ## [0.55.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.0...v0.55.4-rc.1) (2025-03-24)
 
 **Note:** Version bump only for package @fundamental-ngx/core
