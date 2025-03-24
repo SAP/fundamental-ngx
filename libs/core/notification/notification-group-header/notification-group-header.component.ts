@@ -11,8 +11,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
@@ -38,7 +36,7 @@ import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, ContentDensityDirective, IconComponent],
+    imports: [IconComponent],
     providers: [
         {
             provide: FD_NOTIFICATION_GROUP_HEADER,

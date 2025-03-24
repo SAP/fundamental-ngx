@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -13,17 +14,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { startWith } from 'rxjs/operators';
-import { InputComponent } from '../input/input.component';
-
-import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { InputGroupAddonBodyComponent } from './addon-body.component';
+import { startWith } from 'rxjs/operators';
+import { InputComponent } from '../input/input.component';
 import { InputGroupAddonComponent } from './addon.component';
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
 import { InputGroupConfig } from './input-group.config';
@@ -58,14 +56,7 @@ import { InputGroupInputComponent } from './input.component';
         { provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => InputGroupComponent), multi: true },
         contentDensityObserverProviders()
     ],
-    imports: [
-        InputGroupAddonBodyComponent,
-        NgTemplateOutlet,
-        InputComponent,
-        InputGroupModule,
-        FormControlComponent,
-        FormsModule
-    ]
+    imports: [NgTemplateOutlet, InputGroupModule, FormControlComponent, FormsModule]
 })
 export class InputGroupComponent implements OnInit, AfterContentInit {
     /** Input value */

@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -18,7 +17,7 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
 @Component({
     selector: 'fdb-navigation-content-end',
     template: `<ul fdb-navigation-list [listItems]="allListItems$()"></ul>`,
-    imports: [NavigationListComponent, NgTemplateOutlet],
+    imports: [NavigationListComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

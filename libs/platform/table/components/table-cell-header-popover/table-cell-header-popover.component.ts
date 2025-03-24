@@ -1,4 +1,4 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -53,7 +53,6 @@ import { startWith } from 'rxjs/operators';
         FormItemComponent,
         FormLabelComponent,
         FormControlComponent,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })
