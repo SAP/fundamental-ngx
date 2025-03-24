@@ -7,7 +7,7 @@ export function lookupValue(item: unknown, lookupKey: string): string {
     if (isSelectItem(item)) {
         return lookupKey && item ? item.value[lookupKey] : item.value;
     } else {
-        return lookupKey && item ? item[lookupKey] : item;
+        return lookupKey && item ? item[lookupKey] : (item as string);
     }
 }
 
