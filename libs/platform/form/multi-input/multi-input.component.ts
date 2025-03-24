@@ -21,9 +21,8 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-
 import { DisplayFnPipe, DynamicComponentService, InitialFocusDirective, KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 import {
     BaseListItem,
     ListComponent,
@@ -95,7 +94,6 @@ export class MultiInputSelectionChangeEvent {
         InputGroupModule,
         TokenComponent,
         TokenizerComponent,
-        TokenizerInputDirective,
         FormControlComponent,
         FormsModule,
         AutoCompleteDirective,

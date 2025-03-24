@@ -1,8 +1,6 @@
+import { NgClass } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
-
-import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { Nullable, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
@@ -44,9 +42,7 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
         TextTypePopoverComponent,
         ButtonComponent,
         IconComponent,
-        AsyncOrSyncPipe,
-        IconTabBarTextTypeTabItemComponent,
-        NgTemplateOutlet
+        IconTabBarTextTypeTabItemComponent
     ]
 })
 export class IconTabBarTextTypeComponent extends ClosableIconTabBar {

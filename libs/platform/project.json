@@ -20,8 +20,8 @@
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
-                "tsConfig": "{projectRoot}/tsconfig.lib.json",
-                "project": "{projectRoot}/ng-package.json"
+                "tsConfig": "libs/platform/tsconfig.lib.json",
+                "project": "libs/platform/ng-package.json"
             },
             "configurations": {
                 "production": {
