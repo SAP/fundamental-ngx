@@ -28,7 +28,7 @@ import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
@@ -62,7 +62,6 @@ export class NavigationListItemMarkerDirective implements HasElementRef {
         NgTemplateOutlet,
         NavigationListComponent,
         PopoverComponent,
-        PopoverControlComponent,
         PopoverBodyComponent,
         NavigationListItemMarkerDirective,
         IconComponent,

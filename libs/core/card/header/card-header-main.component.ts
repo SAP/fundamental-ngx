@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChild, input } from '@angular/core';
 import { FD_AVATAR_COMPONENT } from '@fundamental-ngx/core/avatar';
 import {
@@ -21,7 +20,7 @@ import {
             useExisting: CardMainHeaderComponent
         }
     ],
-    imports: [NgClass]
+    imports: []
 })
 export class CardMainHeaderComponent {
     /**

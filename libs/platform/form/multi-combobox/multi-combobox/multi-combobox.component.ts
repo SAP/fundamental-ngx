@@ -1,4 +1,5 @@
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -15,9 +16,16 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import equal from 'fast-deep-equal';
-
 import { DynamicComponentService, KeyUtil, SearchHighlightPipe, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
     DATA_PROVIDERS,
     DataProvider,
@@ -25,21 +33,7 @@ import {
     OptionItem,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
-
-import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import {
-    ContentDensityDirective,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
-import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import equal from 'fast-deep-equal';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
@@ -78,7 +72,6 @@ let deprecationWarningShown = false;
         InputGroupModule,
         TokenComponent,
         TokenizerComponent,
-        TokenizerInputDirective,
         FormControlComponent,
         FormsModule,
         AutoCompleteDirective,
@@ -89,7 +82,6 @@ let deprecationWarningShown = false;
         ListSecondaryDirective,
         SearchHighlightPipe,
         FdTranslatePipe,
-        ContentDensityDirective,
         MultiAnnouncerDirective
     ]
 })

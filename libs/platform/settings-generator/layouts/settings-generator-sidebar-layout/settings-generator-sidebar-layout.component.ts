@@ -13,7 +13,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { AsyncOrSyncPipe, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -45,7 +44,6 @@ import { SettingsGeneratorSidebarIconComponent } from './settings-generator-side
         AsyncOrSyncPipe,
         TitleComponent,
         FdTranslatePipe,
-        InputGroupComponent,
         FormsModule
     ]
 })
