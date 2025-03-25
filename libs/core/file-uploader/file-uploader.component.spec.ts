@@ -102,6 +102,9 @@ describe('FileUploaderComponent', () => {
         jest.spyOn(component, 'onChange');
         jest.spyOn(component, 'onChange');
         jest.spyOn(component, 'setInputValue');
+        const file1: MockFile = new File([''], 'file1');
+        const event: File[] = [file1];
+        component.selectHandler(event);
         component.clear();
         expect(component.inputRef.nativeElement.value).toEqual('');
         expect(component.inputRef.nativeElement.placeholder).toEqual('');
