@@ -7,8 +7,8 @@ const { exec, execSync } = require('child_process');
  * @param skipUnstable
  * @returns {Promise<string[]>}
  */
-module.exports = (maxVersion = null, skipUnstable = false) => {
-    return execSync('git tag -l', { maxBuffer: Infinity })
+module.exports = (maxVersion = null, skipUnstable = false) =>
+    execSync('git tag -l', { maxBuffer: Infinity })
         .toString()
         .split('\n')
         .filter((tag) => {
@@ -22,4 +22,3 @@ module.exports = (maxVersion = null, skipUnstable = false) => {
             return !(maxVersion && semver.gt(tag, maxVersion));
         })
         .sort(semver.rcompare);
-};
