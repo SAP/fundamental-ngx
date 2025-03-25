@@ -15,6 +15,13 @@ import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 })
 export class FlexibleColumnLayoutDynamicPageExampleComponent {
     /**
+     * property needed ONLY for the current documentation purposes
+     * provides access to the HTML element with "overlay" reference
+     */
+    @ViewChild('overlay')
+    overlay: ElementRef<HTMLElement>;
+
+    /**
      * property set by the consuming application (name can vary????????)
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
      * sets a new layout for the component
@@ -33,13 +40,6 @@ export class FlexibleColumnLayoutDynamicPageExampleComponent {
      * checks if the component layout is in full screen
      */
     isFullScreen = this.localLayout.includes('FullScreen');
-
-    /**
-     * property needed ONLY for the current documentation purposes
-     * provides access to the HTML element with "overlay" reference
-     */
-    @ViewChild('overlay')
-    overlay: ElementRef<HTMLElement>;
 
     /**
      * property needed ONLY for the current documentation purposes

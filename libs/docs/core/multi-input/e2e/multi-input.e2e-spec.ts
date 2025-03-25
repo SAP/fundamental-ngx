@@ -32,9 +32,6 @@ describe('Multi input test suite', () => {
         disableInputs,
         simpleMultiInputOptions,
         multiInputOptions,
-        buttonShowAll,
-        expandedDropdown,
-        hiddenAddonButtonInputOptions,
         compactMultiInputOptions,
         multiSelectButton,
         approveButton,
@@ -48,13 +45,10 @@ describe('Multi input test suite', () => {
         simpleExampleTokens,
         checkboxInput,
         listItem,
-        simpleHiddenAddonExampleTokens,
         popover,
-        compactExampleTokens,
         dialogCheckbox,
         selectAllItemsBtn,
         dialogListItem,
-        compactInput,
         cozyMultiInputs,
         compactMultiInputs
     } = multiInputPage;

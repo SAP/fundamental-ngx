@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ObjectNumberPo extends CoreBaseComponentPo {
-    private url = '/object-number';
     root = '#page-content';
     pageHeader = 'fd-object-number-header h1';
 
@@ -18,6 +17,8 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     unitObjExamples = 'fd-object-number-units-example ' + this.objectNumbers;
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
     truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;
+
+    private url = '/object-number';
 
     objectNumberText = async (exampleBlock: string): Promise<string> => exampleBlock + ' ' + this.objText;
 

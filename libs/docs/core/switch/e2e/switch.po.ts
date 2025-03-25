@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SwitchPo extends CoreBaseComponentPo {
-    private url = '/switch';
-
     switchSizesExample = 'fd-switch-sizes-example ';
     disabledSwitchExample = 'fd-disabled-switch-example ';
     switchBindingExample = 'fd-switch-binding-example ';
@@ -25,6 +23,8 @@ export class SwitchPo extends CoreBaseComponentPo {
     declineIcon = this.semanticswitchExample + '.sap-icon--decline';
     acceptIcon = this.semanticswitchExample + '.sap-icon--accept';
     switchBtn = this.switchBindingExample + '.fd-button--standard';
+
+    private url = '/switch';
 
     async open(): Promise<void> {
         await super.open(this.url);

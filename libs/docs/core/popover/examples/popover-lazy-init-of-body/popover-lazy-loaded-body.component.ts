@@ -17,7 +17,7 @@ export class PopoverLazyLoadedBodyComponent implements AfterViewInit {
         console.log('constructed');
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         console.log('after view init');
     }
 }

@@ -21,6 +21,8 @@ export class GroupTypeExampleComponent {
     personDetails: any = null;
     overflowPopoverStage: 'main' | 'detail' = 'main';
 
+    constructor(private _rtlService: RtlService) {}
+
     get isDetailStage(): boolean {
         return this.overflowPopoverStage === 'detail';
     }
@@ -34,8 +36,6 @@ export class GroupTypeExampleComponent {
             ' avatars hidden, activate for complete list'
         );
     }
-
-    constructor(private _rtlService: RtlService) {}
 
     get isRtl(): boolean {
         return this._rtlService.rtl.getValue();

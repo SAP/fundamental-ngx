@@ -32,7 +32,7 @@ export class DateUtil {
     templateUrl: './date-picker-special-day-example.component.html',
     styleUrl: './date-picker-special-day-example.component.scss'
 })
-export class DatePickerSpecialDayExampleComponent<D> {
+export class DatePickerSpecialDayExampleComponent {
     customDate = new FdDate(2024, 8, 28);
     firstRule = {
         specialDayNumber: 6,

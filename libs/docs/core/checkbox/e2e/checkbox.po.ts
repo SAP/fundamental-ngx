@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class CheckboxPo extends CoreBaseComponentPo {
-    private url = '/checkbox';
-
     standardCheckbox = 'fd-checkbox-default-example ';
     tristateCheckbox = 'fd-checkbox-tristate-example ';
     customValueCheckbox = 'fd-checkbox-custom-values-example ';
@@ -16,6 +14,8 @@ export class CheckboxPo extends CoreBaseComponentPo {
     checkboxCheckmark = this.checkboxLabel + ' span.fd-checkbox__checkmark';
     link = this.checkbox + ' a';
     tristateOutput = this.tristateCheckbox + 'div';
+
+    private url = '/checkbox';
 
     async open(): Promise<void> {
         await super.open(this.url);

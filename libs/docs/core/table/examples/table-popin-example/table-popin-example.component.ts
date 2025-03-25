@@ -81,6 +81,8 @@ export class TablePopinExampleComponent implements OnInit {
         }
     ];
 
+    constructor(private _rtlService: RtlService) {}
+
     select(index: number, checked: boolean): void {
         this.fruits[index].checked = checked;
 
@@ -92,8 +94,6 @@ export class TablePopinExampleComponent implements OnInit {
 
         this._handleMasterCheckboxState();
     }
-
-    constructor(private _rtlService: RtlService) {}
 
     ngOnInit(): void {
         this.navigationArrow$ = this._rtlService.rtl.pipe(

@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ButtonPo extends CoreBaseComponentPo {
-    private url = '/button';
-
     typeButtons = 'fd-button-types-example button';
     menuButtons = 'fd-button-menu-example button';
     sizeButtons = 'fd-button-sizes-example button';
@@ -17,6 +15,8 @@ export class ButtonPo extends CoreBaseComponentPo {
     checkboxCompact = '#playgroundcompact~label';
     checkboxMenu = '#playgroundfdMenu~label';
     menuOption = this.dropDownMenu + ' option';
+
+    private url = '/button';
 
     async open(): Promise<void> {
         await super.open(this.url);

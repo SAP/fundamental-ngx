@@ -15,15 +15,15 @@ export class MultiInputAsyncExampleComponent {
     readonly dropdownValues$: Observable<OptionItem[]>;
     selected = [];
 
-    displayFn = (v: OptionItem): string => v.label;
-    valueFn = (v: OptionItem): string => v.value;
-
     constructor() {
         this.dropdownValues$ = this.searchValue$.pipe(
             startWith(''),
             switchMap((searchQuery) => this.serverRequest(searchQuery))
         );
     }
+
+    displayFn = (v: OptionItem): string => v.label;
+    valueFn = (v: OptionItem): string => v.value;
 
     /**
      * Server request emulation

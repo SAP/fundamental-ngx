@@ -201,8 +201,4 @@ describe('Standard List test suite', () => {
             await expect(await getElementClass(exampleSelector + listItems, i)).toContain('is-selected');
         }
     }
-
-    async function pickBorderStyleAttribute(): Promise<string> {
-        return (await browserIsFirefox()) ? 'border-bottom-style' : 'border';
-    }
 });

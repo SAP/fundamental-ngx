@@ -18,7 +18,7 @@ let itemIndex = 0;
 class ExampleStripAlertComponent implements OnDestroy {
     itemIndex = ++itemIndex;
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         console.log('Component destroyed');
     }
 }
@@ -50,7 +50,7 @@ class ExampleStripAlertComponent implements OnDestroy {
 class ExampleStripAlertFooterComponent {
     alertRefs$ = inject(MessageStripAlertContainerAlertRefs);
 
-    dismissAll(alertRefs: MessageStripAlertRef[]) {
+    dismissAll(alertRefs: MessageStripAlertRef[]): void {
         alertRefs.forEach((alertRef) => alertRef.dismiss());
     }
 }
@@ -96,7 +96,7 @@ export class MessageStripAlertExampleComponent {
         this.messageStripAlertService.setFooterComponent('top-end', ExampleStripAlertFooterComponent);
     }
 
-    openText(vPosition: 'top' | 'bottom' = 'top') {
+    openText(vPosition: 'top' | 'bottom' = 'top'): void {
         this.messageStripAlertService.open({
             content: 'This will be automatically dismissed in 5 seconds and if mouse is hovered dismiss time is reset',
             position: `${vPosition}-start`,
@@ -113,7 +113,7 @@ export class MessageStripAlertExampleComponent {
         });
     }
 
-    openTemplate(content: TemplateRef<{ $implicit: MessageStripAlertRef }>, vPosition: 'top' | 'bottom' = 'top') {
+    openTemplate(content: TemplateRef<{ $implicit: MessageStripAlertRef }>, vPosition: 'top' | 'bottom' = 'top'): void {
         this.messageStripAlertService.open({
             position: `${vPosition}-middle`,
             closeOnNavigation: true,
@@ -126,7 +126,7 @@ export class MessageStripAlertExampleComponent {
         });
     }
 
-    openComponent(vPosition: 'top' | 'bottom' = 'top') {
+    openComponent(vPosition: 'top' | 'bottom' = 'top'): void {
         this.messageStripAlertService.open({
             content: ExampleStripAlertComponent,
             position: `${vPosition}-end`,

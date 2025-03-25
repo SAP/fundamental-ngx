@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class PopoverPo extends CoreBaseComponentPo {
-    private url = '/popover';
-
     avatar = 'fd-popover-example .fd-avatar--circle';
     programmaticAvatar = 'fd-popover-programmatic-open-example .fd-avatar--circle';
     popover = '.fd-popover__body';
@@ -52,6 +50,8 @@ export class PopoverPo extends CoreBaseComponentPo {
     popoverMobileExample = 'fd-popover-mobile-example ';
     mobileInput = 'fd-dialog-body input';
     mobileFooterButton = '.fd-dialog__footer .fd-button';
+
+    private url = '/popover';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -19,7 +19,6 @@ import { ObjectNumberPo } from './object-number.po';
 describe('object number test suite', () => {
     const objectNumberPage = new ObjectNumberPo();
     const {
-        basicExamples,
         allExamples,
         objStatusExamples,
         largeObjExamples,

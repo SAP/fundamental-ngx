@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SplitButtonPo extends CoreBaseComponentPo {
-    private url = '/split-button';
-
     buttonBehaviorExample = 'fd-split-button-behaviors-example ';
     iconBehaviorExample = 'fd-split-button-icons-example ';
     buttonTypesExample = 'fd-split-button-types-example ';
@@ -14,6 +12,8 @@ export class SplitButtonPo extends CoreBaseComponentPo {
     button = '.fd-button';
     splitMenu = 'div.fd-popover__body';
     splitMenuItem = '.fd-menu__list li';
+
+    private url = '/split-button';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -106,11 +106,6 @@ export class DialogFullScreenInnerExampleComponent {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogFullScreenExampleComponent {
-    constructor(
-        private _dialogService: DialogService,
-        private _cdr: ChangeDetectorRef
-    ) {}
-
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;
 
@@ -124,6 +119,11 @@ export class DialogFullScreenExampleComponent {
     componentCloseReason = '';
 
     private _dialogReference: DialogRef;
+
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     openFromComponent(): void {
         const dialogRef = this._dialogService.open(DialogFullScreenInnerExampleComponent, {

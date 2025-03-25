@@ -22,6 +22,10 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     imports: [WizardModule, ButtonComponent, BarModule]
 })
 export class WizardMobileExampleComponent {
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
     contentHeight = '450px';
     example1step1status: WizardStepStatus = 'current';
     example1step2status: WizardStepStatus = 'upcoming';
@@ -30,10 +34,6 @@ export class WizardMobileExampleComponent {
     example2step1status: WizardStepStatus = 'current';
     example2step2status: WizardStepStatus = 'upcoming';
     example2step3status: WizardStepStatus = 'upcoming';
-
-    /** @hidden */
-    @ViewChildren(WizardStepComponent)
-    steps: QueryList<WizardStepComponent>;
 
     constructor(private _wizardService: WizardService) {}
 

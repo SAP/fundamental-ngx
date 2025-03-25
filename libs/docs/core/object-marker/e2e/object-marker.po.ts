@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ObjectMarkerPo extends CoreBaseComponentPo {
-    private url = '/object-marker';
     root = '#page-content';
 
     marker = 'span.fd-object-marker';
@@ -9,6 +8,8 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
     objectMarkerClickableExample = 'fd-object-marker-clickable-example ';
     link = 'a';
     icon = 'fd-icon';
+
+    private url = '/object-marker';
 
     async open(): Promise<void> {
         await super.open(this.url);

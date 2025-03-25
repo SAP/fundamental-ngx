@@ -23,12 +23,12 @@ import { delay, tap } from 'rxjs/operators';
     imports: [PaginationModule, ButtonComponent]
 })
 export class PaginationExampleComponent {
+    @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
+
     totalItems = 50;
     itemsPerPage = 10;
     currentPage = 5;
     notification = '';
-
-    @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
     private _cdr = inject(ChangeDetectorRef);
 

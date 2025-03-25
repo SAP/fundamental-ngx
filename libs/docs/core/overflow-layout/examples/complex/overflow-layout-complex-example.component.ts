@@ -38,12 +38,14 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
     ]
 })
 export class OverflowLayoutComplexExampleComponent {
+    @ViewChild('overflowPopover', { read: PopoverComponent })
+    overflowPopover: PopoverComponent;
+
     size: Size = 's';
 
     itemsToRender: any[];
 
-    @ViewChild('overflowPopover', { read: PopoverComponent })
-    overflowPopover: PopoverComponent;
+    personDetails: any = null;
 
     private _overflowPopoverStage: 'main' | 'detail' = 'main';
 
@@ -55,8 +57,6 @@ export class OverflowLayoutComplexExampleComponent {
     get overflowPopoverStage(): 'main' | 'detail' {
         return this._overflowPopoverStage;
     }
-
-    personDetails: any = null;
 
     get isDetailStage(): boolean {
         return this.overflowPopoverStage === 'detail';

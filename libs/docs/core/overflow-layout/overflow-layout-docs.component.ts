@@ -19,7 +19,6 @@ const overflowLayoutDefaultExampleTs = 'default/overflow-layout-default-example.
 
 const overflowLayoutComplexExampleHtml = 'complex/overflow-layout-complex-example.component.html';
 const overflowLayoutComplexExampleTs = 'complex/overflow-layout-complex-example.component.ts';
-const avatarGeneratorExampleService = 'complex/avatar-generator-example.service.ts';
 const overflowLayoutVisibleItemsExampleHtml = 'always-visible/overflow-layout-always-visible-example.component.html';
 const overflowLayoutVisibleItemsExampleTs = 'always-visible/overflow-layout-always-visible-example.component.ts';
 

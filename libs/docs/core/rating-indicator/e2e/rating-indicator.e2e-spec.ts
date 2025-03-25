@@ -26,9 +26,7 @@ describe('Rating indicator test suite', () => {
         inputsDynamicChanges,
         touchedInputsDynamicChanges,
         inputsBasicExample,
-        touchedInputsBasicExample,
-        starsRatingDisplayMode,
-        textDisplayMode
+        touchedInputsBasicExample
     } = ratingIndicatorPage;
 
     beforeAll(async () => {

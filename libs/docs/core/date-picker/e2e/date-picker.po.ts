@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, getElementClass, waitForElDisplayed } from '../../../../../e2e';
 
 export class DatePickerPo extends CoreBaseComponentPo {
-    private url = '/date-picker';
-
     defaultExample = 'fd-date-picker-single-example ';
     rangeExample = 'fd-date-picker-range-example ';
     internationalExample = 'fd-datepicker-i18n-example ';
@@ -41,6 +39,8 @@ export class DatePickerPo extends CoreBaseComponentPo {
     selectMonthButton = 'div > div:nth-child(2) > button';
     selectYearButton = 'div:nth-child(3) > button';
     monthAttributeLabel = 'data-fd-calendar-month';
+
+    private url = '/date-picker';
 
     async open(): Promise<void> {
         await super.open(this.url);

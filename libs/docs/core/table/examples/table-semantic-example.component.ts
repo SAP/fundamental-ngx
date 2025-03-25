@@ -11,7 +11,6 @@ import { TableModule, TableStatuses } from '@fundamental-ngx/core/table';
     imports: [FocusableGridDirective, TableModule, CheckboxComponent, FormsModule, LinkComponent]
 })
 export class TableSemanticExampleComponent {
-    private readonly _rangeSelector = new RangeSelector();
     isAllSelected: boolean | null = false;
 
     tableRows: RowData[] = [
@@ -80,6 +79,8 @@ export class TableSemanticExampleComponent {
             checked: false
         }
     ];
+
+    private readonly _rangeSelector = new RangeSelector();
 
     select(index: number, event: MouseEvent): void {
         // using rangeSelector utility to be able to select multiple rows while "shift" is pressed

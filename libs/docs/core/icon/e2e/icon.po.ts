@@ -1,8 +1,8 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class IconPo extends CoreBaseComponentPo {
-    private url = '/icon';
     root = '#page-content';
+    private url = '/icon';
 
     async open(): Promise<void> {
         await super.open(this.url);

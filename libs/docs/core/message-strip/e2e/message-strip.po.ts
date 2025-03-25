@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class MessageStripPo extends CoreBaseComponentPo {
-    private url = '/message-strip';
-
     defaultExample = 'fd-message-strip-example ';
     noIconExample = 'fd-message-strip-noicon-example ';
     widthExample = 'fd-message-strip-width-example ';
@@ -19,6 +17,8 @@ export class MessageStripPo extends CoreBaseComponentPo {
     stateOption = this.playground + 'option';
     resetButton = this.playground + '.fd-fieldset .fd-button';
     messageStripMessage = this.playground + '.fd-message-strip__text';
+
+    private url = '/message-strip';
 
     async open(): Promise<void> {
         await super.open(this.url);

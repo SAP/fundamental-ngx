@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class BusyIndicatorPo extends CoreBaseComponentPo {
-    private url = '/busy-indicator';
     componentExample = '.docs-tile-content-example';
     root = '#page-content';
     enableDisableButton = 'fd-busy-indicator ~ button';
@@ -23,6 +22,8 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     largeIndicator = '.fd-busy-indicator.fd-busy-indicator--l';
     indicatorBlockWrapper = 'fd-busy-indicator-wrapper-example  fd-busy-indicator:nth-child(2)';
     messageToast = '.fd-message-toast ';
+
+    private url = '/busy-indicator';
 
     async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
