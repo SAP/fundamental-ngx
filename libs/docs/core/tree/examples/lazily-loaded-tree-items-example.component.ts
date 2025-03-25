@@ -7,7 +7,6 @@ import { FdTreeDataSource, TreeItem, TreeModule } from '@fundamental-ngx/core/tr
 import { Observable, delay, of } from 'rxjs';
 
 let index = 0;
-let totalIndex = 0;
 
 @Component({
     selector: 'fd-lazily-loaded-tree-items-example',

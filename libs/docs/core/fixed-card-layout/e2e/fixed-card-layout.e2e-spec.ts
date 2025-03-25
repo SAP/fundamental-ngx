@@ -17,11 +17,7 @@ describe('Fixed card layout test suite', () => {
         cardDivArr,
         cardHeaderArr,
         cardContentArr,
-        cardColumnArr,
         disableDragBtn,
-        placeholderCard,
-        navigationMenuBtn,
-        pageSidebar,
         disabledCardContent,
         disabledCardDiv
     } = fxdCardLayoutPage;

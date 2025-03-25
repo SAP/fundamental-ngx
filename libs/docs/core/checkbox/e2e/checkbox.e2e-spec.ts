@@ -33,7 +33,6 @@ describe('checkbox test suite', () => {
         customLabelCheckbox,
         styledCheckbox,
         checkbox,
-        checkboxInput,
         checkboxLabel,
         checkboxCheckmark,
         link,

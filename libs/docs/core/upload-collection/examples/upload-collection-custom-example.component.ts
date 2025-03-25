@@ -41,6 +41,9 @@ import {
     ]
 })
 export class UploadCollectionCustomExampleComponent {
+    @ContentChildren(UploadCollectionItemDirective, { descendants: true })
+    uploadCollectionItems: QueryList<UploadCollectionItemDirective>;
+
     files = [
         {
             fileName: 'File_Name_1',
@@ -62,9 +65,6 @@ export class UploadCollectionCustomExampleComponent {
         },
         { fileName: 'File_Name_3', extension: 'pdf', icon: 'customer', allowEdit: true, allowDelete: false }
     ];
-
-    @ContentChildren(UploadCollectionItemDirective, { descendants: true })
-    uploadCollectionItems: QueryList<UploadCollectionItemDirective>;
 
     fileNameChanged(event: UploadCollectionItemDirective): void {
         window.alert('User has updated the file name to ' + event.fileName);

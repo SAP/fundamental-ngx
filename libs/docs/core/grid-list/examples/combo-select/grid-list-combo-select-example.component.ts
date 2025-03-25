@@ -44,10 +44,10 @@ interface GridListItem {
     ]
 })
 export class GridListComboSelectComponent {
-    selectionMode = 'None';
-
     @ViewChild(GridListComponent)
     grid: GridListComponent<GridListItem>;
+
+    selectionMode = 'None';
 
     list: GridListItem[] = [
         {
@@ -120,7 +120,7 @@ export class GridListComboSelectComponent {
         }
     }
 
-    onCardClick() {
+    onCardClick(): void {
         alert('Card clicked');
     }
 }

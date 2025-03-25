@@ -8,7 +8,7 @@ import { TileModule } from '@fundamental-ngx/core/tile';
     imports: [TileModule]
 })
 export class LaunchTileExampleComponent {
-    tileClick() {
+    tileClick(): void {
         alert('Refresh clicked!');
     }
 }

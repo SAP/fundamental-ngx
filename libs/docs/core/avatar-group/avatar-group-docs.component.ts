@@ -13,6 +13,7 @@ import { AvatarGroupDefaultExampleComponent } from './examples/default/avatar-gr
 import { GroupTypeExampleComponent } from './examples/group-type/group-type-example.component';
 import { AvatarGroupVerticalExampleComponent } from './examples/vertical/avatar-group-vertical-example.component';
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const service = () => ({
     language: 'typescript',
     name: 'avatar-group-data-example.service.ts',

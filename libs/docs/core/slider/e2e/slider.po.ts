@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SliderPo extends CoreBaseComponentPo {
-    private url = '/slider';
-
     pageHeader = 'fd-slider-header h1';
 
     // example blocks
@@ -39,6 +37,8 @@ export class SliderPo extends CoreBaseComponentPo {
     // other selectors
     ticksAnsMarksSliderTicks = this.ticksAndLabelsExamples + '.fd-slider__ticks';
     ticksAnsMarksSliderLabels = this.ticksAndLabelsExamples + this.sliderLabels;
+
+    private url = '/slider';
 
     async open(): Promise<void> {
         await super.open(this.url);

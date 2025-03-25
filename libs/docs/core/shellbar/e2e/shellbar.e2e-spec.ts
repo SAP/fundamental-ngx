@@ -29,19 +29,10 @@ describe('shellbar test suite', () => {
         collapsableExample,
         sizeButtons,
         collapsableShellbar,
-        searchbarButton,
-        searchField,
         collapsableShellbarTitle,
-        searchMenuItem,
         actionButton,
         myAppsButton,
-        myApps,
-        sideNavExample,
-        sideNavItems,
-        sideNavIcons,
-        sideNavText,
-        sideNavControlBtn,
-        suggestionsDropdown
+        myApps
     } = shellbarPage;
 
     beforeAll(async () => {

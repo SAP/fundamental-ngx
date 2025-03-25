@@ -262,12 +262,6 @@ module.exports = [
             'no-throw-literal': 'error',
             'no-undef-init': 'error',
             'no-unused-expressions': 'off',
-            'no-unused-vars': [
-                'error',
-                {
-                    args: 'none'
-                }
-            ],
             'no-var': 'error',
             'object-curly-spacing': ['error', 'always'],
             'object-shorthand': ['error', 'always'],

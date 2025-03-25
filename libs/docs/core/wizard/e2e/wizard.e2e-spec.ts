@@ -317,7 +317,7 @@ describe('Wizard component test', () => {
                 if ((await getValue(selector)) === value) {
                     return;
                 }
-            } catch (e) {
+            } catch (_e) {
                 attempts++;
                 await pause(500);
             }

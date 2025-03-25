@@ -23,13 +23,11 @@ describe('Grid-list test suite', () => {
         moreButtonItems,
         footer,
         gridListItemsByMode,
-        deleteModeTitle,
         deleteItemButton,
         lockedStateItemButton,
         lockedStateItemText,
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
-        dragAndDropItems,
         gridListToolbar,
         deleteSegmentedButton,
         multiSelectSegmentedButton
