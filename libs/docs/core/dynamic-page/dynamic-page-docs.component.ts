@@ -10,6 +10,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { DPWizardExampleComponent } from './examples/dp-wizard/dp-wizard-example.component';
 import { DynamicPageColumnLayoutExampleComponent } from './examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component';
 import { DynamicPageDynamicContainerHeightExampleComponent } from './examples/dynamic-page-dynamic-container-height-example/dynamic-page-dynamic-container-height-example.component';
 import { DynamicPageExampleComponent } from './examples/dynamic-page-example.component';
@@ -36,6 +37,9 @@ const dynamicPageFacetsExampleTsCode = 'dynamic-page-facets-example/dynamic-page
 const dynamicPageRoutingHtmlCode = 'dynamic-page-routing/dynamic-page-routing-example.component.html';
 const dynamicPageRoutingTsCode = 'dynamic-page-routing/dynamic-page-routing-example.component.ts';
 
+const dpWizardExampleHtmlCode = 'dp-wizard/dp-wizard-example.component.html';
+const dpWizardExampleTsCode = 'dp-wizard/dp-wizard-example.component.ts';
+
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './dynamic-page-docs.component.html',
@@ -52,6 +56,7 @@ const dynamicPageRoutingTsCode = 'dynamic-page-routing/dynamic-page-routing-exam
         DynamicPageFacetsExampleComponent,
         DynamicPageDynamicContainerHeightExampleComponent,
         DynamicPageRoutingExampleComponent,
+        DPWizardExampleComponent,
         RouterLink
     ]
 })
@@ -137,6 +142,20 @@ export class DynamicPageDocsComponent {
             code: getAssetFromModuleAssets(dynamicPageRoutingTsCode),
             fileName: 'dynamic-page-routing-example',
             component: 'DynamicPageRoutingExampleComponent'
+        }
+    ];
+
+    dpWizard: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dpWizardExampleHtmlCode),
+            fileName: 'dp-wizard-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(dpWizardExampleTsCode),
+            fileName: 'dp-wizard-example',
+            component: 'DPWizardExampleComponent'
         }
     ];
 }
