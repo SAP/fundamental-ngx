@@ -44,7 +44,7 @@ interface GridListItem {
     ]
 })
 export class GridListComboSelectComponent {
-    selectionMode: string = 'None';
+    selectionMode = 'None';
 
     @ViewChild(GridListComponent)
     grid: GridListComponent<GridListItem>;

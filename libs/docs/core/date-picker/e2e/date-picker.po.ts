@@ -1,4 +1,3 @@
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CoreBaseComponentPo, getElementClass, waitForElDisplayed } from '../../../../../e2e';
 
 export class DatePickerPo extends CoreBaseComponentPo {

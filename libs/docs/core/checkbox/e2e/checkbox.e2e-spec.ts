@@ -1,5 +1,3 @@
-import { CheckboxPo } from './checkbox.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     browserIsSafari,
     click,
@@ -23,6 +21,7 @@ import {
     customLabelsArr,
     emptyString
 } from './checkbox-content';
+import { CheckboxPo } from './checkbox.po';
 
 describe('checkbox test suite', () => {
     const checkboxPage = new CheckboxPo();

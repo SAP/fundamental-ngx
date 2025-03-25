@@ -1,5 +1,3 @@
-import { CarouselPo } from './carousel.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     browserIsSafari,
     click,
@@ -15,6 +13,7 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { imgSource, loadErrorMsg, numberedPages } from './carousel-contents';
+import { CarouselPo } from './carousel.po';
 
 describe('Carousel test suite', () => {
     const carouselPage = new CarouselPo();

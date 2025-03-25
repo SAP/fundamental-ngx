@@ -1,7 +1,6 @@
+import { checkElArrIsClickable, click, doesItExist, isElementDisplayed, waitForElDisplayed } from '../../../../../e2e';
 import { backButton } from './action-bar-contents';
 import { ActionBarPo } from './action-bar.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { checkElArrIsClickable, click, doesItExist, isElementDisplayed, waitForElDisplayed } from '../../../../../e2e';
 
 describe('Action Bar Test Suite', () => {
     const actionBarPage = new ActionBarPo();

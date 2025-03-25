@@ -79,29 +79,25 @@ export class DatePickerSpecialDayExampleComponent<D> {
             this.specialDaysRulesSignal.set([
                 {
                     ...this.firstRule,
-                    rule: (date: FdDate): boolean => {
-                        return Boolean(
-                            this.customDataList.find((customData) => {
-                                return (
+                    rule: (date: FdDate): boolean =>
+                        Boolean(
+                            this.customDataList.find(
+                                (customData) =>
                                     DateUtil.getEdmDateFormat(DateUtil.getDateFromFdDate(date)) === customData.date &&
                                     customData.active
-                                );
-                            })
-                        );
-                    }
+                            )
+                        )
                 },
                 {
                     ...this.secondRule,
-                    rule: (date: FdDate): boolean => {
-                        return Boolean(
-                            this.customDataList.find((customData) => {
-                                return (
+                    rule: (date: FdDate): boolean =>
+                        Boolean(
+                            this.customDataList.find(
+                                (customData) =>
                                     DateUtil.getEdmDateFormat(DateUtil.getDateFromFdDate(date)) === customData.date &&
                                     !customData.active
-                                );
-                            })
-                        );
-                    }
+                            )
+                        )
                 }
             ]);
         }
