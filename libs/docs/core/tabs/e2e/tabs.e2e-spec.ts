@@ -194,7 +194,7 @@ describe('Tabs test suite', () => {
     });
 
     async function checkTabsSelect(section: string): Promise<boolean> {
-        let length: number = 0;
+        let length = 0;
         if (section === collapsibleOverflowExample) {
             length = (await getElementArrayLength(section + fdTab)) - 3;
         }

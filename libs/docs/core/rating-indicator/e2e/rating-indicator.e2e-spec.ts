@@ -118,7 +118,6 @@ describe('Rating indicator test suite', () => {
             await ratingIndicatorPage.waitForRoot();
             await waitForElDisplayed(ratingIndicatorPage.title);
             await click(inputsDynamicChanges);
-            // eslint-disable-next-line radix
             for (let i = parseInt(await getValue(inputsDynamicChanges)); i !== 1; i--) {
                 await sendKeys('ArrowDown');
             }

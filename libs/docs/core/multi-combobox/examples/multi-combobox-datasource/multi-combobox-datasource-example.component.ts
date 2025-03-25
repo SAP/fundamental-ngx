@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
@@ -27,7 +27,7 @@ import { of } from 'rxjs';
         ReactiveFormsModule
     ]
 })
-export class MultiComboboxDatasourceExampleComponent {
+export class MultiComboboxDatasourceExampleComponent implements OnInit {
     isLimitless = true;
     matchingStategy = MatchingStrategy.CONTAINS;
 
