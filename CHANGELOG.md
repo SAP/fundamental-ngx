@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.2...v0.55.4-rc.3) (2025-03-25)
+
+
+### Features
+
+* **core:** wizard in a dynamic page ([#13140](https://github.com/SAP/fundamental-ngx/issues/13140)) ([36caa13](https://github.com/SAP/fundamental-ngx/commit/36caa137ba30aa39195d577963d4f2e5454d75e0))
+
+
+
+
+
 ## [0.55.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.1...v0.55.4-rc.2) (2025-03-24)
 
 
