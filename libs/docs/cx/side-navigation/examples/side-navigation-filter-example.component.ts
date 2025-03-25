@@ -67,7 +67,7 @@ export class SideNavigationFilterExampleComponent implements OnInit {
 
     displayedItems: any[] = [];
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.displayedItems = this.items;
     }
 
