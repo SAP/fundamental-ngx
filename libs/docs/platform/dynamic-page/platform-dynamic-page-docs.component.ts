@@ -68,10 +68,6 @@ const platformDynamicPagePageOverflowServiceTs = 'platform-dynamic-page-page-ove
     ]
 })
 export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
-    private _subscription: Subscription;
-    // service to change the overflow value for page-content class
-    constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
-
     dynamicPageBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -232,6 +228,11 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
             service: true
         }
     ];
+
+    private _subscription: Subscription;
+
+    // service to change the overflow value for page-content class
+    constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
     ngOnInit(): void {
         this._subscription = this._overflowHandlingService.isExampleOpened.subscribe((isExampleOpened) => {

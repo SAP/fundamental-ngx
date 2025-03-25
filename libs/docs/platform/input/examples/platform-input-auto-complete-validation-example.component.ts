@@ -10,6 +10,9 @@ import { PlatformInputModule } from '@fundamental-ngx/platform/form';
     imports: [PopoverComponent, PopoverControlComponent, PlatformInputModule, FormsModule, PopoverBodyComponent]
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
+    @ViewChild('typeahead')
+    typeahead: PopoverComponent;
+
     public inputText: string;
     public options: string[];
 
@@ -28,9 +31,6 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
         'Snooker',
         'Tennis'
     ];
-
-    @ViewChild('typeahead')
-    typeahead: PopoverComponent;
 
     ngOnInit(): void {
         this.options = [];

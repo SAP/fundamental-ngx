@@ -9,7 +9,6 @@ import {
 } from '../../../../../e2e';
 
 export class MultiInputPo extends PlatformBaseComponentPo {
-    private url = '/multi-input';
     root = '#page-content';
     header = 'h2';
     expandedDropdown = 'fdp-list .fd-list';
@@ -31,6 +30,8 @@ export class MultiInputPo extends PlatformBaseComponentPo {
     declineButton = '.fd-button[glyph=decline]';
     listitems = 'ul[role=list] [role="listitem"] li';
     reactiveExample = 'fdp-platform-multi-input-reactive-example';
+
+    private url = '/multi-input';
 
     crossButton = (option: string): string => `//span[text() = '${option}']/../following-sibling::span`;
 

@@ -53,7 +53,7 @@ export class PlatformTableP13FilterExampleComponent {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
 
-    validator = (rules: CollectionFilter[]) => {
+    validator: (rules: CollectionFilter[]) => boolean = (rules: CollectionFilter[]) => {
         let retVal = true;
         let foundMatch = false;
         const excludedRules = [...rules.filter((rule) => rule.exclude === true)];
@@ -135,6 +135,23 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+        const searchText = searchInput?.text || '';
+        const keysToSearchBy = columnKeys;
+
+        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            return valuesForSearch
+                .filter((value) => !!value)
+                .map((value): string => value.toString())
+                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+        });
+    }
+
     private sort({ sortBy }: TableState): ExampleItem[] {
         const items = this.items.slice();
 
@@ -181,23 +198,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
             });
 
         return items;
-    }
-
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
-        const searchText = searchInput?.text || '';
-        const keysToSearchBy = columnKeys;
-
-        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
-            return items;
-        }
-
-        return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
-            return valuesForSearch
-                .filter((value) => !!value)
-                .map((value): string => value.toString())
-                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
-        });
     }
 }
 

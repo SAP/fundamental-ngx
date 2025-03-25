@@ -15,7 +15,7 @@ import { delay } from 'rxjs/operators';
     imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformComboboxModule, FormsModule]
 })
 export class ComboboxLoadingExampleComponent {
-    private options = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
+    options = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
     readonly dataSource = new ComboBoxDataSource(new DelayedBaseDataProvider(this.options));
 
     selectedItem = this.options[3];
