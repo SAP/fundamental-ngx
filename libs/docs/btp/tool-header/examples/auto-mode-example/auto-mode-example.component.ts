@@ -191,7 +191,7 @@ export class ToolHeaderAutoModeExampleComponent {
         }
     ];
 
-    valueUpdate($event: string) {
+    valueUpdate($event: string): void {
         console.log($event);
         this.searchValue = $event;
     }
