@@ -207,11 +207,11 @@ const ITEMS: TableRow[] = [
         date: new FdDate(2020, 5, 4),
         verified: true
     }
-].map((value, index) => {
-    return newTableRow({
+].map((value, index) =>
+    newTableRow({
         type: TableRowType.ITEM,
         checked: index % 4 === 0,
         index,
         value
-    });
-});
+    })
+);

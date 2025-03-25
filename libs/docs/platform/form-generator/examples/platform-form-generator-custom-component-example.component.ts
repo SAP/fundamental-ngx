@@ -54,7 +54,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
     formCreated = false;
     formValue: DynamicFormValue;
 
-    questions: DynamicFormItem<{}, SliderDynamicFormControl>[] = [
+    questions: DynamicFormItem<object, SliderDynamicFormControl>[] = [
         {
             type: 'slider',
             name: 'some_slider',

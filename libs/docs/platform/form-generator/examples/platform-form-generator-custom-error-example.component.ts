@@ -15,9 +15,9 @@ import {
     imports: [PlatformFormGeneratorModule, PlatformButtonModule]
 })
 export class PlatformFormGeneratorCustomErrorExampleComponent {
-    formCreated = false;
-
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
+
+    formCreated = false;
 
     formItems: DynamicFormItem[] = [
         {

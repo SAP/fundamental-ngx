@@ -1,8 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ListPo extends PlatformBaseComponentPo {
-    private url = '/list';
-
     // deletion examples
     deletionListItems = 'fdp-platform-list-with-delete-button-example .fd-list__item';
     deletionBtn = 'fdp-platform-list-with-delete-button-example button';
@@ -26,6 +24,8 @@ export class ListPo extends PlatformBaseComponentPo {
     // button examples
     btnDeleteBtn = 'fdp-platform-list-with-buttons-example button[id^=delete]';
     btnEditBtn = 'fdp-platform-list-with-buttons-example button[id^=detail]';
+
+    private url = '/list';
 
     async open(): Promise<void> {
         await super.open(this.url);

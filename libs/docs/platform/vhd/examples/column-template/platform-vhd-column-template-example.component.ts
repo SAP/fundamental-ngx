@@ -162,7 +162,7 @@ class DelayedVhdDataProvider<R extends object> extends VhdDataProvider<R> {
     // Override default fetch method to be able to deal with booleans.
     // Developers should implement own logic of filtering the data. E.g. sending http request to the backend.
     fetch(params: Map<string, string>): Observable<R[]> {
-        let data = this.values;
+        let values = this.values;
         const arrayParams = Array.from(params);
         const filterFn = (row: R): boolean => {
             const rowEntries = Object.entries(row) as string[][];
@@ -176,9 +176,9 @@ class DelayedVhdDataProvider<R extends object> extends VhdDataProvider<R> {
             });
         };
         if (params.size) {
-            data = this.values.filter(filterFn);
+            values = this.values.filter(filterFn);
         }
-        return of(data).pipe(delay(300));
+        return of(values).pipe(delay(300));
     }
 
     private _search(rowEntryValue: any, value: any): boolean {

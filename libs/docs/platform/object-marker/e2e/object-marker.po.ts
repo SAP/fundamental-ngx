@@ -1,12 +1,13 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ObjectMarkerPo extends PlatformBaseComponentPo {
-    private url = '/object-marker';
     root = '#page-content';
 
     marker = 'component-example .fd-object-marker';
     iconOnlyMarkers = 'fdp-object-marker-example span';
     clickableMarkers = 'fdp-object-marker [ng-reflect-clickable="true"]';
+
+    private url = '/object-marker';
 
     async open(): Promise<void> {
         await super.open(this.url);

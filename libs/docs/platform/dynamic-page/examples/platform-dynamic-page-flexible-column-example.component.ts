@@ -116,14 +116,14 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDest
         this.onViewportChanged();
     }
 
+    ngOnDestroy(): void {
+        this.resetPageActions();
+    }
+
     private onViewportChanged(): void {
         // Wait until animation is done and trigger Breadcrumb resize
         setTimeout(() => {
             this.breadCrumbComponent.onResize();
         }, 800);
-    }
-
-    ngOnDestroy(): void {
-        this.resetPageActions();
     }
 }

@@ -63,9 +63,9 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
     currentValue: Partial<VhdValue> = {};
     selected: ExampleTestModel['id'][] = [];
 
-    valueFn = (item: ExampleTestModel) => item.id;
-
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
+
+    valueFn: (item: ExampleTestModel) => number = (item: ExampleTestModel) => item.id;
 
     ngOnInit(): void {
         const data = exampleDataSource();

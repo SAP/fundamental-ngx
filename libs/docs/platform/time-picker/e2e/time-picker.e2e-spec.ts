@@ -19,15 +19,12 @@ describe('Time picker suite', () => {
     const timePickerPage = new TimePickerPO();
     const {
         activeTimePickerInput,
-        timePickerInput,
         timerExpanded,
         activeTimePickerButton,
         errorBorder,
-        selectedValue,
         disabledInput,
         disabledButton,
         navigationDownArrowButton,
-        timeColumn,
         setToNullButton,
         setValidTimeButton,
         hoursColumn,
@@ -155,24 +152,6 @@ describe('Time picker suite', () => {
         await timePickerPage.checkRtlSwitch();
     });
 
-    async function selectHoursAndMinutes(
-        hour: number = 1,
-        minute: number = 1,
-        day_time: string = ' PM '
-    ): Promise<void> {
-        while ((await getText(selectedValue)).trim() !== ` ${hour.toString()} `) {
-            await click(navigationDownArrowButton);
-        }
-        await click(timeColumn, 1);
-        while ((await getText(selectedValue, 1)).trim() !== ` ${minute.toString()} `) {
-            await click(navigationDownArrowButton);
-        }
-        await click(timeColumn, 2);
-        while ((await getText(selectedValue, 2)).trim() !== day_time) {
-            await click(navigationDownArrowButton);
-        }
-    }
-
     async function checkTimeFormat(format: '24h' | '12h', buttonIndex: number = 0): Promise<void> {
         await click(activeTimePickerButton, buttonIndex);
         const arr: number[] = [];
@@ -181,9 +160,7 @@ describe('Time picker suite', () => {
             await click(navigationDownArrowButton);
         }
 
-        const max = arr.reduce((a: number, b: number) => {
-            return Math.max(a, b);
-        }, 0);
+        const max = arr.reduce((a: number, b: number) => Math.max(a, b), 0);
 
         if (format === '12h') {
             await expect(max).not.toBeGreaterThan(12);

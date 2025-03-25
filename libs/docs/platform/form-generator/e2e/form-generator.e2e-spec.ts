@@ -26,7 +26,6 @@ describe('Form generator test suite', () => {
     const formGeneratorPage = new FormGeneratorPo();
     const {
         errorExample,
-        customExample,
         defaultExample,
         observableExample,
         fieldLayoutExample,
@@ -42,8 +41,6 @@ describe('Form generator test suite', () => {
         calendarInputGroup,
         errorMessage,
         radioButtonLabel,
-        sliderPoint,
-        formValue,
         validationInput,
         busyIndicator
     } = formGeneratorPage;

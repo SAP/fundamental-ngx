@@ -53,6 +53,23 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+        const searchText = searchInput?.text || '';
+        const keysToSearchBy = columnKeys;
+
+        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            return valuesForSearch
+                .filter((value) => !!value)
+                .map((value): string => value.toString())
+                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+        });
+    }
+
     private sort({ sortBy }: TableState): ExampleItem[] {
         const items = this.items.slice();
 
@@ -146,23 +163,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
                     (getNestedValue(groupCriteria.field, a) > getNestedValue(groupCriteria.field, b) ? 1 : -1) *
                     ascModifier
             );
-    }
-
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
-        const searchText = searchInput?.text || '';
-        const keysToSearchBy = columnKeys;
-
-        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
-            return items;
-        }
-
-        return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
-            return valuesForSearch
-                .filter((value) => !!value)
-                .map((value): string => value.toString())
-                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
-        });
     }
 }
 

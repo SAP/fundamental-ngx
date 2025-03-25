@@ -93,7 +93,9 @@ export class PlatformVhdBasicExampleComponent {
 
     readonly messageBoxService = inject(MessageBoxService);
 
-    validator = (value: VhdValueChangeEvent) =>
+    actualItems: string[] = [];
+
+    validator: (value: VhdValueChangeEvent) => Observable<boolean> = (value: VhdValueChangeEvent) =>
         of(value.selected.length <= 10).pipe(
             delay(5000),
             tap((result) => {
@@ -114,8 +116,6 @@ export class PlatformVhdBasicExampleComponent {
                 const messageBoxRef = this.messageBoxService.open(content, { type: 'error' });
             })
         );
-
-    actualItems: string[] = [];
     formatTokenFn = (value: VhdValueChangeEvent<ExampleTestModel>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),

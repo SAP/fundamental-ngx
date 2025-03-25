@@ -68,9 +68,6 @@ export class VariantManagementDynamicPageExampleComponent implements OnDestroy {
 
     source: ExampleItem[] = ITEMS;
 
-    trackBy(_: number, item: ExampleItem): number {
-        return item.id;
-    }
     variants: Variant<CombinedVariantManagementPreset>[] = [
         {
             isDefault: true,
@@ -137,6 +134,10 @@ export class VariantManagementDynamicPageExampleComponent implements OnDestroy {
             }
         }
     ];
+
+    trackBy(_: number, item: ExampleItem): number {
+        return item.id;
+    }
 
     onCollapseChange(): void {
         console.log('collapse changed');

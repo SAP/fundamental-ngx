@@ -1,15 +1,17 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
+    inject,
+    OnInit,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
@@ -49,10 +51,10 @@ import { take } from 'rxjs/operators';
     imports: [FDP_ICON_TAB_BAR, SettingsGeneratorModule, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
-    protected _destroyRef = inject(DestroyRef);
-
     @ViewChildren(TabPanelComponent)
     tabPanels: QueryList<TabPanelComponent>;
+
+    protected _destroyRef = inject(DestroyRef);
 
     /**
      * Abstract method implementation for activating defined section and (optionally) group.
@@ -61,10 +63,7 @@ export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorL
      */
     focusElementByPath(path: string, element: ElementRef<HTMLElement>): void {
         const pathArray = path.split('.');
-        const sectionIndex =
-            this.settings?.items.findIndex((section) => {
-                return (<any>section).id === pathArray[0];
-            }) ?? -1;
+        const sectionIndex = this.settings?.items.findIndex((section) => (<any>section).id === pathArray[0]) ?? -1;
         if (sectionIndex > -1) {
             this.tabPanels.get(sectionIndex)!.open(true);
         }
@@ -92,7 +91,7 @@ export interface FlatSettingsLayout extends BaseSettingsModel<AnyDynamicFormFiel
         }
     ]
 })
-export class SettingsGeneratorCustomLayoutExampleComponent {
+export class SettingsGeneratorCustomLayoutExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('firstTabContent')
     firstTabContent: TemplateRef<any>;
 
