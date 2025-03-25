@@ -9,7 +9,8 @@ module.exports = [
         files: ['**/*.ts'],
         rules: {
             '@angular-eslint/directive-selector': ['off'],
-            '@angular-eslint/component-selector': ['off']
+            '@angular-eslint/component-selector': ['off'],
+            '@nx/enforce-module-boundaries': ['off']
         }
     },
     {
