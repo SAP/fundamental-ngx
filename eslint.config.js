@@ -217,13 +217,6 @@ module.exports = [
                 }
             ],
             'keyword-spacing': 'error',
-            'max-len': [
-                'error',
-                {
-                    code: 160,
-                    ignorePattern: '^import .*'
-                }
-            ],
             'new-parens': 'error',
             'no-bitwise': 'error',
             'no-caller': 'error',
@@ -282,7 +275,6 @@ module.exports = [
             'prefer-arrow/prefer-arrow-functions': 'off',
             'prefer-const': 'error',
             'quote-props': ['off', 'as-needed'],
-            radix: 'error',
             semi: ['error', 'always'],
             'space-before-blocks': 'error',
             'space-infix-ops': 'error',
