@@ -31,11 +31,11 @@ import { DragAndDropModule, FdDndDropEventMode, FdDropEvent } from '@fundamental
     imports: [NgTemplateOutlet, DragAndDropModule, NgStyle]
 })
 export class DefaultExampleComponent {
-    private _cdr = inject(ChangeDetectorRef);
-
     values = generateItems();
     values2 = generateItems();
     values3 = generateItems();
+
+    private _cdr = inject(ChangeDetectorRef);
 
     onItemDropped(event: FdDropEvent<ListItem>, property: string): void {
         const values = this[property] as ListItem[];

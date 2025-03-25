@@ -62,9 +62,7 @@ export class ExampleDataSourceParser<T> implements DataSourceParser<T, ExampleDa
     hostDirectives: [
         {
             directive: DataSourceDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['dataSource'],
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
             outputs: ['dataChanged']
         }
     ],
@@ -104,7 +102,7 @@ export class DataSourceDefaultExampleComponent implements OnInit {
 
         this.dataSourceDirective.isLoading.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isLoading) => {
             this.isLoading = isLoading;
-            this._cd.detectChanges;
+            this._cd.detectChanges();
         });
     }
 
