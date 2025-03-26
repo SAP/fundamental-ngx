@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class QuickViewPo extends CoreBaseComponentPo {
-    private url = '/quick-view';
     root = '#page-content';
 
     mobileLabel = '(//fd-quick-view-group-item-content//child::a[contains(@href, "tel")])[1]';
@@ -23,6 +22,8 @@ export class QuickViewPo extends CoreBaseComponentPo {
     popoverSendReminderButton = '.fd-bar__right :nth-child(1) button';
     popoverCancelButton = '.fd-bar__right :nth-child(2) button';
     openDialogButton = '#in-dialog + component-example button';
+
+    private url = '/quick-view';
 
     async open(): Promise<void> {
         await super.open(this.url);

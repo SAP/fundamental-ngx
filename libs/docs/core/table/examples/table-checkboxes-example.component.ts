@@ -21,8 +21,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     ]
 })
 export class TableCheckboxesExampleComponent {
-    private readonly _rangeSelector = new RangeSelector();
-
     checkboxValue: boolean | null = false;
     checkboxValueCompact: boolean | null = false;
     checkboxValueCondensed: boolean | null = false;
@@ -104,6 +102,8 @@ export class TableCheckboxesExampleComponent {
             checked: false
         }
     ];
+
+    private readonly _rangeSelector = new RangeSelector();
 
     select(index: number, event: MouseEvent, size: string): void {
         // using rangeSelector utility to be able to select multiple rows while "shift" is pressed

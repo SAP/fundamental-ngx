@@ -44,6 +44,10 @@ export class PlatformTableTreeExampleComponent {
 
     source: TableDataSource<ExampleItem>;
 
+    constructor() {
+        this.source = new TableDataSource(new TableDataProviderExample());
+    }
+
     dropPredicate: DropPredicate<TableRow<ExampleItem>> = (dragRow, dropRow, evt) => {
         console.log(dragRow, dropRow, evt);
         // Cancel the drop if categories are different.
@@ -59,10 +63,6 @@ export class PlatformTableTreeExampleComponent {
         }
         return true;
     };
-
-    constructor() {
-        this.source = new TableDataSource(new TableDataProviderExample());
-    }
 
     alert(message: string): void {
         alert(message);
@@ -80,7 +80,7 @@ export class PlatformTableTreeExampleComponent {
         this.table.toggleGroupRows(0);
     }
 
-    onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>) {
+    onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
         console.log(event);
     }
 }

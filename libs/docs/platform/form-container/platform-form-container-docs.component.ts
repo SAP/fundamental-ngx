@@ -22,8 +22,6 @@ const platformFormLayoutContainerSrc = 'platform-form-container-recommended-exam
 const platformFormLayoutContainerTsCode = 'platform-form-container-recommended-example.component.ts';
 const platformPossibleFormContainerSrc = 'platform-form-container-possible-example.component.html';
 const platformPossibleFormContainerTsCode = 'platform-form-container-possible-example.component.ts';
-const platformNotRecommendedFormContainerSrc = 'platform-form-container-not-recommended-example.component.html';
-const platformNotRecommendedFormContainerTsCode = 'platform-form-container-not-recommended-example.component.ts';
 const platformComplexFormContainerSrc = 'platform-form-container-complex-example.component.html';
 const platformComplexFormContainerTsCode = 'platform-form-container-complex-example.component.ts';
 

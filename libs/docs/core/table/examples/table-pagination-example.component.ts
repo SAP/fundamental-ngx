@@ -14,6 +14,9 @@ import { Observable } from 'rxjs';
     imports: [FocusableGridDirective, TableModule, LinkComponent, IconComponent, PaginationModule, ToolbarItemDirective]
 })
 export class TablePaginationExampleComponent implements OnInit {
+    @ViewChild('itemsPerPageMenu')
+    itemsPerPageMenu: MenuComponent;
+
     tableRows: any[];
     displayedRows: any[];
     totalItems = 30;
@@ -22,8 +25,7 @@ export class TablePaginationExampleComponent implements OnInit {
     itemsPerPageOptions: number[] = [3, 5, 10];
     rtl$: Observable<boolean>;
 
-    @ViewChild('itemsPerPageMenu')
-    itemsPerPageMenu: MenuComponent;
+    constructor(private _rtlService: RtlService) {}
 
     newPageClicked(pageNumber: number): void {
         this.currentPage = pageNumber;
@@ -38,8 +40,6 @@ export class TablePaginationExampleComponent implements OnInit {
         this.itemsPerPage = value;
         this.newPageClicked(this.currentPage);
     }
-
-    constructor(private _rtlService: RtlService) {}
 
     ngOnInit(): void {
         this.rtl$ = this._rtlService.rtl;

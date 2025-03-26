@@ -10,9 +10,6 @@
             "options": {
                 "commands": ["echo === E2E ===", "yarn run e2e:wdio"]
             }
-        },
-        "lint": {
-            "executor": "@nx/eslint:lint"
         }
     }
 }

@@ -48,6 +48,9 @@ import { Observable, delay, of } from 'rxjs';
     ]
 })
 export class MessagePopoverDefaultExampleComponent {
+    @ViewChild('reactiveForm', { read: FormGroupDirective })
+    reactiveForm: FormGroupDirective;
+
     templateFormValue = {
         input1: '',
         input2: ''
@@ -58,9 +61,6 @@ export class MessagePopoverDefaultExampleComponent {
     validate = [Validators.requiredTrue];
     maxValidator = [Validators.max(40)];
     emailValidator = [Validators.email];
-
-    @ViewChild('reactiveForm', { read: FormGroupDirective })
-    reactiveForm: FormGroupDirective;
 
     reactiveFormExample: FormGroup;
 

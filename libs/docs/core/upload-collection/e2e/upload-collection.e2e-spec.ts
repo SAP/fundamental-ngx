@@ -31,7 +31,6 @@ describe('File uploader component test', () => {
         uploadCollectionSmallExample,
         uploadCollectionCustomExample,
         emphasizedButton,
-        fileUploaderInputFile,
         checkbox,
         standardButton
     } = uploadCollectionPage;

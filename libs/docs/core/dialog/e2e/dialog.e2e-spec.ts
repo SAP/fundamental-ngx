@@ -1,5 +1,3 @@
-import { DialogPo } from './dialog.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -39,6 +37,7 @@ import {
     noMobileSpacingClass,
     styleAttribute
 } from './dialog-contents';
+import { DialogPo } from './dialog.po';
 
 describe('dialog test suite', () => {
     const dialogPage = new DialogPo();

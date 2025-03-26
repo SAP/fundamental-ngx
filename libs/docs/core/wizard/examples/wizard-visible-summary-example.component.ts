@@ -46,6 +46,10 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     ]
 })
 export class WizardVisibleSummaryExampleComponent {
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    wizardStepComponents: QueryList<WizardStepComponent>;
+
     step1status: WizardStepStatus = 'current';
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
@@ -57,10 +61,6 @@ export class WizardVisibleSummaryExampleComponent {
     addressLine2 = '';
 
     currentStep = 1;
-
-    /** @hidden */
-    @ViewChildren(WizardStepComponent)
-    wizardStepComponents: QueryList<WizardStepComponent>;
 
     constructor(
         private _dialogService: DialogService,

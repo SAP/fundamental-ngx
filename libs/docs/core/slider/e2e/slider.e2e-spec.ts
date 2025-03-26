@@ -230,9 +230,7 @@ describe('slider test suite', () => {
             await clearValue(sliderInput, 2);
             await click(sliderInput, 2);
             await setValue(sliderInput, '20', 2);
-            // eslint-disable-next-line radix
             const firstLabelValue = parseInt(await getText(firstSliderLabel));
-            // eslint-disable-next-line radix
             const secondLabelValue = parseInt(await getText(secondSliderLabel));
 
             await expect(secondLabelValue - firstLabelValue).toEqual(20);

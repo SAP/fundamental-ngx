@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class InlineHelpPo extends CoreBaseComponentPo {
-    private url = '/inline-help';
     root = '#page-content';
     defaultInlineHelp = 'fd-inline-help-example span';
     inlineHelpIcons = 'fd-inline-help-example fd-icon';
@@ -12,6 +11,8 @@ export class InlineHelpPo extends CoreBaseComponentPo {
     inlineHelpExampleExtended = '.docs-tile';
     popover = 'div.fd-popover__body';
     inlineHelp = '.fd-inline-help__content';
+
+    private url = '/inline-help';
 
     async open(): Promise<void> {
         await super.open(this.url);

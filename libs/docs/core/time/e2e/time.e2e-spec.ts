@@ -40,7 +40,6 @@ describe('Time component test', () => {
         upperMinute,
         lowerSec,
         upperSec,
-        exampleAreaContainersArr,
         formExample1Hour,
         formExample2Minute,
         formExample3Second

@@ -1,7 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ObjectListItemPo extends PlatformBaseComponentPo {
-    private url = '/object-list-item';
     root = '#page-content';
 
     // selectors for all items on the page
@@ -40,6 +39,8 @@ export class ObjectListItemPo extends PlatformBaseComponentPo {
     objDecIntro = 'fdp-platform-object-list-item-example .fd-object-list__intro';
     objDecAttributes = 'fdp-platform-object-list-item-example fd-object-attribute';
     objDecStatuses = 'fdp-platform-object-list-item-example .fd-object-status';
+
+    private url = '/object-list-item';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FeedListItemPo extends CoreBaseComponentPo {
-    private url = '/feed-list-item';
-
     readonly simpleExample = 'fd-fli-simple-example ';
     readonly avatarExample = 'fd-fli-avatar-example ';
     readonly actionExample = 'fd-fli-action-example ';
@@ -21,6 +19,8 @@ export class FeedListItemPo extends CoreBaseComponentPo {
     readonly optionCancel = '.fd-button--negative';
     readonly avatar = 'fd-avatar';
     readonly icon = ' fd-icon';
+
+    private url = '/feed-list-item';
 
     async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);

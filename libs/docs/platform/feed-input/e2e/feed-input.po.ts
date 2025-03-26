@@ -2,7 +2,6 @@ import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e'
 import { placeholders_array } from './feed-input-page-contents';
 
 export class FeedInputPo extends PlatformBaseComponentPo {
-    private url = '/feed-input';
     root = '#page-content';
 
     feedInput = 'fdp-feed-input';
@@ -12,6 +11,8 @@ export class FeedInputPo extends PlatformBaseComponentPo {
     feedInputNoAvatar = 'fdp-feed-input-no-avatar-example ' + this.feedInputAvatar;
     feedInputPlaceholder1 = `.fd-feed-input__textarea[placeholder="${placeholders_array[0]}"]`;
     feedInputPlaceholder2 = `.fd-feed-input__textarea[placeholder="${placeholders_array[2]}"]`;
+
+    private url = '/feed-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

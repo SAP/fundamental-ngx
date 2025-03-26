@@ -1,5 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -114,9 +115,7 @@ export class ExampleUserService {
         ButtonComponent
     ]
 })
-export class SettingsGeneratorDialogExampleComponent {
-    confirmationReason: string;
-
+export class SettingsGeneratorDialogExampleComponent implements AfterViewInit {
     @ViewChild('privacyContent')
     privacyContent: TemplateRef<any>;
 
@@ -128,6 +127,8 @@ export class SettingsGeneratorDialogExampleComponent {
 
     @ViewChild(SettingsGeneratorComponent)
     settingsGenerator: SettingsGeneratorComponent;
+
+    confirmationReason: string;
 
     schema: SettingsModel;
 

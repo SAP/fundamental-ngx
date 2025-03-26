@@ -21,8 +21,8 @@ import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core
     ]
 })
 export class PopoverMobileExampleComponent {
-    private _cdr = inject(ChangeDetectorRef);
     clickCount = 0;
+    private _cdr = inject(ChangeDetectorRef);
 
     addClick(): void {
         this.clickCount++;

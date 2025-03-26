@@ -1,8 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class MultiComboboxPo extends PlatformBaseComponentPo {
-    private url = '/multi-combobox';
-
     mobileModeExamples = 'fdp-multi-combobox-mobile-example ';
 
     expandButton = 'fdp-multi-combobox .fd-input-group .fd-button';
@@ -22,6 +20,8 @@ export class MultiComboboxPo extends PlatformBaseComponentPo {
     selectedDialogItem = this.dialog + ' .fd-list__item.is-selected .fd-list__title';
     dialogInput = this.dialog + ' #mobile';
     showSelectedItemsBtn = this.dialog + ' .fd-margin-begin--tiny';
+
+    private url = '/multi-combobox';
 
     async open(): Promise<void> {
         await super.open(this.url);

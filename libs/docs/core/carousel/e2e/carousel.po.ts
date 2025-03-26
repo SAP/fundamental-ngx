@@ -1,8 +1,6 @@
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class CarouselPo extends CoreBaseComponentPo {
-    private url = '/carousel';
     root = '#page-content';
 
     sectionTitle = 'fd-docs-section-title h2';
@@ -21,6 +19,8 @@ export class CarouselPo extends CoreBaseComponentPo {
     busyIndicator = 'fd-carousel-loading-content-example .fd-busy-indicator';
     disableLoadingBtn = 'fd-carousel-loading-content-example .fd-button--standard';
     contentNavBtns = 'fd-carousel-content-navigation-example ' + this.navBtns;
+
+    private url = '/carousel';
 
     async open(): Promise<void> {
         await super.open(this.url);

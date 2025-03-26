@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { PlatformTableModule, TableComponent } from '@fundamental-ngx/platform/table';
@@ -30,7 +30,7 @@ import { Observable, delay, of } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableCustomPaginationOuterScrollExampleComponent {
+export class TableCustomPaginationOuterScrollExampleComponent implements OnInit {
     @ViewChild(TableComponent)
     table: TableComponent<ExampleItem>;
 

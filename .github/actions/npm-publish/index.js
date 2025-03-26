@@ -2,14 +2,13 @@ const { getInput, info, error } = require('@actions/core');
 const { npmPublish } = require('@jsdevtools/npm-publish');
 const { resolve } = require('path');
 
-const publishPackage = async ({ packageJsonPath, tag, token, access }) => {
-    return await npmPublish({
+const publishPackage = async ({ packageJsonPath, tag, token, access }) =>
+    await npmPublish({
         package: packageJsonPath,
         token,
         tag,
         access
     });
-};
 
 const handleError = async (exception, retryData) => {
     const { currentTryNumber, retryCount, ...rest } = retryData;

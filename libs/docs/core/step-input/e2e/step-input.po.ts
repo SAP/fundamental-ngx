@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class StepInputPo extends CoreBaseComponentPo {
-    private url = '/step-input';
-
     defaultExample = 'fd-step-input-default-example ';
     configExample = 'fd-step-input-configuration-example ';
     localExample = 'fd-step-input-locale-example ';
@@ -19,6 +17,8 @@ export class StepInputPo extends CoreBaseComponentPo {
     text = 'small';
 
     textForDisabledExample = this.formExample + 'div > div:nth-child(1) > table > tr:nth-child(1) > td:nth-child(2)';
+
+    private url = '/step-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

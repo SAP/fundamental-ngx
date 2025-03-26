@@ -1,5 +1,3 @@
-import { CalendarPo } from './calendar.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     click,
     doesItExist,
@@ -33,6 +31,7 @@ import {
     portraitAttribute,
     tuesdayStartDate
 } from './calendar-contents';
+import { CalendarPo } from './calendar.po';
 
 describe('calendar test suite', () => {
     const calendarPage = new CalendarPo();

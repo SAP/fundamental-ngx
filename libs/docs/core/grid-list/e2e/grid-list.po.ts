@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class GridListPo extends CoreBaseComponentPo {
-    private url = '/grid-list';
     root = '#page-content';
 
     layoutPattern = 'h2#layout-pattern';
@@ -40,6 +39,8 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListToolbar = '.fd-toolbar.fd-toolbar--info ';
     gridListRadioButton = '.fd-grid-list__item-toolbar .fd-grid-list__radio-label';
     gridListCheckbox = '.fd-grid-list__checkbox-label';
+
+    private url = '/grid-list';
 
     gridListItemsByMode = async (name: string): Promise<string> => ` [selectionmode="${name}"] fd-grid-list-item`;
 

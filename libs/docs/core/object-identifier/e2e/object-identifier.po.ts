@@ -1,10 +1,10 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ObjectIdentifierPo extends CoreBaseComponentPo {
-    private url = '/object-identifier';
-
     identifier = '.fd-object-identifier';
     clickableLinks = '.fd-link';
+
+    private url = '/object-identifier';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -64,7 +64,7 @@ const gridListComboSelectHtml = 'combo-select/grid-list-combo-select-example.com
     ]
 })
 export class GridListDocsComponent {
-    private _scssFileCode = getAssetFromModuleAssets(scssFileCode);
+    _scssFileCode = getAssetFromModuleAssets(scssFileCode);
 
     gridListComboExample: ExampleFile[] = [
         {

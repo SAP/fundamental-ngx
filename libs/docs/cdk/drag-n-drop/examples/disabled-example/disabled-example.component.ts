@@ -57,7 +57,6 @@ import { delay, of } from 'rxjs';
 })
 export class DisabledExampleComponent {
     values = generateItems();
-    private _cdr = inject(ChangeDetectorRef);
 
     dropMode: 'all' | 'none' | 'odd' = 'all';
 
@@ -66,6 +65,8 @@ export class DisabledExampleComponent {
     simulateDelay = false;
 
     loading = false;
+
+    private _cdr = inject(ChangeDetectorRef);
 
     dragoverPredicate: DragoverPredicate<ListItem> = (dragItem, dragOverItem, dragItemIndex, dragOverItemIndex) => {
         console.log(dragItem, dragOverItem, dragItemIndex, dragOverItemIndex);
@@ -86,7 +87,7 @@ export class DisabledExampleComponent {
     };
 
     predicate: DropPredicate<ListItem> = (dragItem, dropItem, event) => {
-        const resultFn = () => {
+        const resultFn = (): boolean => {
             if (this.dropMode === 'all') {
                 return true;
             }

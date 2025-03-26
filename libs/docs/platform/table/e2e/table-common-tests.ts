@@ -10,7 +10,7 @@ import {
 } from '../../../../../e2e';
 import { TablePo } from './table.po';
 
-export const runCommonTests = (allInputFields: string, tablePage: TablePo) => {
+export const runCommonTests = (allInputFields: string, tablePage: TablePo): void => {
     describe('Check input fields', () => {
         xit('should check input fields does not change width', async () => {
             // TODO - review the test

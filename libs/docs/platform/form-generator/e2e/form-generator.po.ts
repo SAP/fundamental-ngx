@@ -1,8 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FormGeneratorPo extends PlatformBaseComponentPo {
-    private url = '/form-generator';
-
     defaultExample = 'fdp-platform-form-generator-example ';
     observableExample = 'fdp-platform-form-generator-observable-example ';
     customExample = 'fdp-platform-form-generator-custom-component-example ';
@@ -26,6 +24,8 @@ export class FormGeneratorPo extends PlatformBaseComponentPo {
     sliderPoint = '.fd-slider__handle';
     validationInput = '.fd-input[aria-labelledby*="validation"]';
     busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
+
+    private url = '/form-generator';
 
     async open(): Promise<void> {
         await super.open(this.url);

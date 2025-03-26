@@ -1,8 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SwitchPo extends PlatformBaseComponentPo {
-    private url = '/switch';
-
     root = '#page-content';
     defaultSwitchLabel = '#default-switch .fd-switch';
     defaultSwitchInput = '#default-switch-input';
@@ -33,6 +31,8 @@ export class SwitchPo extends PlatformBaseComponentPo {
     semanticCompactSwitchHandel = '#semantic-switch-compact .fd-switch__handle';
     semanticCompactSwitchIconOff = '#semantic-switch-compact .fd-switch__icon--off';
     semanticCompactSwitchIconOn = '#semantic-switch-compact .fd-switch__icon--on';
+
+    private url = '/switch';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -74,6 +74,12 @@ const customErrorsConfig: MessagePopoverConfig = {
     ]
 })
 export class MessagePopoverCustomConfigExampleComponent {
+    @ViewChild('personal', { read: FormGroupDirective })
+    personalForm: FormGroupDirective;
+
+    @ViewChild('business', { read: FormGroupDirective })
+    businessForm: FormGroupDirective;
+
     personalInfoForm: FormGroup;
     businessInfoForm: FormGroup;
     submitted = false;
@@ -85,12 +91,6 @@ export class MessagePopoverCustomConfigExampleComponent {
 
     maxErrorModel: MaxErrorModel;
     maxLengthErrorModel: MaxLengthErrorModel;
-
-    @ViewChild('personal', { read: FormGroupDirective })
-    personalForm: FormGroupDirective;
-
-    @ViewChild('business', { read: FormGroupDirective })
-    businessForm: FormGroupDirective;
 
     constructor(private readonly _cd: ChangeDetectorRef) {
         this.personalInfoForm = new FormGroup({});

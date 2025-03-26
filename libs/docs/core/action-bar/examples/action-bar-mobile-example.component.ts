@@ -16,10 +16,10 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
     imports: [ActionBarModule, ButtonComponent, MenuModule, AsyncPipe]
 })
 export class ActionBarMobileExampleComponent implements OnInit {
-    navigationArrow$: Observable<string>;
-
     @ViewChild('menu')
     menu: MenuComponent;
+
+    navigationArrow$: Observable<string>;
 
     constructor(private _rtlService: RtlService) {}
 

@@ -32,7 +32,7 @@ import {
     ]
 })
 export class UsageWithLayoutExampleComponent {
-    searchValue: string = '';
+    searchValue = '';
 
     actions: Array<FdbToolHeaderActionButton[]> = [
         [
@@ -66,7 +66,7 @@ export class UsageWithLayoutExampleComponent {
         ]
     ];
 
-    valueUpdate($event: any) {}
+    valueUpdate($event: any): void {}
 
-    toggleMenu(b: boolean) {}
+    toggleMenu(b: boolean): void {}
 }

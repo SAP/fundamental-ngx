@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class TitlePo extends CoreBaseComponentPo {
-    private url = '/title';
-
     semanticExample = 'fd-title-semantic-example ';
     visualExample = 'fd-title-visual-example ';
     ellisionExample = 'fd-title-elision-example ';
@@ -10,6 +8,8 @@ export class TitlePo extends CoreBaseComponentPo {
 
     title = '.fd-title';
     paragraphsBlock = 'div';
+
+    private url = '/title';
 
     async open(): Promise<void> {
         await super.open(this.url);

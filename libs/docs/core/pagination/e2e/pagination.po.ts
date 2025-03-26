@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class PaginationPo extends CoreBaseComponentPo {
-    private url = '/pagination';
-
     basicPaginationExample = 'fd-pagination-example ';
     showingItemsPaginationExample = 'fd-pagination-showing-example ';
     perPagePaginationExample = 'fd-pagination-per-page-example ';
@@ -30,6 +28,8 @@ export class PaginationPo extends CoreBaseComponentPo {
     itemsPerPageProperty = '[arialabel="Pagination with itemsPerPage property"] ';
     itemsPerPageTemplate = '[arialabel="Pagination with itemsPerPageOptions property"] ';
     itemsPerPageList = '[arialabel="Pagination with custom items"] ';
+
+    private url = '/pagination';
 
     async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);

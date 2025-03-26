@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class MultiInputPo extends CoreBaseComponentPo {
-    private url = '/multi-input';
-
     activeDropdownButtons = 'button:not(:disabled) .sap-icon--value-help';
     activeInputs = '.fd-multi-input-field input:not(:disabled)';
     disableInputs = 'div.is-disabled';
@@ -33,6 +31,8 @@ export class MultiInputPo extends CoreBaseComponentPo {
     compactInput = '.fd-multi-input.is-compact .fd-input';
     compactMultiInputs = '.fd-multi-input.is-compact fd-input-group';
     cozyMultiInputs = '.fd-multi-input-field fd-input-group:not(.is-disabled)';
+
+    private url = '/multi-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

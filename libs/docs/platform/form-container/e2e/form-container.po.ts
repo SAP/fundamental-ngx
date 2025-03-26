@@ -1,8 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FormContainerPo extends PlatformBaseComponentPo {
-    private url = '/form-container';
-
     textArea = '.fd-textarea';
     checkboxLabel = 'fd-checkbox label';
     formGroup = 'fdp-form-group';
@@ -61,6 +59,8 @@ export class FormContainerPo extends PlatformBaseComponentPo {
     isInlineExampleDropdownMenu = this.isInlineExample + '.fd-select__control';
     isInlineExampleCombobox = this.isInlineExample + 'fdp-combobox input';
     isInlineExampleComboboxBtn = this.isInlineExample + 'fdp-combobox button';
+
+    private url = '/form-container';
 
     async open(): Promise<void> {
         await super.open(this.url);

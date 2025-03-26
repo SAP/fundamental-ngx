@@ -22,8 +22,7 @@ describe('Inline help test suite', () => {
         inlineHelpStyledIcon,
         inlineHelpTemplateExample,
         exampleAreaContainersArr,
-        popover,
-        inlineHelp
+        popover
     } = inlineHelpPage;
 
     beforeAll(async () => {

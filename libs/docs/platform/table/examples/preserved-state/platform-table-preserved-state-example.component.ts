@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -55,7 +56,7 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
         FdDatetimeModule
     ]
 })
-export class PlatformTablePreservedStateExampleComponent {
+export class PlatformTablePreservedStateExampleComponent implements AfterViewInit {
     @ViewChild(TableComponent)
     table: TableComponent;
 
@@ -65,11 +66,9 @@ export class PlatformTablePreservedStateExampleComponent {
 
     items = [...ITEMS];
 
-    private _dateTimeAdapter = inject<DatetimeAdapter<FdDate>>(DatetimeAdapter);
-
-    private readonly _cdr = inject(ChangeDetectorRef);
-
-    source = new ExampleTableDataSource(new ExampleTableProvider(this.items, this._dateTimeAdapter));
+    source = new ExampleTableDataSource(
+        new ExampleTableProvider(this.items, inject<DatetimeAdapter<FdDate>>(DatetimeAdapter))
+    );
 
     page = 1;
 
@@ -82,6 +81,10 @@ export class PlatformTablePreservedStateExampleComponent {
     focusedCell: FocusableCellPosition;
 
     applyScroll = false;
+
+    private _dateTimeAdapter = inject<DatetimeAdapter<FdDate>>(DatetimeAdapter);
+
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -96,40 +99,6 @@ export class PlatformTablePreservedStateExampleComponent {
         this._cdr.detectChanges();
 
         this._listenOnTableData();
-    }
-
-    /**
-     * Method that listens on table's dataReceived event, then switches to tableRowsSet event to restore the scroll position.
-     * This is needed for cases when there's a delay in data source data retrieval.
-     */
-    private _listenOnTableData(): void {
-        this._refresh$.next();
-        this._refresh$.complete();
-
-        this._refresh$ = new Subject();
-
-        if (!this.table) {
-            return;
-        }
-
-        const refresh = merge(destroyObservable(this._destroyRef), this._refresh$);
-
-        this.table._dataSourceDirective.onDataReceived
-            .pipe(
-                switchMap(() => this.table.tableRowsSet),
-                takeUntil(refresh)
-            )
-            .subscribe(() => {
-                if (!this.applyScroll) {
-                    return;
-                }
-                this.applyScroll = false;
-                this.table.tableScrollable.setScrollTop(this.tableOffset, false);
-
-                if (this.focusedCell) {
-                    this.table.focusCell(this.focusedCell);
-                }
-            });
     }
 
     ngAfterViewInit(): void {
@@ -175,6 +144,40 @@ export class PlatformTablePreservedStateExampleComponent {
 
     onCellFocused(event: any): void {
         this.focusedCell = event;
+    }
+
+    /**
+     * Method that listens on table's dataReceived event, then switches to tableRowsSet event to restore the scroll position.
+     * This is needed for cases when there's a delay in data source data retrieval.
+     */
+    private _listenOnTableData(): void {
+        this._refresh$.next();
+        this._refresh$.complete();
+
+        this._refresh$ = new Subject();
+
+        if (!this.table) {
+            return;
+        }
+
+        const refresh = merge(destroyObservable(this._destroyRef), this._refresh$);
+
+        this.table._dataSourceDirective.onDataReceived
+            .pipe(
+                switchMap(() => this.table.tableRowsSet),
+                takeUntil(refresh)
+            )
+            .subscribe(() => {
+                if (!this.applyScroll) {
+                    return;
+                }
+                this.applyScroll = false;
+                this.table.tableScrollable.setScrollTop(this.tableOffset, false);
+
+                if (this.focusedCell) {
+                    this.table.focusCell(this.focusedCell);
+                }
+            });
     }
 }
 
@@ -234,7 +237,7 @@ export class ExampleTableProvider extends TableDataProvider<ExampleItem> {
     }
 
     override fetch(tableState?: TableState): Observable<ExampleItem[]> {
-        let items = this.items;
+        const items = this.items;
 
         return of(items);
     }

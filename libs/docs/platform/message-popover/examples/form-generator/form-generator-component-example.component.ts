@@ -48,6 +48,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         JsonPipe
     ]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class FormGeneratorComponentExample {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 

@@ -28,8 +28,7 @@ describe('Message-box test suits', () => {
         button,
         okButton,
         cancelButton,
-        messageBox,
-        messageIcon
+        messageBox
     } = messageBoxPage;
 
     beforeAll(async () => {

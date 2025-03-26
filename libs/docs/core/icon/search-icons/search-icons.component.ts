@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -56,27 +56,27 @@ export class SearchIconsComponent {
     dataProvider = new IconsDataSourceProvider(availableSapIcons);
     searchTerm = toSignal(this.dataProvider.searchInput$, { requireSync: true });
     source = new TableDataSource<FdIconDocsType>(this.dataProvider);
+    iconType!: FdIconDocsType;
 
     private copyService = inject(CopyService);
     private messageStripAlertService = inject(MessageStripAlertService);
     private domSanitizer = inject(DomSanitizer);
-    iconType!: FdIconDocsType;
 
-    protected copyTheCode(row: FdIconDocsType) {
+    protected copyTheCode(row: FdIconDocsType): void {
         this._copy(`<fd-icon font="${row.font}" glyph="${row.name}" />`);
     }
 
-    protected copyTheName(row: FdIconDocsType) {
+    protected copyTheName(row: FdIconDocsType): void {
         this._copy(row.name);
     }
 
-    protected highlightedInfoLabelHTML(s: string) {
+    protected highlightedInfoLabelHTML(s: string): SafeHtml {
         return this.domSanitizer.bypassSecurityTrustHtml(
             '<span class="highlighted-text fd-info-label__text">' + s + '</span>'
         );
     }
 
-    private _copy(text: string) {
+    private _copy(text: string): void {
         this.copyService.copyText(text);
         this.messageStripAlertService.open({
             content: `\`${text}\` copied!`,
@@ -94,6 +94,7 @@ class IconsDataSourceProvider extends TableDataProvider<FdIconDocsType> {
     fuse: Fuse<any>;
     originalData: FdIconDocsType[];
     private _searchInput$ = new BehaviorSubject('');
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     searchInput$ = this._searchInput$.asObservable();
 
     constructor(data: FdIconDocsType[]) {

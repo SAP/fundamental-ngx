@@ -1,7 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class StandardListItemPo extends PlatformBaseComponentPo {
-    private url = '/standard-list-item';
     root = '#page-content';
 
     // noBorder examples
@@ -45,6 +44,8 @@ export class StandardListItemPo extends PlatformBaseComponentPo {
     sInvtList = 'fdp-standard-list-item-with-inverted-secondary-type-example li';
     sInvtAvatar = 'fdp-standard-list-item-with-inverted-secondary-type-example fd-avatar';
     sInvtListItem = 'fdp-standard-list-item-with-inverted-secondary-type-example fdp-standard-list-item';
+
+    private url = '/standard-list-item';
 
     async open(): Promise<void> {
         await super.open(this.url);

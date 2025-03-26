@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class MessageBoxPo extends CoreBaseComponentPo {
-    private url = '/message-box';
     root = '#page-content';
 
     basedObjectExample = 'fd-object-based-message-box-example ';
@@ -19,6 +18,8 @@ export class MessageBoxPo extends CoreBaseComponentPo {
     cancelButton = 'fd-button-bar:nth-child(2)';
     resultTxt = 'p';
     messageIcon = this.messageBoxExample + 'fd-message-box-semantic-icon > fd-icon';
+
+    private url = '/message-box';
 
     async open(): Promise<void> {
         await super.open(this.url);

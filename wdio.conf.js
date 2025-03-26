@@ -1,9 +1,9 @@
-/*require('ts-node').register({ transpileOnly: true });
+/* require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
 const { join } = require('path');
 import dns from 'node:dns';
 require('ts-node').register({ transpileOnly: true });
-AllureReporter = require('@wdio/allure-reporter').default;
+const AllureReporter = require('@wdio/allure-reporter').default;
 exports.config = {
     beforeSession: () => {
         dns.setDefaultResultOrder('ipv4first');
@@ -351,7 +351,7 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function () {
+    before() {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
@@ -419,7 +419,7 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: function (test, context, { error, result, duration, passed, retries }) {
+    afterTest(test, context, { error, result, duration, passed, retries }) {
         if (error !== undefined) {
             browser.takeScreenshot();
             const html = browser.getPageSource();
@@ -474,6 +474,6 @@ exports.config = {
      * @param {String} oldSessionId session ID of the old session
      * @param {String} newSessionId session ID of the new session
      */
-    //onReload: function(oldSessionId, newSessionId) {
-    //}
+    // onReload: function(oldSessionId, newSessionId) {
+    // }
 };

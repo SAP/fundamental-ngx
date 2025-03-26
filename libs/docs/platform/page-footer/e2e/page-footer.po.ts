@@ -1,9 +1,10 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class PageFooterPo extends PlatformBaseComponentPo {
-    private url = '/page-footer';
     pageFooterClickableLink = '.fd-page-footer__container fdp-link';
     pageFooterText = '.fd-page-footer__text .fd-form-label';
+
+    private url = '/page-footer';
 
     async open(): Promise<void> {
         await super.open(this.url);

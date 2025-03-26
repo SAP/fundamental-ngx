@@ -31,9 +31,6 @@ import { TableSemanticExampleComponent } from './examples/table-semantic-example
 import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
 import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 
-const tableColumnSortPipeTs = 'sort.pipe.ts';
-const tableColumnFilterPipeTs = 'filter.pipe.ts';
-const tableFilterPipe = 'filter.pipe.ts';
 const tableCdkScss = 'table-cdk-example.component.scss';
 const tableHtmlSrc = 'table-example.component.html';
 const tableTsSrc = 'table-example.component.ts';

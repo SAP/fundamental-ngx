@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class TimePo extends CoreBaseComponentPo {
-    private url = '/time';
-
     timeExample = 'fd-time-example ';
     TwelveExample = 'fd-time-12-example ';
     noSpinnersExample = 'fd-time-no-spinners-example ';
@@ -42,6 +40,8 @@ export class TimePo extends CoreBaseComponentPo {
     formExample1Hour = 'fd-time-form-example .fd-time__col:nth-child(1) .fd-time__item[data-displayed-value="1"]';
     formExample2Minute = 'fd-time-form-example .fd-time__col:nth-child(2) .fd-time__item[data-displayed-value="2"]';
     formExample3Second = 'fd-time-form-example .fd-time__col:nth-child(3) .fd-time__item[data-displayed-value="3"]';
+
+    private url = '/time';
 
     async open(): Promise<void> {
         await super.open(this.url);

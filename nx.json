@@ -64,7 +64,7 @@
             "cache": true
         },
         "lint": {
-            "cache": false
+            "cache": true
         },
         "@nx/jest:jest": {
             "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
@@ -106,5 +106,13 @@
     "nxCloudAccessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
     "useInferencePlugins": false,
     "defaultBase": "main",
-    "useLegacyCache": true
+    "useLegacyCache": true,
+    "plugins": [
+        {
+            "plugin": "@nx/eslint/plugin",
+            "options": {
+                "targetName": "lint"
+            }
+        }
+    ]
 }

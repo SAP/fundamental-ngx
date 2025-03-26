@@ -3,10 +3,11 @@ import {
     ChangeDetectorRef,
     Component,
     DestroyRef,
-    Input,
-    ViewChild,
     forwardRef,
-    inject
+    inject,
+    Input,
+    OnInit,
+    ViewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,10 +35,10 @@ import { cloneDeep } from 'lodash-es';
     ]
 })
 export class FormsDefaultExampleComponent {
-    form: FormGroup = new FormGroup({});
-
     @ViewChild('fg1', { read: FormGroupDirective })
     formGroup: FormGroupDirective;
+
+    form: FormGroup = new FormGroup({});
 
     constructor(private readonly _cd: ChangeDetectorRef) {}
 
@@ -73,7 +74,7 @@ export class FormsDefaultExampleComponent {
     ],
     imports: [FormsModule, ReactiveFormsModule, CheckboxComponent]
 })
-export class CustomCdkControlExampleComponent {
+export class CustomCdkControlExampleComponent implements OnInit {
     @Input()
     set options(options: string[]) {
         this.form = this._formBuilder.group(

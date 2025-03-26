@@ -45,7 +45,6 @@ describe('Wizard generator test suite', () => {
         branchingExample,
         responsiveDialogExample,
         step,
-        stepContainer,
         select,
         button,
         listItem,
@@ -835,31 +834,6 @@ describe('Wizard generator test suite', () => {
             });
         });
     });
-
-    async function checkNavigationByScrolling(selector: string): Promise<void> {
-        await scrollIntoView(selector);
-        if (selector === summaryObjectsExample) {
-            await click(checkboxLabel);
-        }
-        if (selector === onChangeExample) {
-            await setValue(selector + input, name);
-        }
-        if (selector !== summaryObjectsExample && selector !== onChangeExample) {
-            await click(selector + select);
-            await click(listItem);
-        }
-        selector === externalNavigationExample || selector === customizableGeneratorExample
-            ? await click(selector + nextStepBtn2)
-            : await click(selector + nextStepBtn);
-        await pause(await getPauseTime());
-        await expect(await getElementClass(selector + step, 1)).toContain('current');
-        await expect(await getElementClass(selector + step, 0)).toContain('completed');
-        await scrollIntoView(selector + stepContainer);
-        await scrollIntoView(selector + step);
-        await pause(await getPauseTime());
-        await expect(await getElementClass(selector + step, 0)).toContain('current', 'step did not back to first');
-        await expect(await getElementClass(selector + step, 1)).toContain('upcoming', 'step did not back to first');
-    }
 
     async function checkNavigationByButtonsInDialog(selector: string): Promise<void> {
         await scrollIntoView(selector);

@@ -44,13 +44,8 @@ describe('Table component test suite', () => {
         buttonRemove,
         dialogInput,
         expandedButton,
-        dropdownList,
-        dropdownOption,
-        dialogButton,
         allInputFields,
         toolbarButton,
-        expandedOption,
-        buttonFilter,
         slimArrowRight,
         dialogDecisiveButton,
         messageBoxHeader

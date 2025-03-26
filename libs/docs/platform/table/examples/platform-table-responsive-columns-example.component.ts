@@ -53,12 +53,12 @@ import { Observable, of } from 'rxjs';
     ]
 })
 export class PlatformTableResponsiveColumnsExampleComponent implements AfterViewInit {
+    @ViewChild(TableComponent, { read: ElementRef })
+    table: ElementRef<HTMLElement>;
+
     source: TableDataSource<ExampleItem>;
 
     tableWidth = '450px';
-
-    @ViewChild(TableComponent, { read: ElementRef })
-    table: ElementRef<HTMLElement>;
 
     currentTableWidth = 0;
 
