@@ -1,6 +1,13 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    QueryList,
+    TemplateRef,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -12,7 +19,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { WizardModule, WizardService, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-visible-summary-example',
@@ -39,6 +46,10 @@ import { WizardModule, WizardService, WizardStepStatus } from '@fundamental-ngx/
     ]
 })
 export class WizardVisibleSummaryExampleComponent {
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    wizardStepComponents: QueryList<WizardStepComponent>;
+
     step1status: WizardStepStatus = 'current';
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
