@@ -27,7 +27,6 @@ export interface AdditionalTreeItemData {
 
 export class ExampleObservableTreeDataSource<T = TreeItem<AdditionalTreeItemData>> extends FdTreeDataSource<T> {
     constructor(_level = 1) {
-        totalIndex++;
         super(new FdTreeLazyLoadingDataProvider<T>(_level));
     }
 }
