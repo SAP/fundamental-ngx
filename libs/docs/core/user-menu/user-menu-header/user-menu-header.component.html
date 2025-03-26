@@ -1,0 +1,88 @@
+<fd-doc-page>
+    <header>User Menu</header>
+    <description>
+        <p>
+            The User Menu is an integral part of the Shell Bar, accessible by clicking the avatar located at its
+            far-right end. It provides user-specific options and remains available across all screens. In addition to
+            standard options, the User Menu can include product-specific functionality.
+        </p>
+
+        <h3>The User Menu can display the following:</h3>
+        <ul>
+            <li>Current user information</li>
+            <li>Switch between accounts</li>
+            <li>User Menu items</li>
+        </ul>
+
+        <h3>When to use</h3>
+        <ul>
+            <li>To present user-specific information, settings, and actions.</li>
+            <li>To enable account switching.</li>
+            <li>To display product-related and legal information.</li>
+            <li>To facilitate Sign In or Sign Out actions.</li>
+        </ul>
+
+        <h3>When not to use</h3>
+        <ul>
+            <li>Navigation: Avoid including navigational elements.</li>
+            <li>Home Page Customization: Exclude items related to customizing the home page.</li>
+            <li>Inactive Items: Hide inactive items instead of displaying them as disabled.</li>
+            <li>Content Overload: Keep the menu concise by limiting links to essential items only.</li>
+            <li>Dynamic Content: Avoid altering the menu content within the product.</li>
+        </ul>
+
+        <h3>Anatomy</h3>
+
+        <h4>Components</h4>
+        <ul>
+            <li>
+                <code>fd-user-menu</code>
+                <ul>
+                    <li><code>mobile</code> input to contol the mode (default/mobile)</li>
+                </ul>
+            </li>
+            <li>
+                <code>fd-user-menu-control</code>
+                <ul>
+                    <li><code>clicked</code> output</li>
+                </ul>
+            </li>
+            <li><code>fd-user-menu-body</code></li>
+            <li><code>fd-user-menu-content-container</code></li>
+            <li><code>fd-user-menu-list</code></li>
+            <li>
+                <code>fd-user-menu-list-item</code>
+                <ul>
+                    <li>
+                        <code>uniqueId</code> input (string) - to set the id of the list item. A default one is
+                        provided.
+                    </li>
+                    <li><code>icon</code> input (string) - icon (glyph) name for the menu list item (optional)</li>
+                    <li><code>text</code> input (string) - text for the menu list item (required)</li>
+                    <li><code>textId</code> input (string) - id for the text element. A default one is provided.</li>
+                    <li><code>hasSubmenu</code> input (boolean) - whether the item has a submenu</li>
+                    <li><code>submenu</code> input (TemplateRef) - a template ref for user menu list item submenu</li>
+                    <li><code>selected</code> input (boolean) - whether the item is selected</li>
+                </ul>
+            </li>
+            <li>
+                <code>fd-user-menu-sublist</code>
+                <ul>
+                    <li><code>hasIcons</code> input (boolean) - whether the sublist items have icons</li>
+                </ul>
+            </li>
+            <li><code>fd-user-menu-footer</code></li>
+        </ul>
+
+        <h4>Directives</h4>
+        <ul>
+            <li><code>fd-user-menu-header</code></li>
+            <li><code>fd-user-menu-header-container</code></li>
+            <li><code>fd-user-menu-user-name</code></li>
+            <li><code>fd-user-menu-subline</code></li>
+        </ul>
+    </description>
+    <import module="userMenuModule" subPackage="user-menu"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

@@ -1,0 +1,63 @@
+@if (hasSubmenu()) {
+    @if (mobile()) {
+        <button
+            role="menuitem"
+            class="fd-menu__link"
+            [class.is-selected]="selected()"
+            [tabIndex]="_tabIndex$()"
+            (click)="onShowDetailsView()"
+        >
+            @if (icon()) {
+                <span class="fd-menu__addon-before">
+                    <i [class]="'sap-icon--' + icon()" role="presentation"></i>
+                </span>
+            }
+
+            <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+            <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
+        </button>
+    } @else {
+        <fd-popover
+            #popover
+            [noArrow]="true"
+            style="width: 100%"
+            placement="left-start"
+            [focusTrapped]="true"
+            [focusAutoCapture]="true"
+            [restoreFocusOnClose]="false"
+            [isOpen]="isOpen()"
+            (isOpenChange)="isOpenChangeHandle($event, popover)"
+        >
+            <fd-popover-control>
+                <button
+                    role="menuitem"
+                    class="fd-menu__link fd-menu__link--popover"
+                    [class.is-selected]="selected()"
+                    [tabIndex]="_tabIndex$()"
+                >
+                    @if (icon()) {
+                        <span class="fd-menu__addon-before">
+                            <i [class]="'sap-icon--' + icon()" role="presentation"></i>
+                        </span>
+                    }
+
+                    <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+                    <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
+                </button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <ng-container *ngTemplateOutlet="submenu()"></ng-container>
+            </fd-popover-body>
+        </fd-popover>
+    }
+} @else {
+    <button role="menuitem" class="fd-menu__link" [class.is-selected]="selected()" [tabIndex]="_tabIndex$()">
+        @if (icon()) {
+            <span class="fd-menu__addon-before">
+                <i [class]="'sap-icon--' + icon()" role="presentation"></i>
+            </span>
+        }
+
+        <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+    </button>
+}

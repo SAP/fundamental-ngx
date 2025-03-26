@@ -2,6 +2,7 @@ import { importProvidersFrom } from '@angular/core';
 import { Routes } from '@angular/router';
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import { CoreSchemaModule } from '@fundamental-ngx/docs/core/schema';
+
 import {
     COMBOBOX_MOBILE_CONFIG,
     configureRoutes,
@@ -203,6 +204,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/core/list-byline').then(configureLibRoutes)
     },
     {
+        path: 'list-subline',
+        loadChildren: () => import('@fundamental-ngx/docs/core/list-subline').then(configureLibRoutes)
+    },
+    {
         path: 'menu',
         loadChildren: () => import('@fundamental-ngx/docs/core/menu').then(configureLibRoutes)
     },
@@ -371,6 +376,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/core/tree').then(configureLibRoutes)
     },
     {
+        path: 'user-menu',
+        loadChildren: () => import('@fundamental-ngx/docs/core/user-menu').then(configureLibRoutes)
+    },
+    {
         path: 'vertical-navigation',
         loadChildren: () => import('@fundamental-ngx/docs/core/vertical-navigation').then(configureLibRoutes)
     },
@@ -413,6 +422,10 @@ const componentRoutes = [
     {
         path: 'avatar-group',
         loadChildren: () => import('@fundamental-ngx/docs/core/avatar-group').then(configureLibRoutes)
+    },
+    {
+        path: 'settings-dialog',
+        loadChildren: () => import('@fundamental-ngx/docs/core/settings-dialog').then(configureLibRoutes)
     }
 ];
 export const ROUTES: Routes = [

@@ -13,7 +13,9 @@ import {
     Output,
     QueryList,
     ViewEncapsulation,
-    inject
+    booleanAttribute,
+    inject,
+    input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -44,7 +46,9 @@ import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
     selector: '[fd-list], [fdList]',
     template: `<ng-content></ng-content>`,
     host: {
-        class: 'fd-list'
+        class: 'fd-list',
+        '[class.fd-settings__list]': 'settingsList() || settingsListFooter()',
+        '[class.fd-settings__list--footer]': 'settingsListFooter()'
     },
     styleUrls: ['./list.component.scss', '../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -108,6 +112,11 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     @HostBinding('class.fd-list--byline')
     byline = false;
 
+    /** Whether list should have a subline */
+    @Input()
+    @HostBinding('class.fd-list--subline')
+    subline = false;
+
     /** Whether to display unread notification indicator. */
     @HostBinding('class.fd-list--unread-indicator')
     @Input()
@@ -144,6 +153,12 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private get _ariaRole(): string {
         return this.role || this._defaultRole;
     }
+
+    /** Whether the list is used inside Settings Dialog */
+    settingsList = input(false, { transform: booleanAttribute });
+
+    /** Whether the list is used inside Settings Dialog Footer */
+    settingsListFooter = input(false, { transform: booleanAttribute });
 
     /**
      * @hidden
