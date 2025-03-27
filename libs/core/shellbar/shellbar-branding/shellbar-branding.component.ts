@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewEncapsulation } from '@angular/core';
-import { ShellbarComponent } from '../shellbar.component';
+import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
  * The component for shellbar branding.
@@ -33,7 +33,7 @@ export class ShellbarBrandingComponent {
     interactiveBranding = false;
 
     /** @hidden */
-    private _shellbar = inject(ShellbarComponent);
+    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
 
     /** @hidden */
     constructor(private _elRef: ElementRef) {}

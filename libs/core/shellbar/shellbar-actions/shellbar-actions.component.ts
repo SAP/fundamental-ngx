@@ -27,8 +27,7 @@ import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
-import { ShellbarComponent } from '../shellbar.component';
-import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
+import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
 /**
@@ -143,7 +142,7 @@ export class ShellbarActionsComponent implements OnDestroy {
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private _shellbar = inject(ShellbarComponent);
+    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
 
     /** @hidden */
     private _searchComponent: Nullable<SearchComponent>;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
-import { ShellbarComponent } from '../shellbar.component';
+import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
  * Component representing the context area of the shellbar.
@@ -24,7 +24,7 @@ import { ShellbarComponent } from '../shellbar.component';
 })
 export class ShellbarContextAreaComponent {
     /** @hidden */
-    private _shellbar = inject(ShellbarComponent);
+    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
 
     /** @hidden */
     constructor(public el: ElementRef) {}
