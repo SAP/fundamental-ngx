@@ -28,28 +28,46 @@
     --fdButtonColor: var(--sapShell_TextColor);
 }
 
-.fd-shellbar--s,
-.fd-shellbar--m {
-    .fd-shellbar__group--context-area {
-        .fd-object-status {
-            display: none; // TODO: this should be handled via toolbar resize if/when shellbar uses toolbar
-        }
-    }
-    .fd-shellbar__branding {
-        gap: 0;
-        .fd-shellbar__title {
-            display: none; // TODO: this should be handled via toolbar resize if/when shellbar uses toolbar
-        }
-    }
-    .fd-shellbar__separator {
-        display: none; // TODO: this should be handled via toolbar resize if/when shellbar uses toolbar
-    }
+.fd-shellbar {
+    gap: 0.5rem;
+
     .fd-shellbar__search-field {
         min-width: auto;
     }
 }
 
-.fd-shellbar__group--context-area {
+.fd-shellbar.fd-shellbar--has-context-area {
+    justify-content: start;
+
+    .fd-shellbar__group--actions {
+        margin-right: 0;
+        margin-left: auto;
+
+        @include rtl() {
+            margin-right: auto;
+            margin-left: 0;
+        }
+    }
+}
+
+.fd-shellbar__title {
+    vertical-align: middle;
+}
+
+.fd-shellbar--s,
+.fd-shellbar--m {
+    .fd-shellbar__branding {
+        gap: 0;
+    }
+
+    .fd-shellbar__separator {
+        display: none;
+    }
+}
+
+.fd-shellbar .fd-shellbar__group--context-area {
+    flex: none;
+
     .fd-object-status {
         white-space: nowrap;
         overflow: hidden;
@@ -63,6 +81,10 @@
     .fd-shellbar__search-field {
         max-width: 12.5rem;
     }
+}
+
+.fd-shellbar:not(.fd-shellbar--xl) .fd-shellbar__search-field .fd-shellbar__search-field-input {
+    width: auto;
 }
 
 .fd-shellbar.fd-shellbar--m {

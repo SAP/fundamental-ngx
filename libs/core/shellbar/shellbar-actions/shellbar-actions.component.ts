@@ -4,8 +4,8 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     EventEmitter,
-    HostBinding,
     Input,
     OnDestroy,
     Output,
@@ -27,7 +27,8 @@ import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
-import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
+import { ShellbarComponent } from '../shellbar.component';
+import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
 /**
@@ -124,6 +125,9 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     _searchPortal: DomPortal;
 
+    /** @hidden */
+    _showMobileActions = false;
+
     /**
      * Whether to show the search field.
      */
@@ -133,24 +137,13 @@ export class ShellbarActionsComponent implements OnDestroy {
     currentSize: ShellbarSizes;
 
     /** @hidden */
+    _elRef = inject(ElementRef);
+
+    /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT, {
-        optional: true
-    });
-
-    /** @hidden */
-    @HostBinding('class.fd-shellbar__group--shrink')
-    private get _groupShrink(): boolean {
-        return !!this._shellbar?.groupFlex?.actions?.shrink;
-    }
-
-    /** @hidden */
-    @HostBinding('class.fd-shellbar__group--basis-auto')
-    private get _groupBasisAuto(): boolean {
-        return !!this._shellbar?.groupFlex?.actions?.flexBasisAuto;
-    }
+    private _shellbar = inject(ShellbarComponent);
 
     /** @hidden */
     private _searchComponent: Nullable<SearchComponent>;
@@ -172,6 +165,17 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._portalOutlet?.dispose();
+    }
+
+    /** @hidden */
+    _handleOverflow(shouldOverflow: boolean): void {
+        this._showMobileActions = shouldOverflow;
+
+        this.shellbarActions.forEach((action) => {
+            action._elRef.nativeElement.style.display = shouldOverflow ? 'none' : 'flex';
+        });
+
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -227,6 +231,9 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._cd.detectChanges();
         if (focusSearch) {
             this._searchComponent?.focus();
+        }
+        if (this._shellbar) {
+            this._shellbar._searchToggledFromActions();
         }
     }
 }

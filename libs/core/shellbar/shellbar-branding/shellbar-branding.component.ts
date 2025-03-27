@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewEncapsulation } from '@angular/core';
+import { ShellbarComponent } from '../shellbar.component';
 
 /**
  * The component for shellbar branding.
@@ -30,4 +31,28 @@ export class ShellbarBrandingComponent {
     /** Whether the shellbar branding is interactive. */
     @Input()
     interactiveBranding = false;
+
+    /** @hidden */
+    private _shellbar = inject(ShellbarComponent);
+
+    /** @hidden */
+    constructor(private _elRef: ElementRef) {}
+
+    /** @hidden */
+    hideTitleIfNeeded(): void {
+        if (this._shellbar._actionsExceedShellbarWidth()) {
+            const titleEl = this._elRef.nativeElement.querySelector('fd-shellbar-title');
+            if (titleEl) {
+                titleEl.style.display = 'none';
+            }
+        }
+    }
+
+    /** @hidden */
+    showTitle(): void {
+        const titleEl = this._elRef.nativeElement.querySelector('fd-shellbar-title');
+        if (titleEl) {
+            titleEl.style.display = 'flex';
+        }
+    }
 }

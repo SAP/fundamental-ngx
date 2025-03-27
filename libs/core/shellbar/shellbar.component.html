@@ -2,6 +2,7 @@
     class="fd-shellbar"
     [class]="'fd-shellbar--' + _currentSize + _getSideNavClass()"
     [class.fd-shellbar--side-nav]="sideNav === true"
+    [class.fd-shellbar--has-context-area]="!!contextArea"
     #shellbar
 >
     @if (!_hideAllComponents) {
@@ -10,19 +11,17 @@
             [class.fd-shellbar__group--shrink]="groupFlex?.product?.shrink"
             [class.fd-shellbar__group--basis-auto]="groupFlex?.product?.flexBasisAuto"
         >
-            <ng-content select="[fd-shellbar-side-nav]"></ng-content>
             <ng-content select="fd-shellbar-branding"></ng-content>
+            <ng-content select="[fd-shellbar-side-nav]"></ng-content>
             <ng-content select="fd-shellbar-logo"></ng-content>
             @if (!_hideTitleComponents) {
                 <ng-content select="fd-shellbar-title"></ng-content>
                 <ng-content select="fd-product-menu"></ng-content>
                 <ng-content select="fd-shellbar-subtitle"></ng-content>
                 <ng-content select="fd-shellbar-separator"></ng-content>
-                @if (!_hideContextArea) {
-                    <ng-content select="fd-shellbar-context-area"></ng-content>
-                }
             }
         </div>
+        <ng-content select="fd-shellbar-context-area"></ng-content>
     }
     <div hidden>
         <ng-content></ng-content>
@@ -36,7 +35,7 @@
             <div class="fd-shellbar__action fd-shellbar__action--grow">
                 <ng-container cdkPortalOutlet #searchPortalOutlet></ng-container>
             </div>
-            @if (_currentSize === 'xl' || _hideAllComponents) {
+            @if (_hideAllComponents) {
                 <div class="fd-shellbar__action fd-shellbar__action--mobile fd-shellbar__action--shrink">
                     <button class="fd-button fd-button--transparent" (click)="_closeMobileSearch()">
                         {{ 'coreShellbar.cancel' | fdTranslate }}

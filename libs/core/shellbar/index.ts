@@ -9,6 +9,7 @@ export * from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 export * from './shellbar-actions/shellbar-actions.component';
 export * from './shellbar-branding/shellbar-branding.component';
 export * from './shellbar-context-area/shellbar-context-area.component';
+export * from './shellbar-hide-priority.directive';
 export * from './shellbar-logo/shellbar-logo.component';
 export * from './shellbar-separator/shellbar-separator.component';
 export * from './shellbar-sidenav.directive';

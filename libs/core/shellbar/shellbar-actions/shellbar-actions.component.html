@@ -1,22 +1,24 @@
 @if (comboboxComponent) {
-    <div class="fd-shellbar__action fd-shellbar__action--desktop">
+    <div class="fd-shellbar__action">
         <ng-content select="fd-combobox"></ng-content>
     </div>
 }
 <!-- If portal outlet placed outside div, it will be added to the end of the root container. So this div actually keeps outlet in desired place. -->
 <div class="fd-shellbar__action" cdkPortalOutlet></div>
-<div class="fd-shellbar__action fd-shellbar__action--mobile">
-    <fd-shellbar-actions-mobile
-        [shellbarActions]="shellbarActions"
-        [searchExists]="!!_searchPortal"
-        (showSearch)="_toggleSearch()"
-        [assistiveToolsCallback]="assistiveToolsCallback"
-    ></fd-shellbar-actions-mobile>
-</div>
-<div class="fd-shellbar__action fd-shellbar__action--desktop">
+@if (_showMobileActions) {
+    <div class="fd-shellbar__action">
+        <fd-shellbar-actions-mobile
+            [shellbarActions]="shellbarActions"
+            [searchExists]="!!_searchPortal"
+            (showSearch)="_toggleSearch()"
+            [assistiveToolsCallback]="assistiveToolsCallback"
+        ></fd-shellbar-actions-mobile>
+    </div>
+}
+<div class="fd-shellbar__action">
     <ng-content></ng-content>
 </div>
-@if (_addSearchIcon && !showSearch) {
+@if (_addSearchIcon && !showSearch && !_showMobileActions) {
     <fd-shellbar-action glyph="search" [callback]="_toggleSearch"></fd-shellbar-action>
 }
 <ng-content select="fd-shellbar-action"></ng-content>
@@ -37,7 +39,7 @@
         <ng-content select="fd-product-switch"></ng-content>
     </div>
 }
-@if (assistiveTools) {
+@if (assistiveTools && !_showMobileActions) {
     <fd-shellbar-action
         glyph="sys-help"
         label="{{ 'coreShellbar.assistiveTools' | fdTranslate }}"

@@ -6,11 +6,24 @@
         <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
     </fd-shellbar-branding>
 
-    <fd-shellbar-separator></fd-shellbar-separator>
-
     <fd-shellbar-context-area>
-        <span fd-object-status status="informative" [inverted]="true" label="Test System"></span>
-        <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems"> </fd-product-menu>
+        <fd-shellbar-separator fdShellbarHidePriority="1"></fd-shellbar-separator>
+        <span
+            fdShellbarHidePriority="2"
+            fd-object-status
+            status="informative"
+            [inverted]="true"
+            label="Status priority 2"
+        ></span>
+        <fd-product-menu
+            fdShellbarHidePriority="1"
+            [control]="'Menu priority 1'"
+            [closePopoverOnSelect]="true"
+            [items]="productMenuItems"
+        >
+        </fd-product-menu>
+        <span fdShellbarHidePriority="4" fd-button label="Button priority 4"></span>
+        <span fdShellbarHidePriority="3" fd-button label="Button priority 3"></span>
     </fd-shellbar-context-area>
 
     <fdp-search-field

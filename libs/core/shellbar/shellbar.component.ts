@@ -14,10 +14,11 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -25,9 +26,11 @@ import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { BehaviorSubject, Subscription, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
+import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
+import { ShellbarContextAreaComponent } from './shellbar-context-area/shellbar-context-area.component';
 import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 
 /**
@@ -107,6 +110,32 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     @ContentChildren(FD_BUTTON_COMPONENT, { read: ElementRef })
     buttons: QueryList<ElementRef>;
 
+    /** @hidden */
+    @ContentChild(ShellbarContextAreaComponent)
+    contextArea: ShellbarContextAreaComponent;
+
+    /** @hidden */
+    @ContentChild(ShellbarBrandingComponent)
+    branding: ShellbarBrandingComponent;
+
+    /** @hidden */
+    @ContentChild(ShellbarActionsComponent)
+    private _actions?: ShellbarActionsComponent;
+
+    /** @hidden */
+    @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
+    private readonly _searchPortalOutlet: CdkPortalOutlet;
+
+    /** @hidden */
+    @ViewChild('shellbar')
+    private readonly _shellbar: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    _showMobileSearch = false;
+
+    /** @hidden */
+    readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+
     /**
      * Search component placed inside the shellbar
      */
@@ -164,25 +193,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    @ContentChild(ShellbarActionsComponent)
-    private _actions?: ShellbarActionsComponent;
-
-    /** @hidden */
-    @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
-    private readonly _searchPortalOutlet: CdkPortalOutlet;
-
-    /** @hidden */
-    @ViewChild('shellbar')
-    private readonly _shellbar: ElementRef<HTMLElement>;
-
-    /** @hidden */
     get _hideTitleComponents(): boolean {
         return this._currentSize !== 'xl' && this._currentSize !== 'l' && this._showMobileSearch;
-    }
-
-    /** @hidden */
-    get _hideContextArea(): boolean {
-        return this._currentSize !== 'xl' && this._showMobileSearch;
     }
 
     /** @hidden */
@@ -194,9 +206,6 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     get _currentSize(): ShellbarSizes {
         return this._size || this._breakpointSize;
     }
-
-    /** @hidden */
-    _showMobileSearch = false;
 
     /** @hidden */
     private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
@@ -234,6 +243,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _searchSubmitSubscription: Nullable<Subscription>;
 
     /** @hidden */
+    private _resizeObserverService = inject(ResizeObserverService);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this.applyShellbarModeToCombobox();
         this.applyShellbarModeToButtons();
@@ -241,9 +258,11 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     ngAfterViewInit(): void {
-        resizeObservable(this._shellbar.nativeElement)
-            .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
+        this._resizeObserverService
+            .observe(this._shellbar.nativeElement)
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._setCurrentBreakpoint());
+        requestAnimationFrame(() => this._setCurrentBreakpoint());
 
         this._setSearchComponentListeners();
     }
@@ -287,6 +306,37 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
+    _getShellbarEnd(): number {
+        const shellbarEl = this._shellbar.nativeElement;
+        const end = this._rtl$() ? shellbarEl.getBoundingClientRect().left : shellbarEl.getBoundingClientRect().right;
+        let shellbarPadding = parseInt(window.getComputedStyle(shellbarEl).paddingInline, 10);
+        if (this._rtl$()) {
+            shellbarPadding = shellbarPadding * -1;
+        }
+        return end - shellbarPadding;
+    }
+
+    /** @hidden */
+    _getActionsEnd(): number {
+        const end = this._rtl$()
+            ? this._actions?._elRef.nativeElement.getBoundingClientRect().left
+            : this._actions?._elRef.nativeElement.getBoundingClientRect().right;
+        return end;
+    }
+
+    /** @hidden */
+    _actionsExceedShellbarWidth(): boolean {
+        return this._rtl$()
+            ? this._getActionsEnd() < this._getShellbarEnd()
+            : this._getActionsEnd() > this._getShellbarEnd();
+    }
+
+    /** @hidden */
+    _searchToggledFromActions(): void {
+        this._setCurrentBreakpoint();
+    }
+
+    /** @hidden */
     private _setSearchComponentListeners(): void {
         this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
             this._showMobileSearch = showSearch;
@@ -313,7 +363,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if (size === 'xl' || (size === 's' && this._showMobileSearch)) {
+        if ((size === 'xl' && !this.contextArea) || (size === 's' && this._showMobileSearch)) {
             this._attachSearch();
         } else {
             this._detachSearch();
@@ -323,17 +373,48 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     private _setCurrentBreakpoint(): void {
         if (this._shellbar) {
-            const { width } = this._shellbar.nativeElement.getBoundingClientRect();
+            this._handleOverflow();
 
+            const width = this._shellbar.nativeElement.getBoundingClientRect().width;
             const breakpoint = this._breakpoints.find((item) => width >= item.min && width < item.max + 1);
 
-            if (!breakpoint || breakpoint.size === this._currentSize) {
-                return;
+            if (breakpoint && breakpoint.size !== this._currentSize) {
+                this._breakpointSize = breakpoint.size;
+                this._currentSize$.next(this._currentSize);
             }
-
-            this._breakpointSize = breakpoint.size;
-            this._currentSize$.next(this._currentSize);
             this._cd.detectChanges();
+        }
+    }
+
+    /** @hidden */
+    private _handleOverflow(): void {
+        if (this._shellbar) {
+            this._resetOverflow();
+
+            if (this._actions) {
+                if (this._actionsExceedShellbarWidth()) {
+                    this._actions._handleOverflow(true);
+                }
+                if (this.branding) {
+                    this.branding.hideTitleIfNeeded();
+                }
+                if (this.contextArea) {
+                    this.contextArea.hideElementsIfNeeded();
+                }
+            }
+        }
+    }
+
+    /** @hidden */
+    private _resetOverflow(): void {
+        if (this.contextArea) {
+            this.contextArea.showElements();
+        }
+        if (this.branding) {
+            this.branding.showTitle();
+        }
+        if (this._actions) {
+            this._actions._handleOverflow(false);
         }
     }
 
