@@ -180,11 +180,13 @@ describe('IconTabBarComponent', () => {
 
     it('should emit selected event', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
-        const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
+        const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__tab');
+
+        const someOtherTab = tabs[1]
 
         jest.spyOn(component, 'selected');
-        expect(someTab).toBeDefined();
-        someTab?.click();
+        expect(someOtherTab).toBeDefined();
+        someOtherTab?.click();
         fixture.detectChanges();
 
         expect(component.selected).toHaveBeenCalled();
@@ -342,11 +344,13 @@ describe('IconTabBarComponent', () => {
 
     it('should emit selected event', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
-        const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
+        const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__tab');
+
+        const someOtherTab = tabs[1]
 
         jest.spyOn(component, 'selected');
-        expect(someTab).toBeDefined();
-        someTab?.click();
+        expect(someOtherTab).toBeDefined();
+        someOtherTab?.click();
         fixture.detectChanges();
 
         expect(component.selected).toHaveBeenCalled();
