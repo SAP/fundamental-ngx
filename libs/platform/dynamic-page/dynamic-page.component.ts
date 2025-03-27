@@ -28,7 +28,6 @@ import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
-import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
     DynamicPageComponent as CoreDynamicPageComponent,
     DynamicPageContentComponent as CoreDynamicPageContentComponent,
@@ -93,7 +92,6 @@ export class DynamicPageTabChangeEvent {
     imports: [
         CoreDynamicPageComponent,
         CoreDynamicPageHeaderComponent,
-        BreadcrumbComponent,
         NgTemplateOutlet,
         DynamicPageHeaderSubtitleDirective,
         DynamicPageHeaderTitleDirective,
@@ -104,8 +102,6 @@ export class DynamicPageTabChangeEvent {
         DynamicPageSubheaderComponent,
         IconTabBarComponent,
         IconTabBarTabComponent,
-        DynamicPageContentComponent,
-        DynamicPageFooterComponent,
         CoreDynamicPageFooterComponent,
         CoreDynamicPageContentComponent,
         DynamicPageBreadcrumbComponent

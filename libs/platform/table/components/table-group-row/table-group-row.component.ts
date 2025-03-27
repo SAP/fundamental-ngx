@@ -1,4 +1,4 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -38,7 +38,7 @@ import { TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/t
         role: 'row',
         '[attr.aria-expanded]': 'row.expanded'
     },
-    imports: [TableCellDirective, NgTemplateOutlet, AsyncPipe]
+    imports: [TableCellDirective, NgTemplateOutlet]
 })
 export class TableGroupRowComponent<T> extends TableRowDirective implements OnChanges {
     /** Table ID. */

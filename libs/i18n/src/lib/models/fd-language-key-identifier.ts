@@ -443,6 +443,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.cancelBtnLabel'
     | 'platformTable.filteredBy'
     | 'platformTable.showingBlankOfBlank'
+    | 'platformTable.clearFilters'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'platformMessagePopover.allErrors'
     | 'platformMessagePopover.defaultErrors.email'

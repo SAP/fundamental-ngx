@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.1...v0.55.4-rc.2) (2025-03-24)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.0...v0.55.4-rc.1) (2025-03-24)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.3...v0.55.4-rc.0) (2025-03-24)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.3-rc.1...v0.55.3) (2025-03-24)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.3-rc.0...v0.55.3-rc.1) (2025-03-24)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.2...v0.55.3-rc.0) (2025-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.6...v0.55.2) (2025-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.5...v0.55.2-rc.6) (2025-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.4...v0.55.2-rc.5) (2025-03-19)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.55.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.3...v0.55.2-rc.4) (2025-03-19)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
 ## [0.55.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.2...v0.55.2-rc.3) (2025-03-18)
 
 **Note:** Version bump only for package @fundamental-ngx/cx

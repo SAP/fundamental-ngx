@@ -21,7 +21,6 @@ import {
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
     NavigationMenuComponent,
-    NavigationMenuItemComponent,
     NavigationMenuPopoverComponent,
     NavigationMenuPopoverControlDirective
 } from '@fundamental-ngx/btp/navigation-menu';
@@ -35,23 +34,12 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { IconComponent } from '@fundamental-ngx/core/icon';
-import {
-    GlyphMenuAddonDirective,
-    MenuAddonDirective,
-    MenuComponent,
-    MenuInteractiveComponent,
-    MenuItemComponent,
-    MenuTitleDirective,
-    MenuTriggerDirective
-} from '@fundamental-ngx/core/menu';
 import {
     OverflowItemRef,
     OverflowItemRefDirective,
     OverflowLayoutComponent,
     OverflowLayoutItemDirective
 } from '@fundamental-ngx/core/overflow-layout';
-import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '@fundamental-ngx/core/product-switch';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BehaviorSubject, Subscription, delayWhen, first } from 'rxjs';
@@ -77,23 +65,12 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
     imports: [
         ToolHeaderGroupDirective,
         NgTemplateOutlet,
-        PopoverComponent,
-        PopoverControlComponent,
-        MenuTriggerDirective,
-        MenuComponent,
-        MenuItemComponent,
-        MenuInteractiveComponent,
-        MenuTitleDirective,
-        MenuAddonDirective,
-        GlyphMenuAddonDirective,
         ToolHeaderElementDirective,
-        IconComponent,
         ButtonComponent,
         ToolHeaderButtonDirective,
         ToolHeaderLogoDirective,
         FdTranslatePipe,
         NavigationMenuComponent,
-        NavigationMenuItemComponent,
         FocusableListDirective,
         IndirectFocusableListDirective,
         FocusableItemDirective,
@@ -103,7 +80,6 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
         OverflowLayoutComponent,
         OverflowLayoutItemDirective,
         OverflowItemRefDirective,
-        PopoverBodyDirective,
         PortalModule,
         ToolHeaderActionButtonDirective
     ],
