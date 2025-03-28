@@ -6,7 +6,13 @@
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
             <!-- Flexible Column Layout -->
-            <fd-flexible-column-layout [(layout)]="localLayout">
+            <fd-flexible-column-layout
+                [(layout)]="localLayout"
+                expandTitleStartBtn="Expand first column"
+                collapseTitleStartBtn="Collapse first column"
+                expandTitleEndBtn="Expand last column"
+                collapseTitleEndBtn="Collapse last column"
+            >
                 <ng-template #startColumn>
                     <div class="docs-fcl-example-section">
                         <h2>Start Column</h2>

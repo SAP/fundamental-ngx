@@ -137,6 +137,22 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     @Input()
     collapseTitle: string;
 
+    /** title for expanded state of the button between start and mid column */
+    @Input()
+    expandTitleStartBtn: string;
+
+    /** title for collapsed state of the button between start and mid column */
+    @Input()
+    collapseTitleStartBtn: string;
+
+    /** title for expanded state of the button between mid and end column */
+    @Input()
+    expandTitleEndBtn: string;
+
+    /** title for collapsed state of the button between mid and end column */
+    @Input()
+    collapseTitleEndBtn: string;
+
     /**
      * @hidden
      * left column separator value (between start and middle columns)
