@@ -4,3 +4,9 @@
 .fd-list {
     max-width: 100% !important;
 }
+
+.fd-list--byline .fd-list__group-header {
+    min-height: var(--sapElement_LineHeight);
+    height: var(--sapElement_LineHeight);
+    max-height: var(--sapElement_LineHeight);
+}
