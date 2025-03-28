@@ -29,7 +29,11 @@
             <fdp-search-field
                 fd-toolbar-item
                 [style.min-width.rem]="15.5"
-                [placeholder]="searchFieldPlaceholder ? searchFieldPlaceholder : 'platformTable.toolbarSearchPlaceholder' | fdTranslate"
+                [placeholder]="
+                    searchFieldPlaceholder
+                        ? searchFieldPlaceholder
+                        : ('platformTable.toolbarSearchPlaceholder' | fdTranslate)
+                "
                 [inputText]="_searchInputText"
                 [disabled]="!!(tableLoading$ | async)"
                 [suggestions]="searchSuggestions"
