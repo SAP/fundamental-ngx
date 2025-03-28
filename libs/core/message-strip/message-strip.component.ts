@@ -54,6 +54,10 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @HostBinding('class.fd-message-strip--dismissible')
     dismissible: BooleanInput = true;
 
+    /** Title for dismiss button */
+    @Input()
+    dismissBtnTitle: string;
+
     /** The default message strip does not have an icon.
      * The other types (warning, success, information and error) have icons by default.
      * To remove the icon set the property to true.

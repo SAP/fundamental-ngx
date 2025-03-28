@@ -19,7 +19,7 @@
         fdCompact
         (click)="dismiss()"
         [attr.aria-controls]="id"
-        [attr.aria-label]="'coreMessageStrip.dismissLabel' | fdTranslate"
-        [attr.title]="'coreMessageStrip.dismissLabel' | fdTranslate"
+        [attr.aria-label]="dismissBtnTitle || ('coreMessageStrip.dismissLabel' | fdTranslate)"
+        [attr.title]="dismissBtnTitle || ('coreMessageStrip.dismissLabel' | fdTranslate)"
     ></button>
 }
