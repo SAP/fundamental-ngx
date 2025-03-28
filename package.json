@@ -32,7 +32,7 @@
         "nx": "nx",
         "postinstall": "husky install",
         "pre-commit": "lint-staged",
-        "format": "prettier . --write --list-different"
+        "format": "prettier . --write"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
