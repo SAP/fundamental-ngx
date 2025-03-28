@@ -112,3 +112,7 @@
 .fd-dynamic-page__header {
     z-index: 15;
 }
+
+.fd-dynamic-page__header.fd-dynamic-page__header--not-collapsible:has(+ fdp-icon-tab-bar) {
+    box-shadow: none;
+}

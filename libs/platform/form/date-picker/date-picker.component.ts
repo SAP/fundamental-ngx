@@ -14,8 +14,6 @@ import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
-    CalendarComponent,
-    CalendarDayViewComponent,
     CalendarType,
     CalendarYearGrid,
     DateRange,
@@ -50,7 +48,7 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
     host: {
         '(blur)': 'onTouched()'
     },
-    imports: [DatePickerComponent, FormsModule, CalendarDayViewComponent, CalendarComponent]
+    imports: [DatePickerComponent, FormsModule]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
     /**

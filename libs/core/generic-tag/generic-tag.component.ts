@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -33,7 +32,7 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
         '[attr.aria-roledescription]': 'ariaRoleDescription',
         role: 'button'
     },
-    imports: [NgClass, IconComponent]
+    imports: [IconComponent]
 })
 export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

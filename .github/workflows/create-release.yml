@@ -114,7 +114,7 @@ jobs:
               uses: ./.github/actions/generate-conventional-release-notes
 
             - name: Create Release
-              uses: ncipollo/release-action@v1.14.0
+              uses: ncipollo/release-action@v1.16.0
               with:
                   prerelease: ${{ steps.bumpVersion.outputs.isPrerelease }}
                   tag: v${{ steps.bumpVersion.outputs.newVersion }}
@@ -156,7 +156,7 @@ jobs:
               run: npx nx run docs:compile:production --skip-nx-cache
 
             - name: Publish to gh-pages
-              uses: JamesIves/github-pages-deploy-action@v4.6.9
+              uses: JamesIves/github-pages-deploy-action@v4.7.3
               with:
                   folder: dist/apps/docs
                   token: ${{ secrets.GHACTIONS }}

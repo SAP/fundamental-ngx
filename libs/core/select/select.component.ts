@@ -116,8 +116,7 @@ export enum TextOverflowModeEnum {
         ListMessageDirective,
         FdTranslatePipe,
         ButtonComponent,
-        ListTitleDirective,
-        OptionComponent
+        ListTitleDirective
     ]
 })
 export class SelectComponent<T = any>

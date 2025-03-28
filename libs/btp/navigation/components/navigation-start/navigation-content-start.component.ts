@@ -1,5 +1,4 @@
 import { PortalModule } from '@angular/cdk/portal';
-import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -31,7 +30,7 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
 @Component({
     selector: 'fdb-navigation-content-start',
     templateUrl: './navigation-content-start.component.html',
-    imports: [PortalModule, NgTemplateOutlet, NavigationListComponent, NavigationMoreButtonComponent],
+    imports: [PortalModule, NavigationListComponent, NavigationMoreButtonComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
