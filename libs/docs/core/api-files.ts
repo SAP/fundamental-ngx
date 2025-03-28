@@ -254,7 +254,9 @@ export const API_FILES = {
         'ShellbarActionsComponent',
         'ShellbarLogoComponent',
         'ShellbarSubtitleComponent',
-        'ShellbarTitleComponent'
+        'ShellbarTitleComponent',
+        'ShellbarBrandingComponent',
+        'ShellbarContextAreaComponent'
     ],
     sideNavigation: [
         'SideNavigationComponent',

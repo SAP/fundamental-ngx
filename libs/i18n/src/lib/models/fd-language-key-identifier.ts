@@ -81,6 +81,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreShellbar.collapsedItemMenuLabel'
     | 'coreShellbar.cancel'
     | 'coreShellbar.search'
+    | 'coreShellbar.assistiveTools'
     | 'coreSlider.singleMinMaxDetails'
     | 'coreSlider.singleValueminDetails'
     | 'coreSlider.singleValuemaxDetails'
