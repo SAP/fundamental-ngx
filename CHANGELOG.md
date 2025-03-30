@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.3...v0.55.4-rc.4) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add an option to provide more descriptive title for Message Strip dismiss btn ([#13153](https://github.com/SAP/fundamental-ngx/issues/13153)) ([d08d5df](https://github.com/SAP/fundamental-ngx/commit/d08d5df1057e3a2b881f7f8cf0cfa0b486c05916))
+
+
+
+
+
 ## [0.55.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.2...v0.55.4-rc.3) (2025-03-25)
 
 
