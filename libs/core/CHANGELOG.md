@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.5...v0.55.4-rc.6) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add additional options to set the flexible column layout splitter title ([#13151](https://github.com/SAP/fundamental-ngx/issues/13151)) ([a96f7b5](https://github.com/SAP/fundamental-ngx/commit/a96f7b55e9f314bcf7ae6f413a52b0fc9195d6b6))
+
+
+
+
+
 ## [0.55.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.4...v0.55.4-rc.5) (2025-03-30)
 
 
