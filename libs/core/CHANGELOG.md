@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.4...v0.55.4-rc.5) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** set correct height for List with Byline group header ([#13152](https://github.com/SAP/fundamental-ngx/issues/13152)) ([d4f6f56](https://github.com/SAP/fundamental-ngx/commit/d4f6f5654de6fbcee9ffcd27d0506e550182108e))
+
+
+
+
+
 ## [0.55.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.3...v0.55.4-rc.4) (2025-03-30)
 
 
