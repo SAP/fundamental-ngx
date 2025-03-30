@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.6...v0.55.4-rc.7) (2025-03-30)
+
+
+### Features
+
+* **platform:** table search placeholder is customizable ([#13147](https://github.com/SAP/fundamental-ngx/issues/13147)) ([51e13a2](https://github.com/SAP/fundamental-ngx/commit/51e13a28f398eab31ffaf20026c166430d6d3025))
+
+
+
+
+
 ## [0.55.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.5...v0.55.4-rc.6) (2025-03-30)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
