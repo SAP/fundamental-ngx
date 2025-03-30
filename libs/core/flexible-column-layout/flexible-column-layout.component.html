@@ -25,7 +25,11 @@
                 fdCompact
                 fdType="transparent"
                 class="fd-flexible-column-layout__button"
-                [title]="_leftColumnSeparator === 'left' ? expandTitle : collapseTitle"
+                [title]="
+                    _leftColumnSeparator === 'left'
+                        ? expandTitleStartBtn || expandTitle
+                        : collapseTitleStartBtn || collapseTitle
+                "
             >
                 <fd-icon
                     [glyph]="_leftColumnSeparator ? 'slim-arrow-' + _leftColumnSeparator : ''"
@@ -56,7 +60,11 @@
                 fdCompact
                 fdType="transparent"
                 class="fd-flexible-column-layout__button"
-                [title]="_rightColumnSeparator === 'left' ? expandTitle : collapseTitle"
+                [title]="
+                    _rightColumnSeparator === 'left'
+                        ? expandTitleEndBtn || expandTitle
+                        : collapseTitleEndBtn || collapseTitle
+                "
             >
                 <fd-icon
                     [glyph]="_rightColumnSeparator ? 'slim-arrow-' + _rightColumnSeparator : ''"
