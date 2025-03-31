@@ -1,0 +1,82 @@
+@import 'fundamental-styles/dist/user-menu.css';
+
+// Specific to Angular Implementation (composite components)
+.fd-user-menu__menu.fd-menu {
+    width: 100%;
+    margin-block-start: 0.25rem;
+}
+
+.fd-menu__list.fd-user-menu__menu-list > .fd-menu__item {
+    position: unset;
+    width: 100%;
+}
+
+.fd-dialog__body .fd-user-menu__body {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+
+    .fd-menu__list.fd-user-menu__menu-list {
+        min-width: 100%;
+    }
+}
+
+.fd-user-menu__details-view .fd-menu.fd-user-menu__menu {
+    padding: 1rem;
+}
+
+.fd-user-menu__main-view-bar.fd-bar {
+    box-shadow: none;
+}
+
+.fd-menu__link {
+    position: relative;
+}
+
+.fd-menu__item:is(:focus, :focus-within, :focus-visible) {
+    outline: none;
+}
+
+// To be removed with the latest version of fundamental-styles
+.fd-user-menu__menu-list.fd-user-menu__menu-list {
+    box-shadow: none;
+    border-radius: 0;
+
+    & > *:first-child,
+    & > *:last-child {
+        border-radius: 0;
+    }
+}
+
+.fd-user-menu__body {
+    position: relative;
+}
+
+.fd-user-menu__body:has(.fd-user-menu__details-view) {
+    padding: 0;
+}
+
+.fd-user-menu__user-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.4rem;
+    max-height: 2.8rem;
+}
+
+.fd-panel__title,
+.fd-user-menu__subline {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fd-user-menu__header-container {
+    max-width: 100%;
+}

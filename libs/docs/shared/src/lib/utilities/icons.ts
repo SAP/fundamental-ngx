@@ -694,5 +694,8 @@ export const Icons = [
     'da',
     'da-2',
     'ai',
-    'in-progress-2'
+    'in-progress-2',
+    'unsynchronize',
+    'verified',
+    'walk-me'
 ];

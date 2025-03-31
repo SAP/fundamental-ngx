@@ -11,9 +11,11 @@ import {
     HostBinding,
     HostListener,
     inject,
+    input,
     Input,
     Output,
     QueryList,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -91,6 +93,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** Counter on list item */
     @Input()
     counter: number;
+
+    /** Whether list item shows active indicator. Used only in List with Subline. */
+    @Input()
+    active = false;
 
     /** Whether list item should contain additional unRead styles */
     @Input()
@@ -170,6 +176,9 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     readonly _list = inject(FD_LIST_UNREAD_INDICATOR, {
         optional: true
     });
+
+    /** Template ref for Settings list item */
+    settingsListTpl = input<TemplateRef<any>>();
 
     /** @hidden */
     private _role = 'listitem'; // default for li elements

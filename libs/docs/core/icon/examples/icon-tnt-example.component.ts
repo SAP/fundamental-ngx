@@ -185,6 +185,10 @@ export class IconTNTExampleComponent {
         'bound-validation-rule',
         'business-application-studio',
         'clone-from-gi',
-        'business-accelerator'
+        'business-accelerator',
+        'ai-feature-estimator',
+        'service-estimator',
+        'add-project',
+        'add-issue'
     ];
 }

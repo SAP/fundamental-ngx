@@ -66,7 +66,10 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
         ScrollbarDirective,
         ScrollSpyDirective,
         IconTabBarTabContentDirective
-    ]
+    ],
+    host: {
+        '[class.fd-settings__tab-bar]': 'settings()'
+    }
 })
 export class IconTabBarComponent implements OnInit, TabList {
     /**
@@ -116,6 +119,9 @@ export class IconTabBarComponent implements OnInit, TabList {
      * If any of the color associations provided, they'll be read by screenreader instead of the actual color
      */
     colorAssociations = input<TabColorAssociations>();
+
+    /** @description If Icon tab bar is used in Settings Dialog */
+    settings = input(false, { transform: booleanAttribute });
 
     /**
      * Maximum height of the content.
@@ -299,6 +305,7 @@ export class IconTabBarComponent implements OnInit, TabList {
         if (this.layoutMode() === 'column') {
             styles.push('fd-icon-tab-bar--counters');
         }
+
         return styles;
     }
 

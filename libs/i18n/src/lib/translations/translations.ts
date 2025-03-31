@@ -109,7 +109,8 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
         cancel: 'Cancel',
-        search: 'Search'
+        search: 'Search',
+        assistiveTools: 'Assistive Tools'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',

@@ -142,7 +142,8 @@ export const API_FILES = {
         'ListMessageDirective',
         'ListNavigationItemArrowDirective',
         'ListNavigationItemTextDirective',
-        'ListNavigationItemComponent'
+        'ListNavigationItemComponent',
+        'ListSublineDirective'
     ],
     menu: [
         'MenuAddonDirective',
@@ -253,7 +254,9 @@ export const API_FILES = {
         'ShellbarActionsComponent',
         'ShellbarLogoComponent',
         'ShellbarSubtitleComponent',
-        'ShellbarTitleComponent'
+        'ShellbarTitleComponent',
+        'ShellbarBrandingComponent',
+        'ShellbarContextAreaComponent'
     ],
     sideNavigation: [
         'SideNavigationComponent',
@@ -420,5 +423,18 @@ export const API_FILES = {
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
     ],
-    genericTag: ['GenericTagComponent']
+    genericTag: ['GenericTagComponent'],
+    settingsDialog: [
+        'SettingsComponent',
+        'SettingsContainerComponent',
+        'SettingsContentDirective',
+        'SettingsDetailAreaDirective',
+        'SettingsDialogBodyDirective',
+        'SettingsDialogContentDirective',
+        'SettingsHeaderDirective',
+        'SettingsHeaderButtonDirective',
+        'SettingsListAreaDirective',
+        'SettingsListContainerDirective'
+    ],
+    userMenu: ['UserMenuComponent']
 };
