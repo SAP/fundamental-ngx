@@ -257,6 +257,16 @@ export class ShellbarBrandingContextAreaExampleComponent {
         alert('Assistive Tools Clicked');
     }
 
+    navClicked(event): void {
+        console.log(event);
+        alert('Navigation Button Clicked');
+    }
+
+    backClicked(event): void {
+        console.log(event);
+        alert('Back Button Clicked');
+    }
+
     onSearchSubmit($event: SearchInput): void {
         this.searchTerm = $event.text;
     }

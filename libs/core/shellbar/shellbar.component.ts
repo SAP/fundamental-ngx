@@ -9,8 +9,10 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
+    EventEmitter,
     Input,
     OnDestroy,
+    Output,
     QueryList,
     ViewChild,
     ViewEncapsulation,
@@ -18,8 +20,8 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
-import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { ClickedDirective, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
@@ -54,7 +56,7 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
             useExisting: ShellbarComponent
         }
     ],
-    imports: [PortalModule, FdTranslatePipe]
+    imports: [PortalModule, FdTranslatePipe, ButtonComponent, ClickedDirective]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
@@ -101,6 +103,22 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     get groupFlex(): Nullable<ShellbarGroupFlexOptions> {
         return this._groupFlex;
     }
+
+    /** Whether to show the navigation button. */
+    @Input()
+    showNavigationButton = false;
+
+    /** Whether to show the back button. */
+    @Input()
+    showBackButton = false;
+
+    /** Emitted event when navigation button is clicked. */
+    @Output()
+    navigationButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
+
+    /** Emitted event when back button is clicked. */
+    @Output()
+    backButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden */
     @ContentChild(FD_COMBOBOX_COMPONENT, { static: false })
@@ -337,6 +355,16 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
+    _navigationClicked(event: Event): void {
+        this.navigationButtonClicked.emit(event);
+    }
+
+    /** @hidden */
+    _backClicked(event: Event): void {
+        this.backButtonClicked.emit(event);
+    }
+
+    /** @hidden */
     private _setSearchComponentListeners(): void {
         this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
             this._showMobileSearch = showSearch;
@@ -400,6 +428,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                 }
                 if (this.contextArea) {
                     this.contextArea.hideElementsIfNeeded();
+                }
+                if (this._showMobileSearch && this._actionsExceedShellbarWidth()) {
+                    this._closeMobileSearch();
                 }
             }
         }
