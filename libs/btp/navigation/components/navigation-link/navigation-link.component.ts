@@ -1,5 +1,4 @@
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -35,7 +34,7 @@ export class NavigationLinkRefDirective {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'a[fdb-navigation-link]',
-    imports: [IconComponent, NgTemplateOutlet],
+    imports: [IconComponent],
     hostDirectives: [RouterLinkActive],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

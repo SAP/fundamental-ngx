@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -6,7 +5,7 @@ import { Table, TableDataSourceDirective, TableService } from '@fundamental-ngx/
 
 @Component({
     selector: 'fdp-table-growing-button',
-    imports: [ListComponent, ListItemComponent, ListTitleDirective, ListLinkDirective, AsyncPipe, FdTranslatePipe],
+    imports: [ListComponent, ListItemComponent, ListTitleDirective, ListLinkDirective, FdTranslatePipe],
     templateUrl: './table-growing-button.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

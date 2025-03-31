@@ -3,6 +3,128 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.7...v0.55.4) (2025-03-31)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.6...v0.55.4-rc.7) (2025-03-30)
+
+
+### Features
+
+* **platform:** table search placeholder is customizable ([#13147](https://github.com/SAP/fundamental-ngx/issues/13147)) ([51e13a2](https://github.com/SAP/fundamental-ngx/commit/51e13a28f398eab31ffaf20026c166430d6d3025))
+
+
+
+
+
+## [0.55.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.5...v0.55.4-rc.6) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add additional options to set the flexible column layout splitter title ([#13151](https://github.com/SAP/fundamental-ngx/issues/13151)) ([a96f7b5](https://github.com/SAP/fundamental-ngx/commit/a96f7b55e9f314bcf7ae6f413a52b0fc9195d6b6))
+
+
+
+
+
+## [0.55.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.4...v0.55.4-rc.5) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** set correct height for List with Byline group header ([#13152](https://github.com/SAP/fundamental-ngx/issues/13152)) ([d4f6f56](https://github.com/SAP/fundamental-ngx/commit/d4f6f5654de6fbcee9ffcd27d0506e550182108e))
+
+
+
+
+
+## [0.55.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.3...v0.55.4-rc.4) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add an option to provide more descriptive title for Message Strip dismiss btn ([#13153](https://github.com/SAP/fundamental-ngx/issues/13153)) ([d08d5df](https://github.com/SAP/fundamental-ngx/commit/d08d5df1057e3a2b881f7f8cf0cfa0b486c05916))
+
+
+
+
+
+## [0.55.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.2...v0.55.4-rc.3) (2025-03-25)
+
+
+### Features
+
+* **core:** wizard in a dynamic page ([#13140](https://github.com/SAP/fundamental-ngx/issues/13140)) ([36caa13](https://github.com/SAP/fundamental-ngx/commit/36caa137ba30aa39195d577963d4f2e5454d75e0))
+
+
+
+
+
+## [0.55.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.1...v0.55.4-rc.2) (2025-03-24)
+
+
+### Bug Fixes
+
+* **core:** remove Dynamic page shadow when used with Icon Tab Bar ([#13137](https://github.com/SAP/fundamental-ngx/issues/13137)) ([80f6f55](https://github.com/SAP/fundamental-ngx/commit/80f6f558c979d06d2418e49596b79b5aa08eb972))
+
+
+
+
+
+## [0.55.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.0...v0.55.4-rc.1) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.3...v0.55.4-rc.0) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.3-rc.1...v0.55.3) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.3-rc.0...v0.55.3-rc.1) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.2...v0.55.3-rc.0) (2025-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.6...v0.55.2) (2025-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.55.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.5...v0.55.2-rc.6) (2025-03-20)
 
 **Note:** Version bump only for package fundamental-ngx

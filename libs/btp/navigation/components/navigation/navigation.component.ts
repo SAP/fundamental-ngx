@@ -36,7 +36,6 @@ import { FdbNavigation } from '../../models/navigation.class';
 import { FdbNavigationState, FdbNavigationType } from '../../models/navigation.types';
 import { NavigationService } from '../../services/navigation.service';
 import { NavigationContentEndComponent } from '../navigation-end/navigation-content-end.component';
-import { NavigationListItemComponent } from '../navigation-item/navigation-list-item.component';
 import { NavigationContentStartComponent } from '../navigation-start/navigation-content-start.component';
 
 interface GroupedDataSourceItems {
@@ -64,8 +63,7 @@ interface GroupedDataSourceItems {
         NgTemplateOutlet,
         NavigationListItemDirective,
         NavigationContentStartComponent,
-        NavigationContentEndComponent,
-        NavigationListItemComponent
+        NavigationContentEndComponent
     ]
 })
 export class NavigationComponent

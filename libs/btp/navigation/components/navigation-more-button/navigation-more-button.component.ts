@@ -1,5 +1,5 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
@@ -30,15 +30,7 @@ export interface NavigationMoreButtonRefContext {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'li[fdb-navigation-more-button]',
-    imports: [
-        NavigationLinkComponent,
-        NavigationListComponent,
-        PopoverComponent,
-        PopoverControlComponent,
-        PopoverBodyComponent,
-        NgTemplateOutlet,
-        NgClass
-    ],
+    imports: [NavigationLinkComponent, NavigationListComponent, PopoverComponent, PopoverBodyComponent, NgClass],
     providers: [
         {
             provide: FdbNavigationListItem,
