@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.4...v0.55.5-rc.0) (2025-03-31)
+
+
+### Features
+
+* UXC Vega ([#13097](https://github.com/SAP/fundamental-ngx/issues/13097)) ([3cc70a9](https://github.com/SAP/fundamental-ngx/commit/3cc70a9c8830f8d35b86262621f40f6ba52c3ca2))
+
+
+
+
+
 ## [0.55.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.7...v0.55.4) (2025-03-31)
 
 **Note:** Version bump only for package fundamental-ngx
