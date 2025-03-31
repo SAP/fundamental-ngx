@@ -34,7 +34,7 @@ export class NavigationLinkRefDirective {
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'a[fdb-navigation-link]',
+    selector: 'a[fdb-navigation-link], button[fdb-navigation-link]',
     imports: [IconComponent],
     hostDirectives: [RouterLinkActive],
     changeDetection: ChangeDetectionStrategy.OnPush,
