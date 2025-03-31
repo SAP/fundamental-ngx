@@ -1,42 +1,46 @@
 @if (items && items.length > 0) {
-    <h1 class="fd-sr-only">{{ control }}</h1>
-    <button
-        fd-button
-        fdType="transparent"
-        class="fd-shellbar__button fd-shellbar__button--menu"
-        glyph="slim-arrow-down"
-        glyphPosition="after"
-        fdCozy
-        [disabled]="disabled"
-        [fdMenuTrigger]="menu"
-    >
-        <span class="fd-shellbar__title">{{ control }}</span>
-    </button>
-    <fd-menu
-        #menu
-        [placement]="placement"
-        [triggers]="triggers"
-        [fillControlMode]="fillControlMode"
-        [closeOnEscapeKey]="closeOnEscapeKey"
-        [closeOnOutsideClick]="closeOnOutsideClick"
-    >
-        @for (item of items; track item) {
-            <li (click)="itemClicked(item, $event)" fd-menu-item>
-                <a
-                    [attr.href]="item.link ? item.link : null"
-                    [attr.target]="item.newTab ? '_blank' : null"
-                    fd-menu-interactive
-                >
-                    <span fd-menu-title>{{ item.name }}</span>
-                    @if (item.glyph) {
-                        <fd-icon fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
-                    }
-                </a>
-            </li>
-        }
-    </fd-menu>
+    <div class="fd-shellbar__product">
+        <h1 class="fd-sr-only">{{ control }}</h1>
+        <button
+            fd-button
+            fdType="transparent"
+            class="fd-shellbar__button fd-shellbar__button--menu"
+            glyph="slim-arrow-down"
+            glyphPosition="after"
+            fdCozy
+            [disabled]="disabled"
+            [fdMenuTrigger]="menu"
+        >
+            <span class="fd-shellbar__title">{{ control }}</span>
+        </button>
+        <fd-menu
+            #menu
+            [placement]="placement"
+            [triggers]="triggers"
+            [fillControlMode]="fillControlMode"
+            [closeOnEscapeKey]="closeOnEscapeKey"
+            [closeOnOutsideClick]="closeOnOutsideClick"
+        >
+            @for (item of items; track item) {
+                <li (click)="itemClicked(item, $event)" fd-menu-item>
+                    <a
+                        [attr.href]="item.link ? item.link : null"
+                        [attr.target]="item.newTab ? '_blank' : null"
+                        fd-menu-interactive
+                    >
+                        <span fd-menu-title>{{ item.name }}</span>
+                        @if (item.glyph) {
+                            <fd-icon fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
+                        }
+                    </a>
+                </li>
+            }
+        </fd-menu>
+    </div>
 } @else {
-    <h1 class="fd-shellbar__title fd-product-menu__title">
-        {{ control }}
-    </h1>
+    <div class="fd-shellbar__product">
+        <h1 class="fd-shellbar__title fd-product-menu__title">
+            {{ control }}
+        </h1>
+    </div>
 }

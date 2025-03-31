@@ -91,3 +91,23 @@
     <fd-shellbar-custom-user-menu-example></fd-shellbar-custom-user-menu-example>
 </component-example>
 <code-example [exampleFiles]="shellbarCustomUserMenuExample"></code-example>
+
+<fd-docs-section-title id="branding-context-area" componentName="shellbar">
+    Shellbar with branding and context area
+</fd-docs-section-title>
+<description>
+    <p>Below demonstrates the use of the shellbar branding and context area components.</p>
+
+    <p>
+        The items in the context area take priority over the shellbar actions. This means that, as the shellbar shrinks
+        horizontally, the shellbar actions will be collapsed into an overflow menu before the items in the context area
+        are hidden. After the shellbar action items have all been moved into the overflow menu, if the shellbar
+        continues to shrink, items from the context area will start to be hidden. Note that these context area items are
+        not moved to an overflow menu. The order in which context area items are hidden can be configured using the
+        <code>fdShellbarHidePriority</code> directive, as demonstrated below.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-branding-context-area-example></fd-shellbar-branding-context-area-example>
+</component-example>
+<code-example [exampleFiles]="shellbarBrandingContextAreaExample"></code-example>

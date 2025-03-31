@@ -12,7 +12,6 @@ import {
     ShellbarLogoComponent,
     ShellbarMenuItem,
     ShellbarSizes,
-    ShellbarSubtitleComponent,
     ShellbarUser,
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
@@ -35,7 +34,6 @@ import {
         ShellbarComponent,
         ShellbarLogoComponent,
         ProductMenuComponent,
-        ShellbarSubtitleComponent,
         PlatformSearchFieldModule,
         ContentDensityDirective,
         ShellbarActionsComponent,

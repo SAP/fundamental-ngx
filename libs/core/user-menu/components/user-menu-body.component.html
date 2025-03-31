@@ -1,0 +1,29 @@
+@if (!submenu()) {
+    <ng-content select="[fd-user-menu-header]"></ng-content>
+    <ng-content select="[fd-user-menu-content-container]"></ng-content>
+} @else {
+    <div class="fd-user-menu__details-view">
+        <ng-container *ngTemplateOutlet="submenu()"></ng-container>
+    </div>
+}
+
+<ng-template #bodyHeader let-dialogRef="dialogRef">
+    <div fd-bar [class.fd-user-menu__main-view-bar]="!submenu()">
+        @if (submenu()) {
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <fd-button-bar ariaLabel="previous" [glyph]="navigationArrow$ | async" (click)="clearSubmenu()">
+                    </fd-button-bar>
+                </fd-bar-element>
+                <fd-bar-element>
+                    <h5 fd-title>{{ selectedItemTitle() }}</h5>
+                </fd-bar-element>
+            </div>
+        }
+        <div fd-bar-right>
+            <fd-bar-element>
+                <fd-button-bar ariaLabel="previous" glyph="decline" (click)="closeDialog(dialogRef)"> </fd-button-bar>
+            </fd-bar-element>
+        </div>
+    </div>
+</ng-template>

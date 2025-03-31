@@ -8,8 +8,10 @@ import {
     Input,
     Output,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     inject,
+    input,
     signal
 } from '@angular/core';
 
@@ -77,6 +79,12 @@ export class PanelComponent {
     /** Reference to panel content */
     @ContentChild(PanelContentDirective)
     panelContent: Nullable<PanelContentDirective>;
+
+    /** Whether the panel (header and content) is transparent */
+    transparent = input(false, { transform: booleanAttribute });
+
+    /** Whether the panel has no border radius */
+    noRadius = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     _buttonIcon$ = computed(() =>

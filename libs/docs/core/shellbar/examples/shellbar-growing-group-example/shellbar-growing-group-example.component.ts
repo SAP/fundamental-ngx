@@ -8,7 +8,6 @@ import {
     ShellbarGroupFlexOptions,
     ShellbarLogoComponent,
     ShellbarMenuItem,
-    ShellbarSubtitleComponent,
     ShellbarUser,
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
@@ -22,7 +21,6 @@ import {
         ShellbarComponent,
         ShellbarLogoComponent,
         ProductMenuComponent,
-        ShellbarSubtitleComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ProductSwitchModule
