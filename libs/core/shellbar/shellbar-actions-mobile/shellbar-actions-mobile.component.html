@@ -39,6 +39,15 @@
                         }
                     </li>
                 }
+                @if (!!assistiveToolsCallback) {
+                    <li
+                        fd-action-sheet-item
+                        tabindex="-1"
+                        glyph="sys-help"
+                        [label]="'coreShellbar.assistiveTools' | fdTranslate"
+                        (click)="assistiveToolsCallback($event)"
+                    ></li>
+                }
             </fd-action-sheet-body>
         </fd-action-sheet>
     </div>

@@ -1,92 +1,40 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ClickedDirective } from '@fundamental-ngx/cdk';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
+import { ShellbarMenuItem, ShellbarModule, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
 import {
-    ProductMenuComponent,
-    ShellbarActionComponent,
-    ShellbarActionsComponent,
-    ShellbarComponent,
-    ShellbarLogoComponent,
-    ShellbarMenuItem,
-    ShellbarSizes,
-    ShellbarUser,
-    ShellbarUserMenu
-} from '@fundamental-ngx/core/shellbar';
-import {
-    PlatformSearchFieldModule,
+    SearchFieldComponent,
     SearchInput,
     SuggestionItem,
     ValueLabelItem
 } from '@fundamental-ngx/platform/search-field';
 
 @Component({
-    selector: 'fd-shellbar-collapsible-example',
-    templateUrl: './shellbar-collapsible-example.component.html',
+    selector: 'fd-shellbar-branding-context-area-example',
+    templateUrl: './shellbar-branding-context-area-example.component.html',
     imports: [
-        SegmentedButtonModule,
-        FormsModule,
+        ShellbarModule,
+        MenuModule,
+        AvatarComponent,
+        ClickedDirective,
         ButtonComponent,
-        ShellbarComponent,
-        ShellbarLogoComponent,
-        ProductMenuComponent,
-        PlatformSearchFieldModule,
-        ContentDensityDirective,
-        ShellbarActionsComponent,
-        ShellbarActionComponent,
-        ProductSwitchModule
+        FormsModule,
+        ProductSwitchModule,
+        SearchFieldComponent,
+        SegmentedButtonComponent,
+        ObjectStatusComponent
     ]
 })
-export class ShellbarCollapsibleExampleComponent {
-    currentSize: ShellbarSizes = 'xl';
-
-    showSearch = true;
-
-    sizesWidth = {
-        s: 320,
-        m: 720,
-        l: 1024,
-        xl: 1900
-    };
-
+export class ShellbarBrandingContextAreaExampleComponent {
     searchTerm = '';
 
     inputText = '';
-
-    productMenuControl = 'Corporate Portal';
-
-    categories: ValueLabelItem[] = [
-        {
-            value: 'red',
-            label: 'Red'
-        },
-        {
-            value: 'orange',
-            label: 'Orange'
-        },
-        {
-            value: 'yellow',
-            label: 'Yellow'
-        },
-        {
-            value: 'green',
-            label: 'Green'
-        },
-        {
-            value: 'blue',
-            label: 'Blue'
-        },
-        {
-            value: 'indigo',
-            label: 'Indigo'
-        },
-        {
-            value: 'violet',
-            label: 'Violet'
-        }
-    ];
 
     suggestions: SuggestionItem[] = [
         {
@@ -127,6 +75,39 @@ export class ShellbarCollapsibleExampleComponent {
         }
     ];
 
+    searchTerms = ['Apple', 'Banana', 'Kiwi', 'Strawberry'];
+
+    categories: ValueLabelItem[] = [
+        {
+            value: 'red',
+            label: 'Red'
+        },
+        {
+            value: 'orange',
+            label: 'Orange'
+        },
+        {
+            value: 'yellow',
+            label: 'Yellow'
+        },
+        {
+            value: 'green',
+            label: 'Green'
+        },
+        {
+            value: 'blue',
+            label: 'Blue'
+        },
+        {
+            value: 'indigo',
+            label: 'Indigo'
+        },
+        {
+            value: 'violet',
+            label: 'Violet'
+        }
+    ];
+
     productMenuItems: ShellbarMenuItem[] = [
         {
             name: 'Application A',
@@ -154,16 +135,6 @@ export class ShellbarCollapsibleExampleComponent {
         }
     ];
 
-    user: ShellbarUser = {
-        fullName: 'William Willson',
-        colorAccent: 1
-    };
-
-    userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: this.settingsCallback },
-        { text: 'Sign Out', callback: this.signOutCallback }
-    ];
-
     actions = [
         {
             glyph: 'pool',
@@ -181,14 +152,12 @@ export class ShellbarCollapsibleExampleComponent {
         }
     ];
 
-    searchTerms = ['Apple', 'Banana', 'Kiwi', 'Strawberry'];
-
     productSwitcher: ProductSwitchItem[] = [
         {
             title: 'Home',
             subtitle: 'Central Home',
             icon: 'home',
-            callback: () => this.productSwitcherCallback('Home '),
+            callback: () => this.productSwitcherCallback('Home'),
             disabledDragAndDrop: true,
             stickToPosition: true
         },
@@ -245,13 +214,28 @@ export class ShellbarCollapsibleExampleComponent {
         }
     ];
 
-    settingsCallback($event): void {
+    user: ShellbarUser = {
+        fullName: 'William Willson',
+        colorAccent: 6
+    };
+
+    userMenu: ShellbarUserMenu[] = [
+        { text: 'Settings', callback: this.settingsCallback },
+        { text: 'Sign Out', callback: this.signOutCallback }
+    ];
+
+    brandingClicked($event: Event): void {
         console.log($event);
+        alert('Branding clicked');
+    }
+
+    settingsCallback($event: MouseEvent): void {
+        console.log({ $event });
         alert('Settings Clicked');
     }
 
-    signOutCallback($event): void {
-        console.log($event);
+    signOutCallback($event: MouseEvent): void {
+        console.log({ $event });
         alert('Sign Out Clicked');
     }
 
@@ -267,6 +251,20 @@ export class ShellbarCollapsibleExampleComponent {
 
     productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
+    }
+
+    assistiveToolsCallback(): void {
+        alert('Assistive Tools Clicked');
+    }
+
+    navClicked(event): void {
+        console.log(event);
+        alert('Navigation Button Clicked');
+    }
+
+    backClicked(event): void {
+        console.log(event);
+        alert('Back Button Clicked');
     }
 
     onSearchSubmit($event: SearchInput): void {
