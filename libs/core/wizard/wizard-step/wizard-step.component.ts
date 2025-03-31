@@ -163,7 +163,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
             }
             this.statusChange.emit(this.status);
         }
-
     }
 
     /** @hidden */
@@ -191,25 +190,25 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         if (event) {
             event.preventDefault();
         }
-        
+
         if (
             this.visited &&
             (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) &&
             (!this.stepIndicator ||
                 !this.stepIndicator.stackedItems$() ||
-                !this.stepIndicator.stackedItems$().length) && (this.stepClickValidator === undefined || await this.stepClickValidator(this.visited, this.completed) === true)
+                !this.stepIndicator.stackedItems$().length) &&
+            (this.stepClickValidator === undefined ||
+                (await this.stepClickValidator(this.visited, this.completed)) === true)
         ) {
             this.stepClicked.emit(this);
             this._isValidated = true;
-        }
-        else {
+        } else {
             this._isValidated = false;
         }
 
         if (this.stepClickValidator !== undefined) {
             console.log(await this.stepClickValidator(this.visited, this.completed));
         }
-        
     }
 
     /** @hidden */

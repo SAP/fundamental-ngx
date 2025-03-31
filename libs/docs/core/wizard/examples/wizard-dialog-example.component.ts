@@ -46,6 +46,9 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     ]
 })
 export class WizardDialogExampleComponent {
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
     step1status: WizardStepStatus = 'current';
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
@@ -57,9 +60,6 @@ export class WizardDialogExampleComponent {
     addressLine2 = '';
 
     currentStep = 1;
-
-    @ViewChildren(WizardStepComponent)
-    steps: QueryList<WizardStepComponent>;
 
     constructor(
         private _dialogService: DialogService,
@@ -83,9 +83,7 @@ export class WizardDialogExampleComponent {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 
-    validateStep = (): boolean | Promise<boolean> => {
-        return (this.fullName != '' && this.addressLine1 != '');
-      };
+    validateStep = (): boolean | Promise<boolean> => this.fullName !== '' && this.addressLine1 !== '';
 
     goToStep(step: number): void {
         switch (step) {
