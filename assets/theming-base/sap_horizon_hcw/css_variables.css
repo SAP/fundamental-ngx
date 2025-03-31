@@ -1,12 +1,12 @@
 /**
-* Copyright (c) 2012-2024 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
+* Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 14.2.8
-* data:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "14.2.8"}, "Version": { "Build": "11.24.0.20241212104249", "Source": "11.24.0"}}
+* Theming Engine 15.0.1
+* data:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "15.0.1"}, "Version": { "Build": "11.28.2.20250320152502", "Source": "11.28.2"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "14.2.8"}, "Version": { "Build": "11.24.0.20241212104249", "Source": "11.24.0"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "14.2.8"}, "Version": { "Build": "11.24.0.20241212104249", "Source": "11.24.0"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "15.0.1"}, "Version": { "Build": "11.28.2.20250320152502", "Source": "11.28.2"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "15.0.1"}, "Version": { "Build": "11.28.2.20250320152502", "Source": "11.28.2"}};}
 :root {
   --sapBrandColor: #e97624;
   --sapHighlightColor: #e97624;
@@ -18,6 +18,7 @@
   --sapTextColor: #000;
   --sapLinkColor: #000;
   --sapCompanyLogo: none;
+  --sapFavicon: none;
   --sapBackgroundImage: none;
   --sapBackgroundImageOpacity: 1.0;
   --sapBackgroundImageRepeat: false;
@@ -747,6 +748,12 @@
   --sapTab_Critical_Selected_TextColor: #000;
   --sapTab_Critical_Selected_IconColor: #000;
   --sapTab_Critical_Selected_Background: #5c93ff;
+  --sapTab_Neutral_TextColor: #000;
+  --sapTab_Neutral_ForegroundColor: #000;
+  --sapTab_Neutral_IconColor: #000;
+  --sapTab_Neutral_Selected_TextColor: #000;
+  --sapTab_Neutral_Selected_IconColor: #000;
+  --sapTab_Neutral_Selected_Background: #5c93ff;
   --sapTile_Background: #fff;
   --sapTile_Hover_Background: #e97624;
   --sapTile_Active_Background: #e97624;
