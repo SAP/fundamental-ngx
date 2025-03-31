@@ -166,6 +166,9 @@ export class IconTabBarComponent implements OnInit, TabList {
     /** @hidden */
     _init = true;
 
+    /** @hidden */
+    activeTab: TabConfig | null = null;
+
     /** Scrollable element reference. */
     get scrollableElement(): Nullable<ElementRef> {
         return this._scrollbar()?.elementRef;
@@ -249,7 +252,11 @@ export class IconTabBarComponent implements OnInit, TabList {
      */
     _selectItem(selectedItem: IconTabBarItem): void {
         this._tabRenderer$.set(selectedItem);
-        this.iconTabSelected.emit(selectedItem);
+
+        if (this.activeTab !== selectedItem) {
+            this.activeTab = selectedItem;
+            this.iconTabSelected.emit(selectedItem);
+        }
 
         if (this.stackContent) {
             this._scrollToPanel(this.tabDirectives().find((tab) => tab.uId() === selectedItem.uId)!);
