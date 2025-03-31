@@ -12,6 +12,7 @@ export * from './directives/list-navigation-item-text.directive';
 export * from './directives/list-secondary.directive';
 export * from './directives/list-title-text.directive';
 export * from './directives/list-title.directive';
+export * from './directives/subline/list-subline.directive';
 export * from './list-component.interface';
 export * from './list-focus-item.model';
 export * from './list-item/list-item.component';

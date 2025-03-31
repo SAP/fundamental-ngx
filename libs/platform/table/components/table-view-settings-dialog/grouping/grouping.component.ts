@@ -1,23 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, OnInit, output, signal, ViewEncapsulation } from '@angular/core';
-import equal from 'fast-deep-equal/es6';
-
-import {
-    DialogBodyComponent,
-    DialogComponent,
-    DialogFooterComponent,
-    DialogHeaderComponent
-} from '@fundamental-ngx/core/dialog';
-
-import { CdkScrollable } from '@angular/cdk/overlay';
-
 import { FormsModule } from '@angular/forms';
-import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import {
-    BarElementDirective,
-    BarLeftDirective,
-    BarRightDirective,
-    ButtonBarComponent
-} from '@fundamental-ngx/core/bar';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ListComponent,
     ListGroupHeaderDirective,
@@ -25,11 +8,9 @@ import {
     ListTitleDirective
 } from '@fundamental-ngx/core/list';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SortDirection } from '@fundamental-ngx/platform/table-helpers';
-import { ResetButtonComponent } from '../../reset-button/reset-button.component';
+import equal from 'fast-deep-equal/es6';
 import {
     INITIAL_DIRECTION,
     NOT_GROUPED_OPTION_VALUE,
@@ -46,25 +27,12 @@ let groupOrderHeaderUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        DialogComponent,
-        DialogHeaderComponent,
-        TemplateDirective,
-        BarLeftDirective,
-        BarElementDirective,
-        TitleComponent,
-        BarRightDirective,
-        ResetButtonComponent,
-        CdkScrollable,
-        ScrollbarDirective,
-        DialogBodyComponent,
         ListComponent,
         ListGroupHeaderDirective,
         ListTitleDirective,
         ListItemComponent,
         RadioButtonComponent,
         FormsModule,
-        DialogFooterComponent,
-        ButtonBarComponent,
         FdTranslatePipe
     ]
 })

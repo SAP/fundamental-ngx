@@ -4,3 +4,13 @@
 .fd-list {
     max-width: 100% !important;
 }
+
+.fd-settings__list.fd-list.fd-list--byline .fd-list__content {
+    height: auto;
+}
+
+.fd-list--byline .fd-list__group-header {
+    min-height: var(--sapElement_LineHeight);
+    height: var(--sapElement_LineHeight);
+    max-height: var(--sapElement_LineHeight);
+}

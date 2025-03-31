@@ -29,7 +29,11 @@
             <fdp-search-field
                 fd-toolbar-item
                 [style.min-width.rem]="15.5"
-                [placeholder]="'platformTable.toolbarSearchPlaceholder' | fdTranslate"
+                [placeholder]="
+                    searchFieldPlaceholder
+                        ? searchFieldPlaceholder
+                        : ('platformTable.toolbarSearchPlaceholder' | fdTranslate)
+                "
                 [inputText]="_searchInputText"
                 [disabled]="!!(tableLoading$ | async)"
                 [suggestions]="searchSuggestions"
@@ -185,8 +189,8 @@
                 fd-button
                 fdType="transparent"
                 glyph="decline"
-                ariaLabel="Close Toolbar Button"
-                title="Close Toolbar Button"
+                [title]="'platformTable.clearFilters' | fdTranslate"
+                [ariaLabel]="'platformTable.clearFilters' | fdTranslate"
             ></button>
         </fd-toolbar>
     }

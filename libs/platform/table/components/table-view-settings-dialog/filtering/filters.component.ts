@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -11,28 +12,9 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import equal from 'fast-deep-equal/es6';
-
-import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import {
-    DialogBodyComponent,
-    DialogComponent,
-    DialogFooterComponent,
-    DialogHeaderComponent
-} from '@fundamental-ngx/core/dialog';
-
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgTemplateOutlet } from '@angular/common';
-import {
-    BarElementDirective,
-    BarLeftDirective,
-    BarRightDirective,
-    ButtonBarComponent
-} from '@fundamental-ngx/core/bar';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, FilterType, TableColumn } from '@fundamental-ngx/platform/table-helpers';
-import { ResetButtonComponent } from '../../reset-button/reset-button.component';
+import equal from 'fast-deep-equal/es6';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
 import { ACTIVE_STEP, FiltersDialogData, FiltersDialogResultData } from '../table-view-settings.model';
 import { FilterStepComponent } from './filter-step.component';
@@ -44,24 +26,7 @@ import { FiltersListStepComponent, SelectableFilter } from './filters-list-step.
     templateUrl: './filters.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [
-        DialogComponent,
-        DialogHeaderComponent,
-        TemplateDirective,
-        BarLeftDirective,
-        BarElementDirective,
-        NgTemplateOutlet,
-        BarRightDirective,
-        ResetButtonComponent,
-        CdkScrollable,
-        ScrollbarDirective,
-        DialogBodyComponent,
-        DialogFooterComponent,
-        ButtonBarComponent,
-        FiltersListStepComponent,
-        FilterStepComponent,
-        FdTranslatePipe
-    ]
+    imports: [NgTemplateOutlet, FiltersListStepComponent, FilterStepComponent]
 })
 export class FiltersComponent implements AfterViewInit, OnInit {
     /** Data for the filtering dialog */

@@ -1,12 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import {
-    BasePopoverClass,
-    PopoverBodyComponent,
-    PopoverComponent,
-    PopoverControlComponent
-} from '@fundamental-ngx/core/popover';
+import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import {
     FD_PRODUCT_SWITCH_COMPONENT,
     ProductSwitchButtonDirective,
@@ -20,9 +15,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     imports: [
         ButtonComponent,
         FdTranslatePipe,
-        PopoverBodyComponent,
-        PopoverComponent,
-        PopoverControlComponent,
         ProductSwitchComponent,
         ProductSwitchButtonDirective,
         ToolHeaderButtonDirective

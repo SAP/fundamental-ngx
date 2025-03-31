@@ -3,6 +3,210 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.4...v0.55.5-rc.0) (2025-03-31)
+
+
+### Features
+
+* UXC Vega ([#13097](https://github.com/SAP/fundamental-ngx/issues/13097)) ([3cc70a9](https://github.com/SAP/fundamental-ngx/commit/3cc70a9c8830f8d35b86262621f40f6ba52c3ca2))
+
+
+
+
+
+## [0.55.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.7...v0.55.4) (2025-03-31)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.6...v0.55.4-rc.7) (2025-03-30)
+
+
+### Features
+
+* **platform:** table search placeholder is customizable ([#13147](https://github.com/SAP/fundamental-ngx/issues/13147)) ([51e13a2](https://github.com/SAP/fundamental-ngx/commit/51e13a28f398eab31ffaf20026c166430d6d3025))
+
+
+
+
+
+## [0.55.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.5...v0.55.4-rc.6) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add additional options to set the flexible column layout splitter title ([#13151](https://github.com/SAP/fundamental-ngx/issues/13151)) ([a96f7b5](https://github.com/SAP/fundamental-ngx/commit/a96f7b55e9f314bcf7ae6f413a52b0fc9195d6b6))
+
+
+
+
+
+## [0.55.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.4...v0.55.4-rc.5) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** set correct height for List with Byline group header ([#13152](https://github.com/SAP/fundamental-ngx/issues/13152)) ([d4f6f56](https://github.com/SAP/fundamental-ngx/commit/d4f6f5654de6fbcee9ffcd27d0506e550182108e))
+
+
+
+
+
+## [0.55.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.3...v0.55.4-rc.4) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add an option to provide more descriptive title for Message Strip dismiss btn ([#13153](https://github.com/SAP/fundamental-ngx/issues/13153)) ([d08d5df](https://github.com/SAP/fundamental-ngx/commit/d08d5df1057e3a2b881f7f8cf0cfa0b486c05916))
+
+
+
+
+
+## [0.55.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.2...v0.55.4-rc.3) (2025-03-25)
+
+
+### Features
+
+* **core:** wizard in a dynamic page ([#13140](https://github.com/SAP/fundamental-ngx/issues/13140)) ([36caa13](https://github.com/SAP/fundamental-ngx/commit/36caa137ba30aa39195d577963d4f2e5454d75e0))
+
+
+
+
+
+## [0.55.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.1...v0.55.4-rc.2) (2025-03-24)
+
+
+### Bug Fixes
+
+* **core:** remove Dynamic page shadow when used with Icon Tab Bar ([#13137](https://github.com/SAP/fundamental-ngx/issues/13137)) ([80f6f55](https://github.com/SAP/fundamental-ngx/commit/80f6f558c979d06d2418e49596b79b5aa08eb972))
+
+
+
+
+
+## [0.55.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.0...v0.55.4-rc.1) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.3...v0.55.4-rc.0) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.3-rc.1...v0.55.3) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.3-rc.0...v0.55.3-rc.1) (2025-03-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.2...v0.55.3-rc.0) (2025-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.6...v0.55.2) (2025-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.5...v0.55.2-rc.6) (2025-03-20)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.4...v0.55.2-rc.5) (2025-03-19)
+
+
+### Bug Fixes
+
+* **platform:** do not set focus on list when there is IME processing ([#13122](https://github.com/SAP/fundamental-ngx/issues/13122)) ([dcecb69](https://github.com/SAP/fundamental-ngx/commit/dcecb69c99ea6b4bc3bc74963cbdeff445c1cb65))
+
+
+
+
+
+## [0.55.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.3...v0.55.2-rc.4) (2025-03-19)
+
+
+### Bug Fixes
+
+* **platform:** incorrect tooltip label ([#13111](https://github.com/SAP/fundamental-ngx/issues/13111)) ([d5cded3](https://github.com/SAP/fundamental-ngx/commit/d5cded31e836837054e1c3fe75b342feece938c1))
+
+
+
+
+
+## [0.55.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.2...v0.55.2-rc.3) (2025-03-18)
+
+
+### Bug Fixes
+
+* **core:** footer height not substracted ([#13110](https://github.com/SAP/fundamental-ngx/issues/13110)) ([874b629](https://github.com/SAP/fundamental-ngx/commit/874b629e0276a2a62472d19ee7234ec6e053e522))
+
+
+
+
+
+## [0.55.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.1...v0.55.2-rc.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* **core:** checkbox clicking in multi input ([#13124](https://github.com/SAP/fundamental-ngx/issues/13124)) ([566d6f6](https://github.com/SAP/fundamental-ngx/commit/566d6f68704aa8003f7d9ebf8d09f2475aea0a31))
+
+
+
+
+
+## [0.55.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.2-rc.0...v0.55.2-rc.1) (2025-03-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.1...v0.55.2-rc.0) (2025-03-14)
+
+
+### Features
+
+* lazy load popover body in all cases for the avatar group ([#13090](https://github.com/SAP/fundamental-ngx/issues/13090)) ([2797e4c](https://github.com/SAP/fundamental-ngx/commit/2797e4c3bac2ce08154565fa5de70e65444a49ad))
+
+
+
+
+
 ## [0.55.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.1-rc.1...v0.55.1) (2025-03-10)
 
 **Note:** Version bump only for package fundamental-ngx

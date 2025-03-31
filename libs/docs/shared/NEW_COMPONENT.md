@@ -2,19 +2,19 @@
 
 ## Content
 
--   [1. Code Structure](#1)
--   [2.Prerequisites ](#2)
--   [3. Generating A New Component](#3)
--   [4. Component Example](#4)
--   [5. Updating Documentation](#5)
--   [6. Publishing](#6)
+- [1. Code Structure](#1)
+- [2.Prerequisites ](#2)
+- [3. Generating A New Component](#3)
+- [4. Component Example](#4)
+- [5. Updating Documentation](#5)
+- [6. Publishing](#6)
 
 ## <a name="1"></a>1. Code Structure
 
 The fundamental-ngx repository is split into two projects
 
--   the component library: a centralized modular repository made from components. It allow users to easily insert/reuse a large part of the code improving the quality and time required for their application.
--   the documentation app: used to catalog the various different components, as well as present use cases for them.
+- the component library: a centralized modular repository made from components. It allow users to easily insert/reuse a large part of the code improving the quality and time required for their application.
+- the documentation app: used to catalog the various different components, as well as present use cases for them.
 
 In the following guide we will look at how to create a component from scratch, test it, update the relevant part of the documentation, and publish our work.
 
@@ -193,11 +193,11 @@ myComponentDoubleButtonExample: ExampleFile[] = [
 
 The name of this array should be again the same as the component example in `camel Case`. In this array atleast one instance of the document object needs to present with the following properties:
 
--   `language` it holds the information of the type of file; typescript, html, scss.
--   `code` it contains the the location of the code to be shown.
--   `fileName` it should be the same as the file, without the extensions.
--   `name` reference name give when the user looks at the raw code. It should be as simple and clear as possible.
--   `component` the component class declration, it needs to be present only for typescript files.
+- `language` it holds the information of the type of file; typescript, html, scss.
+- `code` it contains the the location of the code to be shown.
+- `fileName` it should be the same as the file, without the extensions.
+- `name` reference name give when the user looks at the raw code. It should be as simple and clear as possible.
+- `component` the component class declration, it needs to be present only for typescript files.
 
 When you have multiple files, they all need to be declared in the same array as separate objects. For more information read the following [file](https://github.com/SAP/fundamental-ngx/wiki/Stackblitz-support-instructions).
 
@@ -214,16 +214,16 @@ The last thing we need is to add the following code in the html file:
 <code-example [exampleFiles]="raw code array name"></code-example>
 ```
 
--   `<separator></separator>` is used to separate the different examples, it needs to be present for each example after the first one
--   "id" for each instance should be the name of the example without any modifications; for our example this would be `double-button`
--   "Component name" should be the same name as the one as the actuall component. That would be "My Component" in our case. This should be the same for all the  
-    examples present in the file.
--   "Example Name" should be short and descriptive, telling the user what the following example is.
--   "Description" is used to describe the example in more detail and/or add more detail.
--   `<[example selector></[example selector]>`, is an instance of our example component, it should be replaced with
-    `<fd-my-component-double-button-example></fd-my-component-double-button-example>` in our case.
-    Generally, there should be only one such instance for each example.
--   "[exampleFiles]="raw code array name" should be replaced with the class variable that contains all the raw code that should be showed. For our example component that would be `myComponentDoubleButtonExample`.
+- `<separator></separator>` is used to separate the different examples, it needs to be present for each example after the first one
+- "id" for each instance should be the name of the example without any modifications; for our example this would be `double-button`
+- "Component name" should be the same name as the one as the actuall component. That would be "My Component" in our case. This should be the same for all the  
+  examples present in the file.
+- "Example Name" should be short and descriptive, telling the user what the following example is.
+- "Description" is used to describe the example in more detail and/or add more detail.
+- `<[example selector></[example selector]>`, is an instance of our example component, it should be replaced with
+  `<fd-my-component-double-button-example></fd-my-component-double-button-example>` in our case.
+  Generally, there should be only one such instance for each example.
+- "[exampleFiles]="raw code array name" should be replaced with the class variable that contains all the raw code that should be showed. For our example component that would be `myComponentDoubleButtonExample`.
 
 In our case this code should look something like this:
 

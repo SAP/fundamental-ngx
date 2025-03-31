@@ -28,12 +28,13 @@ export class ObservableTreeDataSource<T> extends FdTreeDataSource<T> {
  * Type of acceptable objects as a datasource for the Multi-Combo Box component.
  */
 export type FdTreeAcceptableDataSource<T = any> = FdTreeDataSource<T> | Observable<T[]> | T[];
-export type FdTreeItemType<Type extends FdTreeAcceptableDataSource> = Type extends BaseDataSource<infer X>
-    ? X
-    : Type extends Array<infer X>
-      ? X
-      : Type extends Observable<infer X>
-        ? X extends Array<infer V>
-            ? V
-            : X
-        : Type;
+export type FdTreeItemType<Type extends FdTreeAcceptableDataSource> =
+    Type extends BaseDataSource<infer X>
+        ? X
+        : Type extends Array<infer X>
+          ? X
+          : Type extends Observable<infer X>
+            ? X extends Array<infer V>
+                ? V
+                : X
+            : Type;

@@ -23,8 +23,8 @@ export class FormGeneratorComponentsAccessorService {
      * @param types types of the form item.
      */
     addComponent(component: Type<BaseDynamicFormGeneratorControl>, types: string[]): boolean {
-        const bestMatchComponentIndex = this._formComponentDefinitions.findIndex(
-            (c) => c.types?.every((t) => types.includes(t))
+        const bestMatchComponentIndex = this._formComponentDefinitions.findIndex((c) =>
+            c.types?.every((t) => types.includes(t))
         );
 
         if (bestMatchComponentIndex > -1) {
@@ -33,8 +33,8 @@ export class FormGeneratorComponentsAccessorService {
         }
 
         // Try to find component in types key. There might be some unique cases when new component might replace multiple.
-        const existingComponents = this._formComponentDefinitions.filter(
-            (c) => c.types?.filter((t) => types.includes(t))
+        const existingComponents = this._formComponentDefinitions.filter((c) =>
+            c.types?.filter((t) => types.includes(t))
         );
 
         existingComponents.forEach((existingComponent, index) => {

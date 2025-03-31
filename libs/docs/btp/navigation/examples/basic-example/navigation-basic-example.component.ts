@@ -23,4 +23,8 @@ export interface ExampleNavigationItem {
 export class NavigationBasicExampleComponent {
     state: FdbNavigationState = 'expanded';
     mode: FdbViewMode = '';
+
+    onQuickCreateClick(): void {
+        alert('Quick create!');
+    }
 }

@@ -27,7 +27,7 @@ export class AsyncOrSyncPipe implements OnDestroy, PipeTransform {
      * @param value raw value. Can be either a static value, or Promise-like, or Observable-like.
      */
     transform<T>(value: FdkAsyncProperty<T>): T | null {
-        return !isPromise(value) && !isSubscribable(value) ? value : this._asyncPipe?.transform(value) ?? null;
+        return !isPromise(value) && !isSubscribable(value) ? value : (this._asyncPipe?.transform(value) ?? null);
     }
 
     /** @Hidden */

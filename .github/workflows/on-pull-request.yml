@@ -25,8 +25,6 @@ jobs:
                 node-version: [22.x]
         steps:
             - uses: actions/checkout@v4.2.2
-            - name: Sleep before running CI
-              run: sleep $(( $RANDOM % 30 + 3 ))
             - uses: ./.github/actions/nodejs
             - name: set up xvfb
               run: |
@@ -51,21 +49,18 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
 
-            - uses: nrwl/nx-set-shas@v4.1.2
+            - uses: nrwl/nx-set-shas@v4.3.0
               name: Derive appropriate SHAs for base and head for nx-affected commands
               with:
                   main-branch-name: main
 
             - uses: ./.github/actions/nodejs
 
-            - name: Sleep before running CI
-              run: sleep 35
-
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
             - name: Format Check
-              run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
+              run: npx prettier . --check
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
@@ -138,8 +133,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4.2.2
-            - name: Sleep before running CI
-              run: sleep 25
             - uses: ./.github/actions/nodejs
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents
