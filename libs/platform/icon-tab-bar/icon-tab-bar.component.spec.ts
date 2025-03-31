@@ -182,7 +182,7 @@ describe('IconTabBarComponent', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__tab');
 
-        const someOtherTab = tabs[1]
+        const someOtherTab = tabs[1];
 
         jest.spyOn(component, 'selected');
         expect(someOtherTab).toBeDefined();
@@ -346,7 +346,7 @@ describe('IconTabBarComponent', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__tab');
 
-        const someOtherTab = tabs[1]
+        const someOtherTab = tabs[1];
 
         jest.spyOn(component, 'selected');
         expect(someOtherTab).toBeDefined();
