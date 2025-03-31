@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.5...v0.55.6-rc.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **platform:** iconTabSelected is now called once ([#13129](https://github.com/SAP/fundamental-ngx/issues/13129)) ([13227b2](https://github.com/SAP/fundamental-ngx/commit/13227b288230d18b04470ccd09b18f9723b93839))
+
+
+
+
+
 ## [0.55.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.5-rc.0...v0.55.5) (2025-03-31)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
