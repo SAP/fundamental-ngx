@@ -29,17 +29,18 @@ const CUSTOM_DATETIME_FORMATS = {
     template: `
         <label fd-form-label for="language">Select language:</label>
         <fd-segmented-button id="language" [style.margin-bottom.px]="20">
-            <button fd-button label="French" (click)="setLocale('fr')" [class.is-selected]="'fr' === locale"></button>
-            <button fd-button label="German" (click)="setLocale('de')" [class.is-selected]="'de' === locale"></button>
-            <button
-                fd-button
-                label="Bulgarian"
-                (click)="setLocale('bg')"
-                [class.is-selected]="'bg' === locale"
-            ></button>
+            <button fd-button label="French" (click)="setLocale('fr')" [class.is-selected]="'fr' === locale">
+                &nbsp;
+            </button>
+            <button fd-button label="German" (click)="setLocale('de')" [class.is-selected]="'de' === locale">
+                &nbsp;
+            </button>
+            <button fd-button label="Bulgarian" (click)="setLocale('bg')" [class.is-selected]="'bg' === locale">
+                &nbsp;
+            </button>
         </fd-segmented-button>
         <br />
-        <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1"></fd-date-picker>
+        <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1" [showTodayButton]="true"></fd-date-picker>
         <p>Selected: {{ date }}</p>
     `,
     // Note that this can be provided in the root of your application.
@@ -57,7 +58,8 @@ const CUSTOM_DATETIME_FORMATS = {
                 nextYearLabel: 'Année suivante',
                 monthSelectionLabel: 'Sélection du mois',
                 previousMonthLabel: 'Mois précédent',
-                nextMonthLabel: 'Mois suivant'
+                nextMonthLabel: 'Mois suivant',
+                todayLabel: `Aujourd'hui`
             }
         }),
         {
