@@ -102,7 +102,7 @@
         "@types/jest": "29.5.14",
         "@types/lodash-es": "4.17.6",
         "@types/marked": "5.0.2",
-        "@types/node": "22.10.2",
+        "@types/node": "22.13.16",
         "@wdio/allure-reporter": "7.7.3",
         "@wdio/cli": "7.16.16",
         "@wdio/jasmine-framework": "7.0.0",
