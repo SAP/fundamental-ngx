@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.0...v0.55.6-rc.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **core:** update breadcrumb overflow button label ([#13164](https://github.com/SAP/fundamental-ngx/issues/13164)) ([4268d19](https://github.com/SAP/fundamental-ngx/commit/4268d19f51ff03abb7a4b84900eff08ee885afab))
+
+
+
+
+
 ## [0.55.6-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.5...v0.55.6-rc.0) (2025-03-31)
 
 
