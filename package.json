@@ -87,7 +87,7 @@
         "@jsdevtools/npm-publish": "3.0.1",
         "@nx/devkit": "20.6.2",
         "@nx/eslint": "20.6.2",
-        "@nx/eslint-plugin": "20.6.2",
+        "@nx/eslint-plugin": "20.7.0",
         "@nx/jest": "20.6.2",
         "@nx/js": "20.6.2",
         "@nx/plugin": "20.6.2",

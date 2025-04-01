@@ -5481,7 +5481,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:>=17.1.2 < 21":
+"@nx/devkit@npm:20.7.0, @nx/devkit@npm:>=17.1.2 < 21":
   version: 20.7.0
   resolution: "@nx/devkit@npm:20.7.0"
   dependencies:
@@ -5499,12 +5499,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/eslint-plugin@npm:20.6.2":
-  version: 20.6.2
-  resolution: "@nx/eslint-plugin@npm:20.6.2"
+"@nx/eslint-plugin@npm:20.7.0":
+  version: 20.7.0
+  resolution: "@nx/eslint-plugin@npm:20.7.0"
   dependencies:
-    "@nx/devkit": "npm:20.6.2"
-    "@nx/js": "npm:20.6.2"
+    "@nx/devkit": "npm:20.7.0"
+    "@nx/js": "npm:20.7.0"
     "@typescript-eslint/type-utils": "npm:^8.0.0"
     "@typescript-eslint/utils": "npm:^8.0.0"
     chalk: "npm:^4.1.0"
@@ -5515,11 +5515,11 @@ __metadata:
     tslib: "npm:^2.3.0"
   peerDependencies:
     "@typescript-eslint/parser": ^6.13.2 || ^7.0.0 || ^8.0.0
-    eslint-config-prettier: ^9.0.0
+    eslint-config-prettier: ^10.0.0
   peerDependenciesMeta:
     eslint-config-prettier:
       optional: true
-  checksum: 10/be22f2cc5280dc445371c140af86ec7107a94608304b21d7136c541da59a006ec8fae921337ae80d366007137fac03c178afcfdaa24c6c789506910da0cf2590
+  checksum: 10/20fe9e01b6780267512032b3875c889d589fc901e77437625ce1beb724ebf84adb7de095c917d64f2729eddd53709939861fe3f22966ea2171d676dc7d627573
   languageName: node
   linkType: hard
 
@@ -5606,6 +5606,48 @@ __metadata:
     verdaccio:
       optional: true
   checksum: 10/8402d20433dd2b724cb7741673d6dbc6fe35b61a4d10d6a09e6e0baa7e1b6bf94641c2304b2bd87c501e43578f60c4351a06d6353509c921be1e714b9d9af12e
+  languageName: node
+  linkType: hard
+
+"@nx/js@npm:20.7.0":
+  version: 20.7.0
+  resolution: "@nx/js@npm:20.7.0"
+  dependencies:
+    "@babel/core": "npm:^7.23.2"
+    "@babel/plugin-proposal-decorators": "npm:^7.22.7"
+    "@babel/plugin-transform-class-properties": "npm:^7.22.5"
+    "@babel/plugin-transform-runtime": "npm:^7.23.2"
+    "@babel/preset-env": "npm:^7.23.2"
+    "@babel/preset-typescript": "npm:^7.22.5"
+    "@babel/runtime": "npm:^7.22.6"
+    "@nx/devkit": "npm:20.7.0"
+    "@nx/workspace": "npm:20.7.0"
+    "@zkochan/js-yaml": "npm:0.0.7"
+    babel-plugin-const-enum: "npm:^1.0.1"
+    babel-plugin-macros: "npm:^3.1.0"
+    babel-plugin-transform-typescript-metadata: "npm:^0.3.1"
+    chalk: "npm:^4.1.0"
+    columnify: "npm:^1.6.0"
+    detect-port: "npm:^1.5.1"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    js-tokens: "npm:^4.0.0"
+    jsonc-parser: "npm:3.2.0"
+    npm-package-arg: "npm:11.0.1"
+    npm-run-path: "npm:^4.0.1"
+    ora: "npm:5.3.0"
+    picocolors: "npm:^1.1.0"
+    picomatch: "npm:4.0.2"
+    semver: "npm:^7.5.3"
+    source-map-support: "npm:0.5.19"
+    tinyglobby: "npm:^0.2.12"
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    verdaccio: ^6.0.5
+  peerDependenciesMeta:
+    verdaccio:
+      optional: true
+  checksum: 10/fef1f77a1f39d078b32bf4ebf4179484548a40af1f500b1f39e9cea6b7815c9520d9c5d380a342c47b3432ff804fe108eb847a6036da2e03a784c9341735dafd
   languageName: node
   linkType: hard
 
@@ -5827,6 +5869,22 @@ __metadata:
     tslib: "npm:^2.3.0"
     yargs-parser: "npm:21.1.1"
   checksum: 10/cbde9ab8c4a77389651cb3ba62dc1f2675c1445f17eb6aa8ed440496ee736fc45b3c9ea05837e3151eaa03edcf0e2bf0f741a9c40eec652c7cc997fe2ab2ab2d
+  languageName: node
+  linkType: hard
+
+"@nx/workspace@npm:20.7.0":
+  version: 20.7.0
+  resolution: "@nx/workspace@npm:20.7.0"
+  dependencies:
+    "@nx/devkit": "npm:20.7.0"
+    "@zkochan/js-yaml": "npm:0.0.7"
+    chalk: "npm:^4.1.0"
+    enquirer: "npm:~2.3.6"
+    nx: "npm:20.7.0"
+    picomatch: "npm:4.0.2"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  checksum: 10/6e1cc99275b06a5291305522e20eafc825ed23de235052c6dd8d3c5cd54cb11fea09f3818f34f2c348cac2ed51dd7ee2c7fae2c2c130280f458b1dc70b9b7f96
   languageName: node
   linkType: hard
 
@@ -15108,7 +15166,7 @@ __metadata:
     "@nx/angular": "npm:20.6.2"
     "@nx/devkit": "npm:20.6.2"
     "@nx/eslint": "npm:20.6.2"
-    "@nx/eslint-plugin": "npm:20.6.2"
+    "@nx/eslint-plugin": "npm:20.7.0"
     "@nx/jest": "npm:20.6.2"
     "@nx/js": "npm:20.6.2"
     "@nx/plugin": "npm:20.6.2"
