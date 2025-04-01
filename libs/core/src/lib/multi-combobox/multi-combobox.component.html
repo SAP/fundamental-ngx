@@ -165,6 +165,7 @@
         aria-multiselectable="true"
         (keydown.tab)="close()"
         (keydown.shift.tab)="close()"
+        (keydown.escape)="close()"
     >
         <fd-form-message
             *ngIf="!!this._cva.stateMessage"

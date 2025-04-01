@@ -118,6 +118,7 @@
             (focusEscapeList)="handleListFocusEscape($event)"
             [style.min-width]="'100%'"
             (keydown.tab)="_close()"
+            (keydown.escape)="_close()"
             aria-multiselectable="true"
         >
             <li

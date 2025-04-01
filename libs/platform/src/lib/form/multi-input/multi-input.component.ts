@@ -24,7 +24,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
@@ -381,9 +381,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
                 this.showList(!this.isOpen);
                 this.searchInputElement.nativeElement.focus();
             }
-        }
-        if (KeyUtil.isKeyCode(event, [ESCAPE])) {
-            this.showList(false);
         }
         this._cd.markForCheck();
     }
