@@ -15196,7 +15196,7 @@ __metadata:
     tsconfig-paths: "npm:4.1.0"
     tslib: "npm:^2.3.0"
     typedoc: "npm:0.25.3"
-    typedoc-plugin-merge-modules: "npm:5.1.0"
+    typedoc-plugin-merge-modules: "npm:7.0.0"
     typescript: "npm:5.8.2"
     typescript-eslint: "npm:^8.22.0"
     wait-on: "npm:6.0.1"
@@ -26381,12 +26381,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-merge-modules@npm:5.1.0":
-  version: 5.1.0
-  resolution: "typedoc-plugin-merge-modules@npm:5.1.0"
+"typedoc-plugin-merge-modules@npm:7.0.0":
+  version: 7.0.0
+  resolution: "typedoc-plugin-merge-modules@npm:7.0.0"
   peerDependencies:
-    typedoc: 0.24.x || 0.25.x
-  checksum: 10/4ff170c03cf0942eb2184515ffb1ddb4bfb7990ee7d7d51b5a0fcf63297f997dba72321696abe57237887b28b5e9d2902806f3d450a1171923f78551042cf5d7
+    typedoc: 0.28.x
+  checksum: 10/e36987571e52dfb53d0ab783f624e3b3f7d4a9bc881509a9e16f5e333cb7b443a190fa6159b8a10c571491883b29e9c8e28695b7b3f82629f8d3ac5b2fcdae0a
   languageName: node
   linkType: hard
 
