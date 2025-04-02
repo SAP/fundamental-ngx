@@ -113,6 +113,7 @@
         aria-multiselectable="true"
         [interceptTabKey]="false"
         (keydown.tab)="close()"
+        (keydown.escape)="close()"
     >
         <ng-container *ngIf="!isGroup">
             <fdp-standard-list-item
