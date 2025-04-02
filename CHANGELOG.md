@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.2...v0.55.6-rc.3) (2025-04-02)
+
+
+### Bug Fixes
+
+* **core:** date picker today btn i18n ([#13166](https://github.com/SAP/fundamental-ngx/issues/13166)) ([048fca1](https://github.com/SAP/fundamental-ngx/commit/048fca18d7aaedd75a21aec65f60aed967ae43af))
+
+
+
+
+
 ## [0.55.6-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.1...v0.55.6-rc.2) (2025-04-01)
 
 **Note:** Version bump only for package fundamental-ngx
