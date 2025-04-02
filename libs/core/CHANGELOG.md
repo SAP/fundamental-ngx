@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.3...v0.55.6-rc.4) (2025-04-02)
+
+
+### Bug Fixes
+
+* **core,platform:** combobox/multi-input/multi-combobox escape improvements ([#13168](https://github.com/SAP/fundamental-ngx/issues/13168)) ([e9a66de](https://github.com/SAP/fundamental-ngx/commit/e9a66dec2ed4dc6c69ecb45a05cdd24d9294a9d6))
+
+
+
+
+
 ## [0.55.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.2...v0.55.6-rc.3) (2025-04-02)
 
 
