@@ -139,7 +139,6 @@
         "jest-extended": "4.0.2",
         "jest-preset-angular": "14.4.2",
         "jsonc-eslint-parser": "^2.1.0",
-        "lerna": "^8.1.9",
         "lint-staged": "15.1.0",
         "ng-packagr": "19.2.0",
         "ngx-cva-test-suite": "2.0.0",
