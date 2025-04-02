@@ -119,6 +119,7 @@
                 (focusEscapeList)="handleListFocusEscape($event)"
                 [style.min-width]="'100%'"
                 (keydown.tab)="_close()"
+                (keydown.escape)="_close()"
                 aria-multiselectable="true"
             >
                 @for (option of viewModel.displayedOptions; track valueFn(option.item); let idx = $index) {

@@ -155,6 +155,7 @@
         [attr.aria-labelledby]="id + '-search'"
         aria-multiselectable="true"
         (keydown.tab)="close()"
+        (keydown.escape)="close()"
     >
         @if (stateMessage) {
             <li
