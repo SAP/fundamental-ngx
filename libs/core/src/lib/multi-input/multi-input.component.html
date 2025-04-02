@@ -53,9 +53,6 @@
             [iconTitle]="addonIconTitle"
             [glyphAriaLabel]="addOnButtonAriaLabel"
         >
-            <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
-                'coreMultiInput.tokensCountText' | fdTranslate : { length: selected.length }
-            }}</span>
             <fd-tokenizer
                 #tokenizer
                 [compactCollapse]="compactCollapse"
@@ -95,7 +92,6 @@
                     [attr.aria-required]="required"
                     [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
                     [ariaLabelledBy]="ariaLabelledBy"
-                    [attr.aria-describedby]="tokenHiddenId"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
                     (focus)="tokenizer._showAllTokens()"

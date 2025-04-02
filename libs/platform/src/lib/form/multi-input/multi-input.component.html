@@ -41,9 +41,6 @@
         [glyphAriaLabel]="glyphAriaLabel"
         [iconTitle]="addonIconTitle"
     >
-        <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
-            >Contains {{ selected.length || 'no' }} token</span
-        >
         <fd-tokenizer
             *ngIf="selected"
             [tokenizerFocusable]="false"
@@ -94,7 +91,6 @@
                 [ariaLabel]="ariaLabel"
                 [ariaLabelledBy]="ariaLabelledBy"
                 [attr.aria-required]="required"
-                [attr.aria-describedby]="tokenHiddenId"
                 aria-roledescription="Multi Value Input"
                 fdkInitialFocus
                 [enabled]="autofocus"
