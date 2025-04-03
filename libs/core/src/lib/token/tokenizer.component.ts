@@ -46,9 +46,11 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { BehaviorSubject, Observable, Subject, Subscription, fromEvent, merge, startWith } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, firstValueFrom, fromEvent, merge, startWith } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -177,6 +179,9 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     _tokensContainerWidth = 'auto';
 
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
     /** @hidden
      * Variable which will keep the index of the first token pressed in the tokenizer
      */
@@ -222,7 +227,9 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2,
-        @Inject(DOCUMENT) private readonly _document: Document
+        @Inject(DOCUMENT) private readonly _document: Document,
+        private readonly _liveAnnouncer: LiveAnnouncer,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
     ) {
         this._eventListeners.push(
             this._renderer.listen('window', 'click', (e: Event) => {
@@ -238,7 +245,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.input?.nativeElement) {
-            this._inputKeydownEvent();
+            this._setupInputKeydownEvent();
+            this._setupInputFocusEvent();
         }
 
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
@@ -681,12 +689,30 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /** @hidden */
-    private _inputKeydownEvent(): void {
+    private _setupInputKeydownEvent(): void {
         this._eventListeners.push(
             this._renderer.listen(this.input.nativeElement, 'keydown', (event: KeyboardEvent) => {
                 this.handleKeyDown(event, this.tokenList.length);
             })
         );
+    }
+
+    /** @hidden */
+    private _setupInputFocusEvent(): void {
+        this._eventListeners.push(
+            this._renderer.listen(this.input.nativeElement, 'focus', () => {
+                this._makeTokenizerFocusCountAnnouncement();
+            })
+        );
+    }
+
+    /** @hidden */
+    private async _makeTokenizerFocusCountAnnouncement(): Promise<void> {
+        const lang = await firstValueFrom(this._language$);
+        const message = this._translationResolver.resolve(lang, 'coreMultiInput.tokensCountText', {
+            length: this.tokenList.length ? this.tokenList.length : 0
+        });
+        this._liveAnnouncer.announce(message);
     }
 
     /** @hidden Method which handles what happens to token when it is clicked and no key is being held down.*/
