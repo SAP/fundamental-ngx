@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
     coreCalendar: {
