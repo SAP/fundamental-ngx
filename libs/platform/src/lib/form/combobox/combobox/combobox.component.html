@@ -108,6 +108,7 @@
         [style.maxWidth]="autoResize && maxWidth + 'px'"
         (keydown.tab)="_close()"
         (keydown.shift.tab)="_close()"
+        (keydown.escape)="_close()"
     >
         <li
             *ngIf="stateMessage"
