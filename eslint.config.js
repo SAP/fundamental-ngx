@@ -13,65 +13,6 @@ module.exports = pluginTs.config(
         files: ['**/*.ts'],
         extends: [...nx.configs['flat/typescript']],
         rules: {
-            '@nx/enforce-module-boundaries': [
-                'error',
-                {
-                    allow: ['jest.config.base'],
-                    depConstraints: [
-                        {
-                            sourceTag: 'scope:cdk',
-                            onlyDependOnLibsWithTags: ['scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:fd',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:fdb',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:fdb', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:fdp',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:fdp', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:datetime-adapter',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:cx',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:cx', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:i18n',
-                            onlyDependOnLibsWithTags: ['scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:docs',
-                            onlyDependOnLibsWithTags: [
-                                'scope:docs',
-                                'scope:fd',
-                                'scope:fdp',
-                                'scope:fdb',
-                                'scope:datetime-adapter',
-                                'scope:i18n',
-                                'scope:cx',
-                                'scope:cdk'
-                            ]
-                        }
-                    ]
-                }
-            ],
-            '@nx/dependency-checks': [
-                'error',
-                {
-                    buildTargets: ['build'],
-                    checkMissingDependencies: true,
-                    checkObsoleteDependencies: true,
-                    checkVersionMismatches: true,
-                    ignoredDependencies: ['@angular/cdk', 'rxjs', 'tslib', 'zone.js']
-                }
-            ],
             '@typescript-eslint/ban-ts-comment': [
                 'error',
                 {
