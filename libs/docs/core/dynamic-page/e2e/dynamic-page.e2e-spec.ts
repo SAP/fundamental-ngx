@@ -3,10 +3,8 @@ import {
     click,
     doesItExist,
     getAttributeByName,
-    getCurrentUrl,
     getElementArrayLength,
     getElementClass,
-    goBack,
     isElementDisplayed,
     pause,
     refreshPage,
@@ -351,16 +349,5 @@ describe('dynamic side content test suite', () => {
         await click(collapseButton);
         await expect(await isElementDisplayed(collapsibleHeader)).toBe(true, 'collapsible area is not displayed');
         await click(exitButton);
-    }
-
-    async function checkUrlNavigation(): Promise<void> {
-        const currentUrl = await getCurrentUrl();
-        await click(currentBreadcrumbLink);
-        // check that link is clickable and does not navigate
-        await expect(await getCurrentUrl()).toEqual(currentUrl);
-        await click(breadcrumbLink);
-        // check that url works correct and directs to page
-        await expect(await getCurrentUrl()).not.toEqual(currentUrl);
-        await goBack();
     }
 });

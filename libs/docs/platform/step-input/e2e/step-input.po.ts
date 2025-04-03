@@ -1,7 +1,6 @@
 import { clearValue, PlatformBaseComponentPo, sendKeys, setValue, waitForElDisplayed } from '../../../../../e2e';
 
 export class StepInputPo extends PlatformBaseComponentPo {
-    private url = '/step-input';
     root = '#page-content';
 
     stepInputRoot = '.fd-step-input';
@@ -14,7 +13,6 @@ export class StepInputPo extends PlatformBaseComponentPo {
     allButtonIncrement = '//button[@title="Increment" and not(ancestor::div[contains(@class, "is-readonly")])]';
     allButtonDecrement = '//button[@title="Decrement" and not(ancestor::div[contains(@class, "is-readonly")])]';
     activeInput =
-        // eslint-disable-next-line max-len
         '//input[contains(@class, "fd-step-input__input") and not(ancestor::div[contains(@class, "is-disabled")]) and not (ancestor::div[contains(@class, "is-readonly")])]';
     reactiveFormInput = 'input#reactive-form-qty';
     formInput = 'input[name=qty]';
@@ -25,6 +23,8 @@ export class StepInputPo extends PlatformBaseComponentPo {
         '//input[contains(@class, "fd-step-input__input") and not (ancestor::div[contains(@class, "is-disabled")]) and not (@name="qty")]';
     quantityText = '.fd-page__content + pre';
     formStatusText = '.fd-page__content + pre ~ pre';
+
+    private url = '/step-input';
 
     async fillInput(input: string, value: string): Promise<void> {
         await clearValue(input);

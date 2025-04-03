@@ -12,14 +12,7 @@ import { placeholderTestTextArr } from './file-uploader-contents';
 
 describe('File uploader component test', () => {
     const fileUploaderPage = new FileUploaderPo();
-    const {
-        fileUploaderInput,
-        browseButton,
-        browseButtonDisabled,
-        fileUploaderInputFile,
-        fileSelectedText,
-        fileUploaderExample
-    } = fileUploaderPage;
+    const { fileUploaderInput, browseButton, browseButtonDisabled } = fileUploaderPage;
 
     beforeAll(async () => {
         await fileUploaderPage.open();

@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FlexibleColumnLayoutPo extends CoreBaseComponentPo {
-    private url = '/flexible-column-layout';
-
     defaultExample = 'fd-flexible-column-layout-example ';
     dynamicExample = 'fd-flexible-column-layout-dynamic-page-example ';
     separator = '.fd-flexible-column-layout__separator ';
@@ -18,6 +16,8 @@ export class FlexibleColumnLayoutPo extends CoreBaseComponentPo {
     collapsibleHeader = '.fd-dynamic-page__collapsible-header';
     pinButton = '.fd-dynamic-page__pin-button';
     columnButton2 = this.column + ' .fd-button:not(.fd-button--standard, .fd-button--transparent)';
+
+    private url = '/flexible-column-layout';
 
     async open(): Promise<void> {
         await super.open(this.url);

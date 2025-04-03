@@ -32,7 +32,7 @@ export class DateUtil {
     templateUrl: './date-picker-special-day-example.component.html',
     styleUrl: './date-picker-special-day-example.component.scss'
 })
-export class DatePickerSpecialDayExampleComponent<D> {
+export class DatePickerSpecialDayExampleComponent {
     customDate = new FdDate(2024, 8, 28);
     firstRule = {
         specialDayNumber: 6,
@@ -79,29 +79,25 @@ export class DatePickerSpecialDayExampleComponent<D> {
             this.specialDaysRulesSignal.set([
                 {
                     ...this.firstRule,
-                    rule: (date: FdDate): boolean => {
-                        return Boolean(
-                            this.customDataList.find((customData) => {
-                                return (
+                    rule: (date: FdDate): boolean =>
+                        Boolean(
+                            this.customDataList.find(
+                                (customData) =>
                                     DateUtil.getEdmDateFormat(DateUtil.getDateFromFdDate(date)) === customData.date &&
                                     customData.active
-                                );
-                            })
-                        );
-                    }
+                            )
+                        )
                 },
                 {
                     ...this.secondRule,
-                    rule: (date: FdDate): boolean => {
-                        return Boolean(
-                            this.customDataList.find((customData) => {
-                                return (
+                    rule: (date: FdDate): boolean =>
+                        Boolean(
+                            this.customDataList.find(
+                                (customData) =>
                                     DateUtil.getEdmDateFormat(DateUtil.getDateFromFdDate(date)) === customData.date &&
                                     !customData.active
-                                );
-                            })
-                        );
-                    }
+                            )
+                        )
                 }
             ]);
         }

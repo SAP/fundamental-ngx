@@ -23,13 +23,11 @@ describe('Grid-list test suite', () => {
         moreButtonItems,
         footer,
         gridListItemsByMode,
-        deleteModeTitle,
         deleteItemButton,
         lockedStateItemButton,
         lockedStateItemText,
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
-        dragAndDropItems,
         gridListToolbar,
         deleteSegmentedButton,
         multiSelectSegmentedButton
@@ -102,7 +100,6 @@ describe('Grid-list test suite', () => {
         await expect((await getText(lockedStateItemText)).trim()).toBe(textLocked);
     });
 
-    // eslint-disable-next-line max-len
     it('Verify selecting multiple items in "Multi select mode" component -> Multiple items can be selected. Checkbox should be checked when item is selected', async () => {
         await click(multiSelectSegmentedButton);
         const arrayLength = await getElementArrayLength(await gridListItemsByMode('multiSelect'));

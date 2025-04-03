@@ -44,14 +44,12 @@ describe('Table component test suite', () => {
         tableCellStatus,
         dialogFilters,
         filterInput,
-        filterButtonOk,
         filterResetButton,
         allInputFields,
         sortableIcon,
         sortableOption,
         sortablePopover,
-        toolbarButton,
-        buttonFilter
+        toolbarButton
     } = tablePage;
 
     beforeAll(async () => {

@@ -104,9 +104,9 @@ export class CheckboxStatesExampleComponent {
 
     toggleCheckboxTristateValue(): void {
         this.displayOnlyCheckboxTristateValue =
-            this.displayOnlyCheckboxTristateValue == true
+            this.displayOnlyCheckboxTristateValue === true
                 ? false
-                : this.displayOnlyCheckboxTristateValue == false
+                : this.displayOnlyCheckboxTristateValue === false
                   ? null
                   : true;
     }

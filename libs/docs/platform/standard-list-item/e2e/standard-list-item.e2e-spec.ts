@@ -17,7 +17,6 @@ describe('Standard List Item test suite:', () => {
     const {
         sNoBorderList,
         sNoBorderByLineList,
-        sNoBorderByLineAttr,
         sNoBorderAvatar,
         sFooterByLineList,
         sFooterByLineAvatar,

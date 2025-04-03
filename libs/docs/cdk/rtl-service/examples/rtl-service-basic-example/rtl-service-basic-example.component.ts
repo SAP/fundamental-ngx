@@ -10,9 +10,6 @@ import { ButtonComponent, FormLabelComponent, RtlService, SwitchComponent, TextC
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RtlServiceBasicExampleComponent {
-    // Injecting the RtlService
-    private _rtlService = inject(RtlService);
-
     // Example text
     text = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -26,9 +23,10 @@ export class RtlServiceBasicExampleComponent {
     // Signal to track RTL state
     rtl$ = computed(() => !!this._rtlService?.rtlSignal());
     // Signal to track a direction
-    _dir$ = computed<Direction>(() => {
-        return this.rtl$() ? 'rtl' : 'ltr';
-    });
+    _dir$ = computed<Direction>(() => (this.rtl$() ? 'rtl' : 'ltr'));
+
+    // Injecting the RtlService
+    private _rtlService = inject(RtlService);
 
     constructor() {
         effect(() => {
@@ -36,13 +34,14 @@ export class RtlServiceBasicExampleComponent {
         });
     }
 
-    // Method to update the direction of the text container
-    private _updateTextContainerDirection() {
-        const labelElement = document.getElementById('exampleTextContainer');
-        labelElement && (labelElement.dir = this._dir$());
-    }
     // Method to handle changes in RTL state
     simulateRTL(): void {
         this._rtlService.rtl.next(!this._rtlService.rtl.value);
+    }
+
+    // Method to update the direction of the text container
+    private _updateTextContainerDirection(): void {
+        const labelElement = document.getElementById('exampleTextContainer');
+        labelElement && (labelElement.dir = this._dir$());
     }
 }
