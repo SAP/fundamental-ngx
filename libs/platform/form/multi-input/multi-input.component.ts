@@ -107,10 +107,10 @@ export class MultiInputSelectionChangeEvent {
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
-    /** @hidden */
+    /** @hidden TODO: remove when permanently deleting the deprecated tokenHiddenId input */
     protected tokenCountHiddenLabel = `fdp-multi-input-token-count-id-${uniqueHiddenLabel++}`;
 
-    /** token  count hidden label */
+    /** @deprecated Now handled internally by tokenizer. */
     @Input()
     tokenHiddenId: string = this.tokenCountHiddenLabel;
 

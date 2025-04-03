@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -75,8 +74,6 @@ function isOptionItem<ItemType = any, ValueType = any>(
 function isOptionItemBase<ValueType = any>(candidate: unknown): candidate is OptionItemBase<ValueType> {
     return typeof candidate === 'object' && candidate !== null && 'value' in candidate && 'label' in candidate;
 }
-
-let uniqueHiddenLabel = 0;
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -384,13 +381,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Aria-label for the addon button. */
     @Input()
     addOnButtonAriaLabel: Nullable<string>;
-
-    /** @hidden */
-    private _tokenCountHiddenLabel = `fd-multi-input-token-count-id-${uniqueHiddenLabel++}`;
-
-    /** token  count hidden label */
-    @Input()
-    tokenHiddenId: string = this._tokenCountHiddenLabel;
 
     /** Event emitted, when the multi input's popover body is opened or closed */
     @Output()
