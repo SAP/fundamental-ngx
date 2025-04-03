@@ -111,7 +111,8 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
-        search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
+        search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+        assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]'
     },
     coreSlider: {
         singleMinMaxDetails: '[[[Ŝĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {ɱįŋ}, ɱąχįɱűɱ ʋąĺűē įş {ɱąχ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
@@ -201,7 +202,7 @@ export default {
         ariaLabel: '[[[Ŵįžąŗƌ∙∙∙∙∙∙∙∙]]]'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '[[[Μŏŗē]]]',
+        overflowTitleMore: '[[[Ĉĺįċķ ŏŗ ρŗēşş ēŋţēŗ ţŏ ʋįēŵ ɱŏŗē ƌēţąįĺş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         breadcrumbTrailLabel: '[[[Ɓŗēąƌċŗűɱƃ Ţŗąįĺ∙∙∙∙∙∙∙∙]]]'
     },
     platformApprovalFlow: {
