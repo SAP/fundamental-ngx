@@ -637,12 +637,16 @@ export class DatetimePickerComponent<D>
      * Method that is triggered when 'OK' button is pressed.
      */
     submit(): void {
-        // marking date & time as not null, errors will be caught below
-        const currentDate = this._tempDate!;
-        let currentTime = this._tempTime;
+        // Initialize date and time values, defaulting to the current date if invalid
+        let currentDate = this._tempDate!;
+        let currentTime = this._tempTime!;
 
-        if (!currentTime) {
-            currentTime = this._dateTimeAdapter.today();
+        // Initialize date and time values, defaulting to the current date if invalid
+        if (!this._tempDate || !this._dateTimeAdapter.isValid(this._tempDate)) {
+            currentDate = this._dateTimeAdapter.today()!;
+        }
+        if (!this._tempTime || !this._dateTimeAdapter.isValid(this._tempTime)) {
+            currentTime = this._dateTimeAdapter.today()!;
         }
 
         try {
