@@ -71,20 +71,14 @@
 
 <fd-docs-section-title id="focusable" componentName="table"> Focusable </fd-docs-section-title>
 <description>
-    <p>Table rows and cells can be made focusable, by adding <code>[focusable]="true"</code> to them.</p>
-
-    <p>Navigation inside table works with arrow keys.</p>
-
-    <p>Navigating between focusable element inside table cell works with the Tab key.</p>
+    <p>Table rows and cells can be made focusable by adding the input <code>[focusable]="true"</code>.</p>
 
     <p>
-        When pressing Tab key inside cell and there's no focusable elements, focus will be switched to the next
-        focusable element after the table.
-    </p>
-
-    <p>
-        To focus cell when row is focused or to focus cell's focusable child when cell is focused use F2/Enter key. To
-        focus cell when cell's focusable child is focused or to focus row when cell is focused use Shift+F2/Escape key.
+        When the user initially tabs to the table, the first cell will be focused. At this point, pressing "tab" again
+        will move focus past the entire table to the next focusable item. The user instead uses the arrow keys to move
+        focus around the table. If a focused table cell has a focusableelement inside of it, the user can press "tab" or
+        "enter/return" to move focus from the cell to the focusable item within the cell. To move focus back to the cell
+        itself to resume navigation via arrow keys, the user can press "escape".
     </p>
 </description>
 <component-example>

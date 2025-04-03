@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.5...v0.55.6-rc.6) (2025-04-03)
+
+
+### Bug Fixes
+
+* update table keyboard docs ([#13178](https://github.com/SAP/fundamental-ngx/issues/13178)) ([5d4051e](https://github.com/SAP/fundamental-ngx/commit/5d4051edd1e5e995914304c3aede22229732c775))
+
+
+
+
+
+## [0.55.6-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.4...v0.55.6-rc.5) (2025-04-03)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.55.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.3...v0.55.6-rc.4) (2025-04-02)
 
 
