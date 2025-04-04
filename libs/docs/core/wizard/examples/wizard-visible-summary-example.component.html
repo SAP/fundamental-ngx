@@ -105,6 +105,7 @@
                         <li
                             fd-wizard-step
                             [status]="step3status"
+                            [stepClickValidator]="validateStep"
                             (statusChange)="statusChanged(3, $event)"
                             label="Additional Information"
                             optionalText="(Optional)"
@@ -131,6 +132,7 @@
                         <li
                             fd-wizard-step
                             [status]="step4status"
+                            [stepClickValidator]="validateStep"
                             (statusChange)="statusChanged(4, $event)"
                             label="Pricing and Payment"
                             ariaLabel="Step 4: Pricing and Payment"
@@ -155,6 +157,7 @@
                         <li
                             fd-wizard-step
                             [status]="summaryStatus"
+                            [stepClickValidator]="validateStep"
                             [isSummary]="true"
                             (statusChange)="statusChanged(5, $event)"
                             label="Visible summary step"
