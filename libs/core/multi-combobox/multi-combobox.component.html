@@ -157,6 +157,7 @@
         aria-multiselectable="true"
         (keydown.tab)="close()"
         (keydown.shift.tab)="close()"
+        (keydown.escape)="close()"
     >
         @if (!!_cva.stateMessage) {
             <fd-form-message [type]="_cva.state" [innerHtml]="_cva.stateMessage"></fd-form-message>

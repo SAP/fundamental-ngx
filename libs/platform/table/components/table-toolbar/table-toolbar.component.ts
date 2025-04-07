@@ -127,6 +127,10 @@ export class TableToolbarComponent implements TableToolbarInterface {
     @Input()
     hideSearchInput = false;
 
+    /** Set a customized placeholder */
+    @Input()
+    searchFieldPlaceholder: string;
+
     /** Toggle to expand and collapse all feature */
     @Input()
     showExpandCollapseButtons = false;

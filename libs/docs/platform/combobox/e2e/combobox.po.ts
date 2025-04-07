@@ -10,7 +10,6 @@ import {
 } from '../../../../../e2e';
 
 export class ComboBoxPo extends PlatformBaseComponentPo {
-    private url = '/combobox';
     root = '#page-content';
     pageTitle = 'fd-platform-combobox-header h1';
 
@@ -22,6 +21,8 @@ export class ComboBoxPo extends PlatformBaseComponentPo {
     optionsArray = '.fdp-combobox__popover .fd-list__item';
     comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
     mobileComboBoxInput = 'fdp-combobox input[id*=mobile]';
+
+    private url = '/combobox';
 
     selectedDropDownOption = (name: string): string =>
         `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;

@@ -8,6 +8,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ActionSheetBodyComponent,
     ActionSheetComponent,
@@ -43,6 +44,10 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
      */
     @Input()
     searchExists = false;
+
+    /** @hidden */
+    @Input()
+    assistiveToolsCallback: Nullable<(event: MouseEvent) => void>;
 
     /** @hidden */
     @Output()

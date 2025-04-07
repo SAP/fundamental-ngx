@@ -42,7 +42,7 @@ describe('ShellbarActionsComponent', () => {
     it('should apply modifier classes', async () => {
         await fixture.whenRenderingDone();
 
-        expect(fixture.debugElement.nativeElement.classList).toContain('fd-shellbar__group--shrink');
-        expect(fixture.debugElement.nativeElement.classList).toContain('fd-shellbar__group--basis-auto');
+        expect(fixture.debugElement.nativeElement.classList).toContain('fd-shellbar__group');
+        expect(fixture.debugElement.nativeElement.classList).toContain('fd-shellbar__group--actions');
     });
 });

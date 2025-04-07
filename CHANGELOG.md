@@ -3,6 +3,167 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.7...v0.55.6-rc.8) (2025-04-07)
+
+
+### Bug Fixes
+
+* **core:** wizard step are clickable even without permissions ([#13103](https://github.com/SAP/fundamental-ngx/issues/13103)) ([072582c](https://github.com/SAP/fundamental-ngx/commit/072582c69548c471aaaaa6e6aa972e3ce51b2fab))
+
+
+
+
+
+## [0.55.6-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.6...v0.55.6-rc.7) (2025-04-03)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.6-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.5...v0.55.6-rc.6) (2025-04-03)
+
+
+### Bug Fixes
+
+* update table keyboard docs ([#13178](https://github.com/SAP/fundamental-ngx/issues/13178)) ([5d4051e](https://github.com/SAP/fundamental-ngx/commit/5d4051edd1e5e995914304c3aede22229732c775))
+
+
+
+
+
+## [0.55.6-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.4...v0.55.6-rc.5) (2025-04-03)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.3...v0.55.6-rc.4) (2025-04-02)
+
+
+### Bug Fixes
+
+* **core,platform:** combobox/multi-input/multi-combobox escape improvements ([#13168](https://github.com/SAP/fundamental-ngx/issues/13168)) ([e9a66de](https://github.com/SAP/fundamental-ngx/commit/e9a66dec2ed4dc6c69ecb45a05cdd24d9294a9d6))
+
+
+
+
+
+## [0.55.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.2...v0.55.6-rc.3) (2025-04-02)
+
+
+### Bug Fixes
+
+* **core:** date picker today btn i18n ([#13166](https://github.com/SAP/fundamental-ngx/issues/13166)) ([048fca1](https://github.com/SAP/fundamental-ngx/commit/048fca18d7aaedd75a21aec65f60aed967ae43af))
+
+
+
+
+
+## [0.55.6-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.1...v0.55.6-rc.2) (2025-04-01)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.6-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.0...v0.55.6-rc.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **core:** update breadcrumb overflow button label ([#13164](https://github.com/SAP/fundamental-ngx/issues/13164)) ([4268d19](https://github.com/SAP/fundamental-ngx/commit/4268d19f51ff03abb7a4b84900eff08ee885afab))
+
+
+
+
+
+## [0.55.6-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.5...v0.55.6-rc.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **platform:** iconTabSelected is now called once ([#13129](https://github.com/SAP/fundamental-ngx/issues/13129)) ([13227b2](https://github.com/SAP/fundamental-ngx/commit/13227b288230d18b04470ccd09b18f9723b93839))
+
+
+
+
+
+## [0.55.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.5-rc.0...v0.55.5) (2025-03-31)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.4...v0.55.5-rc.0) (2025-03-31)
+
+
+### Features
+
+* UXC Vega ([#13097](https://github.com/SAP/fundamental-ngx/issues/13097)) ([3cc70a9](https://github.com/SAP/fundamental-ngx/commit/3cc70a9c8830f8d35b86262621f40f6ba52c3ca2))
+
+
+
+
+
+## [0.55.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.7...v0.55.4) (2025-03-31)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.55.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.6...v0.55.4-rc.7) (2025-03-30)
+
+
+### Features
+
+* **platform:** table search placeholder is customizable ([#13147](https://github.com/SAP/fundamental-ngx/issues/13147)) ([51e13a2](https://github.com/SAP/fundamental-ngx/commit/51e13a28f398eab31ffaf20026c166430d6d3025))
+
+
+
+
+
+## [0.55.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.5...v0.55.4-rc.6) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add additional options to set the flexible column layout splitter title ([#13151](https://github.com/SAP/fundamental-ngx/issues/13151)) ([a96f7b5](https://github.com/SAP/fundamental-ngx/commit/a96f7b55e9f314bcf7ae6f413a52b0fc9195d6b6))
+
+
+
+
+
+## [0.55.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.4...v0.55.4-rc.5) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** set correct height for List with Byline group header ([#13152](https://github.com/SAP/fundamental-ngx/issues/13152)) ([d4f6f56](https://github.com/SAP/fundamental-ngx/commit/d4f6f5654de6fbcee9ffcd27d0506e550182108e))
+
+
+
+
+
+## [0.55.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.3...v0.55.4-rc.4) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** add an option to provide more descriptive title for Message Strip dismiss btn ([#13153](https://github.com/SAP/fundamental-ngx/issues/13153)) ([d08d5df](https://github.com/SAP/fundamental-ngx/commit/d08d5df1057e3a2b881f7f8cf0cfa0b486c05916))
+
+
+
+
+
 ## [0.55.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.4-rc.2...v0.55.4-rc.3) (2025-03-25)
 
 

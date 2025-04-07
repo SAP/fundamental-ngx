@@ -245,6 +245,8 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'cross-target',
         'non-stackable',
         'back-to-search',
-        'business-objects-folder'
+        'business-objects-folder',
+        'dangerous-goods',
+        'staging'
     ];
 }

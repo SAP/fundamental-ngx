@@ -108,6 +108,7 @@
             aria-multiselectable="true"
             [interceptTabKey]="false"
             (keydown.tab)="close()"
+            (keydown.escape)="close()"
         >
             @if (!isGroup) {
                 @for (listItem of _suggestions; track listItem) {

@@ -19,51 +19,7 @@ import { InputPo } from './input.po';
 
 describe('Input should ', () => {
     const inputPage = new InputPo();
-    const {
-        defaultInput,
-        requiredInput,
-        passwordInput,
-        compactInput,
-        inlineHelpRightInput,
-        inlineHelpLeftInput,
-        validInput,
-        invalidInput,
-        warningInput,
-        informationInput,
-        disabledInput,
-        readonlyInput,
-        reactiveDefaultInput,
-        reactiveDisabledInput,
-        reactivePrimaryInput,
-        reactiveSecondaryInput,
-        formMessagePopover,
-        validInputLabel,
-        invalidInputLabel,
-        warningInputLabel,
-        informationInputLabel,
-        addBtn,
-        reactivePrimaryInput2,
-        allInputFields,
-        popoverHelp,
-        questionMark,
-        inputStateExample,
-        input
-    } = inputPage;
-
-    const inputsArr = [
-        defaultInput,
-        requiredInput,
-        passwordInput,
-        compactInput,
-        inlineHelpRightInput,
-        inlineHelpLeftInput,
-        disabledInput,
-        readonlyInput,
-        reactiveDefaultInput,
-        reactiveDisabledInput,
-        reactivePrimaryInput,
-        reactiveSecondaryInput
-    ];
+    const { defaultInput, addBtn, reactivePrimaryInput2, popoverHelp, questionMark } = inputPage;
 
     beforeAll(async () => {
         await inputPage.open();

@@ -1,0 +1,39 @@
+<fd-doc-page>
+    <header>Settings Dialog</header>
+    <description>
+        <p>
+            The Settings Dialog allows users to personalize their Fiori experience by adjusting various settings. It
+            follows a standard dialog layout, with a split content area. The left section displays a list of option
+            groups, and selecting an option shows the corresponding settings in the detail area.
+        </p>
+
+        <p>
+            The Settings Dialog is a composite component that includes the following elements
+            <b>with additional directives and properties</b>:
+        </p>
+
+        <ul>
+            <li>
+                Dialog: In the dialog configuration object, add <code>settings: true</code>. This applies the necessary
+                classes to the dialog and its components, giving it the appearance of a settings dialog.
+            </li>
+            <li>Bar</li>
+            <li>Title</li>
+            <li>Input Group</li>
+            <li>List: includes boolean propertied <code>settingsList</code> and <code>settingsListFooter</code>.</li>
+            <li>
+                List Item: includes an input property <code>settingsListTpl</code>, which links a list item to a
+                template rendered in the Settings Detail area.
+            </li>
+            <li>
+                Button: includes the additional <code>fd-settings-header-button</code> directive. This button is
+                rendered in the Detail area and is visible only in mobile modes (sm and md). It serves as a back
+                navigation to the List area and is a required element.
+            </li>
+            <li>Icon Tab Bar: includes a boolean property <code>settings</code>.</li>
+        </ul>
+    </description>
+    <import module="SettingsModule" subPackage="settings"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

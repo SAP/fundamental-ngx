@@ -1,5 +1,3 @@
-import { ButtonPo } from './button.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     click,
     getAttributeByName,
@@ -14,6 +12,7 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { fdTypeOptions, iconOptions, testText } from './button-contents';
+import { ButtonPo } from './button.po';
 
 describe('Button test suite:', () => {
     const buttonPage = new ButtonPo();

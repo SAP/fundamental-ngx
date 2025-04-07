@@ -27,7 +27,6 @@ describe('Toolbar test suite', () => {
         overflowBody,
         alwaysButton,
         overflowGroupingButton,
-        checkbox,
         dropdownMenu,
         dropdownOption,
         inputFieldText,
@@ -47,8 +46,6 @@ describe('Toolbar test suite', () => {
         popoverInput,
         popoverButton,
         popoverToggledButton,
-        popoverSplitButton,
-        popoverDropDown,
         overflowInput
     } = toolbarPage;
 

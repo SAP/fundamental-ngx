@@ -1,7 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SliderPo extends PlatformBaseComponentPo {
-    private url = '/slider';
     root = '#page-content';
 
     // example blocks
@@ -36,6 +35,8 @@ export class SliderPo extends PlatformBaseComponentPo {
     progressTracker = this.playgroundExamples + '.fd-slider__track-range';
     sliderTicks = this.playgroundExamples + '.fd-slider__tick';
     inputCheckboxes = this.playgroundExamples + '.fd-checkbox__label';
+
+    private url = '/slider';
 
     async open(): Promise<void> {
         await super.open(this.url);

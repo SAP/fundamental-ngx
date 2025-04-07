@@ -66,7 +66,10 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
         ScrollbarDirective,
         ScrollSpyDirective,
         IconTabBarTabContentDirective
-    ]
+    ],
+    host: {
+        '[class.fd-settings__tab-bar]': 'settings()'
+    }
 })
 export class IconTabBarComponent implements OnInit, TabList {
     /**
@@ -117,6 +120,9 @@ export class IconTabBarComponent implements OnInit, TabList {
      */
     colorAssociations = input<TabColorAssociations>();
 
+    /** @description If Icon tab bar is used in Settings Dialog */
+    settings = input(false, { transform: booleanAttribute });
+
     /**
      * Maximum height of the content.
      * Works only for content-projected tab content.
@@ -159,6 +165,9 @@ export class IconTabBarComponent implements OnInit, TabList {
 
     /** @hidden */
     _init = true;
+
+    /** @hidden */
+    activeTab: TabConfig | null = null;
 
     /** Scrollable element reference. */
     get scrollableElement(): Nullable<ElementRef> {
@@ -243,7 +252,11 @@ export class IconTabBarComponent implements OnInit, TabList {
      */
     _selectItem(selectedItem: IconTabBarItem): void {
         this._tabRenderer$.set(selectedItem);
-        this.iconTabSelected.emit(selectedItem);
+
+        if (this.activeTab !== selectedItem) {
+            this.activeTab = selectedItem;
+            this.iconTabSelected.emit(selectedItem);
+        }
 
         if (this.stackContent) {
             this._scrollToPanel(this.tabDirectives().find((tab) => tab.uId() === selectedItem.uId)!);
@@ -299,6 +312,7 @@ export class IconTabBarComponent implements OnInit, TabList {
         if (this.layoutMode() === 'column') {
             styles.push('fd-icon-tab-bar--counters');
         }
+
         return styles;
     }
 
