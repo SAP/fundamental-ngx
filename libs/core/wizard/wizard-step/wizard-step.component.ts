@@ -205,10 +205,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         } else {
             this._isValidated = false;
         }
-
-        if (this.stepClickValidator !== undefined) {
-            console.log(await this.stepClickValidator(this.visited, this.completed));
-        }
     }
 
     /** @hidden */
