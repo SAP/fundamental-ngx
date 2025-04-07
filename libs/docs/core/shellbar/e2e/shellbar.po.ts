@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class ShellbarPo extends CoreBaseComponentPo {
-    private url = '/shellbar';
-
     // example blocks
     basicExample = 'fd-shellbar-basic-example ';
     collapsableExample = 'fd-shellbar-collapsible-example ';
@@ -31,6 +29,8 @@ export class ShellbarPo extends CoreBaseComponentPo {
     sideNavIcons = this.sideNavItems + ' .fd-nested-list__icon';
     sideNavText = this.sideNavItems + ' .fd-nested-list__title';
     sideNavControlBtn = this.sideNavExample + ' button[fd-shellbar-side-nav]';
+
+    private url = '/shellbar';
 
     async open(): Promise<void> {
         await super.open(this.url);

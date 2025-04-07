@@ -36,8 +36,8 @@ function getTypePriority(type) {
     return typelist.indexOf(type);
 }
 
-module.exports = ({ prereleaseRequested, currentVersion }) => {
-    return new Promise((resolve, reject) => {
+module.exports = ({ prereleaseRequested, currentVersion }) =>
+    new Promise((resolve, reject) => {
         recommendedVersion(
             {
                 preset: {
@@ -67,4 +67,3 @@ module.exports = ({ prereleaseRequested, currentVersion }) => {
             }
         );
     });
-};

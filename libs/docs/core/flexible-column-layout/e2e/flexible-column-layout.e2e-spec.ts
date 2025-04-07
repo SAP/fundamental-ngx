@@ -183,17 +183,4 @@ describe('Flexible column layout component test', () => {
         await click(exitExampleBtn);
         await expect(await doesItExist(column)).toBe(false);
     }
-
-    async function checkExistSeparator(section: string): Promise<void> {
-        await click(section + button);
-        await click(columnButton2);
-        await expect(await waitForElDisplayed(separator)).toBe(true, 'separator is not displayed');
-
-        await click(columnButton2, 1);
-        await pause(1000);
-        await click(separateButton, 1);
-        await pause(1000);
-        await expect(await isElementDisplayed(separator)).toBe(true, 'separator is not displayed');
-        await expect(await isElementDisplayed(separator, 1)).toBe(true, 'separator is not displayed');
-    }
 });

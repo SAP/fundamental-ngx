@@ -32,7 +32,6 @@ describe('Combobox test suite', () => {
         comboboxTwoColumns,
         optionsArray,
         comboBoxInput,
-        mobileComboBoxInput,
         selectedDropDownOption,
         comboBoxOptionHint,
         comboBoxButtons,

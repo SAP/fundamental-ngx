@@ -29,6 +29,9 @@ interface GridListItem {
     imports: [GridListModule, ButtonComponent, ContentDensityDirective, AvatarComponent, LinkComponent, RouterLink]
 })
 export class GridListFocusingItemExampleComponent {
+    @ViewChildren(GridListItemComponent)
+    gridListItems: QueryList<GridListItemComponent<GridListItem>>;
+
     list: GridListItem[] = [
         {
             id: 1,
@@ -63,9 +66,6 @@ export class GridListFocusingItemExampleComponent {
             description: 'Description 6'
         }
     ];
-
-    @ViewChildren(GridListItemComponent)
-    gridListItems: QueryList<GridListItemComponent<GridListItem>>;
 
     navigate(event: GridListItemOutputEvent<undefined>): void {
         alert('Navigation event');

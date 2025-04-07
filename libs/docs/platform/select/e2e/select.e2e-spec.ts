@@ -29,7 +29,6 @@ describe('Select test suite', () => {
         selectModeExample,
         displayText,
         select,
-        buttons,
         selectedValue_1,
         selectWithTwoColumnsExample,
         selectedValue_2,
@@ -169,7 +168,7 @@ describe('Select test suite', () => {
     async function checkOptions(selector: string, itemIndex: number, index = 0): Promise<void> {
         const textBefore = await getText(selector + displayText, index);
         click(selector + inputControl, index);
-        if (selector == selectMobileExample) {
+        if (selector === selectMobileExample) {
             await (await $('fd-dialog-body .fd-select-options')).waitForDisplayed();
             await click('fd-dialog-body .fd-select-options .fd-list__item', itemIndex);
         } else {

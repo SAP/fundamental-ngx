@@ -17,7 +17,6 @@ describe('Switch test suite', () => {
         toggle,
         toggleInput,
         switchBindingExample,
-        switchFormsExample,
         semanticswitchExample,
         playGroundSwitchExample,
         disabledToggle,

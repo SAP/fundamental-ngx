@@ -34,12 +34,10 @@ export class MultiInputOptionItemExampleComponent {
         { label: 'Strawberry', value: 'strawberry_value' },
         { label: 'Blueberry', value: 'blueberry_value' },
         { label: 'Orange', value: 'orange_value' }
-    ].map((item, index) => {
-        return {
-            id: index,
-            ...item,
-            item
-        };
-    });
+    ].map((item, index) => ({
+        id: index,
+        ...item,
+        item
+    }));
     constructor() {}
 }
