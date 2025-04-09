@@ -1,7 +1,7 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <fdp-dynamic-page ariaLabel="Example Dynamic Page">
+        <fdp-dynamic-page [headingLevel]="1" ariaLabel="Example Dynamic Page">
             <fdp-dynamic-page-title>
                 <span *fdpDynamicPageHeaderTitle="let collapsed">
                     {{ pageTitle }} ({{ collapsed ? 'collapsed' : 'not collapsed' }})

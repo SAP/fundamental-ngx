@@ -1,7 +1,7 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <fdp-dynamic-page [autoResponsive]="false" size="medium" ariaLabel="Example Dynamic Page">
+        <fdp-dynamic-page [headingLevel]="1" [autoResponsive]="false" size="medium" ariaLabel="Example Dynamic Page">
             <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
                 <fdp-dynamic-page-key-info>
                     <!-- key information content -->

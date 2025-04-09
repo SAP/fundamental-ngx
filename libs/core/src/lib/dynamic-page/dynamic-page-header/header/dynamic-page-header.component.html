@@ -19,11 +19,13 @@
             </ng-container>
 
             <div class="fd-dynamic-page__title-subtitle-container">
-                <h2 class="fd-dynamic-page__title-container">
+                <div class="fd-dynamic-page__title-container">
                     <span
                         class="fd-dynamic-page__title"
                         [class.fd-dynamic-page__title--wrap]="titleWrap"
                         fdkIgnoreClickOnSelection
+                        role="heading"
+                        [attr.heading-level]="headingLevel"
                     >
                         <ng-template [ngTemplateOutlet]="_titleTemplate ? titleRef : defaultTitle"></ng-template>
                     </span>
@@ -34,7 +36,7 @@
                             <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
                         </ng-container>
                     </div>
-                </h2>
+                </div>
                 <div
                     *ngIf="_collapsed && (subtitle || _subtitleTemplate)"
                     class="fd-dynamic-page__subtitle"
