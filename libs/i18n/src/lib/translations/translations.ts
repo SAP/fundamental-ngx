@@ -1,3 +1,4 @@
+ 
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
     coreCalendar: {
@@ -110,7 +111,9 @@ export default {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
         cancel: 'Cancel',
         search: 'Search',
-        assistiveTools: 'Assistive Tools'
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',
@@ -198,7 +201,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'More',
+        overflowTitleMore: 'Click or press enter to view more details',
         breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
