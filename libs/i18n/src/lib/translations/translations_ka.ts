@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
     coreCalendar: {
@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'დამალული ელემენტი',
         cancel: 'Cancel',
-        search: 'Search'
+        search: 'Search',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',

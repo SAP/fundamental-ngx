@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Komprimert elementmeny',
         cancel: 'Avbryt',
-        search: 'Søk'
+        search: 'Søk',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimumsverdi for glidebryter er {min}, maksimumsverdi er {max}',

@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Tiivistetty kohteen valikko',
         cancel: 'Peruuta',
-        search: 'Hae'
+        search: 'Hae',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Liukusäätimen minimiarvo on {min}, maksimiarvo {max}',

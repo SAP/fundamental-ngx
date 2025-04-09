@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
     coreCalendar: {
@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'छोटा किया गया आइटम मेनू',
         cancel: 'Cancel',
-        search: 'Search'
+        search: 'Search',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',

@@ -109,7 +109,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '摺疊項目功能表',
         cancel: '取消',
-        search: '搜尋'
+        search: '搜尋',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: '滑桿最小值為 {min}、最大值為 {max}',

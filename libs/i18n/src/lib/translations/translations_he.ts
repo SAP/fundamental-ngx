@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'תפריט פריט מכווץ',
         cancel: 'בטל',
-        search: 'חפש'
+        search: 'חפש',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'הערך המינימלי של המחוון הוא {min}, הערך המקסימלי הוא {max}',

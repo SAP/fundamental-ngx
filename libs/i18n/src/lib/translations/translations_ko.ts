@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '접힌 항목 메뉴',
         cancel: '취소',
-        search: '검색'
+        search: '검색',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: '슬라이더 최소값은 {min}, 최대값은 {max}입니다.',

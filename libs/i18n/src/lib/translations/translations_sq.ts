@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menyja e artikullit të palosur',
         cancel: 'Cancel',
-        search: 'Search'
+        search: 'Search',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}',
