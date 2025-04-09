@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class VerticalNavigationPo extends CoreBaseComponentPo {
-    private url = '/vertical-navigation';
-
     defaultExample = 'fd-vertical-navigation-default-example ';
     condensedExample = 'fd-vertical-navigation-condensed-example ';
     textOnlyExample = 'fd-vertical-navigation-no-icons-example ';
@@ -16,6 +14,8 @@ export class VerticalNavigationPo extends CoreBaseComponentPo {
     expandableItemText = this.expandableItem + this.itemText;
     hiddenItem = this.expandableItem + this.listItem;
     groupHeader = '.fd-list__group-header';
+
+    private url = '/vertical-navigation';
 
     async open(): Promise<void> {
         await super.open(this.url);

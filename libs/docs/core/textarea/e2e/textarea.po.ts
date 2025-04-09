@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class TextareaPo extends CoreBaseComponentPo {
-    private url = '/textarea';
-
     defaultExample = 'fd-textarea-example ';
     inlineHelpExample = 'fd-textarea-inline-help-example ';
     stateExample = 'fd-textarea-state-example ';
@@ -16,6 +14,8 @@ export class TextareaPo extends CoreBaseComponentPo {
     helpIcon = '.sap-icon--question-mark';
     helpContent = '.fd-inline-help__content';
     formMessage = '.fd-popover__body fd-form-message';
+
+    private url = '/textarea';
 
     async open(): Promise<void> {
         await super.open(this.url);

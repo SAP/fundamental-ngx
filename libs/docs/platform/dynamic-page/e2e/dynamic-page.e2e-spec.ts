@@ -29,12 +29,8 @@ describe('Dynamic Page Layout test suite:', () => {
         dynamicPageTabs,
         dynamicPageTabsContent,
         disableHeaderCollapseExampleButton,
-        dynamicPageContentEnd,
-        dynamicPageContentStart,
         openColumnButton,
-        columnSectionHeader,
-        columnSectionExpandIcon,
-        columnSection
+        columnSectionHeader
     } = dynamicPageLayoutPage;
 
     beforeAll(async () => {

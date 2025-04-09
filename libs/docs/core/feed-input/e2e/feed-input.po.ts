@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FeedInputPo extends CoreBaseComponentPo {
-    private url = '/feed-input';
     root = '#page-content';
     feedInput = 'fd-feed-input div';
     feedInputTextArea = 'textarea.fd-feed-input__textarea';
@@ -11,6 +10,8 @@ export class FeedInputPo extends CoreBaseComponentPo {
     disableInputTextArea = 'textarea[aria-disabled="true"]';
     disableInputButton = '.fd-feed-input.is-disabled button';
     activeInputTextAreas = "//textarea[not(contains(@aria-disabled, 'true'))]";
+
+    private url = '/feed-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

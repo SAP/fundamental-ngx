@@ -40,13 +40,13 @@ import { cloneDeep } from 'lodash-es';
     ]
 })
 export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestroy {
-    private graphs = getGraphs();
-
     /** @hidden */
     @ViewChild(ApprovalFlowComponent)
     _approvalFlow: ApprovalFlowComponent;
 
     @ViewChild('reminderTemplate') _reminderTemplate: TemplateRef<any>;
+
+    graphs = getGraphs();
 
     examples: GraphTypes[] = ['empty', 'simple', 'medium', 'complex'];
     selectedExample: GraphTypes = 'complex';

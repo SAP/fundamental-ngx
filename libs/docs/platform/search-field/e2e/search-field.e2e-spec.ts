@@ -135,7 +135,7 @@ describe('Search field', () => {
                 await setValue(searchFields, 'li', i);
                 await waitForElDisplayed(autosuggestionItems);
 
-                let codemod_placeholder_6978 = await getTextArr(autosuggestionItems);
+                const codemod_placeholder_6978 = await getTextArr(autosuggestionItems);
 
                 for (const suggestionItemText of codemod_placeholder_6978) {
                     await expect(suggestionItemText).toContain('List Item 1');

@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class DynamicPagePo extends CoreBaseComponentPo {
-    private url = '/dynamic-page';
-
     defaultExample = 'fd-dynamic-page-example ';
     tabsExample = 'fd-dynamic-page-tabs-example ';
     columnLayoutExample = 'fd-dynamic-page-column-layout-example ';
@@ -30,6 +28,8 @@ export class DynamicPagePo extends CoreBaseComponentPo {
     article = '.fd-dynamic-page-section-example';
     breadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';
     currentBreadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper .fd-overflow-layout__item--last span';
+
+    private url = '/dynamic-page';
 
     async open(): Promise<void> {
         await super.open(this.url);

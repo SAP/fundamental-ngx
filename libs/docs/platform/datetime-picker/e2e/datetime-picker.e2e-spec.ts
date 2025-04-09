@@ -47,8 +47,7 @@ const {
     selectMonthButton,
     disabledFunctionExample,
     calendarContainer,
-    buttonText,
-    inputGroup
+    buttonText
 } = new DateTimePicker();
 
 describe('Datetime picker suite', () => {

@@ -30,7 +30,6 @@ import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-
 import { ListNavigationExampleComponent } from './examples/list-navigation-example/list-navigation-example.component';
 import { ListSelectionExampleComponent } from './examples/list-selection-example/list-selection-example.component';
 
-const listSortPipe = 'sort.pipe.ts';
 const listSrc = 'list-example.component.html';
 const listSecondarySrc = 'list-secondary-example.component.html';
 const iconListSrc = 'list-icon-example.component.html';
@@ -46,8 +45,6 @@ const listIndicatorH = 'list-nav-indicator-example/list-nav-indicator-example.co
 const listNavH = 'list-navigation-example/list-navigation-example.component.html';
 const listSelectionH = 'list-selection-example/list-selection-example.component.html';
 const listSelectionTs = 'list-selection-example/list-selection-example.component.ts';
-const listFilterTs = 'list-data-example/list-data-example.component.ts';
-const listFilterH = 'list-data-example/list-data-example.component.html';
 const infiniteScrollSrcHtml = 'list-infinite-scroll-example.component.html';
 const infiniteScrollSrcTs = 'list-infinite-scroll-example.component.ts';
 const listInteractiveHtml = 'list-interactive-example/list-interactive-example.component.html';

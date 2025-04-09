@@ -1,76 +1,18 @@
 const nx = require('@nx/eslint-plugin');
+const pluginTs = require('typescript-eslint');
 
-module.exports = [
+module.exports = pluginTs.config(
+    {
+        ignores: ['**/dist', '.nx', '**/typedoc']
+    },
     ...nx.configs['flat/base'],
-    ...nx.configs['flat/typescript'],
     ...nx.configs['flat/javascript'],
     ...nx.configs['flat/angular'],
     ...nx.configs['flat/angular-template'],
     {
-        ignores: ['**/dist']
-    },
-    {
-        files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+        files: ['**/*.ts'],
+        extends: [...nx.configs['flat/typescript']],
         rules: {
-            '@nx/enforce-module-boundaries': [
-                'error',
-                {
-                    allow: ['jest.config.base'],
-                    depConstraints: [
-                        {
-                            sourceTag: 'scope:cdk',
-                            onlyDependOnLibsWithTags: ['scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:fd',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:fdb',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:fdb', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:fdp',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:fdp', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:datetime-adapter',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:cx',
-                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:cx', 'scope:i18n', 'scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:i18n',
-                            onlyDependOnLibsWithTags: ['scope:cdk']
-                        },
-                        {
-                            sourceTag: 'scope:docs',
-                            onlyDependOnLibsWithTags: [
-                                'scope:docs',
-                                'scope:fd',
-                                'scope:fdp',
-                                'scope:fdb',
-                                'scope:datetime-adapter',
-                                'scope:i18n',
-                                'scope:cx',
-                                'scope:cdk'
-                            ]
-                        }
-                    ]
-                }
-            ],
-            '@nx/dependency-checks': [
-                'error',
-                {
-                    buildTargets: ['build'],
-                    checkMissingDependencies: true,
-                    checkObsoleteDependencies: true,
-                    checkVersionMismatches: true,
-                    ignoredDependencies: ['@angular/cdk', 'rxjs', 'tslib', 'zone.js']
-                }
-            ],
             '@typescript-eslint/ban-ts-comment': [
                 'error',
                 {
@@ -202,7 +144,70 @@ module.exports = [
             ],
             // TODO https://typescript-eslint.io/rules/type-annotation-spacing/
             // "@typescript-eslint/type-annotation-spacing": "error",
-            '@typescript-eslint/unified-signatures': 'error',
+            '@typescript-eslint/unified-signatures': 'error'
+        }
+    },
+    {
+        files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+        rules: {
+            '@nx/enforce-module-boundaries': [
+                'error',
+                {
+                    allow: ['jest.config.base'],
+                    depConstraints: [
+                        {
+                            sourceTag: 'scope:cdk',
+                            onlyDependOnLibsWithTags: ['scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:fd',
+                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:i18n', 'scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:fdb',
+                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:fdb', 'scope:i18n', 'scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:fdp',
+                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:fdp', 'scope:i18n', 'scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:datetime-adapter',
+                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:i18n', 'scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:cx',
+                            onlyDependOnLibsWithTags: ['scope:fd', 'scope:cx', 'scope:i18n', 'scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:i18n',
+                            onlyDependOnLibsWithTags: ['scope:cdk']
+                        },
+                        {
+                            sourceTag: 'scope:docs',
+                            onlyDependOnLibsWithTags: [
+                                'scope:docs',
+                                'scope:fd',
+                                'scope:fdp',
+                                'scope:datetime-adapter',
+                                'scope:i18n',
+                                'scope:cx',
+                                'scope:cdk'
+                            ]
+                        }
+                    ]
+                }
+            ],
+            '@nx/dependency-checks': [
+                'error',
+                {
+                    buildTargets: ['build'],
+                    checkMissingDependencies: true,
+                    checkObsoleteDependencies: true,
+                    checkVersionMismatches: true,
+                    ignoredDependencies: ['@angular/cdk', 'rxjs', 'tslib', 'zone.js']
+                }
+            ],
             'arrow-body-style': 'error',
             'arrow-parens': ['off', 'always'],
             curly: 'error',
@@ -217,13 +222,6 @@ module.exports = [
                 }
             ],
             'keyword-spacing': 'error',
-            'max-len': [
-                'error',
-                {
-                    code: 160,
-                    ignorePattern: '^import .*'
-                }
-            ],
             'new-parens': 'error',
             'no-bitwise': 'error',
             'no-caller': 'error',
@@ -269,12 +267,6 @@ module.exports = [
             'no-throw-literal': 'error',
             'no-undef-init': 'error',
             'no-unused-expressions': 'off',
-            'no-unused-vars': [
-                'error',
-                {
-                    args: 'none'
-                }
-            ],
             'no-var': 'error',
             'object-curly-spacing': ['error', 'always'],
             'object-shorthand': ['error', 'always'],
@@ -282,7 +274,6 @@ module.exports = [
             'prefer-arrow/prefer-arrow-functions': 'off',
             'prefer-const': 'error',
             'quote-props': ['off', 'as-needed'],
-            radix: 'error',
             semi: ['error', 'always'],
             'space-before-blocks': 'error',
             'space-infix-ops': 'error',
@@ -313,4 +304,4 @@ module.exports = [
             '@angular-eslint/template/prefer-control-flow': 'error'
         }
     }
-];
+);

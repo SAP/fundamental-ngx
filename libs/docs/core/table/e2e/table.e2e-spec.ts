@@ -57,9 +57,7 @@ describe('Table test suite', () => {
         sortDescending,
         markAllCheckboxesFF,
         clickableTableRowFF,
-        selectedPage,
         tableCDKExample,
-        tableCellWOHeader,
         tableActivableExample,
         tableFocusableExample
     } = tablePage;
