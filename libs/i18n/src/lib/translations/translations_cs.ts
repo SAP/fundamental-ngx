@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     coreCalendar: {
@@ -595,6 +596,8 @@ export default {
         groupHeaderTitle: 'Rozbalit/sbalit',
         groupAriaDescription: 'Skupina oznámení',
         groupAriaDescriptionExpanded: 'rozbaleno',
-        groupAriaDescriptionCollapsed: 'sbaleno'
+        groupAriaDescriptionCollapsed: 'sbaleno',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

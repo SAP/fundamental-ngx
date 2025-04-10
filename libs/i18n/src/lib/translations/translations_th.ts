@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreCalendar: {
@@ -595,6 +596,8 @@ export default {
         groupHeaderTitle: 'ขยาย/ยุบรวม',
         groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
         groupAriaDescriptionExpanded: 'ขยาย',
-        groupAriaDescriptionCollapsed: 'ยุบรวม'
+        groupAriaDescriptionCollapsed: 'ยุบรวม',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

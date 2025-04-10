@@ -1,4 +1,4 @@
-import { Directive, input } from '@angular/core';
+import { Directive, ElementRef, inject, input } from '@angular/core';
 import { FD_NOTIFICATION_PARAGRAPH } from '../token';
 
 let notificationParagraphCounter = 0;
@@ -23,4 +23,7 @@ export class NotificationParagraphDirective {
      * if not set, a default value is provided
      */
     id = input('fd-notification-paragraph-' + ++notificationParagraphCounter);
+
+    /** @hidden */
+    elementRef = inject(ElementRef);
 }

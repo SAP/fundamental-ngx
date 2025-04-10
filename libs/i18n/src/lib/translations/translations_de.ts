@@ -597,6 +597,8 @@ export default {
         groupHeaderTitle: 'Erweitern/reduzieren',
         groupAriaDescription: 'Benachrichtigungsgruppe',
         groupAriaDescriptionExpanded: 'erweitert',
-        groupAriaDescriptionCollapsed: 'reduziert'
+        groupAriaDescriptionCollapsed: 'reduziert',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

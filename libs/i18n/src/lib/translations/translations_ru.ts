@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
     coreCalendar: {
@@ -595,6 +596,8 @@ export default {
         groupHeaderTitle: 'Развернуть/свернуть',
         groupAriaDescription: 'Группа уведомлений',
         groupAriaDescriptionExpanded: 'развернуто',
-        groupAriaDescriptionCollapsed: 'свернуто'
+        groupAriaDescriptionCollapsed: 'свернуто',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

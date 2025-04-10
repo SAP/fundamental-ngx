@@ -598,6 +598,8 @@ export default {
         groupHeaderTitle: 'Développer/Réduire',
         groupAriaDescription: 'Groupe de notifications',
         groupAriaDescriptionExpanded: 'développé',
-        groupAriaDescriptionCollapsed: 'réduit'
+        groupAriaDescriptionCollapsed: 'réduit',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

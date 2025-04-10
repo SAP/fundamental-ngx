@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     coreCalendar: {
@@ -596,6 +597,8 @@ export default {
         groupHeaderTitle: 'Uitvouwen/samenvouwen',
         groupAriaDescription: 'Meldingsgroep',
         groupAriaDescriptionExpanded: 'uitgevouwen',
-        groupAriaDescriptionCollapsed: 'samengevouwen'
+        groupAriaDescriptionCollapsed: 'samengevouwen',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

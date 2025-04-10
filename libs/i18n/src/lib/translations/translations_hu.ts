@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreCalendar: {
@@ -595,6 +596,8 @@ export default {
         groupHeaderTitle: 'Kibontás/visszazárás',
         groupAriaDescription: 'Értesítési csoport',
         groupAriaDescriptionExpanded: 'kibontva',
-        groupAriaDescriptionCollapsed: 'visszazárva'
+        groupAriaDescriptionCollapsed: 'visszazárva',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };
