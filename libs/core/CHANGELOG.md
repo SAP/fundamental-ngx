@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.9...v0.55.6-rc.10) (2025-04-10)
+
+
+### Features
+
+* **core:** add more and less expander for Notifications ([#13183](https://github.com/SAP/fundamental-ngx/issues/13183)) ([dda0526](https://github.com/SAP/fundamental-ngx/commit/dda0526140c9afaba00fab9ca06d9dddd725ea5b))
+
+
+
+
+
 ## [0.55.6-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.8...v0.55.6-rc.9) (2025-04-07)
 
 
