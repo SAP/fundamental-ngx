@@ -596,6 +596,8 @@ export default {
         groupHeaderTitle: 'Proširi/sažmi',
         groupAriaDescription: 'Grupa obaveštenja',
         groupAriaDescriptionExpanded: 'prošireno',
-        groupAriaDescriptionCollapsed: 'sažeto'
+        groupAriaDescriptionCollapsed: 'sažeto',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

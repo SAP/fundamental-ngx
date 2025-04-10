@@ -596,6 +596,8 @@ export default {
         groupHeaderTitle: 'Rozwiń/zwiń',
         groupAriaDescription: 'Grupa zawiadomień',
         groupAriaDescriptionExpanded: 'rozwinięte',
-        groupAriaDescriptionCollapsed: 'zwinięte'
+        groupAriaDescriptionCollapsed: 'zwinięte',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

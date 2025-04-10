@@ -716,4 +716,12 @@ export interface FdLanguage {
     btpToolHeader: {
         menuButtonAriaLabel: FdLanguageKey;
     };
+    coreNotification: {
+        groupHeaderTitle: FdLanguageKey;
+        groupAriaDescription: FdLanguageKey;
+        groupAriaDescriptionExpanded: FdLanguageKey;
+        groupAriaDescriptionCollapsed: FdLanguageKey;
+        triggerMoreLabel: FdLanguageKey;
+        triggerLessLabel: FdLanguageKey;
+    };
 }

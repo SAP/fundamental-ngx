@@ -596,6 +596,8 @@ export default {
         groupHeaderTitle: 'Expandir/recolher',
         groupAriaDescription: 'Grupo de notificações',
         groupAriaDescriptionExpanded: 'expandido',
-        groupAriaDescriptionCollapsed: 'recolhido'
+        groupAriaDescriptionCollapsed: 'recolhido',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

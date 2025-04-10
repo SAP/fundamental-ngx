@@ -596,6 +596,8 @@ export default {
         groupHeaderTitle: 'Разгъване/свиване',
         groupAriaDescription: 'Група за известия',
         groupAriaDescriptionExpanded: 'разгърнато',
-        groupAriaDescriptionCollapsed: 'свито'
+        groupAriaDescriptionCollapsed: 'свито',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };
