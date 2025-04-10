@@ -1,2 +1,9 @@
 @import 'fundamental-styles/dist/input.css';
 @import 'fundamental-styles/dist/textarea.css';
+
+// @todo: to be removed after the release of fund-styles versions above v0.39.2
+.fd-input.is-readonly,
+.fd-input[aria-readonly='true'],
+.fd-input[readonly] {
+    z-index: 1;
+}
