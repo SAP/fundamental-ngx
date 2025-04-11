@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.11...v0.55.6-rc.12) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core:** fix dynamic page scrolling ([#13204](https://github.com/SAP/fundamental-ngx/issues/13204)) ([d65fd46](https://github.com/SAP/fundamental-ngx/commit/d65fd46bbe9f338c269bbccbc891e42adb1c8bb2))
+
+
+
+
+
 ## [0.55.6-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.10...v0.55.6-rc.11) (2025-04-11)
 
 
