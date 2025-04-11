@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.14...v0.55.6-rc.15) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core:** remove neg z-index from readonly input ([#13196](https://github.com/SAP/fundamental-ngx/issues/13196)) ([4372de5](https://github.com/SAP/fundamental-ngx/commit/4372de537b4202aa2cccbae99aa4ff16166ffeda))
+
+
+
+
+
 ## [0.55.6-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.13...v0.55.6-rc.14) (2025-04-11)
 
 
