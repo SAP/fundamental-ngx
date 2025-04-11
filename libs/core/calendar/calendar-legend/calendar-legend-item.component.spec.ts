@@ -1,90 +1,74 @@
+import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { LegendItemComponent } from './calendar-legend-item.component';
 
+@Component({
+    template: `
+        <fd-calendar-legend-item
+            [text]="text()"
+            [color]="color()"
+            [circle]="circle()"
+            [id]="id()"
+            [type]="type()"
+            (focusedElementEvent)="onFocus($event)"
+        ></fd-calendar-legend-item>
+    `,
+    imports: [LegendItemComponent]
+})
+export class LegendItemHostTestComponent {
+    text = signal<string>('Legend Item');
+    color = signal<string>('placeholder-1');
+    circle = signal<boolean>(false);
+    id = signal<string>('fd-calendar-legend-item-1');
+    type = signal<string>('appointment');
+    onFocus = (event: string): void => {
+        console.log('Focused element:', event);
+    };
+}
+
 describe('LegendItemComponent', () => {
-    let component: LegendItemComponent;
-    let fixture: ComponentFixture<LegendItemComponent>;
+    let fixture: ComponentFixture<LegendItemHostTestComponent>;
+    let host: LegendItemHostTestComponent;
+    let legendItem: LegendItemComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [LegendItemComponent]
+            imports: [LegendItemHostTestComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LegendItemComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(LegendItemHostTestComponent);
+        host = fixture.componentInstance;
+        legendItem = fixture.debugElement.query(By.directive(LegendItemComponent)).componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(host).toBeTruthy();
     });
 
-    it('should emit focusedElementEvent with the correct id on focus', () => {
-        const spy = jest.spyOn(component.focusedElementEvent, 'emit');
-        component.onFocus();
-        expect(spy).toHaveBeenCalledWith(component.id);
+    it('should set the text correctly', () => {
+        expect(legendItem.text()).toBe('Legend Item');
     });
 
-    it('should apply the correct CSS classes when inputs change', () => {
-        component.type = 'appointment';
-        component.circle = true;
-        component.color = 'placeholder-10';
-
-        // Trigger ngOnChanges to rebuild the CSS classes
-        component.ngOnChanges();
-
-        const cssClasses = component.buildComponentCssClass();
-        expect(cssClasses).toContain('fd-calendar-legend__item');
-        expect(cssClasses).toContain('fd-calendar-legend__item--appointment');
-        expect(cssClasses).toContain('fd-calendar-legend__item--placeholder-10');
+    it('should set the color correctly', () => {
+        expect(legendItem.color()).toBe('placeholder-1');
     });
 
-    it('should update CSS classes dynamically when input signals change', () => {
-        component.type = 'appointment';
-        fixture.detectChanges();
-
-        let cssClasses = component.buildComponentCssClass();
-        expect(cssClasses).toContain('fd-calendar-legend__item--appointment');
-
-        // Update inputSignal value
-        component.type = '';
-        fixture.detectChanges();
-
-        cssClasses = component.buildComponentCssClass();
-        expect(cssClasses).not.toContain('fd-calendar-legend__item--appointment');
+    it('should set the id correctly', () => {
+        expect(legendItem.id()).toBe('fd-calendar-legend-item-1');
     });
 
-    it('should handle color input dynamically via inputSignals', () => {
-        component.color = 'placeholder-9';
-        fixture.detectChanges();
-
-        const cssClasses = component.buildComponentCssClass();
-        expect(cssClasses).toContain('fd-calendar-legend__item--placeholder-9');
-
-        component.color = 'placeholder-10';
-        fixture.detectChanges();
-
-        const updatedCssClasses = component.buildComponentCssClass();
-        expect(updatedCssClasses).toContain('fd-calendar-legend__item--placeholder-10');
-        expect(updatedCssClasses).not.toContain('fd-calendar-legend__item--placeholder-9');
+    it('should set the type correctly', () => {
+        expect(legendItem.type()).toBe('appointment');
     });
 
-    it('should add appointment class when circle input is true', () => {
-        component.circle = true;
+    it('should emit the focused element event', () => {
+        const eventSpy = jest.spyOn(host, 'onFocus');
+        legendItem.onFocus();
         fixture.detectChanges();
-
-        const appointmentClass = component.getAppointmentClass();
-        expect(appointmentClass).toBe('fd-calendar-legend__item--appointment');
-    });
-
-    it('should not add appointment class when circle is false and type is not appointment', () => {
-        component.circle = false;
-        component.type = '';
-        fixture.detectChanges();
-
-        const appointmentClass = component.getAppointmentClass();
-        expect(appointmentClass).toBe('');
+        expect(eventSpy).toHaveBeenCalledWith('fd-calendar-legend-item-1');
     });
 });

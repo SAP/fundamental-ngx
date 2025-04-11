@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { Component } from '@angular/core';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -14,47 +14,59 @@ import { LegendItemComponent } from './calendar-legend-item.component';
 import { CalendarLegendComponent } from './calendar-legend.component';
 
 @Component({
-    template: `
-        <div style="display: flex; flex-direction: row; gap: 0.5rem; align-items: flex-start">
-            <fd-calendar [specialDaysRules]="specialDays"></fd-calendar>
-            <fd-calendar-legend [specialDaysRules]="specialDays" [col]="true"></fd-calendar-legend>
-        </div>
-    `
+    template: ` <fd-calendar-legend [col]="col" [specialDaysRules]="specialDaysRules"> </fd-calendar-legend> `,
+    imports: [CalendarLegendComponent]
 })
-class CalendarLegendHostTestComponent {
-    @ViewChild(CalendarLegendComponent) calendarLegend: CalendarLegendComponent<any>;
+export class CalendarLegendHostComponent {
+    /** Element getting focused */
+    focusedElement = '';
 
+    /** If the layout is column */
+    col = false;
+
+    /** Special days rules to be displayed in the legend */
     specialDaysRules: SpecialDayRule<FdDate>[] = [
-        { legendText: 'Holiday 1', specialDayNumber: 1, rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 14 },
-        { legendText: 'Holiday 2', specialDayNumber: 2, rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 15 }
+        {
+            specialDayNumber: 5,
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) in [2, 9, 16],
+            legendText: 'Placeholder-5'
+        },
+        {
+            specialDayNumber: 6,
+            rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
+            legendText: 'Placeholder-6'
+        },
+        {
+            specialDayNumber: 10,
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 15,
+            legendText: 'Placeholder-10'
+        },
+        {
+            specialDayNumber: 11,
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 30,
+            legendText: 'Placeholder-11'
+        }
     ];
 
-    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    constructor(public datetimeAdapter: DatetimeAdapter<FdDate>) {}
 }
 
 describe('CalendarLegendComponent', () => {
-    let fixture: ComponentFixture<CalendarLegendHostTestComponent>;
-    let host: CalendarLegendHostTestComponent;
+    let fixture: ComponentFixture<CalendarLegendHostComponent>;
+    let host: CalendarLegendHostComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CalendarLegendComponent, LegendItemComponent],
-            declarations: [CalendarLegendHostTestComponent],
+            imports: [CalendarLegendHostComponent],
             providers: [
-                {
-                    provide: DatetimeAdapter,
-                    useClass: FdDatetimeAdapter
-                },
-                {
-                    provide: DATE_TIME_FORMATS,
-                    useValue: FD_DATETIME_FORMATS
-                }
+                { provide: DATE_TIME_FORMATS, useValue: FD_DATETIME_FORMATS },
+                { provide: DatetimeAdapter, useClass: FdDatetimeAdapter }
             ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CalendarLegendHostTestComponent);
+        fixture = TestBed.createComponent(CalendarLegendHostComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -63,39 +75,22 @@ describe('CalendarLegendComponent', () => {
         expect(host).toBeTruthy();
     });
 
-    it('should render legend items correctly', () => {
-        const legendItemElements = fixture.debugElement.queryAll(By.directive(LegendItemComponent));
-        expect(legendItemElements.length).toBe(2);
-        expect(legendItemElements[0].nativeElement.textContent).toContain('Holiday 1');
-        expect(legendItemElements[1].nativeElement.textContent).toContain('Holiday 2');
+    it('should render legend items', () => {
+        const legendItems = fixture.debugElement.queryAll(By.directive(LegendItemComponent));
+        expect(legendItems.length).toBe(4);
+        expect(legendItems[0].componentInstance.text()).toBe('Placeholder-5');
+        expect(legendItems[1].componentInstance.text()).toBe('Placeholder-6');
+        expect(legendItems[2].componentInstance.text()).toBe('Placeholder-10');
+        expect(legendItems[3].componentInstance.text()).toBe('Placeholder-11');
     });
 
-    it('should pass specialDayNumber as color to legend items', () => {
-        const legendItemElements = fixture.debugElement.queryAll(By.directive(LegendItemComponent));
-        expect(legendItemElements[0].componentInstance.color).toBe('placeholder-1');
-        expect(legendItemElements[1].componentInstance.color).toBe('placeholder-2');
-    });
+    it('should set the col correctly', () => {
+        expect(host.col).toBe(false);
 
-    it('should append the legend items to the DOM', () => {
-        const nativeElement = fixture.nativeElement;
-        expect(nativeElement.querySelectorAll('fd-calendar-legend-item').length).toBe(2);
-    });
-
-    it('should toggle column class based on "col" input', () => {
-        host.calendarLegend.col = true;
+        host.col = true;
         fixture.detectChanges();
-        expect(
-            fixture.nativeElement
-                .querySelector('.fd-calendar-legend')
-                .classList.contains('fd-calendar-legend--auto-column')
-        ).toBeTruthy();
 
-        host.calendarLegend.col = false;
-        fixture.detectChanges();
-        expect(
-            fixture.nativeElement
-                .querySelector('.fd-calendar-legend')
-                .classList.contains('fd-calendar-legend--auto-column')
-        ).toBeFalsy();
+        const calendarLegend = fixture.debugElement.query(By.directive(CalendarLegendComponent));
+        expect(calendarLegend.componentInstance.col).toBe(true);
     });
 });

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChildren, Input, QueryList, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { LegendItemComponent } from './calendar-legend-item.component';
 
@@ -19,16 +20,11 @@ import { LegendItemComponent } from './calendar-legend-item.component';
     `,
     host: {
         class: 'fd-calendar-legend',
-        '[class.fd-calendar-legend--auto-column]': 'col',
-        '[attr.fd-data-calendar-index]': 'calIndex'
+        '[class.fd-calendar-legend--auto-column]': 'col'
     },
     imports: [CommonModule, LegendItemComponent]
 })
 export class CalendarLegendComponent<D> {
-    /** Get all legend Items */
-    @ContentChildren(LegendItemComponent, { descendants: true })
-    legendItems: QueryList<LegendItemComponent>;
-
     /**
      * Make it a column instead
      */
@@ -38,9 +34,8 @@ export class CalendarLegendComponent<D> {
      * days rules to be displayed in the legend */
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
 
-    /** Calendar's index */
-    calIndex: number;
-
     /** Element getting focused */
     focusedElement = input<string>('');
+
+    constructor(public datetimeAdapter: DatetimeAdapter<FdDate>) {}
 }

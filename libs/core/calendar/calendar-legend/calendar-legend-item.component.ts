@@ -4,7 +4,6 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    Input,
     OnChanges,
     OnInit,
     Output,
@@ -24,7 +23,7 @@ let id = 0;
     template: `
         <span class="fd-calendar-legend__marker"></span>
         <span class="fd-calendar-legend__text">
-            <ng-content>{{ text }}</ng-content>
+            <ng-content>{{ text() }}</ng-content>
         </span>
     `,
     host: {
@@ -34,23 +33,23 @@ let id = 0;
     }
 })
 export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
-    /** The text of the legend item */
-    @Input() text: string | undefined;
-
-    /** The color of the legend item marker */
-    @Input() color: string;
-
     /** Sending the focused item to parent */
     @Output() focusedElementEvent = new EventEmitter<string>();
 
+    /** The text of the legend item */
+    text = input<string | undefined>();
+
+    /** The color of the legend item marker */
+    color = input<string>();
+
     /** The type of the legend item  */
-    @Input() type: Nullable<string> = '';
+    type = input<Nullable<string> | undefined>();
 
     /** If the marker is a circle or a square */
-    @Input() circle = false;
+    circle = input<boolean>();
 
     /** The id of the legend item */
-    @Input() id = `fd-calendar-legend-item-${id++}`;
+    id = input<string>(`fd-calendar-legend-item-${id++}`);
 
     /** The aria-label of the legend item */
     ariaLabel = input<string>();
@@ -87,21 +86,21 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     getTypeClass(): string {
-        return this.type ? `fd-calendar-legend__item--${this.type}` : '';
+        return this.type() ? `fd-calendar-legend__item--${this.type()}` : '';
     }
 
     /** @hidden */
     getAppointmentClass(): string {
-        return this.circle || this.type === 'appointment' ? `fd-calendar-legend__item--appointment` : '';
+        return this.circle() || this.type() === 'appointment' ? `fd-calendar-legend__item--appointment` : '';
     }
 
     /** @hidden */
     getColorClass(): string {
-        return this.color ? `fd-calendar-legend__item--${this.color}` : '';
+        return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
     }
 
     /** @hidden */
     onFocus(): void {
-        this.focusedElementEvent.emit(this.id);
+        this.focusedElementEvent.emit(this.id());
     }
 }
