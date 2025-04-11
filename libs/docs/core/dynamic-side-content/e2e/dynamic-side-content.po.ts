@@ -1,9 +1,9 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class DynamicSideContentPo extends CoreBaseComponentPo {
-    private url = '/dynamic-side-content';
     root = '#page-content';
     pageHeader = 'app-dynamic-side-content-header h1';
+    private url = '/dynamic-side-content';
 
     async open(): Promise<void> {
         await super.open(this.url);

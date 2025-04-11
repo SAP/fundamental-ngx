@@ -1,7 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class DynamicPagePo extends PlatformBaseComponentPo {
-    private url = '/dynamic-page';
     basicExampleButton = 'fdp-platform-dynamic-page-example button';
     snapsExampleButton = 'fdp-platform-dynamic-page-snap-scroll-example button';
     tabbesExampleButton = 'fdp-platform-dynamic-page-tabbed-example button';
@@ -25,6 +24,8 @@ export class DynamicPagePo extends PlatformBaseComponentPo {
     openColumnButton = '.docs-fcl-example-section button';
     columnSectionHeader = 'article header';
     columnSectionExpandIcon = '.fd-flexible-column-layout__button';
+
+    private url = '/dynamic-page';
 
     async open(): Promise<void> {
         await super.open(this.url);

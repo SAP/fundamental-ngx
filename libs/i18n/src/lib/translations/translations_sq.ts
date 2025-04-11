@@ -574,5 +574,9 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Butoni i menysë'
+    },
+    coreNotification: {
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

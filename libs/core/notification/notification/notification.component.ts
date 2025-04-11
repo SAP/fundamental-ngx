@@ -18,6 +18,7 @@ import {
     ViewEncapsulation,
     computed,
     contentChild,
+    effect,
     inject,
     input,
     signal,
@@ -26,13 +27,14 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { AbstractFdNgxClass, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent } from 'rxjs';
+import { debounceTime, filter, take } from 'rxjs/operators';
 import { NotificationParagraphDirective } from '../directives/notification-paragraph.directive';
 import { NotificationTitleDirective } from '../directives/notification-title.directive';
+import { NotificationFooterComponent } from '../notification-footer/notification-footer.component';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { FD_NOTIFICATION, FD_NOTIFICATION_PARAGRAPH, FD_NOTIFICATION_TITLE } from '../token';
+import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_NOTIFICATION_TITLE } from '../token';
 
 @Component({
     selector: 'fd-notification',
@@ -125,6 +127,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     private _notificationParagraph = contentChild<NotificationParagraphDirective>(FD_NOTIFICATION_PARAGRAPH);
 
     /** @hidden */
+    private _notificationFooter = contentChild<NotificationFooterComponent>(FD_NOTIFICATION_FOOTER);
+
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -155,11 +160,27 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     private _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private _isTitleTruncated = signal(false);
+
+    /** @hidden */
+    private _isParagraphTruncated = signal(false);
+
+    /** @hidden */
+    private _hasTruncation = computed(() => this._isTitleTruncated() || this._isParagraphTruncated());
+
+    /** @hidden */
+    private _expanded = computed(() => this._notificationFooter()?.expanded() ?? false);
+
+    /** @hidden */
     constructor() {
         super();
         if (this._notificationConfig) {
             this._setNotificationConfig(this._notificationConfig);
         }
+
+        effect(() => {
+            this._updateExpandedClass();
+        });
     }
 
     /** @hidden Listen and close notification on Escape key */
@@ -174,6 +195,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
         this._setProperties();
+        this._attachResizeListener();
     }
 
     /** @hidden */
@@ -193,6 +215,8 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         } else if (this._notificationParagraph()) {
             this.ariaLabelledBy.set(this._notificationParagraph()?.id());
         }
+
+        this._checkTruncation();
         this._afterViewInit$.next(true);
         this._cdRef.detectChanges();
     }
@@ -214,6 +238,49 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-notification');
+    }
+
+    /** @hidden */
+    private _updateExpandedClass(): void {
+        const isExpanded = this._expanded();
+
+        [this._notificationTitle(), this._notificationParagraph()].forEach((ref) => {
+            ref?.elementRef.nativeElement.classList.toggle('is-expanded', isExpanded);
+        });
+    }
+
+    /** @hidden */
+    private _checkTruncation(): void {
+        const titleEl = this._notificationTitle()?.elementRef.nativeElement;
+        const paragraphEl = this._notificationParagraph()?.elementRef.nativeElement;
+        const footer = this._notificationFooter();
+
+        if (titleEl) {
+            this._isTitleTruncated.set(titleEl.scrollHeight > titleEl.clientHeight);
+        }
+
+        if (paragraphEl) {
+            this._isParagraphTruncated.set(paragraphEl.scrollHeight > paragraphEl.clientHeight);
+        }
+
+        if (footer) {
+            footer.showTrigger.set(this._hasTruncation() || this._expanded());
+        }
+
+        this._updateExpandedClass();
+    }
+
+    /** @hidden */
+    private _attachResizeListener(): void {
+        fromEvent(window, 'resize', { passive: true })
+            .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => this._onWindowResize());
+    }
+
+    /** @hidden */
+    private _onWindowResize(): void {
+        this._checkTruncation();
+        this._cdRef.markForCheck();
     }
 
     /** @hidden Listen on NavigationStart event and dismiss the dialog */

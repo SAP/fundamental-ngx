@@ -15,7 +15,6 @@ import {
     PlatformButtonTypesExampleComponent
 } from './examples/platform-button-examples.component';
 const buttonIconsExample = 'platform-button-icons-example.component.html';
-const buttonStateExample = 'platform-button-state-example.component.html';
 const buttonTypesExample = 'platform-button-types-example.component.html';
 const buttonTruncateExample = 'platform-button-truncate-example.component.html';
 const buttonScss = 'platform-button-examples.scss';

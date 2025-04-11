@@ -1,8 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class WizardGeneratorPO extends PlatformBaseComponentPo {
-    private url = '/wizard-generator';
-
     defaultExample = 'fdp-wizard-generator-default-example ';
     dialogExample = 'fdp-wizard-generator-dialog-example ';
     customizableGeneratorExample = 'fdp-wizard-generator-customizable-embeded-example ';
@@ -33,6 +31,8 @@ export class WizardGeneratorPO extends PlatformBaseComponentPo {
     checkbox = '.fd-checkbox';
     dialog = '.fd-dialog ';
     dialogBarButton = this.dialog + '.fd-bar ' + this.button;
+
+    private url = '/wizard-generator';
 
     async open(): Promise<void> {
         await super.open(this.url);

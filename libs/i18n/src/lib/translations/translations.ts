@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
     coreCalendar: {
@@ -198,7 +199,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'More',
+        overflowTitleMore: 'Click or press enter to view more details',
         breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
@@ -596,6 +597,8 @@ export default {
         groupHeaderTitle: 'Expand/Collapse',
         groupAriaDescription: 'Notification Group',
         groupAriaDescriptionExpanded: 'expanded',
-        groupAriaDescriptionCollapsed: 'collapsed'
+        groupAriaDescriptionCollapsed: 'collapsed',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

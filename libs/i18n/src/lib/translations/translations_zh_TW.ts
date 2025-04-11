@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
     coreCalendar: {
@@ -592,6 +593,8 @@ export default {
         groupHeaderTitle: '展開/摺疊',
         groupAriaDescription: '通知群組',
         groupAriaDescriptionExpanded: '已展開',
-        groupAriaDescriptionCollapsed: '已摺疊'
+        groupAriaDescriptionCollapsed: '已摺疊',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -1,10 +1,10 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class BreadcrumbPo extends CoreBaseComponentPo {
-    private url = '/breadcrumb';
     root = '#page-content';
     links = '.fd-breadcrumb__link';
     disabledLinks = '.fd-breadcrumb__item span';
+    private url = '/breadcrumb';
 
     async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);

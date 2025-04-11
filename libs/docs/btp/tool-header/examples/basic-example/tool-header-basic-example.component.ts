@@ -90,7 +90,7 @@ export class ToolHeaderBasicExampleComponent {
         }
     ];
 
-    valueUpdate($event: string) {
+    valueUpdate($event: string): void {
         console.log($event);
         this.searchValue = $event;
     }

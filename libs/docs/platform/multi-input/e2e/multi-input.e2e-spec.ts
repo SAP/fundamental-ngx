@@ -56,7 +56,6 @@ describe('Multi input test suite', () => {
         const activeButtonsQuantity = await getElementArrayLength(activeDropdownButtons);
         const mobileExample = 6;
         const disabledExample = 5;
-        const loadingExample = 8;
 
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i === disabledExample) {

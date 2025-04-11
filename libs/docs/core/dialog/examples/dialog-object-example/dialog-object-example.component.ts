@@ -12,11 +12,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
     imports: [ButtonComponent, BarModule, InputGroupModule, InitialFocusDirective]
 })
 export class DialogObjectExampleComponent {
-    constructor(
-        private _dialogService: DialogService,
-        private _cdr: ChangeDetectorRef
-    ) {}
-
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;
 
@@ -26,6 +21,11 @@ export class DialogObjectExampleComponent {
     closeReason = '';
 
     private _dialogReference: DialogRef;
+
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     openDialog(): void {
         const object: DialogDefaultContent = {

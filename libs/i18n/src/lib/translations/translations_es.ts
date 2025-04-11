@@ -597,6 +597,8 @@ export default {
         groupHeaderTitle: 'Expandir/Contraer',
         groupAriaDescription: 'Grupo de notificaciones',
         groupAriaDescriptionExpanded: 'expandido',
-        groupAriaDescriptionCollapsed: 'contraído'
+        groupAriaDescriptionCollapsed: 'contraído',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

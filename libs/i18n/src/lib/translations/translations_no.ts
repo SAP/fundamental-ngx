@@ -597,6 +597,8 @@ export default {
         groupHeaderTitle: 'Utvid/skjul',
         groupAriaDescription: 'Meldingsgruppe',
         groupAriaDescriptionExpanded: 'utvidet',
-        groupAriaDescriptionCollapsed: 'komprimert'
+        groupAriaDescriptionCollapsed: 'komprimert',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -1,5 +1,3 @@
-import { ComboboxPo } from './combobox.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     acceptAlert,
     browserIsSafari,
@@ -17,6 +15,7 @@ import {
     setValue,
     waitForElDisplayed
 } from '../../../../../e2e';
+import { ComboboxPo } from './combobox.po';
 
 describe('Combobox component test suit', () => {
     const comboboxPage = new ComboboxPo();

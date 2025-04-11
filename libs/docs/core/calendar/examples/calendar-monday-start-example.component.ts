@@ -48,7 +48,7 @@ export class CalendarMondayStartExampleComponent {
     startingDayOfWeekOptions: DaysOfWeek[] = [1, 2, 3, 4, 5, 6, 7];
     startingDayOfWeekOptionsInDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-    public onChangeStartingDayOfWeek(day: DaysOfWeek) {
+    public onChangeStartingDayOfWeek(day: DaysOfWeek): void {
         this.startingDayOfWeek = day;
     }
 }

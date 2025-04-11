@@ -1,7 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class DisplayListItemPo extends PlatformBaseComponentPo {
-    private url = '/display-list-item';
     root = '#page-content';
 
     // partial navigation examples
@@ -13,6 +12,8 @@ export class DisplayListItemPo extends PlatformBaseComponentPo {
     declarativeDisplayLinks = 'fdp-platform-display-list-item-with-navigation-example a';
     declarativeDisplayTitles = 'fdp-platform-display-list-item-with-navigation-example a span:first-of-type';
     declarativeSection = 'fdp-platform-display-list-item-with-navigation-example .fd-list';
+
+    private url = '/display-list-item';
 
     async open(): Promise<void> {
         await super.open(this.url);

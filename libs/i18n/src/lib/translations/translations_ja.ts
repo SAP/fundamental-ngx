@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -595,6 +596,8 @@ export default {
         groupHeaderTitle: '展開/圧縮',
         groupAriaDescription: '通知グループ',
         groupAriaDescriptionExpanded: '表示',
-        groupAriaDescriptionCollapsed: '非表示'
+        groupAriaDescriptionCollapsed: '非表示',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

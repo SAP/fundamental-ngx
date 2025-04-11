@@ -140,6 +140,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _finalStep = false;
 
     /** @hidden */
+    _isValidated = true;
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
@@ -198,6 +201,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
                 (await this.stepClickValidator(this.visited, this.completed)) === true)
         ) {
             this.stepClicked.emit(this);
+            this._isValidated = true;
+        } else {
+            this._isValidated = false;
         }
     }
 

@@ -597,6 +597,8 @@ export default {
         groupHeaderTitle: 'Extindere/Restrângere',
         groupAriaDescription: 'Grup de notificări',
         groupAriaDescriptionExpanded: 'extins',
-        groupAriaDescriptionCollapsed: 'restrâns'
+        groupAriaDescriptionCollapsed: 'restrâns',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

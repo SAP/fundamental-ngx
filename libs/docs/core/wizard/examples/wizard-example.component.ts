@@ -55,6 +55,10 @@ export class WizardExampleComponent {
     @ViewChild('overlay')
     overlay: ElementRef<HTMLElement>;
 
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
     /**
      * documentation related property
      * specifies if the doc example is rendered in fullscreen or not
@@ -70,10 +74,6 @@ export class WizardExampleComponent {
     fullName = '';
     addressLine1 = '';
     addressLine2 = '';
-
-    /** @hidden */
-    @ViewChildren(WizardStepComponent)
-    steps: QueryList<WizardStepComponent>;
 
     constructor(private _wizardService: WizardService) {}
 
