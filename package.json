@@ -13,7 +13,7 @@
     "yarn": ">= 1.22.19",
     "node": ">= 16"
   },
-  "packageManager": "yarn@1.22.18",
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "preinstall": "npx only-allow yarn",
     "build": "echo Building default app && nx build",

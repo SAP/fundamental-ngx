@@ -102,6 +102,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @Input()
     expandContent = true;
 
+    /** Heading level of the dynamic page title. */
+    @Input()
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
+
     /**
      * Tab Change event
      */
