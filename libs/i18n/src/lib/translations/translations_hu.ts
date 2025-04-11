@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Összecsukott menüelem',
         cancel: 'Mégse',
-        search: 'Keresés'
+        search: 'Keresés',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'A csúszka minimális értéke {min}, maximális értéke {max}',

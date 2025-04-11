@@ -111,7 +111,9 @@ export default {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
         cancel: 'Cancel',
         search: 'Search',
-        assistiveTools: 'Assistive Tools'
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',

@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Komprimerad artikelmeny',
         cancel: 'Avbryt',
-        search: 'Sök'
+        search: 'Sök',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimivärde för reglage är {min}, maximalt värde är {max}',

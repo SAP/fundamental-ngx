@@ -18,6 +18,8 @@
                     fdType="transparent"
                     glyph="menu2"
                     (fdkClicked)="_navigationClicked($event)"
+                    [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
+                    [attr.aria-label]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
                 ></button>
             }
             @if (showBackButton && !_showMobileSearch) {
@@ -27,6 +29,8 @@
                     fdType="transparent"
                     [glyph]="_rtl$() ? 'slim-arrow-right' : 'nav-back'"
                     (fdkClicked)="_backClicked($event)"
+                    [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
+                    [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
                 ></button>
             }
             <ng-content select="fd-shellbar-branding"></ng-content>

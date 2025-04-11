@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menu Item yang Diruntuhkan',
         cancel: 'Batal',
-        search: 'Cari'
+        search: 'Cari',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Nilai minimum penggelongsor ialah {min}, nilai maksimum ialah {max}',

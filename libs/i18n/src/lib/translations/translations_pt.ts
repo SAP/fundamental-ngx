@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menu de item recolhido',
         cancel: 'Cancelar',
-        search: 'Pesquisar'
+        search: 'Pesquisar',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'O valor mínimo do controle deslizante é {min}, o valor máximo é {max}',

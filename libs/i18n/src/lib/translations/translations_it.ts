@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Voce menu compressa',
         cancel: 'Annulla',
-        search: 'Cerca'
+        search: 'Cerca',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Il valore minimo del cursore è {min}, quello massimo è {max}',

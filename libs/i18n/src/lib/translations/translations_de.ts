@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Komprimiertes Elementmenü',
         cancel: 'Abbrechen',
-        search: 'Suchen'
+        search: 'Suchen',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Mindestwert des Schiebereglers ist {min}, Höchstwert ist {max}',

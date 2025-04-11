@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Συνεπτυγμένο Μενού Στοιχείων',
         cancel: 'Ακύρωση',
-        search: 'Αναζήτηση'
+        search: 'Αναζήτηση',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Ελάχιστη τιμή Slider είναι {min}, μέγιστη τιμή είναι (max}',

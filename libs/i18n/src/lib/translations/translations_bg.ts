@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Свито меню на позиции',
         cancel: 'Отказ',
-        search: 'Търсене'
+        search: 'Търсене',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минималната стойност на плъзгача е {min}, а максималната е {max}',

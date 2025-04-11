@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Zbalená ponuka položiek',
         cancel: 'Zrušiť',
-        search: 'Vyhľadávanie'
+        search: 'Vyhľadávanie',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimálna hodnota posúvača je {min}, maximálna hodnota je {max}',

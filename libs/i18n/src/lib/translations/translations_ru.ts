@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Свернутое меню позиций',
         cancel: 'Отменить',
-        search: 'Поиск'
+        search: 'Поиск',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение ползунка: {min}, макс.: {max}',

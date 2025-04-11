@@ -112,7 +112,11 @@ export default {
         collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
-        assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]'
+      
+      
+        assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: '[[[Ŝĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {ɱįŋ}, ɱąχįɱűɱ ʋąĺűē įş {ɱąχ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
