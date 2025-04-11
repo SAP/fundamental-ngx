@@ -78,7 +78,7 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _role = 'tree';
+    private _role = 'navigation';
 
     /** @hidden */
     @HostBinding('attr.aria-roledescription')

@@ -74,10 +74,6 @@ export class NestedLinkComponent {
     @HostBinding('class.fdx-nested-list__link')
     cxNestedListItemClass = true;
 
-    /** @hidden */
-    @HostBinding('attr.role')
-    role = 'treeitem';
-
     /**
      *  @hidden
      *  Reference to title element, it is used, to get title for condensed mode.

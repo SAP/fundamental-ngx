@@ -31,10 +31,6 @@ export class NestedListContentDirective implements AfterContentInit {
     selected = false;
 
     /** @hidden */
-    @HostBinding('attr.role')
-    role = 'treeitem';
-
-    /** @hidden */
     @HostBinding('attr.aria-expanded')
     ariaExpanded = false;
 

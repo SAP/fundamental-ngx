@@ -33,9 +33,6 @@ import { FD_LIST_COMPONENT } from '../tokens';
     selector: '[fd-list-navigation-item], [fdListNavigaitonItem]',
     templateUrl: './list-navigation-item.component.html',
     styleUrl: './list-navigation-item.component.scss',
-    host: {
-        role: 'treeitem'
-    },
     imports: [NgTemplateOutlet, IconComponent]
 })
 export class ListNavigationItemComponent implements AfterContentInit, AfterViewInit, FocusableOption {
