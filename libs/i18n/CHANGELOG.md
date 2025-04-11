@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.13...v0.55.6-rc.14) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core:** add title/aria-label to shellbar nav and back buttons ([#13186](https://github.com/SAP/fundamental-ngx/issues/13186)) ([cb887fb](https://github.com/SAP/fundamental-ngx/commit/cb887fbd3ae109af791d921e325e14a63a49a91a))
+
+
+
+
+
 ## [0.55.6-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.12...v0.55.6-rc.13) (2025-04-11)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
