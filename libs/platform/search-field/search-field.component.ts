@@ -516,6 +516,8 @@ export class SearchFieldComponent
         }
 
         this.closeSuggestionMenu(false);
+
+        this.focus();
     }
 
     /**

@@ -87,7 +87,6 @@
             @if (inputText && inputText.length > 0) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}">
                     <button
-                        tabindex="-1"
                         [attr.aria-hidden]="!mobile"
                         [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
                         class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
@@ -108,7 +107,6 @@
                 >
                     @if (!disableSearch) {
                         <button
-                            tabindex="-1"
                             [attr.aria-hidden]="!mobile"
                             [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
                             class="fdp-search-field__submit fd-button fd-button--transparent {{
@@ -155,7 +153,6 @@
             <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir$()">
                 <nav
                     class="fd-menu"
-                    tabindex="-1"
                     [class.is-compact]="contentDensityObserver.isCompactSignal()"
                     [class.fd-menu--mobile]="mobile"
                     [class.fd-menu--overflow]="!mobile"
