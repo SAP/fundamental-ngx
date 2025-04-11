@@ -12,7 +12,7 @@ import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigat
 export class VerticalNavigationCondensedExampleComponent {
     condensed = signal(true);
 
-    toggleCondensed() {
+    toggleCondensed(): void {
         this.condensed.update((condensed) => !condensed);
     }
 }

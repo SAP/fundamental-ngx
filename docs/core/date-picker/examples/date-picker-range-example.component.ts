@@ -83,12 +83,12 @@ export class DatePickerRangeExampleComponent {
         };
     }
 
-    handleMonthDateRangeChange(dates: DateRange<FdDate>) {
+    handleMonthDateRangeChange(dates: DateRange<FdDate>): void {
         this.monthYearFormatDateRanges.start = this.datetimeAdapter.format(dates.start, this.monthYearDateFormat);
         this.monthYearFormatDateRanges.end = this.datetimeAdapter.format(dates.end, this.monthYearDateFormat);
     }
 
-    handleYearDateRangeChange(dates: DateRange<FdDate>) {
+    handleYearDateRangeChange(dates: DateRange<FdDate>): void {
         this.yearFormatDateRanges.start = this.datetimeAdapter.format(dates.start, this.yearDateFormat);
         this.yearFormatDateRanges.end = this.datetimeAdapter.format(dates.end, this.yearDateFormat);
     }

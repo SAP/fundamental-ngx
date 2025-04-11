@@ -1,5 +1,5 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import {
     BaseToastPosition,
     ToastBottomCenterPosition,
@@ -26,7 +26,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ButtonComponent, MessageToastModule]
 })
-export class MessageToastPositionExampleComponent {
+export class MessageToastPositionExampleComponent implements AfterViewInit {
     @ViewChild('boundedButton', { read: ElementRef })
     boundButton: ElementRef;
     topLeftPosition = ToastTopLeftPosition;

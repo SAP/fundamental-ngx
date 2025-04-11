@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
@@ -20,7 +20,7 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
         ReactiveFormsModule
     ]
 })
-export class MultiComboboxGroupExampleComponent {
+export class MultiComboboxGroupExampleComponent implements OnInit {
     dataSource = [
         { name: 'Apple', type: 'Fruits' },
         { name: 'Banana', type: 'Fruits' },
