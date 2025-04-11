@@ -8,4 +8,5 @@
 export interface SpecialDayRule<D> {
     specialDayNumber: number;
     rule: (date: D) => boolean;
+    legendText?: string;
 }

@@ -15,6 +15,7 @@ import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/ca
 import { CalendarFormExamplesComponent } from './examples/calendar-form-example/calendar-form-example.component';
 import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
 import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
+import { CalendarLegendExampleComponent } from './examples/calendar-legend-example/calendar-legend-example.component';
 import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
@@ -52,10 +53,13 @@ const calendarMobileHtml = 'calendar-mobile-example/calendar-mobile-example.comp
 const calendarFormSourceT = 'calendar-form-example/calendar-form-example.component.ts';
 const calendarFormSourceH = 'calendar-form-example/calendar-form-example.component.html';
 const calendarProgrammaticallySource = 'calendar-programmatically-change-example.component.ts';
+const calendarLegendSource = 'calendar-legend-example/calendar-legend-example.component.ts';
+const calendarLegendSourceHtml = 'calendar-legend-example/calendar-legend-example.component.html';
 
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html',
+    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
@@ -77,7 +81,8 @@ const calendarProgrammaticallySource = 'calendar-programmatically-change-example
         CalendarFormExamplesComponent,
         CalendarDisabledNavigationButtonsExampleComponent,
         CalendarMultiExampleComponent,
-        CalendarMultiRangeExampleComponent
+        CalendarMultiRangeExampleComponent,
+        CalendarLegendExampleComponent
     ]
 })
 export class CalendarDocsComponent {
@@ -358,6 +363,21 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarProgrammaticallyChangeExampleComponent',
             fileName: 'calendar-programmatically-change-example',
             code: getAssetFromModuleAssets(calendarProgrammaticallySource)
+        }
+    ];
+
+    calendarLegendSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarLegendExampleComponent',
+            fileName: 'calendar-legend-example',
+            code: getAssetFromModuleAssets(calendarLegendSource)
+        },
+        {
+            language: 'html',
+            component: 'CalendarLegendExampleComponent',
+            fileName: 'calendar-legend-example',
+            code: getAssetFromModuleAssets(calendarLegendSourceHtml)
         }
     ];
 }
