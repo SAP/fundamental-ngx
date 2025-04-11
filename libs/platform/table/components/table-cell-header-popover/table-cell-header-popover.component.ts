@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
+    ElementRef,
     Input,
     QueryList,
     TemplateRef,
@@ -138,9 +139,23 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     }
 
     /** @hidden */
+    mapColumnAlignToPlacement(columnAlignValue: Nullable<ColumnAlignValue>): Placement {
+        switch (columnAlignValue) {
+            case ColumnAlign.START:
+                return PopoverPlacement.BOTTOM_START;
+            case ColumnAlign.CENTER:
+                return PopoverPlacement.BOTTOM;
+            case ColumnAlign.END:
+                return PopoverPlacement.BOTTOM_END;
+            default:
+                return PopoverPlacement.AUTO;
+        }
+    }
+
+    /** @hidden */
     _setColumnHeaderSortBy(field: TableColumn['key'], direction: SortDirection): void {
         this._tableService.setSort([{ field, direction }]);
-        this.popover?.close();
+        this._closePopover();
     }
 
     /** @hidden */
@@ -169,19 +184,19 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
         };
 
         this._tableService.addFilters([collectionFilter]);
-        this.popover?.close();
+        this._closePopover();
     }
 
     /** @hidden */
     _freeze(): void {
         this._table.freezeToColumn(this.column.name, this.column.endFreezable);
-        this.popover?.close();
+        this._closePopover();
     }
 
     /** @hidden */
     _unFreeze(): void {
         this._table.unfreeze(this.column.name, this.column.endFreezable);
-        this.popover?.close();
+        this._closePopover();
     }
 
     /** @hidden */
@@ -192,16 +207,10 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    mapColumnAlignToPlacement(columnAlignValue: Nullable<ColumnAlignValue>): Placement {
-        switch (columnAlignValue) {
-            case ColumnAlign.START:
-                return PopoverPlacement.BOTTOM_START;
-            case ColumnAlign.CENTER:
-                return PopoverPlacement.BOTTOM;
-            case ColumnAlign.END:
-                return PopoverPlacement.BOTTOM_END;
-            default:
-                return PopoverPlacement.AUTO;
+    _closePopover(): void {
+        if (this.popover) {
+            this.popover.close();
+            (this.popover.trigger as ElementRef).nativeElement.focus();
         }
     }
 }
