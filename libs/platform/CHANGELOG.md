@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.12...v0.55.6-rc.13) (2025-04-11)
+
+
+### Bug Fixes
+
+* **platform:** keyboard improvements for table filtering and header popover ([#13195](https://github.com/SAP/fundamental-ngx/issues/13195)) ([2620830](https://github.com/SAP/fundamental-ngx/commit/2620830f72d71dac6167af678c6f0a279ad8a55d))
+
+
+
+
+
 ## [0.55.6-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.11...v0.55.6-rc.12) (2025-04-11)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
