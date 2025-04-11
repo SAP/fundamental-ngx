@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü',
         cancel: 'İptal',
-        search: 'Ara'
+        search: 'Ara',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Kaydırıcı asgari değeri: {min}; azami değeri: {max}',

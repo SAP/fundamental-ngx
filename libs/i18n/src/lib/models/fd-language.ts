@@ -187,6 +187,9 @@ export interface FdLanguage {
         collapsedItemMenuLabel: FdLanguageKey;
         cancel: FdLanguageKey;
         search: FdLanguageKey;
+        assistiveTools: FdLanguageKey;
+        backButtonLabel: FdLanguageKey;
+        navigationButtonLabel: FdLanguageKey;
     };
     coreSlider: {
         /**

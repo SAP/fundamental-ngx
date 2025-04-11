@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Minimeret elementmenu',
         cancel: 'Annuller',
-        search: 'Søg'
+        search: 'Søg',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Skyderens minimumsværdi er {min}, maksimumsværdi er {max}',

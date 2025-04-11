@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Sažeti meni stavke',
         cancel: 'Otkaži',
-        search: 'Traži'
+        search: 'Traži',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna vrednost klizača je {min}, maksimalna vrednost je {max}',

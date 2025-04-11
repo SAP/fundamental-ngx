@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'قائمة عناصر تم طيها',
         cancel: 'إلغاء',
-        search: 'بحث'
+        search: 'بحث',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'الحد الأدنى لقيمة شريط التمرير هو {min}، والحد الأقصى للقيمة هو {max}',

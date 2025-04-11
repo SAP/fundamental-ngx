@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreCalendar: {
@@ -112,7 +111,10 @@ export default {
         collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
-        assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]'
+
+        assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: '[[[Ŝĺįƌēŗ ɱįŋįɱűɱ ʋąĺűē įş {ɱįŋ}, ɱąχįɱűɱ ʋąĺűē įş {ɱąχ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',

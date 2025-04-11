@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '非表示の項目メニュー',
         cancel: 'キャンセル',
-        search: '検索'
+        search: '検索',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'スライダの最小値: {min}、最大値: {max}',

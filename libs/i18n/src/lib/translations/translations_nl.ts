@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menu-item samengevouwen',
         cancel: 'Annuleren',
-        search: 'Zoeken'
+        search: 'Zoeken',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimumwaarde voor schuifregelaar is {min}, maximumwaarde is {max}',
