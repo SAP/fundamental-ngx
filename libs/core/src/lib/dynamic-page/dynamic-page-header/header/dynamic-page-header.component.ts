@@ -68,7 +68,7 @@ export class DynamicPageHeaderComponent
 
     /** Heading level of the dynamic page title. */
     @Input()
-    headingLevel = 2;
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6> = 2;
 
     /**
      * @hidden
