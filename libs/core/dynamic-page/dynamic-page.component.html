@@ -31,11 +31,7 @@
         <ng-content select="fd-dynamic-page-subheader"></ng-content>
     </header>
     <ng-content select="fd-tab-list"></ng-content>
-    <ng-content select="fd-wizard">
-        <div>
-            <ng-content select="fd-dynamic-page-content"></ng-content>
-        </div>
-    </ng-content>
+    <ng-content select="fd-wizard"></ng-content>
     <ng-content select="fdp-icon-tab-bar"></ng-content>
     @if (!_tabComponent) {
         <div fd-scrollbar>
