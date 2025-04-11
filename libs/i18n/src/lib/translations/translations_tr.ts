@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreCalendar: {
@@ -599,6 +600,8 @@ export default {
         groupHeaderTitle: 'Genişlet/Daralt',
         groupAriaDescription: 'Bildirim Grubu',
         groupAriaDescriptionExpanded: 'genişletildi',
-        groupAriaDescriptionCollapsed: 'daraltıldı'
+        groupAriaDescriptionCollapsed: 'daraltıldı',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

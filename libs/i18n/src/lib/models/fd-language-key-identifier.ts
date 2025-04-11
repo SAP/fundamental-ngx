@@ -489,4 +489,6 @@ export type FdLanguageKeyIdentifier =
     | 'coreNotification.groupHeaderTitle'
     | 'coreNotification.groupAriaDescription'
     | 'coreNotification.groupAriaDescriptionExpanded'
-    | 'coreNotification.groupAriaDescriptionCollapsed';
+    | 'coreNotification.groupAriaDescriptionCollapsed'
+    | 'coreNotification.triggerMoreLabel'
+    | 'coreNotification.triggerLessLabel';

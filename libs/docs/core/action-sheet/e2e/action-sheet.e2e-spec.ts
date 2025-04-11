@@ -1,6 +1,3 @@
-import { alertMessages, compactValue } from './action-sheet-content';
-import { ActionSheetPo } from './action-sheet.po';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     checkElArrIsClickable,
     click,
@@ -11,6 +8,8 @@ import {
     waitForElDisplayed,
     waitForNotDisplayed
 } from '../../../../../e2e';
+import { alertMessages, compactValue } from './action-sheet-content';
+import { ActionSheetPo } from './action-sheet.po';
 
 describe('Action sheet test suite', () => {
     const actionSheetPage = new ActionSheetPo();

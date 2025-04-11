@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
@@ -599,6 +600,8 @@ export default {
         groupHeaderTitle: 'Розгорнути/згорнути',
         groupAriaDescription: 'Група сповіщень',
         groupAriaDescriptionExpanded: 'розгорнуто',
-        groupAriaDescriptionCollapsed: 'згорнуто'
+        groupAriaDescriptionCollapsed: 'згорнуто',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -340,9 +340,6 @@
             },
             "defaultConfiguration": "hot-module-replacement",
             "dependsOn": ["^compile-typedoc"]
-        },
-        "lint": {
-            "executor": "@nx/eslint:lint"
         }
     }
 }

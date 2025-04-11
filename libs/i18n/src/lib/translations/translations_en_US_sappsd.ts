@@ -112,6 +112,8 @@ export default {
         collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+      
+      
         assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]',
         backButtonLabel: 'Back',
         navigationButtonLabel: 'Navigation'
@@ -607,6 +609,8 @@ export default {
         groupHeaderTitle: '[[[Ĕχρąŋƌ/Ĉŏĺĺąρşē∙∙∙∙]]]',
         groupAriaDescription: '[[[Ńŏţįƒįċąţįŏŋ Ģŗŏűρ∙∙∙∙∙∙]]]',
         groupAriaDescriptionExpanded: '[[[ēχρąŋƌēƌ∙∙∙∙∙∙]]]',
-        groupAriaDescriptionCollapsed: '[[[ċŏĺĺąρşēƌ∙∙∙∙∙]]]'
+        groupAriaDescriptionCollapsed: '[[[ċŏĺĺąρşēƌ∙∙∙∙∙]]]',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

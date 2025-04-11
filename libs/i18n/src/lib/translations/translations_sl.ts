@@ -599,6 +599,8 @@ export default {
         groupHeaderTitle: 'Razširitev/strnitev',
         groupAriaDescription: 'Skupina obvestil',
         groupAriaDescriptionExpanded: 'razširjeno',
-        groupAriaDescriptionCollapsed: 'strnjeno'
+        groupAriaDescriptionCollapsed: 'strnjeno',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

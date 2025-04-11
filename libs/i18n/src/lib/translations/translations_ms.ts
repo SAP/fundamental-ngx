@@ -598,6 +598,8 @@ export default {
         groupHeaderTitle: 'Kembangkan/Runtuhkan',
         groupAriaDescription: 'Kumpulan Pemberitahuan',
         groupAriaDescriptionExpanded: 'dikembangkan',
-        groupAriaDescriptionCollapsed: 'diruntuhkan'
+        groupAriaDescriptionCollapsed: 'diruntuhkan',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreCalendar: {
@@ -596,6 +597,8 @@ export default {
         groupHeaderTitle: '펼치기/접기',
         groupAriaDescription: '통지 그룹',
         groupAriaDescriptionExpanded: '펼친 상태',
-        groupAriaDescriptionCollapsed: '접힌 상태'
+        groupAriaDescriptionCollapsed: '접힌 상태',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

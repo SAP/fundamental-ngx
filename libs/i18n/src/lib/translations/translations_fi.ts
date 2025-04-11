@@ -599,6 +599,8 @@ export default {
         groupHeaderTitle: 'Laajenna/tiivistä',
         groupAriaDescription: 'Ilmoitusryhmä',
         groupAriaDescriptionExpanded: 'laajennettu',
-        groupAriaDescriptionCollapsed: 'tiivistetty'
+        groupAriaDescriptionCollapsed: 'tiivistetty',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

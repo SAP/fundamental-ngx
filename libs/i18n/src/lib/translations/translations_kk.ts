@@ -599,6 +599,8 @@ export default {
         groupHeaderTitle: 'Жаю/жию',
         groupAriaDescription: 'Хабарландыру тобы',
         groupAriaDescriptionExpanded: 'жайылған',
-        groupAriaDescriptionCollapsed: 'жиылған'
+        groupAriaDescriptionCollapsed: 'жиылған',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

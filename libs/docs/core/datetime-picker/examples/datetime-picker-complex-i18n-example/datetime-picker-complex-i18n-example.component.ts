@@ -51,13 +51,13 @@ const placeholders = new Map([
     imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {
+    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<FdDate>;
+
     locale = 'en-ca';
 
     date = FdDate.getNow();
 
     placeholder = placeholders.get(this.locale) as string;
-
-    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<FdDate>;
 
     constructor(
         private datetimeAdapter: DatetimeAdapter<FdDate>,

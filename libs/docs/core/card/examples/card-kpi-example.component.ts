@@ -23,10 +23,10 @@ import { GoogleChartService, Visualization } from './card-kpi-google-charts.serv
     imports: [CardModule, ObjectStatusComponent, BusyIndicatorComponent]
 })
 export class CardKpiExampleComponent implements AfterViewInit {
-    isLoading = true;
-
     @ViewChild('chart')
     private chartContainer: ElementRef<HTMLElement>;
+
+    isLoading = true;
 
     constructor(
         private googleChartService: GoogleChartService,

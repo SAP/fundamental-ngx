@@ -51,6 +51,10 @@ export class WizardNgForExampleComponent {
     @ViewChild('overlay')
     overlay: ElementRef<HTMLElement>;
 
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    wizardStepComponents: QueryList<WizardStepComponent>;
+
     /**
      * documentation related property
      * specifies if the doc example is rendered in fullscreen or not
@@ -84,10 +88,6 @@ export class WizardNgForExampleComponent {
             contentText: 'Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar.'
         }
     ];
-
-    /** @hidden */
-    @ViewChildren(WizardStepComponent)
-    wizardStepComponents: QueryList<WizardStepComponent>;
 
     constructor(private _wizardService: WizardService) {}
 

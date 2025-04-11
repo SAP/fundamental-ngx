@@ -91,6 +91,12 @@ export class UploadCollectionComplexExampleComponent {
     @Input()
     uploaderFiles: File[];
 
+    @ContentChildren(UploadCollectionItemDirective, { descendants: true })
+    uploadCollectionItems: QueryList<UploadCollectionItemDirective>;
+
+    @ViewChild('fileUploader')
+    fileUploader: FileUploaderComponent;
+
     searchTerm: string;
 
     files: FileItem[] = [
@@ -105,12 +111,6 @@ export class UploadCollectionComplexExampleComponent {
         },
         { fileName: 'File_Name_3', extension: 'pdf', icon: 'customer', selected: false }
     ];
-
-    @ContentChildren(UploadCollectionItemDirective, { descendants: true })
-    uploadCollectionItems: QueryList<UploadCollectionItemDirective>;
-
-    @ViewChild('fileUploader')
-    fileUploader: FileUploaderComponent;
 
     private readonly _rangeSelector = new RangeSelector();
 

@@ -30,9 +30,7 @@ describe('multi-combobox test suite', () => {
         dialogButton,
         dialogListItem,
         selectedDialogItem,
-        dialogInput,
-        mobileExpandButton,
-        showSelectedItemsBtn
+        dialogInput
     } = multiComboboxPage;
     const mobileExample = 6;
     const nMoreExample = 5;
@@ -125,7 +123,7 @@ describe('multi-combobox test suite', () => {
                     await click(inputField, i);
                     await sendKeys(searchValue);
 
-                    if (i == inputCount - 2) {
+                    if (i === inputCount - 2) {
                         await browser.pause(500);
                     }
 

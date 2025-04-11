@@ -44,6 +44,12 @@ interface MaxLengthErrorModel {
     ]
 })
 export class FormContainerExampleComponent {
+    @ViewChild('personal', { read: FormGroupDirective })
+    personalForm: FormGroupDirective;
+
+    @ViewChild('business', { read: FormGroupDirective })
+    businessForm: FormGroupDirective;
+
     personalInfoForm: FormGroup;
     businessInfoForm: FormGroup;
     submitted = false;
@@ -55,12 +61,6 @@ export class FormContainerExampleComponent {
 
     maxErrorModel: MaxErrorModel;
     maxLengthErrorModel: MaxLengthErrorModel;
-
-    @ViewChild('personal', { read: FormGroupDirective })
-    personalForm: FormGroupDirective;
-
-    @ViewChild('business', { read: FormGroupDirective })
-    businessForm: FormGroupDirective;
 
     constructor(private readonly _cd: ChangeDetectorRef) {
         this.personalInfoForm = new FormGroup({});

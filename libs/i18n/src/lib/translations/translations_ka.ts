@@ -575,5 +575,9 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'მენიუს ღილაკი'
+    },
+    coreNotification: {
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

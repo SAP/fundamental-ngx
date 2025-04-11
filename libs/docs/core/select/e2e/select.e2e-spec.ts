@@ -11,7 +11,7 @@ import {
 } from '../../../../../e2e';
 import { SelectPo } from './select.po';
 
-fdescribe('Select component:', () => {
+describe('Select component:', () => {
     const selectPage = new SelectPo();
     const {
         selectModesExample,

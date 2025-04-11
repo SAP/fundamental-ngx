@@ -599,6 +599,8 @@ export default {
         groupHeaderTitle: 'Udvid/minimer',
         groupAriaDescription: 'Meddelelsesgruppe',
         groupAriaDescriptionExpanded: 'udvidet',
-        groupAriaDescriptionCollapsed: 'minimeret'
+        groupAriaDescriptionCollapsed: 'minimeret',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

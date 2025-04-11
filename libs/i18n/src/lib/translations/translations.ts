@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
     coreCalendar: {
@@ -598,6 +599,8 @@ export default {
         groupHeaderTitle: 'Expand/Collapse',
         groupAriaDescription: 'Notification Group',
         groupAriaDescriptionExpanded: 'expanded',
-        groupAriaDescriptionCollapsed: 'collapsed'
+        groupAriaDescriptionCollapsed: 'collapsed',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -35,13 +35,13 @@ const CELL_DATA: CellData[] = [
     imports: [FocusableGridDirective, TableModule, LinkComponent, IconComponent, ButtonComponent, UpperCasePipe]
 })
 export class TableCustomColumnsExampleComponent {
+    @ViewChild(TableComponent)
+    tableComponent: TableComponent;
+
     displayedColumns: string[];
     originalDisplayedColumns: DisplayedColumn[];
     dataSource = CELL_DATA;
     dialogRef: DialogRef;
-
-    @ViewChild(TableComponent)
-    tableComponent: TableComponent;
 
     constructor(private _dialogService: DialogService) {
         this.displayedColumns = Object.keys(this.dataSource[0]);

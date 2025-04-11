@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
     coreCalendar: {
@@ -598,6 +599,8 @@ export default {
         groupHeaderTitle: 'Expandera/komprimera',
         groupAriaDescription: 'Aviseringsgrupp',
         groupAriaDescriptionExpanded: 'expandera',
-        groupAriaDescriptionCollapsed: 'komprimera'
+        groupAriaDescriptionCollapsed: 'komprimera',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

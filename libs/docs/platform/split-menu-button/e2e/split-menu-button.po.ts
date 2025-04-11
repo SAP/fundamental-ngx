@@ -2,7 +2,6 @@ import { getText, PlatformBaseComponentPo, waitForElDisplayed } from '../../../.
 import { outputLabel } from './split-menu-button-page-contents';
 
 export class SplitMenuButtonPo extends PlatformBaseComponentPo {
-    private url = '/split-menu-button';
     root = '#page-content';
 
     arrowBtnArr = 'component-example button:nth-of-type(2)';
@@ -17,6 +16,8 @@ export class SplitMenuButtonPo extends PlatformBaseComponentPo {
     iconExSelectionBtnArr = 'fdp-platform-split-button-icons-example button:first-of-type';
     iconExArrowBtnArr = 'fdp-platform-split-button-icons-example button:nth-of-type(2)';
     iconBtnAttrArr = 'fdp-platform-split-button-icons-example fdp-split-menu-button';
+
+    private url = '/split-menu-button';
 
     async checkBtnSelectionChange(array, btnArray, expectation): Promise<void> {
         for (let i = 0; i < array.length; i++) {

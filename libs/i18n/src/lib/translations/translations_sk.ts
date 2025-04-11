@@ -599,6 +599,8 @@ export default {
         groupHeaderTitle: 'Rozbaliť/zbaliť',
         groupAriaDescription: 'Skupina oznámení',
         groupAriaDescriptionExpanded: 'rozbalené',
-        groupAriaDescriptionCollapsed: 'zbalené'
+        groupAriaDescriptionCollapsed: 'zbalené',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

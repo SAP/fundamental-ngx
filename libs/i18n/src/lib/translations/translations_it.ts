@@ -600,6 +600,8 @@ export default {
         groupHeaderTitle: 'Espandi/comprimi',
         groupAriaDescription: 'Gruppo di notifiche',
         groupAriaDescriptionExpanded: 'espanso',
-        groupAriaDescriptionCollapsed: 'compresso'
+        groupAriaDescriptionCollapsed: 'compresso',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

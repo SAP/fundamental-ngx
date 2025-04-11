@@ -1,4 +1,4 @@
-import { Directive, input } from '@angular/core';
+import { Directive, ElementRef, inject, input } from '@angular/core';
 import { FD_NOTIFICATION_TITLE } from '../token';
 
 let notificationTitleCounter = 0;
@@ -30,4 +30,7 @@ export class NotificationTitleDirective {
      * if not set, a default value is provided
      */
     id = input('fd-notification-title-' + ++notificationTitleCounter);
+
+    /** @hidden */
+    elementRef = inject(ElementRef);
 }

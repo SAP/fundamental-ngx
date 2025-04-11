@@ -600,6 +600,8 @@ export default {
         groupHeaderTitle: 'Επέκταση/Σύμπτηξη',
         groupAriaDescription: 'Ομάδα Ειδοποιήσεων',
         groupAriaDescriptionExpanded: 'επεκτάθηκε',
-        groupAriaDescriptionCollapsed: 'συμπτύχθηκε'
+        groupAriaDescriptionCollapsed: 'συμπτύχθηκε',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -575,5 +575,9 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'मेनू बटन'
+    },
+    coreNotification: {
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreCalendar: {
@@ -597,6 +598,8 @@ export default {
         groupHeaderTitle: 'توسيع/طي',
         groupAriaDescription: 'مجموعة الإشعارات',
         groupAriaDescriptionExpanded: 'موسَّع',
-        groupAriaDescriptionCollapsed: 'تم طيه'
+        groupAriaDescriptionCollapsed: 'تم طيه',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

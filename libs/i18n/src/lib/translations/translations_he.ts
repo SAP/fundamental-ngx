@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
     coreCalendar: {
@@ -596,6 +597,8 @@ export default {
         groupHeaderTitle: 'הרחבה/כיווץ',
         groupAriaDescription: 'קבוצת הודעות',
         groupAriaDescriptionExpanded: 'מורחב',
-        groupAriaDescriptionCollapsed: 'מצומצם'
+        groupAriaDescriptionCollapsed: 'מצומצם',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -40,9 +40,6 @@ export class VariantManagementDefaultExampleComponent {
 
     source: ExampleItem[] = ITEMS;
 
-    trackBy(_: number, item: ExampleItem): number {
-        return item.id;
-    }
     variants: Variant<CombinedVariantManagementPreset>[] = [
         {
             isDefault: true,
@@ -109,6 +106,10 @@ export class VariantManagementDefaultExampleComponent {
             }
         }
     ];
+
+    trackBy(_: number, item: ExampleItem): number {
+        return item.id;
+    }
 }
 
 export interface ExampleItem {

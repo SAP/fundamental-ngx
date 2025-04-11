@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class WizardPo extends CoreBaseComponentPo {
-    private url = '/wizard';
-
     defaultExample = 'fd-wizard-example ';
     customizableExample = 'fd-wizard-customizable-example ';
     mobileExample = 'fd-wizard-mobile-example ';
@@ -39,6 +37,8 @@ export class WizardPo extends CoreBaseComponentPo {
 
     continueButton = this.containerFooter + '.fd-button--emphasized';
     cancelButton = this.containerFooter + '.fd-button--transparent';
+
+    private url = '/wizard';
 
     async open(): Promise<void> {
         await super.open(this.url);
