@@ -11,7 +11,6 @@ import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-calendar-legend-example',
-    standalone: true,
     templateUrl: './calendar-legend-example.component.html',
     providers: [
         {

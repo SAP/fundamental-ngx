@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ContentChildren, Input, QueryList, input } from '@angular/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { LegendItemComponent } from './calendar-legend-item.component';
 
@@ -43,4 +44,6 @@ export class CalendarLegendComponent<D> {
 
     /** Element getting focused */
     focusedElement = input<string>('');
+
+    constructor(public datetimeAdapter: DatetimeAdapter<FdDate>) {}
 }
