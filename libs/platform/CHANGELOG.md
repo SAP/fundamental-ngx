@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.7-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.0...v0.55.7-rc.1) (2025-04-12)
+
+
+### Bug Fixes
+
+* **platform:** search field should have aria-controls only if it has a menu ([#13205](https://github.com/SAP/fundamental-ngx/issues/13205)) ([133088e](https://github.com/SAP/fundamental-ngx/commit/133088e83b650f5aada52a358c4d0fdf657a5ca7))
+
+
+
+
+
 ## [0.55.7-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.6...v0.55.7-rc.0) (2025-04-12)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
