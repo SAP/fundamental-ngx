@@ -52,6 +52,10 @@ fd-popover-body {
 
         &--inline-help.fd-inline-help__content {
             white-space: initial;
+
+            > .fd-scrollbar {
+                border-radius: 0;
+            }
         }
 
         &.fd-form-message {
