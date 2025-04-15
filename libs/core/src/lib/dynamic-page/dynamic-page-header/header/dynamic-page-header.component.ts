@@ -66,6 +66,10 @@ export class DynamicPageHeaderComponent
     @Input()
     subtitleWrap = false;
 
+    /** Heading level of the dynamic page title. */
+    @Input()
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6> = 2;
+
     /**
      * @hidden
      * Template used to provide a custom content for the subtitle page header area.

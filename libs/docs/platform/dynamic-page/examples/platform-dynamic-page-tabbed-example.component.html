@@ -4,7 +4,12 @@
 <button fd-button (click)="openPage(true)">Click to open full screen</button>
 <div class="overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <fdp-dynamic-page [stackContent]="stackedTabs" [background]="background" (tabChange)="onTabChanged($event)">
+        <fdp-dynamic-page
+            [headingLevel]="1"
+            [stackContent]="stackedTabs"
+            [background]="background"
+            (tabChange)="onTabChanged($event)"
+        >
             <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
                 <!-- breadcrumb content -->
                 <ng-template #breadcrumbTemplate>
