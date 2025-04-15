@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.53](https://github.com/SAP/fundamental-ngx/compare/v0.43.52...v0.43.53) (2025-04-15)
+
+
+### Bug Fixes
+
+* **core,platform:** add input for dynamic page header title heading level ([#13192](https://github.com/SAP/fundamental-ngx/issues/13192)) ([72110f0](https://github.com/SAP/fundamental-ngx/commit/72110f0f391180d949441b97f59c21cb536f04c7))
+* **core,platform:** combobox/multi-input/multi-combobox escape key handling ([#13167](https://github.com/SAP/fundamental-ngx/issues/13167)) ([92affbc](https://github.com/SAP/fundamental-ngx/commit/92affbc7c3a24f0befe1b9e7e175073de45ed86b))
+* **core,platform:** move token count announcer logic to tokenizer ([#13175](https://github.com/SAP/fundamental-ngx/issues/13175)) ([e0b04f9](https://github.com/SAP/fundamental-ngx/commit/e0b04f9079b2bd85c61b4a3c84cf59b5ab286a44))
+* **core:** datepicker should not display invalid date text ([#13165](https://github.com/SAP/fundamental-ngx/issues/13165)) ([1393ef5](https://github.com/SAP/fundamental-ngx/commit/1393ef5e0d498db813db0c5998b2c17690e37768))
+* **core:** incorrect roles for vertical navigation ([#13170](https://github.com/SAP/fundamental-ngx/issues/13170)) ([1831e8f](https://github.com/SAP/fundamental-ngx/commit/1831e8f12b23574c85d4e10272f0d364b05fd6dc))
+
+
+
+
+
 ## [0.43.52](https://github.com/SAP/fundamental-ngx/compare/v0.43.51...v0.43.52) (2025-03-19)
 
 
