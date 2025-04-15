@@ -27,6 +27,7 @@ import { NestedListExpandIconComponent } from '../nested-list-directives';
 export class NestedListContentDirective implements AfterContentInit {
     /** Whether this element is selected*/
     @Input()
+    @HostBinding('attr.aria-selected')
     @HostBinding('class.is-selected')
     selected = false;
 
