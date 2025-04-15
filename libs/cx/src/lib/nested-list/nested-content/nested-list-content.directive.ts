@@ -27,6 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     /** Whether this element is selected*/
     @Input()
+    @HostBinding('attr.aria-selected')
     @HostBinding('class.is-selected')
     selected = false;
 
