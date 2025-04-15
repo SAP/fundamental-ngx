@@ -5,5 +5,23 @@
 .fd-input.is-readonly,
 .fd-input[aria-readonly='true'],
 .fd-input[readonly] {
-    z-index: 1;
+    z-index: 1 !important;
+}
+
+.fd-input.is-readonly.is-hover,
+.fd-input.is-readonly:hover,
+.fd-input[aria-readonly='true'].is-hover,
+.fd-input[aria-readonly='true']:hover,
+.fd-input[readonly].is-hover,
+.fd-input[readonly]:hover {
+    z-index: 1 !important;
+}
+
+.fd-input.is-readonly.is-focus,
+.fd-input.is-readonly:focus,
+.fd-input[aria-readonly='true'].is-focus,
+.fd-input[aria-readonly='true']:focus,
+.fd-input[readonly].is-focus,
+.fd-input[readonly]:focus {
+    z-index: 1 !important;
 }
