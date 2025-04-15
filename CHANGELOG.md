@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.7-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.1...v0.55.7-rc.2) (2025-04-15)
+
+
+### Bug Fixes
+
+* **core:** fix for readonly input z-index again ([#13209](https://github.com/SAP/fundamental-ngx/issues/13209)) ([a7c4d0d](https://github.com/SAP/fundamental-ngx/commit/a7c4d0dd398b9e00aab6c4b5fa651ce623e4d05f))
+* **core:** fix the Inline Help text cut corners ([#13210](https://github.com/SAP/fundamental-ngx/issues/13210)) ([b260bd2](https://github.com/SAP/fundamental-ngx/commit/b260bd28ff91127eeb8c275139ca3313ab46a413))
+
+
+
+
+
 ## [0.55.7-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.0...v0.55.7-rc.1) (2025-04-12)
 
 
