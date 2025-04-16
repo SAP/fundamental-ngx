@@ -85,7 +85,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Tree Item {itemDetails}, {index} of {total}{selectedDescription}'
+        linkItemAriaLabel: 'Tree Item {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} more'

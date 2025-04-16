@@ -199,8 +199,8 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
                 item.linkItem.ariaDescribedby = this._nestedListHeader?.id || null;
                 item.linkItem._ariaLabel = this._translationResolver.resolve(lang, 'coreNestedList.linkItemAriaLabel', {
                     itemDetails: item.linkItem.getTitle(),
-                    index: i + 1,
-                    total: this.nestedItems.length,
+                    index: i + 1, // TODO: this property has been deprecated and will be removed from translations
+                    total: this.nestedItems.length, // TODO: this property has been deprecated and will be removed from translations
                     selectedDescription:
                         !this._nestedListStateService.selectable && item.linkItem.selected
                             ? ', ' + this.ariaLabelSelected
