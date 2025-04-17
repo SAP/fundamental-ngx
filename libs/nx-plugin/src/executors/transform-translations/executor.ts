@@ -50,15 +50,17 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
                 { ...prettierConfig, parser: 'typescript' }
             )
         );
-        execSync(`git add ${newFilePath}`);
-        execSync(`git add ${newFileSpecPath}`);
     }
     updateTypings(host, Object.keys(parseProperties(host.read(propertiesFiles[0], 'utf-8') as string)));
-    execSync(`git add libs/i18n/src/lib/models/fd-language-key-identifier.ts`);
     await formatFiles(host);
     const changes = host.listChanges();
     printChanges(changes);
+    // need to call flushChanges because the files to git add have yet to actually change on the filesystem
     flushChanges(host.root, changes);
+    execSync(`git add libs/i18n/src/lib/models/fd-language-key-identifier.ts`);
+    for (const change of changes) {
+        execSync(`git add ${change.path}`);
+    }
     return {
         success: true
     };
