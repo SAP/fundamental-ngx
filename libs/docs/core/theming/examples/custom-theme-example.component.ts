@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import {
@@ -19,32 +19,20 @@ customThemingConfig.defaultTheme = 'fiori_horizon_fonts';
 customThemingConfig.customThemes = [
     {
         id: 'fiori_horizon_fonts',
-        description: 'Fiori theme with Horizon fonts',
-        name: 'Fiori theme with Horizon fonts',
+        description: 'Fiori theme',
+        name: 'Fiori theme',
         theming: {
             themingBasePath: 'assets/theming-base/sap_fiori_3/css_variables.css',
-            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css',
-            themeFontPath: 'sap_horizon_fonts.css'
+            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css'
         }
     },
     {
         id: 'horizon_fiori_fonts',
-        description: 'Horizon theme with Fiori fonts',
-        name: 'Horizon theme with Fiori fonts',
+        description: 'Horizon theme',
+        name: 'Horizon theme',
         theming: {
             themingBasePath: 'assets/theming-base/sap_horizon/css_variables.css',
-            themePath: 'assets/fundamental-styles-theming/sap_horizon.css',
-            themeFontPath: 'sap_fiori_3_fonts.css'
-        }
-    },
-    {
-        id: 'horizon_belize_fonts',
-        description: 'Belize Preview theme with Fiori fonts',
-        name: 'Belize Preview theme with Fiori fonts',
-        theming: {
-            themingBasePath: 'assets/theming-base/sap_belize/css_variables.css',
-            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css',
-            themeFontPath: 'sap_belize_fonts.css'
+            themePath: 'assets/fundamental-styles-theming/sap_horizon.css'
         }
     }
 ];
@@ -63,18 +51,15 @@ customThemingConfig.customThemes = [
     ],
     imports: [ButtonComponent, FormLabelComponent, JsonPipe]
 })
-export class CustomThemeExampleComponent implements OnDestroy {
+export class CustomThemeExampleComponent implements OnDestroy, OnInit {
     themes: CompleteThemeDefinition[];
     currentTheme: CompleteThemeDefinition | null;
-
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private _themingService: ThemingService) {
-        this.themes = this._themingService.getThemes();
-        this._themingService.init();
-        this._themingService.currentTheme
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((theme) => (this.currentTheme = theme));
+    constructor(private _themingService: ThemingService) {}
+
+    ngOnInit(): void {
+        this._initializeThemes();
     }
 
     selectTheme(themeId: string): void {
@@ -84,5 +69,17 @@ export class CustomThemeExampleComponent implements OnDestroy {
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    private _initializeThemes(): void {
+        this.themes = this._themingService.getThemes();
+        this._themingService.init();
+        this._subscribeToThemeChanges();
+    }
+
+    private _subscribeToThemeChanges(): void {
+        this._themingService.currentTheme
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((theme) => (this.currentTheme = theme));
     }
 }

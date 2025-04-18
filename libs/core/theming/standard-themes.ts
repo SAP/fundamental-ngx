@@ -3,33 +3,25 @@ import { ThemeDefinition } from './interfaces/theme.interface';
 export const STANDARD_THEMES: ThemeDefinition[] = [
     {
         id: 'sap_horizon',
-        name: 'Morning Horizon (Light)',
-        theming: {
-            themeFontPath: 'sap_horizon_fonts.css'
-        }
+        name: 'Morning Horizon (Light)'
     },
     {
         id: 'sap_horizon_dark',
-        name: 'Evening Horizon (Dark)',
-        theming: {
-            themeFontPath: 'sap_horizon_fonts.css'
-        }
+        name: 'Evening Horizon (Dark)'
     },
     {
         id: 'sap_horizon_hcb',
         name: 'Horizon High Contrast Black',
-        description: 'Optimized contrast and accessibility for extremely bright environments',
-        theming: {
-            themeFontPath: 'sap_horizon_fonts.css'
-        }
+        description: 'Optimized contrast and accessibility for extremely bright environments'
     },
     {
         id: 'sap_horizon_hcw',
         name: 'Horizon High Contrast White',
-        description: 'Optimized contrast and accessibility for extremely dark environments',
-        theming: {
-            themeFontPath: 'sap_horizon_fonts.css'
-        }
+        description: 'Optimized contrast and accessibility for extremely dark environments'
+    },
+    {
+        id: 'sap_horizon_set',
+        name: 'Horizon Set'
     },
     {
         id: 'sap_fiori_3',
@@ -56,8 +48,8 @@ export const STANDARD_THEMES: ThemeDefinition[] = [
         name: 'Quartz Auto (Depending on the OS Settings)'
     },
     {
-        id: 'sap_belize',
-        name: 'Belize Preview',
-        description: 'Use in regular office environment'
+        id: 'sap_fiori_3_set',
+        name: 'Quartz Set',
+        description: 'Quartz Auto (Depending on the OS Settings)'
     }
 ];
