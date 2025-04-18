@@ -1,7 +1,6 @@
 export interface Schema {
     project: string;
     animations: boolean;
-    fonts: boolean;
     theme:
         | 'sap_fiori_3'
         | 'sap_fiori_3_dark'

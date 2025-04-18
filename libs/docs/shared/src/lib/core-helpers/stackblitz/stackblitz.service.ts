@@ -60,21 +60,16 @@ export class StackblitzService {
             getAsset('./stackblitz/example-stack/tsconfig.json'),
             getAsset('./stackblitz/example-stack/angular.json'),
             getAsset('./stackblitz/example-stack/package.json'),
-            getAsset('./stackblitz/example-stack/stackblitzrc'),
-            getAsset('./stackblitz/example-stack/theming/sap_fiori_3_fonts.css'),
-            getAsset('./stackblitz/example-stack/theming/sap_horizon_fonts.css'),
-            getAsset('./stackblitz/example-stack/theming/sap_belize_fonts.css')
+            getAsset('./stackblitz/example-stack/stackblitzrc')
         )
             .pipe(
                 first(),
-                tap(([styles, tsconfig, angular, packageJson, stackblitzrc, fioriFonts, horizonFonts]) => {
+                tap(([styles, tsconfig, angular, packageJson, stackblitzrc]) => {
                     this.styles = styles;
                     this.tsconfig = tsconfig;
                     this.angular = angular;
                     this.packageJson = this._setDependencies(packageJson);
                     this.stackblitzrc = stackblitzrc;
-                    this.fioriFonts = fioriFonts;
-                    this.horizonFonts = horizonFonts;
                 })
             )
             .subscribe();
@@ -86,9 +81,6 @@ export class StackblitzService {
                 // Main file content will be populated later when the project structure is formed.
                 'src/main.ts': '',
                 'src/styles.scss': this.styles,
-                'src/theming/sap_fiori_3_fonts.css': this.fioriFonts,
-                'src/theming/sap_horizon_fonts.css': this.horizonFonts,
-                'src/theming/sap_belize_fonts.css': this.horizonFonts,
                 'angular.json': this.angular,
                 'tsconfig.json': this.tsconfig,
                 'package.json': this.packageJson,
@@ -157,7 +149,6 @@ export class StackblitzService {
     <head>
         <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_horizon.css" />
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
     </head>
     <body>

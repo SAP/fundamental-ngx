@@ -15,15 +15,6 @@
         <p>For the correct work developers would need to modify their <code>angular.json</code> as such:</p>
         <p>For <code>assets</code> array developers would need to add this part of the code:</p>
         <fd-code-snippet [file]="assetsChunk"></fd-code-snippet>
-        <p>If application should have ability to change theme fonts, additional changes are needed:</p>
-        <ol>
-            <li>Create <code>[themeName]_fonts.css</code> files in your application folder;</li>
-            <li>
-                Adjust <code>styles</code> array in <code>angular.json</code> to include these css files during
-                application build:
-            </li>
-        </ol>
-        <fd-code-snippet [file]="stylesChunk"></fd-code-snippet>
         <fd-message-strip [dismissible]="false" type="information">
             <b>Note:</b> these changes are automatically applied if you use <code>ng add</code>.
         </fd-message-strip>

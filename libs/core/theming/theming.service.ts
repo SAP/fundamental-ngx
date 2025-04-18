@@ -76,6 +76,8 @@ export class ThemingService {
         }
 
         const mergedThemes = this._formatProvidedThemes(this.config.customThemes);
+        console.log('mergedThemes', mergedThemes);
+
         this._availableThemes = new Map<string, CompleteThemeDefinition>(
             mergedThemes.map((theme) => [theme.id, theme])
         );
@@ -106,6 +108,8 @@ export class ThemingService {
      */
     setTheme(themeId: string): boolean {
         const theme = this._availableThemes.get(themeId);
+        console.log('themeId', themeId);
+        console.log('theme', theme?.theming);
 
         if (!theme) {
             console.warn(
@@ -116,10 +120,6 @@ export class ThemingService {
 
         this._setThemeResource('base-theme', theme.theming.themingBasePath);
         this._setThemeResource('custom-theme', theme.theming.themePath);
-
-        if (!this.config.excludeThemingFonts) {
-            this._setThemeResource('fonts', theme.theming.themeFontPath);
-        }
 
         this._currentThemeSubject.next(theme);
 
@@ -200,8 +200,7 @@ export class ThemingService {
         const existingConfig = theme.theming || {};
         const defaultConfig: CompleteThemingResource = {
             themingBasePath: `assets/theming-base/${theme.id}/css_variables.css`,
-            themePath: `assets/fundamental-styles-theming/${theme.id}.css`,
-            themeFontPath: `${this.config.defaultFontFile}_fonts.css`
+            themePath: `assets/fundamental-styles-theming/${theme.id}.css`
         };
 
         return Object.assign(defaultConfig, existingConfig);

@@ -58,8 +58,4 @@ export interface CompleteThemingResource {
      * Theming css file path. Usually a path for the fundamental-styles css variables file.
      */
     themePath: string;
-    /**
-     * Theme icons css file path.
-     */
-    themeFontPath: string;
 }

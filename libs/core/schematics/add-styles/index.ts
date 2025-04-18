@@ -15,10 +15,6 @@ function addStylesToConfig(options: Schema): Rule {
     return async (tree: Tree, context: SchematicContext) => {
         try {
             const additionalStyles = ['./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css'];
-
-            if (options.fonts) {
-                additionalStyles.push('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
-            }
             const buildTarget = await getProjectBuildTarget(tree, options.project);
             const stylesArray: AssetPattern[] = (buildTarget.options?.styles as any) || [];
             let stylesUpdated = false;
@@ -36,10 +32,6 @@ function addStylesToConfig(options: Schema): Rule {
 
             if (!stylesUpdated) {
                 context.logger.info(`✅️ Found duplicate styles in angular.json. Skipping.`);
-
-                if (options.fonts) {
-                    context.logger.info(`✅️ Found duplicate font styles to angular.json.`);
-                }
                 const workspace = await getWorkspaceDefinition(tree);
                 await updateWorkspaceDefinition(tree, workspace);
                 return;
@@ -58,10 +50,6 @@ function addStylesToConfig(options: Schema): Rule {
         }
 
         context.logger.info(`✅️ Added styles to angular.json.`);
-
-        if (options.fonts) {
-            context.logger.info(`✅️ Added font styles to angular.json.`);
-        }
     };
 }
 
@@ -78,8 +66,13 @@ function addAssetsToConfig(options: Schema): Rule {
                 },
                 {
                     glob: '**/*',
-                    input: './node_modules/fundamental-styles/dist/theming/',
-                    output: './assets/fundamental-styles-theming/'
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/',
+                    output: './assets/theming-base/baseTheme/fonts/'
+                },
+                {
+                    glob: '**/*',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/',
+                    output: './assets/theming-base/sap_horizon/fonts/'
                 }
             ];
             const buildTarget = await getProjectBuildTarget(tree, options.project);

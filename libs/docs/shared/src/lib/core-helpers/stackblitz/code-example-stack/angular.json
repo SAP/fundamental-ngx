@@ -44,6 +44,16 @@
                             },
                             {
                                 "glob": "**/*",
+                                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/",
+                                "output": "./assets/theming-base/baseTheme/fonts/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/horizon/fonts/",
+                                "output": "./assets/theming-base/horizon/fonts/"
+                            },
+                            {
+                                "glob": "**/*",
                                 "input": "./node_modules/fundamental-styles/dist/theming/",
                                 "output": "./assets/fundamental-styles-theming/"
                             }
@@ -53,25 +63,7 @@
                         "outputPath": "dist",
                         "polyfills": ["zone.js"],
                         "scripts": [],
-                        "styles": [
-                            "node_modules/fundamental-styles/dist/icon.css",
-                            "src/styles.scss",
-                            {
-                                "input": "src/theming/sap_fiori_3_fonts.css",
-                                "inject": false,
-                                "bundleName": "sap_fiori_3_fonts"
-                            },
-                            {
-                                "input": "src/theming/sap_horizon_fonts.css",
-                                "inject": false,
-                                "bundleName": "sap_horizon_fonts"
-                            },
-                            {
-                                "input": "src/theming/sap_belize_fonts.css",
-                                "inject": false,
-                                "bundleName": "sap_belize_fonts"
-                            }
-                        ],
+                        "styles": ["node_modules/fundamental-styles/dist/icon.css", "src/styles.scss"],
                         "tsConfig": "tsconfig.json"
                     }
                 },

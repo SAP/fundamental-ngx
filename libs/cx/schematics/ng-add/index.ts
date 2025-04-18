@@ -9,7 +9,6 @@ import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 import { hasModuleImport } from '../utils/ng-module-utils';
 
 import { addModuleImportToModule, findModuleFromOptions } from '@angular/cdk/schematics';
-import { defaultFontStyle } from './styles';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
@@ -17,7 +16,7 @@ const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 
 /** Installs cx package and dependencies. */
 export function ngAdd(options: any): Rule {
-    return chain([addDependencies(), addAnimations(options), addStylePathToConfig(options), addFontsToStyles(options)]);
+    return chain([addDependencies(), addAnimations(options), addStylePathToConfig(options)]);
 }
 
 // Adds missing dependencies to the project.
@@ -112,47 +111,6 @@ function addStylePathToConfig(options: any): Rule {
         }
         tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
         console.log(`✅️ Added fundamental-styles path to angular.json.`);
-        return tree;
-    };
-}
-
-// Adds the default fonts import into styles.scss
-function addFontsToStyles(options: any): Rule {
-    return (tree: Tree) => {
-        const stylesFilePath = '/src/styles.scss';
-        const stylesFileContent = tree.read('/src/styles.scss');
-        const defaultFontStyleString = defaultFontStyle;
-        const sapThemingImport = 'node_modules/@sap-theming/theming-base-content/content/Base/baseLib';
-
-        if (options.styleFonts) {
-            if (!stylesFileContent) {
-                console.warn(
-                    // eslint-disable-next-line max-len
-                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.app/?path=/docs/docs-introduction--docs#getting-started`
-                );
-                return tree;
-            }
-
-            try {
-                let stylesFileString: string = stylesFileContent.toString();
-
-                if (!stylesFileString.includes(sapThemingImport)) {
-                    stylesFileString = defaultFontStyleString + stylesFileString;
-                    tree.overwrite(stylesFilePath, stylesFileString);
-                } else {
-                    console.log(`✅️ There are imports from @sap-theming in styles.scss already. Skipping`);
-                    return tree;
-                }
-            } catch (e) {
-                console.error('Error:', e);
-                console.warn(
-                    // eslint-disable-next-line max-len
-                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.app/?path=/docs/docs-introduction--docs#getting-started`
-                );
-                return tree;
-            }
-        }
-
         return tree;
     };
 }

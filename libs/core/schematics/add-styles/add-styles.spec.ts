@@ -29,9 +29,6 @@ describe('add-styles schematic', () => {
         it('should add fd-ngx styles', () => {
             expect(styles).toContain('./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css');
         });
-        it('should add sap fonts', () => {
-            expect(styles).toContain('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
-        });
         it('should add assets', () => {
             const expectedAssets = [
                 JSON.stringify({
@@ -50,13 +47,6 @@ describe('add-styles schematic', () => {
                 expect(factualAssets).toContain(expectedAsset);
             });
         });
-    });
-
-    it('should not add fonts if not requested', async () => {
-        const result = await runner.runSchematic('add-styles', { project: 'test', fonts: false }, tree);
-        const angularJson = result.readJson('angular.json') as Record<string, any>;
-        const styles = angularJson.projects.test.architect.build.options.styles;
-        expect(styles).not.toContain('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
     });
 
     it('should not add styles more than once', async () => {

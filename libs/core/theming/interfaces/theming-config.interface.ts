@@ -10,17 +10,9 @@ export interface ThemingConfig {
      */
     defaultTheme: string;
     /**
-     * Default theme font file. Used as a fallback for themes which do not have own font file.
-     */
-    defaultFontFile: string;
-    /**
      * Whether to exclude default themes from the list of available options.
      */
     excludeDefaultThemes: boolean;
-    /**
-     * Whether to exclude theme font file from inserting it onto the page.
-     */
-    excludeThemingFonts: boolean;
     /**
      * URL Query parameter flag to change theme based on the provided parameter.
      */
