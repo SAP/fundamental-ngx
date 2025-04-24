@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.7-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.3...v0.55.7-rc.4) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.55.7-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.2...v0.55.7-rc.3) (2025-04-24)
+
+
+### Bug Fixes
+
+* **platform:** bug with horizontal and vertical switched for table header cells ([#13225](https://github.com/SAP/fundamental-ngx/issues/13225)) ([4b68add](https://github.com/SAP/fundamental-ngx/commit/4b68add1ff2441878c9a61f3dc31742febfd4014))
+* **platform:** fix platform table aria-haspopup incorrect values ([#13217](https://github.com/SAP/fundamental-ngx/issues/13217)) ([76015ff](https://github.com/SAP/fundamental-ngx/commit/76015fff369c5d50f106de5067d0dc7e44f07d98))
+* **platform:** remove requirement that tableScrolled event only emitted with pageScrolling ([#13226](https://github.com/SAP/fundamental-ngx/issues/13226)) ([355be10](https://github.com/SAP/fundamental-ngx/commit/355be102894262b06413207829c7ae144f2d53cf))
+
+
+
+
+
 ## [0.55.7-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.1...v0.55.7-rc.2) (2025-04-15)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
