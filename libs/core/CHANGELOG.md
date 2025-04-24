@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.5...v0.56.0-rc.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* remove using fundamental-styles fonts settings and use from theming-base ([#13219](https://github.com/SAP/fundamental-ngx/issues/13219)) ([d68cf9a](https://github.com/SAP/fundamental-ngx/commit/d68cf9a70a0c9e40c2d4270bae830a13d4082af8))
+
+
+### BREAKING CHANGES
+
+* theming service doesn't use fundamental-styles fonts settings and rely on theming-base
+
+Co-authored-by: Inna Atanasova <39598672+InnaAtanasova@users.noreply.github.com>
+
+
+
+
+
 ## [0.55.7-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.4...v0.55.7-rc.5) (2025-04-24)
 
 
