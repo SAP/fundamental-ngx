@@ -16,8 +16,8 @@ export class TableCellStylesPipe implements PipeTransform {
         columnWidth: string,
         nextColumnWidthPx: number | null,
         noBorders?: boolean,
-        noBordersY?: boolean,
-        noBordersX?: boolean
+        noHorizontalBorders?: boolean,
+        noVerticalBorders?: boolean
     ): Record<string, number | string> {
         const styles: { [property: string]: number | string } = {};
 
@@ -32,12 +32,12 @@ export class TableCellStylesPipe implements PipeTransform {
             styles[key] = (nextColumnWidthPx || 0).toString();
         }
 
-        if (noBordersY) {
+        if (noHorizontalBorders) {
             styles['border-top'] = 'none';
             styles['border-bottom'] = 'none';
         }
 
-        if (noBordersX) {
+        if (noVerticalBorders) {
             styles['border-left'] = 'none';
             styles['border-right'] = 'none';
         }
