@@ -98,8 +98,8 @@
                     : _tableColumnResizeService.getColumnWidthStyle(column.name)
                     : _tableColumnResizeService.getNextColumnsWidth(column.name)
                     : noBorders
-                    : noVerticalBorders
                     : noHorizontalBorders
+                    : noVerticalBorders
         "
         [fdPopoverTrigger]="(column | isColumnHasHeaderMenu) ? tablePopover.popover : null"
         (cellFocused)="_tableRowService.cellFocused($event)"
