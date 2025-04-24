@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.7-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.3...v0.55.7-rc.4) (2025-04-24)
+
+
+### Bug Fixes
+
+* **core:** remove index/total from cx list translation ([#13215](https://github.com/SAP/fundamental-ngx/issues/13215)) ([5cc1942](https://github.com/SAP/fundamental-ngx/commit/5cc1942ee36b88236c0da36d992e1347b86be40c))
+
+
+
+
+
 ## [0.55.7-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.2...v0.55.7-rc.3) (2025-04-24)
 
 **Note:** Version bump only for package @fundamental-ngx/cx
