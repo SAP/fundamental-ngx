@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.7-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.4...v0.55.7-rc.5) (2025-04-24)
+
+
+### Bug Fixes
+
+* **core,cx:** vertical and side nav announcing selection incorrectly ([#13211](https://github.com/SAP/fundamental-ngx/issues/13211)) ([70ad2fa](https://github.com/SAP/fundamental-ngx/commit/70ad2fa3b6d07fd7bafa92443c601464d368ded5))
+
+
+
+
+
 ## [0.55.7-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.3...v0.55.7-rc.4) (2025-04-24)
 
 
