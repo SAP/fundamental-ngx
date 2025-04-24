@@ -5,67 +5,77 @@ import { createCleanApplication, createCleanWorkspace } from '../testing-utils/c
 import { clearWorkspaceCache } from '../utils/workspace';
 
 describe('add-styles schematic', () => {
+    let runner: SchematicTestRunner;
     let tree: Tree;
-    const runner: SchematicTestRunner = new SchematicTestRunner(
-        'schematics',
-        path.join(__dirname, '../collection.json')
-    );
 
     beforeEach(async () => {
+        runner = new SchematicTestRunner('schematics', path.join(__dirname, '../collection.json'));
         tree = await createCleanApplication({}, await createCleanWorkspace());
     });
 
     afterEach(clearWorkspaceCache);
 
-    describe('should add styles to angular.json', () => {
+    describe('should modify angular.json correctly', () => {
         let styles: any[];
         let assets: any[];
+
         beforeEach(async () => {
             const result = await runner.runSchematic('add-styles', { project: 'test' }, tree);
             const angularJson = result.readJson('angular.json') as Record<string, any>;
             styles = angularJson.projects.test.architect.build.options.styles;
             assets = angularJson.projects.test.architect.build.options.assets;
         });
+
         it('should add fd-ngx styles', () => {
             expect(styles).toContain('./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css');
         });
-        it('should add sap fonts', () => {
-            expect(styles).toContain('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
-        });
-        it('should add assets', () => {
+
+        it('should add specified assets', () => {
             const expectedAssets = [
-                JSON.stringify({
+                {
                     glob: '**/css_variables.css',
                     input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/',
                     output: './assets/theming-base/'
-                }),
-                JSON.stringify({
+                },
+                {
+                    glob: '**/*',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/',
+                    output: './assets/theming-base/baseTheme/fonts/'
+                },
+                {
+                    glob: '**/*',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/',
+                    output: './assets/theming-base/sap_horizon/fonts/'
+                },
+                {
                     glob: '**/*',
                     input: './node_modules/fundamental-styles/dist/theming/',
                     output: './assets/fundamental-styles-theming/'
-                })
+                }
             ];
-            const factualAssets = JSON.stringify(assets);
             expectedAssets.forEach((expectedAsset) => {
-                expect(factualAssets).toContain(expectedAsset);
+                expect(assets).toContainEqual(expectedAsset);
             });
         });
-    });
 
-    it('should not add fonts if not requested', async () => {
-        const result = await runner.runSchematic('add-styles', { project: 'test', fonts: false }, tree);
-        const angularJson = result.readJson('angular.json') as Record<string, any>;
-        const styles = angularJson.projects.test.architect.build.options.styles;
-        expect(styles).not.toContain('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
-    });
+        it('should not add styles more than once', async () => {
+            const resultFirstRun = await runner.runSchematic('add-styles', { project: 'test' }, tree);
+            const angularJsonFirstRun = resultFirstRun.readText('angular.json');
 
-    it('should not add styles more than once', async () => {
-        const result = await runner.runSchematic('add-styles', { project: 'test' }, tree);
-        const angularJson = result.readText('angular.json');
+            const resultSecondRun = await runner.runSchematic('add-styles', { project: 'test' }, resultFirstRun);
+            const angularJsonSecondRun = resultSecondRun.readText('angular.json');
 
-        const result2 = await runner.runSchematic('add-styles', { project: 'test' }, result);
-        const angularJson2 = result2.readText('angular.json');
+            expect(angularJsonFirstRun).toEqual(angularJsonSecondRun);
+        });
 
-        expect(angularJson).toEqual(angularJson2);
+        it('should not duplicate assets on subsequent runs', async () => {
+            const resultFirstRun = await runner.runSchematic('add-styles', { project: 'test' }, tree);
+            const angularJsonFirstRun = resultFirstRun.readText('angular.json');
+
+            const resultSecondRun = await runner.runSchematic('add-styles', { project: 'test' }, resultFirstRun);
+            const angularJsonSecondRun = resultSecondRun.readText('angular.json');
+
+            expect(angularJsonFirstRun).toEqual(angularJsonSecondRun);
+        });
     });
 });
