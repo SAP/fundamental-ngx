@@ -46,6 +46,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** Whether or not this list item is indicated for navigation. */
     @Input()
+    @HostBinding('attr.aria-selected')
     @HostBinding('class.fd-list__navigation-item--indicated')
     indicated = false;
 

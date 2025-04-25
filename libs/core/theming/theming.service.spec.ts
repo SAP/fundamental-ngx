@@ -13,8 +13,7 @@ const customThemes = [
         name: 'Fiori theme with Horizon fonts',
         theming: {
             themingBasePath: 'assets/theming-base/sap_fiori_3/css_variables.css',
-            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css',
-            themeFontPath: 'sap_horizon_fonts.css'
+            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css'
         }
     },
     {
@@ -23,89 +22,71 @@ const customThemes = [
         name: 'Horizon theme with Fiori fonts',
         theming: {
             themingBasePath: 'assets/theming-base/sap_horizon/css_variables.css',
-            themePath: 'assets/fundamental-styles-theming/sap_horizon.css',
-            themeFontPath: 'sap_fiori_3_fonts.css'
-        }
-    },
-    {
-        id: 'belize_fiori_fonts',
-        description: 'Belize Preview theme with Fiori fonts',
-        name: 'Belize Preview theme with Fiori fonts',
-        theming: {
-            themingBasePath: 'assets/theming-base/sap_belize/css_variables.css',
-            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css',
-            themeFontPath: 'sap_belize_fonts.css'
+            themePath: 'assets/fundamental-styles-theming/sap_horizon.css'
         }
     }
 ];
 
-const customConfig = new BaseThemingConfig();
-customConfig.customThemes = customThemes;
-customConfig.excludeDefaultThemes = true;
-customConfig.defaultTheme = customThemes[1].id;
+const setupService = (config): ThemingService => {
+    TestBed.configureTestingModule({
+        imports: [RouterModule, RouterTestingModule],
+        providers: [
+            {
+                provide: THEMING_CONFIG_TOKEN,
+                useValue: config
+            },
+            ThemingService
+        ]
+    });
+    const service = TestBed.inject(ThemingService);
+    service.init();
+    return service;
+};
 
-describe('ThemingService with default config', () => {
+describe('ThemingService', () => {
     let service: ThemingService;
     const defaultConfig = new BaseThemingConfig();
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [RouterModule, RouterTestingModule],
-            providers: [
-                {
-                    provide: THEMING_CONFIG_TOKEN,
-                    useValue: defaultConfig
-                },
-                ThemingService
-            ]
+    describe('with default config', () => {
+        beforeEach(() => {
+            service = setupService(defaultConfig);
         });
-        service = TestBed.inject(ThemingService);
-        service.init();
-    });
 
-    it('should set default scheme', () => {
-        const currentTheme = service.getCurrentTheme();
-        expect(currentTheme?.id).toEqual(defaultConfig.defaultTheme);
-    });
+        it('should set default scheme', () => {
+            const currentTheme = service.getCurrentTheme();
+            expect(currentTheme?.id).toEqual(defaultConfig.defaultTheme);
+        });
 
-    it('should set theme', () => {
-        const newTheme = STANDARD_THEMES[1];
+        it('should handle standard theme setting', () => {
+            const newTheme = STANDARD_THEMES[1];
+            service.setTheme(newTheme.id);
+            const currentTheme = service.getCurrentTheme();
+            expect(currentTheme?.id).toEqual(newTheme.id);
+        });
 
-        service.setTheme(newTheme.id);
-
-        const currentTheme = service.getCurrentTheme();
-
-        expect(currentTheme?.id).toEqual(newTheme.id);
-    });
-
-    it('should insert link elements', () => {
-        Object.values(defaultConfig.themeStyleLinkIdentifiers).forEach((id) => {
-            expect(document.getElementById(id)).toBeTruthy();
+        it('should insert correct link elements', () => {
+            Object.values(defaultConfig.themeStyleLinkIdentifiers).forEach((id) => {
+                const linkElement = document.getElementById(id);
+                expect(linkElement).toBeTruthy();
+                expect(linkElement?.tagName).toBe('LINK');
+            });
         });
     });
-});
 
-describe('ThemingService with custom config', () => {
-    let service: ThemingService;
+    describe('with custom config', () => {
+        const customConfig = new BaseThemingConfig();
+        customConfig.customThemes = customThemes;
+        customConfig.excludeDefaultThemes = true;
+        customConfig.defaultTheme = customThemes[1].id;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [RouterModule, RouterTestingModule],
-            providers: [
-                {
-                    provide: THEMING_CONFIG_TOKEN,
-                    useValue: customConfig
-                },
-                ThemingService
-            ]
+        beforeEach(() => {
+            service = setupService(customConfig);
         });
-        service = TestBed.inject(ThemingService);
-        service.init();
-    });
 
-    it('should apply custom configuration', async () => {
-        expect(service.getThemes()).toEqual(customThemes);
-        const currentTheme = service.getCurrentTheme();
-        expect(currentTheme?.id).toEqual(customConfig.defaultTheme);
+        it('should apply custom configuration correctly', () => {
+            expect(service.getThemes()).toEqual(customThemes);
+            const currentTheme = service.getCurrentTheme();
+            expect(currentTheme?.id).toEqual(customConfig.defaultTheme);
+        });
     });
 });
