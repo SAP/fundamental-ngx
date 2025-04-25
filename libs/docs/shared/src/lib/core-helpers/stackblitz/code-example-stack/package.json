@@ -9,10 +9,10 @@
         "test": "ng test"
     },
     "engines": {
-        "yarn": ">= 4.6.0",
+        "yarn": ">= 4.9.0",
         "node": ">= 18"
     },
-    "packageManager": "yarn@4.6.0",
+    "packageManager": "yarn@4.9.1",
     "private": true,
     "dependencies": {}
 }

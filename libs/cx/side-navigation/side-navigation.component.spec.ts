@@ -1,17 +1,21 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { NestedListExpandIconComponent, NestedListIconComponent, NestedListPopoverComponent, NestedListTitleDirective } from '@fundamental-ngx/core/nested-list';
+import {
+    NestedListExpandIconComponent,
+    NestedListIconComponent,
+    NestedListPopoverComponent,
+    NestedListTitleDirective
+} from '@fundamental-ngx/core/nested-list';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { NestedItemComponent } from '../nested-list/nested-item/nested-item.component';
 import { NestedLinkComponent } from '../nested-list/nested-link/nested-link.component';
 import { NestedListComponent } from '../nested-list/nested-list/nested-list.component';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationComponent } from './side-navigation.component';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { IconComponent } from '@fundamental-ngx/core/icon';
-import { By } from '@angular/platform-browser';
 
 @Component({
     template: `
@@ -65,7 +69,7 @@ import { By } from '@angular/platform-browser';
         NestedListIconComponent,
         IconComponent,
         NestedListTitleDirective,
-        NestedListExpandIconComponent,
+        NestedListExpandIconComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
