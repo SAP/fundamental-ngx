@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.2...v0.56.0-rc.3) (2025-04-25)
+
+
+### Bug Fixes
+
+* **core:** bug with select focusing popover control after opening ([#13232](https://github.com/SAP/fundamental-ngx/issues/13232)) ([ab3add3](https://github.com/SAP/fundamental-ngx/commit/ab3add395296f3fca422deb55623942b486de5fd))
+* **core:** remove fdp from core object attribute ([#13236](https://github.com/SAP/fundamental-ngx/issues/13236)) ([011a7a5](https://github.com/SAP/fundamental-ngx/commit/011a7a52053f27e195320be0aede0a14c9b73753))
+
+
+
+
+
 # [0.56.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.1...v0.56.0-rc.2) (2025-04-25)
 
 **Note:** Version bump only for package fundamental-ngx
