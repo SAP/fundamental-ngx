@@ -8,6 +8,7 @@ type CarType = { id: string; name: string };
     templateUrl: './select-custom-comparator-example.component.html',
     imports: [SelectModule]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SelectCustomComparatorExample {
     carTypes: CarType[] = [
         { id: '1', name: 'Hatchback' },

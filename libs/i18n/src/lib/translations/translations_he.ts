@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'תפריט פריט מכווץ',
         cancel: 'בטל',
-        search: 'חפש'
+        search: 'חפש',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'הערך המינימלי של המחוון הוא {min}, הערך המקסימלי הוא {max}',
@@ -593,6 +597,8 @@ export default {
         groupHeaderTitle: 'הרחבה/כיווץ',
         groupAriaDescription: 'קבוצת הודעות',
         groupAriaDescriptionExpanded: 'מורחב',
-        groupAriaDescriptionCollapsed: 'מצומצם'
+        groupAriaDescriptionCollapsed: 'מצומצם',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

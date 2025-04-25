@@ -1,8 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class TabsPo extends CoreBaseComponentPo {
-    private url = '/tabs';
-
     tabsExample = 'fd-tabs-example ';
     IconOnlyExample = 'fd-tab-icon-only-example ';
     ProcessExample = 'fd-tab-process-example ';
@@ -40,6 +38,8 @@ export class TabsPo extends CoreBaseComponentPo {
     iconSelect = '#playgroundicon ';
     accidentalLeaveIcon = this.iconSelect + 'option:nth-child(2)';
     fdIcon = this.playGroundExample + 'fd-icon';
+
+    private url = '/tabs';
 
     async open(): Promise<void> {
         await super.open(this.url);

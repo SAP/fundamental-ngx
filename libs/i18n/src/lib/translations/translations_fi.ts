@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Tiivistetty kohteen valikko',
         cancel: 'Peruuta',
-        search: 'Hae'
+        search: 'Hae',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Laajenna/tiivistä',
         groupAriaDescription: 'Ilmoitusryhmä',
         groupAriaDescriptionExpanded: 'laajennettu',
-        groupAriaDescriptionCollapsed: 'tiivistetty'
+        groupAriaDescriptionCollapsed: 'tiivistetty',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

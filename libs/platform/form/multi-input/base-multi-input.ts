@@ -365,6 +365,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.searchTermChanged();
         this.isOpenChange.emit(false);
         this.openChange.next(false);
+        this.searchInputElement.nativeElement.focus();
         this.markForCheck();
     }
 

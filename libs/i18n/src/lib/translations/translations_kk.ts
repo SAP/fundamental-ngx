@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Жиылған тармақ мәзірі',
         cancel: 'Болдырмау',
-        search: 'Іздеу'
+        search: 'Іздеу',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Слайдердің минималды мәні — {min}, максималды мәні — {max}',
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Жаю/жию',
         groupAriaDescription: 'Хабарландыру тобы',
         groupAriaDescriptionExpanded: 'жайылған',
-        groupAriaDescriptionCollapsed: 'жиылған'
+        groupAriaDescriptionCollapsed: 'жиылған',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

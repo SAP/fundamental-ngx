@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '접힌 항목 메뉴',
         cancel: '취소',
-        search: '검색'
+        search: '검색',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: '슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
@@ -593,6 +597,8 @@ export default {
         groupHeaderTitle: '펼치기/접기',
         groupAriaDescription: '통지 그룹',
         groupAriaDescriptionExpanded: '펼친 상태',
-        groupAriaDescriptionCollapsed: '접힌 상태'
+        groupAriaDescriptionCollapsed: '접힌 상태',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

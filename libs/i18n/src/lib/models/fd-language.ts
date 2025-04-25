@@ -187,6 +187,9 @@ export interface FdLanguage {
         collapsedItemMenuLabel: FdLanguageKey;
         cancel: FdLanguageKey;
         search: FdLanguageKey;
+        assistiveTools: FdLanguageKey;
+        backButtonLabel: FdLanguageKey;
+        navigationButtonLabel: FdLanguageKey;
     };
     coreSlider: {
         /**
@@ -715,5 +718,13 @@ export interface FdLanguage {
     };
     btpToolHeader: {
         menuButtonAriaLabel: FdLanguageKey;
+    };
+    coreNotification: {
+        groupHeaderTitle: FdLanguageKey;
+        groupAriaDescription: FdLanguageKey;
+        groupAriaDescriptionExpanded: FdLanguageKey;
+        groupAriaDescriptionCollapsed: FdLanguageKey;
+        triggerMoreLabel: FdLanguageKey;
+        triggerLessLabel: FdLanguageKey;
     };
 }

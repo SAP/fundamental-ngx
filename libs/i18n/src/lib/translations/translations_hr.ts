@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Sažeti izbornik stavki',
         cancel: 'Otkaži',
-        search: 'Pretraži'
+        search: 'Pretraži',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna vrijednost klizača je {min}, maksimalna vrijednost je {max}',
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Proširi/sažmi',
         groupAriaDescription: 'Grupa obavijesti',
         groupAriaDescriptionExpanded: 'prošireno',
-        groupAriaDescriptionCollapsed: 'sažeto'
+        groupAriaDescriptionCollapsed: 'sažeto',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

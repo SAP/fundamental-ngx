@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Meniu de elemente comprimate',
         cancel: 'Anulare',
-        search: 'Căutare'
+        search: 'Căutare',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Valoare minimă cursor de reglare este {min}, valoare maximă este {max}',
@@ -597,6 +600,8 @@ export default {
         groupHeaderTitle: 'Extindere/Restrângere',
         groupAriaDescription: 'Grup de notificări',
         groupAriaDescriptionExpanded: 'extins',
-        groupAriaDescriptionCollapsed: 'restrâns'
+        groupAriaDescriptionCollapsed: 'restrâns',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

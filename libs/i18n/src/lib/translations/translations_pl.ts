@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Zwinięte menu pozycji',
         cancel: 'Anuluj',
-        search: 'Wyszukiwanie'
+        search: 'Wyszukiwanie',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Rozwiń/zwiń',
         groupAriaDescription: 'Grupa zawiadomień',
         groupAriaDescriptionExpanded: 'rozwinięte',
-        groupAriaDescriptionCollapsed: 'zwinięte'
+        groupAriaDescriptionCollapsed: 'zwinięte',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

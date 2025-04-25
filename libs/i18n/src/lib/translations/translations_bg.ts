@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Свито меню на позиции',
         cancel: 'Отказ',
-        search: 'Търсене'
+        search: 'Търсене',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минималната стойност на плъзгача е {min}, а максималната е {max}',
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Разгъване/свиване',
         groupAriaDescription: 'Група за известия',
         groupAriaDescriptionExpanded: 'разгърнато',
-        groupAriaDescriptionCollapsed: 'свито'
+        groupAriaDescriptionCollapsed: 'свито',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

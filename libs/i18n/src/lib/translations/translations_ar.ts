@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'قائمة عناصر تم طيها',
         cancel: 'إلغاء',
-        search: 'بحث'
+        search: 'بحث',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'الحد الأدنى لقيمة شريط التمرير هو {min}، والحد الأقصى للقيمة هو {max}',
@@ -594,6 +598,8 @@ export default {
         groupHeaderTitle: 'توسيع/طي',
         groupAriaDescription: 'مجموعة الإشعارات',
         groupAriaDescriptionExpanded: 'موسَّع',
-        groupAriaDescriptionCollapsed: 'تم طيه'
+        groupAriaDescriptionCollapsed: 'تم طيه',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

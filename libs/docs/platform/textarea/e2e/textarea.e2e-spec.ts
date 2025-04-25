@@ -3,7 +3,6 @@ import {
     browserIsSafari,
     clearValue,
     click,
-    currentPlatformName,
     executeScriptAfterTagAttr,
     getElementArrayLength,
     getElementPlaceholder,
@@ -42,13 +41,10 @@ describe('Verify Textarea component', () => {
     const {
         basicTextArea,
         basicTextAreaLabel,
-        basicTextAreaPopoverIcon,
-        basicTextAreaPopoverBody,
         readOnlyTextAreaLabel,
         disabledTextArea,
         disabledTextAreaLabel,
         growingDisabledTextarea,
-        growingMaxLinesTextarea,
         growingHeightTextarea,
         withGrowingAndNoLimitsTextarea,
         withCharactersMaxNumberTextarea,
@@ -66,7 +62,6 @@ describe('Verify Textarea component', () => {
         textareaCounterTemplateExample,
         message
     } = textareaPage;
-    const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
 
     beforeAll(async () => {
         await textareaPage.open();

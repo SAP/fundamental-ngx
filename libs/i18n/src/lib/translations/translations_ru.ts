@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Свернутое меню позиций',
         cancel: 'Отменить',
-        search: 'Поиск'
+        search: 'Поиск',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение ползунка: {min}, макс.: {max}',
@@ -595,6 +599,8 @@ export default {
         groupHeaderTitle: 'Развернуть/свернуть',
         groupAriaDescription: 'Группа уведомлений',
         groupAriaDescriptionExpanded: 'развернуто',
-        groupAriaDescriptionCollapsed: 'свернуто'
+        groupAriaDescriptionCollapsed: 'свернуто',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

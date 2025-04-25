@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Minimeret elementmenu',
         cancel: 'Annuller',
-        search: 'Søg'
+        search: 'Søg',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Skyderens minimumsværdi er {min}, maksimumsværdi er {max}',
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Udvid/minimer',
         groupAriaDescription: 'Meddelelsesgruppe',
         groupAriaDescriptionExpanded: 'udvidet',
-        groupAriaDescriptionCollapsed: 'minimeret'
+        groupAriaDescriptionCollapsed: 'minimeret',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

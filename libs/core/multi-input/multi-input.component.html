@@ -52,9 +52,6 @@
             [glyphAriaLabel]="addOnButtonAriaLabel"
             [iconTitle]="addonIconTitle"
         >
-            <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
-                'coreMultiInput.tokensCountText' | fdTranslate: { length: selected.length }
-            }}</span>
             <fd-tokenizer
                 #tokenizer
                 [compactCollapse]="compactCollapse"
@@ -97,7 +94,6 @@
                     [attr.aria-required]="required"
                     [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
                     [ariaLabelledBy]="ariaLabelledBy"
-                    [attr.aria-describedby]="tokenHiddenId"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
                     (focus)="tokenizer._showAllTokens()"
@@ -119,6 +115,7 @@
                 (focusEscapeList)="handleListFocusEscape($event)"
                 [style.min-width]="'100%'"
                 (keydown.tab)="_close()"
+                (keydown.escape)="_close()"
                 aria-multiselectable="true"
             >
                 @for (option of viewModel.displayedOptions; track valueFn(option.item); let idx = $index) {

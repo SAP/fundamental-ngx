@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Komprimerad artikelmeny',
         cancel: 'Avbryt',
-        search: 'Sök'
+        search: 'Sök',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimivärde för reglage är {min}, maximalt värde är {max}',
@@ -595,6 +599,8 @@ export default {
         groupHeaderTitle: 'Expandera/komprimera',
         groupAriaDescription: 'Aviseringsgrupp',
         groupAriaDescriptionExpanded: 'expandera',
-        groupAriaDescriptionCollapsed: 'komprimera'
+        groupAriaDescriptionCollapsed: 'komprimera',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

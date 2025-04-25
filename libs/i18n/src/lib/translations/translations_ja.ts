@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '非表示の項目メニュー',
         cancel: 'キャンセル',
-        search: '検索'
+        search: '検索',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'スライダの最小値: {min}、最大値: {max}',
@@ -595,6 +599,8 @@ export default {
         groupHeaderTitle: '展開/圧縮',
         groupAriaDescription: '通知グループ',
         groupAriaDescriptionExpanded: '表示',
-        groupAriaDescriptionCollapsed: '非表示'
+        groupAriaDescriptionCollapsed: '非表示',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

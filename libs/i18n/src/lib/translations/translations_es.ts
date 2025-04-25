@@ -110,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menú de elementos contraídos',
         cancel: 'Cancelar',
-        search: 'Buscar'
+        search: 'Buscar',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'El valor mínimo del slider es {min}, el valor máximo es {max}',
@@ -597,6 +600,8 @@ export default {
         groupHeaderTitle: 'Expandir/Contraer',
         groupAriaDescription: 'Grupo de notificaciones',
         groupAriaDescriptionExpanded: 'expandido',
-        groupAriaDescriptionCollapsed: 'contraído'
+        groupAriaDescriptionCollapsed: 'contraído',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

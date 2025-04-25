@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FixedCardLayoutPo extends CoreBaseComponentPo {
-    private url = '/fixed-card-layout';
     root = '#page-content';
     pageHeader = 'fd-fixed-card-layout-docs-header h1';
 
@@ -16,6 +15,8 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     pageSidebar = 'sections-toolbar .sidebar';
     disabledCardContent = 'fd-fixed-card-layout-disabled-drag fd-card fd-card-content';
     disabledCardDiv = 'fd-fixed-card-layout-disabled-drag .fd-fixed-card-layout__card';
+
+    private url = '/fixed-card-layout';
 
     async open(): Promise<void> {
         await super.open(this.url);

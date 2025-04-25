@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'เมนูไอเท็มแบบยุบรวม',
         cancel: 'ยกเลิก',
-        search: 'ค้นหา'
+        search: 'ค้นหา',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนคือ {min} ค่าสูงสุดคือ {max}',
@@ -595,6 +599,8 @@ export default {
         groupHeaderTitle: 'ขยาย/ยุบรวม',
         groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
         groupAriaDescriptionExpanded: 'ขยาย',
-        groupAriaDescriptionCollapsed: 'ยุบรวม'
+        groupAriaDescriptionCollapsed: 'ยุบรวม',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

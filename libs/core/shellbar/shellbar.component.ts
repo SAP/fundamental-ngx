@@ -112,6 +112,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     @Input()
     showBackButton = false;
 
+    /** Label for the navigation button. */
+    @Input()
+    navigationButtonLabel: string;
+
+    /** Label for the back button. */
+    @Input()
+    backButtonLabel: string;
+
     /** Emitted event when navigation button is clicked. */
     @Output()
     navigationButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menu-item samengevouwen',
         cancel: 'Annuleren',
-        search: 'Zoeken'
+        search: 'Zoeken',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimumwaarde voor schuifregelaar is {min}, maximumwaarde is {max}',
@@ -596,6 +600,8 @@ export default {
         groupHeaderTitle: 'Uitvouwen/samenvouwen',
         groupAriaDescription: 'Meldingsgroep',
         groupAriaDescriptionExpanded: 'uitgevouwen',
-        groupAriaDescriptionCollapsed: 'samengevouwen'
+        groupAriaDescriptionCollapsed: 'samengevouwen',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

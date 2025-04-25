@@ -82,6 +82,8 @@ export type FdLanguageKeyIdentifier =
     | 'coreShellbar.cancel'
     | 'coreShellbar.search'
     | 'coreShellbar.assistiveTools'
+    | 'coreShellbar.backButtonLabel'
+    | 'coreShellbar.navigationButtonLabel'
     | 'coreSlider.singleMinMaxDetails'
     | 'coreSlider.singleValueminDetails'
     | 'coreSlider.singleValuemaxDetails'
@@ -487,4 +489,6 @@ export type FdLanguageKeyIdentifier =
     | 'coreNotification.groupHeaderTitle'
     | 'coreNotification.groupAriaDescription'
     | 'coreNotification.groupAriaDescriptionExpanded'
-    | 'coreNotification.groupAriaDescriptionCollapsed';
+    | 'coreNotification.groupAriaDescriptionCollapsed'
+    | 'coreNotification.triggerMoreLabel'
+    | 'coreNotification.triggerLessLabel';

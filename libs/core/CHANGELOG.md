@@ -3,6 +3,253 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.1...v0.56.0-rc.2) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.0...v0.56.0-rc.1) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.5...v0.56.0-rc.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* remove using fundamental-styles fonts settings and use from theming-base ([#13219](https://github.com/SAP/fundamental-ngx/issues/13219)) ([d68cf9a](https://github.com/SAP/fundamental-ngx/commit/d68cf9a70a0c9e40c2d4270bae830a13d4082af8))
+
+
+### BREAKING CHANGES
+
+* theming service doesn't use fundamental-styles fonts settings and rely on theming-base
+
+Co-authored-by: Inna Atanasova <39598672+InnaAtanasova@users.noreply.github.com>
+
+
+
+
+
+## [0.55.7-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.4...v0.55.7-rc.5) (2025-04-24)
+
+
+### Bug Fixes
+
+* **core,cx:** vertical and side nav announcing selection incorrectly ([#13211](https://github.com/SAP/fundamental-ngx/issues/13211)) ([70ad2fa](https://github.com/SAP/fundamental-ngx/commit/70ad2fa3b6d07fd7bafa92443c601464d368ded5))
+
+
+
+
+
+## [0.55.7-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.3...v0.55.7-rc.4) (2025-04-24)
+
+
+### Bug Fixes
+
+* **core:** remove index/total from cx list translation ([#13215](https://github.com/SAP/fundamental-ngx/issues/13215)) ([5cc1942](https://github.com/SAP/fundamental-ngx/commit/5cc1942ee36b88236c0da36d992e1347b86be40c))
+
+
+
+
+
+## [0.55.7-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.2...v0.55.7-rc.3) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.7-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.1...v0.55.7-rc.2) (2025-04-15)
+
+
+### Bug Fixes
+
+* **core:** fix for readonly input z-index again ([#13209](https://github.com/SAP/fundamental-ngx/issues/13209)) ([a7c4d0d](https://github.com/SAP/fundamental-ngx/commit/a7c4d0dd398b9e00aab6c4b5fa651ce623e4d05f))
+* **core:** fix the Inline Help text cut corners ([#13210](https://github.com/SAP/fundamental-ngx/issues/13210)) ([b260bd2](https://github.com/SAP/fundamental-ngx/commit/b260bd28ff91127eeb8c275139ca3313ab46a413))
+
+
+
+
+
+## [0.55.7-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.0...v0.55.7-rc.1) (2025-04-12)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.7-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.6...v0.55.7-rc.0) (2025-04-12)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.15...v0.55.6) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.14...v0.55.6-rc.15) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core:** remove neg z-index from readonly input ([#13196](https://github.com/SAP/fundamental-ngx/issues/13196)) ([4372de5](https://github.com/SAP/fundamental-ngx/commit/4372de537b4202aa2cccbae99aa4ff16166ffeda))
+
+
+
+
+
+## [0.55.6-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.13...v0.55.6-rc.14) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core:** add title/aria-label to shellbar nav and back buttons ([#13186](https://github.com/SAP/fundamental-ngx/issues/13186)) ([cb887fb](https://github.com/SAP/fundamental-ngx/commit/cb887fbd3ae109af791d921e325e14a63a49a91a))
+
+
+
+
+
+## [0.55.6-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.12...v0.55.6-rc.13) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.11...v0.55.6-rc.12) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core:** fix dynamic page scrolling ([#13204](https://github.com/SAP/fundamental-ngx/issues/13204)) ([d65fd46](https://github.com/SAP/fundamental-ngx/commit/d65fd46bbe9f338c269bbccbc891e42adb1c8bb2))
+
+
+
+
+
+## [0.55.6-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.10...v0.55.6-rc.11) (2025-04-11)
+
+
+### Bug Fixes
+
+* **core,platform:** token count announcement should come from tokenizer ([#13177](https://github.com/SAP/fundamental-ngx/issues/13177)) ([21cac28](https://github.com/SAP/fundamental-ngx/commit/21cac28903985f8f4925f45c3ac14dc883ea095b))
+
+
+
+
+
+## [0.55.6-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.9...v0.55.6-rc.10) (2025-04-10)
+
+
+### Features
+
+* **core:** add more and less expander for Notifications ([#13183](https://github.com/SAP/fundamental-ngx/issues/13183)) ([dda0526](https://github.com/SAP/fundamental-ngx/commit/dda0526140c9afaba00fab9ca06d9dddd725ea5b))
+
+
+
+
+
+## [0.55.6-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.8...v0.55.6-rc.9) (2025-04-07)
+
+
+### Bug Fixes
+
+* **core:** file uploader should only emit events when files change ([#13141](https://github.com/SAP/fundamental-ngx/issues/13141)) ([7eef98c](https://github.com/SAP/fundamental-ngx/commit/7eef98ccbc77f237d214be8e30643ec20cc4b05f))
+
+
+
+
+
+## [0.55.6-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.7...v0.55.6-rc.8) (2025-04-07)
+
+
+### Bug Fixes
+
+* **core:** wizard step are clickable even without permissions ([#13103](https://github.com/SAP/fundamental-ngx/issues/13103)) ([072582c](https://github.com/SAP/fundamental-ngx/commit/072582c69548c471aaaaa6e6aa972e3ce51b2fab))
+
+
+
+
+
+## [0.55.6-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.6...v0.55.6-rc.7) (2025-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.5...v0.55.6-rc.6) (2025-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.4...v0.55.6-rc.5) (2025-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.3...v0.55.6-rc.4) (2025-04-02)
+
+
+### Bug Fixes
+
+* **core,platform:** combobox/multi-input/multi-combobox escape improvements ([#13168](https://github.com/SAP/fundamental-ngx/issues/13168)) ([e9a66de](https://github.com/SAP/fundamental-ngx/commit/e9a66dec2ed4dc6c69ecb45a05cdd24d9294a9d6))
+
+
+
+
+
+## [0.55.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.2...v0.55.6-rc.3) (2025-04-02)
+
+
+### Bug Fixes
+
+* **core:** date picker today btn i18n ([#13166](https://github.com/SAP/fundamental-ngx/issues/13166)) ([048fca1](https://github.com/SAP/fundamental-ngx/commit/048fca18d7aaedd75a21aec65f60aed967ae43af))
+
+
+
+
+
+## [0.55.6-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.1...v0.55.6-rc.2) (2025-04-01)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.55.6-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.0...v0.55.6-rc.1) (2025-04-01)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.55.6-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.5...v0.55.6-rc.0) (2025-03-31)
 
 **Note:** Version bump only for package @fundamental-ngx/core

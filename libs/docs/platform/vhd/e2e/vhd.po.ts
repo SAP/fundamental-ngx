@@ -1,7 +1,6 @@
 import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class VhdPo extends PlatformBaseComponentPo {
-    private url = '/value-help-dialog';
     root = '#page-content';
     pageHeader = 'app-vhd-header h1';
 
@@ -56,6 +55,8 @@ export class VhdPo extends PlatformBaseComponentPo {
     openMobileExampleBtn = 'fdp-platform-vhd-mobile-example button';
     token = '.fd-token';
     tokenizerClearButton = '.fdp-value-help-dialog__tokens-clear';
+
+    private url = '/value-help-dialog';
 
     formInputField = (id: string): string => this.inputFields + `[id="${id}"]`;
 

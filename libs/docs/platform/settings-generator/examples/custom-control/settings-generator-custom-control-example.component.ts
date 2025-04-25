@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     inject,
+    OnInit,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -65,12 +66,12 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [SettingsGeneratorModule, BarModule]
 })
-export class SettingsGeneratorCustomControlExampleComponent {
-    // By specifying first generic type of SettingsModel we are notifying typescipt's suggestions engine to include SliderDynamicFormControl type into available `items` options.
-    schema: SettingsModel<SliderDynamicFormControl>;
-
+export class SettingsGeneratorCustomControlExampleComponent implements OnInit {
     @ViewChild(SettingsGeneratorComponent)
     settingsGenerator: SettingsGeneratorComponent;
+
+    // By specifying first generic type of SettingsModel we are notifying typescipt's suggestions engine to include SliderDynamicFormControl type into available `items` options.
+    schema: SettingsModel<SliderDynamicFormControl>;
 
     private readonly _cdr = inject(ChangeDetectorRef);
 

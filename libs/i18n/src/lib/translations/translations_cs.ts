@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Sbalená položka menu',
         cancel: 'Zrušit',
-        search: 'Hledat'
+        search: 'Hledat',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
@@ -595,6 +599,8 @@ export default {
         groupHeaderTitle: 'Rozbalit/sbalit',
         groupAriaDescription: 'Skupina oznámení',
         groupAriaDescriptionExpanded: 'rozbaleno',
-        groupAriaDescriptionCollapsed: 'sbaleno'
+        groupAriaDescriptionCollapsed: 'sbaleno',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

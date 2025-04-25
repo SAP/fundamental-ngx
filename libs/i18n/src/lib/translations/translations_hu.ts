@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Összecsukott menüelem',
         cancel: 'Mégse',
-        search: 'Keresés'
+        search: 'Keresés',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'A csúszka minimális értéke {min}, maximális értéke {max}',
@@ -595,6 +599,8 @@ export default {
         groupHeaderTitle: 'Kibontás/visszazárás',
         groupAriaDescription: 'Értesítési csoport',
         groupAriaDescriptionExpanded: 'kibontva',
-        groupAriaDescriptionCollapsed: 'visszazárva'
+        groupAriaDescriptionCollapsed: 'visszazárva',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

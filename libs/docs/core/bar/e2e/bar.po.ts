@@ -1,7 +1,6 @@
 import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class BarPo extends CoreBaseComponentPo {
-    private url = '/bar';
     root = '#page-content';
     componentExample = '.docs-tile-content-example';
     arrowButtons = '.fd-bar__left button';
@@ -11,6 +10,7 @@ export class BarPo extends CoreBaseComponentPo {
     rightSections = '.fd-bar__right fd-bar-element:nth-child(1)';
     pictures = '.fd-bar__right fd-avatar';
     saveCancelButtons = '.fd-bar__right button';
+    private url = '/bar';
 
     async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);

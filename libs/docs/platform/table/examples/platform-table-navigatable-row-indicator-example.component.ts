@@ -32,10 +32,10 @@ import {
     ]
 })
 export class PlatformTableNavigatableRowIndicatorExampleComponent {
-    source: TableDataSource<ExampleItem>;
-
     @ViewChild(TableComponent)
     table: TableComponent;
+
+    source: TableDataSource<ExampleItem>;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());

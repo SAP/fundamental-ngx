@@ -3,6 +3,206 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.1...v0.56.0-rc.2) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+# [0.56.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.0...v0.56.0-rc.1) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+# [0.56.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.5...v0.56.0-rc.0) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.7-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.4...v0.55.7-rc.5) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.7-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.3...v0.55.7-rc.4) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.7-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.2...v0.55.7-rc.3) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.7-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.1...v0.55.7-rc.2) (2025-04-15)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.7-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.0...v0.55.7-rc.1) (2025-04-12)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.7-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.6...v0.55.7-rc.0) (2025-04-12)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.15...v0.55.6) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.14...v0.55.6-rc.15) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.13...v0.55.6-rc.14) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.12...v0.55.6-rc.13) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.11...v0.55.6-rc.12) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.10...v0.55.6-rc.11) (2025-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.9...v0.55.6-rc.10) (2025-04-10)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.8...v0.55.6-rc.9) (2025-04-07)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.7...v0.55.6-rc.8) (2025-04-07)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.6...v0.55.6-rc.7) (2025-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.5...v0.55.6-rc.6) (2025-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.4...v0.55.6-rc.5) (2025-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.3...v0.55.6-rc.4) (2025-04-02)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.2...v0.55.6-rc.3) (2025-04-02)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.1...v0.55.6-rc.2) (2025-04-01)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
+## [0.55.6-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.55.6-rc.0...v0.55.6-rc.1) (2025-04-01)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
 ## [0.55.6-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.5...v0.55.6-rc.0) (2025-03-31)
 
 **Note:** Version bump only for package @fundamental-ngx/moment-adapter

@@ -11,8 +11,6 @@ import {
 import { MessageToastExampleComponent } from './examples/message-toast-example.component';
 import { MessageToastPositionExampleComponent } from './examples/message-toast-position-example.component';
 
-const messageToastExampleScss = 'message-toast-example.component.scss';
-
 const messageToastContentExample = 'message-toast-content-example.component.ts';
 const messageToastExample = 'message-toast-example.component.ts';
 const messageToastExampleHtml = 'message-toast-example.component.html';

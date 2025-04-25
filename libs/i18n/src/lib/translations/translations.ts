@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
     coreCalendar: {
@@ -84,7 +85,7 @@ export default {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Tree Item {itemDetails}, {index} of {total}{selectedDescription}'
+        linkItemAriaLabel: 'Tree Item {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} more'
@@ -110,7 +111,9 @@ export default {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
         cancel: 'Cancel',
         search: 'Search',
-        assistiveTools: 'Assistive Tools'
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',
@@ -198,7 +201,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'More',
+        overflowTitleMore: 'Click or press enter to view more details',
         breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
@@ -596,6 +599,8 @@ export default {
         groupHeaderTitle: 'Expand/Collapse',
         groupAriaDescription: 'Notification Group',
         groupAriaDescriptionExpanded: 'expanded',
-        groupAriaDescriptionCollapsed: 'collapsed'
+        groupAriaDescriptionCollapsed: 'collapsed',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

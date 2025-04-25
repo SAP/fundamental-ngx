@@ -8,7 +8,6 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    getValue,
     isElementClickable,
     isElementDisplayed,
     pause,
@@ -19,7 +18,7 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { blockExamples } from './date-picker-contents';
-import { currentYear, getCurrentItemIndex, getCurrentMonth, getNextDay, invalidDate } from './date-picker-tags';
+import { currentYear, getCurrentItemIndex, getCurrentMonth, invalidDate } from './date-picker-tags';
 import { DatePickerPo } from './date-picker.po';
 
 // https://github.com/SAP/fundamental-ngx/issues/8837
@@ -412,34 +411,6 @@ xdescribe('Date picker suite', () => {
             'Invalid Date',
             `error message is not appeared`
         );
-    }
-
-    async function checkChoosingDate(section: string): Promise<void> {
-        let chosenDate;
-        await scrollIntoView(section + calendarIcon);
-        await click(section + calendarIcon);
-        const currentDayIndex = await getCurrentDayIndex();
-        const dayCount = (await getElementArrayLength(currentMonthCalendarItem)) - 1;
-
-        if (currentDayIndex === dayCount - 1) {
-            await click(altCalendarItem, currentDayIndex - 1);
-            await click(section + calendarIcon);
-        }
-        if (currentDayIndex !== dayCount - 1) {
-            await click(altCalendarItem + ':not(.fd-calendar__item--other)', currentDayIndex + 1);
-
-            section === formattingExample
-                ? (chosenDate = `${await getCurrentMonth(true)}/${await getNextDay(true)}/${currentYear
-                      .toString()
-                      .slice(2)}`)
-                : (chosenDate = `${await getCurrentMonth(false)}/${await getNextDay(false)}/${currentYear}`);
-
-            await expect(await getValue(section + calendarInput)).toContain(
-                chosenDate,
-                `input does not contain chosen value for ${section}`
-            );
-            await click(section + calendarIcon);
-        }
     }
 
     async function checkOpenClose(section: string): Promise<void> {

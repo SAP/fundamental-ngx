@@ -2232,17 +2232,14 @@ export class TableComponent<T = any>
     /** @hidden */
     private _listenToPageScrolling(): void {
         this._subscriptions.add(
-            this._tableScrollDispatcher
-                .scrolled()
-                .pipe(filter(() => this.pageScrolling))
-                .subscribe((scrollable) => {
-                    const scrollTop = scrollable.getScrollTop();
+            this._tableScrollDispatcher.scrolled().subscribe((scrollable) => {
+                const scrollTop = scrollable.getScrollTop();
 
-                    this.tableScrolled.emit(scrollTop);
+                this.tableScrolled.emit(scrollTop);
 
-                    // Instead of having two places to record this possition, we could just subscribe once.
-                    this.getTableState().scrollTopPosition = scrollTop;
-                })
+                // Instead of having two places to record this possition, we could just subscribe once.
+                this.getTableState().scrollTopPosition = scrollTop;
+            })
         );
     }
 

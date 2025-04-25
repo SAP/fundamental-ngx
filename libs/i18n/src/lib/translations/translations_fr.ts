@@ -111,7 +111,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Menu des éléments réduits',
         cancel: 'Annuler',
-        search: 'Rechercher'
+        search: 'Rechercher',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'La valeur minimale du curseur est {min}, la valeur maximale est {max}',
@@ -598,6 +601,8 @@ export default {
         groupHeaderTitle: 'Développer/Réduire',
         groupAriaDescription: 'Groupe de notifications',
         groupAriaDescriptionExpanded: 'développé',
-        groupAriaDescriptionCollapsed: 'réduit'
+        groupAriaDescriptionCollapsed: 'réduit',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

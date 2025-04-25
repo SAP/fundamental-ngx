@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
@@ -109,7 +110,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: 'Згорнуте меню елементів',
         cancel: 'Скасувати',
-        search: 'Пошук'
+        search: 'Пошук',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: 'Мінімальне значення повзунка: {min}, максимальне значення: {max}',
@@ -596,6 +600,8 @@ export default {
         groupHeaderTitle: 'Розгорнути/згорнути',
         groupAriaDescription: 'Група сповіщень',
         groupAriaDescriptionExpanded: 'розгорнуто',
-        groupAriaDescriptionCollapsed: 'згорнуто'
+        groupAriaDescriptionCollapsed: 'згорнуто',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

@@ -2,7 +2,6 @@ import {
     browserIsFirefox,
     browserIsSafari,
     click,
-    clickRightMouseBtn,
     doubleClick,
     getElementArrayLength,
     getElementClass,
@@ -147,24 +146,6 @@ describe('Step input component test suit', () => {
     it('should check RTL orientation', async () => {
         await stepInputPage.checkRtlSwitch();
     });
-
-    async function checkClickByRightMouseBth(section: string): Promise<void> {
-        const inputLength = await getElementArrayLength(section + input);
-        await scrollIntoView(section);
-        for (let i = 0; i < inputLength; i++) {
-            const defaultValue = await getValue(section + input, i);
-            await clickRightMouseBtn(section + plusButton, i);
-            await expect(await getValue(section + input, i)).toEqual(
-                defaultValue,
-                'value changed by clickin on right mouse button'
-            );
-            await clickRightMouseBtn(section + minusButton, i);
-            await expect(await getValue(section + input, i)).toEqual(
-                defaultValue,
-                'value changed by clickin on right mouse button'
-            );
-        }
-    }
 
     async function checkInputWithInvalidValues(section: string): Promise<void> {
         await scrollIntoView(section);

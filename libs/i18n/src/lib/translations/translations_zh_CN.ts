@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
     coreCalendar: {
@@ -108,7 +109,10 @@ export default {
     coreShellbar: {
         collapsedItemMenuLabel: '已折叠项目菜单',
         cancel: '取消',
-        search: '搜索'
+        search: '搜索',
+        assistiveTools: 'Assistive Tools',
+        backButtonLabel: 'Back',
+        navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
         singleMinMaxDetails: '滑块最小值为 {min}，最大值为 {max}',
@@ -592,6 +596,8 @@ export default {
         groupHeaderTitle: '展开/折叠',
         groupAriaDescription: '通知组',
         groupAriaDescriptionExpanded: '已展开',
-        groupAriaDescriptionCollapsed: '已折叠'
+        groupAriaDescriptionCollapsed: '已折叠',
+        triggerMoreLabel: 'More',
+        triggerLessLabel: 'Less'
     }
 };

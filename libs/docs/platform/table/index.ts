@@ -10,11 +10,6 @@ export const ROUTES: Routes = [
         providers: [ExampleChildService, RtlService],
         children: [
             {
-                path: '',
-                redirectTo: 'basic',
-                pathMatch: 'full'
-            },
-            {
                 path: 'basic',
                 loadComponent: () => import('./platform-table-docs.component').then((c) => c.PlatformTableDocsComponent)
             },

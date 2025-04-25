@@ -23,8 +23,6 @@ import {
 import { loadMoreClass, multiSelect, navIndicator, navUrl, selectionAttr } from './list-contents';
 import { ListPo } from './list.po';
 
-declare const $$: any;
-
 describe('List test suite:', () => {
     const listPage = new ListPo();
     const {

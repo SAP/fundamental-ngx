@@ -130,7 +130,8 @@ describe('Tabs test suite', () => {
         }
         await scrollIntoView(collapsibleOverflowExample);
         const length = await getElementArrayLength(collapsibleOverflowExample + collapsibleTab);
-        const lastOfMainList = async () => await getText(collapsibleOverflowExample + collapsibleTab, length - 1);
+        const lastOfMainList = async (): Promise<string> =>
+            await getText(collapsibleOverflowExample + collapsibleTab, length - 1);
         const lastPointOfMainList = await lastOfMainList();
         await click(moreBtn);
         const firstPointOfExpandedList = await getText(expandedListItem);
@@ -194,7 +195,7 @@ describe('Tabs test suite', () => {
     });
 
     async function checkTabsSelect(section: string): Promise<boolean> {
-        let length: number = 0;
+        let length = 0;
         if (section === collapsibleOverflowExample) {
             length = (await getElementArrayLength(section + fdTab)) - 3;
         }
