@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.3...v0.56.0-rc.4) (2025-04-25)
+
+
+### Features
+
+* **core:** calendar legend (main component & child items) ([#13203](https://github.com/SAP/fundamental-ngx/issues/13203)) ([b962af5](https://github.com/SAP/fundamental-ngx/commit/b962af5336bde83a19131f368a5306514ccc1557))
+
+
+
+
+
 # [0.56.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.2...v0.56.0-rc.3) (2025-04-25)
 
 
