@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.4...v0.56.0-rc.5) (2025-04-25)
+
+
+### Bug Fixes
+
+* **platform:** search field needs title tooltips for buttons ([#13228](https://github.com/SAP/fundamental-ngx/issues/13228)) ([6693ccb](https://github.com/SAP/fundamental-ngx/commit/6693ccb58cf7540e6584171b322fc22d14052443))
+
+
+
+
+
 # [0.56.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.3...v0.56.0-rc.4) (2025-04-25)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
