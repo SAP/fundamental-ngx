@@ -27,7 +27,7 @@ let id = 0;
         </span>
     `,
     host: {
-        '[attr.id]': 'id',
+        '[attr.id]': 'id()',
         '(focus)': 'onFocus()',
         tabindex: '0'
     }
