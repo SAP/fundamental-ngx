@@ -1,11 +1,10 @@
-import { Component, Input, NO_ERRORS_SCHEMA, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Input, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { MenuItemComponent, PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { MenuButtonComponent } from './menu-button.component';
 import { PlatformMenuButtonModule } from './menu-button.module';
 
@@ -124,7 +123,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
         </fdp-menu>
     `,
     standalone: true,
-    imports: [PlatformMenuModule, PlatformMenuButtonModule]
+    imports: [PlatformMenuButtonModule]
 })
 class TestMenuButtonComponent {
     @Input()
@@ -138,9 +137,6 @@ class TestMenuButtonComponent {
 
     @ViewChild(MenuButtonComponent, { static: true })
     component: MenuButtonComponent;
-
-    @ViewChildren(MenuItemComponent)
-    menuItems: QueryList<MenuItemComponent>;
 
     currentSelectedItem = '';
 
