@@ -21,7 +21,7 @@
                 (inputChange)="onInputChange($event)"
             ></fdp-search-field>
         }
-        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+        <fd-shellbar-actions>
             @for (action of actions; track action) {
                 <fd-shellbar-action
                     [glyph]="action.glyph"
@@ -35,6 +35,140 @@
                 <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
                 </fd-product-switch-body>
             </fd-product-switch>
+            <fd-user-menu (isOpenChange)="isOpenChange($event)">
+                <fd-user-menu-control>
+                    <fd-avatar
+                        size="xs"
+                        [circle]="true"
+                        ariaLabel="photo 1 in circle"
+                        image="https://picsum.photos/id/1018/400"
+                    ></fd-avatar>
+                </fd-user-menu-control>
+
+                <fd-user-menu-body>
+                    <div fd-user-menu-header>
+                        <fd-avatar
+                            [circle]="true"
+                            size="l"
+                            label="Lisa Miller"
+                            zoomGlyph="edit"
+                            (zoomGlyphClicked)="onZoomGlyphClick()"
+                            title="Edit avatar"
+                        ></fd-avatar>
+                        <div fd-user-menu-header-container>
+                            <div fd-user-menu-user-name>Lisa Miller</div>
+                            <div fd-user-menu-subline>lisa.miller&#64;test.com</div>
+                            <div fd-user-menu-subline>User Experience Designer</div>
+                        </div>
+                        <button
+                            fd-button
+                            label="Manage Account"
+                            glyph="user-settings"
+                            ariaLabel="Manage Account"
+                        ></button>
+                    </div>
+                    <div fd-user-menu-content-container>
+                        <fd-panel
+                            transparent
+                            noRadius
+                            [(expanded)]="expanded"
+                            expandId="panel-expand-1"
+                            [expandAriaLabel]="expanded ? 'Hide other accounts' : 'Show other accounts'"
+                            expandAriaLabelledBy="panel-expandable-title-1"
+                        >
+                            <h5 fd-panel-title id="panel-expandable-title-1">Other Accounts</h5>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                glyph="add-employee"
+                                ariaLabel="Add account"
+                                title="Add account"
+                            ></button>
+                            <div fd-panel-content noPadding ariaLabel="Panel Content" id="panel-content-1">
+                                <ul fd-list [subline]="true">
+                                    <li fd-list-item [interactive]="true" [active]="true">
+                                        <fd-avatar size="s" label="Lisa Miller"></fd-avatar>
+                                        <div fd-list-content>
+                                            <div fd-list-title>Lisa Miller</div>
+                                            <div fd-list-subline>lisa.miller&#64;test.com</div>
+                                            <div fd-list-subline>User Experience Designer</div>
+                                        </div>
+                                    </li>
+                                    <li fd-list-item [interactive]="true">
+                                        <fd-avatar size="s" label="John Doe"></fd-avatar>
+                                        <div fd-list-content>
+                                            <div fd-list-title>John Doe</div>
+                                            <div fd-list-subline>john.doe&#64;test.com</div>
+                                            <div fd-list-subline>Project Manager</div>
+                                        </div>
+                                    </li>
+                                    <li fd-list-item [interactive]="true">
+                                        <fd-avatar image="https://picsum.photos/id/1018/400" size="s"></fd-avatar>
+                                        <div fd-list-content>
+                                            <div fd-list-title>Jane Doe</div>
+                                            <div fd-list-subline>jane.doe&#64;test.com</div>
+                                            <div fd-list-subline>Delivery Manager</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </fd-panel>
+
+                        <fd-user-menu-list>
+                            <li
+                                fd-user-menu-list-item
+                                icon="action-settings"
+                                text="Settings"
+                                (click)="actionPicked('Settings')"
+                            ></li>
+                            <li
+                                fd-user-menu-list-item
+                                icon="official-service"
+                                text="Legal Information"
+                                hasSubmenu
+                                [submenu]="legalSublist"
+                            ></li>
+                            <li
+                                fd-user-menu-list-item
+                                icon="message-information"
+                                text="About"
+                                (click)="actionPicked('About')"
+                            ></li>
+                        </fd-user-menu-list>
+
+                        <ng-template #legalSublist>
+                            <div fd-user-menu-sublist hasIcons>
+                                <li
+                                    fd-user-menu-list-item
+                                    icon="private"
+                                    text="Privacy Policy"
+                                    (click)="actionPicked('Privacy Policy')"
+                                ></li>
+                                <li
+                                    fd-user-menu-list-item
+                                    icon="notes"
+                                    text="Terms of Use"
+                                    (click)="actionPicked('Terms of Use')"
+                                ></li>
+                            </div>
+                        </ng-template>
+                    </div>
+                </fd-user-menu-body>
+
+                <fd-user-menu-footer>
+                    <div fd-bar barDesign="footer">
+                        <div fd-bar-right>
+                            <button
+                                fd-button
+                                label="Sign Out"
+                                fdType="transparent"
+                                glyph="filter"
+                                ariaLabel="Transparent Filter"
+                            ></button>
+                        </div>
+                    </div>
+                </fd-user-menu-footer>
+            </fd-user-menu>
         </fd-shellbar-actions>
     </fd-shellbar>
 </div>

@@ -10,7 +10,6 @@ import {
     getAssetFromModuleAssets,
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
-import { CustomUserMenuExampleComponent } from './examples/custom-user-menu-example.component';
 import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
 import { ShellbarBrandingContextAreaExampleComponent } from './examples/shellbar-branding-context-area-example/shellbar-branding-context-area-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
@@ -35,7 +34,6 @@ const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
         ShellbarCollapsibleExampleComponent,
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent,
-        CustomUserMenuExampleComponent,
         ShellbarBrandingContextAreaExampleComponent
     ]
 })
@@ -90,13 +88,6 @@ export class ShellbarDocsComponent {
         }),
         getExampleFile('shellbar-growing-group-example/shellbar-growing-group-example.component.html', {
             name: 'shellbar-growing-group-example.html'
-        })
-    ];
-
-    shellbarCustomUserMenuExample: ExampleFile[] = [
-        getExampleFile('custom-user-menu-example.component.ts', {
-            selector: 'shellbar-custom-user-menu-example',
-            component: 'CustomUserMenuExampleComponent'
         })
     ];
 

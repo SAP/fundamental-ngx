@@ -22,8 +22,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { KeyboardSupportService, RtlService } from '@fundamental-ngx/cdk/utils';
-import { ContentDensityMode } from '@fundamental-ngx/core';
-import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 import {
     DialogBodyComponent,

@@ -1,13 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClickedDirective } from '@fundamental-ngx/cdk';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { PanelModule } from '@fundamental-ngx/core/panel';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { ShellbarMenuItem, ShellbarModule, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
+import {
+    UserMenuBodyComponent,
+    UserMenuComponent,
+    UserMenuContentContainerComponent,
+    UserMenuControlComponent,
+    UserMenuFooterComponent,
+    UserMenuHeaderContainerDirective,
+    UserMenuHeaderDirective,
+    UserMenuListComponent,
+    UserMenuListItemComponent,
+    UserMenuSublineDirective,
+    UserMenuSublistComponent,
+    UserMenuUserNameDirective
+} from '@fundamental-ngx/core/user-menu';
 import {
     SearchFieldComponent,
     SearchInput,
@@ -28,10 +47,35 @@ import {
         ProductSwitchModule,
         SearchFieldComponent,
         SegmentedButtonComponent,
-        ObjectStatusComponent
+        ObjectStatusComponent,
+        UserMenuComponent,
+        UserMenuBodyComponent,
+        UserMenuControlComponent,
+        UserMenuFooterComponent,
+        UserMenuContentContainerComponent,
+        UserMenuHeaderContainerDirective,
+        UserMenuHeaderDirective,
+        UserMenuSublineDirective,
+        UserMenuUserNameDirective,
+        UserMenuListComponent,
+        UserMenuSublistComponent,
+        UserMenuListItemComponent,
+        PopoverModule,
+        ListModule,
+        PanelModule,
+        BarComponent,
+        BarRightDirective,
+        MessageToastModule
     ]
 })
 export class ShellbarBrandingContextAreaExampleComponent {
+    @ViewChild(UserMenuComponent)
+    userMenuComponent: UserMenuComponent;
+
+    expanded = true;
+
+    isOpen = false;
+
     searchTerm = '';
 
     inputText = '';
@@ -224,6 +268,8 @@ export class ShellbarBrandingContextAreaExampleComponent {
         { text: 'Sign Out', callback: this.signOutCallback }
     ];
 
+    constructor(private _messageToastService: MessageToastService) {}
+
     brandingClicked($event: Event): void {
         console.log($event);
         alert('Branding clicked');
@@ -273,5 +319,25 @@ export class ShellbarBrandingContextAreaExampleComponent {
 
     onInputChange($event: SearchInput): void {
         this.inputText = $event.text;
+    }
+
+    isOpenChange(isOpen: boolean): void {
+        this.isOpen = isOpen;
+    }
+
+    onZoomGlyphClick(): void {
+        alert('Edit profile');
+    }
+
+    actionPicked(action: string): void {
+        this.openMessageToast(action);
+        this.userMenuComponent.close();
+    }
+
+    openMessageToast(action: string): void {
+        const content = `${action} action performed`;
+        this._messageToastService.open(content, {
+            duration: 5000
+        });
     }
 }
