@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.5...v0.56.0-rc.6) (2025-04-28)
+
+
+### Bug Fixes
+
+* **core:** add User Menu to ShellBar actions, update examples ([#13227](https://github.com/SAP/fundamental-ngx/issues/13227)) ([94f5854](https://github.com/SAP/fundamental-ngx/commit/94f5854a80cd274ae6b630056c4a77dfb86b52bd))
+
+
+
+
+
 # [0.56.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.4...v0.56.0-rc.5) (2025-04-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
