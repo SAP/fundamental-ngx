@@ -11,64 +11,36 @@ export function addStyles(options: Schema): Rule {
     return chain([addStylesToConfig(options), addAssetsToConfig(options)]);
 }
 
+function handleError(context: SchematicContext, error: Error, message: string): void {
+    context.logger.error(message);
+    throw new SchematicsException(`${message}: ${error.message}`);
+}
+
 function addStylesToConfig(options: Schema): Rule {
-    return async (tree: Tree, context: SchematicContext) => {
+    return async (tree: Tree, context: SchematicContext): Promise<void> => {
         try {
-            const additionalStyles = ['./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css'];
-
-            if (options.fonts) {
-                additionalStyles.push('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
-            }
+            const additionalStyle = './node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css';
             const buildTarget = await getProjectBuildTarget(tree, options.project);
-            const stylesArray: AssetPattern[] = (buildTarget.options?.styles as any) || [];
-            let stylesUpdated = false;
+            const stylesArray: string[] = (buildTarget.options?.styles as string[]) || [];
 
-            additionalStyles.forEach((additionalStyle) => {
-                if (
-                    !stylesArray.find(
-                        (jsonStyle) => typeof jsonStyle === 'string' && jsonStyle === `${additionalStyle}`
-                    )
-                ) {
-                    stylesUpdated = true;
-                    stylesArray.push(additionalStyle);
-                }
-            });
-
-            if (!stylesUpdated) {
-                context.logger.info(`✅️ Found duplicate styles in angular.json. Skipping.`);
-
-                if (options.fonts) {
-                    context.logger.info(`✅️ Found duplicate font styles to angular.json.`);
-                }
-                const workspace = await getWorkspaceDefinition(tree);
-                await updateWorkspaceDefinition(tree, workspace);
-                return;
-            }
-            if (buildTarget.options) {
-                buildTarget.options.styles = stylesArray as any;
+            if (!stylesArray.includes(additionalStyle)) {
+                stylesArray.push(additionalStyle);
+                context.logger.info(`✅️ Added style to angular.json.`);
             } else {
-                buildTarget.options = {
-                    styles: stylesArray as any
-                };
+                context.logger.info(`✅️ Style already exists in angular.json. Skipping.`);
             }
-        } catch {
-            throw new SchematicsException(
-                `Unable to find angular.json project styles. Please manually configure your styles array.`
-            );
-        }
 
-        context.logger.info(`✅️ Added styles to angular.json.`);
-
-        if (options.fonts) {
-            context.logger.info(`✅️ Added font styles to angular.json.`);
+            buildTarget.options.styles = stylesArray;
+            const workspace = await getWorkspaceDefinition(tree);
+            await updateWorkspaceDefinition(tree, workspace);
+        } catch (error) {
+            handleError(context, error, 'Failed to add styles configuration');
         }
     };
 }
 
 function addAssetsToConfig(options: Schema): Rule {
-    return async (tree: Tree, context: SchematicContext) => {
-        const workspaceJson = await getWorkspaceDefinition(tree);
-
+    return async (tree: Tree, context: SchematicContext): Promise<void> => {
         try {
             const additionalAssets: AssetPatternClass[] = [
                 {
@@ -78,39 +50,47 @@ function addAssetsToConfig(options: Schema): Rule {
                 },
                 {
                     glob: '**/*',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/',
+                    output: './assets/theming-base/baseTheme/fonts/'
+                },
+                {
+                    glob: '**/*',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/',
+                    output: './assets/theming-base/sap_horizon/fonts/'
+                },
+                {
+                    glob: '**/*',
                     input: './node_modules/fundamental-styles/dist/theming/',
                     output: './assets/fundamental-styles-theming/'
                 }
             ];
+
             const buildTarget = await getProjectBuildTarget(tree, options.project);
-            const assetsArray: AssetPattern[] = (buildTarget.options as any)['assets'];
-            let assetsUpdated = false;
+            const assetsArray: AssetPattern[] = (buildTarget.options?.assets as AssetPattern[]) || [];
 
-            additionalAssets.forEach((asset) => {
-                if (
-                    !assetsArray.find((jsonAsset) => typeof jsonAsset === 'object' && jsonAsset.input === asset.input)
-                ) {
-                    assetsUpdated = true;
-                    assetsArray.push(asset);
-                }
-            });
+            const newAssets = additionalAssets.filter(
+                (newAsset) =>
+                    !assetsArray.some(
+                        (existingAsset) =>
+                            typeof existingAsset === 'object' &&
+                            existingAsset.input === newAsset.input &&
+                            existingAsset.glob === newAsset.glob &&
+                            existingAsset.output === newAsset.output
+                    )
+            );
 
-            if (!assetsUpdated) {
-                context.logger.info(`✅️ Found duplicate assets in angular.json. Skipping.`);
-                return;
+            if (newAssets.length > 0) {
+                assetsArray.push(...newAssets);
+                context.logger.info(`✅️ Added assets to angular.json.`);
+            } else {
+                context.logger.info(`✅️ Assets already exist in angular.json. Skipping.`);
             }
 
-            (buildTarget.options as any)['assets'] = assetsArray;
-        } catch {
-            throw new SchematicsException(
-                `Unable to find angular.json project assets. Please manually configure your assets array.`
-            );
+            buildTarget.options.assets = assetsArray;
+            const workspace = await getWorkspaceDefinition(tree);
+            await updateWorkspaceDefinition(tree, workspace);
+        } catch (error) {
+            handleError(context, error, 'Failed to add assets configuration');
         }
-
-        await updateWorkspaceDefinition(tree, workspaceJson!);
-
-        context.logger.info(`✅️ Added assets to angular.json.`);
-
-        return;
     };
 }

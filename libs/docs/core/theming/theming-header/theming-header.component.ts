@@ -25,39 +25,21 @@ import {
 })
 export class ThemingHeaderComponent {
     assetsChunk: ExampleFile = {
-        code: `
-{
-    "glob": "**/css_variables.css",
-    "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-    "output": "./assets/theming-base/"
-},
-{
+        code: `{
     "glob": "**/*",
     "input": "./node_modules/fundamental-styles/dist/theming/",
     "output": "./assets/fundamental-styles-theming/"
-}
-        `,
-        language: 'json'
-    };
-
-    stylesChunk: ExampleFile = {
-        code: `
-{
-    "input": "{path to local theming folder}/sap_fiori_3_fonts.css",
-    "inject": false,
-    "bundleName": "sap_fiori_3_fonts"
 },
 {
-    "input": "{path to local theming folder}/sap_horizon_fonts.css",
-    "inject": false,
-    "bundleName": "sap_horizon_fonts"
+    "glob": "**/*",
+    "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/",
+    "output": "./assets/theming-base/baseTheme/fonts/"
 },
 {
-    "input": "{path to local theming folder}/sap_belize_fonts.css",
-    "inject": false,
-    "bundleName": "sap_belize_fonts"
-}
-        `,
+    "glob": "**/*",
+    "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/",
+    "output": "./assets/theming-base/sap_horizon/fonts/"
+}`,
         language: 'json'
     };
 }
