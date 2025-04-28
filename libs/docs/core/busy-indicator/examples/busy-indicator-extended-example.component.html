@@ -3,6 +3,11 @@
 
 <ng-template #template>
     <div fd-busy-indicator-extended>
-        <fd-busy-indicator [loading]="true" label="Please Wait..." title="Please wait"></fd-busy-indicator>
+        <fd-busy-indicator
+            [loading]="true"
+            ariaLabel="loading"
+            title="Please wait"
+            ariaValueText="Busy"
+        ></fd-busy-indicator>
     </div>
 </ng-template>
