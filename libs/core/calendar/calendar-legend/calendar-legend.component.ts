@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, input } from '@angular/core';
+import { Component, ElementRef, Input, input } from '@angular/core';
 import { FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { CalendarLegendFocusingService } from './calendar-legend-focusing.service';
 import { LegendItemComponent } from './calendar-legend-item.component';
 
 @Component({
@@ -17,6 +18,7 @@ import { LegendItemComponent } from './calendar-legend-item.component';
                         fdkFocusableItem
                         [text]="rule.legendText"
                         [color]="'placeholder-' + rule.specialDayNumber"
+                        (focusedElementEvent)="handleFocusedElementEvent($event, rule.specialDayNumber)"
                     ></fd-calendar-legend-item>
                 }
             </div>
@@ -41,5 +43,28 @@ export class CalendarLegendComponent<D> {
     /** Element getting focused */
     focusedElement = input<string>('');
 
-    constructor(public datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    /** Calendar Index */
+    calIndex: number;
+
+    constructor(
+        public datetimeAdapter: DatetimeAdapter<FdDate>,
+        private elementRef: ElementRef,
+        private focusingService: CalendarLegendFocusingService
+    ) {
+        this.calIndex = this.focusingService.getCalendarIndex() - 1;
+    }
+
+    /** @hidden */
+    handleFocusedElementEvent(event: string, specialDayNumber: number): void {
+        this.focusedElementEventHandle(event, specialDayNumber);
+    }
+
+    /** @hidden */
+    focusedElementEventHandle(event: string, specialNumber?: number): void {
+        this.focusingService.setFocusOnCell(
+            this.elementRef.nativeElement.querySelector(`#${event}`),
+            this.calIndex,
+            specialNumber
+        );
+    }
 }
