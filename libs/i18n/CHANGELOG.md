@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.6...v0.56.0-rc.7) (2025-04-29)
+
+
+### Bug Fixes
+
+* translation delivery commit by LX Lab ([#13245](https://github.com/SAP/fundamental-ngx/issues/13245)) ([68592d5](https://github.com/SAP/fundamental-ngx/commit/68592d5561fb361ea351a147a9b9eea34085f49d))
+
+
+
+
+
 # [0.56.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.5...v0.56.0-rc.6) (2025-04-28)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
