@@ -54,7 +54,7 @@
                 role="combobox"
                 autocomplete="off"
                 [attr.aria-label]="ariaLabel"
-                [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-labelledby]="_getLabelledBy()"
                 [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
                 [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
                 [attr.aria-haspopup]="autoComplete && !mobile"
@@ -89,6 +89,7 @@
             *ngIf="mobile || isOpen ? null : !!stateMessage"
             [type]="state"
             [innerHtml]="stateMessage"
+            [attr.id]="'fdp-list-message-combobox-state-message-' + id"
         ></fd-form-message>
     </fd-form-input-message-group>
 </ng-template>
