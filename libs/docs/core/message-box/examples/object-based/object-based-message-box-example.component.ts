@@ -27,6 +27,8 @@ export class ObjectBasedMessageBoxExampleComponent {
     open(): void {
         const content: MessageBoxContent = {
             title: this.title,
+            titleId: 'message-box-title-id-1',
+            contentId: 'message-box-content-id-1',
             content: this.content,
             approveButton: 'Ok',
             cancelButton: 'Cancel',
@@ -36,7 +38,8 @@ export class ObjectBasedMessageBoxExampleComponent {
         };
 
         const messageBoxRef = this._messageBoxService.open(content, {
-            ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body'
+            ariaLabelledBy: 'message-box-title-id-1',
+            ariaDescribedBy: 'message-box-content-id-1'
         });
 
         messageBoxRef.afterClosed.subscribe({

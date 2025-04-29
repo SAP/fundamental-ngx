@@ -22,7 +22,9 @@ export class MessageBoxMobileExampleComponent {
     open(): void {
         const content: MessageBoxContent = {
             title: this.title,
+            titleId: 'fd-message-box-mobile-header',
             content: this.content,
+            contentId: 'fd-message-box-mobile-body',
             approveButton: 'Ok',
             cancelButton: 'Cancel',
             approveButtonCallback: () => messageBoxRef.close('Approved'),
@@ -32,7 +34,8 @@ export class MessageBoxMobileExampleComponent {
 
         const messageBoxRef = this._messageBoxService.open(content, {
             mobile: true,
-            ariaLabelledBy: `fd-message-box-mobile-header fd-message-box-mobile-body`
+            ariaLabelledBy: 'fd-message-box-mobile-header',
+            ariaDescribedBy: 'fd-message-box-mobile-body'
         });
     }
 }

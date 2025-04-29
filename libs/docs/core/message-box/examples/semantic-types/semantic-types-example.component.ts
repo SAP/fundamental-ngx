@@ -17,6 +17,8 @@ export class SemanticTypesExampleComponent {
     title = 'Fruit facts';
     content = 'Strawberries have more vitamin C than oranges.';
     types = '';
+    titleId = '';
+    contentId = '';
 
     constructor(private _messageBoxService: MessageBoxService) {}
 
@@ -24,10 +26,15 @@ export class SemanticTypesExampleComponent {
         this.types = `Message box uses the semantic type "${type}" ${
             customSemanticIcon ? 'with custom icon' : 'with default icon'
         }`;
+        this.titleId = `fd-message-box-semantic-title-${type}`;
+        this.contentId = `fd-message-box-semantic-content-${type}`;
+
         const messageBoxRef = this._messageBoxService.open(
             {
                 title: this.title,
+                titleId: this.titleId,
                 content: this.content,
+                contentId: this.contentId,
                 approveButton: 'Ok',
                 cancelButton: 'Cancel',
                 approveButtonCallback: () => messageBoxRef.close('Approved'),
@@ -38,8 +45,8 @@ export class SemanticTypesExampleComponent {
                 type,
                 showSemanticIcon,
                 customSemanticIcon,
-                ariaLabelledBy: 'fd-message-box-semantic-types-header fd-message-box-semantic-types-body',
-                ariaDescribedBy: 'fd-message-box-semantic-types-types'
+                ariaLabelledBy: this.titleId,
+                ariaDescribedBy: this.contentId
             }
         );
     }
