@@ -155,7 +155,7 @@ export const FD_LANGUAGE_CHINESE_TRADITIONAL: FdLanguage = {
         formItemPlaceholder: '檔名'
     },
     coreWizard: { ariaLabel: '精靈' },
-    coreBreadcrumb: { overflowTitleMore: '更多' },
+    coreBreadcrumb: { overflowTitleMore: '按一下或按下 Enter 以檢視更多詳細資訊' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: '新增節點',

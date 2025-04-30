@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.54](https://github.com/SAP/fundamental-ngx/compare/v0.43.53...v0.43.54) (2025-04-30)
+
+
+### Bug Fixes
+
+* **cdk:** focusable item tabindex bug ([#13220](https://github.com/SAP/fundamental-ngx/issues/13220)) ([8f2ec88](https://github.com/SAP/fundamental-ngx/commit/8f2ec88b60f6260cbec5dfdf9da6ab1fb71803e9))
+* **core,cx:** vertical and side nav announcing selection incorrectly ([#13212](https://github.com/SAP/fundamental-ngx/issues/13212)) ([b38c552](https://github.com/SAP/fundamental-ngx/commit/b38c55257b9f58037c6773fae891a662305b56e5))
+* **platform:** fix platform table aria-haspopup incorrect values ([#13218](https://github.com/SAP/fundamental-ngx/issues/13218)) ([bb034a3](https://github.com/SAP/fundamental-ngx/commit/bb034a366c198ef9b4b5a452a67fee916af90bd4))
+
+
+
+
+
 ## [0.43.53](https://github.com/SAP/fundamental-ngx/compare/v0.43.52...v0.43.53) (2025-04-15)
 
 

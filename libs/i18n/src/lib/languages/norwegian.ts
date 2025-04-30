@@ -160,7 +160,7 @@ export const FD_LANGUAGE_NORWEGIAN: FdLanguage = {
         formItemPlaceholder: 'Filnavn'
     },
     coreWizard: { ariaLabel: 'Veiviser' },
-    coreBreadcrumb: { overflowTitleMore: 'Mer' },
+    coreBreadcrumb: { overflowTitleMore: 'Klikk eller trykk på Enter for å vise flere detaljer' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Legg til knutepunkt',

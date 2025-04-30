@@ -160,7 +160,7 @@ export const FD_LANGUAGE_DANISH: FdLanguage = {
         formItemPlaceholder: 'Filnavn'
     },
     coreWizard: { ariaLabel: 'Guide' },
-    coreBreadcrumb: { overflowTitleMore: 'Flere' },
+    coreBreadcrumb: { overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Tilføj node',

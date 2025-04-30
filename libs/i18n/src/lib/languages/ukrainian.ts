@@ -222,7 +222,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         formItemPlaceholder: "Ім'я файлу"
     },
     coreWizard: { ariaLabel: 'Майстер' },
-    coreBreadcrumb: { overflowTitleMore: 'Більше' },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Щоб переглянути докладнішу інформацію, клікніть або натисніть клавішу Enter'
+    },
     platformActionBar: { backButtonLabel: 'Повернутися назад' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Додати',

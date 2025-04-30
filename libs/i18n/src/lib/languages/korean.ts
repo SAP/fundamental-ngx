@@ -156,7 +156,7 @@ export const FD_LANGUAGE_KOREAN: FdLanguage = {
         formItemPlaceholder: '파일 이름'
     },
     coreWizard: { ariaLabel: '마법사' },
-    coreBreadcrumb: { overflowTitleMore: '더 보기' },
+    coreBreadcrumb: { overflowTitleMore: '클릭하거나 Enter를 눌러 자세한 내용을 확인할 수 있습니다.' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: '노드 추가',

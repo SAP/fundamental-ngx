@@ -162,7 +162,7 @@ export const FD_LANGUAGE_THAI: FdLanguage = {
         formItemPlaceholder: 'ชื่อไฟล์'
     },
     coreWizard: { ariaLabel: 'Wizard' },
-    coreBreadcrumb: { overflowTitleMore: 'เพิ่มเติม' },
+    coreBreadcrumb: { overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'เพิ่มโหนด',

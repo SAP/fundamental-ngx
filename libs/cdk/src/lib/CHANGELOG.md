@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.54](https://github.com/SAP/fundamental-ngx/compare/v0.43.53...v0.43.54) (2025-04-30)
+
+
+### Bug Fixes
+
+* **cdk:** focusable item tabindex bug ([#13220](https://github.com/SAP/fundamental-ngx/issues/13220)) ([8f2ec88](https://github.com/SAP/fundamental-ngx/commit/8f2ec88b60f6260cbec5dfdf9da6ab1fb71803e9))
+
+
+
+
+
 ## [0.43.53](https://github.com/SAP/fundamental-ngx/compare/v0.43.52...v0.43.53) (2025-04-15)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

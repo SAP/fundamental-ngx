@@ -165,7 +165,7 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         formItemPlaceholder: 'Dateiname'
     },
     coreWizard: { ariaLabel: 'Assistent' },
-    coreBreadcrumb: { overflowTitleMore: 'Mehr' },
+    coreBreadcrumb: { overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen' },
     platformActionBar: { backButtonLabel: 'Zurück' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Knoten hinzufügen',

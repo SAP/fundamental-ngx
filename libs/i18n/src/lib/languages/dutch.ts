@@ -164,7 +164,7 @@ export const FD_LANGUAGE_DUTCH: FdLanguage = {
         formItemPlaceholder: 'Bestandsnaam'
     },
     coreWizard: { ariaLabel: 'Wizard' },
-    coreBreadcrumb: { overflowTitleMore: 'Meer' },
+    coreBreadcrumb: { overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Knooppunt toevoegen',

@@ -160,7 +160,7 @@ export const FD_LANGUAGE_JAPANESE: FdLanguage = {
         formItemPlaceholder: 'ファイル名'
     },
     coreWizard: { ariaLabel: 'ウィザード' },
-    coreBreadcrumb: { overflowTitleMore: '表示を増やす' },
+    coreBreadcrumb: { overflowTitleMore: '詳細を表示するにはクリックするか Enter を押してください' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'ノードを追加',

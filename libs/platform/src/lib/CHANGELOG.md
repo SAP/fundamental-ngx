@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.54](https://github.com/SAP/fundamental-ngx/compare/v0.43.53...v0.43.54) (2025-04-30)
+
+
+### Bug Fixes
+
+* **platform:** fix platform table aria-haspopup incorrect values ([#13218](https://github.com/SAP/fundamental-ngx/issues/13218)) ([bb034a3](https://github.com/SAP/fundamental-ngx/commit/bb034a366c198ef9b4b5a452a67fee916af90bd4))
+
+
+
+
+
 ## [0.43.53](https://github.com/SAP/fundamental-ngx/compare/v0.43.52...v0.43.53) (2025-04-15)
 
 

@@ -165,7 +165,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         formItemPlaceholder: 'Nazwa pliku'
     },
     coreWizard: { ariaLabel: 'Kreator' },
-    coreBreadcrumb: { overflowTitleMore: 'Więcej' },
+    coreBreadcrumb: { overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów' },
     platformActionBar: { backButtonLabel: 'Powrót' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Dodaj węzeł',

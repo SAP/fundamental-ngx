@@ -165,7 +165,7 @@ export const FD_LANGUAGE_MALAY: FdLanguage = {
         formItemPlaceholder: 'Nama fail'
     },
     coreWizard: { ariaLabel: 'Bestari' },
-    coreBreadcrumb: { overflowTitleMore: 'Selanjutnya' },
+    coreBreadcrumb: { overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Tambah nod',
