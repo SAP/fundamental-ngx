@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
     coreCalendar: {
@@ -110,9 +109,9 @@ export default {
         collapsedItemMenuLabel: '摺疊項目功能表',
         cancel: '取消',
         search: '搜尋',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: '輔助工具',
+        backButtonLabel: '返回',
+        navigationButtonLabel: '瀏覽'
     },
     coreSlider: {
         singleMinMaxDetails: '滑桿最小值為 {min}、最大值為 {max}',
@@ -200,7 +199,7 @@ export default {
         ariaLabel: '精靈'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '更多',
+        overflowTitleMore: '按一下或按下 Enter 以檢視更多詳細資訊',
         breadcrumbTrailLabel: '階層連結軌跡'
     },
     platformApprovalFlow: {
@@ -532,7 +531,8 @@ export default {
         confirmBtnLabel: '確定',
         cancelBtnLabel: '取消',
         filteredBy: '篩選依據',
-        showingBlankOfBlank: '顯示 {totalGrowingItemsCount}/{totalGrowingItemsCount} 個'
+        showingBlankOfBlank: '顯示 {totalGrowingItemsCount}/{totalGrowingItemsCount} 個',
+        clearFilters: '清除篩選器'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編輯'
@@ -597,7 +597,7 @@ export default {
         groupAriaDescription: '通知群組',
         groupAriaDescriptionExpanded: '已展開',
         groupAriaDescriptionCollapsed: '已摺疊',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: '更多',
+        triggerLessLabel: '較少'
     }
 };

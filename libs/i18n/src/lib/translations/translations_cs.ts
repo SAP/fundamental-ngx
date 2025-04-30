@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Sbalená položka menu',
         cancel: 'Zrušit',
         search: 'Hledat',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Pomocné nástroje',
+        backButtonLabel: 'Zpět',
+        navigationButtonLabel: 'Navigace'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Průvodce'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Více',
+        overflowTitleMore: 'Kliknutím nebo stisknutím enter zobrazíte další detaily',
         breadcrumbTrailLabel: 'Navigační cesta'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Zrušit',
         filteredBy: 'Filtrováno podle',
-        showingBlankOfBlank: 'Zobrazení {totalGrowingItemsCount} z {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Zobrazení {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        clearFilters: 'Vymazat filtry'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Skupina oznámení',
         groupAriaDescriptionExpanded: 'rozbaleno',
         groupAriaDescriptionCollapsed: 'sbaleno',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Více',
+        triggerLessLabel: 'Méně'
     }
 };

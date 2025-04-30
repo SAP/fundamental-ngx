@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_de.properties instead
 export default {
     coreCalendar: {
@@ -111,8 +110,8 @@ export default {
         collapsedItemMenuLabel: 'Komprimiertes Elementmenü',
         cancel: 'Abbrechen',
         search: 'Suchen',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
+        assistiveTools: 'Unterstützende Tools',
+        backButtonLabel: 'Zurück',
         navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Assistent'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mehr',
+        overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen',
         breadcrumbTrailLabel: 'Navigationspfad'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Abbrechen',
         filteredBy: 'Gefiltert nach',
-        showingBlankOfBlank: 'Anzeige von {totalGrowingItemsCount} von {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Anzeige von {totalGrowingItemsCount} von {totalGrowingItemsCount}',
+        clearFilters: 'Filter zurücksetzen'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bearbeiten'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Benachrichtigungsgruppe',
         groupAriaDescriptionExpanded: 'erweitert',
         groupAriaDescriptionCollapsed: 'reduziert',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mehr',
+        triggerLessLabel: 'Weniger'
     }
 };

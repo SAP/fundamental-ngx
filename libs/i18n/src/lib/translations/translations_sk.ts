@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sk.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Zbalená ponuka položiek',
         cancel: 'Zrušiť',
         search: 'Vyhľadávanie',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Pomocné nástroje',
+        backButtonLabel: 'Späť',
+        navigationButtonLabel: 'Navigácia'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimálna hodnota posúvača je {min}, maximálna hodnota je {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Sprievodca'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Ďalšie',
+        overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti',
         breadcrumbTrailLabel: 'Navigačná cesta'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Zrušiť',
         filteredBy: 'Filtrované podľa',
-        showingBlankOfBlank: 'Zobrazuje sa {totalGrowingItemsCount} z {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Zobrazuje sa {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        clearFilters: 'Vymazať filtre'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upraviť'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Skupina oznámení',
         groupAriaDescriptionExpanded: 'rozbalené',
         groupAriaDescriptionCollapsed: 'zbalené',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Viac',
+        triggerLessLabel: 'Menej'
     }
 };
