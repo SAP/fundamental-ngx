@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'תפריט פריט מכווץ',
         cancel: 'בטל',
         search: 'חפש',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'כלים מסייעים',
+        backButtonLabel: 'חזרה',
+        navigationButtonLabel: 'ניווט'
     },
     coreSlider: {
         singleMinMaxDetails: 'הערך המינימלי של המחוון הוא {min}, הערך המקסימלי הוא {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'אשף'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'עוד',
+        overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים",
         breadcrumbTrailLabel: 'שביל ניווט'
     },
     platformApprovalFlow: {
@@ -533,7 +532,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'בטל',
         filteredBy: 'מסונן לפי',
-        showingBlankOfBlank: 'מציג {totalGrowingItemsCount} של {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'מציג {totalGrowingItemsCount} של {totalGrowingItemsCount}',
+        clearFilters: 'נקה מסננים'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'ערוך'
@@ -598,7 +598,7 @@ export default {
         groupAriaDescription: 'קבוצת הודעות',
         groupAriaDescriptionExpanded: 'מורחב',
         groupAriaDescriptionCollapsed: 'מצומצם',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'יותר',
+        triggerLessLabel: 'פחות'
     }
 };

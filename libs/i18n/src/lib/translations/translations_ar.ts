@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'قائمة عناصر تم طيها',
         cancel: 'إلغاء',
         search: 'بحث',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'الأدوات المساعدة',
+        backButtonLabel: 'رجوع',
+        navigationButtonLabel: 'تنقل'
     },
     coreSlider: {
         singleMinMaxDetails: 'الحد الأدنى لقيمة شريط التمرير هو {min}، والحد الأقصى للقيمة هو {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'المعالج'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'المزيد',
+        overflowTitleMore: 'انقر أو اضغط ’Enter‘ لعرض مزيد من التفاصيل',
         breadcrumbTrailLabel: 'مسار التنقل'
     },
     platformApprovalFlow: {
@@ -497,7 +496,7 @@ export default {
         toolbarActionCollapseAllButtonTitle: 'طي الكل',
         expandRowButtonTitle: 'توسيع الصف',
         collapseRowButtonTitle: 'طي الصف',
-        rowNavigateButtonTitle: 'انتقال',
+        rowNavigateButtonTitle: 'تنقل',
         filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogNotFilteredLabel: '(لم تتم تصفيته)',
         filterDialogFilterByLabel: 'تصفية حسب: {filterLabel}',
@@ -534,7 +533,8 @@ export default {
         confirmBtnLabel: 'موافق',
         cancelBtnLabel: 'إلغاء',
         filteredBy: 'تمت التصفية حسب',
-        showingBlankOfBlank: 'إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'إظهار {totalGrowingItemsCount} من {totalGrowingItemsCount}',
+        clearFilters: 'مسح عوامل التصفية'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'تحرير'
@@ -599,7 +599,7 @@ export default {
         groupAriaDescription: 'مجموعة الإشعارات',
         groupAriaDescriptionExpanded: 'موسَّع',
         groupAriaDescriptionCollapsed: 'تم طيه',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'المزيد',
+        triggerLessLabel: 'أقل'
     }
 };

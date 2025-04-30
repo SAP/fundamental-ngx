@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Összecsukott menüelem',
         cancel: 'Mégse',
         search: 'Keresés',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Segítségnyújtó eszközök',
+        backButtonLabel: 'Vissza',
+        navigationButtonLabel: 'Navigáció'
     },
     coreSlider: {
         singleMinMaxDetails: 'A csúszka minimális értéke {min}, maximális értéke {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Varázsló'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Továbbiak',
+        overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez',
         breadcrumbTrailLabel: 'Útkövetési napló'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Mégse',
         filteredBy: 'Alkalmazott szűrő:',
-        showingBlankOfBlank: 'totalGrowingItemsCount} megjelenítve ennyiből: {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'totalGrowingItemsCount} megjelenítve ennyiből: {totalGrowingItemsCount}',
+        clearFilters: 'Szűrők törlése'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Szerkesztés'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Értesítési csoport',
         groupAriaDescriptionExpanded: 'kibontva',
         groupAriaDescriptionCollapsed: 'visszazárva',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Több',
+        triggerLessLabel: 'Kevesebb'
     }
 };

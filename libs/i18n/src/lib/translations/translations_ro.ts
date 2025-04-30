@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ro.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Meniu de elemente comprimate',
         cancel: 'Anulare',
         search: 'Căutare',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Instrumente de asistență',
+        backButtonLabel: 'Înapoi',
+        navigationButtonLabel: 'Navigare'
     },
     coreSlider: {
         singleMinMaxDetails: 'Valoare minimă cursor de reglare este {min}, valoare maximă este {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Aplicație-asistent'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mai mult',
+        overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii',
         breadcrumbTrailLabel: 'Istoric de navigare'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Anulare',
         filteredBy: 'Filtrat după',
-        showingBlankOfBlank: 'Afișare {totalGrowingItemsCount} din {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Afișare {totalGrowingItemsCount} din {totalGrowingItemsCount}',
+        clearFilters: 'Golire filtre'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modificare'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Grup de notificări',
         groupAriaDescriptionExpanded: 'extins',
         groupAriaDescriptionCollapsed: 'restrâns',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mai mult',
+        triggerLessLabel: 'Mai puțin'
     }
 };
