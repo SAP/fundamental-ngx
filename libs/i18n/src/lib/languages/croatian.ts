@@ -169,7 +169,7 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         formItemPlaceholder: 'Naziv datoteke'
     },
     coreWizard: { ariaLabel: 'Čarobnjak' },
-    coreBreadcrumb: { overflowTitleMore: 'Više' },
+    coreBreadcrumb: { overflowTitleMore: 'Kliknite ili pristinite Enter kako biste prikazali više pojedinosti' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Dodaj čvor',

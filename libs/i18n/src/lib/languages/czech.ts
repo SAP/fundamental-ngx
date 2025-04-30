@@ -165,7 +165,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         formItemPlaceholder: 'Název souboru'
     },
     coreWizard: { ariaLabel: 'Průvodce' },
-    coreBreadcrumb: { overflowTitleMore: 'Více' },
+    coreBreadcrumb: { overflowTitleMore: 'Kliknutím nebo stisknutím enter zobrazíte další detaily' },
     platformActionBar: { backButtonLabel: 'Vraťit se zpět' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Přidat uzel',

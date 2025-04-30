@@ -165,7 +165,7 @@ export const FD_LANGUAGE_ROMANIAN: FdLanguage = {
         formItemPlaceholder: 'Numele fișierului'
     },
     coreWizard: { ariaLabel: 'Aplicație-asistent' },
-    coreBreadcrumb: { overflowTitleMore: 'Mai mult' },
+    coreBreadcrumb: { overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Adăugare nod',

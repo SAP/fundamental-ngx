@@ -156,7 +156,7 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         formItemPlaceholder: 'שם קובץ'
     },
     coreWizard: { ariaLabel: 'אשף' },
-    coreBreadcrumb: { overflowTitleMore: 'עוד' },
+    coreBreadcrumb: { overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים" },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'הוסף צומת',

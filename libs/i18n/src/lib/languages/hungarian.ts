@@ -169,7 +169,7 @@ export const FD_LANGUAGE_HUNGARIAN: FdLanguage = {
         formItemPlaceholder: 'Fájlnév'
     },
     coreWizard: { ariaLabel: 'Varázsló' },
-    coreBreadcrumb: { overflowTitleMore: 'Továbbiak' },
+    coreBreadcrumb: { overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Csomópont hozzáadása',

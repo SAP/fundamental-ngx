@@ -165,7 +165,7 @@ export const FD_LANGUAGE_SLOVAK: FdLanguage = {
         formItemPlaceholder: 'Názov súboru'
     },
     coreWizard: { ariaLabel: 'Sprievodca' },
-    coreBreadcrumb: { overflowTitleMore: 'Ďalšie' },
+    coreBreadcrumb: { overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Pridať uzol',

@@ -225,7 +225,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         formItemPlaceholder: 'Имя файла'
     },
     coreWizard: { ariaLabel: 'Мастер' },
-    coreBreadcrumb: { overflowTitleMore: 'Больше' },
+    coreBreadcrumb: { overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности' },
     platformActionBar: { backButtonLabel: 'Вернуться назад' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Добавить',

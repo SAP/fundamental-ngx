@@ -155,7 +155,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         formItemPlaceholder: '文件名'
     },
     coreWizard: { ariaLabel: '向导' },
-    coreBreadcrumb: { overflowTitleMore: '更多' },
+    coreBreadcrumb: { overflowTitleMore: '单击或按回车以查看更多详细信息' },
     platformActionBar: { backButtonLabel: '返回' },
     platformApprovalFlow: {
         addNodeButtonTitle: '添加节点',

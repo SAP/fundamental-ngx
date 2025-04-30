@@ -165,7 +165,7 @@ export const FD_LANGUAGE_SLOVENIAN: FdLanguage = {
         formItemPlaceholder: 'Ime datoteke'
     },
     coreWizard: { ariaLabel: 'Čarovnik' },
-    coreBreadcrumb: { overflowTitleMore: 'Več' },
+    coreBreadcrumb: { overflowTitleMore: 'Za ogled več podrobnosti kliknite ali pritisnite Enter' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Dodaj vozlišče',

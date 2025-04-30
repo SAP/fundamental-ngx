@@ -160,7 +160,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         formItemPlaceholder: 'Filename'
     },
     coreWizard: { ariaLabel: 'Wizard' },
-    coreBreadcrumb: { overflowTitleMore: 'More' },
+    coreBreadcrumb: { overflowTitleMore: 'Click or press enter to view more details' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Add node',
