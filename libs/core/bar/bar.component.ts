@@ -36,6 +36,9 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
             defaultContentDensity: ContentDensityMode.COMPACT
         })
     ],
+    host: {
+        role: 'toolbar'
+    },
     standalone: true
 })
 export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
