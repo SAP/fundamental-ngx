@@ -165,7 +165,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         formItemPlaceholder: 'Nome do arquivo'
     },
     coreWizard: { ariaLabel: 'Assistente' },
-    coreBreadcrumb: { overflowTitleMore: 'Mais' },
+    coreBreadcrumb: { overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes' },
     platformActionBar: { backButtonLabel: 'Voltar' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Adicionar nó',

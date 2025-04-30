@@ -163,7 +163,7 @@ export const FD_LANGUAGE_SWEDISH: FdLanguage = {
         formItemPlaceholder: 'Filnamn'
     },
     coreWizard: { ariaLabel: 'Guide' },
-    coreBreadcrumb: { overflowTitleMore: 'Fler' },
+    coreBreadcrumb: { overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Lägg till nod',

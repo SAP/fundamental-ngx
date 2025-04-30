@@ -171,7 +171,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         formItemPlaceholder: 'Nom du fichier'
     },
     coreWizard: { ariaLabel: 'Assistant' },
-    coreBreadcrumb: { overflowTitleMore: 'Plus' },
+    coreBreadcrumb: { overflowTitleMore: 'Cliquer ou appuyer sur Entrée pour plus de détails' },
     platformActionBar: { backButtonLabel: 'Revenir en arrière' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Ajouter un nœud',

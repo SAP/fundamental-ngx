@@ -165,7 +165,7 @@ export const FD_LANGUAGE_GREEK: FdLanguage = {
         formItemPlaceholder: 'Όνομα αρχείου'
     },
     coreWizard: { ariaLabel: 'Οδηγός' },
-    coreBreadcrumb: { overflowTitleMore: 'Περισσότερα' },
+    coreBreadcrumb: { overflowTitleMore: 'Κάντε κλικ ή πατήστε enter για να δείτε περισσότερες λεπτομέρειες' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Προσθήκη κόμβου',

@@ -163,7 +163,7 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
         formItemPlaceholder: 'اسم الملف'
     },
     coreWizard: { ariaLabel: 'المعالج' },
-    coreBreadcrumb: { overflowTitleMore: 'المزيد' },
+    coreBreadcrumb: { overflowTitleMore: 'انقر أو اضغط ’Enter‘ لعرض مزيد من التفاصيل' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'إضافة عقدة',

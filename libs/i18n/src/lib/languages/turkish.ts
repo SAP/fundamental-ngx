@@ -160,7 +160,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         formItemPlaceholder: 'Dosya adı'
     },
     coreWizard: { ariaLabel: 'Sihirbaz' },
-    coreBreadcrumb: { overflowTitleMore: 'Daha Fazla' },
+    coreBreadcrumb: { overflowTitleMore: "Daha fazla ayrıntı görüntülemek için Enter'a tıklayın veya basın" },
     platformActionBar: { backButtonLabel: 'Geri dön' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Düğüm ekle',

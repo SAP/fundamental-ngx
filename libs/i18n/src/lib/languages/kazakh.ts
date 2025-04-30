@@ -165,7 +165,7 @@ export const FD_LANGUAGE_KAZAKH: FdLanguage = {
         formItemPlaceholder: 'Файл аты'
     },
     coreWizard: { ariaLabel: 'Шебер' },
-    coreBreadcrumb: { overflowTitleMore: 'Қосымша' },
+    coreBreadcrumb: { overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Түйін қосу',

@@ -163,7 +163,7 @@ export const FD_LANGUAGE_FINNISH: FdLanguage = {
         formItemPlaceholder: 'Tiedostonimi'
     },
     coreWizard: { ariaLabel: 'Avustaja' },
-    coreBreadcrumb: { overflowTitleMore: 'Enemmän' },
+    coreBreadcrumb: { overflowTitleMore: 'Napsauta tai paina Enter nähdäksesi lisätietoja' },
     platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Lisää solmu',

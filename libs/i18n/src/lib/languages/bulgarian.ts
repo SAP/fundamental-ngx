@@ -170,7 +170,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         formItemPlaceholder: 'Име на файл'
     },
     coreWizard: { ariaLabel: 'Асистент' },
-    coreBreadcrumb: { overflowTitleMore: 'Повече' },
+    coreBreadcrumb: { overflowTitleMore: 'Кликнете или натиснете Enter, за да видите повече подробности' },
     platformActionBar: { backButtonLabel: 'Върни Се Обратно' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Добавяне на възел',
