@@ -17,7 +17,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider, OptionItem } from '@fundamental-ngx/platform/shared';
@@ -221,6 +221,21 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         }
 
         this.isOpenChangeHandle(false);
+    }
+
+    /** @hidden */
+    _getLabelledBy(): Nullable<string> {
+        let retVal = this.ariaLabelledBy;
+
+        if (this.stateMessage) {
+            retVal = retVal + ' fdp-list-message-combobox-state-message-' + this.id;
+        }
+
+        if (this.advancedStateMessage?.hasErrors && this.advancedStateMessage?.template) {
+            retVal = retVal + ' fdp-list-message-combobox-error-message-' + this.id;
+        }
+
+        return retVal;
     }
 
     /** @hidden if not selected update model */
