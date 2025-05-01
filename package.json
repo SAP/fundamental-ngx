@@ -49,7 +49,7 @@
         "@angular/platform-browser": "19.2.3",
         "@angular/platform-browser-dynamic": "19.2.3",
         "@angular/router": "19.2.3",
-        "@fundamental-styles/cx": "0.39.3",
+        "@fundamental-styles/cx": "0.40.0",
         "@nx/angular": "20.8.1",
         "@sap-theming/theming-base-content": "11.29.3",
         "@stackblitz/sdk": "1.9.0",
