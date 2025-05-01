@@ -15211,7 +15211,7 @@ __metadata:
     husky: "npm:8.0.2"
     intl: "npm:1.2.5"
     intl-messageformat: "npm:10.5.2"
-    jasmine-core: "npm:4.5.0"
+    jasmine-core: "npm:5.7.0"
     jasmine-marbles: "npm:0.9.2"
     jasmine-spec-reporter: "npm:7.0.0"
     jest: "npm:29.7.0"
@@ -17442,10 +17442,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:4.5.0":
-  version: 4.5.0
-  resolution: "jasmine-core@npm:4.5.0"
-  checksum: 10/63afd0dcb9ccd371c5497536cf11a403dacac8504279701f494a0b9afafd18c5f8f14740b7131a532aa0fea2c706629b942c2a3069c939417a5d0a17541ffb86
+"jasmine-core@npm:5.7.0":
+  version: 5.7.0
+  resolution: "jasmine-core@npm:5.7.0"
+  checksum: 10/bf5bffa23a755444f87ff85a7310455ce5641341c4687b6afe332cba502c9c8c01e60a167e4d393c1b13934c12ebd4058f87faaf26f9ac3370d01f92ee803c19
   languageName: node
   linkType: hard
 

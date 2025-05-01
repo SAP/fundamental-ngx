@@ -130,7 +130,7 @@
         "eslint-plugin-prefer-arrow": "1.2.3",
         "fast-glob": "3.3.1",
         "husky": "8.0.2",
-        "jasmine-core": "4.5.0",
+        "jasmine-core": "5.7.0",
         "jasmine-marbles": "0.9.2",
         "jasmine-spec-reporter": "7.0.0",
         "jest": "29.7.0",
