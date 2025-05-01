@@ -156,6 +156,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _previousValidFiles;
+
+    /** @hidden */
+    private _previousInvalidFiles;
+
+    /** @hidden */
     constructor(
         private _fileUploadService: FileUploaderService,
         private _changeDetRef: ChangeDetectorRef,
@@ -271,9 +277,20 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
      * Clears the files from the input.
      */
     public clear(): void {
-        this.validFiles = [];
-        this.invalidFiles = [];
-        this._propagateFiles();
+        let shouldPropagate = false;
+        if (this.validFiles.length) {
+            this.validFiles = [];
+            shouldPropagate = true;
+        }
+        if (this.invalidFiles.length) {
+            this.invalidFiles = [];
+            shouldPropagate = true;
+        }
+        // Clears selection in file uploader input.
+        this.inputRef.nativeElement.value = '';
+        if (shouldPropagate) {
+            this._propagateFiles();
+        }
     }
 
     /** @hidden */
@@ -285,7 +302,13 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     private _propagateFiles(): void {
         this.setInputValue(this.validFiles);
         this.onChange(this.validFiles);
-        this.selectedFilesChanged.emit(this.validFiles);
-        this.selectedInvalidFiles.emit(this.invalidFiles);
+        if (this._previousValidFiles !== this.validFiles) {
+            this._previousValidFiles = this.validFiles;
+            this.selectedFilesChanged.emit(this.validFiles);
+        }
+        if (this._previousInvalidFiles !== this.invalidFiles) {
+            this._previousInvalidFiles = this.invalidFiles;
+            this.selectedInvalidFiles.emit(this.invalidFiles);
+        }
     }
 }
