@@ -6782,9 +6782,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/cli@npm:0.6.0":
-  version: 0.6.0
-  resolution: "@swc/cli@npm:0.6.0"
+"@swc/cli@npm:0.7.3":
+  version: 0.7.3
+  resolution: "@swc/cli@npm:0.7.3"
   dependencies:
     "@swc/counter": "npm:^0.1.3"
     "@xhmikosr/bin-wrapper": "npm:^13.0.5"
@@ -6805,7 +6805,7 @@ __metadata:
     spack: bin/spack.js
     swc: bin/swc.js
     swcx: bin/swcx.js
-  checksum: 10/a5a3fbf6d664c7d43a12a506e07ff9e10752da3446d0d92bdb454d39f212eed6b23ea49707856896a74213f747b0154d3a2423a85e08189e33939719c08c7bb2
+  checksum: 10/f718b235c680b2a06ed05235e187aba4a1273abcb6a2506ff0c0f88085bb33ed1e8d2ab26deca7382ed601a38a013a0bf1277f901bcf5743a3327409a28c05d3
   languageName: node
   linkType: hard
 
@@ -15164,7 +15164,7 @@ __metadata:
     "@schematics/angular": "npm:19.2.4"
     "@stackblitz/sdk": "npm:1.9.0"
     "@swc-node/register": "npm:1.9.2"
-    "@swc/cli": "npm:0.6.0"
+    "@swc/cli": "npm:0.7.3"
     "@swc/core": "npm:1.5.7"
     "@swc/helpers": "npm:0.5.11"
     "@types/google.visualization": "npm:0.0.71"
