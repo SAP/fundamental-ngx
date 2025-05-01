@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Згорнуте меню елементів',
         cancel: 'Скасувати',
         search: 'Пошук',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Допоміжні інструменти',
+        backButtonLabel: 'Назад',
+        navigationButtonLabel: 'Навігація'
     },
     coreSlider: {
         singleMinMaxDetails: 'Мінімальне значення повзунка: {min}, максимальне значення: {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Майстер'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Більше',
+        overflowTitleMore: 'Щоб переглянути докладнішу інформацію, клікніть або натисніть клавішу Enter',
         breadcrumbTrailLabel: 'Навігаційна стежка'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'ОК',
         cancelBtnLabel: 'Скасувати',
         filteredBy: 'Фільтрувати за',
-        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} з {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} з {totalGrowingItemsCount}',
+        clearFilters: 'Очистити фільтри'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Група сповіщень',
         groupAriaDescriptionExpanded: 'розгорнуто',
         groupAriaDescriptionCollapsed: 'згорнуто',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Більше',
+        triggerLessLabel: 'Менше'
     }
 };

@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ms.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Menu Item yang Diruntuhkan',
         cancel: 'Batal',
         search: 'Cari',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Alat Bantuan',
+        backButtonLabel: 'Kembali',
+        navigationButtonLabel: 'Navigasi'
     },
     coreSlider: {
         singleMinMaxDetails: 'Nilai minimum penggelongsor ialah {min}, nilai maksimum ialah {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Bestari'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Selanjutnya',
+        overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut',
         breadcrumbTrailLabel: 'Jejak Tinggalan'
     },
     platformApprovalFlow: {
@@ -534,7 +533,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Batal',
         filteredBy: 'Ditapis mengikut',
-        showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}',
+        clearFilters: 'Kosongkan Penapis'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
@@ -599,7 +599,7 @@ export default {
         groupAriaDescription: 'Kumpulan Pemberitahuan',
         groupAriaDescriptionExpanded: 'dikembangkan',
         groupAriaDescriptionCollapsed: 'diruntuhkan',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Selanjutnya',
+        triggerLessLabel: 'Kurang'
     }
 };

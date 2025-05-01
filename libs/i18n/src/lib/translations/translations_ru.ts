@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Свернутое меню позиций',
         cancel: 'Отменить',
         search: 'Поиск',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Вспомогательные инструменты',
+        backButtonLabel: 'Назад',
+        navigationButtonLabel: 'Навигация'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение ползунка: {min}, макс.: {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Ассистент'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Больше',
+        overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности',
         breadcrumbTrailLabel: 'Путь навигации'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'ОК',
         cancelBtnLabel: 'Отменить',
         filteredBy: 'Отфильтровано по',
-        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}',
+        clearFilters: 'Очистить фильтры'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Изменить'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Группа уведомлений',
         groupAriaDescriptionExpanded: 'развернуто',
         groupAriaDescriptionCollapsed: 'свернуто',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Больше',
+        triggerLessLabel: 'Меньше'
     }
 };
