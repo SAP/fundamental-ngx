@@ -46,7 +46,7 @@
         "@angular/compiler": "19.2.3",
         "@angular/core": "19.2.3",
         "@angular/forms": "19.2.3",
-        "@angular/platform-browser": "19.2.3",
+        "@angular/platform-browser": "19.2.9",
         "@angular/platform-browser-dynamic": "19.2.3",
         "@angular/router": "19.2.3",
         "@fundamental-styles/cx": "0.39.3",
