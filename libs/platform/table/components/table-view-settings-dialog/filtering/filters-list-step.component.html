@@ -5,17 +5,18 @@
 <ng-template #bodyTemplate>
     <ul fd-list>
         <li fd-list-group-header>{{ 'platformTable.filterDialogFilterBy' | fdTranslate }}</li>
-
-        @for (filter of filters; track filter) {
-            <li
-                fd-list-item
-                [interactive]="true"
-                (click)="selectFilter.emit(filter)"
-                (keydown.space)="selectFilter.emit(filter)"
-                (keydown.enter)="selectFilter.emit(filter)"
-            >
-                <span fd-list-title>{{ filter.label }}</span>
-            </li>
-        }
+        <ul fd-list>
+            @for (filter of filters; track filter) {
+                <li
+                    fd-list-item
+                    [interactive]="true"
+                    (click)="selectFilter.emit(filter)"
+                    (keydown.space)="selectFilter.emit(filter)"
+                    (keydown.enter)="selectFilter.emit(filter)"
+                >
+                    <span fd-list-title>{{ filter.label }}</span>
+                </li>
+            }
+        </ul>
     </ul>
 </ng-template>
