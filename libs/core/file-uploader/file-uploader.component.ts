@@ -74,7 +74,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
 
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
-    accept: string;
+    accept!: string;
 
     /** Whether the file input accepts drag and dropped files. */
     @Input()
@@ -202,7 +202,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     writeValue(files: File[]): void {
         if (this.validFiles.length > 0 && files && files.length === 0) {
             this.clear();
-        } else if (this._isEmpty()) {
+        } else if (!files?.length) {
             return;
         } else {
             this._propagateFiles(false);
@@ -241,19 +241,11 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
 
     /** @hidden */
     setInputValue(selectedFiles: File[], fromClear = false): void {
-        let fileName = '';
-        selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
-        if (!this.inputRefText) {
-            return;
-        }
+        const fileName = selectedFiles.map((file) => file.name).join(' ');
+        if (!this.inputRefText) {return;}
         this.inputRefText.nativeElement.value = fileName;
-        this.inputRefText.nativeElement.title = fileName;
-        if (fileName) {
-            this.inputRefText.nativeElement.placeholder = fileName;
-        } else {
-            this.inputRefText.nativeElement.placeholder = this.placeholder;
-            this.inputRefText.nativeElement.title = this.placeholder;
-        }
+        this.inputRefText.nativeElement.title = fileName || this.placeholder;
+        this.inputRefText.nativeElement.placeholder = fileName || this.placeholder;
         if (!fromClear) {
             this.inputRefText.nativeElement.focus();
         }
@@ -263,10 +255,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     keyDownHandle(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.open();
-        } else if (KeyUtil.isKeyCode(event, [TAB])) {
-            return;
         }
-        event.preventDefault();
+        if (!KeyUtil.isKeyCode(event, [TAB])) {
+            event.preventDefault();
+        }
     }
 
     /**
@@ -280,16 +272,9 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
      * Clears the files from the input.
      */
     public clear(): void {
-        let shouldPropagate = false;
-        if (this.validFiles.length) {
-            this.validFiles = [];
-            shouldPropagate = true;
-        }
-        if (this.invalidFiles.length) {
-            this.invalidFiles = [];
-            shouldPropagate = true;
-        }
-        // Clears selection in file uploader input.
+        const shouldPropagate = this.validFiles.length > 0 || this.invalidFiles.length > 0;
+        this.validFiles = [];
+        this.invalidFiles = [];
         this.inputRef.nativeElement.value = '';
         if (shouldPropagate) {
             this._propagateFiles();
@@ -297,12 +282,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     }
 
     /** @hidden */
-    private _isEmpty(): boolean {
-        return this.validFiles.length === 0 && this.invalidFiles.length === 0;
-    }
-
-    /** @hidden */
-    private _propagateFiles(handleOnChange: boolean = true): void {
+    private _propagateFiles(handleOnChange = true): void {
         this.setInputValue(this.validFiles);
         if (handleOnChange) {
             this.onChange(this.validFiles);
