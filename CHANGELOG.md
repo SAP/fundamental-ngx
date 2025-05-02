@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.9...v0.56.0-rc.10) (2025-05-02)
+
+
+### Bug Fixes
+
+* **core:** file uploader button a11y ([#13267](https://github.com/SAP/fundamental-ngx/issues/13267)) ([5f2fc5a](https://github.com/SAP/fundamental-ngx/commit/5f2fc5a0767a653527ee812cd20942ead3f3ab0a))
+
+
+
+
+
 # [0.56.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.8...v0.56.0-rc.9) (2025-05-01)
 
 
