@@ -242,7 +242,9 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     /** @hidden */
     setInputValue(selectedFiles: File[], fromClear = false): void {
         const fileName = selectedFiles.map((file) => file.name).join(' ');
-        if (!this.inputRefText) {return;}
+        if (!this.inputRefText) {
+            return;
+        }
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName || this.placeholder;
         this.inputRefText.nativeElement.placeholder = fileName || this.placeholder;
