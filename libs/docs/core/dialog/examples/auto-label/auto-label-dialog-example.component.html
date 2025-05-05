@@ -1,11 +1,11 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 id="fd-dialog-header-10" fd-title fd-dialog-title>The History of Pineapple</h1>
+            <h1 id="fd-dialog-header-auto" fd-title fd-dialog-title>The History of Pineapple</h1>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-10">Are you interested in The Great History of Pineapple?</div>
+            <div id="fd-dialog-body-auto">Are you interested in The Great History of Pineapple?</div>
         </fd-dialog-body>
 
         <fd-dialog-footer>
@@ -13,7 +13,7 @@
                 fdType="emphasized"
                 label="Interested"
                 (click)="dialog.close('Continue')"
-                ariaLabel="Interested Emphasized"
+                ariaLabel="Interested"
             ></fd-button-bar>
 
             <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')" ariaLabel="Cancel"></fd-button-bar>

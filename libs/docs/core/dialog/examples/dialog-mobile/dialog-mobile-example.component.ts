@@ -35,8 +35,8 @@ export class DialogMobileExampleComponent {
         this._dialogService.open(dialogTemplate, {
             mobile: true,
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-5',
-            ariaDescribedBy: 'fd-dialog-body-5',
+            ariaLabelledBy: 'fd-dialog-header-mobile',
+            ariaDescribedBy: 'fd-dialog-body-mobile',
             contentDensity: ContentDensityMode.COZY
         });
     }

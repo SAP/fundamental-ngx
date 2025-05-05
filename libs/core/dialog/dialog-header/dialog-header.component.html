@@ -1,33 +1,36 @@
-<div
-    fd-bar
-    class="fd-dialog__header"
-    [fdContentDensity]="dialogConfig.contentDensity ?? ''"
-    [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
->
-    <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
-    <ng-template #defaultTemplate>
-        <div fd-bar-left>
-            <fd-bar-element [fullWidth]="true">
-                <ng-content select="[fd-title]"></ng-content>
-            </fd-bar-element>
-        </div>
-        <div fd-bar-right>
-            <fd-bar-element>
-                @if (!dialogConfig.mobile) {
-                    <ng-content select="[fd-dialog-full-screen-toggler-button]"></ng-content>
-                }
-                <ng-content select="[fd-dialog-close-button]"></ng-content>
-            </fd-bar-element>
-        </div>
-    </ng-template>
-</div>
-@if (subHeaderTemplate) {
+<header>
     <div
         fd-bar
-        class="fd-dialog__subheader"
-        barDesign="subheader"
+        role="group"
+        class="fd-dialog__header"
         [fdContentDensity]="dialogConfig.contentDensity ?? ''"
+        [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
     >
-        <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
+        <ng-template #defaultTemplate>
+            <div fd-bar-left>
+                <fd-bar-element [fullWidth]="true">
+                    <ng-content select="[fd-title]"></ng-content>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    @if (!dialogConfig.mobile) {
+                        <ng-content select="[fd-dialog-full-screen-toggler-button]"></ng-content>
+                    }
+                    <ng-content select="[fd-dialog-close-button]"></ng-content>
+                </fd-bar-element>
+            </div>
+        </ng-template>
     </div>
-}
+    @if (subHeaderTemplate) {
+        <div
+            fd-bar
+            class="fd-dialog__subheader"
+            barDesign="subheader"
+            [fdContentDensity]="dialogConfig.contentDensity ?? ''"
+        >
+            <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
+        </div>
+    }
+</header>

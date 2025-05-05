@@ -7,8 +7,14 @@ export class DialogContentBase<ContentType = unknown> {
     /** Dialog Title */
     title?: string;
 
+    /** Dialog Title Heading Level. Default is 1 */
+    titleHeadingLevel?: 1 | 2 | 3 | 4 | 5 | 6 = 1;
+
     /** Dialog Body */
     content?: ContentType;
+
+    /** Dialog Body Id */
+    contentId?: string;
 
     /** Aria Modal for the dialog component element */
     ariaModal?: boolean;

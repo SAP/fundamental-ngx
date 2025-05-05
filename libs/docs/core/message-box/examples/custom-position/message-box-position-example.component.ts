@@ -32,8 +32,7 @@ export class MessageBoxPositionExampleComponent {
 
         const messageBoxRef = this._messageBoxService.open(content, {
             width: '300px',
-            position: { top: '25px' },
-            ariaLabelledBy: `fd-message-box-custom-position-header fd-message-box-custom-position-body`
+            position: { top: '25px' }
         });
     }
 }

@@ -10,7 +10,9 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
  */
 @Component({
     selector: 'fd-message-box-body',
-    template: '<ng-content></ng-content>',
+    template: `<section>
+        <ng-content></ng-content>
+    </section>`,
     host: {
         '[class.fd-message-box__body]': 'true',
         '[class.fd-message-box__body--no-vertical-padding]': '!messageBoxConfig.verticalPadding'

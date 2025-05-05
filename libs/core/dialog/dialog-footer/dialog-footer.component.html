@@ -1,9 +1,11 @@
-<footer fd-bar class="fd-dialog__footer" barDesign="footer" [fdContentDensity]="dialogConfig.contentDensity ?? ''">
-    <ng-template [ngTemplateOutlet]="footerTemplate ? footerTemplate : defaultTemplate"></ng-template>
+<footer>
+    <div fd-bar class="fd-dialog__footer" barDesign="footer" [fdContentDensity]="dialogConfig.contentDensity ?? ''">
+        <ng-template [ngTemplateOutlet]="footerTemplate ? footerTemplate : defaultTemplate"></ng-template>
 
-    <ng-template #defaultTemplate>
-        <div fd-bar-right>
-            <ng-content></ng-content>
-        </div>
-    </ng-template>
+        <ng-template #defaultTemplate>
+            <div fd-bar-right>
+                <ng-content></ng-content>
+            </div>
+        </ng-template>
+    </div>
 </footer>

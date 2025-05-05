@@ -2,13 +2,14 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    input,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityMode,
     ContentDensityObserver,
@@ -37,7 +38,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
         })
     ],
     host: {
-        role: 'toolbar'
+        '[attr.role]': 'role()'
     },
     standalone: true
 })
@@ -65,6 +66,11 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
      */
     @Input()
     size: SizeType = '';
+
+    /** Aria role for the Bar
+     * default is toolbar
+     */
+    role = input('toolbar');
 
     /** @hidden */
     private _subscriptions = new Subscription();

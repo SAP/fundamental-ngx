@@ -22,8 +22,9 @@ export class TemplateBasedMessageBoxExampleComponent {
 
     open(messageBox: TemplateRef<any>): void {
         const messageBoxRef = this._messageBoxService.open(messageBox, {
-            ariaLabel: 'aria-label attr for the Message Box',
-            focusTrapped: true
+            focusTrapped: true,
+            ariaLabelledBy: 'fd-message-box-template-base-header',
+            ariaDescribedBy: 'fd-message-box-template-base-body'
         });
 
         messageBoxRef.afterClosed.subscribe(
