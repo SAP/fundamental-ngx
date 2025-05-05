@@ -111,7 +111,7 @@ export class OverflowListDirective implements AfterViewInit {
                     }
                 });
 
-                this.overflowChanged.emit(overflowCount);
+                this._calculateAmountOfOverflowedItems();
             }, 0);
         });
     }
