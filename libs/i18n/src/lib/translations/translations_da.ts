@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
     coreCalendar: {
@@ -111,8 +110,8 @@ export default {
         collapsedItemMenuLabel: 'Minimeret elementmenu',
         cancel: 'Annuller',
         search: 'Søg',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
+        assistiveTools: 'Assisterende værktøjer',
+        backButtonLabel: 'Tilbage',
         navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Guide'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Flere',
+        overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer',
         breadcrumbTrailLabel: 'Brødkrummespor'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Annuller',
         filteredBy: 'Filtreret efter',
-        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}',
+        clearFilters: 'Ryd filtre'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Meddelelsesgruppe',
         groupAriaDescriptionExpanded: 'udvidet',
         groupAriaDescriptionCollapsed: 'minimeret',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mere',
+        triggerLessLabel: 'Mindre'
     }
 };

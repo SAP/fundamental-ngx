@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: '접힌 항목 메뉴',
         cancel: '취소',
         search: '검색',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: '지원 툴',
+        backButtonLabel: '뒤로',
+        navigationButtonLabel: '탐색'
     },
     coreSlider: {
         singleMinMaxDetails: '슬라이더 최소값은 {min}, 최대값은 {max}입니다.',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: '마법사'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '더 보기',
+        overflowTitleMore: '클릭하거나 Enter를 눌러 자세한 내용을 확인할 수 있습니다.',
         breadcrumbTrailLabel: '탐색 경로 추적'
     },
     platformApprovalFlow: {
@@ -533,7 +532,8 @@ export default {
         confirmBtnLabel: '확인',
         cancelBtnLabel: '취소',
         filteredBy: '필터링 기준',
-        showingBlankOfBlank: '{totalGrowingItemsCount}개 중 {totalGrowingItemsCount}개 표시 중'
+        showingBlankOfBlank: '{totalGrowingItemsCount}개 중 {totalGrowingItemsCount}개 표시 중',
+        clearFilters: '필터 지우기'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '편집'
@@ -598,7 +598,7 @@ export default {
         groupAriaDescription: '통지 그룹',
         groupAriaDescriptionExpanded: '펼친 상태',
         groupAriaDescriptionCollapsed: '접힌 상태',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: '자세히',
+        triggerLessLabel: '간단히'
     }
 };

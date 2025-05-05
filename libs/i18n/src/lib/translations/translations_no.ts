@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_no.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Komprimert elementmeny',
         cancel: 'Avbryt',
         search: 'Søk',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Hjelpeverktøy',
+        backButtonLabel: 'Tilbake',
+        navigationButtonLabel: 'Navigering'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimumsverdi for glidebryter er {min}, maksimumsverdi er {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Veiviser'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mer',
+        overflowTitleMore: 'Klikk eller trykk på Enter for å vise flere detaljer',
         breadcrumbTrailLabel: 'Navigeringsbane'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Avbryt',
         filteredBy: 'Filtrert etter',
-        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} av {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} av {totalGrowingItemsCount}',
+        clearFilters: 'Tøm filtre'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Meldingsgruppe',
         groupAriaDescriptionExpanded: 'utvidet',
         groupAriaDescriptionCollapsed: 'komprimert',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mer',
+        triggerLessLabel: 'Mindre'
     }
 };

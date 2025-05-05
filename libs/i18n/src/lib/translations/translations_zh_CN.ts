@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
     coreCalendar: {
@@ -110,9 +109,9 @@ export default {
         collapsedItemMenuLabel: '已折叠项目菜单',
         cancel: '取消',
         search: '搜索',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: '辅助工具',
+        backButtonLabel: '返回',
+        navigationButtonLabel: '导航'
     },
     coreSlider: {
         singleMinMaxDetails: '滑块最小值为 {min}，最大值为 {max}',
@@ -200,7 +199,7 @@ export default {
         ariaLabel: '向导'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '更多',
+        overflowTitleMore: '单击或按回车以查看更多详细信息',
         breadcrumbTrailLabel: '浏览记录'
     },
     platformApprovalFlow: {
@@ -532,7 +531,8 @@ export default {
         confirmBtnLabel: '确定',
         cancelBtnLabel: '取消',
         filteredBy: '过滤条件',
-        showingBlankOfBlank: '显示 {totalGrowingItemsCount}/{totalGrowingItemsCount}'
+        showingBlankOfBlank: '显示 {totalGrowingItemsCount}/{totalGrowingItemsCount}',
+        clearFilters: '清除过滤器'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'
@@ -597,7 +597,7 @@ export default {
         groupAriaDescription: '通知组',
         groupAriaDescriptionExpanded: '已展开',
         groupAriaDescriptionCollapsed: '已折叠',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: '更多',
+        triggerLessLabel: '更少'
     }
 };

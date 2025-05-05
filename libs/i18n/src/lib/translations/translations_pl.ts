@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_pl.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Zwinięte menu pozycji',
         cancel: 'Anuluj',
         search: 'Wyszukiwanie',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Narzędzia pomocnicze',
+        backButtonLabel: 'Wstecz',
+        navigationButtonLabel: 'Nawigacja'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Kreator'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Więcej',
+        overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów',
         breadcrumbTrailLabel: 'Ścieżka nawigacji'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Anuluj',
         filteredBy: 'Odfiltrowane wg',
-        showingBlankOfBlank: 'Wyświetla {totalGrowingItemsCount} z {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Wyświetla {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        clearFilters: 'Wyczyść filtry'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Grupa zawiadomień',
         groupAriaDescriptionExpanded: 'rozwinięte',
         groupAriaDescriptionCollapsed: 'zwinięte',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Więcej',
+        triggerLessLabel: 'Mniej'
     }
 };

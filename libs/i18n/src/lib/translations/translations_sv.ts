@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Komprimerad artikelmeny',
         cancel: 'Avbryt',
         search: 'Sök',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Hjälpverktyg',
+        backButtonLabel: 'Tillbaka',
+        navigationButtonLabel: 'Navigering'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimivärde för reglage är {min}, maximalt värde är {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Guide'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Fler',
+        overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer',
         breadcrumbTrailLabel: 'Tillämpade datafiltreringssteg'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Avbryt',
         filteredBy: 'Filtrerat efter',
-        showingBlankOfBlank: '{totalGrowingItemsCount} av {totalGrowingItemsCount} visas'
+        showingBlankOfBlank: '{totalGrowingItemsCount} av {totalGrowingItemsCount} visas',
+        clearFilters: 'Rensa filter'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redigera'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Aviseringsgrupp',
         groupAriaDescriptionExpanded: 'expandera',
         groupAriaDescriptionCollapsed: 'komprimera',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mer',
+        triggerLessLabel: 'Mindre'
     }
 };

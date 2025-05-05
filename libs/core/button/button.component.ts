@@ -67,17 +67,16 @@ export class ButtonComponent
      */
     get buttonArialabel(): string | null {
         if (this.ariaLabel) {
-            return this.ariaLabel;
+            return this.ariaLabel; // return the input aria-label
+        }
+
+        const attrAriaLabel = this.elementRef.nativeElement.getAttribute('aria-label');
+        if (attrAriaLabel) {
+            return attrAriaLabel; // return the attribute aria-label
         }
 
         if (this.specialButtonType.includes(this.fdType)) {
-            if (this.label != null) {
-                return this.label;
-            }
-
-            if (this.glyph != null) {
-                return this.glyph.split('-').join(' ');
-            }
+            return this.label ?? this.glyph?.replace(/-/g, ' ') ?? null;
         }
 
         return null;

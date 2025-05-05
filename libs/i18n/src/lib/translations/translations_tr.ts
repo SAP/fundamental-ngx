@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü',
         cancel: 'İptal',
         search: 'Ara',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Yardımcı Araçlar',
+        backButtonLabel: 'Geri',
+        navigationButtonLabel: 'Dolaşma'
     },
     coreSlider: {
         singleMinMaxDetails: 'Kaydırıcı asgari değeri: {min}; azami değeri: {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Sihirbaz'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Daha Fazla',
+        overflowTitleMore: "Daha fazla ayrıntı görüntülemek için Enter'a tıklayın veya basın",
         breadcrumbTrailLabel: 'İçerik Haritası Yolu'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'Tamam',
         cancelBtnLabel: 'İptal',
         filteredBy: 'Filtre ölçütü',
-        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} gösteriliyor'
+        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount} gösteriliyor',
+        clearFilters: 'Filtreleri Temizle'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Bildirim Grubu',
         groupAriaDescriptionExpanded: 'genişletildi',
         groupAriaDescriptionCollapsed: 'daraltıldı',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Daha Fazla',
+        triggerLessLabel: 'Daha Az'
     }
 };

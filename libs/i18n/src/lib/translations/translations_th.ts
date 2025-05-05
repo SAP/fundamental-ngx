@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'เมนูไอเท็มแบบยุบรวม',
         cancel: 'ยกเลิก',
         search: 'ค้นหา',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'เครื่องมือช่วยเหลือ',
+        backButtonLabel: 'ย้อนกลับ',
+        navigationButtonLabel: 'การเนวิเกต'
     },
     coreSlider: {
         singleMinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนคือ {min} ค่าสูงสุดคือ {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'เพิ่มเติม',
+        overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม',
         breadcrumbTrailLabel: 'เมนูนำทาง'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'ตกลง',
         cancelBtnLabel: 'ยกเลิก',
         filteredBy: 'กรองตาม',
-        showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}',
+        clearFilters: 'เคลียร์ตัวกรอง'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'แก้ไข'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
         groupAriaDescriptionExpanded: 'ขยาย',
         groupAriaDescriptionCollapsed: 'ยุบรวม',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'เพิ่มเติม',
+        triggerLessLabel: 'น้อยลง'
     }
 };

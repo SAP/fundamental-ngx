@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_el.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Συνεπτυγμένο Μενού Στοιχείων',
         cancel: 'Ακύρωση',
         search: 'Αναζήτηση',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Βοηθητικά Εργαλεία',
+        backButtonLabel: 'Πίσω',
+        navigationButtonLabel: 'Πλοήγηση'
     },
     coreSlider: {
         singleMinMaxDetails: 'Ελάχιστη τιμή Slider είναι {min}, μέγιστη τιμή είναι (max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Οδηγός'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Περισσότερα',
+        overflowTitleMore: 'Κάντε κλικ ή πατήστε enter για να δείτε περισσότερες λεπτομέρειες',
         breadcrumbTrailLabel: 'Διαδρομή Περιήγησης'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Ακύρωση',
         filteredBy: 'Φιλτράρισμα κατά',
-        showingBlankOfBlank: 'Εμφάνιση {totalGrowingItemsCount} από {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Εμφάνιση {totalGrowingItemsCount} από {totalGrowingItemsCount}',
+        clearFilters: 'Εκκαθάριση Φίλτρων'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Επεξεργασία'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Ομάδα Ειδοποιήσεων',
         groupAriaDescriptionExpanded: 'επεκτάθηκε',
         groupAriaDescriptionCollapsed: 'συμπτύχθηκε',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Περισσότερα',
+        triggerLessLabel: 'Λιγότερα'
     }
 };

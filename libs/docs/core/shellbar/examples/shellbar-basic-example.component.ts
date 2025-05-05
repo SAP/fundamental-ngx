@@ -1,34 +1,90 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { PanelModule } from '@fundamental-ngx/core/panel';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import {
     ShellbarActionsComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
-    ShellbarTitleComponent,
-    ShellbarUser,
-    ShellbarUserMenu
+    ShellbarTitleComponent
 } from '@fundamental-ngx/core/shellbar';
+import {
+    UserMenuBodyComponent,
+    UserMenuComponent,
+    UserMenuContentContainerComponent,
+    UserMenuControlComponent,
+    UserMenuFooterComponent,
+    UserMenuHeaderContainerDirective,
+    UserMenuHeaderDirective,
+    UserMenuListComponent,
+    UserMenuListItemComponent,
+    UserMenuSublineDirective,
+    UserMenuSublistComponent,
+    UserMenuUserNameDirective
+} from '@fundamental-ngx/core/user-menu';
 
 @Component({
     selector: 'fd-shellbar-basic-example',
     templateUrl: './shellbar-basic-example.component.html',
-    imports: [ShellbarComponent, ShellbarLogoComponent, ShellbarTitleComponent, ShellbarActionsComponent]
+    imports: [
+        ShellbarComponent,
+        ShellbarLogoComponent,
+        ShellbarTitleComponent,
+        ShellbarActionsComponent,
+        UserMenuComponent,
+        UserMenuBodyComponent,
+        UserMenuControlComponent,
+        UserMenuFooterComponent,
+        UserMenuContentContainerComponent,
+        UserMenuHeaderContainerDirective,
+        UserMenuHeaderDirective,
+        UserMenuSublineDirective,
+        UserMenuUserNameDirective,
+        UserMenuListComponent,
+        UserMenuSublistComponent,
+        UserMenuListItemComponent,
+        AvatarComponent,
+        PopoverModule,
+        ListModule,
+        PanelModule,
+        MenuModule,
+        ButtonComponent,
+        BarComponent,
+        BarRightDirective,
+        MessageToastModule
+    ]
 })
 export class ShellbarBasicExampleComponent {
-    user: ShellbarUser = {
-        fullName: 'William Willson',
-        colorAccent: 6
-    };
+    @ViewChild(UserMenuComponent)
+    userMenuComponent: UserMenuComponent;
 
-    userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: this.settingsCallback },
-        { text: 'Sign Out', callback: this.signOutCallback }
-    ];
+    expanded = true;
+    isOpen = false;
 
-    settingsCallback(): void {
-        alert('Settings Clicked');
+    constructor(private _messageToastService: MessageToastService) {}
+
+    isOpenChange(isOpen: boolean): void {
+        this.isOpen = isOpen;
     }
 
-    signOutCallback(): void {
-        alert('Sign Out Clicked');
+    onZoomGlyphClick(): void {
+        alert('Edit profile');
+    }
+
+    actionPicked(action: string): void {
+        this.openMessageToast(action);
+        this.userMenuComponent.close();
+    }
+
+    openMessageToast(action: string): void {
+        const content = `${action} action performed`;
+        this._messageToastService.open(content, {
+            duration: 5000
+        });
     }
 }

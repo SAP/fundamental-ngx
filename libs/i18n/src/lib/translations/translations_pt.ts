@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_pt.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Menu de item recolhido',
         cancel: 'Cancelar',
         search: 'Pesquisar',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Ferramentas assistivas',
+        backButtonLabel: 'Voltar',
+        navigationButtonLabel: 'Navegação'
     },
     coreSlider: {
         singleMinMaxDetails: 'O valor mínimo do controle deslizante é {min}, o valor máximo é {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Assistente'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mais',
+        overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes',
         breadcrumbTrailLabel: 'Trilha de breadcrumb'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Cancelar',
         filteredBy: 'Filtrado por',
-        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
+        clearFilters: 'Limpar filtros'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Grupo de notificações',
         groupAriaDescriptionExpanded: 'expandido',
         groupAriaDescriptionCollapsed: 'recolhido',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mais',
+        triggerLessLabel: 'Menos'
     }
 };
