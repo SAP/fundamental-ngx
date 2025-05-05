@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.10...v0.56.0-rc.11) (2025-05-05)
+
+
+### Bug Fixes
+
+* **platform:** fixed the overflow in icon tab bar component ([#13235](https://github.com/SAP/fundamental-ngx/issues/13235)) ([8773266](https://github.com/SAP/fundamental-ngx/commit/87732663959e2af859a79f847a3f795fd4c8a71c))
+
+
+
+
+
 # [0.56.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.9...v0.56.0-rc.10) (2025-05-02)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
