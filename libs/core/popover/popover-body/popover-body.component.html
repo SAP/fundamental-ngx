@@ -26,7 +26,7 @@
         <ng-template [ngTemplateOutlet]="renderer"></ng-template>
     }
     @if (_resizable) {
-        <span fdkResizeHandle class="fd-popover__resize-handle"></span>
+        <span fdkResizeHandle class="fd-popover__resize-handle" role="presentation" aria-hidden="true"></span>
     }
 </div>
 <ng-template #renderer>
