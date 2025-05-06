@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hr.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Sažeti izbornik stavki',
         cancel: 'Otkaži',
         search: 'Pretraži',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Pomoćni alati',
+        backButtonLabel: 'Natrag',
+        navigationButtonLabel: 'Navigacija'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna vrijednost klizača je {min}, maksimalna vrijednost je {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Čarobnjak'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Više',
+        overflowTitleMore: 'Kliknite ili pristinite Enter kako biste prikazali više pojedinosti',
         breadcrumbTrailLabel: 'Put hijerarhijske navigacije'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Odustani',
         filteredBy: 'Filtrirano po',
-        showingBlankOfBlank: 'Pokazuje {totalGrowingItemsCount} od {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Pokazuje {totalGrowingItemsCount} od {totalGrowingItemsCount}',
+        clearFilters: 'Poništi filtre'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Grupa obavijesti',
         groupAriaDescriptionExpanded: 'prošireno',
         groupAriaDescriptionCollapsed: 'sažeto',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Više',
+        triggerLessLabel: 'Manje'
     }
 };

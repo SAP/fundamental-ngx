@@ -771,6 +771,19 @@ export class FormFieldComponent
         return typeof hintOptions === 'string';
     }
 
+    /** @hidden */
+    _getLabelledBy(): string {
+        let retVal = 'fdp-form-label-' + this.id;
+        if (this.hasErrors() && this.groupedErrors.length > 0) {
+            retVal = retVal + ' fdp-form-message-grouped-errors-' + this.id;
+        }
+        if (this.groupedErrors.length === 0 && this.hasErrors() && this.i18Strings) {
+            retVal = retVal + ' fdp-form-message-error-' + this.id;
+        }
+
+        return retVal;
+    }
+
     /**
      * @hidden
      * Listens to form message component changes and passes its instance to the form control component.

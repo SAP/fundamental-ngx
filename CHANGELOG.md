@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.11...v0.56.0-rc.12) (2025-05-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.56.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.10...v0.56.0-rc.11) (2025-05-05)
+
+
+### Bug Fixes
+
+* **platform:** fixed the overflow in icon tab bar component ([#13235](https://github.com/SAP/fundamental-ngx/issues/13235)) ([8773266](https://github.com/SAP/fundamental-ngx/commit/87732663959e2af859a79f847a3f795fd4c8a71c))
+
+
+
+
+
+# [0.56.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.9...v0.56.0-rc.10) (2025-05-02)
+
+
+### Bug Fixes
+
+* **core:** file uploader button a11y ([#13267](https://github.com/SAP/fundamental-ngx/issues/13267)) ([5f2fc5a](https://github.com/SAP/fundamental-ngx/commit/5f2fc5a0767a653527ee812cd20942ead3f3ab0a))
+
+
+
+
+
+# [0.56.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.8...v0.56.0-rc.9) (2025-05-01)
+
+
+### Bug Fixes
+
+* **platform:** platform form field should announce form message ([#13250](https://github.com/SAP/fundamental-ngx/issues/13250)) ([94cc767](https://github.com/SAP/fundamental-ngx/commit/94cc767845953c9e1d815bf62a5d9b9ac5abd1ab))
+
+
+
+
+
+# [0.56.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.7...v0.56.0-rc.8) (2025-04-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.56.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.6...v0.56.0-rc.7) (2025-04-29)
 
 

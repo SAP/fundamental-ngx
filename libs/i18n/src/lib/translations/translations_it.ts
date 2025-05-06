@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_it.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Voce menu compressa',
         cancel: 'Annulla',
         search: 'Cerca',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Strumenti assistivi',
+        backButtonLabel: 'Indietro',
+        navigationButtonLabel: 'Navigazione'
     },
     coreSlider: {
         singleMinMaxDetails: 'Il valore minimo del cursore è {min}, quello massimo è {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Procedura guidata'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Di più',
+        overflowTitleMore: 'Fare clic o premere Invio per visualizzare più dettagli',
         breadcrumbTrailLabel: 'Percorso di navigazione'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Annulla',
         filteredBy: 'Filtrato in base a',
-        showingBlankOfBlank: 'Voci visualizzate: {totalGrowingItemsCount} di {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Voci visualizzate: {totalGrowingItemsCount} di {totalGrowingItemsCount}',
+        clearFilters: 'Cancella filtri'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifica'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Gruppo di notifiche',
         groupAriaDescriptionExpanded: 'espanso',
         groupAriaDescriptionCollapsed: 'compresso',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Espandi',
+        triggerLessLabel: 'Comprimi'
     }
 };

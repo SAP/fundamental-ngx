@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_fi.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Tiivistetty kohteen valikko',
         cancel: 'Peruuta',
         search: 'Hae',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Avustavat työkalut',
+        backButtonLabel: 'Paluu',
+        navigationButtonLabel: 'Navigointi'
     },
     coreSlider: {
         singleMinMaxDetails: 'Liukusäätimen minimiarvo on {min}, maksimiarvo {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Avustaja'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Enemmän',
+        overflowTitleMore: 'Napsauta tai paina Enter nähdäksesi lisätietoja',
         breadcrumbTrailLabel: 'Navigointipolku'
     },
     platformApprovalFlow: {
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Peruuta',
         filteredBy: 'Suodatusperuste',
-        showingBlankOfBlank: 'Näytetään {totalGrowingItemsCount} / {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Näytetään {totalGrowingItemsCount} / {totalGrowingItemsCount}',
+        clearFilters: 'Tyhjennä suodattimet'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Muokkaa'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Ilmoitusryhmä',
         groupAriaDescriptionExpanded: 'laajennettu',
         groupAriaDescriptionCollapsed: 'tiivistetty',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Lisää',
+        triggerLessLabel: 'Vähemmän'
     }
 };
