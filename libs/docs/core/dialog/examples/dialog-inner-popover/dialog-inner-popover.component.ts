@@ -62,8 +62,8 @@ export class DialogInnerPopoverComponent {
                 ]
             },
             width: '400px',
-            ariaLabelledBy: 'fd-dialog-header-1',
-            ariaDescribedBy: 'fd-dialog-body-1',
+            ariaLabelledBy: 'fd-dialog-header-pop',
+            ariaDescribedBy: 'fd-dialog-body-pop',
             responsivePadding: true
         });
 
@@ -82,11 +82,11 @@ export class DialogInnerPopoverComponent {
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
+                <h1 id="fd-dialog-header-pop" fd-title>{{ dialogRef.data.title }}</h1>
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-1" role="listbox">
+                <div id="fd-dialog-body-pop" role="listbox">
                     <label for="first-list">The first list of options:</label>
                     <fd-multi-input
                         inputId="first-list"
@@ -113,7 +113,7 @@ export class DialogInnerPopoverComponent {
                     label="Interesting"
                     fdType="emphasized"
                     (click)="dialogRef.close('Interesting')"
-                    ariaLabel="Interesting Emphasized"
+                    ariaLabel="Interesting"
                 >
                 </fd-button-bar>
                 <fd-button-bar

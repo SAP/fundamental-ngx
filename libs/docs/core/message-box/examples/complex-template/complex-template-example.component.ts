@@ -21,7 +21,8 @@ export class ComplexTemplateExampleComponent {
     open(): void {
         this._messageBoxService.open(MessageBoxComplexExampleComponent, {
             width: '400px',
-            ariaLabel: 'aria-label attr for the Message Box'
+            ariaLabelledBy: 'fd-message-box-complex-template-header fd-message-box-complex-template-header-2',
+            ariaDescribedBy: 'fd-message-box-complex-template-body'
         });
     }
 }

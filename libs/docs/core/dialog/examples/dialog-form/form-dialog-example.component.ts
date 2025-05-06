@@ -46,7 +46,8 @@ export class FormDialogExampleComponent {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: this.responsivePadding,
             focusTrapped: true,
-            verticalPadding: this.verticalPadding
+            verticalPadding: this.verticalPadding,
+            ariaLabelledBy: 'fd-dialog-header-form'
         });
 
         dialogRef.afterClosed.subscribe(

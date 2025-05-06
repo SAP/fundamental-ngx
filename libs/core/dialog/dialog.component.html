@@ -28,13 +28,12 @@
     [attr.aria-label]="dialogConfig.ariaLabel"
     [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
     [attr.aria-describedby]="dialogConfig.ariaDescribedBy"
-    [attr.aria-modal]="dialogConfig.ariaModal"
     (cdkDragStarted)="isDragged = true"
     (cdkDragEnded)="isDragged = false"
     (onResizeEnd)="adjustResponsivePadding()"
 >
     @if (dialogConfig.resizable && !_fullScreen && !dialogConfig.mobile) {
-        <span fdkResizeHandle class="fd-dialog__resize-handle"></span>
+        <span fdkResizeHandle class="fd-dialog__resize-handle" role="presentation" aria-hidden="true"></span>
     }
     <div cdkDragHandle [cdkDragHandleDisabled]="!dialogConfig.draggable">
         <ng-content select="fd-dialog-header"></ng-content>
