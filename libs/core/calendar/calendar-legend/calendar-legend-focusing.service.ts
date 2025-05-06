@@ -32,11 +32,6 @@ export class CalendarLegendFocusingService {
         }
     }
 
-    /** Getting the elements that are getting currently focused */
-    getFocusedElement(): number | null {
-        return this.specialNumber;
-    }
-
     /** Setting the index of the calendar */
     setCalendarIndex(calIndex: number): void {
         this.calIndex = calIndex;

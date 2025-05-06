@@ -319,13 +319,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             this.changeDetRef.markForCheck();
         });
 
-        setTimeout(() => {
-            this.focusedService.cellSubject$.subscribe(({ cell, calIndex, cellNumber }) => {
+        this.focusedService.cellSubject$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(({ cell, calIndex, cellNumber }) => {
                 if (cell !== null && cellNumber !== null) {
                     this._focusOnLegendsDay(cell, calIndex, cellNumber);
                 }
             });
-        }, 10);
     }
 
     /** @hidden */

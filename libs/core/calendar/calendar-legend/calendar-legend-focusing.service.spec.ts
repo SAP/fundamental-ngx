@@ -57,7 +57,7 @@ describe('CalendarLegendFocusingService', () => {
         const mockElement = document.createElement('div');
 
         service.setFocusOnCell(mockElement, 0, mockSpecialNumber);
-        const focusedSpecialNumber = service.getFocusedElement();
+        const focusedSpecialNumber = service.specialNumber;
 
         expect(focusedSpecialNumber).toBe(mockSpecialNumber);
     });
