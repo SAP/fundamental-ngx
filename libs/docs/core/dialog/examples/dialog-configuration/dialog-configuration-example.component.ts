@@ -37,8 +37,8 @@ export class DialogConfigurationExampleComponent {
             draggable: true,
             responsivePadding: true,
             backdropClickCloseable: true,
-            ariaLabelledBy: 'fd-dialog-header-4',
-            ariaDescribedBy: 'fd-dialog-body-4'
+            ariaLabelledBy: 'fd-dialog-header-config',
+            ariaDescribedBy: 'fd-dialog-body-config'
         });
     }
 
@@ -48,8 +48,8 @@ export class DialogConfigurationExampleComponent {
             resizable: true,
             responsivePadding: true,
             backdropClickCloseable: true,
-            ariaLabelledBy: 'fd-dialog-header-4',
-            ariaDescribedBy: 'fd-dialog-body-4'
+            ariaLabelledBy: 'fd-dialog-header-config',
+            ariaDescribedBy: 'fd-dialog-body-config'
         });
     }
 
@@ -58,8 +58,8 @@ export class DialogConfigurationExampleComponent {
             width: '300px',
             escKeyCloseable: false,
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-4',
-            ariaDescribedBy: 'fd-dialog-body-4'
+            ariaLabelledBy: 'fd-dialog-header-config',
+            ariaDescribedBy: 'fd-dialog-body-config'
         });
     }
 }

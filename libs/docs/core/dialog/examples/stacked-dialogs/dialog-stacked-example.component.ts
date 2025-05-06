@@ -14,8 +14,8 @@ export class DialogStackedExampleComponent {
     openDialog(): void {
         this._dialogService.open(FirstDialogExampleComponent, {
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-8',
-            ariaDescribedBy: 'fd-dialog-body-8'
+            ariaLabelledBy: 'fd-dialog-header-first',
+            ariaDescribedBy: 'fd-dialog-body-first'
         });
     }
 }

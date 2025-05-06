@@ -41,7 +41,8 @@ export class ComponentBasedMessageBoxExampleComponent {
             showSemanticIcon: true,
             customSemanticIcon: 'thumb-up',
             width: '400px',
-            ariaLabelledBy: 'fd-message-box-component-base-header fd-message-box-component-base-body'
+            ariaLabelledBy: 'fd-message-box-component-base-header',
+            ariaDescribedBy: 'fd-message-box-component-base-body'
         });
 
         messageBoxRef.afterClosed.subscribe(
