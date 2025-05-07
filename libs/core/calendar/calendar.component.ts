@@ -33,7 +33,6 @@ import {
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
-import { CalendarLegendFocusingService } from './calendar-legend/calendar-legend-focusing.service';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
@@ -290,6 +289,10 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
+    /** The unique ID of the calendar legend, if the calendar is to display a legend. */
+    @Input()
+    associatedLegendId: string;
+
     /**
      * @hidden
      * Currently displayed days depending on month and year
@@ -312,7 +315,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _CalendarLegendFocusingService: CalendarLegendFocusingService,
         _contentDensityObserver: ContentDensityObserver,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
@@ -330,7 +332,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
         this._listenToLocaleChanges();
-        this._CalendarLegendFocusingService.setCalendarIndex(calendarUniqueId);
     }
 
     /** That allows to define function that should happen, when focus should normally escape of component */

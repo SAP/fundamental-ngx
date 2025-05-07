@@ -190,6 +190,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     /** Id of the calendar. If none is provided, one will be generated. */
     id = input<string>();
 
+    /** @hidden Id of the associated legend, passed from the parent calendar component. */
+    associatedLegendId = input<string>();
+
     /**
      * Whether user wants to mark day cells on hover.
      * Works only on range mode, when start date is selected.
@@ -296,7 +299,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         private eRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService,
-        private focusedService: CalendarLegendFocusingService,
+        private legendFocusedService: CalendarLegendFocusingService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         public _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
@@ -319,11 +322,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             this.changeDetRef.markForCheck();
         });
 
-        this.focusedService.cellSubject$
+        this.legendFocusedService.focusedLegendItemSubject$
             .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(({ cell, calIndex, cellNumber }) => {
-                if (cell !== null && cellNumber !== null) {
-                    this._focusOnLegendsDay(cell, calIndex, cellNumber);
+            .subscribe(({ legendId, specialDayNumber }) => {
+                if (!specialDayNumber) {
+                    this._legendBlurred();
+                } else if (legendId !== null && specialDayNumber !== null) {
+                    this._focusOnLegendsDay(legendId, specialDayNumber);
                 }
             });
     }
@@ -626,37 +631,27 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /** @hidden */
-    private _focusOnLegendsDay(cell: HTMLElement, calIndex: number | null, specialNumber: number): void {
-        const allElements = this.eRef.nativeElement.querySelectorAll('.fd-calendar__item');
-        const elementToSpecialDayMap = new Map<HTMLElement, number>();
-        const id = this.id();
-        const legendClassName = 'fd-calendar__item--legend-';
+    private _focusOnLegendsDay(legendId: string | null, specialDayNumber: number): void {
+        const associatedLegendId = this.associatedLegendId();
 
-        if (calIndex !== null && id && Number.parseInt(id.split('')[id.length - 1], 10) === calIndex) {
-            allElements.forEach((element) => {
-                element.classList.forEach((className) => {
-                    if (className.startsWith(legendClassName)) {
-                        elementToSpecialDayMap.set(element, parseInt(className.split('-').pop()!, 10));
-                    }
-                });
-                if (!element.classList.contains(`${legendClassName + specialNumber}`)) {
-                    element.classList.forEach((className) => {
-                        if (className.startsWith(legendClassName) && !className.endsWith(specialNumber.toString())) {
-                            element.classList.remove(className);
-                        }
-                    });
-                }
-                element.addEventListener('focusout', () => {
-                    element.classList.add(`${legendClassName + elementToSpecialDayMap.get(element)}`);
+        if (legendId !== null && associatedLegendId && associatedLegendId === legendId) {
+            this._dayViewGrid.forEach((row) => {
+                row.forEach((day) => {
+                    day.shouldHideSpecialDayMarker = day.specialDayNumber !== specialDayNumber;
                 });
             });
-
-            cell.addEventListener('focusout', () => {
-                elementToSpecialDayMap.forEach((specialElementNumber, element) => {
-                    element.classList.add(`${legendClassName + specialElementNumber}`);
-                });
-            });
+            this.changeDetRef.markForCheck();
         }
+    }
+
+    /** @hidden */
+    private _legendBlurred(): void {
+        this._dayViewGrid.forEach((row) => {
+            row.forEach((day) => {
+                day.shouldHideSpecialDayMarker = false;
+            });
+        });
+        this.changeDetRef.markForCheck();
     }
 
     /**
@@ -865,7 +860,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             weekDay,
             weekend: this._isWeekendDay(weekDay),
             ariaLabel: this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateA11yLabel),
-            specialNumber: this._getSpecialDay(date) ?? undefined,
+            specialDayNumber: this._getSpecialDay(date) ?? undefined,
             past: isPast
         };
 

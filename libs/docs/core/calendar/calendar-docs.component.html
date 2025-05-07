@@ -36,7 +36,10 @@
     Calendar has a sibling component called <code>fd-calendar-legend</code>. It is used to display the legend of the
     calendar component. The legend can be displayed in two different ways: as a column or as a row. The legend is
     automatically generated based on the special days rules passed to the calendar. It can be used in conjunction with
-    the calendar component or separately.
+    the calendar component or separately.<br />
+    In order for the calendar to correctly associate with its corresponding legend, the legend component must be given a
+    unique identifier via the <code>[legendId]</code> input, and the calendar component must reference this identifier
+    via the <code>[associatedLegendId]</code> input, as demonstrated in the examples below.
 </description>
 <component-example>
     <fd-calendar-legend-example></fd-calendar-legend-example>

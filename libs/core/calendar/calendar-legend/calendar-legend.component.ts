@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { CalendarLegendFocusingService } from './calendar-legend-focusing.service';
-import { LegendItemComponent } from './calendar-legend-item.component';
+import { CalendarLegendItemComponent } from './calendar-legend-item.component';
 
 @Component({
     selector: 'fd-calendar-legend',
@@ -17,8 +17,10 @@ import { LegendItemComponent } from './calendar-legend-item.component';
                     <fd-calendar-legend-item
                         fdkFocusableItem
                         [text]="rule.legendText"
+                        [circle]="rule.appointment"
                         [color]="'placeholder-' + rule.specialDayNumber"
-                        (focusedElementEvent)="handleFocusedElementEvent($event, rule.specialDayNumber)"
+                        (focus)="_handleFocusedElementEvent(rule.specialDayNumber)"
+                        (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
                 }
             </div>
@@ -26,45 +28,31 @@ import { LegendItemComponent } from './calendar-legend-item.component';
     `,
     host: {
         class: 'fd-calendar-legend',
-        '[class.fd-calendar-legend--auto-column]': 'col'
+        '[class.fd-calendar-legend--auto-column]': 'col()'
     },
-    imports: [CommonModule, LegendItemComponent, FocusableListDirective, FocusableItemDirective]
+    imports: [CommonModule, CalendarLegendItemComponent, FocusableListDirective, FocusableItemDirective]
 })
 export class CalendarLegendComponent<D> {
+    /** The unique identifier of the calendar legend. This is a required property. */
+    legendId = input.required<string>();
+
     /**
      * Make it a column instead
      */
-    @Input() col = false;
+    col = input<boolean>(false);
 
-    /** Special
-     * days rules to be displayed in the legend */
+    /**
+     * Special days rules to be displayed in the legend
+     */
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
-
-    /** Element getting focused */
-    focusedElement = input<string>('');
-
-    /** Calendar Index */
-    calIndex: number;
 
     constructor(
         public datetimeAdapter: DatetimeAdapter<FdDate>,
-        private elementRef: ElementRef,
         private focusingService: CalendarLegendFocusingService
-    ) {
-        this.calIndex = this.focusingService.getCalendarIndex() - 1;
-    }
+    ) {}
 
     /** @hidden */
-    handleFocusedElementEvent(event: string, specialDayNumber: number): void {
-        this.focusedElementEventHandle(event, specialDayNumber);
-    }
-
-    /** @hidden */
-    focusedElementEventHandle(event: string, specialNumber?: number): void {
-        this.focusingService.setFocusOnCell(
-            this.elementRef.nativeElement.querySelector(`#${event}`),
-            this.calIndex,
-            specialNumber
-        );
+    _handleFocusedElementEvent(specialDayNumber: number | null): void {
+        this.focusingService._handleLegendItemFocus(this.legendId(), specialDayNumber);
     }
 }

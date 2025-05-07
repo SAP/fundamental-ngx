@@ -3,16 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter,
     OnChanges,
     OnInit,
-    Output,
     ViewEncapsulation,
     input
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-
-let id = 0;
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-calendar-legend-item',
@@ -27,38 +23,18 @@ let id = 0;
         </span>
     `,
     host: {
-        '[attr.id]': 'id()',
-        '(focus)': 'onFocus()',
         tabindex: '0'
     }
 })
-export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
-    /** Sending the focused item to parent */
-    @Output() focusedElementEvent = new EventEmitter<string>();
-
+export class CalendarLegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The text of the legend item */
     text = input<string | undefined>();
 
     /** The color of the legend item marker */
     color = input<string>();
 
-    /** The type of the legend item  */
-    type = input<Nullable<string> | undefined>();
-
     /** If the marker is a circle or a square */
     circle = input<boolean>();
-
-    /** The id of the legend item */
-    id = input<string>(`fd-calendar-legend-item-${id++}`);
-
-    /** The aria-label of the legend item */
-    ariaLabel = input<string>();
-
-    /** The aria-labelledby of the legend item */
-    ariaLabelledBy = input<string>();
-
-    /** The aria-describedby of the legend item */
-    ariaDescribedBy = input<string>();
 
     /** @hidden */
     class: string;
@@ -69,9 +45,7 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            `fd-calendar-legend__item ${this.getTypeClass()} ${this.getAppointmentClass()} ${this.getColorClass()}`
-        ];
+        return [`fd-calendar-legend__item ${this.getAppointmentClass()} ${this.getColorClass()}`];
     }
 
     /** @hidden */
@@ -85,22 +59,12 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    getTypeClass(): string {
-        return this.type() ? `fd-calendar-legend__item--${this.type()}` : '';
-    }
-
-    /** @hidden */
     getAppointmentClass(): string {
-        return this.circle() || this.type() === 'appointment' ? `fd-calendar-legend__item--appointment` : '';
+        return this.circle() ? `fd-calendar-legend__item--appointment` : '';
     }
 
     /** @hidden */
     getColorClass(): string {
         return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
-    }
-
-    /** @hidden */
-    onFocus(): void {
-        this.focusedElementEvent.emit(this.id());
     }
 }
