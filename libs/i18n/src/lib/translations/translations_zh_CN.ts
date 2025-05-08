@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: '日历',
         calendarMonthViewDescription: '月份选取器',
         calendarYearsViewDescription: '年度选取器',
-        calendarYearsRangeViewDescription: '年度范围选取器'
+        calendarYearsRangeViewDescription: '年度范围选取器',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '多值组合框',

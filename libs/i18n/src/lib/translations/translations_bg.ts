@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_bg.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Календар',
         calendarMonthViewDescription: 'Средство за избор на месец',
         calendarYearsViewDescription: 'Средство за избор на година',
-        calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години'
+        calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Комбинирано поле с множество стойности',
