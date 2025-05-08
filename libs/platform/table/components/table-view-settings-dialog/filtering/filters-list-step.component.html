@@ -3,8 +3,10 @@
 </ng-template>
 
 <ng-template #bodyTemplate>
-    <h3 fd-list-group-header>{{ 'platformTable.filterDialogFilterBy' | fdTranslate }}</h3>
-    <ul fd-list>
+    <h3 fd-list-group-header id="platformTableInternalFilterListGroupHeader">
+        {{ 'platformTable.filterDialogFilterBy' | fdTranslate }}
+    </h3>
+    <ul fd-list aria-labelledby="platformTableInternalFilterListGroupHeader">
         @for (filter of filters; track filter) {
             <li
                 fd-list-item
