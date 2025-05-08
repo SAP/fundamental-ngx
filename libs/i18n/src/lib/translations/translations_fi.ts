@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'Valitse kaikki ({selectedItems} / {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Siirry edelliseen kohteeseen',
         rightNavigationBtnLabel: 'SIirry seuraavaan kohteeseen'
     },

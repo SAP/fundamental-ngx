@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'Odaberi svih ({selectedItems} od {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
         rightNavigationBtnLabel: 'Idi na sledeću stavku'
     },

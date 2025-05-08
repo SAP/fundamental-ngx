@@ -68,6 +68,7 @@ export interface FdLanguage {
         selectAllLabel: FdLanguageKey;
     };
     coreCarousel: {
+        pageIndicatorLabel: FdLanguageKey;
         leftNavigationBtnLabel: FdLanguageKey;
         rightNavigationBtnLabel: FdLanguageKey;
     };

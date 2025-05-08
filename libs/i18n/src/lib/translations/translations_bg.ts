@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Към предишната позиция',
         rightNavigationBtnLabel: 'Към следващата позиция'
     },

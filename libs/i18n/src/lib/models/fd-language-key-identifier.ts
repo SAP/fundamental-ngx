@@ -24,6 +24,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreCalendar.calendarYearsRangeViewDescription'
     | 'coreMultiComboBox.multiComboBoxAriaLabel'
     | 'coreMultiComboBox.selectAllLabel'
+    | 'coreCarousel.pageIndicatorLabel'
     | 'coreCarousel.leftNavigationBtnLabel'
     | 'coreCarousel.rightNavigationBtnLabel'
     | 'coreDatePicker.dateInputLabel'
