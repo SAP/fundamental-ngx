@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.13...v0.56.0-rc.14) (2025-05-08)
+
+
+### Bug Fixes
+
+* **platform:** heading level for sort/filter table dialogs should be h2 ([#13277](https://github.com/SAP/fundamental-ngx/issues/13277)) ([faafcdc](https://github.com/SAP/fundamental-ngx/commit/faafcdcda28bb734aaeacaf3f83672a8ca2f0afc))
+
+
+
+
+
 # [0.56.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.12...v0.56.0-rc.13) (2025-05-08)
 
 
