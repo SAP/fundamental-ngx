@@ -19,7 +19,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                         fdkFocusableItem
                         class="fd-calendar-legend__item--today"
                         [text]="'coreCalendar.todayLabel' | fdTranslate"
-                        (focus)="_handleFocusedElementEvent('hideAllSpecialMarkers')"
+                        (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
                 }
@@ -28,7 +28,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                         fdkFocusableItem
                         class="fd-calendar-legend__item--selected"
                         [text]="'coreCalendar.dateSelectedLabel' | fdTranslate"
-                        (focus)="_handleFocusedElementEvent('hideAllSpecialMarkers')"
+                        (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
                 }
@@ -37,7 +37,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                         fdkFocusableItem
                         class="fd-calendar-legend__item--work"
                         [text]="'coreCalendar.workDayLabel' | fdTranslate"
-                        (focus)="_handleFocusedElementEvent('hideAllSpecialMarkers')"
+                        (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
                 }
@@ -46,7 +46,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                         fdkFocusableItem
                         class="fd-calendar-legend__item--non-work"
                         [text]="'coreCalendar.nonWorkDayLabel' | fdTranslate"
-                        (focus)="_handleFocusedElementEvent('hideAllSpecialMarkers')"
+                        (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
                 }
@@ -108,7 +108,7 @@ export class CalendarLegendComponent<D> {
     ) {}
 
     /** @hidden */
-    _handleFocusedElementEvent(specialDayNumber: Nullable<number> | 'hideAllSpecialMarkers'): void {
+    _handleFocusedElementEvent(specialDayNumber: Nullable<number>): void {
         this.focusingService._handleLegendItemFocus(this.legendId(), specialDayNumber);
     }
 }

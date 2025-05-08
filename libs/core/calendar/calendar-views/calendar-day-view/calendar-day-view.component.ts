@@ -631,15 +631,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /** @hidden */
-    private _focusOnLegendsDay(legendId: Nullable<string>, specialDayNumber: number | 'hideAllSpecialMarkers'): void {
+    private _focusOnLegendsDay(legendId: Nullable<string>, specialDayNumber: number): void {
         const associatedLegendId = this.associatedLegendId();
 
         if (legendId && associatedLegendId && associatedLegendId === legendId) {
             this._dayViewGrid.forEach((row) => {
                 row.forEach((day) => {
-                    if (specialDayNumber === 'hideAllSpecialMarkers') {
-                        day.shouldHideSpecialDayMarker = true;
-                    }
                     day.shouldHideSpecialDayMarker = day.specialDayNumber !== specialDayNumber;
                 });
             });

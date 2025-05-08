@@ -9,7 +9,7 @@ export class CalendarLegendFocusingService {
     /** Subject to emit the focused element */
     focusedLegendItemSubject$ = new Subject<{
         legendId: Nullable<string>;
-        specialDayNumber: Nullable<number> | 'hideAllSpecialMarkers';
+        specialDayNumber: Nullable<number>;
     }>();
 
     /** Clearing the focused element */
@@ -18,7 +18,7 @@ export class CalendarLegendFocusingService {
     }
 
     /** Setting the elements that are getting currently focused */
-    _handleLegendItemFocus(legendId: string, specialDayNumber: Nullable<number> | 'hideAllSpecialMarkers'): void {
+    _handleLegendItemFocus(legendId: string, specialDayNumber: Nullable<number>): void {
         this.focusedLegendItemSubject$.next({ legendId, specialDayNumber });
     }
 }
