@@ -11,6 +11,7 @@ import {
     DestroyRef,
     EmbeddedViewRef,
     HostListener,
+    OnDestroy,
     OnInit,
     TemplateRef,
     Type,
@@ -63,7 +64,7 @@ import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
+export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     containerRef = viewChild('vc', { read: ViewContainerRef });
 
@@ -172,6 +173,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     private _expanded = computed(() => this._notificationFooter()?.expanded() ?? false);
 
     /** @hidden */
+    private _observer: ResizeObserver;
+
+    /** @hidden */
     constructor() {
         super();
         if (this._notificationConfig) {
@@ -217,8 +221,14 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
 
         this._checkTruncation();
+        this._observeNotificationResize();
         this._afterViewInit$.next(true);
         this._cdRef.detectChanges();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._observer?.disconnect();
     }
 
     /**
@@ -238,6 +248,19 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-notification');
+    }
+
+    /** @hidden */
+    private _observeNotificationResize(): void {
+        const el = this.elementRef.nativeElement;
+
+        if (typeof ResizeObserver !== 'undefined') {
+            this._observer = new ResizeObserver(() => {
+                this._checkTruncation();
+                this._cdRef.markForCheck();
+            });
+            this._observer.observe(el);
+        }
     }
 
     /** @hidden */
