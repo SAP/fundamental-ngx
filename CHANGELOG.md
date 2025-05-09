@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.15...v0.56.0-rc.16) (2025-05-09)
+
+
+### Bug Fixes
+
+* **core:** fd-list-group-header should not be adjacent to fd-list-item ([#13270](https://github.com/SAP/fundamental-ngx/issues/13270)) ([73a01ae](https://github.com/SAP/fundamental-ngx/commit/73a01aed12f2b5c8f71c8e1fbfa4332bdc53ace9))
+
+
+
+
+
 # [0.56.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.14...v0.56.0-rc.15) (2025-05-08)
 
 **Note:** Version bump only for package fundamental-ngx
