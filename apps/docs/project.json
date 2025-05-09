@@ -334,7 +334,8 @@
                 }
             },
             "defaultConfiguration": "hot-module-replacement",
-            "dependsOn": ["^compile-typedoc"]
+            "dependsOn": ["^compile-typedoc"],
+            "continuous": true
         }
     }
 }
