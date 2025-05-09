@@ -1,5 +1,10 @@
 <div [style.position]="'relative'">
-    <fd-action-sheet [mobile]="true" (isOpenChange)="isOpenChange($event)">
+    <fd-action-sheet
+        [mobile]="true"
+        (isOpenChange)="isOpenChange($event)"
+        controlTitle="Control Title"
+        [controlTitleHeading]="3"
+    >
         <fd-action-sheet-control>
             <button
                 fd-button
