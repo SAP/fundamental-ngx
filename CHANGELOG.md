@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.17...v0.56.0-rc.18) (2025-05-09)
+
+
+### Bug Fixes
+
+* **platform:** add check that secondary rows exist for virtual scrolling with pop-in columns ([#13278](https://github.com/SAP/fundamental-ngx/issues/13278)) ([b4f9faf](https://github.com/SAP/fundamental-ngx/commit/b4f9faf00acd946225ad3016142f32248234c52c))
+
+
+
+
+
+# [0.56.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.16...v0.56.0-rc.17) (2025-05-09)
+
+
+### Bug Fixes
+
+* **cdk:** focusable item tabindex bug ([#13255](https://github.com/SAP/fundamental-ngx/issues/13255)) ([d241458](https://github.com/SAP/fundamental-ngx/commit/d24145835adf6727d624cb727d1b66b6c367f66d))
+
+
+
+
+
 # [0.56.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.15...v0.56.0-rc.16) (2025-05-09)
 
 
