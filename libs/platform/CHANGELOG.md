@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.15...v0.56.0-rc.16) (2025-05-09)
+
+
+### Bug Fixes
+
+* **core:** fd-list-group-header should not be adjacent to fd-list-item ([#13270](https://github.com/SAP/fundamental-ngx/issues/13270)) ([73a01ae](https://github.com/SAP/fundamental-ngx/commit/73a01aed12f2b5c8f71c8e1fbfa4332bdc53ace9))
+
+
+
+
+
+# [0.56.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.14...v0.56.0-rc.15) (2025-05-08)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.56.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.13...v0.56.0-rc.14) (2025-05-08)
+
+
+### Bug Fixes
+
+* **platform:** heading level for sort/filter table dialogs should be h2 ([#13277](https://github.com/SAP/fundamental-ngx/issues/13277)) ([faafcdc](https://github.com/SAP/fundamental-ngx/commit/faafcdcda28bb734aaeacaf3f83672a8ca2f0afc))
+
+
+
+
+
+# [0.56.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.12...v0.56.0-rc.13) (2025-05-08)
+
+
+### Bug Fixes
+
+* **platform:** remove nowrap rule from pop in table text ([#13273](https://github.com/SAP/fundamental-ngx/issues/13273)) ([0726816](https://github.com/SAP/fundamental-ngx/commit/07268164a9ce9dbab753e8ab41033be131f2bc62))
+
+
+
+
+
+# [0.56.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.11...v0.56.0-rc.12) (2025-05-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.56.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.10...v0.56.0-rc.11) (2025-05-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.56.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.9...v0.56.0-rc.10) (2025-05-02)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.56.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.8...v0.56.0-rc.9) (2025-05-01)
+
+
+### Bug Fixes
+
+* **platform:** platform form field should announce form message ([#13250](https://github.com/SAP/fundamental-ngx/issues/13250)) ([94cc767](https://github.com/SAP/fundamental-ngx/commit/94cc767845953c9e1d815bf62a5d9b9ac5abd1ab))
+
+
+
+
+
 # [0.56.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.7...v0.56.0-rc.8) (2025-04-30)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
