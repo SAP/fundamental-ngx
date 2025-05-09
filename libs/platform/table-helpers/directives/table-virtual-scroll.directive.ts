@@ -95,11 +95,13 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
         let rowHeight = this.rowHeight + 1;
 
+        const tableContainerEl = this._table.tableContainer.nativeElement;
+
         if (this._tableService.poppingColumns$().length > 0) {
-            rowHeight =
-                rowHeight +
-                this._table.tableContainer.nativeElement.getElementsByClassName('fd-table__row--secondary')[0]
-                    .clientHeight;
+            const secondaryRows = tableContainerEl.getElementsByClassName('fd-table__row--secondary');
+            if (secondaryRows[0]) {
+                rowHeight = rowHeight + secondaryRows[0].clientHeight;
+            }
         }
 
         const rowsVisible = this._table._tableRowsVisible;
@@ -110,8 +112,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         let startNodeIndex = Math.floor(scrollTop / rowHeight) - this.renderAhead;
         startNodeIndex = Math.max(0, startNodeIndex);
 
-        let visibleNodeCount =
-            Math.ceil(this._table.tableContainer.nativeElement.clientHeight / rowHeight) + 2 * this.renderAhead;
+        let visibleNodeCount = Math.ceil(tableContainerEl.clientHeight / rowHeight) + 2 * this.renderAhead;
         visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
 
         this.virtualScrollTransform$.next(startNodeIndex * rowHeight);
