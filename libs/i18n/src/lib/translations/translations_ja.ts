@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '前の項目へ',
         rightNavigationBtnLabel: '次の項目へ'
     },

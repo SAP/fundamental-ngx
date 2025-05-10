@@ -1,12 +1,13 @@
-<div
+<section
     class="fd-carousel"
     [class.fd-carousel--no-navigation]="!navigation"
-    data-ride="carousel"
     tabindex="0"
     [style.height]="height"
     [style.width]="width"
     [attr.dir]="_dir$()"
-    role="region"
+    role="listbox"
+    aria-roledescription="Carousel"
+    [attr.aria-activedescendant]="ariaActivedescendant"
     #carouselContainer
     (click)="_focus()"
 >
@@ -35,7 +36,7 @@
     <div [style.display]="'none'" role="region" [attr.id]="id + '-accessibility'" aria-live="polite" dir="ltr">
         {{ screenReaderLabel }}
     </div>
-</div>
+</section>
 <ng-template #pageIndicatorContainer>
     <div
         class="fd-carousel__page-indicator-container"
@@ -62,27 +63,30 @@
         </div>
     }
     @if (!numericIndicator && _showNavigationButtonInPageIndicatorContainer) {
-        <ol class="fd-carousel__page-indicators" [attr.dir]="_dir$()">
+        <div class="fd-carousel__page-indicators" [attr.dir]="_dir$()">
             @if (pageIndicator) {
                 @for (item of pageIndicatorsCountArray; track item; let i = $index) {
-                    <li
-                        [attr.data-slide-to]="i + 1"
+                    <span
+                        role="img"
+                        [attr.aria-label]="
+                            'coreCarousel.pageIndicatorLabel' | fdTranslate: { itemNum: i + 1, totalNum: totalSlides }
+                        "
                         class="fd-carousel__page-indicator"
                         [class.fd-carousel__page-indicator--active]="i === currentActiveSlidesStartIndex"
-                    ></li>
+                    ></span>
                 }
             }
-        </ol>
+        </div>
     }
 </ng-template>
 <ng-template #buttonLeft>
     <button
         fd-button
+        role="button"
         class="fd-carousel__button"
         [class.fd-carousel__button--left]="!vertical"
         [class.fd-carousel__button--up]="vertical"
         [style.z-index]="1"
-        data-slide="previous"
         [attr.aria-label]="'coreCarousel.leftNavigationBtnLabel' | fdTranslate"
         (click)="previous(); $event.stopPropagation()"
         [disabled]="leftButtonDisabled"
@@ -93,11 +97,11 @@
 <ng-template #buttonRight>
     <button
         fd-button
+        role="button"
         class="fd-carousel__button"
         [class.fd-carousel__button--right]="!vertical"
         [class.fd-carousel__button--down]="vertical"
         [style.z-index]="1"
-        data-slide="next"
         [attr.aria-label]="'coreCarousel.rightNavigationBtnLabel' | fdTranslate"
         (click)="next(); $event.stopPropagation()"
         [disabled]="rightButtonDisabled"

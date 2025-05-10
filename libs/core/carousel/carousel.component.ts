@@ -199,6 +199,15 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     /** @hidden Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
 
+    /** @hidden End index of currently active items */
+    currentActiveSlidesEndIndex = 0;
+
+    /** @hidden an array of id(s) of currently active item(s) */
+    currentActiveSlidesIds: string[] = [];
+
+    /** @hidden the total number of slides in the carousel */
+    totalSlides = 0;
+
     /** @hidden handles rtl service */
     readonly _dir$ = computed<Direction>(() => (this._rtl$() ? 'rtl' : 'ltr'));
 
@@ -213,6 +222,9 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
 
     /** @hidden */
     _slidesWrapperSize = 0;
+
+    /** @hidden A string containing the id(s) of the active item(s) */
+    ariaActivedescendant: string;
 
     /** @hidden */
     get _contentSizePx(): string {
@@ -304,6 +316,24 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     ngAfterContentInit(): void {
         // On carousel load, display first slide + number of slide visible
         this.currentActiveSlidesStartIndex = 0;
+        this.currentActiveSlidesEndIndex = this._visibleSlidesNumericCount - 1;
+        this.currentActiveSlidesIds = [];
+        this.totalSlides = this.slides.length;
+
+        this.slides.forEach((slide, index) => {
+            const isActive = index >= this.currentActiveSlidesStartIndex && index <= this.currentActiveSlidesEndIndex;
+
+            slide.ariaSetsize.set(this.totalSlides);
+            slide.ariaPosinset.set(index + 1);
+            slide.ariaHidden.set(!isActive);
+            slide.ariaSelected.set(isActive);
+
+            if (isActive) {
+                this.currentActiveSlidesIds.push(slide.id);
+            }
+        });
+
+        this.ariaActivedescendant = this.currentActiveSlidesIds.join(' ');
 
         // Change pagination display to numeric, if item count is more than 8
         if (this.slides.length > ICON_PAGE_INDICATOR_LIMIT) {
@@ -608,17 +638,28 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     /** @hidden Manages visibility for slides. Useful in managing tab order */
     private _manageSlideVisibility(firstActiveSlideIndex: number): void {
         setTimeout(() => {
-            this.slides.forEach((_slides, index) => {
-                if (index >= firstActiveSlideIndex && index < firstActiveSlideIndex + this._visibleSlidesNumericCount) {
-                    if (_slides.visibility === 'hidden') {
-                        _slides.visibility = 'visible';
-                    }
-                } else {
-                    if (_slides.visibility === 'visible') {
-                        _slides.visibility = 'hidden';
-                    }
+            const lastActiveSlideIndex = firstActiveSlideIndex + this._visibleSlidesNumericCount;
+
+            this.currentActiveSlidesIds = [];
+
+            this.slides.forEach((slide, index) => {
+                const isVisible = index >= firstActiveSlideIndex && index < lastActiveSlideIndex;
+
+                // Only update visibility if it has changed
+                if (slide.visibility !== (isVisible ? 'visible' : 'hidden')) {
+                    slide.visibility = isVisible ? 'visible' : 'hidden';
                 }
+
+                if (isVisible) {
+                    this.currentActiveSlidesIds.push(slide.id);
+                }
+
+                slide.ariaHidden.set(!isVisible);
+                slide.ariaSelected.set(isVisible);
             });
+
+            this.ariaActivedescendant = this.currentActiveSlidesIds.join(' ');
+
             this._changeDetectorRef.markForCheck();
         }, this.slideTransitionDuration);
     }

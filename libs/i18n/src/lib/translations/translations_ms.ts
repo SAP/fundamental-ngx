@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
         rightNavigationBtnLabel: 'Pergi ke item seterusnya'
     },

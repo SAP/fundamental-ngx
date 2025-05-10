@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'ไปยังไอเท็มก่อนหน้า',
         rightNavigationBtnLabel: 'ไปยังไอเท็มถัดไป'
     },

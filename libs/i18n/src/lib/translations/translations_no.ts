@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'Merk alle ({selectedItems} av {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til neste element'
     },

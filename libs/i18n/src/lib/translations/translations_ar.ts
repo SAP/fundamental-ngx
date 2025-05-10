@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreCalendar: {
@@ -27,6 +26,7 @@ export default {
         selectAllLabel: 'تحديد الكل ({selectedItems} من {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'انتقال إلى البند السابق',
         rightNavigationBtnLabel: 'انتقال إلى البند التالي'
     },
