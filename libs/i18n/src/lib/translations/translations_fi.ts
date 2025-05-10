@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_fi.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Kalenteri',
         calendarMonthViewDescription: 'Kuukausivalitsin',
         calendarYearsViewDescription: 'Vuosivalitsin',
-        calendarYearsRangeViewDescription: 'Vuosialuevalitsin'
+        calendarYearsRangeViewDescription: 'Vuosialuevalitsin',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Moninkertaisen arvon yhdistelmäruutu',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'ปฏิทิน',
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
         calendarYearsViewDescription: 'ตัวเลือกปี',
-        calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี'
+        calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'คอมโบบ็อกซ์แบบหลายค่า',

@@ -20,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Kalendar',
         calendarMonthViewDescription: 'Zgjedhësi i muajit',
         calendarYearsViewDescription: 'Zgjedhësi i vitit',
-        calendarYearsRangeViewDescription: 'Zgjedhësi i shtrirjes së viteve'
+        calendarYearsRangeViewDescription: 'Zgjedhësi i shtrirjes së viteve',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kutia e kombinuar me shumë vlera',

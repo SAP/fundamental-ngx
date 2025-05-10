@@ -67,7 +67,11 @@
                         "
                         [class.fd-calendar__item--other]="cell.monthStatus !== 'current'"
                         [class.is-disabled]="cell.disabled"
-                        [class]="cell.specialNumber ? 'fd-calendar__item--legend-' + cell.specialNumber : ''"
+                        [class]="
+                            cell.specialDayNumber && !cell.shouldHideSpecialDayMarker
+                                ? 'fd-calendar__item--legend-' + cell.specialDayNumber
+                                : ''
+                        "
                         [attr.id]="cell.id"
                         [attr.data-fd-calendar-date-day]="cell.label"
                         [attr.data-fd-calendar-day]="cell.index"

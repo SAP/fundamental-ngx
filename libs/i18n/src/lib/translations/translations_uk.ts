@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Календар',
         calendarMonthViewDescription: 'Вибір місяця',
         calendarYearsViewDescription: 'Вибір року',
-        calendarYearsRangeViewDescription: 'Вибір діапазону років'
+        calendarYearsRangeViewDescription: 'Вибір діапазону років',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Багатозначне поле зі списком',

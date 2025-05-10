@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'التقويم',
         calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsViewDescription: 'أداة انتقاء السنة',
-        calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات'
+        calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'مربع تحرير وسرد متعدد القيم',

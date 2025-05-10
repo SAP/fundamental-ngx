@@ -20,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Calendar',
         calendarMonthViewDescription: 'Month picker',
         calendarYearsViewDescription: 'Year picker',
-        calendarYearsRangeViewDescription: 'Years range picker'
+        calendarYearsRangeViewDescription: 'Years range picker',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Multi Value Combo Box',

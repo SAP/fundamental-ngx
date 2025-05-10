@@ -34,7 +34,8 @@ export class CalendarLegendExampleComponent {
         {
             specialDayNumber: 6,
             rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
-            legendText: 'Placeholder-6'
+            legendText: 'Appointment Type',
+            appointment: true
         },
         {
             specialDayNumber: 10,
@@ -49,4 +50,6 @@ export class CalendarLegendExampleComponent {
     ];
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+
+    noop(): void {}
 }

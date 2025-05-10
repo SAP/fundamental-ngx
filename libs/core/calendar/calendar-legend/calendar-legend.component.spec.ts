@@ -10,7 +10,7 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { LegendItemComponent } from './calendar-legend-item.component';
+import { CalendarLegendItemComponent } from './calendar-legend-item.component';
 import { CalendarLegendComponent } from './calendar-legend.component';
 
 @Component({
@@ -76,21 +76,11 @@ describe('CalendarLegendComponent', () => {
     });
 
     it('should render legend items', () => {
-        const legendItems = fixture.debugElement.queryAll(By.directive(LegendItemComponent));
+        const legendItems = fixture.debugElement.queryAll(By.directive(CalendarLegendItemComponent));
         expect(legendItems.length).toBe(4);
         expect(legendItems[0].componentInstance.text()).toBe('Placeholder-5');
         expect(legendItems[1].componentInstance.text()).toBe('Placeholder-6');
         expect(legendItems[2].componentInstance.text()).toBe('Placeholder-10');
         expect(legendItems[3].componentInstance.text()).toBe('Placeholder-11');
-    });
-
-    it('should set the col correctly', () => {
-        expect(host.col).toBe(false);
-
-        host.col = true;
-        fixture.detectChanges();
-
-        const calendarLegend = fixture.debugElement.query(By.directive(CalendarLegendComponent));
-        expect(calendarLegend.componentInstance.col).toBe(true);
     });
 });

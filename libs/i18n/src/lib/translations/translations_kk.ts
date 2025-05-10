@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Күнтізбе',
         calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarYearsViewDescription: 'Жылды таңдау құралы',
-        calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы'
+        calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Бірнеше мәннің құрама ұясы',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: '달력',
         calendarMonthViewDescription: '월 선택 도구',
         calendarYearsViewDescription: '연도 선택 도구',
-        calendarYearsRangeViewDescription: '연도 범위 선택 도구'
+        calendarYearsRangeViewDescription: '연도 범위 선택 도구',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '다중 값 콤보 박스',

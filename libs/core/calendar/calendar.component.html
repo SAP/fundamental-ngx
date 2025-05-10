@@ -36,6 +36,7 @@
             [focusEscapeFunction]="escapeFocusFunction"
             (nextMonthSelect)="displayNextMonth()"
             (previousMonthSelect)="displayPreviousMonth()"
+            [associatedLegendId]="associatedLegendId"
         ></fd-calendar-day-view>
     } @else if (activeView === 'month') {
         <fd-calendar-month-view

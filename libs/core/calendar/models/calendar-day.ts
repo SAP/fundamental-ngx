@@ -4,7 +4,8 @@ export interface CalendarDay<D> extends BaseCalendarCell {
     weekDay: number; // weeks number in the year
     weekend: boolean; // to highlight Saturday and Sunday
     monthStatus?: 'previous' | 'current' | 'next'; // to mark days from sibling months
-    specialNumber?: number; // special day marker flag
+    specialDayNumber?: number; // special day marker flag
+    shouldHideSpecialDayMarker?: boolean; // if the special day should be marked
     blocked?: boolean; // blocked date
     past?: boolean; // date in past
     selectedFirst?: boolean; // to highlight the first selected date in the range

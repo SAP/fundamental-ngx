@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'कैलेंडर',
         calendarMonthViewDescription: 'महीना चयनकर्ता',
         calendarYearsViewDescription: 'वर्ष चयनकर्ता',
-        calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता'
+        calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स',
