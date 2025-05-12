@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.20...v0.56.0) (2025-05-12)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.56.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.19...v0.56.0-rc.20) (2025-05-12)
 
 
