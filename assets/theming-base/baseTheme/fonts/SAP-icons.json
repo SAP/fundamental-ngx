@@ -1,0 +1,7001 @@
+{
+  "0xe000": {
+    "names": ["accidental-leave"],
+    "groups": ["medical", "status"],
+    "tags": [
+      "accidental",
+      "leave",
+      "medical",
+      "cross",
+      "plus",
+      "emergency",
+      "hospital"
+    ],
+    "rtl": "flip"
+  },
+  "0xe001": {
+    "names": ["account"],
+    "groups": ["people"],
+    "tags": ["user", "menu", "settings", "person", "account"],
+    "rtl": "flip"
+  },
+  "0xe002": {
+    "names": ["wrench"],
+    "groups": ["action", "thing"],
+    "tags": ["wrench", "control", "configuration", "settings", "tool"],
+    "rtl": "flip"
+  },
+  "0xe003": {
+    "names": ["windows-doors"],
+    "groups": ["objects"],
+    "tags": ["window", "door", "entry"],
+    "rtl": "flip"
+  },
+  "0xe004": {
+    "names": ["washing-machine"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["washing", "machine", "laundry", "clean", "wash", "purify"],
+    "rtl": "flip"
+  },
+  "0xe005": {
+    "names": ["visits"],
+    "groups": ["people", "arrow", "action"],
+    "tags": ["user", "arrow", "door", "visit", "login", "entry"],
+    "rtl": "flip"
+  },
+  "0xe006": {
+    "names": ["video"],
+    "groups": ["devices", "action", "thing", "objects"],
+    "tags": ["camera", "recorder", "video", "movie", "clip"],
+    "rtl": "flip"
+  },
+  "0xe007": {
+    "names": ["travel-expense"],
+    "groups": ["money", "travel", "transport"],
+    "tags": [
+      "plane",
+      "dollar",
+      "money",
+      "trip",
+      "expense",
+      "travel",
+      "holiday",
+      "flight",
+      "budget",
+      "billing",
+      "invoice",
+      "cost",
+      "payments"
+    ],
+    "rtl": "none"
+  },
+  "0xe008": {
+    "names": ["temperature"],
+    "groups": ["charts", "medical", "status", "thing", "objects"],
+    "tags": [
+      "temperature",
+      "hot",
+      "heat",
+      "cold",
+      "cool",
+      "illness",
+      "sickness",
+      "health",
+      "medical"
+    ],
+    "rtl": "flip"
+  },
+  "0xe009": {
+    "names": ["task"],
+    "groups": ["clipboard"],
+    "tags": ["clipboard", "task", "checkbox", "checklist", "list", "checkmark"],
+    "rtl": "none"
+  },
+  "0xe00a": {
+    "names": ["synchronize"],
+    "groups": ["arrow", "action"],
+    "tags": ["synchronize", "reload", "refresh", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe00b": {
+    "names": ["survey"],
+    "groups": ["form"],
+    "tags": [
+      "survey",
+      "form",
+      "checklist",
+      "list",
+      "checkbox",
+      "checkmark",
+      "x"
+    ],
+    "rtl": "none"
+  },
+  "0xe00c": {
+    "names": ["settings"],
+    "groups": ["action"],
+    "tags": [
+      "cogwheels",
+      "configuration",
+      "settings",
+      "tools",
+      "modify",
+      "customize"
+    ],
+    "rtl": "flip"
+  },
+  "0xe00d": {
+    "names": ["search"],
+    "groups": ["action"],
+    "tags": ["search", "magnifier", "glass"],
+    "rtl": "none"
+  },
+  "0xe00e": {
+    "names": ["sales-document"],
+    "groups": ["money", "documents"],
+    "tags": ["document", "page", "file", "text", "sales", "money"],
+    "rtl": "none"
+  },
+  "0xe00f": {
+    "names": ["retail-store"],
+    "groups": ["shopping", "place"],
+    "tags": ["shop", "store", "retail", "market"],
+    "rtl": "flip"
+  },
+  "0xe010": {
+    "names": ["refresh"],
+    "groups": ["arrow", "action"],
+    "tags": ["reload", "refresh", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe011": {
+    "names": ["product"],
+    "groups": ["objects"],
+    "tags": [
+      "product",
+      "commodity",
+      "goods",
+      "stock",
+      "merchandise",
+      "package"
+    ],
+    "rtl": "flip"
+  },
+  "0xe012": {
+    "names": ["present"],
+    "groups": ["time"],
+    "tags": ["time", "clock", "star", "current", "present"],
+    "rtl": "flip"
+  },
+  "0xe013": {
+    "names": ["ppt-attachment"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "ppt", "powerpoint"],
+    "rtl": "flip"
+  },
+  "0xe014": {
+    "names": ["pool"],
+    "groups": ["objects", "place"],
+    "tags": ["pool", "basin", "swim"],
+    "rtl": "flip"
+  },
+  "0xe015": {
+    "names": ["pie-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "pie", "segments"],
+    "rtl": "flip"
+  },
+  "0xe016": {
+    "names": ["picture"],
+    "groups": ["thing", "objects"],
+    "tags": ["picture", "photo", "photograph", "shot", "image"],
+    "rtl": "flip"
+  },
+  "0xe017": {
+    "names": ["photo-voltaic"],
+    "groups": ["objects"],
+    "tags": [
+      "photovoltaic",
+      "voltaic",
+      "electricity",
+      "power",
+      "solar",
+      "panel",
+      "sun"
+    ],
+    "rtl": "flip"
+  },
+  "0xe018": {
+    "names": ["phone"],
+    "groups": ["devices", "action", "thing", "objects"],
+    "tags": ["phone", "telephone", "landline", "number", "call", "dial"],
+    "rtl": "flip"
+  },
+  "0xe019": {
+    "names": ["pending"],
+    "groups": ["time"],
+    "tags": [
+      "time",
+      "clock",
+      "pend",
+      "pending",
+      "awaiting",
+      "unresolved",
+      "unsettled"
+    ],
+    "rtl": "flip"
+  },
+  "0xe01a": {
+    "names": ["pdf-attachment"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "pdf"],
+    "rtl": "none"
+  },
+  "0xe01b": {
+    "names": ["past"],
+    "groups": ["time"],
+    "tags": ["time", "clock", "past", "bygone", "former", "late"],
+    "rtl": "none"
+  },
+  "0xe01c": {
+    "names": ["outgoing-call"],
+    "groups": ["action"],
+    "tags": ["call", "communicate", "phone", "telephone", "outgoing", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe01d": {
+    "names": ["opportunity"],
+    "groups": ["objects"],
+    "tags": [
+      "chart",
+      "line",
+      "star",
+      "opportunity",
+      "stock",
+      "market",
+      "exchange",
+      "trade"
+    ],
+    "rtl": "flip"
+  },
+  "0xe01e": {
+    "names": ["opportunities"],
+    "groups": ["people"],
+    "tags": ["user", "person", "dollar", "equal to", "opportunity"],
+    "rtl": "none"
+  },
+  "0xe01f": {
+    "names": ["notes"],
+    "groups": ["action", "calendar"],
+    "tags": ["notes", "marks", "info", "draft"],
+    "rtl": "flip"
+  },
+  "0xe020": {
+    "names": ["money-bills"],
+    "groups": ["money"],
+    "tags": ["money", "cash", "payment", "bills", "dollar"],
+    "rtl": "none"
+  },
+  "0xe021": {
+    "names": ["map"],
+    "groups": ["objects", "place"],
+    "tags": ["map", "pin", "location", "place", "area"],
+    "rtl": "flip"
+  },
+  "0xe022": {
+    "names": ["log"],
+    "groups": ["action"],
+    "tags": ["log", "logout", "log on", "log off"],
+    "rtl": "flip"
+  },
+  "0xe023": {
+    "names": ["line-charts"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "flip"
+  },
+  "0xe024": {
+    "names": ["lightbulb"],
+    "groups": ["objects"],
+    "tags": ["lightbulb", "light", "lamp", "idea"],
+    "rtl": "flip"
+  },
+  "0xe025": {
+    "names": ["leads"],
+    "groups": ["people"],
+    "tags": ["user", "person", "leads", "star", "equal to"],
+    "rtl": "flip"
+  },
+  "0xe026": {
+    "names": ["lead"],
+    "groups": ["money", "status"],
+    "tags": ["money", "dollar", "currency", "payment"],
+    "rtl": "none"
+  },
+  "0xe027": {
+    "names": ["laptop"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["laptop", "device", "computer"],
+    "rtl": "flip"
+  },
+  "0xe028": {
+    "names": ["kpi-managing-my-area"],
+    "groups": ["people"],
+    "tags": ["user", "person", "kpi", "checkmark", "equal to"],
+    "rtl": "none"
+  },
+  "0xe029": {
+    "names": ["kpi-corporate-performance"],
+    "groups": ["objects"],
+    "tags": ["chart", "line", "kpi", "checkmark", "performance"],
+    "rtl": "none"
+  },
+  "0xe02a": {
+    "names": ["incoming-call"],
+    "groups": ["action"],
+    "tags": ["call", "communicate", "incoming", "phone", "telephone", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe02b": {
+    "names": ["inbox"],
+    "groups": ["arrow", "action"],
+    "tags": ["inbox", "in", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe02c": {
+    "names": ["horizontal-bar-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "bar", "horizontal"],
+    "rtl": "flip"
+  },
+  "0xe02d": {
+    "names": ["history"],
+    "groups": ["time", "status"],
+    "tags": ["time", "clock", "history", "past", "chronicle"],
+    "rtl": "flip"
+  },
+  "0xe02e": {
+    "names": ["heating-cooling"],
+    "groups": ["objects"],
+    "tags": [
+      "temperature",
+      "air conditioning",
+      "ac",
+      "heat",
+      "cold",
+      "sun",
+      "snowflake"
+    ],
+    "rtl": "flip"
+  },
+  "0xe02f": {
+    "names": ["gantt-bars"],
+    "groups": ["charts", "calendar", "objects"],
+    "tags": ["calendar", "gantt", "bars", "gantt bars", "chart", "schedule"],
+    "rtl": "flip"
+  },
+  "0xe030": {
+    "names": ["future"],
+    "groups": ["time"],
+    "tags": ["time", "clock", "arrow", "future", "hereafter"],
+    "rtl": "none"
+  },
+  "0xe031": {
+    "names": ["fridge"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": [
+      "fridge",
+      "refrigerator",
+      "icebox",
+      "freezer",
+      "cooler",
+      "appliance"
+    ],
+    "rtl": "flip"
+  },
+  "0xe032": {
+    "names": ["fallback"],
+    "groups": ["folder"],
+    "tags": ["folder", "fallback", "marked", "object", "directory", "library"],
+    "rtl": "flip"
+  },
+  "0xe033": {
+    "names": ["expense-report"],
+    "groups": ["money", "documents"],
+    "tags": ["expense", "report", "documents", "money", "dollar"],
+    "rtl": "none"
+  },
+  "0xe034": {
+    "names": ["excel-attachment"],
+    "groups": ["documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "excel",
+      "spreadsheet",
+      "accounting"
+    ],
+    "rtl": "flip"
+  },
+  "0xe035": {
+    "names": ["energy-saving-lightbulb"],
+    "groups": ["thing", "objects"],
+    "tags": ["lightbulb", "light", "lamp", "idea", "eco", "energy saving"],
+    "rtl": "flip"
+  },
+  "0xe036": {
+    "names": ["employee"],
+    "groups": ["people"],
+    "tags": [
+      "user",
+      "person",
+      "employee",
+      "member",
+      "operator",
+      "representative"
+    ],
+    "rtl": "flip"
+  },
+  "0xe037": {
+    "names": ["email"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "envelope",
+      "email",
+      "e-mail",
+      "electronic mail",
+      "mail",
+      "correspondence"
+    ],
+    "rtl": "flip"
+  },
+  "0xe038": {
+    "names": ["edit"],
+    "groups": ["action"],
+    "tags": ["pencil", "pen", "write", "edit", "modify", "text"],
+    "rtl": "flip"
+  },
+  "0xe039": {
+    "names": ["duplicate"],
+    "groups": ["arrow", "action"],
+    "tags": ["duplicate", "objects", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe03a": {
+    "names": ["download"],
+    "groups": ["arrow", "action"],
+    "tags": ["download", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe03b": {
+    "names": ["doc-attachment"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "word", "text"],
+    "rtl": "flip"
+  },
+  "0xe03c": {
+    "names": ["dishwasher"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["dishwasher", "dish", "wash", "appliance"],
+    "rtl": "flip"
+  },
+  "0xe03d": {
+    "names": ["delete"],
+    "groups": ["action"],
+    "tags": ["bin", "trash can", "rubbish", "delete"],
+    "rtl": "flip"
+  },
+  "0xe03e": {
+    "names": ["decline"],
+    "groups": ["action"],
+    "tags": ["reject", "close", "remove", "cancel", "x", "delete", "decline"],
+    "rtl": "flip"
+  },
+  "0xe03f": {
+    "names": ["complete"],
+    "groups": ["action"],
+    "tags": ["complete", "checkmark", "tick", "affirmative", "enter", "finish"],
+    "rtl": "none"
+  },
+  "0xe040": {
+    "names": ["competitor"],
+    "groups": ["thing", "objects"],
+    "tags": ["competitor", "winner", "prize", "award", "trophy", "cup"],
+    "rtl": "flip"
+  },
+  "0xe041": {
+    "names": ["collections-management"],
+    "groups": ["money", "objects"],
+    "tags": [
+      "calculator",
+      "counting",
+      "simulate",
+      "collections management",
+      "total",
+      "accounting"
+    ],
+    "rtl": "flip"
+  },
+  "0xe042": {
+    "names": ["chalkboard"],
+    "groups": ["objects"],
+    "tags": [
+      "chalkboard",
+      "education",
+      "teaching",
+      "learning",
+      "classroom",
+      "school",
+      "college"
+    ],
+    "rtl": "none"
+  },
+  "0xe043": {
+    "names": ["cart"],
+    "groups": ["shopping", "thing"],
+    "tags": ["cart", "trolley", "basket", "shopping"],
+    "rtl": "flip"
+  },
+  "0xe044": {
+    "names": ["card"],
+    "groups": ["objects"],
+    "tags": [
+      "image",
+      "placeholder",
+      "picture",
+      "hills",
+      "mountains",
+      "sun",
+      "card"
+    ],
+    "rtl": "flip"
+  },
+  "0xe045": {
+    "names": ["camera"],
+    "groups": ["action", "thing", "objects"],
+    "tags": ["camera", "photograph", "device", "image", "snap shot"],
+    "rtl": "flip"
+  },
+  "0xe046": {
+    "names": ["calendar"],
+    "groups": ["calendar", "thing"],
+    "tags": ["calendar"],
+    "rtl": "none"
+  },
+  "0xe047": {
+    "names": ["begin"],
+    "groups": ["arrow", "action"],
+    "tags": ["begin", "start", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe048": {
+    "names": ["basket"],
+    "groups": ["shopping", "thing"],
+    "tags": ["basket", "shopping"],
+    "rtl": "flip"
+  },
+  "0xe049": {
+    "names": ["bar-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "column"],
+    "rtl": "flip"
+  },
+  "0xe04a": {
+    "names": ["attachment"],
+    "groups": ["action"],
+    "tags": ["attach", "file", "paper clip"],
+    "rtl": "flip"
+  },
+  "0xe04b": {
+    "names": ["arrow-top"],
+    "groups": ["arrow"],
+    "tags": ["arrow top", "up"],
+    "rtl": "flip"
+  },
+  "0xe04c": {
+    "names": ["arrow-right"],
+    "groups": ["arrow"],
+    "tags": ["arrow right"],
+    "rtl": "flip"
+  },
+  "0xe04d": {
+    "names": ["arrow-left"],
+    "groups": ["arrow"],
+    "tags": ["arrow left"],
+    "rtl": "flip"
+  },
+  "0xe04e": {
+    "names": ["arrow-bottom"],
+    "groups": ["arrow"],
+    "tags": ["arrow bottom", "down"],
+    "rtl": "flip"
+  },
+  "0xe04f": {
+    "names": ["approvals"],
+    "groups": ["form"],
+    "tags": ["form", "details", "text", "approvals", "accepted", "checkmark"],
+    "rtl": "none"
+  },
+  "0xe050": {
+    "names": ["appointment"],
+    "groups": ["calendar"],
+    "tags": ["date picker", "calendar", "month", "week", "day", "appointment"],
+    "rtl": "flip"
+  },
+  "0xe051": {
+    "names": ["alphabetical-order"],
+    "groups": ["action"],
+    "tags": [
+      "function",
+      "alphabet",
+      "letters",
+      "a to z",
+      "descending",
+      "sorting",
+      "order"
+    ],
+    "rtl": "none"
+  },
+  "0xe052": {
+    "names": ["along-stacked-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "bar"],
+    "rtl": "flip"
+  },
+  "0xe053": {
+    "names": ["alert"],
+    "groups": ["status"],
+    "tags": ["message", "warning", "critical", "notifications", "status"],
+    "rtl": "flip"
+  },
+  "0xe054": {
+    "names": ["addresses"],
+    "groups": ["objects"],
+    "tags": [
+      "customers",
+      "contacts",
+      "addresses",
+      "email",
+      "e-mail",
+      "directory",
+      "companies",
+      "houses",
+      "homes"
+    ],
+    "rtl": "flip"
+  },
+  "0xe055": {
+    "names": ["address-book"],
+    "groups": ["objects"],
+    "tags": [
+      "customers",
+      "contacts",
+      "addresses",
+      "email",
+      "e-mail",
+      "directory",
+      "companies",
+      "@",
+      "at"
+    ],
+    "rtl": "none"
+  },
+  "0xe056": {
+    "names": ["add-filter"],
+    "groups": ["action"],
+    "tags": [
+      "filter",
+      "organise",
+      "aggregate",
+      "data",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe057": {
+    "names": ["add-favorite"],
+    "groups": ["action"],
+    "tags": [
+      "favorite",
+      "favourite",
+      "star",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe058": {
+    "names": ["add"],
+    "groups": ["action"],
+    "tags": [
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more",
+      "add row",
+      "add object",
+      "add item"
+    ],
+    "rtl": "flip"
+  },
+  "0xe059": {
+    "names": ["activities"],
+    "groups": ["action"],
+    "tags": ["activities", "tasks", "to do", "list"],
+    "rtl": "none"
+  },
+  "0xe05a": {
+    "names": ["action"],
+    "groups": ["action"],
+    "tags": [
+      "actions",
+      "collection",
+      "share options",
+      "forward actions",
+      "more actions",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe05b": {
+    "names": ["accept"],
+    "groups": ["action"],
+    "tags": [
+      "accept",
+      "approve",
+      "correct",
+      "checkmark",
+      "tick",
+      "affirmative"
+    ],
+    "rtl": "none"
+  },
+  "0xe05c": {
+    "names": ["hint"],
+    "groups": ["text", "action"],
+    "tags": ["information", "hint", "about", "details"],
+    "rtl": "none"
+  },
+  "0xe05d": {
+    "names": ["group"],
+    "groups": ["people"],
+    "tags": [
+      "group",
+      "team",
+      "people",
+      "communication",
+      "collaborate",
+      "teamwork",
+      "peer to peer",
+      "design thinking",
+      "work",
+      "together",
+      "project",
+      "customers",
+      "audience",
+      "category"
+    ],
+    "rtl": "flip"
+  },
+  "0xe05e": {
+    "names": ["check-availability"],
+    "groups": ["calendar"],
+    "tags": [
+      "date picker",
+      "calendar",
+      "month",
+      "week",
+      "day",
+      "appointment",
+      "search",
+      "look up",
+      "check",
+      "availability",
+      "find"
+    ],
+    "rtl": "none"
+  },
+  "0xe05f": {
+    "names": ["weather-proofing"],
+    "groups": ["objects"],
+    "tags": ["weather", "proofing", "protection"],
+    "rtl": "flip"
+  },
+  "0xe060": {
+    "names": ["payment-approval"],
+    "groups": ["money", "action"],
+    "tags": [
+      "sales",
+      "simple payment",
+      "money",
+      "bill",
+      "details",
+      "quote",
+      "accept",
+      "approval",
+      "checkmark"
+    ],
+    "rtl": "none"
+  },
+  "0xe061": {
+    "names": ["batch-payments"],
+    "groups": ["money", "folder"],
+    "tags": ["folder", "open", "money", "documents", "payments", "bills"],
+    "rtl": "none"
+  },
+  "0xe062": {
+    "names": ["bed"],
+    "groups": ["medical", "travel", "thing", "objects"],
+    "tags": [
+      "bed",
+      "sleep",
+      "ill",
+      "hospital",
+      "sick",
+      "medical",
+      "tired",
+      "snooze",
+      "night"
+    ],
+    "rtl": "flip"
+  },
+  "0xe063": {
+    "names": ["arobase"],
+    "groups": ["objects"],
+    "tags": ["at", "@", "email", "address"],
+    "rtl": "none"
+  },
+  "0xe064": {
+    "names": ["family-care"],
+    "groups": ["people"],
+    "tags": ["family", "protection", "people"],
+    "rtl": "flip"
+  },
+  "0xe065": {
+    "names": ["favorite"],
+    "groups": ["action"],
+    "tags": ["favorite", "favourite", "star", "full", "filled", "starred"],
+    "rtl": "flip"
+  },
+  "0xe066": {
+    "names": ["navigation-right-arrow"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "navigation",
+      "right",
+      "expand",
+      "collapsed tree",
+      "tree arrow",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe067": {
+    "names": ["navigation-left-arrow"],
+    "groups": ["arrow", "action"],
+    "tags": ["navigation", "left", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe068": {
+    "names": ["e-care"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "e care",
+      "digital customer care",
+      "service",
+      "electronic",
+      "leaf",
+      "leaves",
+      "nature",
+      "organic",
+      "health",
+      "environment"
+    ],
+    "rtl": "flip"
+  },
+  "0xe069": {
+    "names": ["less"],
+    "groups": ["action"],
+    "tags": ["less", "minus", "subtract"],
+    "rtl": "flip"
+  },
+  "0xe06a": {
+    "names": ["lateness"],
+    "groups": ["time", "status", "objects"],
+    "tags": [
+      "time",
+      "timer",
+      "waiting",
+      "lateness",
+      "loading",
+      "hour glass",
+      "sand",
+      "out of time"
+    ],
+    "rtl": "flip"
+  },
+  "0xe06b": {
+    "names": ["lab"],
+    "groups": ["status", "thing", "objects"],
+    "tags": [
+      "lab",
+      "chemicals",
+      "liquid",
+      "mixture",
+      "chemistry",
+      "science",
+      "laboratory"
+    ],
+    "rtl": "flip"
+  },
+  "0xe06c": {
+    "names": ["internet-browser"],
+    "groups": ["objects"],
+    "tags": [
+      "screen",
+      "internet",
+      "website",
+      "browser",
+      "web app",
+      "globe",
+      "www",
+      "html"
+    ],
+    "rtl": "flip"
+  },
+  "0xe06d": {
+    "names": ["instance"],
+    "groups": ["time"],
+    "tags": ["instance", "process", "clock", "chevron"],
+    "rtl": "flip"
+  },
+  "0xe06e": {
+    "names": ["inspection"],
+    "groups": ["documents", "action"],
+    "tags": ["search", "document", "inspect"],
+    "rtl": "flip"
+  },
+  "0xe06f": {
+    "names": ["image-viewer"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "image",
+      "placeholder",
+      "picture",
+      "hills",
+      "mountains",
+      "sun",
+      "viewer",
+      "carousel",
+      "lightbox"
+    ],
+    "rtl": "flip"
+  },
+  "0xe070": {
+    "names": ["home"],
+    "groups": ["action", "travel", "place"],
+    "tags": ["home", "house", "index", "landing page", "start", "main"],
+    "rtl": "flip"
+  },
+  "0xe071": {
+    "names": ["grid"],
+    "groups": ["objects"],
+    "tags": ["grid", "layout", "boxes", "squares", "modular", "waffle"],
+    "rtl": "flip"
+  },
+  "0xe072": {
+    "names": ["goalseek"],
+    "groups": ["status", "objects"],
+    "tags": ["goal", "goalseek", "target", "result", "objective", "aim"],
+    "rtl": "flip"
+  },
+  "0xe073": {
+    "names": ["general-leave-request"],
+    "groups": ["action", "place"],
+    "tags": [
+      "holiday",
+      "vacation",
+      "leave",
+      "request",
+      "deck",
+      "chair",
+      "sun",
+      "create"
+    ],
+    "rtl": "flip"
+  },
+  "0xe074": {
+    "names": ["create-leave-request"],
+    "groups": ["action", "place"],
+    "tags": [
+      "holiday",
+      "vacation",
+      "leave",
+      "request",
+      "deck chair",
+      "sun",
+      "create",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe075": {
+    "names": ["flight"],
+    "groups": ["travel", "transport"],
+    "tags": [
+      "plane",
+      "trip",
+      "travel",
+      "holiday",
+      "flight",
+      "Aeroplane",
+      "transit",
+      "shipment"
+    ],
+    "rtl": "flip"
+  },
+  "0xe076": {
+    "names": ["filter"],
+    "groups": ["action"],
+    "tags": ["filter", "organise", "aggregate", "data"],
+    "rtl": "flip"
+  },
+  "0xe077": {
+    "names": ["favorite-list"],
+    "groups": ["action"],
+    "tags": ["favorite", "favourite", "star", "menu", "list"],
+    "rtl": "flip"
+  },
+  "0xe078": {
+    "names": ["factory"],
+    "groups": ["objects", "place"],
+    "tags": ["factory", "production", "supplier", "manufacturing"],
+    "rtl": "flip"
+  },
+  "0xe079": {
+    "names": ["endoscopy"],
+    "groups": ["medical", "objects"],
+    "tags": ["endoscopy", "medical", "procedure"],
+    "rtl": "flip"
+  },
+  "0xe07a": {
+    "names": ["employee-pane"],
+    "groups": ["people"],
+    "tags": [
+      "user",
+      "person",
+      "employee",
+      "member",
+      "operator",
+      "representative",
+      "profile",
+      "me"
+    ],
+    "rtl": "flip"
+  },
+  "0xe07b": {
+    "names": ["employee-approvals"],
+    "groups": ["people", "status"],
+    "tags": [
+      "person",
+      "accept",
+      "approval",
+      "employee",
+      "hr",
+      "human resources"
+    ],
+    "rtl": "none"
+  },
+  "0xe07c": {
+    "names": ["email-read"],
+    "groups": ["action"],
+    "tags": ["mail", "letter", "e-mail", "envelope", "open", "read"],
+    "rtl": "flip"
+  },
+  "0xe07d": {
+    "names": ["electrocardiogram"],
+    "groups": ["medical"],
+    "tags": ["electrocardiogram", "heart", "scan", "monitor", "medical"],
+    "rtl": "flip"
+  },
+  "0xe07e": {
+    "names": ["documents"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "documents"],
+    "rtl": "flip"
+  },
+  "0xe07f": {
+    "names": ["decision"],
+    "groups": ["people", "status"],
+    "tags": [
+      "hand shake",
+      "decision",
+      "hands",
+      "agreement",
+      "colleagues",
+      "contract"
+    ],
+    "rtl": "flip"
+  },
+  "0xe080": {
+    "names": ["database"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "database",
+      "big data",
+      "cube",
+      "complex",
+      "complicated",
+      "simple",
+      "information",
+      "backend"
+    ],
+    "rtl": "flip"
+  },
+  "0xe081": {
+    "names": ["customer-history"],
+    "groups": ["people", "time"],
+    "tags": ["person", "history", "customer", "user", "clock", "account"],
+    "rtl": "flip"
+  },
+  "0xe082": {
+    "names": ["customer"],
+    "groups": ["people"],
+    "tags": [
+      "person",
+      "individual",
+      "user",
+      "customer",
+      "human",
+      "circle",
+      "profile",
+      "me"
+    ],
+    "rtl": "flip"
+  },
+  "0xe083": {
+    "names": ["credit-card"],
+    "groups": ["objects"],
+    "tags": [
+      "credit card",
+      "master-card",
+      "money",
+      "debit",
+      "order",
+      "buy",
+      "purchase",
+      "shopping",
+      "book online"
+    ],
+    "rtl": "flip"
+  },
+  "0xe084": {
+    "names": ["create-entry-time"],
+    "groups": ["time", "documents", "action"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "timesheet",
+      "clock",
+      "hours",
+      "days",
+      "workday",
+      "create entry time",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe085": {
+    "names": ["contacts"],
+    "groups": ["objects"],
+    "tags": [
+      "customers",
+      "contacts",
+      "address",
+      "email",
+      "e-mail",
+      "phone book",
+      "directory",
+      "phone numbers",
+      "companies"
+    ],
+    "rtl": "flip"
+  },
+  "0xe086": {
+    "names": ["compare"],
+    "groups": ["objects"],
+    "tags": [
+      "compare",
+      "law",
+      "legal",
+      "justice",
+      "scale",
+      "measure",
+      "weight",
+      "balance",
+      "compare",
+      "comparison"
+    ],
+    "rtl": "flip"
+  },
+  "0xe087": {
+    "names": ["clinical-order"],
+    "groups": ["medical", "documents"],
+    "tags": ["document", "page", "file", "text", "medical", "clinical"],
+    "rtl": "flip"
+  },
+  "0xe088": {
+    "names": ["chain-link"],
+    "groups": ["action"],
+    "tags": ["link", "chain", "hyperlink"],
+    "rtl": "flip"
+  },
+  "0xe089": {
+    "names": ["pull-down"],
+    "groups": ["arrow", "action"],
+    "tags": ["navigation", "pull down", "refresh", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe08a": {
+    "names": ["cargo-train"],
+    "groups": ["travel", "transport"],
+    "tags": ["train", "cargo", "delivery", "transit"],
+    "rtl": "flip"
+  },
+  "0xe08b": {
+    "names": ["car-rental"],
+    "groups": ["travel", "transport"],
+    "tags": [
+      "car",
+      "auto",
+      "rental",
+      "company car",
+      "hire",
+      "vehicle",
+      "transportation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe08c": {
+    "names": ["business-card"],
+    "groups": ["people", "objects"],
+    "tags": [
+      "business card",
+      "contact",
+      "networking",
+      "colleague",
+      "person",
+      "address",
+      "identification",
+      "details",
+      "profile"
+    ],
+    "rtl": "flip"
+  },
+  "0xe08d": {
+    "names": ["bar-code"],
+    "groups": ["documents", "objects"],
+    "tags": ["bar code", "document", "file", "scan", "verify"],
+    "rtl": "flip"
+  },
+  "0xe08e": {
+    "names": ["folder-blank"],
+    "groups": ["folder"],
+    "tags": ["folder", "directory", "library", "blank"],
+    "rtl": "flip"
+  },
+  "0xe08f": {
+    "names": ["passenger-train"],
+    "groups": ["travel", "transport"],
+    "tags": ["train", "public transportation", "passenger"],
+    "rtl": "flip"
+  },
+  "0xe090": {
+    "names": ["question-mark"],
+    "groups": ["status", "message"],
+    "tags": ["message", "question mark", "neutral", "notifications", "status"],
+    "rtl": "none"
+  },
+  "0xe091": {
+    "names": ["world"],
+    "groups": ["travel", "objects", "place"],
+    "tags": [
+      "globe",
+      "world",
+      "geographical",
+      "earth",
+      "planet",
+      "international",
+      "global"
+    ],
+    "rtl": "flip"
+  },
+  "0xe092": {
+    "names": ["iphone"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": [
+      "iphone",
+      "phone",
+      "smart phone",
+      "portrait",
+      "tablet",
+      "mobile",
+      "responsive",
+      "cozy"
+    ],
+    "rtl": "flip"
+  },
+  "0xe093": {
+    "names": ["ipad"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["ipad", "tablet", "portrait", "mobile", "responsive", "cozy"],
+    "rtl": "flip"
+  },
+  "0xe094": {
+    "names": ["warning"],
+    "groups": ["status"],
+    "tags": ["warning", "exclamation mark", "indicator", "information"],
+    "rtl": "flip"
+  },
+  "0xe095": {
+    "names": ["sort"],
+    "groups": ["arrow", "action"],
+    "tags": ["sort", "aggregate", "ascending", "descending", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe096": {
+    "names": ["course-book"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "education",
+      "course",
+      "learning",
+      "e book",
+      "bookmark",
+      "open",
+      "knowledge",
+      "course book",
+      "program"
+    ],
+    "rtl": "flip"
+  },
+  "0xe097": {
+    "names": ["course-program"],
+    "groups": ["documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "course",
+      "education",
+      "learning",
+      "e book",
+      "bookmark",
+      "open",
+      "knowledge",
+      "coursebook",
+      "program"
+    ],
+    "rtl": "flip"
+  },
+  "0xe098": {
+    "names": ["add-coursebook"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "education",
+      "course",
+      "learning",
+      "e book",
+      "bookmark",
+      "open",
+      "knowledge",
+      "course book",
+      "program",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe099": {
+    "names": ["print"],
+    "groups": ["devices", "action", "objects"],
+    "tags": [
+      "print",
+      "printer",
+      "send to print",
+      "hard copy",
+      "output",
+      "paper",
+      "document",
+      "file"
+    ],
+    "rtl": "flip"
+  },
+  "0xe09a": {
+    "names": ["save"],
+    "groups": ["action", "objects"],
+    "tags": ["save", "diskette", "floppy disc", "local disc", "hard disc"],
+    "rtl": "flip"
+  },
+  "0xe09b": {
+    "names": ["play"],
+    "groups": ["arrow", "action"],
+    "tags": ["play"],
+    "rtl": "none"
+  },
+  "0xe09c": {
+    "names": ["pause"],
+    "groups": ["action"],
+    "tags": ["pause"],
+    "rtl": "flip"
+  },
+  "0xe09d": {
+    "names": ["record"],
+    "groups": ["action"],
+    "tags": ["record"],
+    "rtl": "flip"
+  },
+  "0xe09e": {
+    "names": ["response"],
+    "groups": ["arrow", "action"],
+    "tags": ["reply", "response", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe09f": {
+    "names": ["pushpin-on"],
+    "groups": ["documents", "action"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "pin",
+      "pushpin",
+      "stick",
+      "unstick",
+      "snap",
+      "remove pin",
+      "unpin",
+      "off",
+      "on"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a0": {
+    "names": ["pushpin-off"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "pin",
+      "pushpin",
+      "stick",
+      "unstick",
+      "snap",
+      "remove pin",
+      "unpin",
+      "off",
+      "on"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a1": {
+    "names": ["unfavorite"],
+    "groups": ["action"],
+    "tags": [
+      "removed",
+      "not starred",
+      "empty",
+      "no favorite",
+      "add to favorite",
+      "not favorite at the moment",
+      "remove",
+      "unfavorite",
+      "star"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a2": {
+    "names": ["learning-assistant"],
+    "groups": ["people"],
+    "tags": [
+      "education",
+      "course",
+      "learning",
+      "e book",
+      "bookmark",
+      "open",
+      "knowledge",
+      "school",
+      "college",
+      "help",
+      "tutor",
+      "assistant",
+      "teacher",
+      "professor"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a3": {
+    "names": ["timesheet"],
+    "groups": ["time", "documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "timesheet",
+      "clock",
+      "hours",
+      "days",
+      "workday"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a4": {
+    "names": ["time-entry-request"],
+    "groups": ["time"],
+    "tags": ["time", "entry", "request", "clock", "list"],
+    "rtl": "flip"
+  },
+  "0xe0a5": {
+    "names": ["list"],
+    "groups": ["action"],
+    "tags": ["list", "text", "ordered"],
+    "rtl": "flip"
+  },
+  "0xe0a6": {
+    "names": ["action-settings"],
+    "groups": ["action"],
+    "tags": [
+      "settings",
+      "cogwheel",
+      "configuration",
+      "tools",
+      "modify",
+      "customize"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a7": {
+    "names": ["share"],
+    "groups": ["arrow", "action"],
+    "tags": ["share", "reshare", "distribute", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe0a8": {
+    "names": ["feed"],
+    "groups": ["action"],
+    "tags": [
+      "feed",
+      "messages",
+      "input",
+      "news",
+      "updates",
+      "latest",
+      "real-time"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0a9": {
+    "names": ["role"],
+    "groups": ["people", "status", "message"],
+    "tags": [
+      "person",
+      "individual",
+      "user",
+      "customer",
+      "permission",
+      "access",
+      "granted",
+      "open",
+      "restrictions",
+      "unlocked"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0aa": {
+    "names": ["flag"],
+    "groups": ["action", "status"],
+    "tags": ["flag", "mark", "marker", "important"],
+    "rtl": "none"
+  },
+  "0xe0ab": {
+    "names": ["post"],
+    "groups": ["action", "callout", "thing"],
+    "tags": ["speech", "bubble", "comment", "post"],
+    "rtl": "flip"
+  },
+  "0xe0ac": {
+    "names": ["inspect"],
+    "groups": ["arrow", "action"],
+    "tags": ["inspect", "dialog", "popup", "popout", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe0ad": {
+    "names": ["inspect-down"],
+    "groups": ["action"],
+    "tags": ["cancel", "x", "close", "dialog", "popup"],
+    "rtl": "flip"
+  },
+  "0xe0ae": {
+    "names": ["appointment-2"],
+    "groups": ["calendar"],
+    "tags": ["date picker", "calendar", "month", "week", "day", "appointment"],
+    "rtl": "flip"
+  },
+  "0xe0af": {
+    "names": ["target-group"],
+    "groups": ["status", "objects"],
+    "tags": [
+      "arrow",
+      "dart",
+      "dartboard",
+      "target group",
+      "goal",
+      "audience",
+      "specific"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0b0": {
+    "names": ["marketing-campaign"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": [
+      "marketing campaign",
+      "loud speaker",
+      "megaphone",
+      "notify",
+      "announcement",
+      "public address"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0b1": {
+    "names": ["message-error"],
+    "groups": ["status", "message"],
+    "tags": ["message", "error", "negative", "notifications", "status"],
+    "rtl": "flip"
+  },
+  "0xe0b2": {
+    "names": ["comment"],
+    "groups": ["action", "callout"],
+    "tags": ["speech", "bubble", "comment", "discussion"],
+    "rtl": "flip"
+  },
+  "0xe0b3": {
+    "names": ["shipping-status"],
+    "groups": ["travel", "transport"],
+    "tags": [
+      "shipping status",
+      "truck",
+      "products",
+      "delivery",
+      "supplier",
+      "transit",
+      "lorry",
+      "van",
+      "shipment"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0b4": {
+    "names": ["collaborate"],
+    "groups": ["people"],
+    "tags": [
+      "group",
+      "team",
+      "people",
+      "colleagues",
+      "communication",
+      "collaborate",
+      "teamwork",
+      "peer to peer",
+      "design thinking",
+      "work",
+      "together",
+      "project"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0b5": {
+    "names": ["shortcut"],
+    "groups": ["arrow", "action"],
+    "tags": ["shortcut", "redirect", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe0b6": {
+    "names": ["lead-outdated"],
+    "groups": ["money", "status", "message"],
+    "tags": ["lead outdated", "circle", "dollar"],
+    "rtl": "none"
+  },
+  "0xe0b7": {
+    "names": ["tools-opportunity"],
+    "groups": ["charts", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "overview",
+      "map",
+      "org",
+      "tree"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0b8": {
+    "names": ["permission"],
+    "groups": ["documents", "status", "message"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "permission",
+      "access",
+      "granted",
+      "open",
+      "restrictions",
+      "unlocked"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0b9": {
+    "names": ["supplier"],
+    "groups": ["people"],
+    "tags": [
+      "supplier",
+      "package",
+      "product",
+      "satisfaction",
+      "returns",
+      "deliveries",
+      "warehouse",
+      "person",
+      "seller",
+      "buyer",
+      "inventory"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0ba": {
+    "names": ["table-view"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "table",
+      "grid",
+      "view",
+      "columns",
+      "rows",
+      "waffle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0bb": {
+    "names": ["table-chart"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "table",
+      "columns",
+      "rows",
+      "grid",
+      "view",
+      "waffle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0bc": {
+    "names": ["switch-views"],
+    "groups": ["action"],
+    "tags": ["switch", "views", "objects", "arrange"],
+    "rtl": "flip"
+  },
+  "0xe0bd": {
+    "names": ["e-learning"],
+    "groups": ["objects"],
+    "tags": [
+      "education",
+      "course",
+      "e learning",
+      "e book",
+      "bookmark",
+      "open",
+      "knowledge",
+      "school",
+      "college",
+      "computer",
+      "screen"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0be": {
+    "names": ["manager"],
+    "groups": ["people"],
+    "tags": [
+      "manager",
+      "company",
+      "overview",
+      "inform",
+      "board",
+      "leader",
+      "conference",
+      "meeting",
+      "keynote",
+      "speech",
+      "presentation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0bf": {
+    "names": ["switch-classes"],
+    "groups": ["people", "action"],
+    "tags": ["switch", "views", "objects", "arrange", "classes"],
+    "rtl": "flip"
+  },
+  "0xe0c0": {
+    "names": ["simple-payment"],
+    "groups": ["money"],
+    "tags": ["sales", "simple payment", "money", "bill", "details", "quote"],
+    "rtl": "none"
+  },
+  "0xe0c1": {
+    "names": ["signature"],
+    "groups": ["action"],
+    "tags": ["pencil", "pen", "signature", "sign"],
+    "rtl": "flip"
+  },
+  "0xe0c2": {
+    "names": ["sales-order-item"],
+    "groups": ["money", "documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "sales order item",
+      "money",
+      "bill",
+      "details",
+      "quote"
+    ],
+    "rtl": "none"
+  },
+  "0xe0c3": {
+    "names": ["sales-order"],
+    "groups": ["money", "documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "sales order",
+      "money",
+      "bill",
+      "details",
+      "quote"
+    ],
+    "rtl": "none"
+  },
+  "0xe0c4": {
+    "names": ["request"],
+    "groups": ["documents", "action"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "text",
+      "edit",
+      "write",
+      "new",
+      "pencil",
+      "pen",
+      "request"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0c5": {
+    "names": ["receipt"],
+    "groups": ["money", "form", "action"],
+    "tags": ["money", "bill", "details", "proof", "sale", "receipt"],
+    "rtl": "flip"
+  },
+  "0xe0c6": {
+    "names": ["puzzle"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "puzzle",
+      "pieces",
+      "fit",
+      "together",
+      "jigsaw",
+      "thinking",
+      "objects",
+      "challenge"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0c7": {
+    "names": ["process"],
+    "groups": ["arrow", "action"],
+    "tags": ["process", "flow", "arrow", "chevron"],
+    "rtl": "flip"
+  },
+  "0xe0c8": {
+    "names": ["private"],
+    "groups": ["people", "status", "message"],
+    "tags": [
+      "person",
+      "individual",
+      "user",
+      "customer",
+      "human",
+      "locked",
+      "in use",
+      "occupied",
+      "restricted",
+      "private",
+      "forbidden"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0c9": {
+    "names": ["popup-window"],
+    "groups": ["devices", "action"],
+    "tags": ["computer", "dialog", "popup", "window", "screen", "popout"],
+    "rtl": "flip"
+  },
+  "0xe0ca": {
+    "names": ["person-placeholder"],
+    "groups": ["people"],
+    "tags": [
+      "person",
+      "individual",
+      "user",
+      "customer",
+      "human",
+      "profile",
+      "me"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0cb": {
+    "names": ["per-diem"],
+    "groups": ["money", "calendar"],
+    "tags": ["euro", "time", "per diem", "calendar"],
+    "rtl": "none"
+  },
+  "0xe0cc": {
+    "names": ["paper-plane"],
+    "groups": ["action", "thing", "objects"],
+    "tags": [
+      "send",
+      "flight",
+      "paper",
+      "plane",
+      "fly",
+      "message",
+      "note",
+      "folded"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0cd": {
+    "names": ["paid-leave"],
+    "groups": ["money"],
+    "tags": ["paid leave", "money", "dollar", "bill", "approved"],
+    "rtl": "none"
+  },
+  "0xe0ce": {
+    "names": ["pdf-reader"],
+    "groups": ["documents", "action"],
+    "tags": ["pdf reader", "document", "display", "file"],
+    "rtl": "none"
+  },
+  "0xe0cf": {
+    "names": ["overview-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "overview", "map", "org"],
+    "rtl": "flip"
+  },
+  "0xe0d0": {
+    "names": ["overlay"],
+    "groups": ["objects"],
+    "tags": ["overlay", "circle", "dot"],
+    "rtl": "flip"
+  },
+  "0xe0d1": {
+    "names": ["org-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "overview",
+      "map",
+      "org",
+      "tree"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0d2": {
+    "names": ["number-sign"],
+    "groups": ["objects"],
+    "tags": ["number sign", "hash", "#'"],
+    "rtl": "flip"
+  },
+  "0xe0d3": {
+    "names": ["notification-2"],
+    "groups": ["action", "callout"],
+    "tags": ["speech", "bubble", "comment", "discussion", "notification"],
+    "rtl": "flip"
+  },
+  "0xe0d4": {
+    "names": ["my-sales-order"],
+    "groups": ["people", "documents"],
+    "tags": [
+      "document",
+      "page",
+      "sales",
+      "order",
+      "money",
+      "bill",
+      "details",
+      "quote",
+      "invoice"
+    ],
+    "rtl": "none"
+  },
+  "0xe0d5": {
+    "names": ["meal"],
+    "groups": ["travel", "thing", "objects", "place"],
+    "tags": [
+      "meal",
+      "knife and fork",
+      "dinner",
+      "lunch",
+      "eating",
+      "dine",
+      "expenses"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0d6": {
+    "names": ["loan"],
+    "groups": ["money", "objects"],
+    "tags": ["money bag", "bank", "dollar", "tag"],
+    "rtl": "none"
+  },
+  "0xe0d7": {
+    "names": ["order-status"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "order", "status"],
+    "rtl": "none"
+  },
+  "0xe0d8": {
+    "names": ["customer-order-entry"],
+    "groups": ["form"],
+    "tags": [
+      "sign",
+      "signature",
+      "order",
+      "entry",
+      "customer",
+      "contract",
+      "agreement"
+    ],
+    "rtl": "none"
+  },
+  "0xe0d9": {
+    "names": ["performance"],
+    "groups": ["objects"],
+    "tags": ["gauge", "measure", "speed", "monitor", "performance"],
+    "rtl": "flip"
+  },
+  "0xe0da": {
+    "names": ["menu"],
+    "groups": ["action"],
+    "tags": ["menu", "list"],
+    "rtl": "flip"
+  },
+  "0xe0db": {
+    "names": ["employee-lookup"],
+    "groups": ["people"],
+    "tags": [
+      "customer",
+      "user",
+      "person",
+      "individual",
+      "contacts",
+      "look up",
+      "find",
+      "search"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0dc": {
+    "names": ["education"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "education",
+      "course",
+      "learning",
+      "e book",
+      "bookmark",
+      "open",
+      "knowledge",
+      "school",
+      "college"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0dd": {
+    "names": ["customer-briefing"],
+    "groups": ["people"],
+    "tags": [
+      "customer",
+      "user",
+      "person",
+      "individual",
+      "contacts",
+      "address",
+      "email",
+      "e-mail",
+      "briefing"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0de": {
+    "names": ["customer-and-contacts"],
+    "groups": ["people"],
+    "tags": [
+      "customer",
+      "user",
+      "person",
+      "individual",
+      "contacts",
+      "address",
+      "email",
+      "e-mail"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0df": {
+    "names": ["my-view"],
+    "groups": ["people", "action", "objects"],
+    "tags": [
+      "my view",
+      "person",
+      "profile",
+      "tv",
+      "monitor",
+      "video call",
+      "individual",
+      "cutomer",
+      "user"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0e0": {
+    "names": ["accelerated"],
+    "groups": ["calendar"],
+    "tags": ["calendar", "time", "speed"],
+    "rtl": "flip"
+  },
+  "0xe0e1": {
+    "names": ["to-be-reviewed"],
+    "groups": ["status", "message"],
+    "tags": ["to be reviewed", "indicator", "information"],
+    "rtl": "flip"
+  },
+  "0xe0e2": {
+    "names": ["warning2"],
+    "groups": ["status", "message"],
+    "tags": ["warning", "to be reviewed", "indicator", "information"],
+    "rtl": "flip"
+  },
+  "0xe0e3": {
+    "names": ["feeder-arrow"],
+    "groups": ["arrow"],
+    "tags": ["feeder", "arrow", "input", "enter text", "execute", "send"],
+    "rtl": "flip"
+  },
+  "0xe0e4": {
+    "names": ["quality-issue"],
+    "groups": ["status", "message"],
+    "tags": [
+      "quality issue",
+      "warning",
+      "problem",
+      "attention",
+      "status",
+      "details"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0e5": {
+    "names": ["workflow-tasks"],
+    "groups": ["action", "clipboard", "calendar"],
+    "tags": ["calendar", "workflow", "task", "process", "steps", "project"],
+    "rtl": "flip"
+  },
+  "0xe0e6": {
+    "names": ["create"],
+    "groups": ["documents", "action"],
+    "tags": ["document", "page", "file", "attachment", "create", "new"],
+    "rtl": "flip"
+  },
+  "0xe0e7": {
+    "names": ["home-share"],
+    "groups": ["action", "place"],
+    "tags": [
+      "globe",
+      "world",
+      "geographical",
+      "earth",
+      "planet",
+      "share",
+      "global distribution",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0e8": {
+    "names": ["globe"],
+    "groups": ["objects", "place"],
+    "tags": [
+      "globe",
+      "world",
+      "geographical",
+      "earth",
+      "planet",
+      "international",
+      "global"
+    ],
+    "rtl": "none"
+  },
+  "0xe0e9": {
+    "names": ["tags"],
+    "groups": ["action", "thing", "objects"],
+    "tags": ["tag", "label", "marker", "indicator", "detail"],
+    "rtl": "flip"
+  },
+  "0xe0ea": {
+    "names": ["work-history"],
+    "groups": ["folder"],
+    "tags": ["folder", "person", "work history"],
+    "rtl": "flip"
+  },
+  "0xe0eb": {
+    "names": ["x-ray"],
+    "groups": ["medical"],
+    "tags": ["x ray", "procedure", "scan", "medical"],
+    "rtl": "flip"
+  },
+  "0xe0ec": {
+    "names": ["wounds-doc"],
+    "groups": ["people", "medical"],
+    "tags": [
+      "wounds",
+      "doc",
+      "injury",
+      "accident",
+      "hospital",
+      "patient",
+      "emergency",
+      "health",
+      "illness",
+      "cross"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0ed": {
+    "names": ["web-cam"],
+    "groups": ["devices", "action", "thing", "objects"],
+    "tags": ["web cam", "camera", "live", "video", "visual"],
+    "rtl": "flip"
+  },
+  "0xe0ee": {
+    "names": ["waiver"],
+    "groups": ["money"],
+    "tags": ["waiver", "money bag", "percentage"],
+    "rtl": "none"
+  },
+  "0xe0ef": {
+    "names": ["vertical-bar-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "bar",
+      "vertical",
+      "column"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0f0": {
+    "names": ["upstacked-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "upstacked",
+      "vertical",
+      "column"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0f1": {
+    "names": ["trip-report"],
+    "groups": ["charts", "transport", "status", "message"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "suitcase",
+      "trip",
+      "report",
+      "business trip"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0f2": {
+    "names": ["microphone"],
+    "groups": ["devices", "action", "thing", "objects"],
+    "tags": [
+      "microphone",
+      "mic",
+      "keynote",
+      "announcement",
+      "speech",
+      "talk",
+      "audio",
+      "dictate",
+      "record"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0f3": {
+    "names": ["unpaid-leave"],
+    "groups": ["money"],
+    "tags": ["unpaid leave", "money", "dollar", "bill", "rejected"],
+    "rtl": "none"
+  },
+  "0xe0f4": {
+    "names": ["tree"],
+    "groups": ["charts", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "overview",
+      "map",
+      "org",
+      "tree"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0f5": {
+    "names": ["toaster-up"],
+    "groups": ["action", "objects"],
+    "tags": ["toaster", "up", "details"],
+    "rtl": "flip"
+  },
+  "0xe0f6": {
+    "names": ["toaster-top"],
+    "groups": ["objects"],
+    "tags": ["toaster", "top", "details"],
+    "rtl": "flip"
+  },
+  "0xe0f7": {
+    "names": ["toaster-down"],
+    "groups": ["action", "objects"],
+    "tags": ["toaster", "down", "details"],
+    "rtl": "flip"
+  },
+  "0xe0f8": {
+    "names": ["time-account"],
+    "groups": ["time"],
+    "tags": ["time", "account", "clock", "list"],
+    "rtl": "flip"
+  },
+  "0xe0f9": {
+    "names": ["theater"],
+    "groups": ["objects", "place"],
+    "tags": ["theater", "show", "play", "masks"],
+    "rtl": "flip"
+  },
+  "0xe0fa": {
+    "names": ["taxi"],
+    "groups": ["travel", "transport"],
+    "tags": ["car", "taxi", "cab", "transportation"],
+    "rtl": "flip"
+  },
+  "0xe0fb": {
+    "names": ["subway-train"],
+    "groups": ["travel", "transport"],
+    "tags": ["subway train", "underground", "tube"],
+    "rtl": "flip"
+  },
+  "0xe0fc": {
+    "names": ["study-leave"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "study",
+      "education",
+      "graduate",
+      "school",
+      "college",
+      "student",
+      "qualification"
+    ],
+    "rtl": "flip"
+  },
+  "0xe0fd": {
+    "names": ["stethoscope"],
+    "groups": ["medical", "thing"],
+    "tags": ["stethoscope", "medical", "health", "doctor", "hospital", "nurse"],
+    "rtl": "flip"
+  },
+  "0xe0fe": {
+    "names": ["step"],
+    "groups": ["arrow", "action"],
+    "tags": ["process", "flow", "step", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe0ff": {
+    "names": ["sonography"],
+    "groups": ["medical"],
+    "tags": ["sonography", "medical", "ultrasound", "ultrasonography"],
+    "rtl": "flip"
+  },
+  "0xe100": {
+    "names": ["soccer"],
+    "deprecatedNames": ["soccor"],
+    "groups": ["thing", "objects"],
+    "tags": ["soccer", "ball", "football", "world cup"],
+    "rtl": "flip"
+  },
+  "0xe101": {
+    "names": ["physical-activity"],
+    "groups": ["people", "medical", "travel"],
+    "tags": ["physical activity", "running", "run", "jogging"],
+    "rtl": "flip"
+  },
+  "0xe102": {
+    "names": ["pharmacy"],
+    "groups": ["medical", "thing"],
+    "tags": ["medicine", "pills", "drugs", "pharmacy", "pain", "medication"],
+    "rtl": "flip"
+  },
+  "0xe103": {
+    "names": ["official-service"],
+    "groups": ["objects", "place"],
+    "tags": [
+      "official",
+      "service",
+      "government",
+      "court house",
+      "law",
+      "legal",
+      "authority"
+    ],
+    "rtl": "flip"
+  },
+  "0xe104": {
+    "names": ["offsite-work"],
+    "groups": ["objects", "place"],
+    "tags": ["offsite work", "external", "company", "office", "outside"],
+    "rtl": "flip"
+  },
+  "0xe105": {
+    "names": ["nutrition-activity"],
+    "groups": ["medical", "thing", "objects"],
+    "tags": ["apple", "nutrition", "activity", "health", "fruit"],
+    "rtl": "flip"
+  },
+  "0xe106": {
+    "names": ["newspaper"],
+    "groups": ["documents", "objects"],
+    "tags": ["newspaper", "headlines", "latest", "updates"],
+    "rtl": "flip"
+  },
+  "0xe107": {
+    "names": ["monitor-payments"],
+    "groups": ["people", "money"],
+    "tags": [
+      "report",
+      "bill",
+      "billing",
+      "sales",
+      "expense",
+      "quote",
+      "envelope",
+      "invoice",
+      "dollar",
+      "money",
+      "monitor payments"
+    ],
+    "rtl": "none"
+  },
+  "0xe108": {
+    "names": ["map-2"],
+    "groups": ["objects", "place"],
+    "tags": ["map", "card", "navigation", "hunt", "destination", "location"],
+    "rtl": "flip"
+  },
+  "0xe109": {
+    "names": ["machine"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["machine", "factory", "production", "supplier", "technical"],
+    "rtl": "flip"
+  },
+  "0xe10a": {
+    "names": ["mri-scan"],
+    "groups": ["medical"],
+    "tags": ["mri", "scan", "medical"],
+    "rtl": "flip"
+  },
+  "0xe10b": {
+    "names": ["end-user-experience-monitoring"],
+    "groups": ["objects"],
+    "tags": [
+      "end user experience monitoring",
+      "gauge",
+      "measure",
+      "speed",
+      "monitor"
+    ],
+    "rtl": "flip"
+  },
+  "0xe10c": {
+    "names": ["unwired"],
+    "groups": ["objects"],
+    "tags": ["unwired", "gauge", "measure", "speed", "monitor", "performance"],
+    "rtl": "flip"
+  },
+  "0xe10d": {
+    "names": ["customer-financial-fact-sheet"],
+    "groups": ["money", "documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "customer",
+      "financial",
+      "fact sheet",
+      "money"
+    ],
+    "rtl": "none"
+  },
+  "0xe10e": {
+    "names": ["retail-store-manager"],
+    "groups": ["shopping"],
+    "tags": ["retail store manager"],
+    "rtl": "flip"
+  },
+  "0xe10f": {
+    "names": ["Netweaver-business-client"],
+    "groups": ["objects"],
+    "tags": ["netweaver business client", "bird"],
+    "rtl": "flip"
+  },
+  "0xe110": {
+    "names": ["electronic-medical-record"],
+    "groups": ["medical", "objects"],
+    "tags": [
+      "electronic medical record",
+      "medical",
+      "cross",
+      "emergency",
+      "hospital"
+    ],
+    "rtl": "flip"
+  },
+  "0xe111": {
+    "names": ["eam-work-order"],
+    "groups": ["objects"],
+    "tags": [
+      "enterprise asset management",
+      "work",
+      "order",
+      "hard hat",
+      "check",
+      "tick mark"
+    ],
+    "rtl": "none"
+  },
+  "0xe112": {
+    "names": ["customer-view"],
+    "groups": ["objects"],
+    "tags": ["customer", "view", "analytics", "overview"],
+    "rtl": "flip"
+  },
+  "0xe113": {
+    "names": ["crm-service-manager"],
+    "groups": ["clipboard"],
+    "tags": ["crm service manager", "task", "dropdown", "list"],
+    "rtl": "flip"
+  },
+  "0xe114": {
+    "names": ["crm-sales"],
+    "groups": ["objects"],
+    "tags": [
+      "crm sales",
+      "customer",
+      "relationship",
+      "management",
+      "person",
+      "star",
+      "money",
+      "list"
+    ],
+    "rtl": "none"
+  },
+  "0xe115": {
+    "names": ["widgets"],
+    "groups": ["objects"],
+    "tags": ["widgets", "random", "star", "dollar", "plane", "music", "apps"],
+    "rtl": "none"
+  },
+  "0xe116": {
+    "names": ["commission-check"],
+    "groups": ["money"],
+    "tags": [
+      "commission check",
+      "coins",
+      "stack",
+      "search",
+      "percentage",
+      "money"
+    ],
+    "rtl": "none"
+  },
+  "0xe117": {
+    "names": ["collections-insight"],
+    "groups": ["money"],
+    "tags": [
+      "collections",
+      "insight",
+      "report",
+      "bill",
+      "billing",
+      "sales",
+      "expense",
+      "quote",
+      "envelope",
+      "invoice",
+      "dollar",
+      "money"
+    ],
+    "rtl": "none"
+  },
+  "0xe118": {
+    "names": ["clinical-task-tracker"],
+    "deprecatedNames": ["clinical-tast-tracker"],
+    "groups": ["medical"],
+    "tags": [
+      "clinical",
+      "task",
+      "tracker",
+      "clipboard",
+      "medical",
+      "checklist",
+      "check boxes"
+    ],
+    "rtl": "flip"
+  },
+  "0xe119": {
+    "names": ["citizen-connect"],
+    "groups": ["people"],
+    "tags": [
+      "citizen connect",
+      "people",
+      "colleagues",
+      "communication",
+      "collaborate",
+      "teamwork",
+      "peer to peer",
+      "design thinking",
+      "work",
+      "together",
+      "project"
+    ],
+    "rtl": "flip"
+  },
+  "0xe11a": {
+    "names": ["cart-approval"],
+    "groups": ["shopping"],
+    "tags": [
+      "cart",
+      "trolley",
+      "basket",
+      "shopping",
+      "item",
+      "approve",
+      "approval",
+      "accept",
+      "check"
+    ],
+    "rtl": "none"
+  },
+  "0xe11b": {
+    "names": ["capital-projects"],
+    "groups": ["money", "objects", "place"],
+    "tags": ["capital projects", "building", "dollar", "money"],
+    "rtl": "none"
+  },
+  "0xe11c": {
+    "names": ["bo-strategy-management"],
+    "groups": ["objects"],
+    "tags": ["bo strategy management", "business", "object", "circle"],
+    "rtl": "flip"
+  },
+  "0xe11d": {
+    "names": ["business-objects-mobile"],
+    "groups": ["objects"],
+    "tags": [
+      "business objects mobile",
+      "analytics",
+      "chart",
+      "display",
+      "data"
+    ],
+    "rtl": "flip"
+  },
+  "0xe11e": {
+    "names": ["business-objects-explorer"],
+    "groups": ["objects"],
+    "tags": ["business objects explorer", "compass"],
+    "rtl": "flip"
+  },
+  "0xe11f": {
+    "names": ["business-objects-experience"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "business objects experience",
+      "combination",
+      "line-chart",
+      "column",
+      "bar",
+      "vertical"
+    ],
+    "rtl": "flip"
+  },
+  "0xe120": {
+    "names": ["bbyd-dashboard"],
+    "groups": ["objects"],
+    "tags": ["business by design", "dashboard"],
+    "rtl": "flip"
+  },
+  "0xe121": {
+    "names": ["bbyd-active-sales"],
+    "groups": ["objects"],
+    "tags": [
+      "business by design",
+      "active",
+      "sales",
+      "search",
+      "approvals",
+      "check",
+      "book"
+    ],
+    "rtl": "none"
+  },
+  "0xe122": {
+    "names": ["business-by-design"],
+    "groups": ["objects"],
+    "tags": ["business by design"],
+    "rtl": "none"
+  },
+  "0xe123": {
+    "names": ["business-one"],
+    "groups": ["objects"],
+    "tags": ["business one"],
+    "rtl": "none"
+  },
+  "0xe124": {
+    "names": ["sap-box"],
+    "groups": ["objects"],
+    "tags": [
+      "container",
+      "box",
+      "work load",
+      "collection",
+      "documents",
+      "files",
+      "filing",
+      "directory",
+      "storage"
+    ],
+    "rtl": "flip"
+  },
+  "0xe125": {
+    "names": ["manager-insight"],
+    "groups": ["objects"],
+    "tags": [
+      "manager",
+      "insight",
+      "company",
+      "overview",
+      "analyse",
+      "inform",
+      "board",
+      "report"
+    ],
+    "rtl": "flip"
+  },
+  "0xe126": {
+    "names": ["accounting-document-verification"],
+    "groups": ["documents"],
+    "tags": ["document", "approve", "verify", "accounting", "money", "coins"],
+    "rtl": "none"
+  },
+  "0xe127": {
+    "names": ["hr-approval"],
+    "groups": ["people", "status", "message"],
+    "tags": [
+      "person",
+      "accept",
+      "approval",
+      "employee",
+      "hr",
+      "human resources"
+    ],
+    "rtl": "none"
+  },
+  "0xe128": {
+    "names": ["idea-wall"],
+    "groups": ["people"],
+    "tags": [
+      "idea",
+      "wall",
+      "collaborate",
+      "teamwork",
+      "peer to peer",
+      "design thinking",
+      "work",
+      "together",
+      "project",
+      "improve"
+    ],
+    "rtl": "flip"
+  },
+  "0xe129": {
+    "names": ["Chart-Tree-Map"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "flip"
+  },
+  "0xe12a": {
+    "names": ["cart-5"],
+    "groups": ["shopping"],
+    "tags": ["cart", "trolley", "basket", "shopping", "item", "sap"],
+    "rtl": "flip"
+  },
+  "0xe12b": {
+    "names": ["cart-4"],
+    "groups": ["shopping"],
+    "tags": [
+      "cart",
+      "trolley",
+      "basket",
+      "shopping",
+      "item",
+      "add",
+      "put in",
+      "insert",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe12c": {
+    "names": ["wallet"],
+    "groups": ["money", "thing", "objects"],
+    "tags": [
+      "money",
+      "wallet",
+      "purse",
+      "coins",
+      "bank",
+      "allowance",
+      "worth",
+      "wealth",
+      "cash",
+      "notes"
+    ],
+    "rtl": "flip"
+  },
+  "0xe12d": {
+    "names": ["vehicle-repair"],
+    "groups": ["transport"],
+    "tags": [
+      "car",
+      "crash",
+      "accident",
+      "damage",
+      "repair",
+      "fix",
+      "garage",
+      "vehicle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe12e": {
+    "names": ["upload"],
+    "groups": ["arrow", "action"],
+    "tags": ["upload", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe12f": {
+    "names": ["unlocked"],
+    "groups": ["action", "status", "message", "objects"],
+    "tags": [
+      "unlocked",
+      "open padlock",
+      "open",
+      "status",
+      "available",
+      "access",
+      "unrestricted"
+    ],
+    "rtl": "flip"
+  },
+  "0xe130": {
+    "names": ["umbrella"],
+    "groups": ["thing", "objects"],
+    "tags": ["rain", "umbrella", "brolly", "shelter", "keep dry"],
+    "rtl": "flip"
+  },
+  "0xe131": {
+    "names": ["travel-request"],
+    "groups": ["transport", "status", "message", "callout"],
+    "tags": [
+      "bubble",
+      "question",
+      "exclamation",
+      "notifications",
+      "status",
+      "help"
+    ],
+    "rtl": "none"
+  },
+  "0xe132": {
+    "names": ["travel-expense-report"],
+    "groups": ["money", "transport"],
+    "tags": [
+      "report",
+      "bill",
+      "billing",
+      "sales",
+      "travel",
+      "expense",
+      "quote",
+      "envelope",
+      "invoice"
+    ],
+    "rtl": "none"
+  },
+  "0xe133": {
+    "names": ["travel-itinerary"],
+    "groups": ["travel", "transport"],
+    "tags": [
+      "travel",
+      "airplane",
+      "plane",
+      "car",
+      "itinerary",
+      "schedule",
+      "plan",
+      "flight",
+      "drive"
+    ],
+    "rtl": "flip"
+  },
+  "0xe134": {
+    "names": ["time-overtime"],
+    "groups": ["time", "money"],
+    "tags": ["time", "overtime", "clock", "money", "hours"],
+    "rtl": "none"
+  },
+  "0xe135": {
+    "names": ["thing-type"],
+    "groups": ["callout"],
+    "tags": ["popup", "speech", "bubble", "thing-type"],
+    "rtl": "flip"
+  },
+  "0xe136": {
+    "names": ["technical-object"],
+    "groups": ["objects"],
+    "tags": [
+      "technical",
+      "object",
+      "wrench",
+      "tool",
+      "fine tune",
+      "tweak",
+      "fix",
+      "work",
+      "component"
+    ],
+    "rtl": "flip"
+  },
+  "0xe137": {
+    "names": ["tag"],
+    "groups": ["action", "objects"],
+    "tags": ["tag", "label", "marker", "indicator", "detail"],
+    "rtl": "flip"
+  },
+  "0xe138": {
+    "names": ["syringe"],
+    "groups": ["medical", "action"],
+    "tags": [
+      "medical",
+      "emergency",
+      "hospital",
+      "syringe",
+      "needle",
+      "shot",
+      "injection"
+    ],
+    "rtl": "flip"
+  },
+  "0xe139": {
+    "names": ["syntax"],
+    "groups": ["text", "action"],
+    "tags": ["source", "code", "develop", "write", "syntax"],
+    "rtl": "flip"
+  },
+  "0xe13a": {
+    "names": ["suitcase"],
+    "groups": ["travel", "thing", "objects"],
+    "tags": [
+      "travel",
+      "suitcase",
+      "business trip",
+      "personal",
+      "possessions",
+      "articles",
+      "items",
+      "collection"
+    ],
+    "rtl": "flip"
+  },
+  "0xe13b": {
+    "names": ["simulate"],
+    "groups": ["devices", "action", "thing", "objects"],
+    "tags": [
+      "calculator",
+      "calculate",
+      "count",
+      "numbers",
+      "counting",
+      "simulate",
+      "divide",
+      "calculation",
+      "tot up",
+      "digits",
+      "algorithm",
+      "mathematician",
+      "mathematics"
+    ],
+    "rtl": "flip"
+  },
+  "0xe13c": {
+    "names": ["shield"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "authority",
+      "legitimate",
+      "official",
+      "important",
+      "protection",
+      "defense",
+      "security"
+    ],
+    "rtl": "flip"
+  },
+  "0xe13d": {
+    "names": ["share-2"],
+    "groups": ["action"],
+    "tags": ["share", "distribute", "share with connections"],
+    "rtl": "flip"
+  },
+  "0xe13e": {
+    "names": ["sales-quote"],
+    "groups": ["money", "documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "text",
+      "sales",
+      "money",
+      "bill",
+      "details",
+      "quote"
+    ],
+    "rtl": "none"
+  },
+  "0xe13f": {
+    "names": ["repost"],
+    "groups": ["arrow", "action"],
+    "tags": ["post again", "circulate"],
+    "rtl": "flip"
+  },
+  "0xe140": {
+    "names": ["provision"],
+    "groups": ["charts", "tables"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "table",
+      "columns",
+      "rows",
+      "grid",
+      "settings",
+      "modify",
+      "customize",
+      "waffle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe141": {
+    "names": ["projector"],
+    "groups": ["devices", "action", "thing", "objects"],
+    "tags": ["beamer", "projector", "show", "movie", "presentation", "keynote"],
+    "rtl": "flip"
+  },
+  "0xe142": {
+    "names": ["add-product"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "product",
+      "box",
+      "package",
+      "unit",
+      "inventory",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe143": {
+    "names": ["pipeline-analysis"],
+    "groups": ["charts", "objects"],
+    "tags": ["analytics", "chart", "display", "data", "kebab"],
+    "rtl": "flip"
+  },
+  "0xe144": {
+    "names": ["add-photo"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "camera",
+      "photograph",
+      "device",
+      "image",
+      "snap shot",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe145": {
+    "names": ["palette"],
+    "groups": ["thing", "objects"],
+    "tags": [
+      "palette",
+      "paint",
+      "color",
+      "spot",
+      "mixing",
+      "artist",
+      "theme",
+      "design"
+    ],
+    "rtl": "flip"
+  },
+  "0xe146": {
+    "names": ["nurse"],
+    "groups": ["people", "medical"],
+    "tags": ["nurse", "medical", "cross", "emergency", "hospital"],
+    "rtl": "flip"
+  },
+  "0xe147": {
+    "names": ["sales-notification"],
+    "groups": ["money", "callout"],
+    "tags": ["bubble", "sales", "notification"],
+    "rtl": "none"
+  },
+  "0xe148": {
+    "names": ["mileage"],
+    "groups": ["thing", "objects", "place"],
+    "tags": ["mileage", "tank", "petrol", "fuel", "fill up", "gas", "station"],
+    "rtl": "flip"
+  },
+  "0xe149": {
+    "names": ["meeting-room"],
+    "groups": ["people"],
+    "tags": [
+      "meeting",
+      "room",
+      "collaborate",
+      "colleagues",
+      "teamwork",
+      "peer to peer"
+    ],
+    "rtl": "flip"
+  },
+  "0xe14a": {
+    "names": ["media-forward"],
+    "groups": ["arrow", "action"],
+    "tags": ["forward", "media", "arrow", "end", "finish"],
+    "rtl": "none"
+  },
+  "0xe14b": {
+    "names": ["media-play"],
+    "groups": ["arrow", "action"],
+    "tags": ["play", "media", "arrow"],
+    "rtl": "none"
+  },
+  "0xe14c": {
+    "names": ["media-pause"],
+    "groups": ["arrow", "action"],
+    "tags": ["pause", "media", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe14d": {
+    "names": ["media-reverse"],
+    "groups": ["arrow", "action"],
+    "tags": ["reverse", "media", "arrow"],
+    "rtl": "none"
+  },
+  "0xe14e": {
+    "names": ["media-rewind"],
+    "groups": ["arrow", "action"],
+    "tags": ["rewind", "media", "arrow", "start", "back"],
+    "rtl": "none"
+  },
+  "0xe14f": {
+    "names": ["measurement-document"],
+    "groups": ["documents", "calendar", "objects"],
+    "tags": [
+      "measure",
+      "weight",
+      "scale",
+      "precision",
+      "technical",
+      "calibrate",
+      "calibration",
+      "calculation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe150": {
+    "names": ["measuring-point"],
+    "groups": ["objects"],
+    "tags": ["measure", "point", "scale", "precision", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe151": {
+    "names": ["measure"],
+    "groups": ["objects"],
+    "tags": [
+      "measure",
+      "weight",
+      "scale",
+      "precision",
+      "technical",
+      "calibrate",
+      "calibration",
+      "calculation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe152": {
+    "names": ["map-3"],
+    "groups": ["objects", "place"],
+    "tags": [
+      "map",
+      "card",
+      "x marks the spot",
+      "treasure",
+      "navigation",
+      "hunt",
+      "find",
+      "destination",
+      "location"
+    ],
+    "rtl": "flip"
+  },
+  "0xe153": {
+    "names": ["locked"],
+    "groups": ["action", "status", "message", "objects"],
+    "tags": [
+      "locked",
+      "padlock",
+      "private",
+      "status",
+      "in use",
+      "forbidden",
+      "restricted",
+      "safe"
+    ],
+    "rtl": "flip"
+  },
+  "0xe154": {
+    "names": ["letter"],
+    "groups": ["objects"],
+    "tags": [
+      "letter",
+      "mail",
+      "post",
+      "postal",
+      "envelope",
+      "address",
+      "contact",
+      "correspondence"
+    ],
+    "rtl": "flip"
+  },
+  "0xe155": {
+    "names": ["journey-arrive"],
+    "groups": ["arrow", "action"],
+    "tags": ["journey", "arrive", "arrow", "placement"],
+    "rtl": "flip"
+  },
+  "0xe156": {
+    "names": ["journey-change"],
+    "groups": ["arrow", "action"],
+    "tags": ["journey", "change", "direction", "arrow", "placement"],
+    "rtl": "flip"
+  },
+  "0xe157": {
+    "names": ["journey-depart"],
+    "groups": ["arrow", "action"],
+    "tags": ["journey", "depart", "arrow", "move", "placement"],
+    "rtl": "flip"
+  },
+  "0xe158": {
+    "names": ["it-system"],
+    "groups": ["devices", "objects"],
+    "tags": [
+      "server",
+      "it",
+      "machine",
+      "computer",
+      "technology",
+      "device",
+      "system"
+    ],
+    "rtl": "flip"
+  },
+  "0xe159": {
+    "names": ["it-instance"],
+    "groups": ["devices", "objects"],
+    "tags": [
+      "server",
+      "it",
+      "machine",
+      "computer",
+      "technology",
+      "device",
+      "instance"
+    ],
+    "rtl": "flip"
+  },
+  "0xe15a": {
+    "names": ["it-host"],
+    "groups": ["devices", "objects"],
+    "tags": [
+      "server",
+      "it",
+      "machine",
+      "computer",
+      "technology",
+      "device",
+      "host"
+    ],
+    "rtl": "flip"
+  },
+  "0xe15b": {
+    "names": ["iphone-2"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": [
+      "iphone",
+      "phone",
+      "smart phone",
+      "landscape",
+      "tablet",
+      "mobile",
+      "responsive",
+      "cozy"
+    ],
+    "rtl": "flip"
+  },
+  "0xe15c": {
+    "names": ["ipad-2"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["ipad", "landscape", "tablet", "mobile", "responsive", "cozy"],
+    "rtl": "flip"
+  },
+  "0xe15d": {
+    "names": ["inventory"],
+    "groups": ["transport"],
+    "tags": ["inventory", "truck", "wrench", "tools"],
+    "rtl": "flip"
+  },
+  "0xe15e": {
+    "names": ["insurance-house"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "insurance", "house"],
+    "rtl": "flip"
+  },
+  "0xe15f": {
+    "names": ["insurance-life"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "insurance", "life"],
+    "rtl": "flip"
+  },
+  "0xe160": {
+    "names": ["insurance-car"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "insurance", "car"],
+    "rtl": "flip"
+  },
+  "0xe161": {
+    "names": ["initiative"],
+    "groups": ["arrow", "objects"],
+    "tags": [
+      "initiative",
+      "initiate",
+      "begin",
+      "enter",
+      "right",
+      "arrow",
+      "circle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe162": {
+    "names": ["incident"],
+    "groups": ["status", "message"],
+    "tags": ["incident", "question", "message"],
+    "rtl": "none"
+  },
+  "0xe163": {
+    "names": ["group-2"],
+    "groups": ["action"],
+    "tags": ["group", "data", "aggregate", "list", "table"],
+    "rtl": "flip"
+  },
+  "0xe164": {
+    "names": ["goal"],
+    "groups": ["status", "message", "objects"],
+    "tags": ["goal", "target", "result", "objective", "aim"],
+    "rtl": "flip"
+  },
+  "0xe165": {
+    "names": ["functional-location"],
+    "groups": ["objects"],
+    "tags": [
+      "arrow",
+      "locate",
+      "me",
+      "map",
+      "location",
+      "pointer",
+      "navigation",
+      "functional"
+    ],
+    "rtl": "flip"
+  },
+  "0xe166": {
+    "names": ["full-screen"],
+    "groups": ["arrow", "action"],
+    "tags": ["full", "screen", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe167": {
+    "names": ["form"],
+    "groups": ["form"],
+    "tags": ["form", "details", "text"],
+    "rtl": "flip"
+  },
+  "0xe168": {
+    "names": ["fob-watch"],
+    "groups": ["time", "devices", "objects"],
+    "tags": ["fob watch", "time", "stop watch", "timer", "countdown"],
+    "rtl": "flip"
+  },
+  "0xe169": {
+    "names": ["blank-tag"],
+    "groups": ["objects"],
+    "tags": ["tag", "label", "marker", "indicator", "blank"],
+    "rtl": "flip"
+  },
+  "0xe16a": {
+    "names": ["family-protection"],
+    "groups": ["people"],
+    "tags": ["family", "protection", "people", "house", "roof"],
+    "rtl": "flip"
+  },
+  "0xe16b": {
+    "names": ["folder"],
+    "groups": ["folder"],
+    "tags": ["folder", "details", "directory", "library"],
+    "rtl": "flip"
+  },
+  "0xe16c": {
+    "names": ["fax-machine"],
+    "groups": ["devices", "action"],
+    "tags": ["fax", "machine", "communicate"],
+    "rtl": "flip"
+  },
+  "0xe16d": {
+    "names": ["example"],
+    "groups": ["objects"],
+    "tags": ["example", "dots", "cicles", "individual", "odd"],
+    "rtl": "flip"
+  },
+  "0xe16e": {
+    "names": ["eraser"],
+    "groups": ["action", "thing"],
+    "tags": ["pencil", "pen", "erase", "remove", "undo", "text"],
+    "rtl": "flip"
+  },
+  "0xe16f": {
+    "names": ["employee-rejections"],
+    "groups": ["people", "status", "message"],
+    "tags": ["person", "x", "rejections", "employee", "hr", "human resources"],
+    "rtl": "flip"
+  },
+  "0xe170": {
+    "names": ["drop-down-list"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "dropdown",
+      "list",
+      "arrow",
+      "drop down",
+      "view",
+      "view settings",
+      "view-settings",
+      "table",
+      "sort",
+      "filter",
+      "group",
+      "settings",
+      "megamenu"
+    ],
+    "rtl": "flip"
+  },
+  "0xe171": {
+    "names": ["draw-rectangle"],
+    "groups": ["action", "objects"],
+    "tags": ["draw", "rectangle", "resize", "shape", "create"],
+    "rtl": "flip"
+  },
+  "0xe172": {
+    "names": ["document"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "blank", "new"],
+    "rtl": "flip"
+  },
+  "0xe173": {
+    "names": ["doctor"],
+    "groups": ["people", "medical", "travel", "place"],
+    "tags": ["doctor", "medical", "cross", "emergency", "hospital"],
+    "rtl": "flip"
+  },
+  "0xe174": {
+    "names": ["discussion-2"],
+    "groups": ["callout"],
+    "tags": ["speech", "bubble", "comment", "discussion", "text"],
+    "rtl": "flip"
+  },
+  "0xe175": {
+    "names": ["discussion"],
+    "groups": ["callout"],
+    "tags": ["speech", "bubble", "comment", "discussion", "blank"],
+    "rtl": "flip"
+  },
+  "0xe176": {
+    "names": ["dimension"],
+    "groups": ["objects"],
+    "tags": ["dimension", "layers", "stacked"],
+    "rtl": "flip"
+  },
+  "0xe177": {
+    "names": ["customer-and-supplier"],
+    "groups": ["people"],
+    "tags": [
+      "customer and supplier",
+      "package",
+      "product",
+      "satisfaction",
+      "returns",
+      "warehouse",
+      "person",
+      "seller",
+      "buyer",
+      "inventory"
+    ],
+    "rtl": "flip"
+  },
+  "0xe178": {
+    "names": ["crop"],
+    "groups": ["action"],
+    "tags": [
+      "crop",
+      "clip",
+      "snip",
+      "cut",
+      "picture",
+      "image",
+      "shape",
+      "object"
+    ],
+    "rtl": "flip"
+  },
+  "0xe179": {
+    "names": ["add-contact"],
+    "groups": ["people"],
+    "tags": [
+      "person",
+      "contact",
+      "business card",
+      "customer",
+      "details",
+      "address",
+      "information",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe17a": {
+    "names": ["compare-2"],
+    "groups": ["action", "thing", "objects"],
+    "tags": [
+      "compare",
+      "law",
+      "legal",
+      "justice",
+      "scale",
+      "measure",
+      "weight",
+      "balance",
+      "comparison"
+    ],
+    "rtl": "flip"
+  },
+  "0xe17b": {
+    "names": ["color-fill"],
+    "groups": ["objects"],
+    "tags": ["square", "filled", "color"],
+    "rtl": "flip"
+  },
+  "0xe17c": {
+    "names": ["collision"],
+    "groups": ["transport", "objects"],
+    "tags": ["car", "crash", "accident", "damage"],
+    "rtl": "flip"
+  },
+  "0xe17d": {
+    "names": ["curriculum"],
+    "groups": ["folder"],
+    "tags": ["folder", "curriculum", "learning", "documents", "content"],
+    "rtl": "flip"
+  },
+  "0xe17e": {
+    "names": ["chart-axis"],
+    "groups": ["charts", "arrow"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "chart axis",
+      "arrows",
+      "directions"
+    ],
+    "rtl": "flip"
+  },
+  "0xe17f": {
+    "names": ["full-stacked-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "full stacked chart"],
+    "rtl": "flip"
+  },
+  "0xe180": {
+    "names": ["full-stacked-column-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "full stacked column chart"
+    ],
+    "rtl": "flip"
+  },
+  "0xe181": {
+    "names": ["vertical-bar-chart-2"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "vertical bar chart",
+      "column"
+    ],
+    "rtl": "flip"
+  },
+  "0xe182": {
+    "names": ["horizontal-bar-chart-2"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "horizontal bar chart"],
+    "rtl": "flip"
+  },
+  "0xe183": {
+    "names": ["horizontal-stacked-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "horizontal stacked chart"
+    ],
+    "rtl": "flip"
+  },
+  "0xe184": {
+    "names": ["vertical-stacked-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "vertical stacked chart"],
+    "rtl": "flip"
+  },
+  "0xe185": {
+    "names": ["choropleth-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "choropleth chart",
+      "geographic",
+      "map",
+      "world"
+    ],
+    "rtl": "none"
+  },
+  "0xe186": {
+    "names": ["geographic-bubble-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "geographic",
+      "bubble",
+      "map",
+      "world"
+    ],
+    "rtl": "none"
+  },
+  "0xe187": {
+    "names": ["multiple-radar-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "multiple radar chart"],
+    "rtl": "flip"
+  },
+  "0xe188": {
+    "names": ["radar-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "radar-chart"],
+    "rtl": "flip"
+  },
+  "0xe189": {
+    "names": ["crossed-line-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "crossed line chart"],
+    "rtl": "flip"
+  },
+  "0xe18a": {
+    "names": ["multiple-line-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "multiple line chart"],
+    "rtl": "flip"
+  },
+  "0xe18b": {
+    "names": ["multiple-bar-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "multiple bar chart"],
+    "rtl": "flip"
+  },
+  "0xe18c": {
+    "names": ["line-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "line chart"],
+    "rtl": "flip"
+  },
+  "0xe18d": {
+    "names": ["line-chart-dual-axis"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "line chart",
+      "dual axis"
+    ],
+    "rtl": "flip"
+  },
+  "0xe18e": {
+    "names": ["bubble-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "bubble chart"],
+    "rtl": "flip"
+  },
+  "0xe18f": {
+    "names": ["scatter-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "scatter chart"],
+    "rtl": "flip"
+  },
+  "0xe190": {
+    "names": ["multiple-pie-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "multiple", "pie chart"],
+    "rtl": "flip"
+  },
+  "0xe191": {
+    "names": ["column-chart-dual-axis"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "column", "dual axis"],
+    "rtl": "flip"
+  },
+  "0xe192": {
+    "names": ["tag-cloud-chart"],
+    "groups": ["charts", "callout"],
+    "tags": ["analytics", "chart", "display", "data", "speech", "tag", "cloud"],
+    "rtl": "flip"
+  },
+  "0xe193": {
+    "names": ["area-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data", "area"],
+    "rtl": "flip"
+  },
+  "0xe194": {
+    "names": ["cause"],
+    "groups": ["arrow", "action"],
+    "tags": ["get", "reason", "incoming", "arrow", "relocate", "take"],
+    "rtl": "flip"
+  },
+  "0xe195": {
+    "names": ["cart-3"],
+    "groups": ["shopping"],
+    "tags": [
+      "cart",
+      "trolley",
+      "basket",
+      "shopping",
+      "item",
+      "add",
+      "put in",
+      "insert",
+      "down",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe196": {
+    "names": ["cart-2"],
+    "groups": ["shopping"],
+    "tags": [
+      "cart",
+      "trolley",
+      "basket",
+      "shopping",
+      "empty",
+      "remove",
+      "take out",
+      "clear",
+      "up",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe197": {
+    "names": ["bus-public-transport"],
+    "groups": ["travel", "transport"],
+    "tags": ["bus", "public", "traffic", "vehicle"],
+    "rtl": "flip"
+  },
+  "0xe198": {
+    "names": ["burglary"],
+    "groups": ["objects"],
+    "tags": [
+      "money",
+      "thief",
+      "loss",
+      "theft",
+      "safe",
+      "unsafe",
+      "burglary",
+      "robbery",
+      "bank"
+    ],
+    "rtl": "flip"
+  },
+  "0xe199": {
+    "names": ["building"],
+    "groups": ["objects", "place"],
+    "tags": ["building", "company", "firm", "factory", "office"],
+    "rtl": "flip"
+  },
+  "0xe19a": {
+    "names": ["border"],
+    "groups": ["objects"],
+    "tags": ["border", "square", "outline"],
+    "rtl": "flip"
+  },
+  "0xe19b": {
+    "names": ["bookmark"],
+    "groups": ["action", "status", "message"],
+    "tags": ["bookmark", "later", "marker", "save"],
+    "rtl": "flip"
+  },
+  "0xe19c": {
+    "names": ["badge"],
+    "groups": ["status", "message", "objects"],
+    "tags": [
+      "badge",
+      "insignia",
+      "star",
+      "service",
+      "identity",
+      "authority",
+      "legitimate",
+      "coat of arms",
+      "membership",
+      "award",
+      "rank"
+    ],
+    "rtl": "flip"
+  },
+  "0xe19d": {
+    "names": ["attachment-audio"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "audio", "sound"],
+    "rtl": "flip"
+  },
+  "0xe19e": {
+    "names": ["attachment-video"],
+    "groups": ["documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "video",
+      "film",
+      "movie"
+    ],
+    "rtl": "flip"
+  },
+  "0xe19f": {
+    "names": ["attachment-html"],
+    "groups": ["documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "attachment",
+      "html",
+      "web",
+      "website"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1a0": {
+    "names": ["attachment-photo"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "attachment", "photo", "image"],
+    "rtl": "flip"
+  },
+  "0xe1a1": {
+    "names": ["attachment-e-pub"],
+    "groups": ["documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "e pub",
+      "electronic publication",
+      "e book"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1a2": {
+    "names": ["attachment-zip-file"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "zip", "compressed"],
+    "rtl": "flip"
+  },
+  "0xe1a3": {
+    "names": ["attachment-text-file"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "text"],
+    "rtl": "flip"
+  },
+  "0xe1a4": {
+    "names": ["add-equipment"],
+    "groups": ["action"],
+    "tags": [
+      "wrench",
+      "control",
+      "configuration",
+      "settings",
+      "tool",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1a5": {
+    "names": ["add-activity"],
+    "groups": ["action"],
+    "tags": [
+      "activity",
+      "activities",
+      "tasks",
+      "to do",
+      "list",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "none"
+  },
+  "0xe1a6": {
+    "names": ["activity-individual"],
+    "groups": ["people", "clipboard"],
+    "tags": [
+      "activity",
+      "activities",
+      "tasks",
+      "to do",
+      "list",
+      "individual",
+      "person"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1a7": {
+    "names": ["activity-2"],
+    "groups": ["clipboard"],
+    "tags": [
+      "activity",
+      "activities",
+      "tasks",
+      "to do",
+      "list",
+      "check list",
+      "correct",
+      "success",
+      "tick mark"
+    ],
+    "rtl": "none"
+  },
+  "0xe1a8": {
+    "names": ["add-activity-2"],
+    "groups": ["clipboard"],
+    "tags": [
+      "activity",
+      "activities",
+      "tasks",
+      "to do",
+      "list",
+      "check list",
+      "correct",
+      "success",
+      "tick mark",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "none"
+  },
+  "0xe1a9": {
+    "names": ["activity-items"],
+    "groups": ["clipboard"],
+    "tags": ["activity", "activities", "tasks", "to do", "list", "items"],
+    "rtl": "flip"
+  },
+  "0xe1aa": {
+    "names": ["activity-assigned-to-goal"],
+    "groups": ["clipboard"],
+    "tags": [
+      "activity",
+      "activities",
+      "tasks",
+      "to do",
+      "assigned to goal",
+      "target",
+      "objective"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1ab": {
+    "names": ["status-positive"],
+    "groups": ["status", "message"],
+    "tags": [
+      "positive",
+      "completed",
+      "on track",
+      "led",
+      "traffic lights",
+      "street sign",
+      "lifecycle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1ac": {
+    "names": ["status-negative"],
+    "groups": ["status", "message"],
+    "tags": [
+      "negative",
+      "attention",
+      "led",
+      "traffic lights",
+      "street sign",
+      "lifecycle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1ad": {
+    "names": ["status-inactive"],
+    "groups": ["status", "message"],
+    "tags": [
+      "inactive",
+      "neutral",
+      "information",
+      "led",
+      "traffic lights",
+      "street sign",
+      "lifecycle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1ae": {
+    "names": ["status-critical"],
+    "groups": ["status", "message"],
+    "tags": [
+      "critical",
+      "in process",
+      "warning",
+      "led",
+      "traffic lights",
+      "street sign",
+      "lifecycle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1af": {
+    "names": ["blank-tag-2"],
+    "groups": ["objects"],
+    "tags": ["tag", "label", "marker", "indicator", "blank"],
+    "rtl": "flip"
+  },
+  "0xe1b0": {
+    "names": ["cart-full"],
+    "groups": ["shopping"],
+    "tags": [
+      "cart",
+      "trolley",
+      "basket",
+      "shopping",
+      "full",
+      "capacity",
+      "load"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1b1": {
+    "names": ["locate-me"],
+    "groups": ["arrow", "action", "place"],
+    "tags": [
+      "arrow",
+      "locate",
+      "me",
+      "map",
+      "location",
+      "pointer",
+      "navigation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1b2": {
+    "names": ["paging"],
+    "groups": ["action"],
+    "tags": ["paging", "navigation"],
+    "rtl": "flip"
+  },
+  "0xe1b3": {
+    "names": ["company-view"],
+    "groups": ["people"],
+    "tags": ["view", "group", "company", "personnel", "firm", "overview"],
+    "rtl": "flip"
+  },
+  "0xe1b4": {
+    "names": ["document-text"],
+    "groups": ["documents"],
+    "tags": ["document", "page", "file", "text"],
+    "rtl": "flip"
+  },
+  "0xe1b5": {
+    "names": ["explorer"],
+    "groups": ["thing", "objects"],
+    "tags": ["explorer", "compass"],
+    "rtl": "flip"
+  },
+  "0xe1b6": {
+    "names": ["personnel-view"],
+    "groups": ["people"],
+    "tags": ["view", "person", "profile", "personnel", "overview"],
+    "rtl": "flip"
+  },
+  "0xe1b7": {
+    "names": ["sorting-ranking"],
+    "groups": ["arrow", "action"],
+    "tags": ["sort", "ranking", "ascending", "descending", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1b8": {
+    "names": ["drill-down"],
+    "groups": ["arrow", "action"],
+    "tags": ["drill down", "arrow", "detail", "hierarchy", "level", "megamenu"],
+    "rtl": "flip"
+  },
+  "0xe1b9": {
+    "names": ["drill-up"],
+    "groups": ["arrow", "action"],
+    "tags": ["drill up", "arrow", "detail", "hierarchy", "level"],
+    "rtl": "flip"
+  },
+  "0xe1ba": {
+    "names": ["vds-file"],
+    "groups": ["documents"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "text",
+      "attachment",
+      "Visual Design Stream",
+      "vds"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1bb": {
+    "names": ["sap-logo-shape"],
+    "groups": ["objects"],
+    "tags": ["sap", "logo", "shape"],
+    "rtl": "none"
+  },
+  "0xe1bc": {
+    "names": ["folder-full"],
+    "groups": ["folder"],
+    "tags": [
+      "folder",
+      "full",
+      "directory",
+      "library",
+      "contents",
+      "content",
+      "detail"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1bd": {
+    "names": ["system-exit"],
+    "groups": ["arrow", "action"],
+    "tags": ["system", "exit"],
+    "rtl": "flip"
+  },
+  "0xe1be": {
+    "names": ["system-exit-2"],
+    "groups": ["arrow", "action"],
+    "tags": ["system", "exit"],
+    "rtl": "flip"
+  },
+  "0xe1bf": {
+    "names": ["close-command-field"],
+    "groups": ["arrow"],
+    "tags": [
+      "close command field",
+      "navigation",
+      "left",
+      "page left",
+      "previous",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1c0": {
+    "names": ["open-command-field"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "open command field",
+      "navigation",
+      "right",
+      "page right",
+      "next",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1c1": {
+    "names": ["sys-enter-2"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "system",
+      "enter",
+      "correct",
+      "tick",
+      "affirmative",
+      "available",
+      "online",
+      "present",
+      "me",
+      "check",
+      "checkmark",
+      "status",
+      "message",
+      "filled",
+      "notification",
+      "success",
+      "positive"
+    ],
+    "rtl": "none"
+  },
+  "0xe1c2": {
+    "names": ["sys-enter"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "system",
+      "enter",
+      "correct",
+      "tick",
+      "affirmative",
+      "check",
+      "checkmark",
+      "status",
+      "message",
+      "positive",
+      "success"
+    ],
+    "rtl": "none"
+  },
+  "0xe1c3": {
+    "names": ["sys-help-2"],
+    "groups": ["action", "status", "message"],
+    "tags": ["system", "help", "circle", "question", "filled"],
+    "rtl": "none"
+  },
+  "0xe1c4": {
+    "names": ["sys-help"],
+    "groups": ["action", "status", "message"],
+    "tags": ["system", "help", "circle", "question"],
+    "rtl": "none"
+  },
+  "0xe1c5": {
+    "names": ["sys-back"],
+    "groups": ["arrow", "action"],
+    "tags": ["system", "back", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe1c6": {
+    "names": ["sys-back-2"],
+    "groups": ["arrow", "action"],
+    "tags": ["system", "back", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe1c7": {
+    "names": ["sys-cancel"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "clear",
+      "remove",
+      "cancel",
+      "x",
+      "status",
+      "message",
+      "error",
+      "message-error",
+      "notification"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1c8": {
+    "names": ["sys-cancel-2"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "clear",
+      "remove",
+      "cancel",
+      "x",
+      "status",
+      "message",
+      "filled",
+      "error",
+      "message-error",
+      "notification"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1c9": {
+    "names": ["open-folder"],
+    "groups": ["folder"],
+    "tags": ["folder", "open"],
+    "rtl": "flip"
+  },
+  "0xe1ca": {
+    "names": ["sys-find-next"],
+    "groups": ["action"],
+    "tags": [
+      "find",
+      "binoculars",
+      "look up",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1cb": {
+    "names": ["sys-find"],
+    "groups": ["action", "thing"],
+    "tags": ["find", "binoculars", "look up"],
+    "rtl": "flip"
+  },
+  "0xe1cc": {
+    "names": ["sys-monitor"],
+    "groups": ["devices", "thing", "objects"],
+    "tags": ["screen", "monitor", "tv"],
+    "rtl": "flip"
+  },
+  "0xe1cd": {
+    "names": ["sys-prev-page"],
+    "groups": ["documents", "action"],
+    "tags": ["system", "previous", "page", "up", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe1ce": {
+    "names": ["sys-first-page"],
+    "groups": ["documents", "action"],
+    "tags": ["system", "first", "page", "up", "top", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe1cf": {
+    "names": ["sys-next-page"],
+    "groups": ["documents", "action"],
+    "tags": ["system", "next", "page", "down", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe1d0": {
+    "names": ["sys-last-page"],
+    "groups": ["documents", "action"],
+    "tags": ["system", "last", "page", "down", "bottom", "arrows"],
+    "rtl": "flip"
+  },
+  "0xe1d1": {
+    "names": ["generate-shortcut"],
+    "groups": ["action"],
+    "tags": ["generate", "shortcut", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1d2": {
+    "names": ["create-session"],
+    "groups": ["action"],
+    "tags": ["create", "session"],
+    "rtl": "flip"
+  },
+  "0xe1d3": {
+    "names": ["display-more"],
+    "groups": ["action"],
+    "tags": ["display", "details", "more", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1d4": {
+    "names": ["enter-more"],
+    "groups": ["arrow", "action"],
+    "tags": ["enter", "details", "more", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1d5": {
+    "names": ["zoom-in"],
+    "groups": ["action"],
+    "tags": ["zoom", "in", "magnify", "glass", "plus", "enlarge", "bigger"],
+    "rtl": "flip"
+  },
+  "0xe1d6": {
+    "names": ["zoom-out"],
+    "groups": ["action"],
+    "tags": ["zoom", "out", "glass", "minus", "reduce", "smaller"],
+    "rtl": "flip"
+  },
+  "0xe1d7": {
+    "names": ["header"],
+    "groups": ["objects"],
+    "tags": ["maximize", "header", "screen"],
+    "rtl": "flip"
+  },
+  "0xe1d8": {
+    "names": ["detail-view", "show-edit"],
+    "groups": ["form", "action"],
+    "tags": ["search", "form", "look up", "find", "view", "detail"],
+    "rtl": "flip"
+  },
+  "0xe1d9": {
+    "names": ["collapse"],
+    "groups": ["action"],
+    "tags": ["collapse all", "minus", "ungroup all", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1da": {
+    "names": ["expand"],
+    "groups": ["action"],
+    "tags": ["expand all", "plus", "group all", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1db": {
+    "names": ["positive"],
+    "groups": ["action"],
+    "tags": ["plus", "positive"],
+    "rtl": "flip"
+  },
+  "0xe1dc": {
+    "names": ["negative"],
+    "groups": ["action"],
+    "tags": ["minus", "remove", "subtract", "negative"],
+    "rtl": "flip"
+  },
+  "0xe1dd": {
+    "names": ["display"],
+    "groups": ["action", "thing"],
+    "tags": ["display", "details", "inspect", "spectacles", "glasses"],
+    "rtl": "flip"
+  },
+  "0xe1de": {
+    "names": ["menu2"],
+    "groups": ["action"],
+    "tags": ["menu", "hamburger menu", "main menu"],
+    "rtl": "flip"
+  },
+  "0xe1df": {
+    "names": ["redo"],
+    "groups": ["arrow", "action"],
+    "tags": ["redo", "arrow", "previous state", "history", "forwards"],
+    "rtl": "flip"
+  },
+  "0xe1e0": {
+    "names": ["undo"],
+    "groups": ["arrow", "action"],
+    "tags": ["undo", "arrow", "previous state", "history", "backwards"],
+    "rtl": "flip"
+  },
+  "0xe1e1": {
+    "names": ["navigation-up-arrow"],
+    "groups": ["arrow", "action"],
+    "tags": ["navigation", "up", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1e2": {
+    "names": ["navigation-down-arrow"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "navigation",
+      "down",
+      "collapse",
+      "expanded tree",
+      "tree arrow",
+      "arrow",
+      "megamenu"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1e3": {
+    "names": ["down"],
+    "groups": ["arrow", "action"],
+    "tags": ["down", "triangle", "megamenu"],
+    "rtl": "flip"
+  },
+  "0xe1e4": {
+    "names": ["up"],
+    "groups": ["arrow", "action"],
+    "tags": ["up", "triangle"],
+    "rtl": "flip"
+  },
+  "0xe1e5": {
+    "names": ["shelf"],
+    "groups": ["objects"],
+    "tags": ["shelf", "storage", "drawers", "compartments"],
+    "rtl": "flip"
+  },
+  "0xe1e6": {
+    "names": ["background"],
+    "groups": ["objects"],
+    "tags": ["image", "placeholder", "picture", "hills", "mountains", "sun"],
+    "rtl": "flip"
+  },
+  "0xe1e7": {
+    "names": ["resize"],
+    "groups": ["arrow", "action"],
+    "tags": ["resize", "bigger", "smaller"],
+    "rtl": "flip"
+  },
+  "0xe1e8": {
+    "names": ["move"],
+    "groups": ["arrow", "action"],
+    "tags": ["move", "relocate", "left", "right", "up", "down"],
+    "rtl": "flip"
+  },
+  "0xe1e9": {
+    "names": ["show"],
+    "groups": ["action"],
+    "tags": ["show", "eye"],
+    "rtl": "flip"
+  },
+  "0xe1ea": {
+    "names": ["hide"],
+    "groups": ["action"],
+    "tags": ["hide", "eye"],
+    "rtl": "flip"
+  },
+  "0xe1eb": {
+    "names": ["nav-back"],
+    "groups": ["arrow", "action"],
+    "tags": ["navigation", "back", "previous", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1ec": {
+    "names": ["error"],
+    "groups": ["status", "message"],
+    "tags": [
+      "message",
+      "error",
+      "negative",
+      "notifications",
+      "status",
+      "solid"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1ed": {
+    "names": ["slim-arrow-right"],
+    "groups": ["arrow", "action"],
+    "tags": ["slim", "thin", "skinny", "arrow", "right", "scroll right"],
+    "rtl": "flip"
+  },
+  "0xe1ee": {
+    "names": ["slim-arrow-left"],
+    "groups": ["arrow", "action"],
+    "tags": ["slim", "thin", "skinny", "arrow", "left", "scroll left"],
+    "rtl": "flip"
+  },
+  "0xe1ef": {
+    "names": ["slim-arrow-down"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "slim",
+      "thin",
+      "skinny",
+      "arrow",
+      "down",
+      "select navigation",
+      "combobox",
+      "multi combobox"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1f0": {
+    "names": ["slim-arrow-up"],
+    "groups": ["arrow", "action"],
+    "tags": ["slim", "thin", "skinny", "arrow", "up"],
+    "rtl": "flip"
+  },
+  "0xe1f1": {
+    "names": ["forward"],
+    "groups": ["arrow"],
+    "tags": ["forward", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1f2": {
+    "names": ["overflow"],
+    "groups": ["action"],
+    "tags": ["overflow", "dots", "ellipsis", "more"],
+    "rtl": "flip"
+  },
+  "0xe1f3": {
+    "names": ["value-help"],
+    "groups": ["action"],
+    "tags": ["value", "help", "popup", "assistance", "multi input"],
+    "rtl": "flip"
+  },
+  "0xe1f4": {
+    "names": ["multi-select"],
+    "deprecatedNames": ["multiselect"],
+    "groups": ["action"],
+    "tags": ["multi select", "list", "table", "data"],
+    "rtl": "none"
+  },
+  "0xe1f5": {
+    "names": ["exit-full-screen"],
+    "deprecatedNames": ["exitfullscreen"],
+    "groups": ["action"],
+    "tags": ["exit", "fullscreen", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1f6": {
+    "names": ["sys-add"],
+    "groups": ["action"],
+    "tags": [
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more",
+      "add row",
+      "add object",
+      "add item"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1f7": {
+    "names": ["sys-minus"],
+    "groups": ["action"],
+    "tags": ["minus", "remove", "subtract"],
+    "rtl": "flip"
+  },
+  "0xe1f8": {
+    "names": ["dropdown"],
+    "groups": ["arrow", "action"],
+    "tags": ["dropdown", "menu", "menu button", "arrow", "megamenu"],
+    "rtl": "flip"
+  },
+  "0xe1f9": {
+    "names": ["expand-group"],
+    "groups": ["arrow", "action"],
+    "tags": ["expand", "group", "move to bottom", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe1fa": {
+    "names": ["vertical-grip"],
+    "groups": ["action", "objects"],
+    "tags": ["vertical", "grip", "move left", "move right", "splitter"],
+    "rtl": "flip"
+  },
+  "0xe1fb": {
+    "names": ["horizontal-grip"],
+    "groups": ["action", "objects"],
+    "tags": ["horizontal", "grip", "move up", "move down", "splitter"],
+    "rtl": "flip"
+  },
+  "0xe1fc": {
+    "names": ["sort-descending"],
+    "groups": ["arrow", "action"],
+    "tags": ["sort", "descending", "down", "table", "aggregate"],
+    "rtl": "flip"
+  },
+  "0xe1fd": {
+    "names": ["sort-ascending"],
+    "groups": ["arrow", "action"],
+    "tags": ["sort", "ascending", "up", "table", "aggregate"],
+    "rtl": "flip"
+  },
+  "0xe1fe": {
+    "names": ["arrow-down"],
+    "groups": ["arrow"],
+    "tags": [
+      "arrow",
+      "circle",
+      "down",
+      "variant",
+      "management",
+      "selection",
+      "options",
+      "megamenu"
+    ],
+    "rtl": "flip"
+  },
+  "0xe1ff": {
+    "names": ["legend"],
+    "groups": ["charts", "action", "objects"],
+    "tags": [
+      "legend",
+      "description",
+      "colors",
+      "charts",
+      "table",
+      "planning",
+      "calendar"
+    ],
+    "rtl": "flip"
+  },
+  "0xe200": {
+    "names": ["collapse-group"],
+    "groups": ["arrow", "action"],
+    "tags": ["collapse", "group", "move to top", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe201": {
+    "names": ["message-warning"],
+    "groups": ["status", "message"],
+    "tags": ["message", "warning", "critical", "notifications", "status"],
+    "rtl": "flip"
+  },
+  "0xe202": {
+    "names": ["message-information"],
+    "groups": ["status", "message"],
+    "tags": ["message", "information", "neutral", "notifications", "status"],
+    "rtl": "none"
+  },
+  "0xe203": {
+    "names": ["message-success"],
+    "groups": ["status", "message"],
+    "tags": ["message", "success", "positive", "notifications", "status"],
+    "rtl": "none"
+  },
+  "0xe204": {
+    "names": ["restart"],
+    "groups": ["arrow", "action"],
+    "tags": ["restart", "process", "play"],
+    "rtl": "flip"
+  },
+  "0xe205": {
+    "names": ["stop"],
+    "groups": ["action"],
+    "tags": ["stop", "process", "play"],
+    "rtl": "flip"
+  },
+  "0xe206": {
+    "names": ["add-process"],
+    "groups": ["action", "objects"],
+    "tags": ["process", "add", "plus", "additional", "another", "more"],
+    "rtl": "flip"
+  },
+  "0xe207": {
+    "names": ["cancel-maintenance"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "wrench",
+      "control",
+      "configuration",
+      "settings",
+      "tool",
+      "cancel maintenance"
+    ],
+    "rtl": "flip"
+  },
+  "0xe208": {
+    "names": ["activate"],
+    "groups": ["action"],
+    "tags": ["activate", "ignite", "initiate", "magic", "wand", "spark"],
+    "rtl": "flip"
+  },
+  "0xe209": {
+    "names": ["resize-horizontal"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "resize",
+      "horizontal",
+      "column",
+      "screen",
+      "bigger",
+      "smaller",
+      "enlarge",
+      "reduce",
+      "arrows",
+      "lines",
+      "side to side"
+    ],
+    "rtl": "flip"
+  },
+  "0xe20a": {
+    "names": ["resize-vertical"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "resize",
+      "vertical",
+      "row",
+      "screen",
+      "bigger",
+      "smaller",
+      "enlarge",
+      "reduce",
+      "arrows",
+      "lines",
+      "up and down"
+    ],
+    "rtl": "flip"
+  },
+  "0xe20b": {
+    "names": ["connected"],
+    "groups": ["status", "message"],
+    "tags": ["plug", "connected", "on", "state"],
+    "rtl": "flip"
+  },
+  "0xe20c": {
+    "names": ["disconnected"],
+    "groups": ["action", "status", "message"],
+    "tags": ["plug", "disconnected", "unplug", "state"],
+    "rtl": "flip"
+  },
+  "0xe20d": {
+    "names": ["edit-outside"],
+    "groups": ["arrow", "action"],
+    "tags": [
+      "pencil",
+      "pen",
+      "write",
+      "edit",
+      "modify",
+      "text",
+      "outside",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe20e": {
+    "names": ["key"],
+    "groups": ["thing", "objects"],
+    "tags": ["key", "foreign", "data", "lock", "important"],
+    "rtl": "flip"
+  },
+  "0xe20f": {
+    "names": ["minimize"],
+    "groups": ["action", "objects"],
+    "tags": ["minimize", "screen", "window", "reduce", "hide"],
+    "rtl": "flip"
+  },
+  "0xe210": {
+    "names": ["back-to-top"],
+    "groups": ["arrow", "action"],
+    "tags": ["back to top", "jump", "beginning", "arrow", "up"],
+    "rtl": "flip"
+  },
+  "0xe211": {
+    "names": ["hello-world"],
+    "groups": ["callout", "objects"],
+    "tags": ["bubble", "ui5", "hello", "world"],
+    "rtl": "flip"
+  },
+  "0xe212": {
+    "names": ["outbox"],
+    "groups": ["action"],
+    "tags": ["outbox", "out", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe213": {
+    "names": ["donut-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "flip"
+  },
+  "0xe214": {
+    "names": ["heatmap-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "flip"
+  },
+  "0xe215": {
+    "names": ["horizontal-bullet-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "flip"
+  },
+  "0xe216": {
+    "names": ["vertical-bullet-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "flip"
+  },
+  "0xe217": {
+    "names": ["call"],
+    "groups": ["action"],
+    "tags": ["call", "communicate", "phone", "telephone"],
+    "rtl": "flip"
+  },
+  "0xe218": {
+    "names": ["download-from-cloud"],
+    "groups": ["arrow", "action"],
+    "tags": ["download", "cloud", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe219": {
+    "names": ["upload-to-cloud"],
+    "groups": ["arrow", "action"],
+    "tags": ["save", "upload", "cloud", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe21a": {
+    "names": ["jam"],
+    "groups": ["thing", "objects", "place"],
+    "tags": ["sap", "logo", "jam", "social", "collaborate", "share"],
+    "rtl": "flip"
+  },
+  "0xe21b": {
+    "names": ["sap-ui5"],
+    "groups": ["thing", "objects"],
+    "tags": ["ui5", "framework", "development", "sap"],
+    "rtl": "flip"
+  },
+  "0xe21c": {
+    "names": ["message-popup"],
+    "groups": ["status", "message", "callout"],
+    "tags": [
+      "message",
+      "popup",
+      "speech",
+      "bubble",
+      "exclamation",
+      "notifications",
+      "status"
+    ],
+    "rtl": "flip"
+  },
+  "0xe21d": {
+    "names": ["cloud"],
+    "groups": ["thing", "objects", "place"],
+    "tags": ["cloud", "platform", "storage", "big data", "sap"],
+    "rtl": "flip"
+  },
+  "0xe21e": {
+    "names": ["horizontal-waterfall-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "none"
+  },
+  "0xe21f": {
+    "names": ["vertical-waterfall-chart"],
+    "groups": ["charts"],
+    "tags": ["analytics", "chart", "display", "data"],
+    "rtl": "none"
+  },
+  "0xe220": {
+    "names": ["broken-link"],
+    "groups": ["status", "message", "objects"],
+    "tags": ["unlink", "broken", "chain", "hyperlink"],
+    "rtl": "flip"
+  },
+  "0xe221": {
+    "names": ["headset"],
+    "groups": ["objects"],
+    "tags": ["headset", "call", "help", "support", "talk", "mic", "listen"],
+    "rtl": "flip"
+  },
+  "0xe222": {
+    "names": ["thumb-up"],
+    "groups": ["action"],
+    "tags": ["thumbs", "up", "like", "appreciate", "positive"],
+    "rtl": "none"
+  },
+  "0xe223": {
+    "names": ["thumb-down"],
+    "groups": ["action"],
+    "tags": ["thumbs", "down", "dislike", "negative"],
+    "rtl": "none"
+  },
+  "0xe224": {
+    "names": ["multiselect-all"],
+    "groups": ["action"],
+    "tags": ["multi select", "list", "table", "data", "all", "selected"],
+    "rtl": "none"
+  },
+  "0xe225": {
+    "names": ["multiselect-none"],
+    "groups": ["action"],
+    "tags": ["multi select", "list", "table", "data", "none", "deselected"],
+    "rtl": "none"
+  },
+  "0xe226": {
+    "names": ["scissors"],
+    "groups": ["action", "objects"],
+    "tags": ["cut", "scissors", "document", "clipboards", "file", "text"],
+    "rtl": "flip"
+  },
+  "0xe227": {
+    "names": ["sound"],
+    "groups": ["action", "objects"],
+    "tags": ["sound", "audio", "speaker"],
+    "rtl": "none"
+  },
+  "0xe228": {
+    "names": ["sound-loud"],
+    "groups": ["action", "objects"],
+    "tags": ["sound", "audio", "speaker", "loud", "louder"],
+    "rtl": "none"
+  },
+  "0xe229": {
+    "names": ["sound-off"],
+    "groups": ["action", "objects"],
+    "tags": ["sound", "audio", "off", "mute", "quiet", "speaker", "cancel"],
+    "rtl": "none"
+  },
+  "0xe22a": {
+    "names": ["date-time"],
+    "groups": ["calendar"],
+    "tags": ["date", "time"],
+    "rtl": "none"
+  },
+  "0xe22b": {
+    "names": ["user-settings"],
+    "groups": ["people", "action"],
+    "tags": [
+      "settings",
+      "cogwheel",
+      "configuration",
+      "settings",
+      "tools",
+      "modify",
+      "customize",
+      "person",
+      "user",
+      "runtime authoring"
+    ],
+    "rtl": "flip"
+  },
+  "0xe22c": {
+    "names": ["key-user-settings"],
+    "groups": ["action"],
+    "tags": [
+      "settings",
+      "cogwheel",
+      "configuration",
+      "tools",
+      "modify",
+      "customize",
+      "administrator",
+      "key user",
+      "runtime authoring"
+    ],
+    "rtl": "flip"
+  },
+  "0xe22d": {
+    "names": ["developer-settings"],
+    "groups": ["action"],
+    "tags": [
+      "settings",
+      "cogwheel",
+      "configuration",
+      "tools",
+      "modify",
+      "customize",
+      "developer",
+      "runtime authoring"
+    ],
+    "rtl": "flip"
+  },
+  "0xe22e": {
+    "names": ["text-formatting"],
+    "groups": ["text", "action"],
+    "tags": [
+      "customize",
+      "text",
+      "format",
+      "options",
+      "text decoration",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe22f": {
+    "names": ["bold-text"],
+    "groups": ["text", "action"],
+    "tags": [
+      "bold",
+      "fat",
+      "bulk",
+      "weight",
+      "text",
+      "format",
+      "text decoration",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe230": {
+    "names": ["italic-text"],
+    "groups": ["text", "action"],
+    "tags": [
+      "italic",
+      "slanted",
+      "leaning",
+      "text",
+      "format",
+      "text decoration",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe231": {
+    "names": ["underline-text"],
+    "groups": ["text", "action"],
+    "tags": [
+      "underline",
+      "text",
+      "format",
+      "text decoration",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe232": {
+    "names": ["text-align-justified"],
+    "groups": ["text", "action"],
+    "tags": ["align", "text", "justified", "text edit", "rich-text"],
+    "rtl": "none"
+  },
+  "0xe233": {
+    "names": ["text-align-left"],
+    "groups": ["text", "action"],
+    "tags": ["align", "text", "left", "text edit", "rich-text"],
+    "rtl": "none"
+  },
+  "0xe234": {
+    "names": ["text-align-center"],
+    "groups": ["text", "action"],
+    "tags": ["align", "text", "center", "text edit", "rich-text"],
+    "rtl": "none"
+  },
+  "0xe235": {
+    "names": ["text-align-right"],
+    "groups": ["text", "action"],
+    "tags": ["align", "text", "right", "text edit", "rich-text"],
+    "rtl": "none"
+  },
+  "0xe236": {
+    "names": ["bullet-text"],
+    "groups": ["text", "action"],
+    "tags": ["bullet", "text", "dots", "text edit", "rich-text"],
+    "rtl": "none"
+  },
+  "0xe237": {
+    "names": ["numbered-text"],
+    "groups": ["text", "action"],
+    "tags": ["numbered", "text", "1, 2, 3", "text edit", "rich-text"],
+    "rtl": "none"
+  },
+  "0xe238": {
+    "names": ["co"],
+    "groups": ["objects"],
+    "tags": ["co pilot", "mnemonics", "assistant", "launchpad"],
+    "rtl": "flip"
+  },
+  "0xe239": {
+    "names": ["ui-notifications"],
+    "groups": ["action", "callout"],
+    "tags": ["notify", "ui", "notifications", "alerts", "launchpad"],
+    "rtl": "flip"
+  },
+  "0xe23a": {
+    "names": ["bell"],
+    "groups": ["objects"],
+    "tags": ["bell", "alarm", "notify", "alerts"],
+    "rtl": "flip"
+  },
+  "0xe23b": {
+    "names": ["cancel-share"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "cancel share",
+      "cancel distribution",
+      "do not share with connections"
+    ],
+    "rtl": "flip"
+  },
+  "0xe23c": {
+    "names": ["write-new-document"],
+    "groups": ["documents", "action"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "text",
+      "edit",
+      "write",
+      "new",
+      "pencil",
+      "pen"
+    ],
+    "rtl": "flip"
+  },
+  "0xe23d": {
+    "names": ["write-new"],
+    "groups": ["action"],
+    "tags": ["write", "new", "create", "pencil", "pen"],
+    "rtl": "flip"
+  },
+  "0xe23e": {
+    "names": ["cancel"],
+    "groups": ["action", "status", "message"],
+    "tags": ["unable", "forbidden", "do not", "cancel", "not allowed"],
+    "rtl": "none"
+  },
+  "0xe23f": {
+    "names": ["screen-split-one"],
+    "groups": ["objects"],
+    "tags": ["screen", "split", "two", "master", "detail", "split app"],
+    "rtl": "flip"
+  },
+  "0xe240": {
+    "names": ["screen-split-two"],
+    "groups": ["objects"],
+    "tags": ["screen", "split", "two", "half"],
+    "rtl": "flip"
+  },
+  "0xe241": {
+    "names": ["screen-split-three"],
+    "groups": ["objects"],
+    "tags": ["screen", "split", "three", "columns"],
+    "rtl": "flip"
+  },
+  "0xe242": {
+    "names": ["customize"],
+    "groups": ["action"],
+    "tags": [
+      "settings",
+      "configuration",
+      "settings",
+      "modify",
+      "customize",
+      "equaliser",
+      "fine tune"
+    ],
+    "rtl": "flip"
+  },
+  "0xe243": {
+    "names": ["user-edit"],
+    "groups": ["people", "action"],
+    "tags": ["user", "edit", "person", "pencil", "pen"],
+    "rtl": "flip"
+  },
+  "0xe244": {
+    "names": ["source-code"],
+    "groups": ["arrow"],
+    "tags": ["source", "code", "develop", "write", "syntax"],
+    "rtl": "flip"
+  },
+  "0xe245": {
+    "names": ["copy"],
+    "groups": ["action"],
+    "tags": ["copy", "document", "file", "duplicate", "text"],
+    "rtl": "flip"
+  },
+  "0xe246": {
+    "names": ["paste"],
+    "groups": ["action", "clipboard"],
+    "tags": ["paste", "document", "clipboards", "file", "text"],
+    "rtl": "flip"
+  },
+  "0xe247": {
+    "names": ["line-chart-time-axis"],
+    "groups": ["charts", "time"],
+    "tags": ["chart", "line", "time", "axis"],
+    "rtl": "none"
+  },
+  "0xe248": {
+    "names": ["clear-filter"],
+    "groups": ["action"],
+    "tags": [
+      "filter",
+      "organise",
+      "aggregate",
+      "data",
+      "clear",
+      "delete",
+      "remove",
+      "cancel"
+    ],
+    "rtl": "flip"
+  },
+  "0xe249": {
+    "names": ["reset"],
+    "groups": ["arrow", "action"],
+    "tags": ["reset", "x", "cancel"],
+    "rtl": "flip"
+  },
+  "0xe24a": {
+    "names": ["trend-up"],
+    "groups": ["arrow", "action"],
+    "tags": ["trend", "up", "diagonal", "increase", "improve", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe24b": {
+    "names": ["trend-down"],
+    "groups": ["arrow", "action"],
+    "tags": ["trend", "down", "diagonal", "decrease", "decline", "arrow"],
+    "rtl": "flip"
+  },
+  "0xe24c": {
+    "names": ["cursor-arrow"],
+    "groups": ["action", "objects", "text"],
+    "tags": ["cursor", "arrow", "mouse", "pointer", "select"],
+    "rtl": "flip"
+  },
+  "0xe24d": {
+    "names": ["add-document"],
+    "groups": ["documents", "action"],
+    "tags": [
+      "document",
+      "page",
+      "file",
+      "text",
+      "new",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe24e": {
+    "names": ["create-form"],
+    "groups": ["form", "action"],
+    "tags": [
+      "create",
+      "form",
+      "new",
+      "add",
+      "plus",
+      "additional",
+      "another",
+      "more"
+    ],
+    "rtl": "flip"
+  },
+  "0xe24f": {
+    "names": ["resize-corner"],
+    "groups": ["action"],
+    "tags": ["resize", "dialog", "corner"],
+    "rtl": "flip"
+  },
+  "0xe250": {
+    "names": ["chevron-phase"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "chevron",
+      "phase"
+    ],
+    "rtl": "flip"
+  },
+  "0xe251": {
+    "names": ["chevron-phase-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "chevron",
+      "phase"
+    ],
+    "rtl": "flip"
+  },
+  "0xe252": {
+    "names": ["rhombus-milestone"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "rhombus",
+      "milestone"
+    ],
+    "rtl": "flip"
+  },
+  "0xe253": {
+    "names": ["rhombus-milestone-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "rhombus",
+      "milestone"
+    ],
+    "rtl": "flip"
+  },
+  "0xe254": {
+    "names": ["circle-task"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "circle",
+      "task"
+    ],
+    "rtl": "flip"
+  },
+  "0xe255": {
+    "names": ["circle-task-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "circle",
+      "task"
+    ],
+    "rtl": "flip"
+  },
+  "0xe256": {
+    "names": ["project-definition-triangle"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "triangle",
+      "project",
+      "definition"
+    ],
+    "rtl": "flip"
+  },
+  "0xe257": {
+    "names": ["project-definition-triangle-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "triangle",
+      "project",
+      "definition"
+    ],
+    "rtl": "flip"
+  },
+  "0xe258": {
+    "names": ["master-task-triangle"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "triangle",
+      "task",
+      "master"
+    ],
+    "rtl": "flip"
+  },
+  "0xe259": {
+    "names": ["master-task-triangle-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "triangle",
+      "task",
+      "master"
+    ],
+    "rtl": "flip"
+  },
+  "0xe25a": {
+    "names": ["program-triangles"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "triangle",
+      "program"
+    ],
+    "rtl": "flip"
+  },
+  "0xe25b": {
+    "names": ["program-triangles-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "triangle",
+      "program"
+    ],
+    "rtl": "flip"
+  },
+  "0xe25c": {
+    "names": ["mirrored-task-circle"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "mirrored",
+      "circle",
+      "task"
+    ],
+    "rtl": "flip"
+  },
+  "0xe25d": {
+    "names": ["mirrored-task-circle-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "mirrored",
+      "circle",
+      "task"
+    ],
+    "rtl": "flip"
+  },
+  "0xe25e": {
+    "names": ["checklist-item"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "checklist",
+      "item"
+    ],
+    "rtl": "flip"
+  },
+  "0xe25f": {
+    "names": ["checklist-item-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "checklist",
+      "item"
+    ],
+    "rtl": "flip"
+  },
+  "0xe260": {
+    "names": ["checklist"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "checklist"
+    ],
+    "rtl": "flip"
+  },
+  "0xe261": {
+    "names": ["checklist-2"],
+    "groups": ["charts", "tables", "objects"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "gantt",
+      "shape",
+      "checklist"
+    ],
+    "rtl": "flip"
+  },
+  "0xe262": {
+    "names": ["chart-table-view"],
+    "groups": ["charts", "tables"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "table",
+      "columns",
+      "rows",
+      "grid",
+      "view",
+      "waffle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe263": {
+    "names": ["filter-analytics"],
+    "groups": ["charts", "objects"],
+    "tags": [
+      "analytics",
+      "filter",
+      "organise",
+      "chart",
+      "customize",
+      "display",
+      "data"
+    ],
+    "rtl": "flip"
+  },
+  "0xe264": {
+    "names": ["filter-facets"],
+    "groups": ["objects"],
+    "tags": [
+      "analytics",
+      "filter",
+      "organise",
+      "chart",
+      "customize",
+      "display",
+      "data"
+    ],
+    "rtl": "flip"
+  },
+  "0xe265": {
+    "names": ["filter-fields"],
+    "groups": ["objects"],
+    "tags": [
+      "analytics",
+      "filter",
+      "organise",
+      "chart",
+      "customize",
+      "display",
+      "data"
+    ],
+    "rtl": "flip"
+  },
+  "0xe266": {
+    "names": ["indent"],
+    "groups": ["text", "action"],
+    "tags": [
+      "indent",
+      "paragraph",
+      "move right",
+      "align",
+      "text edit",
+      "spacing",
+      "rich-text",
+      "arrows"
+    ],
+    "rtl": "flip"
+  },
+  "0xe267": {
+    "names": ["outdent"],
+    "groups": ["text", "action"],
+    "tags": [
+      "outdent",
+      "paragraph",
+      "move left",
+      "align",
+      "text edit",
+      "spacing",
+      "rich-text",
+      "arrows"
+    ],
+    "rtl": "flip"
+  },
+  "0xe268": {
+    "names": ["heading1"],
+    "deprecatedNames": ["heading-1"],
+    "groups": ["text", "action"],
+    "tags": [
+      "heading",
+      "header",
+      "h1",
+      "large text",
+      "title",
+      "level 1",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe269": {
+    "names": ["heading2"],
+    "deprecatedNames": ["heading-2"],
+    "groups": ["text", "action"],
+    "tags": [
+      "heading",
+      "header",
+      "h2",
+      "large text",
+      "title",
+      "level 2",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe26a": {
+    "names": ["heading3"],
+    "deprecatedNames": ["heading-3"],
+    "groups": ["text", "action"],
+    "tags": [
+      "heading",
+      "header",
+      "h3",
+      "large text",
+      "title",
+      "level 3",
+      "text edit",
+      "rich-text"
+    ],
+    "rtl": "none"
+  },
+  "0xe26b": {
+    "names": ["decrease-line-height"],
+    "groups": ["text", "action"],
+    "tags": [
+      "decrease",
+      "line height",
+      "leading",
+      "text edit",
+      "spacing",
+      "rich-text",
+      "less space",
+      "reduce",
+      "compress",
+      "arrows"
+    ],
+    "rtl": "flip"
+  },
+  "0xe26c": {
+    "names": ["increase-line-height"],
+    "groups": ["text", "action"],
+    "tags": [
+      "increase",
+      "line height",
+      "leading",
+      "text edit",
+      "spacing",
+      "rich-text",
+      "more space",
+      "enlarge",
+      "expand",
+      "arrows"
+    ],
+    "rtl": "flip"
+  },
+  "0xe26d": {
+    "names": ["fx"],
+    "groups": ["text", "action"],
+    "tags": [
+      "function",
+      "formula",
+      "effects",
+      "fx",
+      "calculation",
+      "mathematics",
+      "sum",
+      "letters",
+      "conditions"
+    ],
+    "rtl": "none"
+  },
+  "0xe26e": {
+    "names": ["add-folder"],
+    "groups": ["action"],
+    "tags": ["folder", "add", "directory", "additional", "library"],
+    "rtl": "flip"
+  },
+  "0xe26f": {
+    "names": ["away"],
+    "groups": ["status", "message"],
+    "tags": [
+      "time",
+      "clock",
+      "away",
+      "availability",
+      "chronicle",
+      "be right back",
+      "appear away",
+      "off work",
+      "me"
+    ],
+    "rtl": "flip"
+  },
+  "0xe270": {
+    "names": ["busy"],
+    "groups": ["status", "message"],
+    "tags": [
+      "busy",
+      "unavailable",
+      "not responsive",
+      "blocked",
+      "circle",
+      "dot",
+      "me",
+      "working"
+    ],
+    "rtl": "flip"
+  },
+  "0xe271": {
+    "names": ["appear-offline"],
+    "groups": ["status", "message"],
+    "tags": ["appear-offline", "offline", "hide", "blocked", "circle", "me"],
+    "rtl": "flip"
+  },
+  "0xe272": {
+    "names": ["blur"],
+    "groups": ["action"],
+    "tags": [
+      "blur",
+      "tool",
+      "screenshot",
+      "image",
+      "edit",
+      "modify",
+      "distort",
+      "smudge",
+      "blurry",
+      "filter",
+      "effects"
+    ],
+    "rtl": "flip"
+  },
+  "0xe273": {
+    "names": ["pixelate"],
+    "groups": ["action"],
+    "tags": [
+      "pixel",
+      "tool",
+      "screenshot",
+      "image",
+      "edit",
+      "modify",
+      "distort",
+      "pixelate",
+      "squares",
+      "dots",
+      "resolution",
+      "noise"
+    ],
+    "rtl": "flip"
+  },
+  "0xe274": {
+    "names": ["horizontal-combination-chart"],
+    "groups": ["charts"],
+    "tags": [
+      "analytics",
+      "chart",
+      "display",
+      "data",
+      "combination",
+      "line-chart",
+      "bar",
+      "horizontal"
+    ],
+    "rtl": "flip"
+  },
+  "0xe275": {
+    "names": ["add-employee"],
+    "groups": ["people", "action"],
+    "tags": [
+      "customer",
+      "user",
+      "person",
+      "individual",
+      "contacts",
+      "add",
+      "additional",
+      "employee",
+      "hr",
+      "human resources",
+      "plus"
+    ],
+    "rtl": "flip"
+  },
+  "0xe276": {
+    "names": ["text-color"],
+    "groups": ["text"],
+    "tags": [
+      "color",
+      "formatting",
+      "edit",
+      "colour",
+      "letters",
+      "rich",
+      "rich-text",
+      "options"
+    ],
+    "rtl": "none"
+  },
+  "0xe277": {
+    "names": ["browse-folder"],
+    "groups": ["folder"],
+    "tags": [
+      "browse folder",
+      "search",
+      "look up",
+      "folder",
+      "browse",
+      "directory",
+      "library",
+      "find"
+    ],
+    "rtl": "flip"
+  },
+  "0xe278": {
+    "names": ["primary-key"],
+    "groups": ["objects"],
+    "tags": ["key", "primary", "data", "lock", "important"],
+    "rtl": "flip"
+  },
+  "0xe279": {
+    "names": ["two-keys"],
+    "groups": ["objects"],
+    "tags": ["key", "primary", "foreign", "data", "lock", "important"],
+    "rtl": "flip"
+  },
+  "0xe27a": {
+    "names": ["strikethrough"],
+    "groups": ["text"],
+    "tags": [
+      "strike",
+      "formatting",
+      "edit",
+      "cross out",
+      "letters",
+      "rich",
+      "rich-text",
+      "options",
+      "review"
+    ],
+    "rtl": "flip"
+  },
+  "0xe27b": {
+    "names": ["text"],
+    "groups": ["text"],
+    "tags": [
+      "text",
+      "formatting",
+      "edit",
+      "input",
+      "letters",
+      "rich",
+      "rich-text"
+    ],
+    "rtl": "flip"
+  },
+  "0xe27c": {
+    "names": ["responsive"],
+    "groups": ["devices"],
+    "tags": [
+      "desktop",
+      "tablet",
+      "mobile",
+      "phone",
+      "adaptive",
+      "cozy",
+      "compact",
+      "web app"
+    ],
+    "rtl": "flip"
+  },
+  "0xe27d": {
+    "names": ["desktop-mobile"],
+    "groups": ["devices"],
+    "tags": [
+      "desktop",
+      "tablet",
+      "mobile",
+      "phone",
+      "adaptive",
+      "cozy",
+      "compact",
+      "web app",
+      "responsive"
+    ],
+    "rtl": "flip"
+  },
+  "0xe27e": {
+    "names": ["table-row"],
+    "groups": ["tables", "objects"],
+    "tags": [
+      "display",
+      "data",
+      "table",
+      "table row",
+      "grid",
+      "view",
+      "rows",
+      "waffle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe27f": {
+    "names": ["table-column"],
+    "groups": ["tables", "objects"],
+    "tags": [
+      "display",
+      "data",
+      "table",
+      "table column",
+      "grid",
+      "view",
+      "columns",
+      "waffle"
+    ],
+    "rtl": "flip"
+  },
+  "0xe280": {
+    "names": ["validate"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "message",
+      "check",
+      "validate",
+      "security",
+      "status",
+      "approve",
+      "reject",
+      "decision",
+      "certify"
+    ],
+    "rtl": "none"
+  },
+  "0xe281": {
+    "names": ["keyboard-and-mouse"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "mouse",
+      "desktop",
+      "click",
+      "keyboard",
+      "compact",
+      "condensed",
+      "controls",
+      "devices"
+    ],
+    "rtl": "flip"
+  },
+  "0xe282": {
+    "names": ["touch"],
+    "groups": ["action", "objects"],
+    "tags": [
+      "finger",
+      "mobile",
+      "press",
+      "touch",
+      "cozy",
+      "comfortable",
+      "controls",
+      "devices"
+    ],
+    "rtl": "flip"
+  },
+  "0xe283": {
+    "names": ["expand-all"],
+    "groups": ["arrow"],
+    "tags": [
+      "expand",
+      "all",
+      "open",
+      "open all",
+      "expand all",
+      "arrow",
+      "table",
+      "tree",
+      "list"
+    ],
+    "rtl": "flip"
+  },
+  "0xe284": {
+    "names": ["collapse-all"],
+    "groups": ["arrow"],
+    "tags": [
+      "collapse",
+      "all",
+      "close",
+      "close all",
+      "collapse all",
+      "arrow",
+      "table",
+      "tree",
+      "list"
+    ],
+    "rtl": "flip"
+  },
+  "0xe285": {
+    "names": ["combine"],
+    "groups": ["arrow"],
+    "tags": [
+      "combine",
+      "merge",
+      "arrow-right",
+      "combine-split",
+      "runtime authoring",
+      "settings",
+      "arrow",
+      "glue",
+      "together",
+      "join",
+      "meld",
+      "unite",
+      "aggregate",
+      "interflow",
+      "arrows-right",
+      "runtime adaptation",
+      "ui adaptation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe286": {
+    "names": ["split"],
+    "groups": ["arrow"],
+    "tags": [
+      "split",
+      "arrows-right",
+      "user",
+      "runtime authoring",
+      "settings",
+      "arrow",
+      "separate",
+      "break",
+      "cleave",
+      "clove",
+      "cut up",
+      "runtime adaptation",
+      "ui adaptation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe287": {
+    "names": ["megamenu"],
+    "groups": ["arrow"],
+    "tags": [
+      "navigation",
+      "arrows-down",
+      "arrow-down",
+      "down",
+      "shell",
+      "arrow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe288": {
+    "names": ["feedback"],
+    "groups": ["people", "action", "callout"],
+    "tags": ["feedback", "smiley", "comment", "shell", "callout", "speech"],
+    "rtl": "flip"
+  },
+  "0xe289": {
+    "names": ["information"],
+    "groups": ["status", "message"],
+    "tags": [
+      "information",
+      "info",
+      "message",
+      "message-information",
+      "i",
+      "filled",
+      "notification"
+    ],
+    "rtl": "flip"
+  },
+  "0xe28a": {
+    "names": ["s4hana"],
+    "groups": ["objects"],
+    "tags": [
+      "s4hana",
+      "S/4HANA",
+      "HANA",
+      "hana",
+      "s4",
+      "S/4",
+      "product switch",
+      "product",
+      "switch"
+    ],
+    "rtl": "none"
+  },
+  "0xe28b": {
+    "names": ["translate"],
+    "groups": ["text"],
+    "tags": ["translate", "text", "letters", "translation", "A", "arrows"],
+    "rtl": "none"
+  },
+  "0xe28c": {
+    "names": ["clear-all"],
+    "groups": ["tables", "action"],
+    "tags": [
+      "clear",
+      "clear-all",
+      "square",
+      "x",
+      "delete",
+      "remove",
+      "check",
+      "uncheck"
+    ],
+    "rtl": "flip"
+  },
+  "0xe28d": {
+    "names": ["command-line-interfaces"],
+    "groups": ["arrow"],
+    "tags": [
+      "command",
+      "command-line",
+      "interfaces",
+      "code",
+      "develop",
+      "source",
+      "source-code",
+      "write",
+      "syntax",
+      "programming",
+      "technical"
+    ],
+    "rtl": "flip"
+  },
+  "0xe28e": {
+    "names": ["sum"],
+    "groups": ["tables", "action"],
+    "tags": [
+      "sigma",
+      "sum",
+      "summation",
+      "addition",
+      "total",
+      "aggregate",
+      "amount",
+      "covariance",
+      "covariance matrix"
+    ],
+    "rtl": "none"
+  },
+  "0xe28f": {
+    "names": ["qr-code"],
+    "groups": ["objects"],
+    "tags": ["qr", "qrcode", "qr-code", "scan", "code"],
+    "rtl": "none"
+  },
+  "0xe290": {
+    "names": ["space-navigation"],
+    "groups": ["place"],
+    "tags": ["space", "navigation", "circle", "shape", "line"],
+    "rtl": "flip"
+  },
+  "0xe291": {
+    "names": ["in-progress"],
+    "groups": ["time", "status"],
+    "tags": [
+      "in process",
+      "status",
+      "working",
+      "current",
+      "on-going",
+      "clock",
+      "Time",
+      "Square"
+    ],
+    "rtl": "none"
+  },
+  "0xe292": {
+    "names": ["not-editable"],
+    "groups": ["status"],
+    "tags": [
+      "not editable",
+      "pencil",
+      "status",
+      "editable false",
+      "crossed-out"
+    ],
+    "rtl": "flip"
+  },
+  "0xe293": {
+    "names": ["heart"],
+    "groups": ["action"],
+    "tags": [
+      "heart",
+      "full",
+      "love",
+      "feeling",
+      "emotion",
+      "care",
+      "favorite",
+      "choose",
+      "selected",
+      "filled",
+      "content"
+    ],
+    "rtl": "flip"
+  },
+  "0xe294": {
+    "names": ["heart-2"],
+    "groups": ["action"],
+    "tags": [
+      "heart",
+      "empty",
+      "unfulfilled",
+      "love",
+      "unloved",
+      "not loved",
+      "feeling",
+      "emotion",
+      "care",
+      "unfavorite",
+      "choose me",
+      "not selected",
+      "unfilled"
+    ],
+    "rtl": "flip"
+  },
+  "0xe295": {
+    "names": ["tri-state"],
+    "groups": ["tables", "action"],
+    "tags": [
+      "third",
+      "state",
+      "partial",
+      "selected",
+      "square",
+      "box",
+      "table",
+      "tree",
+      "list",
+      "selection",
+      "tri",
+      "tri-state"
+    ],
+    "rtl": "flip"
+  },
+  "0xe296": {
+    "names": ["bookmark-2"],
+    "groups": ["action"],
+    "tags": [
+      "bookmark",
+      "later",
+      "marker",
+      "save",
+      "remove selection",
+      "choose me",
+      "not selected",
+      "unfilled"
+    ],
+    "rtl": "flip"
+  },
+  "0xe297": {
+    "names": ["detail-less"],
+    "groups": ["tables", "text", "action"],
+    "tags": [
+      "detail",
+      "hide detail",
+      "popin",
+      "table",
+      "less",
+      "information",
+      "data",
+      "hide",
+      "reduce"
+    ],
+    "rtl": "flip"
+  },
+  "0xe298": {
+    "names": ["detail-more"],
+    "groups": ["tables", "text", "action"],
+    "tags": [
+      "detail",
+      "show detail",
+      "popin",
+      "table",
+      "more",
+      "information",
+      "data",
+      "show",
+      "extend",
+      "grow"
+    ],
+    "rtl": "flip"
+  },
+  "0xe299": {
+    "names": ["flag-2"],
+    "groups": ["action"],
+    "tags": [
+      "unflag",
+      "flag",
+      "unmark",
+      "mark",
+      "remove marker",
+      "important",
+      "remove selection",
+      "choose me",
+      "not selected",
+      "unfilled"
+    ],
+    "rtl": "none"
+  },
+  "0xe29a": {
+    "names": ["folder-2"],
+    "groups": ["folder"],
+    "tags": [
+      "folder",
+      "full",
+      "content",
+      "detail",
+      "choose",
+      "selected",
+      "filled"
+    ],
+    "rtl": "flip"
+  },
+  "0xe29b": {
+    "names": ["paint-bucket"],
+    "groups": ["action"],
+    "tags": ["filled", "color", "colour", "bucket", "spill", "drop", "fill"],
+    "rtl": "flip"
+  },
+  "0xe29c": {
+    "names": ["direction-arrows"],
+    "groups": ["arrow"],
+    "tags": ["arrow", "slider", "direction", "left", "right"],
+    "rtl": "flip"
+  },
+  "0xe29d": {
+    "names": ["non-binary"],
+    "groups": ["people"],
+    "tags": ["non-binary", "shapes", "symbol", "gender"],
+    "rtl": "flip"
+  },
+  "0xe29e": {
+    "names": ["female"],
+    "groups": ["people"],
+    "tags": ["female", "woman", "girl", "shapes", "symbol", "gender"],
+    "rtl": "flip"
+  },
+  "0xe29f": {
+    "names": ["male"],
+    "groups": ["people"],
+    "tags": ["male", "man", "boy", "shapes", "symbol", "gender"],
+    "rtl": "none"
+  },
+  "0xe2a0": {
+    "names": ["bell-2"],
+    "groups": ["objects"],
+    "tags": ["bell", "alarm", "notify", "alerts", "full", "filled"],
+    "rtl": "flip"
+  },
+  "0xe2a1": {
+    "names": ["accessibility"],
+    "groups": ["people"],
+    "tags": [
+      "user",
+      "person",
+      "accessible",
+      "accessibility",
+      "inclusive",
+      "inclusion",
+      "people"
+    ],
+    "rtl": "flip"
+  },
+  "0xe2a2": {
+    "names": ["high-priority"],
+    "groups": ["status", "message"],
+    "tags": [
+      "warning",
+      "critical",
+      "message",
+      "alert",
+      "status",
+      "!",
+      "notification",
+      "exclamation"
+    ],
+    "rtl": "flip"
+  },
+  "0xe2a3": {
+    "names": ["da"],
+    "groups": ["objects"],
+    "tags": [
+      "artificial intelligence",
+      "voice recognition",
+      "npl",
+      "NPL",
+      "assistant",
+      "chatbot",
+      "machine learning",
+      "ai",
+      "digital",
+      "assistance",
+      "virtual",
+      "intelligence",
+      "conversational ai",
+      "contextual understanding",
+      "artificial",
+      "machine"
+    ],
+    "rtl": "none"
+  },
+  "0xe2a4": {
+    "names": ["da-2"],
+    "groups": ["objects"],
+    "tags": [
+      "artificial intelligence",
+      "voice recognition",
+      "npl",
+      "NPL",
+      "assistant",
+      "chatbot",
+      "machine learning",
+      "ai",
+      "digital",
+      "assistance",
+      "virtual",
+      "intelligence",
+      "conversational ai",
+      "contextual understanding",
+      "artificial",
+      "machine",
+      "filled",
+      "full"
+    ],
+    "rtl": "none"
+  },
+  "0xe2a5": {
+    "names": ["ai"],
+    "groups": ["action"],
+    "tags": [
+      "artificial intelligence",
+      "star",
+      "information",
+      "sparkle",
+      "magic",
+      "generate",
+      "automate",
+      "automation",
+      "generic",
+      "situation",
+      "machine learning",
+      "ai",
+      "digital",
+      "assistance",
+      "virtual",
+      "intelligence",
+      "contextual understanding",
+      "artificial",
+      "machine",
+      "robot"
+    ],
+    "rtl": "none"
+  },
+  "0xe2a6": {
+    "names": ["in-progress-2"],
+    "groups": ["time", "status"],
+    "tags": [
+      "in process",
+      "status",
+      "working",
+      "current",
+      "on-going",
+      "clock",
+      "Time",
+      "Square",
+      "filled",
+      "full"
+    ],
+    "rtl": "none"
+  },
+  "0xe2a7": {
+    "names": ["unsynchronize"],
+    "groups": ["action", "arrow"],
+    "tags": ["unsynchronize", "arrow", "unsync", "disconnect", "x"],
+    "rtl": "none"
+  },
+  "0xe2a8": {
+    "names": ["verified"],
+    "groups": ["action", "status", "message"],
+    "tags": [
+      "verified",
+      "checkmark",
+      "valid",
+      "confirmation",
+      "tick",
+      "validation",
+      "approved"
+    ],
+    "rtl": "flip"
+  },
+  "0xe2a9": {
+    "names": ["walk-me"],
+    "groups": ["action", "arrow"],
+    "tags": [
+      "walkme",
+      "walk",
+      "onboarding",
+      "walkthrough",
+      "training",
+      "help",
+      "guidance"
+    ],
+    "rtl": "flip"
+  },
+  "0xe300": {
+    "names": ["gender-male-and-female"],
+    "groups": ["people"],
+    "tags": [
+      "male",
+      "man",
+      "boy",
+      "female",
+      "woman",
+      "girl",
+      "shapes",
+      "symbol",
+      "gender"
+    ],
+    "rtl": "none"
+  },
+  "0xe301": {
+    "names": ["rotate"],
+    "groups": ["action"],
+    "tags": ["arrow", "square", "object", "rotate", "around", "direction"],
+    "rtl": "flip"
+  },
+  "0xe302": {
+    "names": ["locate-me-2"],
+    "groups": ["place"],
+    "tags": [
+      "arrow",
+      "locate",
+      "me",
+      "map",
+      "location",
+      "pointer",
+      "navigation",
+      "filled"
+    ],
+    "rtl": "flip"
+  },
+  "0xe303": {
+    "names": ["map-fill"],
+    "groups": ["objects"],
+    "tags": [
+      "map",
+      "pin",
+      "location",
+      "place",
+      "area",
+      "solid",
+      "fill",
+      "filled"
+    ],
+    "rtl": "flip"
+  },
+  "0xe304": {
+    "names": ["cloud-check"],
+    "groups": ["objects"],
+    "tags": ["cloud", "check", "data"],
+    "rtl": "none"
+  },
+  "0xe305": {
+    "names": ["enablement"],
+    "groups": ["objects"],
+    "tags": [
+      "people",
+      "person",
+      "setting",
+      "chart",
+      "enable",
+      "tool",
+      "wrench",
+      "widgets"
+    ],
+    "rtl": "none"
+  },
+  "0xe306": {
+    "names": ["biometric-thumb"],
+    "groups": ["people"],
+    "tags": ["fingerprint", "finger", "thumb", "id", "recognition"],
+    "rtl": "flip"
+  },
+  "0xe307": {
+    "names": ["biometric-face"],
+    "groups": ["people"],
+    "tags": ["face", "faceid", "viewfinder", "id", "recognition"],
+    "rtl": "flip"
+  },
+  "0xe308": {
+    "names": ["people-connected"],
+    "groups": ["people"],
+    "tags": [
+      "people",
+      "connection",
+      "connected",
+      "collaboration",
+      "task-center",
+      "team",
+      "collaborate",
+      "work"
+    ],
+    "rtl": "flip"
+  },
+  "0xe309": {
+    "names": ["light-mode"],
+    "groups": ["action"],
+    "tags": ["light", "sun", "sunny", "mode", "day"],
+    "rtl": "flip"
+  },
+  "0xe30a": {
+    "names": ["dark-mode"],
+    "groups": ["action"],
+    "tags": ["dark", "moon", "night", "mode"],
+    "rtl": "flip"
+  },
+  "0xe30b": {
+    "names": ["select-appointments"],
+    "groups": ["calendar"],
+    "tags": [
+      "date picker",
+      "calendar",
+      "month",
+      "week",
+      "day",
+      "appointment",
+      "check",
+      "select",
+      "choose"
+    ],
+    "rtl": "none"
+  },
+  "0xe30c": {
+    "names": ["time-off"],
+    "groups": ["calendar"],
+    "tags": [
+      "holiday",
+      "vacation",
+      "leave",
+      "request",
+      "out-of-office",
+      "out",
+      "appointment",
+      "calendar"
+    ],
+    "rtl": "flip"
+  },
+  "0xe30d": {
+    "names": ["add-calendar"],
+    "groups": ["calendar"],
+    "tags": [
+      "appointment",
+      "vacation",
+      "leave",
+      "request",
+      "add",
+      "plus",
+      "calendar"
+    ],
+    "rtl": "flip"
+  },
+  "0xe30e": {
+    "names": ["currency"],
+    "groups": ["money"],
+    "tags": ["money", "bills", "currency", "payment", "cash"],
+    "rtl": "flip"
+  }
+}

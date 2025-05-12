@@ -1,0 +1,3012 @@
+{
+	"0xe000": {
+		"names": ["icon-heart"],
+		"groups": ["objects", "medical"],
+		"tags": ["heart", "medical"],
+		"rtl": "flip"
+	},
+	"0xe001": {
+		"names": ["icon-quarter"],
+		"groups": ["calendar", "things"],
+		"tags": ["calendar", "time", "date", "quarter", "schedule"],
+		"rtl": "flip"
+	},
+	"0xe002": {
+		"names": ["icon-year"],
+		"groups": ["calendar", "things"],
+		"tags": ["calendar", "time", "date", "year", "schedule"],
+		"rtl": "flip"
+	},
+	"0xe003": {
+		"names": ["icon-equalizer"],
+		"groups": ["objects", "things", "actions"],
+		"tags": ["equalizer", "sliders", "adjust"],
+		"rtl": "flip"
+	},
+	"0xe004": {
+		"names": ["icon-component"],
+		"groups": ["objects", "actions"],
+		"tags": ["plus", "add"],
+		"rtl": "flip"
+	},
+	"0xe005": {
+		"names": ["icon-component-private"],
+		"groups": ["objects"],
+		"tags": ["component", "private", "locked"],
+		"rtl": "flip"
+	},
+	"0xe006": {
+		"names": ["icon-raw-material"],
+		"groups": ["objects", "things"],
+		"tags": ["barrel", "raw", "material"],
+		"rtl": "flip"
+	},
+	"0xe007": {
+		"names": ["icon-sms"],
+		"groups": ["objects", "devices", "callout"],
+		"tags": ["sms", "mobile", "message", "phone", "speech", "bubble", "text"],
+		"rtl": "flip"
+	},
+	"0xe008": {
+		"names": ["icon-add-note"],
+		"groups": ["actions"],
+		"tags": [
+			"add",
+			"plus",
+			"additional",
+			"more",
+			"another",
+			"note",
+			"info",
+			"draft"
+		],
+		"rtl": "flip"
+	},
+	"0xe009": {
+		"names": ["icon-change-time-horizon"],
+		"groups": ["actions", "time", "arrows"],
+		"tags": ["change", "arrow", "time", "clock", "time horizon"],
+		"rtl": "flip"
+	},
+	"0xe00a": {
+		"names": ["icon-table-chart-customization"],
+		"groups": ["actions"],
+		"tags": [
+			"wrench",
+			"control",
+			"customize",
+			"configuration",
+			"tools",
+			"settings",
+			"table",
+			"chart"
+		],
+		"rtl": "flip"
+	},
+	"0xe00b": {
+		"names": ["icon-delegated-important-task"],
+		"groups": ["objects", "actions", "arrows"],
+		"tags": ["flag", "arrow", "task", "delegate", "important"],
+		"rtl": "flip"
+	},
+	"0xe00c": {
+		"names": ["icon-forklift"],
+		"groups": ["objects", "things", "transport"],
+		"tags": ["forklift", "transport"],
+		"rtl": "flip"
+	},
+	"0xe00d": {
+		"names": ["icon-coins"],
+		"groups": ["objects", "things", "money"],
+		"tags": ["coins", "money", "cash"],
+		"rtl": "flip"
+	},
+	"0xe00e": {
+		"names": ["icon-filter-menu"],
+		"groups": ["objects", "actions"],
+		"tags": ["filter", "organise", "aggregate", "data", "menu"],
+		"rtl": "flip"
+	},
+	"0xe00f": {
+		"names": ["icon-target-to-date"],
+		"groups": ["calendar", "arrows"],
+		"tags": ["date", "target", "calendar", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe010": {
+		"names": ["icon-program"],
+		"groups": ["objects", "charts"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"program",
+			"project",
+			"scheduling",
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics"
+		],
+		"rtl": "flip"
+	},
+	"0xe011": {
+		"names": ["icon-phase"],
+		"groups": ["objects", "charts"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"program",
+			"project",
+			"scheduling",
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics",
+			"chevron"
+		],
+		"rtl": "flip"
+	},
+	"0xe012": {
+		"names": ["icon-checklist"],
+		"groups": ["objects", "charts"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"program",
+			"project",
+			"scheduling",
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics",
+			"checklist"
+		],
+		"rtl": "flip"
+	},
+	"0xe013": {
+		"names": ["icon-mirrored-task"],
+		"groups": ["objects", "arrows", "charts"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"program",
+			"project",
+			"scheduling",
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics",
+			"mirrored task"
+		],
+		"rtl": "flip"
+	},
+	"0xe014": {
+		"names": ["icon-sub-project"],
+		"groups": ["objects", "charts"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"program",
+			"project",
+			"scheduling",
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics",
+			"sub project"
+		],
+		"rtl": "flip"
+	},
+	"0xe015": {
+		"names": ["icon-checklist-item"],
+		"groups": ["objects", "charts"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"program",
+			"project",
+			"scheduling",
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics",
+			"checklist item"
+		],
+		"rtl": "flip"
+	},
+	"0xe016": {
+		"names": ["icon-adhoc-analysis"],
+		"groups": ["actions"],
+		"tags": [
+			"magnifier",
+			"glass",
+			"search",
+			"adhoc analysis",
+			"analytics",
+			"exclamation",
+			"status"
+		],
+		"rtl": "flip"
+	},
+	"0xe017": {
+		"names": ["icon-change-analysis"],
+		"groups": ["actions"],
+		"tags": ["magnifier", "glass", "search", "change analysis", "analytics"],
+		"rtl": "flip"
+	},
+	"0xe018": {
+		"names": ["icon-review-demands"],
+		"groups": ["actions", "arrows", "clipboards"],
+		"tags": [
+			"magnifier",
+			"glass",
+			"search",
+			"review demands",
+			"clipboard",
+			"task",
+			"arrow"
+		],
+		"rtl": "flip"
+	},
+	"0xe019": {
+		"names": ["icon-project-definition"],
+		"groups": ["charts", "tables"],
+		"tags": [
+			"shape",
+			"gantt",
+			"chart",
+			"display",
+			"analytics",
+			"triangle",
+			"project",
+			"definition",
+			"planning",
+			"scheduling"
+		],
+		"rtl": "flip"
+	},
+	"0xe01a": {
+		"names": ["icon-data-access"],
+		"groups": ["arrows"],
+		"tags": ["arrow", "data", "access"],
+		"rtl": "flip"
+	},
+	"0xe01b": {
+		"names": ["icon-define-shortage"],
+		"groups": ["actions"],
+		"tags": ["define", "shortage", "chart", "measurement"],
+		"rtl": "flip"
+	},
+	"0xe01c": {
+		"names": ["icon-review-supplies"],
+		"groups": ["actions"],
+		"tags": [
+			"magnifier",
+			"glass",
+			"search",
+			"review",
+			"supplies",
+			"supply",
+			"analytics"
+		],
+		"rtl": "flip"
+	},
+	"0xe01d": {
+		"names": ["icon-change-log"],
+		"groups": ["objects", "time", "time"],
+		"tags": ["change", "log", "time", "clock"],
+		"rtl": "flip"
+	},
+	"0xe01e": {
+		"names": ["icon-priority-1"],
+		"groups": ["status"],
+		"tags": ["high priority", "exclamation", "alert", "warning", "status"],
+		"rtl": "flip"
+	},
+	"0xe01f": {
+		"names": ["icon-priority-2"],
+		"groups": ["status"],
+		"tags": [
+			"high priority",
+			"exclamation",
+			"alert",
+			"warning",
+			"status",
+			"multiple"
+		],
+		"rtl": "flip"
+	},
+	"0xe020": {
+		"names": ["icon-jam"],
+		"groups": ["objects", "callout", "places"],
+		"tags": [
+			"jam",
+			"message",
+			"speech",
+			"bubble",
+			"text",
+			"conversation",
+			"social",
+			"comment",
+			"discussion"
+		],
+		"rtl": "flip"
+	},
+	"0xe021": {
+		"names": ["icon-milestone"],
+		"groups": ["objects"],
+		"tags": [
+			"badge",
+			"insignia",
+			"star",
+			"prize",
+			"award",
+			"achievement",
+			"milestone"
+		],
+		"rtl": "flip"
+	},
+	"0xe022": {
+		"names": ["icon-bulleting-with-numbers"],
+		"groups": ["actions", "text"],
+		"tags": ["bullet", "text", "dots", "rich text"],
+		"rtl": "flip"
+	},
+	"0xe023": {
+		"names": ["icon-decrease-indent"],
+		"groups": ["actions", "arrows", "text"],
+		"tags": [
+			"text",
+			"rich text",
+			"decrease indent",
+			"paragraph",
+			"move left",
+			"align",
+			"arrow",
+			"outdent"
+		],
+		"rtl": "flip"
+	},
+	"0xe024": {
+		"names": ["icon-increase-indent"],
+		"groups": ["actions", "arrows", "text"],
+		"tags": [
+			"text",
+			"rich text",
+			"increase indent",
+			"paragraph",
+			"move left",
+			"align",
+			"arrow",
+			"indent"
+		],
+		"rtl": "flip"
+	},
+	"0xe025": {
+		"names": ["icon-bold"],
+		"groups": ["actions", "text"],
+		"tags": [
+			"text",
+			"rich text",
+			"style",
+			"text decoration",
+			"format",
+			"bold",
+			"fat",
+			"weight"
+		],
+		"rtl": "flip"
+	},
+	"0xe026": {
+		"names": ["icon-italic"],
+		"groups": ["actions", "text"],
+		"tags": [
+			"text",
+			"rich text",
+			"style",
+			"text decoration",
+			"format",
+			"italic",
+			"slanted",
+			"leaning"
+		],
+		"rtl": "flip"
+	},
+	"0xe027": {
+		"names": ["icon-strike-through"],
+		"groups": ["actions", "text"],
+		"tags": [
+			"text",
+			"rich text",
+			"style",
+			"text decoration",
+			"format",
+			"strike through",
+			"crossed out"
+		],
+		"rtl": "flip"
+	},
+	"0xe028": {
+		"names": ["icon-underline"],
+		"groups": ["actions", "text"],
+		"tags": [
+			"text",
+			"rich text",
+			"style",
+			"text decoration",
+			"format",
+			"underline"
+		],
+		"rtl": "flip"
+	},
+	"0xe029": {
+		"names": ["icon-save-as"],
+		"groups": ["actions", "text"],
+		"tags": ["save as", "diskette", "pencil", "floppy disc"],
+		"rtl": "flip"
+	},
+	"0xe02a": {
+		"names": ["icon-segmentation"],
+		"groups": ["objects", "actions"],
+		"tags": [
+			"segmentation",
+			"hierarchy",
+			"map",
+			"org",
+			"tree",
+			"overview",
+			"data"
+		],
+		"rtl": "flip"
+	},
+	"0xe02b": {
+		"names": ["icon-context-menu"],
+		"groups": ["actions"],
+		"tags": ["menu", "options", "context", "button", "corner", "triangle"],
+		"rtl": "flip"
+	},
+	"0xe02c": {
+		"names": ["icon-snapshot"],
+		"groups": ["actions"],
+		"tags": ["snapshot", "arrows", "x", "cancel", "remove", "delete", "close"],
+		"rtl": "flip"
+	},
+	"0xe02d": {
+		"names": ["icon-subtraction-b-a"],
+		"groups": ["actions"],
+		"tags": [
+			"circles",
+			"subtraction",
+			"analytics",
+			"analyze objects",
+			"filter",
+			"segmentation",
+			"segment",
+			"target group",
+			"b-a"
+		],
+		"rtl": "flip"
+	},
+	"0xe02e": {
+		"names": ["icon-subtraction-a-b"],
+		"groups": ["actions"],
+		"tags": [
+			"circles",
+			"subtraction",
+			"analytics",
+			"analyze objects",
+			"filter",
+			"segmentation",
+			"segment",
+			"target group",
+			"a-b"
+		],
+		"rtl": "flip"
+	},
+	"0xe02f": {
+		"names": ["icon-intersection"],
+		"groups": ["actions"],
+		"tags": [
+			"circles",
+			"intersection",
+			"analytics",
+			"analyze objects",
+			"filter",
+			"segmentation",
+			"segment",
+			"target group"
+		],
+		"rtl": "flip"
+	},
+	"0xe030": {
+		"names": ["icon-union"],
+		"groups": ["actions"],
+		"tags": [
+			"circles",
+			"intersection",
+			"analytics",
+			"analyze objects",
+			"filter",
+			"segmentation",
+			"segment",
+			"target group",
+			"union",
+			"merge",
+			"combine"
+		],
+		"rtl": "flip"
+	},
+	"0xe031": {
+		"names": ["icon-top"],
+		"groups": ["actions", "arrows"],
+		"tags": ["arrow", "top"],
+		"rtl": "flip"
+	},
+	"0xe032": {
+		"names": ["icon-bottom"],
+		"groups": ["actions", "arrows"],
+		"tags": ["arrow", "bottom"],
+		"rtl": "flip"
+	},
+	"0xe033": {
+		"names": ["icon-page-up"],
+		"groups": ["actions", "arrows"],
+		"tags": ["arrows", "page up"],
+		"rtl": "flip"
+	},
+	"0xe034": {
+		"names": ["icon-page-down"],
+		"groups": ["actions", "arrows"],
+		"tags": ["arrows", "page down"],
+		"rtl": "flip"
+	},
+	"0xe035": {
+		"names": ["icon-create-dashboard"],
+		"groups": ["actions", "documents"],
+		"tags": ["create", "new", "plus", "dashboard", "page", "file"],
+		"rtl": "flip"
+	},
+	"0xe036": {
+		"names": ["icon-excelsius-file"],
+		"groups": ["documents"],
+		"tags": ["excelsius file"],
+		"rtl": "flip"
+	},
+	"0xe037": {
+		"names": ["icon-open-folder"],
+		"groups": ["actions", "arrows", "folder"],
+		"tags": ["arrow", "open", "folder"],
+		"rtl": "flip"
+	},
+	"0xe038": {
+		"names": ["icon-neutral"],
+		"groups": ["status"],
+		"tags": ["neutral"],
+		"rtl": "flip"
+	},
+	"0xe039": {
+		"names": ["icon-split-segmentation"],
+		"groups": ["objects", "actions", "arrows"],
+		"tags": [
+			"split",
+			"separate",
+			"divide",
+			"arrows",
+			"segmentation",
+			"segment",
+			"target group"
+		],
+		"rtl": "flip"
+	},
+	"0xe03a": {
+		"names": ["icon-manage-budget"],
+		"groups": ["actions", "arrows", "money"],
+		"tags": ["arrows", "money", "manage", "budget"],
+		"rtl": "flip"
+	},
+	"0xe03b": {
+		"names": ["icon-blocked"],
+		"groups": ["status"],
+		"tags": ["blocked"],
+		"rtl": "flip"
+	},
+	"0xe03c": {
+		"names": ["icon-pipette"],
+		"groups": ["objects", "things", "actions"],
+		"tags": ["pipette", "eye dropper", "sample"],
+		"rtl": "flip"
+	},
+	"0xe03d": {
+		"names": ["icon-top-recipe"],
+		"groups": ["objects", "things", "status"],
+		"tags": ["recipe", "bowl", "mortar", "star", "top", "important"],
+		"rtl": "flip"
+	},
+	"0xe03e": {
+		"names": ["icon-recipe"],
+		"groups": ["objects", "things"],
+		"tags": ["recipe", "bowl", "mortar"],
+		"rtl": "flip"
+	},
+	"0xe03f": {
+		"names": ["icon-ingredients"],
+		"groups": ["objects"],
+		"tags": ["ingredients"],
+		"rtl": "flip"
+	},
+	"0xe040": {
+		"names": ["icon-multiple-charts"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "multiple charts"],
+		"rtl": "flip"
+	},
+	"0xe041": {
+		"names": ["icon-descending-bars"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "descending bars"],
+		"rtl": "flip"
+	},
+	"0xe042": {
+		"names": ["icon-descending-stacked-bars"],
+		"groups": ["charts"],
+		"tags": [
+			"analytics",
+			"chart",
+			"display",
+			"data",
+			"descending stacked bars"
+		],
+		"rtl": "flip"
+	},
+	"0xe043": {
+		"names": ["icon-scatter-plot"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "scatter plot"],
+		"rtl": "flip"
+	},
+	"0xe044": {
+		"names": ["icon-spill"],
+		"groups": ["objects"],
+		"tags": ["spill", "hazard"],
+		"rtl": "flip"
+	},
+	"0xe045": {
+		"names": ["icon-fire"],
+		"groups": ["objects", "things"],
+		"tags": ["fire", "hazard"],
+		"rtl": "flip"
+	},
+	"0xe046": {
+		"names": ["icon-stratification"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "stratification"],
+		"rtl": "flip"
+	},
+	"0xe047": {
+		"names": ["icon-relationship"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "relationship"],
+		"rtl": "flip"
+	},
+	"0xe048": {
+		"names": ["icon-margin-decomposition"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "margin decomposition"],
+		"rtl": "flip"
+	},
+	"0xe049": {
+		"names": ["icon-control-group"],
+		"groups": ["objects", "arrows", "people"],
+		"tags": ["control group", "people"],
+		"rtl": "flip"
+	},
+	"0xe04a": {
+		"names": ["icon-comparison-chart"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "comparison", "multiple"],
+		"rtl": "flip"
+	},
+	"0xe04b": {
+		"names": ["icon-responsible-area"],
+		"groups": ["objects", "people"],
+		"tags": ["responsible area", "person", "people"],
+		"rtl": "flip"
+	},
+	"0xe04c": {
+		"names": ["icon-increase"],
+		"groups": ["arrows"],
+		"tags": ["increase", "arrow", "up", "raise"],
+		"rtl": "flip"
+	},
+	"0xe04d": {
+		"names": ["icon-decrease"],
+		"groups": ["arrows"],
+		"tags": ["decrease", "arrow", "down", "lower"],
+		"rtl": "flip"
+	},
+	"0xe04e": {
+		"names": ["icon-current-stock"],
+		"groups": ["objects"],
+		"tags": ["current stock", "diamond"],
+		"rtl": "flip"
+	},
+	"0xe04f": {
+		"names": ["icon-expedite"],
+		"groups": ["calendar", "actions", "arrows"],
+		"tags": ["arrow left", "calendar", "accelerate"],
+		"rtl": "flip"
+	},
+	"0xe050": {
+		"names": ["icon-postpone"],
+		"groups": ["calendar", "actions", "arrows"],
+		"tags": ["arrow right", "calendar", "postpone", "delay"],
+		"rtl": "flip"
+	},
+	"0xe051": {
+		"names": ["icon-approved"],
+		"groups": ["actions", "status"],
+		"tags": ["checkmark", "approved", "tick", "ok", "checked"],
+		"rtl": "flip"
+	},
+	"0xe052": {
+		"names": ["icon-partially-delivered"],
+		"groups": ["actions", "status"],
+		"tags": ["partially delivered"],
+		"rtl": "flip"
+	},
+	"0xe053": {
+		"names": ["icon-line-bar-chart"],
+		"groups": ["charts"],
+		"tags": ["analytics", "chart", "display", "data", "line bar chart"],
+		"rtl": "flip"
+	},
+	"0xe054": {
+		"names": ["icon-expand-all"],
+		"groups": ["actions", "arrows"],
+		"tags": ["expand all", "plus"],
+		"rtl": "flip"
+	},
+	"0xe055": {
+		"names": ["icon-submission"],
+		"groups": ["actions", "money"],
+		"tags": ["money", "submission", "exclamation", "circle"],
+		"rtl": "flip"
+	},
+	"0xe056": {
+		"names": ["icon-change-request"],
+		"groups": ["actions"],
+		"tags": [
+			"change",
+			"request",
+			"pencil",
+			"file",
+			"edit",
+			"write",
+			"new",
+			"pen"
+		],
+		"rtl": "flip"
+	},
+	"0xe057": {
+		"names": ["icon-column-unselected"],
+		"groups": ["actions", "status"],
+		"tags": ["column", "unselected", "circle"],
+		"rtl": "flip"
+	},
+	"0xe058": {
+		"names": ["icon-column-selected"],
+		"groups": ["actions", "status"],
+		"tags": ["column", "selected", "circle"],
+		"rtl": "flip"
+	},
+	"0xe059": {
+		"names": ["icon-row-unselected"],
+		"groups": ["actions", "status"],
+		"tags": ["row", "unselected", "circle"],
+		"rtl": "flip"
+	},
+	"0xe05a": {
+		"names": ["icon-row-selected"],
+		"groups": ["actions", "status"],
+		"tags": ["row", "selected", "circle"],
+		"rtl": "flip"
+	},
+	"0xe05b": {
+		"names": ["icon-stock-requirements"],
+		"groups": ["objects", "arrows"],
+		"tags": ["arrows", "stock", "requirement"],
+		"rtl": "flip"
+	},
+	"0xe05c": {
+		"names": ["icon-gender-male-and-female"],
+		"groups": ["objects", "people"],
+		"tags": ["gender", "male and female"],
+		"rtl": "flip"
+	},
+	"0xe05d": {
+		"names": ["icon-icon-marital-status"],
+		"groups": ["objects", "people"],
+		"tags": ["marital status", "wedding rings", "married", "not married"],
+		"rtl": "flip"
+	},
+	"0xe05e": {
+		"names": ["icon-birthday"],
+		"groups": ["objects", "things", "people"],
+		"tags": ["birthday", "cake", "candles", "birth date"],
+		"rtl": "flip"
+	},
+	"0xe05f": {
+		"names": ["icon-classification"],
+		"groups": ["objects"],
+		"tags": ["classification", "ranking"],
+		"rtl": "flip"
+	},
+	"0xe060": {
+		"names": ["icon-marked-for-deletion"],
+		"groups": ["actions", "time", "time", "status"],
+		"tags": [
+			"clock",
+			"time",
+			"bin",
+			"trash can",
+			"rubbish",
+			"deletion",
+			"marked",
+			"to be deleted"
+		],
+		"rtl": "flip"
+	},
+	"0xe061": {
+		"names": ["icon-bullet-chart"],
+		"groups": ["charts"],
+		"tags": ["bullet chart", "analytics", "chart", "display", "data"],
+		"rtl": "flip"
+	},
+	"0xe062": {
+		"names": ["icon-remove-filter"],
+		"groups": ["objects", "actions"],
+		"tags": [
+			"filter",
+			"organise",
+			"aggregate",
+			"data",
+			"clear",
+			"delete",
+			"remove",
+			"cancel"
+		],
+		"rtl": "flip"
+	},
+	"0xe063": {
+		"names": ["icon-bank-account"],
+		"groups": ["money"],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe064": {
+		"names": ["icon-savings-account"],
+		"groups": ["objects", "money"],
+		"tags": ["money", "bank", "account", "savings"],
+		"rtl": "flip"
+	},
+	"0xe065": {
+		"names": ["icon-debit-card"],
+		"groups": ["objects", "money"],
+		"tags": [
+			"money",
+			"bank",
+			"account",
+			"savings",
+			"debit",
+			"payment",
+			"buy",
+			"purchase",
+			"shopping"
+		],
+		"rtl": "flip"
+	},
+	"0xe066": {
+		"names": ["icon-vip-customer"],
+		"groups": ["actions", "money", "people"],
+		"tags": [
+			"person",
+			"individual",
+			"user",
+			"customer",
+			"human",
+			"circle",
+			"profile",
+			"me",
+			"favorite",
+			"favourite",
+			"star"
+		],
+		"rtl": "flip"
+	},
+	"0xe067": {
+		"names": ["icon-undesirable-customer"],
+		"groups": ["actions", "money", "people"],
+		"tags": [
+			"person",
+			"individual",
+			"user",
+			"customer",
+			"human",
+			"circle",
+			"profile",
+			"me",
+			"star",
+			"unfavourite",
+			"remove"
+		],
+		"rtl": "flip"
+	},
+	"0xe068": {
+		"names": ["icon-answered-change-request"],
+		"groups": ["objects", "callout"],
+		"tags": ["request", "bubble"],
+		"rtl": "flip"
+	},
+	"0xe069": {
+		"names": ["icon-collected-change-request"],
+		"groups": ["objects"],
+		"tags": ["request", "collection", "layers stacked"],
+		"rtl": "flip"
+	},
+	"0xe06a": {
+		"names": ["icon-draw-freehand"],
+		"groups": ["actions"],
+		"tags": ["draw", "shape", "create", "freehand"],
+		"rtl": "flip"
+	},
+	"0xe06b": {
+		"names": ["icon-draw-circle"],
+		"groups": ["actions"],
+		"tags": ["draw", "shape", "create", "circle"],
+		"rtl": "flip"
+	},
+	"0xe06c": {
+		"names": ["icon-completed"],
+		"groups": ["status"],
+		"tags": [
+			"status",
+			"done",
+			"completed",
+			"accept",
+			"approve",
+			"correct",
+			"checkmark",
+			"tick",
+			"affirmative"
+		],
+		"rtl": "flip"
+	},
+	"0xe06d": {
+		"names": ["icon-answered"],
+		"groups": ["callout", "status"],
+		"tags": ["answered", "bubble"],
+		"rtl": "flip"
+	},
+	"0xe06e": {
+		"names": ["icon-traffic-cone"],
+		"groups": ["objects", "transport"],
+		"tags": ["traffic", "logistics", "cone"],
+		"rtl": "flip"
+	},
+	"0xe06f": {
+		"names": ["icon-traffic-lights"],
+		"groups": ["objects", "transport"],
+		"tags": ["traffic", "logistics", "traffic lights"],
+		"rtl": "flip"
+	},
+	"0xe070": {
+		"names": ["icon-container"],
+		"groups": ["objects", "transport"],
+		"tags": ["traffic", "logistics", "container", "freight", "shipping"],
+		"rtl": "flip"
+	},
+	"0xe071": {
+		"names": ["icon-container-loading"],
+		"groups": ["objects", "transport", "status"],
+		"tags": [
+			"traffic",
+			"logistics",
+			"container",
+			"freight",
+			"shipping",
+			"load"
+		],
+		"rtl": "flip"
+	},
+	"0xe072": {
+		"names": ["icon-traffic-jam"],
+		"groups": ["transport"],
+		"tags": ["traffic", "logistics", "traffic jam", "road conjestion"],
+		"rtl": "flip"
+	},
+	"0xe073": {
+		"names": ["icon-products"],
+		"groups": ["objects"],
+		"tags": [
+			"product",
+			"commodity",
+			"goods",
+			"stock",
+			"merchandise",
+			"package"
+		],
+		"rtl": "flip"
+	},
+	"0xe074": {
+		"names": ["icon-sidepanel"],
+		"groups": ["objects"],
+		"tags": ["screen", "split", "two", "area", "split app", "side panel"],
+		"rtl": "flip"
+	},
+	"0xe075": {
+		"names": ["icon-split-screen"],
+		"groups": ["objects", "actions"],
+		"tags": [
+			"screen",
+			"split",
+			"two",
+			"area",
+			"split app",
+			"top bottom",
+			"horizontal split",
+			"analytics"
+		],
+		"rtl": "flip"
+	},
+	"0xe076": {
+		"names": ["icon-truck-driver-2"],
+		"groups": ["transport", "people"],
+		"tags": ["vehicle", "truck", "driver"],
+		"rtl": "flip"
+	},
+	"0xe077": {
+		"names": ["icon-keep-segment"],
+		"groups": ["actions"],
+		"tags": ["segments", "data", "marketing", "campaign", "keep", "approve"],
+		"rtl": "flip"
+	},
+	"0xe078": {
+		"names": ["icon-exclude-segment"],
+		"groups": ["actions"],
+		"tags": [
+			"segments",
+			"data",
+			"marketing",
+			"campaign",
+			"clear",
+			"approve",
+			"remove",
+			"cancel",
+			"x"
+		],
+		"rtl": "flip"
+	},
+	"0xe079": {
+		"names": ["icon-separate-segments"],
+		"groups": ["actions"],
+		"tags": ["segments", "data", "marketing", "campaign", "separate"],
+		"rtl": "flip"
+	},
+	"0xe07a": {
+		"names": ["icon-distribute-segments"],
+		"groups": ["actions"],
+		"tags": ["segments", "data", "marketing", "campaign", "distribute"],
+		"rtl": "flip"
+	},
+	"0xe07b": {
+		"names": ["icon-next-open-item"],
+		"groups": ["objects", "arrows"],
+		"tags": ["navigation", "jump", "shift", "next", "arrow", "queue"],
+		"rtl": "flip"
+	},
+	"0xe07c": {
+		"names": ["icon-where-used"],
+		"groups": ["objects"],
+		"tags": ["arrows", "directions", "move", "forward"],
+		"rtl": "flip"
+	},
+	"0xe07d": {
+		"names": ["icon-outbound-delivery"],
+		"groups": ["arrows", "transport"],
+		"tags": ["arrow", "truck", "move", "delivery", "forward"],
+		"rtl": "flip"
+	},
+	"0xe07e": {
+		"names": ["icon-outbound-delivery-inactive"],
+		"groups": ["objects", "arrows", "status"],
+		"tags": ["circle", "stroke", "dot", "status"],
+		"rtl": "flip"
+	},
+	"0xe07f": {
+		"names": ["icon-outbound-delivery-active"],
+		"groups": ["objects", "arrows", "status"],
+		"tags": ["circle", "fill", "dot", "status"],
+		"rtl": "flip"
+	},
+	"0xe080": {
+		"names": ["icon-target"],
+		"groups": ["objects", "arrows"],
+		"tags": ["arrow", "download", "down", "import"],
+		"rtl": "flip"
+	},
+	"0xe081": {
+		"names": ["icon-source"],
+		"groups": ["objects", "arrows"],
+		"tags": ["arrow", "upload", "up", "export"],
+		"rtl": "flip"
+	},
+	"0xe082": {
+		"names": ["icon-material"],
+		"groups": ["objects"],
+		"tags": ["screw", "data", "material"],
+		"rtl": "flip"
+	},
+	"0xe083": {
+		"names": ["icon-due-date"],
+		"groups": ["calendar", "arrows"],
+		"tags": ["arrow", "calendar", "due", "date", "appointment", "next"],
+		"rtl": "flip"
+	},
+	"0xe084": {
+		"names": ["icon-overdue"],
+		"groups": ["calendar", "things", "arrows"],
+		"tags": ["arrow", "calendar", "due", "date", "appointment", "previous"],
+		"rtl": "flip"
+	},
+	"0xe085": {
+		"names": ["icon-set-as-default"],
+		"groups": ["actions"],
+		"tags": ["tick", "setting", "yes"],
+		"rtl": "flip"
+	},
+	"0xe086": {
+		"names": ["icon-face-very-bad"],
+		"groups": ["actions"],
+		"tags": ["smiley", "emotions", "emoji", "bad"],
+		"rtl": "flip"
+	},
+	"0xe087": {
+		"names": ["icon-face-bad"],
+		"groups": ["actions"],
+		"tags": ["smiley", "emotions", "emoji", "sad"],
+		"rtl": "flip"
+	},
+	"0xe088": {
+		"names": ["icon-face-skeptical"],
+		"groups": ["actions"],
+		"tags": ["smiley", "emotions", "emoji", "skeptical"],
+		"rtl": "flip"
+	},
+	"0xe089": {
+		"names": ["icon-face-neutral"],
+		"groups": ["actions"],
+		"tags": ["smiley", "emotions", "emoji", "neutral"],
+		"rtl": "flip"
+	},
+	"0xe08a": {
+		"names": ["icon-face-astonished"],
+		"groups": ["actions"],
+		"tags": ["smiley", "emotions", "emoji", "astonished"],
+		"rtl": "flip"
+	},
+	"0xe08b": {
+		"names": ["icon-face-happy"],
+		"groups": ["actions", "status"],
+		"tags": ["face", "emoticon", "smile", "positive", "round"],
+		"rtl": "flip"
+	},
+	"0xe08c": {
+		"names": ["icon-face-very-happy"],
+		"groups": ["actions", "status"],
+		"tags": ["face", "emoticon", "smile", "positive", "round"],
+		"rtl": "flip"
+	},
+	"0xe08d": {
+		"names": ["icon-face-awful"],
+		"groups": ["actions", "status"],
+		"tags": ["face", "sad", "emoticon", "negative", "round"],
+		"rtl": "flip"
+	},
+	"0xe08e": {
+		"names": ["icon-face-devastated"],
+		"groups": ["actions", "status"],
+		"tags": ["face", "sad", "emoticon", "negative", "round"],
+		"rtl": "flip"
+	},
+	"0xe08f": {
+		"names": ["icon-face-okey-dokey"],
+		"groups": ["actions", "status"],
+		"tags": ["face", "emoticon", "smile", "blink", "positive", "round"],
+		"rtl": "flip"
+	},
+	"0xe090": {
+		"names": ["icon-alarm"],
+		"groups": ["objects", "actions"],
+		"tags": ["attention", "bell", "noise"],
+		"rtl": "flip"
+	},
+	"0xe091": {
+		"names": ["icon-activate"],
+		"groups": ["actions"],
+		"tags": ["magic", "wand", "select"],
+		"rtl": "flip"
+	},
+	"0xe092": {
+		"names": ["icon-segment-preview-reference-objects"],
+		"groups": ["objects"],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe093": {
+		"names": ["icon-radius"],
+		"groups": ["objects"],
+		"tags": ["plus", "add"],
+		"rtl": "flip"
+	},
+	"0xe094": {
+		"names": ["icon-polygon-black"],
+		"groups": ["objects", "actions"],
+		"tags": ["geometric body", "measurement", "geometry"],
+		"rtl": "flip"
+	},
+	"0xe095": {
+		"names": ["icon-polygon-white"],
+		"groups": ["objects", "actions"],
+		"tags": ["geometric body", "measurement", "geometry"],
+		"rtl": "flip"
+	},
+	"0xe096": {
+		"names": ["icon-polygon"],
+		"groups": ["objects", "actions"],
+		"tags": ["connection", "geometry", "network", "connected", "dots"],
+		"rtl": "flip"
+	},
+	"0xe097": {
+		"names": ["icon-no-filter"],
+		"groups": ["objects", "actions"],
+		"tags": ["remove", "minus", "no"],
+		"rtl": "flip"
+	},
+	"0xe098": {
+		"names": ["icon-grip"],
+		"groups": ["objects"],
+		"tags": ["pattern", "move", "grab", "take", "drag"],
+		"rtl": "flip"
+	},
+	"0xe099": {
+		"names": ["icon-add-component"],
+		"groups": ["objects", "actions"],
+		"tags": ["plus", "add"],
+		"rtl": "flip"
+	},
+	"0xe09a": {
+		"names": ["icon-water"],
+		"groups": ["objects"],
+		"tags": ["drop", "oil", "energy"],
+		"rtl": "flip"
+	},
+	"0xe09b": {
+		"names": ["icon-gas"],
+		"groups": ["objects"],
+		"tags": ["fire", "flame", "energy"],
+		"rtl": "flip"
+	},
+	"0xe09c": {
+		"names": ["icon-liquid"],
+		"groups": ["objects"],
+		"tags": ["drop", "water", "energy"],
+		"rtl": "flip"
+	},
+	"0xe09d": {
+		"names": ["icon-gas-2"],
+		"groups": ["objects"],
+		"tags": ["fire", "flame", "energy", "cooker"],
+		"rtl": "flip"
+	},
+	"0xe09e": {
+		"names": ["icon-water-2"],
+		"groups": ["objects"],
+		"tags": ["drop", "tap", "oil", "control", "close", "open"],
+		"rtl": "flip"
+	},
+	"0xe09f": {
+		"names": ["icon-operator"],
+		"groups": ["people"],
+		"tags": [
+			"person",
+			"individual",
+			"user",
+			"customer",
+			"human",
+			"me",
+			"security",
+			"helmet"
+		],
+		"rtl": "flip"
+	},
+	"0xe0a0": {
+		"names": ["icon-target-filter"],
+		"groups": ["objects", "actions"],
+		"tags": ["round", "circle", "cross", "segment"],
+		"rtl": "flip"
+	},
+	"0xe0a1": {
+		"names": ["icon-equipment"],
+		"groups": ["objects"],
+		"tags": ["pump", "engine", "pipeline", "generator"],
+		"rtl": "flip"
+	},
+	"0xe0a2": {
+		"names": ["icon-gis-layer"],
+		"groups": ["objects", "transport"],
+		"tags": ["world", "round", "map"],
+		"rtl": "flip"
+	},
+	"0xe0a3": {
+		"names": ["icon-section"],
+		"groups": ["objects", "medical", "people"],
+		"tags": ["people", "person", "group", "team", "selection", "part"],
+		"rtl": "flip"
+	},
+	"0xe0a4": {
+		"names": ["icon-kohorte"],
+		"groups": ["objects", "medical", "people"],
+		"tags": [
+			"people",
+			"person",
+			"group",
+			"team",
+			"selection",
+			"part",
+			"data",
+			"folder",
+			"index",
+			"card"
+		],
+		"rtl": "flip"
+	},
+	"0xe0a5": {
+		"names": ["icon-female"],
+		"groups": ["people"],
+		"tags": ["cross", "gender"],
+		"rtl": "flip"
+	},
+	"0xe0a6": {
+		"names": ["icon-male"],
+		"groups": ["people"],
+		"tags": ["arrow", "gender"],
+		"rtl": "flip"
+	},
+	"0xe0a7": {
+		"names": ["icon-model"],
+		"groups": ["objects"],
+		"tags": ["pump", "engine", "pipeline", "generator", "sheet", "dataset"],
+		"rtl": "flip"
+	},
+	"0xe0a8": {
+		"names": ["icon-hourglass"],
+		"groups": ["objects", "actions", "time"],
+		"tags": ["sand", "diabolo"],
+		"rtl": "flip"
+	},
+	"0xe0a9": {
+		"names": ["icon-plain-grid-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0aa": {
+		"names": ["icon-top-panel-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0ab": {
+		"names": ["icon-2x1-grid-layout"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe0ac": {
+		"names": ["icon-1x2-grid-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0ad": {
+		"names": ["icon-side-panel-left-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0ae": {
+		"names": ["icon-2x2-grid-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0af": {
+		"names": ["icon-inverse-t-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0b0": {
+		"names": ["icon-t-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0b1": {
+		"names": ["icon-top-side-panel-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0b2": {
+		"names": ["icon-side-top-panel-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0b3": {
+		"names": ["icon-4x4-grid-layout"],
+		"groups": ["objects", "actions"],
+		"tags": ["square", "grid", "division", "partition", "split"],
+		"rtl": "flip"
+	},
+	"0xe0b4": {
+		"names": ["icon-add-point"],
+		"groups": ["actions"],
+		"tags": ["plus", "circle", "ball"],
+		"rtl": "flip"
+	},
+	"0xe0b5": {
+		"names": ["icon-add-polyline"],
+		"groups": ["actions"],
+		"tags": ["plus", "share", "price"],
+		"rtl": "flip"
+	},
+	"0xe0b6": {
+		"names": ["icon-add-polygone"],
+		"groups": ["actions"],
+		"tags": ["plus", "layer", "window", "rectangle"],
+		"rtl": "flip"
+	},
+	"0xe0b7": {
+		"names": ["icon-email-send-delayed"],
+		"groups": ["actions", "time", "status"],
+		"tags": ["clock", "timer", "time", "watch"],
+		"rtl": "flip"
+	},
+	"0xe0b8": {
+		"names": ["icon-email-not-opened"],
+		"groups": ["actions", "time", "status"],
+		"tags": ["warning", "exclamation mark", "reminder", "attention"],
+		"rtl": "flip"
+	},
+	"0xe0b9": {
+		"names": ["icon-link-not-clicked"],
+		"groups": ["actions", "time", "status"],
+		"tags": ["warning", "exclamation mark", "reminder", "attention"],
+		"rtl": "flip"
+	},
+	"0xe0ba": {
+		"names": ["icon-sms-send-delayed"],
+		"groups": ["actions", "callout", "time", "status"],
+		"tags": [
+			"clock",
+			"timer",
+			"time",
+			"watch",
+			"speech bubble",
+			"conversation",
+			"chat"
+		],
+		"rtl": "flip"
+	},
+	"0xe0bb": {
+		"names": ["icon-ab-testing"],
+		"groups": ["actions"],
+		"tags": ["mail", "duplicate", "store"],
+		"rtl": "flip"
+	},
+	"0xe0bc": {
+		"names": ["icon-tv"],
+		"groups": ["objects", "devices"],
+		"tags": [
+			"screen",
+			"monitor",
+			"technical device",
+			"hi-fi",
+			"smart-tv",
+			"broadcast"
+		],
+		"rtl": "flip"
+	},
+	"0xe0bd": {
+		"names": ["icon-radio"],
+		"groups": ["objects", "devices"],
+		"tags": ["technical device", "sound", "tuner"],
+		"rtl": "flip"
+	},
+	"0xe0be": {
+		"names": ["icon-outdoor"],
+		"groups": ["places"],
+		"tags": ["hills", "mountains", "sun", "tree", "image", "landscape"],
+		"rtl": "flip"
+	},
+	"0xe0bf": {
+		"names": ["icon-event"],
+		"groups": ["people"],
+		"tags": [
+			"cinema",
+			"keynote",
+			"party",
+			"workshop",
+			"team",
+			"beamer",
+			"announcement"
+		],
+		"rtl": "flip"
+	},
+	"0xe0c0": {
+		"names": ["icon-paid-search"],
+		"groups": ["money"],
+		"tags": ["money", "finder", "lens", "glass", "finance", "deposit"],
+		"rtl": "flip"
+	},
+	"0xe0c1": {
+		"names": ["icon-display-ads"],
+		"groups": ["objects"],
+		"tags": [
+			"screen",
+			"monitor",
+			"website",
+			"information",
+			"layout",
+			"screendesign",
+			"shopping",
+			"online",
+			"social media",
+			"facebook"
+		],
+		"rtl": "flip"
+	},
+	"0xe0c2": {
+		"names": ["icon-call-center"],
+		"groups": ["people"],
+		"tags": [
+			"person",
+			"individual",
+			"user",
+			"customer",
+			"human",
+			"headset",
+			"phones",
+			"microphone"
+		],
+		"rtl": "flip"
+	},
+	"0xe0c3": {
+		"names": ["icon-social"],
+		"groups": ["people"],
+		"tags": [
+			"people",
+			"person",
+			"group",
+			"team",
+			"conversation",
+			"chat",
+			"bubble",
+			"workshop"
+		],
+		"rtl": "flip"
+	},
+	"0xe0c4": {
+		"names": ["icon-event2"],
+		"groups": ["calendar", "time", "status"],
+		"tags": ["calendar", "time", "clock", "watch", "date"],
+		"rtl": "flip"
+	},
+	"0xe0c5": {
+		"names": ["icon-official-service-group"],
+		"groups": ["objects"],
+		"tags": [
+			"bank",
+			"account",
+			"data",
+			"storage",
+			"folder",
+			"finance",
+			"money"
+		],
+		"rtl": "flip"
+	},
+	"0xe0c6": {
+		"names": ["icon-time-deposit"],
+		"groups": ["time", "money"],
+		"tags": ["clock", "timer", "money", "bag"],
+		"rtl": "flip"
+	},
+	"0xe0c7": {
+		"names": ["icon-early-widthdrawal-for-time-deposits"],
+		"groups": ["time", "money"],
+		"tags": ["clock", "timer", "money", "bag"],
+		"rtl": "flip"
+	},
+	"0xe0c8": {
+		"names": ["icon-aggregated-view"],
+		"groups": ["actions"],
+		"tags": ["sort", "order", "tree view"],
+		"rtl": "flip"
+	},
+	"0xe0c9": {
+		"names": ["icon-detailed-view"],
+		"groups": ["actions"],
+		"tags": ["sort", "order", "tree view"],
+		"rtl": "flip"
+	},
+	"0xe0ca": {
+		"names": ["icon-rescheduling"],
+		"groups": ["actions", "arrows"],
+		"tags": ["change", "replacement", "placement", "select", "switch", "move"],
+		"rtl": "flip"
+	},
+	"0xe0cb": {
+		"names": ["icon-resequencing"],
+		"groups": ["actions", "arrows"],
+		"tags": ["change", "replacement", "placement", "select", "switch", "move"],
+		"rtl": "flip"
+	},
+	"0xe0cc": {
+		"names": ["icon-movement-warning"],
+		"groups": ["arrows"],
+		"tags": ["alert", "attention", "square"],
+		"rtl": "flip"
+	},
+	"0xe0cd": {
+		"names": ["icon-multiple-warnings"],
+		"groups": ["status"],
+		"tags": ["alert", "attention", "square"],
+		"rtl": "flip"
+	},
+	"0xe0ce": {
+		"names": ["icon-box-truck"],
+		"groups": ["transport"],
+		"tags": ["load", "cargo", "freight", "street", "vehicle"],
+		"rtl": "flip"
+	},
+	"0xe0cf": {
+		"names": ["icon-box-truck-empty"],
+		"groups": ["transport"],
+		"tags": ["load", "cargo", "freight", "street", "vehicle"],
+		"rtl": "flip"
+	},
+	"0xe0d0": {
+		"names": ["icon-tractor"],
+		"groups": ["transport"],
+		"tags": ["load", "cargo", "freight", "street", "vehicle"],
+		"rtl": "flip"
+	},
+	"0xe0d1": {
+		"names": ["icon-driver"],
+		"groups": ["transport", "people"],
+		"tags": ["people", "target-user", "driver"],
+		"rtl": "flip"
+	},
+	"0xe0d2": {
+		"names": ["icon-driver-warning"],
+		"groups": ["transport", "people"],
+		"tags": ["people", "target-user", "warning", "attention", "driver"],
+		"rtl": "flip"
+	},
+	"0xe0d3": {
+		"names": ["icon-overlap"],
+		"groups": ["objects"],
+		"tags": ["object", "overlap", "window"],
+		"rtl": "flip"
+	},
+	"0xe0d4": {
+		"names": ["icon-expand-overlap"],
+		"groups": ["objects", "arrows"],
+		"tags": ["object", "overlap", "window", "hierarchy", "expand"],
+		"rtl": "flip"
+	},
+	"0xe0d5": {
+		"names": ["icon-collapse-overlap"],
+		"groups": ["objects", "arrows"],
+		"tags": ["object", "overlap", "wiondow", "hierarchy", "expand"],
+		"rtl": "flip"
+	},
+	"0xe0d6": {
+		"names": ["icon-utilization"],
+		"groups": ["actions"],
+		"tags": ["utilization", "evaluation", "usage"],
+		"rtl": "flip"
+	},
+	"0xe0d7": {
+		"names": ["icon-expand-utilization"],
+		"groups": ["actions", "arrows"],
+		"tags": ["utilization", "evaluation", "usage", "expand", "show"],
+		"rtl": "flip"
+	},
+	"0xe0d8": {
+		"names": ["icon-collapse-utilization"],
+		"groups": ["actions", "arrows"],
+		"tags": ["utilization", "evaluation", "usage", "collapse", "hide"],
+		"rtl": "flip"
+	},
+	"0xe0d9": {
+		"names": ["icon-trailer"],
+		"groups": ["transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"cargo",
+			"freight",
+			"trailer",
+			"street",
+			"transportation"
+		],
+		"rtl": "flip"
+	},
+	"0xe0da": {
+		"names": ["icon-container-closed"],
+		"groups": ["transport"],
+		"tags": ["container", "cargo", "freight"],
+		"rtl": "flip"
+	},
+	"0xe0db": {
+		"names": ["icon-railcar"],
+		"groups": ["transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"cargo",
+			"freight",
+			"railway",
+			"transportation"
+		],
+		"rtl": "flip"
+	},
+	"0xe0dc": {
+		"names": ["icon-warehouse"],
+		"groups": ["transport", "places"],
+		"tags": ["building", "warehouse", "industry", "repository", "depository"],
+		"rtl": "flip"
+	},
+	"0xe0dd": {
+		"names": ["icon-goods"],
+		"groups": ["transport"],
+		"tags": ["beverage", "product", "goods"],
+		"rtl": "flip"
+	},
+	"0xe0de": {
+		"names": ["icon-ship"],
+		"groups": ["travel", "transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"cargo",
+			"freight",
+			"shipment",
+			"transportation"
+		],
+		"rtl": "flip"
+	},
+	"0xe0df": {
+		"names": ["icon-truck-driver"],
+		"groups": ["transport", "people"],
+		"tags": ["vehicle", "truck", "driver"],
+		"rtl": "flip"
+	},
+	"0xe0e0": {
+		"names": ["icon-return-delivery"],
+		"groups": ["arrows", "transport"],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe0e1": {
+		"names": ["icon-return-order"],
+		"groups": ["arrows", "money"],
+		"tags": ["document", "order", "return", "money", "receipt"],
+		"rtl": "flip"
+	},
+	"0xe0e2": {
+		"names": ["icon-contract"],
+		"groups": ["money"],
+		"tags": ["document", "order", "contract", "deal", "agreement"],
+		"rtl": "flip"
+	},
+	"0xe0e3": {
+		"names": ["icon-business-partner"],
+		"groups": ["people"],
+		"tags": ["people", "partner", "collaboration", "business-partner"],
+		"rtl": "flip"
+	},
+	"0xe0e4": {
+		"names": ["icon-business-partner-verified"],
+		"groups": ["people"],
+		"tags": [
+			"people",
+			"partner",
+			"collaboration",
+			"business-partner",
+			"verification"
+		],
+		"rtl": "flip"
+	},
+	"0xe0e5": {
+		"names": ["icon-business-partner-anonymous"],
+		"groups": ["people"],
+		"tags": [
+			"people",
+			"partner",
+			"collaboration",
+			"business-partner",
+			"anonymous"
+		],
+		"rtl": "flip"
+	},
+	"0xe0e6": {
+		"names": ["icon-business-partner-self-identified"],
+		"groups": ["people"],
+		"tags": [
+			"people",
+			"partner",
+			"collaboration",
+			"business-partner",
+			"favorite"
+		],
+		"rtl": "flip"
+	},
+	"0xe0e7": {
+		"names": ["icon-money-withdrawal"],
+		"groups": [],
+		"tags": ["money", "withdrawal", "moneybag"],
+		"rtl": "flip"
+	},
+	"0xe0e8": {
+		"names": ["icon-truck-load"],
+		"groups": ["arrows", "transport"],
+		"tags": ["vehicle", "load", "cargo", "freight", "truck", "street"],
+		"rtl": "flip"
+	},
+	"0xe0e9": {
+		"names": ["icon-truck-unload"],
+		"groups": ["arrows", "transport"],
+		"tags": [
+			"vehicle",
+			"unload",
+			"deposit",
+			"cargo",
+			"freight",
+			"truck",
+			"street"
+		],
+		"rtl": "flip"
+	},
+	"0xe0ea": {
+		"names": ["icon-truck-load-unload"],
+		"groups": ["arrows", "transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"unload",
+			"cargo",
+			"freight",
+			"truck",
+			"street"
+		],
+		"rtl": "flip"
+	},
+	"0xe0eb": {
+		"names": ["icon-pharmacy"],
+		"groups": ["medical"],
+		"tags": ["health", "medicine", "pharmacy", "making"],
+		"rtl": "flip"
+	},
+	"0xe0ec": {
+		"names": ["icon-medicine-syrup"],
+		"groups": ["medical"],
+		"tags": ["health", "medicine", "pharmacy", "medication", "syrup"],
+		"rtl": "flip"
+	},
+	"0xe0ed": {
+		"names": ["icon-reminder"],
+		"groups": ["objects", "medical", "time"],
+		"tags": ["time", "reminder", "alarm", "timer"],
+		"rtl": "flip"
+	},
+	"0xe0ee": {
+		"names": ["icon-medicine-pill"],
+		"groups": ["medical"],
+		"tags": ["health", "medicine", "pharmacy", "medication", "pills"],
+		"rtl": "flip"
+	},
+	"0xe0ef": {
+		"names": ["icon-medicine-ointment"],
+		"groups": ["medical"],
+		"tags": [
+			"health",
+			"medicine",
+			"pharmacy",
+			"medication",
+			"ointment",
+			"salve"
+		],
+		"rtl": "flip"
+	},
+	"0xe0f0": {
+		"names": ["icon-medicine-drops"],
+		"groups": ["medical"],
+		"tags": [
+			"health",
+			"medicine",
+			"pharmacy",
+			"medication",
+			"drops",
+			"tincture"
+		],
+		"rtl": "flip"
+	},
+	"0xe0f1": {
+		"names": ["icon-blood-test"],
+		"groups": ["medical"],
+		"tags": ["health", "blood", "test", "examination", "diagnose"],
+		"rtl": "flip"
+	},
+	"0xe0f2": {
+		"names": ["icon-temperature"],
+		"groups": ["medical"],
+		"tags": ["health", "temperature", "test", "examination", "diagnose"],
+		"rtl": "flip"
+	},
+	"0xe0f3": {
+		"names": ["icon-medicine-inhaler"],
+		"groups": ["medical"],
+		"tags": ["health", "medicine", "pharmacy", "medication", "inhaler"],
+		"rtl": "flip"
+	},
+	"0xe0f4": {
+		"names": ["icon-foot-steps"],
+		"groups": ["medical"],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe0f5": {
+		"names": ["icon-weight"],
+		"groups": ["medical"],
+		"tags": ["health", "weight", "test", "examination", "diagnose"],
+		"rtl": "flip"
+	},
+	"0xe0f6": {
+		"names": ["icon-health-tracking"],
+		"groups": ["medical"],
+		"tags": [
+			"health",
+			"heart",
+			"test",
+			"examination",
+			"diagnose",
+			"heart-rate",
+			"activity-tracker"
+		],
+		"rtl": "flip"
+	},
+	"0xe0f7": {
+		"names": ["icon-blood-pressure"],
+		"groups": ["medical"],
+		"tags": [
+			"health",
+			"blood",
+			"blood-pressure",
+			"test",
+			"examination",
+			"diagnose"
+		],
+		"rtl": "flip"
+	},
+	"0xe0f8": {
+		"names": ["icon-immunization"],
+		"groups": ["medical"],
+		"tags": [
+			"health",
+			"medicine",
+			"pharmacy",
+			"immunization",
+			"vaccination",
+			"injection"
+		],
+		"rtl": "flip"
+	},
+	"0xe0f9": {
+		"names": ["icon-allergies"],
+		"groups": ["medical", "people"],
+		"tags": ["health", "allergies", "diagnose"],
+		"rtl": "flip"
+	},
+	"0xe0fa": {
+		"names": ["icon-rescheduling2"],
+		"groups": ["arrows"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"rescheduling",
+			"time",
+			"sequence",
+			"steps"
+		],
+		"rtl": "flip"
+	},
+	"0xe0fb": {
+		"names": ["icon-resequencing2"],
+		"groups": ["arrows"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"resequencing",
+			"time",
+			"sequence",
+			"steps"
+		],
+		"rtl": "flip"
+	},
+	"0xe0fc": {
+		"names": ["icon-no-time-change"],
+		"groups": ["arrows"],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe0fd": {
+		"names": ["icon-time-change"],
+		"groups": ["arrows"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"change-time",
+			"time",
+			"sequence",
+			"steps"
+		],
+		"rtl": "flip"
+	},
+	"0xe0fe": {
+		"names": ["icon-smart-matcher"],
+		"groups": [],
+		"tags": ["people", "match", "agreement"],
+		"rtl": "flip"
+	},
+	"0xe0ff": {
+		"names": ["icon-3D"],
+		"groups": ["objects"],
+		"tags": ["object", "cube", "3d", "box"],
+		"rtl": "flip"
+	},
+	"0xe100": {
+		"names": ["icon-parallel-sequence"],
+		"groups": ["objects", "actions", "status"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"process",
+			"parallel",
+			"sequence",
+			"flow"
+		],
+		"rtl": "flip"
+	},
+	"0xe101": {
+		"names": ["icon-alternative-sequence"],
+		"groups": ["objects", "actions", "status"],
+		"tags": [
+			"planning",
+			"scheduling",
+			"process",
+			"alternative-sequence",
+			"flow",
+			"decision"
+		],
+		"rtl": "flip"
+	},
+	"0xe102": {
+		"names": ["icon-main-sequence"],
+		"groups": ["objects", "actions", "status"],
+		"tags": ["planning", "scheduling", "process", "main-sequence", "flow"],
+		"rtl": "flip"
+	},
+	"0xe103": {
+		"names": ["icon-refinery"],
+		"groups": ["transport", "places"],
+		"tags": ["building", "factory", "warehouse", "industry", "production"],
+		"rtl": "flip"
+	},
+	"0xe104": {
+		"names": ["icon-terminal"],
+		"groups": ["transport", "places"],
+		"tags": [
+			"building",
+			"terminal",
+			"collecting-point",
+			"reloading-point",
+			"transshipment"
+		],
+		"rtl": "flip"
+	},
+	"0xe105": {
+		"names": ["icon-vessel"],
+		"groups": ["transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"cargo",
+			"freight",
+			"shipment",
+			"vessel",
+			"transportation"
+		],
+		"rtl": "flip"
+	},
+	"0xe106": {
+		"names": ["icon-barge"],
+		"groups": ["transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"cargo",
+			"freight",
+			"shipment",
+			"barge",
+			"transportation"
+		],
+		"rtl": "flip"
+	},
+	"0xe107": {
+		"names": ["icon-road"],
+		"groups": ["transport"],
+		"tags": [
+			"vehicle",
+			"load",
+			"cargo",
+			"freight",
+			"truck",
+			"street",
+			"transportation"
+		],
+		"rtl": "flip"
+	},
+	"0xe108": {
+		"names": ["icon-pipeline"],
+		"groups": ["transport"],
+		"tags": ["pipeline", "channel", "tube", "transportation"],
+		"rtl": "flip"
+	},
+	"0xe109": {
+		"names": ["icon-delay"],
+		"groups": ["time", "status", "documents"],
+		"tags": ["time", "reminder", "timer", "delay", "warning"],
+		"rtl": "flip"
+	},
+	"0xe10a": {
+		"names": ["icon-legal-section"],
+		"groups": ["objects", "documents"],
+		"tags": ["document", "legal", "section"],
+		"rtl": "flip"
+	},
+	"0xe10b": {
+		"names": ["icon-causes"],
+		"groups": ["actions", "arrows"],
+		"tags": ["analytics", "evaluation", "cog-wheel", "cause"],
+		"rtl": "flip"
+	},
+	"0xe10c": {
+		"names": ["icon-effects"],
+		"groups": ["actions", "arrows"],
+		"tags": ["analytics", "evaluation", "cog-wheel", "effects"],
+		"rtl": "flip"
+	},
+	"0xe10d": {
+		"names": ["icon-shared-by-me"],
+		"groups": ["arrows", "people"],
+		"tags": ["people", "team", "group", "shared", "deliver"],
+		"rtl": "flip"
+	},
+	"0xe10e": {
+		"names": ["icon-shared-with-me"],
+		"groups": ["arrows", "people"],
+		"tags": ["people", "team", "group", "shared", "received"],
+		"rtl": "flip"
+	},
+	"0xe10f": {
+		"names": ["icon-main-milestone"],
+		"groups": ["objects"],
+		"tags": ["planning", "goal", "milestone", "steps"],
+		"rtl": "flip"
+	},
+	"0xe110": {
+		"names": ["icon-indicator-groups"],
+		"groups": ["time", "documents", "folder"],
+		"tags": ["indicator", "groups", "status", "time", "folder"],
+		"rtl": "flip"
+	},
+	"0xe111": {
+		"names": ["icon-alert-groups"],
+		"groups": ["status", "documents", "folder"],
+		"tags": ["indicator", "groups", "alert", "status", "folder"],
+		"rtl": "flip"
+	},
+	"0xe112": {
+		"names": ["icon-function-alert"],
+		"groups": ["actions", "status"],
+		"tags": ["status", "function", "alert"],
+		"rtl": "flip"
+	},
+	"0xe113": {
+		"names": ["icon-function-hierarchy"],
+		"groups": ["actions", "status"],
+		"tags": ["status", "function", "hierarchy"],
+		"rtl": "flip"
+	},
+	"0xe114": {
+		"names": ["icon-rfid"],
+		"groups": ["objects", "things", "devices"],
+		"tags": ["device", "location", "indicator", "alert"],
+		"rtl": "flip"
+	},
+	"0xe115": {
+		"names": ["icon-input"],
+		"groups": ["actions", "arrows", "status"],
+		"tags": ["actions", "arrow", "status"],
+		"rtl": "flip"
+	},
+	"0xe116": {
+		"names": ["icon-software-item"],
+		"groups": ["objects"],
+		"tags": ["actions", "arrow", "status"],
+		"rtl": "flip"
+	},
+	"0xe117": {
+		"names": ["icon-product-view"],
+		"groups": ["objects"],
+		"tags": ["actions", "arrow", "status"],
+		"rtl": "flip"
+	},
+	"0xe118": {
+		"names": ["icon-software-item-variant"],
+		"groups": ["objects"],
+		"tags": ["actions", "arrow", "status"],
+		"rtl": "flip"
+	},
+	"0xe119": {
+		"names": ["icon-lighthouse"],
+		"groups": ["objects", "things", "status", "places"],
+		"tags": [
+			"status",
+			"building",
+			"things",
+			"important",
+			"highlight",
+			"app",
+			"light"
+		],
+		"rtl": "flip"
+	},
+	"0xe11a": {
+		"names": ["icon-demand-unit"],
+		"groups": ["objects", "things", "people"],
+		"tags": ["people", "person", "circle"],
+		"rtl": "flip"
+	},
+	"0xe11b": {
+		"names": ["icon-fma-management"],
+		"groups": ["status"],
+		"tags": ["alert", "status", "light", "bulb"],
+		"rtl": "flip"
+	},
+	"0xe11c": {
+		"names": ["icon-fma-validation"],
+		"groups": ["status"],
+		"tags": ["flowchart", "tree", "hierarchy", "class"],
+		"rtl": "flip"
+	},
+	"0xe11d": {
+		"names": ["icon-fma-analytics"],
+		"groups": ["charts", "status"],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe11e": {
+		"names": ["icon-class"],
+		"groups": ["actions", "charts", "tables"],
+		"tags": ["alert", "status", "chart", "pie"],
+		"rtl": "flip"
+	},
+	"0xe11f": {
+		"names": ["icon-overview"],
+		"groups": ["objects", "travel", "things", "time", "arrows", "time"],
+		"tags": ["eye", "arrow", "rewind", "0verlook"],
+		"rtl": "flip"
+	},
+	"0xe120": {
+		"names": ["icon-production"],
+		"groups": [
+			"objects",
+			"travel",
+			"things",
+			"actions",
+			"devices",
+			"time",
+			"transport",
+			"status"
+		],
+		"tags": ["machine", "production"],
+		"rtl": "flip"
+	},
+	"0xe121": {
+		"names": ["icon-subclass"],
+		"groups": ["charts", "tables"],
+		"tags": ["flowchart", "tree", "hierarchy", "class"],
+		"rtl": "flip"
+	},
+	"0xe122": {
+		"names": ["icon-variant-configuration"],
+		"groups": ["objects", "actions"],
+		"tags": ["component", "variant", "configuration", "product"],
+		"rtl": "flip"
+	},
+	"0xe123": { "names": ["icon-sum"], "groups": [], "tags": [], "rtl": "flip" },
+	"0xe124": {
+		"names": ["icon-add-outside"],
+		"groups": [
+			"objects",
+			"things",
+			"actions",
+			"charts",
+			"clipboards",
+			"tables",
+			"places",
+			"documents",
+			"folder"
+		],
+		"tags": ["component", "outside", "add", "product"],
+		"rtl": "flip"
+	},
+	"0xe125": {
+		"names": ["icon-compressor"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas", "product"],
+		"rtl": "flip"
+	},
+	"0xe126": {
+		"names": ["icon-dehydrator"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas", "product"],
+		"rtl": "flip"
+	},
+	"0xe127": {
+		"names": ["icon-heater-treater"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas", "product"],
+		"rtl": "flip"
+	},
+	"0xe128": {
+		"names": ["icon-pump"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas", "product"],
+		"rtl": "flip"
+	},
+	"0xe129": {
+		"names": ["icon-separator"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas", "product"],
+		"rtl": "flip"
+	},
+	"0xe12a": {
+		"names": ["icon-well-completion"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas"],
+		"rtl": "flip"
+	},
+	"0xe12b": {
+		"names": ["icon-well"],
+		"groups": ["objects"],
+		"tags": ["component", "oil", "gas"],
+		"rtl": "flip"
+	},
+	"0xe12c": {
+		"names": ["icon-meter-chained"],
+		"groups": ["objects"],
+		"tags": ["component", "chain"],
+		"rtl": "flip"
+	},
+	"0xe12d": {
+		"names": ["icon-cluster-chained"],
+		"groups": ["objects"],
+		"tags": ["component", "chain"],
+		"rtl": "flip"
+	},
+	"0xe12e": {
+		"names": ["icon-tank-chained"],
+		"groups": ["objects"],
+		"tags": ["component", "chain"],
+		"rtl": "flip"
+	},
+	"0xe12f": {
+		"names": ["icon-empty-trailer"],
+		"groups": ["travel", "transport"],
+		"tags": ["travel", "transport"],
+		"rtl": "flip"
+	},
+	"0xe130": {
+		"names": ["icon-door"],
+		"groups": ["objects", "places"],
+		"tags": ["objects", "places"],
+		"rtl": "flip"
+	},
+	"0xe131": {
+		"names": ["icon-loading-point"],
+		"groups": ["objects", "transport", "status"],
+		"tags": ["objects", "transport", "status"],
+		"rtl": "flip"
+	},
+	"0xe132": {
+		"names": ["icon-stock-warehouse"],
+		"groups": ["transport", "places"],
+		"tags": ["transport", "places"],
+		"rtl": "flip"
+	},
+	"0xe133": {
+		"names": ["icon-gate"],
+		"groups": ["objects", "things", "transport", "places"],
+		"tags": ["objects", "things", "transport", "places"],
+		"rtl": "flip"
+	},
+	"0xe134": {
+		"names": ["icon-timeseries-waterfall-chart"],
+		"groups": ["charts", "time", "status"],
+		"tags": ["charts", "time", "status"],
+		"rtl": "flip"
+	},
+	"0xe135": {
+		"names": ["icon-expand-collapse-level-2"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe136": {
+		"names": ["icon-expand-collapse-level-3"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe137": {
+		"names": ["icon-recycle"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe138": {
+		"names": ["icon-stages-warning"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe139": {
+		"names": ["icon-empty-warning"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe140": {
+		"names": ["icon-ps-text"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe141": {
+		"names": ["icon-activity"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe142": {
+		"names": ["icon-activity-element"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe143": {
+		"names": ["icon-transformer"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe144": {
+		"names": ["icon-generation"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe145": {
+		"names": ["icon-consumer"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe146": {
+		"names": ["icon-storage"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe147": {
+		"names": ["icon-circuit-breaker"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe148": { "names": ["icon-grid"], "groups": [], "tags": [], "rtl": "flip" },
+	"0xe149": {
+		"names": ["icon-applied_filter"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe14a": {
+		"names": ["icon-thumb-sideway"],
+		"groups": ["actions", "callout", "status"],
+		"tags": ["actions", "callout", "status"],
+		"rtl": "flip"
+	},
+	"0xe14b": {
+		"names": ["icon-thumb-sideway-filled"],
+		"groups": ["actions", "callout", "status"],
+		"tags": ["actions", "callout", "status"],
+		"rtl": "flip"
+	},
+	"0xe14c": {
+		"names": ["icon-thumb-up-filled"],
+		"groups": ["actions", "callout", "status"],
+		"tags": ["actions", "callout", "status"],
+		"rtl": "flip"
+	},
+	"0xe14d": {
+		"names": ["icon-thumb-down-filled"],
+		"groups": ["actions", "callout", "status"],
+		"tags": ["actions", "callout", "status"],
+		"rtl": "flip"
+	},
+	"0xe14e": {
+		"names": ["icon-multi-container"],
+		"groups": ["objects", "travel", "things", "transport", "status"],
+		"tags": ["objects", "travel", "things", "transport"],
+		"rtl": "flip"
+	},
+	"0xe14f": {
+		"names": ["icon-collaboration-manager"],
+		"groups": ["callout", "people"],
+		"tags": [
+			"callout",
+			"comment",
+			"bubble",
+			"collaboration",
+			"comment",
+			"discussion",
+			"chat",
+			"team",
+			"group",
+			"people"
+		],
+		"rtl": "flip"
+	},
+	"0xe150": {
+		"names": ["icon-network-header"],
+		"groups": ["objects", "actions", "status"],
+		"tags": [
+			"component",
+			"network",
+			"activity",
+			"project",
+			"structure",
+			"hierarchy"
+		],
+		"rtl": "flip"
+	},
+	"0xe151": {
+		"names": ["icon-late"],
+		"groups": ["objects", "actions", "time"],
+		"tags": ["component", "time", "activity", "product"],
+		"rtl": "flip"
+	},
+	"0xe152": {
+		"names": ["icon-created"],
+		"groups": ["objects", "actions", "status", "documents"],
+		"tags": ["component", "activity", "product", "created"],
+		"rtl": "flip"
+	},
+	"0xe153": {
+		"names": ["icon-dispatched-deallocate"],
+		"groups": ["objects", "actions", "status"],
+		"tags": [
+			"component",
+			"activity",
+			"product",
+			"created",
+			"dispatched",
+			"deallocate"
+		],
+		"rtl": "flip"
+	},
+	"0xe154": {
+		"names": ["icon-confirmed"],
+		"groups": ["objects", "actions", "status"],
+		"tags": ["component", "activity", "product", "confirmed"],
+		"rtl": "flip"
+	},
+	"0xe155": {
+		"names": ["icon-unfirmed"],
+		"groups": ["objects", "actions", "status"],
+		"tags": ["component", "activity", "product", "unfirmed", "status"],
+		"rtl": "flip"
+	},
+	"0xe156": {
+		"names": ["icon-firmed"],
+		"groups": ["objects", "actions", "status"],
+		"tags": ["component", "activity", "product", "firmed", "status"],
+		"rtl": "flip"
+	},
+	"0xe157": {
+		"names": ["icon-unsaved-changes"],
+		"groups": [],
+		"tags": [],
+		"rtl": "flip"
+	},
+	"0xe158": {
+		"names": ["icon-project-definition-2"],
+		"groups": ["objects", "actions", "status", "documents"],
+		"tags": [
+			"component",
+			"activity",
+			"product",
+			"project",
+			"changes",
+			"status"
+		],
+		"rtl": "flip"
+	},
+	"0xe159": {
+		"names": ["icon-asterisk"],
+		"groups": ["things", "actions", "time", "tables", "text"],
+		"tags": ["things", "actions", "time", "table", "text"],
+		"rtl": "flip"
+	},
+	"0xe15a": {
+		"names": ["icon-equal"],
+		"groups": ["actions", "time", "tables", "text"],
+		"tags": ["actions", "time", "table", "text"],
+		"rtl": "flip"
+	},
+	"0xe15b": {
+		"names": ["icon-not-equal"],
+		"groups": ["actions", "time", "tables", "text"],
+		"tags": ["actions", "time", "table", "text"],
+		"rtl": "flip"
+	},
+	"0xe15c": {
+		"names": ["icon-fixed-cell"],
+		"groups": ["objects", "things", "actions", "status"],
+		"tags": ["actions", "things", "objects", "status"],
+		"rtl": "flip"
+	},
+	"0xe15d": {
+		"names": ["icon-partially-fixed-cell"],
+		"groups": ["objects", "things", "actions", "status"],
+		"tags": ["actions", "things", "objects", "status"],
+		"rtl": "flip"
+	},
+	"0xe15e": {
+		"names": ["icon-stripes-pattern"],
+		"groups": ["calendar", "actions", "charts", "time", "status"],
+		"tags": ["calendar", "actions", "charts", "time", "status"],
+		"rtl": "flip"
+	},
+	"0xe15f": {
+		"names": ["icon-feature-dictionary"],
+		"groups": ["objects", "things", "documents"],
+		"tags": ["objects", "things", "documents"],
+		"rtl": "flip"
+	},
+	"0xe160": {
+		"names": ["icon-variant-planning"],
+		"groups": ["objects", "things", "documents"],
+		"tags": ["objects", "things", "documents"],
+		"rtl": "flip"
+	},
+	"0xe161": {
+		"names": ["icon-requirement-model"],
+		"groups": ["objects", "things", "documents"],
+		"tags": ["objects", "things", "documents"],
+		"rtl": "flip"
+	},
+	"0xe162": {
+		"names": ["icon-bottle"],
+		"groups": ["objects", "medical", "things"],
+		"tags": ["objects", "things", "medical"],
+		"rtl": "flip"
+	},
+	"0xe163": {
+		"names": ["icon-bottle-cap"],
+		"groups": ["objects", "medical", "things"],
+		"tags": ["objects", "things", "medical"],
+		"rtl": "flip"
+	},
+	"0xe164": {
+		"names": ["icon-pallet"],
+		"groups": ["objects", "medical", "things"],
+		"tags": ["objects", "things", "medical"],
+		"rtl": "flip"
+	},
+	"0xe165": {
+		"names": ["icon-foil"],
+		"groups": ["objects", "medical", "things"],
+		"tags": ["objects", "things", "medical"],
+		"rtl": "flip"
+	},
+	"0xe166": {
+		"names": ["icon-tray"],
+		"groups": ["objects", "medical", "things"],
+		"tags": ["objects", "things", "medical"],
+		"rtl": "flip"
+	},
+	"0xe167": {
+		"names": ["icon-unknown-dependency"],
+		"groups": ["objects", "status"],
+		"tags": [
+			"status",
+			"things",
+			"relationship",
+			"configuration",
+			"node",
+			"dependency",
+			"unknown",
+			"class node"
+		],
+		"rtl": "flip"
+	},
+	"0xe168": {
+		"names": ["icon-layer"],
+		"groups": ["objects", "things"],
+		"tags": ["things", "objects"],
+		"rtl": "flip"
+	},
+	"0xe169": {
+		"names": ["icon-move-folder"],
+		"groups": ["actions", "arrows", "folder"],
+		"tags": ["actions", "arrows", "folder"],
+		"rtl": "flip"
+	},
+	"0xe16a": {
+		"names": ["icon-remove-folder"],
+		"groups": ["actions", "folder"],
+		"tags": ["actions", "folder"],
+		"rtl": "flip"
+	},
+	"0xe16b": {
+		"names": ["icon-match-case"],
+		"groups": ["actions", "text"],
+		"tags": ["actions", "text"],
+		"rtl": "flip"
+	},
+	"0xe16c": {
+		"names": ["icon-match-whole-word"],
+		"groups": ["actions", "text"],
+		"tags": ["actions", "text"],
+		"rtl": "flip"
+	},
+	"0xe16d": {
+		"names": ["icon-remove-total"],
+		"groups": ["actions"],
+		"tags": ["actions"],
+		"rtl": "flip"
+	},
+	"0xe16e": {
+		"names": ["icon-after-total"],
+		"groups": ["actions", "arrows"],
+		"tags": ["actions", "arrows"],
+		"rtl": "flip"
+	},
+	"0xe16f": {
+		"names": ["icon-before-total"],
+		"groups": ["actions", "arrows"],
+		"tags": ["actions", "arrows"],
+		"rtl": "flip"
+	},
+	"0xe170": {
+		"names": ["icon-workbook-filter"],
+		"groups": ["actions", "documents", "folder"],
+		"tags": ["actions", "documents", "folder"],
+		"rtl": "flip"
+	},
+	"0xe171": {
+		"names": ["icon-update-filter"],
+		"groups": ["actions", "arrows"],
+		"tags": ["actions", "arrows"],
+		"rtl": "flip"
+	},
+	"0xe172": {
+		"names": ["icon-cell-lock"],
+		"groups": ["objects", "things", "actions", "status"],
+		"tags": ["objects", "things", "actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe173": {
+		"names": ["icon-monitor-assembly-sequence"],
+		"groups": ["status"],
+		"tags": ["time", "status"],
+		"rtl": "flip"
+	},
+	"0xe174": {
+		"names": ["icon-monitor-just-in-time-calls"],
+		"groups": ["time", "status"],
+		"tags": ["time", "status"],
+		"rtl": "flip"
+	},
+	"0xe175": {
+		"names": ["icon-manage-charging-stations"],
+		"groups": ["objects", "status"],
+		"tags": ["time", "status"],
+		"rtl": "flip"
+	},
+	"0xe176": {
+		"names": ["icon-district-heating"],
+		"groups": ["objects", "things", "status"],
+		"tags": ["objects", "status", "things"],
+		"rtl": "flip"
+	},
+	"0xe177": {
+		"names": ["icon-producer-switch"],
+		"groups": ["objects", "things", "actions", "status"],
+		"tags": ["things", "status", "objects"],
+		"rtl": "flip"
+	},
+	"0xe178": {
+		"names": ["icon-consumer-switch"],
+		"groups": ["objects", "things", "actions", "status"],
+		"tags": ["things", "status", "objects"],
+		"rtl": "flip"
+	},
+	"0xe179": {
+		"names": ["icon-storage-switch"],
+		"groups": ["objects", "things", "actions", "status"],
+		"tags": ["things", "status", "objects"],
+		"rtl": "flip"
+	},
+	"0xe17a": {
+		"names": ["icon-repeatable"],
+		"groups": ["actions", "status"],
+		"tags": ["things", "status", "actions"],
+		"rtl": "flip"
+	},
+	"0xe17b": {
+		"names": ["icon-max-container"],
+		"groups": ["travel", "things", "devices", "transport", "status"],
+		"tags": ["travel", "things", "transport", "status"],
+		"rtl": "flip"
+	},
+	"0xe17c": {
+		"names": ["icon-max-interval"],
+		"groups": ["calendar", "time", "arrows"],
+		"tags": ["calendar", "time", "arrows"],
+		"rtl": "flip"
+	},
+	"0xe17d": {
+		"names": ["icon-min-interval"],
+		"groups": ["calendar", "time", "arrows"],
+		"tags": ["calendar", "time", "arrows"],
+		"rtl": "flip"
+	},
+	"0xe17e": {
+		"names": ["icon-cross-order"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe17f": {
+		"names": ["icon-empty-order"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe180": {
+		"names": ["icon-cross-sequence"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe181": {
+		"names": ["icon-empty-sequence"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe182": {
+		"names": ["icon-cross-union"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe183": {
+		"names": ["icon-empty-union"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe184": {
+		"names": ["icon-cross-target"],
+		"groups": ["actions", "status"],
+		"tags": ["actions", "status"],
+		"rtl": "flip"
+	},
+	"0xe185": {
+		"names": ["icon-non-stackable"],
+		"groups": ["actions", "status"],
+		"tags": ["things", "status"],
+		"rtl": "flip"
+	},
+	"0xe186": {
+		"names": ["icon-back-to-search"],
+		"groups": ["actions", "status", "arrows"],
+		"tags": ["search", "arrow", "back"],
+		"rtl": "flip"
+	},
+	"0xe187": {
+		"names": ["icon-business-objects-folder"],
+		"groups": ["objects", "things", "documents", "folder"],
+		"tags": ["folder", "objects", "chart"],
+		"rtl": "flip"
+	},
+	"0xe188": {
+		"names": ["icon-map-navigation"],
+		"groups": ["objects", "things", "arrows"],
+		"tags": ["navigation", "arrow", "map", "direction"],
+		"rtl": "flip"
+	},
+	"0xe189": {
+		"names": ["icon-staging"],
+		"groups": ["objects", "things", "status", "transport"],
+		"tags": ["wearhouse", "stage", "staging", "products", "loading", "layer", "transport"],
+		"rtl": "flip"
+	},
+	"0xe18a": {
+		"names": ["icon-dangerous-goods"],
+		"groups": ["objects", "things", "status", "transport"],
+		"tags": ["danger", "goods", "alert", "warning", "status", "transport"],
+		"rtl": "flip"
+	},
+	"0xe18b": {
+		"names": ["icon-configurable-product"],
+		"groups": ["objects", "things", "status", "actions"],
+		"tags": ["product", "settings", "configure", "configurable"],
+		"rtl": "flip"
+	},
+	"0xe18c": {
+		"names": ["icon-entry-configurable-product"],
+		"groups": ["objects", "things", "status", "actions"],
+		"tags": ["product", "arrows", "configure", "configurable", "entry"],
+		"rtl": "flip"
+	}
+}
+
+

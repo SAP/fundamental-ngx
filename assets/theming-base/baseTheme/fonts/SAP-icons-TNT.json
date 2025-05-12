@@ -1,0 +1,1456 @@
+{
+	"0xe000": {
+		"names": ["technicalsystem"],
+		"groups": ["technical"],
+		"tags": ["system", "hexagon"],
+		"rtl": "flip"
+	},
+	"0xe001": {
+		"names": ["systemjava"],
+		"groups": ["technical"],
+		"tags": ["system", "java"],
+		"rtl": "flip"
+	},
+	"0xe002": {
+		"names": ["systemabap"],
+		"groups": ["technical"],
+		"tags": ["abap", "system"],
+		"rtl": "flip"
+	},
+	"0xe003": {
+		"names": ["systemrecommendations"],
+		"groups": ["technical"],
+		"tags": ["system", "star", "favorite"],
+		"rtl": "flip"
+	},
+	"0xe004": {
+		"names": ["system"],
+		"groups": ["technical"],
+		"tags": ["system"],
+		"rtl": "flip"
+	},
+	"0xe005": {
+		"names": ["systemtrex"],
+		"groups": ["technical"],
+		"tags": ["system", "trex", "settings"],
+		"rtl": "flip"
+	},
+	"0xe006": {
+		"names": ["systemtracks"],
+		"groups": ["technical", "arrows"],
+		"tags": ["system", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe007": {
+		"names": ["technicalscenario"],
+		"groups": ["technical"],
+		"tags": ["hexagon", "connection", "scenario"],
+		"rtl": "flip"
+	},
+	"0xe008": {
+		"names": ["technicalinstance"],
+		"groups": ["technical"],
+		"tags": ["hexagon", "connection", "instance"],
+		"rtl": "flip"
+	},
+	"0xe009": {
+		"names": ["throughput-backlog"],
+		"groups": ["arrows", "charts"],
+		"tags": ["arrow", "bar", "chart", "up"],
+		"rtl": "flip"
+	},
+	"0xe00a": {
+		"names": ["batch-processing"],
+		"groups": ["documents", "objects"],
+		"tags": ["process", "document", "settings", "double", "multiple"],
+		"rtl": "flip"
+	},
+	"0xe00b": {
+		"names": ["database-consistency"],
+		"groups": ["technical", "objects"],
+		"tags": ["data", "indicator", "warning"],
+		"rtl": "flip"
+	},
+	"0xe00c": {
+		"names": ["intermediate-message"],
+		"groups": ["actions", "objects", "arrows"],
+		"tags": [
+			"email",
+			"e-mail",
+			"electronic mail",
+			"envelope",
+			"mail",
+			"correspondence",
+			"message",
+			"arrow"
+		],
+		"rtl": "flip"
+	},
+	"0xe00d": {
+		"names": ["exceptions"],
+		"groups": ["status"],
+		"tags": ["warning", "status", "exclamation"],
+		"rtl": "flip"
+	},
+	"0xe00e": {
+		"names": ["system-HANA"],
+		"groups": ["technical"],
+		"tags": ["hana", "system", "chip"],
+		"rtl": "flip"
+	},
+	"0xe00f": {
+		"names": ["python"],
+		"groups": ["technical"],
+		"tags": ["system", "python"],
+		"rtl": "flip"
+	},
+	"0xe010": {
+		"names": ["raise-fault"],
+		"groups": ["actions", "status"],
+		"tags": ["lightning", "flash", "status"],
+		"rtl": "flip"
+	},
+	"0xe011": {
+		"names": ["code1"],
+		"groups": ["technical", "actions", "text"],
+		"tags": ["source", "code", "develop", "write"],
+		"rtl": "flip"
+	},
+	"0xe012": {
+		"names": ["code2"],
+		"groups": ["technical", "actions", "text"],
+		"tags": ["source", "code", "develop", "write"],
+		"rtl": "flip"
+	},
+	"0xe013": {
+		"names": ["spike-arrest"],
+		"groups": ["charts", "objects"],
+		"tags": [
+			"chart",
+			"line",
+			"performance",
+			"cancel",
+			"data",
+			"analytics",
+			"x"
+		],
+		"rtl": "flip"
+	},
+	"0xe014": {
+		"names": ["verify-API"],
+		"groups": ["actions"],
+		"tags": ["wrench", "question mark", "status", "tool"],
+		"rtl": "flip"
+	},
+	"0xe015": {
+		"names": ["user"],
+		"groups": ["people"],
+		"tags": [
+			"person",
+			"individual",
+			"user",
+			"customer",
+			"human",
+			"profile",
+			"me"
+		],
+		"rtl": "flip"
+	},
+	"0xe016": {
+		"names": ["note"],
+		"groups": ["actions", "text"],
+		"tags": ["notes", "draft", "text", "write", "letter"],
+		"rtl": "flip"
+	},
+	"0xe017": {
+		"names": ["throwing-message"],
+		"groups": ["actions", "objects"],
+		"tags": [
+			"envelope",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"mail",
+			"correspondence",
+			"throwing"
+		],
+		"rtl": "flip"
+	},
+	"0xe018": {
+		"names": ["catching-message"],
+		"groups": ["actions", "objects"],
+		"tags": [
+			"envelope",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"mail",
+			"correspondence",
+			"catching"
+		],
+		"rtl": "flip"
+	},
+	"0xe019": {
+		"names": ["start-event"],
+		"groups": ["objects", "status"],
+		"tags": ["circle", "start", "event", "display", "data", "task"],
+		"rtl": "flip"
+	},
+	"0xe01a": {
+		"names": ["end-event"],
+		"groups": ["objects", "status"],
+		"tags": ["circle", "end", "event", "display", "data", "task"],
+		"rtl": "flip"
+	},
+	"0xe01b": {
+		"names": ["gateway"],
+		"groups": ["objects"],
+		"tags": ["shape", "indicator", "check"],
+		"rtl": "flip"
+	},
+	"0xe01c": {
+		"names": ["sub-process-marker"],
+		"groups": ["actions"],
+		"tags": ["add", "square", "shape", "process", "plus", "marker"],
+		"rtl": "flip"
+	},
+	"0xe01d": {
+		"names": ["ad-hoc-marker"],
+		"groups": ["actions"],
+		"tags": ["tilde", "marker"],
+		"rtl": "flip"
+	},
+	"0xe01e": {
+		"names": ["manual-task"],
+		"groups": ["actions"],
+		"tags": ["activity", "manual", "task", "process", "hand"],
+		"rtl": "flip"
+	},
+	"0xe01f": {
+		"names": ["send-task"],
+		"groups": ["actions", "objects"],
+		"tags": [
+			"envelope",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"mail",
+			"correspondence",
+			"catching",
+			"send"
+		],
+		"rtl": "flip"
+	},
+	"0xe020": {
+		"names": ["receive-task"],
+		"groups": ["actions", "objects"],
+		"tags": [
+			"envelope",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"mail",
+			"correspondence",
+			"catching",
+			"receive"
+		],
+		"rtl": "flip"
+	},
+	"0xe021": {
+		"names": ["script-task"],
+		"groups": ["actions", "objects", "text"],
+		"tags": ["script", "activity", "task", "process"],
+		"rtl": "flip"
+	},
+	"0xe022": {
+		"names": ["marquee"],
+		"groups": ["actions", "objects"],
+		"tags": ["mark", "select", "lines", "dashed line"],
+		"rtl": "flip"
+	},
+	"0xe023": {
+		"names": ["data-input-arrow"],
+		"groups": ["arrows"],
+		"tags": ["out", "arrow", "data", "arrow right", "filled"],
+		"rtl": "flip"
+	},
+	"0xe024": {
+		"names": ["data-output-arrow"],
+		"groups": ["arrows"],
+		"tags": ["out", "arrow", "data", "arrow right", "empty"],
+		"rtl": "flip"
+	},
+	"0xe025": {
+		"names": ["more"],
+		"groups": ["actions", "arrows"],
+		"tags": ["dropdown", "list", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe026": {
+		"names": ["pattern"],
+		"groups": ["actions", "objects"],
+		"tags": ["squares", "shape", "check"],
+		"rtl": "flip"
+	},
+	"0xe027": {
+		"names": ["task"],
+		"groups": ["actions", "objects"],
+		"tags": ["task", "steps", "project", "shape"],
+		"rtl": "flip"
+	},
+	"0xe028": {
+		"names": ["arrow"],
+		"groups": ["arrows"],
+		"tags": ["arrow up", "direction", "up", "right"],
+		"rtl": "flip"
+	},
+	"0xe029": {
+		"names": ["data"],
+		"groups": ["documents"],
+		"tags": ["document", "page", "file", "attachment", "blank", "new"],
+		"rtl": "flip"
+	},
+	"0xe02a": {
+		"names": ["data-store"],
+		"groups": ["objects"],
+		"tags": ["data", "store", "storage", "files", "barrel", "cylinder"],
+		"rtl": "flip"
+	},
+	"0xe02b": {
+		"names": ["pool"],
+		"groups": ["actions", "objects"],
+		"tags": ["collect", "double", "pool", "lanes"],
+		"rtl": "flip"
+	},
+	"0xe02c": {
+		"names": ["swimlane"],
+		"groups": ["actions", "objects"],
+		"tags": ["collect", "single", "pool", "lane"],
+		"rtl": "flip"
+	},
+	"0xe02d": {
+		"names": ["select"],
+		"groups": ["actions", "arrows"],
+		"tags": [
+			"arrow",
+			"selection",
+			"select",
+			"cursor",
+			"arrow",
+			"pointer",
+			"mouse",
+			"filled"
+		],
+		"rtl": "flip"
+	},
+	"0xe02e": {
+		"names": ["cursor"],
+		"groups": ["actions", "arrows"],
+		"tags": [
+			"arrow",
+			"selection",
+			"select",
+			"cursor",
+			"arrow",
+			"pointer",
+			"mouse"
+		],
+		"rtl": "flip"
+	},
+	"0xe02f": {
+		"names": ["api"],
+		"groups": ["technical"],
+		"tags": ["api", "program", "application"],
+		"rtl": "flip"
+	},
+	"0xe030": {
+		"names": ["o-data"],
+		"groups": ["technical"],
+		"tags": ["o data", "data", "protocol"],
+		"rtl": "flip"
+	},
+	"0xe031": {
+		"names": ["java"],
+		"groups": ["technical"],
+		"tags": ["java", "coffee"],
+		"rtl": "flip"
+	},
+	"0xe032": {
+		"names": ["value-mapping"],
+		"groups": ["objects"],
+		"tags": ["value", "exchange"],
+		"rtl": "flip"
+	},
+	"0xe033": {
+		"names": ["terminate-end-event"],
+		"groups": ["objects", "status"],
+		"tags": ["circle", "end", "event", "terminate", "data", "task"],
+		"rtl": "flip"
+	},
+	"0xe034": {
+		"names": ["parallel-gateway"],
+		"groups": ["objects"],
+		"tags": ["shape", "indicator", "add", "check"],
+		"rtl": "flip"
+	},
+	"0xe035": {
+		"names": ["exclusive-gateway"],
+		"groups": ["objects"],
+		"tags": ["shape", "indicator", "cancel", "check"],
+		"rtl": "flip"
+	},
+	"0xe036": {
+		"names": ["service-task"],
+		"groups": ["actions", "objects"],
+		"tags": ["service", "task", "setting", "configuration", "customize"],
+		"rtl": "flip"
+	},
+	"0xe037": {
+		"names": ["workflow-editor"],
+		"groups": ["objects"],
+		"tags": ["connection", "flow", "workflow", "square", "circle", "lines"],
+		"rtl": "flip"
+	},
+	"0xe038": {
+		"names": ["boundary-interrupting"],
+		"groups": ["objects"],
+		"tags": ["indicator", "clock", "event", "time", "boundary"],
+		"rtl": "flip"
+	},
+	"0xe039": {
+		"names": ["boundary-non-interrupting"],
+		"groups": ["objects"],
+		"tags": ["indicator", "clock", "event", "time", "boundary"],
+		"rtl": "flip"
+	},
+	"0xe03a": {
+		"names": ["block"],
+		"groups": ["objects"],
+		"tags": [
+			"cube",
+			"square",
+			"modular",
+			"system",
+			"collection",
+			"box",
+			"object"
+		],
+		"rtl": "flip"
+	},
+	"0xe03b": {
+		"names": ["constrain-block"],
+		"groups": ["objects"],
+		"tags": ["block", "cube", "braces", "brackets", "analysis", "model"],
+		"rtl": "flip"
+	},
+	"0xe03c": {
+		"names": ["actor"],
+		"groups": ["people"],
+		"tags": ["person", "individual", "user", "human"],
+		"rtl": "flip"
+	},
+	"0xe03d": {
+		"names": ["instance-specification"],
+		"groups": ["objects"],
+		"tags": ["block", "brick", "model", "system", "part", "module"],
+		"rtl": "flip"
+	},
+	"0xe03e": {
+		"names": ["value-type"],
+		"groups": ["objects"],
+		"tags": ["slider", "define", "system", "panel", "variant", "control"],
+		"rtl": "flip"
+	},
+	"0xe03f": {
+		"names": ["interface-block"],
+		"groups": ["objects"],
+		"tags": ["hexagon", "code", "design", "port"],
+		"rtl": "flip"
+	},
+	"0xe040": {
+		"names": ["unit"],
+		"groups": ["objects"],
+		"tags": ["measure", "ruler", "quantity", "magnitude", "education"],
+		"rtl": "flip"
+	},
+	"0xe041": {
+		"names": ["signal"],
+		"groups": ["objects"],
+		"tags": ["tower", "information", "network", "radio", "wave"],
+		"rtl": "flip"
+	},
+	"0xe042": {
+		"names": ["quantity-kind"],
+		"groups": ["objects"],
+		"tags": [
+			"measure",
+			"quantity",
+			"magnitude",
+			"unit",
+			"beaker",
+			"jug",
+			"capacity"
+		],
+		"rtl": "flip"
+	},
+	"0xe043": {
+		"names": ["item-flow"],
+		"groups": ["arrow"],
+		"tags": ["flow", "association", "connector"],
+		"rtl": "flip"
+	},
+	"0xe044": {
+		"names": ["dependency"],
+		"groups": ["arrow"],
+		"tags": ["link", "interrupted", "dependent"],
+		"rtl": "flip"
+	},
+	"0xe045": {
+		"names": ["generalization"],
+		"groups": ["arrow"],
+		"tags": ["link", "general"],
+		"rtl": "flip"
+	},
+	"0xe046": {
+		"names": ["aggregation"],
+		"groups": ["arrow"],
+		"tags": ["link", "aggregate", "collect"],
+		"rtl": "flip"
+	},
+	"0xe047": {
+		"names": ["composition"],
+		"groups": ["arrow"],
+		"tags": ["link", "compose"],
+		"rtl": "flip"
+	},
+	"0xe048": {
+		"names": ["association"],
+		"groups": ["arrow"],
+		"tags": ["link", "associate"],
+		"rtl": "flip"
+	},
+	"0xe049": {
+		"names": ["port"],
+		"groups": ["object"],
+		"tags": ["external", "entity", "point", "block", "modular"],
+		"rtl": "flip"
+	},
+	"0xe04a": {
+		"names": ["proxy-port"],
+		"groups": ["object"],
+		"tags": [
+			"external",
+			"entity",
+			"point",
+			"block",
+			"modular",
+			"proxy",
+			"system",
+			"boundary"
+		],
+		"rtl": "flip"
+	},
+	"0xe04b": {
+		"names": ["full-port"],
+		"groups": ["object"],
+		"tags": [
+			"external",
+			"entity",
+			"point",
+			"block",
+			"modular",
+			"full",
+			"system",
+			"boundary"
+		],
+		"rtl": "flip"
+	},
+	"0xe04c": {
+		"names": ["operations"],
+		"groups": ["object"],
+		"tags": ["setting", "arrow", "circle", "development"],
+		"rtl": "flip"
+	},
+	"0xe04d": {
+		"names": ["constrains"],
+		"groups": ["object"],
+		"tags": ["brackets"],
+		"rtl": "flip"
+	},
+	"0xe04e": {
+		"names": ["receptions"],
+		"groups": ["object"],
+		"tags": ["arrow", "hexagon", "receive", "input", "inside"],
+		"rtl": "flip"
+	},
+	"0xe04f": {
+		"names": ["references"],
+		"groups": ["object"],
+		"tags": ["connection", "block", "relation", "connect", "influence"],
+		"rtl": "flip"
+	},
+	"0xe050": {
+		"names": ["parts"],
+		"groups": ["object"],
+		"tags": ["puzzle", "piece", "game", "module", "match"],
+		"rtl": "flip"
+	},
+	"0xe051": {
+		"names": ["flow"],
+		"groups": ["arrow"],
+		"tags": ["arrow", "direction", "cross"],
+		"rtl": "flip"
+	},
+	"0xe052": {
+		"names": ["values"],
+		"groups": ["object"],
+		"tags": ["object", "code"],
+		"rtl": "flip"
+	},
+	"0xe053": {
+		"names": ["bill-of-material"],
+		"groups": ["object"],
+		"tags": ["list", "material", "manufacture", "list", "bom"],
+		"rtl": "flip"
+	},
+	"0xe054": {
+		"names": ["document-info-recording"],
+		"groups": ["object"],
+		"tags": ["document", "link"],
+		"rtl": "flip"
+	},
+	"0xe055": {
+		"names": ["use-case-diagram"],
+		"groups": ["object"],
+		"tags": ["diagram", "oval"],
+		"rtl": "flip"
+	},
+	"0xe056": {
+		"names": ["bdd-diagram"],
+		"groups": ["object"],
+		"tags": ["diagram", "box"],
+		"rtl": "flip"
+	},
+	"0xe057": {
+		"names": ["requirement-diagram"],
+		"groups": ["object"],
+		"tags": ["diagram", "need", "note", "notepad"],
+		"rtl": "flip"
+	},
+	"0xe058": {
+		"names": ["package-diagram"],
+		"groups": ["object"],
+		"tags": ["diagram", "folder"],
+		"rtl": "flip"
+	},
+	"0xe059": {
+		"names": ["internal-block-diagram"],
+		"groups": ["object"],
+		"tags": ["diagram", "box"],
+		"rtl": "flip"
+	},
+	"0xe05a": {
+		"names": ["requirement-containment-relationship"],
+		"groups": ["object"],
+		"tags": ["diagram", "box"],
+		"rtl": "flip"
+	},
+	"0xe05b": {
+		"names": ["use-case"],
+		"groups": ["object"],
+		"tags": ["oval"],
+		"rtl": "flip"
+	},
+	"0xe05c": {
+		"names": ["use-case-extension-point"],
+		"groups": ["object"],
+		"tags": ["oval", "dots"],
+		"rtl": "flip"
+	},
+	"0xe05d": {
+		"names": ["communication-path"],
+		"groups": ["object"],
+		"tags": ["line", "diagonal"],
+		"rtl": "flip"
+	},
+	"0xe05e": {
+		"names": ["note-connection"],
+		"groups": ["object"],
+		"tags": ["line", "diagonal", "dotted"],
+		"rtl": "flip"
+	},
+	"0xe05f": {
+		"names": ["subject"],
+		"groups": ["object"],
+		"tags": ["window"],
+		"rtl": "flip"
+	},
+	"0xe060": {
+		"names": ["auto-layout"],
+		"groups": ["object"],
+		"tags": ["compose", "arrange"],
+		"rtl": "flip"
+	},
+	"0xe061": {
+		"names": ["required-interface"],
+		"groups": ["object"],
+		"tags": ["receive", "import", "input"],
+		"rtl": "flip"
+	},
+	"0xe062": {
+		"names": ["provided-interface"],
+		"groups": ["object"],
+		"tags": ["deliver", "export", "output"],
+		"rtl": "flip"
+	},
+	"0xe063": {
+		"names": ["sub-content"],
+		"groups": ["object"],
+		"tags": ["folder", "container"],
+		"rtl": "flip"
+	},
+	"0xe064": {
+		"names": ["connector"],
+		"groups": ["object"],
+		"tags": ["connect", "connection", "number"],
+		"rtl": "flip"
+	},
+	"0xe065": {
+		"names": ["local-process-call"],
+		"groups": ["action"],
+		"tags": ["window", "arrow", "call", "process", "out"],
+		"rtl": "flip"
+	},
+	"0xe066": {
+		"names": ["aggregator"],
+		"groups": ["action"],
+		"tags": ["tree", "gather", "collect", "combine", "merge"],
+		"rtl": "flip"
+	},
+	"0xe067": {
+		"names": ["splitter"],
+		"groups": ["action"],
+		"tags": ["tree", "separate", "divide"],
+		"rtl": "flip"
+	},
+	"0xe068": {
+		"names": ["converter"],
+		"groups": ["action"],
+		"tags": ["tree", "extractor", "arrow", "document", "file", "transform"],
+		"rtl": "flip"
+	},
+	"0xe069": {
+		"names": ["content-modifier"],
+		"groups": ["action"],
+		"tags": [
+			"letter",
+			"mail",
+			"pen",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"envelope"
+		],
+		"rtl": "flip"
+	},
+	"0xe06a": {
+		"names": ["message-start-event"],
+		"groups": ["objects"],
+		"tags": [
+			"mail",
+			"circle",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"envelope",
+			"mail",
+			"correspondence",
+			"receiving",
+			"sending",
+			"standard",
+			"task"
+		],
+		"rtl": "flip"
+	},
+	"0xe06b": {
+		"names": ["message-end-event"],
+		"groups": ["objects"],
+		"tags": [
+			"mail",
+			"circle",
+			"email",
+			"e-mail",
+			"electronic mail",
+			"envelope",
+			"mail",
+			"correspondence",
+			"receiving",
+			"sending",
+			"standard"
+		],
+		"rtl": "flip"
+	},
+	"0xe06c": {
+		"names": ["escalation-end-event"],
+		"groups": ["objects"],
+		"tags": ["arrow", "circle", "responsibility", "standard", "task"],
+		"rtl": "flip"
+	},
+	"0xe06d": {
+		"names": ["start-timer-event"],
+		"groups": ["objects"],
+		"tags": [
+			"clock",
+			"circle",
+			"standard",
+			"timer",
+			"span",
+			"timeout",
+			"time",
+			"schedule",
+			"task"
+		],
+		"rtl": "flip"
+	},
+	"0xe06e": {
+		"names": ["error-start-event"],
+		"groups": ["objects"],
+		"tags": ["circle", "lightning", "flash", "task"],
+		"rtl": "flip"
+	},
+	"0xe06f": {
+		"names": ["error-end-event"],
+		"groups": ["objects"],
+		"tags": ["circle", "lightning", "flash", "task"],
+		"rtl": "flip"
+	},
+	"0xe070": {
+		"names": ["content-enricher"],
+		"groups": ["action"],
+		"tags": ["square", "arrow", "box", "enhance", "merge"],
+		"rtl": "flip"
+	},
+	"0xe071": {
+		"names": ["realization"],
+		"groups": ["objects"],
+		"tags": ["sysml", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe072": {
+		"names": ["interface"],
+		"groups": ["objects"],
+		"tags": ["sysml", "i", "hexagon"],
+		"rtl": "flip"
+	},
+	"0xe073": {
+		"names": ["business-capability"],
+		"groups": ["actions"],
+		"tags": [
+			"business",
+			"architecture",
+			"enterprise",
+			"capability",
+			"pentagon"
+		],
+		"rtl": "flip"
+	},
+	"0xe074": {
+		"names": ["progress-group"],
+		"groups": ["actions"],
+		"tags": [
+			"business",
+			"architecture",
+			"enterprise",
+			"process",
+			"group",
+			"chevron",
+			"square"
+		],
+		"rtl": "flip"
+	},
+	"0xe075": {
+		"names": ["value-stream"],
+		"groups": ["actions"],
+		"tags": [
+			"business",
+			"architecture",
+			"enterprise",
+			"value",
+			"dollar",
+			"square"
+		],
+		"rtl": "flip"
+	},
+	"0xe076": {
+		"names": ["value-flow"],
+		"groups": ["actions"],
+		"tags": [
+			"business",
+			"architecture",
+			"enterprise",
+			"value",
+			"dollar",
+			"chevron"
+		],
+		"rtl": "flip"
+	},
+	"0xe077": {
+		"names": ["application"],
+		"groups": ["objects", "technical"],
+		"tags": ["app", "architecture", "enterprise", "application", "program"],
+		"rtl": "flip"
+	},
+	"0xe078": {
+		"names": ["etl-job"],
+		"groups": ["actions"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"application",
+			"etl",
+			"extract",
+			"transform",
+			"load",
+			"configuration",
+			"setting"
+		],
+		"rtl": "flip"
+	},
+	"0xe079": {
+		"names": ["business-service"],
+		"groups": ["actions"],
+		"tags": [
+			"business",
+			"enterprise",
+			"application",
+			"service",
+			"pentagon",
+			"setting",
+			"architecture"
+		],
+		"rtl": "flip"
+	},
+	"0xe07a": {
+		"names": ["application-service"],
+		"groups": ["actions"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"application",
+			"service",
+			"app",
+			"setting"
+		],
+		"rtl": "flip"
+	},
+	"0xe07b": {
+		"names": ["network-node"],
+		"groups": ["actions", "arrows"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"infrastructure",
+			"arrow",
+			"circle",
+			"node"
+		],
+		"rtl": "flip"
+	},
+	"0xe07c": {
+		"names": ["network"],
+		"groups": ["actions"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"infrastructure",
+			"circle",
+			"node",
+			"onboarding",
+			"semantic",
+			"mesh",
+			"graph",
+			"network"
+		],
+		"rtl": "flip"
+	},
+	"0xe07d": {
+		"names": ["deployment-instance"],
+		"groups": ["objects"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"infrastructure",
+			"square",
+			"setting"
+		],
+		"rtl": "flip"
+	},
+	"0xe07e": {
+		"names": ["intranet"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"infrastructure",
+			"house",
+			"world",
+			"globe"
+		],
+		"rtl": "flip"
+	},
+	"0xe07f": {
+		"names": ["mobile-network"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"infrastructure",
+			"mobile",
+			"network",
+			"tower",
+			"power",
+			"pole"
+		],
+		"rtl": "flip"
+	},
+	"0xe080": {
+		"names": ["private-cloud"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"infrastructure",
+			"cloud",
+			"lock",
+			"secure",
+			"safe"
+		],
+		"rtl": "flip"
+	},
+	"0xe081": {
+		"names": ["antenna"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "antenna", "transmit"],
+		"rtl": "flip"
+	},
+	"0xe082": {
+		"names": ["firewall"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"architecture",
+			"enterprise",
+			"firewall",
+			"brick",
+			"wall",
+			"secure",
+			"safe"
+		],
+		"rtl": "flip"
+	},
+	"0xe083": {
+		"names": ["hub"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "grid"],
+		"rtl": "flip"
+	},
+	"0xe084": {
+		"names": ["modem"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "grid", "internet", "web"],
+		"rtl": "flip"
+	},
+	"0xe085": {
+		"names": ["repeater"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "grid", "internet", "repeat"],
+		"rtl": "flip"
+	},
+	"0xe086": {
+		"names": ["router"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "grid", "internet"],
+		"rtl": "flip"
+	},
+	"0xe087": {
+		"names": ["switch"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "grid"],
+		"rtl": "flip"
+	},
+	"0xe088": {
+		"names": ["satellite"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "space"],
+		"rtl": "flip"
+	},
+	"0xe089": {
+		"names": ["system-2"],
+		"groups": ["objects", "technical"],
+		"tags": ["architecture", "enterprise", "square", "node"],
+		"rtl": "flip"
+	},
+	"0xe08a": {
+		"names": ["status-activating"],
+		"groups": ["status"],
+		"tags": ["activate", "clock", "square"],
+		"rtl": "flip"
+	},
+	"0xe08b": {
+		"names": ["status-suspended"],
+		"groups": ["status"],
+		"tags": ["suspend", "pause", "square"],
+		"rtl": "flip"
+	},
+	"0xe08c": {
+		"names": ["status-suspending"],
+		"groups": ["status"],
+		"tags": ["suspend", "pause", "square", "clock"],
+		"rtl": "flip"
+	},
+	"0xe08d": {
+		"names": ["status-terminated"],
+		"groups": ["status"],
+		"tags": ["terminate", "triangle"],
+		"rtl": "flip"
+	},
+	"0xe08e": {
+		"names": ["status-terminating"],
+		"groups": ["status"],
+		"tags": ["terminate", "triangle", "clock"],
+		"rtl": "flip"
+	},
+	"0xe08f": {
+		"names": ["solution-not-licensed"],
+		"groups": ["status"],
+		"tags": ["circle", "half", "fill", "empty", "license"],
+		"rtl": "flip"
+	},
+	"0xe090": {
+		"names": ["clear-all-mapping"],
+		"groups": ["actions"],
+		"tags": ["clear", "remove", "delete", "map", "cancel"],
+		"rtl": "flip"
+	},
+	"0xe091": {
+		"names": ["map-all-fields"],
+		"groups": ["actions"],
+		"tags": ["link", "source", "target", "text"],
+		"rtl": "flip"
+	},
+	"0xe092": {
+		"names": ["process-package"],
+		"groups": ["objects"],
+		"tags": ["package", "process", "arrow", "arrows", "chevron"],
+		"rtl": "flip"
+	},
+	"0xe093": {
+		"names": ["process-kpis"],
+		"groups": ["charts"],
+		"tags": ["process", "kpi", "chart", "bulb", "light", "lamp"],
+		"rtl": "flip"
+	},
+	"0xe094": {
+		"names": ["insights"],
+		"groups": ["charts"],
+		"tags": ["insights", "chart", "light", "bulb", "lamp"],
+		"rtl": "flip"
+	},
+	"0xe095": {
+		"names": ["escalation-boundary-interrupting"],
+		"groups": ["actions"],
+		"tags": ["diagram", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe096": {
+		"names": ["escalation-boundary-non-interrupting"],
+		"groups": ["actions"],
+		"tags": ["diagram", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe097": {
+		"names": ["escalation-throwing"],
+		"groups": ["actions"],
+		"tags": ["diagram", "arrow"],
+		"rtl": "flip"
+	},
+	"0xe098": {
+		"names": ["solution"],
+		"groups": ["objects"],
+		"tags": ["circle", "half", "fill", "empty", "enterprise", "architecture"],
+		"rtl": "flip"
+	},
+	"0xe099": {
+		"names": ["binary"],
+		"groups": ["technical"],
+		"tags": ["number", "system", "code"],
+		"rtl": "flip"
+	},
+	"0xe09a": {
+		"names": ["uuid"],
+		"groups": ["technical"],
+		"tags": ["system", "code"],
+		"rtl": "flip"
+	},
+	"0xe09b": {
+		"names": ["github"],
+		"groups": ["technical"],
+		"tags": ["system", "infrastructure", "code"],
+		"rtl": "flip"
+	},
+	"0xe09c": {
+		"names": ["robot"],
+		"groups": ["technical"],
+		"tags": ["circle", "machine"],
+		"rtl": "flip"
+	},
+	"0xe09d": {
+		"names": ["string"],
+		"groups": ["technical"],
+		"tags": ["text", "write", "system", "code"],
+		"rtl": "flip"
+	},
+	"0xe09e": {
+		"names": ["boolean"],
+		"groups": ["charts"],
+		"tags": ["checkmark", "tick", "cancel", "x", "close", "system", "code"],
+		"rtl": "flip"
+	},
+	"0xe09f": {
+		"names": ["array"],
+		"groups": ["technical"],
+		"tags": ["system", "code"],
+		"rtl": "flip"
+	},
+	"0xe101": {
+		"names": ["any"],
+		"groups": ["technical"],
+		"tags": ["circle", "system", "code"],
+		"rtl": "flip"
+	},
+	"0xe102": {
+		"names": ["integer"],
+		"groups": ["technical"],
+		"tags": ["number", "system", "code"],
+		"rtl": "flip"
+	},
+	"0xe103": {
+		"names": ["float"],
+		"groups": ["technical"],
+		"tags": ["number", "system", "code"],
+		"rtl": "flip"
+	},
+	"0xe104": {
+		"names": ["build-work-zone"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"app",
+			"architecture",
+			"enterprise",
+			"application",
+			"program",
+			"build",
+			"work",
+			"zone",
+			"logo",
+			"jam",
+			"social",
+			"collaborate",
+			"share"
+		],
+		"rtl": "flip"
+	},
+	"0xe105": {
+		"names": ["build-apps"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"appgyver",
+			"app",
+			"architecture",
+			"enterprise",
+			"application",
+			"program",
+			"build",
+			"logo"
+		],
+		"rtl": "flip"
+	},
+	"0xe106": {
+		"names": ["build-process-automation"],
+		"groups": ["objects", "technical"],
+		"tags": [
+			"app",
+			"architecture",
+			"enterprise",
+			"application",
+			"program",
+			"build",
+			"logo",
+			"workflow"
+		],
+		"rtl": "flip"
+	},
+	"0xe107": {
+		"names": ["indicator"],
+		"groups": ["status"],
+		"tags": ["process"],
+		"rtl": "flip"
+	},
+	"0xe108": {
+		"names": ["indicator-active"],
+		"groups": ["status"],
+		"tags": ["process", "active"],
+		"rtl": "flip"
+	},
+	"0xe109": {
+		"names": ["task-optional"],
+		"groups": ["status"],
+		"tags": ["process"],
+		"rtl": "flip"
+	},
+	"0xe10a": {
+		"names": ["task-done"],
+		"groups": ["status"],
+		"tags": ["process", "complete"],
+		"rtl": "flip"
+	},
+	"0xe10b": {
+		"names": ["a1-1"],
+		"groups": ["status"],
+		"tags": [
+			"ai",
+			"artificial-intelligence",
+			"chat",
+			"large-language-model",
+			"conversation",
+			"co-pilot"
+		],
+		"rtl": "flip"
+	},
+	"0xe10c": {
+		"names": ["ai-2"],
+		"groups": ["status"],
+		"tags": [
+			"ai",
+			"artificial-intelligence",
+			"chat",
+			"large-language-model",
+			"conversation",
+			"co-pilot"
+		],
+		"rtl": "flip"
+	},
+	"0xe10d": {
+		"names": ["bound-validation-rule"],
+		"groups": ["status"],
+		"tags": ["bound-validation-rule", "binding", "column"],
+		"rtl": "flip"
+	},
+	"0xe10e": {
+		"names": ["fiori-application"],
+		"groups": ["status"],
+		"tags": ["SAP-fiori", "app", "application", "tool", "integration"],
+		"rtl": "flip"
+	},
+	"0xe10f": {
+		"names": ["build-code"],
+		"groups": ["status"],
+		"tags": [
+			"app",
+			"architecture",
+			"enterprise",
+			"application",
+			"program",
+			"build",
+			"logo",
+			"ide",
+			"bas",
+			"code"
+		],
+		"rtl": "flip"
+	},
+	"0xe110": {
+		"names": ["business-application-studio"],
+		"groups": ["status"],
+		"tags": [
+			"bas",
+			"dev-space-manager",
+			"code",
+			"developer",
+			"pro-code",
+			"pro-developer",
+			"SAP-build"
+		],
+		"rtl": "flip"
+	},
+	"0xe111": {
+		"names": ["clone-from-git"],
+		"groups": ["status"],
+		"tags": [
+			"clone-project",
+			"clone",
+			"remote-repository",
+			"build-code",
+			"code",
+			"SAP-build",
+			"pro-developer",
+			"developer"
+		],
+		"rtl": "flip"
+	},
+	"0xe112": {
+		"names": ["business-accelerator"],
+		"groups": ["status"],
+		"tags": ["accelerator", "business-content", "business-accelerator"],
+		"rtl": "flip"
+	},
+	"0xe113": {
+		"names": ["ai-feature-estimator"],
+		"groups": ["objects"],
+		"tags": [
+			"calculate-ai", 
+			"calculate", 
+			"estimate-ai", 
+			"ai-cost", 
+			"ai-savings", 
+			"savings"
+		],
+		"rtl": "flip"
+	},
+		"0xe114": {
+		"names": ["service-estimator"],
+		"groups": ["objects"],
+		"tags": [
+			"calculate",  
+			"estimate", 
+			"service", 
+			"cost", 
+			"rough-estimate", 
+			"commercial-model"
+		],
+		"rtl": "flip"
+	},
+		"0xe115": {
+		"names": ["add-project"],
+		"groups": ["status"],
+		"tags": [
+			"project", 
+			"plan", 
+			"project-plan", 
+			"manage", 
+			"add"
+		],
+		"rtl": "flip"
+	},
+		"0xe116": {
+		"names": ["add-issue"],
+		"groups": ["status"],
+		"tags": [
+			"issue", 
+			"alert", 
+			"critical", 
+			"warning", 
+			"add"
+		],
+		"rtl": "flip"
+	}
+}

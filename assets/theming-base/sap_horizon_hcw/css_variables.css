@@ -1,12 +1,235 @@
 /**
 * Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 15.0.1
-* data:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "15.0.1"}, "Version": { "Build": "11.28.2.20250320152502", "Source": "11.28.2"}}
+* Theming Engine 15.0.8
+* data:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_fiori_3_hcw", "Engine": {"Name": "theming-engine", "Version": "15.0.8"}, "Version": { "Build": "11.29.3.20250417070835", "Source": "11.29.3"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "15.0.1"}, "Version": { "Build": "11.28.2.20250320152502", "Source": "11.28.2"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "15.0.1"}, "Version": { "Build": "11.28.2.20250320152502", "Source": "11.28.2"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_fiori_3_hcw", "Engine": {"Name": "theming-engine", "Version": "15.0.8"}, "Version": { "Build": "11.29.3.20250417070835", "Source": "11.29.3"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_fiori_3_hcw", "Engine": {"Name": "theming-engine", "Version": "15.0.8"}, "Version": { "Build": "11.29.3.20250417070835", "Source": "11.29.3"}};}
+@font-face {
+  font-family: 'SAP-icons';
+  src: url(../sap_horizon/fonts/SAP-icons.woff2) format('woff2'), url(../sap_horizon/fonts/SAP-icons.woff) format('woff'), url(../sap_horizon/fonts/SAP-icons.ttf) format('truetype'), local('SAP-icons');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAP-icons-TNT';
+  src: url(../sap_horizon/fonts/SAP-icons-TNT.woff2) format('woff2'), url(../sap_horizon/fonts/SAP-icons-TNT.woff) format('woff'), url(../sap_horizon/fonts/SAP-icons-TNT.ttf) format('truetype'), local('SAP-icons-TNT');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAP-icons-Business-Suite';
+  src: url(../sap_horizon/fonts/BusinessSuiteInAppSymbols.woff2) format('woff2'), url(../sap_horizon/fonts/BusinessSuiteInAppSymbols.woff) format('woff'), url(../sap_horizon/fonts/BusinessSuiteInAppSymbols.ttf) format('truetype'), local('SAP-icons-Business-Suite_woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../baseTheme/fonts/72-Regular.woff2) format('woff2'), url(../baseTheme/fonts/72-Regular.woff) format('woff'), local('72');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72full';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../baseTheme/fonts/72-Regular-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Regular-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-Bold';
+  src: url(../baseTheme/fonts/72-Bold.woff2) format('woff2'), url(../baseTheme/fonts/72-Bold.woff) format('woff'), local('72-Bold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../baseTheme/fonts/72-Bold.woff2) format('woff2'), url(../baseTheme/fonts/72-Bold.woff) format('woff'), local('72-Bold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72-Boldfull';
+  src: url(../baseTheme/fonts/72-Bold-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Bold-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72full';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../baseTheme/fonts/72-Bold-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Bold-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-Semibold';
+  src: url(../baseTheme/fonts/72-Semibold.woff2) format('woff2'), url(../baseTheme/fonts/72-Semibold.woff) format('woff'), local('72-Semibold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 600;
+  src: url(../baseTheme/fonts/72-Semibold.woff2) format('woff2'), url(../baseTheme/fonts/72-Semibold.woff) format('woff'), local('72-Semibold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72-Semiboldfull';
+  src: url(../baseTheme/fonts/72-Semibold-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Semibold-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72full';
+  font-style: normal;
+  font-weight: 600;
+  src: url(../baseTheme/fonts/72-Semibold-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Semibold-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-SemiboldDuplex';
+  src: url(../baseTheme/fonts/72-SemiboldDuplex.woff2) format('woff2'), url(../baseTheme/fonts/72-SemiboldDuplex.woff) format('woff'), local('72-SemiboldDuplex');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72-SemiboldDuplexfull';
+  src: url(../baseTheme/fonts/72-SemiboldDuplex-full.woff2) format('woff2'), url(../baseTheme/fonts/72-SemiboldDuplex-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-Light';
+  src: url(../baseTheme/fonts/72-Light.woff2) format('woff2'), url(../baseTheme/fonts/72-Light.woff) format('woff'), local('72-Light');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../baseTheme/fonts/72-Light.woff2) format('woff2'), url(../baseTheme/fonts/72-Light.woff) format('woff'), local('72-Light');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72-Lightfull';
+  src: url(../baseTheme/fonts/72-Light-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Light-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72full';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../baseTheme/fonts/72-Light-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Light-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72Black';
+  src: url(../baseTheme/fonts/72-Black.woff2) format('woff2'), url(../baseTheme/fonts/72-Black.woff) format('woff'), local('72Black');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+160-161, U+178, U+17D-17E, U+192, U+237, U+2C6-2C7, U+2DC, U+3BC, U+1E0E, U+2013-2014, U+2018-2019, U+201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 900;
+  src: url(../baseTheme/fonts/72-Black.woff2) format('woff2'), url(../baseTheme/fonts/72-Black.woff) format('woff'), local('72Black');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+160-161, U+178, U+17D-17E, U+192, U+237, U+2C6-2C7, U+2DC, U+3BC, U+1E0E, U+2013-2014, U+2018-2019, U+201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72Blackfull';
+  src: url(../baseTheme/fonts/72-Black-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Black-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72full';
+  font-style: normal;
+  font-weight: 900;
+  src: url(../baseTheme/fonts/72-Black-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Black-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-BoldItalic';
+  src: url(../baseTheme/fonts/72-BoldItalic.woff2) format('woff2'), url(../baseTheme/fonts/72-BoldItalic.woff) format('woff'), local('72-BoldItalic');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: italic;
+  font-weight: 700;
+  src: url(../baseTheme/fonts/72-BoldItalic.woff2) format('woff2'), url(../baseTheme/fonts/72-BoldItalic.woff) format('woff'), local('72-BoldItalic');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72full';
+  font-style: italic;
+  font-weight: 700;
+  src: url(../baseTheme/fonts/72-BoldItalic-full.woff2) format('woff2'), url(../baseTheme/fonts/72-BoldItalic-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-Condensed';
+  src: url(../baseTheme/fonts/72-Condensed.woff2) format('woff2'), url(../baseTheme/fonts/72-Condensed.woff) format('woff'), local('72-Condensed');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: condensed;
+  src: url(../baseTheme/fonts/72-Condensed.woff2) format('woff2'), url(../baseTheme/fonts/72-Condensed.woff) format('woff'), local('72-Condensed');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: condensed;
+  src: url(../baseTheme/fonts/72-Condensed-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Condensed-full.woff) format('woff');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72-CondensedBold';
+  src: url(../baseTheme/fonts/72-CondensedBold.woff2) format('woff2'), url(../baseTheme/fonts/72-CondensedBold.woff) format('woff'), local('72-CondensedBold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: condensed;
+  src: url(../baseTheme/fonts/72-CondensedBold.woff2) format('woff2'), url(../baseTheme/fonts/72-CondensedBold.woff) format('woff'), local('72-CondensedBold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72full';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: condensed;
+  src: url(../baseTheme/fonts/72-CondensedBold-full.woff2) format('woff2'), url(../baseTheme/fonts/72-CondensedBold-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72-Italic';
+  src: url(../baseTheme/fonts/72-Italic.woff2) format('woff2'), url(../baseTheme/fonts/72-Italic.woff) format('woff'), local('72-Italic');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72';
+  font-style: italic;
+  font-weight: 400;
+  src: url(../baseTheme/fonts/72-Italic.woff2) format('woff2'), url(../baseTheme/fonts/72-Italic.woff) format('woff'), local('72-Italic');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72full';
+  font-style: italic;
+  font-weight: 400;
+  src: url(../baseTheme/fonts/72-Italic-full.woff2) format('woff2'), url(../baseTheme/fonts/72-Italic-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72Mono';
+  src: url(../baseTheme/fonts/72Mono-Regular.woff2) format('woff2'), url(../baseTheme/fonts/72Mono-Regular.woff) format('woff'), local('72Mono');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72Monofull';
+  src: url(../baseTheme/fonts/72Mono-Regular-full.woff2) format('woff2'), url(../baseTheme/fonts/72Mono-Regular-full.woff) format('woff');
+}
+@font-face {
+  font-family: '72Mono-Bold';
+  src: url(../baseTheme/fonts/72Mono-Bold.woff2) format('woff2'), url(../baseTheme/fonts/72Mono-Bold.woff) format('woff'), local('72Mono-Bold');
+  unicode-range: U+00, U+0D, U+20-7E, U+A0-FF, U+131, U+152-153, U+161, U+178, U+17D-17E, U+192, U+237, U+2C6, U+2DC, U+3BC, U+1E9E, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+@font-face {
+  font-family: '72Mono-Boldfull';
+  src: url(../baseTheme/fonts/72Mono-Bold-full.woff2) format('woff2'), url(../baseTheme/fonts/72Mono-Bold-full.woff) format('woff');
+}
 :root {
   --sapBrandColor: #e97624;
   --sapHighlightColor: #e97624;
@@ -158,7 +381,7 @@
   --sapContent_Space_M: 2rem;
   --sapContent_Space_L: 2rem;
   --sapContent_Space_XL: 3rem;
-  --sapContent_Space_Tiny: 2rem;
+  --sapContent_Space_Tiny: 0.5rem;
   --sapContent_Space_Small: 1rem;
   --sapContent_Space_Medium: 2rem;
   --sapContent_Space_Large: 3rem;
