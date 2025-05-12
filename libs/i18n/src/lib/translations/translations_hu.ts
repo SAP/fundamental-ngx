@@ -27,6 +27,7 @@ export default {
         selectAllLabel: 'Összes kiválasztása ({selectedItems} / {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Ugrás az előző elemre',
         rightNavigationBtnLabel: 'Ugrás a következő elemre'
     },

@@ -27,6 +27,7 @@ export default {
         selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({şēĺēċţēƌĬţēɱş} ŏƒ {ţŏţąĺĬţēɱş})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
         rightNavigationBtnLabel: '[[[Ģŏ ţŏ ŋēχţ įţēɱ∙∙∙∙]]]'
     },
