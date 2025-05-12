@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.19...v0.56.0-rc.20) (2025-05-12)
+
+
+### Bug Fixes
+
+* **core:** combobox bug when selecting object with matching display values ([#13244](https://github.com/SAP/fundamental-ngx/issues/13244)) ([4e98b36](https://github.com/SAP/fundamental-ngx/commit/4e98b3692873ae7b24c4fc636415101d5d02dfd5))
+
+
+
+
+
 # [0.56.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.18...v0.56.0-rc.19) (2025-05-12)
 
 
