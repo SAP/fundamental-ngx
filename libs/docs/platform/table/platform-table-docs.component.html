@@ -6,6 +6,10 @@
         To do that, developers need to wrap needed content with <code>fdp-table-toolbar-left-actions</code> component.
     </p>
     <p>This example also shows the usage of the overflow functionality of the toolbar.</p>
+    <p>
+        By default, the heading level of the table toolbar will be <code>h2</code>. This can be configured via the
+        <code>headingLevel</code> input, as demonstrated in the example below.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-default-example></fdp-platform-table-default-example>
@@ -380,7 +384,11 @@
         (columnFreeze)="onFreezeChange($event)"
         (groupChange)="onGroupChange($event)"
     >
-        <fdp-table-toolbar [title]="data['table-toolbar'].title" [hideItemCount]="data['table-toolbar'].hideItemCount">
+        <fdp-table-toolbar
+            [title]="data['table-toolbar'].title"
+            [hideItemCount]="data['table-toolbar'].hideItemCount"
+            [headingLevel]="data['table-toolbar'].headingLevel"
+        >
             <fdp-table-toolbar-actions>
                 <fdp-button label="Action Button"></fdp-button>
             </fdp-table-toolbar-actions>

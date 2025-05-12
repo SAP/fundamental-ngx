@@ -795,8 +795,8 @@ export class ComboboxComponent<T = any>
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
-            this.inputText = this.displayFn(term);
             this.setValue(term);
+            this.inputText = this.displayFn(term);
             this.searchInputElement.nativeElement.value = this.inputText;
             this._cdRef.detectChanges();
 

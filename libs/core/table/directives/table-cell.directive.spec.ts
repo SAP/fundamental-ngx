@@ -57,7 +57,7 @@ describe('TableCellDirective', () => {
 
         fixture.detectChanges();
 
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(8);
+        expect(component.cell.elementRef.nativeElement.classList.length).toBe(9);
     });
 
     it('should handle focus events', () => {
