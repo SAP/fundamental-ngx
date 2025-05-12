@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.18...v0.56.0-rc.19) (2025-05-12)
+
+
+### Bug Fixes
+
+* **core:** add fix for Notifications expander not showing in Notification Group ([#13279](https://github.com/SAP/fundamental-ngx/issues/13279)) ([ac18494](https://github.com/SAP/fundamental-ngx/commit/ac1849431089b7a2f67b45daf398724b01d71528))
+
+
+
+
+
 # [0.56.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.17...v0.56.0-rc.18) (2025-05-09)
 
 
