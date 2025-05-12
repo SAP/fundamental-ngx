@@ -149,7 +149,8 @@ export class PlatformTableDocsComponent {
         },
         'table-toolbar': {
             title: 'Order Line Items',
-            hideItemCount: false
+            hideItemCount: false,
+            headingLevel: 2
         },
         'first-column': {
             align: 'start',

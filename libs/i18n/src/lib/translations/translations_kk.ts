@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
     coreCalendar: {
@@ -55,7 +54,7 @@ export default {
     },
     coreFeedListItem: {
         moreLabel: 'тағы {count}',
-        lessLabel: 'Кем'
+        lessLabel: 'Азырақ'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Болдырмау',
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Жиылған тармақ мәзірі',
         cancel: 'Болдырмау',
         search: 'Іздеу',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Көмекші құралдар',
+        backButtonLabel: 'Артқа',
+        navigationButtonLabel: 'Навигация'
     },
     coreSlider: {
         singleMinMaxDetails: 'Слайдердің минималды мәні — {min}, максималды мәні — {max}',
@@ -146,11 +145,11 @@ export default {
         semanticDeclineLabel: 'Қабылдамау'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Қосымша'
+        tabListExpandButtonText: 'Көбірек'
     },
     coreText: {
-        moreLabel: 'Қосымша',
-        lessLabel: 'Кем'
+        moreLabel: 'Көбірек',
+        lessLabel: 'Азырақ'
     },
     coreTime: {
         componentAriaName: 'Уақытты таңдау құралы',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Шебер'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Қосымша',
+        overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз',
         breadcrumbTrailLabel: 'Өту тізбегінің жолы'
     },
     platformApprovalFlow: {
@@ -296,7 +295,7 @@ export default {
         searchShowAllAdvancedSearchLabel: 'Барлық сүзгілерді көрсету',
         searchHideAllAdvancedSearchLabel: 'Барлық сүзгілерді жасыру',
         selectTabDisplayCountLabel: 'Тармақтар ({count})',
-        selectTabMoreBtnLabel: 'Қосымша',
+        selectTabMoreBtnLabel: 'Көбірек',
         selectTabCountHiddenA11yLabel: '{rowCount} қатар мен {colCount} бағанды қамтиды',
         selectMobileTabBackBtnTitle: 'Артқа',
         selectMobileTabBtnOpenDialogLabel: 'Ашық диалог',
@@ -535,7 +534,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Болдырмау',
         filteredBy: 'Сүзгілеу шарты',
-        showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} көрсетілуде'
+        showingBlankOfBlank: '{totalGrowingItemsCount} / {totalGrowingItemsCount} көрсетілуде',
+        clearFilters: 'Сүзгілерді тазарту'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Өңдеу'
@@ -600,7 +600,7 @@ export default {
         groupAriaDescription: 'Хабарландыру тобы',
         groupAriaDescriptionExpanded: 'жайылған',
         groupAriaDescriptionCollapsed: 'жиылған',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Көбірек',
+        triggerLessLabel: 'Азырақ'
     }
 };

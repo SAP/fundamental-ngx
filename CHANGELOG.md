@@ -3,6 +3,140 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.18...v0.56.0-rc.19) (2025-05-12)
+
+
+### Bug Fixes
+
+* **core:** add fix for Notifications expander not showing in Notification Group ([#13279](https://github.com/SAP/fundamental-ngx/issues/13279)) ([ac18494](https://github.com/SAP/fundamental-ngx/commit/ac1849431089b7a2f67b45daf398724b01d71528))
+
+
+
+
+
+# [0.56.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.17...v0.56.0-rc.18) (2025-05-09)
+
+
+### Bug Fixes
+
+* **platform:** add check that secondary rows exist for virtual scrolling with pop-in columns ([#13278](https://github.com/SAP/fundamental-ngx/issues/13278)) ([b4f9faf](https://github.com/SAP/fundamental-ngx/commit/b4f9faf00acd946225ad3016142f32248234c52c))
+
+
+
+
+
+# [0.56.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.16...v0.56.0-rc.17) (2025-05-09)
+
+
+### Bug Fixes
+
+* **cdk:** focusable item tabindex bug ([#13255](https://github.com/SAP/fundamental-ngx/issues/13255)) ([d241458](https://github.com/SAP/fundamental-ngx/commit/d24145835adf6727d624cb727d1b66b6c367f66d))
+
+
+
+
+
+# [0.56.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.15...v0.56.0-rc.16) (2025-05-09)
+
+
+### Bug Fixes
+
+* **core:** fd-list-group-header should not be adjacent to fd-list-item ([#13270](https://github.com/SAP/fundamental-ngx/issues/13270)) ([73a01ae](https://github.com/SAP/fundamental-ngx/commit/73a01aed12f2b5c8f71c8e1fbfa4332bdc53ace9))
+
+
+
+
+
+# [0.56.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.14...v0.56.0-rc.15) (2025-05-08)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.56.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.13...v0.56.0-rc.14) (2025-05-08)
+
+
+### Bug Fixes
+
+* **platform:** heading level for sort/filter table dialogs should be h2 ([#13277](https://github.com/SAP/fundamental-ngx/issues/13277)) ([faafcdc](https://github.com/SAP/fundamental-ngx/commit/faafcdcda28bb734aaeacaf3f83672a8ca2f0afc))
+
+
+
+
+
+# [0.56.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.12...v0.56.0-rc.13) (2025-05-08)
+
+
+### Bug Fixes
+
+* **platform:** remove nowrap rule from pop in table text ([#13273](https://github.com/SAP/fundamental-ngx/issues/13273)) ([0726816](https://github.com/SAP/fundamental-ngx/commit/07268164a9ce9dbab753e8ab41033be131f2bc62))
+
+
+
+
+
+# [0.56.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.11...v0.56.0-rc.12) (2025-05-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.56.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.10...v0.56.0-rc.11) (2025-05-05)
+
+
+### Bug Fixes
+
+* **platform:** fixed the overflow in icon tab bar component ([#13235](https://github.com/SAP/fundamental-ngx/issues/13235)) ([8773266](https://github.com/SAP/fundamental-ngx/commit/87732663959e2af859a79f847a3f795fd4c8a71c))
+
+
+
+
+
+# [0.56.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.9...v0.56.0-rc.10) (2025-05-02)
+
+
+### Bug Fixes
+
+* **core:** file uploader button a11y ([#13267](https://github.com/SAP/fundamental-ngx/issues/13267)) ([5f2fc5a](https://github.com/SAP/fundamental-ngx/commit/5f2fc5a0767a653527ee812cd20942ead3f3ab0a))
+
+
+
+
+
+# [0.56.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.8...v0.56.0-rc.9) (2025-05-01)
+
+
+### Bug Fixes
+
+* **platform:** platform form field should announce form message ([#13250](https://github.com/SAP/fundamental-ngx/issues/13250)) ([94cc767](https://github.com/SAP/fundamental-ngx/commit/94cc767845953c9e1d815bf62a5d9b9ac5abd1ab))
+
+
+
+
+
+# [0.56.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.7...v0.56.0-rc.8) (2025-04-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.56.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.6...v0.56.0-rc.7) (2025-04-29)
+
+
+### Bug Fixes
+
+* translation delivery commit by LX Lab ([#13245](https://github.com/SAP/fundamental-ngx/issues/13245)) ([68592d5](https://github.com/SAP/fundamental-ngx/commit/68592d5561fb361ea351a147a9b9eea34085f49d))
+
+
+
+
+
 # [0.56.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.5...v0.56.0-rc.6) (2025-04-28)
 
 

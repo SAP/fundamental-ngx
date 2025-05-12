@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     coreCalendar: {
@@ -111,9 +110,9 @@ export default {
         collapsedItemMenuLabel: 'Menu-item samengevouwen',
         cancel: 'Annuleren',
         search: 'Zoeken',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Ondersteunende tools',
+        backButtonLabel: 'Terug',
+        navigationButtonLabel: 'Navigatie'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimumwaarde voor schuifregelaar is {min}, maximumwaarde is {max}',
@@ -201,7 +200,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Meer',
+        overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken',
         breadcrumbTrailLabel: 'Navigatiepad'
     },
     platformApprovalFlow: {
@@ -536,7 +535,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Annuleren',
         filteredBy: 'Gefilterd op',
-        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergegeven'
+        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergegeven',
+        clearFilters: 'Filters wissen'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bewerken'
@@ -601,7 +601,7 @@ export default {
         groupAriaDescription: 'Meldingsgroep',
         groupAriaDescriptionExpanded: 'uitgevouwen',
         groupAriaDescriptionCollapsed: 'samengevouwen',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Meer',
+        triggerLessLabel: 'Minder'
     }
 };
