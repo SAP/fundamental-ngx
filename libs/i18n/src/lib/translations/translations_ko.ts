@@ -29,6 +29,7 @@ export default {
         selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '이전 항목으로 이동',
         rightNavigationBtnLabel: '다음 항목으로 이동'
     },

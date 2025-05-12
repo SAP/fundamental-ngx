@@ -29,6 +29,7 @@ export default {
         selectAllLabel: '全選 ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '移至先前項目',
         rightNavigationBtnLabel: '移至下一個項目'
     },

@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Vybrať všetko ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Prejsť na predchádzajúcu položku',
         rightNavigationBtnLabel: 'Prejsť na ďalšiu položku'
     },

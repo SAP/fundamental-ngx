@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Salt la articol anterior',
         rightNavigationBtnLabel: 'Salt la articol următor'
     },

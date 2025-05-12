@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'בחר הכול ({selectedItems} מתוך {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'עבור לפריט הקודם',
         rightNavigationBtnLabel: 'עבור לפריט הבא'
     },

@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til næste element'
     },

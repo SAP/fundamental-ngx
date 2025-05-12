@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Προς προηγούμενο στοιχείο',
         rightNavigationBtnLabel: 'Προς επόμενο στοιχείο'
     },
