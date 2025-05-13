@@ -85,8 +85,11 @@ describe('CalendarLegendComponent', () => {
         expect(legendItems[3].componentInstance.text()).toBe('Non-Work day');
         expect(legendItems[4].componentInstance.text()).toBe('Placeholder-5');
         expect(legendItems[5].componentInstance.text()).toBe('Appointment Type');
-        expect(legendItems[5].componentInstance.elementRef.nativeElement.classList
-            .contains('fd-calendar-legend__item--appointment')).toBe(true);
+        expect(
+            legendItems[5].componentInstance.elementRef.nativeElement.classList.contains(
+                'fd-calendar-legend__item--appointment'
+            )
+        ).toBe(true);
         expect(legendItems[6].componentInstance.text()).toBe('Placeholder-10');
         expect(legendItems[7].componentInstance.text()).toBe('Placeholder-11');
     });
