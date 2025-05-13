@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.0...v0.56.1-rc.0) (2025-05-13)
+
+
+### Features
+
+* **core:** calendar legend focusing ([#13248](https://github.com/SAP/fundamental-ngx/issues/13248)) ([629ce16](https://github.com/SAP/fundamental-ngx/commit/629ce169a5d30fdd6a0ae6fc5544d7f75cdc2cf2))
+
+
+
+
+
 # [0.56.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.20...v0.56.0) (2025-05-12)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
