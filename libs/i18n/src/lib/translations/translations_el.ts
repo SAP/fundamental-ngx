@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_el.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Ημερολόγιο',
         calendarMonthViewDescription: 'Επιλογέας μήνα',
         calendarYearsViewDescription: 'Επιλογέας έτους',
-        calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών'
+        calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Σύνθετο Πλαίσιο Πολλών Τιμών',

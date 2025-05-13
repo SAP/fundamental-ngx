@@ -20,7 +20,9 @@ export default {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
         calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
-        calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]'
+        calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '[[[Μűĺţį Ʋąĺűē Ĉŏɱƃŏ Ɓŏχ∙∙∙∙∙]]]',

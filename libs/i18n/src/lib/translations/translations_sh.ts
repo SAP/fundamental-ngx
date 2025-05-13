@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sh.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Kalendar',
         calendarMonthViewDescription: 'Birač meseca',
         calendarYearsViewDescription: 'Birač godine',
-        calendarYearsRangeViewDescription: 'Birač raspona godina'
+        calendarYearsRangeViewDescription: 'Birač raspona godina',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Combo box višestruke vrednosti',
