@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Hodnota je {value}',
         multipleHandle2ValueNowDetails: 'Aktuálna hodnota je {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Ďalšie akcie',
         arialLabel: 'Tlačidlo rozdelenia'

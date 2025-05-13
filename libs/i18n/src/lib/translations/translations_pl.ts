@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Wartość to {value}',
         multipleHandle2ValueNowDetails: 'Wartość bieżąca to {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Więcej czynności',
         arialLabel: 'Przycisk podzielony na dwie części'

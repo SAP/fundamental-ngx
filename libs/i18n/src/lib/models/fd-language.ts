@@ -227,6 +227,10 @@ export interface FdLanguage {
         /** @param value */
         multipleHandle2ValueNowDetails: FdLanguageKey<{ value: number | string }>;
     };
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: FdLanguageKey;
+        ariaRoledescription: FdLanguageKey;
+    };
     coreSplitButton: {
         expandButtonAriaLabel: FdLanguageKey;
         arialLabel: FdLanguageKey;

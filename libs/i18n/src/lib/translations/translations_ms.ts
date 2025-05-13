@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Nilai ialah {value}',
         multipleHandle2ValueNowDetails: 'Nilai semasa ialah {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Tindakan selanjutnya',
         arialLabel: 'Butang pisahan'

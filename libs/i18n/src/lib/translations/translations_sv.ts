@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Värde är {value}',
         multipleHandle2ValueNowDetails: 'Aktuellt värde är {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Fler åtgärder',
         arialLabel: 'Delningsknapp'

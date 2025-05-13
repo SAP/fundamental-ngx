@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
     coreCalendar: {
@@ -129,6 +128,10 @@ export default {
         multipleHandle2ValueminDetails: 'Værdi er {value}',
         multipleHandle2ValuemaxDetails: 'Værdi er {value}',
         multipleHandle2ValueNowDetails: 'Aktuel værdi er {value}'
+    },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Flere handlinger',

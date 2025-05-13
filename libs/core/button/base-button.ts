@@ -1,5 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, booleanAttribute, inject } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, Input, booleanAttribute, inject, signal } from '@angular/core';
 
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
@@ -20,11 +20,15 @@ export type ButtonType =
 
 export const defaultButtonType = 'standard' as ButtonType;
 
-@Directive()
+@Directive({
+    host: {
+        // Toggle buttons should have aria-pressed, Segmented buttons should have aria-selected
+        '[attr.aria-pressed]': 'role() === "button" ? toggled : null',
+        '[attr.aria-selected]': 'role() === "option" ? toggled : null'
+    }
+})
 export class BaseButton implements HasElementRef {
     /** Whether button is in toggled state. */
-    @HostBinding('class.fd-button--toggled')
-    @HostBinding('attr.aria-pressed')
     @Input({ transform: booleanAttribute })
     toggled: BooleanInput;
 
@@ -88,6 +92,34 @@ export class BaseButton implements HasElementRef {
      */
     @Input({ alias: 'aria-disabled', transform: booleanAttribute })
     ariaDisabled = false;
+
+    /** aria-roledescription for the button */
+    ariaRoledescription = signal<Nullable<string>>(null);
+
+    /**
+     * role for the button
+     * default: button
+     * can be 'option' in case of Segmented Button
+     */
+    role = signal('button');
+
+    /**
+     * value for the aria-setsize
+     * needed for the case of Segmented Button
+     */
+    ariaSetsize = signal<Nullable<number>>(null);
+
+    /**
+     * value for the aria-posinset
+     * needed for the case of Segmented Button
+     */
+    ariaPosinset = signal<Nullable<number>>(null);
+
+    /**
+     * value for the aria-selected
+     * needed for the case of Segmented Button
+     */
+    ariaSelected = signal<Nullable<boolean>>(null);
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);

@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Η τιμή είναι (τιμή)',
         multipleHandle2ValueNowDetails: 'Η τρέχουσα τιμή είναι (τιμή)'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Περισσότερες ενέργειες',
         arialLabel: 'Κουμπί επιμερισμού'

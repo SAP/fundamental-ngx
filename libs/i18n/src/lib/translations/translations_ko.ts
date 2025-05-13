@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: '값: {value}',
         multipleHandle2ValueNowDetails: '현재 값: {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: '추가 조치',
         arialLabel: '분할 버튼'

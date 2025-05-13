@@ -19,7 +19,8 @@ import {
     ViewEncapsulation,
     booleanAttribute,
     effect,
-    forwardRef
+    forwardRef,
+    input
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
@@ -31,6 +32,7 @@ import {
     destroyObservable
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
@@ -53,6 +55,9 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     styleUrl: './segmented-button.component.scss',
     host: {
         role: 'listbox',
+        '[attr.aria-multiselectable]': 'toggle',
+        '[attr.aria-roledescription]': 'ariaRoledescription()',
+        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
         '[class.fd-segmented-button]': 'true',
         '[class.fd-segmented-button--vertical]': 'vertical'
     },
@@ -87,6 +92,15 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     @ContentChildren(FocusableItemDirective)
     _focusableItems: QueryList<FocusableItemDirective>;
+
+    /**
+     * Value for aria-roledescription
+     * Default value is provided 'Segmented button group'
+     **/
+    ariaRoledescription = input<string>(resolveTranslationSignal('coreSegmentedButton.ariaRoledescriptionGroup')());
+
+    /** @hidden */
+    private _ariaRoledescriptionBtns = resolveTranslationSignal('coreSegmentedButton.ariaRoledescription')();
 
     /**
      * Value of segmented button can have 2 types:
@@ -212,8 +226,13 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
                 this._toggleDisableButtons(this._isDisabled);
                 this._pickButtonsByValues(this._currentValue);
-                this._buttons.forEach((button) => {
-                    button.elementRef.nativeElement.role = 'option';
+                this._buttons.forEach((button, index) => {
+                    button.role.set('option');
+                    button.ariaPosinset.set(index + 1);
+                    button.ariaSelected.set(!!button.toggled);
+                    button.ariaSetsize.set(this._buttons.length);
+                    button.ariaRoledescription.set(this._ariaRoledescriptionBtns);
+
                     this._listenToTriggerEvents(button);
                 });
             });
@@ -245,13 +264,12 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
             if (!this.toggle) {
                 this._buttons.forEach((button) => this._deselectButton(button));
                 this._selectButton(buttonComponent);
-                this._propagateChange();
-                this._changeDetRef.markForCheck();
             } else {
                 this._toggleButton(buttonComponent);
-                this._propagateChange();
-                this._changeDetRef.markForCheck();
             }
+
+            this._propagateChange();
+            this._changeDetRef.markForCheck();
         }
     }
 

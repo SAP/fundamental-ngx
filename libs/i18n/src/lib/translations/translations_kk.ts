@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Мән — {value}',
         multipleHandle2ValueNowDetails: 'Ағымдағы мән — {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Басқа операциялар',
         arialLabel: 'Бөлу түймесі'

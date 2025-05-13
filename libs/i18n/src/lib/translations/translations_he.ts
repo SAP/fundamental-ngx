@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'הערך הוא {value}',
         multipleHandle2ValueNowDetails: 'הערך הנוכחי הוא {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'עוד פעולות',
         arialLabel: 'לחצן פיצול'

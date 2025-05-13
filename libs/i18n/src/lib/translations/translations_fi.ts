@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Arvo on {value}',
         multipleHandle2ValueNowDetails: 'Nykyinen arvo on {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Enemmän toimia',
         arialLabel: 'Jaa-painike'

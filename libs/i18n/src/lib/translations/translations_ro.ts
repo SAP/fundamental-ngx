@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Valoarea este {value}',
         multipleHandle2ValueNowDetails: 'Valoarea curentă este {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Mai multe acțiuni',
         arialLabel: 'Buton de divizare'

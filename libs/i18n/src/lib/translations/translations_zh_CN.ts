@@ -129,6 +129,10 @@ export default {
         multipleHandle2ValuemaxDetails: '值为 {value}',
         multipleHandle2ValueNowDetails: '当前值为 {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: '更多操作',
         arialLabel: '拆分按钮'

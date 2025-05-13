@@ -133,6 +133,10 @@ export default {
         multipleHandle2ValuemaxDetails: '[[[Ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙∙∙]]]',
         multipleHandle2ValueNowDetails: '[[[Ĉűŗŗēŋţ ʋąĺűē įş {ʋąĺűē}∙∙∙∙∙∙]]]'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: '[[[Μŏŗē ąċţįŏŋş∙∙∙∙∙∙∙]]]',
         arialLabel: '[[[Ŝρĺįţ ƃűţţŏŋ∙∙∙∙∙∙∙]]]'

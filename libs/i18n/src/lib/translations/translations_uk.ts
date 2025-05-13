@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Значення: {value}',
         multipleHandle2ValueNowDetails: 'Поточне значення: {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Більше дій',
         arialLabel: 'Кнопка розділення'

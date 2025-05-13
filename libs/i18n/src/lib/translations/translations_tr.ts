@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Değer: {value}',
         multipleHandle2ValueNowDetails: 'Mevcut değer: {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Daha fazla eylem',
         arialLabel: 'İki bölümlü düğme'

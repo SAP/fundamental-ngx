@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'ค่าคือ {value}',
         multipleHandle2ValueNowDetails: 'ค่าปัจจุบันคือ {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'การดำเนินการเพิ่มเติม',
         arialLabel: "ปุ่ม 'แยก'"

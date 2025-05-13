@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Vrednost je {value}',
         multipleHandle2ValueNowDetails: 'Trenutna vrednost je {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Više radnji',
         arialLabel: 'Dugme za deljenje'

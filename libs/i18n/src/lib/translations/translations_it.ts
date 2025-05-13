@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Il valore è {value}',
         multipleHandle2ValueNowDetails: 'Il valore attuale è {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Altre azioni',
         arialLabel: 'Pulsante Suddividi'

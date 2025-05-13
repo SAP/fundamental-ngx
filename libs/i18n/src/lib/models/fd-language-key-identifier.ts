@@ -97,6 +97,8 @@ export type FdLanguageKeyIdentifier =
     | 'coreSlider.multipleHandle2ValueminDetails'
     | 'coreSlider.multipleHandle2ValuemaxDetails'
     | 'coreSlider.multipleHandle2ValueNowDetails'
+    | 'coreSegmentedButton.ariaRoledescriptionGroup'
+    | 'coreSegmentedButton.ariaRoledescription'
     | 'coreSplitButton.expandButtonAriaLabel'
     | 'coreSplitButton.arialLabel'
     | 'coreSplitter.paginationItemAriaLabel'

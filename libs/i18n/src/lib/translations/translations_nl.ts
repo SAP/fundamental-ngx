@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Waarde is {value}',
         multipleHandle2ValueNowDetails: 'Huidige waarde is {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Meer acties',
         arialLabel: 'Knop Splitsen'

@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Verdi er {value}',
         multipleHandle2ValueNowDetails: 'Gjeldende verdi er {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'Flere handlinger',
         arialLabel: 'Oppdelt knapp'

@@ -37,9 +37,14 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.type]': 'type',
+        '[attr.role]': 'role()',
         '[attr.disabled]': 'disabled || null',
         '[attr.aria-label]': 'buttonArialabel',
-        '[attr.aria-description]': 'buttonAriaDescription'
+        '[attr.aria-setsize]': 'ariaSetsize()',
+        '[attr.aria-posinset]': 'ariaPosinset()',
+        '[attr.aria-selected]': 'ariaSelected()',
+        '[attr.aria-description]': 'buttonAriaDescription',
+        '[attr.aria-roledescription]': 'ariaRoledescription()'
     },
     providers: [
         contentDensityObserverProviders(),

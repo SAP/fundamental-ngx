@@ -129,6 +129,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'القيمة هي {value}',
         multipleHandle2ValueNowDetails: 'القيمة الحالية هي {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'مزيد من الإجراءات',
         arialLabel: 'الزر ’تقسيم‘'

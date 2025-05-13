@@ -130,6 +130,10 @@ export default {
         multipleHandle2ValuemaxDetails: 'Az értéke {value}',
         multipleHandle2ValueNowDetails: 'A jelenlegi érték {value}'
     },
+    coreSegmentedButton: {
+        ariaRoledescriptionGroup: 'Segmented button group',
+        ariaRoledescription: 'Segmented button'
+    },
     coreSplitButton: {
         expandButtonAriaLabel: 'További műveletek',
         arialLabel: 'Felosztott gomb'
