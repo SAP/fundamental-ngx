@@ -1,14 +1,18 @@
 <fd-breadcrumb>
     <fd-breadcrumb-item>
-        <a fd-link routerLink="/core/avatar"> Breadcrumb Level <span [style.font-weight]="'bold'">1</span> </a>
+        <a fd-link routerLink="/core/avatar" aria-current="false" aria-label="Root Page 1 of 4">
+            Breadcrumb Level <span [style.font-weight]="'bold'">1</span>
+        </a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <a fd-link routerLink="/core/message-strip">Breadcrumb Level 2</a>
+        <a fd-link routerLink="/core/message-strip" aria-current="false" aria-label="Parent Page 2 of 4">
+            Breadcrumb Level 2
+        </a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <a fd-link routerLink="/core/bar">Breadcrumb Level 3</a>
+        <a fd-link routerLink="/core/bar" aria-current="false" aria-label="Parent Page 3 of 4"> Breadcrumb Level 3 </a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <span aria-current="page">Breadcrumb Level 4</span>
+        <span role="link" aria-current="page" aria-label="Current Page 4 of 4"> Breadcrumb Level 4 </span>
     </fd-breadcrumb-item>
 </fd-breadcrumb>

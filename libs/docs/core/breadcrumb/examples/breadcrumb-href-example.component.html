@@ -1,16 +1,16 @@
 <fd-breadcrumb>
     <fd-breadcrumb-item>
-        <a fd-link (click)="onClick('Breadcrumb Level 1 clicked')">
+        <a fd-link (click)="onClick('Breadcrumb Level 1 clicked')" aria-current="false" aria-label="Root Page 1 of 4">
             Breadcrumb Level <span [style.font-weight]="'bold'">1</span>
         </a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <a fd-link href="/#/core/breadcrumb">Breadcrumb Level 2</a>
+        <a fd-link href="/#/core/breadcrumb" aria-current="false" aria-label="Parent Page 2 of 4">Breadcrumb Level 2</a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <a fd-link href="/#/core/breadcrumb">Breadcrumb Level 3</a>
+        <a fd-link href="/#/core/breadcrumb" aria-current="false" aria-label="Parent Page 3 of 4">Breadcrumb Level 3</a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <span aria-current="page">Breadcrumb Level 4</span>
+        <span aria-current="page" aria-current="page" aria-label="Current Page 4 of 4">Breadcrumb Level 4</span>
     </fd-breadcrumb-item>
 </fd-breadcrumb>
