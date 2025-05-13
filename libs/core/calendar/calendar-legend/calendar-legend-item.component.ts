@@ -37,7 +37,7 @@ export class CalendarLegendItemComponent implements OnChanges, OnInit, CssClassB
     circle = input<boolean>();
 
     /** @hidden */
-    class = input<string>();
+    class = input<string | undefined>('');
 
     /** @hidden */
     constructor(public elementRef: ElementRef) {}
@@ -45,7 +45,6 @@ export class CalendarLegendItemComponent implements OnChanges, OnInit, CssClassB
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        console.log(this.class());
         return [`fd-calendar-legend__item ${this.class()} ${this.getAppointmentClass()} ${this.getColorClass()}`];
     }
 

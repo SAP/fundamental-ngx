@@ -34,7 +34,8 @@ export class CalendarLegendHostComponent {
         {
             specialDayNumber: 6,
             rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
-            legendText: 'Placeholder-6'
+            appointment: true,
+            legendText: 'Appointment Type'
         },
         {
             specialDayNumber: 10,
@@ -77,10 +78,16 @@ describe('CalendarLegendComponent', () => {
 
     it('should render legend items', () => {
         const legendItems = fixture.debugElement.queryAll(By.directive(CalendarLegendItemComponent));
-        expect(legendItems.length).toBe(4);
-        expect(legendItems[0].componentInstance.text()).toBe('Placeholder-5');
-        expect(legendItems[1].componentInstance.text()).toBe('Placeholder-6');
-        expect(legendItems[2].componentInstance.text()).toBe('Placeholder-10');
-        expect(legendItems[3].componentInstance.text()).toBe('Placeholder-11');
+        expect(legendItems.length).toBe(8);
+        expect(legendItems[0].componentInstance.text()).toBe('Today');
+        expect(legendItems[1].componentInstance.text()).toBe('Selected date');
+        expect(legendItems[2].componentInstance.text()).toBe('Work day');
+        expect(legendItems[3].componentInstance.text()).toBe('Non-Work day');
+        expect(legendItems[4].componentInstance.text()).toBe('Placeholder-5');
+        expect(legendItems[5].componentInstance.text()).toBe('Appointment Type');
+        expect(legendItems[5].componentInstance.elementRef.nativeElement.classList
+            .contains('fd-calendar-legend__item--appointment')).toBe(true);
+        expect(legendItems[6].componentInstance.text()).toBe('Placeholder-10');
+        expect(legendItems[7].componentInstance.text()).toBe('Placeholder-11');
     });
 });
