@@ -43,6 +43,9 @@ export class GroupingComponent implements OnInit {
     /** @hidden Initial grouping settings */
     initialGrouping = input<Nullable<SettingsGroupDialogResultData>>();
 
+    /** @hidden Heading level */
+    headingLevel = input<number>(2);
+
     /** Event emitter for group changes */
     groupChange = output<SettingsGroupDialogResultData>();
 

@@ -1,8 +1,8 @@
-<h3 fd-list-group-header>
+<span role="heading" [attr.aria-level]="headingLevel() + 1" fd-list-group-header>
     <span fd-list-title [attr.id]="groupOrderHeaderId">
         {{ 'platformTable.groupDialogGroupOrderHeader' | fdTranslate }}
     </span>
-</h3>
+</span>
 <ul fd-list [selection]="true">
     <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="groupOrderHeaderId">
         <fd-radio-button
@@ -25,11 +25,11 @@
         <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderDesc' | fdTranslate }}</span>
     </li>
 </ul>
-<h3 fd-list-group-header>
+<span role="heading" [attr.aria-level]="headingLevel() + 1" fd-list-group-header>
     <span fd-list-title [attr.id]="groupByHeaderId">
         {{ 'platformTable.groupDialogGroupByHeader' | fdTranslate }}
     </span>
-</h3>
+</span>
 <ul fd-list [selection]="true">
     <li fd-list-item [selected]="NOT_GROUPED_OPTION_VALUE === field()" [attr.aria-describedby]="groupByHeaderId">
         <fd-radio-button
