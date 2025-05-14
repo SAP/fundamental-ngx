@@ -289,6 +289,10 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
+    /** The unique ID of the calendar legend, if the calendar is to display a legend. */
+    @Input()
+    associatedLegendId: string;
+
     /**
      * @hidden
      * Currently displayed days depending on month and year

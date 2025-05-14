@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'לוח שנה',
         calendarMonthViewDescription: 'בוחר חודש',
         calendarYearsViewDescription: 'בוחר שנה',
-        calendarYearsRangeViewDescription: 'בוחר טווח שנים'
+        calendarYearsRangeViewDescription: 'בוחר טווח שנים',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'תיבה משולבת עם ערכים מרובים',

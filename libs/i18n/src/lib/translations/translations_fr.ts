@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_fr.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Calendrier',
         calendarMonthViewDescription: 'Sélecteur de mois',
         calendarYearsViewDescription: "Sélecteur d'année",
-        calendarYearsRangeViewDescription: "Sélecteur de plage d'années"
+        calendarYearsRangeViewDescription: "Sélecteur de plage d'années",
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Zone combinée multiple',
