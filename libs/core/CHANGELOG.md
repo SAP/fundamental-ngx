@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.1-rc.0...v0.56.1-rc.1) (2025-05-14)
+
+
+### Features
+
+* **core:** add option to customize Facets content ([#13281](https://github.com/SAP/fundamental-ngx/issues/13281)) ([085651f](https://github.com/SAP/fundamental-ngx/commit/085651fc13ce3c2e87a6a594cc7613e3e0af055e))
+
+
+
+
+
 ## [0.56.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.0...v0.56.1-rc.0) (2025-05-13)
 
 
