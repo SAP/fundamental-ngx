@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Naptár',
         calendarMonthViewDescription: 'Hónapválasztó',
         calendarYearsViewDescription: 'Évválasztó',
-        calendarYearsRangeViewDescription: 'Évtartomány-választó'
+        calendarYearsRangeViewDescription: 'Évtartomány-választó',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Többértékes kombinált lista',

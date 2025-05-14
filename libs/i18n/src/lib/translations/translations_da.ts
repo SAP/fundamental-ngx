@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
     coreCalendar: {
@@ -19,7 +20,9 @@ export default {
         calendarDayViewDescription: 'Kalender',
         calendarMonthViewDescription: 'Månedsvælger',
         calendarYearsViewDescription: 'Årsvælger',
-        calendarYearsRangeViewDescription: 'Vælger af årsinterval'
+        calendarYearsRangeViewDescription: 'Vælger af årsinterval',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Multiværdikombinationsboks',
