@@ -41,14 +41,14 @@ runs:
           shell: bash
 
         - name: Use the global Yarn cache if available
-          uses: actions/cache@v4.1.2
+          uses: actions/cache@v4.2.3
           with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
               key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
                   ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
 
-        - uses: actions/cache@v4.1.2
+        - uses: actions/cache@v4.2.3
           id: node_modules
           name: Use project node_modules cache if available
           with:
