@@ -241,7 +241,6 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     private _listenToTriggerEvents(buttonComponent: ButtonComponent): void {
         const htmlElement = buttonComponent.elementRef.nativeElement;
-
         const refresh$ = merge(destroyObservable(this._destroyRef), this._onRefresh$);
 
         const triggerEvents$ = merge(

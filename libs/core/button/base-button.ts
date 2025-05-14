@@ -1,5 +1,14 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Directive, ElementRef, Input, booleanAttribute, inject, signal } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    booleanAttribute,
+    inject,
+    signal
+} from '@angular/core';
 
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
@@ -29,6 +38,7 @@ export const defaultButtonType = 'standard' as ButtonType;
 })
 export class BaseButton implements HasElementRef {
     /** Whether button is in toggled state. */
+    @HostBinding('class.fd-button--toggled')
     @Input({ transform: booleanAttribute })
     toggled: BooleanInput;
 
