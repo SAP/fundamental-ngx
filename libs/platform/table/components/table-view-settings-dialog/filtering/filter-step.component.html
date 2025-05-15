@@ -7,9 +7,9 @@
         [ariaLabel]="'platformTable.filterDialogBackToColumns' | fdTranslate"
         (click)="back.emit()"
     ></button>
-    <h2 fd-title [headerSize]="4">
+    <span role="heading" [attr.aria-level]="headingLevel" fd-title [headerSize]="4">
         {{ 'platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label } }}
-    </h2>
+    </span>
 </ng-template>
 
 <ng-template #bodyTemplate>

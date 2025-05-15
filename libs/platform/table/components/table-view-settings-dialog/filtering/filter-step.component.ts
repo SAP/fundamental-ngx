@@ -68,6 +68,10 @@ export class FilterStepComponent implements FiltersViewStep {
     @Input()
     columnName: string;
 
+    /** Heading level of the dialog. */
+    @Input()
+    headingLevel = 2;
+
     /** Go back event */
     @Output()
     back: EventEmitter<void> = new EventEmitter<void>();

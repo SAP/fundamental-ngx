@@ -1,11 +1,18 @@
 <ng-template #titleTemplate>
-    <h2 fd-title [headerSize]="4">{{ 'platformTable.filterDialogFilterTitle' | fdTranslate }}</h2>
+    <span role="heading" [attr.aria-level]="headingLevel" fd-title [headerSize]="4">{{
+        'platformTable.filterDialogFilterTitle' | fdTranslate
+    }}</span>
 </ng-template>
 
 <ng-template #bodyTemplate>
-    <h3 fd-list-group-header id="platformTableInternalFilterListGroupHeader">
+    <span
+        role="heading"
+        [attr.aria-level]="headingLevel + 1"
+        fd-list-group-header
+        id="platformTableInternalFilterListGroupHeader"
+    >
         {{ 'platformTable.filterDialogFilterBy' | fdTranslate }}
-    </h3>
+    </span>
     <ul fd-list aria-labelledby="platformTableInternalFilterListGroupHeader">
         @for (filter of filters; track filter) {
             <li

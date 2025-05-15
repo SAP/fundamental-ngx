@@ -34,6 +34,9 @@ export class FiltersComponent implements AfterViewInit, OnInit {
         this._initializeFilterData(value);
     }
 
+    /** @hidden Heading level */
+    headingLevel = input<number>(2);
+
     /** Initial set of filters applied */
     initialFilters = input<CollectionFilter[]>([]);
 
