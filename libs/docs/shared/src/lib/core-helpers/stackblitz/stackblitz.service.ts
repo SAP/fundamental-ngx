@@ -147,9 +147,9 @@ export class StackblitzService {
         defaultProjectInfo.files['src/index.html'] = `
 <html>
     <head>
-        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css" />
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_horizon.css" />
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
+        <link rel="stylesheet" href="assets/theming-base/sap_horizon/css_variables.css" />
+        <link rel="stylesheet" href="assets/fundamental-styles-theming/sap_horizon.css" />
+        <link rel="stylesheet" href="assets/fundamental-styles-theming/icon.css" />
     </head>
     <body>
         <${mainFileSelector}></${mainFileSelector}>
