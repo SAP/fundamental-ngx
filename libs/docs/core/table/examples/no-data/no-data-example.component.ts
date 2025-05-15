@@ -14,12 +14,12 @@ export class NoDataExampleComponent {
 
     sceneConfig = {
         scene: {
-            url: 'assets/images/sapIllus-Scene-NoMail.svg',
-            id: 'sapIllus-Scene-NoMail-1'
+            url: 'assets/images/sapIllus-Ice-Cream-Demo-Large.svg',
+            id: 'sapIllus-Ice-Cream-Demo-Large'
         },
         dialog: {
-            url: 'assets/images/sapIllus-Dialog-NoMail.svg',
-            id: 'sapIllus-Dialog-NoMail'
+            url: 'assets/images/sapIllus-UnknownFolder-Demo-Medium.svg',
+            id: 'sapIllus-UnknownFolder-Demo-Medium'
         }
     };
 }

@@ -10,6 +10,6 @@ import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illus
 })
 export class IllustratedMessageDotExampleComponent {
     spotConfig: SvgConfig = {
-        dot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
+        dot: { url: 'assets/images/sapIllus-Ice-Cream-Demo-ExtraSmall.svg', id: 'sapIllus-Ice-Cream-Demo-ExtraSmall' }
     };
 }
