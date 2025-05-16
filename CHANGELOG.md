@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.0...v0.56.2-rc.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **core:** fund-styles breaking changes adoption part 1 ([#13291](https://github.com/SAP/fundamental-ngx/issues/13291)) ([6c7a5ff](https://github.com/SAP/fundamental-ngx/commit/6c7a5ffc033c68af0e89a2a403ef52bd393e9315)), closes [#13241](https://github.com/SAP/fundamental-ngx/issues/13241) [#13249](https://github.com/SAP/fundamental-ngx/issues/13249) [#13268](https://github.com/SAP/fundamental-ngx/issues/13268) [#13272](https://github.com/SAP/fundamental-ngx/issues/13272) [#13271](https://github.com/SAP/fundamental-ngx/issues/13271) [#13242](https://github.com/SAP/fundamental-ngx/issues/13242) [#13276](https://github.com/SAP/fundamental-ngx/issues/13276)
+
+
+
+
+
 ## [0.56.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.1...v0.56.2-rc.0) (2025-05-15)
 
 
