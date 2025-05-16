@@ -1,4 +1,5 @@
 @import 'fundamental-styles/dist/action-sheet.css';
+@import 'fundamental-styles/dist/bar.css';
 
 fd-action-sheet-body {
     width: 100%;
@@ -9,4 +10,9 @@ fd-action-sheet-body {
 .fd-action-sheet__wrapper--active {
     position: fixed;
     z-index: 999;
+}
+
+// Angular specific CSS
+.fd-action-sheet__wrapper .fd-action-sheet__bar.fd-bar + fd-action-sheet-body .fd-action-sheet.fd-action-sheet--mobile {
+    border-radius: 0 0 var(--sapPopover_BorderCornerRadius) var(--sapPopover_BorderCornerRadius);
 }

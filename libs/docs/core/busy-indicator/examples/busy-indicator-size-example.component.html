@@ -1,5 +1,11 @@
 @for (size of sizes; track size) {
     <div [style.text-align]="'center'">
-        <fd-busy-indicator [loading]="true" [size]="size" [title]="size + ' ' + 'size loading'"></fd-busy-indicator>
+        <fd-busy-indicator
+            [loading]="true"
+            [size]="size"
+            [ariaLabel]="size + ' ' + 'size loading'"
+            title="Please wait"
+            ariaValueText="Busy"
+        ></fd-busy-indicator>
     </div>
 }

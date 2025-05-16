@@ -10,12 +10,12 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 id="fd-dialog-header-9" fd-title>Second Dialog</h1>
+                <h1 id="fd-dialog-header-second" fd-title>Second Dialog</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss()" title="close"></button>
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-9">
+                <div id="fd-dialog-body-second">
                     This is the second dialog!<br />
                     It is completely independent from the first dialog and can be controlled separately!
                 </div>

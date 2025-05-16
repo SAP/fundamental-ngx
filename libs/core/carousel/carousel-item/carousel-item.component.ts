@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    signal,
+    ViewEncapsulation
+} from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { CarouselItemInterface } from '../carousel.service';
@@ -21,6 +29,14 @@ let carouselItemCounter = 0;
             }
         `
     ],
+    host: {
+        role: 'option',
+        class: 'fd-carousel__item fd-carousel__item--active',
+        '[attr.aria-setsize]': 'ariaSetsize()',
+        '[attr.aria-posinset]': 'ariaPosinset()',
+        '[attr.aria-selected]': 'ariaSelected()',
+        '[attr.aria-hidden]': 'ariaHidden()'
+    },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [BusyIndicatorComponent]
@@ -69,17 +85,21 @@ export class CarouselItemComponent<T = any> implements CarouselItemInterface {
     @Input()
     value: T;
 
-    /** @hidden */
-    @HostBinding('class.fd-carousel__item')
-    carouselItem = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-carousel__item--active')
-    carouselItemActive = true;
-
     /** @hidden Hide/show slide, useful for managing tab order */
     @HostBinding('style.visibility')
     _visibility: Visibility = 'visible';
+
+    /** @hidden value for aria-setsize attribute */
+    ariaSetsize = signal<number>(0);
+
+    /** @hidden value for aria-posinset attribute */
+    ariaPosinset = signal<number>(0);
+
+    /** @hidden value for aria-selected attribute */
+    ariaSelected = signal<boolean>(false);
+
+    /** @hidden value for aria-hidden attribute */
+    ariaHidden = signal<boolean>(false);
 
     /** @hidden */
     set visibility(visibility: Visibility) {

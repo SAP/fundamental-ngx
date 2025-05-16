@@ -6,7 +6,8 @@ import {
     Input,
     OnDestroy,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    input
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
@@ -32,6 +33,9 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
     /** @hidden */
     @ContentChild(forwardRef(() => FeedInputButtonDirective))
     buttonElement: FeedInputButtonDirective;
+
+    /** Value for aria label */
+    ariaLabel = input<string>();
 
     /** @hidden */
     private readonly _subscriptions = new Subscription();

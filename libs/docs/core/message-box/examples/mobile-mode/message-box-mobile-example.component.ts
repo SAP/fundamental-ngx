@@ -31,8 +31,7 @@ export class MessageBoxMobileExampleComponent {
         };
 
         const messageBoxRef = this._messageBoxService.open(content, {
-            mobile: true,
-            ariaLabelledBy: `fd-message-box-mobile-header fd-message-box-mobile-body`
+            mobile: true
         });
     }
 }

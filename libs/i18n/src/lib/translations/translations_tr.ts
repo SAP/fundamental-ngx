@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Önceki öğeye git',
         rightNavigationBtnLabel: 'Sonraki öğeye git'
     },
