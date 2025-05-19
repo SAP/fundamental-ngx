@@ -1,26 +1,29 @@
-<div
-    fd-bar
-    class="fd-message-box__header"
-    [fdCozy]="messageBoxConfig.mobile"
-    [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
->
-    <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
-    <ng-template #defaultTemplate>
-        <div fd-bar-left>
-            <fd-bar-element #defaultTemplateHeaderBar>
-                @if (_showSemanticIcon) {
-                    <fd-message-box-semantic-icon
-                        class="fd-message-box__internal-semantic-icon"
-                    ></fd-message-box-semantic-icon>
-                }
-                <ng-content select="fd-message-box-semantic-icon"></ng-content>
-                <ng-content select="[fd-title]"></ng-content>
-            </fd-bar-element>
-        </div>
-    </ng-template>
-</div>
-@if (subHeaderTemplate) {
-    <div fd-bar class="fd-message-box__subheader" barDesign="subheader" [fdCozy]="messageBoxConfig.mobile">
-        <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
+<header>
+    <div
+        fd-bar
+        role="group"
+        class="fd-message-box__header"
+        [fdCozy]="messageBoxConfig.mobile"
+        [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
+    >
+        <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
+        <ng-template #defaultTemplate>
+            <div fd-bar-left>
+                <fd-bar-element #defaultTemplateHeaderBar>
+                    @if (_showSemanticIcon) {
+                        <fd-message-box-semantic-icon
+                            class="fd-message-box__internal-semantic-icon"
+                        ></fd-message-box-semantic-icon>
+                    }
+                    <ng-content select="fd-message-box-semantic-icon"></ng-content>
+                    <ng-content select="[fd-title]"></ng-content>
+                </fd-bar-element>
+            </div>
+        </ng-template>
     </div>
-}
+    @if (subHeaderTemplate) {
+        <div fd-bar class="fd-message-box__subheader" barDesign="subheader" [fdCozy]="messageBoxConfig.mobile">
+            <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
+        </div>
+    }
+</header>

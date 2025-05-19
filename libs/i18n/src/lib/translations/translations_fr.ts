@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Calendrier',
         calendarMonthViewDescription: 'Sélecteur de mois',
         calendarYearsViewDescription: "Sélecteur d'année",
-        calendarYearsRangeViewDescription: "Sélecteur de plage d'années"
+        calendarYearsRangeViewDescription: "Sélecteur de plage d'années",
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Zone combinée multiple',
         selectAllLabel: 'Tout sélectionner ({selectedItems} sur {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: "Aller à l'élément précédent",
         rightNavigationBtnLabel: "Aller à l'élément suivant"
     },
@@ -112,8 +115,8 @@ export default {
         collapsedItemMenuLabel: 'Menu des éléments réduits',
         cancel: 'Annuler',
         search: 'Rechercher',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
+        assistiveTools: "Outils d'assistance",
+        backButtonLabel: 'Retour',
         navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
@@ -202,7 +205,7 @@ export default {
         ariaLabel: 'Assistant'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Plus',
+        overflowTitleMore: 'Cliquer ou appuyer sur Entrée pour plus de détails',
         breadcrumbTrailLabel: "Fil d'Ariane"
     },
     platformApprovalFlow: {
@@ -537,7 +540,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Annuler',
         filteredBy: 'Filtré par',
-        showingBlankOfBlank: 'Affichage {totalGrowingItemsCount} sur {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Affichage {totalGrowingItemsCount} sur {totalGrowingItemsCount}',
+        clearFilters: 'Effacer les filtres'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifier'
@@ -602,7 +606,7 @@ export default {
         groupAriaDescription: 'Groupe de notifications',
         groupAriaDescriptionExpanded: 'développé',
         groupAriaDescriptionCollapsed: 'réduit',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Plus',
+        triggerLessLabel: 'Moins'
     }
 };

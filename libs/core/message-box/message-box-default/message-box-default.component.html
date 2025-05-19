@@ -1,9 +1,16 @@
 @if (_messageBoxContent) {
     <fd-message-box>
         <fd-message-box-header>
-            <h1 fd-title>{{ _messageBoxContent.title }}</h1>
+            <div
+                fd-title
+                role="heading"
+                [ariaLevel]="_messageBoxContent.titleHeadingLevel || 2"
+                [id]="_messageBoxContent.titleId || messageBoxTitleId"
+            >
+                {{ _messageBoxContent.title }}
+            </div>
         </fd-message-box-header>
-        <fd-message-box-body>
+        <fd-message-box-body [id]="_messageBoxContent.contentId || messageBoxContentId">
             <ng-template [ngTemplateOutlet]="_contentTemplate"></ng-template>
         </fd-message-box-body>
         @if (_footerVisible) {

@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'ปฏิทิน',
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
         calendarYearsViewDescription: 'ตัวเลือกปี',
-        calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี'
+        calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'คอมโบบ็อกซ์แบบหลายค่า',
         selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'ไปยังไอเท็มก่อนหน้า',
         rightNavigationBtnLabel: 'ไปยังไอเท็มถัดไป'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'เมนูไอเท็มแบบยุบรวม',
         cancel: 'ยกเลิก',
         search: 'ค้นหา',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'เครื่องมือช่วยเหลือ',
+        backButtonLabel: 'ย้อนกลับ',
+        navigationButtonLabel: 'การเนวิเกต'
     },
     coreSlider: {
         singleMinMaxDetails: 'ค่าต่ำสุดของแถบเลื่อนคือ {min} ค่าสูงสุดคือ {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'เพิ่มเติม',
+        overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม',
         breadcrumbTrailLabel: 'เมนูนำทาง'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'ตกลง',
         cancelBtnLabel: 'ยกเลิก',
         filteredBy: 'กรองตาม',
-        showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'กำลังแสดง {totalGrowingItemsCount} จาก {totalGrowingItemsCount}',
+        clearFilters: 'เคลียร์ตัวกรอง'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'แก้ไข'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
         groupAriaDescriptionExpanded: 'ขยาย',
         groupAriaDescriptionCollapsed: 'ยุบรวม',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'เพิ่มเติม',
+        triggerLessLabel: 'น้อยลง'
     }
 };

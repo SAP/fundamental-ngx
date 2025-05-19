@@ -78,6 +78,10 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     @Input()
     allowDisablingSorting = true;
 
+    /** Heading level of the dialog. */
+    @Input()
+    headingLevel: 1 | 2 | 3 | 4 | 5 | 6 = 2;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
     filters: QueryList<TableViewSettingsFilterComponent>;
@@ -133,7 +137,8 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
                 data: {
                     sortingData: sortData.columns.length > 0 ? sortData : null,
                     filteringData: filterData.viewSettingsFilters.length > 0 ? filterData : null,
-                    groupingData: groupData.columns.length > 0 ? groupData : null
+                    groupingData: groupData.columns.length > 0 ? groupData : null,
+                    headingLevel: this.headingLevel
                 }
             },
             this.table.injector

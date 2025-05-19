@@ -29,7 +29,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-dialog-full-screen-inner-example',
     template: ` <fd-dialog>
         <fd-dialog-header>
-            <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
+            <h1 id="fd-dialog-header-fs-component" fd-title>{{ dialogRef.data.title }}</h1>
             <button
                 fd-dialog-full-screen-toggler-button
                 [title]="(dialogRef.fullScreen | async) === true ? 'Leave full-screen mode' : 'Enter full-screen mode'"
@@ -38,7 +38,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         </fd-dialog-header>
         <fd-dialog-body>
             <p
-                id="fd-dialog-body-1"
+                id="fd-dialog-body-fs-component"
                 [ngStyle]="{
                     'text-align': 'justify',
                     margin: 0
@@ -59,7 +59,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
                 label="Interesting"
                 fdType="emphasized"
                 (click)="dialogRef.close('Continue')"
-                ariaLabel="Interesting Emphasized"
+                ariaLabel="Interesting"
             >
             </fd-button-bar>
             <fd-button-bar label="Cancel" fdType="transparent" (click)="dialogRef.dismiss('Cancel')" ariaLabel="Cancel">
@@ -150,8 +150,8 @@ export class DialogFullScreenExampleComponent {
                 ]
             },
             width: '400px',
-            ariaLabelledBy: 'fd-dialog-header-1',
-            ariaDescribedBy: 'fd-dialog-body-1',
+            ariaLabelledBy: 'fd-dialog-header-fs-component',
+            ariaDescribedBy: 'fd-dialog-body-fs-component',
             responsivePadding: true,
             draggable: true,
             resizable: true,
@@ -175,8 +175,8 @@ export class DialogFullScreenExampleComponent {
             responsivePadding: true,
             draggable: true,
             resizable: true,
-            ariaLabelledBy: 'fd-dialog-header-full-screen',
-            ariaDescribedBy: 'fd-dialog-header-full-screen',
+            ariaLabelledBy: 'fd-dialog-header-fs-template',
+            ariaDescribedBy: 'fd-dialog-body-fs-template',
             focusTrapped: true
         });
 
@@ -195,8 +195,9 @@ export class DialogFullScreenExampleComponent {
     openDialog(): void {
         const object: DialogDefaultContent = {
             title: 'Dialog Title',
-            titleId: 'fd-dialog-header-full-screen',
+            titleId: 'fd-dialog-header-fs-object',
             content: this.dialogContent,
+            contentId: 'fd-dialog-body-fs-object',
             subHeader: this.dialogSubHeader,
             approveButton: 'Ok',
             approveButtonAriaLabel: 'Ok Emphasized',
@@ -212,8 +213,8 @@ export class DialogFullScreenExampleComponent {
         };
 
         this._dialogReference = this._dialogService.open(object, {
-            ariaLabelledBy: 'fd-dialog-header-full-screen',
-            ariaDescribedBy: 'fd-dialog-body-full-screen',
+            ariaLabelledBy: 'fd-dialog-header-fs-object',
+            ariaDescribedBy: 'fd-dialog-body-fs-object',
             focusTrapped: true,
             resizable: true,
             draggable: true

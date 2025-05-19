@@ -105,7 +105,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
             .observe(this.elementRef, false)
             .pipe(takeUntilDestroyed())
             .subscribe((isFocusable) => {
-                if (!isFocusable && isFocusable !== this.fdkFocusableItem) {
+                if (isFocusable !== this.fdkFocusableItem) {
                     this.fdkFocusableItem = isFocusable;
                 }
             });

@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'カレンダー',
         calendarMonthViewDescription: '月選択',
         calendarYearsViewDescription: '年選択',
-        calendarYearsRangeViewDescription: '年範囲選択'
+        calendarYearsRangeViewDescription: '年範囲選択',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '複数値コンボボックス',
         selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '前の項目へ',
         rightNavigationBtnLabel: '次の項目へ'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: '非表示の項目メニュー',
         cancel: 'キャンセル',
         search: '検索',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: '補助ツール',
+        backButtonLabel: '戻る',
+        navigationButtonLabel: 'ナビゲーション'
     },
     coreSlider: {
         singleMinMaxDetails: 'スライダの最小値: {min}、最大値: {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'ウィザード'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '表示を増やす',
+        overflowTitleMore: '詳細を表示するにはクリックするか Enter を押してください',
         breadcrumbTrailLabel: '階層リンク'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'キャンセル',
         filteredBy: 'フィルタ基準',
-        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount}件を表示中'
+        showingBlankOfBlank: '{totalGrowingItemsCount}/{totalGrowingItemsCount}件を表示中',
+        clearFilters: 'フィルタをクリア'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編集'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: '通知グループ',
         groupAriaDescriptionExpanded: '表示',
         groupAriaDescriptionCollapsed: '非表示',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: '表示を増やす',
+        triggerLessLabel: '表示を減らす'
     }
 };

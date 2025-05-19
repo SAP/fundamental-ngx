@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalendář',
         calendarMonthViewDescription: 'Výběr měsíce',
         calendarYearsViewDescription: 'Výběr roku',
-        calendarYearsRangeViewDescription: 'Výběr rozsahu let'
+        calendarYearsRangeViewDescription: 'Výběr rozsahu let',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Vícehodnotový výklopný seznam',
         selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
         rightNavigationBtnLabel: 'Přejít na další položku'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Sbalená položka menu',
         cancel: 'Zrušit',
         search: 'Hledat',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Pomocné nástroje',
+        backButtonLabel: 'Zpět',
+        navigationButtonLabel: 'Navigace'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Průvodce'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Více',
+        overflowTitleMore: 'Kliknutím nebo stisknutím enter zobrazíte další detaily',
         breadcrumbTrailLabel: 'Navigační cesta'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Zrušit',
         filteredBy: 'Filtrováno podle',
-        showingBlankOfBlank: 'Zobrazení {totalGrowingItemsCount} z {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Zobrazení {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        clearFilters: 'Vymazat filtry'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Skupina oznámení',
         groupAriaDescriptionExpanded: 'rozbaleno',
         groupAriaDescriptionCollapsed: 'sbaleno',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Více',
+        triggerLessLabel: 'Méně'
     }
 };

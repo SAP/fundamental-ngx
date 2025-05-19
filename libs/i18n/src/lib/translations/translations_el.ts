@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Ημερολόγιο',
         calendarMonthViewDescription: 'Επιλογέας μήνα',
         calendarYearsViewDescription: 'Επιλογέας έτους',
-        calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών'
+        calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Σύνθετο Πλαίσιο Πολλών Τιμών',
         selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Προς προηγούμενο στοιχείο',
         rightNavigationBtnLabel: 'Προς επόμενο στοιχείο'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Συνεπτυγμένο Μενού Στοιχείων',
         cancel: 'Ακύρωση',
         search: 'Αναζήτηση',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Βοηθητικά Εργαλεία',
+        backButtonLabel: 'Πίσω',
+        navigationButtonLabel: 'Πλοήγηση'
     },
     coreSlider: {
         singleMinMaxDetails: 'Ελάχιστη τιμή Slider είναι {min}, μέγιστη τιμή είναι (max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Οδηγός'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Περισσότερα',
+        overflowTitleMore: 'Κάντε κλικ ή πατήστε enter για να δείτε περισσότερες λεπτομέρειες',
         breadcrumbTrailLabel: 'Διαδρομή Περιήγησης'
     },
     platformApprovalFlow: {
@@ -536,7 +539,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Ακύρωση',
         filteredBy: 'Φιλτράρισμα κατά',
-        showingBlankOfBlank: 'Εμφάνιση {totalGrowingItemsCount} από {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Εμφάνιση {totalGrowingItemsCount} από {totalGrowingItemsCount}',
+        clearFilters: 'Εκκαθάριση Φίλτρων'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Επεξεργασία'
@@ -601,7 +605,7 @@ export default {
         groupAriaDescription: 'Ομάδα Ειδοποιήσεων',
         groupAriaDescriptionExpanded: 'επεκτάθηκε',
         groupAriaDescriptionCollapsed: 'συμπτύχθηκε',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Περισσότερα',
+        triggerLessLabel: 'Λιγότερα'
     }
 };

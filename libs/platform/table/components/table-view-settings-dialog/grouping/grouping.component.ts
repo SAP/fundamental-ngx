@@ -43,6 +43,9 @@ export class GroupingComponent implements OnInit {
     /** @hidden Initial grouping settings */
     initialGrouping = input<Nullable<SettingsGroupDialogResultData>>();
 
+    /** @hidden Heading level */
+    headingLevel = input<number>(2);
+
     /** Event emitter for group changes */
     groupChange = output<SettingsGroupDialogResultData>();
 
@@ -60,6 +63,9 @@ export class GroupingComponent implements OnInit {
 
     /** @hidden */
     groupOrderHeaderId = `fdp-table-group-dialog-group-order-header-${groupOrderHeaderUniqueId++}`;
+
+    /** @hidden */
+    groupByHeaderId = `fdp-table-group-dialog-group-by-header-${groupOrderHeaderUniqueId++}`;
 
     /** Constants for grouping directions */
     readonly SORT_DIRECTION = SortDirection;

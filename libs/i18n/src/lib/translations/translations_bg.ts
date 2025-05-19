@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Календар',
         calendarMonthViewDescription: 'Средство за избор на месец',
         calendarYearsViewDescription: 'Средство за избор на година',
-        calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години'
+        calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Комбинирано поле с множество стойности',
         selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Към предишната позиция',
         rightNavigationBtnLabel: 'Към следващата позиция'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Свито меню на позиции',
         cancel: 'Отказ',
         search: 'Търсене',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Помощни инструменти',
+        backButtonLabel: 'Назад',
+        navigationButtonLabel: 'Навигация'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минималната стойност на плъзгача е {min}, а максималната е {max}',
@@ -146,7 +149,7 @@ export default {
         semanticDeclineLabel: 'Отхвърляне'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Още'
+        tabListExpandButtonText: 'Повече'
     },
     coreText: {
         moreLabel: 'Повече',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Асистент'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Повече',
+        overflowTitleMore: 'Кликнете или натиснете Enter, за да видите повече подробности',
         breadcrumbTrailLabel: 'Навигационен път'
     },
     platformApprovalFlow: {
@@ -296,7 +299,7 @@ export default {
         searchShowAllAdvancedSearchLabel: 'Показване на всички филтри',
         searchHideAllAdvancedSearchLabel: 'Скриване на всички филтри',
         selectTabDisplayCountLabel: 'Позиции: ({count})',
-        selectTabMoreBtnLabel: 'Още',
+        selectTabMoreBtnLabel: 'Повече',
         selectTabCountHiddenA11yLabel: 'съдържа {rowCount} реда и {colCount} колони',
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Отвори диалогов прозорец',
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Отмяна',
         filteredBy: 'Филтрирано по',
-        showingBlankOfBlank: 'Показване: {totalGrowingItemsCount} от {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показване: {totalGrowingItemsCount} от {totalGrowingItemsCount}',
+        clearFilters: 'Изчистване на филтрите'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактиране'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Група за известия',
         groupAriaDescriptionExpanded: 'разгърнато',
         groupAriaDescriptionCollapsed: 'свито',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Повече',
+        triggerLessLabel: 'По-малко'
     }
 };

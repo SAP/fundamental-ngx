@@ -21,6 +21,7 @@ import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '@fundamenta
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
+import { UserMenuComponent } from '@fundamental-ngx/core/user-menu';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarSizes } from '../model/shellbar-sizes';
 import { ShellbarUser } from '../model/shellbar-user';
@@ -113,6 +114,10 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false })
     productSwitchComponent: ProductSwitchComponent;
+
+    /** @hidden */
+    @ContentChild(UserMenuComponent, { static: false })
+    userMenuComponent: UserMenuComponent;
 
     /** @hidden */
     @ViewChild(CdkPortalOutlet)

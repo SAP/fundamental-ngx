@@ -1,21 +1,15 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 id="fd-dialog-header-7" fd-title>Dialog states</h1>
+            <h1 id="fd-dialog-header-state" fd-title>Dialog states</h1>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-7">{{ dialog.data }}</div>
+            <div id="fd-dialog-body-state">{{ dialog.data }}</div>
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-button-bar
-                fdkInitialFocus
-                fdType="emphasized"
-                label="Ok"
-                (click)="dialog.close()"
-                ariaLabel="Ok Emphasized"
-            >
+            <fd-button-bar fdkInitialFocus fdType="emphasized" label="Ok" (click)="dialog.close()" ariaLabel="Ok">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>

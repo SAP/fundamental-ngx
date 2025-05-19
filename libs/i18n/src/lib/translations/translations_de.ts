@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalender',
         calendarMonthViewDescription: 'Monatsauswahl',
         calendarYearsViewDescription: 'Jahresauswahl',
-        calendarYearsRangeViewDescription: 'Jahresbereichsauswahl'
+        calendarYearsRangeViewDescription: 'Jahresbereichsauswahl',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Mehrwert-Combobox',
         selectAllLabel: 'Alle ({selectedItems} von {totalItems}) auswählen'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Zum vorherigen Element wechseln',
         rightNavigationBtnLabel: 'Zum nächsten Element wechseln'
     },
@@ -111,8 +114,8 @@ export default {
         collapsedItemMenuLabel: 'Komprimiertes Elementmenü',
         cancel: 'Abbrechen',
         search: 'Suchen',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
+        assistiveTools: 'Unterstützende Tools',
+        backButtonLabel: 'Zurück',
         navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Assistent'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mehr',
+        overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen',
         breadcrumbTrailLabel: 'Navigationspfad'
     },
     platformApprovalFlow: {
@@ -536,7 +539,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Abbrechen',
         filteredBy: 'Gefiltert nach',
-        showingBlankOfBlank: 'Anzeige von {totalGrowingItemsCount} von {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Anzeige von {totalGrowingItemsCount} von {totalGrowingItemsCount}',
+        clearFilters: 'Filter zurücksetzen'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bearbeiten'
@@ -601,7 +605,7 @@ export default {
         groupAriaDescription: 'Benachrichtigungsgruppe',
         groupAriaDescriptionExpanded: 'erweitert',
         groupAriaDescriptionCollapsed: 'reduziert',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mehr',
+        triggerLessLabel: 'Weniger'
     }
 };

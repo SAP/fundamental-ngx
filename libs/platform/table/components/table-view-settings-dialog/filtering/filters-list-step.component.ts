@@ -51,6 +51,10 @@ export class FiltersListStepComponent implements FiltersViewStep {
     @Input()
     filters: SelectableFilter[] = [];
 
+    /** Heading level of the dialog. */
+    @Input()
+    headingLevel: number;
+
     /** Select event is fired once some filter is selected */
     @Output()
     selectFilter: EventEmitter<SelectableFilter> = new EventEmitter<SelectableFilter>();

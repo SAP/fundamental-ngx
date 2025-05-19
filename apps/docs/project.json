@@ -51,6 +51,16 @@
                         "output": "./assets/theming-base/"
                     },
                     {
+                        "glob": "**/*",
+                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/",
+                        "output": "./assets/theming-base/baseTheme/fonts/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts",
+                        "output": "./assets/theming-base/sap_horizon/fonts/"
+                    },
+                    {
                         "input": ".",
                         "glob": "README.md",
                         "output": "./assets"
@@ -164,22 +174,7 @@
                 "styles": [
                     "node_modules/fundamental-styles/dist/icon.css",
                     "apps/docs/src/fd-typedoc/assets/css/main.scss",
-                    "apps/docs/src/styles.scss",
-                    {
-                        "input": "apps/docs/src/theming/sap_fiori_3_fonts.css",
-                        "inject": false,
-                        "bundleName": "sap_fiori_3_fonts"
-                    },
-                    {
-                        "input": "apps/docs/src/theming/sap_horizon_fonts.css",
-                        "inject": false,
-                        "bundleName": "sap_horizon_fonts"
-                    },
-                    {
-                        "input": "apps/docs/src/theming/sap_belize_fonts.css",
-                        "inject": false,
-                        "bundleName": "sap_belize_fonts"
-                    }
+                    "apps/docs/src/styles.scss"
                 ],
                 "stylePreprocessorOptions": {
                     "includePaths": ["node_modules"]
@@ -339,7 +334,8 @@
                 }
             },
             "defaultConfiguration": "hot-module-replacement",
-            "dependsOn": ["^compile-typedoc"]
+            "dependsOn": ["^compile-typedoc"],
+            "continuous": true
         }
     }
 }

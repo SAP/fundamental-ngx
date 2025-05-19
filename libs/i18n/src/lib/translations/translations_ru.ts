@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Календарь',
         calendarMonthViewDescription: 'Выбор месяца',
         calendarYearsViewDescription: 'Выбор года',
-        calendarYearsRangeViewDescription: 'Выбор диапазона годов'
+        calendarYearsRangeViewDescription: 'Выбор диапазона годов',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Поле со списком значений',
         selectAllLabel: 'Выбрать все ({selectedItems} из {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'К предыдущей позиции',
         rightNavigationBtnLabel: 'К следующей позиции'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Свернутое меню позиций',
         cancel: 'Отменить',
         search: 'Поиск',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Вспомогательные инструменты',
+        backButtonLabel: 'Назад',
+        navigationButtonLabel: 'Навигация'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение ползунка: {min}, макс.: {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Ассистент'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Больше',
+        overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности',
         breadcrumbTrailLabel: 'Путь навигации'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'ОК',
         cancelBtnLabel: 'Отменить',
         filteredBy: 'Отфильтровано по',
-        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Показано {totalGrowingItemsCount} из {totalGrowingItemsCount}',
+        clearFilters: 'Очистить фильтры'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Изменить'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Группа уведомлений',
         groupAriaDescriptionExpanded: 'развернуто',
         groupAriaDescriptionCollapsed: 'свернуто',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Больше',
+        triggerLessLabel: 'Меньше'
     }
 };

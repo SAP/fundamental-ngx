@@ -19,6 +19,17 @@
     <ng-template [ngTemplateOutlet]="actionSheetControl"></ng-template>
 }
 <ng-template #actionSheetBodyTemplate>
+    @if (mobile && controlTitle) {
+        <div class="fd-bar fd-action-sheet__bar" role="toolbar" aria-label="Bar">
+            <div class="fd-bar__left">
+                <div class="fd-bar__element">
+                    <div role="heading" [ariaLevel]="controlTitleHeading" class="fd-action-sheet__title">
+                        {{ controlTitle }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <ng-content select="fd-action-sheet-body"></ng-content>
 </ng-template>
 <ng-template #actionSheetControl>

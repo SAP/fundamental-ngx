@@ -19,6 +19,9 @@ import { MessageBoxComponent } from '../message-box.component';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 
+let mbTitleId = 0;
+let mbContentId = 0;
+
 /** Message box component used to create the message box in object based approach */
 @Component({
     selector: 'fd-message-box-default',
@@ -50,6 +53,18 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     /** @hidden */
     _footerVisible: boolean;
 
+    /**
+     * message box title id
+     * if not set, a default value is provided
+     */
+    messageBoxTitleId = 'fd-message-box-title-id-' + mbTitleId++;
+
+    /**
+     * message box content id
+     * if not set, a default value is provided
+     */
+    messageBoxContentId = 'fd-message-box-content-id-' + mbContentId++;
+
     /** @hidden */
     constructor(
         public _messageBoxConfig: MessageBoxConfig,
@@ -64,6 +79,16 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         this._setContentTemplate();
+
+        /**
+         * If the configuration object doesn't provide values for ariaLabelledBy and/or ariaDescribedBy
+         * use the default generated ids for title and content
+         */
+
+        if (this._messageBoxConfig) {
+            this._messageBoxConfig.ariaLabelledBy ??= this.messageBoxTitleId;
+            this._messageBoxConfig.ariaDescribedBy ??= this.messageBoxContentId;
+        }
     }
 
     /** @hidden */

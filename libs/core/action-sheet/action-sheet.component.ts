@@ -27,9 +27,12 @@ import {
     destroyObservable,
     DynamicComponentService,
     FocusEscapeDirection,
-    KeyboardSupportService
+    KeyboardSupportService,
+    Nullable
 } from '@fundamental-ngx/cdk/utils';
+
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+
 import { Placement } from '@fundamental-ngx/core/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
@@ -75,6 +78,18 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
      */
     @Input()
     triggers: string[] = ['click'];
+
+    /** Value for the control title in mobile mode */
+    @Input()
+    controlTitle: Nullable<string>;
+
+    /**
+     * Value for the control title heading level
+     * A number between 1 and 6
+     * Default is set to 2
+     */
+    @Input()
+    controlTitleHeading: 1 | 2 | 3 | 4 | 5 | 6 = 2;
 
     /** Event thrown, when focus escapes the list */
     @Output()

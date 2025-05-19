@@ -61,6 +61,12 @@ export interface FdLanguage {
 
         /** Calendar years range view aria role description. */
         calendarYearsRangeViewDescription: FdLanguageKey;
+
+        /** Label for work days in the calendar legend. */
+        workDayLabel: FdLanguageKey;
+
+        /** Label for non-work days in the calendar legend. */
+        nonWorkDayLabel: FdLanguageKey;
     };
     coreMultiComboBox: {
         /** Label for the multi-combobox. */
@@ -68,6 +74,7 @@ export interface FdLanguage {
         selectAllLabel: FdLanguageKey;
     };
     coreCarousel: {
+        pageIndicatorLabel: FdLanguageKey;
         leftNavigationBtnLabel: FdLanguageKey;
         rightNavigationBtnLabel: FdLanguageKey;
     };

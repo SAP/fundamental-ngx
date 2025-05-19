@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalendar',
         calendarMonthViewDescription: 'Pemilih bulan',
         calendarYearsViewDescription: 'Pemilih tahun',
-        calendarYearsRangeViewDescription: 'Pemilih julat tahun'
+        calendarYearsRangeViewDescription: 'Pemilih julat tahun',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kotak Kombo Nilai Berbilang',
         selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
         rightNavigationBtnLabel: 'Pergi ke item seterusnya'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Menu Item yang Diruntuhkan',
         cancel: 'Batal',
         search: 'Cari',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Alat Bantuan',
+        backButtonLabel: 'Kembali',
+        navigationButtonLabel: 'Navigasi'
     },
     coreSlider: {
         singleMinMaxDetails: 'Nilai minimum penggelongsor ialah {min}, nilai maksimum ialah {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Bestari'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Selanjutnya',
+        overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut',
         breadcrumbTrailLabel: 'Jejak Tinggalan'
     },
     platformApprovalFlow: {
@@ -534,7 +537,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Batal',
         filteredBy: 'Ditapis mengikut',
-        showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}',
+        clearFilters: 'Kosongkan Penapis'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
@@ -599,7 +603,7 @@ export default {
         groupAriaDescription: 'Kumpulan Pemberitahuan',
         groupAriaDescriptionExpanded: 'dikembangkan',
         groupAriaDescriptionCollapsed: 'diruntuhkan',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Selanjutnya',
+        triggerLessLabel: 'Kurang'
     }
 };

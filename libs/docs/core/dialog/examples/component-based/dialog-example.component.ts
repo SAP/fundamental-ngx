@@ -17,10 +17,10 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
+                <h1 id="fd-dialog-header-c" fd-title>{{ dialogRef.data.title }}</h1>
             </fd-dialog-header>
             <fd-dialog-body>
-                <p id="fd-dialog-body-1" [ngStyle]="{ 'text-align': 'justify', margin: 0 }">
+                <p id="fd-dialog-body-c" [ngStyle]="{ 'text-align': 'justify', margin: 0 }">
                     {{ dialogRef.data.pinnapleDescription }}
                 </p>
                 <ul [style.margin-bottom]="0">
@@ -36,7 +36,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
                     label="Interesting"
                     fdType="emphasized"
                     (click)="dialogRef.close('Continue')"
-                    ariaLabel="Interesting Emphasized"
+                    ariaLabel="Interesting"
                 >
                 </fd-button-bar>
                 <fd-button-bar

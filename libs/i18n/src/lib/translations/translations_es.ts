@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Calendario',
         calendarMonthViewDescription: 'Selector de mes',
         calendarYearsViewDescription: 'Selector de año',
-        calendarYearsRangeViewDescription: 'Selector de rango de años'
+        calendarYearsRangeViewDescription: 'Selector de rango de años',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Cuadro combinado de varios valores',
         selectAllLabel: 'Seleccionar todos ({selectedItems} de {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Ir a elemento anterior',
         rightNavigationBtnLabel: 'Ir a siguiente elemento'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Menú de elementos contraídos',
         cancel: 'Cancelar',
         search: 'Buscar',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Herramientas de asistencia',
+        backButtonLabel: 'Atrás',
+        navigationButtonLabel: 'Navegación'
     },
     coreSlider: {
         singleMinMaxDetails: 'El valor mínimo del slider es {min}, el valor máximo es {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Asistente'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Más',
+        overflowTitleMore: 'Hacer clic o pulsar intro para ver más detalles',
         breadcrumbTrailLabel: 'Ruta de navegación'
     },
     platformApprovalFlow: {
@@ -536,7 +539,8 @@ export default {
         confirmBtnLabel: 'Aceptar',
         cancelBtnLabel: 'Cancelar',
         filteredBy: 'Filtrado por',
-        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
+        clearFilters: 'Borrar filtros'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'
@@ -601,7 +605,7 @@ export default {
         groupAriaDescription: 'Grupo de notificaciones',
         groupAriaDescriptionExpanded: 'expandido',
         groupAriaDescriptionCollapsed: 'contraído',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Más',
+        triggerLessLabel: 'Menos'
     }
 };

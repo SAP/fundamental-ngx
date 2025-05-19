@@ -1,6 +1,13 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-title [id]="_defaultDialogContent?.titleId">{{ _defaultDialogContent?.title }}</h1>
+        <div
+            role="heading"
+            [attr.aria-level]="_defaultDialogContent?.titleHeadingLevel || 1"
+            fd-title
+            [id]="_defaultDialogContent?.titleId || dialogTitleId"
+        >
+            {{ _defaultDialogContent?.title }}
+        </div>
         @if (_defaultDialogContent?.allowFullScreen) {
             <button
                 fd-dialog-full-screen-toggler-button
@@ -28,7 +35,7 @@
         }
     </fd-dialog-header>
     @if (_defaultDialogContent?.content) {
-        <fd-dialog-body>
+        <fd-dialog-body [id]="_defaultDialogContent?.contentId || dialogContentId">
             <ng-template [ngTemplateOutlet]="_defaultDialogContent?.content!"></ng-template>
         </fd-dialog-body>
     }

@@ -500,10 +500,6 @@ fdk-dynamic-portal {
             .fd-table__row--secondary {
                 .fd-table__cell {
                     border-bottom: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);
-
-                    .fd-table__text {
-                        white-space: nowrap !important;
-                    }
                 }
 
                 &:hover {

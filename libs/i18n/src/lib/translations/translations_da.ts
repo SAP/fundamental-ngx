@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalender',
         calendarMonthViewDescription: 'Månedsvælger',
         calendarYearsViewDescription: 'Årsvælger',
-        calendarYearsRangeViewDescription: 'Vælger af årsinterval'
+        calendarYearsRangeViewDescription: 'Vælger af årsinterval',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Multiværdikombinationsboks',
         selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til næste element'
     },
@@ -111,8 +114,8 @@ export default {
         collapsedItemMenuLabel: 'Minimeret elementmenu',
         cancel: 'Annuller',
         search: 'Søg',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
+        assistiveTools: 'Assisterende værktøjer',
+        backButtonLabel: 'Tilbage',
         navigationButtonLabel: 'Navigation'
     },
     coreSlider: {
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Guide'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Flere',
+        overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer',
         breadcrumbTrailLabel: 'Brødkrummespor'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Annuller',
         filteredBy: 'Filtreret efter',
-        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Viser {totalGrowingItemsCount} af {totalGrowingItemsCount}',
+        clearFilters: 'Ryd filtre'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Meddelelsesgruppe',
         groupAriaDescriptionExpanded: 'udvidet',
         groupAriaDescriptionCollapsed: 'minimeret',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mere',
+        triggerLessLabel: 'Mindre'
     }
 };

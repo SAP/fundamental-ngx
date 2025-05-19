@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalendarz',
         calendarMonthViewDescription: 'Selektor miesiąca',
         calendarYearsViewDescription: 'Selektor roku',
-        calendarYearsRangeViewDescription: 'Selektor zakresu lat'
+        calendarYearsRangeViewDescription: 'Selektor zakresu lat',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Pole wielokrotnego wyboru',
         selectAllLabel: 'Wybierz wszystkie ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Przejdź do poprzedniej pozycji',
         rightNavigationBtnLabel: 'Przejdź do następnej pozycji'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Zwinięte menu pozycji',
         cancel: 'Anuluj',
         search: 'Wyszukiwanie',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Narzędzia pomocnicze',
+        backButtonLabel: 'Wstecz',
+        navigationButtonLabel: 'Nawigacja'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna wartość suwaka to {min}, maksymalna wartość to {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Kreator'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Więcej',
+        overflowTitleMore: 'Kliknij lub naciśnij Enter, aby wyświetlić więcej szczegółów',
         breadcrumbTrailLabel: 'Ścieżka nawigacji'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Anuluj',
         filteredBy: 'Odfiltrowane wg',
-        showingBlankOfBlank: 'Wyświetla {totalGrowingItemsCount} z {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Wyświetla {totalGrowingItemsCount} z {totalGrowingItemsCount}',
+        clearFilters: 'Wyczyść filtry'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Grupa zawiadomień',
         groupAriaDescriptionExpanded: 'rozwinięte',
         groupAriaDescriptionCollapsed: 'zwinięte',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Więcej',
+        triggerLessLabel: 'Mniej'
     }
 };

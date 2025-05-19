@@ -31,6 +31,27 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="legendSection" componentName="calendar"> Calendar Legend</fd-docs-section-title>
+<description>
+    Calendar has a sibling component called <code>fd-calendar-legend</code>. It is used to display the legend of the
+    calendar component. The legend can be displayed in two different ways: as a column or as a row. The legend is
+    automatically generated based on the special days rules passed to the calendar. It can be used in conjunction with
+    the calendar component or separately.<br /><br />
+    In order for the calendar to correctly associate with its corresponding legend, the legend component must be given a
+    unique identifier via the <code>[legendId]</code> input, and the calendar component must reference this identifier
+    via the <code>[associatedLegendId]</code> input, as demonstrated in the examples below. Also, both the calendar and
+    the legend component must reference the same value with the <code>[specialDaysRules]</code> input.<br />
+    <br />
+    By default, the legend will display the rules for "Today", "Selected Date", "Work Day" and "Non-Work" day. These can
+    be individually disabled with corresponding inputs, as demonstrated by the second example below.
+</description>
+<component-example>
+    <fd-calendar-legend-example></fd-calendar-legend-example>
+</component-example>
+<code-example [exampleFiles]="calendarLegendSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="options" componentName="calendar"> Calendar Options </fd-docs-section-title>
 <description>
     Calendar has an extensive set of customization options, such as displaying the week number or applying compact mode

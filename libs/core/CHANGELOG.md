@@ -3,6 +3,312 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.0...v0.56.2-rc.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **core:** fund-styles breaking changes adoption part 1 ([#13291](https://github.com/SAP/fundamental-ngx/issues/13291)) ([6c7a5ff](https://github.com/SAP/fundamental-ngx/commit/6c7a5ffc033c68af0e89a2a403ef52bd393e9315)), closes [#13241](https://github.com/SAP/fundamental-ngx/issues/13241) [#13249](https://github.com/SAP/fundamental-ngx/issues/13249) [#13268](https://github.com/SAP/fundamental-ngx/issues/13268) [#13272](https://github.com/SAP/fundamental-ngx/issues/13272) [#13271](https://github.com/SAP/fundamental-ngx/issues/13271) [#13242](https://github.com/SAP/fundamental-ngx/issues/13242) [#13276](https://github.com/SAP/fundamental-ngx/issues/13276)
+
+
+
+
+
+## [0.56.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.1...v0.56.2-rc.0) (2025-05-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.1-rc.3...v0.56.1) (2025-05-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.1-rc.2...v0.56.1-rc.3) (2025-05-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.1-rc.1...v0.56.1-rc.2) (2025-05-14)
+
+
+### Bug Fixes
+
+* **core:** fix popover body performance issue ([#13288](https://github.com/SAP/fundamental-ngx/issues/13288)) ([32752a2](https://github.com/SAP/fundamental-ngx/commit/32752a238ca71d1b3a35f7f6c711cffeeedeb503))
+
+
+
+
+
+## [0.56.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.1-rc.0...v0.56.1-rc.1) (2025-05-14)
+
+
+### Features
+
+* **core:** add option to customize Facets content ([#13281](https://github.com/SAP/fundamental-ngx/issues/13281)) ([085651f](https://github.com/SAP/fundamental-ngx/commit/085651fc13ce3c2e87a6a594cc7613e3e0af055e))
+
+
+
+
+
+## [0.56.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.0...v0.56.1-rc.0) (2025-05-13)
+
+
+### Features
+
+* **core:** calendar legend focusing ([#13248](https://github.com/SAP/fundamental-ngx/issues/13248)) ([629ce16](https://github.com/SAP/fundamental-ngx/commit/629ce169a5d30fdd6a0ae6fc5544d7f75cdc2cf2))
+
+
+
+
+
+# [0.56.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.20...v0.56.0) (2025-05-12)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.19...v0.56.0-rc.20) (2025-05-12)
+
+
+### Bug Fixes
+
+* **core:** combobox bug when selecting object with matching display values ([#13244](https://github.com/SAP/fundamental-ngx/issues/13244)) ([4e98b36](https://github.com/SAP/fundamental-ngx/commit/4e98b3692873ae7b24c4fc636415101d5d02dfd5))
+
+
+
+
+
+# [0.56.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.18...v0.56.0-rc.19) (2025-05-12)
+
+
+### Bug Fixes
+
+* **core:** add fix for Notifications expander not showing in Notification Group ([#13279](https://github.com/SAP/fundamental-ngx/issues/13279)) ([ac18494](https://github.com/SAP/fundamental-ngx/commit/ac1849431089b7a2f67b45daf398724b01d71528))
+
+
+
+
+
+# [0.56.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.17...v0.56.0-rc.18) (2025-05-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.16...v0.56.0-rc.17) (2025-05-09)
+
+
+### Bug Fixes
+
+* **cdk:** focusable item tabindex bug ([#13255](https://github.com/SAP/fundamental-ngx/issues/13255)) ([d241458](https://github.com/SAP/fundamental-ngx/commit/d24145835adf6727d624cb727d1b66b6c367f66d))
+
+
+
+
+
+# [0.56.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.15...v0.56.0-rc.16) (2025-05-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.14...v0.56.0-rc.15) (2025-05-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.13...v0.56.0-rc.14) (2025-05-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.12...v0.56.0-rc.13) (2025-05-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.11...v0.56.0-rc.12) (2025-05-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.10...v0.56.0-rc.11) (2025-05-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.9...v0.56.0-rc.10) (2025-05-02)
+
+
+### Bug Fixes
+
+* **core:** file uploader button a11y ([#13267](https://github.com/SAP/fundamental-ngx/issues/13267)) ([5f2fc5a](https://github.com/SAP/fundamental-ngx/commit/5f2fc5a0767a653527ee812cd20942ead3f3ab0a))
+
+
+
+
+
+# [0.56.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.8...v0.56.0-rc.9) (2025-05-01)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.7...v0.56.0-rc.8) (2025-04-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.6...v0.56.0-rc.7) (2025-04-29)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.5...v0.56.0-rc.6) (2025-04-28)
+
+
+### Bug Fixes
+
+* **core:** add User Menu to ShellBar actions, update examples ([#13227](https://github.com/SAP/fundamental-ngx/issues/13227)) ([94f5854](https://github.com/SAP/fundamental-ngx/commit/94f5854a80cd274ae6b630056c4a77dfb86b52bd))
+
+
+
+
+
+# [0.56.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.4...v0.56.0-rc.5) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.3...v0.56.0-rc.4) (2025-04-25)
+
+
+### Features
+
+* **core:** calendar legend (main component & child items) ([#13203](https://github.com/SAP/fundamental-ngx/issues/13203)) ([b962af5](https://github.com/SAP/fundamental-ngx/commit/b962af5336bde83a19131f368a5306514ccc1557))
+
+
+
+
+
+# [0.56.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.2...v0.56.0-rc.3) (2025-04-25)
+
+
+### Bug Fixes
+
+* **core:** bug with select focusing popover control after opening ([#13232](https://github.com/SAP/fundamental-ngx/issues/13232)) ([ab3add3](https://github.com/SAP/fundamental-ngx/commit/ab3add395296f3fca422deb55623942b486de5fd))
+* **core:** remove fdp from core object attribute ([#13236](https://github.com/SAP/fundamental-ngx/issues/13236)) ([011a7a5](https://github.com/SAP/fundamental-ngx/commit/011a7a52053f27e195320be0aede0a14c9b73753))
+
+
+
+
+
+# [0.56.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.1...v0.56.0-rc.2) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.0-rc.0...v0.56.0-rc.1) (2025-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.56.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.5...v0.56.0-rc.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* remove using fundamental-styles fonts settings and use from theming-base ([#13219](https://github.com/SAP/fundamental-ngx/issues/13219)) ([d68cf9a](https://github.com/SAP/fundamental-ngx/commit/d68cf9a70a0c9e40c2d4270bae830a13d4082af8))
+
+
+### BREAKING CHANGES
+
+* theming service doesn't use fundamental-styles fonts settings and rely on theming-base
+
+Co-authored-by: Inna Atanasova <39598672+InnaAtanasova@users.noreply.github.com>
+
+
+
+
+
+## [0.55.7-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.4...v0.55.7-rc.5) (2025-04-24)
+
+
+### Bug Fixes
+
+* **core,cx:** vertical and side nav announcing selection incorrectly ([#13211](https://github.com/SAP/fundamental-ngx/issues/13211)) ([70ad2fa](https://github.com/SAP/fundamental-ngx/commit/70ad2fa3b6d07fd7bafa92443c601464d368ded5))
+
+
+
+
+
+## [0.55.7-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.3...v0.55.7-rc.4) (2025-04-24)
+
+
+### Bug Fixes
+
+* **core:** remove index/total from cx list translation ([#13215](https://github.com/SAP/fundamental-ngx/issues/13215)) ([5cc1942](https://github.com/SAP/fundamental-ngx/commit/5cc1942ee36b88236c0da36d992e1347b86be40c))
+
+
+
+
+
+## [0.55.7-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.2...v0.55.7-rc.3) (2025-04-24)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.55.7-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.55.7-rc.1...v0.55.7-rc.2) (2025-04-15)
 
 

@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Calendário',
         calendarMonthViewDescription: 'Selecionador de mês',
         calendarYearsViewDescription: 'Selecionador de ano',
-        calendarYearsRangeViewDescription: 'Selecionador de intervalo de anos'
+        calendarYearsRangeViewDescription: 'Selecionador de intervalo de anos',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Combobox de valores múltiplos',
         selectAllLabel: 'Selecionar todos os ({selectedItems} de {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Ir para o item anterior',
         rightNavigationBtnLabel: 'Ir para o próximo item'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Menu de item recolhido',
         cancel: 'Cancelar',
         search: 'Pesquisar',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Ferramentas assistivas',
+        backButtonLabel: 'Voltar',
+        navigationButtonLabel: 'Navegação'
     },
     coreSlider: {
         singleMinMaxDetails: 'O valor mínimo do controle deslizante é {min}, o valor máximo é {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Assistente'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mais',
+        overflowTitleMore: 'Clique ou pressione Enter para exibir mais detalhes',
         breadcrumbTrailLabel: 'Trilha de breadcrumb'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Cancelar',
         filteredBy: 'Filtrado por',
-        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Mostrando {totalGrowingItemsCount} de {totalGrowingItemsCount}',
+        clearFilters: 'Limpar filtros'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Grupo de notificações',
         groupAriaDescriptionExpanded: 'expandido',
         groupAriaDescriptionCollapsed: 'recolhido',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Mais',
+        triggerLessLabel: 'Menos'
     }
 };

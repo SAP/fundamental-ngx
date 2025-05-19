@@ -140,7 +140,9 @@ describe('OverflowItemsDirective', () => {
         fixture.detectChanges();
         tick(100); // Wait for any async tasks to complete
 
-        expect(component.currentExtraItems).not.toBe(0);
+        fixture.whenStable().then(() => {
+            expect(component.currentExtraItems).not.toBe(0);
+        });
     }), 10000); // Extend timeout in milliseconds
 
     it('should recalculate on resize', fakeAsync(() => {

@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalendar',
         calendarMonthViewDescription: 'Birač meseca',
         calendarYearsViewDescription: 'Birač godine',
-        calendarYearsRangeViewDescription: 'Birač raspona godina'
+        calendarYearsRangeViewDescription: 'Birač raspona godina',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Combo box višestruke vrednosti',
         selectAllLabel: 'Odaberi svih ({selectedItems} od {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
         rightNavigationBtnLabel: 'Idi na sledeću stavku'
     },
@@ -109,11 +112,11 @@ export default {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Sažeti meni stavke',
-        cancel: 'Otkaži',
+        cancel: 'Odustani',
         search: 'Traži',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Asistivni alati',
+        backButtonLabel: 'Nazad',
+        navigationButtonLabel: 'Usmeravanje'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna vrednost klizača je {min}, maksimalna vrednost je {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Čarobnjak'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Više',
+        overflowTitleMore: 'Kliknite ili pritisnite Enter da biste videli više detalja',
         breadcrumbTrailLabel: 'Put usmeravanja'
     },
     platformApprovalFlow: {
@@ -535,7 +538,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Odustani',
         filteredBy: 'Filtrirano prema',
-        showingBlankOfBlank: 'Prikazano {totalGrowingItemsCount} od {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Prikazano {totalGrowingItemsCount} od {totalGrowingItemsCount}',
+        clearFilters: 'Obriši filtere'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'
@@ -600,7 +604,7 @@ export default {
         groupAriaDescription: 'Grupa obaveštenja',
         groupAriaDescriptionExpanded: 'prošireno',
         groupAriaDescriptionCollapsed: 'sažeto',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Više',
+        triggerLessLabel: 'Manje'
     }
 };

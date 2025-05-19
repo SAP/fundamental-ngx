@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import {
     ProductMenuComponent,
@@ -7,10 +7,30 @@ import {
     ShellbarComponent,
     ShellbarGroupFlexOptions,
     ShellbarLogoComponent,
-    ShellbarMenuItem,
-    ShellbarUser,
-    ShellbarUserMenu
+    ShellbarMenuItem
 } from '@fundamental-ngx/core/shellbar';
+
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { PanelModule } from '@fundamental-ngx/core/panel';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import {
+    UserMenuBodyComponent,
+    UserMenuComponent,
+    UserMenuContentContainerComponent,
+    UserMenuControlComponent,
+    UserMenuFooterComponent,
+    UserMenuHeaderContainerDirective,
+    UserMenuHeaderDirective,
+    UserMenuListComponent,
+    UserMenuListItemComponent,
+    UserMenuSublineDirective,
+    UserMenuSublistComponent,
+    UserMenuUserNameDirective
+} from '@fundamental-ngx/core/user-menu';
 
 @Component({
     selector: 'fd-shellbar-growing-group-example',
@@ -23,10 +43,36 @@ import {
         ProductMenuComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
-        ProductSwitchModule
+        ProductSwitchModule,
+        UserMenuComponent,
+        UserMenuBodyComponent,
+        UserMenuControlComponent,
+        UserMenuFooterComponent,
+        UserMenuContentContainerComponent,
+        UserMenuHeaderContainerDirective,
+        UserMenuHeaderDirective,
+        UserMenuSublineDirective,
+        UserMenuUserNameDirective,
+        UserMenuListComponent,
+        UserMenuSublistComponent,
+        UserMenuListItemComponent,
+        AvatarComponent,
+        PopoverModule,
+        ListModule,
+        PanelModule,
+        MenuModule,
+        BarComponent,
+        BarRightDirective,
+        MessageToastModule
     ]
 })
 export class ShellbarGrowingGroupExampleComponent {
+    @ViewChild(UserMenuComponent)
+    userMenuComponent: UserMenuComponent;
+
+    expanded = true;
+    isOpen = false;
+
     groupConfig: ShellbarGroupFlexOptions = {
         product: {
             shrink: true,
@@ -65,16 +111,6 @@ export class ShellbarGrowingGroupExampleComponent {
                 alert('Application D Clicked');
             }
         }
-    ];
-
-    user: ShellbarUser = {
-        fullName: 'William Willson',
-        colorAccent: 1
-    };
-
-    userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: this.settingsCallback },
-        { text: 'Sign Out', callback: this.signOutCallback }
     ];
 
     actions = [
@@ -156,6 +192,8 @@ export class ShellbarGrowingGroupExampleComponent {
         }
     ];
 
+    constructor(private _messageToastService: MessageToastService) {}
+
     settingsCallback($event): void {
         console.log($event);
         alert('Settings Clicked');
@@ -178,5 +216,25 @@ export class ShellbarGrowingGroupExampleComponent {
 
     productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
+    }
+
+    isOpenChange(isOpen: boolean): void {
+        this.isOpen = isOpen;
+    }
+
+    onZoomGlyphClick(): void {
+        alert('Edit profile');
+    }
+
+    actionPicked(action: string): void {
+        this.openMessageToast(action);
+        this.userMenuComponent.close();
+    }
+
+    openMessageToast(action: string): void {
+        const content = `${action} action performed`;
+        this._messageToastService.open(content, {
+            duration: 5000
+        });
     }
 }

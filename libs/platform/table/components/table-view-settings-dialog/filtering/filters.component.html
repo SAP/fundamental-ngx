@@ -4,11 +4,13 @@
 <!-- Keep active step component  -->
 @if (activeStep() === ACTIVE_STEP.SELECT_FILTER) {
     <fdp-filters-list-step
+        [headingLevel]="headingLevel()"
         [filters]="viewSettingsFilters()"
         (selectFilter)="selectFilter($event)"
     ></fdp-filters-list-step>
 } @else if (activeStep() === ACTIVE_STEP.FILTER) {
     <fdp-filter-step
+        [headingLevel]="headingLevel()"
         [columnKey]="activeFilterColumnKey()!"
         [columnName]="activeFilter()!.label"
         [filter]="activeFilter()!"

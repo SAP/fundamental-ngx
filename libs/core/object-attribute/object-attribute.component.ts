@@ -9,10 +9,9 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
-import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fd-object-attribute, fdp-object-attribute',
+    selector: 'fd-object-attribute',
     templateUrl: './object-attribute.component.html',
     styleUrl: './object-attribute.component.scss',
     encapsulation: ViewEncapsulation.None,
@@ -44,11 +43,7 @@ export class ObjectAttributeComponent implements OnInit {
     constructor(
         private _el: ElementRef<HTMLElement>,
         private _renderer: Renderer2
-    ) {
-        if (this._el.nativeElement.tagName === 'fdp-object-attribute') {
-            warnOnce('`fdp-object-attribute` selector is deprecated, use `fd-object-attribute` instead.');
-        }
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

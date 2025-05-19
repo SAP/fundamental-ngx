@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalender',
         calendarMonthViewDescription: 'Maandenkiezer',
         calendarYearsViewDescription: 'Jaarkiezer',
-        calendarYearsRangeViewDescription: 'Jarenbereikkiezer'
+        calendarYearsRangeViewDescription: 'Jarenbereikkiezer',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Keuzelijst met invoerveld met meerdere waarden',
         selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Naar vorige item',
         rightNavigationBtnLabel: 'Naar volgende item'
     },
@@ -111,9 +114,9 @@ export default {
         collapsedItemMenuLabel: 'Menu-item samengevouwen',
         cancel: 'Annuleren',
         search: 'Zoeken',
-        assistiveTools: 'Assistive Tools',
-        backButtonLabel: 'Back',
-        navigationButtonLabel: 'Navigation'
+        assistiveTools: 'Ondersteunende tools',
+        backButtonLabel: 'Terug',
+        navigationButtonLabel: 'Navigatie'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimumwaarde voor schuifregelaar is {min}, maximumwaarde is {max}',
@@ -201,7 +204,7 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Meer',
+        overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken',
         breadcrumbTrailLabel: 'Navigatiepad'
     },
     platformApprovalFlow: {
@@ -536,7 +539,8 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Annuleren',
         filteredBy: 'Gefilterd op',
-        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergegeven'
+        showingBlankOfBlank: '{totalGrowingItemsCount} van {totalGrowingItemsCount} weergegeven',
+        clearFilters: 'Filters wissen'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bewerken'
@@ -601,7 +605,7 @@ export default {
         groupAriaDescription: 'Meldingsgroep',
         groupAriaDescriptionExpanded: 'uitgevouwen',
         groupAriaDescriptionCollapsed: 'samengevouwen',
-        triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerMoreLabel: 'Meer',
+        triggerLessLabel: 'Minder'
     }
 };

@@ -48,6 +48,9 @@ export const tableSchema = {
                 },
                 hideItemCount: {
                     type: 'boolean'
+                },
+                headingLevel: {
+                    type: 'string'
                 }
             }
         },
