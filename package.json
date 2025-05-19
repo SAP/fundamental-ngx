@@ -167,9 +167,6 @@
         "nx": "20.6.2"
     },
     "lint-staged": {
-        "*.properties": [
-            "yarn nx run i18n:transform-translations"
-        ],
         "*": [
             "yarn nx format:write --uncommitted"
         ],
