@@ -149,7 +149,6 @@ export class StackblitzService {
     <head>
         <link rel="stylesheet" href="assets/theming-base/sap_horizon/css_variables.css" />
         <link rel="stylesheet" href="assets/fundamental-styles-theming/sap_horizon.css" />
-        <link rel="stylesheet" href="assets/fundamental-styles-theming/icon.css" />
     </head>
     <body>
         <${mainFileSelector}></${mainFileSelector}>
