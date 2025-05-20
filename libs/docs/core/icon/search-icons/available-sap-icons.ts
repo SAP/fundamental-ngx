@@ -1,3 +1,4 @@
+import businessIcons from '@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.json';
 import tntIcons from '@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/SAP-icons-TNT.json';
 import sapIcons from '@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/SAP-icons.json';
 
@@ -42,4 +43,8 @@ Object.values(sapIcons).forEach((icon: SAPIconType) => {
 
 Object.values(tntIcons).forEach((icon: SAPIconType) => {
     availableSapIcons.push(toFdDocIconType(icon, 'SAP-icons-TNT'));
+});
+
+Object.values(businessIcons).forEach((icon: SAPIconType) => {
+    availableSapIcons.push(toFdDocIconType(icon, 'sap-icon-businessSuiteInAppSymbols'));
 });
