@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.4...v0.56.2-rc.5) (2025-05-21)
+
+
+### Bug Fixes
+
+* **core:** fd-multi-combobox select all should clear input ([#13298](https://github.com/SAP/fundamental-ngx/issues/13298)) ([2c51dc1](https://github.com/SAP/fundamental-ngx/commit/2c51dc1380950e6d8155ea2f11b40feec81d0e3e))
+
+
+
+
+
 ## [0.56.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.3...v0.56.2-rc.4) (2025-05-21)
 
 
