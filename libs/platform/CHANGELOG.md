@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.3...v0.56.2-rc.4) (2025-05-21)
+
+
+### Bug Fixes
+
+* **platform:** table grouping row visual issue ([#13295](https://github.com/SAP/fundamental-ngx/issues/13295)) ([71de90f](https://github.com/SAP/fundamental-ngx/commit/71de90f32c1915bbb50ed4f93f0a71b895f5622d))
+
+
+
+
+
 ## [0.56.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.2...v0.56.2-rc.3) (2025-05-21)
 
 
