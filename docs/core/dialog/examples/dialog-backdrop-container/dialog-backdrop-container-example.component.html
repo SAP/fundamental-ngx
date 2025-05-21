@@ -9,12 +9,12 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
-            <h1 id="fd-dialog-header-2" fd-title>Backdrop Configuration</h1>
+            <h1 id="fd-dialog-header-backdrop" fd-title>Backdrop Configuration</h1>
             <button fd-dialog-close-button (click)="dialog.dismiss()" title="close"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-2">{{ dialog.data }}</div>
+            <div id="fd-dialog-body-backdrop">{{ dialog.data }}</div>
         </fd-dialog-body>
 
         <fd-dialog-footer>
