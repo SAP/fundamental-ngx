@@ -38,8 +38,8 @@ export class DialogStateExampleComponent {
             width: '300px',
             responsivePadding: true,
             data: 'This Dialog will be closed after 4s',
-            ariaLabelledBy: 'fd-dialog-header-7',
-            ariaDescribedBy: 'fd-dialog-body-7'
+            ariaLabelledBy: 'fd-dialog-header-state',
+            ariaDescribedBy: 'fd-dialog-body-state'
         });
         setTimeout(() => dialogRef.close(), 4000);
     }
@@ -49,8 +49,8 @@ export class DialogStateExampleComponent {
             width: '300px',
             responsivePadding: true,
             data: 'This Dialog will be dismissed after 4s',
-            ariaLabelledBy: 'fd-dialog-header-7',
-            ariaDescribedBy: 'fd-dialog-body-7'
+            ariaLabelledBy: 'fd-dialog-header-state',
+            ariaDescribedBy: 'fd-dialog-body-state'
         });
         setTimeout(() => dialogRef.dismiss(), 4000);
     }
@@ -60,8 +60,8 @@ export class DialogStateExampleComponent {
             width: '300px',
             responsivePadding: true,
             data: 'This Dialog will be hidden after 4s',
-            ariaLabelledBy: 'fd-dialog-header-7',
-            ariaDescribedBy: 'fd-dialog-body-7'
+            ariaLabelledBy: 'fd-dialog-header-state',
+            ariaDescribedBy: 'fd-dialog-body-state'
         });
         setTimeout(() => dialogRef.hide(true), 4000);
     }
@@ -70,8 +70,8 @@ export class DialogStateExampleComponent {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-7',
-            ariaDescribedBy: 'fd-dialog-body-7'
+            ariaLabelledBy: 'fd-dialog-header-state',
+            ariaDescribedBy: 'fd-dialog-body-state'
         });
         dialogRef.loading({
             isLoading: true,

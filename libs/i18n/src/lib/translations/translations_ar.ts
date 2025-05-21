@@ -19,13 +19,16 @@ export default {
         calendarDayViewDescription: 'التقويم',
         calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsViewDescription: 'أداة انتقاء السنة',
-        calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات'
+        calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'مربع تحرير وسرد متعدد القيم',
         selectAllLabel: 'تحديد الكل ({selectedItems} من {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'انتقال إلى البند السابق',
         rightNavigationBtnLabel: 'انتقال إلى البند التالي'
     },

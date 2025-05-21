@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'カレンダー',
         calendarMonthViewDescription: '月選択',
         calendarYearsViewDescription: '年選択',
-        calendarYearsRangeViewDescription: '年範囲選択'
+        calendarYearsRangeViewDescription: '年範囲選択',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '複数値コンボボックス',
         selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '前の項目へ',
         rightNavigationBtnLabel: '次の項目へ'
     },

@@ -35,9 +35,7 @@ export class ObjectBasedMessageBoxExampleComponent {
             closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
         };
 
-        const messageBoxRef = this._messageBoxService.open(content, {
-            ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body'
-        });
+        const messageBoxRef = this._messageBoxService.open(content);
 
         messageBoxRef.afterClosed.subscribe({
             next: (result) => {

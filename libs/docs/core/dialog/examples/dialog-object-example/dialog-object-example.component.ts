@@ -30,7 +30,6 @@ export class DialogObjectExampleComponent {
     openDialog(): void {
         const object: DialogDefaultContent = {
             title: 'Dialog Title',
-            titleId: 'fd-dialog-header-12',
             content: this.dialogContent,
             subHeader: this.dialogSubHeader,
             approveButton: 'Ok',
@@ -44,8 +43,6 @@ export class DialogObjectExampleComponent {
         };
 
         this._dialogReference = this._dialogService.open(object, {
-            ariaLabelledBy: 'fd-dialog-header-12',
-            ariaDescribedBy: 'fd-dialog-body-12',
             focusTrapped: true
         });
 

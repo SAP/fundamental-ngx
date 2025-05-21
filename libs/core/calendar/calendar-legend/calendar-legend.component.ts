@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, input } from '@angular/core';
-import { FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
+import { Component, input } from '@angular/core';
+import { FocusableItemDirective, FocusableListDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { LegendItemComponent } from './calendar-legend-item.component';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { CalendarLegendFocusingService } from './calendar-legend-focusing.service';
+import { CalendarLegendItemComponent } from './calendar-legend-item.component';
 
 @Component({
     selector: 'fd-calendar-legend',
@@ -12,11 +14,51 @@ import { LegendItemComponent } from './calendar-legend-item.component';
         <ng-content></ng-content>
         <ng-container>
             <div fdkFocusableList>
+                @if (displayTodayLegendItem()) {
+                    <fd-calendar-legend-item
+                        fdkFocusableItem
+                        class="fd-calendar-legend__item--today"
+                        [text]="'coreCalendar.todayLabel' | fdTranslate"
+                        (focus)="_handleFocusedElementEvent(null)"
+                        (blur)="_handleFocusedElementEvent(null)"
+                    ></fd-calendar-legend-item>
+                }
+                @if (displaySelectedLegendItem()) {
+                    <fd-calendar-legend-item
+                        fdkFocusableItem
+                        class="fd-calendar-legend__item--selected"
+                        [text]="'coreCalendar.dateSelectedLabel' | fdTranslate"
+                        (focus)="_handleFocusedElementEvent(null)"
+                        (blur)="_handleFocusedElementEvent(null)"
+                    ></fd-calendar-legend-item>
+                }
+                @if (displayWorkDayLegendItem()) {
+                    <fd-calendar-legend-item
+                        fdkFocusableItem
+                        class="fd-calendar-legend__item--work"
+                        [text]="'coreCalendar.workDayLabel' | fdTranslate"
+                        (focus)="_handleFocusedElementEvent(null)"
+                        (blur)="_handleFocusedElementEvent(null)"
+                    ></fd-calendar-legend-item>
+                }
+                @if (displayNonWorkDayLegendItem()) {
+                    <fd-calendar-legend-item
+                        fdkFocusableItem
+                        class="fd-calendar-legend__item--non-work"
+                        [text]="'coreCalendar.nonWorkDayLabel' | fdTranslate"
+                        (focus)="_handleFocusedElementEvent(null)"
+                        (blur)="_handleFocusedElementEvent(null)"
+                    ></fd-calendar-legend-item>
+                }
+
                 @for (rule of specialDaysRules(); track rule.specialDayNumber) {
                     <fd-calendar-legend-item
                         fdkFocusableItem
                         [text]="rule.legendText"
+                        [circle]="rule.appointment"
                         [color]="'placeholder-' + rule.specialDayNumber"
+                        (focus)="_handleFocusedElementEvent(rule.specialDayNumber)"
+                        (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
                 }
             </div>
@@ -24,22 +66,49 @@ import { LegendItemComponent } from './calendar-legend-item.component';
     `,
     host: {
         class: 'fd-calendar-legend',
-        '[class.fd-calendar-legend--auto-column]': 'col'
+        '[class.fd-calendar-legend--auto-column]': 'col()'
     },
-    imports: [CommonModule, LegendItemComponent, FocusableListDirective, FocusableItemDirective]
+    imports: [
+        CommonModule,
+        CalendarLegendItemComponent,
+        FocusableListDirective,
+        FocusableItemDirective,
+        FdTranslatePipe
+    ]
 })
 export class CalendarLegendComponent<D> {
+    /** The unique identifier of the calendar legend. This is a required property. */
+    legendId = input.required<string>();
+
     /**
      * Make it a column instead
      */
-    @Input() col = false;
+    col = input<boolean>(false);
 
-    /** Special
-     * days rules to be displayed in the legend */
+    /** Whether to display the legend item for today's date. */
+    displayTodayLegendItem = input<boolean>(true);
+
+    /** Whether to display the legend item for the currently selected date. */
+    displaySelectedLegendItem = input<boolean>(true);
+
+    /** Whether to display the legend item for work days. */
+    displayWorkDayLegendItem = input<boolean>(true);
+
+    /** Whether to display the legend item for non-work days. */
+    displayNonWorkDayLegendItem = input<boolean>(true);
+
+    /**
+     * Special days rules to be displayed in the legend
+     */
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
 
-    /** Element getting focused */
-    focusedElement = input<string>('');
+    constructor(
+        public datetimeAdapter: DatetimeAdapter<FdDate>,
+        private focusingService: CalendarLegendFocusingService
+    ) {}
 
-    constructor(public datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    /** @hidden */
+    _handleFocusedElementEvent(specialDayNumber: Nullable<number>): void {
+        this.focusingService._handleLegendItemFocus(this.legendId(), specialDayNumber);
+    }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalender',
         calendarMonthViewDescription: 'Månedsvælger',
         calendarYearsViewDescription: 'Årsvælger',
-        calendarYearsRangeViewDescription: 'Vælger af årsinterval'
+        calendarYearsRangeViewDescription: 'Vælger af årsinterval',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Multiværdikombinationsboks',
         selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til næste element'
     },

@@ -1,9 +1,12 @@
-<ng-content></ng-content>
-@if (dialogRef.onLoading | async) {
-    <div class="fd-dialog__loader fd-busy-indicator-dialog">
-        @if (dialogRef.loadingContent) {
-            <fdk-dynamic-portal class="fd-text" [auto]="dialogRef.loadingContent"></fdk-dynamic-portal>
-        }
-        <fd-busy-indicator [loading]="true" size="l" [label]="dialogRef.loadingLabel"></fd-busy-indicator>
-    </div>
-}
+<section>
+    <ng-content></ng-content>
+
+    @if (dialogRef.onLoading | async) {
+        <div class="fd-dialog__loader fd-busy-indicator-dialog">
+            @if (dialogRef.loadingContent) {
+                <fdk-dynamic-portal class="fd-text" [auto]="dialogRef.loadingContent"></fdk-dynamic-portal>
+            }
+            <fd-busy-indicator [loading]="true" size="l" [label]="dialogRef.loadingLabel"></fd-busy-indicator>
+        </div>
+    }
+</section>

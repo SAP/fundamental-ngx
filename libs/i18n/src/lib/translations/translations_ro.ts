@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ro.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Calendar',
         calendarMonthViewDescription: 'Selector lună',
         calendarYearsViewDescription: 'Selector an',
-        calendarYearsRangeViewDescription: 'Selector interval de ani'
+        calendarYearsRangeViewDescription: 'Selector interval de ani',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Casetă combinată cu valori multiple',
         selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Salt la articol anterior',
         rightNavigationBtnLabel: 'Salt la articol următor'
     },

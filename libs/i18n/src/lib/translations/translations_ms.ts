@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ms.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalendar',
         calendarMonthViewDescription: 'Pemilih bulan',
         calendarYearsViewDescription: 'Pemilih tahun',
-        calendarYearsRangeViewDescription: 'Pemilih julat tahun'
+        calendarYearsRangeViewDescription: 'Pemilih julat tahun',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kotak Kombo Nilai Berbilang',
         selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
         rightNavigationBtnLabel: 'Pergi ke item seterusnya'
     },

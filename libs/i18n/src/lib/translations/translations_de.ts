@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_de.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Kalender',
         calendarMonthViewDescription: 'Monatsauswahl',
         calendarYearsViewDescription: 'Jahresauswahl',
-        calendarYearsRangeViewDescription: 'Jahresbereichsauswahl'
+        calendarYearsRangeViewDescription: 'Jahresbereichsauswahl',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Mehrwert-Combobox',
         selectAllLabel: 'Alle ({selectedItems} von {totalItems}) auswählen'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Zum vorherigen Element wechseln',
         rightNavigationBtnLabel: 'Zum nächsten Element wechseln'
     },

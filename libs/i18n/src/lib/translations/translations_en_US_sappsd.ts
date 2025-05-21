@@ -20,13 +20,16 @@ export default {
         calendarDayViewDescription: '[[[Ĉąĺēŋƌąŗ∙∙∙∙∙∙]]]',
         calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
-        calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]'
+        calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '[[[Μűĺţį Ʋąĺűē Ĉŏɱƃŏ Ɓŏχ∙∙∙∙∙]]]',
         selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({şēĺēċţēƌĬţēɱş} ŏƒ {ţŏţąĺĬţēɱş})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
         rightNavigationBtnLabel: '[[[Ģŏ ţŏ ŋēχţ įţēɱ∙∙∙∙]]]'
     },

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Takvim',
         calendarMonthViewDescription: 'Ay seçici',
         calendarYearsViewDescription: 'Yıl seçici',
-        calendarYearsRangeViewDescription: 'Yıl aralığı seçici'
+        calendarYearsRangeViewDescription: 'Yıl aralığı seçici',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Çoklu Değer Açılan Kutusu',
         selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Önceki öğeye git',
         rightNavigationBtnLabel: 'Sonraki öğeye git'
     },

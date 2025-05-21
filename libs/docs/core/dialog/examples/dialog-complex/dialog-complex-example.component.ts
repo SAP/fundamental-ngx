@@ -82,8 +82,8 @@ export class DialogComplexExampleComponent {
             draggable: true,
             resizable: true,
             verticalPadding: false,
-            ariaLabelledBy: 'fd-dialog-header-3',
-            ariaDescribedBy: 'fd-dialog-description-3'
+            ariaLabelledBy: 'fd-dialog-header-complex',
+            ariaDescribedBy: 'fd-dialog-description-complex'
         });
         this.dialogRef.loading(true);
         setTimeout(() => this.dialogRef.loading(false), 2000);

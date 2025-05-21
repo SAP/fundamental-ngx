@@ -1,3 +1,5 @@
-<div class="fd-feed-input" [class.is-disabled]="disabled">
-    <ng-content></ng-content>
+<div class="fd-feed-input" role="group" [attr.aria-label]="ariaLabel()" [class.is-disabled]="disabled">
+    <div class="fd-feed-input__container">
+        <ng-content></ng-content>
+    </div>
 </div>

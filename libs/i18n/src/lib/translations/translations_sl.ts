@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sl.properties instead
 export default {
     coreCalendar: {
@@ -19,13 +20,16 @@ export default {
         calendarDayViewDescription: 'Koledar',
         calendarMonthViewDescription: 'Izbirnik meseca',
         calendarYearsViewDescription: 'Izbirnik leta',
-        calendarYearsRangeViewDescription: 'Izbirnik števila let'
+        calendarYearsRangeViewDescription: 'Izbirnik števila let',
+        workDayLabel: 'Work day',
+        nonWorkDayLabel: 'Non-Work day'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinirani seznam z več vrednostmi',
         selectAllLabel: 'Izbira vseh ({selectedItems} od {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Premik na prejšnjo postavko',
         rightNavigationBtnLabel: 'Premik na naslednjo postavko'
     },
