@@ -625,6 +625,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     selectAllItems(selectAll: boolean): void {
         if (selectAll) {
             this.selected = this._optionItems.map((c) => c.value);
+            this._resetSearchTerm();
         } else {
             this.selected = [];
         }

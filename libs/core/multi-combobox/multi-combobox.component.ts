@@ -507,6 +507,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._onEveryItem(this._suggestions, (item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
         this._rangeSelector.reset();
+        this.inputText = '';
 
         this._propagateChange();
     };
