@@ -49,8 +49,8 @@
                             },
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/horizon/fonts/",
-                                "output": "./assets/theming-base/horizon/fonts/"
+                                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/",
+                                "output": "./assets/theming-base/sap_horizon/fonts/"
                             },
                             {
                                 "glob": "**/*",

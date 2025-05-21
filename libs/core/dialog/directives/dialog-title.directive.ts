@@ -8,7 +8,7 @@ let titleUniqueId = 1;
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-dialog-title]',
     host: {
-        '[attr.id]': 'id'
+        '[attr.id]': 'id()'
     },
     standalone: true
 })

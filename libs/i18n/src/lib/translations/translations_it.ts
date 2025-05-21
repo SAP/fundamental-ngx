@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: "Vai all'elemento precedente",
         rightNavigationBtnLabel: "Vai all'elemento successivo"
     },

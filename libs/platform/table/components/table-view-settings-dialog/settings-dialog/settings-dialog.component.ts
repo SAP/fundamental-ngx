@@ -86,6 +86,9 @@ export class SettingsDialogComponent implements Resettable {
     /** Flag indicating whether the subheader should be shown */
     showSubheader = signal<boolean>(false);
 
+    /** Heading level of the dialog header. */
+    headingLevel: number;
+
     /** Current step component to render for filtering */
     activeFilterStepView = signal<Nullable<FiltersViewStep>>(null);
 
@@ -109,6 +112,7 @@ export class SettingsDialogComponent implements Resettable {
             sortingData: Nullable<SettingsSortDialogData>;
             filteringData: Nullable<FiltersDialogData>;
             groupingData: Nullable<SettingsGroupDialogData>;
+            headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
         }>,
         private readonly _table: Table
     ) {
@@ -116,6 +120,7 @@ export class SettingsDialogComponent implements Resettable {
         this.sortingData.set(data.sortingData);
         this.filteringData.set(data.filteringData);
         this.groupingData.set(data.groupingData);
+        this.headingLevel = data.headingLevel;
         this.activeTab.set(this._getInitialActiveTab());
         this._shouldRenderSubheader();
         this._setInitialSorting();

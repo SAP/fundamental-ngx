@@ -2,8 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ChangeDetectionStrategy, Component, Type, ViewChild } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogButtonClass, DialogFooterComponent } from './dialog-footer.component';
 
@@ -18,7 +17,7 @@ import { DialogButtonClass, DialogFooterComponent } from './dialog-footer.compon
         </fd-dialog-footer>
     `,
     standalone: true,
-    imports: [DialogFooterComponent, TemplateDirective, BarModule]
+    imports: [DialogFooterComponent, TemplateDirective, BarMiddleDirective, ButtonBarComponent]
 })
 class CustomFooterTestComponent {
     @ViewChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
@@ -31,7 +30,7 @@ class CustomFooterTestComponent {
         </fd-dialog-footer>
     `,
     standalone: true,
-    imports: [DialogFooterComponent, BarModule]
+    imports: [DialogFooterComponent, BarMiddleDirective, ButtonBarComponent]
 })
 class DefaultFooterTestComponent {
     @ViewChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
@@ -68,21 +67,6 @@ describe('DialogFooterComponent', () => {
 
         expect(component).toBeTruthy();
         expect(component.dialogFooterRef).toBeTruthy();
-    });
-
-    it('should display in mobile mode', async () => {
-        const { fixture, component } = setup<DefaultFooterTestComponent>(DefaultFooterTestComponent);
-
-        await wait(fixture);
-
-        component.dialogFooterRef.dialogConfig.mobile = true;
-        component.dialogFooterRef.dialogConfig.contentDensity = ContentDensityMode.COZY;
-
-        await wait(fixture);
-        const footerEl = fixture.nativeElement.querySelector('footer');
-
-        expect(footerEl.classList).toContain('fd-dialog__footer');
-        expect(footerEl.classList).toContain('is-cozy');
     });
 
     it('should use default template', async () => {

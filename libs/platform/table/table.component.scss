@@ -122,6 +122,10 @@ fdk-dynamic-portal {
         }
     }
 
+    .fd-table__row:focus-visible {
+        outline: none;
+    }
+
     /** When actions are not collapsed */
     .fdp-table-toolbar-actions {
         margin: 0;

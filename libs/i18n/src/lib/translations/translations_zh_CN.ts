@@ -29,6 +29,7 @@ export default {
         selectAllLabel: '全选（已选 {selectedItems} 个，共 {totalItems} 个）'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: '转到上一个项目',
         rightNavigationBtnLabel: '转到下一个项目'
     },

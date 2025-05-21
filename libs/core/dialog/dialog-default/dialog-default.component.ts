@@ -17,6 +17,9 @@ import { DialogComponent } from '../dialog.component';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
+let dTitleId = 0;
+let dContentId = 0;
+
 /** Dialog component used to create the dialog in object based approach */
 @Component({
     selector: 'fd-dialog-default',
@@ -47,13 +50,33 @@ export class DialogDefaultComponent implements AfterViewInit {
     /** @hidden */
     _defaultDialogConfiguration: DialogConfig;
 
+    /**
+     * dialog title id
+     * if not set, a default value is provided
+     */
+    dialogTitleId = 'fd-dialog-title-id-' + dTitleId++;
+
+    /**
+     * dialog content id
+     * if not set, a default value is provided
+     */
+    dialogContentId = 'fd-dialog-content-id-' + dContentId++;
+
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        public _dialogConfig: DialogConfig
+    ) {}
 
     /** @hidden
      * TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title)
      * */
     ngAfterViewInit(): void {
+        if (this._dialogConfig) {
+            this._dialogConfig.ariaLabelledBy ??= this.dialogTitleId;
+            this._dialogConfig.ariaDescribedBy ??= this.dialogContentId;
+        }
+
         this._changeDetectorRef.detectChanges();
     }
 

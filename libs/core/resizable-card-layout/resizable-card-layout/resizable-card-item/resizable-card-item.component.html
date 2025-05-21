@@ -13,7 +13,7 @@
         <div class="fd-resizable-card-layout__card">
             <ng-content></ng-content>
             @if (showingResizeIcon) {
-                <div class="fd-resizable-card-layout__icon-wrapper">
+                <div class="fd-resizable-card-layout__icon-wrapper" role="presentation" aria-hidden="true">
                     <div
                         class="fd-resizable-card-layout__icon"
                         #cornerHandle

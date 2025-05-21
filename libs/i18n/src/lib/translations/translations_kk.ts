@@ -29,6 +29,7 @@ export default {
         selectAllLabel: 'Барлық ({selectedItems}/{totalItems}) таңдаңыз'
     },
     coreCarousel: {
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
         leftNavigationBtnLabel: 'Алдыңғы тармаққа өту',
         rightNavigationBtnLabel: 'Келесі тармаққа өту'
     },

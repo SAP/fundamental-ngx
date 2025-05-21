@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.2...v0.56.2-rc.3) (2025-05-21)
+
+
+### Bug Fixes
+
+* **platform:** table pop in border issues ([#13282](https://github.com/SAP/fundamental-ngx/issues/13282)) ([d857029](https://github.com/SAP/fundamental-ngx/commit/d857029d54be05be18ebbdce12134da81cd77287))
+
+
+
+
+
+## [0.56.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.1...v0.56.2-rc.2) (2025-05-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.0...v0.56.2-rc.1) (2025-05-16)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.1...v0.56.2-rc.0) (2025-05-15)
+
+
+### Bug Fixes
+
+* **platform:** table sort/group dialog heading a11y improvements ([#13280](https://github.com/SAP/fundamental-ngx/issues/13280)) ([ffe0663](https://github.com/SAP/fundamental-ngx/commit/ffe066319500efac6726f336f5ee946d00550a0d))
+
+
+
+
+
 ## [0.56.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.1-rc.3...v0.56.1) (2025-05-14)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
