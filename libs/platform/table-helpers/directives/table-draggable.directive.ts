@@ -1,4 +1,15 @@
 import {
+    DOWN_ARROW,
+    END,
+    HOME,
+    LEFT_ARROW,
+    PAGE_DOWN,
+    PAGE_UP,
+    RIGHT_ARROW,
+    SPACE,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
+import {
     ChangeDetectorRef,
     Directive,
     EventEmitter,
@@ -7,6 +18,7 @@ import {
     inject,
     Input,
     NgZone,
+    OnDestroy,
     Output
 } from '@angular/core';
 import {
@@ -14,7 +26,8 @@ import {
     DropPredicate,
     FdDndDropEventMode,
     FdDndDropType,
-    FdDropEvent
+    FdDropEvent,
+    KeyUtil
 } from '@fundamental-ngx/cdk/utils';
 import { take } from 'rxjs/operators';
 import { FDP_TABLE_DRAGGABLE_DIRECTIVE } from '../constants';
@@ -35,7 +48,7 @@ import { Table } from '../table';
         }
     ]
 })
-export class TableDraggableDirective<T = any> extends TableDraggable<T> {
+export class TableDraggableDirective<T = any> extends TableDraggable<T> implements OnDestroy {
     /** Whether to allow for row reordering on tree tables via drag and drop. */
     @Input()
     enableRowReordering = true;
@@ -85,6 +98,11 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         host: true
     });
 
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._enableScrolling();
+    }
+
     /** Sets table reference. */
     setTable(table: Table): void {
         this._table = table;
@@ -95,6 +113,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
      */
     dragDropStart(): void {
         this.dragDropInProgress = true;
+        this._blockScrolling();
     }
 
     /** Method called when dnd performed with the keyboard. */
@@ -133,7 +152,10 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     dragDropItemDrop(event: FdDropEvent<TableRow>): void {
         /** After timeout to make click event handled first */
         this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => (this.dragDropInProgress = false));
+            setTimeout(() => {
+                this.dragDropInProgress = false;
+                this._enableScrolling();
+            });
         });
 
         this._onZoneFree(() => {
@@ -309,5 +331,36 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             callback();
         });
+    }
+
+    /** @hidden */
+    private _blockScrolling(): void {
+        this._table.tableContainer.nativeElement.addEventListener('DOMMouseScroll', preventDefault, false);
+        this._table.tableContainer.nativeElement.addEventListener('wheel', preventDefault, { passive: false });
+        this._table.tableContainer.nativeElement.addEventListener('mousewheel', preventDefault, { passive: false });
+        this._table.tableContainer.nativeElement.addEventListener('touchmove', preventDefault, { passive: false });
+        this._table.tableContainer.nativeElement.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+    /** @hidden */
+    private _enableScrolling(): void {
+        this._table.tableContainer.nativeElement.removeEventListener('DOMMouseScroll', preventDefault, false);
+        this._table.tableContainer.nativeElement.removeEventListener('wheel', preventDefault);
+        this._table.tableContainer.nativeElement.removeEventListener('mousewheel', preventDefault);
+        this._table.tableContainer.nativeElement.removeEventListener('touchmove', preventDefault);
+        this._table.tableContainer.nativeElement.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+}
+
+function preventDefault(event): void {
+    event.preventDefault();
+}
+
+function preventDefaultForScrollKeys(event): boolean | undefined {
+    if (
+        KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, SPACE, PAGE_DOWN, PAGE_UP, END, HOME])
+    ) {
+        preventDefault(event);
+        return false;
     }
 }
