@@ -100,7 +100,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._enableScrolling();
+        this._setDragInProgress(false);
     }
 
     /** Sets table reference. */
@@ -112,8 +112,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
      * Initiates drag&drop sequence.
      */
     dragDropStart(): void {
-        this.dragDropInProgress = true;
-        this._blockScrolling();
+        this._setDragInProgress(true);
     }
 
     /** Method called when dnd performed with the keyboard. */
@@ -144,7 +143,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     dropCancelled(): void {
         /** After timeout to make click event handled first */
         this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => (this.dragDropInProgress = false));
+            setTimeout(() => this._setDragInProgress(false));
         });
     }
 
@@ -153,8 +152,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
         /** After timeout to make click event handled first */
         this._ngZone.runOutsideAngular(() => {
             setTimeout(() => {
-                this.dragDropInProgress = false;
-                this._enableScrolling();
+                this._setDragInProgress(false);
             });
         });
 
@@ -212,6 +210,12 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
                 rows
             )
         );
+    }
+
+    /** @hidden */
+    private _setDragInProgress(dragging: boolean): void {
+        this.dragDropInProgress = dragging;
+        dragging ? this._blockScrolling() : this._enableScrolling();
     }
 
     /** @hidden */
@@ -335,6 +339,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
 
     /** @hidden */
     private _blockScrolling(): void {
+        this._table._focusableGrid._preventKeydown = true;
         this._table.tableContainer.nativeElement.addEventListener('DOMMouseScroll', preventDefault, false);
         this._table.tableContainer.nativeElement.addEventListener('wheel', preventDefault, { passive: false });
         this._table.tableContainer.nativeElement.addEventListener('mousewheel', preventDefault, { passive: false });
@@ -344,6 +349,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
 
     /** @hidden */
     private _enableScrolling(): void {
+        this._table._focusableGrid._preventKeydown = false;
         this._table.tableContainer.nativeElement.removeEventListener('DOMMouseScroll', preventDefault, false);
         this._table.tableContainer.nativeElement.removeEventListener('wheel', preventDefault);
         this._table.tableContainer.nativeElement.removeEventListener('mousewheel', preventDefault);
@@ -352,12 +358,13 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     }
 }
 
-function preventDefault(event): void {
+function preventDefault(event: Event): void {
     event.preventDefault();
 }
 
-function preventDefaultForScrollKeys(event): boolean | undefined {
+function preventDefaultForScrollKeys(event: KeyboardEvent): boolean | undefined {
     if (
+        !event.altKey &&
         KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, SPACE, PAGE_DOWN, PAGE_UP, END, HOME])
     ) {
         preventDefault(event);
