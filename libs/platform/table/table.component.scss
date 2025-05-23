@@ -670,3 +670,7 @@ th.fd-table__cell .fd-table__inner {
 .fd-tr-hovered {
     background-color: var(--sapList_Hover_Background) !important;
 }
+
+.fdp-table__body--disable-scroll {
+    overflow: hidden !important;
+}
