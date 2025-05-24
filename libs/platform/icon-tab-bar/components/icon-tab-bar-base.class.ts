@@ -28,7 +28,7 @@ import { FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../constants';
 import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
-import { TabDestinyMode } from '../types';
+import { TabDensityMode } from '../types';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
 import { TextTypePopoverComponent } from './popovers/text-type-popover/text-type-popover.component';
 
@@ -66,7 +66,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description densityMode setter triggers tabs to re-calculation overflowed tabs
      */
     @Input()
-    set densityMode(value: TabDestinyMode) {
+    set densityMode(value: TabDensityMode) {
         // Skip first value && value doesn't equal to previous one
         if (this._densityMode && value !== this._densityMode) {
             this._triggerRecalculationVisibleItems();
@@ -129,7 +129,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _tabs: IconTabBarItem[] = [];
 
     /** @hidden */
-    private _densityMode: TabDestinyMode;
+    private _densityMode: TabDensityMode;
 
     /** @hidden */
     private _destroyRef = inject(DestroyRef);
