@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.2...v0.56.3-rc.3) (2025-05-27)
+
+
+### Bug Fixes
+
+* **core:** optimize Button performance with signals ([#13304](https://github.com/SAP/fundamental-ngx/issues/13304)) ([bdec43f](https://github.com/SAP/fundamental-ngx/commit/bdec43f4b59893979d79de379984859b464db974))
+
+
+
+
+
 ## [0.56.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.1...v0.56.3-rc.2) (2025-05-27)
 
 **Note:** Version bump only for package @fundamental-ngx/core
