@@ -43,7 +43,7 @@ import { UNIQUE_KEY_SEPARATOR } from './constants';
 import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from './interfaces/tab-color-associations.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
-import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from './types';
+import { IconTabBarBackground, IconTabBarSize, TabDensityMode, TabType } from './types';
 
 @Component({
     selector: 'fdp-icon-tab-bar',
@@ -90,8 +90,8 @@ export class IconTabBarComponent implements OnInit, TabList {
      */
     tabsConfig = model<TabConfig[]>();
 
-    /** @description Destiny mode. */
-    densityMode = model<TabDestinyMode>('inherit');
+    /** @description Density mode. */
+    densityMode = model<TabDensityMode>('inherit');
 
     /** @description Icon font */
     iconTabFont = input<IconFont>('SAP-icons');

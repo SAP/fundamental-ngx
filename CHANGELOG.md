@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.1...v0.56.3-rc.2) (2025-05-27)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.56.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.0...v0.56.3-rc.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* **platform:** rename TabDestinyMode to TabDensityMode for consistency ([#13299](https://github.com/SAP/fundamental-ngx/issues/13299)) ([a6f8f4b](https://github.com/SAP/fundamental-ngx/commit/a6f8f4bf136cbf800eb2289ca45858cfea06d0c8))
+
+
+
+
+
 ## [0.56.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.2...v0.56.3-rc.0) (2025-05-25)
 
 **Note:** Version bump only for package fundamental-ngx
