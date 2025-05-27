@@ -1,5 +1,14 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, booleanAttribute, inject } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Input,
+    booleanAttribute,
+    inject,
+    input
+} from '@angular/core';
 
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
@@ -69,14 +78,6 @@ export class BaseButton implements HasElementRef {
     @Input()
     fdMenu = false;
 
-    /** adding native aria-label to the component */
-    @Input()
-    ariaLabel: Nullable<string>;
-
-    /** adding native aria-description to the componenet */
-    @Input()
-    ariaDescription: Nullable<string>;
-
     /**
      * Native disabled attribute of button element
      */
@@ -88,6 +89,12 @@ export class BaseButton implements HasElementRef {
      */
     @Input({ alias: 'aria-disabled', transform: booleanAttribute })
     ariaDisabled = false;
+
+    /** adding native aria-label to the component */
+    ariaLabel = input<Nullable<string>>();
+
+    /** adding native aria-description to the componenet */
+    ariaDescription = input<Nullable<string>>();
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
