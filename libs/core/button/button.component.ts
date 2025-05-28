@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
     HostListener,
     Input,
@@ -9,7 +10,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, HasElementRef, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
@@ -38,8 +39,8 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     host: {
         '[attr.type]': 'type',
         '[attr.disabled]': 'disabled || null',
-        '[attr.aria-label]': 'buttonArialabel',
-        '[attr.aria-description]': 'buttonAriaDescription'
+        '[attr.aria-label]': 'buttonArialabel()',
+        '[attr.aria-description]': 'buttonAriaDescription()'
     },
     providers: [
         contentDensityObserverProviders(),
@@ -65,9 +66,9 @@ export class ButtonComponent
      * Calculate aria-label attribute
      * @hidden
      */
-    get buttonArialabel(): string | null {
-        if (this.ariaLabel) {
-            return this.ariaLabel; // return the input aria-label
+    buttonArialabel = computed(() => {
+        if (this.ariaLabel()) {
+            return this.ariaLabel(); // return the input aria-label
         }
 
         const attrAriaLabel = this.elementRef.nativeElement.getAttribute('aria-label');
@@ -80,15 +81,15 @@ export class ButtonComponent
         }
 
         return null;
-    }
+    });
 
     /**
      * Calculate aria-description attribute
      * @hidden
      */
-    get buttonAriaDescription(): string | null {
-        if (this.ariaDescription) {
-            return this.ariaDescription;
+    buttonAriaDescription = computed(() => {
+        if (this.ariaDescription()) {
+            return this.ariaDescription();
         }
 
         if (this.specialButtonType.includes(this.fdType)) {
@@ -96,7 +97,7 @@ export class ButtonComponent
         }
 
         return null;
-    }
+    });
 
     /** @hidden */
     private _subscriptions = new Subscription();

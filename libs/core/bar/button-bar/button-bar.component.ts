@@ -16,7 +16,7 @@ let randomButtonBarId = 0;
             [fdType]="fdType"
             [label]="label"
             [attr.title]="title"
-            [ariaLabel]="ariaLabel"
+            [ariaLabel]="ariaLabel()"
             [fdMenu]="fdMenu"
             [disabled]="disabled"
         >

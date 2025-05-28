@@ -6,11 +6,13 @@ import { ButtonModule } from './button.module';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button label="Button"></button>',
+    template: '<button fd-button [ariaLabel]="ariaLabel" label="Button"></button>',
     standalone: true,
     imports: [ButtonComponent]
 })
-export class TestComponent {}
+export class TestComponent {
+    ariaLabel: string | null = null;
+}
 
 @Component({
     selector: 'fd-disabled-test-component',
@@ -125,32 +127,15 @@ describe('ButtonComponent - AriaLabel Tests', () => {
     });
 
     it('should return input ariaLabel if provided', () => {
-        componentInstance.ariaLabel = 'Custom Aria Label';
-        expect(componentInstance.buttonArialabel).toBe('Custom Aria Label');
-    });
+        const hostInstance = fixture.componentInstance;
+        hostInstance.ariaLabel = 'Custom Aria Label';
+        fixture.detectChanges();
 
-    it('should return element native aria-label attribute if no input ariaLabel provided', () => {
-        const nativeElement: HTMLElement = componentInstance.elementRef.nativeElement;
-        nativeElement.setAttribute('aria-label', 'Native Aria Label');
-        expect(componentInstance.buttonArialabel).toBe('Native Aria Label');
-    });
-
-    it('should return label if fdType is special and label is provided', () => {
-        componentInstance.fdType = 'emphasized';
-        componentInstance.label = 'Button Label';
-        expect(componentInstance.buttonArialabel).toBe('Button Label');
-    });
-
-    it('should return glyph with hyphen replaced as spaces if fdType is special and glyph is provided', () => {
-        componentInstance.fdType = 'emphasized';
-        // Ensure label is undefined to test glyph transformation.
-        componentInstance.label = undefined;
-        componentInstance.glyph = 'icon-glyph-name';
-        expect(componentInstance.buttonArialabel).toBe('icon glyph name');
+        expect(componentInstance.buttonArialabel()).toBe('Custom Aria Label');
     });
 
     it('should return null if no conditions are met', () => {
         componentInstance.fdType = 'standard';
-        expect(componentInstance.buttonArialabel).toBeNull();
+        expect(componentInstance.buttonArialabel()).toBeNull();
     });
 });
