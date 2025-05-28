@@ -2,8 +2,8 @@ import { DestroyRef, Directive, inject, Input, OnChanges, SimpleChanges } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject, filter } from 'rxjs';
-import { FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
-import { TableVirtualScroll } from '../models';
+import { FDP_TABLE_DRAGGABLE_DIRECTIVE, FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
+import { TableDraggable, TableVirtualScroll } from '../models';
 import { TableScrollDispatcherService } from '../services/table-scroll-dispatcher.service';
 import { TableService } from '../services/table.service';
 import { Table } from '../table';
@@ -63,6 +63,11 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private readonly _tableScrollDispatcher = inject(TableScrollDispatcherService);
 
     /** @hidden */
+    private readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
+        optional: true
+    });
+
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -89,7 +94,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
      * Calculates rows to be rendered in the table.
      */
     calculateVirtualScrollRows(): void {
-        if (!this.virtualScroll || !this.bodyHeight) {
+        if (!this.virtualScroll || !this.bodyHeight || this._dndTableDirective?.dragDropInProgress) {
             return;
         }
 
