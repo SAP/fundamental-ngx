@@ -38,15 +38,14 @@
                 }
             },
             "defaultConfiguration": "production",
-            "dependsOn": ["transform-translations", "^build"]
+            "dependsOn": ["^build"]
         },
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
                 "jestConfig": "{projectRoot}/jest.config.ts"
-            },
-            "dependsOn": ["transform-translations"]
+            }
         }
     }
 }
