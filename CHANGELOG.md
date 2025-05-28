@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.3...v0.56.3-rc.4) (2025-05-28)
+
+
+### Bug Fixes
+
+* **core:** shellbar action alignment bug ([#13307](https://github.com/SAP/fundamental-ngx/issues/13307)) ([ecc61cb](https://github.com/SAP/fundamental-ngx/commit/ecc61cb77193c1d10662e02ba93e9f8c102dbdd3))
+
+
+
+
+
 ## [0.56.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.2...v0.56.3-rc.3) (2025-05-27)
 
 
