@@ -73,6 +73,14 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         return this.labelValueChanges$.value;
     }
 
+    /** Column footer label, to be used when the footer contains only text. */
+    @Input()
+    footerLabel: string;
+
+    /** Column footer cell template, to be used when the footer cell requires more complex content than only text. */
+    @Input()
+    footerCellTemplate: Nullable<TemplateRef<any>>;
+
     /** Cell text alignment. */
     @Input() align: ColumnAlignValue = 'start';
 

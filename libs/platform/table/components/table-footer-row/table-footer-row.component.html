@@ -1,0 +1,14 @@
+@for (column of _fdpTableService.visibleColumns$(); track column.name) {
+    <td class="fd-table__cell" tabindex="-1">
+        @if (column?.footerLabel) {
+            <span class="fd-table__cell--truncate-txt">
+                {{ column.footerLabel }}
+            </span>
+        } @else if (column?.footerCellTemplate && column.footerCellTemplate !== undefined) {
+            <ng-template
+                [ngTemplateOutlet]="column.footerCellTemplate"
+                [ngTemplateOutletContext]="{ $implicit: column }"
+            ></ng-template>
+        }
+    </td>
+}

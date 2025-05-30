@@ -235,6 +235,11 @@
                     </tr>
                 </tbody>
             }
+            @if (showTableFooter) {
+                <tfoot fd-table-footer>
+                    <tr fdp-table-footer-row></tr>
+                </tfoot>
+            }
         </table>
     </div>
 </ng-template>
