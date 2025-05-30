@@ -44,6 +44,7 @@ import { PlatformTableCustomWidthExampleComponent } from './examples/platform-ta
 import { ExampleItem } from './examples/platform-table-data-items-example';
 import { TableDataProviderExample } from './examples/platform-table-data-provider-example';
 import { PlatformTableDefaultExampleComponent } from './examples/platform-table-default-example.component';
+import { PlatformTableFooterExampleComponent } from './examples/platform-table-footer-example.component';
 import { PlatformTableFreezableExampleComponent } from './examples/platform-table-freezable-example.component';
 import { PlatformTableInitialStateExampleComponent } from './examples/platform-table-initial-state-example.component';
 import { PlatformTableLoadingExampleComponent } from './examples/platform-table-loading-example.component';
@@ -90,6 +91,9 @@ const platformInitialLoadingTsSrc = 'initial-loading/platform-table-initial-load
 const platformTableNgForSrc = 'platform-table-columns-ngfor-example.component.html';
 const platformTableNgForTsSrc = 'platform-table-columns-ngfor-example.component.ts';
 
+const platformTableFooterSrc = 'platform-table-footer-example.component.html';
+const platformTableFooterTsSrc = 'platform-table-footer-example.component.ts';
+
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
 @Component({
@@ -121,6 +125,7 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         PlatformTableResponsiveColumnsExampleComponent,
         PlatformTableInitialLoadingExampleComponent,
         PlatformTableColumnsNgforExampleComponent,
+        PlatformTableFooterExampleComponent,
         PlayGroundComponent,
         TableDataSourceDirective,
         TableHeaderResizerDirective,
@@ -421,6 +426,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-columns-ngfor-example',
             component: 'PlatformTableColumnsNgforExampleComponent',
             name: 'platform-table-columns-ngfor-example.component.ts'
+        }
+    ];
+
+    footerTable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableFooterSrc),
+            fileName: 'platform-table-footer-example',
+            name: 'platform-table-footer-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableFooterTsSrc),
+            fileName: 'platform-table-footer-example',
+            component: 'PlatformTableFooterExampleComponent',
+            name: 'platform-table-footer-example.component.ts'
         }
     ];
 

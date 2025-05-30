@@ -1,0 +1,26 @@
+<fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found" [showTableFooter]="true">
+    <fdp-table-toolbar
+        title="Order Line Items"
+        [shouldOverflow]="true"
+        [disableRefresh]="true"
+        headingLevel="3"
+    ></fdp-table-toolbar>
+
+    <fdp-column
+        [nonInteractive]="true"
+        name="name"
+        key="name"
+        label="Name"
+        align="start"
+        [footerCellTemplate]="footerTemplate"
+    >
+    </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end" footerLabel="Footer Label"> </fdp-column>
+</fdp-table>
+
+<ng-template #footerTemplate>
+    <button fd-button>Footer button</button>
+</ng-template>

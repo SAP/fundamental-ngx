@@ -363,6 +363,19 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="footer-table" componentName="table">Table with Footer</fd-docs-section-title>
+<description>
+    A table footer can be displayed by using the <code>[showTableFooter]</code> input. The column component contains two
+    inputs, <code>[footerLabel]</code> for displaying basic text and <code>[footerCellTemplate]</code> for passing more
+    complex templates to the footer cell, if necessary.
+</description>
+<component-example>
+    <fdp-platform-table-footer-example></fdp-platform-table-footer-example>
+</component-example>
+<code-example [exampleFiles]="footerTable"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="playground-table" componentName="table"> Playground Area </fd-docs-section-title>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table

@@ -15,6 +15,9 @@ export abstract class TableColumn {
     /** Column header label. */
     abstract label: string;
 
+    /** Column footer label. */
+    abstract footerLabel: string;
+
     /** Emits when the label value changes. */
     abstract labelValueChanges$: Observable<Nullable<string>>;
 
@@ -62,6 +65,9 @@ export abstract class TableColumn {
 
     /** Column header template. */
     abstract headerCellTemplate: Nullable<TemplateRef<any>>;
+
+    /** Column header template. */
+    abstract footerCellTemplate: Nullable<TemplateRef<any>>;
 
     /** Column header popover template. */
     abstract headerCellPopoverTemplate: Nullable<TemplateRef<any>>;
