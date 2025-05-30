@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/fn",
-  "version": "0.43.54",
+  "version": "0.43.55",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - FN",
   "license": "Apache-2.0",

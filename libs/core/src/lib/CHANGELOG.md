@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.55](https://github.com/SAP/fundamental-ngx/compare/v0.43.54...v0.43.55) (2025-05-30)
+
+
+### Bug Fixes
+
+* **core:** file uploader should only emit events when files change ([#13256](https://github.com/SAP/fundamental-ngx/issues/13256)) ([c4c5303](https://github.com/SAP/fundamental-ngx/commit/c4c5303696ee312bccd449b7012c04068a79d824))
+
+
+
+
+
 ## [0.43.54](https://github.com/SAP/fundamental-ngx/compare/v0.43.53...v0.43.54) (2025-04-30)
 
 

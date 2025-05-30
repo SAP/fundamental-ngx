@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.55](https://github.com/SAP/fundamental-ngx/compare/v0.43.54...v0.43.55) (2025-05-30)
+
+
+### Bug Fixes
+
+* **platform:** platform form field should announce form message ([#13251](https://github.com/SAP/fundamental-ngx/issues/13251)) ([a56429a](https://github.com/SAP/fundamental-ngx/commit/a56429a63331ef05a07710512f46f7583f65b422))
+
+
+
+
+
 ## [0.43.54](https://github.com/SAP/fundamental-ngx/compare/v0.43.53...v0.43.54) (2025-04-30)
 
 
