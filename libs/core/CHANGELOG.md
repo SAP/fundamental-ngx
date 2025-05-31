@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.4](https://github.com/SAP/fundamental-ngx/compare/v0.54.3...v0.54.4) (2025-05-31)
+
+
+### Bug Fixes
+
+* **core:** fix popover body performance issue ([#13288](https://github.com/SAP/fundamental-ngx/issues/13288)) ([16051a7](https://github.com/SAP/fundamental-ngx/commit/16051a725d03d2d63836ebd23915669da5394d13))
+
+
+
+
+
 ## [0.54.3](https://github.com/SAP/fundamental-ngx/compare/v0.54.2...v0.54.3) (2025-03-18)
 
 
