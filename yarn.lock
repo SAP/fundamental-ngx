@@ -5625,6 +5625,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nx/devkit@npm:21.1.2":
+  version: 21.1.2
+  resolution: "@nx/devkit@npm:21.1.2"
+  dependencies:
+    ejs: "npm:^3.1.7"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    minimatch: "npm:9.0.3"
+    semver: "npm:^7.5.3"
+    tmp: "npm:~0.2.1"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  peerDependencies:
+    nx: 21.1.2
+  checksum: 10/e6bc9c8c89675f593752a0b427b63c5fe45661530a7e5693eb6dce22a5c2d3a4d305ee4510694fae22a8c3f20e7ddc7dbf6a590804924436fdd95a38d4ff5749
+  languageName: node
+  linkType: hard
+
 "@nx/devkit@npm:>=17.1.2 < 21":
   version: 20.8.2
   resolution: "@nx/devkit@npm:20.8.2"
@@ -5705,6 +5723,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nx/eslint@npm:21.1.2":
+  version: 21.1.2
+  resolution: "@nx/eslint@npm:21.1.2"
+  dependencies:
+    "@nx/devkit": "npm:21.1.2"
+    "@nx/js": "npm:21.1.2"
+    semver: "npm:^7.5.3"
+    tslib: "npm:^2.3.0"
+    typescript: "npm:~5.7.2"
+  peerDependencies:
+    "@zkochan/js-yaml": 0.0.7
+    eslint: ^8.0.0 || ^9.0.0
+  peerDependenciesMeta:
+    "@zkochan/js-yaml":
+      optional: true
+  checksum: 10/f21ebca4bb4606dd332ac15ab6fd70df20f84314ddf601fcd7e9c0276f24428808f3739d69b05246b79781cf84aabcf2b296e946772f495c451715f669d36bd3
+  languageName: node
+  linkType: hard
+
 "@nx/jest@npm:21.0.1":
   version: 21.0.1
   resolution: "@nx/jest@npm:21.0.1"
@@ -5725,6 +5762,29 @@ __metadata:
     tslib: "npm:^2.3.0"
     yargs-parser: "npm:21.1.1"
   checksum: 10/b727ef209ea806a3c8554a93ac696d2f5cb122f94932b747f3a24aa8703f85bcb6a996e98a40acfb2aeea6ac34acaf894406808017b4b545aab7bd1f383b95cb
+  languageName: node
+  linkType: hard
+
+"@nx/jest@npm:21.1.2":
+  version: 21.1.2
+  resolution: "@nx/jest@npm:21.1.2"
+  dependencies:
+    "@jest/reporters": "npm:^29.4.1"
+    "@jest/test-result": "npm:^29.4.1"
+    "@nx/devkit": "npm:21.1.2"
+    "@nx/js": "npm:21.1.2"
+    "@phenomnomnominal/tsquery": "npm:~5.0.1"
+    identity-obj-proxy: "npm:3.0.0"
+    jest-config: "npm:^29.4.1"
+    jest-resolve: "npm:^29.4.1"
+    jest-util: "npm:^29.4.1"
+    minimatch: "npm:9.0.3"
+    picocolors: "npm:^1.1.0"
+    resolve.exports: "npm:2.0.3"
+    semver: "npm:^7.5.3"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  checksum: 10/681698637e5bdc2fe748863eb4a8edc1f5105497aaaabdcbac7fdfa1283645d5ff44bcea51d71ee1c606d996ae855e8ac823272512f7ee7949ea9a28de6c30a9
   languageName: node
   linkType: hard
 
@@ -5809,6 +5869,48 @@ __metadata:
     verdaccio:
       optional: true
   checksum: 10/921f7d5121b8a58b3f5e1b931f2e85d0b235c214768523810d5704ad2991d3695f6fb6c091e59d5a9ec1231307b6cf7cc80e2c63e307f6a532038e85da61e6ac
+  languageName: node
+  linkType: hard
+
+"@nx/js@npm:21.1.2":
+  version: 21.1.2
+  resolution: "@nx/js@npm:21.1.2"
+  dependencies:
+    "@babel/core": "npm:^7.23.2"
+    "@babel/plugin-proposal-decorators": "npm:^7.22.7"
+    "@babel/plugin-transform-class-properties": "npm:^7.22.5"
+    "@babel/plugin-transform-runtime": "npm:^7.23.2"
+    "@babel/preset-env": "npm:^7.23.2"
+    "@babel/preset-typescript": "npm:^7.22.5"
+    "@babel/runtime": "npm:^7.22.6"
+    "@nx/devkit": "npm:21.1.2"
+    "@nx/workspace": "npm:21.1.2"
+    "@zkochan/js-yaml": "npm:0.0.7"
+    babel-plugin-const-enum: "npm:^1.0.1"
+    babel-plugin-macros: "npm:^3.1.0"
+    babel-plugin-transform-typescript-metadata: "npm:^0.3.1"
+    chalk: "npm:^4.1.0"
+    columnify: "npm:^1.6.0"
+    detect-port: "npm:^1.5.1"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    js-tokens: "npm:^4.0.0"
+    jsonc-parser: "npm:3.2.0"
+    npm-package-arg: "npm:11.0.1"
+    npm-run-path: "npm:^4.0.1"
+    ora: "npm:5.3.0"
+    picocolors: "npm:^1.1.0"
+    picomatch: "npm:4.0.2"
+    semver: "npm:^7.5.3"
+    source-map-support: "npm:0.5.19"
+    tinyglobby: "npm:^0.2.12"
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    verdaccio: ^6.0.5
+  peerDependenciesMeta:
+    verdaccio:
+      optional: true
+  checksum: 10/8c9aac03defe5c04e0ba1da9f441f4a243063f2f951602549cc3ffae907a24c64a5dddae522934810e1ef83bf0e53ba01b8cdbfdb55b19418352ef5804fd9199
   languageName: node
   linkType: hard
 
@@ -5902,16 +6004,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/plugin@npm:21.0.1":
-  version: 21.0.1
-  resolution: "@nx/plugin@npm:21.0.1"
+"@nx/plugin@npm:21.1.2":
+  version: 21.1.2
+  resolution: "@nx/plugin@npm:21.1.2"
   dependencies:
-    "@nx/devkit": "npm:21.0.1"
-    "@nx/eslint": "npm:21.0.1"
-    "@nx/jest": "npm:21.0.1"
-    "@nx/js": "npm:21.0.1"
+    "@nx/devkit": "npm:21.1.2"
+    "@nx/eslint": "npm:21.1.2"
+    "@nx/jest": "npm:21.1.2"
+    "@nx/js": "npm:21.1.2"
     tslib: "npm:^2.3.0"
-  checksum: 10/805f6ea28c34b425fb4e7a3cb3b41f0d769b41052659b0b9afdfc4b0a8f893d6fd8bf787a3c1c3b7e73a57ad5eb5b6ca375064ce8ee1fe8ca4c81fcf0e2a3d60
+  checksum: 10/e14013b71c0d6934f2c2a2eaa27ab7c20355885a4309e2891a09fce97a6cca46eada8ff07d6b1e527dcb0d8fb2104224751a99c22d067ae813d47ca1bc7f9df2
   languageName: node
   linkType: hard
 
@@ -6045,6 +6147,22 @@ __metadata:
     tslib: "npm:^2.3.0"
     yargs-parser: "npm:21.1.1"
   checksum: 10/bdc45685b573d673cd8fd9f194c4b41587610067bca6a546877130b97664ea7cafe6659b57cc351b57b189077846f6407f4d379e4c5a83c85c3000648c93856f
+  languageName: node
+  linkType: hard
+
+"@nx/workspace@npm:21.1.2":
+  version: 21.1.2
+  resolution: "@nx/workspace@npm:21.1.2"
+  dependencies:
+    "@nx/devkit": "npm:21.1.2"
+    "@zkochan/js-yaml": "npm:0.0.7"
+    chalk: "npm:^4.1.0"
+    enquirer: "npm:~2.3.6"
+    nx: "npm:21.1.2"
+    picomatch: "npm:4.0.2"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  checksum: 10/2213cfbb98e93a187e053ca6375a3fa16f6384ab9344122a33f8bf3a88d018328005cd52da6f22ac2a4b4a13c80fe7a9feb08e23c2690cbf54c2a0166bd97c01
   languageName: node
   linkType: hard
 
@@ -15482,7 +15600,7 @@ __metadata:
     "@nx/eslint-plugin": "npm:21.0.1"
     "@nx/jest": "npm:21.0.1"
     "@nx/js": "npm:21.0.1"
-    "@nx/plugin": "npm:21.0.1"
+    "@nx/plugin": "npm:21.1.2"
     "@nx/workspace": "npm:21.0.1"
     "@sap-theming/theming-base-content": "npm:11.30.1"
     "@sap-ui/common-css": "npm:0.40.1"
