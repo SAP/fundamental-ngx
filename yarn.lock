@@ -9850,14 +9850,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.0":
-  version: 1.6.0
-  resolution: "axios@npm:1.6.0"
+"axios@npm:1.9.0, axios@npm:^1.7.4, axios@npm:^1.8.2, axios@npm:^1.8.3":
+  version: 1.9.0
+  resolution: "axios@npm:1.9.0"
   dependencies:
-    follow-redirects: "npm:^1.15.0"
+    follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/f069d938a05d2293e27c7cd6f0c08a1cb764f7cc43a1e637572f8d5928837ecd735890ad67a867d696094ee4b8b4dfdb3727a57aae600845e4c295581cb32f9a
+  checksum: 10/a2f90bba56820883879f32a237e2b9ff25c250365dcafd41cec41b3406a3df334a148f90010182dfdadb4b41dc59f6f0b3e8898ff41b666d1157b5f3f4523497
   languageName: node
   linkType: hard
 
@@ -9876,17 +9876,6 @@ __metadata:
   dependencies:
     follow-redirects: "npm:^1.14.7"
   checksum: 10/7961f4386e5492c2a32756a8c9a2ca247130d4aa8d24f855d11d02f8d99288c6e9a4aabe0675587ace61779b6bd3d54a654f64431c87dc0270cfba52a4dca9c9
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.7.4, axios@npm:^1.8.2, axios@npm:^1.8.3":
-  version: 1.9.0
-  resolution: "axios@npm:1.9.0"
-  dependencies:
-    follow-redirects: "npm:^1.15.6"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10/a2f90bba56820883879f32a237e2b9ff25c250365dcafd41cec41b3406a3df334a148f90010182dfdadb4b41dc59f6f0b3e8898ff41b666d1157b5f3f4523497
   languageName: node
   linkType: hard
 
@@ -15185,7 +15174,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.15.6":
   version: 1.15.9
   resolution: "follow-redirects@npm:1.15.9"
   peerDependenciesMeta:
@@ -15508,7 +15497,7 @@ __metadata:
     autoprefixer: "npm:^10.4.0"
     axe-core: "npm:4.5.2"
     axe-html-reporter: "npm:2.2.3"
-    axios: "npm:1.6.0"
+    axios: "npm:1.9.0"
     chromedriver: "npm:99.0.0"
     compare-versions: "npm:6.1.0"
     conventional-changelog: "npm:4.0.0"
