@@ -86,7 +86,7 @@
         "@commitlint/config-conventional": "18.6.1",
         "@jsdevtools/npm-publish": "3.0.1",
         "@nx/devkit": "21.0.1",
-        "@nx/eslint": "21.0.1",
+        "@nx/eslint": "21.1.2",
         "@nx/eslint-plugin": "21.0.1",
         "@nx/jest": "21.0.1",
         "@nx/js": "21.0.1",
