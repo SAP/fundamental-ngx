@@ -27,6 +27,8 @@ import { TableP13FilterComponent } from './table-p13-filter.component';
 import { TableP13GroupComponent } from './table-p13-group.component';
 import { TableP13SortComponent } from './table-p13-sort.component';
 
+import { VisibleColumnType } from './columns/columns.component';
+
 import { ColumnsDialogData, ColumnsDialogResultData, P13ColumnsDialogComponent } from './columns/columns.component';
 import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
 import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
@@ -117,6 +119,9 @@ export class TableP13DialogComponent implements OnDestroy {
 
     /** @hidden */
     private _tableSubscriptions = new Subscription();
+
+    /** @hidden */
+    private _columnOrder: VisibleColumnType[];
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
@@ -254,6 +259,12 @@ export class TableP13DialogComponent implements OnDestroy {
             visibleColumns
         };
 
+        if (this._columnOrder && this._columnOrder.length) {
+            dialogData.availableColumns.sort(
+                (a, b) => this._columnOrder.indexOf(a.key) - this._columnOrder.indexOf(b.key)
+            );
+        }
+
         // dismiss any open dialog, before opening a new one
         if (this._dialogRef) {
             this._dialogRef.dismiss();
@@ -273,7 +284,10 @@ export class TableP13DialogComponent implements OnDestroy {
         this._subscriptions.add(
             this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ visibleColumns: result }: ColumnsDialogResultData) => {
+                .subscribe(({ visibleColumns: result, columnOrder }: ColumnsDialogResultData) => {
+                    if (columnOrder) {
+                        this._columnOrder = columnOrder;
+                    }
                     this.dialogClosed.emit(result);
                     this._applyColumns(result);
                 })

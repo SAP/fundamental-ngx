@@ -45,7 +45,7 @@ export interface DialogTableColumn {
     key: string;
 }
 
-type VisibleColumnType = string; // ColumnKey
+export type VisibleColumnType = string; // ColumnKey
 
 export interface ColumnsDialogData extends TableDialogCommonData {
     availableColumns: DialogTableColumn[];
@@ -54,6 +54,7 @@ export interface ColumnsDialogData extends TableDialogCommonData {
 
 export interface ColumnsDialogResultData {
     visibleColumns: VisibleColumnType[];
+    columnOrder?: VisibleColumnType[];
 }
 
 class SelectableColumn {
@@ -63,9 +64,7 @@ class SelectableColumn {
         /** Active */
         public active: boolean,
         /** Table Column it belongs to */
-        public column: DialogTableColumn,
-        /** Table column order */
-        public order: number
+        public column: DialogTableColumn
     ) {}
 }
 
@@ -182,7 +181,8 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** Confirm changes and close dialog */
     confirm(): void {
         const visibleColumns = this._getVisibleColumnsFromSelectedColumns(this._selectableColumns);
-        const result: ColumnsDialogResultData = { visibleColumns };
+        const columnOrder = this._getColumnOrder(this._selectableColumns);
+        const result: ColumnsDialogResultData = { visibleColumns, columnOrder };
         this.dialogRef.close(result);
     }
 
@@ -292,17 +292,13 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
      */
     private _initiateColumns(visibleColumnKeys: string[]): void {
         const visibleColumnIndexMap = new Map(visibleColumnKeys.map((key, index) => [key, index]));
-        this._selectableColumns = this.availableColumns
-            .slice()
-            .map(
-                (column, index: number): SelectableColumn => ({
-                    column,
-                    selected: visibleColumnKeys.includes(column.key),
-                    active: index === 0,
-                    order: visibleColumnIndexMap.get(column.key) ?? index
-                })
-            )
-            .sort((a, b) => a.order - b.order);
+        this._selectableColumns = this.availableColumns.slice().map(
+            (column, index: number): SelectableColumn => ({
+                column,
+                selected: visibleColumnKeys.includes(column.key),
+                active: index === 0
+            })
+        );
 
         // keep count of selected
         this._countSelectedColumns();
@@ -342,6 +338,11 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     private _getVisibleColumnsFromSelectedColumns(columns = this._selectableColumns): VisibleColumnType[] {
         return columns.filter(({ selected }) => selected).map(({ column }): VisibleColumnType => column.key);
+    }
+
+    /** @hidden */
+    private _getColumnOrder(columns: SelectableColumn[]): VisibleColumnType[] {
+        return columns.map((column) => column.column.key);
     }
 
     /** @hidden */
