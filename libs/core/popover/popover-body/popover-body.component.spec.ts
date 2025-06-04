@@ -2,14 +2,12 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PopoverService } from '../popover-service/popover.service';
 import { PopoverModule } from '../popover.module';
 import { PopoverBodyComponent } from './popover-body.component';
 
 describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
     let fixture: ComponentFixture<PopoverBodyComponent>;
-    let popoverService: PopoverService;
 
     const mockRenderer2 = {
         listen: jest.fn(),
@@ -20,14 +18,13 @@ describe('PopoverBodyComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PopoverModule, A11yModule],
-            providers: [{ provide: Renderer2, useValue: mockRenderer2 }, PopoverService]
+            providers: [{ provide: Renderer2, useValue: mockRenderer2 }]
         }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PopoverBodyComponent);
         component = fixture.componentInstance;
-        popoverService = TestBed.inject(PopoverService);
 
         fixture.detectChanges();
     });
