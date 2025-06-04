@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.4...v0.56.3-rc.5) (2025-06-04)
+
+
+### Bug Fixes
+
+* **core:** remove document click in popover ([#13329](https://github.com/SAP/fundamental-ngx/issues/13329)) ([42e041d](https://github.com/SAP/fundamental-ngx/commit/42e041d02306f071afb5bb91dbe2d19e11e50a0d))
+
+
+
+
+
 ## [0.56.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.3...v0.56.3-rc.4) (2025-05-28)
 
 
