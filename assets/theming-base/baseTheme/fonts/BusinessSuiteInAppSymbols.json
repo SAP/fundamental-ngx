@@ -2509,6 +2509,24 @@
 		"tags": [],
 		"rtl": "flip"
 	},
+	"0xe13a": {
+		"names": ["icon-all-spaces-pin"],
+		"groups": ["actions", "objects", "status"],
+		"tags": ["pin", "list", "spaces"],
+		"rtl": "flip"
+	},
+	"0xe13b": {
+		"names": ["icon-handling-units"],
+		"groups": ["actions", "objects", "status", "places"],
+		"tags": ["handling", "units", "work", "pallet"],
+		"rtl": "flip"
+	},
+	"0xe13c": {
+		"names": ["icon-packing-work-center"],
+		"groups": ["actions", "objects", "status", "places", "warehouse"],
+		"tags": ["packing","work", "center", "warehouse"],
+		"rtl": "flip"
+	},
 	"0xe140": {
 		"names": ["icon-ps-text"],
 		"groups": [],
@@ -2986,7 +3004,7 @@
 	"0xe189": {
 		"names": ["icon-staging"],
 		"groups": ["objects", "things", "status", "transport"],
-		"tags": ["wearhouse", "stage", "staging", "products", "loading", "layer", "transport"],
+		"tags": ["warehouse", "stage", "staging", "products", "loading", "layer", "transport"],
 		"rtl": "flip"
 	},
 	"0xe18a": {
@@ -3008,5 +3026,3 @@
 		"rtl": "flip"
 	}
 }
-
-
