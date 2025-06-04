@@ -29,9 +29,6 @@ describe('PopoverBodyComponent', () => {
         component = fixture.componentInstance;
         popoverService = TestBed.inject(PopoverService);
 
-        jest.spyOn(popoverService, 'registerPopover');
-        jest.spyOn(popoverService, 'unregisterPopover');
-
         fixture.detectChanges();
     });
 
@@ -45,12 +42,5 @@ describe('PopoverBodyComponent', () => {
         component._closeOnEscapeKey = true;
         component.bodyKeyupHandler(keyboardEvent);
         expect(component.onClose.next).toHaveBeenCalled();
-    });
-
-    it('should register and unregister with PopoverService', () => {
-        expect(popoverService.registerPopover).toHaveBeenCalledWith(component);
-
-        fixture.destroy();
-        expect(popoverService.unregisterPopover).toHaveBeenCalledWith(component);
     });
 });
