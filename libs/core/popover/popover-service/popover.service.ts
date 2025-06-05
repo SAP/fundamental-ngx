@@ -94,9 +94,6 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _isModal = false;
 
-    /** @hidden */
-    private _popoverComponents = new Set<PopoverBodyComponent>();
-
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -118,8 +115,6 @@ export class PopoverService extends BasePopoverClass {
 
         /** Merge observables - close or destroy */
         this._refresh$ = merge(this.isOpenChange, destroyObservable(this._destroyRef));
-
-        this._renderer.listen('document', 'click', (event: MouseEvent) => this._handleGlobalClick(event));
 
         this._destroyRef.onDestroy(() => {
             this._removeTriggerListeners();
@@ -364,31 +359,6 @@ export class PopoverService extends BasePopoverClass {
     updateTriggerElement(trigger: ElementRef | HTMLElement): void {
         this._triggerElement = trigger;
         this._refreshTriggerListeners();
-    }
-
-    /**
-     * register a popover body component instance
-     * @param popoverBodyComponent
-     */
-    registerPopover(popoverBodyComponent: PopoverBodyComponent): void {
-        this._popoverComponents.add(popoverBodyComponent);
-    }
-
-    /**
-     * unregister a popover body component instance
-     * @param popoverBodyComponent
-     */
-    unregisterPopover(popoverBodyComponent: PopoverBodyComponent): void {
-        this._popoverComponents.delete(popoverBodyComponent);
-    }
-
-    private _handleGlobalClick(event: MouseEvent): void {
-        this._popoverComponents.forEach((popoverBodyComponent) => {
-            const clickInside = popoverBodyComponent._elementRef.nativeElement.contains(event.target as HTMLElement);
-            if (!clickInside) {
-                popoverBodyComponent._focusFirstTabbableElement();
-            }
-        });
     }
 
     /** @hidden */
