@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.1...v0.56.4-rc.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **platform:** persist column reordering when reopening columns p13 dialog ([#13328](https://github.com/SAP/fundamental-ngx/issues/13328)) ([13162be](https://github.com/SAP/fundamental-ngx/commit/13162be90eef56271e2e480058577ac91a6b783d))
+
+
+
+
+
 ## [0.56.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.0...v0.56.4-rc.1) (2025-06-05)
 
 
