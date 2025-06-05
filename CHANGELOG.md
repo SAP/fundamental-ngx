@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.0...v0.56.4-rc.1) (2025-06-05)
+
+
+### Features
+
+* **platform:** add table footer component to platform table ([#13315](https://github.com/SAP/fundamental-ngx/issues/13315)) ([42fe8bb](https://github.com/SAP/fundamental-ngx/commit/42fe8bb2a2b2902d54a0461b9949f3f7f71e3f88))
+
+
+
+
+
 ## [0.56.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.3...v0.56.4-rc.0) (2025-06-05)
 
 **Note:** Version bump only for package fundamental-ngx
