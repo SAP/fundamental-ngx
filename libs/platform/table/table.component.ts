@@ -493,7 +493,7 @@ export class TableComponent<T = any>
     minimumColumnWidth = TABLE_COLUMN_MIN_WIDTH;
 
     /** Whether to display the table footer. */
-    @Input()
+    @Input({ transform: booleanAttribute })
     showTableFooter = false;
 
     /**
