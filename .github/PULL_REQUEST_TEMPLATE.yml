@@ -1,0 +1,22 @@
+name: Pull Request
+description: Submit your changes for review.
+title: '[PR] <title>'
+body:
+    - type: input
+      id: related-issues
+      attributes:
+          label: Related Issue(s)
+          description: >
+              If this PR fixes multiple issues, use the full syntax (`closes #issue-number`) for each issue so that each issue gets closed automatically; e.g. closes #0001, closes #0002.
+          placeholder: 'closes #1234, closes #5678'
+      validations:
+          required: false
+
+    - type: textarea
+      id: description
+      attributes:
+          label: Description and Screenshots (Before and After if applicable)
+          description: 'Enter a short description of the change.'
+          placeholder: Short summary of your changes.
+      validations:
+          required: true
