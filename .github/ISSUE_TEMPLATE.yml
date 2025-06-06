@@ -1,0 +1,55 @@
+name: Feature, Bug or Enhancement Report
+description: Report a bug, request an enhancement or feature.
+labels: []
+body:
+    - type: markdown
+      attributes:
+          value: |
+              **IMPORTANT:** Please refrain from providing any internal or sensitive information like: internal urls, login credentials, screenshots of applications or features in development, as this project is open-source, and its contents are accessible to anyone.
+
+    - type: textarea
+      id: proposal-description
+      attributes:
+          label: Describe your proposal
+          description: Please provide a detailed description of your proposal, bug, or feature request.
+      validations:
+          required: true
+
+    - type: input
+      id: versions
+      attributes:
+          label: Which versions of Angular and Fundamental Library for Angular are affected?
+          description: Specify the exact versions. (If requesting a feature, use current version.)
+          placeholder: 'Angular: x.y.z, Fundamental Library: x.y.z'
+      validations:
+          required: true
+
+    - type: textarea
+      id: reproduction-steps
+      attributes:
+          label: Steps to Reproduce (for bugs)
+          description: Provide steps for reproducing the issue, including the exact components you are using.
+          placeholder: |
+              1. Go to ...
+              2. Click on ...
+              3. ...
+      validations:
+          required: false
+
+    - type: input
+      id: stackblitz
+      attributes:
+          label: StackBlitz example(s)
+          description: If possible, provide a link to a minimal reproducible saved StackBlitz.
+          placeholder: 'https://stackblitz.com/...'
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: confirmation
+      attributes:
+          label: Declaration
+          description: By submitting this issue, I confirm to follow the recommendation not to disclose any internal or sensitive information.
+          options:
+              - label: I'm not disclosing any internal or sensitive information.
+                required: true
