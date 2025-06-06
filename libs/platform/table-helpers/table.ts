@@ -3,7 +3,7 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { TableDataSource } from './domain';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
@@ -67,6 +67,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract _tableCurrentlyRenderedRowsPlaceholder: number[];
 
     abstract minimumColumnWidth: number;
+
+    abstract _focusableGrid: FocusableGridDirective;
 
     /** Get table state */
     abstract getTableState(): TableState;

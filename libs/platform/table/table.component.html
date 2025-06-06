@@ -26,6 +26,7 @@
     <div
         class="fdp-table__body fd-scrollbar"
         [class.fdp-table__body--virtual-scroll]="!!_virtualScrollDirective?.virtualScroll"
+        [class.fdp-table__body--disable-scroll]="!!_dndTableDirective?.dragDropInProgress"
         fdpTableScrollable
         #tableScrollable="tableScrollable"
         [style.height]="bodyHeight"
