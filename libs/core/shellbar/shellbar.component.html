@@ -13,7 +13,7 @@
         >
             @if (showNavigationButton && !_showMobileSearch) {
                 <button
-                    class="fd-shellbar__action"
+                    class="fd-shellbar__button"
                     fd-button
                     fdType="transparent"
                     glyph="menu2"
@@ -24,7 +24,7 @@
             }
             @if (showBackButton && !_showMobileSearch) {
                 <button
-                    class="fd-shellbar__action"
+                    class="fd-shellbar__button"
                     fd-button
                     fdType="transparent"
                     [glyph]="_rtl$() ? 'slim-arrow-right' : 'nav-back'"
