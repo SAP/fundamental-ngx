@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Provider } from '@angular/core';
+import { DOCUMENT, Provider } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContentDensityService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityStorage } from './classes/abstract-content-density-storage';

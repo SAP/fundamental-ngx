@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
 import {
     DestroyRef,
+    DOCUMENT,
     inject,
     Inject,
     Injectable,
