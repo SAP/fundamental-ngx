@@ -33,7 +33,7 @@ const carouselItems = `<fd-carousel-item>
             [noPaginationContainerBorder]="noPaginationContainerBorder"
             [contentBackground]="contentBackground"
             [pageIndicatorBackground]="pageIndicatorBackground"
-            >${carouselItems}</fd-carousel
+            >{{ carouselItems }}</fd-carousel
         >
     `
 })
@@ -52,6 +52,7 @@ class TestCarouselComponent {
     noPaginationContainerBorder = false;
     contentBackground: CarouselBackgroundOptions;
     pageIndicatorBackground: CarouselBackgroundOptions;
+    carouselItems = carouselItems;
 }
 
 describe('CarouselComponent', () => {
@@ -190,7 +191,7 @@ describe('CarouselComponent', () => {
             [navigatorInPageIndicator]="navigatorInPageIndicator"
             [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
-            >${carouselItems}</fd-carousel
+            >{{ carouselItems }}</fd-carousel
         >
     `
 })
@@ -205,6 +206,7 @@ class TestCarouselMultipleActiveItemComponent {
     navigatorInPageIndicator = true;
     pageIndicatorContainerPlacement: PageIndicatorsOrientation = 'top';
     isCircular = false;
+    carouselItems = carouselItems;
 }
 
 describe('CarouselComponent Multiple Active Item', () => {
@@ -316,7 +318,7 @@ describe('CarouselComponent Multiple Active Item', () => {
             [navigatorInPageIndicator]="navigatorInPageIndicator"
             [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
-            >${carouselItems}</fd-carousel
+            >{{ carouselItems }}</fd-carousel
         >
     `
 })
@@ -331,6 +333,7 @@ class TestCarouselLoopingNavigationComponent {
     navigatorInPageIndicator = true;
     pageIndicatorContainerPlacement: PageIndicatorsOrientation = 'bottom';
     isCircular = true;
+    carouselItems = carouselItems;
 }
 
 describe('CarouselComponent looping navigation', () => {
