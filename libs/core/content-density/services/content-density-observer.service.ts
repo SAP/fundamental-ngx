@@ -28,8 +28,7 @@ const getDeps = (injector: Injector, defaultContentDensity: FactorySansProvider)
             for (let index = 0; index < dep.length; index++) {
                 const flag = dep[index]['__NG_DI_FLAG__'];
                 if (typeof flag === 'number') {
-                    // eslint-disable-next-line no-bitwise
-                    flags |= flag;
+                    flags = { ...flags, flag };
                 } else {
                     type = dep[index];
                 }
