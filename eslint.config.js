@@ -285,7 +285,8 @@ module.exports = pluginTs.config(
                     markers: ['/']
                 }
             ],
-            'valid-typeof': 'off'
+            'valid-typeof': 'off',
+            '@angular-eslint/prefer-inject': 'off'
         }
     },
     {
