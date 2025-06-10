@@ -4,7 +4,6 @@ import {
     FactorySansProvider,
     inject,
     Injectable,
-    InjectFlags,
     Injector,
     Renderer2,
     Signal
@@ -25,7 +24,7 @@ const getDeps = (injector: Injector, defaultContentDensity: FactorySansProvider)
     (defaultContentDensity.deps || []).map((dep): any => {
         if (Array.isArray(dep)) {
             let type;
-            let flags = InjectFlags.Default;
+            let flags = {};
             for (let index = 0; index < dep.length; index++) {
                 const flag = dep[index]['__NG_DI_FLAG__'];
                 if (typeof flag === 'number') {
@@ -37,7 +36,7 @@ const getDeps = (injector: Injector, defaultContentDensity: FactorySansProvider)
             }
             return injector.get(type, undefined, flags);
         }
-        return injector.get(dep, undefined, InjectFlags.Default);
+        return injector.get(dep, undefined, {});
     });
 
 const getDefaultContentDensity = (
@@ -58,7 +57,7 @@ const initialContentDensity = (
     injector: Injector,
     configuration?: ContentDensityObserverSettings
 ): ContentDensityMode => {
-    const serviceValue = injector.get(GlobalContentDensityService, null, InjectFlags.Optional)?.currentContentDensity;
+    const serviceValue = injector.get(GlobalContentDensityService, null, { optional: true })?.currentContentDensity;
     if (serviceValue) {
         return serviceValue;
     }
