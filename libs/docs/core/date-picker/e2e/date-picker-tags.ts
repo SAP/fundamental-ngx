@@ -1,3 +1,4 @@
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getElementArrayLength, getElementClass } from '@fundamental-ngx/e2e';
 import { DatePickerPo } from './date-picker.po';
 
