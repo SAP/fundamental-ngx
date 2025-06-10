@@ -24,12 +24,12 @@
         "build": {
             "executor": "@nx/angular:package",
             "options": {
-                "tsConfig": "{projectRoot}/tsconfig.lib.json",
+                "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
                 "project": "{projectRoot}/ng-package.json"
             },
             "configurations": {
                 "production": {
-                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
+                    "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
                 }
             },
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],

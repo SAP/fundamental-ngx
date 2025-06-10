@@ -25,7 +25,7 @@
             },
             "configurations": {
                 "production": {
-                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
+                    "tsConfig": "libs/platform/tsconfig.lib.prod.json"
                 }
             },
             "defaultConfiguration": "production"
