@@ -1,4 +1,4 @@
-import { checkElArrIsClickable, click, getElementArrayLength, getElementSize } from '../../../../../e2e';
+import { checkElArrIsClickable, click, getElementArrayLength, getElementSize } from '@fundamental-ngx/e2e';
 import { TimelinePo } from './timeline.po';
 
 describe('Timeline test suite', () => {

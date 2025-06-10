@@ -7,7 +7,7 @@ import {
     getElementClass,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { navTitlesArr, navUrl } from './display-list-item-contents';
 import { DisplayListItemPo } from './display-list-item.po';
 

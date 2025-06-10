@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class PaginationPo extends CoreBaseComponentPo {
     basicPaginationExample = 'fd-pagination-example ';

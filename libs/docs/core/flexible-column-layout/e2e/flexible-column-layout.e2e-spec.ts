@@ -8,7 +8,7 @@ import {
     refreshPage,
     waitForElDisplayed,
     waitForNotDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { FlexibleColumnLayoutPo } from './flexible-column-layout.po';
 
 describe('Flexible column layout component test', () => {

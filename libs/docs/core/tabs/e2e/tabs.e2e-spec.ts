@@ -13,7 +13,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { TabsPo } from './tabs.po';
 
 describe('Tabs test suite', () => {

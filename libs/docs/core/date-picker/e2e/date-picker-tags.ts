@@ -1,4 +1,4 @@
-import { getElementArrayLength, getElementClass } from '../../../../../e2e';
+import { getElementArrayLength, getElementClass } from '@fundamental-ngx/e2e';
 import { DatePickerPo } from './date-picker.po';
 
 const { altCalendarItem } = new DatePickerPo();

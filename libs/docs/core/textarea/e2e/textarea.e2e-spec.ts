@@ -16,7 +16,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { TextareaPo } from './textarea.po';
 
 import { formMessageTestText, sections, states, styleArr } from './textarea-contents';

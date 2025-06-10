@@ -4,7 +4,7 @@ import {
     getElementArrayLength,
     getElementTitle,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { iconStatusesList } from './object-marker-contents';
 import { ObjectMarkerPo } from './object-marker.po';
 

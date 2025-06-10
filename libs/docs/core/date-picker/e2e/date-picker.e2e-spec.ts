@@ -16,7 +16,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { blockExamples } from './date-picker-contents';
 import { currentYear, getCurrentItemIndex, getCurrentMonth, invalidDate } from './date-picker-tags';
 import { DatePickerPo } from './date-picker.po';

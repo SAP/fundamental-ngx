@@ -8,7 +8,7 @@ import {
     getText,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { secondaryAttr, secondaryTypes, toolbarTextValue } from './standard-list-item-contents';
 import { StandardListItemPo } from './standard-list-item.po';
 

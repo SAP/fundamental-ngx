@@ -8,7 +8,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { SplitterPo } from './spltiller.po';
 
 describe('Standard List test suite', () => {

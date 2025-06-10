@@ -13,7 +13,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { currentDay, date, fruitArr, placeholder, testText } from './toolbar-contents';
 import { ToolbarPo } from './toolbar.po';
 

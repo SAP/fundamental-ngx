@@ -54,6 +54,7 @@
             "@fundamental-ngx/docs/schema": ["libs/docs/schema/src/index.ts"],
             "@fundamental-ngx/docs/shared": ["libs/docs/shared/src/index.ts"],
             "@fundamental-ngx/docs/shared-pages": ["libs/docs/shared-pages/index.ts"],
+            "@fundamental-ngx/e2e": ["e2e/index.ts"],
             "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],

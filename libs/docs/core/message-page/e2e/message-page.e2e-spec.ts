@@ -7,7 +7,7 @@ import {
     isElementDisplayed,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { subtitleTextArr, titleTextArr } from './message-page-content';
 import { MessagePagePo } from './message-page.po';
 

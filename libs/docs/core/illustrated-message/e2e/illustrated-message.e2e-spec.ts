@@ -5,7 +5,7 @@ import {
     isElementClickable,
     waitForElDisplayed,
     waitForNotPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { IllustratedMessagePo } from './illustrated-message.po';
 
 describe('Illustrated-message test suite', () => {

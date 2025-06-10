@@ -1,4 +1,4 @@
-import { checkElementTextValue, getAttributeByName, isElementDisplayed } from '../../../../../e2e';
+import { checkElementTextValue, getAttributeByName, isElementDisplayed } from '@fundamental-ngx/e2e';
 import { labelAttribute, linkText, standaloneText } from './object-attribute-contents';
 import { ObjectAttributePo } from './object-attribute.po';
 

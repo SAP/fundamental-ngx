@@ -8,7 +8,7 @@ import {
     refreshPage,
     waitForElDisplayed,
     waitForNotDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { main_button_title } from './dynamic-page-contents';
 import { DynamicPagePo } from './dynamic-page.po';
 

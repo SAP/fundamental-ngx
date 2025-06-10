@@ -1,4 +1,4 @@
-import { click, CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { click, CoreBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class TimePickerPo extends CoreBaseComponentPo {
     url = '/time-picker';

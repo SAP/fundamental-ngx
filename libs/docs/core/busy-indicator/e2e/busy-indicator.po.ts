@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class BusyIndicatorPo extends CoreBaseComponentPo {
     componentExample = '.docs-tile-content-example';

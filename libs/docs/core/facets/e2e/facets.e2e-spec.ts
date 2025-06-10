@@ -5,7 +5,7 @@ import {
     isElementClickable,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { FacetsPo } from './facets.po';
 
 describe('dynamic side content test suite', () => {

@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class CheckboxPo extends CoreBaseComponentPo {
     standardCheckbox = 'fd-checkbox-default-example ';
