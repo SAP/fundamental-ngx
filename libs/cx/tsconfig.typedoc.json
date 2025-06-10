@@ -10,7 +10,8 @@
         "useDefineForClassFields": false,
         "jsx": "react",
         "jsxFactory": "JSX.createElement",
-        "jsxFragmentFactory": "JSX.Fragment"
+        "jsxFragmentFactory": "JSX.Fragment",
+        "moduleResolution": "bundler"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
