@@ -1,4 +1,4 @@
-import { checkElementTextValue, getElementArrayLength, isElementClickable, scrollIntoView } from '../../../../../e2e';
+import { checkElementTextValue, getElementArrayLength, isElementClickable, scrollIntoView } from '@fundamental-ngx/e2e';
 import { footerTextArr } from './page-footer-contents';
 import { PageFooterPo } from './page-footer.po';
 

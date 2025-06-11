@@ -9,7 +9,7 @@ import {
     refreshPage,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 
 import { customMessage, customWidth } from './message-strip';
 import { messageTypes, playgroundStates, sections } from './message-strip.contents';

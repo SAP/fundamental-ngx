@@ -15,7 +15,7 @@ import {
     setValue,
     waitForElDisappear,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { WizardPo } from './wizard.po';
 import { firstAdress, firstAdressLength, fullName, secAdress, update } from './wizard.tags';
 

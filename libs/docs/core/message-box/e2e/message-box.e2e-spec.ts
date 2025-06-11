@@ -10,7 +10,7 @@ import {
     waitForElDisappear,
     waitForElDisplayed,
     waitForNotPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { buttonClassArr } from './message-box';
 import { MessageBoxPo } from './message-box.po';
 

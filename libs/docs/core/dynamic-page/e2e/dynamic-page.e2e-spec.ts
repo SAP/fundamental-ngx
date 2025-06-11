@@ -10,7 +10,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { DynamicPagePo } from './dynamic-page.po';
 
 describe('dynamic side content test suite', () => {

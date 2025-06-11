@@ -9,8 +9,7 @@ module.exports = [
         files: ['**/*.ts'],
         rules: {
             '@angular-eslint/directive-selector': ['off'],
-            '@angular-eslint/component-selector': ['off'],
-            '@nx/enforce-module-boundaries': ['off']
+            '@angular-eslint/component-selector': ['off']
         }
     },
     {
@@ -22,6 +21,12 @@ module.exports = [
             '@angular-eslint/template/interactive-supports-focus': 'off',
             '@angular-eslint/template/label-has-associated-control': 'off',
             '@angular-eslint/template/alt-text': 'off'
+        }
+    },
+    {
+        files: ['**/*.e2e-spec.ts', '**/*tests.ts', '**/*.po.ts'],
+        rules: {
+            '@nx/enforce-module-boundaries': ['off']
         }
     }
 ];

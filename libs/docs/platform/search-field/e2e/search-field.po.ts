@@ -1,4 +1,4 @@
-import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { PlatformBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class SearchFieldPo extends PlatformBaseComponentPo {
     url = '/search-field';

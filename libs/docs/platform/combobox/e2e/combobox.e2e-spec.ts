@@ -20,7 +20,7 @@ import {
     waitForElDisplayed,
     waitForPresent,
     waitForUnclickable
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { activeTypeNames, appleOption, bananaOption, notActiveTypeNames } from './combobox.page-content';
 import { ComboBoxPo } from './combobox.po';
 

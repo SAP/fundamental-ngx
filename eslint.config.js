@@ -189,6 +189,7 @@ module.exports = pluginTs.config(
                                 'scope:docs',
                                 'scope:fd',
                                 'scope:fdp',
+                                'scope:fdb',
                                 'scope:datetime-adapter',
                                 'scope:i18n',
                                 'scope:cx',

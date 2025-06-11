@@ -12,7 +12,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { MultiInputPo } from './multi-input.po';
 
 describe('Multi input test suite', () => {

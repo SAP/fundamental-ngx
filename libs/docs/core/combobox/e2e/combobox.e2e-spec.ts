@@ -14,7 +14,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { ComboboxPo } from './combobox.po';
 
 describe('Combobox component test suit', () => {

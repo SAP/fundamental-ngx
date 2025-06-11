@@ -10,7 +10,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { alertTestText1, alertTestText2, testText, testTextName, testTextSearch } from './table-contents';
 
 export class TablePo extends PlatformBaseComponentPo {

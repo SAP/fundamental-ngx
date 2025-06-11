@@ -5,7 +5,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { BarPo } from './bar.po';
 
 describe('Bar test suite:', () => {

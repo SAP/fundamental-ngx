@@ -19,7 +19,7 @@ import {
     waitForElDisplayed,
     waitForInvisibilityOf,
     waitForNotPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { loadMoreClass, multiSelect, navIndicator, navUrl, selectionAttr } from './list-contents';
 import { ListPo } from './list.po';
 

@@ -16,7 +16,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { email_value, numeric_value, string_value } from './input-group';
 import {
     inputWithFormLabel,

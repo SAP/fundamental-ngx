@@ -16,7 +16,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { FormContainerPo } from './form-container.po';
 
 describe('Form Container test suite', () => {

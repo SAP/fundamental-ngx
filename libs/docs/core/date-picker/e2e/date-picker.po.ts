@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, getElementClass, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, getElementClass, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class DatePickerPo extends CoreBaseComponentPo {
     defaultExample = 'fd-date-picker-single-example ';

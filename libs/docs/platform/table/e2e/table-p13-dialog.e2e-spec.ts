@@ -8,7 +8,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { runCommonTests } from './table-common-tests';
 import {
     astroTestText,

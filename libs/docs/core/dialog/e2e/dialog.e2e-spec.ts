@@ -20,7 +20,7 @@ import {
     waitForElDisappear,
     waitForElDisplayed,
     waitForNotPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { papayaFruit } from './dialog';
 import {
     approvedStatus,

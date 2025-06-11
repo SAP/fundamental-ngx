@@ -1,4 +1,4 @@
-import { BtpBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { BtpBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class SplitterPo extends BtpBaseComponentPo {
     basicExample = 'fdb-splitter-default-example ';

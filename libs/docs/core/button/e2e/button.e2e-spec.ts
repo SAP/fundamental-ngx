@@ -10,7 +10,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { fdTypeOptions, iconOptions, testText } from './button-contents';
 import { ButtonPo } from './button.po';
 

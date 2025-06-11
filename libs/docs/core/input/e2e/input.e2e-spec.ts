@@ -13,7 +13,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { longLine, number, special_characters, text } from './input';
 import { InputPo } from './input.po';
 

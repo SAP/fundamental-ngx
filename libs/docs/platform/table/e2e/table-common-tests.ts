@@ -7,7 +7,7 @@ import {
     scrollIntoView,
     sendKeys,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { TablePo } from './table.po';
 
 export const runCommonTests = (allInputFields: string, tablePage: TablePo): void => {

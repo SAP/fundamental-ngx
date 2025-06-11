@@ -1,4 +1,4 @@
-import { refreshPage, waitForElDisplayed } from '../../../../../e2e';
+import { refreshPage, waitForElDisplayed } from '@fundamental-ngx/e2e';
 import { DynamicSideContentPo } from './dynamic-side-content.po';
 
 describe('dynamic side content test suite', () => {

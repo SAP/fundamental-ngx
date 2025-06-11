@@ -8,7 +8,7 @@ import {
     scrollIntoView,
     waitForElDisplayed,
     waitForInvisibilityOf
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { SelectPo } from './select.po';
 
 describe('Select component:', () => {
