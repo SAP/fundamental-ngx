@@ -31,11 +31,11 @@ const illustratedMessageDotTsCode = 'illustrated-message-dot-example.component.t
 const illustratedMessageInlineScr = 'illustrated-message-inline-example.component.html';
 const illustratedMessageInlineTsCore = 'illustrated-message-inline-example.component.ts';
 
-const illustration = 'assets/images/sapIllus-Dialog-NoMail.svg';
-const illustrationDialogNoMail = 'assets/images/sapIllus-Dialog-NoMail.svg';
-const illustrationSceneNoMail = 'assets/images/sapIllus-Scene-NoMail.svg';
+const illustration = 'assets/images/sapIllus-UnknownFolder-Demo-Medium.svg';
+const illustrationDialogNoMail = 'assets/images/sapIllus-UnknownFolder-Demo-Medium.svg';
+const illustrationSceneNoMail = 'sapIllus-Phone-with-Icon-Demo-Small.svg';
 
-const illustrationSpotNoMail = 'assets/images/sapIllus-Spot-NoMail.svg';
+const illustrationSpotNoMail = 'sapIllus-Phone-with-Icon-Demo-Small.svg';
 
 @Component({
     selector: 'app-illustrated-message',
