@@ -577,3 +577,7 @@ fdk-dynamic-portal {
 .fd-table__intersection-spy {
     position: relative;
 }
+
+.fdp-table__body--disable-scroll {
+    overflow: hidden !important;
+}
