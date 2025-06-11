@@ -6,7 +6,6 @@ import {
     ElementRef,
     HostListener,
     Input,
-    OnDestroy,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -23,7 +22,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import { KeyUtil, Nullable, ResizeDirective, ResizeHandleDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { PopoverService } from '../popover-service/popover.service';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -44,7 +42,7 @@ import { PopoverService } from '../popover-service/popover.service';
     imports: [A11yModule, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ResizeHandleDirective, ResizeDirective],
     standalone: true
 })
-export class PopoverBodyComponent implements AfterViewInit, OnDestroy {
+export class PopoverBodyComponent implements AfterViewInit {
     /** Minimum width of the popover body element. */
     @Input()
     minWidth: Nullable<string>;
@@ -131,8 +129,7 @@ export class PopoverBodyComponent implements AfterViewInit, OnDestroy {
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
-        readonly _contentDensityObserver: ContentDensityObserver,
-        private _popoverService: PopoverService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** Handler escape keydown */
@@ -147,16 +144,9 @@ export class PopoverBodyComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._popoverService.registerPopover(this);
-
         if (this._scrollbar) {
             this._scrollbar._inPopover = true;
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._popoverService.unregisterPopover(this);
     }
 
     /** @hidden */

@@ -3,6 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.5...v0.56.4-rc.6) (2025-06-10)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.4...v0.56.4-rc.5) (2025-06-10)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.3...v0.56.4-rc.4) (2025-06-06)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.2...v0.56.4-rc.3) (2025-06-06)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.1...v0.56.4-rc.2) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.0...v0.56.4-rc.1) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.3...v0.56.4-rc.0) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.5...v0.56.3) (2025-06-04)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.4...v0.56.3-rc.5) (2025-06-04)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.3...v0.56.3-rc.4) (2025-05-28)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.2...v0.56.3-rc.3) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.1...v0.56.3-rc.2) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.0...v0.56.3-rc.1) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.56.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.2...v0.56.3-rc.0) (2025-05-25)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
 ## [0.56.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.5...v0.56.2) (2025-05-21)
 
 **Note:** Version bump only for package @fundamental-ngx/cx

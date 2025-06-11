@@ -3,6 +3,130 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.5...v0.56.4-rc.6) (2025-06-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.4...v0.56.4-rc.5) (2025-06-10)
+
+
+### Bug Fixes
+
+* **core:** apply correct class to back and hamburger buttons in ShellBar ([#13336](https://github.com/SAP/fundamental-ngx/issues/13336)) ([824db89](https://github.com/SAP/fundamental-ngx/commit/824db8991d4473deec9767e3db6135bb7d0f7fe9))
+
+
+
+
+
+## [0.56.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.3...v0.56.4-rc.4) (2025-06-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.2...v0.56.4-rc.3) (2025-06-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.1...v0.56.4-rc.2) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.0...v0.56.4-rc.1) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.3...v0.56.4-rc.0) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.5...v0.56.3) (2025-06-04)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.4...v0.56.3-rc.5) (2025-06-04)
+
+
+### Bug Fixes
+
+* **core:** remove document click in popover ([#13329](https://github.com/SAP/fundamental-ngx/issues/13329)) ([42e041d](https://github.com/SAP/fundamental-ngx/commit/42e041d02306f071afb5bb91dbe2d19e11e50a0d))
+
+
+
+
+
+## [0.56.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.3...v0.56.3-rc.4) (2025-05-28)
+
+
+### Bug Fixes
+
+* **core:** shellbar action alignment bug ([#13307](https://github.com/SAP/fundamental-ngx/issues/13307)) ([ecc61cb](https://github.com/SAP/fundamental-ngx/commit/ecc61cb77193c1d10662e02ba93e9f8c102dbdd3))
+
+
+
+
+
+## [0.56.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.2...v0.56.3-rc.3) (2025-05-27)
+
+
+### Bug Fixes
+
+* **core:** optimize Button performance with signals ([#13304](https://github.com/SAP/fundamental-ngx/issues/13304)) ([bdec43f](https://github.com/SAP/fundamental-ngx/commit/bdec43f4b59893979d79de379984859b464db974))
+
+
+
+
+
+## [0.56.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.1...v0.56.3-rc.2) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.0...v0.56.3-rc.1) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.2...v0.56.3-rc.0) (2025-05-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.56.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.5...v0.56.2) (2025-05-21)
 
 **Note:** Version bump only for package @fundamental-ngx/core

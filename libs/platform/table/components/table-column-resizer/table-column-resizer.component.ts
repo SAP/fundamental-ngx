@@ -58,9 +58,11 @@ export class PlatformTableColumnResizerComponent implements OnInit {
             fromEvent<MouseEvent>(this._elmRef.nativeElement, 'mousedown')
                 .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((evt) => {
-                    this._tableColumnResizeService.startResize(evt);
+                    if (evt.button === 0 && !evt.ctrlKey) {
+                        this._tableColumnResizeService.startResize(evt);
 
-                    this._listenForMouseUp();
+                        this._listenForMouseUp();
+                    }
                 });
 
             this._tableColumnResizeService.resizerPosition$

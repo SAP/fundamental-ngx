@@ -60,6 +60,7 @@ import {
     TableComponent as FdTableComponent,
     TableBodyDirective,
     TableCellDirective,
+    TableFooterDirective,
     TableHeaderDirective,
     TableRowDirective
 } from '@fundamental-ngx/core/table';
@@ -152,6 +153,7 @@ import {
     ToolbarContext
 } from './components';
 import { TableGrowingButtonComponent } from './components/growing-button/table-growing-button.component';
+import { TableFooterRowComponent } from './components/table-footer-row/table-footer-row.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
 import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
@@ -258,7 +260,9 @@ let tableUniqueId = 0;
         AsyncPipe,
         FdTranslatePipe,
         RowClassesPipe,
-        TableGrowingButtonComponent
+        TableGrowingButtonComponent,
+        TableFooterDirective,
+        TableFooterRowComponent
     ]
 })
 export class TableComponent<T = any>
@@ -487,6 +491,10 @@ export class TableComponent<T = any>
     /** The minimum width at which the user can resize a column, in pixels. Default is 50. */
     @Input()
     minimumColumnWidth = TABLE_COLUMN_MIN_WIDTH;
+
+    /** Whether to display the table footer. */
+    @Input({ transform: booleanAttribute })
+    showTableFooter = false;
 
     /**
      * Specifies minimal width of the non-frozen columns.

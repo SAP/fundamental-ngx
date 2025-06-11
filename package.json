@@ -51,7 +51,7 @@
         "@angular/router": "19.2.3",
         "@fundamental-styles/cx": "0.40.1",
         "@nx/angular": "20.8.1",
-        "@sap-theming/theming-base-content": "11.29.3",
+        "@sap-theming/theming-base-content": "11.30.1",
         "@stackblitz/sdk": "1.9.0",
         "@swc/helpers": "0.5.11",
         "compare-versions": "6.1.0",

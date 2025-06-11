@@ -3,6 +3,130 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.5...v0.56.4-rc.6) (2025-06-10)
+
+
+### Bug Fixes
+
+* **platform:** do not start resize when right mousre button clicked ([#13337](https://github.com/SAP/fundamental-ngx/issues/13337)) ([fc9ebba](https://github.com/SAP/fundamental-ngx/commit/fc9ebba9f79b4ecec53deb08db26be50e3cf1bd7))
+
+
+
+
+
+## [0.56.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.4...v0.56.4-rc.5) (2025-06-10)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.3...v0.56.4-rc.4) (2025-06-06)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.2...v0.56.4-rc.3) (2025-06-06)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.1...v0.56.4-rc.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **platform:** persist column reordering when reopening columns p13 dialog ([#13328](https://github.com/SAP/fundamental-ngx/issues/13328)) ([13162be](https://github.com/SAP/fundamental-ngx/commit/13162be90eef56271e2e480058577ac91a6b783d))
+
+
+
+
+
+## [0.56.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.0...v0.56.4-rc.1) (2025-06-05)
+
+
+### Features
+
+* **platform:** add table footer component to platform table ([#13315](https://github.com/SAP/fundamental-ngx/issues/13315)) ([42fe8bb](https://github.com/SAP/fundamental-ngx/commit/42fe8bb2a2b2902d54a0461b9949f3f7f71e3f88))
+
+
+
+
+
+## [0.56.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.3...v0.56.4-rc.0) (2025-06-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.5...v0.56.3) (2025-06-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.4...v0.56.3-rc.5) (2025-06-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.3...v0.56.3-rc.4) (2025-05-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.2...v0.56.3-rc.3) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.1...v0.56.3-rc.2) (2025-05-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.56.3-rc.0...v0.56.3-rc.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* **platform:** rename TabDestinyMode to TabDensityMode for consistency ([#13299](https://github.com/SAP/fundamental-ngx/issues/13299)) ([a6f8f4b](https://github.com/SAP/fundamental-ngx/commit/a6f8f4bf136cbf800eb2289ca45858cfea06d0c8))
+
+
+
+
+
+## [0.56.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.2...v0.56.3-rc.0) (2025-05-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.56.2](https://github.com/SAP/fundamental-ngx/compare/v0.56.2-rc.5...v0.56.2) (2025-05-21)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
