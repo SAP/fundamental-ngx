@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GridListModule } from '../../grid-list.module';
 import { GridListComponent } from '../grid-list/grid-list.component';
 import { GridListItemComponent } from './grid-list-item.component';
+import { GridListTitleBarComponent } from '../grid-list-title-bar/grid-list-title-bar.component';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 
 @Component({
     template: `
@@ -39,7 +40,7 @@ import { GridListItemComponent } from './grid-list-item.component';
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [GridListModule, GridListItemComponent]
+    imports: [GridListItemComponent, AvatarComponent, GridListComponent, GridListTitleBarComponent]
 })
 class TestComponent {
     @ViewChild(GridListComponent)
@@ -87,17 +88,11 @@ class TestComponent {
         }
     ];
 
-    detail(event): void {
-        console.log('Detail event', event);
-    }
+    detail(_event): void {}
 
-    draft(event): void {
-        console.log('Draft event', event);
-    }
+    draft(_event): void {}
 
-    locked(event): void {
-        console.log('Locked event', event);
-    }
+    locked(_event): void {}
 }
 
 describe('GridListItemComponent', () => {
@@ -126,7 +121,6 @@ describe('GridListItemComponent', () => {
 
     it('should display 6 items', () => {
         const itemsLength = fixture.debugElement.queryAll(By.css('fd-grid-list-item')).length;
-        console.log('1 itemsLength: ', itemsLength);
 
         expect((gridListComponent as any)._gridListItems.length).toEqual(6);
         expect(itemsLength).toEqual(6);
@@ -159,7 +153,7 @@ describe('GridListItemComponent', () => {
     it('should throw Draft event if click on Draft button', () => {
         jest.spyOn(component, 'draft');
 
-        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Draft"]'));
+        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[data-test-id="Draft"]'));
         button.nativeElement.click();
         fixture.detectChanges();
 
@@ -169,7 +163,7 @@ describe('GridListItemComponent', () => {
     it('should throw Locked event if click on Locked button', () => {
         jest.spyOn(component, 'locked');
 
-        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Locked"]'));
+        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[data-test-id="Locked"]'));
         button.nativeElement.click();
         fixture.detectChanges();
 
