@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { GridListTitleBarComponent } from '../grid-list-title-bar/grid-list-title-bar.component';
 import { GridListComponent } from '../grid-list/grid-list.component';
 import { GridListItemComponent } from './grid-list-item.component';
-import { GridListTitleBarComponent } from '../grid-list-title-bar/grid-list-title-bar.component';
-import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 
 @Component({
     template: `
