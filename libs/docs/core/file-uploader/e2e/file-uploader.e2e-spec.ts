@@ -5,7 +5,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { FileUploaderPo } from './file-uploader.po';
 
 import { placeholderTestTextArr } from './file-uploader-contents';

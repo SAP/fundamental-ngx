@@ -10,7 +10,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { date, date1, date10, date11, date12, date2, date3, date5, date8, date9, text, year2025 } from './date-picker';
 import { DatePicker } from './date-picker.po';
 

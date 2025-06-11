@@ -4,7 +4,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { BreadcrumbPo } from './breadcrumb.po';
 
 describe('Breadcrumb test suite:', () => {

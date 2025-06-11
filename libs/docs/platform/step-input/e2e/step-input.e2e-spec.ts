@@ -15,7 +15,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { StepInputPo } from './step-input.po';
 
 describe('Step input test suite', () => {

@@ -16,7 +16,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { eight_lines_text, four_lines_text } from './feed-input';
 import {
     avatar_tooltip,

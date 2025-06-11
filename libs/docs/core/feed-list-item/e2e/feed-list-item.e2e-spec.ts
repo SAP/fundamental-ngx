@@ -11,7 +11,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { alertText, testTextLess, testTextMore } from './feed-list-item-contents';
 import { FeedListItemPo } from './feed-list-item.po';
 

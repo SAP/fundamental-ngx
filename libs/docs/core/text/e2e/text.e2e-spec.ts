@@ -6,7 +6,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { TextPo } from './text.po';
 
 import { testTextLess, testTextLessLabel, testTextMore, testTextMoreLabel } from './text-contents';

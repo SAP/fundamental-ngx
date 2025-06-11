@@ -6,7 +6,7 @@ import {
     scrollIntoView,
     sendKeys,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 
 export class MultiInputPo extends PlatformBaseComponentPo {
     root = '#page-content';

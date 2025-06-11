@@ -8,7 +8,7 @@ import {
     mouseHoverElement,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { MenuPo } from './menu.po';
 
 describe('Menu component test suite', () => {

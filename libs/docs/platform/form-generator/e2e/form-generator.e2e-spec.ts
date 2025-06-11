@@ -11,7 +11,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { correctPassword, invalidBirthday, simplePassword, validBirthday } from './form-generator';
 import {
     birthdayYearErrorMessage,

@@ -6,7 +6,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { runCommonTests } from './table-common-tests';
 import { tableCellArr } from './table-contents';
 import { TablePo } from './table.po';

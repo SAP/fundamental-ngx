@@ -9,7 +9,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { runCommonTests } from './table-common-tests';
 import { tableCellArr2, testText2 } from './table-contents';
 import { TablePo } from './table.po';

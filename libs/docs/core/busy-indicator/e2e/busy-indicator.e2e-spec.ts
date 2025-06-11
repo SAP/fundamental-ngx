@@ -10,7 +10,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { sizeL, sizeM, sizeS } from './busy-indicator-contents';
 import { BusyIndicatorPo } from './busy-indicator.po';
 

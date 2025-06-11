@@ -10,7 +10,7 @@ import {
     sendKeys,
     waitForElDisappear,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { MultiComboboxPo } from './multi-combobox.po';
 
 describe('multi-combobox test suite', () => {

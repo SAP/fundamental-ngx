@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core';
-import { IconTabBarComponent, IconTabBarTabComponent, TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
+import {
+    IconTabBarComponent,
+    IconTabBarTabComponent,
+    IconTabTitleDirective,
+    TabConfig
+} from '@fundamental-ngx/platform/icon-tab-bar';
 import { cloneDeep } from 'lodash-es';
-import { IconTabTitleDirective } from '../../../../../platform/icon-tab-bar/directives/icon-tab-title.directive';
 import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({

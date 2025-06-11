@@ -7,7 +7,7 @@ import {
     sendKeys,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 
 export class ComboBoxPo extends PlatformBaseComponentPo {
     root = '#page-content';

@@ -1,4 +1,4 @@
-import { getElementArrayLength, getElementClass, isElementDisplayed } from '../../../../../e2e';
+import { getElementArrayLength, getElementClass, isElementDisplayed } from '@fundamental-ngx/e2e';
 import { colorsArr } from './info-label-contents';
 import { InfoLabelPo } from './info-label.po';
 

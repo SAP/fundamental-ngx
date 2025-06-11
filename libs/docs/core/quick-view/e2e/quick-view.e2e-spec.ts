@@ -1,4 +1,11 @@
-import { click, getText, refreshPage, scrollIntoView, waitForClickable, waitForElDisplayed } from '../../../../../e2e';
+import {
+    click,
+    getText,
+    refreshPage,
+    scrollIntoView,
+    waitForClickable,
+    waitForElDisplayed
+} from '@fundamental-ngx/e2e';
 import { address, companyName, email, mobile, phone, popoverHeaderValue } from './quick-view-content';
 import { QuickViewPo } from './quick-view.po';
 

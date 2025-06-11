@@ -5,7 +5,7 @@ import {
     isElementDisplayed,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { LinkPo } from './link.po';
 
 describe('Link test suite', () => {

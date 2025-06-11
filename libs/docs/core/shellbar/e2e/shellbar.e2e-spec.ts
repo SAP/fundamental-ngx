@@ -15,7 +15,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { ShellbarPo } from './shellbar.po';
 
 describe('shellbar test suite', () => {

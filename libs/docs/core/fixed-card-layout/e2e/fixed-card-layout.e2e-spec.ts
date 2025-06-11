@@ -7,7 +7,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { FixedCardLayoutPo } from './fixed-card-layout.po';
 
 describe('Fixed card layout test suite', () => {

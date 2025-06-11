@@ -5,7 +5,7 @@ import {
     getText,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     objDecimalExamplesText,
     objStatusExamplesText,

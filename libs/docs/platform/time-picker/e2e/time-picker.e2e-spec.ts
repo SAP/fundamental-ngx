@@ -11,7 +11,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { altValidTime, defaultValidTime, text } from './time-picker';
 import { TimePickerPO } from './time-picker.po';
 

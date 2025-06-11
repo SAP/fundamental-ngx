@@ -68,7 +68,7 @@ const componentRoutes = [
     },
     {
         path: 'rtl-service',
-        loadChildren: () => import('libs/docs/cdk/rtl-service').then(configureLibRoutes)
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/rtl-service').then(configureLibRoutes)
     }
 ];
 

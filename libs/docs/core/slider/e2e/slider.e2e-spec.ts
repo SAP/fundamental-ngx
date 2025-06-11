@@ -15,7 +15,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { cozySliderClass, disabledAttribute } from './slider-contents';
 import { SliderPo } from './slider.po';
 
