@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.5...v0.56.4-rc.6) (2025-06-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.56.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.4...v0.56.4-rc.5) (2025-06-10)
+
+
+### Bug Fixes
+
+* **core:** apply correct class to back and hamburger buttons in ShellBar ([#13336](https://github.com/SAP/fundamental-ngx/issues/13336)) ([824db89](https://github.com/SAP/fundamental-ngx/commit/824db8991d4473deec9767e3db6135bb7d0f7fe9))
+
+
+
+
+
 ## [0.56.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.3...v0.56.4-rc.4) (2025-06-06)
 
 **Note:** Version bump only for package @fundamental-ngx/core
