@@ -8,7 +8,7 @@ import {
     scrollIntoView,
     waitForElDisplayed,
     waitForNotDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { MessageToastPo } from './message-toast.po';
 
 describe('Textarea component test', () => {

@@ -17,7 +17,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     fifty_character_string,
     forty_nine_character_string,

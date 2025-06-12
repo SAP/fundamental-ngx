@@ -6,7 +6,7 @@ import {
     isElementDisplayed,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { ProductSwitchPo } from './product-switch.po';
 
 describe('product switch test suite', () => {

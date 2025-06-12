@@ -10,7 +10,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { ResizableCardLayoutPo } from './resizable-card-layout.po';
 
 import { blockExamples } from './resizable-card-layout.contents';

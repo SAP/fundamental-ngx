@@ -7,7 +7,7 @@ import {
     pause,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { SwitchPo } from './switch.po';
 
 describe('Switch test suite', () => {

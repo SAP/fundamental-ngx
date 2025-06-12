@@ -15,7 +15,7 @@ import {
     waitForElDisappear,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { searchValues, valueOne, valueZero } from './vhd';
 import { conditionsValues, customLabels } from './vhd-contents';
 import { VhdPo } from './vhd.po';

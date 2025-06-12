@@ -62,6 +62,9 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
+    _preventKeydown = false;
+
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -128,7 +131,10 @@ export class FocusableGridDirective implements AfterViewInit {
 
     /** @hidden */
     _onKeydown(event: KeyboardEvent, list: FocusableListDirective, activeItemIndex: Nullable<number>): void {
-        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, PAGE_DOWN, PAGE_UP])) {
+        if (
+            !KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, PAGE_DOWN, PAGE_UP]) ||
+            this._preventKeydown
+        ) {
             return;
         }
 

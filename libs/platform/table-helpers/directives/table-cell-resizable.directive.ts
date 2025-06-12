@@ -3,9 +3,8 @@ import { AfterViewInit, computed, Directive, inject, Input, OnDestroy, OnInit } 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableCellDirective } from '@fundamental-ngx/core/table';
-import equal from 'fast-deep-equal';
 import { fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { TableColumnResizeService } from '../services/table-column-resize.service';
 
 export type TableColumnResizableSide = 'start' | 'end' | 'both';
@@ -73,7 +72,6 @@ export class PlatformTableCellResizableDirective
                     filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
                     debounceTime(5),
                     map((event) => this._getResizer(event) || { resizerPosition: 0, resizedColumn: this.columnName }),
-                    distinctUntilChanged((prev, curr) => equal(prev, curr)),
                     takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe((data) => {

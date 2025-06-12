@@ -10,7 +10,7 @@ import {
     getText,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { navUrl } from './object-list-item-contents';
 import { ObjectListItemPo } from './object-list-item.po';
 

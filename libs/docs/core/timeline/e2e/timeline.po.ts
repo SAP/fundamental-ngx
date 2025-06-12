@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class TimelinePo extends CoreBaseComponentPo {
     actionButton = '.fd-timeline__post .fd-button';

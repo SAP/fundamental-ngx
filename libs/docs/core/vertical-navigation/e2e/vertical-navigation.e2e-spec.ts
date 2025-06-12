@@ -7,7 +7,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { VerticalNavigationPo } from './vertical-navigation.po';
 
 describe('Vertical navigation component tests', function () {

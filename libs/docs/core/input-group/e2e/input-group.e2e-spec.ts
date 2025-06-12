@@ -14,7 +14,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { smallTestText, testText } from './input-group-contents';
 import { InputGroupPo } from './input-group.po';
 

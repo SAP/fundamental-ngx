@@ -15,7 +15,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { currentDay, date, date2, date3, date4, dates, i18n, testText, year2030 } from './date-time-picker-contents';
 import { DateTimePicker } from './date-time-picker.po';
 

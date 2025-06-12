@@ -11,7 +11,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { RatingIndicatorPo } from './rating-indicator.po';
 
 describe('Rating indicator test suite', () => {

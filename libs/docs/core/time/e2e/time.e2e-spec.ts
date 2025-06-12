@@ -11,7 +11,7 @@ import {
     getText,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { sections } from './time-contents';
 import { TimePo } from './time.po';
 

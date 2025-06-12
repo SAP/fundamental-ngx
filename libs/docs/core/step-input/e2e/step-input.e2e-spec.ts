@@ -13,7 +13,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { sections } from './step-input-content';
 import { StepInputPo } from './step-input.po';
 

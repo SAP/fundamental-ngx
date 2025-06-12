@@ -1,4 +1,3 @@
-import { checkElArrIsClickable } from 'e2e/wdio/helper/assertion-helper';
 import {
     browserIsIE,
     click,
@@ -11,7 +10,8 @@ import {
     refreshPage,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
+import { checkElArrIsClickable } from 'e2e/wdio/helper/assertion-helper';
 import { expected_category, search_placeholder } from './search-field-content';
 import { SearchFieldPo } from './search-field.po';
 

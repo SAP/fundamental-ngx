@@ -1,4 +1,4 @@
-import { click, CoreBaseComponentPo, scrollIntoView, waitForElDisplayed } from '../../../../../e2e';
+import { click, CoreBaseComponentPo, scrollIntoView, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class CalendarPo extends CoreBaseComponentPo {
     url = '/calendar';

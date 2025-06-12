@@ -1,4 +1,10 @@
-import { checkElArrIsClickable, click, doesItExist, isElementDisplayed, waitForElDisplayed } from '../../../../../e2e';
+import {
+    checkElArrIsClickable,
+    click,
+    doesItExist,
+    isElementDisplayed,
+    waitForElDisplayed
+} from '@fundamental-ngx/e2e';
 import { backButton } from './action-bar-contents';
 import { ActionBarPo } from './action-bar.po';
 

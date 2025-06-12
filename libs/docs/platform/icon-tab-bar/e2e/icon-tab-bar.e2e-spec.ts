@@ -7,7 +7,7 @@ import {
     isElementDisplayed,
     refreshPage,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { IconTabBarPO } from './icon-tab-bar.po';
 
 import { paddingsSizes } from './icon-tab-bar-contents';

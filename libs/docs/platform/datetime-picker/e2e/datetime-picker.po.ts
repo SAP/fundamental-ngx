@@ -1,4 +1,4 @@
-import { getElementClass, PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { getElementClass, PlatformBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class DateTimePicker extends PlatformBaseComponentPo {
     url = '/datetime-picker';

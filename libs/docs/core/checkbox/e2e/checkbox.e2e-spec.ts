@@ -9,7 +9,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     acceptAllTrue,
     allMarkedFalse,

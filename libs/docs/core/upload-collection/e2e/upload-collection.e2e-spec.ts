@@ -13,7 +13,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { acceptAlertText, declineAlertText, formatArr, testText } from './upload-collection-contents';
 import { UploadCollectionPo } from './upload-collection.po';
 
