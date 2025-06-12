@@ -68,7 +68,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @Input()
     @HostBinding('class.is-selected')
     @HostBinding('attr.aria-selected')
-    selected = false;
+    selected: boolean;
 
     /** Whether there is no data inside list item */
     @Input()
