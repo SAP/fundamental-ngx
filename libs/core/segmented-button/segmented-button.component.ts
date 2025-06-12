@@ -189,8 +189,6 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
                 if (this._buttons) {
                     this._listenToButtonChanges();
                     this._pickButtonsByValues(this._currentValue);
-                } else {
-                    setTimeout(() => this._listenToButtonChanges(), 0);
                 }
             });
         }
@@ -202,6 +200,8 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         if (!this._buttons || !this._focusableItems) {
             return;
         }
+
+        this._onRefresh$.next();
 
         merge(this._buttons.changes ?? EMPTY, this._focusableItems.changes ?? EMPTY)
             .pipe(startWith(1), observeOn(asyncScheduler), takeUntil(this._onDestroy$))

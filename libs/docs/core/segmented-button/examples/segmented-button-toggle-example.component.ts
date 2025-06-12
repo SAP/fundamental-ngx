@@ -11,4 +11,11 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 })
 export class SegmentedButtonToggleExampleComponent {
     value: string[] = ['first'];
+
+    values: string[] = ['first', 'second', 'third'];
+    currentValue: string[] = [];
+
+    handleValueChange(value: string): void {
+        alert('Button with value "' + value + '" was clicked');
+    }
 }

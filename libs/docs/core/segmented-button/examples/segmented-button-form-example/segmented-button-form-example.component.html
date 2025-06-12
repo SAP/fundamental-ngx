@@ -24,4 +24,30 @@
         <small>Dirty: {{ customForm.controls.disabled.dirty }} </small><br />
         <small>Touched: {{ customForm.controls.disabled.touched }} </small>
     </div>
+
+    <div>
+        <h4>Toggled</h4>
+        <fd-segmented-button [toggle]="true" formControlName="toggled">
+            <button fd-button fdkFocusableItem label="Left" value="first"></button>
+            <button fd-button fdkFocusableItem label="Middle" value="second"></button>
+            <button fd-button fdkFocusableItem label="Right" value="third"></button>
+        </fd-segmented-button>
+        <br />
+        <small>Value: {{ customForm.controls.toggled.value }} </small><br />
+        <small>Dirty: {{ customForm.controls.toggled.dirty }} </small><br />
+        <small>Touched: {{ customForm.controls.toggled.touched }} </small>
+    </div>
+
+    <div>
+        <h4>Toggled Disabled</h4>
+        <fd-segmented-button [toggle]="true" formControlName="toggledDisabled">
+            <button fd-button fdkFocusableItem label="Left" value="first"></button>
+            <button fd-button fdkFocusableItem label="Middle" value="second"></button>
+            <button fd-button fdkFocusableItem label="Right" value="third"></button>
+        </fd-segmented-button>
+        <br />
+        <small>Value: {{ customForm.controls.toggledDisabled.value }} </small><br />
+        <small>Dirty: {{ customForm.controls.toggledDisabled.dirty }} </small><br />
+        <small>Touched: {{ customForm.controls.toggledDisabled.touched }} </small>
+    </div>
 </form>
