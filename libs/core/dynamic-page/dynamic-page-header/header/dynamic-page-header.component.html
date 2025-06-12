@@ -42,7 +42,9 @@
                     </div>
                 </div>
                 @if (_dynamicPageService.collapsed() && (subtitle || _subtitleTemplate)) {
-                    <div
+                    <span
+                        role="heading"
+                        [attr.aria-level]="_headingLevel() + 1"
                         class="fd-dynamic-page__subtitle"
                         [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
                         fdkIgnoreClickOnSelection
@@ -50,20 +52,22 @@
                         <ng-template
                             [ngTemplateOutlet]="_subtitleTemplate ? subtitleRef : defaultSubtitle"
                         ></ng-template>
-                    </div>
+                    </span>
                 }
             </div>
         </div>
     </div>
 </div>
 @if (!_dynamicPageService.collapsed() && (subtitle || _subtitleTemplate)) {
-    <div
+    <span
         class="fd-dynamic-page__subtitle"
+        role="heading"
+        [attr.aria-level]="_headingLevel() + 1"
         [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
         fdkIgnoreClickOnSelection
     >
         <ng-template [ngTemplateOutlet]="_subtitleTemplate ? subtitleRef : defaultSubtitle"></ng-template>
-    </div>
+    </span>
 }
 <ng-template #dynamicPageGlobalActionsRef>
     <ng-content select="fd-dynamic-page-global-actions"></ng-content>
