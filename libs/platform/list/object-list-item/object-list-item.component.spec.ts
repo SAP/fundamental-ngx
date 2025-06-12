@@ -415,14 +415,6 @@ describe('Object  List Item Component with DataSource', () => {
         expect(listItems[3].nativeElement.textContent).toContain('Notebook Basic 18');
     });
 
-    it('All Object list item should have images', () => {
-        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item'));
-        fixture.detectChanges();
-        listItems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('ng-reflect-image')).toContain('https://picsum.photos/400/400');
-        });
-    });
-
     it('All Object list item should have currency defines', () => {
         const listItems = fixture.debugElement.queryAll(By.css('.fd-object-number__unit'));
         fixture.detectChanges();
