@@ -6,7 +6,7 @@
         [(value)]="locale"
         ariaLabelledBy="lang-select"
     >
-        @for (option of ['en-ca', 'fr', 'bg', 'pl', 'zh']; track option) {
+        @for (option of ['en-us', 'en-gb', 'fr', 'bg', 'pl', 'zh']; track option) {
             <li fd-option [value]="option">
                 {{ option }}
             </li>

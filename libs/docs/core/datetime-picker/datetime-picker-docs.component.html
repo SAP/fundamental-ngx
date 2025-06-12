@@ -91,7 +91,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="complex-i18n" componentName="datetime-picker"> i18n example. </fd-docs-section-title>
+<fd-docs-section-title id="complex-i18n" componentName="datetime-picker"> Internationalization </fd-docs-section-title>
 <description>
     <fd-datetime-important componentName="DatetimePicker"></fd-datetime-important>
     <p>
@@ -100,6 +100,12 @@
         labels) will need to be translated via the <code>fundamental-ngx/i18n</code> module. This is because the
         <code>CalendarComponent</code> utilizes different localization strategies than the other components of the
         library. Note the <code>TypeScript</code> example code below to see how this is done.
+    </p>
+    <p>
+        Also, due to the limitations of <code>FdDatetimeAdapter</code> which is built upon the JavaScript native
+        <code>Date</code>, it is advised to use the <code>Day.js</code> adapter for parsing of dates of various locales.
+        See the example below, as well as <a [routerLink]="['/core/dayjs-datetime-adapter']">this page</a> for more
+        information.
     </p>
 </description>
 <component-example>
