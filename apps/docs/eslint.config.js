@@ -4,8 +4,6 @@ const overrides = require('../../eslint.overrides');
 
 module.exports = [
     ...baseConfig,
-    ...nx.configs['flat/angular'],
-    ...nx.configs['flat/angular-template'],
     ...overrides,
     {
         files: ['**/*.ts'],

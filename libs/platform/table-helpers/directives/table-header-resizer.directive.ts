@@ -1,6 +1,6 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/common';
-import { DestroyRef, Directive, ElementRef, NgZone, OnInit, inject } from '@angular/core';
+
+import { DOCUMENT, DestroyRef, Directive, ElementRef, NgZone, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FocusableCellPosition,

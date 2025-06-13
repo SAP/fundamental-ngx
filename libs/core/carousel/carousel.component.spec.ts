@@ -5,17 +5,6 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 import { CarouselBackgroundOptions, CarouselComponent, PageIndicatorsOrientation } from './carousel.component';
 import { CarouselModule } from './carousel.module';
 
-const carouselItems = `<fd-carousel-item>
-                Item 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus facilis doloribus repellendus
-                quia consequuntur distinctio nobis unde omnis laboriosam. Saepe voluptatum laborum dicta, dignissimos
-                quo voluptate consequuntur quidem maiores vitae assumenda iure magnam natus quae ea repudiandae nihil
-                tempore ratione, rem accusantium quibusdam culpa deleniti reprehenderit. Consequatur autem sed nesciunt
-                hic ex blanditiis quidem, tempore reprehenderit dolorum. Praesentium ipsa cum perspiciatis voluptatem,
-                aliquam error soluta exercitationem ullam saepe eum, amet illo beatae qui nobis est nemo, libero
-                cupiditate consequatur omnis hic voluptatum odit quia at fugiat. Sint minus enim, ipsum necessitatibus
-                quos alias perspiciatis architecto similique veniam pariatur commodi amet.
-            </fd-carousel-item>`.repeat(8);
-
 @Component({
     selector: 'fd-test-carousel',
     standalone: true,
@@ -33,8 +22,16 @@ const carouselItems = `<fd-carousel-item>
             [noPaginationContainerBorder]="noPaginationContainerBorder"
             [contentBackground]="contentBackground"
             [pageIndicatorBackground]="pageIndicatorBackground"
-            >${carouselItems}</fd-carousel
         >
+            <fd-carousel-item>Item 1 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 2 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 3 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 4 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 5 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 6 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 7 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 8 Lorem ipsum dolor sit amet.</fd-carousel-item>
+        </fd-carousel>
     `
 })
 class TestCarouselComponent {
@@ -190,8 +187,16 @@ describe('CarouselComponent', () => {
             [navigatorInPageIndicator]="navigatorInPageIndicator"
             [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
-            >${carouselItems}</fd-carousel
         >
+            <fd-carousel-item>Item 1 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 2 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 3 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 4 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 5 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 6 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 7 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 8 Lorem ipsum dolor sit amet.</fd-carousel-item>
+        </fd-carousel>
     `
 })
 class TestCarouselMultipleActiveItemComponent {
@@ -316,8 +321,16 @@ describe('CarouselComponent Multiple Active Item', () => {
             [navigatorInPageIndicator]="navigatorInPageIndicator"
             [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
-            >${carouselItems}</fd-carousel
         >
+            <fd-carousel-item>Item 1 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 2 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 3 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 4 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 5 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 6 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 7 Lorem ipsum dolor sit amet.</fd-carousel-item>
+            <fd-carousel-item>Item 8 Lorem ipsum dolor sit amet.</fd-carousel-item>
+        </fd-carousel>
     `
 })
 class TestCarouselLoopingNavigationComponent {

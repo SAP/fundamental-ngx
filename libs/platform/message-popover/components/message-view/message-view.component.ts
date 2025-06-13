@@ -1,10 +1,11 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DOCUMENT,
     DestroyRef,
     ElementRef,
     EventEmitter,

@@ -57,7 +57,7 @@ describe('SwitchComponent', () => {
 
         detectChangesOnPush();
 
-        expect(input.getAttribute('ng-reflect-name')).toEqual(component._cva.name);
+        expect(input.getAttribute('name')).toEqual(component._cva.name);
     });
 
     it('should auto-generate id', () => {

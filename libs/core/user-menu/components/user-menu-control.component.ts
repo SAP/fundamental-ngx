@@ -1,5 +1,5 @@
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
-import { CommonModule } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -14,7 +14,7 @@ import {
     template: `<ng-content />`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CommonModule]
+    imports: []
 })
 export class UserMenuControlComponent {
     /** Event emitted event when control element is clicked */

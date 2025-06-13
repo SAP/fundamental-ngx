@@ -1,5 +1,14 @@
-import { DOCUMENT } from '@angular/common';
-import { DestroyRef, Directive, ElementRef, forwardRef, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
+import {
+    DestroyRef,
+    Directive,
+    DOCUMENT,
+    ElementRef,
+    forwardRef,
+    inject,
+    NgZone,
+    OnDestroy,
+    OnInit
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, Observable, Observer } from 'rxjs';
 import { filter, share, tap } from 'rxjs/operators';
