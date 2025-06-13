@@ -14,7 +14,7 @@ export class AsyncOrSyncPipe implements OnDestroy, PipeTransform {
     /** @hidden */
     private _cdr: ChangeDetectorRef | null;
     /** @hidden */
-    private _asyncPipe: AsyncPipe | null;
+    private _asyncPipe: AsyncPipe;
 
     /** @hidden */
     constructor(ref: ChangeDetectorRef) {
@@ -27,13 +27,15 @@ export class AsyncOrSyncPipe implements OnDestroy, PipeTransform {
      * @param value raw value. Can be either a static value, or Promise-like, or Observable-like.
      */
     transform<T>(value: FdkAsyncProperty<T>): T | null {
-        return !isPromise(value) && !isSubscribable(value) ? value : (this._asyncPipe?.transform(value) ?? null);
+        if (isPromise(value) || isSubscribable(value)) {
+            return this._asyncPipe.transform(value);
+        }
+        return value;
     }
 
     /** @Hidden */
     ngOnDestroy(): void {
-        this._asyncPipe?.ngOnDestroy();
-        this._asyncPipe = null;
+        this._asyncPipe.ngOnDestroy();
         this._cdr = null;
     }
 }
