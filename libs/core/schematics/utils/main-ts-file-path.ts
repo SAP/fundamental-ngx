@@ -6,7 +6,7 @@ export async function getMainTsFilePath(tree: Tree, projectName: string): Promis
     const buildTarget = await getProjectBuildTarget(tree, projectName);
     const options = buildTarget.options as Record<string, string>;
 
-    const mainFilePath = buildTarget.builder === Builders.Application ? options.browser : options.main;
+    const mainFilePath = buildTarget.builder === Builders.BuildApplication ? options.browser : options.main;
 
     if (!mainFilePath || !tree.exists(mainFilePath)) {
         throw new SchematicsException(`Could not find the main file of the project.`);
