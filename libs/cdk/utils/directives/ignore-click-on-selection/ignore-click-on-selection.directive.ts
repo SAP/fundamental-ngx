@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, HostListener, Inject } from '@angular/core';
+import { Directive, DOCUMENT, ElementRef, HostListener, Inject } from '@angular/core';
 import { IgnoreClickOnSelectionDirectiveToken } from './tokens';
 
 /**

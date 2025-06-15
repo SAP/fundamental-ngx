@@ -1,10 +1,11 @@
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ViewportRuler } from '@angular/cdk/scrolling';
-import { DOCUMENT } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DOCUMENT,
     DestroyRef,
     EventEmitter,
     Inject,

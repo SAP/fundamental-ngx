@@ -7,7 +7,7 @@
             "executor": "@nx/js:tsc",
             "options": {
                 "outputPath": "dist/{projectRoot}",
-                "tsConfig": "{projectRoot}/tsconfig.json",
+                "tsConfig": "libs/platform/schematics/tsconfig.json",
                 "main": "{projectRoot}/ng-add/index.ts",
                 "assets": [
                     "{projectRoot}/**/*/schema.json",

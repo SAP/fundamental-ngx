@@ -72,19 +72,19 @@ describe('add-theming schematic', () => {
         afterEach(clearWorkspaceCache);
         it('should add theming and initializer', async () => {
             tree = await runner.runSchematic('add-theming', { project: 'test' }, tree);
-            expect(tree.readText('./test/src/app/app.module.ts')).toContain('provideTheming');
-            expect(tree.readText('./test/src/app/app.module.ts')).toContain('themingInitializer()');
+            expect(tree.readText('./test/src/app/app-module.ts')).toContain('provideTheming');
+            expect(tree.readText('./test/src/app/app-module.ts')).toContain('themingInitializer()');
         });
         it('should not add theming if already present', async () => {
             tree = await runner.runSchematic('add-theming', { project: 'test' }, tree);
             tree = await runner.runSchematic('add-theming', { project: 'test' }, tree);
-            const content = tree.readText('./test/src/app/app.module.ts');
+            const content = tree.readText('./test/src/app/app-module.ts');
             expect(content.split('provideTheming').length === 3).toBe(true);
             expect(content.split('themingInitializer').length === 3).toBe(true);
         });
         it('should correctly take the theme name into the configuration', async () => {
             tree = await runner.runSchematic('add-theming', { project: 'test', theme: 'sap_fiori_3' }, tree);
-            expect(tree.readText('./test/src/app/app.module.ts')).toContain(
+            expect(tree.readText('./test/src/app/app-module.ts')).toContain(
                 "provideTheming({ defaultTheme: 'sap_fiori_3', changeThemeOnQueryParamChange: false })"
             );
         });
@@ -94,10 +94,10 @@ describe('add-theming schematic', () => {
                 { project: 'test', theme: 'sap_fiori_3', readThemeFromURL: true },
                 tree
             );
-            expect(tree.readText('./test/src/app/app.module.ts')).toContain(
+            expect(tree.readText('./test/src/app/app-module.ts')).toContain(
                 "provideTheming({ defaultTheme: 'sap_fiori_3', changeThemeOnQueryParamChange: true })"
             );
-            expect(tree.readText('./test/src/app/app.module.ts')).toContain('RouterModule.forRoot([])');
+            expect(tree.readText('./test/src/app/app-module.ts')).toContain('RouterModule.forRoot([])');
         });
     });
 });

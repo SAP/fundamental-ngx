@@ -14,10 +14,12 @@
     "generators": {
         "@schematics/angular:component": {
             "prefix": "fd",
-            "style": "scss"
+            "style": "scss",
+            "type": "component"
         },
         "@schematics/angular:directive": {
-            "prefix": "fd"
+            "prefix": "fd",
+            "type": "directive"
         },
         "@nx/angular:application": {
             "style": "scss",
@@ -30,14 +32,60 @@
             "unitTestRunner": "jest"
         },
         "@nx/angular:component": {
-            "style": "scss"
+            "style": "scss",
+            "type": "component"
         },
         "@nx/angular": {
             "convert-tslint-to-eslint": {
                 "ignoreExistingTslintConfig": false,
                 "removeTSLintIfNoMoreTSLintTargets": true,
                 "skipFormat": false
+            },
+            "directive": {
+                "type": "directive"
+            },
+            "service": {
+                "type": "service"
+            },
+            "scam": {
+                "type": "component"
+            },
+            "scam-directive": {
+                "type": "directive"
+            },
+            "guard": {
+                "typeSeparator": "."
+            },
+            "interceptor": {
+                "typeSeparator": "."
+            },
+            "module": {
+                "typeSeparator": "."
+            },
+            "pipe": {
+                "typeSeparator": "."
+            },
+            "resolver": {
+                "typeSeparator": "."
             }
+        },
+        "@schematics/angular:service": {
+            "type": "service"
+        },
+        "@schematics/angular:guard": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+            "typeSeparator": "."
         }
     },
     "$schema": "./node_modules/nx/schemas/nx-schema.json",

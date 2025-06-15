@@ -1,5 +1,14 @@
-import { DOCUMENT } from '@angular/common';
-import { DestroyRef, ElementRef, EventEmitter, Inject, Injectable, OnDestroy, QueryList, inject } from '@angular/core';
+import {
+    DOCUMENT,
+    DestroyRef,
+    ElementRef,
+    EventEmitter,
+    Inject,
+    Injectable,
+    OnDestroy,
+    QueryList,
+    inject
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, fromEvent, merge } from 'rxjs';

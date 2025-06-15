@@ -6,7 +6,8 @@
         "outDir": "../../dist/out-tsc",
         "types": ["node"],
         "target": "ES2022",
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "moduleResolution": "bundler"
     },
     "exclude": ["**/*.spec.ts"],
     "include": ["**/*.ts"]

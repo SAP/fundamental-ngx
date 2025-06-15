@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FocusableItemDirective, FocusableListDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
@@ -68,13 +67,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
         class: 'fd-calendar-legend',
         '[class.fd-calendar-legend--auto-column]': 'col()'
     },
-    imports: [
-        CommonModule,
-        CalendarLegendItemComponent,
-        FocusableListDirective,
-        FocusableItemDirective,
-        FdTranslatePipe
-    ]
+    imports: [CalendarLegendItemComponent, FocusableListDirective, FocusableItemDirective, FdTranslatePipe]
 })
 export class CalendarLegendComponent<D> {
     /** The unique identifier of the calendar legend. This is a required property. */
