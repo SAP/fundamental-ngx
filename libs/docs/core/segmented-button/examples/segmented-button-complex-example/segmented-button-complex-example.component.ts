@@ -14,15 +14,7 @@ export class SegmentedButtonComplexExampleComponent {
     currentValue = '';
 
     handleValueChange(value: string): void {
-        const index = this.currentValue.indexOf(value);
-        if (index === -1) {
-            this.currentValue = this.currentValue ? `${this.currentValue},${value}` : value;
-        } else {
-            this.currentValue = this.currentValue
-                .split(',')
-                .filter((v) => v !== value)
-                .join(',');
-        }
+        this.currentValue = 'first';
         alert(`Current value changed to ${this.currentValue}`);
     }
 }

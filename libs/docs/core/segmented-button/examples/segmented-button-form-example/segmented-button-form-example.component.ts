@@ -15,6 +15,11 @@ export class SegmentedButtonFormExampleComponent {
         disabled: new FormControl({
             value: 'first',
             disabled: true
+        }),
+        toggled: new FormControl('third'),
+        toggledDisabled: new FormControl({
+            value: 'second',
+            disabled: true
         })
     });
 
@@ -25,5 +30,11 @@ export class SegmentedButtonFormExampleComponent {
         setTimeout(() => {
             this.customForm.controls['basic'].enable();
         }, 2000);
+        setTimeout(() => {
+            this.customForm.controls['toggled'].disable();
+        }, 1500);
+        setTimeout(() => {
+            this.customForm.controls['toggled'].enable();
+        }, 2700);
     }
 }
