@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, LOCALE_ID, ViewChild } from '@angular/core';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import dayjs, { Dayjs } from 'dayjs';
@@ -27,11 +27,13 @@ import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/d
         }
     ]
 })
-export class DatePickerDayjsAdapterExampleComponent {
+export class DatePickerDayjsAdapterExampleComponent implements AfterViewInit {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Dayjs>;
 
     actualLocale: string;
     date: Dayjs = dayjs();
+
+    locale = inject(LOCALE_ID);
 
     readonly localeOptions = [
         { value: 'en', label: 'English' },
@@ -41,10 +43,12 @@ export class DatePickerDayjsAdapterExampleComponent {
         { value: 'ar', label: 'Arabic' }
     ];
 
-    constructor(@Inject(LOCALE_ID) locale: string, private datetimeAdapter: DatetimeAdapter<Dayjs>) {
+    constructor(private datetimeAdapter: DatetimeAdapter<Dayjs>) {}
+
+    ngAfterViewInit(): void {
         // since datetimeAdapter instance is shared globally,
         // once loaded, we need to update value in it with LOCALE_ID provided for this component
-        this.setLocale(locale);
+        this.setLocale(this.locale);
     }
 
     setLocale(locale: string): void {
