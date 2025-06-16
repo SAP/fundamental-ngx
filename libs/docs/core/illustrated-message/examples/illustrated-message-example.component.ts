@@ -8,10 +8,13 @@ import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-mess
     imports: [IllustratedMessageModule, ButtonComponent]
 })
 export class IllustratedMessageExampleComponent {
-    sceneConfig = {
-        scene: { url: 'assets/images/sapIllus-Scene-NoMail.svg', id: 'sapIllus-Scene-NoMail-1' },
-        dialog: { url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail' },
-        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' },
-        dot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
+    largeConfig = {
+        large: { url: 'assets/images/sapIllus-Ice-Cream-Demo-Largev2.svg', id: 'sapIllus-Ice-Cream-Demo-Largev2' },
+        medium: { url: 'assets/images/sapIllus-Ice-Cream-Demo-Medium.svg', id: 'sapIllus-Ice-Cream-Demo-Medium' },
+        small: { url: 'assets/images/sapIllus-Ice-Cream-Demo-Small.svg', id: 'sapIllus-Ice-Cream-Demo-Small' },
+        xsmall: {
+            url: 'assets/images/sapIllus-Ice-Cream-Demo-ExtraSmall.svg',
+            id: 'sapIllus-Ice-Cream-Demo-ExtraSmall'
+        }
     };
 }
