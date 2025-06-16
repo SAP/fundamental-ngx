@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.9...v0.56.4-rc.10) (2025-06-16)
+
+
+### Bug Fixes
+
+* **core:** fix toggle segmented button ([#13340](https://github.com/SAP/fundamental-ngx/issues/13340)) ([c19cf22](https://github.com/SAP/fundamental-ngx/commit/c19cf22920f3cec4d85d85432a1531e3179a85ed))
+* **core:** make dynamic page subheader a landmark for screenreaders ([#13346](https://github.com/SAP/fundamental-ngx/issues/13346)) ([9efe2e9](https://github.com/SAP/fundamental-ngx/commit/9efe2e9d9191b54ab2413e8b0005e310f5893350))
+* update default dayjs parse rule, doc improvements ([#13344](https://github.com/SAP/fundamental-ngx/issues/13344)) ([d73faf4](https://github.com/SAP/fundamental-ngx/commit/d73faf48c64a6d15031154eeb57aea4413caeef8))
+
+
+
+
+
 ## [0.56.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.8...v0.56.4-rc.9) (2025-06-16)
 
 

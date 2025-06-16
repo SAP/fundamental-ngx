@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.9...v0.56.4-rc.10) (2025-06-16)
+
+
+### Bug Fixes
+
+* update default dayjs parse rule, doc improvements ([#13344](https://github.com/SAP/fundamental-ngx/issues/13344)) ([d73faf4](https://github.com/SAP/fundamental-ngx/commit/d73faf48c64a6d15031154eeb57aea4413caeef8))
+
+
+
+
+
 ## [0.56.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.8...v0.56.4-rc.9) (2025-06-16)
 
 **Note:** Version bump only for package @fundamental-ngx/datetime-adapter
