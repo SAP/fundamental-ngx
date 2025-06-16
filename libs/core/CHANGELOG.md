@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.8...v0.56.4-rc.9) (2025-06-16)
+
+
+### Bug Fixes
+
+* **core:** list item should not have aria-selected by default ([#13347](https://github.com/SAP/fundamental-ngx/issues/13347)) ([4c34032](https://github.com/SAP/fundamental-ngx/commit/4c340326766352897b0b351307c8ccd447536c15))
+
+
+
+
+
 ## [0.56.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.7...v0.56.4-rc.8) (2025-06-11)
 
 **Note:** Version bump only for package @fundamental-ngx/core
