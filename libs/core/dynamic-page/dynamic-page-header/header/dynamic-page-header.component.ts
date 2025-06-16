@@ -115,7 +115,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /** @hidden */
     _headingLevel = computed(() =>
-        this.headingLevel() ? Number.parseInt(`${this.headingLevel()}`.replace(/\D/g, ''), 10) : undefined
+        this.headingLevel() ? Number.parseInt(`${this.headingLevel()}`.replace(/\D/g, ''), 10) : 2
     );
 
     /** Dynamic page title id, it has some default value if not set,  */
