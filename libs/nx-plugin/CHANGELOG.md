@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.57.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.4...v0.57.0-rc.0) (2025-06-16)
+
+
+### chore
+
+* update to angular 20 ([#13341](https://github.com/SAP/fundamental-ngx/issues/13341)) ([0d90dcd](https://github.com/SAP/fundamental-ngx/commit/0d90dcd442f54346eaf78e8eceba00f8e4643cef))
+
+
+### BREAKING CHANGES
+
+* angular 20 support
+
+
+
+
+
 ## [0.56.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.10...v0.56.4) (2025-06-16)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin
