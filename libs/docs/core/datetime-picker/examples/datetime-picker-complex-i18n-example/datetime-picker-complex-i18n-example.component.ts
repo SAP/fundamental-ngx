@@ -1,15 +1,11 @@
 import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-    DATE_TIME_FORMATS,
-    DatetimeAdapter,
-    FD_DATETIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter
-} from '@fundamental-ngx/core/datetime';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 import {
     FD_LANGUAGE,
     FD_LANGUAGE_BULGARIAN,
@@ -19,13 +15,18 @@ import {
     FD_LANGUAGE_POLISH,
     FdLanguage
 } from '@fundamental-ngx/i18n';
+import dayjs, { Dayjs } from 'dayjs';
+import 'dayjs/locale/en-gb';
+import 'dayjs/locale/pl';
+import 'dayjs/locale/zh';
 import { BehaviorSubject } from 'rxjs';
 
 const placeholders = new Map([
-    ['en-ca', 'mm/dd/yyyy, hh:mm a'],
-    ['fr', 'dd/mm/yyyy  hh:mm'],
-    ['bg', 'дд.мм.гг чч:мм'],
-    ['pl', 'dd.mm.yyyy, hh:mm']
+    ['en-us', 'mm/dd/yyyy, hh:mm a'],
+    ['en-gb', 'dd/mm/yyyy, hh:mm a'],
+    ['fr', 'dd/mm/yyyy  hh:mm a'],
+    ['bg', 'дд.мм.гг чч:мм a'],
+    ['pl', 'dd.mm.yyyy, hh:mm a']
 ]);
 
 @Component({
@@ -37,30 +38,30 @@ const placeholders = new Map([
         // Due to the limit of this example we must provide it on this level.
         {
             provide: LOCALE_ID,
-            useValue: 'en-ca'
-        },
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
+            useValue: 'en-us'
         },
         {
             provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
+            useValue: DAYJS_DATETIME_FORMATS
+        },
+        {
+            provide: DatetimeAdapter,
+            useClass: DayjsDatetimeAdapter
         }
     ],
-    imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, FormsModule]
+    imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, DatePickerComponent, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {
-    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<FdDate>;
+    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<Dayjs>;
 
-    locale = 'en-ca';
+    locale = 'en-us';
 
-    date = FdDate.getNow();
+    date: Dayjs = dayjs();
 
     placeholder = placeholders.get(this.locale) as string;
 
     constructor(
-        private datetimeAdapter: DatetimeAdapter<FdDate>,
+        private datetimeAdapter: DatetimeAdapter<Dayjs>,
         @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>
     ) {}
 
@@ -68,7 +69,7 @@ export class DatetimePickerComplexI18nExampleComponent {
         this.locale = locale;
         this.datetimeAdapter.setLocale(locale);
         this.placeholder = placeholders.get(this.locale) as string;
-        if (locale === 'en-ca') {
+        if (locale === 'en-us' || locale === 'en-gb') {
             this.langSubject$.next(FD_LANGUAGE_ENGLISH);
         } else if (locale === 'fr') {
             this.langSubject$.next(FD_LANGUAGE_FRENCH);
