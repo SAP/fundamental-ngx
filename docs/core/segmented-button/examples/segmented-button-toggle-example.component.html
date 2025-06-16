@@ -6,3 +6,12 @@
 
 <br />
 <small>value: {{ value }}</small>
+
+<h4>Toggle Empty Initial State</h4>
+<fd-segmented-button [toggle]="true" [(ngModel)]="currentValue">
+    @for (value of values; track value) {
+        <button fd-button fdkFocusableItem [label]="value" [value]="value" (click)="handleValueChange(value)"></button>
+    }
+</fd-segmented-button>
+<br />
+<small>value: {{ currentValue }}</small>
