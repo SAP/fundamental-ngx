@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -13,7 +12,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fd-calendar-legend-item',
     standalone: true,
-    imports: [CommonModule],
+    imports: [],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `

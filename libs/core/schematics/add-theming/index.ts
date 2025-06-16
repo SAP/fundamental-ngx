@@ -36,7 +36,7 @@ export function addTheming(options: Schema): Rule {
         const targetOptions = buildTarget.options;
         if (!targetOptions) {
             context.logger.info(
-                `ℹ️ Can not add theming to application. Please add theming manually. Reason: no target options found for project ${options.project}`
+                `⚠️ Can not add theming to application. Please add theming manually. Reason: no target options found for project ${options.project}`
             );
             return;
         }
@@ -50,7 +50,7 @@ export function addTheming(options: Schema): Rule {
             if (baseVariablesMatch) {
                 const theme = baseVariablesMatch[2];
                 context.logger
-                    .info(`ℹ️ Found theming ${theme} base SAP variables in styles. Can not add theme to application.
+                    .info(`⚠️ Found theming ${theme} base SAP variables in styles. Can not add theme to application.
 Try to replace theme in application manually, or use ThemingService to manage multiple themes.
 [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
                 return;
@@ -62,7 +62,7 @@ Try to replace theme in application manually, or use ThemingService to manage mu
             if (fundamentalStylesDeltaThemingVariablesMatch) {
                 const theme = fundamentalStylesDeltaThemingVariablesMatch[2];
                 context.logger
-                    .info(`ℹ️ Found theming ${theme} fundamental-styles variables in styles. Can not add theme to application.
+                    .info(`⚠️ Found theming ${theme} fundamental-styles variables in styles. Can not add theme to application.
 Try to replace theme in application manually, or use ThemingService to manage multiple themes.
 [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
                 return;
@@ -158,7 +158,7 @@ Try to replace theme in application manually, or use ThemingService to manage mu
             ]);
         } catch (e) {
             context.logger.debug(e);
-            context.logger.info(`ℹ️ Please process adding Theming to root module by yourself.
+            context.logger.info(`⚠️ Please process adding Theming to root module by yourself.
 [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
         }
     };

@@ -1,9 +1,10 @@
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DOCUMENT,
     ElementRef,
     EventEmitter,
     HostBinding,

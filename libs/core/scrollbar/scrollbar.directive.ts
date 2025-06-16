@@ -1,7 +1,8 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
     CSP_NONCE,
+    DOCUMENT,
     Directive,
     ElementRef,
     HostBinding,

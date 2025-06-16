@@ -81,7 +81,7 @@ export class AutoDismissMessageStripDirective {
         const startAutoDismissTimer$ = new Observable((res) => {
             this.autoDismissTimeout = setTimeout(() => {
                 this.dismiss();
-                res.next();
+                res.next(null);
             }, this.duration);
             return this.stopAutoDismiss;
         });

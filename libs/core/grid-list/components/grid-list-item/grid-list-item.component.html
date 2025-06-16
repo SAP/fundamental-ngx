@@ -185,6 +185,7 @@
                         glyph="private"
                         [label]="'coreGridList.listItemStatusLocked' | fdTranslate"
                         [attr.aria-label]="'coreGridList.listItemStatusLocked' | fdTranslate"
+                        [attr.data-test-id]="'coreGridList.listItemStatusLocked' | fdTranslate"
                         fdCompact
                         (click)="_clickOnLocked($event)"
                     ></button>
@@ -196,6 +197,7 @@
                         fdType="transparent"
                         [attr.aria-label]="'coreGridList.listItemStatusDraft' | fdTranslate"
                         [label]="'coreGridList.listItemStatusDraft' | fdTranslate"
+                        [attr.data-test-id]="'coreGridList.listItemStatusDraft' | fdTranslate"
                         fdCompact
                         (click)="_clickOnDraft($event)"
                     ></button>

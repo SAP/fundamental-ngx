@@ -1,9 +1,10 @@
 import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/common';
+
 import {
     AfterViewInit,
     ContentChildren,
+    DOCUMENT,
     DestroyRef,
     Directive,
     ElementRef,

@@ -1,6 +1,6 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+
+import { DOCUMENT, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ClickedDirective } from './clicked.directive';
 
 type EventHandlerFunction = ($event: Event) => void;

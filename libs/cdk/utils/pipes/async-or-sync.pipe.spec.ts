@@ -1,28 +1,49 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { isSubscribable } from '../typecheck';
 import { AsyncOrSyncPipe } from './async-or-sync.pipe';
 
-class CdrStub {
-    detectChanges(): void {}
-
-    markForCheck(): void {}
+@Component({
+    template: ` <div>{{ value | fdkAsyncOrSync }}</div> `,
+    standalone: true,
+    imports: [AsyncOrSyncPipe]
+})
+class TestComponent {
+    value: any;
 }
 
 describe('AsyncOrSyncPipe', () => {
-    it('create an instance', () => {
-        const pipe = new AsyncOrSyncPipe(new CdrStub() as ChangeDetectorRef);
-        expect(pipe).toBeTruthy();
+    let fixture;
+    let component: TestComponent;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestComponent]
+        });
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
     });
 
-    it('should transform async-like value', () => {
-        const pipe = new AsyncOrSyncPipe(new CdrStub() as ChangeDetectorRef);
+    it('should render static value', () => {
+        component.value = 'static value';
+        fixture.detectChanges();
+        const div = fixture.nativeElement.querySelector('div');
+        expect(div.textContent).toBe('static value');
+    });
 
-        const stringFromObservable = pipe.transform(of('string'));
-        const stringNotModified = pipe.transform('string');
+    it('should render async value from observable', () => {
+        component.value = of('async value');
+        fixture.detectChanges();
+        const div = fixture.nativeElement.querySelector('div');
+        expect(div.textContent).toBe('async value');
+    });
 
-        expect(isSubscribable(stringFromObservable)).toBe(false);
-        expect(stringFromObservable).toEqual('string');
-        expect(stringNotModified).toEqual('string');
+    it('should render async value from promise', async () => {
+        component.value = Promise.resolve('promise value');
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+        const div = fixture.nativeElement.querySelector('div');
+        expect(div.textContent).toBe('promise value');
     });
 });

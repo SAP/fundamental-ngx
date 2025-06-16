@@ -1,7 +1,7 @@
 import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
-import { AsyncPipe, DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -9,6 +9,7 @@ import {
     computed,
     DestroyRef,
     Directive,
+    DOCUMENT,
     ElementRef,
     EventEmitter,
     forwardRef,

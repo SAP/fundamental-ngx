@@ -24,10 +24,10 @@
             },
             "configurations": {
                 "production": {
-                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
+                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
                 },
                 "development": {
-                    "tsConfig": "{projectRoot}/tsconfig.lib.json"
+                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
                 }
             },
             "defaultConfiguration": "production"
