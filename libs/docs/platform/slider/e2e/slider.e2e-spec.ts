@@ -13,7 +13,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { SliderPo } from './slider.po';
 
 describe('slider test suite', () => {

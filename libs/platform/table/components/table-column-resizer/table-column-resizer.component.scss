@@ -11,6 +11,7 @@
     border-left: 3px solid var(--sapContent_DragAndDropActiveColor, #0854a0);
     border-right: 3px solid var(--sapContent_DragAndDropActiveColor, #0854a0);
     user-select: none;
+    height: 100%;
 
     &--active {
         opacity: 1;

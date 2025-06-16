@@ -10,7 +10,7 @@ import {
     refreshPage,
     waitForElDisplayed,
     waitForNotDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     behaviorBtnTextArr,
     compactButtonClass,

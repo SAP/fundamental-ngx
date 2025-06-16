@@ -9,7 +9,7 @@ import {
     scrollIntoView,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { customMessage, defaultMessage } from './inline-help-contents';
 import { InlineHelpPo } from './inline-help.po';
 

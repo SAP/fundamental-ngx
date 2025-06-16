@@ -10,7 +10,7 @@ import {
     scrollIntoView,
     waitForClickable,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { isSelected, text, textLocked } from './grid-list-content';
 import { GridListPo } from './grid-list.po';
 

@@ -10,7 +10,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { TokenPo } from './token.po';
 
 describe('Token component test', () => {

@@ -1,4 +1,4 @@
-import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { PlatformBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 import { placeholders_array } from './feed-input-page-contents';
 
 export class FeedInputPo extends PlatformBaseComponentPo {

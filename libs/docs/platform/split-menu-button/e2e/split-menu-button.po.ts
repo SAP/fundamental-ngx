@@ -1,4 +1,4 @@
-import { getText, PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { getText, PlatformBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 import { outputLabel } from './split-menu-button-page-contents';
 
 export class SplitMenuButtonPo extends PlatformBaseComponentPo {

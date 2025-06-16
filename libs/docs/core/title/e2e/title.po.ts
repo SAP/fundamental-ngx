@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class TitlePo extends CoreBaseComponentPo {
     semanticExample = 'fd-title-semantic-example ';

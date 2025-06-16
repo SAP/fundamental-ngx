@@ -20,7 +20,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { alertText, componentExampleArr, dateTestText, tableCellArr, tableCellArr2, testText } from './table-content';
 import { TablePo } from './table.po';
 

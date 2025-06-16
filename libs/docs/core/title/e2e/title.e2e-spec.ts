@@ -1,4 +1,4 @@
-import { getAttributeByName, getElementClass, refreshPage, waitForElDisplayed } from '../../../../../e2e';
+import { getAttributeByName, getElementClass, refreshPage, waitForElDisplayed } from '@fundamental-ngx/e2e';
 import { titleLevels, titleLevelsReversed } from './title-contents';
 import { TitlePo } from './title.po';
 

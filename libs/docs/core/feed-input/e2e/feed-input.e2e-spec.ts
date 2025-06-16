@@ -11,7 +11,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { four_lines_text } from './feed-input';
 import { default_avatar, default_placeholder, send_button_tooltip } from './feed-input-page-contents';
 import { FeedInputPo } from './feed-input.po';

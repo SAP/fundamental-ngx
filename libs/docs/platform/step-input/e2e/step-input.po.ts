@@ -1,4 +1,4 @@
-import { clearValue, PlatformBaseComponentPo, sendKeys, setValue, waitForElDisplayed } from '../../../../../e2e';
+import { clearValue, PlatformBaseComponentPo, sendKeys, setValue, waitForElDisplayed } from '@fundamental-ngx/e2e';
 
 export class StepInputPo extends PlatformBaseComponentPo {
     root = '#page-content';

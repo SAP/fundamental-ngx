@@ -13,7 +13,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForNotDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { StandardListPo } from './standard-list.po';
 
 describe('Standard List test suite', () => {

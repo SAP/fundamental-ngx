@@ -7,7 +7,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { iconStatusesList } from './object-marker-content';
 import { ObjectMarkerPo } from './object-marker.po';
 

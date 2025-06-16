@@ -1,4 +1,5 @@
-import { getElementArrayLength, getElementClass } from '../../../../../e2e';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { getElementArrayLength, getElementClass } from '@fundamental-ngx/e2e';
 import { DatePickerPo } from './date-picker.po';
 
 const { altCalendarItem } = new DatePickerPo();

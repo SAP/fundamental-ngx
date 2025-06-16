@@ -18,7 +18,7 @@ import {
     waitForElDisplayed,
     waitForNotDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     disableAddingAfterOption,
     disableAddingBeforeOption,

@@ -13,7 +13,7 @@ import {
     scrollIntoView,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     a11yCheckboxAriaLabel,
     a11yCheckboxAriaLabelledBy,

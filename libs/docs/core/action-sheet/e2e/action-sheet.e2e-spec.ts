@@ -7,7 +7,7 @@ import {
     refreshPage,
     waitForElDisplayed,
     waitForNotDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { alertMessages, compactValue } from './action-sheet-content';
 import { ActionSheetPo } from './action-sheet.po';
 

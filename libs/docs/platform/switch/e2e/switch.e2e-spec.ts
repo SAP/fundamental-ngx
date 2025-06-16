@@ -11,7 +11,7 @@ import {
     scrollIntoView,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import {
     default_compact_switch_alternative_text,
     default_switch_alternative_text,

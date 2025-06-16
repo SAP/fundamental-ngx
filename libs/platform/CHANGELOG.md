@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.7...v0.56.4-rc.8) (2025-06-11)
+
+
+### Bug Fixes
+
+* **platform:** disable scrolling during table row drag and drop ([#13300](https://github.com/SAP/fundamental-ngx/issues/13300)) ([f6a2ee5](https://github.com/SAP/fundamental-ngx/commit/f6a2ee580a8ec36a591c2f57826ba553eca6ca4e))
+
+
+
+
+
+## [0.56.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.6...v0.56.4-rc.7) (2025-06-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.56.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.5...v0.56.4-rc.6) (2025-06-10)
+
+
+### Bug Fixes
+
+* **platform:** do not start resize when right mousre button clicked ([#13337](https://github.com/SAP/fundamental-ngx/issues/13337)) ([fc9ebba](https://github.com/SAP/fundamental-ngx/commit/fc9ebba9f79b4ecec53deb08db26be50e3cf1bd7))
+
+
+
+
+
+## [0.56.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.4...v0.56.4-rc.5) (2025-06-10)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.56.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.3...v0.56.4-rc.4) (2025-06-06)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

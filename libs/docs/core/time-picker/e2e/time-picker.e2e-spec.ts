@@ -15,7 +15,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed
-} from '../../../../../e2e';
+} from '@fundamental-ngx/e2e';
 import { TimePickerPo } from './time-picker.po';
 
 describe('Time-picker component test', () => {
