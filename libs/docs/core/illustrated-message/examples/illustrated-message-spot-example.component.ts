@@ -9,8 +9,22 @@ import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-mess
     imports: [CardModule, IllustratedMessageModule, ButtonComponent]
 })
 export class IllustratedMessageSpotExampleComponent {
-    spotConfig = {
-        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' },
-        dot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
+    smallConfig = {
+        small: { url: 'assets/images/sapIllus-UnknownFolder-Demo-Small.svg', id: 'sapIllus-UnknownFolder-Demo-Small' },
+        xsmall: {
+            url: 'assets/images/sapIllus-UnknownFolder-Demo-ExtraSmall.svg',
+            id: 'sapIllus-UnknownFolder-Demo-ExtraSmall'
+        }
+    };
+
+    smallConfigInbox = {
+        small: {
+            url: 'assets/images/sapIllus-Phone-with-Icon-Demo-Small.svg',
+            id: 'sapIllus-Phone-with-Icon-Demo-Small'
+        },
+        xsmall: {
+            url: 'assets/images/sapIllus-Phone-with-Icon-Demo-ExtraSmall.svg',
+            id: 'sapIllus-Phone-with-Icon-Demo-ExtraSmall'
+        }
     };
 }

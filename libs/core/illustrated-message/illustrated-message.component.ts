@@ -16,27 +16,47 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CssClassBuilder, Nullable, RequireOnlyOne, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { Subscription, debounceTime, fromEvent } from 'rxjs';
 
-export interface SvgConfig {
-    scene?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
-    dialog?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
-    spot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
-    dot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
-}
-
 export interface SvgItemConfig {
     url: string;
     id: string;
     file: string;
 }
 
-export type IllustratedMessageType = 'scene' | 'dialog' | 'spot' | 'dot' | 'base';
+export interface SvgConfig {
+    // New keys
+    large?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    medium?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    small?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    xsmall?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+
+    // Legacy keys
+    scene?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    dialog?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    spot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    dot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+}
+
+export type IllustratedMessageType =
+    | 'large'
+    | 'medium'
+    | 'small'
+    | 'xsmall'
+    | 'base'
+    | 'scene'
+    | 'dialog'
+    | 'spot'
+    | 'dot';
 
 export enum IllustratedMessageTypes {
+    LARGE = 'large',
+    MEDIUM = 'medium',
+    SMALL = 'small',
+    EXTRA_SMALL = 'xsmall',
+    BASE = 'base',
     SCENE = 'scene',
     DIALOG = 'dialog',
     SPOT = 'spot',
-    DOT = 'dot',
-    BASE = 'base'
+    DOT = 'dot'
 }
 
 let illustratedMessageUniqueId = 0;
@@ -51,74 +71,38 @@ let illustratedMessageUniqueId = 0;
     imports: []
 })
 export class IllustratedMessageComponent implements AfterContentChecked, OnChanges, OnDestroy, OnInit, CssClassBuilder {
-    /**
-     * The type of the Illustrated Message
-     * Options include: 'scene' | 'spot' | 'dialog' | 'dot' | 'base'.
-     */
     @Input()
     type: IllustratedMessageType;
 
-    /**
-     * An object containing url and id for each type used to construct the svg href
-     * For 'scene' type 'scene' and 'dialog' values are required
-     * In small screens (less than 600px) 'dialog' svg will be applied for 'scene' type
-     */
     @Input()
     svgConfig: SvgConfig;
 
-    /**
-     * aria-label for the svg
-     */
     @Input()
     svgAriaLabel: Nullable<string>;
 
-    /**
-     * When set to true will remove the illustration from the Illustrated Message
-     * The default is set to false
-     */
     @Input()
     noSvg = false;
 
-    /**
-     * Id of the Illustrated Message
-     * If not provided, a default one is generated
-     */
     @Input()
     @HostBinding('attr.id')
     id: string = 'fd-illustrated-message-' + illustratedMessageUniqueId++;
 
-    /** User's custom classes */
     @Input()
     class: string;
 
-    /** @hidden */
     _href: string;
-
-    /** @hidden */
     _isSmallScreen: boolean;
-
-    /** @hidden */
     _inlineSvg: SafeHtml | undefined;
-
-    /** @hidden */
     _tempType: IllustratedMessageType;
 
-    /** @hidden */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         private _sanitizer: DomSanitizer
     ) {}
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -128,76 +112,92 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
         ].filter(Boolean);
     }
 
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('svgConfig' in changes) {
             this._constructHref();
         }
     }
 
-    /** @hidden */
     ngOnInit(): void {
         const resizeSubscription = fromEvent(window, 'resize')
-            .pipe(debounceTime(200)) // reduce frequent calls during window resizing
+            .pipe(debounceTime(200))
             .subscribe(() => this._constructHref());
         this._subscriptions.add(resizeSubscription);
     }
 
-    /** @hidden */
     ngAfterContentChecked(): void {
         this._constructHref();
     }
 
-    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
     private _constructHref(): void {
         this._inlineSvg = undefined;
         const containerWidth = this.elementRef.nativeElement.offsetWidth;
-        this._tempType = this.type;
-        if (!this.type && containerWidth > 0) {
-            this._tempType = this._determineIllustratedMessageType(containerWidth);
-        }
-        const inlineSvg = this.svgConfig?.[this._tempType]?.file;
+        const normalizedType = this._normalizeType(this.type);
+        this._tempType = this.type ? normalizedType : this._determineIllustratedMessageType(containerWidth);
+
+        const normalizedConfig = this._normalizeSvgConfig(this.svgConfig);
+        const inlineSvg = normalizedConfig?.[this._tempType]?.file;
         if (inlineSvg) {
             this._inlineSvg = this._sanitizer.bypassSecurityTrustHtml(inlineSvg);
         }
 
-        this._href = this.svgConfig ? this._getHrefByType(this._tempType, this.svgConfig) : '';
+        this._href = normalizedConfig ? this._getHrefByType(this._tempType, normalizedConfig) : '';
         this.buildComponentCssClass();
-
         this._cdRef.markForCheck();
     }
 
-    /** @hidden */
     private _determineIllustratedMessageType(width: number): IllustratedMessageType {
         if (width >= 682) {
-            return IllustratedMessageTypes.SCENE;
+            return IllustratedMessageTypes.LARGE;
         } else if (width >= 361) {
-            return IllustratedMessageTypes.DIALOG;
+            return IllustratedMessageTypes.MEDIUM;
         } else if (width >= 261) {
-            return IllustratedMessageTypes.SPOT;
+            return IllustratedMessageTypes.SMALL;
         } else if (width >= 161) {
-            return IllustratedMessageTypes.DOT;
+            return IllustratedMessageTypes.EXTRA_SMALL;
         }
 
         return IllustratedMessageTypes.BASE;
     }
 
-    /** @hidden */
+    private _normalizeType(type: IllustratedMessageType): IllustratedMessageType {
+        switch (type) {
+            case 'scene':
+                return 'large';
+            case 'dialog':
+                return 'medium';
+            case 'spot':
+                return 'small';
+            case 'dot':
+                return 'xsmall';
+            default:
+                return type;
+        }
+    }
+
+    private _normalizeSvgConfig(config: SvgConfig): SvgConfig {
+        return {
+            large: config.large || config.scene,
+            medium: config.medium || config.dialog,
+            small: config.small || config.spot,
+            xsmall: config.xsmall || config.dot
+        };
+    }
+
     private _getHrefByType(type: IllustratedMessageType, svgConfig: SvgConfig): string {
         switch (type) {
-            case IllustratedMessageTypes.SCENE:
-                return `${svgConfig.scene?.url || ''}#${svgConfig.scene?.id}`;
-            case IllustratedMessageTypes.DIALOG:
-                return `${svgConfig.dialog?.url || ''}#${svgConfig.dialog?.id}`;
-            case IllustratedMessageTypes.SPOT:
-                return `${svgConfig.spot?.url || ''}#${svgConfig.spot?.id}`;
-            case IllustratedMessageTypes.DOT:
-                return `${svgConfig.dot?.url || ''}#${svgConfig.dot?.id}`;
+            case 'large':
+                return `${svgConfig.large?.url || ''}#${svgConfig.large?.id}`;
+            case 'medium':
+                return `${svgConfig.medium?.url || ''}#${svgConfig.medium?.id}`;
+            case 'small':
+                return `${svgConfig.small?.url || ''}#${svgConfig.small?.id}`;
+            case 'xsmall':
+                return `${svgConfig.xsmall?.url || ''}#${svgConfig.xsmall?.id}`;
             default:
                 return '';
         }
