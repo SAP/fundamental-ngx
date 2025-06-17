@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.57.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.0-rc.1...v0.57.0) (2025-06-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.57.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.0-rc.0...v0.57.0-rc.1) (2025-06-17)
+
+
+### Bug Fixes
+
+* font schematics ([#13354](https://github.com/SAP/fundamental-ngx/issues/13354)) ([aac426b](https://github.com/SAP/fundamental-ngx/commit/aac426b5ff783fb0d817d0da9387df25ff8f2716))
+
+
+### BREAKING CHANGES
+
+* remove old schematic migration files for 0.37, 0.39 and fdp splitter
+
+
+
+
+
 # [0.57.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.56.4...v0.57.0-rc.0) (2025-06-16)
 
 
