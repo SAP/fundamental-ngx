@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.0...v0.57.1-rc.1) (2025-06-17)
+
+
+### Bug Fixes
+
+* **core:** update the Illustrated messages ([#13353](https://github.com/SAP/fundamental-ngx/issues/13353)) ([5c54785](https://github.com/SAP/fundamental-ngx/commit/5c5478542a0161b9bcc905cf382ad3d158284c62))
+
+
+
+
+
 ## [0.57.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.0...v0.57.1-rc.0) (2025-06-17)
 
 
