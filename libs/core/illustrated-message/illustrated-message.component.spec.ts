@@ -29,12 +29,12 @@ class TestIllustratedMessageComponent {
     @ViewChild(IllustratedMessageComponent, { static: true, read: ElementRef })
     illustratedMessageElementRef: ElementRef;
 
-    type: IllustratedMessageType = 'scene';
+    type: IllustratedMessageType = 'large';
     svgConfig: SvgConfig = {
-        scene: { url: 'scene-url', id: 'scene-id' },
-        dialog: { url: 'dialog-url', id: 'dialog-id' },
-        spot: { url: 'spot-url', id: 'spot-id' },
-        dot: { url: 'dot-url', id: 'dot-id' }
+        large: { url: 'large-url', id: 'large-id' },
+        medium: { url: 'medium-url', id: 'medium-id' },
+        small: { url: 'small-url', id: 'small-id' },
+        xsmall: { url: 'xsmall-url', id: 'xsmall-id' }
     };
     svgAriaLabel = 'Illustrated Message';
     noSvg = false;
@@ -62,18 +62,18 @@ describe('IllustratedMessageComponent', () => {
         expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message')).toBe(true);
     });
 
-    it('Should add dialog type', () => {
-        testComponent.type = 'dialog';
+    it('Should add medium type', () => {
+        testComponent.type = 'medium';
         fixture.detectChanges();
-        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--dialog')).toBe(
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--medium')).toBe(
             true
         );
     });
 
-    it('Should add spot type', () => {
-        testComponent.type = 'spot';
+    it('Should add small type', () => {
+        testComponent.type = 'small';
         fixture.detectChanges();
-        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')).toBe(
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--small')).toBe(
             true
         );
     });
@@ -88,14 +88,14 @@ describe('IllustratedMessageComponent', () => {
 
     it('Should update href when svgConfig changes', () => {
         testComponent.svgConfig = {
-            scene: { url: 'new-scene-url', id: 'new-scene-id' },
-            dialog: { url: 'new-dialog-url', id: 'new-dialog-id' },
-            spot: { url: 'new-spot-url', id: 'new-spot-id' },
-            dot: { url: 'new-dot-url', id: 'new-dot-id' }
+            large: { url: 'new-large-url', id: 'new-large-id' },
+            medium: { url: 'new-medium-url', id: 'new-medium-id' },
+            small: { url: 'new-small-url', id: 'new-small-id' },
+            xsmall: { url: 'new-xsmall-url', id: 'new-xsmall-id' }
         };
         fixture.detectChanges();
         const useElement = fixture.debugElement.query(By.css('use'));
-        expect(useElement.nativeElement.getAttribute('href')).toBe('new-scene-url#new-scene-id');
+        expect(useElement.nativeElement.getAttribute('href')).toBe('new-large-url#new-large-id');
     });
 
     it('Should add aria-label to svg', () => {

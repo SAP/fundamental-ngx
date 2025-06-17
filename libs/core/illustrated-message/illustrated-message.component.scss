@@ -1,5 +1,400 @@
-@import 'fundamental-styles/dist/illustrated-message.css';
+// @import 'fundamental-styles/dist/illustrated-message.css';
 
+// TO BE REMOVED WHEN LATEST FD STULES VERSION IS ADOPTED
+.fd-illustrated-message {
+    --illustratedMessagePadding: 1rem;
+    --illustratedMessageMaxWidth: auto;
+    --actionsMarginInline: 0;
+    --actionsMarginBlock: 1rem;
+    --actionsPaddingInlineStart: 0;
+    --actionsPaddingInlineEnd: 0;
+    --illustrationMinWidth: 15rem;
+    --illustrationMaxWidth: 20rem;
+    --illustrationMinHeight: 11.25rem;
+    --illustrationMaxHeight: 15rem;
+    --illustrationMarginBlock: 2rem;
+    --illustrationMarginInlineStart: 0;
+    --illustrationMarginInlineEnd: 0;
+    --illustrationDisplay: flex;
+    --containerFlexDirection: column;
+    --figcaptionMaxWidth: 61.9375rem;
+    --titleMinWidth: auto;
+    --titleMarginBottom: 1rem;
+    --titleFontSize: var(--sapFontHeader2Size);
+    --textMinWidth: auto;
+    --textMarginBottom: 0.5rem;
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    max-width: var(--illustratedMessageMaxWidth);
+    padding-block: var(--illustratedMessagePadding);
+    padding-inline: var(--illustratedMessagePadding);
+}
+.fd-illustrated-message::before,
+.fd-illustrated-message::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message-responsive-container {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+    container-type: inline-size;
+}
+.fd-illustrated-message-responsive-container::before,
+.fd-illustrated-message-responsive-container::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message__container {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: var(--containerFlexAlignment, center);
+    -ms-flex-align: var(--containerFlexAlignment, center);
+    align-items: var(--containerFlexAlignment, center);
+    -ms-flex-direction: var(--containerFlexDirection);
+    flex-direction: var(--containerFlexDirection);
+}
+.fd-illustrated-message__container::before,
+.fd-illustrated-message__container::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
 .fd-illustrated-message__illustration {
-    height: var(--illustrationMaxWidth);
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    width: auto;
+    height: auto;
+    display: var(--illustrationDisplay);
+    min-width: var(--illustrationMinWidth);
+    min-height: var(--illustrationMinHeight);
+    max-width: var(--illustrationMaxWidth);
+    max-height: var(--illustrationMaxHeight);
+    margin-block: var(--illustrationMarginBlock);
+    margin-inline: var(--illustrationMarginInlineStart) var(--illustrationMarginInlineEnd);
+}
+.fd-illustrated-message__illustration::before,
+.fd-illustrated-message__illustration::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message__figcaption {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: hidden;
+    max-width: var(--figcaptionMaxWidth);
+}
+.fd-illustrated-message__figcaption::before,
+.fd-illustrated-message__figcaption::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message__title {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    width: 100%;
+    text-align: center;
+    font-size: var(--titleFontSize);
+    color: var(--sapGroup_TitleTextColor);
+    font-family: var(--sapFontHeaderFamily);
+    -webkit-margin-after: var(--titleMarginBottom);
+    margin-block-end: var(--titleMarginBottom);
+}
+.fd-illustrated-message__title::before,
+.fd-illustrated-message__title::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message__text {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    text-wrap: wrap;
+    text-align: center;
+    line-height: 1.5;
+    -webkit-margin-after: var(--textMarginBottom);
+    margin-block-end: var(--textMarginBottom);
+}
+.fd-illustrated-message__text::before,
+.fd-illustrated-message__text::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message__actions {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: var(--actionsMarginBlock);
+    margin-inline: var(--actionsMarginInline);
+    padding-inline: var(--actionsPaddingInlineStart) var(--actionsPaddingInlineEnd);
+}
+.fd-illustrated-message__actions::before,
+.fd-illustrated-message__actions::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-illustrated-message--dialog,
+.fd-illustrated-message--medium {
+    --illustrationMinWidth: 10rem;
+    --illustrationMinHeight: 10rem;
+    --illustrationMaxWidth: 10rem;
+    --illustrationMaxHeight: 10rem;
+    --illustrationMarginBlock: 1rem;
+    --titleMarginBottom: 0.5rem;
+    --titleFontSize: var(--sapFontHeader3Size);
+    --figcaptionMaxWidth: 40.5625rem;
+    --actionsMarginBlock: 0.5rem 1rem;
+}
+.fd-illustrated-message--spot,
+.fd-illustrated-message--small {
+    --illustratedMessagePadding: 0.5rem;
+    --illustrationMinWidth: 8rem;
+    --illustrationMinHeight: 8rem;
+    --illustrationMaxWidth: 8rem;
+    --illustrationMaxHeight: 8rem;
+    --illustrationMarginBlock: 0 0.5rem;
+    --titleMarginBottom: 0.5rem;
+    --titleFontSize: var(--sapFontHeader4Size);
+    --figcaptionMaxWidth: 21.5rem;
+    --actionsMarginBlock: 0.5rem;
+}
+.fd-illustrated-message--dot,
+.fd-illustrated-message--xsmall {
+    --illustratedMessagePadding: 0.25rem;
+    --containerFlexDirection: row;
+    --containerFlexAlignment: flex-start;
+    --illustrationMinWidth: 2.8125rem;
+    --illustrationMaxWidth: 2.8125rem;
+    --illustrationMinHeight: 2.8125rem;
+    --illustrationMaxHeight: 2.8125rem;
+    --illustrationMarginBlock: 0;
+    --illustrationMarginInlineEnd: 0.25rem;
+    --figcaptionMaxWidth: 12.6875rem;
+    --titleMarginBottom: 0.25rem;
+    --titleFontSize: var(--sapFontHeader5Size);
+    --textMarginBottom: 0.313rem;
+    --actionsMarginBlock: 0.25rem;
+    --actionsMarginInline: auto;
+    --actionsPaddingInlineStart: var(--illustrationMaxWidth);
+}
+.fd-illustrated-message--base {
+    --illustratedMessagePadding: 0.25rem;
+    --illustratedMessageMaxWidth: auto;
+    --illustrationDisplay: none;
+    --figcaptionMaxWidth: 12.6875rem;
+    --titleMarginBottom: 0.25rem;
+    --titleFontSize: var(--sapFontHeader5Size);
+    --textMarginBottom: 0.313rem;
+    --actionsMarginBlock: 0.25rem;
+    --actionsMarginInline: auto;
+    --actionsPaddingInlineStart: 0;
+}
+@container (width <= 681px) {
+    .fd-illustrated-message {
+        --illustrationMinWidth: 10rem;
+        --illustrationMinHeight: 10rem;
+        --illustrationMaxWidth: 10rem;
+        --illustrationMaxHeight: 10rem;
+        --illustrationMarginBlock: 1rem;
+        --titleMarginBottom: 0.5rem;
+        --titleFontSize: var(--sapFontHeader3Size);
+        --figcaptionMaxWidth: 40.5625rem;
+        --actionsMarginBlock: 0.5rem 1rem;
+    }
+}
+@container (width <= 360px) {
+    .fd-illustrated-message {
+        --illustratedMessagePadding: 0.5rem;
+        --illustrationMinWidth: 8rem;
+        --illustrationMinHeight: 8rem;
+        --illustrationMaxWidth: 8rem;
+        --illustrationMaxHeight: 8rem;
+        --illustrationMarginBlock: 0 0.5rem;
+        --titleMarginBottom: 0.5rem;
+        --titleFontSize: var(--sapFontHeader4Size);
+        --figcaptionMaxWidth: 21.5rem;
+        --actionsMarginBlock: 0.5rem;
+    }
+}
+@container (width <= 260px) {
+    .fd-illustrated-message {
+        --illustratedMessagePadding: 0.25rem;
+        --containerFlexDirection: row;
+        --containerFlexAlignment: flex-start;
+        --illustrationMinWidth: 2.8125rem;
+        --illustrationMaxWidth: 2.8125rem;
+        --illustrationMinHeight: 2.8125rem;
+        --illustrationMaxHeight: 2.8125rem;
+        --illustrationMarginBlock: 0;
+        --illustrationMarginInlineEnd: 0.25rem;
+        --figcaptionMaxWidth: 12.6875rem;
+        --titleMarginBottom: 0.25rem;
+        --titleFontSize: var(--sapFontHeader5Size);
+        --textMarginBottom: 0.313rem;
+        --actionsMarginBlock: 0.25rem;
+        --actionsMarginInline: auto;
+        --actionsPaddingInlineStart: var(--illustrationMaxWidth);
+    }
+}
+@container (width <= 160px) {
+    .fd-illustrated-message {
+        --illustratedMessagePadding: 0.25rem;
+        --illustratedMessageMaxWidth: auto;
+        --illustrationDisplay: none;
+        --figcaptionMaxWidth: 12.6875rem;
+        --titleMarginBottom: 0.25rem;
+        --titleFontSize: var(--sapFontHeader5Size);
+        --textMarginBottom: 0.313rem;
+        --actionsMarginBlock: 0.25rem;
+        --actionsMarginInline: auto;
+        --actionsPaddingInlineStart: 0;
+    }
+}
+
+/* Specific for the implementation */
+.fd-illustrated-message__illustration {
+    width: 100%;
 }
