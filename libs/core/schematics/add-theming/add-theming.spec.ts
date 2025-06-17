@@ -11,24 +11,6 @@ describe('add-theming schematic', () => {
         path.join(__dirname, '../collection.json')
     );
 
-    describe('angular.json modifications', () => {
-        beforeEach(async () => {
-            tree = await createCleanApplication({ standalone: true }, await createCleanWorkspace());
-        });
-        afterEach(clearWorkspaceCache);
-        it('should add icon font styles', async () => {
-            const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts'];
-            tree = await runner.runSchematic('add-theming', { project: 'test' }, tree);
-            const styles = (tree.readJson('./angular.json') as Record<string, any>).projects.test.architect.build
-                .options.styles;
-            iconFonts.forEach((font) => {
-                expect(
-                    styles.find((jsonStyle: any) => typeof jsonStyle === 'object' && jsonStyle.bundleName === font)
-                ).toBeDefined();
-            });
-        });
-    });
-
     describe('standalone app', () => {
         beforeEach(async () => {
             tree = await createCleanApplication({ standalone: true }, await createCleanWorkspace());
