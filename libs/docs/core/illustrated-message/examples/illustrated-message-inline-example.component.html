@@ -1,11 +1,10 @@
 <div [style.width.%]="100" [style.display]="'flex'" [style.justify-content]="'center'">
-    <figure fd-illustrated-message type="dot" [svgConfig]="spotConfig">
+    <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
         <figcaption fd-illustrated-message-figcaption>
-            <h3 fd-illustrated-message-title>No new mail</h3>
-            <p fd-illustrated-message-text>Check back again later.</p>
+            <h3 fd-illustrated-message-title>Delivery Delay</h3>
+            <p fd-illustrated-message-text>
+                A broken cooling system resulted in melted ice cream in transit. Another delivery is already on the way.
+            </p>
         </figcaption>
-        <fd-illustrated-message-actions>
-            <button fd-button label="Compose"></button>
-        </fd-illustrated-message-actions>
     </figure>
 </div>
