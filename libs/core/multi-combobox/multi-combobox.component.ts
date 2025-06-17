@@ -907,7 +907,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         const rect = this._inputGroup.nativeElement.getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
         this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
-        this.minWidth = rect.width - 2;
         this._cd.detectChanges();
     }
 

@@ -64,3 +64,8 @@ $block: fd-multi-combobox;
         border-radius: 0 !important;
     }
 }
+
+.fd-multi-combobox__list fd-form-message {
+    position: relative;
+    z-index: 10;
+}

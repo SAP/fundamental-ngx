@@ -35,11 +35,6 @@
             "factory": "./add-animations/index#addAnimations",
             "schema": "./add-animations/schema.json",
             "private": true
-        },
-        "migrate-to-fdb-splitter": {
-            "description": "Migrates fd-splitter to fdb-splitter",
-            "factory": "./migrate-to-fdb-splitter/index#migrateToFdbSplitter",
-            "schema": "./migrate-to-fdb-splitter/schema.json"
         }
     }
 }
