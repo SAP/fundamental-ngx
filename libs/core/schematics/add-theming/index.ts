@@ -10,12 +10,7 @@ import { addRootProvider } from '@schematics/angular/utility';
 import { Schema } from '../models/schema';
 import { callsProvidersFunction } from '../utils/calls-providers-function';
 import { getMainTsFilePath } from '../utils/main-ts-file-path';
-import {
-    getProjectBuildTarget,
-    getProjectDefinition,
-    getWorkspaceDefinition,
-    updateWorkspaceDefinition
-} from '../utils/workspace';
+import { getProjectBuildTarget, getProjectDefinition } from '../utils/workspace';
 
 /**
  * Add theming to angular.json and root module or config
@@ -26,7 +21,6 @@ export function addTheming(options: Schema): Rule {
         if (options.theme === 'custom') {
             return;
         }
-        const workspace = await getWorkspaceDefinition(tree);
 
         context.logger.info(
             `⚠️ Currently, we don't automatically remove the deprecated Themes approach. If you have it applied you have to remove it by yourself.
@@ -69,29 +63,6 @@ Try to replace theme in application manually, or use ThemingService to manage mu
             }
         }
 
-        const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts'];
-
-        let stylesUpdated = false;
-
-        iconFonts.forEach((font) => {
-            if (!styles.find((jsonStyle) => typeof jsonStyle === 'object' && jsonStyle.bundleName === `${font}`)) {
-                stylesUpdated = true;
-                styles.push({
-                    input: `./node_modules/fundamental-styles/dist/fonts/${font}.css`,
-                    inject: false,
-                    bundleName: font
-                });
-            }
-        });
-
-        if (stylesUpdated) {
-            targetOptions.outputHashing = 'all';
-
-            await updateWorkspaceDefinition(tree, workspace);
-            context.logger.info(`✅️ Added theming icon font styles to angular.json and set outputHashing to 'all'`);
-        } else {
-            context.logger.info(`✅️ Found duplicate theming icon font styles in angular.json. Skipping.`);
-        }
         try {
             return chain([
                 async () => {
