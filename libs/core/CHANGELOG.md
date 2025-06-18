@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.1...v0.57.1-rc.2) (2025-06-18)
+
+
+### Bug Fixes
+
+* **core:** add fix for input group missing button focus ([#13351](https://github.com/SAP/fundamental-ngx/issues/13351)) ([90b0140](https://github.com/SAP/fundamental-ngx/commit/90b0140d1fe740ca7518b84885d502d4ad2fabf4))
+
+
+
+
+
 ## [0.57.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.0...v0.57.1-rc.1) (2025-06-17)
 
 
