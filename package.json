@@ -11,7 +11,7 @@
     },
     "engines": {
         "yarn": ">= 4.9.0",
-        "node": ">= 18"
+        "node": ">= 20"
     },
     "packageManager": "yarn@4.9.2",
     "scripts": {
