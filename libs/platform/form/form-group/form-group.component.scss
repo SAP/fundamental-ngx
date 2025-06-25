@@ -6,6 +6,28 @@
 fdp-form-group {
     // resize observer won't work with inline elements
     display: block;
+
+    .fd-form-group {
+        display: block;
+    }
+
+    .fd-form-group.fd-form-group--inline {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .fd-form-group__header {
+        padding-inline: 1rem;
+    }
+
+    .fd-row:empty {
+        display: none;
+    }
+
+    .fd-form-group__header {
+        margin-block-start: 1rem;
+    }
 }
 
 // revert core styles overriding the form label styles
