@@ -10,7 +10,7 @@
         [focusTrapped]="true"
         [triggers]="triggers"
         [disabled]="disabled || readOnly"
-        [maxWidth]="640"
+        [maxWidth]="!mobile && noDropDownMaxWidth ? null : dropDownMaxWidthPx"
         [style.width]="width && '100%'"
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
