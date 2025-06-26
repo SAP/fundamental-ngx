@@ -253,6 +253,17 @@ export class ComboboxComponent<T = any>
     @Input()
     maxHeight = '50vh';
 
+    /** Max width of the dropdown in pixels. Default is 640px (40rem). */
+    @Input()
+    dropDownMaxWidthPx = 640;
+
+    /**
+     * Whether the dropdown should have max width.
+     * Set to true if you want the dropdown to take the width of the control.
+     * Default is false */
+    @Input()
+    noDropDownMaxWidth = false;
+
     /** Custom width of the control. */
     @Input()
     width: Nullable<string>;
