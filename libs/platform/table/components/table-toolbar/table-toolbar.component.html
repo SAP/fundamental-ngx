@@ -17,12 +17,12 @@
         [headingLevel]="headingLevel"
     >
         @if (_tableToolbarLeftActionsComponent) {
-            <span fd-toolbar-item>
+            <div fd-toolbar-item class="fd-toolbar__group">
                 @if (!!title || !hideItemCount) {
                     <fd-toolbar-separator></fd-toolbar-separator>
                 }
                 <ng-template [ngTemplateOutlet]="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-template>
-            </span>
+            </div>
         }
         <fd-toolbar-spacer></fd-toolbar-spacer>
         @if (!hideSearchInput) {

@@ -100,14 +100,9 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 /** When actions are collapsed */
 fdk-dynamic-portal {
     .fdp-table-toolbar-actions {
+        gap: 0.5rem;
         display: flex;
         flex-direction: column;
-
-        > *:not(:last-of-type) {
-            margin-left: 0;
-            margin-right: 0;
-            margin-bottom: 0.25rem;
-        }
     }
 }
 
@@ -128,15 +123,9 @@ fdk-dynamic-portal {
 
     /** When actions are not collapsed */
     .fdp-table-toolbar-actions {
-        margin: 0;
-
-        > *:not(:first-of-type) {
-            margin-left: 0.5rem;
-            @include fd-rtl() {
-                margin-left: 0;
-                margin-right: 0.5rem;
-            }
-        }
+        gap: 0.5rem;
+        display: flex;
+        align-items: center;
     }
 
     .fdp-table__applied-filters-toolbar {
@@ -673,4 +662,10 @@ th.fd-table__cell .fd-table__inner {
 
 .fdp-table__body--disable-scroll {
     overflow: hidden !important;
+}
+
+.fd-toolbar__group {
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
 }
