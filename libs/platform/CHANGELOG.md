@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.5...v0.57.1-rc.6) (2025-06-26)
+
+
+### Bug Fixes
+
+* **platform:** show Toolbar separator in custom Toolbar inside Platform table ([#13367](https://github.com/SAP/fundamental-ngx/issues/13367)) ([ce60929](https://github.com/SAP/fundamental-ngx/commit/ce609291c9f6c1632cc1407a288a89e9edc29328))
+
+
+
+
+
 ## [0.57.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.4...v0.57.1-rc.5) (2025-06-26)
 
 
