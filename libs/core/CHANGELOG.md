@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.6...v0.57.1-rc.7) (2025-06-26)
+
+
+### Bug Fixes
+
+* **core:** add fix for Select keyboard navigation not working ([#13366](https://github.com/SAP/fundamental-ngx/issues/13366)) ([47373a8](https://github.com/SAP/fundamental-ngx/commit/47373a8c52e1ccd623c94aeb64aed3c55c23ea5d))
+
+
+
+
+
 ## [0.57.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.5...v0.57.1-rc.6) (2025-06-26)
 
 **Note:** Version bump only for package @fundamental-ngx/core
