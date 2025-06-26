@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.3...v0.57.1-rc.4) (2025-06-26)
+
+
+### Bug Fixes
+
+* **core:** add option to customize Combobox dropdown width ([#13364](https://github.com/SAP/fundamental-ngx/issues/13364)) ([1122388](https://github.com/SAP/fundamental-ngx/commit/1122388220c0278ee02dabec48adb4e5dd9956f3))
+
+
+
+
+
 ## [0.57.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.2...v0.57.1-rc.3) (2025-06-20)
 
 **Note:** Version bump only for package fundamental-ngx
