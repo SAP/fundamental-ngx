@@ -23,16 +23,17 @@
         @for (column of formRows | keyvalue; track $index) {
             <div class="fd-row">
                 @for (fields of column | fieldGroupRowValue | keyvalue; track $index) {
-                    <div class="fd-col fd-form-group" [class]="xlCol">
-                        @if ($fieldGroup(column.value); as value) {
-                            @if (value.label) {
-                                <div class="fd-row">
-                                    <div class="fd-col">
-                                        <div fdp-form-group-header [fieldGroup]="$index === 0 ? value : null"></div>
-                                    </div>
+                    @if ($fieldGroup(column.value); as value) {
+                        @if (value.label && $index === 0) {
+                            <div class="fd-row fd-form-item">
+                                <div class="fd-col" [class]="xlCol">
+                                    <div fdp-form-group-header [fieldGroup]="$index === 0 ? value : null"></div>
                                 </div>
-                            }
+                            </div>
                         }
+                    }
+
+                    <div class="fd-col fd-form-group" [class]="xlCol">
                         @for (field of fields.value; track trackByFieldName($index, field)) {
                             <div class="fd-row fd-form-item">
                                 <div class="fd-col" [class]="_inlineColumnLayoutClass" [style.order]="field.rank">

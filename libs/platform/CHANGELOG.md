@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.4...v0.57.1-rc.5) (2025-06-26)
+
+
+### Bug Fixes
+
+* **platform:** add fix for Form Field Group layout ([#13363](https://github.com/SAP/fundamental-ngx/issues/13363)) ([6d986dd](https://github.com/SAP/fundamental-ngx/commit/6d986dd88a0993778a0582351df917a3311e1e4d))
+
+
+
+
+
 ## [0.57.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.3...v0.57.1-rc.4) (2025-06-26)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
