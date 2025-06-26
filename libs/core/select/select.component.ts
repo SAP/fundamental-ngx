@@ -573,9 +573,9 @@ export class SelectComponent<T = any>
         );
 
         this._keyManagerService._keyManager.withHorizontalOrientation(null);
-
         this._highlightCorrectOption();
-
+        this._changeDetectorRef.markForCheck();
+        this._controlElementRef.nativeElement.focus();
         this.isOpenChange.emit(true);
     }
 
@@ -681,18 +681,11 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     _highlightCorrectOption(): void {
-        let elToFocus;
         if (this._keyManagerService._keyManager && this._selectionModel.isEmpty()) {
             this._keyManagerService._keyManager.setFirstItemActive();
-            elToFocus = this._options.first._getHtmlElement();
         } else if (this._keyManagerService._keyManager && !this._selectionModel.isEmpty()) {
             this._keyManagerService._keyManager.setActiveItem(this.selected);
-            elToFocus = this.selected._getHtmlElement();
-        } else {
-            elToFocus = this._controlElementRef?.nativeElement as HTMLElement;
         }
-        this._changeDetectorRef.detectChanges();
-        elToFocus.focus();
     }
 
     /** @hidden */

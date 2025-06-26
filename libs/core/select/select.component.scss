@@ -70,3 +70,7 @@ $block: fd-select;
         }
     }
 }
+
+.fd-select__control.is-expanded {
+    outline: none;
+}
