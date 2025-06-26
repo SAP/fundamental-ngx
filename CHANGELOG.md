@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4...v0.56.5) (2025-06-26)
+
+
+### Bug Fixes
+
+* **core:** update the Illustrated messages ([#13353](https://github.com/SAP/fundamental-ngx/issues/13353)) ([dd15f8a](https://github.com/SAP/fundamental-ngx/commit/dd15f8a671e669093296ad0a827172cd4167dd62))
+
+
+
+
+
 ## [0.56.4](https://github.com/SAP/fundamental-ngx/compare/v0.56.4-rc.10...v0.56.4) (2025-06-16)
 
 **Note:** Version bump only for package fundamental-ngx
