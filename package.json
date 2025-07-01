@@ -93,7 +93,7 @@
         "@nx/plugin": "21.2.0",
         "@nx/workspace": "21.2.0",
         "@sap-ui/common-css": "0.40.1",
-        "@schematics/angular": "20.0.1",
+        "@schematics/angular": "20.0.4",
         "@swc-node/register": "1.9.2",
         "@swc/cli": "0.6.0",
         "@swc/core": "1.5.7",
