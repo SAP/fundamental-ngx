@@ -42,7 +42,7 @@
         "@angular-eslint/template-parser": "20.0.0",
         "@angular/animations": "20.0.2",
         "@angular/cdk": "20.0.2",
-        "@angular/common": "20.0.2",
+        "@angular/common": "20.0.5",
         "@angular/compiler": "20.0.2",
         "@angular/core": "20.0.2",
         "@angular/forms": "20.0.2",
