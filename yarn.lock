@@ -6873,16 +6873,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/helpers@npm:0.5.11":
-  version: 0.5.11
-  resolution: "@swc/helpers@npm:0.5.11"
-  dependencies:
-    tslib: "npm:^2.4.0"
-  checksum: 10/54d66ade8010e6ba526a9d73b8bcdbb01c806a24f2d3786640ef3081065e8fba398d9b890df4847744c33d086412fd9a6570b5e99e8001ea1462efc5ce0f3847
-  languageName: node
-  linkType: hard
-
-"@swc/helpers@npm:^0.5.17":
+"@swc/helpers@npm:0.5.17, @swc/helpers@npm:^0.5.17":
   version: 0.5.17
   resolution: "@swc/helpers@npm:0.5.17"
   dependencies:
@@ -15064,7 +15055,7 @@ __metadata:
     "@swc-node/register": "npm:1.9.2"
     "@swc/cli": "npm:0.6.0"
     "@swc/core": "npm:1.5.7"
-    "@swc/helpers": "npm:0.5.11"
+    "@swc/helpers": "npm:0.5.17"
     "@types/google.visualization": "npm:0.0.71"
     "@types/jasmine": "npm:5.1.3"
     "@types/jest": "npm:29.5.14"
