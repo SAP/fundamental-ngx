@@ -1,7 +1,7 @@
 <fd-docs-section-title id="large" componentName="illustrated-message"> Large </fd-docs-section-title>
 <description
-    >The configuration object passed to <code>[svgConfig]</code> should contain values for 'large', 'medium', 'small'
-    and 'xsmall'.</description
+    >The configuration object passed to <code>[svgConfig]</code> should define values for all sizes: 'large', 'medium',
+    'small' and 'xsmall'. The appropriate size is applied automatically based on the container's width.</description
 >
 <component-example>
     <fd-illustrated-message-example></fd-illustrated-message-example>
@@ -13,7 +13,8 @@
 <fd-docs-section-title id="medium" componentName="illustrated-message"> Medium </fd-docs-section-title>
 <description
     >Set the <code>type</code> property to <code>medium</code> for Illustration Message used in a Dialog or a Message
-    Box.</description
+    Box. The configuration object passed to <code>[svgConfig]</code> should contain values for 'medium', 'small' and
+    'xsmall'.</description
 >
 <component-example>
     <fd-illustrated-message-dialog-example></fd-illustrated-message-dialog-example>
@@ -25,7 +26,8 @@
 <fd-docs-section-title id="small" componentName="illustrated-message"> Small </fd-docs-section-title>
 <description
     >Set the <code>type</code> property to <code>small</code> for Illustration Message used in medium-sized cards or UI
-    elements smaller than full screen.</description
+    elements smaller than full screen. The configuration object passed to <code>[svgConfig]</code> should contain values
+    for 'small' and 'xsmall'.</description
 >
 <component-example>
     <fd-illustrated-message-spot-example></fd-illustrated-message-spot-example>
@@ -35,7 +37,8 @@
 <fd-docs-section-title id="xsmall" componentName="illustrated-message"> Extra Small </fd-docs-section-title>
 <description>
     Set the <code>type</code> property to <code>xsmall</code> for Illustration Message used in small-sized cards or UI
-    elements smaller than full screen.
+    elements smaller than full screen. The configuration object passed to <code>[svgConfig]</code> should contain values
+    for 'xsmall'.
 </description>
 <component-example>
     <fd-illustrated-message-dot-example></fd-illustrated-message-dot-example>
@@ -47,8 +50,8 @@
     <p>In some cases it's not applicable to use URLs for the SVG locations.</p>
     <p>
         In this case developers can load SVG directly into their js code and pass it as a string to the component. The
-        configuration object passed to <code>[svgConfig]</code> should contain values for 'scene', 'dialog', 'spot' and
-        'dot'.
+        configuration object passed to <code>[svgConfig]</code> should contain values for 'large', 'medium', 'small' and
+        'xsmall'.
     </p>
 </description>
 
