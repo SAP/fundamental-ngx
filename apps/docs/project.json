@@ -283,7 +283,7 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^compile-typedoc", "^transform-translations"]
+            "dependsOn": ["^compile-typedoc"]
         },
         "serve": {
             "executor": "@angular-devkit/build-angular:dev-server",
