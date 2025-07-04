@@ -33,17 +33,18 @@
         </ul>
 
         <h3>Responsiveness and Adaptiveness</h3>
-        <p>
-            Resizing is neither required nor recommended for S and M illustrations. L illustrations should uniformly
-            scale to 75% of its target size for size S for smartphones, small hybrid devices, and small tablets.
-        </p>
-
         <fd-message-strip type="information" [dismissible]="false"
             ><b>Illustrated Message Update:</b> The illustration types have been renamed from scene, dialog, spot, and
             dot to large, medium, small, and extra small for clarity and consistency. Legacy type values and modifier
             classes are still supported for backward compatibility.</fd-message-strip
         >
         <br /><br />
+
+        <p>
+            Resizing is not required or recommended for Medium and Small illustrations. Large illustrations
+            automatically scale based on the width of their container. The container uses breakpoints to adjust the size
+            responsively, as shown below:
+        </p>
 
         <table style="border-collapse: collapse">
             <tr>
