@@ -10,6 +10,8 @@
     </fd-combobox>
 </div>
 <small>Search Term: {{ searchTerm }}</small>
+
+<br /><br />
 <div fd-form-item>
     <label fd-form-label>Combobox</label>
     <fd-combobox
@@ -22,3 +24,35 @@
     </fd-combobox>
 </div>
 <small>Combobox Term: {{ searchTerm2 }}</small>
+
+<br /><br />
+
+<div fd-form-item>
+    <label fd-form-label>Combobox with custom dropdown width</label>
+    <fd-combobox
+        maxHeight="250px"
+        placeholder="Type some text..."
+        [showClearButton]="true"
+        [dropDownMaxWidthPx]="992"
+        [dropdownValues]="fruits"
+        [(ngModel)]="searchTerm3"
+    >
+    </fd-combobox>
+</div>
+<small>Combobox Term: {{ searchTerm3 }}</small>
+
+<br /><br />
+
+<div fd-form-item>
+    <label fd-form-label>Combobox with full dropdown width</label>
+    <fd-combobox
+        maxHeight="250px"
+        placeholder="Type some text..."
+        [showClearButton]="true"
+        [noDropDownMaxWidth]="true"
+        [dropdownValues]="fruits"
+        [(ngModel)]="searchTerm4"
+    >
+    </fd-combobox>
+</div>
+<small>Combobox Term: {{ searchTerm4 }}</small>
