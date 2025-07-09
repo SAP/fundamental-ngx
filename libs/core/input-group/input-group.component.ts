@@ -54,7 +54,7 @@ let addOnInputRandomId = 0;
     hostDirectives: [
         {
             directive: CvaDirective,
-            inputs: ['placeholder', 'disabled', 'readonly', 'state', 'name', 'stateMessage']
+            inputs: ['placeholder', 'disabled', 'readonly', 'state', 'name', 'stateMessage', 'type']
         }
     ],
     providers: [

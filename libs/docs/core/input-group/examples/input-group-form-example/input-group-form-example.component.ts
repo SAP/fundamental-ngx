@@ -18,6 +18,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 export class InputGroupFormExampleComponent {
     customForm = new FormGroup({
         disabledInput: new FormControl({ value: 'Disabled Value', disabled: true }),
-        enabledInput: new FormControl({ value: '123', disabled: false })
+        enabledInputNumber: new FormControl({ value: 123, disabled: false }),
+        enabledInputText: new FormControl({ value: '', disabled: false })
     });
 }

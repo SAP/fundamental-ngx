@@ -13,16 +13,46 @@
             </fd-input-group>
         </div>
         <small>Disabled Input Value: {{ customForm.controls.disabledInput.value }}</small>
+
+        <!-- Input with Type Text  -->
         <div fd-form-item [style.margin-top.rem]="1">
-            <label fd-form-label for="fd-input-group-form-2" id="fd-input-group-form-label-2">Enabled Input</label>
-            <fd-input-group formControlName="enabledInput" ariaLabelledBy="fd-input-group-form-label-2">
+            <label fd-form-label for="fd-input-group-form-2" id="fd-input-group-form-label-2"
+                >Enabled Input (Type Text)</label
+            >
+            <fd-input-group
+                formControlName="enabledInputText"
+                ariaLabelledBy="fd-input-group-form-label-2"
+                placeholder="Enter text"
+            >
             </fd-input-group>
         </div>
         <small>
-            Enabled Input Form Control Value: {{ customForm.controls.enabledInput.value }}<br />
-            Enabled Input Form Control Touched: {{ customForm.controls.enabledInput.touched }}<br />
-            Enabled Input Form Control Dirty: {{ customForm.controls.enabledInput.dirty }}<br />
-            Enabled Input Form Control Valid: {{ customForm.controls.enabledInput.valid }}
+            Enabled Input Form Control Value: {{ customForm.controls.enabledInputText.value }}<br />
+            Enabled Input Form Control Value Type: {{ typeof customForm.controls.enabledInputText.value }}<br />
+            Enabled Input Form Control Touched: {{ customForm.controls.enabledInputText.touched }}<br />
+            Enabled Input Form Control Dirty: {{ customForm.controls.enabledInputText.dirty }}<br />
+            Enabled Input Form Control Valid: {{ customForm.controls.enabledInputText.valid }}
+        </small>
+
+        <!-- Input with Type Number  -->
+        <div fd-form-item [style.margin-top.rem]="1">
+            <label fd-form-label for="fd-input-group-form-3" id="fd-input-group-form-label-3"
+                >Enabled Input (Type Number)</label
+            >
+            <fd-input-group
+                formControlName="enabledInputNumber"
+                ariaLabelledBy="fd-input-group-form-label-3"
+                placeholder="Enter a number"
+                type="number"
+            >
+            </fd-input-group>
+        </div>
+        <small>
+            Enabled Input Form Control Value: {{ customForm.controls.enabledInputNumber.value }}<br />
+            Enabled Input Form Control Value Type: {{ typeof customForm.controls.enabledInputNumber.value }}<br />
+            Enabled Input Form Control Touched: {{ customForm.controls.enabledInputNumber.touched }}<br />
+            Enabled Input Form Control Dirty: {{ customForm.controls.enabledInputNumber.dirty }}<br />
+            Enabled Input Form Control Valid: {{ customForm.controls.enabledInputNumber.valid }}
         </small>
     </fieldset>
 </form>
