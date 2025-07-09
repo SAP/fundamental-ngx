@@ -38,6 +38,10 @@ export class CvaDirective<T = any>
     @Input()
     placeholder: string;
 
+    /** Input type */
+    @Input()
+    type: string;
+
     /**
      *  The state of the form control - applies css classes.
      *  Can be 'success', 'error', 'warning', 'default', 'information'.
@@ -394,10 +398,16 @@ export class CvaDirective<T = any>
      * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
      */
     setValue(value: T, emitOnChange = true): void {
-        if (value !== this.value) {
-            this.writeValue(value);
+        let coercedValue: any = value;
+
+        if (this.type === 'number') {
+            coercedValue = value === '' || value === null || value === undefined ? null : Number(value);
+        }
+
+        if (coercedValue !== this.value) {
+            this.writeValue(coercedValue);
             if (emitOnChange) {
-                this.onChange(value);
+                this.onChange(coercedValue);
             }
             this._markForCheck();
         }
