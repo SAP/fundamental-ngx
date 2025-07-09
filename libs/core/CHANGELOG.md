@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.1...v0.57.2-rc.0) (2025-07-09)
+
+
+### Bug Fixes
+
+* **core:** Input Group of type number should have value of type number ([#13385](https://github.com/SAP/fundamental-ngx/issues/13385)) ([2f18ac4](https://github.com/SAP/fundamental-ngx/commit/2f18ac4933d6899f8fbb597b2ab1c9075b7f05c9))
+
+
+
+
+
 ## [0.57.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.1-rc.8...v0.57.1) (2025-07-07)
 
 **Note:** Version bump only for package @fundamental-ngx/core
