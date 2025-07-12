@@ -11,6 +11,7 @@ import { DayjsDatetimeAdapterModule } from './dayjs-datetime-adapter.module';
 // preload locales that are used in tests
 import 'dayjs/locale/ar-ma';
 import 'dayjs/locale/da';
+import 'dayjs/locale/fr';
 import 'dayjs/locale/ja';
 
 export const JAN = 0,
@@ -262,7 +263,8 @@ describe('DayjsDatetimeAdapter', () => {
     });
 
     it('should parse "en" datetime string with localized format', () => {
-        expect(adapter.parse('1/3/2017', 'L HH:mm:ss A')?.format()).toEqual(dayjs(new Date(2017, JAN, 3)).format());
+        adapter.setLocale('en-us');
+        expect(adapter.parse('01/03/2017', 'L HH:mm:ss A')?.format()).toEqual(dayjs(new Date(2017, JAN, 3)).format());
     });
 
     it('should parse "en" time string', () => {
@@ -506,5 +508,15 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
         expect(() => adapter.setLocale('en-au')).toThrow();
         await import('dayjs/locale/en-au');
         expect(() => adapter.setLocale('en-au')).not.toThrow();
+    });
+
+    it('should parse date string even when time is missing and format expects time', () => {
+        // simulate the input field edited by the user, with missing time
+        const result = adapter['_createDayjsDate']('10/07/2025', 'L hh:mm A');
+        adapter.setLocale('fr');
+        expect(result.isValid()).toBeTruthy();
+        expect(result.year()).toBe(2025);
+        expect(result.month()).toBe(JUL); // month is 0-based
+        expect(result.date()).toBe(10);
     });
 });
