@@ -15,6 +15,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [0.43.56](https://github.com/SAP/fundamental-ngx/compare/v0.43.55...v0.43.56) (2025-07-15)
+
+
+### Bug Fixes
+
+* **core:** date time picker default dayjs parse ([#13383](https://github.com/SAP/fundamental-ngx/issues/13383)) ([982a9b8](https://github.com/SAP/fundamental-ngx/commit/982a9b8e927ec82d04f069de9f9b6b36aa25b8e9))
+* **core:** implement fallback formatter for datetime adapter ([#13388](https://github.com/SAP/fundamental-ngx/issues/13388)) ([96f1b2a](https://github.com/SAP/fundamental-ngx/commit/96f1b2adc44ebf5ac4edc5a0230d8996ff8d77ed))
+
+
+
+
+
 ## [0.43.55](https://github.com/SAP/fundamental-ngx/compare/v0.43.54...v0.43.55) (2025-05-30)
 
 

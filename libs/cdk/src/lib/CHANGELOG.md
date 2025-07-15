@@ -11,6 +11,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [0.43.56](https://github.com/SAP/fundamental-ngx/compare/v0.43.55...v0.43.56) (2025-07-15)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 ## [0.43.55](https://github.com/SAP/fundamental-ngx/compare/v0.43.54...v0.43.55) (2025-05-30)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
