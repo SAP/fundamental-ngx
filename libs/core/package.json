@@ -7,7 +7,7 @@
   },
   "description": "Fundamental Library for Angular - core",
   "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx/home",
+  "homepage": "https://sap.github.io/fundamental-ngx",
   "repository": {
     "type": "git",
     "url": "https://github.com/SAP/fundamental-ngx"
