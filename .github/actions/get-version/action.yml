@@ -8,5 +8,5 @@ outputs:
         description: Current version
 
 runs:
-    using: node16
+    using: node20
     main: ./index.js
