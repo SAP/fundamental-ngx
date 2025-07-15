@@ -1,10 +1,11 @@
-@if (_selectedItems.length) {
+@if (_allSelectedUsers.length) {
     <div class="fdp-approval-flow-user-list__selected-count">
-        @if (_selectedItems.length === 1) {
+        @if (_allSelectedUsers.length === 1) {
             {{ 'platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate }}
         } @else {
             {{
-                'platformApprovalFlow.userListSelectedItemsCountPlural' | fdTranslate: { count: _selectedItems.length }
+                'platformApprovalFlow.userListSelectedItemsCountPlural'
+                    | fdTranslate: { count: _allSelectedUsers.length }
             }}
         }
     </div>
@@ -21,6 +22,7 @@
     @for (_user of _displayUsers; track _trackByFn($index, _user)) {
         <fdp-standard-list-item
             [attr.id]="_idPrefix + _user.id"
+            [id]="_idPrefix + _user.id"
             [avatar]="{ image: _user.imgUrl, ariaLabel: _user.name }"
             [description]="_user.description"
             [ariaLabel]="_user.name"

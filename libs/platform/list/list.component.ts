@@ -1,5 +1,5 @@
 import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { SelectionModel } from '@angular/cdk/collections';
+import { SelectionChange, SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -69,6 +69,10 @@ export class SelectionChangeEvent {
     selectedItems: BaseListItem[];
     /** Index */
     index: number;
+    /** Selected item */
+    added?: BaseListItem[];
+    /** Deselected item */
+    removed?: BaseListItem[];
 }
 
 let nextListId = 0;
@@ -512,13 +516,21 @@ export class ListComponent<T>
 
         this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
-            this.selectedItems = this._selectionModel.selected;
-            const event = new SelectionChangeEvent();
-            event.selectedItems = this.selectedItems;
-            this.stateChanges.next(event);
-            this.selectedItemChange.emit(event);
-        });
+        this._selectionModel.changed
+            .pipe(takeUntilDestroyed(this._destroyed))
+            .subscribe((selection: SelectionChange<BaseListItem>) => {
+                this.selectedItems = this._selectionModel.selected;
+                const event = new SelectionChangeEvent();
+                event.selectedItems = this.selectedItems;
+                if (selection.added?.length) {
+                    event.added = [...selection.added];
+                }
+                if (selection.removed?.length) {
+                    event.removed = [...selection.removed];
+                }
+                this.stateChanges.next(event);
+                this.selectedItemChange.emit(event);
+            });
     }
 
     /**
@@ -661,6 +673,11 @@ export class ListComponent<T>
     _selectItem(item: BaseListItem): void {
         this._selectionModel.select(item);
         this.stateChanges.next(item);
+    }
+
+    /** @hidden */
+    _clearSelection(): void {
+        this._selectionModel.clear();
     }
 
     /** @hidden */
