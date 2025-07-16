@@ -410,14 +410,28 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** @hidden */
     _createDayjsDate(date?: ConfigType, format?: string, ignoreUtc = false): Dayjs {
         const { strict, useUtc }: DayjsDatetimeAdapterOptions = this._options || {};
-
         const method = useUtc && !ignoreUtc ? dayjs.utc : dayjs;
-        let parsed = method(date, format, strict);
-        // dayjs strictly follows the provided format
-        // so partial strings will not be resolved. in this case attempt to resolve without formatting
-        if (!parsed?.isValid() && !strict && format) {
-            parsed = method(date, undefined, strict);
+
+        if (typeof date === 'string' && format) {
+            const fallbackFormats = [
+                format, // original
+                format.replace(/ ?[Hh]:?mm[aA]?/, ''), // remove time
+                format.replace(/ ?[Hh]:?mm/, ''), // remove time (no meridiem),
+                'L',
+                dayjs.Ls[dayjs.locale()].formats['L'],
+                'DD/MM/YYYY',
+                'YYYY-MM-DD'
+            ];
+
+            for (const f of fallbackFormats) {
+                const tryParsed = method(date, f, strict);
+                if (tryParsed.isValid()) {
+                    return tryParsed;
+                }
+            }
         }
+
+        const parsed = method(date, format, strict);
         return parsed;
     }
 }

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.1...v0.57.2-rc.2) (2025-07-16)
+
+
+### Bug Fixes
+
+* **core:** implement fallback formatter for datetime adapter ([#13387](https://github.com/SAP/fundamental-ngx/issues/13387)) ([bb6eca6](https://github.com/SAP/fundamental-ngx/commit/bb6eca6149aa50b0c853e96a1f530dfaeae58749))
+
+
+
+
+
+## [0.57.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.0...v0.57.2-rc.1) (2025-07-15)
+
+
+### Bug Fixes
+
+* homepage link ([#13392](https://github.com/SAP/fundamental-ngx/issues/13392)) ([201b025](https://github.com/SAP/fundamental-ngx/commit/201b025168cecd083455836302dc6b5416fe0784))
+
+
+
+
+
 ## [0.57.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.1...v0.57.2-rc.0) (2025-07-09)
 
 

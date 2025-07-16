@@ -1,10 +1,10 @@
 {
   "name": "@fundamental-ngx/cx",
-  "version": "0.57.2-rc.0",
+  "version": "0.57.2-rc.2",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - cx",
   "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx/home",
+  "homepage": "https://sap.github.io/fundamental-ngx",
   "repository": {
     "type": "git",
     "url": "https://github.com/SAP/fundamental-ngx"
