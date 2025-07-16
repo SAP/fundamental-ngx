@@ -289,9 +289,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _exitSelectMode(): void {
-        if (this._selectedApprovers.length && !this._data.node?.approvers.length) {
-            this._selectedApprovers = [];
-        }
+        this._selectedApprovers = this._data.node?.approvers?.length ? [...this._data.node.approvers] : [];
 
         if (!this._data.isEdit && !this._data.node?.approvalTeamId) {
             this.viewService.resetTeam();
