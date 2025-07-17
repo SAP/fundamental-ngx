@@ -48,16 +48,20 @@
         </fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item">{{ item.name }}</fdp-table-cell>
     </fdp-column>
-    <fdp-column name="description" key="description" [sortable]="true">
+    <fdp-column name="description" key="description" [sortable]="true" [announceEmptyCell]="false">
         <fdp-table-header *fdpHeaderCellDef> Description </fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item">
-            <fdp-input
-                type="text"
-                name="description"
-                placeholder="Enter the description"
-                [(ngModel)]="item.description"
-            >
-            </fdp-input>
+            @if (!item.description) {
+                <span [attr.aria-label]="'Empty Cell'"></span>
+            } @else {
+                <fdp-input
+                    type="text"
+                    name="description"
+                    placeholder="Enter the description"
+                    [(ngModel)]="item.description"
+                >
+                </fdp-input>
+            }
         </fdp-table-cell>
     </fdp-column>
     <fdp-column name="price" key="price.value" [nonInteractive]="true">
