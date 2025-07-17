@@ -63,6 +63,7 @@ import {
     isTreeRow,
     isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
+import { get } from 'lodash-es';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { TableEditableCellComponent } from '../table-editable-cell/table-editable-cell.component';
@@ -179,6 +180,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
 
     /** @hidden */
     _rowSelectionHelperTextId = `rowSelectionHelper-${uuidv4()}`;
+
+    /** @hidden */
+    _enableEmptyCellScreenReader: boolean;
 
     /** @hidden */
     readonly _isTreeRowFirstCell = isTreeRowFirstCell;
@@ -325,6 +329,19 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     };
 
     /** @hidden */
+    _handleCellFocused(
+        event: FocusableItemPosition,
+        index: number,
+        row: TableRow<T>,
+        column: TableColumn,
+        tableTextContainer: HTMLElement
+    ): void {
+        this._enableEmptyCellForScreenReader(row, column, tableTextContainer);
+        this._tableRowService.cellFocused(event);
+        this._tableRowService.cellActivate(index, row);
+    }
+
+    /** @hidden */
     protected _handleCellSpaceKey(colIdx: number, tableCellElement: HTMLTableCellElement, $event: Event): void {
         if ($event.target === tableCellElement && isTreeRowFirstCell(colIdx, this.row, $event)) {
             $event.preventDefault();
@@ -366,5 +383,31 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             this.index,
             event.shiftKey ? 'group' : 'shift'
         );
+    }
+
+    /** @hidden */
+    private _enableEmptyCellForScreenReader(
+        row: TableRow<T>,
+        column: TableColumn,
+        tableTextContainer: HTMLElement
+    ): void {
+        if (row.state !== 'readonly') {
+            return;
+        }
+
+        let value: string;
+        const isCellEmptyInNonColumnTemplate =
+            !column.columnCellTemplate &&
+            (!(value = get(row.value, column.key)) || (typeof value === 'string' && value.trim() === ''));
+
+        // Content comes from application template. Some element, like input field, value is not part of text node.
+        const isCellEmptyInColumnTemplate =
+            column.columnCellTemplate &&
+            tableTextContainer?.innerText?.trim() === '' &&
+            tableTextContainer?.querySelectorAll('input')?.length === 0;
+
+        if (isCellEmptyInColumnTemplate || isCellEmptyInNonColumnTemplate) {
+            this._enableEmptyCellScreenReader = true;
+        }
     }
 }
