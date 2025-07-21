@@ -157,8 +157,8 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
         }
 
-        srElement.setAttribute('role', this._bodyRole);
+        srElement.setAttribute('role', 'tooltip');
         const parent = this._elementRef.nativeElement.parentNode;
-        this._renderer.appendChild(parent, srElement);
+        this._renderer.appendChild(parent ? parent : this._elementRef.nativeElement, srElement);
     }
 }
