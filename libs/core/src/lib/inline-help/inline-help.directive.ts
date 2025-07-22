@@ -105,6 +105,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
     ) {
         super();
+        this._describedBy = `fd-inline-help-${inlineHelpId++}`;
     }
 
     /** @hidden */
@@ -118,7 +119,6 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** @hidden */
     ngOnInit(): void {
         this._bodyRole = 'tooltip';
-        this._describedBy = `fd-inline-help-${inlineHelpId++}`;
         this._elementRef.nativeElement.setAttribute('aria-describedby', this._describedBy);
         this._bodyId = this._describedBy;
         this._applyAdditionalInlineHelpClass();
@@ -158,6 +158,8 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         }
 
         srElement.setAttribute('role', 'tooltip');
+        srElement.setAttribute('id', this._describedBy);
+
         const parent = this._elementRef.nativeElement.parentNode;
         this._renderer.appendChild(parent ? parent : this._elementRef.nativeElement, srElement);
     }
