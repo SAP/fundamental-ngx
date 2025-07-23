@@ -9,7 +9,7 @@
     [overflowOffset]="_offsetOverflowDirective"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    @if (_showLeftBtn) {
+    @if (_showLeftBtn && _prevSteps.length) {
         <li
             role="presentation"
             class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow fd-icon-tab-bar__item--overflow-left"
@@ -90,7 +90,7 @@
             }
         </li>
     }
-    @if (_showRightBtn) {
+    @if (_showRightBtn && _nextSteps.length) {
         <li role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
             <fdp-icon-tab-bar-popover
                 [isRtl]="isRtl"
