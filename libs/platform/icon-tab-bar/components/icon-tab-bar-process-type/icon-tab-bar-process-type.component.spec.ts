@@ -75,7 +75,9 @@ describe('IconTabBarProcessTypeComponent', () => {
             component._recalculateVisibleItems(0);
             fixture.detectChanges();
 
-            const popoverElement = fixture.nativeElement.querySelector('.fd-icon-tab-bar__item--overflow-right fdp-icon-tab-bar-popover');
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-right fdp-icon-tab-bar-popover'
+            );
 
             expect(component._prevSteps.length).toBe(0);
             expect(component._nextSteps.length).toBe(0);
@@ -86,7 +88,9 @@ describe('IconTabBarProcessTypeComponent', () => {
             component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
             fixture.detectChanges();
 
-            const popoverElement = fixture.nativeElement.querySelector('.fd-icon-tab-bar__item--overflow-right fdp-icon-tab-bar-popover');
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-right fdp-icon-tab-bar-popover'
+            );
 
             expect(component._prevSteps.length).toBeGreaterThan(0);
             expect(component._nextSteps.length).toBeGreaterThan(0);
@@ -103,7 +107,9 @@ describe('IconTabBarProcessTypeComponent', () => {
             component._recalculateVisibleItems(0);
             fixture.detectChanges();
 
-            const popoverElement = fixture.nativeElement.querySelector('.fd-icon-tab-bar__item--overflow-left fdp-icon-tab-bar-popover');
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-left fdp-icon-tab-bar-popover'
+            );
 
             expect(component._prevSteps.length).toBe(0);
             expect(component._nextSteps.length).toBe(0);
@@ -114,7 +120,9 @@ describe('IconTabBarProcessTypeComponent', () => {
             component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
             fixture.detectChanges();
 
-            const popoverElement = fixture.nativeElement.querySelector('.fd-icon-tab-bar__item--overflow-left fdp-icon-tab-bar-popover');
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-left fdp-icon-tab-bar-popover'
+            );
 
             expect(component._prevSteps.length).toBeGreaterThan(0);
             expect(component._nextSteps.length).toBeGreaterThan(0);
