@@ -91,7 +91,10 @@
         </li>
     }
     @if (_showRightBtn && _nextSteps.length) {
-        <li role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
+        <li
+            role="presentation"
+            class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow fd-icon-tab-bar__item--overflow-right"
+        >
             <fdp-icon-tab-bar-popover
                 [isRtl]="isRtl"
                 [extraTabs]="_nextSteps"
