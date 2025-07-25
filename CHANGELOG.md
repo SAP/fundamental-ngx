@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.2...v0.57.2-rc.3) (2025-07-25)
+
+
+### Bug Fixes
+
+* **platform:** show overflow popover on process type tab bar only when there are extra items ([#13398](https://github.com/SAP/fundamental-ngx/issues/13398)) ([120c088](https://github.com/SAP/fundamental-ngx/commit/120c08822b69263e8d3eb10e47c4cf080e1117ab))
+
+
+
+
+
 ## [0.57.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.1...v0.57.2-rc.2) (2025-07-16)
 
 
