@@ -1,15 +1,15 @@
 /**
 * Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 16.0.3
-* data:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "16.0.3"}, "Version": { "Build": "11.30.1.20250522091941", "Source": "11.30.1"}}
+* Theming Engine 16.0.13
+* data:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "16.0.3"}, "Version": { "Build": "11.30.1.20250522091941", "Source": "11.30.1"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "16.0.3"}, "Version": { "Build": "11.30.1.20250522091941", "Source": "11.30.1"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}};}
 
 /**
-* Base.baseLib.baseTheme.base (Version 11.30.1)
+* Base.baseLib.baseTheme.base (Version 11.31.1)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -239,7 +239,7 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.skeleton (Version 11.30.1)
+* Base.baseLib.baseTheme.skeleton (Version 11.31.1)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -358,7 +358,7 @@
   --sapContent_Selected_Hover_Background: #e3f0ff;
   --sapContent_Selected_ForegroundColor: #0064d9;
   --sapContent_ForcedColorAdjust: none;
-  --sapContent_Lite_Shadow: None;
+  --sapContent_Lite_Shadow: none;
   --sapContent_Illustrative_Color1: #9b015d;
   --sapContent_Illustrative_Color2: #56bdff;
   --sapContent_Illustrative_Color3: #ff7f4c;
@@ -441,7 +441,7 @@
   --sapShell_BackgroundImage: linear-gradient(to bottom, #eff1f2, #eff1f2);
   --sapShell_BackgroundImageOpacity: 1.0;
   --sapShell_BackgroundImageRepeat: false;
-  --sapShell_BorderColor: #fff;
+  --sapShell_BorderColor: #d9d9d9;
   --sapShell_TextColor: #131e29;
   --sapShell_InteractiveBackground: #eff1f2;
   --sapShell_InteractiveTextColor: #131e29;
@@ -1261,10 +1261,10 @@
   --sapChart_Critical: #e26300;
   --sapChart_Good: #30914c;
   --sapChart_Neutral: #758ca4;
-  --sapChart_Sequence_1_Plus3: #96ccff;
+  --sapChart_Sequence_1_Plus3: #8bc7ff;
   --sapChart_Sequence_1_Plus3_TextColor: #000;
   --sapChart_Sequence_1_Plus3_TextShadow: 0 0 .125rem #fff;
-  --sapChart_Sequence_1_Plus2: #3b9ffe;
+  --sapChart_Sequence_1_Plus2: #62b3ff;
   --sapChart_Sequence_1_Plus2_TextColor: #000;
   --sapChart_Sequence_1_Plus2_TextShadow: 0 0 .125rem #fff;
   --sapChart_Sequence_1_Plus1: #3fa2ff;
@@ -1273,20 +1273,20 @@
   --sapChart_Sequence_1: #168eff;
   --sapChart_Sequence_1_TextColor: #000;
   --sapChart_Sequence_1_TextShadow: 0 0 .125rem #fff;
-  --sapChart_Sequence_1_BorderColor: #168eff;
-  --sapChart_Sequence_1_Minus1: #077cea;
+  --sapChart_Sequence_1_BorderColor: #0074e2;
+  --sapChart_Sequence_1_Minus1: #0074e2;
   --sapChart_Sequence_1_Minus1_TextColor: #fff;
   --sapChart_Sequence_1_Minus1_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus2: #077cea;
+  --sapChart_Sequence_1_Minus2: #0065c3;
   --sapChart_Sequence_1_Minus2_TextColor: #fff;
   --sapChart_Sequence_1_Minus2_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus3: #06559e;
+  --sapChart_Sequence_1_Minus3: #0055a5;
   --sapChart_Sequence_1_Minus3_TextColor: #fff;
   --sapChart_Sequence_1_Minus3_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus4: #054887;
+  --sapChart_Sequence_1_Minus4: #003b72;
   --sapChart_Sequence_1_Minus4_TextColor: #fff;
   --sapChart_Sequence_1_Minus4_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus5: #043b6e;
+  --sapChart_Sequence_1_Minus5: #00305d;
   --sapChart_Sequence_1_Minus5_TextColor: #fff;
   --sapChart_Sequence_1_Minus5_TextShadow: 0 0 .125rem #223548;
   --sapChart_Sequence_2_Plus3: #efbf72;
@@ -1311,7 +1311,7 @@
   --sapChart_Sequence_2_Minus3: #623c00;
   --sapChart_Sequence_2_Minus3_TextColor: #fff;
   --sapChart_Sequence_2_Minus3_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_2_Minus4: #623c00;
+  --sapChart_Sequence_2_Minus4: #492d00;
   --sapChart_Sequence_2_Minus4_TextColor: #fff;
   --sapChart_Sequence_2_Minus4_TextShadow: 0 0 .125rem #223548;
   --sapChart_Sequence_2_Minus5: #2f1d00;
@@ -1566,7 +1566,7 @@
   --sapChart_Sequence_11_Minus4: #250f83;
   --sapChart_Sequence_11_Minus4_TextColor: #fff;
   --sapChart_Sequence_11_Minus4_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_11_Minus5: #2f13a8;
+  --sapChart_Sequence_11_Minus5: #180955;
   --sapChart_Sequence_11_Minus5_TextColor: #fff;
   --sapChart_Sequence_11_Minus5_TextShadow: 0 0 .125rem #223548;
   --sapChart_Sequence_12_Plus3: #e4ddcf;
@@ -1784,16 +1784,16 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.css_variables (Version 11.30.1)
+* Base.baseLib.baseTheme.css_variables (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_horizon.base (Version 11.30.1)
+* Base.baseLib.sap_horizon.base (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_horizon.css_variables (Version 11.30.1)
+* Base.baseLib.sap_horizon.css_variables (Version 11.31.1)
 */
 

@@ -6835,6 +6835,18 @@
     ],
     "rtl": "flip"
   },
+  "0xe2aa": {
+    "names": ["smart-watch"],
+    "groups": ["devices", "time"],
+    "tags": ["smart watch", "time", "device", "watch", "clock"],
+    "rtl": "none"
+  },
+    "0xe2ab": {
+    "names": ["vr-glasses"],
+    "groups": ["devices"],
+    "tags": ["virtual", "vr", "glasses", "device"],
+    "rtl": "none"
+  },
   "0xe300": {
     "names": ["gender-male-and-female"],
     "groups": ["people"],

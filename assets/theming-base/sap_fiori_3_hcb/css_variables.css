@@ -1,15 +1,15 @@
 /**
 * Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 16.0.3
-* data:{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_belize_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.3"}, "Version": { "Build": "11.30.1.20250522091941", "Source": "11.30.1"}}
+* Theming Engine 16.0.13
+* data:{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_belize_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_belize_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.3"}, "Version": { "Build": "11.30.1.20250522091941", "Source": "11.30.1"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_belize_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.3"}, "Version": { "Build": "11.30.1.20250522091941", "Source": "11.30.1"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_belize_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_belize_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}};}
 
 /**
-* Base.baseLib.baseTheme.base (Version 11.30.1)
+* Base.baseLib.baseTheme.base (Version 11.31.1)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -239,7 +239,7 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.skeleton (Version 11.30.1)
+* Base.baseLib.baseTheme.skeleton (Version 11.31.1)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -1784,36 +1784,36 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.css_variables (Version 11.30.1)
+* Base.baseLib.baseTheme.css_variables (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.base (Version 11.30.1)
+* Base.baseLib.sap_base_fiori.base (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.css_variables (Version 11.30.1)
+* Base.baseLib.sap_base_fiori.css_variables (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3.base (Version 11.30.1)
+* Base.baseLib.sap_fiori_3.base (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3.css_variables (Version 11.30.1)
+* Base.baseLib.sap_fiori_3.css_variables (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3_hcb.base (Version 11.30.1)
+* Base.baseLib.sap_fiori_3_hcb.base (Version 11.31.1)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3_hcb.css_variables (Version 11.30.1)
+* Base.baseLib.sap_fiori_3_hcb.css_variables (Version 11.31.1)
 */
 
