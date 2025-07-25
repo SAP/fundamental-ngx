@@ -21,7 +21,7 @@
                 class="fd-icon-tab-bar__tab"
                 #tabItem
                 role="tab"
-                [attr.tabindex]="idx === 0 ? 0 : -1"
+                [attr.tabindex]="item.uId === selectedUid ? 0 : -1"
                 [attr.aria-selected]="item.uId === selectedUid"
                 (click)="_selectItem(item)"
                 (keydown)="_keyDownHandler($event, item, idx)"

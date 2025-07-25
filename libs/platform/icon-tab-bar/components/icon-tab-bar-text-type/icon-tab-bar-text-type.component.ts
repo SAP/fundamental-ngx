@@ -132,6 +132,15 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         this.reordered.emit(this.tabs);
     }
 
+    /**
+     * @hidden
+     * @param uid
+     * @description Get item id from sub item uid. Eg if sub item id is '6.2', then item id will be '6'. Defaults to '0'.
+     */
+    _getItemIdFromSubItemUid(uid: string | undefined): string {
+        return uid?.split(UNIQUE_KEY_SEPARATOR)[0] || '0';
+    }
+
     /** @hidden */
     protected _getTabUIElementFocusable(tabUIElement: Nullable<TabItem>): Nullable<HTMLElement> {
         if (!tabUIElement) {

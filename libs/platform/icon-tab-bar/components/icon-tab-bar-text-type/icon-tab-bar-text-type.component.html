@@ -31,7 +31,7 @@
                         [item]="item"
                         [layoutMode]="layoutMode"
                         [colorAssociations]="colorAssociations()"
-                        [attr.tabindex]="idx === 0 ? 0 : -1"
+                        [attr.tabindex]="item.uId === selectedUid ? 0 : -1"
                         [attr.aria-selected]="item.uId === selectedUid"
                         (click)="_selectItem(item, $event)"
                         (keydown)="_keyDownHandler($event, item, idx)"
@@ -43,7 +43,7 @@
                     <fdp-text-type-popover
                         #tabItem
                         #itemPopover
-                        [tabindex]="idx === 0 ? 0 : -1"
+                        [tabindex]="item.uId === _getItemIdFromSubItemUid(selectedUid) ? 0 : -1"
                         [parentTab]="item"
                         [layoutMode]="layoutMode"
                         [multiClick]="multiClick"
