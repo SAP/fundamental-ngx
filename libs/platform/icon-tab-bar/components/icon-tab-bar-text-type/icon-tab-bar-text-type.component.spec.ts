@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
 import { _generateTabBarItems, generateTestConfig } from '../../tests-helper';
 import { IconTabBarTextTypeComponent } from './icon-tab-bar-text-type.component';
@@ -18,7 +19,7 @@ describe('IconTabBarTextTypeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(IconTabBarTextTypeComponent);
         component = fixture.componentInstance;
-        component.tabs = _generateTabBarItems(generateTestConfig(10));
+        component.tabs = _generateTabBarItems(generateTestConfig(10, true)); // generate 10 tabs, the 6th of them with subitems
         fixture.detectChanges();
     });
 
@@ -72,5 +73,39 @@ describe('IconTabBarTextTypeComponent', () => {
 
         expect(component._extraTabs$().length).toBe(extraTabs);
         expect(visibleTabsLength).toBe(tabsLength - extraTabs);
+    });
+
+    describe('for items without subitems', () => {
+        it('should set tabindex=0 to the selected tab', () => {
+            const selectedTab = 2; // a tab without subitems
+
+            component.selectedUid = component.tabs[selectedTab].uId;
+            fixture.detectChanges();
+
+            const iconTabBarElements = fixture.debugElement.queryAll(By.css('[fdp-icon-tab-bar-text-type-tab-item]'));
+            iconTabBarElements.forEach((tabElement, index) => {
+                if (index === selectedTab) {
+                    expect(tabElement.nativeElement.getAttribute('tabindex')).toBe('0');
+                } else {
+                    expect(tabElement.nativeElement.getAttribute('tabindex')).toBe('-1');
+                }
+            });
+            const popoverTabBarElement = fixture.debugElement.query(By.css('fdp-text-type-popover'));
+            expect(popoverTabBarElement.componentInstance.tabindex).toBe(-1);
+        });
+    });
+
+    describe('for items with subitems', () => {
+        it('should set tabindex=0 to the selected tab', () => {
+            component.selectedUid = component.tabs[5].subItems![0].uId; // an id of a tab with subitems
+            fixture.detectChanges();
+
+            const iconTabBarElements = fixture.debugElement.queryAll(By.css('[fdp-icon-tab-bar-text-type-tab-item]'));
+            iconTabBarElements.forEach((tabElement) => {
+                expect(tabElement.nativeElement.getAttribute('tabindex')).toBe('-1');
+            });
+            const popoverTabBarElement = fixture.debugElement.query(By.css('fdp-text-type-popover'));
+            expect(popoverTabBarElement.componentInstance.tabindex).toBe(0);
+        });
     });
 });
