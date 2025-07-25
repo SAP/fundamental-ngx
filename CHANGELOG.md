@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.4...v0.57.2-rc.5) (2025-07-25)
+
+
+### Bug Fixes
+
+* **platform:** cache user selection and fix cancel functionality ([#13390](https://github.com/SAP/fundamental-ngx/issues/13390)) ([c25b9a0](https://github.com/SAP/fundamental-ngx/commit/c25b9a01eb3f80a07e28e79f8ad660f7fc749468))
+
+
+
+
+
 ## [0.57.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.3...v0.57.2-rc.4) (2025-07-25)
 
 **Note:** Version bump only for package fundamental-ngx
