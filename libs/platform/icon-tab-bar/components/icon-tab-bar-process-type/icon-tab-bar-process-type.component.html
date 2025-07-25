@@ -37,7 +37,7 @@
                 [attr.aria-selected]="item.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
                 #tabItem
-                [attr.tabindex]="idx === 0 ? 0 : -1"
+                [attr.tabindex]="item.uId === selectedUid ? 0 : -1"
                 role="tab"
                 [attr.aria-level]="tabHeadingLevel()"
             >
