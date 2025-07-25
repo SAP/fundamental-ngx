@@ -697,5 +697,7 @@ export const Icons = [
     'in-progress-2',
     'unsynchronize',
     'verified',
-    'walk-me'
+    'walk-me',
+    'smart-watch',
+    'vr-glasses'
 ];
