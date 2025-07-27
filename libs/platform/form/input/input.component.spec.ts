@@ -72,7 +72,7 @@ describe('InputComponent Unit Tests', () => {
         component.type = 'invalid' as any;
         expect(() => {
             component.ngOnInit(); // This line checks the init process and validates the input type
-        }).toThrowError('Input type invalid is not supported');
+        }).toThrow('Input type invalid is not supported');
     });
 
     it('should accept various input values', () => {

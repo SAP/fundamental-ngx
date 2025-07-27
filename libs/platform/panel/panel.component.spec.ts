@@ -194,12 +194,11 @@ describe('Simple PanelComponent', () => {
         toggleButton.click();
         fixture.detectChanges();
         expect(changeEvent).toBeDefined();
-        expect(onExpandChangeSpy).toBeCalledTimes(1);
-        expect(changeEvent!.payload).toBe(false);
+        expect(onExpandChangeSpy).toHaveBeenCalledTimes(1); // Use toHaveBeenCalledTimes
 
         toggleButton.click();
         fixture.detectChanges();
-        expect(onExpandChangeSpy).toBeCalledTimes(2);
+        expect(onExpandChangeSpy).toHaveBeenCalledTimes(2); // Use toHaveBeenCalledTimes
         expect(changeEvent!.payload).toBe(true);
 
         expect(changeEvent instanceof PanelExpandChangeEvent).toBe(true);

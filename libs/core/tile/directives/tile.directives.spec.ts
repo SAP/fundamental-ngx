@@ -93,13 +93,13 @@ describe('TileDirectives', () => {
         expect(component.profileImg.nativeElement.className).toContain('fd-tile__profile-img');
         expect(component.profileImg.nativeElement.id).toContain('fd-profileTile-');
         expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url(https://picsum.photos/60/60)'
+            'url("https://picsum.photos/60/60")'
         );
         expect(component.container.nativeElement.className).toContain('fd-tile-container');
         expect(component.container.nativeElement.className).toContain('fd-tile-container--list');
         expect(component.backgroundImg.nativeElement.className).toContain('fd-tile__background-img');
         expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url(https://picsum.photos/60/60)'
+            'url("https://picsum.photos/60/60")'
         );
         component.actionClose.buildComponentCssClass();
         expect(component.actionClose.elementRef.nativeElement.className).toContain('fd-tile__action-close');
