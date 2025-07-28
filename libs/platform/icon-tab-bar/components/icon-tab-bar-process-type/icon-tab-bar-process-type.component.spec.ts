@@ -79,6 +79,70 @@ describe('IconTabBarProcessTypeComponent', () => {
             }
         });
     });
+
+    describe('displaying an overflow popover to the right', () => {
+        beforeEach(() => {
+            component.isRtl = false; // Ensure LTR mode
+        });
+
+        it('should not display an overflow popover if there are no extra items', () => {
+            component._recalculateVisibleItems(0);
+            fixture.detectChanges();
+
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-right fdp-icon-tab-bar-popover'
+            );
+
+            expect(component._prevSteps.length).toBe(0);
+            expect(component._nextSteps.length).toBe(0);
+            expect(popoverElement).toBeNull();
+        });
+
+        it('should display an overflow popover if there are extra items', () => {
+            component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
+            fixture.detectChanges();
+
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-right fdp-icon-tab-bar-popover'
+            );
+
+            expect(component._prevSteps.length).toBeGreaterThan(0);
+            expect(component._nextSteps.length).toBeGreaterThan(0);
+            expect(popoverElement).toBeTruthy();
+        });
+    });
+
+    describe('displaying an overflow popover to the left', () => {
+        beforeEach(() => {
+            component.isRtl = true; // Ensure RTL mode
+        });
+
+        it('should not display an overflow popover if there are no extra items', () => {
+            component._recalculateVisibleItems(0);
+            fixture.detectChanges();
+
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-left fdp-icon-tab-bar-popover'
+            );
+
+            expect(component._prevSteps.length).toBe(0);
+            expect(component._nextSteps.length).toBe(0);
+            expect(popoverElement).toBeNull();
+        });
+
+        it('should display an overflow popover if there are extra items', () => {
+            component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
+            fixture.detectChanges();
+
+            const popoverElement = fixture.nativeElement.querySelector(
+                '.fd-icon-tab-bar__item--overflow-left fdp-icon-tab-bar-popover'
+            );
+
+            expect(component._prevSteps.length).toBeGreaterThan(0);
+            expect(component._nextSteps.length).toBeGreaterThan(0);
+            expect(popoverElement).toBeTruthy();
+        });
+    });
 });
 
 const fakeOverflowDirective = {

@@ -706,6 +706,8 @@ export class IconExampleComponent {
         'in-progress-2',
         'unsynchronize',
         'verified',
-        'walk-me'
+        'walk-me',
+        'smart-watch',
+        'vr-glasses'
     ];
 }
