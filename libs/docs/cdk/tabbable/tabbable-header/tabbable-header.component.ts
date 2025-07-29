@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -13,4 +13,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
-export class TabbableHeaderComponent {}
+export class TabbableHeaderComponent {
+    falseSignal = signal(false);
+}

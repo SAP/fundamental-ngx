@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
     DescriptionComponent,
@@ -12,5 +12,7 @@ import {
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })
 export class BreakpointHeaderComponent {
+    falseSignal = signal(false);
+
     constructor() {}
 }
