@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.2...v0.57.3-rc.0) (2025-07-29)
+
+
+### Bug Fixes
+
+* **core,platform:** remove aria-haspopup attribute from button ([#13405](https://github.com/SAP/fundamental-ngx/issues/13405)) ([92c6fb6](https://github.com/SAP/fundamental-ngx/commit/92c6fb6d4bb135f041752c6446e7813c6f24db7e))
+
+
+
+
+
 ## [0.57.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.5...v0.57.2) (2025-07-25)
 
 **Note:** Version bump only for package fundamental-ngx
