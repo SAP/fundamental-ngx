@@ -8,7 +8,7 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
         <h1 class="header">
             <ng-content></ng-content>
         </h1>
-        @if (isDeprecated()) {
+        <!-- @if (isDeprecated()) {
             <fd-message-strip type="warning" [dismissible]="false">
                 The component has been deprecated since version 0.57 (August 2025) and enters Long-Term Support (LTS)
                 until end of 2027, with critical fixes, UX enhancements and accessibility improvements. Deleting is
@@ -16,7 +16,7 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
                 <a class="fd-link" href="https://ui5-webcomponents-ngx.netlify.app/">UI5 Web Components for Angular</a>
                 is recommended.
             </fd-message-strip>
-        }
+        } -->
     `,
     styles: [
         `
