@@ -36,7 +36,12 @@ function getImport(file: StackblitzFileObject): string {
 @Injectable()
 export class StackblitzService {
     main: string;
-    styles: string;
+    styles = `
+@use '@angular/cdk/overlay-prebuilt' as *;
+
+body {
+    font-family: '72', sans-serif;
+}`;
     tsconfig: string;
     angular: string;
     packageJson: string;
@@ -56,7 +61,6 @@ export class StackblitzService {
 
     constructor() {
         zip(
-            getAsset('./stackblitz/example-stack/styles.scss'),
             getAsset('./stackblitz/example-stack/tsconfig.json'),
             getAsset('./stackblitz/example-stack/angular.json'),
             getAsset('./stackblitz/example-stack/package.json'),
@@ -64,8 +68,7 @@ export class StackblitzService {
         )
             .pipe(
                 first(),
-                tap(([styles, tsconfig, angular, packageJson, stackblitzrc]) => {
-                    this.styles = styles;
+                tap(([tsconfig, angular, packageJson, stackblitzrc]) => {
                     this.tsconfig = tsconfig;
                     this.angular = angular;
                     this.packageJson = this._setDependencies(packageJson);

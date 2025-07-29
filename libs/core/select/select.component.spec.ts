@@ -508,7 +508,7 @@ describe('SelectComponent', () => {
             it('should throw an error when using a non-function comparator', fakeAsync(() => {
                 instance.useNullComparator();
 
-                expect(() => fixtureCompare.detectChanges()).toThrowError();
+                expect(() => fixtureCompare.detectChanges()).toThrow();
             }));
         });
     });
