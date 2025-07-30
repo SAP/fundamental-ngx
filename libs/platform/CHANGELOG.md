@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.3...v0.57.3-rc.4) (2025-07-30)
+
+
+### Bug Fixes
+
+* **platform:** focus moves to unselected tab in Icon Tab Bar ([#13401](https://github.com/SAP/fundamental-ngx/issues/13401)) ([b3cc37d](https://github.com/SAP/fundamental-ngx/commit/b3cc37dd92016b3ee0add7553a76d3c3b9c5aadb))
+
+
+
+
+
 ## [0.57.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.2...v0.57.3-rc.3) (2025-07-29)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
