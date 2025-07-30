@@ -15,7 +15,7 @@
                 (keydown)="_keyDownHandler($event, _totalTab, 0)"
                 [attr.aria-selected]="_totalTab?.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
-                tabindex="0"
+                [tabindex]="selectedUid === '0' ? 0 : -1"
                 #tabItem
                 role="tab"
                 [attr.aria-level]="tabHeadingLevel()"
@@ -42,7 +42,7 @@
                 [attr.aria-selected]="item.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
                 #tabItem
-                [attr.tabindex]="showTotalTab ? -1 : idx > 0 ? -1 : 0"
+                [attr.tabindex]="item.uId === selectedUid ? 0 : -1"
                 (keydown)="_keyDownHandler($event, item, idx + (showTotalTab ? 1 : 0))"
                 role="tab"
                 [attr.aria-level]="tabHeadingLevel()"
