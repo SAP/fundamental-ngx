@@ -429,17 +429,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/cdk@npm:20.1.0":
-  version: 20.1.0
-  resolution: "@angular/cdk@npm:20.1.0"
+"@angular/cdk@npm:20.1.3":
+  version: 20.1.3
+  resolution: "@angular/cdk@npm:20.1.3"
   dependencies:
-    parse5: "npm:^7.1.2"
+    parse5: "npm:^8.0.0"
     tslib: "npm:^2.3.0"
   peerDependencies:
     "@angular/common": ^20.0.0 || ^21.0.0
     "@angular/core": ^20.0.0 || ^21.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10/c097901b009547f94be5a02219be4ec455cd450b7adb577bdc0650c948deb1c98f4792e89522ee3cf682cb81c7d7fb092e209cd95efc5e9212d7a219a8fc5bd8
+  checksum: 10/6b5a5f346705addcc336c225472c4f27854a4c13e871531f26ce04441c363c7c9aa384ebe16106bd0f0af5f3757e010ab81695ccc1dcfaa3eeced4b1b252b13a
   languageName: node
   linkType: hard
 
@@ -7306,9 +7306,9 @@ __metadata:
   linkType: hard
 
 "@types/d3-dispatch@npm:*":
-  version: 3.0.6
-  resolution: "@types/d3-dispatch@npm:3.0.6"
-  checksum: 10/f82076c7d205885480d363c92c19b8e0d6b9e529a3a78ce772f96a7cc4cce01f7941141f148828337035fac9676b13e7440565530491d560fdf12e562cb56573
+  version: 3.0.7
+  resolution: "@types/d3-dispatch@npm:3.0.7"
+  checksum: 10/ce7ab5a7d5c64aacf563797c0c61f3862b9ff687cb35470fe462219f09e402185646f51707339beede616586d92ded6974c3958dbeb15e35a85b1ecfafdf13a8
   languageName: node
   linkType: hard
 
@@ -9947,8 +9947,8 @@ __metadata:
   linkType: hard
 
 "babel-preset-current-node-syntax@npm:^1.1.0":
-  version: 1.1.1
-  resolution: "babel-preset-current-node-syntax@npm:1.1.1"
+  version: 1.2.0
+  resolution: "babel-preset-current-node-syntax@npm:1.2.0"
   dependencies:
     "@babel/plugin-syntax-async-generators": "npm:^7.8.4"
     "@babel/plugin-syntax-bigint": "npm:^7.8.3"
@@ -9967,7 +9967,7 @@ __metadata:
     "@babel/plugin-syntax-top-level-await": "npm:^7.14.5"
   peerDependencies:
     "@babel/core": ^7.0.0 || ^8.0.0-0
-  checksum: 10/4f8a4ee7e8d2f3848a9c67c3d30432be72c0baae7360c43f5f5511edbb745b3fcdec08aa874af53a39f2ffcac822a39473aed06091f044cf58ed9a358b5972b2
+  checksum: 10/3608fa671cfa46364ea6ec704b8fcdd7514b7b70e6ec09b1199e13ae73ed346c51d5ce2cb6d4d5b295f6a3f2cad1fdeec2308aa9e037002dd7c929194cc838ea
   languageName: node
   linkType: hard
 
@@ -13627,7 +13627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^4.2.0":
+"entities@npm:^4.2.0, entities@npm:^4.4.0":
   version: 4.5.0
   resolution: "entities@npm:4.5.0"
   checksum: 10/ede2a35c9bce1aeccd055a1b445d41c75a14a2bb1cd22e242f20cf04d236cdcd7f9c859eb83f76885327bfae0c25bf03303665ee1ce3d47c5927b98b0e3e3d48
@@ -15286,7 +15286,7 @@ __metadata:
     "@angular-eslint/eslint-plugin-template": "npm:20.0.0"
     "@angular-eslint/template-parser": "npm:20.0.0"
     "@angular/animations": "npm:20.1.3"
-    "@angular/cdk": "npm:20.1.0"
+    "@angular/cdk": "npm:20.1.3"
     "@angular/cli": "npm:~20.0.0"
     "@angular/common": "npm:20.1.3"
     "@angular/compiler": "npm:20.1.3"
@@ -19765,14 +19765,14 @@ __metadata:
   linkType: hard
 
 "memfs@npm:^4.14.0, memfs@npm:^4.6.0":
-  version: 4.23.0
-  resolution: "memfs@npm:4.23.0"
+  version: 4.24.0
+  resolution: "memfs@npm:4.24.0"
   dependencies:
     "@jsonjoy.com/json-pack": "npm:^1.0.3"
     "@jsonjoy.com/util": "npm:^1.3.0"
     tree-dump: "npm:^1.0.1"
     tslib: "npm:^2.0.0"
-  checksum: 10/40a0edd2ae2b5ccd49b026206ae656e7a50668e235d09e395f06c4bd83e80d6b9e3f666766248901f0b41300a65eb341638e9d2a127bed6b4035c2febbfcc355
+  checksum: 10/76ef811b89376b9114dd9896bcae59c3ebbacb86fd190fc93469847a24bb56a52b90427b97443bcfa36c8360c2884d407f6cbe7671dafbf0b092fe1a903a60c6
   languageName: node
   linkType: hard
 
@@ -20693,8 +20693,8 @@ __metadata:
   linkType: hard
 
 "node-gyp@npm:^11.0.0, node-gyp@npm:latest":
-  version: 11.2.0
-  resolution: "node-gyp@npm:11.2.0"
+  version: 11.3.0
+  resolution: "node-gyp@npm:11.3.0"
   dependencies:
     env-paths: "npm:^2.2.0"
     exponential-backoff: "npm:^3.1.1"
@@ -20708,7 +20708,7 @@ __metadata:
     which: "npm:^5.0.0"
   bin:
     node-gyp: bin/node-gyp.js
-  checksum: 10/806fd8e3adc9157e17bf0d4a2c899cf6b98a0bbe9f453f630094ce791866271f6cddcaf2133e6513715d934fcba2014d287c7053d5d7934937b3a34d5a3d84ad
+  checksum: 10/e7fb17ba72172d743ee791ea470cba1a579d1c37bcaa67a45d221d07df055baf1367d0684b3c7ee2b9b61f260cea77b2016aaac47027dbc0f43030c90b21527d
   languageName: node
   linkType: hard
 
@@ -21783,19 +21783,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5@npm:4.0.0":
-  version: 4.0.0
-  resolution: "parse5@npm:4.0.0"
-  checksum: 10/ba851b10a328e21b437f7c685ef52e078cc75e7bfbff7449c4ff5e0734343ebd65e5f3e338830d9b970862eca94e92a4e55e36cefb934e1e027e3d17138d1db4
-  languageName: node
-  linkType: hard
-
-"parse5@npm:^7.0.0, parse5@npm:^7.1.2, parse5@npm:^7.2.1":
-  version: 7.3.0
-  resolution: "parse5@npm:7.3.0"
+"parse5@npm:7.1.2":
+  version: 7.1.2
+  resolution: "parse5@npm:7.1.2"
   dependencies:
-    entities: "npm:^6.0.0"
-  checksum: 10/b0e48be20b820c655b138b86fa6fb3a790de6c891aa2aba536524f8027b4dca4fe538f11a0e5cf2f6f847d120dbb9e4822dcaeb933ff1e10850a2ef0154d1d88
+    entities: "npm:^4.4.0"
+  checksum: 10/3c86806bb0fb1e9a999ff3a4c883b1ca243d99f45a619a0898dbf021a95a0189ed955c31b07fe49d342b54e814f33f2c9d7489198e8630dacd5477d413ec5782
   languageName: node
   linkType: hard
 
