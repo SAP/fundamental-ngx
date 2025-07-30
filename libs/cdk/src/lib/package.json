@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/cdk",
-  "version": "0.43.55",
+  "version": "0.43.57",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - CDK",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
     "url": "https://github.com/SAP/fundamental-ngx"
   },
   "engine": {
-    "node": ">= 10"
+    "node": ">= 18"
   },
   "peerDependencies": {
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",

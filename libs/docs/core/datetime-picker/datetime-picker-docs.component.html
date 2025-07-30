@@ -90,7 +90,10 @@
         <code>DatetimeAdapter</code> and the remaining pieces of the component (such as OK/Cancel buttons, "Hrs/Min/Sec"
         labels) will need to be translated via the <code>fundamental-ngx/i18n</code> module. This is because the
         <code>CalendarComponent</code> utilizes different localization strategies than the other components of the
-        library. Note the <code>TypeScript</code> example code below to see how this is done.
+        library. Note the <code>TypeScript</code> example code below to see how this is done. Also, due to the
+        limitations of <code>FdDatetimeAdapter</code> which is built upon the JavaScript native <code>Date</code>, it is
+        advised to use the <code>Day.js</code> adapter for parsing of dates of various locales. See the example below,
+        as well as <a [routerLink]="['/core/dayjs-datetime-adapter']">this page</a> for more information.
     </p>
 </description>
 <component-example>
