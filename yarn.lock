@@ -9664,14 +9664,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.5.2":
-  version: 4.5.2
-  resolution: "axe-core@npm:4.5.2"
-  checksum: 10/90eb1a8acdc98562d2595107682f0854c6716e6d8a542f6769a8f1fccf82ef3ee7a295cee14c6debe54ab18464ab526733fc58e2ac5dbed473116257cf5dbfda
-  languageName: node
-  linkType: hard
-
-"axe-core@npm:^4.3.2":
+"axe-core@npm:4.10.3, axe-core@npm:^4.3.2":
   version: 4.10.3
   resolution: "axe-core@npm:4.10.3"
   checksum: 10/9ff51ad0fd0fdec5c0247ea74e8ace5990b54c7f01f8fa3e5cd8ba98b0db24d8ebd7bab4a9bd4d75c28c4edcd1eac455b44c8c6c258c6a98f3d2f88bc60af4cc
@@ -15276,7 +15269,7 @@ __metadata:
     "@wdio/spec-reporter": "npm:7.7.3"
     angular-eslint: "npm:20.0.0"
     autoprefixer: "npm:^10.4.0"
-    axe-core: "npm:4.5.2"
+    axe-core: "npm:4.10.3"
     axe-html-reporter: "npm:2.2.3"
     axios: "npm:1.6.0"
     chromedriver: "npm:99.0.0"
