@@ -142,6 +142,11 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (changes.tabs && !changes.tabs.firstChange) {
             this._initTabs();
             this._triggerRecalculationVisibleItems();
+
+            if (this._tabWasRemoved(changes)) {
+                this._updateSelectedTab(changes);
+            }
+
             return;
         }
         if (changes.isRtl && !changes.isRtl.firstChange) {
@@ -173,11 +178,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @param selectedItem
      * @param event
      */
-    _selectItem(selectedItem: IconTabBarItem, event?: Event): void {
+    _selectItem(selectedItem: IconTabBarItem | undefined, event?: Event): void {
         event?.stopPropagation();
-        this.selectedUid = selectedItem.uId;
+        this.selectedUid = selectedItem?.uId;
         this.selectedUidChange.emit(this.selectedUid);
-        selectedItem.badge = false;
+        if (selectedItem) {
+            selectedItem.badge = false;
+        }
         this.selected.emit(selectedItem);
     }
 
@@ -409,5 +416,57 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         }
 
         return activeTab;
+    }
+
+    /**
+     * @hidden
+     * Checks if a tab was removed from the list of tabs.
+     * @param changes - SimpleChanges
+     * @returns { boolean } - Returns true if a tab was removed, false otherwise.
+     */
+    private _tabWasRemoved(changes: SimpleChanges): boolean {
+        return changes.tabs.currentValue.length < changes.tabs.previousValue.length;
+    }
+
+    /**
+     * @hidden
+     * Updates the selected tab based on the changes in the tabs.
+     * If the removed tab was before the selected tab or is the selected tab, it updates the selected tab.
+     * If no previous selected tab can be found, it selects the first one.
+     * If the removed tab is after the selected tab, no changes are needed.
+     * @param changes - SimpleChanges
+     */
+    private _updateSelectedTab(changes: SimpleChanges): void {
+        const selectedIdNumber = Number(this.selectedUid);
+        const removedTabIndex = this._getRemovedTabIndex(changes);
+
+        if (isNaN(selectedIdNumber) || removedTabIndex === -1) {
+            return;
+        }
+
+        // If the removed tab was before the selected tab or was the selected tab, we need to update the selection.
+        if (removedTabIndex <= selectedIdNumber) {
+            const previousSelectedTabId = `${selectedIdNumber - 1}`;
+            // Mark the previous tab as selected. If it cannot be found, select the first one.
+            const selectedItem = this.tabs.find((tab) => tab.uId === previousSelectedTabId) || this.tabs[0];
+            this._selectItem(selectedItem);
+        }
+    }
+
+    /**
+     * @hidden
+     * Gets the index of the removed tab based on the changes in the tabs.
+     * @param changes - SimpleChanges
+     * @returns { number } - The index of the removed tab, or -1 if not found.
+     */
+
+    private _getRemovedTabIndex(changes: SimpleChanges): number {
+        return changes.tabs.previousValue.findIndex((tab: IconTabBarItem) => {
+            const tabStillExists = changes.tabs.currentValue.some(
+                (currentTab: IconTabBarItem) => currentTab.id === tab.id
+            );
+
+            return tabStillExists ? false : true;
+        });
     }
 }
