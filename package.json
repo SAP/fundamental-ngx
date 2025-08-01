@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "@angular-eslint/eslint-plugin-template": "20.0.0",
-        "@angular-eslint/template-parser": "20.0.0",
+        "@angular-eslint/template-parser": "20.1.1",
         "@angular/animations": "20.1.4",
         "@angular/cdk": "20.1.4",
         "@angular/common": "20.1.4",
