@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.7...v0.57.3-rc.8) (2025-08-04)
+
+
+### Bug Fixes
+
+* remove core/utils and refer directly cdk/utils ([#13434](https://github.com/SAP/fundamental-ngx/issues/13434)) ([06e129b](https://github.com/SAP/fundamental-ngx/commit/06e129b403b1b0ffa42429cbb0be9f5539a358ef))
+
+
+
+
+
 ## [0.57.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.6...v0.57.3-rc.7) (2025-07-31)
 
 **Note:** Version bump only for package @fundamental-ngx/core
