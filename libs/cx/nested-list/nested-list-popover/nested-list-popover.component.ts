@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { RtlService } from '@fundamental-ngx/core/utils';
 import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';

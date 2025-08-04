@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, HostListener, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { warnOnce } from '@fundamental-ngx/core/utils';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 
