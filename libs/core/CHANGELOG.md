@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.8...v0.57.3-rc.9) (2025-08-05)
+
+
+### Bug Fixes
+
+* **core:** fix the font-weight of emphasized button ([#13435](https://github.com/SAP/fundamental-ngx/issues/13435)) ([7ff9551](https://github.com/SAP/fundamental-ngx/commit/7ff95515c9d202b05e4f96fc5aba4eb1179dc66d))
+
+
+
+
+
 ## [0.57.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.7...v0.57.3-rc.8) (2025-08-04)
 
 
