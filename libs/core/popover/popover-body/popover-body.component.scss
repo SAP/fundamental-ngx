@@ -141,6 +141,18 @@ fd-popover-body {
     &__resize-handle {
         user-select: none;
     }
+
+    &__body--inline-help-with-icon.#{$block}__body--arrow-top.#{$block}__body--arrow-x-start {
+        left: -0.3125rem;
+
+        @at-root {
+            [dir='rtl'] &,
+            &[dir='rtl'] {
+                left: auto;
+                right: -0.3125rem;
+            }
+        }
+    }
 }
 
 .cdk-overlay {
