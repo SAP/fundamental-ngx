@@ -1,12 +1,14 @@
 import {
     AfterContentInit,
+    booleanAttribute,
     ContentChildren,
     Directive,
+    EventEmitter,
     HostBinding,
     HostListener,
     Input,
-    QueryList,
-    booleanAttribute
+    Output,
+    QueryList
 } from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
@@ -76,6 +78,10 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     @Input()
     key: string;
 
+    /** Event emitted when a cell is focused out. */
+    @Output()
+    readonly cellFocusedOut = new EventEmitter<void>();
+
     /** @hidden */
     @ContentChildren(FD_CHECKBOX_COMPONENT)
     _checkboxes: QueryList<CheckboxComponent>;
@@ -108,6 +114,7 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
         if (this._parentPreviousTabIndex) {
             parentEl?.setAttribute('tabindex', this._parentPreviousTabIndex.toString());
         }
+        this.cellFocusedOut.emit();
     }
 
     /** @hidden */
