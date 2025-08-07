@@ -19,7 +19,7 @@ import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
 import { BasePopoverClass, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
-const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
+const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-with-icon';
 
 let inlineHelpId = 0;
 
