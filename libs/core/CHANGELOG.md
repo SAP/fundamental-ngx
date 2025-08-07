@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.3...v0.57.4-rc.0) (2025-08-07)
+
+
+### Bug Fixes
+
+* **core:** fix for arrow position of Inline Help ([#13439](https://github.com/SAP/fundamental-ngx/issues/13439)) ([0cbad2c](https://github.com/SAP/fundamental-ngx/commit/0cbad2c48fa9d10d69539ea7fbc20648566d27c0))
+
+
+
+
+
 ## [0.57.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.9...v0.57.3) (2025-08-07)
 
 **Note:** Version bump only for package @fundamental-ngx/core
