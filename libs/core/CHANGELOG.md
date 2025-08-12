@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.2...v0.57.4-rc.3) (2025-08-12)
+
+
+### Bug Fixes
+
+* **core:** disable tab focus on disabled multi input ([#13442](https://github.com/SAP/fundamental-ngx/issues/13442)) ([d42f979](https://github.com/SAP/fundamental-ngx/commit/d42f979251de02f20fecedd6a4b59bd2dc6545a5))
+
+
+
+
+
 ## [0.57.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.1...v0.57.4-rc.2) (2025-08-12)
 
 **Note:** Version bump only for package @fundamental-ngx/core
