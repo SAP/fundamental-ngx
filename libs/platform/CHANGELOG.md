@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.1...v0.57.4-rc.2) (2025-08-12)
+
+
+### Bug Fixes
+
+* **platform:** listen for tab removal in ngOnChanges and adjust selected tab accordingly ([#13432](https://github.com/SAP/fundamental-ngx/issues/13432)) ([e83a4d4](https://github.com/SAP/fundamental-ngx/commit/e83a4d4c76be37bf6442fa3ecfa555992348cf38))
+
+
+
+
+
 ## [0.57.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.0...v0.57.4-rc.1) (2025-08-11)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
