@@ -251,6 +251,7 @@ describe('MultiInputComponent', () => {
         // displaying only those options that were "seen" as values
         expect(component.selected).toEqual(['foo1', 'baz']);
     });
+
     it('should selectAll values  selectAllItems call with true and deselect all items it call with false', async () => {
         await fixture.whenStable();
 
@@ -273,5 +274,25 @@ describe('MultiInputComponent', () => {
         component._addOnButtonClicked(new MouseEvent('click'));
         expect(buttonSpy).toHaveBeenCalled();
         expect(openSpy).not.toHaveBeenCalled();
+    });
+
+    it('should disable pointer events and prevent tab focus when disabled', () => {
+        const element = component.elementRef.nativeElement;
+
+        component.setDisabledState(true);
+        fixture.detectChanges();
+
+        expect(element.style.pointerEvents).toBe('none');
+        expect(element.tabIndex).toBe(-1);
+    });
+
+    it('should enable pointer events and allow tab focus when enabled', () => {
+        const element = component.elementRef.nativeElement;
+
+        component.setDisabledState(false);
+        fixture.detectChanges();
+
+        expect(element.style.pointerEvents).toBe('auto');
+        expect(element.tabIndex).toBe(0);
     });
 });
