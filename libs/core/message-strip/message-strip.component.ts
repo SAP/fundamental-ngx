@@ -22,6 +22,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { MessageStripIconDirective } from './message-strip-icon.directive';
 import { MessageStripIndicationColor } from './message-strip-indication-color';
 import { MessageStripType } from './message-strip-type';
+import { MESSAGE_STRIP_CLOSABLE, MessageStripAnnouncement } from './message-strip.enum';
 
 let messageStripUniqueId = 0;
 
@@ -38,7 +39,6 @@ let messageStripUniqueId = 0;
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
         '[style.margin-bottom]': 'marginBottom',
-        role: 'alert',
         '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
@@ -149,6 +149,22 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
                 return 'error';
             case 'information':
                 return 'information';
+            default:
+                return '';
+        }
+    }
+
+    /** @hidden */
+    get hiddenText(): string {
+        switch (this.type) {
+            case 'warning':
+                return `${MessageStripAnnouncement.WARNING} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
+            case 'success':
+                return `${MessageStripAnnouncement.SUCCESS} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
+            case 'error':
+                return `${MessageStripAnnouncement.ERROR} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
+            case 'information':
+                return `${MessageStripAnnouncement.INFORMATION} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
             default:
                 return '';
         }
