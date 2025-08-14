@@ -21,12 +21,34 @@
                 [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
                 [stickInPlace]="!!product.stickToPosition"
             >
-                <fd-icon
-                    [font]="product.font || FD_DEFAULT_ICON_FONT_FAMILY"
-                    role="presentation"
-                    class="fd-product-switch__icon"
-                    [glyph]="product.icon"
-                ></fd-icon>
+                @if (product.avatar) {
+                    <fd-avatar
+                        size="s"
+                        [glyph]="product.avatar.glyph"
+                        [label]="product.avatar.label"
+                        [circle]="!!product.avatar.circle"
+                        [image]="product.avatar.image"
+                        [contain]="!!product.avatar.contain"
+                        [transparent]="!!product.avatar.transparent"
+                        [placeholder]="!!product.avatar.placeholder"
+                        [tile]="!!product.avatar.tile"
+                        [colorAccent]="product.avatar.colorAccent"
+                        [colorIndication]="product.avatar.colorIndication"
+                        [border]="!!product.avatar.border"
+                        [alterIcon]="product.avatar.alterIcon"
+                        [backupImage]="product.avatar.backupImage"
+                        [ariaLabel]="product.avatar.ariaLabel"
+                    >
+                    </fd-avatar>
+                } @else {
+                    <fd-icon
+                        [font]="product.font || FD_DEFAULT_ICON_FONT_FAMILY"
+                        role="presentation"
+                        class="fd-product-switch__icon"
+                        [glyph]="product.icon"
+                    ></fd-icon>
+                }
+
                 <div class="fd-product-switch__text">
                     <div class="fd-product-switch__title">{{ product.title }}</div>
                     @if (product.subtitle) {

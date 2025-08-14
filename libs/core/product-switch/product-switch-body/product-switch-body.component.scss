@@ -74,3 +74,24 @@
         }
     }
 }
+
+// TO DO: to be removed with the adoption of fundamental-styles v0.41.0+
+.fd-product-switch__item {
+    gap: 0.5rem;
+}
+
+.fd-product-switch__icon [class*='sap-icon'],
+.fd-product-switch__icon[class*='sap-icon'] {
+    margin-block-end: 0;
+}
+
+.fd-product-switch__body.fd-product-switch__body--mobile {
+    .fd-product-switch__item {
+        gap: 0.75rem;
+    }
+
+    .fd-product-switch__icon [class*='sap-icon'],
+    .fd-product-switch__icon[class*='sap-icon'] {
+        margin-inline: 0;
+    }
+}
