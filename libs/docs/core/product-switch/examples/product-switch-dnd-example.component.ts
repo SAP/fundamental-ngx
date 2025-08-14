@@ -24,11 +24,20 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Catalog',
             subtitle: 'Ariba',
-            icon: 'contacts'
+            avatar: {
+                glyph: 'contacts',
+                colorAccent: 5,
+                ariaLabel: 'Ariba Catalog',
+                circle: true
+            }
         },
         {
             title: 'Guided Buying',
-            icon: 'credit-card'
+            avatar: {
+                image: 'https://picsum.photos/id/1018/400',
+                ariaLabel: 'Guided Buying',
+                transparent: true
+            }
         },
         {
             title: 'Strategic Procurement',
