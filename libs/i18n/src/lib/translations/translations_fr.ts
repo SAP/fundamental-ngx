@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_fr.properties instead
 export default {
     coreCalendar: {
@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'Ébauche'
     },
     coreMessageStrip: {
-        dismissLabel: 'Ignorer'
+        dismissLabel: 'Ignorer',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 élément dans la liste des résultats',

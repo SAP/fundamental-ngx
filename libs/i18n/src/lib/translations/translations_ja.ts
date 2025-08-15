@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'ドラフト'
     },
     coreMessageStrip: {
-        dismissLabel: '無視'
+        dismissLabel: '無視',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '結果の一覧項目は1件です。',

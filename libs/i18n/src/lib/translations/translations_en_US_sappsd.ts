@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreCalendar: {
@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
     },
     coreMessageStrip: {
-        dismissLabel: '[[[Ďįşɱįşş∙∙∙∙∙∙∙]]]'
+        dismissLabel: '[[[Ďįşɱįşş∙∙∙∙∙∙∙]]]',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '[[[1 ŗēşűĺţ ĺįşţ įţēɱ.∙∙∙∙∙]]]',

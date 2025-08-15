@@ -1,28 +1,40 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     OnChanges,
     OnInit,
     Output,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage, I18nModule, TranslationResolver } from '@fundamental-ngx/i18n';
+import { map, of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { MessageStripIconDirective } from './message-strip-icon.directive';
 import { MessageStripIndicationColor } from './message-strip-indication-color';
 import { MessageStripType } from './message-strip-type';
-import { MESSAGE_STRIP_CLOSABLE, MessageStripAnnouncement } from './message-strip.enum';
+import {
+    MESSAGE_STRIP_CLOSABLE,
+    MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT,
+    MessageStringIconEnum,
+    MessageStripAnnouncement,
+    MessageStripAnnouncementType,
+    MessageStripTypeEnum
+} from './message-strip.enum';
 
 let messageStripUniqueId = 0;
 
@@ -43,7 +55,7 @@ let messageStripUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent]
+    imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent, AsyncPipe]
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */
@@ -100,6 +112,21 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @ContentChild(MessageStripIconDirective)
     icon: MessageStripIconDirective;
 
+    /** message strip information read by screen readers */
+    messageStripHiddenText$: Observable<string>;
+
+    /** default dismiss button text read by screen readers */
+    defaultDismissButtonText$: Observable<string>;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
+
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
@@ -123,6 +150,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        this.setScreenReaderTexts();
     }
 
     /** @hidden */
@@ -141,30 +169,14 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     get typeSpecificIconName(): string {
         switch (this.type) {
-            case 'warning':
-                return 'alert';
-            case 'success':
-                return 'sys-enter-2';
-            case 'error':
-                return 'error';
-            case 'information':
-                return 'information';
-            default:
-                return '';
-        }
-    }
-
-    /** @hidden */
-    get hiddenText(): string {
-        switch (this.type) {
-            case 'warning':
-                return `${MessageStripAnnouncement.WARNING} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
-            case 'success':
-                return `${MessageStripAnnouncement.SUCCESS} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
-            case 'error':
-                return `${MessageStripAnnouncement.ERROR} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
-            case 'information':
-                return `${MessageStripAnnouncement.INFORMATION} ` + `${this.dismissible ? MESSAGE_STRIP_CLOSABLE : ''}`;
+            case MessageStripTypeEnum.WARNING:
+                return MessageStringIconEnum.ALERT;
+            case MessageStripTypeEnum.SUCCESS:
+                return MessageStringIconEnum.SUCCESS;
+            case MessageStripTypeEnum.ERROR:
+                return MessageStringIconEnum.ERROR;
+            case MessageStripTypeEnum.INFORMATION:
+                return MessageStringIconEnum.INFORMATION;
             default:
                 return '';
         }
@@ -177,5 +189,59 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
         this.elementRef.nativeElement.classList.add('fd-has-display-none');
         this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.onDismiss.emit();
+    }
+
+    /** Sets screen reader texts for message strip type announcement and dismiss button */
+    private setScreenReaderTexts(): void {
+        if (!this.type) {
+            return;
+        }
+
+        switch (this.type) {
+            case MessageStripTypeEnum.WARNING:
+                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.WARNING);
+                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.WARNING);
+                break;
+            case MessageStripTypeEnum.SUCCESS:
+                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.SUCCESS);
+                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.SUCCESS);
+                break;
+            case MessageStripTypeEnum.ERROR:
+                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.ERROR);
+                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.ERROR);
+                break;
+            case MessageStripTypeEnum.INFORMATION:
+                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.INFORMATION);
+                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.INFORMATION);
+                break;
+            default:
+                this.messageStripHiddenText$ = of('');
+        }
+    }
+
+    /** @hidden */
+    private _buildMessageStripHiddenText(type: MessageStripAnnouncementType): Observable<string> {
+        return this._lang$.pipe(
+            takeUntilDestroyed(this._destroyRef),
+            map((lang: FdLanguage) => {
+                const announcement = this._translationResolver.resolve(lang, type);
+                const closable = this._translationResolver.resolve(lang, MESSAGE_STRIP_CLOSABLE);
+                return `${announcement} ${this.dismissible ? closable : ''}`;
+            })
+        );
+    }
+
+    /** @hidden **/
+    private _getDefaultHiddenButtonText(type: MessageStripAnnouncementType): Observable<string> {
+        return this._lang$.pipe(
+            map((lang: FdLanguage) => {
+                const announcement = this._translationResolver.resolve(lang, type);
+                const closeButtonText = this._translationResolver.resolve(
+                    lang,
+                    MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT
+                );
+                return `${announcement} ${closeButtonText}`;
+            })
+        );
     }
 }

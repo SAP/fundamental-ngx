@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
     coreCalendar: {
@@ -70,7 +70,12 @@ export default {
         listItemStatusDraft: 'დაუსრულებელი'
     },
     coreMessageStrip: {
-        dismissLabel: 'გაუქმება'
+        dismissLabel: 'გაუქმება',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 რეზულტატი.',

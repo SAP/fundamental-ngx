@@ -7,7 +7,9 @@
                 <div class="fd-message-strip__icon-wrapper" aria-hidden="true">
                     <fd-icon [glyph]="typeSpecificIconName"></fd-icon>
                 </div>
-                <span class="fd-message-strip__hidden-text" id="{{ id }}__hidden-text">{{ hiddenText }}</span>
+                <span class="fd-message-strip__hidden-text" id="{{ id }}__hidden-text">{{
+                    messageStripHiddenText$ | async
+                }}</span>
             }
         </div>
     }
@@ -23,8 +25,8 @@
             fdCompact
             (click)="dismiss()"
             [attr.aria-controls]="id"
-            [attr.aria-label]="dismissBtnTitle || ('coreMessageStrip.dismissLabel' | fdTranslate)"
-            [attr.title]="dismissBtnTitle || ('coreMessageStrip.dismissLabel' | fdTranslate)"
+            [attr.aria-label]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
+            [attr.title]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
         ></button>
     }
 </div>
