@@ -24,3 +24,7 @@ export type MessageStripAnnouncementType = `${MessageStripAnnouncement}`;
 export const MESSAGE_STRIP_CLOSABLE = 'coreMessageStrip.closable';
 
 export const MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT = 'coreMessageStrip.dismissLabel';
+
+export const DEFAULT_HIDDEN_TEXT = 'Message strip';
+
+export const DEFAULT_DISMISS_BUTTON_TEXT = 'Close';

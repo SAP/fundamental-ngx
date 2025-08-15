@@ -28,6 +28,8 @@ import { MessageStripIconDirective } from './message-strip-icon.directive';
 import { MessageStripIndicationColor } from './message-strip-indication-color';
 import { MessageStripType } from './message-strip-type';
 import {
+    DEFAULT_DISMISS_BUTTON_TEXT,
+    DEFAULT_HIDDEN_TEXT,
     MESSAGE_STRIP_CLOSABLE,
     MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT,
     MessageStringIconEnum,
@@ -215,7 +217,8 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
                 this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.INFORMATION);
                 break;
             default:
-                this.messageStripHiddenText$ = of('');
+                this.messageStripHiddenText$ = of(DEFAULT_HIDDEN_TEXT);
+                this.defaultDismissButtonText$ = of(DEFAULT_DISMISS_BUTTON_TEXT);
         }
     }
 
