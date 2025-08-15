@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'แบบร่าง'
     },
     coreMessageStrip: {
-        dismissLabel: 'ยกเลิก'
+        dismissLabel: 'ยกเลิก',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: 'ไอเท็มในรายการผลลัพธ์ 1 รายการ',
