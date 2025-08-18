@@ -1,3 +1,5 @@
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
+import { IndicationColor } from '@fundamental-ngx/core/avatar';
 import { IconFont } from '@fundamental-ngx/core/icon';
 
 export interface ProductSwitchItem {
@@ -12,6 +14,24 @@ export interface ProductSwitchItem {
 
     /** Icon of product item */
     icon?: string;
+
+    /** Avatar representing the product item */
+    avatar?: {
+        glyph?: string;
+        label?: string;
+        circle?: boolean;
+        image?: string;
+        contain?: boolean;
+        transparent?: boolean;
+        placeholder?: boolean;
+        tile?: boolean;
+        colorAccent?: ColorAccent | null;
+        colorIndication?: IndicationColor | null;
+        border?: boolean;
+        alterIcon?: string;
+        backupImage?: string;
+        ariaLabel?: string;
+    };
 
     /** Font of product item */
     font?: IconFont;
