@@ -59,7 +59,13 @@
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/index.ts"],
-            "@fundamental-ngx/platform/*": ["libs/platform/*/index.ts"]
+            "@fundamental-ngx/platform/*": ["libs/platform/*/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents": ["libs/ui5-webcomponents/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-ai": ["libs/ui5-webcomponents-ai/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-ai/*": ["libs/ui5-webcomponents-ai/*/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-fiori": ["libs/ui5-webcomponents-fiori/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-fiori/*": ["libs/ui5-webcomponents-fiori/*/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents/*": ["libs/ui5-webcomponents/*/index.ts"]
         },
         "skipLibCheck": true
     },
