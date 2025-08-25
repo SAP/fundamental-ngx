@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'Wersja robocza'
     },
     coreMessageStrip: {
-        dismissLabel: 'Ignoruj'
+        dismissLabel: 'Ignoruj',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 pozycja listy wyników.',
