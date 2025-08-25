@@ -1,32 +1,28 @@
-<div role="note" [attr.aria-labelledby]="id + '__hidden-text ' + id + '__content-text'">
-    @if (shouldShowIcon) {
-        <div class="fd-message-strip__icon-container">
-            @if (icon) {
-                <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
-            } @else {
-                <div class="fd-message-strip__icon-wrapper" aria-hidden="true">
-                    <fd-icon [glyph]="typeSpecificIconName"></fd-icon>
-                </div>
-                <span class="fd-message-strip__hidden-text" id="{{ id }}__hidden-text">{{
-                    messageStripHiddenText$ | async
-                }}</span>
-            }
-        </div>
-    }
-    <p class="fd-message-strip__text" id="{{ id }}__content-text">
-        <ng-content></ng-content>
-    </p>
-    @if (dismissible) {
-        <button
-            class="fd-message-strip__close"
-            fd-button
-            glyph="decline"
-            fdType="transparent"
-            fdCompact
-            (click)="dismiss()"
-            [attr.aria-controls]="id"
-            [attr.aria-label]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
-            [attr.title]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
-        ></button>
-    }
-</div>
+@if (shouldShowIcon) {
+    <div class="fd-message-strip__icon-container" aria-hidden="true">
+        @if (icon) {
+            <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
+        } @else {
+            <fd-icon [glyph]="typeSpecificIconName" role="presentation" aria-hidden="true"></fd-icon>
+            <span class="fd-message-strip__sr-only" id="{{ id }}-hidden-text">{{
+                messageStripHiddenText$ | async
+            }}</span>
+        }
+    </div>
+}
+<p class="fd-message-strip__text" id="{{ id }}-content-text">
+    <ng-content></ng-content>
+</p>
+@if (dismissible) {
+    <button
+        class="fd-message-strip__close"
+        fd-button
+        glyph="decline"
+        fdType="transparent"
+        fdCompact
+        (click)="dismiss()"
+        [attr.aria-controls]="id"
+        [attr.aria-label]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
+        [attr.title]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
+    ></button>
+}
