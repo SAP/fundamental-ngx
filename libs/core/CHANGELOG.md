@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.4...v0.57.4-rc.5) (2025-08-26)
+
+
+### Bug Fixes
+
+* **core:** prevent list item selection when radio and checkbox are disabled ([#13451](https://github.com/SAP/fundamental-ngx/issues/13451)) ([09182b9](https://github.com/SAP/fundamental-ngx/commit/09182b9273944453f8be7fdd4fe04c098cb22cee))
+
+
+
+
+
 ## [0.57.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.3...v0.57.4-rc.4) (2025-08-18)
 
 
