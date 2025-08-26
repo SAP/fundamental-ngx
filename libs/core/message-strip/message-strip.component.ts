@@ -22,7 +22,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_LANGUAGE, FdLanguage, I18nModule, TranslationResolver } from '@fundamental-ngx/i18n';
-import { map, of } from 'rxjs';
+import { map, of, withLatestFrom } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { MessageStripIconDirective } from './message-strip-icon.directive';
 import { MessageStripIndicationColor } from './message-strip-indication-color';
@@ -208,35 +208,39 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
             return;
         }
 
-        switch (this.type) {
-            case MessageStripTypeEnum.WARNING:
-                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.WARNING);
-                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.WARNING);
-                break;
-            case MessageStripTypeEnum.SUCCESS:
-                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.SUCCESS);
-                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.SUCCESS);
-                break;
-            case MessageStripTypeEnum.ERROR:
-                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.ERROR);
-                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.ERROR);
-                break;
-            case MessageStripTypeEnum.INFORMATION:
-                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(MessageStripAnnouncement.INFORMATION);
-                this.defaultDismissButtonText$ = this._getDefaultHiddenButtonText(MessageStripAnnouncement.INFORMATION);
-                break;
-            default:
-                this.messageStripHiddenText$ = of(DEFAULT_HIDDEN_TEXT);
-                this.defaultDismissButtonText$ = of(DEFAULT_DISMISS_BUTTON_TEXT);
+        const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
+            [MessageStripTypeEnum.WARNING]: MessageStripAnnouncement.WARNING,
+            [MessageStripTypeEnum.SUCCESS]: MessageStripAnnouncement.SUCCESS,
+            [MessageStripTypeEnum.ERROR]: MessageStripAnnouncement.ERROR,
+            [MessageStripTypeEnum.INFORMATION]: MessageStripAnnouncement.INFORMATION
+        };
+
+        const announcementType = announcementMap[this.type];
+
+        if (announcementType) {
+            const announcement$ = this._translateAnnouncement(announcementType);
+            this.messageStripHiddenText$ = this._buildMessageStripHiddenText(announcement$);
+            this.defaultDismissButtonText$ = this._getHiddenButtonText(announcement$);
+        } else {
+            this.messageStripHiddenText$ = of(DEFAULT_HIDDEN_TEXT);
+            this.defaultDismissButtonText$ = of(DEFAULT_DISMISS_BUTTON_TEXT);
         }
     }
 
     /** @hidden */
-    private _buildMessageStripHiddenText(type: MessageStripAnnouncementType): Observable<string> {
+    private _translateAnnouncement(announcementType: MessageStripAnnouncementType): Observable<string> {
         return this._lang$.pipe(
             takeUntilDestroyed(this._destroyRef),
-            map((lang: FdLanguage) => {
-                const announcement = this._translationResolver.resolve(lang, type);
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, announcementType))
+        );
+    }
+
+    /** @hidden */
+    private _buildMessageStripHiddenText(announcement$: Observable<string>): Observable<string> {
+        return this._lang$.pipe(
+            takeUntilDestroyed(this._destroyRef),
+            withLatestFrom(announcement$),
+            map(([lang, announcement]: [FdLanguage, string]) => {
                 const closable = this._translationResolver.resolve(lang, MESSAGE_STRIP_CLOSABLE);
                 return `${announcement} ${this.dismissible ? closable : ''}`;
             })
@@ -244,10 +248,11 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /** @hidden **/
-    private _getDefaultHiddenButtonText(type: MessageStripAnnouncementType): Observable<string> {
+    private _getHiddenButtonText(announcement$: Observable<string>): Observable<string> {
         return this._lang$.pipe(
-            map((lang: FdLanguage) => {
-                const announcement = this._translationResolver.resolve(lang, type);
+            takeUntilDestroyed(this._destroyRef),
+            withLatestFrom(announcement$),
+            map(([lang, announcement]: [FdLanguage, string]) => {
                 const closeButtonText = this._translationResolver.resolve(
                     lang,
                     MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT
