@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    HostBinding,
     HostListener,
     TemplateRef,
     ViewChild,
@@ -112,6 +113,12 @@ export class PopoverBodyComponent implements AfterViewInit {
             event.stopPropagation();
             this.onClose.next();
         }
+    }
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    get _role(): string {
+        return this._bodyRole || 'dialog';
     }
 
     /** @hidden */
