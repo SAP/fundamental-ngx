@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.6...v0.57.4-rc.7) (2025-08-27)
+
+
+### Bug Fixes
+
+* **core:** import menu css in user menu ([#13454](https://github.com/SAP/fundamental-ngx/issues/13454)) ([ee96841](https://github.com/SAP/fundamental-ngx/commit/ee968411fb8defbfc4b6bb472c9aa2c72211abe8))
+
+
+
+
+
 ## [0.57.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.5...v0.57.4-rc.6) (2025-08-27)
 
 
