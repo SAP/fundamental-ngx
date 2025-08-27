@@ -14,7 +14,7 @@ import {
 import { InlineHelpPo } from './inline-help.po';
 import { customMessage, defaultMessage } from './inline-help-contents';
 
-xdescribe('Inline help test suite', () => {
+describe('Inline help test suite', () => {
     const inlineHelpPage = new InlineHelpPo();
     const {
         inlineHelpIcons,
