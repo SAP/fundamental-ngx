@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: '草稿'
     },
     coreMessageStrip: {
-        dismissLabel: '忽略'
+        dismissLabel: '忽略',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 個結果清單項目。',

@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: '초안'
     },
     coreMessageStrip: {
-        dismissLabel: '해제'
+        dismissLabel: '해제',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1개의 결과 리스트 항목이 있습니다.',

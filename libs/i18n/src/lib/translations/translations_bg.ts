@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'Чернова'
     },
     coreMessageStrip: {
-        dismissLabel: 'Отхвърляне'
+        dismissLabel: 'Отхвърляне',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 позиция от списъка с резултати.',

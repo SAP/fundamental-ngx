@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'Koncept'
     },
     coreMessageStrip: {
-        dismissLabel: 'Odmietnuť'
+        dismissLabel: 'Odmietnuť',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 položka zoznamu výsledkov.',

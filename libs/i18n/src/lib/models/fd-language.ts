@@ -119,6 +119,11 @@ export interface FdLanguage {
     };
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
+        announcementInfo: FdLanguageKey;
+        announcementWarning: FdLanguageKey;
+        announcementError: FdLanguageKey;
+        announcementSuccess: FdLanguageKey;
+        closable: FdLanguageKey;
     };
     coreMultiInput: {
         multiInputAriaLabel: FdLanguageKey;

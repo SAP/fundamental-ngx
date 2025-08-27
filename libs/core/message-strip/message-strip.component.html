@@ -3,11 +3,14 @@
         @if (icon) {
             <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
         } @else {
-            <fd-icon [glyph]="typeSpecificIconName"></fd-icon>
+            <fd-icon [glyph]="typeSpecificIconName" role="presentation" aria-hidden="true"></fd-icon>
+            <span class="fd-message-strip__sr-only" id="{{ id }}-hidden-text">{{
+                messageStripHiddenText$ | async
+            }}</span>
         }
     </div>
 }
-<p class="fd-message-strip__text">
+<p class="fd-message-strip__text" id="{{ id }}-content-text">
     <ng-content></ng-content>
 </p>
 @if (dismissible) {
@@ -19,7 +22,7 @@
         fdCompact
         (click)="dismiss()"
         [attr.aria-controls]="id"
-        [attr.aria-label]="dismissBtnTitle || ('coreMessageStrip.dismissLabel' | fdTranslate)"
-        [attr.title]="dismissBtnTitle || ('coreMessageStrip.dismissLabel' | fdTranslate)"
+        [attr.aria-label]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
+        [attr.title]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
     ></button>
 }

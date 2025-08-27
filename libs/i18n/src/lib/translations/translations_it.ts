@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'Bozza'
     },
     coreMessageStrip: {
-        dismissLabel: 'Ignora'
+        dismissLabel: 'Ignora',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 voce elenco dei risultati.',

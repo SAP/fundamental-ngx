@@ -70,7 +70,12 @@ export default {
         listItemStatusDraft: 'प्रालेख'
     },
     coreMessageStrip: {
-        dismissLabel: 'खारिज करें'
+        dismissLabel: 'खारिज करें',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 परिणाम सूची आइटम',
