@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.5...v0.57.4-rc.6) (2025-08-27)
+
+
+### Bug Fixes
+
+* **core:** message strip information is not read ([#13448](https://github.com/SAP/fundamental-ngx/issues/13448)) ([cfc9de8](https://github.com/SAP/fundamental-ngx/commit/cfc9de834f035bdcc68ed295d9b6e1bb405f259f))
+
+
+
+
+
 ## [0.57.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.4...v0.57.4-rc.5) (2025-08-26)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
