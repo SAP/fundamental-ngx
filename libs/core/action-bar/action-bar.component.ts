@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { warnOnce } from '@fundamental-ngx/core/utils';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated

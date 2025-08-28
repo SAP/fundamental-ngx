@@ -57,10 +57,10 @@ describe('VariantManagementComponent', () => {
 
         component.variants = mockVariants;
 
-        expect(setVariantSpy).toBeCalledTimes(1);
+        expect(setVariantSpy).toHaveBeenCalledTimes(1);
         expect(setVariantSpy).toHaveBeenLastCalledWith(selectedVariantItem);
 
-        expect(setVariantEventSpy).toBeCalledTimes(1);
+        expect(setVariantEventSpy).toHaveBeenCalledTimes(1);
         expect(setVariantEventSpy).toHaveBeenLastCalledWith(selectedVariantItem);
     });
 

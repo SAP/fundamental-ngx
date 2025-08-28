@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
     DescriptionComponent,
@@ -11,4 +11,6 @@ import {
     templateUrl: './dnd-header.component.html',
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })
-export class DndHeaderComponent {}
+export class DndHeaderComponent {
+    falseSignal = signal(false);
+}

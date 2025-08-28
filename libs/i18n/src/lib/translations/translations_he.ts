@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'טיוטה'
     },
     coreMessageStrip: {
-        dismissLabel: 'בטל'
+        dismissLabel: 'בטל',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: 'פריט רשימת תוצאות אחד.',

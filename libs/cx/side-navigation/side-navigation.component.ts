@@ -20,11 +20,10 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 import {
     NestedListComponent,
     NestedListKeyboardService,
@@ -42,7 +41,6 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
  * a left navigation that can always display or expand/collapse using the menu icon within the global navigation.
  */
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fdx-side-nav',
     templateUrl: './side-navigation.component.html',
     styleUrl: 'side-navigation.component.scss',

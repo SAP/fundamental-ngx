@@ -14,3 +14,8 @@
     height: var(--sapElement_LineHeight);
     max-height: var(--sapElement_LineHeight);
 }
+
+.fd-list.fd-list--selection .fd-radio.is-focus + .fd-radio__label,
+.fd-list.fd-list--selection .fd-radio:focus + .fd-radio__label {
+    outline: none;
+}

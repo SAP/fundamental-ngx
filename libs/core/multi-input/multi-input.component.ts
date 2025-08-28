@@ -568,8 +568,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this.disabled = isDisabled;
         if (isDisabled) {
             this.elementRef.nativeElement.style.pointerEvents = 'none';
+            this.elementRef.nativeElement.tabIndex = -1; // prevent focus
         } else {
             this.elementRef.nativeElement.style.pointerEvents = 'auto';
+            this.elementRef.nativeElement.tabIndex = 0; // allow focus
         }
 
         this._changeDetRef.detectChanges();

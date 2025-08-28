@@ -30,6 +30,21 @@ export class ListSelectionExampleComponent {
         }
     ];
 
+    cozyObjectCheckboxDisabled = [
+        {
+            selected: false,
+            label: 'List item 1'
+        },
+        {
+            selected: false,
+            label: 'List item 2'
+        },
+        {
+            selected: false,
+            label: 'List item 3'
+        }
+    ];
+
     compactObject = [
         {
             selected: false,

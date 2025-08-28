@@ -70,7 +70,12 @@ export default {
         listItemStatusDraft: 'დაუსრულებელი'
     },
     coreMessageStrip: {
-        dismissLabel: 'გაუქმება'
+        dismissLabel: 'გაუქმება',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 რეზულტატი.',

@@ -3,6 +3,229 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.6...v0.57.4-rc.7) (2025-08-27)
+
+
+### Bug Fixes
+
+* **core:** import menu css in user menu ([#13454](https://github.com/SAP/fundamental-ngx/issues/13454)) ([ee96841](https://github.com/SAP/fundamental-ngx/commit/ee968411fb8defbfc4b6bb472c9aa2c72211abe8))
+
+
+
+
+
+## [0.57.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.5...v0.57.4-rc.6) (2025-08-27)
+
+
+### Bug Fixes
+
+* **core:** message strip information is not read ([#13448](https://github.com/SAP/fundamental-ngx/issues/13448)) ([cfc9de8](https://github.com/SAP/fundamental-ngx/commit/cfc9de834f035bdcc68ed295d9b6e1bb405f259f))
+
+
+
+
+
+## [0.57.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.4...v0.57.4-rc.5) (2025-08-26)
+
+
+### Bug Fixes
+
+* **core:** prevent list item selection when radio and checkbox are disabled ([#13451](https://github.com/SAP/fundamental-ngx/issues/13451)) ([09182b9](https://github.com/SAP/fundamental-ngx/commit/09182b9273944453f8be7fdd4fe04c098cb22cee))
+
+
+
+
+
+## [0.57.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.3...v0.57.4-rc.4) (2025-08-18)
+
+
+### Features
+
+* **core:** enhance Product Switch to support Avatar ([#13447](https://github.com/SAP/fundamental-ngx/issues/13447)) ([8e85da1](https://github.com/SAP/fundamental-ngx/commit/8e85da127091855a437f84a9299c7ffbf22acd51))
+
+
+
+
+
+## [0.57.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.2...v0.57.4-rc.3) (2025-08-12)
+
+
+### Bug Fixes
+
+* **core:** disable tab focus on disabled multi input ([#13442](https://github.com/SAP/fundamental-ngx/issues/13442)) ([d42f979](https://github.com/SAP/fundamental-ngx/commit/d42f979251de02f20fecedd6a4b59bd2dc6545a5))
+
+
+
+
+
+## [0.57.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.1...v0.57.4-rc.2) (2025-08-12)
+
+
+### Bug Fixes
+
+* **platform:** listen for tab removal in ngOnChanges and adjust selected tab accordingly ([#13432](https://github.com/SAP/fundamental-ngx/issues/13432)) ([e83a4d4](https://github.com/SAP/fundamental-ngx/commit/e83a4d4c76be37bf6442fa3ecfa555992348cf38))
+
+
+
+
+
+## [0.57.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.0...v0.57.4-rc.1) (2025-08-11)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.3...v0.57.4-rc.0) (2025-08-07)
+
+
+### Bug Fixes
+
+* **core:** fix for arrow position of Inline Help ([#13439](https://github.com/SAP/fundamental-ngx/issues/13439)) ([0cbad2c](https://github.com/SAP/fundamental-ngx/commit/0cbad2c48fa9d10d69539ea7fbc20648566d27c0))
+
+
+
+
+
+## [0.57.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.9...v0.57.3) (2025-08-07)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.8...v0.57.3-rc.9) (2025-08-05)
+
+
+### Bug Fixes
+
+* **core:** fix the font-weight of emphasized button ([#13435](https://github.com/SAP/fundamental-ngx/issues/13435)) ([7ff9551](https://github.com/SAP/fundamental-ngx/commit/7ff95515c9d202b05e4f96fc5aba4eb1179dc66d))
+
+
+
+
+
+## [0.57.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.7...v0.57.3-rc.8) (2025-08-04)
+
+
+### Bug Fixes
+
+* remove core/utils and refer directly cdk/utils ([#13434](https://github.com/SAP/fundamental-ngx/issues/13434)) ([06e129b](https://github.com/SAP/fundamental-ngx/commit/06e129b403b1b0ffa42429cbb0be9f5539a358ef))
+
+
+
+
+
+## [0.57.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.6...v0.57.3-rc.7) (2025-07-31)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.5...v0.57.3-rc.6) (2025-07-31)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.4...v0.57.3-rc.5) (2025-07-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.3...v0.57.3-rc.4) (2025-07-30)
+
+
+### Bug Fixes
+
+* **platform:** focus moves to unselected tab in Icon Tab Bar ([#13401](https://github.com/SAP/fundamental-ngx/issues/13401)) ([b3cc37d](https://github.com/SAP/fundamental-ngx/commit/b3cc37dd92016b3ee0add7553a76d3c3b9c5aadb))
+
+
+
+
+
+## [0.57.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.2...v0.57.3-rc.3) (2025-07-29)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.1...v0.57.3-rc.2) (2025-07-29)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.0...v0.57.3-rc.1) (2025-07-29)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.2...v0.57.3-rc.0) (2025-07-29)
+
+
+### Bug Fixes
+
+* **core,platform:** remove aria-haspopup attribute from button ([#13405](https://github.com/SAP/fundamental-ngx/issues/13405)) ([92c6fb6](https://github.com/SAP/fundamental-ngx/commit/92c6fb6d4bb135f041752c6446e7813c6f24db7e))
+
+
+
+
+
+## [0.57.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.5...v0.57.2) (2025-07-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.4...v0.57.2-rc.5) (2025-07-25)
+
+
+### Bug Fixes
+
+* **platform:** cache user selection and fix cancel functionality ([#13390](https://github.com/SAP/fundamental-ngx/issues/13390)) ([c25b9a0](https://github.com/SAP/fundamental-ngx/commit/c25b9a01eb3f80a07e28e79f8ad660f7fc749468))
+
+
+
+
+
+## [0.57.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.3...v0.57.2-rc.4) (2025-07-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.2...v0.57.2-rc.3) (2025-07-25)
+
+
+### Bug Fixes
+
+* **platform:** show overflow popover on process type tab bar only when there are extra items ([#13398](https://github.com/SAP/fundamental-ngx/issues/13398)) ([120c088](https://github.com/SAP/fundamental-ngx/commit/120c08822b69263e8d3eb10e47c4cf080e1117ab))
+
+
+
+
+
 ## [0.57.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.1...v0.57.2-rc.2) (2025-07-16)
 
 

@@ -1,7 +1,7 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NestedItemInterface } from './nested-item/nested-item.interface';

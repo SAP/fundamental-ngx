@@ -3,6 +3,205 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.6...v0.57.4-rc.7) (2025-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.5...v0.57.4-rc.6) (2025-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.4...v0.57.4-rc.5) (2025-08-26)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.3...v0.57.4-rc.4) (2025-08-18)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.2...v0.57.4-rc.3) (2025-08-12)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.1...v0.57.4-rc.2) (2025-08-12)
+
+
+### Bug Fixes
+
+* **platform:** listen for tab removal in ngOnChanges and adjust selected tab accordingly ([#13432](https://github.com/SAP/fundamental-ngx/issues/13432)) ([e83a4d4](https://github.com/SAP/fundamental-ngx/commit/e83a4d4c76be37bf6442fa3ecfa555992348cf38))
+
+
+
+
+
+## [0.57.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.0...v0.57.4-rc.1) (2025-08-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.3...v0.57.4-rc.0) (2025-08-07)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.9...v0.57.3) (2025-08-07)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.8...v0.57.3-rc.9) (2025-08-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.7...v0.57.3-rc.8) (2025-08-04)
+
+
+### Bug Fixes
+
+* remove core/utils and refer directly cdk/utils ([#13434](https://github.com/SAP/fundamental-ngx/issues/13434)) ([06e129b](https://github.com/SAP/fundamental-ngx/commit/06e129b403b1b0ffa42429cbb0be9f5539a358ef))
+
+
+
+
+
+## [0.57.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.6...v0.57.3-rc.7) (2025-07-31)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.5...v0.57.3-rc.6) (2025-07-31)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.4...v0.57.3-rc.5) (2025-07-30)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.3...v0.57.3-rc.4) (2025-07-30)
+
+
+### Bug Fixes
+
+* **platform:** focus moves to unselected tab in Icon Tab Bar ([#13401](https://github.com/SAP/fundamental-ngx/issues/13401)) ([b3cc37d](https://github.com/SAP/fundamental-ngx/commit/b3cc37dd92016b3ee0add7553a76d3c3b9c5aadb))
+
+
+
+
+
+## [0.57.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.2...v0.57.3-rc.3) (2025-07-29)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.1...v0.57.3-rc.2) (2025-07-29)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.3-rc.0...v0.57.3-rc.1) (2025-07-29)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.2...v0.57.3-rc.0) (2025-07-29)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.5...v0.57.2) (2025-07-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.4...v0.57.2-rc.5) (2025-07-25)
+
+
+### Bug Fixes
+
+* **platform:** cache user selection and fix cancel functionality ([#13390](https://github.com/SAP/fundamental-ngx/issues/13390)) ([c25b9a0](https://github.com/SAP/fundamental-ngx/commit/c25b9a01eb3f80a07e28e79f8ad660f7fc749468))
+
+
+
+
+
+## [0.57.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.3...v0.57.2-rc.4) (2025-07-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.57.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.2...v0.57.2-rc.3) (2025-07-25)
+
+
+### Bug Fixes
+
+* **platform:** show overflow popover on process type tab bar only when there are extra items ([#13398](https://github.com/SAP/fundamental-ngx/issues/13398)) ([120c088](https://github.com/SAP/fundamental-ngx/commit/120c08822b69263e8d3eb10e47c4cf080e1117ab))
+
+
+
+
+
 ## [0.57.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.2-rc.1...v0.57.2-rc.2) (2025-07-16)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

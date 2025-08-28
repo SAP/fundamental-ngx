@@ -210,10 +210,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            if (this.checkbox) {
+            if (this.checkbox && !this.checkbox.disabled) {
                 this.checkbox.nextValue();
                 this._muteEvent(event);
-            } else if (this.radio) {
+            } else if (this.radio && !this.radio.disabled) {
                 this.radio.labelClicked(event, false);
                 this._muteEvent(event);
             } else if (this.interactive) {
@@ -244,14 +244,14 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     onClick(event: MouseEvent): void {
         if (!this.preventClick) {
             this._clicked$.next(event);
-            if (this.checkbox && !this.link) {
+            if (this.checkbox && !this.checkbox.disabled && !this.link) {
                 if (!this.checkbox.elementRef.nativeElement.contains(event.target as Node)) {
                     // clicking on the checkbox is not suppressed
                     // so we should only process clicks if clicked on the list-item, not checkbox itself
                     this.checkbox.nextValue();
                 }
             }
-            if (this.radio && !this.link) {
+            if (this.radio && !this.radio.disabled && !this.link) {
                 this.radio.labelClicked(event, false);
             }
         }

@@ -71,7 +71,12 @@ export default {
         listItemStatusDraft: 'Nacrt'
     },
     coreMessageStrip: {
-        dismissLabel: 'Odbaci'
+        dismissLabel: 'Odbaci',
+        announcementInfo: 'Information Message Strip',
+        announcementWarning: 'Warning Message Strip',
+        announcementError: 'Error Message Strip',
+        announcementSuccess: 'Success Message Strip',
+        closable: 'Closable'
     },
     coreMultiInput: {
         countListResultsSingular: '1 stavka liste rezultata.',

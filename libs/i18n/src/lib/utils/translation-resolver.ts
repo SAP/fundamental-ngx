@@ -1,4 +1,4 @@
-import { isDevMode } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IntlMessageFormat } from 'intl-messageformat';
 import { get } from 'lodash-es';
@@ -13,6 +13,9 @@ import {
 
 const _internalReferenceRegExp = /\{\s*@@([^{}\s]*)\s*}/g;
 
+@Injectable({
+    providedIn: 'root'
+})
 /** Utility class, that provides the logic to resolve FdLanguage translations */
 export class TranslationResolver {
     /** Resolves the translation for the provided language by key and args */

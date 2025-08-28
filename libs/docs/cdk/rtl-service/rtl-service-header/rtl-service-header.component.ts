@@ -1,23 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {
-    DescriptionComponent,
-    DocPageComponent,
-    HeaderComponent,
-    HeaderTabsComponent,
-    ImportComponent
-} from '@fundamental-ngx/docs/shared';
+import { DescriptionComponent, HeaderComponent, HeaderTabsComponent } from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'fd-rtl-service-header',
     templateUrl: './rtl-service-header.component.html',
-    imports: [
-        HeaderComponent,
-        DocPageComponent,
-        RouterOutlet,
-        DescriptionComponent,
-        ImportComponent,
-        HeaderTabsComponent
-    ]
+    imports: [HeaderComponent, RouterOutlet, DescriptionComponent, HeaderTabsComponent]
 })
-export class RtlServiceHeaderComponent {}
+export class RtlServiceHeaderComponent {
+    falseSignal = signal(false);
+}
