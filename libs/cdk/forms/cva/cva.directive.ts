@@ -77,10 +77,16 @@ export class CvaDirective<T = any>
     }
 
     /**
-     * readOnly Value to Mark component read only
+     * readOnly Value to mark component read only
      */
     @Input()
     readonly: boolean;
+
+    /**
+     * display Value to mark component display only
+     */
+    @Input()
+    display: boolean;
 
     /** Binds to control aria-labelledBy attribute */
     @Input()

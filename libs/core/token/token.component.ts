@@ -44,6 +44,10 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     @Input()
     disabled = false;
 
+    /** Whether the token is display-only */
+    @Input()
+    display = false;
+
     /** @hidden */
     @ViewChild('tokenWrapperElement')
     tokenWrapperElement: ElementRef;

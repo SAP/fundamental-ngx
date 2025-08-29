@@ -24,6 +24,19 @@ Selected: {{ secondSelected | json }}
 
 <br /><br />
 
+<label fd-label for="disabledMultiInput1">Display-only Multi Input</label>
+<fd-multi-input
+    inputId="displayOnlyMultiInput1"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+    placeholder="Search here..."
+    [display]="true"
+    [(ngModel)]="selected"
+></fd-multi-input>
+
+Selected: {{ selected | json }}
+
+<br /><br />
+
 <label fd-label for="noAddonMultiInput1">Hidden Addon Button</label>
 <fd-multi-input
     inputId="noAddonMultiInput1"

@@ -65,6 +65,8 @@ import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobi
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { PairSelectionModel } from './pair-selection.model';
 
+const UNICODE_FOR_DOT = '&#x00B7;';
+
 function isOptionItem<ItemType = any, ValueType = any>(
     candidate: unknown
 ): candidate is _OptionItem<ItemType, ValueType> {
@@ -141,6 +143,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Whether the input is disabled. */
     @Input()
     disabled = false;
+
+    /** Whether the input is display-only */
+    @Input()
+    display = false;
 
     /** If it is mandatory field */
     @Input()
@@ -821,6 +827,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     _close(): void {
         this.searchInputElement.nativeElement.focus();
         this.openChangeHandle(false);
+    }
+
+    getDotSymbol(): string {
+        return UNICODE_FOR_DOT;
     }
 
     /** @hidden */

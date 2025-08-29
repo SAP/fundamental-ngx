@@ -39,3 +39,16 @@ input {
     display: flex;
     justify-content: space-between;
 }
+
+.fd-tokenizer--display {
+    overflow: visible;
+    pointer-events: none;
+
+    .fd-token {
+        margin-inline-end: 0;
+    }
+
+    .fd-tokenizer__inner {
+        overflow: visible;
+    }
+}
