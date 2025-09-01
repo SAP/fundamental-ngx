@@ -64,7 +64,7 @@
         "fuse.js": "7.0.0",
         "highlight.js": "11.7.0",
         "intl": "1.2.5",
-        "intl-messageformat": "10.5.2",
+        "intl-messageformat": "10.7.16",
         "lodash-es": "4.17.21",
         "marked": "9.0.0",
         "moment": "2.29.4",
