@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.8...v0.57.4-rc.9) (2025-09-02)
+
+
+### Bug Fixes
+
+* **core:** prevents esc key from propagating to the parent in nested popovers ([#13471](https://github.com/SAP/fundamental-ngx/issues/13471)) ([5482cee](https://github.com/SAP/fundamental-ngx/commit/5482cee24adcd5bd22fe384bf5aca24024048071))
+
+
+
+
+
 ## [0.57.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.7...v0.57.4-rc.8) (2025-09-02)
 
 **Note:** Version bump only for package fundamental-ngx
