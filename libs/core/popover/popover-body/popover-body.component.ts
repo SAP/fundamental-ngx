@@ -133,7 +133,7 @@ export class PopoverBodyComponent implements AfterViewInit {
     ) {}
 
     /** Handler escape keydown */
-    @HostListener('keyup', ['$event'])
+    @HostListener('keydown', ['$event'])
     bodyKeyupHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE) && this._closeOnEscapeKey) {
             // In case if popover belongs to the element inside dialog

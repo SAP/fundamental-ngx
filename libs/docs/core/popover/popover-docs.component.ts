@@ -19,6 +19,7 @@ import { PopoverDropdownExampleComponent } from './examples/popover-dropdown/pop
 import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
 import { PopoverDynamicExampleComponent } from './examples/popover-dynamic/popover-dynamic-example.component';
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
+import { PopoverInsidePopoverExampleComponent } from './examples/popover-inside-popover/popover-inside-popover-example.component';
 import { PopoverLazyInitOfBodyExampleComponent } from './examples/popover-lazy-init-of-body/popover-lazy-init-of-body-example.component';
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
@@ -46,6 +47,8 @@ const popoverPlacementTsSrc = 'popover-placement/popover-placement-example.compo
 const popoverPlacementScss = 'popover-placement/popover-placement-example.component.scss';
 const popoverDialogHtmlSrc = 'popover-dialog/popover-dialog-example.component.html';
 const popoverDialogTsSrc = 'popover-dialog/popover-dialog-example.component.ts';
+const popoverInsidePopoverHtmlSrc = 'popover-inside-popover/popover-inside-popover-example.component.html';
+const popoverInsidePopoverTsSrc = 'popover-inside-popover/popover-inside-popover-example.component.ts';
 const popoverFillHSrc = 'popover-c-fill/popover-c-fill.component.html';
 const popoverFillSrcTs = 'popover-c-fill/popover-c-fill.component.ts';
 const popoverDynamicHSrc = 'popover-dynamic/popover-dynamic-example.component.html';
@@ -103,7 +106,8 @@ const dynamicContainerHeightTsSrc =
         PopoverMobileExampleComponent,
         PopoverDynamicContainerHeightExampleComponent,
         PopoverLazyInitOfBodyExampleComponent,
-        PopoverResizableExampleComponent
+        PopoverResizableExampleComponent,
+        PopoverInsidePopoverExampleComponent
     ]
 })
 export class PopoverDocsComponent {
@@ -255,6 +259,20 @@ export class PopoverDocsComponent {
             component: 'PopoverDialogExampleComponent',
             code: getAssetFromModuleAssets(popoverDialogTsSrc),
             fileName: 'popover-dialog-example'
+        }
+    ];
+
+    popoverInsidePopoverExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(popoverInsidePopoverHtmlSrc),
+            fileName: 'popover-dialog-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PopoverInsidePopoverExampleComponent',
+            code: getAssetFromModuleAssets(popoverInsidePopoverTsSrc),
+            fileName: 'popover-inside-popover-example'
         }
     ];
 
