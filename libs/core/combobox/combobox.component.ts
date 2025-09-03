@@ -739,7 +739,7 @@ export class ComboboxComponent<T = any>
         this.inputText = this._value ? this.inputText : '';
         if (this.tabOutStrategy === 'closeAndSelect') {
             const focusedItem = this.listComponent.getActiveItem();
-            if (focusedItem) {
+            if (focusedItem && !this.inputText) {
                 this._handleClickActions(focusedItem.value);
                 return;
             }
