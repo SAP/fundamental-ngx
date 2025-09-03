@@ -65,7 +65,8 @@
             "@fundamental-ngx/ui5-webcomponents-ai/*": ["libs/ui5-webcomponents-ai/*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-fiori": ["libs/ui5-webcomponents-fiori/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-fiori/*": ["libs/ui5-webcomponents-fiori/*/index.ts"],
-            "@fundamental-ngx/ui5-webcomponents/*": ["libs/ui5-webcomponents/*/index.ts"]
+            "@fundamental-ngx/ui5-webcomponents/*": ["libs/ui5-webcomponents/*/index.ts"],
+            "@fundamental-ngx/webc-generator": ["libs/webc-generator/src/index.ts"]
         },
         "skipLibCheck": true
     },
