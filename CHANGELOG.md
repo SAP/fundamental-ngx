@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.9...v0.57.4-rc.10) (2025-09-03)
+
+
+### Bug Fixes
+
+* **core:** apply correct value on Tab selection for Combobox ([#13474](https://github.com/SAP/fundamental-ngx/issues/13474)) ([2488f74](https://github.com/SAP/fundamental-ngx/commit/2488f74223e28bead7865aa1116b3a897a7eae6f))
+
+
+
+
+
 ## [0.57.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.8...v0.57.4-rc.9) (2025-09-02)
 
 
