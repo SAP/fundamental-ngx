@@ -1,1 +1,1 @@
-export * from '@fundamental-ngx/ui5-webcomponents-fiori/apple';
+export { Ui5ComponentsModule } from './ui5.module';

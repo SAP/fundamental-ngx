@@ -17,6 +17,15 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "generate": {
+            "executor": "@fundamental-ngx/webc-generator:generate",
+            "options": {
+                "cemFile": "@ui5/webcomponents/dist/custom-elements-internal.json",
+                "targetDir": ".",
+                "outputPath": "libs/generated/ui5-webcomponents",
+                "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.json"
+            }
+        },
         "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],

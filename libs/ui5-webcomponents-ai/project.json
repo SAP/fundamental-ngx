@@ -9,6 +9,15 @@
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=ui5-webcomponents-ai --verbose",
             "dependsOn": ["ui5-webcomponents:build", "^prepare"]
         },
+        "generate": {
+            "executor": "@fundamental-ngx/webc-generator:generate",
+            "options": {
+                "cemFile": "@ui5/webcomponents-ai/dist/custom-elements-internal.json",
+                "targetDir": ".",
+                "outputPath": "libs/generated/ui5-webcomponents-ai",
+                "tsConfig": "libs/ui5-webcomponents-ai/tsconfig.lib.json"
+            }
+        },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
