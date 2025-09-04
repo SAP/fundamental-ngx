@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import {
     ALT,
-    BACKSPACE,
     CONTROL,
     DOWN_ARROW,
     ENTER,
@@ -19,7 +18,6 @@ import {
     NUMPAD_ZERO,
     RIGHT_ARROW,
     SHIFT,
-    SPACE,
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
@@ -498,17 +496,6 @@ export abstract class BaseCombobox
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             if (!KeyUtil.isKeyCode(event, this._numberPadNumberKeys)) {
                 this.isOpenChangeHandle(true);
-            }
-            const acceptedKeys =
-                !KeyUtil.isKeyCode(event, BACKSPACE) &&
-                !KeyUtil.isKeyCode(event, SPACE) &&
-                !KeyUtil.isKeyType(event, 'alphabetical') &&
-                !KeyUtil.isKeyType(event, 'numeric') &&
-                !KeyUtil.isKeyType(event, 'ime') &&
-                !KeyUtil.isKeyCode(event, this._numberPadNumberKeys);
-
-            if (this.isEmptyValue && acceptedKeys) {
-                this.listComponent?.setItemActive(0);
             }
         }
     }
