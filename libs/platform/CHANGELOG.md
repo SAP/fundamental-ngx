@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.10...v0.57.4-rc.11) (2025-09-04)
+
+
+### Bug Fixes
+
+* **platform:** allow Hungarian special alphabet characters in Combobox input ([#13477](https://github.com/SAP/fundamental-ngx/issues/13477)) ([16394c9](https://github.com/SAP/fundamental-ngx/commit/16394c97c109f728d87faae0f1362586733fffd1))
+
+
+
+
+
 ## [0.57.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.9...v0.57.4-rc.10) (2025-09-03)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
