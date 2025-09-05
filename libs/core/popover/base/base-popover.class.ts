@@ -14,6 +14,11 @@ export class BasePopoverClass {
     @HostBinding('class.fd-popover-custom--disabled')
     disabled = false;
 
+    /** Whether the popover is display-only. */
+    @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
+    display = false;
+
     /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
     @Input()
     maxWidth: Nullable<number> = null;

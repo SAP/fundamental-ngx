@@ -1,4 +1,8 @@
-<div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
+<div
+    class="fd-tokenizer fd-tokenizer--scrollable"
+    [class.is-focus]="_tokenizerHasFocus"
+    [class.fd-tokenizer--display]="display"
+>
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <div
             [attr.aria-hidden]="tokenList.length === 0"
@@ -12,6 +16,9 @@
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {
+                @if (display) {
+                    <span class="fd-token-separator" [innerHtml]="getDotSymbol()">mimi</span>
+                }
                 <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
                     @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                         {{

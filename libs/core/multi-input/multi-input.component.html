@@ -15,6 +15,7 @@
                     [triggers]="[]"
                     [maxWidth]="_popoverMaxWidth"
                     [disabled]="disabled"
+                    [display]="display"
                     [fillControlMode]="fillControlMode"
                     class="fd-multi-input-popover-custom"
                 >
@@ -44,6 +45,7 @@
             [buttonFocusable]="buttonFocusable"
             [button]="showAddonButton"
             [disabled]="disabled"
+            [display]="display"
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
             [glyph]="showAddonButton ? glyph : ''"
@@ -58,6 +60,7 @@
                 [showOverflowPopover]="false"
                 [open]="open"
                 [tokenizerFocusable]="false"
+                [display]="display"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
                 tabindex="-1"
@@ -67,12 +70,17 @@
                 @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
+                        [display]="display"
+                        [class.fd-token--display]="display"
                         (onCloseClick)="_onTokenCloseClick(option, false, $event)"
                         (onRemove)="_onTokenCloseClick(option, false)"
                         [title]="option.label"
                         (onTokenClick)="_tokenElementClicked($event)"
                     >
                         <span [innerHtml]="option.label"></span>
+                        @if (display && !$last) {
+                            <span class="fd-token-separator" [innerHtml]="getDotSymbol()"></span>
+                        }
                     </fd-token>
                 }
                 <input
@@ -126,7 +134,11 @@
                         (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                         [selected]="!!option.isSelected"
                     >
-                        <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
+                        <fd-checkbox
+                            (click)="_onCheckboxClick(option, $event, idx)"
+                            [value]="option.isSelected"
+                            [displayOnly]="true"
+                        >
                             <!-- TODO -->
                         </fd-checkbox>
                         <ng-template

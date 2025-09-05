@@ -9,6 +9,7 @@
     [attr.aria-setsize]="_totalCount"
     [attr.aria-posinset]="_itemPosition"
     [class.fd-token__disabled]="disabled"
+    [class.fd-token--display]="display"
     [class.fd-token--selected]="selected"
     [class.fd-token--readonly]="readOnly"
     [attr.aria-selected]="selected"
@@ -16,7 +17,7 @@
     <span class="fd-token__text no-text-select">
         <ng-container #viewContainer></ng-container>
     </span>
-    @if (!readOnly) {
+    @if (!readOnly && !display) {
         <span
             (click)="closeClickHandler($event)"
             role="button"
