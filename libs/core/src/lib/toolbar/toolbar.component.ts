@@ -24,12 +24,14 @@ import {
     applyCssClass,
     CssClassBuilder,
     DestroyedService,
+    Nullable,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, map, Observable, startWith, takeUntil } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import {
     ContentDensityMode,
     ContentDensityObserver,
@@ -123,6 +125,18 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     tabindex = -1;
 
+    /**
+     * Heading level of the toolbar title.
+     */
+    @Input()
+    set headingLevel(level: Nullable<HeadingLevel>) {
+        if (typeof level === 'number') {
+            this._headingLevel = level;
+        } else if (typeof level === 'string') {
+            this._headingLevel = Number.parseInt(level.replace(/\D/g, ''), 10);
+        }
+    }
+
     /** @hidden */
     @ViewChild('toolbar')
     toolbar: ElementRef;
@@ -144,6 +158,9 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     get titleComponent(): TitleToken | null {
         return this._titleComponent$.value;
     }
+
+    /** @hidden */
+    _headingLevel = 4;
 
     /** @hidden */
     overflowItems$: Observable<ToolbarItem[]>;
