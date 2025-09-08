@@ -56,6 +56,8 @@ const MAX_CONTENT_SIZE = 99999999;
 
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
 
+let toolbarTitleId = 0;
+
 export const enum OverflowPriorityEnum {
     ALWAYS = 'always',
     NEVER = 'never',
@@ -93,7 +95,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
      * The ID of the toolbar title
      * */
     @Input()
-    titleId: string;
+    titleId = `fd-toolbar-title-${toolbarTitleId++}`;
 
     /** Property allows user to pass additional class
      */
