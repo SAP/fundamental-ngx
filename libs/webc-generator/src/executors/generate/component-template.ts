@@ -24,20 +24,34 @@ function generateTypeImports(
                         // Import from the new central types file
                         componentEnums.push(reference.name);
                         typeNames.add(reference.name);
+                        continue;
+                    }
+
+                    let importPath: string | undefined;
+
+                    if (reference.package === '@ui5/webcomponents-base') {
+                        // Case 1: If the package is @ui5/webcomponents-base, map to our base library
+                        importPath = `@fundamental-ngx/ui5-webcomponents-base`;
+                    } else if (reference.package === '@ui5/webcomponents' && reference.module) {
+                        // Case 2: If the package is @ui5/webcomponents, use the module path
+                        importPath = `@ui5/webcomponents/${reference.module}`;
                     } else if (reference.module) {
-                        // Use the correct import path directly from the CEM module path, including the .js extension
-                        const modulePath = reference.module.startsWith('.')
+                        // Fallback: If no package is defined, or it's an unexpected one,
+                        // use the existing module logic.
+                        importPath = reference.module.startsWith('.')
                             ? reference.module
                             : `@ui5/webcomponents/${reference.module}`;
-                        componentImports.push(`import { ${reference.name} } from '${modulePath}';`);
-                        typeNames.add(reference.name);
                     } else if (reference.package) {
                         // Handle the case where the reference has a package
                         const mappedPackage = reference.package.replace(
                             '@ui5/webcomponents',
                             '@fundamental-ngx/ui5-webcomponents'
                         );
-                        componentImports.push(`import { ${reference.name} } from '${mappedPackage}';`);
+                        importPath = `${mappedPackage}`;
+                    }
+
+                    if (importPath) {
+                        componentImports.push(`import { ${reference.name} } from '${importPath}';`);
                         typeNames.add(reference.name);
                     }
                 }
