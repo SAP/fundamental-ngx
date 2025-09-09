@@ -21,7 +21,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
     if (!options.cemFile) {
         return {
             success: false,
-            error: `Could not determine a valid path to the CEM file. Please provide it via the "cemFile" option.`
+            error: `Could not determine a valid path to the CEM file. Please provide it via the cemFile option.`
         };
     }
 
@@ -30,124 +30,130 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
     } catch (error) {
         return {
             success: false,
-            error: `Failed to resolve CEM file at path "${options.cemFile}". Please ensure the package is installed and the path is correct. Original error: ${error.message}`
+            error: `Failed to resolve CEM file at path ${options.cemFile}. Please ensure the package is installed and the path is correct. Original error: ${error.message}`
         };
     }
 
     let cemData: CEM.Package;
     try {
-        const fileContent = await readFile(cemFilePath, 'utf-8');
-        cemData = JSON.parse(fileContent) as CEM.Package;
+        const cemContent = await readFile(cemFilePath, 'utf-8');
+        cemData = JSON.parse(cemContent) as CEM.Package;
     } catch (error) {
-        return { success: false, error: `Failed to read or parse CEM file at ${cemFilePath}: ${error.message}` };
+        return {
+            success: false,
+            error: `Failed to read or parse the CEM file at ${cemFilePath}. Original error: ${error.message}`
+        };
     }
 
-    // Get the project's root directory from the context.
-    const projectRoot = executorContext.projectsConfigurations.projects[executorContext.projectName].root;
-    const targetDir = options.targetDir || 'src/generated';
-    console.log(`Generating components into: ${path.join(projectRoot, targetDir)}`);
+    // Helper function to convert PascalCase to kebab-case
+    const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 
-    // Use an array to store all promises for file creation.
-    const writePromises: Promise<void>[] = [];
-    const componentImports: { className: string; path: string }[] = [];
+    const componentDeclarations = cemData.modules.flatMap((m) => {
+        const declarations = m.declarations.filter(
+            (d): d is CEM.CustomElementDeclaration =>
+                d?.kind === 'class' && 'customElement' in d && d.customElement === true
+        );
+        return declarations.map((d) => ({ declaration: d, modulePath: m.path }));
+    });
 
-    // Iterate over each module in the CEM data to find component declarations.
-    for (const module of cemData.modules) {
-        const declarations = module.declarations as CEM.CustomElementDeclaration[] | undefined;
-
-        if (declarations) {
-            // Loop through each custom element declaration.
-            for (const declaration of declarations) {
-                // Generate components only for classes that have a tag name.
-                if (declaration.kind === 'class' && declaration.tagName) {
-                    writePromises.push(
-                        (async () => {
-                            // Get the component's tag name and sanitize it for use in a file path.
-                            const componentTagName = declaration.tagName as string;
-                            const className = declaration.name as string;
-
-                            // Remove the 'ui5-' prefix from the folder name
-                            const componentFolderName = componentTagName.replace(/^ui5-/, '');
-                            componentImports.push({ className, path: componentFolderName });
-
-                            // Construct the full path where the component's directory will be created.
-                            const componentDir = path.join(projectRoot, targetDir, componentFolderName);
-                            const tsPath = path.join(componentDir, 'index.ts');
-                            const ngPackagePath = path.join(componentDir, 'ng-package.json');
-                            const ngPackageContent = JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2);
-
-                            try {
-                                // Create the directory (and any parent directories) if it doesn't exist.
-                                await mkdir(componentDir, { recursive: true });
-
-                                // Generate the component's content.
-                                const generatedComponent = componentTemplate(declaration, cemData);
-
-                                // Write the generated content to the index.ts file.
-                                await writeFile(tsPath, generatedComponent, 'utf-8');
-
-                                // Write the ng-package.json file.
-                                await writeFile(ngPackagePath, ngPackageContent, 'utf-8');
-                            } catch (error) {
-                                // If any part of this process fails, log a specific error and re-throw
-                                // so that the Promise.all at the end will reject.
-                                console.error(`Failed to generate component for ${componentTagName}:`, error);
-                                throw new Error(`Failed to write file for ${componentTagName}: ${error.message}`);
-                            }
-                        })()
-                    );
-                }
-            }
-        }
-    }
+    const components = componentDeclarations
+        .map(({ declaration, modulePath }) => {
+            const className = declaration.name || '';
+            const fileName = pascalToKebabCase(declaration.name || '');
+            return { className, fileName };
+        })
+        .filter((c) => c.className !== '' && c.fileName !== '');
 
     try {
-        // Wait for all the component file promises to resolve.
-        await Promise.all(writePromises);
+        const projectRoot = executorContext.root;
+        const targetDir = `libs/${executorContext.projectName}`;
 
-        // Now generate the main module file.
-        const moduleImports = componentImports.map((c) => `import { ${c.className} } from './${c.path}';`).join('\n');
-        const componentNames = componentImports.map((c) => c.className).join(',\n    ');
+        // Create the directory if it doesn't exist
+        await mkdir(path.join(projectRoot, targetDir), { recursive: true });
 
-        const moduleContent = `import { NgModule } from '@angular/core';
-${moduleImports}
+        // Generate all component files and ng-package.json files
+        await Promise.all(
+            componentDeclarations.map(({ declaration, modulePath }) => {
+                const fileName = pascalToKebabCase(declaration.name || '');
+                const componentDir = path.join(projectRoot, targetDir, fileName);
+                const componentIndexPath = path.join(componentDir, 'index.ts');
+                const ngPackagePath = path.join(componentDir, 'ng-package.json');
 
-@NgModule({
-  imports: [
-    ${componentNames}
+                return mkdir(componentDir, { recursive: true })
+                    .then(() => writeFile(componentIndexPath, componentTemplate(declaration, cemData), 'utf-8'))
+                    .then(() =>
+                        writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8')
+                    );
+            })
+        );
+
+        // Generate the utils folder and cva.ts file
+        const utilsDir = path.join(projectRoot, targetDir, 'utils');
+        const cvaFilePath = path.join(utilsDir, 'cva.ts');
+        const cvaContent = `import { Directive, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+interface CvaComponent<ValueType = any> {
+  element: Element;
+  cvaValue: ValueType;
+}
+
+@Directive({
+  selector: '[noop]',
+  standalone: true,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => GenericControlValueAccessor), // TODO: it's not needed in the older wrappers
+      //useExisting: GenericControlValueAccessor,
+      multi: true,
+    },
   ],
-  exports: [
-    ${componentNames}
-  ],
+  host: {
+    '(focusout)': 'onTouched?.()',
+  },
 })
-export class Ui5ComponentsModule {}
-`;
+class GenericControlValueAccessor<ValueType = any>
+  implements ControlValueAccessor
+{
+  onChange!: (val: ValueType) => void;
+  onTouched!: () => void;
 
-        const modulePath = path.join(projectRoot, targetDir, 'ui5.module.ts');
-        await writeFile(modulePath, moduleContent, 'utf-8');
+  host!: CvaComponent<ValueType>;
 
-        // Generate the root index.ts file for the module.
+  setDisabledState = (isDisabled: boolean): void => {
+    this.host.element['disabled'] = isDisabled;
+  };
+
+  registerOnChange(fn: (newVal: ValueType) => void): void {
+    this.onChange = fn;
+  };
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  };
+
+  writeValue(val: ValueType): void {
+    this.host.cvaValue = val;
+  };
+}
+
+export { GenericControlValueAccessor };`;
+
+        await mkdir(utilsDir, { recursive: true });
+        await writeFile(cvaFilePath, cvaContent, 'utf-8');
+
+        // Generate the root index.ts file
         const rootIndexPath = path.join(projectRoot, targetDir, 'index.ts');
-        const rootIndexContent = `export { Ui5ComponentsModule } from './ui5.module';\n`;
-        await writeFile(rootIndexPath, rootIndexContent, 'utf-8');
+        const exportsContent =
+            `export { GenericControlValueAccessor } from './utils/cva';\n` +
+            components.map(({ className, fileName }) => `export { ${className} } from './${fileName}';`).join('\n');
+        await writeFile(rootIndexPath, exportsContent, 'utf-8');
 
         // Add the new theming folder and service file
         const themingDir = path.join(projectRoot, targetDir, 'theming');
         const themingServicePath = path.join(themingDir, 'index.ts');
-        const themingServiceContent = `import { Injectable } from '@angular/core';
-import { WebcomponentsThemingProvider } from '@ui5/webcomponents-ngx/theming';
-
-@Injectable({ providedIn: 'root' })
-class Ui5WebcomponentsThemingService extends WebcomponentsThemingProvider {
-  name = 'ui-5-webcomponents-theming-service';
-  constructor() {
-    super(
-      () => import('@ui5/webcomponents/dist/generated/json-imports/Themes.js'),
-    );
-  }
-}
-
-export { Ui5WebcomponentsThemingService };`;
+        const themingServiceContent = `import { Injectable } from '@angular/core';\nimport { WebcomponentsThemingProvider } from '@ui5/webcomponents-ngx/theming';\n\n@Injectable({ providedIn: 'root' })\nclass Ui5WebcomponentsThemingService extends WebcomponentsThemingProvider {\n  name = 'ui-5-webcomponents-theming-service';\n  constructor() {\n    super(\n      () => import('@ui5/webcomponents/dist/generated/json-imports/Themes.js'),\n    );\n  }\n}\n\nexport { Ui5WebcomponentsThemingService };`;
 
         await mkdir(themingDir, { recursive: true });
         await writeFile(themingServicePath, themingServiceContent, 'utf-8');
@@ -156,7 +162,10 @@ export { Ui5WebcomponentsThemingService };`;
     } catch (error) {
         // If any promise in the array rejected, the catch block will be triggered
         // and we can return a clear failure status.
-        return { success: false, error: error.message };
+        return {
+            success: false,
+            error: `An error occurred during component generation: ${error.message}`
+        };
     }
 };
 

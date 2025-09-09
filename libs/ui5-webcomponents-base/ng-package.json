@@ -1,0 +1,15 @@
+{
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/libs/ui5-webcomponents-base",
+    "deleteDestPath": true,
+    "assets": ["./assets/**/*", "./styles/*.*"],
+    "lib": {
+        "entryFile": "./index.ts"
+    },
+    "allowedNonPeerDependencies": [
+        "@sap-theming/theming-base-content",
+        "lodash-es",
+        "compare-versions",
+        "fast-deep-equal"
+    ]
+}
