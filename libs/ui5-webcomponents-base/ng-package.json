@@ -6,10 +6,5 @@
     "lib": {
         "entryFile": "./index.ts"
     },
-    "allowedNonPeerDependencies": [
-        "@sap-theming/theming-base-content",
-        "lodash-es",
-        "compare-versions",
-        "fast-deep-equal"
-    ]
+    "allowedNonPeerDependencies": ["focus-trap", "lodash-es", "fast-deep-equal", "compare-versions"]
 }
