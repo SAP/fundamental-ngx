@@ -1,7 +1,15 @@
 @if (title) {
-    <span [attr.aria-level]="_headingLevel" fd-title class="fd-toolbar__title" [id]="titleId" #titleElement>{{
-        title
-    }}</span>
+    <span
+        fd-title
+        role="heading"
+        [headerSize]="4"
+        [attr.aria-level]="_headingLevel"
+        class="fd-toolbar__title"
+        [id]="titleId"
+        #titleElement
+    >
+        {{ title }}
+    </span>
 }
 <ng-content></ng-content>
 @if (overflownItems.length > 0) {
