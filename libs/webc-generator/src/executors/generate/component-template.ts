@@ -137,7 +137,7 @@ export const componentTemplate = (data: CEM.CustomElementDeclaration, cemPackage
         `  booleanAttribute,`,
         `} from '@angular/core';`,
         ui5ImportLine,
-        `import { GenericControlValueAccessor } from '../../utils/cva';`,
+        `import { GenericControlValueAccessor } from '../utils/cva';`,
         `import { UI5CustomEvent } from '@ui5/webcomponents-base';`
     ];
 
@@ -147,6 +147,56 @@ export const componentTemplate = (data: CEM.CustomElementDeclaration, cemPackage
     const inputMembers = data.members?.filter(isField) || [];
     const outputEvents = data.events || [];
 
+    const inputsToSyncCode =
+        inputMembers.length > 0
+            ? `
+    const inputsToSync = [
+${inputMembers.map((m) => `      '${kebabToCamelCase(m.name)}',`).join('\n')}\
+    ];`
+            : '';
+
+    const inputSyncLoop =
+        inputMembers.length > 0
+            ? `
+    // Synchronize inputs (properties)
+    for (const inputName of inputsToSync) {
+      if (this[inputName] && typeof this[inputName] === 'function') {
+        runInInjectionContext(this.injector, () => {
+          effect(() => {
+            const value = this[inputName]();
+            if (wcElement) {
+              wcElement[inputName] = value;
+            }
+          });
+        });
+      }
+    }
+  `
+            : '';
+
+    const outputsToSyncCode =
+        outputEvents.length > 0
+            ? `
+    const outputsToSync = [
+${outputEvents.map((e) => `      'ui5${kebabToCamelCase(e.name)}',`).join('\n')}\
+    ];`
+            : '';
+
+    const outputSyncLoop =
+        outputEvents.length > 0
+            ? `
+    // Synchronize outputs (events)
+    for (const outputName of outputsToSync) {
+      const eventName = outputName.replace('ui5', '').toLowerCase();
+      if (this[outputName] && typeof this[outputName].emit === 'function' && wcElement.addEventListener) {
+        // Cast the listener to the correct type to satisfy TypeScript
+        wcElement.addEventListener(eventName, (e) => {
+          this[outputName].emit(e as CustomEvent<any>);
+        });
+      }
+    }
+  `
+            : '';
     return `
 ${componentImports.join('\n')}
 
@@ -173,37 +223,10 @@ ${generateOutputs(data)}
 
   ngAfterViewInit(): void {
     const wcElement = this.element;
-    const inputsToSync = [
-${inputMembers.map((m) => `      '${kebabToCamelCase(m.name)}',`).join('\n')}
-    ];
-    const outputsToSync = [
-${outputEvents.map((e) => `      'ui5${kebabToCamelCase(e.name)}',`).join('\n')}
-    ];
-
-    // Synchronize outputs (events)
-    for (const outputName of outputsToSync) {
-      const eventName = outputName.replace('ui5', '').toLowerCase();
-      if (this[outputName] && typeof this[outputName].emit === 'function' && wcElement.addEventListener) {
-        // Cast the listener to the correct type to satisfy TypeScript
-        wcElement.addEventListener(eventName, (e) => {
-          this[outputName].emit(e as CustomEvent<any>);
-        });
-      }
-    }
-
-    // Synchronize inputs (properties)
-    for (const inputName of inputsToSync) {
-      if (this[inputName] && typeof this[inputName] === 'function') {
-        runInInjectionContext(this.injector, () => {
-          effect(() => {
-            const value = this[inputName]();
-            if (wcElement) {
-              wcElement[inputName] = value;
-            }
-          });
-        });
-      }
-    }
+    ${inputsToSyncCode}
+    ${inputSyncLoop}
+    ${outputsToSyncCode}
+    ${outputSyncLoop}
   }
 }
 `;
