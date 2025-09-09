@@ -1,29 +1,108 @@
 import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
 
-// Helper function to extract and format enum-like types from the schema
-function extractAndFormatEnums(data: CEM.CustomElementDeclaration, cemPackage: CEM.Package): string[] {
-    const enums: string[] = [];
-    const typeNames: Set<string> = new Set();
-    data.members?.filter(isField).forEach((member) => {
-        const typeReferenceName = member.type?.references?.[0]?.name;
-        if (typeReferenceName && !typeNames.has(typeReferenceName)) {
-            // Find the enum declaration in the global CEM
-            const enumDeclaration = cemPackage.modules
-                .flatMap((mod) => mod.declarations)
-                .filter((dec): dec is CEM.Declaration => dec !== undefined) // Filter out undefined values
-                .find((dec) => dec.name === typeReferenceName && dec.kind === 'enum') as
-                | CEM.EnumDeclaration
-                | undefined;
+function kebabToCamelCase(s: string): string {
+    return s.replace(/-./g, (x) => x[1].toUpperCase());
+}
 
-            if (enumDeclaration && enumDeclaration.members) {
-                const enumValues = enumDeclaration.members.map((m) => `"${m.name}"`).join(' | ');
+// Function to generate imports for enum types and other referenced types
+function generateTypeImports(
+    data: CEM.CustomElementDeclaration,
+    allEnums: { name: string; members: string[] }[]
+): { componentImports: string[]; componentEnums: string[] } {
+    const componentImports: string[] = [];
+    const componentEnums: string[] = [];
+    const typeNames = new Set<string>();
 
-                typeNames.add(typeReferenceName);
-                enums.push(`export type ${typeReferenceName} = ${enumValues} | undefined;`);
+    const members = (data.members as CEM.ClassField[] | undefined) || [];
+    for (const member of members) {
+        if (member.type?.references) {
+            for (const reference of member.type.references) {
+                if (reference.name && !typeNames.has(reference.name)) {
+                    // Check if the reference is one of the enums we have extracted
+                    const isEnum = allEnums.some((e) => e.name === reference.name);
+                    if (isEnum) {
+                        // Import from the new central types file
+                        componentEnums.push(reference.name);
+                        typeNames.add(reference.name);
+                    } else if (reference.module) {
+                        // Use the correct import path directly from the CEM module path, including the .js extension
+                        const modulePath = reference.module.startsWith('.')
+                            ? reference.module
+                            : `@ui5/webcomponents/${reference.module}`;
+                        componentImports.push(`import { ${reference.name} } from '${modulePath}';`);
+                        typeNames.add(reference.name);
+                    } else if (reference.package) {
+                        // Handle the case where the reference has a package
+                        const mappedPackage = reference.package.replace(
+                            '@ui5/webcomponents',
+                            '@fundamental-ngx/ui5-webcomponents'
+                        );
+                        componentImports.push(`import { ${reference.name} } from '${mappedPackage}';`);
+                        typeNames.add(reference.name);
+                    }
+                }
             }
         }
+    }
+
+    if (componentEnums.length > 0) {
+        componentImports.push(`import { ${componentEnums.join(', ')} } from '../types';`);
+    }
+
+    return { componentImports, componentEnums };
+}
+
+// Helper function to generate input properties for the component
+function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): string {
+    const inputs: string[] = [];
+    (data.members ?? []).filter(isField).forEach((member) => {
+        let type = member.type?.text?.replace(' | undefined', '');
+        const typeReferenceName = member.type?.references?.[0]?.name;
+
+        // If the type is an enum, use the imported type name
+        if (typeReferenceName && enums.includes(typeReferenceName)) {
+            type = typeReferenceName;
+        }
+
+        const isBoolean = type?.includes('boolean') || typeReferenceName === 'Boolean';
+        const hasInputDecorator = member.privacy === 'public';
+
+        if (hasInputDecorator) {
+            const inputType = isBoolean ? '' : `<${type}>`;
+            const memberDefault = member.default;
+
+            let inputCall;
+            if (memberDefault === 'undefined' || memberDefault === undefined) {
+                inputCall = `input${inputType}()`;
+            } else if (isBoolean) {
+                const defaultVal = memberDefault === 'true';
+                inputCall = `input(${defaultVal}, { transform: booleanAttribute })`;
+            } else {
+                inputCall = `input${inputType}(${memberDefault})`;
+            }
+
+            inputs.push(`
+  /**
+   * ${member.description || ''}
+   */
+  ${kebabToCamelCase(member.name)} = ${inputCall};`);
+        }
     });
-    return enums;
+
+    return inputs.join('\n');
+}
+
+// Helper function to generate output properties for the component
+function generateOutputs(data: CEM.CustomElementDeclaration): string {
+    const outputs: string[] = [];
+    data.events?.forEach((event) => {
+        outputs.push(`
+  /**
+   * ${event.description || ''}
+   */
+  ui5${kebabToCamelCase(event.name)} = output<CustomEvent<any>>();`);
+    });
+    return outputs.join('\n');
 }
 
 // Type guard to check if a member is a ClassField
@@ -31,132 +110,28 @@ function isField(member: CEM.ClassMember): member is CEM.ClassField {
     return member.kind === 'field';
 }
 
-function kebabToCamelCase(str: string): string {
-    return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
+    return data.superclass?.name === 'FormSupport' || data.superclass?.name === 'InputBase';
 }
 
-// Helper function to generate input() properties from schema members
-function generateInputs(data: CEM.CustomElementDeclaration): string {
-    const inputs = data.members?.filter(isField) || [];
-    return inputs
-        .map((member) => {
-            const propName = kebabToCamelCase(member.name);
-            const type = member.type?.text.replace(/\| undefined/g, '').trim() || 'any';
-            const isBoolean = type === 'boolean' || type.includes('boolean');
-            const hasDefault = member.default !== undefined && member.default !== 'undefined';
-            let docComment = '';
-
-            if (member.description) {
-                const descriptionLines = member.description.split('\n');
-                docComment = `  /**\n` + descriptionLines.map((line) => `   * ${line.trim()}`).join('\n') + `\n   */\n`;
-            }
-
-            let inputDecorator: string;
-            if (hasDefault) {
-                const defaultValue = member.default;
-                if (isBoolean) {
-                    inputDecorator = `input(${defaultValue}, { transform: booleanAttribute })`;
-                } else {
-                    // Cast the default value to the correct type to resolve TS errors
-                    inputDecorator = `input<${type}>(${defaultValue} as ${type})`;
-                }
-            } else {
-                inputDecorator = `input<${type}>()`;
-            }
-            return `${docComment}  ${propName} = ${inputDecorator};`;
-        })
-        .join('\n');
-}
-
-// Helper function to generate output() properties from schema events
-function generateOutputs(data: CEM.CustomElementDeclaration): string {
-    const outputs = data.events || [];
-    return outputs
-        .map((event) => {
-            const eventName = `ui5${kebabToCamelCase(event.name)}`;
-            let docComment = '';
-
-            if (event.description) {
-                const descriptionLines = event.description.split('\n');
-                docComment = `  /**\n` + descriptionLines.map((line) => `   * ${line.trim()}`).join('\n') + `\n   */\n`;
-            }
-
-            return `${docComment}  ${eventName} = output<CustomEvent<any>>();`;
-        })
-        .join('\n');
-}
-
-// The main function to export
-export const componentTemplate = (data: CEM.CustomElementDeclaration, cemPackage: CEM.Package): string => {
-    const tagName = data.tagName;
+export function componentTemplate(
+    data: CEM.CustomElementDeclaration,
+    cemPackage: CEM.Package,
+    allEnums: { name: string; members: string[] }[]
+): string {
+    const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
+    const tagName = data.tagName || '';
     const className = data.name;
-    const ui5Class = `_${className}`;
-
-    // Extract and format enum types
-    const enumDeclarations = extractAndFormatEnums(data, cemPackage);
-    const enumBlock = enumDeclarations.length > 0 ? enumDeclarations.join('\n') + '\n\n' : '';
-
-    // Collect all types that need to be imported
-    const importsFromWebComponent = new Set<string>();
-    data.members?.filter(isField).forEach((member) => {
-        const typeReferenceName = member.type?.references?.[0]?.name;
-        if (typeReferenceName) {
-            const enumDeclaration = cemPackage.modules
-                .flatMap((mod) => mod.declarations)
-                .filter((dec): dec is CEM.Declaration => dec !== undefined)
-                .find((dec) => dec.name === typeReferenceName && dec.kind === 'enum') as
-                | CEM.EnumDeclaration
-                | undefined;
-
-            // If the type is not an enum, add it to our import list
-            if (!enumDeclaration) {
-                importsFromWebComponent.add(typeReferenceName);
-            }
-        }
-    });
-
-    // Construct the import statement for the web component
-    const namedImports = [...importsFromWebComponent].join(', ');
-    const ui5ImportLine =
-        namedImports.length > 0
-            ? `import { default as ${ui5Class}, ${namedImports} } from '@ui5/webcomponents/dist/${className}.js';`
-            : `import ${ui5Class} from '@ui5/webcomponents/dist/${className}.js';`;
-
-    const componentImports = [
-        `import {`,
-        `  ChangeDetectionStrategy,`,
-        `  Component,`,
-        `  ElementRef,`,
-        `  input,`,
-        `  output,`,
-        `  AfterViewInit,`,
-        `  effect,`,
-        `  runInInjectionContext,`,
-        `  inject,`,
-        `  Injector,`,
-        `  booleanAttribute,`,
-        `} from '@angular/core';`,
-        ui5ImportLine,
-        `import { GenericControlValueAccessor } from '../utils/cva';`,
-        `import { UI5CustomEvent } from '@ui5/webcomponents-base';`
-    ];
-
-    const isCva = data.members?.some((member) => member.name === 'value');
-    const cvaHostDirective = isCva ? `  hostDirectives: [GenericControlValueAccessor],` : '';
-
-    const inputMembers = data.members?.filter(isField) || [];
+    const ui5Class = data.name;
     const outputEvents = data.events || [];
+    const cvaHostDirective = hasCvaHostDirective(data) ? `  hostDirectives: [GenericControlValueAccessor],\n` : '';
 
-    const inputsToSyncCode =
-        inputMembers.length > 0
-            ? `
-    const inputsToSync = [
-${inputMembers.map((m) => `      '${kebabToCamelCase(m.name)}',`).join('\n')}\
-    ];`
-            : '';
-
+    const inputsToSyncCode = `\n    const inputsToSync = [\n${(data.members ?? [])
+        .filter(isField)
+        .map((m) => `      '${m.name}',`)
+        .join('\n')}\n    ];`;
     const inputSyncLoop =
-        inputMembers.length > 0
+        (data.members ?? []).filter(isField).length > 0
             ? `
     // Synchronize inputs (properties)
     for (const inputName of inputsToSync) {
@@ -178,7 +153,7 @@ ${inputMembers.map((m) => `      '${kebabToCamelCase(m.name)}',`).join('\n')}\
         outputEvents.length > 0
             ? `
     const outputsToSync = [
-${outputEvents.map((e) => `      'ui5${kebabToCamelCase(e.name)}',`).join('\n')}\
+${outputEvents.map((e) => `      'ui5${kebabToCamelCase(e.name)}',`).join('\n')}
     ];`
             : '';
 
@@ -198,9 +173,24 @@ ${outputEvents.map((e) => `      'ui5${kebabToCamelCase(e.name)}',`).join('\n')}
   `
             : '';
     return `
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  input,
+  output,
+  AfterViewInit,
+  effect,
+  runInInjectionContext,
+  inject,
+  Injector,
+  booleanAttribute
+} from '@angular/core';
+import { default as _${className} } from '@ui5/webcomponents/dist/${className}.js';
+import { UI5CustomEvent } from '@ui5/webcomponents-base';
+
 ${componentImports.join('\n')}
 
-${enumBlock}
 @Component({
   standalone: true,
   selector: '${tagName}',
@@ -210,14 +200,14 @@ ${cvaHostDirective}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
-${generateInputs(data)}
+${generateInputs(data, componentEnums)}
 
 ${generateOutputs(data)}
 
-  public elementRef: ElementRef<${ui5Class}> = inject(ElementRef);
+  public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
 
-  get element(): ${ui5Class} {
+  get element(): _${className} {
     return this.elementRef.nativeElement;
   }
 
@@ -230,4 +220,4 @@ ${generateOutputs(data)}
   }
 }
 `;
-};
+}
