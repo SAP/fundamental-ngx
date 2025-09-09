@@ -93,7 +93,7 @@
     padding: 0 !important;
 }
 
-.fd-dynamic-page__collapsible-header:has(.fd-has-display-none) {
+.fd-dynamic-page__collapsible-header:has(.fd-has-display-none):not(:has(.fd-message-strip.fd-has-display-none)) {
     padding-block: 0;
     padding-inline: 0;
 }
