@@ -77,6 +77,19 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
         // Create the directory if it doesn't exist
         await mkdir(path.join(projectRoot, targetDir), { recursive: true });
 
+        // Generate the types file
+        const typesDir = path.join(projectRoot, targetDir, 'types');
+        const typesIndexPath = path.join(typesDir, 'index.ts');
+        const typesContent = allEnums
+            .map((e) => {
+                const enumValues = e.members.map((m) => `'${m}'`).join(' | ');
+                return `export type ${e.name} = ${enumValues} | undefined;`;
+            })
+            .join('\n');
+
+        await mkdir(typesDir, { recursive: true });
+        await writeFile(typesIndexPath, typesContent, 'utf-8');
+
         // Generate all component files and ng-package.json files
         await Promise.all(
             componentDeclarations.map(({ declaration, modulePath }) => {
