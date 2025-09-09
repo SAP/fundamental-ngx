@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.11...v0.57.4-rc.12) (2025-09-09)
+
+
+### Bug Fixes
+
+* **core:** add role heading to title element in Toolbar ([#13480](https://github.com/SAP/fundamental-ngx/issues/13480)) ([7d8b492](https://github.com/SAP/fundamental-ngx/commit/7d8b492476116691f475c7be32d2c39ee6be0bbd))
+
+
+
+
+
 ## [0.57.4-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.10...v0.57.4-rc.11) (2025-09-04)
 
 
