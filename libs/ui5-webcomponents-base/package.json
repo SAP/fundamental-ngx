@@ -24,7 +24,6 @@
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
-    "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER",
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "lodash-es": "LODASH_ES_VER_PLACEHOLDER",

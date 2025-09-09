@@ -17,14 +17,11 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
         throw new Error('Project name is not defined in the executor context.');
     }
 
-    const projectRoot = executorContext.projectGraph.nodes[executorContext.projectName].data.root;
-    const { targetDir } = options;
-
     let cemFilePath: string | undefined;
     if (!options.cemFile) {
         return {
             success: false,
-            error: `Could not determine a valid path to the CEM file. Please provide it via the "cemFile" option.`
+            error: `Could not determine a valid path to the CEM file. Please provide it via the cemFile option.`
         };
     }
 
@@ -33,89 +30,128 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
     } catch (error) {
         return {
             success: false,
-            error: `Failed to resolve CEM file at path "${options.cemFile}". Please ensure the package is installed and the path is correct. Original error: ${error.message}`
+            error: `Failed to resolve CEM file at path ${options.cemFile}. Please ensure the package is installed and the path is correct. Original error: ${error.message}`
         };
     }
 
     let cemData: CEM.Package;
     try {
-        const cemFileContent = await readFile(cemFilePath, 'utf-8');
-        cemData = JSON.parse(cemFileContent) as CEM.Package;
+        const cemContent = await readFile(cemFilePath, 'utf-8');
+        cemData = JSON.parse(cemContent) as CEM.Package;
     } catch (error) {
         return {
             success: false,
-            error: `Failed to parse CEM file. Please ensure it is a valid JSON file. Original error: ${error.message}`
+            error: `Failed to read or parse the CEM file at ${cemFilePath}. Original error: ${error.message}`
         };
     }
 
+    // Helper function to convert PascalCase to kebab-case
+    const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
+
+    const componentDeclarations = cemData.modules.flatMap((m) => {
+        const declarations = (m.declarations || []).filter(
+            (d): d is CEM.CustomElementDeclaration =>
+                d?.kind === 'class' && 'customElement' in d && d.customElement === true
+        );
+        return declarations.map((d) => ({ declaration: d, modulePath: m.path }));
+    });
+
+    const components = componentDeclarations
+        .map(({ declaration, modulePath }) => {
+            const className = declaration.name || '';
+            const fileName = pascalToKebabCase(declaration.name || '');
+            return { className, fileName };
+        })
+        .filter((c) => c.className !== '' && c.fileName !== '');
+
+    // Extract all enum declarations from the CEM data
+    const allEnums = cemData.modules
+        .flatMap((m) => m.declarations || [])
+        .filter((d): d is CEM.EnumDeclaration => d?.kind === 'enum')
+        .map((e) => ({ name: e.name, members: (e.members || []).map((m) => m.name) }));
+
     try {
-        const components: { className: string; fileName: string }[] = [];
-        const enumDeclarations: { name: string; members: string[] }[] = [];
+        const projectRoot = executorContext.root;
+        const targetDir = `libs/${executorContext.projectName}`;
 
-        for (const module of cemData.modules) {
-            // Check if declarations exist before trying to iterate
-            for (const declaration of module.declarations || []) {
-                if (declaration.kind === 'enum') {
-                    const members =
-                        (declaration as CEM.EnumDeclaration).members?.map((member) => `"${member.name}"`) || [];
-                    enumDeclarations.push({ name: declaration.name, members });
-                }
-            }
-        }
+        // Create the directory if it doesn't exist
+        await mkdir(path.join(projectRoot, targetDir), { recursive: true });
 
-        // Generate the central types file
-        const typesDir = path.join(projectRoot, targetDir, 'types');
-        await mkdir(typesDir, { recursive: true });
+        // Generate all component files and ng-package.json files
+        await Promise.all(
+            componentDeclarations.map(({ declaration, modulePath }) => {
+                const fileName = pascalToKebabCase(declaration.name || '');
+                const componentDir = path.join(projectRoot, targetDir, fileName);
+                const componentIndexPath = path.join(componentDir, 'index.ts');
+                const ngPackagePath = path.join(componentDir, 'ng-package.json');
 
-        const typesContent = enumDeclarations
-            .map((e) => `export type ${e.name} = ${e.members.join(' | ')} | undefined;`)
-            .join('\n');
-        await writeFile(path.join(typesDir, 'index.ts'), typesContent, 'utf-8');
-
-        // Generate the utils/cva.ts file
-        const utilsDir = path.join(projectRoot, targetDir, 'utils');
-        const cvaPath = path.join(utilsDir, 'cva.ts');
-        const cvaContent = `import { Directive, HostListener, forwardRef } from '@angular/core';\nimport { NG_VALUE_ACCESSOR } from '@angular/forms';\n\n@Directive({\n  selector: 'ui5-input[ngModel],ui5-input[formControl],ui5-input[formControlName],' +\n    'ui5-textarea[ngModel],ui5-textarea[formControl],ui5-textarea[formControlName],' +\n    'ui5-slider[ngModel],ui5-slider[formControl],ui5-slider[formControlName],' +\n    'ui5-step-input[ngModel],ui5-step-input[formControl],ui5-step-input[formControlName],' +\n    'ui5-rating-indicator[ngModel],ui5-rating-indicator[formControl],ui5-rating-indicator[formControlName],' +\n    'ui5-select[ngModel],ui5-select[formControl],ui5-select[formControlName],' +\n    'ui5-multi-combobox[ngModel],ui5-multi-combobox[formControl],ui5-multi-combobox[formControlName],' +\n    'ui5-radio-button[ngModel],ui5-radio-button[formControl],ui5-radio-button[formControlName],' +\n    'ui5-checkbox[ngModel],ui5-checkbox[formControl],ui5-checkbox[formControlName],' +\n    'ui5-switch[ngModel],ui5-switch[formControl],ui5-switch[formControlName],' +\n    'ui5-date-picker[ngModel],ui5-date-picker[formControl],ui5-date-picker[formControlName],' +\n    'ui5-daterange-picker[ngModel],ui5-daterange-picker[formControl],ui5-daterange-picker[formControlName],' +\n    'ui5-time-picker[ngModel],ui5-time-picker[formControl],ui5-time-picker[formControlName],' +\n    'ui5-datetime-picker[ngModel],ui5-datetime-picker[formControl],ui5-datetime-picker[formControlName],' +\n    'ui5-upload-collection[ngModel],ui5-upload-collection[formControl],ui5-upload-collection[formControlName]',\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => GenericControlValueAccessor),\n      multi: true,\n    },\n  ],\n})\nexport class GenericControlValueAccessor {\n  onChange: (_: any) => void = () => {};\n  onTouched: () => void = () => {};\n\n  writeValue(value: any): void {\n    // Cast value to a string to properly update the UI5 Web Component.\n    // Note: This might not be suitable for all components (e.g., FileUploader)\n    const element = this.host.nativeElement as any;\n    element.value = (value === null || value === undefined) ? '' : value;\n  }\n\n  registerOnChange(fn: any): void {\n    this.onChange = fn;\n  }\n\n  registerOnTouched(fn: any): void {\n    this.onTouched = fn;\n  }\n\n  setDisabledState(isDisabled: boolean): void {\n    (this.host.nativeElement as any).disabled = isDisabled;\n  }\n\n  @HostListener('input', ['$event.target.value']) onInput(value: any): void {\n    this.onChange(value);\n  }\n\n  @HostListener('blur') onBlur(): void {\n    this.onTouched();\n  }\n\n  @HostListener('change') onChangeEvent(): void {\n    this.onTouched();\n  }\n\n  constructor(private host: ElementRef) {}\n}`;
-        await mkdir(utilsDir, { recursive: true });
-        await writeFile(cvaPath, cvaContent, 'utf-8');
-
-        // Filter for components and generate them
-        const componentPromises = cemData.modules.flatMap((mod) => (mod.declarations || [])
-                .filter(
-                    (dec): dec is CEM.CustomElementDeclaration =>
-                        dec?.kind === 'class' && (dec as CEM.CustomElementDeclaration).customElement
-                )
-                .map(async (declaration) => {
-                    const componentName = declaration.tagName?.replace('ui5-', '') || '';
-                    const componentDir = path.join(projectRoot, targetDir, componentName);
-                    const componentIndexFile = path.join(componentDir, 'index.ts');
-                    const componentPackageFile = path.join(componentDir, 'ng-package.json');
-                    const className = declaration.name;
-
-                    await mkdir(componentDir, { recursive: true });
-
-                    const componentContent = componentTemplate(declaration, cemData, enumDeclarations);
-                    await writeFile(componentIndexFile, componentContent, 'utf-8');
-
-                    // Generate ng-package.json for the component
-                    const packageJsonContent = JSON.stringify(
-                        {
-                            $schema: '../../node_modules/ng-packagr/ng-package.schema.json',
-                            dest: `../../dist/libs/${targetDir}/${componentName}`,
-                            lib: {
-                                entryFile: 'index.ts'
-                            }
-                        },
-                        null,
-                        2
+                return mkdir(componentDir, { recursive: true })
+                    .then(() =>
+                        writeFile(componentIndexPath, componentTemplate(declaration, cemData, allEnums), 'utf-8')
+                    )
+                    .then(() =>
+                        writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8')
                     );
-                    await writeFile(componentPackageFile, packageJsonContent, 'utf-8');
+            })
+        );
 
-                    components.push({ className, fileName: componentName });
-                }));
+        // Generate the utils folder and cva.ts file
+        const utilsDir = path.join(projectRoot, targetDir, 'utils');
+        const cvaFilePath = path.join(utilsDir, 'cva.ts');
+        const cvaContent = `import { Directive, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-        await Promise.all(componentPromises);
+interface CvaComponent<ValueType = any> {
+  element: Element;
+  cvaValue: ValueType;
+}
 
+@Directive({
+  selector: '[noop]',
+  standalone: true,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => GenericControlValueAccessor), // TODO: it's not needed in the older wrappers
+      //useExisting: GenericControlValueAccessor,
+      multi: true,
+    },
+  ],
+  host: {
+    '(focusout)': 'onTouched?.()',
+  },
+})
+class GenericControlValueAccessor<ValueType = any>
+  implements ControlValueAccessor
+{
+  onChange!: (val: ValueType) => void;
+  onTouched!: () => void;
+
+  host!: CvaComponent<ValueType>;
+
+  setDisabledState = (isDisabled: boolean): void => {
+    this.host.element['disabled'] = isDisabled;
+  };
+
+  registerOnChange(fn: (newVal: ValueType) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  writeValue(val: ValueType): void {
+    this.host.cvaValue = val;
+  }
+}
+
+export { GenericControlValueAccessor };`;
+
+        await mkdir(utilsDir, { recursive: true });
+        await writeFile(cvaFilePath, cvaContent, 'utf-8');
+
+        // Generate the root index.ts file
         const rootIndexPath = path.join(projectRoot, targetDir, 'index.ts');
         const exportsContent =
             `export { GenericControlValueAccessor } from './utils/cva';\n` +
@@ -132,6 +168,8 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
 
         return { success: true };
     } catch (error) {
+        // If any promise in the array rejected, the catch block will be triggered
+        // and we can return a clear failure status.
         return {
             success: false,
             error: `An error occurred during component generation: ${error.message}`
