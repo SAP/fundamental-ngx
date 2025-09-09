@@ -70,15 +70,37 @@ function generateTypeImports(
 function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): string {
     const inputs: string[] = [];
     (data.members ?? []).filter(isField).forEach((member) => {
-        let type = member.type?.text?.replace(' | undefined', '');
+        const typeText = member.type?.text?.replace(' | undefined', '');
         const typeReferenceName = member.type?.references?.[0]?.name;
 
-        // If the type is an enum, use the imported type name
-        if (typeReferenceName && enums.includes(typeReferenceName)) {
-            type = typeReferenceName;
+        // Determine if the property should be treated as an array
+        const isArrayType = typeText?.endsWith('[]');
+        const isDefaultValueArray = member.default === '[]';
+        const isArray = isArrayType || isDefaultValueArray;
+
+        let type = typeText;
+        if (isArray) {
+            // Get the base type, handling both 'Type[]' and 'Type' cases
+            const baseType = isArrayType ? typeText?.replace('[]', '') : typeReferenceName;
+
+            // If the base type is an enum, use the imported type name
+            if (baseType && enums.includes(baseType)) {
+                type = baseType;
+            } else if (baseType) {
+                type = baseType;
+            } else {
+                type = typeText;
+            }
+
+            type = `Array<${type}>`;
+        } else {
+            // If the type is an enum, use the imported type name
+            if (typeReferenceName && enums.includes(typeReferenceName)) {
+                type = typeReferenceName;
+            }
         }
 
-        const isBoolean = type?.includes('boolean') || typeReferenceName === 'Boolean';
+        const isBoolean = typeText?.includes('boolean') || typeReferenceName === 'Boolean';
         const hasInputDecorator = member.privacy === 'public';
 
         if (hasInputDecorator) {
@@ -86,7 +108,9 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): st
             const memberDefault = member.default;
 
             let inputCall;
-            if (memberDefault === 'undefined' || memberDefault === undefined) {
+            if (isArray) {
+                inputCall = `input${inputType}([])`;
+            } else if (memberDefault === 'undefined' || memberDefault === undefined) {
                 inputCall = `input${inputType}()`;
             } else if (isBoolean) {
                 const defaultVal = memberDefault === 'true';
