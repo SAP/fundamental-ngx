@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.12...v0.57.4-rc.13) (2025-09-09)
+
+
+### Bug Fixes
+
+* **core:** not reset Dynamic Page Header paddings when Message strip is used ([#13482](https://github.com/SAP/fundamental-ngx/issues/13482)) ([275b47e](https://github.com/SAP/fundamental-ngx/commit/275b47e7cca2f07c18c802fe030172150068e6fd))
+
+
+
+
+
 ## [0.57.4-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.11...v0.57.4-rc.12) (2025-09-09)
 
 
