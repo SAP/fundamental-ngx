@@ -11,6 +11,7 @@
         [titleId]="tableToolbarTitleId"
         [title]="title && !hideItemCount ? title + ' (' + (counter | async) + ')' : title"
         [shouldOverflow]="shouldOverflow"
+        [headingLevel]="headingLevel"
     >
         <ng-container *ngIf="_tableToolbarLeftActionsComponent">
             <span fd-toolbar-item fdOverflowPriority="never">
