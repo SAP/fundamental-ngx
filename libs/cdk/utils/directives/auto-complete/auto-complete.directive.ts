@@ -66,7 +66,7 @@ export class AutoCompleteDirective {
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+     
     constructor() {
         /**
          * Fixes #10710
@@ -74,7 +74,7 @@ export class AutoCompleteDirective {
          * By ensuring that we set all properties we can proceed with stable data.
          */
         this._zone.runOutsideAngular(() => {
-            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keydown');
             const compositionStartEvent = fromEvent<CompositionEvent>(
                 this._elementRef.nativeElement,
                 'compositionstart'
