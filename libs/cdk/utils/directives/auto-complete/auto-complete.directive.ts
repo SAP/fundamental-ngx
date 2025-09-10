@@ -66,7 +66,7 @@ export class AutoCompleteDirective {
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-     
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     constructor() {
         /**
          * Fixes #10710
