@@ -386,9 +386,9 @@ fd-input-group {
     opacity: var(--sapContent_DisabledOpacity);
 }
 
-.fd-input-group.is-display-only {
-    pointer-events: none;
-}
+// .fd-input-group.is-display-only {
+//     pointer-events: none;
+// }
 
 .fd-input-group[aria-disabled='true']::-webkit-input-placeholder,
 .fd-input-group.is-disabled::-webkit-input-placeholder,

@@ -88,6 +88,12 @@ export class CvaDirective<T = any>
     @Input()
     display: boolean;
 
+    /**
+     * isLast Value to mark component as last in a group
+     */
+    @Input()
+    isLast: boolean;
+
     /** Binds to control aria-labelledBy attribute */
     @Input()
     ariaLabelledBy: Nullable<string>;

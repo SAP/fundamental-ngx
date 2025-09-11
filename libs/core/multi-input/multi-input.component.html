@@ -67,20 +67,17 @@
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
             >
-                @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
+                @for (option of viewModel.selectedOptions; track valueFn(option.item); let last = $last) {
                     <fd-token
                         [disabled]="disabled"
                         [display]="display"
-                        [class.fd-token--display]="display"
+                        [isLast]="last"
                         (onCloseClick)="_onTokenCloseClick(option, false, $event)"
                         (onRemove)="_onTokenCloseClick(option, false)"
                         [title]="option.label"
                         (onTokenClick)="_tokenElementClicked($event)"
                     >
                         <span [innerHtml]="option.label"></span>
-                        @if (display && !$last) {
-                            <span class="fd-token-separator" [innerHtml]="getDotSymbol()"></span>
-                        }
                     </fd-token>
                 }
                 <input
@@ -130,17 +127,20 @@
                     <li
                         fd-list-item
                         [attr.aria-label]="option.label"
+                        [class.fd-multi-input-menu-overflow-list-item-display]="display"
                         (click)="_onCheckboxClick(option, $event, idx, true)"
                         (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                         [selected]="!!option.isSelected"
                     >
-                        <fd-checkbox
-                            (click)="_onCheckboxClick(option, $event, idx)"
-                            [value]="option.isSelected"
-                            [displayOnly]="true"
-                        >
-                            <!-- TODO -->
-                        </fd-checkbox>
+                        @if (!display) {
+                            <fd-checkbox
+                                (click)="_onCheckboxClick(option, $event, idx)"
+                                [value]="option.isSelected"
+                                [displayOnly]="true"
+                            >
+                                <!-- TODO -->
+                            </fd-checkbox>
+                        }
                         <ng-template
                             [ngTemplateOutlet]="itemSource"
                             [ngTemplateOutletContext]="{ option: option }"
@@ -169,6 +169,7 @@
             <span
                 fd-list-title
                 fdTruncatedTitle
+                [class.fd-multi-input-menu-overflow-list-item-display]="display"
                 [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"
             ></span>
         } @else {

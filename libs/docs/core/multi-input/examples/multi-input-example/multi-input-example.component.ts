@@ -9,7 +9,22 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
     imports: [MultiInputComponent, FormsModule, JsonPipe]
 })
 export class MultiInputExampleComponent {
-    selected = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry'];
+    selected = [
+        'Apple',
+        'Banana',
+        'Pineapple',
+        'Tomato',
+        'Kiwi',
+        'Strawberry',
+        'Blueberry',
+        'Apple1',
+        'Banana1',
+        'Pineapple1',
+        'Tomato1',
+        'Kiwi1',
+        'Strawberry1',
+        'Blueberry1'
+    ];
     secondSelected = ['Pineapple'];
     thirdSelected = ['Kiwi'];
     selectedDisabledAutoComplete = ['Kiwi'];

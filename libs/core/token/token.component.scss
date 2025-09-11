@@ -23,7 +23,10 @@ fd-token {
     --fdToken_Text_Color: var(--sapTextColor);
     --fdToken_Border: none;
     --fdToken_Background_Color: transparent;
+    --fdToken_Min_Width: fit-content;
+
     margin-inline: 0;
     padding-inline: 0;
+    text-align: start;
     pointer-events: none;
 }

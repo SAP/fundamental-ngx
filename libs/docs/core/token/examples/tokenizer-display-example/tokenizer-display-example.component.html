@@ -1,0 +1,15 @@
+<form [formGroup]="tokenizerExampleForm">
+    <div fd-form-item>
+        <fd-tokenizer [display]="true">
+            @for (token of tokens; track token; let last = $last) {
+                <fd-token [display]="token.display" [isLast]="last">{{ token.text }}</fd-token>
+            }
+            <input
+                formControlName="inputControl"
+                fd-tokenizer-input
+                fd-form-control
+                placeholder="Field placeholder text"
+            />
+        </fd-tokenizer>
+    </div>
+</form>

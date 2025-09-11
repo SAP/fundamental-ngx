@@ -9,10 +9,12 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { TokenCompactExampleComponent } from './examples/token-compact-example/token-compact-example.component';
+import { TokenDisplayExampleComponent } from './examples/token-display-example/token-display-example.component';
 import { TokenExampleComponent } from './examples/token-example/token-example.component';
 import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
 import { TokenSelectedExampleComponent } from './examples/token-selected-example/token-selected-example.component';
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenizerDisplayExampleComponent } from './examples/tokenizer-display-example/tokenizer-display-example.component';
 import { TokenizerExampleComponent } from './examples/tokenizer-example/tokenizer-example.component';
 
 const basicTokenH = 'token-example/token-example.component.html';
@@ -24,6 +26,9 @@ const selectedTokenTs = 'token-selected-example/token-selected-example.component
 const readOnlyTokenH = 'token-readonly-example/token-readonly-example.component.html';
 const readOnlyTokenTs = 'token-readonly-example/token-readonly-example.component.ts';
 
+const displayTokenH = 'token-display-example/token-display-example.component.html';
+const displayTokenTs = 'token-display-example/token-display-example.component.ts';
+
 const compactTokenH = 'token-compact-example/token-compact-example.component.html';
 const compactTokenTs = 'token-compact-example/token-compact-example.component.ts';
 
@@ -32,6 +37,9 @@ const tokenizerTsCode = 'tokenizer-example/tokenizer-example.component.ts';
 
 const tokenizerCompactH = 'tokenizer-compact-example/tokenizer-compact-example.component.html';
 const tokenizerCompactTsCode = 'tokenizer-compact-example/tokenizer-compact-example.component.ts';
+
+const tokenizerDisplayH = 'tokenizer-display-example/tokenizer-display-example.component.html';
+const tokenizerDisplayTsCode = 'tokenizer-display-example/tokenizer-display-example.component.ts';
 
 @Component({
     selector: 'app-token-docs',
@@ -45,10 +53,12 @@ const tokenizerCompactTsCode = 'tokenizer-compact-example/tokenizer-compact-exam
         CodeExampleComponent,
         TokenSelectedExampleComponent,
         TokenReadOnlyExampleComponent,
+        TokenDisplayExampleComponent,
         TokenCompactExampleComponent,
         DescriptionComponent,
         TokenizerExampleComponent,
-        TokenizerCompactExampleComponent
+        TokenizerCompactExampleComponent,
+        TokenizerDisplayExampleComponent
     ]
 })
 export class TokenDocsComponent {
@@ -77,6 +87,15 @@ export class TokenDocsComponent {
             fileName: 'token-readonly-example',
             component: 'TokenReadOnlyExampleComponent',
             typescriptFileCode: getAssetFromModuleAssets(readOnlyTokenTs)
+        }
+    ];
+    displayToken: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(displayTokenH),
+            fileName: 'token-display-example',
+            component: 'TokenDisplayExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(displayTokenTs)
         }
     ];
     compactToken: ExampleFile[] = [
@@ -112,6 +131,19 @@ export class TokenDocsComponent {
             component: 'TokenizerCompactExampleComponent',
             code: getAssetFromModuleAssets(tokenizerCompactTsCode),
             fileName: 'tokenizer-compact-example'
+        }
+    ];
+    tokenizerDisplay: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(tokenizerDisplayH),
+            fileName: 'tokenizer-display-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TokenizerDisplayExampleComponent',
+            code: getAssetFromModuleAssets(tokenizerDisplayTsCode),
+            fileName: 'tokenizer-display-example'
         }
     ];
 }

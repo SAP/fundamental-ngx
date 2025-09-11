@@ -99,3 +99,10 @@ $block: fd-multi-input;
 .fd-token-separator {
     padding: 0.25rem 1rem;
 }
+
+.fd-multi-input-menu-overflow-list-item-display {
+    pointer-events: none !important;
+
+    background: none !important;
+    border-bottom: none !important;
+}
