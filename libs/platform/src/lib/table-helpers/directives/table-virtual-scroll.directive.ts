@@ -3,8 +3,8 @@ import { DestroyedService, FocusableItemPosition, KeyUtil } from '@fundamental-n
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject, filter, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
-import { TableVirtualScroll } from '../models';
+import { FDP_TABLE_DRAGGABLE_DIRECTIVE, FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
+import { TableDraggable, TableVirtualScroll } from '../models';
 import { TableScrollDispatcherService } from '../services/table-scroll-dispatcher.service';
 import { Table } from '../table';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
@@ -76,6 +76,11 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
     /** @hidden */
     private readonly _tableScrollDispatcher = inject(TableScrollDispatcherService);
+
+    /** @hidden */
+    private readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
+        optional: true
+    });
 
     /** @hidden */
     private readonly _tableRowService = inject(TableRowService);
@@ -174,7 +179,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
                     this._focusedCell = event;
                 });
             }
-            if (!this.virtualScroll || !this.bodyHeight) {
+            if (!this.virtualScroll || !this.bodyHeight || this._dndTableDirective?.dragDropInProgress) {
                 return;
             }
 
