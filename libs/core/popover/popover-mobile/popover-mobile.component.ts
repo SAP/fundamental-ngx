@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import {
     DialogBodyComponent,
+    DialogCloseButtonComponent,
     DialogComponent,
     DialogFooterComponent,
     DialogHeaderComponent
@@ -41,7 +42,8 @@ let mobilePopoverUniqueId = 0;
         DialogComponent,
         DialogBodyComponent,
         DialogHeaderComponent,
-        DialogFooterComponent
+        DialogFooterComponent,
+        DialogCloseButtonComponent
     ]
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
