@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.14...v0.57.4-rc.15) (2025-09-11)
+
+
+### Bug Fixes
+
+* **core:** fix missing import in popover mobile ([#13489](https://github.com/SAP/fundamental-ngx/issues/13489)) ([11eead8](https://github.com/SAP/fundamental-ngx/commit/11eead8c36c9b57241e6a8ca453ba7cfc0909ac4))
+
+
+
+
+
 ## [0.57.4-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.13...v0.57.4-rc.14) (2025-09-11)
 
 **Note:** Version bump only for package @fundamental-ngx/core
