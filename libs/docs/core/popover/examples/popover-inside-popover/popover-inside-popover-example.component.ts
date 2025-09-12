@@ -26,7 +26,8 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         AvatarComponent,
         ComboboxModule,
         FormsModule
-    ]
+    ],
+    standalone: true
 })
 export class PopoverInsidePopoverExampleComponent {
     searchTermOne = '';
