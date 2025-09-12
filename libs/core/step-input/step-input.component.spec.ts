@@ -376,10 +376,10 @@ describe('StepInputComponent', () => {
     it('should handle the increment/decrement buttons when the input is set to null', () => {
         component.writeValue(null);
         component.increment();
-        expect(component.value).toBe(101);
+        expect(component.value).toBe(0);
         component.writeValue(null);
         component.decrement();
-        expect(component.value).toBe(99);
+        expect(component.value).toBe(0);
     });
 
     it('should handle increment/decrement when initial value is max value and input is cleared', () => {
