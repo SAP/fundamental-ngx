@@ -23,7 +23,8 @@
                 "cemFile": "@ui5/webcomponents/dist/custom-elements-internal.json",
                 "targetDir": ".",
                 "outputPath": "libs/generated/ui5-webcomponents",
-                "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.json"
+                "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.json",
+                "skipComponents": false
             }
         },
         "build": {
