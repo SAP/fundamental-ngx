@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.15...v0.57.4-rc.16) (2025-09-12)
+
+
+### Bug Fixes
+
+* **core:** Step Input minimum not recognized when input is cleared ([#13486](https://github.com/SAP/fundamental-ngx/issues/13486)) ([29b972a](https://github.com/SAP/fundamental-ngx/commit/29b972a63f6ee20d07a88b83d263d987442b417b))
+
+
+
+
+
 ## [0.57.4-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.14...v0.57.4-rc.15) (2025-09-11)
 
 
