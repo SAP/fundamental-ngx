@@ -21,6 +21,7 @@
             "executor": "@fundamental-ngx/webc-generator:generate",
             "options": {
                 "cemFile": "@ui5/webcomponents-fiori/dist/custom-elements-internal.json",
+                "packageName": "@ui5/webcomponents-fiori",
                 "targetDir": ".",
                 "outputPath": "libs/generated/ui5-webcomponents-fiori",
                 "tsConfig": "libs/ui5-webcomponents-fiori/tsconfig.lib.json"

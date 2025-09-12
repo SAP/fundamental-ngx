@@ -20,47 +20,65 @@ function generateTypeImports(
                 if (reference.name && !typeNames.has(reference.name)) {
                     // Check if the reference is one of the enums we have extracted
                     const isEnum = allEnums.some((e) => e.name === reference.name);
-                    if (isEnum) {
-                        // Import from the new central types file
-                        componentEnums.push(reference.name);
-                        typeNames.add(reference.name);
-                        continue;
-                    }
-
                     let importPath: string | undefined;
 
-                    if (reference.package === '@ui5/webcomponents-base') {
-                        // Case 1: If the package is @ui5/webcomponents-base, map to our base library
-                        importPath = `@fundamental-ngx/ui5-webcomponents-base`;
-                    } else if (reference.package === '@ui5/webcomponents' && reference.module) {
-                        // Case 2: If the package is @ui5/webcomponents, use the module path
-                        importPath = `@ui5/webcomponents/${reference.module}`;
-                    } else if (reference.module) {
-                        // Fallback: If no package is defined, or it's an unexpected one,
-                        // use the existing module logic.
-                        importPath = reference.module.startsWith('.')
-                            ? reference.module
-                            : `@ui5/webcomponents/${reference.module}`;
-                    } else if (reference.package) {
-                        // Handle the case where the reference has a package
-                        const mappedPackage = reference.package.replace(
-                            '@ui5/webcomponents',
-                            '@fundamental-ngx/ui5-webcomponents'
-                        );
-                        importPath = `${mappedPackage}`;
+                    if (isEnum) {
+                        if (reference.package) {
+                            if (reference.package === '@ui5/webcomponents') {
+                                importPath = `@fundamental-ngx/ui5-webcomponents/types`;
+                            } else if (reference.package === '@ui5/webcomponents-base') {
+                                importPath = `@fundamental-ngx/ui5-webcomponents-base/types`;
+                            } else if (reference.package === '@ui5/webcomponents-fiori') {
+                                importPath = `@fundamental-ngx/ui5-webcomponents-fiori/types`;
+                            } else if (reference.package === '@ui5/webcomponents-ai') {
+                                importPath = `@fundamental-ngx/ui5-webcomponents-ai/types`;
+                            }
+                        }
+                    } else {
+                        if (reference.package === '@ui5/webcomponents-base') {
+                            importPath = `@fundamental-ngx/ui5-webcomponents-base/types`;
+                        } else if (reference.package === '@ui5/webcomponents' && reference.module) {
+                            if (reference.module?.includes('/types/')) {
+                                importPath = `@fundamental-ngx/ui5-webcomponents/types`;
+                            } else {
+                                importPath = `@ui5/webcomponents/${reference.module}`;
+                            }
+                        } else if (reference.package === '@ui5/webcomponents-fiori' && reference.module) {
+                            if (reference.module?.includes('/types/')) {
+                                importPath = `@fundamental-ngx/ui5-webcomponents-fiori/types`;
+                            } else {
+                                importPath = `${reference.package}/${reference.module}`;
+                            }
+                        } else if (reference.package === '@ui5/webcomponents-ai' && reference.module) {
+                            if (reference.module?.includes('/types/')) {
+                                importPath = `@fundamental-ngx/ui5-webcomponents-ai/types`;
+                            } else {
+                                importPath = `${reference.package}/${reference.module}`;
+                            }
+                        } else if (reference.module) {
+                            importPath = reference.module.startsWith('.')
+                                ? reference.module
+                                : `@ui5/webcomponents/${reference.module}`;
+                        } else if (reference.package) {
+                            const mappedPackage = reference.package.replace(
+                                '@ui5/webcomponents',
+                                '@fundamental-ngx/ui5-webcomponents'
+                            );
+                            importPath = `${mappedPackage}`;
+                        }
                     }
 
                     if (importPath) {
-                        componentImports.push(`import { ${reference.name} } from '${importPath}';`);
+                        if (reference.module?.includes('dist/' + reference.name)) {
+                            componentImports.push(`import ${reference.name} from '${importPath}';`);
+                        } else {
+                            componentImports.push(`import { ${reference.name} } from '${importPath}';`);
+                        }
                         typeNames.add(reference.name);
                     }
                 }
             }
         }
-    }
-
-    if (componentEnums.length > 0) {
-        componentImports.push(`import { ${componentEnums.join(', ')} } from '../types';`);
     }
 
     return { componentImports, componentEnums };
@@ -155,12 +173,12 @@ function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
 export function componentTemplate(
     data: CEM.CustomElementDeclaration,
     cemPackage: CEM.Package,
-    allEnums: { name: string; members: string[] }[]
+    allEnums: { name: string; members: string[] }[],
+    packageName: string
 ): string {
     const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
     const tagName = data.tagName || '';
     const className = data.name;
-    const ui5Class = data.name;
     const outputEvents = data.events || [];
     const cvaHostDirective = hasCvaHostDirective(data) ? `  hostDirectives: [GenericControlValueAccessor],\n` : '';
 
@@ -224,14 +242,15 @@ import {
   Injector,
   booleanAttribute
 } from '@angular/core';
-import { default as _${className} } from '@ui5/webcomponents/dist/${className}.js';
+import '${packageName}/dist/${className}.js';
+import { default as _${className} } from '${packageName}/dist/${className}.js';
 import { UI5CustomEvent } from '@ui5/webcomponents-base';
 
 ${componentImports.join('\n')}
 
 @Component({
   standalone: true,
-  selector: '${tagName}',
+  selector: '${tagName}, [${tagName}]',
   template: '<ng-content></ng-content>',
   exportAs: 'ui5${className}',
 ${cvaHostDirective}

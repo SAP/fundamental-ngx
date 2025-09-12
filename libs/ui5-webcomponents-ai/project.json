@@ -14,6 +14,7 @@
             "options": {
                 "cemFile": "@ui5/webcomponents-ai/dist/custom-elements-internal.json",
                 "targetDir": ".",
+                "packageName": "@ui5/webcomponents-ai",
                 "outputPath": "libs/generated/ui5-webcomponents-ai",
                 "tsConfig": "libs/ui5-webcomponents-ai/tsconfig.lib.json"
             }

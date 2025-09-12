@@ -45,6 +45,9 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
         };
     }
 
+    const skipComponents = options.skipComponents === true;
+    const packageName = options.packageName || '@ui5/webcomponents';
+
     // Helper function to convert PascalCase to kebab-case
     const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 
@@ -74,12 +77,6 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
         const projectRoot = executorContext.root;
         const targetDir = `libs/${executorContext.projectName}`;
 
-        // Create the directory if it doesn't exist
-        await mkdir(path.join(projectRoot, targetDir), { recursive: true });
-
-        // Generate the types file
-        const typesDir = path.join(projectRoot, targetDir, 'types');
-        const typesIndexPath = path.join(typesDir, 'index.ts');
         const typesContent = allEnums
             .map((e) => {
                 const enumValues = e.members.map((m) => `'${m}'`).join(' | ');
@@ -87,31 +84,59 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
             })
             .join('\n');
 
-        await mkdir(typesDir, { recursive: true });
-        await writeFile(typesIndexPath, typesContent, 'utf-8');
+        // Create the directory if it doesn't exist
+        await mkdir(path.join(projectRoot, targetDir), { recursive: true });
 
-        // Generate all component files and ng-package.json files
-        await Promise.all(
-            componentDeclarations.map(({ declaration, modulePath }) => {
-                const fileName = pascalToKebabCase(declaration.name || '');
-                const componentDir = path.join(projectRoot, targetDir, fileName);
-                const componentIndexPath = path.join(componentDir, 'index.ts');
-                const ngPackagePath = path.join(componentDir, 'ng-package.json');
+        let exportsContent = '';
 
-                return mkdir(componentDir, { recursive: true })
-                    .then(() =>
-                        writeFile(componentIndexPath, componentTemplate(declaration, cemData, allEnums), 'utf-8')
-                    )
-                    .then(() =>
-                        writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8')
-                    );
-            })
-        );
+        if (typesContent) {
+            // Generate the types file
+            const typesDir = path.join(projectRoot, targetDir, 'types');
+            const typesIndexPath = path.join(typesDir, 'index.ts');
+            if (typesContent) {
+                exportsContent += `export * from './types';\n`;
+            }
 
-        // Generate the utils folder and cva.ts file
-        const utilsDir = path.join(projectRoot, targetDir, 'utils');
-        const cvaFilePath = path.join(utilsDir, 'cva.ts');
-        const cvaContent = `import { Directive, forwardRef } from '@angular/core';
+            await mkdir(typesDir, { recursive: true });
+            await writeFile(typesIndexPath, typesContent, 'utf-8');
+            await writeFile(
+                path.join(typesDir, 'ng-package.json'),
+                JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2),
+                'utf-8'
+            );
+        }
+
+        if (!skipComponents) {
+            // Generate all component files and ng-package.json files
+            await Promise.all(
+                componentDeclarations.map(({ declaration, modulePath }) => {
+                    const fileName = pascalToKebabCase(declaration.name || '');
+                    const componentDir = path.join(projectRoot, targetDir, fileName);
+                    const componentIndexPath = path.join(componentDir, 'index.ts');
+                    const ngPackagePath = path.join(componentDir, 'ng-package.json');
+
+                    return mkdir(componentDir, { recursive: true })
+                        .then(() =>
+                            writeFile(
+                                componentIndexPath,
+                                componentTemplate(declaration, cemData, allEnums, packageName),
+                                'utf-8'
+                            )
+                        )
+                        .then(() =>
+                            writeFile(
+                                ngPackagePath,
+                                JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2),
+                                'utf-8'
+                            )
+                        );
+                })
+            );
+
+            // Generate the utils folder and cva.ts file
+            const utilsDir = path.join(projectRoot, targetDir, 'utils');
+            const cvaFilePath = path.join(utilsDir, 'cva.ts');
+            const cvaContent = `import { Directive, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface CvaComponent<ValueType = any> {
@@ -160,24 +185,31 @@ class GenericControlValueAccessor<ValueType = any>
 }
 
 export { GenericControlValueAccessor };`;
+            await mkdir(utilsDir, { recursive: true });
+            await writeFile(cvaFilePath, cvaContent, 'utf-8');
 
-        await mkdir(utilsDir, { recursive: true });
-        await writeFile(cvaFilePath, cvaContent, 'utf-8');
+            exportsContent +=
+                `export { GenericControlValueAccessor } from './utils/cva';\n` +
+                components.map(({ className, fileName }) => `export { ${className} } from './${fileName}';`).join('\n');
+
+            // Add the new theming folder and service file
+            const themingDir = path.join(projectRoot, targetDir, 'theming');
+            const themingServicePath = path.join(themingDir, 'index.ts');
+            const themingServiceContent = `import { Injectable } from '@angular/core';\nimport { WebcomponentsThemingProvider } from '@fundamental-ngx/ui5-webcomponents-base/theming';\n\n@Injectable({ providedIn: 'root' })\nclass Ui5Webcomponents${getSuffix(packageName)}ThemingService extends WebcomponentsThemingProvider {\n  name = 'ui-5-webcomponents-theming-service';\n  constructor() {\n    super(\n      () => import('@ui5/webcomponents/dist/generated/json-imports/Themes.js'),\n    );\n  }\n}\n\nexport { Ui5Webcomponents${getSuffix(packageName)}ThemingService };`;
+
+            await mkdir(themingDir, { recursive: true });
+            await writeFile(themingServicePath, themingServiceContent, 'utf-8');
+            await writeFile(
+                path.join(themingDir, 'ng-package.json'),
+                JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2),
+                'utf-8'
+            );
+        }
 
         // Generate the root index.ts file
         const rootIndexPath = path.join(projectRoot, targetDir, 'index.ts');
-        const exportsContent =
-            `export { GenericControlValueAccessor } from './utils/cva';\n` +
-            components.map(({ className, fileName }) => `export { ${className} } from './${fileName}';`).join('\n');
+
         await writeFile(rootIndexPath, exportsContent, 'utf-8');
-
-        // Add the new theming folder and service file
-        const themingDir = path.join(projectRoot, targetDir, 'theming');
-        const themingServicePath = path.join(themingDir, 'index.ts');
-        const themingServiceContent = `import { Injectable } from '@angular/core';\nimport { WebcomponentsThemingProvider } from '@ui5/webcomponents-ngx/theming';\n\n@Injectable({ providedIn: 'root' })\nclass Ui5WebcomponentsThemingService extends WebcomponentsThemingProvider {\n  name = 'ui-5-webcomponents-theming-service';\n  constructor() {\n    super(\n      () => import('@ui5/webcomponents/dist/generated/json-imports/Themes.js'),\n    );\n  }\n}\n\nexport { Ui5WebcomponentsThemingService };`;
-
-        await mkdir(themingDir, { recursive: true });
-        await writeFile(themingServicePath, themingServiceContent, 'utf-8');
 
         return { success: true };
     } catch (error) {
@@ -189,5 +221,17 @@ export { GenericControlValueAccessor };`;
         };
     }
 };
+
+function getSuffix(packageName: string): string {
+    const prefix = '@ui5/webcomponents';
+    if (!packageName.startsWith(prefix)) {
+        throw new Error('Invalid package name');
+    }
+
+    const suffix = packageName.slice(prefix.length + 1) || 'main';
+    const capitalizedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1);
+
+    return capitalizedSuffix;
+}
 
 export default runExecutor;

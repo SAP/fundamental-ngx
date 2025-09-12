@@ -7,8 +7,9 @@
         "declarationMap": true,
         "types": [],
         "lib": ["dom", "es2020"],
-        "useDefineForClassFields": false,
-        "moduleResolution": "bundler"
+    "useDefineForClassFields": false,
+    "moduleResolution": "node",
+    "skipLibCheck": true
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
