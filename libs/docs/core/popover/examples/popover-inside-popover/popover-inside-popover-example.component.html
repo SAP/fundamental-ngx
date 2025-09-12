@@ -1,0 +1,25 @@
+<fd-popover title="money-bills" [focusAutoCapture]="true" [focusTrapped]="true">
+    <fd-popover-control>
+        <fd-avatar
+            size="s"
+            [circle]="true"
+            ariaLabel="photo 1 in circle"
+            image="https://picsum.photos/id/1018/400"
+        ></fd-avatar>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div style="min-height: 20rem; padding: 1rem">
+            <h3 fd-title>Combobox control inside Popover</h3>
+            <br /><br />
+            <fd-combobox
+                inputId="comboboxID1"
+                ariaLabel="Standard"
+                maxHeight="250px"
+                width="300px"
+                placeholder="Type some text..."
+                [dropdownValues]="fruits"
+                [(ngModel)]="searchTermOne"
+            ></fd-combobox>
+        </div>
+    </fd-popover-body>
+</fd-popover>

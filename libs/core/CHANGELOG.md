@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.14...v0.57.4-rc.15) (2025-09-11)
+
+
+### Bug Fixes
+
+* **core:** fix missing import in popover mobile ([#13489](https://github.com/SAP/fundamental-ngx/issues/13489)) ([11eead8](https://github.com/SAP/fundamental-ngx/commit/11eead8c36c9b57241e6a8ca453ba7cfc0909ac4))
+
+
+
+
+
+## [0.57.4-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.13...v0.57.4-rc.14) (2025-09-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.12...v0.57.4-rc.13) (2025-09-09)
+
+
+### Bug Fixes
+
+* **core:** not reset Dynamic Page Header paddings when Message strip is used ([#13482](https://github.com/SAP/fundamental-ngx/issues/13482)) ([275b47e](https://github.com/SAP/fundamental-ngx/commit/275b47e7cca2f07c18c802fe030172150068e6fd))
+
+
+
+
+
+## [0.57.4-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.11...v0.57.4-rc.12) (2025-09-09)
+
+
+### Bug Fixes
+
+* **core:** add role heading to title element in Toolbar ([#13480](https://github.com/SAP/fundamental-ngx/issues/13480)) ([7d8b492](https://github.com/SAP/fundamental-ngx/commit/7d8b492476116691f475c7be32d2c39ee6be0bbd))
+
+
+
+
+
+## [0.57.4-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.10...v0.57.4-rc.11) (2025-09-04)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.9...v0.57.4-rc.10) (2025-09-03)
+
+
+### Bug Fixes
+
+* **core:** apply correct value on Tab selection for Combobox ([#13474](https://github.com/SAP/fundamental-ngx/issues/13474)) ([2488f74](https://github.com/SAP/fundamental-ngx/commit/2488f74223e28bead7865aa1116b3a897a7eae6f))
+
+
+
+
+
+## [0.57.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.8...v0.57.4-rc.9) (2025-09-02)
+
+
+### Bug Fixes
+
+* **core:** prevents esc key from propagating to the parent in nested popovers ([#13471](https://github.com/SAP/fundamental-ngx/issues/13471)) ([5482cee](https://github.com/SAP/fundamental-ngx/commit/5482cee24adcd5bd22fe384bf5aca24024048071))
+
+
+
+
+
+## [0.57.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.7...v0.57.4-rc.8) (2025-09-02)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.57.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.6...v0.57.4-rc.7) (2025-08-27)
 
 
