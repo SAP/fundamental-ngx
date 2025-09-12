@@ -78,6 +78,10 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     @Input()
     disableKeyboardDeletion = false;
 
+    /** Whether the tokenizer is display-only */
+    @Input()
+    display = false;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
@@ -306,7 +310,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             });
         });
 
-        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse && !this.display) {
             this._handleCozyTokenCount();
         }
         this._listenElementEvents();
@@ -380,7 +384,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
-            if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
+            if (!this._contentDensityObserver.isCompact && !this.compactCollapse && !this.display) {
                 this._handleCozyTokenCount();
             }
         }
@@ -560,7 +564,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         if (this._forceAllTokensToDisplay) {
             return;
         }
-        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse && !this.display) {
             this._getHiddenCozyTokenCount();
             return;
         }
@@ -624,7 +628,12 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _resetTokens(): void {
         this.moreTokensLeft = [];
         this.moreTokensRight = [];
-        if (this._contentDensityObserver.isCompact || this.compactCollapse || this._forceAllTokensToDisplay) {
+        if (
+            this._contentDensityObserver.isCompact ||
+            this.compactCollapse ||
+            this.display ||
+            this._forceAllTokensToDisplay
+        ) {
             this.tokenList.forEach((token) => {
                 this._makeElementVisible(token.elementRef);
             });

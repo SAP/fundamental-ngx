@@ -1,25 +1,41 @@
-<div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
+<div
+    class="fd-tokenizer fd-tokenizer--scrollable"
+    [class.is-focus]="_tokenizerHasFocus"
+    [class.fd-tokenizer--display]="display"
+>
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <div
             [attr.aria-hidden]="tokenList.length === 0"
             role="listbox"
             [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
             [style.width]="_tokensContainerWidth"
+            [class.fd-tokenizer__inner-show-dot]="display"
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
+        @if (
+            showOverflowPopover &&
+            _hiddenTokens.length > 0 &&
+            (_contentDensityObserver.isCompactSignal() || compactCollapse || display)
+        ) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {
-                <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
-                    @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
+                <span
+                    (click)="moreClicked()"
+                    #moreElementSpan
+                    class="fd-tokenizer-more"
+                    [class.fd-tokenizer-allow-pointer]="display"
+                    role="button"
+                    tabindex="-1"
+                >
+                    @if (_contentDensityObserver.isCompactSignal() || compactCollapse || display) {
                         {{
                             'coreTokenizer.moreLabel'
                                 | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
                         }}
                     }
-                    @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
+                    @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse && !display) {
                         {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
                     }
                 </span>
@@ -48,9 +64,13 @@
         <fd-popover-body>
             <ul fd-list class="fd-tokenizer__overflow-list">
                 @for (token of _hiddenTokens; track token) {
-                    <li fd-list-item class="fd-tokenizer__overflow-list-item">
+                    <li
+                        fd-list-item
+                        class="fd-tokenizer__overflow-list-item"
+                        [class.fd-tokenizer__overflow-list-item-display]="display"
+                    >
                         <ng-container #viewContainer></ng-container>
-                        @if (!token.readOnly) {
+                        @if (!token.readOnly && !token.display) {
                             <span
                                 class="fd-token__close"
                                 role="button"
@@ -66,11 +86,18 @@
 </ng-template>
 <ng-template #moreElement>
     @if (_showMoreElement && _hiddenTokens.length > 0) {
-        <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
-            @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
+        <span
+            (click)="moreClicked()"
+            #moreElementSpan
+            class="fd-tokenizer-more"
+            [class.fd-tokenizer-allow-pointer]="display"
+            role="button"
+            tabindex="-1"
+        >
+            @if (_contentDensityObserver.isCompactSignal() || compactCollapse || display) {
                 {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
             }
-            @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
+            @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse && !display) {
                 {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
             }
         </span>
