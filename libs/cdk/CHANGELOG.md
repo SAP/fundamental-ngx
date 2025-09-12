@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.6](https://github.com/SAP/fundamental-ngx/compare/v0.54.5...v0.54.6) (2025-09-12)
+
+
+### Bug Fixes
+
+* **core:** apply autocomplete logic on keydown instead of keyup ([#13483](https://github.com/SAP/fundamental-ngx/issues/13483)) ([1b16da1](https://github.com/SAP/fundamental-ngx/commit/1b16da11386b4674d763d7772d4df48a592d6d95))
+
+
+
+
+
 ## [0.54.5](https://github.com/SAP/fundamental-ngx/compare/v0.54.4...v0.54.5) (2025-06-04)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
