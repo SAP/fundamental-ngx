@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.6](https://github.com/SAP/fundamental-ngx/compare/v0.56.5...v0.56.6) (2025-09-12)
+
+
+### Bug Fixes
+
+* **core:** apply correct value on Tab selection for Combobox ([#13474](https://github.com/SAP/fundamental-ngx/issues/13474)) ([35d0561](https://github.com/SAP/fundamental-ngx/commit/35d05614dcd4ca100e9576be4133f2329c69f39e))
+* **core:** prevents esc key from propagating to the parent in nested popovers ([#13471](https://github.com/SAP/fundamental-ngx/issues/13471)) ([e00987d](https://github.com/SAP/fundamental-ngx/commit/e00987daa98889be4cd7e7bb02bb6b7729633e65))
+
+
+
+
+
 ## [0.56.5](https://github.com/SAP/fundamental-ngx/compare/v0.56.4...v0.56.5) (2025-06-26)
 
 
