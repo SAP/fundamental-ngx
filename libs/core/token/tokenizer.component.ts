@@ -50,8 +50,6 @@ import { BehaviorSubject, Observable, Subscription, firstValueFrom, fromEvent, m
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
 
-const UNICODE_FOR_DOT = '&#x00B7;';
-
 @Component({
     selector: 'fd-tokenizer',
     templateUrl: './tokenizer.component.html',
@@ -479,10 +477,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             this._cdRef.detectChanges();
             this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
         });
-    }
-
-    getDotSymbol(): string {
-        return UNICODE_FOR_DOT;
     }
 
     /**

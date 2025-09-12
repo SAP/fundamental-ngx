@@ -9,10 +9,15 @@
             role="listbox"
             [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
             [style.width]="_tokensContainerWidth"
+            [class.fd-tokenizer__inner-show-dot]="display"
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse || display)) {
+        @if (
+            showOverflowPopover &&
+            _hiddenTokens.length > 0 &&
+            (_contentDensityObserver.isCompactSignal() || compactCollapse || display)
+        ) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {
@@ -20,7 +25,7 @@
                     (click)="moreClicked()"
                     #moreElementSpan
                     class="fd-tokenizer-more"
-                    [class.fd-tokenizer-show-dot]="display"
+                    [class.fd-tokenizer-allow-pointer]="display"
                     role="button"
                     tabindex="-1"
                 >
@@ -85,7 +90,7 @@
             (click)="moreClicked()"
             #moreElementSpan
             class="fd-tokenizer-more"
-            [class.fd-tokenizer-show-dot]="display"
+            [class.fd-tokenizer-allow-pointer]="display"
             role="button"
             tabindex="-1"
         >

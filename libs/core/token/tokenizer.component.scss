@@ -26,18 +26,6 @@ input {
     }
 }
 
-.fd-tokenizer-show-dot {
-    pointer-events: all;
-
-    &::before {
-        content: '\00B7';
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 1rem;
-    }
-}
-
 .fd-input-group__addon--button .fd-input-group__button {
     &.fd-tokenizer-addon {
         height: 2.25rem;
@@ -70,8 +58,15 @@ input {
             overflow: visible;
         }
 
-        .fd-tokenizer__input {
-            display: none;
+        .fd-tokenizer__inner-show-dot:has(+ fd-popover),
+        .fd-tokenizer__inner-show-dot:has(+ .fd-tokenizer-more) {
+            &::after {
+                content: '\00B7';
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 1rem;
+            }
         }
 
         .fd-token {
@@ -85,28 +80,27 @@ input {
                     justify-content: center;
                     min-width: 1rem;
                 }
-
-                // &:has(+ .fd-tokenizer__more) {
-                //     &::after {
-                //         content: '' !important;
-                //         min-width: 0;
-                //     }
-                // }
             }
 
             &--isLast {
                 &::after {
-                    content: '' !important;
+                    content: '';
                     min-width: 0;
-                }
-
-                &:has(+ .fd-tokenizer__more) {
-                    &::after {
-                        content: '\00B7';
-                        min-width: 0;
-                    }
                 }
             }
         }
+
+        .fd-tokenizer__input {
+            display: none;
+        }
     }
+}
+
+.fd-tokenizer.fd-tokenizer--display.is-hover,
+.fd-tokenizer.fd-tokenizer--display:hover {
+    background: transparent;
+}
+
+.fd-tokenizer-allow-pointer {
+    pointer-events: all;
 }

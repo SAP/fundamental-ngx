@@ -127,17 +127,13 @@
                     <li
                         fd-list-item
                         [attr.aria-label]="option.label"
-                        [class.fd-multi-input-menu-overflow-list-item-display]="display"
+                        [class.overflow-list-item-display]="display"
                         (click)="_onCheckboxClick(option, $event, idx, true)"
                         (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                         [selected]="!!option.isSelected"
                     >
                         @if (!display) {
-                            <fd-checkbox
-                                (click)="_onCheckboxClick(option, $event, idx)"
-                                [value]="option.isSelected"
-                                [displayOnly]="true"
-                            >
+                            <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
                                 <!-- TODO -->
                             </fd-checkbox>
                         }
@@ -169,7 +165,7 @@
             <span
                 fd-list-title
                 fdTruncatedTitle
-                [class.fd-multi-input-menu-overflow-list-item-display]="display"
+                [class.overflow-list-item-display]="display"
                 [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"
             ></span>
         } @else {
