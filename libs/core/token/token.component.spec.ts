@@ -50,6 +50,17 @@ describe('TokenComponent', () => {
         expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeFalsy();
     });
 
+    it('should not render close icon when in display-only mode', async () => {
+        component.display = false;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeTruthy();
+        component.display = true;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeFalsy();
+    });
+
     it('should fire onCloseClick when clicking x', () => {
         jest.spyOn(component.onCloseClick, 'emit');
         const content = fixture.nativeElement.querySelector('.fd-token__close');
