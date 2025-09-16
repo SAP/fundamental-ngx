@@ -21,6 +21,7 @@ import { ComboboxFormsExampleComponent } from './examples/combobox-forms-example
 import { ComboboxGroupExampleComponent } from './examples/combobox-group-example.component';
 import { ComboboxHeightExampleComponent } from './examples/combobox-height-example.component';
 import { ComboboxIncludesExampleComponent } from './examples/combobox-includes-example.component';
+import { ComboboxInsideDialogExampleComponent } from './examples/combobox-inside-dialog-example.component';
 import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
 import { ComboboxOpenControlExampleComponent } from './examples/combobox-open-control-example.component';
 import { ComboboxSearchFieldExampleComponent } from './examples/combobox-search-field-example.component';
@@ -63,6 +64,9 @@ const comboboxSearchFieldTSSrc = 'combobox-search-field-example.component.ts';
 const comboboxBylineHtml = 'combobox-byline-example.component.html';
 const comboboxBylineTs = 'combobox-byline-example.component.ts';
 
+const comboboxInsideDialogH = 'combobox-inside-dialog-example.component.html';
+const comboboxInsideDialogT = 'combobox-inside-dialog-example.component.ts';
+
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html',
@@ -88,7 +92,8 @@ const comboboxBylineTs = 'combobox-byline-example.component.ts';
         ComboboxIncludesExampleComponent,
         ComboboxFormsExampleComponent,
         ComboboxDisabledExampleComponent,
-        ComboboxBylineExampleComponent
+        ComboboxBylineExampleComponent,
+        ComboboxInsideDialogExampleComponent
     ]
 })
 export class ComboboxDocsComponent {
@@ -314,6 +319,20 @@ export class ComboboxDocsComponent {
             component: 'ComboboxBylineExampleComponent',
             code: getAssetFromModuleAssets(comboboxBylineTs),
             fileName: 'combobox-byline-example'
+        }
+    ];
+
+    comboboxInsideDialogExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(comboboxInsideDialogH),
+            fileName: 'combobox-inside-dialog-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxInsideDialogExampleComponent',
+            code: getAssetFromModuleAssets(comboboxInsideDialogT),
+            fileName: 'combobox-inside-dialog-example'
         }
     ];
 }
