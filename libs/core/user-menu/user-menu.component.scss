@@ -2,6 +2,10 @@
 @import 'fundamental-styles/dist/menu.css';
 
 // Specific to Angular Implementation (composite components)
+.fd-user-menu {
+    background: transparent;
+}
+
 .fd-user-menu__menu.fd-menu {
     width: 100%;
     margin-block-start: 0.25rem;
@@ -37,6 +41,20 @@
 
 .fd-menu__item:is(:focus, :focus-within, :focus-visible) {
     outline: none;
+}
+
+fd-user-menu-control {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    border-radius: 50rem;
+    justify-content: center;
+}
+
+fd-user-menu-control:is(:focus) {
+    outline-offset: 0.0625rem;
+    outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
 }
 
 // To be removed with the latest version of fundamental-styles

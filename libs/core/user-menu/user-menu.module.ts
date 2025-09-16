@@ -11,6 +11,7 @@ import { UserMenuSublistComponent } from './components/user-menu-sublist.compone
 import { UserMenuComponent } from './user-menu.component';
 
 // Directives
+import { UserMenuControlElementDirective } from './directives/user-menu-control-element.directive';
 import { UserMenuHeaderContainerDirective } from './directives/user-menu-header-container.directive';
 import { UserMenuHeaderDirective } from './directives/user-menu-header.directive';
 import { UserMenuSublineDirective } from './directives/user-menu-subline.directive';
@@ -28,7 +29,8 @@ const components = [
     UserMenuHeaderDirective,
     UserMenuHeaderContainerDirective,
     UserMenuUserNameDirective,
-    UserMenuSublineDirective
+    UserMenuSublineDirective,
+    UserMenuControlElementDirective
 ];
 
 /**
