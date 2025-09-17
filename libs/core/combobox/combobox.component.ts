@@ -684,7 +684,7 @@ export class ComboboxComponent<T = any>
             this.open = isOpen;
             this.openChange.emit(isOpen);
 
-            /** Allow combobox up and down arrows to work properly when combobox is inside a dialog */
+            /** Allow combobox up and down arrows to work properly when combobox is inside a dialog with a trapped focus */
             if (this.open) {
                 this._focusTrapService.pauseCurrentFocusTrap();
             } else {
