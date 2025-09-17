@@ -142,6 +142,20 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     disabled = false;
 
+    /** Whether the input is display-only */
+    @Input()
+    set display(value: boolean) {
+        this._display = value;
+
+        if (value) {
+            this.displayAddonButton = false;
+        }
+    }
+
+    get display(): boolean {
+        return this._display;
+    }
+
     /** If it is mandatory field */
     @Input()
     required = false;
@@ -447,6 +461,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
         return (item: string, searchTerm: string) => item.startsWith(searchTerm);
     }
+
+    /** @hidden */
+    private _display = false;
 
     /** @hidden */
     private _subscriptions = new Subscription();

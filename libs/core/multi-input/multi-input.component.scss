@@ -95,3 +95,13 @@ $block: fd-multi-input;
 .fd-popover__body--hidden {
     display: none;
 }
+
+.fd-list__item.overflow-list-item-display {
+    pointer-events: none;
+    background: none;
+    border-bottom: none;
+}
+
+.fd-list__item .overflow-list-item-display {
+    pointer-events: none;
+}

@@ -295,4 +295,31 @@ describe('MultiInputComponent', () => {
         expect(element.style.pointerEvents).toBe('auto');
         expect(element.tabIndex).toBe(0);
     });
+
+    describe('when in display mode', () => {
+        beforeEach(() => {
+            updateComponentInput('display', true);
+        });
+
+        it('should not display addon button when in display mode', () => {
+            expect(component.displayAddonButton).toBeFalsy();
+        });
+
+        it('should add overflow-list-item-display class to overflow list items and list titles when in display mode', () => {
+            const tokenElements = fixture.nativeElement.querySelectorAll('[fd-list-item]');
+            const titleElements = fixture.nativeElement.querySelectorAll('[fd-list-title]');
+
+            tokenElements.forEach((tokenElement) => {
+                expect(tokenElement.classList).toContain('fd-token--overflow-list-item-display');
+            });
+            titleElements.forEach((titleElement) => {
+                expect(titleElement.classList).toContain('fd-token--overflow-list-item-display');
+            });
+        });
+
+        it('should not display checkboxes on overflowing items when in display mode', () => {
+            const checkboxElements = fixture.nativeElement.querySelectorAll('fd-checkbox');
+            expect(checkboxElements.length).toBe(0);
+        });
+    });
 });
