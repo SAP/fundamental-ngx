@@ -1,0 +1,38 @@
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 id="fd-dialog-header-10" fd-title>Combobox inside a dialog</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div fd-form-item>
+                <fd-combobox
+                    inputId="comboboxId"
+                    ariaLabel="Standard"
+                    maxHeight="250px"
+                    width="300px"
+                    placeholder="Type some text..."
+                    [dropdownValues]="fruits"
+                    [(ngModel)]="searchTerm"
+                >
+                </fd-combobox>
+            </div>
+            <small>Search Term: {{ searchTerm }}</small>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="OK"
+                (click)="dialog.close('Continue')"
+                ariaLabel="OK Emphasized"
+            ></fd-button-bar>
+
+            <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')" ariaLabel="Cancel"></fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open Dialog" (click)="openDialog(confirmationDialog)"></button>
+<br />
+<small>{{ confirmationReason }}</small>

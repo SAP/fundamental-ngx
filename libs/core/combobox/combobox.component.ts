@@ -41,6 +41,7 @@ import {
     AutoCompleteEvent,
     DynamicComponentService,
     FocusEscapeDirection,
+    FocusTrapService,
     KeyUtil,
     Nullable,
     TruncatedTitleDirective
@@ -467,6 +468,7 @@ export class ComboboxComponent<T = any>
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
+        private readonly _focusTrapService: FocusTrapService,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
@@ -681,6 +683,13 @@ export class ComboboxComponent<T = any>
         if (this.open !== isOpen) {
             this.open = isOpen;
             this.openChange.emit(isOpen);
+
+            /** Allow combobox up and down arrows to work properly when combobox is inside a dialog with a trapped focus */
+            if (this.open) {
+                this._focusTrapService.pauseCurrentFocusTrap();
+            } else {
+                this._focusTrapService.unpauseCurrentFocusTrap();
+            }
         }
 
         if (!this.open && !this.mobile) {

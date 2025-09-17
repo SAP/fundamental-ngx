@@ -399,4 +399,15 @@ describe('ComboboxComponent', () => {
             expect(component.onChange).toHaveBeenCalledWith('');
         });
     });
+
+    it('should pause and unpause focus trap when open changes', () => {
+        jest.spyOn((<any>component)._focusTrapService, 'pauseCurrentFocusTrap');
+        jest.spyOn((<any>component)._focusTrapService, 'unpauseCurrentFocusTrap');
+
+        component.isOpenChangeHandle(true);
+        expect((<any>component)._focusTrapService.pauseCurrentFocusTrap).toHaveBeenCalled();
+
+        component.isOpenChangeHandle(false);
+        expect((<any>component)._focusTrapService.unpauseCurrentFocusTrap).toHaveBeenCalled();
+    });
 });
