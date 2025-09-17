@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.16...v0.57.4-rc.17) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** Combobox inside a Dialog - Not able navigate through the invoked drop-down values using keyboard ([#13496](https://github.com/SAP/fundamental-ngx/issues/13496)) ([243bb6f](https://github.com/SAP/fundamental-ngx/commit/243bb6fb3d59293946e55ddb0991e8a8653d2042))
+
+
+
+
+
 ## [0.57.4-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.15...v0.57.4-rc.16) (2025-09-12)
 
 
