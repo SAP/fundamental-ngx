@@ -26,6 +26,7 @@ import {
     ContentDensity,
     DynamicComponentService,
     FocusEscapeDirection,
+    FocusTrapService,
     KeyUtil,
     Nullable,
     SearchHighlightPipe,
@@ -430,7 +431,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         private readonly _elementRef: ElementRef,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        private readonly _dynamicComponentService: DynamicComponentService
+        private readonly _dynamicComponentService: DynamicComponentService,
+        private readonly _focusTrapService: FocusTrapService
     ) {
         super();
 
@@ -615,6 +617,14 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     _popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
+
+        /** Allow combobox up and down arrows to work properly when multi combobox is inside a dialog with a trapped focus */
+        if (this.isOpen) {
+            this._focusTrapService.pauseCurrentFocusTrap();
+        } else {
+            this._focusTrapService.unpauseCurrentFocusTrap();
+        }
+
         this._rangeSelector.reset();
         if (!isOpen) {
             this._cva.onTouched();
