@@ -101,6 +101,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** Whether to apply a circle style to the Avatar. */
     @Input() circle = false;
 
+    /** Whether the Avatar should be interactive. */
+    @Input() interactive = false;
+
     /** Whether to apply a transparent style to the Avatar. */
     @Input() transparent = false;
 
@@ -253,6 +256,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
                 : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
+            this.interactive ? 'fd-avatar--interactive' : '',
             this.transparent ? 'fd-avatar--transparent' : '',
             this.contain ? 'fd-avatar--background-contain' : '',
             this.placeholder ? 'fd-avatar--placeholder' : '',

@@ -1,8 +1,10 @@
 <fd-user-menu (isOpenChange)="isOpenChange($event)">
     <fd-user-menu-control>
         <fd-avatar
+            fd-user-menu-control-element
             size="xs"
             [circle]="true"
+            [interactive]="true"
             ariaLabel="photo 1 in circle"
             image="https://picsum.photos/id/1018/400"
         ></fd-avatar>

@@ -1,6 +1,7 @@
 export * from './user-menu.module';
 
 // Directives
+export * from './directives/user-menu-control-element.directive';
 export * from './directives/user-menu-header-container.directive';
 export * from './directives/user-menu-header.directive';
 export * from './directives/user-menu-subline.directive';
