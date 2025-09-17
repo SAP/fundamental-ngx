@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.17...v0.57.4-rc.18) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** allow navigation inside multi combobox located in a dialog ([#13499](https://github.com/SAP/fundamental-ngx/issues/13499)) ([1da7e3f](https://github.com/SAP/fundamental-ngx/commit/1da7e3f56607e93eda4248655e8b93850ab775e8))
+
+
+
+
+
 ## [0.57.4-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.16...v0.57.4-rc.17) (2025-09-17)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/cdk",
-  "version": "0.57.4-rc.17",
+  "version": "0.57.4-rc.18",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - CDK",
   "license": "Apache-2.0",
