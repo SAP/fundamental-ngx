@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.18...v0.57.4-rc.19) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** apply active and focus states on Avatar in User Menu ([#13497](https://github.com/SAP/fundamental-ngx/issues/13497)) ([bda80a2](https://github.com/SAP/fundamental-ngx/commit/bda80a2b66c8443adab5ad9c7a8a5cd7f3ac5057))
+
+
+
+
+
 ## [0.57.4-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.17...v0.57.4-rc.18) (2025-09-17)
 
 

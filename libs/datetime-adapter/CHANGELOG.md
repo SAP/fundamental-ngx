@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.18...v0.57.4-rc.19) (2025-09-17)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
 ## [0.57.4-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.17...v0.57.4-rc.18) (2025-09-17)
 
 **Note:** Version bump only for package @fundamental-ngx/datetime-adapter
