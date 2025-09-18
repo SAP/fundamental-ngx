@@ -787,10 +787,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
                 const groupIdx = idWithGroup.split('-')[idWithGroup.split('-').length - 1];
                 return groupIdx === String(groupIndex);
             })
-            .map((el) => {
-                const id = el.nativeElement.getAttribute('id');
-                return id;
-            });
+            .map((el) => el.nativeElement.getAttribute('id'));
 
         return groupItemIds?.join(' ');
     }

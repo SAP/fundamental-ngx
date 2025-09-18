@@ -30,6 +30,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
+    ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
     forwardRef
@@ -409,6 +410,10 @@ export class ComboboxComponent<T = any>
     @ContentChild(ComboboxItemDirective)
     private readonly _comboboxItemRenderer: ComboboxItemDirective;
 
+    /** @hidden */
+    @ViewChildren('item', { read: ElementRef })
+    private readonly items: QueryList<ElementRef>;
+
     /** Whether the matching string should be highlighted after combobox value is selected. */
     filterHighlight = true;
 
@@ -752,6 +757,23 @@ export class ComboboxComponent<T = any>
     isSelected(term: any): boolean {
         const termValue = this.communicateByObject ? term : this.displayFn(term);
         return this.getValue() === termValue;
+    }
+
+    /** @hidden */
+    _getGroupItemIds(groupIndex: number): string {
+        if (!this.items?.length) {
+            return '';
+        }
+
+        const groupItemIds = this.items
+            .filter((el) => {
+                const idWithGroup = el.nativeElement.getAttribute('id-with-group-index');
+                const groupIdx = idWithGroup.split('-')[idWithGroup.split('-').length - 1];
+                return groupIdx === String(groupIndex);
+            })
+            .map((el) => el.nativeElement.getAttribute('id'));
+
+        return groupItemIds?.join(' ');
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */

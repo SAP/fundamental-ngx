@@ -133,15 +133,25 @@
     >
         <ng-content></ng-content>
         @if (groupFn) {
-            @for (group of displayedValues | listGroupPipe: groupFn; track group.key) {
-                <li role="group" fd-list-group-header [tabindex]="0">
+            @for (group of displayedValues | listGroupPipe: groupFn; track group.key; let groupIndex = $index) {
+                <label
+                    fd-list-item
+                    fd-list-group-header
+                    role="'group'"
+                    [attr.aria-roledescription]="'Group Header'"
+                    [attr.aria-setsize]="displayedValues.length"
+                    [attr.aria-posinset]="groupIndex + 1"
+                    [attr.aria-owns]="_getGroupItemIds(groupIndex)"
+                >
                     <span fd-list-title>{{ group.key }}</span>
-                </li>
+                </label>
                 @for (term of group.value; track term) {
                     <li
-                        role="option"
                         fd-list-item
+                        #item="fdListItem"
+                        [ariaRole]="'option'"
                         [attr.aria-placeholder]="group.key"
+                        [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
                         [tabindex]="0"
                         class="fd-combobox-list-item"
                         [selected]="isSelected(term)"
