@@ -172,9 +172,17 @@
         }
         <ng-content></ng-content>
         @if (isGroup) {
-            @for (group of _suggestions; track group) {
+            @for (group of _suggestions; track group; let groupIndex = $index) {
                 @if (!groupItemTemplate) {
-                    <label fd-list-group-header role="group">
+                    <label
+                        fd-list-item
+                        fd-list-group-header
+                        role="'group'"
+                        [attr.aria-roledescription]="'Group Header'"
+                        [attr.aria-setsize]="_suggestions.length"
+                        [attr.aria-posinset]="groupIndex + 1"
+                        [attr.aria-owns]="_getGroupItemIds(groupIndex)"
+                    >
                         <span fd-list-title>{{ group.label }}</span>
                     </label>
                 } @else {
@@ -186,11 +194,13 @@
                 @for (optionItem of group.children; track optionItem; let i = $index) {
                     <li
                         fd-list-item
+                        #item="fdListItem"
                         role="option"
                         [tabindex]="0"
                         (click)="!mobile && _onOptionClicked($event, i)"
                         (keydown)="_onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
+                        [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
                     >
                         <fd-checkbox
                             (click)="_onOptionCheckboxClicked($event, i)"

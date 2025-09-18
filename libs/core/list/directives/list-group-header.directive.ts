@@ -18,8 +18,7 @@ let uniqueId = 0;
         '[style.outline]': '"none"',
         '[class.fd-list__item]': 'true',
         '[class.fd-list__group-header]': 'true',
-        '[attr.tabindex]': '0',
-        '[attr.aria-roledescription]': '"Group Header"'
+        '[attr.role]': '"group"'
     },
     standalone: true,
     providers: [
