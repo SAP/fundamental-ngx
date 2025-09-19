@@ -14,6 +14,7 @@ import { MultiComboboxColumnsExampleComponent } from './examples/multi-combobox-
 import { MultiComboboxDatasourceExampleComponent } from './examples/multi-combobox-datasource/multi-combobox-datasource-example.component';
 import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-forms/multi-combobox-forms-example.component';
 import { MultiComboboxGroupExampleComponent } from './examples/multi-combobox-group/multi-combobox-group-example.component';
+import { MultiComboboxInsideDialogExampleComponent } from './examples/multi-combobox-inside-dialog/multi-combobox-inside-dialog-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 import { MultiComboboxMobileExampleComponent } from './examples/multi-combobox-mobile/multi-combobox-mobile-example.component';
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
@@ -37,6 +38,9 @@ const multiComboboxTokenizerHtml = 'tokenizer/multi-combobox-responsive-tokenize
 const multiComboboxTokenizerTs = 'tokenizer/multi-combobox-responsive-tokenizer-example.component.ts';
 const multiComboboxBylineHtml = 'multi-combobox-byline/multi-combobox-byline-example.component.html';
 const multiComboboxBylineTs = 'multi-combobox-byline/multi-combobox-byline-example.component.ts';
+const multiComboboxInsideDialogHtml =
+    'multi-combobox-inside-dialog/multi-combobox-inside-dialog-example.component.html';
+const multiComboboxInsideDialogTs = 'multi-combobox-inside-dialog/multi-combobox-inside-dialog-example.component.ts';
 
 @Component({
     selector: 'app-multi-combobox',
@@ -56,7 +60,8 @@ const multiComboboxBylineTs = 'multi-combobox-byline/multi-combobox-byline-examp
         MultiComboboxFormsExampleComponent,
         MultiComboboxLoadingExampleComponent,
         MultiComboboxResponsiveTokenizerExampleComponent,
-        MultiComboboxBylineExampleComponent
+        MultiComboboxBylineExampleComponent,
+        MultiComboboxInsideDialogExampleComponent
     ]
 })
 export class MultiComboboxDocsComponent {
@@ -183,6 +188,20 @@ export class MultiComboboxDocsComponent {
             fileName: 'multi-combobox-byline-example',
             code: getAssetFromModuleAssets(multiComboboxBylineTs),
             component: 'MultiComboboxBylineExampleComponent'
+        }
+    ];
+
+    multiComboboxInsideDialogExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-inside-dialog-example',
+            code: getAssetFromModuleAssets(multiComboboxInsideDialogHtml)
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-inside-dialog-example',
+            code: getAssetFromModuleAssets(multiComboboxInsideDialogTs),
+            component: 'MultiComboboxInsideDialogExampleComponent'
         }
     ];
 }

@@ -202,6 +202,17 @@ describe('MultiComboBox component', () => {
         );
         expect(component._selectedSuggestions.length).toEqual(1);
     });
+
+    it('should pause and unpause focus trap when opened and closed', () => {
+        const pauseFocusTrapSpy = jest.spyOn(component['_focusTrapService'], 'pauseCurrentFocusTrap');
+        const unpauseFocusTrapSpy = jest.spyOn(component['_focusTrapService'], 'unpauseCurrentFocusTrap');
+
+        component._popoverOpenChangeHandle(true);
+        expect(pauseFocusTrapSpy).toHaveBeenCalled();
+
+        component._popoverOpenChangeHandle(false);
+        expect(unpauseFocusTrapSpy).toHaveBeenCalled();
+    });
 });
 
 describe('MultiComboBox component CVA', () => {

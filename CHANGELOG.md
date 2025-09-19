@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.18...v0.57.4-rc.19) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** apply active and focus states on Avatar in User Menu ([#13497](https://github.com/SAP/fundamental-ngx/issues/13497)) ([bda80a2](https://github.com/SAP/fundamental-ngx/commit/bda80a2b66c8443adab5ad9c7a8a5cd7f3ac5057))
+
+
+
+
+
+## [0.57.4-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.17...v0.57.4-rc.18) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** allow navigation inside multi combobox located in a dialog ([#13499](https://github.com/SAP/fundamental-ngx/issues/13499)) ([1da7e3f](https://github.com/SAP/fundamental-ngx/commit/1da7e3f56607e93eda4248655e8b93850ab775e8))
+
+
+
+
+
+## [0.57.4-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.16...v0.57.4-rc.17) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** Combobox inside a Dialog - Not able navigate through the invoked drop-down values using keyboard ([#13496](https://github.com/SAP/fundamental-ngx/issues/13496)) ([243bb6f](https://github.com/SAP/fundamental-ngx/commit/243bb6fb3d59293946e55ddb0991e8a8653d2042))
+
+
+
+
+
 ## [0.57.4-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.15...v0.57.4-rc.16) (2025-09-12)
 
 

@@ -1,8 +1,7 @@
-import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
-
 import {
     ChangeDetectionStrategy,
     Component,
+    ElementRef,
     EventEmitter,
     HostListener,
     Output,
@@ -14,6 +13,9 @@ import {
     template: `<ng-content />`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        tabindex: '0'
+    },
     imports: []
 })
 export class UserMenuControlComponent {
@@ -21,18 +23,17 @@ export class UserMenuControlComponent {
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden Saves element that is focused before dialog opened */
-    private _focusedElementBeforeDialogOpened: HTMLElement | null = null;
+    /** @hidden */
+    constructor(private el: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    @HostListener('click', ['$event'])
+    @HostListener('click')
     onClick(): void {
-        this._focusedElementBeforeDialogOpened = _getFocusedElementPierceShadowDom();
         this.clicked.emit();
     }
 
     /** @hidden */
-    _focus(): void {
-        this._focusedElementBeforeDialogOpened?.focus();
+    focus(): void {
+        this.el.nativeElement.focus();
     }
 }
