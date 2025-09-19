@@ -61,7 +61,8 @@ let listItemUniqueId = 0;
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [FormItemComponent, DecimalPipe, IconComponent]
+    imports: [FormItemComponent, DecimalPipe, IconComponent],
+    exportAs: 'fdListItem'
 })
 export class ListItemComponent<T = any> extends ListFocusItem<T> implements AfterContentInit, ListItemInterface {
     /** Whether list item is selected */
