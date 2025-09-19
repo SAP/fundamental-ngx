@@ -174,7 +174,7 @@
         @if (isGroup) {
             @for (group of _suggestions; track group; let groupIndex = $index) {
                 @if (!groupItemTemplate) {
-                    <label
+                    <li
                         fd-list-item
                         fd-list-group-header
                         role="'group'"
@@ -184,7 +184,7 @@
                         [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                     >
                         <span fd-list-title>{{ group.label }}</span>
-                    </label>
+                    </li>
                 } @else {
                     <ng-template
                         [ngTemplateOutlet]="groupItemTemplate"

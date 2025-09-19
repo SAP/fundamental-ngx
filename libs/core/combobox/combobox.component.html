@@ -134,7 +134,7 @@
         <ng-content></ng-content>
         @if (groupFn) {
             @for (group of displayedValues | listGroupPipe: groupFn; track group.key; let groupIndex = $index) {
-                <label
+                <li
                     fd-list-item
                     fd-list-group-header
                     role="'group'"
@@ -144,7 +144,7 @@
                     [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                 >
                     <span fd-list-title>{{ group.key }}</span>
-                </label>
+                </li>
                 @for (term of group.value; track term) {
                     <li
                         fd-list-item
