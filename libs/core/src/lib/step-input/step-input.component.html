@@ -40,7 +40,7 @@
             [attr.aria-required]="required"
             [attr.aria-roledescription]="ariaRoleDescription || ('coreStepInput.ariaRoleDescription' | fdTranslate)"
             (focusin)="handleFocusIn()"
-            (wheel)="handleScroll($event)"
+            (wheel)="!disableWheel && handleScroll($event)"
             (keydown)="handleKeyDown($event)"
             (input)="trackInputValue($event)"
             (change)="updateOnInputChanged()"
