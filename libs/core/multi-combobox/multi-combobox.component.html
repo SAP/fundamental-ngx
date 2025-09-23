@@ -179,8 +179,6 @@
                         fd-list-group-header
                         role="'group'"
                         [attr.aria-roledescription]="'Group Header'"
-                        [attr.aria-setsize]="_suggestions.length"
-                        [attr.aria-posinset]="groupIndex + 1"
                         [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                     >
                         <span fd-list-title>{{ group.label }}</span>
@@ -201,6 +199,8 @@
                         (keydown)="_onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
                         [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
+                        [attr.aria-setsize]="group.children?.length"
+                        [attr.aria-posinset]="i"
                     >
                         <fd-checkbox
                             (click)="_onOptionCheckboxClicked($event, i)"
