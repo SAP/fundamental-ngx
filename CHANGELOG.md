@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.19...v0.57.4-rc.20) (2025-09-23)
+
+
+### Bug Fixes
+
+* **core:** add property to disable wheel event for Step Input ([#13503](https://github.com/SAP/fundamental-ngx/issues/13503)) ([bec2535](https://github.com/SAP/fundamental-ngx/commit/bec253594a8d3f783e28b55f93f7827b585ba168))
+
+
+
+
+
 ## [0.57.4-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.18...v0.57.4-rc.19) (2025-09-17)
 
 
