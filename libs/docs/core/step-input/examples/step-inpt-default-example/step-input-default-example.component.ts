@@ -20,11 +20,17 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
             </div>
         </div>
         <br />
-        <div class="step-input-example-container" [style.width.%]="100">
+        <div class="step-input-example-container" [style.justify-content]="'space-between'">
             <div class="step-input-example">
                 <label fd-form-label for="full-width-input">Full Width</label>
                 <fd-step-input inputId="full-width-input" [isFullWidth]="true" [(value)]="value3"></fd-step-input>
                 <small>Value: {{ value3 }}</small>
+            </div>
+
+            <div class="step-input-example">
+                <label fd-form-label for="input-wheel">Disabled wheel event</label>
+                <fd-step-input disableWheel inputId="input-wheel" [(value)]="value4"></fd-step-input>
+                <small>Value: {{ value4 }}</small>
             </div>
         </div>
     `,
@@ -34,4 +40,5 @@ export class StepInputDefaultExampleComponent {
     value1: number | null = 0;
     value2: number | null = 0;
     value3: number | null = 0;
+    value4: number | null = 0;
 }
