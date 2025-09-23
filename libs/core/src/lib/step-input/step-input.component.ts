@@ -157,6 +157,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     inputTitle = '';
 
+    /** Whether the wheel event should be disabled. Default value is false */
+    @Input()
+    disableWheel = false;
+
     /** Sets formatting mode */
     @Input()
     mode: 'decimal' | 'currency' = 'decimal';

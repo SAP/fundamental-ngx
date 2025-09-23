@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
             <div class="step-input-example">
                 <label fd-form-label for="information-input">Information</label>
                 <fd-step-input
+                    [disableWheel]="true"
                     inputId="information-input"
                     [(value)]="value1"
                     state="information"
@@ -18,6 +19,7 @@ import { Component } from '@angular/core';
             <div class="step-input-example">
                 <label fd-form-label for="success-input">Success</label>
                 <fd-step-input
+                    [disableWheel]="true"
                     inputId="success-input"
                     [(value)]="value2"
                     state="success"
