@@ -16,6 +16,7 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     forwardRef,
     isDevMode
 } from '@angular/core';
@@ -155,6 +156,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Sets input title attribute */
     @Input()
     inputTitle = '';
+
+    /** Whether the wheel event should be disabled. Default value is false */
+    @Input({ transform: booleanAttribute })
+    disableWheel = false;
 
     /** Sets formatting mode */
     @Input()
