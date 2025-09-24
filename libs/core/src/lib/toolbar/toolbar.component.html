@@ -1,5 +1,13 @@
 <div #toolbar [tabindex]="tabindex" [class.fd-toolbar--cozy]="_contentDensityObserver.isCozy$ | async">
-    <h4 *ngIf="title" class="fd-title fd-title--h4 fd-toolbar__title" [id]="titleId" #titleElement>{{ title }}</h4>
+    <span
+        *ngIf="title"
+        role="heading"
+        [attr.aria-level]="_headingLevel"
+        class="fd-title fd-title--h4 fd-toolbar__title"
+        [id]="titleId"
+        #titleElement
+        >{{ title }}</span
+    >
 
     <ng-content></ng-content>
 

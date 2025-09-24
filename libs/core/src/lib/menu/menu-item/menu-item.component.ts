@@ -53,7 +53,7 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'attr.role': 'menuitem',
+        role: 'none',
         '[class.fd-menu__item]': 'true'
     }
 })

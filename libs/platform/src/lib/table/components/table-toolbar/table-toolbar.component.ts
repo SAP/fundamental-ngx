@@ -14,6 +14,7 @@ import { Observable, Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { takeUntil } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
@@ -63,6 +64,12 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     /** Toggle to show search input. */
     @Input()
     hideSearchInput = false;
+
+    /**
+     * Heading level of the table toolbar title.
+     */
+    @Input()
+    headingLevel: Nullable<HeadingLevel>;
 
     /** Toggle to expand and collapse all feature */
     @Input()

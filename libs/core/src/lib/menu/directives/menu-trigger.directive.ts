@@ -47,8 +47,10 @@ export class MenuTriggerDirective implements OnDestroy {
     /** @hidden */
     private _subscribeToMenu(menu: MenuComponent): void {
         this._menuSubscription.add(
-            menu.isOpenChange.subscribe(() => {
-                this._setAriaAttributes(menu);
+            menu.isOpenChange.subscribe((isOpen: boolean) => {
+                this.ariaHasPopup = true;
+                this.ariaExpanded = isOpen;
+                this.ariaControls = isOpen ? menu.id : null;
             })
         );
     }

@@ -16,6 +16,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fd-product-menu',
     templateUrl: './product-menu.component.html',
+    styleUrls: ['./product-menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
