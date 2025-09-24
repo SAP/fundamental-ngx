@@ -54,7 +54,10 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     host: {
         role: 'listbox',
         '[class.fd-segmented-button]': 'true',
-        '[class.fd-segmented-button--vertical]': 'vertical'
+        '[class.fd-segmented-button--vertical]': 'vertical',
+        '[attr.aria-multiselectable]': 'toggle',
+        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
+        '[attr.aria-roledescription]': '"Segmented button group"'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -212,8 +215,8 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
                 this._toggleDisableButtons(this._isDisabled);
                 this._pickButtonsByValues(this._currentValue);
-                this._buttons.forEach((button) => {
-                    button.elementRef.nativeElement.role = 'option';
+                this._buttons.forEach((button, index) => {
+                    this._setButtonAttributes(button, index);
                     this._listenToTriggerEvents(button);
                 });
             });
@@ -237,6 +240,18 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         );
 
         triggerEvents$.pipe(takeUntil(refresh$)).subscribe(() => this._handleTriggerOnButton(buttonComponent));
+    }
+
+    /** @hidden */
+    private _setButtonAttributes(buttonComponent: ButtonComponent, index: number): void {
+        buttonComponent.elementRef.nativeElement.setAttribute('role', 'option');
+        buttonComponent.elementRef.nativeElement.setAttribute('aria-roledescription', 'Segmented button');
+        buttonComponent.elementRef.nativeElement.setAttribute('aria-posinset', String(index + 1));
+        buttonComponent.elementRef.nativeElement.setAttribute('aria-setsize', String(this._buttons.length));
+        buttonComponent.elementRef.nativeElement.setAttribute(
+            'aria-selected',
+            String(this._isButtonSelected(buttonComponent))
+        );
     }
 
     /** @hidden */
