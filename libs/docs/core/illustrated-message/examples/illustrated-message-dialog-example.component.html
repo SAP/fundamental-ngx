@@ -6,14 +6,21 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <figure fd-illustrated-message type="medium" [svgConfig]="mediumConfig">
-                <figcaption fd-illustrated-message-figcaption role="document" [id]="dialogId + '-description'">
-                    <h3 fd-illustrated-message-title>Unknown File Format</h3>
-                    <p fd-illustrated-message-text>
-                        We found some files that have an unknown file format. Let's take a look and fix the issue.
-                    </p>
-                </figcaption>
-            </figure>
+            <section fd-illustrated-message-section ariaLabel="Illustrated Message">
+                <figure
+                    fd-illustrated-message
+                    type="medium"
+                    [svgConfig]="mediumConfig"
+                    svgAlt="alt text for the illustration"
+                >
+                    <figcaption fd-illustrated-message-figcaption role="document" [id]="dialogId + '-description'">
+                        <h3 fd-illustrated-message-title>Unknown File Format</h3>
+                        <p fd-illustrated-message-text>
+                            We found some files that have an unknown file format. Let's take a look and fix the issue.
+                        </p>
+                    </figcaption>
+                </figure>
+            </section>
         </fd-dialog-body>
 
         <fd-dialog-footer>

@@ -2,15 +2,17 @@
     <fd-card aria-describedby="xsmall-description" role="group">
         <fd-card-header> </fd-card-header>
         <fd-card-content>
-            <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
-                <figcaption fd-illustrated-message-figcaption id="xsmall-description">
-                    <h3 fd-illustrated-message-title>Delivery Delay</h3>
-                    <p fd-illustrated-message-text>
-                        A broken cooling system resulted in melted ice cream in transit. Another delivery is already on
-                        the way.
-                    </p>
-                </figcaption>
-            </figure>
+            <section fd-illustrated-message-section ariaLabel="Illustrated Message">
+                <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
+                    <figcaption fd-illustrated-message-figcaption id="xsmall-description">
+                        <h3 fd-illustrated-message-title>Delivery Delay</h3>
+                        <p fd-illustrated-message-text>
+                            A broken cooling system resulted in melted ice cream in transit. Another delivery is already
+                            on the way.
+                        </p>
+                    </figcaption>
+                </figure>
+            </section>
         </fd-card-content>
     </fd-card>
 </div>

@@ -81,6 +81,9 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
     svgAriaLabel: Nullable<string>;
 
     @Input()
+    svgAlt: Nullable<string>;
+
+    @Input()
     noSvg = false;
 
     @Input()

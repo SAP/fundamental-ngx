@@ -1,6 +1,11 @@
 <div class="fd-illustrated-message__container">
     @if (!noSvg) {
-        <svg class="fd-illustrated-message__illustration" [attr.aria-label]="svgAriaLabel">
+        <svg
+            class="fd-illustrated-message__illustration"
+            role="img"
+            [attr.aria-label]="svgAriaLabel"
+            [attr.alt]="svgAlt"
+        >
             <use [attr.href]="_href"></use>
         </svg>
     }
