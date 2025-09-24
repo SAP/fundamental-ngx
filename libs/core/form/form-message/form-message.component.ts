@@ -2,24 +2,28 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    Input,
+    inject,
+    input,
     OnChanges,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { CssClassBuilder, DynamicComponentService, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
-/**
- * Form message. Intended to be displayed with a form control for validation purposes.
- */
+
+let formMessageId = 0;
+
 @Component({
     selector: 'fd-form-message',
-    template: `<ng-content></ng-content>`,
+    template: `<span class="fd-form-message__sr-only"> {{ valueStateMessages[type()]?.() }} </span
+        ><ng-content></ng-content>`,
     styleUrl: './form-message.component.scss',
     host: {
         'aria-live': 'assertive',
-        'aria-atomic': 'true'
+        'aria-atomic': 'true',
+        '[attr.id]': 'id()'
     },
     providers: [DynamicComponentService],
     encapsulation: ViewEncapsulation.None,
@@ -28,37 +32,65 @@ import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 })
 export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges {
     /** Type of the message. */
-    @Input()
-    type: FormStates;
+    type = input<FormStates>('default');
 
     /** Whether message should be in static mode, without popover. It's mostly used for forms component, that contain dropdown */
-    @Input()
-    static = false;
+    static = input(false);
 
     /**
      * Whether message is used inside popovers or dialogs.
      * When it is enabled box shadow is removed and message is expanded to whole container width
      */
-    @Input()
-    embedded = false;
+    embedded = input(false);
 
     /** User's custom classes */
-    @Input()
-    class: string;
+    class = input<string>();
+
+    /**
+     * Value state "success" message.
+     */
+    valueStateSuccessMessage = input<string>(inject(ValueStateAriaMessageService).success);
+
+    /**
+     * Value state "information" message.
+     */
+    valueStateInformationMessage = input<string>(inject(ValueStateAriaMessageService).information);
+
+    /**
+     * Value state "warning" message.
+     */
+    valueStateWarningMessage = input<string>(inject(ValueStateAriaMessageService).warning);
+
+    /**
+     * Value state "error" message.
+     */
+    valueStateErrorMessage = input<string>(inject(ValueStateAriaMessageService).error);
+
+    /** Form Message Text ID
+     *  Default value is provided if not set  */
+    id = input('fd-form-message-' + ++formMessageId);
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    valueStateMessages = {
+        success: this.valueStateSuccessMessage,
+        information: this.valueStateInformationMessage,
+        warning: this.valueStateWarningMessage,
+        error: this.valueStateErrorMessage
+    } as const;
+
+    /** @hidden */
+    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             CSS_CLASS_NAME.message,
-            this.static ? CSS_CLASS_NAME.messageStatic : '',
-            this.embedded ? CSS_CLASS_NAME.messageEmbedded : '',
-            getTypeClassName(this.type),
-            this.class
-        ].filter((v): v is string => !!v);
+            this.static() ? CSS_CLASS_NAME.messageStatic : '',
+            this.embedded() ? CSS_CLASS_NAME.messageEmbedded : '',
+            getTypeClassName(this.type()),
+            this.class()
+        ].filter(Boolean) as string[];
     }
 
     /** @hidden */
