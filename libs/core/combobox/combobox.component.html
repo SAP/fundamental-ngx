@@ -127,6 +127,7 @@
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
         [byline]="byline"
+        [tabindex]="0"
         (keydown.tab)="_close()"
         (keydown.shift.tab)="_close()"
         (focusEscapeList)="handleListFocusEscape($event)"
@@ -136,11 +137,11 @@
             @for (group of displayedValues | listGroupPipe: groupFn; track group.key; let groupIndex = $index) {
                 <li
                     fd-list-item
+                    fd-list-group-header
                     [ariaRole]="'group'"
                     [attr.aria-roledescription]="'Group Header'"
                     [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                     [attr.aria-label]="group.key"
-                    class="fd-list__item fd-list__group-header"
                 >
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
@@ -153,7 +154,6 @@
                         [attr.aria-setsize]="group.value.length"
                         [attr.aria-posinset]="index"
                         [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
-                        [tabindex]="0"
                         class="fd-combobox-list-item"
                         [selected]="isSelected(term)"
                         [value]="term"

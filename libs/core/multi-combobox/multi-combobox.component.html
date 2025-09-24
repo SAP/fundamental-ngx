@@ -155,6 +155,7 @@
         [style.max-width.px]="autoResize && maxWidth"
         [attr.aria-labelledby]="_cva.id + '-search'"
         aria-multiselectable="true"
+        [tabindex]="0"
         (keydown.tab)="close()"
         (keydown.shift.tab)="close()"
         (keydown.escape)="close()"
@@ -176,11 +177,11 @@
                 @if (!groupItemTemplate) {
                     <li
                         fd-list-item
+                        fd-list-group-header
                         [ariaRole]="'group'"
                         [attr.aria-roledescription]="'Group Header'"
                         [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                         [attr.aria-label]="group.label"
-                        class="fd-list__item fd-list__group-header"
                     >
                         <span fd-list-title>{{ group.label }}</span>
                     </li>
@@ -195,7 +196,6 @@
                         fd-list-item
                         #item="fdListItem"
                         role="option"
-                        [tabindex]="0"
                         (click)="!mobile && _onOptionClicked($event, i)"
                         (keydown)="_onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
