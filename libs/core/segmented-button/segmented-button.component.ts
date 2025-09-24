@@ -248,10 +248,6 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         buttonComponent.elementRef.nativeElement.setAttribute('aria-roledescription', 'Segmented button');
         buttonComponent.elementRef.nativeElement.setAttribute('aria-posinset', String(index + 1));
         buttonComponent.elementRef.nativeElement.setAttribute('aria-setsize', String(this._buttons.length));
-        buttonComponent.elementRef.nativeElement.setAttribute(
-            'aria-selected',
-            String(this._isButtonSelected(buttonComponent))
-        );
     }
 
     /** @hidden */

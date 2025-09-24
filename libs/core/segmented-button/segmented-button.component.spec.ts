@@ -50,6 +50,36 @@ describe('SegmentedButtonComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should set segmented button group classes and attributes correctly', () => {
+        const segmentedButtonElement = fixture.debugElement.nativeElement.querySelector('fd-segmented-button');
+        expect(segmentedButtonElement.classList).toContain('fd-segmented-button');
+        expect(segmentedButtonElement.classList).not.toContain('fd-segmented-button--vertical');
+
+        expect(segmentedButtonElement.getAttribute('role')).toBe('listbox');
+        expect(segmentedButtonElement.getAttribute('aria-multiselectable')).toBe('false');
+        expect(segmentedButtonElement.getAttribute('aria-orientation')).toBe('horizontal');
+        expect(segmentedButtonElement.getAttribute('aria-roledescription')).toBe('Segmented button group');
+    });
+
+    it('should set button attributes correctly', () => {
+        expect(component.firstButton.nativeElement.getAttribute('role')).toBe('option');
+        expect(component.firstButton.nativeElement.getAttribute('aria-roledescription')).toBe('Segmented button');
+        expect(component.firstButton.nativeElement.getAttribute('aria-posinset')).toBe('1');
+        expect(component.firstButton.nativeElement.getAttribute('aria-setsize')).toBe('3');
+
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('role')).toBe('option');
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-roledescription')).toBe(
+            'Segmented button'
+        );
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-posinset')).toBe('2');
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-setsize')).toBe('3');
+
+        expect(component.thirdButton.nativeElement.getAttribute('role')).toBe('option');
+        expect(component.thirdButton.nativeElement.getAttribute('aria-roledescription')).toBe('Segmented button');
+        expect(component.thirdButton.nativeElement.getAttribute('aria-posinset')).toBe('3');
+        expect(component.thirdButton.nativeElement.getAttribute('aria-setsize')).toBe('3');
+    });
+
     // Default Example
     it('should correctly select and deselect single value in non-toggle mode', () => {
         component.segmentedButton.writeValue('second');

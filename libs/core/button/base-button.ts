@@ -34,6 +34,7 @@ export class BaseButton implements HasElementRef {
     /** Whether button is in toggled state. */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
+    @HostBinding('attr.aria-selected')
     @Input({ transform: booleanAttribute })
     toggled: BooleanInput;
 
