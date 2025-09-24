@@ -1,5 +1,18 @@
-<div [style.width.%]="100" [style.display]="'flex'" [style.justify-content]="'center'">
-    <figure fd-illustrated-message [svgConfig]="largeConfig" svgAriaLabel="Illustration label">
+<section
+    fd-illustrated-message-section
+    responsive
+    tabindex="0"
+    ariaLabel="Illustrated Message"
+    [style.width.%]="100"
+    [style.display]="'flex'"
+    [style.justify-content]="'center'"
+>
+    <figure
+        fd-illustrated-message
+        [svgConfig]="largeConfig"
+        svgAriaLabel="aria-label for the illustration"
+        svgAlt="alt text for the illustration"
+    >
         <figcaption fd-illustrated-message-figcaption>
             <h3 fd-illustrated-message-title>Delivery Delay</h3>
             <p fd-illustrated-message-text>
@@ -10,4 +23,4 @@
             <button fd-button label="Check Delivery Schedule"></button>
         </fd-illustrated-message-actions>
     </figure>
-</div>
+</section>
