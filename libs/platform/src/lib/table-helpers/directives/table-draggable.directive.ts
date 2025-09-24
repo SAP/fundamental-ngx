@@ -154,7 +154,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> implemen
     dragDropItemDrop(event: FdDropEvent<TableRow>): void {
         /** After timeout to make click event handled first */
         this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => (this.dragDropInProgress = false));
+            setTimeout(() => this._setDragInProgress(false));
         });
 
         this._onZoneFree(() => {
