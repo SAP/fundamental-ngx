@@ -176,10 +176,11 @@
                 @if (!groupItemTemplate) {
                     <li
                         fd-list-item
-                        fd-list-group-header
-                        role="'group'"
+                        [ariaRole]="'group'"
                         [attr.aria-roledescription]="'Group Header'"
                         [attr.aria-owns]="_getGroupItemIds(groupIndex)"
+                        [attr.aria-label]="group.label"
+                        class="fd-list__item fd-list__group-header"
                     >
                         <span fd-list-title>{{ group.label }}</span>
                     </li>

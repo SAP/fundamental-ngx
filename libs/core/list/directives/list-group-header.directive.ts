@@ -7,8 +7,7 @@ let uniqueId = 0;
     host: {
         '[style.outline]': '"none"',
         '[class.fd-list__item]': 'true',
-        '[class.fd-list__group-header]': 'true',
-        '[attr.role]': '"group"'
+        '[class.fd-list__group-header]': 'true'
     },
     standalone: true
 })
