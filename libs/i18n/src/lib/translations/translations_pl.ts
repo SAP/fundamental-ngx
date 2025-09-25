@@ -1,4 +1,3 @@
- 
 // Do not modify, it's automatically created. Modify translations_pl.properties instead
 export default {
     coreCalendar: {
