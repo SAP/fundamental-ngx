@@ -201,7 +201,7 @@
                         [selected]="!!optionItem.selected"
                         [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
                         [attr.aria-setsize]="group.children?.length"
-                        [attr.aria-posinset]="i"
+                        [attr.aria-posinset]="i + 1"
                     >
                         <fd-checkbox
                             (click)="_onOptionCheckboxClicked($event, i)"

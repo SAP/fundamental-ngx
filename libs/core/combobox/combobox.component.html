@@ -152,7 +152,7 @@
                         [ariaRole]="'option'"
                         [attr.aria-placeholder]="group.key"
                         [attr.aria-setsize]="group.value.length"
-                        [attr.aria-posinset]="index"
+                        [attr.aria-posinset]="index + 1"
                         [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
                         class="fd-combobox-list-item"
                         [selected]="isSelected(term)"
