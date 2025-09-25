@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
     coreCalendar: {
@@ -611,5 +611,9 @@ export default {
         groupAriaDescriptionCollapsed: 'жиылған',
         triggerMoreLabel: 'Көбірек',
         triggerLessLabel: 'Азырақ'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

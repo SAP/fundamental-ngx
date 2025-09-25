@@ -13,13 +13,15 @@ import {
     NgZone,
     OnChanges,
     OnDestroy,
+    OnInit,
     Optional,
     QueryList,
     SimpleChanges,
     ViewEncapsulation,
     booleanAttribute,
     effect,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
@@ -31,6 +33,7 @@ import {
     destroyObservable
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
@@ -57,7 +60,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
         '[class.fd-segmented-button--vertical]': 'vertical',
         '[attr.aria-multiselectable]': 'toggle',
         '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
-        '[attr.aria-roledescription]': '"Segmented button group"'
+        '[attr.aria-roledescription]': '_groupRoleDescription'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,7 +74,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     standalone: true,
     hostDirectives: [FocusableListDirective]
 })
-export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
+export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input({ transform: booleanAttribute })
     toggle = false;
@@ -91,6 +94,12 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     @ContentChildren(FocusableItemDirective)
     _focusableItems: QueryList<FocusableItemDirective>;
 
+    /** @hidden */
+    _groupRoleDescription: string;
+
+    /** @hidden */
+    _buttonRoleDescription: string;
+
     /**
      * Value of segmented button can have 2 types:
      * - string, when there is no toggle mode and only 1 value can be chosen.
@@ -105,6 +114,12 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     private readonly _onDestroy$ = new Subject<void>();
+
+    /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
     constructor(
@@ -127,6 +142,22 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._lang$.pipe(takeUntil(this._onDestroy$)).subscribe((lang: FdLanguage) => {
+            this._groupRoleDescription = this._translationResolver.resolve(
+                lang,
+                'segmentedButton.groupRoleDescription'
+            );
+            this._buttonRoleDescription = this._translationResolver.resolve(
+                lang,
+                'segmentedButton.buttonRoleDescription'
+            );
+            this._updateButtonRoleDescriptions();
+            this._changeDetRef.markForCheck();
+        });
     }
 
     /** @hidden */
@@ -245,9 +276,18 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     private _setButtonAttributes(buttonComponent: ButtonComponent, index: number): void {
         buttonComponent.elementRef.nativeElement.setAttribute('role', 'option');
-        buttonComponent.elementRef.nativeElement.setAttribute('aria-roledescription', 'Segmented button');
+        buttonComponent.elementRef.nativeElement.setAttribute('aria-roledescription', this._buttonRoleDescription);
         buttonComponent.elementRef.nativeElement.setAttribute('aria-posinset', String(index + 1));
         buttonComponent.elementRef.nativeElement.setAttribute('aria-setsize', String(this._buttons.length));
+    }
+
+    private _updateButtonRoleDescriptions(): void {
+        if (!this._buttons) {
+            return;
+        }
+        this._buttons.forEach((button) => {
+            button.elementRef.nativeElement.setAttribute('aria-roledescription', this._buttonRoleDescription);
+        });
     }
 
     /** @hidden */

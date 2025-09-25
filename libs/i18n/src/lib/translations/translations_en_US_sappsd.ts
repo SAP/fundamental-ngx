@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreCalendar: {
@@ -618,5 +618,9 @@ export default {
         groupAriaDescriptionCollapsed: '[[[ċŏĺĺąρşēƌ∙∙∙∙∙]]]',
         triggerMoreLabel: '[[[Μŏŗē]]]',
         triggerLessLabel: '[[[Ļēşş]]]'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

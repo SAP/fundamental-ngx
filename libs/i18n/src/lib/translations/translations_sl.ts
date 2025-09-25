@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Do not modify, it's automatically created. Modify translations_sl.properties instead
 export default {
     coreCalendar: {
@@ -611,5 +611,9 @@ export default {
         groupAriaDescriptionCollapsed: 'strnjeno',
         triggerMoreLabel: 'Več',
         triggerLessLabel: 'Manj'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };
