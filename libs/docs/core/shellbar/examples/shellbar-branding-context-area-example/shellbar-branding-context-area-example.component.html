@@ -28,7 +28,9 @@
         >
         </fd-product-menu>
         <span fdShellbarHidePriority="4" fd-button label="Button priority 4"></span>
-        <span fdShellbarHidePriority="3" fd-button label="Button priority 3"></span>
+        @if (showButtonWithPriority3) {
+            <span fdShellbarHidePriority="3" fd-button label="Button priority 3"></span>
+        }
     </fd-shellbar-context-area>
 
     <fdp-search-field
@@ -187,3 +189,7 @@
         </fd-user-menu>
     </fd-shellbar-actions>
 </fd-shellbar>
+
+<br />
+
+<button fd-button (click)="toggleButton3()">Toggle display of button with priority 3</button>
