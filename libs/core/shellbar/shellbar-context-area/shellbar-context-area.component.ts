@@ -1,6 +1,16 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    ElementRef,
+    EventEmitter,
+    inject,
+    Output
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
+import { isEqual, sortBy } from 'lodash-es';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
@@ -25,6 +35,10 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
     ]
 })
 export class ShellbarContextAreaComponent implements AfterViewInit {
+    /** Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden. */
+    @Output()
+    contentItemVisibilityChange = new EventEmitter<HTMLElement[]>();
+
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
 
@@ -33,6 +47,9 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private _hiddenItems: HTMLElement[];
 
     /** @hidden */
     constructor(public el: ElementRef) {}
@@ -52,6 +69,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * Iteratively hides elements if the end of the actions exceed the end of the shellbar.
      */
     hideElementsIfNeeded(): void {
+        const newHiddenItems: HTMLElement[] = [];
         const contextAreaItems: { el: HTMLElement; priority: number }[] = this._getContextAreaItemsWithPriority();
         while (this._shellbar._actionsExceedShellbarWidth()) {
             const shownElements = contextAreaItems.filter((item) => item?.el?.style?.display !== 'none');
@@ -60,8 +78,13 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
             }
             const lastItem = shownElements[shownElements.length - 1];
             if (lastItem?.el?.style) {
+                newHiddenItems.push(lastItem.el);
                 lastItem.el.style.display = 'none';
             }
+        }
+        if (!isEqual(sortBy(this._hiddenItems), sortBy(newHiddenItems))) {
+            this._hiddenItems = newHiddenItems;
+            this.contentItemVisibilityChange.emit(newHiddenItems);
         }
     }
 

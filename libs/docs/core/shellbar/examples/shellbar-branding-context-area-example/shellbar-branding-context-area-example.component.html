@@ -11,7 +11,7 @@
         <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
     </fd-shellbar-branding>
 
-    <fd-shellbar-context-area>
+    <fd-shellbar-context-area (contentItemVisibilityChange)="itemVisibilityChanged($event)">
         <fd-shellbar-separator fdShellbarHidePriority="1"></fd-shellbar-separator>
         <span
             fdShellbarHidePriority="2"

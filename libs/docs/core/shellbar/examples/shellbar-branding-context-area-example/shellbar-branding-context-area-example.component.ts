@@ -357,4 +357,8 @@ export class ShellbarBrandingContextAreaExampleComponent {
     toggleButton3(): void {
         this.showButtonWithPriority3 = !this.showButtonWithPriority3;
     }
+
+    itemVisibilityChanged(event: any): void {
+        console.log(event);
+    }
 }
