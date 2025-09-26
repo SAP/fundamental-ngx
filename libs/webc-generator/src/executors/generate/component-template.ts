@@ -22,50 +22,26 @@ function generateTypeImports(
                     const isEnum = allEnums.some((e) => e.name === reference.name);
                     let importPath: string | undefined;
 
-                    if (isEnum) {
-                        if (reference.package) {
-                            if (reference.package === '@ui5/webcomponents') {
-                                importPath = `@fundamental-ngx/ui5-webcomponents/types`;
-                            } else if (reference.package === '@ui5/webcomponents-base') {
-                                importPath = `@fundamental-ngx/ui5-webcomponents-base/types`;
-                            } else if (reference.package === '@ui5/webcomponents-fiori') {
-                                importPath = `@fundamental-ngx/ui5-webcomponents-fiori/types`;
-                            } else if (reference.package === '@ui5/webcomponents-ai') {
-                                importPath = `@fundamental-ngx/ui5-webcomponents-ai/types`;
-                            }
-                        }
-                    } else {
-                        if (reference.package === '@ui5/webcomponents-base') {
-                            importPath = `@fundamental-ngx/ui5-webcomponents-base/types`;
-                        } else if (reference.package === '@ui5/webcomponents' && reference.module) {
-                            if (reference.module?.includes('/types/')) {
-                                importPath = `@fundamental-ngx/ui5-webcomponents/types`;
-                            } else {
-                                importPath = `@ui5/webcomponents/${reference.module}`;
-                            }
-                        } else if (reference.package === '@ui5/webcomponents-fiori' && reference.module) {
-                            if (reference.module?.includes('/types/')) {
-                                importPath = `@fundamental-ngx/ui5-webcomponents-fiori/types`;
-                            } else {
-                                importPath = `${reference.package}/${reference.module}`;
-                            }
-                        } else if (reference.package === '@ui5/webcomponents-ai' && reference.module) {
-                            if (reference.module?.includes('/types/')) {
-                                importPath = `@fundamental-ngx/ui5-webcomponents-ai/types`;
-                            } else {
-                                importPath = `${reference.package}/${reference.module}`;
-                            }
-                        } else if (reference.module) {
-                            importPath = reference.module.startsWith('.')
-                                ? reference.module
-                                : `@ui5/webcomponents/${reference.module}`;
-                        } else if (reference.package) {
-                            const mappedPackage = reference.package.replace(
-                                '@ui5/webcomponents',
-                                '@fundamental-ngx/ui5-webcomponents'
-                            );
-                            importPath = `${mappedPackage}`;
-                        }
+                    const enumPackageMapping = {
+                        '@ui5/webcomponents': '@fundamental-ngx/ui5-webcomponents/types',
+                        '@ui5/webcomponents-base': '@fundamental-ngx/ui5-webcomponents-base/types',
+                        '@ui5/webcomponents-fiori': '@fundamental-ngx/ui5-webcomponents-fiori/types',
+                        '@ui5/webcomponents-ai': '@fundamental-ngx/ui5-webcomponents-ai/types'
+                    };
+
+                    if (reference.module) {
+                        importPath = reference.module.startsWith('.')
+                            ? reference.module
+                            : `${reference.package}/${reference.module}`;
+                    } else if (reference.package) {
+                        importPath = reference.package.replace(
+                            '@ui5/webcomponents',
+                            '@fundamental-ngx/ui5-webcomponents'
+                        );
+                    }
+
+                    if (reference.package && reference.module && reference.module.includes('/types/')) {
+                        importPath = enumPackageMapping[reference.package];
                     }
 
                     if (importPath) {
@@ -102,15 +78,13 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): st
             const baseType = isArrayType ? typeText?.replace('[]', '') : typeReferenceName;
 
             // If the base type is an enum, use the imported type name
-            if (baseType && enums.includes(baseType)) {
-                type = baseType;
-            } else if (baseType) {
+            if (baseType) {
                 type = baseType;
             } else {
                 type = typeText;
             }
 
-            type = `Array<${type}>`;
+            type = `${type}[]`;
         } else {
             // If the type is an enum, use the imported type name
             if (typeReferenceName && enums.includes(typeReferenceName)) {
@@ -119,30 +93,26 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): st
         }
 
         const isBoolean = typeText?.includes('boolean') || typeReferenceName === 'Boolean';
-        const hasInputDecorator = member.privacy === 'public';
+        const inputType = isBoolean ? '' : `<${type}>`;
+        const memberDefault = member.default;
 
-        if (hasInputDecorator) {
-            const inputType = isBoolean ? '' : `<${type}>`;
-            const memberDefault = member.default;
+        let inputCall;
+        if (isArray) {
+            inputCall = `input${inputType}([])`;
+        } else if (memberDefault === 'undefined' || memberDefault === undefined) {
+            inputCall = `input${inputType}()`;
+        } else if (isBoolean) {
+            const defaultVal = memberDefault === 'true';
+            inputCall = `input(${defaultVal}, { transform: booleanAttribute })`;
+        } else {
+            inputCall = `input${inputType}(${memberDefault})`;
+        }
 
-            let inputCall;
-            if (isArray) {
-                inputCall = `input${inputType}([])`;
-            } else if (memberDefault === 'undefined' || memberDefault === undefined) {
-                inputCall = `input${inputType}()`;
-            } else if (isBoolean) {
-                const defaultVal = memberDefault === 'true';
-                inputCall = `input(${defaultVal}, { transform: booleanAttribute })`;
-            } else {
-                inputCall = `input${inputType}(${memberDefault})`;
-            }
-
-            inputs.push(`
+        inputs.push(`
   /**
    * ${member.description || ''}
    */
   ${kebabToCamelCase(member.name)} = ${inputCall};`);
-        }
     });
 
     return inputs.join('\n');

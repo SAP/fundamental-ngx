@@ -65,6 +65,8 @@
             "@fundamental-ngx/ui5-webcomponents-ai/*": ["libs/ui5-webcomponents-ai/*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-base": ["libs/ui5-webcomponents-base/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-base/*": ["libs/ui5-webcomponents-base/*/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-base/theming": ["dist/libs/ui5-webcomponents-base/theming/index.d.ts"],
+            "@fundamental-ngx/ui5-webcomponents-base/types": ["dist/libs/ui5-webcomponents-base/types/index.d.ts"],
             "@fundamental-ngx/ui5-webcomponents-fiori": ["libs/ui5-webcomponents-fiori/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-fiori/*": ["libs/ui5-webcomponents-fiori/*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents/*": ["libs/ui5-webcomponents/*/index.ts"],
