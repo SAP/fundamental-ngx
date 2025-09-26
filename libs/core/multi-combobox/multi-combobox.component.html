@@ -204,6 +204,7 @@
                         [attr.aria-posinset]="i + 1"
                     >
                         <fd-checkbox
+                            role="presentation"
                             (click)="_onOptionCheckboxClicked($event, i)"
                             (ngModelChange)="_toggleSelection(optionItem)"
                             [ngModel]="optionItem.selected"
@@ -227,6 +228,7 @@
                     [selected]="!!optionItem.selected"
                 >
                     <fd-checkbox
+                        role="presentation"
                         (click)="_onOptionCheckboxClicked($event, i)"
                         (ngModelChange)="_toggleSelection(optionItem)"
                         [ngModel]="optionItem.selected"
