@@ -12,7 +12,7 @@ module.exports = [
                 'error',
                 {
                     type: 'attribute',
-                    prefix: 'fd',
+                    prefix: ['fd', 'noop'],
                     style: 'camelCase'
                 }
             ],

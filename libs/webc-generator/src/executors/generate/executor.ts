@@ -134,57 +134,11 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
             );
 
             // Generate the utils folder and cva.ts file
+            const cvaTemplatePath = path.resolve(__dirname, 'utils/cva.ts');
+            const cvaContent = await readFile(cvaTemplatePath, 'utf-8');
+
             const utilsDir = path.join(projectRoot, targetDir, 'utils');
             const cvaFilePath = path.join(utilsDir, 'cva.ts');
-            const cvaContent = `import { Directive, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-interface CvaComponent<ValueType = any> {
-  element: Element;
-  cvaValue: ValueType;
-}
-
-@Directive({
-  selector: '[noop]',
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GenericControlValueAccessor), // TODO: it's not needed in the older wrappers
-      //useExisting: GenericControlValueAccessor,
-      multi: true,
-    },
-  ],
-  host: {
-    '(focusout)': 'onTouched?.()',
-  },
-})
-class GenericControlValueAccessor<ValueType = any>
-  implements ControlValueAccessor
-{
-  onChange!: (val: ValueType) => void;
-  onTouched!: () => void;
-
-  host!: CvaComponent<ValueType>;
-
-  setDisabledState = (isDisabled: boolean): void => {
-    this.host.element['disabled'] = isDisabled;
-  };
-
-  registerOnChange(fn: (newVal: ValueType) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  writeValue(val: ValueType): void {
-    this.host.cvaValue = val;
-  }
-}
-
-export { GenericControlValueAccessor };`;
             await mkdir(utilsDir, { recursive: true });
             await writeFile(cvaFilePath, cvaContent, 'utf-8');
 
@@ -195,7 +149,8 @@ export { GenericControlValueAccessor };`;
             // Add the new theming folder and service file
             const themingDir = path.join(projectRoot, targetDir, 'theming');
             const themingServicePath = path.join(themingDir, 'index.ts');
-            const themingServiceContent = `import { Injectable } from '@angular/core';\nimport { WebcomponentsThemingProvider } from '@fundamental-ngx/ui5-webcomponents-base/theming';\n\n@Injectable({ providedIn: 'root' })\nclass Ui5Webcomponents${getSuffix(packageName)}ThemingService extends WebcomponentsThemingProvider {\n  name = 'ui-5-webcomponents-theming-service';\n  constructor() {\n    super(\n      () => import('@ui5/webcomponents/dist/generated/json-imports/Themes.js'),\n    );\n  }\n}\n\nexport { Ui5Webcomponents${getSuffix(packageName)}ThemingService };`;
+
+            const themingServiceContent = await getThemingServiceContent(packageName);
 
             await mkdir(themingDir, { recursive: true });
             await writeFile(themingServicePath, themingServiceContent, 'utf-8');
@@ -213,8 +168,6 @@ export { GenericControlValueAccessor };`;
 
         return { success: true };
     } catch (error) {
-        // If any promise in the array rejected, the catch block will be triggered
-        // and we can return a clear failure status.
         return {
             success: false,
             error: `An error occurred during component generation: ${error.message}`
@@ -232,6 +185,16 @@ function getSuffix(packageName: string): string {
     const capitalizedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1);
 
     return capitalizedSuffix;
+}
+
+async function getThemingServiceContent(packageName: string): Promise<string> {
+    const themingTemplatePath = path.resolve(__dirname, 'utils/theming-service-template.tpl');
+    let content = await readFile(themingTemplatePath, 'utf-8');
+    const suffix = getSuffix(packageName);
+
+    content = content.replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix);
+
+    return content;
 }
 
 export default runExecutor;
