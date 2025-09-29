@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.60](https://github.com/SAP/fundamental-ngx/compare/v0.43.59...v0.43.60) (2025-09-24)
+
+
+### Bug Fixes
+
+* **platform:** add option to set heading level for Table Toolbar ([#13479](https://github.com/SAP/fundamental-ngx/issues/13479)) ([e4f5410](https://github.com/SAP/fundamental-ngx/commit/e4f54106a69c42fed00e6f3f6e900fb1ea5ff5e3))
+
+
+
+
+
 ## [0.43.59](https://github.com/SAP/fundamental-ngx/compare/v0.43.57...v0.43.59) (2025-09-04)
 
 
