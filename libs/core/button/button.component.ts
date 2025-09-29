@@ -3,6 +3,7 @@ import {
     Component,
     computed,
     ElementRef,
+    forwardRef,
     HostListener,
     Input,
     OnChanges,
@@ -46,7 +47,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
         contentDensityObserverProviders(),
         {
             provide: FD_BUTTON_COMPONENT,
-            useExisting: ButtonComponent
+            useExisting: forwardRef(() => ButtonComponent)
         }
     ],
     imports: [IconComponent]
