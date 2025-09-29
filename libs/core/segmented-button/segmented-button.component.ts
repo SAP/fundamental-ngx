@@ -8,6 +8,7 @@ import {
     DestroyRef,
     ElementRef,
     Host,
+    HostBinding,
     HostListener,
     Input,
     NgZone,
@@ -38,6 +39,8 @@ import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
 export type SegmentedButtonValue = string | (string | null)[] | null;
+
+let segmentedButtonUniqueId = 0;
 
 /**
  * Container for grouped buttons.
@@ -87,6 +90,12 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     vertical = false;
 
     /** @hidden */
+    @HostBinding('attr.aria-activedescendant')
+    private get _ariaActiveDescendant(): string | null {
+        return this._focusedItemId;
+    }
+
+    /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
     _buttons: QueryList<ButtonComponent>;
 
@@ -122,6 +131,9 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
+    private _focusedItemId: string | null = null;
+
+    /** @hidden */
     constructor(
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -133,6 +145,10 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
         this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
         effect(() => {
             this._focusableList.contentDirection = this._rtlService?.rtlSignal() ? 'rtl' : 'ltr';
+        });
+        this._focusableList.itemFocused.pipe(takeUntil(this._onDestroy$)).subscribe((item) => {
+            this._focusedItemId = item.id;
+            this._changeDetRef.markForCheck();
         });
     }
 
@@ -168,6 +184,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._addButtonIdsIfMissing();
         this._listenToButtonChanges();
     }
 
@@ -227,6 +244,18 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
             });
         }
         this._changeDetRef.detectChanges();
+    }
+
+    private _addButtonIdsIfMissing(): void {
+        if (!this._buttons) {
+            return;
+        }
+        this._buttons.forEach((button) => {
+            const element = button.elementRef.nativeElement;
+            if (!element.id) {
+                element.id = `fd-segmented-button-${segmentedButtonUniqueId++}`;
+            }
+        });
     }
 
     /** @hidden */
@@ -347,17 +376,17 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     private _selectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.toggled = true;
+        buttonComponent.selected = true;
     }
 
     /** @hidden */
     private _deselectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.toggled = false;
+        buttonComponent.selected = false;
     }
 
     /** @hidden */
     private _isButtonSelected(buttonComponent: ButtonComponent): Nullable<boolean> {
-        return !!buttonComponent.toggled;
+        return !!buttonComponent.selected;
     }
 
     /** @hidden */

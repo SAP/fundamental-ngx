@@ -6,8 +6,6 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
 
-const isSelectedClass = 'fd-button--toggled';
-
 @Component({
     selector: 'fd-test-component',
     template: `
@@ -84,12 +82,12 @@ describe('SegmentedButtonComponent', () => {
     it('should correctly select and deselect single value in non-toggle mode', () => {
         component.segmentedButton.writeValue('second');
         fixture.detectChanges();
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         component.segmentedButton.writeValue('first');
         fixture.detectChanges();
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(false);
+        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('true');
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBe('false');
     });
 
     // Toggle Example
@@ -99,31 +97,31 @@ describe('SegmentedButtonComponent', () => {
 
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         component.thirdButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.thirdButton.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         // Deselect
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(false);
+        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('false');
     });
 
     // Form Example
     it('should update form value correctly', () => {
         component.segmentedButton.writeValue('first');
         fixture.detectChanges();
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         component.segmentedButton.writeValue('second');
         fixture.detectChanges();
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBe('true');
     });
 
     // Disabled State Check
@@ -150,15 +148,15 @@ describe('SegmentedButtonComponent', () => {
 
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         component.secondButton.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
-        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBe('true');
 
         component.thirdButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
         fixture.detectChanges();
-        expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.thirdButton.nativeElement.getAttribute('aria-selected')).toBe('true');
     });
 });
 
