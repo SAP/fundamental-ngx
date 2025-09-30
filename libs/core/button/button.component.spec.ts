@@ -31,25 +31,22 @@ export class DisabledTestComponent {}
 export class AriaDisabledTestComponent {}
 
 describe('ButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
-    let component, componentInstance: ButtonComponent;
+    let fixture: ComponentFixture<ButtonComponent>, componentInstance: ButtonComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule, TestComponent]
+            imports: [ButtonComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
-        debugElement = fixture.debugElement;
+        fixture = TestBed.createComponent(ButtonComponent);
         fixture.detectChanges();
-        component = debugElement.query(By.directive(ButtonComponent));
-        componentInstance = component.injector.get(ButtonComponent);
+        componentInstance = fixture.componentInstance;
     });
 
-    it('should create TestComponent', () => {
-        expect(component).toBeTruthy();
+    it('should create ButtonComponent', () => {
+        expect(componentInstance).toBeTruthy();
     });
 
     it('should add appropriate classes', () => {
@@ -66,6 +63,16 @@ describe('ButtonComponent', () => {
         jest.spyOn(componentInstance, 'buildComponentCssClass');
         componentInstance.ngOnInit();
         expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
+    });
+
+    it('should set a default id', () => {
+        expect(componentInstance.id()).toBe('fd-button-4');
+    });
+
+    it('should set a custom id if such is provided', () => {
+        fixture.componentRef.setInput('id', 'custom-id');
+        fixture.detectChanges();
+        expect(componentInstance.id()).toBe('custom-id');
     });
 });
 
