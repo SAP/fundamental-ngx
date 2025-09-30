@@ -8,7 +8,6 @@ import {
     DestroyRef,
     ElementRef,
     Host,
-    HostBinding,
     HostListener,
     Input,
     NgZone,
@@ -17,12 +16,14 @@ import {
     OnInit,
     Optional,
     QueryList,
+    Renderer2,
     SimpleChanges,
     ViewEncapsulation,
     booleanAttribute,
     effect,
     forwardRef,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
@@ -39,8 +40,6 @@ import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
 export type SegmentedButtonValue = string | (string | null)[] | null;
-
-let segmentedButtonUniqueId = 0;
 
 /**
  * Container for grouped buttons.
@@ -63,7 +62,8 @@ let segmentedButtonUniqueId = 0;
         '[class.fd-segmented-button--vertical]': 'vertical',
         '[attr.aria-multiselectable]': 'toggle',
         '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
-        '[attr.aria-roledescription]': '_groupRoleDescription'
+        '[attr.aria-roledescription]': '_groupRoleDescription',
+        '[attr.aria-activedescendant]': '_focusedItemId()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -88,12 +88,6 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
      **/
     @Input({ transform: booleanAttribute })
     vertical = false;
-
-    /** @hidden */
-    @HostBinding('attr.aria-activedescendant')
-    private get _ariaActiveDescendant(): string | null {
-        return this._focusedItemId;
-    }
 
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
@@ -131,7 +125,10 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
-    private _focusedItemId: string | null = null;
+    private _focusedItemId = signal<string | null>(null);
+
+    /** @hidden */
+    private renderer = inject(Renderer2);
 
     /** @hidden */
     constructor(
@@ -147,8 +144,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
             this._focusableList.contentDirection = this._rtlService?.rtlSignal() ? 'rtl' : 'ltr';
         });
         this._focusableList.itemFocused.pipe(takeUntil(this._onDestroy$)).subscribe((item) => {
-            this._focusedItemId = item.id;
-            this._changeDetRef.markForCheck();
+            this._focusedItemId.set(item.id);
         });
     }
 
@@ -184,7 +180,6 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._addButtonIdsIfMissing();
         this._listenToButtonChanges();
     }
 
@@ -246,18 +241,6 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
         this._changeDetRef.detectChanges();
     }
 
-    private _addButtonIdsIfMissing(): void {
-        if (!this._buttons) {
-            return;
-        }
-        this._buttons.forEach((button) => {
-            const element = button.elementRef.nativeElement;
-            if (!element.id) {
-                element.id = `fd-segmented-button-${segmentedButtonUniqueId++}`;
-            }
-        });
-    }
-
     /** @hidden */
     private _listenToButtonChanges(): void {
         if (!this._buttons || !this._focusableItems) {
@@ -304,10 +287,11 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     private _setButtonAttributes(buttonComponent: ButtonComponent, index: number): void {
-        buttonComponent.elementRef.nativeElement.setAttribute('role', 'option');
-        buttonComponent.elementRef.nativeElement.setAttribute('aria-roledescription', this._buttonRoleDescription);
-        buttonComponent.elementRef.nativeElement.setAttribute('aria-posinset', String(index + 1));
-        buttonComponent.elementRef.nativeElement.setAttribute('aria-setsize', String(this._buttons.length));
+        const el = buttonComponent.elementRef.nativeElement;
+        this.renderer.setAttribute(el, 'role', 'option');
+        this.renderer.setAttribute(el, 'aria-roledescription', this._buttonRoleDescription);
+        this.renderer.setAttribute(el, 'aria-posinset', String(index + 1));
+        this.renderer.setAttribute(el, 'aria-setsize', String(this._buttons.length));
     }
 
     private _updateButtonRoleDescriptions(): void {
@@ -315,7 +299,11 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
             return;
         }
         this._buttons.forEach((button) => {
-            button.elementRef.nativeElement.setAttribute('aria-roledescription', this._buttonRoleDescription);
+            this.renderer.setAttribute(
+                button.elementRef.nativeElement,
+                'aria-roledescription',
+                this._buttonRoleDescription
+            );
         });
     }
 

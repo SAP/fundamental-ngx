@@ -5,6 +5,7 @@ import {
     ElementRef,
     forwardRef,
     HostListener,
+    input,
     Input,
     OnChanges,
     OnDestroy,
@@ -18,6 +19,8 @@ import { BaseButton } from './base-button';
 
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_BUTTON_COMPONENT } from './tokens';
+
+let buttonId = 0;
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -41,7 +44,8 @@ import { FD_BUTTON_COMPONENT } from './tokens';
         '[attr.type]': 'type',
         '[attr.disabled]': 'disabled || null',
         '[attr.aria-label]': 'buttonArialabel()',
-        '[attr.aria-description]': 'buttonAriaDescription()'
+        '[attr.aria-description]': 'buttonAriaDescription()',
+        '[attr.id]': 'id()'
     },
     providers: [
         contentDensityObserverProviders(),
@@ -59,6 +63,9 @@ export class ButtonComponent
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
+
+    /** Button ID - default value is provided if not set  */
+    id = input(`fd-button-${++buttonId}`);
 
     /** @hidden */
     specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
