@@ -10,15 +10,13 @@ import {
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { applyCssClass, CssClassBuilder, DynamicComponentService } from '@fundamental-ngx/cdk/utils';
-import { ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 let formMessageId = 0;
 
 @Component({
     selector: 'fd-form-message',
-    template: `<span class="fd-form-message__sr-only"> {{ valueStateMessages[type()]?.() }} </span
-        ><ng-content></ng-content>`,
+    template: `<ng-content></ng-content>`,
     styleUrl: './form-message.component.scss',
     host: {
         'aria-live': 'assertive',
@@ -46,37 +44,9 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
     /** User's custom classes */
     class = input<string>();
 
-    /**
-     * Value state "success" message.
-     */
-    valueStateSuccessMessage = input<string>(inject(ValueStateAriaMessageService).success);
-
-    /**
-     * Value state "information" message.
-     */
-    valueStateInformationMessage = input<string>(inject(ValueStateAriaMessageService).information);
-
-    /**
-     * Value state "warning" message.
-     */
-    valueStateWarningMessage = input<string>(inject(ValueStateAriaMessageService).warning);
-
-    /**
-     * Value state "error" message.
-     */
-    valueStateErrorMessage = input<string>(inject(ValueStateAriaMessageService).error);
-
     /** Form Message Text ID
      *  Default value is provided if not set  */
-    id = input('fd-form-message-' + ++formMessageId);
-
-    /** @hidden */
-    valueStateMessages = {
-        success: this.valueStateSuccessMessage,
-        information: this.valueStateInformationMessage,
-        warning: this.valueStateWarningMessage,
-        error: this.valueStateErrorMessage
-    } as const;
+    id = input(`fd-form-message-${++formMessageId}`);
 
     /** @hidden */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);

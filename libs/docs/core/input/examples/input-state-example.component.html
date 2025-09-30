@@ -1,19 +1,9 @@
 <div fd-form-item>
     <label fd-form-label for="input-52"> Valid(Success) Input </label>
-    <fd-form-input-message-group>
-        <input
-            fd-form-control
-            type="text"
-            id="input-52"
-            placeholder="Field placeholder text"
-            state="success"
-            aria-describedby="input-state-form-message-52"
-        />
-        <fd-form-message type="success" id="input-state-form-message-52">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
-        </fd-form-message>
-    </fd-form-input-message-group>
+    <input fd-form-control type="text" id="input-52" placeholder="Field placeholder text" state="success" />
 </div>
+
+<br /><br />
 
 <div fd-form-item>
     <label fd-form-label for="input-53"> Invalid(Error) Input - Message appears on hover </label>
@@ -28,10 +18,12 @@
             aria-errormessage="input-state-form-message-53"
         />
         <fd-form-message type="error" id="input-state-form-message-53">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Username must be at least 6 characters.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
+
+<br /><br />
 
 <div fd-form-item>
     <label fd-form-label for="input-54"> Warning Input - Example of message triggered only on focus/blur </label>
@@ -49,10 +41,12 @@
             aria-describedby="input-state-form-message-54"
         />
         <fd-form-message type="warning" id="input-state-form-message-54">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Make sure this is easy for you to remember.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
+
+<br /><br />
 
 <div fd-form-item>
     <label fd-form-label for="input-55"> Information Input </label>
@@ -63,18 +57,21 @@
             id="input-55"
             placeholder="Field placeholder text"
             state="information"
-            aria-describedby="input-state-form-message-55"
+            valueStateInformationMessage="Custom Value State Information Message"
         />
-        <fd-form-message type="information" id="input-state-form-message-55">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
-        </fd-form-message>
+        <fd-form-message type="information"> You can leave this blank if not applicable. </fd-form-message>
     </fd-form-input-message-group>
 </div>
+
+<br /><br />
 
 <div fd-form-item>
     <label fd-form-label for="input-56"> Disabled Input </label>
     <input fd-form-control type="text" id="input-56" placeholder="Field placeholder text" disabled />
 </div>
+
+<br /><br />
+
 <div fd-form-item>
     <label fd-form-label for="input-57"> Readonly Input </label>
     <input fd-form-control type="text" id="input-57" placeholder="Field placeholder text" readonly />

@@ -21,3 +21,9 @@ $form-label-margin: 0.5rem;
         }
     }
 }
+
+/* Disable label pointer events if the same form-item contains a disabled input/textarea */
+.fd-form-item:has(input[disabled], textarea[disabled], input.is-disabled, textarea.is-disabled)
+    .fd-form-label__wrapper {
+    pointer-events: none;
+}
