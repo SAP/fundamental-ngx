@@ -123,6 +123,7 @@ export interface FdLanguage {
         announcementWarning: FdLanguageKey;
         announcementError: FdLanguageKey;
         announcementSuccess: FdLanguageKey;
+        announcementDefault: FdLanguageKey;
         closable: FdLanguageKey;
     };
     coreMultiInput: {

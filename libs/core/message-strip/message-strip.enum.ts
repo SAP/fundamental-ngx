@@ -2,7 +2,8 @@ export const enum MessageStripTypeEnum {
     INFORMATION = 'information',
     WARNING = 'warning',
     SUCCESS = 'success',
-    ERROR = 'error'
+    ERROR = 'error',
+    DEFAULT = 'default'
 }
 
 export const enum MessageStringIconEnum {
@@ -16,7 +17,8 @@ export const enum MessageStripAnnouncement {
     INFORMATION = 'coreMessageStrip.announcementInfo',
     WARNING = 'coreMessageStrip.announcementWarning',
     SUCCESS = 'coreMessageStrip.announcementSuccess',
-    ERROR = 'coreMessageStrip.announcementError'
+    ERROR = 'coreMessageStrip.announcementError',
+    DEFAULT = 'coreMessageStrip.announcementDefault'
 }
 
 export type MessageStripAnnouncementType = `${MessageStripAnnouncement}`;

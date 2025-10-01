@@ -1,8 +1,10 @@
 import { BooleanInput } from '@angular/cdk/coercion';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
+    AfterContentInit,
     booleanAttribute,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     DestroyRef,
@@ -59,7 +61,7 @@ let messageStripUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent, AsyncPipe]
 })
-export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
+export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
     /** User's custom classes */
     @Input() class = '';
 
@@ -67,6 +69,11 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @Input({ transform: booleanAttribute })
     @HostBinding('class.fd-message-strip--dismissible')
     dismissible: BooleanInput = true;
+
+    @HostBinding('class.fd-message-strip--link')
+    get hasLink(): boolean {
+        return this._hasProjectedLink;
+    }
 
     /** Id of the element that labels the message-strip. */
     @Input() ariaLabelledBy: Nullable<string>;
@@ -95,7 +102,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** The type of the message strip.
      * Can be one of *warning*, *success*, *information*, *error* or null.
      */
-    @Input() type: MessageStripType;
+    @Input() type: MessageStripType = null;
 
     /** Id for the message-strip component. If omitted, a unique one is generated. */
     @Input() id: string = 'fd-message-strip-' + messageStripUniqueId++;
@@ -130,6 +137,12 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     defaultDismissButtonText$: Observable<string>;
 
     /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -139,7 +152,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    private _hasProjectedLink = false;
 
     /** @hidden
      * CssClassBuilder interface implementation
@@ -162,6 +175,13 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     ngOnInit(): void {
         this.buildComponentCssClass();
         this.setScreenReaderTexts();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        // Check for projected <a> elements
+        this._hasProjectedLink = !!this.elementRef.nativeElement.querySelector('a');
+        this.cdr.markForCheck();
     }
 
     /** @hidden */
@@ -198,24 +218,20 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
      */
     dismiss(): void {
         this.elementRef.nativeElement.classList.add('fd-has-display-none');
-        this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.onDismiss.emit();
     }
 
     /** Sets screen reader texts for message strip type announcement and dismiss button */
     private setScreenReaderTexts(): void {
-        if (!this.type) {
-            return;
-        }
-
         const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
             [MessageStripTypeEnum.WARNING]: MessageStripAnnouncement.WARNING,
             [MessageStripTypeEnum.SUCCESS]: MessageStripAnnouncement.SUCCESS,
             [MessageStripTypeEnum.ERROR]: MessageStripAnnouncement.ERROR,
-            [MessageStripTypeEnum.INFORMATION]: MessageStripAnnouncement.INFORMATION
+            [MessageStripTypeEnum.INFORMATION]: MessageStripAnnouncement.INFORMATION,
+            [MessageStripTypeEnum.DEFAULT]: MessageStripAnnouncement.DEFAULT
         };
 
-        const announcementType = announcementMap[this.type];
+        const announcementType = announcementMap[this.type ?? MessageStripTypeEnum.DEFAULT];
 
         if (announcementType) {
             const announcement$ = this._translateAnnouncement(announcementType);

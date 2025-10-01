@@ -1,12 +1,10 @@
+<span class="fd-message-strip__sr-only" id="{{ id }}-hidden-text">{{ messageStripHiddenText$ | async }}</span>
 @if (shouldShowIcon) {
     <div class="fd-message-strip__icon-container" aria-hidden="true">
         @if (icon) {
             <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
         } @else {
             <fd-icon [glyph]="typeSpecificIconName" role="presentation" aria-hidden="true"></fd-icon>
-            <span class="fd-message-strip__sr-only" id="{{ id }}-hidden-text">{{
-                messageStripHiddenText$ | async
-            }}</span>
         }
     </div>
 }
