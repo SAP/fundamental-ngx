@@ -4,9 +4,8 @@ import {
     Component,
     DestroyRef,
     ElementRef,
-    EventEmitter,
     inject,
-    Output
+    output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
@@ -36,8 +35,10 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
 })
 export class ShellbarContextAreaComponent implements AfterViewInit {
     /** Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden. */
-    @Output()
-    contentItemVisibilityChange = new EventEmitter<HTMLElement[]>();
+    contentItemVisibilityChange = output<HTMLElement[]>();
+
+    /** @hidden */
+    el: ElementRef = inject(ElementRef);
 
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
@@ -50,9 +51,6 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
 
     /** @hidden */
     private _hiddenItems: HTMLElement[];
-
-    /** @hidden */
-    constructor(public el: ElementRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
