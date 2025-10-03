@@ -125,7 +125,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
-    private _focusedItemId = signal<string | null>(null);
+    private _focusedItemId = signal<string | null | undefined>(null);
 
     /** @hidden */
     private renderer = inject(Renderer2);

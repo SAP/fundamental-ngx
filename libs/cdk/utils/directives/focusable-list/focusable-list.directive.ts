@@ -40,8 +40,8 @@ import { ScrollPosition, scrollIntoView } from './scroll';
 
 export interface FocusableListItemFocusedEvent {
     index: number;
-    id: string | null;
     total: number;
+    id?: string | null;
 }
 
 export interface FocusableListKeydownEvent {
