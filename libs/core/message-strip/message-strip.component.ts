@@ -1,6 +1,6 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
-    AfterContentInit,
+    AfterContentChecked,
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
@@ -64,7 +64,7 @@ let messageStripUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent, AsyncPipe]
 })
-export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
+export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentChecked {
     /** Event fired when the message-strip is dismissed. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
@@ -159,7 +159,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
+    ngAfterContentChecked(): void {
         // Check for projected <a> elements
         this._hasProjectedLink$.set(!!this.elementRef.nativeElement.querySelector('a'));
     }
