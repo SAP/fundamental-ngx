@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.20...v0.57.4-rc.21) (2025-10-02)
+
+
+### Bug Fixes
+
+* **core:** shellbar context area should allow ngIf ([#13510](https://github.com/SAP/fundamental-ngx/issues/13510)) ([4b836ba](https://github.com/SAP/fundamental-ngx/commit/4b836bac39fc05e5f62c33698bfe789a2fc3f935))
+
+
+
+
+
 ## [0.57.4-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.19...v0.57.4-rc.20) (2025-09-23)
 
 
