@@ -1,21 +1,19 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     booleanAttribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     DestroyRef,
     ElementRef,
     EventEmitter,
-    HostBinding,
     inject,
-    Input,
+    input,
     OnChanges,
     OnInit,
     Output,
+    signal,
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -49,12 +47,17 @@ let messageStripUniqueId = 0;
     selector: 'fd-message-strip',
     templateUrl: './message-strip.component.html',
     styleUrl: './message-strip.component.scss',
+    standalone: true,
     host: {
-        '[attr.aria-label]': 'ariaLabel',
-        '[style.width]': 'width',
-        '[style.min-width]': 'minWidth',
-        '[style.margin-bottom]': 'marginBottom',
-        '[attr.id]': 'id',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.aria-labelledby]': 'ariaLabelledBy() || (id() + "-hidden-text " + id() + "-content-text")',
+        '[style.width]': 'width()',
+        '[style.min-width]': 'minWidth()',
+        '[style.margin-bottom]': 'marginBottom()',
+        '[attr.id]': 'id()',
+        '[class.fd-message-strip--link]': '_hasProjectedLink$()',
+        '[class.fd-message-strip--no-icon]': 'noIcon()',
+        '[class.fd-message-strip--dismissible]': 'dismissible()',
         role: 'note'
     },
     encapsulation: ViewEncapsulation.None,
@@ -62,66 +65,6 @@ let messageStripUniqueId = 0;
     imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent, AsyncPipe]
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
-    /** User's custom classes */
-    @Input() class = '';
-
-    /** Whether the message strip is dismissible. */
-    @Input({ transform: booleanAttribute })
-    @HostBinding('class.fd-message-strip--dismissible')
-    dismissible: BooleanInput = true;
-
-    @HostBinding('class.fd-message-strip--link')
-    get hasLink(): boolean {
-        return this._hasProjectedLink;
-    }
-
-    /** Id of the element that labels the message-strip. */
-    @Input() ariaLabelledBy: Nullable<string>;
-
-    /** Set aria-labelledby for fd-message-strip. */
-    @HostBinding('attr.aria-labelledby')
-    get hostAriaLabelledBy(): Nullable<string> {
-        if (this.ariaLabelledBy) {
-            return this.ariaLabelledBy;
-        }
-        return `${this.id}-hidden-text ${this.id}-content-text`;
-    }
-
-    /** Title for dismiss button */
-    @Input()
-    dismissBtnTitle: string;
-
-    /** The default message strip does not have an icon.
-     * The other types (warning, success, information and error) have icons by default.
-     * To remove the icon set the property to true.
-     */
-    @Input({ transform: booleanAttribute })
-    @HostBinding('class.fd-message-strip--no-icon')
-    noIcon: BooleanInput = false;
-
-    /** The type of the message strip.
-     * Can be one of *warning*, *success*, *information*, *error* or null.
-     */
-    @Input() type: MessageStripType = null;
-
-    /** Id for the message-strip component. If omitted, a unique one is generated. */
-    @Input() id: string = 'fd-message-strip-' + messageStripUniqueId++;
-
-    /** Aria label for the message-strip component element. */
-    @Input() ariaLabel: Nullable<string>;
-
-    /** Width of the message-strip. */
-    @Input() width: string;
-
-    /** Minimum width of the message-strip. */
-    @Input() minWidth: string;
-
-    /** Margin bottom of the message-strip. */
-    @Input() marginBottom: string;
-
-    /** indication color of the message-strip. */
-    @Input() indicationColor: MessageStripIndicationColor;
-
     /** Event fired when the message-strip is dismissed. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
@@ -129,6 +72,47 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** Custom icon component */
     @ContentChild(MessageStripIconDirective)
     icon: MessageStripIconDirective;
+
+    /** User's custom classes */
+    class = input<string | undefined>('');
+
+    /** Whether the message strip is dismissible. */
+    dismissible = input(true, { transform: booleanAttribute });
+
+    /** Id of the element that labels the message-strip. */
+    ariaLabelledBy = input<Nullable<string>>();
+
+    /** Title for dismiss button */
+    dismissBtnTitle = input<string>();
+
+    /** The default message strip does not have an icon.
+     * The other types (warning, success, information and error) have icons by default.
+     * To remove the icon set the property to true.
+     */
+    noIcon = input(false, { transform: booleanAttribute });
+
+    /** The type of the message strip.
+     * Can be one of *warning*, *success*, *information*, *error* or null.
+     */
+    type = input<MessageStripType>(null);
+
+    /** Id for the message-strip component. If omitted, a unique one is generated. */
+    id = input<string>('fd-message-strip-' + messageStripUniqueId++);
+
+    /** Aria label for the message-strip component element. */
+    ariaLabel = input<Nullable<string>>();
+
+    /** Width of the message-strip. */
+    width = input<string>();
+
+    /** Minimum width of the message-strip. */
+    minWidth = input<string>();
+
+    /** Margin bottom of the message-strip. */
+    marginBottom = input<string>();
+
+    /** indication color of the message-strip. */
+    indicationColor = input<MessageStripIndicationColor>();
 
     /** message strip information read by screen readers */
     messageStripHiddenText$: Observable<string>;
@@ -140,9 +124,6 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    private readonly cdr = inject(ChangeDetectorRef);
-
-    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -152,7 +133,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
-    private _hasProjectedLink = false;
+    private _hasProjectedLink$ = signal<boolean>(false);
 
     /** @hidden
      * CssClassBuilder interface implementation
@@ -163,11 +144,11 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     buildComponentCssClass(): string[] {
         return [
             'fd-message-strip',
-            this.type ? `fd-message-strip--${this.type}` : '',
-            this.dismissible ? 'fd-message-strip--dismissible' : '',
-            this.noIcon ? 'fd-message-strip--no-icon' : '',
-            this.indicationColor ? `fd-message-strip--indication-color-${this.indicationColor}` : '',
-            this.class
+            this.type() ? `fd-message-strip--${this.type()}` : '',
+            this.dismissible() ? 'fd-message-strip--dismissible' : '',
+            this.noIcon() ? 'fd-message-strip--no-icon' : '',
+            this.indicationColor() ? `fd-message-strip--indication-color-${this.indicationColor()}` : '',
+            this.class() ?? ''
         ];
     }
 
@@ -180,8 +161,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     ngAfterContentInit(): void {
         // Check for projected <a> elements
-        this._hasProjectedLink = !!this.elementRef.nativeElement.querySelector('a');
-        this.cdr.markForCheck();
+        this._hasProjectedLink$.set(!!this.elementRef.nativeElement.querySelector('a'));
     }
 
     /** @hidden */
@@ -191,15 +171,15 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** Whether icon container should be shown */
     get shouldShowIcon(): boolean {
-        if (this.noIcon) {
+        if (this.noIcon()) {
             return false;
         }
-        return !!this.icon || !!this.type;
+        return !!this.icon || !!this.type();
     }
 
     /** @hidden */
     get typeSpecificIconName(): string {
-        switch (this.type) {
+        switch (this.type()) {
             case MessageStripTypeEnum.WARNING:
                 return MessageStringIconEnum.ALERT;
             case MessageStripTypeEnum.SUCCESS:
@@ -231,7 +211,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
             [MessageStripTypeEnum.DEFAULT]: MessageStripAnnouncement.DEFAULT
         };
 
-        const announcementType = announcementMap[this.type ?? MessageStripTypeEnum.DEFAULT];
+        const announcementType = announcementMap[this.type() ?? MessageStripTypeEnum.DEFAULT];
 
         if (announcementType) {
             const announcement$ = this._translateAnnouncement(announcementType);
@@ -258,7 +238,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
             withLatestFrom(announcement$),
             map(([lang, announcement]: [FdLanguage, string]) => {
                 const closable = this._translationResolver.resolve(lang, MESSAGE_STRIP_CLOSABLE);
-                return `${announcement} ${this.dismissible ? closable : ''}`;
+                return `${announcement} ${this.dismissible() ? closable : ''}`;
             })
         );
     }
