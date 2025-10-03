@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClickedDirective } from '@fundamental-ngx/cdk';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -12,12 +12,19 @@ import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
-import { ShellbarMenuItem, ShellbarModule, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
+import {
+    ShellbarComponent,
+    ShellbarMenuItem,
+    ShellbarModule,
+    ShellbarUser,
+    ShellbarUserMenu
+} from '@fundamental-ngx/core/shellbar';
 import {
     UserMenuBodyComponent,
     UserMenuComponent,
     UserMenuContentContainerComponent,
     UserMenuControlComponent,
+    UserMenuControlElementDirective,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
     UserMenuHeaderDirective,
@@ -60,6 +67,7 @@ import {
         UserMenuListComponent,
         UserMenuSublistComponent,
         UserMenuListItemComponent,
+        UserMenuControlElementDirective,
         PopoverModule,
         ListModule,
         PanelModule,
@@ -72,6 +80,9 @@ export class ShellbarBrandingContextAreaExampleComponent {
     @ViewChild(UserMenuComponent)
     userMenuComponent: UserMenuComponent;
 
+    @ViewChild(ShellbarComponent, { read: ElementRef })
+    shellbar: ElementRef;
+
     expanded = true;
 
     isOpen = false;
@@ -79,6 +90,8 @@ export class ShellbarBrandingContextAreaExampleComponent {
     searchTerm = '';
 
     inputText = '';
+
+    showButtonWithPriority3 = true;
 
     suggestions: SuggestionItem[] = [
         {
@@ -339,5 +352,13 @@ export class ShellbarBrandingContextAreaExampleComponent {
         this._messageToastService.open(content, {
             duration: 5000
         });
+    }
+
+    toggleButton3(): void {
+        this.showButtonWithPriority3 = !this.showButtonWithPriority3;
+    }
+
+    itemVisibilityChanged(event: any): void {
+        console.log(event);
     }
 }

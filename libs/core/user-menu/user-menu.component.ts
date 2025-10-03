@@ -9,11 +9,13 @@ import {
     contentChild,
     contentChildren,
     effect,
+    ElementRef,
     EventEmitter,
     inject,
     input,
     OnInit,
     Output,
+    Renderer2,
     signal,
     TemplateRef,
     ViewEncapsulation
@@ -37,6 +39,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 import { UserMenuBodyComponent } from './components/user-menu-body.component';
 import { UserMenuControlComponent } from './components/user-menu-control.component';
 import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
+import { UserMenuControlElementDirective } from './directives/user-menu-control-element.directive';
 
 @Component({
     selector: 'fd-user-menu',
@@ -73,6 +76,9 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     /** @hidden */
     userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
 
+    /** @hidden */
+    userMenuControlElement = contentChild(UserMenuControlElementDirective, { descendants: true, read: ElementRef });
+
     /** Whether the user menu is in mobile mode */
     mobile = input(false, { transform: booleanAttribute });
 
@@ -90,6 +96,9 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     private _changeDetectionRef = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private _renderer = inject(Renderer2);
 
     /** @hidden */
     private _dialogRef: DialogRef | undefined;
@@ -149,6 +158,10 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
         });
 
         const refSub = this._dialogRef.afterClosed.subscribe({
+            next: () => {
+                this.userMenuControl.focus();
+                refSub.unsubscribe();
+            },
             error: (type) => {
                 if (type === 'escape') {
                     this._clearSubmenu();
@@ -167,9 +180,16 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
         this.isOpen.set(isOpen);
         this.isOpenChange.emit(isOpen);
 
-        if (!this.isOpen()) {
-            this.userMenuControl._focus();
+        if (!isOpen && !this.mobile()) {
+            this.userMenuControl.focus();
         }
+
+        const userMenuControlEl = this.userMenuControlElement()?.nativeElement;
+
+        this.userMenuControlElement()?.nativeElement &&
+            (isOpen
+                ? this._renderer.addClass(userMenuControlEl, 'is-active')
+                : this._renderer.removeClass(userMenuControlEl, 'is-active'));
 
         this._changeDetectionRef.detectChanges();
     }

@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.20...v0.57.4-rc.21) (2025-10-02)
+
+
+### Bug Fixes
+
+* **core:** shellbar context area should allow ngIf ([#13510](https://github.com/SAP/fundamental-ngx/issues/13510)) ([4b836ba](https://github.com/SAP/fundamental-ngx/commit/4b836bac39fc05e5f62c33698bfe789a2fc3f935))
+
+
+
+
+
+## [0.57.4-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.19...v0.57.4-rc.20) (2025-09-23)
+
+
+### Bug Fixes
+
+* **core:** add property to disable wheel event for Step Input ([#13503](https://github.com/SAP/fundamental-ngx/issues/13503)) ([bec2535](https://github.com/SAP/fundamental-ngx/commit/bec253594a8d3f783e28b55f93f7827b585ba168))
+
+
+
+
+
+## [0.57.4-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.18...v0.57.4-rc.19) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** apply active and focus states on Avatar in User Menu ([#13497](https://github.com/SAP/fundamental-ngx/issues/13497)) ([bda80a2](https://github.com/SAP/fundamental-ngx/commit/bda80a2b66c8443adab5ad9c7a8a5cd7f3ac5057))
+
+
+
+
+
+## [0.57.4-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.17...v0.57.4-rc.18) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** allow navigation inside multi combobox located in a dialog ([#13499](https://github.com/SAP/fundamental-ngx/issues/13499)) ([1da7e3f](https://github.com/SAP/fundamental-ngx/commit/1da7e3f56607e93eda4248655e8b93850ab775e8))
+
+
+
+
+
+## [0.57.4-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.16...v0.57.4-rc.17) (2025-09-17)
+
+
+### Bug Fixes
+
+* **core:** Combobox inside a Dialog - Not able navigate through the invoked drop-down values using keyboard ([#13496](https://github.com/SAP/fundamental-ngx/issues/13496)) ([243bb6f](https://github.com/SAP/fundamental-ngx/commit/243bb6fb3d59293946e55ddb0991e8a8653d2042))
+
+
+
+
+
+## [0.57.4-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.15...v0.57.4-rc.16) (2025-09-12)
+
+
+### Bug Fixes
+
+* **core:** Step Input minimum not recognized when input is cleared ([#13486](https://github.com/SAP/fundamental-ngx/issues/13486)) ([29b972a](https://github.com/SAP/fundamental-ngx/commit/29b972a63f6ee20d07a88b83d263d987442b417b))
+
+
+
+
+
 ## [0.57.4-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.14...v0.57.4-rc.15) (2025-09-11)
 
 

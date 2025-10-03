@@ -9,10 +9,11 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
     template: `
         <div class="step-input-example-container">
             <div class="step-input-example">
-                <label fd-form-label for="reactive-form-input" [required]="true">Reactive forms</label>
+                <label fd-form-label for="reactive-form-input" [required]="true">Reactive forms (min value 0)</label>
                 <fd-step-input
                     inputId="reactive-form-input"
                     [required]="true"
+                    [min]="0"
                     [formControl]="stepInputFormControl1"
                 ></fd-step-input>
                 <table [style.fontSize]="'smaller'">
@@ -31,6 +32,37 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
                     <tr>
                         <td>Status:</td>
                         <td>{{ stepInputFormControl1.status }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="step-input-example">
+                <label fd-form-label for="reactive-form-input" [required]="true"
+                    >Reactive forms (min value 5, max value 10)</label
+                >
+                <fd-step-input
+                    inputId="reactive-form-input"
+                    [required]="true"
+                    [min]="5"
+                    [max]="10"
+                    [formControl]="stepInputFormControl1a"
+                ></fd-step-input>
+                <table [style.fontSize]="'smaller'">
+                    <tr>
+                        <td>Value:</td>
+                        <td>{{ stepInputFormControl1a.value }}</td>
+                    </tr>
+                    <tr>
+                        <td>Dirty:</td>
+                        <td>{{ stepInputFormControl1a.dirty }}</td>
+                    </tr>
+                    <tr>
+                        <td>Touched:</td>
+                        <td>{{ stepInputFormControl1a.touched }}</td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td>{{ stepInputFormControl1a.status }}</td>
                     </tr>
                 </table>
             </div>
@@ -75,7 +107,8 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
     imports: [FormLabelComponent, StepInputModule, FormsModule, ReactiveFormsModule, ButtonComponent]
 })
 export class StepInputFormExampleComponent {
-    stepInputFormControl1 = new FormControl(100);
+    stepInputFormControl1 = new FormControl(null);
+    stepInputFormControl1a = new FormControl(5);
     stepInputFormControl2 = new FormControl({ disabled: true, value: 100 });
     value1: number | null = 100;
     value2: number | null = 100;

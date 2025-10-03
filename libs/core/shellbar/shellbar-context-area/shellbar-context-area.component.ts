@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    ElementRef,
+    inject,
+    output
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
+import { isEqual, sortBy } from 'lodash-es';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
@@ -22,24 +33,56 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
         `
     ]
 })
-export class ShellbarContextAreaComponent {
+export class ShellbarContextAreaComponent implements AfterViewInit {
+    /** Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden. */
+    contentItemVisibilityChange = output<HTMLElement[]>();
+
+    /** @hidden */
+    el: ElementRef = inject(ElementRef);
+
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
 
     /** @hidden */
-    constructor(public el: ElementRef) {}
+    private _resizeObserverService = inject(ResizeObserverService);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private _hiddenItems: HTMLElement[];
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._resizeObserverService
+            .observe(this.el.nativeElement)
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this.showElements();
+                this.hideElementsIfNeeded();
+            });
+    }
 
     /**
      * Iteratively hides elements if the end of the actions exceed the end of the shellbar.
      */
     hideElementsIfNeeded(): void {
-        const elements: { el: HTMLElement; priority: number }[] = this._getElementsWithPriority();
+        const newHiddenItems: HTMLElement[] = [];
+        const contextAreaItems: { el: HTMLElement; priority: number }[] = this._getContextAreaItemsWithPriority();
         while (this._shellbar._actionsExceedShellbarWidth()) {
-            const shownElements = elements.filter((el) => el.el.style.display !== 'none');
+            const shownElements = contextAreaItems.filter((item) => item?.el?.style?.display !== 'none');
             if (shownElements.length === 0) {
                 break;
             }
-            shownElements[shownElements.length - 1].el.style.display = 'none';
+            const lastItem = shownElements[shownElements.length - 1];
+            if (lastItem?.el?.style) {
+                newHiddenItems.push(lastItem.el);
+                lastItem.el.style.display = 'none';
+            }
+        }
+        if (!isEqual(sortBy(this._hiddenItems), sortBy(newHiddenItems))) {
+            this._hiddenItems = newHiddenItems;
+            this.contentItemVisibilityChange.emit(newHiddenItems);
         }
     }
 
@@ -48,8 +91,10 @@ export class ShellbarContextAreaComponent {
      * to exceed the end of th eshellbar.
      */
     showElements(): void {
-        this._getElementsWithPriority().forEach((el) => {
-            el.el.style.display = '';
+        this._getContextAreaItemsWithPriority().forEach((item) => {
+            if (item?.el?.style) {
+                item.el.style.display = '';
+            }
         });
     }
 
@@ -58,8 +103,8 @@ export class ShellbarContextAreaComponent {
      * The elements are sorted based on their priority, with elements having
      * higher priority shown first.
      */
-    private _getElementsWithPriority(): { el: HTMLElement; priority: number }[] {
-        return [...this.el.nativeElement.childNodes]
+    private _getContextAreaItemsWithPriority(): { el: HTMLElement; priority: number }[] {
+        return [...this.el.nativeElement.children]
             .map((element: HTMLElement, index) => {
                 const hasPriorityAttribute = element.hasAttribute && element.hasAttribute('fdShellbarHidePriority');
                 const priority = hasPriorityAttribute

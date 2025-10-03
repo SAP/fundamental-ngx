@@ -16,6 +16,7 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     forwardRef,
     isDevMode
 } from '@angular/core';
@@ -155,6 +156,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Sets input title attribute */
     @Input()
     inputTitle = '';
+
+    /** Whether the wheel event should be disabled. Default value is false */
+    @Input({ transform: booleanAttribute })
+    disableWheel = false;
 
     /** Sets formatting mode */
     @Input()
@@ -414,22 +419,22 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     private _incrementOrDecrement(direction: 'increment' | 'decrement'): void {
         if ((direction === 'increment' && this.canIncrement) || (direction === 'decrement' && this.canDecrement)) {
-            let _shouldChange = true;
-            if (this.value == null && this._firstEmittedValue) {
-                this._value = this._firstEmittedValue;
-                let _limit: number;
-                direction === 'increment' ? (_limit = this.max) : (_limit = this.min);
-                if (this._firstEmittedValue === _limit) {
-                    this._value = _limit;
-                    _shouldChange = false;
+            let newValue: number;
+
+            if (this.value == null) {
+                if (direction === 'increment') {
+                    newValue = !isNaN(this.min) ? this._min : 0;
+                } else {
+                    newValue = !isNaN(this.max) ? this._max : 0;
                 }
-            }
-            if (_shouldChange) {
-                this._value =
+            } else {
+                newValue =
                     direction === 'increment'
-                        ? this._cutFloatingNumberDistortion(this.value!, this.step)
-                        : this._cutFloatingNumberDistortion(this.value!, -this.step);
+                        ? this._cutFloatingNumberDistortion(this.value, this.step)
+                        : this._cutFloatingNumberDistortion(this.value, -this.step);
             }
+
+            this._value = this._checkValueLimits(newValue);
             this._emitChangedValue();
             this._updateViewValue();
         }
