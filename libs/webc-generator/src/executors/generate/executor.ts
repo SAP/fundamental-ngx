@@ -18,6 +18,13 @@ const FILES = {
     THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
 };
 
+const DEFAULT_ENUM_PACKAGE_MAPPING: Record<string, string> = {
+    '@ui5/webcomponents': '@fundamental-ngx/ui5-webcomponents/types',
+    '@ui5/webcomponents-base': '@fundamental-ngx/ui5-webcomponents-base/types',
+    '@ui5/webcomponents-fiori': '@fundamental-ngx/ui5-webcomponents-fiori/types',
+    '@ui5/webcomponents-ai': '@fundamental-ngx/ui5-webcomponents-ai/types'
+};
+
 /** Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
 const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 
@@ -149,14 +156,22 @@ async function generateComponentFiles(
             const fileName = pascalToKebabCase(className);
             const componentDir = path.join(targetDir, fileName);
 
-            if (!className) {return;}
+            if (!className) {
+                return;
+            }
 
             componentExports.push(`export { ${className} } from './${fileName}';`);
 
             const componentIndexPath = path.join(componentDir, FILES.INDEX_TS);
             const ngPackagePath = path.join(componentDir, FILES.NG_PACKAGE_JSON);
 
-            const templateContent = componentTemplate(declaration, cemData, allEnums, packageName);
+            const templateContent = componentTemplate(
+                declaration,
+                cemData,
+                allEnums,
+                packageName,
+                DEFAULT_ENUM_PACKAGE_MAPPING
+            );
 
             return ensureDirAndWriteFile(componentIndexPath, templateContent).then(() =>
                 writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8')
