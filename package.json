@@ -22,6 +22,8 @@
         "build:umbrella:prod": "echo Building umbrella libraries PROD && yarn run build:umbrella -- --configuration=production",
         "build:prepare": "echo Building libraries and preparing for publishing && nx run-many --target=prepare --all --pack --configuration=production --skip-nx-cache",
         "test": "echo Running unit tests && nx run-many --target=test --all --parallel=10",
+        "cleanup": "find libs/ui5-webcomponents -mindepth 1 -type d -exec rm -r {} + && rm libs/ui5-webcomponents/index.ts && find libs/ui5-webcomponents-ai -mindepth 1 -type d -exec rm -r {} + && rm libs/ui5-webcomponents-ai/index.ts && find libs/ui5-webcomponents-fiori -mindepth 1 -type d -exec rm -r {} + && rm libs/ui5-webcomponents-fiori/index.ts && rm -rf libs/ui5-webcomponents-base/types && rm -rf dist",
+        "generate:ui5": "echo Generating UI5 Webcomponents Wrappers && nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base",
         "app:e2e:affected": "echo Running affected e2e tests on local && nx run docs:e2e-app:affected-local",
         "app:e2e:all": "echo Running all e2e tests on local && nx run docs:e2e-app:all-local",
         "ng": "ng",
