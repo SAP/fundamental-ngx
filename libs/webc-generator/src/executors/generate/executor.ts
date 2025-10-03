@@ -1,56 +1,87 @@
-import { PromiseExecutor } from '@nx/devkit';
+import { ExecutorContext, PromiseExecutor } from '@nx/devkit';
 import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
 import { mkdir, readFile, writeFile } from 'fs/promises';
 import * as path from 'path';
 import { componentTemplate } from './component-template';
 import { GenerateExecutorSchema } from './schema';
 
+const SUBDIRS = {
+    TYPES: 'types',
+    UTILS: 'utils',
+    THEMING: 'theming'
+};
+
+const FILES = {
+    INDEX_TS: 'index.ts',
+    NG_PACKAGE_JSON: 'ng-package.json',
+    CVA_TS: 'cva.ts',
+    THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
+};
+
+/** Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
+const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
+
 /**
- * An NX executor that generates Angular components from UI5 Web Components'
- * custom-elements-internal.json schema.
- * @param options The executor options.
- * @param executorContext The executor context.
- * @returns A promise that resolves to an object with a success status.
+ * Ensures directory exists and writes content to a file.
+ * @param filePath Absolute path to the file.
+ * @param content The content to write.
  */
-const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, executorContext) => {
-    if (!executorContext.projectName) {
-        throw new Error('Project name is not defined in the executor context.');
+async function ensureDirAndWriteFile(filePath: string, content: string): Promise<void> {
+    await mkdir(path.dirname(filePath), { recursive: true });
+    await writeFile(filePath, content, 'utf-8');
+}
+
+/** Determines the capitalized suffix for the theming service based on package name. */
+function getPackageSuffix(packageName: string): string {
+    const prefix = '@ui5/webcomponents';
+    if (!packageName.startsWith(prefix)) {
+        throw new Error(`Invalid package name: ${packageName}. Expected format: ${prefix} or ${prefix}-<suffix>`);
     }
 
-    let cemFilePath: string | undefined;
+    const suffix = packageName.slice(prefix.length + 1);
+    const effectiveSuffix = suffix || 'main';
+    return effectiveSuffix.charAt(0).toUpperCase() + effectiveSuffix.slice(1);
+}
+
+/** Loads the theming template and injects the package suffix. */
+async function generateThemingServiceContent(packageName: string): Promise<string> {
+    const themingTemplatePath = path.resolve(__dirname, FILES.THEMING_TEMPLATE);
+    const content = await readFile(themingTemplatePath, 'utf-8');
+    const suffix = getPackageSuffix(packageName);
+    return content.replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix);
+}
+
+/**
+ * Step 1: Resolve and load the CEM file.
+ */
+async function loadCemData(options: GenerateExecutorSchema, context: ExecutorContext): Promise<CEM.Package> {
     if (!options.cemFile) {
-        return {
-            success: false,
-            error: `Could not determine a valid path to the CEM file. Please provide it via the cemFile option.`
-        };
+        throw new Error('Could not determine a valid path to the CEM file. Please provide it via the cemFile option.');
     }
 
+    let cemFilePath: string;
     try {
-        cemFilePath = require.resolve(options.cemFile, { paths: [executorContext.root] });
+        cemFilePath = require.resolve(options.cemFile, { paths: [context.root] });
     } catch (error) {
-        return {
-            success: false,
-            error: `Failed to resolve CEM file at path ${options.cemFile}. Please ensure the package is installed and the path is correct. Original error: ${error.message}`
-        };
+        throw new Error(`Failed to resolve CEM file at path ${options.cemFile}. Original error: ${error.message}`);
     }
 
-    let cemData: CEM.Package;
-    try {
-        const cemContent = await readFile(cemFilePath, 'utf-8');
-        cemData = JSON.parse(cemContent) as CEM.Package;
-    } catch (error) {
-        return {
-            success: false,
-            error: `Failed to read or parse the CEM file at ${cemFilePath}. Original error: ${error.message}`
-        };
-    }
+    const cemContent = await readFile(cemFilePath, 'utf-8');
+    return JSON.parse(cemContent) as CEM.Package;
+}
 
-    const skipComponents = options.skipComponents === true;
-    const packageName = options.packageName || '@ui5/webcomponents';
+/**
+ * Defines the structure for the data extracted from the Custom Elements Manifest (CEM).
+ */
+type ExtractedCemData = {
+    componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[];
+    allEnums: { name: string; members: string[] }[];
+};
 
-    // Helper function to convert PascalCase to kebab-case
-    const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
-
+/**
+ * Step 2: Extract all relevant data from the CEM.
+ */
+function extractCemData(cemData: CEM.Package): ExtractedCemData {
     const componentDeclarations = cemData.modules.flatMap((m) => {
         const declarations = (m.declarations || []).filter(
             (d): d is CEM.CustomElementDeclaration =>
@@ -59,142 +90,158 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, exe
         return declarations.map((d) => ({ declaration: d, modulePath: m.path }));
     });
 
-    const components = componentDeclarations
-        .map(({ declaration, modulePath }) => {
-            const className = declaration.name || '';
-            const fileName = pascalToKebabCase(declaration.name || '');
-            return { className, fileName };
-        })
-        .filter((c) => c.className !== '' && c.fileName !== '');
-
-    // Extract all enum declarations from the CEM data
     const allEnums = cemData.modules
         .flatMap((m) => m.declarations || [])
         .filter((d): d is CEM.EnumDeclaration => d?.kind === 'enum')
         .map((e) => ({ name: e.name, members: (e.members || []).map((m) => m.name) }));
 
+    return { componentDeclarations, allEnums };
+}
+
+/**
+ * Generates the types/index.ts file and its ng-package.json.
+ */
+async function generateTypesFiles(allEnums: { name: string; members: string[] }[], targetDir: string): Promise<string> {
+    const typesContent = allEnums
+        .map((e) => {
+            const enumValues = e.members.map((m) => `'${m}'`).join(' | ');
+            return `export type ${e.name} = ${enumValues} | undefined;`;
+        })
+        .join('\n');
+
+    const typesIndexFilePath = path.join(targetDir, SUBDIRS.TYPES, FILES.INDEX_TS);
+    await ensureDirAndWriteFile(typesIndexFilePath, typesContent);
+
+    const ngPackagePath = path.join(targetDir, SUBDIRS.TYPES, FILES.NG_PACKAGE_JSON);
+    await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
+
+    return typesContent ? `export * from './${SUBDIRS.TYPES}';\n` : '';
+}
+
+/**
+ * Generates the theming service file and its ng-package.json.
+ */
+async function generateThemingFiles(packageName: string, targetDir: string): Promise<void> {
+    const themingServiceContent = await generateThemingServiceContent(packageName);
+
+    const themingIndexPath = path.join(targetDir, SUBDIRS.THEMING, FILES.INDEX_TS);
+    await ensureDirAndWriteFile(themingIndexPath, themingServiceContent);
+
+    const ngPackagePath = path.join(targetDir, SUBDIRS.THEMING, FILES.NG_PACKAGE_JSON);
+    await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
+}
+
+/**
+ * Generates all individual component wrapper files.
+ */
+async function generateComponentFiles(
+    componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
+    cemData: CEM.Package,
+    allEnums: { name: string; members: string[] }[],
+    packageName: string,
+    targetDir: string
+): Promise<string[]> {
+    const componentExports: string[] = [];
+
+    await Promise.all(
+        componentDeclarations.map(({ declaration }) => {
+            const className = declaration.name || '';
+            const fileName = pascalToKebabCase(className);
+            const componentDir = path.join(targetDir, fileName);
+
+            if (!className) {return;}
+
+            componentExports.push(`export { ${className} } from './${fileName}';`);
+
+            const componentIndexPath = path.join(componentDir, FILES.INDEX_TS);
+            const ngPackagePath = path.join(componentDir, FILES.NG_PACKAGE_JSON);
+
+            const templateContent = componentTemplate(declaration, cemData, allEnums, packageName);
+
+            return ensureDirAndWriteFile(componentIndexPath, templateContent).then(() =>
+                writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8')
+            );
+        })
+    );
+
+    return componentExports;
+}
+
+/**
+ * Generates the Control Value Accessor (CVA) utility file.
+ */
+async function generateCvaFile(targetDir: string): Promise<void> {
+    const cvaTemplatePath = path.resolve(__dirname, 'utils', FILES.CVA_TS);
+    const cvaContent = await readFile(cvaTemplatePath, 'utf-8');
+
+    const cvaFilePath = path.join(targetDir, SUBDIRS.UTILS, FILES.CVA_TS);
+    await ensureDirAndWriteFile(cvaFilePath, cvaContent);
+}
+
+/**
+ * An NX executor that generates Angular components from UI5 Web Components'
+ * custom-elements-internal.json schema.
+ */
+const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, context) => {
+    if (!context.projectName) {
+        return { success: false, error: 'Project name is not defined in the executor context.' };
+    }
+
     try {
-        const projectRoot = executorContext.root;
-        const targetDir = `libs/${executorContext.projectName}`;
+        const packageName = options.packageName || '@ui5/webcomponents';
+        const projectRoot = context.root;
+        const targetDir = path.join(projectRoot, `libs/${context.projectName}`);
 
-        const typesContent = allEnums
-            .map((e) => {
-                const enumValues = e.members.map((m) => `'${m}'`).join(' | ');
-                return `export type ${e.name} = ${enumValues} | undefined;`;
-            })
-            .join('\n');
+        // Resolve, load, and parse the CEM file
+        const cemData = await loadCemData(options, context);
 
-        // Create the directory if it doesn't exist
-        await mkdir(path.join(projectRoot, targetDir), { recursive: true });
+        // Extract necessary data (declarations, enums)
+        const { componentDeclarations, allEnums } = extractCemData(cemData);
+
+        // Generate Utility/Config Files
+        await mkdir(targetDir, { recursive: true });
 
         let exportsContent = '';
 
-        if (typesContent) {
-            // Generate the types file
-            const typesDir = path.join(projectRoot, targetDir, 'types');
-            const typesIndexPath = path.join(typesDir, 'index.ts');
-            if (typesContent) {
-                exportsContent += `export * from './types';\n`;
-            }
-
-            await mkdir(typesDir, { recursive: true });
-            await writeFile(typesIndexPath, typesContent, 'utf-8');
-            await writeFile(
-                path.join(typesDir, 'ng-package.json'),
-                JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2),
-                'utf-8'
-            );
+        if (allEnums.length > 0) {
+            exportsContent += await generateTypesFiles(allEnums, targetDir);
         }
 
-        if (!skipComponents) {
-            // Generate all component files and ng-package.json files
-            await Promise.all(
-                componentDeclarations.map(({ declaration, modulePath }) => {
-                    const fileName = pascalToKebabCase(declaration.name || '');
-                    const componentDir = path.join(projectRoot, targetDir, fileName);
-                    const componentIndexPath = path.join(componentDir, 'index.ts');
-                    const ngPackagePath = path.join(componentDir, 'ng-package.json');
+        if (options.skipComponents !== true) {
+            // Generate Theming
+            await generateThemingFiles(packageName, targetDir);
 
-                    return mkdir(componentDir, { recursive: true })
-                        .then(() =>
-                            writeFile(
-                                componentIndexPath,
-                                componentTemplate(declaration, cemData, allEnums, packageName),
-                                'utf-8'
-                            )
-                        )
-                        .then(() =>
-                            writeFile(
-                                ngPackagePath,
-                                JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2),
-                                'utf-8'
-                            )
-                        );
-                })
+            // Generate CVA Utility
+            await generateCvaFile(targetDir);
+
+            exportsContent += `export { GenericControlValueAccessor } from './${SUBDIRS.UTILS}/${FILES.CVA_TS.replace('.ts', '')}';\n`;
+
+            // Generate Component Wrappers
+            const componentExports = await generateComponentFiles(
+                componentDeclarations,
+                cemData,
+                allEnums,
+                packageName,
+                targetDir
             );
+            exportsContent += componentExports.join('\n');
 
-            // Generate the utils folder and cva.ts file
-            const cvaTemplatePath = path.resolve(__dirname, 'utils/cva.ts');
-            const cvaContent = await readFile(cvaTemplatePath, 'utf-8');
-
-            const utilsDir = path.join(projectRoot, targetDir, 'utils');
-            const cvaFilePath = path.join(utilsDir, 'cva.ts');
-            await mkdir(utilsDir, { recursive: true });
-            await writeFile(cvaFilePath, cvaContent, 'utf-8');
-
-            exportsContent +=
-                `export { GenericControlValueAccessor } from './utils/cva';\n` +
-                components.map(({ className, fileName }) => `export { ${className} } from './${fileName}';`).join('\n');
-
-            // Add the new theming folder and service file
-            const themingDir = path.join(projectRoot, targetDir, 'theming');
-            const themingServicePath = path.join(themingDir, 'index.ts');
-
-            const themingServiceContent = await getThemingServiceContent(packageName);
-
-            await mkdir(themingDir, { recursive: true });
-            await writeFile(themingServicePath, themingServiceContent, 'utf-8');
-            await writeFile(
-                path.join(themingDir, 'ng-package.json'),
-                JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2),
-                'utf-8'
-            );
+            // Add theming service export to root index
+            exportsContent += `\nexport * from './${SUBDIRS.THEMING}';\n`;
         }
 
         // Generate the root index.ts file
-        const rootIndexPath = path.join(projectRoot, targetDir, 'index.ts');
-
+        const rootIndexPath = path.join(targetDir, FILES.INDEX_TS);
         await writeFile(rootIndexPath, exportsContent, 'utf-8');
 
         return { success: true };
     } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
         return {
             success: false,
-            error: `An error occurred during component generation: ${error.message}`
+            error: `An error occurred during component generation: ${errorMessage}`
         };
     }
 };
-
-function getSuffix(packageName: string): string {
-    const prefix = '@ui5/webcomponents';
-    if (!packageName.startsWith(prefix)) {
-        throw new Error('Invalid package name');
-    }
-
-    const suffix = packageName.slice(prefix.length + 1) || 'main';
-    const capitalizedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1);
-
-    return capitalizedSuffix;
-}
-
-async function getThemingServiceContent(packageName: string): Promise<string> {
-    const themingTemplatePath = path.resolve(__dirname, 'utils/theming-service-template.tpl');
-    let content = await readFile(themingTemplatePath, 'utf-8');
-    const suffix = getSuffix(packageName);
-
-    content = content.replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix);
-
-    return content;
-}
 
 export default runExecutor;
