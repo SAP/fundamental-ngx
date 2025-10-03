@@ -2,69 +2,53 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
-    HostBinding,
-    Input,
-    NgZone,
+    contentChild,
+    input,
     ViewEncapsulation
 } from '@angular/core';
-import { first } from 'rxjs';
 import { FORM_ITEM_CONTROL, FormItemControl } from '../form-item-control/form-item-control';
 import { FormLabelComponent } from '../form-label/form-label.component';
+import { FormMessageComponent } from '../form-message/form-message.component';
 
-/**
- * Directive to be applied to the parent of a form control.
- *
- * ```html
- * <div fd-form-item>
- *     <input fd-form-control type="text" />
- * </div>
- * ```
- */
 @Component({
-    // TODO to be discussed
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-item]',
     template: `<ng-content></ng-content>`,
     styleUrl: './form-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-form-item',
+        '[class.fd-form-item--inline]': 'isInline()',
+        '[class.fd-form-item--horizontal]': 'horizontal()'
+    }
 })
 export class FormItemComponent implements AfterViewInit {
     /** Whether the form item is inline. */
-    @Input()
-    @HostBinding('class.fd-form-item--inline')
-    isInline = false;
+    isInline = input(false);
 
     /** Whether the form item is horizontal. */
-    @Input()
-    @HostBinding('class.fd-form-item--horizontal')
-    horizontal = false;
+    horizontal = input(false);
 
     /** @hidden */
-    @HostBinding('class.fd-form-item')
-    fdFormItemClass = true;
+    formLabel = contentChild(FormLabelComponent);
 
     /** @hidden */
-    @ContentChild(FormLabelComponent)
-    formLabel?: FormLabelComponent;
+    formMessage = contentChild(FormMessageComponent);
 
     /** @hidden */
-    @ContentChild(FORM_ITEM_CONTROL)
-    formItemControl?: FormItemControl;
-
-    /** @hidden */
-    constructor(private ngZone: NgZone) {}
+    formItemControl = contentChild<FormItemControl>(FORM_ITEM_CONTROL);
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
-            this.ngZone.onStable.pipe(first()).subscribe(() => {
-                if (this.formLabel && this.formItemControl) {
-                    this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
-                }
-            });
+        if (this.formLabel() && this.formItemControl && !this.formItemControl()?.ariaLabelledBy) {
+            const formItemControl = this.formItemControl();
+
+            if (formItemControl) {
+                formItemControl.ariaLabelledBy = this.formLabel()?.id();
+                formItemControl.formItemAriaDescribedBy?.set(this.formMessage()?.id());
+            }
         }
     }
 }

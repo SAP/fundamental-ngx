@@ -4,14 +4,11 @@ import { IllustratedMessageSectionComponent } from './illustrated-message-sectio
 
 // Mock component for testing
 @Component({
-    template: `
-        <section fd-illustrated-message-section [responsive]="responsive">Test content</section>
-    `,
+    template: ` <section fd-illustrated-message-section [responsive]="responsive">Test content</section> `,
     standalone: true,
     imports: [IllustratedMessageSectionComponent]
 })
 class TestIllustratedMessageSectionComponent {
-    
     @ViewChild(IllustratedMessageSectionComponent, { static: true, read: ElementRef })
     illustratedMessageSectionElementRef: ElementRef;
 
@@ -39,6 +36,10 @@ describe('IllustratedMessageSectionComponent', () => {
     it('Should have assigned class when responsive is set to true', () => {
         testComponent.responsive = true;
         fixture.detectChanges();
-        expect(illustratedMessageSectionElementRef.nativeElement.classList.contains('fd-illustrated-message-responsive-container')).toBe(true);
+        expect(
+            illustratedMessageSectionElementRef.nativeElement.classList.contains(
+                'fd-illustrated-message-responsive-container'
+            )
+        ).toBe(true);
     });
 });

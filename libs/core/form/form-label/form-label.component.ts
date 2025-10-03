@@ -1,13 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    Input,
-    OnChanges,
-    TemplateRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
@@ -34,39 +26,40 @@ let formLabelIdCount = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
+    host: {
+        '[attr.id]': 'id()',
+        class: 'fd-form-label__wrapper',
+        '[class.fd-form-label__wrapper--align-end]': 'alignLabelEnd()',
+        '[class.fd-form-label__wrapper--inline-help]': '!!inlineHelpContent()',
+        '[class.fd-form-label__wrapper--inline-help--after]':
+            '!!inlineHelpContent() && inlineHelpPlacement() === "after"'
+    },
     imports: [LinkComponent, IconComponent, InlineHelpDirective, NgTemplateOutlet]
 })
-export class FormLabelComponent implements OnChanges {
+export class FormLabelComponent {
     /** Whether form is required. */
-    @Input()
-    required = false;
+    required = input(false);
 
     /** Whether label text should be appended with colon. */
-    @Input()
-    colon = false;
+    colon = input(false);
 
     /** Align label on end. */
-    @Input()
-    @HostBinding('class.fd-form-label__wrapper--align-end')
-    alignLabelEnd = false;
+    alignLabelEnd = input(false);
 
     /** Inline help content. Could be just a string or complex template */
-    @Input()
-    inlineHelpContent: Nullable<string | TemplateRef<any>> = null;
+    inlineHelpContent = input<string | TemplateRef<any>>('');
 
     /** Glyph of icon triggering inline help. */
-    @Input()
-    inlineHelpGlyph = 'question-mark';
+    inlineHelpGlyph = input('question-mark');
 
     /** Trigger event names for the inline help. */
-    @Input()
-    inlineHelpTriggers: (string | TriggerConfig)[] = [
+    inlineHelpTriggers = input<(string | TriggerConfig)[]>([
         'mouseenter',
         'mouseleave',
         'focusin',
         'focusout',
         { trigger: 'click', openAction: true, closeAction: true }
-    ];
+    ]);
 
     /**
      * The placement of the inline help.
@@ -74,61 +67,31 @@ export class FormLabelComponent implements OnChanges {
      * top, top-start, top-end, bottom, bottom-start, bottom-end,
      * right, right-start, right-end, left, left-start, left-end.
      */
-    @Input()
-    inlineHelpBodyPlacement: Placement;
+    inlineHelpBodyPlacement = input<Placement>('bottom-start');
 
     /** If inline help trigger icon should be placed after, or before text. */
-    @Input()
-    inlineHelpPlacement: InlineHelpFormPlacement = 'after';
+    inlineHelpPlacement = input<InlineHelpFormPlacement>('after');
 
     /** Whether to allow the text of the form label to wrap. */
-    @Input()
-    allowWrap = false;
+    allowWrap = input(false);
 
-    /** Inline help label. */
-    @Input()
-    set inlineHelpLabel(label: string) {
-        this._inlineHelpLabel = label;
+    /** ID of the label. A default value is provided if not set. */
+    id = input(`fd-form-label-${++formLabelIdCount}`);
+
+    /** Inline help label */
+    inlineHelpLabel = input<Nullable<string>>(null);
+
+    get inlineHelpContentValue(): string | TemplateRef<any> {
+        return this.inlineHelpContent();
     }
-    get inlineHelpLabel(): string {
-        if (this._inlineHelpLabel) {
-            return this._inlineHelpLabel;
+
+    /** Computed inline help label */
+    computedInlineHelpLabel = computed(() => {
+        const label = this.inlineHelpLabel();
+        if (label) {
+            return label;
         }
-        return typeof this.inlineHelpContent === 'string' ? this.inlineHelpContent : '';
-    }
-
-    /** @hidden */
-    @HostBinding('class.fd-form-label__wrapper')
-    defaultClass = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-form-label__wrapper--inline-help')
-    inlineHelpClass = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-form-label__wrapper--inline-help--after')
-    inlineHelpAfter = true;
-
-    /** @hidden */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('id')
-    @HostBinding('id')
-    set formLabelId(value: Nullable<string>) {
-        this._formLabelId = value || this._formLabelId;
-    }
-    get formLabelId(): string {
-        return this._formLabelId;
-    }
-
-    /** @hidden */
-    private _formLabelId = `fd-form-label-${++formLabelIdCount}`;
-
-    /** @hidden */
-    private _inlineHelpLabel?: string;
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.inlineHelpClass = !!this.inlineHelpContent;
-        this.inlineHelpAfter = !!this.inlineHelpContent && this.inlineHelpPlacement === 'after';
-    }
+        const content = this.inlineHelpContent();
+        return typeof content === 'string' ? content : '';
+    });
 }
