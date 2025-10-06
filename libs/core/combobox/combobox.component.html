@@ -138,8 +138,8 @@
                 <li
                     fd-list-item
                     fd-list-group-header
-                    [ariaRole]="'group'"
-                    [attr.aria-roledescription]="'Group Header'"
+                    ariaRole="group"
+                    aria-roledescription="Group Header"
                     [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                     [attr.aria-label]="group.key"
                 >
@@ -149,7 +149,7 @@
                     <li
                         fd-list-item
                         #item="fdListItem"
-                        [ariaRole]="'option'"
+                        ariaRole="option"
                         [attr.aria-placeholder]="group.key"
                         [attr.aria-setsize]="group.value.length"
                         [attr.aria-posinset]="index + 1"
