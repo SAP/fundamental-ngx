@@ -4,20 +4,6 @@
     display: block;
 }
 
-.fd-has-display-block {
-    display: block;
-}
-
 .fd-has-display-none {
     display: none;
-}
-
-.fd-message-strip__sr-only {
-    position: absolute;
-    clip: rect(1px, 1px, 1px, 1px);
-    user-select: none;
-    left: -1000px;
-    top: -1000px;
-    pointer-events: none;
-    font-size: 0px;
 }

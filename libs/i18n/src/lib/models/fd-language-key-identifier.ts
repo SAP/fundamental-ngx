@@ -61,6 +61,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreMessageStrip.announcementWarning'
     | 'coreMessageStrip.announcementError'
     | 'coreMessageStrip.announcementSuccess'
+    | 'coreMessageStrip.announcementDefault'
     | 'coreMessageStrip.closable'
     | 'coreMultiInput.countListResultsSingular'
     | 'coreMultiInput.countListResultsPlural'

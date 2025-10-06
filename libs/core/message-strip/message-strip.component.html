@@ -1,19 +1,17 @@
+<span class="fd-message-strip__sr-only" id="{{ id() }}-hidden-text">{{ messageStripHiddenText$ | async }}</span>
 @if (shouldShowIcon) {
     <div class="fd-message-strip__icon-container" aria-hidden="true">
         @if (icon) {
             <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
         } @else {
             <fd-icon [glyph]="typeSpecificIconName" role="presentation" aria-hidden="true"></fd-icon>
-            <span class="fd-message-strip__sr-only" id="{{ id }}-hidden-text">{{
-                messageStripHiddenText$ | async
-            }}</span>
         }
     </div>
 }
-<p class="fd-message-strip__text" id="{{ id }}-content-text">
+<p class="fd-message-strip__text" id="{{ id() }}-content-text">
     <ng-content></ng-content>
 </p>
-@if (dismissible) {
+@if (dismissible()) {
     <button
         class="fd-message-strip__close"
         fd-button
@@ -21,8 +19,8 @@
         fdType="transparent"
         fdCompact
         (click)="dismiss()"
-        [attr.aria-controls]="id"
-        [attr.aria-label]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
-        [attr.title]="dismissBtnTitle || (defaultDismissButtonText$ | async)"
+        [attr.aria-controls]="id()"
+        [attr.aria-label]="dismissBtnTitle() || (defaultDismissButtonText$ | async)"
+        [attr.title]="dismissBtnTitle() || (defaultDismissButtonText$ | async)"
     ></button>
 }
