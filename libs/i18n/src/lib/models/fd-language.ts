@@ -739,4 +739,8 @@ export interface FdLanguage {
         triggerMoreLabel: FdLanguageKey;
         triggerLessLabel: FdLanguageKey;
     };
+    segmentedButton: {
+        groupRoleDescription: FdLanguageKey;
+        buttonRoleDescription: FdLanguageKey;
+    };
 }

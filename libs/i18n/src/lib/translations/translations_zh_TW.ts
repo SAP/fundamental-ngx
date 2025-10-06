@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
     coreCalendar: {
@@ -608,5 +607,9 @@ export default {
         groupAriaDescriptionCollapsed: '已摺疊',
         triggerMoreLabel: '更多',
         triggerLessLabel: '較少'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

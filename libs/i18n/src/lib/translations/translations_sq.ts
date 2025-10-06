@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sq.properties instead
 export default {
     coreCalendar: {
@@ -588,5 +587,9 @@ export default {
     coreNotification: {
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

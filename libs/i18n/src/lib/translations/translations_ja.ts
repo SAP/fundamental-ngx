@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -611,5 +610,9 @@ export default {
         groupAriaDescriptionCollapsed: '非表示',
         triggerMoreLabel: '表示を増やす',
         triggerLessLabel: '表示を減らす'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };
