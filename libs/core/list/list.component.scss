@@ -19,3 +19,59 @@
 .fd-list.fd-list--selection .fd-radio:focus + .fd-radio__label {
     outline: none;
 }
+
+/*
+ * TO BE REMOVED WITH FUNDAMENTAL STYLES VERSION 0.41.0
+ * ----------------------------------------------------------------------------------------------------
+ */
+
+.fd-list--subline .fd-list__item {
+    height: auto;
+}
+
+.fd-list--subline .fd-list__title {
+    width: 100%;
+    max-width: 100%;
+    font-style: normal;
+    line-height: normal;
+    white-space: normal;
+    font-size: var(--sapFontSize);
+    color: var(--sapList_TextColor);
+    font-family: var(--sapFontSemiboldDuplexFamily);
+}
+
+.fd-list--subline .fd-list__title--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fd-list--subline .fd-list__subline {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    width: 100%;
+    max-width: 100%;
+    font-style: normal;
+    line-height: normal;
+    white-space: normal;
+    font-size: var(--sapFontSize);
+    font-family: var(--sapFontFamily);
+    color: var(--sapContent_LabelColor);
+}
+
+.fd-list--subline .fd-list__subline--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
