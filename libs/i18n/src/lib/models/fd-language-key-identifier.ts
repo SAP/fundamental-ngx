@@ -3,6 +3,7 @@
  * This type is generated automatically. Please, do not change it manually.
  **/
 export type FdLanguageKeyIdentifier =
+    | 'coreAvatar.defaultLabel'
     | 'coreCalendar.yearSelectionLabel'
     | 'coreCalendar.yearsRangeSelectionLabel'
     | 'coreCalendar.monthSelectionLabel'

@@ -1,5 +1,9 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: '选择年度',
         yearsRangeSelectionLabel: '选择年度范围',

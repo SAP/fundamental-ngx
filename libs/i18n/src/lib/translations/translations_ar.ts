@@ -1,5 +1,9 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: 'تحديد السنة',
         yearsRangeSelectionLabel: 'تحديد نطاق السنوات',

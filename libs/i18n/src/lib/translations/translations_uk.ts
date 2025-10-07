@@ -1,5 +1,9 @@
+/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: 'Виберіть рік',
         yearsRangeSelectionLabel: 'Виберіть діапазон років',

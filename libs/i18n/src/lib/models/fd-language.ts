@@ -4,6 +4,10 @@ import { FdLanguageKey } from './fd-language-key';
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreAvatar: {
+        /**  Default label for the Avatar. */
+        defaultLabel: FdLanguageKey;
+    };
     coreCalendar: {
         /** Year selection aria label. Used on the button to navigate to the years view. */
         yearSelectionLabel: FdLanguageKey;
