@@ -55,7 +55,10 @@ async function generateThemingServiceContent(packageName: string): Promise<strin
     const themingTemplatePath = path.resolve(__dirname, FILES.THEMING_TEMPLATE);
     const content = await readFile(themingTemplatePath, 'utf-8');
     const suffix = getPackageSuffix(packageName);
-    return content.replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix);
+    const suffixLower = suffix.toLowerCase();
+    return content
+        .replace(/\${PACKAGE_SUFFIX_LOWER_PLACEHOLDER}/g, suffixLower)
+        .replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix);
 }
 
 /**

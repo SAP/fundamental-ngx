@@ -130,14 +130,14 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): st
     return inputs.join('\n');
 }
 
-function generateOutputs(data: CEM.CustomElementDeclaration): string {
+function generateOutputs(data: CEM.CustomElementDeclaration, className: string): string {
     const outputs: string[] = [];
     data.events?.forEach((event) => {
         outputs.push(`
   /**
    * ${event.description || ''}
    */
-  ui5${kebabToCamelCase(event.name)} = output<CustomEvent<any>>();`);
+  ui5${kebabToCamelCase(event.name)} = output<UI5CustomEvent<_${className}, '${event.name}'>>();`);
     });
     return outputs.join('\n');
 }
@@ -200,7 +200,7 @@ export function componentTemplate(
         outputEvents.length > 0
             ? `
     const outputsToSync = [
-${outputEvents.map((e) => `      'ui5${kebabToCamelCase(e.name)}',`).join('\n')}
+${outputEvents.map((e) => `      'ui5-${kebabToCamelCase(e.name)}',`).join('\n')}
     ];`
             : '';
 
@@ -238,9 +238,7 @@ import {
 import '${packageName}/dist/${className}.js';
 import { default as _${className} } from '${packageName}/dist/${className}.js';
 import { UI5CustomEvent } from '@ui5/webcomponents-base';
-
 ${cvaImport}
-
 ${componentImports.join('\n')}
 
 @Component({
@@ -254,7 +252,7 @@ ${cvaHostDirective}
 export class ${className} implements AfterViewInit {
 ${generateInputs(data, componentEnums)}
 
-${generateOutputs(data)}
+${generateOutputs(data, className)}
 
   public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
