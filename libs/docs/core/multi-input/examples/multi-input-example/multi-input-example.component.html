@@ -24,16 +24,19 @@ Selected: {{ secondSelected | json }}
 
 <br /><br />
 
-<label fd-label for="disabledMultiInput1">Display-only Multi Input</label>
-<fd-multi-input
-    inputId="displayOnlyMultiInput1"
-    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
-    placeholder="Search here..."
-    [display]="true"
-    [(ngModel)]="selected"
-></fd-multi-input>
+<div fd-form-item [horizontal]="true">
+    <label fd-label for="displayOnlyMultiInput" class="fd-form-label">Multi Input:</label>
+    <fd-multi-input
+        fd-form-control
+        inputId="displayOnlyMultiInput"
+        [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+        placeholder="Search here..."
+        [display]="true"
+        [(ngModel)]="displayOnlySelected"
+    ></fd-multi-input>
+</div>
 
-Selected: {{ selected | json }}
+Selected: {{ displayOnlySelected | json }}
 
 <br /><br />
 

@@ -472,6 +472,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
+    private _emptySpace = 0;
+
+    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -522,6 +525,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this.buildComponentCssClass();
+
+                this._calculateEmptySpace();
             })
         );
 
@@ -563,6 +568,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         if (this.mobile) {
             this._setUpMobileMode();
         }
+
+        this._calculateEmptySpace();
     }
 
     /** @hidden */
@@ -808,10 +815,21 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._resetSearchTerm();
     }
 
+    getPopoverTransform(): string | null {
+        if (!this.display) {
+            return null;
+        }
+
+        // Use different direction for RTL/LTR
+        const translateValue = this._dir === 'rtl' ? this._emptySpace : -this._emptySpace;
+        return `translateX(${translateValue}px)`;
+    }
+
     /** @hidden */
     _moreClicked(): void {
         this._onlySelected$.next(true);
         this.openChangeHandle(true);
+        this._calculateEmptySpace();
     }
 
     /** @hidden */
@@ -1021,6 +1039,24 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
         );
+    }
+
+    /** @hidden */
+    private _calculateEmptySpace(): void {
+        const tokenizer = this.tokenizer?.elementRef.nativeElement;
+        const container = tokenizer?.closest('.fd-multi-input-field');
+
+        if (!tokenizer || !container) {
+            return;
+        }
+
+        // Get precise measurements from the actual elements
+        const containerRect = container.getBoundingClientRect();
+        const tokenizerRect = tokenizer.getBoundingClientRect();
+
+        // Calculate the difference between the container and tokenizer widths
+        this._emptySpace =
+            this._dir === 'rtl' ? tokenizerRect.width - containerRect.width : containerRect.width - tokenizerRect.width;
     }
 }
 

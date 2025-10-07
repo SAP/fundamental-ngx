@@ -16,8 +16,10 @@
                     [maxWidth]="_popoverMaxWidth"
                     [disabled]="disabled"
                     [display]="display"
-                    [fillControlMode]="fillControlMode"
+                    [noArrow]="display ? false : true"
+                    [fillControlMode]="display ? 'fit-content' : fillControlMode"
                     class="fd-multi-input-popover-custom"
+                    [placement]="display ? 'bottom-end' : null"
                 >
                     <fd-popover-control>
                         <form (submit)="_onSubmit()">
@@ -30,6 +32,7 @@
                     <fd-popover-body
                         [attr.aria-hidden]="!open"
                         [class.fd-popover__body--hidden]="!viewModel.displayedOptions.length"
+                        [style.transform]="getPopoverTransform()"
                     >
                         <ng-template [ngTemplateOutlet]="list"></ng-template>
                         <ng-content></ng-content>
