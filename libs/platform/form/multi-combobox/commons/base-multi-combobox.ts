@@ -465,9 +465,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** @hidden */
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
-            this.formMessage._popover.close();
+            this.formMessage?._popover.close();
         }
-        this.formMessage._popover.setIgnoreTriggers(isOpen);
+        this.formMessage?._popover.setIgnoreTriggers(isOpen);
     }
 
     /** Opens the select popover body. */
