@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.22...v0.57.4-rc.23) (2025-10-07)
+
+
+### Bug Fixes
+
+* **platform:** tree table with single selection is checking multiple rows due to selectedKey ([#13517](https://github.com/SAP/fundamental-ngx/issues/13517)) ([07dab26](https://github.com/SAP/fundamental-ngx/commit/07dab26ef79478473d34f8bb7050ac374000b466))
+
+
+
+
+
 ## [0.57.4-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.21...v0.57.4-rc.22) (2025-10-06)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
