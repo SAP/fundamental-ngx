@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/webc-generator/src",
     "projectType": "library",
-    "tags": [],
+    "tags": ["type:tools", "scope:tools"],
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",

@@ -95,8 +95,9 @@ function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): 
     const componentDeclarations = cemData.modules.flatMap((m) => {
         const declarations = (m.declarations || []).filter(
             (d): d is CEM.CustomElementDeclaration =>
-                d?.kind === 'class' && 'customElement' in d && d.customElement === true
+                d?.kind === 'class' && 'tagName' in d && 'customElement' in d && d.customElement === true
         );
+
         return declarations.map((d) => ({ declaration: d, modulePath: m.path }));
     });
 
@@ -132,13 +133,18 @@ function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): 
  * Generates the types/index.ts file and its ng-package.json.
  */
 async function generateTypesFiles(allEnums: ExtractedCemData['allEnums'], targetDir: string): Promise<string> {
-    const typesContent = allEnums
+    let typesContent = allEnums
         .map(
             (e) =>
                 // Target export format: export { default as CalendarType } from "@ui5/webcomponents-base/dist/types/CalendarType.js";
                 `export { default as ${e.name} } from '${e.package}/${e.module}.js';`
         )
         .join('\n');
+
+    // Add one empty line at the end if there's content
+    if (typesContent) {
+        typesContent += '\n';
+    }
 
     const typesIndexFilePath = path.join(targetDir, SUBDIRS.TYPES, FILES.INDEX_TS);
     await ensureDirAndWriteFile(typesIndexFilePath, typesContent);
