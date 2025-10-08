@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Casella combinata multivalore',
-        selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})'
+        selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

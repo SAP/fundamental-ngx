@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Cuadro combinado de varios valores',
-        selectAllLabel: 'Seleccionar todos ({selectedItems} de {totalItems})'
+        selectAllLabel: 'Seleccionar todos ({selectedItems} de {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

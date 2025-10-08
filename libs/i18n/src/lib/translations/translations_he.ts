@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'תיבה משולבת עם ערכים מרובים',
-        selectAllLabel: 'בחר הכול ({selectedItems} מתוך {totalItems})'
+        selectAllLabel: 'בחר הכול ({selectedItems} מתוך {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

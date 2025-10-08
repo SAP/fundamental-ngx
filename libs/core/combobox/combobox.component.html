@@ -139,7 +139,7 @@
                     fd-list-item
                     fd-list-group-header
                     ariaRole="group"
-                    aria-roledescription="Group Header"
+                    [attr.aria-roledescription]="'coreMultiComboBox.listGroupHeader' | fdTranslate"
                     [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                     [attr.aria-label]="group.key"
                 >

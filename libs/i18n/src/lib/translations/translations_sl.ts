@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinirani seznam z več vrednostmi',
-        selectAllLabel: 'Izbira vseh ({selectedItems} od {totalItems})'
+        selectAllLabel: 'Izbira vseh ({selectedItems} od {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

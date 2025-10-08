@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Zone combinée multiple',
-        selectAllLabel: 'Tout sélectionner ({selectedItems} sur {totalItems})'
+        selectAllLabel: 'Tout sélectionner ({selectedItems} sur {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

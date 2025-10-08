@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kotak Kombo Nilai Berbilang',
-        selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})'
+        selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

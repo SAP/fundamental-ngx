@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Çoklu Değer Açılan Kutusu',
-        selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})'
+        selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
