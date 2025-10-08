@@ -24,7 +24,8 @@
                 "packageName": "@ui5/webcomponents-base",
                 "outputPath": "libs/generated/ui5-webcomponents-base",
                 "tsConfig": "libs/ui5-webcomponents-base/tsconfig.lib.json",
-                "skipComponents": true
+                "skipComponents": true,
+                "_cacheBust": "2025-10-08-v2"
             }
         },
         "build": {
