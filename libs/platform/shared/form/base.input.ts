@@ -247,7 +247,6 @@ export abstract class BaseInput
 
     /** @hidden */
     constructor() {
-        console.log('BaseInput constructor');
         /**
          * We do not use Injector.get() approach here because there is a bug
          * with this signature https://github.com/angular/angular/issues/31776
