@@ -17,8 +17,9 @@
                 "packageName": "@ui5/webcomponents-ai",
                 "outputPath": "libs/generated/ui5-webcomponents-ai",
                 "tsConfig": "libs/ui5-webcomponents-ai/tsconfig.lib.json",
-                "_cacheBust": "2025-10-08-v2"
-            }
+                "_cacheBust": "2025-10-08-generate-utils"
+            },
+            "outputs": ["{projectRoot}/index.ts", "{projectRoot}/**/index.ts", "{projectRoot}/types", "{projectRoot}/utils", "{options.outputPath}"]
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
@@ -40,7 +41,7 @@
                     "tsConfig": "libs/ui5-webcomponents-ai/tsconfig.lib.prod.json"
                 }
             },
-            "dependsOn": ["generate", "^generate"],
+            "dependsOn": ["generate", "ui5-webcomponents:build"],
             "defaultConfiguration": "production"
         },
         "test": {

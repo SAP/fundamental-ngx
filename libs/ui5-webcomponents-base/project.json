@@ -25,8 +25,9 @@
                 "outputPath": "libs/generated/ui5-webcomponents-base",
                 "tsConfig": "libs/ui5-webcomponents-base/tsconfig.lib.json",
                 "skipComponents": true,
-                "_cacheBust": "2025-10-08-v2"
-            }
+                "_cacheBust": "2025-10-08-generate-utils"
+            },
+            "outputs": ["{projectRoot}/index.ts", "{projectRoot}/**/index.ts", "{projectRoot}/types", "{options.outputPath}"]
         },
         "build": {
             "executor": "@nx/angular:package",
@@ -40,7 +41,7 @@
                     "tsConfig": "libs/ui5-webcomponents-base/tsconfig.lib.prod.json"
                 }
             },
-            "dependsOn": ["generate", "^generate"],
+            "dependsOn": ["generate"],
             "defaultConfiguration": "production"
         },
         "test": {
