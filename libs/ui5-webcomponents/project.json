@@ -40,6 +40,7 @@
                     "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.prod.json"
                 }
             },
+            "dependsOn": ["generate", "ui5-webcomponents-base:build", "^generate"],
             "defaultConfiguration": "production"
         },
         "test": {

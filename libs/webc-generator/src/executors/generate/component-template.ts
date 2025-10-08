@@ -29,7 +29,6 @@ function generateTypeImports(
     enumPackageMapping: Record<string, string>
 ): { componentImports: string[]; componentEnums: string[] } {
     const componentImports: string[] = [];
-    const componentEnums: string[] = [];
     const typeNames = new Set<string>();
 
     const members = (data.members as CEM.ClassField[] | undefined) || [];
@@ -37,7 +36,6 @@ function generateTypeImports(
         if (member.type?.references) {
             for (const reference of member.type.references) {
                 if (reference.name && !typeNames.has(reference.name)) {
-                    const isEnum = allEnums.some((e) => e.name === reference.name);
                     let importPath: string | undefined;
 
                     if (reference.module) {
@@ -73,51 +71,53 @@ function generateTypeImports(
 }
 
 /** Helper function to generate input properties for the component. */
-function generateInputs(data: CEM.CustomElementDeclaration, enums: string[]): string {
+function generateInputs(data: CEM.CustomElementDeclaration, enums: string[], className: string): string {
+    // className added
     const inputs: string[] = [];
     (data.members ?? []).filter(isField).forEach((member) => {
         const typeText = member.type?.text?.replace(' | undefined', '');
         const typeReferenceName = member.type?.references?.[0]?.name;
 
-        // Determine the array status
-        const isArrayType = typeText?.endsWith('[]');
-        const isDefaultValueArray = member.default === '[]';
-        const isArray = isArrayType || isDefaultValueArray;
-
-        // Determine the final type string for the input
-        let type = typeText;
-        let inputType = '';
-
-        const baseType = getBaseType(typeText) || typeReferenceName;
-
-        if (baseType && enums.includes(baseType)) {
-            type = baseType; // Use the enum name directly
-        }
-
-        if (isArray) {
-            type = `${baseType || type}[]`; // Fallback to original type if baseType is undefined
-        }
-
+        // Determine the array status and boolean status
+        const isArray = typeText?.endsWith('[]') || member.default === '[]';
         const isBoolean = typeText?.includes('boolean') || typeReferenceName === 'Boolean';
-        if (!isBoolean) {
-            inputType = `<${type}>`;
-        }
 
         const memberDefault = member.default;
         const camelCaseName = kebabToCamelCase(member.name);
 
         let inputCall: string;
+        let inputType: string;
 
-        if (isArray) {
-            inputCall = `input${inputType}([])`;
-        } else if (isBoolean) {
+        if (isBoolean) {
+            // BOOLEAN: Use booleanAttribute transform
             const defaultVal = memberDefault === 'true';
             inputCall = `input(${defaultVal}, { transform: booleanAttribute })`;
-        } else if (memberDefault === 'undefined' || memberDefault === undefined) {
-            inputCall = `input${inputType}()`;
+            inputType = '';
+        } else if (isArray) {
+            // ARRAY: Use the original type reference for the element type
+            const baseType = getBaseType(typeText);
+            const typeString = baseType ? `${baseType}[]` : 'any[]';
+
+            inputType = `<${typeString}>`;
+            inputCall = `input${inputType}([])`;
         } else {
-            // Use the member default value directly (e.g., '0', '"text"', etc.)
-            inputCall = `input${inputType}(${memberDefault})`;
+            // ENUM/SIMPLE TYPE: Use typeof _${className}.prototype.${member.name} | undefined
+
+            // Build the required type string using the WC's default import alias (_ClassName)
+            const typeString = `typeof _${className}.prototype.${member.name} | undefined`;
+            inputType = `<${typeString}>`;
+
+            // Get the default value for the input() call
+            const defaultValueArgument =
+                memberDefault === 'undefined' || memberDefault === undefined ? '' : memberDefault;
+
+            if (!defaultValueArgument) {
+                // No default value specified
+                inputCall = `input${inputType}()`;
+            } else {
+                // Has a default value, e.g., "Circle"
+                inputCall = `input${inputType}(${defaultValueArgument})`;
+            }
         }
 
         inputs.push(`
@@ -250,7 +250,7 @@ ${cvaHostDirective}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
-${generateInputs(data, componentEnums)}
+${generateInputs(data, componentEnums, className)} // className is now passed
 
 ${generateOutputs(data, className)}
 

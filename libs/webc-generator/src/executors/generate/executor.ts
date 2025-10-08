@@ -55,7 +55,7 @@ async function generateThemingServiceContent(packageName: string): Promise<strin
     const themingTemplatePath = path.resolve(__dirname, FILES.THEMING_TEMPLATE);
     const content = await readFile(themingTemplatePath, 'utf-8');
     const suffix = getPackageSuffix(packageName);
-    const suffixLower = suffix.toLowerCase();
+    const suffixLower = suffix === 'Main' ? '' : '-' + suffix.toLowerCase();
     return content
         .replace(/\${PACKAGE_SUFFIX_LOWER_PLACEHOLDER}/g, suffixLower)
         .replace(/\${PACKAGE_SUFFIX_PLACEHOLDER}/g, suffix);
@@ -85,13 +85,13 @@ async function loadCemData(options: GenerateExecutorSchema, context: ExecutorCon
  */
 type ExtractedCemData = {
     componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[];
-    allEnums: { name: string; members: string[] }[];
+    allEnums: { name: string; members: string[]; module: string; package: string }[];
 };
 
 /**
  * Step 2: Extract all relevant data from the CEM.
  */
-function extractCemData(cemData: CEM.Package): ExtractedCemData {
+function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): ExtractedCemData {
     const componentDeclarations = cemData.modules.flatMap((m) => {
         const declarations = (m.declarations || []).filter(
             (d): d is CEM.CustomElementDeclaration =>
@@ -101,9 +101,29 @@ function extractCemData(cemData: CEM.Package): ExtractedCemData {
     });
 
     const allEnums = cemData.modules
-        .flatMap((m) => m.declarations || [])
-        .filter((d): d is CEM.EnumDeclaration => d?.kind === 'enum')
-        .map((e) => ({ name: e.name, members: (e.members || []).map((m) => m.name) }));
+        .flatMap((m) =>
+            (m.declarations || [])
+                .filter((d): d is CEM.EnumDeclaration => d?.kind === 'enum')
+                .map((e) => ({ enumDeclaration: e, modulePath: m.path }))
+        )
+        .map(({ enumDeclaration: e, modulePath }) => {
+            const ui5Package = options.packageName || '@ui5/webcomponents'; // Default to the package being generated for
+            let ui5Module = '';
+            const typesPathMatch = modulePath.match(/^(.*\/)?(dist\/types\/[^/]+\.js)$/);
+
+            if (typesPathMatch) {
+                ui5Module = typesPathMatch[2].replace(/\.js$/, '');
+            } else {
+                ui5Module = modulePath.replace(/\.js$/, '');
+            }
+
+            return {
+                name: e.name,
+                members: (e.members || []).map((m) => m.name),
+                module: ui5Module,
+                package: ui5Package
+            };
+        });
 
     return { componentDeclarations, allEnums };
 }
@@ -111,12 +131,13 @@ function extractCemData(cemData: CEM.Package): ExtractedCemData {
 /**
  * Generates the types/index.ts file and its ng-package.json.
  */
-async function generateTypesFiles(allEnums: { name: string; members: string[] }[], targetDir: string): Promise<string> {
+async function generateTypesFiles(allEnums: ExtractedCemData['allEnums'], targetDir: string): Promise<string> {
     const typesContent = allEnums
-        .map((e) => {
-            const enumValues = e.members.map((m) => `'${m}'`).join(' | ');
-            return `export type ${e.name} = ${enumValues} | undefined;`;
-        })
+        .map(
+            (e) =>
+                // Target export format: export { default as CalendarType } from "@ui5/webcomponents-base/dist/types/CalendarType.js";
+                `export { default as ${e.name} } from '${e.package}/${e.module}.js';`
+        )
         .join('\n');
 
     const typesIndexFilePath = path.join(targetDir, SUBDIRS.TYPES, FILES.INDEX_TS);
@@ -147,7 +168,7 @@ async function generateThemingFiles(packageName: string, targetDir: string): Pro
 async function generateComponentFiles(
     componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
     cemData: CEM.Package,
-    allEnums: { name: string; members: string[] }[],
+    allEnums: ExtractedCemData['allEnums'],
     packageName: string,
     targetDir: string
 ): Promise<string[]> {
@@ -171,7 +192,7 @@ async function generateComponentFiles(
             const templateContent = componentTemplate(
                 declaration,
                 cemData,
-                allEnums,
+                allEnums.map((e) => ({ name: e.name, members: e.members })),
                 packageName,
                 DEFAULT_ENUM_PACKAGE_MAPPING
             );
@@ -206,6 +227,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
     }
 
     try {
+        console.log(`Starting component generation for project: ${options.packageName}`);
         const packageName = options.packageName || '@ui5/webcomponents';
         const projectRoot = context.root;
         const targetDir = path.join(projectRoot, `libs/${context.projectName}`);
@@ -214,7 +236,8 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
         const cemData = await loadCemData(options, context);
 
         // Extract necessary data (declarations, enums)
-        const { componentDeclarations, allEnums } = extractCemData(cemData);
+        // PASS THE OPTIONS OBJECT TO extractCemData
+        const { componentDeclarations, allEnums } = extractCemData(cemData, options);
 
         // Generate Utility/Config Files
         await mkdir(targetDir, { recursive: true });

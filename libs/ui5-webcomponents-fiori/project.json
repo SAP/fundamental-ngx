@@ -39,6 +39,7 @@
                     "tsConfig": "libs/ui5-webcomponents-fiori/tsconfig.lib.prod.json"
                 }
             },
+            "dependsOn": ["generate", "^generate"],
             "defaultConfiguration": "production"
         },
         "test": {

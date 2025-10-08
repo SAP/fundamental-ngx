@@ -90,8 +90,13 @@
     },
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "targetDefaults": {
+        "generate": {
+            "dependsOn": ["^generate"],
+            "inputs": ["production", "^production"],
+            "cache": true
+        },
         "build": {
-            "dependsOn": ["^build"],
+            "dependsOn": ["^build", "^generate"],
             "inputs": ["production", "^production"],
             "cache": true
         },
