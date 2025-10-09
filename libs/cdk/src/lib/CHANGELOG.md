@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.61](https://github.com/SAP/fundamental-ngx/compare/v0.43.60...v0.43.61) (2025-10-09)
+
+
+### Bug Fixes
+
+* **platform:** disable scrolling during table row drag and drop ([#13343](https://github.com/SAP/fundamental-ngx/issues/13343)) ([d573411](https://github.com/SAP/fundamental-ngx/commit/d573411810f6b32ca0a76b31bce3b1c1c79e9eec))
+
+
+
+
+
 ## [0.43.60](https://github.com/SAP/fundamental-ngx/compare/v0.43.59...v0.43.60) (2025-09-24)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
