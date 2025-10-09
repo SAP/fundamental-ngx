@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.25...v0.57.4-rc.26) (2025-10-09)
+
+
+### Bug Fixes
+
+* **core:** adopt latest changes for user menu ([#13518](https://github.com/SAP/fundamental-ngx/issues/13518)) ([5d84f42](https://github.com/SAP/fundamental-ngx/commit/5d84f42a68fec9d194d3286a7795c4dfe72a5c3c))
+
+
+
+
+
 ## [0.57.4-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.24...v0.57.4-rc.25) (2025-10-09)
 
 
