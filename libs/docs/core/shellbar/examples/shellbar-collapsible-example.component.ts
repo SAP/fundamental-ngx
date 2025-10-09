@@ -12,13 +12,13 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
-    ProductMenuComponent,
     ShellbarActionComponent,
     ShellbarActionsComponent,
+    ShellbarBrandingComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
-    ShellbarMenuItem,
-    ShellbarSizes
+    ShellbarSizes,
+    ShellbarTitleComponent
 } from '@fundamental-ngx/core/shellbar';
 import {
     UserMenuBodyComponent,
@@ -51,11 +51,12 @@ import {
         ButtonComponent,
         ShellbarComponent,
         ShellbarLogoComponent,
-        ProductMenuComponent,
         PlatformSearchFieldModule,
         ContentDensityDirective,
         ShellbarActionsComponent,
         ShellbarActionComponent,
+        ShellbarBrandingComponent,
+        ShellbarTitleComponent,
         ProductSwitchModule,
         UserMenuComponent,
         UserMenuBodyComponent,
@@ -172,33 +173,6 @@ export class ShellbarCollapsibleExampleComponent {
         },
         {
             value: 'Raspberry'
-        }
-    ];
-
-    productMenuItems: ShellbarMenuItem[] = [
-        {
-            name: 'Application A',
-            callback: () => {
-                alert('Application A Clicked');
-            }
-        },
-        {
-            name: 'Application B',
-            callback: () => {
-                alert('Application B Clicked');
-            }
-        },
-        {
-            name: 'Application C',
-            callback: () => {
-                alert('Application C Clicked');
-            }
-        },
-        {
-            name: 'Application D',
-            callback: () => {
-                alert('Application D Clicked');
-            }
         }
     ];
 
