@@ -9,6 +9,7 @@ import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import {
     ShellbarActionsComponent,
+    ShellbarBrandingComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
     ShellbarTitleComponent
@@ -37,6 +38,7 @@ import {
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarActionsComponent,
+        ShellbarBrandingComponent,
         UserMenuComponent,
         UserMenuBodyComponent,
         UserMenuControlComponent,

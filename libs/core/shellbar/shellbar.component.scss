@@ -102,3 +102,22 @@
 .fd-button.fd-shellbar__button.fd-shellbar__button--user-menu {
     padding: 0 !important;
 }
+
+.fd-shellbar__separator {
+    height: 2rem;
+}
+
+.fd-shellbar .fd-shellbar__branding {
+    padding-inline: 0.25rem 0.5rem;
+
+    .fd-shellbar__logo {
+        height: 1.875rem;
+        max-height: 1.875rem;
+        width: 4rem;
+        margin-block: 0.0625rem;
+    }
+
+    .fd-shellbar__title {
+        padding-inline: 0;
+    }
+}

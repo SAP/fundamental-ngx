@@ -1,10 +1,12 @@
 <p>This example shows Shellbar groups taking only space needed for the content inside.</p>
 <fd-shellbar [groupFlex]="groupConfig" #shellbar>
-    <fd-shellbar-logo>
-        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
-    </fd-shellbar-logo>
-    <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
-    </fd-product-menu>
+    <fd-shellbar-branding [interactiveBranding]="true">
+        <fd-shellbar-logo>
+            <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-shellbar-logo>
+        <fd-shellbar-title>Product Identifier</fd-shellbar-title>
+    </fd-shellbar-branding>
+
     <fd-shellbar-actions>
         @for (action of actions; track action) {
             <fd-shellbar-action
