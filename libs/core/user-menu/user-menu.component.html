@@ -10,15 +10,16 @@
             <ng-container *ngTemplateOutlet="control"></ng-container>
         </fd-popover-control>
         <fd-popover-body fd-user-menu-popover-control>
-            @if (!isUserNameVisible()) {
+            <div
+                class="fd-user-menu__scroll-header"
+                [class.hidden]="isUserNameVisible()"
+                role="presentation"
+                aria-hidden="true"
+            >
                 <ng-container *ngTemplateOutlet="header"></ng-container>
-            }
-
-            <ng-container *ngTemplateOutlet="body"></ng-container>
-
-            <div fd-popover-body-footer>
-                <ng-container *ngTemplateOutlet="footer"></ng-container>
             </div>
+            <ng-container *ngTemplateOutlet="body"></ng-container>
+            <ng-container *ngTemplateOutlet="footer"></ng-container>
         </fd-popover-body>
     </fd-popover>
 } @else {
@@ -36,10 +37,8 @@
                     </ng-container>
                 }
                 <ng-container *ngTemplateOutlet="body"></ng-container>
-            </fd-dialog-body>
-            <fd-dialog-footer>
                 <ng-container *ngTemplateOutlet="footer"></ng-container>
-            </fd-dialog-footer>
+            </fd-dialog-body>
         </fd-dialog>
     </ng-template>
 }
@@ -49,7 +48,7 @@
 </ng-template>
 
 <ng-template #header>
-    <div fd-popover-body-header style="position: sticky; top: 0; z-index: 20; max-width: 20rem">
+    <div fd-popover-body-header>
         <div fd-bar barDesign="header">
             <div fd-bar-middle>
                 <fd-bar-element>
