@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Поле со списком значений',
-        selectAllLabel: 'Выбрать все ({selectedItems} из {totalItems})'
+        selectAllLabel: 'Выбрать все ({selectedItems} из {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

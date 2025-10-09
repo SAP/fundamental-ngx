@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '複数値コンボボックス',
-        selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})'
+        selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

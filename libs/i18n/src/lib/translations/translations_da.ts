@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Multiværdikombinationsboks',
-        selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})'
+        selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

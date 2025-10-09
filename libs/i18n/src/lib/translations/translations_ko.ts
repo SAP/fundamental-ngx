@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '다중 값 콤보 박스',
-        selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)'
+        selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

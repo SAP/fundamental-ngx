@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Combo box višestruke vrednosti',
-        selectAllLabel: 'Odaberi svih ({selectedItems} od {totalItems})'
+        selectAllLabel: 'Odaberi svih ({selectedItems} od {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
