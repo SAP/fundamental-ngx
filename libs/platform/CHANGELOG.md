@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.24...v0.57.4-rc.25) (2025-10-09)
+
+
+### Bug Fixes
+
+* **platform:** remove error when using fdp-combobox and fdp-multi-combobox outside of fdp-form-field ([#13520](https://github.com/SAP/fundamental-ngx/issues/13520)) ([98644bd](https://github.com/SAP/fundamental-ngx/commit/98644bd49a0a07b768bf4dfa9544bd3f761331f4))
+
+
+
+
+
 ## [0.57.4-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.23...v0.57.4-rc.24) (2025-10-09)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
