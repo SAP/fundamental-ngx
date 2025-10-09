@@ -398,3 +398,17 @@
 .fd-illustrated-message__illustration {
     width: 100%;
 }
+
+.fd-illustrated-message__sr-only {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    margin-inline: -1px;
+    margin-block: -1px;
+    padding-inline: 0;
+    padding-block: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}

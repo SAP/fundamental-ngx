@@ -55,7 +55,6 @@ export class AutoDismissMessageStripDirective {
     /** @hidden */
     open(): void {
         this.opened = true;
-        this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.elementRef.nativeElement.classList.remove('fd-has-display-none');
         this.stopAutoDismiss();
         if (this.autoDismiss && !this.dismissible && isDevMode()) {
