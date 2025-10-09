@@ -164,7 +164,7 @@ export abstract class BaseInput
     abstract set value(value: any);
 
     /** @hidden */
-    formMessage: FormInputMessageGroupComponent;
+    formMessage: Nullable<FormInputMessageGroupComponent>;
 
     /**
      * See @FormFieldControl
