@@ -157,11 +157,40 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
         }
 
         // logic for showing/hiding the popover header with user name on scroll
+        let debounceTimer: any;
+        let lastState = false;
+
         const intersectionObserver = new IntersectionObserver(
             (entries) => {
-                this.isUserNameVisible.set(entries[0].isIntersecting);
+                const entry = entries[0];
+                const ratio = entry.intersectionRatio;
+
+                // hysteresis buffer (how much must change before we flip state)
+                const SHOW_THRESHOLD = 0.3;
+                const HIDE_THRESHOLD = 0.15;
+
+                let newState = lastState;
+
+                // only toggle if we’ve clearly crossed the threshold
+                if (!lastState && ratio > SHOW_THRESHOLD) {
+                    newState = true;
+                } else if (lastState && ratio < HIDE_THRESHOLD) {
+                    newState = false;
+                }
+
+                if (newState !== lastState) {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        this.isUserNameVisible.set(newState);
+                        lastState = newState;
+                    }, 60); // short debounce to smooth frame transitions
+                }
             },
-            { root: null, threshold: 0.1 }
+            {
+                root: null,
+                threshold: Array.from({ length: 21 }, (_, i) => i / 20), // [0, 0.05, ..., 1]
+                rootMargin: '0px 0px -25px 0px'
+            }
         );
 
         intersectionObserver.observe(el);
