@@ -155,6 +155,7 @@
         [style.max-width.px]="autoResize && maxWidth"
         [attr.aria-labelledby]="_cva.id + '-search'"
         aria-multiselectable="true"
+        [tabindex]="0"
         (keydown.tab)="close()"
         (keydown.shift.tab)="close()"
         (keydown.escape)="close()"
@@ -172,11 +173,18 @@
         }
         <ng-content></ng-content>
         @if (isGroup) {
-            @for (group of _suggestions; track group) {
+            @for (group of _suggestions; track group; let groupIndex = $index) {
                 @if (!groupItemTemplate) {
-                    <label fd-list-group-header role="group">
+                    <li
+                        fd-list-item
+                        fd-list-group-header
+                        ariaRole="group"
+                        [attr.aria-roledescription]="'coreMultiComboBox.listGroupHeader' | fdTranslate"
+                        [attr.aria-owns]="_getGroupItemIds(groupIndex)"
+                        [attr.aria-label]="group.label"
+                    >
                         <span fd-list-title>{{ group.label }}</span>
-                    </label>
+                    </li>
                 } @else {
                     <ng-template
                         [ngTemplateOutlet]="groupItemTemplate"
@@ -186,13 +194,17 @@
                 @for (optionItem of group.children; track optionItem; let i = $index) {
                     <li
                         fd-list-item
+                        #item="fdListItem"
                         role="option"
-                        [tabindex]="0"
                         (click)="!mobile && _onOptionClicked($event, i)"
                         (keydown)="_onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
+                        [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
+                        [attr.aria-setsize]="group.children?.length"
+                        [attr.aria-posinset]="i + 1"
                     >
                         <fd-checkbox
+                            role="presentation"
                             (click)="_onOptionCheckboxClicked($event, i)"
                             (ngModelChange)="_toggleSelection(optionItem)"
                             [ngModel]="optionItem.selected"
@@ -216,6 +228,7 @@
                     [selected]="!!optionItem.selected"
                 >
                     <fd-checkbox
+                        role="presentation"
                         (click)="_onOptionCheckboxClicked($event, i)"
                         (ngModelChange)="_toggleSelection(optionItem)"
                         [ngModel]="optionItem.selected"

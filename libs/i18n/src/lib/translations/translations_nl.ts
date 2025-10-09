@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Keuzelijst met invoerveld met meerdere waarden',
-        selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren'
+        selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

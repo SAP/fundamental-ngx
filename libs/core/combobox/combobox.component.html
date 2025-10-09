@@ -127,22 +127,33 @@
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
         [byline]="byline"
+        [tabindex]="0"
         (keydown.tab)="_close()"
         (keydown.shift.tab)="_close()"
         (focusEscapeList)="handleListFocusEscape($event)"
     >
         <ng-content></ng-content>
         @if (groupFn) {
-            @for (group of displayedValues | listGroupPipe: groupFn; track group.key) {
-                <li role="group" fd-list-group-header [tabindex]="0">
+            @for (group of displayedValues | listGroupPipe: groupFn; track group.key; let groupIndex = $index) {
+                <li
+                    fd-list-item
+                    fd-list-group-header
+                    ariaRole="group"
+                    [attr.aria-roledescription]="'coreMultiComboBox.listGroupHeader' | fdTranslate"
+                    [attr.aria-owns]="_getGroupItemIds(groupIndex)"
+                    [attr.aria-label]="group.key"
+                >
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
-                @for (term of group.value; track term) {
+                @for (term of group.value; track term; let index = $index) {
                     <li
-                        role="option"
                         fd-list-item
+                        #item="fdListItem"
+                        ariaRole="option"
                         [attr.aria-placeholder]="group.key"
-                        [tabindex]="0"
+                        [attr.aria-setsize]="group.value.length"
+                        [attr.aria-posinset]="index + 1"
+                        [attr.id-with-group-index]="item.id + '-group-' + groupIndex"
                         class="fd-combobox-list-item"
                         [selected]="isSelected(term)"
                         [value]="term"

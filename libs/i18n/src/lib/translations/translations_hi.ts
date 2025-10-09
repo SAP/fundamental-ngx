@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स',
-        selectAllLabel: 'सबका चयन करें'
+        selectAllLabel: 'सबका चयन करें',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',

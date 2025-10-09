@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Pole wielokrotnego wyboru',
-        selectAllLabel: 'Wybierz wszystkie ({selectedItems} z {totalItems})'
+        selectAllLabel: 'Wybierz wszystkie ({selectedItems} z {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

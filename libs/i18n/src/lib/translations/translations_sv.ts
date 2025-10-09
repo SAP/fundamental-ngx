@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinationsruta med flera värden',
-        selectAllLabel: 'Välj alla ({selectedItems} av {totalItems})'
+        selectAllLabel: 'Välj alla ({selectedItems} av {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

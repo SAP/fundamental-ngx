@@ -25,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Moninkertaisen arvon yhdistelmäruutu',
-        selectAllLabel: 'Valitse kaikki ({selectedItems} / {totalItems})'
+        selectAllLabel: 'Valitse kaikki ({selectedItems} / {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
