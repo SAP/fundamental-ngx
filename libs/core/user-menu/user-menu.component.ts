@@ -5,16 +5,15 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     contentChild,
     contentChildren,
+    DestroyRef,
     effect,
     ElementRef,
-    EventEmitter,
     inject,
     input,
     OnInit,
-    Output,
+    output,
     Renderer2,
     signal,
     TemplateRef,
@@ -36,10 +35,13 @@ import {
 
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
+import { BarComponent, BarElementDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
+
 import { UserMenuBodyComponent } from './components/user-menu-body.component';
 import { UserMenuControlComponent } from './components/user-menu-control.component';
 import { UserMenuListItemComponent } from './components/user-menu-list-item.component';
 import { UserMenuControlElementDirective } from './directives/user-menu-control-element.directive';
+import { UserMenuUserNameDirective } from './directives/user-menu-user-name.directive';
 
 @Component({
     selector: 'fd-user-menu',
@@ -52,6 +54,9 @@ import { UserMenuControlElementDirective } from './directives/user-menu-control-
     },
     imports: [
         CommonModule,
+        BarComponent,
+        BarMiddleDirective,
+        BarElementDirective,
         PopoverComponent,
         PopoverBodyComponent,
         PopoverControlComponent,
@@ -63,30 +68,50 @@ import { UserMenuControlElementDirective } from './directives/user-menu-control-
 })
 export class UserMenuComponent implements OnInit, AfterViewInit {
     /** Event thrown, when the user menu is opened or closed */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    /** @hidden */
-    @ContentChild(UserMenuControlComponent)
-    userMenuControl: UserMenuControlComponent;
-
-    /** @hidden */
-    listItems = contentChildren(UserMenuListItemComponent, { descendants: true });
-
-    /** @hidden */
-    userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
-
-    /** @hidden */
-    userMenuControlElement = contentChild(UserMenuControlElementDirective, { descendants: true, read: ElementRef });
+    isOpenChange = output<boolean>();
 
     /** Whether the user menu is in mobile mode */
     mobile = input(false, { transform: booleanAttribute });
 
     /** Whether the user menu is open */
-    isOpen = signal(false);
+    readonly isOpen = signal(false);
+
+    /**
+     * Signal indicating whether the user name element is currently visible
+     * within the user menu. This updates automatically as the element
+     * enters or leaves the viewport.
+     *
+     * Used by the template to conditionally render the sticky header.
+     */
+    readonly isUserNameVisible = signal(true);
+
+    /**
+     * Signal storing the HTML content of the user name element.
+     * When the original element scrolls out of view, this content
+     * is displayed in the sticky header.
+     */
+    readonly userNameContent = signal('');
+
+    /** @hidden */
+    protected readonly userMenuControl = contentChild(UserMenuControlComponent);
+
+    /** @hidden */
+    protected readonly userNameEl = contentChild(UserMenuUserNameDirective, { read: ElementRef });
+
+    /** @hidden */
+    protected readonly userMenuControlElement = contentChild(UserMenuControlElementDirective, {
+        descendants: true,
+        read: ElementRef
+    });
+
+    /** @hidden */
+    protected readonly userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
 
     /** @hidden */
     protected navigationArrow$: Observable<string>;
+
+    /** @hidden */
+    private _listItems = contentChildren(UserMenuListItemComponent, { descendants: true });
 
     /** @hidden */
     private _rtlService = inject(RtlService);
@@ -103,11 +128,13 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     /** @hidden */
     private _dialogRef: DialogRef | undefined;
 
+    private _destroyRef = inject(DestroyRef);
+
     /** @hidden */
     constructor() {
         effect(() => {
             const isMobile = this.mobile();
-            this.listItems()?.forEach((item) => item.mobile.set(isMobile));
+            this._listItems()?.forEach((item) => item.mobile.set(isMobile));
         });
     }
 
@@ -121,7 +148,42 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         const isMobile = this.mobile();
-        this.listItems()?.forEach((item) => item.mobile.set(isMobile));
+        this._listItems()?.forEach((item) => item.mobile.set(isMobile));
+
+        const el = this.userNameEl()?.nativeElement;
+
+        if (!el) {
+            return;
+        }
+
+        // logic for showing/hiding the popover header with user name on scroll
+        const intersectionObserver = new IntersectionObserver(
+            (entries) => {
+                this.isUserNameVisible.set(entries[0].isIntersecting);
+            },
+            { root: null, threshold: 0.1 }
+        );
+
+        intersectionObserver.observe(el);
+
+        // Initialize
+        this.userNameContent.set(el.innerHTML.trim());
+
+        // Watch for changes in projected content
+        const mutationObserver = new MutationObserver(() => {
+            this.userNameContent.set(el.innerHTML.trim());
+        });
+
+        mutationObserver.observe(el, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+
+        this._destroyRef.onDestroy(() => {
+            intersectionObserver.disconnect();
+            mutationObserver.disconnect();
+        });
     }
 
     /** Method that opens the user menu */
@@ -133,13 +195,13 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     close(): void {
         this.isOpenChangeHandle(false);
 
-        if (this.listItems().length > 0) {
-            this.listItems().forEach((item) => {
+        if (this._listItems().length > 0) {
+            this._listItems().forEach((item) => {
                 item.isOpen.set(false);
                 item._elementRef?.nativeElement.querySelector('.fd-menu__link')?.classList.remove('is-active');
             });
 
-            this.listItems()[0]?._tabIndex$.set(0);
+            this._listItems()[0]?._tabIndex$.set(0);
         }
 
         this._clearSubmenu();
@@ -159,7 +221,7 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
 
         const refSub = this._dialogRef.afterClosed.subscribe({
             next: () => {
-                this.userMenuControl.focus();
+                this.userMenuControl()?.focus();
                 refSub.unsubscribe();
             },
             error: (type) => {
@@ -181,7 +243,7 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
         this.isOpenChange.emit(isOpen);
 
         if (!isOpen && !this.mobile()) {
-            this.userMenuControl.focus();
+            this.userMenuControl()?.focus();
         }
 
         const userMenuControlEl = this.userMenuControlElement()?.nativeElement;
