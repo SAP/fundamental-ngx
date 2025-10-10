@@ -9,6 +9,7 @@ import {
     forwardRef,
     HostListener,
     Injector,
+    input,
     Input,
     isDevMode,
     OnChanges,
@@ -141,20 +142,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Whether the input is disabled. */
     @Input()
     disabled = false;
-
-    /** Whether the input is display-only */
-    @Input()
-    set display(value: boolean) {
-        this._display = value;
-
-        if (value) {
-            this.displayAddonButton = false;
-        }
-    }
-
-    get display(): boolean {
-        return this._display;
-    }
 
     /** If it is mandatory field */
     @Input()
@@ -432,6 +419,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
+    /** Whether the input is display-only */
+    display = input(false);
+
     /** @hidden */
     get _optionItems(): _OptionItem<ItemType, ValueType>[] {
         return this.optionItems$.value;
@@ -463,16 +453,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _display = false;
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
-
-    /** @hidden */
-    private _emptySpace = 0;
 
     /** @hidden */
     constructor(
@@ -525,8 +509,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this.buildComponentCssClass();
-
-                this._calculateEmptySpace();
             })
         );
 
@@ -568,8 +550,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         if (this.mobile) {
             this._setUpMobileMode();
         }
-
-        this._calculateEmptySpace();
     }
 
     /** @hidden */
@@ -815,21 +795,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._resetSearchTerm();
     }
 
-    getPopoverTransform(): string | null {
-        if (!this.display) {
-            return null;
-        }
-
-        // Use different direction for RTL/LTR
-        const translateValue = this._dir === 'rtl' ? this._emptySpace : -this._emptySpace;
-        return `translateX(${translateValue}px)`;
-    }
-
     /** @hidden */
     _moreClicked(): void {
         this._onlySelected$.next(true);
         this.openChangeHandle(true);
-        this._calculateEmptySpace();
     }
 
     /** @hidden */
@@ -1039,24 +1008,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
         );
-    }
-
-    /** @hidden */
-    private _calculateEmptySpace(): void {
-        const tokenizer = this.tokenizer?.elementRef.nativeElement;
-        const container = tokenizer?.closest('.fd-multi-input-field');
-
-        if (!tokenizer || !container) {
-            return;
-        }
-
-        // Get precise measurements from the actual elements
-        const containerRect = container.getBoundingClientRect();
-        const tokenizerRect = tokenizer.getBoundingClientRect();
-
-        // Calculate the difference between the container and tokenizer widths
-        this._emptySpace =
-            this._dir === 'rtl' ? tokenizerRect.width - containerRect.width : containerRect.width - tokenizerRect.width;
     }
 }
 

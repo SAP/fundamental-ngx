@@ -6,6 +6,18 @@
                     [ngTemplateOutlet]="control"
                     [ngTemplateOutletContext]="{ displayAddonButton: displayAddonButton }"
                 ></ng-template>
+            } @else if (display()) {
+                <fd-tokenizer
+                    [display]="display()"
+                    [tokenizerFocusable]="false"
+                    [compactCollapse]="compactCollapse"
+                    [ariaLabelledBy]="ariaLabelledBy"
+                    class="fd-multi-input-tokenizer-custom"
+                >
+                    @for (token of viewModel.selectedOptions; track token; let last = $last) {
+                        <fd-token [display]="display()" [isLast]="last">{{ token.label }}</fd-token>
+                    }
+                </fd-tokenizer>
             } @else {
                 <fd-popover
                     additionalBodyClass="fd-popover-custom-list"
@@ -15,11 +27,8 @@
                     [triggers]="[]"
                     [maxWidth]="_popoverMaxWidth"
                     [disabled]="disabled"
-                    [display]="display"
-                    [noArrow]="display ? false : true"
-                    [fillControlMode]="display ? 'fit-content' : fillControlMode"
+                    [fillControlMode]="fillControlMode"
                     class="fd-multi-input-popover-custom"
-                    [placement]="display ? 'bottom-end' : null"
                 >
                     <fd-popover-control>
                         <form (submit)="_onSubmit()">
@@ -32,7 +41,6 @@
                     <fd-popover-body
                         [attr.aria-hidden]="!open"
                         [class.fd-popover__body--hidden]="!viewModel.displayedOptions.length"
-                        [style.transform]="getPopoverTransform()"
                     >
                         <ng-template [ngTemplateOutlet]="list"></ng-template>
                         <ng-content></ng-content>
@@ -48,7 +56,6 @@
             [buttonFocusable]="buttonFocusable"
             [button]="showAddonButton"
             [disabled]="disabled"
-            [display]="display"
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
             [glyph]="showAddonButton ? glyph : ''"
@@ -63,18 +70,15 @@
                 [showOverflowPopover]="false"
                 [open]="open"
                 [tokenizerFocusable]="false"
-                [display]="display"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
                 tabindex="-1"
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
             >
-                @for (option of viewModel.selectedOptions; track valueFn(option.item); let last = $last) {
+                @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
-                        [display]="display"
-                        [isLast]="last"
                         (onCloseClick)="_onTokenCloseClick(option, false, $event)"
                         (onRemove)="_onTokenCloseClick(option, false)"
                         [title]="option.label"
@@ -130,16 +134,13 @@
                     <li
                         fd-list-item
                         [attr.aria-label]="option.label"
-                        [class.overflow-list-item-display]="display"
                         (click)="_onCheckboxClick(option, $event, idx, true)"
                         (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                         [selected]="!!option.isSelected"
                     >
-                        @if (!display) {
-                            <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
-                                <!-- TODO -->
-                            </fd-checkbox>
-                        }
+                        <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
+                            <!-- TODO -->
+                        </fd-checkbox>
                         <ng-template
                             [ngTemplateOutlet]="itemSource"
                             [ngTemplateOutletContext]="{ option: option }"
@@ -168,7 +169,6 @@
             <span
                 fd-list-title
                 fdTruncatedTitle
-                [class.overflow-list-item-display]="display"
                 [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"
             ></span>
         } @else {

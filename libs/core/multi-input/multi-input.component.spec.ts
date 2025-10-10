@@ -298,28 +298,14 @@ describe('MultiInputComponent', () => {
 
     describe('when in display mode', () => {
         beforeEach(() => {
-            updateComponentInput('display', true);
+            fixture.componentRef.setInput('display', true);
+            fixture.detectChanges();
         });
 
-        it('should not display addon button', () => {
-            expect(component.displayAddonButton).toBeFalsy();
-        });
-
-        it('should add overflow-list-item-display class to overflow list items and list titles', () => {
-            const tokenElements = fixture.nativeElement.querySelectorAll('[fd-list-item]');
-            const titleElements = fixture.nativeElement.querySelectorAll('[fd-list-title]');
-
-            tokenElements.forEach((tokenElement) => {
-                expect(tokenElement.classList).toContain('fd-token--overflow-list-item-display');
-            });
-            titleElements.forEach((titleElement) => {
-                expect(titleElement.classList).toContain('fd-token--overflow-list-item-display');
-            });
-        });
-
-        it('should not display checkboxes on overflowing items', () => {
-            const checkboxElements = fixture.nativeElement.querySelectorAll('fd-checkbox');
-            expect(checkboxElements.length).toBe(0);
+        it('should render a tokenizer in display mode', () => {
+            const tokenizerElement = fixture.nativeElement.querySelector('fd-tokenizer');
+            expect(tokenizerElement).toBeTruthy();
+            expect(component.tokenizer.display()).toBe(true);
         });
     });
 });

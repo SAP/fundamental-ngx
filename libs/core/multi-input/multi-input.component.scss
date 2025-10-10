@@ -31,7 +31,8 @@ $block: fd-multi-input;
 
     &-custom {
         display: block;
-        flex: 1;
+        flex-grow: 1;
+        flex-basis: 0;
     }
 
     &-item {
@@ -95,14 +96,4 @@ $block: fd-multi-input;
 
 .fd-popover__body--hidden {
     display: none;
-}
-
-.fd-list__item.overflow-list-item-display {
-    pointer-events: none;
-    background: none;
-    border-bottom: none;
-}
-
-.fd-list__item .overflow-list-item-display {
-    pointer-events: none;
 }

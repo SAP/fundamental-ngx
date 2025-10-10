@@ -386,13 +386,6 @@ fd-input-group {
     opacity: var(--sapContent_DisabledOpacity);
 }
 
-.fd-input-group.is-display {
-    pointer-events: none;
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
-}
-
 .fd-input-group[aria-disabled='true']::-webkit-input-placeholder,
 .fd-input-group.is-disabled::-webkit-input-placeholder,
 .fd-input-group:disabled::-webkit-input-placeholder {
