@@ -1,7 +1,426 @@
-@import 'fundamental-styles/dist/user-menu.css';
+// @import 'fundamental-styles/dist/user-menu.css';
 @import 'fundamental-styles/dist/menu.css';
 
-// Specific to Angular Implementation (composite components)
+/*
+  * TO BE REMOVED WITH FUNDAMENTAL STYLES VERSION 0.41.0
+  * ----------------------------------------------------------------------------------------------------
+  */
+
+.fd-user-menu {
+    background: var(--sapGroup_ContentBackground);
+}
+.fd-user-menu .fd-user-menu__title-bar {
+    --fdBar_Shadow: none;
+}
+.fd-user-menu .fd-panel__header:has(.fd-panel__button[aria-expanded='false']) {
+    --fdPanel_Header_Border_Bottom_Left_Radius: 0;
+    --fdPanel_Header_Border_Bottom_Right_Radius: 0;
+}
+.fd-user-menu .fd-user-menu__popover-wrapper {
+    overflow: visible;
+    width: 20rem;
+    min-width: 20rem;
+}
+.fd-user-menu__body {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: visible;
+    min-width: 18rem;
+    max-width: 20rem;
+    position: relative;
+    padding-inline: 0.5rem;
+    padding-block: 2.5rem 0.5rem;
+}
+.fd-user-menu__body::before,
+.fd-user-menu__body::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-user-menu__body:has(.fd-user-menu__details-view) {
+    padding: 0;
+}
+.fd-user-menu__header {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 0.5rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.fd-user-menu__header::before,
+.fd-user-menu__header::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-user-menu__header-container,
+.fd-user-menu__subheader {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 0.25rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: 100%;
+    text-align: center;
+    -webkit-margin-after: 0.5rem;
+    margin-block-end: 0.5rem;
+}
+.fd-user-menu__header-container::before,
+.fd-user-menu__header-container::after,
+.fd-user-menu__subheader::before,
+.fd-user-menu__subheader::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-user-menu__user-name {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    max-width: 100%;
+    line-height: 1.4rem;
+    white-space: normal;
+    color: var(--sapTextColor);
+    font-size: var(--sapFontLargeSize);
+    font-family: var(--sapFontSemiboldDuplexFamily);
+}
+.fd-user-menu__user-name::before,
+.fd-user-menu__user-name::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-user-menu__user-name--truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    max-height: 2.8rem;
+}
+.fd-user-menu__user-info,
+.fd-user-menu__user-role,
+.fd-user-menu__subline {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    color: var(--sapContent_LabelColor);
+}
+.fd-user-menu__user-info::before,
+.fd-user-menu__user-info::after,
+.fd-user-menu__user-role::before,
+.fd-user-menu__user-role::after,
+.fd-user-menu__subline::before,
+.fd-user-menu__subline::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-user-menu__user-info--truncate,
+.fd-user-menu__user-role--truncate,
+.fd-user-menu__subline--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fd-user-menu .fd-user-menu__menu {
+    width: 100%;
+}
+.fd-user-menu .fd-user-menu__menu-list {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+.fd-user-menu .fd-user-menu__menu-list > *:first-child,
+.fd-user-menu .fd-user-menu__menu-list > *:last-child {
+    border-radius: 0;
+}
+.fd-user-menu .fd-user-menu__menu-list.fd-user-menu__menu-list {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+.fd-user-menu .fd-user-menu__menu-list.fd-user-menu__menu-list > *:first-child,
+.fd-user-menu .fd-user-menu__menu-list.fd-user-menu__menu-list > *:last-child {
+    border-radius: 0;
+}
+.fd-user-menu .fd-user-menu__panel > div {
+    border-radius: 0;
+}
+.fd-user-menu__content-container {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    --fdPanel_Margin_Bottom: 0.25rem;
+}
+.fd-user-menu__content-container::before,
+.fd-user-menu__content-container::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+[class*='-condensed'] .fd-user-menu .fd-menu:not([class*='-cozy']),
+[class*='-compact'] .fd-user-menu .fd-menu:not([class*='-cozy']),
+.fd-user-menu .fd-menu[class*='-condensed'],
+.fd-user-menu .fd-menu[class*='-compact'] {
+    --fdMenu_Icon_Width: 2.5rem;
+    --fdMenu_Link_Height: 2.5rem;
+    --fdMenu_Item_Spacing_Left: 0.75rem;
+    --fdMenu_Item_Spacing_Right: 0.75rem;
+}
+.fd-user-menu--mobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    -webkit-padding-before: 0;
+    padding-block-start: 0;
+}
+.fd-user-menu--mobile .fd-user-menu__body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-padding-before: 1rem;
+    padding-block-start: 1rem;
+}
+.fd-user-menu--tool-header .fd-user-menu__user-name {
+    font-family: var(--sapFontBlackFamily);
+    font-size: 1.25rem;
+    line-height: 1.3;
+    color: var(-–sapTitleColor);
+}
+.fd-user-menu--tool-header .fd-user-menu__navigation-submenu {
+    top: -0.5rem;
+    border: none;
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+    border-radius: 0.5rem;
+    -webkit-margin-end: 0.3875rem;
+    margin-inline-end: 0.3875rem;
+    -webkit-box-shadow: var(--sapMenu_Shadow1);
+    box-shadow: var(--sapMenu_Shadow1);
+    background: var(--sapGroup_ContentBackground);
+}
+.fd-user-menu--tool-header .fd-user-menu__navigation-submenu-wrapper {
+    overflow: visible;
+}
+.fd-user-menu--tool-header .fd-user-menu__user-role {
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    line-height: var(--sapContent_LineHeight);
+    color: var(–sapContent_LabelColor);
+}
+.fd-user-menu--tool-header .fd-user-menu__body {
+    overflow: visible;
+}
+.fd-user-menu--tool-header .fd-user-menu__body:has(.fd-user-menu__navigation-menu:first-child) {
+    padding-block: 0;
+}
+.fd-user-menu--tool-header .fd-user-menu__popover-body {
+    border: none;
+    padding-block: 0.75rem;
+    padding-inline: 0;
+    border-radius: 0.75rem;
+    -webkit-box-shadow: var(--sapMenu_Shadow2);
+    box-shadow: var(--sapMenu_Shadow2);
+    background: var(--sapGroup_ContentBackground);
+}
+.fd-user-menu--tool-header .fd-user-menu__footer {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding-block: 0.75rem;
+    padding-inline: 1.125rem;
+}
+.fd-user-menu--tool-header .fd-user-menu__footer::before,
+.fd-user-menu--tool-header .fd-user-menu__footer::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+.fd-user-menu--tool-header .fd-navigation__item.fd-navigation__item--title {
+    --fdNavigation_Item_Title_Display: flex;
+    -webkit-margin-after: 1rem;
+    margin-block-end: 1rem;
+}
+
+.fd-user-menu__body .fd-list--subline .fd-list__item {
+    height: auto;
+}
+
+.fd-user-menu__body .fd-list--subline .fd-list__title {
+    width: 100%;
+    max-width: 100%;
+    font-style: normal;
+    line-height: normal;
+    white-space: normal;
+    font-size: var(--sapFontSize);
+    color: var(--sapList_TextColor);
+    font-family: var(--sapFontSemiboldDuplexFamily);
+}
+
+.fd-user-menu__body .fd-list--subline .fd-list__title--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fd-user-menu__body .fd-list--subline .fd-list__subline {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+    width: 100%;
+    max-width: 100%;
+    font-style: normal;
+    line-height: normal;
+    white-space: normal;
+    font-size: var(--sapFontSize);
+    font-family: var(--sapFontFamily);
+    color: var(--sapContent_LabelColor);
+}
+
+.fd-user-menu__body .fd-list--subline .fd-list__subline--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*
+ * ----------------------------------------------------------------------------------------------------
+ */
+
+/*
+ * Specific to Angular Implementation (composite components)
+ */
+
 .fd-user-menu {
     background: transparent;
 }
@@ -70,32 +489,21 @@ fd-user-menu-control:is(:focus) {
 
 .fd-user-menu__body {
     position: relative;
+    width: 20rem;
+    min-width: 20rem;
+    max-width: 20rem;
 }
 
 .fd-user-menu__body:has(.fd-user-menu__details-view) {
     padding: 0;
 }
 
-.fd-user-menu__user-name {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    max-width: 100%;
-    white-space: normal;
-    line-height: 1.4rem;
-    max-height: 2.8rem;
-}
-
-.fd-panel__title,
-.fd-user-menu__subline {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 .fd-user-menu__header-container {
     max-width: 100%;
+}
+
+.fd-user-menu .fd-popover__body > .fd-scrollbar {
+    width: 20rem;
+    min-width: 20rem;
+    max-width: 20rem;
 }

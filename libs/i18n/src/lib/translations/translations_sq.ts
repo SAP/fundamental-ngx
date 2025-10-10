@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sq.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kutia e kombinuar me shumë vlera',
-        selectAllLabel: 'Selekto të gjitha ({selectedItems} nga {totalItems})'
+        selectAllLabel: 'Selekto të gjitha ({selectedItems} nga {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
@@ -588,5 +588,9 @@ export default {
     coreNotification: {
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

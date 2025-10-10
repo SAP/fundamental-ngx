@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '다중 값 콤보 박스',
-        selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)'
+        selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -609,5 +609,9 @@ export default {
         groupAriaDescriptionCollapsed: '접힌 상태',
         triggerMoreLabel: '자세히',
         triggerLessLabel: '간단히'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

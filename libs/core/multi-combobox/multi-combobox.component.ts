@@ -14,6 +14,7 @@ import {
     QueryList,
     TemplateRef,
     ViewChild,
+    ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
     inject
@@ -346,6 +347,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     @ViewChild('inputGroup', { read: ElementRef })
     private readonly _inputGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChildren('item', { read: ElementRef })
+    private readonly items: QueryList<ElementRef>;
 
     /**
      * @hidden
@@ -778,6 +783,23 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     _getMapLimit(): number {
         return this.limitless ? (this.dataSourceDirective.dataSource as any[]).length : this._mapLimit;
+    }
+
+    /** @hidden */
+    _getGroupItemIds(groupIndex: number): string {
+        if (!this.items?.length) {
+            return '';
+        }
+
+        const groupItemIds = this.items
+            .filter((el) => {
+                const idWithGroup = el.nativeElement.getAttribute('id-with-group-index');
+                const groupIdx = idWithGroup.split('-')[idWithGroup.split('-').length - 1];
+                return groupIdx === String(groupIndex);
+            })
+            .map((el) => el.nativeElement.getAttribute('id'));
+
+        return groupItemIds?.join(' ');
     }
 
     /**
