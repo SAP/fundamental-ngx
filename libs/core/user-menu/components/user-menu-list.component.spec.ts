@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
 import { UserMenuListComponent } from './user-menu-list.component';
 
 @Component({
@@ -18,7 +19,8 @@ describe('UserMenuListComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestHostComponent]
+            imports: [TestHostComponent],
+            providers: [KeyboardSupportService]
         }).compileComponents();
     }));
 

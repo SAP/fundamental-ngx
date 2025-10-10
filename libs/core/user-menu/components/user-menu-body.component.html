@@ -8,7 +8,7 @@
 }
 
 <ng-template #bodyHeader let-dialogRef="dialogRef">
-    <div fd-bar [class.fd-user-menu__main-view-bar]="!submenu()">
+    <div fd-bar style="position: sticky; top: 0; z-index: 6">
         @if (submenu()) {
             <div fd-bar-left>
                 <fd-bar-element>
@@ -21,6 +21,22 @@
             </div>
         }
         <div fd-bar-right>
+            @if (!submenu()) {
+                <fd-bar-element
+                    [fullWidth]="true"
+                    class="fd-user-menu__scroll-header-element"
+                    [class.hidden]="isUserNameVisible()"
+                    role="presentation"
+                    aria-hidden="true"
+                >
+                    <div
+                        [innerHTML]="userNameContent()"
+                        class="fd-user-menu__user-name fd-user-menu__user-name--truncate"
+                        style="text-align: center; margin-inline-start: 2.75rem"
+                    ></div>
+                </fd-bar-element>
+            }
+
             <fd-bar-element>
                 <fd-button-bar ariaLabel="previous" glyph="decline" (click)="closeDialog(dialogRef)"> </fd-button-bar>
             </fd-bar-element>

@@ -83,6 +83,9 @@
                     (click)="actionPicked('Settings')"
                 ></li>
                 <li fd-user-menu-list-item icon="card" text="Menu Item" hasSubmenu [submenu]="menuSublist"></li>
+                @for (item of menuItems; track $index) {
+                    <li fd-user-menu-list-item icon="card" [text]="item" (click)="actionPicked(item)"></li>
+                }
                 <li fd-user-menu-list-item icon="official-service" text="Legal Information"></li>
                 <li fd-user-menu-list-item icon="message-information" text="About" (click)="actionPicked('About')"></li>
             </fd-user-menu-list>
@@ -92,10 +95,12 @@
                     <li
                         fd-user-menu-list-item
                         icon="card"
-                        text="Sub-menu Item"
-                        (click)="actionPicked('Sub-menu Item 1')"
+                        text="Sub-menu Item 0"
+                        (click)="actionPicked('Sub-menu Item 0')"
                     ></li>
-                    <li fd-user-menu-list-item text="Sub-menu Item" (click)="actionPicked('Sub-menu Item 2')"></li>
+                    @for (item of subMenuItems; track $index) {
+                        <li fd-user-menu-list-item [text]="item" (click)="actionPicked(item)"></li>
+                    }
                 </div>
             </ng-template>
         </div>

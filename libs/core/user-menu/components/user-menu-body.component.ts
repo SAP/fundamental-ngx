@@ -5,17 +5,19 @@ import {
     Component,
     ContentChildren,
     DestroyRef,
+    ElementRef,
     HostListener,
     OnInit,
     QueryList,
     TemplateRef,
     ViewEncapsulation,
+    contentChild,
     inject,
     signal,
     viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyboardSupportService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     BarComponent,
     BarElementDirective,
@@ -25,7 +27,8 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { Observable, Subject, map, merge, startWith, takeUntil } from 'rxjs';
+import { Observable, Subject, map, startWith } from 'rxjs';
+import { UserMenuUserNameDirective } from '../directives/user-menu-user-name.directive';
 import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
 @Component({
@@ -45,7 +48,7 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
         ButtonBarComponent,
         BarElementDirective
     ],
-    providers: [KeyboardSupportService, contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()]
 })
 export class UserMenuBodyComponent implements OnInit, AfterViewInit {
     /** @hidden */
@@ -69,10 +72,29 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
     selectedItemTitle = signal<string | null>(null);
 
     /**
+     * Signal indicating whether the user name element is currently visible
+     * within the user menu. This updates automatically as the element
+     * enters or leaves the viewport.
+     *
+     * Used by the template to conditionally render the sticky header.
+     */
+    readonly isUserNameVisible = signal(true);
+
+    /**
+     * Signal storing the HTML content of the user name element.
+     * When the original element scrolls out of view, this content
+     * is displayed in the sticky header.
+     */
+    readonly userNameContent = signal('');
+
+    /**
      * Template ref to the header of the user menu body.
      * Needed in mobile mode
      */
     readonly bodyHeader = viewChild<TemplateRef<any>>('bodyHeader');
+
+    /** @hidden */
+    protected readonly userNameEl = contentChild(UserMenuUserNameDirective, { read: ElementRef });
 
     /** @hidden */
     private _rtlService = inject(RtlService);
@@ -84,20 +106,9 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly _keyboardSupportService = inject(KeyboardSupportService);
-
-    /** @hidden */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         event.stopPropagation();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this._keyboardSupportService.keyManager) {
-            this._keyboardSupportService.onKeyDown(event);
-        }
     }
 
     /** @hidden */
@@ -109,12 +120,6 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._keyboardSupportService.setKeyboardService(this._listItems, false, false);
-
-        this._listItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._setupInteractionListeners();
-        });
-
         this._listItems.changes
             .pipe(startWith(this._listItems), takeUntilDestroyed(this._destroyRef))
             .subscribe((listItems) => {
@@ -129,6 +134,41 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
                     });
                 });
             });
+
+        const el = this.userNameEl()?.nativeElement;
+
+        if (!el) {
+            return;
+        }
+
+        // logic for showing/hiding the popover header with user name on scroll
+        const intersectionObserver = new IntersectionObserver(
+            (entries) => {
+                this.isUserNameVisible.set(entries[0].isIntersecting);
+            },
+            { root: null, threshold: 1, rootMargin: '-20px 0px 0px 0px' }
+        );
+
+        intersectionObserver.observe(el);
+
+        // Initialize
+        this.userNameContent.set(el.innerHTML.trim());
+
+        // Watch for changes in projected content
+        const mutationObserver = new MutationObserver(() => {
+            this.userNameContent.set(el.innerHTML.trim());
+        });
+
+        mutationObserver.observe(el, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+
+        this._destroyRef.onDestroy(() => {
+            intersectionObserver.disconnect();
+            mutationObserver.disconnect();
+        });
     }
 
     /**
@@ -160,22 +200,5 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
     closeDialog(dialogRef): void {
         dialogRef.dismiss('Close');
         this.clearSubmenu();
-    }
-
-    /** @hidden */
-    private _setupInteractionListeners(): void {
-        this._refresh$.next();
-        this._refresh$.complete();
-        this._refresh$ = new Subject<void>();
-
-        merge(...this._listItems.toArray().map((i) => i.focused))
-            .pipe(takeUntil(this._refresh$), takeUntilDestroyed(this._destroyRef))
-            .subscribe((focusedItem) => {
-                this._listItems.forEach((item) => {
-                    item._tabIndex$.set(-1);
-                });
-                focusedItem._tabIndex$.set(0);
-                this._keyboardSupportService.keyManager.setActiveItem(focusedItem);
-            });
     }
 }

@@ -58,6 +58,7 @@ export class UserMenuDefaultExampleComponent {
 
     expanded = true;
     isOpen = false;
+    menuItems = Array.from({ length: 20 }, (_, i) => `Menu Item ${i + 1}`);
 
     constructor(private _messageToastService: MessageToastService) {}
 
