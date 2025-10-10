@@ -38,4 +38,69 @@ input {
 .fd-tokenizer__overflow-list-item {
     display: flex;
     justify-content: space-between;
+
+    &-display {
+        pointer-events: none;
+        border: none;
+    }
+}
+
+.fd-tokenizer {
+    &--display {
+        border: none;
+        box-shadow: none;
+        overflow: visible;
+        pointer-events: none;
+        background: transparent;
+
+        .fd-tokenizer__inner {
+            justify-content: flex-start;
+            overflow: visible;
+        }
+
+        .fd-tokenizer__inner-show-dot:has(+ fd-popover),
+        .fd-tokenizer__inner-show-dot:has(+ .fd-tokenizer-more) {
+            &::after {
+                content: '\00B7';
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 1rem;
+            }
+        }
+
+        .fd-token {
+            margin-inline-end: 0;
+
+            &--display {
+                &::after {
+                    content: '\00B7';
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 1rem;
+                }
+            }
+
+            &--isLast {
+                &::after {
+                    content: '';
+                    min-width: 0;
+                }
+            }
+        }
+
+        .fd-tokenizer__input {
+            display: none;
+        }
+    }
+}
+
+.fd-tokenizer.fd-tokenizer--display.is-hover,
+.fd-tokenizer.fd-tokenizer--display:hover {
+    background: transparent;
+}
+
+.fd-tokenizer-allow-pointer {
+    pointer-events: all;
 }

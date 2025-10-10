@@ -31,6 +31,8 @@ $block: fd-multi-input;
 
     &-custom {
         display: block;
+        flex-grow: 1;
+        flex-basis: 0;
     }
 
     &-item {
