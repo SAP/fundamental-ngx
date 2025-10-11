@@ -90,8 +90,13 @@
     },
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "targetDefaults": {
+        "generate": {
+            "dependsOn": ["^generate"],
+            "inputs": ["production", "^production"],
+            "cache": true
+        },
         "build": {
-            "dependsOn": ["^build"],
+            "dependsOn": ["^build", "^generate"],
             "inputs": ["production", "^production"],
             "cache": true
         },
@@ -130,6 +135,11 @@
         "@nx/eslint:lint": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
             "cache": true
+        },
+        "@nx/js:tsc": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"]
         }
     },
     "namedInputs": {
