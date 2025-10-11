@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'คอมโบบ็อกซ์แบบหลายค่า',
-        selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ'
+        selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -611,5 +611,9 @@ export default {
         groupAriaDescriptionCollapsed: 'ยุบรวม',
         triggerMoreLabel: 'เพิ่มเติม',
         triggerLessLabel: 'น้อยลง'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

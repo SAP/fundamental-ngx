@@ -1,1 +1,11 @@
 @import 'fundamental-styles/dist/segmented-button.css';
+
+.fd-button.is-disabled.is-selected,
+.fd-button.is-disabled[aria-selected='true'],
+.fd-button:disabled.is-selected,
+.fd-button:disabled[aria-selected='true'],
+.fd-button[aria-disabled='true'].is-selected,
+.fd-button[aria-disabled='true'][aria-selected='true'] {
+    --fdButtonBorderColor: var(--sapButton_Selected_BorderColor);
+    --fdButtonBackgroundColor: var(--sapButton_Selected_Background);
+}

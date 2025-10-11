@@ -41,6 +41,7 @@ import { ScrollPosition, scrollIntoView } from './scroll';
 export interface FocusableListItemFocusedEvent {
     index: number;
     total: number;
+    id?: string | null;
 }
 
 export interface FocusableListKeydownEvent {
@@ -364,7 +365,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                     this._gridItemFocused$.next(directiveItem._position!);
                 }
 
-                this.itemFocused.next({ index, total: items.length });
+                const id = getItemElement(item)?.id ?? null;
+                this.itemFocused.next({ index, total: items.length, id });
                 this._focusableItems.forEach((i) => i.setTabbable(i === directiveItem));
                 this._keyManager?.setActiveItem(index);
             })

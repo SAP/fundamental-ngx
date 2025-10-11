@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Keuzelijst met invoerveld met meerdere waarden',
-        selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren'
+        selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -612,5 +612,9 @@ export default {
         groupAriaDescriptionCollapsed: 'samengevouwen',
         triggerMoreLabel: 'Meer',
         triggerLessLabel: 'Minder'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

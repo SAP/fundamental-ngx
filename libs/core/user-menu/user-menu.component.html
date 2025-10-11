@@ -9,7 +9,11 @@
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="control"></ng-container>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body fd-user-menu-popover-control>
+            @if (!isUserNameVisible()) {
+                <ng-container *ngTemplateOutlet="header"></ng-container>
+            }
+
             <ng-container *ngTemplateOutlet="body"></ng-container>
 
             <div fd-popover-body-footer>
@@ -42,6 +46,21 @@
 
 <ng-template #control>
     <ng-content select="fd-user-menu-control" />
+</ng-template>
+
+<ng-template #header>
+    <div fd-popover-body-header style="position: sticky; top: 0; z-index: 20; max-width: 20rem">
+        <div fd-bar barDesign="header">
+            <div fd-bar-middle>
+                <fd-bar-element>
+                    <div
+                        class="fd-user-menu__user-name fd-user-menu__user-name--truncate"
+                        [innerHTML]="userNameContent()"
+                    ></div>
+                </fd-bar-element>
+            </div>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template #body>

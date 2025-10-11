@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '[[[Μűĺţį Ʋąĺűē Ĉŏɱƃŏ Ɓŏχ∙∙∙∙∙]]]',
-        selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({şēĺēċţēƌĬţēɱş} ŏƒ {ţŏţąĺĬţēɱş})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+        selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({şēĺēċţēƌĬţēɱş} ŏƒ {ţŏţąĺĬţēɱş})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -618,5 +618,9 @@ export default {
         groupAriaDescriptionCollapsed: '[[[ċŏĺĺąρşēƌ∙∙∙∙∙]]]',
         triggerMoreLabel: '[[[Μŏŗē]]]',
         triggerLessLabel: '[[[Ļēşş]]]'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

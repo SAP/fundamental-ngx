@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '多重值下拉式清單方塊',
-        selectAllLabel: '全選 ({selectedItems}/{totalItems})'
+        selectAllLabel: '全選 ({selectedItems}/{totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -608,5 +608,9 @@ export default {
         groupAriaDescriptionCollapsed: '已摺疊',
         triggerMoreLabel: '更多',
         triggerLessLabel: '較少'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

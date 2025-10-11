@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '複数値コンボボックス',
-        selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})'
+        selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -611,5 +611,9 @@ export default {
         groupAriaDescriptionCollapsed: '非表示',
         triggerMoreLabel: '表示を増やす',
         triggerLessLabel: '表示を減らす'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Багатозначне поле зі списком',
-        selectAllLabel: 'Вибрати всі ({selectedItems} з {totalItems})'
+        selectAllLabel: 'Вибрати всі ({selectedItems} з {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -612,5 +612,9 @@ export default {
         groupAriaDescriptionCollapsed: 'згорнуто',
         triggerMoreLabel: 'Більше',
         triggerLessLabel: 'Менше'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

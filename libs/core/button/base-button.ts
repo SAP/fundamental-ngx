@@ -37,6 +37,11 @@ export class BaseButton implements HasElementRef {
     @Input({ transform: booleanAttribute })
     toggled: BooleanInput;
 
+    /** Whether button is selected. */
+    @HostBinding('attr.aria-selected')
+    @Input({ transform: booleanAttribute })
+    selected: BooleanInput;
+
     /**
      * Native type of button element
      */

@@ -28,7 +28,6 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
             newFilePath,
             await format(
                 `
-            /* eslint-disable */
             // Do not modify, it's automatically created. Modify ${
                 parsedPropertiesFilePath.name + parsedPropertiesFilePath.ext
             } instead

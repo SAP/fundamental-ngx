@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'მრავალ ღირებულების კომბინირებული ყუთი',
-        selectAllLabel: 'ყველას არჩევა ({selectedItems} {totalItems}-დან)'
+        selectAllLabel: 'ყველას არჩევა ({selectedItems} {totalItems}-დან)',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',
@@ -587,5 +587,9 @@ export default {
     coreNotification: {
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

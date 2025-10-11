@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स',
-        selectAllLabel: 'सबका चयन करें'
+        selectAllLabel: 'सबका चयन करें',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
@@ -587,5 +587,9 @@ export default {
     coreNotification: {
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

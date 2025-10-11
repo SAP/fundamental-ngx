@@ -13,13 +13,17 @@ import {
     NgZone,
     OnChanges,
     OnDestroy,
+    OnInit,
     Optional,
     QueryList,
+    Renderer2,
     SimpleChanges,
     ViewEncapsulation,
     booleanAttribute,
     effect,
-    forwardRef
+    forwardRef,
+    inject,
+    signal
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
@@ -31,6 +35,7 @@ import {
     destroyObservable
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
@@ -54,7 +59,11 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     host: {
         role: 'listbox',
         '[class.fd-segmented-button]': 'true',
-        '[class.fd-segmented-button--vertical]': 'vertical'
+        '[class.fd-segmented-button--vertical]': 'vertical',
+        '[attr.aria-multiselectable]': 'toggle',
+        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
+        '[attr.aria-roledescription]': '_groupRoleDescription',
+        '[attr.aria-activedescendant]': '_focusedItemId()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,7 +77,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     standalone: true,
     hostDirectives: [FocusableListDirective]
 })
-export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
+export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input({ transform: booleanAttribute })
     toggle = false;
@@ -88,6 +97,12 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     @ContentChildren(FocusableItemDirective)
     _focusableItems: QueryList<FocusableItemDirective>;
 
+    /** @hidden */
+    _groupRoleDescription: string;
+
+    /** @hidden */
+    _buttonRoleDescription: string;
+
     /**
      * Value of segmented button can have 2 types:
      * - string, when there is no toggle mode and only 1 value can be chosen.
@@ -104,6 +119,18 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     private readonly _onDestroy$ = new Subject<void>();
 
     /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
+
+    /** @hidden */
+    private _focusedItemId = signal<string | null | undefined>(null);
+
+    /** @hidden */
+    private renderer = inject(Renderer2);
+
+    /** @hidden */
     constructor(
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -116,6 +143,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         effect(() => {
             this._focusableList.contentDirection = this._rtlService?.rtlSignal() ? 'rtl' : 'ltr';
         });
+        this._focusableList.itemFocused.pipe(takeUntil(this._onDestroy$)).subscribe((item) => {
+            this._focusedItemId.set(item.id);
+        });
     }
 
     /** @hidden */
@@ -124,6 +154,22 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._lang$.pipe(takeUntil(this._onDestroy$)).subscribe((lang: FdLanguage) => {
+            this._groupRoleDescription = this._translationResolver.resolve(
+                lang,
+                'segmentedButton.groupRoleDescription'
+            );
+            this._buttonRoleDescription = this._translationResolver.resolve(
+                lang,
+                'segmentedButton.buttonRoleDescription'
+            );
+            this._updateButtonRoleDescriptions();
+            this._changeDetRef.markForCheck();
+        });
     }
 
     /** @hidden */
@@ -212,8 +258,8 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
                 this._toggleDisableButtons(this._isDisabled);
                 this._pickButtonsByValues(this._currentValue);
-                this._buttons.forEach((button) => {
-                    button.elementRef.nativeElement.role = 'option';
+                this._buttons.forEach((button, index) => {
+                    this._setButtonAttributes(button, index);
                     this._listenToTriggerEvents(button);
                 });
             });
@@ -237,6 +283,28 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         );
 
         triggerEvents$.pipe(takeUntil(refresh$)).subscribe(() => this._handleTriggerOnButton(buttonComponent));
+    }
+
+    /** @hidden */
+    private _setButtonAttributes(buttonComponent: ButtonComponent, index: number): void {
+        const el = buttonComponent.elementRef.nativeElement;
+        this.renderer.setAttribute(el, 'role', 'option');
+        this.renderer.setAttribute(el, 'aria-roledescription', this._buttonRoleDescription);
+        this.renderer.setAttribute(el, 'aria-posinset', String(index + 1));
+        this.renderer.setAttribute(el, 'aria-setsize', String(this._buttons.length));
+    }
+
+    private _updateButtonRoleDescriptions(): void {
+        if (!this._buttons) {
+            return;
+        }
+        this._buttons.forEach((button) => {
+            this.renderer.setAttribute(
+                button.elementRef.nativeElement,
+                'aria-roledescription',
+                this._buttonRoleDescription
+            );
+        });
     }
 
     /** @hidden */
@@ -296,17 +364,17 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _selectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.toggled = true;
+        buttonComponent.selected = true;
     }
 
     /** @hidden */
     private _deselectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.toggled = false;
+        buttonComponent.selected = false;
     }
 
     /** @hidden */
     private _isButtonSelected(buttonComponent: ButtonComponent): Nullable<boolean> {
-        return !!buttonComponent.toggled;
+        return !!buttonComponent.selected;
     }
 
     /** @hidden */

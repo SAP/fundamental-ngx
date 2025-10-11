@@ -1,18 +1,22 @@
-import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, input, OnInit } from '@angular/core';
 
 @Directive({
     selector: '[fd-list-title], [fdListTitle]',
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-list__title',
+        '[class.fd-list__title--truncate]': 'truncate()'
+    }
 })
 export class ListTitleDirective implements OnInit {
-    /** @hidden */
-    @HostBinding('class.fd-list__title')
-    fdListTitleClass = true;
+    /**
+     * @deprecated
+     * Whether or not this should be wrapped, when too much text.
+     */
+    wrap = input(false, { transform: booleanAttribute });
 
-    /** Whether or not this should be wrapped, when too much text. */
-    @Input()
-    @HostBinding('class.fd-list__title--wrap')
-    wrap = false;
+    /** Whether the text should truncate with ellipsis. */
+    truncate = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     constructor(public elRef: ElementRef) {}

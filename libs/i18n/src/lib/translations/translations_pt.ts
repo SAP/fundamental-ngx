@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_pt.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Combobox de valores múltiplos',
-        selectAllLabel: 'Selecionar todos os ({selectedItems} de {totalItems})'
+        selectAllLabel: 'Selecionar todos os ({selectedItems} de {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -611,5 +611,9 @@ export default {
         groupAriaDescriptionCollapsed: 'recolhido',
         triggerMoreLabel: 'Mais',
         triggerLessLabel: 'Menos'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };
