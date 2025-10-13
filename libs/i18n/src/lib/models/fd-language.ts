@@ -76,6 +76,7 @@ export interface FdLanguage {
         /** Label for the multi-combobox. */
         multiComboBoxAriaLabel: FdLanguageKey;
         selectAllLabel: FdLanguageKey;
+        listGroupHeader: FdLanguageKey;
     };
     coreCarousel: {
         pageIndicatorLabel: FdLanguageKey;

@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Vícehodnotový výklopný seznam',
-        selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})'
+        selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

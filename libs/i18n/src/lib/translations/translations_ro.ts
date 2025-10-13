@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Casetă combinată cu valori multiple',
-        selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})'
+        selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

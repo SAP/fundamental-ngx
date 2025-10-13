@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'მრავალ ღირებულების კომბინირებული ყუთი',
-        selectAllLabel: 'ყველას არჩევა ({selectedItems} {totalItems}-დან)'
+        selectAllLabel: 'ყველას არჩევა ({selectedItems} {totalItems}-დან)',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',

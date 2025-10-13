@@ -144,7 +144,7 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
         this.isOpenChange.emit(isOpen);
 
         this._onZoneStable().subscribe(() => {
-            this.isOpen() ? linkElement.classList.add('is-active') : linkElement.classList.remove('is-active');
+            this.isOpen() ? linkElement.classList.add('is-selected') : linkElement.classList.remove('is-selected');
             firstTabbableElement.focus();
         });
 

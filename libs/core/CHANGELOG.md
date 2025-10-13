@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.25...v0.57.4-rc.26) (2025-10-09)
+
+
+### Bug Fixes
+
+* **core:** adopt latest changes for user menu ([#13518](https://github.com/SAP/fundamental-ngx/issues/13518)) ([5d84f42](https://github.com/SAP/fundamental-ngx/commit/5d84f42a68fec9d194d3286a7795c4dfe72a5c3c))
+
+
+
+
+
+## [0.57.4-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.24...v0.57.4-rc.25) (2025-10-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.23...v0.57.4-rc.24) (2025-10-09)
+
+
+### Bug Fixes
+
+* **core:** List: Group label not read ([#13494](https://github.com/SAP/fundamental-ngx/issues/13494)) ([ba5768c](https://github.com/SAP/fundamental-ngx/commit/ba5768c71e4b368dbae6020662394864b3a4c199))
+
+
+
+
+
+## [0.57.4-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.22...v0.57.4-rc.23) (2025-10-07)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.57.4-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.21...v0.57.4-rc.22) (2025-10-06)
 
 

@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Többértékes kombinált lista',
-        selectAllLabel: 'Összes kiválasztása ({selectedItems} / {totalItems})'
+        selectAllLabel: 'Összes kiválasztása ({selectedItems} / {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '多重值下拉式清單方塊',
-        selectAllLabel: '全選 ({selectedItems}/{totalItems})'
+        selectAllLabel: '全選 ({selectedItems}/{totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

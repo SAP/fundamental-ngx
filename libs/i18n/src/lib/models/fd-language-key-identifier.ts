@@ -27,6 +27,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreCalendar.nonWorkDayLabel'
     | 'coreMultiComboBox.multiComboBoxAriaLabel'
     | 'coreMultiComboBox.selectAllLabel'
+    | 'coreMultiComboBox.listGroupHeader'
     | 'coreCarousel.pageIndicatorLabel'
     | 'coreCarousel.leftNavigationBtnLabel'
     | 'coreCarousel.rightNavigationBtnLabel'

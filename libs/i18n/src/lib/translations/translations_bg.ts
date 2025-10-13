@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Комбинирано поле с множество стойности',
-        selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})'
+        selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

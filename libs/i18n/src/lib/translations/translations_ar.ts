@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'مربع تحرير وسرد متعدد القيم',
-        selectAllLabel: 'تحديد الكل ({selectedItems} من {totalItems})'
+        selectAllLabel: 'تحديد الكل ({selectedItems} من {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

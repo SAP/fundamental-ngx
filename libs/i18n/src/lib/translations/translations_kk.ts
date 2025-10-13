@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Бірнеше мәннің құрама ұясы',
-        selectAllLabel: 'Барлық ({selectedItems}/{totalItems}) таңдаңыз'
+        selectAllLabel: 'Барлық ({selectedItems}/{totalItems}) таңдаңыз',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

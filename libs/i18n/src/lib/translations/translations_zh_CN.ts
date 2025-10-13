@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '多值组合框',
-        selectAllLabel: '全选（已选 {selectedItems} 个，共 {totalItems} 个）'
+        selectAllLabel: '全选（已选 {selectedItems} 个，共 {totalItems} 个）',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',

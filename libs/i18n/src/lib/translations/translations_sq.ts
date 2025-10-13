@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kutia e kombinuar me shumë vlera',
-        selectAllLabel: 'Selekto të gjitha ({selectedItems} nga {totalItems})'
+        selectAllLabel: 'Selekto të gjitha ({selectedItems} nga {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',

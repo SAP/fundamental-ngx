@@ -29,7 +29,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Σύνθετο Πλαίσιο Πολλών Τιμών',
-        selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})'
+        selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
