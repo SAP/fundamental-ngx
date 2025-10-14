@@ -1,0 +1,18 @@
+{
+    "guides": [
+        {
+            "url": "ui5-webcomponents/home",
+            "name": "Home"
+        }
+    ],
+    "components": [
+        {
+            "url": "ui5-webcomponents/avatar",
+            "name": "Avatar"
+        },
+        {
+            "url": "ui5-webcomponents/avatar-group",
+            "name": "Avatar Group"
+        }
+    ]
+}

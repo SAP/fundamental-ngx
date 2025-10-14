@@ -1,0 +1,70 @@
+<section>
+    <p>Avatar Shapes</p>
+    <ui5-avatar shape="Circle"></ui5-avatar>
+    <ui5-avatar shape="Square"></ui5-avatar>
+</section>
+<section>
+    <p>Avatar with Initials</p>
+    <ui5-avatar initials="A"></ui5-avatar>
+    <ui5-avatar initials="AB"></ui5-avatar>
+    <ui5-avatar initials="CDE"></ui5-avatar>
+</section>
+<section>
+    <p>Avatar Icon/Background Image</p>
+    <ui5-avatar icon="lightbulb"></ui5-avatar>
+    <ui5-avatar icon="fridge"></ui5-avatar>
+    <ui5-avatar>
+        <img alt="Woman" src="https://ui5.github.io/webcomponents/images/avatars/woman_avatar_1.png" />
+    </ui5-avatar>
+</section>
+<section>
+    <p>Avatar Sizes</p>
+    <ui5-avatar size="XS"></ui5-avatar>
+    <ui5-avatar size="S"></ui5-avatar>
+    <ui5-avatar size="M"></ui5-avatar>
+    <ui5-avatar size="L"></ui5-avatar>
+    <ui5-avatar size="XL"></ui5-avatar>
+</section>
+<section>
+    <p>interactive</p>
+    <ui5-avatar [interactive]="true" size="XS" initials="A"></ui5-avatar>
+    <ui5-avatar [interactive]="true" size="S" initials="AB"></ui5-avatar>
+    <ui5-avatar [interactive]="true" size="M" initials="CDE"></ui5-avatar>
+    <ui5-avatar [interactive]="true" size="L" initials="FGH"></ui5-avatar>
+    <ui5-avatar [interactive]="true" size="XL" initials="IJK"></ui5-avatar>
+</section>
+<section>
+    <p>disabled</p>
+    <ui5-avatar [disabled]="true" size="XS" initials="A"></ui5-avatar>
+    <ui5-avatar [disabled]="true" size="S" initials="AB"></ui5-avatar>
+    <ui5-avatar [disabled]="true" size="M" initials="CDE"></ui5-avatar>
+    <ui5-avatar [disabled]="true" size="L" initials="FGH"></ui5-avatar>
+    <ui5-avatar [disabled]="true" size="XL" initials="IJK"></ui5-avatar>
+</section>
+<section>
+    <p>Color Options</p>
+    <ui5-avatar [colorScheme]="'Accent1'" initials="A"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent2'" initials="B"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent3'" initials="C"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent4'" initials="D"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent5'" initials="E"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent6'" initials="F"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent7'" initials="G"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent8'" initials="H"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent9'" initials="I"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Accent10'" initials="J"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Auto'" initials="K"></ui5-avatar>
+    <ui5-avatar [colorScheme]="'Placeholder'" initials="L"></ui5-avatar>
+    <p>Avatar Transparent: N/A</p>
+    <p>Avatar Tile: N/A</p>
+    <p>Avatar Indication Palette: N/A</p>
+    <p>Avatar Value States: N/A</p>
+</section>
+<section>
+    <p>Avatar with Zoom Icon</p>
+    <ui5-avatar initials="AB" size="L" shape="Circle">
+        <ui5-tag slot="badge">
+            <ui5-icon slot="icon" name="edit"></ui5-icon>
+        </ui5-tag>
+    </ui5-avatar>
+</section>

@@ -54,6 +54,21 @@
             "@fundamental-ngx/docs/schema": ["libs/docs/schema/src/index.ts"],
             "@fundamental-ngx/docs/shared": ["libs/docs/shared/src/index.ts"],
             "@fundamental-ngx/docs/shared-pages": ["libs/docs/shared-pages/index.ts"],
+            "@fundamental-ngx/docs/ui5-webcomponents": ["libs/docs/ui5-webcomponents/index.ts"],
+            "@fundamental-ngx/docs/ui5-webcomponents-ai": ["libs/docs/ui5-webcomponents-ai/index.ts"],
+            "@fundamental-ngx/docs/ui5-webcomponents-ai/*": [
+                "libs/docs/ui5-webcomponents-ai/*/index.ts",
+                "libs/docs/ui5-webcomponents-ai/*/src/index.ts"
+            ],
+            "@fundamental-ngx/docs/ui5-webcomponents-fiori": ["libs/docs/ui5-webcomponents-fiori/index.ts"],
+            "@fundamental-ngx/docs/ui5-webcomponents-fiori/*": [
+                "libs/docs/ui5-webcomponents-fiori/*/index.ts",
+                "libs/docs/ui5-webcomponents-fiori/*/src/index.ts"
+            ],
+            "@fundamental-ngx/docs/ui5-webcomponents/*": [
+                "libs/docs/ui5-webcomponents/*/index.ts",
+                "libs/docs/ui5-webcomponents/*/src/index.ts"
+            ],
             "@fundamental-ngx/e2e": ["e2e/index.ts"],
             "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
