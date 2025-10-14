@@ -33,7 +33,7 @@ describe('FdTranslate pipe', () => {
         return testComponentFixture.nativeElement.textContent.trim();
     }
 
-    function setCtx(key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs): void {
+    function setCtx(key: FdLanguageKeyIdentifier | null, args?: FdLanguageKeyArgs): void {
         testComponentFixture.componentRef.setInput('testKey', key);
         testComponentFixture.componentRef.setInput('testArgs', args);
         testComponentFixture.detectChanges();
@@ -74,6 +74,12 @@ describe('FdTranslate pipe', () => {
             setCtx('wrong');
             expectValueToBe('');
         });
+
+        it('should return an empty string if null is passed', () => {
+            setCtx(null);
+            expectValueToBe('');
+        });
+
         it('should work with function values', () => {
             const nodeMembersCount = jest.fn((params) => `${params['count']} function members`);
             lang$.next({

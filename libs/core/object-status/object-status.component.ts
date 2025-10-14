@@ -3,15 +3,28 @@ import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
+    DestroyRef,
     ElementRef,
+    inject,
     Input,
     OnChanges,
     OnInit,
+    signal,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { applyCssClass, ColorAccent, CssClassBuilder, Nullable, NullableObject } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
+import {
+    FD_LANGUAGE,
+    FdLanguage,
+    FdLanguageKeyIdentifier,
+    FdTranslatePipe,
+    TranslationResolver
+} from '@fundamental-ngx/i18n';
+import { map } from 'rxjs';
 import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
@@ -19,26 +32,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-status]',
-    template: `
-        @if (glyph) {
-            <fd-icon
-                class="fd-object-status__icon"
-                [glyph]="glyph"
-                [font]="glyphFont"
-                [attr.role]="glyphAriaLabel ? 'presentation' : ''"
-                [ariaLabel]="glyphAriaLabel"
-            >
-            </fd-icon>
-        }
-        @if (textTemplate) {
-            <span class="fd-object-status__text" [class]="_textClass">
-                <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
-            </span>
-        }
-        @if (label) {
-            <span class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
-        }
-    `,
+    templateUrl: './object-status.component.html',
     styleUrl: './object-status.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,9 +43,11 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         }
     ],
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : null'
+        '[attr.tabindex]': 'clickable ? 0 : null',
+        '[attr.role]': 'clickable ? "button" : null',
+        '[attr.aria-roledescription]': 'clickable ? _ariaRoleDescription() : null'
     },
-    imports: [IconComponent, NgTemplateOutlet]
+    imports: [IconComponent, NgTemplateOutlet, FdTranslatePipe]
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -119,10 +115,43 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     _textClass: string;
 
+    /** @hidden */
+    _indicationColorCode = computed<string>(
+        () => ` ${this.indicationColor ?? ''}${this.secondaryIndication ? 'b' : ''}`
+    );
+
+    /** @hidden */
+    _statusTranslateKey = computed<FdLanguageKeyIdentifier | null>(() => {
+        switch (this.status) {
+            case 'negative':
+                return 'coreObjectStatus.negative';
+            case 'critical':
+                return 'coreObjectStatus.critical';
+            case 'positive':
+                return 'coreObjectStatus.positive';
+            case 'informative':
+                return 'coreObjectStatus.informative';
+            default:
+                return null;
+        }
+    });
+
     /** Whether the Object status is icon-only. */
     get iconOnly(): boolean {
         return !this.label && !this.textTemplate;
     }
+
+    /** @hidden */
+    private readonly _ariaRoleDescription = signal<string>('');
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
@@ -145,6 +174,21 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        this._setAriaRoleDescription();
+    }
+
+    /** @hidden */
+    private _setAriaRoleDescription(): void {
+        this._lang$
+            .pipe(
+                takeUntilDestroyed(this._destroyRef),
+                map((lang: FdLanguage) =>
+                    this._translationResolver.resolve(lang, 'coreObjectStatus.ariaRoleDescription')
+                )
+            )
+            .subscribe((res) => {
+                this._ariaRoleDescription.set(res);
+            });
     }
 }
 

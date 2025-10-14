@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sq.properties instead
 export default {
     coreAvatar: {
@@ -98,6 +97,15 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'Artikulli i pemës {itemDetails}, {index} nga {total}{selectedDescription}'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} artikuj { count, plural, one {më shumë} other {të tjerë} }'

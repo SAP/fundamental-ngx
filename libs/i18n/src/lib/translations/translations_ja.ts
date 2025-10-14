@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreAvatar: {
@@ -99,6 +98,15 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'ツリー項目: {itemDetails}、{index}/{total}{selectedDescription}'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: 'ほか{count}件'
