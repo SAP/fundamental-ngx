@@ -75,10 +75,9 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[], cla
     // className added
     const inputs: string[] = [];
     (data.members ?? []).filter(isField).forEach((member) => {
-        const typeText = member.type?.text?.replace(' | undefined', '');
+        const typeText = member.type?.text;
         const typeReferenceName = member.type?.references?.[0]?.name;
 
-        // Determine the array status and boolean status
         const isArray = typeText?.endsWith('[]') || member.default === '[]';
         const isBoolean = typeText?.includes('boolean') || typeReferenceName === 'Boolean';
 

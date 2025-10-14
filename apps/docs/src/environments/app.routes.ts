@@ -43,5 +43,26 @@ export const ROUTES: Routes = [
         },
         loadChildren: () => import('@fundamental-ngx/docs/i18n')
     },
+    {
+        path: 'ui5-webcomponents',
+        data: {
+            library: 'Web Components Main'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents')
+    },
+    {
+        path: 'ui5-webcomponents-ai',
+        data: {
+            library: 'Web Components AI'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-ai')
+    },
+    {
+        path: 'ui5-webcomponents-fiori',
+        data: {
+            library: 'Web Components Fiori'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori')
+    },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];
