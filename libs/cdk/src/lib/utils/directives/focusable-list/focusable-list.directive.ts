@@ -123,6 +123,10 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     @Output()
     readonly itemFocused = new EventEmitter<FocusableListItemFocusedEvent>();
 
+    /** Event emitted when a focusable child element is focused. */
+    @Output()
+    readonly focusableChildElementFocused = new EventEmitter<void>();
+
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
     public readonly _projectedFocusableItems: QueryList<FocusableItemDirective>;
@@ -360,14 +364,16 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         this._focusableItems.changes
             .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
             .subscribe((items) =>
-                items.forEach(
-                    (item, index) =>
-                        (item._position = {
-                            ...this._gridPosition,
-                            colIndex: index,
-                            totalCols: this._focusableItems.length
-                        })
-                )
+                items.forEach((item: FocusableItemDirective, index) => {
+                    item._position = {
+                        ...this._gridPosition,
+                        colIndex: index,
+                        totalCols: this._focusableItems.length
+                    };
+                    item.focusableChildElementFocused.subscribe(() => {
+                        this.focusableChildElementFocused.emit();
+                    });
+                })
             );
     }
 

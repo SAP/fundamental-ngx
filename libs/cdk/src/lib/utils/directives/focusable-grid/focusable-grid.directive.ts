@@ -74,11 +74,12 @@ export class FocusableGridDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._focusableItems.changes
-            .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
-            .subscribe((items) => {
-                items.forEach((item) => {
-                    item.focusableChildElementFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this._focusableLists.changes
+            .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
+            .subscribe((lists) =>
+                lists.forEach((list, index) => {
+                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
+                    list.focusableChildElementFocused.subscribe(() => {
                         this._focusableItems.forEach((focusableItem) => {
                             // enable tab on all focusable/tabbable child elements
                             focusableItem._enableTabbableElements();
@@ -86,15 +87,7 @@ export class FocusableGridDirective implements AfterViewInit {
                             focusableItem.setTabbable(false, true);
                         });
                     });
-                });
-            });
-
-        this._focusableLists.changes
-            .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
-            .subscribe((lists) =>
-                lists.forEach((list, index) =>
-                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length })
-                )
+                })
             );
 
         this._focusableLists.changes
