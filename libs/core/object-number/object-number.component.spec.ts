@@ -99,4 +99,29 @@ describe('ObjectNumberComponent', () => {
         expect(srElement).toBeTruthy();
         expect(srElement.textContent).toEqual('coreObjectNumber.positive');
     });
+
+    describe('when interactive is true', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('interactive', true);
+            fixture.detectChanges();
+        });
+
+        it('should add an "fd-object-number--interactive" class', () => {
+            expect(component.elementRef.nativeElement.classList.contains('fd-object-number--interactive')).toBe(true);
+        });
+
+        it('should set tabindex on the host to 0', () => {
+            expect(component.elementRef.nativeElement.tabIndex).toBe(0);
+        });
+
+        it('should set role on the host to "button"', () => {
+            expect(component.elementRef.nativeElement.role).toBe('button');
+        });
+    });
+
+    it('should add an "fd-object-number--inverted" class when inverted is true', () => {
+        fixture.componentRef.setInput('inverted', true);
+        fixture.detectChanges();
+        expect(component.elementRef.nativeElement.classList.contains('fd-object-number--inverted')).toBe(true);
+    });
 });

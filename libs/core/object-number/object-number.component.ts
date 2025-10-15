@@ -1,5 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -20,7 +21,9 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     styleUrl: './object-number.component.scss',
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy()',
-        '[attr.aria-label]': 'ariaLabel()'
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.tabindex]': 'interactive() ? 0 : null',
+        '[attr.role]': 'interactive() ? "button" : null'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,6 +70,12 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     /** Aria label for the object number. */
     ariaLabel = input<Nullable<string>>(null);
 
+    /** Whether the object number is interactive */
+    interactive = input(false, { transform: booleanAttribute });
+
+    /** Whether the object number is inverted. */
+    inverted = input(false, { transform: booleanAttribute });
+
     /** @hidden */
     _numberPipeConfig = '';
 
@@ -84,6 +93,8 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
             'fd-object-number',
             this.large() ? 'fd-object-number--large' : '',
             this.status() ? `fd-object-number--${this.status()}` : '',
+            this.interactive() ? 'fd-object-number--interactive' : '',
+            this.inverted() ? 'fd-object-number--inverted' : '',
             this.class() ?? ''
         ];
     }
