@@ -94,10 +94,9 @@ describe('ObjectNumberComponent', () => {
     it('should add translated screen reader status text when status is set', () => {
         fixture.componentRef.setInput('status', 'positive');
         fixture.detectChanges();
-
-        const srElement = fixture.nativeElement.querySelector('.fd-object-number__sr-only');
-        expect(srElement).toBeTruthy();
-        expect(srElement.textContent).toEqual('coreObjectNumber.positive');
+        expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
+            'coreObjectNumber.positive'
+        );
     });
 
     describe('when interactive is true', () => {
