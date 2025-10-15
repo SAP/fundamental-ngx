@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { InteractivityChecker, LiveAnnouncer } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
@@ -70,6 +70,10 @@ export class FocusableItemDirective implements HasElementRef {
     @Output()
     readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
+    /** Event emitted when a focusable child element is focused. */
+    @Output()
+    readonly focusableChildElementFocused = new EventEmitter<void>();
+
     /** @hidden */
     public readonly _keydown$ = new Subject<KeyboardEvent>();
 
@@ -104,6 +108,8 @@ export class FocusableItemDirective implements HasElementRef {
     private readonly _renderer2 = inject(Renderer2);
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
+    /** @hidden */
+    private readonly _checker = inject(InteractivityChecker);
 
     /** @hidden */
     constructor() {
@@ -138,17 +144,27 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** Set tabbable state */
-    setTabbable(state: boolean): void {
+    setTabbable(state: boolean, parentOnly: boolean = false): void {
         this._zone.runOutsideAngular(() => {
             this._tabbable = state;
             this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
 
             if (state) {
                 this._enableTabbableElements();
-            } else {
+            } else if (!parentOnly) {
                 this._disableTabbableElements();
             }
         });
+    }
+
+    /** @hidden */
+    _enableTabbableElements(): void {
+        if (this._tabbableElements.size === 0) {
+            return;
+        }
+
+        this._tabbableElements.forEach((tabIndex, element) => (element.tabIndex = tabIndex));
+        this._tabbable = false;
     }
 
     /** @hidden */
@@ -170,6 +186,17 @@ export class FocusableItemDirective implements HasElementRef {
                 this._liveAnnouncer.clear();
                 await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
             }
+        }
+
+        const activeEl = this._document.activeElement as HTMLElement;
+
+        if (
+            activeEl &&
+            activeEl !== this.elementRef.nativeElement &&
+            this._checker.isFocusable(activeEl) &&
+            this._checker.isTabbable(activeEl)
+        ) {
+            this.focusableChildElementFocused.emit();
         }
     }
 
@@ -205,6 +232,8 @@ export class FocusableItemDirective implements HasElementRef {
 
             tabbableElement?.focus();
 
+            this.focusableChildElementFocused.emit();
+
             return;
         } else if (shouldFocusCell) {
             event.stopPropagation();
@@ -217,16 +246,6 @@ export class FocusableItemDirective implements HasElementRef {
         if (isFocused) {
             this._keydown$.next(event);
         }
-    }
-
-    /** @hidden */
-    private _enableTabbableElements(): void {
-        if (this._tabbableElements.size === 0) {
-            return;
-        }
-
-        this._tabbableElements.forEach((tabIndex, element) => (element.tabIndex = tabIndex));
-        this._tabbable = false;
     }
 
     /** @hidden */

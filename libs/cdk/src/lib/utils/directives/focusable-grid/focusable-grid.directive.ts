@@ -5,7 +5,7 @@ import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
-import { FocusableItemPosition } from '../focusable-item';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, FocusableItemPosition } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
 import { ScrollPosition } from '../focusable-list';
@@ -63,6 +63,10 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
+    private readonly _focusableItems: QueryList<FocusableItemDirective>;
+
+    /** @hidden */
     _preventKeydown = false;
 
     /** @hidden */
@@ -70,6 +74,21 @@ export class FocusableGridDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._focusableItems.changes
+            .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
+            .subscribe((items) => {
+                items.forEach((item) => {
+                    item.focusableChildElementFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                        this._focusableItems.forEach((focusableItem) => {
+                            // enable tab on all focusable/tabbable child elements
+                            focusableItem._enableTabbableElements();
+                            // disable tab on all parent grid items
+                            focusableItem.setTabbable(false, true);
+                        });
+                    });
+                });
+            });
+
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
             .subscribe((lists) =>
