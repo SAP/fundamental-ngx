@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
     coreAvatar: {
@@ -98,6 +97,13 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: '树项目 {itemDetails}，{index}，共 {total}{selectedDescription}'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
     },
     coreOverflowLayout: {
         moreItemsButton: '另外 {count} 个'

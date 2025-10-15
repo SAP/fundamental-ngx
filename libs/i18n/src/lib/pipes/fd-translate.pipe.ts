@@ -33,7 +33,15 @@ export class FdTranslatePipe implements PipeTransform {
     }
 
     /** Translate a key with arguments and, optionally, default value */
-    transform(key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
+    transform(
+        key: FdLanguageKeyIdentifier | null,
+        args?: FdLanguageKeyArgs | Record<string, any>,
+        defaultValue = ''
+    ): string {
+        if (!key) {
+            return defaultValue;
+        }
+
         this._key$.next(key);
         this._args$.next(args);
 
