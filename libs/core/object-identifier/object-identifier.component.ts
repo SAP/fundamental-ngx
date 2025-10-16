@@ -5,15 +5,15 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    HostBinding,
-    Input,
     QueryList,
     ViewEncapsulation,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_LINK_COMPONENT } from '@fundamental-ngx/core/link';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { startWith } from 'rxjs/operators';
 
 @Component({
@@ -22,38 +22,38 @@ import { startWith } from 'rxjs/operators';
         <p class="fd-object-identifier__title" [class.fd-object-identifier__title--bold]="bold">
             <ng-content></ng-content>
         </p>
-        @if (description) {
+        @if (description()) {
             <p class="fd-object-identifier__text">
-                {{ description }}
+                {{ description() }}
             </p>
         }
+        <span class="fd-object-identifier__sr-only">{{ 'coreObjectIdentifier.announcement' | fdTranslate }}</span>
     `,
     styleUrl: './object-identifier.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: []
+    host: {
+        '[class.fd-object-identifier--medium]': 'medium()',
+        '[class.fd-object-identifier]': 'objectIdentifierClass'
+    },
+    imports: [FdTranslatePipe]
 })
 export class ObjectIdentifierComponent implements AfterContentInit {
-    /** Description text */
-    @Input()
-    description: Nullable<string>;
-
-    /** Whether the title should be bolded */
-    @Input()
-    bold = false;
-
-    /** Whether the title is medium size */
-    @Input()
-    @HostBinding('class.fd-object-identifier--medium')
-    medium = false;
-
-    /** @hidden */
-    @HostBinding('class.fd-object-identifier')
-    objectIdentifierClass = true;
-
     /** @hidden */
     @ContentChildren(FD_LINK_COMPONENT, { read: ElementRef })
     linkComponents: QueryList<ElementRef>;
+
+    /** Description text */
+    description = input<Nullable<string>>();
+
+    /** Whether the title should be bolded */
+    bold = input<boolean>(false);
+
+    /** Whether the title is medium size */
+    medium = input<boolean>(false);
+
+    /** @hidden */
+    objectIdentifierClass = true;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);
