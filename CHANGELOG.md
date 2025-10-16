@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.27...v0.57.4-rc.28) (2025-10-16)
+
+
+### Bug Fixes
+
+* **core:** test scroll ([#13524](https://github.com/SAP/fundamental-ngx/issues/13524)) ([1f4948a](https://github.com/SAP/fundamental-ngx/commit/1f4948a9f24a0e6a09d328a6c0a80a398a512853))
+
+
+
+
+
 ## [0.57.4-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.26...v0.57.4-rc.27) (2025-10-16)
 
 
