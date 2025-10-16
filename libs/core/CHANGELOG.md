@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.26...v0.57.4-rc.27) (2025-10-16)
+
+
+### Bug Fixes
+
+* **core:** update Shellbar separator, branding spacings, inline padding ([#13522](https://github.com/SAP/fundamental-ngx/issues/13522)) ([4a45e39](https://github.com/SAP/fundamental-ngx/commit/4a45e3987b1ac4ef8ed6464da04604ca038c31a9))
+
+
+
+
+
 ## [0.57.4-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.25...v0.57.4-rc.26) (2025-10-09)
 
 
