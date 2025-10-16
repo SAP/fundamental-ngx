@@ -1,29 +1,29 @@
-@if (glyph) {
+@if (glyph()) {
     <fd-icon
         class="fd-object-status__icon"
-        [glyph]="glyph"
-        [font]="glyphFont"
-        [attr.role]="glyphAriaLabel ? 'presentation' : ''"
-        [ariaLabel]="glyphAriaLabel"
+        [glyph]="glyph()"
+        [font]="glyphFont()"
+        [attr.role]="glyphAriaLabel() ? 'presentation' : ''"
+        [ariaLabel]="glyphAriaLabel()"
     >
     </fd-icon>
 }
-@if (textTemplate) {
+@if (textTemplate()) {
     <span class="fd-object-status__text" [class]="_textClass">
-        <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="textTemplate()"></ng-template>
     </span>
 }
-@if (label) {
-    <span class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
+@if (label()) {
+    <span class="fd-object-status__text" [class]="_textClass">{{ label() }}</span>
 }
-@if (!clickable) {
+@if (!clickable()) {
     <span class="fd-object-status__sr-only">{{ 'coreObjectStatus.announcement' | fdTranslate }}</span>
 }
-@if (indicationColor) {
+@if (indicationColor()) {
     <span class="fd-object-status__sr-only">{{
         ('coreObjectStatus.indicationColor' | fdTranslate) + _indicationColorCode()
     }}</span>
 }
-@if (status) {
+@if (status()) {
     <span class="fd-object-status__sr-only">{{ _statusTranslateKey() | fdTranslate }}</span>
 }

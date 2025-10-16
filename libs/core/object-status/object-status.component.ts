@@ -7,7 +7,7 @@ import {
     DestroyRef,
     ElementRef,
     inject,
-    Input,
+    input,
     OnChanges,
     OnInit,
     signal,
@@ -43,86 +43,74 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         }
     ],
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : null',
-        '[attr.role]': 'clickable ? "button" : null',
-        '[attr.aria-roledescription]': 'clickable ? _ariaRoleDescription() : null'
+        '[attr.tabindex]': 'clickable() ? 0 : null',
+        '[attr.role]': 'clickable() ? "button" : null',
+        '[attr.aria-roledescription]': 'clickable() ? _ariaRoleDescription() : null'
     },
     imports: [IconComponent, NgTemplateOutlet, FdTranslatePipe]
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
-    @Input()
-    class: string;
+    class = input<string | undefined>('');
 
     /**
      * The status represented by the Object Status.
      * Can be one of the following: 'negative' | 'critical' | 'positive' | 'informative'
      * For default Object Status omit this property
      */
-    @Input()
-    status: Nullable<ObjectStatus>;
+    status = input<Nullable<ObjectStatus>>(null);
 
     /**
      * Glyph (icon) of the Object Status.
      */
-    @Input()
-    glyph: Nullable<string>;
+    glyph = input<Nullable<string>>(null);
 
     /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
     /** Define the text content of the Object Status */
-    @Input()
-    label: Nullable<string>;
+    label = input<Nullable<string>>(null);
 
     /**
      * Label applied to glyph element, should be used when there is no text included
      */
-    @Input()
-    glyphAriaLabel: string;
+    glyphAriaLabel = input<string>('');
 
     /**
      * A number representing the indication color.
      * For non-inverted state available numbers are from 1 to 8.
      * For inverted state available numbers are from 1 to 10.
      */
-    @Input()
-    indicationColor: Nullable<ColorAccent>;
+    indicationColor = input<Nullable<ColorAccent>>(null);
 
     /** Whether the Object Status is clickable. */
-    @Input()
-    clickable = false;
+    clickable = input<boolean>(false);
 
     /** Whether the Object Status is inverted. */
-    @Input({ transform: booleanAttribute })
-    inverted = false;
+    inverted = input(false, { transform: booleanAttribute });
 
     /** Whether the Object Status is in Large Design. */
-    @Input()
-    large = false;
+    large = input<boolean>(false);
 
     /** Whether to use secondary set of indication colors. */
-    @Input()
-    secondaryIndication = false;
+    secondaryIndication = input<boolean>(false);
 
     /**
      * Template reference for complex object status texts.
      */
-    @Input()
-    textTemplate: Nullable<TemplateRef<any>>;
+    textTemplate = input<Nullable<TemplateRef<any>>>(null);
 
     /** @hidden */
     _textClass: string;
 
     /** @hidden */
     _indicationColorCode = computed<string>(
-        () => ` ${this.indicationColor ?? ''}${this.secondaryIndication ? 'b' : ''}`
+        () => ` ${this.indicationColor() ?? ''}${this.secondaryIndication() ? 'b' : ''}`
     );
 
     /** @hidden */
     _statusTranslateKey = computed<FdLanguageKeyIdentifier | null>(() => {
-        switch (this.status) {
+        switch (this.status()) {
             case 'negative':
                 return 'coreObjectStatus.negative';
             case 'critical':
@@ -138,7 +126,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
 
     /** Whether the Object status is icon-only. */
     get iconOnly(): boolean {
-        return !this.label && !this.textTemplate;
+        return !this.label() && !this.textTemplate();
     }
 
     /** @hidden */
@@ -163,14 +151,22 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return buildObjectStatusCssClasses(this);
+        return buildObjectStatusCssClasses({
+            status: this.status(),
+            inverted: this.inverted(),
+            large: this.large(),
+            indicationColor: this.indicationColor(),
+            clickable: this.clickable(),
+            class: this.class(),
+            iconOnly: this.iconOnly,
+            secondaryIndication: this.secondaryIndication()
+        });
     }
 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
-
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
