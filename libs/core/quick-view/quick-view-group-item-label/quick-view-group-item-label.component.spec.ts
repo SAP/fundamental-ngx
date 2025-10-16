@@ -35,7 +35,5 @@ describe('QuickViewGroupItemLabelComponent', () => {
         const quickViewContainer = fixture.debugElement.query(By.css('label[fd-form-label]'));
 
         expect(quickViewContainer.nativeElement.classList).toContain('fd-form-label__wrapper');
-        expect(quickViewContainer.nativeElement.classList).toContain('fd-form-label__wrapper--inline-help');
-        expect(quickViewContainer.nativeElement.classList).toContain('fd-form-label__wrapper--inline-help--after');
     });
 });

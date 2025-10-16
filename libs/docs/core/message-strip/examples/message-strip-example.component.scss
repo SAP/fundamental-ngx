@@ -4,3 +4,8 @@ fd-message-strip {
 fd-message-strip:last-child {
     margin: 0;
 }
+
+.fd-link--emphasized {
+    text-decoration: none;
+    font-family: var(--sapFontBoldFamily);
+}

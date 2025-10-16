@@ -1,4 +1,4 @@
-import { ElementRef, InjectionToken, Provider, Type } from '@angular/core';
+import { ElementRef, InjectionToken, Provider, Type, WritableSignal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /** An injection token, that should be used with all controls, that can be put inside `fd-form-item` */
@@ -17,4 +17,5 @@ export function registerFormItemControl(control: Type<FormItemControl>): Provide
 export interface FormItemControl {
     ariaLabelledBy: Nullable<string>;
     elmRef?: ElementRef;
+    formItemAriaDescribedBy?: WritableSignal<Nullable<string>>;
 }

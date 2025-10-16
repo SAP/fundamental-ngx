@@ -27,7 +27,6 @@ $form-label-bottom-spacing: 0.125rem;
 
     &__inline-help {
         position: relative;
-        top: 0.125rem;
     }
 
     &--allow-wrap {
@@ -65,6 +64,12 @@ $form-label-bottom-spacing: 0.125rem;
                 padding-right: 0;
                 padding-left: $form-label-inline-help-placement-space;
             }
+        }
+    }
+
+    &:has(.fd-form-label__inline-help) {
+        .fd-form-label {
+            margin-inline-end: 0;
         }
     }
 }
