@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreAvatar: {
@@ -99,6 +98,9 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {index} จาก {total}{selectedDescription} รายการ'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
     },
     coreOverflowLayout: {
         moreItemsButton: 'อีก {count} รายการ'

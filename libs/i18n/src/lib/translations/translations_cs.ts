@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     coreAvatar: {
@@ -99,6 +98,9 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'Položka stromu {itemDetails}, {index} z {total}{selectedDescription}'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
     },
     coreOverflowLayout: {
         moreItemsButton: 'další(ch) {count}'

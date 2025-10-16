@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreAvatar: {
@@ -100,6 +99,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel:
             '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {įŋƌēχ} ŏƒ {ţŏţąĺ}{şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
     },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'

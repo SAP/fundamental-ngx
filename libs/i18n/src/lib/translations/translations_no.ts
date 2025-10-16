@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_no.properties instead
 export default {
     coreAvatar: {
@@ -99,6 +98,9 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'Treelement {itemDetails}, {index} av {total}{selectedDescription}'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} mer'

@@ -75,6 +75,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreNavigation.mainNavigation'
     | 'coreNavigation.navigationPath'
     | 'coreNestedList.linkItemAriaLabel'
+    | 'coreObjectIdentifier.announcement'
     | 'coreOverflowLayout.moreItemsButton'
     | 'corePagination.pageLabel'
     | 'corePagination.currentPageAriaLabel'

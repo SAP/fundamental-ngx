@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreAvatar: {
@@ -99,6 +98,9 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: '{itemDetails} struktúraelem, indexszáma {index} a(z) {total}{selectedDescription} elemből'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
     },
     coreOverflowLayout: {
         moreItemsButton: 'További {count}'

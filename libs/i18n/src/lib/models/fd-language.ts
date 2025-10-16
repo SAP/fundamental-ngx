@@ -158,6 +158,9 @@ export interface FdLanguage {
             selectedDescription: string;
         }>;
     };
+    coreObjectIdentifier: {
+        announcement: FdLanguageKey;
+    };
     coreOverflowLayout: {
         /** @param count */
         moreItemsButton: FdLanguageKey<{ count: number }>;

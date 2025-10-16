@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectIdentifierComponent } from './object-identifier.component';
 
@@ -68,5 +69,12 @@ describe('ObjectIdentifierComponent', () => {
     it('Should add class to fd-link', () => {
         fixture.detectChanges();
         expect(testComponent.linkElementRef.nativeElement.classList.contains('fd-object-identifier__link')).toBe(true);
+    });
+
+    it('should add a screen reader text', () => {
+        fixture.detectChanges();
+        expect(fixture.debugElement.query(By.css('.fd-object-identifier__sr-only')).nativeElement.textContent).toBe(
+            'Object Identifier'
+        );
     });
 });
