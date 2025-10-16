@@ -186,6 +186,8 @@
     max-width: 100%;
     white-space: normal;
     color: var(--sapContent_LabelColor);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 .fd-user-menu__user-info::before,
 .fd-user-menu__user-info::after,
@@ -399,6 +401,8 @@
     border: 0;
     width: 100%;
     max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     font-style: normal;
     line-height: normal;
     white-space: normal;
@@ -492,6 +496,7 @@ fd-user-menu-control:is(:focus) {
     width: 20rem;
     min-width: 20rem;
     max-width: 20rem;
+    padding-block: 0.5rem;
 }
 
 .fd-user-menu__body:has(.fd-user-menu__details-view) {
@@ -506,4 +511,40 @@ fd-user-menu-control:is(:focus) {
     width: 20rem;
     min-width: 20rem;
     max-width: 20rem;
+}
+
+.fd-user-menu__scroll-header {
+    top: 0;
+    z-index: 10;
+    width: 20rem;
+    min-width: 20rem;
+    max-width: 20rem;
+    position: sticky;
+    background: var(--sapPageHeader_Background);
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-0.5rem);
+    }
+}
+
+.fd-user-menu__scroll-header-element {
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-0.5rem);
+    }
+}
+
+fd-user-menu-footer {
+    position: sticky;
+    bottom: 0;
 }
