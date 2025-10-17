@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreAvatar: {
@@ -99,6 +98,15 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'Елемент дерева {itemDetails}, {index} з {total}{selectedDescription}'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Ще {count}'

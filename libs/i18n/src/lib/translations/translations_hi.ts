@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
     coreAvatar: {
@@ -98,6 +97,15 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'ट्री वस्तु {itemDetails}, {index} का {total}{selectedDescription}'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} अधिक'
