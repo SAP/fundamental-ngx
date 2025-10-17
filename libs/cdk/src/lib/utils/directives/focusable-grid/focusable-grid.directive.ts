@@ -1,11 +1,20 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import {
+    AfterViewInit,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList
+} from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
-import { FocusableItemPosition } from '../focusable-item';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, FocusableItemPosition } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
 import { ScrollPosition } from '../focusable-list';
@@ -63,13 +72,38 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
+    private readonly _focusableItems: QueryList<FocusableItemDirective>;
+
+    /** @hidden */
     _preventKeydown = false;
 
     /** @hidden */
-    constructor(private readonly _destroy$: DestroyedService) {}
+    constructor(private readonly _destroy$: DestroyedService, private readonly _elRef: ElementRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._focusableItems.changes
+            .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
+            .subscribe((items) => {
+                items.forEach((item: FocusableItemDirective) => {
+                    item.focusableChildElementFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                        this._focusableItems.forEach((focusableItem) => {
+                            focusableItem.setTabbable(false);
+                            focusableItem.enableTabbableElements();
+                        });
+                    });
+                    item._parentFocusableItemFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                        this._focusableItems.forEach((focusableItem) => {
+                            if (item !== focusableItem) {
+                                focusableItem.disableTabbableElements();
+                            } else {
+                                focusableItem.enableTabbableElements();
+                            }
+                        });
+                    });
+                });
+            });
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
             .subscribe((lists) =>
