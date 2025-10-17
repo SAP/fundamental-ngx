@@ -195,6 +195,10 @@ module.exports = pluginTs.config(
                                 'scope:cx',
                                 'scope:cdk'
                             ]
+                        },
+                        {
+                            sourceTag: 'scope:ui5',
+                            onlyDependOnLibsWithTags: ['scope:ui5', 'scope:cdk']
                         }
                     ]
                 }
