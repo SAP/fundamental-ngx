@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
     coreAvatar: {
@@ -73,6 +72,10 @@ export default {
         listItemStatusContainsErrors: 'Қателері бар',
         listItemStatusLocked: 'Құлыпталды',
         listItemStatusDraft: 'Нобай'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: 'Бас тарту',

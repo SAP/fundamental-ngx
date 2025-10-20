@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreAvatar: {
@@ -73,6 +72,10 @@ export default {
         listItemStatusContainsErrors: 'エラーあり',
         listItemStatusLocked: 'ロック済み',
         listItemStatusDraft: 'ドラフト'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: '無視',

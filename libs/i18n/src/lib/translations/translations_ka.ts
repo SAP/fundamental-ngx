@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
     coreAvatar: {
@@ -72,6 +71,10 @@ export default {
         listItemStatusContainsErrors: 'შეიცავს შეცდომებს',
         listItemStatusLocked: 'დაბლოკილი',
         listItemStatusDraft: 'დაუსრულებელი'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: 'გაუქმება',

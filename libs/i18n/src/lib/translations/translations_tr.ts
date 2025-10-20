@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreAvatar: {
@@ -73,6 +72,10 @@ export default {
         listItemStatusContainsErrors: 'Hata içeriyor',
         listItemStatusLocked: 'Kilitli',
         listItemStatusDraft: 'Taslak'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: 'Yoksay',

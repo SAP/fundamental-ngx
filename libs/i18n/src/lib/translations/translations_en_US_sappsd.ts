@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreAvatar: {
@@ -73,6 +72,10 @@ export default {
         listItemStatusContainsErrors: '[[[Ĉŏŋţąįŋş ēŗŗŏŗş∙∙∙∙]]]',
         listItemStatusLocked: '[[[Ļŏċķēƌ∙∙∙∙∙∙∙∙]]]',
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: '[[[Ďįşɱįşş∙∙∙∙∙∙∙]]]',

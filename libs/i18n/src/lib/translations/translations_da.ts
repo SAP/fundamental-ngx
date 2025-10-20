@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
     coreAvatar: {
@@ -73,6 +72,10 @@ export default {
         listItemStatusContainsErrors: 'Indeholder fejl',
         listItemStatusLocked: 'Låst',
         listItemStatusDraft: 'Udkast'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: 'Afvis',

@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
     coreAvatar: {
@@ -72,6 +71,10 @@ export default {
         listItemStatusContainsErrors: 'इसमें गलतियां हैं',
         listItemStatusLocked: 'बंद',
         listItemStatusDraft: 'प्रालेख'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: 'खारिज करें',

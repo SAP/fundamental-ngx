@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sq.properties instead
 export default {
     coreAvatar: {
@@ -72,6 +71,10 @@ export default {
         listItemStatusContainsErrors: 'Përmban gabime.',
         listItemStatusLocked: 'I kyçur',
         listItemStatusDraft: 'Draft'
+    },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
     },
     coreMessageStrip: {
         dismissLabel: 'Largoje',

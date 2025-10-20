@@ -58,6 +58,8 @@ export type FdLanguageKeyIdentifier =
     | 'coreGridList.listItemStatusContainsErrors'
     | 'coreGridList.listItemStatusLocked'
     | 'coreGridList.listItemStatusDraft'
+    | 'coreLink.emphasized'
+    | 'coreLink.subtle'
     | 'coreMessageStrip.dismissLabel'
     | 'coreMessageStrip.announcementInfo'
     | 'coreMessageStrip.announcementWarning'
