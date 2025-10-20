@@ -5,6 +5,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     template: `<ng-content />`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fd-user-menu__footer'
+    },
     imports: []
 })
 export class UserMenuFooterComponent {}

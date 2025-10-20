@@ -17,7 +17,7 @@ import {
     viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     BarComponent,
     BarElementDirective,
@@ -46,7 +46,8 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
         BarLeftDirective,
         BarRightDirective,
         ButtonBarComponent,
-        BarElementDirective
+        BarElementDirective,
+        InitialFocusDirective
     ],
     providers: [contentDensityObserverProviders()]
 })
@@ -146,7 +147,7 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
             (entries) => {
                 this.isUserNameVisible.set(entries[0].isIntersecting);
             },
-            { root: null, threshold: 1, rootMargin: '-20px 0px 0px 0px' }
+            { root: null, threshold: 0 }
         );
 
         intersectionObserver.observe(el);

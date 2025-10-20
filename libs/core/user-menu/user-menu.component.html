@@ -5,21 +5,29 @@
         [focusAutoCapture]="true"
         [restoreFocusOnClose]="true"
         [focusTrapped]="true"
+        [disableScrollbar]="true"
     >
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="control"></ng-container>
         </fd-popover-control>
         <fd-popover-body fd-user-menu-popover-control>
-            <div
-                class="fd-user-menu__scroll-header"
-                [class.hidden]="isUserNameVisible()"
-                role="presentation"
-                aria-hidden="true"
-            >
-                <ng-container *ngTemplateOutlet="header"></ng-container>
+            <div class="fd-user-menu__popover-wrapper">
+                <div
+                    fd-popover-body-header
+                    class="fd-user-menu__scroll-header"
+                    [class.hidden]="isUserNameVisible()"
+                    role="presentation"
+                    aria-hidden="true"
+                >
+                    <ng-container *ngTemplateOutlet="header"></ng-container>
+                </div>
+
+                <ng-container *ngTemplateOutlet="body"></ng-container>
+
+                <div fd-popover-body-footer>
+                    <ng-container *ngTemplateOutlet="footer"></ng-container>
+                </div>
             </div>
-            <ng-container *ngTemplateOutlet="body"></ng-container>
-            <ng-container *ngTemplateOutlet="footer"></ng-container>
         </fd-popover-body>
     </fd-popover>
 } @else {
@@ -29,16 +37,24 @@
 
     <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
         <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-            <fd-dialog-body style="padding: 0">
+            <fd-dialog-header>
                 @if (userMenuBody()?.bodyHeader()) {
-                    <ng-container
-                        *ngTemplateOutlet="userMenuBody()?.bodyHeader() ?? null; context: { dialogRef: dialog }"
-                    >
-                    </ng-container>
+                    <ng-template fdkTemplate="header">
+                        <ng-container
+                            *ngTemplateOutlet="userMenuBody()?.bodyHeader() ?? null; context: { dialogRef: dialog }"
+                        >
+                        </ng-container>
+                    </ng-template>
                 }
+            </fd-dialog-header>
+            <fd-dialog-body style="padding: 0">
                 <ng-container *ngTemplateOutlet="body"></ng-container>
-                <ng-container *ngTemplateOutlet="footer"></ng-container>
             </fd-dialog-body>
+            <fd-dialog-footer>
+                <ng-template fdkTemplate="customFooter">
+                    <ng-container *ngTemplateOutlet="footer"></ng-container>
+                </ng-template>
+            </fd-dialog-footer>
         </fd-dialog>
     </ng-template>
 }
