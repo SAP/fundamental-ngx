@@ -1,6 +1,15 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import {
+    AfterViewInit,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList
+} from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
@@ -66,17 +75,40 @@ export class FocusableGridDirective implements AfterViewInit {
     _preventKeydown = false;
 
     /** @hidden */
-    constructor(private readonly _destroy$: DestroyedService) {}
+    constructor(private readonly _destroy$: DestroyedService, private readonly _elRef: ElementRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
-            .subscribe((lists) =>
-                lists.forEach((list, index) =>
-                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length })
-                )
-            );
+            .subscribe((lists) => {
+                lists.forEach((list, index) => {
+                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
+                    list._focusableItems.changes.pipe(takeUntil(this._destroy$)).subscribe((items) => {
+                        items.forEach((item) => {
+                            item.focusableChildElementFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                                this._focusableLists.forEach((focusableList) => {
+                                    focusableList._focusableItems.forEach((focusableItem) => {
+                                        focusableItem.setTabbable(false);
+                                        focusableItem.enableTabbableElements();
+                                    });
+                                });
+                            });
+                            item._parentFocusableItemFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                                this._focusableLists.forEach((focusableList) => {
+                                    focusableList._focusableItems.forEach((focusableItem) => {
+                                        if (item !== focusableItem) {
+                                            focusableItem.disableTabbableElements();
+                                        } else {
+                                            focusableItem.enableTabbableElements();
+                                        }
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
 
         this._focusableLists.changes
             .pipe(

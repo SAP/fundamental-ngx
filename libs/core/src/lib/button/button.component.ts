@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 import { FD_BUTTON_COMPONENT } from './tokens';
@@ -47,8 +47,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
             provide: FD_BUTTON_COMPONENT,
             useExisting: ButtonComponent
         }
-    ],
-    hostDirectives: [FocusableItemDirective]
+    ]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */
