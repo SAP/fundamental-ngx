@@ -15,6 +15,7 @@ import {
     Self,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     inject,
     input
 } from '@angular/core';
@@ -63,25 +64,25 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     contentSpan: ElementRef<HTMLSpanElement>;
 
     /** user's custom classes */
-    class = input<string | undefined>('');
+    class = input<string>();
 
     /** Whether user wants to use emphasized mode */
-    emphasized = input<boolean>(false);
+    emphasized = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to put disabled mode */
-    disabled = input<boolean>(false);
+    disabled = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to use inverted mode */
-    inverted = input<boolean>(false);
+    inverted = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to use subtle mode */
-    subtle = input<boolean>(false);
+    subtle = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to have a link without underline decoration */
-    undecorated = input<boolean>(false);
+    undecorated = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to have a larger touch target */
-    touchTarget = input<boolean>(false);
+    touchTarget = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     _prefixPortal: Portal<any> | null;
