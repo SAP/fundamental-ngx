@@ -25,5 +25,9 @@
     }}</span>
 }
 @if (status()) {
-    <span class="fd-object-status__sr-only">{{ _statusTranslateKey() | fdTranslate }}</span>
+    @if (statusMessage()) {
+        <span class="fd-object-status__sr-only">{{ statusMessage() }}</span>
+    } @else {
+        <span class="fd-object-status__sr-only">{{ _statusTranslateKey() | fdTranslate }}</span>
+    }
 }

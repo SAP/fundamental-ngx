@@ -38,6 +38,7 @@ export const FD_LANGUAGE = new InjectionToken<any>('FD_LANGUAGE');
             [clickable]="clickable"
             [inverted]="inverted"
             [large]="large"
+            [statusMessage]="statusMessage"
         >
         </span>
     `,
@@ -55,6 +56,7 @@ class TestObjectStatusComponent {
     clickable: boolean;
     inverted: boolean;
     large: boolean;
+    statusMessage: string;
 }
 
 describe('ObjectStatusComponent', () => {
@@ -103,10 +105,22 @@ describe('ObjectStatusComponent', () => {
             expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--positive')).toBe(true);
         });
 
-        it('should add a status screen reader text', () => {
-            expect(
-                fixture.debugElement.queryAll(By.css('.fd-object-status__sr-only'))[1].nativeElement.textContent
-            ).toBe('coreObjectStatus.positive');
+        describe('when no statusMessage is provided', () => {
+            it('should add default translated screen reader status text', () => {
+                expect(
+                    fixture.debugElement.queryAll(By.css('.fd-object-status__sr-only'))[1].nativeElement.textContent
+                ).toBe('coreObjectStatus.positive');
+            });
+        });
+
+        describe('when statusMessage is provided', () => {
+            it('should add the provided statusMessage as screen reader text', () => {
+                testComponent.statusMessage = 'Custom status message';
+                fixture.detectChanges();
+                expect(
+                    fixture.debugElement.queryAll(By.css('.fd-object-status__sr-only'))[1].nativeElement.textContent
+                ).toEqual('Custom status message');
+            });
         });
     });
 

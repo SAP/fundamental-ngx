@@ -51,7 +51,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
-    class = input<string | undefined>('');
+    class = input<string>();
 
     /**
      * The status represented by the Object Status.
@@ -59,6 +59,9 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * For default Object Status omit this property
      */
     status = input<Nullable<ObjectStatus>>(null);
+
+    /** An optional status message for the Object Status. */
+    statusMessage = input<Nullable<string>>(null);
 
     /**
      * Glyph (icon) of the Object Status.
@@ -84,21 +87,24 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     indicationColor = input<Nullable<ColorAccent>>(null);
 
     /** Whether the Object Status is clickable. */
-    clickable = input<boolean>(false);
+    clickable = input(false, { transform: booleanAttribute });
 
     /** Whether the Object Status is inverted. */
     inverted = input(false, { transform: booleanAttribute });
 
     /** Whether the Object Status is in Large Design. */
-    large = input<boolean>(false);
+    large = input(false, { transform: booleanAttribute });
 
     /** Whether to use secondary set of indication colors. */
-    secondaryIndication = input<boolean>(false);
+    secondaryIndication = input(false, { transform: booleanAttribute });
 
     /**
      * Template reference for complex object status texts.
      */
     textTemplate = input<Nullable<TemplateRef<any>>>(null);
+
+    /** Aria role description for the object status. */
+    ariaRoleDescription = input<string>('');
 
     /** @hidden */
     _textClass: string;
@@ -175,16 +181,20 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
 
     /** @hidden */
     private _setAriaRoleDescription(): void {
-        this._lang$
-            .pipe(
-                takeUntilDestroyed(this._destroyRef),
-                map((lang: FdLanguage) =>
-                    this._translationResolver.resolve(lang, 'coreObjectStatus.ariaRoleDescription')
+        if (this.ariaRoleDescription()) {
+            this._ariaRoleDescription.set(this.ariaRoleDescription());
+        } else {
+            this._lang$
+                .pipe(
+                    takeUntilDestroyed(this._destroyRef),
+                    map((lang: FdLanguage) =>
+                        this._translationResolver.resolve(lang, 'coreObjectStatus.ariaRoleDescription')
+                    )
                 )
-            )
-            .subscribe((res) => {
-                this._ariaRoleDescription.set(res);
-            });
+                .subscribe((res) => {
+                    this._ariaRoleDescription.set(res);
+                });
+        }
     }
 }
 
