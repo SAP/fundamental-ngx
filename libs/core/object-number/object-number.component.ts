@@ -44,13 +44,16 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     unit = input<string>('');
 
     /** Set the value to true to display the object number in bold text */
-    emphasized = input<boolean>(false);
+    emphasized = input(false, { transform: booleanAttribute });
 
     /** Set the value to true to display the object number in large text */
-    large = input<boolean>(false);
+    large = input(false, { transform: booleanAttribute });
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
     status = input<ObjectStatus | null>(null);
+
+    /** An optional status message for the object number */
+    statusMessage = input<string>();
 
     /** Status key to translate for screen readers */
     statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
@@ -62,7 +65,7 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     });
 
     /** User's custom classes */
-    class = input<string | undefined>('');
+    class = input<string>();
 
     /** Id of the element that labels object number. */
     ariaLabelledBy = input<Nullable<string>>(null);

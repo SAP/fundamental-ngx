@@ -49,12 +49,6 @@ describe('ObjectNumberComponent', () => {
         expect(component.elementRef.nativeElement.classList.contains('fd-object-number--large')).toBe(true);
     });
 
-    it('should add status', () => {
-        fixture.componentRef.setInput('status', 'positive');
-        fixture.detectChanges();
-        expect(component.elementRef.nativeElement.classList.contains('fd-object-number--positive')).toBe(true);
-    });
-
     it('should add custom class', () => {
         fixture.componentRef.setInput('class', 'custom-class');
         fixture.detectChanges();
@@ -91,12 +85,33 @@ describe('ObjectNumberComponent', () => {
         );
     });
 
-    it('should add translated screen reader status text when status is set', () => {
-        fixture.componentRef.setInput('status', 'positive');
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
-            'coreObjectNumber.positive'
-        );
+    describe('when status is set', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('status', 'positive');
+            fixture.detectChanges();
+        });
+
+        it('should add the correct status class', () => {
+            expect(component.elementRef.nativeElement.classList.contains('fd-object-number--positive')).toBe(true);
+        });
+
+        describe('when no statusMessage is provided', () => {
+            it('should add default translated screen reader status text', () => {
+                expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
+                    'coreObjectNumber.positive'
+                );
+            });
+        });
+
+        describe('when statusMessage is provided', () => {
+            it('should add the provided statusMessage as screen reader text', () => {
+                fixture.componentRef.setInput('statusMessage', 'Custom status message');
+                fixture.detectChanges();
+                expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
+                    'Custom status message'
+                );
+            });
+        });
     });
 
     describe('when interactive is true', () => {

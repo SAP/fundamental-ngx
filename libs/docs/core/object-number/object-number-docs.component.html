@@ -7,10 +7,20 @@
 <separator></separator>
 
 <fd-docs-section-title id="status" componentName="object-number"> Object Number Status </fd-docs-section-title>
-<description
-    >The <code>status</code> option can be set to positive, informative, critical and negative. If you omit this
-    property the default status will be applied.</description
->
+<description>
+    <p>
+        The <code>status</code> option can be set to positive, informative, critical and negative. If you omit this
+        property the default status will be applied.
+    </p>
+    <p>
+        When a status is passed, the corresponding styles will be applied to the component and a screen reader text will
+        be added - "Value State Success", "Value State Information", "Value State Warning", "Value State Error".
+    </p>
+    <p>
+        If you wish to provide a custom screen reader text, you could do it by passing an optional
+        <code>statusMessage</code>.
+    </p>
+</description>
 <component-example>
     <fd-object-number-status-example></fd-object-number-status-example>
 </component-example>

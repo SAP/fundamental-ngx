@@ -6,5 +6,9 @@
     <span class="fd-object-number__sr-only">{{ 'coreObjectNumber.emphasized' | fdTranslate }}</span>
 }
 @if (status()) {
-    <span class="fd-object-number__sr-only">{{ statusKey() | fdTranslate }}</span>
+    @if (statusMessage()) {
+        <span class="fd-object-number__sr-only">{{ statusMessage() }}</span>
+    } @else {
+        <span class="fd-object-number__sr-only">{{ statusKey() | fdTranslate }}</span>
+    }
 }
