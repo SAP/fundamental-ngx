@@ -16,10 +16,12 @@ import { FD_LINK_COMPONENT } from '@fundamental-ngx/core/link';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { startWith } from 'rxjs/operators';
 
+let objIdentifierId = 0;
+
 @Component({
     selector: 'fd-object-identifier',
     template: `
-        <p class="fd-object-identifier__title" [class.fd-object-identifier__title--bold]="bold">
+        <p class="fd-object-identifier__title" [class.fd-object-identifier__title--bold]="bold()">
             <ng-content></ng-content>
         </p>
         @if (description()) {
@@ -27,7 +29,9 @@ import { startWith } from 'rxjs/operators';
                 {{ description() }}
             </p>
         }
-        <span class="fd-object-identifier__sr-only">{{ 'coreObjectIdentifier.announcement' | fdTranslate }}</span>
+        <span class="fd-object-identifier__sr-only" [id]="id()">{{
+            'coreObjectIdentifier.announcement' | fdTranslate
+        }}</span>
     `,
     styleUrl: './object-identifier.component.scss',
     encapsulation: ViewEncapsulation.None,
@@ -42,6 +46,12 @@ export class ObjectIdentifierComponent implements AfterContentInit {
     /** @hidden */
     @ContentChildren(FD_LINK_COMPONENT, { read: ElementRef })
     linkComponents: QueryList<ElementRef>;
+
+    /**
+     * obj identifier id
+     * if not set, a default value is provided
+     */
+    id = input('fd-obj-identifier-id-' + ++objIdentifierId);
 
     /** Description text */
     description = input<Nullable<string>>();
@@ -65,13 +75,21 @@ export class ObjectIdentifierComponent implements AfterContentInit {
 
     /** @hidden */
     private _listenOnLinkQueryChange(): void {
-        this.linkComponents.changes
-            .pipe(startWith(0), takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => this.linkComponents.forEach((link) => this._addIdentifierClass(link)));
+        this.linkComponents.changes.pipe(startWith(0), takeUntilDestroyed(this._destroyRef)).subscribe(() =>
+            this.linkComponents.forEach((link) => {
+                this._addIdentifierClass(link);
+                this._addAriaDescribedBy(link);
+            })
+        );
     }
 
     /** @hidden */
     private _addIdentifierClass(link: ElementRef): void {
         link.nativeElement.classList.add('fd-object-identifier__link');
+    }
+
+    /** @hidden */
+    private _addAriaDescribedBy(link: ElementRef): void {
+        link.nativeElement.setAttribute('aria-describedby', this.id());
     }
 }
