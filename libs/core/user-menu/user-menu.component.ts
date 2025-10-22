@@ -22,10 +22,16 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { KeyboardSupportService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyboardSupportService, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-
-import { DialogBodyComponent, DialogComponent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
@@ -55,7 +61,10 @@ import { UserMenuUserNameDirective } from './directives/user-menu-user-name.dire
         PopoverBodyComponent,
         PopoverControlComponent,
         DialogComponent,
-        DialogBodyComponent
+        DialogBodyComponent,
+        DialogFooterComponent,
+        DialogHeaderComponent,
+        TemplateDirective
     ],
     providers: [KeyboardSupportService, contentDensityObserverProviders()]
 })
@@ -154,7 +163,7 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
             (entries) => {
                 this.isUserNameVisible.set(entries[0].isIntersecting);
             },
-            { root: null, threshold: 1, rootMargin: '-20px 0px 0px 0px' }
+            { root: null, threshold: 0, rootMargin: '-20px 0px 0px 0px' }
         );
 
         intersectionObserver.observe(el);
