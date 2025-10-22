@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Lukittu',
         listItemStatusDraft: 'Luonnos'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Hylkää',
         announcementInfo: 'Information Message Strip',

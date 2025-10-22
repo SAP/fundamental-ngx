@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Blocat',
         listItemStatusDraft: 'Schiță'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Respingere',
         announcementInfo: 'Information Message Strip',

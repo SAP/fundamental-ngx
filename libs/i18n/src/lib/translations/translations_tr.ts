@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Kilitli',
         listItemStatusDraft: 'Taslak'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Yoksay',
         announcementInfo: 'Information Message Strip',

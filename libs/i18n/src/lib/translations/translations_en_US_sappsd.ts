@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: '[[[Ļŏċķēƌ∙∙∙∙∙∙∙∙]]]',
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: '[[[Ďįşɱįşş∙∙∙∙∙∙∙]]]',
         announcementInfo: 'Information Message Strip',

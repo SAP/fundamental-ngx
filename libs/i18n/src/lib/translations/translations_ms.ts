@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Dikunci',
         listItemStatusDraft: 'Draf'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Tolak',
         announcementInfo: 'Information Message Strip',

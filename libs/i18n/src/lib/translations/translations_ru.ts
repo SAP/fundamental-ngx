@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Заблокировано',
         listItemStatusDraft: 'Черновик'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Игнорировать',
         announcementInfo: 'Information Message Strip',

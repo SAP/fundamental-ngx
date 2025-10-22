@@ -8,7 +8,6 @@ import {
     DestroyRef,
     ElementRef,
     Inject,
-    Input,
     OnChanges,
     OnInit,
     Optional,
@@ -16,12 +15,15 @@ import {
     Self,
     ViewChild,
     ViewEncapsulation,
-    inject
+    booleanAttribute,
+    inject,
+    input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { map, startWith, tap } from 'rxjs';
 import { FD_LINK_COMPONENT } from './tokens';
 
@@ -47,7 +49,10 @@ import { FD_LINK_COMPONENT } from './tokens';
             ]
         }
     ],
-    imports: [PortalModule]
+    host: {
+        '[attr.aria-disabled]': 'disabled() ? true : false'
+    },
+    imports: [PortalModule, FdTranslatePipe]
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit {
     /** @hidden */
@@ -59,28 +64,25 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     contentSpan: ElementRef<HTMLSpanElement>;
 
     /** user's custom classes */
-    @Input()
-    class: string;
+    class = input<string>();
 
     /** Whether user wants to use emphasized mode */
-    @Input()
-    emphasized: boolean;
+    emphasized = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to put disabled mode */
-    @Input()
-    disabled: boolean;
+    disabled = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to use inverted mode */
-    @Input()
-    inverted: boolean;
+    inverted = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to use subtle mode */
-    @Input()
-    subtle: boolean;
+    subtle = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to have a link without underline decoration */
-    @Input()
-    undecorated: boolean;
+    undecorated = input(false, { transform: booleanAttribute });
+
+    /** Whether user wants to have a larger touch target */
+    touchTarget = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     _prefixPortal: Portal<any> | null;
@@ -112,12 +114,13 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     buildComponentCssClass(): string[] {
         return [
             'fd-link',
-            this.emphasized ? 'fd-link--emphasized' : '',
-            this.disabled ? 'is-disabled' : '',
-            this.inverted ? `fd-link--inverted` : '',
-            this.subtle ? 'fd-link--subtle' : '',
-            this.undecorated ? 'fd-link--undecorated' : '',
-            this.class
+            this.emphasized() ? 'fd-link--emphasized' : '',
+            this.disabled() ? 'is-disabled' : '',
+            this.inverted() ? `fd-link--inverted` : '',
+            this.subtle() ? 'fd-link--subtle' : '',
+            this.undecorated() ? 'fd-link--undecorated' : '',
+            this.touchTarget() ? 'fd-link--touch-target' : '',
+            this.class() ?? ''
         ];
     }
 

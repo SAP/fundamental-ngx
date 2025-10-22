@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Zárolva',
         listItemStatusDraft: 'Vázlat'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Elvetés',
         announcementInfo: 'Information Message Strip',

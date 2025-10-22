@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Κλειδωμένο',
         listItemStatusDraft: 'Πρόχειρο'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Παράβλεψη',
         announcementInfo: 'Information Message Strip',

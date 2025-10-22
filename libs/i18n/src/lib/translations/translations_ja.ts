@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'ロック済み',
         listItemStatusDraft: 'ドラフト'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: '無視',
         announcementInfo: 'Information Message Strip',

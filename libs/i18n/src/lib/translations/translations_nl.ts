@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Vergrendeld',
         listItemStatusDraft: 'Concept'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Afwijzen',
         announcementInfo: 'Information Message Strip',

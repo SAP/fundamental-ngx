@@ -72,6 +72,10 @@ export default {
         listItemStatusLocked: 'बंद',
         listItemStatusDraft: 'प्रालेख'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'खारिज करें',
         announcementInfo: 'Information Message Strip',

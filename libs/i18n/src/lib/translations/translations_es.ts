@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Bloqueado',
         listItemStatusDraft: 'Borrador'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Descartar',
         announcementInfo: 'Information Message Strip',

@@ -72,6 +72,10 @@ export default {
         listItemStatusLocked: 'დაბლოკილი',
         listItemStatusDraft: 'დაუსრულებელი'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'გაუქმება',
         announcementInfo: 'Information Message Strip',

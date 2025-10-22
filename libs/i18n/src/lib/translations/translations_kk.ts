@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Құлыпталды',
         listItemStatusDraft: 'Нобай'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Бас тарту',
         announcementInfo: 'Information Message Strip',

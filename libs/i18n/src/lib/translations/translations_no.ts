@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Sperret',
         listItemStatusDraft: 'Utkast'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Avvis',
         announcementInfo: 'Information Message Strip',

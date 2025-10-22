@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'נעול',
         listItemStatusDraft: 'טיוטה'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'בטל',
         announcementInfo: 'Information Message Strip',

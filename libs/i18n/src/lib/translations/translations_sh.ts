@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'Zaključano',
         listItemStatusDraft: 'Nacrt'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Odbaci',
         announcementInfo: 'Information Message Strip',
