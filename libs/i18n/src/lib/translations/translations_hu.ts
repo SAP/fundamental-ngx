@@ -103,6 +103,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '{itemDetails} struktúraelem, indexszáma {index} a(z) {total}{selectedDescription} elemből'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

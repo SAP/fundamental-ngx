@@ -103,6 +103,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '트리 항목 {itemDetails}, {index}/ {total}{selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

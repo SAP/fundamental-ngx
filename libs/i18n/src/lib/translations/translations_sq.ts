@@ -102,6 +102,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Artikulli i pemës {itemDetails}, {index} nga {total}{selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

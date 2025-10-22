@@ -102,6 +102,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'ट्री वस्तु {itemDetails}, {index} का {total}{selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',
