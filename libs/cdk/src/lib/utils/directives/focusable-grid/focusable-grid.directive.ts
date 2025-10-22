@@ -88,9 +88,11 @@ export class FocusableGridDirective implements AfterViewInit {
             .subscribe((lists) => {
                 lists.forEach((list, index) => {
                     list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
-                    list._focusableItems.changes.pipe(takeUntil(this._destroy$)).subscribe((items) => {
-                        this._handleItemSubscriptions(items);
-                    });
+                    list._focusableItems.changes
+                        .pipe(startWith(list._focusableItems), takeUntil(this._destroy$))
+                        .subscribe((items) => {
+                            this._handleItemSubscriptions(items);
+                        });
                 });
             });
 
