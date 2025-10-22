@@ -103,6 +103,22 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Element din arbore {itemDetails}, {index} din {total}{selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
+    },
     coreOverflowLayout: {
         moreItemsButton: 'Încă {count}'
     },
