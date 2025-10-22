@@ -14,6 +14,6 @@ import {
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class AvatarGroupHeader {
-    componentName = 'Avatar Group';
+    componentName = 'AvatarGroup';
     packageName = '@ui5/webcomponents';
 }
