@@ -7,6 +7,7 @@ import {
     ElementRef,
     QueryList,
     ViewEncapsulation,
+    computed,
     inject,
     input
 } from '@angular/core';
@@ -25,11 +26,11 @@ let objIdentifierId = 0;
             <ng-content></ng-content>
         </p>
         @if (description()) {
-            <p class="fd-object-identifier__text">
+            <p class="fd-object-identifier__text" [id]="_descriptionId()">
                 {{ description() }}
             </p>
         }
-        <span class="fd-object-identifier__sr-only" [id]="id()">{{
+        <span class="fd-object-identifier__sr-only" [id]="_srId()">{{
             'coreObjectIdentifier.announcement' | fdTranslate
         }}</span>
     `,
@@ -52,6 +53,12 @@ export class ObjectIdentifierComponent implements AfterContentInit {
      * if not set, a default value is provided
      */
     id = input('fd-obj-identifier-id-' + ++objIdentifierId);
+
+    /** @hidden */
+    _srId = computed(() => `${this.id()}-sr`);
+
+    /** @hidden */
+    _descriptionId = computed(() => `${this.id()}-desc`);
 
     /** Description text */
     description = input<Nullable<string>>();
@@ -90,6 +97,7 @@ export class ObjectIdentifierComponent implements AfterContentInit {
 
     /** @hidden */
     private _addAriaDescribedBy(link: ElementRef): void {
-        link.nativeElement.setAttribute('aria-describedby', this.id());
+        const describedBy = this.description() ? `${this._srId()} ${this._descriptionId()}` : `${this._srId()}`;
+        link.nativeElement.setAttribute('aria-describedby', describedBy);
     }
 }

@@ -22,7 +22,7 @@ class TestObjectIdentifierComponent {
     @ViewChild('linkRef', { read: ElementRef })
     linkElementRef: ElementRef;
 
-    description: string;
+    description = 'Some description';
     bold: boolean;
     medium: boolean;
 
@@ -71,10 +71,32 @@ describe('ObjectIdentifierComponent', () => {
         expect(testComponent.linkElementRef.nativeElement.classList.contains('fd-object-identifier__link')).toBe(true);
     });
 
-    it('should add a screen reader text', () => {
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.fd-object-identifier__sr-only')).nativeElement.textContent).toBe(
-            'Object Identifier'
-        );
+    it('should add a screen reader text with an id', () => {
+        const srElement = fixture.debugElement.query(By.css('.fd-object-identifier__sr-only')).nativeElement;
+        expect(srElement.textContent).toBe('Object Identifier');
+        expect(srElement.id).toMatch(/fd-obj-identifier-id-\d+-sr/);
+    });
+
+    it('should add an aria-describedby containing the screen reader id to fd-link', () => {
+        const srElementId = fixture.debugElement.query(By.css('.fd-object-identifier__sr-only')).nativeElement.id;
+        expect(testComponent.linkElementRef.nativeElement.getAttribute('aria-describedby')).toContain(srElementId);
+    });
+
+    describe('when a description is provided', () => {
+        it('should add a description paragraph with an id', () => {
+            fixture.detectChanges();
+            const description = fixture.debugElement.query(By.css('.fd-object-identifier__text')).nativeElement;
+            expect(description.textContent).toContain('Some description');
+            expect(description.getAttribute('id')).toMatch(/fd-obj-identifier-id-\d+-desc/);
+        });
+
+        it('should add an aria-describedby pointing to the screen reader and the description id to fd-link', () => {
+            fixture.detectChanges();
+            const srElementId = fixture.debugElement.query(By.css('.fd-object-identifier__sr-only')).nativeElement.id;
+            const descriptionId = fixture.debugElement.query(By.css('.fd-object-identifier__text')).nativeElement.id;
+            expect(testComponent.linkElementRef.nativeElement.getAttribute('aria-describedby')).toBe(
+                `${srElementId} ${descriptionId}`
+            );
+        });
     });
 });
