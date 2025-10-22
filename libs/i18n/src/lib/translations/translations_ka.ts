@@ -1,5 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: 'წელის არჩევა',
         yearsRangeSelectionLabel: 'წელთა შუალედის არჩევა',
@@ -69,12 +72,17 @@ export default {
         listItemStatusLocked: 'დაბლოკილი',
         listItemStatusDraft: 'დაუსრულებელი'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'გაუქმება',
         announcementInfo: 'Information Message Strip',
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
+        announcementDefault: 'Message Strip',
         closable: 'Closable'
     },
     coreMultiInput: {
@@ -93,6 +101,22 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'სიის ელემენტი {itemDetails}, ინდექსით {index} {total}-დან {selectedDescription}'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: 'დანარჩენი {count}'

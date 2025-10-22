@@ -180,11 +180,11 @@ describe('AvatarComponent', () => {
         component.label = 'Jane Doe';
         fixture.detectChanges();
         await fixture.whenRenderingDone();
-        expect(component.avatarComponent.abbreviate).toEqual('JD');
+        expect(component.avatarComponent.abbreviate()).toEqual('JD');
 
         component.label = 'Marjolein van Veen';
         fixture.detectChanges();
-        expect(component.avatarComponent.abbreviate).toEqual('MvV');
+        expect(component.avatarComponent.abbreviate()).toEqual('MvV');
     });
 
     it('should add respective Value State Icons', () => {

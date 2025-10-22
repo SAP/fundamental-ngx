@@ -1,5 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗ∙∙∙∙∙∙∙∙]]]',
         yearsRangeSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗş ŗąŋğē∙∙∙∙∙∙]]]',
@@ -70,12 +73,17 @@ export default {
         listItemStatusLocked: '[[[Ļŏċķēƌ∙∙∙∙∙∙∙∙]]]',
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: '[[[Ďįşɱįşş∙∙∙∙∙∙∙]]]',
         announcementInfo: 'Information Message Strip',
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
+        announcementDefault: 'Message Strip',
         closable: 'Closable'
     },
     coreMultiInput: {
@@ -95,6 +103,22 @@ export default {
     coreNestedList: {
         linkItemAriaLabel:
             '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {įŋƌēχ} ŏƒ {ţŏţąĺ}{şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'

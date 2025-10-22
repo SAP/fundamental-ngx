@@ -1,74 +1,84 @@
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-52">Textarea State: Success</label>
+    <label fd-form-label for="textarea-52">Customer Feedback</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
             id="textarea-52"
-            placeholder="Field placeholder text"
+            placeholder="Share your experience with our service"
             state="success"
             aria-describedby="form-message-52"
         ></textarea>
         <fd-form-message type="success" id="form-message-52">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Thank you! Your feedback has been saved successfully.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
+<br /><br /><br />
+
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-53">Textarea State: Error</label>
+    <label fd-form-label for="textarea-53">Billing Address</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
             id="textarea-53"
-            aria-errormessage="form-message-53"
+            aria-describedby="form-message-53"
             aria-invalid="true"
-            placeholder="Field placeholder text"
+            placeholder="Enter your full billing address"
             state="error"
         ></textarea>
         <fd-form-message type="error" id="form-message-53">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Address is required. Please provide your billing details.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
+<br /><br /><br />
+
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-54">Textarea State: Warning</label>
+    <label fd-form-label for="textarea-54">Delivery Instructions</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
             id="textarea-54"
-            placeholder="Field placeholder text"
+            placeholder="Add optional notes for the delivery driver"
             state="warning"
             aria-describedby="form-message-54"
         ></textarea>
         <fd-form-message type="warning" id="form-message-54">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Keep instructions under 250 characters to avoid truncation.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
+<br /><br /><br />
+
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-55">Textarea State: Information</label>
+    <label fd-form-label for="textarea-55">Support Request</label>
     <fd-form-input-message-group>
         <textarea
             fd-form-control
             id="textarea-55"
-            placeholder="Field placeholder text"
+            placeholder="Describe the issue you are experiencing"
             state="information"
             aria-describedby="form-message-55"
         ></textarea>
         <fd-form-message type="information" id="form-message-55">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            Your request will be reviewed by our support team within 24 hours.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
+<br /><br /><br />
+
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-56">Textarea State: Disabled</label>
+    <label fd-form-label for="textarea-56">Textarea State: Disabled</label>
     <textarea fd-form-control id="textarea-56" placeholder="Field placeholder text" disabled></textarea>
 </div>
 
+<br /><br /><br />
+
 <div fd-form-item>
-    <label fd-form-label [colon]="true" for="textarea-57">Textarea State: Readonly</label>
+    <label fd-form-label for="textarea-57">Textarea State: Readonly</label>
     <textarea fd-form-control id="textarea-57" placeholder="Field placeholder text" readonly></textarea>
 </div>

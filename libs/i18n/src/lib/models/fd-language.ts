@@ -4,6 +4,10 @@ import { FdLanguageKey } from './fd-language-key';
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreAvatar: {
+        /**  Default label for the Avatar. */
+        defaultLabel: FdLanguageKey;
+    };
     coreCalendar: {
         /** Year selection aria label. Used on the button to navigate to the years view. */
         yearSelectionLabel: FdLanguageKey;
@@ -118,12 +122,17 @@ export interface FdLanguage {
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
     };
+    coreLink: {
+        emphasized: FdLanguageKey;
+        subtle: FdLanguageKey;
+    };
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
         announcementInfo: FdLanguageKey;
         announcementWarning: FdLanguageKey;
         announcementError: FdLanguageKey;
         announcementSuccess: FdLanguageKey;
+        announcementDefault: FdLanguageKey;
         closable: FdLanguageKey;
     };
     coreMultiInput: {
@@ -152,6 +161,22 @@ export interface FdLanguage {
             total: number;
             selectedDescription: string;
         }>;
+    };
+    coreObjectNumber: {
+        emphasized: FdLanguageKey;
+        negative: FdLanguageKey;
+        critical: FdLanguageKey;
+        positive: FdLanguageKey;
+        informative: FdLanguageKey;
+    };
+    coreObjectStatus: {
+        announcement: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+        indicationColor: FdLanguageKey;
+        negative: FdLanguageKey;
+        critical: FdLanguageKey;
+        positive: FdLanguageKey;
+        informative: FdLanguageKey;
     };
     coreOverflowLayout: {
         /** @param count */

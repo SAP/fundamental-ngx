@@ -3655,10 +3655,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.40.1":
-  version: 0.40.1
-  resolution: "@fundamental-styles/cx@npm:0.40.1"
-  checksum: 10/42276f2489bdbcb0be6474b1df32c60f175667d2739e4fb46eba02f4f85621724e6997a5e08abec56e8c851a76194bd66a7b5490486ac89a2b998d799ca298a9
+"@fundamental-styles/cx@npm:0.41.0-rc.60":
+  version: 0.41.0-rc.60
+  resolution: "@fundamental-styles/cx@npm:0.41.0-rc.60"
+  checksum: 10/dd6b7d4336da7a97e0a03992683b56fb123ce253b1c277aa8d7701e88f697da0d62bc8f8fc92376855fe6eb5fcf6b0edad90e8d67a2fb2c5120aae222813d58a
   languageName: node
   linkType: hard
 
@@ -16117,7 +16117,7 @@ __metadata:
     "@angular/router": "npm:20.1.4"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/cx": "npm:0.40.1"
+    "@fundamental-styles/cx": "npm:0.41.0-rc.60"
     "@jsdevtools/npm-publish": "npm:3.0.1"
     "@nx/angular": "npm:21.2.4"
     "@nx/devkit": "npm:21.2.4"
@@ -16174,7 +16174,7 @@ __metadata:
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
     fs-extra: "npm:^11.3.0"
-    fundamental-styles: "npm:0.40.1"
+    fundamental-styles: "npm:0.41.0-rc.60"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -16223,13 +16223,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.40.1":
-  version: 0.40.1
-  resolution: "fundamental-styles@npm:0.40.1"
+"fundamental-styles@npm:0.41.0-rc.60":
+  version: 0.41.0-rc.60
+  resolution: "fundamental-styles@npm:0.41.0-rc.60"
   peerDependencies:
-    "@sap-theming/theming-base-content": ^11.29.0
-    "@sap-ui/common-css": 0.40.1
-  checksum: 10/e68e298ea5d0e0accff8e48d7ea2a6b232c9d6645b6326765af69a6bab32fd8630fe8b660f0e2d30ef62023ad6f6b9abeddefa38ba749f0ea7eabc864ac49ba5
+    "@sap-theming/theming-base-content": ^11.32.0
+    "@sap-ui/common-css": 0.41.0-rc.60
+  checksum: 10/7c515d918817af12eeea0c9a48b8c9df1123003689534f2ac7f8876ef943b33b413149c89799442031e83e6cd967ed7c7e236974a588ccf32d8dad0ab9fec04c
   languageName: node
   linkType: hard
 
