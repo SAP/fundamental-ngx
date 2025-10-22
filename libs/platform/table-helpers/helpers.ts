@@ -212,7 +212,7 @@ export function convertTreeObjectsToTableRows<T>(
 
                 const selectedAll = selectedChildren.length === children.length && children.length > 0;
                 const selectedSome = selectedChildren.length > 0;
-                if (r.checked) {
+                if (r.checked && selectionMode === SelectionMode.MULTIPLE) {
                     applySelectionToChildren(rows, r, [], []);
                     return;
                 }

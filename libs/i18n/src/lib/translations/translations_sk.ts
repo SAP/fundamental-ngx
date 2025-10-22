@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_sk.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Výklopný zoznam s viacerými hodnotami',
-        selectAllLabel: 'Vybrať všetko ({selectedItems} z {totalItems})'
+        selectAllLabel: 'Vybrať všetko ({selectedItems} z {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -611,5 +611,9 @@ export default {
         groupAriaDescriptionCollapsed: 'zbalené',
         triggerMoreLabel: 'Viac',
         triggerLessLabel: 'Menej'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

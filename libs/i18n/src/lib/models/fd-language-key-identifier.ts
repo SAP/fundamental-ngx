@@ -26,6 +26,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreCalendar.nonWorkDayLabel'
     | 'coreMultiComboBox.multiComboBoxAriaLabel'
     | 'coreMultiComboBox.selectAllLabel'
+    | 'coreMultiComboBox.listGroupHeader'
     | 'coreCarousel.pageIndicatorLabel'
     | 'coreCarousel.leftNavigationBtnLabel'
     | 'coreCarousel.rightNavigationBtnLabel'
@@ -499,4 +500,6 @@ export type FdLanguageKeyIdentifier =
     | 'coreNotification.groupAriaDescriptionExpanded'
     | 'coreNotification.groupAriaDescriptionCollapsed'
     | 'coreNotification.triggerMoreLabel'
-    | 'coreNotification.triggerLessLabel';
+    | 'coreNotification.triggerLessLabel'
+    | 'segmentedButton.groupRoleDescription'
+    | 'segmentedButton.buttonRoleDescription';

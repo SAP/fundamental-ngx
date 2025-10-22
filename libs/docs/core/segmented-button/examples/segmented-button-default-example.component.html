@@ -7,16 +7,30 @@
 
 <fd-text text="example with icon buttons"></fd-text>
 <fd-segmented-button [(ngModel)]="value">
-    <button fd-button fdkFocusableItem glyph="cart" value="first"></button>
-    <button fd-button fdkFocusableItem glyph="action" value="second"></button>
-    <button fd-button fdkFocusableItem glyph="activities" value="third"></button>
+    <button fd-button fdkFocusableItem glyph="cart" title="Add to cart" ariaLabel="Add to cart" value="first"></button>
+    <button fd-button fdkFocusableItem glyph="action" title="Action" ariaLabel="Action" value="second"></button>
+    <button
+        fd-button
+        fdkFocusableItem
+        glyph="activities"
+        title="Activities"
+        ariaLabel="Activities"
+        value="third"
+    ></button>
 </fd-segmented-button>
 
 <fd-text text="example with Vertical alignment"></fd-text>
 <fd-segmented-button [(ngModel)]="value" vertical>
-    <button fd-button fdkFocusableItem glyph="cart" value="first"></button>
-    <button fd-button fdkFocusableItem glyph="action" value="second"></button>
-    <button fd-button fdkFocusableItem glyph="activities" value="third"></button>
+    <button fd-button fdkFocusableItem glyph="cart" title="Add to cart" ariaLabel="Add to cart" value="first"></button>
+    <button fd-button fdkFocusableItem glyph="action" title="Action" ariaLabel="Action" value="second"></button>
+    <button
+        fd-button
+        fdkFocusableItem
+        glyph="activities"
+        title="Activities"
+        ariaLabel="Activities"
+        value="third"
+    ></button>
 </fd-segmented-button>
 
 <br />

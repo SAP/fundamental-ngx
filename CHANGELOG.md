@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.27...v0.57.4-rc.28) (2025-10-16)
+
+
+### Bug Fixes
+
+* **core:** test scroll ([#13524](https://github.com/SAP/fundamental-ngx/issues/13524)) ([1f4948a](https://github.com/SAP/fundamental-ngx/commit/1f4948a9f24a0e6a09d328a6c0a80a398a512853))
+
+
+
+
+
+## [0.57.4-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.26...v0.57.4-rc.27) (2025-10-16)
+
+
+### Bug Fixes
+
+* **core:** update Shellbar separator, branding spacings, inline padding ([#13522](https://github.com/SAP/fundamental-ngx/issues/13522)) ([4a45e39](https://github.com/SAP/fundamental-ngx/commit/4a45e3987b1ac4ef8ed6464da04604ca038c31a9))
+
+
+
+
+
+## [0.57.4-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.25...v0.57.4-rc.26) (2025-10-09)
+
+
+### Bug Fixes
+
+* **core:** adopt latest changes for user menu ([#13518](https://github.com/SAP/fundamental-ngx/issues/13518)) ([5d84f42](https://github.com/SAP/fundamental-ngx/commit/5d84f42a68fec9d194d3286a7795c4dfe72a5c3c))
+
+
+
+
+
+## [0.57.4-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.24...v0.57.4-rc.25) (2025-10-09)
+
+
+### Bug Fixes
+
+* **platform:** remove error when using fdp-combobox and fdp-multi-combobox outside of fdp-form-field ([#13520](https://github.com/SAP/fundamental-ngx/issues/13520)) ([98644bd](https://github.com/SAP/fundamental-ngx/commit/98644bd49a0a07b768bf4dfa9544bd3f761331f4))
+
+
+
+
+
+## [0.57.4-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.23...v0.57.4-rc.24) (2025-10-09)
+
+
+### Bug Fixes
+
+* **core:** List: Group label not read ([#13494](https://github.com/SAP/fundamental-ngx/issues/13494)) ([ba5768c](https://github.com/SAP/fundamental-ngx/commit/ba5768c71e4b368dbae6020662394864b3a4c199))
+
+
+
+
+
+## [0.57.4-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.22...v0.57.4-rc.23) (2025-10-07)
+
+
+### Bug Fixes
+
+* **platform:** tree table with single selection is checking multiple rows due to selectedKey ([#13517](https://github.com/SAP/fundamental-ngx/issues/13517)) ([07dab26](https://github.com/SAP/fundamental-ngx/commit/07dab26ef79478473d34f8bb7050ac374000b466))
+
+
+
+
+
+## [0.57.4-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.21...v0.57.4-rc.22) (2025-10-06)
+
+
+### Bug Fixes
+
+* **core:** add some a11y improvements to segmented button ([#13505](https://github.com/SAP/fundamental-ngx/issues/13505)) ([4533c2e](https://github.com/SAP/fundamental-ngx/commit/4533c2e9ae2f5f4e6f6f88731487cfa0abb52f1c))
+
+
+
+
+
 ## [0.57.4-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.20...v0.57.4-rc.21) (2025-10-02)
 
 

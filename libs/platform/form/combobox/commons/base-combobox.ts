@@ -393,9 +393,9 @@ export abstract class BaseCombobox
     /** @hidden */
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
-            this.formMessage._popover.close();
+            this.formMessage?._popover.close();
         }
-        this.formMessage._popover.setIgnoreTriggers(isOpen);
+        this.formMessage?._popover.setIgnoreTriggers(isOpen);
     }
 
     /** @hidden */

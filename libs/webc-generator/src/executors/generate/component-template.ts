@@ -95,7 +95,7 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[], cla
         } else if (isArray) {
             // ARRAY: Use the original type reference for the element type
             const baseType = getBaseType(typeText);
-            const typeString = baseType ? `${baseType}[]` : 'any[]';
+            const typeString = baseType ? `${baseType}` : 'any[]';
 
             inputType = `<${typeString}>`;
             inputCall = `input${inputType}([])`;

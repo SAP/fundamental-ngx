@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_el.properties instead
 export default {
     coreCalendar: {
@@ -26,7 +25,8 @@ export default {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Σύνθετο Πλαίσιο Πολλών Τιμών',
-        selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})'
+        selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})',
+        listGroupHeader: 'Group Header'
     },
     coreCarousel: {
         pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
@@ -612,5 +612,9 @@ export default {
         groupAriaDescriptionCollapsed: 'συμπτύχθηκε',
         triggerMoreLabel: 'Περισσότερα',
         triggerLessLabel: 'Λιγότερα'
+    },
+    segmentedButton: {
+        groupRoleDescription: 'Segmented Button Group',
+        buttonRoleDescription: 'Segmented Button'
     }
 };

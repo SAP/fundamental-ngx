@@ -72,6 +72,7 @@ export interface FdLanguage {
         /** Label for the multi-combobox. */
         multiComboBoxAriaLabel: FdLanguageKey;
         selectAllLabel: FdLanguageKey;
+        listGroupHeader: FdLanguageKey;
     };
     coreCarousel: {
         pageIndicatorLabel: FdLanguageKey;
@@ -738,5 +739,9 @@ export interface FdLanguage {
         groupAriaDescriptionCollapsed: FdLanguageKey;
         triggerMoreLabel: FdLanguageKey;
         triggerLessLabel: FdLanguageKey;
+    };
+    segmentedButton: {
+        groupRoleDescription: FdLanguageKey;
+        buttonRoleDescription: FdLanguageKey;
     };
 }

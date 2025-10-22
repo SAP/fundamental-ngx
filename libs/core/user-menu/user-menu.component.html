@@ -9,12 +9,17 @@
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="control"></ng-container>
         </fd-popover-control>
-        <fd-popover-body>
-            <ng-container *ngTemplateOutlet="body"></ng-container>
-
-            <div fd-popover-body-footer>
-                <ng-container *ngTemplateOutlet="footer"></ng-container>
+        <fd-popover-body fd-user-menu-popover-control>
+            <div
+                class="fd-user-menu__scroll-header"
+                [class.hidden]="isUserNameVisible()"
+                role="presentation"
+                aria-hidden="true"
+            >
+                <ng-container *ngTemplateOutlet="header"></ng-container>
             </div>
+            <ng-container *ngTemplateOutlet="body"></ng-container>
+            <ng-container *ngTemplateOutlet="footer"></ng-container>
         </fd-popover-body>
     </fd-popover>
 } @else {
@@ -32,16 +37,29 @@
                     </ng-container>
                 }
                 <ng-container *ngTemplateOutlet="body"></ng-container>
-            </fd-dialog-body>
-            <fd-dialog-footer>
                 <ng-container *ngTemplateOutlet="footer"></ng-container>
-            </fd-dialog-footer>
+            </fd-dialog-body>
         </fd-dialog>
     </ng-template>
 }
 
 <ng-template #control>
     <ng-content select="fd-user-menu-control" />
+</ng-template>
+
+<ng-template #header>
+    <div fd-popover-body-header>
+        <div fd-bar barDesign="header">
+            <div fd-bar-middle>
+                <fd-bar-element>
+                    <div
+                        class="fd-user-menu__user-name fd-user-menu__user-name--truncate"
+                        [innerHTML]="userNameContent()"
+                    ></div>
+                </fd-bar-element>
+            </div>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template #body>
