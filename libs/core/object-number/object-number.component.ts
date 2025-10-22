@@ -1,14 +1,17 @@
 import { DecimalPipe } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
-    Input,
+    input,
     OnChanges,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
+import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -17,53 +20,64 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     templateUrl: './object-number.component.html',
     styleUrl: './object-number.component.scss',
     host: {
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
-        '[attr.aria-label]': 'ariaLabel'
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.tabindex]': 'interactive() ? 0 : null',
+        '[attr.role]': 'interactive() ? "button" : null'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DecimalPipe]
+    imports: [DecimalPipe, FdTranslatePipe]
 })
 export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {
     /**
      * Numerical value of the object number.
      */
-    @Input()
-    number: number;
+    number = input<number>(0);
 
     /**
      * Number of decimal places to show
      */
-    @Input()
-    decimal = 0;
+    decimal = input<number>(0);
 
     /** Sets unit of measure displayed. */
-    @Input()
-    unit: string;
+    unit = input<string>('');
 
     /** Set the value to true to display the object number in bold text */
-    @Input()
-    emphasized = false;
+    emphasized = input(false, { transform: booleanAttribute });
 
     /** Set the value to true to display the object number in large text */
-    @Input()
-    large = false;
+    large = input(false, { transform: booleanAttribute });
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
-    @Input()
-    status: ObjectStatus;
+    status = input<ObjectStatus | null>(null);
+
+    /** An optional status message for the object number */
+    statusMessage = input<string>();
+
+    /** Status key to translate for screen readers */
+    statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
+        const status = this.status();
+        if (this.isValidObjectStatus(status)) {
+            return `coreObjectNumber.${status}`;
+        }
+        return null;
+    });
 
     /** User's custom classes */
-    @Input()
-    class: string;
+    class = input<string>();
 
     /** Id of the element that labels object number. */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
+    ariaLabelledBy = input<Nullable<string>>(null);
 
     /** Aria label for the object number. */
-    @Input()
-    ariaLabel: Nullable<string>;
+    ariaLabel = input<Nullable<string>>(null);
+
+    /** Whether the object number is interactive */
+    interactive = input(false, { transform: booleanAttribute });
+
+    /** Whether the object number is inverted. */
+    inverted = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     _numberPipeConfig = '';
@@ -80,9 +94,11 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     buildComponentCssClass(): string[] {
         return [
             'fd-object-number',
-            this.large ? 'fd-object-number--large' : '',
-            this.status ? `fd-object-number--${this.status}` : '',
-            this.class
+            this.large() ? 'fd-object-number--large' : '',
+            this.status() ? `fd-object-number--${this.status()}` : '',
+            this.interactive() ? 'fd-object-number--interactive' : '',
+            this.inverted() ? 'fd-object-number--inverted' : '',
+            this.class() ?? ''
         ];
     }
 
@@ -104,6 +120,14 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** @hidden */
     private _buildNumberPipeConfig(): void {
-        this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
+        this._numberPipeConfig = `0.${this.decimal()}-${this.decimal()}`;
+    }
+
+    /**
+     * Type guard to check if the status is a valid ObjectStatus
+     * @hidden
+     */
+    private isValidObjectStatus(status: ObjectStatus | null): status is ObjectStatus {
+        return status === 'negative' || status === 'critical' || status === 'positive' || status === 'informative';
     }
 }

@@ -56,3 +56,27 @@ export class ObjectNumberDecimalExampleComponent {}
     imports: [ObjectNumberModule]
 })
 export class ObjectNumberTruncationExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-interactive-example',
+    templateUrl: './object-number-interactive-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss'],
+    imports: [ObjectNumberModule]
+})
+export class ObjectNumberInteractiveExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-inverted-example',
+    templateUrl: './object-number-inverted-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss'],
+    imports: [ObjectNumberModule]
+})
+export class ObjectNumberInvertedExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-inverted-interactive-example',
+    templateUrl: './object-number-inverted-interactive-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss'],
+    imports: [ObjectNumberModule]
+})
+export class ObjectNumberInvertedInteractiveExampleComponent {}

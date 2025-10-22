@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Do not modify, it's automatically created. Modify translations_fr.properties instead
 export default {
     coreAvatar: {
@@ -100,6 +99,13 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: "Élément d'arborescence {itemDetails}, {index} sur {total}{selectedDescription}"
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} de plus'
