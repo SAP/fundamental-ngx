@@ -25,6 +25,10 @@ const componentRoutes = [
     {
         path: 'avatar-group',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/avatar-group').then(configureLibRoutes)
+    },
+    {
+        path: 'bar',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/bar').then(configureLibRoutes)
     }
 ];
 

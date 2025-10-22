@@ -7,5 +7,6 @@
  */
 export const API_FILES = {
     avatar: ['Avatar'],
-    avatarGroup: ['AvatarGroup']
+    avatarGroup: ['AvatarGroup'],
+    bar: ['Bar']
 };
