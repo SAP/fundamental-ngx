@@ -122,6 +122,10 @@ export interface FdLanguage {
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
     };
+    coreLink: {
+        emphasized: FdLanguageKey;
+        subtle: FdLanguageKey;
+    };
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
         announcementInfo: FdLanguageKey;
@@ -160,6 +164,22 @@ export interface FdLanguage {
     };
     coreObjectIdentifier: {
         announcement: FdLanguageKey;
+    };
+    coreObjectNumber: {
+        emphasized: FdLanguageKey;
+        negative: FdLanguageKey;
+        critical: FdLanguageKey;
+        positive: FdLanguageKey;
+        informative: FdLanguageKey;
+    };
+    coreObjectStatus: {
+        announcement: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+        indicationColor: FdLanguageKey;
+        negative: FdLanguageKey;
+        critical: FdLanguageKey;
+        positive: FdLanguageKey;
+        informative: FdLanguageKey;
     };
     coreOverflowLayout: {
         /** @param count */
