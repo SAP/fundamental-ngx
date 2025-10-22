@@ -169,6 +169,10 @@ export interface FdLanguage {
         announcement: FdLanguageKey;
         ariaRoleDescription: FdLanguageKey;
         indicationColor: FdLanguageKey;
+        negative: FdLanguageKey;
+        critical: FdLanguageKey;
+        positive: FdLanguageKey;
+        informative: FdLanguageKey;
     };
     coreOverflowLayout: {
         /** @param count */
