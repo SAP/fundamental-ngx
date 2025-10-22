@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.29...v0.57.4-rc.30) (2025-10-22)
+
+
+### Bug Fixes
+
+* **core, platform:** Narrow empty check when cell is focused and add option for empty cell announcement for column template ([#13395](https://github.com/SAP/fundamental-ngx/issues/13395)) ([d60edf4](https://github.com/SAP/fundamental-ngx/commit/d60edf47b5364f98e624a311c43963b6ef3ec489))
+
+
+
+
+
 ## [0.57.4-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.28...v0.57.4-rc.29) (2025-10-22)
 
 
