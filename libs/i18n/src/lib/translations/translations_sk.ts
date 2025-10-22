@@ -99,6 +99,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Položka stromu {itemDetails}, {index} z {total}{selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreObjectStatus: {
         announcement: 'Object Status',
         ariaRoleDescription: 'Object Status Button',

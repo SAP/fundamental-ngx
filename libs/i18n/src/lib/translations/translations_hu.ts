@@ -99,6 +99,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '{itemDetails} struktúraelem, indexszáma {index} a(z) {total}{selectedDescription} elemből'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreObjectStatus: {
         announcement: 'Object Status',
         ariaRoleDescription: 'Object Status Button',

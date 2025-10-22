@@ -158,14 +158,17 @@ export interface FdLanguage {
             selectedDescription: string;
         }>;
     };
-    coreObjectStatus: {
-        announcement: FdLanguageKey;
-        ariaRoleDescription: FdLanguageKey;
-        indicationColor: FdLanguageKey;
+    coreObjectNumber: {
+        emphasized: FdLanguageKey;
         negative: FdLanguageKey;
         critical: FdLanguageKey;
         positive: FdLanguageKey;
         informative: FdLanguageKey;
+    };
+    coreObjectStatus: {
+        announcement: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+        indicationColor: FdLanguageKey;
     };
     coreOverflowLayout: {
         /** @param count */
