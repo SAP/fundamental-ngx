@@ -107,6 +107,15 @@ export default {
         positive: 'Value State Success',
         informative: 'Value State Information'
     },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
+    },
     coreOverflowLayout: {
         moreItemsButton: '{count} de plus'
     },

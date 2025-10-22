@@ -38,7 +38,7 @@ export class FdTranslatePipe implements PipeTransform {
         args?: FdLanguageKeyArgs | Record<string, any>,
         defaultValue = ''
     ): string {
-        if (!key) {
+        if (key === null) {
             return defaultValue;
         }
 
