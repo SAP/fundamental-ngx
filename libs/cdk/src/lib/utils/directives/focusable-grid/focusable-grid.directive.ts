@@ -1,15 +1,6 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import {
-    AfterViewInit,
-    ContentChildren,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Input,
-    Output,
-    QueryList
-} from '@angular/core';
+import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
@@ -79,7 +70,7 @@ export class FocusableGridDirective implements AfterViewInit {
     _preventKeydown = false;
 
     /** @hidden */
-    constructor(private readonly _destroy$: DestroyedService, private readonly _elRef: ElementRef) {}
+    constructor(private readonly _destroy$: DestroyedService) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
