@@ -5,6 +5,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 import { TableModule } from '@fundamental-ngx/core/table';
@@ -114,6 +115,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         SelectModule,
         SegmentedButtonModule,
+        SplitButtonModule,
         ToolbarModule,
         PlatformMenuModule,
         PopoverModule,

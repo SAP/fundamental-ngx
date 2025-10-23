@@ -77,7 +77,20 @@
     <fdp-column name="index" key="index">
         <fdp-table-header *fdpHeaderCellDef>Row index</fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item; as: exampleItemType; let i = rowIndex">
-            <span>Row index {{ i }}</span>
+            <fd-split-button glyph="menu">
+                <fd-menu>
+                    <li fd-menu-item>
+                        <div fd-menu-interactive>
+                            <span fd-menu-title>Row index {{ i }}</span>
+                        </div>
+                    </li>
+                    <li fd-menu-item>
+                        <div fd-menu-interactive>
+                            <span fd-menu-title>Option 2</span>
+                        </div>
+                    </li>
+                </fd-menu>
+            </fd-split-button>
         </fdp-table-cell>
     </fdp-column>
 </fdp-table>

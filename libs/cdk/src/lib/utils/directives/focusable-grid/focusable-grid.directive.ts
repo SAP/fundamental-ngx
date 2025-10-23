@@ -5,7 +5,7 @@ import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
-import { FocusableItemPosition } from '../focusable-item';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, FocusableItemPosition } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
 import { ScrollPosition } from '../focusable-list';
@@ -63,6 +63,10 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
+    private readonly _focusableItems: QueryList<FocusableItemDirective>;
+
+    /** @hidden */
     _preventKeydown = false;
 
     /** @hidden */
@@ -72,11 +76,22 @@ export class FocusableGridDirective implements AfterViewInit {
     ngAfterViewInit(): void {
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
-            .subscribe((lists) =>
-                lists.forEach((list, index) =>
-                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length })
-                )
-            );
+            .subscribe((lists) => {
+                lists.forEach((list, index) => {
+                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
+                    list._focusableItems.changes
+                        .pipe(startWith(list._focusableItems), takeUntil(this._destroy$))
+                        .subscribe((items) => {
+                            this._handleItemSubscriptions(items);
+                        });
+                });
+            });
+
+        this._focusableItems.changes
+            .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
+            .subscribe((items) => {
+                this._handleItemSubscriptions(items);
+            });
 
         this._focusableLists.changes
             .pipe(
@@ -211,5 +226,30 @@ export class FocusableGridDirective implements AfterViewInit {
         }
 
         return this.shortRowFocus === 'first' ? 0 : list._focusableItems.length - 1;
+    }
+
+    /** @hidden */
+    private _handleItemSubscriptions(items: QueryList<FocusableItemDirective>): void {
+        items.forEach((item) => {
+            item.focusableChildElementFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                this._focusableLists.forEach((focusableList) => {
+                    focusableList._focusableItems.forEach((focusableItem) => {
+                        focusableItem.setTabbable(false);
+                        focusableItem.enableTabbableElements();
+                    });
+                });
+            });
+            item._parentFocusableItemFocused.pipe(takeUntil(this._destroy$)).subscribe(() => {
+                this._focusableLists.forEach((focusableList) => {
+                    focusableList._focusableItems.forEach((focusableItem) => {
+                        if (item !== focusableItem) {
+                            focusableItem.disableTabbableElements();
+                        } else {
+                            focusableItem.enableTabbableElements();
+                        }
+                    });
+                });
+            });
+        });
     }
 }
