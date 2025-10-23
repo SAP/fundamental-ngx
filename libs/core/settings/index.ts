@@ -1,4 +1,5 @@
 export * from './settings-container/settings-container.component';
+export * from './settings-content-container/settings-content-container.directive';
 export * from './settings-content/settings-content.directive';
 export * from './settings-detail-area/settings-detail-area.directive';
 export * from './settings-dialog-body/settings-dialog-body.directive';
@@ -7,5 +8,8 @@ export * from './settings-header-button/settings-header-button.directive';
 export * from './settings-header/settings-header.directive';
 export * from './settings-list-area/settings-list-area.directive';
 export * from './settings-list-container/settings-list-container.directive';
+export * from './settings-profile-card-name/settings-profile-card-name.directive';
+export * from './settings-profile-card-subline/settings-profile-card-subline.directive';
+export * from './settings-profile-card/settings-profile-card.directive';
 export * from './settings.component';
 export * from './settings.module';

@@ -50,3 +50,7 @@
 .fd-dialog__content:has(.fd-dialog__resize-handle) {
     overflow: visible !important;
 }
+
+.fd-dialog__body.fd-settings__dialog-body section {
+    width: 100%;
+}

@@ -1,19 +1,27 @@
+import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    HostListener,
-    OnDestroy,
-    Renderer2,
-    ViewContainerRef,
-    ViewEncapsulation,
-    contentChild,
     contentChildren,
+    HostListener,
     inject,
-    signal
+    input,
+    OnDestroy,
+    OnInit,
+    Renderer2,
+    signal,
+    viewChild,
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
+import { InitialFocusDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { map, Observable } from 'rxjs';
+import { SettingsDetailAreaDirective } from '../settings-detail-area/settings-detail-area.directive';
 import { SettingsHeaderButtonDirective } from '../settings-header-button/settings-header-button.directive';
 import { SettingsHeaderDirective } from '../settings-header/settings-header.directive';
 
@@ -27,14 +35,8 @@ export enum VIEW_MODE {
 
 @Component({
     selector: 'fd-settings-container',
-    template: `
-        @if (this.showListArea()) {
-            <ng-content select="[fd-settings-list-area]"></ng-content>
-        }
-        @if (this.showDetailArea()) {
-            <ng-content select="[fd-settings-detail-area]"></ng-content>
-        }
-    `,
+    templateUrl: './settings-container.component.html',
+    styleUrl: './settings-container.component.scss',
     host: {
         class: 'fd-settings__container',
         '[class.fd-settings__container--md]': 'viewMode() === "md"',
@@ -42,14 +44,47 @@ export enum VIEW_MODE {
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    imports: [
+        AsyncPipe,
+        BarComponent,
+        BarElementDirective,
+        BarLeftDirective,
+        SettingsHeaderButtonDirective,
+        SettingsHeaderDirective,
+        SettingsDetailAreaDirective,
+        ButtonComponent,
+        TitleComponent,
+        InitialFocusDirective
+    ]
 })
-export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
-    /** @hidden */
-    readonly viewContainer = contentChild(SettingsHeaderDirective, { read: ViewContainerRef });
+export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewInit {
+    /**
+     * Heading level for the title in the Details Area
+     * Default value is 2
+     * Acceptable values: number 1 | 2 | 3 | 4 | 5 | 6
+     */
+    readonly detailsAreaTitleHeading = input<1 | 2 | 3 | 4 | 5 | 6>(2);
+
+    /**
+     * Heading level display size for the title in the Details Area (controls the font size)
+     * Default value is 5
+     * Acceptable values: number 1 | 2 | 3 | 4 | 5 | 6
+     */
+    readonly detailsAreaTitleHeadingSize = input<1 | 2 | 3 | 4 | 5 | 6>(5);
+
+    /**
+     * aria-label and title value for the back button
+     */
+    readonly backBtnAriaLabel = input<string>('');
+
+    /**
+     * Handle the navigation icon (arrow) of the Back button in RTL mode
+     */
+    navigationArrow$: Observable<string>;
 
     /** @hidden */
-    readonly headerButton = contentChild(SettingsHeaderButtonDirective, { descendants: true, read: ButtonComponent });
+    readonly viewContainer = viewChild('container', { read: ViewContainerRef });
 
     /** @hidden */
     readonly listItems = contentChildren(ListItemComponent, { descendants: true });
@@ -70,7 +105,13 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     readonly showDetailArea = signal<boolean>(true);
 
     /** @hidden */
+    readonly activeTitle = signal<string>('');
+
+    /** @hidden */
     private _eventUnlisteners: (() => void)[] = [];
+
+    /** @hidden */
+    private _rtlService = inject(RtlService);
 
     /** @hidden */
     private _renderer = inject(Renderer2);
@@ -88,15 +129,35 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     }
 
     /** @hidden */
+    ngOnInit(): void {
+        this.navigationArrow$ = this._rtlService.rtl.pipe(
+            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
+        );
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._updateViewMode();
-        this._setupHeaderButton();
         this._setupListItemListeners();
+
+        if (this.showListArea()) {
+            this._focusInitialListItem();
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._eventUnlisteners.forEach((unlistener) => unlistener());
+    }
+
+    /** @hidden */
+    onHeaderBackClick(): void {
+        if (this.viewMode() !== VIEW_MODE.LG) {
+            this.showListArea.set(true);
+            this.showDetailArea.set(false);
+
+            queueMicrotask(() => this._focusInitialListItem());
+        }
     }
 
     /** @hidden */
@@ -116,36 +177,9 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
         this.showListArea.set(true);
         this.showDetailArea.set(isLargeView);
 
-        this._updateHeaderButtonVisibility();
-    }
-
-    /** @hidden */
-    private _setupHeaderButton(): void {
-        const button = this.headerButton()?.elementRef.nativeElement;
-        if (!button) {
-            return;
+        if (isLargeView && this.activeListItem()) {
+            queueMicrotask(() => this._renderTemplate());
         }
-
-        this._eventUnlisteners.push(
-            this._renderer.listen(button, 'click', () => {
-                if (this.viewMode() !== VIEW_MODE.LG) {
-                    this.showListArea.set(true);
-                    this.showDetailArea.set(false);
-                }
-            })
-        );
-
-        this._updateHeaderButtonVisibility();
-    }
-
-    /** @hidden */
-    private _updateHeaderButtonVisibility(): void {
-        const button = this.headerButton()?.elementRef.nativeElement;
-        if (!button) {
-            return;
-        }
-
-        this._renderer.setStyle(button, 'display', this.viewMode() === VIEW_MODE.LG ? 'none' : 'block');
     }
 
     /** @hidden */
@@ -153,6 +187,7 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
         this.listItems().forEach((item: ListItemComponent) => {
             if (item.selected) {
                 this.activeListItem.set(item);
+                this._updateActiveTitle(item);
                 this._renderTemplate();
             }
 
@@ -168,11 +203,13 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
                     const newActiveItem = this.activeListItem();
                     if (newActiveItem) {
                         newActiveItem.selected = true;
+                        this._updateActiveTitle(newActiveItem);
                     }
 
                     if (this.viewMode() !== VIEW_MODE.LG) {
                         this.showListArea.set(false);
                         this.showDetailArea.set(true);
+                        setTimeout(() => this._renderTemplate());
                     }
 
                     this._renderTemplate();
@@ -189,5 +226,30 @@ export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
             this.viewContainer()?.clear();
             this.viewContainer()?.createEmbeddedView(template);
         }
+    }
+
+    /** @hidden */
+    private _updateActiveTitle(item: ListItemComponent): void {
+        const titleEl = item.elementRef.nativeElement.querySelector('[fd-list-title]');
+        const titleText = titleEl?.textContent?.trim() || '';
+        this.activeTitle.set(titleText);
+    }
+
+    /** @hidden */
+    private _focusInitialListItem(): void {
+        queueMicrotask(() => {
+            const items = this.listItems();
+            if (!items?.length) {
+                return;
+            }
+
+            const selectedItem = items.find((item) => item.selected);
+            const itemToFocus = selectedItem ?? items[0];
+
+            setTimeout(() => {
+                const el = itemToFocus.elementRef.nativeElement as HTMLElement;
+                el.focus();
+            });
+        });
     }
 }

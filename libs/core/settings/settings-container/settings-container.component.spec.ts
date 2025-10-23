@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { SettingsContainerComponent } from './settings-container.component';
 
@@ -8,7 +9,8 @@ describe('SettingsContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SettingsContainerComponent]
+            imports: [SettingsContainerComponent],
+            providers: [RtlService]
         }).compileComponents();
     }));
 

@@ -1,102 +1,86 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-body>
-            <fd-settings-container>
+            <fd-settings-container backBtnAriaLabel="Navigate Back" [detailsAreaTitleHeading]="2">
                 <div fd-settings-list-area>
-                    <div fd-bar barDesign="header-with-subheader">
+                    <div fd-bar barDesign="header">
                         <div fd-bar-left>
                             <fd-bar-element>
-                                <h5 fd-title>Settings</h5>
-                            </fd-bar-element>
-                        </div>
-                    </div>
-                    <div fd-bar barDesign="subheader">
-                        <div fd-bar-middle>
-                            <fd-bar-element [fullWidth]="true">
-                                <fd-input-group
-                                    glyph="decline"
-                                    glyphAriaLabel="Clear"
-                                    placeholder="Search"
-                                    [button]="true"
-                                    [disabled]="false"
-                                >
-                                </fd-input-group>
+                                <h1 fd-title [headerSize]="5">Settings</h1>
                             </fd-bar-element>
                         </div>
                     </div>
                     <div fd-settings-list-container>
                         <ul fd-list [byline]="true" [navigationIndicator]="true" [noBorder]="true" settingsList>
-                            <li fd-list-item [settingsListTpl]="item1Template" [selected]="true">
+                            <li fd-list-item [settingsListTpl]="userAccountTemplate" [selected]="true">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <span fd-list-thumbnail>
-                                        <fd-icon glyph="activate"></fd-icon>
+                                        <fd-icon glyph="user-settings"></fd-icon>
                                     </span>
                                     <div fd-list-content>
-                                        <div fd-list-title>Settings Item 1</div>
-                                        <div fd-list-byline>Byline Text</div>
+                                        <div fd-list-title>User Account</div>
+                                        <div fd-list-byline>Alain Chevallier</div>
                                     </div>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="item2Template">
-                                <a fd-list-link [navigationIndicator]="true">
-                                    <span fd-list-thumbnail>
-                                        <fd-icon glyph="employee"></fd-icon>
-                                    </span>
-                                    <div fd-list-content>
-                                        <div fd-list-title>Settings Item 2</div>
-                                        <div fd-list-byline>Byline Text</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li fd-list-item [settingsListTpl]="item3Template">
+                            <li fd-list-item [settingsListTpl]="appearanceTemplate">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <span fd-list-thumbnail>
                                         <fd-icon glyph="palette"></fd-icon>
                                     </span>
                                     <div fd-list-content>
-                                        <div fd-list-title>Settings Item 3</div>
-                                        <div fd-list-byline>Byline Text</div>
+                                        <div fd-list-title>Appearance</div>
+                                        <div fd-list-byline>Configure theme and language</div>
                                     </div>
                                 </a>
                             </li>
-                            <li fd-list-item [settingsListTpl]="item4Template">
+                            <li fd-list-item [settingsListTpl]="languageTemplate">
                                 <a fd-list-link [navigationIndicator]="true">
                                     <span fd-list-thumbnail>
-                                        <fd-icon glyph="wrench"></fd-icon>
+                                        <fd-icon glyph="globe"></fd-icon>
                                     </span>
                                     <div fd-list-content>
-                                        <div fd-list-title>Settings Item 4</div>
-                                        <div fd-list-byline>Byline Text</div>
+                                        <div fd-list-title>Language & Region</div>
+                                        <div fd-list-byline>Configure date and time formats</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li fd-list-item [settingsListTpl]="mobileStartTemplate">
+                                <a fd-list-link [navigationIndicator]="true">
+                                    <span fd-list-thumbnail>
+                                        <fd-icon glyph="iphone"></fd-icon>
+                                    </span>
+                                    <div fd-list-content>
+                                        <div fd-list-title>SAP Mobile Start Application</div>
+                                        <div fd-list-byline>iOS and Android</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li fd-list-item [settingsListTpl]="notificationsTemplate">
+                                <a fd-list-link [navigationIndicator]="true">
+                                    <span fd-list-thumbnail>
+                                        <fd-icon glyph="bell"></fd-icon>
+                                    </span>
+                                    <div fd-list-content>
+                                        <div fd-list-title>Notifications</div>
+                                        <div fd-list-byline>Configure Notification Alerts</div>
                                     </div>
                                 </a>
                             </li>
                         </ul>
-                        <ul fd-list [navigationIndicator]="true" [noBorder]="true" settingsListFooter>
-                            <li fd-list-item [settingsListTpl]="itemFixedTemplate">
+                        <ul fd-list [navigationIndicator]="true" [byline]="true" [noBorder]="true" settingsListFooter>
+                            <li fd-list-item [settingsListTpl]="resetTemplate">
                                 <a fd-list-link [navigationIndicator]="true">
-                                    <span fd-list-title>Fixed Settings Item</span>
+                                    <span fd-list-thumbnail>
+                                        <fd-icon glyph="reset"></fd-icon>
+                                    </span>
+                                    <div fd-list-content>
+                                        <div fd-list-title>Reset Settings</div>
+                                        <div fd-list-byline>Reset all and personalized settings</div>
+                                    </div>
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div fd-settings-detail-area>
-                    <div fd-bar barDesign="header" fd-settings-header>
-                        <div fd-bar-left>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fd-settings-header-button
-                                    fdType="transparent"
-                                    glyph="navigation-left-arrow"
-                                    ariaLabel="Navigate Back to Settings Area"
-                                    title="Navigate Back to Settings Area"
-                                ></button>
-                            </fd-bar-element>
-                            <fd-bar-element>
-                                <h5 fd-title>Settings Item</h5>
-                            </fd-bar-element>
-                        </div>
                     </div>
                 </div>
             </fd-settings-container>
@@ -108,187 +92,263 @@
     </fd-dialog>
 </ng-template>
 
-<ng-template #item1Template>
+<ng-template #userAccountTemplate>
+    <div fd-settings-content>
+        <div fd-settings-profile-card>
+            <fd-avatar
+                [circle]="true"
+                size="xl"
+                label="Alain Chevallier"
+                zoomGlyph="edit"
+                (zoomGlyphClicked)="onZoomGlyphClick()"
+                title="Edit avatar"
+            ></fd-avatar>
+            <div fd-settings-profile-card-name>Alain Chevallier</div>
+            <div fd-settings-profile-card-subline>alain.chevallier&#64;sap.com</div>
+            <div fd-settings-profile-card-subline>Delivery Manager, SAP SE</div>
+            <button fd-button label="Manage Account" glyph="user-settings" ariaLabel="Manage Account"></button>
+        </div>
+
+        <div fd-settings-content-container>
+            <div
+                style="
+                    background: cornsilk;
+                    height: 16rem;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                "
+            >
+                Content Area
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #appearanceTemplate>
+    <div fd-settings-content>
+        <div fd-settings-content-container>
+            <div
+                style="
+                    background: cornsilk;
+                    height: 4rem;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                "
+            >
+                Content Area
+            </div>
+        </div>
+
+        <fd-toolbar title="Themes" [headingLevel]="3"></fd-toolbar>
+
+        <ul fd-list [theme]="true">
+            <li fd-list-group-header>
+                <span fd-list-title>SAP Horizon</span>
+            </li>
+
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Automatic (based on your operating syste settings)</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP Morning Horizon</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP Evening Horizon</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP High Contrast White (Horizon)</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP High Contrast Black (Horizon)</div>
+                </div>
+            </li>
+
+            <li fd-list-group-header>
+                <span fd-list-title>SAP Quartz</span>
+            </li>
+
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>Automatic (based on your operating syste settings)</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP Quartz Light</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP Quartz Dark</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP High Contrast White (Quartz)</div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <fd-avatar [colorAccent]="7" glyph="product" size="xs"></fd-avatar>
+                <div fd-list-content>
+                    <div fd-list-title>SAP High Contrast Black (Quartz)</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #languageTemplate>
+    <div fd-settings-content>
+        <div fd-form-item>
+            <label fd-form-label for="language">Display Language: </label>
+            <fd-combobox
+                inputId="language"
+                ariaLabel="Language"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select language"
+                [dropdownValues]="languages"
+                [(ngModel)]="selectedLanguage"
+            >
+            </fd-combobox>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label for="region">Region: </label>
+            <fd-combobox
+                inputId="region"
+                ariaLabel="region"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select region"
+                [dropdownValues]="regions"
+                [(ngModel)]="selectedRegion"
+            >
+            </fd-combobox>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label for="dateFormat">Date Format: </label>
+            <fd-combobox
+                inputId="dateFormat"
+                ariaLabel="Date Format"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select date format"
+                [dropdownValues]="dateFormats"
+                [(ngModel)]="selectedDateFormat"
+            >
+            </fd-combobox>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label for="timeFormat">Time Format: </label>
+            <fd-combobox
+                inputId="timeFormat"
+                ariaLabel="Time Format"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select time format"
+                [dropdownValues]="timeFormats"
+                [(ngModel)]="selectedTimeFormat"
+            >
+            </fd-combobox>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label for="timeZone">Time zone: </label>
+            <fd-combobox
+                inputId="timeZone"
+                ariaLabel="Time Zone"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select time zone"
+                [dropdownValues]="timeZones"
+                [(ngModel)]="selectedTimeZone"
+            >
+            </fd-combobox>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label for="currency">Currency: </label>
+            <fd-combobox
+                inputId="currency"
+                ariaLabel="Currency"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select Currency"
+                [dropdownValues]="currencies"
+                [(ngModel)]="selectedCurrency"
+            >
+            </fd-combobox>
+        </div>
+
+        <div fd-form-item>
+            <label fd-form-label for="numberFormat">Number Format: </label>
+            <fd-combobox
+                inputId="numberFormat"
+                ariaLabel="Number Format"
+                maxHeight="250px"
+                width="100%"
+                placeholder="Select numberFormat"
+                [dropdownValues]="numberFormats"
+                [(ngModel)]="selectednumberFormat"
+            >
+            </fd-combobox>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #mobileStartTemplate>
+    <div fd-settings-content>
+        <div style="display: flex; gap: 0.5rem">
+            <button fd-button label="iOS"></button>
+            <button fd-button label="Android"></button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #notificationsTemplate>
+    <div fd-settings-content>
+        <fd-checkbox
+            label="Show High-Priority Notification Alerts"
+            [(ngModel)]="checkboxValue"
+            inputId="defaultCheckbox"
+        ></fd-checkbox>
+    </div>
+</ng-template>
+
+<ng-template #resetTemplate>
     <fdp-icon-tab-bar iconTabSize="sm" settings>
-        <fdp-icon-tab-bar-tab label="Tab Text 1">
-            <div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error deleniti cum sunt
-                illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet consectetur
-                adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis hic
-                suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-                non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores
-                eaque, expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia
-                repudiandae inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus
-                repellendus error deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum,
-                dolor sit amet consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis
-                doloremque corporis hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda
-                iure, voluptatem deserunt non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur
-                aliquam, non asperiores eaque, expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque
-                facilis nesciunt quia repudiandae inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Temporibus repellendus error deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti
-                harum. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus perspiciatis ipsum
-                dignissimos perferendis doloremque corporis hic suscipit aperiam rerum rem atque harum, obcaecati
-                quibusdam itaque, assumenda iure, voluptatem deserunt non. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Optio pariatur aliquam, non asperiores eaque, expedita nihil iure quas, repellendus
-                fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae inventore hic. Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit. Temporibus repellendus error deleniti cum sunt illo enim. Beatae,
-                vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis hic suscipit aperiam rerum
-                rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt non. Lorem ipsum dolor
-                sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque, expedita nihil iure
-                quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae inventore hic. Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error deleniti cum sunt illo
-                enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet consectetur adipisicing
-                elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis hic suscipit aperiam
-                rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt non. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque, expedita
-                nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae inventore
-                hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error deleniti cum
-                sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet consectetur
-                adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis hic
-                suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-                non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores
-                eaque, expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia
-                repudiandae inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus
-                repellendus error deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum,
-                dolor sit amet consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis
-                doloremque corporis hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda
-                iure, voluptatem deserunt non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur
-                aliquam, non asperiores eaque, expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque
-                facilis nesciunt quia repudiandae inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Temporibus repellendus error deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti
-                harum. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus perspiciatis ipsum
-                dignissimos perferendis doloremque corporis hic suscipit aperiam rerum rem atque harum, obcaecati
-                quibusdam itaque, assumenda iure, voluptatem deserunt non. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Optio pariatur aliquam, non asperiores eaque, expedita nihil iure quas, repellendus
-                fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae inventore hic. Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit. Temporibus repellendus error deleniti cum sunt illo enim. Beatae,
-                vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis hic suscipit aperiam rerum
-                rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt non. Lorem ipsum dolor
-                sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque, expedita nihil iure
-                quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae inventore hic.
-            </div>
+        <fdp-icon-tab-bar-tab label="Reset Personalization">
+            <button fd-button label="Reset Personalization content"></button>
         </fdp-icon-tab-bar-tab>
-        <fdp-icon-tab-bar-tab label="Tab Text 2">
-            <div>
-                Iure omnis ipsam expedita, rerum, laudantium reprehenderit voluptates impedit non assumenda adipisci
-                aliquid quod, fuga nemo architecto maiores nam ut aperiam quaerat. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Aliquam porro praesentium, reprehenderit, ut distinctio voluptas expedita,
-                eligendi at ullam dolores dolorum recusandae in debitis veniam nisi totam nostrum et? Quis. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Earum nesciunt corporis odio velit iusto minima dolor?
-            </div>
+        <fdp-icon-tab-bar-tab label="Reset All Settings">
+            <button fd-button label="Reset All Settings content"></button>
         </fdp-icon-tab-bar-tab>
     </fdp-icon-tab-bar>
-</ng-template>
-
-<ng-template #item2Template>
-    <div fd-settings-content>
-        <h3>Settings Item 2 Content</h3>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure omnis ipsam expedita, rerum, laudantium
-            reprehenderit voluptates impedit non assumenda adipisci aliquid quod, fuga nemo architecto maiores nam ut
-            aperiam quaerat.
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #item3Template>
-    <div fd-settings-content>
-        <h3>Settings Item 3 Content</h3>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure omnis ipsam expedita, rerum, laudantium
-            reprehenderit voluptates impedit non assumenda adipisci aliquid quod, fuga nemo architecto maiores nam ut
-            aperiam quaerat.
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #item4Template>
-    <div fd-settings-content>
-        <h3>Settings Item 4 Content</h3>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure omnis ipsam expedita, rerum, laudantium
-            reprehenderit voluptates impedit non assumenda adipisci aliquid quod, fuga nemo architecto maiores nam ut
-            aperiam quaerat.
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #item5Template>
-    <div fd-settings-content>
-        <h3>Settings Item 5 Content</h3>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure omnis ipsam expedita, rerum, laudantium
-            reprehenderit voluptates impedit non assumenda adipisci aliquid quod, fuga nemo architecto maiores nam ut
-            aperiam quaerat.
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #itemFixedTemplate>
-    <div fd-settings-content>
-        <h3>Settings Fixed Item Content</h3>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure omnis ipsam expedita, rerum, laudantium
-            reprehenderit voluptates impedit non assumenda adipisci aliquid quod, fuga nemo architecto maiores nam ut
-            aperiam quaerat. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus repellendus error
-            deleniti cum sunt illo enim. Beatae, vitae in. Explicabo, deleniti harum. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Voluptatibus perspiciatis ipsum dignissimos perferendis doloremque corporis
-            hic suscipit aperiam rerum rem atque harum, obcaecati quibusdam itaque, assumenda iure, voluptatem deserunt
-            non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio pariatur aliquam, non asperiores eaque,
-            expedita nihil iure quas, repellendus fuga ab. Eum, velit doloremque facilis nesciunt quia repudiandae
-            inventore hic.
-        </div>
-    </div>
 </ng-template>
 
 <button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)"></button>
