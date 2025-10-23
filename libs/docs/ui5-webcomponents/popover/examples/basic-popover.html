@@ -1,0 +1,20 @@
+<div class="ui5-popover-sample-flex-spread">
+    <ui5-button id="btn-popover-opener" design="Emphasized" (click)="popoverOpen.set(!popoverOpen())">
+        {{ buttonLabel() }}
+    </ui5-button>
+
+    <ui5-button class="ui5-popover-button-sample" (click)="popoverOpen.set(!popoverOpen())">
+        {{ buttonLabel2() }}
+    </ui5-button>
+</div>
+
+<ui5-popover
+    #popover="ui5Popover"
+    opener="btn-popover-opener"
+    headerText="Newsletter subscription"
+    [open]="popoverOpen()"
+    (ui5close)="popoverOpen.set(false)"
+>
+    <ui5-label for="emailInput" required>Email:</ui5-label>
+    <ui5-input id="emailInput" style="min-width: 150px" placeholder="Enter Email"></ui5-input>
+</ui5-popover>

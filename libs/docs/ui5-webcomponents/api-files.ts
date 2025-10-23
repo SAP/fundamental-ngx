@@ -8,5 +8,6 @@
 export const API_FILES = {
     avatar: ['Avatar'],
     avatarGroup: ['AvatarGroup'],
-    bar: ['Bar']
+    bar: ['Bar'],
+    popover: ['Popover']
 };

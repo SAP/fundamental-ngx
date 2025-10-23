@@ -29,6 +29,10 @@ const componentRoutes = [
     {
         path: 'bar',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/bar').then(configureLibRoutes)
+    },
+    {
+        path: 'popover',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
     }
 ];
 

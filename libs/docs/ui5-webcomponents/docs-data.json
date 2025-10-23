@@ -17,6 +17,10 @@
         {
             "url": "ui5-webcomponents/bar",
             "name": "Bar"
+        },
+        {
+            "url": "ui5-webcomponents/popover",
+            "name": "Popover"
         }
     ]
 }
