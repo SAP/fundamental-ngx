@@ -1,0 +1,95 @@
+<section aria-labelledby="button-basic-sample">
+    <h2 id="button-basic-sample">Basic Button Example</h2>
+    <ui5-button (click)="onButtonClick($event, 'Basic Button')">Basic Button</ui5-button>
+    <ui5-button disabled="true">Disabled Button</ui5-button>
+    <ui5-button icon="home" (click)="onButtonClick($event, 'Icon Button')">Button with Icon</ui5-button>
+    <ui5-button icon="home" tooltip="Home Button" aria-label="Home"></ui5-button>
+</section>
+
+<section aria-labelledby="button-designs">
+    <h2 id="button-designs">Button Design Variations</h2>
+    <ui5-button design="Default" (click)="onButtonClick($event, 'Default Design')">Default</ui5-button>
+    <ui5-button design="Emphasized" (click)="onButtonClick($event, 'Emphasized Design')">Emphasized</ui5-button>
+    <ui5-button design="Positive" (click)="onButtonClick($event, 'Positive Design')">Positive</ui5-button>
+    <ui5-button design="Negative" (click)="onButtonClick($event, 'Negative Design')">Negative</ui5-button>
+    <ui5-button design="Transparent" (click)="onButtonClick($event, 'Transparent Design')">Transparent</ui5-button>
+    <ui5-button design="Attention" (click)="onButtonClick($event, 'Attention Design')">Attention</ui5-button>
+</section>
+
+<section aria-labelledby="button-icons">
+    <h2 id="button-icons">Buttons with Icons</h2>
+    <ui5-button icon="add" (click)="onButtonClick($event, 'Add Button')">Add</ui5-button>
+    <ui5-button icon="delete" design="Negative" (click)="onButtonClick($event, 'Delete Button')">Delete</ui5-button>
+    <ui5-button icon="edit" design="Emphasized" (click)="onButtonClick($event, 'Edit Button')">Edit</ui5-button>
+    <ui5-button icon="save" design="Positive" (click)="onButtonClick($event, 'Save Button')">Save</ui5-button>
+    <ui5-button icon="home" endIcon="navigation-down-arrow" (click)="onButtonClick($event, 'Home with End Icon')"
+        >Home</ui5-button
+    >
+</section>
+
+<section aria-labelledby="button-icon-only">
+    <h2 id="button-icon-only">Icon-only Buttons</h2>
+    <ui5-button
+        icon="add"
+        tooltip="Add item"
+        aria-label="Add"
+        (click)="onButtonClick($event, 'Add Icon Only')"
+    ></ui5-button>
+    <ui5-button
+        icon="delete"
+        tooltip="Delete item"
+        aria-label="Delete"
+        design="Negative"
+        (click)="onButtonClick($event, 'Delete Icon Only')"
+    ></ui5-button>
+    <ui5-button
+        icon="settings"
+        tooltip="Settings"
+        aria-label="Settings"
+        (click)="onButtonClick($event, 'Settings Icon Only')"
+    ></ui5-button>
+    <ui5-button
+        icon="search"
+        tooltip="Search"
+        aria-label="Search"
+        design="Transparent"
+        (click)="onButtonClick($event, 'Search Icon Only')"
+    ></ui5-button>
+</section>
+
+<section aria-labelledby="button-loading">
+    <h2 id="button-loading">Button Loading States</h2>
+    <ui5-button [loading]="isLoading" (click)="toggleLoading()">
+        {{ isLoading() ? 'Loading...' : 'Click to Load' }}
+    </ui5-button>
+    <ui5-button loading="true" [loadingDelay]="delay()">Always Loading</ui5-button>
+</section>
+
+<section aria-labelledby="button-types">
+    <h2 id="button-types">Button Types (Form Context)</h2>
+    <form>
+        <ui5-button type="Button" (click)="onButtonClick($event, 'Regular Button')">Regular Button</ui5-button>
+        <ui5-button type="Submit" design="Emphasized">Submit Form</ui5-button>
+        <ui5-button type="Reset" design="Transparent">Reset Form</ui5-button>
+    </form>
+</section>
+
+<section aria-labelledby="button-accessibility">
+    <h2 id="button-accessibility">Accessibility Examples</h2>
+    <ui5-button
+        accessibleName="Close dialog"
+        icon="decline"
+        tooltip="Close"
+        aria-label="Close dialog"
+        (click)="onButtonClick($event, 'Close Dialog')"
+    >
+    </ui5-button>
+    <ui5-button
+        accessibleDescription="This button will open a menu with additional options"
+        [accessibilityAttributes]="{ hasPopup: 'menu', expanded: 'false' }"
+        endIcon="navigation-down-arrow"
+        (click)="onButtonClick($event, 'Menu Button')"
+    >
+        Options
+    </ui5-button>
+</section>
