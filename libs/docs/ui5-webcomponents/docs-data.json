@@ -23,6 +23,10 @@
             "name": "Button"
         },
         {
+            "url": "ui5-webcomponents/calendar",
+            "name": "Calendar"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         }

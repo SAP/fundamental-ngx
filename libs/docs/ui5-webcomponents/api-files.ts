@@ -10,5 +10,6 @@ export const API_FILES = {
     avatarGroup: ['AvatarGroup'],
     bar: ['Bar'],
     button: ['Button'],
+    calendar: ['Calendar'],
     popover: ['Popover']
 };
