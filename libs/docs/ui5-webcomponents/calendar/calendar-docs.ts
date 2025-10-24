@@ -14,8 +14,8 @@ import '@ui5/webcomponents-base/dist/features/LegacyDateFormats.js';
 import '@ui5/webcomponents-localization/dist/Assets.js';
 import '@ui5/webcomponents-localization/dist/features/calendar/Gregorian.js';
 
-const basicSampleHtml = 'calendar-example.html';
-const basicSampleTs = 'calendar-example.ts';
+const basicSampleHtml = 'calendar-sample.html';
+const basicSampleTs = 'calendar-sample.ts';
 
 @Component({
     selector: 'ui5-calendar-docs',

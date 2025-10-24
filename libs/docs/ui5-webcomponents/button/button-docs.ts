@@ -9,8 +9,8 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { ButtonExample } from './examples/button-sample';
 
-const basicSampleHtml = 'button-example.html';
-const basicSampleTs = 'button-example.ts';
+const basicSampleHtml = 'button-sample.html';
+const basicSampleTs = 'button-sample.ts';
 
 @Component({
     selector: 'ui5-button-docs',
