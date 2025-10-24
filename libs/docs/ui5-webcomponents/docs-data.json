@@ -23,6 +23,14 @@
             "name": "Busy Indicator"
         },
         {
+            "url": "ui5-webcomponents/button",
+            "name": "Button"
+        },
+        {
+            "url": "ui5-webcomponents/calendar",
+            "name": "Calendar"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         }

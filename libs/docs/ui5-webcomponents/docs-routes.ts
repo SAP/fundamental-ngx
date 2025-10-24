@@ -35,6 +35,14 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/busy-indicator').then(configureLibRoutes)
     },
     {
+        path: 'button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/button').then(configureLibRoutes)
+    },
+    {
+        path: 'calendar',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/calendar').then(configureLibRoutes)
+    },
+    {
         path: 'popover',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
     }

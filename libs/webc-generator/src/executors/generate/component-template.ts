@@ -15,7 +15,7 @@ function getBaseType(typeText: string | undefined): string | undefined {
 
 /** Type guard to check if a member is a ClassField. */
 function isField(member: CEM.ClassMember): member is CEM.ClassField {
-    return member.kind === 'field';
+    return member.kind === 'field' && member.privacy === 'public' && member.readonly === undefined;
 }
 
 /** Checks if the component should host the CVA directive. */
