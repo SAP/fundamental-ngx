@@ -53,6 +53,10 @@ const componentRoutes = [
     {
         path: 'segmented-button',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/segmented-button').then(configureLibRoutes)
+    },
+    {
+        path: 'slider',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/slider').then(configureLibRoutes)
     }
 ];
 

@@ -41,6 +41,10 @@
         {
             "url": "ui5-webcomponents/segmented-button",
             "name": "Segmented Button"
+        },
+        {
+            "url": "ui5-webcomponents/slider",
+            "name": "Slider"
         }
     ]
 }
