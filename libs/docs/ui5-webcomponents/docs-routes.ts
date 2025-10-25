@@ -45,6 +45,10 @@ const componentRoutes = [
     {
         path: 'popover',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
+    },
+    {
+        path: 'segmented-button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/segmented-button').then(configureLibRoutes)
     }
 ];
 

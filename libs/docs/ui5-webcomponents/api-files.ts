@@ -11,6 +11,7 @@ export const API_FILES = {
     bar: ['Bar'],
     busyIndicator: ['BusyIndicator'],
     button: ['Button'],
-    calendar: ['Calendar'],
-    popover: ['Popover']
+    calendar: ['Calendar', 'CalendarDate'],
+    popover: ['Popover'],
+    segmentedButton: ['SegmentedButton', 'SegmentedButtonItem']
 };

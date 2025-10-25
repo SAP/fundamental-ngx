@@ -1,28 +1,32 @@
-<section aria-labelledby="calendar-basic" class="calendar-section">
-    <h2 id="calendar-basic">Calendar</h2>
+<section aria-labelledby="calendar-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-basic" class="fd-section__title">Calendar</h2>
+    </div>
     <ui5-calendar (ui5selectionChange)="onSelectionChange($event)" aria-label="Basic calendar example"> </ui5-calendar>
-    <p><strong>Selected Dates:</strong> {{ selectedDatesDisplay() }}</p>
-    <p><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</p>
+    <p class="fd-margin-top--sm"><strong>Selected Dates:</strong> {{ selectedDatesDisplay() }}</p>
+    <p class="fd-margin-top--tiny"><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</p>
 </section>
 
-<section aria-labelledby="calendar-configured" class="calendar-section">
-    <h2 id="calendar-configured">Calendar with Configuration</h2>
-    <h3>Selection Mode</h3>
+<section aria-labelledby="calendar-configured" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-configured" class="fd-section__title">Calendar with Configuration</h2>
+    </div>
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Selection Mode</h3>
     <ui5-segmented-button (ui5SelectionChange)="onSelectionModeChange($event)">
         @for (mode of selectionModes(); track mode) {
         <ui5-segmented-button-item [attr.data-mode]="mode"> {{ mode }} </ui5-segmented-button-item>
         }
     </ui5-segmented-button>
-    <h3>Calendar Type</h3>
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Calendar Type</h3>
     <ui5-segmented-button (ui5SelectionChange)="onCalendarTypeChange($event)">
         @for (type of calendarTypes(); track type) {
         <ui5-segmented-button-item [attr.data-type]="type"> {{ type }} </ui5-segmented-button-item>
         }
     </ui5-segmented-button>
-    <h3>Week Numbers</h3>
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Week Numbers</h3>
     <ui5-button (ui5Click)="toggleWeekNumbers()"> {{ showWeekNumbers() ? 'Hide' : 'Show' }} Week Numbers </ui5-button>
-    <h3>Quick Actions</h3>
-    <div class="button-group">
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Quick Actions</h3>
+    <div class="fd-margin-bottom--sm" style="display: flex; gap: 0.5rem; flex-wrap: wrap">
         <ui5-button (ui5Click)="selectToday()">Select Today</ui5-button>
         <ui5-button (ui5Click)="selectThisWeek()" [disabled]="currentSelectionMode() === 'Single'">
             Select This Week
@@ -44,8 +48,8 @@
         <ui5-date [value]="date"></ui5-date>
         } }
     </ui5-calendar>
-    <h3>Current Configuration:</h3>
-    <ul>
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Current Configuration:</h3>
+    <ul class="fd-margin-top--tiny">
         <li><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</li>
         <li><strong>Calendar Type:</strong> {{ currentCalendarType() }}</li>
         <li><strong>Week Numbers:</strong> {{ showWeekNumbers() ? 'Shown' : 'Hidden' }}</li>
@@ -56,8 +60,10 @@
     </ul>
 </section>
 
-<section aria-labelledby="calendar-range" class="calendar-section">
-    <h2 id="calendar-range">Range Selection Calendar</h2>
+<section aria-labelledby="calendar-range" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-range" class="fd-section__title">Range Selection Calendar</h2>
+    </div>
     <ui5-calendar
         selectionMode="Range"
         (ui5selectionChange)="onSelectionChange($event)"
@@ -65,12 +71,16 @@
     >
     </ui5-calendar>
     @if (isRangeMode()) {
-    <p class="info-text">Range mode allows selection of a date range. Click on start date, then end date.</p>
+    <p class="fd-margin-top--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Range mode allows selection of a date range. Click on start date, then end date.
+    </p>
     }
 </section>
 
-<section aria-labelledby="calendar-multiple" class="calendar-section">
-    <h2 id="calendar-multiple">Multiple Selection Calendar</h2>
+<section aria-labelledby="calendar-multiple" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-multiple" class="fd-section__title">Multiple Selection Calendar</h2>
+    </div>
     <ui5-calendar
         selectionMode="Multiple"
         (ui5selectionChange)="onSelectionChange($event)"
@@ -78,15 +88,17 @@
     >
     </ui5-calendar>
     @if (isMultipleMode()) {
-    <p class="info-text">
+    <p class="fd-margin-top--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
         Multiple mode allows selection of multiple individual dates. Hold Ctrl/Cmd while clicking to select multiple
         dates.
     </p>
     }
 </section>
 
-<section aria-labelledby="calendar-restricted" class="calendar-section">
-    <h2 id="calendar-restricted">Calendar with Date Restrictions</h2>
+<section aria-labelledby="calendar-restricted" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-restricted" class="fd-section__title">Calendar with Date Restrictions</h2>
+    </div>
     <ui5-calendar
         selectionMode="Single"
         minDate="2024-06-01"
@@ -96,61 +108,93 @@
         aria-label="Date restricted calendar"
     >
     </ui5-calendar>
-    <p class="info-text">This calendar is restricted to dates between June 1, 2024 and December 31, 2024.</p>
+    <p class="fd-margin-top--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
+        This calendar is restricted to dates between June 1, 2024 and December 31, 2024.
+    </p>
 </section>
 
-<section aria-labelledby="calendar-different-types" class="calendar-section">
-    <h2 id="calendar-different-types">Different Calendar Types</h2>
+<section aria-labelledby="calendar-different-types" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-different-types" class="fd-section__title">Different Calendar Types</h2>
+    </div>
 
-    <div class="calendar-grid">
-        <div class="calendar-item">
-            <h3>Gregorian Calendar</h3>
-            <ui5-calendar
-                primaryCalendarType="Gregorian"
-                selectionMode="Single"
-                (ui5selectionChange)="onSelectionChange($event)"
-                aria-label="Gregorian calendar"
-            >
-            </ui5-calendar>
-        </div>
+    <div class="fd-container fd-margin-top--sm">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Gregorian Calendar</h3>
+                    </div>
+                    <div class="fd-panel__content" style="text-align: center">
+                        <ui5-calendar
+                            primaryCalendarType="Gregorian"
+                            selectionMode="Single"
+                            (ui5selectionChange)="onSelectionChange($event)"
+                            aria-label="Gregorian calendar"
+                        >
+                        </ui5-calendar>
+                    </div>
+                </div>
+            </div>
 
-        <div class="calendar-item">
-            <h3>Islamic Calendar</h3>
-            <ui5-calendar
-                primaryCalendarType="Islamic"
-                selectionMode="Single"
-                (ui5selectionChange)="onSelectionChange($event)"
-                aria-label="Islamic calendar"
-            >
-            </ui5-calendar>
-        </div>
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Islamic Calendar</h3>
+                    </div>
+                    <div class="fd-panel__content" style="text-align: center">
+                        <ui5-calendar
+                            primaryCalendarType="Islamic"
+                            selectionMode="Single"
+                            (ui5selectionChange)="onSelectionChange($event)"
+                            aria-label="Islamic calendar"
+                        >
+                        </ui5-calendar>
+                    </div>
+                </div>
+            </div>
 
-        <div class="calendar-item">
-            <h3>Japanese Calendar</h3>
-            <ui5-calendar
-                primaryCalendarType="Japanese"
-                selectionMode="Single"
-                (ui5selectionChange)="onSelectionChange($event)"
-                aria-label="Japanese calendar"
-            >
-            </ui5-calendar>
-        </div>
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Japanese Calendar</h3>
+                    </div>
+                    <div class="fd-panel__content" style="text-align: center">
+                        <ui5-calendar
+                            primaryCalendarType="Japanese"
+                            selectionMode="Single"
+                            (ui5selectionChange)="onSelectionChange($event)"
+                            aria-label="Japanese calendar"
+                        >
+                        </ui5-calendar>
+                    </div>
+                </div>
+            </div>
 
-        <div class="calendar-item">
-            <h3>Buddhist Calendar</h3>
-            <ui5-calendar
-                primaryCalendarType="Buddhist"
-                selectionMode="Single"
-                (ui5selectionChange)="onSelectionChange($event)"
-                aria-label="Buddhist calendar"
-            >
-            </ui5-calendar>
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Buddhist Calendar</h3>
+                    </div>
+                    <div class="fd-panel__content" style="text-align: center">
+                        <ui5-calendar
+                            primaryCalendarType="Buddhist"
+                            selectionMode="Single"
+                            (ui5selectionChange)="onSelectionChange($event)"
+                            aria-label="Buddhist calendar"
+                        >
+                        </ui5-calendar>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section aria-labelledby="calendar-dual" class="calendar-section">
-    <h2 id="calendar-dual">Dual Calendar Type</h2>
+<section aria-labelledby="calendar-dual" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="calendar-dual" class="fd-section__title">Dual Calendar Type</h2>
+    </div>
     <ui5-calendar
         primaryCalendarType="Gregorian"
         secondaryCalendarType="Islamic"
@@ -159,65 +203,7 @@
         aria-label="Dual calendar type example"
     >
     </ui5-calendar>
-    <p class="info-text">This calendar shows both Gregorian and Islamic dates for better international support.</p>
+    <p class="fd-margin-top--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
+        This calendar shows both Gregorian and Islamic dates for better international support.
+    </p>
 </section>
-
-<style>
-    .calendar-section {
-        margin-bottom: 2rem;
-        padding: 1rem;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-    }
-
-    .control-group {
-        margin-bottom: 1rem;
-    }
-
-    .button-group {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-
-    .control-group ui5-segmented-button {
-        margin-top: 0.5rem;
-    }
-
-    .button-group ui5-button {
-        margin-right: 0.5rem;
-    }
-
-    .selection-info,
-    .configuration-info {
-        margin-top: 1rem;
-        padding: 1rem;
-        background: #f8f9fa;
-        border-radius: 4px;
-    }
-
-    .info-text {
-        margin-top: 0.5rem;
-        color: #666;
-        font-style: italic;
-    }
-
-    .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
-    .calendar-item {
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-    }
-
-    .calendar-item h3 {
-        margin-top: 0;
-        margin-bottom: 1rem;
-    }
-</style>

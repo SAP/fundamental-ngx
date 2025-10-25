@@ -1,0 +1,214 @@
+<section aria-labelledby="segmented-button-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-basic" class="fd-section__title">Basic Segmented Button</h2>
+    </div>
+    <ui5-segmented-button
+        (ui5SelectionChange)="onBasicSelectionChange($event)"
+        aria-label="Basic segmented button example"
+    >
+        <ui5-segmented-button-item>Option 1</ui5-segmented-button-item>
+        <ui5-segmented-button-item selected>Option 2</ui5-segmented-button-item>
+        <ui5-segmented-button-item>Option 3</ui5-segmented-button-item>
+        <ui5-segmented-button-item>Option 4</ui5-segmented-button-item>
+    </ui5-segmented-button>
+    <p class="fd-margin-top--sm"><strong>Selected Items:</strong> {{ basicSelectedItemsDisplay() }}</p>
+</section>
+
+<section aria-labelledby="segmented-button-configuration" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-configuration" class="fd-section__title">Segmented Button with Configuration</h2>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Selection Mode</h3>
+    <ui5-segmented-button (ui5SelectionChange)="onSelectionModeChange($event)">
+        @for (mode of selectionModes(); track mode) {
+        <ui5-segmented-button-item [selected]="currentSelectionMode() === mode" [attr.data-mode]="mode">
+            {{ mode }}
+        </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Control Actions</h3>
+    <div class="fd-margin-bottom--sm" style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+        <ui5-button (ui5Click)="toggleDisabled()">
+            {{ isDisabled() ? 'Enable' : 'Disable' }} Segmented Button
+        </ui5-button>
+        <ui5-button (ui5Click)="clearSelection()">Clear Selection</ui5-button>
+        @if (isMultipleMode()) {
+        <ui5-button (ui5Click)="selectAll()">Select All</ui5-button>
+        }
+        <ui5-button (ui5Click)="resetToDefaults()">Reset to Defaults</ui5-button>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Configurable Segmented Button</h3>
+    <ui5-segmented-button
+        [selectionMode]="currentSelectionMode()"
+        (ui5SelectionChange)="onConfigurableSelectionChange($event)"
+        aria-label="Configurable segmented button"
+    >
+        <ui5-segmented-button-item [disabled]="isDisabled()" [selected]="isConfigurableItemSelected('Option 1')"
+            >Option 1</ui5-segmented-button-item
+        >
+        <ui5-segmented-button-item [disabled]="isDisabled()" [selected]="isConfigurableItemSelected('Option 2')"
+            >Option 2</ui5-segmented-button-item
+        >
+        <ui5-segmented-button-item [disabled]="isDisabled()" [selected]="isConfigurableItemSelected('Option 3')"
+            >Option 3</ui5-segmented-button-item
+        >
+        <ui5-segmented-button-item [disabled]="isDisabled()" [selected]="isConfigurableItemSelected('Option 4')"
+            >Option 4</ui5-segmented-button-item
+        >
+    </ui5-segmented-button>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Current Configuration:</h3>
+    <ul class="fd-margin-top--tiny">
+        <li><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</li>
+        <li><strong>Disabled:</strong> {{ isDisabled() ? 'Yes' : 'No' }}</li>
+        <li><strong>Selected Items:</strong> {{ configurableSelectedItemsDisplay() }}</li>
+    </ul>
+</section>
+
+<section aria-labelledby="segmented-button-multiple" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-multiple" class="fd-section__title">Multiple Selection Mode</h2>
+    </div>
+    <ui5-segmented-button
+        selectionMode="Multiple"
+        (ui5SelectionChange)="onMultipleSelectionChange($event)"
+        aria-label="Multiple selection segmented button"
+    >
+        <ui5-segmented-button-item [selected]="isMultipleItemSelected('Item A')">Item A</ui5-segmented-button-item>
+        <ui5-segmented-button-item [selected]="isMultipleItemSelected('Item B')">Item B</ui5-segmented-button-item>
+        <ui5-segmented-button-item [selected]="isMultipleItemSelected('Item C')">Item C</ui5-segmented-button-item>
+        <ui5-segmented-button-item [selected]="isMultipleItemSelected('Item D')">Item D</ui5-segmented-button-item>
+    </ui5-segmented-button>
+    <p class="fd-margin-top--sm"><strong>Selected Items:</strong> {{ multipleSelectedItemsDisplay() }}</p>
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Multiple mode allows selection of multiple items simultaneously. Click on items to toggle their selection.
+    </p>
+</section>
+
+<section aria-labelledby="segmented-button-single" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-single" class="fd-section__title">Single Selection Mode</h2>
+    </div>
+    <ui5-segmented-button
+        selectionMode="Single"
+        (ui5SelectionChange)="onSingleSelectionChange($event)"
+        aria-label="Single selection segmented button"
+    >
+        <ui5-segmented-button-item [selected]="isSingleItemSelected('Choice 1')">Choice 1</ui5-segmented-button-item>
+        <ui5-segmented-button-item [selected]="isSingleItemSelected('Choice 2')">Choice 2</ui5-segmented-button-item>
+        <ui5-segmented-button-item [selected]="isSingleItemSelected('Choice 3')">Choice 3</ui5-segmented-button-item>
+    </ui5-segmented-button>
+    <p class="fd-margin-top--sm"><strong>Selected Items:</strong> {{ singleSelectedItemsDisplay() }}</p>
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Single mode allows only one item to be selected at a time. Selecting a new item deselects the previous one.
+    </p>
+</section>
+
+<section aria-labelledby="segmented-button-use-cases" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-use-cases" class="fd-section__title">Real-World Use Cases</h2>
+    </div>
+
+    <div class="fd-container fd-margin-top--sm">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Theme Selector</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-segmented-button (ui5SelectionChange)="onThemeChange($event)" aria-label="Theme selection">
+                            @for (theme of themeOptions(); track theme) {
+                            <ui5-segmented-button-item [selected]="currentTheme() === theme">
+                                {{ theme | titlecase }}
+                            </ui5-segmented-button-item>
+                            }
+                        </ui5-segmented-button>
+                        <p class="fd-margin-top--sm"><strong>Current Theme:</strong> {{ currentTheme() }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Priority Selector</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-segmented-button
+                            (ui5SelectionChange)="onPriorityChange($event)"
+                            aria-label="Priority selection"
+                        >
+                            @for (priority of priorityLevels(); track priority) {
+                            <ui5-segmented-button-item [selected]="selectedPriority() === priority">
+                                {{ priority | titlecase }}
+                            </ui5-segmented-button-item>
+                            }
+                        </ui5-segmented-button>
+                        <p class="fd-margin-top--sm"><strong>Selected Priority:</strong> {{ selectedPriority() }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6 fd-col-lg--4">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Status Workflow</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-segmented-button
+                            (ui5SelectionChange)="onStatusChange($event)"
+                            aria-label="Status selection"
+                        >
+                            @for (status of statusOptions(); track status) {
+                            <ui5-segmented-button-item [selected]="currentStatus() === status">
+                                {{ status | titlecase }}
+                            </ui5-segmented-button-item>
+                            }
+                        </ui5-segmented-button>
+                        <p class="fd-margin-top--sm"><strong>Current Status:</strong> {{ currentStatus() }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="segmented-button-disabled" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-disabled" class="fd-section__title">Disabled States</h2>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Individual Disabled Items</h3>
+    <ui5-segmented-button aria-label="Mixed disabled states">
+        <ui5-segmented-button-item>Active Item</ui5-segmented-button-item>
+        <ui5-segmented-button-item disabled>Disabled Item</ui5-segmented-button-item>
+        <ui5-segmented-button-item selected>Selected Active</ui5-segmented-button-item>
+        <ui5-segmented-button-item disabled>Another Disabled</ui5-segmented-button-item>
+    </ui5-segmented-button>
+
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Disabled items cannot be selected or focused and are visually distinguished from active items.
+    </p>
+</section>
+
+<section aria-labelledby="segmented-button-accessibility" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="segmented-button-accessibility" class="fd-section__title">Accessibility Features</h2>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">With ARIA Labels</h3>
+    <ui5-segmented-button accessibleName="File format selection" aria-label="Choose file format">
+        <ui5-segmented-button-item tooltip="Portable Document Format">PDF</ui5-segmented-button-item>
+        <ui5-segmented-button-item tooltip="Microsoft Word Document">DOCX</ui5-segmented-button-item>
+        <ui5-segmented-button-item tooltip="Plain Text File">TXT</ui5-segmented-button-item>
+        <ui5-segmented-button-item tooltip="Comma Separated Values">CSV</ui5-segmented-button-item>
+    </ui5-segmented-button>
+
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Each item includes tooltips for better accessibility. The segmented button has proper ARIA labeling.
+    </p>
+</section>

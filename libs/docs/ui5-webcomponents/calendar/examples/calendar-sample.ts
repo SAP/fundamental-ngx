@@ -23,6 +23,13 @@ import '@ui5/webcomponents-localization/dist/features/calendar/Persian.js';
 // Set language configuration
 import { setLanguage } from '@ui5/webcomponents-base/dist/config/Language.js';
 
+// Import Fundamental Styles
+import 'fundamental-styles/dist/layout-grid.css';
+import 'fundamental-styles/dist/margins.css';
+import 'fundamental-styles/dist/paddings.css';
+import 'fundamental-styles/dist/panel.css';
+import 'fundamental-styles/dist/section.css';
+
 // Create a TypeScript type from the enum for better developer experience
 type CalendarType = (typeof CalendarTypeEnum)[keyof typeof CalendarTypeEnum];
 
