@@ -132,11 +132,13 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[], cla
 function generateOutputs(data: CEM.CustomElementDeclaration, className: string): string {
     const outputs: string[] = [];
     data.events?.forEach((event) => {
+        // Convert kebab-case to PascalCase after ui5 prefix
+        const pascalCaseEventName = kebabToCamelCase(event.name).replace(/^./, (char) => char.toUpperCase());
         outputs.push(`
   /**
    * ${event.description || ''}
    */
-  ui5${kebabToCamelCase(event.name)} = output<UI5CustomEvent<_${className}, '${event.name}'>>();`);
+  ui5${pascalCaseEventName} = output<UI5CustomEvent<_${className}, '${event.name}'>>();`);
     });
     return outputs.join('\n');
 }
@@ -199,7 +201,13 @@ export function componentTemplate(
         outputEvents.length > 0
             ? `
     const outputsToSync = [
-${outputEvents.map((e) => `      'ui5-${kebabToCamelCase(e.name)}',`).join('\n')}
+${outputEvents
+    .map((e) => {
+        const camelCase = kebabToCamelCase(e.name);
+        const pascalCase = camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+        return `      'ui5${pascalCase}',`;
+    })
+    .join('\n')}
     ];`
             : '';
 
@@ -208,7 +216,8 @@ ${outputEvents.map((e) => `      'ui5-${kebabToCamelCase(e.name)}',`).join('\n')
             ? `
     // Synchronize outputs (events)
     for (const outputName of outputsToSync) {
-      const eventName = outputName.replace('ui5', '').toLowerCase();
+      // Map Angular output name to UI5 web component event name
+      const eventName = outputName.replace('ui5', '').replace(/([A-Z])/g, '-$1').toLowerCase().substring(1);
       // Ensure the output property exists and has an emit function before adding listener
       if (this[outputName] && typeof this[outputName].emit === 'function' && wcElement.addEventListener) {
         // Cast the listener to the correct type to satisfy TypeScript

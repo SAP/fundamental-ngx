@@ -1,6 +1,7 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Calendar } from '@fundamental-ngx/ui5-webcomponents/calendar';
+import { CalendarDate } from '@fundamental-ngx/ui5-webcomponents/calendar-date';
 import { SegmentedButton } from '@fundamental-ngx/ui5-webcomponents/segmented-button';
 import { SegmentedButtonItem } from '@fundamental-ngx/ui5-webcomponents/segmented-button-item';
 import { CalendarSelectionMode, CalendarWeekNumbering } from '@fundamental-ngx/ui5-webcomponents/types';
@@ -17,6 +18,7 @@ import '@ui5/webcomponents-localization/dist/features/calendar/Buddhist.js';
 import '@ui5/webcomponents-localization/dist/features/calendar/Gregorian.js';
 import '@ui5/webcomponents-localization/dist/features/calendar/Islamic.js';
 import '@ui5/webcomponents-localization/dist/features/calendar/Japanese.js';
+import '@ui5/webcomponents-localization/dist/features/calendar/Persian.js';
 
 // Set language configuration
 import { setLanguage } from '@ui5/webcomponents-base/dist/config/Language.js';
@@ -28,17 +30,15 @@ type CalendarType = (typeof CalendarTypeEnum)[keyof typeof CalendarTypeEnum];
     selector: 'ui5-calendar-sample',
     templateUrl: './calendar-sample.html',
     standalone: true,
-    imports: [Calendar, Button, SegmentedButton, SegmentedButtonItem]
+    imports: [Calendar, Button, SegmentedButton, SegmentedButtonItem, CalendarDate]
 })
 export class CalendarExample {
-    // Using Angular 20 signals for reactive state management
     readonly selectedDates = signal<string[]>([]);
     readonly currentSelectionMode = signal<CalendarSelectionMode>(CalendarSelectionMode.Single);
     readonly currentCalendarType = signal<CalendarType>(CalendarTypeEnum.Gregorian);
     readonly showWeekNumbers = signal<boolean>(true);
     readonly currentWeekNumbering = signal<CalendarWeekNumbering>(CalendarWeekNumbering.Default);
 
-    // Computed properties using Angular 20 signals
     readonly selectionModes = computed(() => Object.values(CalendarSelectionMode));
     readonly calendarTypes = computed(() => Object.values(CalendarTypeEnum));
     readonly weekNumberingOptions = computed(() => Object.values(CalendarWeekNumbering));
@@ -74,7 +74,8 @@ export class CalendarExample {
     // Event handlers using Angular 20 patterns
     onSelectionChange(event: any): void {
         const calendarEvent = event.detail;
-        const dates = calendarEvent.selectedDates || [];
+        // Extract selectedValues (date strings) instead of selectedDates (timestamps)
+        const dates = calendarEvent.selectedValues || [];
         this.selectedDates.set(dates);
         console.log('Calendar selection changed:', dates);
     }
@@ -82,7 +83,7 @@ export class CalendarExample {
     // Methods to update signals
     updateSelectionMode(mode: CalendarSelectionMode): void {
         this.currentSelectionMode.set(mode);
-        this.selectedDates.set([]); // Clear selection when changing mode
+        this.selectedDates.set([]);
     }
 
     updateCalendarType(type: CalendarType): void {
@@ -91,19 +92,19 @@ export class CalendarExample {
 
     // Event handlers for UI5 segmented buttons
     onSelectionModeChange(event: any): void {
-        console.log('onSelectionModeChange called');
+        console.log('onSelectionModeChange called', event.detail);
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {
-            const selectedKey = selectedItems[0].key;
+            const selectedKey = selectedItems[0].innerText;
             this.updateSelectionMode(selectedKey as CalendarSelectionMode);
         }
     }
 
     onCalendarTypeChange(event: any): void {
-        console.log('onCalendarTypeChange called');
+        console.log('onCalendarTypeChange called:', event.detail.selectedItems[0].innerText);
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {
-            const selectedKey = selectedItems[0].key;
+            const selectedKey = selectedItems[0].innerText;
             this.updateCalendarType(selectedKey as CalendarType);
         }
     }

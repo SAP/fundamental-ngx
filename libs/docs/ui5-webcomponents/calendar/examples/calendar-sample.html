@@ -1,57 +1,34 @@
 <section aria-labelledby="calendar-basic" class="calendar-section">
-    <h2 id="calendar-basic">Basic Calendar</h2>
-    <ui5-calendar
-        [selectionMode]="currentSelectionMode()"
-        (ui5selectionChange)="onSelectionChange($event)"
-        aria-label="Basic calendar example"
-    >
-    </ui5-calendar>
-    <div class="selection-info">
-        <p><strong>Selected Dates:</strong> {{ selectedDatesDisplay() }}</p>
-        <p><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</p>
-    </div>
-</section>
-
-<section aria-labelledby="calendar-controls" class="calendar-section">
-    <h2 id="calendar-controls">Calendar Controls</h2>
-    <div class="control-group">
-        <h3>Selection Mode</h3>
-        <ui5-segmented-button></ui5-segmented-button>
-        <ui5-segmented-button (ui5selectionChange)="onSelectionModeChange($event)">
-            @for (mode of selectionModes(); track mode) {
-            <ui5-segmented-button-item [attr.data-mode]="mode"> {{ mode }} </ui5-segmented-button-item>
-            }
-        </ui5-segmented-button>
-    </div>
-
-    <div class="control-group">
-        <h3>Calendar Type</h3>
-        <ui5-segmented-button (ui5selectionChange)="onCalendarTypeChange($event)">
-            @for (type of calendarTypes(); track type) {
-            <ui5-segmented-button-item [attr.data-type]="type"> {{ type }} </ui5-segmented-button-item>
-            }
-        </ui5-segmented-button>
-    </div>
-
-    <div class="control-group">
-        <h3>Week Numbers</h3>
-        <ui5-button (click)="toggleWeekNumbers()"> {{ showWeekNumbers() ? 'Hide' : 'Show' }} Week Numbers </ui5-button>
-    </div>
-
-    <div class="control-group">
-        <h3>Quick Actions</h3>
-        <div class="button-group">
-            <ui5-button (click)="selectToday()">Select Today</ui5-button>
-            <ui5-button (click)="selectThisWeek()" [disabled]="currentSelectionMode() === 'Single'">
-                Select This Week
-            </ui5-button>
-            <ui5-button (click)="clearSelection()">Clear Selection</ui5-button>
-        </div>
-    </div>
+    <h2 id="calendar-basic">Calendar</h2>
+    <ui5-calendar (ui5selectionChange)="onSelectionChange($event)" aria-label="Basic calendar example"> </ui5-calendar>
+    <p><strong>Selected Dates:</strong> {{ selectedDatesDisplay() }}</p>
+    <p><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</p>
 </section>
 
 <section aria-labelledby="calendar-configured" class="calendar-section">
     <h2 id="calendar-configured">Calendar with Configuration</h2>
+    <h3>Selection Mode</h3>
+    <ui5-segmented-button (ui5SelectionChange)="onSelectionModeChange($event)">
+        @for (mode of selectionModes(); track mode) {
+        <ui5-segmented-button-item [attr.data-mode]="mode"> {{ mode }} </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+    <h3>Calendar Type</h3>
+    <ui5-segmented-button (ui5SelectionChange)="onCalendarTypeChange($event)">
+        @for (type of calendarTypes(); track type) {
+        <ui5-segmented-button-item [attr.data-type]="type"> {{ type }} </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+    <h3>Week Numbers</h3>
+    <ui5-button (ui5Click)="toggleWeekNumbers()"> {{ showWeekNumbers() ? 'Hide' : 'Show' }} Week Numbers </ui5-button>
+    <h3>Quick Actions</h3>
+    <div class="button-group">
+        <ui5-button (ui5Click)="selectToday()">Select Today</ui5-button>
+        <ui5-button (ui5Click)="selectThisWeek()" [disabled]="currentSelectionMode() === 'Single'">
+            Select This Week
+        </ui5-button>
+        <ui5-button (ui5Click)="clearSelection()">Clear Selection</ui5-button>
+    </div>
     <ui5-calendar
         [selectionMode]="currentSelectionMode()"
         [primaryCalendarType]="currentCalendarType()"
@@ -63,19 +40,20 @@
         (ui5selectionChange)="onSelectionChange($event)"
         aria-label="Configured calendar example"
     >
+        @if (currentSelectionMode() !== 'Range') { @for (date of selectedDates(); track date) {
+        <ui5-date [value]="date"></ui5-date>
+        } }
     </ui5-calendar>
-
-    <div class="configuration-info">
-        <h3>Current Configuration:</h3>
-        <ul>
-            <li><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</li>
-            <li><strong>Calendar Type:</strong> {{ currentCalendarType() }}</li>
-            <li><strong>Week Numbers:</strong> {{ showWeekNumbers() ? 'Shown' : 'Hidden' }}</li>
-            <li><strong>Week Numbering:</strong> {{ currentWeekNumbering() }}</li>
-            <li><strong>Format Pattern:</strong> {{ formatPattern() }}</li>
-            <li><strong>Date Range:</strong> {{ minDate() }} to {{ maxDate() }}</li>
-        </ul>
-    </div>
+    <h3>Current Configuration:</h3>
+    <ul>
+        <li><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</li>
+        <li><strong>Calendar Type:</strong> {{ currentCalendarType() }}</li>
+        <li><strong>Week Numbers:</strong> {{ showWeekNumbers() ? 'Shown' : 'Hidden' }}</li>
+        <li><strong>Week Numbering:</strong> {{ currentWeekNumbering() }}</li>
+        <li><strong>Format Pattern:</strong> {{ formatPattern() }}</li>
+        <li><strong>Selected Date:</strong> {{ selectedDates() }}</li>
+        <li><strong>Date Range:</strong> {{ minDate() }} to {{ maxDate() }}</li>
+    </ul>
 </section>
 
 <section aria-labelledby="calendar-range" class="calendar-section">
