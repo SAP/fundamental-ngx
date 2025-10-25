@@ -1,0 +1,18 @@
+{
+    "extends": "../../../../tsconfig.base.json",
+    "files": [],
+    "include": ["**/*.ts"],
+    "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noImplicitReturns": false,
+        "noFallthroughCasesInSwitch": true,
+        "target": "es2020",
+        "outDir": "../../../../dist/out-tsc",
+        "declaration": true,
+        "declarationMap": true,
+        "inlineSources": true,
+        "types": []
+    },
+    "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
+}

@@ -12,7 +12,8 @@ const knownScopes = new Set([
     'tools',
     'datetime-adapter',
     'components-e2e',
-    'i18n'
+    'i18n',
+    'ui5'
 ]);
 
 // For some reason this test hangs. TODO: investigate whats wrong.

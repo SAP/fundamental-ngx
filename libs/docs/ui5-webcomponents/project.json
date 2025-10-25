@@ -1,0 +1,7 @@
+{
+    "name": "docs-ui5-webcomponents",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "tags": ["scope:docs", "type:lib"],
+    "// targets": "to see all targets run: nx show project docs-ui5-webcomponents --web",
+    "targets": {}
+}

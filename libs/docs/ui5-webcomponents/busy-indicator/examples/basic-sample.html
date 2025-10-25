@@ -1,0 +1,9 @@
+<div class="busy-indicator-examples">
+    <ui5-button (ui5Click)="toggleBusyIndicator()"> {{ isActive() ? 'Hide' : 'Show' }} Busy Indicator </ui5-button>
+
+    <div class="example-content">
+        <ui5-busy-indicator [active]="isActive()" text="Loading...">
+            <ui5-label>Content that can be busy</ui5-label>
+        </ui5-busy-indicator>
+    </div>
+</div>

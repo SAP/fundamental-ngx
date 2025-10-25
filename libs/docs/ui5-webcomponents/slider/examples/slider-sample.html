@@ -1,0 +1,427 @@
+<section aria-labelledby="slider-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="slider-basic" class="fd-section__title">Basic Slider</h2>
+    </div>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Simple Value Slider</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Progress: {{ basicSliderValue() }}%</ui5-label>
+                        <ui5-slider
+                            class="fd-margin-top--tiny"
+                            [value]="basicSliderValue()"
+                            [min]="0"
+                            [max]="100"
+                            [step]="1"
+                            [showTooltip]="true"
+                            (ui5Change)="onBasicSliderChange($event)"
+                            accessibleName="Progress slider"
+                        >
+                        </ui5-slider>
+                        <p class="fd-margin-top--sm sap-text sap-helper-text">
+                            A basic slider with tooltip showing current value.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Volume Control</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Volume: {{ volumeDisplay() }}</ui5-label>
+                        <ui5-slider
+                            class="fd-margin-top--tiny"
+                            [value]="volumeValue()"
+                            [min]="0"
+                            [max]="100"
+                            [step]="5"
+                            [showTooltip]="true"
+                            [showTickmarks]="true"
+                            [labelInterval]="4"
+                            (ui5Change)="onVolumeChange($event)"
+                            accessibleName="Volume control slider"
+                        >
+                        </ui5-slider>
+                        <p class="fd-margin-top--sm sap-text sap-helper-text">
+                            Volume slider with tickmarks and labels every 20 units.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="slider-range" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="slider-range" class="fd-section__title">Range Sliders</h2>
+    </div>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Price Range</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Price Range: {{ priceRange() }}</ui5-label>
+                        <ui5-range-slider
+                            class="fd-margin-top--tiny"
+                            [startValue]="priceRangeStart()"
+                            [endValue]="priceRangeEnd()"
+                            [min]="100"
+                            [max]="1000"
+                            [step]="50"
+                            [showTooltip]="true"
+                            (ui5Change)="onPriceRangeChange($event)"
+                            accessibleName="Price range slider"
+                        >
+                        </ui5-range-slider>
+                        <p class="fd-margin-top--sm sap-text sap-helper-text">
+                            Select a price range between $100 and $1000 in $50 increments.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Working Hours</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Working Hours: {{ timeRange() }}</ui5-label>
+                        <ui5-range-slider
+                            class="fd-margin-top--tiny"
+                            [startValue]="timeRangeStart()"
+                            [endValue]="timeRangeEnd()"
+                            [min]="6"
+                            [max]="22"
+                            [step]="1"
+                            [showTooltip]="true"
+                            [showTickmarks]="true"
+                            [labelInterval]="2"
+                            (ui5Change)="onTimeRangeChange($event)"
+                            accessibleName="Working hours range slider"
+                        >
+                        </ui5-range-slider>
+                        <p class="fd-margin-top--sm sap-text sap-helper-text">
+                            Set working hours with tickmarks showing every 2 hours.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="slider-configuration" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="slider-configuration" class="fd-section__title">Configurable Slider</h2>
+    </div>
+
+    <div class="fd-container fd-margin-bottom--md">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Display Options</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <div class="fd-margin-bottom--sm sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                            <ui5-switch [checked]="showTooltip()" (ui5Change)="toggleTooltip()"></ui5-switch>
+                            <ui5-label>Show Tooltip</ui5-label>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                            <ui5-switch [checked]="showTickmarks()" (ui5Change)="toggleTickmarks()"></ui5-switch>
+                            <ui5-label>Show Tickmarks</ui5-label>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                            <ui5-switch
+                                [checked]="editableTooltip()"
+                                (ui5Change)="toggleEditableTooltip()"
+                            ></ui5-switch>
+                            <ui5-label>Editable Tooltip</ui5-label>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                            <ui5-switch [checked]="disabled()" (ui5Change)="toggleDisabled()"></ui5-switch>
+                            <ui5-label>Disabled</ui5-label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Value Options</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <div class="fd-margin-bottom--sm">
+                            <ui5-label>Step Size:</ui5-label>
+                            <ui5-segmented-button
+                                class="fd-margin-top--tiny"
+                                (ui5SelectionChange)="onStepChange($event)"
+                            >
+                                @for (stepOption of stepOptions(); track stepOption) {
+                                <ui5-segmented-button-item [selected]="step() === stepOption">
+                                    {{ stepOption }}
+                                </ui5-segmented-button-item>
+                                }
+                            </ui5-segmented-button>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm">
+                            <ui5-label>Label Interval:</ui5-label>
+                            <ui5-segmented-button
+                                class="fd-margin-top--tiny"
+                                (ui5SelectionChange)="onLabelIntervalChange($event)"
+                            >
+                                @for (interval of labelIntervalOptions(); track interval) {
+                                <ui5-segmented-button-item [selected]="labelInterval() === interval">
+                                    {{ interval === 0 ? 'None' : interval }}
+                                </ui5-segmented-button-item>
+                                }
+                            </ui5-segmented-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Quick Presets</h3>
+    <div class="fd-margin-bottom--sm sap-flex sap-flex--gap-small sap-flex--wrap">
+        <ui5-button (ui5Click)="setBasicConfiguration()">Basic Slider</ui5-button>
+        <ui5-button (ui5Click)="setAdvancedConfiguration()">Advanced Features</ui5-button>
+        <ui5-button (ui5Click)="setCustomRangeConfiguration()">Custom Range</ui5-button>
+        <ui5-button (ui5Click)="resetConfiguration()">Reset to Defaults</ui5-button>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Configurable Demo Slider</h3>
+    <div class="fd-panel">
+        <div class="fd-panel__content">
+            <ui5-label>Current Value: {{ configSliderValue() }}</ui5-label>
+            <ui5-slider
+                class="fd-margin-top--tiny"
+                [value]="configSliderValue()"
+                [min]="configMin()"
+                [max]="configMax()"
+                [step]="step()"
+                [showTooltip]="showTooltip()"
+                [showTickmarks]="showTickmarks()"
+                [editableTooltip]="editableTooltip()"
+                [labelInterval]="labelInterval()"
+                [disabled]="disabled()"
+                (ui5Change)="onConfigSliderChange($event)"
+                accessibleName="Configurable demo slider"
+            >
+            </ui5-slider>
+        </div>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Current Configuration:</h3>
+    <ul class="fd-margin-top--tiny">
+        <li><strong>Show Tooltip:</strong> {{ showTooltip() ? 'Yes' : 'No' }}</li>
+        <li><strong>Show Tickmarks:</strong> {{ showTickmarks() ? 'Yes' : 'No' }}</li>
+        <li><strong>Editable Tooltip:</strong> {{ editableTooltip() ? 'Yes' : 'No' }}</li>
+        <li><strong>Disabled:</strong> {{ disabled() ? 'Yes' : 'No' }}</li>
+        <li><strong>Step Size:</strong> {{ step() }}</li>
+        <li><strong>Label Interval:</strong> {{ labelInterval() === 0 ? 'None' : labelInterval() }}</li>
+        <li><strong>Range:</strong> {{ configMin() }} - {{ configMax() }}</li>
+    </ul>
+</section>
+
+<section aria-labelledby="slider-advanced" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="slider-advanced" class="fd-section__title">Advanced Examples</h2>
+    </div>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Temperature Control</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Temperature: {{ temperatureDisplay() }}</ui5-label>
+                        <ui5-slider
+                            class="fd-margin-top--tiny"
+                            [value]="temperatureValue()"
+                            [min]="16"
+                            [max]="30"
+                            [step]="0.5"
+                            [showTooltip]="true"
+                            [editableTooltip]="true"
+                            [showTickmarks]="true"
+                            [labelInterval]="2"
+                            (ui5Change)="onTemperatureChange($event)"
+                            accessibleName="Temperature control slider"
+                        >
+                        </ui5-slider>
+                        <div class="fd-margin-top--sm sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                            <div class="temperature-indicator"></div>
+                            <span class="sap-text sap-helper-text"> Editable tooltip with decimal steps </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Image Brightness</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Brightness: {{ brightnessValue() }}%</ui5-label>
+                        <ui5-slider
+                            class="fd-margin-top--tiny"
+                            [value]="brightnessValue()"
+                            [min]="10"
+                            [max]="200"
+                            [step]="10"
+                            [showTooltip]="true"
+                            (ui5Change)="onBrightnessChange($event)"
+                            accessibleName="Image brightness slider"
+                        >
+                        </ui5-slider>
+                        <div class="fd-margin-top--sm sap-flex sap-flex--center-column">
+                            <div
+                                style="
+                                    width: 100px;
+                                    height: 60px;
+                                    background: url('https://picsum.photos/100/60?id=10') center/cover;
+                                    border-radius: 4px;
+                                    transition: filter 0.2s ease;
+                                "
+                                [style.filter]="getBrightnessFilter()"
+                            ></div>
+                            <p class="sap-text sap-margin-top-tiny sap-helper-text">Live brightness adjustment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Progress Indicator</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Auto-incrementing Progress: {{ progressValue() }}%</ui5-label>
+                        <ui5-slider
+                            class="fd-margin-top--tiny"
+                            [value]="progressValue()"
+                            [min]="0"
+                            [max]="100"
+                            [disabled]="true"
+                            [showTooltip]="true"
+                            accessibleName="Progress indicator slider"
+                        >
+                        </ui5-slider>
+                        <div class="fd-margin-top--sm">
+                            <div class="progress-bar-container">
+                                <div
+                                    [style.width.%]="progressValue()"
+                                    [style.background]="getProgressColor()"
+                                    class="progress-bar-fill"
+                                ></div>
+                            </div>
+                            <p class="sap-text sap-margin-top-tiny sap-helper-text">
+                                Disabled slider showing real-time progress
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Quality Settings</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <ui5-label>Quality Level: {{ qualityText() }} ({{ qualityValue() }})</ui5-label>
+                        <ui5-slider
+                            class="fd-margin-top--tiny"
+                            [value]="qualityValue()"
+                            [min]="1"
+                            [max]="10"
+                            [step]="1"
+                            [showTooltip]="true"
+                            [showTickmarks]="true"
+                            [labelInterval]="1"
+                            (ui5Change)="onQualityChange($event)"
+                            accessibleName="Quality level slider"
+                        >
+                        </ui5-slider>
+                        <div
+                            class="fd-margin-top--sm sap-flex sap-flex--justify-space-between sap-flex--align-items-center"
+                        >
+                            <span class="sap-text sap-helper-text-small" style="color: var(--sapErrorColor)">Low</span>
+                            <span class="sap-text sap-helper-text-small" style="color: var(--sapCriticalColor)"
+                                >Medium</span
+                            >
+                            <span class="sap-text sap-helper-text-small" style="color: var(--sapSuccessColor)"
+                                >High</span
+                            >
+                            <span class="sap-text sap-helper-text-small" style="color: var(--sapInformationColor)"
+                                >Ultra</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="slider-accessibility" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="slider-accessibility" class="fd-section__title">Accessibility Features</h2>
+    </div>
+    <div class="fd-panel">
+        <div class="fd-panel__content">
+            <ui5-label>Zoom Level: {{ zoomDisplay() }}</ui5-label>
+            <ui5-slider
+                class="fd-margin-top--tiny"
+                [value]="zoomValue()"
+                [min]="50"
+                [max]="200"
+                [step]="25"
+                [showTooltip]="true"
+                [editableTooltip]="true"
+                [showTickmarks]="true"
+                [labelInterval]="1"
+                (ui5Change)="onZoomChange($event)"
+                accessibleName="Zoom level control for accessibility"
+            >
+            </ui5-slider>
+            <div class="fd-margin-top--md">
+                <h4 class="sap-margin-bottom-tiny">Keyboard Navigation:</h4>
+                <ul class="sap-text sap-helper-text">
+                    <li><strong>Arrow Keys:</strong> Increase/decrease value by step size</li>
+                    <li><strong>Page Up/Down:</strong> Increase/decrease by larger increments</li>
+                    <li><strong>Home/End:</strong> Jump to minimum/maximum values</li>
+                    <li><strong>Tab:</strong> Navigate to the slider handle</li>
+                    <li><strong>Enter/Space:</strong> Edit tooltip when editable tooltips are enabled</li>
+                </ul>
+            </div>
+            <div class="fd-margin-top--sm">
+                <h4 class="sap-margin-bottom-tiny">Screen Reader Support:</h4>
+                <ul class="sap-text sap-helper-text">
+                    <li>Proper ARIA labeling with <code>accessibleName</code> property</li>
+                    <li>Value announcements on change</li>
+                    <li>Minimum and maximum value announcements</li>
+                    <li>Step size and current position information</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

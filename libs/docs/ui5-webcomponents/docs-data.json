@@ -1,0 +1,50 @@
+{
+    "guides": [
+        {
+            "url": "ui5-webcomponents/home",
+            "name": "Home"
+        }
+    ],
+    "components": [
+        {
+            "url": "ui5-webcomponents/avatar",
+            "name": "Avatar"
+        },
+        {
+            "url": "ui5-webcomponents/avatar-group",
+            "name": "Avatar Group"
+        },
+        {
+            "url": "ui5-webcomponents/bar",
+            "name": "Bar"
+        },
+        {
+            "url": "ui5-webcomponents/busy-indicator",
+            "name": "Busy Indicator"
+        },
+        {
+            "url": "ui5-webcomponents/button",
+            "name": "Button"
+        },
+        {
+            "url": "ui5-webcomponents/calendar",
+            "name": "Calendar"
+        },
+        {
+            "url": "ui5-webcomponents/carousel",
+            "name": "Carousel"
+        },
+        {
+            "url": "ui5-webcomponents/popover",
+            "name": "Popover"
+        },
+        {
+            "url": "ui5-webcomponents/segmented-button",
+            "name": "Segmented Button"
+        },
+        {
+            "url": "ui5-webcomponents/slider",
+            "name": "Slider"
+        }
+    ]
+}

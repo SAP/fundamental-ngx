@@ -1,0 +1,17 @@
+<div class="delay-examples">
+    <div class="controls">
+        <ui5-button (click)="showBusyIndicator()">Show Busy Indicators (5s auto-hide)</ui5-button>
+        <ui5-button (click)="hideBusyIndicator()">Hide Busy Indicators</ui5-button>
+    </div>
+
+    @for (delay of delays; track delay.value) {
+    <div class="delay-example">
+        <ui5-label>{{ delay.label }}</ui5-label>
+        <div class="example-content">
+            <ui5-busy-indicator [active]="isActive()" [delay]="delay.value" text="Loading...">
+                <ui5-label>Content with {{ delay.value }}ms delay</ui5-label>
+            </ui5-busy-indicator>
+        </div>
+    </div>
+    }
+</div>
