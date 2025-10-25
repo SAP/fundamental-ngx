@@ -31,6 +31,10 @@
             "name": "Calendar"
         },
         {
+            "url": "ui5-webcomponents/carousel",
+            "name": "Carousel"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         },
