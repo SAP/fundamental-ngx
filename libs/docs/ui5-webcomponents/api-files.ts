@@ -12,6 +12,7 @@ export const API_FILES = {
     busyIndicator: ['BusyIndicator'],
     button: ['Button'],
     calendar: ['Calendar', 'CalendarDate'],
+    card: ['Card', 'CardHeader'],
     carousel: ['Carousel'],
     popover: ['Popover'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],

@@ -98,10 +98,18 @@ export class SliderExample {
     readonly timeRange = computed(() => `${this.timeRangeStart()}:00 - ${this.timeRangeEnd()}:00`);
     readonly qualityText = computed(() => {
         const quality = this.qualityValue();
-        if (quality <= 2) {return 'Low';}
-        if (quality <= 4) {return 'Medium';}
-        if (quality <= 6) {return 'High';}
-        if (quality <= 8) {return 'Very High';}
+        if (quality <= 2) {
+            return 'Low';
+        }
+        if (quality <= 4) {
+            return 'Medium';
+        }
+        if (quality <= 6) {
+            return 'High';
+        }
+        if (quality <= 8) {
+            return 'Very High';
+        }
         return 'Ultra';
     });
     readonly zoomDisplay = computed(() => `${this.zoomValue()}%`);
@@ -242,9 +250,15 @@ export class SliderExample {
     // Utility methods for demos
     getProgressColor(): string {
         const progress = this.progressValue();
-        if (progress < 25) {return 'var(--sapErrorColor)';}
-        if (progress < 50) {return 'var(--sapCriticalColor)';}
-        if (progress < 75) {return 'var(--sapNeutralColor)';}
+        if (progress < 25) {
+            return 'var(--sapErrorColor)';
+        }
+        if (progress < 50) {
+            return 'var(--sapCriticalColor)';
+        }
+        if (progress < 75) {
+            return 'var(--sapNeutralColor)';
+        }
         return 'var(--sapSuccessColor)';
     }
 
