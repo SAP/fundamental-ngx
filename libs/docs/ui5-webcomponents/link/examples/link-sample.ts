@@ -206,8 +206,12 @@ export class LinkExample {
     }
 
     getLinkDesign(linkText: string): 'Default' | 'Subtle' | 'Emphasized' {
-        if (linkText.includes('Subtle')) {return 'Subtle';}
-        if (linkText.includes('Emphasized')) {return 'Emphasized';}
+        if (linkText.includes('Subtle')) {
+            return 'Subtle';
+        }
+        if (linkText.includes('Emphasized')) {
+            return 'Emphasized';
+        }
         return this.currentDesign();
     }
 
