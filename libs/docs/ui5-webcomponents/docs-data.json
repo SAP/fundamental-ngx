@@ -39,6 +39,10 @@
             "name": "Carousel"
         },
         {
+            "url": "ui5-webcomponents/link",
+            "name": "Link"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         },

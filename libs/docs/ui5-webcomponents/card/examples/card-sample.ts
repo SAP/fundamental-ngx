@@ -246,8 +246,12 @@ export class CardExample {
     }
 
     getStockStatus(stock: number): { text: string; color: string } {
-        if (stock < 5) {return { text: 'Critical', color: 'var(--sapErrorColor)' };}
-        if (stock < 10) {return { text: 'Low', color: 'var(--sapCriticalColor)' };}
+        if (stock < 5) {
+            return { text: 'Critical', color: 'var(--sapErrorColor)' };
+        }
+        if (stock < 10) {
+            return { text: 'Low', color: 'var(--sapCriticalColor)' };
+        }
         return { text: 'Good', color: 'var(--sapSuccessColor)' };
     }
 }

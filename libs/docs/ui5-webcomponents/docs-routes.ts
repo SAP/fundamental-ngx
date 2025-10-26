@@ -51,6 +51,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/carousel').then(configureLibRoutes)
     },
     {
+        path: 'link',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/link').then(configureLibRoutes)
+    },
+    {
         path: 'popover',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
     },
