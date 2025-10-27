@@ -39,6 +39,10 @@
             "name": "Carousel"
         },
         {
+            "url": "ui5-webcomponents/check-box",
+            "name": "Check Box"
+        },
+        {
             "url": "ui5-webcomponents/label",
             "name": "Label"
         },

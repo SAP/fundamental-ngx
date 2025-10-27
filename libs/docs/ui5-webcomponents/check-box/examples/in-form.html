@@ -1,0 +1,10 @@
+<form id="form" method="post" (submit)="onSubmit($event)">
+    <div class="checkbox-group">
+        <ui5-checkbox id="js" text="JavaScript" value="js" name="languages"></ui5-checkbox>
+        <ui5-checkbox id="python" text="Python" value="python" name="languages"></ui5-checkbox>
+        <ui5-checkbox id="java" text="Java" value="java" name="languages"></ui5-checkbox>
+        <ui5-checkbox id="csharp" text="C#" value="csharp" name="languages"></ui5-checkbox>
+    </div>
+    <ui5-button type="Submit" design="Emphasized">Submit Form</ui5-button>
+</form>
+<div id="output">{{ formOutput() }}</div>

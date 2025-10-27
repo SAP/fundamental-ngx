@@ -14,6 +14,7 @@ export const API_FILES = {
     calendar: ['Calendar', 'CalendarDate'],
     card: ['Card', 'CardHeader'],
     carousel: ['Carousel'],
+    checkBox: ['CheckBox'],
     label: ['Label'],
     link: ['Link'],
     popover: ['Popover'],
