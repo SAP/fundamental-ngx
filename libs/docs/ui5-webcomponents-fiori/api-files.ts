@@ -6,5 +6,6 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    mediaGallery: ['MediaGallery']
+    mediaGallery: ['MediaGallery'],
+    timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

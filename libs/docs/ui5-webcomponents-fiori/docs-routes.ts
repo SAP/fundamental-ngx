@@ -22,6 +22,10 @@ const componentRoutes = [
         path: 'media-gallery',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/media-gallery').then(configureLibRoutes)
+    },
+    {
+        path: 'timeline',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/timeline').then(configureLibRoutes)
     }
 ];
 

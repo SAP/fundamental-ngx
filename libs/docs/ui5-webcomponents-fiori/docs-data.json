@@ -9,6 +9,10 @@
         {
             "url": "ui5-webcomponents-fiori/media-gallery",
             "name": "Media Gallery"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/timeline",
+            "name": "Timeline"
         }
     ]
 }
