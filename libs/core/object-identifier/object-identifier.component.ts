@@ -7,6 +7,7 @@ import {
     ElementRef,
     QueryList,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     inject,
     input
@@ -64,10 +65,10 @@ export class ObjectIdentifierComponent implements AfterContentInit {
     description = input<Nullable<string>>();
 
     /** Whether the title should be bolded */
-    bold = input<boolean>(false);
+    bold = input(false, { transform: booleanAttribute });
 
     /** Whether the title is medium size */
-    medium = input<boolean>(false);
+    medium = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     objectIdentifierClass = true;
