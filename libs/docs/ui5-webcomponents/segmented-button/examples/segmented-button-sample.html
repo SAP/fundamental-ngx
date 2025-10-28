@@ -3,6 +3,7 @@
         <h2 id="segmented-button-basic" class="fd-section__title">Basic Segmented Button</h2>
     </div>
     <ui5-segmented-button
+        #basicSegmentedButton
         (ui5SelectionChange)="onBasicSelectionChange($event)"
         aria-label="Basic segmented button example"
     >
@@ -11,7 +12,17 @@
         <ui5-segmented-button-item>Option 3</ui5-segmented-button-item>
         <ui5-segmented-button-item>Option 4</ui5-segmented-button-item>
     </ui5-segmented-button>
-    <p class="fd-margin-top--sm"><strong>Selected Items:</strong> {{ basicSelectedItemsDisplay() }}</p>
+
+    <p class="sap-text fd-margin-top--sm">
+        <strong>Selected Items (from event):</strong> {{ basicSelectedItemsDisplay() }}
+    </p>
+    <p class="fd-margin-top--tiny">
+        <strong>Selected Items (reactive signal):</strong> {{ reactiveSelectedItemsText() }}
+    </p>
+    <p class="fd-margin-top--tiny"><strong>Selection Count:</strong> {{ reactiveSelectedItemsCount() }}</p>
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Single mode allows only one item to be selected at a time. Selecting a new item deselects the previous one.
+    </p>
 </section>
 
 <section aria-labelledby="segmented-button-configuration" class="fd-section fd-margin-bottom--md">
@@ -88,23 +99,86 @@
     </p>
 </section>
 
-<section aria-labelledby="segmented-button-single" class="fd-section fd-margin-bottom--md">
+<section aria-labelledby="segmented-button-reactive" class="fd-section fd-margin-bottom--md">
     <div class="fd-section__header">
-        <h2 id="segmented-button-single" class="fd-section__title">Single Selection Mode</h2>
+        <h2 id="segmented-button-reactive" class="fd-section__title">🚀 Reactive <code>selectedItems</code> Signal</h2>
     </div>
+
+    <div>
+        <h3 style="margin-top: 0; color: var(--sapInformationColor)">💡 Key Benefits</h3>
+        <ul>
+            <li><strong>Automatic Updates:</strong> No need to manually handle selection-change events</li>
+            <li><strong>Signal-Based:</strong> Integrates perfectly with Angular's reactive primitives</li>
+            <li><strong>Composable:</strong> Can be used in computed() and effect() for derived state</li>
+            <li><strong>Type-Safe:</strong> Full TypeScript support with proper typing</li>
+        </ul>
+    </div>
+
     <ui5-segmented-button
-        selectionMode="Single"
-        (ui5SelectionChange)="onSingleSelectionChange($event)"
-        aria-label="Single selection segmented button"
+        #reactiveSegmentedButton
+        (ui5SelectionChange)="onReactiveSelectionChange($event)"
+        selectionMode="Multiple"
+        aria-label="Reactive selectedItems demonstration"
     >
-        <ui5-segmented-button-item [selected]="isSingleItemSelected('Choice 1')">Choice 1</ui5-segmented-button-item>
-        <ui5-segmented-button-item [selected]="isSingleItemSelected('Choice 2')">Choice 2</ui5-segmented-button-item>
-        <ui5-segmented-button-item [selected]="isSingleItemSelected('Choice 3')">Choice 3</ui5-segmented-button-item>
+        <ui5-segmented-button-item>🍎 Apple</ui5-segmented-button-item>
+        <ui5-segmented-button-item selected>🍌 Banana</ui5-segmented-button-item>
+        <ui5-segmented-button-item>🍊 Orange</ui5-segmented-button-item>
+        <ui5-segmented-button-item selected>🍇 Grape</ui5-segmented-button-item>
+        <ui5-segmented-button-item>🥝 Kiwi</ui5-segmented-button-item>
     </ui5-segmented-button>
-    <p class="fd-margin-top--sm"><strong>Selected Items:</strong> {{ singleSelectedItemsDisplay() }}</p>
-    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
-        Single mode allows only one item to be selected at a time. Selecting a new item deselects the previous one.
-    </p>
+
+    <!-- Real-time display of reactive selectedItems -->
+    <div class="fd-margin-top--md" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+        <div
+            style="
+                padding: 1rem;
+                background-color: var(--sapSuccessBackgroundColor);
+                border-radius: 6px;
+                border-left: 4px solid var(--sapSuccessColor);
+            "
+        >
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--sapSuccessColor)">✨ New Reactive Approach</h4>
+            <div style="font-family: monospace; font-size: 0.9rem">
+                <div><strong>selectedItems():</strong></div>
+                <div
+                    style="
+                        padding: 0.5rem;
+                        background-color: rgba(255, 255, 255, 0.5);
+                        border-radius: 4px;
+                        margin: 0.25rem 0;
+                    "
+                >
+                    {{ reactiveSelectedItemsText() }}
+                </div>
+                <div><strong>Count:</strong> {{ reactiveSelectedItemsCount() }}</div>
+            </div>
+        </div>
+
+        <div
+            style="
+                padding: 1rem;
+                background-color: var(--sapNeutralBackgroundColor);
+                border-radius: 6px;
+                border-left: 4px solid var(--sapNeutralColor);
+            "
+        >
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--sapNeutralTextColor)">📜 Traditional Event Approach</h4>
+            <div style="font-family: monospace; font-size: 0.9rem">
+                <div><strong>From event handler:</strong></div>
+                <div
+                    style="
+                        padding: 0.5rem;
+                        background-color: rgba(255, 255, 255, 0.5);
+                        border-radius: 4px;
+                        margin: 0.25rem 0;
+                    "
+                >
+                    {{ reactiveEventBasedItemsDisplay() }}
+                </div>
+                <div><strong>Manual tracking required</strong></div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section aria-labelledby="segmented-button-use-cases" class="fd-section fd-margin-bottom--md">
