@@ -59,6 +59,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/check-box').then(configureLibRoutes)
     },
     {
+        path: 'color-palette',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-palette').then(configureLibRoutes)
+    },
+    {
         path: 'label',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/label').then(configureLibRoutes)
     },

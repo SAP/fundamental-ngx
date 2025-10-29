@@ -16,6 +16,7 @@ export const API_FILES = {
     card: ['Card', 'CardHeader'],
     carousel: ['Carousel'],
     checkBox: ['CheckBox'],
+    colorPalette: ['ColorPalette', 'ColorPaletteItem'],
     label: ['Label'],
     link: ['Link'],
     popover: ['Popover'],

@@ -47,6 +47,10 @@
             "name": "Check Box"
         },
         {
+            "url": "ui5-webcomponents/color-palette",
+            "name": "Color Palette"
+        },
+        {
             "url": "ui5-webcomponents/label",
             "name": "Label"
         },
