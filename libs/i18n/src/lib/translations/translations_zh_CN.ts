@@ -102,6 +102,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '树项目 {itemDetails}，{index}，共 {total}{selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

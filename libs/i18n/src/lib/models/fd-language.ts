@@ -162,6 +162,9 @@ export interface FdLanguage {
             selectedDescription: string;
         }>;
     };
+    coreObjectIdentifier: {
+        announcement: FdLanguageKey;
+    };
     coreObjectNumber: {
         emphasized: FdLanguageKey;
         negative: FdLanguageKey;

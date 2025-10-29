@@ -103,6 +103,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'פריט עץ {itemDetails}, {index} מתוך {total}{selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

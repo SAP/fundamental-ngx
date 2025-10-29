@@ -103,6 +103,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Tree Item {itemDetails}, {selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

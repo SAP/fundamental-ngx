@@ -103,6 +103,9 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Structuuritem {itemDetails}, {index} van {total}{selectedDescription}'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

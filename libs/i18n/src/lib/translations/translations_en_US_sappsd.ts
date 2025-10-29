@@ -104,6 +104,9 @@ export default {
         linkItemAriaLabel:
             '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {įŋƌēχ} ŏƒ {ţŏţąĺ}{şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

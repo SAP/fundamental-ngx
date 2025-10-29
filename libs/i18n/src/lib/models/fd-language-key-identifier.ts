@@ -77,6 +77,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreNavigation.mainNavigation'
     | 'coreNavigation.navigationPath'
     | 'coreNestedList.linkItemAriaLabel'
+    | 'coreObjectIdentifier.announcement'
     | 'coreObjectNumber.emphasized'
     | 'coreObjectNumber.negative'
     | 'coreObjectNumber.critical'
