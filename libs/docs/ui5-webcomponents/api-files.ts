@@ -12,6 +12,7 @@ export const API_FILES = {
     busyIndicator: ['BusyIndicator'],
     button: ['Button'],
     calendar: ['Calendar', 'CalendarDate'],
+    calendarLegend: ['CalendarLegend', 'CalendarLegendItem'],
     card: ['Card', 'CardHeader'],
     carousel: ['Carousel'],
     checkBox: ['CheckBox'],

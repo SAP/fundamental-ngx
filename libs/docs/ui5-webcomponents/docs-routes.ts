@@ -43,6 +43,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/calendar').then(configureLibRoutes)
     },
     {
+        path: 'calendar-legend',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/calendar-legend').then(configureLibRoutes)
+    },
+    {
         path: 'card',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/card').then(configureLibRoutes)
     },

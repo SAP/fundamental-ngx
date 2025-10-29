@@ -31,6 +31,10 @@
             "name": "Calendar"
         },
         {
+            "url": "ui5-webcomponents/calendar-legend",
+            "name": "Calendar Legend"
+        },
+        {
             "url": "ui5-webcomponents/card",
             "name": "Card"
         },
