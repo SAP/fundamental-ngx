@@ -18,6 +18,7 @@ export const API_FILES = {
     checkBox: ['CheckBox'],
     colorPalette: ['ColorPalette', 'ColorPaletteItem'],
     colorPicker: ['ColorPicker'],
+    expandableText: ['ExpandableText'],
     label: ['Label'],
     link: ['Link'],
     popover: ['Popover'],
