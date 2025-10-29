@@ -1,0 +1,26 @@
+<div class="legend-controls">
+    <ui5-checkbox [checked]="hideToday()" (ui5Change)="toggleToday()" text="Hide Today"> </ui5-checkbox>
+    <ui5-checkbox [checked]="hideSelectedDay()" (ui5Change)="toggleSelectedDay()" text="Hide Selected Day">
+    </ui5-checkbox>
+    <ui5-checkbox [checked]="hideNonWorkingDay()" (ui5Change)="toggleNonWorkingDay()" text="Hide Non-Working Day">
+    </ui5-checkbox>
+    <ui5-checkbox [checked]="hideWorkingDay()" (ui5Change)="toggleWorkingDay()" text="Hide Working Day"> </ui5-checkbox>
+</div>
+
+<ui5-calendar-legend
+    [hideToday]="hideToday()"
+    [hideSelectedDay]="hideSelectedDay()"
+    [hideNonWorkingDay]="hideNonWorkingDay()"
+    [hideWorkingDay]="hideWorkingDay()"
+    aria-label="Interactive calendar legend example"
+>
+    <ui5-calendar-legend-item type="Type01" text="Type01"></ui5-calendar-legend-item>
+    <ui5-calendar-legend-item type="Type02" text="Type02"></ui5-calendar-legend-item>
+    <ui5-calendar-legend-item type="Type03" text="Type03"></ui5-calendar-legend-item>
+    <ui5-calendar-legend-item type="Type04" text="Type04"></ui5-calendar-legend-item>
+</ui5-calendar-legend>
+
+<div class="control-buttons">
+    <ui5-button (ui5Click)="resetAll()" design="Emphasized">Show All Defaults</ui5-button>
+    <ui5-button (ui5Click)="hideAll()" design="Transparent">Hide All Defaults</ui5-button>
+</div>

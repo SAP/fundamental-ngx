@@ -1,0 +1,43 @@
+<div class="wrapping-examples">
+    <div class="wrapping-group">
+        <ui5-label>Normal Wrapping (Default)</ui5-label>
+
+        <div class="checkbox-item">
+            <ui5-checkbox
+                text="This is a very long text that will wrap normally when there is not enough space available in the container"
+                wrappingType="Normal"
+            >
+            </ui5-checkbox>
+        </div>
+
+        <div class="checkbox-item">
+            <ui5-checkbox
+                text="Another example with normal wrapping that demonstrates how the text behaves with multiple lines"
+                checked="true"
+                wrappingType="Normal"
+            >
+            </ui5-checkbox>
+        </div>
+    </div>
+
+    <div class="wrapping-group">
+        <ui5-label>No Wrapping (Truncated)</ui5-label>
+
+        <div class="checkbox-item">
+            <ui5-checkbox
+                text="This is a very long text that will be truncated with an ellipsis when there is not enough space available"
+                wrappingType="None"
+            >
+            </ui5-checkbox>
+        </div>
+
+        <div class="checkbox-item">
+            <ui5-checkbox
+                text="Another example with no wrapping that shows truncation with ellipsis"
+                checked="true"
+                wrappingType="None"
+            >
+            </ui5-checkbox>
+        </div>
+    </div>
+</div>

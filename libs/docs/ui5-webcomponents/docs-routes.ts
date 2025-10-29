@@ -43,12 +43,28 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/calendar').then(configureLibRoutes)
     },
     {
+        path: 'calendar-legend',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/calendar-legend').then(configureLibRoutes)
+    },
+    {
         path: 'card',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/card').then(configureLibRoutes)
     },
     {
         path: 'carousel',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/carousel').then(configureLibRoutes)
+    },
+    {
+        path: 'check-box',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/check-box').then(configureLibRoutes)
+    },
+    {
+        path: 'color-palette',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-palette').then(configureLibRoutes)
+    },
+    {
+        path: 'color-picker',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-picker').then(configureLibRoutes)
     },
     {
         path: 'label',

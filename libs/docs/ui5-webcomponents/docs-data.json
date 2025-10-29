@@ -31,12 +31,28 @@
             "name": "Calendar"
         },
         {
+            "url": "ui5-webcomponents/calendar-legend",
+            "name": "Calendar Legend"
+        },
+        {
             "url": "ui5-webcomponents/card",
             "name": "Card"
         },
         {
             "url": "ui5-webcomponents/carousel",
             "name": "Carousel"
+        },
+        {
+            "url": "ui5-webcomponents/check-box",
+            "name": "Check Box"
+        },
+        {
+            "url": "ui5-webcomponents/color-palette",
+            "name": "Color Palette"
+        },
+        {
+            "url": "ui5-webcomponents/color-picker",
+            "name": "Color Picker"
         },
         {
             "url": "ui5-webcomponents/label",

@@ -1,4 +1,3 @@
- 
 export default {
     displayName: 'docs-ui5-webcomponents-fiori-timeline',
     preset: '../../../../jest.preset.js',
