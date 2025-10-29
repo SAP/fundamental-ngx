@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -8,12 +8,12 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'ui5-color-palette-header',
-    templateUrl: './color-palette-header.html',
+    selector: 'ui5-color-picker-header',
+    templateUrl: './color-picker-header.html',
     standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
-export class ColorPaletteHeader {
-    readonly componentName = 'ColorPalette';
-    readonly packageName = '@ui5/webcomponents';
+export class ColorPickerHeader {
+    readonly componentName = signal('ColorPicker');
+    readonly packageName = signal('@ui5/webcomponents');
 }

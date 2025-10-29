@@ -51,6 +51,10 @@
             "name": "Color Palette"
         },
         {
+            "url": "ui5-webcomponents/color-picker",
+            "name": "Color Picker"
+        },
+        {
             "url": "ui5-webcomponents/label",
             "name": "Label"
         },
