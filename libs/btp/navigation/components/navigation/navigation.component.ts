@@ -158,6 +158,9 @@ export class NavigationComponent
     /** @hidden */
     constructor() {
         super();
+
+        console.log(this._dataSourceDirective);
+
         this.dataSourceItems = toSignal(
             !this._dataSourceDirective
                 ? of({ start: [], end: [] } as GroupedDataSourceItems)

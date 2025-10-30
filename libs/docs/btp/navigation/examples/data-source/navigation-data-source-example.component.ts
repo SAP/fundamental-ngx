@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -17,7 +18,7 @@ interface ExampleNavigationItem {
 
 @Component({
     selector: 'fdb-navigation-data-source-example',
-    imports: [RouterLink, FormsModule, SegmentedButtonComponent, ButtonComponent, FDB_NAVIGATION],
+    imports: [RouterLink, FormsModule, SegmentedButtonComponent, ButtonComponent, FDB_NAVIGATION, NgTemplateOutlet],
     templateUrl: './navigation-data-source-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,180 +33,138 @@ export class NavigationDataSourceExampleComponent {
         {
             title: 'Home',
             icon: 'home',
-            home: true,
             placement: 'start'
         },
         {
-            title: 'Main items',
+            title: 'Favourites',
+            icon: 'favorite-list',
+            placement: 'start'
+        },
+        {
+            title: 'Recent',
+            icon: 'time-account',
+            placement: 'start'
+        },
+        {
+            title: 'Sales',
             group: true,
             placement: 'start',
             expanded: true,
             children: [
                 {
-                    title: 'Item 1',
-                    icon: 'basket',
-                    placement: 'start',
-                    children: [
-                        {
-                            title: 'Item 1.1',
-                            icon: 'basket',
-                            placement: 'start',
-                            link: '/core'
-                        },
-                        {
-                            title: 'Item 1.2',
-                            icon: 'basket',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Item 1.3',
-                            icon: 'basket',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Item 1.4',
-                            icon: 'basket',
-                            placement: 'start'
-                        }
-                    ]
-                },
-                {
-                    title: 'Item 2',
-                    icon: 'basket',
+                    title: 'Leads',
+                    icon: 'lead',
                     placement: 'start',
                     expanded: true,
                     children: [
                         {
-                            title: 'Item 2.1',
-                            icon: 'basket',
+                            title: 'All Leads',
                             placement: 'start',
                             link: '/btp/navigation'
                         },
                         {
-                            title: 'Item 2.2',
-                            icon: 'basket',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Item 2.3',
-                            icon: 'basket',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Item 2.4',
-                            icon: 'basket',
-                            placement: 'start'
+                            title: 'Lead Sources',
+                            placement: 'start',
+                            link: '/core'
                         }
                     ]
                 },
                 {
-                    title: 'Item 3',
-                    icon: 'basket',
-                    placement: 'start'
-                },
-                {
-                    title: 'Item 4',
-                    icon: 'basket',
-                    placement: 'start'
-                },
-                {
-                    title: 'Item 5',
-                    icon: 'basket',
-                    placement: 'start'
-                },
-                {
-                    title: 'Item 6',
-                    icon: 'basket',
-                    placement: 'start'
-                }
-            ]
-        },
-        {
-            title: 'Favourites',
-            placement: 'start',
-            group: true,
-            expanded: true,
-            children: [
-                {
-                    title: 'Favourite Item 1',
-                    icon: 'settings',
-                    placement: 'start',
-                    children: [
-                        {
-                            title: 'Favourite Item 1.1',
-                            icon: 'settings',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Favourite Item 1.2',
-                            icon: 'settings',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Favourite Item 1.3',
-                            icon: 'settings',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Favourite Item 1.4',
-                            icon: 'settings',
-                            placement: 'start'
-                        }
-                    ]
-                },
-                {
-                    title: 'Favourite Item 2',
-                    icon: 'settings',
+                    title: 'Opportunities',
+                    icon: 'opportunities',
                     placement: 'start',
                     expanded: true,
                     children: [
                         {
-                            title: 'Favourite Item 2.1',
-                            icon: 'settings',
+                            title: 'All Opportunities',
                             placement: 'start'
                         },
                         {
-                            title: 'Favourite Item 2.2',
-                            icon: 'settings',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Favourite Item 2.3',
-                            icon: 'settings',
-                            placement: 'start'
-                        },
-                        {
-                            title: 'Favourite Item 2.4',
-                            icon: 'settings',
+                            title: 'Team Pipeline',
                             placement: 'start'
                         }
                     ]
                 },
                 {
-                    title: 'Favourite Item 3',
-                    icon: 'settings',
+                    title: 'Sales Quotes',
+                    icon: 'sales-quote',
+                    placement: 'start',
+                    children: [
+                        {
+                            title: 'All Quotes',
+                            placement: 'start'
+                        },
+                        {
+                            title: 'Reports',
+                            placement: 'start'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            title: 'Reports and Analytics',
+            group: true,
+            placement: 'start',
+            expanded: true,
+            children: [
+                {
+                    title: 'Sales Reports',
+                    icon: 'manager-insight',
                     placement: 'start'
                 },
                 {
-                    title: 'Favourite Item 4',
-                    icon: 'settings',
-                    placement: 'start'
-                },
-                {
-                    title: 'Favourite Item 5',
-                    icon: 'settings',
-                    placement: 'start'
-                },
-                {
-                    title: 'Favourite Item 6',
-                    icon: 'settings',
+                    title: 'Performance Reports',
+                    icon: 'kpi-corporate-performance',
                     placement: 'start'
                 }
             ]
         },
         {
-            title: 'Item 6',
-            icon: 'create-entry-time',
+            title: 'Customer Management',
+            group: true,
+            placement: 'start',
+            children: [
+                {
+                    title: 'Contacts',
+                    icon: 'contacts',
+                    placement: 'start'
+                },
+                {
+                    title: 'Companies',
+                    icon: 'company-view',
+                    placement: 'start'
+                },
+                {
+                    title: 'Partners',
+                    icon: 'citizen-connect',
+                    placement: 'start'
+                }
+            ]
+        },
+        {
+            title: 'Task Manager',
+            icon: 'task',
+            placement: 'start'
+        },
+        {
+            title: 'Create Ticket',
+            icon: 'write-new',
+            placement: 'end'
+        },
+        {
+            title: 'Dashboard',
+            icon: 'bbyd-dashboard',
+            placement: 'end'
+        },
+        {
+            title: 'Create Ticket',
+            icon: 'write-new',
+            placement: 'end'
+        },
+        {
+            title: 'Dashboard',
+            icon: 'bbyd-dashboard',
             placement: 'end'
         }
     ];
