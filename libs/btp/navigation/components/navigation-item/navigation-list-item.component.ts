@@ -40,6 +40,8 @@ import {
     LIST_ITEM_CLASS
 } from '../../models/navigation-list-item.class';
 import { NavigationService } from '../../services/navigation.service';
+import { NavigationFocusManager } from '../../utils/focus-manager.util';
+import { NavigationKeyboardUtil } from '../../utils/keyboard.util';
 import { NavigationLinkRefDirective } from '../navigation-link/navigation-link.component';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
 
@@ -248,18 +250,32 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     );
 
     /** CSS Class signal. */
-    readonly class$ = computed(() =>
-        [
-            LIST_ITEM_CLASS,
-            this._class$(),
-            this._separator$() ? `${LIST_ITEM_CLASS}--separator` : '',
-            this._spacer$() ? `${LIST_ITEM_CLASS}--spacer` : '',
-            this._home$() ? `${LIST_ITEM_CLASS}--home` : '',
-            this.disabled$() ? `${LIST_ITEM_CLASS}--disabled` : ''
-        ]
-            .filter((k) => !!k)
-            .join(' ')
-    );
+    readonly class$ = computed(() => {
+        const classes = [LIST_ITEM_CLASS];
+
+        const customClass = this._class$();
+        if (customClass) {
+            classes.push(customClass);
+        }
+
+        if (this._separator$()) {
+            classes.push(`${LIST_ITEM_CLASS}--separator`);
+        }
+
+        if (this._spacer$()) {
+            classes.push(`${LIST_ITEM_CLASS}--spacer`);
+        }
+
+        if (this._home$()) {
+            classes.push(`${LIST_ITEM_CLASS}--home`);
+        }
+
+        if (this.disabled$()) {
+            classes.push(`${LIST_ITEM_CLASS}--disabled`);
+        }
+
+        return classes.join(' ');
+    });
 
     /** Selected Signal. */
     readonly selected$ = signal(false);
@@ -431,7 +447,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** @hidden */
-    handleHorizontalNavigation(_isExpand: boolean): void {
+    handleHorizontalNavigation(): void {
         // Handle horizontal navigation logic here if needed
     }
 
@@ -440,35 +456,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     popoverLinkArrowDown(): void {
         this._keyManager?.setActiveItem(0);
-    }
-
-    /** @Hidden */
-    _innerListKeydown(event: KeyboardEvent): void {
-        if (!this.popoverOpen$()) {
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, UP_ARROW) && this._keyManager?.activeItemIndex === 0) {
-            this._focusPopoverLink();
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
-            this._keyManager?.onKeydown(event);
-            return;
-        }
-
-        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            return;
-        }
-
-        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW);
-
-        if (!isGoBack) {
-            return;
-        }
-
-        this._snappedItemKeyboardExpandedHandler(false);
     }
 
     /** Toggles expanded state of the item. */
@@ -481,13 +468,22 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** Callback method when user used keyboard arrows to expand/collapse list item. */
     keyboardExpanded(shouldExpand: boolean): void {
-        if (this.isOverflow$()) {
-            this._overflowItemKeyboardExpandedHandler(shouldExpand);
-        } else if (this.navigation.isSnapped$()) {
-            this._snappedItemKeyboardExpandedHandler(shouldExpand);
-        } else {
-            this._visibleItemKeyboardExpandedHandler(shouldExpand);
-        }
+        const strategy = NavigationFocusManager.getFocusStrategy(this.isOverflow$(), this.navigation.isSnapped$());
+
+        const context = {
+            hasChildren: this.hasChildren$(),
+            expanded: this.expanded$(),
+            popoverOpen: this.popoverOpen$(),
+            parentListItem: this.parentListItem,
+            listItems: this.listItems.toArray(),
+            setExpanded: (expanded: boolean) => this.expanded$.set(expanded),
+            setPopoverOpen: (open: boolean) => this.popoverOpen$.set(open),
+            focus: () => this.focus(),
+            focusFirstChild: () => this.listItems.first?.focus(),
+            focusLink: () => this.link$()?.elementRef.nativeElement.focus()
+        };
+
+        NavigationFocusManager.handleKeyboardExpansion(strategy, shouldExpand, context);
     }
 
     /**
@@ -520,6 +516,51 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         }
     }
 
+    /** @Hidden */
+    _innerListKeydown(event: KeyboardEvent): void {
+        if (!this.popoverOpen$()) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, UP_ARROW) && this._keyManager?.activeItemIndex === 0) {
+            this._focusPopoverLink();
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
+            this._keyManager?.onKeydown(event);
+            return;
+        }
+
+        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
+            return;
+        }
+
+        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW);
+
+        if (!isGoBack) {
+            return;
+        }
+
+        // Handle closing popover in snapped mode
+        this.popoverOpen$.set(false);
+        this.link$()?.elementRef.nativeElement.focus();
+    }
+
+    /**
+     * @hidden
+     * Handle keyboard events for expand/collapse functionality
+     */
+    _keydownHandler(event: KeyboardEvent): void {
+        NavigationKeyboardUtil.handleNavigationKeys(
+            event,
+            this.hasChildren$(),
+            this.expanded$(),
+            () => this.keyboardExpanded(true),
+            () => this.keyboardExpanded(false)
+        );
+    }
+
     /** @hidden */
     _onPopoverOpen(isOpen: boolean, popover: PopoverComponent): void {
         this.popoverOpen$.set(isOpen);
@@ -534,63 +575,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     private _focusPopoverLink(): void {
         this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
-    }
-
-    /** @hidden */
-    private _visibleItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        if (!this.hasChildren$()) {
-            if (!shouldExpand) {
-                this.parentListItem?.focus();
-            }
-            return;
-        }
-
-        if (!shouldExpand) {
-            // If item already collapsed, shift focus to parent link
-            if (!this.expanded$()) {
-                this.parentListItem?.focus();
-                return;
-            }
-            this.expanded$.set(false);
-        } else {
-            if (this.expanded$()) {
-                this.listItems.first?.focus();
-                return;
-            }
-            this.expanded$.set(true);
-        }
-    }
-
-    /** @hidden */
-    private _snappedItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        if (!this.hasChildren$()) {
-            return;
-        }
-        if (shouldExpand && !this.popoverOpen$()) {
-            this.popoverOpen$.set(true);
-        }
-        if (!shouldExpand && this.popoverOpen$()) {
-            this.popoverOpen$.set(false);
-            this.link$()?.elementRef.nativeElement.focus();
-        }
-    }
-
-    /**
-     * @hidden
-     * Method used to handle keyboard navigation for list item that is inside overflow container.
-     */
-    private _overflowItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        if (shouldExpand && this._childLists.length > 0) {
-            const firstList = this._childLists[0];
-            firstList.setActiveItemIndex(0);
-        }
-        if (shouldExpand && !this.popoverOpen$()) {
-            this.popoverOpen$.set(true);
-        }
-        if (!shouldExpand && this.popoverOpen$()) {
-            this.popoverOpen$.set(false);
-            this.link?.elementRef.nativeElement.focus();
-        }
     }
 
     /** @hidden */

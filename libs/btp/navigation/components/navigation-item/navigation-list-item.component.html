@@ -13,6 +13,7 @@
             [attr.aria-expanded]="expandedAttr$()"
             [attr.normalized-level]="normalizedLevel$()"
             (focusin)="_focusInHandler()"
+            (keydown)="_keydownHandler($event)"
             fdbNavigationListItemMarker
             #itemContainer
         >

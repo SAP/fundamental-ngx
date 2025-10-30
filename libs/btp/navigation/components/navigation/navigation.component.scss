@@ -1,7 +1,10 @@
 @import 'fundamental-styles/dist/navigation.css';
 
 $block: fd-navigation;
+$list-item-class: '#{$block}__list-item';
+$list-container-class: '#{$block}__list-container';
 
+// Navigation container styles
 .#{$block} {
     & &__container--top {
         padding-left: var(--fdNavigation_Padding_X);
@@ -14,8 +17,9 @@ $block: fd-navigation;
         height: auto;
     }
 
+    // Snapped navigation state
     &--snapped {
-        .#{$block}__list-item--home {
+        .#{$list-item-class}--home {
             position: relative;
         }
 
@@ -28,55 +32,64 @@ $block: fd-navigation;
                 flex-grow: 1;
                 height: auto;
                 min-height: 0;
+
                 &--no-grow {
                     flex-grow: 0;
                 }
             }
         }
+
         .#{$block}__container--hidden-overflow {
             overflow: hidden !important;
         }
     }
 
+    // Expanded and popup states
     &--expanded,
     &--popup {
-        .#{$block}__list-item--home {
+        .#{$list-item-class}--home {
             z-index: 21;
         }
     }
 
+    // Custom menu styling
     &__list-container--custom-menu {
         box-shadow: var(--sapMenu_Shadow1);
     }
 
+    // Spacer items
     &__list-item--spacer {
         &--hidden {
             display: none !important;
         }
     }
 
-    .fd-navigation__list-item--home-without-separator {
+    // Home item without separator
+    .#{$list-item-class}--home-without-separator {
         margin-bottom: 0.125rem;
     }
 }
 
-.#{$block}--snapped .#{$block}__list-container.#{$block}__list-container--menu {
+// Menu positioning
+.#{$block}--snapped .#{$list-container-class}.#{$list-container-class}--menu {
     position: relative;
     transition: none;
 }
 
-.#{$block}__list-item:not(.#{$block}__list-item--home) {
+// Non-home list items
+.#{$list-item-class}:not(.#{$list-item-class}--home) {
     position: relative;
 }
 
-.#{$block}__list-container--menu {
+// Menu container styles
+.#{$list-container-class}--menu {
     > .fd-scrollbar {
         overflow: visible !important;
     }
 
     .#{$block}__list--parent-items {
-        .#{$block}__list-item {
-            // Give more focus area for submenu
+        .#{$list-item-class} {
+            // Submenu focus area
             &::before {
                 content: '';
                 position: absolute;
@@ -85,20 +98,23 @@ $block: fd-navigation;
                 left: -1rem;
                 right: -1rem;
             }
-            > .#{$block}__list-container {
+
+            > .#{$list-container-class} {
                 display: none;
                 top: -0.5rem;
             }
 
+            // Show submenu on hover/focus
             &:hover,
             &:focus,
             &:focus-within {
-                > .#{$block}__list-container {
+                > .#{$list-container-class} {
                     display: block;
                 }
             }
 
-            .#{$block}__list-container--submenu {
+            // Submenu overlay
+            .#{$list-container-class}--submenu {
                 &::before {
                     content: '';
                     position: absolute;
@@ -112,41 +128,41 @@ $block: fd-navigation;
     }
 }
 
-.fd-popover__body.fd-navigation__list-container {
+// Popover body styling
+.fd-popover__body.#{$list-container-class} {
     display: block;
 }
 
+// Navigation item styles
 .fd-navigation__item {
     .fd-popover-custom {
         max-width: none;
     }
-}
 
-.fd-navigation__item.fd-navigation__item--title .fd-navigation__has-children-indicator {
-    display: none;
-}
-
-.fd-navigation__item {
-    .fd-navigation__icon {
-        font-family: var(--sapFontSemiboldDuplexFamily);
+    // Title items
+    &.fd-navigation__item--title .fd-navigation__has-children-indicator {
+        display: none;
     }
 
+    // Font styling for icons and text
+    .fd-navigation__icon,
     .fd-navigation__text {
         font-family: var(--sapFontSemiboldDuplexFamily);
     }
-}
 
-.fd-navigation__item.fd-navigation__item--child {
-    .fd-navigation__icon {
-        font-family: var(--sapFontFamily);
-    }
-
-    .fd-navigation__text {
-        font-family: var(--sapFontFamily);
+    // Child item font styling
+    &.fd-navigation__item--child {
+        .fd-navigation__icon,
+        .fd-navigation__text {
+            font-family: var(--sapFontFamily);
+        }
     }
 }
 
-.fd-navigation.fd-navigation--expanded {
+// Expanded navigation styles
+.#{$block}.#{$block}--expanded {
+    width: 16rem;
+    min-width: 16rem;
     max-width: 16rem;
 
     .fd-navigation__item:not(.fd-navigation__item--create) {
@@ -156,20 +172,15 @@ $block: fd-navigation;
     }
 }
 
-.fd-popover__body.fd-navigation__list-container .fd-navigation__list-wrapper {
+// Popover body in list container
+.fd-popover__body.#{$list-container-class} .fd-navigation__list-wrapper {
     max-width: 40rem;
 }
 
-.fd-navigation.fd-navigation--expanded {
-    width: 16rem;
-    min-width: 16rem;
-    max-width: 16rem;
-}
-
 // Disabled navigation items
-.#{$block}__list-item--disabled {
+.#{$list-item-class}--disabled {
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.6;
 
     .#{$block}__link,
     .#{$block}__item {
@@ -177,7 +188,7 @@ $block: fd-navigation;
         cursor: not-allowed;
         opacity: 0.6;
 
-        // Ensure no focus styles are shown on disabled items
+        // Remove focus styles on disabled items
         &:focus,
         &:focus-visible {
             outline: none !important;

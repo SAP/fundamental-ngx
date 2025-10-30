@@ -1,5 +1,4 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -23,7 +22,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
-import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { Subject, map, of } from 'rxjs';
 import { NavigationListDataSourceDirective } from '../../directives/navigation-list-data-source.directive';
 import {
@@ -57,7 +56,8 @@ interface GroupedDataSourceItems {
         }
     ],
     host: {
-        role: 'navigation'
+        role: 'navigation',
+        tabindex: '0'
     },
     imports: [
         NgTemplateOutlet,
@@ -183,6 +183,39 @@ export class NavigationComponent
         });
     }
 
+    /**
+     * @hidden
+     * Main keyboard navigation handler.
+     */
+    @HostListener('keydown', ['$event'])
+    _keyDownHandler(event: KeyboardEvent): void {
+        if (!this._keyManager) {
+            return;
+        }
+
+        switch (event.key) {
+            case 'ArrowUp':
+                event.preventDefault();
+                this._keyManager.setPreviousItemActive();
+                break;
+
+            case 'ArrowDown':
+                event.preventDefault();
+                this._keyManager.setNextItemActive();
+                break;
+
+            case 'Home':
+                event.preventDefault();
+                this._keyManager.setFirstItemActive();
+                break;
+
+            case 'End':
+                event.preventDefault();
+                this._keyManager.setLastItemActive();
+                break;
+        }
+    }
+
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
@@ -195,21 +228,6 @@ export class NavigationComponent
             ].filter((k) => !!k)
         );
         return [...this.classList$(), `fd-navigation--${this.type}`];
-    }
-
-    /**
-     * @hidden
-     * Main keyboard navigation handler.
-     */
-    @HostListener('keydown', ['$event'])
-    private _keyDownHandler(event: KeyboardEvent): void {
-        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
-            return;
-        }
-
-        event.preventDefault();
-
-        this._keyManager.onKeydown(event);
     }
 
     /** @hidden */

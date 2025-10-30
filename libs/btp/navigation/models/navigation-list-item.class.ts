@@ -5,6 +5,7 @@ import { NavigationListItemMarkerDirective } from '../components/navigation-item
 import { NavigationListComponent } from '../components/navigation-list/navigation-list.component';
 import { FdbNavigationContentContainer } from './navigation-content-container.class';
 import { FdbNavigationItemLink } from './navigation-item-link.class';
+import { NavigationItemConfig, NavigationItemState } from './navigation-types';
 import { FdbNavigation } from './navigation.class';
 
 export const LIST_ITEM_CLASS = 'fd-navigation__list-item';
@@ -30,7 +31,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract unregisterLink(link: FdbNavigationItemLink): void;
     abstract registerChildList(list: NavigationListComponent): void;
     abstract unregisterChildList(list: NavigationListComponent): void;
-    abstract handleHorizontalNavigation(isExpand: boolean): void;
+    abstract handleHorizontalNavigation(isExpand?: boolean): void;
     abstract focusLink(closePopover?: boolean): void;
 
     /** Marker directive that is attached to the rendered list item. */
@@ -109,6 +110,41 @@ export abstract class FdbNavigationListItem implements FocusableOption {
 
     /** Navigation container reference. */
     readonly navigation = inject(FdbNavigation);
+
+    /**
+     * Get current navigation item state
+     */
+    readonly currentState$ = computed((): NavigationItemState[] => {
+        const states: NavigationItemState[] = [];
+        if (this.expanded$()) {
+            states.push('expanded');
+        }
+        if (!this.expanded$() && this.hasChildren$()) {
+            states.push('collapsed');
+        }
+        if (this.disabled) {
+            states.push('disabled');
+        }
+        if (this.selected$()) {
+            states.push('selected');
+        }
+        return states;
+    });
+
+    /**
+     * Get current navigation item configuration
+     */
+    getConfig(): NavigationItemConfig {
+        return {
+            disabled: this.disabled,
+            selected: this.selected$(),
+            expanded: this.expanded$(),
+            home: this.home,
+            separator: this.separator,
+            spacer: this.spacer,
+            group: this.isGroup$()
+        };
+    }
 }
 
 export abstract class FdbNavigationListItemCmp extends FdbNavigationListItem {}
