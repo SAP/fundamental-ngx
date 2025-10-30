@@ -31,18 +31,7 @@
 <ng-template #itemRenderer let-item let-injector="injector">
     <ng-template
         [ngTemplateOutlet]="_navigationItemRenderer()?.templateRef || null"
-        [ngTemplateOutletContext]="{ $implicit: item }"
+        [ngTemplateOutletContext]="{ $implicit: item, children: item.children }"
         [ngTemplateOutletInjector]="injector"
     ></ng-template>
-    @if (item.children && item.children.length > 0) {
-        @for (child of item.children; track child) {
-            <ng-container fdbNavigationListItem [item]="child" #listItemDirective="fdbListItem">
-                <ng-template
-                    [ngTemplateOutlet]="itemRenderer"
-                    [ngTemplateOutletContext]="{ $implicit: child, injector: listItemDirective.injector }"
-                    [ngTemplateOutletInjector]="listItemDirective.injector"
-                ></ng-template>
-            </ng-container>
-        }
-    }
 </ng-template>

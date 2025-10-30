@@ -159,3 +159,34 @@ $block: fd-navigation;
 .fd-popover__body.fd-navigation__list-container .fd-navigation__list-wrapper {
     max-width: 40rem;
 }
+
+.fd-navigation.fd-navigation--expanded {
+    width: 16rem;
+    min-width: 16rem;
+    max-width: 16rem;
+}
+
+// Disabled navigation items
+.#{$block}__list-item--disabled {
+    pointer-events: none;
+    opacity: 0.4;
+
+    .#{$block}__link,
+    .#{$block}__item {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.6;
+
+        // Ensure no focus styles are shown on disabled items
+        &:focus,
+        &:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .#{$block}__has-children-indicator {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+}

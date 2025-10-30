@@ -61,9 +61,9 @@ interface GroupedDataSourceItems {
     },
     imports: [
         NgTemplateOutlet,
-        NavigationListItemDirective,
         NavigationContentStartComponent,
-        NavigationContentEndComponent
+        NavigationContentEndComponent,
+        NavigationListItemDirective
     ]
 })
 export class NavigationComponent
@@ -159,8 +159,6 @@ export class NavigationComponent
     constructor() {
         super();
 
-        console.log(this._dataSourceDirective);
-
         this.dataSourceItems = toSignal(
             !this._dataSourceDirective
                 ? of({ start: [], end: [] } as GroupedDataSourceItems)
@@ -229,7 +227,7 @@ export class NavigationComponent
     ngAfterViewInit(): void {
         this._keyManager = new FocusKeyManager(this._navigationItems)
             .withVerticalOrientation()
-            .skipPredicate((item) => !item.isVisible$() || item.skipNavigation);
+            .skipPredicate((item) => !item.isVisible$() || item.skipNavigation || item.disabled);
         this._keyManager.setActiveItem(0);
         this._viewInitiated$.set(true);
     }

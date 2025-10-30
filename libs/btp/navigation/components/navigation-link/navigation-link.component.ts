@@ -72,10 +72,23 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     @Input({ transform: booleanAttribute })
     quickCreate = false;
 
+    /** Whether the link is disabled. */
+    @Input({ transform: booleanAttribute })
+    disabled = false;
+
     /** @hidden */
     @HostBinding('attr.tabindex')
     private get _tabIndex(): number {
+        if (this.disabled || this._listItemComponent?.disabled$()) {
+            return -1;
+        }
         return this._listItemComponent?.popoverOpen$() || this._navigation.getActiveItem()?.link$() === this ? 0 : -1;
+    }
+
+    /** @hidden */
+    @HostBinding('attr.aria-disabled')
+    private get _ariaDisabled(): boolean | null {
+        return this.disabled || this._listItemComponent?.disabled$() ? true : null;
     }
 
     /** Whether the link is inside popover. */

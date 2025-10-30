@@ -197,6 +197,6 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
         this._keyManager = new FocusKeyManager(this._listItemsArray as FdbNavigationListItem[])
             .withVerticalOrientation()
-            .skipPredicate((item) => item.skipNavigation);
+            .skipPredicate((item) => item.skipNavigation || item.disabled);
     }
 }

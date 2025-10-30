@@ -1,13 +1,152 @@
-<fdb-navigation [dataSource]="dataSource" [style.width]="'fit-content'" [style.height.px]="400">
+<p>Set navigation state</p>
+
+<fd-segmented-button [(ngModel)]="state">
+    <button fd-button label="Expanded" value="expanded"></button>
+    <button fd-button label="Snapped" value="snapped"></button>
+    <button fd-button label="Popup" value="popup"></button>
+</fd-segmented-button>
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value=""></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+
+<p>&nbsp;</p>
+
+<fdb-navigation
+    [dataSource]="dataSource"
+    [state]="state"
+    [mode]="mode"
+    [style.width]="'fit-content'"
+    [style.height.px]="600"
+>
     <fdb-navigation-list-item
         *fdbNavigationListItemRef="let item; as: type"
         [group]="item.group"
         [home]="item.home"
         [expanded]="item.expanded"
         [selected]="item.selected"
+        [separator]="item.separator"
+        [quickCreate]="item.quickCreate"
+        [disabled]="item.disabled"
     >
-        <a fdb-navigation-link *fdbNavigationLinkRef [glyph]="item.icon" (click)="toggleSelection(item)">{{
-            item.title
-        }}</a>
+        <!-- Handle different link types with selection -->
+        @if (item.quickCreate) {
+            <button
+                fdb-navigation-link
+                quickCreate
+                [glyph]="item.icon"
+                *fdbNavigationLinkRef
+                (click)="onQuickCreateClick()"
+            >
+                {{ item.title }}
+            </button>
+        } @else if (item.routerLink) {
+            <a
+                fdb-navigation-link
+                [routerLink]="item.routerLink"
+                *fdbNavigationLinkRef
+                [glyph]="item.icon"
+                (click)="toggleSelection(item)"
+                >{{ item.title }}</a
+            >
+        } @else if (item.external) {
+            <a
+                fdb-navigation-link
+                *fdbNavigationLinkRef
+                [glyph]="item.icon"
+                [external]="true"
+                (click)="toggleSelection(item)"
+                >{{ item.title }}</a
+            >
+        } @else if (!item.separator) {
+            <a fdb-navigation-link *fdbNavigationLinkRef [glyph]="item.icon" (click)="toggleSelection(item)">{{
+                item.title
+            }}</a>
+        }
+
+        <!-- Render children items -->
+        @if (item.children && item.children.length > 0) {
+            @for (child of item.children; track child.id || child.title; let childIndex = $index) {
+                <fdb-navigation-list-item
+                    [group]="child.group"
+                    [expanded]="child.expanded"
+                    [selected]="child.selected"
+                    [separator]="child.separator"
+                >
+                    @if (child.routerLink) {
+                        <a
+                            fdb-navigation-link
+                            [routerLink]="child.routerLink"
+                            *fdbNavigationLinkRef
+                            [glyph]="child.icon"
+                            (click)="toggleSelection(child)"
+                            >{{ child.title }}</a
+                        >
+                    } @else if (child.external) {
+                        <a
+                            fdb-navigation-link
+                            *fdbNavigationLinkRef
+                            [glyph]="child.icon"
+                            [external]="true"
+                            (click)="toggleSelection(child)"
+                            >{{ child.title }}</a
+                        >
+                    } @else if (!child.separator) {
+                        <a
+                            fdb-navigation-link
+                            *fdbNavigationLinkRef
+                            [glyph]="child.icon"
+                            (click)="toggleSelection(child)"
+                            >{{ child.title }}</a
+                        >
+                    }
+
+                    <!-- Render grandchildren if any -->
+                    @if (child.children && child.children.length > 0) {
+                        @for (
+                            grandchild of child.children;
+                            track grandchild.id || grandchild.title;
+                            let grandchildIndex = $index
+                        ) {
+                            <fdb-navigation-list-item
+                                [group]="grandchild.group"
+                                [expanded]="grandchild.expanded"
+                                [selected]="grandchild.selected"
+                            >
+                                @if (grandchild.routerLink) {
+                                    <a
+                                        fdb-navigation-link
+                                        [routerLink]="grandchild.routerLink"
+                                        *fdbNavigationLinkRef
+                                        [glyph]="grandchild.icon"
+                                        (click)="toggleSelection(grandchild)"
+                                        >{{ grandchild.title }}</a
+                                    >
+                                } @else if (grandchild.external) {
+                                    <a
+                                        fdb-navigation-link
+                                        *fdbNavigationLinkRef
+                                        [glyph]="grandchild.icon"
+                                        [external]="true"
+                                        (click)="toggleSelection(grandchild)"
+                                        >{{ grandchild.title }}</a
+                                    >
+                                } @else {
+                                    <a
+                                        fdb-navigation-link
+                                        *fdbNavigationLinkRef
+                                        [glyph]="grandchild.icon"
+                                        (click)="toggleSelection(grandchild)"
+                                        >{{ grandchild.title }}</a
+                                    >
+                                }
+                            </fdb-navigation-list-item>
+                        }
+                    }
+                </fdb-navigation-list-item>
+            }
+        }
     </fdb-navigation-list-item>
 </fdb-navigation>

@@ -27,8 +27,8 @@
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent</a>
+        <fdb-navigation-list-item disabled>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
         </fdb-navigation-list-item>
 
         <fdb-navigation-list-item group expanded>
@@ -40,11 +40,7 @@
                     <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']">All Leads</a>
                 </fdb-navigation-list-item>
                 <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef [external]="true"
-                        >Lead Sources Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias assumenda a
-                        facere iste, expedita, sed voluptatibus officiis illo eaque ducimus impedit, aliquid rem ratione
-                        aperiam.</a
-                    >
+                    <a fdb-navigation-link *fdbNavigationLinkRef [external]="true">Lead Sources (External Link)</a>
                 </fdb-navigation-list-item>
             </fdb-navigation-list-item>
 
@@ -61,7 +57,9 @@
             </fdb-navigation-list-item>
 
             <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="sales-quote">Sales Quotes</a>
+                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/core']" glyph="sales-quote"
+                    >Sales Quotes (Internal Information)</a
+                >
                 <fdb-navigation-list-item>
                     <a fdb-navigation-link *fdbNavigationLinkRef>All Quotes</a>
                 </fdb-navigation-list-item>

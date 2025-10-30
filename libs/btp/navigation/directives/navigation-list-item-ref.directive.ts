@@ -61,6 +61,35 @@ export class NavigationListItemDirective implements OnDestroy {
      */
     registerItem(item: FdbNavigationListItem): void {
         this._item = item;
+
+        // Apply item properties from data source to the navigation list item component
+        if (this.item && this._item) {
+            if (this.item.group !== undefined && 'group' in this._item) {
+                (this._item as any).group = this.item.group;
+            }
+            if (this.item.expanded !== undefined && 'expanded' in this._item) {
+                (this._item as any).expanded = this.item.expanded;
+            }
+            if (this.item.selected !== undefined && 'selected' in this._item) {
+                (this._item as any).selected = this.item.selected;
+            }
+            if (this.item.separator !== undefined && 'separator' in this._item) {
+                (this._item as any).separator = this.item.separator;
+            }
+            if (this.item.home !== undefined && 'home' in this._item) {
+                (this._item as any).home = this.item.home;
+            }
+            if (this.item.quickCreate !== undefined && 'quickCreate' in this._item) {
+                (this._item as any).quickCreate = this.item.quickCreate;
+            }
+            if (this.item.spacer !== undefined && 'spacer' in this._item) {
+                (this._item as any).spacer = this.item.spacer;
+            }
+            if (this.item.disabled !== undefined && 'disabled' in this._item) {
+                (this._item as any).disabled = this.item.disabled;
+            }
+        }
+
         this._contentContainer?.registerItem(this._item);
     }
 

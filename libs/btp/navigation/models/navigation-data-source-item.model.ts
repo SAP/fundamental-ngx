@@ -14,7 +14,7 @@ export type NavigationDataSourceItem<T extends Record<string, any> = Record<stri
 
 export class FdbNavigationDataSource<T extends NavigationDataSourceItem> extends BaseDataSource<T> {
     /** @hidden */
-    limitless = false;
+    limitless = true;
     /** @hidden */
     constructor(public dataProvider: AbstractDataProvider<T>) {
         super(dataProvider);

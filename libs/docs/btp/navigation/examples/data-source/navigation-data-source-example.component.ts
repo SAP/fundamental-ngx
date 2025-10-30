@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -8,17 +7,25 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
 interface ExampleNavigationItem {
+    id?: string;
     icon?: string;
-    title: string;
+    title?: string;
     expanded?: boolean;
     group?: boolean;
     link?: string;
+    routerLink?: any[];
+    external?: boolean;
+    quickCreate?: boolean;
+    separator?: boolean;
     home?: boolean;
+    selected?: boolean;
+    disabled?: boolean;
+    children?: ExampleNavigationItem[];
 }
 
 @Component({
     selector: 'fdb-navigation-data-source-example',
-    imports: [RouterLink, FormsModule, SegmentedButtonComponent, ButtonComponent, FDB_NAVIGATION, NgTemplateOutlet],
+    imports: [RouterLink, FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
     templateUrl: './navigation-data-source-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -33,7 +40,8 @@ export class NavigationDataSourceExampleComponent {
         {
             title: 'Home',
             icon: 'home',
-            placement: 'start'
+            placement: 'start',
+            home: true
         },
         {
             title: 'Favourites',
@@ -41,9 +49,10 @@ export class NavigationDataSourceExampleComponent {
             placement: 'start'
         },
         {
-            title: 'Recent',
+            title: 'Recent (disabled)',
             icon: 'time-account',
-            placement: 'start'
+            placement: 'start',
+            disabled: true
         },
         {
             title: 'Sales',
@@ -60,19 +69,20 @@ export class NavigationDataSourceExampleComponent {
                         {
                             title: 'All Leads',
                             placement: 'start',
-                            link: '/btp/navigation'
+                            routerLink: ['/btp/navigation']
                         },
                         {
-                            title: 'Lead Sources',
+                            title: 'Lead Sources (External Link)',
                             placement: 'start',
-                            link: '/core'
+                            external: true
                         }
                     ]
                 },
                 {
-                    title: 'Opportunities',
+                    title: 'Opportunities (Parent Link)',
                     icon: 'opportunities',
                     placement: 'start',
+                    routerLink: ['/core'],
                     expanded: true,
                     children: [
                         {
@@ -86,9 +96,10 @@ export class NavigationDataSourceExampleComponent {
                     ]
                 },
                 {
-                    title: 'Sales Quotes',
+                    title: 'Sales Quotes (Parent Link)',
                     icon: 'sales-quote',
                     placement: 'start',
+                    routerLink: ['/core'],
                     children: [
                         {
                             title: 'All Quotes',
@@ -121,6 +132,10 @@ export class NavigationDataSourceExampleComponent {
             ]
         },
         {
+            separator: true,
+            placement: 'start'
+        },
+        {
             title: 'Customer Management',
             group: true,
             placement: 'start',
@@ -143,6 +158,10 @@ export class NavigationDataSourceExampleComponent {
             ]
         },
         {
+            separator: true,
+            placement: 'start'
+        },
+        {
             title: 'Task Manager',
             icon: 'task',
             placement: 'start'
@@ -150,17 +169,8 @@ export class NavigationDataSourceExampleComponent {
         {
             title: 'Create Ticket',
             icon: 'write-new',
-            placement: 'end'
-        },
-        {
-            title: 'Dashboard',
-            icon: 'bbyd-dashboard',
-            placement: 'end'
-        },
-        {
-            title: 'Create Ticket',
-            icon: 'write-new',
-            placement: 'end'
+            placement: 'end',
+            quickCreate: true
         },
         {
             title: 'Dashboard',
@@ -168,4 +178,8 @@ export class NavigationDataSourceExampleComponent {
             placement: 'end'
         }
     ];
+
+    onQuickCreateClick(): void {
+        alert('Quick create!');
+    }
 }

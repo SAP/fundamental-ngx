@@ -76,6 +76,9 @@ export class NavigationMoreButtonComponent {
     /** Whether item has child items. */
     readonly hasChildren$ = signal(false);
 
+    /** Whether the more button is disabled. */
+    readonly disabled = false;
+
     /** @hidden */
     readonly _navigation = inject(FdbNavigation);
 
@@ -137,6 +140,10 @@ export class NavigationMoreButtonComponent {
 
     /** @hidden */
     focus(): void {
+        // Don't focus disabled items
+        if (this.disabled) {
+            return;
+        }
         this.focusLink();
     }
 

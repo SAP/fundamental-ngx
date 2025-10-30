@@ -14,6 +14,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract separator: boolean;
     abstract spacer: boolean;
     abstract home: boolean;
+    abstract disabled: boolean;
     abstract isVisible$: Signal<boolean>;
     abstract skipNavigation: boolean;
     abstract placementContainer?: FdbNavigationContentContainer;
@@ -102,6 +103,9 @@ export abstract class FdbNavigationListItem implements FocusableOption {
 
     /** @hidden */
     readonly isGroup$ = signal(false);
+
+    /** @hidden */
+    readonly disabled$ = signal(false);
 
     /** Navigation container reference. */
     readonly navigation = inject(FdbNavigation);

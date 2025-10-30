@@ -164,6 +164,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return this.selected$();
     }
 
+    /** Whether the item should be disabled. */
+    @Input({ transform: booleanAttribute })
+    set disabled(disabled: boolean) {
+        this.disabled$.set(disabled);
+    }
+
+    get disabled(): boolean {
+        return this.disabled$();
+    }
+
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: false })
     listItems: QueryList<FdbNavigationListItem>;
@@ -244,7 +254,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this._class$(),
             this._separator$() ? `${LIST_ITEM_CLASS}--separator` : '',
             this._spacer$() ? `${LIST_ITEM_CLASS}--spacer` : '',
-            this._home$() ? `${LIST_ITEM_CLASS}--home` : ''
+            this._home$() ? `${LIST_ITEM_CLASS}--home` : '',
+            this.disabled$() ? `${LIST_ITEM_CLASS}--disabled` : ''
         ]
             .filter((k) => !!k)
             .join(' ')
@@ -329,7 +340,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
                 const listItems = this.listItems$().filter(Boolean) as FdbNavigationListItem[];
                 this._keyManager = new FocusKeyManager(listItems)
                     .withVerticalOrientation()
-                    .skipPredicate((item) => item.skipNavigation);
+                    .skipPredicate((item) => item.skipNavigation || item.disabled);
             } else {
                 this._keyManager?.destroy();
             }
@@ -420,8 +431,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** @hidden */
-    handleHorizontalNavigation(isExpand: boolean): void {
-        console.log(isExpand);
+    handleHorizontalNavigation(_isExpand: boolean): void {
+        // Handle horizontal navigation logic here if needed
     }
 
     /**
@@ -485,6 +496,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      * @param origin
      */
     focus(): void {
+        // Don't focus disabled items
+        if (this.disabled) {
+            return;
+        }
+
         // If popover is open, focus will be automatically shifted to cloned link.
         if (this.popoverOpen$() && !this.isOverflow$()) {
             return;
