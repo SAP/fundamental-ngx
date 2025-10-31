@@ -71,6 +71,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
     },
     {
+        path: 'icon',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/icon').then(configureLibRoutes)
+    },
+    {
         path: 'label',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/label').then(configureLibRoutes)
     },

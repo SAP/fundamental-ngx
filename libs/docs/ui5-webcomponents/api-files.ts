@@ -19,6 +19,7 @@ export const API_FILES = {
     colorPalette: ['ColorPalette', 'ColorPaletteItem'],
     colorPicker: ['ColorPicker'],
     expandableText: ['ExpandableText'],
+    icon: ['Icon'],
     label: ['Label'],
     link: ['Link'],
     popover: ['Popover'],
