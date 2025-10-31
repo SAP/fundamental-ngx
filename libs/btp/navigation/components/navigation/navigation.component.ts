@@ -14,34 +14,25 @@ import {
     OnDestroy,
     OnInit,
     QueryList,
-    Signal,
     ViewEncapsulation,
     computed,
     effect,
     inject,
     signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { Subject, map, of } from 'rxjs';
-import { NavigationListDataSourceDirective } from '../../directives/navigation-list-data-source.directive';
+import { Subject } from 'rxjs';
 import {
     NavigationListItemDirective,
     NavigationListItemRefDirective
 } from '../../directives/navigation-list-item-ref.directive';
-import { NavigationDataSourceItem } from '../../models/navigation-data-source-item.model';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { FdbNavigationState, FdbNavigationType } from '../../models/navigation.types';
 import { NavigationService } from '../../services/navigation.service';
 import { NavigationContentEndComponent } from '../navigation-end/navigation-content-end.component';
 import { NavigationContentStartComponent } from '../navigation-start/navigation-content-start.component';
-
-interface GroupedDataSourceItems {
-    start: NavigationDataSourceItem[];
-    end: NavigationDataSourceItem[];
-}
 
 @Component({
     selector: 'fdb-navigation',
@@ -132,9 +123,6 @@ export class NavigationComponent
     readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    readonly dataSourceItems: Signal<GroupedDataSourceItems | undefined>;
-
-    /** @hidden */
     readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
 
     /** Stream notifies to close all popups in child list items. */
@@ -143,37 +131,12 @@ export class NavigationComponent
     /** @hidden */
     private readonly _viewInitiated$ = signal(false);
 
-    /**
-     * @hidden
-     * Data source directive.
-     */
-    private readonly _dataSourceDirective = inject(NavigationListDataSourceDirective, {
-        optional: true,
-        self: true
-    });
-
     /** @hidden */
     private _keyManager: FocusKeyManager<FdbNavigationListItem>;
 
     /** @hidden */
     constructor() {
         super();
-        this.dataSourceItems = toSignal(
-            !this._dataSourceDirective
-                ? of({ start: [], end: [] } as GroupedDataSourceItems)
-                : this._dataSourceDirective.dataChanged$.asObservable().pipe(
-                      map((data) => {
-                          const groupedItems: GroupedDataSourceItems = data.reduce(
-                              (acc, item) => {
-                                  acc[item.placement].push(item);
-                                  return acc;
-                              },
-                              { start: [], end: [] } as GroupedDataSourceItems
-                          );
-                          return groupedItems;
-                      })
-                  )
-        );
         // When show more button is shown, reset items list with added "More button".
         effect(() => {
             if (this._viewInitiated$()) {
@@ -214,7 +177,6 @@ export class NavigationComponent
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        this._dataSourceDirective?.dataSourceProvider?.match();
     }
 
     /** @hidden */

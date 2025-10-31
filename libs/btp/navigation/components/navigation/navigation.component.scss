@@ -125,3 +125,33 @@ $block: fd-navigation;
 .fd-navigation__item.fd-navigation__item--title .fd-navigation__has-children-indicator {
     display: none;
 }
+
+.fd-navigation__item {
+    .fd-navigation__icon,
+    .fd-navigation__text {
+        font-family: var(--sapFontSemiboldDuplexFamily);
+    }
+
+    &.fd-navigation__item--child {
+        .fd-navigation__icon,
+        .fd-navigation__text {
+            font-family: var(--sapFontFamily);
+        }
+    }
+}
+
+.fd-navigation.fd-navigation--expanded {
+    width: 16rem;
+    min-width: 16rem;
+    max-width: 16rem;
+
+    .fd-navigation__item:not(.fd-navigation__item--create) {
+        .fd-navigation__text {
+            white-space: normal;
+        }
+    }
+}
+
+.fd-popover__body.fd-navigation__list-container.fd-navigation__list-wrapper {
+    max-width: 40rem;
+}

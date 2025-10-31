@@ -7,7 +7,6 @@ import {
 } from './components/navigation-link/navigation-link.component';
 import { NavigationContentStartComponent } from './components/navigation-start/navigation-content-start.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { NavigationListDataSourceDirective } from './directives/navigation-list-data-source.directive';
 import { NavigationListItemRefDirective } from './directives/navigation-list-item-ref.directive';
 
 @NgModule({
@@ -18,8 +17,7 @@ import { NavigationListItemRefDirective } from './directives/navigation-list-ite
         NavigationLinkComponent,
         NavigationLinkRefDirective,
         NavigationListItemComponent,
-        NavigationListItemRefDirective,
-        NavigationListDataSourceDirective
+        NavigationListItemRefDirective
     ],
     exports: [
         NavigationComponent,
@@ -28,8 +26,7 @@ import { NavigationListItemRefDirective } from './directives/navigation-list-ite
         NavigationLinkComponent,
         NavigationLinkRefDirective,
         NavigationListItemComponent,
-        NavigationListItemRefDirective,
-        NavigationListDataSourceDirective
+        NavigationListItemRefDirective
     ]
 })
 export class NavigationModule {}

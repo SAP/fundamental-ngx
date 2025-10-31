@@ -6,7 +6,6 @@ import {
 } from './components/navigation-link/navigation-link.component';
 import { NavigationContentStartComponent } from './components/navigation-start/navigation-content-start.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { NavigationListDataSourceDirective } from './directives/navigation-list-data-source.directive';
 import { NavigationListItemRefDirective } from './directives/navigation-list-item-ref.directive';
 
 export * from './components/navigation-end/navigation-content-end.component';
@@ -14,10 +13,8 @@ export * from './components/navigation-item/navigation-list-item.component';
 export * from './components/navigation-link/navigation-link.component';
 export * from './components/navigation-start/navigation-content-start.component';
 export * from './components/navigation/navigation.component';
-export * from './directives/navigation-list-data-source.directive';
 export * from './directives/navigation-list-item-ref.directive';
 export * from './models/navigation-content-container.class';
-export * from './models/navigation-data-source-item.model';
 export * from './models/navigation-list-item.class';
 export * from './models/navigation.types';
 
@@ -32,6 +29,5 @@ export const FDB_NAVIGATION = [
     NavigationLinkComponent,
     NavigationLinkRefDirective,
     NavigationListItemComponent,
-    NavigationListItemRefDirective,
-    NavigationListDataSourceDirective
+    NavigationListItemRefDirective
 ] as const;

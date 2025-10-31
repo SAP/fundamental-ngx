@@ -9,9 +9,7 @@ import {
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
-import { NavigationDataSourceExampleComponent } from './examples/data-source/navigation-data-source-example.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
-import { NavigationSelectionExampleComponent } from './examples/selection-example/navigation-selection-example.component';
 
 @Component({
     templateUrl: './navigation-docs.component.html',
@@ -22,9 +20,7 @@ import { NavigationSelectionExampleComponent } from './examples/selection-exampl
         CodeExampleComponent,
         NavigationBasicExampleComponent,
         SeparatorComponent,
-        NavigationParentItemLinkComponent,
-        NavigationDataSourceExampleComponent,
-        NavigationSelectionExampleComponent
+        NavigationParentItemLinkComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -34,22 +30,6 @@ export class NavigationDocsComponent {
             selector: 'navigation-basic-example'
         }),
         getExampleFile('basic-example/navigation-basic-example.component.html')
-    ];
-
-    dataSourceExample: ExampleFile[] = [
-        getExampleFile('data-source/navigation-data-source-example.component.ts', {
-            component: 'NavigationDataSourceExampleComponent',
-            selector: 'navigation-data-source-example'
-        }),
-        getExampleFile('data-source/navigation-data-source-example.component.html')
-    ];
-
-    selectionExample: ExampleFile[] = [
-        getExampleFile('selection-example/navigation-selection-example.component.ts', {
-            component: 'NavigationSelectionExampleComponent',
-            selector: 'navigation-selection-example'
-        }),
-        getExampleFile('selection-example/navigation-selection-example.component.html')
     ];
 
     parentItemLinkExample: ExampleFile[] = [

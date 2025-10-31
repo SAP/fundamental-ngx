@@ -16,12 +16,6 @@ import { FdbNavigationListItem } from '../models/navigation-list-item.class';
 })
 export class NavigationListItemDirective implements OnDestroy {
     /**
-     * Item definition.
-     */
-    @Input()
-    item: any;
-
-    /**
      * Injector used for rendering child list item component.
      * Allows list item component to inject parent list container and register itself as a child item.
      */

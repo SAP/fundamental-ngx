@@ -37,39 +37,3 @@
 <code-example [exampleFiles]="parentItemLinkExample"></code-example>
 
 <separator></separator>
-
-<fd-docs-section-title id="data-source" componentName="FdbNavigation"
-    >Navigation with Data-source</fd-docs-section-title
->
-<description>
-    <p>
-        In addition to content-projected approach, Navigation component supports passing data-source with custom list
-        item renderer.
-    </p>
-    <p>
-        To use Data-source approach be sure to import <code>NavigationListDataSourceDirective</code> to your Component
-        or NgModule.
-    </p>
-</description>
-<component-example [hasBackground]="false">
-    <fdb-navigation-data-source-example></fdb-navigation-data-source-example>
-</component-example>
-<code-example [exampleFiles]="dataSourceExample"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="selection" componentName="FdbNavigation">Selecting Navigation Item</fd-docs-section-title>
-<description>
-    <p>
-        By default, Navigation component listens to <code>RouterLinkActive</code> directive applied to
-        <code>fdb-navigation-link</code>, and determines whether to mark navigation item as selected.
-    </p>
-    <p>
-        If more flexible control over the selected state is required, developers can utilize
-        <code>[selected]</code> input property of <code>fdb-navigation-list-item</code>
-    </p>
-</description>
-<component-example [hasBackground]="false">
-    <fdb-navigation-selection-example></fdb-navigation-selection-example>
-</component-example>
-<code-example [exampleFiles]="selectionExample"></code-example>
