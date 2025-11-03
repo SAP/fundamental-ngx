@@ -177,7 +177,8 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
             }
             // Since we are going from the bottom to the top, we need to add item to the list as the first item of the array.
             hiddenItems.unshift(item);
-            availableSpace = availableSpace + item?.marker?.elementRef.nativeElement.clientHeight;
+            const itemHeight = item?.marker?.elementRef?.nativeElement?.clientHeight || 0;
+            availableSpace = availableSpace + itemHeight;
             item.hidden$.set(true);
         }
 

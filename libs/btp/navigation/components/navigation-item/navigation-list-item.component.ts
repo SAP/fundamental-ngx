@@ -164,6 +164,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return this.selected$();
     }
 
+    /** Whether the item is disabled. */
+    @Input({ transform: booleanAttribute })
+    set disabled(disabled: boolean) {
+        this.disabled$.set(disabled);
+    }
+
+    get disabled(): boolean {
+        return this.disabled$();
+    }
+
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: false })
     listItems: QueryList<FdbNavigationListItem>;
@@ -225,11 +235,14 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return this.parentListItem.isVisible$() && this.parentListItem.expanded$();
     });
 
+    /** Whether the item is disabled. Cached to avoid repeated signal calls. */
+    readonly _isDisabledCached$ = computed(() => this.disabled$());
+
     /**
      * Whether the item is navigatable via the keyboard.
      */
     get skipNavigation(): boolean {
-        return this.spacer || this.separator;
+        return this.spacer || this.separator || this._isDisabledCached$();
     }
 
     /** aria-expanded attribute value. */
@@ -462,6 +475,10 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** Toggles expanded state of the item. */
     toggleExpanded(): void {
+        if (this.disabled$()) {
+            return;
+        }
+
         if (!this.hasChildren$()) {
             return;
         }

@@ -8,9 +8,11 @@
             [class.fd-navigation__item--child]="normalizedLevel$() > 2"
             [class.fd-navigation__item--overflow]="isOverflow$()"
             [class.fd-navigation__item--with-expander]="!!link$()?.routerLink && hasChildren$()"
+            [class.fd-navigation__item--disabled]="disabled$()"
             [attr.aria-level]="level$()"
             [attr.aria-selected]="isActiveAttr$()"
             [attr.aria-expanded]="expandedAttr$()"
+            [attr.aria-disabled]="disabled$()"
             [attr.normalized-level]="normalizedLevel$()"
             (focusin)="_focusInHandler()"
             fdbNavigationListItemMarker

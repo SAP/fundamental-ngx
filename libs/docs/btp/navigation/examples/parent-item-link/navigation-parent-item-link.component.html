@@ -1,5 +1,5 @@
 <p>Set navigation state</p>
-<!-- eslint-disable @angular-eslint/template/elements-content -->
+
 <fd-segmented-button [(ngModel)]="state">
     <button fd-button label="Expanded" value="expanded"></button>
     <button fd-button label="Snapped" value="snapped"></button>
@@ -12,105 +12,102 @@
     <button fd-button label="Mobile" value="phone"></button>
 </fd-segmented-button>
 <p>&nbsp;</p>
-<!-- eslint-enable @angular-eslint/template/elements-content -->
 
 <fdb-navigation
     [state]="state"
     [mode]="mode"
     homeSeparator="false"
     [style.width]="'fit-content'"
-    [style.height.px]="400"
+    [style.height.px]="500"
 >
-    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']" glyph="home">Home</a>
     <fdb-navigation-content-start>
-        <fdb-navigation-list-item home>
+        <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
         </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item disabled>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
+        </fdb-navigation-list-item>
+
         <fdb-navigation-list-item group expanded>
-            <a fdb-navigation-link *fdbNavigationLinkRef>Main items</a>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
+
             <fdb-navigation-list-item expanded>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="create-entry-time">Time</a>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
+                <fdb-navigation-list-item selected>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']">All Leads</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [external]="true">Lead Sources (External Link)</a>
+                </fdb-navigation-list-item>
             </fdb-navigation-list-item>
+
             <fdb-navigation-list-item expanded>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="basket" [routerLink]="['/btp/navigation']"
-                    >Basket</a
+                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/core']" glyph="opportunities"
+                    >Opportunities</a
                 >
                 <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>Future orders</a>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
                 </fdb-navigation-list-item>
                 <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>Current orders</a>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/core']" glyph="sales-quote"
+                    >Sales Quotes (Internal Information)</a
+                >
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Quotes</a>
                 </fdb-navigation-list-item>
                 <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/core']" [external]="true"
-                        >Past orders (External link)</a
-                    >
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Reports</a>
                 </fdb-navigation-list-item>
             </fdb-navigation-list-item>
         </fdb-navigation-list-item>
         <fdb-navigation-list-item separator />
-        <fdb-navigation-list-item expanded>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings without wrapper</a>
+
+        <fdb-navigation-list-item group expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Reports and Analytics</a>
+
             <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="manager-insight">Sales Reports</a>
             </fdb-navigation-list-item>
+
             <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
-            </fdb-navigation-list-item>
-            <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="kpi-corporate-performance">Performance Reports</a>
             </fdb-navigation-list-item>
         </fdb-navigation-list-item>
+        <fdb-navigation-list-item separator />
+
         <fdb-navigation-list-item group>
-            <a fdb-navigation-link *fdbNavigationLinkRef>Favourites</a>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Customer Management</a>
+
             <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="contacts">Contacts</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Contacts</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [external]="true">External Contacts (External Link)</a>
+                </fdb-navigation-list-item>
             </fdb-navigation-list-item>
+
             <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
-                <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
-                </fdb-navigation-list-item>
-                <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
-                </fdb-navigation-list-item>
-                <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
-                </fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="company-view">Companies</a>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="citizen-connect">Partners</a>
             </fdb-navigation-list-item>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item group>
-            <a fdb-navigation-link *fdbNavigationLinkRef>Favourites</a>
-            <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
-            </fdb-navigation-list-item>
-            <fdb-navigation-list-item expanded>
-                <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
-                <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
-                </fdb-navigation-list-item>
-                <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
-                </fdb-navigation-list-item>
-                <fdb-navigation-list-item>
-                    <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
-                </fdb-navigation-list-item>
-            </fdb-navigation-list-item>
-        </fdb-navigation-list-item>
+        <fdb-navigation-list-item separator />
+
         <fdb-navigation-list-item>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield without wrapper</a>
-        </fdb-navigation-list-item>
-        <fdb-navigation-list-item expanded>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
-            <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
-            </fdb-navigation-list-item>
-            <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
-            </fdb-navigation-list-item>
-            <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
-            </fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="task">Task Manager</a>
         </fdb-navigation-list-item>
     </fdb-navigation-content-start>
     <fdb-navigation-content-end>
@@ -122,14 +119,11 @@
                 *fdbNavigationLinkRef
                 (click)="onQuickCreateClick()"
             >
-                Quick Create
+                Create Ticket
             </button>
         </fdb-navigation-list-item>
         <fdb-navigation-list-item>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="sys-help">Help</a>
-        </fdb-navigation-list-item>
-        <fdb-navigation-list-item>
-            <a fdb-navigation-link *fdbNavigationLinkRef glyph="compare">Legal</a>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="bbyd-dashboard">Dashboard</a>
         </fdb-navigation-list-item>
     </fdb-navigation-content-end>
 </fdb-navigation>

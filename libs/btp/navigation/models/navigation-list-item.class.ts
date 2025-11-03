@@ -103,6 +103,9 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     /** @hidden */
     readonly isGroup$ = signal(false);
 
+    /** @hidden */
+    readonly disabled$ = signal(false);
+
     /** Navigation container reference. */
     readonly navigation = inject(FdbNavigation);
 }

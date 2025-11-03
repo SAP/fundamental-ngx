@@ -124,8 +124,16 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     }
 
     /** @hidden */
-    @HostListener('click')
-    private _clickHandler(): void {
+    @HostListener('click', ['$event'])
+    private _clickHandler(event: Event): void {
+        // Simple disabled check - cache the result to avoid repeated signal calls
+        const isDisabled = this._listItemComponent?.disabled$() || false;
+        if (isDisabled) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+
         if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
             this._navigation.closePopups();
         }
@@ -139,6 +147,12 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** @hidden */
     @HostListener('keydown', ['$event'])
     private _keyDownHandler(event: KeyboardEvent): void {
+        // Simple disabled check at the start
+        const isDisabled = this._listItemComponent?.disabled$() || false;
+        if (isDisabled) {
+            return; // Just ignore, don't prevent - let CSS handle it
+        }
+
         if (this.inPopover && KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             this._listItemComponent?.popoverLinkArrowDown();
             return;
