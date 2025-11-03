@@ -31,6 +31,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract unregisterChildList(list: NavigationListComponent): void;
     abstract handleHorizontalNavigation(isExpand: boolean): void;
     abstract focusLink(closePopover?: boolean): void;
+    abstract canItemBeSelected(): boolean;
 
     /** Marker directive that is attached to the rendered list item. */
     marker: Nullable<NavigationListItemMarkerDirective>;

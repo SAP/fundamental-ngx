@@ -514,7 +514,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         }
 
         // Handle selection in click mode for selectable items
-        if (this.navigation.selectionMode === 'click' && this._canItemBeSelected()) {
+        if (this.navigation.selectionMode === 'click' && this.canItemBeSelected()) {
             this.navigation.service.setSelectedItem(this);
         }
     }
@@ -565,6 +565,31 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this._onZoneStable().subscribe(() => {
             popover.popoverBody._focusFirstTabbableElement(true);
         });
+    }
+
+    /**
+     * Determines if this item can be selected based on its type and structure.
+     * @returns true if the item can be selected, false otherwise
+     */
+    canItemBeSelected(): boolean {
+        // Group items (headers) cannot be selected
+        if (this.isGroup$()) {
+            return false;
+        }
+
+        // Items with children that don't have a router link cannot be selected
+        // (they should only expand/collapse)
+        if (this.hasChildren$() && !this.link$()?.routerLink) {
+            return false;
+        }
+
+        // Separator and spacer items cannot be selected
+        if (this.separator || this.spacer) {
+            return false;
+        }
+
+        // All other items (leaf items and items with both links and children) can be selected
+        return true;
     }
 
     private _focusPopoverLink(): void {
@@ -636,30 +661,5 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             take(1),
             takeUntilDestroyed(this._destroyRef)
         );
-    }
-
-    /**
-     * Determines if this item can be selected based on its type and structure.
-     * @returns true if the item can be selected, false otherwise
-     */
-    private _canItemBeSelected(): boolean {
-        // Group items (headers) cannot be selected
-        if (this.isGroup$()) {
-            return false;
-        }
-
-        // Items with children that don't have a router link cannot be selected
-        // (they should only expand/collapse)
-        if (this.hasChildren$() && !this.link$()?.routerLink) {
-            return false;
-        }
-
-        // Separator and spacer items cannot be selected
-        if (this.separator || this.spacer) {
-            return false;
-        }
-
-        // All other items (leaf items and items with both links and children) can be selected
-        return true;
     }
 }

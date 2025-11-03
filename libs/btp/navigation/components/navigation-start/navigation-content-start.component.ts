@@ -128,6 +128,13 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
             .subscribe(() => {
                 this._calculateVisibleItems();
             });
+
+        // Listen for overflow item selections to promote them to visible
+        this.navigation.service.overflowItemSelected$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((selectedItem) => {
+                this._promoteOverflowItem(selectedItem);
+            });
     }
 
     /**
@@ -193,5 +200,86 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         this.navigation.showMoreButton$.set(this._showMoreButton);
 
         this._calculationInProgress = false;
+    }
+
+    /**
+     * @hidden
+     * Promotes an overflow item to be the last visible item.
+     * Moves the current last visible item to overflow while preserving overflow order.
+     */
+    private _promoteOverflowItem(selectedItem: FdbNavigationListItem): void {
+        if (!this.navigation.isSnapped$() || !this._showMoreButton$()) {
+            return;
+        }
+
+        const currentVisible = [...this.visibleItems$()];
+        const currentHidden = [...this.hiddenItems$()];
+        const allItems = [...this.listItems$()]; // Original order
+
+        // Find the selected item in hidden items
+        const hiddenIndex = currentHidden.findIndex((item) => item === selectedItem);
+
+        // If not found by object reference, try text-based matching
+        let fallbackIndex = -1;
+        if (hiddenIndex === -1) {
+            const selectedText = selectedItem.link$()?.elementRef?.nativeElement?.textContent?.trim();
+            fallbackIndex = currentHidden.findIndex(
+                (item) => item.link$()?.elementRef?.nativeElement?.textContent?.trim() === selectedText
+            );
+        }
+
+        const finalIndex = hiddenIndex !== -1 ? hiddenIndex : fallbackIndex;
+
+        if (finalIndex === -1) {
+            return; // Item not found in hidden items
+        }
+
+        // Remove the selected item from hidden items
+        const [itemToPromote] = currentHidden.splice(finalIndex, 1);
+
+        // Move the last visible item to overflow, but insert it in the correct position
+        // to maintain the original order
+        const lastVisibleItem = currentVisible.pop();
+        if (lastVisibleItem) {
+            lastVisibleItem.hidden$.set(true);
+
+            // Find the correct position in the original order
+            const lastVisibleIndex = allItems.findIndex((item) => item === lastVisibleItem);
+
+            // Insert the item in the correct position in hidden items to maintain order
+            let insertPosition = 0;
+            for (let i = 0; i < currentHidden.length; i++) {
+                const hiddenItemIndex = allItems.findIndex((item) => item === currentHidden[i]);
+                if (hiddenItemIndex > lastVisibleIndex) {
+                    break;
+                }
+                insertPosition++;
+            }
+
+            currentHidden.splice(insertPosition, 0, lastVisibleItem);
+        }
+
+        // Add the promoted item as the last visible item
+        currentVisible.push(itemToPromote);
+        itemToPromote.hidden$.set(false);
+
+        // Update the signals
+        this.visibleItems$.set(currentVisible);
+        this.hiddenItems$.set(currentHidden);
+
+        // Update the "More" button visibility
+        this._showMoreButton$.set(currentHidden.length > 0);
+        this.navigation.showMoreButton$.set(currentHidden.length > 0 ? this._showMoreButton : null);
+
+        // Trigger change detection to ensure navigation items are properly updated
+        this._cdr.detectChanges();
+
+        // Focus the More button after promotion to maintain standard accessibility pattern
+        // (focus returns to trigger when popover closes)
+        setTimeout(() => {
+            if (this._showMoreButton) {
+                this._showMoreButton.focus();
+            }
+        }, 50);
     }
 }

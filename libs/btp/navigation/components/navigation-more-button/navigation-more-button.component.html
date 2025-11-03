@@ -13,7 +13,7 @@
         [trigger]="trigger"
         [triggers]="[]"
         [isOpen]="popoverOpen$()"
-        (isOpenChange)="popoverOpen$.set($event)"
+        (isOpenChange)="_onPopoverOpenChange($event)"
         [focusTrapped]="true"
         [noArrow]="false"
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"

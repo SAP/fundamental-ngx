@@ -4,12 +4,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
+    ElementRef,
     Input,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
     computed,
-    effect,
     inject,
     signal
 } from '@angular/core';
@@ -99,22 +99,49 @@ export class NavigationMoreButtonComponent {
     });
 
     /** @hidden */
+    private readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
     private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     constructor() {
-        effect(() => {
-            if (this.popoverOpen$() && !this._popoverClicked) {
-                setTimeout(() => {
-                    this.listItems[0]?.focus();
-                });
-            }
-            this._popoverClicked = false;
-        });
-
         this._navigation.closeAllPopups.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(() => {
             this.popoverOpen$.set(false);
         });
+    }
+
+    /** @hidden */
+    _onPopoverOpenChange(isOpen: boolean): void {
+        this.popoverOpen$.set(isOpen);
+
+        // When popover opens, focus the first item
+        if (isOpen) {
+            // Use a short timeout to ensure the DOM is updated
+            setTimeout(() => {
+                // Query the document for any open popover (since popover is rendered at document level)
+                const popoverBody = document.querySelector('.fd-popover__body:not([style*="display: none"])');
+
+                if (popoverBody) {
+                    const firstLink = popoverBody.querySelector('a[fdb-navigation-link]') as HTMLElement;
+
+                    if (firstLink) {
+                        firstLink.focus();
+                        return;
+                    }
+                }
+
+                // Fallback to listItems array if DOM query fails
+                if (this.listItems && this.listItems.length > 0) {
+                    const firstItem = this.listItems[0];
+                    const link = firstItem.link$();
+
+                    if (link?.elementRef?.nativeElement) {
+                        link.elementRef.nativeElement.focus();
+                    }
+                }
+            }, 150);
+        }
     }
 
     /** @hidden */
@@ -155,7 +182,13 @@ export class NavigationMoreButtonComponent {
     toggleExpanded(): void {}
 
     /** @hidden */
-    keyboardExpanded(): void {}
+    keyboardExpanded(shouldExpand: boolean): void {
+        if (shouldExpand && !this.popoverOpen$()) {
+            this.popoverOpen$.set(true);
+        } else if (!shouldExpand && this.popoverOpen$()) {
+            this.popoverOpen$.set(false);
+        }
+    }
 
     /** @hidden */
     _keydownPopoverToggle(event: KeyboardEvent): void {
@@ -166,12 +199,11 @@ export class NavigationMoreButtonComponent {
 
         const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
 
-        // If user clicked on popover opener button, and then tried to use keyboard, simply shift focus to the first item in the popover menu.
-        if (isOpenAction && this.popoverOpen$()) {
-            this.listItems[0]?.focus();
-            return;
-        }
-
         this.popoverOpen$.set(isOpenAction);
+    }
+
+    /** @hidden */
+    canItemBeSelected(): boolean {
+        return false; // More button cannot be selected
     }
 }

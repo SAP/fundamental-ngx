@@ -1,4 +1,4 @@
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -126,9 +126,18 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** @hidden */
     @HostListener('click', ['$event'])
     private _clickHandler(event: Event): void {
-        // Simple disabled check - cache the result to avoid repeated signal calls
-        const isDisabled = this._listItemComponent?.disabled$() || false;
-        if (isDisabled) {
+        // Check if this is a NavigationMoreButtonComponent (More button itself)
+        if (
+            this._listItemComponent &&
+            'type' in this._listItemComponent &&
+            (this._listItemComponent as any).type === 'showMore'
+        ) {
+            return;
+        }
+
+        const disabled = this._listItemComponent?.disabled$?.() || false;
+
+        if (disabled) {
             event.preventDefault();
             event.stopPropagation();
             return;
@@ -137,26 +146,81 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
         if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
             this._navigation.closePopups();
         }
-        // Ignore click if link has URL applied to it.
+
         if (this.routerLink) {
             return;
         }
-        this._listItemComponent?.toggleExpanded();
+
+        // Handle selection directly if in click mode
+        if (this._navigation.selectionMode === 'click' && this._listItemComponent) {
+            const canSelect = this._canItemBeSelected();
+
+            if (canSelect) {
+                this._navigation.service.setSelectedItem(this._listItemComponent);
+            } else {
+                // Handle expansion for items with children
+                this._listItemComponent?.toggleExpanded();
+            }
+        } else {
+            // Handle expansion for items with children
+            this._listItemComponent?.toggleExpanded();
+        }
     }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
     private _keyDownHandler(event: KeyboardEvent): void {
         // Simple disabled check at the start
-        const isDisabled = this._listItemComponent?.disabled$() || false;
+        const isDisabled = this._listItemComponent?.disabled$?.() || false;
         if (isDisabled) {
             return; // Just ignore, don't prevent - let CSS handle it
+        }
+
+        // Handle Space and Enter for selection (same as click behavior)
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            // Check if this is a NavigationMoreButtonComponent (More button itself)
+            if (
+                this._listItemComponent &&
+                'type' in this._listItemComponent &&
+                (this._listItemComponent as any).type === 'showMore'
+            ) {
+                return; // Let the popover handle Space/Enter
+            }
+
+            // Prevent default scrolling behavior for Space
+            event.preventDefault();
+
+            if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
+                this._navigation.closePopups();
+            }
+
+            // Ignore if link has URL applied to it (let router handle it)
+            if (this.routerLink) {
+                return;
+            }
+
+            // Handle selection directly if in click mode
+            if (this._navigation.selectionMode === 'click' && this._listItemComponent) {
+                const canSelect = this._canItemBeSelected();
+
+                if (canSelect) {
+                    this._navigation.service.setSelectedItem(this._listItemComponent);
+                } else {
+                    // Handle expansion for items with children
+                    this._listItemComponent?.toggleExpanded();
+                }
+            } else {
+                // Handle expansion for items with children
+                this._listItemComponent?.toggleExpanded();
+            }
+            return;
         }
 
         if (this.inPopover && KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             this._listItemComponent?.popoverLinkArrowDown();
             return;
         }
+
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             return;
         }
@@ -169,5 +233,31 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** @hidden */
     ngOnDestroy(): void {
         this._listItemComponent?.unregisterLink(this);
+    }
+
+    /** @hidden */
+    private _canItemBeSelected(): boolean {
+        if (!this._listItemComponent) {
+            return false;
+        }
+
+        // Group items (headers) cannot be selected
+        if (this._listItemComponent.isGroup$()) {
+            return false;
+        }
+
+        // Items with children that don't have a router link cannot be selected
+        // (they should only expand/collapse)
+        if (this._listItemComponent.hasChildren$() && !this.routerLink) {
+            return false;
+        }
+
+        // Separator and spacer items cannot be selected
+        if (this._listItemComponent.separator || this._listItemComponent.spacer) {
+            return false;
+        }
+
+        // All other items (leaf items and items with both links and children) can be selected
+        return true;
     }
 }
