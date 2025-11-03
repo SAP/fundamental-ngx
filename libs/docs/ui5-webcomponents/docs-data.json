@@ -71,6 +71,10 @@
             "name": "Link"
         },
         {
+            "url": "ui5-webcomponents/list",
+            "name": "List"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         },

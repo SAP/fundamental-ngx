@@ -22,6 +22,7 @@ export const API_FILES = {
     icon: ['Icon'],
     label: ['Label'],
     link: ['Link'],
+    list: ['List'],
     popover: ['Popover'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     slider: ['Slider', 'RangeSlider']

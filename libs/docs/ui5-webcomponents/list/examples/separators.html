@@ -1,0 +1,13 @@
+<ui5-list separators="None">
+    @for (item of noSeparatorItems; track item.name) {
+    <ui5-li [icon]="item.icon">{{ item.name }}</ui5-li>
+    }
+</ui5-list>
+
+<br /><br />
+
+<ui5-list separators="Inner">
+    @for (item of innerSeparatorItems; track item.name) {
+    <ui5-li [icon]="item.icon">{{ item.name }}</ui5-li>
+    }
+</ui5-list>

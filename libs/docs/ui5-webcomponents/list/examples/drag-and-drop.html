@@ -1,0 +1,5 @@
+<ui5-list #list id="listDnd1" (ui5Move)="onItemMove($event)" (ui5MoveOver)="onItemMoveOver($event)">
+    @for(item of items(); track item) {
+    <ui5-li icon="checklist-item" movable>{{ item }}</ui5-li>
+    }
+</ui5-list>
