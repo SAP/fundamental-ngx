@@ -15,6 +15,7 @@
             [attr.aria-disabled]="disabled$()"
             [attr.normalized-level]="normalizedLevel$()"
             (focusin)="_focusInHandler()"
+            (click)="handleItemClick()"
             fdbNavigationListItemMarker
             #itemContainer
         >

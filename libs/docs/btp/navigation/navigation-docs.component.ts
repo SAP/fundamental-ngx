@@ -10,6 +10,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
+import { SelectionModeComponent } from './examples/selection-mode/selection-mode.component';
 
 @Component({
     templateUrl: './navigation-docs.component.html',
@@ -20,7 +21,8 @@ import { NavigationParentItemLinkComponent } from './examples/parent-item-link/n
         CodeExampleComponent,
         NavigationBasicExampleComponent,
         SeparatorComponent,
-        NavigationParentItemLinkComponent
+        NavigationParentItemLinkComponent,
+        SelectionModeComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -38,5 +40,13 @@ export class NavigationDocsComponent {
             selector: 'navigation-parent-item-link'
         }),
         getExampleFile('parent-item-link/navigation-parent-item-link.component.html')
+    ];
+
+    selectionModeExample: ExampleFile[] = [
+        getExampleFile('selection-mode/selection-mode.component.ts', {
+            component: 'SelectionModeComponent',
+            selector: 'selection-mode'
+        }),
+        getExampleFile('selection-mode/selection-mode.component.html')
     ];
 }

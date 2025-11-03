@@ -1,0 +1,174 @@
+<p>Set navigation state</p>
+
+<fd-segmented-button [(ngModel)]="state">
+    <button fd-button label="Expanded" value="expanded"></button>
+    <button fd-button label="Snapped" value="snapped"></button>
+    <button fd-button label="Popup" value="popup"></button>
+</fd-segmented-button>
+
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value=""></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+
+<p>Set selection mode</p>
+<fd-segmented-button [(ngModel)]="selectionMode">
+    <button fd-button label="Router-based" value="router"></button>
+    <button fd-button label="Click-based" value="click"></button>
+</fd-segmented-button>
+
+<p>&nbsp;</p>
+
+<fdb-navigation
+    [state]="state"
+    [mode]="mode"
+    [selectionMode]="selectionMode"
+    homeSeparator="false"
+    [style.width]="'fit-content'"
+    [style.height.px]="500"
+>
+    <fdb-navigation-content-start>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item disabled>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
+        </fdb-navigation-list-item>
+
+        <fdb-navigation-list-item group expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
+
+            <fdb-navigation-list-item expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Leads</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [external]="true">Lead Sources (External Link)</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="opportunities" routerLink="/opportunities"
+                    >Opportunities</a
+                >
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="sales-quote">Sales Quotes (Internal Information)</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Quotes</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Reports</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item separator />
+
+        <fdb-navigation-list-item group expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Reports and Analytics</a>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="manager-insight">Sales Reports</a>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="kpi-corporate-performance">Performance Reports</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item separator />
+
+        <fdb-navigation-list-item group>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Customer Management</a>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="contacts">Contacts</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>All Contacts</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [external]="true">External Contacts (External Link)</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="company-view">Companies</a>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="citizen-connect">Partners</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item separator />
+
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="task">Task Manager</a>
+        </fdb-navigation-list-item>
+    </fdb-navigation-content-start>
+    <fdb-navigation-content-end>
+        <fdb-navigation-list-item quickCreate>
+            <button
+                fdb-navigation-link
+                quickCreate
+                glyph="write-new"
+                *fdbNavigationLinkRef
+                (click)="onQuickCreateClick()"
+            >
+                Create Ticket
+            </button>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="bbyd-dashboard">Dashboard</a>
+        </fdb-navigation-list-item>
+    </fdb-navigation-content-end>
+</fdb-navigation>
+
+<br /><br />
+
+<div style="display: flex; gap: 10px; margin-bottom: 20px">
+    <button
+        fd-button
+        label="Show Selected Item"
+        (click)="showSelectedItem()"
+        [disabled]="selectionMode !== 'click'"
+    ></button>
+    <button
+        fd-button
+        label="Clear Selection"
+        (click)="clearSelection()"
+        [disabled]="selectionMode !== 'click'"
+    ></button>
+</div>
+
+<p><strong>Instructions:</strong></p>
+<ul>
+    <li><strong>Router-based mode:</strong> Selection is determined by router link activation (default behavior)</li>
+    <li>
+        <strong>Click-based mode:</strong> Smart selection based on item type:
+        <ul>
+            <li><strong>Leaf items</strong> (e.g., "Home", "All Leads"): Clickable and selectable</li>
+            <li>
+                <strong>Group headers</strong> (e.g., "Sales", "Reports and Analytics"): Only expand/collapse, not
+                selectable
+            </li>
+            <li><strong>Parent items without links</strong> (e.g., "Leads"): Only expand/collapse, not selectable</li>
+            <li>
+                <strong>Two-zone items with links</strong> (e.g., "Opportunities"): Text area is selectable, expander
+                button expands/collapses
+            </li>
+            <li><strong>Disabled items</strong>: Not interactive in either mode</li>
+        </ul>
+    </li>
+</ul>

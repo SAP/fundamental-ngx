@@ -157,7 +157,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** Whether the item should be marked as selected. */
     @Input({ transform: booleanAttribute })
     set selected(selected: boolean) {
-        this.selected$.set(selected);
+        this._manuallySelected$.set(selected);
     }
 
     get selected(): boolean {
@@ -263,8 +263,20 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             .join(' ')
     );
 
-    /** Selected Signal. */
-    readonly selected$ = signal(false);
+    /** Combined selected state - considers both manual selection and service selection. */
+    readonly selected$ = computed(() => {
+        // Check if manually selected (for router-based selection mode)
+        if (this._manuallySelected$()) {
+            return true;
+        }
+
+        // Check if selected via service (for click-based selection mode)
+        if (this.navigation.selectionMode === 'click') {
+            return this.navigation.service.selectedItem$() === this;
+        }
+
+        return false;
+    });
 
     /** @hidden */
     readonly quickCreate$ = signal(false);
@@ -290,6 +302,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     private readonly _home$ = signal(false);
+
+    /** Manual selection state signal (for router-based selection mode). */
+    private readonly _manuallySelected$ = signal(false);
 
     /** @hidden */
     private readonly _class$ = signal<Nullable<string>>(null);
@@ -485,6 +500,25 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this.expanded$.update((expanded) => !expanded);
     }
 
+    /** Handles item click for both selection and expansion based on item type and navigation mode. */
+    handleItemClick(): void {
+        if (this.disabled$()) {
+            return;
+        }
+
+        // Let the navigation link handle expansion for items with links
+        // Only handle expansion here for items without any links
+        if (this.hasChildren$() && !this.link$()) {
+            this.toggleExpanded();
+            return;
+        }
+
+        // Handle selection in click mode for selectable items
+        if (this.navigation.selectionMode === 'click' && this._canItemBeSelected()) {
+            this.navigation.service.setSelectedItem(this);
+        }
+    }
+
     /** Callback method when user used keyboard arrows to expand/collapse list item. */
     keyboardExpanded(shouldExpand: boolean): void {
         if (this.isOverflow$()) {
@@ -602,5 +636,30 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             take(1),
             takeUntilDestroyed(this._destroyRef)
         );
+    }
+
+    /**
+     * Determines if this item can be selected based on its type and structure.
+     * @returns true if the item can be selected, false otherwise
+     */
+    private _canItemBeSelected(): boolean {
+        // Group items (headers) cannot be selected
+        if (this.isGroup$()) {
+            return false;
+        }
+
+        // Items with children that don't have a router link cannot be selected
+        // (they should only expand/collapse)
+        if (this.hasChildren$() && !this.link$()?.routerLink) {
+            return false;
+        }
+
+        // Separator and spacer items cannot be selected
+        if (this.separator || this.spacer) {
+            return false;
+        }
+
+        // All other items (leaf items and items with both links and children) can be selected
+        return true;
     }
 }

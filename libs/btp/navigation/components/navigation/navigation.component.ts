@@ -88,6 +88,14 @@ export class NavigationComponent
     @Input()
     type: FdbNavigationType = 'vertical';
 
+    /**
+     * Selection mode for navigation items.
+     * - 'router': Selection is handled by router link activation (default)
+     * - 'click': Selection is handled by click events
+     */
+    @Input()
+    selectionMode: 'router' | 'click' = 'router';
+
     /** @hidden */
     @ContentChild(NavigationListItemRefDirective)
     set _navigationItemRef(value: Nullable<NavigationListItemRefDirective>) {
@@ -121,6 +129,9 @@ export class NavigationComponent
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
+
+    /** Navigation service for managing selection state. */
+    readonly service = inject(NavigationService);
 
     /** @hidden */
     readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
@@ -215,6 +226,29 @@ export class NavigationComponent
     /** Notifies child list items that all popups should be closed. */
     closePopups(): void {
         this.closeAllPopups.next();
+    }
+
+    /**
+     * Get the currently selected item when in click selection mode.
+     * @returns The currently selected item, or null if none is selected.
+     */
+    getSelectedItem(): FdbNavigationListItem | null {
+        return this.service.getSelectedItem();
+    }
+
+    /**
+     * Set the selected item when in click selection mode.
+     * @param item The item to select, or null to clear selection.
+     */
+    setSelectedItem(item: FdbNavigationListItem | null): void {
+        this.service.setSelectedItem(item);
+    }
+
+    /**
+     * Clear the current selection when in click selection mode.
+     */
+    clearSelection(): void {
+        this.service.setSelectedItem(null);
     }
 
     /**
