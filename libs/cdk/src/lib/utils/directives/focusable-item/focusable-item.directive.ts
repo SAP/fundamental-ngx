@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { InteractivityChecker, LiveAnnouncer } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
@@ -70,6 +70,14 @@ export class FocusableItemDirective implements HasElementRef {
     @Output()
     readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
+    /** Event emitted when a focusable child element is focused. */
+    @Output()
+    readonly focusableChildElementFocused = new EventEmitter<void>();
+
+    /** @hidden */
+    @Output()
+    readonly _parentFocusableItemFocused = new EventEmitter<void>();
+
     /** @hidden */
     public readonly _keydown$ = new Subject<KeyboardEvent>();
 
@@ -80,13 +88,10 @@ export class FocusableItemDirective implements HasElementRef {
     private _focusable = true;
 
     /** @hidden */
-    private _tabbableElements = new Map<HTMLElement, number>();
-
-    /** @hidden */
     private _tabbable = true;
 
     /** @hidden */
-    private _timerId: ReturnType<typeof setTimeout> | null;
+    private _tabbableElements = new Map<HTMLElement, number>();
 
     /** Element reference. */
     public readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -104,6 +109,8 @@ export class FocusableItemDirective implements HasElementRef {
     private readonly _renderer2 = inject(Renderer2);
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
+    /** @hidden */
+    private readonly _checker = inject(InteractivityChecker);
 
     /** @hidden */
     constructor() {
@@ -123,12 +130,6 @@ export class FocusableItemDirective implements HasElementRef {
                     await this._onFocusin();
                 });
 
-            fromEvent(this.elementRef.nativeElement, 'focusout')
-                .pipe(takeUntil(this._destroy$))
-                .subscribe(() => {
-                    this._onFocusout();
-                });
-
             fromEvent<KeyboardEvent>(this.elementRef.nativeElement, 'keydown')
                 .pipe(takeUntil(this._destroy$))
                 .subscribe((event) => {
@@ -142,24 +143,34 @@ export class FocusableItemDirective implements HasElementRef {
         this._zone.runOutsideAngular(() => {
             this._tabbable = state;
             this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
-
-            if (state) {
-                this._enableTabbableElements();
-            } else {
-                this._disableTabbableElements();
-            }
         });
+    }
+
+    /** @hidden */
+    enableTabbableElements(): void {
+        if (this._tabbableElements.size === 0) {
+            return;
+        }
+
+        this._tabbableElements.forEach((tabIndex, element) => (element.tabIndex = tabIndex));
+        this._tabbable = false;
+    }
+
+    /** @hidden */
+    disableTabbableElements(): void {
+        // Since we cannot select by tabindex attribute (links, inputs, buttons might not have one but still can be focusable),
+        // Select all elements from the cell and filter by tabIndex property.
+        Array.from(this.elementRef.nativeElement.querySelectorAll<HTMLElement>('*'))
+            .filter((elm) => elm.tabIndex >= 0)
+            .forEach((elm) => {
+                this._tabbableElements.set(elm, elm.tabIndex);
+                elm.tabIndex = -1;
+            });
     }
 
     /** @hidden */
     private async _onFocusin(): Promise<void> {
         if (!this.fdkFocusableItem) {
-            return;
-        }
-
-        if (this._timerId != null) {
-            clearTimeout(this._timerId);
-            this._timerId = null;
             return;
         }
 
@@ -171,25 +182,23 @@ export class FocusableItemDirective implements HasElementRef {
                 await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
             }
         }
-    }
 
-    /** @hidden */
-    private _onFocusout(): void {
-        if (!this.fdkFocusableItem) {
-            return;
+        const activeEl = this._document.activeElement as HTMLElement;
+
+        if (activeEl === this.elementRef.nativeElement) {
+            this._parentFocusableItemFocused.emit();
+        } else if (activeEl && activeEl !== this.elementRef.nativeElement && this._checker.isFocusable(activeEl)) {
+            this.focusableChildElementFocused.emit();
         }
-
-        // Timeout is needed to prevent focusout event from being emitted when focus moves between item's children.
-        this._timerId = setTimeout(() => (this._timerId = null));
     }
 
     /** @hidden */
     private _onKeydown(event: KeyboardEvent): void {
+        const activeEl = this._document.activeElement;
         if (!this.fdkFocusableItem) {
             return;
         }
-
-        const isFocused = this._document.activeElement === this.elementRef.nativeElement;
+        const isFocused = activeEl === this.elementRef.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
         const shouldFocusCell =
             ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
@@ -205,6 +214,8 @@ export class FocusableItemDirective implements HasElementRef {
 
             tabbableElement?.focus();
 
+            this.focusableChildElementFocused.emit();
+
             return;
         } else if (shouldFocusCell) {
             event.stopPropagation();
@@ -217,28 +228,6 @@ export class FocusableItemDirective implements HasElementRef {
         if (isFocused) {
             this._keydown$.next(event);
         }
-    }
-
-    /** @hidden */
-    private _enableTabbableElements(): void {
-        if (this._tabbableElements.size === 0) {
-            return;
-        }
-
-        this._tabbableElements.forEach((tabIndex, element) => (element.tabIndex = tabIndex));
-        this._tabbable = false;
-    }
-
-    /** @hidden */
-    private _disableTabbableElements(): void {
-        // Since we cannot select by tabindex attribute (links, inputs, buttons might not have one but still can be focusable),
-        // Select all elements from the cell and filter by tabIndex property.
-        Array.from(this.elementRef.nativeElement.querySelectorAll<HTMLElement>('*'))
-            .filter((elm) => elm.tabIndex >= 0)
-            .forEach((elm) => {
-                this._tabbableElements.set(elm, elm.tabIndex);
-                elm.tabIndex = -1;
-            });
     }
 
     /** @hidden */
