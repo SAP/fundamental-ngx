@@ -87,6 +87,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/list').then(configureLibRoutes)
     },
     {
+        path: 'message-strip',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
+    },
+    {
         path: 'popover',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
     },

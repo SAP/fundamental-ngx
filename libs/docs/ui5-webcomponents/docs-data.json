@@ -75,6 +75,10 @@
             "name": "List"
         },
         {
+            "url": "ui5-webcomponents/message-strip",
+            "name": "Message Strip"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         },

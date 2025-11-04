@@ -1,0 +1,18 @@
+@for (message of customMessages(); track message.id) {
+<div class="fd-margin-bottom--sm">
+    <ui5-message-strip [design]="message.design">
+        <ui5-icon slot="icon" [name]="message.icon" [style.color]="message.customColor"> </ui5-icon>
+        {{ message.message }}
+    </ui5-message-strip>
+</div>
+}
+<ui5-message-strip design="Negative">
+    <img
+        src="https://ui5.github.io/webcomponents/nightly/images/loading.gif"
+        width="16"
+        height="16"
+        slot="icon"
+        alt="loading"
+    />
+    Custom MessageStrip with animated gif
+</ui5-message-strip>
