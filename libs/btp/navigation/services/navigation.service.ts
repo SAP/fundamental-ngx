@@ -13,12 +13,18 @@ export class NavigationService {
     /** Subject to notify when an overflow item is selected and should be promoted. */
     overflowItemSelected$ = new Subject<FdbNavigationListItem>();
 
+    /** Subject to notify when selection changes to clear manual selections */
+    selectionChanged$ = new Subject<FdbNavigationListItem | null>();
+
     /**
      * Set the selected item.
      * @param item The item to select, or null to clear selection.
      */
     setSelectedItem(item: FdbNavigationListItem | null): void {
         this.selectedItem$.set(item);
+
+        // Notify that selection has changed so other items can clear their manual selection
+        this.selectionChanged$.next(item);
 
         // Handle smart overflow promotion logic
         if (item) {

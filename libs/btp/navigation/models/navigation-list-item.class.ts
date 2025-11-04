@@ -21,6 +21,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract parentListItem: FdbNavigationListItem | null;
     abstract class$: Signal<string>;
     abstract selected$: Signal<boolean>;
+    abstract id: Signal<string>;
     abstract focus(origin?: FocusOrigin | undefined): void;
     abstract toggleExpanded(): void;
     abstract keyboardExpanded(shouldExpand: boolean): void;

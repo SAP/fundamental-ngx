@@ -9,6 +9,7 @@
             [class.fd-navigation__item--overflow]="isOverflow$()"
             [class.fd-navigation__item--with-expander]="!!link$()?.routerLink && hasChildren$()"
             [class.fd-navigation__item--disabled]="disabled$()"
+            [attr.id]="id()"
             [attr.aria-level]="level$()"
             [attr.aria-selected]="isActiveAttr$()"
             [attr.aria-expanded]="expandedAttr$()"
@@ -80,7 +81,7 @@
 <ng-template #listRenderer>
     @if (isGroup$() && normalizedLevel$() === 1) {
         <ul fdb-navigation-list [listItems]="listItems$()" parentItems [moreButtonRef]="_moreButtonRef$()"></ul>
-    } @else {
+    } @else if (hasChildren$()) {
         <div class="fd-navigation__list-container">
             <ng-template
                 [ngTemplateOutlet]="wrapperRenderer"

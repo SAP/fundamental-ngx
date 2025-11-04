@@ -62,6 +62,9 @@ export class NavigationMoreButtonComponent {
     /** Whether popover is open. Applicable for snapped navigation state. */
     readonly popoverOpen$ = signal(false);
 
+    /** ID for the more button. */
+    readonly id = signal('fdb-navigation-more-button');
+
     /** @hidden */
     readonly type = 'showMore';
 

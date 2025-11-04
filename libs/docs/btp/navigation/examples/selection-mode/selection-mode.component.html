@@ -30,35 +30,35 @@
     [style.height.px]="500"
 >
     <fdb-navigation-content-start>
-        <fdb-navigation-list-item>
+        <fdb-navigation-list-item id="nav-home" selected>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item>
+        <fdb-navigation-list-item id="nav-favourites">
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item disabled>
+        <fdb-navigation-list-item id="nav-recent" disabled>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
         </fdb-navigation-list-item>
 
-        <fdb-navigation-list-item group expanded>
+        <fdb-navigation-list-item id="nav-sales" group expanded>
             <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
 
-            <fdb-navigation-list-item expanded>
+            <fdb-navigation-list-item id="nav-leads" expanded>
                 <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
-                <fdb-navigation-list-item>
+                <fdb-navigation-list-item id="nav-all-leads">
                     <a fdb-navigation-link *fdbNavigationLinkRef>All Leads</a>
                 </fdb-navigation-list-item>
-                <fdb-navigation-list-item>
+                <fdb-navigation-list-item id="nav-lead-sources">
                     <a fdb-navigation-link *fdbNavigationLinkRef [external]="true">Lead Sources (External Link)</a>
                 </fdb-navigation-list-item>
             </fdb-navigation-list-item>
 
-            <fdb-navigation-list-item expanded>
+            <fdb-navigation-list-item id="nav-opportunities" expanded>
                 <a fdb-navigation-link *fdbNavigationLinkRef glyph="opportunities">Opportunities</a>
-                <fdb-navigation-list-item>
+                <fdb-navigation-list-item id="nav-all-opportunities">
                     <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
                 </fdb-navigation-list-item>
-                <fdb-navigation-list-item>
+                <fdb-navigation-list-item id="nav-team-pipeline">
                     <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
                 </fdb-navigation-list-item>
             </fdb-navigation-list-item>
@@ -150,6 +150,23 @@
     ></button>
 </div>
 
+<div style="display: flex; gap: 10px; margin-bottom: 20px">
+    <p style="margin: 0; align-self: center"><strong>Select by ID:</strong></p>
+    <button fd-button label="Select Home" (click)="selectHomeById()" [disabled]="selectionMode !== 'click'"></button>
+    <button
+        fd-button
+        label="Select Favourites"
+        (click)="selectFavouritesById()"
+        [disabled]="selectionMode !== 'click'"
+    ></button>
+    <button
+        fd-button
+        label="Select All Leads"
+        (click)="selectAllLeadsById()"
+        [disabled]="selectionMode !== 'click'"
+    ></button>
+</div>
+
 <p><strong>Instructions:</strong></p>
 <ul>
     <li><strong>Router-based mode:</strong> Selection is determined by router link activation (default behavior)</li>
@@ -168,5 +185,15 @@
             </li>
             <li><strong>Disabled items</strong>: Not interactive in either mode</li>
         </ul>
+    </li>
+</ul>
+
+<p><strong>ID-based Selection:</strong></p>
+<ul>
+    <li>
+        <strong>Programmatic Selection:</strong> Use <code>setSelectedItemById(id)</code> to select items by their ID
+    </li>
+    <li>
+        <strong>Getting Items:</strong> Use <code>getNavigationItemById(id)</code> to retrieve specific navigation items
     </li>
 </ul>

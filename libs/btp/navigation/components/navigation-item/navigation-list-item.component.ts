@@ -21,13 +21,11 @@ import {
     computed,
     effect,
     inject,
+    input,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
@@ -42,6 +40,8 @@ import {
 import { NavigationService } from '../../services/navigation.service';
 import { NavigationLinkRefDirective } from '../navigation-link/navigation-link.component';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
+
+let navListItemUniqueId = 0;
 
 @Directive({
     selector: '[fdbNavigationListItemMarker]',
@@ -64,9 +64,6 @@ export class NavigationListItemMarkerDirective implements HasElementRef {
         PopoverComponent,
         PopoverBodyComponent,
         NavigationListItemMarkerDirective,
-        IconComponent,
-        ButtonComponent,
-        NestedButtonDirective,
         NgClass
     ],
     templateUrl: './navigation-list-item.component.html',
@@ -198,6 +195,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         });
     }
 
+    /** ID for the navigation list item. Default one is assigned if not provided. */
+    id = input(`fdb-nav-list-item-${++navListItemUniqueId}`);
+
     /** Type of the list item. Whether its a standard item or a "show more" button container. */
     readonly type: 'item' | 'showMore' = 'item';
 
@@ -265,14 +265,18 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** Combined selected state - considers both manual selection and service selection. */
     readonly selected$ = computed(() => {
-        // Check if manually selected (for router-based selection mode)
-        if (this._manuallySelected$()) {
-            return true;
+        // In router mode, only consider manual selection
+        if (this.navigation.selectionMode === 'router') {
+            return this._manuallySelected$();
         }
 
-        // Check if selected via service (for click-based selection mode)
+        // In click mode, check both manual selection and service selection
+        // But manual selection should only be considered if no item is selected via service
         if (this.navigation.selectionMode === 'click') {
-            return this.navigation.service.selectedItem$() === this;
+            const serviceSelected = this.navigation.service.selectedItem$() === this;
+            const manuallySelected = this._manuallySelected$() && this.navigation.service.selectedItem$() === null;
+
+            return serviceSelected || manuallySelected;
         }
 
         return false;
@@ -389,6 +393,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this.navigation.closeAllPopups.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.popoverOpen$.set(false);
         });
+
+        // Listen for selection changes to implement single-selection behavior
+        this.navigation.service.selectionChanged$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((selectedItem) => {
+                // If another item was selected and we're in click mode, clear our manual selection
+                if (this.navigation.selectionMode === 'click' && selectedItem !== this && this._manuallySelected$()) {
+                    this._manuallySelected$.set(false);
+                }
+            });
     }
 
     /** @hidden */

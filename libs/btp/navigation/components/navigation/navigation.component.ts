@@ -252,6 +252,55 @@ export class NavigationComponent
     }
 
     /**
+     * Get a navigation item by its ID.
+     * @param id The ID of the navigation item to find.
+     * @returns The navigation item with the specified ID, or null if not found.
+     */
+    getNavigationItemById(id: string): FdbNavigationListItem | null {
+        const items = this._navigationItems.toArray();
+        return this._findItemById(items, id);
+    }
+
+    /**
+     * Set the selected item by its ID when in click selection mode.
+     * @param id The ID of the navigation item to select.
+     * @returns True if the item was found and selected, false otherwise.
+     */
+    setSelectedItemById(id: string): boolean {
+        const item = this.getNavigationItemById(id);
+        if (item) {
+            this.setSelectedItem(item);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Helper method to find an item by ID recursively through the navigation tree.
+     * @param items Array of navigation items to search through.
+     * @param id The ID to search for.
+     * @returns The found item or null.
+     */
+    private _findItemById(items: FdbNavigationListItem[], id: string): FdbNavigationListItem | null {
+        for (const item of items) {
+            // Check if current item matches
+            if (item.id() === id) {
+                return item;
+            }
+
+            // Recursively search in child items
+            if (item.listItems$().length > 0) {
+                const childItems = item.listItems$().filter((child): child is FdbNavigationListItem => child !== null);
+                const found = this._findItemById(childItems, id);
+                if (found) {
+                    return found;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Updates the list of items.
      * Optionally inserts "More" button if overflow menu should be rendered.
      * @param showMoreButton Whether to add "More" button.
