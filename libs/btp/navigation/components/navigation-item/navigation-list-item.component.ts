@@ -287,6 +287,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
 
+    /** @hidden */
+    readonly _moreButtonRef$ = computed(() => this._parentNavigationList?.moreButtonRef || null);
+
     /** Optional parent list component. */
     readonly parentListItemComponent = inject(FdbNavigationListItemCmp, {
         optional: true,
@@ -342,6 +345,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     private readonly _parentNavigationService = inject(NavigationService, {
+        skipSelf: true,
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _parentNavigationList = inject(NavigationListComponent, {
         skipSelf: true,
         optional: true
     });
@@ -479,7 +488,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return;
         }
 
-        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW);
+        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? LEFT_ARROW : RIGHT_ARROW);
 
         if (!isGoBack) {
             return;
@@ -558,13 +567,18 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     _onPopoverOpen(isOpen: boolean, popover: PopoverComponent): void {
         this.popoverOpen$.set(isOpen);
-        if (!isOpen) {
-            return;
+        if (isOpen) {
+            this._onZoneStable().subscribe(() => {
+                popover.popoverBody._focusFirstTabbableElement(true);
+            });
+        } else {
+            // When popover closes, return focus to the parent link (for snapped state)
+            if (this.navigation.isSnapped$()) {
+                this._onZoneStable().subscribe(() => {
+                    this.focusLink();
+                });
+            }
         }
-
-        this._onZoneStable().subscribe(() => {
-            popover.popoverBody._focusFirstTabbableElement(true);
-        });
     }
 
     /**

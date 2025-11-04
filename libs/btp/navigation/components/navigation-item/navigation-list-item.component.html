@@ -79,7 +79,7 @@
 <!-- Generic list renderer. Used when navigation is not snapped. -->
 <ng-template #listRenderer>
     @if (isGroup$() && normalizedLevel$() === 1) {
-        <ul fdb-navigation-list [listItems]="listItems$()" parentItems></ul>
+        <ul fdb-navigation-list [listItems]="listItems$()" parentItems [moreButtonRef]="_moreButtonRef$()"></ul>
     } @else {
         <div class="fd-navigation__list-container">
             <ng-template
@@ -117,6 +117,7 @@
             (keydown)="(false)"
             (focusBefore)="_focusBeforeList()"
             [withKeyboardNavigation]="keyboardNavigation"
+            [moreButtonRef]="_moreButtonRef$()"
         ></ul>
     </div>
 </ng-template>

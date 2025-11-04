@@ -195,11 +195,17 @@ export class NavigationMoreButtonComponent {
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             return;
         }
+
         const isRtl = this._rtl$() || false;
 
-        const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
-
-        this.popoverOpen$.set(isOpenAction);
+        // Only handle RIGHT arrow to open popover when it's closed
+        if (KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW)) {
+            // Open popover only if not already open
+            if (!this.popoverOpen$()) {
+                this.popoverOpen$.set(true);
+            }
+        }
+        // Don't handle LEFT arrow here - let NavigationListComponent handle closing
     }
 
     /** @hidden */

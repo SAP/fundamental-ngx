@@ -74,6 +74,10 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     @Input({ transform: booleanAttribute })
     withKeyboardNavigation = false;
 
+    /** Reference to the More button component if this list is inside a More button popover. */
+    @Input()
+    moreButtonRef: any;
+
     /** Event emitted when user tries to navigate to the item before the list itself. */
     @Output()
     focusBefore = new EventEmitter<void>();
@@ -155,10 +159,24 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         // We need to cancel event bubbling since we may have parent list that will also try to focus it's parent list item.
         event.stopImmediatePropagation();
 
+        // All navigation lists use the same swapped arrow logic:
+        // RIGHT arrow = expand action, LEFT arrow = collapse/go back action
         const isExpandAction = KeyUtil.isKeyCode(event, this._rtl?.rtl.value ? LEFT_ARROW : RIGHT_ARROW);
 
         if (!isExpandAction) {
-            this._listItem?.focusLink(true);
+            // If this list is inside a More button popover, we need to be smart about when to close vs navigate
+            if (this.moreButtonRef) {
+                // Check if we have a parent list item to navigate back to
+                // If we do, do normal navigation; if not, close the More button popover
+                if (this._listItem) {
+                    this._listItem.focusLink(true);
+                } else {
+                    this.moreButtonRef.popoverOpen$.set(false);
+                    this.moreButtonRef.focusLink();
+                }
+            } else {
+                this._listItem?.focusLink(true);
+            }
         }
     }
 
