@@ -59,3 +59,37 @@
     <ui5-list-drag-and-drop-example></ui5-list-drag-and-drop-example>
 </component-example>
 <code-example [exampleFiles]="dragAndDropExamples()"></code-example>
+
+<fd-docs-section-title id="drag-and-drop-multi" componentName="List">Multiple Item Drag</fd-docs-section-title>
+<description
+    >You can select and drag multiple items at once when using <b>selection-mode="Multiple"</b>. This sample
+    demonstrates cross-list dragging and the multiple drag ghost feature.
+</description>
+<component-example>
+    <ui5-list-multiple-drag-and-drop-example></ui5-list-multiple-drag-and-drop-example>
+</component-example>
+<code-example [exampleFiles]="multipleDragAndDropExamples()"></code-example>
+
+<fd-docs-section-title id="wrapping" componentName="List">Wrapping</fd-docs-section-title>
+<description>
+    <p>
+        The standard list item <code>&lt;ui5-li&gt;</code> and the list item group
+        <code>&lt;ui5-li-group&gt;</code> supports text wrapping through the <b>wrappingType</b> property. When set to
+        "Normal", long text content (title and description) will wrap to multiple lines instead of truncating with an
+        ellipsis. For very long content, the text is displayed with a "Show More/Show Less" mechanism.
+    </p>
+    <p>The wrapping behavior is responsive:</p>
+    <ul>
+        <li>On mobile devices (size S), text is truncated after 100 characters</li>
+        <li>On tablets and desktop (size M and larger), text is truncated after 300 characters</li>
+    </ul>
+    <p>This feature improves readability when displaying lengthy content in lists.</p>
+    <p>
+        The <code>&lt;ui5-li-custom&gt;</code> is intentionally designed as a generic container to provide maximum
+        flexibility. It can be used alongside <code>ui5-expandable-text</code> for long text content.
+    </p>
+</description>
+<component-example>
+    <ui5-list-wrapping-example></ui5-list-wrapping-example>
+</component-example>
+<code-example [exampleFiles]="wrappingExamples()"></code-example>

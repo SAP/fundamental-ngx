@@ -11,9 +11,11 @@ import { ListBasicExample } from './examples/basic-sample';
 import { ListDragAndDropExample } from './examples/drag-and-drop';
 import { ListGroupingExample } from './examples/grouping';
 import { ListGrowingExample } from './examples/growing-list';
+import { ListMultipleDragAndDropExample } from './examples/multiple-drag-and-drop';
 import { ListNoDataExample } from './examples/no-data';
 import { ListSelectionModesExample } from './examples/selection-modes';
 import { ListSeparatorsExample } from './examples/separators';
+import { ListWrappingExample } from './examples/wrapping';
 
 const basicSampleHtml = 'basic-sample.html';
 const basicSampleTs = 'basic-sample.ts';
@@ -29,6 +31,10 @@ const separatorsHtml = 'separators.html';
 const separatorsTs = 'separators.ts';
 const dragAndDropHtml = 'drag-and-drop.html';
 const dragAndDropTs = 'drag-and-drop.ts';
+const multipleDragAndDropHtml = 'multiple-drag-and-drop.html';
+const multipleDragAndDropTs = 'multiple-drag-and-drop.ts';
+const wrappingHtml = 'wrapping.html';
+const wrappingTs = 'wrapping.ts';
 
 @Component({
     selector: 'ui5-list-docs',
@@ -45,7 +51,9 @@ const dragAndDropTs = 'drag-and-drop.ts';
         ListNoDataExample,
         ListGroupingExample,
         ListSeparatorsExample,
-        ListDragAndDropExample
+        ListDragAndDropExample,
+        ListMultipleDragAndDropExample,
+        ListWrappingExample
     ]
 })
 export class ListDocs {
@@ -147,6 +155,34 @@ export class ListDocs {
         }
     ]);
 
+    private readonly multipleDragAndDropExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(multipleDragAndDropHtml),
+            fileName: 'multiple-drag-and-drop'
+        },
+        {
+            language: 'typescript',
+            component: 'ListMultipleDragAndDropExample',
+            code: getAssetFromModuleAssets(multipleDragAndDropTs),
+            fileName: 'multiple-drag-and-drop'
+        }
+    ]);
+
+    private readonly wrappingExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(wrappingHtml),
+            fileName: 'wrapping'
+        },
+        {
+            language: 'typescript',
+            component: 'ListWrappingExample',
+            code: getAssetFromModuleAssets(wrappingTs),
+            fileName: 'wrapping'
+        }
+    ]);
+
     readonly basicExamples = computed(() => this.basicExampleFiles());
     readonly growingListExamples = computed(() => this.growingListExampleFiles());
     readonly selectionModesExamples = computed(() => this.selectionModesExampleFiles());
@@ -154,4 +190,6 @@ export class ListDocs {
     readonly groupingExamples = computed(() => this.groupingExampleFiles());
     readonly separatorsExamples = computed(() => this.separatorsExampleFiles());
     readonly dragAndDropExamples = computed(() => this.dragAndDropExampleFiles());
+    readonly multipleDragAndDropExamples = computed(() => this.multipleDragAndDropExampleFiles());
+    readonly wrappingExamples = computed(() => this.wrappingExampleFiles());
 }

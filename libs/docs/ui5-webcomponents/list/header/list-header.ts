@@ -14,6 +14,6 @@ import {
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ListDocsHeader {
-    componentName = 'list';
+    componentName = 'List';
     packageName = '@ui5/webcomponents';
 }

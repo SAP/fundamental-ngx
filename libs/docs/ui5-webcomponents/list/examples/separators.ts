@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
 
@@ -6,7 +7,7 @@ import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-s
     selector: 'ui5-list-separators-example',
     templateUrl: './separators.html',
     standalone: true,
-    imports: [List, ListItemStandard]
+    imports: [List, ListItemStandard, Label]
 })
 export class ListSeparatorsExample {
     noSeparatorItems = [

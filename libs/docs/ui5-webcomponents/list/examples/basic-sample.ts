@@ -1,8 +1,7 @@
 import { Component, signal } from '@angular/core';
+import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
-
-import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 
 // Import Fundamental Styles
 import 'fundamental-styles/dist/layout-grid.css';
