@@ -258,7 +258,7 @@ export class IconTabBarComponent implements OnInit, TabList {
             this.iconTabSelected.emit(selectedItem);
         }
 
-        if (this.stackContent) {
+        if (this.stackContent && selectedItem) {
             this._scrollToPanel(this.tabDirectives().find((tab) => tab.uId() === selectedItem.uId)!);
         }
     }
