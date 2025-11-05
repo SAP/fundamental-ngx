@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.32...v0.57.4-rc.33) (2025-11-05)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** update focusable CDK to allow tabbing between child elements ([#13562](https://github.com/SAP/fundamental-ngx/issues/13562)) ([f1f07aa](https://github.com/SAP/fundamental-ngx/commit/f1f07aa68f72ea5836c6afea838fdebd3c5cb664))
+
+
+
+
+
 ## [0.57.4-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.31...v0.57.4-rc.32) (2025-11-05)
 
 
