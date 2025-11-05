@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/cx",
-  "version": "0.57.4-rc.31",
+  "version": "0.57.4-rc.32",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - cx",
   "license": "Apache-2.0",

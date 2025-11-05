@@ -117,7 +117,7 @@
     fd-scrollbar
     [trackedTags]="['fd-tab']"
     [scrollSpyDisabled]="_disableScrollSpy"
-    (spyChange)="highlightActiveTab($event.id)"
+    (spyChange)="highlightActiveTab($event?.id)"
 >
     <ng-content></ng-content>
 </div>
