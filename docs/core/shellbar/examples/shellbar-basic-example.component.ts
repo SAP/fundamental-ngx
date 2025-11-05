@@ -9,6 +9,7 @@ import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import {
     ShellbarActionsComponent,
+    ShellbarBrandingComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
     ShellbarTitleComponent
@@ -18,6 +19,7 @@ import {
     UserMenuComponent,
     UserMenuContentContainerComponent,
     UserMenuControlComponent,
+    UserMenuControlElementDirective,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
     UserMenuHeaderDirective,
@@ -36,6 +38,7 @@ import {
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarActionsComponent,
+        ShellbarBrandingComponent,
         UserMenuComponent,
         UserMenuBodyComponent,
         UserMenuControlComponent,
@@ -48,6 +51,7 @@ import {
         UserMenuListComponent,
         UserMenuSublistComponent,
         UserMenuListItemComponent,
+        UserMenuControlElementDirective,
         AvatarComponent,
         PopoverModule,
         ListModule,

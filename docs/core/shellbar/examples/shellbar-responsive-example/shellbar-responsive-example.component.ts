@@ -5,13 +5,13 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
-    ProductMenuComponent,
     ShellbarActionComponent,
     ShellbarActionsComponent,
+    ShellbarBrandingComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
-    ShellbarMenuItem,
-    ShellbarSizes
+    ShellbarSizes,
+    ShellbarTitleComponent
 } from '@fundamental-ngx/core/shellbar';
 import {
     PlatformSearchFieldModule,
@@ -32,6 +32,7 @@ import {
     UserMenuComponent,
     UserMenuContentContainerComponent,
     UserMenuControlComponent,
+    UserMenuControlElementDirective,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
     UserMenuHeaderDirective,
@@ -53,7 +54,8 @@ import {
         ButtonComponent,
         ShellbarComponent,
         ShellbarLogoComponent,
-        ProductMenuComponent,
+        ShellbarBrandingComponent,
+        ShellbarTitleComponent,
         PlatformSearchFieldModule,
         ContentDensityDirective,
         ShellbarActionsComponent,
@@ -71,6 +73,7 @@ import {
         UserMenuListComponent,
         UserMenuSublistComponent,
         UserMenuListItemComponent,
+        UserMenuControlElementDirective,
         AvatarComponent,
         PopoverModule,
         ListModule,
@@ -171,33 +174,6 @@ export class ShellbarResponsiveExampleComponent {
         },
         {
             value: 'Raspberry'
-        }
-    ];
-
-    productMenuItems: ShellbarMenuItem[] = [
-        {
-            name: 'Application A',
-            callback: () => {
-                alert('Application A Clicked');
-            }
-        },
-        {
-            name: 'Application B',
-            callback: () => {
-                alert('Application B Clicked');
-            }
-        },
-        {
-            name: 'Application C',
-            callback: () => {
-                alert('Application C Clicked');
-            }
-        },
-        {
-            name: 'Application D',
-            callback: () => {
-                alert('Application D Clicked');
-            }
         }
     ];
 

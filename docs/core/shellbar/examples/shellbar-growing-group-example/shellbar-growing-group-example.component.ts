@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import {
-    ProductMenuComponent,
     ShellbarActionComponent,
     ShellbarActionsComponent,
+    ShellbarBrandingComponent,
     ShellbarComponent,
     ShellbarGroupFlexOptions,
     ShellbarLogoComponent,
-    ShellbarMenuItem
+    ShellbarTitleComponent
 } from '@fundamental-ngx/core/shellbar';
 
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -22,6 +22,7 @@ import {
     UserMenuComponent,
     UserMenuContentContainerComponent,
     UserMenuControlComponent,
+    UserMenuControlElementDirective,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
     UserMenuHeaderDirective,
@@ -40,7 +41,8 @@ import {
     imports: [
         ShellbarComponent,
         ShellbarLogoComponent,
-        ProductMenuComponent,
+        ShellbarBrandingComponent,
+        ShellbarTitleComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ProductSwitchModule,
@@ -56,6 +58,7 @@ import {
         UserMenuListComponent,
         UserMenuSublistComponent,
         UserMenuListItemComponent,
+        UserMenuControlElementDirective,
         AvatarComponent,
         PopoverModule,
         ListModule,
@@ -83,35 +86,6 @@ export class ShellbarGrowingGroupExampleComponent {
             flexBasisAuto: true
         }
     };
-
-    productMenuControl = 'Corporate Portal';
-
-    productMenuItems: ShellbarMenuItem[] = [
-        {
-            name: 'Application A',
-            callback: () => {
-                alert('Application A Clicked');
-            }
-        },
-        {
-            name: 'Application B',
-            callback: () => {
-                alert('Application B Clicked');
-            }
-        },
-        {
-            name: 'Application C',
-            callback: () => {
-                alert('Application C Clicked');
-            }
-        },
-        {
-            name: 'Application D',
-            callback: () => {
-                alert('Application D Clicked');
-            }
-        }
-    ];
 
     actions = [
         {

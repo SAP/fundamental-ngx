@@ -11,6 +11,7 @@ import {
     UserMenuComponent,
     UserMenuContentContainerComponent,
     UserMenuControlComponent,
+    UserMenuControlElementDirective,
     UserMenuFooterComponent,
     UserMenuHeaderContainerDirective,
     UserMenuHeaderDirective,
@@ -39,6 +40,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
         UserMenuListComponent,
         UserMenuSublistComponent,
         UserMenuListItemComponent,
+        UserMenuControlElementDirective,
         AvatarComponent,
         PopoverModule,
         ListModule,
@@ -56,6 +58,7 @@ export class UserMenuDefaultExampleComponent {
 
     expanded = true;
     isOpen = false;
+    menuItems = Array.from({ length: 20 }, (_, i) => `Menu Item ${i + 1}`);
 
     constructor(private _messageToastService: MessageToastService) {}
 
