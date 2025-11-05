@@ -156,7 +156,9 @@ export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewI
             this.showListArea.set(true);
             this.showDetailArea.set(false);
 
-            queueMicrotask(() => this._focusInitialListItem());
+            /**  The timeout is to ensure any keyboard events are fully processed before focusing the list item. This prevents the Enter key that triggered the back button from accidentally activating the newly focused list item. */
+
+            setTimeout(() => this._focusInitialListItem(), 200);
         }
     }
 
@@ -246,6 +248,7 @@ export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewI
             const selectedItem = items.find((item) => item.selected);
             const itemToFocus = selectedItem ?? items[0];
 
+            // setTimeout is needed so that the focus outline is displayed, o.w. the item is focussed, the tabindex is updated, but without the timeout the focus is not shown.
             setTimeout(() => {
                 const el = itemToFocus.elementRef.nativeElement as HTMLElement;
                 el.focus();

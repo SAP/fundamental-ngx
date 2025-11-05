@@ -67,3 +67,10 @@
 .fd-settings__content-container {
     @include fd-reset();
 }
+
+@media (max-width: 600px) {
+    .fd-dialog__footer.fd-bar {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
