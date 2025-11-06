@@ -224,6 +224,21 @@ async function generateCvaFile(targetDir: string): Promise<void> {
 }
 
 /**
+ * Generates the utils secondary entry point files (index.ts and ng-package.json).
+ */
+async function generateUtilsFiles(targetDir: string): Promise<void> {
+    // Generate utils/index.ts that exports the CVA
+    const utilsContent = `export { GenericControlValueAccessor } from './cva';\n`;
+
+    const utilsIndexPath = path.join(targetDir, SUBDIRS.UTILS, FILES.INDEX_TS);
+    await ensureDirAndWriteFile(utilsIndexPath, utilsContent);
+
+    // Generate utils/ng-package.json
+    const ngPackagePath = path.join(targetDir, SUBDIRS.UTILS, FILES.NG_PACKAGE_JSON);
+    await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
+}
+
+/**
  * An NX executor that generates Angular components from UI5 Web Components'
  * custom-elements-internal.json schema.
  */
@@ -258,10 +273,11 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
             // Generate Theming
             await generateThemingFiles(packageName, targetDir);
 
-            // Generate CVA Utility
+            // Generate CVA Utility and Utils secondary entry point
             await generateCvaFile(targetDir);
+            await generateUtilsFiles(targetDir);
 
-            exportsContent += `export { GenericControlValueAccessor } from './${SUBDIRS.UTILS}/${FILES.CVA_TS.replace('.ts', '')}';\n`;
+            exportsContent += `export * from './utils';\n`;
 
             // Generate Component Wrappers
             const componentExports = await generateComponentFiles(

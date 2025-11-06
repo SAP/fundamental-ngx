@@ -67,6 +67,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-picker').then(configureLibRoutes)
     },
     {
+        path: 'input',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/input').then(configureLibRoutes)
+    },
+    {
         path: 'label',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/label').then(configureLibRoutes)
     },
