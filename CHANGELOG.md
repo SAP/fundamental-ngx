@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.4...v0.57.5-rc.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **core:** update Settings Dialog to latest UXC design and comments ([#13543](https://github.com/SAP/fundamental-ngx/issues/13543)) ([94a8b3b](https://github.com/SAP/fundamental-ngx/commit/94a8b3b72b6790fd5d0e8fb34e0b4d1fd1df947a))
+
+
+
+
+
 ## [0.57.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.33...v0.57.4) (2025-11-05)
 
 **Note:** Version bump only for package fundamental-ngx
