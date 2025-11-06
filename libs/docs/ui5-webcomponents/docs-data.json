@@ -63,6 +63,10 @@
             "name": "Icon"
         },
         {
+            "url": "ui5-webcomponents/input",
+            "name": "Input"
+        },
+        {
             "url": "ui5-webcomponents/label",
             "name": "Label"
         },

@@ -25,7 +25,16 @@ function isReadonlyField(member: CEM.ClassMember): member is CEM.ClassField {
 
 /** Checks if the component should host the CVA directive. */
 function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
-    return data.superclass?.name === 'FormSupport' || data.superclass?.name === 'InputBase';
+    return (
+        data.members?.some(
+            (member) =>
+                member.kind === 'field' &&
+                !member.static &&
+                member.privacy === 'public' &&
+                !member.readonly &&
+                (member as any)._ui5formProperty === true
+        ) ?? false
+    );
 }
 
 function generateTypeImports(
@@ -54,12 +63,18 @@ function generateTypeImports(
                         );
                     }
 
+                    if (reference.package && reference.module && reference.module.includes('/types/')) {
+                        // Use direct imports to avoid circular dependencies during build
+                        importPath = `${reference.package}/${reference.module}`;
+                    }
+
                     if (importPath) {
                         if (
                             reference.module?.includes('dist/' + reference.name) ||
                             reference.module?.includes('/types/')
                         ) {
-                            componentImports.push(`import ${reference.name} from '${importPath}';`);
+                            // Use default import for direct type imports and default exports
+                            componentImports.push(`import { default as ${reference.name} } from '${importPath}';`);
                         } else {
                             componentImports.push(`import { ${reference.name} } from '${importPath}';`);
                         }
@@ -204,13 +219,15 @@ export function componentTemplate(
     const tagName = data.tagName || '';
     const className = data.name;
     const outputEvents = data.events || [];
-    const shouldHostCVA = hasCvaHostDirective(data);
+    const shouldHostCVA = hasCvaHostDirective(data); // false; // Temporarily disabled to validate build
 
     // Add CVA hostDirective property only if needed
     const cvaHostDirective = shouldHostCVA ? `  hostDirectives: [GenericControlValueAccessor],\n` : '';
 
     // Add CVA import only if needed
-    const cvaImport = shouldHostCVA ? `import { GenericControlValueAccessor } from './utils/cva';` : '';
+    const cvaImport = shouldHostCVA
+        ? `import { GenericControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`
+        : '';
 
     const inputMembers = (data.members ?? []).filter(isField);
 
@@ -378,7 +395,8 @@ ${(() => {
     initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}();
 
     // Fallback delayed initialization if web component needs more time
-    setTimeout(initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}, 0);`;
+    // Use requestAnimationFrame for zoneless compatibility
+    requestAnimationFrame(() => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;
         })
         .join('\n');
 

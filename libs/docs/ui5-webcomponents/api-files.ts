@@ -1,4 +1,5 @@
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
+
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -20,6 +21,7 @@ export const API_FILES = {
     colorPicker: ['ColorPicker'],
     expandableText: ['ExpandableText'],
     icon: ['Icon'],
+    input: ['Input'],
     label: ['Label'],
     link: ['Link'],
     list: ['List', 'ListItemCustom', 'ListItemGroup', 'ListItemStandard'],
