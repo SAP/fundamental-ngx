@@ -54,12 +54,11 @@ function generateTypeImports(
                         );
                     }
 
-                    if (reference.package && reference.module && reference.module.includes('/types/')) {
-                        importPath = enumPackageMapping[reference.package];
-                    }
-
                     if (importPath) {
-                        if (reference.module?.includes('dist/' + reference.name)) {
+                        if (
+                            reference.module?.includes('dist/' + reference.name) ||
+                            reference.module?.includes('/types/')
+                        ) {
                             componentImports.push(`import ${reference.name} from '${importPath}';`);
                         } else {
                             componentImports.push(`import { ${reference.name} } from '${importPath}';`);
@@ -374,10 +373,10 @@ ${(() => {
         this._${camelCaseName}Signal.set(currentValue);
       }
     };
-    
+
     // Try immediate initialization
     initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}();
-    
+
     // Fallback delayed initialization if web component needs more time
     setTimeout(initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}, 0);`;
         })

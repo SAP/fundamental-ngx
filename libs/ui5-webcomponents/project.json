@@ -52,5 +52,6 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    }
+    },
+    "implicitDependencies": ["ui5-webcomponents-base"]
 }
