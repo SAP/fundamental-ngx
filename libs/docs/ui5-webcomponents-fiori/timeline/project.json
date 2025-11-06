@@ -5,22 +5,13 @@
     "sourceRoot": "libs/docs/ui5-webcomponents-fiori/timeline",
     "prefix": "ui5",
     "targets": {
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+        "e2e": {
+            "executor": "@fundamental-ngx/nx-plugin:e2e-test",
             "options": {
-                "jestConfig": "libs/docs/ui5-webcomponents-fiori/timeline/jest.config.ts",
-                "passWithNoTests": true
-            }
-        },
-        "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/docs/ui5-webcomponents-fiori/timeline/**/*.ts",
-                    "libs/docs/ui5-webcomponents-fiori/timeline/**/*.html"
-                ]
-            }
+                "e2eFiles": ["libs/docs/ui5-webcomponents-fiori/timeline/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["{workspaceRoot}/allure-results/docs-ui5-webcomponents-fiori-timeline"]
         }
     }
 }
