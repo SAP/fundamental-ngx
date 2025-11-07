@@ -1,6 +1,13 @@
 <h5 fd-title [wrap]="!!settings?.wrapSectionTitle" class="fdp-settings-generator__title">
     @if (mobile) {
-        <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="goBack.emit()"></button>
+        <button
+            [attr.title]="backButtonLabel || ('platformSettingsGenerator.backButtonLabel' | fdTranslate)"
+            [attr.aria-label]="backButtonLabel || ('platformSettingsGenerator.backButtonLabel' | fdTranslate)"
+            fd-button
+            glyph="navigation-left-arrow"
+            fdType="transparent"
+            (click)="goBack.emit()"
+        ></button>
     }
     @if (settings?.title | fdkAsyncOrSync; as settingsTitle) {
         {{ settingsTitle }}
