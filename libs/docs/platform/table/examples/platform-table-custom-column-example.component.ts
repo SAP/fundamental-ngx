@@ -10,6 +10,7 @@ import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } fro
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { MenuComponent, MenuItemComponent, SplitMenuButtonComponent } from '@fundamental-ngx/platform';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import {
@@ -59,11 +60,17 @@ import {
         FormsModule,
         ObjectStatusComponent,
         AsyncPipe,
-        FdDatetimeModule
+        FdDatetimeModule,
+        SplitMenuButtonComponent,
+        MenuComponent,
+        MenuItemComponent
     ]
 })
 export class PlatformTableCustomColumnExampleComponent {
     source: TableDataSource<ExampleItem>;
+
+    label1 = 'Option 1';
+    selectedItem1: string;
 
     exampleItemType: ExampleItem;
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
@@ -72,6 +79,11 @@ export class PlatformTableCustomColumnExampleComponent {
 
     onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
         console.log(event);
+    }
+
+    onItemSelect1(menuItemValue: string): void {
+        this.selectedItem1 = menuItemValue;
+        this.label1 = menuItemValue;
     }
 }
 
@@ -207,7 +219,7 @@ const ITEMS: ExampleItem[] = [
     },
     {
         name: 'Beam Breaker B-1',
-        description: 'fermentum donec ut',
+        description: '',
         price: {
             value: 36.56,
             currency: 'NZD'

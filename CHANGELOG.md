@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.4...v0.57.5-rc.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **core:** update Settings Dialog to latest UXC design and comments ([#13543](https://github.com/SAP/fundamental-ngx/issues/13543)) ([94a8b3b](https://github.com/SAP/fundamental-ngx/commit/94a8b3b72b6790fd5d0e8fb34e0b4d1fd1df947a))
+
+
+
+
+
+## [0.57.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.33...v0.57.4) (2025-11-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.4-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.32...v0.57.4-rc.33) (2025-11-05)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** update focusable CDK to allow tabbing between child elements ([#13562](https://github.com/SAP/fundamental-ngx/issues/13562)) ([f1f07aa](https://github.com/SAP/fundamental-ngx/commit/f1f07aa68f72ea5836c6afea838fdebd3c5cb664))
+
+
+
+
+
+## [0.57.4-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.31...v0.57.4-rc.32) (2025-11-05)
+
+
+### Bug Fixes
+
+* **core,platform:** Add null check on scroll spy handling of tabs ([#13552](https://github.com/SAP/fundamental-ngx/issues/13552)) ([708c343](https://github.com/SAP/fundamental-ngx/commit/708c343254378c3895d62d60d77133ce08543366))
+
+
+
+
+
+## [0.57.4-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.30...v0.57.4-rc.31) (2025-11-04)
+
+
+### Bug Fixes
+
+* **core:** add null check on header component ([#13551](https://github.com/SAP/fundamental-ngx/issues/13551)) ([7dcf959](https://github.com/SAP/fundamental-ngx/commit/7dcf9599fe0efa80f6667b4f83e24d6a91bef0f7))
+
+
+
+
+
+## [0.57.4-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.29...v0.57.4-rc.30) (2025-10-22)
+
+
+### Bug Fixes
+
+* **core, platform:** Narrow empty check when cell is focused and add option for empty cell announcement for column template ([#13395](https://github.com/SAP/fundamental-ngx/issues/13395)) ([d60edf4](https://github.com/SAP/fundamental-ngx/commit/d60edf47b5364f98e624a311c43963b6ef3ec489))
+
+
+
+
+
+## [0.57.4-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.28...v0.57.4-rc.29) (2025-10-22)
+
+
+### Bug Fixes
+
+* **core:** css changes for scroll on Windows ([#13539](https://github.com/SAP/fundamental-ngx/issues/13539)) ([a567477](https://github.com/SAP/fundamental-ngx/commit/a567477707227cb2290a3e39d6029891f95b68bf))
+
+
+
+
+
 ## [0.57.4-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.27...v0.57.4-rc.28) (2025-10-16)
 
 

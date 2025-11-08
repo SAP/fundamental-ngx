@@ -9,7 +9,8 @@ import {
     Optional,
     SimpleChanges,
     TemplateRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    input
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -147,6 +148,9 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Column role attribute. */
     @Input()
     role: 'cell' | 'rowheader' | 'gridcell' = 'gridcell';
+
+    /** Whether to announce empty cells to screen readers. Default is true. */
+    readonly announceEmptyCell = input(true);
 
     /** Column cell template */
     columnCellTemplate: Nullable<TemplateRef<any>>;

@@ -8,11 +8,16 @@
 }
 
 <ng-template #bodyHeader let-dialogRef="dialogRef">
-    <div fd-bar style="position: sticky; top: 0; z-index: 6">
+    <div fd-bar style="position: fixed; top: 0; left: 0; right: 0; z-index: 10">
         @if (submenu()) {
             <div fd-bar-left>
                 <fd-bar-element>
-                    <fd-button-bar ariaLabel="previous" [glyph]="navigationArrow$ | async" (click)="clearSubmenu()">
+                    <fd-button-bar
+                        fdkInitialFocus
+                        ariaLabel="previous"
+                        [glyph]="navigationArrow$ | async"
+                        (click)="clearSubmenu()"
+                    >
                     </fd-button-bar>
                 </fd-bar-element>
                 <fd-bar-element>
@@ -38,7 +43,7 @@
             }
 
             <fd-bar-element>
-                <fd-button-bar ariaLabel="previous" glyph="decline" (click)="closeDialog(dialogRef)"> </fd-button-bar>
+                <fd-button-bar ariaLabel="close" glyph="decline" (click)="closeDialog(dialogRef)"> </fd-button-bar>
             </fd-bar-element>
         </div>
     </div>

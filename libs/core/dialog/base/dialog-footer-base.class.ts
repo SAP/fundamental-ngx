@@ -27,6 +27,9 @@ export abstract class DialogFooterBase implements AfterContentInit {
     footerTemplate: TemplateRef<any> | undefined;
 
     /** @hidden */
+    customFooterTemplate: TemplateRef<any> | undefined;
+
+    /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
@@ -54,6 +57,11 @@ export abstract class DialogFooterBase implements AfterContentInit {
     private _assignCustomTemplates(): void {
         const footerTemplate = this.customTemplates.find((template) => template.name === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
+
+        // Custom template that doesn't use predefined Bar. The user has to set everything
+        const customFooterTemplate = this.customTemplates.find((template) => template.name === 'customFooter');
+        this.customFooterTemplate = customFooterTemplate ? customFooterTemplate.templateRef : undefined;
+
         this._cdr.detectChanges();
     }
 }

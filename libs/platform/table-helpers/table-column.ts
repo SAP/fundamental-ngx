@@ -1,4 +1,4 @@
-import { TemplateRef } from '@angular/core';
+import { Signal, TemplateRef } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { Observable } from 'rxjs';
@@ -85,6 +85,12 @@ export abstract class TableColumn {
     abstract responsiveState: FdpColumnResponsiveState;
     /** Column role attribute. */
     abstract role: 'cell' | 'rowheader' | 'gridcell';
+
+    /**
+     * Whether to announce built-in empty cells to screen readers for columns with column templates.
+     * This provides option to turn off the announcement if the column template already includes its own
+     * */
+    abstract announceEmptyCell: Signal<boolean>;
 
     /** @hidden */
     abstract _freezed: boolean;

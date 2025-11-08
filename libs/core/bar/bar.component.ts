@@ -61,6 +61,10 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     @Input()
     inHomePage: boolean;
 
+    /** Whether the Bar component should remove the box-shadow on the bottom. */
+    @Input()
+    clear: boolean;
+
     /** The size of the Page in Page responsive design.
      * Available sizes: 's' | 'm_l' | 'xl'
      */
@@ -98,6 +102,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
             this.inPage && this.size ? `fd-bar--page-${this.size}` : '',
             this.inHomePage && !this.size ? 'fd-bar--home-page' : '',
             this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
+            this.clear ? 'fd-bar--clear' : '',
             this.class
         ];
     }

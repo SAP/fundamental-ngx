@@ -102,6 +102,7 @@
 @for (column of _fdpTableService.visibleColumns$(); track column.name) {
     <td
         #tableCellElement
+        fd-table-cell
         [fdpTableCellResizable]="
             $index
                 | columnResizableSide
@@ -136,7 +137,8 @@
         "
         [attr.aria-expanded]="_isTreeRowFirstCell($index, row) ? row.expanded : null"
         [attr.data-nesting-level]="$index === 0 ? row.level + 1 : null"
-        (cellFocused)="_tableRowService.cellFocused($event); _tableRowService.cellActivate($index, row)"
+        (cellFocused)="_handleCellFocused($event, $index, row, column, tableTextContainer)"
+        (focusout)="_announceEmptyCell.set(false)"
         (click)="_tableRowService.cellClicked({ index: $index, row })"
         (keydown.enter)="_isTreeRowFirstCell($index, row, $event) && _toggleGroupRow()"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
@@ -163,7 +165,7 @@
                 ></span>
             }
             @if (row.state === 'readonly') {
-                @if (tableTextContainer.innerText?.trim() === '') {
+                @if (_announceEmptyCell()) {
                     <span
                         [ngStyle]="{
                             position: 'absolute',

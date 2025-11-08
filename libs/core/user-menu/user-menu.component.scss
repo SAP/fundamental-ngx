@@ -496,7 +496,6 @@ fd-user-menu-control:is(:focus) {
     width: 20rem;
     min-width: 20rem;
     max-width: 20rem;
-    padding-block: 0.5rem;
 }
 
 .fd-user-menu__body:has(.fd-user-menu__details-view) {
@@ -514,37 +513,51 @@ fd-user-menu-control:is(:focus) {
 }
 
 .fd-user-menu__scroll-header {
-    top: 0;
-    z-index: 10;
     width: 20rem;
     min-width: 20rem;
     max-width: 20rem;
-    position: sticky;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    overflow: hidden;
+    border-top-left-radius: var(--fdPopover_Border_Radius);
+    border-top-right-radius: var(--fdPopover_Border_Radius);
     background: var(--sapPageHeader_Background);
-    transition:
-        opacity 0.15s ease,
-        transform 0.15s ease;
+    transition: all 0.15s ease;
 
     &.hidden {
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-0.5rem);
     }
 }
-
 .fd-user-menu__scroll-header-element {
-    transition:
-        opacity 0.15s ease,
-        transform 0.15s ease;
+    transition: all 0.15s ease;
 
     &.hidden {
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-0.5rem);
     }
 }
 
-fd-user-menu-footer {
+.fd-user-menu__footer .fd-bar.fd-bar--footer {
     position: sticky;
     bottom: 0;
+}
+
+.fd-user-menu__popover-wrapper {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+    overflow-anchor: none;
+}
+
+.fd-user-menu__body {
+    overflow: auto;
+    flex: 1;
+}
+
+.fd-user-menu__footer {
+    min-height: 2rem;
 }
