@@ -119,45 +119,63 @@ export class InputExample implements AfterViewInit {
     // Computed properties for individual field states
     readonly firstNameState = computed(() => {
         const control = this.firstName();
-        if (!control.touched) {return 'None';}
+        if (!control.touched) {
+            return 'None';
+        }
         return control.valid ? 'Positive' : 'Negative';
     });
 
     readonly lastNameState = computed(() => {
         const control = this.lastName();
-        if (!control.touched) {return 'None';}
+        if (!control.touched) {
+            return 'None';
+        }
         return control.valid ? 'Positive' : 'Negative';
     });
 
     readonly emailState = computed(() => {
         const control = this.email();
-        if (!control.touched) {return 'None';}
+        if (!control.touched) {
+            return 'None';
+        }
         return control.valid ? 'Positive' : 'Negative';
     });
 
     readonly phoneState = computed(() => {
         const control = this.phone();
-        if (!control.touched) {return 'None';}
-        if (control.value && !control.valid) {return 'Critical';}
+        if (!control.touched) {
+            return 'None';
+        }
+        if (control.value && !control.valid) {
+            return 'Critical';
+        }
         return control.valid ? 'Positive' : 'None';
     });
 
     readonly websiteState = computed(() => {
         const control = this.website();
-        if (!control.touched) {return 'None';}
-        if (control.value && !control.valid) {return 'Negative';}
+        if (!control.touched) {
+            return 'None';
+        }
+        if (control.value && !control.valid) {
+            return 'Negative';
+        }
         return control.valid ? 'Positive' : 'None';
     });
 
     readonly ageState = computed(() => {
         const control = this.age();
-        if (!control.touched) {return 'None';}
+        if (!control.touched) {
+            return 'None';
+        }
         return control.valid ? 'Positive' : 'Negative';
     });
 
     readonly usernameState = computed(() => {
         const control = this.username();
-        if (!control.touched) {return 'None';}
+        if (!control.touched) {
+            return 'None';
+        }
         return control.valid ? 'Positive' : 'Negative';
     });
 
@@ -182,7 +200,9 @@ export class InputExample implements AfterViewInit {
     ]);
     readonly filteredSuggestions = computed(() => {
         const value = this.searchValue().toLowerCase();
-        if (!value) {return [];}
+        if (!value) {
+            return [];
+        }
         return this.searchSuggestions()
             .filter((suggestion) => suggestion.toLowerCase().includes(value))
             .slice(0, 5);
@@ -300,10 +320,18 @@ export class InputExample implements AfterViewInit {
 
     getDynamicValueState(): 'None' | 'Positive' | 'Negative' | 'Critical' | 'Information' {
         const value = this.dynamicStateValue().toLowerCase();
-        if (value.includes('success') || value.includes('positive')) {return 'Positive';}
-        if (value.includes('warning') || value.includes('critical')) {return 'Critical';}
-        if (value.includes('error') || value.includes('negative')) {return 'Negative';}
-        if (value.includes('info') || value.includes('information')) {return 'Information';}
+        if (value.includes('success') || value.includes('positive')) {
+            return 'Positive';
+        }
+        if (value.includes('warning') || value.includes('critical')) {
+            return 'Critical';
+        }
+        if (value.includes('error') || value.includes('negative')) {
+            return 'Negative';
+        }
+        if (value.includes('info') || value.includes('information')) {
+            return 'Information';
+        }
         return 'None';
     }
 
@@ -316,10 +344,18 @@ export class InputExample implements AfterViewInit {
         | 'ColorSet2'
         | undefined {
         const value = this.dynamicStateValue().toLowerCase();
-        if (value.includes('success') || value.includes('positive')) {return 'Positive';}
-        if (value.includes('warning') || value.includes('critical')) {return 'Critical';}
-        if (value.includes('error') || value.includes('negative')) {return 'Negative';}
-        if (value.includes('info') || value.includes('information')) {return 'Information';}
+        if (value.includes('success') || value.includes('positive')) {
+            return 'Positive';
+        }
+        if (value.includes('warning') || value.includes('critical')) {
+            return 'Critical';
+        }
+        if (value.includes('error') || value.includes('negative')) {
+            return 'Negative';
+        }
+        if (value.includes('info') || value.includes('information')) {
+            return 'Information';
+        }
         return 'Information';
     }
 
@@ -447,17 +483,32 @@ export class InputExample implements AfterViewInit {
         }
 
         const errors = control.errors;
-        if (errors['required']) {return `${fieldName} is required`;}
-        if (errors['minlength'])
-            {return `${fieldName} must be at least ${errors['minlength'].requiredLength} characters`;}
-        if (errors['maxlength']) {return `${fieldName} must not exceed ${errors['maxlength'].requiredLength} characters`;}
-        if (errors['email']) {return 'Please enter a valid email address';}
-        if (errors['pattern']) {
-            if (fieldName === 'phone') {return 'Please enter a valid phone number';}
-            if (fieldName === 'website') {return 'Please enter a valid URL starting with http:// or https://';}
+        if (errors['required']) {
+            return `${fieldName} is required`;
         }
-        if (errors['min']) {return `${fieldName} must be at least ${errors['min'].min}`;}
-        if (errors['max']) {return `${fieldName} must not exceed ${errors['max'].max}`;}
+        if (errors['minlength']) {
+            return `${fieldName} must be at least ${errors['minlength'].requiredLength} characters`;
+        }
+        if (errors['maxlength']) {
+            return `${fieldName} must not exceed ${errors['maxlength'].requiredLength} characters`;
+        }
+        if (errors['email']) {
+            return 'Please enter a valid email address';
+        }
+        if (errors['pattern']) {
+            if (fieldName === 'phone') {
+                return 'Please enter a valid phone number';
+            }
+            if (fieldName === 'website') {
+                return 'Please enter a valid URL starting with http:// or https://';
+            }
+        }
+        if (errors['min']) {
+            return `${fieldName} must be at least ${errors['min'].min}`;
+        }
+        if (errors['max']) {
+            return `${fieldName} must not exceed ${errors['max'].max}`;
+        }
 
         return 'Invalid value';
     }

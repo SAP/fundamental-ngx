@@ -1,0 +1,95 @@
+<fd-docs-section-title id="basic" componentName="List">Basic List</fd-docs-section-title>
+<description>
+    UI5 Lists provide a comprehensive set of components for displaying and managing lists of items.
+</description>
+<component-example>
+    <ui5-list-basic-example></ui5-list-basic-example>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"></code-example>
+
+<fd-docs-section-title id="growing-list" componentName="List">Growing List</fd-docs-section-title>
+<description>
+    The Growing List component allows for incremental loading of list items as the user scrolls or interacts with the
+    list.
+</description>
+<component-example>
+    <ui5-list-growing-example></ui5-list-growing-example>
+</component-example>
+<code-example [exampleFiles]="growingListExamples()"></code-example>
+
+<fd-docs-section-title id="selection" componentName="List">Selection Modes</fd-docs-section-title>
+<description>
+    Lists support various selection modes including <b>None</b>, <b>Single</b>, <b>SingleStart</b>, <b>SingleEnd</b>,
+    <b>SingleAuto</b>, <b>Multiple</b> and <b>Delete</b>.
+</description>
+<component-example>
+    <ui5-list-selection-modes-example></ui5-list-selection-modes-example>
+</component-example>
+<code-example [exampleFiles]="selectionModesExamples()"></code-example>
+
+<fd-docs-section-title id="no-data" componentName="List">No Data</fd-docs-section-title>
+<description>You can show a text when there aren't items (data) via the <b>noDataText</b> property.</description>
+<component-example>
+    <ui5-list-no-data-example></ui5-list-no-data-example>
+</component-example>
+<code-example [exampleFiles]="noDataExamples()"></code-example>
+
+<fd-docs-section-title id="grouping" componentName="List">Grouping</fd-docs-section-title>
+<description>The <b>ListItemGroup</b> can be used to start group section and implement grouping.</description>
+<component-example>
+    <ui5-list-grouping-example></ui5-list-grouping-example>
+</component-example>
+<code-example [exampleFiles]="groupingExamples()"></code-example>
+
+<fd-docs-section-title id="separators" componentName="List">Separators</fd-docs-section-title>
+<description
+    >The <b>separators</b> options (<b>All</b>, <b>Inner</b>, <b>None</b>) allows the outer lines (Inner) or all the
+    lines (None) to be hidden.</description
+>
+<component-example>
+    <ui5-list-separators-example></ui5-list-separators-example>
+</component-example>
+<code-example [exampleFiles]="separatorsExamples()"></code-example>
+
+<fd-docs-section-title id="drag-and-drop" componentName="List">Drag and Drop</fd-docs-section-title>
+<description
+    >The list items are draggable through the use of the <b>movable</b> property on <b>ListItem</b>.</description
+>
+<component-example>
+    <ui5-list-drag-and-drop-example></ui5-list-drag-and-drop-example>
+</component-example>
+<code-example [exampleFiles]="dragAndDropExamples()"></code-example>
+
+<fd-docs-section-title id="drag-and-drop-multi" componentName="List">Multiple Item Drag</fd-docs-section-title>
+<description
+    >You can select and drag multiple items at once when using <b>selection-mode="Multiple"</b>. This sample
+    demonstrates cross-list dragging and the multiple drag ghost feature.
+</description>
+<component-example>
+    <ui5-list-multiple-drag-and-drop-example></ui5-list-multiple-drag-and-drop-example>
+</component-example>
+<code-example [exampleFiles]="multipleDragAndDropExamples()"></code-example>
+
+<fd-docs-section-title id="wrapping" componentName="List">Wrapping</fd-docs-section-title>
+<description>
+    <p>
+        The standard list item <code>&lt;ui5-li&gt;</code> and the list item group
+        <code>&lt;ui5-li-group&gt;</code> supports text wrapping through the <b>wrappingType</b> property. When set to
+        "Normal", long text content (title and description) will wrap to multiple lines instead of truncating with an
+        ellipsis. For very long content, the text is displayed with a "Show More/Show Less" mechanism.
+    </p>
+    <p>The wrapping behavior is responsive:</p>
+    <ul>
+        <li>On mobile devices (size S), text is truncated after 100 characters</li>
+        <li>On tablets and desktop (size M and larger), text is truncated after 300 characters</li>
+    </ul>
+    <p>This feature improves readability when displaying lengthy content in lists.</p>
+    <p>
+        The <code>&lt;ui5-li-custom&gt;</code> is intentionally designed as a generic container to provide maximum
+        flexibility. It can be used alongside <code>ui5-expandable-text</code> for long text content.
+    </p>
+</description>
+<component-example>
+    <ui5-list-wrapping-example></ui5-list-wrapping-example>
+</component-example>
+<code-example [exampleFiles]="wrappingExamples()"></code-example>

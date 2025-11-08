@@ -67,6 +67,14 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-picker').then(configureLibRoutes)
     },
     {
+        path: 'expandable-text',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
+    },
+    {
+        path: 'icon',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/icon').then(configureLibRoutes)
+    },
+    {
         path: 'input',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/input').then(configureLibRoutes)
     },
@@ -77,6 +85,14 @@ const componentRoutes = [
     {
         path: 'link',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/link').then(configureLibRoutes)
+    },
+    {
+        path: 'list',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/list').then(configureLibRoutes)
+    },
+    {
+        path: 'message-strip',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
     },
     {
         path: 'popover',

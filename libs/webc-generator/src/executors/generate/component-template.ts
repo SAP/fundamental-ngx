@@ -390,10 +390,10 @@ ${(() => {
         this._${camelCaseName}Signal.set(currentValue);
       }
     };
-    
+
     // Try immediate initialization
     initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}();
-    
+
     // Fallback delayed initialization if web component needs more time
     // Use requestAnimationFrame for zoneless compatibility
     requestAnimationFrame(() => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;

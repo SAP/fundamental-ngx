@@ -19,9 +19,13 @@ export const API_FILES = {
     checkBox: ['CheckBox'],
     colorPalette: ['ColorPalette', 'ColorPaletteItem'],
     colorPicker: ['ColorPicker'],
+    expandableText: ['ExpandableText'],
+    icon: ['Icon'],
     input: ['Input'],
     label: ['Label'],
     link: ['Link'],
+    list: ['List', 'ListItemCustom', 'ListItemGroup', 'ListItemStandard'],
+    messageStrip: ['MessageStrip'],
     popover: ['Popover'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     slider: ['Slider', 'RangeSlider']

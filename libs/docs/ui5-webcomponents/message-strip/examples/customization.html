@@ -1,0 +1,65 @@
+<div class="fd-container fd-padding--none">
+    <!-- Configuration Controls -->
+    <div class="fd-row">
+        <div class="fd-col">
+            <div class="fd-panel">
+                <div class="fd-panel__content fd-padding--sm">
+                    <h4 class="fd-margin-bottom--sm">Configuration Options:</h4>
+
+                    <div class="fd-margin-bottom--sm">
+                        <ui5-button (ui5Click)="toggleIcon()" [design]="showIcon() ? 'Positive' : 'Default'">
+                            {{ showIcon() ? 'Icon Enabled' : 'Icon Disabled' }}
+                        </ui5-button>
+                        <ui5-button
+                            (ui5Click)="toggleCloseButton()"
+                            [design]="showCloseButton() ? 'Positive' : 'Default'"
+                            class="fd-margin-left--xs"
+                        >
+                            {{ showCloseButton() ? 'Close Button Enabled' : 'Close Button Disabled' }}
+                        </ui5-button>
+                    </div>
+
+                    <div class="fd-margin-bottom--sm">
+                        <h5 class="fd-margin-bottom--xs">ColorSet Design:</h5>
+                        <ui5-segmented-button selectionMode="Single" (ui5SelectionChange)="onDesignChange($event)">
+                            @for (design of colorSetDesigns(); track design) {
+                            <ui5-segmented-button-item [selected]="selectedDesign() === design">
+                                {{ design }}
+                            </ui5-segmented-button-item>
+                            }
+                        </ui5-segmented-button>
+                    </div>
+
+                    <div>
+                        <h5 class="fd-margin-bottom--xs">Color Scheme (1-10):</h5>
+                        <ui5-segmented-button selectionMode="Single" (ui5SelectionChange)="onColorSchemeChange($event)">
+                            @for (scheme of colorSchemes(); track scheme) {
+                            <ui5-segmented-button-item [selected]="selectedColorScheme() === scheme">
+                                {{ scheme }}
+                            </ui5-segmented-button-item>
+                            }
+                        </ui5-segmented-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ColorSet Customization Preview -->
+    <div class="fd-row fd-margin-top--sm">
+        <div class="fd-col">
+            <h4 class="fd-margin-bottom--sm">ColorSet Design Preview:</h4>
+            <ui5-message-strip
+                [design]="selectedDesign()"
+                [colorScheme]="selectedColorScheme()"
+                [hideIcon]="!showIcon()"
+                [hideCloseButton]="!showCloseButton()"
+                (ui5Close)="onCustomMessageClose($event)"
+            >
+                <ui5-icon slot="icon" name="palette" style="color: var(--sapContent_IconColor)"> </ui5-icon>
+                {{ selectedDesign() }} design with color scheme {{ selectedColorScheme() }}. Icon: {{ showIcon() ?
+                'Enabled' : 'Disabled' }}, Close Button: {{ showCloseButton() ? 'Enabled' : 'Disabled' }}.
+            </ui5-message-strip>
+        </div>
+    </div>
+</div>

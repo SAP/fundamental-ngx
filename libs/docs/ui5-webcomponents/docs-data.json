@@ -55,6 +55,14 @@
             "name": "Color Picker"
         },
         {
+            "url": "ui5-webcomponents/expandable-text",
+            "name": "Expandable Text"
+        },
+        {
+            "url": "ui5-webcomponents/icon",
+            "name": "Icon"
+        },
+        {
             "url": "ui5-webcomponents/input",
             "name": "Input"
         },
@@ -65,6 +73,14 @@
         {
             "url": "ui5-webcomponents/link",
             "name": "Link"
+        },
+        {
+            "url": "ui5-webcomponents/list",
+            "name": "List"
+        },
+        {
+            "url": "ui5-webcomponents/message-strip",
+            "name": "Message Strip"
         },
         {
             "url": "ui5-webcomponents/popover",

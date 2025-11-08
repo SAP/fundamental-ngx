@@ -7,15 +7,12 @@
         "strict": true,
         "noImplicitReturns": false,
         "noFallthroughCasesInSwitch": true,
-        "target": "es2022",
+        "target": "es2020",
         "outDir": "../../../../dist/out-tsc",
         "declaration": true,
         "declarationMap": true,
         "inlineSources": true,
-        "types": [],
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "useDefineForClassFields": false
+        "types": []
     },
     "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }
