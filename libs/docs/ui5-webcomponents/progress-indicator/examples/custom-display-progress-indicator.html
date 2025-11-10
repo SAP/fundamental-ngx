@@ -1,0 +1,37 @@
+<div class="fd-layout-grid">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--md">Custom Display Value Examples</h4>
+        </div>
+    </div>
+
+    @for (example of customDisplayExamples(); track example.displayValue) {
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--3">
+            <label class="fd-margin-end--sm">{{ example.description }}:</label>
+        </div>
+        <div class="fd-col fd-col--9">
+            <ui5-progress-indicator
+                [value]="example.value"
+                [displayValue]="example.displayValue"
+                [accessibleName]="example.description"
+            >
+            </ui5-progress-indicator>
+        </div>
+    </div>
+    }
+
+    <div class="fd-row fd-margin-bottom--md fd-margin-top--lg">
+        <div class="fd-col fd-col--3">
+            <label class="fd-margin-end--sm">Hidden Value:</label>
+        </div>
+        <div class="fd-col fd-col--9">
+            <ui5-progress-indicator
+                [value]="85"
+                [hideValue]="true"
+                accessibleName="Progress indicator with hidden value"
+            >
+            </ui5-progress-indicator>
+        </div>
+    </div>
+</div>

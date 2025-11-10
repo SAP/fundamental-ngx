@@ -95,6 +95,10 @@
             "name": "Popover"
         },
         {
+            "url": "ui5-webcomponents/progress-indicator",
+            "name": "Progress Indicator"
+        },
+        {
             "url": "ui5-webcomponents/segmented-button",
             "name": "Segmented Button"
         },

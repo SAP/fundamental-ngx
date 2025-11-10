@@ -107,6 +107,11 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
     },
     {
+        path: 'progress-indicator',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/progress-indicator').then(configureLibRoutes)
+    },
+    {
         path: 'segmented-button',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/segmented-button').then(configureLibRoutes)
     },

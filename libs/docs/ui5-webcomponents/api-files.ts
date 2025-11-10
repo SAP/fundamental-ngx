@@ -29,6 +29,7 @@ export const API_FILES = {
     messageStrip: ['MessageStrip'],
     panel: ['Panel'],
     popover: ['Popover'],
+    progressIndicator: ['ProgressIndicator'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     slider: ['Slider', 'RangeSlider']
 };

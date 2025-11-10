@@ -1,0 +1,45 @@
+<div class="fd-layout-grid">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--md">Static Progress Examples</h4>
+        </div>
+    </div>
+
+    @for (scenario of progressScenarios(); track scenario.label) {
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--3">
+            <label class="fd-margin-end--sm">{{ scenario.label }}:</label>
+        </div>
+        <div class="fd-col fd-col--9">
+            <ui5-progress-indicator [value]="scenario.value" [accessibleName]="scenario.description">
+            </ui5-progress-indicator>
+        </div>
+    </div>
+    }
+
+    <div class="fd-row fd-margin-top--lg">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--md">Interactive Progress Control</h4>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--3">
+            <label class="fd-margin-end--sm">Interactive:</label>
+        </div>
+        <div class="fd-col fd-col--9">
+            <ui5-progress-indicator [value]="currentProgress()" accessibleName="Interactive progress indicator">
+            </ui5-progress-indicator>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <div class="fd-button-group fd-margin-top--sm">
+                <ui5-button (click)="decreaseProgress()" design="Transparent"> Decrease (-10%) </ui5-button>
+                <ui5-button (click)="increaseProgress()" design="Transparent"> Increase (+10%) </ui5-button>
+                <ui5-button (click)="resetProgress()" design="Attention"> Reset </ui5-button>
+            </div>
+        </div>
+    </div>
+</div>

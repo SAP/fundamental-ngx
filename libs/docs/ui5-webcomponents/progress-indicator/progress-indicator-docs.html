@@ -1,0 +1,35 @@
+<fd-docs-section-title id="basic" componentName="progress-indicator"> Basic Sample </fd-docs-section-title>
+<description>
+    Basic Progress Indicator with different progress values. The value property accepts a number from 0 to 100
+    representing the percentage of completion.
+</description>
+<component-example>
+    <ui5-basic-progress-indicator></ui5-basic-progress-indicator>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"> </code-example>
+
+<fd-docs-section-title id="custom-display" componentName="progress-indicator">
+    Custom Display Value and Interactive Controls
+</fd-docs-section-title>
+<description>
+    Progress Indicators can display custom text instead of the default percentage using the
+    <code>displayValue</code> property. You can also hide the value completely with <code>hideValue</code>. This example
+    demonstrates interactive controls to modify the progress indicator properties.
+</description>
+<component-example>
+    <ui5-custom-display-progress-indicator></ui5-custom-display-progress-indicator>
+</component-example>
+<code-example [exampleFiles]="customDisplayExamples()"> </code-example>
+
+<fd-docs-section-title id="value-states" componentName="progress-indicator">
+    Progress Indicator with Value States
+</fd-docs-section-title>
+<description>
+    Progress Indicators can display different semantic states using the <code>valueState</code> property. Available
+    states are: <strong>None (default)</strong>, <strong>Positive</strong>, <strong>Critical</strong>,
+    <strong>Negative</strong>, and <strong>Information</strong>.
+</description>
+<component-example>
+    <ui5-value-state-progress-indicator></ui5-value-state-progress-indicator>
+</component-example>
+<code-example [exampleFiles]="valueStateExamples()"> </code-example>
