@@ -56,8 +56,8 @@ const calendarFormSourceH = 'calendar-form-example/calendar-form-example.compone
 const calendarProgrammaticallySource = 'calendar-programmatically-change-example.component.ts';
 const calendarLegendSource = 'calendar-legend-example/calendar-legend-example.component.ts';
 const calendarLegendSourceHtml = 'calendar-legend-example/calendar-legend-example.component.html';
-const calendarBCP = 'calendar-bpc/calendar-bcp.ts';
-const calendarBCPHTML = 'calendar-bpc/calendar-bcp.html';
+const calendarBCP = 'calendar-bcp/calendar-bcp.ts';
+const calendarBCPHTML = 'calendar-bcp/calendar-bcp.html';
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html',
