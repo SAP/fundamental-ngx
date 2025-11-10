@@ -16,6 +16,7 @@ import { FormHeaderTextWrappingSample } from './examples/header-text-wrapping';
 import { FormLabelSpanSample } from './examples/label-span';
 import { FormLabelsOnTopSample } from './examples/labels-on-top';
 import { FormLayoutsSample } from './examples/layouts';
+import { FormValidationSample } from './examples/validation';
 
 const basicSampleHtml = 'basic-sample.html';
 const basicSampleTs = 'basic-sample.ts';
@@ -35,6 +36,8 @@ const headerTextWrappingHtml = 'header-text-wrapping.html';
 const headerTextWrappingTs = 'header-text-wrapping.ts';
 const customHeaderHtml = 'custom-header.html';
 const customHeaderTs = 'custom-header.ts';
+const validationHtml = 'validation.html';
+const validationTs = 'validation.ts';
 
 @Component({
     selector: 'ui5-form-docs',
@@ -53,7 +56,8 @@ const customHeaderTs = 'custom-header.ts';
         FormEditSample,
         FormColumnSpanSample,
         FormHeaderTextWrappingSample,
-        FormCustomHeaderSample
+        FormCustomHeaderSample,
+        FormValidationSample
     ]
 })
 export class FormDocs {
@@ -183,6 +187,20 @@ export class FormDocs {
         }
     ]);
 
+    private readonly validationExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(validationHtml),
+            fileName: 'validation'
+        },
+        {
+            language: 'typescript',
+            component: 'FormValidationSample',
+            code: getAssetFromModuleAssets(validationTs),
+            fileName: 'validation'
+        }
+    ]);
+
     readonly basicExamples = computed(() => this.basicExampleFiles());
     readonly layoutsExamples = computed(() => this.layoutsExampleFiles());
     readonly labelSpanExamples = computed(() => this.labelSpanExampleFiles());
@@ -192,4 +210,5 @@ export class FormDocs {
     readonly columnSpanExamples = computed(() => this.columnSpanExampleFiles());
     readonly headerTextWrappingExamples = computed(() => this.headerTextWrappingExampleFiles());
     readonly customHeaderExamples = computed(() => this.customHeaderExampleFiles());
+    readonly validationExamples = computed(() => this.validationExampleFiles());
 }
