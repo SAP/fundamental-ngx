@@ -11,6 +11,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { CalendarBcp } from './examples/calendar-bcp/calendar-bcp';
 import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
 import { CalendarFormExamplesComponent } from './examples/calendar-form-example/calendar-form-example.component';
 import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
@@ -55,7 +56,8 @@ const calendarFormSourceH = 'calendar-form-example/calendar-form-example.compone
 const calendarProgrammaticallySource = 'calendar-programmatically-change-example.component.ts';
 const calendarLegendSource = 'calendar-legend-example/calendar-legend-example.component.ts';
 const calendarLegendSourceHtml = 'calendar-legend-example/calendar-legend-example.component.html';
-
+const calendarBCP = 'calendar-bpc/calendar-bcp.ts';
+const calendarBCPHTML = 'calendar-bpc/calendar-bcp.html';
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html',
@@ -82,7 +84,8 @@ const calendarLegendSourceHtml = 'calendar-legend-example/calendar-legend-exampl
         CalendarDisabledNavigationButtonsExampleComponent,
         CalendarMultiExampleComponent,
         CalendarMultiRangeExampleComponent,
-        CalendarLegendExampleComponent
+        CalendarLegendExampleComponent,
+        CalendarBcp
     ]
 })
 export class CalendarDocsComponent {
@@ -378,6 +381,21 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarLegendExampleComponent',
             fileName: 'calendar-legend-example',
             code: getAssetFromModuleAssets(calendarLegendSourceHtml)
+        }
+    ];
+
+    calendarBCP: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarBcp',
+            fileName: 'calendar-bcp',
+            code: getAssetFromModuleAssets(calendarBCP)
+        },
+        {
+            language: 'html',
+            component: 'CalendarBcp',
+            fileName: 'calendar-bcp',
+            code: getAssetFromModuleAssets(calendarBCPHTML)
         }
     ];
 }
