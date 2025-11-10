@@ -59,6 +59,10 @@
             "name": "Expandable Text"
         },
         {
+            "url": "ui5-webcomponents/form",
+            "name": "Form"
+        },
+        {
             "url": "ui5-webcomponents/icon",
             "name": "Icon"
         },

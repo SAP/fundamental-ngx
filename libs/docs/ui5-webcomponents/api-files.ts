@@ -20,6 +20,7 @@ export const API_FILES = {
     colorPalette: ['ColorPalette', 'ColorPaletteItem'],
     colorPicker: ['ColorPicker'],
     expandableText: ['ExpandableText'],
+    form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],
     input: ['Input'],
     label: ['Label'],
