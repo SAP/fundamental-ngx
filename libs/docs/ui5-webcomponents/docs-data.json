@@ -87,6 +87,10 @@
             "name": "Message Strip"
         },
         {
+            "url": "ui5-webcomponents/panel",
+            "name": "Panel"
+        },
+        {
             "url": "ui5-webcomponents/popover",
             "name": "Popover"
         },

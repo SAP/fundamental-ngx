@@ -1,0 +1,35 @@
+<ui5-panel headerText="System Status Collapsed" [fixed]="true" [collapsed]="true">
+    <div class="fd-padding--sm">
+        <ui5-text>Critical system information that should always be visible.</ui5-text>
+
+        <div class="fd-margin-top--sm">
+            <ui5-list>
+                @for (info of importantInfo; track info.label) {
+                <ui5-li>
+                    {{ info.label }}
+                    <ui5-tag design="Set1" [colorScheme]="info.colorScheme">{{ info.value }}</ui5-tag>
+                </ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+</ui5-panel>
+
+<br /><br />
+
+<ui5-panel headerText="System Status Expanded" [fixed]="true">
+    <div class="fd-padding--sm">
+        <ui5-text>Critical system information that should always be visible.</ui5-text>
+
+        <div class="fd-margin-top--sm">
+            <ui5-list>
+                @for (info of importantInfo; track info.label) {
+                <ui5-li>
+                    {{ info.label }}
+                    <ui5-tag design="Set1" [colorScheme]="info.colorScheme">{{ info.value }}</ui5-tag>
+                </ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+</ui5-panel>
