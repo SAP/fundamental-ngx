@@ -112,6 +112,10 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents/progress-indicator').then(configureLibRoutes)
     },
     {
+        path: 'rating-indicator',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/rating-indicator').then(configureLibRoutes)
+    },
+    {
         path: 'segmented-button',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/segmented-button').then(configureLibRoutes)
     },

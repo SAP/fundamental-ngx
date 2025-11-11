@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
 
 @Component({
