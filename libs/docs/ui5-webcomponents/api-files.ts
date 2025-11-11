@@ -33,5 +33,6 @@ export const API_FILES = {
     ratingIndicator: ['RatingIndicator'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     slider: ['Slider', 'RangeSlider'],
-    stepInput: ['StepInput']
+    stepInput: ['StepInput'],
+    switch: ['Switch']
 };

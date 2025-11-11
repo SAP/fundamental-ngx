@@ -126,6 +126,10 @@ const componentRoutes = [
     {
         path: 'step-input',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/step-input').then(configureLibRoutes)
+    },
+    {
+        path: 'switch',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/switch').then(configureLibRoutes)
     }
 ];
 

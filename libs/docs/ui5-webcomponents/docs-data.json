@@ -113,6 +113,10 @@
         {
             "url": "ui5-webcomponents/step-input",
             "name": "StepInput"
+        },
+        {
+            "url": "ui5-webcomponents/switch",
+            "name": "Switch"
         }
     ]
 }
