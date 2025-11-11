@@ -32,5 +32,6 @@ export const API_FILES = {
     progressIndicator: ['ProgressIndicator'],
     ratingIndicator: ['RatingIndicator'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
-    slider: ['Slider', 'RangeSlider']
+    slider: ['Slider', 'RangeSlider'],
+    stepInput: ['StepInput']
 };

@@ -2,13 +2,12 @@ import { Component, signal } from '@angular/core';
 import { ProgressIndicator } from '@fundamental-ngx/ui5-webcomponents/progress-indicator';
 
 // Import Fundamental Styles
-import 'fundamental-styles/dist/form-item.css';
 import 'fundamental-styles/dist/layout-grid.css';
 import 'fundamental-styles/dist/margins.css';
 import 'fundamental-styles/dist/paddings.css';
 
 @Component({
-    selector: 'ui5-custom-display-progress-indicator',
+    selector: 'ui5-custom-display-progress-indicator-sample',
     templateUrl: './custom-display-progress-indicator.html',
     standalone: true,
     imports: [ProgressIndicator]

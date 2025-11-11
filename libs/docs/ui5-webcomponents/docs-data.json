@@ -109,6 +109,10 @@
         {
             "url": "ui5-webcomponents/slider",
             "name": "Slider"
+        },
+        {
+            "url": "ui5-webcomponents/step-input",
+            "name": "StepInput"
         }
     ]
 }

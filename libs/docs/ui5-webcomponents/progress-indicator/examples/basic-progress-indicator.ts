@@ -1,4 +1,4 @@
-import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { ProgressIndicator } from '@fundamental-ngx/ui5-webcomponents/progress-indicator';
 
@@ -7,11 +7,10 @@ import 'fundamental-styles/dist/layout-grid.css';
 import 'fundamental-styles/dist/margins.css';
 
 @Component({
-    selector: 'ui5-basic-progress-indicator',
+    selector: 'ui5-basic-progress-indicator-sample',
     templateUrl: './basic-progress-indicator.html',
     standalone: true,
-    imports: [ProgressIndicator, Button],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [ProgressIndicator, Button]
 })
 export class BasicProgressIndicatorExample {
     private readonly _progressValue = signal(0);

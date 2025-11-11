@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ValueState } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { ProgressIndicator } from '@fundamental-ngx/ui5-webcomponents/progress-indicator';
 import { SegmentedButton } from '@fundamental-ngx/ui5-webcomponents/segmented-button';
@@ -16,11 +16,10 @@ interface ValueStateConfig {
 }
 
 @Component({
-    selector: 'ui5-value-state-progress-indicator',
+    selector: 'ui5-value-state-progress-indicator-sample',
     templateUrl: './value-state-progress-indicator.html',
     standalone: true,
-    imports: [ProgressIndicator, SegmentedButton, SegmentedButtonItem],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [ProgressIndicator, SegmentedButton, SegmentedButtonItem]
 })
 export class ValueStateProgressIndicatorExample {
     readonly valueStates = signal([

@@ -1,4 +1,4 @@
-<div class="fd-layout-grid fd-layout-grid--no-gap">
+<div class="fd-container">
     <div class="fd-row">
         <div class="fd-col fd-col--12">
             <h4 class="fd-margin-bottom--md">All Value States</h4>
@@ -34,10 +34,7 @@
         <div class="fd-col fd-col--12">
             <ui5-segmented-button>
                 @for (stateConfig of valueStates(); track stateConfig.state) {
-                <ui5-segmented-button-item
-                    [pressed]="selectedValueState() === stateConfig.state"
-                    (click)="setValueState(stateConfig.state)"
-                >
+                <ui5-segmented-button-item (click)="setValueState(stateConfig.state)">
                     {{ stateConfig.state }}
                 </ui5-segmented-button-item>
                 }

@@ -122,6 +122,10 @@ const componentRoutes = [
     {
         path: 'slider',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/slider').then(configureLibRoutes)
+    },
+    {
+        path: 'step-input',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/step-input').then(configureLibRoutes)
     }
 ];
 
