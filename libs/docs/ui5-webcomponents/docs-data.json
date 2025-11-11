@@ -117,6 +117,10 @@
         {
             "url": "ui5-webcomponents/switch",
             "name": "Switch"
+        },
+        {
+            "url": "ui5-webcomponents/tag",
+            "name": "Tag"
         }
     ]
 }

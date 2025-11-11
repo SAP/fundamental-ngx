@@ -1,0 +1,7 @@
+<div class="fd-padding--sm" style="max-width: 200px">
+    @for (wrappingType of wrappingTypes(); track wrappingType.type) {
+    <div class="fd-margin-top--sm">
+        <ui5-tag [wrappingType]="wrappingType.type" colorScheme="3" style="width: 200px"> {{ longText() }} </ui5-tag>
+    </div>
+    }
+</div>

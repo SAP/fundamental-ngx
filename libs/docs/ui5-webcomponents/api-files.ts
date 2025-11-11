@@ -34,5 +34,6 @@ export const API_FILES = {
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     slider: ['Slider', 'RangeSlider'],
     stepInput: ['StepInput'],
-    switch: ['Switch']
+    switch: ['Switch'],
+    tag: ['Tag']
 };

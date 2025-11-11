@@ -130,6 +130,10 @@ const componentRoutes = [
     {
         path: 'switch',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/switch').then(configureLibRoutes)
+    },
+    {
+        path: 'tag',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tag').then(configureLibRoutes)
     }
 ];
 
