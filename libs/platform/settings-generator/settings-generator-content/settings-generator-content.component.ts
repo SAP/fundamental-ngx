@@ -11,6 +11,7 @@ import {
     ViewChildren,
     ViewEncapsulation,
     computed,
+    input,
     signal
 } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -18,6 +19,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 import {
     GroupedFormSettingsItem,
@@ -41,7 +43,8 @@ import { SettingsGeneratorSectionComponent } from './settings-generator-section/
         SettingsGeneratorSectionComponent,
         NgTemplateOutlet,
         AsyncOrSyncPipe,
-        IconTabBarComponent
+        IconTabBarComponent,
+        FdTranslatePipe
     ]
 })
 export class SettingsGeneratorContentComponent {
@@ -70,6 +73,9 @@ export class SettingsGeneratorContentComponent {
     /** @hidden */
     @ViewChildren(TabPanelComponent)
     private readonly _tabPanels: QueryList<TabPanelComponent>;
+
+    /** Optional alternative text for the settings generator dialog back button. */
+    backButtonLabel = input<string>();
 
     /** @hidden */
     _id: Nullable<string>;

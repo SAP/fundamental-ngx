@@ -1,0 +1,17 @@
+<div>
+    <h3>Calendar with Dynamic Locale Support</h3>
+
+    <div class="locale-selector">
+        <label>Current locale: {{ currentLocale() }}</label>
+        <br />
+        <fd-segmented-button [(ngModel)]="selectedLocale" (ngModelChange)="changeLocale($event)">
+            @for (locale of availableLocales; track locale.code) {
+            <button fd-button fdkFocusableItem [label]="locale.name" [value]="locale.code"></button>
+            }
+        </fd-segmented-button>
+    </div>
+
+    <div class="calendar-container">
+        <!-- Dynamic calendar component will be inserted here -->
+    </div>
+</div>
