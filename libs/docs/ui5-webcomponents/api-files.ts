@@ -36,5 +36,6 @@ export const API_FILES = {
     stepInput: ['StepInput'],
     switch: ['Switch'],
     tag: ['Tag'],
-    text: ['Text']
+    text: ['Text'],
+    textArea: ['TextArea']
 };

@@ -1,0 +1,29 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-6 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label class="fd-form-label fd-margin--sm">Strict Character Limit (100)</label>
+                <ui5-textarea
+                    [maxlength]="100"
+                    [showExceededText]="false"
+                    placeholder="Type here... (max 100 characters, strict mode)"
+                >
+                </ui5-textarea>
+            </div>
+        </div>
+
+        <div class="fd-col-6">
+            <div class="fd-form-item">
+                <label class="fd-form-label fd-margin--sm">Allow Exceeded Text (100)</label>
+                <ui5-textarea
+                    [maxlength]="100"
+                    [showExceededText]="true"
+                    placeholder="Type here... (max 100 characters, allows exceeded text)"
+                    [valueState]="exceededValueState()"
+                    (ui5Input)="onExceededLimitTextChange($event)"
+                >
+                </ui5-textarea>
+            </div>
+        </div>
+    </div>
+</div>

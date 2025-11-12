@@ -125,6 +125,10 @@
         {
             "url": "ui5-webcomponents/text",
             "name": "Text"
+        },
+        {
+            "url": "ui5-webcomponents/text-area",
+            "name": "TextArea"
         }
     ]
 }

@@ -1,0 +1,35 @@
+<div class="fd-container">
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col-2 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label class="fd-form-label">Disabled</label>
+                <ui5-textarea value="Disabled text" [disabled]="true"> </ui5-textarea>
+                <small class="fd-form-message">Disabled state</small>
+            </div>
+        </div>
+        <div class="fd-col-2 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label class="fd-form-label">Read-Only</label>
+                <ui5-textarea value="Read-only text" [readonly]="true"> </ui5-textarea>
+                <small class="fd-form-message">Read-only state</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        @for (valueState of valueStates(); track valueState.state) {
+        <div class="fd-col-2 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label class="fd-form-label">{{ valueState.label }}</label>
+                <ui5-textarea
+                    [valueState]="valueState.state"
+                    [value]="stateValues()[valueState.state]"
+                    [placeholder]="valueState.description"
+                >
+                </ui5-textarea>
+                <small class="fd-form-message">{{ valueState.description }}</small>
+            </div>
+        </div>
+        }
+    </div>
+</div>

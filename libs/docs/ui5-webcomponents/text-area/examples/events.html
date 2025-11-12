@@ -1,0 +1,35 @@
+<div class="fd-form-item">
+    <ui5-label class="fd-margin-bottom--sm">Interactive TextArea:</ui5-label>
+    <ui5-textarea
+        [value]="textareaValue()"
+        [rows]="5"
+        [growing]="false"
+        placeholder="Type, select text, or scroll to see events..."
+        (ui5Change)="onTextareaChange($event)"
+        (ui5Input)="onTextareaInput($event)"
+        (ui5Select)="onTextareaSelect()"
+        (ui5Scroll)="onTextareaScroll()"
+    >
+    </ui5-textarea>
+    <small class="fd-form-message"> Interact with the textarea to see events below </small>
+</div>
+
+<div class="fd-form-item fd-margin-top--md">
+    <ui5-label class="fd-margin-bottom--sm">Event Log:</ui5-label>
+    <ui5-text
+        class="fd-scrollbar"
+        style="
+            background-color: var(--sapBackgroundColor);
+            border: var(--sapContent_ForegroundBorderColor) solid 1px;
+            min-height: 100px;
+            max-height: 200px;
+            overflow-y: auto;
+        "
+    >
+        @if (eventLog().length === 0) {
+        <small class="fd-text--secondary">No events yet. Interact with the textarea above.</small>
+        } @else { @for (event of eventLog(); track $index) {
+        <div class="fd-text--monospace fd-text--small fd-margin-bottom--tiny">{{ event }}</div>
+        } }
+    </ui5-text>
+</div>

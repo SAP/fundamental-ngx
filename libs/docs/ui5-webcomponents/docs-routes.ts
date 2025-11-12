@@ -138,6 +138,10 @@ const componentRoutes = [
     {
         path: 'text',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/text').then(configureLibRoutes)
+    },
+    {
+        path: 'text-area',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/text-area').then(configureLibRoutes)
     }
 ];
 
