@@ -13,10 +13,12 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { map } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -87,6 +89,12 @@ export class NavigationMoreButtonComponent {
      */
     readonly link$ = signal<Nullable<FdbNavigationItemLink>>(null);
 
+    /** More button aria-label attribute value. */
+    readonly moreButtonAriaLabelAttr$ = computed(() => this._moreButtonAriaLabel$());
+
+    /** Overflow menu aria-label attribute value. */
+    readonly overflowMenuAriaLabelAttr$ = computed(() => this._overflowMenuAriaLabel$());
+
     /**
      * @hidden
      * Popover position. Changes based on rtl value.
@@ -106,6 +114,28 @@ export class NavigationMoreButtonComponent {
 
     /** @hidden */
     private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+
+    /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
+
+    /** Translation signal for more button aria-label. */
+    private readonly _moreButtonAriaLabel$ = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.moreButtonAriaLabel'))
+        ),
+        { initialValue: 'Displays additional navigation items that are hidden due to limited screen space' }
+    );
+
+    /** Translation signal for overflow menu aria-label. */
+    private readonly _overflowMenuAriaLabel$ = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.overflowMenuAriaLabel'))
+        ),
+        { initialValue: 'Additional Navigation Items' }
+    );
 
     /** @hidden */
     constructor() {

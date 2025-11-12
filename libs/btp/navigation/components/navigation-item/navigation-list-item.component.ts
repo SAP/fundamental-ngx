@@ -24,11 +24,12 @@ import {
     input,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { Observable, asyncScheduler, filter, map, observeOn, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -315,6 +316,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return undefined;
     });
 
+    /** Expander aria-label attribute value. */
+    readonly expanderAriaLabelAttr$ = computed(() => this._expanderAriaLabel$());
+
     /** aria-haspopup attribute value for snapped mode items with children. */
     readonly ariaHasPopupAttr$ = computed(() => {
         if (this.navigation.isSnapped$() && this.hasChildren$()) {
@@ -347,7 +351,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** Wrapper aria-roledescription for snapped mode popovers. */
     readonly wrapperAriaRoleDescriptionAttr$ = computed(() => {
         if (this.navigation.isSnapped$() && this.hasChildren$() && !this.isOverflow$()) {
-            return 'Navigation List Tree';
+            return this._snappedPopoverRoleDescription$();
         }
         return undefined;
     });
@@ -468,6 +472,30 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     private readonly _zone = inject(NgZone);
+
+    /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
+
+    /** Translation signal for snapped popover role description. */
+    private readonly _snappedPopoverRoleDescription$ = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) =>
+                this._translationResolver.resolve(lang, 'btpNavigation.snappedPopoverRoleDescription')
+            )
+        ),
+        { initialValue: 'Navigation List Tree' }
+    );
+
+    /** Translation signal for expander aria-label. */
+    private readonly _expanderAriaLabel$ = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.expanderAriaLabel'))
+        ),
+        { initialValue: 'expand/collapse sub-items' }
+    );
 
     private readonly _rtlService = inject(RtlService, {
         optional: true

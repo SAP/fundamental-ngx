@@ -79,7 +79,7 @@
         <span
             class="fd-navigation__has-children-indicator"
             role="button"
-            aria-label="expand/collapse children"
+            [attr.aria-label]="expanderAriaLabelAttr$()"
             (click)="toggleExpanded()"
         ></span>
     }
