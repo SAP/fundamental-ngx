@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.2...v0.57.5-rc.3) (2025-11-12)
+
+
+### Bug Fixes
+
+* **platform:** add aria-label and title for settings generator back button ([#13566](https://github.com/SAP/fundamental-ngx/issues/13566)) ([cc04e1e](https://github.com/SAP/fundamental-ngx/commit/cc04e1ea58c390510b38ded23601b7f9e749ffe8))
+
+
+
+
+
 ## [0.57.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.1...v0.57.5-rc.2) (2025-11-10)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
