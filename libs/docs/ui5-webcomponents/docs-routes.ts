@@ -134,6 +134,10 @@ const componentRoutes = [
     {
         path: 'tag',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tag').then(configureLibRoutes)
+    },
+    {
+        path: 'text',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/text').then(configureLibRoutes)
     }
 ];
 

@@ -121,6 +121,10 @@
         {
             "url": "ui5-webcomponents/tag",
             "name": "Tag"
+        },
+        {
+            "url": "ui5-webcomponents/text",
+            "name": "Text"
         }
     ]
 }
