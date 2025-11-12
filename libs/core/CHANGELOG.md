@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.1...v0.57.5-rc.2) (2025-11-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.0...v0.57.5-rc.1) (2025-11-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.4...v0.57.5-rc.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **core:** update Settings Dialog to latest UXC design and comments ([#13543](https://github.com/SAP/fundamental-ngx/issues/13543)) ([94a8b3b](https://github.com/SAP/fundamental-ngx/commit/94a8b3b72b6790fd5d0e8fb34e0b4d1fd1df947a))
+
+
+
+
+
+## [0.57.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.33...v0.57.4) (2025-11-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.32...v0.57.4-rc.33) (2025-11-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.31...v0.57.4-rc.32) (2025-11-05)
+
+
+### Bug Fixes
+
+* **core,platform:** Add null check on scroll spy handling of tabs ([#13552](https://github.com/SAP/fundamental-ngx/issues/13552)) ([708c343](https://github.com/SAP/fundamental-ngx/commit/708c343254378c3895d62d60d77133ce08543366))
+
+
+
+
+
 ## [0.57.4-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.30...v0.57.4-rc.31) (2025-11-04)
 
 
