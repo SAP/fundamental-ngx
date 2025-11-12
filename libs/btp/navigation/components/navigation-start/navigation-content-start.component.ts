@@ -50,6 +50,18 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     @Input()
     contentProjected = true;
 
+    /**
+     * aria-label for the navigation list.
+     */
+    @Input()
+    ariaLabel: Nullable<string> = null;
+
+    /**
+     * aria-roledescription for the navigation list.
+     */
+    @Input()
+    ariaRoleDescription: Nullable<string> = null;
+
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: true })
     private readonly _listItems: QueryList<FdbNavigationListItem>;

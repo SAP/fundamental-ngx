@@ -1,5 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -249,6 +249,141 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     readonly expandedAttr$ = computed(() =>
         this.navigation.isSnapped$() ? this.popoverOpen$() && !this.isOverflow$() : this.expanded$()
     );
+
+    /** Role attribute value based on navigation state. */
+    readonly roleAttr$ = computed(() => {
+        if (this.navigation.isSnapped$()) {
+            // In popover context (when parent list item exists), child items should be treeitem
+            if (this.parentListItem && this.parentListItem.popoverOpen$()) {
+                return 'treeitem';
+            }
+            // In overflow menu context (More button popover), items should be menuitem
+            if (this.isOverflow$()) {
+                return 'menuitem';
+            }
+            return 'menuitemradio';
+        }
+        return 'treeitem';
+    });
+
+    /** aria-checked attribute value for menuitemradio role. */
+    readonly ariaCheckedAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && this.roleAttr$() === 'menuitemradio') {
+            return this.isActiveAttr$();
+        }
+        return undefined;
+    });
+
+    /** aria-selected attribute value - kept in both expanded and snapped modes. */
+    readonly ariaSelectedAttr$ = computed(() => this.isActiveAttr$());
+
+    /** aria-level attribute value - only for treeitem role. */
+    readonly ariaLevelAttr$ = computed(() => {
+        if (!this.navigation.isSnapped$()) {
+            return this.level$();
+        }
+        return undefined;
+    });
+
+    /** aria-owns attribute value for items with children. */
+    readonly ariaOwnsAttr$ = computed(() => {
+        if (this.hasChildren$()) {
+            return `${this.id()}-list`;
+        }
+        return undefined;
+    });
+
+    /** ID attribute for child lists. */
+    readonly childListIdAttr$ = computed(() => {
+        if (this.hasChildren$()) {
+            return `${this.id()}-list`;
+        }
+        return undefined;
+    });
+
+    /** aria-label attribute value for snapped mode menuitemradio. */
+    readonly ariaLabelAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && this.roleAttr$() === 'menuitemradio') {
+            const link = this.link$();
+            if (link?.elementRef?.nativeElement) {
+                const textElement = link.elementRef.nativeElement.querySelector('.fd-navigation__text');
+                if (textElement) {
+                    return textElement.textContent?.trim() || undefined;
+                }
+            }
+        }
+        return undefined;
+    });
+
+    /** aria-haspopup attribute value for snapped mode items with children. */
+    readonly ariaHasPopupAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && this.hasChildren$()) {
+            // In overflow menu, items with submenus should have aria-haspopup="menu"
+            if (this.isOverflow$()) {
+                return 'menu';
+            }
+            // Regular navigation items should have aria-haspopup="dialog"
+            return 'dialog';
+        }
+        return undefined;
+    });
+
+    /** aria-current attribute value for snapped mode items with children. */
+    readonly ariaCurrentAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && this.hasChildren$()) {
+            return 'page';
+        }
+        return undefined;
+    });
+
+    /** Wrapper role attribute for snapped mode popovers. */
+    readonly wrapperRoleAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && this.hasChildren$() && !this.isOverflow$()) {
+            return 'tree';
+        }
+        return undefined;
+    });
+
+    /** Wrapper aria-roledescription for snapped mode popovers. */
+    readonly wrapperAriaRoleDescriptionAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && this.hasChildren$() && !this.isOverflow$()) {
+            return 'Navigation List Tree';
+        }
+        return undefined;
+    });
+
+    /** Title item role for snapped mode - should be treeitem in popovers. */
+    readonly titleItemRoleAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && !this.isOverflow$()) {
+            return 'treeitem';
+        }
+        return this.roleAttr$();
+    });
+
+    /** Title item aria-selected for snapped mode - should not be selected if children are selected. */
+    readonly titleItemAriaSelectedAttr$ = computed(() => {
+        if (this.navigation.isSnapped$() && !this.isOverflow$()) {
+            // In popover, if any child is selected, the parent should not have aria-selected
+            const hasSelectedChild = this.listItems$().some((item) => item?.isActiveAttr$());
+            if (hasSelectedChild) {
+                return false;
+            }
+            // Otherwise use the normal selected state
+            return this.ariaSelectedAttr$();
+        }
+        return this.ariaSelectedAttr$();
+    });
+    readonly titleItemFocusable$ = computed(() => {
+        if (this.navigation.isSnapped$() && !this.isOverflow$()) {
+            // Check if the parent item has the with-expander class (two-click area)
+            const parentItemElement = this.marker?.elementRef?.nativeElement;
+            if (parentItemElement) {
+                return parentItemElement.classList.contains('fd-navigation__item--with-expander');
+            }
+            return false; // Default to not focusable for one-click areas
+        }
+        return true;
+    });
 
     /** CSS Class signal. */
     readonly class$ = computed(() =>
@@ -542,6 +677,21 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         }
     }
 
+    /** Handles keydown events for navigation item actions. */
+    handleItemKeydown(event: KeyboardEvent): void {
+        // For quick create items, execute the click action on Enter/Space
+        if (this.quickCreate$() && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Trigger click on the link element if it exists
+            const linkElement = this.link$()?.elementRef?.nativeElement;
+            if (linkElement) {
+                linkElement.click();
+            }
+        }
+    }
+
     /** Callback method when user used keyboard arrows to expand/collapse list item. */
     keyboardExpanded(shouldExpand: boolean): void {
         if (this.isOverflow$()) {
@@ -602,6 +752,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     canItemBeSelected(): boolean {
         // Group items (headers) cannot be selected
         if (this.isGroup$()) {
+            return false;
+        }
+
+        // Quick create items cannot be selected (they execute actions instead)
+        if (this.quickCreate$()) {
             return false;
         }
 

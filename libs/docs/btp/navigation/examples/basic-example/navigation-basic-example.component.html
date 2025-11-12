@@ -3,7 +3,6 @@
 <fd-segmented-button [(ngModel)]="state">
     <button fd-button label="Expanded" value="expanded"></button>
     <button fd-button label="Snapped" value="snapped"></button>
-    <button fd-button label="Popup" value="popup"></button>
 </fd-segmented-button>
 <p>Set visual mode</p>
 <fd-segmented-button [(ngModel)]="mode">
@@ -17,11 +16,12 @@
 <fdb-navigation
     [state]="state"
     [mode]="mode"
-    homeSeparator="false"
     [style.width]="'fit-content'"
     [style.height.px]="800"
+    [ariaLabel]="`Main Navigation ${state}`"
+    ariaRoleDescription="Side Navigation"
 >
-    <fdb-navigation-content-start>
+    <fdb-navigation-content-start ariaLabel="Primary Navigation Menu" ariaRoleDescription="Navigation List Tree">
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
         </fdb-navigation-list-item>
@@ -101,12 +101,13 @@
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="task">Task Manager</a>
         </fdb-navigation-list-item>
     </fdb-navigation-content-start>
-    <fdb-navigation-content-end>
+    <fdb-navigation-content-end ariaLabel="Footer Navigation Menu" ariaRoleDescription="Navigation List Tree">
         <fdb-navigation-list-item quickCreate>
             <button
                 fdb-navigation-link
                 quickCreate
                 glyph="write-new"
+                aria-label="Quick Create"
                 *fdbNavigationLinkRef
                 (click)="onQuickCreateClick()"
             >

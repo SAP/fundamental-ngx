@@ -16,12 +16,14 @@ import {
     SimpleChanges,
     ViewEncapsulation,
     booleanAttribute,
+    computed,
     inject,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationService } from '../../services/navigation.service';
 
 @Component({
@@ -52,8 +54,35 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** List Role. */
     @HostBinding('attr.role')
+    get _role(): 'tree' | 'menubar' | 'group' | 'menu' {
+        return this.computedRole();
+    }
+
     @Input()
-    role: 'tree' | 'menubar' = 'tree';
+    role: 'tree' | 'menubar' | 'group' | 'menu' = 'tree';
+
+    /**
+     * aria-label for the navigation list.
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('ariaLabel')
+    ariaLabel: Nullable<string> = null;
+
+    /**
+     * Computed aria-label that uses parent item's text for group lists.
+     */
+    @HostBinding('attr.aria-label')
+    get _ariaLabel(): Nullable<string> {
+        return this.computedAriaLabel();
+    }
+
+    /**
+     * aria-roledescription for the navigation list.
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('ariaRoleDescription')
+    @HostBinding('attr.aria-roledescription')
+    ariaRoleDescription: Nullable<string> = null;
 
     /** Whether the list is for parent items. */
     @HostBinding('class.fd-navigation__list--parent-items')
@@ -86,6 +115,46 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     @Output()
     focusAfter = new EventEmitter<void>();
 
+    /** Computed role based on navigation state and input role. */
+    readonly computedRole = computed(() => {
+        // Prioritize explicit role input
+        if (this.role && this.role !== 'tree') {
+            return this.role;
+        }
+
+        // Check if this is in an overflow menu context (More button popover)
+        const navigation = this._navigation;
+        if (navigation?.isSnapped$() && this.moreButtonRef) {
+            // In overflow menu, lists should have role="menu"
+            return 'menu';
+        }
+
+        // If this is a child items list or parent items list, it should have role="group"
+        if (this.childItems || this.parentItems) {
+            return 'group';
+        }
+
+        if (navigation?.isSnapped$()) {
+            return 'menubar';
+        }
+        return this.role || 'tree';
+    });
+
+    /** Computed aria-label for group lists based on parent item's text content. */
+    readonly computedAriaLabel = computed(() => {
+        // Only provide aria-label for group role lists
+        if (this.computedRole() === 'group' && this._listItem) {
+            const parentLink = this._listItem.link$();
+            if (parentLink?.elementRef?.nativeElement) {
+                const textElement = parentLink.elementRef.nativeElement.querySelector('.fd-navigation__text');
+                if (textElement) {
+                    return textElement.textContent?.trim() || null;
+                }
+            }
+        }
+        return this.ariaLabel;
+    });
+
     /** List items. */
     readonly listItems$ = signal<Nullable<FdbNavigationListItem>[]>([]);
 
@@ -97,6 +166,14 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** @hidden */
     private readonly _navigationService = inject(NavigationService, {
+        optional: true
+    });
+
+    /**
+     * @hidden
+     * Parent navigation component.
+     */
+    private readonly _navigation = inject(FdbNavigation, {
         optional: true
     });
 

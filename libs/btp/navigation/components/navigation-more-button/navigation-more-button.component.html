@@ -1,8 +1,9 @@
 <div
-    aria-current="page"
     role="menuitem"
     class="fd-navigation__item"
     [attr.aria-expanded]="popoverOpen$()"
+    [attr.aria-haspopup]="'menu'"
+    [attr.aria-label]="'Displays additional navigation items that are hidden due to limited screen space'"
     aria-level="1"
     (click)="togglePopover(true)"
     (keydown)="_keydownPopoverToggle($event)"
@@ -19,11 +20,12 @@
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
         [placement]="_popoverPlacement$()"
     >
-        <fd-popover-body [ngClass]="_navigation.classList$()">
+        <fd-popover-body [ngClass]="_navigation.classList$()" role="menu">
             <ul
                 fdb-navigation-list
                 withKeyboardNavigation
                 [parentItems]="true"
+                [ariaLabel]="'Additional Navigation Items'"
                 class="fd-menu__list"
                 [listItems]="listItems"
                 [moreButtonRef]="this"

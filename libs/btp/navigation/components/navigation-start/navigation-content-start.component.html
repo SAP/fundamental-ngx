@@ -1,4 +1,9 @@
-<ul fdb-navigation-list [listItems]="visibleItems$()"></ul>
+<ul
+    fdb-navigation-list
+    [listItems]="visibleItems$()"
+    [ariaLabel]="ariaLabel"
+    [ariaRoleDescription]="ariaRoleDescription"
+></ul>
 @if (_showMoreButton$()) {
     <ul noGrow fdb-navigation-list role="menubar" #moreContainer>
         <li fdb-navigation-more-button [listItems]="hiddenItems$()"></li>

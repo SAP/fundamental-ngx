@@ -8,6 +8,7 @@ import {
     ContentChild,
     ContentChildren,
     ElementRef,
+    HostBinding,
     HostListener,
     Input,
     OnChanges,
@@ -64,6 +65,20 @@ export class NavigationComponent
     /** @hidden */
     @Input()
     class: string;
+
+    /**
+     * aria-label for the navigation.
+     */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: Nullable<string> = null;
+
+    /**
+     * aria-roledescription for the navigation.
+     */
+    @Input()
+    @HostBinding('attr.aria-roledescription')
+    ariaRoleDescription: Nullable<string> = null;
 
     /**
      * Navigation mode.
@@ -175,7 +190,7 @@ export class NavigationComponent
      * Main keyboard navigation handler.
      */
     @HostListener('keydown', ['$event'])
-    private _keyDownHandler(event: KeyboardEvent): void {
+    _keyDownHandler(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
             return;
         }
