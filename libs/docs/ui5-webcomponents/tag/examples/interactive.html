@@ -1,0 +1,17 @@
+<div class="fd-padding--sm">
+    <div class="fd-margin-top--sm">
+        <ui5-tag [interactive]="true" (ui5Click)="onTagClick()"> Clickable Tag </ui5-tag>
+    </div>
+
+    <div class="fd-margin-top--sm">
+        <ui5-tag [interactive]="true" design="Positive" (ui5Click)="onTagClick()"> Success Action </ui5-tag>
+    </div>
+
+    <div class="fd-margin-top--sm">
+        <ui5-tag [interactive]="true" design="Critical" (ui5Click)="onTagClick()"> Warning Action </ui5-tag>
+    </div>
+
+    <div class="fd-margin-top--sm">
+        <p>Click count: {{ clickCount() }}</p>
+    </div>
+</div>

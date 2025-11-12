@@ -1,0 +1,43 @@
+<div class="fd-container fd-padding--none">
+    @for (comparison of designComparisons(); track comparison.label) {
+    <div class="fd-row">
+        <div class="fd-col fd-col--3">
+            <strong>{{ comparison.label }}:</strong>
+            <br />
+            <small>{{ comparison.description }}</small>
+        </div>
+
+        <div class="fd-col fd-col--4">
+            <div class="fd-form-item">
+                <ui5-label>Textual Design:</ui5-label>
+                <ui5-switch
+                    design="Textual"
+                    [checked]="comparison.textualChecked"
+                    [textOn]="comparison.textOn"
+                    [textOff]="comparison.textOff"
+                    [accessibleName]="'Textual ' + comparison.description"
+                >
+                </ui5-switch>
+                <div class="fd-margin-top--xs">
+                    <small>Shows: "{{ comparison.textualChecked ? comparison.textOn : comparison.textOff }}"</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="fd-col fd-col--4">
+            <div class="fd-form-item">
+                <ui5-label>Graphical Design:</ui5-label>
+                <ui5-switch
+                    design="Graphical"
+                    [checked]="comparison.graphicalChecked"
+                    [accessibleName]="'Graphical ' + comparison.description"
+                >
+                </ui5-switch>
+                <div class="fd-margin-top--xs">
+                    <small>Shows: Icons (✓/✗)</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

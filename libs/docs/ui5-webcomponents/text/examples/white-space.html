@@ -1,0 +1,17 @@
+<div>
+    <h5>Method 1: Using HTML entities</h5>
+    <ui5-text style="white-space: pre; width: 300px"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;White spaces are preserved on this line.<br /><br />This line is preceded by an
+        empty line.<br />&nbsp;&nbsp;&nbsp;&nbsp;This line is preceded by a tab.</ui5-text
+    >
+</div>
+
+<div class="fd-margin-top--lg">
+    <h5>Method 2: Using Angular string interpolation</h5>
+    <ui5-text style="white-space: pre-wrap; width: 300px">{{ whitespaceText() }}</ui5-text>
+</div>
+
+<div class="fd-margin-top--lg">
+    <h5>Method 3: Using <code>innerHTML</code> binding</h5>
+    <ui5-text style="white-space: pre; width: 300px" [innerHTML]="htmlContent()"></ui5-text>
+</div>

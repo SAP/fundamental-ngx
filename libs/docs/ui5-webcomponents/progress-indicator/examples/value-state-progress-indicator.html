@@ -1,0 +1,69 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--md">All Value States</h4>
+        </div>
+    </div>
+
+    @for (stateConfig of valueStates(); track stateConfig.state) {
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--2">
+            <label class="fd-margin-end--sm">{{ stateConfig.state }}:</label>
+        </div>
+        <div class="fd-col fd-col--6">
+            <ui5-progress-indicator
+                [value]="stateConfig.value"
+                [valueState]="stateConfig.state"
+                [accessibleName]="stateConfig.description"
+            >
+            </ui5-progress-indicator>
+        </div>
+        <div class="fd-col fd-col--4">
+            <span class="fd-margin-start--sm">{{ stateConfig.scenario }}</span>
+        </div>
+    </div>
+    }
+
+    <div class="fd-row fd-margin-top--lg">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--sm">Interactive Value State Selection</h4>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--12">
+            <ui5-segmented-button>
+                @for (stateConfig of valueStates(); track stateConfig.state) {
+                <ui5-segmented-button-item (click)="setValueState(stateConfig.state)">
+                    {{ stateConfig.state }}
+                </ui5-segmented-button-item>
+                }
+            </ui5-segmented-button>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--2">
+            <label class="fd-margin-end--sm">Selected:</label>
+        </div>
+        <div class="fd-col fd-col--6">
+            <ui5-progress-indicator
+                [value]="getCurrentStateConfig().value"
+                [valueState]="selectedValueState()"
+                [accessibleName]="getCurrentStateConfig().description"
+            >
+            </ui5-progress-indicator>
+        </div>
+        <div class="fd-col fd-col--4">
+            <span class="fd-margin-start--sm">{{ getCurrentStateConfig().scenario }}</span>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <p class="fd-margin-top--sm">
+                <strong>Current State:</strong> {{ selectedValueState() }} - {{ getCurrentStateConfig().description }}
+            </p>
+        </div>
+    </div>
+</div>

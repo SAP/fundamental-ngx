@@ -71,6 +71,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
     },
     {
+        path: 'form',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/form').then(configureLibRoutes)
+    },
+    {
         path: 'icon',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/icon').then(configureLibRoutes)
     },
@@ -95,8 +99,21 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
     },
     {
+        path: 'panel',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/panel').then(configureLibRoutes)
+    },
+    {
         path: 'popover',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/popover').then(configureLibRoutes)
+    },
+    {
+        path: 'progress-indicator',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/progress-indicator').then(configureLibRoutes)
+    },
+    {
+        path: 'rating-indicator',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/rating-indicator').then(configureLibRoutes)
     },
     {
         path: 'segmented-button',
@@ -105,6 +122,26 @@ const componentRoutes = [
     {
         path: 'slider',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/slider').then(configureLibRoutes)
+    },
+    {
+        path: 'step-input',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/step-input').then(configureLibRoutes)
+    },
+    {
+        path: 'switch',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/switch').then(configureLibRoutes)
+    },
+    {
+        path: 'tag',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tag').then(configureLibRoutes)
+    },
+    {
+        path: 'text',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/text').then(configureLibRoutes)
+    },
+    {
+        path: 'text-area',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/text-area').then(configureLibRoutes)
     }
 ];
 

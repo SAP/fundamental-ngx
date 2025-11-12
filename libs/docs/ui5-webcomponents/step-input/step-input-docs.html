@@ -1,0 +1,38 @@
+<fd-docs-section-title id="basic" componentName="step-input"> Basic Step Input </fd-docs-section-title>
+<description>
+    Basic Step Input examples showing different configurations including default values, step increments, and
+    placeholder text. Users can increment/decrement values using the buttons or type directly into the input field.
+</description>
+<component-example>
+    <ui5-basic-step-input-sample></ui5-basic-step-input-sample>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"> </code-example>
+
+<fd-docs-section-title id="range" componentName="step-input"> Min/Max Range </fd-docs-section-title>
+<description>
+    Step Input components with minimum and maximum value constraints. The component prevents users from entering values
+    outside the defined range and disables increment/decrement buttons when limits are reached.
+</description>
+<component-example>
+    <ui5-range-step-input-sample></ui5-range-step-input-sample>
+</component-example>
+<code-example [exampleFiles]="rangeExamples()"> </code-example>
+
+<fd-docs-section-title id="precision" componentName="step-input">
+    Decimal Precision and Custom Steps
+</fd-docs-section-title>
+<description>
+    Step Input with decimal precision control using <code>valuePrecision</code> and custom step increments. This is
+    useful for financial calculations, measurements, or any scenario requiring precise decimal control.
+</description>
+<component-example>
+    <ui5-precision-step-input-sample></ui5-precision-step-input-sample>
+</component-example>
+<code-example [exampleFiles]="precisionExamples()"> </code-example>
+
+<fd-docs-section-title id="value-states" componentName="step-input"> States </fd-docs-section-title>
+<description> Step Input supports readonly, disabled as well as several semantic value states. </description>
+<component-example>
+    <ui5-value-state-step-input-sample></ui5-value-state-step-input-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExamples()"> </code-example>

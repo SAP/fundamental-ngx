@@ -20,13 +20,22 @@ export const API_FILES = {
     colorPalette: ['ColorPalette', 'ColorPaletteItem'],
     colorPicker: ['ColorPicker'],
     expandableText: ['ExpandableText'],
+    form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],
     input: ['Input'],
     label: ['Label'],
     link: ['Link'],
     list: ['List', 'ListItemCustom', 'ListItemGroup', 'ListItemStandard'],
     messageStrip: ['MessageStrip'],
+    panel: ['Panel'],
     popover: ['Popover'],
+    progressIndicator: ['ProgressIndicator'],
+    ratingIndicator: ['RatingIndicator'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
-    slider: ['Slider', 'RangeSlider']
+    slider: ['Slider', 'RangeSlider'],
+    stepInput: ['StepInput'],
+    switch: ['Switch'],
+    tag: ['Tag'],
+    text: ['Text'],
+    textArea: ['TextArea']
 };

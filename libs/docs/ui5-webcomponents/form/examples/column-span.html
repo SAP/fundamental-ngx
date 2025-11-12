@@ -1,0 +1,30 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col"><ui5-label show-colon>Form Layout</ui5-label><ui5-text>S1 M3 L4 XL4</ui5-text></div>
+        <div class="fd-col"><ui5-label show-colon>Label Span</ui5-label><ui5-text>S12 M12 L12 XL12</ui5-text></div>
+        <div class="fd-col">
+            <ui5-label show-colon>Page Size</ui5-label><ui5-text id="txtLayout">{{pageSize()}}</ui5-text>
+        </div>
+        <ui5-slider id="slider" [value]="sliderValue()" (ui5Change)="onSliderChange($event)"></ui5-slider>
+    </div>
+
+    <div class="fd-row" id="container" style="max-width: 1500px; width: 1250px; overflow-x: auto">
+        <div class="fd-col" [ngStyle]="{'min-width': containerWidth()}">
+            <ui5-form headerText="With column span" layout="S2 M2 L4 XL6" labelSpan="S12 M12 L12 XL12">
+                @for (formField of formFields(); track formField.formGroupTitle; let i = $index) {
+                <ui5-form-group
+                    headerText="{{formField.formGroupTitle}} - column-span={{i === 0 ? 1 : 2}}"
+                    [columnSpan]="i === 0 ? 1 : 2"
+                >
+                    @for (formItem of formField.formGroupItems; track formItem.id) {
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                        <ui5-text>{{ formItem.value }}</ui5-text>
+                    </ui5-form-item>
+                    }
+                </ui5-form-group>
+                }
+            </ui5-form>
+        </div>
+    </div>
+</div>
