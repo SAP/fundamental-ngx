@@ -129,6 +129,10 @@
         {
             "url": "ui5-webcomponents/text-area",
             "name": "TextArea"
+        },
+        {
+            "url": "ui5-webcomponents/time-picker",
+            "name": "TimePicker"
         }
     ]
 }

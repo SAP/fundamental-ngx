@@ -1,0 +1,19 @@
+<div class="fd-container">
+    <div class="fd-row">
+        @for (example of stateExamples(); track $index) {
+        <div class="fd-col fd-col--4">
+            <div class="fd-form-item" [ngStyle]="{'width': '20rem'}">
+                <label class="fd-form-label">{{ example.title }}</label>
+                <ui5-time-picker
+                    [value]="example.value()"
+                    [disabled]="example.disabled"
+                    [readonly]="example.readonly"
+                    [placeholder]="'Select time for ' + example.title.toLowerCase()"
+                >
+                </ui5-time-picker>
+                <small class="fd-form-message">{{ example.description }}</small>
+            </div>
+        </div>
+        }
+    </div>
+</div>

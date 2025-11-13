@@ -37,5 +37,6 @@ export const API_FILES = {
     switch: ['Switch'],
     tag: ['Tag'],
     text: ['Text'],
-    textArea: ['TextArea']
+    textArea: ['TextArea'],
+    timePicker: ['TimePicker']
 };

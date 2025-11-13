@@ -1,0 +1,22 @@
+<div class="fd-container">
+    <div class="fd-row">
+        @for (valueState of valueStates(); track valueState.state) {
+        <div class="fd-col fd-col--2">
+            <div class="fd-form-item">
+                <label class="fd-form-label">{{ valueState.label }}</label>
+                <ui5-time-picker
+                    [valueState]="valueState.state"
+                    [value]="stateValues()[valueState.state]"
+                    [placeholder]="'Enter time for ' + valueState.state"
+                    (ui5Change)="onStateChange($event, valueState.state)"
+                >
+                </ui5-time-picker>
+                <small class="fd-form-message">{{ valueState.description }}</small>
+                <div class="fd-margin-top--tiny">
+                    <small>Value: "{{ stateValues()[valueState.state] }}"</small>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
