@@ -148,10 +148,14 @@ function generateInputs(data: CEM.CustomElementDeclaration, enums: string[], cla
     return inputs.join('\n');
 }
 
-function generateReadonlyProperties(data: CEM.CustomElementDeclaration): string {
+function generateProperties(data: CEM.CustomElementDeclaration): {
+    readonlyProperties: string;
+    privateProperties: string;
+} {
     const readonlyMembers = (data.members ?? []).filter(isReadonlyField);
     const events = data.events || [];
     const properties: string[] = [];
+    const privateProperties: string[] = [];
 
     readonlyMembers.forEach((member) => {
         const camelCaseName = kebabToCamelCase(member.name);
@@ -164,10 +168,12 @@ function generateReadonlyProperties(data: CEM.CustomElementDeclaration): string 
             const typeString = member.type?.text || 'any';
             const defaultValue = member.default || (typeString.includes('Array') ? '[]' : 'undefined');
 
-            properties.push(`
+            privateProperties.push(`
   // Internal signal to track ${camelCaseName} from ${relatedEvent.name} events
   private _${camelCaseName}Signal = signal<${typeString}>(${defaultValue});
+`);
 
+            properties.push(`
   /**
    * ${member.description || `Returns ${member.name}.`}
    * @readonly This property is managed by the web component and updates reactively.
@@ -190,7 +196,7 @@ function generateReadonlyProperties(data: CEM.CustomElementDeclaration): string 
         }
     });
 
-    return properties.join('\n');
+    return { readonlyProperties: properties.join('\n'), privateProperties: privateProperties.join('\n') };
 }
 
 function generateOutputs(data: CEM.CustomElementDeclaration, className: string): string {
@@ -218,6 +224,7 @@ export function componentTemplate(
     const { componentImports, componentEnums } = generateTypeImports(data, allEnums, enumPackageMapping);
     const tagName = data.tagName || '';
     const className = data.name;
+    const { readonlyProperties, privateProperties } = generateProperties(data);
     const outputEvents = data.events || [];
     const shouldHostCVA = hasCvaHostDirective(data); // false; // Temporarily disabled to validate build
 
@@ -356,13 +363,13 @@ ${cvaHostDirective}
 })
 export class ${className} implements AfterViewInit {
 ${generateInputs(data, componentEnums, className)} // className is now passed
-${generateReadonlyProperties(data)}
+${readonlyProperties}
 
 ${generateOutputs(data, className)}
 
   public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
-
+${privateProperties}
   get element(): _${className} {
     return this.elementRef.nativeElement;
   }
@@ -384,7 +391,7 @@ ${(() => {
             const fallbackValue = member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined');
             return `    // Initialize ${camelCaseName} signal with current state using delayed initialization
     // to handle web component timing properly
-    const initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)} = () => {
+    const initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)} = (): void => {
       const currentValue = wcElement.${member.name} || ${fallbackValue};
       if (JSON.stringify(currentValue) !== JSON.stringify(this._${camelCaseName}Signal())) {
         this._${camelCaseName}Signal.set(currentValue);
