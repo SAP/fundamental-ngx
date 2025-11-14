@@ -12,7 +12,9 @@ import 'dayjs/locale/ar';
 import 'dayjs/locale/bg';
 import 'dayjs/locale/de';
 import 'dayjs/locale/en';
+import 'dayjs/locale/fa';
 import 'dayjs/locale/fr';
+import 'dayjs/locale/ja';
 
 @Component({
     selector: 'fd-date-picker-dayjs-adapter-example',
@@ -45,7 +47,9 @@ export class DatePickerDayjsAdapterExampleComponent implements AfterViewInit {
         { value: 'fr', label: 'French' },
         { value: 'de', label: 'Deutsch' },
         { value: 'bg', label: 'Bulgarian' },
-        { value: 'ar', label: 'Arabic' }
+        { value: 'ar', label: 'Arabic' },
+        { value: 'ja', label: 'Japanese' },
+        { value: 'fa', label: 'Persian' }
     ];
 
     constructor(private datetimeAdapter: DatetimeAdapter<Dayjs>) {}
