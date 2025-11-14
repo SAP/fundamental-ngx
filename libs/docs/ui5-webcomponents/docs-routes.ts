@@ -150,6 +150,10 @@ const componentRoutes = [
     {
         path: 'title',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/title').then(configureLibRoutes)
+    },
+    {
+        path: 'toast',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/toast').then(configureLibRoutes)
     }
 ];
 
