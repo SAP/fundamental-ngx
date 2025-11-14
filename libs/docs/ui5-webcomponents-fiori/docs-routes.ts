@@ -19,6 +19,16 @@ const configureLibRoutes = configureRoutes(API_FILES);
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 const componentRoutes = [
     {
+        path: 'barcode-scanner-dialog',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/barcode-scanner-dialog').then(configureLibRoutes)
+    },
+    {
+        path: 'dynamic-page',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/dynamic-page').then(configureLibRoutes)
+    },
+    {
         path: 'media-gallery',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/media-gallery').then(configureLibRoutes)

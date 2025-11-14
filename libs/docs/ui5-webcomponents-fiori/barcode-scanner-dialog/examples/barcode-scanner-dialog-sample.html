@@ -1,0 +1,45 @@
+<section aria-labelledby="barcode-scanner-basic" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="barcode-scanner-basic" class="fd-section__title">Basic Barcode Scanner</h2>
+    </div>
+    <div class="sap-margin-bottom-small">
+        <ui5-button (ui5Click)="openBasicScanner()" design="Emphasized"> Open Basic Scanner </ui5-button>
+        <ui5-checkbox
+            class="sap-margin-begin-small"
+            [checked]="isAutoCloseEnabled()"
+            (ui5Change)="toggleAutoClose()"
+            text="Auto-close on success"
+        >
+        </ui5-checkbox>
+    </div>
+
+    @if (lastScanResult()) {
+    <ui5-message-strip design="Positive" class="sap-margin-bottom-small">
+        <strong>Last Scan Result:</strong> {{ lastScanResult()?.text }} <br /><small class="sap-text-color-neutral"
+            >Scanned at: {{ lastScanResult()?.timestamp | date:'medium' }}</small
+        >
+    </ui5-message-strip>
+    }
+
+    <div class="sap-display-flex sap-flex-wrap">
+        <ui5-tag class="sap-margin-end-tiny sap-margin-bottom-tiny" design="Set2">
+            Total Scans: {{ scanCount() }}
+        </ui5-tag>
+        <ui5-tag class="sap-margin-end-tiny sap-margin-bottom-tiny" design="Set1">
+            Success Rate: {{ scanSuccessRate() }}%
+        </ui5-tag>
+    </div>
+
+    <ui5-barcode-scanner-dialog
+        [open]="isBasicScannerOpen()"
+        (ui5Close)="onBasicScannerClose()"
+        (ui5ScanSuccess)="onBasicScanSuccess($event)"
+        (ui5ScanError)="onBasicScanError($event)"
+        aria-label="Basic barcode scanner dialog"
+    >
+    </ui5-barcode-scanner-dialog>
+
+    <p class="sap-text-color-neutral sap-margin-top-small" style="font-style: italic">
+        Basic scanner demonstrates simple open/close functionality with success and error handling.
+    </p>
+</section>

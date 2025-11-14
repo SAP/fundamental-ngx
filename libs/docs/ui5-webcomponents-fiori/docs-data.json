@@ -7,6 +7,14 @@
     ],
     "components": [
         {
+            "url": "ui5-webcomponents-fiori/barcode-scanner-dialog",
+            "name": "Barcode Scanner Dialog"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/dynamic-page",
+            "name": "Dynamic Page"
+        },
+        {
             "url": "ui5-webcomponents-fiori/media-gallery",
             "name": "Media Gallery"
         },

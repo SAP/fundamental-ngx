@@ -6,6 +6,8 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
+    barcodeScannerDialog: ['BarcodeScannerDialog'],
+    dynamicPage: ['DynamicPage', 'DynamicPageHeader', 'DynamicPageTitle'],
     mediaGallery: ['MediaGallery'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };
