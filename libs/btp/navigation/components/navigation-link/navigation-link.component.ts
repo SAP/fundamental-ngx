@@ -4,14 +4,15 @@ import {
     Component,
     Directive,
     ElementRef,
-    HostBinding,
     HostListener,
     Input,
     OnDestroy,
+    Renderer2,
     Signal,
     TemplateRef,
     ViewEncapsulation,
     booleanAttribute,
+    effect,
     inject
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -72,12 +73,6 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     @Input({ transform: booleanAttribute })
     quickCreate = false;
 
-    /** @hidden */
-    @HostBinding('attr.tabindex')
-    private get _tabIndex(): number {
-        return this._listItemComponent?.popoverOpen$() || this._navigation.getActiveItem()?.link$() === this ? 0 : -1;
-    }
-
     /** Whether the link is inside popover. */
     get inPopover(): boolean {
         return !!this.elementRef.nativeElement.parentElement?.classList.contains('fd-navigation__item--title');
@@ -115,6 +110,29 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     private readonly _navigation = inject(FdbNavigation);
 
     /** @hidden */
+    private _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private _tabIndexEffect = effect(() => {
+        // Track all the signals that affect tabindex computation
+        this._navigation.getActiveItem(); // Track active item changes
+        const isParentPopoverOpen = this._listItemComponent?.popoverOpen$();
+        const isGrandparentPopoverOpen = this._listItemComponent?.parentListItem?.popoverOpen$();
+
+        const hasOpenPopover = isParentPopoverOpen || isGrandparentPopoverOpen;
+
+        if (hasOpenPopover) {
+            // For popover cases, update immediately to ensure tabindex is set before focus management
+            this._updateTabIndex();
+        } else {
+            // For other cases, use setTimeout to avoid expression changed errors
+            setTimeout(() => {
+                this._updateTabIndex();
+            }, 0);
+        }
+    });
+
+    /** @hidden */
     constructor() {
         super();
         this._listItemComponent?.registerLink(this);
@@ -125,7 +143,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostListener('click', ['$event'])
-    private _clickHandler(event: Event): void {
+    _clickHandler(event: Event): void {
         // Check if this is a NavigationMoreButtonComponent (More button itself)
         if (
             this._listItemComponent &&
@@ -169,7 +187,8 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    private _keyDownHandler(event: KeyboardEvent): void {
+    _keyDownHandler(event: Event): void {
+        const keyboardEvent = event as KeyboardEvent;
         // Simple disabled check at the start
         const isDisabled = this._listItemComponent?.disabled$?.() || false;
         if (isDisabled) {
@@ -177,7 +196,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
         }
 
         // Handle Space and Enter for selection (same as click behavior)
-        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+        if (KeyUtil.isKeyCode(keyboardEvent, [SPACE, ENTER])) {
             // Check if this is a NavigationMoreButtonComponent (More button itself)
             if (
                 this._listItemComponent &&
@@ -188,7 +207,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             }
 
             // Prevent default scrolling behavior for Space
-            event.preventDefault();
+            keyboardEvent.preventDefault();
 
             if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
                 this._navigation.closePopups();
@@ -216,12 +235,12 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             return;
         }
 
-        if (this.inPopover && KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+        if (this.inPopover && KeyUtil.isKeyCode(keyboardEvent, DOWN_ARROW)) {
             this._listItemComponent?.popoverLinkArrowDown();
             return;
         }
 
-        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
+        if (!KeyUtil.isKeyCode(keyboardEvent, [LEFT_ARROW, RIGHT_ARROW])) {
             return;
         }
 
@@ -232,12 +251,38 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
         const expansionKey = this._rtl?.rtl.value ? LEFT_ARROW : RIGHT_ARROW;
 
-        this._listItemComponent?.keyboardExpanded(KeyUtil.isKeyCode(event, expansionKey));
+        this._listItemComponent?.keyboardExpanded(KeyUtil.isKeyCode(keyboardEvent, expansionKey));
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._listItemComponent?.unregisterLink(this);
+    }
+
+    /** @hidden */
+    private _updateTabIndex(): void {
+        try {
+            // Check if this link should have tabindex=0
+            const isActiveItem = this._navigation.getActiveItem()?.link$() === this;
+
+            // Check if any ancestor has an open popover
+            const isParentPopoverOpen = this._listItemComponent?.popoverOpen$();
+            const isGrandparentPopoverOpen = this._listItemComponent?.parentListItem?.popoverOpen$();
+
+            // When a popover is open, all links in the popover hierarchy should be focusable
+            if (isParentPopoverOpen || isGrandparentPopoverOpen) {
+                // All links in popover context should be focusable (except disabled ones)
+                const tabIndex = 0;
+                this._renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', tabIndex.toString());
+            } else {
+                // Normal case: active item gets tabindex=0, others get -1
+                const tabIndex = isActiveItem ? 0 : -1;
+                this._renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', tabIndex.toString());
+            }
+        } catch {
+            // Fallback to -1 if there's any issue during evaluation
+            this._renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
+        }
     }
 
     /** @hidden */

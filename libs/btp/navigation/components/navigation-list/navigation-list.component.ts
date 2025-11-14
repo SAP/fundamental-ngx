@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
+    ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
@@ -13,10 +14,12 @@ import {
     OnChanges,
     OnDestroy,
     Output,
+    Renderer2,
     SimpleChanges,
     ViewEncapsulation,
     booleanAttribute,
     computed,
+    effect,
     inject,
     signal
 } from '@angular/core';
@@ -67,14 +70,6 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('ariaLabel')
     ariaLabel: Nullable<string> = null;
-
-    /**
-     * Computed aria-label that uses parent item's text for group lists.
-     */
-    @HostBinding('attr.aria-label')
-    get _ariaLabel(): Nullable<string> {
-        return this.computedAriaLabel();
-    }
 
     /**
      * aria-roledescription for the navigation list.
@@ -142,17 +137,22 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** Computed aria-label for group lists based on parent item's text content. */
     readonly computedAriaLabel = computed(() => {
-        // Only provide aria-label for group role lists
-        if (this.computedRole() === 'group' && this._listItem) {
-            const parentLink = this._listItem.link$();
-            if (parentLink?.elementRef?.nativeElement) {
-                const textElement = parentLink.elementRef.nativeElement.querySelector('.fd-navigation__text');
-                if (textElement) {
-                    return textElement.textContent?.trim() || null;
+        try {
+            // Only provide aria-label for group role lists
+            if (this.computedRole() === 'group' && this._listItem) {
+                const parentLink = this._listItem.link$();
+                if (parentLink?.elementRef?.nativeElement) {
+                    const textElement = parentLink.elementRef.nativeElement.querySelector('.fd-navigation__text');
+                    if (textElement) {
+                        return textElement.textContent?.trim() || null;
+                    }
                 }
             }
+            return this.ariaLabel;
+        } catch {
+            // Fallback to default ariaLabel if DOM is not ready or there's any error
+            return this.ariaLabel;
         }
-        return this.ariaLabel;
     });
 
     /** List items. */
@@ -197,6 +197,21 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     private get _activeItemIndex(): number {
         return this._keyManager?.activeItemIndex ?? -1;
     }
+
+    /** @hidden */
+    private _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private _ariaLabelEffect = effect(() => {
+        // This effect runs whenever the signals change, but we need to ensure
+        // it doesn't run during the initial change detection cycle
+        setTimeout(() => {
+            this._updateAriaLabel();
+        }, 0);
+    });
 
     /** @hidden */
     constructor() {
@@ -267,6 +282,8 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         this._navigationService?.currentItem$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((item) => {
             this._keyManager?.setActiveItem(item);
         });
+
+        // The reactive effect will handle aria-label updates
     }
 
     /** @hidden */
@@ -280,6 +297,25 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     ngOnDestroy(): void {
         this._listItem?.unregisterChildList(this);
         this._keyManager?.destroy();
+    }
+
+    /**
+     * Updates aria-label attribute manually to avoid expression changed errors
+     */
+    private _updateAriaLabel(): void {
+        try {
+            const ariaLabel = this.computedAriaLabel();
+            if (ariaLabel !== null && ariaLabel !== undefined) {
+                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-label', ariaLabel);
+            } else {
+                this._renderer.removeAttribute(this._elementRef.nativeElement, 'aria-label');
+            }
+        } catch {
+            // Fallback to default ariaLabel if there's any issue during evaluation
+            if (this.ariaLabel) {
+                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-label', this.ariaLabel);
+            }
+        }
     }
 
     /** @hidden */

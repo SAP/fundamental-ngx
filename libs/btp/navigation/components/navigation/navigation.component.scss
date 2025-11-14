@@ -174,3 +174,29 @@ $block: fd-navigation;
 .fd-popover__body.fd-navigation__list-container.fd-navigation__list-wrapper {
     max-width: 40rem;
 }
+
+.fd-navigation__text {
+    margin-block: 0.5rem;
+}
+
+.fd-navigation.fd-navigation--vertical.fd-navigation--popup {
+    --fdNavigation_Border_Radius: 0;
+    --fdNavigation_Box_Shadow: none;
+    --fdNavigation_Height: 100%;
+}
+
+.fd-navigation.is-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fd-navigation.fd-navigation--expanded.is-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}

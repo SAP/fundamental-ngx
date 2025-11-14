@@ -761,7 +761,33 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this.popoverOpen$.set(isOpen);
         if (isOpen) {
             this._onZoneStable().subscribe(() => {
-                popover.popoverBody._focusFirstTabbableElement(true);
+                // Force update of tabindex for all child links before focusing
+                this._ensureChildTabindexUpdated();
+                setTimeout(() => {
+                    // Manual focus management - focus first navigation link in popover
+                    try {
+                        const popoverBodyElement = popover.popoverBody?._elementRef?.nativeElement;
+                        if (popoverBodyElement) {
+                            // Look specifically for navigation links, not just any tabbable element
+                            const navigationLinks = popoverBodyElement.querySelectorAll(
+                                'a.fd-navigation__link[tabindex="0"]'
+                            );
+                            if (navigationLinks.length > 0) {
+                                (navigationLinks[0] as HTMLElement).focus();
+                            } else {
+                                // Fallback to any tabbable element
+                                const tabbableElements = popoverBodyElement.querySelectorAll('[tabindex="0"]');
+                                if (tabbableElements.length > 0) {
+                                    (tabbableElements[0] as HTMLElement).focus();
+                                }
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error focusing in popover:', error);
+                        // Fallback to original method
+                        popover.popoverBody._focusFirstTabbableElement(true);
+                    }
+                }, 0);
             });
         } else {
             // When popover closes, return focus to the parent link (for snapped state)
@@ -805,6 +831,18 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     private _focusPopoverLink(): void {
         this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
+    }
+
+    /** @hidden */
+    private _ensureChildTabindexUpdated(): void {
+        // When popover is open, all links should be focusable
+        this._links.forEach((link) => {
+            if (link.elementRef?.nativeElement) {
+                // Simple logic: if any popover is open in the hierarchy, all links are focusable
+                const tabIndex = this.popoverOpen$() ? 0 : -1;
+                link.elementRef.nativeElement.setAttribute('tabindex', tabIndex.toString());
+            }
+        });
     }
 
     /** @hidden */

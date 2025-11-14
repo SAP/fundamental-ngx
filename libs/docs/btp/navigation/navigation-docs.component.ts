@@ -9,6 +9,8 @@ import {
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
+import { NavigationDesktopExampleComponent } from './examples/desktop/desktop.component';
+import { NavigationOverlayExampleComponent } from './examples/overlay/overlay.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
 import { SelectionModeComponent } from './examples/selection-mode/selection-mode.component';
 
@@ -22,7 +24,9 @@ import { SelectionModeComponent } from './examples/selection-mode/selection-mode
         NavigationBasicExampleComponent,
         SeparatorComponent,
         NavigationParentItemLinkComponent,
-        SelectionModeComponent
+        SelectionModeComponent,
+        NavigationOverlayExampleComponent,
+        NavigationDesktopExampleComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -48,5 +52,21 @@ export class NavigationDocsComponent {
             selector: 'selection-mode'
         }),
         getExampleFile('selection-mode/selection-mode.component.html')
+    ];
+
+    desktopExample: ExampleFile[] = [
+        getExampleFile('desktop/desktop.component.ts', {
+            component: 'NavigationDesktopExampleComponent',
+            selector: 'desktop'
+        }),
+        getExampleFile('desktop/desktop.component.html')
+    ];
+
+    overlayExample: ExampleFile[] = [
+        getExampleFile('overlay/overlay.component.ts', {
+            component: 'NavigationOverlayExampleComponent',
+            selector: 'overlay'
+        }),
+        getExampleFile('overlay/overlay.component.html')
     ];
 }

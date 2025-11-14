@@ -167,34 +167,3 @@
         [disabled]="selectionMode !== 'click'"
     ></button>
 </div>
-
-<p><strong>Instructions:</strong></p>
-<ul>
-    <li><strong>Router-based mode:</strong> Selection is determined by router link activation (default behavior)</li>
-    <li>
-        <strong>Click-based mode:</strong> Smart selection based on item type:
-        <ul>
-            <li><strong>Leaf items</strong> (e.g., "Home", "All Leads"): Clickable and selectable</li>
-            <li>
-                <strong>Group headers</strong> (e.g., "Sales", "Reports and Analytics"): Only expand/collapse, not
-                selectable
-            </li>
-            <li><strong>Parent items without links</strong> (e.g., "Leads"): Only expand/collapse, not selectable</li>
-            <li>
-                <strong>Two-zone items with links</strong> (e.g., "Opportunities"): Text area is selectable, expander
-                button expands/collapses
-            </li>
-            <li><strong>Disabled items</strong>: Not interactive in either mode</li>
-        </ul>
-    </li>
-</ul>
-
-<p><strong>ID-based Selection:</strong></p>
-<ul>
-    <li>
-        <strong>Programmatic Selection:</strong> Use <code>setSelectedItemById(id)</code> to select items by their ID
-    </li>
-    <li>
-        <strong>Getting Items:</strong> Use <code>getNavigationItemById(id)</code> to retrieve specific navigation items
-    </li>
-</ul>

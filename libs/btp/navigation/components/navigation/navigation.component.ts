@@ -16,6 +16,7 @@ import {
     OnInit,
     QueryList,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     effect,
     inject,
@@ -85,6 +86,12 @@ export class NavigationComponent
      */
     @Input()
     mode: FdbViewMode = '';
+
+    /**
+     * Navigation mode.
+     */
+    @Input({ transform: booleanAttribute })
+    isOverlay = false;
 
     /**
      * Navigation state.
@@ -179,7 +186,8 @@ export class NavigationComponent
                 this.class,
                 'fd-navigation',
                 this.mode === '' ? 'fd-navigation--compact' : '',
-                `fd-navigation--${this.state}`
+                `fd-navigation--${this.state}`,
+                this.isOverlay && this.state === 'expanded' ? 'is-overlay' : ''
             ].filter((k) => !!k)
         );
         return [...this.classList$(), `fd-navigation--${this.type}`];

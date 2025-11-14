@@ -1,0 +1,168 @@
+<div fdbToolLayout>
+    <div fdbToolLayoutContainer>
+        <div fdbToolLayoutHeaderContainer>
+            <fd-shellbar [showNavigationButton]="true" [navigationButtonTemplate]="navButtonTpl">
+                <fd-shellbar-branding [interactiveBranding]="true">
+                    <fd-shellbar-logo>
+                        <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+                    </fd-shellbar-logo>
+                    <fd-shellbar-title>Product Identifier</fd-shellbar-title>
+                </fd-shellbar-branding>
+            </fd-shellbar>
+        </div>
+    </div>
+
+    <div fdbToolLayoutContainer>
+        <div fdbToolLayoutContentContainer>
+            <div [style.width.%]="100" [style.height.px]="800" [style.background-color]="'#00677f'">
+                <div style="color: white; padding: 20px">
+                    <p>Mobile mode: {{ isMobile() }}</p>
+                    <p>Window width: {{ getCurrentWidth() }}px</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- navigationButtonTemplate -->
+<ng-template #navButtonTpl>
+    <button
+        [fdPopoverTrigger]="currentPopover"
+        class="fd-shellbar__button"
+        fd-button
+        fdType="transparent"
+        glyph="menu2"
+        [attr.title]="'Navigation Menu'"
+        [attr.aria-label]="'Navigation Menu'"
+    ></button>
+</ng-template>
+
+<!-- Desktop popover -->
+@if (!isMobile()) {
+    <fd-popover #desktopPopover [mobile]="false" [noArrow]="false" [disableScrollbar]="true">
+        <fd-popover-body>
+            <ng-container [ngTemplateOutlet]="sideNavigationTemplate"></ng-container>
+        </fd-popover-body>
+    </fd-popover>
+}
+
+<!-- Mobile popover -->
+@if (isMobile()) {
+    <fd-popover #mobilePopover [mobile]="true" [mobileConfig]="{ hasCloseButton: true }">
+        <ng-template #popoverBodyContent>
+            <ng-container [ngTemplateOutlet]="sideNavigationTemplate"></ng-container>
+        </ng-template>
+    </fd-popover>
+}
+
+<!-- Side navigation template -->
+<ng-template #sideNavigationTemplate>
+    <fdb-navigation
+        state="popup"
+        [mode]="isMobile() ? 'phone' : ''"
+        selectionMode="click"
+        [style.max-height]="isMobile() ? '100%' : '800px'"
+        ariaLabel="Main Navigation in Popup"
+        ariaRoleDescription="Side Navigation"
+    >
+        <fdb-navigation-content-start ariaLabel="Primary Navigation Menu" ariaRoleDescription="Navigation List Tree">
+            <fdb-navigation-list-item selected id="nav-home">
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item id="nav-favourites">
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item id="nav-recent">
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent</a>
+            </fdb-navigation-list-item>
+
+            <fdb-navigation-list-item id="nav-sales" group expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
+
+                <fdb-navigation-list-item id="nav-leads" expanded>
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
+                    <fdb-navigation-list-item id="nav-all-leads">
+                        <a fdb-navigation-link *fdbNavigationLinkRef>All Leads</a>
+                    </fdb-navigation-list-item>
+                    <fdb-navigation-list-item id="nav-lead-sources">
+                        <a fdb-navigation-link *fdbNavigationLinkRef>Lead Sources</a>
+                    </fdb-navigation-list-item>
+                </fdb-navigation-list-item>
+
+                <fdb-navigation-list-item id="nav-opportunities" expanded>
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="opportunities">Opportunities</a>
+                    <fdb-navigation-list-item id="nav-all-opportunities">
+                        <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
+                    </fdb-navigation-list-item>
+                    <fdb-navigation-list-item id="nav-team-pipeline">
+                        <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
+                    </fdb-navigation-list-item>
+                </fdb-navigation-list-item>
+
+                <fdb-navigation-list-item id="nav-sales-quotes">
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="sales-quote">Sales Quotes</a>
+                    <fdb-navigation-list-item id="nav-all-quotes">
+                        <a fdb-navigation-link *fdbNavigationLinkRef>All Quotes</a>
+                    </fdb-navigation-list-item>
+                    <fdb-navigation-list-item id="nav-reports">
+                        <a fdb-navigation-link *fdbNavigationLinkRef>Reports</a>
+                    </fdb-navigation-list-item>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item separator />
+
+            <fdb-navigation-list-item id="nav-reports-analytics" group expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Reports and Analytics</a>
+
+                <fdb-navigation-list-item id="nav-sales-reports">
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="manager-insight">Sales Reports</a>
+                </fdb-navigation-list-item>
+
+                <fdb-navigation-list-item id="nav-performance-reports">
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="kpi-corporate-performance"
+                        >Performance Reports</a
+                    >
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item separator />
+
+            <fdb-navigation-list-item id="nav-customer-management" group>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Customer Management</a>
+
+                <fdb-navigation-list-item id="nav-contacts">
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="contacts">Contacts</a>
+                </fdb-navigation-list-item>
+
+                <fdb-navigation-list-item id="nav-companies">
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="company-view">Companies</a>
+                </fdb-navigation-list-item>
+
+                <fdb-navigation-list-item id="nav-partners">
+                    <a fdb-navigation-link *fdbNavigationLinkRef glyph="citizen-connect">Partners</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item separator />
+
+            <fdb-navigation-list-item id="nav-task-manager">
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="task">Task Manager</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-content-start>
+        <fdb-navigation-content-end ariaLabel="Footer Navigation Menu" ariaRoleDescription="Navigation List Tree">
+            <fdb-navigation-list-item id="nav-quick-create" quickCreate>
+                <button
+                    fdb-navigation-link
+                    quickCreate
+                    glyph="write-new"
+                    aria-label="Quick Create"
+                    *fdbNavigationLinkRef
+                    (click)="onQuickCreateClick()"
+                >
+                    Create Ticket
+                </button>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item id="nav-dashboard">
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="bbyd-dashboard">Dashboard</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-content-end>
+    </fdb-navigation>
+</ng-template>
