@@ -1,26 +1,18 @@
 {
+    "extends": "../../../../tsconfig.base.json",
+    "files": [],
+    "include": ["**/*.ts"],
     "compilerOptions": {
-        "target": "ES2022",
-        "useDefineForClassFields": false,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "noImplicitOverride": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true
+        "noImplicitReturns": false,
+        "noFallthroughCasesInSwitch": true,
+        "target": "es2020",
+        "outDir": "../../../../dist/out-tsc",
+        "declaration": true,
+        "declarationMap": true,
+        "inlineSources": true,
+        "types": []
     },
-    "files": [],
-    "include": [],
-    "references": [
-        {
-            "path": "./tsconfig.lib.json"
-        }
-    ],
-    "extends": "../../../../tsconfig.base.json",
-    "angularCompilerOptions": {
-        "enableI18nLegacyMessageIdFormat": false,
-        "strictInjectionParameters": true,
-        "strictInputAccessModifiers": true,
-        "strictTemplates": true
-    }
+    "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }
