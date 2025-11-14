@@ -19,9 +19,6 @@ import {
     ToolLayoutHeaderContainerDirective,
     ToolLayoutNavigationContainerDirective
 } from '@fundamental-ngx/btp/tool-layout';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
-
 import { ShellbarComponent, ShellbarModule } from '@fundamental-ngx/core/shellbar';
 
 export interface ExampleNavigationItem {
@@ -37,8 +34,6 @@ export interface ExampleNavigationItem {
     imports: [
         RouterLink,
         FormsModule,
-        ButtonComponent,
-        SegmentedButtonComponent,
         ToolLayoutComponent,
         ToolLayoutContainerDirective,
         ToolLayoutContentContainerDirective,
@@ -54,6 +49,7 @@ export interface ExampleNavigationItem {
 export class NavigationDesktopExampleComponent implements OnInit, OnDestroy {
     state: FdbNavigationState = 'expanded';
     mode: FdbViewMode = '';
+    showNavigation = signal(true);
 
     isMobile = signal(false);
 
@@ -67,8 +63,24 @@ export class NavigationDesktopExampleComponent implements OnInit, OnDestroy {
         const initialMatch = window.matchMedia(this.mediaQuery).matches;
         this.isMobile.set(initialMatch);
 
+        // Set initial navigation visibility based on mobile mode
+        if (initialMatch) {
+            this.showNavigation.set(false); // Start hidden in mobile mode
+        }
+
         this.breakpointSubscription = this.breakpointObserver.observe([this.mediaQuery]).subscribe((result) => {
             this.isMobile.set(result.matches);
+
+            // Update navigation visibility when switching between mobile and desktop
+            if (result.matches) {
+                // Switching to mobile - hide navigation
+                this.showNavigation.set(false);
+                this.state = 'expanded'; // Always use expanded when shown in mobile
+            } else {
+                // Switching to desktop - show navigation
+                this.showNavigation.set(true);
+                this.state = 'expanded';
+            }
         });
     }
 
@@ -87,6 +99,13 @@ export class NavigationDesktopExampleComponent implements OnInit, OnDestroy {
     }
 
     toggleSideNavState(): void {
-        this.state = this.state === 'expanded' ? 'snapped' : 'expanded';
+        if (this.isMobile()) {
+            // In mobile mode, toggle navigation visibility (always expanded when shown)
+            this.showNavigation.set(!this.showNavigation());
+            this.state = 'expanded'; // Always use expanded state in mobile mode
+        } else {
+            // In desktop mode, toggle between expanded and snapped
+            this.state = this.state === 'expanded' ? 'snapped' : 'expanded';
+        }
     }
 }

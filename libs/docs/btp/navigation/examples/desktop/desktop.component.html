@@ -1,4 +1,4 @@
-<div fdbToolLayout>
+<div fdbToolLayout noGaps>
     <div fdbToolLayoutContainer>
         <div fdbToolLayoutHeaderContainer>
             <fd-shellbar [showNavigationButton]="true" (navigationButtonClicked)="toggleSideNavState()">
@@ -13,126 +13,128 @@
     </div>
     <div fdbToolLayoutContainer>
         <div fdbToolLayoutNavigationContainer>
-            <fdb-navigation
-                [state]="state"
-                [style.width]="'fit-content'"
-                [isOverlay]="isMobile()"
-                [style.height.px]="800"
-                [selectionMode]="'click'"
-                [ariaLabel]="`Main Navigation ${state}`"
-                ariaRoleDescription="Side Navigation"
-            >
-                <fdb-navigation-content-start
-                    ariaLabel="Primary Navigation Menu"
-                    ariaRoleDescription="Navigation List Tree"
+            @if (showNavigation()) {
+                <fdb-navigation
+                    [state]="state"
+                    [style.width]="'fit-content'"
+                    [isOverlay]="isMobile()"
+                    [style.height.px]="800"
+                    [selectionMode]="'click'"
+                    [ariaLabel]="`Main Navigation ${state}`"
+                    ariaRoleDescription="Side Navigation"
                 >
-                    <fdb-navigation-list-item>
-                        <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
-                    </fdb-navigation-list-item>
-                    <fdb-navigation-list-item>
-                        <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
-                    </fdb-navigation-list-item>
-                    <fdb-navigation-list-item disabled>
-                        <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
-                    </fdb-navigation-list-item>
+                    <fdb-navigation-content-start
+                        ariaLabel="Primary Navigation Menu"
+                        ariaRoleDescription="Navigation List Tree"
+                    >
+                        <fdb-navigation-list-item>
+                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
+                        </fdb-navigation-list-item>
+                        <fdb-navigation-list-item>
+                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="favorite-list">Favourites</a>
+                        </fdb-navigation-list-item>
+                        <fdb-navigation-list-item disabled>
+                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="time-account">Recent (Disabled)</a>
+                        </fdb-navigation-list-item>
 
-                    <fdb-navigation-list-item group expanded>
-                        <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
+                        <fdb-navigation-list-item group expanded>
+                            <a fdb-navigation-link *fdbNavigationLinkRef>Sales</a>
 
-                        <fdb-navigation-list-item expanded>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
-                            <fdb-navigation-list-item selected>
-                                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']"
-                                    >All Leads</a
+                            <fdb-navigation-list-item expanded>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="lead">Leads</a>
+                                <fdb-navigation-list-item selected>
+                                    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']"
+                                        >All Leads</a
+                                    >
+                                </fdb-navigation-list-item>
+                                <fdb-navigation-list-item>
+                                    <a fdb-navigation-link *fdbNavigationLinkRef>Lead Sources</a>
+                                </fdb-navigation-list-item>
+                            </fdb-navigation-list-item>
+
+                            <fdb-navigation-list-item expanded>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="opportunities">Opportunities</a>
+                                <fdb-navigation-list-item>
+                                    <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
+                                </fdb-navigation-list-item>
+                                <fdb-navigation-list-item>
+                                    <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
+                                </fdb-navigation-list-item>
+                            </fdb-navigation-list-item>
+
+                            <fdb-navigation-list-item>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="sales-quote">Sales Quotes</a>
+                                <fdb-navigation-list-item>
+                                    <a fdb-navigation-link *fdbNavigationLinkRef>All Quotes</a>
+                                </fdb-navigation-list-item>
+                                <fdb-navigation-list-item>
+                                    <a fdb-navigation-link *fdbNavigationLinkRef>Reports</a>
+                                </fdb-navigation-list-item>
+                            </fdb-navigation-list-item>
+                        </fdb-navigation-list-item>
+                        <fdb-navigation-list-item separator />
+
+                        <fdb-navigation-list-item group expanded>
+                            <a fdb-navigation-link *fdbNavigationLinkRef>Reports and Analytics</a>
+
+                            <fdb-navigation-list-item>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="manager-insight">Sales Reports</a>
+                            </fdb-navigation-list-item>
+
+                            <fdb-navigation-list-item>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="kpi-corporate-performance"
+                                    >Performance Reports</a
                                 >
                             </fdb-navigation-list-item>
-                            <fdb-navigation-list-item>
-                                <a fdb-navigation-link *fdbNavigationLinkRef>Lead Sources</a>
-                            </fdb-navigation-list-item>
                         </fdb-navigation-list-item>
+                        <fdb-navigation-list-item separator />
 
-                        <fdb-navigation-list-item expanded>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="opportunities">Opportunities</a>
+                        <fdb-navigation-list-item group disabled>
+                            <a fdb-navigation-link *fdbNavigationLinkRef>Customer Management</a>
+
                             <fdb-navigation-list-item>
-                                <a fdb-navigation-link *fdbNavigationLinkRef>All Opportunities</a>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="contacts">Contacts</a>
                             </fdb-navigation-list-item>
+
                             <fdb-navigation-list-item>
-                                <a fdb-navigation-link *fdbNavigationLinkRef>Team Pipeline</a>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="company-view">Companies</a>
+                            </fdb-navigation-list-item>
+
+                            <fdb-navigation-list-item>
+                                <a fdb-navigation-link *fdbNavigationLinkRef glyph="citizen-connect">Partners</a>
                             </fdb-navigation-list-item>
                         </fdb-navigation-list-item>
+                        <fdb-navigation-list-item separator />
 
                         <fdb-navigation-list-item>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="sales-quote">Sales Quotes</a>
-                            <fdb-navigation-list-item>
-                                <a fdb-navigation-link *fdbNavigationLinkRef>All Quotes</a>
-                            </fdb-navigation-list-item>
-                            <fdb-navigation-list-item>
-                                <a fdb-navigation-link *fdbNavigationLinkRef>Reports</a>
-                            </fdb-navigation-list-item>
+                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="task">Task Manager</a>
                         </fdb-navigation-list-item>
-                    </fdb-navigation-list-item>
-                    <fdb-navigation-list-item separator />
-
-                    <fdb-navigation-list-item group expanded>
-                        <a fdb-navigation-link *fdbNavigationLinkRef>Reports and Analytics</a>
-
-                        <fdb-navigation-list-item>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="manager-insight">Sales Reports</a>
-                        </fdb-navigation-list-item>
-
-                        <fdb-navigation-list-item>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="kpi-corporate-performance"
-                                >Performance Reports</a
+                    </fdb-navigation-content-start>
+                    <fdb-navigation-content-end
+                        ariaLabel="Footer Navigation Menu"
+                        ariaRoleDescription="Navigation List Tree"
+                    >
+                        <fdb-navigation-list-item quickCreate>
+                            <button
+                                fdb-navigation-link
+                                quickCreate
+                                glyph="write-new"
+                                aria-label="Quick Create"
+                                *fdbNavigationLinkRef
+                                (click)="onQuickCreateClick()"
                             >
+                                Create Ticket
+                            </button>
                         </fdb-navigation-list-item>
-                    </fdb-navigation-list-item>
-                    <fdb-navigation-list-item separator />
-
-                    <fdb-navigation-list-item group disabled>
-                        <a fdb-navigation-link *fdbNavigationLinkRef>Customer Management</a>
-
                         <fdb-navigation-list-item>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="contacts">Contacts</a>
+                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="bbyd-dashboard">Dashboard</a>
                         </fdb-navigation-list-item>
-
-                        <fdb-navigation-list-item>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="company-view">Companies</a>
-                        </fdb-navigation-list-item>
-
-                        <fdb-navigation-list-item>
-                            <a fdb-navigation-link *fdbNavigationLinkRef glyph="citizen-connect">Partners</a>
-                        </fdb-navigation-list-item>
-                    </fdb-navigation-list-item>
-                    <fdb-navigation-list-item separator />
-
-                    <fdb-navigation-list-item>
-                        <a fdb-navigation-link *fdbNavigationLinkRef glyph="task">Task Manager</a>
-                    </fdb-navigation-list-item>
-                </fdb-navigation-content-start>
-                <fdb-navigation-content-end
-                    ariaLabel="Footer Navigation Menu"
-                    ariaRoleDescription="Navigation List Tree"
-                >
-                    <fdb-navigation-list-item quickCreate>
-                        <button
-                            fdb-navigation-link
-                            quickCreate
-                            glyph="write-new"
-                            aria-label="Quick Create"
-                            *fdbNavigationLinkRef
-                            (click)="onQuickCreateClick()"
-                        >
-                            Create Ticket
-                        </button>
-                    </fdb-navigation-list-item>
-                    <fdb-navigation-list-item>
-                        <a fdb-navigation-link *fdbNavigationLinkRef glyph="bbyd-dashboard">Dashboard</a>
-                    </fdb-navigation-list-item>
-                </fdb-navigation-content-end>
-            </fdb-navigation>
+                    </fdb-navigation-content-end>
+                </fdb-navigation>
+            }
         </div>
-        <div fdbToolLayoutContentContainer>
-            <div [style.width.%]="100" [style.height.px]="800" [style.background-color]="'#00677f'"></div>
+        <div fdbToolLayoutContentContainer background="transparent">
+            <div [style.width.%]="100" [style.height.px]="800"></div>
         </div>
     </div>
 </div>

@@ -269,8 +269,11 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             const isParentPopoverOpen = this._listItemComponent?.popoverOpen$();
             const isGrandparentPopoverOpen = this._listItemComponent?.parentListItem?.popoverOpen$();
 
+            // Check if the navigation is inside any popover body (not just navigation item popovers)
+            const isInsidePopoverBody = this.elementRef.nativeElement.closest('.fd-popover__body');
+
             // When a popover is open, all links in the popover hierarchy should be focusable
-            if (isParentPopoverOpen || isGrandparentPopoverOpen) {
+            if (isParentPopoverOpen || isGrandparentPopoverOpen || isInsidePopoverBody) {
                 // All links in popover context should be focusable (except disabled ones)
                 const tabIndex = 0;
                 this._renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', tabIndex.toString());

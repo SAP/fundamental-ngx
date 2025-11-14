@@ -1,4 +1,4 @@
-<div fdbToolLayout>
+<div fdbToolLayout noGaps>
     <div fdbToolLayoutContainer>
         <div fdbToolLayoutHeaderContainer>
             <fd-shellbar [showNavigationButton]="true" [navigationButtonTemplate]="navButtonTpl">
@@ -39,7 +39,7 @@
 
 <!-- Desktop popover -->
 @if (!isMobile()) {
-    <fd-popover #desktopPopover [mobile]="false" [noArrow]="false" [disableScrollbar]="true">
+    <fd-popover #desktopPopover [mobile]="false" [noArrow]="false" [disableScrollbar]="true" [focusAutoCapture]="true">
         <fd-popover-body>
             <ng-container [ngTemplateOutlet]="sideNavigationTemplate"></ng-container>
         </fd-popover-body>
@@ -48,7 +48,7 @@
 
 <!-- Mobile popover -->
 @if (isMobile()) {
-    <fd-popover #mobilePopover [mobile]="true" [mobileConfig]="{ hasCloseButton: true }">
+    <fd-popover #mobilePopover [mobile]="true" [mobileConfig]="{ hasCloseButton: true }" [focusAutoCapture]="true">
         <ng-template #popoverBodyContent>
             <ng-container [ngTemplateOutlet]="sideNavigationTemplate"></ng-container>
         </ng-template>
