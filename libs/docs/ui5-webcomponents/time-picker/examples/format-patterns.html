@@ -1,0 +1,21 @@
+<div class="fd-container">
+    <div class="fd-row">
+        @for (formatPattern of formatPatterns(); track formatPattern.pattern) {
+        <div class="fd-col fd-col--2">
+            <div class="fd-form-item">
+                <label class="fd-form-label">{{ formatPattern.pattern }}</label>
+                <ui5-time-picker
+                    [formatPattern]="formatPattern.pattern"
+                    [value]="patternValues()[formatPattern.pattern]"
+                    (ui5Change)="onPatternChange($event, formatPattern.pattern)"
+                >
+                </ui5-time-picker>
+                <small class="fd-form-message">{{ formatPattern.description }}</small>
+                <div class="fd-margin-top--tiny">
+                    <small>Value: "{{ patternValues()[formatPattern.pattern] }}"</small>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

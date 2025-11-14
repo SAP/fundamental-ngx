@@ -1,0 +1,24 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6 fd-padding--none">
+            <ui5-label for="duration-select" class="fd-margin-end--sm">Select Duration:</ui5-label>
+            <ui5-select
+                id="duration-select"
+                [value]="selectedDuration().toString()"
+                (ui5Change)="onDurationChange($event)"
+            >
+                @for (duration of durations; track duration.value) {
+                <ui5-option [value]="duration.value.toString()">{{ duration.label }}</ui5-option>
+                }
+            </ui5-select>
+        </div>
+
+        <div class="fd-col fd-col--6 fd-padding--none">
+            <ui5-button (click)="showToast()">Show Toast</ui5-button>
+        </div>
+    </div>
+</div>
+
+<ui5-toast [open]="isToastOpen()" [duration]="selectedDuration()" (ui5Close)="onToastClose()">
+    {{ toastMessage() }} (Duration: {{ selectedDuration() }}ms)
+</ui5-toast>

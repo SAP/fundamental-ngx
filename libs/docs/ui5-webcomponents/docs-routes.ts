@@ -142,6 +142,18 @@ const componentRoutes = [
     {
         path: 'text-area',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/text-area').then(configureLibRoutes)
+    },
+    {
+        path: 'time-picker',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/time-picker').then(configureLibRoutes)
+    },
+    {
+        path: 'title',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/title').then(configureLibRoutes)
+    },
+    {
+        path: 'toast',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/toast').then(configureLibRoutes)
     }
 ];
 

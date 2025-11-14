@@ -1,0 +1,32 @@
+<div class="fd-form-item">
+    <label class="fd-form-label">Interactive TimePicker</label>
+    <ui5-time-picker
+        [value]="timeValue()"
+        placeholder="Select or type a time..."
+        (ui5Change)="onTimeChange($event)"
+        (ui5Input)="onTimeInput($event)"
+        (ui5Open)="onTimeOpen($event)"
+        (ui5Close)="onTimeClose($event)"
+    >
+    </ui5-time-picker>
+    <small> Type a time or click the clock icon to open the picker </small>
+</div>
+
+<div class="fd-form-item">
+    <ui5-label class="fd-margin-top--sm fd-margin-bottom--sm">Event Log:</ui5-label>
+    <ui5-text
+        style="
+            background-color: var(--sapBackgroundColor);
+            border: var(--sapContent_ForegroundBorderColor) solid 1px;
+            min-height: 100px;
+            max-height: 200px;
+            overflow-y: auto;
+        "
+    >
+        @if (eventLog().length === 0) {
+        <small class="fd-text--secondary">No events yet. Interact with the time picker above.</small>
+        } @else { @for (event of eventLog(); track $index) {
+        <div class="fd-text--monospace fd-text--small fd-margin-bottom--tiny">{{ event }}</div>
+        } }
+    </ui5-text>
+</div>
