@@ -146,6 +146,10 @@ const componentRoutes = [
     {
         path: 'time-picker',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/time-picker').then(configureLibRoutes)
+    },
+    {
+        path: 'title',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/title').then(configureLibRoutes)
     }
 ];
 

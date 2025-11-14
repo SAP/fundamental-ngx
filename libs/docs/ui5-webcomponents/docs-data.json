@@ -133,6 +133,10 @@
         {
             "url": "ui5-webcomponents/time-picker",
             "name": "TimePicker"
+        },
+        {
+            "url": "ui5-webcomponents/title",
+            "name": "Title"
         }
     ]
 }

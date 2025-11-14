@@ -38,5 +38,6 @@ export const API_FILES = {
     tag: ['Tag'],
     text: ['Text'],
     textArea: ['TextArea'],
-    timePicker: ['TimePicker']
+    timePicker: ['TimePicker'],
+    title: ['Title']
 };
