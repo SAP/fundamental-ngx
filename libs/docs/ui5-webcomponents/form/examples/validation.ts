@@ -9,12 +9,7 @@ import { FormItem } from '@fundamental-ngx/ui5-webcomponents/form-item';
 import { Input } from '@fundamental-ngx/ui5-webcomponents/input';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { MessageStrip } from '@fundamental-ngx/ui5-webcomponents/message-strip';
-import { TextArea } from '@fundamental-ngx/ui5-webcomponents/text-area';
-
-// Import UI5 custom event types
-import { UI5CustomEvent } from '@ui5/webcomponents-base';
-import { default as _Input } from '@ui5/webcomponents/dist/Input.js';
-import { default as _TextArea } from '@ui5/webcomponents/dist/TextArea.js';
+import { TextArea, TextAreaInputEventDetail } from '@fundamental-ngx/ui5-webcomponents/text-area';
 
 // Import Fundamental Styles
 import 'fundamental-styles/dist/layout-grid.css';
@@ -185,20 +180,20 @@ export class FormValidationSample {
         return 'Invalid input';
     }
 
-    onInputChange(fieldName: string, event: UI5CustomEvent<_Input, 'input'>): void {
+    onInputChange(fieldName: string, event: CustomEvent): void {
         const value = (event.target as any)?.value;
         this.registrationForm.get(fieldName)?.setValue(value);
         this.registrationForm.get(fieldName)?.markAsDirty();
     }
 
-    onTextAreaChange(fieldName: string, event: UI5CustomEvent<_TextArea, 'input'>): void {
+    onTextAreaChange(fieldName: string, event: CustomEvent<TextAreaInputEventDetail>): void {
         const value = (event.target as any)?.value;
         this.registrationForm.get(fieldName)?.setValue(value);
         this.registrationForm.get(fieldName)?.markAsDirty();
     }
 
-    onCheckboxChange(fieldName: string, event: any): void {
-        const checked = event.target.checked;
+    onCheckboxChange(fieldName: string, event: CustomEvent): void {
+        const checked = (event.target as any)?.checked;
         this.registrationForm.get(fieldName)?.setValue(checked);
         this.registrationForm.get(fieldName)?.markAsDirty();
     }

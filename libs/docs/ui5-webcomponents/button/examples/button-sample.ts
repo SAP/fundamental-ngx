@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
+import { Button, ButtonClickEventDetail } from '@fundamental-ngx/ui5-webcomponents/button';
+
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 @Component({
@@ -17,7 +18,7 @@ import '@ui5/webcomponents-icons/dist/AllIcons.js';
 })
 export class ButtonExample {
     // Example click handler
-    onButtonClick(event: any, buttonLabel: string): void {
+    onButtonClick(event: CustomEvent<ButtonClickEventDetail>, buttonLabel: string): void {
         console.log(`${buttonLabel} clicked`, event);
     }
 

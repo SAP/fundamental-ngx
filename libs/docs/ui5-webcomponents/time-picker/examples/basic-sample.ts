@@ -1,7 +1,6 @@
 import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { TimePicker } from '@fundamental-ngx/ui5-webcomponents/time-picker';
-import { TimePickerChangeEventDetail } from '@ui5/webcomponents/dist/TimePicker.js';
+import { TimePicker, TimePickerChangeEventDetail } from '@fundamental-ngx/ui5-webcomponents/time-picker';
 
 // Ensure CLDR data is available for all time-picker components
 import '@ui5/webcomponents-localization/dist/Assets.js';
