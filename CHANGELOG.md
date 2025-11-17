@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.0...v0.58.0-rc.1) (2025-11-17)
+
+
+### Bug Fixes
+
+* pack and publish ui5wc packages ([#13576](https://github.com/SAP/fundamental-ngx/issues/13576)) ([2defc4b](https://github.com/SAP/fundamental-ngx/commit/2defc4b14091e81b125412b7b67bd4a65384356d))
+
+
+
+
+
 # [0.58.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.5...v0.58.0-rc.0) (2025-11-17)
 
 
