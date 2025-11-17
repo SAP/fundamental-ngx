@@ -39,10 +39,9 @@ function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
 
 function generateTypeImports(
     data: CEM.CustomElementDeclaration,
-    allEnums: { name: string; members: string[] }[],
-    enumPackageMapping: Record<string, string>
+    allEnums: { name: string; members: string[] }[]
 ): { componentImports: string[]; componentEnums: string[] } {
-    const componentImports: string[] = [];
+    const componentImports: Set<string> = new Set();
     const typeNames = new Set<string>();
 
     const members = (data.members as CEM.ClassField[] | undefined) || [];
@@ -74,9 +73,9 @@ function generateTypeImports(
                             reference.module?.includes('/types/')
                         ) {
                             // Use default import for direct type imports and default exports
-                            componentImports.push(`import { default as ${reference.name} } from '${importPath}';`);
+                            componentImports.add(`import { default as ${reference.name} } from '${importPath}';`);
                         } else {
-                            componentImports.push(`import { ${reference.name} } from '${importPath}';`);
+                            componentImports.add(`import { ${reference.name} } from '${importPath}';`);
                         }
                         typeNames.add(reference.name);
                     }
@@ -84,9 +83,20 @@ function generateTypeImports(
             }
         }
     }
+
+    // Add event types
+    const events = data.events || [];
+    for (const event of events) {
+        if (event.type?.references?.length) {
+            for (const reference of event.type.references) {
+                componentImports.add(`import { ${reference.name} } from '${reference.package}/${reference.module}';`);
+            }
+        }
+    }
+
     const extractedEnums = allEnums.filter((e) => typeNames.has(e.name)).map((e) => e.name);
 
-    return { componentImports, componentEnums: extractedEnums };
+    return { componentImports: Array.from(componentImports), componentEnums: extractedEnums };
 }
 
 /** Helper function to generate input properties for the component. */
@@ -204,24 +214,66 @@ function generateOutputs(data: CEM.CustomElementDeclaration, className: string):
     data.events?.forEach((event) => {
         // Convert kebab-case to PascalCase after ui5 prefix
         const pascalCaseEventName = kebabToCamelCase(event.name).replace(/^./, (char) => char.toUpperCase());
-        outputs.push(`
+
+        if (event.type.references?.length) {
+            outputs.push(`
+  /**
+   * ${event.description || ''}
+   */
+  ui5${pascalCaseEventName} = output<${event.type.text}>();`);
+        } else {
+            outputs.push(`
   /**
    * ${event.description || ''}
    */
   ui5${pascalCaseEventName} = output<UI5CustomEvent<_${className}, '${event.name}'>>();`);
+        }
     });
+
     return outputs.join('\n');
+}
+
+function generateExports(data: CEM.CustomElementDeclaration): string {
+    const className = data.name;
+    const exports: Set<string> = new Set();
+    const isExportedFromComponent = (ref: CEM.TypeReference): boolean | undefined =>
+        ref.module?.split('.')[0].endsWith(className);
+
+    const members = (data.members as CEM.ClassField[] | undefined) || [];
+    members?.forEach((member) => {
+        if (member.type?.references?.length) {
+            member.type.references.forEach((ref) => {
+                // export only those types that are exported from the current component
+                if (isExportedFromComponent(ref)) {
+                    exports.add(ref.name);
+                }
+            });
+        }
+    });
+
+    data.events?.forEach((event) => {
+        event.type.references?.forEach((ref) => {
+            // export only those types that are exported from the current component
+            if (isExportedFromComponent(ref)) {
+                exports.add(ref.name);
+            }
+        });
+    });
+
+    return exports.size
+        ? `export type {\n${Array.from(exports)
+              .map((type) => `\t${type}`)
+              .join(',\n')}\n};`
+        : '';
 }
 
 /** Generate the Angular component wrapper. */
 export function componentTemplate(
     data: CEM.CustomElementDeclaration,
-    cemPackage: CEM.Package,
     allEnums: { name: string; members: string[] }[],
-    packageName: string,
-    enumPackageMapping: Record<string, string>
+    packageName: string
 ): string {
-    const { componentImports, componentEnums } = generateTypeImports(data, allEnums, enumPackageMapping);
+    const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
     const tagName = data.tagName || '';
     const className = data.name;
     const { readonlyProperties, privateProperties } = generateProperties(data);
@@ -411,5 +463,7 @@ ${(() => {
 })()}
   }
 }
+
+${generateExports(data)}
 `;
 }
