@@ -88,7 +88,7 @@ export class NavigationComponent
     mode: FdbViewMode = '';
 
     /**
-     * Navigation mode.
+     * Whether the navigation is rendered as an overlay.
      */
     @Input({ transform: booleanAttribute })
     isOverlay = false;
@@ -306,12 +306,10 @@ export class NavigationComponent
      */
     private _findItemById(items: FdbNavigationListItem[], id: string): FdbNavigationListItem | null {
         for (const item of items) {
-            // Check if current item matches
             if (item.id() === id) {
                 return item;
             }
 
-            // Recursively search in child items
             if (item.listItems$().length > 0) {
                 const childItems = item.listItems$().filter((child): child is FdbNavigationListItem => child !== null);
                 const found = this._findItemById(childItems, id);

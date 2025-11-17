@@ -28,17 +28,9 @@ export class NavigationService {
 
         // Handle smart overflow promotion logic
         if (item) {
-            const itemText = item.link$()?.elementRef?.nativeElement?.textContent?.trim();
-
-            // Case 1: Child items that should promote their parent (regardless of overflow state)
-            if (
-                itemText === 'All Contacts' ||
-                itemText === 'External Contacts' ||
-                itemText?.includes('External Contacts')
-            ) {
-                if (item.parentListItem) {
-                    this.overflowItemSelected$.next(item.parentListItem);
-                }
+            // Case 1: Child items promote their parent when the parent is in overflow
+            if (item.parentListItem && item.parentListItem.isOverflow$()) {
+                this.overflowItemSelected$.next(item.parentListItem);
             }
             // Case 2: Regular overflow items promote themselves
             else if (item.isOverflow$()) {

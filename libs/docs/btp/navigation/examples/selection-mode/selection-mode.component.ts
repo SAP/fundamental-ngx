@@ -23,23 +23,16 @@ export class SelectionModeComponent {
         alert('Quick create!');
     }
 
-    /**
-     * Clear the current selection in click mode.
-     */
     clearSelection(): void {
         if (this.navigation) {
             this.navigation.clearSelection();
         }
     }
 
-    /**
-     * Get information about the currently selected item.
-     */
     showSelectedItem(): void {
         if (this.navigation) {
             const selectedItem = this.navigation.getSelectedItem();
             if (selectedItem) {
-                // Try to get text content from the link element if available
                 const linkElement = selectedItem.link$()?.elementRef?.nativeElement;
                 const itemText = linkElement?.textContent?.trim() || 'Selected item';
                 alert(`Selected item: ${itemText} (ID: ${selectedItem.id()})`);
@@ -49,27 +42,18 @@ export class SelectionModeComponent {
         }
     }
 
-    /**
-     * Select the Home item by its ID.
-     */
     selectHomeById(): void {
         if (this.navigation) {
             this.navigation.setSelectedItemById('nav-home');
         }
     }
 
-    /**
-     * Select the Favourites item by its ID.
-     */
     selectFavouritesById(): void {
         if (this.navigation) {
             this.navigation.setSelectedItemById('nav-favourites');
         }
     }
 
-    /**
-     * Select the All Leads item by its ID.
-     */
     selectAllLeadsById(): void {
         if (this.navigation) {
             this.navigation.setSelectedItemById('nav-all-leads');

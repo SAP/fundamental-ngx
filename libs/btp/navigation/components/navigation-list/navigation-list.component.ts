@@ -256,10 +256,7 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         const isExpandAction = KeyUtil.isKeyCode(event, this._rtl?.rtl.value ? LEFT_ARROW : RIGHT_ARROW);
 
         if (!isExpandAction) {
-            // If this list is inside a More button popover, we need to be smart about when to close vs navigate
             if (this.moreButtonRef) {
-                // Check if we have a parent list item to navigate back to
-                // If we do, do normal navigation; if not, close the More button popover
                 if (this._listItem) {
                     this._listItem.focusLink(true);
                 } else {
@@ -282,8 +279,6 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         this._navigationService?.currentItem$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((item) => {
             this._keyManager?.setActiveItem(item);
         });
-
-        // The reactive effect will handle aria-label updates
     }
 
     /** @hidden */
@@ -311,7 +306,6 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
                 this._renderer.removeAttribute(this._elementRef.nativeElement, 'aria-label');
             }
         } catch {
-            // Fallback to default ariaLabel if there's any issue during evaluation
             if (this.ariaLabel) {
                 this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-label', this.ariaLabel);
             }

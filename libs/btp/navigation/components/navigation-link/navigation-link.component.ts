@@ -189,10 +189,9 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     @HostListener('keydown', ['$event'])
     _keyDownHandler(event: Event): void {
         const keyboardEvent = event as KeyboardEvent;
-        // Simple disabled check at the start
         const isDisabled = this._listItemComponent?.disabled$?.() || false;
         if (isDisabled) {
-            return; // Just ignore, don't prevent - let CSS handle it
+            return;
         }
 
         // Handle Space and Enter for selection (same as click behavior)
@@ -203,7 +202,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
                 'type' in this._listItemComponent &&
                 (this._listItemComponent as any).type === 'showMore'
             ) {
-                return; // Let the popover handle Space/Enter
+                return;
             }
 
             // Prevent default scrolling behavior for Space

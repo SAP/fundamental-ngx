@@ -63,21 +63,17 @@ export class NavigationDesktopExampleComponent implements OnInit, OnDestroy {
         const initialMatch = window.matchMedia(this.mediaQuery).matches;
         this.isMobile.set(initialMatch);
 
-        // Set initial navigation visibility based on mobile mode
         if (initialMatch) {
-            this.showNavigation.set(false); // Start hidden in mobile mode
+            this.showNavigation.set(false);
         }
 
         this.breakpointSubscription = this.breakpointObserver.observe([this.mediaQuery]).subscribe((result) => {
             this.isMobile.set(result.matches);
 
-            // Update navigation visibility when switching between mobile and desktop
             if (result.matches) {
-                // Switching to mobile - hide navigation
                 this.showNavigation.set(false);
-                this.state = 'expanded'; // Always use expanded when shown in mobile
+                this.state = 'expanded';
             } else {
-                // Switching to desktop - show navigation
                 this.showNavigation.set(true);
                 this.state = 'expanded';
             }

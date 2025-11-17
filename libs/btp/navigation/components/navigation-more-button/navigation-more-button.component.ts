@@ -152,7 +152,6 @@ export class NavigationMoreButtonComponent {
         if (isOpen) {
             // Use a short timeout to ensure the DOM is updated
             setTimeout(() => {
-                // Query the document for any open popover (since popover is rendered at document level)
                 const popoverBody = document.querySelector('.fd-popover__body:not([style*="display: none"])');
 
                 if (popoverBody) {
@@ -164,7 +163,6 @@ export class NavigationMoreButtonComponent {
                     }
                 }
 
-                // Fallback to listItems array if DOM query fails
                 if (this.listItems && this.listItems.length > 0) {
                     const firstItem = this.listItems[0];
                     const link = firstItem.link$();
@@ -231,14 +229,12 @@ export class NavigationMoreButtonComponent {
 
         const isRtl = this._rtl$() || false;
 
-        // Only handle RIGHT arrow to open popover when it's closed
         if (KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW)) {
             // Open popover only if not already open
             if (!this.popoverOpen$()) {
                 this.popoverOpen$.set(true);
             }
         }
-        // Don't handle LEFT arrow here - let NavigationListComponent handle closing
     }
 
     /** @hidden */
