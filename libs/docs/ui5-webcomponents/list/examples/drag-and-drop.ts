@@ -1,10 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { MovePlacement } from '@fundamental-ngx/ui5-webcomponents-base/types';
-import { List } from '@fundamental-ngx/ui5-webcomponents/list';
+import { List, ListMoveEventDetail } from '@fundamental-ngx/ui5-webcomponents/list';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
-
-import { UI5CustomEvent } from '@ui5/webcomponents-base';
-import { default as _List } from '@ui5/webcomponents/dist/List.js';
 
 // Import the icon used in this example
 import '@ui5/webcomponents-icons/dist/checklist-item.js';
@@ -18,7 +15,7 @@ import '@ui5/webcomponents-icons/dist/checklist-item.js';
 export class ListDragAndDropExample {
     readonly items = signal(['Item #1', 'Item #2', 'Item #3', 'Item #4']);
 
-    onItemMove(event: any): void {
+    onItemMove(event: CustomEvent<ListMoveEventDetail>): void {
         const { destination, source } = event.detail;
 
         switch (destination.placement) {
@@ -34,7 +31,7 @@ export class ListDragAndDropExample {
         }
     }
 
-    onItemMoveOver(event: UI5CustomEvent<_List, 'move-over'>): void {
+    onItemMoveOver(event: CustomEvent<ListMoveEventDetail>): void {
         const { source } = event.detail;
 
         if (!(event.target as HTMLElement).contains(source.element)) {
@@ -44,7 +41,7 @@ export class ListDragAndDropExample {
         this.handleBeforeItemMove(event);
     }
 
-    private handleBeforeItemMove(event: UI5CustomEvent<_List, 'move-over'>): void {
+    private handleBeforeItemMove(event: CustomEvent<ListMoveEventDetail>): void {
         const { destination } = event.detail;
 
         if (destination.placement === 'Before' || destination.placement === 'After') {
