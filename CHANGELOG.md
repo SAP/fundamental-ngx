@@ -3,6 +3,144 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.3...v0.58.0-rc.4) (2025-11-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.58.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.2...v0.58.0-rc.3) (2025-11-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.58.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.1...v0.58.0-rc.2) (2025-11-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.58.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.0...v0.58.0-rc.1) (2025-11-17)
+
+
+### Bug Fixes
+
+* pack and publish ui5wc packages ([#13576](https://github.com/SAP/fundamental-ngx/issues/13576)) ([2defc4b](https://github.com/SAP/fundamental-ngx/commit/2defc4b14091e81b125412b7b67bd4a65384356d))
+
+
+
+
+
+# [0.58.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.5...v0.58.0-rc.0) (2025-11-17)
+
+
+### Features
+
+* bring ui5wc generator ([#13511](https://github.com/SAP/fundamental-ngx/issues/13511)) ([15b465b](https://github.com/SAP/fundamental-ngx/commit/15b465bbea87ba9fc278a6d420e6381f83dff70d))
+
+
+### BREAKING CHANGES
+
+* bring UI5 WebComponents Angular Wrappers as packages under Fundamental Library for Angular
+
+
+
+
+
+## [0.57.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.3...v0.57.5) (2025-11-14)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.2...v0.57.5-rc.3) (2025-11-12)
+
+
+### Bug Fixes
+
+* **platform:** add aria-label and title for settings generator back button ([#13566](https://github.com/SAP/fundamental-ngx/issues/13566)) ([cc04e1e](https://github.com/SAP/fundamental-ngx/commit/cc04e1ea58c390510b38ded23601b7f9e749ffe8))
+
+
+
+
+
+## [0.57.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.1...v0.57.5-rc.2) (2025-11-10)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.5-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.0...v0.57.5-rc.1) (2025-11-10)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.4...v0.57.5-rc.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **core:** update Settings Dialog to latest UXC design and comments ([#13543](https://github.com/SAP/fundamental-ngx/issues/13543)) ([94a8b3b](https://github.com/SAP/fundamental-ngx/commit/94a8b3b72b6790fd5d0e8fb34e0b4d1fd1df947a))
+
+
+
+
+
+## [0.57.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.33...v0.57.4) (2025-11-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.57.4-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.32...v0.57.4-rc.33) (2025-11-05)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** update focusable CDK to allow tabbing between child elements ([#13562](https://github.com/SAP/fundamental-ngx/issues/13562)) ([f1f07aa](https://github.com/SAP/fundamental-ngx/commit/f1f07aa68f72ea5836c6afea838fdebd3c5cb664))
+
+
+
+
+
+## [0.57.4-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.31...v0.57.4-rc.32) (2025-11-05)
+
+
+### Bug Fixes
+
+* **core,platform:** Add null check on scroll spy handling of tabs ([#13552](https://github.com/SAP/fundamental-ngx/issues/13552)) ([708c343](https://github.com/SAP/fundamental-ngx/commit/708c343254378c3895d62d60d77133ce08543366))
+
+
+
+
+
+## [0.57.4-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.30...v0.57.4-rc.31) (2025-11-04)
+
+
+### Bug Fixes
+
+* **core:** add null check on header component ([#13551](https://github.com/SAP/fundamental-ngx/issues/13551)) ([7dcf959](https://github.com/SAP/fundamental-ngx/commit/7dcf9599fe0efa80f6667b4f83e24d6a91bef0f7))
+
+
+
+
+
 ## [0.57.4-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.29...v0.57.4-rc.30) (2025-10-22)
 
 

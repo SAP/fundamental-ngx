@@ -1,0 +1,76 @@
+@import 'fundamental-styles/dist/settings.css';
+
+// TO DO: to be removed after moving this to fund-styles
+
+@mixin fd-reset {
+    font-size: var(--sapFontSize);
+    line-height: normal;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    box-sizing: border-box;
+    forced-color-adjust: none;
+    padding-inline: 0;
+    padding-block: 0;
+    margin-inline: 0;
+    margin-block: 0;
+    border: 0;
+
+    &::before,
+    &::after {
+        box-sizing: inherit;
+        font-size: inherit;
+    }
+}
+
+.fd-settings__detail-area {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.fd-settings__profile-card {
+    @include fd-reset();
+
+    width: 100%;
+    gap: 0.25rem;
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding-block: 2.5rem 1rem;
+
+    button {
+        margin-block-start: 0.25rem;
+    }
+}
+
+.fd-settings__profile-card-name {
+    @include fd-reset();
+
+    line-height: 1.4rem;
+    white-space: normal;
+    word-break: break-all;
+    color: var(--sapTextColor);
+    margin-block-start: 0.25rem;
+    font-size: var(--sapFontLargeSize);
+    font-family: var(--sapFontSemiboldDuplexFamily);
+}
+
+.fd-settings__profile-card-subline {
+    @include fd-reset();
+
+    word-break: break-all;
+    color: var(--sapContent_LabelColor);
+}
+
+.fd-settings__content-container {
+    @include fd-reset();
+}
+
+@media (max-width: 600px) {
+    .fd-dialog__footer.fd-bar {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}

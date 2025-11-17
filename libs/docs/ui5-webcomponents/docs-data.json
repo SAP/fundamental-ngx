@@ -1,0 +1,146 @@
+{
+    "guides": [
+        {
+            "url": "ui5-webcomponents/home",
+            "name": "Home"
+        }
+    ],
+    "components": [
+        {
+            "url": "ui5-webcomponents/avatar",
+            "name": "Avatar"
+        },
+        {
+            "url": "ui5-webcomponents/avatar-group",
+            "name": "Avatar Group"
+        },
+        {
+            "url": "ui5-webcomponents/bar",
+            "name": "Bar"
+        },
+        {
+            "url": "ui5-webcomponents/busy-indicator",
+            "name": "Busy Indicator"
+        },
+        {
+            "url": "ui5-webcomponents/button",
+            "name": "Button"
+        },
+        {
+            "url": "ui5-webcomponents/calendar",
+            "name": "Calendar"
+        },
+        {
+            "url": "ui5-webcomponents/calendar-legend",
+            "name": "Calendar Legend"
+        },
+        {
+            "url": "ui5-webcomponents/card",
+            "name": "Card"
+        },
+        {
+            "url": "ui5-webcomponents/carousel",
+            "name": "Carousel"
+        },
+        {
+            "url": "ui5-webcomponents/check-box",
+            "name": "Check Box"
+        },
+        {
+            "url": "ui5-webcomponents/color-palette",
+            "name": "Color Palette"
+        },
+        {
+            "url": "ui5-webcomponents/color-picker",
+            "name": "Color Picker"
+        },
+        {
+            "url": "ui5-webcomponents/expandable-text",
+            "name": "Expandable Text"
+        },
+        {
+            "url": "ui5-webcomponents/form",
+            "name": "Form"
+        },
+        {
+            "url": "ui5-webcomponents/icon",
+            "name": "Icon"
+        },
+        {
+            "url": "ui5-webcomponents/input",
+            "name": "Input"
+        },
+        {
+            "url": "ui5-webcomponents/label",
+            "name": "Label"
+        },
+        {
+            "url": "ui5-webcomponents/link",
+            "name": "Link"
+        },
+        {
+            "url": "ui5-webcomponents/list",
+            "name": "List"
+        },
+        {
+            "url": "ui5-webcomponents/message-strip",
+            "name": "Message Strip"
+        },
+        {
+            "url": "ui5-webcomponents/panel",
+            "name": "Panel"
+        },
+        {
+            "url": "ui5-webcomponents/popover",
+            "name": "Popover"
+        },
+        {
+            "url": "ui5-webcomponents/progress-indicator",
+            "name": "Progress Indicator"
+        },
+        {
+            "url": "ui5-webcomponents/rating-indicator",
+            "name": "Rating Indicator"
+        },
+        {
+            "url": "ui5-webcomponents/segmented-button",
+            "name": "Segmented Button"
+        },
+        {
+            "url": "ui5-webcomponents/slider",
+            "name": "Slider"
+        },
+        {
+            "url": "ui5-webcomponents/step-input",
+            "name": "StepInput"
+        },
+        {
+            "url": "ui5-webcomponents/switch",
+            "name": "Switch"
+        },
+        {
+            "url": "ui5-webcomponents/tag",
+            "name": "Tag"
+        },
+        {
+            "url": "ui5-webcomponents/text",
+            "name": "Text"
+        },
+        {
+            "url": "ui5-webcomponents/text-area",
+            "name": "TextArea"
+        },
+        {
+            "url": "ui5-webcomponents/time-picker",
+            "name": "TimePicker"
+        },
+        {
+            "url": "ui5-webcomponents/title",
+            "name": "Title"
+        },
+        {
+            "url": "ui5-webcomponents/toast",
+            "name": "Toast"
+        }
+    ]
+}

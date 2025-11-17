@@ -1,0 +1,53 @@
+<fd-docs-section-title id="basic" componentName="TimePicker">Basic Sample</fd-docs-section-title>
+<description>
+    The TimePicker component provides an input field with time picker functionality for selecting and formatting time
+    values. It supports reactive value binding, placeholder text, and can be pre-filled with initial values for enhanced
+    user experience.
+</description>
+<component-example>
+    <ui5-time-picker-basic-sample></ui5-time-picker-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"></code-example>
+
+<fd-docs-section-title id="format-patterns" componentName="TimePicker">Format Patterns</fd-docs-section-title>
+<description>
+    Customize time display and input format using the <b>formatPattern</b> property. Supports various patterns including
+    24-hour format (<code>HH:mm:ss</code>), 12-hour format with AM/PM (<code>hh:mm:ss a</code>), and partial formats
+    like minutes and seconds only (<code>mm:ss</code>).
+</description>
+<component-example>
+    <ui5-time-picker-format-patterns-sample></ui5-time-picker-format-patterns-sample>
+</component-example>
+<code-example [exampleFiles]="formatPatternsExamples()"></code-example>
+
+<fd-docs-section-title id="value-states" componentName="TimePicker">Value States</fd-docs-section-title>
+<description>
+    TimePicker supports different visual states for validation feedback: <b>None</b> (default),
+    <b>Positive</b> (success), <b>Critical</b> (warning), <b>Negative</b> (error), and <b>Information</b>. Use these
+    states to provide clear user guidance and validation feedback.
+</description>
+<component-example>
+    <ui5-time-picker-value-states-sample></ui5-time-picker-value-states-sample>
+</component-example>
+<code-example [exampleFiles]="valueStatesExamples()"></code-example>
+
+<fd-docs-section-title id="states" componentName="TimePicker">Component States</fd-docs-section-title>
+<description>
+    Configure TimePicker interaction states using <b>disabled</b> (non-interactive) and <b>readonly</b> (focusable but
+    not editable).
+</description>
+<component-example>
+    <ui5-time-picker-states-sample></ui5-time-picker-states-sample>
+</component-example>
+<code-example [exampleFiles]="statesExamples()"></code-example>
+
+<fd-docs-section-title id="events" componentName="TimePicker">Events</fd-docs-section-title>
+<description>
+    TimePicker emits events for different user interactions: <b>ui5Change</b> (value change on blur),
+    <b>ui5Input</b> (keystroke input), <b>ui5Open</b> (picker opened), and <b>ui5Close</b> (picker closed). Use these
+    events to create responsive time selection workflows and validation.
+</description>
+<component-example>
+    <ui5-time-picker-events-sample></ui5-time-picker-events-sample>
+</component-example>
+<code-example [exampleFiles]="eventsExamples()"></code-example>

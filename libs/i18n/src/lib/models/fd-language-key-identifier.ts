@@ -296,6 +296,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformSearchField.searchSuggestionNavigateMessage'
     | 'platformSettingsGenerator.settingsLabel'
     | 'platformSettingsGenerator.searchLabel'
+    | 'platformSettingsGenerator.backButtonLabel'
     | 'platformSwitch.ariaLabel'
     | 'platformSmartFilterBar.searchPlaceholder'
     | 'platformSmartFilterBar.submitButtonLabel'

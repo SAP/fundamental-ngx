@@ -1,0 +1,14 @@
+<div class="fd-container">
+    <div class="fd-row">
+        @for (mode of emptyIndicatorModes(); track mode.mode) {
+        <div class="fd-col-6 fd-margin-end--sm fd-margin-bottom--sm">
+            <h5>{{ mode.description }}</h5>
+
+            <div>
+                <p><strong>Empty content:</strong></p>
+                <ui5-text [emptyIndicatorMode]="mode.mode"> {{ emptyText() }} </ui5-text>
+            </div>
+        </div>
+        }
+    </div>
+</div>

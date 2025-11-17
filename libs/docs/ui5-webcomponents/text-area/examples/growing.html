@@ -1,0 +1,45 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-6 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label class="fd-form-label">Growing TextArea</label>
+                <ui5-textarea
+                    [growing]="true"
+                    [rows]="2"
+                    placeholder="This textarea grows automatically as you type..."
+                    (ui5Change)="onTextChange($event)"
+                >
+                </ui5-textarea>
+                <small class="fd-form-message"> Automatically expands as content grows </small>
+            </div>
+        </div>
+
+        <div class="fd-col-6">
+            <div class="fd-form-item">
+                <label class="fd-form-label">Growing with Max Rows</label>
+                <ui5-textarea
+                    [growing]="true"
+                    [rows]="2"
+                    [growingMaxRows]="5"
+                    placeholder="This textarea grows up to 5 rows maximum..."
+                >
+                </ui5-textarea>
+                <small class="fd-form-message"> Grows up to 5 rows maximum, then scrolls </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-top--md">
+        <div class="fd-form-item">
+            <label class="fd-form-label">Fixed Height TextArea (Non-growing)</label>
+            <ui5-textarea
+                [growing]="false"
+                [rows]="3"
+                placeholder="This textarea has a fixed height and will scroll when content exceeds the visible area..."
+                [value]="fixedHeightValue()"
+            >
+            </ui5-textarea>
+            <small class="fd-form-message"> Fixed height - scrolls when content exceeds visible area </small>
+        </div>
+    </div>
+</div>

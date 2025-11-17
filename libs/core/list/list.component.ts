@@ -117,6 +117,11 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     @HostBinding('class.fd-list--subline')
     subline = false;
 
+    /** Whether to apply modifier class for Theme List */
+    @Input()
+    @HostBinding('class.fd-list--theme')
+    theme = false;
+
     /** Whether to display unread notification indicator. */
     @HostBinding('class.fd-list--unread-indicator')
     @Input()

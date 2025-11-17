@@ -75,3 +75,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.fd-list--theme .fd-list__item:not(.fd-list__group-header) {
+    --fdList_Item_Height: auto;
+
+    padding-block: 0.5625rem;
+
+    .fd-list__title {
+        white-space: normal;
+    }
+}

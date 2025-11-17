@@ -1,0 +1,18 @@
+{
+    "name": "docs-ui5-webcomponents-color-palette",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/docs/ui5-webcomponents/color-palette",
+    "projectType": "library",
+    "prefix": "ui5-doc",
+    "tags": ["type:lib", "scope:docs"],
+    "targets": {
+        "e2e": {
+            "executor": "@fundamental-ngx/nx-plugin:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/ui5-webcomponents/color-palette/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["{workspaceRoot}/allure-results/docs-ui5-webcomponents-color-palette"]
+        }
+    }
+}

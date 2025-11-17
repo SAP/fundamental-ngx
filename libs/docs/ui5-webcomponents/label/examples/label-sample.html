@@ -1,0 +1,258 @@
+<section aria-labelledby="label-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="label-basic" class="fd-section__title">Basic Label</h2>
+    </div>
+    <div class="fd-margin-bottom--sm" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center">
+        <ui5-label for="basic-input">First Name</ui5-label>
+        <ui5-input
+            id="basic-input"
+            placeholder="Enter your first name"
+            [value]="firstName()"
+            (ui5input)="onFirstNameChange($event)"
+        ></ui5-input>
+    </div>
+    <p class="fd-margin-top--tiny"><strong>Current Value:</strong> {{ firstName() || 'No value entered' }}</p>
+</section>
+
+<section aria-labelledby="label-configuration" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="label-configuration" class="fd-section__title">Label Configuration</h2>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Show Colon</h3>
+    <ui5-button (ui5Click)="toggleColon()">{{ showColon() ? 'Hide' : 'Show' }} Colon</ui5-button>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Show Required Indicator</h3>
+    <ui5-button (ui5Click)="toggleRequired()">{{ showRequired() ? 'Hide' : 'Show' }} Required Indicator</ui5-button>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Wrapping Type</h3>
+    <ui5-segmented-button (ui5SelectionChange)="onWrappingTypeChange($event)">
+        @for (type of wrappingTypes(); track type) {
+        <ui5-segmented-button-item [attr.data-type]="type">{{ type }}</ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+
+    <div class="fd-margin-top--md" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center">
+        <ui5-label
+            for="configured-input"
+            [showColon]="showColon()"
+            [required]="showRequired()"
+            [wrappingType]="currentWrappingType()"
+        >
+            This is a configurable label that demonstrates various label options
+        </ui5-label>
+        <ui5-input
+            id="configured-input"
+            placeholder="Type here to see label behavior"
+            [value]="lastName()"
+            (ui5input)="onLastNameChange($event)"
+        ></ui5-input>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Current Configuration:</h3>
+    <ul class="fd-margin-top--tiny">
+        <li><strong>Show Colon:</strong> {{ showColon() }}</li>
+        <li><strong>Required Indicator:</strong> {{ showRequired() }}</li>
+        <li><strong>Wrapping Type:</strong> {{ currentWrappingType() }}</li>
+    </ul>
+</section>
+
+<section aria-labelledby="label-form" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="label-form" class="fd-section__title">Form with Labels</h2>
+    </div>
+
+    <ui5-form>
+        <ui5-form-group title-text="Personal Information">
+            <ui5-form-item>
+                <ui5-label for="form-first-name" [showColon]="showColon()" [required]="showRequired()"
+                    >First Name</ui5-label
+                >
+                <ui5-input
+                    id="form-first-name"
+                    placeholder="Enter first name"
+                    [value]="firstName()"
+                    (ui5input)="onFirstNameChange($event)"
+                ></ui5-input>
+            </ui5-form-item>
+
+            <ui5-form-item>
+                <ui5-label for="form-last-name" [showColon]="showColon()" [required]="showRequired()"
+                    >Last Name</ui5-label
+                >
+                <ui5-input
+                    id="form-last-name"
+                    placeholder="Enter last name"
+                    [value]="lastName()"
+                    (ui5input)="onLastNameChange($event)"
+                ></ui5-input>
+            </ui5-form-item>
+
+            <ui5-form-item>
+                <ui5-label for="form-email" [showColon]="showColon()" [required]="showRequired()"
+                    >Email Address</ui5-label
+                >
+                <ui5-input
+                    id="form-email"
+                    type="Email"
+                    placeholder="Enter email address"
+                    [value]="email()"
+                    (ui5input)="onEmailChange($event)"
+                ></ui5-input>
+            </ui5-form-item>
+        </ui5-form-group>
+
+        <ui5-form-group title-text="Additional Details">
+            <ui5-form-item>
+                <ui5-label for="form-description" [showColon]="showColon()">Description</ui5-label>
+                <ui5-textarea
+                    id="form-description"
+                    placeholder="Enter description"
+                    [rows]="textAreaRows()"
+                    [value]="description()"
+                    (ui5input)="onDescriptionChange($event)"
+                ></ui5-textarea>
+            </ui5-form-item>
+
+            <ui5-form-item>
+                <ui5-label for="form-gender" [showColon]="showColon()">Gender</ui5-label>
+                <div style="display: flex; gap: 1rem; align-items: center">
+                    <ui5-radio-button
+                        id="form-gender-male"
+                        name="gender"
+                        value="male"
+                        text="Male"
+                        [checked]="gender() === 'male'"
+                        (ui5change)="onGenderChange($event)"
+                    ></ui5-radio-button>
+                    <ui5-radio-button
+                        id="form-gender-female"
+                        name="gender"
+                        value="female"
+                        text="Female"
+                        [checked]="gender() === 'female'"
+                        (ui5change)="onGenderChange($event)"
+                    ></ui5-radio-button>
+                    <ui5-radio-button
+                        id="form-gender-other"
+                        name="gender"
+                        value="other"
+                        text="Other"
+                        [checked]="gender() === 'other'"
+                        (ui5change)="onGenderChange($event)"
+                    ></ui5-radio-button>
+                </div>
+            </ui5-form-item>
+
+            <ui5-form-item>
+                <ui5-label for="form-country" [showColon]="showColon()">Country</ui5-label>
+                <ui5-select id="form-country" (ui5change)="onCountryChange($event)">
+                    <ui5-option>Select Country</ui5-option>
+                    <ui5-option value="us">United States</ui5-option>
+                    <ui5-option value="ca">Canada</ui5-option>
+                    <ui5-option value="uk">United Kingdom</ui5-option>
+                    <ui5-option value="de">Germany</ui5-option>
+                    <ui5-option value="fr">France</ui5-option>
+                </ui5-select>
+            </ui5-form-item>
+
+            <ui5-form-item>
+                <ui5-label for="form-notifications" [showColon]="showColon()">Enable Notifications</ui5-label>
+                <ui5-switch
+                    id="form-notifications"
+                    [checked]="notifications()"
+                    (ui5change)="onNotificationsChange($event)"
+                ></ui5-switch>
+            </ui5-form-item>
+
+            <ui5-form-item>
+                <ui5-label for="form-terms" [showColon]="showColon()" [required]="true">Accept Terms</ui5-label>
+                <ui5-checkbox
+                    id="form-terms"
+                    text="I accept the terms and conditions"
+                    [checked]="acceptTerms()"
+                    (ui5change)="onTermsChange($event)"
+                ></ui5-checkbox>
+            </ui5-form-item>
+        </ui5-form-group>
+    </ui5-form>
+
+    <div class="fd-margin-top--md" style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+        <ui5-button (ui5Click)="onSubmit()" [disabled]="!isFormValid()">Submit Form</ui5-button>
+        <ui5-button (ui5Click)="onReset()">Reset Form</ui5-button>
+        <ui5-button (ui5Click)="loadSampleData()">Load Sample Data</ui5-button>
+    </div>
+
+    <div class="fd-margin-top--md">
+        <h3 class="fd-margin-bottom--tiny">Form Status:</h3>
+        <p><strong>Valid:</strong> {{ isFormValid() ? 'Yes' : 'No' }}</p>
+        @if (!isFormValid()) {
+        <p style="color: var(--sapNegativeTextColor); font-style: italic">
+            Please fill in all required fields (First Name, Last Name, Email) and accept the terms to submit the form.
+        </p>
+        }
+    </div>
+</section>
+
+<section aria-labelledby="label-wrapping" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="label-wrapping" class="fd-section__title">Label Text Wrapping</h2>
+    </div>
+
+    <div style="max-width: 200px; border: 1px solid var(--sapNeutralBorderColor); padding: 1rem; margin-bottom: 1rem">
+        <h3 class="fd-margin-bottom--tiny">Normal Wrapping (Default)</h3>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-start">
+            <ui5-label for="wrapping-normal" wrappingType="Normal">
+                This is a very long label text that will wrap normally within the container when there is not enough
+                space available
+            </ui5-label>
+            <ui5-input id="wrapping-normal" placeholder="Input field"></ui5-input>
+        </div>
+    </div>
+
+    <div style="max-width: 200px; border: 1px solid var(--sapNeutralBorderColor); padding: 1rem">
+        <h3 class="fd-margin-bottom--tiny">No Wrapping</h3>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-start">
+            <ui5-label for="wrapping-none" wrappingType="None">
+                This is a very long label text that will not wrap and will be truncated with ellipsis when there is not
+                enough space
+            </ui5-label>
+            <ui5-input id="wrapping-none" placeholder="Input field"></ui5-input>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="label-accessibility" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="label-accessibility" class="fd-section__title">Accessibility & Best Practices</h2>
+    </div>
+
+    <div class="fd-margin-bottom--md">
+        <h3 class="fd-margin-bottom--tiny">Proper Label Association</h3>
+        <p class="fd-margin-bottom--sm">
+            Always use the <code>for</code> attribute to associate labels with form controls:
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem">
+            <ui5-label for="accessible-input">Accessible Input</ui5-label>
+            <ui5-input id="accessible-input" placeholder="This input is properly labeled"></ui5-input>
+        </div>
+    </div>
+
+    <div class="fd-margin-bottom--md">
+        <h3 class="fd-margin-bottom--tiny">Required Field Indication</h3>
+        <p class="fd-margin-bottom--sm">Use the <code>required</code> attribute to indicate mandatory fields:</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem">
+            <ui5-label for="required-input" required="true">Required Field</ui5-label>
+            <ui5-input id="required-input" placeholder="This field is required"></ui5-input>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="fd-margin-bottom--tiny">Form Context</h3>
+        <p class="fd-margin-bottom--sm">Use <code>showColon</code> in form contexts for better visual hierarchy:</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center">
+            <ui5-label for="form-context-input" showColon="true">Form Field</ui5-label>
+            <ui5-input id="form-context-input" placeholder="Field in form context"></ui5-input>
+        </div>
+    </div>
+</section>

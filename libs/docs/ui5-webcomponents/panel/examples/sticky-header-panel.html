@@ -1,0 +1,10 @@
+<div class="scrollable-content">
+    <ui5-panel headerText="Documentation Content with a Sticky Header" [stickyHeader]="stickyEnabled()">
+        @for (section of contentSections(); track section.title) {
+        <div>
+            <h4>{{ section.title }}</h4>
+            <ui5-text>{{ section.content }}</ui5-text>
+        </div>
+        }
+    </ui5-panel>
+</div>

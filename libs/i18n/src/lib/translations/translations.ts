@@ -377,7 +377,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Settings',
-        searchLabel: 'Search'
+        searchLabel: 'Search',
+        backButtonLabel: 'Back'
     },
     platformSwitch: {
         ariaLabel: 'Switch input'

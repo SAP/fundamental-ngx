@@ -1,0 +1,13 @@
+{
+    "name": "@fundamental-ngx/webc-generator",
+    "version": "0.58.0-rc.4",
+    "private": true,
+    "type": "commonjs",
+    "main": "./src/index.js",
+    "types": "./src/index.d.ts",
+    "dependencies": {
+        "@nx/devkit": "21.2.4",
+        "tslib": "^2.3.0"
+    },
+    "executors": "./executors.json"
+}

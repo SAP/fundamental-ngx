@@ -77,3 +77,15 @@ sauce_connect.log
 !.yarn/versions
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+
+# generation
+libs/ui5-webcomponents/**/
+libs/ui5-webcomponents/index.ts
+libs/ui5-webcomponents-base/**/
+libs/ui5-webcomponents-base/index.ts
+libs/ui5-webcomponents-ai/**/
+libs/ui5-webcomponents-ai/index.ts
+libs/ui5-webcomponents-fiori/**/
+libs/ui5-webcomponents-fiori/index.ts
+!libs/ui5-webcomponents-base/theming/
+

@@ -1,0 +1,74 @@
+<div class="fd-layout-grid fd-layout-grid--no-gap">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--sm">Different Precision Scenarios</h4>
+        </div>
+    </div>
+
+    @for (scenario of precisionScenarios(); track scenario.label) {
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--4">
+            <div class="fd-form-item">
+                <ui5-label>{{ scenario.label }}:</ui5-label>
+                <ui5-step-input
+                    [value]="scenario.value"
+                    [step]="scenario.step"
+                    [valuePrecision]="scenario.precision"
+                    [accessibleName]="scenario.description"
+                >
+                </ui5-step-input>
+            </div>
+        </div>
+        <div class="fd-col fd-col--8">
+            <strong>Description:</strong> {{ scenario.description }}
+            <br />
+            <strong>Step:</strong> {{ scenario.step }} | <strong>Precision:</strong> {{ scenario.precision }} decimals
+            <br />
+            <strong>Example:</strong> {{ scenario.example }}
+        </div>
+    </div>
+    }
+
+    <div class="fd-row fd-margin-top--lg">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--sm">Dynamic Precision Configuration</h4>
+            <p>Change the precision dynamically to see how it affects the input behavior and step values.</p>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--6">
+            <div class="fd-form-item">
+                <ui5-label>Select Precision:</ui5-label>
+                <ui5-segmented-button class="fd-margin-top--xs">
+                    @for (option of precisionOptions(); track option.value) {
+                    <ui5-segmented-button-item (click)="setPrecision(option.value)">
+                        {{ option.label }}
+                    </ui5-segmented-button-item>
+                    }
+                </ui5-segmented-button>
+            </div>
+        </div>
+
+        <div class="fd-col fd-col--6">
+            <div class="fd-form-item">
+                <ui5-label for="custom-precision-input">Custom Value:</ui5-label>
+                <ui5-step-input
+                    id="custom-precision-input"
+                    [value]="customValue()"
+                    [step]="stepForPrecision()"
+                    [valuePrecision]="selectedPrecision()"
+                    [min]="0"
+                    [max]="999"
+                    (ui5Change)="onCustomValueChange($event)"
+                    placeholder="Enter value"
+                    [accessibleName]="'Custom value with ' + selectedPrecision() + ' decimal precision'"
+                >
+                </ui5-step-input>
+                <div class="fd-margin-top--xs">
+                    <small>Step: {{ stepForPrecision() }} | Value: {{ customValue() }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

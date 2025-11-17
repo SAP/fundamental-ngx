@@ -1,0 +1,222 @@
+<div class="fd-container fd-padding-none">
+    @if (validationMessages().length > 0) { @if (!formValidation().isValid) {
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-message-strip design="Negative" [hideCloseButton]="true">
+                <strong>Validation Errors:</strong>
+                <div style="margin-top: 8px">
+                    @for (error of validationMessages(); track error) {
+                    <div style="margin-bottom: 4px">• {{ error }}</div>
+                    }
+                </div>
+            </ui5-message-strip>
+        </div>
+    </div>
+    } }
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                <ui5-form headerText="User Registration" layout="S1 M1 L2 XL2" itemSpacing="Normal">
+                    <ui5-form-group headerText="Personal Information">
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent" required>First Name:</ui5-label>
+                            <ui5-input
+                                formControlName="firstName"
+                                [id]="'firstNameInput'"
+                                [valueState]="hasFieldError('firstName') ? 'Negative' : 'None'"
+                                placeholder="Enter your first name"
+                                (ui5Input)="onInputChange('firstName', $event)"
+                            >
+                                @if (hasFieldError('firstName')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('firstName') }}</div>
+                                }
+                            </ui5-input>
+                        </ui5-form-item>
+
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent" required>Last Name:</ui5-label>
+                            <ui5-input
+                                formControlName="lastName"
+                                [id]="'lastNameInput'"
+                                [valueState]="hasFieldError('lastName') ? 'Negative' : 'None'"
+                                placeholder="Enter your last name"
+                                (ui5Input)="onInputChange('lastName', $event)"
+                            >
+                                @if (hasFieldError('lastName')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('lastName') }}</div>
+                                }
+                            </ui5-input>
+                        </ui5-form-item>
+                    </ui5-form-group>
+
+                    <ui5-form-group headerText="Contact Information">
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent" required>Email:</ui5-label>
+                            <ui5-input
+                                type="Email"
+                                formControlName="email"
+                                [valueState]="hasFieldError('email') ? 'Negative' : 'None'"
+                                placeholder="Enter your email address"
+                                (ui5Input)="onInputChange('email', $event)"
+                            >
+                                @if (hasFieldError('email')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('email') }}</div>
+                                }
+                            </ui5-input>
+                        </ui5-form-item>
+
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent">Phone Number:</ui5-label>
+                            <ui5-input
+                                type="Tel"
+                                formControlName="phone"
+                                [valueState]="hasFieldError('phone') ? 'Negative' : 'None'"
+                                placeholder="Enter your phone number (optional)"
+                                (ui5Input)="onInputChange('phone', $event)"
+                            >
+                                @if (hasFieldError('phone')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('phone') }}</div>
+                                }
+                            </ui5-input>
+                        </ui5-form-item>
+                    </ui5-form-group>
+
+                    <ui5-form-group headerText="Security">
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent" required>Password:</ui5-label>
+                            <ui5-input
+                                type="Password"
+                                formControlName="password"
+                                [valueState]="hasFieldError('password') ? 'Negative' : 'None'"
+                                placeholder="Create a strong password"
+                                (ui5Input)="onInputChange('password', $event)"
+                            >
+                                @if (hasFieldError('password')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('password') }}</div>
+                                }
+                            </ui5-input>
+                        </ui5-form-item>
+
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent" required>Confirm Password:</ui5-label>
+                            <ui5-input
+                                type="Password"
+                                formControlName="confirmPassword"
+                                [valueState]="hasFieldError('confirmPassword') ? 'Negative' : 'None'"
+                                placeholder="Confirm your password"
+                                (ui5Input)="onInputChange('confirmPassword', $event)"
+                            >
+                                @if (hasFieldError('confirmPassword')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('confirmPassword') }}</div>
+                                }
+                            </ui5-input>
+                        </ui5-form-item>
+                    </ui5-form-group>
+
+                    <ui5-form-group headerText="Additional Information">
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent">Bio:</ui5-label>
+                            <ui5-textarea
+                                formControlName="bio"
+                                [valueState]="hasFieldError('bio') ? 'Negative' : 'None'"
+                                placeholder="Tell us about yourself (max 500 characters)"
+                                [rows]="4"
+                                showExceededText="true"
+                                [maxlength]="500"
+                                (ui5Input)="onTextAreaChange('bio', $event)"
+                            >
+                                @if (hasFieldError('bio')) {
+                                <div slot="valueStateMessage">{{ getFieldErrorMessage('bio') }}</div>
+                                }
+                            </ui5-textarea>
+                        </ui5-form-item>
+
+                        <ui5-form-item>
+                            <ui5-label slot="labelContent" required>Terms & Conditions:</ui5-label>
+                            <ui5-checkbox
+                                formControlName="terms"
+                                text="I accept the terms and conditions"
+                                [valueState]="hasFieldError('terms') ? 'Negative' : 'None'"
+                                (ui5Change)="onCheckboxChange('terms', $event)"
+                            >
+                            </ui5-checkbox>
+                            @if (hasFieldError('terms')) {
+                            <ui5-message-strip design="Negative" [hideCloseButton]="true">
+                                <div style="color: var(--sapNegativeColor); font-size: 0.875rem">
+                                    {{ getFieldErrorMessage('terms') }}
+                                </div>
+                            </ui5-message-strip>
+                            }
+                        </ui5-form-item>
+                    </ui5-form-group>
+                </ui5-form>
+            </form>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-top--sm">
+        <div class="fd-col">
+            <div class="fd-panel">
+                <div class="fd-panel__content fd-padding--sm">
+                    <h5>Form Statistics:</h5>
+                    <div class="fd-margin-bottom--xs">
+                        <strong>Form Status:</strong> {{ registrationForm.valid ? 'Valid' : 'Invalid' }}
+                    </div>
+                    <div class="fd-margin-bottom--xs"><strong>Submit Attempts:</strong> {{ submitAttempts() }}</div>
+                    <div class="fd-margin-bottom--xs">
+                        <strong>Dirty Fields:</strong> {{ registrationForm.dirty ? 'Yes' : 'No' }}
+                    </div>
+                    <div><strong>Validation Errors:</strong> {{ validationMessages().length }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-top--md">
+        <div class="fd-col">
+            <ui5-button
+                design="Emphasized"
+                type="Submit"
+                [disabled]="!registrationForm.valid && isSubmitted()"
+                (ui5Click)="onSubmit()"
+            >
+                Register Account
+            </ui5-button>
+            <ui5-button design="Default" class="fd-margin-left--sm" (ui5Click)="resetForm()"> Reset Form </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-top--md">
+        <div class="fd-col">
+            <div class="fd-panel">
+                <div class="fd-panel__header">
+                    <h5 class="fd-panel__title">Password Requirements</h5>
+                </div>
+                <div class="fd-panel__content fd-padding--sm">
+                    <div>
+                        <div>• At least 8 characters long</div>
+                        <div>• Contains at least one uppercase letter (A-Z)</div>
+                        <div>• Contains at least one lowercase letter (a-z)</div>
+                        <div>• Contains at least one number (0-9)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (registrationForm.value) {
+    <div class="fd-row fd-margin-top--md">
+        <div class="fd-col">
+            <div class="fd-panel">
+                <div class="fd-panel__header">
+                    <h5 class="fd-panel__title">Form Data (Development View)</h5>
+                </div>
+                <div class="fd-panel__content fd-padding--sm">
+                    <pre style="font-size: 0.875rem; white-space: pre-wrap">{{ registrationForm.value | json }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

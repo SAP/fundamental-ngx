@@ -102,6 +102,7 @@
 @for (column of _fdpTableService.visibleColumns$(); track column.name) {
     <td
         #tableCellElement
+        fd-table-cell
         [fdpTableCellResizable]="
             $index
                 | columnResizableSide

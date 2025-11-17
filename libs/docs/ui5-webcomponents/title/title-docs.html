@@ -1,0 +1,42 @@
+<fd-docs-section-title>Basic Example</fd-docs-section-title>
+<description>
+    The UI5 Title component is used to display headings and titles in different semantic levels and visual sizes. It
+    provides a simple way to create consistent typography across your application while maintaining proper semantic
+    hierarchy for accessibility.
+</description>
+<component-example>
+    <ui5-title-basic-sample></ui5-title-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicSampleFiles()"></code-example>
+
+<fd-docs-section-title>Visual Sizes</fd-docs-section-title>
+<description>
+    The <code>size</code> property controls the visual appearance and font size of the title. Available sizes range from
+    H1 (largest) to H6 (smallest). The size property is independent of the semantic level, allowing for flexible design
+    while maintaining proper accessibility.
+</description>
+<component-example>
+    <ui5-title-sizes-sample></ui5-title-sizes-sample>
+</component-example>
+<code-example [exampleFiles]="sizesSampleFiles()"></code-example>
+
+<fd-docs-section-title>Semantic Levels</fd-docs-section-title>
+<description>
+    The <code>level</code> property defines the semantic importance of the title for screen readers and SEO. Available
+    levels are H1 through H6, with H1 being the most important. This property affects the underlying HTML element but
+    not the visual appearance.
+</description>
+<component-example>
+    <ui5-title-levels-sample></ui5-title-levels-sample>
+</component-example>
+<code-example [exampleFiles]="levelsSampleFiles()"></code-example>
+
+<fd-docs-section-title>Text Wrapping</fd-docs-section-title>
+<description>
+    The <code>wrappingType</code> property controls how text behaves when it doesn't fit in the available space. Use
+    "Normal" for standard text wrapping or "None" to prevent wrapping and allow text to overflow.
+</description>
+<component-example>
+    <ui5-title-wrapping-sample></ui5-title-wrapping-sample>
+</component-example>
+<code-example [exampleFiles]="wrappingSampleFiles()"></code-example>

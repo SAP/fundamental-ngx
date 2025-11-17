@@ -1,0 +1,53 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-md-6 fd-col-lg-6">
+            <div class="fd-margin-bottom--sm">
+                <ui5-text>Select multiple items and drag to move them together:</ui5-text>
+            </div>
+
+            <div class="fd-margin-bottom--md">
+                <ui5-label>Selected: </ui5-label
+                ><span id="count1" class="selected-count">{{ list1SelectedCount() }}</span> items
+            </div>
+
+            <ui5-list
+                #list1
+                headerText="My Tasks"
+                selectionMode="Multiple"
+                (dragstart)="onDragStart($event, 1)"
+                (ui5Move)="onItemMove($event)"
+                (ui5MoveOver)="onItemMoveOver($event)"
+                (ui5SelectionChange)="onSelectionChange(1)"
+            >
+                @for (item of list1Items(); track item.id) {
+                <ui5-li movable [icon]="item.icon" [attr.data-id]="item.id"> {{ item.text }} </ui5-li>
+                }
+            </ui5-list>
+        </div>
+
+        <div class="fd-col-md-6 fd-col-lg-6 fd-padding-begin-end--md">
+            <div class="fd-margin-bottom--sm">
+                <ui5-text>Drag items from the left list here:</ui5-text>
+            </div>
+
+            <div class="fd-margin-bottom--md">
+                <ui5-label>Selected: </ui5-label
+                ><span id="count2" class="selected-count">{{ list2SelectedCount() }}</span> items
+            </div>
+
+            <ui5-list
+                #list2
+                headerText="Done"
+                selectionMode="Multiple"
+                (dragstart)="onDragStart($event, 2)"
+                (ui5Move)="onItemMove($event)"
+                (ui5MoveOver)="onItemMoveOver($event)"
+                (ui5SelectionChange)="onSelectionChange(2)"
+            >
+                @for (item of list2Items(); track item.id) {
+                <ui5-li movable [icon]="item.icon" [attr.data-id]="item.id"> {{ item.text }} </ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+</div>

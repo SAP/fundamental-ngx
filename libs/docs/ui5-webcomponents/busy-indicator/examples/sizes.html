@@ -1,0 +1,14 @@
+<div class="sizes-examples">
+    <ui5-button (click)="toggleBusyIndicator()"> {{ isActive() ? 'Hide' : 'Show' }} All Busy Indicators </ui5-button>
+
+    @for (size of sizes; track size.value) {
+    <div class="size-example">
+        <ui5-label>{{ size.label }} ({{ size.value }})</ui5-label>
+        <div class="example-content">
+            <ui5-busy-indicator [active]="isActive()" [size]="size.value" text="Loading...">
+                <ui5-label>Content</ui5-label>
+            </ui5-busy-indicator>
+        </div>
+    </div>
+    }
+</div>

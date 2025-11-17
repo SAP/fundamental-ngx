@@ -1,0 +1,20 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6 fd-padding--none">
+            <ui5-label for="placement-select" class="fd-margin-end--sm">Select Placement:</ui5-label>
+            <ui5-select id="placement-select" [value]="selectedPlacement()" (ui5Change)="onPlacementChange($event)">
+                @for (placement of placements; track placement) {
+                <ui5-option [value]="placement">{{ placement }}</ui5-option>
+                }
+            </ui5-select>
+        </div>
+
+        <div class="fd-col fd-col--6">
+            <ui5-button (click)="showToast()">Show Toast</ui5-button>
+        </div>
+    </div>
+</div>
+
+<ui5-toast [open]="isToastOpen()" [placement]="selectedPlacement()" (ui5Close)="onToastClose()">
+    {{ toastMessage() }} ({{ selectedPlacement() }})
+</ui5-toast>
