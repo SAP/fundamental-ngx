@@ -44,6 +44,9 @@ const getVersions = () => {
 
     logger.info(`🎯 [sync-versions] Final VERSION_PLACEHOLDER will be: ${currentVersion} (source: ${versionSource})`);
 
+    // Force console logging as backup
+    console.log(`🎯 [sync-versions] Final VERSION_PLACEHOLDER will be: ${currentVersion} (source: ${versionSource})`);
+
     const aboveMinorVersion = (version) => {
         const parsed = parse(version);
         return `^${parsed?.major}.${parsed?.minor}.0`;
@@ -89,9 +92,47 @@ const getVersions = () => {
 
 export const replaceInFile = (file: string, fileContents: string): string => {
     const verboseLogging = process.env.NX_VERBOSE_LOGGING === 'true';
+
+    // Force console logging as backup in case logger doesn't work
+    console.log(`📁 [sync-versions] STARTING replaceInFile for: ${file}`);
+    console.log(
+        `🔍 [sync-versions] Environment FD_ENV_VERSION_PLACEHOLDER: ${process.env.FD_ENV_VERSION_PLACEHOLDER || 'NOT SET'}`
+    );
+
     const versions = getVersions(); // Get versions dynamically each time
 
     logger.info(`📁 [sync-versions] Processing file: ${file}`);
+
+    // Special handling for package.json files to ensure version is correct
+    if (file.endsWith('package.json') && process.env.FD_ENV_VERSION_PLACEHOLDER) {
+        try {
+            const packageData = JSON.parse(fileContents);
+            const currentVersion = packageData.version;
+            const expectedVersion = process.env.FD_ENV_VERSION_PLACEHOLDER;
+
+            if (currentVersion && currentVersion !== expectedVersion) {
+                logger.info(
+                    `🔄 [sync-versions] Found package.json with version "${currentVersion}", updating to "${expectedVersion}"`
+                );
+                packageData.version = expectedVersion;
+                fileContents = JSON.stringify(packageData, null, 2) + '\n';
+                logger.info(
+                    `✅ [sync-versions] Updated package.json version from "${currentVersion}" to "${expectedVersion}"`
+                );
+                console.log(
+                    `✅ [sync-versions] Updated package.json version from "${currentVersion}" to "${expectedVersion}"`
+                );
+            } else if (currentVersion === expectedVersion) {
+                logger.info(
+                    `ℹ️ [sync-versions] Package.json version "${currentVersion}" already matches expected "${expectedVersion}"`
+                );
+            } else {
+                logger.info(`ℹ️ [sync-versions] Package.json has no version field or environment variable not set`);
+            }
+        } catch (e) {
+            logger.warn(`❌ [sync-versions] Could not parse package.json: ${e.message}`);
+        }
+    }
 
     let replacements = 0;
     Object.keys(versions).forEach((key) => {

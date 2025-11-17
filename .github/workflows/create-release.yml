@@ -88,6 +88,12 @@ jobs:
                       npx nx run-many --target=lint --skip-nx-cache --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai --parallel=1
                       npx nx run-many --target=build --all --parallel=1
 
+            # Ensure nx-plugin is built and available before prepare step
+            - name: Build nx-plugin
+              run: npx nx build nx-plugin
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
             - name: Pack libraries
               run: npx nx run-many --target=prepare --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai --parallel=3
               env:
