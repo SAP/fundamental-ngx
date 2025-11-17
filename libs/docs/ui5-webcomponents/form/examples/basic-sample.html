@@ -1,0 +1,98 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col"><ui5-label show-colon>Form Layout</ui5-label><ui5-text>S1 M2 L2 XL3</ui5-text></div>
+        <div class="fd-col">
+            <ui5-label show-colon>Page Size</ui5-label><ui5-text id="txtLayout">{{ pageSize() }}</ui5-text>
+        </div>
+        <ui5-slider id="slider" [value]="85" (ui5Change)="onSliderChange($event)"></ui5-slider>
+    </div>
+
+    <div class="fd-row" id="container" [ngStyle]="{ 'max-width': '1500px', 'width': '100%', 'overflow-x': 'auto' }">
+        <div class="fd-col" [ngStyle]="{'min-width': containerWidth()}">
+            <ui5-form headerText="Contact Information" layout="S1 M2 L2 XL3">
+                <ui5-form-group headerText="Personal Details">
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">First Name:</ui5-label>
+                        <ui5-input
+                            [value]="formData().firstName"
+                            (ui5Input)="updateFormField('firstName', $event)"
+                            placeholder="Enter first name"
+                        >
+                        </ui5-input>
+                    </ui5-form-item>
+
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">Last Name:</ui5-label>
+                        <ui5-input
+                            [value]="formData().lastName"
+                            (ui5Input)="updateFormField('lastName', $event)"
+                            placeholder="Enter last name"
+                        >
+                        </ui5-input>
+                    </ui5-form-item>
+                </ui5-form-group>
+
+                <ui5-form-group headerText="Contact Information">
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">Email:</ui5-label>
+                        <ui5-input
+                            type="Email"
+                            [value]="formData().email"
+                            (ui5Input)="updateFormField('email', $event)"
+                            placeholder="Enter email address"
+                        >
+                        </ui5-input>
+                    </ui5-form-item>
+
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">Phone:</ui5-label>
+                        <ui5-input
+                            type="Tel"
+                            [value]="formData().phone"
+                            (ui5Input)="updateFormField('phone', $event)"
+                            placeholder="Enter phone number"
+                        >
+                        </ui5-input>
+                    </ui5-form-item>
+                </ui5-form-group>
+
+                <ui5-form-group headerText="Additional Information">
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">Company:</ui5-label>
+                        <ui5-input
+                            [value]="formData().company"
+                            (ui5Input)="updateFormField('company', $event)"
+                            placeholder="Enter company name"
+                        >
+                        </ui5-input>
+                    </ui5-form-item>
+
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">Notes:</ui5-label>
+                        <ui5-textarea
+                            [value]="formData().notes"
+                            (ui5Input)="updateFormField('notes', $event)"
+                            placeholder="Additional notes..."
+                            [rows]="3"
+                        >
+                        </ui5-textarea>
+                    </ui5-form-item>
+                </ui5-form-group>
+            </ui5-form>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button design="Emphasized" (ui5Click)="onSubmit()"> Submit Form </ui5-button>
+            <ui5-button design="Default" class="fd-margin-begin--sm" (ui5Click)="onReset()"> Reset </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <h4>Form Data:</h4>
+            <pre>{{ formData() | json }}</pre>
+        </div>
+    </div>
+</div>

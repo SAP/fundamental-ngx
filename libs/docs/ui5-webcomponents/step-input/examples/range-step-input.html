@@ -1,0 +1,30 @@
+<div class="fd-layout-grid fd-layout-grid--no-gap">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--sm">Common Range Scenarios</h4>
+        </div>
+    </div>
+
+    @for (scenario of rangeScenarios(); track scenario.label) {
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--4">
+            <ui5-label>{{ scenario.label }}:</ui5-label>
+            <ui5-step-input
+                [value]="scenario.value"
+                [min]="scenario.min"
+                [max]="scenario.max"
+                [step]="scenario.step"
+                [accessibleName]="scenario.description"
+            >
+            </ui5-step-input>
+        </div>
+        <div class="fd-col fd-col--8">
+            <strong>Range:</strong> {{ scenario.min }} to {{ scenario.max }}{{ scenario.unit }}
+            <br />
+            <strong>Description:</strong> {{ scenario.description }}
+            <br />
+            <strong>Example:</strong> {{ scenario.value }}{{ scenario.unit }}
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,11 @@
+{
+    "$schema": "https://json-schema.org/schema",
+    "version": 2,
+    "title": "Generate executor",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "packageName": "@ui5/webcomponents-tools"
+    },
+    "required": []
+}

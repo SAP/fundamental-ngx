@@ -1,0 +1,26 @@
+<div class="fd-layout-grid fd-layout-grid--no-gap">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4 class="fd-margin-bottom--sm">All Value States</h4>
+        </div>
+    </div>
+
+    @for (scenario of valueStateScenarios(); track scenario.label) {
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col fd-col--4">
+            <ui5-label>{{ scenario.label }}:</ui5-label>
+            <ui5-step-input
+                [value]="scenario.value"
+                [valueState]="scenario.valueState"
+                [accessibleName]="scenario.description"
+                [readonly]="scenario.readonly"
+                [disabled]="scenario.disabled"
+                (ui5Change)="onFormValueChange($event)"
+                (ui5Input)="onFormValueInput($event)"
+                (ui5ValueStateChange)="onValueStateChange($event)"
+            >
+            </ui5-step-input>
+        </div>
+    </div>
+    }
+</div>

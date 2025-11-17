@@ -136,6 +136,24 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             callback: () => {
                 this._routerService.navigate(['i18n/home']);
             }
+        },
+        {
+            name: 'Web Components (Main)',
+            callback: () => {
+                this._routerService.navigate(['ui5-webcomponents/home']);
+            }
+        },
+        {
+            name: 'Web Components AI',
+            callback: () => {
+                this._routerService.navigate(['ui5-webcomponents-ai/home']);
+            }
+        },
+        {
+            name: 'Web Components Fiori',
+            callback: () => {
+                this._routerService.navigate(['ui5-webcomponents-fiori/home']);
+            }
         }
     ];
 

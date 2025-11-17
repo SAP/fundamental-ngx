@@ -1,0 +1,43 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-label show-colon>Page Size</ui5-label><ui5-text id="txtLayout">{{pageSize()}}</ui5-text>
+        </div>
+        <ui5-slider id="slider" [value]="sliderValue()" (ui5Change)="onSliderChange($event)"></ui5-slider>
+    </div>
+
+    <div class="fd-row" id="container" style="max-width: 1500px; width: 1250px; overflow-x: auto">
+        <div class="fd-col" [ngStyle]="{'min-width': containerWidth()}">
+            <ui5-form headerText="Label Span: S12 M4 L4 XL4" labelSpan="S12 M4 L4 XL4">
+                @for (formItem of formItems(); track formItem.id) {
+                <ui5-form-item>
+                    <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                    <ui5-text>{{ formItem.value }}</ui5-text>
+                </ui5-form-item>
+                }
+            </ui5-form>
+
+            <br /><br />
+
+            <ui5-form headerText="Label Span: S12 M6 L6 XL6" labelSpan="S12 M6 L6 XL6">
+                @for (formItem of formItems(); track formItem.id) {
+                <ui5-form-item>
+                    <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                    <ui5-text>{{ formItem.value }}</ui5-text>
+                </ui5-form-item>
+                }
+            </ui5-form>
+
+            <br /><br />
+
+            <ui5-form headerText="Label Span: S12 M12 L12 XL12" labelSpan="S12 M12 L12 XL12">
+                @for (formItem of formItems(); track formItem.id) {
+                <ui5-form-item>
+                    <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                    <ui5-text>{{ formItem.value }}</ui5-text>
+                </ui5-form-item>
+                }
+            </ui5-form>
+        </div>
+    </div>
+</div>

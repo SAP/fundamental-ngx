@@ -1,0 +1,31 @@
+<fd-docs-section-title id="basic" componentName="Toast">Basic Example</fd-docs-section-title>
+<description>
+    The UI5 Toast component provides brief, temporary notifications that appear on screen to inform users about the
+    result of an action or provide important information. Toasts appear temporarily and automatically disappear after a
+    specified duration.
+</description>
+<component-example>
+    <ui5-toast-basic-sample></ui5-toast-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicSampleFiles()"></code-example>
+
+<fd-docs-section-title id="placement" componentName="Toast">Toast Placement</fd-docs-section-title>
+<description>
+    The <code>placement</code> property controls where the toast appears on the screen. Available placements include
+    nine different positions: TopStart, TopCenter, TopEnd, MiddleStart, MiddleCenter, MiddleEnd, BottomStart,
+    BottomCenter, and BottomEnd. The default placement is BottomCenter.
+</description>
+<component-example>
+    <ui5-toast-placement-sample></ui5-toast-placement-sample>
+</component-example>
+<code-example [exampleFiles]="placementSampleFiles()"></code-example>
+
+<fd-docs-section-title id="duration" componentName="Toast">Toast Duration</fd-docs-section-title>
+<description>
+    The <code>duration</code> property defines how long the toast remains visible before automatically closing. The
+    duration is specified in milliseconds, with a minimum value of 500ms. The default duration is 3000ms (3 seconds).
+</description>
+<component-example>
+    <ui5-toast-duration-sample></ui5-toast-duration-sample>
+</component-example>
+<code-example [exampleFiles]="durationSampleFiles()"></code-example>

@@ -1,0 +1,25 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6">
+            <h4>Semantic Levels (for screen readers and SEO)</h4>
+            @for (levelExample of levels(); track levelExample.level) {
+            <ui5-title [level]="levelExample.level" size="H5"> Level {{ levelExample.level }} </ui5-title>
+            <div class="fd-margin-bottom--sm">
+                <small>{{ levelExample.description }}</small>
+            </div>
+            }
+        </div>
+        <div class="fd-col fd-col--6">
+            <h4>Visual Size vs Semantic Level</h4>
+            <p>These examples show how visual appearance (size) can be independent from semantic meaning (level)</p>
+            @for (example of examples(); track example.text) {
+            <div class="fd-col">
+                <ui5-title [size]="example.size" [level]="example.level"> {{ example.text }} </ui5-title>
+                <div class="fd-margin-bottom--sm">
+                    <small>Size: {{ example.size }}, Semantic Level: {{ example.level }}</small>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,337 @@
+<section aria-labelledby="input-basic" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="input-basic" class="fd-section__title">Basic Input</h2>
+    </div>
+    <ui5-input
+        #basicInput
+        [value]="basicValue()"
+        [placeholder]="basicPlaceholder()"
+        (ui5Input)="onBasicInput($event)"
+        (ui5Change)="onBasicChange($event)"
+        (ui5Select)="onSelection($event)"
+        aria-label="Basic input example"
+        class="sap-margin-bottom-small"
+    ></ui5-input>
+
+    <p class="sap-text sap-margin-top-tiny"><strong>Current Value:</strong> {{ basicValueDisplay() }}</p>
+    <p class="sap-text" style="font-style: italic">
+        Basic input with two-way data binding using signals. Type to see the value update reactively.
+    </p>
+</section>
+
+<section aria-labelledby="input-configuration" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="input-configuration" class="fd-section__title">Input Configuration</h2>
+    </div>
+
+    <div class="sap-flex sap-flex--column sap-margin-bottom-tiny">
+        <ui5-label for="config-input" [required]="isRequired()">Configurable Input:</ui5-label>
+        <ui5-input
+            id="config-input"
+            placeholder="Configurable input"
+            [disabled]="isDisabled()"
+            [readonly]="isReadonly()"
+            [required]="isRequired()"
+            [showClearIcon]="showClearIcon()"
+            [showSuggestions]="showSuggestions()"
+            [maxlength]="maxLength()"
+            [valueState]="currentValueState()"
+            [type]="inputType()"
+            class="sap-margin-bottom-small"
+        ></ui5-input>
+    </div>
+
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col--6">
+                <ui5-panel collapsed="true" headerText="Configuration Options">
+                    <div class="sap-flex sap-flex--column sap-padding-x-medium">
+                        <div
+                            class="sap-flex sap-flex--row sap-flex--align-items-center sap-padding-x-tiny sap-flex--gap-tiny"
+                        >
+                            <ui5-switch [checked]="isDisabled()" (ui5Change)="toggleDisabled()"></ui5-switch>
+                            <ui5-label>Disabled</ui5-label>
+                        </div>
+
+                        <div
+                            class="sap-flex sap-flex--row sap-flex--align-items-center sap-padding-x-tiny sap-flex--gap-tiny"
+                        >
+                            <ui5-switch [checked]="isReadonly()" (ui5Change)="toggleReadonly()"></ui5-switch>
+                            <ui5-label>Readonly</ui5-label>
+                        </div>
+
+                        <div
+                            class="sap-flex sap-flex--row sap-flex--align-items-center sap-padding-x-tiny sap-flex--gap-tiny"
+                        >
+                            <ui5-switch [checked]="isRequired()" (ui5Change)="toggleRequired()"></ui5-switch>
+                            <ui5-label>Required</ui5-label>
+                        </div>
+
+                        <div
+                            class="sap-flex sap-flex--row sap-flex--align-items-center sap-padding-x-tiny sap-flex--gap-tiny"
+                        >
+                            <ui5-switch [checked]="showClearIcon()" (ui5Change)="toggleClearIcon()"></ui5-switch>
+                            <ui5-label>Show Clear Icon</ui5-label>
+                        </div>
+
+                        <div
+                            class="sap-flex sap-flex--row sap-flex--align-items-center sap-padding-x-tiny sap-flex--gap-tiny"
+                        >
+                            <ui5-switch [checked]="showSuggestions()" (ui5Change)="toggleSuggestions()"></ui5-switch>
+                            <ui5-label>Show Suggestions</ui5-label>
+                        </div>
+
+                        <div class="sap-flex sap-flex--column sap-padding-x-tiny">
+                            <ui5-label for="type-select">Input Type</ui5-label>
+                            <ui5-select id="type-select" (ui5Change)="onTypeChange($event)">
+                                @for (type of availableTypes(); track type) {
+                                <ui5-option [selected]="inputType() === type">{{ type }}</ui5-option>
+                                }
+                            </ui5-select>
+                        </div>
+
+                        <div class="sap-flex sap-flex--column sap-padding-x-tiny">
+                            <ui5-label for="value-state-select">Value State</ui5-label>
+                            <ui5-select id="value-state-select" (ui5Change)="onValueStateChange($event)">
+                                @for (state of availableValueStates(); track state) {
+                                <ui5-option [selected]="currentValueState() === state">{{ state }}</ui5-option>
+                                }
+                            </ui5-select>
+                        </div>
+
+                        <div class="sap-flex sap-flex--column sap-padding-x-tiny">
+                            <ui5-label for="max-length-input">Max Length</ui5-label>
+                            <ui5-input
+                                id="max-length-input"
+                                type="Number"
+                                placeholder="Set max length"
+                                (ui5Change)="onMaxLengthChange($event)"
+                            ></ui5-input>
+                        </div>
+                    </div>
+                </ui5-panel>
+            </div>
+
+            <div class="fd-col fd-col--6">
+                <ui5-panel collapsed="true" headerText="Current Configuration Summary">
+                    <pre class="sap-padding-x-medium">{{ configurationSummary() | json }}</pre>
+                </ui5-panel>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="input-reactive-forms" class="fd-section sap-margin-bottom-tiny">
+    <div class="fd-section__header">
+        <h2 id="input-reactive-forms" class="fd-section__title">Reactive Forms Integration</h2>
+    </div>
+
+    <ui5-card>
+        <ui5-card-header
+            titleText="User Registration Form"
+            subtitleText="Angular Reactive Forms with validation and signals"
+        ></ui5-card-header>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="fd-container fd-form-layout-grid-container fd-form-group">
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="firstName" [required]="true" class="fd-form-label">First Name</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="firstName"
+                            formControlName="firstName"
+                            placeholder="Enter your first name"
+                            [valueState]="firstNameState()"
+                            [required]="true"
+                        >
+                            <div slot="valueStateMessage">Test the states</div>
+                        </ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="lastName" [required]="true" class="fd-form-label">Last Name</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="lastName"
+                            formControlName="lastName"
+                            placeholder="Enter your last name"
+                            [valueState]="lastNameState()"
+                            [required]="true"
+                        ></ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="email" [required]="true" class="fd-form-label">Email</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="email"
+                            formControlName="email"
+                            placeholder="Enter your email"
+                            [valueState]="emailState()"
+                            [required]="true"
+                            type="Email"
+                        ></ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="phone" class="fd-form-label">Phone (Optional)</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="phone"
+                            formControlName="phone"
+                            placeholder="Enter your phone number"
+                            [valueState]="phoneState()"
+                            type="Tel"
+                        ></ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="website" class="fd-form-label">Website (Optional)</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="website"
+                            formControlName="website"
+                            type="URL"
+                            placeholder="https://your-website.com"
+                            [valueState]="websiteState()"
+                        ></ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="age" [required]="true" class="fd-form-label">Age</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="age"
+                            formControlName="age"
+                            type="Number"
+                            placeholder="Enter your age"
+                            [valueState]="ageState()"
+                            [required]="true"
+                        ></ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="username" [required]="true" class="fd-form-label">Username</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="username"
+                            formControlName="username"
+                            placeholder="Choose a username"
+                            [valueState]="usernameState()"
+                            [required]="true"
+                            [maxlength]="maxLengthExample2()"
+                        ></ui5-input>
+                    </div>
+                </div>
+                <div class="fd-row">
+                    <div class="fd-col fd-col-md--2">
+                        <ui5-label for="bio" class="fd-form-label">Bio (Optional)</ui5-label>
+                    </div>
+                    <div class="fd-col fd-col-md--10">
+                        <ui5-input
+                            id="bio"
+                            formControlName="bio"
+                            placeholder="Tell us about yourself"
+                            [maxlength]="maxLengthExample()"
+                        ></ui5-input>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="sap-flex sap-flex--row sap-margin-top-medium sap-flex--gap-small sap-padding-x-medium">
+            <ui5-button type="Submit" design="Emphasized" [disabled]="!isFormValid()"> Submit </ui5-button>
+            <ui5-button design="Transparent" (ui5Click)="resetForm()"> Reset </ui5-button>
+            <ui5-button design="Default" (ui5Click)="fillSampleData()"> Fill Sample Data </ui5-button>
+        </div>
+        <div class="sap-margin-medium sap-padding-x-medium">
+            <h4>Form State Summary</h4>
+            <ui5-panel collapsed="true" headerText="Form Details">
+                <pre class="sap-padding-x-medium">{{ formSummary() | json }}</pre>
+            </ui5-panel>
+        </div>
+    </ui5-card>
+</section>
+
+<section aria-labelledby="input-suggestions" class="fd-section sap-margin-bottom-tiny">
+    <div class="fd-section__header">
+        <h2 id="input-suggestions" class="fd-section__title">Input with Suggestions</h2>
+    </div>
+
+    <ui5-label for="search-input">Technology Search</ui5-label>
+    <p>{{filteredSuggestions()}}</p>
+    <ui5-input
+        id="search-input"
+        [value]="searchValue()"
+        placeholder="Type to search technologies..."
+        [showSuggestions]="true"
+        showClearIcon="true"
+        (ui5Input)="onSearchInput($event)"
+        class="sap-margin-bottom-small"
+    >
+        @for (suggestion of filteredSuggestions(); track suggestion) {
+        <ui5-suggestion-item [text]="suggestion"></ui5-suggestion-item>
+        }
+    </ui5-input>
+
+    <p class="sap-text sap-margin-top-tiny"><strong>Search Value:</strong> {{ searchValue() || 'Start typing...' }}</p>
+    <p class="sap-margin-top-tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Input with dynamic suggestions filtered based on user input. Try typing "an", "js", or "node".
+    </p>
+
+    <h4>Available Technologies</h4>
+    <ul>
+        @for (suggestion of searchSuggestions(); track suggestion) {
+        <li class="sap-text">{{ suggestion }}</li>
+        }
+    </ul>
+</section>
+
+<section aria-labelledby="input-events" class="fd-section sap-margin-bottom-tiny">
+    <div class="fd-section__header">
+        <h2 id="input-events" class="fd-section__title">Event Handling</h2>
+    </div>
+
+    <ui5-label for="event-input">Event Tracking Input</ui5-label>
+    <ui5-input
+        id="event-input"
+        placeholder="Type or select text to see events"
+        (ui5Input)="onBasicInput($event)"
+        (ui5Change)="onBasicChange($event)"
+        (ui5Select)="onSelection($event)"
+        class="sap-margin-bottom--sm"
+    ></ui5-input>
+
+    <h4>Input Events (ui5Input)</h4>
+    <ui5-panel collapsed="false" headerText="Last 5 Input Events">
+        @if (inputEvents().length === 0) {
+        <p class="sap-padding-x-medium sap-text">No input events yet</p>
+        } @else { @for (event of inputEvents(); track $index) {
+        <p class="sap-padding-x-medium sap-text">{{ event }}</p>
+        } }
+    </ui5-panel>
+
+    <h4>Change Events (ui5Change)</h4>
+    <ui5-panel collapsed="false" headerText="Last 5 Change Events">
+        @if (changeEvents().length === 0) {
+        <p class="sap-padding-x-medium sap-text">No change events yet</p>
+        } @else { @for (event of changeEvents(); track $index) {
+        <p class="sap-padding-x-medium sap-text">{{ event }}</p>
+        } }
+    </ui5-panel>
+    <p class="sap-margin-top-tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Input events fire on every keystroke, change events fire when the input loses focus or on Enter.
+    </p>
+</section>

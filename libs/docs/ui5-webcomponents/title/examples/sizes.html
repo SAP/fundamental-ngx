@@ -1,0 +1,10 @@
+<div class="fd-padding--sm">
+    @for (sizeExample of sizes(); track sizeExample.size) {
+    <div class="fd-margin-bottom--md">
+        <ui5-title [size]="sizeExample.size"> {{ sizeExample.size }} - {{ sizeExample.description }} </ui5-title>
+        <div class="fd-margin-top--sm">
+            <small>Visual size: {{ sizeExample.size }}</small>
+        </div>
+    </div>
+    }
+</div>

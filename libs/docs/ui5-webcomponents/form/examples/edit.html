@@ -1,0 +1,28 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-segmented-button (ui5SelectionChange)="toggleSelection($event)">
+                <ui5-segmented-button-item id="display">Display</ui5-segmented-button-item>
+                <ui5-segmented-button-item id="edit">Edit</ui5-segmented-button-item>
+            </ui5-segmented-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-form headerText="Company Information" layout="S1 M2 L2 XL2" [itemSpacing]="itemSpacing()">
+                @if(editable()) { @for (formItem of formItems(); track formItem.id) {
+                <ui5-form-item>
+                    <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                    <ui5-input>{{ formItem.value }}</ui5-input>
+                </ui5-form-item>
+                } } @else { @for (formItem of formItems(); track formItem.id) {
+                <ui5-form-item>
+                    <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                    <ui5-text>{{ formItem.value }}</ui5-text>
+                </ui5-form-item>
+                } }
+            </ui5-form>
+        </div>
+    </div>
+</div>

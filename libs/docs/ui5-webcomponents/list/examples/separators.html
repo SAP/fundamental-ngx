@@ -1,0 +1,20 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-md-6 fd-col-lg-6">
+            <ui5-label class="fd-margin--sm">Separators None:</ui5-label>
+            <ui5-list separators="None">
+                @for (item of noSeparatorItems; track item.name) {
+                <ui5-li [icon]="item.icon">{{ item.name }}</ui5-li>
+                }
+            </ui5-list>
+        </div>
+        <div class="fd-col-md-6 fd-col-lg-6 fd-padding-begin-end--sm">
+            <ui5-label class="fd-margin--sm">Separators Inner:</ui5-label>
+            <ui5-list separators="Inner">
+                @for (item of innerSeparatorItems; track item.name) {
+                <ui5-li [icon]="item.icon">{{ item.name }}</ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "target": "ES2022",
+        "declaration": true,
+        "declarationMap": true,
+        "types": [],
+        "lib": ["dom", "es2020"],
+    "useDefineForClassFields": false,
+    "moduleResolution": "node",
+    "skipLibCheck": true
+    },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    },
+    "files": ["./index.ts"],
+    "exclude": ["test.ts", "**/*.spec.ts"],
+    "include": ["**/*.ts"]
+}

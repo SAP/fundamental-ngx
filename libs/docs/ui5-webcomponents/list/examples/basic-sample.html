@@ -1,0 +1,22 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-md-6 fd-col-lg-6">
+            <ui5-label class="fd-margin-bottom--sm">Basic List with Header and Footer:</ui5-label>
+            <ui5-list [headerText]="headerText()" [footerText]="footerText()">
+                @for (item of listItems(); track item.text) {
+                <ui5-li [description]="item.description" [additionalText]="item.additionalText" [icon]="item.icon">
+                    {{ item.text }}
+                </ui5-li>
+                }
+            </ui5-list>
+        </div>
+        <div class="fd-col-md-6 fd-col-lg-6 fd-padding-begin-end--md">
+            <ui5-label class="fd-margin-bottom--sm">Simple List without Header:</ui5-label>
+            <ui5-list>
+                @for (item of listItems(); track item.text) {
+                <ui5-li> {{ item.text }} </ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+</div>
