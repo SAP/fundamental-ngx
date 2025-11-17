@@ -81,6 +81,12 @@ jobs:
               run: |
                   npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --message="chore(release): publish %v [ci skip]" --no-push
 
+            # Ensure lerna.json is updated with the new version for packages that depend on ui5-webcomponents:build
+            - name: Update lerna.json version
+              if: env.IS_MANUAL == 'false'
+              run: |
+                  jq '.version = "${{ steps.bumpVersion.outputs.newVersion }}"' lerna.json > lerna.json.tmp && mv lerna.json.tmp lerna.json
+
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
               with:
