@@ -18,13 +18,6 @@ const FILES = {
     THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
 };
 
-const DEFAULT_ENUM_PACKAGE_MAPPING: Record<string, string> = {
-    '@ui5/webcomponents': '@fundamental-ngx/ui5-webcomponents/types',
-    '@ui5/webcomponents-base': '@fundamental-ngx/ui5-webcomponents-base/types',
-    '@ui5/webcomponents-fiori': '@fundamental-ngx/ui5-webcomponents-fiori/types',
-    '@ui5/webcomponents-ai': '@fundamental-ngx/ui5-webcomponents-ai/types'
-};
-
 /** Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
 const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 
@@ -173,7 +166,6 @@ async function generateThemingFiles(packageName: string, targetDir: string): Pro
  */
 async function generateComponentFiles(
     componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
-    cemData: CEM.Package,
     allEnums: ExtractedCemData['allEnums'],
     packageName: string,
     targetDir: string
@@ -197,10 +189,8 @@ async function generateComponentFiles(
 
             const templateContent = componentTemplate(
                 declaration,
-                cemData,
                 allEnums.map((e) => ({ name: e.name, members: e.members })),
-                packageName,
-                DEFAULT_ENUM_PACKAGE_MAPPING
+                packageName
             );
 
             return ensureDirAndWriteFile(componentIndexPath, templateContent).then(() =>
@@ -282,7 +272,6 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
             // Generate Component Wrappers
             const componentExports = await generateComponentFiles(
                 componentDeclarations,
-                cemData,
                 allEnums,
                 packageName,
                 targetDir
