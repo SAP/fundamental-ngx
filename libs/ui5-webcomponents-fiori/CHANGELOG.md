@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.14...v0.58.0-rc.15) (2025-11-18)
+
+**Note:** Version bump only for package @fundamental-ngx/ui5-webcomponents-fiori
+
+
+
+
+
 # [0.58.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.8...v0.58.0-rc.14) (2025-11-18)
 
 **Note:** Version bump only for package @fundamental-ngx/ui5-webcomponents-fiori
