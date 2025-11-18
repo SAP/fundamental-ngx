@@ -6,7 +6,11 @@ export class StackblitzDependencies {
         '@fundamental-ngx/i18n',
         '@fundamental-ngx/cx',
         '@fundamental-ngx/btp',
-        '@fundamental-ngx/datetime-adapter'
+        '@fundamental-ngx/datetime-adapter',
+        '@fundamental-ngx/ui5-webcomponents-base',
+        '@fundamental-ngx/ui5-webcomponents',
+        '@fundamental-ngx/ui5-webcomponents-fiori',
+        '@fundamental-ngx/ui5-webcomponents-ai'
     ];
 
     private static _ngDependencies: string[] = [
