@@ -1,5 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: 'Vybrat rok',
         yearsRangeSelectionLabel: 'Vybrat rozsah let',
@@ -70,12 +73,17 @@ export default {
         listItemStatusLocked: 'Blokováno',
         listItemStatusDraft: 'Koncept'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Zrušit',
         announcementInfo: 'Information Message Strip',
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
+        announcementDefault: 'Message Strip',
         closable: 'Closable'
     },
     coreMultiInput: {
@@ -94,6 +102,25 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'Položka stromu {itemDetails}, {index} z {total}{selectedDescription}'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: 'další(ch) {count}'

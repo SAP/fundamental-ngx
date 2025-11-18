@@ -1,30 +1,6 @@
-<span
-    fd-object-status
-    status="negative"
-    glyph="error"
-    [inverted]="true"
-    [large]="true"
-    title="Negative"
-    aria-label="Object Status Negative Inverted and large"
-></span>
-<span
-    fd-object-status
-    status="critical"
-    glyph="alert"
-    [inverted]="true"
-    [large]="true"
-    title="Critical"
-    aria-label="Object Status Critical Inverted and large"
-></span>
-<span
-    fd-object-status
-    status="positive"
-    glyph="sys-enter-2"
-    [inverted]="true"
-    [large]="true"
-    title="Positive"
-    aria-label="Object Status Positive Inverted and large"
-></span>
+<span fd-object-status status="negative" glyph="error" [inverted]="true" [large]="true" title="Negative"></span>
+<span fd-object-status status="critical" glyph="alert" [inverted]="true" [large]="true" title="Critical"></span>
+<span fd-object-status status="positive" glyph="sys-enter-2" [inverted]="true" [large]="true" title="Positive"></span>
 <span
     fd-object-status
     status="informative"
@@ -32,126 +8,35 @@
     [inverted]="true"
     [large]="true"
     title="Informative"
-    aria-label="Object Status Informative Inverted and large"
 ></span>
 
 <br /><br />
 
-<span
-    fd-object-status
-    status="negative"
-    [large]="true"
-    label="Negative"
-    title="Negative"
-    aria-label="Object Status Negative large"
-></span>
-<span
-    fd-object-status
-    status="critical"
-    [large]="true"
-    label="Critical"
-    title="Critical"
-    aria-label="Object Status Critical large"
-></span>
-<span
-    fd-object-status
-    status="positive"
-    [large]="true"
-    label="Positive"
-    title="Positive"
-    aria-label="Object Status Positive large"
-></span>
-<span
-    fd-object-status
-    status="informative"
-    [large]="true"
-    label="Informative"
-    title="Informative"
-    aria-label="Object Status Informative large"
-></span>
-<span fd-object-status [large]="true" label="Default" title="Default" aria-label="Object Status Default large"></span>
+<span fd-object-status status="negative" [large]="true" label="Negative" title="Negative"></span>
+<span fd-object-status status="critical" [large]="true" label="Critical" title="Critical"></span>
+<span fd-object-status status="positive" [large]="true" label="Positive" title="Positive"></span>
+<span fd-object-status status="informative" [large]="true" label="Informative" title="Informative"></span>
+<span fd-object-status [large]="true" label="Default" title="Default"></span>
 
 <br /><br />
 
-<span
-    fd-object-status
-    status="negative"
-    [large]="true"
-    label="5"
-    title="5"
-    aria-label="Object Status Negative Numberic and large"
-></span>
-<span
-    fd-object-status
-    status="critical"
-    [large]="true"
-    label="20"
-    title="20"
-    aria-label="Object Status Critical Numberic and large"
-></span>
-<span
-    fd-object-status
-    status="positive"
-    [large]="true"
-    label="2.99"
-    title="2.99"
-    aria-label="Object Status Positive Numberic and large"
-></span>
-<span
-    fd-object-status
-    status="informative"
-    [large]="true"
-    label="10"
-    title="10"
-    aria-label="Object Status Informative Numberic and large"
-></span>
-<span
-    fd-object-status
-    [large]="true"
-    label="99+"
-    title="99+"
-    aria-label="Object Status Default Numberic and large"
-></span>
+<span fd-object-status status="negative" [large]="true" label="5" title="5"></span>
+<span fd-object-status status="critical" [large]="true" label="20" title="20"></span>
+<span fd-object-status status="positive" [large]="true" label="2.99" title="2.99"></span>
+<span fd-object-status status="informative" [large]="true" label="10" title="10"></span>
+<span fd-object-status [large]="true" label="99+" title="99+"></span>
 
 <br /><br />
 
-<span
-    fd-object-status
-    status="negative"
-    glyph="error"
-    [large]="true"
-    label="Negative"
-    aria-label="Object Status Informative icon and large text"
-></span>
-<span
-    fd-object-status
-    status="critical"
-    glyph="alert"
-    [large]="true"
-    label="Critical"
-    aria-label="Object Status Critical icon and large text"
-></span>
-<span
-    fd-object-status
-    status="positive"
-    glyph="sys-enter-2"
-    [large]="true"
-    label="Positive"
-    aria-label="Object Status Positive icon and large text"
-></span>
-<span
-    fd-object-status
-    status="informative"
-    glyph="information"
-    [large]="true"
-    label="Informative"
-    aria-label="Object Status Informative icon and large text"
-></span>
-<span fd-object-status [large]="true" label="Default" aria-label="Object Status Default icon and large text"></span>
+<span fd-object-status status="negative" glyph="error" [large]="true" label="Negative"></span>
+<span fd-object-status status="critical" glyph="alert" [large]="true" label="Critical"></span>
+<span fd-object-status status="positive" glyph="sys-enter-2" [large]="true" label="Positive"></span>
+<span fd-object-status status="informative" glyph="information" [large]="true" label="Informative"></span>
+<span fd-object-status [large]="true" label="Default"></span>
 
 <br /><br />
 
-<a
+<div
     fd-object-status
     status="negative"
     glyph="error"
@@ -159,9 +44,8 @@
     [large]="true"
     [inverted]="true"
     label="Negative"
-    aria-label="Object Status Negative icon and large text Clickable"
-></a>
-<a
+></div>
+<div
     fd-object-status
     status="critical"
     glyph="alert"
@@ -169,9 +53,8 @@
     [large]="true"
     [inverted]="true"
     label="Critical"
-    aria-label="Object Status Critical icon and large text Clickable"
-></a>
-<a
+></div>
+<div
     fd-object-status
     status="positive"
     glyph="sys-enter-2"
@@ -179,9 +62,8 @@
     [large]="true"
     [inverted]="true"
     label="Positive"
-    aria-label="Object Status Positive icon and large text Clickable"
-></a>
-<a
+></div>
+<div
     fd-object-status
     status="informative"
     glyph="information"
@@ -189,13 +71,5 @@
     [large]="true"
     [inverted]="true"
     label="Informative"
-    aria-label="Object Status Informative icon and large text Clickable"
-></a>
-<a
-    fd-object-status
-    [clickable]="true"
-    [large]="true"
-    [inverted]="true"
-    label="Default"
-    aria-label="Object Status Default icon and large text Clickable"
-></a>
+></div>
+<div fd-object-status [clickable]="true" [large]="true" [inverted]="true" label="Default"></div>

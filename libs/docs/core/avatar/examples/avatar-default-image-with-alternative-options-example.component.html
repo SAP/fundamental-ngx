@@ -1,6 +1,7 @@
 <!-- should display "JD" from content -->
 <fd-avatar
     size="xs"
+    clickable
     image="http://example.com/1.jpeg"
     alterIcon="content|alt|backup|default-icon"
     backupImage="https://picsum.photos/id/1018/400"
@@ -11,6 +12,7 @@
 <!-- should display "JD" from alt -->
 <fd-avatar
     size="s"
+    clickable
     image="http://example.com/2.jpeg"
     alterIcon="content|alt|backup|default-icon"
     backupImage="https://picsum.photos/id/1018/400"
@@ -21,22 +23,31 @@
 <!-- should display backupImage -->
 <fd-avatar
     size="m"
+    clickable
     image="http://example.com/3.jpeg"
     alterIcon="content|alt|backup|default-icon"
-    backupImage="https://picsum.photos/200/300.jpg"
+    backupImage="https://picsum.photos/id/1018/400"
 >
 </fd-avatar>
 
 <!-- should display default icon, because there's no backupImage url provided -->
-<fd-avatar size="l" image="http://example.com/4.jpeg" alterIcon="alt|content|backup|default-icon"> </fd-avatar>
+<fd-avatar clickable size="l" image="http://example.com/4.jpeg" alterIcon="alt|content|backup|default-icon">
+</fd-avatar>
 
 <!-- should display default icon, because backupImage is not loadable -->
-<fd-avatar size="xl" image="http://example.com/5.jpeg" alterIcon="custom" backupImage="http://example.com/6.jpeg">
+<fd-avatar
+    clickable
+    size="xl"
+    image="http://example.com/5.jpeg"
+    alterIcon="custom"
+    backupImage="http://example.com/6.jpeg"
+>
 </fd-avatar>
 
 <!-- should load image -->
 <fd-avatar
     size="xl"
+    clickable
     [contain]="true"
     image="http://example.com/4.jpeg"
     alterIcon="alt|content|backup|default-icon"

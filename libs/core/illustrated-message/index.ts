@@ -1,5 +1,6 @@
 export * from './components/illustrated-message-actions/illustrated-message-actions.component';
 export * from './components/illustrated-message-figcaption/illustrated-message-figcaption.component';
+export * from './components/illustrated-message-section/illustrated-message-section.component';
 export * from './directives/illustrated-message-text/illustrated-message-text.directive';
 export * from './directives/illustrated-message-title/illustrated-message-title.directive';
 export * from './illustrated-message.component';

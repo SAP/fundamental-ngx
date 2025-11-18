@@ -1,5 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: '選擇年份',
         yearsRangeSelectionLabel: '選擇年份範圍',
@@ -70,12 +73,17 @@ export default {
         listItemStatusLocked: '已鎖定',
         listItemStatusDraft: '草稿'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: '忽略',
         announcementInfo: 'Information Message Strip',
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
+        announcementDefault: 'Message Strip',
         closable: 'Closable'
     },
     coreMultiInput: {
@@ -93,6 +101,25 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: '樹狀項目 {itemDetails}、{index}/{total}{selectedDescription}'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: '還有 {count} 個'

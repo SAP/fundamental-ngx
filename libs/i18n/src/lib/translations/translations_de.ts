@@ -1,5 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_de.properties instead
 export default {
+    coreAvatar: {
+        defaultLabel: 'Avatar'
+    },
     coreCalendar: {
         yearSelectionLabel: 'Jahr auswählen',
         yearsRangeSelectionLabel: 'Jahresbereich auswählen',
@@ -70,12 +73,17 @@ export default {
         listItemStatusLocked: 'Gesperrt',
         listItemStatusDraft: 'Entwurf'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Verwerfen',
         announcementInfo: 'Information Message Strip',
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
+        announcementDefault: 'Message Strip',
         closable: 'Closable'
     },
     coreMultiInput: {
@@ -94,6 +102,25 @@ export default {
     },
     coreNestedList: {
         linkItemAriaLabel: 'Baumelement {itemDetails}, {index} von {total}{selectedDescription}'
+    },
+    coreObjectIdentifier: {
+        announcement: 'Object Identifier'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        announcement: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} mehr'
