@@ -137,54 +137,28 @@ jobs:
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
 
             - name: Configure npm for trusted publishing
-              run: |
-                  echo "Configuring npm for trusted publishing..."
-                  npm config set registry https://registry.npmjs.org/
-                  npm config delete //registry.npmjs.org/:_authToken || true
-                  echo "Registry configured for trusted publishing"
+              run: npm config delete //registry.npmjs.org/:_authToken || true
 
             - name: Publish packages to NPM
               run: |
+                  # Determine npm tag
                   if [ "${{ env.IS_PRERELEASE }}" = "true" ]; then
-                    tag="prerelease"
+                    NPM_TAG="prerelease"
                   elif [ "${{ env.IS_HOTFIX }}" = "true" ]; then
-                    tag="archive"
+                    NPM_TAG="archive"
                   else
-                    tag="latest"
+                    NPM_TAG="latest"
                   fi
-                  echo "Using npm tag: $tag"
 
-                  # Verify npm configuration
-                  echo "npm version: $(npm --version)"
-                  echo "npm registry: $(npm config get registry)"
-                  echo "npm user: $(npm whoami 2>/dev/null || echo 'Not authenticated with token')"
+                  echo "Publishing packages with npm tag: $NPM_TAG"
 
-                  for package_path in dist/libs/cdk dist/libs/core dist/libs/i18n dist/libs/platform dist/libs/moment-adapter dist/libs/datetime-adapter dist/libs/cx dist/libs/btp dist/libs/ui5-webcomponents-base dist/libs/ui5-webcomponents dist/libs/ui5-webcomponents-fiori dist/libs/ui5-webcomponents-ai; do
-                    if [ -f "$package_path/package.json" ]; then
-                      package_name=$(node -p "require('./$package_path/package.json').name")
-                      echo "Publishing $package_name from $package_path with tag $tag"
-                      
-                      cd "$package_path"
-                      
-                      # Validate package.json syntax
-                      if ! node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"; then
-                        echo "❌ ERROR: Invalid package.json syntax for $package_name"
-                        cat package.json
-                        exit 1
-                      fi
-                      
-                      # Attempt to publish with detailed error reporting
-                      if npm publish --tag "$tag" --provenance; then
-                        echo "✅ Successfully published $package_name"
-                      else
-                        echo "❌ Failed to publish $package_name"
-                        echo "Package details:"
-                        cat package.json | head -20
-                        echo "npm publish output above should show the specific error"
-                        exit 1
-                      fi
-                      cd - > /dev/null
-                    fi
+                  # Dynamically find all package directories and publish
+                  find dist/libs -name "package.json" -type f | while read package_file; do
+                    package_dir=$(dirname "$package_file")
+                    package_name=$(node -p "require('$package_file').name")
+                    echo "Publishing $package_name..."
+                    
+                    (cd "$package_dir" && npm publish --tag "$NPM_TAG" --provenance)
                   done
 
             # This step is for pushing into the main repo if version has been updated by the CI.
