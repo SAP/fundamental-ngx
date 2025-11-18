@@ -63,11 +63,6 @@ jobs:
             - name: Update npm for trusted publishing
               run: npm install -g npm@latest
 
-            - name: Configure npm for trusted publishing
-              run: |
-                  npm config set registry https://registry.npmjs.org/
-                  npm config delete //registry.npmjs.org/:_authToken || true
-
             - name: Install Corepack and Enable Yarn
               run: |
                   echo "Installing Corepack..."
@@ -141,6 +136,13 @@ jobs:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
 
+            - name: Configure npm for trusted publishing
+              run: |
+                  echo "Configuring npm for trusted publishing..."
+                  npm config set registry https://registry.npmjs.org/
+                  npm config delete //registry.npmjs.org/:_authToken || true
+                  echo "Registry configured for trusted publishing"
+
             - name: Publish packages to NPM
               run: |
                   if [ "${{ env.IS_PRERELEASE }}" = "true" ]; then
@@ -152,17 +154,29 @@ jobs:
                   fi
                   echo "Using npm tag: $tag"
 
+                  # Verify npm configuration
+                  echo "npm version: $(npm --version)"
+                  echo "npm registry: $(npm config get registry)"
+                  echo "npm user: $(npm whoami 2>/dev/null || echo 'Not authenticated with token')"
+
                   for package_path in dist/libs/cdk dist/libs/core dist/libs/i18n dist/libs/platform dist/libs/moment-adapter dist/libs/datetime-adapter dist/libs/cx dist/libs/btp dist/libs/ui5-webcomponents-base dist/libs/ui5-webcomponents dist/libs/ui5-webcomponents-fiori dist/libs/ui5-webcomponents-ai; do
                     if [ -f "$package_path/package.json" ]; then
                       package_name=$(node -p "require('./$package_path/package.json').name")
                       echo "Publishing $package_name from $package_path with tag $tag"
                       cd "$package_path"
-                      npm publish --tag "$tag" --provenance
+                      
+                      # Attempt to publish with detailed error reporting
+                      if npm publish --tag "$tag" --provenance; then
+                        echo "✅ Successfully published $package_name"
+                      else
+                        echo "❌ Failed to publish $package_name"
+                        echo "Package details:"
+                        cat package.json | head -20
+                        exit 1
+                      fi
                       cd - > /dev/null
                     fi
-                  done
-
-            # This step is for pushing into the main repo if version has been updated by the CI.
+                  done            # This step is for pushing into the main repo if version has been updated by the CI.
             # Commit is created by the lerna version command
             # This Will NOT trigger this workflow again, so it is okay
             - name: Push changes
