@@ -185,7 +185,9 @@ jobs:
                       fi
                       cd - > /dev/null
                     fi
-                  done            # This step is for pushing into the main repo if version has been updated by the CI.
+                  done
+
+            # This step is for pushing into the main repo if version has been updated by the CI.
             # Commit is created by the lerna version command
             # This Will NOT trigger this workflow again, so it is okay
             - name: Push changes
