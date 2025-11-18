@@ -10,7 +10,7 @@
   "homepage": "https://sap.github.io/fundamental-ngx",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SAP/fundamental-ngx"
+    "url": "git+https://github.com/SAP/fundamental-ngx.git"
   },
   "engine": {
     "node": ">= 10"
