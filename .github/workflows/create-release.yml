@@ -141,12 +141,26 @@ jobs:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
 
-            - name: Publish packages
-              uses: ./.github/actions/npm-publish
-              with:
-                  projects: '["cdk", "core", "i18n", "platform", "moment-adapter", "datetime-adapter", "cx", "btp", "ui5-webcomponents-base", "ui5-webcomponents", "ui5-webcomponents-fiori", "ui5-webcomponents-ai"]'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  releaseTag: ${{ steps.releaseTags.outputs.npm }}
+            - name: Publish packages to NPM
+              run: |
+                  if [ "${{ env.IS_PRERELEASE }}" = "true" ]; then
+                    tag="prerelease"
+                  elif [ "${{ env.IS_HOTFIX }}" = "true" ]; then
+                    tag="archive"
+                  else
+                    tag="latest"
+                  fi
+                  echo "Using npm tag: $tag"
+
+                  for package_path in dist/libs/cdk dist/libs/core dist/libs/i18n dist/libs/platform dist/libs/moment-adapter dist/libs/datetime-adapter dist/libs/cx dist/libs/btp dist/libs/ui5-webcomponents-base dist/libs/ui5-webcomponents dist/libs/ui5-webcomponents-fiori dist/libs/ui5-webcomponents-ai; do
+                    if [ -f "$package_path/package.json" ]; then
+                      package_name=$(node -p "require('./$package_path/package.json').name")
+                      echo "Publishing $package_name from $package_path with tag $tag"
+                      cd "$package_path"
+                      npm publish --tag "$tag" --provenance
+                      cd - > /dev/null
+                    fi
+                  done
 
             # This step is for pushing into the main repo if version has been updated by the CI.
             # Commit is created by the lerna version command
