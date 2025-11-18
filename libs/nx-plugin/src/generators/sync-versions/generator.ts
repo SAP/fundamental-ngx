@@ -19,12 +19,6 @@ const knownBuildExecutors = [
 ];
 
 export async function syncVersionsGenerator(tree: Tree, options: SyncVersionsGeneratorSchema) {
-    // Force console logging to verify generator is being called
-    console.log(`🚀 [sync-versions] Generator starting for project: ${options.project}`);
-    console.log(
-        `🔍 [sync-versions] Environment FD_ENV_VERSION_PLACEHOLDER: ${process.env.FD_ENV_VERSION_PLACEHOLDER || 'NOT SET'}`
-    );
-
     let files = options.files;
     const project = readProjectConfiguration(tree, options.project);
     const projectRoot = project.root;
@@ -63,41 +57,23 @@ export async function syncVersionsGenerator(tree: Tree, options: SyncVersionsGen
         globs.push(normalizedFileName);
     }
 
-    console.log(`📂 [sync-versions] Processing ${globs.length} glob patterns for project ${options.project}:`);
-    globs.forEach((glob, i) => console.log(`  ${i + 1}. ${glob}`));
-
     const foundFiles = fastGlobSync(globs);
-    console.log(`📄 [sync-versions] Found ${foundFiles.length} files to process for project ${options.project}`);
 
     foundFiles.forEach((filePath) => {
-        console.log(`🔧 [sync-versions] Processing file: ${filePath}`);
         const content = readFileSync(filePath, 'utf-8');
         const newContent = replaceInFile(filePath, content);
         if (content !== newContent) {
-            console.log(`✏️ [sync-versions] File modified: ${filePath}`);
             writeFileSync(filePath, newContent);
-        } else {
-            console.log(`➡️ [sync-versions] File unchanged: ${filePath}`);
         }
-    });
-
-    // Also update the source package.json for the project if it exists
+    }); // Also update the source package.json for the project if it exists
     const sourcePackageJsonPath = join(workspaceRoot, projectRoot, 'package.json');
     if (existsSync(sourcePackageJsonPath)) {
-        console.log(`🔧 [sync-versions] Processing source package.json: ${sourcePackageJsonPath}`);
         const sourceContent = readFileSync(sourcePackageJsonPath, 'utf-8');
         const newSourceContent = replaceInFile(sourcePackageJsonPath, sourceContent);
         if (sourceContent !== newSourceContent) {
-            console.log(`✏️ [sync-versions] Source package.json modified: ${sourcePackageJsonPath}`);
             writeFileSync(sourcePackageJsonPath, newSourceContent);
-        } else {
-            console.log(`➡️ [sync-versions] Source package.json unchanged: ${sourcePackageJsonPath}`);
         }
-    } else {
-        console.log(`ℹ️ [sync-versions] No source package.json found at: ${sourcePackageJsonPath}`);
     }
-
-    console.log(`✅ [sync-versions] Generator completed for project: ${options.project}`);
 }
 
 export default syncVersionsGenerator;
