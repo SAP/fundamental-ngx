@@ -152,13 +152,15 @@ jobs:
 
                   echo "Publishing packages with npm tag: $NPM_TAG"
 
-                  # Dynamically find all package directories and publish
-                  find dist/libs -name "package.json" -type f | while read package_file; do
-                    package_dir=$(dirname "$package_file")
-                    package_name=$(node -p "require('$package_file').name")
-                    echo "Publishing $package_name..."
-                    
-                    (cd "$package_dir" && npm publish --tag "$NPM_TAG" --provenance)
+                  # Publish only the packages that are built and prepared
+                  for package_name in cdk core i18n platform moment-adapter datetime-adapter cx btp ui5-webcomponents-base ui5-webcomponents ui5-webcomponents-fiori ui5-webcomponents-ai; do
+                    package_path="dist/libs/$package_name"
+                    if [ -f "$package_path/package.json" ]; then
+                      echo "Publishing @fundamental-ngx/$package_name..."
+                      (cd "$package_path" && npm publish --tag "$NPM_TAG" --provenance)
+                    else
+                      echo "Skipping $package_name (not found in dist)"
+                    fi
                   done
 
             # This step is for pushing into the main repo if version has been updated by the CI.
