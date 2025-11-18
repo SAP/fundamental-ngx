@@ -163,7 +163,15 @@ jobs:
                     if [ -f "$package_path/package.json" ]; then
                       package_name=$(node -p "require('./$package_path/package.json').name")
                       echo "Publishing $package_name from $package_path with tag $tag"
+                      
                       cd "$package_path"
+                      
+                      # Validate package.json syntax
+                      if ! node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"; then
+                        echo "❌ ERROR: Invalid package.json syntax for $package_name"
+                        cat package.json
+                        exit 1
+                      fi
                       
                       # Attempt to publish with detailed error reporting
                       if npm publish --tag "$tag" --provenance; then
@@ -172,6 +180,7 @@ jobs:
                         echo "❌ Failed to publish $package_name"
                         echo "Package details:"
                         cat package.json | head -20
+                        echo "npm publish output above should show the specific error"
                         exit 1
                       fi
                       cd - > /dev/null
