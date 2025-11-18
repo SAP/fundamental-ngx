@@ -6,6 +6,9 @@ on:
         branches:
             - main
             - tmp_hotfix_branch
+permissions:
+    contents: write
+    id-token: write
 env:
     IS_HOTFIX: ${{ github.ref == 'refs/heads/tmp_hotfix_branch' }}
     IS_PRERELEASE: ${{ github.event_name == 'push' && github.ref != 'refs/heads/tmp_hotfix_branch' }}
@@ -52,8 +55,52 @@ jobs:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
 
-            - name: Setup Node.js and Cache
-              uses: ./.github/actions/nodejs
+            - name: Use Node.js ${{ inputs.node-version }}
+              uses: actions/setup-node@v4.3.0
+              with:
+                  node-version: '22.x'
+
+            - name: Update npm for trusted publishing
+              run: npm install -g npm@latest
+
+            - name: Configure npm for trusted publishing
+              run: |
+                  npm config set registry https://registry.npmjs.org/
+                  npm config delete //registry.npmjs.org/:_authToken || true
+
+            - name: Install Corepack and Enable Yarn
+              run: |
+                  echo "Installing Corepack..."
+                  npm install -g corepack || { echo 'Corepack installation failed'; exit 1; }
+                  echo "Corepack installed successfully."
+                  corepack --version
+                  corepack enable yarn
+
+            - name: Get yarn cache directory path
+              id: yarn-cache-dir-path
+              run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+              shell: bash
+
+            - name: Use the global Yarn cache if available
+              uses: actions/cache@v4.2.3
+              with:
+                  path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                  key: ${{ runner.os }}-node-22.x-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-22.x-yarn-
+
+            - uses: actions/cache@v4.2.3
+              id: node_modules
+              name: Use project node_modules cache if available
+              with:
+                  path: '**/node_modules/'
+                  key: ${{ runner.os }}-22.x-node-modules-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-22.x-node-modules-
+
+            - name: Install dependencies
+              if: steps.node_modules.outputs.cache-hit != 'true'
+              run: yarn install --frozen-lockfile
 
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
