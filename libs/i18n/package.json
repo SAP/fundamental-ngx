@@ -1,6 +1,16 @@
 {
     "name": "@fundamental-ngx/i18n",
-    "version": "0.58.0-rc.8",
+    "version": "0.58.0-rc.15",
+    "description": "Fundamental Library for Angular - i18n",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SAP/fundamental-ngx.git"
+    },
+    "engine": {
+        "node": ">= 10"
+    },
     "peerDependencies": {
         "@angular/common": "ANGULAR_VER_PLACEHOLDER",
         "@angular/core": "ANGULAR_VER_PLACEHOLDER",

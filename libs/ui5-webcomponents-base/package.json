@@ -1,13 +1,13 @@
 {
   "name": "@fundamental-ngx/ui5-webcomponents-base",
-  "version": "0.58.0-rc.8",
+  "version": "0.58.0-rc.15",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - UI5 Webcomponents Base",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SAP/fundamental-ngx"
+    "url": "git+https://github.com/SAP/fundamental-ngx.git"
   },
   "engine": {
     "node": ">= 10"
