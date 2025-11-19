@@ -307,9 +307,10 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         if (this.navigation.isSnapped$() && this.roleAttr$() === 'menuitemradio') {
             const link = this.link$();
             if (link?.elementRef?.nativeElement) {
-                const textElement = link.elementRef.nativeElement.querySelector('.fd-navigation__text');
-                if (textElement) {
-                    return textElement.textContent?.trim() || undefined;
+                const linkElement = link.elementRef.nativeElement;
+                const textContent = linkElement.textContent?.trim();
+                if (textContent) {
+                    return textContent;
                 }
             }
         }
@@ -764,28 +765,47 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
                 // Force update of tabindex for all child links before focusing
                 this._ensureChildTabindexUpdated();
                 setTimeout(() => {
-                    // Manual focus management - focus first navigation link in popover
-                    try {
-                        const popoverBodyElement = popover.popoverBody?._elementRef?.nativeElement;
-                        if (popoverBodyElement) {
-                            // Look specifically for navigation links, not just any tabbable element
-                            const navigationLinks = popoverBodyElement.querySelectorAll(
-                                'a.fd-navigation__link[tabindex="0"]'
-                            );
-                            if (navigationLinks.length > 0) {
-                                (navigationLinks[0] as HTMLElement).focus();
-                            } else {
-                                // Fallback to any tabbable element
-                                const tabbableElements = popoverBodyElement.querySelectorAll('[tabindex="0"]');
-                                if (tabbableElements.length > 0) {
-                                    (tabbableElements[0] as HTMLElement).focus();
-                                }
-                            }
+                    // Try to use the FocusKeyManager first
+                    if (this._keyManager) {
+                        this._keyManager.setActiveItem(0);
+                        return;
+                    }
+
+                    // Fallback: Use component data structures to find the first focusable link
+                    const firstFocusableLink = this._links.find(
+                        (link) => link.inPopover && link.elementRef?.nativeElement
+                    );
+
+                    if (firstFocusableLink) {
+                        firstFocusableLink.elementRef.nativeElement.focus();
+                        return;
+                    }
+
+                    // Alternative: Use listItems to find first item's link
+                    const firstListItem = this.listItems$().find((item) => item && !item.skipNavigation);
+                    if (firstListItem) {
+                        const link = firstListItem.link$();
+                        if (link?.elementRef?.nativeElement) {
+                            link.elementRef.nativeElement.focus();
+                            return;
                         }
+                    }
+
+                    // Last resort: use the popover's built-in focus management
+                    try {
+                        popover.popoverBody._focusFirstTabbableElement(true);
                     } catch (error) {
                         console.error('Error focusing in popover:', error);
-                        // Fallback to original method
-                        popover.popoverBody._focusFirstTabbableElement(true);
+
+                        const popoverBodyElement = popover.popoverBody?._elementRef?.nativeElement;
+                        if (popoverBodyElement) {
+                            const firstFocusableElement = popoverBodyElement.querySelector(
+                                'a, button, [tabindex]:not([tabindex="-1"])'
+                            ) as HTMLElement;
+                            if (firstFocusableElement) {
+                                firstFocusableElement.focus();
+                            }
+                        }
                     }
                 }, 0);
             });

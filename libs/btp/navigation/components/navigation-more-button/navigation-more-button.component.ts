@@ -56,6 +56,14 @@ export class NavigationMoreButtonComponent {
     private readonly _link: Nullable<FdbNavigationItemLink>;
 
     /** @hidden */
+    @ViewChild(PopoverComponent)
+    private readonly _popover: Nullable<PopoverComponent>;
+
+    /** @hidden */
+    @ViewChild(NavigationListComponent)
+    private readonly _navigationList: Nullable<NavigationListComponent>;
+
+    /** @hidden */
     customMoreRenderer: Nullable<TemplateRef<any>>;
 
     /** Whether the show more is visible. */
@@ -93,7 +101,7 @@ export class NavigationMoreButtonComponent {
     readonly moreButtonAriaLabelAttr$ = computed(() => this._moreButtonAriaLabel$());
 
     /** Overflow menu aria-label attribute value. */
-    readonly overflowMenuAriaLabelAttr$ = computed(() => this._overflowMenuAriaLabel$());
+    readonly overflowMenuAriaLabelAttr$ = computed((): string => this._overflowMenuAriaLabel$() || '');
 
     /**
      * @hidden
@@ -152,23 +160,31 @@ export class NavigationMoreButtonComponent {
         if (isOpen) {
             // Use a short timeout to ensure the DOM is updated
             setTimeout(() => {
-                const popoverBody = document.querySelector('.fd-popover__body:not([style*="display: none"])');
-
-                if (popoverBody) {
-                    const firstLink = popoverBody.querySelector('a[fdb-navigation-link]') as HTMLElement;
-
-                    if (firstLink) {
-                        firstLink.focus();
-                        return;
-                    }
+                // Try to use the NavigationListComponent's focus management
+                if (this._navigationList) {
+                    this._navigationList.setActiveItemIndex(0);
+                    return;
                 }
 
+                // Fallback: Focus the first item using the listItems array
                 if (this.listItems && this.listItems.length > 0) {
                     const firstItem = this.listItems[0];
                     const link = firstItem.link$();
 
                     if (link?.elementRef?.nativeElement) {
                         link.elementRef.nativeElement.focus();
+                        return;
+                    }
+                }
+
+                // Last resort fallback: if direct access fails, try to focus any focusable element in the popover
+                const popoverBodyElement = this._popover?.popoverBody?._elementRef?.nativeElement;
+                if (popoverBodyElement) {
+                    const firstFocusableElement = popoverBodyElement.querySelector(
+                        'a, button, [tabindex]:not([tabindex="-1"])'
+                    ) as HTMLElement;
+                    if (firstFocusableElement) {
+                        firstFocusableElement.focus();
                     }
                 }
             }, 150);

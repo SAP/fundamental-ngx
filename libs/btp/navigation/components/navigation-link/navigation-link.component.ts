@@ -143,7 +143,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostListener('click', ['$event'])
-    _clickHandler(event: Event): void {
+    protected _clickHandler(event: Event): void {
         // Check if this is a NavigationMoreButtonComponent (More button itself)
         if (
             this._listItemComponent &&
@@ -187,7 +187,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    _keyDownHandler(event: Event): void {
+    protected _keyDownHandler(event: Event): void {
         const keyboardEvent = event as KeyboardEvent;
         const isDisabled = this._listItemComponent?.disabled$?.() || false;
         if (isDisabled) {

@@ -142,9 +142,13 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
             if (this.computedRole() === 'group' && this._listItem) {
                 const parentLink = this._listItem.link$();
                 if (parentLink?.elementRef?.nativeElement) {
-                    const textElement = parentLink.elementRef.nativeElement.querySelector('.fd-navigation__text');
-                    if (textElement) {
-                        return textElement.textContent?.trim() || null;
+                    // Get text content directly from the navigation link element
+                    // The .fd-navigation__text span contains the projected content, but we can access
+                    // the text content directly from the link element itself
+                    const linkElement = parentLink.elementRef.nativeElement;
+                    const textContent = linkElement.textContent?.trim();
+                    if (textContent) {
+                        return textContent;
                     }
                 }
             }

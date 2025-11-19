@@ -1,6 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -25,16 +24,11 @@ import {
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
-import {
-    NavigationListItemDirective,
-    NavigationListItemRefDirective
-} from '../../directives/navigation-list-item-ref.directive';
+import { NavigationListItemRefDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { FdbNavigationState, FdbNavigationType } from '../../models/navigation.types';
 import { NavigationService } from '../../services/navigation.service';
-import { NavigationContentEndComponent } from '../navigation-end/navigation-content-end.component';
-import { NavigationContentStartComponent } from '../navigation-start/navigation-content-start.component';
 
 @Component({
     selector: 'fdb-navigation',
@@ -51,13 +45,7 @@ import { NavigationContentStartComponent } from '../navigation-start/navigation-
     ],
     host: {
         role: 'navigation'
-    },
-    imports: [
-        NgTemplateOutlet,
-        NavigationListItemDirective,
-        NavigationContentStartComponent,
-        NavigationContentEndComponent
-    ]
+    }
 })
 export class NavigationComponent
     extends FdbNavigation

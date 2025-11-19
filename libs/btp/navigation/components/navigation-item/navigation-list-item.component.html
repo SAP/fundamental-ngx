@@ -53,7 +53,7 @@
     @if (!isOverflow$()) {
         <fd-popover
             #popover
-            [noArrow]="false"
+            [noArrow]="true"
             additionalBodyClass="fd-navigation__list-container"
             [isOpen]="popoverOpen$()"
             (isOpenChange)="_onPopoverOpen($event, popover)"
