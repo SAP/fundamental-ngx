@@ -18,6 +18,8 @@ const FILES = {
     THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
 };
 
+const WEB_COMPONENTS_BASE = 'ui5-webcomponents-base';
+
 /** Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
 const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 
@@ -228,6 +230,18 @@ async function generateUtilsFiles(targetDir: string): Promise<void> {
     await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
 }
 
+function addUI5WrapperCustomEventType(): string {
+    return `
+import { OutputEmitterRef } from '@angular/core';
+
+type OutputKeys<T> = {
+    [K in keyof T]: T[K] extends OutputEmitterRef<any> ? K : never;
+}[keyof T];
+
+export type UI5WrapperCustomEvent<T, N extends OutputKeys<T>> = T[N] extends OutputEmitterRef<infer E> ? E : never;
+`;
+}
+
 /**
  * An NX executor that generates Angular components from UI5 Web Components'
  * custom-elements-internal.json schema.
@@ -280,6 +294,10 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
 
             // Add theming service export to root index
             exportsContent += `\nexport * from './${SUBDIRS.THEMING}';\n`;
+        }
+
+        if (context.projectName === WEB_COMPONENTS_BASE) {
+            exportsContent += addUI5WrapperCustomEventType();
         }
 
         // Generate the root index.ts file

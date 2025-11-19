@@ -1,11 +1,9 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
-import { Calendar, CalendarSelectionChangeEventDetail } from '@fundamental-ngx/ui5-webcomponents/calendar';
+import { Calendar } from '@fundamental-ngx/ui5-webcomponents/calendar';
 import { CalendarDate } from '@fundamental-ngx/ui5-webcomponents/calendar-date';
-import {
-    SegmentedButton,
-    SegmentedButtonSelectionChangeEventDetail
-} from '@fundamental-ngx/ui5-webcomponents/segmented-button';
+import { SegmentedButton } from '@fundamental-ngx/ui5-webcomponents/segmented-button';
 import { SegmentedButtonItem } from '@fundamental-ngx/ui5-webcomponents/segmented-button-item';
 import { CalendarSelectionMode, CalendarWeekNumbering } from '@fundamental-ngx/ui5-webcomponents/types';
 
@@ -82,7 +80,7 @@ export class CalendarExample {
     }
 
     // Event handlers using Angular 20 patterns
-    onSelectionChange(event: CustomEvent<CalendarSelectionChangeEventDetail>): void {
+    onSelectionChange(event: UI5WrapperCustomEvent<Calendar, 'ui5SelectionChange'>): void {
         // Extract selectedValues (date strings) instead of selectedDates (timestamps)
         const dates = event.detail.selectedValues || [];
         this.selectedDates.set(dates);
@@ -100,7 +98,7 @@ export class CalendarExample {
     }
 
     // Event handlers for UI5 segmented buttons
-    onSelectionModeChange(event: CustomEvent<SegmentedButtonSelectionChangeEventDetail>): void {
+    onSelectionModeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         console.log('onSelectionModeChange called', event.detail);
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {
@@ -109,7 +107,7 @@ export class CalendarExample {
         }
     }
 
-    onCalendarTypeChange(event: CustomEvent<SegmentedButtonSelectionChangeEventDetail>): void {
+    onCalendarTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         console.log('onCalendarTypeChange called:', event.detail.selectedItems[0].innerText);
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {

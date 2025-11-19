@@ -1,14 +1,12 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Card } from '@fundamental-ngx/ui5-webcomponents/card';
 import { CardHeader } from '@fundamental-ngx/ui5-webcomponents/card-header';
-import { Carousel, CarouselNavigateEventDetail } from '@fundamental-ngx/ui5-webcomponents/carousel';
+import { Carousel } from '@fundamental-ngx/ui5-webcomponents/carousel';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
-import {
-    SegmentedButton,
-    SegmentedButtonSelectionChangeEventDetail
-} from '@fundamental-ngx/ui5-webcomponents/segmented-button';
+import { SegmentedButton } from '@fundamental-ngx/ui5-webcomponents/segmented-button';
 import { SegmentedButtonItem } from '@fundamental-ngx/ui5-webcomponents/segmented-button-item';
 import { Switch } from '@fundamental-ngx/ui5-webcomponents/switch';
 import { Tag } from '@fundamental-ngx/ui5-webcomponents/tag';
@@ -19,6 +17,7 @@ import {
     CarouselArrowsPlacement,
     CarouselPageIndicatorType
 } from '@fundamental-ngx/ui5-webcomponents/types';
+
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 // Import Fundamental Styles
@@ -169,32 +168,32 @@ export class CarouselExample {
     }
 
     // Navigation event handlers
-    onBasicNavigate(event: CustomEvent<CarouselNavigateEventDetail>): void {
+    onBasicNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.basicCurrentPage.set(detail.selectedIndex);
         console.log('Basic carousel navigated to page:', detail.selectedIndex);
     }
 
-    onImageNavigate(event: CustomEvent<CarouselNavigateEventDetail>): void {
+    onImageNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentImagePage.set(detail.selectedIndex);
         console.log('Image carousel navigated to page:', detail.selectedIndex);
     }
 
-    onProductNavigate(event: CustomEvent<CarouselNavigateEventDetail>): void {
+    onProductNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentProductPage.set(detail.selectedIndex);
         console.log('Product carousel navigated to page:', detail.selectedIndex);
     }
 
-    onFeatureNavigate(event: CustomEvent<CarouselNavigateEventDetail>): void {
+    onFeatureNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentFeaturePage.set(detail.selectedIndex);
         console.log('Feature carousel navigated to page:', detail.selectedIndex);
     }
 
     // Configuration change handlers
-    onPageIndicatorTypeChange(event: CustomEvent<SegmentedButtonSelectionChangeEventDetail>): void {
+    onPageIndicatorTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -203,7 +202,7 @@ export class CarouselExample {
         }
     }
 
-    onArrowsPlacementChange(event: CustomEvent<SegmentedButtonSelectionChangeEventDetail>): void {
+    onArrowsPlacementChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {

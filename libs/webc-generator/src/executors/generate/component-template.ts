@@ -84,16 +84,6 @@ function generateTypeImports(
         }
     }
 
-    // Add event types
-    const events = data.events || [];
-    for (const event of events) {
-        if (event.type?.references?.length) {
-            for (const reference of event.type.references) {
-                componentImports.add(`import { ${reference.name} } from '${reference.package}/${reference.module}';`);
-            }
-        }
-    }
-
     const extractedEnums = allEnums.filter((e) => typeNames.has(e.name)).map((e) => e.name);
 
     return { componentImports: Array.from(componentImports), componentEnums: extractedEnums };
@@ -214,57 +204,14 @@ function generateOutputs(data: CEM.CustomElementDeclaration, className: string):
     data.events?.forEach((event) => {
         // Convert kebab-case to PascalCase after ui5 prefix
         const pascalCaseEventName = kebabToCamelCase(event.name).replace(/^./, (char) => char.toUpperCase());
-
-        if (event.type.references?.length) {
-            outputs.push(`
-  /**
-   * ${event.description || ''}
-   */
-  ui5${pascalCaseEventName} = output<${event.type.text}>();`);
-        } else {
-            outputs.push(`
+        outputs.push(`
   /**
    * ${event.description || ''}
    */
   ui5${pascalCaseEventName} = output<UI5CustomEvent<_${className}, '${event.name}'>>();`);
-        }
     });
 
     return outputs.join('\n');
-}
-
-function generateExports(data: CEM.CustomElementDeclaration): string {
-    const className = data.name;
-    const exports: Set<string> = new Set();
-    const isExportedFromComponent = (ref: CEM.TypeReference): boolean | undefined =>
-        ref.module?.split('.')[0].endsWith(className);
-
-    const members = (data.members as CEM.ClassField[] | undefined) || [];
-    members?.forEach((member) => {
-        if (member.type?.references?.length) {
-            member.type.references.forEach((ref) => {
-                // export only those types that are exported from the current component
-                if (isExportedFromComponent(ref)) {
-                    exports.add(ref.name);
-                }
-            });
-        }
-    });
-
-    data.events?.forEach((event) => {
-        event.type.references?.forEach((ref) => {
-            // export only those types that are exported from the current component
-            if (isExportedFromComponent(ref)) {
-                exports.add(ref.name);
-            }
-        });
-    });
-
-    return exports.size
-        ? `export type {\n${Array.from(exports)
-              .map((type) => `\t${type}`)
-              .join(',\n')}\n};`
-        : '';
 }
 
 /** Generate the Angular component wrapper. */
@@ -463,7 +410,5 @@ ${(() => {
 })()}
   }
 }
-
-${generateExports(data)}
 `;
 }
