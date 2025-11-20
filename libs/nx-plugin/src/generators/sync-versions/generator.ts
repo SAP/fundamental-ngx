@@ -57,13 +57,23 @@ export async function syncVersionsGenerator(tree: Tree, options: SyncVersionsGen
         globs.push(normalizedFileName);
     }
 
-    fastGlobSync(globs).forEach((filePath) => {
+    const foundFiles = fastGlobSync(globs);
+
+    foundFiles.forEach((filePath) => {
         const content = readFileSync(filePath, 'utf-8');
         const newContent = replaceInFile(filePath, content);
         if (content !== newContent) {
             writeFileSync(filePath, newContent);
         }
-    });
+    }); // Also update the source package.json for the project if it exists
+    const sourcePackageJsonPath = join(workspaceRoot, projectRoot, 'package.json');
+    if (existsSync(sourcePackageJsonPath)) {
+        const sourceContent = readFileSync(sourcePackageJsonPath, 'utf-8');
+        const newSourceContent = replaceInFile(sourcePackageJsonPath, sourceContent);
+        if (sourceContent !== newSourceContent) {
+            writeFileSync(sourcePackageJsonPath, newSourceContent);
+        }
+    }
 }
 
 export default syncVersionsGenerator;

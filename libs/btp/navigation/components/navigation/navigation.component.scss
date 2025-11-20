@@ -210,6 +210,14 @@ $block: fd-navigation;
     left: auto;
 }
 
+.fd-navigation__list.fd-menu__list.fd-navigation__list--parent-items {
+    .fd-navigation__list-item.fd-navigation__list-item--separator:is(:first-child, :last-child) {
+        height: 0;
+        min-height: 0;
+        max-height: 0;
+    }
+}
+
 @at-root {
     [dir='rtl'],
     [dir='rtl'] {

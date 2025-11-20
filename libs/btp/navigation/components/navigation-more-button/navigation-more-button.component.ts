@@ -160,9 +160,17 @@ export class NavigationMoreButtonComponent {
         if (isOpen) {
             // Use a short timeout to ensure the DOM is updated
             setTimeout(() => {
-                // Try to use the NavigationListComponent's focus management
                 if (this._navigationList) {
-                    this._navigationList.setActiveItemIndex(0);
+                    let firstValidIndex = 0;
+                    const items = this._navigationList._listItems || [];
+                    for (let i = 0; i < items.length; i++) {
+                        if (items[i] && items[i]?.link$()?.elementRef?.nativeElement) {
+                            firstValidIndex = i;
+                            break;
+                        }
+                    }
+
+                    this._navigationList.setActiveItemIndex(firstValidIndex);
                     return;
                 }
 

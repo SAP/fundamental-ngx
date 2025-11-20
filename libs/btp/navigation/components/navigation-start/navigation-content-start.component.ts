@@ -236,7 +236,7 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         if (hiddenIndex === -1) {
             const selectedText = selectedItem.link$()?.elementRef?.nativeElement?.textContent?.trim();
             fallbackIndex = currentHidden.findIndex(
-                (item) => item.link$()?.elementRef?.nativeElement?.textContent?.trim() === selectedText
+                (item) => item?.link$()?.elementRef?.nativeElement?.textContent?.trim() === selectedText
             );
         }
 
@@ -252,6 +252,7 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         // Move the last visible item to overflow, but insert it in the correct position
         // to maintain the original order
         const lastVisibleItem = currentVisible.pop();
+
         if (lastVisibleItem) {
             lastVisibleItem.hidden$.set(true);
 
