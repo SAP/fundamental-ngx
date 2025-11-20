@@ -96,7 +96,6 @@
         "@angular/language-service": "20.1.4",
         "@commitlint/cli": "18.6.1",
         "@commitlint/config-conventional": "18.6.1",
-        "@jsdevtools/npm-publish": "3.0.1",
         "@nx/devkit": "21.2.4",
         "@nx/eslint": "21.2.4",
         "@nx/eslint-plugin": "21.2.4",
