@@ -57,7 +57,7 @@ export class SettingsGeneratorSidebarLayoutComponent
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fdp-settings-generator__sidebar-layout';
+    protected readonly _initialClass = 'fdp-settings-generator__sidebar-layout';
 
     /** @hidden */
     @ViewChild('settingsGeneratorContent')

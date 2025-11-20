@@ -169,7 +169,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
 
     /** @hidden */
     @HostBinding('attr.aria-selected')
-    private get _ariaSelected(): boolean {
+    protected get _ariaSelected(): boolean {
         return !!this.row.checked;
     }
 
