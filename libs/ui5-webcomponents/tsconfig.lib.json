@@ -6,10 +6,9 @@
         "declaration": true,
         "declarationMap": true,
         "types": [],
-        "lib": ["dom", "es2020"],
-    "useDefineForClassFields": false,
-    "moduleResolution": "node",
-    "skipLibCheck": true
+        "useDefineForClassFields": false,
+        "moduleResolution": "bundler",
+        "skipLibCheck": true
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
