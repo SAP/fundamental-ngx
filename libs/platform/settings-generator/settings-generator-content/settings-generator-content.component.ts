@@ -68,7 +68,7 @@ export class SettingsGeneratorContentComponent {
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fdp-settings-generator__content-section';
+    protected readonly _initialClass = 'fdp-settings-generator__content-section';
 
     /** @hidden */
     @ViewChildren(TabPanelComponent)

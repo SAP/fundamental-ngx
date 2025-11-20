@@ -203,7 +203,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** @hidden */
     @HostBinding('attr.role')
-    private get roleAttr(): string {
+    protected get roleAttr(): string {
         return this.ariaRole || this._role;
     }
 

@@ -74,7 +74,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    private get _tabIndex(): number {
+    protected get _tabIndex(): number {
         return this._listItemComponent?.popoverOpen$() || this._navigation.getActiveItem()?.link$() === this ? 0 : -1;
     }
 

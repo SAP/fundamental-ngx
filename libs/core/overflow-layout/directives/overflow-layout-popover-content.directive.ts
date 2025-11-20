@@ -48,7 +48,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-overflow-layout__popover-container';
+    protected readonly _initialClass = 'fd-overflow-layout__popover-container';
 
     /** @hidden */
     private _keyboardEventsManager: Nullable<FocusKeyManager<OverflowLayoutFocusableItem>>;

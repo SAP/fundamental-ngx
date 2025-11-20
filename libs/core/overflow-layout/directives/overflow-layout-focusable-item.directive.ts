@@ -26,7 +26,7 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    private get _tabindex(): number {
+    protected get _tabindex(): number {
         return this.focusable ? 0 : -1;
     }
 
