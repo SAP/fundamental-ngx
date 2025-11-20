@@ -169,7 +169,7 @@
         "webdriverio": "7.27.0"
     },
     "resolutions": {
-        "nx": "21.2.4",
+        "nx": "22.1.0",
         "parse5": "7.1.2"
     },
     "lint-staged": {
