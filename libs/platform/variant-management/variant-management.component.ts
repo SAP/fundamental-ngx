@@ -140,7 +140,7 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-variant-management';
+    protected readonly _initialClass = 'fd-variant-management';
 
     /**
      * Used internally for communicating with wrapper component.

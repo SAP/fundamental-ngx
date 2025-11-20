@@ -130,15 +130,15 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** @hidden */
     @ViewChild('listView', { read: ElementRef })
-    private _listView: ElementRef;
+    protected _listView: ElementRef;
 
     /** @hidden */
     @ViewChild('detailsView', { read: ElementRef })
-    private _detailsView: ElementRef;
+    protected _detailsView: ElementRef;
 
     /** @Hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-message-popover__view-container';
+    protected readonly _initialClass = 'fd-message-popover__view-container';
 
     /** @hidden */
     private _activeListElement: Nullable<HTMLElement> = null;

@@ -14,7 +14,7 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * The state of the Message Toast animations.
      */
     @HostBinding('@state')
-    private get _animationState(): string {
+    protected get _animationState(): string {
         return this._animationStateSignal();
     }
     /**
@@ -22,7 +22,7 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * Whether the animations should be disabled.
      */
     @HostBinding('@.disabled')
-    private _animationsDisabled = false;
+    protected _animationsDisabled = false;
 
     /** @hidden */
     protected _ngZone = inject(NgZone);

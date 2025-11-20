@@ -59,7 +59,7 @@ export class DialogContainerComponent
 
     /** The state of the Dialog animations. */
     @HostBinding('@state')
-    private get _animationState(): string {
+    protected get _animationState(): string {
         return this._animationStateSignal();
     }
 

@@ -35,7 +35,7 @@ export class OverflowLayoutItemContainerDirective {
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-overflow-layout__item';
+    protected readonly _initialClass = 'fd-overflow-layout__item';
 
     /** @hidden */
     constructor(public elementRef: ElementRef) {}

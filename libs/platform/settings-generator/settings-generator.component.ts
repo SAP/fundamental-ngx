@@ -53,7 +53,7 @@ import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens'
 export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy, HasElementRef {
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fdp-settings-generator';
+    protected readonly _initialClass = 'fdp-settings-generator';
     /** @hidden */
     @ViewChild('renderer', { read: ViewContainerRef })
     private readonly _viewRef: ViewContainerRef;

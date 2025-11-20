@@ -88,7 +88,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** @hidden */
     @HostBinding('attr.aria-expanded')
-    private get _ariaExpanded(): boolean | null {
+    protected get _ariaExpanded(): boolean | null {
         return this._isExpandable ? this._expanded : null;
     }
 
