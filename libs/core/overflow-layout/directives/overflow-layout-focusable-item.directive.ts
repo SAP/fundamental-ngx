@@ -44,7 +44,7 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
 
     /** @hidden */
     @HostListener('focus')
-    private _onFocus(): void {
+    protected _onFocus(): void {
         this._overflowContainer.setFocusedElement(this);
     }
 

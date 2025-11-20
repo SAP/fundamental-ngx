@@ -125,7 +125,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostListener('click')
-    private _clickHandler(): void {
+    protected _clickHandler(): void {
         if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
             this._navigation.closePopups();
         }
@@ -138,7 +138,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    private _keyDownHandler(event: KeyboardEvent): void {
+    protected _keyDownHandler(event: KeyboardEvent): void {
         if (this.inPopover && KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             this._listItemComponent?.popoverLinkArrowDown();
             return;

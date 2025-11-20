@@ -103,6 +103,9 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     /** @hidden */
     _buttonRoleDescription: string;
 
+    /** @hidden */
+    protected _focusedItemId = signal<string | null | undefined>(null);
+
     /**
      * Value of segmented button can have 2 types:
      * - string, when there is no toggle mode and only 1 value can be chosen.
@@ -123,9 +126,6 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     private _translationResolver = inject(TranslationResolver);
-
-    /** @hidden */
-    private _focusedItemId = signal<string | null | undefined>(null);
 
     /** @hidden */
     private renderer = inject(Renderer2);
@@ -150,7 +150,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     @HostListener('click', ['$event'])
-    private _click(event: MouseEvent): void {
+    protected _click(event: MouseEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }

@@ -201,7 +201,7 @@ export class NavigationComponent
      * Main keyboard navigation handler.
      */
     @HostListener('keydown', ['$event'])
-    private _keyDownHandler(event: KeyboardEvent): void {
+    protected _keyDownHandler(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
             return;
         }

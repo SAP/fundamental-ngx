@@ -41,7 +41,7 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * Handle end of animations, updating the state of the Message Toast.
      */
     @HostListener('@state.done', ['$event'])
-    private _onAnimationEnd(event: AnimationEvent): void {
+    protected _onAnimationEnd(event: AnimationEvent): void {
         const { fromState, toState } = event;
 
         if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {

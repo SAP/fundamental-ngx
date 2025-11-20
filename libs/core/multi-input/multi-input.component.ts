@@ -485,7 +485,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     @HostListener('focusout', ['$event'])
-    private _focusOut(event: FocusEvent): void {
+    protected _focusOut(event: FocusEvent): void {
         if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
             this.onTouched();
         }
