@@ -93,7 +93,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
-    private _keyUpHandler(event: KeyboardEvent): void {
+    protected _keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             this._keyboardEventsManager.onKeydown(event);
         }

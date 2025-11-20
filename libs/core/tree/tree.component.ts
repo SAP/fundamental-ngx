@@ -277,7 +277,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
      * @param event Keyboard event.
      */
     @HostListener('keydown', ['$event'])
-    private _onKeyUp(event: KeyboardEvent): void {
+    protected _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             if (event.defaultPrevented) {
                 return;

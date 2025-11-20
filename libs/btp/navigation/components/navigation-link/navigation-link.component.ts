@@ -160,7 +160,6 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             event.stopPropagation();
             return;
         }
-
         if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
             this._navigation.closePopups();
         }

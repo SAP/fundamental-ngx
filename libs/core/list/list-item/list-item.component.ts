@@ -260,7 +260,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** @hidden */
     @HostListener('focus')
-    private _onFocus(): void {
+    protected _onFocus(): void {
         // Try to find inner focusable link
         const tabbableLink = this.elementRef.nativeElement.querySelector('.fd-list__link.fd-list__link--focusable');
         tabbableLink?.focus();

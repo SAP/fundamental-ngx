@@ -242,7 +242,7 @@ export class InputGroupComponent implements AfterViewInit, FormItemControl, OnIn
 
     /** @hidden */
     @HostListener('focusout', ['$event'])
-    private _focusOut(event: FocusEvent): void {
+    protected _focusOut(event: FocusEvent): void {
         if (!this.elementRef.nativeElement.contains(event.relatedTarget)) {
             this._cva.onTouched();
         }
