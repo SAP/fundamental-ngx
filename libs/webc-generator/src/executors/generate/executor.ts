@@ -127,7 +127,11 @@ function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): 
 /**
  * Generates the types/index.ts file and its ng-package.json.
  */
-async function generateTypesFiles(allEnums: ExtractedCemData['allEnums'], targetDir: string): Promise<string> {
+async function generateTypesFiles(
+    allEnums: ExtractedCemData['allEnums'],
+    targetDir: string,
+    projectName: string
+): Promise<string> {
     let typesContent = allEnums
         .map(
             (e) =>
@@ -135,6 +139,10 @@ async function generateTypesFiles(allEnums: ExtractedCemData['allEnums'], target
                 `export { default as ${e.name} } from '${e.package}/${e.module}.js';`
         )
         .join('\n');
+
+    if (projectName === WEB_COMPONENTS_BASE) {
+        typesContent += addUI5WrapperCustomEventType();
+    }
 
     // Add one empty line at the end if there's content
     if (typesContent) {
@@ -270,7 +278,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
         let exportsContent = '';
 
         if (allEnums.length > 0) {
-            exportsContent += await generateTypesFiles(allEnums, targetDir);
+            exportsContent += await generateTypesFiles(allEnums, targetDir, context.projectName);
         }
 
         if (options.skipComponents !== true) {
@@ -294,10 +302,6 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
 
             // Add theming service export to root index
             exportsContent += `\nexport * from './${SUBDIRS.THEMING}';\n`;
-        }
-
-        if (context.projectName === WEB_COMPONENTS_BASE) {
-            exportsContent += addUI5WrapperCustomEventType();
         }
 
         // Generate the root index.ts file
