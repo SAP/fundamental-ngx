@@ -9,6 +9,7 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk';
 import { asyncScheduler, filter, observeOn, startWith } from 'rxjs';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
@@ -16,7 +17,12 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
 
 @Component({
     selector: 'fdb-navigation-content-end',
-    template: `<ul fdb-navigation-list [listItems]="allListItems$()"></ul>`,
+    template: `<ul
+        fdb-navigation-list
+        [listItems]="allListItems$()"
+        [ariaLabel]="ariaLabel"
+        [ariaRoleDescription]="ariaRoleDescription"
+    ></ul>`,
     imports: [NavigationListComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -34,6 +40,19 @@ export class NavigationContentEndComponent extends FdbNavigationContentContainer
     /** Whether the list items are content-projected. Used only with data-driven navigation. */
     @Input()
     contentProjected = true;
+
+    /**
+     * aria-label for the navigation list.
+     */
+    @Input()
+    ariaLabel: Nullable<string> = null;
+
+    /**
+     * aria-roledescription for the navigation list.
+     */
+    @Input()
+    ariaRoleDescription: Nullable<string> = null;
+
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: false })
     private readonly _listItems: QueryList<FdbNavigationListItem>;

@@ -18,7 +18,9 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="parent-link" componentName="FdbNavigation">Parent Navigation as Link</fd-docs-section-title>
+<fd-docs-section-title id="parent-link" componentName="FdbNavigation"
+    >Parent Navigation as Link (Two-Click Area)</fd-docs-section-title
+>
 <description>
     <p>By default, the Parent Navigation Item functions as a Navigation Group.</p>
     <p>
@@ -38,38 +40,80 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="data-source" componentName="FdbNavigation"
-    >Navigation with Data-source</fd-docs-section-title
->
+<fd-docs-section-title id="parent-link" componentName="FdbNavigation">Selection Mode</fd-docs-section-title>
 <description>
-    <p>
-        In addition to content-projected approach, Navigation component supports passing data-source with custom list
-        item renderer.
-    </p>
-    <p>
-        To use Data-source approach be sure to import <code>NavigationListDataSourceDirective</code> to your Component
-        or NgModule.
-    </p>
+    <p>There are 2 selection modes: router and click.</p>
+    <ul>
+        <li>
+            <strong>Router-based mode:</strong> Selection is determined by router link activation (default behavior)
+        </li>
+        <li>
+            <strong>Click-based mode:</strong> Selection based on item type:
+            <ul>
+                <li><strong>Leaf items</strong> (e.g., "Home", "All Leads"): Clickable and selectable</li>
+                <li>
+                    <strong>Group headers</strong> (e.g., "Sales", "Reports and Analytics"): Only expand/collapse, not
+                    selectable
+                </li>
+                <li><strong>Parent items without links</strong>Only expand/collapse, not selectable</li>
+                <li>
+                    <strong>Two-zone items with links</strong> Text area is selectable, expander button
+                    expands/collapses
+                </li>
+                <li><strong>Disabled items</strong>: Not interactive in either mode</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>ID-based Selection:</strong></p>
+    <ul>
+        <li>
+            <strong>Programmatic Selection:</strong> Use <code>setSelectedItemById(id)</code> to select items by their
+            ID
+        </li>
+        <li>
+            <strong>Getting Items:</strong> Use <code>getNavigationItemById(id)</code> to retrieve specific navigation
+            items
+        </li>
+    </ul>
 </description>
 <component-example [hasBackground]="false">
-    <fdb-navigation-data-source-example></fdb-navigation-data-source-example>
+    <fdb-selection-mode></fdb-selection-mode>
 </component-example>
-<code-example [exampleFiles]="dataSourceExample"></code-example>
+<code-example [exampleFiles]="selectionModeExample"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title id="selection" componentName="FdbNavigation">Selecting Navigation Item</fd-docs-section-title>
+<fd-docs-section-title id="desktop" componentName="FdbDesktop">Embedded Mode</fd-docs-section-title>
 <description>
     <p>
-        By default, Navigation component listens to <code>RouterLinkActive</code> directive applied to
-        <code>fdb-navigation-link</code>, and determines whether to mark navigation item as selected.
+        The Side Navigation must be placed underneath the Shell Bar. It must support the collapsed and expanded mode,
+        which can be toggled via the side navigation menu located in the Shell Bar. For expanded mode set the
+        <code>state</code> property of the navigation component to <code>expanded</code>, and for collapsed state set it
+        to <code>snapped</code>.
     </p>
     <p>
-        If more flexible control over the selected state is required, developers can utilize
-        <code>[selected]</code> input property of <code>fdb-navigation-list-item</code>
+        On small screens (Size S), Side Navigation can open as a full-width overlay over the content area beneath Shell
+        Bar. To enable this mode set <code>isOverlay</code> property to <code>true</code>. It will work only for
+        expanded state.
     </p>
 </description>
 <component-example [hasBackground]="false">
-    <fdb-navigation-selection-example></fdb-navigation-selection-example>
+    <fdb-desktop></fdb-desktop>
 </component-example>
-<code-example [exampleFiles]="selectionExample"></code-example>
+<code-example [exampleFiles]="desktopExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="overlay" componentName="FdbOverlay">Overlay Mode</fd-docs-section-title>
+<description>
+    <p>
+        The Side Navigation can be implemented in an Overlay Mode using Popover component, which is triggered by the
+        side navigation button in the Shell Bar. On small screen sizes (600px) it should follow the behaviour of the
+        Responsive Popover.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-overlay></fdb-overlay>
+</component-example>
+<code-example [exampleFiles]="overlayExample"></code-example>

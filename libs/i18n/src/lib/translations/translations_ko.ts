@@ -602,6 +602,12 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: '메뉴 버튼'
     },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
+    },
     coreNotification: {
         groupHeaderTitle: '펼치기/접기',
         groupAriaDescription: '통지 그룹',

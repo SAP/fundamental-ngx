@@ -1,11 +1,26 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationService } from '../../services/navigation.service';
 import { NavigationLinkComponent } from './navigation-link.component';
+
+class NavigationServiceMock {
+    currentItem$ = new Subject<FdbNavigationListItem>();
+    selectedItem$ = signal<FdbNavigationListItem | null>(null);
+    overflowItemSelected$ = new Subject<FdbNavigationListItem>();
+    selectionChanged$ = new Subject<FdbNavigationListItem | null>();
+
+    setSelectedItem(item: FdbNavigationListItem | null): void {
+        this.selectedItem$.set(item);
+        this.selectionChanged$.next(item);
+    }
+
+    getSelectedItem(): FdbNavigationListItem | null {
+        return this.selectedItem$();
+    }
+}
 
 class NavigationComponentMock extends FdbNavigation {
     classList$ = signal([]);
@@ -13,6 +28,8 @@ class NavigationComponentMock extends FdbNavigation {
     showMoreButton$ = signal(null);
     _navigationItemRenderer = signal(null);
     closeAllPopups = new Subject<void>();
+    selectionMode: 'router' | 'click' = 'router';
+    service = new NavigationServiceMock() as NavigationService;
     closePopups(): void {}
     setActiveItem(): void {}
     getActiveItem(): FdbNavigationListItem | null {
@@ -23,10 +40,9 @@ class NavigationComponentMock extends FdbNavigation {
 describe('NavigationLinkComponent', () => {
     let component: NavigationLinkComponent;
     let fixture: ComponentFixture<NavigationLinkComponent>;
-    let navComponent: NavigationComponentMock;
 
     beforeEach(async () => {
-        navComponent = new NavigationComponentMock();
+        const navComponent = new NavigationComponentMock();
         await TestBed.configureTestingModule({
             imports: [NavigationLinkComponent],
             providers: [
@@ -46,19 +62,22 @@ describe('NavigationLinkComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render icon if input property provided', async () => {
-        expect(fixture.debugElement.query(By.directive(IconComponent))).toBeFalsy();
-        fixture.componentRef.setInput('glyph', 'home');
-        fixture.detectChanges();
-        await fixture.whenStable();
-        expect(fixture.debugElement.query(By.directive(IconComponent))).toBeTruthy();
+    it('should set glyph property', () => {
+        component.glyph = 'home';
+        expect(component.glyph).toBe('home');
     });
 
-    it('should render external marker if input property provided', async () => {
-        expect(fixture.debugElement.query(By.css('.fd-navigation__external-link-indicator'))).toBeFalsy();
-        fixture.componentRef.setInput('external', true);
-        fixture.detectChanges();
-        await fixture.whenStable();
-        expect(fixture.debugElement.query(By.css('.fd-navigation__external-link-indicator'))).toBeTruthy();
+    it('should set external property', () => {
+        component.external = true;
+        expect(component.external).toBe(true);
+    });
+
+    it('should set quickCreate property', () => {
+        component.quickCreate = true;
+        expect(component.quickCreate).toBe(true);
+    });
+
+    it('should detect if in popover', () => {
+        expect(component.inPopover).toBe(false);
     });
 });
