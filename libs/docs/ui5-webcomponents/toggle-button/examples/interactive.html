@@ -1,0 +1,65 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--4">
+            <h5 for="design-select">Design:</h5>
+            <ui5-select
+                id="design-select"
+                [value]="selectedDesign()"
+                (ui5Change)="onDesignChange($event)"
+                class="fd-margin-bottom--md"
+            >
+                @for (design of designs; track design) {
+                <ui5-option [value]="design">{{ design }}</ui5-option>
+                }
+            </ui5-select>
+        </div>
+
+        <div class="fd-col fd-col--8">
+            <div class="fd-margin-bottom--sm">
+                <ui5-checkbox [checked]="isDisabled()" (ui5Change)="onDisabledChange($event)" text="Disabled">
+                </ui5-checkbox>
+            </div>
+
+            <div class="fd-margin-bottom--sm">
+                <ui5-checkbox [checked]="hasIcon()" (ui5Change)="onIconChange($event)" text="Show Icon"> </ui5-checkbox>
+            </div>
+
+            <div class="fd-margin-bottom--sm">
+                <ui5-checkbox [checked]="hasText()" (ui5Change)="onTextChange($event)" text="Show Text"> </ui5-checkbox>
+            </div>
+
+            <div class="fd-margin-bottom--sm">
+                <ui5-checkbox [checked]="isLoading()" (ui5Change)="onLoadingChange($event)" text="Loading State">
+                </ui5-checkbox>
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h5>Preview:</h5>
+            <ui5-toggle-button
+                [design]="selectedDesign()"
+                [pressed]="isPressed()"
+                [disabled]="isDisabled()"
+                [icon]="hasIcon() ? 'settings' : undefined"
+                [loading]="isLoading()"
+                (ui5Click)="onToggleClick()"
+            >
+                @if (hasText()) { Toggle Button }
+            </ui5-toggle-button>
+
+            <div class="fd-margin-top--md">
+                <h5>Configuration:</h5>
+                <ul>
+                    <li>Design: {{ selectedDesign() }}</li>
+                    <li>State: {{ isPressed() ? 'Pressed' : 'Unpressed' }}</li>
+                    <li>Disabled: {{ isDisabled() ? 'Yes' : 'No' }}</li>
+                    <li>Icon: {{ hasIcon() ? 'Yes' : 'No' }}</li>
+                    <li>Text: {{ hasText() ? 'Yes' : 'No' }}</li>
+                    <li>Loading: {{ isLoading() ? 'Yes' : 'No' }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

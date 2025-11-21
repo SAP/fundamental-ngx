@@ -1,0 +1,59 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <h5>Icon Only:</h5>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--3">
+            <ui5-toggle-button
+                [icon]="favoritePressed() ? 'favorite' : 'unfavorite'"
+                [pressed]="favoritePressed()"
+                design="Transparent"
+                (ui5Click)="toggleFavorite()"
+            >
+            </ui5-toggle-button>
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <ui5-toggle-button
+                icon="bookmark"
+                [pressed]="bookmarkPressed()"
+                design="Transparent"
+                (ui5Click)="toggleBookmark()"
+            >
+            </ui5-toggle-button>
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <ui5-toggle-button
+                [icon]="playPressed() ? 'media-pause' : 'media-play'"
+                [pressed]="playPressed()"
+                design="Emphasized"
+                (ui5Click)="togglePlay()"
+            >
+            </ui5-toggle-button>
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <ui5-toggle-button
+                [icon]="soundPressed() ? 'sound' : 'sound-off'"
+                [pressed]="soundPressed()"
+                design="Transparent"
+                (ui5Click)="toggleSound()"
+            >
+            </ui5-toggle-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <h5>Icon with Text:</h5>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <ui5-toggle-button icon="favorite" [pressed]="favoritePressed()" (ui5Click)="toggleFavorite()">
+                Add to Favorites
+            </ui5-toggle-button>
+        </div>
+    </div>
+</div>

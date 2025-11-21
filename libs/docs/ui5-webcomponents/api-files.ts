@@ -40,5 +40,8 @@ export const API_FILES = {
     textArea: ['TextArea'],
     timePicker: ['TimePicker'],
     title: ['Title'],
-    toast: ['Toast']
+    toast: ['Toast'],
+    toggleButton: ['ToggleButton'],
+    token: ['Token'],
+    tokenizer: ['Tokenizer']
 };
