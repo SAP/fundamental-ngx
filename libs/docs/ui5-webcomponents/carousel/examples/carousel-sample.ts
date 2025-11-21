@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Card } from '@fundamental-ngx/ui5-webcomponents/card';
 import { CardHeader } from '@fundamental-ngx/ui5-webcomponents/card-header';
@@ -16,6 +17,7 @@ import {
     CarouselArrowsPlacement,
     CarouselPageIndicatorType
 } from '@fundamental-ngx/ui5-webcomponents/types';
+
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 // Import Fundamental Styles
@@ -166,32 +168,32 @@ export class CarouselExample {
     }
 
     // Navigation event handlers
-    onBasicNavigate(event: any): void {
+    onBasicNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.basicCurrentPage.set(detail.selectedIndex);
         console.log('Basic carousel navigated to page:', detail.selectedIndex);
     }
 
-    onImageNavigate(event: any): void {
+    onImageNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentImagePage.set(detail.selectedIndex);
         console.log('Image carousel navigated to page:', detail.selectedIndex);
     }
 
-    onProductNavigate(event: any): void {
+    onProductNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentProductPage.set(detail.selectedIndex);
         console.log('Product carousel navigated to page:', detail.selectedIndex);
     }
 
-    onFeatureNavigate(event: any): void {
+    onFeatureNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentFeaturePage.set(detail.selectedIndex);
         console.log('Feature carousel navigated to page:', detail.selectedIndex);
     }
 
     // Configuration change handlers
-    onPageIndicatorTypeChange(event: any): void {
+    onPageIndicatorTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -200,16 +202,7 @@ export class CarouselExample {
         }
     }
 
-    onBackgroundDesignChange(event: any): void {
-        const detail = event.detail;
-        const selectedItems = detail.selectedItems || [];
-        if (selectedItems.length > 0) {
-            const selectedDesign = selectedItems[0].innerText as BackgroundDesign;
-            this.backgroundDesign.set(selectedDesign);
-        }
-    }
-
-    onArrowsPlacementChange(event: any): void {
+    onArrowsPlacementChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -276,30 +269,30 @@ export class CarouselExample {
         return types[status] || '1';
     }
 
-    getImageStyle(image: any): string {
+    getImageStyle(image: { url: string; title: string; description: string; gradient: string }): string {
         return `
-            height: 500px; 
-            background: ${image.gradient}; 
-            background-image: url('${image.url}'); 
-            background-size: cover; 
-            background-position: center; 
-            background-blend-mode: overlay; 
-            display: flex; 
-            align-items: center; 
+            height: 500px;
+            background: ${image.gradient};
+            background-image: url('${image.url}');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            display: flex;
+            align-items: center;
             justify-content: center;
         `;
     }
 
-    getCardImageStyle(image: any): string {
+    getCardImageStyle(image: { url: string; title: string; description: string; gradient: string }): string {
         return `
-            height: 250px; 
-            background: ${image.gradient}; 
-            background-image: url('${image.url}'); 
-            background-size: cover; 
-            background-position: center; 
-            background-blend-mode: overlay; 
-            display: flex; 
-            align-items: center; 
+            height: 250px;
+            background: ${image.gradient};
+            background-image: url('${image.url}');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            display: flex;
+            align-items: center;
             justify-content: center;
         `;
     }

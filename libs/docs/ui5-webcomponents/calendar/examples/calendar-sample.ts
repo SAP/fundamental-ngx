@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Calendar } from '@fundamental-ngx/ui5-webcomponents/calendar';
 import { CalendarDate } from '@fundamental-ngx/ui5-webcomponents/calendar-date';
@@ -79,10 +80,9 @@ export class CalendarExample {
     }
 
     // Event handlers using Angular 20 patterns
-    onSelectionChange(event: any): void {
-        const calendarEvent = event.detail;
+    onSelectionChange(event: UI5WrapperCustomEvent<Calendar, 'ui5SelectionChange'>): void {
         // Extract selectedValues (date strings) instead of selectedDates (timestamps)
-        const dates = calendarEvent.selectedValues || [];
+        const dates = event.detail.selectedValues || [];
         this.selectedDates.set(dates);
         console.log('Calendar selection changed:', dates);
     }
@@ -98,7 +98,7 @@ export class CalendarExample {
     }
 
     // Event handlers for UI5 segmented buttons
-    onSelectionModeChange(event: any): void {
+    onSelectionModeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         console.log('onSelectionModeChange called', event.detail);
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {
@@ -107,7 +107,7 @@ export class CalendarExample {
         }
     }
 
-    onCalendarTypeChange(event: any): void {
+    onCalendarTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         console.log('onCalendarTypeChange called:', event.detail.selectedItems[0].innerText);
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {

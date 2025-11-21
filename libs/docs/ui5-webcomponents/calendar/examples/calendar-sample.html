@@ -2,7 +2,7 @@
     <div class="fd-section__header">
         <h2 id="calendar-basic" class="fd-section__title">Calendar</h2>
     </div>
-    <ui5-calendar (ui5selectionChange)="onSelectionChange($event)" aria-label="Basic calendar example"> </ui5-calendar>
+    <ui5-calendar (ui5SelectionChange)="onSelectionChange($event)" aria-label="Basic calendar example"> </ui5-calendar>
     <p class="fd-margin-top--sm"><strong>Selected Dates:</strong> {{ selectedDatesDisplay() }}</p>
     <p class="fd-margin-top--tiny"><strong>Selection Mode:</strong> {{ currentSelectionMode() }}</p>
 </section>
@@ -41,7 +41,7 @@
         [formatPattern]="formatPattern()"
         [minDate]="minDate()"
         [maxDate]="maxDate()"
-        (ui5selectionChange)="onSelectionChange($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
         aria-label="Configured calendar example"
     >
         @if (currentSelectionMode() !== 'Range') { @for (date of selectedDates(); track date) {
@@ -66,7 +66,7 @@
     </div>
     <ui5-calendar
         selectionMode="Range"
-        (ui5selectionChange)="onSelectionChange($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
         aria-label="Range selection calendar"
     >
     </ui5-calendar>
@@ -83,7 +83,7 @@
     </div>
     <ui5-calendar
         selectionMode="Multiple"
-        (ui5selectionChange)="onSelectionChange($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
         aria-label="Multiple selection calendar"
     >
     </ui5-calendar>
@@ -104,7 +104,7 @@
         minDate="2024-06-01"
         maxDate="2024-12-31"
         formatPattern="MM/dd/yyyy"
-        (ui5selectionChange)="onSelectionChange($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
         aria-label="Date restricted calendar"
     >
     </ui5-calendar>
@@ -129,7 +129,7 @@
                         <ui5-calendar
                             primaryCalendarType="Gregorian"
                             selectionMode="Single"
-                            (ui5selectionChange)="onSelectionChange($event)"
+                            (ui5SelectionChange)="onSelectionChange($event)"
                             aria-label="Gregorian calendar"
                         >
                         </ui5-calendar>
@@ -146,7 +146,7 @@
                         <ui5-calendar
                             primaryCalendarType="Islamic"
                             selectionMode="Single"
-                            (ui5selectionChange)="onSelectionChange($event)"
+                            (ui5SelectionChange)="onSelectionChange($event)"
                             aria-label="Islamic calendar"
                         >
                         </ui5-calendar>
@@ -163,7 +163,7 @@
                         <ui5-calendar
                             primaryCalendarType="Japanese"
                             selectionMode="Single"
-                            (ui5selectionChange)="onSelectionChange($event)"
+                            (ui5SelectionChange)="onSelectionChange($event)"
                             aria-label="Japanese calendar"
                         >
                         </ui5-calendar>
@@ -180,7 +180,7 @@
                         <ui5-calendar
                             primaryCalendarType="Buddhist"
                             selectionMode="Single"
-                            (ui5selectionChange)="onSelectionChange($event)"
+                            (ui5SelectionChange)="onSelectionChange($event)"
                             aria-label="Buddhist calendar"
                         >
                         </ui5-calendar>
@@ -199,7 +199,7 @@
         primaryCalendarType="Gregorian"
         secondaryCalendarType="Islamic"
         selectionMode="Single"
-        (ui5selectionChange)="onSelectionChange($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
         aria-label="Dual calendar type example"
     >
     </ui5-calendar>

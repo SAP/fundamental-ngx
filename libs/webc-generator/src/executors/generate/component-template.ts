@@ -39,10 +39,9 @@ function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
 
 function generateTypeImports(
     data: CEM.CustomElementDeclaration,
-    allEnums: { name: string; members: string[] }[],
-    enumPackageMapping: Record<string, string>
+    allEnums: { name: string; members: string[] }[]
 ): { componentImports: string[]; componentEnums: string[] } {
-    const componentImports: string[] = [];
+    const componentImports: Set<string> = new Set();
     const typeNames = new Set<string>();
 
     const members = (data.members as CEM.ClassField[] | undefined) || [];
@@ -74,9 +73,9 @@ function generateTypeImports(
                             reference.module?.includes('/types/')
                         ) {
                             // Use default import for direct type imports and default exports
-                            componentImports.push(`import { default as ${reference.name} } from '${importPath}';`);
+                            componentImports.add(`import { default as ${reference.name} } from '${importPath}';`);
                         } else {
-                            componentImports.push(`import { ${reference.name} } from '${importPath}';`);
+                            componentImports.add(`import { ${reference.name} } from '${importPath}';`);
                         }
                         typeNames.add(reference.name);
                     }
@@ -84,9 +83,10 @@ function generateTypeImports(
             }
         }
     }
+
     const extractedEnums = allEnums.filter((e) => typeNames.has(e.name)).map((e) => e.name);
 
-    return { componentImports, componentEnums: extractedEnums };
+    return { componentImports: Array.from(componentImports), componentEnums: extractedEnums };
 }
 
 /** Helper function to generate input properties for the component. */
@@ -210,18 +210,17 @@ function generateOutputs(data: CEM.CustomElementDeclaration, className: string):
    */
   ui5${pascalCaseEventName} = output<UI5CustomEvent<_${className}, '${event.name}'>>();`);
     });
+
     return outputs.join('\n');
 }
 
 /** Generate the Angular component wrapper. */
 export function componentTemplate(
     data: CEM.CustomElementDeclaration,
-    cemPackage: CEM.Package,
     allEnums: { name: string; members: string[] }[],
-    packageName: string,
-    enumPackageMapping: Record<string, string>
+    packageName: string
 ): string {
-    const { componentImports, componentEnums } = generateTypeImports(data, allEnums, enumPackageMapping);
+    const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
     const tagName = data.tagName || '';
     const className = data.name;
     const { readonlyProperties, privateProperties } = generateProperties(data);
