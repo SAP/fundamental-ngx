@@ -181,7 +181,7 @@ export class FormValidationSample {
         return 'Invalid input';
     }
 
-    onInputChange(fieldName: string, event: CustomEvent): void {
+    onInputChange(fieldName: string, event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
         const value = (event.target as any)?.value;
         this.registrationForm.get(fieldName)?.setValue(value);
         this.registrationForm.get(fieldName)?.markAsDirty();
