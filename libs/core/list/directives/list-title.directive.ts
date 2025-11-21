@@ -5,7 +5,8 @@ import { booleanAttribute, Directive, ElementRef, input, OnInit } from '@angular
     standalone: true,
     host: {
         class: 'fd-list__title',
-        '[class.fd-list__title--truncate]': 'truncate()'
+        '[class.fd-list__title--truncate]': 'truncate()',
+        '[class.fd-list__title--scope]': 'scope()'
     }
 })
 export class ListTitleDirective implements OnInit {
@@ -17,6 +18,9 @@ export class ListTitleDirective implements OnInit {
 
     /** Whether the text should truncate with ellipsis. */
     truncate = input(false, { transform: booleanAttribute });
+
+    /** Whether this title is used for scope in the shell search results. */
+    scope = input(false);
 
     /** @hidden */
     constructor(public elRef: ElementRef) {}

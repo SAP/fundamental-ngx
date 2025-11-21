@@ -33,20 +33,6 @@
     }
 }
 
-.fdp-search-field__suggestion-dropdown {
-    .fd-menu--overflow {
-        background-color: var(--sapList_Background);
-    }
-
-    .fd-menu__list {
-        max-width: none;
-    }
-
-    .fd-menu__item {
-        max-width: none;
-    }
-}
-
 fdp-search-field {
     display: block;
     .fd-popover-custom {

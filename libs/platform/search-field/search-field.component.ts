@@ -17,6 +17,7 @@ import {
     inject,
     Inject,
     Injector,
+    input,
     Input,
     OnChanges,
     OnDestroy,
@@ -36,24 +37,31 @@ import {
 } from '@angular/core';
 
 import { isObservable, merge, Observable, of, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
+    ClickedDirective,
     destroyObservable,
     DynamicComponentService,
     KeyUtil,
     RtlService,
     SearchHighlightPipe
 } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
+import { TextComponent } from '@fundamental-ngx/core/text';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
@@ -70,7 +78,7 @@ export interface SearchInput {
 }
 
 export interface SuggestionItem {
-    value: string;
+    value: string; // main text of the suggestion
     isHistorical?: string;
     data?: any;
 }
@@ -78,6 +86,16 @@ export interface SuggestionItem {
 export interface ValueLabelItem {
     value: string;
     label: string;
+}
+
+export interface SearchResultsDataModel {
+    subline?: string;
+    listIconGlyph?: string;
+    prefix?: string;
+    counter?: string;
+    avatarGlyph?: string;
+    avatarImage?: string;
+    avatarLabel?: string;
 }
 
 @Directive({
@@ -129,6 +147,13 @@ type Appearance = SearchComponent['appearance'] | undefined;
         SearchHighlightPipe,
         FdTranslatePipe,
         PopoverModule,
+        BarModule,
+        TitleComponent,
+        TextComponent,
+        ListModule,
+        InfoLabelComponent,
+        ClickedDirective,
+        AvatarComponent,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -180,13 +205,10 @@ export class SearchFieldComponent
     set suggestions(value: SuggestionItem[] | Observable<SuggestionItem[]>) {
         this._suggestions = value;
         if (Array.isArray(value)) {
-            // convert suggestions to an array of string for "dropdown values"
-            const dropdownValues = value.map((suggestion: SuggestionItem) => suggestion.value);
-            this._dropdownValues$ = of(dropdownValues);
+            // convert suggestions array to an observable
+            this._dropdownValues$ = of(value);
         } else if (isObservable(value)) {
-            this._dropdownValues$ = value.pipe(
-                map((suggestions: SuggestionItem[]) => suggestions.map((suggestion) => suggestion.value))
-            );
+            this._dropdownValues$ = value;
         } else {
             this._dropdownValues$ = of([]);
         }
@@ -244,6 +266,10 @@ export class SearchFieldComponent
     @Input()
     disableSuggestionsFoundAnnouncer = false;
 
+    /** Function to call when the user clicks the search in scope list item. */
+    @Input()
+    searchInScopeCallback: () => void;
+
     /** Input change event. */
     @Output()
     inputChange: EventEmitter<SearchInput> = new EventEmitter();
@@ -291,14 +317,33 @@ export class SearchFieldComponent
             category: this._currentCategory?.value || null
         };
     }
+
+    /** Title of the initial suggestion, if a suggestion list is displayed. */
+    initialSuggestionTitle = input<string>('');
+
+    /** Subline of the initial suggestion, if a suggestion list is displayed. */
+    initialSuggestionSubline = input<string>('');
+
+    /** Subline of the initial suggestion, if a suggestion list is displayed. */
+    suggestionFooter = input<TemplateRef<any> | null>(null);
+
+    /** Configuration model which allows the developer to specify what properties from the data will be used for different parts of the search results. */
+    searchResultsDataModel = input<SearchResultsDataModel>();
+
+    /** Text for the search results scope search list item. */
+    searchInScopeText = input<string>('');
+
+    /** Number for the search results scope list item. */
+    searchInScopeNumber = input<number>(0);
+
     /** @hidden Focus state */
     _isFocused = false;
 
     /**
-     * Observable list of string values taken from `suggestions` to populate dropdown menu.
+     * Observable list of suggestion items to populate dropdown menu.
      * @hidden
      */
-    _dropdownValues$: Observable<string[]> = of([]);
+    _dropdownValues$: Observable<SuggestionItem[]> = of([]);
 
     /**
      * Currently set category.
@@ -484,8 +529,12 @@ export class SearchFieldComponent
      * Capturing item selection from dropdown menu of combobox.
      * @hidden
      */
-    onItemClick(event: string): void {
-        this.inputText = event;
+    onItemClick(event: SuggestionItem | string): void {
+        if (typeof event === 'string') {
+            this.inputText = event;
+        } else {
+            this.inputText = event.value;
+        }
         this.inputChange.emit(this.searchFieldValue);
         this.searchSubmit.emit(this.searchFieldValue);
         this.closeSuggestionMenu();
@@ -605,6 +654,24 @@ export class SearchFieldComponent
         this._dataSource = dataSource;
     }
 
+    /** @hidden gets the corresponding text for a given key based off the SearchResultsDataModel for a search suggestion */
+    _getDataFromSearchResultsModel(suggestion: SuggestionItem, key: string): string {
+        let retVal = '';
+        const dataModel = this.searchResultsDataModel();
+        if (dataModel) {
+            const keyToCheck = dataModel[key];
+            if (keyToCheck && suggestion.data && suggestion.data[keyToCheck]) {
+                retVal = suggestion.data[keyToCheck];
+            }
+        }
+        return retVal;
+    }
+
+    /** @hidden helper function needed by template */
+    _isString(suggestion: string | object): boolean {
+        return typeof suggestion === 'string';
+    }
+
     /**
      * @hidden return count for matching suggestion with input text
      * @returns number
@@ -613,7 +680,8 @@ export class SearchFieldComponent
         let count = 0;
         this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
             suggestions?.forEach((suggestion) => {
-                if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
+                const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
+                if (this.inputText && textToCheck.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
                 }
             });
@@ -665,14 +733,18 @@ export class SearchFieldComponent
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     /** @hidden */
-    transform(values: string[] | null, match: string): string[] {
-        if (!values) {
-            values = [];
+    transform(suggestions: SuggestionItem[] | null, match: string): SuggestionItem[] {
+        if (!suggestions) {
+            suggestions = [];
         }
         if (!match) {
-            return values;
+            return suggestions;
         }
         const processedMatch = match.trim().toLowerCase();
-        return values.filter((value) => value.toLowerCase().indexOf(processedMatch) > -1);
+        // return suggestions.filter((suggestion) => suggestion.value.toLowerCase().indexOf(processedMatch) > -1);
+        return suggestions.filter((suggestion) => {
+            const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion.value;
+            return textToCheck.toLowerCase().indexOf(processedMatch) > -1;
+        });
     }
 }

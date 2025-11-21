@@ -13,6 +13,7 @@ import {
 import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
 import { ShellbarBrandingContextAreaExampleComponent } from './examples/shellbar-branding-context-area-example/shellbar-branding-context-area-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
+import { ShellbarComplexSearchResultsExampleComponent } from './examples/shellbar-complex-search-results-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 
@@ -34,7 +35,8 @@ const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
         ShellbarCollapsibleExampleComponent,
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent,
-        ShellbarBrandingContextAreaExampleComponent
+        ShellbarBrandingContextAreaExampleComponent,
+        ShellbarComplexSearchResultsExampleComponent
     ]
 })
 export class ShellbarDocsComponent {
@@ -98,6 +100,16 @@ export class ShellbarDocsComponent {
         }),
         getExampleFile('shellbar-branding-context-area-example/shellbar-branding-context-area-example.component.html', {
             name: 'shellbar-branding-context-area-example.html'
+        })
+    ];
+
+    shellbarComplexSearchResultsExample: ExampleFile[] = [
+        getExampleFile('shellbar-complex-search-results-example.component.ts', {
+            selector: 'shellbar-complex-search-results-example',
+            component: 'ShellbarComplexSearchResultsExampleComponent'
+        }),
+        getExampleFile('shellbar-complex-search-results-example.component.html', {
+            name: 'shellbar-complex-search-results-example.html'
         })
     ];
 }

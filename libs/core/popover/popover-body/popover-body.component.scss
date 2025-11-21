@@ -78,15 +78,21 @@ fd-popover-body {
             border-radius: inherit;
         }
 
-        .fd-list {
+        .fd-list:not(:has(~ .fd-popover__body-header)) {
             border-radius: $fd-popover-border-radius;
 
-            &__item {
+            .fd-list__item {
                 &:first-child,
                 &:first-of-type {
                     @include set-list-border-radius(top);
                 }
+            }
+        }
 
+        .fd-list:not(:has(~ .fd-popover__body-footer)) {
+            border-radius: $fd-popover-border-radius;
+
+            .fd-list__item {
                 &:last-child,
                 &:last-of-type {
                     @include set-list-border-radius(bottom);

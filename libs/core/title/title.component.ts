@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, input, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
@@ -16,7 +16,8 @@ export abstract class TitleToken {
     template: '<ng-content></ng-content>',
     host: {
         class: 'fd-title',
-        '[class.fd-title--wrap]': 'wrap'
+        '[class.fd-title--wrap]': 'wrap',
+        '[class.fd-title--two-line-clamp]': 'twoLineClamp()'
     },
     styleUrl: './title.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,6 +44,9 @@ export class TitleComponent extends TitleToken implements OnInit {
 
     /** The size of the header */
     _headerSize: Nullable<HeaderSizes> = null;
+
+    /** Whether this title should clamp at two lines of text. */
+    twoLineClamp = input(false);
 
     /** @hidden */
     private _appliedHeaderSize: number;

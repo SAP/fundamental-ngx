@@ -47,7 +47,8 @@ let listItemUniqueId = 0;
     host: {
         class: 'fd-list__item',
         '[attr.tabindex]': '_normalizedTabIndex$()',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        '[class.fd-list__item--suggestion]': 'suggestion()'
     },
     providers: [
         {
@@ -180,6 +181,9 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Template ref for Settings list item */
     settingsListTpl = input<TemplateRef<any>>();
+
+    /** @hidden Whether this is a suggestion type list item. */
+    suggestion = input(false);
 
     /** @hidden */
     private _role = 'listitem'; // default for li elements

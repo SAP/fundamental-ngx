@@ -1,11 +1,42 @@
 <ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
-    <fd-popover [isOpen]="_isOpen$()" (isOpenChange)="_isOpen$.set($event)" [triggers]="[]">
+    <fd-popover [isOpen]="_isOpen$()" (isOpenChange)="_isOpen$.set($event)" [triggers]="[]" fillControlMode="equal">
         <fd-popover-control>
             <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body
+            [style.display]="(_dropdownValues$ | async | suggestionMatches: inputText).length > 0 ? 'inherit' : 'none'"
+        >
+            @if (initialSuggestionTitle()) {
+                <div fd-popover-body-header>
+                    <div
+                        fd-bar
+                        [initialSuggestionTitle]="true"
+                        [barDesign]="initialSuggestionSubline() ? 'header-with-subheader' : 'header'"
+                    >
+                        <div fd-bar-left>
+                            <span fd-title [twoLineClamp]="true" [headerSize]="6">
+                                {{ initialSuggestionTitle() }}
+                            </span>
+                        </div>
+                    </div>
+                    @if (initialSuggestionSubline()) {
+                        <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
+                            <div fd-bar-left>
+                                <fd-text [subline]="true" [text]="initialSuggestionSubline()"></fd-text>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
             <ng-template [ngTemplateOutlet]="suggestionMenuTemplate"></ng-template>
+            @if (suggestionFooter()) {
+                <div fd-popover-body-footer>
+                    <div fd-bar barDesign="footer">
+                        <ng-template [ngTemplateOutlet]="suggestionFooter()"></ng-template>
+                    </div>
+                </div>
+            }
         </fd-popover-body>
     </fd-popover>
 </ng-template>
@@ -101,6 +132,9 @@
                         <fd-icon glyph="decline"></fd-icon>
                     </button>
                 </span>
+            } @else {
+                <!-- prevents width of search from changing when there is no text in the input -->
+                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}"></span>
             }
             @if (forceSearchButton || isLoading || (!isLoading && !_isSearchDone)) {
                 <span
@@ -154,35 +188,83 @@
     </div>
 </ng-template>
 <ng-template #suggestionMenuTemplate>
-    @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestions) {
-        @if (suggestions?.length) {
-            <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir$()">
-                <nav
-                    class="fd-menu"
-                    tabindex="-1"
-                    [class.is-compact]="contentDensityObserver.isCompactSignal()"
-                    [class.fd-menu--mobile]="mobile"
-                    [class.fd-menu--overflow]="!mobile"
-                    [attr.id]="_menuId"
-                    #menu
-                    (keydown)="onKeydown($event)"
-                >
-                    <ul class="fd-menu__list" role="menu">
-                        @for (value of suggestions; track value) {
-                            <li
-                                fdpSearchFieldSuggestion
-                                class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
-                                (keydown.enter)="onItemClick(value); $event.preventDefault()"
-                                (keydown.tab)="onItemClick(value)"
-                                (keyup.space)="onItemClick(value); $event.stopPropagation()"
-                                (click)="onItemClick(value)"
-                                [innerHTML]="value | highlight: inputText : true : true"
-                                role="menuitem"
-                            ></li>
+    @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestionsFiltered) {
+        @if (suggestionsFiltered?.length) {
+            <ul fd-list [searchResultsList]="true" (keydown)="onKeydown($event)">
+                @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
+                    @let subline = _getDataFromSearchResultsModel(filteredSuggestion, 'subline');
+                    <li
+                        fd-list-item
+                        [interactive]="true"
+                        [suggestion]="true"
+                        fdpSearchFieldSuggestion
+                        (keydown.enter)="onItemClick(filteredSuggestion); $event.preventDefault()"
+                        (keydown.tab)="onItemClick(filteredSuggestion)"
+                        (keyup.space)="onItemClick(filteredSuggestion); $event.stopPropagation()"
+                        (click)="onItemClick(filteredSuggestion)"
+                        [byline]="!!subline"
+                    >
+                        @let listIconGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'listIconGlyph');
+                        @if (listIconGlyph) {
+                            <span fd-list-thumbnail>
+                                <i fd-list-icon [glyph]="listIconGlyph"></i>
+                            </span>
                         }
-                    </ul>
-                </nav>
-            </div>
+                        @let avatarGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarGlyph');
+                        @let avatarImage = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarImage');
+                        @let avatarLabel = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarLabel');
+                        @if (avatarGlyph || avatarImage || avatarLabel) {
+                            <fd-avatar
+                                [circle]="true"
+                                size="xs"
+                                [glyph]="avatarGlyph"
+                                [image]="avatarImage"
+                                [label]="avatarLabel"
+                            ></fd-avatar>
+                        }
+                        @let prefix = _getDataFromSearchResultsModel(filteredSuggestion, 'prefix');
+                        @if (prefix) {
+                            <fd-info-label fd-list-info-label [label]="prefix" color="10"></fd-info-label>
+                        }
+                        <!-- previous API was built on suggestions only being strings, hence the need for the check. -->
+                        @if (_isString(filteredSuggestion)) {
+                            <!-- toString() below is for type safety -->
+                            <span
+                                fd-list-title
+                                [innerHTML]="filteredSuggestion.toString() | highlight: inputText : true : true"
+                            ></span>
+                        } @else {
+                            @if (subline) {
+                                <div fd-list-content>
+                                    <span
+                                        fd-list-title
+                                        [innerHTML]="filteredSuggestion.value | highlight: inputText : true : true"
+                                    ></span>
+                                    <span fd-list-subline>
+                                        {{ subline }}
+                                    </span>
+                                </div>
+                            } @else {
+                                <span
+                                    fd-list-title
+                                    [innerHTML]="filteredSuggestion.value | highlight: inputText : true : true"
+                                ></span>
+                            }
+                        }
+                    </li>
+                }
+                @if (searchInScopeText() && searchInScopeNumber()) {
+                    <li
+                        fd-list-item
+                        (fdkClicked)="searchInScopeCallback()"
+                        [interactive]="true"
+                        [suggestion]="true"
+                        [counter]="searchInScopeNumber()"
+                    >
+                        <span fd-list-title>{{ searchInScopeText() }}</span>
+                    </li>
+                }
+            </ul>
         }
     }
 </ng-template>

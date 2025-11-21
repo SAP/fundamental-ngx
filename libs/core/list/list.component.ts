@@ -48,7 +48,8 @@ import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
     host: {
         class: 'fd-list',
         '[class.fd-settings__list]': 'settingsList() || settingsListFooter()',
-        '[class.fd-settings__list--footer]': 'settingsListFooter()'
+        '[class.fd-settings__list--footer]': 'settingsListFooter()',
+        '[class.fd-list--search-results]': 'searchResultsList()'
     },
     styleUrls: ['./list.component.scss', '../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -159,6 +160,9 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** Whether the list is used inside Settings Dialog Footer */
     settingsListFooter = input(false, { transform: booleanAttribute });
+
+    /** @hidden Whether the list is the shell search results list. */
+    searchResultsList = input(false);
 
     /**
      * @hidden
@@ -272,7 +276,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     private _recheckLinks(): void {
         const items = this.items.filter((item) => item.link);
-        this.hasNavigation = items.length > 0;
+        this.hasNavigation = items.length > 0 || this.searchResultsList();
         if (this.selection) {
             this._defaultRole = 'listbox';
         }
