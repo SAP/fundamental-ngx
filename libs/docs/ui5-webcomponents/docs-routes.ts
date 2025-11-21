@@ -162,6 +162,10 @@ const componentRoutes = [
     {
         path: 'token',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/token').then(configureLibRoutes)
+    },
+    {
+        path: 'tokenizer',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tokenizer').then(configureLibRoutes)
     }
 ];
 

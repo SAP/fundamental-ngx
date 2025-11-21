@@ -42,5 +42,6 @@ export const API_FILES = {
     title: ['Title'],
     toast: ['Toast'],
     toggleButton: ['ToggleButton'],
-    token: ['Token']
+    token: ['Token'],
+    tokenizer: ['Tokenizer']
 };

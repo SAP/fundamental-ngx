@@ -149,6 +149,10 @@
         {
             "url": "ui5-webcomponents/token",
             "name": "Token"
+        },
+        {
+            "url": "ui5-webcomponents/tokenizer",
+            "name": "Tokenizer"
         }
     ]
 }
