@@ -158,6 +158,10 @@ const componentRoutes = [
     {
         path: 'toggle-button',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/toggle-button').then(configureLibRoutes)
+    },
+    {
+        path: 'token',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/token').then(configureLibRoutes)
     }
 ];
 

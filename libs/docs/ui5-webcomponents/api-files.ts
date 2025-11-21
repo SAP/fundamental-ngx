@@ -41,5 +41,6 @@ export const API_FILES = {
     timePicker: ['TimePicker'],
     title: ['Title'],
     toast: ['Toast'],
-    toggleButton: ['ToggleButton']
+    toggleButton: ['ToggleButton'],
+    token: ['Token']
 };
