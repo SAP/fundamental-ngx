@@ -10,13 +10,15 @@ permissions:
     contents: write
     id-token: write
 env:
+    NODE_VERSION: '22.x'
+    # Package list for build, lint, pack, and publish operations
+    RELEASE_PACKAGES: 'i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai'
     IS_HOTFIX: ${{ github.ref == 'refs/heads/tmp_hotfix_branch' }}
     IS_PRERELEASE: ${{ github.event_name == 'push' && github.ref != 'refs/heads/tmp_hotfix_branch' }}
     IS_MANUAL: ${{ contains(github.event.head_commit.message, 'chore(release)') }}
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
     NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 5
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
-    NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
 jobs:
@@ -26,14 +28,15 @@ jobs:
         strategy:
             matrix:
                 agent: [1, 2, 3, 4, 5]
-                node-version: [22.x]
         steps:
             - uses: actions/checkout@v4.2.2
             - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
             - name: Start Nx Cloud Agent
               run: npx nx-cloud start-agent
               env:
-                  NX_AGENT_NAME: ${{matrix.agent}}
+                  NX_AGENT_NAME: ${{ matrix.agent }}
 
     create_release:
         name: Create release
@@ -45,57 +48,23 @@ jobs:
             - name: Fetch from origin repo
               uses: actions/checkout@v4.2.2
               with:
-                  ref: ${{ fromJSON('["tmp_hotfix_branch", "main"]')[env.IS_HOTFIX] }}
+                  ref: ${{ env.IS_HOTFIX == 'true' && 'tmp_hotfix_branch' || 'main' }}
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
 
-            - uses: ./.github/actions/set-up-git
-              name: Set up git user
+            - name: Setup Node.js, dependencies, and caching
+              uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Setup git user
+              uses: ./.github/actions/set-up-git
               with:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
 
-            - name: Use Node.js ${{ inputs.node-version }}
-              uses: actions/setup-node@v4.3.0
-              with:
-                  node-version: '22.x'
-
             - name: Update npm for trusted publishing
               run: npm install -g npm@latest
-
-            - name: Install Corepack and Enable Yarn
-              run: |
-                  echo "Installing Corepack..."
-                  npm install -g corepack || { echo 'Corepack installation failed'; exit 1; }
-                  echo "Corepack installed successfully."
-                  corepack --version
-                  corepack enable yarn
-
-            - name: Get yarn cache directory path
-              id: yarn-cache-dir-path
-              run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-              shell: bash
-
-            - name: Use the global Yarn cache if available
-              uses: actions/cache@v4.2.3
-              with:
-                  path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-                  key: ${{ runner.os }}-node-22.x-yarn-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-22.x-yarn-
-
-            - uses: actions/cache@v4.2.3
-              id: node_modules
-              name: Use project node_modules cache if available
-              with:
-                  path: '**/node_modules/'
-                  key: ${{ runner.os }}-22.x-node-modules-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-22.x-node-modules-
-
-            - name: Install dependencies
-              if: steps.node_modules.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
 
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
@@ -119,7 +88,7 @@ jobs:
                   bumpedVersion: ${{ steps.bumpVersion.outputs.newVersion }}
 
             - name: Update using lerna # Skipping push, in case something goes wrong later during build/prepare
-              if: env.IS_MANUAL == 'false'
+              if: env.IS_MANUAL != 'true'
               run: |
                   npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --message="chore(release): publish %v [ci skip]" --no-push
 
@@ -127,11 +96,11 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx run-many --target=lint --skip-nx-cache --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai --parallel=1
+                      npx nx run-many --target=lint --skip-nx-cache --projects=${{ env.RELEASE_PACKAGES }} --parallel=3
                       npx nx run-many --target=build --all --parallel=1
 
             - name: Pack libraries
-              run: npx nx run-many --target=prepare --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp,ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-fiori,ui5-webcomponents-ai --parallel=3
+              run: npx nx run-many --target=prepare --projects=${{ env.RELEASE_PACKAGES }} --parallel=3
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
@@ -153,21 +122,29 @@ jobs:
                   echo "Publishing packages with npm tag: $NPM_TAG"
 
                   # Publish only the packages that are built and prepared
-                  for package_name in cdk core i18n platform moment-adapter datetime-adapter cx btp ui5-webcomponents-base ui5-webcomponents ui5-webcomponents-fiori ui5-webcomponents-ai; do
+                  IFS=',' read -ra PACKAGES <<< "${{ env.RELEASE_PACKAGES }}"
+                  EXIT_CODE=0
+                  for package_name in "${PACKAGES[@]}"; do
                     package_path="dist/libs/$package_name"
                     if [ -f "$package_path/package.json" ]; then
                       echo "Publishing @fundamental-ngx/$package_name..."
-                      (cd "$package_path" && npm publish --tag "$NPM_TAG" --provenance)
+                      if ! (cd "$package_path" && npm publish --tag "$NPM_TAG" --provenance); then
+                        echo "❌ Failed to publish $package_name"
+                        EXIT_CODE=1
+                      else
+                        echo "✅ Successfully published $package_name"
+                      fi
                     else
-                      echo "Skipping $package_name (not found in dist)"
+                      echo "⚠️  Skipping $package_name (not found in dist)"
                     fi
                   done
+                  exit $EXIT_CODE
 
             # This step is for pushing into the main repo if version has been updated by the CI.
             # Commit is created by the lerna version command
             # This Will NOT trigger this workflow again, so it is okay
             - name: Push changes
-              if: env.IS_MANUAL == 'false'
+              if: env.IS_MANUAL != 'true'
               run: git push --follow-tags
 
             # This will delete locally some tags to properly generate the release notes, so it should go after the push to upstream
@@ -189,7 +166,7 @@ jobs:
               if: env.IS_HOTFIX == 'true' && steps.releaseTags.outputs.mainNeedsSync == 'true'
               run: |
                   git checkout -f main
-                  npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --no-push --no-changelog --no-git-tag-version --no-changelog
+                  npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --no-push --no-changelog --no-git-tag-version
                   git add .
                   git commit -m "chore(release): sync version after hotfix v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
                   git push origin main
@@ -213,6 +190,8 @@ jobs:
 
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
 
             - name: Run build prod
               run: npx nx run docs:compile:production --skip-nx-cache
@@ -223,15 +202,16 @@ jobs:
                   folder: dist/apps/docs
                   token: ${{ secrets.GHACTIONS }}
                   repository-name: ${{ github.repository }}
+
     stop_agents:
         if: ${{ always() }}
-        needs:
-            - create_release
-            - gh_pages
+        needs: create_release
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4.2.2
             - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents
