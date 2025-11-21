@@ -154,6 +154,10 @@ const componentRoutes = [
     {
         path: 'toast',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/toast').then(configureLibRoutes)
+    },
+    {
+        path: 'toggle-button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/toggle-button').then(configureLibRoutes)
     }
 ];
 
