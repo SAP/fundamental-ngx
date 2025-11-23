@@ -7,3 +7,11 @@
 .fd-tool-layout__content-container {
     overflow: hidden;
 }
+
+.fd-tool-layout__container {
+    position: relative;
+}
+
+.fd-tool-layout.fd-tool-layout--no-gaps {
+    --fdToolLayout_Gap: 0;
+}

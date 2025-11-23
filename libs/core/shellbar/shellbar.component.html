@@ -12,15 +12,21 @@
             [class.fd-shellbar__group--basis-auto]="groupFlex?.product?.flexBasisAuto"
         >
             @if (showNavigationButton && !_showMobileSearch) {
-                <button
-                    class="fd-shellbar__button"
-                    fd-button
-                    fdType="transparent"
-                    glyph="menu2"
-                    (fdkClicked)="_navigationClicked($event)"
-                    [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
-                    [attr.aria-label]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
-                ></button>
+                @if (navigationButtonTemplate) {
+                    <ng-container [ngTemplateOutlet]="navigationButtonTemplate"></ng-container>
+                } @else {
+                    <button
+                        class="fd-shellbar__button"
+                        fd-button
+                        fdType="transparent"
+                        glyph="menu2"
+                        (fdkClicked)="_navigationClicked($event)"
+                        [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
+                        [attr.aria-label]="
+                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)
+                        "
+                    ></button>
+                }
             }
             @if (showBackButton && !_showMobileSearch) {
                 <button

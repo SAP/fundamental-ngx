@@ -8,11 +8,22 @@
             [class.fd-navigation__item--child]="normalizedLevel$() > 2"
             [class.fd-navigation__item--overflow]="isOverflow$()"
             [class.fd-navigation__item--with-expander]="!!link$()?.routerLink && hasChildren$()"
-            [attr.aria-level]="level$()"
-            [attr.aria-selected]="isActiveAttr$()"
+            [class.fd-navigation__item--disabled]="disabled$()"
+            [attr.id]="id()"
+            [attr.role]="roleAttr$()"
+            [attr.aria-level]="ariaLevelAttr$()"
+            [attr.aria-label]="ariaLabelAttr$()"
+            [attr.aria-selected]="ariaSelectedAttr$()"
+            [attr.aria-checked]="ariaCheckedAttr$()"
             [attr.aria-expanded]="expandedAttr$()"
+            [attr.aria-disabled]="disabled$()"
+            [attr.aria-owns]="ariaOwnsAttr$()"
+            [attr.aria-haspopup]="ariaHasPopupAttr$()"
+            [attr.aria-current]="ariaCurrentAttr$()"
             [attr.normalized-level]="normalizedLevel$()"
             (focusin)="_focusInHandler()"
+            (click)="handleItemClick()"
+            (keydown)="handleItemKeydown($event)"
             fdbNavigationListItemMarker
             #itemContainer
         >
@@ -42,7 +53,7 @@
     @if (!isOverflow$()) {
         <fd-popover
             #popover
-            [noArrow]="false"
+            [noArrow]="true"
             additionalBodyClass="fd-navigation__list-container"
             [isOpen]="popoverOpen$()"
             (isOpenChange)="_onPopoverOpen($event, popover)"
@@ -68,7 +79,7 @@
         <span
             class="fd-navigation__has-children-indicator"
             role="button"
-            aria-label="expand/collapse children"
+            [attr.aria-label]="expanderAriaLabelAttr$()"
             (click)="toggleExpanded()"
         ></span>
     }
@@ -76,8 +87,14 @@
 <!-- Generic list renderer. Used when navigation is not snapped. -->
 <ng-template #listRenderer>
     @if (isGroup$() && normalizedLevel$() === 1) {
-        <ul fdb-navigation-list [listItems]="listItems$()" parentItems></ul>
-    } @else {
+        <ul
+            fdb-navigation-list
+            [listItems]="listItems$()"
+            parentItems
+            [moreButtonRef]="_moreButtonRef$()"
+            [attr.id]="id() + '-list'"
+        ></ul>
+    } @else if (hasChildren$()) {
         <div class="fd-navigation__list-container">
             <ng-template
                 [ngTemplateOutlet]="wrapperRenderer"
@@ -94,12 +111,18 @@
 </ng-template>
 <!-- Generic list renderer. Implicit context defines whether the inner list should handle keyboard navigation by its own. -->
 <ng-template #wrapperRenderer let-keyboardNavigation>
-    <div class="fd-navigation__list-wrapper">
+    <div
+        class="fd-navigation__list-wrapper"
+        [attr.role]="wrapperRoleAttr$()"
+        [attr.aria-roledescription]="wrapperAriaRoleDescriptionAttr$()"
+    >
         @if (navigation.isSnapped$() && !isOverflow$()) {
-            <!-- If opener link itself is active, project aria-selected attribute to link repeater too. -->
+            <!-- If opener link itself is active, project aria-checked attribute to link repeater too for snapped mode. -->
             <div
                 class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child"
-                [attr.aria-selected]="link$()?.isActive$() || selected$()"
+                [attr.role]="titleItemRoleAttr$()"
+                [attr.aria-selected]="titleItemAriaSelectedAttr$()"
+                [attr.tabindex]="titleItemFocusable$() ? 0 : -1"
             >
                 <ng-template
                     [ngTemplateOutlet]="linkRenderer"
@@ -110,10 +133,13 @@
         <ul
             fdb-navigation-list
             [listItems]="listItems$() || []"
-            [childItems]="normalizedLevel$() > 2"
+            [childItems]="true"
+            [role]="isOverflow$() ? 'menu' : 'group'"
             (keydown)="(false)"
             (focusBefore)="_focusBeforeList()"
             [withKeyboardNavigation]="keyboardNavigation"
+            [moreButtonRef]="_moreButtonRef$()"
+            [attr.id]="childListIdAttr$()"
         ></ul>
     </div>
 </ng-template>

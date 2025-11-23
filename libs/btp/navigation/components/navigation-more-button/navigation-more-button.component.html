@@ -1,8 +1,9 @@
 <div
-    aria-current="page"
     role="menuitem"
     class="fd-navigation__item"
     [attr.aria-expanded]="popoverOpen$()"
+    [attr.aria-haspopup]="'menu'"
+    [attr.aria-label]="moreButtonAriaLabelAttr$()"
     aria-level="1"
     (click)="togglePopover(true)"
     (keydown)="_keydownPopoverToggle($event)"
@@ -13,19 +14,20 @@
         [trigger]="trigger"
         [triggers]="[]"
         [isOpen]="popoverOpen$()"
-        (isOpenChange)="popoverOpen$.set($event)"
+        (isOpenChange)="_onPopoverOpenChange($event)"
         [focusTrapped]="true"
-        [noArrow]="false"
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
         [placement]="_popoverPlacement$()"
     >
-        <fd-popover-body [ngClass]="_navigation.classList$()">
+        <fd-popover-body [ngClass]="_navigation.classList$()" role="menu">
             <ul
                 fdb-navigation-list
                 withKeyboardNavigation
                 [parentItems]="true"
+                [ariaLabel]="overflowMenuAriaLabelAttr$()"
                 class="fd-menu__list"
                 [listItems]="listItems"
+                [moreButtonRef]="this"
             ></ul>
         </fd-popover-body>
     </fd-popover>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FdbNavigationListItem } from '../models/navigation-list-item.class';
 
@@ -6,4 +6,44 @@ import { FdbNavigationListItem } from '../models/navigation-list-item.class';
 export class NavigationService {
     /** Currently active list item. */
     currentItem$ = new Subject<FdbNavigationListItem>();
+
+    /** Currently selected item (for click-based selection mode). */
+    selectedItem$ = signal<FdbNavigationListItem | null>(null);
+
+    /** Subject to notify when an overflow item is selected and should be promoted. */
+    overflowItemSelected$ = new Subject<FdbNavigationListItem>();
+
+    /** Subject to notify when selection changes to clear manual selections */
+    selectionChanged$ = new Subject<FdbNavigationListItem | null>();
+
+    /**
+     * Set the selected item.
+     * @param item The item to select, or null to clear selection.
+     */
+    setSelectedItem(item: FdbNavigationListItem | null): void {
+        this.selectedItem$.set(item);
+
+        // Notify that selection has changed so other items can clear their manual selection
+        this.selectionChanged$.next(item);
+
+        // Handle smart overflow promotion logic
+        if (item) {
+            // Case 1: Child items promote their parent when the parent is in overflow
+            if (item.parentListItem && item.parentListItem.isOverflow$()) {
+                this.overflowItemSelected$.next(item.parentListItem);
+            }
+            // Case 2: Regular overflow items promote themselves
+            else if (item.isOverflow$()) {
+                this.overflowItemSelected$.next(item);
+            }
+        }
+    }
+
+    /**
+     * Get the currently selected item.
+     * @returns The currently selected item, or null if none is selected.
+     */
+    getSelectedItem(): FdbNavigationListItem | null {
+        return this.selectedItem$();
+    }
 }
