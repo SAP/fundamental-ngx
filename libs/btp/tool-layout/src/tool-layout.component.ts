@@ -1,4 +1,5 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -32,6 +33,10 @@ export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder, 
     @Input()
     mode: Nullable<FdbViewMode>;
 
+    /** whether to remove the gaps between layout containers */
+    @Input({ transform: booleanAttribute })
+    noGaps = false;
+
     /** @hidden */
     readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
@@ -42,7 +47,12 @@ export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder, 
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return ['fd-tool-layout', this.mode ? `fd-tool-layout--${this.mode}` : '', this.class];
+        return [
+            'fd-tool-layout',
+            this.mode ? `fd-tool-layout--${this.mode}` : '',
+            this.noGaps ? 'fd-tool-layout--no-gaps' : '',
+            this.class
+        ];
     }
 
     /** @hidden */

@@ -21,6 +21,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract parentListItem: FdbNavigationListItem | null;
     abstract class$: Signal<string>;
     abstract selected$: Signal<boolean>;
+    abstract id: Signal<string>;
     abstract focus(origin?: FocusOrigin | undefined): void;
     abstract toggleExpanded(): void;
     abstract keyboardExpanded(shouldExpand: boolean): void;
@@ -31,6 +32,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract unregisterChildList(list: NavigationListComponent): void;
     abstract handleHorizontalNavigation(isExpand: boolean): void;
     abstract focusLink(closePopover?: boolean): void;
+    abstract canItemBeSelected(): boolean;
 
     /** Marker directive that is attached to the rendered list item. */
     marker: Nullable<NavigationListItemMarkerDirective>;
@@ -102,6 +104,9 @@ export abstract class FdbNavigationListItem implements FocusableOption {
 
     /** @hidden */
     readonly isGroup$ = signal(false);
+
+    /** @hidden */
+    readonly disabled$ = signal(false);
 
     /** Navigation container reference. */
     readonly navigation = inject(FdbNavigation);

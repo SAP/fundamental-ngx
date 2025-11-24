@@ -19,5 +19,3 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'navigation';
 export const API_FILE_KEY = 'navigation';
-
-export * from './examples/data-source/navigation-data-source-example.component';

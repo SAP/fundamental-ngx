@@ -604,6 +604,12 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: 'ปุ่มเมนู'
     },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
+    },
     coreNotification: {
         groupHeaderTitle: 'ขยาย/ยุบรวม',
         groupAriaDescription: 'กลุ่มการแจ้งให้ทราบ',
