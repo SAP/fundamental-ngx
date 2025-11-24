@@ -27,6 +27,13 @@ import 'fundamental-styles/dist/paddings.css';
 import 'fundamental-styles/dist/panel.css';
 import 'fundamental-styles/dist/section.css';
 
+interface ImageStyle {
+    url: string;
+    title: string;
+    description: string;
+    gradient: string;
+}
+
 @Component({
     selector: 'ui5-carousel-sample',
     templateUrl: './carousel-sample.html',
@@ -60,7 +67,7 @@ export class CarouselExample {
     readonly arrowsPlacements = computed(() => Object.values(CarouselArrowsPlacement));
 
     // Sample data signals
-    readonly images = signal<Array<{ url: string; title: string; description: string; gradient: string }>>([
+    readonly images = signal<Array<ImageStyle>>([
         {
             url: 'https://picsum.photos/800/500?id=1',
             title: 'Nature Landscape',
@@ -269,7 +276,7 @@ export class CarouselExample {
         return types[status] || '1';
     }
 
-    getImageStyle(image: { url: string; title: string; description: string; gradient: string }): string {
+    getImageStyle(image: ImageStyle): string {
         return `
             height: 500px;
             background: ${image.gradient};
@@ -283,7 +290,7 @@ export class CarouselExample {
         `;
     }
 
-    getCardImageStyle(image: { url: string; title: string; description: string; gradient: string }): string {
+    getCardImageStyle(image: ImageStyle): string {
         return `
             height: 250px;
             background: ${image.gradient};
