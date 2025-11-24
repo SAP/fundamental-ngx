@@ -1,0 +1,14 @@
+<div class="fd-container">
+    <div class="fd-row">
+        @for (design of designs; track design) {
+        <div class="fd-col fd-col--4 fd-margin-bottom--md">
+            <ui5-toggle-button [design]="design" [pressed]="pressedStates()[design]" (ui5Click)="onToggle(design)">
+                {{ design }} Button
+            </ui5-toggle-button>
+            <p class="fd-margin-top--sm">
+                State: <strong>{{ pressedStates()[design] ? 'Pressed' : 'Unpressed' }}</strong>
+            </p>
+        </div>
+        }
+    </div>
+</div>
