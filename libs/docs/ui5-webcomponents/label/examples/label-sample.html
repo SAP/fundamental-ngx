@@ -8,7 +8,7 @@
             id="basic-input"
             placeholder="Enter your first name"
             [value]="firstName()"
-            (ui5input)="onFirstNameChange($event)"
+            (ui5Input)="onFirstNameChange($event)"
         ></ui5-input>
     </div>
     <p class="fd-margin-top--tiny"><strong>Current Value:</strong> {{ firstName() || 'No value entered' }}</p>
@@ -45,7 +45,7 @@
             id="configured-input"
             placeholder="Type here to see label behavior"
             [value]="lastName()"
-            (ui5input)="onLastNameChange($event)"
+            (ui5Input)="onLastNameChange($event)"
         ></ui5-input>
     </div>
 
@@ -72,7 +72,7 @@
                     id="form-first-name"
                     placeholder="Enter first name"
                     [value]="firstName()"
-                    (ui5input)="onFirstNameChange($event)"
+                    (ui5Input)="onFirstNameChange($event)"
                 ></ui5-input>
             </ui5-form-item>
 
@@ -84,7 +84,7 @@
                     id="form-last-name"
                     placeholder="Enter last name"
                     [value]="lastName()"
-                    (ui5input)="onLastNameChange($event)"
+                    (ui5Input)="onLastNameChange($event)"
                 ></ui5-input>
             </ui5-form-item>
 
@@ -97,7 +97,7 @@
                     type="Email"
                     placeholder="Enter email address"
                     [value]="email()"
-                    (ui5input)="onEmailChange($event)"
+                    (ui5Input)="onEmailChange($event)"
                 ></ui5-input>
             </ui5-form-item>
         </ui5-form-group>
@@ -110,7 +110,7 @@
                     placeholder="Enter description"
                     [rows]="textAreaRows()"
                     [value]="description()"
-                    (ui5input)="onDescriptionChange($event)"
+                    (ui5Input)="onDescriptionChange($event)"
                 ></ui5-textarea>
             </ui5-form-item>
 
@@ -123,7 +123,7 @@
                         value="male"
                         text="Male"
                         [checked]="gender() === 'male'"
-                        (ui5change)="onGenderChange($event)"
+                        (ui5Change)="onGenderChange($event)"
                     ></ui5-radio-button>
                     <ui5-radio-button
                         id="form-gender-female"
@@ -131,7 +131,7 @@
                         value="female"
                         text="Female"
                         [checked]="gender() === 'female'"
-                        (ui5change)="onGenderChange($event)"
+                        (ui5Change)="onGenderChange($event)"
                     ></ui5-radio-button>
                     <ui5-radio-button
                         id="form-gender-other"
@@ -139,14 +139,14 @@
                         value="other"
                         text="Other"
                         [checked]="gender() === 'other'"
-                        (ui5change)="onGenderChange($event)"
+                        (ui5Change)="onGenderChange($event)"
                     ></ui5-radio-button>
                 </div>
             </ui5-form-item>
 
             <ui5-form-item>
                 <ui5-label for="form-country" [showColon]="showColon()">Country</ui5-label>
-                <ui5-select id="form-country" (ui5change)="onCountryChange($event)">
+                <ui5-select id="form-country" (ui5Change)="onCountryChange($event)">
                     <ui5-option>Select Country</ui5-option>
                     <ui5-option value="us">United States</ui5-option>
                     <ui5-option value="ca">Canada</ui5-option>
@@ -161,7 +161,7 @@
                 <ui5-switch
                     id="form-notifications"
                     [checked]="notifications()"
-                    (ui5change)="onNotificationsChange($event)"
+                    (ui5Change)="onNotificationsChange($event)"
                 ></ui5-switch>
             </ui5-form-item>
 
@@ -171,7 +171,7 @@
                     id="form-terms"
                     text="I accept the terms and conditions"
                     [checked]="acceptTerms()"
-                    (ui5change)="onTermsChange($event)"
+                    (ui5Change)="onTermsChange($event)"
                 ></ui5-checkbox>
             </ui5-form-item>
         </ui5-form-group>

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Token } from '@fundamental-ngx/ui5-webcomponents/token';
 import { Tokenizer } from '@fundamental-ngx/ui5-webcomponents/tokenizer';
 
@@ -7,7 +7,7 @@ import { Tokenizer } from '@fundamental-ngx/ui5-webcomponents/tokenizer';
     selector: 'ui5-tokenizer-clear-all-sample',
     templateUrl: './clear-all.html',
     standalone: true,
-    imports: [Tokenizer, Token, Button]
+    imports: [Tokenizer, Token]
 })
 export class TokenizerClearAllSample {
     tags = signal([
@@ -25,7 +25,7 @@ export class TokenizerClearAllSample {
      * This method is fired upon deleting a single token as well as when "Clear All" button is clicked.
      * The difference between the two is the number of elements in event.detail.tokens
      */
-    onTokenDelete(event: CustomEvent): void {
+    onTokenDelete(event: UI5WrapperCustomEvent<Tokenizer, 'ui5TokenDelete'>): void {
         const tokenElements = event.detail.tokens;
         tokenElements.forEach((token) => token.remove());
     }

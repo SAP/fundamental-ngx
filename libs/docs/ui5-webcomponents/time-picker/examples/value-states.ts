@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { ValueState } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { TimePicker } from '@fundamental-ngx/ui5-webcomponents/time-picker';
 
@@ -33,10 +34,10 @@ export class TimePickerValueStatesSample {
         Information: '12:00:00'
     });
 
-    onStateChange(event: any, state: string): void {
+    onStateChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Change'>, state: string): void {
         this.stateValues.update((values) => ({
             ...values,
-            [state]: event.target.value
+            [state]: event.detail.value
         }));
     }
 }

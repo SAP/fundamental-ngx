@@ -1,5 +1,6 @@
 import { JsonPipe, NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
 import { FormGroup } from '@fundamental-ngx/ui5-webcomponents/form-group';
@@ -49,16 +50,19 @@ export class FormBasicSample {
         });
     }
 
-    onSliderChange(event: CustomEvent): void {
+    onSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
         const width = (event.target?.['value'] / 100) * 1500;
         this.containerWidth.set(`${width}px`);
         this.pageSize.set(this.getLayoutByWidth(width));
     }
 
-    updateFormField(field: keyof ReturnType<typeof this.formData>, event: any): void {
+    updateFormField(
+        field: keyof ReturnType<typeof this.formData>,
+        event: UI5WrapperCustomEvent<Input | TextArea, 'ui5Input'>
+    ): void {
         this.formData.update((data) => ({
             ...data,
-            [field]: event.target.value
+            [field]: event.target?.['value']
         }));
     }
 

@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
 import { TextArea } from '@fundamental-ngx/ui5-webcomponents/text-area';
@@ -26,13 +27,13 @@ export class TextAreaEventsSample {
         this.eventLog.update((log) => [eventDescription, ...log].slice(0, 10)); // Keep last 10 events
     }
 
-    onTextareaChange(event: CustomEvent): void {
-        this.textareaValue.set((event.target as any).value);
-        this.addEvent('ui5Change', { value: (event.target as any).value });
+    onTextareaChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Change'>): void {
+        this.textareaValue.set(event.target?.['value']);
+        this.addEvent('ui5Change', { value: event.target?.['value'] });
     }
 
-    onTextareaInput(event: CustomEvent): void {
-        this.addEvent('ui5Input', { value: (event.target as any).value });
+    onTextareaInput(event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
+        this.addEvent('ui5Input', { value: event.target?.['value'] });
     }
 
     onTextareaSelect(): void {

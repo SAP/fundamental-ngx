@@ -1,4 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { MessageStrip } from '@fundamental-ngx/ui5-webcomponents/message-strip';
@@ -39,7 +40,7 @@ export class MessageStripCustomizationSample {
         this.showCloseButton.update((current) => !current);
     }
 
-    onColorSchemeChange(event: any): void {
+    onColorSchemeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -48,16 +49,16 @@ export class MessageStripCustomizationSample {
         }
     }
 
-    onDesignChange(event: any): void {
+    onDesignChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
-            const selectedDesign = selectedItems[0].innerText;
+            const selectedDesign = selectedItems[0].innerText as MessageStripDesign;
             this.selectedDesign.set(selectedDesign);
         }
     }
 
-    onCustomMessageClose(event: any): void {
+    onCustomMessageClose(event: UI5WrapperCustomEvent<MessageStrip, 'ui5Close'>): void {
         console.log('Custom message closed: ', event);
     }
 }

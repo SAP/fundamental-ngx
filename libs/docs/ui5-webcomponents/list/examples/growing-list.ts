@@ -1,6 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
-import { CheckBox } from '@fundamental-ngx/ui5-webcomponents/check-box';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
@@ -22,7 +21,7 @@ interface DataItem {
     selector: 'ui5-list-growing-example',
     templateUrl: './growing-list.html',
     standalone: true,
-    imports: [List, ListItemStandard, Label, CheckBox, Button, Text]
+    imports: [List, ListItemStandard, Label, Button, Text]
 })
 export class ListGrowingExample {
     private readonly totalItems = 50;
