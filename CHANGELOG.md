@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.17...v0.58.0-rc.18) (2025-11-24)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.58.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.16...v0.58.0-rc.17) (2025-11-21)
+
+
+### Features
+
+* **btp, core:** Vertical Navigation UXC updates ([#13559](https://github.com/SAP/fundamental-ngx/issues/13559)) ([c70ccf1](https://github.com/SAP/fundamental-ngx/commit/c70ccf1dfd781c7a904141e3669488533c1987b2))
+
+
+
+
+
 # [0.58.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.15...v0.58.0-rc.16) (2025-11-20)
 
 **Note:** Version bump only for package fundamental-ngx

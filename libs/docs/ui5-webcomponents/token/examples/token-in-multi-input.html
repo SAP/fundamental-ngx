@@ -1,0 +1,11 @@
+<ui5-multi-input
+    #multiInput
+    id="multi-input"
+    (ui5Change)="onInputChange($event)"
+    (keydown.enter)="onInputChange($event)"
+    (ui5TokenDelete)="onTokenDelete($event)"
+>
+    @for (tag of availableTags(); track tag.text) {
+    <ui5-token [text]="tag.text" slot="tokens" style="cursor: pointer"> </ui5-token>
+    }
+</ui5-multi-input>

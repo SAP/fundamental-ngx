@@ -4,19 +4,21 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
+    ElementRef,
     Input,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
     computed,
-    effect,
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { map } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -54,6 +56,14 @@ export class NavigationMoreButtonComponent {
     private readonly _link: Nullable<FdbNavigationItemLink>;
 
     /** @hidden */
+    @ViewChild(PopoverComponent)
+    private readonly _popover: Nullable<PopoverComponent>;
+
+    /** @hidden */
+    @ViewChild(NavigationListComponent)
+    private readonly _navigationList: Nullable<NavigationListComponent>;
+
+    /** @hidden */
     customMoreRenderer: Nullable<TemplateRef<any>>;
 
     /** Whether the show more is visible. */
@@ -61,6 +71,9 @@ export class NavigationMoreButtonComponent {
 
     /** Whether popover is open. Applicable for snapped navigation state. */
     readonly popoverOpen$ = signal(false);
+
+    /** ID for the more button. */
+    readonly id = signal('fdb-navigation-more-button');
 
     /** @hidden */
     readonly type = 'showMore';
@@ -84,6 +97,12 @@ export class NavigationMoreButtonComponent {
      */
     readonly link$ = signal<Nullable<FdbNavigationItemLink>>(null);
 
+    /** More button aria-label attribute value. */
+    readonly moreButtonAriaLabelAttr$ = computed(() => this._moreButtonAriaLabel$());
+
+    /** Overflow menu aria-label attribute value. */
+    readonly overflowMenuAriaLabelAttr$ = computed((): string => this._overflowMenuAriaLabel$() || '');
+
     /**
      * @hidden
      * Popover position. Changes based on rtl value.
@@ -99,22 +118,85 @@ export class NavigationMoreButtonComponent {
     });
 
     /** @hidden */
+    private readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
     private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
-    constructor() {
-        effect(() => {
-            if (this.popoverOpen$() && !this._popoverClicked) {
-                setTimeout(() => {
-                    this.listItems[0]?.focus();
-                });
-            }
-            this._popoverClicked = false;
-        });
+    private readonly _lang$ = inject(FD_LANGUAGE);
 
+    /** @hidden */
+    private _translationResolver = inject(TranslationResolver);
+
+    /** Translation signal for more button aria-label. */
+    private readonly _moreButtonAriaLabel$ = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.moreButtonAriaLabel'))
+        ),
+        { initialValue: 'Displays additional navigation items that are hidden due to limited screen space' }
+    );
+
+    /** Translation signal for overflow menu aria-label. */
+    private readonly _overflowMenuAriaLabel$ = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.overflowMenuAriaLabel'))
+        ),
+        { initialValue: 'Additional Navigation Items' }
+    );
+
+    /** @hidden */
+    constructor() {
         this._navigation.closeAllPopups.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(() => {
             this.popoverOpen$.set(false);
         });
+    }
+
+    /** @hidden */
+    _onPopoverOpenChange(isOpen: boolean): void {
+        this.popoverOpen$.set(isOpen);
+
+        // When popover opens, focus the first item
+        if (isOpen) {
+            // Use a short timeout to ensure the DOM is updated
+            setTimeout(() => {
+                if (this._navigationList) {
+                    let firstValidIndex = 0;
+                    const items = this._navigationList._listItems || [];
+                    for (let i = 0; i < items.length; i++) {
+                        if (items[i] && items[i]?.link$()?.elementRef?.nativeElement) {
+                            firstValidIndex = i;
+                            break;
+                        }
+                    }
+
+                    this._navigationList.setActiveItemIndex(firstValidIndex);
+                    return;
+                }
+
+                // Fallback: Focus the first item using the listItems array
+                if (this.listItems && this.listItems.length > 0) {
+                    const firstItem = this.listItems[0];
+                    const link = firstItem.link$();
+
+                    if (link?.elementRef?.nativeElement) {
+                        link.elementRef.nativeElement.focus();
+                        return;
+                    }
+                }
+
+                // Last resort fallback: if direct access fails, try to focus any focusable element in the popover
+                const popoverBodyElement = this._popover?.popoverBody?._elementRef?.nativeElement;
+                if (popoverBodyElement) {
+                    const firstFocusableElement = popoverBodyElement.querySelector(
+                        'a, button, [tabindex]:not([tabindex="-1"])'
+                    ) as HTMLElement;
+                    if (firstFocusableElement) {
+                        firstFocusableElement.focus();
+                    }
+                }
+            }, 150);
+        }
     }
 
     /** @hidden */
@@ -155,23 +237,32 @@ export class NavigationMoreButtonComponent {
     toggleExpanded(): void {}
 
     /** @hidden */
-    keyboardExpanded(): void {}
+    keyboardExpanded(shouldExpand: boolean): void {
+        if (shouldExpand && !this.popoverOpen$()) {
+            this.popoverOpen$.set(true);
+        } else if (!shouldExpand && this.popoverOpen$()) {
+            this.popoverOpen$.set(false);
+        }
+    }
 
     /** @hidden */
     _keydownPopoverToggle(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             return;
         }
+
         const isRtl = this._rtl$() || false;
 
-        const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
-
-        // If user clicked on popover opener button, and then tried to use keyboard, simply shift focus to the first item in the popover menu.
-        if (isOpenAction && this.popoverOpen$()) {
-            this.listItems[0]?.focus();
-            return;
+        if (KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW)) {
+            // Open popover only if not already open
+            if (!this.popoverOpen$()) {
+                this.popoverOpen$.set(true);
+            }
         }
+    }
 
-        this.popoverOpen$.set(isOpenAction);
+    /** @hidden */
+    canItemBeSelected(): boolean {
+        return false; // More button cannot be selected
     }
 }

@@ -606,6 +606,12 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: 'Bouton de menu'
     },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
+    },
     coreNotification: {
         groupHeaderTitle: 'Développer/Réduire',
         groupAriaDescription: 'Groupe de notifications',

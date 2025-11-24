@@ -601,6 +601,12 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: '功能表按鈕'
     },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
+    },
     coreNotification: {
         groupHeaderTitle: '展開/摺疊',
         groupAriaDescription: '通知群組',

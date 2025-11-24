@@ -1,0 +1,5 @@
+<ui5-tokenizer (ui5TokenDelete)="onTokenDelete($event)">
+    @for (token of tokens(); track token.id) {
+    <ui5-token [attr.data-value]="token.value" [text]="token.text"></ui5-token>
+    }
+</ui5-tokenizer>

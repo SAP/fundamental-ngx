@@ -1,6 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,40 +7,28 @@ import {
     ContentChild,
     ContentChildren,
     ElementRef,
+    HostBinding,
     HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
     QueryList,
-    Signal,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     effect,
     inject,
     signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { Subject, map, of } from 'rxjs';
-import { NavigationListDataSourceDirective } from '../../directives/navigation-list-data-source.directive';
-import {
-    NavigationListItemDirective,
-    NavigationListItemRefDirective
-} from '../../directives/navigation-list-item-ref.directive';
-import { NavigationDataSourceItem } from '../../models/navigation-data-source-item.model';
+import { Subject } from 'rxjs';
+import { NavigationListItemRefDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { FdbNavigationState, FdbNavigationType } from '../../models/navigation.types';
 import { NavigationService } from '../../services/navigation.service';
-import { NavigationContentEndComponent } from '../navigation-end/navigation-content-end.component';
-import { NavigationContentStartComponent } from '../navigation-start/navigation-content-start.component';
-
-interface GroupedDataSourceItems {
-    start: NavigationDataSourceItem[];
-    end: NavigationDataSourceItem[];
-}
 
 @Component({
     selector: 'fdb-navigation',
@@ -58,13 +45,7 @@ interface GroupedDataSourceItems {
     ],
     host: {
         role: 'navigation'
-    },
-    imports: [
-        NgTemplateOutlet,
-        NavigationListItemDirective,
-        NavigationContentStartComponent,
-        NavigationContentEndComponent
-    ]
+    }
 })
 export class NavigationComponent
     extends FdbNavigation
@@ -75,10 +56,30 @@ export class NavigationComponent
     class: string;
 
     /**
+     * aria-label for the navigation.
+     */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: Nullable<string> = null;
+
+    /**
+     * aria-roledescription for the navigation.
+     */
+    @Input()
+    @HostBinding('attr.aria-roledescription')
+    ariaRoleDescription: Nullable<string> = null;
+
+    /**
      * Navigation mode.
      */
     @Input()
     mode: FdbViewMode = '';
+
+    /**
+     * Whether the navigation is rendered as an overlay.
+     */
+    @Input({ transform: booleanAttribute })
+    isOverlay = false;
 
     /**
      * Navigation state.
@@ -96,6 +97,14 @@ export class NavigationComponent
      */
     @Input()
     type: FdbNavigationType = 'vertical';
+
+    /**
+     * Selection mode for navigation items.
+     * - 'router': Selection is handled by router link activation (default)
+     * - 'click': Selection is handled by click events
+     */
+    @Input()
+    selectionMode: 'router' | 'click' = 'router';
 
     /** @hidden */
     @ContentChild(NavigationListItemRefDirective)
@@ -131,8 +140,8 @@ export class NavigationComponent
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
-    readonly dataSourceItems: Signal<GroupedDataSourceItems | undefined>;
+    /** Navigation service for managing selection state. */
+    readonly service = inject(NavigationService);
 
     /** @hidden */
     readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
@@ -143,37 +152,12 @@ export class NavigationComponent
     /** @hidden */
     private readonly _viewInitiated$ = signal(false);
 
-    /**
-     * @hidden
-     * Data source directive.
-     */
-    private readonly _dataSourceDirective = inject(NavigationListDataSourceDirective, {
-        optional: true,
-        self: true
-    });
-
     /** @hidden */
     private _keyManager: FocusKeyManager<FdbNavigationListItem>;
 
     /** @hidden */
     constructor() {
         super();
-        this.dataSourceItems = toSignal(
-            !this._dataSourceDirective
-                ? of({ start: [], end: [] } as GroupedDataSourceItems)
-                : this._dataSourceDirective.dataChanged$.asObservable().pipe(
-                      map((data) => {
-                          const groupedItems: GroupedDataSourceItems = data.reduce(
-                              (acc, item) => {
-                                  acc[item.placement].push(item);
-                                  return acc;
-                              },
-                              { start: [], end: [] } as GroupedDataSourceItems
-                          );
-                          return groupedItems;
-                      })
-                  )
-        );
         // When show more button is shown, reset items list with added "More button".
         effect(() => {
             if (this._viewInitiated$()) {
@@ -190,7 +174,8 @@ export class NavigationComponent
                 this.class,
                 'fd-navigation',
                 this.mode === '' ? 'fd-navigation--compact' : '',
-                `fd-navigation--${this.state}`
+                `fd-navigation--${this.state}`,
+                this.isOverlay && this.state === 'expanded' ? 'is-overlay' : ''
             ].filter((k) => !!k)
         );
         return [...this.classList$(), `fd-navigation--${this.type}`];
@@ -201,7 +186,7 @@ export class NavigationComponent
      * Main keyboard navigation handler.
      */
     @HostListener('keydown', ['$event'])
-    private _keyDownHandler(event: KeyboardEvent): void {
+    _keyDownHandler(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
             return;
         }
@@ -214,7 +199,6 @@ export class NavigationComponent
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        this._dataSourceDirective?.dataSourceProvider?.match();
     }
 
     /** @hidden */
@@ -253,6 +237,76 @@ export class NavigationComponent
     /** Notifies child list items that all popups should be closed. */
     closePopups(): void {
         this.closeAllPopups.next();
+    }
+
+    /**
+     * Get the currently selected item when in click selection mode.
+     * @returns The currently selected item, or null if none is selected.
+     */
+    getSelectedItem(): FdbNavigationListItem | null {
+        return this.service.getSelectedItem();
+    }
+
+    /**
+     * Set the selected item when in click selection mode.
+     * @param item The item to select, or null to clear selection.
+     */
+    setSelectedItem(item: FdbNavigationListItem | null): void {
+        this.service.setSelectedItem(item);
+    }
+
+    /**
+     * Clear the current selection when in click selection mode.
+     */
+    clearSelection(): void {
+        this.service.setSelectedItem(null);
+    }
+
+    /**
+     * Get a navigation item by its ID.
+     * @param id The ID of the navigation item to find.
+     * @returns The navigation item with the specified ID, or null if not found.
+     */
+    getNavigationItemById(id: string): FdbNavigationListItem | null {
+        const items = this._navigationItems.toArray();
+        return this._findItemById(items, id);
+    }
+
+    /**
+     * Set the selected item by its ID when in click selection mode.
+     * @param id The ID of the navigation item to select.
+     * @returns True if the item was found and selected, false otherwise.
+     */
+    setSelectedItemById(id: string): boolean {
+        const item = this.getNavigationItemById(id);
+        if (item) {
+            this.setSelectedItem(item);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Helper method to find an item by ID recursively through the navigation tree.
+     * @param items Array of navigation items to search through.
+     * @param id The ID to search for.
+     * @returns The found item or null.
+     */
+    private _findItemById(items: FdbNavigationListItem[], id: string): FdbNavigationListItem | null {
+        for (const item of items) {
+            if (item.id() === id) {
+                return item;
+            }
+
+            if (item.listItems$().length > 0) {
+                const childItems = item.listItems$().filter((child): child is FdbNavigationListItem => child !== null);
+                const found = this._findItemById(childItems, id);
+                if (found) {
+                    return found;
+                }
+            }
+        }
+        return null;
     }
 
     /**
