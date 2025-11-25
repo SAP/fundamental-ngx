@@ -44,5 +44,6 @@ export const API_FILES = {
     toggleButton: ['ToggleButton'],
     token: ['Token'],
     tokenizer: ['Tokenizer'],
-    toolbar: ['Toolbar', 'ToolbarButton', 'ToolbarSelect', 'ToolbarSelectOption', 'ToolbarSeparator', 'ToolbarSpacer']
+    toolbar: ['Toolbar', 'ToolbarButton', 'ToolbarSelect', 'ToolbarSelectOption', 'ToolbarSeparator', 'ToolbarSpacer'],
+    tree: ['Tree', 'TreeItem', 'TreeItemCustom']
 };
