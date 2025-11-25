@@ -1,0 +1,32 @@
+<ui5-toolbar design="Solid">
+    <ui5-title level="H5">Dashboard</ui5-title>
+
+    <ui5-toolbar-separator></ui5-toolbar-separator>
+
+    <ui5-toolbar-select (ui5Change)="onProjectChange($event)" style="width: 180px">
+        @for (project of projects(); track project) {
+        <ui5-toolbar-select-option [selected]="project === selectedProject()">
+            {{ project }}
+        </ui5-toolbar-select-option>
+        }
+    </ui5-toolbar-select>
+
+    <ui5-toolbar-spacer></ui5-toolbar-spacer>
+
+    <ui5-toolbar-button icon="add" text="Create" design="Emphasized" (ui5Click)="onActionClick('Create')">
+    </ui5-toolbar-button>
+
+    <ui5-toolbar-button icon="edit" text="Edit" (ui5Click)="onActionClick('Edit')"> </ui5-toolbar-button>
+
+    <ui5-toolbar-button icon="delete" text="Delete" design="Negative" (ui5Click)="onActionClick('Delete')">
+    </ui5-toolbar-button>
+
+    <ui5-toolbar-separator></ui5-toolbar-separator>
+
+    <ui5-toolbar-button icon="bell" [text]="notificationText()" (ui5Click)="onActionClick('Notifications')">
+    </ui5-toolbar-button>
+
+    <ui5-toolbar-button icon="action-settings" (ui5Click)="onActionClick('Settings')"> </ui5-toolbar-button>
+
+    <ui5-toolbar-button icon="customer" (ui5Click)="onActionClick('Profile')"> </ui5-toolbar-button>
+</ui5-toolbar>
