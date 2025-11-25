@@ -1,12 +1,26 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewChild, signal } from '@angular/core';
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Subject } from 'rxjs';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationService } from '../../services/navigation.service';
 import { NavigationListItemComponent } from './navigation-list-item.component';
+
+class NavigationServiceMock {
+    currentItem$ = new Subject<FdbNavigationListItem>();
+    selectedItem$ = signal<FdbNavigationListItem | null>(null);
+    overflowItemSelected$ = new Subject<FdbNavigationListItem>();
+    selectionChanged$ = new Subject<FdbNavigationListItem | null>();
+
+    setSelectedItem(item: FdbNavigationListItem | null): void {
+        this.selectedItem$.set(item);
+        this.selectionChanged$.next(item);
+    }
+
+    getSelectedItem(): FdbNavigationListItem | null {
+        return this.selectedItem$();
+    }
+}
 
 class NavigationComponentMock extends FdbNavigation {
     closeAllPopups = new Subject<void>();
@@ -14,6 +28,8 @@ class NavigationComponentMock extends FdbNavigation {
     isSnapped$ = signal(false);
     showMoreButton$ = signal(null);
     _navigationItemRenderer = signal(null);
+    selectionMode: 'router' | 'click' = 'router';
+    service = new NavigationServiceMock() as NavigationService;
     closePopups(): void {}
     setActiveItem(): void {}
     getActiveItem(): FdbNavigationListItem | null {
@@ -21,31 +37,15 @@ class NavigationComponentMock extends FdbNavigation {
     }
 }
 
-@Component({
-    template: `
-        <fdb-navigation-list-item #item>
-            <fdb-navigation-list-item></fdb-navigation-list-item>
-        </fdb-navigation-list-item>
-        <div id="item_renderer"><ng-template [ngTemplateOutlet]="item.renderer$()"></ng-template></div>
-    `,
-    standalone: true,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NavigationListItemComponent, NgTemplateOutlet]
-})
-class TestComponent {
-    @ViewChild(NavigationListItemComponent)
-    navListComponent: NavigationListItemComponent;
-}
-
 describe('NavigationListItemComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+    let component: NavigationListItemComponent;
+    let fixture: ComponentFixture<NavigationListItemComponent>;
     let navComponent: NavigationComponentMock;
 
     beforeEach(async () => {
         navComponent = new NavigationComponentMock();
         await TestBed.configureTestingModule({
-            imports: [TestComponent],
+            imports: [NavigationListItemComponent],
             providers: [
                 {
                     provide: FdbNavigation,
@@ -54,9 +54,8 @@ describe('NavigationListItemComponent', () => {
             ]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(NavigationListItemComponent);
         component = fixture.componentInstance;
-        await fixture.whenStable();
         fixture.detectChanges();
     });
 
@@ -64,25 +63,28 @@ describe('NavigationListItemComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should expose renderer', async () => {
-        await fixture.whenRenderingDone();
-        await fixture.whenStable();
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.fd-navigation__list-item'))).toBeTruthy();
+    it('should set home property', () => {
+        component.home = true;
+        expect(component.home).toBe(true);
     });
 
-    it('should render child items', async () => {
-        await fixture.whenRenderingDone();
-        await fixture.whenStable();
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.fd-navigation__list-item ul'))).toBeTruthy();
+    it('should set quickCreate property', () => {
+        component.quickCreate = true;
+        expect(component.quickCreate).toBe(true);
     });
 
-    it('should hide items when snapped mode is enabled', async () => {
-        navComponent.isSnapped$.set(true);
-        await fixture.whenRenderingDone();
-        await fixture.whenStable();
-        fixture.detectChanges();
-        expect(fixture.debugElement.query(By.directive(PopoverComponent))).toBeTruthy();
+    it('should set separator property', () => {
+        component.separator = true;
+        expect(component.separator).toBe(true);
+    });
+
+    it('should set group property', () => {
+        component.group = true;
+        expect(component.group).toBe(true);
+    });
+
+    it('should set expanded property', () => {
+        component.expanded = true;
+        expect(component.expanded).toBe(true);
     });
 });

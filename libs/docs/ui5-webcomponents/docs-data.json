@@ -141,6 +141,18 @@
         {
             "url": "ui5-webcomponents/toast",
             "name": "Toast"
+        },
+        {
+            "url": "ui5-webcomponents/toggle-button",
+            "name": "Toggle Button"
+        },
+        {
+            "url": "ui5-webcomponents/token",
+            "name": "Token"
+        },
+        {
+            "url": "ui5-webcomponents/tokenizer",
+            "name": "Tokenizer"
         }
     ]
 }

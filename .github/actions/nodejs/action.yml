@@ -30,25 +30,18 @@ runs:
           run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
           shell: bash
 
-        - name: Use the global Yarn cache if available
+        # Optimized cache strategy: Use Yarn cache only (not node_modules)
+        # This prevents cache thrashing and ensures consistent builds
+        - name: Cache Yarn dependencies
           uses: actions/cache@v4.2.3
           with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-              key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+              key: ${{ runner.os }}-yarn-${{ inputs.node-version }}-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
-                  ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
-
-        - uses: actions/cache@v4.2.3
-          id: node_modules
-          name: Use project node_modules cache if available
-          with:
-              path: '**/node_modules/'
-              key: ${{ runner.os }}-${{ inputs.node-version }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-              restore-keys: |
-                  ${{ runner.os }}-${{ inputs.node-version }}-node-modules-
+                  ${{ runner.os }}-yarn-${{ inputs.node-version }}-
+                  ${{ runner.os }}-yarn-
 
         - name: Install dependencies
-          if: inputs.frozen-lockfile != 'true' || steps.node_modules.outputs.cache-hit != 'true'
           run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
           shell: bash
 

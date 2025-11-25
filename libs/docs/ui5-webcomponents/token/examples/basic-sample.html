@@ -1,0 +1,24 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <div class="fd-margin-bottom--sm">
+                @for (token of tokens(); track token.id) {
+                <ui5-token
+                    [text]="token.text"
+                    [selected]="token.selected"
+                    (click)="toggleSelection(token.id)"
+                    style="margin-right: 8px; margin-bottom: 8px; cursor: pointer"
+                >
+                </ui5-token>
+                }
+            </div>
+
+            <h5>Selected Tokens:</h5>
+            <p>
+                @if (selectedTokens.length > 0) { {{ selectedTokenTexts }} } @else {
+                <em>No tokens selected</em>
+                }
+            </p>
+        </div>
+    </div>
+</div>

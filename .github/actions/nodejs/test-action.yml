@@ -1,0 +1,126 @@
+# Test workflow for nodejs composite action
+# Run locally with: act -W .github/actions/nodejs/test-action.yml
+# Or from root: act -W .github/actions/nodejs/test-action.yml
+
+name: Test nodejs action
+
+on:
+    workflow_dispatch:
+    push:
+        paths:
+            - '.github/actions/nodejs/**'
+
+jobs:
+    test-default-config:
+        name: Test with default configuration
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: Test nodejs action (defaults)
+              uses: ./.github/actions/nodejs
+
+            - name: Verify Node.js version
+              run: |
+                  node --version
+                  expected_version="v22"
+                  actual_version=$(node --version | cut -d'.' -f1)
+                  if [[ "$actual_version" != "$expected_version" ]]; then
+                      echo "❌ Expected Node.js $expected_version, got $actual_version"
+                      exit 1
+                  fi
+                  echo "✅ Node.js version is correct: $(node --version)"
+
+            - name: Verify Yarn is available
+              run: |
+                  if ! command -v yarn &> /dev/null; then
+                      echo "❌ Yarn is not installed"
+                      exit 1
+                  fi
+                  echo "✅ Yarn is available: $(yarn --version)"
+
+            - name: Verify dependencies are installed
+              run: |
+                  if [ ! -d "node_modules" ]; then
+                      echo "❌ node_modules directory not found"
+                      exit 1
+                  fi
+                  echo "✅ Dependencies are installed"
+
+            - name: Verify Yarn cache
+              run: |
+                  cache_dir=$(yarn config get cacheFolder)
+                  echo "Yarn cache directory: $cache_dir"
+                  if [ -z "$cache_dir" ]; then
+                      echo "❌ Yarn cache directory not configured"
+                      exit 1
+                  fi
+                  echo "✅ Yarn cache is configured"
+
+    test-custom-node-version:
+        name: Test with custom Node.js version
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: Test nodejs action (Node 20.x)
+              uses: ./.github/actions/nodejs
+              with:
+                  node-version: '20.x'
+
+            - name: Verify Node.js version
+              run: |
+                  node --version
+                  expected_version="v20"
+                  actual_version=$(node --version | cut -d'.' -f1)
+                  if [[ "$actual_version" != "$expected_version" ]]; then
+                      echo "❌ Expected Node.js $expected_version, got $actual_version"
+                      exit 1
+                  fi
+                  echo "✅ Node.js version is correct: $(node --version)"
+
+    test-without-frozen-lockfile:
+        name: Test without frozen lockfile
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: Test nodejs action (no frozen lockfile)
+              uses: ./.github/actions/nodejs
+              with:
+                  frozen-lockfile: 'false'
+
+            - name: Verify installation completed
+              run: |
+                  if [ ! -d "node_modules" ]; then
+                      echo "❌ node_modules directory not found"
+                      exit 1
+                  fi
+                  echo "✅ Dependencies installed without frozen lockfile"
+
+    test-cache-effectiveness:
+        name: Test cache effectiveness
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: First run - populate cache
+              uses: ./.github/actions/nodejs
+
+            - name: Remove node_modules
+              run: rm -rf node_modules
+
+            - name: Second run - use cache
+              uses: ./.github/actions/nodejs
+
+            - name: Verify dependencies restored
+              run: |
+                  if [ ! -d "node_modules" ]; then
+                      echo "❌ node_modules not restored from cache"
+                      exit 1
+                  fi
+                  echo "✅ Dependencies restored from Yarn cache"

@@ -3,7 +3,7 @@
         <fd-dialog-header>
             <h1 fd-title [id]="titleId">{{ title }}</h1>
             @if (this.mobileConfig.hasCloseButton) {
-                <button fd-dialog-close-button (click)="close()"></button>
+                <button fd-dialog-close-button [mobile]="true" (click)="close()"></button>
             }
         </fd-dialog-header>
         <fd-dialog-body>

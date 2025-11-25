@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
+    ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
@@ -13,15 +14,19 @@ import {
     OnChanges,
     OnDestroy,
     Output,
+    Renderer2,
     SimpleChanges,
     ViewEncapsulation,
     booleanAttribute,
+    computed,
+    effect,
     inject,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationService } from '../../services/navigation.service';
 
 @Component({
@@ -52,8 +57,27 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** List Role. */
     @HostBinding('attr.role')
+    get _role(): 'tree' | 'menubar' | 'group' | 'menu' {
+        return this.computedRole();
+    }
+
     @Input()
-    role: 'tree' | 'menubar' = 'tree';
+    role: 'tree' | 'menubar' | 'group' | 'menu' = 'tree';
+
+    /**
+     * aria-label for the navigation list.
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('ariaLabel')
+    ariaLabel: Nullable<string> = null;
+
+    /**
+     * aria-roledescription for the navigation list.
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('ariaRoleDescription')
+    @HostBinding('attr.aria-roledescription')
+    ariaRoleDescription: Nullable<string> = null;
 
     /** Whether the list is for parent items. */
     @HostBinding('class.fd-navigation__list--parent-items')
@@ -74,6 +98,10 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     @Input({ transform: booleanAttribute })
     withKeyboardNavigation = false;
 
+    /** Reference to the More button component if this list is inside a More button popover. */
+    @Input()
+    moreButtonRef: any;
+
     /** Event emitted when user tries to navigate to the item before the list itself. */
     @Output()
     focusBefore = new EventEmitter<void>();
@@ -81,6 +109,55 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     /** Event emitted when user tries to navigate to the item after the list itself. */
     @Output()
     focusAfter = new EventEmitter<void>();
+
+    /** Computed role based on navigation state and input role. */
+    readonly computedRole = computed(() => {
+        // Prioritize explicit role input
+        if (this.role && this.role !== 'tree') {
+            return this.role;
+        }
+
+        // Check if this is in an overflow menu context (More button popover)
+        const navigation = this._navigation;
+        if (navigation?.isSnapped$() && this.moreButtonRef) {
+            // In overflow menu, lists should have role="menu"
+            return 'menu';
+        }
+
+        // If this is a child items list or parent items list, it should have role="group"
+        if (this.childItems || this.parentItems) {
+            return 'group';
+        }
+
+        if (navigation?.isSnapped$()) {
+            return 'menubar';
+        }
+        return this.role || 'tree';
+    });
+
+    /** Computed aria-label for group lists based on parent item's text content. */
+    readonly computedAriaLabel = computed(() => {
+        try {
+            // Only provide aria-label for group role lists
+            if (this.computedRole() === 'group' && this._listItem) {
+                const parentLink = this._listItem.link$();
+                if (parentLink?.elementRef?.nativeElement) {
+                    // Get text content directly from the navigation link element
+                    // The .fd-navigation__text span contains the projected content, but we can access
+                    // the text content directly from the link element itself
+                    const linkElement = parentLink.elementRef.nativeElement;
+                    const textContent = linkElement.textContent?.trim();
+                    if (textContent) {
+                        return textContent;
+                    }
+                }
+            }
+            return this.ariaLabel;
+        } catch {
+            // Fallback to default ariaLabel if DOM is not ready or there's any error
+            return this.ariaLabel;
+        }
+    });
 
     /** List items. */
     readonly listItems$ = signal<Nullable<FdbNavigationListItem>[]>([]);
@@ -93,6 +170,14 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** @hidden */
     private readonly _navigationService = inject(NavigationService, {
+        optional: true
+    });
+
+    /**
+     * @hidden
+     * Parent navigation component.
+     */
+    private readonly _navigation = inject(FdbNavigation, {
         optional: true
     });
 
@@ -116,6 +201,21 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     private get _activeItemIndex(): number {
         return this._keyManager?.activeItemIndex ?? -1;
     }
+
+    /** @hidden */
+    private _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private _ariaLabelEffect = effect(() => {
+        // This effect runs whenever the signals change, but we need to ensure
+        // it doesn't run during the initial change detection cycle
+        setTimeout(() => {
+            this._updateAriaLabel();
+        }, 0);
+    });
 
     /** @hidden */
     constructor() {
@@ -155,10 +255,21 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         // We need to cancel event bubbling since we may have parent list that will also try to focus it's parent list item.
         event.stopImmediatePropagation();
 
+        // All navigation lists use the same swapped arrow logic:
+        // RIGHT arrow = expand action, LEFT arrow = collapse/go back action
         const isExpandAction = KeyUtil.isKeyCode(event, this._rtl?.rtl.value ? LEFT_ARROW : RIGHT_ARROW);
 
         if (!isExpandAction) {
-            this._listItem?.focusLink(true);
+            if (this.moreButtonRef) {
+                if (this._listItem) {
+                    this._listItem.focusLink(true);
+                } else {
+                    this.moreButtonRef.popoverOpen$.set(false);
+                    this.moreButtonRef.focusLink();
+                }
+            } else {
+                this._listItem?.focusLink(true);
+            }
         }
     }
 
@@ -185,6 +296,24 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     ngOnDestroy(): void {
         this._listItem?.unregisterChildList(this);
         this._keyManager?.destroy();
+    }
+
+    /**
+     * Updates aria-label attribute manually to avoid expression changed errors
+     */
+    private _updateAriaLabel(): void {
+        try {
+            const ariaLabel = this.computedAriaLabel();
+            if (ariaLabel !== null && ariaLabel !== undefined) {
+                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-label', ariaLabel);
+            } else {
+                this._renderer.removeAttribute(this._elementRef.nativeElement, 'aria-label');
+            }
+        } catch {
+            if (this.ariaLabel) {
+                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-label', this.ariaLabel);
+            }
+        }
     }
 
     /** @hidden */

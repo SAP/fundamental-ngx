@@ -1,11 +1,11 @@
 @for (item of listItems$(); track item) {
     @if (item) {
-        <li [class]="item.class$()">
+        <li [class]="item.class$()" role="none">
             <ng-template [ngTemplateOutlet]="item.renderer$()"></ng-template>
         </li>
         <!-- Add separator after home list item. -->
         @if (item.home) {
-            <li class="fd-navigation__list-item fd-navigation__list-item--separator"></li>
+            <li class="fd-navigation__list-item fd-navigation__list-item--separator" role="separator"></li>
         }
     }
 }
