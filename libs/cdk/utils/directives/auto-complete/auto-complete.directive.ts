@@ -1,4 +1,4 @@
-import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, map, switchMap } from 'rxjs';
@@ -46,7 +46,7 @@ export class AutoCompleteDirective {
     private readonly _completeKeys: number[] = [ENTER];
 
     /** @hidden */
-    private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW];
+    private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, TAB];
 
     /** @hidden */
     private readonly _stopKeys: number[] = [BACKSPACE, DELETE, ESCAPE];
@@ -66,7 +66,7 @@ export class AutoCompleteDirective {
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+
     constructor() {
         /**
          * Fixes #10710
@@ -74,7 +74,8 @@ export class AutoCompleteDirective {
          * By ensuring that we set all properties we can proceed with stable data.
          */
         this._zone.runOutsideAngular(() => {
-            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keydown');
+            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+            const keydownEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keydown');
             const compositionStartEvent = fromEvent<CompositionEvent>(
                 this._elementRef.nativeElement,
                 'compositionstart'
@@ -91,7 +92,43 @@ export class AutoCompleteDirective {
                     ),
                     takeUntilDestroyed()
                 )
-                .subscribe((evt) => this._handleKeyboardEvent(evt));
+                .subscribe((evt) => {
+                    if (!KeyUtil.isKeyCode(evt, TAB)) {
+                        this.inputText = this._elementRef.nativeElement.value;
+                        this._handleKeyboardEvent(evt);
+                    }
+                });
+
+            keydownEvent
+                .pipe(
+                    switchMap((evt) =>
+                        this._zone.onStable.pipe(
+                            first(),
+                            map(() => evt)
+                        )
+                    ),
+                    takeUntilDestroyed()
+                )
+                .subscribe((evt) => {
+                    if (KeyUtil.isKeyCode(evt, TAB)) {
+                        this.inputText = this._elementRef.nativeElement.value;
+
+                        if (this.enable && !this._isComposing && this.inputText) {
+                            // Find matching item and do typeahead completion
+                            const item = this.options.find((option) =>
+                                this.matcher(
+                                    this.displayFn(option).toLocaleLowerCase(),
+                                    this.inputText.toLocaleLowerCase()
+                                )
+                            );
+
+                            if (item) {
+                                this._typeahead(this.displayFn(item));
+                                this._sendCompleteEvent(false);
+                            }
+                        }
+                    }
+                });
 
             compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
                 this._isComposing = true;
