@@ -153,6 +153,14 @@
         {
             "url": "ui5-webcomponents/tokenizer",
             "name": "Tokenizer"
+        },
+        {
+            "url": "ui5-webcomponents/toolbar",
+            "name": "Toolbar"
+        },
+        {
+            "url": "ui5-webcomponents/tree",
+            "name": "Tree"
         }
     ]
 }

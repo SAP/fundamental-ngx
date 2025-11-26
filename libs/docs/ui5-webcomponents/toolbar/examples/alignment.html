@@ -1,0 +1,21 @@
+<h4>Alignment: {{ alignmentStart() }}</h4>
+<ui5-toolbar [alignContent]="alignmentStart()" class="fd-margin-bottom--md">
+    <ui5-toolbar-button text="Button 1">Button 1</ui5-toolbar-button>
+    <ui5-toolbar-button text="Button 2">Button 2</ui5-toolbar-button>
+    <ui5-toolbar-button text="Button 3">Button 3</ui5-toolbar-button>
+</ui5-toolbar>
+
+<h4>Alignment: {{ alignmentEnd() }}</h4>
+<ui5-toolbar [alignContent]="alignmentEnd()" class="fd-margin-bottom--md">
+    <ui5-toolbar-button text="Button 1">Button 1</ui5-toolbar-button>
+    <ui5-toolbar-button text="Button 2">Button 2</ui5-toolbar-button>
+    <ui5-toolbar-button text="Button 3">Button 3</ui5-toolbar-button>
+</ui5-toolbar>
+
+<h4>With Spacer</h4>
+<ui5-toolbar>
+    <ui5-toolbar-button text="Left">Left</ui5-toolbar-button>
+    <ui5-toolbar-spacer></ui5-toolbar-spacer>
+    <ui5-toolbar-button text="Right 1">Right 1</ui5-toolbar-button>
+    <ui5-toolbar-button text="Right 2">Right 2</ui5-toolbar-button>
+</ui5-toolbar>
