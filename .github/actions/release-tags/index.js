@@ -49,10 +49,12 @@ const getTags = async (bumpTag, bumpedVersion) => {
         };
     }
 
+    // For prerelease or latest releases, mainNeedsSync should always be false
+    // because these releases run on main branch already
     return {
         gh: ghTag,
         npm: bumpTag,
-        mainNeedsSync: bumpTag === 'prerelease' || bumpedIsGreaterThanMain
+        mainNeedsSync: false
     };
 };
 
