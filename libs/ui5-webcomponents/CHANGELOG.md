@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.22...v0.58.0-rc.23) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/ui5-webcomponents
+
+
+
+
+
+# [0.58.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.21...v0.58.0-rc.22) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/ui5-webcomponents
+
+
+
+
+
 # [0.58.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.20...v0.58.0-rc.21) (2025-11-26)
 
 **Note:** Version bump only for package @fundamental-ngx/ui5-webcomponents
