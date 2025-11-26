@@ -19,6 +19,7 @@ export const API_FILES = {
     carousel: ['Carousel'],
     checkBox: ['CheckBox'],
     colorPalette: ['ColorPalette', 'ColorPaletteItem'],
+    colorPalettePopover: ['ColorPalettePopover'],
     colorPicker: ['ColorPicker'],
     expandableText: ['ExpandableText'],
     form: ['Form', 'FormGroup', 'FormItem'],

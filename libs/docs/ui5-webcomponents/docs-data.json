@@ -55,6 +55,10 @@
             "name": "Color Palette"
         },
         {
+            "url": "ui5-webcomponents/color-palette-popover",
+            "name": "Color Palette Popover"
+        },
+        {
             "url": "ui5-webcomponents/color-picker",
             "name": "Color Picker"
         },

@@ -1,0 +1,56 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <ui5-button id="colorPaletteBtn2" (click)="openColorPalette()" design="Emphasized">
+            Select Color (with Default Button)
+        </ui5-button>
+
+        <ui5-color-palette-popover
+            opener="colorPaletteBtn2"
+            [open]="paletteOpen()"
+            [defaultColor]="defaultColorValue"
+            [showDefaultColor]="true"
+            (ui5ItemClick)="onItemClick($event)"
+        >
+            @for (color of colors; track color) {
+            <ui5-color-palette-item [value]="color"></ui5-color-palette-item>
+            }
+        </ui5-color-palette-popover>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--4">
+            <div class="fd-margin-top--sm">
+                <strong>Default Color:</strong>
+                <span
+                    [style.background-color]="defaultColorValue"
+                    [style.display]="'inline-block'"
+                    [style.width]="'60px'"
+                    [style.height]="'30px'"
+                    [style.border]="'1px solid #ccc'"
+                    [style.margin-left]="'10px'"
+                    [style.vertical-align]="'middle'"
+                >
+                </span>
+                <span class="fd-margin-begin--sm">{{ defaultColorValue }}</span>
+            </div>
+        </div>
+        @if (selectedColor()) {
+        <div class="fd-col fd-col--4">
+            <div class="fd-margin-top--sm">
+                <strong>Selected Color:</strong>
+                <span
+                    [style.background-color]="selectedColor()"
+                    [style.display]="'inline-block'"
+                    [style.width]="'60px'"
+                    [style.height]="'30px'"
+                    [style.border]="'1px solid #ccc'"
+                    [style.margin-left]="'10px'"
+                    [style.vertical-align]="'middle'"
+                >
+                </span>
+                <span class="fd-margin-begin--sm">{{ selectedColor() }}</span>
+            </div>
+        </div>
+        }
+    </div>
+</div>

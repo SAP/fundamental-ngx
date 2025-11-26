@@ -67,6 +67,11 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-palette').then(configureLibRoutes)
     },
     {
+        path: 'color-palette-popover',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/color-palette-popover').then(configureLibRoutes)
+    },
+    {
         path: 'color-picker',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-picker').then(configureLibRoutes)
     },
