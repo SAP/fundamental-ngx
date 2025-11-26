@@ -30,7 +30,7 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Test 1: Get current version
-echo -e "${YELLOW}[1/9] Testing current version detection...${NC}"
+echo -e "${YELLOW}[1/11] Testing current version detection...${NC}"
 # Get version from git tags (NX Release compatible), falls back to package.json
 CURRENT_VERSION=$(node -e "
     const getVersion = require('./.github/actions/helpers/get-version');
@@ -41,10 +41,32 @@ if [ -z "$CURRENT_VERSION" ] || [ "$CURRENT_VERSION" = "undefined" ] || [ "$CURR
     exit 1
 fi
 echo -e "${GREEN}✓ Current version: $CURRENT_VERSION${NC}"
+
+# Test 1b: Get version from specific branch (used by release-tags action)
+echo "  Testing version from origin/main..."
+MAIN_VERSION=$(node -e "
+    const getVersion = require('./.github/actions/helpers/get-version');
+    try {
+        const version = getVersion('origin/main');
+        if (!version || version === 'undefined' || version === '0.0.0') {
+            console.error('Invalid version from origin/main');
+            process.exit(1);
+        }
+        console.log(version);
+    } catch (e) {
+        console.error('Error getting version from origin/main:', e.message);
+        process.exit(1);
+    }
+")
+if [ $? -ne 0 ]; then
+    echo -e "${RED}✗ Failed to get version from origin/main${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✓ Version from origin/main: $MAIN_VERSION${NC}"
 echo ""
 
 # Test 2: Test bump-version action (manual mode - no actual bump)
-echo -e "${YELLOW}[2/9] Testing bump-version action (manual mode)...${NC}"
+echo -e "${YELLOW}[2/11] Testing bump-version action (manual mode)...${NC}"
 # Actions must run from repo root where package.json exists
 cd "$REPO_ROOT"
 
@@ -64,7 +86,7 @@ fi
 echo ""
 
 # Test 3: Test conventional commit analysis
-echo -e "${YELLOW}[3/9] Testing conventional commit analysis...${NC}"
+echo -e "${YELLOW}[3/11] Testing conventional commit analysis...${NC}"
 cd "$REPO_ROOT"
 if [ -f ".github/actions/helpers/bumped-release.js" ]; then
     TEST_RESULT=$(node -e "
@@ -89,7 +111,7 @@ fi
 echo ""
 
 # Test 4: Test semver tags retrieval
-echo -e "${YELLOW}[4/9] Testing git semver tags retrieval...${NC}"
+echo -e "${YELLOW}[4/11] Testing git semver tags retrieval...${NC}"
 if git tag | grep -q "v"; then
     LATEST_TAG=$(git tag --sort=-v:refname | grep "^v[0-9]" | head -1)
     echo -e "${GREEN}✓ Latest semver tag: $LATEST_TAG${NC}"
@@ -108,7 +130,7 @@ fi
 echo ""
 
 # Test 5: Test release tag determination
-echo -e "${YELLOW}[5/9] Testing release tag calculation...${NC}"
+echo -e "${YELLOW}[5/11] Testing release tag calculation...${NC}"
 cd "$REPO_ROOT"
 
 # Test scenarios
@@ -138,7 +160,7 @@ done
 echo ""
 
 # Test 6: Test conventional changelog generation (dry run)
-echo -e "${YELLOW}[6/9] Testing conventional changelog generation...${NC}"
+echo -e "${YELLOW}[6/11] Testing conventional changelog generation...${NC}"
 cd "$REPO_ROOT"
 
 if [ -f ".github/actions/generate-conventional-release-notes/index.js" ]; then
@@ -175,7 +197,7 @@ fi
 echo ""
 
 # Test 7: Test NX Release configuration
-echo -e "${YELLOW}[7/9] Testing NX Release configuration...${NC}"
+echo -e "${YELLOW}[7/11] Testing NX Release configuration...${NC}"
 if [ -f "nx.json" ]; then
     # Check if release config exists
     HAS_RELEASE=$(node -e "
@@ -257,7 +279,7 @@ fi
 echo ""
 
 # Test 9: Test NX Release publish (dry-run)
-echo -e "${YELLOW}[9/10] Testing NX Release publish command (dry-run)...${NC}"
+echo -e "${YELLOW}[9/11] Testing NX Release publish command (dry-run)...${NC}"
 
 # Check if packages are built (needed for publish test)
 if [ -d "dist/libs/core" ]; then
