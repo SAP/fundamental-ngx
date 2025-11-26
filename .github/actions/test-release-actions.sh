@@ -30,7 +30,7 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Test 1: Get current version
-echo -e "${YELLOW}[1/11] Testing current version detection...${NC}"
+echo -e "${YELLOW}[1/12] Testing current version detection...${NC}"
 # Get version from git tags (NX Release compatible), falls back to package.json
 CURRENT_VERSION=$(node -e "
     const getVersion = require('./.github/actions/helpers/get-version');
@@ -65,8 +65,90 @@ fi
 echo -e "${GREEN}✓ Version from origin/main: $MAIN_VERSION${NC}"
 echo ""
 
-# Test 2: Test bump-version action (manual mode - no actual bump)
-echo -e "${YELLOW}[2/11] Testing bump-version action (manual mode)...${NC}"
+# Test 2: Verify library package.json files have placeholders (not actual versions)
+echo -e "${YELLOW}[2/11] Testing library package.json placeholders...${NC}"
+PLACEHOLDER_CHECK_FAILED=false
+
+# Get list of release projects
+RELEASE_PROJECTS=$(node -e "
+    try {
+        const nx = require('./nx.json');
+        console.log(nx.release.projects.join(' '));
+    } catch (e) {
+        console.log('');
+    }
+")
+
+if [ -n "$RELEASE_PROJECTS" ]; then
+    echo "  Checking placeholders in library package.json files..."
+    for project in $RELEASE_PROJECTS; do
+        if [ -f "libs/$project/package.json" ]; then
+            # Use Node.js to properly parse JSON and check for actual versions
+            HAS_ACTUAL_VERSIONS=$(node -e "
+                const fs = require('fs');
+                const pkg = JSON.parse(fs.readFileSync('libs/$project/package.json', 'utf-8'));
+                
+                // Check peerDependencies
+                if (pkg.peerDependencies) {
+                    for (const [dep, version] of Object.entries(pkg.peerDependencies)) {
+                        // Check @fundamental-ngx/* dependencies
+                        if (dep.startsWith('@fundamental-ngx/') && version !== 'VERSION_PLACEHOLDER') {
+                            console.log('fundamental-ngx');
+                            process.exit(0);
+                        }
+                        // Check @angular/* dependencies
+                        if (dep.startsWith('@angular/') && version !== 'ANGULAR_VER_PLACEHOLDER') {
+                            console.log('angular');
+                            process.exit(0);
+                        }
+                    }
+                }
+                
+                // Check dependencies
+                if (pkg.dependencies) {
+                    for (const [dep, version] of Object.entries(pkg.dependencies)) {
+                        // Check @fundamental-ngx/* dependencies
+                        if (dep.startsWith('@fundamental-ngx/') && version !== 'VERSION_PLACEHOLDER') {
+                            console.log('fundamental-ngx');
+                            process.exit(0);
+                        }
+                        // Check @angular/* dependencies
+                        if (dep.startsWith('@angular/') && version !== 'ANGULAR_VER_PLACEHOLDER') {
+                            console.log('angular');
+                            process.exit(0);
+                        }
+                    }
+                }
+                
+                console.log('ok');
+            ")
+            
+            if [ "$HAS_ACTUAL_VERSIONS" = "fundamental-ngx" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @fundamental-ngx dependencies"
+                PLACEHOLDER_CHECK_FAILED=true
+            elif [ "$HAS_ACTUAL_VERSIONS" = "angular" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @angular dependencies"
+                PLACEHOLDER_CHECK_FAILED=true
+            else
+                echo -e "    ${GREEN}✓${NC} libs/$project/package.json"
+            fi
+        fi
+    done
+    
+    if [ "$PLACEHOLDER_CHECK_FAILED" = "true" ]; then
+        echo -e "${RED}✗ Some library package.json files have actual versions instead of placeholders${NC}"
+        echo "  Run 'node scripts/reset-placeholders.js' to fix this"
+        exit 1
+    else
+        echo -e "${GREEN}✓ All library package.json files have correct placeholders${NC}"
+    fi
+else
+    echo -e "${YELLOW}⚠️  Could not read release projects${NC}"
+fi
+echo ""
+
+# Test 3: Test bump-version action (manual mode - no actual bump)
+echo -e "${YELLOW}[3/12] Testing bump-version action (manual mode)...${NC}"
 # Actions must run from repo root where package.json exists
 cd "$REPO_ROOT"
 
@@ -85,8 +167,8 @@ else
 fi
 echo ""
 
-# Test 3: Test conventional commit analysis
-echo -e "${YELLOW}[3/11] Testing conventional commit analysis...${NC}"
+# Test 4: Test conventional commit analysis
+echo -e "${YELLOW}[4/12] Testing conventional commit analysis...${NC}"
 cd "$REPO_ROOT"
 if [ -f ".github/actions/helpers/bumped-release.js" ]; then
     TEST_RESULT=$(node -e "
@@ -111,7 +193,7 @@ fi
 echo ""
 
 # Test 4: Test semver tags retrieval
-echo -e "${YELLOW}[4/11] Testing git semver tags retrieval...${NC}"
+echo -e "${YELLOW}[5/12] Testing git semver tags retrieval...${NC}"
 if git tag | grep -q "v"; then
     LATEST_TAG=$(git tag --sort=-v:refname | grep "^v[0-9]" | head -1)
     echo -e "${GREEN}✓ Latest semver tag: $LATEST_TAG${NC}"
@@ -130,7 +212,7 @@ fi
 echo ""
 
 # Test 5: Test release tag determination
-echo -e "${YELLOW}[5/11] Testing release tag calculation...${NC}"
+echo -e "${YELLOW}[6/12] Testing release tag calculation...${NC}"
 cd "$REPO_ROOT"
 
 # Test scenarios
@@ -160,7 +242,7 @@ done
 echo ""
 
 # Test 6: Test conventional changelog generation (dry run)
-echo -e "${YELLOW}[6/11] Testing conventional changelog generation...${NC}"
+echo -e "${YELLOW}[7/12] Testing conventional changelog generation...${NC}"
 cd "$REPO_ROOT"
 
 if [ -f ".github/actions/generate-conventional-release-notes/index.js" ]; then
@@ -197,7 +279,7 @@ fi
 echo ""
 
 # Test 7: Test NX Release configuration
-echo -e "${YELLOW}[7/11] Testing NX Release configuration...${NC}"
+echo -e "${YELLOW}[8/12] Testing NX Release configuration...${NC}"
 if [ -f "nx.json" ]; then
     # Check if release config exists
     HAS_RELEASE=$(node -e "
@@ -227,7 +309,7 @@ fi
 echo ""
 
 # Test 8: Test NX Release version command (dry-run)
-echo -e "${YELLOW}[8/11] Testing NX Release version command (dry-run)...${NC}"
+echo -e "${YELLOW}[9/12] Testing NX Release version command (dry-run)...${NC}"
 
 # Verify all release projects exist
 echo "  Verifying release projects..."
@@ -297,7 +379,7 @@ fi
 echo ""
 
 # Test 9: Test NX Release publish (dry-run)
-echo -e "${YELLOW}[9/11] Testing NX Release publish command (dry-run)...${NC}"
+echo -e "${YELLOW}[10/12] Testing NX Release publish command (dry-run)...${NC}"
 
 # Check if packages are built (needed for publish test)
 if [ -d "dist/libs/core" ]; then
@@ -323,7 +405,7 @@ fi
 echo ""
 
 # Test 10: Test hotfix release script (dry-run)
-echo -e "${YELLOW}[10/11] Testing hotfix release script...${NC}"
+echo -e "${YELLOW}[11/12] Testing hotfix release script...${NC}"
 
 if [ -f "scripts/release-hotfix.js" ]; then
     # Check if current version is valid for hotfix
@@ -365,8 +447,53 @@ else
 fi
 echo ""
 
-# Test 11: Dry run NPM pack (test what would be published)
-echo -e "${YELLOW}[11/11] Testing NPM package dry run...${NC}"
+# Test 12: Test reset-placeholders script
+echo -e "${YELLOW}[12/13] Testing reset-placeholders script...${NC}"
+
+if [ -f "scripts/reset-placeholders.js" ]; then
+    # Create a backup of one package.json
+    TEST_PACKAGE="libs/core/package.json"
+    BACKUP_FILE="/tmp/test-package.json.backup"
+    cp "$TEST_PACKAGE" "$BACKUP_FILE"
+    
+    # Temporarily modify it to have actual versions
+    node -e "
+        const fs = require('fs');
+        const pkg = JSON.parse(fs.readFileSync('$TEST_PACKAGE', 'utf-8'));
+        if (pkg.peerDependencies) {
+            Object.keys(pkg.peerDependencies).forEach(dep => {
+                if (dep.startsWith('@fundamental-ngx/')) {
+                    pkg.peerDependencies[dep] = '0.58.0-rc.26';
+                }
+                if (dep.startsWith('@angular/')) {
+                    pkg.peerDependencies[dep] = '^20.0.0';
+                }
+            });
+        }
+        fs.writeFileSync('$TEST_PACKAGE', JSON.stringify(pkg, null, 4) + '\n');
+    "
+    
+    # Run the reset script
+    RESET_OUTPUT=$(node scripts/reset-placeholders.js 2>&1)
+    
+    # Check if placeholders were restored
+    if grep -q "VERSION_PLACEHOLDER" "$TEST_PACKAGE" && grep -q "ANGULAR_VER_PLACEHOLDER" "$TEST_PACKAGE"; then
+        echo -e "${GREEN}✓ reset-placeholders.js successfully restored placeholders${NC}"
+        echo "  Script output:"
+        echo "$RESET_OUTPUT" | head -3 | sed 's/^/    /'
+    else
+        echo -e "${RED}✗ reset-placeholders.js failed to restore placeholders${NC}"
+    fi
+    
+    # Restore backup
+    mv "$BACKUP_FILE" "$TEST_PACKAGE"
+else
+    echo -e "${RED}✗ scripts/reset-placeholders.js not found${NC}"
+fi
+echo ""
+
+# Test 13: Dry run NPM pack (test what would be published)
+echo -e "${YELLOW}[13/13] Testing NPM package dry run...${NC}"
 
 # Test packing one library to see what would be published
 TEST_PACKAGE="core"

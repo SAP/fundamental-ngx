@@ -30,9 +30,17 @@ const releaseHotfix = async () => {
 
     const nextVersion = semver.inc(currentVersion, 'patch');
 
-    // Update version, commit, and tag using NX Release (but don't push yet)
-    // Explicitly enable git-commit and git-tag, but disable git-push
-    execAndLog(`npx nx release version ${nextVersion} --git-commit=true --git-tag=true --git-push=false`);
+    // Update version using NX Release (without git operations first)
+    execAndLog(`npx nx release version ${nextVersion} --git-commit=false --git-tag=false`);
+
+    // Reset dependency placeholders in source package.json files
+    // NX Release updates both version AND dependencies, but we want to keep placeholders in source
+    execAndLog('node scripts/reset-placeholders.js');
+
+    // Now commit and tag with placeholders restored
+    execAndLog(`git add .`);
+    execAndLog(`git commit -m "chore(release): publish ${nextVersion}"`);
+    execAndLog(`git tag -a "v${nextVersion}" -m "v${nextVersion}"`);
 };
 
 releaseHotfix().then(() => {
