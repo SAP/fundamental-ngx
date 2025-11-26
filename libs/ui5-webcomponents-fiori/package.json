@@ -1,37 +1,37 @@
 {
-  "name": "@fundamental-ngx/ui5-webcomponents-fiori",
-  "version": "0.58.0-rc.25",
-  "schematics": "./schematics/collection.json",
-  "description": "Fundamental Library for Angular - UI5 Webcomponents Fiori",
-  "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SAP/fundamental-ngx.git"
-  },
-  "engine": {
-    "node": ">= 10"
-  },
-  "peerDependencies": {
-    "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/cdk": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/common": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/core": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "@fundamental-ngx/ui5-webcomponents": "VERSION_PLACEHOLDER",
-    "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER"
-  },
-  "dependencies": {
-    "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
-    "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER",
-    "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
-    "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
-    "tslib": "^2.0.0"
-  },
-  "ng-add": {
-    "save": "dependencies"
-  }
+    "name": "@fundamental-ngx/ui5-webcomponents-fiori",
+    "version": "0.58.0-rc.26",
+    "schematics": "./schematics/collection.json",
+    "description": "Fundamental Library for Angular - UI5 Webcomponents Fiori",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SAP/fundamental-ngx.git"
+    },
+    "engine": {
+        "node": ">= 10"
+    },
+    "peerDependencies": {
+        "@angular/animations": "^20.0.0",
+        "@angular/cdk": "^20.0.0",
+        "@angular/common": "^20.0.0",
+        "@angular/core": "^20.0.0",
+        "@angular/forms": "^20.0.0",
+        "@angular/platform-browser": "^20.0.0",
+        "@angular/router": "^20.0.0",
+        "@fundamental-ngx/ui5-webcomponents": "0.58.0-rc.26",
+        "fundamental-styles": "0.40.1",
+        "rxjs": "^7.8.0"
+    },
+    "dependencies": {
+        "@sap-theming/theming-base-content": "^11.31.0",
+        "compare-versions": "^6.1.0",
+        "fast-deep-equal": "3.1.3",
+        "lodash-es": "^4.17.0",
+        "tslib": "^2.0.0"
+    },
+    "ng-add": {
+        "save": "dependencies"
+    }
 }

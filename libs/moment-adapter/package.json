@@ -1,18 +1,18 @@
 {
-  "name": "@fundamental-ngx/moment-adapter",
-  "version": "0.58.0-rc.25",
-  "description": "Datetime adapter for SAP Fundamentals, based on Moment.js package",
-  "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SAP/fundamental-ngx.git"
-  },
-  "peerDependencies": {
-    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
-    "moment": "^2.18.1"
-  },
-  "ng-add": {
-    "save": "dependencies"
-  }
+    "name": "@fundamental-ngx/moment-adapter",
+    "version": "0.58.0-rc.26",
+    "description": "Datetime adapter for SAP Fundamentals, based on Moment.js package",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SAP/fundamental-ngx.git"
+    },
+    "peerDependencies": {
+        "@fundamental-ngx/core": "0.58.0-rc.26",
+        "moment": "^2.18.1"
+    },
+    "ng-add": {
+        "save": "dependencies"
+    }
 }
