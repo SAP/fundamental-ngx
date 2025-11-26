@@ -9,7 +9,7 @@
         "url": "git+https://github.com/SAP/fundamental-ngx.git"
     },
     "peerDependencies": {
-        "@fundamental-ngx/core": "0.58.0-rc.26",
+        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
         "dayjs": "^1.11.0"
     },
     "dependencies": {

@@ -98,6 +98,12 @@ jobs:
               run: |
                   npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
 
+            # Reset dependency placeholders in source package.json files
+            # NX Release updates both version AND dependencies, but we want to keep placeholders in source
+            - name: Reset dependency placeholders
+              if: env.IS_MANUAL != 'true'
+              run: node scripts/reset-placeholders.js
+
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
               with:
@@ -171,6 +177,7 @@ jobs:
               run: |
                   git checkout -f main
                   npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
+                  node scripts/reset-placeholders.js
                   git add .
                   git commit -m "chore(release): sync version after hotfix v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
                   git push origin main
@@ -221,6 +228,9 @@ jobs:
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 1
             - name: Stop all running agents for this CI run
               run: npx --yes nx-cloud@latest stop-all-agents
               env:
