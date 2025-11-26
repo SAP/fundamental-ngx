@@ -1,0 +1,63 @@
+<fd-docs-section-title id="basic" componentName="tree"> Basic Tree </fd-docs-section-title>
+<description>
+    The basic tree displays hierarchical data with expand/collapse functionality. Use <code>ui5-tree-item</code>
+    components as children to create the tree structure. Nest tree items to create parent-child relationships.
+</description>
+<component-example>
+    <ui5-tree-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExamples()" />
+
+<fd-docs-section-title id="selection" componentName="tree"> Selection Modes </fd-docs-section-title>
+<description>
+    The <code>selectionMode</code> property controls how items can be selected. Available modes include
+    <code>None</code>, <code>Single</code>, <code>SingleStart</code>, <code>SingleEnd</code>, <code>Multiple</code>, and
+    <code>Delete</code>. The <code>ui5SelectionChange</code> event fires when selection changes.
+</description>
+<component-example>
+    <ui5-tree-selection-sample />
+</component-example>
+<code-example [exampleFiles]="selectionExamples()" />
+
+<fd-docs-section-title id="icons" componentName="tree"> Tree with Icons and Additional Text </fd-docs-section-title>
+<description>
+    Tree items can display icons using the <code>icon</code> property. Icons help users quickly identify different types
+    of nodes in the tree structure, such as folders, files, or different data types. Also, you could add some
+    clarification text via the <code>additionalText</code> property.
+</description>
+<component-example>
+    <ui5-tree-icons-sample />
+</component-example>
+<code-example [exampleFiles]="iconsExamples()" />
+
+<fd-docs-section-title id="lazy-loading" componentName="tree"> Lazy Loading </fd-docs-section-title>
+<description>
+    For large tree structures, use the <code>hasChildren</code> property to indicate nodes that have children without
+    loading them initially. Load child nodes dynamically when the user expands a node by listening to the
+    <code>ui5ItemToggle</code> event. Call <code>preventDefault()</code> to control the expansion behavior.
+</description>
+<component-example>
+    <ui5-tree-lazy-loading-sample />
+</component-example>
+<code-example [exampleFiles]="lazyLoadingExamples()" />
+
+<fd-docs-section-title id="custom-content" componentName="tree"> Custom Content </fd-docs-section-title>
+<description>
+    Use <code>ui5-tree-item-custom</code> to create tree items with custom interactive content. Instead of simple text,
+    you can place any UI5 component in the <code>content</code> slot, such as buttons, selects, inputs, or other
+    interactive elements. This is useful for creating rich, interactive tree structures with embedded controls.
+</description>
+<component-example>
+    <ui5-tree-custom-content-sample />
+</component-example>
+<code-example [exampleFiles]="customContentExamples()" />
+
+<fd-docs-section-title id="drag-and-drop" componentName="tree"> Drag and Drop </fd-docs-section-title>
+<description>
+    The tree component supports drag-and-drop functionality for reordering items. Users can drag items to new locations
+    within the tree, and the component will handle the updates automatically.
+</description>
+<component-example>
+    <ui5-tree-drag-and-drop-sample />
+</component-example>
+<code-example [exampleFiles]="dragAndDropExamples()" />
