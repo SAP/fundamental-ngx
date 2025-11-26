@@ -31,3 +31,8 @@
         color: var(--sapList_HeaderTextColor);
     }
 }
+
+.fd-table__header th.fd-table__cell {
+    font-weight: normal;
+    font-family: var(--sapFontSemiboldDuplexFamily);
+}
