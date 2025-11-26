@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.23...v0.58.0-rc.24) (2025-11-26)
+
+
+### Bug Fixes
+
+* **core:** add fix for Combobox incorrect behavior ([#13613](https://github.com/SAP/fundamental-ngx/issues/13613)) ([f62b7e1](https://github.com/SAP/fundamental-ngx/commit/f62b7e1ba5f0abe8d88cd74b8c7b252da349189d))
+
+
+### Features
+
+* add types for wrapper event emitters ([#13578](https://github.com/SAP/fundamental-ngx/issues/13578)) ([73a0431](https://github.com/SAP/fundamental-ngx/commit/73a04318958de80780c5034517cedcf2902e5e50))
+
+
+
+
+
 # [0.58.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.22...v0.58.0-rc.23) (2025-11-26)
 
 
