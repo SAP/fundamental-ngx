@@ -3,6 +3,12 @@
 # Test script for release-related composite actions
 # Tests bump-version, release-tags, and conventional release notes generation
 # WITHOUT actually publishing to NPM
+#
+# Key validations:
+# - Library package.json files maintain placeholders in source control
+# - reset-placeholders.js restores placeholders after nx release version
+# - mainNeedsSync logic only returns true for hotfix releases
+# - Version resolution works from git tags and libs/core/package.json
 
 set -e
 
@@ -234,7 +240,17 @@ for scenario in "${scenarios[@]}"; do
         # Use macOS-compatible grep (no -P flag)
         NPM_TAG=$(echo "$OUTPUT" | grep -o '"npm": "[^"]*"' | cut -d'"' -f4 | head -1)
         GH_TAG=$(echo "$OUTPUT" | grep -o '"gh": "[^"]*"' | cut -d'"' -f4 | head -1)
-        echo -e "    ${GREEN}✓ NPM tag: $NPM_TAG, GH tag: $GH_TAG${NC}"
+        MAIN_NEEDS_SYNC=$(echo "$OUTPUT" | grep -o '"mainNeedsSync": [^,}]*' | cut -d':' -f2 | tr -d ' ' | head -1)
+        
+        echo -e "    ${GREEN}✓ NPM tag: $NPM_TAG, GH tag: $GH_TAG, mainNeedsSync: $MAIN_NEEDS_SYNC${NC}"
+        
+        # Verify mainNeedsSync logic
+        if [ "$bumpTag" = "prerelease" ] || [ "$bumpTag" = "latest" ]; then
+            if [ "$MAIN_NEEDS_SYNC" = "true" ]; then
+                echo -e "    ${RED}✗ mainNeedsSync should be false for $bumpTag releases${NC}"
+                exit 1
+            fi
+        fi
     else
         echo -e "    ${YELLOW}⚠️  Could not determine tags (may need git history)${NC}"
     fi
