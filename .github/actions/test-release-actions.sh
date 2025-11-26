@@ -262,19 +262,37 @@ else
 fi
 echo ""
 
-# Test nx release version dry-run (non-interactive with patch bump)
-# Note: This will bump from prerelease (0.58.0-rc.19) to stable (0.58.0)
-echo "  Testing: npx nx release version patch --dry-run"
-NX_RELEASE_OUTPUT=$(NODE_OPTIONS="--no-deprecation" npx nx release version patch --dry-run 2>&1 | head -20 || true)
+# Test nx release version dry-run using the same pattern as the workflow
+# Test 1: With explicit version (matches workflow usage)
+NEXT_TEST_VERSION=$(node -e "
+    const semver = require('semver');
+    const getVersion = require('./.github/actions/helpers/get-version');
+    const current = getVersion();
+    console.log(semver.inc(current, 'prerelease', 'rc'));
+")
+
+echo "  Testing: npx nx release version $NEXT_TEST_VERSION --git-commit=false --git-tag=false --dry-run"
+NX_RELEASE_OUTPUT=$(NODE_OPTIONS="--no-deprecation" npx nx release version "$NEXT_TEST_VERSION" --git-commit=false --git-tag=false --dry-run 2>&1 | head -20 || true)
 
 if echo "$NX_RELEASE_OUTPUT" | grep -qi "new version\\|written to manifest\\|resolved"; then
-    echo -e "${GREEN}✓ NX Release version dry-run executed successfully${NC}"
-    echo "  Output preview (patch bump would convert rc.19 → stable):"
+    echo -e "${GREEN}✓ NX Release version with explicit version executed successfully${NC}"
+    echo "  Output preview:"
     echo "$NX_RELEASE_OUTPUT" | grep -E "Resolved|New version|Applied" | head -3 | sed 's/^/    /'
 else
+    echo -e "${RED}✗ NX Release version command failed${NC}"
+    echo "  Output:"
+    echo "$NX_RELEASE_OUTPUT" | head -10 | sed 's/^/    /'
+    exit 1
+fi
+
+# Test 2: With semver keyword (also valid)
+echo "  Testing: npx nx release version patch --dry-run"
+NX_RELEASE_OUTPUT2=$(NODE_OPTIONS="--no-deprecation" npx nx release version patch --dry-run 2>&1 | head -20 || true)
+
+if echo "$NX_RELEASE_OUTPUT2" | grep -qi "new version\\|written to manifest\\|resolved"; then
+    echo -e "${GREEN}✓ NX Release version with semver keyword executed successfully${NC}"
+else
     echo -e "${YELLOW}⚠️  NX Release dry-run completed with warnings${NC}"
-    echo "  Output preview:"
-    echo "$NX_RELEASE_OUTPUT" | head -5 | sed 's/^/    /'
 fi
 echo ""
 

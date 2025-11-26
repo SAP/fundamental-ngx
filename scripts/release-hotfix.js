@@ -32,9 +32,7 @@ const releaseHotfix = async () => {
 
     // Update version, commit, and tag using NX Release (but don't push yet)
     // Explicitly enable git-commit and git-tag, but disable git-push
-    execAndLog(
-        `npx nx release version ${nextVersion} --skip-publish --git-commit=true --git-tag=true --git-push=false`
-    );
+    execAndLog(`npx nx release version ${nextVersion} --git-commit=true --git-tag=true --git-push=false`);
 };
 
 releaseHotfix().then(() => {

@@ -95,7 +95,7 @@ jobs:
             - name: Update version using NX Release
               if: env.IS_MANUAL != 'true'
               run: |
-                  npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --skip-publish --git-commit=false --git-tag=false
+                  npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
 
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
@@ -166,7 +166,7 @@ jobs:
               if: env.IS_HOTFIX == 'true' && steps.releaseTags.outputs.mainNeedsSync == 'true'
               run: |
                   git checkout -f main
-                  npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --skip-publish --git-commit=false --git-tag=false
+                  npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
                   git add .
                   git commit -m "chore(release): sync version after hotfix v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
                   git push origin main
