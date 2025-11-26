@@ -117,6 +117,12 @@ jobs:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
 
+            # Reset placeholders again after pack step
+            # The sync-versions generator writes actual versions back to source package.json files during build
+            # We need to restore placeholders before committing
+            - name: Reset dependency placeholders after pack
+              run: node scripts/reset-placeholders.js
+
             - name: Configure npm for trusted publishing
               run: npm config delete //registry.npmjs.org/:_authToken || true
 
