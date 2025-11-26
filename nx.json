@@ -140,13 +140,17 @@
             "cache": true,
             "dependsOn": ["^build"],
             "inputs": ["production", "^production"]
+        },
+        "nx-release-publish": {
+            "options": {
+                "packageRoot": "dist/libs/{projectName}"
+            }
         }
     },
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
         "sharedGlobals": [
             "{workspaceRoot}/package.json",
-            "{workspaceRoot}/lerna.json",
             "{workspaceRoot}/angular.json",
             "{workspaceRoot}/tsconfig.json",
             "{workspaceRoot}/nx.json"
@@ -171,5 +175,36 @@
                 "targetName": "lint"
             }
         }
-    ]
+    ],
+    "release": {
+        "projectsRelationship": "fixed",
+        "version": {
+            "conventionalCommits": true,
+            "git": {
+                "commitMessage": "chore(release): publish {version}"
+            }
+        },
+        "changelog": {
+            "projectChangelogs": true,
+            "workspaceChangelog": false,
+            "git": {
+                "commitMessage": "chore(release): update changelog for {version}"
+            }
+        },
+        "releaseTagPattern": "v{version}",
+        "projects": [
+            "i18n",
+            "cdk",
+            "core",
+            "platform",
+            "moment-adapter",
+            "datetime-adapter",
+            "cx",
+            "btp",
+            "ui5-webcomponents-base",
+            "ui5-webcomponents",
+            "ui5-webcomponents-fiori",
+            "ui5-webcomponents-ai"
+        ]
+    }
 }

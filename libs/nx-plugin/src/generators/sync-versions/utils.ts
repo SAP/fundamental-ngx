@@ -4,20 +4,23 @@ import { major, parse } from 'semver';
 
 const getVersions = () => {
     const packageJson = JSON.parse(readFileSync(`./package.json`, 'utf8'));
-    const lernaJson = JSON.parse(readFileSync(`./lerna.json`, 'utf8'));
 
-    // Try to get version from environment variable, lerna.json, or fallback to reading from a source package.json
-    let currentVersion = process.env.FD_ENV_VERSION_PLACEHOLDER || lernaJson.version;
+    // Priority order for version resolution:
+    // 1. FD_ENV_VERSION_PLACEHOLDER environment variable (set during release workflow)
+    // 2. Root package.json version field (note: root is private workspace, typically has no version)
+    // 3. libs/core/package.json version field (fallback - NX Release maintains versions in library package.json files)
+    let currentVersion = process.env.FD_ENV_VERSION_PLACEHOLDER || packageJson.version;
 
-    if (!process.env.FD_ENV_VERSION_PLACEHOLDER) {
-        // If environment variable is not set, try reading from an actual package that was updated by lerna
+    if (!process.env.FD_ENV_VERSION_PLACEHOLDER && !currentVersion) {
+        // Root package.json has no version (it's a private workspace), fall back to library package.json
+        // NX Release maintains version in individual library package.json files in fixed versioning mode
         try {
             const corePackageJson = JSON.parse(readFileSync(`./libs/core/package.json`, 'utf8'));
-            if (corePackageJson.version && corePackageJson.version !== currentVersion) {
+            if (corePackageJson.version) {
                 currentVersion = corePackageJson.version;
             }
         } catch (e) {
-            // Fallback to lerna.json version
+            throw new Error('Could not determine version from root package.json or libs/core/package.json');
         }
     }
 

@@ -56,8 +56,8 @@ So, `Release Creation` job consists of multiple tasks:
     - if the `releaseTag` is `prerelease`, then the tags will be `@prerelease` for the npm and `isPrerelease` for github will be true, since the release is a
       prerelease.
     - if the `releaseTag` is `ng*`, then the tags will be `@ng*` for the npm and `isPrerelease` for github will be false, since the release is not a prerelease.
-- Update using Lerna - If commit message does not contain the `chore(release): publish` message, then the version
-  is not bumped yet on the repository, and it is done in this step. It uses [Lerna](https://lerna.js.org/) to update
+- Update using NX Release - If commit message does not contain the `chore(release): publish` message, then the version
+  is not bumped yet on the repository, and it is done in this step. It uses [NX Release](https://nx.dev/features/manage-releases) to update
   the version of the packages, and to update the dependencies between the packages. It also updates the changelog
   of the packages. It uses the `newVersion` from the `Version bump` step.
 - Lint and Build - Task has two jobs, one is to lint the code, and the other is to build the code. It is done in

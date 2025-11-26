@@ -144,7 +144,6 @@
         "jest-preset-angular": "15.0.0",
         "jest-util": "30.0.5",
         "jsonc-eslint-parser": "^2.1.0",
-        "lerna": "^8.1.9",
         "lint-staged": "15.1.0",
         "ng-packagr": "20.1.0",
         "ngx-cva-test-suite": "2.0.0",
