@@ -29,7 +29,7 @@
         <ul fd-list [byline]="true" [navigationIndicator]="true">
             @for (item of settings?.items; track item; let i = $index) {
                 <li (click)="_setSelectedIndex(i)" fd-list-item [selected]="i === _selectedIndex" [id]="item.id">
-                    <a fd-list-link [navigated]="i === _selectedIndex">
+                    <a fd-list-link [navigated]="i === _selectedIndex" [navigationIndicator]="_isMobile">
                         @if (item.thumbnail) {
                             <span fd-list-thumbnail>
                                 <fdp-settings-generator-sidebar-icon
