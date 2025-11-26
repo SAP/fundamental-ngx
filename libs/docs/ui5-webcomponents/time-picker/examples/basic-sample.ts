@@ -1,7 +1,7 @@
 import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { TimePicker } from '@fundamental-ngx/ui5-webcomponents/time-picker';
-import { TimePickerChangeEventDetail } from '@ui5/webcomponents/dist/TimePicker.js';
 
 // Ensure CLDR data is available for all time-picker components
 import '@ui5/webcomponents-localization/dist/Assets.js';
@@ -21,15 +21,15 @@ export class TimePickerBasicSample {
     readonly placeholderValue = signal('');
     readonly formattedValue = signal('14:30:00');
 
-    onBasicValueChange(event: CustomEvent<TimePickerChangeEventDetail>): void {
+    onBasicValueChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Change'>): void {
         this.basicValue.set(event.detail.value);
     }
 
-    onPlaceholderValueChange(event: CustomEvent<TimePickerChangeEventDetail>): void {
+    onPlaceholderValueChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Input'>): void {
         this.placeholderValue.set(event.detail.value);
     }
 
-    onFormattedValueChange(event: CustomEvent<TimePickerChangeEventDetail>): void {
+    onFormattedValueChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Change'>): void {
         this.formattedValue.set(event.detail.value);
     }
 }

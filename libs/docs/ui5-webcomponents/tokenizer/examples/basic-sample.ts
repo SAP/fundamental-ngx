@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Token } from '@fundamental-ngx/ui5-webcomponents/token';
 import { Tokenizer } from '@fundamental-ngx/ui5-webcomponents/tokenizer';
 
@@ -16,8 +17,8 @@ export class TokenizerBasicSample {
         { id: 4, text: 'Product D', value: 'product-d' }
     ]);
 
-    onTokenDelete(event: any): void {
-        const tokens = event.detail?.tokens;
+    onTokenDelete(event: UI5WrapperCustomEvent<Tokenizer, 'ui5TokenDelete'>): void {
+        const tokens = event.detail.tokens;
 
         if (tokens) {
             tokens.forEach((token) => token.remove());

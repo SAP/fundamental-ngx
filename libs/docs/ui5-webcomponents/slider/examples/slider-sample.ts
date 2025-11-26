@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { RangeSlider } from '@fundamental-ngx/ui5-webcomponents/range-slider';
@@ -135,45 +136,45 @@ export class SliderExample {
     }
 
     // Event handlers for basic sliders
-    onBasicSliderChange(event: any): void {
-        this.basicSliderValue.set(event.target.value);
+    onBasicSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.basicSliderValue.set(event.target?.['value']);
     }
 
-    onVolumeChange(event: any): void {
-        this.volumeValue.set(event.target.value);
+    onVolumeChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.volumeValue.set(event.target?.['value']);
     }
 
-    onTemperatureChange(event: any): void {
-        this.temperatureValue.set(event.target.value);
+    onTemperatureChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.temperatureValue.set(event.target?.['value']);
     }
 
     // Event handlers for range sliders
-    onPriceRangeChange(event: any): void {
-        this.priceRangeStart.set(event.target.startValue);
-        this.priceRangeEnd.set(event.target.endValue);
+    onPriceRangeChange(event: UI5WrapperCustomEvent<RangeSlider, 'ui5Change'>): void {
+        this.priceRangeStart.set(event.target?.['startValue']);
+        this.priceRangeEnd.set(event.target?.['endValue']);
     }
 
-    onTimeRangeChange(event: any): void {
-        this.timeRangeStart.set(event.target.startValue);
-        this.timeRangeEnd.set(event.target.endValue);
+    onTimeRangeChange(event: UI5WrapperCustomEvent<RangeSlider, 'ui5Change'>): void {
+        this.timeRangeStart.set(event.target?.['startValue']);
+        this.timeRangeEnd.set(event.target?.['endValue']);
     }
 
     // Event handlers for configurable slider
-    onConfigSliderChange(event: any): void {
-        this.configSliderValue.set(event.target.value);
+    onConfigSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.configSliderValue.set(event.target?.['value']);
     }
 
     // Event handlers for advanced demo sliders
-    onBrightnessChange(event: any): void {
-        this.brightnessValue.set(event.target.value);
+    onBrightnessChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.brightnessValue.set(event.target?.['value']);
     }
 
-    onQualityChange(event: any): void {
-        this.qualityValue.set(event.target.value);
+    onQualityChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.qualityValue.set(event.target?.['value']);
     }
 
-    onZoomChange(event: any): void {
-        this.zoomValue.set(event.target.value);
+    onZoomChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        this.zoomValue.set(event.target?.['value']);
     }
 
     // Configuration toggle methods

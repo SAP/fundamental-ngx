@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
-import { ListItemCustom } from '@fundamental-ngx/ui5-webcomponents/list-item-custom';
 import { ListItemGroup } from '@fundamental-ngx/ui5-webcomponents/list-item-group';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
 
@@ -13,7 +12,7 @@ import '@ui5/webcomponents-icons/dist/navigation-right-arrow.js';
     selector: 'ui5-list-grouping-example',
     templateUrl: './grouping.html',
     standalone: true,
-    imports: [List, ListItemStandard, ListItemCustom, ListItemGroup, Avatar, Icon]
+    imports: [List, ListItemStandard, ListItemGroup, Avatar, Icon]
 })
 export class ListGroupingExample {
     frontEndDevs = signal([

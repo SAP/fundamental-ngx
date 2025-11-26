@@ -1,4 +1,5 @@
 import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { MovePlacement } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
@@ -69,7 +70,7 @@ export class ListMultipleDragAndDropExample {
         }
     }
 
-    onItemMoveOver(event: CustomEvent): void {
+    onItemMoveOver(event: UI5WrapperCustomEvent<List, 'ui5MoveOver'>): void {
         const { source, destination } = event.detail;
 
         // Allow drops from both lists
@@ -85,7 +86,7 @@ export class ListMultipleDragAndDropExample {
         }
     }
 
-    onItemMove(event: CustomEvent): void {
+    onItemMove(event: UI5WrapperCustomEvent<List, 'ui5Move'>): void {
         const { source, destination } = event.detail;
 
         // Get the source list to find all selected items
@@ -134,8 +135,8 @@ export class ListMultipleDragAndDropExample {
         }
     }
 
-    private getSelectedItems(listElement: HTMLElement): Element[] {
-        const listItemsInThisList = this.allListItems.filter((item) => listElement.contains(item.nativeElement));
+    private getSelectedItems(listElement: Element | null): Element[] {
+        const listItemsInThisList = this.allListItems.filter((item) => listElement?.contains(item.nativeElement));
         return listItemsInThisList.map((item) => item.nativeElement).filter((item: any) => item.selected);
     }
 }

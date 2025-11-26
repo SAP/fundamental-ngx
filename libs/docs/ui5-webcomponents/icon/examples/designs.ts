@@ -1,8 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
-import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
-import { Option } from '@fundamental-ngx/ui5-webcomponents/option';
-import { Select } from '@fundamental-ngx/ui5-webcomponents/select';
 import { IconDesign } from '@fundamental-ngx/ui5-webcomponents/types';
 
 // Import Fundamental Styles
@@ -15,7 +12,7 @@ import '@ui5/webcomponents-icons/dist/da-2.js';
     selector: 'ui5-icon-designs-example',
     templateUrl: './designs.html',
     standalone: true,
-    imports: [Icon, Label, Select, Option]
+    imports: [Icon]
 })
 export class IconDesignsExample {
     readonly demoIcons = signal([

@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
+
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 @Component({
@@ -17,7 +19,7 @@ import '@ui5/webcomponents-icons/dist/AllIcons.js';
 })
 export class ButtonExample {
     // Example click handler
-    onButtonClick(event: any, buttonLabel: string): void {
+    onButtonClick(event: UI5WrapperCustomEvent<Button, 'ui5Click'>, buttonLabel: string): void {
         console.log(`${buttonLabel} clicked`, event);
     }
 
