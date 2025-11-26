@@ -8,7 +8,7 @@
 [build]
   ignore = 'sh ./ignore.sh'
   publish = "dist/apps/docs"
-  command = "NODE_OPTIONS=--max_old_space_size=8192 npx nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori --skip-nx-cache && npx nx run docs:compile:production-unoptimized --base-href=\"/\""
+  command = "NODE_OPTIONS=--max_old_space_size=8192 npx nx run-many --target=generate --projects=ui5-webcomponents-base,ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori && npx nx run docs:compile:production-unoptimized --base-href=\"/\""
 
 [build.environment]
   NODE_VERSION = "22.12.0"
