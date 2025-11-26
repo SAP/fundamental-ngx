@@ -43,5 +43,7 @@ export const API_FILES = {
     toast: ['Toast'],
     toggleButton: ['ToggleButton'],
     token: ['Token'],
-    tokenizer: ['Tokenizer']
+    tokenizer: ['Tokenizer'],
+    toolbar: ['Toolbar', 'ToolbarButton', 'ToolbarSelect', 'ToolbarSelectOption', 'ToolbarSeparator', 'ToolbarSpacer'],
+    tree: ['Tree', 'TreeItem', 'TreeItemCustom']
 };

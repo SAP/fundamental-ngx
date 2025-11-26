@@ -1,0 +1,14 @@
+<div class="fd-margin-bottom--sm">
+    <ui5-segmented-button (ui5SelectionChange)="onDesignChange($event)">
+        @for (design of designs(); track design) {
+        <ui5-segmented-button-item> {{ design }} </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+</div>
+
+<ui5-toolbar [design]="selectedDesign()">
+    <ui5-toolbar-button text="Action 1"></ui5-toolbar-button>
+    <ui5-toolbar-button text="Action 2"></ui5-toolbar-button>
+    <ui5-toolbar-button text="Action 3"></ui5-toolbar-button>
+    <ui5-toolbar-button design="Emphasized" text="Primary Action"></ui5-toolbar-button>
+</ui5-toolbar>

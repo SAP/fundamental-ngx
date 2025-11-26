@@ -1,0 +1,23 @@
+<ui5-tree headerText="Project Files">
+    @for (item of fileStructure(); track item.id) {
+    <ui5-tree-item
+        [text]="item.text"
+        [icon]="item.icon"
+        [expanded]="item.expanded || false"
+        [additionalText]="item.additionalText"
+    >
+        @if (item.children) { @for (child of item.children; track child.id) {
+        <ui5-tree-item [text]="child.text" [icon]="child.icon" [additionalText]="child.additionalText">
+            @if (child.children) { @for (grandchild of child.children; track grandchild.id) {
+            <ui5-tree-item
+                [text]="grandchild.text"
+                [icon]="grandchild.icon"
+                [additionalText]="grandchild.additionalText"
+            >
+            </ui5-tree-item>
+            } }
+        </ui5-tree-item>
+        } }
+    </ui5-tree-item>
+    }
+</ui5-tree>
