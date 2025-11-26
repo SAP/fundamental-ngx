@@ -9,7 +9,7 @@
         "url": "git+https://github.com/SAP/fundamental-ngx.git"
     },
     "peerDependencies": {
-        "@fundamental-ngx/core": "0.58.0-rc.29",
+        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
         "moment": "^2.18.1"
     },
     "ng-add": {
