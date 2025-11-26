@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.24...v0.58.0-rc.25) (2025-11-26)
+
+
+### Bug Fixes
+
+* **core:** add correct icons for form messages ([#13616](https://github.com/SAP/fundamental-ngx/issues/13616)) ([c9eb507](https://github.com/SAP/fundamental-ngx/commit/c9eb507d1c8806229881a03ed2c6fc37d841c940))
+
+
+
+
+
 # [0.58.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.23...v0.58.0-rc.24) (2025-11-26)
 
 
