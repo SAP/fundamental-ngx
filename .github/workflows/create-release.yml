@@ -25,6 +25,7 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        timeout-minutes: 60
         strategy:
             matrix:
                 agent: [1, 2, 3, 4, 5]
@@ -120,10 +121,13 @@ jobs:
             # - prerelease: for RC versions (e.g., 0.58.0-rc.19)
             # - archive: for hotfix releases on older versions
             # - latest: for stable releases
+            # IMPORTANT: Disable distributed execution for publishing (needs local dist/ files and npm auth)
             - name: Publish packages to NPM using NX Release
               run: |
                   echo "📦 Publishing all packages with npm tag: ${{ steps.releaseTags.outputs.npm }}"
                   npx nx release publish --tag="${{ steps.releaseTags.outputs.npm }}" --registry=https://registry.npmjs.org/
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
             # Create git commit and tag after successful build and publish
             # We do this here instead of during 'nx release version' to ensure we only commit
@@ -175,6 +179,14 @@ jobs:
             - name: Delete Temporary hotfix branch
               if: env.IS_HOTFIX == 'true'
               run: git push origin --delete tmp_hotfix_branch
+
+            # Stop NX Cloud agents immediately if any step fails
+            # This prevents agents from running indefinitely when the main job fails
+            - name: Stop Nx Cloud agents on failure
+              if: failure()
+              run: npx --yes nx-cloud@latest stop-all-agents
+              env:
+                  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
     gh_pages:
         name: Github Pages deploy
