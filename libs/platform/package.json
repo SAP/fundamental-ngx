@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/platform",
-    "version": "0.58.0-rc.26",
+    "version": "0.58.0-rc.27",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - platform",
     "license": "Apache-2.0",
@@ -13,9 +13,9 @@
         "node": ">= 10"
     },
     "peerDependencies": {
-        "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
-        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
-        "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER"
+        "@fundamental-ngx/cdk": "0.58.0-rc.27",
+        "@fundamental-ngx/core": "0.58.0-rc.27",
+        "@fundamental-ngx/i18n": "0.58.0-rc.27"
     },
     "dependencies": {
         "fast-deep-equal": "3.1.3",
