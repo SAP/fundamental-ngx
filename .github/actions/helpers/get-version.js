@@ -7,15 +7,21 @@ const { execSync } = require('child_process');
  *
  * Priority:
  * 1. Git tags (latest semver tag, e.g., v0.58.0-rc.19)
- * 2. package.json (workspace root - maintained by NX Release)
+ * 2. libs/core/package.json (contains actual version)
+ * 3. package.json (workspace root - fallback)
  *
  * @param branch - Optional branch to get version from
  * @returns {string} - The current version
  */
 module.exports = (branch = null) => {
-    // If checking a specific branch, use package.json
+    // If checking a specific branch, use libs/core/package.json (has actual version)
     if (branch) {
-        return getFileContents('package.json', branch).version;
+        try {
+            return getFileContents('libs/core/package.json', branch).version;
+        } catch (e) {
+            // Fallback to root package.json
+            return getFileContents('package.json', branch).version;
+        }
     }
 
     // For current branch, prefer git tags (NX Release standard)
@@ -33,10 +39,14 @@ module.exports = (branch = null) => {
         // Git command failed or no tags found, fall through to package.json
     }
 
-    // Fall back to package.json (NX Release maintains this)
+    // Fall back to libs/core/package.json, then root package.json
     try {
-        return getFileContents('package.json').version;
+        return getFileContents('libs/core/package.json').version;
     } catch (e) {
-        throw new Error('Could not determine current version from git tags or package.json');
+        try {
+            return getFileContents('package.json').version;
+        } catch (e2) {
+            throw new Error('Could not determine current version from git tags or package.json');
+        }
     }
 };
