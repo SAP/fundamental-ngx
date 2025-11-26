@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.21...v0.58.0-rc.22) (2025-11-26)
+
+
+### Bug Fixes
+
+* **core:** add correct font family for table header text ([#13611](https://github.com/SAP/fundamental-ngx/issues/13611)) ([7b56817](https://github.com/SAP/fundamental-ngx/commit/7b5681786c1863e5f32eaa736a4c7d7a7b4d5053))
+
+
+
+
+
+# [0.58.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.20...v0.58.0-rc.21) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.19...v0.58.0-rc.20) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 # [0.58.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.18...v0.58.0-rc.19) (2025-11-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
