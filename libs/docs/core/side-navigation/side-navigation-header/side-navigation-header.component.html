@@ -1,7 +1,23 @@
 <fd-doc-page>
     <header>Side Navigation</header>
-    <description
-        >The left navigation can always display or expand/collapse using the menu icon within the global navigation.<br /><br />
+    <description>
+        <fd-message-strip type="warning" [dismissible]="false">
+            <b>Important</b>: The Side Navigation component is now <b>deprecated</b>. It will be removed in the upcoming
+            release (v0.59.0). To ensure consistency with current UXC standards, use the
+            <a
+                target="_blank"
+                href="https://fundamental-ngx.netlify.app/#/btp/navigation"
+                fd-link
+                [emphasized]="true"
+                aria-label="BTP Vertical Navigation"
+                >BTP Vertical Navigation</a
+            >
+            component instead.
+        </fd-message-strip>
+
+        <br /><br />
+
+        The left navigation can always display or expand/collapse using the menu icon within the global navigation.<br /><br />
         Side navigation anchors are keyboard navigated, it can be achieved by <code>ArrowDown</code>,
         <code>ArrowUp</code>, and basic <code>Tab</code>. Sub-levels of tiered side navigation can be opened with the
         space bar, enter key or right arrow.<br /><br />
