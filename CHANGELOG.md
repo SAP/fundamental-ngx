@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.22...v0.58.0-rc.23) (2025-11-26)
+
+
+### Bug Fixes
+
+* **platform:** show navigation indicator on Settings Generator items on small screens ([#13612](https://github.com/SAP/fundamental-ngx/issues/13612)) ([8cd8c5e](https://github.com/SAP/fundamental-ngx/commit/8cd8c5edfb23ef5bb68b32615302878c0b5f8938))
+
+
+
+
+
 # [0.58.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.21...v0.58.0-rc.22) (2025-11-26)
 
 
