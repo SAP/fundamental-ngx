@@ -31,6 +31,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/bar').then(configureLibRoutes)
     },
     {
+        path: 'breadcrumbs',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/breadcrumbs').then(configureLibRoutes)
+    },
+    {
         path: 'busy-indicator',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/busy-indicator').then(configureLibRoutes)
     },

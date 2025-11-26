@@ -10,6 +10,7 @@ export const API_FILES = {
     avatar: ['Avatar'],
     avatarGroup: ['AvatarGroup'],
     bar: ['Bar'],
+    breadcrumbs: ['Breadcrumbs', 'BreadcrumbsItem'],
     busyIndicator: ['BusyIndicator'],
     button: ['Button'],
     calendar: ['Calendar', 'CalendarDate'],

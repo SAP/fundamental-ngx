@@ -19,6 +19,10 @@
             "name": "Bar"
         },
         {
+            "url": "ui5-webcomponents/breadcrumbs",
+            "name": "Breadcrumbs"
+        },
+        {
             "url": "ui5-webcomponents/busy-indicator",
             "name": "Busy Indicator"
         },
