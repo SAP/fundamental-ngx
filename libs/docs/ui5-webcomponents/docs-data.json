@@ -63,6 +63,10 @@
             "name": "Color Picker"
         },
         {
+            "url": "ui5-webcomponents/combo-box",
+            "name": "Combo Box"
+        },
+        {
             "url": "ui5-webcomponents/expandable-text",
             "name": "Expandable Text"
         },

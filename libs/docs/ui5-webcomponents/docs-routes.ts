@@ -76,6 +76,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-picker').then(configureLibRoutes)
     },
     {
+        path: 'combo-box',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/combo-box').then(configureLibRoutes)
+    },
+    {
         path: 'expandable-text',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
     },

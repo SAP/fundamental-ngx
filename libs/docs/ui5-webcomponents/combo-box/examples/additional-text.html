@@ -1,0 +1,5 @@
+<ui5-combobox placeholder="Select a product">
+    @for (product of products; track product.code) {
+    <ui5-cb-item [text]="product.name" [additionalText]="product.code"></ui5-cb-item>
+    }
+</ui5-combobox>
