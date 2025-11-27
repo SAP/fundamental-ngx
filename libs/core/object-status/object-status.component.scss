@@ -1,1 +1,11 @@
 @import 'fundamental-styles/dist/object-status.css';
+
+// TO BE REMOVED AFTER ADOPTION OF FUNDAMENTAL STYLES V.0.41.0
+
+.fd-object-status {
+    align-self: center;
+    height: auto;
+    max-height: none;
+    min-height: var(--fdObjectStatus_Height);
+    min-width: 1.5rem;
+}
