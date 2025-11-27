@@ -22,6 +22,7 @@ export const API_FILES = {
     colorPalettePopover: ['ColorPalettePopover'],
     colorPicker: ['ColorPicker'],
     comboBox: ['ComboBox', 'ComboBoxItem', 'ComboBoxItemGroup'],
+    datePicker: ['DatePicker'],
     expandableText: ['ExpandableText'],
     form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],

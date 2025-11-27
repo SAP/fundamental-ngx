@@ -1,0 +1,70 @@
+<fd-docs-section-title id="basic" componentName="Date Picker">Basic Sample</fd-docs-section-title>
+<description>
+    The Date Picker component allows users to select a date from a calendar popup. It provides keyboard navigation,
+    accessibility support, and internationalization capabilities. The selected date is displayed in the input field
+    according to the specified format pattern.
+</description>
+<component-example>
+    <ui5-date-picker-basic-sample></ui5-date-picker-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"></code-example>
+
+<fd-docs-section-title id="format" componentName="Date Picker">Date Format Patterns</fd-docs-section-title>
+<description>
+    Date Picker supports various format patterns for displaying dates. Use <b>formatPattern</b> to control how dates
+    appear in the input field. Common patterns include <code>yyyy-MM-dd</code>, <code>dd/MM/yyyy</code>,
+    <code>MM/dd/yyyy</code>, and localized patterns. You can also use <b>displayFormat</b> and <b>valueFormat</b> to
+    control the display and value formats separately.
+</description>
+<component-example>
+    <ui5-date-picker-format-sample></ui5-date-picker-format-sample>
+</component-example>
+<code-example [exampleFiles]="formatExamples()"></code-example>
+
+<fd-docs-section-title id="min-max" componentName="Date Picker">Min and Max Dates</fd-docs-section-title>
+<description>
+    <p>
+        Use <b>minDate</b> and <b>maxDate</b> properties to restrict the date selection range. Dates outside this range
+        will be disabled in the calendar popup.
+    </p>
+    <p>
+        <strong>Note:</strong> When using <code>minDate</code> and <code>maxDate</code>, ensure the date format matches
+        your <code>formatPattern</code> or use ISO format (yyyy-MM-dd).
+    </p>
+</description>
+<component-example>
+    <ui5-date-picker-min-max-sample></ui5-date-picker-min-max-sample>
+</component-example>
+<code-example [exampleFiles]="minMaxExamples()"></code-example>
+
+<fd-docs-section-title id="value-state" componentName="Date Picker">Value States</fd-docs-section-title>
+<description>
+    Date Picker supports different value states to indicate validation status: <b>None</b>, <b>Positive</b>,
+    <b>Critical</b>, <b>Negative</b>, and <b>Information</b>. Each state displays a different color and icon to
+    communicate the field's status to users.
+</description>
+<component-example>
+    <ui5-date-picker-value-state-sample></ui5-date-picker-value-state-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExamples()"></code-example>
+
+<fd-docs-section-title id="component-states" componentName="Date Picker">Component States</fd-docs-section-title>
+<description>
+    Date Picker can be <b>disabled</b>, <b>readonly</b>, or <b>required</b>. Use these properties to control user
+    interaction and indicate mandatory fields.
+</description>
+<component-example>
+    <ui5-date-picker-component-states-sample></ui5-date-picker-component-states-sample>
+</component-example>
+<code-example [exampleFiles]="componentStatesExamples()"></code-example>
+
+<fd-docs-section-title id="calendar-types" componentName="Date Picker">Calendar Types</fd-docs-section-title>
+<description>
+    Date Picker supports different calendar types including <b>Gregorian</b>, <b>Islamic</b>, <b>Japanese</b>,
+    <b>Buddhist</b>, and <b>Persian</b>. Use <b>primaryCalendarType</b> and <b>secondaryCalendarType</b> to display one
+    or two calendar types simultaneously.
+</description>
+<component-example>
+    <ui5-date-picker-calendar-types-sample></ui5-date-picker-calendar-types-sample>
+</component-example>
+<code-example [exampleFiles]="calendarTypesExamples()"></code-example>

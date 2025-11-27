@@ -67,6 +67,10 @@
             "name": "Combo Box"
         },
         {
+            "url": "ui5-webcomponents/date-picker",
+            "name": "Date Picker"
+        },
+        {
             "url": "ui5-webcomponents/expandable-text",
             "name": "Expandable Text"
         },
