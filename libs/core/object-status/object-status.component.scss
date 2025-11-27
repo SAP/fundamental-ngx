@@ -3,8 +3,7 @@
 // TO BE REMOVED AFTER ADOPTION OF FUNDAMENTAL STYLES V.0.41.0
 
 .fd-object-status {
-    align-self: center;
-    height: auto;
+    height: fit-content;
     max-height: none;
     min-height: var(--fdObjectStatus_Height);
     min-width: 1.5rem;
