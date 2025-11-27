@@ -23,6 +23,7 @@ export const API_FILES = {
     colorPicker: ['ColorPicker'],
     comboBox: ['ComboBox', 'ComboBoxItem', 'ComboBoxItemGroup'],
     datePicker: ['DatePicker'],
+    dateRangePicker: ['DateRangePicker'],
     expandableText: ['ExpandableText'],
     form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],

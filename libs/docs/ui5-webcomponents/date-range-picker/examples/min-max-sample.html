@@ -1,0 +1,21 @@
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Current Month Only ({{ minDate() }} to {{ maxDate() }}):</label>
+    <ui5-daterange-picker [minDate]="minDate()" [maxDate]="maxDate()" placeholder="Select range in current month">
+    </ui5-daterange-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Current Year Only ({{ yearStart() }} to {{ yearEnd() }}):</label>
+    <ui5-daterange-picker [minDate]="yearStart()" [maxDate]="yearEnd()" placeholder="Select range in current year">
+    </ui5-daterange-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Only Future Dates (min: {{ todayDate() }}):</label>
+    <ui5-daterange-picker [minDate]="todayDate()" placeholder="Select future date range"></ui5-daterange-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Only Past Dates (max: {{ todayDate() }}):</label>
+    <ui5-daterange-picker [maxDate]="todayDate()" placeholder="Select past date range"></ui5-daterange-picker>
+</div>
