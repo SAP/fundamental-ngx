@@ -1,1 +1,18 @@
 @import 'fundamental-styles/dist/form-message.css';
+
+// Temporary CSS for the correct icons until we adopt the latest version of Fundamental Styles
+.fd-form-message--error::before {
+    content: '\e1ec';
+}
+
+.fd-form-message--warning::before {
+    content: '\e053';
+}
+
+.fd-form-message--success::before {
+    content: '\e1c1';
+}
+
+.fd-form-message--information::before {
+    content: '\e289';
+}

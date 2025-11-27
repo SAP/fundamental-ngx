@@ -40,8 +40,6 @@
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
     },
     "dependencies": {
-        "@angular-eslint/eslint-plugin-template": "20.0.0",
-        "@angular-eslint/template-parser": "20.0.0",
         "@angular/animations": "20.1.4",
         "@angular/cdk": "20.1.4",
         "@angular/common": "20.1.4",
@@ -83,7 +81,6 @@
         "ngx-markdown": "19.0.0",
         "rxjs": "7.8.2",
         "tslib": "^2.3.0",
-        "yarn.lock": "^0.0.1-security",
         "zone.js": "0.15.0"
     },
     "devDependencies": {
@@ -134,12 +131,6 @@
         "coveralls": "3.1.1",
         "dependency-tree": "10.0.9",
         "eslint": "^9.28.0",
-        "eslint-config-prettier": "10.1.2",
-        "eslint-plugin-import": "2.26.0",
-        "eslint-plugin-jsdoc": "46.9.0",
-        "eslint-plugin-json": "3.1.0",
-        "eslint-plugin-markdown": "3.0.0",
-        "eslint-plugin-prefer-arrow": "1.2.3",
         "fast-glob": "3.3.1",
         "fs-extra": "^11.3.0",
         "husky": "8.0.2",
@@ -153,7 +144,6 @@
         "jest-preset-angular": "15.0.0",
         "jest-util": "30.0.5",
         "jsonc-eslint-parser": "^2.1.0",
-        "lerna": "^8.1.9",
         "lint-staged": "15.1.0",
         "ng-packagr": "20.1.0",
         "ngx-cva-test-suite": "2.0.0",
@@ -188,7 +178,7 @@
             "yarn nx format:write --uncommitted"
         ],
         "*.{js,ts,html,md,json,yml}": [
-            "eslint --fix --flag unstable_config_lookup_from_file"
+            "eslint --fix --flag v10_config_lookup_from_file"
         ]
     }
 }

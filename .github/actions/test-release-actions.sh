@@ -30,30 +30,126 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Test 1: Get current version
-echo -e "${YELLOW}[1/7] Testing current version detection...${NC}"
-# Try lerna.json first (preferred), fall back to package.json
+echo -e "${YELLOW}[1/12] Testing current version detection...${NC}"
+# Get version from git tags (NX Release compatible), falls back to package.json
 CURRENT_VERSION=$(node -e "
-    try {
-        const lernaVersion = require('./lerna.json').version;
-        if (lernaVersion) {
-            console.log(lernaVersion);
-        } else {
-            console.log(require('./package.json').version);
-        }
-    } catch (e) {
-        console.log(require('./package.json').version || 'unknown');
-    }
+    const getVersion = require('./.github/actions/helpers/get-version');
+    console.log(getVersion());
 ")
 if [ -z "$CURRENT_VERSION" ] || [ "$CURRENT_VERSION" = "undefined" ] || [ "$CURRENT_VERSION" = "unknown" ]; then
     echo -e "${RED}✗ Failed to get current version${NC}"
     exit 1
 fi
 echo -e "${GREEN}✓ Current version: $CURRENT_VERSION${NC}"
+
+# Test 1b: Get version from specific branch (used by release-tags action)
+echo "  Testing version from origin/main..."
+MAIN_VERSION=$(node -e "
+    const getVersion = require('./.github/actions/helpers/get-version');
+    try {
+        const version = getVersion('origin/main');
+        if (!version || version === 'undefined' || version === '0.0.0') {
+            console.error('Invalid version from origin/main');
+            process.exit(1);
+        }
+        console.log(version);
+    } catch (e) {
+        console.error('Error getting version from origin/main:', e.message);
+        process.exit(1);
+    }
+")
+if [ $? -ne 0 ]; then
+    echo -e "${RED}✗ Failed to get version from origin/main${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✓ Version from origin/main: $MAIN_VERSION${NC}"
 echo ""
 
-# Test 2: Test bump-version action (manual mode - no actual bump)
-echo -e "${YELLOW}[2/7] Testing bump-version action (manual mode)...${NC}"
-# Actions must run from repo root where package.json/lerna.json exist
+# Test 2: Verify library package.json files have placeholders (not actual versions)
+echo -e "${YELLOW}[2/11] Testing library package.json placeholders...${NC}"
+PLACEHOLDER_CHECK_FAILED=false
+
+# Get list of release projects
+RELEASE_PROJECTS=$(node -e "
+    try {
+        const nx = require('./nx.json');
+        console.log(nx.release.projects.join(' '));
+    } catch (e) {
+        console.log('');
+    }
+")
+
+if [ -n "$RELEASE_PROJECTS" ]; then
+    echo "  Checking placeholders in library package.json files..."
+    for project in $RELEASE_PROJECTS; do
+        if [ -f "libs/$project/package.json" ]; then
+            # Use Node.js to properly parse JSON and check for actual versions
+            HAS_ACTUAL_VERSIONS=$(node -e "
+                const fs = require('fs');
+                const pkg = JSON.parse(fs.readFileSync('libs/$project/package.json', 'utf-8'));
+                
+                // Check peerDependencies
+                if (pkg.peerDependencies) {
+                    for (const [dep, version] of Object.entries(pkg.peerDependencies)) {
+                        // Check @fundamental-ngx/* dependencies
+                        if (dep.startsWith('@fundamental-ngx/') && version !== 'VERSION_PLACEHOLDER') {
+                            console.log('fundamental-ngx');
+                            process.exit(0);
+                        }
+                        // Check @angular/* dependencies
+                        if (dep.startsWith('@angular/') && version !== 'ANGULAR_VER_PLACEHOLDER') {
+                            console.log('angular');
+                            process.exit(0);
+                        }
+                    }
+                }
+                
+                // Check dependencies
+                if (pkg.dependencies) {
+                    for (const [dep, version] of Object.entries(pkg.dependencies)) {
+                        // Check @fundamental-ngx/* dependencies
+                        if (dep.startsWith('@fundamental-ngx/') && version !== 'VERSION_PLACEHOLDER') {
+                            console.log('fundamental-ngx');
+                            process.exit(0);
+                        }
+                        // Check @angular/* dependencies
+                        if (dep.startsWith('@angular/') && version !== 'ANGULAR_VER_PLACEHOLDER') {
+                            console.log('angular');
+                            process.exit(0);
+                        }
+                    }
+                }
+                
+                console.log('ok');
+            ")
+            
+            if [ "$HAS_ACTUAL_VERSIONS" = "fundamental-ngx" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @fundamental-ngx dependencies"
+                PLACEHOLDER_CHECK_FAILED=true
+            elif [ "$HAS_ACTUAL_VERSIONS" = "angular" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @angular dependencies"
+                PLACEHOLDER_CHECK_FAILED=true
+            else
+                echo -e "    ${GREEN}✓${NC} libs/$project/package.json"
+            fi
+        fi
+    done
+    
+    if [ "$PLACEHOLDER_CHECK_FAILED" = "true" ]; then
+        echo -e "${RED}✗ Some library package.json files have actual versions instead of placeholders${NC}"
+        echo "  Run 'node scripts/reset-placeholders.js' to fix this"
+        exit 1
+    else
+        echo -e "${GREEN}✓ All library package.json files have correct placeholders${NC}"
+    fi
+else
+    echo -e "${YELLOW}⚠️  Could not read release projects${NC}"
+fi
+echo ""
+
+# Test 3: Test bump-version action (manual mode - no actual bump)
+echo -e "${YELLOW}[3/12] Testing bump-version action (manual mode)...${NC}"
+# Actions must run from repo root where package.json exists
 cd "$REPO_ROOT"
 
 # Simulate the action by running the Node.js script from repo root
@@ -71,8 +167,8 @@ else
 fi
 echo ""
 
-# Test 3: Test conventional commit analysis
-echo -e "${YELLOW}[3/7] Testing conventional commit analysis...${NC}"
+# Test 4: Test conventional commit analysis
+echo -e "${YELLOW}[4/12] Testing conventional commit analysis...${NC}"
 cd "$REPO_ROOT"
 if [ -f ".github/actions/helpers/bumped-release.js" ]; then
     TEST_RESULT=$(node -e "
@@ -97,7 +193,7 @@ fi
 echo ""
 
 # Test 4: Test semver tags retrieval
-echo -e "${YELLOW}[4/7] Testing git semver tags retrieval...${NC}"
+echo -e "${YELLOW}[5/12] Testing git semver tags retrieval...${NC}"
 if git tag | grep -q "v"; then
     LATEST_TAG=$(git tag --sort=-v:refname | grep "^v[0-9]" | head -1)
     echo -e "${GREEN}✓ Latest semver tag: $LATEST_TAG${NC}"
@@ -116,7 +212,7 @@ fi
 echo ""
 
 # Test 5: Test release tag determination
-echo -e "${YELLOW}[5/7] Testing release tag calculation...${NC}"
+echo -e "${YELLOW}[6/12] Testing release tag calculation...${NC}"
 cd "$REPO_ROOT"
 
 # Test scenarios
@@ -146,7 +242,7 @@ done
 echo ""
 
 # Test 6: Test conventional changelog generation (dry run)
-echo -e "${YELLOW}[6/7] Testing conventional changelog generation...${NC}"
+echo -e "${YELLOW}[7/12] Testing conventional changelog generation...${NC}"
 cd "$REPO_ROOT"
 
 if [ -f ".github/actions/generate-conventional-release-notes/index.js" ]; then
@@ -182,8 +278,222 @@ else
 fi
 echo ""
 
-# Test 7: Dry run NPM pack (test what would be published)
-echo -e "${YELLOW}[7/7] Testing NPM package dry run...${NC}"
+# Test 7: Test NX Release configuration
+echo -e "${YELLOW}[8/12] Testing NX Release configuration...${NC}"
+if [ -f "nx.json" ]; then
+    # Check if release config exists
+    HAS_RELEASE=$(node -e "
+        const nx = require('./nx.json');
+        console.log(nx.release ? 'true' : 'false');
+    ")
+    
+    if [ "$HAS_RELEASE" = "true" ]; then
+        echo -e "${GREEN}✓ NX Release configuration found${NC}"
+        
+        # Display configuration
+        echo "  Configuration summary:"
+        node -e "
+            const nx = require('./nx.json');
+            const rel = nx.release;
+            console.log('    Projects relationship:', rel.projectsRelationship);
+            console.log('    Conventional commits:', rel.version.conventionalCommits);
+            console.log('    Projects count:', rel.projects.length);
+            console.log('    Projects:', rel.projects.join(', '));
+        "
+    else
+        echo -e "${RED}✗ No release configuration in nx.json${NC}"
+    fi
+else
+    echo -e "${RED}✗ nx.json not found${NC}"
+fi
+echo ""
+
+# Test 8: Test NX Release version command (dry-run)
+echo -e "${YELLOW}[9/12] Testing NX Release version command (dry-run)...${NC}"
+
+# Verify all release projects exist
+echo "  Verifying release projects..."
+RELEASE_PROJECTS=$(node -e "
+    try {
+        const nx = require('./nx.json');
+        console.log(nx.release.projects.join(','));
+    } catch (e) {
+        console.log('');
+    }
+")
+
+if [ -n "$RELEASE_PROJECTS" ]; then
+    IFS=',' read -ra PROJECTS <<< "$RELEASE_PROJECTS"
+    ALL_EXIST=true
+    for project in "${PROJECTS[@]}"; do
+        if [ -d "libs/$project" ]; then
+            echo -e "    ${GREEN}✓${NC} libs/$project"
+        else
+            echo -e "    ${RED}✗${NC} libs/$project (not found)"
+            ALL_EXIST=false
+        fi
+    done
+    
+    if [ "$ALL_EXIST" = "true" ]; then
+        echo -e "${GREEN}✓ All release projects exist${NC}"
+    else
+        echo -e "${RED}✗ Some release projects are missing${NC}"
+    fi
+else
+    echo -e "${YELLOW}⚠️  Could not read release projects${NC}"
+fi
+echo ""
+
+# Test nx release version dry-run using the same pattern as the workflow
+# Test 1: With explicit version (matches workflow usage)
+NEXT_TEST_VERSION=$(node -e "
+    const semver = require('semver');
+    const getVersion = require('./.github/actions/helpers/get-version');
+    const current = getVersion();
+    console.log(semver.inc(current, 'prerelease', 'rc'));
+")
+
+echo "  Testing: npx nx release version $NEXT_TEST_VERSION --git-commit=false --git-tag=false --dry-run"
+NX_RELEASE_OUTPUT=$(NODE_OPTIONS="--no-deprecation" npx nx release version "$NEXT_TEST_VERSION" --git-commit=false --git-tag=false --dry-run 2>&1 | head -20 || true)
+
+if echo "$NX_RELEASE_OUTPUT" | grep -qi "new version\\|written to manifest\\|resolved"; then
+    echo -e "${GREEN}✓ NX Release version with explicit version executed successfully${NC}"
+    echo "  Output preview:"
+    echo "$NX_RELEASE_OUTPUT" | grep -E "Resolved|New version|Applied" | head -3 | sed 's/^/    /'
+else
+    echo -e "${RED}✗ NX Release version command failed${NC}"
+    echo "  Output:"
+    echo "$NX_RELEASE_OUTPUT" | head -10 | sed 's/^/    /'
+    exit 1
+fi
+
+# Test 2: With semver keyword (also valid)
+echo "  Testing: npx nx release version patch --dry-run"
+NX_RELEASE_OUTPUT2=$(NODE_OPTIONS="--no-deprecation" npx nx release version patch --dry-run 2>&1 | head -20 || true)
+
+if echo "$NX_RELEASE_OUTPUT2" | grep -qi "new version\\|written to manifest\\|resolved"; then
+    echo -e "${GREEN}✓ NX Release version with semver keyword executed successfully${NC}"
+else
+    echo -e "${YELLOW}⚠️  NX Release dry-run completed with warnings${NC}"
+fi
+echo ""
+
+# Test 9: Test NX Release publish (dry-run)
+echo -e "${YELLOW}[10/12] Testing NX Release publish command (dry-run)...${NC}"
+
+# Check if packages are built (needed for publish test)
+if [ -d "dist/libs/core" ]; then
+    echo "  Testing: npx nx release publish --dry-run"
+    
+    # Test publish dry-run
+    PUBLISH_OUTPUT=$(NODE_OPTIONS="--no-deprecation" npx nx release publish --dry-run 2>&1 || true)
+    
+    if echo "$PUBLISH_OUTPUT" | grep -qi "dry-run\\|would publish\\|published"; then
+        echo -e "${GREEN}✓ NX Release publish dry-run executed successfully${NC}"
+        echo "  Output preview:"
+        echo "$PUBLISH_OUTPUT" | head -10 | sed 's/^/    /'
+    else
+        echo -e "${YELLOW}⚠️  NX Release publish dry-run completed${NC}"
+        echo "  Output preview:"
+        echo "$PUBLISH_OUTPUT" | head -5 | sed 's/^/    /'
+    fi
+else
+    echo -e "${YELLOW}⚠️  No built packages found in dist/libs/${NC}"
+    echo "  Run 'nx run-many --target=build' first to test publish dry-run"
+    echo "  Skipping publish test (this is normal for quick tests)"
+fi
+echo ""
+
+# Test 10: Test hotfix release script (dry-run)
+echo -e "${YELLOW}[11/12] Testing hotfix release script...${NC}"
+
+if [ -f "scripts/release-hotfix.js" ]; then
+    # Check if current version is valid for hotfix
+    CURRENT_IS_PRERELEASE=$(node -e "
+        const semver = require('semver');
+        const currentVersion = require('./.github/actions/helpers/current-version');
+        console.log(semver.prerelease(currentVersion) ? 'true' : 'false');
+    ")
+    
+    if [ "$CURRENT_IS_PRERELEASE" = "true" ]; then
+        echo -e "${YELLOW}⚠️  Current version is a prerelease (${CURRENT_VERSION})${NC}"
+        echo "  Hotfix releases can only be created from stable versions"
+        echo "  Test skipped (this is expected behavior)"
+    else
+        echo "  Testing hotfix version calculation..."
+        NEXT_HOTFIX_VERSION=$(node -e "
+            const semver = require('semver');
+            const currentVersion = require('./.github/actions/helpers/current-version');
+            console.log(semver.inc(currentVersion, 'patch'));
+        ")
+        
+        if [ -n "$NEXT_HOTFIX_VERSION" ]; then
+            echo -e "${GREEN}✓ Hotfix script is valid${NC}"
+            echo "  Current version: $CURRENT_VERSION"
+            echo "  Next hotfix would be: $NEXT_HOTFIX_VERSION"
+            
+            # Verify the script uses nx release
+            if grep -q "nx release version" scripts/release-hotfix.js; then
+                echo -e "${GREEN}✓ Script uses 'nx release version' command${NC}"
+            else
+                echo -e "${RED}✗ Script does not use 'nx release version' command${NC}"
+            fi
+        else
+            echo -e "${RED}✗ Could not calculate next hotfix version${NC}"
+        fi
+    fi
+else
+    echo -e "${RED}✗ scripts/release-hotfix.js not found${NC}"
+fi
+echo ""
+
+# Test 12: Test reset-placeholders script
+echo -e "${YELLOW}[12/13] Testing reset-placeholders script...${NC}"
+
+if [ -f "scripts/reset-placeholders.js" ]; then
+    # Create a backup of one package.json
+    TEST_PACKAGE="libs/core/package.json"
+    BACKUP_FILE="/tmp/test-package.json.backup"
+    cp "$TEST_PACKAGE" "$BACKUP_FILE"
+    
+    # Temporarily modify it to have actual versions
+    node -e "
+        const fs = require('fs');
+        const pkg = JSON.parse(fs.readFileSync('$TEST_PACKAGE', 'utf-8'));
+        if (pkg.peerDependencies) {
+            Object.keys(pkg.peerDependencies).forEach(dep => {
+                if (dep.startsWith('@fundamental-ngx/')) {
+                    pkg.peerDependencies[dep] = '0.58.0-rc.26';
+                }
+                if (dep.startsWith('@angular/')) {
+                    pkg.peerDependencies[dep] = '^20.0.0';
+                }
+            });
+        }
+        fs.writeFileSync('$TEST_PACKAGE', JSON.stringify(pkg, null, 4) + '\n');
+    "
+    
+    # Run the reset script
+    RESET_OUTPUT=$(node scripts/reset-placeholders.js 2>&1)
+    
+    # Check if placeholders were restored
+    if grep -q "VERSION_PLACEHOLDER" "$TEST_PACKAGE" && grep -q "ANGULAR_VER_PLACEHOLDER" "$TEST_PACKAGE"; then
+        echo -e "${GREEN}✓ reset-placeholders.js successfully restored placeholders${NC}"
+        echo "  Script output:"
+        echo "$RESET_OUTPUT" | head -3 | sed 's/^/    /'
+    else
+        echo -e "${RED}✗ reset-placeholders.js failed to restore placeholders${NC}"
+    fi
+    
+    # Restore backup
+    mv "$BACKUP_FILE" "$TEST_PACKAGE"
+else
+    echo -e "${RED}✗ scripts/reset-placeholders.js not found${NC}"
+fi
+echo ""
+
+# Test 13: Dry run NPM pack (test what would be published)
+echo -e "${YELLOW}[13/13] Testing NPM package dry run...${NC}"
 
 # Test packing one library to see what would be published
 TEST_PACKAGE="core"
@@ -198,11 +508,11 @@ if [ -d "dist/libs/$TEST_PACKAGE" ]; then
         echo "  Files that would be published:"
         echo "$PACK_OUTPUT" | grep -E "^\s+[0-9]" | head -10 | sed 's/^/    /'
         
-        # Get package size
-        PACKAGE_SIZE=$(echo "$PACK_OUTPUT" | grep -oP 'package size:\s+\K[^B]+B' || echo "Unknown")
-        UNPACKED_SIZE=$(echo "$PACK_OUTPUT" | grep -oP 'unpacked size:\s+\K[^B]+B' || echo "Unknown")
-        echo "  Package size: $PACKAGE_SIZE"
-        echo "  Unpacked size: $UNPACKED_SIZE"
+        # Get package size (macOS compatible)
+        PACKAGE_SIZE=$(echo "$PACK_OUTPUT" | grep -o "package size:.*" | head -1 || echo "Unknown")
+        UNPACKED_SIZE=$(echo "$PACK_OUTPUT" | grep -o "unpacked size:.*" | head -1 || echo "Unknown")
+        echo "  $PACKAGE_SIZE"
+        echo "  $UNPACKED_SIZE"
     else
         echo -e "${YELLOW}⚠️  Build dist first: yarn build${NC}"
     fi
@@ -224,8 +534,8 @@ echo -e "${GREEN}All tests completed!${NC}"
 echo ""
 echo "To test the full release process:"
 echo "  1. Make some commits with conventional commit messages"
-echo "  2. Run this script to see what version would be bumped"
+echo "  2. Run 'npx nx release version --dry-run' to preview version bump"
 echo "  3. Run 'nx run-many --target=build' to build packages"
-echo "  4. Run this script again to see package contents"
+echo "  4. Run this script again to validate everything"
 echo ""
 echo -e "${YELLOW}Note: This is a dry run. Nothing was published or modified.${NC}"

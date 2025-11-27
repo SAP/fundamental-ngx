@@ -187,6 +187,14 @@ const componentRoutes = [
     {
         path: 'tokenizer',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tokenizer').then(configureLibRoutes)
+    },
+    {
+        path: 'toolbar',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/toolbar').then(configureLibRoutes)
+    },
+    {
+        path: 'tree',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tree').then(configureLibRoutes)
     }
 ];
 

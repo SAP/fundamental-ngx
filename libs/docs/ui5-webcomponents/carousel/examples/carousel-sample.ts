@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Card } from '@fundamental-ngx/ui5-webcomponents/card';
 import { CardHeader } from '@fundamental-ngx/ui5-webcomponents/card-header';
@@ -16,6 +17,7 @@ import {
     CarouselArrowsPlacement,
     CarouselPageIndicatorType
 } from '@fundamental-ngx/ui5-webcomponents/types';
+
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
 // Import Fundamental Styles
@@ -24,6 +26,13 @@ import 'fundamental-styles/dist/margins.css';
 import 'fundamental-styles/dist/paddings.css';
 import 'fundamental-styles/dist/panel.css';
 import 'fundamental-styles/dist/section.css';
+
+interface ImageStyle {
+    url: string;
+    title: string;
+    description: string;
+    gradient: string;
+}
 
 @Component({
     selector: 'ui5-carousel-sample',
@@ -58,7 +67,7 @@ export class CarouselExample {
     readonly arrowsPlacements = computed(() => Object.values(CarouselArrowsPlacement));
 
     // Sample data signals
-    readonly images = signal<Array<{ url: string; title: string; description: string; gradient: string }>>([
+    readonly images = signal<Array<ImageStyle>>([
         {
             url: 'https://picsum.photos/800/500?id=1',
             title: 'Nature Landscape',
@@ -166,32 +175,32 @@ export class CarouselExample {
     }
 
     // Navigation event handlers
-    onBasicNavigate(event: any): void {
+    onBasicNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.basicCurrentPage.set(detail.selectedIndex);
         console.log('Basic carousel navigated to page:', detail.selectedIndex);
     }
 
-    onImageNavigate(event: any): void {
+    onImageNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentImagePage.set(detail.selectedIndex);
         console.log('Image carousel navigated to page:', detail.selectedIndex);
     }
 
-    onProductNavigate(event: any): void {
+    onProductNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentProductPage.set(detail.selectedIndex);
         console.log('Product carousel navigated to page:', detail.selectedIndex);
     }
 
-    onFeatureNavigate(event: any): void {
+    onFeatureNavigate(event: UI5WrapperCustomEvent<Carousel, 'ui5Navigate'>): void {
         const detail = event.detail;
         this.currentFeaturePage.set(detail.selectedIndex);
         console.log('Feature carousel navigated to page:', detail.selectedIndex);
     }
 
     // Configuration change handlers
-    onPageIndicatorTypeChange(event: any): void {
+    onPageIndicatorTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -200,16 +209,7 @@ export class CarouselExample {
         }
     }
 
-    onBackgroundDesignChange(event: any): void {
-        const detail = event.detail;
-        const selectedItems = detail.selectedItems || [];
-        if (selectedItems.length > 0) {
-            const selectedDesign = selectedItems[0].innerText as BackgroundDesign;
-            this.backgroundDesign.set(selectedDesign);
-        }
-    }
-
-    onArrowsPlacementChange(event: any): void {
+    onArrowsPlacementChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -276,30 +276,30 @@ export class CarouselExample {
         return types[status] || '1';
     }
 
-    getImageStyle(image: any): string {
+    getImageStyle(image: ImageStyle): string {
         return `
-            height: 500px; 
-            background: ${image.gradient}; 
-            background-image: url('${image.url}'); 
-            background-size: cover; 
-            background-position: center; 
-            background-blend-mode: overlay; 
-            display: flex; 
-            align-items: center; 
+            height: 500px;
+            background: ${image.gradient};
+            background-image: url('${image.url}');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            display: flex;
+            align-items: center;
             justify-content: center;
         `;
     }
 
-    getCardImageStyle(image: any): string {
+    getCardImageStyle(image: ImageStyle): string {
         return `
-            height: 250px; 
-            background: ${image.gradient}; 
-            background-image: url('${image.url}'); 
-            background-size: cover; 
-            background-position: center; 
-            background-blend-mode: overlay; 
-            display: flex; 
-            align-items: center; 
+            height: 250px;
+            background: ${image.gradient};
+            background-image: url('${image.url}');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            display: flex;
+            align-items: center;
             justify-content: center;
         `;
     }

@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { ValueState } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { StepInput } from '@fundamental-ngx/ui5-webcomponents/step-input';
@@ -73,15 +74,15 @@ export class ValueStateStepInputExample {
         }
     ]);
 
-    onFormValueChange(event: CustomEvent): void {
+    onFormValueChange(event: UI5WrapperCustomEvent<StepInput, 'ui5Change'>): void {
         console.log('Value change event:', event);
     }
 
-    onFormValueInput(event: CustomEvent): void {
+    onFormValueInput(event: UI5WrapperCustomEvent<StepInput, 'ui5Input'>): void {
         console.log('Input event:', event);
     }
 
-    onValueStateChange(event: CustomEvent): void {
+    onValueStateChange(event: UI5WrapperCustomEvent<StepInput, 'ui5ValueStateChange'>): void {
         console.log('Value state change event:', event);
     }
 }

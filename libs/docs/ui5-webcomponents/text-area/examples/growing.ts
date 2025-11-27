@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { TextArea } from '@fundamental-ngx/ui5-webcomponents/text-area';
 
 // Import Fundamental Styles
@@ -17,7 +18,7 @@ export class TextAreaGrowingSample {
         'This is a fixed height textarea that demonstrates the difference from growing textareas. When you have more content than can fit in the visible rows, the textarea will show a scrollbar instead of expanding.'
     );
 
-    onTextChange(event: CustomEvent): void {
+    onTextChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Change'>): void {
         console.log('Text changed', event);
     }
 }

@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { Button, Label, Option, Select, Toast } from '@fundamental-ngx/ui5-webcomponents';
-import { SelectChangeEventDetail } from '@ui5/webcomponents/dist/Select.js';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 
 // Import Fundamental Styles
 import 'fundamental-styles/dist/layout-grid.css';
@@ -24,7 +24,7 @@ export class ToastDurationSample {
     readonly isToastOpen = signal(false);
     readonly toastMessage = signal('This toast will auto-close after the selected duration');
 
-    onDurationChange(event: CustomEvent<SelectChangeEventDetail>): void {
+    onDurationChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
         const selectedOption = event.detail?.selectedOption;
         if (selectedOption) {
             const duration = parseInt(selectedOption.getAttribute('value') || '3000');

@@ -1,5 +1,6 @@
 import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
 import { FormItem } from '@fundamental-ngx/ui5-webcomponents/form-item';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
@@ -29,7 +30,7 @@ export class FormLabelsOnTopSample {
         { id: 'address_field6', label: 'Delivery Address:', value: 'Newtown' }
     ]);
 
-    onSliderChange(event: CustomEvent): void {
+    onSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
         const width = (event.target?.['value'] / 100) * 1500;
         this.containerWidth.set(`${width}px`);
         this.pageSize.set(this.getLayoutByWidth(width));

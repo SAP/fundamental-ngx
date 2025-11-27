@@ -29,7 +29,18 @@ const releaseHotfix = async () => {
     execAndLog(`git checkout -b ${hotfixBranchName}`);
 
     const nextVersion = semver.inc(currentVersion, 'patch');
-    return execAndLog(`npx lerna version ${nextVersion} --force-publish --yes --no-push`);
+
+    // Update version using NX Release (without git operations first)
+    execAndLog(`npx nx release version ${nextVersion} --git-commit=false --git-tag=false`);
+
+    // Reset dependency placeholders in source package.json files
+    // NX Release updates both version AND dependencies, but we want to keep placeholders in source
+    execAndLog('node scripts/reset-placeholders.js');
+
+    // Now commit and tag with placeholders restored
+    execAndLog(`git add .`);
+    execAndLog(`git commit -m "chore(release): publish ${nextVersion}"`);
+    execAndLog(`git tag -a "v${nextVersion}" -m "v${nextVersion}"`);
 };
 
 releaseHotfix().then(() => {

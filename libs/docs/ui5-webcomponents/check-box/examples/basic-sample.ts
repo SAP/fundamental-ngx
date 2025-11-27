@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { CheckBox } from '@fundamental-ngx/ui5-webcomponents/check-box';
 
 @Component({
@@ -32,7 +33,7 @@ import { CheckBox } from '@fundamental-ngx/ui5-webcomponents/check-box';
 export class BasicCheckBoxSample {
     checked = signal(false);
 
-    onCheckboxChange(event: any): void {
+    onCheckboxChange(event: UI5WrapperCustomEvent<CheckBox, 'ui5Change'>): void {
         this.checked.set(event.target?.['checked']);
     }
 }

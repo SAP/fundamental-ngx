@@ -1,5 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { AfterViewInit, Component, computed, effect, signal, ViewChild } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { SegmentedButton } from '@fundamental-ngx/ui5-webcomponents/segmented-button';
 import { SegmentedButtonItem } from '@fundamental-ngx/ui5-webcomponents/segmented-button-item';
@@ -219,7 +220,7 @@ export class SegmentedButtonExample implements AfterViewInit {
     }
 
     // Event handlers for segmented button selection changes
-    onBasicSelectionChange(event: any): void {
+    onBasicSelectionChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         const itemTexts = selectedItems.map((item: any) => item.innerText || item.textContent);
@@ -227,7 +228,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         console.log('Basic selection changed:', itemTexts);
     }
 
-    onReactiveSelectionChange(event: any): void {
+    onReactiveSelectionChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         const itemTexts = selectedItems.map((item: any) => item.innerText || item.textContent);
@@ -238,7 +239,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         );
     }
 
-    onConfigurableSelectionChange(event: any): void {
+    onConfigurableSelectionChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         const itemTexts = selectedItems.map((item: any) => item.innerText || item.textContent);
@@ -246,7 +247,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         console.log('Configurable selection changed:', itemTexts);
     }
 
-    onMultipleSelectionChange(event: any): void {
+    onMultipleSelectionChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         const itemTexts = selectedItems.map((item: any) => item.innerText || item.textContent);
@@ -254,7 +255,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         console.log('Multiple selection changed:', itemTexts);
     }
 
-    onSingleSelectionChange(event: any): void {
+    onSingleSelectionChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         const itemTexts = selectedItems.map((item: any) => item.innerText || item.textContent);
@@ -262,7 +263,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         console.log('Single selection changed:', itemTexts);
     }
 
-    onSelectionModeChange(event: any): void {
+    onSelectionModeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -273,7 +274,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         }
     }
 
-    onThemeChange(event: any): void {
+    onThemeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -283,7 +284,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         }
     }
 
-    onViewTypeChange(event: any): void {
+    onViewTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -293,7 +294,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         }
     }
 
-    onPriorityChange(event: any): void {
+    onPriorityChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {
@@ -303,7 +304,7 @@ export class SegmentedButtonExample implements AfterViewInit {
         }
     }
 
-    onStatusChange(event: any): void {
+    onStatusChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const detail = event.detail;
         const selectedItems = detail.selectedItems || [];
         if (selectedItems.length > 0) {

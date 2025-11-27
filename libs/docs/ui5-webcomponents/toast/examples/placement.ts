@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Button, Label, Option, Select, Toast } from '@fundamental-ngx/ui5-webcomponents';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { ToastPlacement } from '@fundamental-ngx/ui5-webcomponents/types';
-import { SelectChangeEventDetail } from '@ui5/webcomponents/dist/Select.js';
 
 // Import Fundamental Styles
 import 'fundamental-styles/dist/layout-grid.css';
@@ -20,7 +20,7 @@ export class ToastPlacementSample {
     readonly isToastOpen = signal(false);
     readonly toastMessage = signal('Toast notification with custom placement');
 
-    onPlacementChange(event: CustomEvent<SelectChangeEventDetail>): void {
+    onPlacementChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
         const selectedOption = event.detail?.selectedOption;
         if (selectedOption) {
             this.selectedPlacement.set(

@@ -18,12 +18,7 @@ const FILES = {
     THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
 };
 
-const DEFAULT_ENUM_PACKAGE_MAPPING: Record<string, string> = {
-    '@ui5/webcomponents': '@fundamental-ngx/ui5-webcomponents/types',
-    '@ui5/webcomponents-base': '@fundamental-ngx/ui5-webcomponents-base/types',
-    '@ui5/webcomponents-fiori': '@fundamental-ngx/ui5-webcomponents-fiori/types',
-    '@ui5/webcomponents-ai': '@fundamental-ngx/ui5-webcomponents-ai/types'
-};
+const WEB_COMPONENTS_BASE = 'ui5-webcomponents-base';
 
 /** Converts PascalCase to kebab-case (e.g., 'Ui5Button' -> 'ui5-button'). */
 const pascalToKebabCase = (str: string): string => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
@@ -132,7 +127,11 @@ function extractCemData(cemData: CEM.Package, options: GenerateExecutorSchema): 
 /**
  * Generates the types/index.ts file and its ng-package.json.
  */
-async function generateTypesFiles(allEnums: ExtractedCemData['allEnums'], targetDir: string): Promise<string> {
+async function generateTypesFiles(
+    allEnums: ExtractedCemData['allEnums'],
+    targetDir: string,
+    projectName: string
+): Promise<string> {
     let typesContent = allEnums
         .map(
             (e) =>
@@ -140,6 +139,10 @@ async function generateTypesFiles(allEnums: ExtractedCemData['allEnums'], target
                 `export { default as ${e.name} } from '${e.package}/${e.module}.js';`
         )
         .join('\n');
+
+    if (projectName === WEB_COMPONENTS_BASE) {
+        typesContent += addUI5WrapperCustomEventType();
+    }
 
     // Add one empty line at the end if there's content
     if (typesContent) {
@@ -173,7 +176,6 @@ async function generateThemingFiles(packageName: string, targetDir: string): Pro
  */
 async function generateComponentFiles(
     componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
-    cemData: CEM.Package,
     allEnums: ExtractedCemData['allEnums'],
     packageName: string,
     targetDir: string
@@ -197,10 +199,8 @@ async function generateComponentFiles(
 
             const templateContent = componentTemplate(
                 declaration,
-                cemData,
                 allEnums.map((e) => ({ name: e.name, members: e.members })),
-                packageName,
-                DEFAULT_ENUM_PACKAGE_MAPPING
+                packageName
             );
 
             return ensureDirAndWriteFile(componentIndexPath, templateContent).then(() =>
@@ -238,6 +238,18 @@ async function generateUtilsFiles(targetDir: string): Promise<void> {
     await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
 }
 
+function addUI5WrapperCustomEventType(): string {
+    return `
+import { OutputEmitterRef } from '@angular/core';
+
+type OutputKeys<T> = {
+    [K in keyof T]: T[K] extends OutputEmitterRef<any> ? K : never;
+}[keyof T];
+
+export type UI5WrapperCustomEvent<T, N extends OutputKeys<T>> = T[N] extends OutputEmitterRef<infer E> ? E : never;
+`;
+}
+
 /**
  * An NX executor that generates Angular components from UI5 Web Components'
  * custom-elements-internal.json schema.
@@ -266,7 +278,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
         let exportsContent = '';
 
         if (allEnums.length > 0) {
-            exportsContent += await generateTypesFiles(allEnums, targetDir);
+            exportsContent += await generateTypesFiles(allEnums, targetDir, context.projectName);
         }
 
         if (options.skipComponents !== true) {
@@ -282,7 +294,6 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
             // Generate Component Wrappers
             const componentExports = await generateComponentFiles(
                 componentDeclarations,
-                cemData,
                 allEnums,
                 packageName,
                 targetDir

@@ -1,4 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
 import { FormItem } from '@fundamental-ngx/ui5-webcomponents/form-item';
 import { Input } from '@fundamental-ngx/ui5-webcomponents/input';
@@ -30,7 +31,7 @@ export class FormEditSample {
         { id: 'field6', label: 'Delivery Address:', value: 'Newtown' }
     ]);
 
-    toggleSelection(event: CustomEvent): void {
+    toggleSelection(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         if (event.detail.selectedItems[0].id === 'edit') {
             this.editable.set(true);
         } else {

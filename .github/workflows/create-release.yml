@@ -25,11 +25,14 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        timeout-minutes: 60
         strategy:
             matrix:
                 agent: [1, 2, 3, 4, 5]
         steps:
             - uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 1 # Shallow clone for agents (they don't need git history)
             - uses: ./.github/actions/nodejs
               with:
                   node-version: ${{ env.NODE_VERSION }}
@@ -87,10 +90,19 @@ jobs:
                   bumpTag: ${{ steps.bumpVersion.outputs.releaseTag }}
                   bumpedVersion: ${{ steps.bumpVersion.outputs.newVersion }}
 
-            - name: Update using lerna # Skipping push, in case something goes wrong later during build/prepare
+            # NX Release handles version updates, git commit, and git tag creation
+            # We disable git operations here and handle them manually after successful build
+            # to ensure we don't commit/tag if the build fails
+            - name: Update version using NX Release
               if: env.IS_MANUAL != 'true'
               run: |
-                  npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --message="chore(release): publish %v [ci skip]" --no-push
+                  npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
+
+            # Reset dependency placeholders in source package.json files
+            # NX Release updates both version AND dependencies, but we want to keep placeholders in source
+            # Also run this for manual releases to ensure placeholders are always restored before building
+            - name: Reset dependency placeholders
+              run: node scripts/reset-placeholders.js
 
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
@@ -105,45 +117,49 @@ jobs:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
 
+            # Reset placeholders again after pack step
+            # The sync-versions generator writes actual versions back to source package.json files during build
+            # We need to restore placeholders before committing
+            - name: Reset dependency placeholders after pack
+              run: node scripts/reset-placeholders.js
+
             - name: Configure npm for trusted publishing
               run: npm config delete //registry.npmjs.org/:_authToken || true
 
-            - name: Publish packages to NPM
+            # Use NX Release to publish all packages at once
+            # This replaces the manual loop and handles provenance automatically
+            # NX Release publishes from dist/libs/{projectName} as configured in nx.json
+            # NPM tag is determined by release-tags action:
+            # - prerelease: for RC versions (e.g., 0.58.0-rc.19)
+            # - archive: for hotfix releases on older versions
+            # - latest: for stable releases
+            # IMPORTANT: Disable distributed execution for publishing (needs local dist/ files and npm auth)
+            - name: Publish packages to NPM using NX Release
               run: |
-                  # Determine npm tag
-                  if [ "${{ env.IS_PRERELEASE }}" = "true" ]; then
-                    NPM_TAG="prerelease"
-                  elif [ "${{ env.IS_HOTFIX }}" = "true" ]; then
-                    NPM_TAG="archive"
-                  else
-                    NPM_TAG="latest"
-                  fi
+                  echo "📦 Publishing all packages with npm tag: ${{ steps.releaseTags.outputs.npm }}"
+                  npx nx release publish --tag="${{ steps.releaseTags.outputs.npm }}" --registry=https://registry.npmjs.org/
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
-                  echo "Publishing packages with npm tag: $NPM_TAG"
+            # Create git commit and tag after successful build and publish
+            # We do this here instead of during 'nx release version' to ensure we only commit
+            # if build and publish succeed. The [ci skip] prevents triggering this workflow again.
+            - name: Commit version changes
+              if: env.IS_MANUAL != 'true'
+              run: |
+                  git add .
+                  git commit -m "chore(release): publish ${{ steps.bumpVersion.outputs.newVersion }} [ci skip]" || echo "No changes to commit"
 
-                  # Publish only the packages that are built and prepared
-                  IFS=',' read -ra PACKAGES <<< "${{ env.RELEASE_PACKAGES }}"
-                  EXIT_CODE=0
-                  for package_name in "${PACKAGES[@]}"; do
-                    package_path="dist/libs/$package_name"
-                    if [ -f "$package_path/package.json" ]; then
-                      echo "Publishing @fundamental-ngx/$package_name..."
-                      if ! (cd "$package_path" && npm publish --tag "$NPM_TAG" --provenance); then
-                        echo "❌ Failed to publish $package_name"
-                        EXIT_CODE=1
-                      else
-                        echo "✅ Successfully published $package_name"
-                      fi
-                    else
-                      echo "⚠️  Skipping $package_name (not found in dist)"
-                    fi
-                  done
-                  exit $EXIT_CODE
+            # Create git tag for the release
+            # This tag is used by the GitHub release and for version resolution in future runs
+            - name: Create git tag
+              if: env.IS_MANUAL != 'true'
+              run: |
+                  git tag -a "v${{ steps.bumpVersion.outputs.newVersion }}" -m "v${{ steps.bumpVersion.outputs.newVersion }}"
 
-            # This step is for pushing into the main repo if version has been updated by the CI.
-            # Commit is created by the lerna version command
-            # This Will NOT trigger this workflow again, so it is okay
-            - name: Push changes
+            # Push both the commit and tags to the repository
+            # This will NOT trigger the workflow again due to [ci skip] in commit message
+            - name: Push changes and tags
               if: env.IS_MANUAL != 'true'
               run: git push --follow-tags
 
@@ -166,7 +182,8 @@ jobs:
               if: env.IS_HOTFIX == 'true' && steps.releaseTags.outputs.mainNeedsSync == 'true'
               run: |
                   git checkout -f main
-                  npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --no-push --no-changelog --no-git-tag-version
+                  npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
+                  node scripts/reset-placeholders.js
                   git add .
                   git commit -m "chore(release): sync version after hotfix v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
                   git push origin main
@@ -175,6 +192,14 @@ jobs:
             - name: Delete Temporary hotfix branch
               if: env.IS_HOTFIX == 'true'
               run: git push origin --delete tmp_hotfix_branch
+
+            # Stop NX Cloud agents immediately if any step fails
+            # This prevents agents from running indefinitely when the main job fails
+            - name: Stop Nx Cloud agents on failure
+              if: failure()
+              run: npx --yes nx-cloud@latest stop-all-agents
+              env:
+                  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
     gh_pages:
         name: Github Pages deploy
@@ -210,8 +235,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4.2.2
-            - uses: ./.github/actions/nodejs
               with:
-                  node-version: ${{ env.NODE_VERSION }}
+                  fetch-depth: 1
             - name: Stop all running agents for this CI run
-              run: npx nx-cloud stop-all-agents
+              run: npx --yes nx-cloud@latest stop-all-agents
+              env:
+                  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}

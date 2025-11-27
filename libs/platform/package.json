@@ -1,26 +1,26 @@
 {
-  "name": "@fundamental-ngx/platform",
-  "version": "0.58.0-rc.19",
-  "schematics": "./schematics/collection.json",
-  "description": "Fundamental Library for Angular - platform",
-  "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SAP/fundamental-ngx.git"
-  },
-  "engine": {
-    "node": ">= 10"
-  },
-  "peerDependencies": {
-    "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
-    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
-    "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER"
-  },
-  "dependencies": {
-    "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
-    "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
-    "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
-    "tslib": "^2.0.0"
-  }
+    "name": "@fundamental-ngx/platform",
+    "version": "0.58.0-rc.31",
+    "schematics": "./schematics/collection.json",
+    "description": "Fundamental Library for Angular - platform",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SAP/fundamental-ngx.git"
+    },
+    "engine": {
+        "node": ">= 10"
+    },
+    "peerDependencies": {
+        "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
+        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
+        "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER"
+    },
+    "dependencies": {
+        "fast-deep-equal": "3.1.3",
+        "focus-trap": "^7.1.0",
+        "lodash-es": "^4.17.0",
+        "tslib": "^2.0.0"
+    }
 }

@@ -1,8 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { CheckBox } from '@fundamental-ngx/ui5-webcomponents/check-box';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
-import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
 import { IconMode } from '@fundamental-ngx/ui5-webcomponents/types';
 
 // Import Fundamental Styles
@@ -17,7 +15,7 @@ import '@ui5/webcomponents-icons/dist/AllIcons.js';
     selector: 'ui5-icon-interactive-example',
     templateUrl: './interactive.html',
     standalone: true,
-    imports: [Icon, Label, Text, CheckBox]
+    imports: [Icon, Label]
 })
 export class IconInteractiveExample {
     readonly clickCount = signal(0);

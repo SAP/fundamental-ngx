@@ -1,5 +1,6 @@
 import { Component, signal, viewChild } from '@angular/core';
 import { MultiInput } from '@fundamental-ngx/ui5-webcomponents';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Token } from '@fundamental-ngx/ui5-webcomponents/token';
 
 @Component({
@@ -20,8 +21,8 @@ export class TokenInMultiInputSample {
 
     readonly multiInput = viewChild<MultiInput>('multiInput');
 
-    onInputChange(event: any): void {
-        const inputValue = event.target.value;
+    onInputChange(event: UI5WrapperCustomEvent<MultiInput, 'ui5Change'> | Event): void {
+        const inputValue = event.target?.['value'];
         this.availableTags.update(() => [...this.availableTags(), { text: inputValue }]);
 
         const multiInput = this.multiInput();
@@ -30,8 +31,8 @@ export class TokenInMultiInputSample {
         }
     }
 
-    onTokenDelete(event: any): void {
-        const tokens = event.detail?.tokens;
+    onTokenDelete(event: UI5WrapperCustomEvent<MultiInput, 'ui5TokenDelete'>): void {
+        const tokens = event.detail.tokens;
         if (tokens) {
             tokens.forEach((token) => token.remove());
         }

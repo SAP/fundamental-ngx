@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { Link } from '@fundamental-ngx/ui5-webcomponents/link';
@@ -143,7 +144,7 @@ export class LinkExample {
     }
 
     // Event handlers
-    onLinkClick(linkText: string, event?: Event): void {
+    onLinkClick(linkText: string, event?: UI5WrapperCustomEvent<Link, 'ui5Click'>): void {
         // Prevent navigation for demo purposes on certain links
         if (linkText.includes('Download') || linkText.includes('Settings')) {
             event?.preventDefault();
@@ -158,7 +159,7 @@ export class LinkExample {
         this.design.set(design as 'Default' | 'Subtle' | 'Emphasized');
     }
 
-    onSegmentedButtonChange(event: any): void {
+    onSegmentedButtonChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {
             const selectedItem = selectedItems[0];

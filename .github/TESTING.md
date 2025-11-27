@@ -77,7 +77,7 @@ act workflow_dispatch -W .github/workflows/create-release.yml -n
 
 ### Helper Function Tests
 
-✅ `get-version` - Version retrieval from lerna.json/package.json  
+✅ `get-version` - Version retrieval from git tags/package.json  
 ✅ `angular-version` - Angular major version detection  
 ✅ `get-file-contents` - File reading from filesystem and git  
 ✅ `git-semver-tags` - Git tag parsing and filtering  
@@ -407,7 +407,7 @@ Reusable helper functions for GitHub Actions workflows handle version management
 
 #### `get-version.js`
 
-Gets version from lerna.json or package.json.
+Gets version from git tags or package.json.
 
 ```javascript
 const getVersion = require('./.github/actions/helpers/get-version');
@@ -570,7 +570,7 @@ const latestStable = stableTags[0]; // e.g., "v0.57.5"
 - [Act (local testing tool)](https://github.com/nektos/act)
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [Semantic Versioning](https://semver.org/)
-- [Lerna documentation](https://lerna.js.org/)
+- [NX Release documentation](https://nx.dev/features/manage-releases)
 
 ## CI/CD Integration
 

@@ -45,10 +45,16 @@ export class StackblitzDependencies {
         '@types/google.visualization'
     ];
 
-    static getDependencies(packageInfo: Record<string, any>, lernaInfo: Record<string, any>): Record<string, any> {
+    /**
+     * Get dependencies for StackBlitz project
+     * @param packageInfo Root package.json
+     * @param version Monorepo version (from NX Release)
+     * @returns Dependencies object
+     */
+    static getDependencies(packageInfo: Record<string, any>, version: string): Record<string, any> {
         const _dependencies: Record<string, any> = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = lernaInfo.version));
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = version));
 
         [...this._dependencies, ...this._ngDependencies].forEach((dep) => {
             if (packageInfo.dependencies && packageInfo.dependencies[dep]) {

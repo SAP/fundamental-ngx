@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
-import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 
 // Import Fundamental Styles
 import 'fundamental-styles/dist/paddings.css';
@@ -17,7 +16,7 @@ import '@ui5/webcomponents-icons/dist/settings.js';
     selector: 'ui5-icon-basic-example',
     templateUrl: './basic-sample.html',
     standalone: true,
-    imports: [Icon, Label]
+    imports: [Icon]
 })
 export class IconBasicExample {
     readonly basicIcons = signal([

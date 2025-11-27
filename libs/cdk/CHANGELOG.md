@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.24...v0.58.0-rc.25) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.58.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.23...v0.58.0-rc.24) (2025-11-26)
+
+
+### Bug Fixes
+
+* **core:** add fix for Combobox incorrect behavior ([#13613](https://github.com/SAP/fundamental-ngx/issues/13613)) ([f62b7e1](https://github.com/SAP/fundamental-ngx/commit/f62b7e1ba5f0abe8d88cd74b8c7b252da349189d))
+
+
+
+
+
+# [0.58.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.22...v0.58.0-rc.23) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.58.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.21...v0.58.0-rc.22) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.58.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.20...v0.58.0-rc.21) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.58.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.19...v0.58.0-rc.20) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 # [0.58.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.18...v0.58.0-rc.19) (2025-11-25)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
