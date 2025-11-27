@@ -4,8 +4,9 @@ on:
     pull_request:
 
 env:
+    NODE_VERSION: '22.x'
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
-    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 1
+    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 3
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
     NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
@@ -19,13 +20,17 @@ jobs:
     nx_agents:
         name: Nx Cloud Agent ${{ matrix.agent }}
         runs-on: ubuntu-latest
+        timeout-minutes: 60
         strategy:
             matrix:
                 agent: [1, 2, 3]
-                node-version: [22.x]
         steps:
             - uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 1 # Shallow clone for agents (they don't need git history)
             - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
             - name: set up xvfb
               run: |
                   export DISPLAY=:99
@@ -55,6 +60,8 @@ jobs:
                   main-branch-name: main
 
             - uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
 
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
@@ -77,6 +84,14 @@ jobs:
 
             - name: Text workspace tags
               run: npx nx run nx-plugin:test --skip-nx-cache
+
+            # Stop NX Cloud agents immediately if any step fails
+            # This prevents agents from running indefinitely when the main job fails
+            - name: Stop Nx Cloud agents on failure
+              if: failure()
+              run: npx --yes nx-cloud@latest stop-all-agents
+              env:
+                  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
     # e2e_test:
     #     runs-on: ubuntu-latest
@@ -133,6 +148,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4.2.2
-            - uses: ./.github/actions/nodejs
+              with:
+                  fetch-depth: 1
             - name: Stop all running agents for this CI run
-              run: npx nx-cloud stop-all-agents
+              run: npx --yes nx-cloud@latest stop-all-agents
+              env:
+                  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
