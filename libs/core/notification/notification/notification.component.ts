@@ -311,7 +311,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         if (this._router && this._notificationRef) {
             this._router.events
                 .pipe(
-                    filter((event) => event instanceof NavigationStart && this.closeOnNavigation),
+                    filter(
+                        (event) => event instanceof NavigationStart && !!this._notificationConfig?.closeOnNavigation
+                    ),
                     takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe(() => this._notificationRef?.dismiss());
