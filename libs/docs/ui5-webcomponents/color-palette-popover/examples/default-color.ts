@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { ColorPaletteItem } from '@fundamental-ngx/ui5-webcomponents/color-palette-item';
 import { ColorPalettePopover } from '@fundamental-ngx/ui5-webcomponents/color-palette-popover';
@@ -38,7 +39,11 @@ export class ColorPalettePopoverDefaultColorSample {
         this.paletteOpen.set(!this.paletteOpen());
     }
 
-    onItemClick(event: any): void {
+    onItemClick(event: UI5WrapperCustomEvent<ColorPalettePopover, 'ui5ItemClick'>): void {
         this.selectedColor.set(event.detail.color);
+    }
+
+    onPaletteClose(): void {
+        this.paletteOpen.set(false);
     }
 }

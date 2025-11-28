@@ -1,6 +1,6 @@
 <div class="fd-container">
     <div class="fd-row">
-        <ui5-button id="colorPaletteBtn2" (click)="openColorPalette()" design="Emphasized">
+        <ui5-button id="colorPaletteBtn2" (ui5Click)="openColorPalette()" design="Emphasized">
             Select Color (with Default Button)
         </ui5-button>
 
@@ -10,6 +10,7 @@
             [defaultColor]="defaultColorValue"
             [showDefaultColor]="true"
             (ui5ItemClick)="onItemClick($event)"
+            (ui5Close)="onPaletteClose()"
         >
             @for (color of colors; track color) {
             <ui5-color-palette-item [value]="color"></ui5-color-palette-item>

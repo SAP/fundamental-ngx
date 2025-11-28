@@ -1,10 +1,10 @@
-import { Component, ElementRef, signal, viewChild } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { ColorPaletteItem } from '@fundamental-ngx/ui5-webcomponents/color-palette-item';
 import { ColorPalettePopover } from '@fundamental-ngx/ui5-webcomponents/color-palette-popover';
 
 // Import Fundamental Styles
-import 'fundamental-styles/dist/layout-grid.css';
 import 'fundamental-styles/dist/margins.css';
 
 @Component({
@@ -15,7 +15,6 @@ import 'fundamental-styles/dist/margins.css';
 })
 export class ColorPalettePopoverBasicSample {
     readonly selectedColor = signal<string>('#ff6699');
-    readonly openButton = viewChild<ElementRef>('openButton');
 
     readonly defaultColors = [
         '#ff6699',
@@ -38,7 +37,11 @@ export class ColorPalettePopoverBasicSample {
         this.paletteOpen.set(!this.paletteOpen());
     }
 
-    onItemClick(event: any): void {
+    onItemClick(event: UI5WrapperCustomEvent<ColorPalettePopover, 'ui5ItemClick'>): void {
         this.selectedColor.set(event.detail.color);
+    }
+
+    onPaletteClose(): void {
+        this.paletteOpen.set(false);
     }
 }
