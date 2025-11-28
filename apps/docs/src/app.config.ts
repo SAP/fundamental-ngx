@@ -10,7 +10,7 @@ import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 import { BehaviorSubject } from 'rxjs';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import packageJson from '../../../libs/core/package.json';
+import packageJson from '../../../package.json';
 import { ROUTES as applicationRoutes } from './environments/app.routes';
 import { translations } from './environments/translations';
 
