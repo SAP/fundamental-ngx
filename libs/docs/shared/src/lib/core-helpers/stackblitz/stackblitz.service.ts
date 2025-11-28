@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import sdk from '@stackblitz/sdk';
 import { first, tap, zip } from 'rxjs';
@@ -66,14 +66,34 @@ function extractComponentMetadata(code: string): {
 
 @Injectable()
 export class StackblitzService {
+    // Public readonly accessors
+    get styles(): string {
+        return this._styles();
+    }
+    get tsconfig(): string {
+        return this._tsconfig();
+    }
+    get angular(): string {
+        return this._angular();
+    }
+    get packageJson(): string {
+        return this._packageJson();
+    }
+    get stackblitzrc(): string {
+        return this._stackblitzrc();
+    }
+
+    // Preserved properties for API compatibility (currently unused but kept for potential future use)
     main: string;
-    styles: string;
-    tsconfig: string;
-    angular: string;
-    packageJson: string;
-    stackblitzrc: string;
     fioriFonts: string;
     horizonFonts: string;
+
+    // Signals for reactive state management
+    private readonly _styles = signal<string>('');
+    private readonly _tsconfig = signal<string>('');
+    private readonly _angular = signal<string>('');
+    private readonly _packageJson = signal<string>('');
+    private readonly _stackblitzrc = signal<string>('');
 
     /** @hidden */
     private readonly _themingService = inject(ThemingService, {
@@ -96,11 +116,11 @@ export class StackblitzService {
             .pipe(
                 first(),
                 tap(([styles, tsconfig, angular, packageJson, stackblitzrc]) => {
-                    this.styles = styles;
-                    this.tsconfig = tsconfig;
-                    this.angular = angular;
-                    this.packageJson = this._setDependencies(packageJson);
-                    this.stackblitzrc = stackblitzrc;
+                    this._styles.set(styles);
+                    this._tsconfig.set(tsconfig);
+                    this._angular.set(angular);
+                    this._packageJson.set(this._setDependencies(packageJson));
+                    this._stackblitzrc.set(stackblitzrc);
                 })
             )
             .subscribe();

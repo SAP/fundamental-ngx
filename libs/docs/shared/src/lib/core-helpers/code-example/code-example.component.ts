@@ -1,20 +1,22 @@
-import { AsyncPipe, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    HostListener,
-    Input,
-    OnInit,
-    QueryList,
-    ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    effect,
+    inject,
+    input,
+    signal,
+    viewChildren
 } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageStripAlertService, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
-import { Observable, ReplaySubject, isObservable, of, shareReplay, switchMap, tap, zip } from 'rxjs';
+import { isObservable, of, shareReplay, switchMap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 import { CopyService } from '../../services/copy.service';
 import { height } from '../../utilities';
@@ -26,11 +28,6 @@ enum ExampleEntityState {
     loading,
     success,
     error
-}
-
-interface ExamplesEntity {
-    state: ExampleEntityState;
-    exampleFiles: ExampleFile<string>[];
 }
 
 @Component({
@@ -46,46 +43,36 @@ interface ExamplesEntity {
         MessageStripComponent,
         FDP_ICON_TAB_BAR,
         CodeSnippetComponent,
-        AsyncPipe,
         TitleCasePipe
     ]
 })
-export class CodeExampleComponent implements OnInit {
-    @ViewChildren(CodeSnippetComponent)
-    codeElements: QueryList<ElementRef>;
+export class CodeExampleComponent {
+    // Modern viewChildren query with signals
+    readonly codeElements = viewChildren(CodeSnippetComponent, { read: ElementRef });
 
     /**
      * List of files to display in this code example.
      */
-    @Input() set exampleFiles(files: ExampleFile[]) {
-        this._displayedFiles.next(files);
-    }
+    readonly exampleFiles = input<ExampleFile[]>([]);
 
-    exampleFilesNetworkEntity$: Observable<ExamplesEntity>;
-    states = ExampleEntityState;
-    /**
-     * @hidden
-     */
-    _displayedFiles: ReplaySubject<ExampleFile[]> = new ReplaySubject<ExampleFile[]>(1);
-    _exampleFiles: ExampleFile<string, string, string>[];
-    isOpen = false;
+    // State signals
+    readonly states = ExampleEntityState;
+    readonly isOpen = signal(false);
+    readonly smallScreen = signal(false); // Initialize with false, will be set correctly in effect
+    readonly activeIndex = signal(0);
 
-    smallScreen: boolean;
+    // Computed signals
+    readonly expandIcon = computed(() => (this.isOpen() ? 'navigation-up-arrow' : 'navigation-down-arrow'));
 
-    activeIndex = 0;
+    // Convert observable to signal for template
+    readonly exampleFilesNetworkEntity = toSignal(
+        toObservable(this.exampleFiles).pipe(
+            switchMap((exampleFiles) => {
+                if (!exampleFiles || exampleFiles.length === 0) {
+                    return of({ state: ExampleEntityState.loading, exampleFiles: [] });
+                }
 
-    get expandIcon(): string {
-        return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
-    }
-
-    constructor(
-        private copyService: CopyService,
-        private messageStripAlertService: MessageStripAlertService,
-        private stackBlitzService: StackblitzService
-    ) {
-        this.exampleFilesNetworkEntity$ = this._displayedFiles.pipe(
-            switchMap((exampleFiles: ExampleFile[]) =>
-                zip(
+                return zip(
                     exampleFiles.map((exampleFile) =>
                         zip([
                             isObservable(exampleFile.code) ? exampleFile.code : of(exampleFile.code),
@@ -124,32 +111,51 @@ export class CodeExampleComponent implements OnInit {
                             state: ExampleEntityState.error,
                             exampleFiles: []
                         })
-                    ),
-                    tap(({ exampleFiles: loadedFiles }) => (this._exampleFiles = loadedFiles))
-                )
-            ),
+                    )
+                );
+            }),
             shareReplay(1)
-        );
-    }
+        ),
+        { initialValue: { state: ExampleEntityState.loading, exampleFiles: [] } }
+    );
 
-    @HostListener('window:resize', ['$event'])
-    onResize(): void {
-        this.smallScreen = window.innerWidth <= 768;
+    // Services
+    private readonly copyService = inject(CopyService);
+    private readonly messageStripAlertService = inject(MessageStripAlertService);
+    private readonly stackBlitzService = inject(StackblitzService);
+
+    constructor() {
+        // Listen to window resize with effect (zoneless-compatible)
+        if (typeof window !== 'undefined') {
+            effect((onCleanup): void => {
+                const handleResize = (): void => this.smallScreen.set(window.innerWidth <= 768);
+
+                // Set initial value on effect initialization
+                handleResize();
+
+                // Signal updates automatically trigger change detection in both zone and zoneless modes
+                window.addEventListener('resize', handleResize);
+                onCleanup(() => window.removeEventListener('resize', handleResize));
+            });
+        }
     }
 
     openStackBlitz(): void {
-        this.stackBlitzService.openCode(this._exampleFiles);
+        const entity = this.exampleFilesNetworkEntity();
+        if (entity?.exampleFiles) {
+            this.stackBlitzService.openCode(entity.exampleFiles);
+        }
     }
 
     copyText(): void {
-        this.copyService.copyText(this._exampleFiles[this.activeIndex].code);
-        this.messageStripAlertService.open({
-            content: 'Code copied!',
-            messageStrip: { type: 'success', duration: 5000, mousePersist: true }
-        });
-    }
-
-    ngOnInit(): void {
-        this.smallScreen = window.innerWidth <= 768;
+        const entity = this.exampleFilesNetworkEntity();
+        const index = this.activeIndex();
+        if (entity?.exampleFiles?.[index]) {
+            this.copyService.copyText(entity.exampleFiles[index].code);
+            this.messageStripAlertService.open({
+                content: 'Code copied!',
+                messageStrip: { type: 'success', duration: 5000, mousePersist: true }
+            });
+        }
     }
 }
