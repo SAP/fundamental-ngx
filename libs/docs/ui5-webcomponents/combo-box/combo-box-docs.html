@@ -1,0 +1,76 @@
+<fd-docs-section-title id="basic" componentName="combo-box"> Basic ComboBox </fd-docs-section-title>
+<description>
+    The <code>ui5-combobox</code> component allows users to select a value from a predefined list or enter a custom
+    value. It combines the functionality of a dropdown and an input field. Use <code>ui5-cb-item</code> components as
+    children to define the available options. The <code>ui5Change</code> event fires when the value is changed.
+</description>
+<component-example>
+    <ui5-combo-box-basic-sample></ui5-combo-box-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExamples()" />
+
+<fd-docs-section-title id="value-state" componentName="combo-box"> Value States </fd-docs-section-title>
+<description>
+    The <code>valueState</code> property provides visual feedback about the input validation. Available states include
+    <code>None</code> (default), <code>Positive</code>, <code>Critical</code>, <code>Negative</code>, and
+    <code>Information</code>. Each state displays a different color and icon to indicate the validation status.
+</description>
+<component-example>
+    <ui5-combo-box-value-state-sample></ui5-combo-box-value-state-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExamples()" />
+
+<fd-docs-section-title id="filter" componentName="combo-box"> Filter Types </fd-docs-section-title>
+<description>
+    The <code>filter</code> property controls how items are filtered when the user types. Available options include
+    <code>StartsWithPerTerm</code> (default - matches items where the search value appears at the start of the text or
+    at the start of any word within the text, eg. check the string "Britain"), <code>StartsWith</code> (matches items
+    starting with typed text), <code>Contains</code> (matches items containing typed text), and <code>None</code>
+    (no filtering).
+</description>
+<component-example>
+    <ui5-combo-box-filter-sample></ui5-combo-box-filter-sample>
+</component-example>
+<code-example [exampleFiles]="filterExamples()" />
+
+<fd-docs-section-title id="states" componentName="combo-box"> Component States </fd-docs-section-title>
+<description>
+    The ComboBox supports various states: <code>disabled</code> (completely non-interactive),
+    <code>readonly</code> (displays selected value but cannot be changed), <code>required</code> (indicates required
+    field), and <code>loading</code> (shows loading indicator in the picker).
+</description>
+<component-example>
+    <ui5-combo-box-states-sample></ui5-combo-box-states-sample>
+</component-example>
+<code-example [exampleFiles]="statesExamples()" />
+
+<fd-docs-section-title id="additional-text" componentName="combo-box"> Additional Text </fd-docs-section-title>
+<description>
+    Use the <code>additionalText</code> property on <code>ui5-cb-item</code> to display supplementary information next
+    to the main text. This is useful for showing codes, descriptions, or other contextual information alongside the
+    primary item text.
+</description>
+<component-example>
+    <ui5-combo-box-additional-text-sample></ui5-combo-box-additional-text-sample>
+</component-example>
+<code-example [exampleFiles]="additionalTextExamples()" />
+
+<fd-docs-section-title id="clear-icon" componentName="combo-box"> Clear Icon </fd-docs-section-title>
+<description>
+    The <code>showClearIcon</code> property enables a clear icon in the input field, allowing users to easily clear the
+    selected value.
+</description>
+<component-example>
+    <ui5-combo-box-clear-icon-sample></ui5-combo-box-clear-icon-sample>
+</component-example>
+<code-example [exampleFiles]="clearIconExamples()" />
+
+<fd-docs-section-title id="items-grouping" componentName="combo-box"> Items Grouping </fd-docs-section-title>
+<description>
+    The <code>ui5-cb-item-group</code> component allows you to group items within the ComboBox, making it easier for
+    users to find related options.
+</description>
+<component-example>
+    <ui5-combo-box-items-grouping-sample></ui5-combo-box-items-grouping-sample>
+</component-example>
+<code-example [exampleFiles]="itemsGroupingExamples()" />

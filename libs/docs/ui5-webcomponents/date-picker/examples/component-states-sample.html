@@ -1,0 +1,24 @@
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Normal:</label>
+    <ui5-date-picker value="2024-01-15" placeholder="Normal state"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Disabled:</label>
+    <ui5-date-picker value="2024-01-15" [disabled]="true" placeholder="Disabled state"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Readonly:</label>
+    <ui5-date-picker value="2024-01-15" [readonly]="true" placeholder="Readonly state"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Required *:</label>
+    <ui5-date-picker [required]="true" placeholder="Required field"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Required with Error *:</label>
+    <ui5-date-picker [required]="true" valueState="Negative" placeholder="Required field with error"></ui5-date-picker>
+</div>

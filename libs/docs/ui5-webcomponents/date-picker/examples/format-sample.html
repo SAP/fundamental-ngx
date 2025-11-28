@@ -1,0 +1,24 @@
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">ISO Format (yyyy-MM-dd):</label>
+    <ui5-date-picker [value]="isoDate()" formatPattern="yyyy-MM-dd"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">US Format (MM/dd/yyyy):</label>
+    <ui5-date-picker [value]="usDate()" formatPattern="MM/dd/yyyy"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">European Format (dd/MM/yyyy):</label>
+    <ui5-date-picker [value]="europeanDate()" formatPattern="dd/MM/yyyy"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Long Format (dd MMMM yyyy):</label>
+    <ui5-date-picker [value]="longDate()" formatPattern="dd MMMM yyyy"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Short Format (dd/MM/yy):</label>
+    <ui5-date-picker formatPattern="dd/MM/yy"></ui5-date-picker>
+</div>

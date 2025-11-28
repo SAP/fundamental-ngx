@@ -1,0 +1,34 @@
+<ui5-button id="colorPaletteBtn3" (ui5Click)="openColorPalette()" design="Emphasized">
+    Choose Color (with More Colors)
+</ui5-button>
+
+<ui5-color-palette-popover
+    opener="colorPaletteBtn3"
+    [open]="paletteOpen()"
+    [defaultColor]="selectedColor()"
+    [showMoreColors]="true"
+    [showRecentColors]="true"
+    (ui5ItemClick)="onItemClick($event)"
+    (ui5Close)="onPaletteClose()"
+>
+    @for (color of colors; track color) {
+    <ui5-color-palette-item [value]="color"></ui5-color-palette-item>
+    }
+</ui5-color-palette-popover>
+
+@if (selectedColor()) {
+<div class="fd-margin-top--sm">
+    <strong>Selected Color:</strong>
+    <span
+        [style.background-color]="selectedColor()"
+        [style.display]="'inline-block'"
+        [style.width]="'60px'"
+        [style.height]="'30px'"
+        [style.border]="'1px solid #ccc'"
+        [style.margin-left]="'10px'"
+        [style.vertical-align]="'middle'"
+    >
+    </span>
+    <span class="fd-margin-begin--sm">{{ selectedColor() }}</span>
+</div>
+}

@@ -61,6 +61,8 @@ export class StackblitzDependencies {
                 _dependencies[dep] = packageInfo.dependencies[dep];
             } else if (packageInfo.devDependencies && packageInfo.devDependencies[dep]) {
                 _dependencies[dep] = packageInfo.devDependencies[dep];
+            } else if (packageInfo.peerDependencies && packageInfo.peerDependencies[dep]) {
+                _dependencies[dep] = packageInfo.peerDependencies[dep];
             } else {
                 throw new Error('Dependency ' + dep + ' not found in package.json');
             }

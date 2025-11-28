@@ -30,4 +30,7 @@ export class NotificationConfig<T = any> {
      * @default true
      */
     shouldTrapFocus?: boolean = true;
+
+    /** Whether to dismiss the notification on router navigation start. */
+    closeOnNavigation?: boolean = true;
 }
