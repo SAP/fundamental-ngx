@@ -38,6 +38,43 @@ Example codes are being loaded with the HTTP request to the `docs` folder, which
 Every major library has a provider for the name of it. For example when `@fundamental-ngx/core` library docs are being loaded,
 [CURRENT_LIB](libs/docs/shared/src/lib/utilities/libraries.ts) is set to `core`. This is used in the
 [getAssetFromModuleAssets](libs/docs/shared/src/lib/getAsset.ts) function, which is used to load the example codes.
+
+### StackBlitz Integration
+
+The documentation includes StackBlitz integration that allows users to open examples in an interactive online IDE.
+The StackBlitz service automatically creates a working Angular project based on the example files.
+
+**Important:** To ensure StackBlitz files match the actual example filenames, use the `originalFileName` property
+in the `ExampleFile` configuration. This property should contain the base filename (without extension) from the
+examples folder. For example, if your example files are `button-sample.ts` and `button-sample.html`, set:
+
+```typescript
+examples: ExampleFile[] = [
+    {
+        language: 'html',
+        code: getAssetFromModuleAssets('button-sample.html'),
+        fileName: 'button-example',  // Display name in docs
+        originalFileName: 'button-sample'  // Actual filename for StackBlitz
+    },
+    {
+        language: 'typescript',
+        component: 'ButtonExample',
+        code: getAssetFromModuleAssets('button-sample.ts'),
+        fileName: 'button-example',
+        originalFileName: 'button-sample'
+    }
+];
+```
+
+The StackBlitz service will:
+
+1. Extract metadata (selector, templateUrl, styleUrls) from TypeScript files
+2. Use the `originalFileName` or extracted metadata to create files with correct names
+3. Ensure the generated files match the component's selector and template references
+
+This prevents mismatches where the StackBlitz files (e.g., `button-example.component.ts`) don't match
+the component's internal references (e.g., `selector: 'ui5-button-sample'`, `templateUrl: './button-sample.html'`).
+
 Documentation Application has assets configured in the [project.json](apps/docs/project.json) file like this:
 
 ```json
