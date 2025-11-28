@@ -30,16 +30,15 @@ export class CardDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'card-example'
+            originalFileName: 'card-example'
         },
         {
             language: 'typescript',
             component: 'CardExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'card-example'
+            originalFileName: 'card-example'
         }
     ]);
 
-    // Computed property for template binding (Angular 20 feature)
     readonly examples = computed(() => this.exampleFiles());
 }

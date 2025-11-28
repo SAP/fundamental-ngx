@@ -49,13 +49,13 @@ export class IconDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'icon-basic-example'
+            originalFileName: 'icon-basic-example'
         },
         {
             language: 'typescript',
             component: 'IconBasicExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'icon-basic-example'
+            originalFileName: 'icon-basic-example'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class IconDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(designsHtml),
-            fileName: 'icon-designs-example'
+            originalFileName: 'icon-designs-example'
         },
         {
             language: 'typescript',
             component: 'IconDesignsExample',
             code: getAssetFromModuleAssets(designsTs),
-            fileName: 'icon-designs-example'
+            originalFileName: 'icon-designs-example'
         }
     ]);
 
@@ -77,13 +77,13 @@ export class IconDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(interactiveHtml),
-            fileName: 'icon-interactive-example'
+            originalFileName: 'icon-interactive-example'
         },
         {
             language: 'typescript',
             component: 'IconInteractiveExample',
             code: getAssetFromModuleAssets(interactiveTs),
-            fileName: 'icon-interactive-example'
+            originalFileName: 'icon-interactive-example'
         }
     ]);
 
@@ -91,13 +91,13 @@ export class IconDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customizationHtml),
-            fileName: 'icon-customization-example'
+            originalFileName: 'icon-customization-example'
         },
         {
             language: 'typescript',
             component: 'IconCustomizationExample',
             code: getAssetFromModuleAssets(customizationTs),
-            fileName: 'icon-customization-example'
+            originalFileName: 'icon-customization-example'
         }
     ]);
 
@@ -105,13 +105,13 @@ export class IconDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(tntHtml),
-            fileName: 'icon-tnt-example'
+            originalFileName: 'icon-tnt-example'
         },
         {
             language: 'typescript',
             component: 'IconTntExample',
             code: getAssetFromModuleAssets(tntTs),
-            fileName: 'icon-tnt-example'
+            originalFileName: 'icon-tnt-example'
         }
     ]);
 
@@ -119,13 +119,13 @@ export class IconDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(businessSuiteHtml),
-            fileName: 'icon-business-suite-example'
+            originalFileName: 'icon-business-suite-example'
         },
         {
             language: 'typescript',
             component: 'IconBusinessSuiteExample',
             code: getAssetFromModuleAssets(businessSuiteTs),
-            fileName: 'icon-business-suite-example'
+            originalFileName: 'icon-business-suite-example'
         }
     ]);
 

@@ -33,13 +33,13 @@ export class ExpandableTextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'expandable-text-basic-example'
+            originalFileName: 'expandable-text-basic-example'
         },
         {
             language: 'typescript',
             component: 'ExpandableTextBasicExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'expandable-text-basic-example'
+            originalFileName: 'expandable-text-basic-example'
         }
     ]);
 
@@ -47,13 +47,13 @@ export class ExpandableTextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(overflowModePopoverHtml),
-            fileName: 'expandable-text-overflow-mode-popover-example'
+            originalFileName: 'expandable-text-overflow-mode-popover-example'
         },
         {
             language: 'typescript',
             component: 'ExpandableTextOverflowModesExample',
             code: getAssetFromModuleAssets(overflowModesPopoverTs),
-            fileName: 'expandable-text-overflow-mode-popover-example'
+            originalFileName: 'expandable-text-overflow-mode-popover-example'
         }
     ]);
 }

@@ -45,13 +45,13 @@ export class TextAreaDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'TextAreaBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -59,13 +59,13 @@ export class TextAreaDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(growingHtml),
-            fileName: 'growing'
+            originalFileName: 'growing'
         },
         {
             language: 'typescript',
             component: 'TextAreaGrowingSample',
             code: getAssetFromModuleAssets(growingTs),
-            fileName: 'growing'
+            originalFileName: 'growing'
         }
     ]);
 
@@ -73,13 +73,13 @@ export class TextAreaDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(characterLimitHtml),
-            fileName: 'character-limit'
+            originalFileName: 'character-limit'
         },
         {
             language: 'typescript',
             component: 'TextAreaCharacterLimitSample',
             code: getAssetFromModuleAssets(characterLimitTs),
-            fileName: 'character-limit'
+            originalFileName: 'character-limit'
         }
     ]);
 
@@ -87,13 +87,13 @@ export class TextAreaDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStatesHtml),
-            fileName: 'value-states'
+            originalFileName: 'value-states'
         },
         {
             language: 'typescript',
             component: 'TextAreaValueStatesSample',
             code: getAssetFromModuleAssets(valueStatesTs),
-            fileName: 'value-states'
+            originalFileName: 'value-states'
         }
     ]);
 
@@ -101,13 +101,13 @@ export class TextAreaDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(eventsHtml),
-            fileName: 'events'
+            originalFileName: 'events'
         },
         {
             language: 'typescript',
             component: 'TextAreaEventsSample',
             code: getAssetFromModuleAssets(eventsTs),
-            fileName: 'events'
+            originalFileName: 'events'
         }
     ]);
 

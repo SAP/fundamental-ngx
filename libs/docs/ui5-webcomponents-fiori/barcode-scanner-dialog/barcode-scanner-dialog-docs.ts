@@ -29,13 +29,13 @@ export class BarcodeScannerDialogDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'barcode-scanner-dialog-example'
+            originalFileName: 'barcode-scanner-dialog-example'
         },
         {
             language: 'typescript',
             component: 'BarcodeScannerDialogExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'barcode-scanner-dialog-example'
+            originalFileName: 'barcode-scanner-dialog-example'
         }
     ]);
 

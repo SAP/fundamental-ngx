@@ -41,13 +41,13 @@ export class TokenizerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'TokenizerBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -55,13 +55,13 @@ export class TokenizerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(multiLineHtml),
-            fileName: 'multi-line'
+            originalFileName: 'multi-line'
         },
         {
             language: 'typescript',
             component: 'TokenizerMultiLineSample',
             code: getAssetFromModuleAssets(multiLineTs),
-            fileName: 'multi-line'
+            originalFileName: 'multi-line'
         }
     ]);
 
@@ -69,13 +69,13 @@ export class TokenizerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(readonlyHtml),
-            fileName: 'readonly'
+            originalFileName: 'readonly'
         },
         {
             language: 'typescript',
             component: 'TokenizerReadonlySample',
             code: getAssetFromModuleAssets(readonlyTs),
-            fileName: 'readonly'
+            originalFileName: 'readonly'
         }
     ]);
 
@@ -83,13 +83,13 @@ export class TokenizerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(clearAllHtml),
-            fileName: 'clear-all'
+            originalFileName: 'clear-all'
         },
         {
             language: 'typescript',
             component: 'TokenizerClearAllSample',
             code: getAssetFromModuleAssets(clearAllTs),
-            fileName: 'clear-all'
+            originalFileName: 'clear-all'
         }
     ]);
 

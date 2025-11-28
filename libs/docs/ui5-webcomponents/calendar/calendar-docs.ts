@@ -35,13 +35,13 @@ export class CalendarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'calendar-example'
+            originalFileName: 'calendar-example'
         },
         {
             language: 'typescript',
             component: 'CalendarExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'calendar-example'
+            originalFileName: 'calendar-example'
         }
     ]);
 

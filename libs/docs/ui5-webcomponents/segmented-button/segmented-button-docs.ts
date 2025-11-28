@@ -29,13 +29,13 @@ export class SegmentedButtonDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'segmented-button-example'
+            originalFileName: 'segmented-button-example'
         },
         {
             language: 'typescript',
             component: 'SegmentedButtonExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'segmented-button-example'
+            originalFileName: 'segmented-button-example'
         }
     ]);
 

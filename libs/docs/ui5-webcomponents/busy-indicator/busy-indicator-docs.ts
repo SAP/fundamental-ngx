@@ -34,13 +34,13 @@ export class BusyIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicBusyIndicatorSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ];
 
@@ -48,13 +48,13 @@ export class BusyIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('sizes.html'),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         },
         {
             language: 'typescript',
             component: 'SizesBusyIndicatorSample',
             code: getAssetFromModuleAssets('sizes.ts'),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         }
     ];
 
@@ -62,13 +62,13 @@ export class BusyIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('text-placement.html'),
-            fileName: 'text-placement'
+            originalFileName: 'text-placement'
         },
         {
             language: 'typescript',
             component: 'TextPlacementBusyIndicatorSample',
             code: getAssetFromModuleAssets('text-placement.ts'),
-            fileName: 'text-placement'
+            originalFileName: 'text-placement'
         }
     ];
 
@@ -76,13 +76,13 @@ export class BusyIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('delay.html'),
-            fileName: 'delay'
+            originalFileName: 'delay'
         },
         {
             language: 'typescript',
             component: 'DelayBusyIndicatorSample',
             code: getAssetFromModuleAssets('delay.ts'),
-            fileName: 'delay'
+            originalFileName: 'delay'
         }
     ];
 }

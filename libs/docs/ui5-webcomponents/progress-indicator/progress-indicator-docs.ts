@@ -37,13 +37,13 @@ export class ProgressIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicExampleHtml),
-            fileName: 'basic-progress-indicator'
+            originalFileName: 'basic-progress-indicator'
         },
         {
             language: 'typescript',
             component: 'BasicProgressIndicatorExample',
             code: getAssetFromModuleAssets(basicExampleTs),
-            fileName: 'basic-progress-indicator'
+            originalFileName: 'basic-progress-indicator'
         }
     ]);
 
@@ -51,13 +51,13 @@ export class ProgressIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customDisplayExampleHtml),
-            fileName: 'custom-display-progress-indicator'
+            originalFileName: 'custom-display-progress-indicator'
         },
         {
             language: 'typescript',
             component: 'CustomDisplayProgressIndicatorExample',
             code: getAssetFromModuleAssets(customDisplayExampleTs),
-            fileName: 'custom-display-progress-indicator'
+            originalFileName: 'custom-display-progress-indicator'
         }
     ]);
 
@@ -65,13 +65,13 @@ export class ProgressIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStateExampleHtml),
-            fileName: 'value-state-progress-indicator'
+            originalFileName: 'value-state-progress-indicator'
         },
         {
             language: 'typescript',
             component: 'ValueStateProgressIndicatorExample',
             code: getAssetFromModuleAssets(valueStateExampleTs),
-            fileName: 'value-state-progress-indicator'
+            originalFileName: 'value-state-progress-indicator'
         }
     ]);
 

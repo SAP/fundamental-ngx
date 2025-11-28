@@ -37,8 +37,10 @@ export const getAssetFromModuleAssets = (
 export const getExampleFile = (exampleFileName: string, exampleFile: Partial<ExampleFile> = {}): ExampleFile => {
     const fileExtension = getFileExtensionFromName(exampleFileName);
     const language = fileExtensionToLanguage[fileExtension] || fileExtension;
+    const extractedFileName = exampleFileName.replace(new RegExp(`.(component.|directive.)?${fileExtension}$`), '');
     return {
-        fileName: exampleFileName.replace(new RegExp(`.(component.|directive.)?${fileExtension}$`), ''),
+        fileName: extractedFileName,
+        originalFileName: extractedFileName,
         name: exampleFileName,
         language,
         code: getAssetFromModuleAssets(exampleFileName),

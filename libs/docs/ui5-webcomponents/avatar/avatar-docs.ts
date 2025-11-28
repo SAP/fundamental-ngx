@@ -32,13 +32,13 @@ export class AvatarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicAvatarSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ];
 
@@ -46,13 +46,13 @@ export class AvatarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('avatar-types.html'),
-            fileName: 'avatar-types'
+            originalFileName: 'avatar-types'
         },
         {
             language: 'typescript',
             component: 'AvatarTypesSample',
             code: getAssetFromModuleAssets('avatar-types.ts'),
-            fileName: 'avatar-types'
+            originalFileName: 'avatar-types'
         }
     ];
 }

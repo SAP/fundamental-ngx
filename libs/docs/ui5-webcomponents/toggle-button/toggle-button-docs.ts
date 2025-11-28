@@ -43,12 +43,12 @@ export class ToggleButtonDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(basicSampleHtml)),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(basicSampleTs)),
-            fileName: 'basic-sample',
+            originalFileName: 'basic-sample',
             component: 'ToggleButtonBasicSample'
         }
     ]);
@@ -57,12 +57,12 @@ export class ToggleButtonDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(designsHtml)),
-            fileName: 'designs'
+            originalFileName: 'designs'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(designsTs)),
-            fileName: 'designs',
+            originalFileName: 'designs',
             component: 'ToggleButtonDesignsSample'
         }
     ]);
@@ -71,12 +71,12 @@ export class ToggleButtonDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(iconsHtml)),
-            fileName: 'icons'
+            originalFileName: 'icons'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(iconsTs)),
-            fileName: 'icons',
+            originalFileName: 'icons',
             component: 'ToggleButtonIconsSample'
         }
     ]);
@@ -85,12 +85,12 @@ export class ToggleButtonDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(interactiveHtml)),
-            fileName: 'interactive'
+            originalFileName: 'interactive'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(interactiveTs)),
-            fileName: 'interactive',
+            originalFileName: 'interactive',
             component: 'ToggleButtonInteractiveSample'
         }
     ]);

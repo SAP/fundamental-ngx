@@ -49,13 +49,13 @@ export class DateRangePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'DateRangePickerBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class DateRangePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(delimiterSampleHtml),
-            fileName: 'delimiter-sample'
+            originalFileName: 'delimiter-sample'
         },
         {
             language: 'typescript',
             component: 'DateRangePickerDelimiterSample',
             code: getAssetFromModuleAssets(delimiterSampleTs),
-            fileName: 'delimiter-sample'
+            originalFileName: 'delimiter-sample'
         }
     ]);
 
@@ -77,13 +77,13 @@ export class DateRangePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(formatSampleHtml),
-            fileName: 'format-sample'
+            originalFileName: 'format-sample'
         },
         {
             language: 'typescript',
             component: 'DateRangePickerFormatSample',
             code: getAssetFromModuleAssets(formatSampleTs),
-            fileName: 'format-sample'
+            originalFileName: 'format-sample'
         }
     ]);
 
@@ -91,13 +91,13 @@ export class DateRangePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(minMaxSampleHtml),
-            fileName: 'min-max-sample'
+            originalFileName: 'min-max-sample'
         },
         {
             language: 'typescript',
             component: 'DateRangePickerMinMaxSample',
             code: getAssetFromModuleAssets(minMaxSampleTs),
-            fileName: 'min-max-sample'
+            originalFileName: 'min-max-sample'
         }
     ]);
 
@@ -105,13 +105,13 @@ export class DateRangePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStateSampleHtml),
-            fileName: 'value-state-sample'
+            originalFileName: 'value-state-sample'
         },
         {
             language: 'typescript',
             component: 'DateRangePickerValueStateSample',
             code: getAssetFromModuleAssets(valueStateSampleTs),
-            fileName: 'value-state-sample'
+            originalFileName: 'value-state-sample'
         }
     ]);
 
@@ -119,13 +119,13 @@ export class DateRangePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(componentStatesSampleHtml),
-            fileName: 'component-states-sample'
+            originalFileName: 'component-states-sample'
         },
         {
             language: 'typescript',
             component: 'DateRangePickerComponentStatesSample',
             code: getAssetFromModuleAssets(componentStatesSampleTs),
-            fileName: 'component-states-sample'
+            originalFileName: 'component-states-sample'
         }
     ]);
 

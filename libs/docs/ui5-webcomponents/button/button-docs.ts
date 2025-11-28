@@ -29,13 +29,13 @@ export class ButtonDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'button-example'
+            originalFileName: 'button-sample'
         },
         {
             language: 'typescript',
             component: 'ButtonExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'button-example'
+            originalFileName: 'button-sample'
         }
     ];
 }

@@ -42,7 +42,15 @@ export class StackblitzDependencies {
         'fast-deep-equal',
         'lodash-es',
         'zone.js',
-        '@types/google.visualization'
+        '@types/google.visualization',
+        '@ui5/webcomponents',
+        '@ui5/webcomponents-ai',
+        '@ui5/webcomponents-base',
+        '@ui5/webcomponents-fiori',
+        '@ui5/webcomponents-icons',
+        '@ui5/webcomponents-icons-business-suite',
+        '@ui5/webcomponents-icons-tnt',
+        '@ui5/webcomponents-theming'
     ];
 
     /**

@@ -33,13 +33,13 @@ export class RatingIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicExampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicRatingIndicatorExample',
             code: getAssetFromModuleAssets(basicExampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -47,13 +47,13 @@ export class RatingIndicatorDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(sizesExampleHtml),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         },
         {
             language: 'typescript',
             component: 'SizesRatingIndicatorExample',
             code: getAssetFromModuleAssets(sizesExampleTs),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         }
     ]);
 

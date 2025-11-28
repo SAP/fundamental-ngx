@@ -39,12 +39,12 @@ export class ToastDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(basicSampleHtml)),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(basicSampleTs)),
-            fileName: 'basic-sample',
+            originalFileName: 'basic-sample',
             component: 'ToastBasicSample'
         }
     ]);
@@ -53,12 +53,12 @@ export class ToastDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(placementHtml)),
-            fileName: 'placement'
+            originalFileName: 'placement'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(placementTs)),
-            fileName: 'placement',
+            originalFileName: 'placement',
             component: 'ToastPlacementSample'
         }
     ]);
@@ -67,12 +67,12 @@ export class ToastDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(durationHtml)),
-            fileName: 'duration'
+            originalFileName: 'duration'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(durationTs)),
-            fileName: 'duration',
+            originalFileName: 'duration',
             component: 'ToastDurationSample'
         }
     ]);

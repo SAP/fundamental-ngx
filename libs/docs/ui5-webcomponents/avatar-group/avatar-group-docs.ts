@@ -29,13 +29,13 @@ export class AvatarGroupDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'avatar-group-example'
+            originalFileName: 'avatar-group-example'
         },
         {
             language: 'typescript',
             component: 'AvatarGroupExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'avatar-group-example'
+            originalFileName: 'avatar-group-example'
         }
     ];
 }

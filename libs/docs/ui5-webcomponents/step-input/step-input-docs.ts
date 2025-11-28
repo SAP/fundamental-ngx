@@ -41,13 +41,13 @@ export class StepInputDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicExampleHtml),
-            fileName: 'basic-step-input'
+            originalFileName: 'basic-step-input'
         },
         {
             language: 'typescript',
             component: 'BasicStepInputExample',
             code: getAssetFromModuleAssets(basicExampleTs),
-            fileName: 'basic-step-input'
+            originalFileName: 'basic-step-input'
         }
     ]);
 
@@ -55,13 +55,13 @@ export class StepInputDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(rangeExampleHtml),
-            fileName: 'range-step-input'
+            originalFileName: 'range-step-input'
         },
         {
             language: 'typescript',
             component: 'RangeStepInputExample',
             code: getAssetFromModuleAssets(rangeExampleTs),
-            fileName: 'range-step-input'
+            originalFileName: 'range-step-input'
         }
     ]);
 
@@ -69,13 +69,13 @@ export class StepInputDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(precisionExampleHtml),
-            fileName: 'precision-step-input'
+            originalFileName: 'precision-step-input'
         },
         {
             language: 'typescript',
             component: 'PrecisionStepInputExample',
             code: getAssetFromModuleAssets(precisionExampleTs),
-            fileName: 'precision-step-input'
+            originalFileName: 'precision-step-input'
         }
     ]);
 
@@ -83,13 +83,13 @@ export class StepInputDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStateExampleHtml),
-            fileName: 'value-state-step-input'
+            originalFileName: 'value-state-step-input'
         },
         {
             language: 'typescript',
             component: 'ValueStateStepInputExample',
             code: getAssetFromModuleAssets(valueStateExampleTs),
-            fileName: 'value-state-step-input'
+            originalFileName: 'value-state-step-input'
         }
     ]);
 

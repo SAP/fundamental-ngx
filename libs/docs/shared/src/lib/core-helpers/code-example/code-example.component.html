@@ -1,11 +1,11 @@
 <div class="docs-code-example-toolbar">
     <button
         fd-button
-        [glyph]="expandIcon"
-        [label]="(isOpen ? 'Hide' : 'Show') + ' Code'"
-        (click)="isOpen = !isOpen"
+        [glyph]="expandIcon()"
+        [label]="(isOpen() ? 'Hide' : 'Show') + ' Code'"
+        (click)="isOpen.set(!isOpen())"
     ></button>
-    @if (isOpen) {
+    @if (isOpen()) {
         <div>
             <button
                 fd-button
@@ -25,10 +25,10 @@
         </div>
     }
 </div>
-<div class="docs-html-example-container" [@height]="isOpen">
-    @if (isOpen) {
+<div class="docs-html-example-container" [@height]="isOpen()">
+    @if (isOpen()) {
         <div class="docs-code-example-content">
-            @if (exampleFilesNetworkEntity$ | async; as examples) {
+            @if (exampleFilesNetworkEntity(); as examples) {
                 @if (examples.state === states.loading) {
                     <div [style.text-align]="'center'" [style.padding.rem]="1">
                         <fd-busy-indicator
@@ -41,12 +41,15 @@
                     </div>
                 }
                 @if (examples.state === states.error) {
-                    <fd-message-strip type="error" (onDismiss)="isOpen = false">
+                    <fd-message-strip type="error" (onDismiss)="isOpen.set(false)">
                         Failed to load example files
                     </fd-message-strip>
                 }
                 @if (examples.state === states.success) {
-                    <fdp-icon-tab-bar (iconTabSelected)="activeIndex = $event.index" iconTabSize="responsive-paddings">
+                    <fdp-icon-tab-bar
+                        (iconTabSelected)="activeIndex.set($event.index)"
+                        iconTabSize="responsive-paddings"
+                    >
                         @for (file of examples.exampleFiles; track file; let i = $index) {
                             <fdp-icon-tab-bar-tab [label]="file.name || file.language | titlecase">
                                 <fd-code-snippet [file]="file"></fd-code-snippet>

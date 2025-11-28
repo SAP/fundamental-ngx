@@ -30,13 +30,13 @@ export class CarouselDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'carousel-example'
+            originalFileName: 'carousel-example'
         },
         {
             language: 'typescript',
             component: 'CarouselExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'carousel-example'
+            originalFileName: 'carousel-example'
         }
     ]);
 

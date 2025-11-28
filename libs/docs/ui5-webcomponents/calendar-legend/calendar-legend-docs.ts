@@ -35,13 +35,13 @@ export class CalendarLegendDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'CalendarLegendBasicExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -49,13 +49,13 @@ export class CalendarLegendDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('item-types.html'),
-            fileName: 'item-types'
+            originalFileName: 'item-types'
         },
         {
             language: 'typescript',
             component: 'CalendarLegendItemTypesExample',
             code: getAssetFromModuleAssets('item-types.ts'),
-            fileName: 'item-types'
+            originalFileName: 'item-types'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class CalendarLegendDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('hidden-items.html'),
-            fileName: 'hidden-items'
+            originalFileName: 'hidden-items'
         },
         {
             language: 'typescript',
             component: 'CalendarLegendHiddenItemsExample',
             code: getAssetFromModuleAssets('hidden-items.ts'),
-            fileName: 'hidden-items'
+            originalFileName: 'hidden-items'
         }
     ]);
 }

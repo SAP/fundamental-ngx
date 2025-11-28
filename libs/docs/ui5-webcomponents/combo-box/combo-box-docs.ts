@@ -53,13 +53,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'ComboBoxBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -67,13 +67,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStateHtml),
-            fileName: 'value-state'
+            originalFileName: 'value-state'
         },
         {
             language: 'typescript',
             component: 'ComboBoxValueStateSample',
             code: getAssetFromModuleAssets(valueStateTs),
-            fileName: 'value-state'
+            originalFileName: 'value-state'
         }
     ]);
 
@@ -81,13 +81,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(filterHtml),
-            fileName: 'filter'
+            originalFileName: 'filter'
         },
         {
             language: 'typescript',
             component: 'ComboBoxFilterSample',
             code: getAssetFromModuleAssets(filterTs),
-            fileName: 'filter'
+            originalFileName: 'filter'
         }
     ]);
 
@@ -95,13 +95,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(statesHtml),
-            fileName: 'states'
+            originalFileName: 'states'
         },
         {
             language: 'typescript',
             component: 'ComboBoxStatesSample',
             code: getAssetFromModuleAssets(statesTs),
-            fileName: 'states'
+            originalFileName: 'states'
         }
     ]);
 
@@ -109,13 +109,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(additionalTextHtml),
-            fileName: 'additional-text'
+            originalFileName: 'additional-text'
         },
         {
             language: 'typescript',
             component: 'ComboBoxAdditionalTextSample',
             code: getAssetFromModuleAssets(additionalTextTs),
-            fileName: 'additional-text'
+            originalFileName: 'additional-text'
         }
     ]);
 
@@ -123,13 +123,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(clearIconHtml),
-            fileName: 'clear-icon'
+            originalFileName: 'clear-icon'
         },
         {
             language: 'typescript',
             component: 'ComboBoxClearIconSample',
             code: getAssetFromModuleAssets(clearIconTs),
-            fileName: 'clear-icon'
+            originalFileName: 'clear-icon'
         }
     ]);
 
@@ -137,13 +137,13 @@ export class ComboBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(itemsGroupingHtml),
-            fileName: 'items-grouping'
+            originalFileName: 'items-grouping'
         },
         {
             language: 'typescript',
             component: 'ComboBoxItemsGroupingSample',
             code: getAssetFromModuleAssets(itemsGroupingTs),
-            fileName: 'items-grouping'
+            originalFileName: 'items-grouping'
         }
     ]);
 

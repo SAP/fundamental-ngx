@@ -49,13 +49,13 @@ export class TextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'TextBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class TextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(maxLinesHtml),
-            fileName: 'max-lines'
+            originalFileName: 'max-lines'
         },
         {
             language: 'typescript',
             component: 'TextMaxLinesSample',
             code: getAssetFromModuleAssets(maxLinesTs),
-            fileName: 'max-lines'
+            originalFileName: 'max-lines'
         }
     ]);
 
@@ -77,13 +77,13 @@ export class TextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(emptyIndicatorHtml),
-            fileName: 'empty-indicator'
+            originalFileName: 'empty-indicator'
         },
         {
             language: 'typescript',
             component: 'TextEmptyIndicatorSample',
             code: getAssetFromModuleAssets(emptyIndicatorTs),
-            fileName: 'empty-indicator'
+            originalFileName: 'empty-indicator'
         }
     ]);
 
@@ -91,13 +91,13 @@ export class TextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customStylingHtml),
-            fileName: 'custom-styling'
+            originalFileName: 'custom-styling'
         },
         {
             language: 'typescript',
             component: 'TextCustomStylingSample',
             code: getAssetFromModuleAssets(customStylingTs),
-            fileName: 'custom-styling'
+            originalFileName: 'custom-styling'
         }
     ]);
 
@@ -105,13 +105,13 @@ export class TextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(whiteSpaceHtml),
-            fileName: 'white-space'
+            originalFileName: 'white-space'
         },
         {
             language: 'typescript',
             component: 'WhiteSpaceSample',
             code: getAssetFromModuleAssets(whiteSpaceTs),
-            fileName: 'white-space'
+            originalFileName: 'white-space'
         }
     ]);
 
@@ -119,13 +119,13 @@ export class TextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(hyphenationHtml),
-            fileName: 'hyphenation'
+            originalFileName: 'hyphenation'
         },
         {
             language: 'typescript',
             component: 'TextHyphenationSample',
             code: getAssetFromModuleAssets(hyphenationTs),
-            fileName: 'hyphenation'
+            originalFileName: 'hyphenation'
         }
     ]);
 

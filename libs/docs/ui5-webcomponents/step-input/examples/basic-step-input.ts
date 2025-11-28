@@ -17,6 +17,8 @@ export class BasicStepInputExample {
     private readonly _stepValue = signal(50);
     private readonly _negativeValue = signal(-10);
 
+    private readonly test = signal('');
+
     readonly stepConfigurations = signal([
         {
             label: 'Default (step: 1)',

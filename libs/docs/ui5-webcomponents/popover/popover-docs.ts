@@ -31,13 +31,13 @@ export class PopoverDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-popover'
+            originalFileName: 'basic-popover'
         },
         {
             language: 'typescript',
             component: 'BasicPopoverExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-popover'
+            originalFileName: 'basic-popover'
         }
     ];
 }

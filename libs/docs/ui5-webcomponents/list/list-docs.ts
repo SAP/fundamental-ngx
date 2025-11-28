@@ -61,13 +61,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-example'
+            originalFileName: 'basic-example'
         },
         {
             language: 'typescript',
             component: 'ListBasicExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-example'
+            originalFileName: 'basic-example'
         }
     ]);
 
@@ -75,13 +75,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(growingListHtml),
-            fileName: 'growing-list-example'
+            originalFileName: 'growing-list-example'
         },
         {
             language: 'typescript',
             component: 'ListGrowingExample',
             code: getAssetFromModuleAssets(growingListTs),
-            fileName: 'growing-list-example'
+            originalFileName: 'growing-list-example'
         }
     ]);
 
@@ -89,13 +89,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(selectionModesHtml),
-            fileName: 'selection-modes'
+            originalFileName: 'selection-modes'
         },
         {
             language: 'typescript',
             component: 'ListSelectionModesExample',
             code: getAssetFromModuleAssets(selectionModesTs),
-            fileName: 'selection-modes'
+            originalFileName: 'selection-modes'
         }
     ]);
 
@@ -103,13 +103,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(noDataHtml),
-            fileName: 'no-data'
+            originalFileName: 'no-data'
         },
         {
             language: 'typescript',
             component: 'ListNoDataExample',
             code: getAssetFromModuleAssets(noDataTs),
-            fileName: 'no-data'
+            originalFileName: 'no-data'
         }
     ]);
 
@@ -117,13 +117,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(groupingHtml),
-            fileName: 'grouping'
+            originalFileName: 'grouping'
         },
         {
             language: 'typescript',
             component: 'ListGroupingExample',
             code: getAssetFromModuleAssets(groupingTs),
-            fileName: 'grouping'
+            originalFileName: 'grouping'
         }
     ]);
 
@@ -131,13 +131,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(separatorsHtml),
-            fileName: 'separators'
+            originalFileName: 'separators'
         },
         {
             language: 'typescript',
             component: 'ListSeparatorsExample',
             code: getAssetFromModuleAssets(separatorsTs),
-            fileName: 'separators'
+            originalFileName: 'separators'
         }
     ]);
 
@@ -145,13 +145,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(dragAndDropHtml),
-            fileName: 'drag-and-drop'
+            originalFileName: 'drag-and-drop'
         },
         {
             language: 'typescript',
             component: 'ListDragAndDropExample',
             code: getAssetFromModuleAssets(dragAndDropTs),
-            fileName: 'drag-and-drop'
+            originalFileName: 'drag-and-drop'
         }
     ]);
 
@@ -159,13 +159,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(multipleDragAndDropHtml),
-            fileName: 'multiple-drag-and-drop'
+            originalFileName: 'multiple-drag-and-drop'
         },
         {
             language: 'typescript',
             component: 'ListMultipleDragAndDropExample',
             code: getAssetFromModuleAssets(multipleDragAndDropTs),
-            fileName: 'multiple-drag-and-drop'
+            originalFileName: 'multiple-drag-and-drop'
         }
     ]);
 
@@ -173,13 +173,13 @@ export class ListDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(wrappingHtml),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         },
         {
             language: 'typescript',
             component: 'ListWrappingExample',
             code: getAssetFromModuleAssets(wrappingTs),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         }
     ]);
 

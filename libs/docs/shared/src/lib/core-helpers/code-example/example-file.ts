@@ -13,6 +13,8 @@ export interface ExampleFile<
     directive?: boolean;
     language: string;
     fileName?: string;
+    /** Original filename from the examples folder (e.g., 'button-sample' from 'button-sample.ts') */
+    originalFileName?: string;
     selector?: string;
     entryComponent?: boolean;
     component?: string;
