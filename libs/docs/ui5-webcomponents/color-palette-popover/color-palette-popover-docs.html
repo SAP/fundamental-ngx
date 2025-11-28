@@ -1,0 +1,30 @@
+<fd-docs-section-title id="basic" componentName="color-palette-popover">
+    Basic Color Palette Popover
+</fd-docs-section-title>
+<component-example>
+    <ui5-color-palette-popover-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExamples()" />
+
+<fd-docs-section-title id="default-color" componentName="color-palette-popover"> Default Color </fd-docs-section-title>
+<description>
+    Use the <code>defaultColor</code> property to set a predefined color that will be initially selected in the palette.
+    The default color should be a valid CSS color and match one of the color palette items.
+</description>
+<component-example>
+    <ui5-color-palette-popover-default-color-sample />
+</component-example>
+<code-example [exampleFiles]="defaultColorExamples()" />
+
+<fd-docs-section-title id="more-colors" componentName="color-palette-popover">
+    Show More & Recent Colors
+</fd-docs-section-title>
+<description>
+    Set <code>showMoreColors</code> to <code>true</code> to display a "More Colors" button that opens a color picker
+    dialog, allowing users to select custom colors beyond the predefined palette. You can also enable
+    <code>showRecentColors</code> to display recently selected colors for quick access.
+</description>
+<component-example>
+    <ui5-color-palette-popover-more-colors-sample />
+</component-example>
+<code-example [exampleFiles]="moreColorsExamples()" />

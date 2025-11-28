@@ -31,6 +31,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/bar').then(configureLibRoutes)
     },
     {
+        path: 'breadcrumbs',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/breadcrumbs').then(configureLibRoutes)
+    },
+    {
         path: 'busy-indicator',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/busy-indicator').then(configureLibRoutes)
     },
@@ -63,8 +67,25 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-palette').then(configureLibRoutes)
     },
     {
+        path: 'color-palette-popover',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/color-palette-popover').then(configureLibRoutes)
+    },
+    {
         path: 'color-picker',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/color-picker').then(configureLibRoutes)
+    },
+    {
+        path: 'combo-box',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/combo-box').then(configureLibRoutes)
+    },
+    {
+        path: 'date-picker',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/date-picker').then(configureLibRoutes)
+    },
+    {
+        path: 'date-range-picker',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/date-range-picker').then(configureLibRoutes)
     },
     {
         path: 'expandable-text',
