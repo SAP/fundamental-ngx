@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { TimePicker } from '@fundamental-ngx/ui5-webcomponents/time-picker';
 
 // Ensure CLDR data is available for all time-picker components
@@ -58,10 +59,10 @@ export class TimePickerFormatPatternsSample {
         HH: '14'
     });
 
-    onPatternChange(event: any, pattern: string): void {
+    onPatternChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Change'>, pattern: string): void {
         this.patternValues.update((values) => ({
             ...values,
-            [pattern]: event.target.value
+            [pattern]: event.detail.value
         }));
     }
 }

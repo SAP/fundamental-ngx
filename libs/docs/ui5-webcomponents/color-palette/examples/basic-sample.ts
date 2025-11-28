@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { ColorPalette } from '@fundamental-ngx/ui5-webcomponents/color-palette';
 import { ColorPaletteItem } from '@fundamental-ngx/ui5-webcomponents/color-palette-item';
 
@@ -11,7 +12,7 @@ import { ColorPaletteItem } from '@fundamental-ngx/ui5-webcomponents/color-palet
 export class BasicColorPaletteSample {
     selectedColor = signal<string>('None');
 
-    onItemClick(event: any): void {
+    onItemClick(event: UI5WrapperCustomEvent<ColorPalette, 'ui5ItemClick'>): void {
         this.selectedColor.set(event.detail.color);
     }
 }

@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { ValueState } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { TextArea } from '@fundamental-ngx/ui5-webcomponents/text-area';
 
@@ -16,7 +17,7 @@ import 'fundamental-styles/dist/margins.css';
 export class TextAreaCharacterLimitSample {
     readonly exceededValueState = signal(ValueState.None);
 
-    onExceededLimitTextChange(event: CustomEvent): void {
-        this.exceededValueState.set((event.target as any).value.length > 100 ? ValueState.Critical : ValueState.None);
+    onExceededLimitTextChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
+        this.exceededValueState.set(event.target?.['value'].length > 100 ? ValueState.Critical : ValueState.None);
     }
 }

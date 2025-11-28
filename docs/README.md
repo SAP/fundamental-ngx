@@ -76,9 +76,18 @@ file.
 ## Versioning
 
 fundamental-ngx consists of multiple sub-packages and the versions for all of them
-are managed by the root lerna.json file. This is done to ensure that all the packages
+are managed by NX Release (configured in nx.json). This is done to ensure that all the packages
 are in sync with each other. The versioning of the packages is done using
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) and [Semantic Versioning](https://semver.org/).
+
+NX Release handles the entire release workflow including:
+
+- Version bumping based on conventional commits
+- Updating package.json files across all packages
+- Creating git commits with proper commit messages
+- Tagging releases
+- Publishing packages to npm with provenance
+- Generating changelogs
 
 All the information about the versioning is given in the links above
 but TL;DR is that before we reach version 1, every fix, feature or chore is resulting in the patch version change,
@@ -114,13 +123,28 @@ latest commit from the `main` branch, and create a release from it. The release 
 The command to trigger the next release automatically:
 
 ```bash
-npx lerna version --conventional-graduate
+# Full release (version, commit, tag, publish)
+npx nx release
+
+# Or step by step:
+# 1. Version bump
+npx nx release version
+
+# 2. Build packages
+npx nx run-many --target=build --all
+
+# 3. Publish to npm
+npx nx release publish
 ```
 
 The command for specific version release is:
 
 ```bash
-npx lerna version ${version}
+# Specify exact version
+npx nx release version ${version}
+
+# Or use the full workflow
+npx nx release ${version}
 ```
 
 ### Prereleases
@@ -146,16 +170,16 @@ Steps(hotfix for the latest version of `0.40.x`):
 1. `git checkout v0.40.3` - let's assume `0.40.3` is the latest version of `0.40`
 2. introduce the change either with `git cherry-pick <commit-hash>` or make changes manually
 3. build, run, pack, and test the libraries, ask for peer-review
-4. `npm run hotfix-release` - this will trigger the hotfix release from the workflows
+4. `npm run hotfix-release` - this will create a commit, tag it, and push to trigger the hotfix release
 
 Background:
-After this, lerna determines that the next version should be `0.40.1`, and CI will create a release from the HEAD.
+After this, NX Release determines that the next version should be `0.40.4`, creates a commit and tag, and pushes to trigger CI which will create a release from the HEAD.
 CI also finds out that the `0.40.1` is newer than the latest RC release, which is `0.40.1-rc.*`, and updates the main
 branch version to `0.40.1`. Also it must be noted that the npm will mark this release as the `latest`.
 
 Now, let's imagine that the latest RC version was `0.41.0-rc.0`, and you want to create a hotfix for `0.40.0` release.
 In this case, you do the same exact steps, but the outcome is a little bit different. After the `npm run hotfix-release`
-command, lerna determines that the next version should be `0.40.1`, but since the `0.40.1` is lower than the latest RC,
+command, NX Release determines that the next version should be `0.40.1`, but since the `0.40.1` is lower than the latest RC,
 which is `0.41.0-rc.0`, the main branch version will not be updated, and the hotfix will be marked as `hotfix` on npm.
 
 Now, lets imagine that you want to downport functionality to `v0.39.8`, then you need to checkout the `v0.39.8` tag,
@@ -170,3 +194,83 @@ To create a `hotfix`, there are few requirements, which need to be met:
 - The version from which you are creating a hotfix should not be a `prerelease` version
 - The git tree should be clean
 - The changes which go into the source of the hotfix should not contain breaking changes, otherwise it's not a hotfix
+
+## Testing Release Process
+
+Before creating an actual release, you can test the entire release process safely using dry-run commands and test scripts.
+
+### Local Testing
+
+Run the comprehensive test script that validates all release components:
+
+```bash
+# Run all tests (10 tests covering version bumping, release tags, changelog, NX Release, hotfix script, and npm packaging)
+./.github/actions/test-release-actions.sh
+
+# Save test results to a file
+./.github/actions/test-release-actions.sh > test-results.txt 2>&1
+```
+
+**What it tests:**
+
+- Current version detection
+- Bump version action (manual and prerelease modes)
+- Conventional commit analysis
+- Git semver tags retrieval
+- Release tag calculation
+- Conventional changelog generation
+- NX Release configuration
+- NX Release version command (dry-run)
+- NX Release publish command (dry-run)
+- Hotfix release script validation
+- NPM package dry run
+
+### Preview Version Changes
+
+See what version would be bumped without making any changes:
+
+```bash
+# See what the next version would be based on commits
+npx nx release version --dry-run
+
+# See detailed information about the version bump
+npx nx release version --dry-run --verbose
+
+# Test a specific version bump
+npx nx release version 0.59.0 --dry-run
+
+# Test the entire release workflow (version + publish) without making changes
+npx nx release --dry-run
+
+# Test just the publish step
+npx nx release publish --dry-run
+```
+
+### GitHub Actions Testing
+
+You can also run tests via GitHub Actions:
+
+1. Go to the **Actions** tab in your repository
+2. Select **"Test Release Actions (Dry Run)"** workflow
+3. Click **"Run workflow"**
+4. Choose a test scenario:
+    - `all` - runs all tests (default)
+    - `bump-version` - only version bumping tests
+    - `release-tags` - only release tag tests
+    - `changelog` - only changelog generation tests
+    - `nx-release` - only NX Release version tests
+    - `nx-release-publish` - only NX Release publish tests
+    - `hotfix` - only hotfix script tests
+    - `npm-pack` - only npm package tests
+
+Or trigger via GitHub CLI:
+
+```bash
+# Run all tests
+gh workflow run "Test Release Actions (Dry Run)"
+
+# Run specific test scenario
+gh workflow run "Test Release Actions (Dry Run)" -f test-scenario=nx-release
+```
+
+**Note:** All test commands are completely safe and do not create releases, publish packages, or modify any files. They only validate and preview what would happen.

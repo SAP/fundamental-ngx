@@ -1,0 +1,27 @@
+<div class="fd-container fd-padding--none">
+    <ui5-tree headerText="Lazy Loading Tree" (ui5ItemToggle)="onItemToggle($event)">
+        @for (node of treeData(); track node.id) {
+        <ui5-tree-item
+            [attr.data-id]="node.id"
+            [text]="node.loading ? 'Loading...' : node.text"
+            [icon]="node.icon"
+            [hasChildren]="node.hasChildren"
+            [expanded]="node.expanded || false"
+        >
+            @if (node.children) { @for (child of node.children; track child.id) {
+            <ui5-tree-item
+                [attr.data-id]="child.id"
+                [text]="child.text"
+                [icon]="child.icon"
+                [hasChildren]="child.hasChildren"
+            >
+            </ui5-tree-item>
+            } }
+        </ui5-tree-item>
+        }
+    </ui5-tree>
+
+    @if (loadingStatus()) {
+    <div class="fd-margin-top--sm"><strong>Status:</strong> {{ loadingStatus() }}</div>
+    }
+</div>

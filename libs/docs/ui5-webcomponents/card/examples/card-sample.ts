@@ -154,39 +154,11 @@ export class CardExample {
         console.log(`Action clicked: ${action}`);
     }
 
-    onProductSelect(product: any): void {
-        console.log('Product selected:', product.name);
-    }
-
-    onTeamMemberClick(member: any): void {
-        console.log('Team member clicked:', member.name);
-    }
-
     // Configuration methods
     toggleLoading(): void {
         console.log('toggleLoading called, current value:', this.showLoading());
         this.showLoading.update((loading) => !loading);
         console.log('toggleLoading new value:', this.showLoading());
-    }
-
-    toggleInteractive(): void {
-        console.log('toggleInteractive called, current value:', this.interactive());
-        this.interactive.update((interactive) => !interactive);
-        console.log('toggleInteractive new value:', this.interactive());
-    }
-
-    onViewChange(event: any): void {
-        console.log('onViewChange called, event:', event);
-        const selectedText = event.detail.selectedItem.textContent?.toLowerCase().trim() || 'overview';
-        console.log('selectedText:', selectedText);
-        this.currentView.set(selectedText);
-    }
-
-    onLoadingDelayChange(event: any): void {
-        console.log('onLoadingDelayChange called, event:', event);
-        const delayText = event.detail.selectedItem.textContent?.replace('ms', '') || '500';
-        console.log('delayText:', delayText);
-        this.loadingDelay.set(Number(delayText));
     }
 
     refreshData(): void {
@@ -199,15 +171,6 @@ export class CardExample {
             style: 'currency',
             currency: 'USD'
         }).format(value);
-    }
-
-    getStatusColor(status: string): string {
-        const colors = {
-            online: 'var(--sapSuccessColor)',
-            busy: 'var(--sapCriticalColor)',
-            offline: 'var(--sapNeutralColor)'
-        };
-        return colors[status] || 'var(--sapNeutralColor)';
     }
 
     getStatusState(status: string): ObjectStatus {
@@ -226,32 +189,5 @@ export class CardExample {
             offline: 'log'
         };
         return icons[status] || 'circle-task';
-    }
-
-    getPriorityColor(priority: string): string {
-        const colors = {
-            high: 'var(--sapErrorColor)',
-            medium: 'var(--sapCriticalColor)',
-            low: 'var(--sapSuccessColor)'
-        };
-        return colors[priority] || 'var(--sapNeutralColor)';
-    }
-
-    getTrendIcon(trend: string): string {
-        return trend === 'up' ? 'sap-icon://trend-up' : 'sap-icon://trend-down';
-    }
-
-    getTrendColor(trend: string): string {
-        return trend === 'up' ? 'var(--sapSuccessColor)' : 'var(--sapErrorColor)';
-    }
-
-    getStockStatus(stock: number): { text: string; color: string } {
-        if (stock < 5) {
-            return { text: 'Critical', color: 'var(--sapErrorColor)' };
-        }
-        if (stock < 10) {
-            return { text: 'Low', color: 'var(--sapCriticalColor)' };
-        }
-        return { text: 'Good', color: 'var(--sapSuccessColor)' };
     }
 }

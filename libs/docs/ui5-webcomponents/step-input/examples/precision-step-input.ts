@@ -1,4 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { SegmentedButton } from '@fundamental-ngx/ui5-webcomponents/segmented-button';
 import { SegmentedButtonItem } from '@fundamental-ngx/ui5-webcomponents/segmented-button-item';
@@ -78,7 +79,7 @@ export class PrecisionStepInputExample {
         return precision === 0 ? 1 : 1 / Math.pow(10, precision);
     });
 
-    onCustomValueChange(event: CustomEvent): void {
+    onCustomValueChange(event: UI5WrapperCustomEvent<StepInput, 'ui5Change'>): void {
         this._customValue.set(Number(event.target?.['value'] ?? 0));
     }
 

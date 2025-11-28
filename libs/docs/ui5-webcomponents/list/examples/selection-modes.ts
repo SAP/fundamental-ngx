@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
@@ -39,21 +40,21 @@ export class ListSelectionModesExample {
         { name: 'Poland', capital: 'Warsaw', population: '38M' }
     ]);
 
-    onSelectionModeChange(event: CustomEvent): void {
-        const selectedValue = (event.target as any).selectedOption?.value;
+    onSelectionModeChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
+        const selectedValue = event.detail.selectedOption?.value as ListSelectionMode;
         if (selectedValue) {
             this.selectedMode.set(selectedValue);
             this.selectedItems.set([]);
         }
     }
 
-    onSelectionChange(event: CustomEvent): void {
+    onSelectionChange(event: UI5WrapperCustomEvent<List, 'ui5SelectionChange'>): void {
         const selectedItems = event.detail.selectedItems.map((item: any) => item.textContent.trim());
         this.selectedItems.set(selectedItems);
     }
 
-    onItemDelete(event: CustomEvent): void {
-        const deletedItemText = event.detail.item.textContent.trim();
+    onItemDelete(event: UI5WrapperCustomEvent<List, 'ui5ItemDelete'>): void {
+        const deletedItemText = event.detail.item.textContent?.trim();
         this.countries.update((countries) => countries.filter((country) => country.name !== deletedItemText));
     }
 }

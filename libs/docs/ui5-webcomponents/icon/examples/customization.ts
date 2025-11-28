@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { Option } from '@fundamental-ngx/ui5-webcomponents/option';
@@ -34,13 +35,13 @@ export class IconCustomizationExample {
         { value: 'neutral', label: 'Neutral Gray', css: 'var(--sapNeutralColor)' }
     ]);
 
-    onSizeChange(event: CustomEvent): void {
-        const value = (event.target as any).value;
+    onSizeChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
+        const value = event.target?.['value'];
         this.iconSize.set(Number(value));
     }
 
-    onColorChange(event: CustomEvent): void {
-        const selectedValue = (event.target as any).selectedOption?.value;
+    onColorChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
+        const selectedValue = event.detail.selectedOption.value;
         if (selectedValue) {
             this.selectedColor.set(selectedValue);
         }

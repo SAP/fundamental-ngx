@@ -1,40 +1,40 @@
 {
-  "name": "@fundamental-ngx/cx",
-  "version": "0.58.0-rc.19",
-  "schematics": "./schematics/collection.json",
-  "description": "Fundamental Library for Angular - cx",
-  "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SAP/fundamental-ngx.git"
-  },
-  "engine": {
-    "node": ">= 10"
-  },
-  "peerDependencies": {
-    "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/cdk": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/common": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/core": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
-    "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
-    "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER"
-  },
-  "dependencies": {
-    "@fundamental-styles/cx": "FDCXSTYLES_VER_PLACEHOLDER",
-    "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
-    "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER",
-    "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
-    "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
-    "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
-    "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
-    "tslib": "^2.0.0"
-  },
-  "ng-add": {
-    "save": "dependencies"
-  }
+    "name": "@fundamental-ngx/cx",
+    "version": "0.58.0-rc.35",
+    "schematics": "./schematics/collection.json",
+    "description": "Fundamental Library for Angular - cx",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SAP/fundamental-ngx.git"
+    },
+    "engine": {
+        "node": ">= 10"
+    },
+    "peerDependencies": {
+        "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/cdk": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/common": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/core": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/router": "ANGULAR_VER_PLACEHOLDER",
+        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
+        "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
+        "rxjs": "^7.8.0"
+    },
+    "dependencies": {
+        "@fundamental-styles/cx": "0.40.1",
+        "@sap-theming/theming-base-content": "^11.31.0",
+        "compare-versions": "^6.1.0",
+        "fast-deep-equal": "3.1.3",
+        "focus-trap": "^7.1.0",
+        "fundamental-styles": "0.40.1",
+        "lodash-es": "^4.17.0",
+        "tslib": "^2.0.0"
+    },
+    "ng-add": {
+        "save": "dependencies"
+    }
 }

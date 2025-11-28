@@ -163,7 +163,7 @@ export class StackblitzService {
 
         parsedPackageJson['dependencies'] = StackblitzDependencies.getDependencies(
             this._docsService.getPackageJson(),
-            this._docsService.getLernaJson()
+            this._docsService.getVersion()
         );
 
         return JSON.stringify(parsedPackageJson, null, 4);

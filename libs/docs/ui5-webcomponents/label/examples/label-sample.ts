@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { CheckBox } from '@fundamental-ngx/ui5-webcomponents/check-box';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
@@ -100,36 +101,36 @@ export class LabelExample {
     }
 
     // Event handlers for form controls
-    onFirstNameChange(event: any): void {
-        this.firstName.set(event.target.value);
+    onFirstNameChange(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
+        this.firstName.set(event.target?.['value']);
     }
 
-    onLastNameChange(event: any): void {
-        this.lastName.set(event.target.value);
+    onLastNameChange(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
+        this.lastName.set(event.target?.['value']);
     }
 
-    onEmailChange(event: any): void {
-        this.email.set(event.target.value);
+    onEmailChange(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
+        this.email.set(event.target?.['value']);
     }
 
-    onDescriptionChange(event: any): void {
-        this.description.set(event.target.value);
+    onDescriptionChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
+        this.description.set(event.target?.['value']);
     }
 
-    onTermsChange(event: any): void {
-        this.acceptTerms.set(event.target.checked);
+    onTermsChange(event: UI5WrapperCustomEvent<CheckBox, 'ui5Change'>): void {
+        this.acceptTerms.set(event.target?.['checked']);
     }
 
-    onGenderChange(event: any): void {
-        this.gender.set(event.target.value);
+    onGenderChange(event: UI5WrapperCustomEvent<RadioButton, 'ui5Change'>): void {
+        this.gender.set(event.target?.['value']);
     }
 
-    onCountryChange(event: any): void {
+    onCountryChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
         this.country.set(event.detail.selectedOption?.textContent || '');
     }
 
-    onNotificationsChange(event: any): void {
-        this.notifications.set(event.target.checked);
+    onNotificationsChange(event: UI5WrapperCustomEvent<Switch, 'ui5Change'>): void {
+        this.notifications.set(event.target?.['checked']);
     }
 
     // Label configuration handlers
@@ -141,7 +142,7 @@ export class LabelExample {
         this.showRequired.update((current) => !current);
     }
 
-    onWrappingTypeChange(event: any): void {
+    onWrappingTypeChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const selectedItems = event.detail.selectedItems;
         if (selectedItems && selectedItems.length > 0) {
             const selectedType = selectedItems[0].innerText as WrappingType;

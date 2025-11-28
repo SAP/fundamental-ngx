@@ -11,12 +11,12 @@ import {
     ViewChild
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Card } from '@fundamental-ngx/ui5-webcomponents/card';
 import { CardHeader } from '@fundamental-ngx/ui5-webcomponents/card-header';
 import { Input } from '@fundamental-ngx/ui5-webcomponents/input';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
-import { MessageStrip } from '@fundamental-ngx/ui5-webcomponents/message-strip';
 import { Option } from '@fundamental-ngx/ui5-webcomponents/option';
 import { Panel } from '@fundamental-ngx/ui5-webcomponents/panel';
 import { Select } from '@fundamental-ngx/ui5-webcomponents/select';
@@ -42,7 +42,6 @@ import '@sap-ui/common-css/dist/sap-text.css';
         Input,
         Button,
         Label,
-        MessageStrip,
         Panel,
         Switch,
         Select,
@@ -276,87 +275,25 @@ export class InputExample implements AfterViewInit {
     }
 
     // Event handlers
-    onBasicInput(event: CustomEvent): void {
-        const target = event.target as any;
+    onBasicInput(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
+        const target = event.target?.['value'];
         this.basicValue.set(target.value || '');
         this.addInputEvent(`Input: "${target.value}"`);
     }
 
-    onBasicChange(event: CustomEvent): void {
+    onBasicChange(event: UI5WrapperCustomEvent<Input, 'ui5Change'>): void {
         const target = event.target as any;
         this.addChangeEvent(`Change: "${target.value}"`);
     }
 
-    onSelection(event: CustomEvent): void {
+    onSelection(event: UI5WrapperCustomEvent<Input, 'ui5Select'>): void {
         const target = event.target as any;
         this.addSelectionEvent(`Selection at: ${target.selectionStart}-${target.selectionEnd}`);
     }
 
-    onSearchInput(event: CustomEvent): void {
+    onSearchInput(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
         const target = event.target as any;
         this.searchValue.set(target.value || '');
-    }
-
-    onDynamicStateInput(event: CustomEvent): void {
-        const target = event.target as any;
-        const value = (target.value || '').toLowerCase();
-        this.dynamicStateValue.set(value);
-
-        // Update state and message based on input
-        if (value.includes('success') || value.includes('positive')) {
-            this.dynamicStateMessage.set('✓ Success state activated - everything looks good!');
-        } else if (value.includes('warning') || value.includes('critical')) {
-            this.dynamicStateMessage.set('⚠️ Warning state activated - please review your input');
-        } else if (value.includes('error') || value.includes('negative')) {
-            this.dynamicStateMessage.set('❌ Error state activated - there seems to be an issue');
-        } else if (value.includes('info') || value.includes('information')) {
-            this.dynamicStateMessage.set("INFO: Information state activated - here's some helpful context");
-        } else if (value === '') {
-            this.dynamicStateMessage.set('');
-        } else {
-            this.dynamicStateMessage.set('💡 Try typing: "success", "warning", "error", or "info"');
-        }
-    }
-
-    getDynamicValueState(): 'None' | 'Positive' | 'Negative' | 'Critical' | 'Information' {
-        const value = this.dynamicStateValue().toLowerCase();
-        if (value.includes('success') || value.includes('positive')) {
-            return 'Positive';
-        }
-        if (value.includes('warning') || value.includes('critical')) {
-            return 'Critical';
-        }
-        if (value.includes('error') || value.includes('negative')) {
-            return 'Negative';
-        }
-        if (value.includes('info') || value.includes('information')) {
-            return 'Information';
-        }
-        return 'None';
-    }
-
-    getDynamicMessageDesign():
-        | 'Positive'
-        | 'Critical'
-        | 'Negative'
-        | 'Information'
-        | 'ColorSet1'
-        | 'ColorSet2'
-        | undefined {
-        const value = this.dynamicStateValue().toLowerCase();
-        if (value.includes('success') || value.includes('positive')) {
-            return 'Positive';
-        }
-        if (value.includes('warning') || value.includes('critical')) {
-            return 'Critical';
-        }
-        if (value.includes('error') || value.includes('negative')) {
-            return 'Negative';
-        }
-        if (value.includes('info') || value.includes('information')) {
-            return 'Information';
-        }
-        return 'Information';
     }
 
     // Configuration methods
@@ -380,25 +317,26 @@ export class InputExample implements AfterViewInit {
         this.showSuggestions.update((value) => !value);
     }
 
-    onTypeChange(event: CustomEvent): void {
-        const target = event.target as any;
-        const selectedOption = target.selectedOption;
+    onTypeChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
+        const selectedOption = event.detail.selectedOption;
         if (selectedOption) {
-            this.inputType.set(selectedOption.textContent);
+            this.inputType.set(
+                event.detail.selectedOption.textContent as 'Text' | 'Email' | 'Password' | 'Tel' | 'URL' | 'Number'
+            );
         }
     }
 
-    onValueStateChange(event: CustomEvent): void {
-        const target = event.target as any;
-        const selectedOption = target.selectedOption;
+    onValueStateChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
+        const selectedOption = event.detail.selectedOption;
         if (selectedOption) {
-            this.currentValueState.set(selectedOption.textContent);
+            this.currentValueState.set(
+                selectedOption.textContent as 'None' | 'Positive' | 'Negative' | 'Critical' | 'Information'
+            );
         }
     }
 
-    onMaxLengthChange(event: CustomEvent): void {
-        const target = event.target as any;
-        const value = parseInt(target.value, 10);
+    onMaxLengthChange(event: UI5WrapperCustomEvent<Input, 'ui5Change'>): void {
+        const value = parseInt(event.target?.['value'], 10);
         this.maxLength.set(isNaN(value) ? undefined : value);
     }
 

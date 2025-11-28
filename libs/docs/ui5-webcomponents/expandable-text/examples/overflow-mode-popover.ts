@@ -1,8 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ExpandableText } from '@fundamental-ngx/ui5-webcomponents/expandable-text';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
-import { Option } from '@fundamental-ngx/ui5-webcomponents/option';
-import { Select } from '@fundamental-ngx/ui5-webcomponents/select';
 import { Table } from '@fundamental-ngx/ui5-webcomponents/table';
 import { TableCell } from '@fundamental-ngx/ui5-webcomponents/table-cell';
 import { TableHeaderCell } from '@fundamental-ngx/ui5-webcomponents/table-header-cell';
@@ -18,7 +16,7 @@ import 'fundamental-styles/dist/paddings.css';
     selector: 'ui5-expandable-text-overflow-mode-popover-example',
     templateUrl: './overflow-mode-popover.html',
     standalone: true,
-    imports: [ExpandableText, Table, TableCell, TableRow, TableHeaderCell, TableHeaderRow, Label, Select, Option]
+    imports: [ExpandableText, Table, TableCell, TableRow, TableHeaderCell, TableHeaderRow, Label]
 })
 export class ExpandableTextOverflowModePopoverExample {
     readonly selectedOverflowMode = signal<'InPlace' | 'Popover'>('InPlace');
@@ -30,11 +28,4 @@ export class ExpandableTextOverflowModePopoverExample {
             'when you want to preserve the layout and not push other content around. Both modes provide a clean and ' +
             'intuitive way for users to access additional content when needed.'
     );
-
-    onOverflowModeChange(event: any): void {
-        const selectedValue = (event.target as any).selectedOption?.value;
-        if (selectedValue === 'InPlace' || selectedValue === 'Popover') {
-            this.selectedOverflowMode.set(selectedValue);
-        }
-    }
 }

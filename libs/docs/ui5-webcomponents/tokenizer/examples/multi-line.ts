@@ -1,5 +1,6 @@
 import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Token } from '@fundamental-ngx/ui5-webcomponents/token';
 import { Tokenizer } from '@fundamental-ngx/ui5-webcomponents/tokenizer';
 
@@ -27,16 +28,16 @@ export class TokenizerMultiLineSample {
         'Musical Instruments'
     ]);
 
-    onSingleLineTokenDelete(event: any): void {
-        const tokens = event.detail?.tokens;
+    onSingleLineTokenDelete(event: UI5WrapperCustomEvent<Tokenizer, 'ui5TokenDelete'>): void {
+        const tokens = event.detail.tokens;
 
         if (tokens) {
             tokens.forEach((token) => token.remove());
         }
     }
 
-    onMultiLineTokenDelete(event: any): void {
-        const tokens = event.detail?.tokens;
+    onMultiLineTokenDelete(event: UI5WrapperCustomEvent<Tokenizer, 'ui5TokenDelete'>): void {
+        const tokens = event.detail.tokens;
 
         if (tokens) {
             tokens.forEach((token) => token.remove());

@@ -1,5 +1,6 @@
 import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
 import { FormGroup } from '@fundamental-ngx/ui5-webcomponents/form-group';
 import { FormItem } from '@fundamental-ngx/ui5-webcomponents/form-item';
@@ -67,7 +68,7 @@ export class FormLayoutsSample {
         }
     ]);
 
-    onSliderChange(event: CustomEvent): void {
+    onSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
         const width = (event.target?.['value'] / 100) * 1500;
         this.containerWidth.set(`${width}px`);
         this.pageSize.set(this.getLayoutByWidth(width));
