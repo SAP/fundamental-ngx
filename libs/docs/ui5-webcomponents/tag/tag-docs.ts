@@ -49,13 +49,13 @@ export class TagDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'TagBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class TagDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(designsHtml),
-            fileName: 'designs'
+            originalFileName: 'designs'
         },
         {
             language: 'typescript',
             component: 'TagDesignsSample',
             code: getAssetFromModuleAssets(designsTs),
-            fileName: 'designs'
+            originalFileName: 'designs'
         }
     ]);
 
@@ -77,13 +77,13 @@ export class TagDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(interactiveHtml),
-            fileName: 'interactive'
+            originalFileName: 'interactive'
         },
         {
             language: 'typescript',
             component: 'TagInteractiveSample',
             code: getAssetFromModuleAssets(interactiveTs),
-            fileName: 'interactive'
+            originalFileName: 'interactive'
         }
     ]);
 
@@ -91,13 +91,13 @@ export class TagDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(wrappingHtml),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         },
         {
             language: 'typescript',
             component: 'TagWrappingSample',
             code: getAssetFromModuleAssets(wrappingTs),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         }
     ]);
 
@@ -105,13 +105,13 @@ export class TagDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(colorSchemesHtml),
-            fileName: 'color-schemes'
+            originalFileName: 'color-schemes'
         },
         {
             language: 'typescript',
             component: 'TagColorSchemesSample',
             code: getAssetFromModuleAssets(colorSchemesTs),
-            fileName: 'color-schemes'
+            originalFileName: 'color-schemes'
         }
     ]);
 
@@ -119,13 +119,13 @@ export class TagDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(sizesHtml),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         },
         {
             language: 'typescript',
             component: 'TagSizesSample',
             code: getAssetFromModuleAssets(sizesTs),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         }
     ]);
 

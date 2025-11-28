@@ -45,13 +45,13 @@ export class TimePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'TimePickerBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -59,13 +59,13 @@ export class TimePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(formatPatternsHtml),
-            fileName: 'format-patterns'
+            originalFileName: 'format-patterns'
         },
         {
             language: 'typescript',
             component: 'TimePickerFormatPatternsSample',
             code: getAssetFromModuleAssets(formatPatternsTs),
-            fileName: 'format-patterns'
+            originalFileName: 'format-patterns'
         }
     ]);
 
@@ -73,13 +73,13 @@ export class TimePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStatesHtml),
-            fileName: 'value-states'
+            originalFileName: 'value-states'
         },
         {
             language: 'typescript',
             component: 'TimePickerValueStatesSample',
             code: getAssetFromModuleAssets(valueStatesTs),
-            fileName: 'value-states'
+            originalFileName: 'value-states'
         }
     ]);
 
@@ -87,13 +87,13 @@ export class TimePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(statesHtml),
-            fileName: 'states'
+            originalFileName: 'states'
         },
         {
             language: 'typescript',
             component: 'TimePickerStatesSample',
             code: getAssetFromModuleAssets(statesTs),
-            fileName: 'states'
+            originalFileName: 'states'
         }
     ]);
 
@@ -101,13 +101,13 @@ export class TimePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(eventsHtml),
-            fileName: 'events'
+            originalFileName: 'events'
         },
         {
             language: 'typescript',
             component: 'TimePickerEventsSample',
             code: getAssetFromModuleAssets(eventsTs),
-            fileName: 'events'
+            originalFileName: 'events'
         }
     ]);
 

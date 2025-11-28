@@ -41,12 +41,12 @@ export class TitleDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample',
+            originalFileName: 'basic-sample',
             component: 'TitleBasicSample'
         }
     ]);
@@ -55,12 +55,12 @@ export class TitleDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(levelsHtml),
-            fileName: 'levels'
+            originalFileName: 'levels'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(levelsTs),
-            fileName: 'levels',
+            originalFileName: 'levels',
             component: 'TitleLevelsSample'
         }
     ]);
@@ -69,12 +69,12 @@ export class TitleDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(sizesHtml),
-            fileName: 'sizes'
+            originalFileName: 'sizes'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(sizesTs),
-            fileName: 'sizes',
+            originalFileName: 'sizes',
             component: 'TitleSizesSample'
         }
     ]);
@@ -83,12 +83,12 @@ export class TitleDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(wrappingHtml),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(wrappingTs),
-            fileName: 'wrapping',
+            originalFileName: 'wrapping',
             component: 'TitleWrappingSample'
         }
     ]);

@@ -41,13 +41,13 @@ export class BreadcrumbsDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BreadcrumbsBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -55,13 +55,13 @@ export class BreadcrumbsDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(overflowHtml),
-            fileName: 'overflow'
+            originalFileName: 'overflow'
         },
         {
             language: 'typescript',
             component: 'BreadcrumbsOverflowSample',
             code: getAssetFromModuleAssets(overflowTs),
-            fileName: 'overflow'
+            originalFileName: 'overflow'
         }
     ]);
 
@@ -69,13 +69,13 @@ export class BreadcrumbsDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(designHtml),
-            fileName: 'design'
+            originalFileName: 'design'
         },
         {
             language: 'typescript',
             component: 'BreadcrumbsDesignSample',
             code: getAssetFromModuleAssets(designTs),
-            fileName: 'design'
+            originalFileName: 'design'
         }
     ]);
 
@@ -83,13 +83,13 @@ export class BreadcrumbsDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(separatorsHtml),
-            fileName: 'separators'
+            originalFileName: 'separators'
         },
         {
             language: 'typescript',
             component: 'BreadcrumbsSeparatorsSample',
             code: getAssetFromModuleAssets(separatorsTs),
-            fileName: 'separators'
+            originalFileName: 'separators'
         }
     ]);
 

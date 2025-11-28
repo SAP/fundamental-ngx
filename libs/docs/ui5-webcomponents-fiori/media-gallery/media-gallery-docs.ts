@@ -28,13 +28,13 @@ export class MediaGalleryDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(mediaGallerySampleHtml),
-            fileName: 'media-gallery-sample'
+            originalFileName: 'media-gallery-sample'
         },
         {
             language: 'typescript',
             component: 'MediaGallerySample',
             code: getAssetFromModuleAssets(mediaGallerySampleTs),
-            fileName: 'media-gallery-sample'
+            originalFileName: 'media-gallery-sample'
         }
     ];
 }

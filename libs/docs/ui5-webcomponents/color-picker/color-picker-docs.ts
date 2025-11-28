@@ -33,13 +33,13 @@ export class ColorPickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'color-picker-basic-example'
+            originalFileName: 'color-picker-basic-example'
         },
         {
             language: 'typescript',
             component: 'ColorPickerBasicExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'color-picker-basic-example'
+            originalFileName: 'color-picker-basic-example'
         }
     ]);
 
@@ -47,13 +47,13 @@ export class ColorPickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(simplifiedHtml),
-            fileName: 'color-picker-simplified-example'
+            originalFileName: 'color-picker-simplified-example'
         },
         {
             language: 'typescript',
             component: 'ColorPickerSimplifiedExample',
             code: getAssetFromModuleAssets(simplifiedTs),
-            fileName: 'color-picker-simplified-example'
+            originalFileName: 'color-picker-simplified-example'
         }
     ]);
 }

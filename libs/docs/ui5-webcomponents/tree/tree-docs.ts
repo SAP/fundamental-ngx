@@ -49,13 +49,13 @@ export class TreeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'TreeBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class TreeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(selectionHtml),
-            fileName: 'selection'
+            originalFileName: 'selection'
         },
         {
             language: 'typescript',
             component: 'TreeSelectionSample',
             code: getAssetFromModuleAssets(selectionTs),
-            fileName: 'selection'
+            originalFileName: 'selection'
         }
     ]);
 
@@ -77,13 +77,13 @@ export class TreeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconsHtml),
-            fileName: 'icons'
+            originalFileName: 'icons'
         },
         {
             language: 'typescript',
             component: 'TreeIconsSample',
             code: getAssetFromModuleAssets(iconsTs),
-            fileName: 'icons'
+            originalFileName: 'icons'
         }
     ]);
 
@@ -91,13 +91,13 @@ export class TreeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(lazyLoadingHtml),
-            fileName: 'lazy-loading'
+            originalFileName: 'lazy-loading'
         },
         {
             language: 'typescript',
             component: 'TreeLazyLoadingSample',
             code: getAssetFromModuleAssets(lazyLoadingTs),
-            fileName: 'lazy-loading'
+            originalFileName: 'lazy-loading'
         }
     ]);
 
@@ -105,13 +105,13 @@ export class TreeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customContentHtml),
-            fileName: 'custom-content'
+            originalFileName: 'custom-content'
         },
         {
             language: 'typescript',
             component: 'TreeCustomContentSample',
             code: getAssetFromModuleAssets(customContentTs),
-            fileName: 'custom-content'
+            originalFileName: 'custom-content'
         }
     ]);
 
@@ -119,13 +119,13 @@ export class TreeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(dragAndDropHtml),
-            fileName: 'drag-and-drop'
+            originalFileName: 'drag-and-drop'
         },
         {
             language: 'typescript',
             component: 'TreeDragAndDropSample',
             code: getAssetFromModuleAssets(dragAndDropTs),
-            fileName: 'drag-and-drop'
+            originalFileName: 'drag-and-drop'
         }
     ]);
 

@@ -65,13 +65,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'form-basic'
+            originalFileName: 'form-basic'
         },
         {
             language: 'typescript',
             component: 'FormBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'form-basic'
+            originalFileName: 'form-basic'
         }
     ]);
 
@@ -79,13 +79,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(layoutsHtml),
-            fileName: 'form-layouts'
+            originalFileName: 'form-layouts'
         },
         {
             language: 'typescript',
             component: 'FormLayoutsSample',
             code: getAssetFromModuleAssets(layoutsTs),
-            fileName: 'form-layouts'
+            originalFileName: 'form-layouts'
         }
     ]);
 
@@ -93,13 +93,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(labelSpanHtml),
-            fileName: 'label-span'
+            originalFileName: 'label-span'
         },
         {
             language: 'typescript',
             component: 'FormLabelSpanSample',
             code: getAssetFromModuleAssets(labelSpanTs),
-            fileName: 'label-span'
+            originalFileName: 'label-span'
         }
     ]);
 
@@ -107,13 +107,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(emptySpanHtml),
-            fileName: 'empty-span'
+            originalFileName: 'empty-span'
         },
         {
             language: 'typescript',
             component: 'FormEmptySpanSample',
             code: getAssetFromModuleAssets(emptySpanTs),
-            fileName: 'empty-span'
+            originalFileName: 'empty-span'
         }
     ]);
 
@@ -121,13 +121,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(labelsOnTopHtml),
-            fileName: 'labels-on-top'
+            originalFileName: 'labels-on-top'
         },
         {
             language: 'typescript',
             component: 'FormLabelsOnTopSample',
             code: getAssetFromModuleAssets(labelsOnTopTs),
-            fileName: 'labels-on-top'
+            originalFileName: 'labels-on-top'
         }
     ]);
 
@@ -135,13 +135,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(editHtml),
-            fileName: 'edit'
+            originalFileName: 'edit'
         },
         {
             language: 'typescript',
             component: 'FormEditSample',
             code: getAssetFromModuleAssets(editTs),
-            fileName: 'edit'
+            originalFileName: 'edit'
         }
     ]);
 
@@ -149,13 +149,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(columnSpanHtml),
-            fileName: 'form-column-span'
+            originalFileName: 'form-column-span'
         },
         {
             language: 'typescript',
             component: 'FormColumnSpanSample',
             code: getAssetFromModuleAssets(columnSpanTs),
-            fileName: 'form-column-span'
+            originalFileName: 'form-column-span'
         }
     ]);
 
@@ -163,13 +163,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(headerTextWrappingHtml),
-            fileName: 'header-text-wrapping'
+            originalFileName: 'header-text-wrapping'
         },
         {
             language: 'typescript',
             component: 'FormHeaderTextWrappingSample',
             code: getAssetFromModuleAssets(headerTextWrappingTs),
-            fileName: 'header-text-wrapping'
+            originalFileName: 'header-text-wrapping'
         }
     ]);
 
@@ -177,13 +177,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customHeaderHtml),
-            fileName: 'custom-header'
+            originalFileName: 'custom-header'
         },
         {
             language: 'typescript',
             component: 'FormCustomHeaderSample',
             code: getAssetFromModuleAssets(customHeaderTs),
-            fileName: 'custom-header'
+            originalFileName: 'custom-header'
         }
     ]);
 
@@ -191,13 +191,13 @@ export class FormDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(validationHtml),
-            fileName: 'validation'
+            originalFileName: 'validation'
         },
         {
             language: 'typescript',
             component: 'FormValidationSample',
             code: getAssetFromModuleAssets(validationTs),
-            fileName: 'validation'
+            originalFileName: 'validation'
         }
     ]);
 

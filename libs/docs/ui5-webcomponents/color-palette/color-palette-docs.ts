@@ -29,13 +29,13 @@ export class ColorPaletteDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicColorPaletteSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ];
 }

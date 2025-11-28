@@ -45,13 +45,13 @@ export class MessageStripDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'MessageStripBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -59,13 +59,13 @@ export class MessageStripDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(designsHtml),
-            fileName: 'designs'
+            originalFileName: 'designs'
         },
         {
             language: 'typescript',
             component: 'MessageStripDesignsSample',
             code: getAssetFromModuleAssets(designsTs),
-            fileName: 'designs'
+            originalFileName: 'designs'
         }
     ]);
 
@@ -73,13 +73,13 @@ export class MessageStripDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(hideIconAndCloseButtonHtml),
-            fileName: 'hide-icon-and-close-button'
+            originalFileName: 'hide-icon-and-close-button'
         },
         {
             language: 'typescript',
             component: 'MessageStripHideIconAndCloseButtonSample',
             code: getAssetFromModuleAssets(hideIconAndCloseButtonTs),
-            fileName: 'hide-icon-and-close-button'
+            originalFileName: 'hide-icon-and-close-button'
         }
     ]);
 
@@ -87,13 +87,13 @@ export class MessageStripDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customIconHtml),
-            fileName: 'custom-icon'
+            originalFileName: 'custom-icon'
         },
         {
             language: 'typescript',
             component: 'MessageStripCustomIconSample',
             code: getAssetFromModuleAssets(customIconTs),
-            fileName: 'custom-icon'
+            originalFileName: 'custom-icon'
         }
     ]);
 
@@ -101,13 +101,13 @@ export class MessageStripDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customizationHtml),
-            fileName: 'customization'
+            originalFileName: 'customization'
         },
         {
             language: 'typescript',
             component: 'MessageStripCustomizationSample',
             code: getAssetFromModuleAssets(customizationTs),
-            fileName: 'customization'
+            originalFileName: 'customization'
         }
     ]);
 

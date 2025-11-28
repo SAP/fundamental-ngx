@@ -45,13 +45,13 @@ export class ToolbarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'ToolbarBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -59,13 +59,13 @@ export class ToolbarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(designHtml),
-            fileName: 'design'
+            originalFileName: 'design'
         },
         {
             language: 'typescript',
             component: 'ToolbarDesignSample',
             code: getAssetFromModuleAssets(designTs),
-            fileName: 'design'
+            originalFileName: 'design'
         }
     ]);
 
@@ -73,13 +73,13 @@ export class ToolbarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(alignmentHtml),
-            fileName: 'alignment'
+            originalFileName: 'alignment'
         },
         {
             language: 'typescript',
             component: 'ToolbarAlignmentSample',
             code: getAssetFromModuleAssets(alignmentTs),
-            fileName: 'alignment'
+            originalFileName: 'alignment'
         }
     ]);
 
@@ -87,13 +87,13 @@ export class ToolbarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(overflowHtml),
-            fileName: 'overflow'
+            originalFileName: 'overflow'
         },
         {
             language: 'typescript',
             component: 'ToolbarOverflowSample',
             code: getAssetFromModuleAssets(overflowTs),
-            fileName: 'overflow'
+            originalFileName: 'overflow'
         }
     ]);
 
@@ -101,13 +101,13 @@ export class ToolbarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(complexHtml),
-            fileName: 'complex'
+            originalFileName: 'complex'
         },
         {
             language: 'typescript',
             component: 'ToolbarComplexSample',
             code: getAssetFromModuleAssets(complexTs),
-            fileName: 'complex'
+            originalFileName: 'complex'
         }
     ]);
 

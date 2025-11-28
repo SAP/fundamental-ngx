@@ -29,13 +29,13 @@ export class InputDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'input-example'
+            originalFileName: 'input-example'
         },
         {
             language: 'typescript',
             component: 'InputExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'input-example'
+            originalFileName: 'input-example'
         }
     ]);
 

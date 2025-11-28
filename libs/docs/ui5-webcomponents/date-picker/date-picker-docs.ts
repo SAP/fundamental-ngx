@@ -49,13 +49,13 @@ export class DatePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'DatePickerBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -63,13 +63,13 @@ export class DatePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(formatSampleHtml),
-            fileName: 'format-sample'
+            originalFileName: 'format-sample'
         },
         {
             language: 'typescript',
             component: 'DatePickerFormatSample',
             code: getAssetFromModuleAssets(formatSampleTs),
-            fileName: 'format-sample'
+            originalFileName: 'format-sample'
         }
     ]);
 
@@ -77,13 +77,13 @@ export class DatePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(minMaxSampleHtml),
-            fileName: 'min-max-sample'
+            originalFileName: 'min-max-sample'
         },
         {
             language: 'typescript',
             component: 'DatePickerMinMaxSample',
             code: getAssetFromModuleAssets(minMaxSampleTs),
-            fileName: 'min-max-sample'
+            originalFileName: 'min-max-sample'
         }
     ]);
 
@@ -91,13 +91,13 @@ export class DatePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueStateSampleHtml),
-            fileName: 'value-state-sample'
+            originalFileName: 'value-state-sample'
         },
         {
             language: 'typescript',
             component: 'DatePickerValueStateSample',
             code: getAssetFromModuleAssets(valueStateSampleTs),
-            fileName: 'value-state-sample'
+            originalFileName: 'value-state-sample'
         }
     ]);
 
@@ -105,13 +105,13 @@ export class DatePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(componentStatesSampleHtml),
-            fileName: 'component-states-sample'
+            originalFileName: 'component-states-sample'
         },
         {
             language: 'typescript',
             component: 'DatePickerComponentStatesSample',
             code: getAssetFromModuleAssets(componentStatesSampleTs),
-            fileName: 'component-states-sample'
+            originalFileName: 'component-states-sample'
         }
     ]);
 
@@ -119,13 +119,13 @@ export class DatePickerDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(calendarTypesSampleHtml),
-            fileName: 'calendar-types-sample'
+            originalFileName: 'calendar-types-sample'
         },
         {
             language: 'typescript',
             component: 'DatePickerCalendarTypesSample',
             code: getAssetFromModuleAssets(calendarTypesSampleTs),
-            fileName: 'calendar-types-sample'
+            originalFileName: 'calendar-types-sample'
         }
     ]);
 

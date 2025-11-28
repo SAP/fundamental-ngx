@@ -36,13 +36,13 @@ export class CheckBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicCheckBoxSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ];
 
@@ -50,13 +50,13 @@ export class CheckBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('states.html'),
-            fileName: 'states'
+            originalFileName: 'states'
         },
         {
             language: 'typescript',
             component: 'StatesCheckBoxSample',
             code: getAssetFromModuleAssets('states.ts'),
-            fileName: 'states'
+            originalFileName: 'states'
         }
     ];
 
@@ -64,13 +64,13 @@ export class CheckBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('value-states.html'),
-            fileName: 'value-states'
+            originalFileName: 'value-states'
         },
         {
             language: 'typescript',
             component: 'ValueStatesCheckBoxSample',
             code: getAssetFromModuleAssets('value-states.ts'),
-            fileName: 'value-states'
+            originalFileName: 'value-states'
         }
     ];
 
@@ -78,13 +78,13 @@ export class CheckBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('wrapping.html'),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         },
         {
             language: 'typescript',
             component: 'WrappingCheckBoxSample',
             code: getAssetFromModuleAssets('wrapping.ts'),
-            fileName: 'wrapping'
+            originalFileName: 'wrapping'
         }
     ];
 
@@ -92,13 +92,13 @@ export class CheckBoxDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('in-form.html'),
-            fileName: 'in-form'
+            originalFileName: 'in-form'
         },
         {
             language: 'typescript',
             component: 'InFormCheckBoxSample',
             code: getAssetFromModuleAssets('in-form.ts'),
-            fileName: 'in-form'
+            originalFileName: 'in-form'
         }
     ];
 }

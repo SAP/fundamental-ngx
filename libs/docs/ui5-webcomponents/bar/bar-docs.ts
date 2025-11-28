@@ -30,13 +30,13 @@ export class BarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicBarSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ];
 
@@ -44,13 +44,13 @@ export class BarDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets('accessible-role.html'),
-            fileName: 'accessible-role'
+            originalFileName: 'accessible-role'
         },
         {
             language: 'typescript',
             component: 'AccessibleRoleBarSample',
             code: getAssetFromModuleAssets('accessible-role.ts'),
-            fileName: 'accessible-role'
+            originalFileName: 'accessible-role'
         }
     ];
 }

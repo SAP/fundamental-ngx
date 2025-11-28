@@ -34,13 +34,13 @@ export class TimelineDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'timeline-example'
+            originalFileName: 'timeline-example'
         },
         {
             language: 'typescript',
             component: 'TimelineExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'timeline-example'
+            originalFileName: 'timeline-example'
         }
     ]);
 

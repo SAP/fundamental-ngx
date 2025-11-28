@@ -29,13 +29,13 @@ export class DynamicPageDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'dynamic-page-example'
+            originalFileName: 'dynamic-page-example'
         },
         {
             language: 'typescript',
             component: 'DynamicPageExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'dynamic-page-example'
+            originalFileName: 'dynamic-page-example'
         }
     ]);
 

@@ -30,13 +30,13 @@ export class LabelDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'label-example'
+            originalFileName: 'label-example'
         },
         {
             language: 'typescript',
             component: 'LabelExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'label-example'
+            originalFileName: 'label-example'
         }
     ]);
 

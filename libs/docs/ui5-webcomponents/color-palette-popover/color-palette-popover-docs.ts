@@ -37,13 +37,13 @@ export class ColorPalettePopoverDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'ColorPalettePopoverBasicSample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -51,13 +51,13 @@ export class ColorPalettePopoverDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(defaultColorHtml),
-            fileName: 'default-color'
+            originalFileName: 'default-color'
         },
         {
             language: 'typescript',
             component: 'ColorPalettePopoverDefaultColorSample',
             code: getAssetFromModuleAssets(defaultColorTs),
-            fileName: 'default-color'
+            originalFileName: 'default-color'
         }
     ]);
 
@@ -65,13 +65,13 @@ export class ColorPalettePopoverDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(moreColorsHtml),
-            fileName: 'more-colors'
+            originalFileName: 'more-colors'
         },
         {
             language: 'typescript',
             component: 'ColorPalettePopoverMoreColorsSample',
             code: getAssetFromModuleAssets(moreColorsTs),
-            fileName: 'more-colors'
+            originalFileName: 'more-colors'
         }
     ]);
 

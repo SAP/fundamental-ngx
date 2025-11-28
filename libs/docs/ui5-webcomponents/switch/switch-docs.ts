@@ -33,13 +33,13 @@ export class SwitchDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicExampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicSwitchExample',
             code: getAssetFromModuleAssets(basicExampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -47,13 +47,13 @@ export class SwitchDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(designExampleHtml),
-            fileName: 'design-switch'
+            originalFileName: 'design-switch'
         },
         {
             language: 'typescript',
             component: 'DesignSwitchExample',
             code: getAssetFromModuleAssets(designExampleTs),
-            fileName: 'design-switch'
+            originalFileName: 'design-switch'
         }
     ]);
 

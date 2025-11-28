@@ -41,13 +41,13 @@ export class PanelDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'BasicPanelExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -55,13 +55,13 @@ export class PanelDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(fixedPanelHtml),
-            fileName: 'fixed-panel'
+            originalFileName: 'fixed-panel'
         },
         {
             language: 'typescript',
             component: 'FixedPanelExample',
             code: getAssetFromModuleAssets(fixedPanelTs),
-            fileName: 'fixed-panel'
+            originalFileName: 'fixed-panel'
         }
     ]);
 
@@ -69,13 +69,13 @@ export class PanelDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(stickyHeaderHtml),
-            fileName: 'sticky-header-panel'
+            originalFileName: 'sticky-header-panel'
         },
         {
             language: 'typescript',
             component: 'StickyHeaderPanelExample',
             code: getAssetFromModuleAssets(stickyHeaderTs),
-            fileName: 'sticky-header-panel'
+            originalFileName: 'sticky-header-panel'
         }
     ]);
 
@@ -83,13 +83,13 @@ export class PanelDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(customHeaderHtml),
-            fileName: 'custom-header'
+            originalFileName: 'custom-header'
         },
         {
             language: 'typescript',
             component: 'CustomHeaderPanelExample',
             code: getAssetFromModuleAssets(customHeaderTs),
-            fileName: 'custom-header'
+            originalFileName: 'custom-header'
         }
     ]);
 

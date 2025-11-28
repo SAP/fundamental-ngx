@@ -30,12 +30,13 @@ export class LinkDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: basicSampleHtml
+            originalFileName: 'link-sample'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: basicSampleTs
+            component: 'LinkExample',
+            originalFileName: 'link-sample'
         }
     ]);
 

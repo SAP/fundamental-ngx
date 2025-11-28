@@ -35,12 +35,12 @@ export class TokenDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(basicSampleHtml)),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(basicSampleTs)),
-            fileName: 'basic-sample',
+            originalFileName: 'basic-sample',
             component: 'TokenBasicSample'
         }
     ]);
@@ -49,12 +49,12 @@ export class TokenDocs {
         {
             language: 'html',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(tokenInMultiInputHtml)),
-            fileName: 'token-in-multi-input'
+            originalFileName: 'token-in-multi-input'
         },
         {
             language: 'typescript',
             code: runInInjectionContext(this.injector, () => getAssetFromModuleAssets(tokenInMultiInputTs)),
-            fileName: 'token-in-multi-input',
+            originalFileName: 'token-in-multi-input',
             component: 'TokenInMultiInputSample'
         }
     ]);

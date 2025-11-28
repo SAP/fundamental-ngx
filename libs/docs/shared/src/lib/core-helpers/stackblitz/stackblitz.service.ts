@@ -34,6 +34,25 @@ function getImport(file: StackblitzFileObject): string {
 }
 
 /**
+ * Extracts CSS imports from TypeScript code.
+ */
+function extractCssImports(code: string): string[] {
+    const cssImports: string[] = [];
+    const importRegex = /import\s+['"]([^'"]+\.css)['"]/g;
+    let match;
+
+    while ((match = importRegex.exec(code)) !== null) {
+        const importPath = match[1];
+        // Convert package imports to node_modules paths
+        if (!importPath.startsWith('.') && !importPath.startsWith('/')) {
+            cssImports.push(`node_modules/${importPath}`);
+        }
+    }
+
+    return cssImports;
+}
+
+/**
  * Extracts metadata from TypeScript component code.
  */
 function extractComponentMetadata(code: string): {
@@ -149,12 +168,18 @@ export class StackblitzService {
         const defaultProjectInfo = this.defaultProjectInfo();
         const stackBlitzFiles: StackblitzFile[] = [];
 
-        // First pass: extract metadata from TypeScript files
+        // First pass: extract metadata and CSS imports from TypeScript files
         const metadataMap = new Map<ExampleFile, ReturnType<typeof extractComponentMetadata>>();
+        const cssImports = new Set<string>();
+
         for (const example of exampleFiles) {
             if (example.language === 'typescript' && example.code) {
                 const metadata = extractComponentMetadata(example.code);
                 metadataMap.set(example, metadata);
+
+                // Extract CSS imports from the code
+                const imports = extractCssImports(example.code);
+                imports.forEach((imp) => cssImports.add(imp));
             }
         }
 
@@ -225,6 +250,20 @@ export class StackblitzService {
         <${mainFileSelector}></${mainFileSelector}>
     </body>
 </html>`;
+
+        // Add extracted CSS imports to angular.json
+        if (cssImports.size > 0) {
+            console.log('Extracted CSS imports:', Array.from(cssImports));
+            const angularConfig = JSON.parse(this.angular);
+            const existingStyles =
+                angularConfig.projects['fundamental-ngx-example'].architect.build.options.styles || [];
+            const updatedStyles = [...existingStyles, ...Array.from(cssImports)];
+            angularConfig.projects['fundamental-ngx-example'].architect.build.options.styles = updatedStyles;
+            defaultProjectInfo.files['angular.json'] = JSON.stringify(angularConfig, null, 4);
+            console.log('Updated angular.json styles:', updatedStyles);
+        } else {
+            console.log('No CSS imports found in example files');
+        }
 
         sdk.openProject(<any>defaultProjectInfo);
     }
@@ -447,9 +486,28 @@ bootstrapApplication(${mainComponent.componentName}, {
             };
         }
 
+        // Remove CSS import statements and related comments from the TypeScript code
+        // They will be added to angular.json instead
+        let cleanedCode = file.code;
+
+        // Remove CSS import lines
+        cleanedCode = cleanedCode.replace(/^import\s+['"][^'"]+\.css['"];?\s*$/gm, '');
+
+        // Remove common CSS-related comments (case insensitive)
+        cleanedCode = cleanedCode.replace(
+            /^\/\/\s*Import\s+(Fundamental\s+Styles?|SAP\s+UI\s+Common\s+CSS)\s*$/gim,
+            ''
+        );
+
+        // Remove excessive blank lines (3 or more consecutive newlines become 2)
+        cleanedCode = cleanedCode.replace(/\n{3,}/g, '\n\n');
+
+        // Trim leading/trailing whitespace
+        cleanedCode = cleanedCode.trim();
+
         generatedFile.ts = {
             path: this.getFilePath(file, 'ts', metadata),
-            code: file.code
+            code: cleanedCode
         };
 
         return generatedFile;
