@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-ai",
-    "version": "0.58.0-rc.40",
+    "version": "0.58.0-rc.41",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - UI5 Webcomponents AI",
     "license": "Apache-2.0",
