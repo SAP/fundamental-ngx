@@ -1,5 +1,5 @@
 import { Provider } from '@angular/core';
-import { cloneDeep, merge } from 'lodash-es';
+import { cloneDeep, merge } from '@fundamental-ngx/cdk/utils';
 import { DEFAULT_FLEXIBLE_LAYOUT_CONFIG, FD_FLEXIBLE_LAYOUT_CONFIG, FlexibleLayoutConfig } from './constants';
 
 /**

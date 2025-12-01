@@ -4,6 +4,7 @@ import { delay } from 'rxjs/operators';
 
 import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
@@ -24,7 +25,6 @@ import {
     DataProvider,
     ProviderParams
 } from '@fundamental-ngx/platform/shared';
-import { cloneDeep } from 'lodash-es';
 
 @Component({
     selector: 'fdp-platform-approval-flow-example',

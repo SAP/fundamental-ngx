@@ -26,6 +26,7 @@ import {
 } from '@fundamental-ngx/platform/form';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { get } from '@fundamental-ngx/cdk/utils';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 import { SliderComponent } from '@fundamental-ngx/platform/slider';
@@ -43,7 +44,6 @@ import {
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
-import { get } from 'lodash-es';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 

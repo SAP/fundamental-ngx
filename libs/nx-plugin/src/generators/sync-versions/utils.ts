@@ -51,8 +51,6 @@ const getVersions = () => {
         FOCUSVISIBLE_VER_PLACEHOLDER:
             process.env.FD_ENV_FOCUSVISIBLE_VER_PLACEHOLDER ||
             aboveMinorVersion(packageJson.dependencies['focus-visible']),
-        LODASH_ES_VER_PLACEHOLDER:
-            process.env.FD_ENV_LODASH_ES_VER_PLACEHOLDER || aboveMinorVersion(packageJson.dependencies['lodash-es']),
         COMPARE_VERSIONS_VER_PLACEHOLDER:
             process.env.FD_ENV_COMPARE_VERSIONS_VER_PLACEHOLDER ||
             aboveMinorVersion(packageJson.dependencies['compare-versions']),

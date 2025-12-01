@@ -30,6 +30,7 @@ import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { cloneDeep, uniqBy } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -58,7 +59,6 @@ import {
     DATA_PROVIDERS,
     DataProvider
 } from '@fundamental-ngx/platform/shared';
-import { cloneDeep, uniqBy } from 'lodash-es';
 import {
     APPROVAL_FLOW_NODE_TYPES,
     AddNodeDialogFormData,
