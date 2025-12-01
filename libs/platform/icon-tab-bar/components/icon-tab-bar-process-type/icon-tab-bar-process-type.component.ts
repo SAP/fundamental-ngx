@@ -2,10 +2,14 @@ import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angu
 import { take } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    AsyncOrSyncPipe,
+    OverflowListDirective,
+    OverflowListItemDirective,
+    cloneDeep
+} from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';

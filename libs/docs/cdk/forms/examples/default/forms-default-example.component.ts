@@ -13,11 +13,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { MultiComboboxComponent } from '@fundamental-ngx/core/multi-combobox';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
-import { cloneDeep } from 'lodash-es';
 
 @Component({
     selector: 'fdk-forms-default-example',

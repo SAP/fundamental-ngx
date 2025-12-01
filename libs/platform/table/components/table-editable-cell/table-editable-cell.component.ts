@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { set } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { InputComponent, PlatformDatePickerComponent, SwitchComponent } from '@fundamental-ngx/platform/form';
 import { EditableTableCell, TableColumn, TableRow } from '@fundamental-ngx/platform/table-helpers';
-import { set } from 'lodash-es';
 
 let controlUniqId = 0;
 

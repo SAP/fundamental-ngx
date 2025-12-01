@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { NewVariant, Variant, VariantAccess } from './models/variant.interface';
 
 let defaultVariantId = 0;
