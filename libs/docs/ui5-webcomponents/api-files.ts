@@ -24,6 +24,7 @@ export const API_FILES = {
     comboBox: ['ComboBox', 'ComboBoxItem', 'ComboBoxItemGroup'],
     datePicker: ['DatePicker'],
     dateRangePicker: ['DateRangePicker'],
+    dateTimePicker: ['DateTimePicker'],
     dialog: ['Dialog'],
     expandableText: ['ExpandableText'],
     form: ['Form', 'FormGroup', 'FormItem'],

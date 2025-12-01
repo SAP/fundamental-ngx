@@ -1,0 +1,38 @@
+<div class="fd-form-group">
+    <label class="fd-form-label">Date Time Picker with Event Logging:</label>
+    <ui5-datetime-picker
+        [value]="selectedDateTime()"
+        [placeholder]="'Select date and time'"
+        (ui5Change)="onChange($event)"
+        (ui5Input)="onInput($event)"
+        (ui5Open)="onOpen($event)"
+        (ui5Close)="onClose($event)"
+        (ui5ValueStateChange)="onValueStateChange($event)"
+    />
+</div>
+
+<div class="fd-margin-top--md">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+        <strong>Event Log (last 15 events):</strong>
+    </div>
+    <div
+        style="
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            max-height: 250px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        "
+    >
+        @if (eventLogs().length === 0) {
+        <em>No events yet. Open and close the dialog to see events.</em>
+        } @else { @for (log of eventLogs(); track $index) {
+        <div style="font-family: monospace; font-size: 0.875rem; margin: 0.25rem 0">
+            <span>{{ log.timestamp }}</span>
+            <span><strong>{{ log.type }}</strong> - </span>
+            <span>{{ log.value }}</span>
+        </div>
+        } }
+    </div>
+</div>

@@ -79,6 +79,10 @@
             "name": "Date Range Picker"
         },
         {
+            "url": "ui5-webcomponents/date-time-picker",
+            "name": "Date Time Picker"
+        },
+        {
             "url": "ui5-webcomponents/expandable-text",
             "name": "Expandable Text"
         },
