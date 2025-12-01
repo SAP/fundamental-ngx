@@ -183,6 +183,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _addToNextSerial = false;
 
     /** @hidden */
+    _searchInput = '';
+
+    /** @hidden */
     private _viewChangeSub: Subscription;
 
     /** @hidden */
@@ -255,7 +258,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         });
 
         this._viewChangeSub = this.viewService.onViewChange.subscribe(() => {
-            this._onSearchStringChange('');
             this._cdr.detectChanges();
         });
 
@@ -289,6 +291,8 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _exitSelectMode(): void {
+        this._searchInput = '';
+        this._onSearchStringChange('');
         this._selectedApprovers = this._data.node?.approvers?.length ? [...this._data.node.approvers] : [];
 
         if (!this._data.isEdit && !this._data.node?.approvalTeamId) {
@@ -407,6 +411,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _onSearchStringChange(searchString = ''): void {
+        this._searchInput = searchString;
         const params = new Map([['query', searchString]]);
 
         if (this.viewService.isSelectUserMode) {

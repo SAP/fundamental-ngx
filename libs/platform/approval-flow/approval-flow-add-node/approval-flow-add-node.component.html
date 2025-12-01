@@ -24,6 +24,7 @@
                 <fdp-search-field
                     [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
                     [suggestions]="[]"
+                    [inputText]="_searchInput"
                     (inputChange)="_onSearchStringChange($event.text)"
                 ></fdp-search-field>
             }
