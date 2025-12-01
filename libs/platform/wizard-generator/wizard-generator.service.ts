@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
+import { cloneDeep, concat, mergeWith, uniq } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 

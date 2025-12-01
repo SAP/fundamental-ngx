@@ -1,7 +1,6 @@
 import { DestroyRef, Inject, Injectable, Optional, SkipSelf, Type, inject } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
-import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
-import { cloneDeep, merge } from 'lodash-es';
+import { cloneDeep, isFunction, merge, selectStrategy } from '@fundamental-ngx/cdk/utils';
 
 import { debounceTime } from 'rxjs/operators';
 
@@ -531,7 +530,7 @@ export class FormGeneratorService {
 
     /** @hidden */
     private _getMergedFormFieldItemConfig(formItem: DynamicFormItemMap): DynamicFormItemMap {
-        return merge(cloneDeep(this._defaultItemConfig), formItem);
+        return merge(cloneDeep(this._defaultItemConfig), formItem) as DynamicFormItemMap;
     }
 
     /** @hidden */

@@ -27,7 +27,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { DisplayFnPipe, RtlService, TemplateDirective, cloneDeep } from '@fundamental-ngx/cdk/utils';
 import {
     BarComponent,
     BarElementDirective,
@@ -59,7 +59,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
-import { cloneDeep } from 'lodash-es';
 import { DefineTabComponent } from '../components/define-tab/define-tab.component';
 import { SelectTabComponent } from '../components/select-tab/select-tab.component';
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';

@@ -34,6 +34,7 @@ import {
     RtlService,
     ValueByPathPipe,
     destroyObservable,
+    get,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -64,7 +65,6 @@ import {
     isTreeRow,
     isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
-import { get } from 'lodash-es';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { TableEditableCellComponent } from '../table-editable-cell/table-editable-cell.component';

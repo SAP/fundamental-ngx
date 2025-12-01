@@ -1,6 +1,5 @@
-import { dfs, isString } from '@fundamental-ngx/cdk/utils';
+import { cloneDeep, dfs, get, isString, set } from '@fundamental-ngx/cdk/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
-import { cloneDeep, get, set } from 'lodash-es';
 import { isObservable } from 'rxjs';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';

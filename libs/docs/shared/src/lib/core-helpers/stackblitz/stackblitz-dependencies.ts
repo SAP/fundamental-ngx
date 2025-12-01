@@ -40,7 +40,6 @@ export class StackblitzDependencies {
         'tslib',
         'typescript',
         'fast-deep-equal',
-        'lodash-es',
         'zone.js',
         '@types/google.visualization',
         '@ui5/webcomponents',

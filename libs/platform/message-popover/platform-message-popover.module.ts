@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { mergeWith } from 'lodash-es';
+import { mergeWith } from '@fundamental-ngx/cdk/utils';
 import { MessagePopoverFormWrapperComponent } from './components/message-popover-form-wrapper/message-popover-form-wrapper.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
 import { FDP_MESSAGE_POPOVER_CONFIG, FDP_MESSAGE_POPOVER_DEFAULT_CONFIG, MessagePopoverConfig } from './default-config';

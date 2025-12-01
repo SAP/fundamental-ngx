@@ -12,9 +12,9 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { findLastIndex } from 'lodash-es';
 import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
+import { findLastIndex } from '../../functions/lodash-utils';
 import { Nullable } from '../../models/nullable';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
