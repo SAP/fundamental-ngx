@@ -1,0 +1,41 @@
+<div class="fd-margin-top--sm">
+    <ui5-button (ui5Click)="openSimpleDialog()" class="fd-margin-end--sm">Simple Header (headerText)</ui5-button>
+    <ui5-button (ui5Click)="openCustomDialog()">Custom Header (slot)</ui5-button>
+</div>
+
+<!-- Dialog with simple headerText -->
+<ui5-dialog headerText="Simple Header Text" [open]="isSimpleHeaderDialogOpen()">
+    <div class="fd-margin--sm">
+        <p>This dialog uses the <strong>headerText</strong> property for a simple text header.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; gap: 0.5rem; padding: 0.5rem">
+        <ui5-button design="Transparent" (ui5Click)="closeSimpleHeaderDialog()">Cancel</ui5-button>
+        <ui5-button design="Emphasized" (ui5Click)="closeSimpleHeaderDialog()">OK</ui5-button>
+    </div>
+</ui5-dialog>
+
+<!-- Dialog with custom header and footer slots -->
+<ui5-dialog [open]="isCustomDialogOpen()">
+    <ui5-bar slot="header" design="Header">
+        <ui5-icon name="message-success" slot="startContent"></ui5-icon>
+        <ui5-title level="H5">Custom Header with Icon</ui5-title>
+        <ui5-button
+            class="dialogCloser"
+            design="Transparent"
+            slot="endContent"
+            icon="decline"
+            (ui5Click)="closeCustomDialog()"
+        ></ui5-button>
+    </ui5-bar>
+    <div class="fd-margin--sm">
+        <p>This dialog uses a custom <strong>header slot</strong> with an icon and styled title.</p>
+        <p class="fd-margin-top--sm">The footer also contains multiple action buttons.</p>
+    </div>
+    <ui5-bar slot="footer" design="Footer">
+        <ui5-button design="Transparent" (ui5Click)="closeCustomDialog()">Help</ui5-button>
+        <div style="display: flex; gap: 0.5rem">
+            <ui5-button design="Transparent" (ui5Click)="closeCustomDialog()">Cancel</ui5-button>
+            <ui5-button design="Emphasized" (ui5Click)="closeCustomDialog()">Save</ui5-button>
+        </div>
+    </ui5-bar>
+</ui5-dialog>

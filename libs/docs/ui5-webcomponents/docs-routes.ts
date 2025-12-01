@@ -88,6 +88,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/date-range-picker').then(configureLibRoutes)
     },
     {
+        path: 'dialog',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/dialog').then(configureLibRoutes)
+    },
+    {
         path: 'expandable-text',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
     },

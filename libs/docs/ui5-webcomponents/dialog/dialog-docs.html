@@ -1,0 +1,65 @@
+<fd-docs-section-title id="basic" componentName="Dialog">Basic Sample</fd-docs-section-title>
+<description>
+    The Dialog component is a modal popup that displays content in a layer above the app. Dialogs are used to prompt
+    users for input, confirmation, or to display important information that requires user attention. The dialog blocks
+    interaction with the page content until it is dismissed.
+</description>
+<component-example>
+    <ui5-dialog-basic-sample></ui5-dialog-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"></code-example>
+
+<fd-docs-section-title id="header-footer" componentName="Dialog">Header and Footer</fd-docs-section-title>
+<description>
+    Dialogs support custom header and footer content using slots. Use the <code>header</code> slot for custom header
+    content (like titles with icons), and the <code>footer</code> slot for action buttons. You can also use the simple
+    <b>headerText</b> property for basic text headers.
+</description>
+<component-example>
+    <ui5-dialog-header-footer-sample></ui5-dialog-header-footer-sample>
+</component-example>
+<code-example [exampleFiles]="headerFooterExamples()"></code-example>
+
+<fd-docs-section-title id="draggable-resizable" componentName="Dialog">Draggable and Resizable</fd-docs-section-title>
+<description>
+    Dialogs can be made <b>draggable</b> by setting the draggable property, allowing users to move them by the header.
+    They can also be <b>resizable</b>, which adds a resize handle in the bottom corner. These features are only
+    available in desktop mode.
+</description>
+<component-example>
+    <ui5-dialog-draggable-resizable-sample></ui5-dialog-draggable-resizable-sample>
+</component-example>
+<code-example [exampleFiles]="draggableResizableExamples()"></code-example>
+
+<fd-docs-section-title id="value-state" componentName="Dialog">Value States</fd-docs-section-title>
+<description>
+    Dialogs support different states to communicate the severity or type of information: <b>None</b> (default),
+    <b>Positive</b>, <b>Negative</b>, and <b>Critical</b>. When <b>Negative</b> or <b>Critical</b> is set, the
+    accessibility role changes to "alertdialog" for screen readers.
+</description>
+<component-example>
+    <ui5-dialog-value-state-sample></ui5-dialog-value-state-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExamples()"></code-example>
+
+<fd-docs-section-title id="stretch" componentName="Dialog">Stretch to Full Screen</fd-docs-section-title>
+<description>
+    Use the <b>stretch</b> property to make the dialog fill the entire screen on mobile devices, or approximately 90% of
+    the viewport on desktop. This is particularly useful for forms or content that requires more space on smaller
+    screens.
+</description>
+<component-example>
+    <ui5-dialog-stretch-sample></ui5-dialog-stretch-sample>
+</component-example>
+<code-example [exampleFiles]="stretchExamples()"></code-example>
+
+<fd-docs-section-title id="events" componentName="Dialog">Events</fd-docs-section-title>
+<description>
+    Dialogs emit lifecycle events: <b>ui5BeforeOpen</b> and <b>ui5BeforeClose</b> (both cancellable), and
+    <b>ui5Open</b> and <b>ui5Close</b> (after the action completes). Use these events to perform actions when the dialog
+    state changes or to prevent opening/closing based on validation.
+</description>
+<component-example>
+    <ui5-dialog-events-sample></ui5-dialog-events-sample>
+</component-example>
+<code-example [exampleFiles]="eventsExamples()"></code-example>
