@@ -1,0 +1,46 @@
+<div class="fd-margin-top--sm">
+    <ui5-button (click)="openDialog()" class="fd-margin-end--sm">Open Dialog</ui5-button>
+</div>
+
+<ui5-dialog
+    #dialog
+    headerText="Dialog with Events"
+    [open]="isDialogOpen()"
+    (ui5BeforeOpen)="onBeforeOpen($event)"
+    (ui5Open)="onOpen($event)"
+    (ui5BeforeClose)="onBeforeClose($event)"
+    (ui5Close)="onClose($event)"
+>
+    <div class="fd-margin--sm">
+        <p><strong>Dialog Events Demonstration</strong></p>
+        <p class="fd-margin-top--sm">
+            This dialog demonstrates all lifecycle events: before-open, open, before-close, and close.
+        </p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
+
+<div class="fd-margin-top--md">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+        <strong>Event Log (last 15 events):</strong>
+        <ui5-button design="Transparent" (ui5Click)="clearLog()">Clear Log</ui5-button>
+    </div>
+    <div
+        style="
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            max-height: 250px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        "
+    >
+        @if (eventLog().length === 0) {
+        <em>No events yet. Open and close the dialog to see events.</em>
+        } @else { @for (log of eventLog(); track $index) {
+        <div style="font-family: monospace; font-size: 0.875rem; margin: 0.25rem 0">{{ log }}</div>
+        } }
+    </div>
+</div>

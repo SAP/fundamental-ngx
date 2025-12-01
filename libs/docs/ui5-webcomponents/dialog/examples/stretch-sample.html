@@ -1,0 +1,43 @@
+<div class="fd-margin-top--sm">
+    <ui5-button (ui5Click)="openNormalDialog()" class="fd-margin-end--sm">Normal Dialog</ui5-button>
+    <ui5-button (ui5Click)="openStretchDialog()">Stretched Dialog</ui5-button>
+</div>
+
+<!-- Normal Dialog -->
+<ui5-dialog headerText="Normal Dialog" [open]="isNormalDialogOpen()">
+    <div class="fd-margin--sm">
+        <p>This is a normal dialog with default sizing.</p>
+        <p class="fd-margin-top--sm">
+            On desktop, it sizes according to its content. On mobile, it adapts to the screen size but doesn't fill the
+            entire viewport.
+        </p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeNormalDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
+
+<!-- Stretched Dialog -->
+<ui5-dialog headerText="Stretched Dialog" [stretch]="true" [open]="isStretchDialogOpen()">
+    <div class="fd-margin--sm">
+        <p><strong>This dialog uses the stretch property!</strong></p>
+        <p class="fd-margin-top--sm">
+            On mobile devices, this dialog will fill the entire screen, providing maximum space for content.
+        </p>
+        <p class="fd-margin-top--sm">
+            On desktop, it will stretch to approximately 90% of the viewport, giving users plenty of room to work with
+            forms, tables, or other content that benefits from extra space.
+        </p>
+        <p class="fd-margin-top--sm">
+            <strong>Best practices:</strong>
+        </p>
+        <ul class="fd-margin-top--sm">
+            <li>Use for complex forms with many fields</li>
+            <li>Use for content that needs horizontal space (tables, charts)</li>
+            <li>Recommended for mobile usability when showing detailed information</li>
+        </ul>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeStretchDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
