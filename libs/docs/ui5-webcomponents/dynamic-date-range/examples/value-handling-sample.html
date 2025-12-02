@@ -1,0 +1,46 @@
+<div class="fd-form-group">
+    <label class="fd-form-label" for="dynamic-date-range-value"> Select Date Range: </label>
+    <ui5-dynamic-date-range
+        #dynamicDateRange
+        id="dynamic-date-range-value"
+        [value]="selectedRange()"
+        [options]="options()"
+        (ui5Change)="onDateRangeChange($event)"
+    />
+</div>
+
+@if (selectedRange()) {
+<div class="fd-message-strip fd-message-strip--information fd-margin-top--md" role="alert">
+    <p class="fd-message-strip__text">
+        <strong>Selected Value (JSON):</strong><br />
+        <code style="display: block; white-space: pre-wrap; word-break: break-all; font-size: 0.875rem"
+            >{{ selectedValueJson() }}</code
+        >
+    </p>
+</div>
+
+<div class="fd-message-strip fd-message-strip--success fd-margin-top--md" role="alert">
+    <p class="fd-message-strip__text">
+        <strong>Converted Dates (using toDates()):</strong><br />
+        {{ dateRangeDisplay() }}
+    </p>
+</div>
+} @else {
+<div class="fd-message-strip fd-message-strip--information fd-margin-top--md" role="alert">
+    <p class="fd-message-strip__text">
+        Select a date range to see how the <code>toDates()</code> method converts the value object to actual JavaScript
+        Date objects.
+    </p>
+</div>
+}
+
+<div class="fd-message-strip fd-message-strip--information fd-margin-top--md" role="alert">
+    <p class="fd-message-strip__text">
+        <strong>How it works:</strong><br />
+        • Select a date range from the picker<br />
+        • The <code>ui5Change</code> event fires with the value object<br />
+        • We use <code>viewChild()</code> to access the component reference<br />
+        • Call <code>element.toDates(value)</code> to convert to JavaScript Date objects<br />
+        • Display the formatted date range using <code>Date.toLocaleString()</code>
+    </p>
+</div>

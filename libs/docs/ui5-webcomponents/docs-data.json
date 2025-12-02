@@ -71,16 +71,20 @@
             "name": "Date Picker"
         },
         {
-            "url": "ui5-webcomponents/dialog",
-            "name": "Dialog"
-        },
-        {
             "url": "ui5-webcomponents/date-range-picker",
             "name": "Date Range Picker"
         },
         {
             "url": "ui5-webcomponents/date-time-picker",
             "name": "Date Time Picker"
+        },
+        {
+            "url": "ui5-webcomponents/dialog",
+            "name": "Dialog"
+        },
+        {
+            "url": "ui5-webcomponents/dynamic-date-range",
+            "name": "Dynamic Date Range"
         },
         {
             "url": "ui5-webcomponents/expandable-text",

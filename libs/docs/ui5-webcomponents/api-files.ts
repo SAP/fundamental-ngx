@@ -26,6 +26,7 @@ export const API_FILES = {
     dateRangePicker: ['DateRangePicker'],
     dateTimePicker: ['DateTimePicker'],
     dialog: ['Dialog'],
+    dynamicDateRange: ['DynamicDateRange'],
     expandableText: ['ExpandableText'],
     form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],

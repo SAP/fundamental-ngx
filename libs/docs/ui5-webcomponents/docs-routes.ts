@@ -96,6 +96,11 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/dialog').then(configureLibRoutes)
     },
     {
+        path: 'dynamic-date-range',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/dynamic-date-range').then(configureLibRoutes)
+    },
+    {
         path: 'expandable-text',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
     },
