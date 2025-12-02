@@ -11,9 +11,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { MultiComboboxComponent } from '@fundamental-ngx/core/multi-combobox';
@@ -27,9 +25,7 @@ import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
         FdpFormGroupModule,
         FormsModule,
         ReactiveFormsModule,
-        CvaDirective,
         forwardRef(() => CustomCdkControlExampleComponent),
-        DataSourceDirective,
         MultiComboboxComponent,
         ButtonComponent
     ]
@@ -98,12 +94,15 @@ export class CustomCdkControlExampleComponent implements OnInit {
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
         this.form?.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            const formValue = Object.entries(cloneDeep(this.form.value)).reduce((acc, [currentKey, currentValue]) => {
-                if (currentValue) {
-                    acc[currentKey] = currentValue;
-                }
-                return acc;
-            }, {});
+            const formValue = Object.entries(structuredClone(this.form.value)).reduce(
+                (acc, [currentKey, currentValue]) => {
+                    if (currentValue) {
+                        acc[currentKey] = currentValue;
+                    }
+                    return acc;
+                },
+                {}
+            );
             this.cvaControl.cvaDirective?.setValue(Object.keys(formValue), true);
         });
     }

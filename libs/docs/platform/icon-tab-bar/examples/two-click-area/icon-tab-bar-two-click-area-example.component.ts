@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { longTextTypeConfig } from '../config-for-examples/text-type.config';
 
@@ -11,7 +10,7 @@ import { longTextTypeConfig } from '../config-for-examples/text-type.config';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconTabBarTwoClickAreaExampleComponent {
-    textItems = cloneDeep(longTextTypeConfig).map((item) => {
+    textItems = structuredClone(longTextTypeConfig).map((item) => {
         item.closable = true;
         return item;
     });

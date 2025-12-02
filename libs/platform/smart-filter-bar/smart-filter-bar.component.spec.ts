@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { SmartFilterBarComponent } from './smart-filter-bar.component';
 import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
@@ -26,7 +26,7 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                dataType="number"
+                [dataType]="dataTypeEnum.NUMBER"
                 name="price"
                 key="price.value"
                 label="Price"
@@ -36,7 +36,7 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                filterType="multi-select"
+                [filterType]="filterTypeEnum.MULTI"
                 name="status"
                 key="status"
                 label="Status"
@@ -46,7 +46,7 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                filterType="single-select"
+                [filterType]="filterTypeEnum.SINGLE"
                 name="statusColor"
                 key="statusColor"
                 label="Status color"
@@ -56,7 +56,7 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                dataType="date"
+                [dataType]="dataTypeEnum.DATE"
                 name="date"
                 key="date"
                 label="Date"
@@ -64,8 +64,8 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                filterType="single-select"
-                dataType="boolean"
+                [filterType]="filterTypeEnum.SINGLE"
+                [dataType]="dataTypeEnum.BOOLEAN"
                 name="verified"
                 key="verified"
                 label="Verified"
@@ -76,6 +76,9 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 })
 class TestComponent {
     @ViewChild(SmartFilterBarComponent) smartFilterBar: SmartFilterBarComponent;
+
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
 
     source: ExampleItem[] = ITEMS;
 

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core';
 import {
     IconTabBarComponent,
@@ -21,6 +20,6 @@ export class PlatformIconTabBarProcessTypeExampleComponent implements OnInit {
     items: TabConfig[];
 
     ngOnInit(): void {
-        this.items = this.withOverflowExample ? cloneDeep(longIconTypeConfig) : cloneDeep(iconTypeConfig);
+        this.items = this.withOverflowExample ? structuredClone(longIconTypeConfig) : structuredClone(iconTypeConfig);
     }
 }
