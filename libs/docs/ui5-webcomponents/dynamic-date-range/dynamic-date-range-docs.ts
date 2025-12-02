@@ -33,7 +33,7 @@ export class DynamicDateRangeDocs {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(basicSampleTs),
-            fileName: 'basic-sample',
+            originalFileName: 'basic-sample',
             component: 'BasicSample',
             typescriptFileCode: getAssetFromModuleAssets(basicSampleTs),
             scssFileCode: ''
@@ -41,7 +41,7 @@ export class DynamicDateRangeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            fileName: 'basic-sample'
+            originalFileName: 'basic-sample'
         }
     ];
 
@@ -49,7 +49,7 @@ export class DynamicDateRangeDocs {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(valueHandlingSampleTs),
-            fileName: 'value-handling-sample',
+            originalFileName: 'value-handling-sample',
             component: 'ValueHandlingSample',
             typescriptFileCode: getAssetFromModuleAssets(valueHandlingSampleTs),
             scssFileCode: ''
@@ -57,7 +57,7 @@ export class DynamicDateRangeDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(valueHandlingSampleHtml),
-            fileName: 'value-handling-sample'
+            originalFileName: 'value-handling-sample'
         }
     ];
 }
