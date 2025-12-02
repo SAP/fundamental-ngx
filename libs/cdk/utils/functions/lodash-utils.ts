@@ -124,6 +124,11 @@ export function cloneDeep<T>(obj: T): T {
  * @returns The merged object
  */
 export function merge<T>(target: T, ...sources: Partial<T>[]): T {
+    // Handle null or undefined target
+    if (target == null) {
+        target = {} as T;
+    }
+
     const result = cloneDeep(target);
 
     for (const source of sources) {
@@ -139,6 +144,11 @@ export function merge<T>(target: T, ...sources: Partial<T>[]): T {
  * Helper function for deep merge
  */
 function deepMergeInto<T>(target: T, source: Partial<T>): void {
+    // Handle null or undefined target
+    if (target == null) {
+        return;
+    }
+
     for (const key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
             const sourceValue = source[key];
@@ -181,6 +191,11 @@ export function mergeWith<T>(
     source: Partial<T>,
     customizer: (targetValue: any, sourceValue: any, key: string) => any
 ): T {
+    // Handle null or undefined target
+    if (target == null) {
+        target = {} as T;
+    }
+
     const result = cloneDeep(target);
 
     for (const key in source) {
