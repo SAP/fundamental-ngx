@@ -290,21 +290,6 @@ export function concat<T>(...arrays: (T | T[])[]): T[] {
 }
 
 /**
- * Finds the last index in an array that matches the predicate.
- * @param array The array to inspect
- * @param predicate The function invoked per iteration
- * @returns The index of the found element, else -1
- */
-export function findLastIndex<T>(array: T[], predicate: (item: T, index: number, array: T[]) => boolean): number {
-    for (let i = array.length - 1; i >= 0; i--) {
-        if (predicate(array[i], i, array)) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-/**
  * Escapes HTML characters in a string.
  * Converts characters like <, >, &, ", and ' to their HTML entity equivalents.
  * @param str The string to escape

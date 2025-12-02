@@ -14,7 +14,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
-import { findLastIndex } from '../../functions/lodash-utils';
 import { Nullable } from '../../models/nullable';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
@@ -195,7 +194,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 break;
             case PAGE_DOWN:
                 event.preventDefault();
-                nextRowIndex = findLastIndex(lists, (item) => item._isVisible);
+                nextRowIndex = lists.findLastIndex((item) => item._isVisible);
                 scrollIntoView = 'top';
                 break;
             case PAGE_UP:

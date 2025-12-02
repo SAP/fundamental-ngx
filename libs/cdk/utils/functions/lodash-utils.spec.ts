@@ -1,17 +1,4 @@
-import {
-    cloneDeep,
-    concat,
-    countBy,
-    escape,
-    findLastIndex,
-    flatten,
-    get,
-    merge,
-    mergeWith,
-    set,
-    uniq,
-    uniqBy
-} from './lodash-utils';
+import { cloneDeep, concat, countBy, escape, flatten, get, merge, mergeWith, set, uniq, uniqBy } from './lodash-utils';
 
 describe('lodash-utils', () => {
     describe('get', () => {
@@ -362,42 +349,6 @@ describe('lodash-utils', () => {
 
         it('should handle mixed arrays and values', () => {
             expect(concat([1, 2], 3, [4, 5], 6)).toEqual([1, 2, 3, 4, 5, 6]);
-        });
-    });
-
-    describe('findLastIndex', () => {
-        it('should find last index matching predicate', () => {
-            const arr = [1, 2, 3, 2, 1];
-            const result = findLastIndex(arr, (x) => x === 2);
-            expect(result).toBe(3);
-        });
-
-        it('should return -1 if no match found', () => {
-            const arr = [1, 2, 3];
-            const result = findLastIndex(arr, (x) => x === 5);
-            expect(result).toBe(-1);
-        });
-
-        it('should handle empty arrays', () => {
-            expect(findLastIndex([], (x) => x === 1)).toBe(-1);
-        });
-
-        it('should pass index and array to predicate', () => {
-            const arr = [1, 2, 3];
-            let calledWith: any[] = [];
-            findLastIndex(arr, (item, index, array) => {
-                calledWith = [item, index, array];
-                return item === 1;
-            });
-            expect(calledWith[0]).toBe(1);
-            expect(calledWith[1]).toBe(0);
-            expect(calledWith[2]).toBe(arr);
-        });
-
-        it('should find last element', () => {
-            const arr = [1, 2, 3, 4, 5];
-            const result = findLastIndex(arr, (x) => x > 0);
-            expect(result).toBe(4);
         });
     });
 
