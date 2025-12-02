@@ -133,6 +133,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/list').then(configureLibRoutes)
     },
     {
+        path: 'menu',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/menu').then(configureLibRoutes)
+    },
+    {
         path: 'message-strip',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
     },

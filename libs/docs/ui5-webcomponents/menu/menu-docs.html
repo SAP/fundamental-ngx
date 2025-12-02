@@ -1,0 +1,74 @@
+<fd-docs-section-title id="basic" componentName="menu"> Basic Menu </fd-docs-section-title>
+<description>
+    The basic Menu displays a list of items in a popover. Use the <code>opener</code> property to specify the button or
+    element that opens the menu. The menu automatically positions itself relative to the opener element.
+</description>
+<component-example>
+    <ui5-menu-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="with-icons" componentName="menu"> Menu with Icons </fd-docs-section-title>
+<description>
+    Add icons to menu items using the <code>icon</code> property on <code>ui5-menu-item</code>. Icons provide visual
+    cues and improve the user experience by making actions more recognizable. Use SAP icon names from the SAP Icons font
+    library.
+</description>
+<component-example>
+    <ui5-menu-with-icons-sample />
+</component-example>
+<code-example [exampleFiles]="withIconsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="sub-menus" componentName="menu"> Hierarchical Sub-menus </fd-docs-section-title>
+<description>
+    Create nested menu structures by adding <code>ui5-menu-item</code> elements as children of other menu items. The
+    component automatically displays a sub-menu arrow indicator and handles the sub-menu opening/closing behavior.
+    Sub-menus can be nested to multiple levels.
+</description>
+<component-example>
+    <ui5-menu-sub-menus-sample />
+</component-example>
+<code-example [exampleFiles]="subMenusExample()" />
+
+<separator />
+
+<fd-docs-section-title id="placement" componentName="menu"> Menu Placement </fd-docs-section-title>
+<description>
+    Control where the menu appears relative to its opener using the <code>placement</code> property. Available options
+    are <code>Top</code>, <code>Bottom</code> (default), <code>Left</code>, and <code>Right</code>. The menu
+    automatically adjusts if there's insufficient space in the preferred direction.
+</description>
+<component-example>
+    <ui5-menu-placement-sample />
+</component-example>
+<code-example [exampleFiles]="placementExample()" />
+
+<separator />
+
+<fd-docs-section-title id="additional-text" componentName="menu"> Additional Text </fd-docs-section-title>
+<description>
+    Add additional descriptive text to menu items using the <code>additionalText</code> property on
+    <code>ui5-menu-item</code>. This can be useful for providing more context or information about the action
+    represented by the menu item.
+</description>
+<component-example>
+    <ui5-menu-additional-text-sample />
+</component-example>
+<code-example [exampleFiles]="additionalTextExample()" />
+
+<separator />
+
+<fd-docs-section-title id="loading" componentName="menu"> Loading State </fd-docs-section-title>
+<description>
+    Display a loading indicator inside the menu using the <code>loading</code> property. This is useful when fetching
+    menu items asynchronously. Use <code>loadingDelay</code> to control how long to wait before showing the indicator
+    (default: 1000ms).
+</description>
+<component-example>
+    <ui5-menu-loading-sample />
+</component-example>
+<code-example [exampleFiles]="loadingExample()" />

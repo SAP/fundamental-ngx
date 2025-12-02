@@ -1,0 +1,11 @@
+<ui5-button id="withIconsOpener" icon="menu" (click)="openMenu()"> Actions </ui5-button>
+
+<ui5-menu opener="withIconsOpener" [open]="isMenuOpen()" (ui5Close)="closeMenu()">
+    <ui5-menu-item text="New Document" icon="document" />
+    <ui5-menu-item text="Open Folder" icon="open-folder" />
+    <ui5-menu-item text="Save" icon="save" />
+    <ui5-menu-item text="Copy" icon="copy" />
+    <ui5-menu-item text="Paste" icon="paste" />
+    <ui5-menu-item text="Delete" icon="delete" />
+    <ui5-menu-item text="Settings" icon="action-settings" />
+</ui5-menu>

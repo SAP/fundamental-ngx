@@ -35,6 +35,7 @@ export const API_FILES = {
     label: ['Label'],
     link: ['Link'],
     list: ['List', 'ListItemCustom', 'ListItemGroup', 'ListItemStandard'],
+    menu: ['Menu', 'MenuItem', 'MenuItemGroup', 'MenuSeparator'],
     messageStrip: ['MessageStrip'],
     panel: ['Panel'],
     popover: ['Popover'],

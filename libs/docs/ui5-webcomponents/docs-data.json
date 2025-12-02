@@ -119,6 +119,10 @@
             "name": "List"
         },
         {
+            "url": "ui5-webcomponents/menu",
+            "name": "Menu"
+        },
+        {
             "url": "ui5-webcomponents/message-strip",
             "name": "Message Strip"
         },
