@@ -23,11 +23,10 @@ import {
 import { Observable, Subject, Subscription, filter, isObservable, of, take, tap } from 'rxjs';
 
 import { Direction } from '@angular/cdk/bidi';
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { DisplayFnPipe, RtlService, TemplateDirective, cloneDeep } from '@fundamental-ngx/cdk/utils';
+import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarComponent,
     BarElementDirective,
@@ -105,7 +104,6 @@ let vhiUniqueId = 0;
         DialogHeaderComponent,
         TemplateDirective,
         NgTemplateOutlet,
-        CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
         DialogFooterComponent,
@@ -705,7 +703,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** @hidden Save previous state */
     private _savePreviousState(): void {
-        const value = cloneDeep(this.value);
+        const value = structuredClone(this.value);
         this._currentValue = value;
         this._prevState = value;
     }

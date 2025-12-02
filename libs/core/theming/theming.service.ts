@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { cloneDeep, merge, Nullable, THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
+import { merge, Nullable, THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { BaseThemingConfig } from './config';
@@ -66,7 +66,7 @@ export class ThemingService {
         @Inject(THEMING_CONFIG_TOKEN)
         private readonly _providedConfig: Partial<ThemingConfig>
     ) {
-        this.config = merge(cloneDeep(this.config), cloneDeep(this._providedConfig));
+        this.config = merge(structuredClone(this.config), structuredClone(this._providedConfig));
 
         this._renderer = this._rendererFactory.createRenderer(this._document, null);
 

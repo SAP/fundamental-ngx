@@ -1,4 +1,3 @@
-import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { DataProvider, ProviderParams } from '@fundamental-ngx/platform/shared';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -13,7 +12,7 @@ export class UserDataProvider extends DataProvider<ApprovalUser> {
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
         }
-        return of(cloneDeep(result)).pipe(delay(500));
+        return of(structuredClone(result)).pipe(delay(500));
     }
 
     /** @hidden */
@@ -36,6 +35,6 @@ export class TeamDataProvider extends DataProvider<ApprovalTeam> {
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
         }
-        return of(cloneDeep(result)).pipe(delay(500));
+        return of(structuredClone(result)).pipe(delay(500));
     }
 }

@@ -56,12 +56,65 @@ export function set<T = any>(obj: T, path: string | string[], value: any): T {
 }
 
 /**
- * Deep clones an object using structured clone algorithm.
+ * Deep clones an object, handling functions and other non-cloneable values.
+ * For objects with functions or class instances, it creates a new object and copies properties.
  * @param obj The object to clone
  * @returns The cloned object
  */
 export function cloneDeep<T>(obj: T): T {
-    return structuredClone(obj);
+    // Handle primitives, null, and undefined
+    if (obj == null || typeof obj !== 'object') {
+        return obj;
+    }
+
+    // Handle Date
+    if (obj instanceof Date) {
+        return new Date(obj.getTime()) as any;
+    }
+
+    // Handle Array
+    if (Array.isArray(obj)) {
+        return obj.map((item) => cloneDeep(item)) as any;
+    }
+
+    // Handle RegExp
+    if (obj instanceof RegExp) {
+        return new RegExp(obj.source, obj.flags) as any;
+    }
+
+    // Handle Map
+    if (obj instanceof Map) {
+        const clonedMap = new Map();
+        obj.forEach((value, key) => {
+            clonedMap.set(cloneDeep(key), cloneDeep(value));
+        });
+        return clonedMap as any;
+    }
+
+    // Handle Set
+    if (obj instanceof Set) {
+        const clonedSet = new Set();
+        obj.forEach((value) => {
+            clonedSet.add(cloneDeep(value));
+        });
+        return clonedSet as any;
+    }
+
+    // Handle plain objects
+    const clonedObj = {} as T;
+    for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            const value = obj[key];
+            // Functions and symbols are copied by reference, not cloned
+            if (typeof value === 'function' || typeof value === 'symbol') {
+                (clonedObj as any)[key] = value;
+            } else {
+                (clonedObj as any)[key] = cloneDeep(value);
+            }
+        }
+    }
+
+    return clonedObj;
 }
 
 /**
@@ -74,7 +127,9 @@ export function merge<T>(target: T, ...sources: Partial<T>[]): T {
     const result = cloneDeep(target);
 
     for (const source of sources) {
-        deepMergeInto(result, source);
+        if (source != null) {
+            deepMergeInto(result, source);
+        }
     }
 
     return result;
@@ -89,13 +144,25 @@ function deepMergeInto<T>(target: T, source: Partial<T>): void {
             const sourceValue = source[key];
             const targetValue = target[key];
 
-            if (sourceValue && typeof sourceValue === 'object' && !Array.isArray(sourceValue)) {
-                if (targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
-                    deepMergeInto(targetValue, sourceValue as any);
-                } else {
-                    (target as any)[key] = cloneDeep(sourceValue);
-                }
+            // Handle functions and primitives - copy by reference
+            if (typeof sourceValue === 'function' || typeof sourceValue !== 'object' || sourceValue === null) {
+                (target as any)[key] = sourceValue;
+            } else if (Array.isArray(sourceValue)) {
+                // Clone arrays
+                (target as any)[key] = cloneDeep(sourceValue);
+            } else if (
+                sourceValue instanceof Date ||
+                sourceValue instanceof RegExp ||
+                sourceValue instanceof Map ||
+                sourceValue instanceof Set
+            ) {
+                // Clone special objects
+                (target as any)[key] = cloneDeep(sourceValue);
+            } else if (targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
+                // Recursively merge plain objects
+                deepMergeInto(targetValue, sourceValue as any);
             } else {
+                // Clone plain objects
                 (target as any)[key] = cloneDeep(sourceValue);
             }
         }

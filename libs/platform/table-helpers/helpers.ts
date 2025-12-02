@@ -1,4 +1,4 @@
-import { cloneDeep, dfs, get, isString, set } from '@fundamental-ngx/cdk/utils';
+import { dfs, get, isString, set } from '@fundamental-ngx/cdk/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { isObservable } from 'rxjs';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -343,7 +343,7 @@ export function toDataStream<T>(source: FdpTableDataSource<T>): TableDataSource<
  */
 export function buildNewRowSkeleton<T>(editableRowSkeleton: T, columns: TableColumn[]): T {
     if (editableRowSkeleton) {
-        return cloneDeep(editableRowSkeleton);
+        return structuredClone(editableRowSkeleton);
     }
 
     let newRow = {};

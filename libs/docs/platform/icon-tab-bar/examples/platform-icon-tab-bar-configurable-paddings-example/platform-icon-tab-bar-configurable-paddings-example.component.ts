@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { cloneDeep } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { textTypeConfig } from '../config-for-examples/text-type.config';
 
@@ -17,8 +16,8 @@ import { textTypeConfig } from '../config-for-examples/text-type.config';
     imports: [IconTabBarComponent]
 })
 export class PlatformIconTabBarConfigurablePaddingsExampleComponent {
-    itemsForSmExample = cloneDeep(textTypeConfig);
-    itemsForLgExample = cloneDeep(textTypeConfig);
-    itemsForXlExample = cloneDeep(textTypeConfig);
-    itemsForResponsiveExample = cloneDeep(textTypeConfig);
+    itemsForSmExample = structuredClone(textTypeConfig);
+    itemsForLgExample = structuredClone(textTypeConfig);
+    itemsForXlExample = structuredClone(textTypeConfig);
+    itemsForResponsiveExample = structuredClone(textTypeConfig);
 }
