@@ -1,0 +1,73 @@
+<fd-docs-section-title id="basic" componentName="file-uploader"> Basic File Uploader </fd-docs-section-title>
+<description>
+    The basic File Uploader allows users to select files from their file system. Click "Browse..." or the button to open
+    the file selection dialog. The component displays the selected file name(s).
+</description>
+<component-example>
+    <ui5-file-uploader-basic-sample></ui5-file-uploader-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="multiple" componentName="file-uploader"> Multiple Files </fd-docs-section-title>
+<description>
+    Enable the <code>multiple</code> property to allow users to select multiple files at once. The component will
+    display all selected file names and provide access to the FileList through the reactive <code>files()</code>
+    computed signal.
+</description>
+<component-example>
+    <ui5-file-uploader-multiple-files-sample></ui5-file-uploader-multiple-files-sample>
+</component-example>
+<code-example [exampleFiles]="multipleFilesExample()" />
+
+<separator />
+
+<fd-docs-section-title id="type-restrictions" componentName="file-uploader">
+    File Type Restrictions
+</fd-docs-section-title>
+<description>
+    Use the <code>accept</code> property to restrict file types (e.g., ".pdf", ".jpg", ".png"). The property accepts a
+    comma-separated list of file extensions. Remember to include the dot (.) before file extensions.
+</description>
+<component-example>
+    <ui5-file-uploader-type-restrictions-sample></ui5-file-uploader-type-restrictions-sample>
+</component-example>
+<code-example [exampleFiles]="typeRestrictionsExample()" />
+
+<fd-docs-section-title id="size-restrictions" componentName="file-uploader">
+    File Size Restrictions
+</fd-docs-section-title>
+<description>
+    Use the <code>maxFileSize</code> property to restrict the maximum file size (e.g., "5MB", "10MB").
+</description>
+<component-example>
+    <ui5-file-uploader-file-size-restrictions-sample></ui5-file-uploader-file-size-restrictions-sample>
+</component-example>
+<code-example [exampleFiles]="fileSizeRestrictionsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="value-state" componentName="file-uploader"> Value States </fd-docs-section-title>
+<description>
+    The File Uploader supports different value states: <code>None</code>, <code>Negative</code> (Error),
+    <code>Critical</code> (Warning), <code>Positive</code> (Success), and <code>Information</code>. These provide visual
+    feedback about file selection validation or upload status.
+</description>
+<component-example>
+    <ui5-file-uploader-value-state-sample></ui5-file-uploader-value-state-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExample()" />
+
+<separator />
+
+<fd-docs-section-title id="custom-button" componentName="file-uploader"> Custom Button Design </fd-docs-section-title>
+<description>
+    Use the <code>hideInput</code> property to hide the default input field and provide a custom button in the default
+    slot. This allows you to create a fully branded file upload experience that matches your application's design
+    system.
+</description>
+<component-example>
+    <ui5-file-uploader-custom-button-sample></ui5-file-uploader-custom-button-sample>
+</component-example>
+<code-example [exampleFiles]="customButtonExample()" />

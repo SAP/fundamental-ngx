@@ -91,6 +91,10 @@
             "name": "Expandable Text"
         },
         {
+            "url": "ui5-webcomponents/file-uploader",
+            "name": "File Uploader"
+        },
+        {
             "url": "ui5-webcomponents/form",
             "name": "Form"
         },

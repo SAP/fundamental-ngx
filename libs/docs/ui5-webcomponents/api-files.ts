@@ -28,6 +28,7 @@ export const API_FILES = {
     dialog: ['Dialog'],
     dynamicDateRange: ['DynamicDateRange'],
     expandableText: ['ExpandableText'],
+    fileUploader: ['FileUploader'],
     form: ['Form', 'FormGroup', 'FormItem'],
     icon: ['Icon'],
     input: ['Input'],

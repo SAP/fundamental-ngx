@@ -105,6 +105,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
     },
     {
+        path: 'file-uploader',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/file-uploader').then(configureLibRoutes)
+    },
+    {
         path: 'form',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/form').then(configureLibRoutes)
     },
