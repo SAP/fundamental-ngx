@@ -210,7 +210,7 @@ export class FormGeneratorService {
     ): Promise<DynamicFormValue> {
         await this._triggerFieldsOnchange(form);
 
-        const formValue = cloneDeep(form.value);
+        const formValue = structuredClone(form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
             const formItem = control.formItem;
@@ -285,7 +285,7 @@ export class FormGeneratorService {
      * @returns `Set` where key is item name, and boolean value if field needs to be shown.
      */
     async checkVisibleFormItems(form: DynamicFormGroup): Promise<{ [key: string]: boolean }> {
-        const formValue = this._getFormValueWithoutUngrouped(cloneDeep(form.value));
+        const formValue = this._getFormValueWithoutUngrouped(structuredClone(form.value));
         return await this._checkFormControlsVisibility(form, formValue);
     }
 
