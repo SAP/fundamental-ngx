@@ -116,7 +116,11 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         subline: 'description',
         listIconGlyph: 'icon',
         prefix: 'antecedent',
-        avatarLabel: 'farmerName'
+        avatarLabel: 'farmerName',
+        actionButtons: 'buttons',
+        actionButtonGlyph: 'buttonGlyph',
+        actionButtonCallback: 'buttonCallback',
+        actionButtonLabel: 'buttonLabel'
     };
 
     constructor(private _messageToastService: MessageToastService) {}
@@ -187,7 +191,23 @@ const SUGGESTIONS: SuggestionItem[] = [
         value: 'Blueberry',
         data: {
             type: 'fruit',
-            antecedent: 'Prefix text:'
+            antecedent: 'Prefix text:',
+            buttons: [
+                {
+                    buttonGlyph: 'refresh',
+                    buttonCallback: () => {
+                        console.log('Blueberry refresh button clicked');
+                    },
+                    buttonLabel: 'Refresh Item'
+                },
+                {
+                    buttonGlyph: 'delete',
+                    buttonCallback: () => {
+                        alert('Blueberry delete button clicked');
+                    },
+                    buttonLabel: 'Delete Item'
+                }
+            ]
         }
     },
     {

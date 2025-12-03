@@ -51,6 +51,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
@@ -96,6 +97,16 @@ export interface SearchResultsDataModel {
     avatarGlyph?: string;
     avatarImage?: string;
     avatarLabel?: string;
+    actionButtons?: string;
+    actionButtonGlyph?: string;
+    actionButtonCallback?: string;
+    actionButtonLabel?: string;
+}
+
+export interface SearchResultsActionButton {
+    glyph?: string;
+    label?: string;
+    callback?: () => any;
 }
 
 @Directive({
@@ -154,6 +165,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
         InfoLabelComponent,
         ClickedDirective,
         AvatarComponent,
+        ButtonComponent,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -401,6 +413,9 @@ export class SearchFieldComponent
 
     /** @hidden */
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
+
+    /** @hidden */
+    private _actionButtonKey = '';
 
     /** @hidden */
     private resolveTranslation = resolveTranslationSyncFn();
@@ -655,14 +670,41 @@ export class SearchFieldComponent
     }
 
     /** @hidden gets the corresponding text for a given key based off the SearchResultsDataModel for a search suggestion */
-    _getDataFromSearchResultsModel(suggestion: SuggestionItem, key: string): string {
+    _getDataFromSearchResultsModel(suggestion: SuggestionItem, key: string, isButton: boolean = false): any {
         let retVal = '';
         const dataModel = this.searchResultsDataModel();
         if (dataModel) {
             const keyToCheck = dataModel[key];
-            if (keyToCheck && suggestion.data && suggestion.data[keyToCheck]) {
-                retVal = suggestion.data[keyToCheck];
+            if (keyToCheck && suggestion.data) {
+                if (key === 'actionButtons') {
+                    this._actionButtonKey = keyToCheck;
+                }
+                if (!isButton && suggestion.data[keyToCheck]) {
+                    retVal = suggestion.data[keyToCheck];
+                } else if (isButton && suggestion.data[this._actionButtonKey]?.length) {
+                    retVal = keyToCheck;
+                }
             }
+        }
+        return retVal;
+    }
+
+    /** @hidden gets the buttons for a given search suggestion */
+    _getButtonsFromSearchResultsModel(suggestion: SuggestionItem): SearchResultsActionButton[] {
+        const retVal: SearchResultsActionButton[] = [];
+        const buttonData = this._getDataFromSearchResultsModel(suggestion, 'actionButtons');
+        if (buttonData) {
+            const labelKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonLabel', true);
+            const glyphKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonGlyph', true);
+            const callbackKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonCallback', true);
+            buttonData.forEach((button) => {
+                const parsedButton = {
+                    label: button[labelKey],
+                    glyph: button[glyphKey],
+                    callback: button[callbackKey]
+                };
+                retVal.push(parsedButton);
+            });
         }
         return retVal;
     }
@@ -670,6 +712,13 @@ export class SearchFieldComponent
     /** @hidden helper function needed by template */
     _isString(suggestion: string | object): boolean {
         return typeof suggestion === 'string';
+    }
+
+    /** @hidden */
+    _performButtonClick(callbackFn: (() => any) | undefined): void {
+        if (callbackFn) {
+            callbackFn();
+        }
     }
 
     /**

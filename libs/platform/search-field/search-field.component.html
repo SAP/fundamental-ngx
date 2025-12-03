@@ -199,7 +199,6 @@
                         [suggestion]="true"
                         fdpSearchFieldSuggestion
                         (keydown.enter)="onItemClick(filteredSuggestion); $event.preventDefault()"
-                        (keydown.tab)="onItemClick(filteredSuggestion)"
                         (keyup.space)="onItemClick(filteredSuggestion); $event.stopPropagation()"
                         (click)="onItemClick(filteredSuggestion)"
                         [byline]="!!subline"
@@ -249,6 +248,19 @@
                                     fd-list-title
                                     [innerHTML]="filteredSuggestion.value | highlight: inputText : true : true"
                                 ></span>
+                            }
+
+                            @let actionButtons = _getButtonsFromSearchResultsModel(filteredSuggestion);
+                            @if (actionButtons && actionButtons.length) {
+                                @for (button of actionButtons; track $index) {
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        [title]="button.label"
+                                        [glyph]="button.glyph"
+                                        (fdkClicked)="_performButtonClick(button.callback)"
+                                    ></button>
+                                }
                             }
                         }
                     </li>
