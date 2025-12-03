@@ -33,6 +33,6 @@ export class ComboBoxBasicSample {
     ];
 
     onChange(event: UI5WrapperCustomEvent<ComboBox, 'ui5Change'>): void {
-        this.selectedValue.set((event.target as any)?.value);
+        this.selectedValue.set(event.currentTarget.value);
     }
 }

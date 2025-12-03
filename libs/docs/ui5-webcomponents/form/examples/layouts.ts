@@ -69,7 +69,7 @@ export class FormLayoutsSample {
     ]);
 
     onSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        const width = (event.target?.['value'] / 100) * 1500;
+        const width = (event.currentTarget.value / 100) * 1500;
         this.containerWidth.set(`${width}px`);
         this.pageSize.set(this.getLayoutByWidth(width));
     }

@@ -80,7 +80,7 @@ export class PrecisionStepInputExample {
     });
 
     onCustomValueChange(event: UI5WrapperCustomEvent<StepInput, 'ui5Change'>): void {
-        this._customValue.set(Number(event.target?.['value'] ?? 0));
+        this._customValue.set(Number(event.currentTarget.value ?? 0));
     }
 
     setPrecision(precision: number): void {

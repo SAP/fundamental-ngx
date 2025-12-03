@@ -44,8 +44,7 @@ export class ValueHandlingSample {
     });
 
     onDateRangeChange(event: UI5WrapperCustomEvent<DynamicDateRange, 'ui5Change'>): void {
-        const target = event.target as any;
-        const selectedValue = target.value;
+        const selectedValue = event.currentTarget.value;
 
         this.selectedRange.set(selectedValue);
         this.selectedValueJson.set(JSON.stringify(selectedValue, null, 2));

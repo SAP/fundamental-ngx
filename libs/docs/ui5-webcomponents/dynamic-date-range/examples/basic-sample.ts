@@ -25,6 +25,6 @@ export class BasicSample {
     options = signal('TODAY, TOMORROW, YESTERDAY, DATE, DATERANGE, DATETIMERANGE');
 
     onDateRangeChange(event: UI5WrapperCustomEvent<DynamicDateRange, 'ui5Change'>): void {
-        console.log(`Date range changed: ${JSON.stringify((event.target as any)?.value)}`);
+        console.log(`Date range changed currentTarget: ${JSON.stringify(event.currentTarget.value)}`);
     }
 }
