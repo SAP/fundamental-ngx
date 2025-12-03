@@ -137,44 +137,44 @@ export class SliderExample {
 
     // Event handlers for basic sliders
     onBasicSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.basicSliderValue.set(event.target?.['value']);
+        this.basicSliderValue.set(event.currentTarget.value);
     }
 
     onVolumeChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.volumeValue.set(event.target?.['value']);
+        this.volumeValue.set(event.currentTarget.value);
     }
 
     onTemperatureChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.temperatureValue.set(event.target?.['value']);
+        this.temperatureValue.set(event.currentTarget.value);
     }
 
     // Event handlers for range sliders
     onPriceRangeChange(event: UI5WrapperCustomEvent<RangeSlider, 'ui5Change'>): void {
-        this.priceRangeStart.set(event.target?.['startValue']);
-        this.priceRangeEnd.set(event.target?.['endValue']);
+        this.priceRangeStart.set(event.currentTarget.startValue);
+        this.priceRangeEnd.set(event.currentTarget.endValue);
     }
 
     onTimeRangeChange(event: UI5WrapperCustomEvent<RangeSlider, 'ui5Change'>): void {
-        this.timeRangeStart.set(event.target?.['startValue']);
-        this.timeRangeEnd.set(event.target?.['endValue']);
+        this.timeRangeStart.set(event.currentTarget.startValue);
+        this.timeRangeEnd.set(event.currentTarget.endValue);
     }
 
     // Event handlers for configurable slider
     onConfigSliderChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.configSliderValue.set(event.target?.['value']);
+        this.configSliderValue.set(event.currentTarget.value);
     }
 
     // Event handlers for advanced demo sliders
     onBrightnessChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.brightnessValue.set(event.target?.['value']);
+        this.brightnessValue.set(event.currentTarget.value);
     }
 
     onQualityChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.qualityValue.set(event.target?.['value']);
+        this.qualityValue.set(event.currentTarget.value);
     }
 
     onZoomChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        this.zoomValue.set(event.target?.['value']);
+        this.zoomValue.set(event.currentTarget.value);
     }
 
     // Configuration toggle methods
@@ -195,13 +195,13 @@ export class SliderExample {
     }
 
     // Configuration setter methods
-    onStepChange(event: any): void {
-        const selectedText = event.target.text;
+    onStepChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
+        const selectedText = event.detail.selectedItems[0].textContent;
         this.step.set(Number(selectedText));
     }
 
-    onLabelIntervalChange(event: any): void {
-        const selectedText = event.target.text;
+    onLabelIntervalChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
+        const selectedText = event.detail.selectedItems[0].textContent;
         this.labelInterval.set(Number(selectedText));
     }
 

@@ -334,4 +334,16 @@
     <p class="sap-margin-top-tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
         Input events fire on every keystroke, change events fire when the input loses focus or on Enter.
     </p>
+
+    <h4>Selection Events (ui5Select)</h4>
+    <ui5-panel collapsed="false" headerText="Last 5 Selection Events">
+        @if (selectionEvents().length === 0) {
+        <p class="sap-padding-x-medium sap-text">No selection events yet</p>
+        } @else { @for (event of selectionEvents(); track $index) {
+        <p class="sap-padding-x-medium sap-text">{{ event }}</p>
+        } }
+    </ui5-panel>
+    <p class="sap-margin-top-tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Selection events fire when the user selects text within the input.
+    </p>
 </section>

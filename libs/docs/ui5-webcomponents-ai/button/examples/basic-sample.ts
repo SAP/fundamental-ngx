@@ -90,7 +90,7 @@ export class BasicAiButtonSample {
             event.detail != null &&
             typeof event.detail === 'object' &&
             'text' in event.detail &&
-            typeof (event.detail as any).text === 'string'
+            typeof event.detail.text === 'string'
         );
     }
 }

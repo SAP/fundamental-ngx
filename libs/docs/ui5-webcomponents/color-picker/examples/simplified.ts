@@ -20,7 +20,7 @@ export class ColorPickerSimplifiedExample {
     readonly isSimplified = signal(true);
 
     onColorChange(event: UI5WrapperCustomEvent<ColorPicker, 'ui5Change'>): void {
-        const colorValue = event.target?.['value'];
+        const colorValue = event.currentTarget.value;
         if (colorValue) {
             this.selectedColor.set(colorValue);
         }

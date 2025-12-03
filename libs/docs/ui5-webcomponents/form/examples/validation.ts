@@ -182,19 +182,19 @@ export class FormValidationSample {
     }
 
     onInputChange(fieldName: string, event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
-        const value = (event.target as any)?.value;
+        const value = event.currentTarget.value;
         this.registrationForm.get(fieldName)?.setValue(value);
         this.registrationForm.get(fieldName)?.markAsDirty();
     }
 
     onTextAreaChange(fieldName: string, event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
-        const value = (event.target as any)?.value;
+        const value = event.currentTarget.value;
         this.registrationForm.get(fieldName)?.setValue(value);
         this.registrationForm.get(fieldName)?.markAsDirty();
     }
 
     onCheckboxChange(fieldName: string, event: UI5WrapperCustomEvent<CheckBox, 'ui5Change'>): void {
-        const checked = (event.target as any)?.checked;
+        const checked = event.currentTarget.checked;
         this.registrationForm.get(fieldName)?.setValue(checked);
         this.registrationForm.get(fieldName)?.markAsDirty();
     }

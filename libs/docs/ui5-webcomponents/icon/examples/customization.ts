@@ -36,7 +36,7 @@ export class IconCustomizationExample {
     ]);
 
     onSizeChange(event: UI5WrapperCustomEvent<Slider, 'ui5Change'>): void {
-        const value = event.target?.['value'];
+        const value = event.currentTarget.value;
         this.iconSize.set(Number(value));
     }
 

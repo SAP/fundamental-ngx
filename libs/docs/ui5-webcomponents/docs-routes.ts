@@ -154,6 +154,14 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents/progress-indicator').then(configureLibRoutes)
     },
     {
+        path: 'radio-button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/radio-button').then(configureLibRoutes)
+    },
+    {
+        path: 'range-slider',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/range-slider').then(configureLibRoutes)
+    },
+    {
         path: 'rating-indicator',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/rating-indicator').then(configureLibRoutes)
     },

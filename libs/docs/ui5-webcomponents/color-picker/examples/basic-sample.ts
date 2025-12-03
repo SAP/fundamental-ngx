@@ -19,7 +19,7 @@ export class ColorPickerBasicExample {
     readonly selectedColor = signal('rgba(255, 0, 0, 1)');
 
     onColorChange(event: UI5WrapperCustomEvent<ColorPicker, 'ui5Change'>): void {
-        const colorValue = event.target?.['value'];
+        const colorValue = event.currentTarget.value;
         if (colorValue) {
             this.selectedColor.set(colorValue);
         }
