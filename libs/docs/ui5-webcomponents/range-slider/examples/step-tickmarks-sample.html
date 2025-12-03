@@ -1,0 +1,40 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <p [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapField_BorderColor)'}">
+                Step: 2, Tickmarks displayed
+            </p>
+            <ui5-range-slider
+                [startValue]="18"
+                [endValue]="24"
+                [min]="10"
+                [max]="30"
+                [step]="2"
+                [showTickmarks]="true"
+                (ui5Input)="onInput($event)"
+                (ui5Change)="onChange($event)"
+                class="fd-margin-top--sm"
+            />
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <p [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapField_BorderColor)'}">
+                Step: 2, Tickmarks and labels at interval 2 displayed
+            </p>
+            <ui5-range-slider
+                [startValue]="18"
+                [endValue]="24"
+                [min]="10"
+                [max]="30"
+                [step]="2"
+                [showTickmarks]="true"
+                [labelInterval]="2"
+                (ui5Input)="onInput($event)"
+                (ui5Change)="onChange($event)"
+                class="fd-margin-top--sm"
+            />
+        </div>
+    </div>
+</div>

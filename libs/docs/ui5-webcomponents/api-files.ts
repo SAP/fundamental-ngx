@@ -41,6 +41,7 @@ export const API_FILES = {
     popover: ['Popover'],
     progressIndicator: ['ProgressIndicator'],
     radioButton: ['RadioButton'],
+    rangeSlider: ['RangeSlider'],
     ratingIndicator: ['RatingIndicator'],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     slider: ['Slider', 'RangeSlider'],

@@ -143,6 +143,10 @@
             "name": "Radio Button"
         },
         {
+            "url": "ui5-webcomponents/range-slider",
+            "name": "Range Slider"
+        },
+        {
             "url": "ui5-webcomponents/rating-indicator",
             "name": "Rating Indicator"
         },
