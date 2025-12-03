@@ -1,0 +1,11 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <ui5-radio-button name="basic-group" text="Option 1" value="option1" (ui5Change)="onRadioChange('option1')" />
+
+        <ui5-radio-button name="basic-group" text="Option 2" value="option2" (ui5Change)="onRadioChange('option2')" />
+
+        <ui5-radio-button name="basic-group" text="Option 3" value="option3" (ui5Change)="onRadioChange('option3')" />
+    </div>
+
+    <p class="fd-margin-top--md"><strong>Selected:</strong> {{ selectedOption() }}</p>
+</div>

@@ -1,0 +1,56 @@
+<fd-docs-section-title id="basic" componentName="radio-button"> Basic Radio Buttons </fd-docs-section-title>
+<description>
+    Radio buttons allow users to select a single option from a group of mutually exclusive choices. All radio buttons
+    with the same <code>name</code> property form a radio button group, where only one can be selected at a time. Use
+    the <code>ui5Change</code> event to respond to user selections.
+</description>
+<component-example>
+    <ui5-doc-radio-button-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="value-states" componentName="radio-button"> Value States </fd-docs-section-title>
+<description>
+    Radio buttons support different value states to provide visual feedback: <code>None</code> (default),
+    <code>Positive</code> (Success), <code>Critical</code> (Warning), <code>Negative</code> (Error), and
+    <code>Information</code>. Use value states to indicate validation results or provide contextual information to
+    users.
+</description>
+<component-example>
+    <ui5-doc-radio-button-value-state-sample />
+</component-example>
+<code-example [exampleFiles]="valueStateExample()" />
+
+<separator />
+
+<fd-docs-section-title id="disabled-readonly" componentName="radio-button">
+    Disabled and Read-only States
+</fd-docs-section-title>
+<description>
+    Radio buttons can be <code>disabled</code> or <code>readonly</code>:
+    <ul>
+        <li><strong>Disabled:</strong> Completely non-interactive and cannot receive focus.</li>
+        <li>
+            <strong>Read-only:</strong> Not editable or selectable but can still receive focus and provides visual
+            feedback.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-radio-button-disabled-sample />
+</component-example>
+<code-example [exampleFiles]="disabledExample()" />
+
+<separator />
+
+<fd-docs-section-title id="text-wrapping" componentName="radio-button"> Text Wrapping </fd-docs-section-title>
+<description>
+    Control how the radio button label text behaves when there's not enough space using the <code>wrappingType</code>
+    property.
+</description>
+<component-example>
+    <ui5-doc-radio-button-text-wrapping-sample />
+</component-example>
+<code-example [exampleFiles]="textWrappingExample()" />
