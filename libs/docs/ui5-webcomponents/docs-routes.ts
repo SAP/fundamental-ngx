@@ -96,8 +96,17 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/dialog').then(configureLibRoutes)
     },
     {
+        path: 'dynamic-date-range',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/dynamic-date-range').then(configureLibRoutes)
+    },
+    {
         path: 'expandable-text',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
+    },
+    {
+        path: 'file-uploader',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/file-uploader').then(configureLibRoutes)
     },
     {
         path: 'form',
@@ -122,6 +131,10 @@ const componentRoutes = [
     {
         path: 'list',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/list').then(configureLibRoutes)
+    },
+    {
+        path: 'menu',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/menu').then(configureLibRoutes)
     },
     {
         path: 'message-strip',
