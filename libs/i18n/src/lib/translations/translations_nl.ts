@@ -375,7 +375,8 @@ export default {
         searchInputLabel: 'Zoeken',
         synchronizeButtonTitle: 'Synchroniseren',
         searchSuggestionMessage: '{count} suggesties gevonden',
-        searchSuggestionNavigateMessage: 'gebruik pijl-omhoog en pijl-omlaag om te bladeren'
+        searchSuggestionNavigateMessage: 'gebruik pijl-omhoog en pijl-omlaag om te bladeren',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Instellingen',

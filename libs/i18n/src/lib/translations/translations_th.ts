@@ -374,7 +374,8 @@ export default {
         searchInputLabel: 'ค้นหา',
         synchronizeButtonTitle: 'ซิงโครไนซ์',
         searchSuggestionMessage: 'พบคำแนะนำ {count} รายการ',
-        searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต'
+        searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: 'การตั้งค่า',

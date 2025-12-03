@@ -60,7 +60,7 @@
         "fast-deep-equal": "3.1.3",
         "focus-trap": "7.1.0",
         "focus-visible": "5.2.1",
-        "fundamental-styles": "0.40.1",
+        "fundamental-styles": "0.41.0-rc.90",
         "fuse.js": "7.0.0",
         "highlight.js": "11.7.0",
         "intl": "1.2.5",
@@ -176,7 +176,7 @@
             "yarn nx format:write --uncommitted"
         ],
         "*.{js,ts,html,md,json,yml}": [
-            "eslint --fix --flag unstable_config_lookup_from_file"
+            "eslint --fix --flag v10_config_lookup_from_file"
         ]
     }
 }

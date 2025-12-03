@@ -31,6 +31,10 @@
         // overriding background color in order to have outline displayed correctly
         background: transparent;
     }
+
+    .fdp-search-field__advanced-filter-button {
+        margin-inline-start: 0.625rem !important;
+    }
 }
 
 fdp-search-field {

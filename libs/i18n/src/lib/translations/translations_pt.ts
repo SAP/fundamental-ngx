@@ -374,7 +374,8 @@ export default {
         searchInputLabel: 'Pesquisar',
         synchronizeButtonTitle: 'Sincronizar',
         searchSuggestionMessage: '{count} sugestões encontradas.',
-        searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar'
+        searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Configurações',

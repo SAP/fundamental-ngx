@@ -55,7 +55,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
@@ -101,6 +101,8 @@ export interface SearchResultsDataModel {
     actionButtonGlyph?: string;
     actionButtonCallback?: string;
     actionButtonLabel?: string;
+    showDeleteButton?: string;
+    deleteCallback?: string;
 }
 
 export interface SearchResultsActionButton {
@@ -298,6 +300,10 @@ export class SearchFieldComponent
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** Event emitted when the advanced filter button is clicked. */
+    @Output()
+    advancedFilterButtonClick = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild('categoryDropdown', { static: false })
     categoryDropdown: PopoverComponent;
@@ -347,6 +353,9 @@ export class SearchFieldComponent
 
     /** Number for the search results scope list item. */
     searchInScopeNumber = input<number>(0);
+
+    /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
+    showAdvancedFilter = input<boolean>(false);
 
     /** @hidden Focus state */
     _isFocused = false;
@@ -715,10 +724,24 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    _performButtonClick(callbackFn: (() => any) | undefined): void {
+    _performButtonClick(event: Event, callbackFn: (() => any) | undefined): void {
+        event.stopImmediatePropagation();
         if (callbackFn) {
             callbackFn();
         }
+    }
+
+    /** @hidden */
+    _searchResultIsHoveredOrFocused(suggestionEl: ListItemComponent): boolean {
+        return (
+            document.activeElement === suggestionEl.elementRef.nativeElement ||
+            suggestionEl.elementRef.nativeElement.matches(':hover')
+        );
+    }
+
+    /** @hidden */
+    _advancedFilterButtonClicked(): void {
+        this.advancedFilterButtonClick.emit();
     }
 
     /**

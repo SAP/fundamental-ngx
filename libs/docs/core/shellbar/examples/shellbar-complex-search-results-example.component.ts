@@ -120,7 +120,9 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         actionButtons: 'buttons',
         actionButtonGlyph: 'buttonGlyph',
         actionButtonCallback: 'buttonCallback',
-        actionButtonLabel: 'buttonLabel'
+        actionButtonLabel: 'buttonLabel',
+        showDeleteButton: 'canDelete',
+        deleteCallback: 'deleteFn'
     };
 
     constructor(private _messageToastService: MessageToastService) {}
@@ -196,18 +198,22 @@ const SUGGESTIONS: SuggestionItem[] = [
                 {
                     buttonGlyph: 'refresh',
                     buttonCallback: () => {
-                        console.log('Blueberry refresh button clicked');
+                        alert('Blueberry refresh button clicked');
                     },
                     buttonLabel: 'Refresh Item'
                 },
                 {
-                    buttonGlyph: 'delete',
+                    buttonGlyph: 'settings',
                     buttonCallback: () => {
-                        alert('Blueberry delete button clicked');
+                        alert('Blueberry settings button clicked');
                     },
-                    buttonLabel: 'Delete Item'
+                    buttonLabel: 'Settings'
                 }
-            ]
+            ],
+            canDelete: true,
+            deleteFn: () => {
+                alert('Blueberry delete button clicked');
+            }
         }
     },
     {

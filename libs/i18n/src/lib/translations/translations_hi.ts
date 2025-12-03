@@ -368,7 +368,8 @@ export default {
         searchInputLabel: 'खोज करें',
         synchronizeButtonTitle: 'सिंक्रनाइज़ करें',
         searchSuggestionMessage: '{count} सुझाव मिले',
-        searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें'
+        searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें',
+        deleteButtonLabel: 'Delete'
     },
     platformSwitch: {
         ariaLabel: 'स्विच'

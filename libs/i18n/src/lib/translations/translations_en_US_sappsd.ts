@@ -378,7 +378,8 @@ export default {
         searchInputLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
         synchronizeButtonTitle: '[[[Ŝŷŋċĥŗŏŋįžē∙∙∙∙∙∙∙∙]]]',
         searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
-        searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]'
+        searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',

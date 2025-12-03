@@ -374,7 +374,8 @@ export default {
         searchInputLabel: 'Hledat',
         synchronizeButtonTitle: 'Synchronizovat',
         searchSuggestionMessage: 'Nalezené návrhy: {count}.',
-        searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů'
+        searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavení',

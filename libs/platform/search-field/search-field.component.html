@@ -87,7 +87,18 @@
             class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
             [class.is-focus]="_isFocused"
         >
-            @if (_showCategoryDropdown) {
+            @if (showAdvancedFilter()) {
+                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
+                    <button
+                        (fdkClicked)="_advancedFilterButtonClicked()"
+                        class="fdp-search-field__category-button fdp-search-field__advanced-filter-button fd-input-group__button fd-button fd-button--transparent fd-button--menu {{
+                            appearance?.categoryButtonClass
+                        }}"
+                    >
+                        <fd-icon glyph="filter"></fd-icon>
+                    </button>
+                </span>
+            } @else if (_showCategoryDropdown) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
                     <ng-template
                         [ngTemplateOutlet]="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
@@ -202,6 +213,9 @@
                         (keyup.space)="onItemClick(filteredSuggestion); $event.stopPropagation()"
                         (click)="onItemClick(filteredSuggestion)"
                         [byline]="!!subline"
+                        #suggestionListItem
+                        (mouseenter)="_searchResultIsHoveredOrFocused(suggestionListItem)"
+                        (mouseleave)="_searchResultIsHoveredOrFocused(suggestionListItem)"
                     >
                         @let listIconGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'listIconGlyph');
                         @if (listIconGlyph) {
@@ -258,9 +272,22 @@
                                         fdType="transparent"
                                         [title]="button.label"
                                         [glyph]="button.glyph"
-                                        (fdkClicked)="_performButtonClick(button.callback)"
+                                        (fdkClicked)="_performButtonClick($event, button.callback)"
                                     ></button>
                                 }
+                            }
+
+                            @let showDeleteButton =
+                                _getDataFromSearchResultsModel(filteredSuggestion, 'showDeleteButton');
+                            @let deleteCallback = _getDataFromSearchResultsModel(filteredSuggestion, 'deleteCallback');
+                            @if (showDeleteButton && _searchResultIsHoveredOrFocused(suggestionListItem)) {
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    title="('platformSearchField.deleteButtonLabel' | fdTranslate)"
+                                    glyph="decline"
+                                    (fdkClicked)="_performButtonClick($event, deleteCallback)"
+                                ></button>
                             }
                         }
                     </li>
