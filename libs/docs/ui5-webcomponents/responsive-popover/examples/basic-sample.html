@@ -1,0 +1,21 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button id="basic-opener" (ui5Click)="openPopover()" design="Emphasized">
+                {{ isOpen() ? 'Popover is Open' : 'Open Popover' }}
+            </ui5-button>
+        </div>
+    </div>
+
+    <ui5-responsive-popover headerText="Basic Popover" opener="basic-opener" [modal]="true" [open]="isOpen()">
+        <ui5-list>
+            <ui5-li>Action 1</ui5-li>
+            <ui5-li>Action 2</ui5-li>
+            <ui5-li>Action 3</ui5-li>
+        </ui5-list>
+
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closePopover()" design="Emphasized">Close</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+</div>

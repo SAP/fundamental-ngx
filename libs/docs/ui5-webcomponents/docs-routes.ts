@@ -166,6 +166,11 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/rating-indicator').then(configureLibRoutes)
     },
     {
+        path: 'responsive-popover',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/responsive-popover').then(configureLibRoutes)
+    },
+    {
         path: 'segmented-button',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/segmented-button').then(configureLibRoutes)
     },
