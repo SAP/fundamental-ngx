@@ -175,6 +175,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/segmented-button').then(configureLibRoutes)
     },
     {
+        path: 'select',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/select').then(configureLibRoutes)
+    },
+    {
         path: 'slider',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/slider').then(configureLibRoutes)
     },

@@ -1,0 +1,76 @@
+<fd-docs-section-title id="basic" componentName="select"> Basic Select </fd-docs-section-title>
+<description>
+    The Select component provides a dropdown menu for single-option selection. Use <code>ui5-option</code> components as
+    children to define the available choices. Control the selected value with the <code>value</code> property, or mark
+    options as <code>selected</code>. The <code>ui5Change</code> event fires when the selection changes.
+</description>
+<component-example>
+    <ui5-doc-select-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="additional-text" componentName="select"> Additional Text </fd-docs-section-title>
+<description>
+    The Select component supports displaying <code>additionalText</code> for each option, providing supplementary
+    information alongside the main label.
+</description>
+<component-example>
+    <ui5-doc-select-additional-text-sample />
+</component-example>
+<code-example [exampleFiles]="additionalTextExample()" />
+<separator />
+
+<fd-docs-section-title id="value-states" componentName="select"> Value States </fd-docs-section-title>
+<description>
+    The Select component supports different value states to provide visual feedback: <code>None</code> (default),
+    <code>Success</code> (Positive), <code>Warning</code> (Critical), <code>Error</code> (Negative), and
+    <code>Information</code>. Use value states to indicate validation results or provide contextual information. The
+    <code>required</code> property marks the field as mandatory.
+</description>
+<component-example>
+    <ui5-doc-select-value-state-sample />
+</component-example>
+<code-example [exampleFiles]="valueStateExample()" />
+
+<separator />
+
+<fd-docs-section-title id="disabled-readonly" componentName="select">
+    Disabled and Read-only States
+</fd-docs-section-title>
+<description>
+    The Select can be <code>disabled</code> or <code>readonly</code>:
+    <ul>
+        <li><strong>Disabled:</strong> Completely non-interactive and cannot receive focus.</li>
+        <li>
+            <strong>Read-only:</strong> Not editable but can receive focus and provides visual feedback. In read-only
+            mode, when there is <code>additionalText</code> provided, the select displays the selected value with a
+            customizable separator (controlled by <code>textSeparator</code>).
+        </li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-select-disabled-readonly-sample />
+</component-example>
+<code-example [exampleFiles]="disabledReadonlyExample()" />
+
+<separator />
+
+<fd-docs-section-title id="custom-options" componentName="select"> Custom Options </fd-docs-section-title>
+<description>
+    You can define completely custom options via the ui5-option-custom (providing custom content) component.
+</description>
+<component-example>
+    <ui5-doc-select-custom-options-sample />
+</component-example>
+<code-example [exampleFiles]="customOptionsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="reactive" componentName="select"> Reactive Forms Integration </fd-docs-section-title>
+<description> The Select component integrates seamlessly with Angular Reactive Forms. </description>
+<component-example>
+    <ui5-doc-select-reactive-sample />
+</component-example>
+<code-example [exampleFiles]="reactiveExample()" />

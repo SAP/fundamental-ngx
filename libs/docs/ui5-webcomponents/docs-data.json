@@ -159,6 +159,10 @@
             "name": "Segmented Button"
         },
         {
+            "url": "ui5-webcomponents/select",
+            "name": "Select"
+        },
+        {
             "url": "ui5-webcomponents/slider",
             "name": "Slider"
         },
