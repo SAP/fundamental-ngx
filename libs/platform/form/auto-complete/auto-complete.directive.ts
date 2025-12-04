@@ -114,6 +114,15 @@ export class AutoCompleteDirective {
                     return;
                 }
 
+                // Check if this is a new typing session after programmatic input modification
+                const currentNativeValue = this._element.value;
+
+                if (this.inputText.length > currentNativeValue.length + 1) {
+                    // Reset inputText to current value and don't do typeahead
+                    this.inputText = currentNativeValue;
+                    return;
+                }
+
                 this._oldValue = this.inputText;
                 const item = this._searchByStrategy();
 

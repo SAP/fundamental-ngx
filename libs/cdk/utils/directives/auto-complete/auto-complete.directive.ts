@@ -125,6 +125,13 @@ export class AutoCompleteDirective {
                     return;
                 }
 
+                const currentNativeValue = this._elementRef.nativeElement.value;
+
+                if (this.inputText.length > currentNativeValue.length + 1) {
+                    this.inputText = currentNativeValue;
+                    return;
+                }
+
                 if (!this._triggerTypeAhead()) {
                     return;
                 }
