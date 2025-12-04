@@ -276,24 +276,20 @@ export class InputExample implements AfterViewInit {
 
     // Event handlers
     onBasicInput(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
-        const target = event.target?.['value'];
-        this.basicValue.set(target.value || '');
-        this.addInputEvent(`Input: "${target.value}"`);
+        this.basicValue.set(event.currentTarget.value || '');
+        this.addInputEvent(`Input: "${event.currentTarget.value}"`);
     }
 
     onBasicChange(event: UI5WrapperCustomEvent<Input, 'ui5Change'>): void {
-        const target = event.target as any;
-        this.addChangeEvent(`Change: "${target.value}"`);
+        this.addChangeEvent(`Change: "${event.currentTarget.value}"`);
     }
 
-    onSelection(event: UI5WrapperCustomEvent<Input, 'ui5Select'>): void {
-        const target = event.target as any;
-        this.addSelectionEvent(`Selection at: ${target.selectionStart}-${target.selectionEnd}`);
+    onSelection(_event: UI5WrapperCustomEvent<Input, 'ui5Select'>): void {
+        this.addSelectionEvent('Selection changed.');
     }
 
     onSearchInput(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
-        const target = event.target as any;
-        this.searchValue.set(target.value || '');
+        this.searchValue.set(event.currentTarget.value || '');
     }
 
     // Configuration methods
@@ -336,7 +332,7 @@ export class InputExample implements AfterViewInit {
     }
 
     onMaxLengthChange(event: UI5WrapperCustomEvent<Input, 'ui5Change'>): void {
-        const value = parseInt(event.target?.['value'], 10);
+        const value = parseInt(event.currentTarget.value, 10);
         this.maxLength.set(isNaN(value) ? undefined : value);
     }
 

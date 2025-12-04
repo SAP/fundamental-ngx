@@ -1,0 +1,8 @@
+<div class="fd-form-group">
+    <label class="fd-form-label" for="dynamic-date-range-basic"> Select Date Range: </label>
+    <ui5-dynamic-date-range
+        id="dynamic-date-range-basic"
+        [options]="options()"
+        (ui5Change)="onDateRangeChange($event)"
+    />
+</div>

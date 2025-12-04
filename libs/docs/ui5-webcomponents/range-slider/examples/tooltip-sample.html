@@ -1,0 +1,42 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button (ui5Click)="toggleTooltip()" [design]="showTooltip() ? 'Emphasized' : 'Default'">
+                {{ showTooltip() ? 'Tooltip Enabled' : 'Tooltip Disabled' }}
+            </ui5-button>
+            <ui5-button
+                (ui5Click)="toggleEditable()"
+                [design]="editableTooltip() ? 'Emphasized' : 'Default'"
+                class="fd-margin-begin--sm"
+            >
+                {{ editableTooltip() ? 'Editable Tooltip' : 'Static Tooltip' }}
+            </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-range-slider
+                [startValue]="startValue()"
+                [endValue]="endValue()"
+                [min]="0"
+                [max]="100"
+                [showTooltip]="showTooltip()"
+                [editableTooltip]="editableTooltip()"
+                (ui5Input)="onInputChange($event)"
+                (ui5Change)="onValueChange($event)"
+            />
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <p><strong>Selected Range:</strong> {{ startValue() }} - {{ endValue() }}</p>
+            @if (editableTooltip()) {
+            <p [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapField_BorderColor)'}">
+                <em>Tip: Click on the tooltips to edit values directly.</em>
+            </p>
+            }
+        </div>
+    </div>
+</div>

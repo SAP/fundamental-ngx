@@ -1,0 +1,13 @@
+<ui5-label for="max-file-size-uploader" class="fd-margin-end--sm">Upload files up to 2 MB:</ui5-label>
+<ui5-file-uploader
+    id="max-file-size-uploader"
+    multiple
+    [maxFileSize]="maxFileSize()"
+    [valueState]="valueState()"
+    (ui5Change)="onUpload($event)"
+    (ui5FileSizeExceed)="onFileSizeExceed($event)"
+>
+    @if (showError()) {
+    <div slot="valueStateMessage">{{ errorMessage() }}</div>
+    }
+</ui5-file-uploader>

@@ -1,0 +1,13 @@
+<ui5-button id="menuOpener" (click)="openMenu()"> Open Menu with Loading </ui5-button>
+
+<ui5-menu
+    opener="menuOpener"
+    [open]="isMenuOpen()"
+    [loading]="isLoading()"
+    [loadingDelay]="500"
+    (ui5Close)="closeMenu()"
+>
+    <ui5-menu-item text="Item 1" icon="sys-enter" />
+    <ui5-menu-item text="Item 2" icon="sys-enter-2" />
+    <ui5-menu-item text="Item 3" icon="employee" />
+</ui5-menu>

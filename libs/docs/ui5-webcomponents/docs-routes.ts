@@ -96,8 +96,17 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/dialog').then(configureLibRoutes)
     },
     {
+        path: 'dynamic-date-range',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents/dynamic-date-range').then(configureLibRoutes)
+    },
+    {
         path: 'expandable-text',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/expandable-text').then(configureLibRoutes)
+    },
+    {
+        path: 'file-uploader',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/file-uploader').then(configureLibRoutes)
     },
     {
         path: 'form',
@@ -124,6 +133,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/list').then(configureLibRoutes)
     },
     {
+        path: 'menu',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/menu').then(configureLibRoutes)
+    },
+    {
         path: 'message-strip',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
     },
@@ -139,6 +152,14 @@ const componentRoutes = [
         path: 'progress-indicator',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents/progress-indicator').then(configureLibRoutes)
+    },
+    {
+        path: 'radio-button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/radio-button').then(configureLibRoutes)
+    },
+    {
+        path: 'range-slider',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/range-slider').then(configureLibRoutes)
     },
     {
         path: 'rating-indicator',

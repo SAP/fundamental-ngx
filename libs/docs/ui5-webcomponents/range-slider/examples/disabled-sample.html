@@ -1,0 +1,22 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button (ui5Click)="toggleDisabled()">
+                {{ disabled() ? 'Enable Slider' : 'Disable Slider' }}
+            </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-range-slider
+                [startValue]="20"
+                [endValue]="80"
+                [min]="0"
+                [max]="100"
+                [disabled]="disabled()"
+                class="fd-margin-top--sm"
+            />
+        </div>
+    </div>
+</div>

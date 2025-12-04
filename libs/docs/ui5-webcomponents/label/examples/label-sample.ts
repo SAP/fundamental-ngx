@@ -102,27 +102,27 @@ export class LabelExample {
 
     // Event handlers for form controls
     onFirstNameChange(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
-        this.firstName.set(event.target?.['value']);
+        this.firstName.set(event.currentTarget.value);
     }
 
     onLastNameChange(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
-        this.lastName.set(event.target?.['value']);
+        this.lastName.set(event.currentTarget.value);
     }
 
     onEmailChange(event: UI5WrapperCustomEvent<Input, 'ui5Input'>): void {
-        this.email.set(event.target?.['value']);
+        this.email.set(event.currentTarget.value);
     }
 
     onDescriptionChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
-        this.description.set(event.target?.['value']);
+        this.description.set(event.currentTarget.value);
     }
 
     onTermsChange(event: UI5WrapperCustomEvent<CheckBox, 'ui5Change'>): void {
-        this.acceptTerms.set(event.target?.['checked']);
+        this.acceptTerms.set(event.currentTarget.checked);
     }
 
     onGenderChange(event: UI5WrapperCustomEvent<RadioButton, 'ui5Change'>): void {
-        this.gender.set(event.target?.['value']);
+        this.gender.set(event.currentTarget.value);
     }
 
     onCountryChange(event: UI5WrapperCustomEvent<Select, 'ui5Change'>): void {
@@ -130,7 +130,7 @@ export class LabelExample {
     }
 
     onNotificationsChange(event: UI5WrapperCustomEvent<Switch, 'ui5Change'>): void {
-        this.notifications.set(event.target?.['checked']);
+        this.notifications.set(event.currentTarget.checked);
     }
 
     // Label configuration handlers

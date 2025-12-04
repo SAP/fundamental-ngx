@@ -1,0 +1,22 @@
+<div class="fd-container">
+    <div class="fd-row" [ngStyle]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label class="fd-col--3">Custom Button Design:</ui5-label>
+        <ui5-file-uploader [hideInput]="true" class="fd-col--9">
+            <ui5-button design="Emphasized"> Choose File </ui5-button>
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [ngStyle]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label class="fd-col--3">Custom Button with Icon:</ui5-label>
+        <ui5-file-uploader [hideInput]="true" class="fd-col--9">
+            <ui5-button icon="upload"> Upload Document </ui5-button>
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [ngStyle]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label class="fd-col--3">Custom Button - Multiple Files:</ui5-label>
+        <ui5-file-uploader [hideInput]="true" [multiple]="true" class="fd-col--9">
+            <ui5-button design="Positive" icon="add"> Add Files </ui5-button>
+        </ui5-file-uploader>
+    </div>
+</div>

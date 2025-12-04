@@ -18,6 +18,6 @@ export class TextAreaCharacterLimitSample {
     readonly exceededValueState = signal(ValueState.None);
 
     onExceededLimitTextChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
-        this.exceededValueState.set(event.target?.['value'].length > 100 ? ValueState.Critical : ValueState.None);
+        this.exceededValueState.set(event.currentTarget.value.length > 100 ? ValueState.Critical : ValueState.None);
     }
 }

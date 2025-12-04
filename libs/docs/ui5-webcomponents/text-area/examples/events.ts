@@ -28,12 +28,11 @@ export class TextAreaEventsSample {
     }
 
     onTextareaChange(event: UI5WrapperCustomEvent<TextArea, 'ui5Change'>): void {
-        this.textareaValue.set(event.target?.['value']);
-        this.addEvent('ui5Change', { value: event.target?.['value'] });
+        this.addEvent('ui5Change', { value: event.currentTarget.value });
     }
 
     onTextareaInput(event: UI5WrapperCustomEvent<TextArea, 'ui5Input'>): void {
-        this.addEvent('ui5Input', { value: event.target?.['value'] });
+        this.addEvent('ui5Input', { value: event.currentTarget.value });
     }
 
     onTextareaSelect(): void {

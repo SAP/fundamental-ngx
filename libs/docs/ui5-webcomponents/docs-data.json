@@ -71,10 +71,6 @@
             "name": "Date Picker"
         },
         {
-            "url": "ui5-webcomponents/dialog",
-            "name": "Dialog"
-        },
-        {
             "url": "ui5-webcomponents/date-range-picker",
             "name": "Date Range Picker"
         },
@@ -83,8 +79,20 @@
             "name": "Date Time Picker"
         },
         {
+            "url": "ui5-webcomponents/dialog",
+            "name": "Dialog"
+        },
+        {
+            "url": "ui5-webcomponents/dynamic-date-range",
+            "name": "Dynamic Date Range"
+        },
+        {
             "url": "ui5-webcomponents/expandable-text",
             "name": "Expandable Text"
+        },
+        {
+            "url": "ui5-webcomponents/file-uploader",
+            "name": "File Uploader"
         },
         {
             "url": "ui5-webcomponents/form",
@@ -111,6 +119,10 @@
             "name": "List"
         },
         {
+            "url": "ui5-webcomponents/menu",
+            "name": "Menu"
+        },
+        {
             "url": "ui5-webcomponents/message-strip",
             "name": "Message Strip"
         },
@@ -125,6 +137,14 @@
         {
             "url": "ui5-webcomponents/progress-indicator",
             "name": "Progress Indicator"
+        },
+        {
+            "url": "ui5-webcomponents/radio-button",
+            "name": "Radio Button"
+        },
+        {
+            "url": "ui5-webcomponents/range-slider",
+            "name": "Range Slider"
         },
         {
             "url": "ui5-webcomponents/rating-indicator",
