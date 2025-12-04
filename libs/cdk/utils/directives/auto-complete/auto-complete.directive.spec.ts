@@ -40,6 +40,7 @@ describe('AutoCompleteDirective', () => {
         const spy = jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
+        (<any>directive)._elementRef.nativeElement.value = 'ap';
 
         directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
@@ -57,6 +58,7 @@ describe('AutoCompleteDirective', () => {
         const spy = jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
+        (<any>directive)._elementRef.nativeElement.value = 'ap';
 
         directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
@@ -72,6 +74,7 @@ describe('AutoCompleteDirective', () => {
 
     it('should stop completing word', () => {
         directive.inputText = 'ap';
+        (<any>directive)._elementRef.nativeElement.value = 'ap';
 
         directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
@@ -84,6 +87,7 @@ describe('AutoCompleteDirective', () => {
 
     it('should not complete, when other word is written', () => {
         directive.inputText = 'SomeOtherWord';
+        (<any>directive)._elementRef.nativeElement.value = 'SomeOtherWord';
 
         directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
         directive._handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'Escape' });
