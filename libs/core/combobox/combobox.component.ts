@@ -36,7 +36,7 @@ import {
     forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 
 import {
     AutoCompleteEvent,
@@ -512,6 +512,8 @@ export class ComboboxComponent<T = any>
         if (this.mobile) {
             this._setUpMobileMode();
         }
+
+        this._setupValueSynchronization();
     }
 
     /** @hidden */
@@ -908,5 +910,34 @@ export class ComboboxComponent<T = any>
                 injector
             }
         );
+    }
+
+    /** @hidden */
+    private _setupValueSynchronization(): void {
+        if (!this.searchInputElement) {
+            return;
+        }
+
+        // Listen for focus events to detect programmatic changes
+        this._subscriptions.add(
+            fromEvent(this.searchInputElement.nativeElement, 'focus').subscribe(() => {
+                this._syncDomValueToModel();
+            })
+        );
+    }
+
+    /** @hidden */
+    private _syncDomValueToModel(): void {
+        if (!this.searchInputElement) {
+            return;
+        }
+
+        const domValue = this.searchInputElement.nativeElement.value;
+        if (domValue !== this.inputText) {
+            // Update the model and trigger change detection
+            this.inputText = domValue;
+            this.handleSearchTermChange();
+            this._cdRef.detectChanges();
+        }
     }
 }

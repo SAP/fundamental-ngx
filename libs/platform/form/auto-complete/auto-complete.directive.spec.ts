@@ -63,6 +63,7 @@ describe('AutoCompleteDirective', () => {
         jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
+        (<any>directive)._elementRef.nativeElement.value = 'ap';
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
@@ -80,6 +81,7 @@ describe('AutoCompleteDirective', () => {
         jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
+        (<any>directive)._elementRef.nativeElement.value = 'ap';
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
@@ -97,6 +99,7 @@ describe('AutoCompleteDirective', () => {
         jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
+        (<any>directive)._elementRef.nativeElement.value = 'ap';
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
 
@@ -111,6 +114,7 @@ describe('AutoCompleteDirective', () => {
         jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'SomeOtherWord';
+        (<any>directive)._elementRef.nativeElement.value = 'SomeOtherWord';
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'Escape' });
