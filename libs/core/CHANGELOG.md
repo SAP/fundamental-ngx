@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.6](https://github.com/SAP/fundamental-ngx/compare/v0.57.5...v0.57.6) (2025-12-05)
+
+
+### Bug Fixes
+
+* **core:** Prevent event propagation on <span> element with class 'fd-time__item--collapsed' ([bd2d779](https://github.com/SAP/fundamental-ngx/commit/bd2d77944e0719e99bed9c808e335ce0a9aa9b45))
+
+
+
+
+
 ## [0.57.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.3...v0.57.5) (2025-11-14)
 
 **Note:** Version bump only for package @fundamental-ngx/core
