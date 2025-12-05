@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.10](https://github.com/SAP/fundamental-ngx/compare/v0.55.9...v0.55.10) (2025-12-05)
+
+
+### Bug Fixes
+
+* **core, platform:** combobox input field programatic control bug ([#13647](https://github.com/SAP/fundamental-ngx/issues/13647)) ([de18be2](https://github.com/SAP/fundamental-ngx/commit/de18be28315f2862a3a80f431ddd65ef122297f5))
+
+
+
+
+
 ## [0.55.9](https://github.com/SAP/fundamental-ngx/compare/v0.55.8...v0.55.9) (2025-09-12)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
