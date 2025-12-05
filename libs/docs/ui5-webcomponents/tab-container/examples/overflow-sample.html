@@ -1,0 +1,22 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button (ui5Click)="toggleOverflow()">
+                Toggle Overflow Mode (Current: {{ overflowMode() }})
+            </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-tabcontainer [overflowMode]="overflowMode()">
+                @for (content of tabContents(); track $index) {
+                <ui5-tab text="Tab {{ $index + 1 }}" [selected]="$index === 0">
+                    <p>{{ content }}</p>
+                </ui5-tab>
+
+                }
+            </ui5-tabcontainer>
+        </div>
+    </div>
+</div>

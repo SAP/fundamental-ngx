@@ -1,0 +1,38 @@
+<div class="fd-container">
+    <div class="fd-row fd-margin-bottom--md">
+        <div class="fd-col">
+            <h4>Reorderable Tabs with Drag & Drop</h4>
+            <p style="font-size: 0.875rem; color: #666; margin-bottom: 0.5rem">
+                Drag and drop tabs to reorder them. The <code>movable</code> property enables drag-and-drop
+                functionality. This example includes nested tabs and demonstrates the <code>move-over</code> and
+                <code>move</code> events.
+            </p>
+            <p style="font-size: 0.875rem; color: #0854a0">
+                <strong>Try it:</strong> Drag any tab to reorder, or drag tabs into the nested tab (Tab 3) to create
+                sub-tabs.
+            </p>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-tabcontainer
+                id="reorderable-tabs"
+                (ui5Move)="onItemMove($event)"
+                (ui5MoveOver)="onItemMoveOver($event)"
+            >
+                @for (tab of tabs(); track tab.id) {
+                <ui5-tab [id]="tab.id" [text]="tab.text" [movable]="true" [selected]="$index === 0">
+                    <p>{{ tab.content }}</p>
+
+                    @if (tab.subTabs && tab.subTabs.length > 0) { @for (subTab of tab.subTabs; track subTab.id) {
+                    <ui5-tab slot="items" [id]="subTab.id" [text]="subTab.text" [movable]="true">
+                        <p>{{ subTab.content }}</p>
+                    </ui5-tab>
+                    } }
+                </ui5-tab>
+                }
+            </ui5-tabcontainer>
+        </div>
+    </div>
+</div>

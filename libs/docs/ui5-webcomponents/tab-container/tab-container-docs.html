@@ -1,0 +1,73 @@
+<fd-docs-section-title id="basic" componentName="tab-container"> Basic Tab Container </fd-docs-section-title>
+<description>
+    The Tab Container provides a tabbed interface for organizing and displaying content in separate sections. Users can
+    click on tabs to switch between different content areas. Tabs can include text, icons, and additional text to
+    provide context.
+</description>
+<component-example>
+    <ui5-doc-tab-container-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="layout" componentName="tab-container"> Tab Layout </fd-docs-section-title>
+<description>
+    The <code>tabLayout</code> property controls how tab content and additional text are displayed. Use
+    <code>Standard</code> (default, vertical layout) or <code>Inline</code> (horizontal layout) to arrange the tab
+    content and additional text.
+</description>
+<component-example>
+    <ui5-doc-tab-container-layout-sample />
+</component-example>
+<code-example [exampleFiles]="layoutExample()" />
+
+<separator />
+
+<fd-docs-section-title id="design" componentName="tab-container"> Tab Design Colors </fd-docs-section-title>
+<description>
+    Individual tabs support design colors to provide visual distinction: <code>Default</code>, <code>Neutral</code>,
+    <code>Positive</code>, <code>Critical</code>, and <code>Negative</code>.
+</description>
+<component-example>
+    <ui5-doc-tab-container-design-sample />
+</component-example>
+<code-example [exampleFiles]="designExample()" />
+
+<separator />
+
+<fd-docs-section-title id="overflow" componentName="tab-container"> Overflow Mode </fd-docs-section-title>
+<description>
+    When there are many tabs, the <code>overflowMode</code> property controls how overflow is handled. Use
+    <code>End</code> (default) to show a "More" button at the end, or <code>StartAndEnd</code> to show overflow buttons
+    at both ends while preserving tab order.
+</description>
+<component-example>
+    <ui5-doc-tab-container-overflow-sample />
+</component-example>
+<code-example [exampleFiles]="overflowExample()" />
+
+<separator />
+
+<fd-docs-section-title id="background-design" componentName="tab-container"> Background Design </fd-docs-section-title>
+<description>
+    Customize the appearance of the tab container header and content using <code>headerBackgroundDesign</code> and
+    <code>contentBackgroundDesign</code> properties. Available designs: <code>Solid</code> (default),
+    <code>Transparent</code>, and <code>Translucent</code>.
+</description>
+<component-example>
+    <ui5-doc-tab-container-background-design-sample />
+</component-example>
+<code-example [exampleFiles]="backgroundDesignExample()" />
+
+<separator />
+
+<fd-docs-section-title id="reorder" componentName="tab-container"> Reorderable Tabs </fd-docs-section-title>
+<description>
+    The Tab Container supports drag-and-drop reordering of tabs when the <code>movable</code> property is set to
+    <code>true</code>. Users can click and drag tabs to rearrange their order within the tab container.
+</description>
+<component-example>
+    <ui5-doc-tab-container-reorder-sample />
+</component-example>
+<code-example [exampleFiles]="reorderExample()" />
