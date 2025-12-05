@@ -253,8 +253,18 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
     }
 
     /** @hidden */
-    @HostListener('click')
-    onItemClick(): void {
+    @HostListener('click', ['$event'])
+    onItemClick(event: MouseEvent): void {
+        const targetRef = event.target as HTMLElement;
+
+        // Check if the click happened on the collapsed time item span
+        if (
+            targetRef.classList.contains('fd-time__item--collapsed') ||
+            targetRef.closest('.fd-time__item--collapsed')
+        ) {
+            // Stop event propagation to prevent bubbling
+            event.stopPropagation();
+        }
         this.activeStateChange.emit();
     }
 
