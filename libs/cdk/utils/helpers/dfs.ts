@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from '../functions/lodash-utils';
 
 /** @hidden */
 interface DfsOptions<T> {

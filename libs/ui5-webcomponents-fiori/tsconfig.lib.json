@@ -6,7 +6,7 @@
         "declaration": true,
         "declarationMap": true,
         "types": [],
-        "lib": ["dom", "es2020"],
+        "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
         "moduleResolution": "bundler"
     },

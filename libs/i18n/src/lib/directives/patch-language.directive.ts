@@ -1,6 +1,6 @@
 import { DestroyRef, Directive, Inject, Input, Self, SkipSelf, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { cloneDeep, merge } from 'lodash-es';
+import { merge } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
@@ -37,7 +37,10 @@ export class FdPatchLanguageDirective {
         combineLatest([parentFdLanguage$, this._languagePatch$])
             .pipe(
                 map(([parentLang, languagePatch]) =>
-                    merge(cloneDeep(parentLang), patchedObj(parentLang, languagePatch || {}))
+                    merge(
+                        structuredClone(parentLang),
+                        patchedObj(parentLang, languagePatch || {}) as Partial<FdLanguage>
+                    )
                 ),
                 takeUntilDestroyed(this._destroyRef)
             )

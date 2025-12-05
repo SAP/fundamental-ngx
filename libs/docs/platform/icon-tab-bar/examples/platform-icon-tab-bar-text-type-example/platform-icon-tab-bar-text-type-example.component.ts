@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IconTabBarComponent, TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
-import { cloneDeep } from 'lodash-es';
 import { longTextTypeConfig, textTypeConfig } from '../config-for-examples/text-type.config';
 
 @Component({
@@ -24,7 +23,7 @@ export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {
     items: TabConfig[];
 
     ngOnInit(): void {
-        this.items = this.withOverflowExample ? cloneDeep(longTextTypeConfig) : cloneDeep(textTypeConfig);
+        this.items = this.withOverflowExample ? structuredClone(longTextTypeConfig) : structuredClone(textTypeConfig);
         if (this.nested) {
             this.items[3].subItems = [
                 {

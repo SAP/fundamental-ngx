@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { escape } from 'lodash-es';
+import { escape } from '../functions/lodash-utils';
 
 @Pipe({
     name: 'highlight',
