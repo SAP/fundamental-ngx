@@ -36,7 +36,7 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Test 1: Get current version
-echo -e "${YELLOW}[1/12] Testing current version detection...${NC}"
+echo -e "${YELLOW}[1/14] Testing current version detection...${NC}"
 # Get version from git tags (NX Release compatible), falls back to package.json
 CURRENT_VERSION=$(node -e "
     const getVersion = require('./.github/actions/helpers/get-version');
@@ -72,7 +72,7 @@ echo -e "${GREEN}✓ Version from origin/main: $MAIN_VERSION${NC}"
 echo ""
 
 # Test 2: Verify library package.json files have placeholders (not actual versions)
-echo -e "${YELLOW}[2/11] Testing library package.json placeholders...${NC}"
+echo -e "${YELLOW}[2/14] Testing library package.json placeholders...${NC}"
 PLACEHOLDER_CHECK_FAILED=false
 
 # Get list of release projects
@@ -154,7 +154,7 @@ fi
 echo ""
 
 # Test 3: Test bump-version action (manual mode - no actual bump)
-echo -e "${YELLOW}[3/12] Testing bump-version action (manual mode)...${NC}"
+echo -e "${YELLOW}[3/14] Testing bump-version action (manual mode)...${NC}"
 # Actions must run from repo root where package.json exists
 cd "$REPO_ROOT"
 
@@ -174,7 +174,7 @@ fi
 echo ""
 
 # Test 4: Test conventional commit analysis
-echo -e "${YELLOW}[4/12] Testing conventional commit analysis...${NC}"
+echo -e "${YELLOW}[4/14] Testing conventional commit analysis...${NC}"
 cd "$REPO_ROOT"
 if [ -f ".github/actions/helpers/bumped-release.js" ]; then
     TEST_RESULT=$(node -e "
@@ -198,8 +198,8 @@ else
 fi
 echo ""
 
-# Test 4: Test semver tags retrieval
-echo -e "${YELLOW}[5/12] Testing git semver tags retrieval...${NC}"
+# Test 5: Test semver tags retrieval
+echo -e "${YELLOW}[5/14] Testing git semver tags retrieval...${NC}"
 if git tag | grep -q "v"; then
     LATEST_TAG=$(git tag --sort=-v:refname | grep "^v[0-9]" | head -1)
     echo -e "${GREEN}✓ Latest semver tag: $LATEST_TAG${NC}"
@@ -217,8 +217,8 @@ else
 fi
 echo ""
 
-# Test 5: Test release tag determination
-echo -e "${YELLOW}[6/12] Testing release tag calculation...${NC}"
+# Test 6: Test release tag determination
+echo -e "${YELLOW}[6/14] Testing release tag calculation...${NC}"
 cd "$REPO_ROOT"
 
 # Test scenarios
@@ -257,8 +257,8 @@ for scenario in "${scenarios[@]}"; do
 done
 echo ""
 
-# Test 6: Test conventional changelog generation (dry run)
-echo -e "${YELLOW}[7/12] Testing conventional changelog generation...${NC}"
+# Test 7: Test conventional changelog generation (dry run)
+echo -e "${YELLOW}[7/14] Testing conventional changelog generation...${NC}"
 cd "$REPO_ROOT"
 
 if [ -f ".github/actions/generate-conventional-release-notes/index.js" ]; then
@@ -294,8 +294,8 @@ else
 fi
 echo ""
 
-# Test 7: Test NX Release configuration
-echo -e "${YELLOW}[8/12] Testing NX Release configuration...${NC}"
+# Test 8: Test NX Release configuration
+echo -e "${YELLOW}[8/14] Testing NX Release configuration...${NC}"
 if [ -f "nx.json" ]; then
     # Check if release config exists
     HAS_RELEASE=$(node -e "
@@ -324,8 +324,8 @@ else
 fi
 echo ""
 
-# Test 8: Test NX Release version command (dry-run)
-echo -e "${YELLOW}[9/12] Testing NX Release version command (dry-run)...${NC}"
+# Test 9: Test NX Release version command (dry-run)
+echo -e "${YELLOW}[9/14] Testing NX Release version command (dry-run)...${NC}"
 
 # Verify all release projects exist
 echo "  Verifying release projects..."
@@ -394,8 +394,8 @@ else
 fi
 echo ""
 
-# Test 9: Test NX Release publish (dry-run)
-echo -e "${YELLOW}[10/12] Testing NX Release publish command (dry-run)...${NC}"
+# Test 10: Test NX Release publish (dry-run)
+echo -e "${YELLOW}[10/14] Testing NX Release publish command (dry-run)...${NC}"
 
 # Check if packages are built (needed for publish test)
 if [ -d "dist/libs/core" ]; then
@@ -420,8 +420,8 @@ else
 fi
 echo ""
 
-# Test 10: Test hotfix release script (dry-run)
-echo -e "${YELLOW}[11/12] Testing hotfix release script...${NC}"
+# Test 11: Test hotfix release script (dry-run)
+echo -e "${YELLOW}[11/14] Testing hotfix release script...${NC}"
 
 if [ -f "scripts/release-hotfix.js" ]; then
     # Check if current version is valid for hotfix
@@ -464,7 +464,7 @@ fi
 echo ""
 
 # Test 12: Test reset-placeholders script
-echo -e "${YELLOW}[12/13] Testing reset-placeholders script...${NC}"
+echo -e "${YELLOW}[12/14] Testing reset-placeholders script...${NC}"
 
 if [ -f "scripts/reset-placeholders.js" ]; then
     # Create a backup of one package.json
@@ -508,8 +508,60 @@ else
 fi
 echo ""
 
-# Test 13: Dry run NPM pack (test what would be published)
-echo -e "${YELLOW}[13/13] Testing NPM package dry run...${NC}"
+# Test 13: Test update-lerna-version script
+echo -e "${YELLOW}[13/14] Testing update-lerna-version script...${NC}"
+
+if [ -f "scripts/update-lerna-version.js" ]; then
+    # Backup lerna.json
+    LERNA_FILE="lerna.json"
+    LERNA_BACKUP="/tmp/lerna.json.backup"
+    
+    if [ -f "$LERNA_FILE" ]; then
+        cp "$LERNA_FILE" "$LERNA_BACKUP"
+        
+        # Get current version from lerna.json
+        LERNA_CURRENT=$(node -e "console.log(require('./lerna.json').version)")
+        echo "  Current lerna.json version: $LERNA_CURRENT"
+        
+        # Test updating to a new version
+        TEST_VERSION="0.99.0-test.1"
+        UPDATE_OUTPUT=$(node scripts/update-lerna-version.js "$TEST_VERSION" 2>&1)
+        
+        # Verify the update worked
+        LERNA_NEW=$(node -e "console.log(require('./lerna.json').version)")
+        
+        if [ "$LERNA_NEW" = "$TEST_VERSION" ]; then
+            echo -e "${GREEN}✓ update-lerna-version.js successfully updated lerna.json${NC}"
+            echo "  Script output: $UPDATE_OUTPUT"
+        else
+            echo -e "${RED}✗ update-lerna-version.js failed to update version${NC}"
+            echo "  Expected: $TEST_VERSION, Got: $LERNA_NEW"
+        fi
+        
+        # Test with current version to restore
+        node scripts/update-lerna-version.js "$LERNA_CURRENT" > /dev/null 2>&1
+        
+        # Restore backup to ensure no side effects
+        mv "$LERNA_BACKUP" "$LERNA_FILE"
+        echo -e "${GREEN}✓ Restored original lerna.json${NC}"
+        
+        # Test error handling (no version argument)
+        ERROR_OUTPUT=$(node scripts/update-lerna-version.js 2>&1 || true)
+        if echo "$ERROR_OUTPUT" | grep -q "Version argument is required"; then
+            echo -e "${GREEN}✓ Script properly validates required arguments${NC}"
+        else
+            echo -e "${YELLOW}⚠️  Script error handling may need review${NC}"
+        fi
+    else
+        echo -e "${RED}✗ lerna.json not found${NC}"
+    fi
+else
+    echo -e "${RED}✗ scripts/update-lerna-version.js not found${NC}"
+fi
+echo ""
+
+# Test 14: Dry run NPM pack (test what would be published)
+echo -e "${YELLOW}[14/14] Testing NPM package dry run...${NC}"
 
 # Test packing one library to see what would be published
 TEST_PACKAGE="core"
