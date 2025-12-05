@@ -112,6 +112,10 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
     @Input()
     columnTranslationsPreset: 'seconds' | 'minutes' | 'hours' | 'period';
 
+    /** Whether to stop event propagation for collapsed time items */
+    @Input()
+    timeItemStopPropagationSourcing = false;
+
     /**
      * Offset for carousel directive, active item is always the first one.
      * In case of having more items in carousel than 1, middle element should be active
@@ -253,8 +257,20 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
     }
 
     /** @hidden */
-    @HostListener('click')
-    onItemClick(): void {
+    @HostListener('click', ['$event'])
+    onItemClick(event?: MouseEvent): void {
+        if (event && this.timeItemStopPropagationSourcing) {
+            const targetRef = event.target as HTMLElement;
+
+            // Check if the click happened on the collapsed time item span
+            if (
+                targetRef.classList.contains('fd-time__item--collapsed') ||
+                targetRef.closest('.fd-time__item--collapsed')
+            ) {
+                // Stop event propagation to prevent bubbling
+                event.stopPropagation();
+            }
+        }
         this.activeStateChange.emit();
     }
 

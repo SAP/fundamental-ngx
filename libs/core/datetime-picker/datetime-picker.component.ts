@@ -291,6 +291,10 @@ export class DatetimePickerComponent<D>
         cols: 5
     };
 
+    /** Whether to stop event propagation for collapsed time items */
+    @Input()
+    timeItemStopPropagationSourcing = false;
+
     /**
      * Object to customize aggregated year grid,
      * Row, Columns and method to display year can be modified

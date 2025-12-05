@@ -120,6 +120,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     @Input()
     spinnerButtons = true;
 
+    /** @Input Whether to stop event propagation for collapsed time items */
+    @Input()
+    timeItemStopPropagationSourcing = false;
+
     /** @hidden */
     @ViewChildren(TimeColumnComponent)
     columns: QueryList<TimeColumnComponent<number, SelectableViewItem<number>>>;

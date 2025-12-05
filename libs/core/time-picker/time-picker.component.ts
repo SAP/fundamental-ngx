@@ -119,6 +119,10 @@ export class TimePickerComponent<D>
     @Input()
     spinnerButtons = true;
 
+    /** Whether to stop event propagation for collapsed time items */
+    @Input()
+    timeItemStopPropagationSourcing = false;
+
     /**
      * When set to false, uses the 24 hour clock (hours ranging from 0 to 23).
      * Default value based on the current locale format option

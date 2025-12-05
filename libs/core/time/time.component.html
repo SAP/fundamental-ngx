@@ -13,6 +13,7 @@
         [activeValue]="activeHourViewItem"
         columnTranslationsPreset="hours"
         [spinners]="spinnerButtons"
+        [timeItemStopPropagationSourcing]="timeItemStopPropagationSourcing"
         (activeValueChange)="handleHourChange($event.value.value)"
         (activeStateChange)="changeActive('hour')"
     ></fd-time-column>
@@ -25,6 +26,7 @@
             [activeValue]="activeMinuteViewItem"
             columnTranslationsPreset="minutes"
             [spinners]="spinnerButtons"
+            [timeItemStopPropagationSourcing]="timeItemStopPropagationSourcing"
             (activeValueChange)="handleMinuteChange($event.value.value)"
             (activeStateChange)="changeActive('minute')"
         ></fd-time-column>
@@ -38,6 +40,7 @@
             [activeValue]="activeSecondViewItem"
             columnTranslationsPreset="seconds"
             [spinners]="spinnerButtons"
+            [timeItemStopPropagationSourcing]="timeItemStopPropagationSourcing"
             (activeValueChange)="handleSecondChange($event.value.value)"
             (activeStateChange)="changeActive('second')"
         ></fd-time-column>
@@ -52,6 +55,7 @@
             columnTranslationsPreset="period"
             [meridian]="true"
             [spinners]="spinnerButtons"
+            [timeItemStopPropagationSourcing]="timeItemStopPropagationSourcing"
             (activeValueChange)="handleMeridianChange($event.value.value)"
             (activeStateChange)="changeActive('meridian')"
         ></fd-time-column>
