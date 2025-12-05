@@ -104,6 +104,11 @@ jobs:
             - name: Reset dependency placeholders
               run: node scripts/reset-placeholders.js
 
+            # Update lerna.json version for backward compatibility with hotfix releases on older versions
+            - name: Update lerna.json version
+              if: env.IS_MANUAL != 'true'
+              run: node scripts/update-lerna-version.js ${{ steps.bumpVersion.outputs.newVersion }}
+
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
               with:
@@ -184,6 +189,7 @@ jobs:
                   git checkout -f main
                   npx nx release version ${{ steps.bumpVersion.outputs.newVersion }} --git-commit=false --git-tag=false
                   node scripts/reset-placeholders.js
+                  node scripts/update-lerna-version.js ${{ steps.bumpVersion.outputs.newVersion }}
                   git add .
                   git commit -m "chore(release): sync version after hotfix v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
                   git push origin main
