@@ -167,6 +167,10 @@
             "name": "Switch"
         },
         {
+            "url": "ui5-webcomponents/tab-container",
+            "name": "Tab Container"
+        },
+        {
             "url": "ui5-webcomponents/tag",
             "name": "Tag"
         },

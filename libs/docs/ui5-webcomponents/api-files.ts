@@ -47,6 +47,7 @@ export const API_FILES = {
     slider: ['Slider', 'RangeSlider'],
     stepInput: ['StepInput'],
     switch: ['Switch'],
+    tabContainer: ['Tab', 'TabContainer', 'TabSeparator'],
     tag: ['Tag'],
     text: ['Text'],
     textArea: ['TextArea'],
