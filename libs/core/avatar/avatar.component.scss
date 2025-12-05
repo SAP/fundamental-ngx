@@ -1,1 +1,7 @@
 @import 'fundamental-styles/dist/avatar.css';
+
+.fd-avatar.fd-avatar--xs,
+.fd-avatar.fd-avatar--s,
+.fd-avatar.fd-avatar--sm {
+    --fdAvatarFontStretch: normal;
+}
