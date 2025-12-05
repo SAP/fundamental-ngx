@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/platform",
-  "version": "0.57.6",
+  "version": "0.57.7",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - platform",
   "license": "Apache-2.0",
