@@ -1,0 +1,36 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--4">
+            <h4>Normal State:</h4>
+            <ui5-select>
+                <ui5-option value="option1" additionalText="Description 1">Option 1</ui5-option>
+                <ui5-option value="option2" additionalText="Description 2" selected>Option 2</ui5-option>
+                <ui5-option value="option3" additionalText="Description 3">Option 3</ui5-option>
+            </ui5-select>
+        </div>
+
+        <div class="fd-col fd-col--4">
+            <h4>Disabled State:</h4>
+            <ui5-select [disabled]="disabled()">
+                <ui5-option value="option1" additionalText="Description 1">Option 1</ui5-option>
+                <ui5-option value="option2" additionalText="Description 2" selected>Option 2</ui5-option>
+                <ui5-option value="option3" additionalText="Description 3">Option 3</ui5-option>
+            </ui5-select>
+            <p class="fd-margin-top--xs" [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+                Non-interactive and cannot receive focus.
+            </p>
+        </div>
+
+        <div class="fd-col fd-col--4">
+            <h4>Read-only with Text Separator:</h4>
+            <ui5-select [readonly]="readonly()" textSeparator="Bullet">
+                <ui5-option value="option1" additionalText="Description 1">Option 1</ui5-option>
+                <ui5-option value="option2" additionalText="Description 2" selected>Option 2</ui5-option>
+                <ui5-option value="option3" additionalText="Description 3">Option 3</ui5-option>
+            </ui5-select>
+            <p class="fd-margin-top--xs" [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+                Read-only with two-column layout. Bullet (•) separates main text from additional text.
+            </p>
+        </div>
+    </div>
+</div>

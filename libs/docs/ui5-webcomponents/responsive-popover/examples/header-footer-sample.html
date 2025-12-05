@@ -1,0 +1,52 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6">
+            <h4 class="fd-margin-top--none">Simple Header (headerText):</h4>
+            <ui5-button id="simple-header-opener" (ui5Click)="openSimplePopover()" design="Emphasized">
+                Open with Simple Header
+            </ui5-button>
+        </div>
+
+        <div class="fd-col fd-col--6">
+            <h4 class="fd-margin-top--none">Custom Header Slot:</h4>
+            <ui5-button id="custom-header-opener" (ui5Click)="openCustomPopover()" design="Emphasized">
+                Open with Custom Header
+            </ui5-button>
+        </div>
+    </div>
+
+    <!-- Simple Header Popover -->
+    <ui5-responsive-popover
+        #simplePopover
+        headerText="Simple Header Text"
+        [modal]="true"
+        [open]="simpleOpen()"
+        opener="simple-header-opener"
+    >
+        <div class="fd-margin--md">
+            <p>This popover uses the simple <code>headerText</code> property.</p>
+            <p class="fd-margin-top--xs">It's quick and easy for basic headers.</p>
+        </div>
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closeSimplePopover()" design="Emphasized">Close</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+
+    <!-- Custom Header Popover -->
+    <ui5-responsive-popover #customPopover [modal]="true" [open]="customOpen()" opener="custom-header-opener">
+        <ui5-bar slot="header">
+            <ui5-button icon="decline" design="Transparent" slot="startContent" (ui5Click)="customOpen.set(false)" />
+            <ui5-title>Custom Header</ui5-title>
+            <ui5-button icon="action-settings" design="Transparent" slot="endContent" />
+        </ui5-bar>
+
+        <div class="fd-margin--md">
+            <p>This popover uses the <code>header</code> slot with a custom Bar component.</p>
+            <p class="fd-margin-top--xs">You can add buttons, icons, and any content to the header.</p>
+        </div>
+
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closeCustomPopover()" design="Emphasized">Close</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+</div>
