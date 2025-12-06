@@ -8,6 +8,7 @@
 export const API_FILES = {
     barcodeScannerDialog: ['BarcodeScannerDialog'],
     dynamicPage: ['DynamicPage', 'DynamicPageHeader', 'DynamicPageTitle'],
+    dynamicSideContent: ['DynamicSideContent'],
     mediaGallery: ['MediaGallery'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

@@ -29,6 +29,11 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/dynamic-page').then(configureLibRoutes)
     },
     {
+        path: 'dynamic-side-content',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/dynamic-side-content').then(configureLibRoutes)
+    },
+    {
         path: 'media-gallery',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/media-gallery').then(configureLibRoutes)

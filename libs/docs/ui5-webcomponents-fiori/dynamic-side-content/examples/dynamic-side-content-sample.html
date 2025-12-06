@@ -1,0 +1,417 @@
+<!-- Example 1: Basic Dynamic Side Content with Configuration -->
+<section aria-labelledby="dynamic-side-content-basic" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="dynamic-side-content-basic" class="fd-section__title">Basic Dynamic Side Content</h2>
+    </div>
+
+    <!-- Configuration Controls (Outside DynamicSideContent) -->
+    <div
+        class="sap-margin-bottom-small sap-padding-small"
+        style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+    >
+        <ui5-text class="sap-display-block sap-margin-bottom-small"><strong>Configuration Controls</strong></ui5-text>
+
+        <div class="sap-margin-bottom-small">
+            <ui5-button (ui5Click)="togglePosition()" design="Emphasized">
+                Toggle Position ({{ sideContentPosition() }})
+            </ui5-button>
+        </div>
+
+        <div class="sap-margin-bottom-small">
+            <ui5-text class="sap-display-block sap-margin-bottom-tiny"><strong>Visibility:</strong></ui5-text>
+            <ui5-segmented-button (ui5SelectionChange)="onVisibilityChange($event)">
+                <ui5-segmented-button-item
+                    data-visibility="ShowAboveS"
+                    [selected]="sideContentVisibility() === 'ShowAboveS'"
+                >
+                    ShowAboveS
+                </ui5-segmented-button-item>
+                <ui5-segmented-button-item
+                    data-visibility="AlwaysShow"
+                    [selected]="sideContentVisibility() === 'AlwaysShow'"
+                >
+                    AlwaysShow
+                </ui5-segmented-button-item>
+                <ui5-segmented-button-item
+                    data-visibility="NeverShow"
+                    [selected]="sideContentVisibility() === 'NeverShow'"
+                >
+                    NeverShow
+                </ui5-segmented-button-item>
+            </ui5-segmented-button>
+        </div>
+
+        <div class="sap-margin-bottom-small">
+            <ui5-text class="sap-display-block sap-margin-bottom-tiny"><strong>Fall Down:</strong></ui5-text>
+            <ui5-segmented-button (ui5SelectionChange)="onFallDownChange($event)">
+                <ui5-segmented-button-item
+                    data-falldown="OnMinimumWidth"
+                    [selected]="sideContentFallDown() === 'OnMinimumWidth'"
+                >
+                    OnMinimumWidth
+                </ui5-segmented-button-item>
+                <ui5-segmented-button-item data-falldown="BelowM" [selected]="sideContentFallDown() === 'BelowM'">
+                    BelowM
+                </ui5-segmented-button-item>
+                <ui5-segmented-button-item data-falldown="BelowL" [selected]="sideContentFallDown() === 'BelowL'">
+                    BelowL
+                </ui5-segmented-button-item>
+            </ui5-segmented-button>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center">
+            <div style="display: flex; align-items: center; gap: 0.5rem">
+                <ui5-text>Equal Split:</ui5-text>
+                <ui5-switch [checked]="equalSplit()" (ui5Change)="toggleEqualSplit()"></ui5-switch>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem">
+                <ui5-text>Hide Main:</ui5-text>
+                <ui5-switch [checked]="hideMainContent()" (ui5Change)="toggleMainContent()"></ui5-switch>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem">
+                <ui5-text>Hide Side:</ui5-text>
+                <ui5-switch [checked]="hideSideContent()" (ui5Change)="toggleSideContent()"></ui5-switch>
+            </div>
+        </div>
+
+        <div
+            class="sap-margin-top-small"
+            style="padding-top: 0.5rem; border-top: 1px solid var(--sapGroup_ContentBorderColor)"
+        >
+            <ui5-text><strong>Breakpoint:</strong> {{ currentBreakpoint() }}</ui5-text>
+        </div>
+    </div>
+
+    <ui5-dynamic-side-content
+        [sideContentPosition]="sideContentPosition()"
+        [sideContentVisibility]="sideContentVisibility()"
+        [sideContentFallDown]="sideContentFallDown()"
+        [equalSplit]="equalSplit()"
+        [hideMainContent]="hideMainContent()"
+        [hideSideContent]="hideSideContent()"
+        [accessibilityAttributes]="accessibilityAttributes()"
+        (ui5LayoutChange)="onLayoutChange($event)"
+        style="height: 500px; border: 1px solid var(--sapGroup_ContentBorderColor)"
+    >
+        <!-- Main Content -->
+        <div class="sap-padding-x-medium sap-padding-y-small">
+            <ui5-title level="H3">Main Content Area</ui5-title>
+            <ui5-text class="sap-margin-top-small sap-display-block">
+                This is the main content area. Use the controls above to configure the component behavior.
+            </ui5-text>
+
+            <div
+                class="sap-margin-top-medium"
+                style="background: var(--sapInfobar_Background); padding: 0.75rem; border-radius: 0.25rem"
+            >
+                <ui5-text>
+                    The main content displays primary information and takes up the majority of the space. When
+                    configured with equalSplit, it takes 50% of the available width on larger screens.
+                </ui5-text>
+            </div>
+        </div>
+
+        <!-- Side Content -->
+        <div
+            slot="sideContent"
+            class="sap-padding-x-medium sap-padding-y-small"
+            style="background: var(--sapBackgroundColor)"
+        >
+            <ui5-title level="H4">Side Content</ui5-title>
+            <ui5-text class="sap-margin-top-small sap-display-block">
+                Additional information displayed in the side panel. Adapts based on screen size.
+            </ui5-text>
+
+            <div
+                class="sap-margin-top-medium"
+                style="background: var(--sapInfobar_Background); padding: 0.75rem; border-radius: 0.25rem"
+            >
+                <ui5-text class="sap-display-block sap-margin-bottom-tiny"><strong>Visibility Modes:</strong></ui5-text>
+                <ui5-text class="sap-display-block" style="font-size: 0.875rem">
+                    • ShowAboveS: M, L, XL<br />
+                    • AlwaysShow: Always visible<br />
+                    • NeverShow: Hidden
+                </ui5-text>
+            </div>
+        </div>
+    </ui5-dynamic-side-content>
+</section>
+
+<!-- Example 2: Product Catalog with Details -->
+<section aria-labelledby="dynamic-side-content-products" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="dynamic-side-content-products" class="fd-section__title">Product Catalog with Side Details</h2>
+    </div>
+
+    <ui5-dynamic-side-content
+        sideContentPosition="End"
+        sideContentVisibility="ShowAboveS"
+        sideContentFallDown="OnMinimumWidth"
+        [hideSideContent]="selectedProduct() === null"
+        style="height: 600px; border: 1px solid var(--sapGroup_ContentBorderColor)"
+    >
+        <!-- Main Content: Product List -->
+        <div class="sap-padding-x-medium sap-padding-y-small">
+            <ui5-title level="H3">Product Catalog</ui5-title>
+            <ui5-text class="sap-margin-top-small sap-display-block">
+                Select a product to view details ({{ availableProducts() }} available)
+            </ui5-text>
+
+            <ui5-list class="sap-margin-top-medium" header-text="Products">
+                @for (product of products(); track product.id) {
+                <ui5-li
+                    [attr.data-product-id]="product.id"
+                    (click)="selectProduct(product)"
+                    [selected]="selectedProduct()?.id === product.id"
+                    type="Active"
+                >
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%">
+                        <div>
+                            <ui5-text class="sap-display-block"><strong>{{ product.name }}</strong></ui5-text>
+                            <ui5-text
+                                class="sap-display-block"
+                                style="color: var(--sapNeutralTextColor); font-size: 0.875rem"
+                            >
+                                ${{ product.price }}
+                            </ui5-text>
+                        </div>
+                        <ui5-tag [design]="getProductStatusDesign(product.status)"> {{ product.status }} </ui5-tag>
+                    </div>
+                </ui5-li>
+                }
+            </ui5-list>
+        </div>
+
+        <!-- Side Content: Product Details -->
+        <div
+            slot="sideContent"
+            class="sap-padding-x-medium sap-padding-y-small"
+            style="background: var(--sapBackgroundColor)"
+        >
+            @if (selectedProduct(); as product) {
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: start">
+                    <ui5-title level="H4">{{ product.name }}</ui5-title>
+                    <ui5-button icon="decline" design="Transparent" (ui5Click)="clearProductSelection()"> </ui5-button>
+                </div>
+
+                <div
+                    class="sap-margin-top-medium sap-padding-small"
+                    style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+                >
+                    <div class="sap-margin-bottom-small">
+                        <ui5-text class="sap-display-block"><strong>Price:</strong> ${{ product.price }}</ui5-text>
+                    </div>
+                    <div class="sap-margin-bottom-small">
+                        <ui5-text class="sap-display-block"><strong>Stock:</strong> {{ product.stock }} units</ui5-text>
+                    </div>
+                    <div class="sap-margin-bottom-small">
+                        <ui5-text class="sap-display-block"><strong>Category:</strong> {{ product.category }}</ui5-text>
+                    </div>
+                    <ui5-tag [design]="getProductStatusDesign(product.status)"> {{ product.status }} </ui5-tag>
+                </div>
+
+                <ui5-button class="sap-margin-top-medium" design="Emphasized" style="width: 100%"
+                    >Add to Cart</ui5-button
+                >
+            </div>
+            } @else {
+            <div style="text-align: center; padding: 2rem">
+                <ui5-text style="color: var(--sapNeutralTextColor)"> Select a product to view details </ui5-text>
+            </div>
+            }
+        </div>
+    </ui5-dynamic-side-content>
+</section>
+
+<!-- Example 3: Notifications Panel -->
+<section aria-labelledby="dynamic-side-content-notifications" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="dynamic-side-content-notifications" class="fd-section__title">Content with Notification Panel</h2>
+    </div>
+
+    <ui5-dynamic-side-content
+        sideContentPosition="End"
+        sideContentVisibility="AlwaysShow"
+        sideContentFallDown="BelowL"
+        [equalSplit]="false"
+        style="height: 600px; border: 1px solid var(--sapGroup_ContentBorderColor)"
+    >
+        <!-- Main Content -->
+        <div class="sap-padding-x-medium sap-padding-y-small">
+            <ui5-title level="H3">Dashboard</ui5-title>
+            <ui5-text class="sap-margin-top-small sap-display-block"> View metrics and notifications. </ui5-text>
+
+            <div
+                class="sap-margin-top-medium"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem"
+            >
+                <div
+                    class="sap-padding-small"
+                    style="background: var(--sapInfobar_Background); border-radius: 0.25rem; text-align: center"
+                >
+                    <ui5-text class="sap-display-block" style="font-size: 0.875rem">Products</ui5-text>
+                    <ui5-title level="H2">{{ products().length }}</ui5-title>
+                </div>
+
+                <div
+                    class="sap-padding-small"
+                    style="background: var(--sapInfobar_Background); border-radius: 0.25rem; text-align: center"
+                >
+                    <ui5-text class="sap-display-block" style="font-size: 0.875rem">Available</ui5-text>
+                    <ui5-title level="H2">{{ availableProducts() }}</ui5-title>
+                </div>
+
+                <div
+                    class="sap-padding-small"
+                    style="background: var(--sapInfobar_Background); border-radius: 0.25rem; text-align: center"
+                >
+                    <ui5-text class="sap-display-block" style="font-size: 0.875rem">Unread</ui5-text>
+                    <ui5-title level="H2">{{ unreadNotifications() }}</ui5-title>
+                </div>
+            </div>
+
+            <div
+                class="sap-margin-top-medium sap-padding-small"
+                style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+            >
+                <ui5-text>Dashboard content area. Notifications are shown in the side panel.</ui5-text>
+            </div>
+        </div>
+
+        <!-- Side Content: Notifications -->
+        <div
+            slot="sideContent"
+            class="sap-padding-x-medium sap-padding-y-small"
+            style="background: var(--sapBackgroundColor)"
+        >
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem">
+                <ui5-title level="H4">
+                    Notifications @if (unreadNotifications() > 0) {
+                    <ui5-tag design="Negative" class="sap-margin-begin-tiny">{{ unreadNotifications() }}</ui5-tag>
+                    }
+                </ui5-title>
+                @if (unreadNotifications() > 0) {
+                <ui5-button design="Transparent" (ui5Click)="markAllAsRead()">Mark All</ui5-button>
+                }
+            </div>
+
+            <div style="overflow-y: auto; max-height: 500px">
+                @for (notification of notifications(); track notification.id) {
+                <div
+                    class="sap-margin-bottom-small sap-padding-small"
+                    [style.opacity]="notification.read ? '0.6' : '1'"
+                    style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+                >
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem"
+                    >
+                        <ui5-text class="sap-display-block"><strong>{{ notification.title }}</strong></ui5-text>
+                        <ui5-tag [design]="getPriorityDesign(notification.priority)">
+                            {{ notification.priority }}
+                        </ui5-tag>
+                    </div>
+
+                    <ui5-text class="sap-display-block" style="font-size: 0.875rem">
+                        {{ notification.message }}
+                    </ui5-text>
+
+                    <div class="sap-margin-top-small" style="display: flex; gap: 0.5rem">
+                        @if (!notification.read) {
+                        <ui5-button design="Transparent" (ui5Click)="markAsRead(notification.id)">Read</ui5-button>
+                        }
+                        <ui5-button icon="delete" design="Transparent" (ui5Click)="deleteNotification(notification.id)">
+                        </ui5-button>
+                    </div>
+                </div>
+                } @empty {
+                <div style="text-align: center; padding: 2rem">
+                    <ui5-text style="color: var(--sapNeutralTextColor)">No notifications</ui5-text>
+                </div>
+                }
+            </div>
+        </div>
+    </ui5-dynamic-side-content>
+</section>
+
+<!-- Example 4: Equal Split Mode -->
+<section aria-labelledby="dynamic-side-content-equal" class="fd-section sap-margin-bottom-medium">
+    <div class="fd-section__header">
+        <h2 id="dynamic-side-content-equal" class="fd-section__title">Equal Split Comparison Mode</h2>
+    </div>
+
+    <ui5-dynamic-side-content
+        sideContentPosition="End"
+        sideContentVisibility="ShowAboveS"
+        sideContentFallDown="OnMinimumWidth"
+        [equalSplit]="true"
+        style="height: 500px; border: 1px solid var(--sapGroup_ContentBorderColor)"
+    >
+        <!-- Main Content: Version A -->
+        <div class="sap-padding-x-medium sap-padding-y-small">
+            <ui5-title level="H3">Basic Plan</ui5-title>
+            <ui5-text class="sap-margin-top-small sap-display-block">
+                50/50 split on larger screens for side-by-side comparison.
+            </ui5-text>
+
+            <div
+                class="sap-margin-top-medium sap-padding-small"
+                style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+            >
+                <ui5-text class="sap-display-block sap-margin-bottom-tiny"><strong>Features:</strong></ui5-text>
+                <ui5-text class="sap-display-block" style="font-size: 0.875rem">
+                    • Basic functionality<br />
+                    • Standard performance<br />
+                    • Email support
+                </ui5-text>
+            </div>
+
+            <div class="sap-margin-top-medium" style="text-align: center">
+                <ui5-title level="H2">$29/mo</ui5-title>
+                <ui5-button class="sap-margin-top-small" design="Default" style="width: 100%"> Choose Plan </ui5-button>
+            </div>
+        </div>
+
+        <!-- Side Content: Version B -->
+        <div
+            slot="sideContent"
+            class="sap-padding-x-medium sap-padding-y-small"
+            style="background: var(--sapBackgroundColor)"
+        >
+            <ui5-title level="H3">Premium Plan</ui5-title>
+            <ui5-text class="sap-margin-top-small sap-display-block">
+                Compare options with equal visual weight.
+            </ui5-text>
+
+            <div
+                class="sap-margin-top-medium sap-padding-small"
+                style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+            >
+                <ui5-text class="sap-display-block sap-margin-bottom-tiny"><strong>Features:</strong></ui5-text>
+                <ui5-text class="sap-display-block" style="font-size: 0.875rem">
+                    • Advanced functionality<br />
+                    • High performance<br />
+                    • Full customization<br />
+                    • Priority 24/7 support<br />
+                    • API access
+                </ui5-text>
+            </div>
+
+            <div class="sap-margin-top-medium" style="text-align: center">
+                <ui5-title level="H2">$79/mo</ui5-title>
+                <ui5-button class="sap-margin-top-small" design="Emphasized" style="width: 100%">
+                    Choose Plan
+                </ui5-button>
+            </div>
+        </div>
+    </ui5-dynamic-side-content>
+
+    <div
+        class="sap-margin-top-small sap-padding-small"
+        style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+    >
+        <ui5-text style="font-size: 0.875rem; font-style: italic">
+            Note: Equal split mode toggles between main and side content on phone screens.
+        </ui5-text>
+    </div>
+</section>
