@@ -59,16 +59,16 @@
             </ui5-segmented-button>
         </div>
 
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center">
-            <div style="display: flex; align-items: center; gap: 0.5rem">
+        <div class="sap-flex sap-flex--gap-medium sap-flex--wrap sap-flex--align-items-center">
+            <div class="sap-flex sap-flex--align-items-center sap-flex--gap-small">
                 <ui5-text>Equal Split:</ui5-text>
                 <ui5-switch [checked]="equalSplit()" (ui5Change)="toggleEqualSplit()"></ui5-switch>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem">
+            <div class="sap-flex sap-flex--align-items-center sap-flex--gap-small">
                 <ui5-text>Hide Main:</ui5-text>
                 <ui5-switch [checked]="hideMainContent()" (ui5Change)="toggleMainContent()"></ui5-switch>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem">
+            <div class="sap-flex sap-flex--align-items-center sap-flex--gap-small">
                 <ui5-text>Hide Side:</ui5-text>
                 <ui5-switch [checked]="hideSideContent()" (ui5Change)="toggleSideContent()"></ui5-switch>
             </div>
@@ -165,7 +165,10 @@
                     [selected]="selectedProduct()?.id === product.id"
                     type="Active"
                 >
-                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%">
+                    <div
+                        class="sap-flex sap-flex--justify-space-between sap-flex--align-items-center"
+                        style="width: 100%"
+                    >
                         <div>
                             <ui5-text class="sap-display-block"><strong>{{ product.name }}</strong></ui5-text>
                             <ui5-text
@@ -190,7 +193,7 @@
         >
             @if (selectedProduct(); as product) {
             <div>
-                <div style="display: flex; justify-content: space-between; align-items: start">
+                <div class="sap-flex sap-flex--justify-space-between sap-flex--align-items-flex-start">
                     <ui5-title level="H4">{{ product.name }}</ui5-title>
                     <ui5-button icon="decline" design="Transparent" (ui5Click)="clearProductSelection()"> </ui5-button>
                 </div>
@@ -216,7 +219,7 @@
                 >
             </div>
             } @else {
-            <div style="text-align: center; padding: 2rem">
+            <div class="sap-padding-large" style="text-align: center">
                 <ui5-text style="color: var(--sapNeutralTextColor)"> Select a product to view details </ui5-text>
             </div>
             }
@@ -285,7 +288,7 @@
             class="sap-padding-x-medium sap-padding-y-small"
             style="background: var(--sapBackgroundColor)"
         >
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem">
+            <div class="sap-flex sap-flex--justify-space-between sap-flex--align-items-center sap-margin-bottom-small">
                 <ui5-title level="H4">
                     Notifications @if (unreadNotifications() > 0) {
                     <ui5-tag design="Negative" class="sap-margin-begin-tiny">{{ unreadNotifications() }}</ui5-tag>
@@ -304,7 +307,7 @@
                     style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
                 >
                     <div
-                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem"
+                        class="sap-flex sap-flex--justify-space-between sap-flex--align-items-flex-start sap-margin-bottom-tiny"
                     >
                         <ui5-text class="sap-display-block"><strong>{{ notification.title }}</strong></ui5-text>
                         <ui5-tag [design]="getPriorityDesign(notification.priority)">
@@ -316,7 +319,7 @@
                         {{ notification.message }}
                     </ui5-text>
 
-                    <div class="sap-margin-top-small" style="display: flex; gap: 0.5rem">
+                    <div class="sap-margin-top-small sap-flex sap-flex--gap-small">
                         @if (!notification.read) {
                         <ui5-button design="Transparent" (ui5Click)="markAsRead(notification.id)">Read</ui5-button>
                         }
@@ -325,7 +328,7 @@
                     </div>
                 </div>
                 } @empty {
-                <div style="text-align: center; padding: 2rem">
+                <div class="sap-padding-large" style="text-align: center">
                     <ui5-text style="color: var(--sapNeutralTextColor)">No notifications</ui5-text>
                 </div>
                 }
