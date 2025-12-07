@@ -1,4 +1,5 @@
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
+
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -9,6 +10,7 @@ export const API_FILES = {
     barcodeScannerDialog: ['BarcodeScannerDialog'],
     dynamicPage: ['DynamicPage', 'DynamicPageHeader', 'DynamicPageTitle'],
     dynamicSideContent: ['DynamicSideContent'],
+    flexibleColumnLayout: ['FlexibleColumnLayout'],
     mediaGallery: ['MediaGallery'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

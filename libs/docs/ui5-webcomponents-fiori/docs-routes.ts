@@ -34,6 +34,11 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/dynamic-side-content').then(configureLibRoutes)
     },
     {
+        path: 'flexible-column-layout',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/flexible-column-layout').then(configureLibRoutes)
+    },
+    {
         path: 'media-gallery',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/media-gallery').then(configureLibRoutes)

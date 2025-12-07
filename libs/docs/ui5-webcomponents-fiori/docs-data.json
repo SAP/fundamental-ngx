@@ -19,6 +19,10 @@
             "name": "Dynamic Side Content"
         },
         {
+            "url": "ui5-webcomponents-fiori/flexible-column-layout",
+            "name": "Flexible Column Layout"
+        },
+        {
             "url": "ui5-webcomponents-fiori/media-gallery",
             "name": "Media Gallery"
         },
