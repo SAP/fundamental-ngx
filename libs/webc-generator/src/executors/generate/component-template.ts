@@ -214,6 +214,51 @@ function generateOutputs(data: CEM.CustomElementDeclaration, className: string):
     return outputs.join('\n');
 }
 
+/** Generate a readonly property documenting available slots for the component. */
+function generateSlotsDocumentation(data: CEM.CustomElementDeclaration): string {
+    const slots = (data as any).slots || [];
+    if (slots.length === 0) {
+        return '';
+    }
+
+    const slotDocs = slots.map((slot: any) => {
+        const slotName = slot.name === 'default' ? '(default)' : slot.name;
+        const description = slot.description || 'No description available.';
+        return `   * - **${slotName}**: ${description}`;
+    });
+
+    return `
+  /**
+   * Available slots for content projection in this component.
+   * 
+   * Slots allow you to insert custom content into predefined areas of the web component.
+   * Use the \`slot\` attribute on child elements to target specific slots.
+   * 
+${slotDocs.join('\n')}
+   * 
+   * @example
+   * \`\`\`html
+   * <${data.tagName}>
+   *   <div slot="header">Custom header content</div>
+   *   <p>Default slot content</p>
+   * </${data.tagName}>
+   * \`\`\`
+   * 
+   * @readonly
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots | MDN Web Components Slots}
+   */
+  readonly slots = ${JSON.stringify(
+      slots.map((slot: any) => ({
+          name: slot.name,
+          description: slot.description,
+          since: slot._ui5since
+      })),
+      null,
+      4
+  ).replace(/\n/g, '\n  ')};
+`;
+}
+
 /** Generate the Angular component wrapper. */
 export function componentTemplate(
     data: CEM.CustomElementDeclaration,
@@ -365,6 +410,7 @@ ${generateInputs(data, componentEnums, className)} // className is now passed
 ${readonlyProperties}
 
 ${generateOutputs(data, className)}
+${generateSlotsDocumentation(data)}
 
   public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
