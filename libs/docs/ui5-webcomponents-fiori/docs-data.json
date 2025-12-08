@@ -23,6 +23,10 @@
             "name": "Flexible Column Layout"
         },
         {
+            "url": "ui5-webcomponents-fiori/illustrated-message",
+            "name": "Illustrated Message"
+        },
+        {
             "url": "ui5-webcomponents-fiori/media-gallery",
             "name": "Media Gallery"
         },

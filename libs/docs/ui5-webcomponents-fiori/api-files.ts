@@ -11,6 +11,7 @@ export const API_FILES = {
     dynamicPage: ['DynamicPage', 'DynamicPageHeader', 'DynamicPageTitle'],
     dynamicSideContent: ['DynamicSideContent'],
     flexibleColumnLayout: ['FlexibleColumnLayout'],
+    illustratedMessage: ['IllustratedMessage'],
     mediaGallery: ['MediaGallery'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };
