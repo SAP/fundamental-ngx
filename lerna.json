@@ -1,0 +1,9 @@
+{
+    "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+    "packages": ["libs/*"],
+    "version": "0.58.0-rc.50",
+    "conventionalCommits": true,
+    "tagVersionPrefix": "v",
+    "message": "chore(release): publish %v",
+    "npmClient": "yarn"
+}
