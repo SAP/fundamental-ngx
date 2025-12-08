@@ -20,7 +20,7 @@ mergeable:
                 - required:
                       reviewers: ['droshev']
                 - required:
-                      reviewers: ['dpavlenishvili']
+                      reviewers: ['MariaIDineva']
                 - required:
                       reviewers: ['mikerodonnell89']
                 - min:
