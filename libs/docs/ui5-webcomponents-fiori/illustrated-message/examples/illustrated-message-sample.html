@@ -1,1 +1,224 @@
-<p>SAMPLE</p>
+<div class="sap-padding-responsive">
+    <!-- Example 1: Search State (BeforeSearch) -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Empty Search State</h2>
+        </div>
+
+        @if (!hasSearchResults()) {
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.BeforeSearch"
+            [design]="selectedDesign()"
+            titleText="Start Your Search"
+            subtitleText="Enter keywords to find relevant results"
+        >
+            <div class="sap-flex sap-flex--gap-small sap-flex--justify-center">
+                <ui5-input
+                    [value]="searchQuery()"
+                    (ui5Input)="onSearchInput($event)"
+                    placeholder="Search for products..."
+                    class="sap-flex-grow-1"
+                    style="max-width: 400px"
+                >
+                </ui5-input>
+                <ui5-button design="Emphasized" (click)="performSearch()" [disabled]="!searchQuery().trim()">
+                    Search
+                </ui5-button>
+            </div>
+        </ui5-illustrated-message>
+        } @else {
+        <div class="sap-padding sap-flex sap-flex--center-column">
+            <ui5-title level="H3">Search Results</ui5-title>
+            <ui5-text class="sap-margin-top-small">Found results for "{{ searchQuery() }}"</ui5-text>
+            <ui5-button class="sap-margin-top-medium" design="Transparent" (click)="clearSearch()">
+                New Search
+            </ui5-button>
+        </div>
+        }
+    </section>
+
+    <!-- Example 2: No Data State -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">No Data Available</h2>
+        </div>
+
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.NoData"
+            [design]="selectedDesign()"
+            titleText="No Data Available"
+            subtitleText="There are no items to display at this time."
+        >
+            <ui5-button design="Emphasized" icon="refresh">Refresh</ui5-button>
+        </ui5-illustrated-message>
+    </section>
+
+    <!-- Example 3: Upload State -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">File Upload</h2>
+        </div>
+
+        @if (!uploadComplete()) {
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.DragFilesToUpload"
+            [design]="selectedDesign()"
+            titleText="Upload Your Files"
+            subtitleText="Drag and drop files here or click to browse"
+        >
+            <div class="sap-flex sap-flex--gap-small sap-flex--justify-center">
+                <ui5-button design="Emphasized" (click)="handleFileUpload()" [disabled]="isLoading()">
+                    {{ isLoading() ? 'Uploading...' : 'Choose Files' }}
+                </ui5-button>
+            </div>
+        </ui5-illustrated-message>
+        } @else {
+        <div class="sap-padding sap-flex sap-flex--center-column">
+            <ui5-title level="H3">Upload Complete</ui5-title>
+            <ui5-text class="sap-margin-top-small">Your files have been uploaded successfully.</ui5-text>
+            <ui5-button class="sap-margin-top-medium" design="Transparent" (click)="resetUpload()">
+                Upload More
+            </ui5-button>
+        </div>
+        }
+    </section>
+
+    <!-- Example 4: No Entries -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Empty List</h2>
+        </div>
+
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.NoEntries"
+            [design]="selectedDesign()"
+            titleText="No Entries Found"
+            subtitleText="Add your first item to get started."
+        >
+            <div class="sap-flex sap-flex--gap-small sap-flex--justify-center">
+                <ui5-button design="Emphasized" icon="add">Add Entry</ui5-button>
+                <ui5-button design="Default">Import</ui5-button>
+            </div>
+        </ui5-illustrated-message>
+    </section>
+
+    <!-- Example 5: No Notifications -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">No Notifications</h2>
+        </div>
+
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.NoNotifications"
+            [design]="selectedDesign()"
+            titleText="You're All Caught Up"
+            subtitleText="No new notifications at this time."
+        >
+            <ui5-text>
+                Check back later for updates or
+                <ui5-link href="#">configure your notification settings</ui5-link>.
+            </ui5-text>
+        </ui5-illustrated-message>
+    </section>
+
+    <!-- Example 6: Custom Subtitle Slot -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Custom Subtitle with Slot</h2>
+        </div>
+
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.NoMail"
+            [design]="selectedDesign()"
+            titleText="No New Messages"
+        >
+            <div slot="subtitle" class="sap-padding-small">
+                <ui5-text class="sap-display-block sap-margin-bottom-tiny">
+                    Your inbox is empty. Would you like to:
+                </ui5-text>
+                <ui5-text class="sap-display-block">
+                    • <ui5-link href="#">Compose a new message</ui5-link><br />
+                    • <ui5-link href="#">Check your spam folder</ui5-link><br />
+                    • <ui5-link href="#">Update email filters</ui5-link>
+                </ui5-text>
+            </div>
+            <ui5-button design="Emphasized" icon="email">Compose Email</ui5-button>
+        </ui5-illustrated-message>
+    </section>
+
+    <!-- Example 7: Design Variations -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Design Variations</h2>
+        </div>
+
+        <div
+            class="sap-margin-bottom-medium sap-padding-small"
+            style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+        >
+            <ui5-text class="sap-display-block sap-margin-bottom-small"><strong>Select Design:</strong></ui5-text>
+            <div class="sap-flex sap-flex--gap-small sap-flex--wrap">
+                <ui5-button
+                    [design]="selectedDesign() === IllustrationMessageDesign.Auto ? 'Emphasized' : 'Default'"
+                    (click)="changeDesign($any(IllustrationMessageDesign.Auto))"
+                >
+                    Auto
+                </ui5-button>
+                <ui5-button
+                    [design]="selectedDesign() === IllustrationMessageDesign.Spot ? 'Emphasized' : 'Default'"
+                    (click)="changeDesign($any(IllustrationMessageDesign.Spot))"
+                >
+                    Spot
+                </ui5-button>
+                <ui5-button
+                    [design]="selectedDesign() === IllustrationMessageDesign.Dialog ? 'Emphasized' : 'Default'"
+                    (click)="changeDesign($any(IllustrationMessageDesign.Dialog))"
+                >
+                    Dialog
+                </ui5-button>
+                <ui5-button
+                    [design]="selectedDesign() === IllustrationMessageDesign.Scene ? 'Emphasized' : 'Default'"
+                    (click)="changeDesign($any(IllustrationMessageDesign.Scene))"
+                >
+                    Scene
+                </ui5-button>
+            </div>
+            <ui5-text
+                class="sap-display-block sap-margin-top-small"
+                style="font-size: 0.875rem; color: var(--sapNeutralTextColor)"
+            >
+                Current design: <strong>{{ selectedDesign() }}</strong>
+            </ui5-text>
+        </div>
+
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.NoActivities"
+            [design]="selectedDesign()"
+            titleText="No Recent Activity"
+            subtitleText="Start working to see your activity timeline here."
+        >
+            <ui5-button design="Emphasized">Get Started</ui5-button>
+        </ui5-illustrated-message>
+    </section>
+
+    <!-- Example 8: Decorative Mode -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Decorative Illustration</h2>
+        </div>
+
+        <ui5-illustrated-message
+            [name]="IllustrationMessageType.Achievement"
+            [design]="selectedDesign()"
+            [decorative]="true"
+            titleText="Congratulations!"
+            subtitleText="You've completed all tasks successfully."
+        >
+            <ui5-text class="sap-display-block sap-margin-bottom-small">
+                The decorative mode applies <code>role="presentation"</code> and <code>aria-hidden="true"</code> to the
+                illustration.
+            </ui5-text>
+            <ui5-button design="Emphasized">Continue</ui5-button>
+        </ui5-illustrated-message>
+    </section>
+</div>

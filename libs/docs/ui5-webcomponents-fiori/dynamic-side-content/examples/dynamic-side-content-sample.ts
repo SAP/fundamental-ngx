@@ -1,4 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { DynamicSideContent } from '@fundamental-ngx/ui5-webcomponents-fiori/dynamic-side-content';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
@@ -140,7 +141,7 @@ export class DynamicSideContentSample {
     });
 
     // Event handlers
-    onLayoutChange(event: CustomEvent): void {
+    onLayoutChange(event: UI5WrapperCustomEvent<DynamicSideContent, 'ui5LayoutChange'>): void {
         const detail = event.detail;
         console.log('Layout changed:', detail);
         this.currentBreakpoint.set(detail.currentBreakpoint || 'Unknown');
@@ -162,7 +163,7 @@ export class DynamicSideContentSample {
         this.hideSideContent.update((hide) => !hide);
     }
 
-    onVisibilityChange(event: Event): void {
+    onVisibilityChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const target = event.target as HTMLElement;
         const selectedItem = target.querySelector('[selected]');
         if (selectedItem) {
@@ -173,7 +174,7 @@ export class DynamicSideContentSample {
         }
     }
 
-    onFallDownChange(event: Event): void {
+    onFallDownChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
         const target = event.target as HTMLElement;
         const selectedItem = target.querySelector('[selected]');
         if (selectedItem) {

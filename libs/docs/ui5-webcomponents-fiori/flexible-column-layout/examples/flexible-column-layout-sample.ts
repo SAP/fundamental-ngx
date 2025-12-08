@@ -1,4 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
+import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import {
     FlexibleColumnLayout,
     type FCLAccessibilityAttributes
@@ -123,11 +124,13 @@ export class FlexibleColumnLayoutSample {
     readonly FCLLayout = FCLLayout;
 
     // Event handlers
-    onLayoutChange(event: any): void {
+    onLayoutChange(event: UI5WrapperCustomEvent<FlexibleColumnLayout, 'ui5LayoutChange'>): void {
         console.log('Layout changed:', event.detail);
     }
 
-    onLayoutConfigurationChange(event: any): void {
+    onLayoutConfigurationChange(
+        event: UI5WrapperCustomEvent<FlexibleColumnLayout, 'ui5LayoutConfigurationChange'>
+    ): void {
         console.log('Layout configuration changed:', event.detail);
     }
 

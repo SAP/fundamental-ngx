@@ -276,7 +276,7 @@ function generateTypeExports(data: CEM.CustomElementDeclaration, packageName: st
                     reference.module === `dist/${data.name}.js` &&
                     !exportedTypes.has(reference.name)
                 ) {
-                    typeExports.push(`export type { ${reference.name} } from '${packageName}/dist/${data.name}.js';`);
+                    typeExports.push(`export { ${reference.name} } from '${packageName}/dist/${data.name}.js';`);
                     exportedTypes.add(reference.name);
                 }
             }
