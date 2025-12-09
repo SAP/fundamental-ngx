@@ -171,6 +171,10 @@
             "name": "Tab Container"
         },
         {
+            "url": "ui5-webcomponents/table",
+            "name": "Table"
+        },
+        {
             "url": "ui5-webcomponents/tag",
             "name": "Tag"
         },
