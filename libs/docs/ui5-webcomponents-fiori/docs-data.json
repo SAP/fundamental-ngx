@@ -31,6 +31,10 @@
             "name": "Media Gallery"
         },
         {
+            "url": "ui5-webcomponents-fiori/navigation-layout",
+            "name": "Navigation Layout"
+        },
+        {
             "url": "ui5-webcomponents-fiori/timeline",
             "name": "Timeline"
         }

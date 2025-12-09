@@ -13,5 +13,6 @@ export const API_FILES = {
     flexibleColumnLayout: ['FlexibleColumnLayout'],
     illustratedMessage: ['IllustratedMessage'],
     mediaGallery: ['MediaGallery'],
+    navigationLayout: ['NavigationLayout'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

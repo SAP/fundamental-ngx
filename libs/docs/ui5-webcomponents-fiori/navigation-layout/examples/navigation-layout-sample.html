@@ -1,0 +1,91 @@
+<div class="sap-padding-responsive">
+    <!-- Dynamic Mode Switching -->
+    <section class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Dynamic Mode Switching</h2>
+        </div>
+
+        <div
+            class="sap-margin-bottom-medium sap-padding-small"
+            style="background: var(--sapInfobar_Background); border-radius: 0.25rem"
+        >
+            <ui5-text class="sap-display-block sap-margin-bottom-small"
+                ><strong>Current Mode:</strong> {{ currentMode() }}</ui5-text
+            >
+            <div class="sap-flex sap-flex--gap-small sap-flex--wrap">
+                <ui5-button
+                    [design]="currentMode() === NavigationLayoutMode.Auto ? 'Emphasized' : 'Default'"
+                    (click)="changeMode($any(NavigationLayoutMode.Auto))"
+                >
+                    Auto
+                </ui5-button>
+                <ui5-button
+                    [design]="currentMode() === NavigationLayoutMode.Expanded ? 'Emphasized' : 'Default'"
+                    (click)="changeMode($any(NavigationLayoutMode.Expanded))"
+                >
+                    Expanded
+                </ui5-button>
+                <ui5-button
+                    [design]="currentMode() === NavigationLayoutMode.Collapsed ? 'Emphasized' : 'Default'"
+                    (click)="changeMode($any(NavigationLayoutMode.Collapsed))"
+                >
+                    Collapsed
+                </ui5-button>
+            </div>
+        </div>
+
+        <div
+            style="
+                position: relative;
+                height: 500px;
+                overflow: hidden;
+                border: 1px solid var(--sapGroup_ContentBorderColor);
+                border-radius: 0.5rem;
+            "
+        >
+            <ui5-navigation-layout [mode]="currentMode()" style="height: 100%; width: 100%">
+                <div
+                    slot="header"
+                    class="sap-flex sap-flex--align-items-center sap-flex--justify-space-between sap-padding"
+                >
+                    <div class="sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                        <ui5-avatar icon="laptop" size="S" colorScheme="Accent3"></ui5-avatar>
+                        <ui5-title level="H5">My Application</ui5-title>
+                    </div>
+                    <ui5-button icon="log" design="Transparent">Logout</ui5-button>
+                </div>
+
+                <div slot="sideContent" class="sap-padding-small">
+                    <ui5-list mode="SingleSelect">
+                        @for (item of navigationItems(); track item.id) {
+                        <ui5-li
+                            [icon]="item.icon"
+                            [accessibleName]="item.label"
+                            (click)="selectNavItem(item.id)"
+                            [style.background]="item.id === selectedNavItem() ? 'var(--sapList_SelectionBackgroundColor)' : 'transparent'"
+                        >
+                            @if (currentMode() !== NavigationLayoutMode.Collapsed) { {{ item.label }} }
+                        </ui5-li>
+                        }
+                    </ui5-list>
+                </div>
+
+                <div class="sap-padding-large">
+                    <ui5-title level="H3" class="sap-margin-bottom-medium">{{ getCurrentContent().title }}</ui5-title>
+                    <ui5-text class="sap-display-block"> {{ getCurrentContent().description }} </ui5-text>
+
+                    <div
+                        class="sap-margin-top-large sap-padding"
+                        style="background: var(--sapHighlight_Background); border-radius: 0.25rem"
+                    >
+                        <ui5-title level="H6" class="sap-margin-bottom-small">💡 Tip</ui5-title>
+                        <ui5-text>
+                            Try switching between modes to see how the navigation adapts. The Auto mode automatically
+                            adjusts based on screen size: Expanded on desktop, Collapsed on tablet and phone.
+                        </ui5-text>
+                    </div>
+                </div>
+            </ui5-navigation-layout>
+        </div>
+    </section>
+</div>
