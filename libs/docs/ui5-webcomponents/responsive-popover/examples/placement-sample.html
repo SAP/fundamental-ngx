@@ -1,0 +1,64 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row fd-margin-bottom--sm">
+        <div class="fd-col">
+            <label [ngStyle]="{'font-size': '0.875rem', 'font-weight': '600'}">Placement:</label>
+            <div class="fd-margin-top--tiny">
+                <ui5-segmented-button (ui5SelectionChange)="setPlacement($event)">
+                    @for (p of placements(); track p) {
+                    <ui5-segmented-button-item [selected]="placement() === p"> {{ p }} </ui5-segmented-button-item>
+                    }
+                </ui5-segmented-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-bottom--sm">
+        <div class="fd-col">
+            <label [ngStyle]="{'font-size': '0.875rem', 'font-weight': '600'}">Horizontal Align:</label>
+            <div class="fd-margin-top--tiny">
+                <ui5-segmented-button (ui5SelectionChange)="setAlignment($event)">
+                    @for (align of alignments(); track align) {
+                    <ui5-segmented-button-item [selected]="horizontalAlign() === align">
+                        {{ align }}
+                    </ui5-segmented-button-item>
+                    }
+                </ui5-segmented-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-bottom--sm">
+        <div class="fd-col">
+            <ui5-button (ui5Click)="toggleArrow()" [design]="hideArrow() ? 'Emphasized' : 'Default'">
+                {{ hideArrow() ? 'Arrow Hidden' : 'Arrow Visible' }}
+            </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button id="placement-opener" (ui5Click)="openPopover()" design="Emphasized"> Open Popover </ui5-button>
+        </div>
+    </div>
+
+    <ui5-responsive-popover
+        headerText="Placement Example"
+        opener="placement-opener"
+        [placement]="placement()"
+        [horizontalAlign]="horizontalAlign()"
+        [hideArrow]="hideArrow()"
+        [modal]="true"
+        [open]="isOpen()"
+    >
+        <div class="fd-margin--md">
+            <p><strong>Current Settings:</strong></p>
+            <p class="fd-margin-top--xs">Placement: {{ placement() }}</p>
+            <p>Horizontal Align: {{ horizontalAlign() }}</p>
+            <p>Arrow: {{ hideArrow() ? 'Hidden' : 'Visible' }}</p>
+        </div>
+
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closePopover()" design="Emphasized">Close</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+</div>

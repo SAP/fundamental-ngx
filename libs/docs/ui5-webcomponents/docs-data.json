@@ -151,8 +151,16 @@
             "name": "Rating Indicator"
         },
         {
+            "url": "ui5-webcomponents/responsive-popover",
+            "name": "Responsive Popover"
+        },
+        {
             "url": "ui5-webcomponents/segmented-button",
             "name": "Segmented Button"
+        },
+        {
+            "url": "ui5-webcomponents/select",
+            "name": "Select"
         },
         {
             "url": "ui5-webcomponents/slider",

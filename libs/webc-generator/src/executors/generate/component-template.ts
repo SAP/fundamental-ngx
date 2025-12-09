@@ -214,6 +214,78 @@ function generateOutputs(data: CEM.CustomElementDeclaration, className: string):
     return outputs.join('\n');
 }
 
+/** Generate a readonly property documenting available slots for the component. */
+function generateSlotsDocumentation(data: CEM.CustomElementDeclaration): string {
+    const slots = (data as any).slots || [];
+    if (slots.length === 0) {
+        return '';
+    }
+
+    const slotDocs = slots.map((slot: any) => {
+        const slotName = slot.name === 'default' ? '(default)' : slot.name;
+        const description = slot.description || 'No description available.';
+        return `   * - **${slotName}**: ${description}`;
+    });
+
+    return `
+  /**
+   * Available slots for content projection in this component.
+   * 
+   * Slots allow you to insert custom content into predefined areas of the web component.
+   * Use the \`slot\` attribute on child elements to target specific slots.
+   * 
+${slotDocs.join('\n')}
+   * 
+   * @example
+   * \`\`\`html
+   * <${data.tagName}>
+   *   <div slot="header">Custom header content</div>
+   *   <p>Default slot content</p>
+   * </${data.tagName}>
+   * \`\`\`
+   * 
+   * @readonly
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots | MDN Web Components Slots}
+   */
+  readonly slots = ${JSON.stringify(
+      slots.map((slot: any) => ({
+          name: slot.name,
+          description: slot.description,
+          since: slot._ui5since
+      })),
+      null,
+      4
+  ).replace(/\n/g, '\n  ')};
+`;
+}
+/** Helper function to extract type exports for re-export at the end of the component file. */
+function generateTypeExports(data: CEM.CustomElementDeclaration, packageName: string): string {
+    const typeExports: string[] = [];
+    const exportedTypes = new Set<string>();
+
+    // Find types that are used in the component but aren't enums (those are already handled)
+    const members = (data.members as CEM.ClassField[] | undefined) || [];
+    for (const member of members) {
+        if (member.type?.references) {
+            for (const reference of member.type.references) {
+                // Only export interface/type definitions (not enums which go to types folder)
+                // Check if the type comes from the component's own .js file (not from /types/)
+                if (
+                    reference.name &&
+                    reference.module &&
+                    reference.module === `dist/${data.name}.js` &&
+                    !exportedTypes.has(reference.name)
+                ) {
+                    typeExports.push(`export { ${reference.name} } from '${packageName}/dist/${data.name}.js';`);
+                    exportedTypes.add(reference.name);
+                }
+            }
+        }
+    }
+
+    return typeExports.length > 0 ? `\n// Re-export types for convenience\n${typeExports.join('\n')}` : '';
+}
+
 /** Generate the Angular component wrapper. */
 export function componentTemplate(
     data: CEM.CustomElementDeclaration,
@@ -223,6 +295,7 @@ export function componentTemplate(
     const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
     const tagName = data.tagName || '';
     const className = data.name;
+    const typeExports = generateTypeExports(data, packageName);
     const { readonlyProperties, privateProperties } = generateProperties(data);
     const outputEvents = data.events || [];
     const shouldHostCVA = hasCvaHostDirective(data); // false; // Temporarily disabled to validate build
@@ -365,6 +438,7 @@ ${generateInputs(data, componentEnums, className)} // className is now passed
 ${readonlyProperties}
 
 ${generateOutputs(data, className)}
+${generateSlotsDocumentation(data)}
 
   public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
@@ -410,5 +484,6 @@ ${(() => {
 })()}
   }
 }
+${typeExports}
 `;
 }
