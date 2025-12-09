@@ -258,6 +258,33 @@ ${slotDocs.join('\n')}
   ).replace(/\n/g, '\n  ')};
 `;
 }
+/** Helper function to extract type exports for re-export at the end of the component file. */
+function generateTypeExports(data: CEM.CustomElementDeclaration, packageName: string): string {
+    const typeExports: string[] = [];
+    const exportedTypes = new Set<string>();
+
+    // Find types that are used in the component but aren't enums (those are already handled)
+    const members = (data.members as CEM.ClassField[] | undefined) || [];
+    for (const member of members) {
+        if (member.type?.references) {
+            for (const reference of member.type.references) {
+                // Only export interface/type definitions (not enums which go to types folder)
+                // Check if the type comes from the component's own .js file (not from /types/)
+                if (
+                    reference.name &&
+                    reference.module &&
+                    reference.module === `dist/${data.name}.js` &&
+                    !exportedTypes.has(reference.name)
+                ) {
+                    typeExports.push(`export { ${reference.name} } from '${packageName}/dist/${data.name}.js';`);
+                    exportedTypes.add(reference.name);
+                }
+            }
+        }
+    }
+
+    return typeExports.length > 0 ? `\n// Re-export types for convenience\n${typeExports.join('\n')}` : '';
+}
 
 /** Generate the Angular component wrapper. */
 export function componentTemplate(
@@ -268,6 +295,7 @@ export function componentTemplate(
     const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
     const tagName = data.tagName || '';
     const className = data.name;
+    const typeExports = generateTypeExports(data, packageName);
     const { readonlyProperties, privateProperties } = generateProperties(data);
     const outputEvents = data.events || [];
     const shouldHostCVA = hasCvaHostDirective(data); // false; // Temporarily disabled to validate build
@@ -456,5 +484,6 @@ ${(() => {
 })()}
   }
 }
+${typeExports}
 `;
 }

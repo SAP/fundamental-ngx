@@ -328,9 +328,13 @@
                 "cdk:compile-typedoc",
                 "core:compile-typedoc",
                 "platform:compile-typedoc",
+                "cx:compile-typedoc",
                 "i18n:compile-typedoc",
                 "datetime-adapter:compile-typedoc",
                 "moment-adapter:compile-typedoc",
+                "ui5-webcomponents:compile-typedoc",
+                "ui5-webcomponents-ai:compile-typedoc",
+                "ui5-webcomponents-fiori:compile-typedoc",
                 "ui5-webcomponents-base:compile-typedoc",
                 "^transform-translations",
                 "^generate"

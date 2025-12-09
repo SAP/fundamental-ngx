@@ -1,0 +1,8 @@
+{
+    "name": "docs-ui5-webcomponents-fiori-navigation-layout",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/docs/ui5-webcomponents-fiori/navigation-layout",
+    "prefix": "ui5-doc",
+    "tags": ["type:lib", "scope:docs"]
+}

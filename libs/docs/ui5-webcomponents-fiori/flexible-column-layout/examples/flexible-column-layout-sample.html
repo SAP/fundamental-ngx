@@ -1,0 +1,192 @@
+<div class="sap-padding-responsive">
+    <!-- Layout Controls -->
+    <div class="fd-section sap-margin-bottom-medium">
+        <div class="fd-section__header">
+            <h2 class="sap-section-title">Layout Controls</h2>
+        </div>
+        <div class="sap-flex sap-flex--gap-small sap-flex--wrap">
+            <ui5-button
+                [design]="currentLayout() === FCLLayout.OneColumn ? 'Emphasized' : 'Default'"
+                (click)="changeLayout($any(FCLLayout.OneColumn))"
+                >One Column</ui5-button
+            >
+            <ui5-button
+                [design]="currentLayout() === FCLLayout.TwoColumnsStartExpanded ? 'Emphasized' : 'Default'"
+                (click)="changeLayout($any(FCLLayout.TwoColumnsStartExpanded))"
+                >Two Columns Start</ui5-button
+            >
+            <ui5-button
+                [design]="currentLayout() === FCLLayout.TwoColumnsMidExpanded ? 'Emphasized' : 'Default'"
+                (click)="changeLayout($any(FCLLayout.TwoColumnsMidExpanded))"
+                >Two Columns Mid</ui5-button
+            >
+            <ui5-button
+                [design]="currentLayout() === FCLLayout.ThreeColumnsMidExpanded ? 'Emphasized' : 'Default'"
+                (click)="changeLayout($any(FCLLayout.ThreeColumnsMidExpanded))"
+                >Three Columns Mid</ui5-button
+            >
+            <ui5-button
+                [design]="currentLayout() === FCLLayout.ThreeColumnsEndExpanded ? 'Emphasized' : 'Default'"
+                (click)="changeLayout($any(FCLLayout.ThreeColumnsEndExpanded))"
+                >Three Columns End</ui5-button
+            >
+            <ui5-button design="Transparent" (click)="toggleResizing()">
+                {{ resizingDisabled() ? 'Enable' : 'Disable' }} Resizing
+            </ui5-button>
+        </div>
+        <div class="sap-margin-top-small">
+            <ui5-text>Current Layout: <strong>{{ currentLayout() }}</strong></ui5-text>
+        </div>
+    </div>
+
+    <!-- Flexible Column Layout -->
+    <ui5-flexible-column-layout
+        [layout]="currentLayout()"
+        [disableResizing]="resizingDisabled()"
+        [accessibilityAttributes]="accessibilityAttrs()"
+        (ui5LayoutChange)="onLayoutChange($event)"
+        (ui5LayoutConfigurationChange)="onLayoutConfigurationChange($event)"
+        class="fd-flexible-column-layout"
+        style="height: 600px"
+    >
+        <!-- Start Column: Product List -->
+        <div slot="startColumn" class="sap-flex sap-flex--column" style="height: 100%; overflow-y: auto">
+            <div
+                class="sap-padding sap-flex sap-flex--justify-space-between sap-flex--align-items-center fd-flexible-column-layout__header"
+            >
+                <ui5-title level="H3">Products</ui5-title>
+                <ui5-text>{{ products().length }} items</ui5-text>
+            </div>
+
+            <ui5-list class="sap-flex-grow-1">
+                @for (product of products(); track product.id) {
+                <ui5-li
+                    [text]="product.name"
+                    [description]="product.category + ' • ' + formatPrice(product.price)"
+                    type="Active"
+                    (click)="selectProduct(product)"
+                    [class.selected]="selectedProduct()?.id === product.id"
+                >
+                    <div slot="additionalText" class="sap-text" [class.sap-text-color--negative]="product.stock < 10">
+                        {{ getStockStatus(product.stock) }}
+                    </div>
+                </ui5-li>
+                }
+            </ui5-list>
+        </div>
+
+        <!-- Mid Column: Product Details -->
+        <div slot="midColumn" class="sap-flex sap-flex--column" style="height: 100%; overflow-y: auto">
+            @if (selectedProduct(); as product) {
+            <div
+                class="sap-padding sap-flex sap-flex--justify-space-between sap-flex--align-items-center fd-flexible-column-layout__header"
+            >
+                <ui5-title level="H3">{{ product.name }}</ui5-title>
+                <ui5-button design="Transparent" icon="decline" (click)="closeMidColumn()"></ui5-button>
+            </div>
+
+            <div class="sap-padding sap-flex-grow-1">
+                <div class="sap-margin-bottom-medium">
+                    <ui5-title level="H5">Overview</ui5-title>
+                    <div class="sap-margin-top-small">
+                        <div class="sap-flex sap-flex--gap-small sap-margin-y-tiny">
+                            <ui5-text><strong>Category:</strong></ui5-text>
+                            <ui5-text>{{ product.category }}</ui5-text>
+                        </div>
+                        <div class="sap-flex sap-flex--gap-small sap-margin-y-tiny">
+                            <ui5-text><strong>Price:</strong></ui5-text>
+                            <ui5-text>{{ formatPrice(product.price) }}</ui5-text>
+                        </div>
+                        <div class="sap-flex sap-flex--gap-small sap-margin-y-tiny">
+                            <ui5-text><strong>Stock:</strong></ui5-text>
+                            <ui5-text>{{ product.stock }} units</ui5-text>
+                        </div>
+                    </div>
+                </div>
+
+                @if (selectedDetail(); as details) {
+                <div class="sap-margin-bottom-medium">
+                    <ui5-title level="H5">Description</ui5-title>
+                    <ui5-text class="sap-margin-top-small">{{ details.description }}</ui5-text>
+                </div>
+
+                <div class="sap-margin-bottom-medium">
+                    <ui5-title level="H5">Specifications</ui5-title>
+                    <ul class="sap-margin-top-small">
+                        @for (spec of details.specifications; track spec) {
+                        <li><ui5-text>{{ spec }}</ui5-text></li>
+                        }
+                    </ul>
+                </div>
+                }
+
+                <div class="sap-margin-top-medium">
+                    <ui5-button design="Emphasized" (click)="viewDetails()">View Additional Details</ui5-button>
+                </div>
+            </div>
+            } @else {
+            <div class="sap-flex sap-flex--center-column" style="height: 100%">
+                <ui5-text>Select a product to view details</ui5-text>
+            </div>
+            }
+        </div>
+
+        <!-- End Column: Additional Information -->
+        <div slot="endColumn" class="sap-flex sap-flex--column" style="height: 100%; overflow-y: auto">
+            @if (selectedDetail(); as details) {
+            <div
+                class="sap-padding sap-flex sap-flex--justify-space-between sap-flex--align-items-center fd-flexible-column-layout__header"
+            >
+                <ui5-title level="H3">Additional Information</ui5-title>
+                <ui5-button design="Transparent" icon="decline" (click)="closeEndColumn()"></ui5-button>
+            </div>
+
+            <div class="sap-padding">
+                <div class="sap-margin-bottom-medium">
+                    <ui5-title level="H5">Supplier Information</ui5-title>
+                    <ui5-text class="sap-margin-top-small">{{ details.supplier }}</ui5-text>
+                </div>
+
+                <div class="sap-margin-bottom-medium">
+                    <ui5-title level="H5">Shipping Details</ui5-title>
+                    <ui5-text class="sap-margin-top-small">Standard shipping: 3-5 business days</ui5-text>
+                    <ui5-text class="sap-margin-top-tiny">Express shipping: 1-2 business days</ui5-text>
+                </div>
+
+                <div class="sap-margin-bottom-medium">
+                    <ui5-title level="H5">Return Policy</ui5-title>
+                    <ui5-text class="sap-margin-top-small"
+                        >30-day money-back guarantee. Items must be unused and in original packaging.</ui5-text
+                    >
+                </div>
+
+                <div class="sap-margin-top-medium">
+                    <ui5-button design="Emphasized">Add to Cart</ui5-button>
+                </div>
+            </div>
+            } @else {
+            <div class="sap-flex sap-flex--center-column" style="height: 100%">
+                <ui5-text>Additional details will appear here</ui5-text>
+            </div>
+            }
+        </div>
+    </ui5-flexible-column-layout>
+
+    <!-- Information Panel -->
+    <div class="fd-section sap-margin-top-medium">
+        <div class="sap-flex sap-flex--gap-medium sap-flex--wrap">
+            <div class="sap-flex sap-flex--gap-tiny">
+                <ui5-text><strong>Start Column Visible:</strong></ui5-text>
+                <ui5-text>{{ startVisible() ? 'Yes' : 'No' }}</ui5-text>
+            </div>
+            <div class="sap-flex sap-flex--gap-tiny">
+                <ui5-text><strong>Mid Column Visible:</strong></ui5-text>
+                <ui5-text>{{ midVisible() ? 'Yes' : 'No' }}</ui5-text>
+            </div>
+            <div class="sap-flex sap-flex--gap-tiny">
+                <ui5-text><strong>End Column Visible:</strong></ui5-text>
+                <ui5-text>{{ endVisible() ? 'Yes' : 'No' }}</ui5-text>
+            </div>
+        </div>
+    </div>
+</div>
