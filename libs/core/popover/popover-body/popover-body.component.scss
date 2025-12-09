@@ -78,7 +78,7 @@ fd-popover-body {
             border-radius: inherit;
         }
 
-        .fd-list:not(:has(~ .fd-popover__body-header)) {
+        .fd-popover__body-header:not(:has(~ .fd-list)) {
             border-radius: $fd-popover-border-radius;
 
             .fd-list__item {

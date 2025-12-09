@@ -3,9 +3,9 @@ import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    ComponentRef,
     computed,
     DestroyRef,
     Directive,
@@ -173,7 +173,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
 })
 export class SearchFieldComponent
     extends BaseComponent
-    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent, AfterViewInit
+    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent
 {
     /** Type of component used to render the categories dropdown. */
     @Input()
@@ -439,6 +439,9 @@ export class SearchFieldComponent
     private _appearance: Appearance;
 
     /** @hidden */
+    private _mobileComponent: ComponentRef<SearchFieldMobileComponent>;
+
+    /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private readonly _viewContainerRef: ViewContainerRef,
@@ -471,16 +474,14 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        if (this.mobile) {
-            this._setUpMobileMode();
-        }
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('categories' in changes || 'currentCategory' in changes) {
             this.setCurrentCategory(this.currentCategory);
+        }
+        if ('mobile' in changes) {
+            setTimeout(() => {
+                this._setUpMobileMode();
+            });
         }
     }
 
@@ -556,7 +557,7 @@ export class SearchFieldComponent
     onItemClick(event: SuggestionItem | string): void {
         if (typeof event === 'string') {
             this.inputText = event;
-        } else {
+        } else if (event?.value) {
             this.inputText = event.value;
         }
         this.inputChange.emit(this.searchFieldValue);
@@ -781,12 +782,16 @@ export class SearchFieldComponent
 
     /** @hidden */
     private _setUpMobileMode(): void {
+        if (this._mobileComponent) {
+            this._mobileComponent.destroy();
+        }
+
         const injector = Injector.create({
             providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }],
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicComponent(
+        this._mobileComponent = this._dynamicComponentService.createDynamicComponent(
             { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
             SearchFieldMobileComponent,
             {
@@ -813,7 +818,6 @@ export class SuggestionMatchesPipe implements PipeTransform {
             return suggestions;
         }
         const processedMatch = match.trim().toLowerCase();
-        // return suggestions.filter((suggestion) => suggestion.value.toLowerCase().indexOf(processedMatch) > -1);
         return suggestions.filter((suggestion) => {
             const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion.value;
             return textToCheck.toLowerCase().indexOf(processedMatch) > -1;

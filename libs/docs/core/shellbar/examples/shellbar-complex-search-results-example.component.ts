@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
     ShellbarActionComponent,
     ShellbarActionsComponent,
@@ -71,7 +74,9 @@ import { Observable, of } from 'rxjs';
         BarRightDirective,
         MessageToastModule,
         SearchFieldComponent,
-        ShellbarActionComponent
+        ShellbarActionComponent,
+        FormsModule,
+        SegmentedButtonComponent
     ]
 })
 export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
@@ -85,6 +90,8 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
 
     expanded = true;
     isOpen = false;
+
+    exampleType: 'categories' | 'advancedFilter' | 'mobile' = 'categories';
 
     categories: ValueLabelItem[] = [
         {
@@ -123,6 +130,11 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         actionButtonLabel: 'buttonLabel',
         showDeleteButton: 'canDelete',
         deleteCallback: 'deleteFn'
+    };
+
+    mobileConfig: MobileModeConfig = {
+        approveButtonText: 'OK',
+        hasCloseButton: true
     };
 
     constructor(private _messageToastService: MessageToastService) {}

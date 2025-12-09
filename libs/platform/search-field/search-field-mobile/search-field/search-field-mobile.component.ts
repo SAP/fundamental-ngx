@@ -98,7 +98,9 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
             ...this.dialogConfig,
             backdropClickCloseable: false,
             escKeyCloseable: true,
-            container: this._elementRef.nativeElement
+            container: 'body',
+            minWidth: '100vw',
+            minHeight: '100vh'
         });
     }
 }

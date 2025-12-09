@@ -292,17 +292,6 @@
                         }
                     </li>
                 }
-                @if (searchInScopeText() && searchInScopeNumber()) {
-                    <li
-                        fd-list-item
-                        (fdkClicked)="searchInScopeCallback()"
-                        [interactive]="true"
-                        [suggestion]="true"
-                        [counter]="searchInScopeNumber()"
-                    >
-                        <span fd-list-title>{{ searchInScopeText() }}</span>
-                    </li>
-                }
             </ul>
         }
     }
