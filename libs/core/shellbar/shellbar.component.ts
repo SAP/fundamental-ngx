@@ -374,11 +374,15 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _navigationClicked(event: Event): void {
+        event.preventDefault();
+        event.stopPropagation();
         this.navigationButtonClicked.emit(event);
     }
 
     /** @hidden */
     _backClicked(event: Event): void {
+        event.preventDefault();
+        event.stopPropagation();
         this.backButtonClicked.emit(event);
     }
 
