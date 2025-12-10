@@ -142,7 +142,7 @@
                     <li
                         (click)="handleOptionItem(optionItem)"
                         fd-list-item
-                        role="option"
+                        ariaRole="option"
                         [tabindex]="0"
                         (keyDown)="handlePressEnter($event, optionItem)"
                         [selected]="isSelectedOptionItem(optionItem)"
@@ -160,7 +160,7 @@
                 <li
                     (click)="handleOptionItem(optionItem)"
                     fd-list-item
-                    role="option"
+                    ariaRole="option"
                     [tabindex]="0"
                     (keyDown)="handlePressEnter($event, optionItem)"
                     [selected]="isSelectedOptionItem(optionItem)"
