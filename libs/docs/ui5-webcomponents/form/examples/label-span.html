@@ -7,7 +7,7 @@
     </div>
 
     <div class="fd-row" id="container" style="max-width: 1500px; width: 1250px; overflow-x: auto">
-        <div class="fd-col" [ngStyle]="{'min-width': containerWidth()}">
+        <div class="fd-col" [style]="{'min-width': containerWidth()}">
             <ui5-form headerText="Label Span: S12 M4 L4 XL4" labelSpan="S12 M4 L4 XL4">
                 @for (formItem of formItems(); track formItem.id) {
                 <ui5-form-item>

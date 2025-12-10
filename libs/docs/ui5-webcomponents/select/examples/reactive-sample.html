@@ -17,7 +17,7 @@
                 </ui5-select>
             </div>
 
-            <div class="fd-col fd-col--6" [ngStyle]="{ 'display': 'flex', 'flex-direction': 'column' }">
+            <div class="fd-col fd-col--6" [style]="{ 'display': 'flex', 'flex-direction': 'column' }">
                 <ui5-label for="quantity-input">Quantity:</ui5-label>
                 <ui5-input
                     id="quantity-input"
@@ -41,7 +41,7 @@
                 <ui5-button (ui5Click)="resetForm()" class="fd-margin-begin--sm">Reset</ui5-button>
                 <span
                     class="fd-margin-begin--sm"
-                    [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}"
+                    [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}"
                 >
                     Form status: {{ isFormValid() }}
                 </span>

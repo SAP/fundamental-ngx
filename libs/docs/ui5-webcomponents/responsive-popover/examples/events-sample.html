@@ -1,12 +1,12 @@
 <div class="fd-container fd-padding--none">
     <div class="fd-row fd-margin-bottom--sm">
         <div class="fd-col">
-            <div [ngStyle]="{'display': 'flex', 'justify-content': 'space-between', 'align-items': 'center'}">
+            <div [style]="{'display': 'flex', 'justify-content': 'space-between', 'align-items': 'center'}">
                 <strong>Event Log (last 15 events):</strong>
                 <ui5-button design="Transparent" (ui5Click)="clearLog()">Clear Log</ui5-button>
             </div>
             <div
-                [ngStyle]="{
+                [style]="{
                     'border': '1px solid #ccc',
                     'padding': '0.5rem',
                     'margin-top': '0.5rem',
@@ -18,7 +18,7 @@
                 @if (eventLog().length === 0) {
                 <em>No events yet. Open and close the popover to see events.</em>
                 } @else { @for (log of eventLog(); track $index) {
-                <div [ngStyle]="{'font-family': 'monospace', 'font-size': '0.875rem', 'margin': '0.25rem 0'}">
+                <div [style]="{'font-family': 'monospace', 'font-size': '0.875rem', 'margin': '0.25rem 0'}">
                     [{{ log.timestamp }}] - {{ log.event }}
                 </div>
 

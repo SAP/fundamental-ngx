@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
@@ -22,7 +21,7 @@ import 'fundamental-styles/dist/layout-grid.css';
         }
     `,
     standalone: true,
-    imports: [Form, FormGroup, FormItem, Label, Slider, Text, Link, NgStyle]
+    imports: [Form, FormGroup, FormItem, Label, Slider, Text, Link]
 })
 export class FormLayoutsSample {
     readonly sliderValue = signal(85);

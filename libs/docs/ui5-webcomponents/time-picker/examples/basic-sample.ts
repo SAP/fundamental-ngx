@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { TimePicker } from '@fundamental-ngx/ui5-webcomponents/time-picker';
@@ -14,7 +13,7 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-time-picker-basic-sample',
     templateUrl: './basic-sample.html',
     standalone: true,
-    imports: [TimePicker, NgStyle]
+    imports: [TimePicker]
 })
 export class TimePickerBasicSample {
     readonly basicValue = signal('');

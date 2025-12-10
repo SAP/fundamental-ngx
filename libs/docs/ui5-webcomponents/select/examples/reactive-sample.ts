@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,7 +21,7 @@ interface Product {
     selector: 'ui5-doc-select-reactive-sample',
     templateUrl: './reactive-sample.html',
     standalone: true,
-    imports: [ReactiveFormsModule, Select, Option, Button, Input, Label, NgStyle]
+    imports: [ReactiveFormsModule, Select, Option, Button, Input, Label]
 })
 export class ReactiveSample {
     private fb = new FormBuilder();

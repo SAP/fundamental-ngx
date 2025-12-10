@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { ResponsivePopover } from '@fundamental-ngx/ui5-webcomponents/responsive-popover';
@@ -11,7 +10,7 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-doc-responsive-popover-modal-sample',
     templateUrl: './modal-sample.html',
     standalone: true,
-    imports: [ResponsivePopover, Button, NgStyle]
+    imports: [ResponsivePopover, Button]
 })
 export class ModalSample {
     modalOpen = signal(false);
