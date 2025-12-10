@@ -95,6 +95,9 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     _selectedElement?: OptionItem;
 
     /** @hidden */
+    _itemMousedown = false;
+
+    /** @hidden */
     constructor(
         @Optional() _dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
@@ -156,7 +159,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     }
 
     /** @hidden Method to set selected item */
-    selectOptionItem(item: OptionItem): void {
+    selectOptionItem(item: OptionItem, shouldClosePopover = true): void {
         if (this.mobile) {
             this._selectedElement = item;
             this.inputText = item.label;
@@ -167,7 +170,9 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
         this.inputText = item.label;
         this._checkAndUpdate(item);
-        this.isOpenChangeHandle(false);
+        if (shouldClosePopover) {
+            this.isOpenChangeHandle(false);
+        }
     }
 
     /** @hidden Method to set as selected */
@@ -221,6 +226,14 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         }
 
         this.isOpenChangeHandle(false);
+    }
+
+    /** @hidden */
+    onItemFocused(value: OptionItem): void {
+        if (!this._itemMousedown && !this.mobile) {
+            this.selectOptionItem(value, false);
+        }
+        this._itemMousedown = false;
     }
 
     /** @hidden */

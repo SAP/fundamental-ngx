@@ -69,7 +69,6 @@
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-describedby]="comboboxId + '-list-results'"
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-            [attr.aria-owns]="autoComplete && !mobile ? comboboxId + '-result' : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
             [attr.aria-expanded]="!mobile && open && displayedValues.length"
             [attr.aria-required]="required"
@@ -158,7 +157,9 @@
                         [selected]="isSelected(term)"
                         [value]="term"
                         (keydown)="onItemKeyDownHandler($event, term)"
+                        (mousedown)="_itemMousedown = true"
                         (click)="onMenuClickHandler(term)"
+                        (focus)="onItemFocused(term)"
                     >
                         <ng-template
                             [ngTemplateOutlet]="itemSource"
@@ -176,8 +177,10 @@
                     class="fd-combobox-list-item"
                     [selected]="isSelected(term)"
                     (keydown)="onItemKeyDownHandler($event, term)"
+                    (mousedown)="_itemMousedown = true"
                     (click)="onMenuClickHandler(term)"
                     [value]="term"
+                    (focus)="onItemFocused(term)"
                 >
                     <ng-template
                         [ngTemplateOutlet]="itemSource"
