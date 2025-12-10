@@ -1,0 +1,23 @@
+<div class="fd-margin-bottom--sm">
+    <ui5-button design="Emphasized" (ui5Click)="toggleDisabled()">
+        {{ disabledState() ? 'Enable' : 'Disable' }}
+    </ui5-button>
+    <ui5-button design="Transparent" class="fd-margin-left--sm" (ui5Click)="toggleReadonly()">
+        {{ readonlyState() ? 'Make Editable' : 'Make Readonly' }}
+    </ui5-button>
+</div>
+
+<div class="fd-margin-bottom--sm">
+    <ui5-multi-combobox
+        id="state-mcb"
+        placeholder="Choose options..."
+        [disabled]="disabledState()"
+        [readonly]="readonlyState()"
+    >
+        <ui5-mcb-item text="Option 1"></ui5-mcb-item>
+        <ui5-mcb-item text="Option 2"></ui5-mcb-item>
+        <ui5-mcb-item text="Option 3"></ui5-mcb-item>
+        <ui5-mcb-item text="Option 4"></ui5-mcb-item>
+        <ui5-mcb-item text="Option 5"></ui5-mcb-item>
+    </ui5-multi-combobox>
+</div>

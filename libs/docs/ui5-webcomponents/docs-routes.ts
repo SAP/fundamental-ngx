@@ -141,6 +141,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
     },
     {
+        path: 'multi-combobox',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/multi-combobox').then(configureLibRoutes)
+    },
+    {
         path: 'panel',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/panel').then(configureLibRoutes)
     },

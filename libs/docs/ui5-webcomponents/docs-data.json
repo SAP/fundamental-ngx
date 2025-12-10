@@ -127,6 +127,10 @@
             "name": "Message Strip"
         },
         {
+            "url": "ui5-webcomponents/multi-combobox",
+            "name": "Multi ComboBox"
+        },
+        {
             "url": "ui5-webcomponents/panel",
             "name": "Panel"
         },

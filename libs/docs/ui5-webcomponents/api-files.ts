@@ -37,6 +37,7 @@ export const API_FILES = {
     list: ['List', 'ListItemCustom', 'ListItemGroup', 'ListItemStandard'],
     menu: ['Menu', 'MenuItem', 'MenuItemGroup', 'MenuSeparator'],
     messageStrip: ['MessageStrip'],
+    multiComboBox: ['MultiComboBox', 'MultiComboBoxItem', 'MultiComboBoxItemGroup'],
     panel: ['Panel'],
     popover: ['Popover'],
     progressIndicator: ['ProgressIndicator'],
