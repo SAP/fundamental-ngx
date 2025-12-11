@@ -48,6 +48,7 @@ export const API_FILES = {
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     select: ['Option', 'OptionCustom', 'Select'],
     slider: ['Slider', 'RangeSlider'],
+    splitButton: ['SplitButton'],
     stepInput: ['StepInput'],
     switch: ['Switch'],
     tabContainer: ['Tab', 'TabContainer', 'TabSeparator'],

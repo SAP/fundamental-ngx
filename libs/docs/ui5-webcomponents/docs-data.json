@@ -171,6 +171,10 @@
             "name": "Slider"
         },
         {
+            "url": "ui5-webcomponents/split-button",
+            "name": "Split Button"
+        },
+        {
             "url": "ui5-webcomponents/step-input",
             "name": "StepInput"
         },

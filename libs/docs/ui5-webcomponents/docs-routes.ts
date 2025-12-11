@@ -187,6 +187,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/slider').then(configureLibRoutes)
     },
     {
+        path: 'split-button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/split-button').then(configureLibRoutes)
+    },
+    {
         path: 'step-input',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/step-input').then(configureLibRoutes)
     },
