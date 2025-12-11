@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.7...v0.57.8) (2025-12-11)
+
+
+### Bug Fixes
+
+* **core,platform:** combobox should automatically select items from dropdown when they are focused ([fec981c](https://github.com/SAP/fundamental-ngx/commit/fec981c060a61a0ad459a6c24eb6a496826aa2f6))
+* **core:** combobox list items should have role="option" ([871869f](https://github.com/SAP/fundamental-ngx/commit/871869fef27f25b34f7acc413fd9521094cf560f))
+
+
+
+
+
 ## [0.57.7](https://github.com/SAP/fundamental-ngx/compare/v0.57.6...v0.57.7) (2025-12-05)
 
 
