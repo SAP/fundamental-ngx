@@ -1,7 +1,7 @@
 <div class="fd-container fd-padding--none">
     <div class="fd-row fd-margin-bottom--sm">
         <div class="fd-col">
-            <label [ngStyle]="{'font-size': '0.875rem', 'font-weight': '600'}">Placement:</label>
+            <label [style]="{'font-size': '0.875rem', 'font-weight': '600'}">Placement:</label>
             <div class="fd-margin-top--tiny">
                 <ui5-segmented-button (ui5SelectionChange)="setPlacement($event)">
                     @for (p of placements(); track p) {
@@ -14,7 +14,7 @@
 
     <div class="fd-row fd-margin-bottom--sm">
         <div class="fd-col">
-            <label [ngStyle]="{'font-size': '0.875rem', 'font-weight': '600'}">Horizontal Align:</label>
+            <label [style]="{'font-size': '0.875rem', 'font-weight': '600'}">Horizontal Align:</label>
             <div class="fd-margin-top--tiny">
                 <ui5-segmented-button (ui5SelectionChange)="setAlignment($event)">
                     @for (align of alignments(); track align) {

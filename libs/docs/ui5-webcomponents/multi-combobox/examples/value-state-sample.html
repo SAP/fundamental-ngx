@@ -1,0 +1,17 @@
+<div class="fd-margin-bottom--sm">
+    <ui5-segmented-button (ui5SelectionChange)="setValueState($event)">
+        <ui5-segmented-button-item> None </ui5-segmented-button-item>
+        <ui5-segmented-button-item> Positive </ui5-segmented-button-item>
+        <ui5-segmented-button-item> Information </ui5-segmented-button-item>
+        <ui5-segmented-button-item> Critical </ui5-segmented-button-item>
+        <ui5-segmented-button-item> Negative </ui5-segmented-button-item>
+    </ui5-segmented-button>
+</div>
+
+<div class="fd-margin-bottom--sm">
+    <ui5-multi-combobox id="valuestate-mcb" placeholder="Choose fruits..." [valueState]="valueState()">
+        @for (fruit of fruits(); track fruit) {
+        <ui5-mcb-item [text]="fruit" [selected]="valueStateSelected().includes(fruit)"> </ui5-mcb-item>
+        }
+    </ui5-multi-combobox>
+</div>

@@ -15,7 +15,7 @@
     To force items to always stay visible and never overflow, set "overflow-priority='NeverOverflow'" on the Toolbar
     items.
 </p>
-<div [ngStyle]="{ 'overflow': 'hidden', 'padding-inline': '10px' }">
+<div [style]="{ 'overflow': 'hidden', 'padding-inline': '10px' }">
     <ui5-toolbar>
         @for (action of actions(); track action) {
         <ui5-toolbar-button [text]="action" overflowPriority="NeverOverflow" (ui5Click)="onActionClick(action)">

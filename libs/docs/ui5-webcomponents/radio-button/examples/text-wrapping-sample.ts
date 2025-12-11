@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { RadioButton } from '@fundamental-ngx/ui5-webcomponents/radio-button';
 
@@ -10,6 +9,6 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-doc-radio-button-text-wrapping-sample',
     templateUrl: './text-wrapping-sample.html',
     standalone: true,
-    imports: [RadioButton, NgStyle]
+    imports: [RadioButton]
 })
 export class TextWrappingSample {}

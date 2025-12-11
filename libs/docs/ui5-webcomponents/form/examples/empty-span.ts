@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
@@ -25,7 +24,7 @@ import 'fundamental-styles/dist/layout-grid.css';
             background: var(--sapAvatar_1_Background);
         }
     `,
-    imports: [Form, FormItem, Slider, Text, Label, Select, Option, UI5Input, NgStyle]
+    imports: [Form, FormItem, Slider, Text, Label, Select, Option, UI5Input]
 })
 export class FormEmptySpanSample {
     readonly sliderValue = signal(85);
