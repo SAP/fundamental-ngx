@@ -4,6 +4,7 @@ export * from './constants';
 export * from './directives/dnd/icon-bar-dnd-container.directive';
 export * from './directives/dnd/icon-bar-dnd-item.directive';
 export * from './directives/dnd/icon-bar-dnd-list.directive';
+export * from './directives/icon-tab-bar-content-template.directive';
 export * from './directives/icon-tab-bar-free-content.directive';
 export * from './directives/icon-tab-title.directive';
 export * from './icon-tab-bar.component';
