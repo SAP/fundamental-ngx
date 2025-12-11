@@ -131,6 +131,10 @@
             "name": "Multi ComboBox"
         },
         {
+            "url": "ui5-webcomponents/multi-input",
+            "name": "Multi Input"
+        },
+        {
             "url": "ui5-webcomponents/panel",
             "name": "Panel"
         },

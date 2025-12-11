@@ -1,0 +1,70 @@
+<fd-docs-section-title id="basic" componentName="multi-input"> Basic Multi-Input </fd-docs-section-title>
+<description>
+    The multi-input component allows users to enter multiple values as tokens. Users can type to search and select from
+    suggestions, and each selected value appears as a token that can be individually removed. Use the
+    <code>ui5-token</code> component in the <code>tokens</code> slot to display selected values, and
+    <code>ui5-suggestion-item</code> components to provide autocomplete suggestions.
+</description>
+<component-example>
+    <ui5-doc-multi-input-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="value-states" componentName="multi-input"> Value States </fd-docs-section-title>
+<description>
+    Multi-input supports different value states to provide visual feedback about validation or status:
+    <ul>
+        <li><code>None</code> (default) - Standard appearance</li>
+        <li><code>Positive</code> - Indicates success or valid input</li>
+        <li><code>Critical</code> - Indicates a warning condition</li>
+        <li><code>Negative</code> - Indicates an error or invalid input</li>
+        <li><code>Information</code> - Provides informational context</li>
+    </ul>
+    Use value states to communicate validation results or provide contextual feedback to users.
+</description>
+<component-example>
+    <ui5-doc-multi-input-value-state-sample />
+</component-example>
+<code-example [exampleFiles]="valueStateExample()" />
+
+<separator />
+
+<fd-docs-section-title id="disabled-readonly" componentName="multi-input">
+    Disabled and Read-only States
+</fd-docs-section-title>
+<description>
+    Multi-input can be <code>disabled</code> or <code>readonly</code>:
+    <ul>
+        <li><strong>Disabled:</strong> Completely non-interactive, cannot receive focus.</li>
+        <li>
+            <strong>Read-only:</strong> Not editable and new tokens cannot be added, but the component can receive
+            focus.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-multi-input-disabled-sample />
+</component-example>
+<code-example [exampleFiles]="disabledExample()" />
+
+<separator />
+
+<fd-docs-section-title id="events" componentName="multi-input"> Event Handling </fd-docs-section-title>
+<description>
+    Multi-input emits various events for user interactions:
+    <ul>
+        <li><code>ui5Input</code> - Fired when the value changes at each keystroke</li>
+        <li><code>ui5Change</code> - Fired when the input operation has finished (Enter or focus out)</li>
+        <li><code>ui5TokenDelete</code> - Fired when tokens are being deleted</li>
+        <li><code>ui5SelectionChange</code> - Fired when navigating through suggestions</li>
+        <li><code>ui5Open</code> - Fired when the suggestions picker opens</li>
+        <li><code>ui5Close</code> - Fired when the suggestions picker closes</li>
+    </ul>
+    Use these events to handle user input and implement custom logic.
+</description>
+<component-example>
+    <ui5-doc-multi-input-events-sample />
+</component-example>
+<code-example [exampleFiles]="eventsExample()" />

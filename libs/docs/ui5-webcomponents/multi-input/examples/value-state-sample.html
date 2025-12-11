@@ -1,0 +1,76 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>None (Default)</strong></p>
+            <ui5-multi-input
+                placeholder="Default state"
+                valueState="None"
+                (ui5TokenDelete)="onTokenDelete($event, noneTokens)"
+            >
+                @for (token of noneTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>Positive (Success)</strong></p>
+            <ui5-multi-input
+                placeholder="Success state"
+                valueState="Positive"
+                (ui5TokenDelete)="onTokenDelete($event, positiveTokens)"
+            >
+                @for (token of positiveTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>Critical (Warning)</strong></p>
+            <ui5-multi-input
+                placeholder="Warning state"
+                valueState="Critical"
+                (ui5TokenDelete)="onTokenDelete($event, criticalTokens)"
+            >
+                @for (token of criticalTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>Negative (Error)</strong></p>
+            <ui5-multi-input
+                placeholder="Error state"
+                valueState="Negative"
+                (ui5TokenDelete)="onTokenDelete($event, negativeTokens)"
+            >
+                @for (token of negativeTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <p><strong>Information</strong></p>
+            <ui5-multi-input
+                placeholder="Information state"
+                valueState="Information"
+                (ui5TokenDelete)="onTokenDelete($event, informationTokens)"
+            >
+                @for (token of informationTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+</div>
