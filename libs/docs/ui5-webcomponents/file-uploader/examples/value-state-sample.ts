@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Label } from '@fundamental-ngx/ui5-webcomponents';
 import { UI5WrapperCustomEvent, ValueState } from '@fundamental-ngx/ui5-webcomponents-base';
@@ -11,7 +10,7 @@ import 'fundamental-styles/dist/layout.css';
     selector: 'ui5-file-uploader-value-state-sample',
     templateUrl: './value-state-sample.html',
     standalone: true,
-    imports: [FileUploader, Label, NgStyle]
+    imports: [FileUploader, Label]
 })
 export class ValueStateSample {
     defaultState = signal<ValueState>(ValueState.None);

@@ -1,0 +1,121 @@
+<!-- Single Selection Table -->
+<h3>Single Selection Table</h3>
+<p>
+    Implement row selection in the table using the <code>ui5-table-selection-single</code> component. This feature
+    allows users to select one row, and you can handle selection changes via the <code>ui5Change</code> event.
+</p>
+<p>
+    The selection features of the table is key-based, therefore each row requires a <code>row-key</code> attribute to be
+    uniquely identified.
+</p>
+<div style="display: flex; align-items: end; justify-content: space-between">
+    <div style="display: flex; align-items: center">
+        <ui5-label>Selection Behavior: </ui5-label>
+        <span id="selectionBehavior" role="radiogroup">
+            <ui5-radio-button
+                name="selectionBehavior"
+                [text]="behaviors().RowSelector"
+                checked
+                (ui5Change)="onSingleSelectionBehaviorChange(behaviors().RowSelector)"
+            ></ui5-radio-button>
+            <ui5-radio-button
+                name="selectionBehavior"
+                [text]="behaviors().RowOnly"
+                (ui5Change)="onSingleSelectionBehaviorChange(behaviors().RowOnly)"
+            ></ui5-radio-button>
+        </span>
+    </div>
+    <ui5-button design="Transparent" (ui5Click)="clearSingleSelected()">Clear Selection</ui5-button>
+</div>
+<ui5-table class="fd-margin-bottom--lg">
+    <ui5-table-selection-single
+        slot="features"
+        [behavior]="singleSelectionBehavior()"
+        [selected]="selectedEmployee()"
+        (ui5Change)="onSingleSelectionChange($event)"
+    >
+    </ui5-table-selection-single>
+    <ui5-table-header-row slot="headerRow">
+        <ui5-table-header-cell>Name</ui5-table-header-cell>
+        <ui5-table-header-cell>Department</ui5-table-header-cell>
+        <ui5-table-header-cell>Role</ui5-table-header-cell>
+        <ui5-table-header-cell>Email</ui5-table-header-cell>
+        <ui5-table-header-cell>Phone</ui5-table-header-cell>
+    </ui5-table-header-row>
+
+    @for (employee of employeesDisplay(); track employee.id) {
+    <ui5-table-row [rowKey]="'emp-' + employee.id">
+        <ui5-table-cell>{{ employee.name }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.department }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.role }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.email }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.phone }}</ui5-table-cell>
+    </ui5-table-row>
+    }
+</ui5-table>
+
+<!-- Multi Selection Table -->
+<h3>Multi Selection Table</h3>
+<p>
+    Enable multi-selection in your table by adding the <code>ui5-table-selection-multi</code> component. This feature
+    allows users to select one or more rows, and you can handle selection changes via the <code>ui5Change</code> event.
+</p>
+<p>
+    The selection features of the table is key-based, therefore each row requires a <code>row-key</code> attribute to be
+    uniquely identified.
+</p>
+<div style="display: flex; align-items: end; justify-content: space-between">
+    <div style="display: flex; flex-direction: column">
+        <div style="display: flex; align-items: center">
+            <ui5-label>Selection Behavior: </ui5-label>
+            <span id="selectionBehavior" role="radiogroup">
+                <ui5-radio-button
+                    name="selectionBehavior"
+                    text="RowSelector"
+                    checked
+                    (ui5Change)="onMultiSelectionBehaviorChange(behaviors().RowSelector)"
+                ></ui5-radio-button>
+                <ui5-radio-button
+                    name="selectionBehavior"
+                    text="RowOnly"
+                    (ui5Change)="onMultiSelectionBehaviorChange(behaviors().RowOnly)"
+                ></ui5-radio-button>
+            </span>
+        </div>
+        <!-- <div style="flex-grow: 1"></div> -->
+        <div style="display: flex; align-items: center">
+            <ui5-label>Header Selector: </ui5-label>
+            <span id="headerSelector" role="radiogroup">
+                <ui5-radio-button name="headerSelector" text="SelectAll" checked></ui5-radio-button>
+                <ui5-radio-button name="headerSelector" text="ClearAll"></ui5-radio-button>
+            </span>
+        </div>
+    </div>
+    <ui5-button design="Transparent" (ui5Click)="clearMultiSelected()">Clear Selection</ui5-button>
+</div>
+<ui5-table>
+    <ui5-table-selection-multi
+        slot="features"
+        [behavior]="multiSelectionBehavior()"
+        [selected]="selectedEmployees()"
+        (ui5Change)="onMultiSelectionChange($event)"
+    >
+    </ui5-table-selection-multi>
+    <ui5-table-header-row slot="headerRow">
+        <ui5-table-header-cell>Name</ui5-table-header-cell>
+        <ui5-table-header-cell>Department</ui5-table-header-cell>
+        <ui5-table-header-cell>Role</ui5-table-header-cell>
+        <ui5-table-header-cell>Email</ui5-table-header-cell>
+        <ui5-table-header-cell>Phone</ui5-table-header-cell>
+    </ui5-table-header-row>
+
+    @for (employee of employeesDisplay(); track employee.id) {
+    <ui5-table-row [rowKey]="'emp-' + employee.id">
+        <ui5-table-cell>{{ employee.name }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.department }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.role }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.email }}</ui5-table-cell>
+        <ui5-table-cell>{{ employee.phone }}</ui5-table-cell>
+    </ui5-table-row>
+    }
+</ui5-table>

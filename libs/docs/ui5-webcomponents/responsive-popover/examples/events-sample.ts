@@ -3,7 +3,6 @@ import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { ResponsivePopover } from '@fundamental-ngx/ui5-webcomponents/responsive-popover';
 
 // Import Fundamental Styles
-import { NgStyle } from '@angular/common';
 import 'fundamental-styles/dist/layout-grid.css';
 import 'fundamental-styles/dist/margins.css';
 
@@ -16,7 +15,7 @@ interface EventLog {
     selector: 'ui5-doc-responsive-popover-events-sample',
     templateUrl: './events-sample.html',
     standalone: true,
-    imports: [ResponsivePopover, Button, NgStyle]
+    imports: [ResponsivePopover, Button]
 })
 export class EventsSample {
     eventLog = signal<EventLog[]>([]);

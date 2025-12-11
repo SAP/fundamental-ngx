@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { Label } from '@fundamental-ngx/ui5-webcomponents';
 import { FileUploader } from '@fundamental-ngx/ui5-webcomponents/file-uploader';
@@ -10,6 +9,6 @@ import 'fundamental-styles/dist/layout.css';
     selector: 'ui5-file-uploader-type-restrictions-sample',
     templateUrl: './type-restrictions-sample.html',
     standalone: true,
-    imports: [FileUploader, Label, NgStyle]
+    imports: [FileUploader, Label]
 })
 export class FileTypeRestrictionsSample {}

@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
@@ -12,7 +11,7 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-doc-range-slider-tooltip-sample',
     templateUrl: './tooltip-sample.html',
     standalone: true,
-    imports: [RangeSlider, Button, NgStyle]
+    imports: [RangeSlider, Button]
 })
 export class TooltipSample {
     showTooltip = signal(true);

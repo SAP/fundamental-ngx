@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
@@ -14,7 +13,7 @@ import 'fundamental-styles/dist/layout-grid.css';
     selector: 'ui5-form-labels-on-top-sample',
     templateUrl: './labels-on-top.html',
     standalone: true,
-    imports: [Form, FormItem, Slider, Text, Label, NgStyle]
+    imports: [Form, FormItem, Slider, Text, Label]
 })
 export class FormLabelsOnTopSample {
     readonly sliderValue = signal(85);

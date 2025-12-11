@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Toolbar } from '@fundamental-ngx/ui5-webcomponents/toolbar';
 import { ToolbarButton } from '@fundamental-ngx/ui5-webcomponents/toolbar-button';
@@ -7,7 +6,7 @@ import { ToolbarButton } from '@fundamental-ngx/ui5-webcomponents/toolbar-button
     selector: 'ui5-toolbar-overflow-sample',
     templateUrl: './overflow.html',
     standalone: true,
-    imports: [Toolbar, ToolbarButton, NgStyle]
+    imports: [Toolbar, ToolbarButton]
 })
 export class ToolbarOverflowSample {
     actions = signal([

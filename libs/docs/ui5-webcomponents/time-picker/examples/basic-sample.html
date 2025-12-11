@@ -1,7 +1,7 @@
 <div class="fd-container">
     <div class="fd-row">
         <div class="fd-col">
-            <div class="fd-form-item" [ngStyle]="{'width': '20rem'}">
+            <div class="fd-form-item" [style]="{'width': '20rem'}">
                 <label class="fd-form-label">Basic TimePicker</label>
                 <ui5-time-picker [value]="basicValue()" (ui5Change)="onBasicValueChange($event)"> </ui5-time-picker>
             </div>
@@ -10,7 +10,7 @@
 
     <div class="fd-row">
         <div class="fd-col">
-            <div class="fd-form-item" [ngStyle]="{'width': '20rem'}">
+            <div class="fd-form-item" [style]="{'width': '20rem'}">
                 <label class="fd-form-label">TimePicker with Placeholder</label>
                 <ui5-time-picker
                     placeholder="Select a time..."
@@ -24,7 +24,7 @@
 
     <div class="fd-row">
         <div class="fd-col">
-            <div class="fd-form-item" [ngStyle]="{'width': '20rem'}">
+            <div class="fd-form-item" [style]="{'width': '20rem'}">
                 <label class="fd-form-label">TimePicker with Initial Value</label>
                 <ui5-time-picker [value]="formattedValue()" (ui5Change)="onFormattedValueChange($event)">
                 </ui5-time-picker>

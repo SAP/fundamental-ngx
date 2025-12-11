@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Option } from '@fundamental-ngx/ui5-webcomponents/option';
 import { Select } from '@fundamental-ngx/ui5-webcomponents/select';
@@ -11,7 +10,7 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-doc-select-disabled-readonly-sample',
     templateUrl: './disabled-readonly-sample.html',
     standalone: true,
-    imports: [Select, Option, NgStyle]
+    imports: [Select, Option]
 })
 export class DisabledReadonlySample {
     disabled = signal(true);

@@ -9,7 +9,7 @@
     </div>
 
     <div class="fd-row" id="container" style="max-width: 1500px; width: 1250px; overflow-x: auto">
-        <div class="fd-col" [ngStyle]="{'min-width': containerWidth()}">
+        <div class="fd-col" [style]="{'min-width': containerWidth()}">
             <ui5-form headerText="With column span" layout="S2 M2 L4 XL6" labelSpan="S12 M12 L12 XL12">
                 @for (formField of formFields(); track formField.formGroupTitle; let i = $index) {
                 <ui5-form-group

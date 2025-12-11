@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { RangeSlider } from '@fundamental-ngx/ui5-webcomponents/range-slider';
@@ -11,7 +10,7 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-doc-range-slider-step-tickmarks-sample',
     templateUrl: './step-tickmarks-sample.html',
     standalone: true,
-    imports: [RangeSlider, NgStyle]
+    imports: [RangeSlider]
 })
 export class StepTickmarksSample {
     startValue = signal(18);
