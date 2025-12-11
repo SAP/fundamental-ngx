@@ -2,7 +2,7 @@
     <div class="fd-row">
         @for (example of stateExamples(); track $index) {
         <div class="fd-col fd-col--4">
-            <div class="fd-form-item" [ngStyle]="{'width': '20rem'}">
+            <div class="fd-form-item" [style]="{'width': '20rem'}">
                 <label class="fd-form-label">{{ example.title }}</label>
                 <ui5-time-picker
                     [value]="example.value()"

@@ -7,8 +7,8 @@
         <ui5-slider id="slider" [value]="85" (ui5Change)="onSliderChange($event)"></ui5-slider>
     </div>
 
-    <div class="fd-row" id="container" [ngStyle]="{ 'max-width': '1500px', 'width': '100%', 'overflow-x': 'auto' }">
-        <div class="fd-col" [ngStyle]="{'min-width': containerWidth()}">
+    <div class="fd-row" id="container" [style]="{ 'max-width': '1500px', 'width': '100%', 'overflow-x': 'auto' }">
+        <div class="fd-col" [style]="{'min-width': containerWidth()}">
             <ui5-form headerText="Contact Information" layout="S1 M2 L2 XL3">
                 <ui5-form-group headerText="Personal Details">
                     <ui5-form-item>

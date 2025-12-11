@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import type { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
@@ -15,7 +14,7 @@ import 'fundamental-styles/dist/margins.css';
     selector: 'ui5-doc-responsive-popover-placement-sample',
     templateUrl: './placement-sample.html',
     standalone: true,
-    imports: [ResponsivePopover, Button, SegmentedButton, SegmentedButtonItem, NgStyle]
+    imports: [ResponsivePopover, Button, SegmentedButton, SegmentedButtonItem]
 })
 export class PlacementSample {
     isOpen = signal(false);

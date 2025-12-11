@@ -141,6 +141,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/message-strip').then(configureLibRoutes)
     },
     {
+        path: 'multi-combobox',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/multi-combobox').then(configureLibRoutes)
+    },
+    {
         path: 'panel',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/panel').then(configureLibRoutes)
     },
@@ -191,8 +195,16 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/switch').then(configureLibRoutes)
     },
     {
+        path: 'tab-container',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tab-container').then(configureLibRoutes)
+    },
+    {
         path: 'tag',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tag').then(configureLibRoutes)
+    },
+    {
+        path: 'table',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/table').then(configureLibRoutes)
     },
     {
         path: 'text',

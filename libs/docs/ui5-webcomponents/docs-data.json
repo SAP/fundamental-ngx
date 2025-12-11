@@ -127,6 +127,10 @@
             "name": "Message Strip"
         },
         {
+            "url": "ui5-webcomponents/multi-combobox",
+            "name": "Multi ComboBox"
+        },
+        {
             "url": "ui5-webcomponents/panel",
             "name": "Panel"
         },
@@ -173,6 +177,14 @@
         {
             "url": "ui5-webcomponents/switch",
             "name": "Switch"
+        },
+        {
+            "url": "ui5-webcomponents/tab-container",
+            "name": "Tab Container"
+        },
+        {
+            "url": "ui5-webcomponents/table",
+            "name": "Table"
         },
         {
             "url": "ui5-webcomponents/tag",

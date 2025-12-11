@@ -2,7 +2,7 @@
     <div class="fd-row">
         <div class="fd-col fd-col--4">
             <h4>Default Radio Buttons:</h4>
-            <div class="fd-margin-top--sm" [ngStyle]="{'display': 'flex', 'flex-direction': 'column'}">
+            <div class="fd-margin-top--sm" [style]="{'display': 'flex', 'flex-direction': 'column'}">
                 <ui5-radio-button name="normal-group" text="Enabled Option 1" class="fd-margin-bottom--sm" />
                 <ui5-radio-button name="normal-group" text="Enabled Option 2" [checked]="true" />
             </div>
@@ -10,7 +10,7 @@
 
         <div class="fd-col fd-col--4">
             <h4>Disabled Radio Buttons:</h4>
-            <div class="fd-margin-top--sm" [ngStyle]="{'display': 'flex', 'flex-direction': 'column'}">
+            <div class="fd-margin-top--sm" [style]="{'display': 'flex', 'flex-direction': 'column'}">
                 <ui5-radio-button
                     name="disabled-group"
                     text="Disabled (Unchecked)"
@@ -23,7 +23,7 @@
 
         <div class="fd-col fd-col--4">
             <h4>Read-only Radio Buttons:</h4>
-            <div class="fd-margin-top--sm" [ngStyle]="{'display': 'flex', 'flex-direction': 'column'}">
+            <div class="fd-margin-top--sm" [style]="{'display': 'flex', 'flex-direction': 'column'}">
                 <ui5-radio-button
                     name="readonly-group"
                     text="Read-only (Unchecked)"
@@ -32,7 +32,7 @@
                 />
                 <ui5-radio-button name="readonly-group" text="Read-only (Checked)" [readonly]="true" [checked]="true" />
             </div>
-            <p class="fd-margin-top--sm" [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+            <p class="fd-margin-top--sm" [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
                 <em>Note: Read-only radio buttons are focusable but not selectable.</em>
             </p>
         </div>

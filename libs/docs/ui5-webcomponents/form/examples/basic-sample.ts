@@ -1,4 +1,4 @@
-import { JsonPipe, NgStyle } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
@@ -20,7 +20,7 @@ import 'fundamental-styles/dist/paddings.css';
     selector: 'ui5-form-basic-sample',
     templateUrl: './basic-sample.html',
     standalone: true,
-    imports: [Form, FormGroup, FormItem, Slider, Text, Label, Input, TextArea, Button, JsonPipe, NgStyle]
+    imports: [Form, FormGroup, FormItem, Slider, Text, Label, Input, TextArea, Button, JsonPipe]
 })
 export class FormBasicSample {
     readonly sliderValue = signal(85);

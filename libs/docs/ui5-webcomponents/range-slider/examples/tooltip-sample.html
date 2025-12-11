@@ -33,7 +33,7 @@
         <div class="fd-col">
             <p><strong>Selected Range:</strong> {{ startValue() }} - {{ endValue() }}</p>
             @if (editableTooltip()) {
-            <p [ngStyle]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+            <p [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
                 <em>Tip: Click on the tooltips to edit values directly.</em>
             </p>
             }

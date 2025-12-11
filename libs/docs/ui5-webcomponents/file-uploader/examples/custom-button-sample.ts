@@ -8,13 +8,12 @@ import '@ui5/webcomponents-icons/dist/add.js';
 import '@ui5/webcomponents-icons/dist/upload.js';
 
 // Import Fundamental Styles
-import { NgStyle } from '@angular/common';
 import 'fundamental-styles/dist/layout.css';
 
 @Component({
     selector: 'ui5-file-uploader-custom-button-sample',
     templateUrl: './custom-button-sample.html',
     standalone: true,
-    imports: [FileUploader, Button, Label, NgStyle]
+    imports: [FileUploader, Button, Label]
 })
 export class CustomButtonSample {}

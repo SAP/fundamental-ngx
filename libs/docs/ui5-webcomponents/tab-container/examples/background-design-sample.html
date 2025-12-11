@@ -1,0 +1,54 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6">
+            <ui5-label>Header Background Design:</ui5-label>
+            <ui5-select [value]="headerDesign()" (ui5Change)="onHeaderDesignChange($event)" class="fd-margin-top--xs">
+                <ui5-option [value]="design().Solid" selected>{{ design().Solid }}</ui5-option>
+                <ui5-option [value]="design().Transparent">{{ design().Transparent }}</ui5-option>
+                <ui5-option [value]="design().Translucent">{{ design().Translucent }}</ui5-option>
+            </ui5-select>
+        </div>
+
+        <div class="fd-col fd-col--6">
+            <ui5-label>Content Background Design:</ui5-label>
+            <ui5-select [value]="contentDesign()" (ui5Change)="onContentDesignChange($event)" class="fd-margin-top--xs">
+                <ui5-option [value]="design().Solid" selected>{{ design().Solid }}</ui5-option>
+                <ui5-option [value]="design().Transparent">{{ design().Transparent }}</ui5-option>
+                <ui5-option [value]="design().Translucent">{{ design().Translucent }}</ui5-option>
+            </ui5-select>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem">
+                <ui5-tabcontainer [headerBackgroundDesign]="headerDesign()" [contentBackgroundDesign]="contentDesign()">
+                    <ui5-tab text="Dashboard" icon="home" selected>
+                        <div style="padding: 1rem">
+                            <h3>Dashboard</h3>
+                            <p>
+                                Welcome to the dashboard. The header background is
+                                <strong>{{ headerDesign() }}</strong> and content background is
+                                <strong>{{ contentDesign() }}</strong>.
+                            </p>
+                        </div>
+                    </ui5-tab>
+
+                    <ui5-tab text="Analytics" icon="bar-chart">
+                        <div style="padding: 1rem">
+                            <h3>Analytics</h3>
+                            <p>View your analytics and metrics with customizable background designs.</p>
+                        </div>
+                    </ui5-tab>
+
+                    <ui5-tab text="Reports" icon="document">
+                        <div style="padding: 1rem">
+                            <h3>Reports</h3>
+                            <p>Generate and view reports with transparent or translucent backgrounds.</p>
+                        </div>
+                    </ui5-tab>
+                </ui5-tabcontainer>
+            </div>
+        </div>
+    </div>
+</div>

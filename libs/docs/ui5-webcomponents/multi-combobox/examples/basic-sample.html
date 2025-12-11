@@ -1,0 +1,9 @@
+<ui5-multi-combobox
+    id="basic-mcb"
+    placeholder="Choose countries..."
+    (ui5SelectionChange)="onCountrySelectionChange($event)"
+>
+    @for (country of countries(); track country.code) {
+    <ui5-mcb-item [text]="country.name" [selected]="selected().includes(country.name)"> </ui5-mcb-item>
+    }
+</ui5-multi-combobox>

@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Form } from '@fundamental-ngx/ui5-webcomponents/form';
@@ -15,7 +14,7 @@ import 'fundamental-styles/dist/layout-grid.css';
     selector: 'ui5-form-column-span-sample',
     templateUrl: './column-span.html',
     standalone: true,
-    imports: [Form, FormGroup, FormItem, Label, Slider, Text, NgStyle]
+    imports: [Form, FormGroup, FormItem, Label, Slider, Text]
 })
 export class FormColumnSpanSample {
     readonly sliderValue = signal(70);

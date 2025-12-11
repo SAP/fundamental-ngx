@@ -1,0 +1,51 @@
+<ui5-table id="table" [rowActionCount]="maxRowActions()">
+    <ui5-table-header-row slot="headerRow">
+        <ui5-table-header-cell>Product</ui5-table-header-cell>
+        <ui5-table-header-cell>Supplier</ui5-table-header-cell>
+        <ui5-table-header-cell horizontalAlign="End">Price</ui5-table-header-cell>
+    </ui5-table-header-row>
+
+    @for (row of products(); track row.rowKey) {
+    <ui5-table-row [rowKey]="row.rowKey" [interactive]="row.interactive || false" [navigated]="row.navigated || false">
+        <!-- Product Cell -->
+        <ui5-table-cell>
+            <ui5-label>
+                <b>{{ row.product.name }}</b><br />
+                <a [href]="row.product.link">{{ row.product.code }}</a>
+            </ui5-label>
+        </ui5-table-cell>
+
+        <!-- Supplier Cell -->
+        <ui5-table-cell>
+            <ui5-label>{{ row.supplier }}</ui5-label>
+        </ui5-table-cell>
+
+        <!-- Price Cell -->
+        <ui5-table-cell>
+            <ui5-label><b>{{ row.price }}</b> EUR</ui5-label>
+        </ui5-table-cell>
+
+        <!-- Row Actions -->
+        @for (action of row.actions; track action.icon) {
+        <ui5-table-row-action
+            slot="actions"
+            [icon]="action.icon"
+            [text]="action.text"
+            [invisible]="action.invisible || false"
+            (ui5Click)="callHandler(action.handler)"
+        >
+        </ui5-table-row-action>
+        }
+
+        <!-- Navigation Action -->
+        @if (row.hasNavigation) {
+        <ui5-table-row-action-navigation
+            slot="actions"
+            [interactive]="row.navigationInteractive || false"
+            (ui5Click)="onNavigate()"
+        >
+        </ui5-table-row-action-navigation>
+        }
+    </ui5-table-row>
+    }
+</ui5-table>

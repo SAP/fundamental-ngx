@@ -1,0 +1,68 @@
+<div>
+    <h3>Growing with a Button</h3>
+    <p>
+        By setting the <code>mode</code> to <code>Button</code>, a dedicated growing button will be rendered. You can
+        customize the text via <code>text</code> and <code>subText</code>.
+    </p>
+
+    <ui5-table>
+        <ui5-table-growing
+            id="growing"
+            mode="Button"
+            slot="features"
+            (ui5LoadMore)="buttonLoadMore()"
+        ></ui5-table-growing>
+        <ui5-table-header-row slot="headerRow">
+            <ui5-table-header-cell>Product</ui5-table-header-cell>
+            <ui5-table-header-cell>Category</ui5-table-header-cell>
+            <ui5-table-header-cell>Price</ui5-table-header-cell>
+            <ui5-table-header-cell>Stock</ui5-table-header-cell>
+        </ui5-table-header-row>
+
+        @for (product of buttonVisibleGrowingProducts(); track product.id) {
+        <ui5-table-row>
+            <ui5-table-cell>{{ product.name }}</ui5-table-cell>
+            <ui5-table-cell>{{ product.category }}</ui5-table-cell>
+            <ui5-table-cell>{{ formatPrice(product.price) }}</ui5-table-cell>
+            <ui5-table-cell>{{ product.stock }}</ui5-table-cell>
+        </ui5-table-row>
+        }
+    </ui5-table>
+</div>
+
+<div>
+    <h3>Growing with scroll</h3>
+    <p>
+        By setting the type to <code>Scroll</code>, the table will fire the <code>ui5LoadMore</code> event, once you've
+        reached the end of the table.
+    </p>
+    <p>
+        If the table is not scrollable, a growing button is rendered instead. The button will disappear once the table
+        is scrollable.
+    </p>
+    <div class="section" style="height: 10rem; overflow: auto">
+        <ui5-table>
+            <ui5-table-growing
+                id="growing"
+                mode="Scroll"
+                slot="features"
+                (ui5LoadMore)="scrollLoadMore()"
+            ></ui5-table-growing>
+            <ui5-table-header-row slot="headerRow">
+                <ui5-table-header-cell>Product</ui5-table-header-cell>
+                <ui5-table-header-cell>Category</ui5-table-header-cell>
+                <ui5-table-header-cell>Price</ui5-table-header-cell>
+                <ui5-table-header-cell>Stock</ui5-table-header-cell>
+            </ui5-table-header-row>
+
+            @for (product of scrollVisibleGrowingProducts(); track product.id) {
+            <ui5-table-row>
+                <ui5-table-cell>{{ product.name }}</ui5-table-cell>
+                <ui5-table-cell>{{ product.category }}</ui5-table-cell>
+                <ui5-table-cell>{{ formatPrice(product.price) }}</ui5-table-cell>
+                <ui5-table-cell>{{ product.stock }}</ui5-table-cell>
+            </ui5-table-row>
+            }
+        </ui5-table>
+    </div>
+</div>
