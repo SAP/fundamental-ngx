@@ -461,6 +461,9 @@ export class ComboboxComponent<T = any>
     }
 
     /** @hidden */
+    _itemMousedown = false;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -567,16 +570,25 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            this._itemMousedown = true;
             event.preventDefault();
             this.onMenuClickHandler(value);
         }
     }
 
     /** @hidden */
-    onMenuClickHandler(value: any): void {
+    onItemFocused(value: any): void {
+        if (!this._itemMousedown && !this.mobile) {
+            this.onMenuClickHandler(value, false);
+        }
+        this._itemMousedown = false;
+    }
+
+    /** @hidden */
+    onMenuClickHandler(value: any, shouldClosePopover = true): void {
         if (value || value === 0) {
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
-            this._handleClickActions(value);
+            this._handleClickActions(value, shouldClosePopover);
             this.filterHighlight = false;
             this.itemClicked.emit({ item: value, index });
         }
@@ -834,8 +846,8 @@ export class ComboboxComponent<T = any>
     }
 
     /** @hidden */
-    private _handleClickActions(term: any): void {
-        if (this.closeOnSelect) {
+    private _handleClickActions(term: any, shouldClosePopover = true): void {
+        if (this.closeOnSelect && shouldClosePopover) {
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
@@ -848,7 +860,9 @@ export class ComboboxComponent<T = any>
                 this._propagateChange();
             }
         }
-        this.handleSearchTermChange();
+        if (shouldClosePopover) {
+            this.handleSearchTermChange();
+        }
     }
 
     /** @hidden */
