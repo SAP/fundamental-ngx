@@ -229,6 +229,20 @@ describe('ComboboxComponent', () => {
         expect(addOns.length).toBe(2);
     });
 
+    it('should select item from focus in dropdown but not close dropdown', () => {
+        component._itemMousedown = false;
+        component.displayFn = (item: any): string => item?.displayedValue ?? '';
+        component.isOpenChangeHandle(true);
+        jest.spyOn(component.itemClicked, 'emit');
+        jest.spyOn(component, 'handleSearchTermChange');
+        component.onItemFocused(component.dropdownValues[1]);
+        expect(component.itemClicked.emit).toHaveBeenCalledWith({ item: component.dropdownValues[1], index: 1 });
+        expect(component.open).toBe(true);
+        expect(component.inputTextValue).toBe('displayedValue2');
+        expect(component.handleSearchTermChange).not.toHaveBeenCalled();
+        expect(component.getValue()).toBe('displayedValue2');
+    });
+
     describe('rendered in shellbar', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(ComboboxComponent);
