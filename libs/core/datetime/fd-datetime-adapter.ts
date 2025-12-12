@@ -518,7 +518,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
          * Date.parse('10:30 AM') doesn't work so we need do a trick
          * and prepend it by a date string.
          */
-        const dateStr = this.format(this.now(), { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const dateStr = new Intl.DateTimeFormat('en-GB').format(new Date());
         const dateTimeString = `${dateStr} ${timeStr}`;
         return new Date(Date.parse(dateTimeString));
     }

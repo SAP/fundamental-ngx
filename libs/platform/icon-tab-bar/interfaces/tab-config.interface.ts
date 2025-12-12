@@ -21,6 +21,8 @@ export type TabConfig = NullableObject<{
     renderer?: TemplateRef<any>;
     titleTemplate?: TemplateRef<any>;
     id: string;
+    /** ID of the template to use for tab content. When provided, the template with this ID will be used as the tab content.*/
+    contentTemplateId?: string;
 }>;
 
 export type ReactiveTabConfig = NullableObject<{

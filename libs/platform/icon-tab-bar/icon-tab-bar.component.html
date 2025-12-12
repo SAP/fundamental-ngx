@@ -15,7 +15,7 @@
         class="fd-icon-tab-bar__content"
         [class.fd-settings__content]="settings()"
         fd-scrollbar
-        (spyChange)="highlightActiveTab($event?.id)"
+        (spyChange)="highlightActiveTab($event.id)"
         [scrollSpyDisabled]="!stackContent || _disableScrollSpy"
         fdScrollSpy
         [trackedTags]="['fdp-icon-tab-bar-tab-content']"

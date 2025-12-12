@@ -14,6 +14,27 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="template-content" componentName="icon-tab-bar">
+    Template-based Tab Content
+</fd-docs-section-title>
+<description>
+    <p>
+        You can define tab content using templates with IDs when using the data-driven approach with
+        <code>tabsConfig</code>. This provides a clean way to connect tab configurations with template content.
+    </p>
+    <p>
+        Use the <code>fdpIconTabBarContentTemplate</code> directive to mark templates with unique IDs, then reference
+        these IDs in your tab configuration using the <code>contentTemplateId</code> property.
+    </p>
+</description>
+
+<component-example>
+    <fdp-platform-icon-tab-bar-template-content-example></fdp-platform-icon-tab-bar-template-content-example>
+</component-example>
+<code-example [exampleFiles]="iconTabBarTemplateContentFiles"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="text-type-column-mode" componentName="icon-tab-bar">
     Text type tabs (column mode)
 </fd-docs-section-title>
