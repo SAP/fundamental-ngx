@@ -10,6 +10,7 @@ import { TextTypePopoverComponent } from './components/popovers/text-type-popove
 import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
+import { IconTabBarContentTemplateDirective } from './directives/icon-tab-bar-content-template.directive';
 import { IconTabBarFreeContentDirective } from './directives/icon-tab-bar-free-content.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
 
@@ -25,10 +26,16 @@ const components = [
     IconBarDndItemDirective,
     IconBarDndContainerDirective,
     IconTabBarTabComponent,
+    IconTabBarContentTemplateDirective,
     IconTabBarFreeContentDirective
 ];
 
-export const FDP_ICON_TAB_BAR = [IconTabBarComponent, IconTabBarTabComponent, IconTabBarFreeContentDirective] as const;
+export const FDP_ICON_TAB_BAR = [
+    IconTabBarComponent,
+    IconTabBarTabComponent,
+    IconTabBarContentTemplateDirective,
+    IconTabBarFreeContentDirective
+] as const;
 
 /**
  * @deprecated
