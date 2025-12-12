@@ -145,6 +145,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/multi-combobox').then(configureLibRoutes)
     },
     {
+        path: 'multi-input',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/multi-input').then(configureLibRoutes)
+    },
+    {
         path: 'panel',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/panel').then(configureLibRoutes)
     },
@@ -185,6 +189,10 @@ const componentRoutes = [
     {
         path: 'slider',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/slider').then(configureLibRoutes)
+    },
+    {
+        path: 'split-button',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/split-button').then(configureLibRoutes)
     },
     {
         path: 'step-input',
