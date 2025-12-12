@@ -14,5 +14,6 @@ export const API_FILES = {
     illustratedMessage: ['IllustratedMessage'],
     mediaGallery: ['MediaGallery'],
     navigationLayout: ['NavigationLayout'],
+    notificationList: ['NotificationList', 'NotificationListGroupItem', 'NotificationListItem'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };
