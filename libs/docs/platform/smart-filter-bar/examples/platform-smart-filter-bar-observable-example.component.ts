@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { get } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
@@ -25,7 +26,6 @@ import {
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
-import { get } from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 

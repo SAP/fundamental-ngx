@@ -1,5 +1,5 @@
+import { get } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { get } from 'lodash-es';
 import { FILTER_DATE_STRATEGY, FILTER_NUMBER_STRATEGY, FILTER_STRING_STRATEGY } from './enums';
 import {
     CollectionBooleanFilter,

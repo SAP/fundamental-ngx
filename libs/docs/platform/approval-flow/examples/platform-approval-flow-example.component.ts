@@ -24,7 +24,6 @@ import {
     DataProvider,
     ProviderParams
 } from '@fundamental-ngx/platform/shared';
-import { cloneDeep } from 'lodash-es';
 
 @Component({
     selector: 'fdp-platform-approval-flow-example',
@@ -107,12 +106,12 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     }
 
     changeExampleData(): void {
-        this.approvalProcess = cloneDeep(this.graphs[this.selectedExample]);
+        this.approvalProcess = structuredClone(this.graphs[this.selectedExample]);
     }
 
     toggleNodeActions(state: boolean): void {
         const approvalProcess = this._approvalFlow.approvalProcess;
-        const updatedState = cloneDeep(approvalProcess);
+        const updatedState = structuredClone(approvalProcess);
         updatedState.nodes.forEach((node) => {
             node.disableActions = state;
         });
@@ -121,7 +120,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     toggleSpecificNodeAction(field: keyof ApprovalNodeActionsConfig, state: boolean): void {
         const approvalProcess = this._approvalFlow.approvalProcess;
-        const updatedState = cloneDeep(approvalProcess);
+        const updatedState = structuredClone(approvalProcess);
         updatedState.nodes.forEach((node) => {
             node.actionsConfig = {
                 ...node.actionsConfig,
@@ -168,7 +167,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         const initialNodeMap = new Map(
             (this.graphs[this.selectedExample] as ApprovalProcess).nodes.map((n) => [n.id, n])
         );
-        const updatedState = cloneDeep(approvalProcess);
+        const updatedState = structuredClone(approvalProcess);
         updatedState.nodes = updatedState.nodes.map((n) => {
             const status =
                 this.setNotStartedStatuses || !initialNodeMap.has(n.id)
@@ -582,7 +581,7 @@ class UserDataProvider extends DataProvider<ApprovalUser> {
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
         }
-        return of(cloneDeep(result)).pipe(delay(500));
+        return of(structuredClone(result)).pipe(delay(500));
     }
 
     getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
@@ -603,6 +602,6 @@ class TeamDataProvider extends DataProvider<ApprovalTeam> {
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
         }
-        return of(cloneDeep(result)).pipe(delay(500));
+        return of(structuredClone(result)).pipe(delay(500));
     }
 }

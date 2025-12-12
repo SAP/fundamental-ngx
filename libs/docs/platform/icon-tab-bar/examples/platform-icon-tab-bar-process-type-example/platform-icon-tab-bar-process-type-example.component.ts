@@ -6,7 +6,6 @@ import {
     IconTabTitleDirective,
     TabConfig
 } from '@fundamental-ngx/platform/icon-tab-bar';
-import { cloneDeep } from 'lodash-es';
 import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({
@@ -21,6 +20,6 @@ export class PlatformIconTabBarProcessTypeExampleComponent implements OnInit {
     items: TabConfig[];
 
     ngOnInit(): void {
-        this.items = this.withOverflowExample ? cloneDeep(longIconTypeConfig) : cloneDeep(iconTypeConfig);
+        this.items = this.withOverflowExample ? structuredClone(longIconTypeConfig) : structuredClone(iconTypeConfig);
     }
 }

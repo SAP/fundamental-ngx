@@ -30,6 +30,7 @@ import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { uniqBy } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -58,7 +59,6 @@ import {
     DATA_PROVIDERS,
     DataProvider
 } from '@fundamental-ngx/platform/shared';
-import { cloneDeep, uniqBy } from 'lodash-es';
 import {
     APPROVAL_FLOW_NODE_TYPES,
     AddNodeDialogFormData,
@@ -307,7 +307,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** Returns snapshot of the current and initial states of approval process */
     get approvalProcess(): ApprovalProcess {
-        return cloneDeep(this._approvalProcess);
+        return structuredClone(this._approvalProcess);
     }
 
     /** @hidden */
@@ -391,7 +391,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.value) {
             const process = this.value ?? { watchers: [], nodes: [] };
-            this._initialApprovalProcess = cloneDeep(process);
+            this._initialApprovalProcess = structuredClone(process);
             this._buildView(process);
         }
 
@@ -552,7 +552,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             this._selectedWatchers = this._approvalProcess.watchers;
             this._selectedWatcherIds = this._selectedWatchers.map((w) => w.id);
             this._isEditMode = true;
-            this._initialApprovalProcess = cloneDeep(this._approvalProcess);
+            this._initialApprovalProcess = structuredClone(this._approvalProcess);
             this._cdr.detectChanges();
         });
         this._subscriptions.add(this._editModeInitSub);
@@ -582,7 +582,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._editModeInitSub?.unsubscribe();
         this.watcherDataSource.close();
 
-        this._approvalProcess = cloneDeep(this._initialApprovalProcess!);
+        this._approvalProcess = structuredClone(this._initialApprovalProcess!);
         this._initialApprovalProcess = undefined;
         this._isEditMode = false;
         this._messages = [];
@@ -604,7 +604,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Restore previously saved approval process state */
     _undoLastAction(): void {
-        this._approvalProcess = cloneDeep(this._previousApprovalProcess!);
+        this._approvalProcess = structuredClone(this._previousApprovalProcess!);
         this._previousApprovalProcess = undefined;
 
         this._buildView(this._approvalProcess);
@@ -1009,7 +1009,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Save current state of approval process data to be able to undo an action made in edit mode */
     private _cacheCurrentApprovalProcess(): void {
-        this._previousApprovalProcess = cloneDeep(this._approvalProcess);
+        this._previousApprovalProcess = structuredClone(this._approvalProcess);
     }
 
     /** @hidden */

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, Nullable, countBy, flatten } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -21,7 +21,6 @@ import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { getFormState } from '@fundamental-ngx/platform/form';
-import { countBy, flatten } from 'lodash-es';
 import { MessageViewComponent } from './components/message-view/message-view.component';
 import {
     MessagePopoverEntry,

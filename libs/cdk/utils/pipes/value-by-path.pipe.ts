@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { get } from 'lodash-es';
+import { get } from '../functions/lodash-utils';
 
 @Pipe({ name: 'valueByPath', standalone: true })
 export class ValueByPathPipe implements PipeTransform {
