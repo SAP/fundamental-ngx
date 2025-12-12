@@ -201,7 +201,8 @@ export class SliderExample {
     }
 
     onLabelIntervalChange(event: UI5WrapperCustomEvent<SegmentedButton, 'ui5SelectionChange'>): void {
-        const selectedText = event.detail.selectedItems[0].textContent;
+        const interval = event.detail.selectedItems[0].textContent;
+        const selectedText = isNaN(Number(interval)) ? 0 : interval;
         this.labelInterval.set(Number(selectedText));
     }
 

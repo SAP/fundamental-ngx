@@ -35,6 +35,10 @@
             "name": "Navigation Layout"
         },
         {
+            "url": "ui5-webcomponents-fiori/notification-list",
+            "name": "Notification List"
+        },
+        {
             "url": "ui5-webcomponents-fiori/timeline",
             "name": "Timeline"
         }

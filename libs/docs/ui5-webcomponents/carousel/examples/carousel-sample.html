@@ -2,7 +2,7 @@
     <div class="fd-section__header">
         <h2 id="carousel-basic" class="fd-section__title">Basic Carousel</h2>
     </div>
-    <ui5-carousel (ui5Navigate)="onBasicNavigate($event)" aria-label="Basic carousel example">
+    <ui5-carousel (ui5Navigate)="onBasicNavigate($event)" accessibleName="Basic carousel example">
         <div
             style="
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -158,7 +158,7 @@
         [pageIndicatorBorderDesign]="pageIndicatorBorderDesign()"
         [arrowsPlacement]="arrowsPlacement()"
         (ui5Navigate)="onBasicNavigate($event)"
-        aria-label="Configurable carousel"
+        accessibleName="Configurable carousel"
     >
         @for (image of images(); track $index) {
         <div style="padding: 1rem">
@@ -203,7 +203,7 @@
         pageIndicatorType="Numeric"
         arrowsPlacement="Navigation"
         (ui5Navigate)="onProductNavigate($event)"
-        aria-label="Product showcase carousel"
+        accessibleName="Product showcase carousel"
     >
         @for (product of products(); track $index) {
         <div style="padding: 0.5rem">
@@ -256,7 +256,7 @@
         hideNavigationArrows="false"
         arrowsPlacement="Content"
         (ui5Navigate)="onFeatureNavigate($event)"
-        aria-label="Feature highlight carousel"
+        accessibleName="Feature highlight carousel"
     >
         @for (feature of features(); track $index) {
         <div
@@ -303,7 +303,7 @@
         pageIndicatorType="Default"
         backgroundDesign="Translucent"
         (ui5Navigate)="onImageNavigate($event)"
-        aria-label="Image gallery carousel"
+        accessibleName="Image gallery carousel"
     >
         @for (image of images(); track $index) {
         <div style="position: relative">
@@ -342,10 +342,7 @@
         <h2 id="carousel-accessibility" class="fd-section__title">Accessibility Features</h2>
     </div>
 
-    <ui5-carousel
-        accessibleName="Accessible carousel demo"
-        aria-label="Demonstration of carousel accessibility features"
-    >
+    <ui5-carousel accessibleName="Demonstration of carousel accessibility features">
         <div
             style="
                 padding: 2rem;

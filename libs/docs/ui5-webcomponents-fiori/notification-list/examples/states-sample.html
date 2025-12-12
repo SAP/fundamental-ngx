@@ -1,0 +1,59 @@
+<div class="fd-margin-bottom--lg">
+    <h4>State Indicators</h4>
+    <ui5-notification-list>
+        <ui5-li-notification titleText="None State" [state]="state().None" [showClose]="true" [read]="false">
+            <ui5-avatar slot="avatar" icon="bell" size="XS" />
+            This notification has no state indicator.
+        </ui5-li-notification>
+
+        <ui5-li-notification titleText="Positive State" [state]="state().Positive" [showClose]="true" [read]="false">
+            <ui5-avatar slot="avatar" icon="accept" size="XS" />
+            This notification indicates a successful operation.
+        </ui5-li-notification>
+
+        <ui5-li-notification titleText="Critical State" [state]="state().Critical" [showClose]="true" [read]="false">
+            <ui5-avatar slot="avatar" icon="alert" size="XS" />
+            This notification indicates a warning condition.
+        </ui5-li-notification>
+
+        <ui5-li-notification titleText="Negative State" [state]="state().Negative" [showClose]="true" [read]="false">
+            <ui5-avatar slot="avatar" icon="error" size="XS" />
+            This notification indicates an error has occurred.
+        </ui5-li-notification>
+
+        <ui5-li-notification
+            titleText="Information State"
+            [state]="state().Information"
+            [showClose]="true"
+            [read]="false"
+        >
+            <ui5-avatar slot="avatar" icon="hint" size="XS" />
+            This notification provides informational content.
+        </ui5-li-notification>
+    </ui5-notification-list>
+</div>
+
+<div>
+    <h4>Importance Levels</h4>
+    <ui5-notification-list>
+        <ui5-li-notification
+            titleText="High Importance"
+            [importance]="importance().Important"
+            [showClose]="true"
+            [read]="false"
+        >
+            <ui5-avatar slot="avatar" icon="warning" size="XS" colorScheme="Accent6" />
+            This notification has high importance and requires immediate attention.
+        </ui5-li-notification>
+
+        <ui5-li-notification
+            titleText="Standard Importance"
+            [importance]="importance().Standard"
+            [showClose]="true"
+            [read]="false"
+        >
+            <ui5-avatar slot="avatar" icon="bell" size="XS" colorScheme="Accent8" />
+            This notification has standard importance.
+        </ui5-li-notification>
+    </ui5-notification-list>
+</div>
