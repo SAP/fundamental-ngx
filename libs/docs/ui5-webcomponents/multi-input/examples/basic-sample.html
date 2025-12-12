@@ -1,0 +1,18 @@
+<div class="fd-margin-bottom--md">
+    <ui5-multi-input
+        placeholder="Type to search programming languages..."
+        [value]="inputValue()"
+        [showSuggestions]="true"
+        (ui5TokenDelete)="onTokenDelete($event)"
+        (ui5Input)="onInput($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
+    >
+        @for (token of selectedTokens(); track token) {
+        <ui5-token slot="tokens" [text]="token" />
+        } @for (suggestion of suggestions; track suggestion) {
+        <ui5-suggestion-item [text]="suggestion" />
+        }
+    </ui5-multi-input>
+</div>
+
+<div class="fd-margin-top--md"><strong>Selected:</strong> {{ selectedTokens().join(', ') }}</div>

@@ -50,7 +50,6 @@
                 [attr.aria-label]="ariaLabel"
                 [attr.aria-labelledby]="_getLabelledBy()"
                 [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-                [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
                 [attr.aria-haspopup]="autoComplete && !mobile"
                 [attr.aria-required]="required"
                 fd-input-group-input
@@ -141,8 +140,10 @@
                 @for (optionItem of group.children; track optionItem; let i = $index) {
                     <li
                         (click)="handleOptionItem(optionItem)"
+                        (mousedown)="_itemMousedown = true"
+                        (focus)="onItemFocused(optionItem)"
                         fd-list-item
-                        role="option"
+                        ariaRole="option"
                         [tabindex]="0"
                         (keyDown)="handlePressEnter($event, optionItem)"
                         [selected]="isSelectedOptionItem(optionItem)"
@@ -159,8 +160,10 @@
             @for (optionItem of _suggestions; track optionItem; let i = $index) {
                 <li
                     (click)="handleOptionItem(optionItem)"
+                    (mousedown)="_itemMousedown = true"
+                    (focus)="onItemFocused(optionItem)"
                     fd-list-item
-                    role="option"
+                    ariaRole="option"
                     [tabindex]="0"
                     (keyDown)="handlePressEnter($event, optionItem)"
                     [selected]="isSelectedOptionItem(optionItem)"

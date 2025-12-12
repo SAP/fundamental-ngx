@@ -1,0 +1,46 @@
+<div class="fd-margin-bottom--md">
+    <ui5-multi-input
+        placeholder="Type to search frameworks..."
+        [value]="inputValue()"
+        [showSuggestions]="true"
+        (ui5Input)="onInput($event)"
+        (ui5Change)="onChange($event)"
+        (ui5TokenDelete)="onTokenDelete($event)"
+        (ui5SelectionChange)="onSelectionChange($event)"
+        (ui5Open)="onOpen()"
+        (ui5Close)="onClose()"
+    >
+        @for (token of tokens(); track token) {
+        <ui5-token slot="tokens" [text]="token" />
+        } @for (framework of frameworks; track framework) {
+        <ui5-suggestion-item [text]="framework" />
+        }
+    </ui5-multi-input>
+</div>
+
+<div class="fd-margin-top--md">
+    <h4>Event Log:</h4>
+    @if (eventLog().length > 0) {
+    <button (click)="clearLog()" style="margin-bottom: 8px">Clear Log</button>
+    <table style="width: 100%; border-collapse: collapse">
+        <thead>
+            <tr style="border-bottom: 1px solid #ccc">
+                <th style="text-align: left; padding: 4px">Time</th>
+                <th style="text-align: left; padding: 4px">Event</th>
+                <th style="text-align: left; padding: 4px">Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (log of eventLog(); track $index) {
+            <tr style="border-bottom: 1px solid #eee">
+                <td style="padding: 4px">{{ log.timestamp }}</td>
+                <td style="padding: 4px"><code>{{ log.event }}</code></td>
+                <td style="padding: 4px">{{ log.detail }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    } @else {
+    <p><em>No events logged yet. Interact with the multi-input above.</em></p>
+    }
+</div>

@@ -131,6 +131,10 @@
             "name": "Multi ComboBox"
         },
         {
+            "url": "ui5-webcomponents/multi-input",
+            "name": "Multi Input"
+        },
+        {
             "url": "ui5-webcomponents/panel",
             "name": "Panel"
         },
@@ -169,6 +173,10 @@
         {
             "url": "ui5-webcomponents/slider",
             "name": "Slider"
+        },
+        {
+            "url": "ui5-webcomponents/split-button",
+            "name": "Split Button"
         },
         {
             "url": "ui5-webcomponents/step-input",
