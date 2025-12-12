@@ -2,7 +2,11 @@
     <div class="fd-section__header">
         <h2 id="timeline-basic" class="fd-section__title">Basic Timeline</h2>
     </div>
-    <ui5-timeline [layout]="currentLayout()" [accessibleName]="accessibleName()" aria-label="Basic timeline example">
+    <ui5-timeline
+        [layout]="currentLayout()"
+        [accessibleName]="accessibleName()"
+        accessibleName="Basic timeline example"
+    >
         @for (event of timelineData(); track event.id) {
         <ui5-timeline-item
             [titleText]="event.title"
@@ -68,7 +72,7 @@
         [loadingDelay]="loadingDelay()"
         [accessibleName]="accessibleName()"
         (ui5LoadMore)="onLoadMore($event)"
-        aria-label="Configurable timeline example"
+        accessibleName="Configurable timeline example"
     >
         @for (event of timelineData(); track event.id) {
         <ui5-timeline-item
