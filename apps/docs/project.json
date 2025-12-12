@@ -112,6 +112,26 @@
                         "output": "./assets/i18n"
                     },
                     {
+                        "input": "./libs/ui5-webcomponents",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents"
+                    },
+                    {
+                        "input": "./libs/ui5-webcomponents-ai",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents-ai"
+                    },
+                    {
+                        "input": "./libs/ui5-webcomponents-fiori",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents-fiori"
+                    },
+                    {
+                        "input": "./libs/ui5-webcomponents-base",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents-base"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"
