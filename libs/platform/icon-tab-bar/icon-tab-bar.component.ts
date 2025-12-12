@@ -42,10 +42,10 @@ import {
 } from './components/icon-tab-bar-tab/icon-tab-bar-tab.component';
 import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
 import { UNIQUE_KEY_SEPARATOR } from './constants';
-import { IconTabBarTemplateService } from './directives/icon-tab-bar-content-template.directive';
 import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from './interfaces/tab-color-associations.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
+import { IconTabBarTemplateService } from './services/icon-tab-bar-template.service';
 import { IconTabBarBackground, IconTabBarSize, TabDensityMode, TabType } from './types';
 
 @Component({
