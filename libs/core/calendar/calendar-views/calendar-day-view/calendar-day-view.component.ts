@@ -2,7 +2,9 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     DestroyRef,
+    effect,
     ElementRef,
     EventEmitter,
     Inject,
@@ -248,6 +250,25 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     _weekHeaderClasses: string[] = [];
 
+    /**
+     * @hidden
+     * Computed signal for the focused special day number if legend matches
+     */
+    protected readonly _focusedSpecialDayNumber = computed<number | null>(() => {
+        const focusedItem = this.legendFocusedService.focusedLegendItem();
+        const associatedId = this.associatedLegendId();
+
+        if (
+            associatedId &&
+            focusedItem.legendId === associatedId &&
+            focusedItem.specialDayNumber !== null &&
+            focusedItem.specialDayNumber !== undefined
+        ) {
+            return focusedItem.specialDayNumber;
+        }
+        return null;
+    });
+
     /** @hidden */
     private _selectedDate: Nullable<D>;
 
@@ -294,6 +315,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     private _newRange: { start: D | null; end: D | null } | null = null;
 
+    /**
+     * @hidden
+     * Cache of days with special markers for efficient legend focus updates
+     */
+    private _daysWithSpecialMarkers: CalendarDay<D>[] = [];
+
     /** @hidden */
     constructor(
         private eRef: ElementRef,
@@ -302,7 +329,15 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         private legendFocusedService: CalendarLegendFocusingService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         public _dateTimeAdapter: DatetimeAdapter<D>
-    ) {}
+    ) {
+        // Effect to update grid when legend focus changes
+        effect(() => {
+            const focusedNumber = this._focusedSpecialDayNumber();
+            if (this._dayViewGrid && this._isInitiated) {
+                this._updateLegendFocusState(focusedNumber);
+            }
+        });
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -321,16 +356,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             this._buildDayViewGrid();
             this.changeDetRef.markForCheck();
         });
-
-        this.legendFocusedService.focusedLegendItemSubject$
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(({ legendId, specialDayNumber }) => {
-                if (!specialDayNumber) {
-                    this._legendBlurred();
-                } else if (legendId !== null && specialDayNumber !== null) {
-                    this._focusOnLegendsDay(legendId, specialDayNumber);
-                }
-            });
     }
 
     /** @hidden */
@@ -656,6 +681,29 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /**
      * @hidden
+     * Updates the legend focus state for calendar days with special markers
+     * @param focusedSpecialDayNumber The currently focused special day number, or null if no legend item is focused
+     */
+    private _updateLegendFocusState(focusedSpecialDayNumber: number | null): void {
+        if (!this._dayViewGrid || this._daysWithSpecialMarkers.length === 0) {
+            return;
+        }
+
+        // Only iterate through days that have special markers (typically 2-10 days instead of 42)
+        this._daysWithSpecialMarkers.forEach((day) => {
+            if (focusedSpecialDayNumber === null) {
+                // No legend item focused - show all markers
+                day.shouldHideSpecialDayMarker = false;
+            } else {
+                // Legend item focused - hide markers that don't match
+                day.shouldHideSpecialDayMarker = day.specialDayNumber !== focusedSpecialDayNumber;
+            }
+        });
+        this.changeDetRef.markForCheck();
+    }
+
+    /**
+     * @hidden
      * Method that creates array of CalendarDay models which will be shown on day grid,
      * depending on current month and year.
      */
@@ -732,6 +780,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         this._dayViewGrid = dayViewGrid;
         this._weeks = this._refreshWeekCount();
+
+        // Cache days with special markers for efficient legend focus updates
+        this._daysWithSpecialMarkers = this._calendarDayList.filter((day) => day.specialDayNumber !== undefined);
     }
 
     /** @hidden */
@@ -861,7 +912,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             weekend: this._isWeekendDay(weekDay),
             ariaLabel: this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateA11yLabel),
             specialDayNumber: this._getSpecialDay(date) ?? undefined,
-            past: isPast
+            past: isPast,
+            shouldHideSpecialDayMarker: false
         };
 
         /** Apply disabled state to days marked with passed function */

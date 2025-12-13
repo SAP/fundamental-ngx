@@ -1,6 +1,5 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { FocusableItemDirective, FocusableListDirective, Nullable } from '@fundamental-ngx/cdk/utils';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarLegendFocusingService } from './calendar-legend-focusing.service';
@@ -9,6 +8,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
 @Component({
     selector: 'fd-calendar-legend',
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <ng-content></ng-content>
         <ng-container>
@@ -95,13 +95,11 @@ export class CalendarLegendComponent<D> {
      */
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
 
-    constructor(
-        public datetimeAdapter: DatetimeAdapter<FdDate>,
-        private focusingService: CalendarLegendFocusingService
-    ) {}
+    /** @hidden */
+    private readonly _focusingService = inject(CalendarLegendFocusingService);
 
     /** @hidden */
     _handleFocusedElementEvent(specialDayNumber: Nullable<number>): void {
-        this.focusingService._handleLegendItemFocus(this.legendId(), specialDayNumber);
+        this._focusingService._handleLegendItemFocus(this.legendId(), specialDayNumber);
     }
 }

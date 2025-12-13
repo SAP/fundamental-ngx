@@ -243,6 +243,10 @@ export class DatePickerComponent<D>
     @Input()
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
+    /** The unique ID of the calendar legend, if the date picker calendar is to display a legend. */
+    @Input()
+    associatedLegendId: string;
+
     /**
      *  The state of the form control - applies css classes.
      *  Also, this is applied to message.
