@@ -368,7 +368,8 @@ export default {
         searchInputLabel: 'ძებნა',
         synchronizeButtonTitle: 'სინქრონიზაცია',
         searchSuggestionMessage: 'ნაპოვნია {count} შემოთავაზება.',
-        searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები'
+        searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები',
+        deleteButtonLabel: 'Delete'
     },
     platformSwitch: {
         ariaLabel: 'გადამრთველი'
