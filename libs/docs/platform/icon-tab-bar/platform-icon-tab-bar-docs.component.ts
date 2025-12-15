@@ -18,6 +18,7 @@ import { PlatformIconTabBarFilterTypeExampleComponent } from './examples/platfor
 import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
 import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component';
 import { PlatformIconTabBarProcessTypeExampleComponent } from './examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component';
+import { PlatformIconTabBarTemplateContentExampleComponent } from './examples/platform-icon-tab-bar-template-content-example/platform-icon-tab-bar-template-content-example.component';
 import { PlatformIconTabBarTextTypeExampleComponent } from './examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component';
 import { IconTabBarTabsContentExampleComponent } from './examples/tabs-content/icon-tab-bar-tabs-content-example.component';
 import { IconTabBarTwoClickAreaExampleComponent } from './examples/two-click-area/icon-tab-bar-two-click-area-example.component';
@@ -26,6 +27,11 @@ const iconTabBarTextTypeHtml =
     'platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.html';
 const iconTabBarTextTypeTs =
     'platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.ts';
+
+const iconTabBarTemplateContentHtml =
+    'platform-icon-tab-bar-template-content-example/platform-icon-tab-bar-template-content-example.component.html';
+const iconTabBarTemplateContentTs =
+    'platform-icon-tab-bar-template-content-example/platform-icon-tab-bar-template-content-example.component.ts';
 
 const iconTabBarIconOnlyTypeHtml =
     'platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.html';
@@ -87,6 +93,7 @@ export interface IconTabBarItem extends TabConfig {
         DescriptionComponent,
         ComponentExampleComponent,
         PlatformIconTabBarTextTypeExampleComponent,
+        PlatformIconTabBarTemplateContentExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         PlatformIconTabBarIconOnlyTypeExampleComponent,
@@ -122,6 +129,22 @@ export class PlatformIconTabBarDocsComponent {
             fileName: 'text-type.config',
             path: 'config-for-examples',
             pure: true
+        }
+    ];
+
+    iconTabBarTemplateContentFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarTemplateContentHtml),
+            fileName: 'platform-icon-tab-bar-template-content-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarTemplateContentTs),
+            fileName: 'platform-icon-tab-bar-template-content-example',
+            component: 'PlatformIconTabBarTemplateContentExampleComponent',
+            path: 'example'
         }
     ];
 
