@@ -35,6 +35,14 @@
             "name": "Navigation Layout"
         },
         {
+            "url": "ui5-webcomponents-fiori/page",
+            "name": "Page"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/shell-bar",
+            "name": "Shell Bar"
+        },
+        {
             "url": "ui5-webcomponents-fiori/timeline",
             "name": "Timeline"
         }

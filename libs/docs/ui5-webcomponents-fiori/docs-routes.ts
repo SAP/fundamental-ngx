@@ -54,6 +54,10 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/navigation-layout').then(configureLibRoutes)
     },
     {
+        path: 'page',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/page').then(configureLibRoutes)
+    },
+    {
         path: 'timeline',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/timeline').then(configureLibRoutes)
     }

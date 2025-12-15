@@ -14,5 +14,6 @@ export const API_FILES = {
     illustratedMessage: ['IllustratedMessage'],
     mediaGallery: ['MediaGallery'],
     navigationLayout: ['NavigationLayout'],
+    page: ['Page'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };
