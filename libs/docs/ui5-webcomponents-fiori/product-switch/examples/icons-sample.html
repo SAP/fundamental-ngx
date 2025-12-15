@@ -1,0 +1,13 @@
+<ui5-product-switch>
+    @for (product of products(); track product.id) {
+    <ui5-product-switch-item [titleText]="product.title" [subtitleText]="product.subtitle" [icon]="product.icon || ''">
+        @if (product.useAvatar) {
+        <ui5-avatar slot="image" size="S" shape="Square" colorScheme="Transparent" [initials]="product.initials || ''">
+            @if (product.imageSrc) {
+            <img alt="{{ product.title }}" [src]="product.imageSrc" />
+            }
+        </ui5-avatar>
+        }
+    </ui5-product-switch-item>
+    }
+</ui5-product-switch>

@@ -30,7 +30,7 @@
         <ui5-list>
             @for (item of items(); track item.id) {
             <ui5-li [additionalText]="item.description">
-                <ui5-icon slot="icon" [name]="item.icon"></ui5-icon>
+                <ui5-icon [name]="item.icon"></ui5-icon>
                 {{ item.title }}
             </ui5-li>
             }

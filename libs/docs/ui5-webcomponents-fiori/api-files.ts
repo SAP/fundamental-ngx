@@ -15,5 +15,6 @@ export const API_FILES = {
     mediaGallery: ['MediaGallery'],
     navigationLayout: ['NavigationLayout'],
     page: ['Page'],
+    productSwitch: ['ProductSwitch', 'ProductSwitchItem'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

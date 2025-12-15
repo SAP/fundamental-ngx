@@ -39,6 +39,10 @@
             "name": "Page"
         },
         {
+            "url": "ui5-webcomponents-fiori/product-switch",
+            "name": "Product Switch"
+        },
+        {
             "url": "ui5-webcomponents-fiori/shell-bar",
             "name": "Shell Bar"
         },
