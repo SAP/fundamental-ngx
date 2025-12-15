@@ -27,7 +27,12 @@
                 "skipComponents": true,
                 "_cacheBust": "2025-10-08-generate-utils"
             },
-            "outputs": ["{projectRoot}/index.ts", "{projectRoot}/**/index.ts", "{projectRoot}/types", "{options.outputPath}"]
+            "outputs": [
+                "{projectRoot}/index.ts",
+                "{projectRoot}/**/index.ts",
+                "{projectRoot}/types",
+                "{options.outputPath}"
+            ]
         },
         "build": {
             "executor": "@nx/angular:package",
