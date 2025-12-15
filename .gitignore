@@ -89,3 +89,4 @@ libs/ui5-webcomponents-fiori/**/
 libs/ui5-webcomponents-fiori/index.ts
 !libs/ui5-webcomponents-base/theming/
 
+migrations.json
