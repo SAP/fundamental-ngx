@@ -7,6 +7,7 @@ import {
     computed,
     contentChildren,
     DestroyRef,
+    effect,
     ElementRef,
     HostBinding,
     inject,
@@ -17,6 +18,7 @@ import {
     Optional,
     output,
     signal,
+    TemplateRef,
     viewChild,
     viewChildren,
     ViewEncapsulation
@@ -43,6 +45,7 @@ import { UNIQUE_KEY_SEPARATOR } from './constants';
 import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from './interfaces/tab-color-associations.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
+import { IconTabBarTemplateService } from './services/icon-tab-bar-template.service';
 import { IconTabBarBackground, IconTabBarSize, TabDensityMode, TabType } from './types';
 
 @Component({
@@ -178,9 +181,6 @@ export class IconTabBarComponent implements OnInit, TabList {
     readonly _selectedUid = signal<string | undefined>(undefined);
 
     /** @hidden */
-    readonly _tabs$ = computed(() => this._generateTabBarItems(this._tabsConfig$()));
-
-    /** @hidden */
     readonly _flatTabs$ = computed(() => this._generateFlatTabs(this._tabs$()));
 
     /** @hidden */
@@ -188,6 +188,19 @@ export class IconTabBarComponent implements OnInit, TabList {
 
     /** @hidden */
     readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+
+    /** @hidden */
+    readonly _templateMap$ = computed(() =>
+        // Access the template service signal to get all registered templates reactively
+        this.templateService.getAllTemplatesSignal()()
+    );
+
+    /** @hidden */
+    readonly _tabs$ = computed(() => {
+        const config = this._tabsConfig$();
+        const templateMap = this._templateMap$();
+        return this._generateTabBarItems(this._applyTemplateMapping(config, templateMap));
+    });
 
     /** @hidden */
     readonly _tabsConfig$ = computed(() => {
@@ -203,10 +216,25 @@ export class IconTabBarComponent implements OnInit, TabList {
         return children.map((t) => this._generateTabConfig(t));
     });
 
+    /** @hidden Initialize active tab when tabs change */
+    private readonly _initActiveTabEffect = effect(() => {
+        const flatTabs = this._flatTabs$();
+        const activeTab = flatTabs.find((tab) => tab.active);
+        if (activeTab) {
+            this._selectedUid.set(activeTab.uId);
+            this._tabRenderer$.set(activeTab);
+            this.activeTab = activeTab;
+        }
+    });
+
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
+    /** @hidden */
     private readonly _inDynamicPage = !!inject(FD_DYNAMIC_PAGE, { optional: true });
+
+    /** @hidden Template service */
+    private readonly templateService = inject(IconTabBarTemplateService);
 
     private readonly _iconTabBarCmp = viewChild<Nullable<IconTabBarBase>>(IconTabBarBase);
 
@@ -389,6 +417,18 @@ export class IconTabBarComponent implements OnInit, TabList {
                 )
             };
             return result;
+        });
+    }
+
+    /** @hidden Apply template mapping to tab configurations */
+    private _applyTemplateMapping(configs: TabConfig[], templateMap: Map<string, TemplateRef<any>>): TabConfig[] {
+        return configs.map((config) => {
+            const mappedTemplate = config.contentTemplateId ? templateMap.get(config.contentTemplateId) : null;
+            return {
+                ...config,
+                renderer: mappedTemplate || config.renderer,
+                subItems: config.subItems ? this._applyTemplateMapping(config.subItems, templateMap) : config.subItems
+            };
         });
     }
 
