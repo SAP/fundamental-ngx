@@ -15,7 +15,7 @@ describe('CalendarDayViewComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdDatetimeModule, CalendarDayViewComponent],
-            providers: [CalendarService]
+            providers: [CalendarService, CalendarLegendFocusingService]
         }).compileComponents();
     }));
 
@@ -409,7 +409,6 @@ describe('CalendarDayViewComponent', () => {
 
         it('should only update cached special days when legend focus changes', () => {
             component.currentlyDisplayed = { month: 10, year: 2018 };
-            fixture.componentRef.setInput('associatedLegendId', 'test-legend');
             fixture.componentRef.setInput('specialDaysRules', [
                 {
                     specialDayNumber: 5,
@@ -429,9 +428,9 @@ describe('CalendarDayViewComponent', () => {
             const cachedDays = (component as any)._daysWithSpecialMarkers;
             expect(cachedDays.every((day: CalendarDay<FdDate>) => day.shouldHideSpecialDayMarker === false)).toBe(true);
 
-            // Simulate legend focus via the focusing service
+            // Simulate legend focus via the focusing service - need to provide it in the component's injector
             const focusingService = TestBed.inject(CalendarLegendFocusingService);
-            focusingService._handleLegendItemFocus('test-legend', 5);
+            focusingService._handleLegendItemFocus(5);
             fixture.detectChanges();
 
             // Only days with specialDayNumber !== 5 should be hidden
@@ -444,7 +443,6 @@ describe('CalendarDayViewComponent', () => {
 
         it('should show all markers when legend focus is cleared', () => {
             component.currentlyDisplayed = { month: 10, year: 2018 };
-            fixture.componentRef.setInput('associatedLegendId', 'test-legend');
             fixture.componentRef.setInput('specialDaysRules', [
                 {
                     specialDayNumber: 5,
@@ -458,7 +456,7 @@ describe('CalendarDayViewComponent', () => {
             const focusingService = TestBed.inject(CalendarLegendFocusingService);
 
             // Focus on a legend item
-            focusingService._handleLegendItemFocus('test-legend', 5);
+            focusingService._handleLegendItemFocus(5);
             fixture.detectChanges();
 
             // Clear focus
@@ -504,7 +502,7 @@ describe('CalendarDayViewComponent', () => {
 
             // Should not error when updating with no special days
             const focusingService = TestBed.inject(CalendarLegendFocusingService);
-            focusingService._handleLegendItemFocus('test-legend', 5);
+            focusingService._handleLegendItemFocus(5);
             fixture.detectChanges();
 
             expect(cachedDays.length).toBe(0);

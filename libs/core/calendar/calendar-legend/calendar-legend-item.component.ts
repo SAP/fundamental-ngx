@@ -54,7 +54,6 @@ export class CalendarLegendItemComponent {
         if (this.color()) {
             classes.push(`fd-calendar-legend__item--${this.color()}`);
         }
-
         return classes.join(' ');
     });
 }

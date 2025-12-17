@@ -304,21 +304,40 @@
 </component-example>
 <code-example [exampleFiles]="datePickerMobile"></code-example>
 
-<!-- Moment example is commented due to the lack of DatetimeAdapter<Moment> implementation  -->
-<!-- <separator></separator>
+<separator></separator>
 
-<fd-docs-section-title
-    id="complex-i18n"
-    componentName="datePicker"
->
-    Complex i18n.
-</fd-docs-section-title>
+<fd-docs-section-title id="legend" componentName="date-picker">Date Picker with Legend</fd-docs-section-title>
 <description>
-    To change format or locale options in <code>DatePicker</code> component, it is needed to pass some variables to
-    <code>[format]</code> or <code>[locale]</code>. By default FdDate model is formatted by angular built-in
-    <code>datePipe</code>.
+    <p>
+        The calendar legend feature displays a visual guide explaining what each special day marker means. Special days
+        are marked in the calendar with distinct colors and styles, while the legend below explains each marker type.
+        Enable the legend by setting <code>[showCalendarLegend]="true"</code> and providing
+        <code>specialDaysRules</code> to define which days should be marked and how they appear.
+    </p>
+    <p>
+        Focusing on legend items automatically highlights the corresponding days in the calendar, providing immediate
+        visual feedback and enhanced accessibility. The legend is keyboard navigable using arrow keys and works
+        seamlessly with both single-date and date-range pickers.
+    </p>
+
+    <h4>How to Use</h4>
+    <p>
+        Define your special days rules with a <code>specialDayNumber</code> (1-20) for the marker color, a
+        <code>rule</code> function that returns true for dates to mark, and <code>legendText</code> describing the
+        special day. Optionally set <code>appointment</code> to true for a circle marker. Customize the legend layout
+        with <code>[legendCol]="true"</code> for a single column or <code>[legendCol]="false"</code> for an auto-flowing
+        multi-column layout.
+    </p>
+
+    <h4>Special Day Properties</h4>
+    <ul>
+        <li><code>specialDayNumber</code>: Number 1-20 determining the marker color/style</li>
+        <li><code>rule</code>: Function that returns true for dates to mark</li>
+        <li><code>legendText</code>: Text displayed in the legend</li>
+        <li><code>appointment</code>: (Optional) If true, shows a small circle marker</li>
+    </ul>
 </description>
-<component-example name="'ex8'">
-    <fd-date-picker-complex-i18n-example></fd-date-picker-complex-i18n-example>
+<component-example name="ex14">
+    <fd-date-picker-legend-example></fd-date-picker-legend-example>
 </component-example>
-<code-example [exampleFiles]="datePickerComplexI18n"></code-example> -->
+<code-example [exampleFiles]="legendExamples"></code-example>

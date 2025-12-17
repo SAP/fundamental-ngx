@@ -1,5 +1,6 @@
 export * from './calendar-directives';
 export * from './calendar-header/calendar-header.component';
+export * from './calendar-legend/calendar-legend-focusing.service';
 export * from './calendar-legend/calendar-legend.component';
 export * from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 export * from './calendar-views/calendar-day-view/calendar-day-view.component';

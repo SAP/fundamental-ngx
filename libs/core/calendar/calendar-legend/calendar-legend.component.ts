@@ -70,9 +70,6 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
     imports: [CalendarLegendItemComponent, FocusableListDirective, FocusableItemDirective, FdTranslatePipe]
 })
 export class CalendarLegendComponent<D> {
-    /** The unique identifier of the calendar legend. This is a required property. */
-    legendId = input.required<string>();
-
     /**
      * Make it a column instead
      */
@@ -96,10 +93,10 @@ export class CalendarLegendComponent<D> {
     specialDaysRules = input<SpecialDayRule<D>[]>([]);
 
     /** @hidden */
-    private readonly _focusingService = inject(CalendarLegendFocusingService);
+    private readonly _focusingService = inject(CalendarLegendFocusingService, { optional: true });
 
     /** @hidden */
     _handleFocusedElementEvent(specialDayNumber: Nullable<number>): void {
-        this._focusingService._handleLegendItemFocus(this.legendId(), specialDayNumber);
+        this._focusingService?.handleLegendItemFocus(specialDayNumber);
     }
 }

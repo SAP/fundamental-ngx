@@ -15,14 +15,11 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
 import { CalendarLegendComponent } from './calendar-legend.component';
 
 @Component({
-    template: `
-        <fd-calendar-legend [legendId]="legendId()" [col]="col()" [specialDaysRules]="specialDaysRules()">
-        </fd-calendar-legend>
-    `,
-    imports: [CalendarLegendComponent]
+    template: ` <fd-calendar-legend [col]="col()" [specialDaysRules]="specialDaysRules()"> </fd-calendar-legend> `,
+    imports: [CalendarLegendComponent],
+    providers: [CalendarLegendFocusingService]
 })
 export class CalendarLegendHostComponent {
-    legendId = signal<string>('test-legend-1');
     col = signal<boolean>(false);
     specialDaysRules = signal<SpecialDayRule<FdDate>[]>([
         {
@@ -72,7 +69,8 @@ describe('CalendarLegendComponent', () => {
         fixture = TestBed.createComponent(CalendarLegendHostComponent);
         host = fixture.componentInstance;
         legendComponent = fixture.debugElement.query(By.directive(CalendarLegendComponent)).componentInstance;
-        focusingService = TestBed.inject(CalendarLegendFocusingService);
+        // Get the service from the host component's injector (since the host provides it)
+        focusingService = fixture.debugElement.injector.get(CalendarLegendFocusingService);
         fixture.detectChanges();
     });
 
@@ -82,16 +80,6 @@ describe('CalendarLegendComponent', () => {
     });
 
     describe('signal inputs', () => {
-        it('should set legendId correctly', () => {
-            expect(legendComponent.legendId()).toBe('test-legend-1');
-        });
-
-        it('should update legendId when signal changes', () => {
-            host.legendId.set('updated-legend');
-            fixture.detectChanges();
-            expect(legendComponent.legendId()).toBe('updated-legend');
-        });
-
         it('should set col layout correctly', () => {
             expect(legendComponent.col()).toBe(false);
         });
@@ -169,7 +157,7 @@ describe('CalendarLegendComponent', () => {
 
             legendComponent._handleFocusedElementEvent(5);
 
-            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith('test-legend-1', 5);
+            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith(5);
         });
 
         it('should pass null specialDayNumber when unfocusing', () => {
@@ -177,17 +165,19 @@ describe('CalendarLegendComponent', () => {
 
             legendComponent._handleFocusedElementEvent(null);
 
-            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith('test-legend-1', null);
+            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith(null);
         });
 
-        it('should use current legendId when handling focus', () => {
-            jest.spyOn(focusingService, '_handleLegendItemFocus');
-            host.legendId.set('dynamic-legend-id');
-            fixture.detectChanges();
+        it('should update service state when called with null', () => {
+            // First set a value
+            focusingService._handleLegendItemFocus(5);
+            expect(focusingService.focusedSpecialDayNumber()).toBe(5);
 
-            legendComponent._handleFocusedElementEvent(10);
+            // Then clear it via the component
+            legendComponent._handleFocusedElementEvent(null);
 
-            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith('dynamic-legend-id', 10);
+            // Service should be cleared
+            expect(focusingService.focusedSpecialDayNumber()).toBeNull();
         });
     });
 

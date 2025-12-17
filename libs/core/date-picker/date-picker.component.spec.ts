@@ -474,6 +474,70 @@ describe('DatePickerComponent', () => {
         );
         expect(component.toggleCalendar).toHaveBeenCalled();
     });
+
+    describe('Calendar Legend Feature', () => {
+        it('should pass showCalendarLegend to calendar component', () => {
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement).toBeTruthy();
+            expect(calendarElement.componentInstance.showCalendarLegend).toBe(true);
+        });
+
+        it('should pass legendCol to calendar component', () => {
+            fixture.componentRef.setInput('legendCol', true);
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement).toBeTruthy();
+            expect(calendarElement.componentInstance.legendCol).toBe(true);
+        });
+
+        it('should render legend inside calendar when showCalendarLegend is true', () => {
+            component.specialDaysRules = [{ specialDayNumber: 1, rule: () => true, legendText: 'Special Day' }];
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            // Legend should be rendered by Calendar component internally
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement).toBeTruthy();
+            expect(calendarElement.componentInstance.showCalendarLegend).toBe(true);
+        });
+
+        it('should not render separate legend in DatePicker template', () => {
+            component.specialDaysRules = [{ specialDayNumber: 1, rule: () => true, legendText: 'Special Day' }];
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            // DatePicker should not render legend separately - Calendar does it
+            const datePickerLegends = fixture.debugElement.queryAll(By.css('fd-date-picker fd-calendar-legend'));
+            expect(datePickerLegends.length).toBe(0);
+        });
+
+        it('should pass specialDaysRules to calendar component', () => {
+            const rules = [
+                { specialDayNumber: 1, rule: () => true, legendText: 'Day 1' },
+                { specialDayNumber: 2, rule: () => false, legendText: 'Day 2' }
+            ];
+            component.specialDaysRules = rules;
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            component.isOpen = true;
+            component._showPopoverContents = true;
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement.componentInstance.specialDaysRules).toEqual(rules);
+        });
+    });
 });
 
 describe('DatePickerComponent Accessibility', () => {

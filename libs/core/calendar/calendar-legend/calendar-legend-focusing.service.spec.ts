@@ -7,7 +7,9 @@ describe('CalendarLegendFocusingService', () => {
     let service: CalendarLegendFocusingService;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({});
+        TestBed.configureTestingModule({
+            providers: [CalendarLegendFocusingService]
+        });
         service = TestBed.inject(CalendarLegendFocusingService);
     });
 
@@ -15,70 +17,56 @@ describe('CalendarLegendFocusingService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should initialize with null values', () => {
-        const focusedItem = service.focusedLegendItem();
-        expect(focusedItem.legendId).toBeNull();
-        expect(focusedItem.specialDayNumber).toBeNull();
+    it('should initialize with null value', () => {
+        expect(service.focusedSpecialDayNumber()).toBeNull();
     });
 
     describe('_handleLegendItemFocus', () => {
-        it('should update focused legend item with provided values', () => {
-            service._handleLegendItemFocus('legend-1', 5);
+        it('should update focused special day number', () => {
+            service._handleLegendItemFocus(5);
 
-            const focusedItem = service.focusedLegendItem();
-            expect(focusedItem.legendId).toBe('legend-1');
-            expect(focusedItem.specialDayNumber).toBe(5);
+            expect(service.focusedSpecialDayNumber()).toBe(5);
         });
 
-        it('should update focused legend item with null specialDayNumber', () => {
-            service._handleLegendItemFocus('legend-2', null);
+        it('should update focused special day number to null', () => {
+            service._handleLegendItemFocus(5);
+            service._handleLegendItemFocus(null);
 
-            const focusedItem = service.focusedLegendItem();
-            expect(focusedItem.legendId).toBe('legend-2');
-            expect(focusedItem.specialDayNumber).toBeNull();
+            expect(service.focusedSpecialDayNumber()).toBeNull();
         });
 
         it('should overwrite previous focused item', () => {
-            service._handleLegendItemFocus('legend-1', 5);
-            service._handleLegendItemFocus('legend-2', 10);
+            service._handleLegendItemFocus(5);
+            service._handleLegendItemFocus(10);
 
-            const focusedItem = service.focusedLegendItem();
-            expect(focusedItem.legendId).toBe('legend-2');
-            expect(focusedItem.specialDayNumber).toBe(10);
+            expect(service.focusedSpecialDayNumber()).toBe(10);
         });
     });
 
     describe('clearFocusedElement', () => {
-        it('should clear focused legend item to null values', () => {
-            service._handleLegendItemFocus('legend-1', 5);
+        it('should clear focused special day number to null', () => {
+            service._handleLegendItemFocus(5);
             service.clearFocusedElement();
 
-            const focusedItem = service.focusedLegendItem();
-            expect(focusedItem.legendId).toBeNull();
-            expect(focusedItem.specialDayNumber).toBeNull();
+            expect(service.focusedSpecialDayNumber()).toBeNull();
         });
 
-        it('should work when called with already null values', () => {
+        it('should work when called with already null value', () => {
             service.clearFocusedElement();
 
-            const focusedItem = service.focusedLegendItem();
-            expect(focusedItem.legendId).toBeNull();
-            expect(focusedItem.specialDayNumber).toBeNull();
+            expect(service.focusedSpecialDayNumber()).toBeNull();
         });
     });
 
     describe('signal reactivity', () => {
         it('should trigger effects when focus changes', () => {
             let updateCount = 0;
-            let lastValue: { legendId: Nullable<string>; specialDayNumber: Nullable<number> } = {
-                legendId: null,
-                specialDayNumber: null
-            };
+            let lastValue: Nullable<number> = null;
 
             // Create an effect that tracks signal changes
             TestBed.runInInjectionContext(() => {
                 effect(() => {
-                    lastValue = service.focusedLegendItem();
+                    lastValue = service.focusedSpecialDayNumber();
                     updateCount++;
                 });
             });
@@ -86,42 +74,40 @@ describe('CalendarLegendFocusingService', () => {
             // Flush initial effect run
             TestBed.flushEffects();
             expect(updateCount).toBe(1);
-            expect(lastValue.legendId).toBeNull();
+            expect(lastValue).toBeNull();
 
             // Change the focused item
-            service._handleLegendItemFocus('legend-1', 5);
+            service._handleLegendItemFocus(5);
             TestBed.flushEffects();
 
             // Effect should run again
             expect(updateCount).toBe(2);
-            expect(lastValue.legendId).toBe('legend-1');
-            expect(lastValue.specialDayNumber).toBe(5);
+            expect(lastValue).toBe(5);
 
             // Change again
-            service._handleLegendItemFocus('legend-2', 10);
+            service._handleLegendItemFocus(10);
             TestBed.flushEffects();
 
             // Effect should run again
             expect(updateCount).toBe(3);
-            expect(lastValue.legendId).toBe('legend-2');
-            expect(lastValue.specialDayNumber).toBe(10);
+            expect(lastValue).toBe(10);
         });
 
-        it('should update computed signals derived from focusedLegendItem', () => {
+        it('should update computed signals derived from focusedSpecialDayNumber', () => {
             TestBed.runInInjectionContext(() => {
                 const derivedSignal = computed(() => {
-                    const item = service.focusedLegendItem();
-                    return item.legendId || 'none';
+                    const dayNum = service.focusedSpecialDayNumber();
+                    return dayNum !== null ? `day-${dayNum}` : 'none';
                 });
 
                 // Initial value
                 expect(derivedSignal()).toBe('none');
 
                 // Update the service signal
-                service._handleLegendItemFocus('test-legend', 7);
+                service._handleLegendItemFocus(7);
 
                 // Computed should update
-                expect(derivedSignal()).toBe('test-legend');
+                expect(derivedSignal()).toBe('day-7');
 
                 // Clear focus
                 service.clearFocusedElement();

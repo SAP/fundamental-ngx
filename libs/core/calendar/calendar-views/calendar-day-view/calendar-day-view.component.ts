@@ -192,9 +192,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     /** Id of the calendar. If none is provided, one will be generated. */
     id = input<string>();
 
-    /** @hidden Id of the associated legend, passed from the parent calendar component. */
-    associatedLegendId = input<string>();
-
     /**
      * Whether user wants to mark day cells on hover.
      * Works only on range mode, when start date is selected.
@@ -249,25 +246,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * and the date is not disabled.
      */
     _weekHeaderClasses: string[] = [];
-
     /**
      * @hidden
-     * Computed signal for the focused special day number if legend matches
+     * Computed signal for the focused special day number
      */
-    protected readonly _focusedSpecialDayNumber = computed<number | null>(() => {
-        const focusedItem = this.legendFocusedService.focusedLegendItem();
-        const associatedId = this.associatedLegendId();
-
-        if (
-            associatedId &&
-            focusedItem.legendId === associatedId &&
-            focusedItem.specialDayNumber !== null &&
-            focusedItem.specialDayNumber !== undefined
-        ) {
-            return focusedItem.specialDayNumber;
-        }
-        return null;
-    });
+    protected readonly _focusedSpecialDayNumber = computed<Nullable<number>>(() => this.legendFocusedService?.focusedSpecialDayNumber() ?? null);
 
     /** @hidden */
     private _selectedDate: Nullable<D>;
@@ -322,11 +305,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     private _daysWithSpecialMarkers: CalendarDay<D>[] = [];
 
     /** @hidden */
+    private readonly legendFocusedService = inject(CalendarLegendFocusingService, { optional: true });
+
+    /** @hidden */
     constructor(
         private eRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService,
-        private legendFocusedService: CalendarLegendFocusingService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         public _dateTimeAdapter: DatetimeAdapter<D>
     ) {
@@ -655,43 +640,19 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this.nextMonthSelect.emit();
     }
 
-    /** @hidden */
-    private _focusOnLegendsDay(legendId: Nullable<string>, specialDayNumber: number): void {
-        const associatedLegendId = this.associatedLegendId();
-
-        if (legendId && associatedLegendId && associatedLegendId === legendId) {
-            this._dayViewGrid.forEach((row) => {
-                row.forEach((day) => {
-                    day.shouldHideSpecialDayMarker = day.specialDayNumber !== specialDayNumber;
-                });
-            });
-            this.changeDetRef.markForCheck();
-        }
-    }
-
-    /** @hidden */
-    private _legendBlurred(): void {
-        this._dayViewGrid.forEach((row) => {
-            row.forEach((day) => {
-                day.shouldHideSpecialDayMarker = false;
-            });
-        });
-        this.changeDetRef.markForCheck();
-    }
-
     /**
      * @hidden
      * Updates the legend focus state for calendar days with special markers
-     * @param focusedSpecialDayNumber The currently focused special day number, or null if no legend item is focused
+     * @param focusedSpecialDayNumber The currently focused special day number, or null/undefined if no legend item is focused
      */
-    private _updateLegendFocusState(focusedSpecialDayNumber: number | null): void {
+    private _updateLegendFocusState(focusedSpecialDayNumber: Nullable<number>): void {
         if (!this._dayViewGrid || this._daysWithSpecialMarkers.length === 0) {
             return;
         }
 
         // Only iterate through days that have special markers (typically 2-10 days instead of 42)
         this._daysWithSpecialMarkers.forEach((day) => {
-            if (focusedSpecialDayNumber === null) {
+            if (focusedSpecialDayNumber == null) {
                 // No legend item focused - show all markers
                 day.shouldHideSpecialDayMarker = false;
             } else {
