@@ -67,6 +67,11 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/search').then(configureLibRoutes)
     },
     {
+        path: 'side-navigation',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/side-navigation').then(configureLibRoutes)
+    },
+    {
         path: 'timeline',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/timeline').then(configureLibRoutes)
     }
