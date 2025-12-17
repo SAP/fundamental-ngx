@@ -17,6 +17,7 @@ export const API_FILES = {
     page: ['Page'],
     productSwitch: ['ProductSwitch', 'ProductSwitchItem'],
     search: ['Search', 'SearchItem', 'SearchItemGroup', 'SearchItemShowMore', 'SearchMessageArea', 'SearchScope'],
+    shellBar: ['ShellBar', 'ShellBarBranding', 'ShellBarItem', 'ShellBarSearch', 'ShellBarSpacer'],
     sideNavigation: ['SideNavigation', 'SideNavigationGroup', 'SideNavigationItem', 'SideNavigationSubItem'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

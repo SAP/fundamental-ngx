@@ -67,6 +67,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/search').then(configureLibRoutes)
     },
     {
+        path: 'shellbar',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/shellbar').then(configureLibRoutes)
+    },
+    {
         path: 'side-navigation',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/side-navigation').then(configureLibRoutes)
