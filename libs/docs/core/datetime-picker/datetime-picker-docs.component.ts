@@ -18,6 +18,7 @@ import { DatetimeFormExampleComponent } from './examples/datetime-form-example/d
 import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
 import { DatetimeMobileExampleComponent } from './examples/datetime-mobile/datetime-mobile-example.component';
 import { DatetimePickerComplexI18nExampleComponent } from './examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
+import { DatetimePickerLegendExample } from './examples/datetime-picker-legend-example/datetime-picker-legend-example';
 import { DateTimePickerUpdateOnBlurExampleComponent } from './examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component';
 import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
 
@@ -46,6 +47,8 @@ const dateTimeFormTs = 'datetime-form-example/datetime-form-example.component.ts
 const dateTimeMobileHtml = 'datetime-mobile/datetime-mobile-example.component.html';
 const dateTimeMobileTs = 'datetime-mobile/datetime-mobile-example.component.ts';
 
+const dateTimeLegend = 'datetime-picker-legend-example/datetime-picker-legend-example.ts';
+const dateTimeLegendHtml = 'datetime-picker-legend-example/datetime-picker-legend-example.html';
 @Component({
     selector: 'app-datetime-picker-docs',
     templateUrl: './datetime-picker-docs.component.html',
@@ -66,7 +69,8 @@ const dateTimeMobileTs = 'datetime-mobile/datetime-mobile-example.component.ts';
         DatetimePickerComplexI18nExampleComponent,
         DateTimePickerUpdateOnBlurExampleComponent,
         RouterLink,
-        DatetimeMobileExampleComponent
+        DatetimeMobileExampleComponent,
+        DatetimePickerLegendExample
     ]
 })
 export class DatetimePickerDocsComponent {
@@ -185,6 +189,21 @@ export class DatetimePickerDocsComponent {
             code: getAssetFromModuleAssets(dateTimeMobileHtml),
             fileName: 'datetime-mobile-example',
             component: 'DatetimeMobileExampleComponent'
+        }
+    ];
+
+    datetimeLegend: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(dateTimeLegend),
+            fileName: 'datetime-picker-legend-example',
+            component: 'DatetimePickerLegendExample'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dateTimeLegendHtml),
+            fileName: 'datetime-picker-legend-example',
+            component: 'DatetimePickerLegendExample'
         }
     ];
 }

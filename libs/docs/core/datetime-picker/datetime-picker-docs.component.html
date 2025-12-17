@@ -153,3 +153,42 @@
     <fd-datetime-mobile-example></fd-datetime-mobile-example>
 </component-example>
 <code-example [exampleFiles]="datetimeMobile"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="calendar-legend" componentName="datetime-picker"> Calendar Legend </fd-docs-section-title>
+<description>
+    <p>
+        The calendar legend feature displays a visual guide explaining what each special day marker means. Special days
+        are marked in the calendar with distinct colors and styles, while the legend below explains each marker type.
+        Enable the legend by setting <code>[showCalendarLegend]="true"</code> and providing
+        <code>specialDaysRules</code> to define which days should be marked and how they appear.
+    </p>
+    <p>
+        Focusing on legend items automatically highlights the corresponding days in the calendar, providing immediate
+        visual feedback and enhanced accessibility. The legend is keyboard navigable using arrow keys and integrates
+        seamlessly with the datetime picker's calendar view.
+    </p>
+
+    <h4>How to Use</h4>
+    <p>
+        Define your special days rules with a <code>specialDayNumber</code> (1-20) for the marker color, a
+        <code>rule</code> function that returns true for dates to mark, and <code>legendText</code> describing the
+        special day. Optionally set <code>appointment</code> to true for a circle marker. Customize the legend layout
+        with <code>[legendCol]="true"</code> for a single column or <code>[legendCol]="false"</code> for an auto-flowing
+        multi-column layout.
+    </p>
+
+    <h4>Special Day Properties</h4>
+    <ul>
+        <li><code>specialDayNumber</code>: Number 1-20 determining the marker color/style</li>
+        <li><code>rule</code>: Function that returns true for dates to mark</li>
+        <li><code>legendText</code>: Text displayed in the legend</li>
+        <li><code>appointment</code>: (Optional) If true, shows a small circle marker</li>
+    </ul>
+</description>
+
+<component-example>
+    <fd-datetime-picker-legend-example></fd-datetime-picker-legend-example>
+</component-example>
+<code-example [exampleFiles]="datetimeLegend"></code-example>

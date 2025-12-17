@@ -250,7 +250,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @hidden
      * Computed signal for the focused special day number
      */
-    protected readonly _focusedSpecialDayNumber = computed<Nullable<number>>(() => this.legendFocusedService?.focusedSpecialDayNumber() ?? null);
+    protected readonly _focusedSpecialDayNumber = computed<Nullable<number>>(
+        () => this.legendFocusedService?.focusedSpecialDayNumber() ?? null
+    );
 
     /** @hidden */
     private _selectedDate: Nullable<D>;

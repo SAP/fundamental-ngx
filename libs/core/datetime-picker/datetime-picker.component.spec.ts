@@ -185,6 +185,184 @@ describe('DatetimePickerComponent', () => {
         );
         expect(component.togglePopover).toHaveBeenCalled();
     });
+
+    describe('Calendar Legend Feature', () => {
+        beforeEach(() => {
+            component.isOpen = true;
+            component._showPopoverContents = true;
+        });
+
+        it('should pass showCalendarLegend to calendar component', () => {
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement).toBeTruthy();
+            expect(calendarElement.componentInstance.showCalendarLegend).toBe(true);
+        });
+
+        it('should pass legendCol to calendar component', () => {
+            fixture.componentRef.setInput('legendCol', true);
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement).toBeTruthy();
+            expect(calendarElement.componentInstance.legendCol).toBe(true);
+        });
+
+        it('should pass specialDaysRules to calendar component', () => {
+            const rules = [
+                { specialDayNumber: 1, rule: () => true, legendText: 'Day 1' },
+                { specialDayNumber: 2, rule: () => false, legendText: 'Day 2' }
+            ];
+            fixture.componentRef.setInput('specialDaysRules', rules);
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement.componentInstance.specialDaysRules).toEqual(rules);
+        });
+
+        it('should render legend inside calendar when showCalendarLegend is true', () => {
+            fixture.componentRef.setInput('specialDaysRules', [
+                { specialDayNumber: 1, rule: () => true, legendText: 'Special Day' }
+            ]);
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            fixture.detectChanges();
+
+            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
+            expect(calendarElement).toBeTruthy();
+            expect(calendarElement.componentInstance.showCalendarLegend).toBe(true);
+        });
+
+        it('should not render separate legend in DatetimePicker template', () => {
+            fixture.componentRef.setInput('specialDaysRules', [
+                { specialDayNumber: 1, rule: () => true, legendText: 'Special Day' }
+            ]);
+            fixture.componentRef.setInput('showCalendarLegend', true);
+            fixture.detectChanges();
+
+            // DatetimePicker should not render legend separately - Calendar does it
+            const dateTimePickerLegends = fixture.debugElement.queryAll(
+                By.css('fd-datetime-picker fd-calendar-legend')
+            );
+            expect(dateTimePickerLegends.length).toBe(0);
+        });
+
+        it('should default showCalendarLegend to false', () => {
+            fixture.detectChanges();
+
+            expect(component.showCalendarLegend()).toBe(false);
+        });
+
+        it('should default legendCol to false', () => {
+            fixture.detectChanges();
+
+            expect(component.legendCol()).toBe(false);
+        });
+    });
+
+    describe('Date and Time Integration', () => {
+        it('should combine date from calendar and time from time component on submit', () => {
+            const date = new FdDate(2024, 5, 15);
+            const time = new FdDate(2024, 1, 1, 14, 30, 45);
+
+            component._tempDate = date;
+            component._tempTime = time;
+            component.submit();
+
+            expect(component.date?.year).toBe(2024);
+            expect(component.date?.month).toBe(5);
+            expect(component.date?.day).toBe(15);
+            expect(component.date?.hour).toBe(14);
+            expect(component.date?.minute).toBe(30);
+            expect(component.date?.second).toBe(45);
+        });
+
+        it('should use current date if tempDate is invalid on submit', () => {
+            component._tempDate = null;
+            component._tempTime = new FdDate(2024, 1, 1, 10, 20, 30);
+
+            const today = new FdDate();
+            component.submit();
+
+            expect(component.date?.year).toBe(today.year);
+            expect(component.date?.month).toBe(today.month);
+            expect(component.date?.day).toBe(today.day);
+            expect(component.date?.hour).toBe(10);
+            expect(component.date?.minute).toBe(20);
+        });
+
+        it('should emit dateChange on submit', () => {
+            jest.spyOn(component, 'onChange');
+            const date = new FdDate(2024, 5, 15, 10, 30);
+            component._tempDate = date;
+            component._tempTime = date;
+
+            component.submit();
+
+            expect(component.onChange).toHaveBeenCalled();
+            expect(component.date).toBeDefined();
+        });
+    });
+
+    describe('Validation', () => {
+        it('should validate as invalid when date is invalid and allowNull is false', () => {
+            component.allowNull = false;
+            component._isInvalidDateInput = true;
+
+            const validationResult = component.validate();
+
+            expect(validationResult).toEqual({ dateValidation: { valid: false } });
+        });
+
+        it('should validate as valid when date is valid', () => {
+            component.date = new FdDate(2024, 5, 15);
+            component._isInvalidDateInput = false;
+
+            const validationResult = component.validate();
+
+            expect(validationResult).toBeNull();
+        });
+
+        it('should set isInvalidDateInput to true for invalid input', () => {
+            component.allowNull = false;
+            component.handleInputChange('invalid-date', true);
+
+            expect(component._isInvalidDateInput).toBe(true);
+        });
+    });
+
+    describe('Footer Behavior', () => {
+        it('should close popover on submit when showFooter is true', () => {
+            component.showFooter = true;
+            component.isOpen = true;
+            jest.spyOn(component, 'closePopover');
+
+            component.submit();
+
+            expect(component.closePopover).toHaveBeenCalled();
+        });
+
+        it('should not close popover on date change when showFooter is false', () => {
+            component.showFooter = false;
+            jest.spyOn(component, 'closePopover');
+
+            component.handleDateChange(new FdDate());
+
+            expect(component.closePopover).not.toHaveBeenCalled();
+        });
+
+        it('should restore date on cancel', () => {
+            const originalDate = new FdDate(2024, 5, 15);
+            component.date = originalDate;
+            component._tempDate = new FdDate(2024, 6, 20);
+
+            component.cancel();
+
+            expect(component._tempDate).toEqual(originalDate);
+        });
+    });
 });
 
 const DATE_TIME_PICKER_IDENTIFIER = 'core-date-time-picker-unit-test';

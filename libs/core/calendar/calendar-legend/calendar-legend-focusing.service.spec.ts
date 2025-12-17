@@ -21,23 +21,23 @@ describe('CalendarLegendFocusingService', () => {
         expect(service.focusedSpecialDayNumber()).toBeNull();
     });
 
-    describe('_handleLegendItemFocus', () => {
+    describe('handleLegendItemFocus', () => {
         it('should update focused special day number', () => {
-            service._handleLegendItemFocus(5);
+            service.handleLegendItemFocus(5);
 
             expect(service.focusedSpecialDayNumber()).toBe(5);
         });
 
         it('should update focused special day number to null', () => {
-            service._handleLegendItemFocus(5);
-            service._handleLegendItemFocus(null);
+            service.handleLegendItemFocus(5);
+            service.handleLegendItemFocus(null);
 
             expect(service.focusedSpecialDayNumber()).toBeNull();
         });
 
         it('should overwrite previous focused item', () => {
-            service._handleLegendItemFocus(5);
-            service._handleLegendItemFocus(10);
+            service.handleLegendItemFocus(5);
+            service.handleLegendItemFocus(10);
 
             expect(service.focusedSpecialDayNumber()).toBe(10);
         });
@@ -45,7 +45,7 @@ describe('CalendarLegendFocusingService', () => {
 
     describe('clearFocusedElement', () => {
         it('should clear focused special day number to null', () => {
-            service._handleLegendItemFocus(5);
+            service.handleLegendItemFocus(5);
             service.clearFocusedElement();
 
             expect(service.focusedSpecialDayNumber()).toBeNull();
@@ -77,7 +77,7 @@ describe('CalendarLegendFocusingService', () => {
             expect(lastValue).toBeNull();
 
             // Change the focused item
-            service._handleLegendItemFocus(5);
+            service.handleLegendItemFocus(5);
             TestBed.flushEffects();
 
             // Effect should run again
@@ -85,7 +85,7 @@ describe('CalendarLegendFocusingService', () => {
             expect(lastValue).toBe(5);
 
             // Change again
-            service._handleLegendItemFocus(10);
+            service.handleLegendItemFocus(10);
             TestBed.flushEffects();
 
             // Effect should run again
@@ -104,7 +104,7 @@ describe('CalendarLegendFocusingService', () => {
                 expect(derivedSignal()).toBe('none');
 
                 // Update the service signal
-                service._handleLegendItemFocus(7);
+                service.handleLegendItemFocus(7);
 
                 // Computed should update
                 expect(derivedSignal()).toBe('day-7');

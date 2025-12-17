@@ -153,24 +153,24 @@ describe('CalendarLegendComponent', () => {
 
     describe('focusing service integration', () => {
         it('should call focusing service when legend item is focused', () => {
-            jest.spyOn(focusingService, '_handleLegendItemFocus');
+            jest.spyOn(focusingService, 'handleLegendItemFocus');
 
             legendComponent._handleFocusedElementEvent(5);
 
-            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith(5);
+            expect(focusingService.handleLegendItemFocus).toHaveBeenCalledWith(5);
         });
 
         it('should pass null specialDayNumber when unfocusing', () => {
-            jest.spyOn(focusingService, '_handleLegendItemFocus');
+            jest.spyOn(focusingService, 'handleLegendItemFocus');
 
             legendComponent._handleFocusedElementEvent(null);
 
-            expect(focusingService._handleLegendItemFocus).toHaveBeenCalledWith(null);
+            expect(focusingService.handleLegendItemFocus).toHaveBeenCalledWith(null);
         });
 
         it('should update service state when called with null', () => {
             // First set a value
-            focusingService._handleLegendItemFocus(5);
+            focusingService.handleLegendItemFocus(5);
             expect(focusingService.focusedSpecialDayNumber()).toBe(5);
 
             // Then clear it via the component
