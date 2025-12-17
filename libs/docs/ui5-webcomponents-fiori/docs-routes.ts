@@ -63,6 +63,10 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/product-switch').then(configureLibRoutes)
     },
     {
+        path: 'search',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/search').then(configureLibRoutes)
+    },
+    {
         path: 'timeline',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/timeline').then(configureLibRoutes)
     }

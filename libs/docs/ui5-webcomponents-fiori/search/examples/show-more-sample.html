@@ -1,0 +1,29 @@
+<ui5-search placeholder="Search with grouped items..." [showClearIcon]="true">
+    <!-- TODO: figure out how to make headerText work -->
+    <ui5-search-item-group headerText="Recent Searches">
+        @for (item of visibleGroup1Items(); track item.id) {
+        <ui5-search-item
+            [text]="item.text"
+            [icon]="item.icon"
+            [deletable]="true"
+            (ui5Delete)="onDeleteItem(item.id)"
+        ></ui5-search-item>
+        } @if (showShowMore()) {
+        <ui5-search-item-show-more
+            [itemsToShowCount]="hiddenGroup1ItemsCount()"
+            (ui5Click)="onShowMoreClick()"
+        ></ui5-search-item-show-more>
+        }
+    </ui5-search-item-group>
+
+    <ui5-search-item-group headerText="Popular Items">
+        @for (item of group2Items(); track item.id) {
+        <ui5-search-item
+            [text]="item.text"
+            [icon]="item.icon"
+            [deletable]="true"
+            (ui5Delete)="onDeleteGroup2Item(item.id)"
+        ></ui5-search-item>
+        }
+    </ui5-search-item-group>
+</ui5-search>

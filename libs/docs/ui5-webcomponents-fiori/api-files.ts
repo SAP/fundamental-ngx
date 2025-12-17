@@ -16,5 +16,6 @@ export const API_FILES = {
     navigationLayout: ['NavigationLayout'],
     page: ['Page'],
     productSwitch: ['ProductSwitch', 'ProductSwitchItem'],
+    search: ['Search', 'SearchItem', 'SearchItemGroup', 'SearchItemShowMore', 'SearchMessageArea', 'SearchScope'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
 };

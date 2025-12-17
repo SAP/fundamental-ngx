@@ -1,7 +1,7 @@
 {
-    "name": "docs-ui5-webcomponents-fiori-product-switch",
+    "name": "docs-ui5-webcomponents-fiori-search",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/docs/ui5-webcomponents-fiori/product-switch",
+    "sourceRoot": "libs/docs/ui5-webcomponents-fiori/search",
     "prefix": "ui5-doc",
     "projectType": "library",
     "tags": ["type:lib", "scope:docs"],
