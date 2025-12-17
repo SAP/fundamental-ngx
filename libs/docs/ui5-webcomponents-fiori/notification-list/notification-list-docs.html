@@ -1,0 +1,86 @@
+<fd-docs-section-title id="basic" componentName="notification-list"> Basic Notification List </fd-docs-section-title>
+<description>
+    The notification list component displays a list of notifications to users. Each notification is represented by a
+    <code>ui5-li-notification</code> component that contains a title, description, and optional avatar. Users can click
+    on notifications to view details or close them using the close button. Use the <code>ui5ItemClick</code> event to
+    handle notification clicks and <code>ui5ItemClose</code> to handle notification dismissals.
+</description>
+<component-example>
+    <ui5-doc-notification-list-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="states-importance" componentName="notification-list">
+    States and Importance Levels
+</fd-docs-section-title>
+<description>
+    Notification list items support different states and importance levels to provide visual feedback:
+    <ul>
+        <li>
+            <strong>States: </strong><code>None</code>, <code>Positive</code>, <code>Critical</code>,
+            <code>Negative</code>, and <code>Information</code> - Use states to indicate the semantic meaning or urgency
+            of the notification
+        </li>
+        <li>
+            <strong>Importance: </strong><code>Standard</code> and <code>Important</code> - Use importance levels to
+            prioritize notifications and help users identify which ones require immediate attention
+        </li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-notification-list-states-sample />
+</component-example>
+<code-example [exampleFiles]="statesExample()" />
+
+<separator />
+
+<fd-docs-section-title id="read-unread" componentName="notification-list">
+    Read and Unread States
+</fd-docs-section-title>
+<description>
+    Notifications can be marked as read or unread using the <code>read</code> property. Unread notifications are
+    displayed with bold title text to draw attention. This is useful for helping users track which notifications they've
+    already seen. Click on a notification to mark it as read, or implement a "Mark all as read" feature for bulk
+    operations.
+</description>
+<component-example>
+    <ui5-doc-notification-list-read-sample />
+</component-example>
+<code-example [exampleFiles]="readExample()" />
+
+<separator />
+
+<fd-docs-section-title id="actions" componentName="notification-list"> Notification Actions </fd-docs-section-title>
+<description>
+    Notifications can include action menus using the <code>menu</code> slot. Add a <code>ui5-menu</code> component with
+    <code>ui5-menu-item</code> children to provide contextual actions for each notification. This is useful for
+    workflows like approving requests, viewing details, or taking other notification-specific actions.
+</description>
+<component-example>
+    <ui5-doc-notification-list-actions-sample />
+</component-example>
+<code-example [exampleFiles]="actionsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="group-items" componentName="notification-list"> Group Items </fd-docs-section-title>
+<description>
+    The notification list supports grouping of related notifications to provide a more organized view:
+    <ul>
+        <li>
+            <strong>Group by:</strong> Notifications can be grouped by various criteria such as type, sender, or
+            project.
+        </li>
+        <li>
+            <strong>Expand/Collapse:</strong> Users can expand or collapse groups to manage their view and focus on
+            specific notifications.
+        </li>
+    </ul>
+    Use grouping to enhance the user experience and make it easier to process notifications.
+</description>
+<component-example>
+    <ui5-doc-notification-list-group-items-sample />
+</component-example>
+<code-example [exampleFiles]="groupItemsExample()" />

@@ -1,0 +1,30 @@
+<div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem">
+        <h4 style="margin: 0">
+            Notifications @if (unreadCount() > 0) {
+            <span
+                style="
+                    background: var(--sapButton_Emphasized_Background);
+                    color: var(--sapButton_Emphasized_TextColor);
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 12px;
+                    font-size: 0.75rem;
+                    margin-left: 0.5rem;
+                "
+            >
+                {{ unreadCount() }}
+            </span>
+            }
+        </h4>
+        <ui5-button design="Emphasized" (ui5Click)="markAllAsRead()">Mark All as Read</ui5-button>
+    </div>
+
+    <ui5-notification-list (ui5ItemClick)="onItemClick($event)">
+        @for (notification of notifications(); track notification.id) {
+        <ui5-li-notification [titleText]="notification.title" [read]="notification.read" [showClose]="true">
+            <ui5-avatar slot="avatar" [icon]="notification.icon" size="XS" />
+            {{ notification.description }}
+        </ui5-li-notification>
+        }
+    </ui5-notification-list>
+</div>
