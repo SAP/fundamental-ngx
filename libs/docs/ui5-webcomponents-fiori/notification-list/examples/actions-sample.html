@@ -1,0 +1,54 @@
+<ui5-notification-list>
+    <ui5-li-notification titleText="New Purchase Order" [read]="false" [showClose]="true">
+        <ui5-avatar slot="avatar" icon="cart" size="XS" colorScheme="Accent1" />
+        <span slot="footnotes">Office Notifications</span>
+        <span slot="footnotes">3 Days</span>
+        <ui5-menu slot="menu" (ui5ItemClick)="onMenuItemClick($event)">
+            <ui5-menu-item text="Approve" />
+            <ui5-menu-item text="Reject" />
+            <ui5-menu-item text="View Details" />
+        </ui5-menu>
+        Purchase Order #PO-2024-001 requires your approval.
+    </ui5-li-notification>
+
+    <ui5-li-notification
+        titleText="Leave Request"
+        [read]="false"
+        [showClose]="true"
+        [importance]="importance().Important"
+    >
+        <ui5-avatar slot="avatar" icon="user-edit" size="XS" colorScheme="Accent2" />
+        <span slot="footnotes">Office Notifications</span>
+        <span slot="footnotes">3 Days</span>
+        <ui5-menu slot="menu" (ui5ItemClick)="onMenuItemClick($event)">
+            <ui5-menu-item text="Approve" />
+            <ui5-menu-item text="Decline" />
+            <ui5-menu-item text="Request More Info" />
+        </ui5-menu>
+        Sarah Johnson has requested leave from Dec 20-25.
+    </ui5-li-notification>
+
+    <ui5-li-notification titleText="Document Shared" [read]="true" [showClose]="true">
+        <ui5-avatar slot="avatar" icon="share" size="XS" colorScheme="Accent3" />
+        <span slot="footnotes">Office Notifications</span>
+        <span slot="footnotes">3 Days</span>
+        <ui5-menu slot="menu" (ui5ItemClick)="onMenuItemClick($event)">
+            <ui5-menu-item text="Open Document" />
+            <ui5-menu-item text="Download" />
+            <ui5-menu-item text="Share with Others" />
+        </ui5-menu>
+        Q4 Financial Report.pdf has been shared with you.
+    </ui5-li-notification>
+
+    <ui5-li-notification titleText="Task Assignment" [read]="false" [showClose]="true" state="Information">
+        <ui5-avatar slot="avatar" icon="task" size="XS" colorScheme="Accent4" />
+        <span slot="footnotes">Office Notifications</span>
+        <span slot="footnotes">3 Days</span>
+        <ui5-menu slot="menu" (ui5ItemClick)="onMenuItemClick($event)">
+            <ui5-menu-item text="Accept" />
+            <ui5-menu-item text="Reassign" />
+            <ui5-menu-item text="View Task" />
+        </ui5-menu>
+        You have been assigned to "Website Redesign Project".
+    </ui5-li-notification>
+</ui5-notification-list>

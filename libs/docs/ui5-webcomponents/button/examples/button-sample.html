@@ -3,7 +3,7 @@
     <ui5-button (ui5Click)="onButtonClick($event, 'Basic Button')">Basic Button</ui5-button>
     <ui5-button disabled="true">Disabled Button</ui5-button>
     <ui5-button icon="home" (ui5Click)="onButtonClick($event, 'Icon Button')">Button with Icon</ui5-button>
-    <ui5-button icon="home" tooltip="Home Button" aria-label="Home"></ui5-button>
+    <ui5-button icon="home" tooltip="Home Button" accessibleName="Home"></ui5-button>
 </section>
 
 <section aria-labelledby="button-designs">
@@ -32,26 +32,26 @@
     <ui5-button
         icon="add"
         tooltip="Add item"
-        aria-label="Add"
+        accessibleName="Add"
         (ui5Click)="onButtonClick($event, 'Add Icon Only')"
     ></ui5-button>
     <ui5-button
         icon="delete"
         tooltip="Delete item"
-        aria-label="Delete"
+        accessibleName="Delete"
         design="Negative"
         (ui5Click)="onButtonClick($event, 'Delete Icon Only')"
     ></ui5-button>
     <ui5-button
         icon="settings"
         tooltip="Settings"
-        aria-label="Settings"
+        accessibleName="Settings"
         (ui5Click)="onButtonClick($event, 'Settings Icon Only')"
     ></ui5-button>
     <ui5-button
         icon="search"
         tooltip="Search"
-        aria-label="Search"
+        accessibleName="Search"
         design="Transparent"
         (ui5Click)="onButtonClick($event, 'Search Icon Only')"
     ></ui5-button>
@@ -77,10 +77,9 @@
 <section aria-labelledby="button-accessibility">
     <h2 id="button-accessibility">Accessibility Examples</h2>
     <ui5-button
-        accessibleName="Close dialog"
         icon="decline"
         tooltip="Close"
-        aria-label="Close dialog"
+        accessibleName="Close dialog"
         (ui5Click)="onButtonClick($event, 'Close Dialog')"
     >
     </ui5-button>
