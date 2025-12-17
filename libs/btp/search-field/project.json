@@ -1,9 +1,0 @@
-{
-    "name": "btp-search-field",
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/btp/search-field/src",
-    "projectType": "library",
-    "tags": ["scope:fdb", "type:lib"],
-    "// targets": "to see all targets run: nx show project btp-search-field --web",
-    "targets": {}
-}

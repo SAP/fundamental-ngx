@@ -1,9 +1,0 @@
-{
-    "name": "btp-shared",
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/btp/shared/src",
-    "projectType": "library",
-    "tags": ["scope:fdb", "type:lib"],
-    "// targets": "to see all targets run: nx show project btp-shared --web",
-    "targets": {}
-}
