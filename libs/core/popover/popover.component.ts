@@ -174,7 +174,7 @@ export class PopoverComponent
 
     /** Handler escape keydown */
     @HostListener('keydown.escape', ['$event'])
-    escapeKeydownHandler(event: KeyboardEvent): void {
+    escapeKeydownHandler(event: Event): void {
         if (this.closeOnEscapeKey && this.isOpen) {
             // In case if popover belongs to the element inside dialog
             event.preventDefault();
@@ -186,7 +186,7 @@ export class PopoverComponent
     /** @hidden */
     @HostListener('keydown.space', ['$event'])
     @HostListener('keydown.enter', ['$event'])
-    onKeyDown(event: KeyboardEvent): void {
+    onKeyDown(event: Event): void {
         if (!this.preventSpaceKeyScroll) {
             return;
         }

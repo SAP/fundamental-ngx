@@ -371,7 +371,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** @hidden */
-    private _focusOut(event: FocusEvent): void {
+    protected _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }

@@ -120,7 +120,7 @@ export class ButtonComponent
 
     /** Forces the focus outline around the button, which is not default behavior in Safari. */
     @HostListener('click', ['$event'])
-    clicked(event: MouseEvent): void {
+    clicked(event: Event): void {
         const target = event?.target as HTMLElement;
         // Target can be empty during unit tests execution.
         if (target && document.activeElement !== target) {

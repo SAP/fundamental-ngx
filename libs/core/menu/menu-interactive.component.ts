@@ -88,7 +88,7 @@ export class MenuInteractiveComponent implements HasElementRef {
     /** @hidden */
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
-    _handleKeydown($event: KeyboardEvent): void {
+    _handleKeydown($event: Event): void {
         if (this._input && $event.target === this.elementRef.nativeElement) {
             this._input.elementRef.nativeElement.focus();
         }

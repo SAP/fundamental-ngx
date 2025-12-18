@@ -102,7 +102,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     }
 
     /** Handler for mouse events */
-    @HostListener('click', ['$event'])
+    @HostListener('click')
     onClick(): void {
         this.clicked.next({
             shouldClose: this.isCloseButton
