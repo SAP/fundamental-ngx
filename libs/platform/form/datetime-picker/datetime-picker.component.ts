@@ -1,19 +1,21 @@
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
     EventEmitter,
+    inject,
+    input,
     Input,
     Output,
-    ViewChild,
-    inject
+    ViewChild
 } from '@angular/core';
 import { FormsModule, NgControl } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView, FdCalendarViewEnum } from '@fundamental-ngx/core/calendar';
-import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
@@ -238,6 +240,21 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     /** @hidden */
     @ViewChild(DatetimePickerComponent, { static: true, read: NgControl })
     protected _control: NgControl;
+
+    /**
+     * Whether to show the calendar legend for special days.
+     * When enabled, displays a legend below the calendar showing the special day markers and their descriptions.
+     * @default false
+     */
+    showCalendarLegend = input(false, { transform: booleanAttribute });
+
+    /**
+     * Whether to display the calendar legend in column layout.
+     * When true, legend items are displayed vertically in a single column.
+     * When false, legend items are displayed horizontally in rows.
+     * @default false
+     */
+    legendCol = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     get _isRequired(): boolean {

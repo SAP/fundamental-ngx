@@ -94,3 +94,42 @@
     <fdp-platform-date-picker-mobile-example></fdp-platform-date-picker-mobile-example>
 </component-example>
 <code-example [exampleFiles]="datePickerMobile"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="calendar-legend" componentName="date-picker"> Calendar Legend </fd-docs-section-title>
+<description>
+    The Date Picker can display a legend for special days by configuring the following properties:
+    <ul>
+        <li>
+            <code>[specialDaysRules]</code> - An array of <code>SpecialDayRule</code> objects that define which days
+            should be marked with special styling. Each rule contains:
+            <ul>
+                <li><code>specialDayNumber</code> - A number between 1-20 that determines the marker style</li>
+                <li><code>rule</code> - A function that receives a date and returns true if it should be marked</li>
+                <li><code>legendText</code> - The descriptive text shown in the legend for this special day type</li>
+            </ul>
+        </li>
+        <li><code>[showCalendarLegend]</code> - Set to <code>true</code> to display the legend below the calendar</li>
+        <li>
+            <code>[legendCol]</code> - Set to <code>true</code> to display the legend in a column layout (vertically),
+            or <code>false</code> for a row layout (horizontally)
+        </li>
+    </ul>
+
+    <h3>How to Use</h3>
+    <ol>
+        <li>Define your special day rules in the component using the <code>SpecialDayRule</code> interface</li>
+        <li>Pass the rules array to the date picker's <code>specialDaysRules</code> input</li>
+        <li>Enable the legend by setting <code>showCalendarLegend</code> to <code>true</code></li>
+        <li>Optionally, set <code>legendCol</code> to <code>true</code> for a vertical column layout</li>
+    </ol>
+
+    <h3>Special Day Properties</h3>
+    The <code>specialDayNumber</code> property can be any number from 1 to 20, with each number corresponding to a
+    different visual marker style. Common uses include marking holidays, deadlines, meetings, or other important dates.
+</description>
+
+<component-example>
+    <fdp-date-picker-legend-example></fdp-date-picker-legend-example>
+</component-example>
+<code-example [exampleFiles]="datepickerLegend"></code-example>
