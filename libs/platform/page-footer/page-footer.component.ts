@@ -37,7 +37,7 @@ export class PlatformFooterComponent {
     }
 
     /** @hidden */
-    @HostListener('window:resize', ['$event'])
+    @HostListener('window:resize')
     onResize(): void {
         this.screenWidth = window.innerWidth;
         if (this.screenWidth > 0 && this.screenWidth <= 360) {

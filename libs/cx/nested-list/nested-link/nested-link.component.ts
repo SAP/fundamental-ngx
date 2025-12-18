@@ -109,8 +109,8 @@ export class NestedLinkComponent {
 
     /** Handler for keyboard events */
     @HostListener('keydown', ['$event'])
-    onKeyDown(event: KeyboardEvent): void {
-        this._itemService.keyDown.next(event);
+    onKeyDown(event: Event): void {
+        this._itemService.keyDown.next(event as KeyboardEvent);
     }
 
     /** Handler for mouse events */

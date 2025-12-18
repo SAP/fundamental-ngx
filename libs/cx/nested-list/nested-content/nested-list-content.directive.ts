@@ -88,7 +88,7 @@ export class NestedListContentDirective implements AfterContentInit {
     }
 
     /** Handler for mouse events */
-    @HostListener('click', ['$event'])
+    @HostListener('click')
     onClick(): void {
         this._itemService.click.next();
     }

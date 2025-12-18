@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Button } from './ai-button';
-import { ButtonState } from './ai-button-state';
-import { PromptInput } from './ai-prompt-input';
+import { Button } from './button';
+import { ButtonState } from './button-state';
+import { PromptInput } from './prompt-input';
 
 @NgModule({
     imports: [Button, ButtonState, PromptInput],

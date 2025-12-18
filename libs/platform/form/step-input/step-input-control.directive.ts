@@ -20,7 +20,7 @@ export class StepInputControlDirective {
      * Handle "input" event to keep track of what user is entering
      */
     @HostListener('input', ['$event'])
-    onInput(event: InputEvent): void {
+    onInput(event: Event): void {
         if (!this.stepInput.canChangeValue) {
             return;
         }

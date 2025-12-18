@@ -226,8 +226,8 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * when the user presses `Ctrl + K` or `Cmd + K` keys
      * @hidden
      **/
-    @HostListener('document:keydown.control.k', ['$event'])
-    @HostListener('document:keydown.meta.k', ['$event'])
+    @HostListener('document:keydown.control.k')
+    @HostListener('document:keydown.meta.k')
     _onKeyDown(): void {
         if (this._mode$() === 'tablet' && this._orientation$() === 'portrait' && this._searchField$()) {
             this._searchFieldExpanded$.set(true);
