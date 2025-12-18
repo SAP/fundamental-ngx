@@ -1,0 +1,87 @@
+<ui5-notification-list>
+    <ui5-li-notification-group titleText="Orders">
+        <ui5-li-notification
+            importance="Important"
+            titleText="New order (#2525) With a very long title - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc."
+            state="Positive"
+            [showClose]="true"
+        >
+            <ui5-avatar icon="employee" size="XS" slot="avatar"></ui5-avatar>
+            <span slot="footnotes">Office Notifications</span>
+            <span slot="footnotes">3 Days</span>
+            <ui5-menu slot="menu">
+                <ui5-menu-item icon="accept" text="Accept"></ui5-menu-item>
+                <ui5-menu-item icon="message-error" text="Reject"></ui5-menu-item>
+            </ui5-menu>
+            And with a very long description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc.
+        </ui5-li-notification>
+        <ui5-li-notification
+            titleText="New order (#2526) With a very long title - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc."
+            state="Critical"
+            [showClose]="true"
+        >
+            <ui5-avatar icon="employee" size="XS" slot="avatar"></ui5-avatar>
+            <span slot="footnotes">Office Notifications</span>
+            <span slot="footnotes">3 Days</span>
+            <ui5-menu slot="menu">
+                <ui5-menu-item icon="message-error" text="Reject"></ui5-menu-item>
+                <ui5-menu-item icon="accept" text="Accept"></ui5-menu-item>
+            </ui5-menu>
+            And with a very long description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc.
+        </ui5-li-notification>
+    </ui5-li-notification-group>
+    <ui5-li-notification-group titleText="Deliveries" collapsed>
+        <ui5-li-notification
+            titleText="New Delivery (#2900) With a very long title - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc."
+            state="Information"
+            [showClose]="true"
+        >
+            <ui5-avatar icon="employee" size="XS" slot="avatar"></ui5-avatar>
+            <span slot="footnotes">Office Notifications</span>
+            <span slot="footnotes">3 Days</span>
+            <ui5-menu slot="menu">
+                <ui5-menu-item icon="accept" text="Accept"></ui5-menu-item>
+            </ui5-menu>
+            And with a very long description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc.
+        </ui5-li-notification>
+
+        <ui5-li-notification
+            titleText="New Delivery (#29001) With a very long title - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc."
+            state="None"
+            [showClose]="true"
+        >
+            <ui5-avatar icon="employee" size="XS" slot="avatar"></ui5-avatar>
+            <span slot="footnotes">Office Notifications</span>
+            <span slot="footnotes">3 Days</span>
+            <ui5-menu slot="menu">
+                <ui5-menu-item icon="accept" text="Accept"></ui5-menu-item>
+            </ui5-menu>
+            And with a very long description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc.
+        </ui5-li-notification>
+    </ui5-li-notification-group>
+
+    <ui5-li-notification-group
+        [collapsed]="true"
+        titleText="Meetings With a very long title - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc."
+    >
+        <ui5-li-notification [showClose]="true" titleText="New meeting at Building (#35001)" state="Positive" read>
+            <ui5-avatar icon="employee" size="XS" slot="avatar"></ui5-avatar>
+            <span slot="footnotes">Office Notifications</span>
+            <span slot="footnotes">3 Days</span>
+            And with a very long description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc.
+        </ui5-li-notification>
+
+        <ui5-li-notification [showClose]="true" titleText="New meeting at Building (#35001)" state="Information" read>
+            <ui5-avatar icon="employee" size="XS" slot="avatar"></ui5-avatar>
+            <span slot="footnotes">Office Notifications</span>
+            <span slot="footnotes">3 Days</span>
+            And with a very long description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            feugiat, turpis vel scelerisque pharetra, tellus odio vehicula dolor, nec elementum lectus turpis at nunc.
+        </ui5-li-notification>
+    </ui5-li-notification-group>
+</ui5-notification-list>

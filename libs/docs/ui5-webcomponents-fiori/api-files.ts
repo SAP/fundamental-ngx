@@ -14,6 +14,7 @@ export const API_FILES = {
     illustratedMessage: ['IllustratedMessage'],
     mediaGallery: ['MediaGallery'],
     navigationLayout: ['NavigationLayout'],
+    notificationList: ['NotificationList', 'NotificationListGroupItem', 'NotificationListItem'],
     page: ['Page'],
     productSwitch: ['ProductSwitch', 'ProductSwitchItem'],
     search: ['Search', 'SearchItem', 'SearchItemGroup', 'SearchItemShowMore', 'SearchMessageArea', 'SearchScope'],
