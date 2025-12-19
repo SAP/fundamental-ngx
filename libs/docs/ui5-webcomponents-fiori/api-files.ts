@@ -20,5 +20,6 @@ export const API_FILES = {
     search: ['Search', 'SearchItem', 'SearchItemGroup', 'SearchItemShowMore', 'SearchMessageArea', 'SearchScope'],
     shellBar: ['ShellBar', 'ShellBarBranding', 'ShellBarItem', 'ShellBarSearch', 'ShellBarSpacer'],
     sideNavigation: ['SideNavigation', 'SideNavigationGroup', 'SideNavigationItem', 'SideNavigationSubItem'],
-    timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
+    timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem'],
+    uploadCollection: ['UploadCollection', 'UploadCollectionItem']
 };

@@ -83,6 +83,11 @@ const componentRoutes = [
     {
         path: 'timeline',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/timeline').then(configureLibRoutes)
+    },
+    {
+        path: 'upload-collection',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/upload-collection').then(configureLibRoutes)
     }
 ];
 

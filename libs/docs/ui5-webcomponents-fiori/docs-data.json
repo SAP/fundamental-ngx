@@ -61,6 +61,10 @@
         {
             "url": "ui5-webcomponents-fiori/timeline",
             "name": "Timeline"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/upload-collection",
+            "name": "Upload Collection"
         }
     ]
 }
