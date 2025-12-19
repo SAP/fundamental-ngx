@@ -1,5 +1,7 @@
 import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
 
+const UI5_ELEMENT = 'UI5Element';
+
 function kebabToCamelCase(s: string): string {
     return s.replace(/-./g, (x) => x[1].toUpperCase());
 }
@@ -230,12 +232,12 @@ function generateSlotsDocumentation(data: CEM.CustomElementDeclaration): string 
     return `
   /**
    * Available slots for content projection in this component.
-   * 
+   *
    * Slots allow you to insert custom content into predefined areas of the web component.
    * Use the \`slot\` attribute on child elements to target specific slots.
-   * 
+   *
 ${slotDocs.join('\n')}
-   * 
+   *
    * @example
    * \`\`\`html
    * <${data.tagName}>
@@ -243,7 +245,7 @@ ${slotDocs.join('\n')}
    *   <p>Default slot content</p>
    * </${data.tagName}>
    * \`\`\`
-   * 
+   *
    * @readonly
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots | MDN Web Components Slots}
    */
@@ -286,19 +288,100 @@ function generateTypeExports(data: CEM.CustomElementDeclaration, packageName: st
     return typeExports.length > 0 ? `\n// Re-export types for convenience\n${typeExports.join('\n')}` : '';
 }
 
+/**
+ * Recursively collects all members from a class and its parent classes.
+ * This ensures that inherited properties, events, and slots are included in the generated component.
+ */
+function collectInheritedMembers(
+    data: CEM.CustomElementDeclaration,
+    allDeclarations: CEM.CustomElementDeclaration[]
+): {
+    allMembers: CEM.ClassMember[];
+    allEvents: CEM.Event[];
+    allSlots: any[];
+} {
+    const allMembers: CEM.ClassMember[] = [...(data.members || [])];
+    const allEvents: CEM.Event[] = [...(data.events || [])];
+    const allSlots: any[] = [...((data as any).slots || [])];
+    const processedClasses = new Set<string>([data.name]);
+
+    let currentClass = data;
+
+    // Traverse the inheritance chain
+    while (currentClass.superclass) {
+        const superclassName = currentClass.superclass.name;
+
+        // We don't want our Angular classes to extend UI5_ELEMENT class
+        if (processedClasses.has(superclassName) || superclassName === UI5_ELEMENT) {
+            break;
+        }
+        processedClasses.add(superclassName);
+
+        // Find the parent class declaration
+        const parentClass = allDeclarations.find((decl) => decl.name === superclassName && decl.customElement);
+
+        if (!parentClass) {
+            break;
+        }
+
+        // Add parent members (avoid duplicates by name)
+        const existingMemberNames = new Set(allMembers.map((m) => m.name));
+        (parentClass.members || []).forEach((member) => {
+            if (!existingMemberNames.has(member.name)) {
+                allMembers.push(member);
+                existingMemberNames.add(member.name);
+            }
+        });
+
+        // Add parent events (avoid duplicates by name)
+        const existingEventNames = new Set(allEvents.map((e) => e.name));
+        (parentClass.events || []).forEach((event) => {
+            if (!existingEventNames.has(event.name)) {
+                allEvents.push(event);
+                existingEventNames.add(event.name);
+            }
+        });
+
+        // Add parent slots (avoid duplicates by name)
+        const existingSlotNames = new Set(allSlots.map((s) => s.name));
+        ((parentClass as any).slots || []).forEach((slot: any) => {
+            if (!existingSlotNames.has(slot.name)) {
+                allSlots.push(slot);
+                existingSlotNames.add(slot.name);
+            }
+        });
+
+        currentClass = parentClass;
+    }
+
+    return { allMembers, allEvents, allSlots };
+}
+
 /** Generate the Angular component wrapper. */
 export function componentTemplate(
     data: CEM.CustomElementDeclaration,
     allEnums: { name: string; members: string[] }[],
-    packageName: string
+    packageName: string,
+    allDeclarations: CEM.CustomElementDeclaration[] = []
 ): string {
-    const { componentImports, componentEnums } = generateTypeImports(data, allEnums);
+    // Collect all members including inherited ones
+    const { allMembers, allEvents, allSlots } = collectInheritedMembers(data, allDeclarations);
+
+    // Create an enriched data object with inherited members
+    const enrichedData: CEM.CustomElementDeclaration = {
+        ...data,
+        members: allMembers,
+        events: allEvents,
+        slots: allSlots
+    } as any;
+
+    const { componentImports, componentEnums } = generateTypeImports(enrichedData, allEnums);
     const tagName = data.tagName || '';
     const className = data.name;
-    const typeExports = generateTypeExports(data, packageName);
-    const { readonlyProperties, privateProperties } = generateProperties(data);
-    const outputEvents = data.events || [];
-    const shouldHostCVA = hasCvaHostDirective(data); // false; // Temporarily disabled to validate build
+    const typeExports = generateTypeExports(enrichedData, packageName);
+    const { readonlyProperties, privateProperties } = generateProperties(enrichedData);
+    const outputEvents = allEvents;
+    const shouldHostCVA = hasCvaHostDirective(enrichedData); // false; // Temporarily disabled to validate build
 
     // Add CVA hostDirective property only if needed
     const cvaHostDirective = shouldHostCVA ? `  hostDirectives: [GenericControlValueAccessor],\n` : '';
@@ -308,7 +391,7 @@ export function componentTemplate(
         ? `import { GenericControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`
         : '';
 
-    const inputMembers = (data.members ?? []).filter(isField);
+    const inputMembers = allMembers.filter(isField);
 
     // Prepare string array of Web Component's kebab-case property names for synchronization
     const inputsToSyncCode =
@@ -357,7 +440,7 @@ ${outputEvents
             : '';
 
     // Generate readonly property signal updates for events
-    const readonlyMembers = (data.members ?? []).filter(isReadonlyField);
+    const readonlyMembers = allMembers.filter(isReadonlyField);
     const readonlySignalUpdates = readonlyMembers
         .filter((member) =>
             // Only include members that have related events with parameters
@@ -434,11 +517,11 @@ ${cvaHostDirective}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
-${generateInputs(data, componentEnums, className)} // className is now passed
+${generateInputs(enrichedData, componentEnums, className)}
 ${readonlyProperties}
 
-${generateOutputs(data, className)}
-${generateSlotsDocumentation(data)}
+${generateOutputs(enrichedData, className)}
+${generateSlotsDocumentation(enrichedData)}
 
   public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
@@ -457,7 +540,7 @@ ${(() => {
     const signalInits = readonlyMembers
         .filter((member) =>
             // Only initialize signals for members that have related events
-            (data.events || []).some((event) => event._ui5parameters?.some((param) => param.name === member.name))
+            allEvents.some((event) => event._ui5parameters?.some((param) => param.name === member.name))
         )
         .map((member) => {
             const camelCaseName = kebabToCamelCase(member.name);
