@@ -123,7 +123,6 @@ export class ModifyItemEvent {
     selector: '[fdpItemDef]',
     standalone: true
 })
- 
 export class ListItemDef implements ItemDef {
     /** @hidden */
     constructor(/** @docs-private */ public templateRef: TemplateRef<any>) {}
