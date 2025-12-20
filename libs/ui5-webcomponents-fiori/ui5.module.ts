@@ -8,12 +8,12 @@ import { FilterItem } from './filter-item';
 import { FilterItemOption } from './filter-item-option';
 import { FlexibleColumnLayout } from './flexible-column-layout';
 import { IllustratedMessage } from './illustrated-message';
+import { NotificationListItem } from './li-notification';
+import { NotificationListGroupItem } from './li-notification-group';
 import { MediaGallery } from './media-gallery';
 import { MediaGalleryItem } from './media-gallery-item';
 import { NavigationLayout } from './navigation-layout';
 import { NotificationList } from './notification-list';
-import { NotificationListGroupItem } from './notification-list-group-item';
-import { NotificationListItem } from './notification-list-item';
 import { Page } from './page';
 import { ProductSwitch } from './product-switch';
 import { ProductSwitchItem } from './product-switch-item';
@@ -22,11 +22,11 @@ import { SearchItem } from './search-item';
 import { SearchItemGroup } from './search-item-group';
 import { SearchMessageArea } from './search-message-area';
 import { SearchScope } from './search-scope';
-import { ShellBar } from './shell-bar';
-import { ShellBarBranding } from './shell-bar-branding';
-import { ShellBarItem } from './shell-bar-item';
-import { ShellBarSearch } from './shell-bar-search';
-import { ShellBarSpacer } from './shell-bar-spacer';
+import { ShellBar } from './shellbar';
+import { ShellBarBranding } from './shellbar-branding';
+import { ShellBarItem } from './shellbar-item';
+import { ShellBarSearch } from './shellbar-search';
+import { ShellBarSpacer } from './shellbar-spacer';
 import { SideNavigation } from './side-navigation';
 import { SideNavigationGroup } from './side-navigation-group';
 import { SideNavigationItem } from './side-navigation-item';
@@ -113,6 +113,8 @@ import { WizardStep } from './wizard-step';
         MediaGalleryItem,
         NavigationLayout,
         NotificationList,
+        NotificationListGroupItem,
+        NotificationListItem,
         Page,
         ProductSwitch,
         ProductSwitchItem,
@@ -122,8 +124,14 @@ import { WizardStep } from './wizard-step';
         SearchMessageArea,
         SearchScope,
         ShellBar,
+        ShellBarBranding,
         ShellBarItem,
+        ShellBarSearch,
         ShellBarSpacer,
+        SideNavigation,
+        SideNavigationGroup,
+        SideNavigationItem,
+        SideNavigationSubItem,
         SortItem,
         Timeline,
         TimelineGroupItem,
