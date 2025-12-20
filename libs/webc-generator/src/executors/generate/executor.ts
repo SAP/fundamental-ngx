@@ -179,8 +179,9 @@ async function generateComponentFiles(
     allEnums: ExtractedCemData['allEnums'],
     packageName: string,
     targetDir: string
-): Promise<string[]> {
+): Promise<{ componentExports: string[]; componentInfo: Array<{ className: string; folderName: string }> }> {
     const componentExports: string[] = [];
+    const componentInfo: Array<{ className: string; folderName: string }> = [];
 
     await Promise.all(
         componentDeclarations.map(({ declaration }) => {
@@ -193,6 +194,7 @@ async function generateComponentFiles(
             }
 
             componentExports.push(`export { ${className} } from './${fileName}';`);
+            componentInfo.push({ className, folderName: fileName });
 
             const componentIndexPath = path.join(componentDir, FILES.INDEX_TS);
             const ngPackagePath = path.join(componentDir, FILES.NG_PACKAGE_JSON);
@@ -209,7 +211,7 @@ async function generateComponentFiles(
         })
     );
 
-    return componentExports;
+    return { componentExports, componentInfo };
 }
 
 /**
@@ -236,6 +238,45 @@ async function generateUtilsFiles(targetDir: string): Promise<void> {
     // Generate utils/ng-package.json
     const ngPackagePath = path.join(targetDir, SUBDIRS.UTILS, FILES.NG_PACKAGE_JSON);
     await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
+}
+
+/**
+ * Generates the ui5.module.ts file with NgModule exports.
+ */
+async function generateUi5Module(
+    componentInfo: Array<{ className: string; folderName: string }>,
+    targetDir: string
+): Promise<void> {
+    // Sort components alphabetically by class name
+    const sortedComponents = [...componentInfo].sort((a, b) => a.className.localeCompare(b.className));
+
+    // Generate imports
+    const imports = sortedComponents
+        .map(({ className, folderName }) => `import { ${className} } from './${folderName}';`)
+        .join('\n');
+
+    // Generate imports array for NgModule
+    const importsArray = sortedComponents.map(({ className }) => `        ${className}`).join(',\n');
+
+    // Generate exports array for NgModule
+    const exportsArray = sortedComponents.map(({ className }) => `        ${className}`).join(',\n');
+
+    const moduleContent = `import { NgModule } from '@angular/core';
+${imports}
+
+@NgModule({
+    imports: [
+${importsArray}
+    ],
+    exports: [
+${exportsArray}
+    ]
+})
+export class Ui5ComponentsModule {}
+`;
+
+    const modulePath = path.join(targetDir, 'ui5.module.ts');
+    await writeFile(modulePath, moduleContent, 'utf-8');
 }
 
 function addUI5WrapperCustomEventType(): string {
@@ -292,7 +333,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
             exportsContent += `export * from './utils';\n`;
 
             // Generate Component Wrappers
-            const componentExports = await generateComponentFiles(
+            const { componentExports, componentInfo } = await generateComponentFiles(
                 componentDeclarations,
                 allEnums,
                 packageName,
@@ -300,8 +341,14 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
             );
             exportsContent += componentExports.join('\n');
 
+            // Generate ui5.module.ts file
+            await generateUi5Module(componentInfo, targetDir);
+
+            // Export ui5.module from index
+            exportsContent += `\nexport * from './ui5.module';\n`;
+
             // Add theming service export to root index
-            exportsContent += `\nexport * from './${SUBDIRS.THEMING}';\n`;
+            exportsContent += `export * from './${SUBDIRS.THEMING}';\n`;
         }
 
         // Generate the root index.ts file

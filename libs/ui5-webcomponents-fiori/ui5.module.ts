@@ -7,26 +7,28 @@ import { DynamicSideContent } from './dynamic-side-content';
 import { FilterItem } from './filter-item';
 import { FilterItemOption } from './filter-item-option';
 import { FlexibleColumnLayout } from './flexible-column-layout';
+import { GroupItem } from './group-item';
 import { IllustratedMessage } from './illustrated-message';
-import { NotificationListItem } from './li-notification';
-import { NotificationListGroupItem } from './li-notification-group';
 import { MediaGallery } from './media-gallery';
 import { MediaGalleryItem } from './media-gallery-item';
 import { NavigationLayout } from './navigation-layout';
 import { NotificationList } from './notification-list';
+import { NotificationListGroupItem } from './notification-list-group-item';
+import { NotificationListItem } from './notification-list-item';
 import { Page } from './page';
 import { ProductSwitch } from './product-switch';
 import { ProductSwitchItem } from './product-switch-item';
 import { Search } from './search';
 import { SearchItem } from './search-item';
 import { SearchItemGroup } from './search-item-group';
+import { SearchItemShowMore } from './search-item-show-more';
 import { SearchMessageArea } from './search-message-area';
 import { SearchScope } from './search-scope';
-import { ShellBar } from './shellbar';
-import { ShellBarBranding } from './shellbar-branding';
-import { ShellBarItem } from './shellbar-item';
-import { ShellBarSearch } from './shellbar-search';
-import { ShellBarSpacer } from './shellbar-spacer';
+import { ShellBar } from './shell-bar';
+import { ShellBarBranding } from './shell-bar-branding';
+import { ShellBarItem } from './shell-bar-item';
+import { ShellBarSearch } from './shell-bar-search';
+import { ShellBarSpacer } from './shell-bar-spacer';
 import { SideNavigation } from './side-navigation';
 import { SideNavigationGroup } from './side-navigation-group';
 import { SideNavigationItem } from './side-navigation-item';
@@ -41,6 +43,7 @@ import { UserMenu } from './user-menu';
 import { UserMenuAccount } from './user-menu-account';
 import { UserMenuItem } from './user-menu-item';
 import { UserMenuItemGroup } from './user-menu-item-group';
+import { UserSettingsAccountView } from './user-settings-account-view';
 import { UserSettingsDialog } from './user-settings-dialog';
 import { UserSettingsItem } from './user-settings-item';
 import { UserSettingsView } from './user-settings-view';
@@ -58,6 +61,7 @@ import { WizardStep } from './wizard-step';
         FilterItem,
         FilterItemOption,
         FlexibleColumnLayout,
+        GroupItem,
         IllustratedMessage,
         MediaGallery,
         MediaGalleryItem,
@@ -71,6 +75,7 @@ import { WizardStep } from './wizard-step';
         Search,
         SearchItem,
         SearchItemGroup,
+        SearchItemShowMore,
         SearchMessageArea,
         SearchScope,
         ShellBar,
@@ -92,6 +97,7 @@ import { WizardStep } from './wizard-step';
         UserMenuAccount,
         UserMenuItem,
         UserMenuItemGroup,
+        UserSettingsAccountView,
         UserSettingsDialog,
         UserSettingsItem,
         UserSettingsView,
@@ -108,6 +114,7 @@ import { WizardStep } from './wizard-step';
         FilterItem,
         FilterItemOption,
         FlexibleColumnLayout,
+        GroupItem,
         IllustratedMessage,
         MediaGallery,
         MediaGalleryItem,
@@ -121,6 +128,7 @@ import { WizardStep } from './wizard-step';
         Search,
         SearchItem,
         SearchItemGroup,
+        SearchItemShowMore,
         SearchMessageArea,
         SearchScope,
         ShellBar,
@@ -142,6 +150,7 @@ import { WizardStep } from './wizard-step';
         UserMenuAccount,
         UserMenuItem,
         UserMenuItemGroup,
+        UserSettingsAccountView,
         UserSettingsDialog,
         UserSettingsItem,
         UserSettingsView,
