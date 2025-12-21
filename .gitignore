@@ -43,6 +43,7 @@ npm-debug.log
 testem.log
 /typings
 report.*.json
+migrations.json
 
 # e2e
 /e2e/*.map
