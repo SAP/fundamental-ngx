@@ -14,7 +14,8 @@
         "inlineSources": true,
         "types": [],
         "module": "preserve",
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2022"]
     },
     "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }
