@@ -4,6 +4,8 @@
         "enableIvy": true
     },
     "compilerOptions": {
-        "target": "es2022"
+        "target": "es2022",
+        "module": "preserve",
+        "moduleResolution": "bundler"
     }
 }
