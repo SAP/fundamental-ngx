@@ -4,6 +4,7 @@
     "projectType": "library",
     "prefix": "ui5",
     "tags": ["type:lib", "scope:ui5"],
+    "implicitDependencies": ["ui5-webcomponents-base"],
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=ui5-webcomponents --verbose",
@@ -28,7 +29,13 @@
                 "skipComponents": false,
                 "_cacheBust": "2025-10-08-generate-utils"
             },
-            "outputs": ["{projectRoot}/index.ts", "{projectRoot}/**/index.ts", "{projectRoot}/types", "{projectRoot}/utils", "{options.outputPath}"]
+            "outputs": [
+                "{projectRoot}/index.ts",
+                "{projectRoot}/**/index.ts",
+                "{projectRoot}/types",
+                "{projectRoot}/utils",
+                "{options.outputPath}"
+            ]
         },
         "build": {
             "executor": "@nx/angular:package",
@@ -52,6 +59,5 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    },
-    "implicitDependencies": ["ui5-webcomponents-base"]
+    }
 }
