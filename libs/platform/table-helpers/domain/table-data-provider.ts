@@ -14,7 +14,7 @@ import {
     CollectionStringFilter
 } from '../interfaces/collection-filter.interface';
 
-import { get } from 'lodash-es';
+import { get } from '@fundamental-ngx/cdk/utils';
 import { TableState } from '../interfaces/table-state.interface';
 import { TableRow } from '../models';
 import { isCollectionFilter } from '../utils';

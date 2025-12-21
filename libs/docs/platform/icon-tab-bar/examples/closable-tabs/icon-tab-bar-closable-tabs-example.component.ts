@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { IconTabBarComponent } from '@fundamental-ngx/platform/icon-tab-bar';
-import { cloneDeep } from 'lodash-es';
 import { longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({
@@ -12,7 +11,7 @@ import { longIconTypeConfig } from '../config-for-examples/icon-type-config';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconTabBarClosableTabsExampleComponent {
-    textItems = cloneDeep(longIconTypeConfig).map((item) => {
+    textItems = structuredClone(longIconTypeConfig).map((item) => {
         item.closable = true;
         return item;
     });

@@ -8,12 +8,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { isSubscribable } from '@fundamental-ngx/cdk/utils';
+import { isSubscribable, merge } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { ListAvatarConfig, ListIconConfig } from '@fundamental-ngx/platform/list';
-import { merge } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { ThumbnailSettingsItem } from '../../../models/settings.model';
 

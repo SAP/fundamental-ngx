@@ -1,7 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, get } from '@fundamental-ngx/cdk/utils';
 import { IntlMessageFormat } from 'intl-messageformat';
-import { get } from 'lodash-es';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
 import {
     FdLanguage,
