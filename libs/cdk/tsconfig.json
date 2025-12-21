@@ -20,6 +20,7 @@
         "noFallthroughCasesInSwitch": true,
         "target": "es2023",
         "module": "preserve",
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2022"]
     }
 }
