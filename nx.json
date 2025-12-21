@@ -191,7 +191,6 @@
                 "commitMessage": "chore(release): update changelog for {version}"
             }
         },
-        "releaseTagPattern": "v{version}",
         "projects": [
             "i18n",
             "cdk",
@@ -205,6 +204,9 @@
             "ui5-webcomponents",
             "ui5-webcomponents-fiori",
             "ui5-webcomponents-ai"
-        ]
+        ],
+        "releaseTag": {
+            "pattern": "v{version}"
+        }
     }
 }
