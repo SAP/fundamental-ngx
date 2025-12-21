@@ -3,10 +3,8 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "prefix": "ui5",
-    "tags": [
-        "type:lib",
-        "scope:ui5"
-    ],
+    "tags": ["type:lib", "scope:ui5"],
+    "implicitDependencies": ["ui5-webcomponents-base"],
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=ui5-webcomponents --verbose",
@@ -72,8 +70,5 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    },
-    "implicitDependencies": [
-        "ui5-webcomponents-base"
-    ]
+    }
 }
