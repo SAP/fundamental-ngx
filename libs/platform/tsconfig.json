@@ -18,6 +18,8 @@
         "strict": false,
         "noImplicitReturns": false,
         "noFallthroughCasesInSwitch": true,
-        "target": "es2022"
+        "target": "es2022",
+        "module": "preserve",
+        "moduleResolution": "bundler"
     }
 }
