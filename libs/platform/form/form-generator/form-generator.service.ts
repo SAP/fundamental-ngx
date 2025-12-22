@@ -1,7 +1,6 @@
 import { DestroyRef, Inject, Injectable, Optional, SkipSelf, Type, inject } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
-import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
-import { cloneDeep, merge } from 'lodash-es';
+import { cloneDeep, isFunction, merge, selectStrategy } from '@fundamental-ngx/cdk/utils';
 
 import { debounceTime } from 'rxjs/operators';
 
@@ -211,7 +210,7 @@ export class FormGeneratorService {
     ): Promise<DynamicFormValue> {
         await this._triggerFieldsOnchange(form);
 
-        const formValue = cloneDeep(form.value);
+        const formValue = structuredClone(form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
             const formItem = control.formItem;
@@ -286,7 +285,7 @@ export class FormGeneratorService {
      * @returns `Set` where key is item name, and boolean value if field needs to be shown.
      */
     async checkVisibleFormItems(form: DynamicFormGroup): Promise<{ [key: string]: boolean }> {
-        const formValue = this._getFormValueWithoutUngrouped(cloneDeep(form.value));
+        const formValue = this._getFormValueWithoutUngrouped(structuredClone(form.value));
         return await this._checkFormControlsVisibility(form, formValue);
     }
 
@@ -531,7 +530,7 @@ export class FormGeneratorService {
 
     /** @hidden */
     private _getMergedFormFieldItemConfig(formItem: DynamicFormItemMap): DynamicFormItemMap {
-        return merge(cloneDeep(this._defaultItemConfig), formItem);
+        return merge(cloneDeep(this._defaultItemConfig), formItem) as DynamicFormItemMap;
     }
 
     /** @hidden */

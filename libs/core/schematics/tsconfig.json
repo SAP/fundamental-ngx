@@ -7,7 +7,7 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
-        "lib": ["es2020", "dom"],
+        "lib": ["es2023", "dom"],
         "declaration": true,
         "module": "commonjs",
         "moduleResolution": "node",
