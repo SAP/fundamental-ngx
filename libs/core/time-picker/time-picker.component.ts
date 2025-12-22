@@ -619,7 +619,7 @@ export class TimePickerComponent<D>
     }
 
     /** @hidden */
-    private _focusOut(event: FocusEvent): void {
+    protected _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }

@@ -474,8 +474,8 @@ export class BaseListItem extends BaseComponent implements AfterViewInit, AfterV
      * helps to avoid multi rows active class with navigation
      */
     @HostListener('focusout', ['$event'])
-    _onBlur(event: KeyboardEvent): void {
-        if (isPresent(this.anchor) && !KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+    _onBlur(event: FocusEvent): void {
+        if (isPresent(this.anchor) && !KeyUtil.isKeyCode(event as unknown as KeyboardEvent, [ENTER, SPACE])) {
             this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
     }

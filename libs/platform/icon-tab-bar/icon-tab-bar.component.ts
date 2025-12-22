@@ -151,7 +151,7 @@ export class IconTabBarComponent implements OnInit, TabList {
     tabDirectives = viewChildren(IconTabBarTabContentDirective);
 
     @HostBinding('class.fd-tabs-custom')
-    private get _customTabs(): boolean {
+    protected get _customTabs(): boolean {
         return this._inDynamicPage;
     }
 

@@ -74,7 +74,7 @@ export class NestedLinkDirective implements NestedItemLink {
     }
 
     /** Handler for mouse events */
-    @HostListener('click', ['$event'])
+    @HostListener('click')
     onClick(): void {
         this._itemService.click.next();
         if (this.onClickCallback) {
