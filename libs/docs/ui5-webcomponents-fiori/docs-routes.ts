@@ -88,6 +88,10 @@ const componentRoutes = [
         path: 'upload-collection',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/upload-collection').then(configureLibRoutes)
+    },
+    {
+        path: 'user-menu',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/user-menu').then(configureLibRoutes)
     }
 ];
 

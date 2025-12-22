@@ -65,6 +65,10 @@
         {
             "url": "ui5-webcomponents-fiori/upload-collection",
             "name": "Upload Collection"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/user-menu",
+            "name": "User Menu"
         }
     ]
 }

@@ -21,5 +21,6 @@ export const API_FILES = {
     shellBar: ['ShellBar', 'ShellBarBranding', 'ShellBarItem', 'ShellBarSearch', 'ShellBarSpacer'],
     sideNavigation: ['SideNavigation', 'SideNavigationGroup', 'SideNavigationItem', 'SideNavigationSubItem'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem'],
-    uploadCollection: ['UploadCollection', 'UploadCollectionItem']
+    uploadCollection: ['UploadCollection', 'UploadCollectionItem'],
+    userMenu: ['UserMenu', 'UserMenuAccount', 'UserMenuItem', 'UserMenuItemGroup']
 };
