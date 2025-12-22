@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
+import { concat, mergeWith, uniq } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -350,7 +350,9 @@ export class WizardGeneratorService {
 
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
-                    : this._formGeneratorService._getFormValueWithoutUngrouped(cloneDeep(forms[form.id]?.form.value));
+                    : this._formGeneratorService._getFormValueWithoutUngrouped(
+                          structuredClone(forms[form.id]?.form.value)
+                      );
             }
         }
 

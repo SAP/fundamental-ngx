@@ -45,7 +45,8 @@ import {
     RepeatDirective,
     resizeObservable,
     RtlService,
-    TabbableElementService
+    TabbableElementService,
+    uniq
 } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import {
@@ -131,7 +132,6 @@ import {
     TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
 import equal from 'fast-deep-equal';
-import { uniq } from 'lodash-es';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     debounceTime,

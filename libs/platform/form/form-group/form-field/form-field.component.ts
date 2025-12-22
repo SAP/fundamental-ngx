@@ -31,7 +31,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
-import { uniqBy } from 'lodash-es';
+import { uniqBy } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 
