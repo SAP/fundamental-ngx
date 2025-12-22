@@ -1,6 +1,5 @@
 import { ExecutorContext, PromiseExecutor } from '@nx/devkit';
 import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
-import type { CustomElementDeclaration } from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
 import { mkdir, readFile, writeFile } from 'fs/promises';
 import * as path from 'path';
 import { componentTemplate } from './component-template';
@@ -275,7 +274,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
         // PASS THE OPTIONS OBJECT TO extractCemData
         const { componentDeclarations, allEnums } = extractCemData(cemData, options);
 
-        let dependencyDeclarations: { declaration: CustomElementDeclaration; modulePath: string }[] = [];
+        let dependencyDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[] = [];
         if (options.dependencyCemFiles?.length) {
             const dependencyCemData: CEM.Package[] = await Promise.all(
                 options.dependencyCemFiles.map((file) => loadCemData(file, context))
