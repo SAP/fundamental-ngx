@@ -16,13 +16,12 @@ import {
     inject
 } from '@angular/core';
 
-import { ColorAccent, KeyUtil, Nullable, Size } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Nullable, Size, merge } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
-import { merge } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { FdpListComponent } from './fdpListComponent.token';
 import { ListConfig } from './list.config';
@@ -123,7 +122,6 @@ export class ModifyItemEvent {
     selector: '[fdpItemDef]',
     standalone: true
 })
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ListItemDef implements ItemDef {
     /** @hidden */
     constructor(/** @docs-private */ public templateRef: TemplateRef<any>) {}

@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash-es';
 import { NewVariant, Variant, VariantAccess } from './models/variant.interface';
 
 let defaultVariantId = 0;
@@ -38,7 +37,7 @@ export class VariantItem<T = any> implements Variant<T> {
     clone(newVariantData: NewVariant = {}, refreshId = true): VariantItem {
         const currentVariantData: Variant = Object.assign({}, this, newVariantData);
 
-        currentVariantData.data = cloneDeep(currentVariantData.data);
+        currentVariantData.data = structuredClone(currentVariantData.data);
 
         if (refreshId) {
             delete currentVariantData.id;
