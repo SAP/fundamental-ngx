@@ -1,0 +1,14 @@
+<ui5-upload-collection (ui5ItemDelete)="onItemDelete($event)">
+    @for (file of files(); track file.id) {
+    <ui5-upload-collection-item
+        [fileName]="file.fileName"
+        [progress]="file.progress"
+        [uploadState]="file.uploadState"
+        type="Detail"
+        (ui5Rename)="onItemRename($event, file.fileName)"
+    >
+        {{ file.details}}
+        <ui5-icon slot="thumbnail" [name]="file.icon" />
+    </ui5-upload-collection-item>
+    }
+</ui5-upload-collection>

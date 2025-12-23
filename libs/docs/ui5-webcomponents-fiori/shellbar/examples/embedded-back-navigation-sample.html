@@ -1,0 +1,21 @@
+<div class="fd-container">
+    <ui5-shellbar notificationsCount="72" [showNotifications]="true">
+        <ui5-shellbar-branding slot="branding">
+            Product Identifier
+            <img slot="logo" src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="SAP Logo" />
+        </ui5-shellbar-branding>
+
+        <ui5-button icon="nav-back" slot="startButton"></ui5-button>
+        <ui5-shellbar-search
+            slot="searchField"
+            [showClearIcon]="true"
+            placeholder="Search Apps, Products"
+        ></ui5-shellbar-search>
+
+        <ui5-shellbar-item icon="sys-help" text="Help"></ui5-shellbar-item>
+        <ui5-toggle-button icon="sap-icon://da" tooltip="Joule" slot="assistant"></ui5-toggle-button>
+        <ui5-avatar slot="profile">
+            <img src="https://ui5.github.io/webcomponents/images/avatars/man_avatar_3.png" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+</div>

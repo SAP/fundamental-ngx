@@ -39,8 +39,44 @@
             "name": "Notification List"
         },
         {
+            "url": "ui5-webcomponents-fiori/page",
+            "name": "Page"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/product-switch",
+            "name": "Product Switch"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/search",
+            "name": "Search"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/shellbar",
+            "name": "Shell Bar"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/side-navigation",
+            "name": "Side Navigation"
+        },
+        {
             "url": "ui5-webcomponents-fiori/timeline",
             "name": "Timeline"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/upload-collection",
+            "name": "Upload Collection"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/user-menu",
+            "name": "User Menu"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/user-settings-dialog",
+            "name": "User Settings Dialog"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/view-settings-dialog",
+            "name": "View Settings Dialog"
         }
     ]
 }

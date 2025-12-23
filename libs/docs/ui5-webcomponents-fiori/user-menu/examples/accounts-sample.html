@@ -1,0 +1,38 @@
+<div>
+    <ui5-shellbar id="shellbar" (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img
+                slot="logo"
+                src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg"
+                alt="Corporate Portal Logo"
+            />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="userMenuMultiProfilesOpener">
+            <img src="https://ui5.github.io/webcomponents/images/avatars/man_avatar_3.png" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+
+    <ui5-user-menu
+        opener="userMenuMultiProfilesOpener"
+        [open]="menuOpen()"
+        [showOtherAccounts]="true"
+        [showEditAccounts]="true"
+        (ui5ChangeAccount)="onChangeAccount($event)"
+        (ui5EditAccountsClick)="onEditAccounts()"
+        (ui5SignOutClick)="onSignOutClick()"
+        (ui5Close)="onClose()"
+    >
+        @for (account of accounts(); track account.id) {
+        <ui5-user-menu-account
+            slot="accounts"
+            [titleText]="account.name"
+            [description]="account.email"
+            [selected]="account.id === '1'"
+            [avatarSrc]="account.avatarSrc"
+        >
+            <ui5-avatar slot="avatar" [icon]="account.icon" />
+        </ui5-user-menu-account>
+        }
+    </ui5-user-menu>
+</div>

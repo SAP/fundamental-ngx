@@ -1,0 +1,31 @@
+<div>
+    <ui5-shellbar id="shellbar" (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img
+                slot="logo"
+                src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg"
+                alt="Corporate Portal Logo"
+            />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="userMenuWithItemsOpener">
+            <img src="https://ui5.github.io/webcomponents/images/avatars/man_avatar_3.png" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+
+    <ui5-user-menu
+        opener="userMenuWithItemsOpener"
+        [open]="menuOpen()"
+        (ui5ItemClick)="onItemClick($event)"
+        (ui5Close)="onClose()"
+    >
+        <ui5-user-menu-item text="Settings" icon="settings" />
+        <ui5-user-menu-item icon="collaborate" text="Product-specific account action">
+            <ui5-user-menu-item text="Terms of Use"></ui5-user-menu-item>
+            <ui5-user-menu-item text="Private Policy"></ui5-user-menu-item>
+        </ui5-user-menu-item>
+        <ui5-user-menu-item text="Notifications" icon="bell" />
+        <ui5-user-menu-item text="Activity Log" icon="journey-change" />
+        <ui5-user-menu-item text="Help & Support" icon="sys-help" />
+    </ui5-user-menu>
+</div>

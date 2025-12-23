@@ -59,8 +59,49 @@ const componentRoutes = [
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/notification-list').then(configureLibRoutes)
     },
     {
+        path: 'page',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/page').then(configureLibRoutes)
+    },
+    {
+        path: 'product-switch',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/product-switch').then(configureLibRoutes)
+    },
+    {
+        path: 'search',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/search').then(configureLibRoutes)
+    },
+    {
+        path: 'shellbar',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/shellbar').then(configureLibRoutes)
+    },
+    {
+        path: 'side-navigation',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/side-navigation').then(configureLibRoutes)
+    },
+    {
         path: 'timeline',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/timeline').then(configureLibRoutes)
+    },
+    {
+        path: 'upload-collection',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/upload-collection').then(configureLibRoutes)
+    },
+    {
+        path: 'user-menu',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/user-menu').then(configureLibRoutes)
+    },
+    {
+        path: 'user-settings-dialog',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/user-settings-dialog').then(configureLibRoutes)
+    },
+    {
+        path: 'view-settings-dialog',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/view-settings-dialog').then(configureLibRoutes)
     }
 ];
 

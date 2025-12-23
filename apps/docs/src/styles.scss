@@ -19,13 +19,6 @@ a {
     color: var(--sapLinkColor);
 }
 
-*,
-::after,
-::before {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-}
-
 body {
     margin: 0;
     background-color: var(--sapBackgroundColor);

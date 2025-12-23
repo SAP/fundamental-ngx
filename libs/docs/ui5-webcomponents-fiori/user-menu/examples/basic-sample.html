@@ -1,0 +1,33 @@
+<div>
+    <ui5-shellbar id="shellbar" (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img
+                slot="logo"
+                src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg"
+                alt="Corporate Portal Logo"
+            />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="userMenuOpener">
+            <img src="https://ui5.github.io/webcomponents/images/avatars/man_avatar_3.png" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+    <ui5-user-menu id="userMenu" opener="userMenuOpener" [open]="menuOpen()" (ui5Close)="onClose()">
+        <ui5-user-menu-account
+            slot="accounts"
+            avatarSrc="https://ui5.github.io/webcomponents/images/avatars/man_avatar_3.png"
+            titleText="Alaina Chevalier"
+            subtitleText="aliana.chevalier@sap.com"
+            description="Delivery Manager"
+            selected
+        >
+        </ui5-user-menu-account>
+        <ui5-user-menu-item icon="action-settings" text="Setting"></ui5-user-menu-item>
+        <ui5-user-menu-item icon="collaborate" text="Product-specific account action">
+            <ui5-user-menu-item text="Terms of Use"></ui5-user-menu-item>
+            <ui5-user-menu-item text="Private Policy"></ui5-user-menu-item>
+        </ui5-user-menu-item>
+        <ui5-user-menu-item icon="official-service" text="Legal Information"></ui5-user-menu-item>
+        <ui5-user-menu-item icon="message-information" text="About"></ui5-user-menu-item>
+    </ui5-user-menu>
+</div>

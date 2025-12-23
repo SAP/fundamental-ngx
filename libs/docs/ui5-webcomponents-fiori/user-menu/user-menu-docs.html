@@ -1,0 +1,46 @@
+<fd-docs-section-title id="basic" componentName="user-menu"> Basic User Menu </fd-docs-section-title>
+<description>
+    The User Menu component is an SAP Fiori specific web component designed to be used within a
+    <code>ui5-shellbar</code>. It provides a comprehensive user account management interface, displaying the current
+    user's information with an avatar and allowing users to access various account-related actions. The menu appears
+    when the user clicks on the ShellBar's profile avatar. The <code>opener</code> property should reference the
+    ShellBar's profile element, and the menu is typically triggered via the <code>ui5ProfileClick</code> event.
+</description>
+<component-example>
+    <ui5-doc-user-menu-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="accounts" componentName="user-menu"> Multiple Accounts </fd-docs-section-title>
+<description>
+    The User Menu supports multiple user accounts within the ShellBar context, allowing users to switch between
+    different profiles. Add account items to the <code>accounts</code> slot to enable account switching functionality.
+    The first account or one marked with <code>selected</code> will be shown as the current account.
+    <ul>
+        <li>
+            <strong>showOtherAccounts: </strong>Controls whether the "Other Accounts" section is visible in the menu
+        </li>
+        <li><strong>showEditAccounts: </strong>Shows an "Edit Accounts" button for account management</li>
+        <li><strong>ui5ChangeAccount: </strong>Event fired when the user switches to a different account</li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-user-menu-accounts-sample />
+</component-example>
+<code-example [exampleFiles]="accountsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="menu-items" componentName="user-menu"> Menu Items </fd-docs-section-title>
+<description>
+    Add custom menu items to the default slot to provide additional user-related actions within the ShellBar's user
+    menu. Use
+    <code>ui5-user-menu-item</code> components to create the menu structure. The <code>ui5ItemClick</code> event is
+    fired when any menu item is selected.
+</description>
+<component-example>
+    <ui5-doc-user-menu-menu-items-sample />
+</component-example>
+<code-example [exampleFiles]="menuItemsExample()" />

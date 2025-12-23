@@ -1,0 +1,20 @@
+<div class="fd-container">
+    <ui5-shellbar
+        [primaryTitle]="primaryTitle()"
+        [showSearchField]="true"
+        (ui5SearchFieldToggle)="onSearchFieldToggle($event)"
+        (ui5SearchButtonClick)="onSearchButtonClick()"
+    >
+        <ui5-input
+            slot="searchField"
+            placeholder="Search..."
+            [value]="searchValue()"
+            (ui5Input)="onSearchInput($event)"
+        >
+            @for (suggestion of suggestions(); track suggestion) {
+            <ui5-suggestion-item [text]="suggestion"></ui5-suggestion-item>
+            }
+        </ui5-input>
+        <ui5-avatar slot="profile" icon="customer" colorScheme="Accent1"></ui5-avatar>
+    </ui5-shellbar>
+</div>

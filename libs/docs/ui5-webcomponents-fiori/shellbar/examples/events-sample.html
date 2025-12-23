@@ -1,0 +1,61 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <ui5-shellbar
+                [primaryTitle]="primaryTitle()"
+                [showNotifications]="true"
+                [notificationsCount]="notificationsCount()"
+                [showProductSwitch]="true"
+                [showSearchField]="true"
+                (ui5LogoClick)="onLogoClick()"
+                (ui5ProfileClick)="onProfileClick()"
+                (ui5NotificationsClick)="onNotificationsClick()"
+                (ui5ProductSwitchClick)="onProductSwitchClick()"
+                (ui5MenuItemClick)="onMenuItemClick($event)"
+                (ui5SearchButtonClick)="onSearchButtonClick()"
+                (ui5SearchFieldToggle)="onSearchFieldToggle($event)"
+            >
+                <img slot="logo" src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="SAP Logo" />
+
+                <ui5-button slot="startButton" icon="menu2"></ui5-button>
+
+                <ui5-li slot="menuItems" icon="home">Home</ui5-li>
+                <ui5-li slot="menuItems" icon="activities">Activities</ui5-li>
+
+                <ui5-input slot="searchField" placeholder="Search..."></ui5-input>
+
+                <ui5-shellbar-item icon="activities" text="Activities"></ui5-shellbar-item>
+
+                <ui5-avatar slot="profile" icon="customer" colorScheme="Accent4"></ui5-avatar>
+            </ui5-shellbar>
+        </div>
+    </div>
+
+    <div class="fd-row fd-margin-top--md">
+        <div class="fd-col fd-col--12">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+                <strong>Event Log (last 10 events):</strong>
+                <ui5-button design="Transparent" (ui5Click)="clearLog()">Clear Log</ui5-button>
+            </div>
+            <div
+                style="
+                    border: 1px solid #ccc;
+                    padding: 0.5rem;
+                    margin-top: 0.5rem;
+                    max-height: 250px;
+                    overflow-y: auto;
+                    background: var(--sapList_Background);
+                "
+            >
+                @if (eventLog().length === 0) {
+                <em>No events yet. Interact with the ShellBar above to see events.</em>
+                } @else { @for (event of eventLog(); track $index) {
+                <div style="font-family: monospace; font-size: 0.875rem; margin: 0.25rem 0">
+                    [{{ event.timestamp.toLocaleTimeString() }}] - <strong>{{ event.eventType }}</strong>: {{
+                    event.details }}
+                </div>
+                } }
+            </div>
+        </div>
+    </div>
+</div>

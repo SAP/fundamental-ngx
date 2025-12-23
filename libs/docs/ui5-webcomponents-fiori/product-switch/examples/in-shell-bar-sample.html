@@ -1,0 +1,33 @@
+<div class="fd-container" [style]="{ height: '300px' }">
+    <ui5-shellbar
+        id="shellbar"
+        secondaryTitle="home"
+        [showProductSwitch]="true"
+        (ui5ProductSwitchClick)="onProductSwitchClick($event)"
+    >
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="SAP Logo" slot="logo" />
+        </ui5-shellbar-branding>
+        <ui5-toggle-button icon="sap-icon://da" slot="assistant"></ui5-toggle-button>
+    </ui5-shellbar>
+
+    <ui5-popover
+        id="productswitch-popover"
+        placement="Bottom"
+        [opener]="opener()"
+        [open]="popoverOpen()"
+        (ui5Close)="onPopoverClose()"
+    >
+        <ui5-product-switch>
+            @for (product of products(); track product.id) {
+            <ui5-product-switch-item
+                [titleText]="product.title"
+                [subtitleText]="product.subtitle"
+                [icon]="product.icon"
+                (ui5Click)="onProductClick(product)"
+            ></ui5-product-switch-item>
+            }
+        </ui5-product-switch>
+    </ui5-popover>
+</div>

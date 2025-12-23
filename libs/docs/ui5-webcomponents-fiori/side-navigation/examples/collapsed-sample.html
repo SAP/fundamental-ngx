@@ -1,0 +1,11 @@
+<div class="fd-margin-bottom--sm">
+    <ui5-button (click)="toggleCollapse()"> {{ isCollapsed() ? 'Expand' : 'Collapse' }} Navigation </ui5-button>
+</div>
+
+<ui5-side-navigation [collapsed]="isCollapsed()">
+    <ui5-side-navigation-item [selected]="true" icon="home" text="Home"></ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="product" text="Products"></ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="calendar" text="Calendar"></ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="contacts" text="Contacts"></ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="activities" text="Activities"></ui5-side-navigation-item>
+</ui5-side-navigation>

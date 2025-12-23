@@ -1,0 +1,75 @@
+<fd-docs-section-title id="basic" componentName="shellbar"> Basic ShellBar </fd-docs-section-title>
+<description>
+    The ShellBar provides a consistent header for your application with primary branding and navigation. Use the
+    <code>primaryTitle</code> and <code>secondaryTitle</code> properties to display application titles. The
+    <code>logo</code> slot accepts an avatar or image component for branding. The <code>profile</code> slot can be used
+    to display user profile information.
+</description>
+<component-example>
+    <ui5-doc-shellbar-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="all-features" componentName="shellbar"> All Features </fd-docs-section-title>
+<description>
+    A comprehensive ShellBar demonstrating all available features including notifications, search, content items, and
+    profile.
+</description>
+<component-example>
+    <ui5-doc-shellbar-all-features-sample />
+</component-example>
+<code-example [exampleFiles]="allFeaturesExample()" />
+
+<separator />
+
+<fd-docs-section-title id="with-search" componentName="shellbar"> With Search Field </fd-docs-section-title>
+<description>
+    The ShellBar can include a search field by placing a <code>ui5-input</code> component in the
+    <code>searchField</code> slot. Set <code>showSearchField</code> to <code>true</code> to display the search field.
+    The search field is responsive and will collapse on smaller screens. Use the <code>ui5SearchButtonClick</code> event
+    to handle search activation and the <code>ui5SearchFieldToggle</code> event to track when the search field is
+    expanded or collapsed.
+</description>
+<component-example>
+    <ui5-doc-shellbar-with-search-sample />
+</component-example>
+<code-example [exampleFiles]="withSearchExample()" />
+
+<separator />
+
+<fd-docs-section-title id="embedded-back-navigation" componentName="shellbar">
+    With Embedded Back Navigation
+</fd-docs-section-title>
+<description>
+    The ShellBar can include an embedded back navigation button by placing a <code>ui5-button</code> component in the
+    <code>startButton</code> slot.
+</description>
+<component-example>
+    <ui5-doc-shellbar-embedded-back-navigation-sample />
+</component-example>
+<code-example [exampleFiles]="withEmbeddedBackNavigationExample()" />
+
+<separator />
+
+<fd-docs-section-title id="trial" componentName="shellbar"> Trial Example </fd-docs-section-title>
+<description> ShellBar configured for trial environments with trial tags and remaining days indicator. </description>
+<component-example>
+    <ui5-doc-shellbar-trial-sample />
+</component-example>
+<code-example [exampleFiles]="trialExample()" />
+
+<separator />
+
+<fd-docs-section-title id="events" componentName="shellbar"> ShellBar Events </fd-docs-section-title>
+<description>
+    The ShellBar fires various events for user interactions including logo clicks, profile clicks, notification clicks,
+    product switch clicks, menu item clicks, and search-related events. Use these events to implement navigation,
+    display popovers, or trigger other application logic. This example demonstrates tracking all major ShellBar events
+    with a history log.
+</description>
+<component-example>
+    <ui5-doc-shellbar-events-sample />
+</component-example>
+<code-example [exampleFiles]="eventsExample()" />

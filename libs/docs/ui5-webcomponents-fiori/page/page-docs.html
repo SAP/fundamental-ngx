@@ -1,0 +1,61 @@
+<fd-docs-section-title id="basic" componentName="page"> Basic Page </fd-docs-section-title>
+<component-example>
+    <ui5-doc-page-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="background" componentName="page"> Background Design </fd-docs-section-title>
+<description>
+    The <code>backgroundDesign</code> property controls the background color of the page content area. Three options are
+    available:
+    <ul>
+        <li><strong>Solid</strong> (default) - Standard background with solid color for general content</li>
+        <li><strong>Transparent</strong> - Transparent background that inherits from the parent container</li>
+        <li>
+            <strong>List</strong> - Optimized background for list content with better color contrast. Use this when
+            placing a <code>ui5-list</code> component inside the page
+        </li>
+    </ul>
+</description>
+<component-example>
+    <ui5-doc-page-background-sample />
+</component-example>
+<code-example [exampleFiles]="backgroundExample()" />
+
+<separator />
+
+<fd-docs-section-title id="scrolling" componentName="page"> Scrolling Behavior </fd-docs-section-title>
+<description>
+    The <code>noScrolling</code> property controls whether the page content is scrollable. By default, the page content
+    can scroll vertically when it exceeds the available space. When <code>noScrolling</code> is set to
+    <code>true</code>, vertical scrolling is disabled and all content must fit within the visible area.
+</description>
+<component-example>
+    <ui5-doc-page-scrolling-sample />
+</component-example>
+<code-example [exampleFiles]="scrollingExample()" />
+
+<separator />
+
+<fd-docs-section-title id="footer" componentName="page"> Footer Configuration </fd-docs-section-title>
+<description>
+    The Page component provides two properties to control the footer:
+    <ul>
+        <li>
+            <strong>hideFooter</strong> - Controls footer visibility. When set to <code>true</code>, the footer is
+            completely hidden from view
+        </li>
+        <li>
+            <strong>fixedFooter</strong> - Controls footer positioning. When set to <code>true</code>, the footer is
+            fixed at the very bottom of the page. When <code>false</code>, it floats over the content with a slight
+            offset from the bottom, creating a floating effect
+        </li>
+    </ul>
+    Use these properties to customize the footer behavior based on your application's requirements.
+</description>
+<component-example>
+    <ui5-doc-page-footer-sample />
+</component-example>
+<code-example [exampleFiles]="footerExample()" />
