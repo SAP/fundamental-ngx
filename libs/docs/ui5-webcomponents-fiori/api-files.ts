@@ -22,5 +22,6 @@ export const API_FILES = {
     sideNavigation: ['SideNavigation', 'SideNavigationGroup', 'SideNavigationItem', 'SideNavigationSubItem'],
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem'],
     uploadCollection: ['UploadCollection', 'UploadCollectionItem'],
-    userMenu: ['UserMenu', 'UserMenuAccount', 'UserMenuItem', 'UserMenuItemGroup']
+    userMenu: ['UserMenu', 'UserMenuAccount', 'UserMenuItem', 'UserMenuItemGroup'],
+    userSettingsDialog: ['UserSettingsAccountView', 'UserSettingsDialog', 'UserSettingsItem', 'UserSettingsView']
 };

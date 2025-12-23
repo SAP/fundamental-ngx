@@ -92,6 +92,11 @@ const componentRoutes = [
     {
         path: 'user-menu',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/user-menu').then(configureLibRoutes)
+    },
+    {
+        path: 'user-settings-dialog',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/user-settings-dialog').then(configureLibRoutes)
     }
 ];
 

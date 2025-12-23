@@ -69,6 +69,10 @@
         {
             "url": "ui5-webcomponents-fiori/user-menu",
             "name": "User Menu"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/user-settings-dialog",
+            "name": "User Settings Dialog"
         }
     ]
 }
