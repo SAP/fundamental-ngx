@@ -1,0 +1,34 @@
+<ui5-button (ui5Click)="onOpenDialog()">Open ViewSettingsDialog</ui5-button>
+
+<ui5-view-settings-dialog
+    [open]="dialogOpen()"
+    [sortDescending]="sortDescending()"
+    (ui5Confirm)="onConfirm($event)"
+    (ui5Cancel)="onCancel()"
+    (ui5Close)="onClose()"
+>
+    @for (sortItem of sortItems(); track sortItem.text) {
+    <ui5-sort-item slot="sortItems" [text]="sortItem.text" [selected]="sortItem.selected"></ui5-sort-item>
+    } @for (filterCategory of filterCategories(); track filterCategory.text) {
+    <ui5-filter-item slot="filterItems" [text]="filterCategory.text">
+        @for (option of filterCategory.options; track option.text) {
+        <ui5-filter-item-option
+            slot="values"
+            [text]="option.text"
+            [selected]="option.selected"
+        ></ui5-filter-item-option>
+        }
+    </ui5-filter-item>
+    } @for (groupItem of groupItems(); track groupItem.text) {
+    <ui5-group-item slot="groupItems" [text]="groupItem.text" [selected]="groupItem.selected"></ui5-group-item>
+    }
+</ui5-view-settings-dialog>
+
+@if (resultText()) {
+<div class="results-container">
+    <ui5-title level="H5" [style]="{'margin-bottom': '0.5rem'}">View Settings Results:</ui5-title>
+    @for (line of resultText().split('\n'); track $index) {
+    <ui5-text class="result-item">{{ line }}</ui5-text>
+    }
+</div>
+}

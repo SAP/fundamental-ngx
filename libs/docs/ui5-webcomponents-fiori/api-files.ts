@@ -23,5 +23,6 @@ export const API_FILES = {
     timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem'],
     uploadCollection: ['UploadCollection', 'UploadCollectionItem'],
     userMenu: ['UserMenu', 'UserMenuAccount', 'UserMenuItem', 'UserMenuItemGroup'],
-    userSettingsDialog: ['UserSettingsAccountView', 'UserSettingsDialog', 'UserSettingsItem', 'UserSettingsView']
+    userSettingsDialog: ['UserSettingsAccountView', 'UserSettingsDialog', 'UserSettingsItem', 'UserSettingsView'],
+    viewSettingsDialog: ['FilterItem', 'FilterItemOption', 'GroupItem', 'SortItem', 'ViewSettingsDialog']
 };

@@ -97,6 +97,11 @@ const componentRoutes = [
         path: 'user-settings-dialog',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/user-settings-dialog').then(configureLibRoutes)
+    },
+    {
+        path: 'view-settings-dialog',
+        loadChildren: () =>
+            import('@fundamental-ngx/docs/ui5-webcomponents-fiori/view-settings-dialog').then(configureLibRoutes)
     }
 ];
 
