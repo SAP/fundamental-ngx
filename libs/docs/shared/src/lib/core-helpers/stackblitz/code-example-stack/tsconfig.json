@@ -7,6 +7,7 @@
         "declaration": false,
         "downlevelIteration": true,
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "module": "esnext",
         "moduleResolution": "node",
         "importHelpers": true,
@@ -14,10 +15,16 @@
         "typeRoots": ["node_modules/@types"],
         "lib": ["es2023", "dom"],
         "allowSyntheticDefaultImports": true,
-        "skipLibCheck": true
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strictNullChecks": true,
+        "alwaysStrict": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true
     },
     "angularCompilerOptions": {
-        "fullTemplateTypeCheck": true,
+        "strictTemplates": true,
         "strictInjectionParameters": true
     },
     "files": ["src/main.ts"],
