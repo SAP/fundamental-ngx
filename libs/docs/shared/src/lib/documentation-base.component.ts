@@ -42,7 +42,7 @@ export class DocumentationBaseComponent implements OnInit {
 
     smallScreen: boolean = window.innerWidth < SMALL_SCREEN_BREAKPOINT;
 
-    @HostListener('window:resize', ['$event'])
+    @HostListener('window:resize')
     onResize(): void {
         this.windowSize();
         this._isCollapsed();

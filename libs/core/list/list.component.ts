@@ -155,7 +155,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     @HostBinding('attr.role')
-    private get _ariaRole(): string {
+    protected get _ariaRole(): string {
         return this.role || this._defaultRole;
     }
 

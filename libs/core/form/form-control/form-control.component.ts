@@ -59,13 +59,13 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     @HostBinding('attr.aria-label')
-    private get ariaLabelBinding(): string {
+    protected get ariaLabelBinding(): string {
         return this.ariaLabelAttr || this.ariaLabel || '';
     }
 
     /** @hidden */
     @HostBinding('attr.aria-labelledby')
-    private get ariaLabelledByBinding(): string {
+    protected get ariaLabelledByBinding(): string {
         return this.ariaLabelledByAttr || this.ariaLabelledBy || '';
     }
 

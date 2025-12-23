@@ -70,27 +70,27 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     @ContentChild(NestedListHeaderDirective)
-    private _nestedListHeader: NestedListHeaderDirective;
+    protected _nestedListHeader: NestedListHeaderDirective;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => NestedListComponent), { descendants: true })
-    private _nestedLists: QueryList<NestedListComponent>;
+    protected _nestedLists: QueryList<NestedListComponent>;
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _role = 'tree';
+    protected _role = 'tree';
 
     /** @hidden */
     @HostBinding('attr.aria-roledescription')
-    private _ariaRoledescription: Nullable<string> = this.ariaRoledescriptionTree;
+    protected _ariaRoledescription: Nullable<string> = this.ariaRoledescriptionTree;
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    private _ariaHaspopup: Nullable<string> = null;
+    protected _ariaHaspopup: Nullable<string> = null;
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    private _tabindex = '-1';
+    protected _tabindex = '-1';
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
