@@ -53,6 +53,7 @@ import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token'
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { get } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
@@ -60,7 +61,6 @@ import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import get from 'lodash-es/get';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { PairSelectionModel } from './pair-selection.model';
@@ -485,7 +485,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     @HostListener('focusout', ['$event'])
-    private _focusOut(event: FocusEvent): void {
+    protected _focusOut(event: FocusEvent): void {
         if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
             this.onTouched();
         }

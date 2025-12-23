@@ -26,7 +26,7 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    private get _tabindex(): number {
+    protected get _tabindex(): number {
         return this.focusable ? 0 : -1;
     }
 
@@ -44,7 +44,7 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
 
     /** @hidden */
     @HostListener('focus')
-    private _onFocus(): void {
+    protected _onFocus(): void {
         this._overflowContainer.setFocusedElement(this);
     }
 

@@ -5,6 +5,7 @@ export * from './intersection-observable';
 export * from './is-compact-density';
 export * from './is-odd';
 export * from './key-util';
+export * from './lodash-utils';
 export * from './module-deprecations-provider';
 export * from './parser-file-size';
 export * from './random-color-accent';

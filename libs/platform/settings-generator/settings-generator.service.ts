@@ -1,9 +1,8 @@
 import { DestroyRef, ElementRef, Injectable, OnDestroy, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, set } from '@fundamental-ngx/cdk/utils';
 import { DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
-import { set } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject, combineLatest, delay, filter, map, switchMap, take, tap } from 'rxjs';
 import { SettingsModel } from './models/settings.model';
 

@@ -89,7 +89,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
 
     /** @hidden Listen and close dialog on Backdrop click */
     @HostListener('mousedown', ['$event.target'])
-    closeDialog(target: ElementRef): void {
+    closeDialog(target: EventTarget | null): void {
         if (this._config.backdropClickCloseable && target === this.elementRef.nativeElement) {
             this._ref.dismiss(FD_DIALOG_DISMISS_REASON.BACKDROP);
         }

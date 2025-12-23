@@ -123,23 +123,23 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _role: string;
+    protected _role: string;
 
     /** @hidden */
     @HostBinding('attr.aria-expanded')
-    private _ariaExpanded: Nullable<boolean> = null;
+    protected _ariaExpanded: Nullable<boolean> = null;
 
     /** @hidden */
     @HostBinding('attr.aria-selected')
-    private _ariaSelected: Nullable<boolean> = null;
+    protected _ariaSelected: Nullable<boolean> = null;
 
     /** @hidden */
     @HostBinding('attr.aria-disabled')
-    private _ariaDisabled = false;
+    protected _ariaDisabled = false;
 
     /** @hidden */
     @HostBinding('attr.aria-label')
-    private _ariaLabel: string;
+    protected _ariaLabel: string;
 
     /** @hidden */
     _narrow = false;

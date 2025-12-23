@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
-import { isEqual, sortBy } from 'lodash-es';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
@@ -80,7 +79,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
                 lastItem.el.style.display = 'none';
             }
         }
-        if (!isEqual(sortBy(this._hiddenItems), sortBy(newHiddenItems))) {
+        if (!this._arraysEqual(this._hiddenItems, newHiddenItems)) {
             this._hiddenItems = newHiddenItems;
             this.contentItemVisibilityChange.emit(newHiddenItems);
         }
@@ -114,5 +113,21 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
                 return { el: element, priority };
             })
             .sort((a, b) => a.priority - b.priority);
+    }
+
+    /**
+     * Compares two arrays of HTMLElements for equality.
+     * Sorts both arrays and checks if all elements are the same.
+     */
+    private _arraysEqual(arr1: HTMLElement[] | undefined, arr2: HTMLElement[]): boolean {
+        if (!arr1 && arr2.length === 0) {
+            return true;
+        }
+        if (!arr1 || arr1.length !== arr2.length) {
+            return false;
+        }
+        const sorted1 = [...arr1].sort();
+        const sorted2 = [...arr2].sort();
+        return sorted1.every((el, index) => el === sorted2[index]);
     }
 }

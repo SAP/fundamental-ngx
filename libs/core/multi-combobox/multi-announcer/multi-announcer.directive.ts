@@ -35,7 +35,7 @@ export class MultiAnnouncerDirective {
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
-    private _makeSearchTermChangeAnnouncements(event: KeyboardEvent): void {
+    protected _makeSearchTermChangeAnnouncements(event: KeyboardEvent): void {
         if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
             this._liveAnnouncer.clear();
             const count = this.multiAnnouncerOptions?.length;

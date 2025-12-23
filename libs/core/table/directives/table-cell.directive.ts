@@ -95,7 +95,7 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
 
     /** @hidden */
     @HostListener('focusin')
-    private _focusIn(): void {
+    protected _focusIn(): void {
         const parentEl = this.elementRef.nativeElement.parentElement;
         this._parentPreviousTabIndex = parentEl?.tabIndex;
         parentEl?.removeAttribute('tabindex');
@@ -103,7 +103,7 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
 
     /** @hidden */
     @HostListener('focusout')
-    private _focusOut(): void {
+    protected _focusOut(): void {
         const parentEl = this.elementRef.nativeElement.parentElement;
         if (this._parentPreviousTabIndex) {
             parentEl?.setAttribute('tabindex', this._parentPreviousTabIndex.toString());
