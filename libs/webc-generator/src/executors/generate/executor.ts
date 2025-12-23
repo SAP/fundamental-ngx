@@ -240,45 +240,6 @@ async function generateUtilsFiles(targetDir: string): Promise<void> {
     await writeFile(ngPackagePath, JSON.stringify({ lib: { entryFile: './index.ts' } }, null, 2), 'utf-8');
 }
 
-/**
- * Generates the ui5.module.ts file with NgModule exports.
- */
-async function generateUi5Module(
-    componentInfo: Array<{ className: string; folderName: string }>,
-    targetDir: string
-): Promise<void> {
-    // Sort components alphabetically by class name
-    const sortedComponents = [...componentInfo].sort((a, b) => a.className.localeCompare(b.className));
-
-    // Generate imports
-    const imports = sortedComponents
-        .map(({ className, folderName }) => `import { ${className} } from './${folderName}';`)
-        .join('\n');
-
-    // Generate imports array for NgModule
-    const importsArray = sortedComponents.map(({ className }) => `        ${className}`).join(',\n');
-
-    // Generate exports array for NgModule
-    const exportsArray = sortedComponents.map(({ className }) => `        ${className}`).join(',\n');
-
-    const moduleContent = `import { NgModule } from '@angular/core';
-${imports}
-
-@NgModule({
-    imports: [
-${importsArray}
-    ],
-    exports: [
-${exportsArray}
-    ]
-})
-export class Ui5ComponentsModule {}
-`;
-
-    const modulePath = path.join(targetDir, 'ui5.module.ts');
-    await writeFile(modulePath, moduleContent, 'utf-8');
-}
-
 function addUI5WrapperCustomEventType(): string {
     return `
 import { OutputEmitterRef } from '@angular/core';
@@ -340,12 +301,6 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
                 targetDir
             );
             exportsContent += componentExports.join('\n');
-
-            // Generate ui5.module.ts file
-            await generateUi5Module(componentInfo, targetDir);
-
-            // Export ui5.module from index
-            exportsContent += `\nexport * from './ui5.module';\n`;
 
             // Add theming service export to root index
             exportsContent += `export * from './${SUBDIRS.THEMING}';\n`;
