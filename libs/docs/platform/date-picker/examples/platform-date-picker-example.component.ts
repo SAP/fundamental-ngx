@@ -10,7 +10,6 @@ import {
 } from '@angular/forms';
 
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
@@ -22,13 +21,7 @@ import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ng
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    imports: [
-        FdpFormGroupModule,
-        FormsModule,
-        ReactiveFormsModule,
-        PlatformDatePickerComponent,
-        ContentDensityDirective
-    ]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickerExampleComponent {
     birthday: FdDate = new FdDate(1990, 1, 2);

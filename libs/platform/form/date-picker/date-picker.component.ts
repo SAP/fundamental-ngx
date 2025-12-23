@@ -1,9 +1,11 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
     EventEmitter,
     inject,
+    input,
     Input,
     Output,
     ViewChild,
@@ -274,6 +276,21 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @ViewChild(FdDatePickerComponent)
     fdDatePickerComponent: FdDatePickerComponent<D>;
+
+    /**
+     * Whether to show the calendar legend for special days.
+     * When enabled, displays a legend below the calendar showing the special day markers and their descriptions.
+     * @default false
+     */
+    showCalendarLegend = input(false, { transform: booleanAttribute });
+
+    /**
+     * Whether to display the calendar legend in column layout.
+     * When true, legend items are displayed vertically in a single column.
+     * When false, legend items are displayed horizontally in rows.
+     * @default false
+     */
+    legendCol = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _datePickerValid = true;

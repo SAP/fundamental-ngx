@@ -20,6 +20,7 @@ import { DatePickerFormMultiRangeExampleComponent } from './examples/date-picker
 import { DatePickerFormRangeExampleComponent } from './examples/date-picker-form-range-example.component';
 import { DatePickerFormatExampleComponent } from './examples/date-picker-format-example.component';
 import { DatePickerI18nExampleComponent } from './examples/date-picker-i18n-example.component';
+import { DatePickerLegendExample } from './examples/date-picker-legend-example';
 import { DatePickerMultiDisableFuncExampleComponent } from './examples/date-picker-multi-disable-func-example.component';
 import { DatePickerMultiExampleComponent } from './examples/date-picker-multi-example.component';
 import { DatePickerMultiRangeExampleComponent } from './examples/date-picker-multi-range-example.component';
@@ -61,6 +62,8 @@ const datePickerWithSpecialDaysRuleTs = 'date-picker-special-day-example/date-pi
 
 const datePickerMobileTs = 'mobile-mode/date-picker-mobile-mode-example.component.ts';
 const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component.html';
+const datePickerLegendExampleTs = 'date-picker-legend-example.ts';
+const datePickerLegendExampleHtml = 'date-picker-legend-example.html';
 
 @Component({
     selector: 'app-date-picker',
@@ -92,7 +95,8 @@ const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component
         DatePickerMultiDisableFuncExampleComponent,
         DatePickerMultiRangeExampleComponent,
         DatePickerFormMultiRangeExampleComponent,
-        DatePickerSpecialDayExampleComponent
+        DatePickerSpecialDayExampleComponent,
+        DatePickerLegendExample
     ]
 })
 export class DatePickerDocsComponent {
@@ -312,6 +316,20 @@ export class DatePickerDocsComponent {
             component: 'DatePickerMobileModeExampleComponent',
             code: getAssetFromModuleAssets(datePickerMobileH),
             fileName: 'date-picker-mobile-mode-example'
+        }
+    ];
+
+    readonly legendExamples: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datePickerLegendExampleHtml),
+            originalFileName: 'date-picker-page-example'
+        },
+        {
+            language: 'typescript',
+            component: 'DatePickerLegendExample',
+            code: getAssetFromModuleAssets(datePickerLegendExampleTs),
+            originalFileName: 'date-picker-legend-example'
         }
     ];
 }

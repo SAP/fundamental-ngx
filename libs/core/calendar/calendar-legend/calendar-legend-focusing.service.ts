@@ -1,24 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Subject } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class CalendarLegendFocusingService {
-    /** Subject to emit the focused element */
-    focusedLegendItemSubject$ = new Subject<{
-        legendId: Nullable<string>;
-        specialDayNumber: Nullable<number>;
-    }>();
+    /** Signal to track the focused special day number. Only one legend item can have focus at a time. */
+    readonly focusedSpecialDayNumber = signal<Nullable<number>>(null);
 
     /** Clearing the focused element */
     clearFocusedElement(): void {
-        this.focusedLegendItemSubject$.next({ legendId: null, specialDayNumber: null });
+        this.focusedSpecialDayNumber.set(null);
     }
 
-    /** Setting the elements that are getting currently focused */
-    _handleLegendItemFocus(legendId: string, specialDayNumber: Nullable<number>): void {
-        this.focusedLegendItemSubject$.next({ legendId, specialDayNumber });
+    /** Setting the special day number that is currently focused */
+    handleLegendItemFocus(specialDayNumber: Nullable<number>): void {
+        this.focusedSpecialDayNumber.set(specialDayNumber);
     }
 }
