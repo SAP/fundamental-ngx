@@ -1,10 +1,8 @@
 <div class="fd-container" [style]="{ height: '300px' }">
-    <!-- TODO: figure out how to avoid overriding box-sizing -->
     <ui5-shellbar
         id="shellbar"
         secondaryTitle="home"
         [showProductSwitch]="true"
-        [style]="{ 'box-sizing': 'border-box' }"
         (ui5ProductSwitchClick)="onProductSwitchClick($event)"
     >
         <ui5-shellbar-branding slot="branding">
@@ -14,7 +12,13 @@
         <ui5-toggle-button icon="sap-icon://da" slot="assistant"></ui5-toggle-button>
     </ui5-shellbar>
 
-    <ui5-popover id="productswitch-popover" placement="Bottom" [opener]="opener()" [open]="popoverOpen()">
+    <ui5-popover
+        id="productswitch-popover"
+        placement="Bottom"
+        [opener]="opener()"
+        [open]="popoverOpen()"
+        (ui5Close)="onPopoverClose()"
+    >
         <ui5-product-switch>
             @for (product of products(); track product.id) {
             <ui5-product-switch-item

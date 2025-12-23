@@ -49,6 +49,10 @@ export class InShellBarSample {
         this.popoverOpen.update((open) => !open);
     }
 
+    onPopoverClose(): void {
+        this.popoverOpen.set(false);
+    }
+
     onProductClick(product: Product): void {
         console.log(`Product selected: ${product.title}.`);
     }

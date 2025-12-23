@@ -9,8 +9,7 @@
 </div>
 
 <ui5-page [hideFooter]="hideFooter()" [fixedFooter]="fixedFooter()" [style]="{ height: '300px' }">
-    <!-- TODO: figure out how to avoid overriding box-sizing -->
-    <ui5-bar slot="header" design="Header" [style]="{ 'box-sizing': 'border-box' }">
+    <ui5-bar slot="header" design="Header">
         <ui5-button icon="home" tooltip="Go home" design="Transparent" slot="startContent"></ui5-button>
         <ui5-title id="basic-label">Footer Configuration</ui5-title>
         <ui5-button design="Transparent" icon="action-settings" tooltip="Go to settings" slot="endContent"></ui5-button>

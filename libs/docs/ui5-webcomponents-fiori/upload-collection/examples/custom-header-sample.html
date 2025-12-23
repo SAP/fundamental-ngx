@@ -4,8 +4,7 @@
     noDataDescription="Upload documents using the button above"
     (ui5ItemDelete)="onItemDelete($event)"
 >
-    <!-- figure out how not to use { 'box-sizing': 'border-box'} -->
-    <ui5-toolbar slot="header" design="Transparent" [style]="{ 'box-sizing': 'border-box'}">
+    <ui5-toolbar slot="header" design="Transparent">
         <ui5-title level="H3">Documents ({{ files().length }})</ui5-title>
         <ui5-file-uploader [hideInput]="true" [multiple]="true" (ui5Change)="onUpload($event)">
             <ui5-button design="Transparent" icon="upload-to-cloud"> Upload File </ui5-button>

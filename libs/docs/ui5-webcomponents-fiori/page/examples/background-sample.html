@@ -15,8 +15,7 @@
 
 <div [style]="{ height: '350px', padding: '1rem', 'background-color': 'var(--sapContent_Illustrative_Color10)'}">
     <ui5-page [backgroundDesign]="backgroundDesign()">
-        <!-- TODO: figure out how to avoid overriding box-sizing -->
-        <ui5-bar slot="header" design="Header" [style]="{ 'box-sizing': 'border-box' }">
+        <ui5-bar slot="header" design="Header">
             <ui5-button design="Transparent" icon="home" tooltip="Go home" slot="startContent"></ui5-button>
             <ui5-label id="background-design-label">Background Sample</ui5-label>
             <ui5-button

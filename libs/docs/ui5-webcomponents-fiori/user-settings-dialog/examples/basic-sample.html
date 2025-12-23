@@ -1,15 +1,15 @@
-<div [style]="{ 'box-sizing': 'border-box' }">
-    <ui5-shellbar id="shellbar" (ui5ProfileClick)="onProfileClick()">
+<div>
+    <ui5-shellbar (ui5ProfileClick)="onProfileClick()">
         <ui5-shellbar-branding slot="branding">
             Corporate Portal
             <img slot="logo" src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="Logo" />
         </ui5-shellbar-branding>
-        <ui5-avatar slot="profile">
+        <ui5-avatar slot="profile" id="menu-opener">
             <img [src]="userAccount().avatarSrc" alt="User Avatar" />
         </ui5-avatar>
     </ui5-shellbar>
 
-    <ui5-user-menu id="userMenuShellBar" opener="shellbar" [open]="menuOpen()" (ui5Close)="onMenuClose()">
+    <ui5-user-menu id="userMenuShellBar" opener="menu-opener" [open]="menuOpen()" (ui5Close)="onMenuClose()">
         <ui5-user-menu-account
             slot="accounts"
             [avatarSrc]="userAccount().avatarSrc"
