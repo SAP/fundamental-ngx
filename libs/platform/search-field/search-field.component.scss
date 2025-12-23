@@ -31,19 +31,9 @@
         // overriding background color in order to have outline displayed correctly
         background: transparent;
     }
-}
 
-.fdp-search-field__suggestion-dropdown {
-    .fd-menu--overflow {
-        background-color: var(--sapList_Background);
-    }
-
-    .fd-menu__list {
-        max-width: none;
-    }
-
-    .fd-menu__item {
-        max-width: none;
+    .fdp-search-field__advanced-filter-button {
+        margin-inline-start: 0.625rem !important;
     }
 }
 

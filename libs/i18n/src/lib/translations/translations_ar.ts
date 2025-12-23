@@ -373,7 +373,8 @@ export default {
         searchInputLabel: 'بحث',
         synchronizeButtonTitle: 'مزامنة',
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
-        searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل'
+        searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',
