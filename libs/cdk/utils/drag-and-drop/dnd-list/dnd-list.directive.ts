@@ -112,7 +112,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-dnd-list';
+    protected readonly _initialClass = 'fd-dnd-list';
 
     /** @hidden */
     private _elementsCoordinates: ElementChord[];

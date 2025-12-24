@@ -1,0 +1,46 @@
+<div class="fd-margin-bottom--md">
+    <ui5-checkbox text="Hide Footer" (ui5Change)="onHideFooterToggle($event)" />
+    <ui5-checkbox
+        text="Fixed Footer (at very bottom)"
+        [disabled]="hideFooter()"
+        (ui5Change)="onFixedFooterToggle($event)"
+        class="fd-margin-begin--md"
+    />
+</div>
+
+<ui5-page [hideFooter]="hideFooter()" [fixedFooter]="fixedFooter()" [style]="{ height: '300px' }">
+    <ui5-bar slot="header" design="Header">
+        <ui5-button icon="home" tooltip="Go home" design="Transparent" slot="startContent"></ui5-button>
+        <ui5-title id="basic-label">Footer Configuration</ui5-title>
+        <ui5-button design="Transparent" icon="action-settings" tooltip="Go to settings" slot="endContent"></ui5-button>
+    </ui5-bar>
+
+    <div style="padding: 2rem">
+        <p class="fd-margin-top--md">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+        </p>
+        <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.
+        </p>
+
+        <p class="fd-margin-top--md">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+        </p>
+        <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.
+        </p>
+    </div>
+
+    <ui5-bar slot="footer" design="Footer">
+        <ui5-title slot="startContent" level="H6"> Footer {{ fixedFooter() ? '(Fixed)' : '(Floating)' }} </ui5-title>
+        <ui5-button slot="endContent" design="Emphasized">Action</ui5-button>
+    </ui5-bar>
+</ui5-page>

@@ -1,0 +1,37 @@
+<fd-docs-section-title id="basic" componentName="product-switch"> Basic Product Switch </fd-docs-section-title>
+<description>
+    The Product Switch component is a container for <code>ui5-product-switch-item</code> components that allows users to
+    quickly navigate between different products or applications. It displays a grid of clickable tiles, each
+    representing a product or application. Each item can have a title, subtitle, and icon to provide clear visual
+    identification.
+</description>
+<component-example>
+    <ui5-doc-product-switch-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="icons" componentName="product-switch"> Custom Icons and Images </fd-docs-section-title>
+<description>
+    Product switch items can display either standard UI5 icons using the <code>icon</code> property or custom images
+    using the <code>image</code> slot. The image slot takes precedence over the icon property. When using the image
+    slot, it's recommended to use a non-interactive <code>ui5-avatar</code> component with size S, Square shape, and
+    Transparent colorScheme for best alignment. This example demonstrates both approaches - using standard icons and
+    custom avatar images.
+</description>
+<component-example>
+    <ui5-doc-product-switch-icons-sample />
+</component-example>
+<code-example [exampleFiles]="iconsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="in-shell-bar" componentName="product-switch">
+    Product Switch In Shell Bar
+</fd-docs-section-title>
+<description> Press the "grid" on the right-most part of the ShellBar to show the ProductSwitch. </description>
+<component-example>
+    <ui5-doc-product-switch-in-shell-bar-sample />
+</component-example>
+<code-example [exampleFiles]="inShellBarExample()" />

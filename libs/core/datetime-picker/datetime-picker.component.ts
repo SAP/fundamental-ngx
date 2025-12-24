@@ -11,6 +11,7 @@ import {
     inject,
     Inject,
     Injector,
+    input,
     Input,
     OnChanges,
     OnDestroy,
@@ -272,16 +273,6 @@ export class DatetimePickerComponent<D>
     buttonFocusable = false;
 
     /**
-     * Special days mark, it can be used by passing array of object with
-     * Special day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:
-     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
-     * Rule accepts method with FdDate object as a parameter. ex:
-     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
-     */
-    @Input()
-    specialDaysRules: SpecialDayRule<D>[] = [];
-
-    /**
      * Object to customize year grid,
      * Row, Columns and method to display year can be modified
      */
@@ -383,21 +374,6 @@ export class DatetimePickerComponent<D>
     @Output()
     readonly touched: EventEmitter<void> = new EventEmitter<void>();
 
-    /** Indicates when datetime input is in invalid state. */
-    get isInvalidDateInput(): boolean {
-        return this._isInvalidDateInput && this._touched;
-    }
-
-    /** @hidden Reference to the inner calendar component. */
-    @ViewChild(CalendarComponent, { static: false })
-    private set _calendarCmp(calendar: CalendarComponent<D>) {
-        setTimeout(() => {
-            calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
-            calendar?.initialFocus();
-        });
-        this._calendarComponent = calendar;
-    }
-
     /** @hidden */
     @ViewChild('inputGroupComponent', {
         read: ElementRef
@@ -417,6 +393,42 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     @ViewChild('pickerTemplate')
     private readonly _pickerTemplate: TemplateRef<any>;
+
+    /**
+     * Special days mark, it can be used by passing array of object with
+     * Special day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:
+     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
+     * Rule accepts method with FdDate object as a parameter. ex:
+     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     */
+    specialDaysRules = input<SpecialDayRule<D>[]>([]);
+
+    /**
+     * Whether to show the calendar legend below the calendar.
+     * The legend displays explanations for special day markers.
+     */
+    showCalendarLegend = input(false, { transform: booleanAttribute });
+
+    /**
+     * Whether the calendar legend should display in a single column layout.
+     * When false (default), the legend items flow into multiple columns automatically.
+     */
+    legendCol = input(false, { transform: booleanAttribute });
+
+    /** Indicates when datetime input is in invalid state. */
+    get isInvalidDateInput(): boolean {
+        return this._isInvalidDateInput && this._touched;
+    }
+
+    /** @hidden Reference to the inner calendar component. */
+    @ViewChild(CalendarComponent, { static: false })
+    private set _calendarCmp(calendar: CalendarComponent<D>) {
+        setTimeout(() => {
+            calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+            calendar?.initialFocus();
+        });
+        this._calendarComponent = calendar;
+    }
 
     /** @hidden */
     _calendarComponent: CalendarComponent<D>;
@@ -526,7 +538,7 @@ export class DatetimePickerComponent<D>
             this._setTempDateTime();
         }
 
-        if (['displayHours', 'displayMinutes', 'displaySeconds', 'meridian'].some((input) => input in changes)) {
+        if (['displayHours', 'displayMinutes', 'displaySeconds', 'meridian'].some((prop) => prop in changes)) {
             this._calculateTimeOptions();
         }
 

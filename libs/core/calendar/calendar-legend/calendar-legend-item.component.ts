@@ -1,13 +1,12 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
-    OnChanges,
-    OnInit,
-    ViewEncapsulation,
-    input
+    inject,
+    input,
+    ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-calendar-legend-item',
@@ -22,10 +21,11 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
         </span>
     `,
     host: {
-        tabindex: '0'
+        tabindex: '0',
+        '[class]': '_componentClasses()'
     }
 })
-export class CalendarLegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
+export class CalendarLegendItemComponent {
     /** The text of the legend item */
     text = input<string | undefined>();
 
@@ -39,31 +39,21 @@ export class CalendarLegendItemComponent implements OnChanges, OnInit, CssClassB
     class = input<string | undefined>('');
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [`fd-calendar-legend__item ${this.class()} ${this.getAppointmentClass()} ${this.getColorClass()}`];
-    }
+    /** @hidden Computed CSS classes based on inputs */
+    protected readonly _componentClasses = computed(() => {
+        const classes = ['fd-calendar-legend__item'];
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+        classes.push(this.class()!);
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        if (this.circle()) {
+            classes.push('fd-calendar-legend__item--appointment');
+        }
 
-    /** @hidden */
-    getAppointmentClass(): string {
-        return this.circle() ? `fd-calendar-legend__item--appointment` : '';
-    }
-
-    /** @hidden */
-    getColorClass(): string {
-        return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
-    }
+        if (this.color()) {
+            classes.push(`fd-calendar-legend__item--${this.color()}`);
+        }
+        return classes.join(' ');
+    });
 }

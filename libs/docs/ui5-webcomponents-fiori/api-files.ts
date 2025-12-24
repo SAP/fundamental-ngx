@@ -15,5 +15,14 @@ export const API_FILES = {
     mediaGallery: ['MediaGallery'],
     navigationLayout: ['NavigationLayout'],
     notificationList: ['NotificationList', 'NotificationListGroupItem', 'NotificationListItem'],
-    timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem']
+    page: ['Page'],
+    productSwitch: ['ProductSwitch', 'ProductSwitchItem'],
+    search: ['Search', 'SearchItem', 'SearchItemGroup', 'SearchItemShowMore', 'SearchMessageArea', 'SearchScope'],
+    shellBar: ['ShellBar', 'ShellBarBranding', 'ShellBarItem', 'ShellBarSearch', 'ShellBarSpacer'],
+    sideNavigation: ['SideNavigation', 'SideNavigationGroup', 'SideNavigationItem', 'SideNavigationSubItem'],
+    timeline: ['Timeline', 'TimelineItem', 'TimelineGroupItem'],
+    uploadCollection: ['UploadCollection', 'UploadCollectionItem'],
+    userMenu: ['UserMenu', 'UserMenuAccount', 'UserMenuItem', 'UserMenuItemGroup'],
+    userSettingsDialog: ['UserSettingsAccountView', 'UserSettingsDialog', 'UserSettingsItem', 'UserSettingsView'],
+    viewSettingsDialog: ['FilterItem', 'FilterItemOption', 'GroupItem', 'SortItem', 'ViewSettingsDialog']
 };

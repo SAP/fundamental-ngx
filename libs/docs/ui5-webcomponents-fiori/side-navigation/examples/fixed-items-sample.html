@@ -1,0 +1,13 @@
+<ui5-side-navigation [style]="{'height': '600px'}">
+    <!-- Main navigation items -->
+    <ui5-side-navigation-item [selected]="true" icon="home" text="Home">Home</ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="product" text="Products">Products</ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="calendar" text="Calendar">Calendar</ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="contacts" text="Contacts">Contacts</ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="activities" text="Activities">Activities</ui5-side-navigation-item>
+
+    <!-- Fixed items at the bottom -->
+    <ui5-side-navigation-item slot="fixedItems" icon="settings" text="Settings">Settings</ui5-side-navigation-item>
+    <ui5-side-navigation-item slot="fixedItems" icon="sys-help" text="Help">Help</ui5-side-navigation-item>
+    <ui5-side-navigation-item slot="fixedItems" icon="log" text="Logout">Logout</ui5-side-navigation-item>
+</ui5-side-navigation>

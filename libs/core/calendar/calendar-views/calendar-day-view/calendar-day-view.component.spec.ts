@@ -2,6 +2,7 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { first } from 'rxjs/operators';
 
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { CalendarLegendFocusingService } from '../../calendar-legend/calendar-legend-focusing.service';
 import { CalendarService } from '../../calendar.service';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarDayViewComponent } from './calendar-day-view.component';
@@ -14,7 +15,7 @@ describe('CalendarDayViewComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdDatetimeModule, CalendarDayViewComponent],
-            providers: [CalendarService]
+            providers: [CalendarService, CalendarLegendFocusingService]
         }).compileComponents();
     }));
 
@@ -381,5 +382,130 @@ describe('CalendarDayViewComponent', () => {
         component.selectDate(component._calendarDayList[15]);
         expect(component.selectedDate).toEqual(component._calendarDayList[14].date);
         expect(component._calendarDayList[15].selected).toBe(true);
+    });
+
+    describe('Legend focus optimization', () => {
+        it('should cache days with special markers during grid build', () => {
+            component.currentlyDisplayed = { month: 10, year: 2018 };
+            fixture.componentRef.setInput('specialDaysRules', [
+                {
+                    specialDayNumber: 5,
+                    rule: (date: FdDate) => datetimeAdapter.getDate(date) === 15,
+                    legendText: 'Special Day 1'
+                },
+                {
+                    specialDayNumber: 10,
+                    rule: (date: FdDate) => datetimeAdapter.getDate(date) === 20,
+                    legendText: 'Special Day 2'
+                }
+            ]);
+            component.ngOnInit();
+
+            const cachedDays = (component as any)._daysWithSpecialMarkers;
+            expect(cachedDays).toBeDefined();
+            expect(cachedDays.length).toBe(2);
+            expect(cachedDays.every((day: CalendarDay<FdDate>) => day.specialDayNumber !== undefined)).toBe(true);
+        });
+
+        it('should only update cached special days when legend focus changes', () => {
+            component.currentlyDisplayed = { month: 10, year: 2018 };
+            fixture.componentRef.setInput('specialDaysRules', [
+                {
+                    specialDayNumber: 5,
+                    rule: (date: FdDate) => datetimeAdapter.getDate(date) === 15,
+                    legendText: 'Special Day 1'
+                },
+                {
+                    specialDayNumber: 10,
+                    rule: (date: FdDate) => datetimeAdapter.getDate(date) === 20,
+                    legendText: 'Special Day 2'
+                }
+            ]);
+            component.ngOnInit();
+            fixture.detectChanges();
+
+            // Verify initial state - all markers visible
+            const cachedDays = (component as any)._daysWithSpecialMarkers;
+            expect(cachedDays.every((day: CalendarDay<FdDate>) => day.shouldHideSpecialDayMarker === false)).toBe(true);
+
+            // Simulate legend focus via the focusing service - need to provide it in the component's injector
+            const focusingService = TestBed.inject(CalendarLegendFocusingService);
+            focusingService.handleLegendItemFocus(5);
+            fixture.detectChanges();
+
+            // Only days with specialDayNumber !== 5 should be hidden
+            const day5 = cachedDays.find((day: CalendarDay<FdDate>) => day.specialDayNumber === 5);
+            const day10 = cachedDays.find((day: CalendarDay<FdDate>) => day.specialDayNumber === 10);
+
+            expect(day5.shouldHideSpecialDayMarker).toBe(false);
+            expect(day10.shouldHideSpecialDayMarker).toBe(true);
+        });
+
+        it('should show all markers when legend focus is cleared', () => {
+            component.currentlyDisplayed = { month: 10, year: 2018 };
+            fixture.componentRef.setInput('specialDaysRules', [
+                {
+                    specialDayNumber: 5,
+                    rule: (date: FdDate) => datetimeAdapter.getDate(date) === 15,
+                    legendText: 'Special Day 1'
+                }
+            ]);
+            component.ngOnInit();
+            fixture.detectChanges();
+
+            const focusingService = TestBed.inject(CalendarLegendFocusingService);
+
+            // Focus on a legend item
+            focusingService.handleLegendItemFocus(5);
+            fixture.detectChanges();
+
+            // Clear focus
+            focusingService.clearFocusedElement();
+            fixture.detectChanges();
+
+            // All markers should be visible again
+            const cachedDays = (component as any)._daysWithSpecialMarkers;
+            expect(cachedDays.every((day: CalendarDay<FdDate>) => day.shouldHideSpecialDayMarker === false)).toBe(true);
+        });
+
+        it('should handle grid rebuild by updating cached special days', () => {
+            component.currentlyDisplayed = { month: 10, year: 2018 };
+            fixture.componentRef.setInput('specialDaysRules', [
+                {
+                    specialDayNumber: 5,
+                    rule: (date: FdDate) => datetimeAdapter.getDate(date) === 15,
+                    legendText: 'Special Day 1'
+                }
+            ]);
+            component.ngOnInit();
+
+            let cachedDays = (component as any)._daysWithSpecialMarkers;
+            expect(cachedDays.length).toBe(1);
+
+            // Change month which rebuilds grid
+            component.currentlyDisplayed = { month: 11, year: 2018 };
+            fixture.detectChanges();
+
+            cachedDays = (component as any)._daysWithSpecialMarkers;
+            expect(cachedDays.length).toBe(1);
+            // Verify it's a different day (November 15th instead of October 15th)
+            expect(datetimeAdapter.getMonth(cachedDays[0].date)).toBe(11);
+        });
+
+        it('should efficiently handle empty special days array', () => {
+            component.currentlyDisplayed = { month: 10, year: 2018 };
+            fixture.componentRef.setInput('specialDaysRules', []);
+            component.ngOnInit();
+
+            const cachedDays = (component as any)._daysWithSpecialMarkers;
+            expect(cachedDays.length).toBe(0);
+
+            // Should not error when updating with no special days
+            const focusingService = TestBed.inject(CalendarLegendFocusingService);
+            focusingService.handleLegendItemFocus(5);
+            fixture.detectChanges();
+
+            expect(cachedDays.length).toBe(0);
+        });
     });
 });

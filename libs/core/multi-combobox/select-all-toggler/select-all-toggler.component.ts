@@ -92,7 +92,7 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     /** @hidden */
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
-    onKeyDown($event: KeyboardEvent): void {
+    onKeyDown($event: Event): void {
         $event.preventDefault();
         this.change(!this.checkboxValue);
     }

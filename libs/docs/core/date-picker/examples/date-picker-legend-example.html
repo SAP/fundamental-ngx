@@ -1,0 +1,17 @@
+<h4>Basic Date Picker with Legend (Column Layout)</h4>
+<fd-date-picker
+    [(ngModel)]="selectedDate"
+    [specialDaysRules]="specialDaysRules"
+    [showCalendarLegend]="true"
+    [legendCol]="true"
+    placeholder="Select a date"
+></fd-date-picker>
+
+<h4>Range Date Picker with Legend (Row Layout)</h4>
+<fd-date-picker
+    type="range"
+    [specialDaysRules]="specialDaysRules"
+    [showCalendarLegend]="true"
+    [legendCol]="false"
+    placeholder="Select date range"
+></fd-date-picker>

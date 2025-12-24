@@ -1,0 +1,34 @@
+<fd-docs-section-title id="basic" componentName="user-settings-dialog">
+    Basic User Settings Dialog
+</fd-docs-section-title>
+<description>
+    The User Settings Dialog is an SAP Fiori-specific web component designed to be used within the
+    <code>ui5-user-menu</code>, which itself is placed in a <code>ui5-shellbar</code>. It provides a comprehensive
+    interface for users to view and manage their account settings, preferences, and application-specific configurations.
+    The dialog displays a navigation list of settings categories on the left and the corresponding content views on the
+    right. <br /><br />
+    The component uses <code>ui5-user-settings-item</code> elements in the default slot to define the settings
+    categories. Each item can contain one or more <code>ui5-user-settings-view</code> elements that display the actual
+    settings content. Use the <code>fixedItems</code> slot for settings items that should remain at the bottom of the
+    navigation list (such as "Sign Out" or "Legal Information"). <br /><br />
+    Key features:
+    <ul>
+        <li><strong>open: </strong>Controls the visibility state of the dialog</li>
+        <li><strong>headerText: </strong>Sets the title text displayed in the dialog header</li>
+        <li>
+            <strong>showSearchField: </strong>Enables a search field to filter through settings items (disabled by
+            default)
+        </li>
+        <li>
+            <strong>ui5SelectionChange: </strong>Event fired when a different settings item is selected in the
+            navigation
+        </li>
+        <li><strong>ui5Open / ui5Close: </strong>Events fired when the dialog opens or closes</li>
+    </ul>
+    This example demonstrates the complete integration flow: ShellBar → User Menu → User Settings Dialog with multiple
+    settings categories including appearance, language, and notification preferences.
+</description>
+<component-example>
+    <ui5-doc-user-settings-dialog-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />

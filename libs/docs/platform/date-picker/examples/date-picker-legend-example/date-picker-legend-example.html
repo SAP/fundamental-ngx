@@ -1,0 +1,18 @@
+<fdp-form-group [formGroup]="datePickerForm">
+    <fdp-form-field #field1 id="date-picker-legend-row" label="Date Picker with Legend (Row Layout)">
+        <fdp-date-picker
+            formControlName="datePicker1"
+            [specialDaysRules]="specialDaysRules"
+            [showCalendarLegend]="true"
+        ></fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #field2 id="date-picker-legend-col" label="Date Picker with Legend (Column Layout)">
+        <fdp-date-picker
+            formControlName="datePicker2"
+            [specialDaysRules]="specialDaysRules"
+            [showCalendarLegend]="true"
+            [legendCol]="true"
+        ></fdp-date-picker>
+    </fdp-form-field>
+</fdp-form-group>

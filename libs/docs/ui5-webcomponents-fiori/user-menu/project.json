@@ -1,0 +1,9 @@
+{
+    "name": "docs-ui5-webcomponents-fiori-user-menu",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/docs/ui5-webcomponents-fiori/user-menu",
+    "prefix": "ui5-doc",
+    "projectType": "library",
+    "tags": ["type:lib", "scope:docs"],
+    "targets": {}
+}

@@ -33,6 +33,8 @@ import {
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { CalendarLegendFocusingService } from './calendar-legend/calendar-legend-focusing.service';
+import { CalendarLegendComponent } from './calendar-legend/calendar-legend.component';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
@@ -83,6 +85,7 @@ let calendarUniqueId = 0;
             multi: true
         },
         CalendarService,
+        CalendarLegendFocusingService,
         contentDensityObserverProviders(),
         {
             provide: FD_LANGUAGE,
@@ -100,7 +103,8 @@ let calendarUniqueId = 0;
         CalendarDayViewComponent,
         CalendarMonthViewComponent,
         CalendarYearViewComponent,
-        CalendarAggregatedYearViewComponent
+        CalendarAggregatedYearViewComponent,
+        CalendarLegendComponent
     ]
 })
 export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
@@ -289,9 +293,19 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
-    /** The unique ID of the calendar legend, if the calendar is to display a legend. */
+    /**
+     * Whether to show the calendar legend below the calendar.
+     * The legend displays special day markers and their meanings.
+     */
     @Input()
-    associatedLegendId: string;
+    showCalendarLegend = false;
+
+    /**
+     * Whether to display the legend in column layout (true) or row layout (false).
+     * Column layout is useful when legend is displayed alongside the calendar.
+     */
+    @Input()
+    legendCol = false;
 
     /**
      * @hidden

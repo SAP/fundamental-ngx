@@ -15,16 +15,18 @@ class MockDatePickerComponent<D> implements DatePicker<D> {
     rangeDate: DateRange<D>;
     mobile: boolean;
     mobileConfig = testDatePickerConfigObject;
+    specialDaysRules?: any[];
+    showCalendarLegend?: boolean;
     isOpenChange = new EventEmitter<boolean>();
     dialogApprove(): void {}
-    dialogDismiss(value: D | DateRange<D>): void {
+    dialogDismiss(value: D | DateRange<D> | Array<D> | Array<DateRange<D>>): void {
         if (this._isDateRange(value)) {
-            this.rangeDate = value;
+            this.rangeDate = value as DateRange<D>;
         } else {
-            this.selectedDate = value;
+            this.selectedDate = value as D;
         }
     }
-    getSelectedDate(): D | DateRange<D> {
+    getSelectedDate(): D | DateRange<D> | Array<D> | Array<DateRange<D>> {
         return this.selectedDate || this.rangeDate;
     }
 
@@ -97,5 +99,34 @@ describe('DatePickerMobileComponent', () => {
         expect(anyComponent._selectedBackup).not.toEqual(modifiedDate);
         component.handleDismiss();
         expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith(originalDate);
+    });
+
+    describe('Calendar Legend Feature', () => {
+        it('should return true for boolean showCalendarLegend', () => {
+            anyComponent._component.showCalendarLegend = true;
+            expect(component._getShowCalendarLegend()).toBe(true);
+        });
+
+        it('should return false for boolean showCalendarLegend', () => {
+            anyComponent._component.showCalendarLegend = false;
+            expect(component._getShowCalendarLegend()).toBe(false);
+        });
+
+        it('should return false when showCalendarLegend is undefined', () => {
+            anyComponent._component.showCalendarLegend = undefined;
+            expect(component._getShowCalendarLegend()).toBe(false);
+        });
+
+        it('should unwrap showCalendarLegend from signal', () => {
+            const mockSignal = jest.fn(() => true);
+            anyComponent._component.showCalendarLegend = mockSignal as any;
+            expect(component._getShowCalendarLegend()).toBe(true);
+        });
+
+        it('should handle specialDaysRules property', () => {
+            const rules = [{ specialDayNumber: 1, rule: () => true, legendText: 'Test Day' }];
+            anyComponent._component.specialDaysRules = rules;
+            expect(anyComponent._component.specialDaysRules).toEqual(rules);
+        });
     });
 });

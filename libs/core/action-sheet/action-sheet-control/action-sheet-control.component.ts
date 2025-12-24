@@ -37,7 +37,7 @@ export class ActionSheetControlComponent {
     private _focusedElementBeforeDialogOpened: HTMLElement | null = null;
 
     /** Handler for mouse events */
-    @HostListener('click', ['$event'])
+    @HostListener('click')
     onClick(): void {
         this._focusedElementBeforeDialogOpened = _getFocusedElementPierceShadowDom();
         this.clicked.emit();

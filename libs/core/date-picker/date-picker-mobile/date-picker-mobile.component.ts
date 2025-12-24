@@ -54,6 +54,26 @@ export class DatePickerMobileComponent<D> extends MobileModeBase<DatePicker<D>> 
     }
 
     /** @hidden */
+    _getShowCalendarLegend(): boolean {
+        const show = this._component.showCalendarLegend;
+        if (typeof show === 'boolean') {
+            return show;
+        }
+
+        return (show as any)?.() || false;
+    }
+
+    /** @hidden */
+    _getLegendCol(): boolean {
+        const col = this._component.legendCol;
+        if (typeof col === 'boolean') {
+            return col;
+        }
+
+        return (col as any)?.() || false;
+    }
+
+    /** @hidden */
     handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
@@ -68,7 +88,7 @@ export class DatePickerMobileComponent<D> extends MobileModeBase<DatePicker<D>> 
     /** @hidden */
     private _toggleDialog(open: boolean): void {
         if (open) {
-            this._selectedBackup = this._component.selectedDate!;
+            this._selectedBackup = this._component.getSelectedDate();
             if (!this._dialogService.hasOpenDialogs()) {
                 this._open();
             }

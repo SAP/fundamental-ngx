@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalendarComponent, CalendarLegendComponent } from '@fundamental-ngx/core/calendar';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -22,30 +22,30 @@ import { SpecialDayRule } from '@fundamental-ngx/core/shared';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [CalendarComponent, CalendarLegendComponent]
+    imports: [CalendarComponent]
 })
 export class CalendarLegendExampleComponent {
     specialDays: SpecialDayRule<FdDate>[] = [
         {
             specialDayNumber: 5,
-            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) in [2, 9, 16],
-            legendText: 'Placeholder-5'
+            rule: (fdDate) => [2, 9, 16, 23].includes(this.datetimeAdapter.getDate(fdDate)),
+            legendText: 'Company Holiday'
         },
         {
             specialDayNumber: 6,
             rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
-            legendText: 'Appointment Type',
+            legendText: 'Team Meeting',
             appointment: true
         },
         {
             specialDayNumber: 10,
-            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 15,
-            legendText: 'Placeholder-10'
+            rule: (fdDate) => [10, 15, 20].includes(this.datetimeAdapter.getDate(fdDate)),
+            legendText: 'Project Deadline'
         },
         {
             specialDayNumber: 11,
-            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 30,
-            legendText: 'Placeholder-11'
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 25,
+            legendText: 'Training Day'
         }
     ];
 
