@@ -59,16 +59,16 @@ async function generateThemingServiceContent(packageName: string): Promise<strin
 /**
  * Step 1: Resolve and load the CEM file.
  */
-async function loadCemData(options: GenerateExecutorSchema, context: ExecutorContext): Promise<CEM.Package> {
-    if (!options.cemFile) {
+async function loadCemData(cemFile: string | undefined, context: ExecutorContext): Promise<CEM.Package> {
+    if (!cemFile) {
         throw new Error('Could not determine a valid path to the CEM file. Please provide it via the cemFile option.');
     }
 
     let cemFilePath: string;
     try {
-        cemFilePath = require.resolve(options.cemFile, { paths: [context.root] });
+        cemFilePath = require.resolve(cemFile, { paths: [context.root] });
     } catch (error) {
-        throw new Error(`Failed to resolve CEM file at path ${options.cemFile}. Original error: ${error.message}`);
+        throw new Error(`Failed to resolve CEM file at path ${cemFile}. Original error: ${error.message}`);
     }
 
     const cemContent = await readFile(cemFilePath, 'utf-8');
@@ -176,6 +176,7 @@ async function generateThemingFiles(packageName: string, targetDir: string): Pro
  */
 async function generateComponentFiles(
     componentDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
+    dependencyDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[],
     allEnums: ExtractedCemData['allEnums'],
     packageName: string,
     targetDir: string
@@ -200,7 +201,8 @@ async function generateComponentFiles(
             const templateContent = componentTemplate(
                 declaration,
                 allEnums.map((e) => ({ name: e.name, members: e.members })),
-                packageName
+                packageName,
+                dependencyDeclarations.map((dep) => dep.declaration)
             );
 
             return ensureDirAndWriteFile(componentIndexPath, templateContent).then(() =>
@@ -266,11 +268,21 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
         const targetDir = path.join(projectRoot, `libs/${context.projectName}`);
 
         // Resolve, load, and parse the CEM file
-        const cemData = await loadCemData(options, context);
+        const cemData = await loadCemData(options.cemFile, context);
 
         // Extract necessary data (declarations, enums)
         // PASS THE OPTIONS OBJECT TO extractCemData
         const { componentDeclarations, allEnums } = extractCemData(cemData, options);
+
+        let dependencyDeclarations: { declaration: CEM.CustomElementDeclaration; modulePath: string }[] = [];
+        if (options.dependencyCemFiles?.length) {
+            const dependencyCemData: CEM.Package[] = await Promise.all(
+                options.dependencyCemFiles.map((file) => loadCemData(file, context))
+            );
+            dependencyDeclarations = dependencyCemData.flatMap(
+                (depCemData) => extractCemData(depCemData, options).componentDeclarations
+            );
+        }
 
         // Generate Utility/Config Files
         await mkdir(targetDir, { recursive: true });
@@ -294,6 +306,7 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
             // Generate Component Wrappers
             const componentExports = await generateComponentFiles(
                 componentDeclarations,
+                dependencyDeclarations,
                 allEnums,
                 packageName,
                 targetDir
