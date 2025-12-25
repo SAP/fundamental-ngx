@@ -1,4 +1,5 @@
 {
   "installDependencies": true,
-  "startCommand": "yarn start"
+  "startCommand": "yarn start",
+  "compileTrigger": "auto"
 }

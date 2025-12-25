@@ -1,7 +1,8 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import sdk from '@stackblitz/sdk';
-import { first, tap, zip } from 'rxjs';
+import { map, zip } from 'rxjs';
 import { getAsset } from '../../getAsset';
 import { DocsService } from '../../services/docs.service';
 import { CURRENT_LIB } from '../../utilities';
@@ -85,34 +86,17 @@ function extractComponentMetadata(code: string): {
 
 @Injectable()
 export class StackblitzService {
-    // Public readonly accessors
-    get styles(): string {
-        return this._styles();
-    }
-    get tsconfig(): string {
-        return this._tsconfig();
-    }
-    get angular(): string {
-        return this._angular();
-    }
-    get packageJson(): string {
-        return this._packageJson();
-    }
-    get stackblitzrc(): string {
-        return this._stackblitzrc();
-    }
+    // Public computed signals for reactive access
+    readonly styles = computed(() => this._assetsSignal().styles);
+    readonly tsconfig = computed(() => this._assetsSignal().tsconfig);
+    readonly angular = computed(() => this._assetsSignal().angular);
+    readonly packageJson = computed(() => this._assetsSignal().packageJson);
+    readonly stackblitzrc = computed(() => this._assetsSignal().stackblitzrc);
 
     // Preserved properties for API compatibility (currently unused but kept for potential future use)
     main: string;
     fioriFonts: string;
     horizonFonts: string;
-
-    // Signals for reactive state management
-    private readonly _styles = signal<string>('');
-    private readonly _tsconfig = signal<string>('');
-    private readonly _angular = signal<string>('');
-    private readonly _packageJson = signal<string>('');
-    private readonly _stackblitzrc = signal<string>('');
 
     /** @hidden */
     private readonly _themingService = inject(ThemingService, {
@@ -124,37 +108,36 @@ export class StackblitzService {
     /** @hidden */
     private readonly _docsService = inject(DocsService);
 
-    constructor() {
+    // Load assets reactively using toSignal
+    private readonly _assetsSignal = toSignal(
         zip(
             getAsset('./stackblitz/example-stack/styles.scss'),
             getAsset('./stackblitz/example-stack/tsconfig.json'),
             getAsset('./stackblitz/example-stack/angular.json'),
             getAsset('./stackblitz/example-stack/package.json'),
             getAsset('./stackblitz/example-stack/stackblitzrc')
-        )
-            .pipe(
-                first(),
-                tap(([styles, tsconfig, angular, packageJson, stackblitzrc]) => {
-                    this._styles.set(styles);
-                    this._tsconfig.set(tsconfig);
-                    this._angular.set(angular);
-                    this._packageJson.set(this._setDependencies(packageJson));
-                    this._stackblitzrc.set(stackblitzrc);
-                })
-            )
-            .subscribe();
-    }
+        ).pipe(
+            map(([styles, tsconfig, angular, packageJson, stackblitzrc]) => ({
+                styles,
+                tsconfig,
+                angular,
+                packageJson: this._setDependencies(packageJson),
+                stackblitzrc
+            }))
+        ),
+        { initialValue: { styles: '', tsconfig: '', angular: '', packageJson: '', stackblitzrc: '' } }
+    );
 
     defaultProjectInfo(): StackblitzProject {
         return {
             files: {
                 // Main file content will be populated later when the project structure is formed.
                 'src/main.ts': '',
-                'src/styles.scss': this.styles,
-                'angular.json': this.angular,
-                'tsconfig.json': this.tsconfig,
-                'package.json': this.packageJson,
-                '.stackblitzrc': this.stackblitzrc
+                'src/styles.scss': this.styles(),
+                'angular.json': this.angular(),
+                'tsconfig.json': this.tsconfig(),
+                'package.json': this.packageJson(),
+                '.stackblitzrc': this.stackblitzrc()
                 // TODO: We need to somehow store the lockfile of generated package.json file
             },
             title: 'Fundamental-NGX Example',
@@ -253,16 +236,12 @@ export class StackblitzService {
 
         // Add extracted CSS imports to angular.json
         if (cssImports.size > 0) {
-            console.log('Extracted CSS imports:', Array.from(cssImports));
-            const angularConfig = JSON.parse(this.angular);
+            const angularConfig = JSON.parse(this.angular());
             const existingStyles =
                 angularConfig.projects['fundamental-ngx-example'].architect.build.options.styles || [];
             const updatedStyles = [...existingStyles, ...Array.from(cssImports)];
             angularConfig.projects['fundamental-ngx-example'].architect.build.options.styles = updatedStyles;
             defaultProjectInfo.files['angular.json'] = JSON.stringify(angularConfig, null, 4);
-            console.log('Updated angular.json styles:', updatedStyles);
-        } else {
-            console.log('No CSS imports found in example files');
         }
 
         sdk.openProject(<any>defaultProjectInfo);
@@ -284,19 +263,19 @@ export class StackblitzService {
         const componentName: string = this.transformSnakeCaseToPascalCase(fileName);
 
         // Since we don't know what part of the library is used, import all modules.
-        return `
-import { Component } from '@angular/core';
+        return `import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 @Component({
     selector: '${libraryPrefix}${fileName}',
     templateUrl: './${fileName}.component.html',
-    styleUrls: ['./${fileName}.component.scss'],
-    standalone: true,
+    styleUrl: './${fileName}.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [FundamentalNgxCoreModule, FundamentalNgxPlatformModule]
 })
-export class ${componentName} {}`;
+export class ${componentName} {}
+`;
     }
 
     private getLibraryPrefix(): string {
@@ -413,28 +392,27 @@ export class ${componentName} {}`;
         // Main component that will be added as a root, if there is no component with main flag, first is chosen
         const mainComponent = files.find((file) => file.main) || files[0];
 
-        return `
-import { ApplicationRef } from '@angular/core';
+        return `import { ApplicationRef } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ThemingService, provideTheming } from '@fundamental-ngx/core/theming';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
+import { provideTheming, ThemingService } from '@fundamental-ngx/core/theming';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 ${getImport({ name: mainComponent.componentName, path: './app/' + mainComponent.basis })};
 
 bootstrapApplication(${mainComponent.componentName}, {
     providers: [
-      provideAnimations(),
-      provideRouter([]),
-      RtlService,
-      provideTheming({
-        defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'
-      }),
-      provideDialogService()
-    ],
-  }).then((appRef: ApplicationRef) => appRef.injector.get(ThemingService).init());
-  `;
+        provideAnimations(),
+        provideRouter([]),
+        provideTheming({
+            defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'
+        }),
+        provideDialogService(),
+        RtlService
+    ]
+}).then((appRef: ApplicationRef) => appRef.injector.get(ThemingService).init());
+`;
     }
 
     private handleHtmlFile(
