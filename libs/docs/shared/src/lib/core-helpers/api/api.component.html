@@ -1,17 +1,17 @@
 <div class="api-main-container">
-    <h2 class="api-main-header">{{ activeFile }}</h2>
+    <h2 class="api-main-header">{{ activeFile() }}</h2>
     <span [style.display]="'flex'" [style.flex-grow]="'1'"></span>
-    @if (files.length > 1) {
+    @if (files().length > 1) {
         <button
             fd-button
-            [label]="'Select a file (' + files.length + ')'"
+            [label]="'Select a file (' + files().length + ')'"
             [fdMenu]="true"
             [fdMenuTrigger]="menu"
         ></button>
     }
     <fd-menu #menu [fillControlMode]="null" placement="bottom-start">
-        @for (file of files; track file) {
-            <li fd-menu-item [class.is-selected]="file === activeFile" (click)="getFile(file)">
+        @for (file of files(); track file) {
+            <li fd-menu-item [class.is-selected]="file === activeFile()" (click)="getFile(file)">
                 <div fd-menu-interactive>
                     <span fd-menu-title>{{ file }}</span>
                 </div>
@@ -19,4 +19,4 @@
         }
     </fd-menu>
 </div>
-<div [innerHTML]="result"></div>
+<div [innerHTML]="result()"></div>
