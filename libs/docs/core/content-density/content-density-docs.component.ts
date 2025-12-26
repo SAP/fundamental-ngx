@@ -97,6 +97,7 @@ export class ContentDensityDocsComponent {
 
     contentDensityStorageExampleFile: ExampleFile = {
         language: 'typescript',
-        code: contentDensityStorageModule
+        code: getAssetFromModuleAssets(contentDensityStorageModule),
+        fileName: 'content-density-storage-example'
     };
 }
