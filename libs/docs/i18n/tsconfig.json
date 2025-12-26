@@ -12,7 +12,10 @@
         "declaration": true,
         "declarationMap": true,
         "inlineSources": true,
-        "types": []
+        "types": [],
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2022"]
     },
     "exclude": ["test-setup.ts", "**/*.spec.ts", "**/*.test.ts", "**/*.e2e-spec.ts"]
 }

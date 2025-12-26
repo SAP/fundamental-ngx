@@ -15,7 +15,10 @@
         "types": [],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2022"]
     },
     "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }
