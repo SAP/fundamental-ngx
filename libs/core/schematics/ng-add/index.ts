@@ -21,9 +21,5 @@ export function ngAdd(options: Schema): Rule {
 
 /** Proceed with schematics */
 export function proceedWithSchematics(options: Schema): Rule {
-    return chain([
-        schematic('add-animations', options),
-        schematic('add-styles', options),
-        schematic('add-theming', options)
-    ]);
+    return chain([schematic('add-styles', options), schematic('add-theming', options)]);
 }

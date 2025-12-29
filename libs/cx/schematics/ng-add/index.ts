@@ -6,17 +6,12 @@ import {
     getPackageJsonDependency
 } from '@schematics/angular/utility/dependencies';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
-import { hasModuleImport } from '../utils/ng-module-utils';
 
-import { addModuleImportToModule, findModuleFromOptions } from '@angular/cdk/schematics';
-
-const browserAnimationsModuleName = 'BrowserAnimationsModule';
-const noopAnimationsModuleName = 'NoopAnimationsModule';
 const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 
 /** Installs cx package and dependencies. */
 export function ngAdd(options: any): Rule {
-    return chain([addDependencies(), addAnimations(options), addStylePathToConfig(options)]);
+    return chain([addDependencies(), addStylePathToConfig(options)]);
 }
 
 // Adds missing dependencies to the project.
@@ -33,51 +28,12 @@ function addDependencies(): Rule {
             });
         }
 
-        const animationsDependency = getPackageJsonDependency(tree, '@angular/animations');
-        if (!animationsDependency) {
-            dependencies.push({
-                ...ngCoreVersionTag,
-                name: '@angular/animations'
-            });
-        }
-
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
             console.log(`✅️ Added ${dependency.name} to ${dependency.type}.`);
         });
 
         context.addTask(new NodePackageInstallTask());
-
-        return tree;
-    };
-}
-
-// Configures browser animations.
-function addAnimations(options: any): any {
-    return async (tree: Tree) => {
-        const modulePath = await findModuleFromOptions(tree, options);
-
-        if (options.animations) {
-            if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
-                return console.warn(
-                    `Could not set up "${browserAnimationsModuleName}" ` +
-                        `because "${noopAnimationsModuleName}" is already imported. Please manually ` +
-                        `set up browser animations.`
-                );
-            }
-            addModuleImportToModule(
-                tree,
-                modulePath,
-                browserAnimationsModuleName,
-                '@angular/platform-browser/animations'
-            );
-
-            console.log(`✅️ Added ${browserAnimationsModuleName} to root module.`);
-        } else if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
-            addModuleImportToModule(tree, modulePath, noopAnimationsModuleName, '@angular/platform-browser/animations');
-
-            console.log(`✅️ Added ${noopAnimationsModuleName} to root module.`);
-        }
 
         return tree;
     };
