@@ -1,4 +1,3 @@
-export * from './base-toast-animations';
 export * from './base-toast-positions';
 export * from './base-toast.service';
 

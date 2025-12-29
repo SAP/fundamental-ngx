@@ -2,7 +2,6 @@ import { Rule, SchematicContext, SchematicsException, Tree } from '@angular-devk
 import { NodeDependencyType, getPackageJsonDependency } from '@schematics/angular/utility/dependencies';
 import { compare } from 'compare-versions';
 import { SemVer, coerce, major, valid } from 'semver';
-import { Schema } from '../models/schema';
 import { addPackageDependency } from '../utils/package-utils';
 
 const libraryPackageJson = require('@fundamental-ngx/core/package.json');
@@ -21,13 +20,12 @@ const desiredVersions = {
 
 /**
  * Adds dependencies to the project
- * @param options
  */
-export function addDependencies(options: Schema): Rule {
-    return addExternalLibraries(options);
+export function addDependencies(): Rule {
+    return addExternalLibraries();
 }
 
-function addExternalLibraries(options: Schema): Rule {
+function addExternalLibraries(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const ngCoreVersionTag = getPackageJsonDependency(tree, '@angular/core');
         if (!ngCoreVersionTag) {
@@ -49,19 +47,6 @@ function addExternalLibraries(options: Schema): Rule {
                     type: NodeDependencyType.Default,
                     version: angularVersion,
                     name: '@angular/forms'
-                },
-                context
-            );
-        }
-
-        const animationsDependency = getPackageJsonDependency(tree, '@angular/animations');
-        if (options.animations && !animationsDependency) {
-            addPackageDependency(
-                tree,
-                {
-                    type: NodeDependencyType.Default,
-                    version: angularVersion,
-                    name: '@angular/animations'
                 },
                 context
             );
