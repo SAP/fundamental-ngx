@@ -19,7 +19,6 @@ import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
 import { isObservable, of, shareReplay, switchMap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 import { CopyService } from '../../services/copy.service';
-import { height } from '../../utilities';
 import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
 import { ExampleFile } from './example-file';
@@ -35,7 +34,6 @@ enum ExampleEntityState {
     templateUrl: './code-example.component.html',
     styleUrls: ['./code-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [height({ time: 200 })],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ButtonComponent,

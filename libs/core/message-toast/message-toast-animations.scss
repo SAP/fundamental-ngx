@@ -1,0 +1,51 @@
+// Message toast slide + fade animation using native CSS
+.fd-message-toast {
+    // Initial state - hidden
+    &--void,
+    &--hidden {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+
+    // Final state - visible
+    &--visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    // Entering animation
+    &--entering {
+        animation: fd-toast-slide-in 150ms cubic-bezier(0, 0, 0.2, 1) forwards;
+    }
+
+    // Exiting animation
+    &--exiting {
+        animation: fd-toast-fade-out 75ms cubic-bezier(0.4, 0, 1, 1) forwards;
+    }
+
+    // Support for disabling animations
+    &--no-animation {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@keyframes fd-toast-slide-in {
+    from {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fd-toast-fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

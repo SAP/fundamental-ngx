@@ -1,0 +1,95 @@
+// Message popover master-detail slide navigation animations using native CSS
+.fdp-message-view {
+    .fdp-message-view__list {
+        // List states
+        &--open {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        &--closed {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+
+        // List transitions
+        &--opening {
+            animation: fd-list-slide-in 100ms 100ms cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        &--closing {
+            animation: fd-list-slide-out 100ms cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+    }
+
+    .fdp-message-view__details {
+        // Details states
+        &--open {
+            transform: translateX(0);
+            opacity: 1;
+            display: block;
+        }
+
+        &--closed {
+            transform: translateX(50px);
+            opacity: 0;
+            display: none;
+        }
+
+        // Details transitions
+        &--opening {
+            display: block;
+            animation: fd-details-slide-in 100ms 100ms cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        &--closing {
+            animation: fd-details-slide-out 100ms cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+    }
+}
+
+@keyframes fd-list-slide-in {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fd-list-slide-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes fd-details-slide-in {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fd-details-slide-out {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+        display: block;
+    }
+    100% {
+        transform: translateX(50px);
+        opacity: 0;
+        display: none;
+    }
+}

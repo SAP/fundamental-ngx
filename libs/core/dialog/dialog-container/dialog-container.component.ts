@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -8,9 +7,9 @@ import {
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
-    HostListener,
     Injector,
     Input,
+    OnDestroy,
     signal,
     TemplateRef,
     Type,
@@ -30,21 +29,19 @@ import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogContainer } from '../utils/dialog-container.model';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogRef } from '../utils/dialog-ref.class';
-import { dialogFade } from '../utils/dialog.animations';
 
 /** Dialog container where the dialog content is embedded. */
 @Component({
     selector: 'fd-dialog-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    styleUrls: ['./dialog-container.component.scss'],
-    animations: [dialogFade],
+    styleUrls: ['./dialog-container.component.scss', './dialog-container-animations.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [PortalModule]
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
-    implements DialogContainer<any>, AfterViewInit, CssClassBuilder
+    implements DialogContainer<any>, AfterViewInit, CssClassBuilder, OnDestroy
 {
     /** Custom classes */
     @Input()
@@ -58,27 +55,48 @@ export class DialogContainerComponent
     portalOutlet: CdkPortalOutlet;
 
     /** The state of the Dialog animations. */
-    @HostBinding('@state')
-    protected get _animationState(): string {
-        return this._animationStateSignal();
+    private _animationStateSignal = signal<'void' | 'visible' | 'hidden'>('void');
+
+    /** @hidden */
+    @HostBinding('class')
+    protected get _containerClasses(): string {
+        const state = this._animationStateSignal();
+        const classes = ['fd-dialog-container', `fd-dialog-container--${state}`];
+
+        if (state === 'visible') {
+            classes.push('fd-dialog-container--entering');
+        } else if (state === 'hidden') {
+            classes.push('fd-dialog-container--exiting');
+        }
+
+        // Add custom container classes
+        if (this.dialogConfig.containerClass) {
+            classes.push(this.dialogConfig.containerClass);
+        }
+        if (this._class) {
+            classes.push(this._class);
+        }
+
+        return classes.join(' ');
     }
 
     /** @hidden */
     private _class = '';
 
     /** @hidden */
-    private _animationStateSignal = signal('void');
+    private _animationEndListener?: (event: AnimationEvent) => void;
 
     /** @hidden */
     constructor(
         public dialogConfig: DialogConfig,
         public ref: DialogRef,
         private _destroyRef: DestroyRef,
-        elementRef: ElementRef,
+        private _elementRef: ElementRef,
         protected readonly _cdr: ChangeDetectorRef,
         injector: Injector
     ) {
-        super(elementRef, injector);
+        super(_elementRef, injector);
+        this._setupAnimationEndListener();
     }
 
     /** @hidden */
@@ -87,14 +105,10 @@ export class DialogContainerComponent
         return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
     }
 
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this.ref._endClose$.next();
-            this.ref._endClose$.complete();
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this._animationEndListener) {
+            this._elementRef.nativeElement.removeEventListener('animationend', this._animationEndListener);
         }
     }
 
@@ -155,5 +169,27 @@ export class DialogContainerComponent
             next: () => callback(),
             error: () => callback()
         });
+    }
+
+    /**
+     * @hidden
+     * Set up native animationend event listener
+     */
+    private _setupAnimationEndListener(): void {
+        this._animationEndListener = (event: AnimationEvent) => {
+            // Only handle our own animations, not child animations
+            if (event.target !== this._elementRef.nativeElement) {
+                return;
+            }
+
+            const state = this._animationStateSignal();
+
+            if (state === 'hidden') {
+                this.ref._endClose$.next();
+                this.ref._endClose$.complete();
+            }
+        };
+
+        this._elementRef.nativeElement.addEventListener('animationend', this._animationEndListener);
     }
 }

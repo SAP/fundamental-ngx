@@ -1,0 +1,40 @@
+// Height collapse/expand animation using native CSS with custom properties
+.fd-code-example {
+    &--collapsed {
+        height: 0;
+        overflow: hidden;
+    }
+
+    &--expanded {
+        height: auto;
+        overflow: visible;
+    }
+
+    &--expanding {
+        overflow: hidden;
+        animation: fd-expand 200ms ease-in forwards;
+    }
+
+    &--collapsing {
+        overflow: hidden;
+        animation: fd-collapse 200ms ease-in forwards;
+    }
+}
+
+@keyframes fd-expand {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--fd-target-height, auto);
+    }
+}
+
+@keyframes fd-collapse {
+    from {
+        height: var(--fd-current-height);
+    }
+    to {
+        height: 0;
+    }
+}
