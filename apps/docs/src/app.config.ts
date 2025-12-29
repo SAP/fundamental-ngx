@@ -1,6 +1,5 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
@@ -18,7 +17,6 @@ import { translations } from './environments/translations';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideAnimations(),
         provideHttpClient(),
         provideRouter(applicationRoutes, withPreloading(PreloadAllModules), withHashLocation()),
         provideTheming({ defaultTheme: 'sap_horizon' }),

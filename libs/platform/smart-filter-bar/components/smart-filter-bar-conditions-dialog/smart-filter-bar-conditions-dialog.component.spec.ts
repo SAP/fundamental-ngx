@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { DynamicFormFieldItem, FormGeneratorService } from '@fundamental-ngx/platform/form';
@@ -40,7 +39,6 @@ describe('SmartFilterBarConditionsDialogComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, SmartFilterBarConditionsDialogComponent],
             providers: [
                 SmartFilterBarService,
                 FormGeneratorService,

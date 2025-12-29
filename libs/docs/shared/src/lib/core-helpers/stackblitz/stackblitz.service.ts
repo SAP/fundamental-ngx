@@ -394,7 +394,6 @@ export class ${componentName} {}
 
         return `import { ApplicationRef } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
 import { provideTheming, ThemingService } from '@fundamental-ngx/core/theming';
@@ -403,7 +402,6 @@ ${getImport({ name: mainComponent.componentName, path: './app/' + mainComponent.
 
 bootstrapApplication(${mainComponent.componentName}, {
     providers: [
-        provideAnimations(),
         provideRouter([]),
         provideTheming({
             defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'

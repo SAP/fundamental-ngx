@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
@@ -38,7 +37,6 @@ describe('ApprovalFlowAddNodeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ApprovalFlowAddNodeComponent, NoopAnimationsModule],
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: DialogConfig, useValue: dialogConfig },

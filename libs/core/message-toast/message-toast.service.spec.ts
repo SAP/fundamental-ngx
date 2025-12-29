@@ -1,7 +1,6 @@
 import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageToastConfig } from './config/message-toast.config';
 import { MESSAGE_TOAST_CONFIG } from './constants/message-toast.token';
 import { MessageToastService } from './message-toast.service';
@@ -23,7 +22,6 @@ describe('MessageToastService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, TestComponent],
             providers: [
                 MessageToastService,
                 Overlay,

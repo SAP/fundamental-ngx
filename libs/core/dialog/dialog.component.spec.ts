@@ -1,6 +1,5 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Subject } from 'rxjs';
@@ -30,9 +29,7 @@ class TemplateTestComponent {
     @ViewChild(DialogComponent) dialog: DialogComponent;
 }
 
-@NgModule({
-    imports: [TemplateTestComponent, NoopAnimationsModule]
-})
+@NgModule({})
 class TestModule {}
 
 describe('DialogComponent', () => {

@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { PlatformTableModule } from '../../../table.module';
 import { P13SortingDialogComponent, SortDialogData } from './sorting.component';
 
 describe('PlatformTableP13SortDialogComponent', () => {
@@ -18,7 +16,6 @@ describe('PlatformTableP13SortDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule, NoopAnimationsModule],
             providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
         }).compileComponents();
     }));

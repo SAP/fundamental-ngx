@@ -1,7 +1,6 @@
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -53,7 +52,6 @@ describe('ApprovalFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [TestPlatformApprovalFlowComponent, NoopAnimationsModule],
             providers: [RtlService]
         }).compileComponents();
     });

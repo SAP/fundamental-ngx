@@ -3,7 +3,6 @@ import { ModifierKeys } from '@angular/cdk/testing';
 import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { OptionComponent } from './option/option.component';
@@ -131,12 +130,7 @@ describe('SelectComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                TestWrapperComponent,
-                TestFilteringWrapperComponent,
-                ValueCompareWithSelectComponent,
-                NoopAnimationsModule
-            ]
+            imports: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
