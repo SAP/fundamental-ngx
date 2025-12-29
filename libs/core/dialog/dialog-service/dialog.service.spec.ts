@@ -1,7 +1,5 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from '../dialog.module';
 import { DialogService } from './dialog.service';
 
@@ -34,9 +32,7 @@ describe('DialogService', () => {
     let fixture: ComponentFixture<DialogServiceTestComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [OverlayModule, NoopAnimationsModule, TemplateTestComponent, DialogServiceTestComponent]
-        }).compileComponents();
+        await TestBed.configureTestingModule({}).compileComponents();
     });
 
     beforeEach(() => {

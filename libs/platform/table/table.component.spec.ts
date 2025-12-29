@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Table, TableDataSource, TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { Table, TableDataSource } from '@fundamental-ngx/platform/table-helpers';
 
 import { TableComponent } from './table.component';
-import { PlatformTableModule } from './table.module';
 import { TableDataProviderMock } from './tests/helpers';
 
 describe('TableComponent', () => {
@@ -12,8 +10,7 @@ describe('TableComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            providers: [{ provide: Table, useValue: {} }],
-            imports: [PlatformTableModule, NoopAnimationsModule, TableDataSourceDirective]
+            providers: [{ provide: Table, useValue: {} }]
         }).compileComponents();
     }));
 

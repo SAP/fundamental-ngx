@@ -1,7 +1,5 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageBoxModule } from '../message-box.module';
 import { MessageBoxService } from './message-box.service';
 
@@ -34,9 +32,7 @@ describe('MessageBoxService', () => {
     let fixture: ComponentFixture<MessageBoxServiceTestComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [OverlayModule, NoopAnimationsModule, TemplateTestComponent, MessageBoxServiceTestComponent]
-        }).compileComponents();
+        await TestBed.configureTestingModule({}).compileComponents();
     });
 
     beforeEach(() => {
