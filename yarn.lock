@@ -393,18 +393,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/animations@npm:20.1.4":
-  version: 20.1.4
-  resolution: "@angular/animations@npm:20.1.4"
-  dependencies:
-    tslib: "npm:^2.3.0"
-  peerDependencies:
-    "@angular/common": 20.1.4
-    "@angular/core": 20.1.4
-  checksum: 10/f91a15216542360a2dc28c3e1f2f1a18149f86baffe1d53f1bfb7bfa8a8bcb2eb0eacf0de79fa035c7b316096a6d7799d710cdf41d75c9c343aac6a01be05601
-  languageName: node
-  linkType: hard
-
 "@angular/build@npm:20.1.4":
   version: 20.1.4
   resolution: "@angular/build@npm:20.1.4"
@@ -17932,7 +17920,6 @@ __metadata:
     "@angular-devkit/build-angular": "npm:20.1.4"
     "@angular-devkit/core": "npm:20.1.4"
     "@angular-devkit/schematics": "npm:20.1.4"
-    "@angular/animations": "npm:20.1.4"
     "@angular/cdk": "npm:20.1.4"
     "@angular/cli": "npm:~20.0.0"
     "@angular/common": "npm:20.1.4"
