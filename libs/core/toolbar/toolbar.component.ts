@@ -271,7 +271,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                     if (!titleComponent) {
                         return this.titleElement?.nativeElement;
                     }
-                    return titleComponent.elementRef.nativeElement;
+                    return titleComponent.elementRef?.nativeElement;
                 })
             ),
             this.shouldOverflow$,
