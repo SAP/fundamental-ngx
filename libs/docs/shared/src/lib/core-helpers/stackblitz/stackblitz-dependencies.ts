@@ -58,12 +58,14 @@ export class StackblitzDependencies {
      * @param version Monorepo version (from NX Release)
      * @returns Dependencies object
      */
-    static getDependencies(packageInfo: Record<string, any>, version: string): Record<string, any> {
-        const _dependencies: Record<string, any> = {};
+    static getDependencies(packageInfo: Record<string, any>, version: string): Record<string, string> {
+        const _dependencies: Record<string, string> = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = version));
+        this._libDependencies.forEach((libDep): void => {
+            _dependencies[libDep] = version;
+        });
 
-        [...this._dependencies, ...this._ngDependencies].forEach((dep) => {
+        [...this._dependencies, ...this._ngDependencies].forEach((dep): void => {
             if (packageInfo.dependencies && packageInfo.dependencies[dep]) {
                 _dependencies[dep] = packageInfo.dependencies[dep];
             } else if (packageInfo.devDependencies && packageInfo.devDependencies[dep]) {
