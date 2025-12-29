@@ -15,7 +15,6 @@ import {
 } from '@fundamental-ngx/core/avatar-group-legacy';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     PopoverBodyComponent,
@@ -38,7 +37,6 @@ import { AvatarGroupLegacyDataExampleService } from './avatar-group-legacy-data-
         AvatarComponent,
         ButtonComponent,
         AvatarGroupLegacyOverflowButtonDirective,
-        ContentDensityDirective,
         AvatarGroupLegacyOverflowButtonTextDirective,
         PopoverBodyComponent,
         PopoverBodyHeaderDirective,

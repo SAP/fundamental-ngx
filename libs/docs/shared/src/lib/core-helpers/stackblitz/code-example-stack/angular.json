@@ -1,6 +1,5 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "defaultProject": "fundamental-ngx-example",
     "newProjectRoot": "projects",
     "projects": {
         "fundamental-ngx-example": {
@@ -9,31 +8,24 @@
                     "builder": "@angular-devkit/build-angular:browser",
                     "configurations": {
                         "production": {
-                            "aot": true,
-                            "buildOptimizer": true,
-                            "extractCss": true,
-                            "extractLicenses": true,
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.ts"
-                                }
-                            ],
-                            "namedChunks": false,
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "vendorChunk": false
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
                         },
                         "development": {
-                            "buildOptimizer": false,
-                            "extractLicenses": false,
-                            "namedChunks": true,
                             "optimization": false,
                             "sourceMap": true,
-                            "vendorChunk": true
+                            "namedChunks": true,
+                            "extractLicenses": false,
+                            "vendorChunk": true,
+                            "buildOptimizer": false
                         }
                     },
+                    "defaultConfiguration": "development",
                     "options": {
                         "assets": [
                             "src/assets",
