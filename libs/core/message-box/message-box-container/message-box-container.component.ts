@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angular/cdk/portal';
 import {
     AfterViewInit,
@@ -9,9 +8,9 @@ import {
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
-    HostListener,
     Injector,
     Input,
+    OnDestroy,
     TemplateRef,
     Type,
     ViewChild,
@@ -19,7 +18,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CssClassBuilder, DynamicComponentContainer, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { DialogContainer, dialogFade } from '@fundamental-ngx/core/dialog';
+import { DialogContainer } from '@fundamental-ngx/core/dialog';
 import { MessageBoxContentType } from '../message-box-content.type';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
@@ -30,12 +29,12 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    animations: [dialogFade],
+    styleUrl: '../../dialog/dialog-container/dialog-container-animations.scss',
     imports: [PortalModule]
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>
-    implements DialogContainer<any>, AfterViewInit, CssClassBuilder
+    implements DialogContainer<any>, AfterViewInit, CssClassBuilder, OnDestroy
 {
     /** Custom classes */
     @Input()
@@ -44,32 +43,53 @@ export class MessageBoxContainerComponent
         this.buildComponentCssClass();
     }
 
-    /** The state of the Dialog animations. */
-    @HostBinding('@state')
-    protected get _animationState(): string {
-        return this._animationStateSignal();
+    /** @hidden */
+    @HostBinding('class')
+    protected get _containerClasses(): string {
+        const state = this._animationStateSignal();
+        const classes = ['fd-dialog-container', `fd-dialog-container--${state}`];
+
+        if (state === 'visible') {
+            classes.push('fd-dialog-container--entering');
+        } else if (state === 'hidden') {
+            classes.push('fd-dialog-container--exiting');
+        }
+
+        // Add custom container classes
+        if (this.messageBoxConfig.containerClass) {
+            classes.push(this.messageBoxConfig.containerClass);
+        }
+        if (this._class) {
+            classes.push(this._class);
+        }
+
+        return classes.join(' ');
     }
 
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
     portalOutlet: CdkPortalOutlet;
 
+    /** The state of the Dialog animations. */
+    private _animationStateSignal = signal<'void' | 'visible' | 'hidden'>('void');
+
     /** @hidden */
     private _class = '';
 
     /** @hidden */
-    private _animationStateSignal = signal('void');
+    private _animationEndListener?: (event: AnimationEvent) => void;
 
     /** @hidden */
     constructor(
         public messageBoxConfig: MessageBoxConfig,
         public ref: MessageBoxRef,
         private _destroyRef: DestroyRef,
-        elementRef: ElementRef,
+        private _elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         injector: Injector
     ) {
-        super(elementRef, injector);
+        super(_elementRef, injector);
+        this._setupAnimationEndListener();
     }
 
     /** @hidden */
@@ -78,14 +98,10 @@ export class MessageBoxContainerComponent
         return [this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '', this._class];
     }
 
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this.ref._endClose$.next();
-            this.ref._endClose$.complete();
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this._animationEndListener) {
+            this._elementRef.nativeElement.removeEventListener('animationend', this._animationEndListener);
         }
     }
 
@@ -144,5 +160,27 @@ export class MessageBoxContainerComponent
             next: () => callback(),
             error: () => callback()
         });
+    }
+
+    /**
+     * @hidden
+     * Set up native animationend event listener
+     */
+    private _setupAnimationEndListener(): void {
+        this._animationEndListener = (event: AnimationEvent) => {
+            // Only handle our own animations, not child animations
+            if (event.target !== this._elementRef.nativeElement) {
+                return;
+            }
+
+            const state = this._animationStateSignal();
+
+            if (state === 'hidden') {
+                this.ref._endClose$.next();
+                this.ref._endClose$.complete();
+            }
+        };
+
+        this._elementRef.nativeElement.addEventListener('animationend', this._animationEndListener);
     }
 }

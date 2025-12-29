@@ -1,4 +1,3 @@
-import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -12,6 +11,7 @@ import {
     HostBinding,
     Inject,
     Input,
+    OnDestroy,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -29,70 +29,10 @@ import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/mess
 @Component({
     selector: 'fdp-message-view',
     templateUrl: './message-view.component.html',
+    styleUrl: './message-view-animations.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [TabbableElementService],
-    animations: [
-        trigger('openCloseList', [
-            // ...
-            state(
-                'open',
-                style({
-                    transform: 'translateX(0)',
-                    opacity: 1
-                })
-            ),
-            state(
-                'closed',
-                style({
-                    transform: 'translateX(-50px)',
-                    opacity: 0
-                })
-            ),
-            transition('open => closed', [animate('.1s cubic-bezier(0, 0, 0.2, 1)')]),
-            transition('closed => open', [animate('0.1s .1s cubic-bezier(0, 0, 0.2, 1)')])
-        ]),
-        trigger('openCloseDetails', [
-            state(
-                'open',
-                style({
-                    transform: 'translateX(0)',
-                    opacity: 1,
-                    display: 'block'
-                })
-            ),
-            state(
-                'closed',
-                style({
-                    transform: 'translateX(50px)',
-                    opacity: 0
-                })
-            ),
-            transition('open => closed', [
-                animate(
-                    '.1s cubic-bezier(0, 0, 0.2, 1)',
-                    keyframes([
-                        style({
-                            transform: 'translateX(0)',
-                            opacity: 1,
-                            display: 'block'
-                        }),
-                        style({
-                            transform: 'translateX(50px)',
-                            opacity: 0,
-                            display: 'none'
-                        })
-                    ])
-                )
-            ]),
-            transition('closed => open', [
-                style({
-                    display: 'block'
-                }),
-                animate('0.1s .1s cubic-bezier(0, 0, 0.2, 1)')
-            ])
-        ])
-    ],
     imports: [
         NgTemplateOutlet,
         CdkScrollable,
@@ -103,7 +43,7 @@ import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/mess
         FdTranslatePipe
     ]
 })
-export class MessageViewComponent implements AfterViewInit {
+export class MessageViewComponent implements AfterViewInit, OnDestroy {
     /** Current Message Popover screen. Can be either `list` or `details`. */
     @Input()
     currentScreen: 'list' | 'details';
@@ -136,12 +76,26 @@ export class MessageViewComponent implements AfterViewInit {
     @ViewChild('detailsView', { read: ElementRef })
     protected _detailsView: ElementRef;
 
+    /** @hidden */
+    @ViewChild('listSection', { read: ElementRef })
+    protected _listSection: ElementRef;
+
+    /** @hidden */
+    @ViewChild('detailsSection', { read: ElementRef })
+    protected _detailsSection: ElementRef;
+
     /** @Hidden */
     @HostBinding('class')
     protected readonly _initialClass = 'fd-message-popover__view-container';
 
     /** @hidden */
+    protected _wasDetails = false;
+
+    /** @hidden */
     private _activeListElement: Nullable<HTMLElement> = null;
+
+    /** @hidden */
+    private _listAnimationEndListener?: (event: AnimationEvent) => void;
 
     /** @hidden */
     constructor(
@@ -158,6 +112,13 @@ export class MessageViewComponent implements AfterViewInit {
                 const { height } = this._detailsView.nativeElement.getBoundingClientRect();
                 this._listView.nativeElement.style.minHeight = `${height}px`;
             });
+
+        this._setupAnimationEndListener();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._removeAnimationEndListener();
     }
 
     /** @hidden */
@@ -167,6 +128,7 @@ export class MessageViewComponent implements AfterViewInit {
             this._focusElement(undefined, entry);
             return;
         }
+        this._wasDetails = true;
         this.currentScreen = 'details';
         this.openDetails.emit(entry);
     }
@@ -185,11 +147,36 @@ export class MessageViewComponent implements AfterViewInit {
         });
     }
 
-    /** @hidden */
-    _onListAnimationComplete(event: any): void {
-        if (event.toState === 'open' && this._activeListElement) {
-            this._activeListElement.focus();
-            this._activeListElement = null;
+    /**
+     * @hidden
+     * Set up native animationend event listener
+     */
+    private _setupAnimationEndListener(): void {
+        this._listAnimationEndListener = (event: AnimationEvent) => {
+            // Only handle list section animations
+            if (event.target !== this._listSection.nativeElement) {
+                return;
+            }
+
+            if (this.currentScreen === 'list' && this._activeListElement) {
+                this._activeListElement.focus();
+                this._activeListElement = null;
+                this._wasDetails = false;
+            }
+        };
+
+        if (this._listSection?.nativeElement) {
+            this._listSection.nativeElement.addEventListener('animationend', this._listAnimationEndListener);
+        }
+    }
+
+    /**
+     * @hidden
+     * Remove animation event listener
+     */
+    private _removeAnimationEndListener(): void {
+        if (this._listAnimationEndListener && this._listSection?.nativeElement) {
+            this._listSection.nativeElement.removeEventListener('animationend', this._listAnimationEndListener);
         }
     }
 }
