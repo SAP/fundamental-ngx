@@ -16,6 +16,7 @@ import { TimePickerExampleComponent } from './examples/time-picker-example.compo
 import { TimePickerFormExampleComponent } from './examples/time-picker-form-example.component';
 import { TimePickerFormatExampleComponent } from './examples/time-picker-format-example.component';
 import { TimePickerLocaleExampleComponent } from './examples/time-picker-locale-example/time-picker-locale-example.component';
+import { TimePickerMinuteStepExample } from './examples/time-picker-minute-step-example';
 
 const timePickerFormScssSrc = 'time-picker-form-example.component.scss';
 
@@ -33,6 +34,8 @@ const timePickerLocaleHtmlSrc = 'time-picker-locale-example/time-picker-locale-e
 const timePickerLocaleTsSrc = 'time-picker-locale-example/time-picker-locale-example.component.ts';
 const timePickerFormHtmlSrc = 'time-picker-form-example.component.html';
 const timePickerFormTsSrc = 'time-picker-form-example.component.ts';
+const timePickerMinuteStepSrc = 'time-picker-minute-step-example.ts';
+const timePickerMinuteStepHtmlSrc = 'time-picker-minute-step-example.html';
 
 @Component({
     selector: 'app-time-picker',
@@ -49,7 +52,8 @@ const timePickerFormTsSrc = 'time-picker-form-example.component.ts';
         TimePickerCompactExampleComponent,
         TimePickerAllowNullExampleComponent,
         TimePickerFormExampleComponent,
-        TimePickerLocaleExampleComponent
+        TimePickerLocaleExampleComponent,
+        TimePickerMinuteStepExample
     ]
 })
 export class TimePickerDocsComponent {
@@ -133,6 +137,20 @@ export class TimePickerDocsComponent {
             code: getAssetFromModuleAssets(timePickerLocaleTsSrc),
             fileName: 'time-picker-locale-example',
             component: 'TimePickerLocaleExampleComponent'
+        }
+    ];
+
+    timePickerStep: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(timePickerMinuteStepHtmlSrc),
+            fileName: 'time-picker-minute-step-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(timePickerMinuteStepSrc),
+            fileName: 'time-picker-minute-step-example',
+            component: 'TimePickerMinuteStepExample'
         }
     ];
 }

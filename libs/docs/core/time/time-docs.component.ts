@@ -13,6 +13,7 @@ import {
 import { Time12ExampleComponent } from './examples/time-12-example.component';
 import { TimeExampleComponent } from './examples/time-example.component';
 import { TimeFormExampleComponent } from './examples/time-form-example.component';
+import { TimeMinuteSteps } from './examples/time-minute-steps';
 import { TimeNoSecondsExampleComponent } from './examples/time-no-seconds-example.component';
 import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example/time-no-spinners-example.component';
 import { TimeOnlyHoursExampleComponent } from './examples/time-only-hours-example.component';
@@ -43,6 +44,8 @@ const timeTwoDigitsSrcH = 'time-two-digits-example/time-two-digits-example.compo
 
 const timeFormHtmlSrc = 'time-form-example.component.html';
 const timeFormTsSrc = 'time-form-example.component.ts';
+const timeMinuteStepTsSrc = 'time-minute-steps.ts';
+const timeMinuteStepHtmlSrc = 'time-minute-steps.html';
 
 @Component({
     selector: 'app-time',
@@ -61,7 +64,8 @@ const timeFormTsSrc = 'time-form-example.component.ts';
         TimeNoSecondsExampleComponent,
         TimeOnlyHoursExampleComponent,
         TimeTwoDigitsExampleComponent,
-        TimeFormExampleComponent
+        TimeFormExampleComponent,
+        TimeMinuteSteps
     ]
 })
 export class TimeDocsComponent {
@@ -167,6 +171,20 @@ export class TimeDocsComponent {
             code: getAssetFromModuleAssets(timeFormTsSrc),
             fileName: 'time-form-example',
             component: 'TimeFormExampleComponent'
+        }
+    ];
+
+    timeMinuteSteps: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(timeMinuteStepTsSrc),
+            fileName: 'time-minute-steps',
+            component: 'TimeMinuteSteps'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(timeMinuteStepHtmlSrc),
+            fileName: 'time-minute-steps'
         }
     ];
 

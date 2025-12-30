@@ -135,8 +135,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** Get minute names */
-    getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (minute) => minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
+    getMinuteNames({ twoDigit, minuteStep = 1 }: { twoDigit: boolean; minuteStep?: number }): string[] {
+        const length = Math.ceil(60 / minuteStep);
+        return range(length, (index) => {
+            const minute = index * minuteStep;
+            return minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        });
     }
 
     /** Get second names */

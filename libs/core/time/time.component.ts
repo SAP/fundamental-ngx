@@ -15,8 +15,10 @@ import {
     SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     forwardRef,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -124,57 +126,72 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     @ViewChildren(TimeColumnComponent)
     columns: QueryList<TimeColumnComponent<number, SelectableViewItem<number>>>;
 
+    /**
+     * The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).
+     * Defaults to 1 (every minute).
+     */
+    readonly minuteStep = input<number>(1);
+
     /** Active column view to iterate with */
     activeView: FdTimeActiveView = 'hour';
-
-    /** Offset */
-    get offset(): number {
-        return Math.floor(this.elementsAtOnce / 2);
-    }
 
     /**
      * @hidden
      * container for [0 - 23] hours
      */
-    hourViewItems: HourViewItem[] = [];
+    protected hourViewItems: HourViewItem[] = [];
     /**
      * @hidden
      * reference to currently selected hourViewItems element
      */
-    activeHourViewItem?: HourViewItem;
+    protected activeHourViewItem?: HourViewItem;
 
     /**
      * @hidden
      * container for [0 - 59] minutes
      */
-    minuteViewItems: MinuteViewItem[] = [];
+    protected minuteViewItems: MinuteViewItem[] = [];
     /**
      * @hidden
      * reference to currently selected minuteViewItems element
      */
-    activeMinuteViewItem?: MinuteViewItem;
+    protected activeMinuteViewItem?: MinuteViewItem;
 
     /**
      * @hidden
      * container for [0 - 59] seconds
      */
-    secondViewItems: SecondViewItem[] = [];
+    protected secondViewItems: SecondViewItem[] = [];
     /**
      * @hidden
      * reference to currently selected secondViewItems element
      */
-    activeSecondViewItem?: SecondViewItem;
+    protected activeSecondViewItem?: SecondViewItem;
 
     /**
      * @hidden
      * container for [am, pm] meridian values
      */
-    meridianViewItems: MeridianViewItem[] = [];
+    protected meridianViewItems: MeridianViewItem[] = [];
     /**
      * @hidden
      * reference to currently selected meridianViewItems element
      */
-    activeMeridianViewItem?: MeridianViewItem;
+    protected activeMeridianViewItem?: MeridianViewItem;
+
+    /** Offset computed signal */
+    protected readonly offset = computed(() => Math.floor(this.elementsAtOnce / 2));
+
+    /** Offset for minutes column, adjusted for minuteStep */
+    protected readonly minuteOffset = computed(() => {
+        const step = this.minuteStep();
+        const stepCount = Math.ceil(60 / step);
+        const effectiveElementsAtOnce = Math.min(this.elementsAtOnce, stepCount);
+        // Ensure effective count is odd for proper centering (need equal items above and below focused item)
+        const adjustedElementsAtOnce =
+            effectiveElementsAtOnce % 2 === 0 ? effectiveElementsAtOnce - 1 : effectiveElementsAtOnce;
+        return Math.floor(adjustedElementsAtOnce / 2);
+    });
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -209,10 +226,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** @hidden
-     * Reacts only when there is meridian or time input change
+     * Reacts only when there is meridian, time, or minuteStep input change
      */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.meridian || changes.time) {
+        if (changes.meridian || changes.time || changes.minuteStep) {
             this._setUpViewGrid();
         }
         if (changes.elementsAtOnce && changes.elementsAtOnce.currentValue % 2 === 0) {
@@ -430,10 +447,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     private _constructMinuteViewItems(): void {
+        const step = this.minuteStep();
         this.minuteViewItems = this._dateTimeAdapter
-            .getMinuteNames({ twoDigit: this.keepTwoDigits })
-            .map((name, minute) => ({
-                value: minute,
+            .getMinuteNames({ twoDigit: this.keepTwoDigits, minuteStep: step })
+            .map((name, index) => ({
+                value: index * step,
                 label: name
             }));
     }
@@ -466,7 +484,12 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     /** @hidden */
     private _calculateActiveMinuteViewItem(): void {
         const minute = this._getModelMinute();
-        this.activeMinuteViewItem = this.minuteViewItems.find(({ value }) => value === minute);
+        const step = this.minuteStep();
+
+        // Round to the nearest valid step and clamp to valid range
+        const roundedMinute = Math.min(Math.round(minute / step) * step, 59);
+
+        this.activeMinuteViewItem = this.minuteViewItems.find(({ value }) => value === roundedMinute);
     }
 
     /** @hidden */
