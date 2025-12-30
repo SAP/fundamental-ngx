@@ -208,11 +208,15 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     }
 
     /** Get minute names */
-    getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
+    getMinuteNames({ twoDigit, minuteStep = 1 }: { twoDigit: boolean; minuteStep?: number }): string[] {
         const format: string = twoDigit ? 'mm' : 'm';
         const dayjsDate = this._createDayjsDate();
+        const length = Math.ceil(60 / minuteStep);
 
-        return range(60, (i) => this.clone(dayjsDate).minute(i).format(format));
+        return range(length, (index) => {
+            const minute = index * minuteStep;
+            return this.clone(dayjsDate).minute(minute).format(format);
+        });
     }
 
     /** Get second names */

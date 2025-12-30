@@ -118,6 +118,62 @@ All components MUST:
 - Do NOT use `ngClass`; use `class` bindings instead
 - Do NOT use `ngStyle`; use `style` bindings instead
 
+#### Component Member Ordering
+
+Follow strict member ordering as enforced by `@typescript-eslint/member-ordering`:
+
+1. **Decorated properties** (in order):
+
+    - `@Input()` decorated properties
+    - `@Output()` decorated properties
+    - `@ViewChild()` / `@ViewChildren()` decorated properties
+    - Other decorated properties
+
+2. **Signal inputs and outputs**:
+
+    - `input()` signal inputs
+    - `output()` signal outputs
+
+3. **Other instance fields**:
+    - Public instance fields
+    - Protected instance fields
+    - Private instance fields
+
+**Important**: Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties to comply with member-ordering rules.
+
+**Example**:
+
+```typescript
+@Component({
+    /* ... */
+})
+export class MyComponent {
+    // 1. Decorated properties first
+    @Input()
+    displayValue = true;
+
+    @Input()
+    placeholder: string;
+
+    @Output()
+    valueChange = new EventEmitter<string>();
+
+    @ViewChild('template')
+    template: TemplateRef<any>;
+
+    // 2. Signal inputs/outputs after decorated properties
+    readonly minuteStep = input<number>(1);
+    readonly itemSelected = output<string>();
+
+    // 3. Other instance fields
+    activeView: string = 'default';
+
+    protected items: string[] = [];
+
+    private _cache: Map<string, any>;
+}
+```
+
 ### State Management
 
 - Use signals for local component state

@@ -21,7 +21,6 @@ export const MOMENT_DATE_TIME_ADAPTER_OPTIONS = new InjectionToken<MomentDatetim
     }
 );
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapterOptions {
     return {
         useUtc: false,
@@ -167,11 +166,15 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return range(24, (i) => this.clone(momentDate).hour(i).format(format));
     }
 
-    getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
+    getMinuteNames({ twoDigit, minuteStep = 1 }: { twoDigit: boolean; minuteStep?: number }): string[] {
         const format: string = twoDigit ? 'mm' : 'm';
         const momentDate = this._createMomentDate();
+        const length = Math.ceil(60 / minuteStep);
 
-        return range(60, (i) => this.clone(momentDate).minute(i).format(format));
+        return range(length, (index) => {
+            const minute = index * minuteStep;
+            return this.clone(momentDate).minute(minute).format(format);
+        });
     }
 
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {

@@ -8,7 +8,7 @@
     <fd-time-column
         [active]="isActive('hour')"
         [rows]="hourViewItems"
-        [offset]="offset"
+        [offset]="offset()"
         [elementsAtOnce]="elementsAtOnce"
         [activeValue]="activeHourViewItem"
         columnTranslationsPreset="hours"
@@ -20,7 +20,7 @@
         <fd-time-column
             [active]="isActive('minute')"
             [rows]="minuteViewItems"
-            [offset]="offset"
+            [offset]="minuteOffset()"
             [elementsAtOnce]="elementsAtOnce"
             [activeValue]="activeMinuteViewItem"
             columnTranslationsPreset="minutes"
@@ -33,7 +33,7 @@
         <fd-time-column
             [active]="isActive('second')"
             [rows]="secondViewItems"
-            [offset]="offset"
+            [offset]="offset()"
             [elementsAtOnce]="elementsAtOnce"
             [activeValue]="activeSecondViewItem"
             columnTranslationsPreset="seconds"

@@ -7,7 +7,8 @@ import {
     OnDestroy,
     OnInit,
     Output,
-    ViewChild
+    ViewChild,
+    input
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
@@ -169,6 +170,12 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     /** @hidden */
     @ViewChild(TimePickerComponent)
     timePickerComponent: TimePickerComponent<D>;
+
+    /**
+     * The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).
+     * Defaults to 1 (every minute).
+     */
+    readonly minuteStep = input<number>(1);
 
     /** @hidden */
     private _meridian: boolean;

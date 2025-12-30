@@ -1,0 +1,19 @@
+<style>
+    @import '@sap-ui/common-css/dist/sap-flex.css';
+    @import '@sap-ui/common-css/dist/sap-margin.css';
+    @import '@sap-ui/common-css/dist/sap-text.css';
+    @import '@sap-ui/common-css/dist/sap-typography.css';
+</style>
+
+<div style="display: flex; gap: 2rem; flex-wrap: wrap">
+    @for (step of minuteSteps; track step.step) {
+    <section class="sap-flex sap-flex--column">
+        <h4 class="sap-margin-bottom-tiny sap-margin-top-none">{{ step.title }}</h4>
+        <p class="sap-margin-bottom-tiny sap-font-small-detail-text">
+            Step: {{ step.step }} {{ step.step === 1 ? 'minute' : 'minutes' }}
+        </p>
+        <fd-time [minuteStep]="step.step" [displaySeconds]="false" [(ngModel)]="step.time" [meridian]="true"></fd-time>
+        <p class="sap-margin-top-tiny sap-font-size-small">Selected: <strong>{{ formatTime(step.time) }}</strong></p>
+    </section>
+    }
+</div>
