@@ -99,6 +99,35 @@ Follow the [Angular Style Guide](https://angular.dev/style-guide) for all coding
 - Use `NgOptimizedImage` for all static images.
     - `NgOptimizedImage` does not work for inline base64 images.
 
+### Zoneless Compatibility
+
+Angular relies on notifications from core APIs to determine when to run change detection. Ensure components are compatible with zoneless change detection:
+
+**Change Detection Notifications:**
+
+- `ChangeDetectorRef.markForCheck()` (called automatically by `AsyncPipe`)
+- `ComponentRef.setInput()`
+- Updating a signal that's read in a template
+- Bound host or template listener callbacks
+- Attaching a view that was marked dirty by one of the above
+
+**OnPush Strategy:**
+
+- Use `ChangeDetectionStrategy.OnPush` to ensure components use correct notification mechanisms
+- OnPush is recommended for application components moving towards zoneless compatibility
+- Library components hosting user components with `Default` strategy cannot always use OnPush
+- Components can use `Default` strategy if they notify Angular when change detection needs to run (via `markForCheck`, signals, `AsyncPipe`, etc.)
+
+**NgZone API Removal:**
+
+- Remove uses of `NgZone.onMicrotaskEmpty`, `NgZone.onUnstable`, `NgZone.isStable`, and `NgZone.onStable`
+- These observables will never emit when zoneless change detection is enabled
+- `NgZone.isStable` will always be `true` in zoneless mode
+- Replace `NgZone.onMicrotaskEmpty` and `NgZone.onStable` with:
+    - `afterNextRender()` for single change detection wait
+    - `afterEveryRender()` for conditions spanning multiple change detection rounds
+    - Direct DOM APIs like `MutationObserver` when waiting for specific DOM state
+
 ### Accessibility Requirements
 
 All components MUST:
@@ -109,6 +138,7 @@ All components MUST:
 ### Components
 
 - Keep components small and focused on a single responsibility
+- Keep components and directives focused on presentation; refactor business logic to separate functions or services
 - Use `input()` signal instead of decorators ([learn more](https://angular.dev/guide/components/inputs))
 - Use `output()` function instead of decorators ([learn more](https://angular.dev/guide/components/outputs))
 - Use `computed()` for derived state ([learn more](https://angular.dev/guide/signals))
@@ -117,6 +147,49 @@ All components MUST:
 - Prefer Reactive forms instead of Template-driven forms
 - Do NOT use `ngClass`; use `class` bindings instead
 - Do NOT use `ngStyle`; use `style` bindings instead
+
+#### Naming Conventions
+
+**Input Names:**
+
+- Avoid choosing input names that collide with properties on DOM elements like `HTMLElement`
+- Do NOT add prefixes for component inputs (like you would with component selectors)
+- Name collisions introduce confusion about whether the property belongs to the component or the DOM element
+
+**Output Names:**
+
+- Avoid choosing output names that collide with events on DOM elements like `HTMLElement`
+- Always use camelCase for output names
+- Avoid prefixing output names with "on"
+- Do NOT add prefixes for component outputs (like you would with component selectors)
+- Name collisions introduce confusion about whether the property belongs to the component or the DOM element
+
+**Event Handlers:**
+
+- Name event handlers for the action they perform rather than for the triggering event
+- This makes it easier to understand what an event does from reading the template
+- For keyboard events, use Angular's key event modifiers with specific handler names
+
+#### Class Members
+
+**Protected Members:**
+
+- Use `protected` access for class members that are only used by a component's template
+- A component's public members define a public API accessible via dependency injection and queries
+- Protected members ensure template-accessible properties don't pollute the public API
+
+**Readonly Properties:**
+
+- Use `readonly` for properties that shouldn't change after initialization
+- Mark properties initialized by Angular as `readonly` (includes `input()`, `model()`, `output()`, and query results)
+- The `readonly` modifier ensures values set by Angular are not accidentally overwritten
+
+#### Lifecycle Hooks
+
+- Keep lifecycle methods simple; avoid long or complex logic inside hooks like `ngOnInit`
+- Create well-named methods to contain complex logic and call them from lifecycle hooks
+- Always implement lifecycle hook interfaces (e.g., `OnInit`, `OnDestroy`) to ensure correct method names
+- Import and implement the TypeScript interface for each lifecycle method used
 
 #### Component Member Ordering
 
@@ -184,6 +257,7 @@ export class MyComponent {
 ### Templates
 
 - Keep templates simple and avoid complex logic
+- When template code gets too complex, refactor logic into TypeScript code (typically with a `computed()`)
 - Use native control flow (`@if`, `@for`, `@switch`) instead of `*ngIf`, `*ngFor`, `*ngSwitch`
 - Do not assume globals like `new Date()` are available
 - Do not write arrow functions in templates (they are not supported)
