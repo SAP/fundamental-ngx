@@ -7,7 +7,6 @@ import {
     DestroyRef,
     ElementRef,
     EmbeddedViewRef,
-    HostBinding,
     Injector,
     Input,
     OnDestroy,
@@ -30,7 +29,10 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrl: '../../dialog/dialog-container/dialog-container-animations.scss',
-    imports: [PortalModule]
+    imports: [PortalModule],
+    host: {
+        '[class]': '_containerClasses'
+    }
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>
@@ -44,7 +46,6 @@ export class MessageBoxContainerComponent
     }
 
     /** @hidden */
-    @HostBinding('class')
     protected get _containerClasses(): string {
         const state = this._animationStateSignal();
         const classes = ['fd-dialog-container', `fd-dialog-container--${state}`];

@@ -1,4 +1,3 @@
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -8,7 +7,6 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
-    HostBinding,
     Inject,
     Input,
     OnDestroy,
@@ -33,15 +31,10 @@ import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/mess
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [TabbableElementService],
-    imports: [
-        NgTemplateOutlet,
-        CdkScrollable,
-        ScrollbarDirective,
-        ListModule,
-        ObjectStatusComponent,
-        LinkComponent,
-        FdTranslatePipe
-    ]
+    imports: [NgTemplateOutlet, ScrollbarDirective, ListModule, ObjectStatusComponent, LinkComponent, FdTranslatePipe],
+    host: {
+        '[class]': '_initialClass'
+    }
 })
 export class MessageViewComponent implements AfterViewInit, OnDestroy {
     /** Current Message Popover screen. Can be either `list` or `details`. */
@@ -85,7 +78,6 @@ export class MessageViewComponent implements AfterViewInit, OnDestroy {
     protected _detailsSection: ElementRef;
 
     /** @Hidden */
-    @HostBinding('class')
     protected readonly _initialClass = 'fd-message-popover__view-container';
 
     /** @hidden */

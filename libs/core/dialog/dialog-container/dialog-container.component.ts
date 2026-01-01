@@ -6,7 +6,6 @@ import {
     DestroyRef,
     ElementRef,
     EmbeddedViewRef,
-    HostBinding,
     Injector,
     Input,
     OnDestroy,
@@ -37,7 +36,10 @@ import { DialogRef } from '../utils/dialog-ref.class';
     styleUrls: ['./dialog-container.component.scss', './dialog-container-animations.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [PortalModule]
+    imports: [PortalModule],
+    host: {
+        '[class]': '_containerClasses'
+    }
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
@@ -58,7 +60,6 @@ export class DialogContainerComponent
     private _animationStateSignal = signal<'void' | 'visible' | 'hidden'>('void');
 
     /** @hidden */
-    @HostBinding('class')
     protected get _containerClasses(): string {
         const state = this._animationStateSignal();
         const classes = ['fd-dialog-container', `fd-dialog-container--${state}`];
