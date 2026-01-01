@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, NgZone, OnDestroy, signal } from '@angular/core';
+import { Directive, ElementRef, inject, OnDestroy, signal } from '@angular/core';
 import { BaseAnimatedToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 
@@ -28,9 +28,6 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * Whether the animations should be disabled.
      */
     protected _animationsDisabled = false;
-
-    /** @hidden */
-    protected _ngZone = inject(NgZone);
 
     /** @hidden */
     private _elementRef = inject(ElementRef);
@@ -87,10 +84,8 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
         // Use setTimeout to defer so subscriptions can be set up first
         if (this._animationsDisabled) {
             setTimeout(() => {
-                this._ngZone.run(() => {
-                    this.onEnter$.next();
-                    this.onEnter$.complete();
-                });
+                this.onEnter$.next();
+                this.onEnter$.complete();
             }, 0);
         }
     }
@@ -135,10 +130,8 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
                 // because it can cause a memory leak.
                 const onEnter = this.onEnter$;
 
-                this._ngZone.run(() => {
-                    onEnter.next();
-                    onEnter.complete();
-                });
+                onEnter.next();
+                onEnter.complete();
             }
         };
 
@@ -173,10 +166,8 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
 
         // Use setTimeout to defer execution to next tick to ensure DOM is ready
         setTimeout(() => {
-            this._ngZone.run(() => {
-                onExit.next();
-                onExit.complete();
-            });
+            onExit.next();
+            onExit.complete();
         }, 0);
     }
 }
