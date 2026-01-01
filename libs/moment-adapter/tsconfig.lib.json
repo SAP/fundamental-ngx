@@ -3,7 +3,7 @@
     "files": ["./src/index.ts"],
     "exclude": ["**/*.spec.ts"],
     "compilerOptions": {
-        "target": "ES2022",
+        "target": "es2023",
         "useDefineForClassFields": false,
         "moduleResolution": "bundler"
     },
