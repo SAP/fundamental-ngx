@@ -21,9 +21,9 @@
         "strict": false,
         "noImplicitReturns": false,
         "noFallthroughCasesInSwitch": true,
-        "target": "es2022",
+        "target": "es2023",
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2022"]
+        "lib": ["dom", "es2023"]
     }
 }
