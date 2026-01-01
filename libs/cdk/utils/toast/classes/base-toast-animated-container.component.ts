@@ -81,11 +81,14 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
         this._isAnimatingSignal.set(!this._animationsDisabled);
 
         // If animations are disabled, immediately complete the enter
+        // Use setTimeout to defer so subscriptions can be set up first
         if (this._animationsDisabled) {
-            this._ngZone.run(() => {
-                this.onEnter$.next();
-                this.onEnter$.complete();
-            });
+            setTimeout(() => {
+                this._ngZone.run(() => {
+                    this.onEnter$.next();
+                    this.onEnter$.complete();
+                });
+            }, 0);
         }
     }
 
