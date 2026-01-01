@@ -1,5 +1,4 @@
 import { Directive, ElementRef, HostBinding, inject, NgZone, OnDestroy, signal } from '@angular/core';
-import { take } from 'rxjs';
 import { BaseAnimatedToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 
@@ -16,6 +15,12 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
 
     /**
      * @hidden
+     * Whether we're currently animating (used to apply animation classes)
+     */
+    protected _isAnimatingSignal = signal<boolean>(false);
+
+    /**
+     * @hidden
      * Whether the animations should be disabled.
      */
     protected _animationsDisabled = false;
@@ -29,6 +34,9 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
     /** @hidden */
     private _animationEndListener?: (event: AnimationEvent) => void;
 
+    /** @hidden */
+    private _exitCompleted = false;
+
     /**
      * @hidden
      * Host binding for animation state CSS classes
@@ -36,12 +44,15 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
     @HostBinding('class')
     protected get _animationClasses(): string {
         const state = this._animationStateSignal();
+        const isAnimating = this._isAnimatingSignal();
         const classes = [this._baseClassName, `${this._baseClassName}--${state}`];
 
-        if (state === 'visible') {
-            classes.push(`${this._baseClassName}--entering`);
-        } else if (state === 'hidden') {
-            classes.push(`${this._baseClassName}--exiting`);
+        if (isAnimating) {
+            if (state === 'visible') {
+                classes.push(`${this._baseClassName}--entering`);
+            } else if (state === 'hidden') {
+                classes.push(`${this._baseClassName}--exiting`);
+            }
         }
 
         if (this._animationsDisabled) {
@@ -67,11 +78,26 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
     /** Begin animation of Message Toast entrance into view. */
     enter(): void {
         this._animationStateSignal.set('visible');
+        this._isAnimatingSignal.set(!this._animationsDisabled);
+
+        // If animations are disabled, immediately complete the enter
+        if (this._animationsDisabled) {
+            this._ngZone.run(() => {
+                this.onEnter$.next();
+                this.onEnter$.complete();
+            });
+        }
     }
 
     /** Begin animation of Message Toast removal. */
     exit(): void {
         this._animationStateSignal.set('hidden');
+        this._isAnimatingSignal.set(!this._animationsDisabled);
+
+        // If animations are disabled, immediately complete the exit
+        if (this._animationsDisabled) {
+            this._completeExit();
+        }
     }
 
     /** @hidden */
@@ -92,6 +118,9 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
             }
 
             const state = this._animationStateSignal();
+
+            // Clear the animating flag when animation completes
+            this._isAnimatingSignal.set(false);
 
             if (state === 'hidden') {
                 this._completeExit();
@@ -126,13 +155,22 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * errors where we end up removing an element which is in the middle of an animation.
      */
     private _completeExit(): void {
+        // Prevent multiple completions
+        if (this._exitCompleted) {
+            return;
+        }
+        this._exitCompleted = true;
+
         // Note: we shouldn't use `this` inside the zone callback,
         // because it can cause a memory leak.
         const onExit = this.onExit$;
 
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
-            onExit.next();
-            onExit.complete();
-        });
+        // Use setTimeout to defer execution to next tick to ensure DOM is ready
+        setTimeout(() => {
+            this._ngZone.run(() => {
+                onExit.next();
+                onExit.complete();
+            });
+        }, 0);
     }
 }
