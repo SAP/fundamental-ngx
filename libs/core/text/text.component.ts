@@ -2,18 +2,29 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    EventEmitter,
-    Input,
-    Output,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject,
+    input,
+    model,
+    signal
 } from '@angular/core';
 import { LineClampDirective, LineClampTargetDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
-/** Type of hyphenation */
+/**
+ * Type of hyphenation to apply to text using CSS hyphens property.
+ * - `'none'` - Disables hyphenation
+ * - `'manual'` - Only breaks at explicit hyphenation points
+ * - `'auto'` - Browser automatically hyphenates
+ * - `null` - No hyphenation applied
+ */
 export type HyphenationType = 'none' | 'manual' | 'auto' | null;
 
+/**
+ * Text component for displaying text content with optional line clamping, hyphenation, and expand/collapse functionality.
+ */
 @Component({
     selector: 'fd-text',
     templateUrl: './text.component.html',
@@ -24,72 +35,88 @@ export type HyphenationType = 'none' | 'manual' | 'auto' | null;
 })
 export class TextComponent {
     /**
-     * Text for render
+     * The text content to render.
+     * @default ''
      */
-    @Input()
-    text: string;
+    readonly text = input<string>('');
 
     /**
-     * Max visible lines of text
+     * Maximum number of visible lines before text is clamped. Set to `null` to disable.
+     * @default null
      */
-    @Input()
-    maxLines: Nullable<number> = null;
+    readonly maxLines = input<Nullable<number>>(null);
 
     /**
-     * Property allowing browsers to render whitespace and tabs
+     * Preserves whitespace and line breaks using CSS `white-space: pre-wrap`.
+     * @default false
      */
-    @Input()
-    whitespaces = false;
+    readonly whitespaces = input(false);
 
     /**
-     * Property for managing hyphenation, using css rule hyphens.
+     * Controls hyphenation behavior using CSS `hyphens` property.
+     * @default null
      */
-    @Input()
-    hyphenation: HyphenationType = null;
+    readonly hyphenation = input<HyphenationType>(null);
 
     /**
-     * Option that adds more and less buttons to expand/collapse text
+     * Displays "more"/"less" links to expand/collapse text. Requires `maxLines` to be set.
+     * @default false
      */
-    @Input()
-    expandable = false;
+    readonly expandable = input(false);
 
     /**
-     * Option to set text collapsed or expand on render
+     * Controls collapsed/expanded state. Two-way bindable via `[(isCollapsed)]`.
+     * @default true
      */
-    @Input()
-    isCollapsed = true;
+    readonly isCollapsed = model(true);
 
     /**
-     * Event, notifying about collapse state changes
+     * Computed signal determining if text should display in collapsed state.
+     * @hidden
      */
-    @Output()
-    isCollapsedChange = new EventEmitter<boolean>();
+    protected readonly _isCollapsed = computed(() => {
+        const collapsed = this.isCollapsed();
+        const max = this.maxLines();
+        return collapsed && !!max && max > 0;
+    });
 
-    /** @hidden */
-    get _isCollapsed(): boolean {
-        return this.isCollapsed && !!this.maxLines && this.maxLines > 0;
+    /**
+     * Computed signal determining if expand/collapse functionality is enabled.
+     * @hidden
+     */
+    protected readonly _expandable = computed(() => {
+        const expand = this.expandable();
+        const max = this.maxLines();
+        return expand && !!max && max > 0;
+    });
+
+    /**
+     * Tracks whether text content exceeds maximum lines.
+     * @hidden
+     */
+    protected readonly _hasMore = signal(false);
+
+    /**
+     * Change detector reference for manual change detection in zoneless mode.
+     * @hidden
+     */
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
+
+    /**
+     * Toggles collapsed/expanded state and notifies parent components.
+     * @hidden
+     */
+    protected toggleTextView(): void {
+        this.isCollapsed.update((collapsed) => !collapsed);
     }
 
-    /** @hidden */
-    get _expandable(): boolean {
-        return this.expandable && !!this.maxLines && this.maxLines > 0;
-    }
-
-    /** @hidden */
-    _hasMore = false;
-
-    /** @hidden */
-    constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
-
-    /** @hidden */
-    toggleTextView(): void {
-        this.isCollapsed = !this.isCollapsed;
-        this.isCollapsedChange.emit(this.isCollapsed);
-    }
-
-    /** @hidden */
-    checkLineCount(count: number): void {
-        this._hasMore = !!this.maxLines && count > this.maxLines;
-        this._changeDetectorRef.detectChanges();
+    /**
+     * Updates `_hasMore` signal based on actual line count from line clamp directive.
+     * @hidden
+     */
+    protected checkLineCount(count: number): void {
+        const max = this.maxLines();
+        this._hasMore.set(!!max && count > max);
+        this._changeDetectorRef.markForCheck();
     }
 }

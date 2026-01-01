@@ -35,72 +35,169 @@ describe('TextComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have expected text', () => {
-        const text = 'Sample test text';
-        component.text = text;
-        fixture.detectChanges();
+    describe('Text rendering', () => {
+        it('should render provided text content', () => {
+            const text = 'Sample test text';
+            fixture.componentRef.setInput('text', text);
+            fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span[fdkLineClampTarget]').innerHTML).toBe(text);
+            expect(fixture.nativeElement.querySelector('span[fdkLineClampTarget]').innerHTML).toBe(text);
+        });
+
+        it('should apply whitespace preservation when enabled', () => {
+            fixture.componentRef.setInput('whitespaces', true);
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.fd-text').classList).toContain('fd-text--pre-wrap');
+        });
+
+        it('should not apply whitespace class when disabled', () => {
+            fixture.componentRef.setInput('whitespaces', false);
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.fd-text').classList).not.toContain('fd-text--pre-wrap');
+        });
     });
 
-    it('should enable whitespaces', () => {
-        component.whitespaces = true;
-        fixture.detectChanges();
+    describe('Hyphenation', () => {
+        it('should apply hyphenation style', () => {
+            fixture.componentRef.setInput('hyphenation', 'auto');
+            fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('.fd-text').classList).toContain('fd-text--pre-wrap');
+            expect(fixture.nativeElement.querySelector('.fd-text').style.hyphens).toEqual('auto');
+        });
     });
 
-    it('should enable hyphenation', () => {
-        component.hyphenation = 'auto';
-        fixture.detectChanges();
+    describe('Line clamping', () => {
+        it('should apply line clamp with maxLines', () => {
+            const maxLines = 3;
+            const target = fixture.nativeElement.querySelector('.fd-text__lineclamp');
 
-        expect(fixture.nativeElement.querySelector('.fd-text').style.hyphens).toEqual('auto');
+            fixture.componentRef.setInput('maxLines', maxLines);
+            fixture.detectChanges();
+
+            expect(target).toBeTruthy();
+            expect(Number(target.style['-webkit-line-clamp'])).toEqual(maxLines);
+        });
+
+        it('should set _hasMore when line count exceeds maxLines', () => {
+            fixture.componentRef.setInput('maxLines', 3);
+            component['checkLineCount'](5);
+
+            expect(component['_hasMore']()).toBe(true);
+        });
+
+        it('should not set _hasMore when line count is within maxLines', () => {
+            fixture.componentRef.setInput('maxLines', 5);
+            component['checkLineCount'](3);
+
+            expect(component['_hasMore']()).toBe(false);
+        });
+
+        it('should not set _hasMore when maxLines is null', () => {
+            fixture.componentRef.setInput('maxLines', null);
+            component['checkLineCount'](10);
+
+            expect(component['_hasMore']()).toBe(false);
+        });
     });
 
-    it('should disable hyphenation', () => {
-        component.hyphenation = 'none';
-        fixture.detectChanges();
+    describe('Computed signals', () => {
+        it('should compute _isCollapsed as true when collapsed with valid maxLines', () => {
+            fixture.componentRef.setInput('isCollapsed', true);
+            fixture.componentRef.setInput('maxLines', 3);
 
-        expect(fixture.nativeElement.querySelector('.fd-text').style.hyphens).toEqual('none');
+            expect(component['_isCollapsed']()).toBe(true);
+        });
+
+        it('should compute _isCollapsed as false when not collapsed', () => {
+            fixture.componentRef.setInput('isCollapsed', false);
+            fixture.componentRef.setInput('maxLines', 3);
+
+            expect(component['_isCollapsed']()).toBe(false);
+        });
+
+        it('should compute _isCollapsed as false when maxLines is null', () => {
+            fixture.componentRef.setInput('isCollapsed', true);
+            fixture.componentRef.setInput('maxLines', null);
+
+            expect(component['_isCollapsed']()).toBe(false);
+        });
+
+        it('should compute _expandable as true when expandable with valid maxLines', () => {
+            fixture.componentRef.setInput('expandable', true);
+            fixture.componentRef.setInput('maxLines', 3);
+
+            expect(component['_expandable']()).toBe(true);
+        });
+
+        it('should compute _expandable as false when not expandable', () => {
+            fixture.componentRef.setInput('expandable', false);
+            fixture.componentRef.setInput('maxLines', 3);
+
+            expect(component['_expandable']()).toBe(false);
+        });
+
+        it('should compute _expandable as false when maxLines is null', () => {
+            fixture.componentRef.setInput('expandable', true);
+            fixture.componentRef.setInput('maxLines', null);
+
+            expect(component['_expandable']()).toBe(false);
+        });
     });
 
-    it('should enable line-clamps', () => {
-        const maxLines = 3;
-        const target = fixture.nativeElement.querySelector('.fd-text__lineclamp');
+    describe('Expandable functionality', () => {
+        it('should toggle between more and less labels when expanding/collapsing', fakeAsync(() => {
+            fixture.componentRef.setInput('maxLines', 1);
+            fixture.componentRef.setInput('expandable', true);
+            component['_hasMore'].set(true);
 
-        component.maxLines = maxLines;
-        fixture.detectChanges();
+            fixture.detectChanges();
+            tick();
 
-        expect(target).toBeTruthy();
-        expect(Number(target.style['-webkit-line-clamp'])).toEqual(maxLines);
-    });
+            const button = fixture.nativeElement.querySelector('.fd-text__link--more .fd-link__content');
 
-    it(`should set labels for more and less buttons`, fakeAsync(() => {
-        component.maxLines = 1;
-        component.expandable = true;
-        component._hasMore = true;
+            expect(button.innerHTML.toLowerCase().trim()).toEqual(moreLabel);
 
-        fixture.detectChanges();
-        tick();
+            fixture.componentRef.setInput('isCollapsed', false);
+            fixture.detectChanges();
+            tick();
 
-        const button = fixture.nativeElement.querySelector('.fd-text__link--more .fd-link__content');
+            expect(button.innerHTML.toLowerCase().trim()).toEqual(lessLabel);
+        }));
 
-        expect(button.innerHTML.toLowerCase().trim()).toEqual(moreLabel);
+        it('should toggle isCollapsed model signal when toggleTextView is called', () => {
+            fixture.componentRef.setInput('expandable', true);
+            component['_hasMore'].set(true);
+            fixture.detectChanges();
 
-        component.isCollapsed = false;
-        fixture.detectChanges();
-        tick();
+            expect(component.isCollapsed()).toBe(true);
 
-        expect(button.innerHTML.toLowerCase().trim()).toEqual(lessLabel);
-    }));
+            component['toggleTextView']();
+            expect(component.isCollapsed()).toBe(false);
 
-    it('should have ability to toggle text view', () => {
-        component.expandable = true;
-        component._hasMore = true;
-        fixture.detectChanges();
-        component.toggleTextView();
-        expect(component.isCollapsed).toBe(false);
-        component.toggleTextView();
-        expect(component.isCollapsed).toBe(true);
+            component['toggleTextView']();
+            expect(component.isCollapsed()).toBe(true);
+        });
+
+        it('should not show more/less link when expandable is false', () => {
+            fixture.componentRef.setInput('maxLines', 1);
+            fixture.componentRef.setInput('expandable', false);
+            component['_hasMore'].set(true);
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('.fd-text__link--more');
+            expect(button).toBeFalsy();
+        });
+
+        it('should not show more/less link when _hasMore is false', () => {
+            fixture.componentRef.setInput('maxLines', 1);
+            fixture.componentRef.setInput('expandable', true);
+            component['_hasMore'].set(false);
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('.fd-text__link--more');
+            expect(button).toBeFalsy();
+        });
     });
 });
