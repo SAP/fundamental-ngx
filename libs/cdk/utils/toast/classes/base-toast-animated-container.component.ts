@@ -164,10 +164,7 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
         // because it can cause a memory leak.
         const onExit = this.onExit$;
 
-        // Use setTimeout to defer execution to next tick to ensure DOM is ready
-        setTimeout(() => {
-            onExit.next();
-            onExit.complete();
-        }, 0);
+        onExit.next();
+        onExit.complete();
     }
 }
