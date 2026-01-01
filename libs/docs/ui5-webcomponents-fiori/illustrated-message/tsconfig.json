@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es2022",
+        "target": "es2023",
         "useDefineForClassFields": false,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
@@ -10,7 +10,7 @@
         "noFallthroughCasesInSwitch": true,
         "module": "preserve",
         "moduleResolution": "bundler",
-        "lib": ["dom", "es2022"]
+        "lib": ["dom", "es2023"]
     },
     "files": [],
     "include": [],
