@@ -1,8 +1,12 @@
-import { Directive, ElementRef, HostBinding, inject, NgZone, OnDestroy, signal } from '@angular/core';
+import { Directive, ElementRef, inject, NgZone, OnDestroy, signal } from '@angular/core';
 import { BaseAnimatedToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 
-@Directive()
+@Directive({
+    host: {
+        '[class]': '_animationClasses'
+    }
+})
 export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimatedToastConfig>
     extends BaseToastContainerComponent<P>
     implements OnDestroy
@@ -41,7 +45,6 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * @hidden
      * Host binding for animation state CSS classes
      */
-    @HostBinding('class')
     protected get _animationClasses(): string {
         const state = this._animationStateSignal();
         const isAnimating = this._isAnimatingSignal();
