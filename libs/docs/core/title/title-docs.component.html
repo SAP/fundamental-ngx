@@ -1,34 +1,32 @@
-<fd-docs-section-title id="semantic-level" componentName="title"> Semantic Level </fd-docs-section-title>
+<fd-docs-section-title id="semantic-level" componentName="title">Semantic Levels</fd-docs-section-title>
 <description>
-    There are 6 semantic levels of a heading element. There should only be one H1 on a page, and headings should only
-    appear in ascending order without skipping a level; i.e. even if there are only 3 levels on a page, the order must
-    be H1-H2-H3, and no other levels used.
+    Headings have 6 semantic levels (H1-H6). Use only one H1 per page and maintain ascending order without skipping
+    levels (e.g., H1 → H2 → H3). The component automatically detects the semantic level from the element tag.
 </description>
 <component-example>
     <fd-title-semantic-example></fd-title-semantic-example>
 </component-example>
 <code-example [exampleFiles]="titleSemanticExample"></code-example>
 
-<fd-docs-section-title id="visual" componentName="title"> Visual </fd-docs-section-title>
+<fd-docs-section-title id="visual" componentName="title">Visual Styling</fd-docs-section-title>
 <description>
-    If a design requires it, the visual level can be set to something different than the semantic level. This allows the
-    sequential order to be maintained while providing flexibility in appearance. In order to do this, use the optional
-    <code>[headerSize]</code> input.
+    Use <code>[headerSize]</code> to style headings differently from their semantic level, maintaining proper document
+    structure while achieving design requirements.
 </description>
 <component-example>
     <fd-title-visual-example></fd-title-visual-example>
 </component-example>
 <code-example [exampleFiles]="titleVisualExample"></code-example>
 
-<fd-docs-section-title id="elision" componentName="title"> Elision </fd-docs-section-title>
-<description> By default the Title text overflow will be elided when longer than its container. </description>
+<fd-docs-section-title id="elision" componentName="title">Text Truncation</fd-docs-section-title>
+<description>By default, title text truncates with ellipsis when it exceeds its container width.</description>
 <component-example>
     <fd-title-elision-example></fd-title-elision-example>
 </component-example>
 <code-example [exampleFiles]="titleElisionExample"></code-example>
 
-<fd-docs-section-title id="wrapping" componentName="title"> Wrapping </fd-docs-section-title>
-<description> Add the <code>[wrap]</code> input to cause the overflow text to wrap instead. </description>
+<fd-docs-section-title id="wrapping" componentName="title">Text Wrapping</fd-docs-section-title>
+<description>Use <code>[wrap]="true"</code> to wrap overflowing text instead of truncating.</description>
 <component-example>
     <fd-title-wrapping-example></fd-title-wrapping-example>
 </component-example>

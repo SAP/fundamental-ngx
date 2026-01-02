@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     ChangeDetectorRef,
+    ComponentRef,
     ContentChild,
     ContentChildren,
     Directive,
@@ -17,9 +18,12 @@ export abstract class DialogHeaderBase implements AfterContentInit {
     /** @hidden */
     @ContentChild(TitleToken)
     set defaultTitleSize(title: TitleComponent) {
-        if (title && !title.headerSize) {
-            title.headerSize = 5;
-            this._changeDetectorRef.detectChanges();
+        if (title && !title.headerSize()) {
+            // Get the component instance's ComponentRef for setting signal inputs
+            const componentRef = (title as any)._componentRef as ComponentRef<TitleComponent>;
+            if (componentRef) {
+                componentRef.setInput('headerSize', 5);
+            }
         }
     }
 
@@ -53,6 +57,6 @@ export abstract class DialogHeaderBase implements AfterContentInit {
                     break;
             }
         });
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 }
