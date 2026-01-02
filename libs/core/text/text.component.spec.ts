@@ -103,6 +103,33 @@ describe('TextComponent', () => {
     });
 
     describe('Computed signals', () => {
+        describe('_hasValidMaxLines', () => {
+            it('should return true when maxLines is a positive number', () => {
+                fixture.componentRef.setInput('maxLines', 3);
+                expect(component['_hasValidMaxLines']()).toBe(true);
+            });
+
+            it('should return false when maxLines is null', () => {
+                fixture.componentRef.setInput('maxLines', null);
+                expect(component['_hasValidMaxLines']()).toBe(false);
+            });
+
+            it('should return false when maxLines is undefined', () => {
+                fixture.componentRef.setInput('maxLines', undefined);
+                expect(component['_hasValidMaxLines']()).toBe(false);
+            });
+
+            it('should return false when maxLines is 0', () => {
+                fixture.componentRef.setInput('maxLines', 0);
+                expect(component['_hasValidMaxLines']()).toBe(false);
+            });
+
+            it('should return false when maxLines is negative', () => {
+                fixture.componentRef.setInput('maxLines', -1);
+                expect(component['_hasValidMaxLines']()).toBe(false);
+            });
+        });
+
         it('should compute _isCollapsed as true when collapsed with valid maxLines', () => {
             fixture.componentRef.setInput('isCollapsed', true);
             fixture.componentRef.setInput('maxLines', 3);

@@ -254,6 +254,110 @@ export class MyComponent {
 - Keep state transformations pure and predictable
 - Do NOT use `mutate` on signals, use `update` or `set` instead
 
+### Signal-Based Change Detection
+
+**Signals eliminate the need for manual change detection.** When migrating to signals, writing new signal-based components, or reviewing a change, follow these guidelines:
+
+**Do NOT use `ChangeDetectorRef` with signals:**
+
+- ❌ `signal.set(value); this._changeDetectorRef.markForCheck();` - REDUNDANT
+- ✅ `signal.set(value);` - Signal automatically notifies Angular
+- ❌ `model.update(fn); this._changeDetectorRef.markForCheck();` - REDUNDANT
+- ✅ `model.update(fn);` - Model signals automatically notify
+- ❌ `componentRef.setInput('prop', value); this._changeDetectorRef.markForCheck();` - REDUNDANT
+- ✅ `componentRef.setInput('prop', value);` - setInput automatically notifies
+
+**When `markForCheck()` IS needed:**
+
+- Only when updating non-signal properties in OnPush components
+- When code runs outside Angular's zone (setTimeout without NgZone, third-party callbacks, Web Workers)
+- When working with observables without `async` pipe
+
+**Signal Migration Checklist:**
+
+When converting components from `@Input()`/`@Output()` to signals:
+
+1. **Convert decorators to signals:**
+
+    - `@Input()` → `input()`
+    - `@Output()` → `output()`
+    - `@Input()` + `@Output()` (two-way binding) → `model()`
+
+2. **Remove manual change detection:**
+
+    - Remove `ChangeDetectorRef` import if only used for signal updates
+    - Remove `markForCheck()` / `detectChanges()` calls after signal updates
+    - Remove `inject(ChangeDetectorRef)` if no longer needed
+
+3. **Refactor computed signals:**
+
+    - Look for duplicate logic across multiple `computed()` signals
+    - Extract common validations/transformations into separate computed signals
+    - Compose computed signals from smaller, focused signals
+    - Apply DRY (Don't Repeat Yourself) principle
+
+4. **Two-pass approach:**
+    - **Pass 1:** Make it work (convert syntax, fix compilation errors)
+    - **Pass 2:** Make it right (refactor, eliminate duplication, remove cruft)
+
+**Example - Before (with manual change detection):**
+
+```typescript
+export class MyComponent {
+    @Input() value: number;
+    @Output() valueChange = new EventEmitter<number>();
+
+    private _changeDetectorRef = inject(ChangeDetectorRef);
+
+    updateValue(newValue: number): void {
+        this.value = newValue;
+        this.valueChange.emit(newValue);
+        this._changeDetectorRef.markForCheck(); // Manual notification
+    }
+}
+```
+
+**Example - After (signal-based, no manual change detection):**
+
+```typescript
+export class MyComponent {
+    readonly value = model<number>(0);
+
+    // No ChangeDetectorRef needed!
+
+    protected updateValue(newValue: number): void {
+        this.value.set(newValue); // Automatic notification
+    }
+}
+```
+
+**Example - Refactoring computed signals:**
+
+```typescript
+// ❌ Before - duplicate logic
+protected readonly _isValid = computed(() => {
+    const val = this.value();
+    return val != null && val > 0;
+});
+
+protected readonly _isEnabled = computed(() => {
+    const val = this.value();
+    return this.enabled() && val != null && val > 0;
+});
+
+// ✅ After - extracted common logic
+protected readonly _hasValidValue = computed(() => {
+    const val = this.value();
+    return val != null && val > 0;
+});
+
+protected readonly _isValid = computed(() => this._hasValidValue());
+
+protected readonly _isEnabled = computed(() =>
+    this.enabled() && this._hasValidValue()
+);
+```
+
 ### Templates
 
 - Keep templates simple and avoid complex logic

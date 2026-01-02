@@ -1,15 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ViewEncapsulation,
-    computed,
-    inject,
-    input,
-    model,
-    signal
-} from '@angular/core';
-import { LineClampDirective, LineClampTargetDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input, model, signal } from '@angular/core';
+import { LineClampDirective, LineClampTargetDirective } from '@fundamental-ngx/cdk/utils';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
@@ -44,7 +34,7 @@ export class TextComponent {
      * Maximum number of visible lines before text is clamped. Set to `null` to disable.
      * @default null
      */
-    readonly maxLines = input<Nullable<number>>(null);
+    readonly maxLines = input<number | null>(null);
 
     /**
      * Preserves whitespace and line breaks using CSS `white-space: pre-wrap`.
@@ -71,36 +61,28 @@ export class TextComponent {
     readonly isCollapsed = model(true);
 
     /**
+     * Computed signal that checks if maxLines is set to a valid positive number.
+     * @hidden
+     */
+    protected readonly _hasValidMaxLines = computed(() => (this.maxLines() ?? 0) > 0);
+
+    /**
      * Computed signal determining if text should display in collapsed state.
      * @hidden
      */
-    protected readonly _isCollapsed = computed(() => {
-        const collapsed = this.isCollapsed();
-        const max = this.maxLines();
-        return collapsed && !!max && max > 0;
-    });
+    protected readonly _isCollapsed = computed(() => this.isCollapsed() && this._hasValidMaxLines());
 
     /**
      * Computed signal determining if expand/collapse functionality is enabled.
      * @hidden
      */
-    protected readonly _expandable = computed(() => {
-        const expand = this.expandable();
-        const max = this.maxLines();
-        return expand && !!max && max > 0;
-    });
+    protected readonly _expandable = computed(() => this.expandable() && this._hasValidMaxLines());
 
     /**
      * Tracks whether text content exceeds maximum lines.
      * @hidden
      */
     protected readonly _hasMore = signal(false);
-
-    /**
-     * Change detector reference for manual change detection in zoneless mode.
-     * @hidden
-     */
-    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /**
      * Toggles collapsed/expanded state and notifies parent components.
@@ -112,11 +94,11 @@ export class TextComponent {
 
     /**
      * Updates `_hasMore` signal based on actual line count from line clamp directive.
+     * Signal update automatically triggers change detection.
      * @hidden
      */
     protected checkLineCount(count: number): void {
         const max = this.maxLines();
         this._hasMore.set(!!max && count > max);
-        this._changeDetectorRef.markForCheck();
     }
 }
