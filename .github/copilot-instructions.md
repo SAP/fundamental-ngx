@@ -254,6 +254,303 @@ export class MyComponent {
 - Keep state transformations pure and predictable
 - Do NOT use `mutate` on signals, use `update` or `set` instead
 
+### Effect vs Observables
+
+**Use `effect()` for signal-reactive side effects instead of observables when:**
+
+- You need to react to signal changes and perform side effects
+- You want automatic cleanup and proper Angular lifecycle integration
+- Your logic depends on multiple signals and you want automatic dependency tracking
+- You're working within a component or service's injection context
+
+**When to use `effect()`:**
+
+- Synchronizing component state with DOM (focus management, scroll position, ARIA attributes)
+- Managing interactions with third-party non-Angular libraries
+- Triggering imperative operations when signals change
+- Reacting to computed signal values
+
+**When to still use Observables:**
+
+- Handling async events from external sources (user events, WebSockets, timers)
+- Complex async operations with operators (debounce, throttle, retry)
+- Working with existing RxJS-based APIs
+- Time-based operations (intervals, timeouts)
+- Multiple subscribers need the same data stream
+
+**Example - Managing focus based on component state:**
+
+```typescript
+// ❌ Before - using RxJS
+export class PopoverComponent implements OnDestroy {
+    readonly isOpen = signal(false);
+    private readonly triggerElement = viewChild<ElementRef>('trigger');
+    private readonly popoverElement = viewChild<ElementRef>('popover');
+    private readonly destroy$ = new Subject<void>();
+
+    constructor() {
+        // Manual subscription management required
+        toObservable(this.isOpen)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((open) => {
+                if (open) {
+                    this.popoverElement()?.nativeElement.focus();
+                } else {
+                    this.triggerElement()?.nativeElement.focus();
+                }
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+}
+
+// ✅ After - using effect()
+export class PopoverComponent {
+    readonly isOpen = signal(false);
+    private readonly triggerElement = viewChild<ElementRef>('trigger');
+    private readonly popoverElement = viewChild<ElementRef>('popover');
+
+    constructor() {
+        // Automatic dependency tracking and cleanup
+        effect(() => {
+            if (this.isOpen()) {
+                // Move focus to popover when opened
+                this.popoverElement()?.nativeElement.focus();
+            } else {
+                // Return focus to trigger when closed
+                this.triggerElement()?.nativeElement.focus();
+            }
+        });
+    }
+}
+```
+
+**Effect Best Practices:**
+
+- Use `effect()` in constructor or initialization context where injection context is available
+- Avoid complex logic inside effects; extract to separate methods
+- Effects automatically track signal dependencies - no need for manual dependency arrays
+- Effects are automatically cleaned up when the component/service is destroyed
+
+**Using `untracked()` to prevent dependencies:**
+
+Use `untracked()` when you need to read a signal's value inside an effect without creating a dependency on it. This prevents the effect from re-running when that signal changes.
+
+```typescript
+export class TooltipComponent {
+    readonly content = signal('');
+    readonly animationDuration = signal(200);
+
+    constructor() {
+        effect(() => {
+            const currentContent = this.content();
+
+            // Read animationDuration without tracking -
+            // effect only re-runs when content changes, not when duration changes
+            const duration = untracked(this.animationDuration);
+
+            this.showTooltip(currentContent, duration);
+        });
+    }
+
+    private showTooltip(content: string, duration: number): void {
+        // Show tooltip with the given content and animation duration
+    }
+}
+```
+
+In this example, the effect should re-run whenever the tooltip content changes to update what's displayed, but it shouldn't re-run when the animation duration setting changes (that would just be a configuration update).
+
+**Without `untracked()`:**
+
+- The effect tracks both `content` and `animationDuration` as dependencies
+- The effect re-runs whenever EITHER signal changes
+- Changing animation duration → effect re-runs → tooltip is shown again (even though content didn't change)
+
+**With `untracked()`:**
+
+- The effect only tracks `content` as a dependency
+- The effect re-runs ONLY when `content` changes
+- Changing animation duration → effect does NOT re-run
+- But the new duration value will be used the NEXT time the effect runs (when content changes)
+
+**Use cases for `untracked()`:**
+
+- Reading configuration values that shouldn't trigger re-execution
+- Accessing signals for logging/debugging without creating dependencies
+- Breaking circular dependencies between signals
+- Reading the current value during initialization without tracking future changes
+
+**Using `allowSignalWrites: true` option:**
+
+By default, Angular prevents signal writes inside effects to avoid infinite loops. Use `allowSignalWrites: true` sparingly when you need to update signals as a side effect, but ensure you don't create cycles.
+
+```typescript
+export class ValidationComponent {
+    readonly inputValue = signal('');
+    readonly validationError = signal<string | null>(null);
+
+    constructor() {
+        effect(
+            () => {
+                const value = this.inputValue();
+
+                // Validate and update error signal
+                if (value.length < 3) {
+                    this.validationError.set('Minimum 3 characters required');
+                } else {
+                    this.validationError.set(null);
+                }
+            },
+            { allowSignalWrites: true }
+        );
+    }
+}
+```
+
+**Important:** Prefer using `computed()` over effects with `allowSignalWrites` when deriving state:
+
+```typescript
+// ✅ Better - use computed() for derived state
+export class ValidationComponent {
+    readonly inputValue = signal('');
+
+    readonly validationError = computed(() => {
+        const value = this.inputValue();
+        return value.length < 3 ? 'Minimum 3 characters required' : null;
+    });
+}
+
+// ❌ Avoid - using effect with allowSignalWrites for derived state
+export class ValidationComponent {
+    readonly inputValue = signal('');
+    readonly validationError = signal<string | null>(null);
+
+    constructor() {
+        effect(
+            () => {
+                const value = this.inputValue();
+                this.validationError.set(value.length < 3 ? 'Minimum 3 characters required' : null);
+            },
+            { allowSignalWrites: true }
+        );
+    }
+}
+```
+
+**Use cases for `allowSignalWrites: true`:**
+
+- Synchronizing multiple related signals that can't be expressed as computed values
+- Updating signals based on imperative operations (DOM measurements, third-party library callbacks)
+- Complex state updates that require multiple signal writes based on conditions
+
+### Signal-Based Change Detection
+
+**Signals eliminate the need for manual change detection.** When migrating to signals, writing new signal-based components, or reviewing a change, follow these guidelines:
+
+**Do NOT use `ChangeDetectorRef` with signals:**
+
+- ❌ `signal.set(value); this._changeDetectorRef.markForCheck();` - REDUNDANT
+- ✅ `signal.set(value);` - Signal automatically notifies Angular
+- ❌ `model.update(fn); this._changeDetectorRef.markForCheck();` - REDUNDANT
+- ✅ `model.update(fn);` - Model signals automatically notify
+- ❌ `componentRef.setInput('prop', value); this._changeDetectorRef.markForCheck();` - REDUNDANT
+- ✅ `componentRef.setInput('prop', value);` - setInput automatically notifies
+
+**When `markForCheck()` IS needed:**
+
+- Only when updating non-signal properties in OnPush components
+- When code runs outside Angular's zone (setTimeout without NgZone, third-party callbacks, Web Workers)
+- When working with observables without `async` pipe
+
+**Signal Migration Checklist:**
+
+When converting components from `@Input()`/`@Output()` to signals:
+
+1. **Convert decorators to signals:**
+
+    - `@Input()` → `input()`
+    - `@Output()` → `output()`
+    - `@Input()` + `@Output()` (two-way binding) → `model()`
+
+2. **Remove manual change detection:**
+
+    - Remove `ChangeDetectorRef` import if only used for signal updates
+    - Remove `markForCheck()` / `detectChanges()` calls after signal updates
+    - Remove `inject(ChangeDetectorRef)` if no longer needed
+
+3. **Refactor computed signals:**
+
+    - Look for duplicate logic across multiple `computed()` signals
+    - Extract common validations/transformations into separate computed signals
+    - Compose computed signals from smaller, focused signals
+    - Apply DRY (Don't Repeat Yourself) principle
+
+4. **Two-pass approach:**
+    - **Pass 1:** Make it work (convert syntax, fix compilation errors)
+    - **Pass 2:** Make it right (refactor, eliminate duplication, remove cruft)
+
+**Example - Before (with manual change detection):**
+
+```typescript
+export class MyComponent {
+    @Input() value: number;
+    @Output() valueChange = new EventEmitter<number>();
+
+    private _changeDetectorRef = inject(ChangeDetectorRef);
+
+    updateValue(newValue: number): void {
+        this.value = newValue;
+        this.valueChange.emit(newValue);
+        this._changeDetectorRef.markForCheck(); // Manual notification
+    }
+}
+```
+
+**Example - After (signal-based, no manual change detection):**
+
+```typescript
+export class MyComponent {
+    readonly value = model<number>(0);
+
+    // No ChangeDetectorRef needed!
+
+    protected updateValue(newValue: number): void {
+        this.value.set(newValue); // Automatic notification
+    }
+}
+```
+
+**Example - Refactoring computed signals:**
+
+```typescript
+// ❌ Before - duplicate logic
+protected readonly _isValid = computed(() => {
+    const val = this.value();
+    return val != null && val > 0;
+});
+
+protected readonly _isEnabled = computed(() => {
+    const val = this.value();
+    return this.enabled() && val != null && val > 0;
+});
+
+// ✅ After - extracted common logic
+protected readonly _hasValidValue = computed(() => {
+    const val = this.value();
+    return val != null && val > 0;
+});
+
+protected readonly _isValid = computed(() => this._hasValidValue());
+
+protected readonly _isEnabled = computed(() =>
+    this.enabled() && this._hasValidValue()
+);
+```
+
 ### Templates
 
 - Keep templates simple and avoid complex logic
