@@ -1,4 +1,4 @@
-<div class="wizard-container">
+<div style="width: 100%; height: 600px">
     <ui5-wizard contentLayout="SingleStep" (ui5StepChange)="onStepChange($event)">
         @for (step of steps(); track $index) {
         <ui5-wizard-step
@@ -7,21 +7,21 @@
             [icon]="step.icon"
             [selected]="currentStep() === $index"
         >
-            <div class="step-content">
+            <div class="fd-padding">
                 @if ($index === 0) {
                 <!-- Step 1: Product Information -->
                 <ui5-title level="H3">{{ step.titleText }}</ui5-title>
                 <ui5-text>Please provide information about your product.</ui5-text>
 
                 @if (!step1Valid() && productName().length > 0) {
-                <ui5-message-strip design="Critical" [hideCloseButton]="true" style="margin-top: 1rem">
+                <ui5-message-strip design="Critical" [hideCloseButton]="true" class="fd-margin-top--sm">
                     Please fill in all required fields to continue.
                 </ui5-message-strip>
                 }
 
-                <div class="form-group" style="margin-top: 1.5rem">
-                    <div class="form-row">
-                        <ui5-label required>Product Name</ui5-label>
+                <div class="fd-margin-top--md">
+                    <div class="fd-margin-bottom--md">
+                        <ui5-label required class="fd-margin-end--tiny">Product Name</ui5-label>
                         <ui5-input
                             placeholder="Enter product name"
                             [value]="productName()"
@@ -29,8 +29,8 @@
                         ></ui5-input>
                     </div>
 
-                    <div class="form-row">
-                        <ui5-label required>Product Description</ui5-label>
+                    <div class="fd-margin-bottom--md">
+                        <ui5-label required class="fd-margin-end--tiny">Product Description</ui5-label>
                         <ui5-textarea
                             placeholder="Enter product description"
                             [value]="productDescription()"
@@ -44,27 +44,27 @@
                 <ui5-title level="H3">{{ step.titleText }}</ui5-title>
                 <ui5-text>Select a pricing plan for your product.</ui5-text>
 
-                <div class="form-group" style="margin-top: 1.5rem">
-                    <div class="radio-group">
-                        <ui5-radio-button
-                            name="pricing"
-                            text="Basic - $9.99/month"
-                            [checked]="selectedPrice() === 'basic'"
-                            (ui5Change)="onPriceChange('basic')"
-                        ></ui5-radio-button>
-                        <ui5-radio-button
-                            name="pricing"
-                            text="Professional - $29.99/month"
-                            [checked]="selectedPrice() === 'professional'"
-                            (ui5Change)="onPriceChange('professional')"
-                        ></ui5-radio-button>
-                        <ui5-radio-button
-                            name="pricing"
-                            text="Enterprise - $99.99/month"
-                            [checked]="selectedPrice() === 'enterprise'"
-                            (ui5Change)="onPriceChange('enterprise')"
-                        ></ui5-radio-button>
-                    </div>
+                <div class="fd-margin-top--md" [style]="{ display: 'flex', 'flex-direction': 'column'}">
+                    <ui5-radio-button
+                        name="pricing"
+                        text="Basic - $9.99/month"
+                        [checked]="selectedPrice() === 'basic'"
+                        (ui5Change)="onPriceChange('basic')"
+                        class="fd-margin-end--sm"
+                    ></ui5-radio-button>
+                    <ui5-radio-button
+                        name="pricing"
+                        text="Professional - $29.99/month"
+                        [checked]="selectedPrice() === 'professional'"
+                        (ui5Change)="onPriceChange('professional')"
+                        class="fd-margin-end--sm"
+                    ></ui5-radio-button>
+                    <ui5-radio-button
+                        name="pricing"
+                        text="Enterprise - $99.99/month"
+                        [checked]="selectedPrice() === 'enterprise'"
+                        (ui5Change)="onPriceChange('enterprise')"
+                    ></ui5-radio-button>
                 </div>
                 } @if ($index === 2) {
                 <!-- Step 3: Delivery Options -->
@@ -72,21 +72,23 @@
                 <ui5-text>Choose your preferred delivery method and additional options.</ui5-text>
 
                 @if (!step3Valid()) {
-                <ui5-message-strip design="Critical" [hideCloseButton]="true" style="margin-top: 1rem">
+                <ui5-message-strip design="Critical" [hideCloseButton]="true" class="fd-margin-top--sm">
                     Please select a delivery method.
                 </ui5-message-strip>
                 }
 
-                <div class="form-group" style="margin-top: 1.5rem">
+                <div class="fd-margin-top--md" [style]="{ display: 'flex', 'flex-direction': 'column'}">
                     <ui5-checkbox
                         text="Standard Delivery (5-7 business days) - Free"
                         [checked]="standardDelivery()"
                         (ui5Change)="onStandardDeliveryChange($event)"
+                        class="fd-margin-end--sm"
                     ></ui5-checkbox>
                     <ui5-checkbox
                         text="Express Delivery (1-2 business days) - $15.00"
                         [checked]="expressDelivery()"
                         (ui5Change)="onExpressDeliveryChange($event)"
+                        class="fd-margin-end--sm"
                     ></ui5-checkbox>
                     <ui5-checkbox
                         text="Gift Wrap - $5.00"
@@ -100,14 +102,14 @@
                 <ui5-text>Provide your contact information for order updates.</ui5-text>
 
                 @if (!step4Valid() && customerName().length > 0) {
-                <ui5-message-strip design="Critical" [hideCloseButton]="true" style="margin-top: 1rem">
+                <ui5-message-strip design="Critical" [hideCloseButton]="true" class="fd-margin-top--sm">
                     Please fill in all required fields with valid information.
                 </ui5-message-strip>
                 }
 
-                <div class="form-group" style="margin-top: 1.5rem">
-                    <div class="form-row">
-                        <ui5-label required>Full Name</ui5-label>
+                <div class="fd-margin-top--md">
+                    <div class="fd-margin-bottom--md">
+                        <ui5-label required class="fd-margin-end--tiny">Full Name</ui5-label>
                         <ui5-input
                             placeholder="Enter your full name"
                             [value]="customerName()"
@@ -115,8 +117,8 @@
                         ></ui5-input>
                     </div>
 
-                    <div class="form-row">
-                        <ui5-label required>Email Address</ui5-label>
+                    <div class="fd-margin-bottom--md">
+                        <ui5-label required class="fd-margin-end--tiny">Email Address</ui5-label>
                         <ui5-input
                             type="Email"
                             placeholder="Enter your email"
@@ -125,8 +127,8 @@
                         ></ui5-input>
                     </div>
 
-                    <div class="form-row">
-                        <ui5-label>Phone Number</ui5-label>
+                    <div class="fd-margin-bottom--md">
+                        <ui5-label class="fd-margin-end--tiny">Phone Number</ui5-label>
                         <ui5-input
                             type="Tel"
                             placeholder="Enter your phone number"
@@ -143,27 +145,27 @@
                 <ui5-message-strip
                     design="Positive"
                     [hideCloseButton]="true"
-                    style="margin-top: 1rem; margin-bottom: 1.5rem"
+                    class="fd-margin-top--sm fd-margin-bottom--md"
                 >
                     All steps completed! Please review your information below.
                 </ui5-message-strip>
 
-                <div class="summary-section">
+                <div class="fd-margin-bottom--md">
                     <ui5-title level="H5">Product Information</ui5-title>
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Product Name:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Product Name:</ui5-text>
                         <ui5-text>{{ productName() }}</ui5-text>
                     </div>
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Description:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Description:</ui5-text>
                         <ui5-text>{{ productDescription() }}</ui5-text>
                     </div>
                 </div>
 
-                <div class="summary-section">
+                <div class="fd-margin-bottom--md">
                     <ui5-title level="H5">Pricing</ui5-title>
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Selected Plan:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Selected Plan:</ui5-text>
                         <ui5-text>
                             @if (selectedPrice() === 'basic') { Basic - $9.99/month } @else if (selectedPrice() ===
                             'professional') { Professional - $29.99/month } @else { Enterprise - $99.99/month }
@@ -171,36 +173,36 @@
                     </div>
                 </div>
 
-                <div class="summary-section">
+                <div class="fd-margin-bottom--md">
                     <ui5-title level="H5">Delivery Options</ui5-title>
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Delivery Method:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Delivery Method:</ui5-text>
                         <ui5-text>
                             @if (standardDelivery()) { Standard Delivery (Free) } @else if (expressDelivery()) { Express
                             Delivery ($15.00) }
                         </ui5-text>
                     </div>
                     @if (giftWrap()) {
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Additional:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Additional:</ui5-text>
                         <ui5-text>Gift Wrap ($5.00)</ui5-text>
                     </div>
                     }
                 </div>
 
-                <div class="summary-section">
+                <div class="fd-margin-bottom--md">
                     <ui5-title level="H5">Contact Information</ui5-title>
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Name:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Name:</ui5-text>
                         <ui5-text>{{ customerName() }}</ui5-text>
                     </div>
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Email:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Email:</ui5-text>
                         <ui5-text>{{ customerEmail() }}</ui5-text>
                     </div>
                     @if (customerPhone()) {
-                    <div class="summary-item">
-                        <ui5-text class="summary-label">Phone:</ui5-text>
+                    <div class="fd-margin-bottom--tiny" [style]="{display: 'flex', gap: '0.5rem'}">
+                        <ui5-text style="font-weight: bold">Phone:</ui5-text>
                         <ui5-text>{{ customerPhone() }}</ui5-text>
                     </div>
                     }
@@ -208,8 +210,13 @@
                 }
 
                 <!-- Navigation Buttons -->
-                <div class="navigation-buttons">
-                    <ui5-button [disabled]="!canGoPrevious()" (ui5Click)="goToPreviousStep()"> Previous </ui5-button>
+                <div
+                    class="fd-margin-top--lg"
+                    style="padding-top: 1rem; border-top: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9)"
+                >
+                    <ui5-button [disabled]="!canGoPrevious()" (ui5Click)="goToPreviousStep()" class="fd-margin-end--sm">
+                        Previous
+                    </ui5-button>
 
                     @if (!isLastStep()) {
                     <ui5-button design="Emphasized" [disabled]="!canGoNext()" (ui5Click)="goToNextStep()">

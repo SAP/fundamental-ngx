@@ -12,6 +12,10 @@ import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
 import { TextArea } from '@fundamental-ngx/ui5-webcomponents/text-area';
 import { Title } from '@fundamental-ngx/ui5-webcomponents/title';
 
+// Import Fundamental Styles
+import 'fundamental-styles/dist/margins.css';
+import 'fundamental-styles/dist/paddings.css';
+
 // Import icons
 import '@ui5/webcomponents-icons/dist/accept.js';
 import '@ui5/webcomponents-icons/dist/cart.js';
@@ -31,54 +35,7 @@ interface WizardStepData {
     selector: 'ui5-doc-wizard-basic-sample',
     templateUrl: './basic-sample.html',
     standalone: true,
-    imports: [Wizard, WizardStep, Button, Input, Label, Title, Text, TextArea, CheckBox, RadioButton, MessageStrip],
-    styles: [
-        `
-            .wizard-container {
-                width: 100%;
-                height: 600px;
-            }
-            .step-content {
-                padding: 2rem;
-            }
-            .form-row {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                margin-bottom: 1.5rem;
-            }
-            .form-group {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .radio-group {
-                display: flex;
-                flex-direction: column;
-                gap: 0.75rem;
-                margin-top: 0.5rem;
-            }
-            .navigation-buttons {
-                display: flex;
-                gap: 1rem;
-                margin-top: 2rem;
-                padding-top: 1rem;
-                border-top: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
-            }
-            .summary-section {
-                margin-bottom: 1.5rem;
-            }
-            .summary-item {
-                display: flex;
-                gap: 0.5rem;
-                margin-bottom: 0.5rem;
-            }
-            .summary-label {
-                font-weight: bold;
-                min-width: 150px;
-            }
-        `
-    ]
+    imports: [Wizard, WizardStep, Button, Input, Label, Title, Text, TextArea, CheckBox, RadioButton, MessageStrip]
 })
 export class BasicSample {
     // Current step index
