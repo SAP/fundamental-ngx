@@ -77,6 +77,10 @@
         {
             "url": "ui5-webcomponents-fiori/view-settings-dialog",
             "name": "View Settings Dialog"
+        },
+        {
+            "url": "ui5-webcomponents-fiori/wizard",
+            "name": "Wizard"
         }
     ]
 }

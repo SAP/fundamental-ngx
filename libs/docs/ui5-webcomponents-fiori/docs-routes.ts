@@ -102,6 +102,10 @@ const componentRoutes = [
         path: 'view-settings-dialog',
         loadChildren: () =>
             import('@fundamental-ngx/docs/ui5-webcomponents-fiori/view-settings-dialog').then(configureLibRoutes)
+    },
+    {
+        path: 'wizard',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori/wizard').then(configureLibRoutes)
     }
 ];
 
