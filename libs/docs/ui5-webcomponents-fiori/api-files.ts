@@ -24,5 +24,6 @@ export const API_FILES = {
     uploadCollection: ['UploadCollection', 'UploadCollectionItem'],
     userMenu: ['UserMenu', 'UserMenuAccount', 'UserMenuItem', 'UserMenuItemGroup'],
     userSettingsDialog: ['UserSettingsAccountView', 'UserSettingsDialog', 'UserSettingsItem', 'UserSettingsView'],
-    viewSettingsDialog: ['FilterItem', 'FilterItemOption', 'GroupItem', 'SortItem', 'ViewSettingsDialog']
+    viewSettingsDialog: ['FilterItem', 'FilterItemOption', 'GroupItem', 'SortItem', 'ViewSettingsDialog'],
+    wizard: ['Wizard', 'WizardStep']
 };
