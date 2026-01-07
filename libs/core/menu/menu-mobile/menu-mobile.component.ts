@@ -30,7 +30,7 @@ import {
     DialogHeaderComponent
 } from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { TitleComponent, TitleModule } from '@fundamental-ngx/core/title';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { startWith, take } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
@@ -47,7 +47,6 @@ import { MenuService } from '../services/menu.service';
         BarRightDirective,
         BarElementDirective,
         ButtonBarComponent,
-        TitleComponent,
         TemplateDirective,
         BarLeftDirective,
         BarRightDirective,
@@ -55,14 +54,14 @@ import { MenuService } from '../services/menu.service';
         ButtonBarComponent,
         ButtonComponent,
         ContentDensityDirective,
-        TitleModule,
         NgTemplateOutlet,
         InitialFocusDirective,
         DialogComponent,
         DialogBodyComponent,
         DialogHeaderComponent,
         DialogCloseButtonComponent,
-        DialogFooterComponent
+        DialogFooterComponent,
+        TitleComponent
     ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {

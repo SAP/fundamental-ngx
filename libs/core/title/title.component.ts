@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    InjectionToken,
     ViewEncapsulation,
     effect,
     inject,
@@ -13,6 +14,30 @@ import {
  * Corresponds to h1 through h6 HTML elements.
  */
 export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
+
+/**
+ * Injection token for providing a default header size to title components.
+ *
+ * **How it works:**
+ * 1. A parent component (like dialog-header) provides this token with a value (e.g., 5)
+ * 2. Child title components automatically receive that value through dependency injection
+ * 3. The title uses this default only if no explicit `headerSize` input is provided
+ *
+ * **Example:**
+ * ```typescript
+ * // Parent provides the default
+ * @Component({
+ *   providers: [{ provide: DEFAULT_TITLE_SIZE, useValue: 5 }]
+ * })
+ * export class DialogHeaderComponent { }
+ *
+ * // Child receives the default automatically
+ * <fd-dialog-header>
+ *   <h1 fd-title>Title</h1>  <!-- Will be size 5 -->
+ * </fd-dialog-header>
+ * ```
+ */
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
 
 /**
  * Abstract token for providing access to the title component's element reference.
@@ -45,7 +70,7 @@ export abstract class TitleToken {
 export class TitleComponent extends TitleToken {
     /**
      * Explicit header size (1-6) for the title styling.
-     * If not provided, automatically detected from the host element's tag name.
+     * If not provided, uses the injected DEFAULT_TITLE_SIZE or automatically detected from the host element's tag name.
      * @default null
      */
     readonly headerSize = input<HeaderSizes | null>(null);
@@ -55,6 +80,13 @@ export class TitleComponent extends TitleToken {
      * @default false
      */
     readonly wrap = input(false);
+
+    /**
+     * Default header size provided by parent component via DI.
+     * Will be `null` if no parent provides DEFAULT_TITLE_SIZE.
+     * @hidden
+     */
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
 
     /**
      * Element reference to the host element.
@@ -89,11 +121,12 @@ export class TitleComponent extends TitleToken {
 
     /**
      * Applies the appropriate header size class to the host element.
-     * Uses explicit headerSize if provided, otherwise extracts from element tag name.
+     * Priority: explicit headerSize > injected default > element tag name.
      * @hidden
      */
     private _setHeaderSize(): void {
-        const headerSize = this.headerSize() ?? this._elementRef.nativeElement.tagName.charAt(1);
+        const headerSize =
+            this.headerSize() ?? this._defaultHeaderSize ?? this._elementRef.nativeElement.tagName.charAt(1);
 
         if (this._appliedHeaderSize !== undefined) {
             this._elementRef.nativeElement.classList.remove(`fd-title--h${this._appliedHeaderSize}`);

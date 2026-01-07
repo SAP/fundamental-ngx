@@ -31,3 +31,32 @@
     <fd-title-wrapping-example></fd-title-wrapping-example>
 </component-example>
 <code-example [exampleFiles]="titleWrappingExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="default-size" componentName="title"
+    >Default Size via Dependency Injection</fd-docs-section-title
+>
+<description>
+    Parent components can provide a default header size for all nested titles using the <code>DEFAULT_TITLE_SIZE</code>
+    injection token. This is useful for containers like dialogs that want consistent title styling without manually
+    setting
+    <code>[headerSize]</code> on every title.
+
+    <h4>Priority order:</h4>
+    <ol>
+        <li>Explicit <code>[headerSize]</code> input (highest priority)</li>
+        <li>Injected <code>DEFAULT_TITLE_SIZE</code> from parent</li>
+        <li>Auto-detected from HTML tag name (h1-h6)</li>
+    </ol>
+
+    <h4>Example usage:</h4>
+    <pre><code>import &#123; DEFAULT_TITLE_SIZE &#125; from '&#64;fundamental-ngx/core/title';
+
+&#64;Component(&#123;
+  providers: [&#123; provide: DEFAULT_TITLE_SIZE, useValue: 5 &#125;]
+&#125;)
+export class MyDialogComponent &#123;
+  // All fd-title elements inside will default to size 5
+&#125;</code></pre>
+</description>

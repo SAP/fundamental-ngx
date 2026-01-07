@@ -3,6 +3,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, ViewEncapsulation
 import { NgTemplateOutlet } from '@angular/common';
 import { BarComponent, BarElementDirective, BarLeftDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DEFAULT_TITLE_SIZE } from '@fundamental-ngx/core/title';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
 import { DialogConfig } from '../utils/dialog-config.class';
 
@@ -21,6 +22,12 @@ import { DialogConfig } from '../utils/dialog-config.class';
     templateUrl: './dialog-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: DEFAULT_TITLE_SIZE,
+            useValue: 5
+        }
+    ],
     imports: [
         BarComponent,
         BarLeftDirective,
