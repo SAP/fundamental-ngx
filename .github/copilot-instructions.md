@@ -568,6 +568,137 @@ protected readonly _isEnabled = computed(() =>
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
 
+### Dependency Injection Patterns
+
+**Contextual Defaults with InjectionTokens:**
+
+Use `InjectionToken` to provide contextual defaults for child components. This pattern allows parent components to influence default values without directly manipulating child component inputs.
+
+**When to use:**
+
+- Parent components need to provide default configurations to unknown child components
+- Setting framework-level defaults (themes, sizes, behaviors)
+- Avoiding tight coupling between parent and child components
+- Providing optional configuration that children can override
+
+**Example - Providing default title size in dialogs:**
+
+```typescript
+// title.component.ts - Define the token
+import { InjectionToken } from '@angular/core';
+
+export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
+
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
+
+@Component({
+    selector: '[fd-title]'
+    /* ... */
+})
+export class TitleComponent {
+    readonly headerSize = input<HeaderSizes | null>(null);
+
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
+
+    constructor() {
+        effect(() => {
+            // Priority: explicit input > injected default > element tag name
+            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._detectSize();
+            this._applySize(size);
+        });
+    }
+}
+
+// dialog-header.component.ts - Provide the default
+@Directive({
+    providers: [
+        {
+            provide: DEFAULT_TITLE_SIZE,
+            useValue: 5
+        }
+    ]
+})
+export class DialogHeaderBase {
+    // Any fd-title within this directive will default to size 5
+}
+```
+
+**Benefits:**
+
+- ✅ No need to query and manipulate child components
+- ✅ Type-safe dependency injection
+- ✅ Works naturally with signal inputs
+- ✅ Testable (mock the token in tests)
+- ✅ Loosely coupled (parent doesn't need to know about child implementation)
+- ✅ Children can opt-out by providing explicit values
+
+**Best practices:**
+
+- Always use `{ optional: true }` when injecting contextual defaults
+- Document the token with JSDoc describing its purpose
+- Export tokens from the component file for reusability
+- Use descriptive token names (e.g., `DEFAULT_TITLE_SIZE` not `TITLE_CONFIG`)
+
+**Why Not @ContentChild with Signal Inputs?**
+
+When migrating components to signals, you may encounter situations where a parent component needs to set default values for child component inputs. The old pattern of querying and manipulating children **no longer works with signal inputs**.
+
+**❌ This pattern breaks with signal inputs:**
+
+```typescript
+// DOES NOT WORK - signal inputs are read-only from outside
+@ContentChild(TitleComponent)
+set title(titleComponent: TitleComponent) {
+    if (titleComponent) {
+        // ❌ Can't directly set signal inputs from outside the component
+        titleComponent.headerSize = 5; // This is read-only!
+
+        // ❌ ComponentRef doesn't exist on queried components
+        const componentRef = (titleComponent as any)._componentRef; // undefined!
+        componentRef.setInput('headerSize', 5); // Crashes!
+    }
+}
+```
+
+**Why it doesn't work:**
+
+1. **Signal inputs are read-only** - `input()` creates a read-only signal that can only be set by Angular's template binding system, not by external code
+2. **No ComponentRef on queries** - `@ContentChild` and `@ViewChild` return component instances, not `ComponentRef` objects. `ComponentRef.setInput()` only works on dynamically created components
+3. **Breaks encapsulation** - Parent should not reach into child internals and manipulate state
+4. **Fragile** - Relies on internal Angular mechanisms that may change
+
+**✅ Use InjectionToken instead:**
+
+```typescript
+// Define token in child component file
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
+
+// Parent provides the default
+@Component({
+    providers: [{ provide: DEFAULT_TITLE_SIZE, useValue: 5 }]
+})
+export class DialogHeaderComponent {}
+
+// Child optionally injects and uses it
+@Component({
+    /* ... */
+})
+export class TitleComponent {
+    readonly headerSize = input<HeaderSizes | null>(null);
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
+
+    constructor() {
+        effect(() => {
+            // Priority: explicit input > injected default > fallback
+            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._fallback();
+            this._applySize(size);
+        });
+    }
+}
+```
+
+**Key principle:** With signal inputs, the **child component is in control** of its own state. The parent provides context via DI, and the child decides what to do with it.
+
 ## NX Monorepo Architecture
 
 ### Workspace Structure
