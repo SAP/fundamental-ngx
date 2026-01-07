@@ -1,0 +1,48 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-md-4">
+            <div class="fd-margin-bottom--md">
+                <ui5-label class="fd-margin-bottom--sm">Color Theme:</ui5-label>
+                <ui5-select (ui5Change)="onColorChange($event)">
+                    @for (color of colorOptions(); track color.value) {
+                    <ui5-option [value]="color.value" [selected]="color.value === selectedColor()">
+                        {{ color.label }}
+                    </ui5-option>
+                    }
+                </ui5-select>
+            </div>
+
+            <div class="fd-margin-bottom--md">
+                <ui5-label class="fd-margin-bottom--sm">Size: {{ iconSize() }}rem</ui5-label>
+                <ui5-slider [min]="1" [max]="10" [step]="1" [value]="iconSize()" (ui5Input)="onSizeChange($event)">
+                </ui5-slider>
+            </div>
+        </div>
+
+        <div class="fd-col-md-8">
+            <div class="fd-margin--md">
+                <ui5-label class="fd-margin-bottom--sm">Preview:</ui5-label>
+                <div
+                    class="fd-padding--xl fd-text-center"
+                    style="
+                        border: 2px dashed var(--sapContent_ForegroundBorderColor);
+                        border-radius: 0.5rem;
+                        min-height: 12rem;
+                        min-width: 12rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <ui5-icon
+                        [name]="selectedIcon()"
+                        [accessibleName]="'Preview of ' + selectedIcon() + ' icon'"
+                        showTooltip="true"
+                        [style]="getIconStyle()"
+                    >
+                    </ui5-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

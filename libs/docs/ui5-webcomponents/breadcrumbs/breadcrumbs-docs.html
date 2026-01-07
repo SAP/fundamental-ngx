@@ -1,0 +1,34 @@
+<fd-docs-section-title id="basic" componentName="breadcrumbs"> Basic Breadcrumbs </fd-docs-section-title>
+<component-example>
+    <ui5-breadcrumbs-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExamples()" />
+
+<fd-docs-section-title id="overflow" componentName="breadcrumbs"> Overflow Behavior </fd-docs-section-title>
+<description> When the links don't fit the available space, they overflow. </description>
+<component-example>
+    <ui5-breadcrumbs-overflow-sample />
+</component-example>
+<code-example [exampleFiles]="overflowExamples()" />
+
+<fd-docs-section-title id="separators" componentName="breadcrumbs"> Separator Styles </fd-docs-section-title>
+<description>
+    The <code>separators</code> property determines the visual style of the separator between breadcrumb items.
+    Available options include <code>Slash</code> (default), <code>BackSlash</code>, <code>DoubleBackSlash</code>,
+    <code>DoubleGreaterThan</code>, <code>DoubleSlash</code>, and <code>GreaterThan</code>.
+</description>
+<component-example>
+    <ui5-breadcrumbs-separators-sample />
+</component-example>
+<code-example [exampleFiles]="separatorsExamples()" />
+
+<fd-docs-section-title id="design" componentName="breadcrumbs"> Design Variations </fd-docs-section-title>
+<description>
+    The <code>design</code> property controls the visual appearance of the last breadcrumb item. The
+    <code>Standard</code> design displays the last item as the current page (bold and without separator), while
+    <code>NoCurrentPage</code> displays all items as regular breadcrumbs with separators.
+</description>
+<component-example>
+    <ui5-breadcrumbs-design-sample />
+</component-example>
+<code-example [exampleFiles]="designExamples()" />

@@ -232,7 +232,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
                             this.items.toArray().reduce((acc, next) => acc + next.getHeight(), 0) / this.items.length;
                         this.wrapperHeight = averageHeight * elementsAtOnce;
                         const visibleButNotSelectedElements = Math.floor(elementsAtOnce / 2);
-                        if (offset === 0) {
+                        if (offset !== 3) {
                             this.items.first.element.style.marginTop = `${
                                 visibleButNotSelectedElements * averageHeight
                             }px`;
@@ -495,7 +495,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
      * @hidden
      */
     private _getItem(_item: Nullable<T>): CarouselItemDirective<T> | undefined {
-        return this.items.find((item) => item.value === _item);
+        return this.items.find((item) => item.value?.value === _item?.value);
     }
 
     /** @hidden */
@@ -551,7 +551,9 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
             elementsAtOnce: this._elementsAtOnce$.value,
             transition: '150ms'
         };
-        if (!this.meridian) {
+        // Enable infinite scrolling only if not meridian column and have enough items
+        // Need more items than elementsAtOnce for infinite scrolling to work
+        if (!this.meridian && this.rows.length > this._elementsAtOnce$.value) {
             config.infinite = true;
         }
         this.config = config;

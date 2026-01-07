@@ -1,0 +1,9 @@
+<div class="fd-form-group">
+    <label class="fd-form-label" for="datetime-picker-basic"> Select Date and Time: </label>
+    <ui5-datetime-picker
+        id="datetime-picker-basic"
+        [value]="selectedDateTime()"
+        [placeholder]="'Enter date and time'"
+        (ui5Change)="onDateTimeChange($event)"
+    />
+</div>

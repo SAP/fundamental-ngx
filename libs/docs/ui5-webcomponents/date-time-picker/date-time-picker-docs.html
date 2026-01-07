@@ -1,0 +1,68 @@
+<fd-docs-section-title id="basic" componentName="datetime-picker"> Basic Date Time Picker </fd-docs-section-title>
+<description>
+    The basic Date Time Picker allows users to select both date and time values. Click the input field to open the
+    popover with calendar and time selectors. The component automatically formats the selected date and time according
+    to the locale.
+</description>
+<component-example>
+    <ui5-date-time-picker-basic-sample></ui5-date-time-picker-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<fd-docs-section-title id="value-state" componentName="datetime-picker"> Value States </fd-docs-section-title>
+<description>
+    The Date Time Picker supports different value states: <code>None</code>, <code>Negative</code>,
+    <code>Critical</code>, <code>Positive</code>, and <code>Information</code>. These provide visual feedback to users
+    about the validity or status of their input.
+</description>
+<component-example>
+    <ui5-date-time-picker-value-state-sample></ui5-date-time-picker-value-state-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExample()" />
+
+<fd-docs-section-title id="min0max" componentName="datetime-picker"> Min and Max Dates </fd-docs-section-title>
+<description>
+    Use the <code>minDate</code> and <code>maxDate</code> properties to restrict the selectable date range. Dates
+    outside this range will be disabled in the calendar.
+</description>
+<component-example>
+    <ui5-date-time-picker-min-max-sample></ui5-date-time-picker-min-max-sample>
+</component-example>
+<code-example [exampleFiles]="minMaxExample()" />
+
+<fd-docs-section-title id="formats" componentName="datetime-picker"> Format Patterns </fd-docs-section-title>
+<description>
+    The Date Time Picker allows you to customize the date and time format using the <code>formatPattern</code>,
+    <code>displayFormat</code>, and <code>valueFormat</code> properties. This enables localization and different display
+    preferences. Supported format options are pattern-based on Unicode LDML Date Format notation. For more information,
+    see
+    <a target="_blank" href="http://unicode.org/reports/tr35/#Date_Field_Symbol_Table"
+        >UTS #35: Unicode Locale Data Markup Language</a
+    >.
+</description>
+<component-example>
+    <ui5-doc-date-time-picker-formats-sample></ui5-doc-date-time-picker-formats-sample>
+</component-example>
+<code-example [exampleFiles]="formatsExample()" />
+
+<fd-docs-section-title id="events" componentName="datetime-picker"> Events </fd-docs-section-title>
+<description>
+    The Date Time Picker emits various events: <code>ui5Change</code> fires when the user confirms a value change,
+    <code>ui5Input</code> fires on every keystroke, <code>ui5Open</code> and <code>ui5Close</code> track the popover
+    state, and <code>ui5ValueStateChange</code> can be used to intercept value state changes.
+</description>
+<component-example>
+    <ui5-date-time-picker-events-sample></ui5-date-time-picker-events-sample>
+</component-example>
+<code-example [exampleFiles]="eventsExample()" />
+
+<fd-docs-section-title id="accessibility" componentName="datetime-picker"> Accessibility </fd-docs-section-title>
+<description>
+    The Date Time Picker provides comprehensive accessibility support through ARIA attributes. Use
+    <code>accessibleName</code> to provide a label, <code>accessibleDescription</code> for additional context, and their
+    <code>*Ref</code> counterparts to reference existing DOM elements.
+</description>
+<component-example>
+    <ui5-date-time-picker-timezones-sample></ui5-date-time-picker-timezones-sample>
+</component-example>
+<code-example [exampleFiles]="timezonesExample()" />

@@ -1,0 +1,49 @@
+<div class="fd-form-group">
+    <label class="fd-form-label">None (Default):</label>
+    <ui5-datetime-picker
+        [value]="noneValue()"
+        [valueState]="'None'"
+        [placeholder]="'Default state'"
+        (ui5Change)="onValueChange($event, noneValue.set.bind(noneValue))"
+    />
+</div>
+
+<div class="fd-form-group">
+    <label class="fd-form-label">Negative State (Error):</label>
+    <ui5-datetime-picker
+        [value]="negativeValue()"
+        [valueState]="'Negative'"
+        [placeholder]="'Invalid date/time'"
+        (ui5Change)="onValueChange($event, negativeValue.set.bind(negativeValue))"
+    />
+</div>
+
+<div class="fd-form-group">
+    <label class="fd-form-label">Critical State (Warning):</label>
+    <ui5-datetime-picker
+        [value]="criticalValue()"
+        [valueState]="'Critical'"
+        [placeholder]="'Check your input'"
+        (ui5Change)="onValueChange($event, criticalValue.set.bind(criticalValue))"
+    />
+</div>
+
+<div class="fd-form-group">
+    <label class="fd-form-label">Positive State (Success):</label>
+    <ui5-datetime-picker
+        [value]="positiveValue()"
+        [valueState]="'Positive'"
+        [placeholder]="'Confirmed'"
+        (ui5Change)="onValueChange($event, positiveValue.set.bind(positiveValue))"
+    />
+</div>
+
+<div class="fd-form-group">
+    <label class="fd-form-label">Information State:</label>
+    <ui5-datetime-picker
+        [value]="informationValue()"
+        [valueState]="'Information'"
+        [placeholder]="'Optional field'"
+        (ui5Change)="onValueChange($event, informationValue.set.bind(informationValue))"
+    />
+</div>

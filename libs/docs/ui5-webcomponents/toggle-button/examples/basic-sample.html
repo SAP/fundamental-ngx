@@ -1,0 +1,5 @@
+<ui5-toggle-button [pressed]="isPressed()" (ui5Click)="onToggleClick()"> Toggle Me </ui5-toggle-button>
+
+<p>
+    <ui5-label>Current state: <strong>{{ isPressed() ? 'Pressed' : 'Unpressed' }}</strong></ui5-label>
+</p>

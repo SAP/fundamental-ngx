@@ -16,7 +16,7 @@ import { HasElementRef } from '@fundamental-ngx/cdk/utils';
  * Applies text area auto resize and set maximum rows to grow
  */
 @Directive({
-    selector: '[fdFeedInputTextarea]',
+    selector: 'textarea[fdFeedInputTextarea]',
     host: {
         '[class.fd-feed-input__textarea]': 'true',
         '[class.fd-textarea]': 'true'

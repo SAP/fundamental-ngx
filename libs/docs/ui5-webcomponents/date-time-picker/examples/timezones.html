@@ -1,0 +1,11 @@
+<ui5-select (ui5Change)="onTimezoneChanged($event)">
+    @for (item of timezones; track $index) {
+    <ui5-option [attr.dataTimezone]="item.id">{{ item.label }}</ui5-option>
+    }
+</ui5-select>
+<ui5-datetime-picker
+    formatPattern="medium"
+    value="today"
+    [value]="selectedDateTime()"
+    (ui5Change)="onDateTimeChanged($event)"
+></ui5-datetime-picker>

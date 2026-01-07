@@ -1,0 +1,61 @@
+<div class="fd-margin-bottom--lg">
+    <h4>Sticky Behavior with scrollable table</h4>
+    <ng-container *ngTemplateOutlet="stickyTable"> </ng-container>
+</div>
+
+<div class="fd-margin-bottom--md">
+    <h4>Sticky Behavior with scrollable container</h4>
+    <p>
+        If your table is located inside of a scrollable container, you have other sticky content and your table is in
+        <code>Scroll</code> mode, provide a height for the table for the sticky header to work as expected.
+    </p>
+    <div style="height: 150px; overflow: auto">
+        <ui5-bar
+            id="toolbar"
+            design="Header"
+            accessibleNameRef="title"
+            style="position: sticky; top: 0; z-index: 2; height: 50px"
+        >
+            <ui5-title tabindex="0" level="H3" id="title" slot="startContent">My Sticky Toolbar</ui5-title>
+        </ui5-bar>
+        <ng-container *ngTemplateOutlet="stickyTable"> </ng-container>
+    </div>
+</div>
+
+<!-- The sticky table template -->
+
+<ng-template #stickyTable>
+    <ui5-table [style]="{'height': tableHeight()}">
+        <ui5-table-header-row slot="headerRow" [sticky]="true">
+            @for (column of columns(); track column.id) {
+            <ui5-table-header-cell
+                [id]="'sticky-header-table-' + column.id + '-Col'"
+                [width]="column.width"
+                [minWidth]="column.minWidth"
+            >
+                <span>{{ column.label }}</span>
+            </ui5-table-header-cell>
+            }
+        </ui5-table-header-row>
+
+        @for (product of products(); track product.code) {
+        <ui5-table-row>
+            <ui5-table-cell>
+                <ui5-label><b>{{ product.name }}</b><br />{{ product.code }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label>{{ product.supplier }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label>{{ product.dimensions }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label [style.color]="product.weightColor"> <b>{{ product.weight }}</b> KG </ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label><b>{{ product.price }}</b> EUR</ui5-label>
+            </ui5-table-cell>
+        </ui5-table-row>
+        }
+    </ui5-table>
+</ng-template>

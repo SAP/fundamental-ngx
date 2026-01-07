@@ -474,6 +474,97 @@ describe('TestDatePickerComponent', () => {
     });
 });
 
+@Component({
+    selector: 'fdp-test-date-picker-legend',
+    template: `
+        <fdp-date-picker
+            [specialDaysRules]="specialDaysRules"
+            [showCalendarLegend]="showLegend"
+            [legendCol]="legendCol"
+        ></fdp-date-picker>
+    `,
+    standalone: true,
+    imports: [PlatformDatePickerModule, FdDatetimeModule]
+})
+class TestDatePickerLegendComponent {
+    @ViewChild(PlatformDatePickerComponent) datepicker: PlatformDatePickerComponent<FdDate>;
+
+    specialDaysRules = [
+        {
+            specialDayNumber: 1,
+            rule: (date: FdDate) => date.getDayOfWeek() === 1,
+            legendText: 'Mondays'
+        }
+    ];
+    showLegend = false;
+    legendCol = false;
+}
+
+describe('TestDatePickerLegendComponent', () => {
+    let component: TestDatePickerLegendComponent;
+    let fixture: ComponentFixture<TestDatePickerLegendComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestDatePickerLegendComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestDatePickerLegendComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    describe('Calendar Legend Feature', () => {
+        it('should pass showCalendarLegend signal to underlying date picker', () => {
+            // Test default value
+            expect(component.datepicker.showCalendarLegend()).toBe(false);
+            expect(component.datepicker.fdDatePickerComponent.showCalendarLegend()).toBe(false);
+
+            // Test setting value
+            component.showLegend = true;
+            fixture.detectChanges();
+
+            expect(component.datepicker.fdDatePickerComponent.showCalendarLegend()).toBe(true);
+        });
+
+        it('should pass legendCol signal to underlying date picker', () => {
+            // Test default value
+            expect(component.datepicker.legendCol()).toBe(false);
+            expect(component.datepicker.fdDatePickerComponent.legendCol()).toBe(false);
+
+            // Test setting value
+            component.legendCol = true;
+            fixture.detectChanges();
+
+            expect(component.datepicker.fdDatePickerComponent.legendCol()).toBe(true);
+        });
+
+        it('should pass specialDaysRules to underlying date picker', () => {
+            expect(component.datepicker.fdDatePickerComponent.specialDaysRules).toEqual(component.specialDaysRules);
+
+            // Update rules
+            const newRules = [
+                {
+                    specialDayNumber: 2,
+                    rule: (date: FdDate) => date.day === 15,
+                    legendText: 'Mid-month'
+                }
+            ];
+            component.specialDaysRules = newRules;
+            fixture.detectChanges();
+
+            expect(component.datepicker.fdDatePickerComponent.specialDaysRules).toEqual(newRules);
+        });
+
+        it('should have default values for legend inputs', () => {
+            expect(component.datepicker.showCalendarLegend()).toBe(false);
+            expect(component.datepicker.legendCol()).toBe(false);
+        });
+    });
+});
+
 const DATE_PICKER_IDENTIFIER = 'platform-date-picker-unit-test';
 
 @Component({

@@ -118,6 +118,11 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     @HostBinding('class.fd-list--subline')
     subline = false;
 
+    /** Whether to apply modifier class for Theme List */
+    @Input()
+    @HostBinding('class.fd-list--theme')
+    theme = false;
+
     /** Whether to display unread notification indicator. */
     @HostBinding('class.fd-list--unread-indicator')
     @Input()
@@ -151,7 +156,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     @HostBinding('attr.role')
-    private get _ariaRole(): string {
+    protected get _ariaRole(): string {
         return this.role || this._defaultRole;
     }
 

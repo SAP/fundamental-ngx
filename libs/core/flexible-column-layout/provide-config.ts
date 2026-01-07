@@ -1,5 +1,5 @@
 import { Provider } from '@angular/core';
-import { cloneDeep, merge } from 'lodash-es';
+import { merge } from '@fundamental-ngx/cdk/utils';
 import { DEFAULT_FLEXIBLE_LAYOUT_CONFIG, FD_FLEXIBLE_LAYOUT_CONFIG, FlexibleLayoutConfig } from './constants';
 
 /**
@@ -8,7 +8,7 @@ import { DEFAULT_FLEXIBLE_LAYOUT_CONFIG, FD_FLEXIBLE_LAYOUT_CONFIG, FlexibleLayo
  * @returns
  */
 export function provideFlexibleColumnLayoutConfig(config: Partial<FlexibleLayoutConfig>): Provider[] {
-    config = merge(cloneDeep(DEFAULT_FLEXIBLE_LAYOUT_CONFIG), cloneDeep(config));
+    config = merge(structuredClone(DEFAULT_FLEXIBLE_LAYOUT_CONFIG), structuredClone(config));
     return [
         {
             provide: FD_FLEXIBLE_LAYOUT_CONFIG,

@@ -34,45 +34,45 @@ describe('TimeComponent', () => {
     });
 
     it('should construct hours view items', () => {
-        expect(component.hourViewItems.length).toBe(24);
-        expect(component.hourViewItems[0].value).toBe(0);
-        expect(component.hourViewItems[23].value).toBe(23);
+        expect((<any>component).hourViewItems.length).toBe(24);
+        expect((<any>component).hourViewItems[0].value).toBe(0);
+        expect((<any>component).hourViewItems[23].value).toBe(23);
     });
 
     it('should construct minutes view items', () => {
-        expect(component.minuteViewItems.length).toBe(60);
-        expect(component.minuteViewItems[0].value).toBe(0);
-        expect(component.minuteViewItems[59].value).toBe(59);
+        expect((<any>component).minuteViewItems.length).toBe(60);
+        expect((<any>component).minuteViewItems[0].value).toBe(0);
+        expect((<any>component).minuteViewItems[59].value).toBe(59);
     });
 
     it('should construct seconds view items', () => {
-        expect(component.secondViewItems.length).toBe(60);
-        expect(component.secondViewItems[0].value).toBe(0);
-        expect(component.secondViewItems[59].value).toBe(59);
+        expect((<any>component).secondViewItems.length).toBe(60);
+        expect((<any>component).secondViewItems[0].value).toBe(0);
+        expect((<any>component).secondViewItems[59].value).toBe(59);
     });
 
     it('should construct meridian view items', () => {
-        expect(component.meridianViewItems.length).toBe(2);
-        expect(component.meridianViewItems[0].value).toBe(Meridian.AM);
-        expect(component.meridianViewItems[1].value).toBe(Meridian.PM);
+        expect((<any>component).meridianViewItems.length).toBe(2);
+        expect((<any>component).meridianViewItems[0].value).toBe(Meridian.AM);
+        expect((<any>component).meridianViewItems[1].value).toBe(Meridian.PM);
     });
 
     it('should keep active view items up to date', () => {
         component.time = new FdDate().setTime(15, 30, 45);
         (<any>component)._setUpViewGrid();
-        expect(component.activeHourViewItem?.value).toBe(15);
-        expect(component.activeMinuteViewItem?.value).toBe(30);
-        expect(component.activeSecondViewItem?.value).toBe(45);
-        expect(component.activeMeridianViewItem?.value).toBe(Meridian.PM);
+        expect((<any>component).activeHourViewItem?.value).toBe(15);
+        expect((<any>component).activeMinuteViewItem?.value).toBe(30);
+        expect((<any>component).activeSecondViewItem?.value).toBe(45);
+        expect((<any>component).activeMeridianViewItem?.value).toBe(Meridian.PM);
     });
 
     it('should set period after hour change', () => {
         component.meridian = true;
         component.handleHourChange(0);
-        expect(component.activeMeridianViewItem?.value).toBe(Meridian.AM);
+        expect((<any>component).activeMeridianViewItem?.value).toBe(Meridian.AM);
 
         component.handleHourChange(12);
-        expect(component.activeMeridianViewItem?.value).toBe(Meridian.PM);
+        expect((<any>component).activeMeridianViewItem?.value).toBe(Meridian.PM);
     });
 
     it('should set hour after period change', () => {

@@ -5,7 +5,18 @@
     "projectType": "application",
     "prefix": "fundamental-ngx",
     "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["cdk", "core", "platform", "i18n", "datetime-adapter", "moment-adapter"],
+    "implicitDependencies": [
+        "cdk",
+        "core",
+        "platform",
+        "i18n",
+        "datetime-adapter",
+        "moment-adapter",
+        "ui5-webcomponents-fiori",
+        "ui5-webcomponents-base",
+        "ui5-webcomponents-ai",
+        "ui5-webcomponents"
+    ],
     "generators": {
         "@nx/schematics:component": {
             "style": "scss"
@@ -101,6 +112,26 @@
                         "output": "./assets/i18n"
                     },
                     {
+                        "input": "./libs/ui5-webcomponents",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents"
+                    },
+                    {
+                        "input": "./libs/ui5-webcomponents-ai",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents-ai"
+                    },
+                    {
+                        "input": "./libs/ui5-webcomponents-fiori",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents-fiori"
+                    },
+                    {
+                        "input": "./libs/ui5-webcomponents-base",
+                        "glob": "README.md",
+                        "output": "./assets/ui5-webcomponents-base"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"
@@ -149,6 +180,36 @@
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/cx",
                         "output": "./docs/cx"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/ui5-webcomponents",
+                        "output": "./docs/ui5-webcomponents"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/ui5-webcomponents-ai",
+                        "output": "./docs/ui5-webcomponents-ai"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/ui5-webcomponents-fiori",
+                        "output": "./docs/ui5-webcomponents-fiori"
+                    },
+                    {
+                        "glob": "custom-elements-internal.json",
+                        "input": "node_modules/@ui5/webcomponents/dist",
+                        "output": "./node_modules/@ui5/webcomponents/dist"
+                    },
+                    {
+                        "glob": "custom-elements-internal.json",
+                        "input": "node_modules/@ui5/webcomponents-fiori/dist",
+                        "output": "./node_modules/@ui5/webcomponents-fiori/dist"
+                    },
+                    {
+                        "glob": "custom-elements-internal.json",
+                        "input": "node_modules/@ui5/webcomponents-ai/dist",
+                        "output": "./node_modules/@ui5/webcomponents-ai/dist"
                     },
                     {
                         "glob": "sort.pipe.ts",
@@ -283,7 +344,21 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^compile-typedoc", "^transform-translations"]
+            "dependsOn": [
+                "cdk:compile-typedoc",
+                "core:compile-typedoc",
+                "platform:compile-typedoc",
+                "cx:compile-typedoc",
+                "i18n:compile-typedoc",
+                "datetime-adapter:compile-typedoc",
+                "moment-adapter:compile-typedoc",
+                "ui5-webcomponents:compile-typedoc",
+                "ui5-webcomponents-ai:compile-typedoc",
+                "ui5-webcomponents-fiori:compile-typedoc",
+                "ui5-webcomponents-base:compile-typedoc",
+                "^transform-translations",
+                "^generate"
+            ]
         },
         "serve": {
             "executor": "@angular-devkit/build-angular:dev-server",

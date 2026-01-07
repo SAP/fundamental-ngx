@@ -1,0 +1,87 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-label show-colon>Page Size</ui5-label><ui5-text id="txtLayout">{{pageSize()}}</ui5-text>
+        </div>
+        <div class="fd-col"><ui5-label show-colon>Label Span</ui5-label><ui5-text>S12 M12 L12 XL12</ui5-text></div>
+        <ui5-slider id="slider" [value]="69" (ui5Change)="onSliderChange($event)"></ui5-slider>
+    </div>
+
+    <div class="fd-row" id="container" [style]="{ 'max-width': '1500px', 'width': '100%', 'overflow-x': 'auto' }">
+        <div class="fd-col" [style]="{'min-width': containerWidth()}">
+            <ui5-form headerText="Form Layout: S1 M1 L2 XL3 (default)" labelSpan="S12 M12 L12 XL12">
+                @for (formGroup of formFields(); track formGroup.formGroupTitle) {
+                <ui5-form-group [headerText]="formGroup.formGroupTitle">
+                    @for (formItem of formGroup.formGroupItems; track formItem.id) {
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                        @if (!isLinkField(formItem.label)) {
+                        <ui5-text>{{ formItem.value }}</ui5-text>
+                        } @else {
+                        <ui5-link [href]="getLinkHref(formItem.label, formItem.value)">{{ formItem.value }}</ui5-link>
+                        }
+                    </ui5-form-item>
+                    }
+                </ui5-form-group>
+                }
+            </ui5-form>
+
+            <br /><br />
+
+            <ui5-form headerText="Form Layout: S1 M2 L3 XL5" layout="S1 M2 L3 XL5" labelSpan="S12 M12 L12 XL12">
+                @for (formGroup of formFields(); track formGroup.formGroupTitle) {
+                <ui5-form-group [headerText]="formGroup.formGroupTitle">
+                    @for (formItem of formGroup.formGroupItems; track formItem.id) {
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                        @if (!isLinkField(formItem.label)) {
+                        <ui5-text>{{ formItem.value }}</ui5-text>
+                        } @else {
+                        <ui5-link [href]="getLinkHref(formItem.label, formItem.value)">{{ formItem.value }}</ui5-link>
+                        }
+                    </ui5-form-item>
+                    }
+                </ui5-form-group>
+                }
+            </ui5-form>
+
+            <br /><br />
+
+            <ui5-form headerText="Form Layout: S1 M2 L4 XL6" layout="S1 M2 L4 XL6" labelSpan="S12 M12 L12 XL12">
+                @for (formGroup of formFields(); track formGroup.formGroupTitle) {
+                <ui5-form-group [headerText]="formGroup.formGroupTitle">
+                    @for (formItem of formGroup.formGroupItems; track formItem.id) {
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                        @if (!isLinkField(formItem.label)) {
+                        <ui5-text>{{ formItem.value }}</ui5-text>
+                        } @else {
+                        <ui5-link [href]="getLinkHref(formItem.label, formItem.value)">{{ formItem.value }}</ui5-link>
+                        }
+                    </ui5-form-item>
+                    }
+                </ui5-form-group>
+                }
+            </ui5-form>
+
+            <br /><br />
+
+            <ui5-form headerText="Form Layout: S2 M3 L5 XL7" layout="S2 M3 L5 XL7" labelSpan="S12 M12 L12 XL12">
+                @for (formGroup of formFields(); track formGroup.formGroupTitle) {
+                <ui5-form-group [headerText]="formGroup.formGroupTitle">
+                    @for (formItem of formGroup.formGroupItems; track formItem.id) {
+                    <ui5-form-item>
+                        <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+                        @if (!isLinkField(formItem.label)) {
+                        <ui5-text>{{ formItem.value }}</ui5-text>
+                        } @else {
+                        <ui5-link [href]="getLinkHref(formItem.label, formItem.value)">{{ formItem.value }}</ui5-link>
+                        }
+                    </ui5-form-item>
+                    }
+                </ui5-form-group>
+                }
+            </ui5-form>
+        </div>
+    </div>
+</div>

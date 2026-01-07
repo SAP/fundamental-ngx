@@ -3,6 +3,253 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.24...v0.58.0-rc.25) (2025-11-26)
+
+
+### Bug Fixes
+
+* **core:** add correct icons for form messages ([#13616](https://github.com/SAP/fundamental-ngx/issues/13616)) ([c9eb507](https://github.com/SAP/fundamental-ngx/commit/c9eb507d1c8806229881a03ed2c6fc37d841c940))
+
+
+
+
+
+# [0.58.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.23...v0.58.0-rc.24) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.22...v0.58.0-rc.23) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.21...v0.58.0-rc.22) (2025-11-26)
+
+
+### Bug Fixes
+
+* **core:** add correct font family for table header text ([#13611](https://github.com/SAP/fundamental-ngx/issues/13611)) ([7b56817](https://github.com/SAP/fundamental-ngx/commit/7b5681786c1863e5f32eaa736a4c7d7a7b4d5053))
+
+
+
+
+
+# [0.58.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.20...v0.58.0-rc.21) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.19...v0.58.0-rc.20) (2025-11-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.18...v0.58.0-rc.19) (2025-11-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.17...v0.58.0-rc.18) (2025-11-24)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.16...v0.58.0-rc.17) (2025-11-21)
+
+
+### Features
+
+* **btp, core:** Vertical Navigation UXC updates ([#13559](https://github.com/SAP/fundamental-ngx/issues/13559)) ([c70ccf1](https://github.com/SAP/fundamental-ngx/commit/c70ccf1dfd781c7a904141e3669488533c1987b2))
+
+
+
+
+
+# [0.58.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.15...v0.58.0-rc.16) (2025-11-20)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.14...v0.58.0-rc.15) (2025-11-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.8...v0.58.0-rc.14) (2025-11-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.7...v0.58.0-rc.8) (2025-11-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.6...v0.58.0-rc.7) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.5...v0.58.0-rc.6) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.4...v0.58.0-rc.5) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.3...v0.58.0-rc.4) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.2...v0.58.0-rc.3) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.1...v0.58.0-rc.2) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.58.0-rc.0...v0.58.0-rc.1) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.58.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.5...v0.58.0-rc.0) (2025-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.3...v0.57.5) (2025-11-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.2...v0.57.5-rc.3) (2025-11-12)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.1...v0.57.5-rc.2) (2025-11-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.57.5-rc.0...v0.57.5-rc.1) (2025-11-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.57.4...v0.57.5-rc.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **core:** update Settings Dialog to latest UXC design and comments ([#13543](https://github.com/SAP/fundamental-ngx/issues/13543)) ([94a8b3b](https://github.com/SAP/fundamental-ngx/commit/94a8b3b72b6790fd5d0e8fb34e0b4d1fd1df947a))
+
+
+
+
+
+## [0.57.4](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.33...v0.57.4) (2025-11-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.32...v0.57.4-rc.33) (2025-11-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.57.4-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.31...v0.57.4-rc.32) (2025-11-05)
+
+
+### Bug Fixes
+
+* **core,platform:** Add null check on scroll spy handling of tabs ([#13552](https://github.com/SAP/fundamental-ngx/issues/13552)) ([708c343](https://github.com/SAP/fundamental-ngx/commit/708c343254378c3895d62d60d77133ce08543366))
+
+
+
+
+
 ## [0.57.4-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.57.4-rc.30...v0.57.4-rc.31) (2025-11-04)
 
 

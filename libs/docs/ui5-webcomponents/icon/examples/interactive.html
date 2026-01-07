@@ -1,0 +1,36 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-label class="fd-margin-bottom--sm"> {{ iconMode() }} Icons - Click to interact: </ui5-label>
+            <div class="fd-row">
+                @for (iconData of interactiveIcons(); track iconData.name) {
+                <div class="fd-padding-responsive--sm">
+                    <ui5-icon
+                        [name]="iconData.name"
+                        [mode]="iconMode()"
+                        [accessibleName]="iconData.label"
+                        [showTooltip]="showTooltips()"
+                        (ui5Click)="onIconClick(iconData.name, iconData.action)"
+                        style="font-size: 2rem"
+                    >
+                    </ui5-icon>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col-md-6">
+            <div class="fd-margin-top--md">
+                <ui5-label>Click Statistics:</ui5-label>
+            </div>
+            <div class="fd-padding--sm" style="background-color: var(--sapBackgroundColor); border-radius: 0.25rem">
+                <p class="fd-margin-none">
+                    <strong>Total Clicks:</strong> {{ clickCount() }}<br />
+                    <strong>Last Action:</strong> {{ lastClickedIcon() || 'None' }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

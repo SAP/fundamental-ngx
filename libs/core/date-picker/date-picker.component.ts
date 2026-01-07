@@ -13,6 +13,7 @@ import {
     Inject,
     inject,
     Injector,
+    input,
     Input,
     OnChanges,
     OnDestroy,
@@ -34,6 +35,7 @@ import { BarComponent, BarElementDirective, BarRightDirective } from '@fundament
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     CalendarComponent,
+    CalendarLegendFocusingService,
     CalendarType,
     CalendarTypeEnum,
     CalendarYearGrid,
@@ -101,7 +103,8 @@ let datePickerCounter = 0;
         registerFormItemControl(DatePickerComponent),
         PopoverFormMessageService,
         PopoverService,
-        DynamicComponentService
+        DynamicComponentService,
+        CalendarLegendFocusingService
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -244,24 +247,6 @@ export class DatePickerComponent<D>
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
     /**
-     *  The state of the form control - applies css classes.
-     *  Also, this is applied to message.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    @Input()
-    set state(state: Nullable<FormStates>) {
-        this._state = state || 'default';
-    }
-
-    /** @hidden */
-    get state(): FormStates {
-        if (this._state == null && this.useValidation && this._isInvalidDateInput) {
-            return 'error';
-        }
-        return this._state;
-    }
-
-    /**
      * @deprecated Popover is toggled with f4 key
      */
     @Input()
@@ -317,21 +302,6 @@ export class DatePickerComponent<D>
      */
     @Input()
     allowMultipleSelection = false;
-
-    /** Whether the date picker is open. Can be used through two-way binding. */
-    @Input()
-    set isOpen(value: boolean) {
-        if (value === this._isOpen) {
-            return;
-        }
-        this._isOpen = value;
-        this._showPopoverContents = value;
-        this._changeDetectionRef.detectChanges();
-    }
-
-    get isOpen(): boolean {
-        return this._isOpen;
-    }
 
     /** Should date picker be inlined. */
     @Input()
@@ -431,6 +401,45 @@ export class DatePickerComponent<D>
     /** @hideen */
     @ViewChildren(CalendarComponent)
     private readonly _calendars: QueryList<CalendarComponent<D>>;
+
+    /** Whether to display the calendar legend below the calendar. Default is false. */
+    showCalendarLegend = input(false, { transform: booleanAttribute });
+
+    /** Whether the legend should display in column layout instead of row layout. Default is false. */
+    legendCol = input(false, { transform: booleanAttribute });
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Also, this is applied to message.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    set state(state: Nullable<FormStates>) {
+        this._state = state || 'default';
+    }
+
+    /** @hidden */
+    get state(): FormStates {
+        if (this._state == null && this.useValidation && this._isInvalidDateInput) {
+            return 'error';
+        }
+        return this._state;
+    }
+
+    /** Whether the date picker is open. Can be used through two-way binding. */
+    @Input()
+    set isOpen(value: boolean) {
+        if (value === this._isOpen) {
+            return;
+        }
+        this._isOpen = value;
+        this._showPopoverContents = value;
+        this._changeDetectionRef.detectChanges();
+    }
+
+    get isOpen(): boolean {
+        return this._isOpen;
+    }
 
     /** @hidden */
     _calendarComponent: CalendarComponent<D>;

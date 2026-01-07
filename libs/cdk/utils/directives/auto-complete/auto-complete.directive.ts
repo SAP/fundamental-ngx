@@ -66,7 +66,7 @@ export class AutoCompleteDirective {
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+
     constructor() {
         /**
          * Fixes #10710
@@ -119,6 +119,19 @@ export class AutoCompleteDirective {
             } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
+                const hasSelection =
+                    this._elementRef.nativeElement.selectionStart !== this._elementRef.nativeElement.selectionEnd;
+                if (hasSelection) {
+                    return;
+                }
+
+                const currentNativeValue = this._elementRef.nativeElement.value;
+
+                if (this.inputText.length > currentNativeValue.length + 1) {
+                    this.inputText = currentNativeValue;
+                    return;
+                }
+
                 if (!this._triggerTypeAhead()) {
                     return;
                 }

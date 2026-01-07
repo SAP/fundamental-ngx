@@ -1,0 +1,14 @@
+{
+    "guides": [
+        {
+            "url": "ui5-webcomponents-ai/home",
+            "name": "Home"
+        }
+    ],
+    "components": [
+        {
+            "url": "ui5-webcomponents-ai/button",
+            "name": "Button"
+        }
+    ]
+}

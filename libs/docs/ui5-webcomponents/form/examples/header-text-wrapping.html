@@ -1,0 +1,10 @@
+<div id="container" style="width: 300px; overflow-x: auto">
+    <ui5-form headerText="A very long header title for the form and more">
+        @for (formItem of formItems(); track formItem.id) {
+        <ui5-form-item>
+            <ui5-label slot="labelContent">{{ formItem.label }}</ui5-label>
+            <ui5-text>{{ formItem.value }}</ui5-text>
+        </ui5-form-item>
+        }
+    </ui5-form>
+</div>

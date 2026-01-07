@@ -1,0 +1,11 @@
+<ui5-multi-combobox
+    id="grouped-mcb"
+    placeholder="Choose technologies..."
+    (ui5SelectionChange)="onTechSelectionChange($event)"
+>
+    @for (category of techCategories(); track category) {
+    <ui5-mcb-item-group [headerText]="category"></ui5-mcb-item-group>
+    @for (tech of getTechsByCategory(category); track tech.id) {
+    <ui5-mcb-item [text]="tech.name" [selected]="selected().includes(tech.name)"> </ui5-mcb-item>
+    } }
+</ui5-multi-combobox>

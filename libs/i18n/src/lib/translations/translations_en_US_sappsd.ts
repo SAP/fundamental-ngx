@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: '[[[Μŏŋţĥ ρįċķēŗ∙∙∙∙∙∙∙]]]',
         calendarYearsViewDescription: '[[[Ŷēąŗ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
         calendarYearsRangeViewDescription: '[[[Ŷēąŗş ŗąŋğē ρįċķēŗ∙∙∙∙∙∙]]]',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: '[[[Ŵŏŗķ ƌąŷ∙∙∙∙∙∙]]]',
+        nonWorkDayLabel: '[[[Ńŏŋ-Ŵŏŗķ ƌąŷ∙∙∙∙∙∙∙]]]'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '[[[Μűĺţį Ʋąĺűē Ĉŏɱƃŏ Ɓŏχ∙∙∙∙∙]]]',
         selectAllLabel: '[[[Ŝēĺēċţ ąĺĺ ({şēĺēċţēƌĬţēɱş} ŏƒ {ţŏţąĺĬţēɱş})∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: '[[[Ģŗŏűρ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '[[[Ĭţēɱ {įţēɱŃűɱ} ŏƒ {ţŏţąĺŃűɱ} ƌįşρĺąŷēƌ∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
         rightNavigationBtnLabel: '[[[Ģŏ ţŏ ŋēχţ įţēɱ∙∙∙∙]]]'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
     },
     coreMessageStrip: {
-        dismissLabel: '[[[Ďįşɱįşş∙∙∙∙∙∙∙]]]',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]',
+        announcementInfo: '[[[Ĭŋƒŏŗɱąţįŏŋ Μēşşąğē Ŝţŗįρ∙∙∙∙∙∙∙]]]',
+        announcementWarning: '[[[Ŵąŗŋįŋğ Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
+        announcementError: '[[[Ĕŗŗŏŗ Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
+        announcementSuccess: '[[[Ŝűċċēşş Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
+        closable: '[[[Ĉĺŏşąƃĺē∙∙∙∙∙∙]]]'
     },
     coreMultiInput: {
         countListResultsSingular: '[[[1 ŗēşűĺţ ĺįşţ įţēɱ.∙∙∙∙∙]]]',
@@ -93,8 +93,7 @@ export default {
         navigationPath: '[[[Ńąʋįğąţįŏŋ Ƥąţĥ∙∙∙∙]]]'
     },
     coreNestedList: {
-        linkItemAriaLabel:
-            '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {įŋƌēχ} ŏƒ {ţŏţąĺ}{şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
+        linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
@@ -383,7 +382,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
-        searchLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
+        searchLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+        backButtonLabel: '[[[Ɓąċķ]]]'
     },
     platformSwitch: {
         ariaLabel: '[[[Ŝŵįţċĥ įŋρűţ∙∙∙∙∙∙∙]]]'
@@ -612,6 +612,13 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: '[[[Μēŋű ƃűţţŏŋ∙∙∙∙∙∙∙∙]]]'
     },
+    btpNavigation: {
+        expanderAriaLabel: '[[[ēχρąŋƌ/ċŏĺĺąρşē şűƃ-įţēɱş∙∙∙∙∙∙∙]]]',
+        moreButtonAriaLabel:
+            '[[[Ďįşρĺąŷş ąƌƌįţįŏŋąĺ ŋąʋįğąţįŏŋ įţēɱş ţĥąţ ąŗē ĥįƌƌēŋ ƌűē ţŏ ĺįɱįţēƌ şċŗēēŋ şρąċē∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        overflowMenuAriaLabel: '[[[Āƌƌįţįŏŋąĺ Ńąʋįğąţįŏŋ Ĭţēɱş∙∙∙∙∙∙∙∙]]]',
+        snappedPopoverRoleDescription: '[[[Ńąʋįğąţįŏŋ Ļįşţ Ţŗēē∙∙∙∙]]]'
+    },
     coreNotification: {
         groupHeaderTitle: '[[[Ĕχρąŋƌ/Ĉŏĺĺąρşē∙∙∙∙]]]',
         groupAriaDescription: '[[[Ńŏţįƒįċąţįŏŋ Ģŗŏűρ∙∙∙∙∙∙]]]',
@@ -621,7 +628,7 @@ export default {
         triggerLessLabel: '[[[Ļēşş]]]'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ Ģŗŏűρ∙∙∙∙∙]]]',
+        buttonRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ∙∙∙∙∙∙∙∙]]]'
     }
 };

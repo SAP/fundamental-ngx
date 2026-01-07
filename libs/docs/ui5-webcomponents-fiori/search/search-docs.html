@@ -1,0 +1,84 @@
+<fd-docs-section-title id="suggestions" componentName="search"> Search with Suggestions </fd-docs-section-title>
+<description>
+    The Search component can display suggestions as users type using <code>ui5-search-item</code> components. The
+    <code>noTypeahead</code> property controls whether the value should be autocompleted to match a suggestion item.
+    Suggestions help users find what they're looking for faster by providing relevant options based on their input. The
+    <code>ui5-search-message-area</code> component in the <code>messageArea</code> slot displays a message when no
+    results are found.
+</description>
+<component-example>
+    <ui5-doc-search-suggestions-sample />
+</component-example>
+<code-example [exampleFiles]="suggestionsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="advanced-filtering" componentName="search"> Advanced Filtering </fd-docs-section-title>
+<description>
+    <p>This example shows how to use a custom advanced filtering button via the <code>filterButton</code> slot.</p>
+</description>
+<component-example>
+    <ui5-doc-search-advanced-filtering-sample />
+</component-example>
+<code-example [exampleFiles]="advancedFilteringExample()" />
+
+<separator />
+
+<fd-docs-section-title id="byline-items" componentName="search"> Byline Items </fd-docs-section-title>
+<description> The example shows how to display byline items with an image, text and description,. </description>
+<component-example>
+    <ui5-doc-search-byline-items-sample />
+</component-example>
+<code-example [exampleFiles]="bylineItemsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="scopes" componentName="search"> Search with Scopes </fd-docs-section-title>
+<description>
+    The Search component supports scopes using <code>ui5-search-scope</code> components in the <code>scopes</code> slot.
+    Scopes allow users to filter their search by different categories or areas. For example, users can choose to search
+    in "All", "Products", "Customers", or "Orders". The <code>ui5ScopeChange</code> event is fired when a user selects a
+    different scope, allowing you to adjust the search results accordingly.
+</description>
+<component-example>
+    <ui5-doc-search-scopes-sample />
+</component-example>
+<code-example [exampleFiles]="scopesExample()" />
+
+<separator />
+
+<fd-docs-section-title id="loading" componentName="search"> Loading State </fd-docs-section-title>
+<description>
+    The <code>loading</code> property displays a loading indicator in the search popup while fetching results. This
+    provides visual feedback to users that their search is being processed. Use this feature when performing
+    asynchronous searches or API calls. You can also use the <code>messageArea</code> slot to display custom messages or
+    illustrated content when no results are found or during loading.
+</description>
+<component-example>
+    <ui5-doc-search-loading-sample />
+</component-example>
+<code-example [exampleFiles]="loadingExample()" />
+
+<separator />
+
+<fd-docs-section-title id="show-more" componentName="search"> Grouped Items with Show More </fd-docs-section-title>
+<description>
+    The Search component can organize suggestions into groups using <code>ui5-search-item-group</code> components. When
+    a group contains many items, you can use the <code>ui5-search-item-show-more</code> component to initially show only
+    a subset of items and allow users to expand the list. The <code>itemsToShowCount</code> property displays the number
+    of hidden items. This example also demonstrates deletable items - users can remove items from the list using the
+    delete button.
+</description>
+<component-example>
+    <ui5-doc-search-show-more-sample />
+</component-example>
+<code-example [exampleFiles]="showMoreExample()" />
+
+<separator />
+
+<fd-docs-section-title id="actions" componentName="search"> Search with Interactive Actions </fd-docs-section-title>
+<description> This example shows how to use interactive elements in search items. </description>
+<component-example>
+    <ui5-doc-search-actions-sample />
+</component-example>
+<code-example [exampleFiles]="actionsExample()" />

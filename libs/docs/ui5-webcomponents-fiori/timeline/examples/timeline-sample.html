@@ -1,0 +1,159 @@
+<section aria-labelledby="timeline-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="timeline-basic" class="fd-section__title">Basic Timeline</h2>
+    </div>
+    <ui5-timeline [layout]="currentLayout()" [accessibleName]="accessibleName()">
+        @for (event of timelineData(); track event.id) {
+        <ui5-timeline-item
+            [titleText]="event.title"
+            [subtitleText]="event.subtitle"
+            [icon]="event.icon"
+            [name]="event.userName"
+        >
+            <div slot="default">
+                <ui5-text>{{formatTimestamp(event.timestamp)}}</ui5-text>
+                <p class="fd-margin-top--tiny">{{event.description}}</p>
+                @if (event.status) {
+                <ui5-tag [colorScheme]="getStatusVariant(event.status)" class="fd-margin-top--tiny">
+                    {{event.status | titlecase}}
+                </ui5-tag>
+                }
+            </div>
+        </ui5-timeline-item>
+        }
+    </ui5-timeline>
+    <div class="fd-margin-top--sm">
+        <p><strong>Total Events:</strong> {{ totalEvents() }}</p>
+        <p><strong>Layout:</strong> {{ currentLayout() }}</p>
+    </div>
+</section>
+
+<section aria-labelledby="timeline-configuration" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="timeline-configuration" class="fd-section__title">Timeline Configuration</h2>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Layout Options</h3>
+    <ui5-segmented-button (ui5SelectionChange)="onLayoutChange($event)">
+        @for (layout of layoutOptions(); track layout) {
+        <ui5-segmented-button-item [attr.data-layout]="layout" [selected]="currentLayout() === layout">
+            {{ layout }}
+        </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Growing Mode</h3>
+    <ui5-segmented-button (ui5SelectionChange)="onGrowingModeChange($event)">
+        @for (mode of growingModeOptions(); track mode) {
+        <ui5-segmented-button-item [attr.data-growing]="mode" [selected]="currentGrowingMode() === mode">
+            {{ mode }}
+        </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Loading State</h3>
+    <ui5-switch [checked]="isLoading()" (ui5Change)="onLoadingToggle()" text="Show Loading"> </ui5-switch>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Actions</h3>
+    <div class="fd-margin-bottom--sm" style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+        <ui5-button (ui5Click)="addNewEvent()">Add Event</ui5-button>
+        <ui5-button (ui5Click)="clearEvents()" design="Negative">Clear All</ui5-button>
+        <ui5-button (ui5Click)="resetToDefault()" design="Transparent">Reset</ui5-button>
+    </div>
+
+    <ui5-timeline
+        [layout]="currentLayout()"
+        [growing]="currentGrowingMode()"
+        [loading]="isLoading()"
+        [loadingDelay]="loadingDelay()"
+        [accessibleName]="accessibleName()"
+        (ui5LoadMore)="onLoadMore($event)"
+    >
+        @for (event of timelineData(); track event.id) {
+        <ui5-timeline-item
+            [titleText]="event.title"
+            [subtitleText]="event.subtitle"
+            [icon]="event.icon"
+            [name]="event.userName"
+        >
+            <div slot="default">
+                <ui5-text class="fd-margin-bottom--tiny">{{formatTimestamp(event.timestamp)}}</ui5-text>
+                <p class="fd-margin-bottom--tiny">{{event.description}}</p>
+                @if (event.status) {
+                <ui5-tag [colorScheme]="getStatusVariant(event.status)"> {{event.status | titlecase}} </ui5-tag>
+                }
+            </div>
+        </ui5-timeline-item>
+        } @empty {
+        <ui5-timeline-item titleText="No Events" subtitleText="Timeline is empty" icon="information">
+            <div slot="default">
+                <ui5-text>No timeline events to display. Use "Add Event" or "Reset" to add some events.</ui5-text>
+            </div>
+        </ui5-timeline-item>
+        }
+    </ui5-timeline>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Current Configuration:</h3>
+    <ul class="fd-margin-top--tiny">
+        <li><strong>Layout:</strong> {{ currentLayout() }}</li>
+        <li><strong>Growing Mode:</strong> {{ currentGrowingMode() }}</li>
+        <li><strong>Loading:</strong> {{ isLoading() ? 'Enabled' : 'Disabled' }}</li>
+        <li><strong>Loading Delay:</strong> {{ loadingDelay() }}ms</li>
+        <li><strong>Events Count:</strong> {{ totalEvents() }}</li>
+        <li><strong>Accessible Name:</strong> {{ accessibleName() }}</li>
+    </ul>
+</section>
+
+@if (currentGrowingMode() !== 'None') {
+<section aria-labelledby="timeline-growing" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="timeline-growing" class="fd-section__title">Growing Timeline</h2>
+    </div>
+    <ui5-card class="fd-padding--md">
+        <p class="fd-margin-bottom--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
+            @if (currentGrowingMode() === 'Button') { Growing mode is set to "Button" - a "More" button will appear at
+            the end of the timeline to load additional events. } @if (currentGrowingMode() === 'Scroll') { Growing mode
+            is set to "Scroll" - scroll to the bottom of the timeline to automatically load more events. }
+        </p>
+        <ui5-text>
+            The <code>ui5LoadMore</code> event will be fired when the user triggers the load more action. In this
+            example, we're using Angular 20 signals to reactively handle the event and update the timeline data.
+        </ui5-text>
+    </ui5-card>
+</section>
+}
+
+<section aria-labelledby="timeline-horizontal" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="timeline-horizontal" class="fd-section__title">Horizontal Timeline</h2>
+    </div>
+    <ui5-timeline layout="Horizontal" accessibleName="Horizontal timeline demonstration">
+        <ui5-timeline-item titleText="Q1 2024" subtitleText="Planning Phase" icon="calendar">
+            <div slot="default">
+                <ui5-text>January - March 2024</ui5-text>
+                <p class="fd-margin-top--tiny">Strategic planning and resource allocation for the upcoming year.</p>
+            </div>
+        </ui5-timeline-item>
+        <ui5-timeline-item titleText="Q2 2024" subtitleText="Development Phase" icon="developer-settings">
+            <div slot="default">
+                <ui5-text>April - June 2024</ui5-text>
+                <p class="fd-margin-top--tiny">Core development work and feature implementation.</p>
+            </div>
+        </ui5-timeline-item>
+        <ui5-timeline-item titleText="Q3 2024" subtitleText="Testing Phase" icon="checklist-2">
+            <div slot="default">
+                <ui5-text>July - September 2024</ui5-text>
+                <p class="fd-margin-top--tiny">Comprehensive testing and quality assurance activities.</p>
+            </div>
+        </ui5-timeline-item>
+        <ui5-timeline-item titleText="Q4 2024" subtitleText="Launch Phase" icon="rocket">
+            <div slot="default">
+                <ui5-text>October - December 2024</ui5-text>
+                <p class="fd-margin-top--tiny">Product launch and market rollout activities.</p>
+            </div>
+        </ui5-timeline-item>
+    </ui5-timeline>
+    <p class="fd-margin-top--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Horizontal layout displays timeline events in a horizontal flow, suitable for showing chronological progression.
+    </p>
+</section>

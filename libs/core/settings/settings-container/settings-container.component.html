@@ -1,0 +1,36 @@
+@if (this.showListArea()) {
+    <ng-content select="[fd-settings-list-area]"></ng-content>
+}
+@if (this.showDetailArea()) {
+    <div fd-settings-detail-area style="max-width: 100%; overflow: hidden">
+        <div fd-bar barDesign="header" [clear]="true" fd-settings-header>
+            <div fd-bar-left>
+                @if (viewMode() !== 'lg') {
+                    <fd-bar-element>
+                        <button
+                            fd-button
+                            fd-settings-header-button
+                            fdkInitialFocus
+                            fdType="transparent"
+                            [glyph]="navigationArrow$ | async"
+                            [ariaLabel]="backBtnAriaLabel()"
+                            [title]="backBtnAriaLabel()"
+                            (click)="onHeaderBackClick()"
+                        ></button>
+                    </fd-bar-element>
+                }
+                <fd-bar-element>
+                    <div
+                        role="heading"
+                        [attr.aria-level]="detailsAreaTitleHeading()"
+                        fd-title
+                        [headerSize]="detailsAreaTitleHeadingSize()"
+                    >
+                        {{ activeTitle() }}
+                    </div>
+                </fd-bar-element>
+            </div>
+        </div>
+        <ng-container #container />
+    </div>
+}

@@ -1,0 +1,28 @@
+<ui5-button id="subMenuOpener" icon="menu" (click)="openMenu()"> Menu with Sub-items </ui5-button>
+
+<ui5-menu opener="subMenuOpener" [open]="isMenuOpen()" (ui5Close)="closeMenu()">
+    <ui5-menu-item text="File" icon="folder">
+        <ui5-menu-item text="New" icon="add-document" />
+        <ui5-menu-item text="Open" icon="open-folder" />
+        <ui5-menu-item text="Save" icon="save" />
+        <ui5-menu-item text="Save As..." icon="save" />
+        <ui5-menu-item text="Export" icon="upload">
+            <ui5-menu-item text="PDF" icon="pdf-attachment" />
+            <ui5-menu-item text="Excel" icon="excel-attachment" />
+            <ui5-menu-item text="Word" icon="doc-attachment" />
+        </ui5-menu-item>
+    </ui5-menu-item>
+
+    <ui5-menu-item text="Edit" icon="edit">
+        <ui5-menu-item text="Copy" icon="copy" />
+        <ui5-menu-item text="Cut" icon="scissors" />
+        <ui5-menu-item text="Paste" icon="paste" />
+        <ui5-menu-item text="Delete" icon="delete" />
+    </ui5-menu-item>
+
+    <ui5-menu-item text="View" icon="show">
+        <ui5-menu-item text="Zoom In" icon="zoom-in" />
+        <ui5-menu-item text="Zoom Out" icon="zoom-out" />
+        <ui5-menu-item text="Full Screen" icon="full-screen" />
+    </ui5-menu-item>
+</ui5-menu>

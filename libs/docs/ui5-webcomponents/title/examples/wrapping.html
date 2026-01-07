@@ -1,0 +1,12 @@
+<div class="fd-container">
+    <div class="fd-row">
+        @for (wrappingType of wrappingTypes(); track wrappingType.type) {
+        <div class="fd-col fd-col--6">
+            <h5>{{ wrappingType.type }} Wrapping</h5>
+            <div class="fd-margin-top--sm">
+                <ui5-title [wrappingType]="wrappingType.type" size="H4"> {{ longTitle() }} </ui5-title>
+            </div>
+        </div>
+        }
+    </div>
+</div>

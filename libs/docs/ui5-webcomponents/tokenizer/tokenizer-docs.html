@@ -1,0 +1,34 @@
+<fd-docs-section-title id="basic" componentName="tokenizer"> Basic Tokenizer </fd-docs-section-title>
+<component-example>
+    <ui5-tokenizer-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicFiles()" />
+
+<fd-docs-section-title id="multi-line" componentName="tokenizer"> Multi-line Tokenizer </fd-docs-section-title>
+<description>
+    With multiLine enabled, tokens are displayed across multiple lines for improved readability.
+</description>
+<component-example>
+    <ui5-tokenizer-multi-line-sample />
+</component-example>
+<code-example [exampleFiles]="multiLineFiles()" />
+
+<fd-docs-section-title id="readonly" componentName="tokenizer"> Read-only Tokenizer </fd-docs-section-title>
+<description>
+    A read-only tokenizer prevents token deletion and provides visual feedback that the component is not editable. Use
+    the <code>readonly</code> property to make the tokenizer read-only.
+</description>
+<component-example>
+    <ui5-tokenizer-readonly-sample />
+</component-example>
+<code-example [exampleFiles]="readonlyFiles()" />
+
+<fd-docs-section-title id="clear-all" componentName="tokenizer"> Clear All Button </fd-docs-section-title>
+<description>
+    When <code>multiLine</code> is enabled, you can also show a "Clear All" button by setting the
+    <code>showClearAll</code> property. This button allows users to delete all tokens at once.
+</description>
+<component-example>
+    <ui5-tokenizer-clear-all-sample />
+</component-example>
+<code-example [exampleFiles]="clearAllFiles()" />

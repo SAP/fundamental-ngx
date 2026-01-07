@@ -12,11 +12,15 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { findLastIndex } from 'lodash-es';
 import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
-import { FocusableItemPosition, FocusableListPosition } from '../focusable-item';
+import {
+    FDK_FOCUSABLE_ITEM_DIRECTIVE,
+    FocusableItemDirective,
+    FocusableItemPosition,
+    FocusableListPosition
+} from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, ScrollPosition } from '../focusable-list';
 import { FDK_FOCUSABLE_GRID_DIRECTIVE } from './focusable-grid.tokens';
 
@@ -62,6 +66,10 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
+    private readonly _focusableItems: QueryList<FocusableItemDirective>;
+
+    /** @hidden */
     _preventKeydown = false;
 
     /** @hidden */
@@ -71,11 +79,22 @@ export class FocusableGridDirective implements AfterViewInit {
     ngAfterViewInit(): void {
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntilDestroyed(this._destroyRef))
-            .subscribe((lists) =>
-                lists.forEach((list, index) =>
-                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length })
-                )
-            );
+            .subscribe((lists) => {
+                lists.forEach((list, index) => {
+                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
+                    list._focusableItems.changes
+                        .pipe(startWith(list._focusableItems), takeUntilDestroyed(this._destroyRef))
+                        .subscribe((items) => {
+                            this._handleItemSubscriptions(items);
+                        });
+                });
+            });
+
+        this._focusableItems.changes
+            .pipe(startWith(this._focusableItems), takeUntilDestroyed(this._destroyRef))
+            .subscribe((items) => {
+                this._handleItemSubscriptions(items);
+            });
 
         this._focusableLists.changes
             .pipe(
@@ -175,7 +194,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 break;
             case PAGE_DOWN:
                 event.preventDefault();
-                nextRowIndex = findLastIndex(lists, (item) => item._isVisible);
+                nextRowIndex = lists.findLastIndex((item) => item._isVisible);
                 scrollIntoView = 'top';
                 break;
             case PAGE_UP:
@@ -210,5 +229,30 @@ export class FocusableGridDirective implements AfterViewInit {
         }
 
         return this.shortRowFocus === 'first' ? 0 : list._focusableItems.length - 1;
+    }
+
+    /** @hidden */
+    private _handleItemSubscriptions(items: QueryList<FocusableItemDirective>): void {
+        items.forEach((item) => {
+            item.focusableChildElementFocused.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+                this._focusableLists.forEach((focusableList) => {
+                    focusableList._focusableItems.forEach((focusableItem) => {
+                        focusableItem.setTabbable(false);
+                        (focusableItem as FocusableItemDirective).enableTabbableElements();
+                    });
+                });
+            });
+            item._parentFocusableItemFocused.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+                this._focusableLists.forEach((focusableList) => {
+                    focusableList._focusableItems.forEach((focusableItem) => {
+                        if (item !== focusableItem) {
+                            (focusableItem as FocusableItemDirective).disableTabbableElements();
+                        } else {
+                            (focusableItem as FocusableItemDirective).enableTabbableElements();
+                        }
+                    });
+                });
+            });
+        });
     }
 }

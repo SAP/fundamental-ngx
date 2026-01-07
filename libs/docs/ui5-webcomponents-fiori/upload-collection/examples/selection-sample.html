@@ -1,0 +1,34 @@
+<div class="fd-margin-bottom--tiny">
+    @for (item of selectionModes(); track item) {
+    <ui5-button class="fd-margin--tiny" (ui5Click)="setSelectionMode(item)" [disabled]="selectionMode() === item">
+        {{ item }}
+    </ui5-button>
+    }
+</div>
+
+<ui5-upload-collection
+    [selectionMode]="selectionMode()"
+    (ui5SelectionChange)="onSelectionChange($event)"
+    (ui5ItemDelete)="onItemDelete($event)"
+>
+    @for (file of files(); track file.id) {
+    <ui5-upload-collection-item [fileName]="file.fileName" [progress]="file.progress" [uploadState]="file.uploadState">
+        {{ file.details}} @if(file.src) {
+        <img [src]="file.src" slot="thumbnail" alt="SAP logo" />
+        } @else {
+        <ui5-icon slot="thumbnail" [name]="file.icon" />
+        }
+    </ui5-upload-collection-item>
+    }
+</ui5-upload-collection>
+
+@if (selectedFiles().length > 0) {
+<div class="fd-margin-top--sm">
+    <ui5-title level="H5">Selected Files ({{ selectedFiles().length }}):</ui5-title>
+    <ul class="fd-list">
+        @for (fileName of selectedFiles(); track fileName) {
+        <li>{{ fileName }}</li>
+        }
+    </ul>
+</div>
+}

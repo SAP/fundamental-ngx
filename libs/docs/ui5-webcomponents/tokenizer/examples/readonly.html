@@ -1,0 +1,5 @@
+<ui5-tokenizer [readonly]="isReadonly()">
+    @for (option of selectedOptions(); track option) {
+    <ui5-token [text]="option"></ui5-token>
+    }
+</ui5-tokenizer>

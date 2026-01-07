@@ -1,4 +1,5 @@
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -14,6 +15,7 @@ import {
     OnDestroy,
     Output,
     QueryList,
+    TemplateRef,
     ViewChild,
     ViewEncapsulation,
     computed,
@@ -56,7 +58,7 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
             useExisting: ShellbarComponent
         }
     ],
-    imports: [PortalModule, FdTranslatePipe, ButtonComponent, ClickedDirective]
+    imports: [PortalModule, FdTranslatePipe, ButtonComponent, ClickedDirective, NgTemplateOutlet]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
@@ -107,6 +109,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** Whether to show the navigation button. */
     @Input()
     showNavigationButton = false;
+
+    /**
+     * Custom template for navigation button. When provided, this template will be rendered instead of the default button.
+     * Use this when you need to render a complex component like a popover with a button inside.
+     * The template should handle its own click events and accessibility attributes.
+     */
+    @Input()
+    navigationButtonTemplate: TemplateRef<any> | null = null;
 
     /** Whether to show the back button. */
     @Input()
@@ -364,11 +374,15 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _navigationClicked(event: Event): void {
+        event.preventDefault();
+        event.stopPropagation();
         this.navigationButtonClicked.emit(event);
     }
 
     /** @hidden */
     _backClicked(event: Event): void {
+        event.preventDefault();
+        event.stopPropagation();
         this.backButtonClicked.emit(event);
     }
 

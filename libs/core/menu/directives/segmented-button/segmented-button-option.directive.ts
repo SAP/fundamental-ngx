@@ -61,7 +61,7 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElem
     @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
-    _onClick($event: MouseEvent | KeyboardEvent): void {
+    _onClick($event: Event): void {
         $event.preventDefault();
         this._clicked.next();
     }

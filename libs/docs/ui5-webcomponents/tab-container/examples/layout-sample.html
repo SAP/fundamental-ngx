@@ -1,0 +1,35 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button (ui5Click)="toggleLayout()">Toggle Layout (Current: {{ tabLayout() }})</ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-tabcontainer [tabLayout]="tabLayout()">
+                <ui5-tab text="Overview" additionalText="Main view" icon="home" selected>
+                    <h3>Overview</h3>
+                    <p>
+                        Welcome to the overview page. This tab demonstrates the <strong>{{ tabLayout() }}</strong>
+                        layout mode.
+                    </p>
+                    <ul>
+                        <li><strong>Standard layout:</strong> Text and additional text are displayed vertically</li>
+                        <li><strong>Inline layout:</strong> Text and additional text are displayed horizontally</li>
+                    </ul>
+                </ui5-tab>
+
+                <ui5-tab text="Details" additionalText="Detailed info" icon="detail-view">
+                    <h3>Details</h3>
+                    <p>View detailed information in {{ tabLayout() }} layout mode.</p>
+                </ui5-tab>
+
+                <ui5-tab text="Settings" additionalText="Configuration" icon="settings">
+                    <h3>Settings</h3>
+                    <p>Manage your settings with the {{ tabLayout() }} tab layout.</p>
+                </ui5-tab>
+            </ui5-tabcontainer>
+        </div>
+    </div>
+</div>

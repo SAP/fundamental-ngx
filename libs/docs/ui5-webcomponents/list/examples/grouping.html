@@ -1,0 +1,38 @@
+<ui5-list selectionMode="Multiple">
+    <ui5-li-group headerText="Front End Developers">
+        @for (employee of frontEndDevs(); track employee.name) {
+        <ui5-li icon="navigation-right-arrow" icon-end
+            >{{ employee.name }}
+            <ui5-avatar slot="image" shape="Square">
+                <img [src]="employee.avatar" [alt]="employee.alt" />
+            </ui5-avatar>
+        </ui5-li>
+        }
+    </ui5-li-group>
+
+    <ui5-li-group headerText="Back End Developers">
+        @for (employee of backEndDevs(); track employee.name) {
+        <ui5-li icon="navigation-right-arrow" icon-end
+            >{{ employee.name }}
+            <ui5-avatar slot="image" shape="Square">
+                <img [src]="employee.avatar" [alt]="employee.alt" />
+            </ui5-avatar>
+        </ui5-li>
+        }
+    </ui5-li-group>
+
+    <ui5-li-group>
+        <div style="width: '100%'; display: flex; justify-content: space-between; align-items: center" slot="header">
+            <span>Back End Developers</span>
+            <ui5-icon name="navigation-right-arrow"></ui5-icon>
+        </div>
+        @for (employee of backEndDevs(); track employee.name) {
+        <ui5-li icon="navigation-right-arrow" icon-end
+            >{{ employee.name }}
+            <ui5-avatar slot="image" shape="Square">
+                <img [src]="employee.avatar" [alt]="employee.alt" />
+            </ui5-avatar>
+        </ui5-li>
+        }
+    </ui5-li-group>
+</ui5-list>

@@ -10,12 +10,12 @@ import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form'
     template: `<label for="update-on-blur">Datetime picker:</label>
         <fdp-datetime-picker
             name="update-on-blur"
-            placeholder="MM/dd/YYYY, hh:mm aa"
+            placeholder="MM/dd/yyyy, hh:mm aa"
             [(ngModel)]="date"
             [processInputOnBlur]="true"
         ></fdp-datetime-picker>
         <br />
-        <div>Selected Date: {{ date.toDate() | date: 'MM/dd/YYYY, hh:mm aa' }}</div> `,
+        <div>Selected Date: {{ date.toDate() | date: 'MM/dd/yyyy, hh:mm aa' }}</div> `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         // Note that this is usually provided in the root of your application.

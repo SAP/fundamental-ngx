@@ -1,0 +1,69 @@
+<fd-docs-section-title id="basic" componentName="Date Range Picker">Basic Sample</fd-docs-section-title>
+<description>
+    The Date Range Picker component allows users to select a date range from a calendar popup. It displays two dates
+    (start and end) separated by a delimiter. The component provides keyboard navigation, accessibility support, and
+    internationalization capabilities.
+</description>
+<component-example>
+    <ui5-date-range-picker-basic-sample></ui5-date-range-picker-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExamples()"></code-example>
+
+<fd-docs-section-title id="delimiter" componentName="Date Range Picker">Custom Delimiter</fd-docs-section-title>
+<description>
+    Use the <b>delimiter</b> property to customize the separator between start and end dates. By default, it uses the
+    locale-specific delimiter (typically a hyphen "-"). You can set custom delimiters like " to ", " - ", or any other
+    string.
+</description>
+<component-example>
+    <ui5-date-range-picker-delimiter-sample></ui5-date-range-picker-delimiter-sample>
+</component-example>
+<code-example [exampleFiles]="delimiterExamples()"></code-example>
+
+<fd-docs-section-title id="format" componentName="Date Range Picker">Date Format Patterns</fd-docs-section-title>
+<description>
+    Date Range Picker supports various format patterns for displaying dates. Use <b>formatPattern</b> to control how
+    dates appear in the input field. Common patterns include <code>yyyy-MM-dd</code>, <code>dd/MM/yyyy</code>,
+    <code>MM/dd/yyyy</code>, and localized patterns.
+</description>
+<component-example>
+    <ui5-date-range-picker-format-sample></ui5-date-range-picker-format-sample>
+</component-example>
+<code-example [exampleFiles]="formatExamples()"></code-example>
+
+<fd-docs-section-title id="min-max" componentName="Date Range Picker">Min and Max Dates</fd-docs-section-title>
+<description>
+    <p>
+        Use <b>minDate</b> and <b>maxDate</b> properties to restrict the selectable date range. Dates outside this range
+        will be disabled in the calendar popup.
+    </p>
+    <p>
+        <strong>Note:</strong> When using <code>minDate</code> and <code>maxDate</code>, ensure the date format matches
+        your <code>formatPattern</code> or use ISO format (yyyy-MM-dd).
+    </p>
+</description>
+<component-example>
+    <ui5-date-range-picker-min-max-sample></ui5-date-range-picker-min-max-sample>
+</component-example>
+<code-example [exampleFiles]="minMaxExamples()"></code-example>
+
+<fd-docs-section-title id="value-state" componentName="Date Range Picker">Value States</fd-docs-section-title>
+<description>
+    Date Range Picker supports different value states to indicate validation status: <b>None</b>, <b>Success</b>,
+    <b>Warning</b>, <b>Error</b>, and <b>Information</b>. Each state displays a different color and icon to communicate
+    the field's status to users.
+</description>
+<component-example>
+    <ui5-date-range-picker-value-state-sample></ui5-date-range-picker-value-state-sample>
+</component-example>
+<code-example [exampleFiles]="valueStateExamples()"></code-example>
+
+<fd-docs-section-title id="component-states" componentName="Date Range Picker">Component States</fd-docs-section-title>
+<description>
+    Date Range Picker can be <b>disabled</b>, <b>readonly</b>, or <b>required</b>. Use these properties to control user
+    interaction and indicate mandatory fields.
+</description>
+<component-example>
+    <ui5-date-range-picker-component-states-sample></ui5-date-range-picker-component-states-sample>
+</component-example>
+<code-example [exampleFiles]="componentStatesExamples()"></code-example>

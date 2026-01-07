@@ -1,0 +1,67 @@
+<fd-docs-section-title id="basic" componentName="responsive-popover"> Basic Responsive Popover </fd-docs-section-title>
+<description>
+    The Responsive Popover adapts to the screen size: on desktop it appears as a popover positioned relative to the
+    opener element, while on mobile it displays as a full-screen dialog. Use the <code>opener</code> property to specify
+    the trigger element, and control visibility with the <code>open</code> property.
+</description>
+<component-example>
+    <ui5-doc-responsive-popover-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="placement" componentName="responsive-popover">
+    Placement and Alignment
+</fd-docs-section-title>
+<description>
+    Control the popover's position using <code>placement</code> (Top, Bottom, Start, End),
+    <code>horizontalAlign</code> (Center, Start, End, Stretch), and <code>verticalAlign</code> (Center, Top, Bottom,
+    Stretch). The <code>hideArrow</code> property removes the visual arrow indicator. Use
+    <code>allowTargetOverlap</code> to allow the popover to overlap the opener element when space is limited.
+</description>
+<component-example>
+    <ui5-doc-responsive-popover-placement-sample />
+</component-example>
+<code-example [exampleFiles]="placementExample()" />
+
+<separator />
+
+<fd-docs-section-title id="modal" componentName="responsive-popover"> Modal Behavior </fd-docs-section-title>
+<description>
+    Set <code>modal</code> to true to make the popover modal, which blocks interaction with background content.
+    Non-modal popovers allow background interaction. This example demonstrates the difference between modal and
+    non-modal behavior.
+</description>
+<component-example>
+    <ui5-doc-responsive-popover-modal-sample />
+</component-example>
+<code-example [exampleFiles]="modalExample()" />
+
+<separator />
+
+<fd-docs-section-title id="header-footer" componentName="responsive-popover">
+    Header and Footer Slots
+</fd-docs-section-title>
+<description>
+    Customize the popover with <code>header</code> and <code>footer</code> slots. Use <code>headerText</code> for simple
+    text headers, or provide custom content in the header slot for more complex layouts. The footer slot is ideal for
+    action buttons. Content without a slot attribute goes into the default content area.
+</description>
+<component-example>
+    <ui5-doc-responsive-popover-header-footer-sample />
+</component-example>
+<code-example [exampleFiles]="headerFooterExample()" />
+
+<separator />
+
+<fd-docs-section-title id="events" componentName="responsive-popover"> Events and Lifecycle </fd-docs-section-title>
+<description>
+    The Responsive Popover provides lifecycle events: <code>ui5BeforeOpen</code> and <code>ui5Open</code> (for opening),
+    and <code>ui5BeforeClose</code> and <code>ui5Close</code> (for closing). The "before" events can be cancelled to
+    prevent the action. Use these events to track popover state, load dynamic content, or clean up resources.
+</description>
+<component-example>
+    <ui5-doc-responsive-popover-events-sample />
+</component-example>
+<code-example [exampleFiles]="eventsExample()" />

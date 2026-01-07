@@ -1,0 +1,12 @@
+<ui5-search
+    [value]="searchValue()"
+    placeholder="Search products (simulates loading)..."
+    [showClearIcon]="true"
+    [loading]="isLoading()"
+    (ui5Input)="onInput($event)"
+    (ui5Search)="onSearch($event)"
+>
+    @for (product of searchResults(); track product.id) {
+    <ui5-search-item [text]="product.name" [description]="product.description" [icon]="product.icon"> </ui5-search-item>
+    }
+</ui5-search>

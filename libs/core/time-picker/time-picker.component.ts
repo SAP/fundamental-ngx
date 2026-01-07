@@ -9,6 +9,7 @@ import {
     forwardRef,
     inject,
     Inject,
+    input,
     Input,
     OnChanges,
     OnDestroy,
@@ -296,6 +297,12 @@ export class TimePickerComponent<D>
     /** @hidden */
     @ViewChild('formMessageTemplate')
     private readonly _formMessageTemplate: TemplateRef<any>;
+
+    /**
+     * The interval between selectable minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals).
+     * Defaults to 1 (every minute).
+     */
+    readonly minuteStep = input<number>(1);
 
     /** @hidden */
     _message: string | null = null;
@@ -619,7 +626,7 @@ export class TimePickerComponent<D>
     }
 
     /** @hidden */
-    private _focusOut(event: FocusEvent): void {
+    protected _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }

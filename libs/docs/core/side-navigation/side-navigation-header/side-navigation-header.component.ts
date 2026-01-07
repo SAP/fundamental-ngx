@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
@@ -21,8 +20,8 @@ import {
         ImportComponent,
         HeaderTabsComponent,
         MessageStripComponent,
-        RouterLink,
-        LinkComponent
+        LinkComponent,
+        MessageStripComponent
     ]
 })
 export class SideNavigationHeaderComponent {}

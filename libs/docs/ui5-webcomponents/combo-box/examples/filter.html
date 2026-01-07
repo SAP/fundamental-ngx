@@ -1,0 +1,35 @@
+<div class="fd-margin-top--sm">
+    <h4>Starts With Per Term (Default)</h4>
+    <ui5-combobox placeholder="Type to filter" filter="StartsWithPerTerm">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>
+
+<div class="fd-margin-top--sm">
+    <h4>Starts With</h4>
+    <ui5-combobox placeholder="Type to filter" filter="StartsWith">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>
+
+<div class="fd-margin-top--sm">
+    <h4>Contains</h4>
+    <ui5-combobox placeholder="Type to filter" filter="Contains">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>
+
+<div class="fd-margin-top--sm">
+    <h4>None (No Filtering)</h4>
+    <ui5-combobox placeholder="No filtering applied" filter="None">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>

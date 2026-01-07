@@ -1,26 +1,14 @@
 <div style="display: flex; justify-content: space-around">
-    <div style="display: flex; flex-direction: column; gap: 0.5rem">
-        <fd-calendar
-            associatedLegendId="legend1"
-            [specialDaysRules]="specialDays"
-            [escapeFocusFunction]="noop"
-        ></fd-calendar>
-        <fd-calendar-legend legendId="legend1" [specialDaysRules]="specialDays" [col]="false"></fd-calendar-legend>
-    </div>
-    <div style="display: flex; flex-direction: row; gap: 0.5rem; align-items: flex-start">
-        <fd-calendar
-            associatedLegendId="legend2"
-            [specialDaysRules]="specialDays"
-            [escapeFocusFunction]="noop"
-        ></fd-calendar>
-        <fd-calendar-legend
-            legendId="legend2"
-            [specialDaysRules]="specialDays"
-            [col]="true"
-            [displayTodayLegendItem]="false"
-            [displaySelectedLegendItem]="false"
-            [displayWorkDayLegendItem]="false"
-            [displayNonWorkDayLegendItem]="false"
-        ></fd-calendar-legend>
-    </div>
+    <fd-calendar
+        [specialDaysRules]="specialDays"
+        [escapeFocusFunction]="noop"
+        [showCalendarLegend]="true"
+        [legendCol]="false"
+    ></fd-calendar>
+    <fd-calendar
+        [specialDaysRules]="specialDays"
+        [escapeFocusFunction]="noop"
+        [showCalendarLegend]="true"
+        [legendCol]="true"
+    ></fd-calendar>
 </div>

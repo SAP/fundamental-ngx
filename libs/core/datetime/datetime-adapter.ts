@@ -130,9 +130,12 @@ export abstract class DatetimeAdapter<D> {
 
     /**
      * Gets a list of minute names.
-     * @returns An ordered list of all hours (0 - 24).
+     * @param options Configuration options for minute names
+     * @param options.twoDigit Whether to format minutes with two digits (e.g., '05' vs '5')
+     * @param options.minuteStep The interval between minutes (e.g., 1 for every minute, 5 for 5-minute intervals, 15 for 15-minute intervals). Defaults to 1.
+     * @returns An ordered list of minute names based on the step interval.
      */
-    abstract getMinuteNames(options: { twoDigit: boolean }): string[];
+    abstract getMinuteNames(options: { twoDigit: boolean; minuteStep?: number }): string[];
 
     /**
      * Gets a list of second names.

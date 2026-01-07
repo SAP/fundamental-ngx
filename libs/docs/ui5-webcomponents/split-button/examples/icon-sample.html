@@ -1,0 +1,42 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>Icon with Text</strong></p>
+            <ui5-split-button
+                id="split-button-download"
+                icon="download"
+                (ui5Click)="onFileAction('Download')"
+                (ui5ArrowClick)="onDownloadMenuOpen()"
+            >
+                Download
+            </ui5-split-button>
+            <ui5-menu opener="split-button-download" [open]="isDownloadMenuOpen()">
+                <ui5-menu-item text="Download as PDF" icon="pdf-attachment" (ui5Click)="onFileAction('Download PDF')" />
+                <ui5-menu-item
+                    text="Download as Excel"
+                    icon="excel-attachment"
+                    (ui5Click)="onFileAction('Download Excel')"
+                />
+                <ui5-menu-item text="Download as CSV" icon="attachment" (ui5Click)="onFileAction('Download CSV')" />
+            </ui5-menu>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>Icon Only</strong></p>
+            <ui5-split-button
+                id="split-button-add"
+                icon="add"
+                (ui5Click)="onFileAction('Add')"
+                (ui5ArrowClick)="onAddMenuOpen()"
+            >
+            </ui5-split-button>
+            <ui5-menu opener="split-button-add" [open]="isAddMenuOpen()">
+                <ui5-menu-item text="Add Document" icon="document" (ui5Click)="onFileAction('Add Document')" />
+                <ui5-menu-item text="Add Folder" icon="folder" (ui5Click)="onFileAction('Add Folder')" />
+                <ui5-menu-item text="Add Link" icon="chain-link" (ui5Click)="onFileAction('Add Link')" />
+            </ui5-menu>
+        </div>
+    </div>
+</div>

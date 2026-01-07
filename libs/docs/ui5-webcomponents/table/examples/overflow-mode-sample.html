@@ -1,0 +1,120 @@
+<!-- Scroll Mode -->
+
+<div class="fd-margin-bottom--lg">
+    <h4>Scroll Mode</h4>
+    <p class="fd-margin-bottom--md">
+        When the table's content does not fit horizontally into the viewport, a horizontal scrollbar is shown, allowing
+        the user to scroll.
+    </p>
+    <ui5-table id="scroll-table" overflowMode="Scroll">
+        <ui5-table-header-row slot="headerRow">
+            @for (column of scrollColumns(); track column.id) {
+            <ui5-table-header-cell
+                [id]="'scroll-table-' + column.id + '-Col'"
+                [width]="column.width"
+                [minWidth]="column.minWidth"
+            >
+                <span>{{ column.label }}</span>
+            </ui5-table-header-cell>
+            }
+        </ui5-table-header-row>
+
+        @for (product of products(); track product.code) {
+        <ui5-table-row>
+            <ui5-table-cell>
+                <ui5-label><b>{{ product.name }}</b><br />{{ product.code }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label>{{ product.supplier }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label>{{ product.dimensions }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label [style.color]="product.weightColor"> <b>{{ product.weight }}</b> KG </ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label><b>{{ product.price }}</b> EUR</ui5-label>
+            </ui5-table-cell>
+        </ui5-table-row>
+        }
+    </ui5-table>
+</div>
+
+<!-- Popin Mode -->
+
+<div class="fd-margin-bottom--md">
+    <h4>Popin Mode</h4>
+    <p class="fd-margin-bottom--md">
+        The Popin mode is a responsive design feature tailored to adapt column layouts in UI grids or tables,
+        particularly for smaller screens or constrained container widths.
+    </p>
+    <p>
+        When screen space becomes limited, Popin mode seamlessly reorganizes columns. Those that cannot fit within the
+        available width are intelligently relocated to the "popin area", an allocated space designed specifically for
+        accommodating additional columns.
+    </p>
+    <p>
+        You can influence the order of columns appearing in the pop-in area by defining the importance of each column.
+    </p>
+    <p>
+        You can hide specific columns in the popin by using the <code>popinHidden</code> property on the
+        <code>ui5-table-header-cell</code>. <strong>Note:</strong> Hiding columns in the popin leads to accessibility
+        issues as information is lost on smaller screens.
+    </p>
+    <ui5-bar>
+        <ui5-segmented-button
+            id="sizeBtn"
+            accessibleName="Switch Table Size"
+            (ui5SelectionChange)="onSizeChanged($event)"
+        >
+            <ui5-segmented-button-item>25%</ui5-segmented-button-item>
+            <ui5-segmented-button-item>50%</ui5-segmented-button-item>
+            <ui5-segmented-button-item>75%</ui5-segmented-button-item>
+            <ui5-segmented-button-item selected>100%</ui5-segmented-button-item>
+        </ui5-segmented-button>
+        <ui5-segmented-button
+            id="showHideDetailsBtn"
+            slot="endContent"
+            accessibleName="Show/Hide Details"
+            (ui5SelectionChange)="onShowHideDetailsChanged($event)"
+        >
+            <ui5-segmented-button-item tooltip="Show Details" icon="detail-more"></ui5-segmented-button-item>
+            <ui5-segmented-button-item tooltip="Hide Details" icon="detail-less" selected></ui5-segmented-button-item>
+        </ui5-segmented-button>
+    </ui5-bar>
+    <ui5-table id="popin-table" [style.width]="tableWidth()" overflowMode="Popin">
+        <ui5-table-header-row slot="headerRow">
+            @for (column of popinColumns(); track column.id) {
+            <ui5-table-header-cell
+                [id]="'popin-table-' + column.id + 'Col'"
+                [minWidth]="column.minWidth"
+                [importance]="column.importance"
+                [popinHidden]="column.popinHidden"
+            >
+                <span>{{ column.label }}</span>
+            </ui5-table-header-cell>
+            }
+        </ui5-table-header-row>
+
+        @for (product of products(); track product.code) {
+        <ui5-table-row>
+            <ui5-table-cell>
+                <ui5-label><b>{{ product.name }}</b><br />{{ product.code }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label>{{ product.supplier }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label>{{ product.dimensions }}</ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label [style.color]="product.weightColor"> <b>{{ product.weight }}</b> KG </ui5-label>
+            </ui5-table-cell>
+            <ui5-table-cell>
+                <ui5-label><b>{{ product.price }}</b> EUR</ui5-label>
+            </ui5-table-cell>
+        </ui5-table-row>
+        }
+    </ui5-table>
+</div>

@@ -135,8 +135,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** Get minute names */
-    getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (minute) => minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
+    getMinuteNames({ twoDigit, minuteStep = 1 }: { twoDigit: boolean; minuteStep?: number }): string[] {
+        const length = Math.ceil(60 / minuteStep);
+        return range(length, (index) => {
+            const minute = index * minuteStep;
+            return minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+        });
     }
 
     /** Get second names */
@@ -518,7 +522,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
          * Date.parse('10:30 AM') doesn't work so we need do a trick
          * and prepend it by a date string.
          */
-        const dateStr = this.format(this.now(), { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const dateStr = new Intl.DateTimeFormat('en-US').format(new Date());
         const dateTimeString = `${dateStr} ${timeStr}`;
         return new Date(Date.parse(dateTimeString));
     }

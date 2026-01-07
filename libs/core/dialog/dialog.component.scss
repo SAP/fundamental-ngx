@@ -50,3 +50,16 @@
 .fd-dialog__content:has(.fd-dialog__resize-handle) {
     overflow: visible !important;
 }
+
+.fd-dialog__body.fd-settings__dialog-body section {
+    width: 100%;
+}
+
+.fd-dialog__body:has(.fd-navigation.fd-navigation--popup) {
+    padding: 0 !important;
+
+    section {
+        height: 100%;
+        overflow: hidden;
+    }
+}

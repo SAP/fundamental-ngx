@@ -1,0 +1,94 @@
+<fd-docs-section-title id="basic" componentName="side-navigation"> Basic Side Navigation </fd-docs-section-title>
+<description>
+    The Side Navigation component provides a vertical navigation menu with hierarchical structure. Items can have icons
+    and text, and users can select items to navigate. The <code>ui5SelectionChange</code> event is fired when a user
+    selects an item. Use <code>ui5-side-navigation-item</code> components to create navigation items, and set the
+    <code>selected</code> property to indicate the currently active item.
+</description>
+<component-example>
+    <ui5-doc-side-navigation-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="collapsed" componentName="side-navigation">
+    Collapsed / Expanded Mode
+</fd-docs-section-title>
+<description>
+    The <code>collapsed</code> property controls whether the side navigation is displayed in collapsed mode (icons only)
+    or expanded mode (icons with text). In collapsed mode, only icons are visible, saving horizontal space. When users
+    hover over items in collapsed mode, tooltips show the item text. Toggle the property to switch between modes,
+    typically using a toggle button in your application header. <br /><br />
+    <strong>Note:</strong> The collapsed mode is not supported on phones. The component is intended to be used within a
+    <code>ui5-navigation-layout</code> component to ensure proper responsive behavior.
+</description>
+<component-example>
+    <ui5-doc-side-navigation-collapsed-sample />
+</component-example>
+<code-example [exampleFiles]="collapsedExample()" />
+
+<separator />
+
+<fd-docs-section-title id="nested" componentName="side-navigation"> Nested Items with Sub-items </fd-docs-section-title>
+<description>
+    <p>
+        Side navigation items can have nested sub-items using <code>ui5-side-navigation-sub-item</code> components
+        inside <code>ui5-side-navigation-item</code>components. Parent items can be expanded or collapsed using the
+        <code>expanded</code> property.
+    </p>
+    <p>
+        When a parent item is marked as
+        <code>[unselectable]="true"</code>, clicking on it does not trigger <code>ui5SelectionChange</code> event.
+        Instead, when clicked, it toggles the expansion state (check "Suppliers").
+    </p>
+    <p>
+        When a parent item is marked as <code>[unselectable]="false"</code> or not marked at all (the default behavior),
+        upon clicking on the text, the <code>ui5SelectionChange</code> event is triggered. In order to toggle the
+        expansion state, the chevron icon needs to be clicked (check "Products").
+    </p>
+    <p>Sub-items can also be selected independently.</p>
+</description>
+<component-example>
+    <ui5-doc-side-navigation-nested-sample />
+</component-example>
+<code-example [exampleFiles]="nestedExample()" />
+
+<separator />
+
+<fd-docs-section-title id="fixed-items" componentName="side-navigation"> Fixed Items </fd-docs-section-title>
+<description>
+    The <code>fixedItems</code> slot allows you to place navigation items at the bottom of the side navigation. These
+    items remain fixed and are typically used for settings, help, or other utility functions that should always be
+    accessible. Fixed items should be kept "flat" (without sub-items) for the best user experience. Use the same
+    <code>ui5-side-navigation-item</code> component with the <code>slot="fixedItems"</code> attribute.
+</description>
+<component-example>
+    <ui5-doc-side-navigation-fixed-items-sample />
+</component-example>
+<code-example [exampleFiles]="fixedItemsExample()" />
+
+<separator />
+
+<fd-docs-section-title id="overlay-mode" componentName="side-navigation"> Overlay Mode </fd-docs-section-title>
+<description>
+    SideNavigation is enabled to be used inside a responsive popover. This example shows how to achieve overlay mode
+    with correct design and interaction.
+</description>
+<component-example>
+    <ui5-doc-side-navigation-overlay-mode-sample />
+</component-example>
+<code-example [exampleFiles]="overlayModeExample()" />
+
+<separator />
+
+<fd-docs-section-title id="custom-width" componentName="side-navigation"> Custom Width </fd-docs-section-title>
+<description>
+    The width of the side navigation panel can be customized using CSS. The panel must be at least 16 rem wide to
+    maintain readability and layout stability. You can set a larger width as needed, but it cannot be reduced below 16
+    rem. If the panel does not have sufficient space, long texts will wrap automatically.
+</description>
+<component-example>
+    <ui5-doc-side-navigation-custom-width-sample />
+</component-example>
+<code-example [exampleFiles]="customWidthExample()" />

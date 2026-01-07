@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SettingsContainerComponent } from './settings-container/settings-container.component';
+import { SettingsContentContainerDirective } from './settings-content-container/settings-content-container.directive';
 import { SettingsContentDirective } from './settings-content/settings-content.directive';
 import { SettingsDetailAreaDirective } from './settings-detail-area/settings-detail-area.directive';
 import { SettingsDialogBodyDirective } from './settings-dialog-body/settings-dialog-body.directive';
@@ -9,6 +10,9 @@ import { SettingsHeaderButtonDirective } from './settings-header-button/settings
 import { SettingsHeaderDirective } from './settings-header/settings-header.directive';
 import { SettingsListAreaDirective } from './settings-list-area/settings-list-area.directive';
 import { SettingsListContainerDirective } from './settings-list-container/settings-list-container.directive';
+import { SettingsProfileCardNameDirective } from './settings-profile-card-name/settings-profile-card-name.directive';
+import { SettingsProfileCardSublineDirective } from './settings-profile-card-subline/settings-profile-card-subline.directive';
+import { SettingsProfileCardDirective } from './settings-profile-card/settings-profile-card.directive';
 import { SettingsComponent } from './settings.component';
 
 const components = [
@@ -16,6 +20,10 @@ const components = [
     SettingsDetailAreaDirective,
     SettingsListContainerDirective,
     SettingsContentDirective,
+    SettingsContentContainerDirective,
+    SettingsProfileCardDirective,
+    SettingsProfileCardNameDirective,
+    SettingsProfileCardSublineDirective,
     SettingsHeaderDirective,
     SettingsHeaderButtonDirective,
     SettingsDialogContentDirective,

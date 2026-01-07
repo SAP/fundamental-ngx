@@ -47,13 +47,13 @@ export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOpt
 
     /** @hidden */
     @HostListener('focus')
-    private _onFocus(): void {
+    protected _onFocus(): void {
         this.focused.emit();
     }
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
-    private _onKeyUp(event: KeyboardEvent): void {
+    protected _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.focused.emit();
         }

@@ -1,24 +1,42 @@
 <header>Navigation</header>
 <description>
-    The navigation is one of the signature design elements of BTP Tools.
-    <h3>Navigation Types:</h3>
+    <p>
+        The Side Navigation is the only option to add a navigation to an application. It offers the user easy access to
+        multiple levels.
+    </p>
+    <h3>States</h3>
+    <h4>Expanded</h4>
     <ul>
-        <li>
-            <b>Vertical Navigation - Expanded</b>. The default navigation visualization provides a logical grouping of
-            navigation items and two levels of hierarchy.
-        </li>
-        <li>
-            <b>Vertical Navigation - Snapped</b>. The snapped vertical navigation variant reduces the navigation width
-            to free horizontal space.
-        </li>
-        <li>
-            <b>Vertical Navigation - Popup</b>. An alternative to the expanded/snapped variant, which places the
-            navigation items in a popup.
-        </li>
-        <li>
-            <b>Horizontal Navigation</b>&nbsp;- The horizontal variant allows for infinite levels of navigation
-            hierarchy through cascading menus.
-        </li>
+        <li>The first levels are a collapsible group (navigation group) – no icon</li>
+        <li>If second-level items have children, they show the expand/collapse arrows</li>
+        <li>Second-level items display an icon and are not indented</li>
+        <li>If second-level items have children, they show the expand/collapse arrows</li>
+        <li>Third-level items do not display an icon and are indented by 2 rem (32 px)</li>
+    </ul>
+
+    <h4>Snapped (collapsed)</h4>
+    <ul>
+        <li>The first levels always show an icon</li>
+        <li>If first-level items have children, they show the expand/collapse arrows</li>
+        <li>Second-level items do not display an icon and are not indented</li>
+        <li>If second-level items have children, they show the expand/collapse arrows</li>
+    </ul>
+
+    <p>
+        The Side Navigation Button placed in Shell Bar allows switching between expanded and snapped(collapsed) modes.
+    </p>
+
+    <h4>Popup (overlay)</h4>
+    <p>
+        In this mode the Side Navigation is placed inside a Popover component. The trigger is the side navigation button
+        placed in Shell Bar. On small screen sizes (600px) it should follow the behaviour of the Responsive Popover.
+    </p>
+
+    <h3>Modes</h3>
+    <ul>
+        <li>Desktop (compact)</li>
+        <li>Tablet (cozy)</li>
+        <li>Phone (cozy)</li>
     </ul>
 </description>
 <import module="NavigationComponent" subPackage="navigation"></import>

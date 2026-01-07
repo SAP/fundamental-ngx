@@ -19,7 +19,8 @@ const Configuration = {
                 'cdk',
                 'shared',
                 'i18n',
-                'datetime-adapter'
+                'datetime-adapter',
+                'ui5'
             ]
         ],
         'body-max-line-length': [2, 'always', 400],

@@ -1,0 +1,3 @@
+<ui5-button (click)="showToast()">Show Basic Toast</ui5-button>
+
+<ui5-toast [open]="isToastOpen()" (ui5Close)="onToastClose()"> {{ toastMessage() }} </ui5-toast>

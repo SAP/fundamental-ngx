@@ -1,0 +1,5 @@
+<ui5-combobox placeholder="Select a country" showClearIcon="true">
+    @for (country of countries; track country) {
+    <ui5-cb-item [text]="country"></ui5-cb-item>
+    }
+</ui5-combobox>

@@ -36,7 +36,6 @@
             [focusEscapeFunction]="escapeFocusFunction"
             (nextMonthSelect)="displayNextMonth()"
             (previousMonthSelect)="displayPreviousMonth()"
-            [associatedLegendId]="associatedLegendId"
         ></fd-calendar-day-view>
     } @else if (activeView === 'month') {
         <fd-calendar-month-view
@@ -74,4 +73,7 @@
         >
         </fd-calendar-aggregated-year-view>
     }
+}
+@if (showCalendarLegend && specialDaysRules.length > 0) {
+    <fd-calendar-legend [specialDaysRules]="specialDaysRules" [col]="legendCol"> </fd-calendar-legend>
 }

@@ -1,0 +1,73 @@
+<div class="fd-container">
+    <p><strong>Instructions:</strong> Upload files to see how different value states are displayed.</p>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="default-uploader" class="fd-col--2">None (Default):</ui5-label>
+        <ui5-file-uploader
+            id="default-uploader"
+            class="fd-col--10"
+            [valueState]="defaultState()"
+            (ui5Change)="onDefaultUpload($event)"
+        >
+            @if (defaultState() === 'None') {
+            <div slot="valueStateMessage">Default state - no validation message</div>
+            }
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="positive-uploader" class="fd-col--2">Positive (Success):</ui5-label>
+        <ui5-file-uploader
+            id="positive-uploader"
+            class="fd-col--10"
+            [valueState]="positiveState()"
+            (ui5Change)="onPositiveUpload($event)"
+        >
+            @if (positiveState() === 'Positive') {
+            <div slot="valueStateMessage">File uploaded successfully!</div>
+            }
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="critical-uploader" class="fd-col--2">Critical (Warning):</ui5-label>
+        <ui5-file-uploader
+            id="critical-uploader"
+            class="fd-col--10"
+            [valueState]="criticalState()"
+            (ui5Change)="onCriticalUpload($event)"
+        >
+            @if (criticalState() === 'Critical') {
+            <div slot="valueStateMessage">Warning: Please review the file before proceeding.</div>
+            }
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="negative-uploader" class="fd-col--2">Negative (Error):</ui5-label>
+        <ui5-file-uploader
+            id="negative-uploader"
+            class="fd-col--10"
+            [valueState]="negativeState()"
+            (ui5Change)="onNegativeUpload($event)"
+        >
+            @if (negativeState() === 'Negative') {
+            <div slot="valueStateMessage">Error: Invalid file type or format.</div>
+            }
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="information-uploader" class="fd-col--2">Information:</ui5-label>
+        <ui5-file-uploader
+            id="information-uploader"
+            class="fd-col--10"
+            [valueState]="informationState()"
+            (ui5Change)="onInformationUpload($event)"
+        >
+            @if (informationState() === 'Information') {
+            <div slot="valueStateMessage">Info: File will be processed in the background.</div>
+            }
+        </ui5-file-uploader>
+    </div>
+</div>

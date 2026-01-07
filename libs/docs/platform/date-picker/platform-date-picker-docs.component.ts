@@ -13,6 +13,9 @@ const datePickerUpdateOnBlurSrcTs = 'platform-date-picker-update-on-blur-example
 const datepickerMobileTs = 'mobile/platform-date-picker-mobile-example.component.ts';
 const datepickerMobileHtml = 'mobile/platform-date-picker-mobile-example.component.html';
 
+const datepickerLegend = 'date-picker-legend-example/date-picker-legend-example.ts';
+const datepickerLegendHtml = 'date-picker-legend-example/date-picker-legend-example.html';
+
 import { RouterLink } from '@angular/router';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
@@ -24,6 +27,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { DatePickerLegendExample } from './examples/date-picker-legend-example/date-picker-legend-example';
 import { PlatformDatePickerMobileExampleComponent } from './examples/mobile/platform-date-picker-mobile-example.component';
 import { PlatformDatePickerDisableFuncExampleComponent } from './examples/platform-date-picker-disable-func-example.component';
 import { PlatformDatePickerExampleComponent } from './examples/platform-date-picker-example.component';
@@ -47,7 +51,8 @@ import { PlatformDatePickerUpdateOnBlurExampleComponent } from './examples/platf
         PlatformDatePickeri18nExampleComponent,
         PlatformDatePickerUpdateOnBlurExampleComponent,
         PlatformDatePickerMobileExampleComponent,
-        FdDatetimeModule
+        FdDatetimeModule,
+        DatePickerLegendExample
     ]
 })
 export class PlatformDatePickerDocsComponent {
@@ -129,6 +134,21 @@ export class PlatformDatePickerDocsComponent {
             code: getAssetFromModuleAssets(datepickerMobileHtml),
             fileName: 'platform-date-picker-mobile-example',
             component: 'PlatformDatePickerMobileExampleComponent'
+        }
+    ];
+
+    datepickerLegend: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(datepickerLegend),
+            originalFileName: 'date-picker-legend-example',
+            component: 'DatePickerLegendExample'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datepickerLegendHtml),
+            originalFileName: 'date-picker-legend-example',
+            component: 'DatePickerLegendExample'
         }
     ];
 }

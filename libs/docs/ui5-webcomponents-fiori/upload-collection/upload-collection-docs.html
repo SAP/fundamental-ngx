@@ -1,0 +1,91 @@
+<fd-docs-section-title id="basic" componentName="upload-collection"> Basic Upload Collection </fd-docs-section-title>
+<description>
+    <p>
+        The Upload Collection component displays a list of uploaded files and allows users to manage them. Each file is
+        represented by a <code>ui5-upload-collection-item</code> that shows the file name, progress, and actions.
+    </p>
+    <p>Use the <code>ui5ItemDelete</code> event to handle file deletions.</p>
+    <p>
+        Mark the item as <code>type="Detail"</code> and use the <code>ui5ItemRename</code> event to handle file
+        renaming.
+    </p>
+</description>
+<component-example>
+    <ui5-doc-upload-collection-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="selection" componentName="upload-collection"> Selection Modes </fd-docs-section-title>
+<description>
+    The Upload Collection supports different selection modes to enable file selection and batch operations:
+    <strong>None</strong>, <strong>Single</strong>, <strong>SingleStart</strong>, <strong>SingleEnd</strong>,
+    <strong>SingleAuto</strong>, <strong>Multiple</strong>. Use the <code>selectionMode</code> property to configure the
+    desired selection behavior. The <code>ui5SelectionChange</code> event fires when the selection changes, allowing you
+    to track selected files.
+</description>
+<component-example>
+    <ui5-doc-upload-collection-selection-sample />
+</component-example>
+<code-example [exampleFiles]="selectionExample()" />
+
+<separator />
+
+<fd-docs-section-title id="upload-states" componentName="upload-collection">
+    Upload States and Progress
+</fd-docs-section-title>
+<description>
+    Upload Collection items support different upload states to provide visual feedback during the upload process:
+    <ul>
+        <li><strong>Ready: </strong>File is ready to be uploaded, shows progress indicator</li>
+        <li>
+            <strong>Uploading: </strong>File is currently being uploaded, shows progress indicator and terminate button
+        </li>
+        <li><strong>Error: </strong>Upload failed, shows progress indicator and retry button</li>
+        <li><strong>Complete: </strong>Upload finished successfully, hides progress indicator</li>
+    </ul>
+    Use the <code>uploadState</code> and <code>progress</code> properties to control the visual state and progress of
+    each file. Handle <code>ui5Retry</code> and <code>ui5Terminate</code> events to implement retry and cancel
+    functionality.
+</description>
+<component-example>
+    <ui5-doc-upload-collection-upload-states-sample />
+</component-example>
+<code-example [exampleFiles]="uploadStatesExample()" />
+
+<separator />
+
+<fd-docs-section-title id="drag-drop" componentName="upload-collection"> Drag and Drop </fd-docs-section-title>
+<description>
+    The Upload Collection provides a drag and drop overlay for easy file uploads. When files are dragged over the
+    component, an overlay appears to indicate that files can be dropped. By default, the drag and drop overlay is
+    enabled. You can disable it by setting the <code>hideDragOverlay</code> property to <code>true</code>. <br /><br />
+    <strong>Note:</strong> The component only displays the overlay. It's the application developer's responsibility to
+    handle the <code>drop</code> event and implement the actual file upload logic. The drop event is fired only when
+    elements are dropped within the drag and drop overlay area.
+</description>
+<component-example>
+    <ui5-doc-upload-collection-drag-drop-sample />
+</component-example>
+<code-example [exampleFiles]="dragDropExample()" />
+
+<separator />
+
+<fd-docs-section-title id="custom-header" componentName="upload-collection"> Custom Header </fd-docs-section-title>
+<description>
+    <p>
+        The Upload Collection supports custom headers through the <code>header</code> slot. You can add a custom header
+        with additional controls like upload buttons, filters, or search functionality. When using a custom header, it's
+        your responsibility to provide proper labeling for accessibility by using the
+        <code>accessibleName</code> property.
+    </p>
+    <p>
+        This example demonstrates a custom header with an upload button and shows how to handle the "No data" state with
+        custom text using the <code>noDataText</code> and <code>noDataDescription</code> properties.
+    </p>
+</description>
+<component-example>
+    <ui5-doc-upload-collection-custom-header-sample />
+</component-example>
+<code-example [exampleFiles]="customHeaderExample()" />

@@ -1,0 +1,63 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row fd-margin-bottom--sm">
+        <div class="fd-col">
+            <div [style]="{'display': 'flex', 'justify-content': 'space-between', 'align-items': 'center'}">
+                <strong>Event Log (last 15 events):</strong>
+                <ui5-button design="Transparent" (ui5Click)="clearLog()">Clear Log</ui5-button>
+            </div>
+            <div
+                [style]="{
+                    'border': '1px solid #ccc',
+                    'padding': '0.5rem',
+                    'margin-top': '0.5rem',
+                    'max-height': '250px',
+                    'overflow-y': 'auto',
+                    'background': 'var(--sapList_Background)'
+                }"
+            >
+                @if (eventLog().length === 0) {
+                <em>No events yet. Open and close the popover to see events.</em>
+                } @else { @for (log of eventLog(); track $index) {
+                <div [style]="{'font-family': 'monospace', 'font-size': '0.875rem', 'margin': '0.25rem 0'}">
+                    [{{ log.timestamp }}] - {{ log.event }}
+                </div>
+
+                } }
+            </div>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button id="events-opener" (ui5Click)="openPopover()" design="Emphasized">
+                {{ isOpen() ? 'Popover is Open' : 'Open Popover' }}
+            </ui5-button>
+        </div>
+    </div>
+
+    <ui5-responsive-popover
+        headerText="Lifecycle Events"
+        opener="events-opener"
+        [modal]="true"
+        [open]="isOpen()"
+        (ui5BeforeOpen)="onBeforeOpen($event)"
+        (ui5Open)="onOpen()"
+        (ui5BeforeClose)="onBeforeClose($event)"
+        (ui5Close)="onClose()"
+    >
+        <div class="fd-margin--md">
+            <p>This popover demonstrates lifecycle events:</p>
+            <ul class="fd-margin-top--sm">
+                <li><code>ui5BeforeOpen</code> - Before popover opens (cancelable)</li>
+                <li><code>ui5Open</code> - After popover opens</li>
+                <li><code>ui5BeforeClose</code> - Before popover closes (cancelable)</li>
+                <li><code>ui5Close</code> - After popover closes</li>
+            </ul>
+            <p class="fd-margin-top--md">Check the event log above to see the event sequence.</p>
+        </div>
+
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closePopover()" design="Emphasized">Close Popover</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+</div>

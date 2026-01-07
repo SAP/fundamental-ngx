@@ -605,6 +605,12 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: 'Valikko-painike'
     },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
+    },
     coreNotification: {
         groupHeaderTitle: 'Laajenna/tiivistä',
         groupAriaDescription: 'Ilmoitusryhmä',

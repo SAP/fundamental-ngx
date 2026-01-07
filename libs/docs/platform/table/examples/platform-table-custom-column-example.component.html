@@ -79,7 +79,20 @@
     <fdp-column name="index" key="index" [nonInteractive]="true">
         <fdp-table-header *fdpHeaderCellDef>Row index</fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item; as: exampleItemType; let i = rowIndex">
-            <span>Row index {{ i }}</span>
+            <fdp-split-menu-button
+                [menu]="menu1"
+                [buttonLabel]="label1"
+                [title]="label1"
+                type="standard"
+                title="Default behavior for split menu button"
+                menuTitle="More options"
+            >
+            </fdp-split-menu-button>
+            <fdp-menu #menu1 xPosition="after">
+                <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
+                <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
+                <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
+            </fdp-menu>
         </fdp-table-cell>
     </fdp-column>
 </fdp-table>

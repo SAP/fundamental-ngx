@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Settings',
-        searchLabel: 'Search'
+        searchLabel: 'Search',
+        backButtonLabel: 'Back'
     },
     platformSwitch: {
         ariaLabel: 'Switch input'
@@ -603,6 +604,12 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menu button'
+    },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
     },
     coreNotification: {
         groupHeaderTitle: 'Expand/Collapse',

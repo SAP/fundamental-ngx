@@ -5,14 +5,14 @@ import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } fr
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
 import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
-import { DocsService, LERNA_JSON, PACKAGE_JSON, Translations } from '@fundamental-ngx/docs/shared';
+import { CORE_PACKAGE_JSON, DocsService, PACKAGE_JSON, Translations } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 import { BehaviorSubject } from 'rxjs';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import lernaJson from '../../../lerna.json';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import packageJson from '../../../package.json';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import corePackageJson from '../../../libs/core/package.json';
 import { ROUTES as applicationRoutes } from './environments/app.routes';
 import { translations } from './environments/translations';
 
@@ -31,8 +31,8 @@ export const appConfig: ApplicationConfig = {
             useValue: packageJson
         },
         {
-            provide: LERNA_JSON,
-            useValue: lernaJson
+            provide: CORE_PACKAGE_JSON,
+            useValue: corePackageJson
         },
         {
             provide: FD_LANGUAGE,

@@ -1,0 +1,64 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col-md-6">
+            <ui5-label class="fd-margin--sm">Selection Mode:</ui5-label>
+            <ui5-select (ui5Change)="onSelectionModeChange($event)">
+                @for (mode of selectionModes(); track mode.value) {
+                <ui5-option [value]="mode.value" [selected]="mode.value === selectedMode()">
+                    {{ mode.label }}
+                </ui5-option>
+                }
+            </ui5-select>
+        </div>
+        <div class="fd-col-md-6">
+            @if (selectedItems().length > 0) {
+            <ui5-label class="fd-margin--sm">Selected Items:</ui5-label>
+            <ui5-text style="display: inline-flex">{{ selectedItems().join(', ') }}</ui5-text>
+            }
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-list
+                [selectionMode]="selectedMode()"
+                headerText="European Countries"
+                (ui5SelectionChange)="onSelectionChange($event)"
+                (ui5ItemDelete)="onItemDelete($event)"
+            >
+                @for (country of countries(); track country.name) {
+                <ui5-li [description]="'Capital: ' + country.capital" [additionalText]="country.population">
+                    {{ country.name }}
+                </ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-label class="fd-margin-bottom--sm">Mode Information:</ui5-label>
+            <div class="fd-padding--sm">
+                @switch (selectedMode()) { @case ('None') {
+                <ui5-text>No selection is possible. Items can only be clicked for navigation.</ui5-text>
+                } @case ('Single') {
+                <ui5-text>Only one item can be selected at a time.</ui5-text>
+                } @case ('SingleStart') {
+                <ui5-text
+                    >Only one item can be selected at a time using radio buttons placed at the beginning of the list
+                    item.</ui5-text
+                >
+                } @case ('SingleEnd') {
+                <ui5-text
+                    >Only one item can be selected at a time using radio buttons placed at the end of the list
+                    item.</ui5-text
+                >
+                } @case ('Multiple') {
+                <ui5-text>Multiple items can be selected using checkboxes.</ui5-text>
+                } @case ('Delete') {
+                <ui5-text>Items can be deleted using delete buttons. Click the delete button to remove items.</ui5-text>
+                } }
+            </div>
+        </div>
+    </div>
+</div>

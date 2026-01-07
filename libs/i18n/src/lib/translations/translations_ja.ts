@@ -605,6 +605,12 @@ export default {
     btpToolHeader: {
         menuButtonAriaLabel: 'メニューボタン'
     },
+    btpNavigation: {
+        expanderAriaLabel: 'expand/collapse sub-items',
+        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
+        overflowMenuAriaLabel: 'Additional Navigation Items',
+        snappedPopoverRoleDescription: 'Navigation List Tree'
+    },
     coreNotification: {
         groupHeaderTitle: '展開/圧縮',
         groupAriaDescription: '通知グループ',

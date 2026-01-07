@@ -1,0 +1,242 @@
+<div class="fd-layout-grid fd-layout-grid--no-gap">
+    <!-- Header Section -->
+    <div class="fd-layout-grid__item fd-layout-grid__item--col-12">
+        <div class="fd-section sap-padding-medium">
+            <h2 class="fd-section__title">UI5 Link Component Examples</h2>
+        </div>
+    </div>
+
+    <!-- Interactive Controls -->
+    <div class="fd-layout-grid__item fd-layout-grid__item--col-12">
+        <div class="controls-section sap-margin-bottom-medium">
+            <h3 class="sap-heading-4 sap-margin-bottom-small">Interactive Controls</h3>
+
+            <div class="sap-flex sap-flex-column sap-margin-bottom-medium sap-flex--justify-space-between">
+                <!-- Design Selection -->
+                <div class="sap-flex sap-flex-column sap-flex--gap-tiny sap-flex--align-items-center">
+                    <ui5-label class="sap-text sap-text-weight-bold">Design:</ui5-label>
+                    <div>
+                        <ui5-segmented-button (ui5SelectionChange)="onSegmentedButtonChange($event)">
+                            @for (designOption of ['Default', 'Subtle', 'Emphasized']; track designOption) {
+                            <ui5-segmented-button-item [selected]="design() === designOption">
+                                {{ designOption }}
+                            </ui5-segmented-button-item>
+                            }
+                        </ui5-segmented-button>
+                    </div>
+                </div>
+
+                <!-- Toggle Switches -->
+                <div class="sap-flex sap-flex-column sap-flex--gap-tiny sap-flex--align-items-center">
+                    <ui5-label class="sap-text sap-text-weight-bold">Toggle Options:</ui5-label>
+                    <div class="sap-flex sap-flex--align-items-center sap-flex--gap-tiny">
+                        <ui5-switch [checked]="disabled()" (ui5Change)="toggleDisabled()"> </ui5-switch>
+                        <ui5-label class="sap-text">Disabled</ui5-label>
+                    </div>
+
+                    <div class="sap-flex sap-flex--align-items-center sap-flex--gap-tiny">
+                        <ui5-switch [checked]="showIcons()" (ui5Change)="toggleIcons()"> </ui5-switch>
+                        <ui5-label class="sap-text">Show Icons</ui5-label>
+                    </div>
+                    <div class="sap-flex sap-flex--align-items-center sap-flex--gap-tiny">
+                        <ui5-switch [checked]="showTooltips()" (ui5Change)="toggleTooltips()"> </ui5-switch>
+                        <ui5-label class="sap-text">Show Tooltips</ui5-label>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <div class="sap-flex sap-flex-column sap-flex--align-items-center sap-flex--gap-tiny">
+                    <ui5-label class="sap-text sap-text-weight-bold">Actions:</ui5-label>
+                    <div>
+                        <ui5-button design="Transparent" (ui5Click)="resetDemo()"> Reset Demo </ui5-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Statistics -->
+            @if (clickCount() > 0) {
+            <div class="sap-flex sap-gap-small sap-flex-align-center sap-margin-top-small">
+                <span class="fd-tag"> Clicks: {{ clickCount() }} </span>
+                @if (lastClickedLink()) {
+                <span class="fd-tag fd-tag--success"> Last: {{ lastClickedLink() }} </span>
+                }
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Basic Link Types -->
+    <div class="fd-layout-grid__item fd-layout-grid__item--col-12 fd-layout-grid__item--lg-6">
+        <div class="example-section">
+            <h3 class="sap-heading-4 sap-margin-bottom-small">Link Design Types</h3>
+            <ui5-label class="sap-margin-bottom-small sap-text-color-neutral">
+                Different visual styles for various use cases
+            </ui5-label>
+
+            <div class="sap-flex sap-flex-column sap-gap-small">
+                @for (linkType of linkTypes(); track linkType.text) {
+                <div class="sap-flex sap-flex-column sap-flex--gap-tiny">
+                    <ui5-link
+                        [href]="linkType.href"
+                        [design]="getLinkDesign(linkType.text)"
+                        [disabled]="isLinkDisabled(linkType.text)"
+                        [target]="target()"
+                        [wrappingType]="wrappingType()"
+                        [interactiveAreaSize]="interactiveAreaSize()"
+                        [tooltip]="getTooltip(linkType.description)"
+                        (ui5Click)="onLinkClick(linkType.text, $event)"
+                    >
+                        {{ linkType.text }}
+                    </ui5-link>
+                    <span class="sap-text sap-text-body-small sap-text-color-neutral sap-margin-left-small">
+                        {{ linkType.description }}
+                    </span>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Links with Icons -->
+    <div class="fd-layout-grid__item fd-layout-grid__item--col-12 fd-layout-grid__item--lg-6">
+        <div class="example-section">
+            <h3 class="sap-heading-4 sap-margin-bottom-small">Links with Icons</h3>
+            <ui5-label class="sap-margin-bottom-small sap-text-color-neutral">
+                Enhanced links with start and end icons
+            </ui5-label>
+
+            <div class="sap-flex sap-flex-column sap-gap-small">
+                @for (link of sampleLinks(); track link.text) {
+                <div class="sap-flex sap-flex-column sap-flex--gap-tiny">
+                    <ui5-link
+                        [href]="link.href"
+                        [design]="currentDesign()"
+                        [disabled]="isDisabled()"
+                        [target]="link.href.startsWith('http') ? '_blank' : target()"
+                        [wrappingType]="wrappingType()"
+                        [interactiveAreaSize]="interactiveAreaSize()"
+                        [tooltip]="getTooltip(link.tooltip)"
+                        [icon]="getIcon(link.icon)"
+                        [endIcon]="getIcon(link.endIcon)"
+                        (ui5Click)="onLinkClick(link.text, $event)"
+                    >
+                        {{ link.text }}
+                    </ui5-link>
+                    <span class="sap-text sap-text-body-small sap-text-color-neutral sap-margin-left-small">
+                        {{ link.tooltip }}
+                    </span>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Long Text Wrapping Example -->
+    <div class="fd-layout-grid__item fd-layout-grid__item--col-12">
+        <div class="example-section">
+            <h3 class="sap-heading-4 sap-margin-bottom-small">Text Wrapping Behavior</h3>
+            <ui5-label class="sap-margin-bottom-small sap-text-color-neutral">
+                Demonstration of how links handle long text with different wrapping types
+            </ui5-label>
+
+            <div class="fd-layout-grid fd-layout-grid--no-gap sap-gap-medium">
+                <div
+                    class="fd-layout-grid__item fd-layout-grid__item--col-12 fd-layout-grid__item--md-6"
+                    style="max-width: 300px"
+                >
+                    <h4 class="sap-text sap-heading-5 sap-margin-bottom-tiny">Normal Wrapping</h4>
+                    <ui5-link
+                        href="#long-text-example"
+                        [design]="currentDesign()"
+                        [disabled]="isDisabled()"
+                        [target]="target()"
+                        wrappingType="Normal"
+                        [interactiveAreaSize]="interactiveAreaSize()"
+                        [tooltip]="getTooltip('Example of normal text wrapping behavior')"
+                        [icon]="getIcon('document-text')"
+                        (ui5Click)="onLinkClick('Long Text Normal', $event)"
+                    >
+                        This is a very long link text that demonstrates normal wrapping behavior when there is
+                        insufficient space in the container
+                    </ui5-link>
+                </div>
+
+                <div
+                    class="fd-layout-grid__item fd-layout-grid__item--col-12 fd-layout-grid__item--md-6"
+                    style="max-width: 300px"
+                >
+                    <h4 class="sap-text sap-heading-5 sap-margin-bottom-tiny">No Wrapping (Truncated)</h4>
+                    <ui5-link
+                        href="#long-text-example"
+                        [design]="currentDesign()"
+                        [disabled]="isDisabled()"
+                        [target]="target()"
+                        wrappingType="None"
+                        [interactiveAreaSize]="interactiveAreaSize()"
+                        [tooltip]="getTooltip('Example of text truncation when wrapping is disabled')"
+                        [icon]="getIcon('document-text')"
+                        (ui5Click)="onLinkClick('Long Text None', $event)"
+                    >
+                        This is a very long link text that demonstrates truncation behavior when wrapping is disabled
+                    </ui5-link>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Examples -->
+    <div class="fd-layout-grid__item fd-layout-grid__item--col-12">
+        <div class="example-section">
+            <h3 class="sap-heading-4 sap-margin-bottom-small">Accessibility Features</h3>
+            <ui5-label class="sap-margin-bottom-small sap-text-color-neutral">
+                Links with proper accessibility attributes and roles
+            </ui5-label>
+
+            <div class="sap-flex sap-flex-column sap-gap-medium">
+                <div class="sap-flex sap-flex-column sap-gap-small">
+                    <h4 class="sap-text sap-heading-6">Link with Custom Accessible Name</h4>
+                    <ui5-link
+                        href="#accessibility"
+                        [design]="currentDesign()"
+                        [disabled]="isDisabled()"
+                        accessibleName="Navigate to accessibility documentation"
+                        [tooltip]="getTooltip('Link with custom accessible name for screen readers')"
+                        (ui5Click)="onLinkClick('Accessible Link', $event)"
+                    >
+                        Learn More
+                    </ui5-link>
+                </div>
+
+                <div class="sap-flex sap-flex-column sap-gap-small">
+                    <h4 class="sap-text sap-heading-6">Button Role Link (Non-Navigation)</h4>
+                    <ui5-link
+                        [design]="currentDesign()"
+                        [disabled]="isDisabled()"
+                        accessibleRole="Button"
+                        accessibleName="Trigger action without navigation"
+                        [tooltip]="getTooltip('Link with button role for non-navigation actions')"
+                        (ui5Click)="onLinkClick('Button Role Link', $event)"
+                    >
+                        Trigger Action
+                    </ui5-link>
+                </div>
+
+                <div class="sap-flex sap-flex-column sap-gap-small">
+                    <h4 class="sap-text sap-heading-6">Link with Description</h4>
+                    <ui5-link
+                        href="#description"
+                        [design]="currentDesign()"
+                        [disabled]="isDisabled()"
+                        accessibleDescription="Opens detailed documentation in a new window"
+                        [tooltip]="getTooltip('Link with accessible description')"
+                        target="_blank"
+                        [icon]="getIcon('sys-help-2')"
+                        (ui5Click)="onLinkClick('Link with Description', $event)"
+                    >
+                        Help Documentation
+                    </ui5-link>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

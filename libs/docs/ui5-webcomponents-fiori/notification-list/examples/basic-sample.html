@@ -1,0 +1,12 @@
+<ui5-notification-list (ui5ItemClick)="onItemClick($event)" (ui5ItemClose)="onItemClose($event)">
+    @for (notification of notifications(); track notification.id) {
+    <ui5-li-notification
+        [titleText]="notification.title"
+        [read]="notification.read"
+        [showClose]="notification.showClose"
+    >
+        <ui5-avatar slot="avatar" icon="product" size="XS" />
+        {{ notification.description }}
+    </ui5-li-notification>
+    }
+</ui5-notification-list>

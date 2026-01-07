@@ -1,0 +1,463 @@
+# Test workflow for release actions (dry run)
+# Run locally with: act -W .github/actions/test-release-actions-workflow.yml
+# Note: Use Medium or Large image when prompted by act (Micro doesn't include git)
+# Or use the local script: ./.github/actions/test-release-actions.sh
+
+name: Test Release Actions (Dry Run)
+
+on:
+    workflow_dispatch:
+        inputs:
+            test-scenario:
+                description: 'Test scenario to run'
+                required: false
+                default: 'all'
+                type: choice
+                options:
+                    - all
+                    - bump-version
+                    - release-tags
+                    - changelog
+                    - npm-pack
+                    - nx-release
+                    - nx-release-publish
+                    - hotfix
+    push:
+        paths:
+            - '.github/actions/bump-version/**'
+            - '.github/actions/release-tags/**'
+            - '.github/actions/generate-conventional-release-notes/**'
+
+jobs:
+    test-bump-version:
+        name: Test version bumping
+        runs-on: ubuntu-latest
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'bump-version' || github.event_name == 'push' }}
+        outputs:
+            newVersion: ${{ steps.test-bump.outputs.newVersion }}
+            releaseTag: ${{ steps.test-bump.outputs.releaseTag }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Get current version
+              id: current
+              run: |
+                  VERSION=$(node -e "console.log(require('./package.json').version)")
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+                  echo "📦 Current version: $VERSION"
+
+            - name: Test bump-version (manual mode)
+              id: test-bump
+              uses: ./.github/actions/bump-version
+              with:
+                  isManual: 'true'
+                  isPrerelease: 'false'
+                  isHotfix: 'false'
+
+            - name: Verify bump-version output
+              run: |
+                  echo "✅ Bump version action outputs:"
+                  echo "  New version: ${{ steps.test-bump.outputs.newVersion }}"
+                  echo "  Is prerelease: ${{ steps.test-bump.outputs.isPrerelease }}"
+                  echo "  Release tag: ${{ steps.test-bump.outputs.releaseTag }}"
+
+                  if [ -z "${{ steps.test-bump.outputs.newVersion }}" ]; then
+                      echo "❌ newVersion output is empty"
+                      exit 1
+                  fi
+
+            - name: Test bump-version (prerelease mode)
+              id: test-prerelease
+              uses: ./.github/actions/bump-version
+              with:
+                  isManual: 'false'
+                  isPrerelease: 'true'
+                  isHotfix: 'false'
+
+            - name: Verify prerelease output
+              run: |
+                  echo "✅ Prerelease bump outputs:"
+                  echo "  New version: ${{ steps.test-prerelease.outputs.newVersion }}"
+                  echo "  Is prerelease: ${{ steps.test-prerelease.outputs.isPrerelease }}"
+                  echo "  Release tag: ${{ steps.test-prerelease.outputs.releaseTag }}"
+
+    test-release-tags:
+        name: Test release tag calculation
+        runs-on: ubuntu-latest
+        needs: test-bump-version
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'release-tags' || github.event_name == 'push' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Test release-tags (latest)
+              id: test-latest
+              uses: ./.github/actions/release-tags
+              with:
+                  bumpedVersion: ${{ needs.test-bump-version.outputs.newVersion }}
+                  bumpTag: 'latest'
+
+            - name: Verify latest tags
+              run: |
+                  echo "✅ Latest release tags:"
+                  echo "  GitHub tag: ${{ steps.test-latest.outputs.gh }}"
+                  echo "  NPM tag: ${{ steps.test-latest.outputs.npm }}"
+                  echo "  Main needs sync: ${{ steps.test-latest.outputs.mainNeedsSync }}"
+
+                  if [ -z "${{ steps.test-latest.outputs.npm }}" ]; then
+                      echo "❌ npm output is empty"
+                      exit 1
+                  fi
+
+            - name: Test release-tags (prerelease)
+              id: test-prerelease-tags
+              uses: ./.github/actions/release-tags
+              with:
+                  bumpedVersion: '0.99.0-rc.0'
+                  bumpTag: 'prerelease'
+
+            - name: Verify prerelease tags
+              run: |
+                  echo "✅ Prerelease tags:"
+                  echo "  GitHub tag: ${{ steps.test-prerelease-tags.outputs.gh }}"
+                  echo "  NPM tag: ${{ steps.test-prerelease-tags.outputs.npm }}"
+                  echo "  Main needs sync: ${{ steps.test-prerelease-tags.outputs.mainNeedsSync }}"
+
+            - name: Test release-tags (hotfix)
+              id: test-hotfix-tags
+              uses: ./.github/actions/release-tags
+              with:
+                  bumpedVersion: '0.40.999'
+                  bumpTag: 'hotfix'
+
+            - name: Verify hotfix tags
+              run: |
+                  echo "✅ Hotfix tags:"
+                  echo "  GitHub tag: ${{ steps.test-hotfix-tags.outputs.gh }}"
+                  echo "  NPM tag: ${{ steps.test-hotfix-tags.outputs.npm }}"
+                  echo "  Main needs sync: ${{ steps.test-hotfix-tags.outputs.mainNeedsSync }}"
+
+    test-changelog:
+        name: Test changelog generation
+        runs-on: ubuntu-latest
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'changelog' || github.event_name == 'push' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Test generate-conventional-release-notes
+              id: test-changelog
+              uses: ./.github/actions/generate-conventional-release-notes
+              continue-on-error: true
+
+            - name: Verify changelog output
+              run: |
+                  if [ -n "${{ steps.test-changelog.outputs.generatedReleaseNotes }}" ]; then
+                      echo "✅ Changelog generated successfully"
+                      echo "Preview (first 500 chars):"
+                      echo "${{ steps.test-changelog.outputs.generatedReleaseNotes }}" | head -c 500
+                      echo ""
+                  else
+                      echo "⚠️  No changelog generated (may be no commits since last tag)"
+                  fi
+
+    test-nx-release:
+        name: Test NX Release
+        runs-on: ubuntu-latest
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'nx-release' || github.event_name == 'push' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Verify NX Release configuration
+              run: |
+                  echo "📋 Checking nx.json release configuration..."
+
+                  # Validate release config exists
+                  if ! node -e "const nx = require('./nx.json'); if (!nx.release) process.exit(1);"; then
+                      echo "❌ No release configuration found in nx.json"
+                      exit 1
+                  fi
+
+                  echo "✅ Release configuration found"
+
+                  # Print configuration
+                  echo ""
+                  echo "Release configuration:"
+                  node -e "console.log(JSON.stringify(require('./nx.json').release, null, 2));"
+
+            - name: Test NX Release version (dry-run)
+              run: |
+                  echo "🧪 Testing nx release version command..."
+                  echo ""
+
+                  # Test dry run (suppress deprecation warnings from NX dependencies)
+                  NODE_OPTIONS="--no-deprecation" npx nx release version --dry-run --verbose || {
+                      echo "⚠️  Dry run completed (may show no changes if no commits since last tag)"
+                  }
+
+            - name: Test NX Release with specific version (dry-run)
+              run: |
+                  echo "🧪 Testing nx release with specific version..."
+                  echo ""
+
+                  # Test with a specific version (suppress deprecation warnings)
+                  NODE_OPTIONS="--no-deprecation" npx nx release version 999.999.999 --dry-run || {
+                      echo "ℹ️  This is expected to show what would happen"
+                  }
+
+            - name: Verify release projects configuration
+              run: |
+                  echo "📦 Verifying release projects..."
+
+                  # Get list of projects from nx.json
+                  PROJECTS=$(node -e "console.log(require('./nx.json').release.projects.join(','));")
+                  echo "Projects configured for release: $PROJECTS"
+
+                  # Verify each project exists
+                  IFS=',' read -ra PROJECT_ARRAY <<< "$PROJECTS"
+                  for project in "${PROJECT_ARRAY[@]}"; do
+                      if [ -d "libs/$project" ]; then
+                          echo "  ✓ libs/$project exists"
+                      else
+                          echo "  ✗ libs/$project not found"
+                          exit 1
+                      fi
+                  done
+
+                  echo ""
+                  echo "✅ All release projects exist"
+
+    test-nx-release-publish:
+        name: Test NX Release Publish
+        runs-on: ubuntu-latest
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'nx-release-publish' || github.event_name == 'push' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Build a sample package for testing
+              run: |
+                  echo "🔨 Building core package for publish test..."
+                  npx nx build core --skip-nx-cache
+
+            - name: Test NX Release publish (dry-run)
+              run: |
+                  echo "🧪 Testing nx release publish command..."
+                  echo ""
+
+                  # Test publish dry-run (suppress deprecation warnings)
+                  NODE_OPTIONS="--no-deprecation" npx nx release publish --dry-run || {
+                      echo "ℹ️  Publish dry-run completed"
+                  }
+
+            - name: Verify publish would use correct registry
+              run: |
+                  echo "🔍 Verifying npm configuration..."
+
+                  # Check default registry
+                  REGISTRY=$(npm config get registry)
+                  echo "Current registry: $REGISTRY"
+
+                  if [[ "$REGISTRY" == *"npmjs.org"* ]]; then
+                      echo "✅ Registry is correctly configured for npmjs.org"
+                  else
+                      echo "⚠️  Registry is: $REGISTRY"
+                  fi
+
+    test-hotfix-script:
+        name: Test Hotfix Release Script
+        runs-on: ubuntu-latest
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'hotfix' || github.event_name == 'push' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Verify hotfix script exists
+              run: |
+                  echo "📋 Checking hotfix release script..."
+
+                  if [ ! -f "scripts/release-hotfix.js" ]; then
+                      echo "❌ scripts/release-hotfix.js not found"
+                      exit 1
+                  fi
+
+                  echo "✅ Hotfix script exists"
+
+            - name: Test hotfix version calculation
+              run: |
+                  echo "🧮 Testing hotfix version calculation..."
+
+                  # Get current version
+                  CURRENT_VERSION=$(node -e "console.log(require('./.github/actions/helpers/current-version'));")
+                  echo "Current version: $CURRENT_VERSION"
+
+                  # Check if it's a prerelease
+                  IS_PRERELEASE=$(node -e "const semver = require('semver'); const v = require('./.github/actions/helpers/current-version'); console.log(semver.prerelease(v) ? 'true' : 'false');")
+
+                  if [ "$IS_PRERELEASE" = "true" ]; then
+                      echo "⚠️  Current version is a prerelease"
+                      echo "Hotfix releases can only be created from stable versions (expected)"
+                      exit 0
+                  fi
+
+                  # Calculate next hotfix version
+                  NEXT_VERSION=$(node -e "const semver = require('semver'); const v = require('./.github/actions/helpers/current-version'); console.log(semver.inc(v, 'patch'));")
+                  echo "Next hotfix version would be: $NEXT_VERSION"
+
+                  if [ -z "$NEXT_VERSION" ]; then
+                      echo "❌ Could not calculate next version"
+                      exit 1
+                  fi
+
+                  echo "✅ Version calculation successful"
+
+            - name: Verify script uses NX Release
+              run: |
+                  echo "🔍 Verifying script uses NX Release commands..."
+
+                  if grep -q "nx release version" scripts/release-hotfix.js; then
+                      echo "✅ Script uses 'nx release version' command"
+                  else
+                      echo "❌ Script does not use 'nx release version' command"
+                      echo "Please update the script to use NX Release"
+                      exit 1
+                  fi
+
+            - name: Check for required dependencies
+              run: |
+                  echo "📦 Checking script dependencies..."
+
+                  # Verify semver is available
+                  node -e "require('semver');" && echo "✅ semver available" || echo "❌ semver missing"
+
+                  # Verify helper exists
+                  node -e "require('./.github/actions/helpers/current-version');" && echo "✅ current-version helper available" || echo "❌ current-version helper missing"
+
+    test-npm-pack:
+        name: Test NPM package dry run
+        runs-on: ubuntu-latest
+        if: ${{ github.event.inputs.test-scenario == 'all' || github.event.inputs.test-scenario == 'npm-pack' || github.event_name == 'push' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+
+            - name: Build core library
+              run: npx nx build core --skip-nx-cache
+
+            - name: Test npm pack (dry run)
+              run: |
+                  cd dist/libs/core
+                  echo "📦 Testing NPM pack for @fundamental-ngx/core..."
+                  echo ""
+
+                  # Dry run - shows what would be published without creating tarball
+                  npm pack --dry-run
+
+                  echo ""
+                  echo "✅ Dry run completed - nothing was published"
+
+            - name: Verify package.json
+              run: |
+                  cd dist/libs/core
+                  echo "📋 Package information:"
+                  node -e "
+                      const pkg = require('./package.json');
+                      console.log('  Name:', pkg.name);
+                      console.log('  Version:', pkg.version);
+                      console.log('  Main:', pkg.main);
+                      console.log('  Module:', pkg.module);
+                      console.log('  Types:', pkg.types);
+                  "
+
+            - name: Check for required files
+              run: |
+                  cd dist/libs/core
+                  echo "📁 Checking required files..."
+
+                  REQUIRED_FILES=("package.json" "README.md" "LICENSE.txt")
+                  ALL_FOUND=true
+
+                  for file in "${REQUIRED_FILES[@]}"; do
+                      if [ -f "$file" ]; then
+                          echo "  ✓ $file"
+                      else
+                          echo "  ✗ $file (missing)"
+                          ALL_FOUND=false
+                      fi
+                  done
+
+                  if [ "$ALL_FOUND" = false ]; then
+                      echo ""
+                      echo "❌ Some required files are missing"
+                      exit 1
+                  fi
+
+                  echo ""
+                  echo "✅ All required files present"
+
+    summary:
+        name: Test Summary
+        runs-on: ubuntu-latest
+        needs:
+            [
+                test-bump-version,
+                test-release-tags,
+                test-changelog,
+                test-nx-release,
+                test-nx-release-publish,
+                test-hotfix-script,
+                test-npm-pack
+            ]
+        if: always()
+        steps:
+            - name: Generate summary
+              run: |
+                  echo "# Release Actions Test Summary" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "| Test | Status |" >> $GITHUB_STEP_SUMMARY
+                  echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+                  echo "| Bump Version | ${{ needs.test-bump-version.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "| Release Tags | ${{ needs.test-release-tags.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "| Changelog | ${{ needs.test-changelog.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "| NX Release Version | ${{ needs.test-nx-release.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "| NX Release Publish | ${{ needs.test-nx-release-publish.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "| Hotfix Script | ${{ needs.test-hotfix-script.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "| NPM Pack | ${{ needs.test-npm-pack.result }} |" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "New version: ${{ needs.test-bump-version.outputs.newVersion }}" >> $GITHUB_STEP_SUMMARY
+                  echo "Release tag: ${{ needs.test-bump-version.outputs.releaseTag }}" >> $GITHUB_STEP_SUMMARY

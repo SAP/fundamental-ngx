@@ -3,3 +3,7 @@
 .fd-bar__left:has(.fd-bar__element > *:is(:empty, [style*='display: none'])) {
     gap: 0;
 }
+
+.fd-bar--clear {
+    --fdBar_Shadow: none;
+}

@@ -6,7 +6,11 @@ export class StackblitzDependencies {
         '@fundamental-ngx/i18n',
         '@fundamental-ngx/cx',
         '@fundamental-ngx/btp',
-        '@fundamental-ngx/datetime-adapter'
+        '@fundamental-ngx/datetime-adapter',
+        '@fundamental-ngx/ui5-webcomponents-base',
+        '@fundamental-ngx/ui5-webcomponents',
+        '@fundamental-ngx/ui5-webcomponents-fiori',
+        '@fundamental-ngx/ui5-webcomponents-ai'
     ];
 
     private static _ngDependencies: string[] = [
@@ -36,21 +40,38 @@ export class StackblitzDependencies {
         'tslib',
         'typescript',
         'fast-deep-equal',
-        'lodash-es',
         'zone.js',
-        '@types/google.visualization'
+        '@types/google.visualization',
+        '@ui5/webcomponents',
+        '@ui5/webcomponents-ai',
+        '@ui5/webcomponents-base',
+        '@ui5/webcomponents-fiori',
+        '@ui5/webcomponents-icons',
+        '@ui5/webcomponents-icons-business-suite',
+        '@ui5/webcomponents-icons-tnt',
+        '@ui5/webcomponents-theming'
     ];
 
-    static getDependencies(packageInfo: Record<string, any>, lernaInfo: Record<string, any>): Record<string, any> {
-        const _dependencies: Record<string, any> = {};
+    /**
+     * Get dependencies for StackBlitz project
+     * @param packageInfo Root package.json
+     * @param version Monorepo version (from NX Release)
+     * @returns Dependencies object
+     */
+    static getDependencies(packageInfo: Record<string, any>, version: string): Record<string, string> {
+        const _dependencies: Record<string, string> = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = lernaInfo.version));
+        this._libDependencies.forEach((libDep): void => {
+            _dependencies[libDep] = version;
+        });
 
-        [...this._dependencies, ...this._ngDependencies].forEach((dep) => {
+        [...this._dependencies, ...this._ngDependencies].forEach((dep): void => {
             if (packageInfo.dependencies && packageInfo.dependencies[dep]) {
                 _dependencies[dep] = packageInfo.dependencies[dep];
             } else if (packageInfo.devDependencies && packageInfo.devDependencies[dep]) {
                 _dependencies[dep] = packageInfo.devDependencies[dep];
+            } else if (packageInfo.peerDependencies && packageInfo.peerDependencies[dep]) {
+                _dependencies[dep] = packageInfo.peerDependencies[dep];
             } else {
                 throw new Error('Dependency ' + dep + ' not found in package.json');
             }

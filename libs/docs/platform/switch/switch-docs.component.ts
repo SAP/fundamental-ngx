@@ -16,6 +16,7 @@ import { SwitchFormsExampleComponent } from './examples/switch-form-example/swit
 import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
 
 const switchSizeHtml = 'switch-sizes-example/switch-sizes-example.component.html';
+const switchSizeTs = 'switch-sizes-example/switch-sizes-example.component.ts';
 const switchDisableHtml = 'disabled-switch-example/disabled-switch-example.component.html';
 const switchDisableTs = 'disabled-switch-example/disabled-switch-example.component.ts';
 const switchSemanticHtml = 'semantic-switch-example/semantic-switch-example.component.html';
@@ -47,6 +48,12 @@ export class SwitchDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(switchSizeHtml),
             fileName: 'switch-sizes-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(switchSizeTs),
+            fileName: 'switch-sizes-example',
+            component: 'SwitchSizesExampleComponent'
         }
     ];
 

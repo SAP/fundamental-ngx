@@ -1,0 +1,54 @@
+<div class="fd-margin-top--sm">
+    <ui5-button (ui5Click)="openDefaultDialog()" class="fd-margin-end--sm">None (Default)</ui5-button>
+    <ui5-button (ui5Click)="openPositiveDialog()" class="fd-margin-end--sm">Positive</ui5-button>
+    <ui5-button (ui5Click)="openCriticalDialog()" class="fd-margin-end--sm">Critical</ui5-button>
+    <ui5-button (ui5Click)="openNegativeDialog()">Negative</ui5-button>
+</div>
+
+<!-- Default State -->
+<ui5-dialog headerText="Default Dialog" state="None" [open]="isDefaultDialogOpen()">
+    <div class="fd-margin--sm">
+        <p>This is a dialog with <strong>None</strong> state (default).</p>
+        <p class="fd-margin-top--sm">Use this for general information or neutral dialogs.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeDefaultDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
+
+<!-- Success State -->
+<ui5-dialog headerText="Success!" state="Positive" [open]="isPositiveDialogOpen()">
+    <div class="fd-margin--sm">
+        <p><strong>Positive</strong> state dialog</p>
+        <p class="fd-margin-top--sm">Operation completed successfully! Your changes have been saved.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closePositiveDialog()">OK</ui5-button>
+    </div>
+</ui5-dialog>
+
+<!-- Critical State -->
+<ui5-dialog headerText="Warning" state="Critical" [open]="isCriticalDialogOpen()">
+    <div class="fd-margin--sm">
+        <p><strong>Critical</strong> state dialog</p>
+        <p class="fd-margin-top--sm">This action may have unintended consequences. Please review before proceeding.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; gap: 0.5rem; padding: 0.5rem">
+        <ui5-button design="Transparent" (ui5Click)="closeCriticalDialog()">Cancel</ui5-button>
+        <ui5-button design="Attention" (ui5Click)="closeCriticalDialog()">Proceed</ui5-button>
+    </div>
+</ui5-dialog>
+
+<!-- Negative State -->
+<ui5-dialog headerText="Error" state="Negative" [open]="isNegativeDialogOpen()">
+    <div class="fd-margin--sm">
+        <p><strong>Negative</strong> state dialog</p>
+        <p class="fd-margin-top--sm">
+            An error occurred while processing your request. Please try again or contact support if the problem
+            persists.
+        </p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Negative" (ui5Click)="closeNegativeDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>

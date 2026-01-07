@@ -1,0 +1,51 @@
+<div class="fd-container fd-padding--none">
+    <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+        <div class="fd-row">
+            <div class="fd-col fd-col--6">
+                <ui5-label for="product-select">Select Product:</ui5-label>
+                <ui5-select
+                    id="product-select"
+                    formControlName="product"
+                    [required]="true"
+                    [valueState]="orderForm.get('product')?.invalid && orderForm.get('product')?.touched ? 'Negative' : 'None'"
+                    class="fd-margin-top--xs"
+                >
+                    <ui5-option value="">Choose a product...</ui5-option>
+                    @for (product of products(); track product.id) {
+                    <ui5-option [value]="product.id">{{ product.name }} - ${{ product.price }}</ui5-option>
+                    }
+                </ui5-select>
+            </div>
+
+            <div class="fd-col fd-col--6" [style]="{ 'display': 'flex', 'flex-direction': 'column' }">
+                <ui5-label for="quantity-input">Quantity:</ui5-label>
+                <ui5-input
+                    id="quantity-input"
+                    type="Number"
+                    formControlName="quantity"
+                    [valueState]="orderForm.get('quantity')?.invalid && orderForm.get('quantity')?.touched ? 'Negative' : 'None'"
+                    class="fd-margin-top--xs"
+                />
+            </div>
+        </div>
+
+        <div class="fd-row fd-margin-top--md">
+            <div class="fd-col">
+                <ui5-button
+                    type="Submit"
+                    [design]="orderForm.valid ? 'Emphasized' : 'Default'"
+                    [disabled]="!orderForm.valid"
+                >
+                    Submit Order
+                </ui5-button>
+                <ui5-button (ui5Click)="resetForm()" class="fd-margin-begin--sm">Reset</ui5-button>
+                <span
+                    class="fd-margin-begin--sm"
+                    [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}"
+                >
+                    Form status: {{ isFormValid() }}
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

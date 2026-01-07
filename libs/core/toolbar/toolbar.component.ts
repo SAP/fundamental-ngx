@@ -188,7 +188,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     @HostBinding('attr.role')
-    private readonly _role = 'toolbar';
+    protected readonly _role = 'toolbar';
 
     /** @hidden */
     overflowItems$: Observable<ToolbarItem[]>;

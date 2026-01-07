@@ -1,0 +1,51 @@
+<fd-docs-section-title id="basic" componentName="range-slider"> Basic Range Slider </fd-docs-section-title>
+<description>
+    The Range Slider allows users to select a value range by dragging two handles along a track. The
+    <code>startValue</code> and <code>endValue</code> properties define the current range selection, while
+    <code>min</code> and <code>max</code> define the overall boundaries. Use the <code>ui5Change</code> event to respond
+    when the user finishes adjusting the range, or <code>ui5Input</code> for real-time updates during dragging.
+</description>
+<component-example>
+    <ui5-doc-range-slider-basic-sample />
+</component-example>
+<code-example [exampleFiles]="basicExample()" />
+
+<separator />
+
+<fd-docs-section-title id="step-tickmarks" componentName="range-slider">
+    Step Size and Tickmarks
+</fd-docs-section-title>
+<description>
+    Control the granularity of value selection using the <code>step</code> property. Enable visual tickmarks with
+    <code>showTickmarks</code>. Additionally, you can display labels at intervals using <code>labelInterval</code>. This
+    helps users understand the scale and make precise selections.
+</description>
+<component-example>
+    <ui5-doc-range-slider-step-tickmarks-sample />
+</component-example>
+<code-example [exampleFiles]="stepTickmarksExample()" />
+
+<separator />
+
+<fd-docs-section-title id="tooltip" componentName="range-slider"> Tooltips and Editable Values </fd-docs-section-title>
+<description>
+    Display tooltips showing current values by setting <code>showTooltip</code> to true. For enhanced accessibility and
+    usability, enable <code>editableTooltip</code> to allow users to directly input values into the tooltip fields. This
+    is particularly useful for precise value entry.
+</description>
+<component-example>
+    <ui5-doc-range-slider-tooltip-sample />
+</component-example>
+<code-example [exampleFiles]="tooltipExample()" />
+
+<separator />
+
+<fd-docs-section-title id="disabled" componentName="range-slider"> Disabled State </fd-docs-section-title>
+<description>
+    The Range Slider can be disabled by setting the <code>disabled</code> property to true. In this state, users cannot
+    interact with the slider, and it provides visual feedback that the control is not available.
+</description>
+<component-example>
+    <ui5-doc-range-slider-disabled-sample />
+</component-example>
+<code-example [exampleFiles]="disabledExample()" />

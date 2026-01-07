@@ -36,7 +36,7 @@ import {
     forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 
 import {
     AutoCompleteEvent,
@@ -461,6 +461,9 @@ export class ComboboxComponent<T = any>
     }
 
     /** @hidden */
+    _itemMousedown = false;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -512,6 +515,8 @@ export class ComboboxComponent<T = any>
         if (this.mobile) {
             this._setUpMobileMode();
         }
+
+        this._setupValueSynchronization();
     }
 
     /** @hidden */
@@ -565,16 +570,25 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            this._itemMousedown = true;
             event.preventDefault();
             this.onMenuClickHandler(value);
         }
     }
 
     /** @hidden */
-    onMenuClickHandler(value: any): void {
+    onItemFocused(value: any): void {
+        if (!this._itemMousedown && !this.mobile) {
+            this.onMenuClickHandler(value, false);
+        }
+        this._itemMousedown = false;
+    }
+
+    /** @hidden */
+    onMenuClickHandler(value: any, shouldClosePopover = true): void {
         if (value || value === 0) {
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
-            this._handleClickActions(value);
+            this._handleClickActions(value, shouldClosePopover);
             this.filterHighlight = false;
             this.itemClicked.emit({ item: value, index });
         }
@@ -832,8 +846,8 @@ export class ComboboxComponent<T = any>
     }
 
     /** @hidden */
-    private _handleClickActions(term: any): void {
-        if (this.closeOnSelect) {
+    private _handleClickActions(term: any, shouldClosePopover = true): void {
+        if (this.closeOnSelect && shouldClosePopover) {
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
@@ -846,7 +860,9 @@ export class ComboboxComponent<T = any>
                 this._propagateChange();
             }
         }
-        this.handleSearchTermChange();
+        if (shouldClosePopover) {
+            this.handleSearchTermChange();
+        }
     }
 
     /** @hidden */
@@ -908,5 +924,34 @@ export class ComboboxComponent<T = any>
                 injector
             }
         );
+    }
+
+    /** @hidden */
+    private _setupValueSynchronization(): void {
+        if (!this.searchInputElement) {
+            return;
+        }
+
+        // Listen for focus events to detect programmatic changes
+        this._subscriptions.add(
+            fromEvent(this.searchInputElement.nativeElement, 'focus').subscribe(() => {
+                this._syncDomValueToModel();
+            })
+        );
+    }
+
+    /** @hidden */
+    private _syncDomValueToModel(): void {
+        if (!this.searchInputElement) {
+            return;
+        }
+
+        const domValue = this.searchInputElement.nativeElement.value;
+        if (domValue !== this.inputText) {
+            // Update the model and trigger change detection
+            this.inputText = domValue;
+            this.handleSearchTermChange();
+            this._cdRef.detectChanges();
+        }
     }
 }
