@@ -247,6 +247,95 @@ export class MyComponent {
 }
 ```
 
+#### Injection Token Pattern
+
+**Use Injection Tokens for component composition and content queries** to create loose coupling between parent and child components.
+
+**The Pattern:**
+
+1. Create a token representing a component role (not implementation)
+2. Register components/directives under that token using `providers`
+3. Query for the token (not the concrete class) using `contentChild()` or `contentChildren()`
+
+**Example - Card Title:**
+
+```typescript
+// ========== token.ts ==========
+export const FD_CARD_TITLE = new InjectionToken<CardTitleDirective>('FdCardTitleDirective');
+
+// ========== card-title.directive.ts ==========
+@Directive({
+    selector: '[fd-card-title]',
+    providers: [
+        {
+            provide: FD_CARD_TITLE,           // The token (contract)
+            useExisting: CardTitleDirective    // This implementation
+        }
+    ]
+})
+export class CardTitleDirective {
+    id = input('fd-card-title-id-0');
+}
+
+// ========== card-header-main.component.ts (parent) ==========
+export class CardMainHeaderComponent {
+    // Query by TOKEN, not by class - enables loose coupling
+    readonly _cardTitle = contentChild(FD_CARD_TITLE);
+}
+
+// ========== Usage ==========
+<fd-card-main-header>
+    <h2 fd-card-title>My Title</h2>  <!-- Parent finds this via token -->
+</fd-card-main-header>
+```
+
+**Why use this pattern:**
+
+- **Decoupling:** Parent doesn't depend on concrete implementation classes
+- **Flexibility:** Multiple implementations can fulfill the same role without changing parent code
+- **Testability:** Easy to mock by providing alternative implementations under the same token
+- **Extensibility:** New directive variants can register under existing tokens
+- **Type safety:** Tokens can be typed for better IDE support
+
+**Provider options:**
+
+- **`useExisting`:** Reference an already-instantiated component/directive (most common for directives)
+- **`useClass`:** Create a new instance of the provided class
+- **`useValue`:** Use a specific value (object, string, number)
+- **`useFactory`:** Use a factory function to create the value
+
+**When to use this pattern:**
+
+- Component libraries where child elements need to be discovered by parent containers
+- Content projection scenarios with communication between projected content and host
+- Creating reusable component compositions with swappable implementations
+- Building extensible component architectures
+
+**Example - Form Control abstraction:**
+
+```typescript
+// Multiple controls register under the same token
+export const FORM_CONTROL = new InjectionToken('FormControl');
+
+@Component({
+    selector: 'app-text-input',
+    providers: [{ provide: FORM_CONTROL, useExisting: TextInputComponent }]
+})
+export class TextInputComponent {}
+
+@Component({
+    selector: 'app-checkbox',
+    providers: [{ provide: FORM_CONTROL, useExisting: CheckboxComponent }]
+})
+export class CheckboxComponent {}
+
+// Parent works with ANY control type
+@Component({ selector: 'app-form-field' })
+export class FormFieldComponent {
+    readonly control = contentChild(FORM_CONTROL); // Works with both!
+}
+```
+
 ### State Management
 
 - Use signals for local component state
@@ -446,6 +535,104 @@ export class ValidationComponent {
 - Synchronizing multiple related signals that can't be expressed as computed values
 - Updating signals based on imperative operations (DOM measurements, third-party library callbacks)
 - Complex state updates that require multiple signal writes based on conditions
+
+### BehaviorSubject + combineLatest vs Computed Signals
+
+**Replace RxJS state management patterns with computed signals.** When you see `BehaviorSubject` combined with `combineLatest` for deriving state, prefer `computed()` signals instead.
+
+**When to migrate from RxJS to signals:**
+
+- You have `BehaviorSubject` instances that represent component state
+- You're using `combineLatest` to derive values from multiple sources
+- You need manual subscription management with `takeUntil`/`unsubscribe`
+- The derived state is synchronous (no async operations like HTTP calls)
+
+**When to keep RxJS:**
+
+- Working with truly async streams (HTTP requests, WebSockets, timers)
+- Need RxJS operators for complex async workflows (debounce, throttle, retry)
+- Interfacing with existing RxJS-based APIs
+
+**Example - Price calculator with discount:**
+
+```typescript
+// ❌ Before - using BehaviorSubject + combineLatest
+export class PriceCalculatorComponent implements OnDestroy {
+    private readonly basePrice$ = new BehaviorSubject<number>(100);
+    private readonly quantity$ = new BehaviorSubject<number>(1);
+    private readonly discountPercent$ = new BehaviorSubject<number>(0);
+    private readonly destroy$ = new Subject<void>();
+
+    readonly totalPrice$ = combineLatest([this.basePrice$, this.quantity$, this.discountPercent$]).pipe(
+        map(([price, qty, discount]) => {
+            const subtotal = price * qty;
+            return subtotal - (subtotal * discount) / 100;
+        }),
+        takeUntil(this.destroy$)
+    );
+
+    updatePrice(price: number): void {
+        this.basePrice$.next(price);
+    }
+
+    updateQuantity(qty: number): void {
+        this.quantity$.next(qty);
+    }
+
+    updateDiscount(discount: number): void {
+        this.discountPercent$.next(discount);
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+}
+
+// ✅ After - using signals + computed()
+export class PriceCalculatorComponent {
+    readonly basePrice = signal(100);
+    readonly quantity = signal(1);
+    readonly discountPercent = signal(0);
+
+    // Automatically recomputes when any dependency changes
+    readonly totalPrice = computed(() => {
+        const subtotal = this.basePrice() * this.quantity();
+        return subtotal - (subtotal * this.discountPercent()) / 100;
+    });
+
+    protected updatePrice(price: number): void {
+        this.basePrice.set(price);
+    }
+
+    protected updateQuantity(qty: number): void {
+        this.quantity.set(qty);
+    }
+
+    protected updateDiscount(discount: number): void {
+        this.discountPercent.set(discount);
+    }
+
+    // No manual cleanup needed!
+}
+```
+
+**Benefits of the signal approach:**
+
+- **Less boilerplate:** No `BehaviorSubject`, `combineLatest`, `pipe`, `map`, or `takeUntil` needed
+- **Automatic cleanup:** No `ngOnDestroy` or subscription management required
+- **Better type inference:** Computed signals provide stronger typing without explicit annotations
+- **Simpler mental model:** Direct value access with `()` instead of observable streams
+- **Better performance:** Computed values are cached and only recalculate when dependencies change
+- **Easier testing:** Test signals directly without subscribing or using async patterns
+
+**Migration pattern:**
+
+1. Replace `BehaviorSubject<T>` with `signal<T>(initialValue)`
+2. Replace `combineLatest([...]).pipe(map(...))` with `computed(() => ...)`
+3. Replace `.next(value)` with `.set(value)` or `.update(fn)`
+4. Remove `takeUntil`, `destroy$`, and `ngOnDestroy` cleanup
+5. Remove `$` suffix from variable names (signals don't need the observable convention)
 
 ### Signal-Based Change Detection
 
