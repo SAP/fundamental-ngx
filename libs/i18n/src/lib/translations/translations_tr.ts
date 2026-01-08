@@ -375,7 +375,8 @@ export default {
         searchInputLabel: 'Ara',
         synchronizeButtonTitle: 'Eşitle',
         searchSuggestionMessage: '{count} öneri bulundu.',
-        searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin'
+        searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',

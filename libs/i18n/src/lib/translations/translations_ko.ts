@@ -373,7 +373,8 @@ export default {
         searchInputLabel: '검색',
         synchronizeButtonTitle: '동기화',
         searchSuggestionMessage: '{count}개의 제안을 찾았습니다.',
-        searchSuggestionNavigateMessage: '위쪽 및 아래쪽 화살표를 사용하여 탐색'
+        searchSuggestionNavigateMessage: '위쪽 및 아래쪽 화살표를 사용하여 탐색',
+        deleteButtonLabel: 'Delete'
     },
     platformSettingsGenerator: {
         settingsLabel: '설정',

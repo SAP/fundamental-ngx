@@ -59,6 +59,10 @@ export class TextComponent {
     @Input()
     isCollapsed = true;
 
+    /** @hidden */
+    @Input()
+    subline = false;
+
     /**
      * Event, notifying about collapse state changes
      */
