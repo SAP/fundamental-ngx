@@ -193,7 +193,9 @@ export class HtmlSanitizer {
             return null;
         }
         if (!iframeDoc?.body) {
-            iframeDoc.write('<body></body>');
+            // Instead of using the deprecated .write method, we directly create and append a body element.
+            const body = iframeDoc.createElement('body');
+            iframeDoc.appendChild(body);
         }
 
         return { iframe, iframeDoc };

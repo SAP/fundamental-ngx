@@ -1,13 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnInit,
-    SimpleChanges,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { HtmlSanitizer } from './utils/html-sanitizer';
@@ -15,19 +6,34 @@ import { HtmlSanitizer } from './utils/html-sanitizer';
 export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_search';
 
 /**
- * Formatted-text allowed tags, only this tags will render in component, other will skip;
+ * Formatted-text component renders sanitized HTML content with configurable link behavior.
  *
- * ``` selector: fd-formatted-text ```
+ * This component accepts HTML text input and renders it after sanitization.
+ * Only safe HTML tags are preserved; potentially dangerous content is stripped.
  *
+ * @example
  * ```html
- * <fd-formatted-text [htmlText]="..."></fd-formatted-text>
+ * <fd-formatted-text
+ *   [htmlText]="'<p>Hello <a href=\'#\'>World</a></p>'"
+ *   [convertedLinksDefaultTarget]="'_blank'"
+ *   [height]="'200px'">
+ * </fd-formatted-text>
  * ```
+ *
+ * @selector fd-formatted-text
+ * @exportAs fd-formatted-text
  */
-
 @Component({
     selector: 'fd-formatted-text',
     exportAs: 'fd-formatted-text',
     template: ``,
+    host: {
+        '[class.fd-formatted-text-with-height]': 'height()',
+        '[class.fd-formatted-text-with-width]': 'width()',
+        '[style.height]': 'height()',
+        '[style.width]': 'width()',
+        '[innerHTML]': 'formattedText()'
+    },
     styles: [
         `
             fd-formatted-text {
@@ -42,65 +48,53 @@ export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_se
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormattedTextComponent implements OnInit, OnChanges {
+export class FormattedTextComponent {
     /**
-     * Text for formatted render.
+     * HTML text content to be formatted and rendered.
      */
-    @Input()
-    htmlText: string;
+    readonly htmlText = input<string>();
+
     /**
-     * Target attribute for included links.
+     * Target attribute for anchor tags in the formatted content.
+     * @default '_blank'
      */
-    @Input()
-    convertedLinksDefaultTarget: LinkTargetType = '_blank';
+    readonly convertedLinksDefaultTarget = input<LinkTargetType>('_blank');
+
     /**
      * Height style for component.
      */
-    @Input()
-    @HostBinding('class.fd-formatted-text-with-height')
-    @HostBinding('style.height')
-    height?: string;
+    readonly height = input<string>();
+
     /**
      * Width style for component.
      */
-    @Input()
-    @HostBinding('class.fd-formatted-text-with-width')
-    @HostBinding('style.width')
-    width?: string;
+    readonly width = input<string>();
 
-    /** @hidden */
-    @HostBinding('innerHTML')
-    formattedText: SafeHtml = '';
+    /**
+     * Computed formatted and sanitized HTML content.
+     * Automatically updates when htmlText or convertedLinksDefaultTarget changes.
+     * @hidden
+     */
+    protected readonly formattedText = computed<SafeHtml>(() => {
+        const rawText = this.htmlText();
 
-    /** @hidden */
-    private _htmlSanitizer!: HtmlSanitizer;
-
-    /** @hidden */
-    constructor(private readonly domSanitizer: DomSanitizer) {
-        this._htmlSanitizer = new HtmlSanitizer();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.render();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('htmlText' in changes) {
-            this.render();
+        // Early return for empty content
+        if (!rawText || !rawText.trim()) {
+            return '';
         }
-    }
+
+        this._htmlSanitizer.extendAttrs({
+            target: this.convertedLinksDefaultTarget()
+        });
+        const text = this._htmlSanitizer.sanitizeHtml(rawText);
+        return this._domSanitizer.bypassSecurityTrustHtml(text.trim());
+    });
 
     /** @hidden */
-    private render(): void {
-        this._htmlSanitizer.extendAttrs({
-            target: this.convertedLinksDefaultTarget
-        });
-        const text = this._htmlSanitizer.sanitizeHtml(this.htmlText ?? '');
-        this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text.trim());
-    }
+    private readonly _htmlSanitizer = new HtmlSanitizer();
+
+    /** @hidden */
+    private readonly _domSanitizer = inject(DomSanitizer);
 }
