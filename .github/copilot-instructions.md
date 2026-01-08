@@ -247,6 +247,228 @@ export class MyComponent {
 }
 ```
 
+### Dependency Injection Patterns
+
+Angular's dependency injection system provides powerful patterns for component composition and configuration. This section covers two key patterns using `InjectionToken`.
+
+#### Pattern 1: Contextual Defaults with InjectionTokens
+
+Use `InjectionToken` to provide contextual defaults for child components. This pattern allows parent components to influence default values without directly manipulating child component inputs.
+
+**When to use:**
+
+- Parent components need to provide default configurations to unknown child components
+- Setting framework-level defaults (themes, sizes, behaviors)
+- Avoiding tight coupling between parent and child components
+- Providing optional configuration that children can override
+
+**Example - Providing default title size in dialogs:**
+
+```typescript
+// title.component.ts - Define the token
+import { InjectionToken } from '@angular/core';
+
+export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
+
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
+
+@Component({
+    selector: '[fd-title]'
+    /* ... */
+})
+export class TitleComponent {
+    readonly headerSize = input<HeaderSizes | null>(null);
+
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
+
+    constructor() {
+        effect(() => {
+            // Priority: explicit input > injected default > element tag name
+            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._detectSize();
+            this._applySize(size);
+        });
+    }
+}
+
+// dialog-header.component.ts - Provide the default
+@Directive({
+    providers: [
+        {
+            provide: DEFAULT_TITLE_SIZE,
+            useValue: 5
+        }
+    ]
+})
+export class DialogHeaderBase {
+    // Any fd-title within this directive will default to size 5
+}
+```
+
+**Benefits:**
+
+- ✅ No need to query and manipulate child components
+- ✅ Type-safe dependency injection
+- ✅ Works naturally with signal inputs
+- ✅ Testable (mock the token in tests)
+- ✅ Loosely coupled (parent doesn't need to know about child implementation)
+- ✅ Children can opt-out by providing explicit values
+
+**Best practices:**
+
+- Always use `{ optional: true }` when injecting contextual defaults
+- Document the token with JSDoc describing its purpose
+- Export tokens from the component file for reusability
+- Use descriptive token names (e.g., `DEFAULT_TITLE_SIZE` not `TITLE_CONFIG`)
+
+**Why Not @ContentChild with Signal Inputs?**
+
+When migrating components to signals, you may encounter situations where a parent component needs to set default values for child component inputs. The old pattern of querying and manipulating children **no longer works with signal inputs**.
+
+**❌ This pattern breaks with signal inputs:**
+
+```typescript
+// DOES NOT WORK - signal inputs are read-only from outside
+@ContentChild(TitleComponent)
+set title(titleComponent: TitleComponent) {
+    if (titleComponent) {
+        // ❌ Can't directly set signal inputs from outside the component
+        titleComponent.headerSize = 5; // This is read-only!
+
+        // ❌ ComponentRef doesn't exist on queried components
+        const componentRef = (titleComponent as any)._componentRef; // undefined!
+        componentRef.setInput('headerSize', 5); // Crashes!
+    }
+}
+```
+
+**Why it doesn't work:**
+
+1. **Signal inputs are read-only** - `input()` creates a read-only signal that can only be set by Angular's template binding system, not by external code
+2. **No ComponentRef on queries** - `@ContentChild` and `@ViewChild` return component instances, not `ComponentRef` objects. `ComponentRef.setInput()` only works on dynamically created components
+3. **Breaks encapsulation** - Parent should not reach into child internals and manipulate state
+4. **Fragile** - Relies on internal Angular mechanisms that may change
+
+**✅ Use InjectionToken instead:**
+
+```typescript
+// Define token in child component file
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
+
+// Parent provides the default
+@Component({
+    providers: [{ provide: DEFAULT_TITLE_SIZE, useValue: 5 }]
+})
+export class DialogHeaderComponent {}
+
+// Child optionally injects and uses it
+@Component({
+    /* ... */
+})
+export class TitleComponent {
+    readonly headerSize = input<HeaderSizes | null>(null);
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
+
+    constructor() {
+        effect(() => {
+            // Priority: explicit input > injected default > fallback
+            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._fallback();
+            this._applySize(size);
+        });
+    }
+}
+```
+
+**Key principle:** With signal inputs, the **child component is in control** of its own state. The parent provides context via DI, and the child decides what to do with it.
+
+#### Pattern 2: Component Composition with InjectionTokens
+
+Use `InjectionToken` for component composition and content queries to create loose coupling between parent and child components. This pattern allows querying for component roles rather than concrete implementations.
+
+**The Pattern:**
+
+1. Create a token representing a component role (not implementation)
+2. Register components/directives under that token using `providers`
+3. Query for the token (not the concrete class) using `contentChild()` or `contentChildren()`
+
+**Example - Card Title:**
+
+```typescript
+// ========== token.ts ==========
+export const FD_CARD_TITLE = new InjectionToken<CardTitleDirective>('FdCardTitleDirective');
+
+// ========== card-title.directive.ts ==========
+@Directive({
+    selector: '[fd-card-title]',
+    providers: [
+        {
+            provide: FD_CARD_TITLE,           // The token (contract)
+            useExisting: CardTitleDirective    // This implementation
+        }
+    ]
+})
+export class CardTitleDirective {
+    id = input('fd-card-title-id-0');
+}
+
+// ========== card-header-main.component.ts (parent) ==========
+export class CardMainHeaderComponent {
+    // Query by TOKEN, not by class - enables loose coupling
+    readonly _cardTitle = contentChild(FD_CARD_TITLE);
+}
+
+// ========== Usage ==========
+<fd-card-main-header>
+    <h2 fd-card-title>My Title</h2>  <!-- Parent finds this via token -->
+</fd-card-main-header>
+```
+
+**Why use this pattern:**
+
+- **Decoupling:** Parent doesn't depend on concrete implementation classes
+- **Flexibility:** Multiple implementations can fulfill the same role without changing parent code
+- **Testability:** Easy to mock by providing alternative implementations under the same token
+- **Extensibility:** New directive variants can register under existing tokens
+- **Type safety:** Tokens can be typed for better IDE support
+
+**Provider options:**
+
+- **`useExisting`:** Reference an already-instantiated component/directive (most common for directives)
+- **`useClass`:** Create a new instance of the provided class
+- **`useValue`:** Use a specific value (object, string, number)
+- **`useFactory`:** Use a factory function to create the value
+
+**When to use this pattern:**
+
+- Component libraries where child elements need to be discovered by parent containers
+- Content projection scenarios with communication between projected content and host
+- Creating reusable component compositions with swappable implementations
+- Building extensible component architectures
+
+**Example - Form Control abstraction:**
+
+```typescript
+// Multiple controls register under the same token
+export const FORM_CONTROL = new InjectionToken('FormControl');
+
+@Component({
+    selector: 'app-text-input',
+    providers: [{ provide: FORM_CONTROL, useExisting: TextInputComponent }]
+})
+export class TextInputComponent {}
+
+@Component({
+    selector: 'app-checkbox',
+    providers: [{ provide: FORM_CONTROL, useExisting: CheckboxComponent }]
+})
+export class CheckboxComponent {}
+
+// Parent works with ANY control type
+@Component({ selector: 'app-form-field' })
+export class FormFieldComponent {
+    readonly control = contentChild(FORM_CONTROL); // Works with both!
+}
+```
+
 ### State Management
 
 - Use signals for local component state
@@ -446,6 +668,104 @@ export class ValidationComponent {
 - Synchronizing multiple related signals that can't be expressed as computed values
 - Updating signals based on imperative operations (DOM measurements, third-party library callbacks)
 - Complex state updates that require multiple signal writes based on conditions
+
+### BehaviorSubject + combineLatest vs Computed Signals
+
+**Replace RxJS state management patterns with computed signals.** When you see `BehaviorSubject` combined with `combineLatest` for deriving state, prefer `computed()` signals instead.
+
+**When to migrate from RxJS to signals:**
+
+- You have `BehaviorSubject` instances that represent component state
+- You're using `combineLatest` to derive values from multiple sources
+- You need manual subscription management with `takeUntil`/`unsubscribe`
+- The derived state is synchronous (no async operations like HTTP calls)
+
+**When to keep RxJS:**
+
+- Working with truly async streams (HTTP requests, WebSockets, timers)
+- Need RxJS operators for complex async workflows (debounce, throttle, retry)
+- Interfacing with existing RxJS-based APIs
+
+**Example - Price calculator with discount:**
+
+```typescript
+// ❌ Before - using BehaviorSubject + combineLatest
+export class PriceCalculatorComponent implements OnDestroy {
+    private readonly basePrice$ = new BehaviorSubject<number>(100);
+    private readonly quantity$ = new BehaviorSubject<number>(1);
+    private readonly discountPercent$ = new BehaviorSubject<number>(0);
+    private readonly destroy$ = new Subject<void>();
+
+    readonly totalPrice$ = combineLatest([this.basePrice$, this.quantity$, this.discountPercent$]).pipe(
+        map(([price, qty, discount]) => {
+            const subtotal = price * qty;
+            return subtotal - (subtotal * discount) / 100;
+        }),
+        takeUntil(this.destroy$)
+    );
+
+    updatePrice(price: number): void {
+        this.basePrice$.next(price);
+    }
+
+    updateQuantity(qty: number): void {
+        this.quantity$.next(qty);
+    }
+
+    updateDiscount(discount: number): void {
+        this.discountPercent$.next(discount);
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+}
+
+// ✅ After - using signals + computed()
+export class PriceCalculatorComponent {
+    readonly basePrice = signal(100);
+    readonly quantity = signal(1);
+    readonly discountPercent = signal(0);
+
+    // Automatically recomputes when any dependency changes
+    readonly totalPrice = computed(() => {
+        const subtotal = this.basePrice() * this.quantity();
+        return subtotal - (subtotal * this.discountPercent()) / 100;
+    });
+
+    protected updatePrice(price: number): void {
+        this.basePrice.set(price);
+    }
+
+    protected updateQuantity(qty: number): void {
+        this.quantity.set(qty);
+    }
+
+    protected updateDiscount(discount: number): void {
+        this.discountPercent.set(discount);
+    }
+
+    // No manual cleanup needed!
+}
+```
+
+**Benefits of the signal approach:**
+
+- **Less boilerplate:** No `BehaviorSubject`, `combineLatest`, `pipe`, `map`, or `takeUntil` needed
+- **Automatic cleanup:** No `ngOnDestroy` or subscription management required
+- **Better type inference:** Computed signals provide stronger typing without explicit annotations
+- **Simpler mental model:** Direct value access with `()` instead of observable streams
+- **Better performance:** Computed values are cached and only recalculate when dependencies change
+- **Easier testing:** Test signals directly without subscribing or using async patterns
+
+**Migration pattern:**
+
+1. Replace `BehaviorSubject<T>` with `signal<T>(initialValue)`
+2. Replace `combineLatest([...]).pipe(map(...))` with `computed(() => ...)`
+3. Replace `.next(value)` with `.set(value)` or `.update(fn)`
+4. Remove `takeUntil`, `destroy$`, and `ngOnDestroy` cleanup
+5. Remove `$` suffix from variable names (signals don't need the observable convention)
 
 ### Signal-Based Change Detection
 
