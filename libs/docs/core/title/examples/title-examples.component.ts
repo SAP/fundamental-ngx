@@ -6,7 +6,9 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     templateUrl: './title-elision-example.component.html',
     imports: [TitleComponent]
 })
-export class TitleElisionExampleComponent {}
+export class TitleElisionExampleComponent {
+    protected readonly longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor';
+}
 
 @Component({
     selector: 'fd-title-semantic-example',
@@ -27,4 +29,6 @@ export class TitleVisualExampleComponent {}
     templateUrl: './title-wrapping-example.component.html',
     imports: [TitleComponent]
 })
-export class TitleWrappingExampleComponent {}
+export class TitleWrappingExampleComponent {
+    protected readonly longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor';
+}
