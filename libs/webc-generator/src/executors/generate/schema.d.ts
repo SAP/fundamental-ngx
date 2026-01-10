@@ -5,4 +5,5 @@ export interface GenerateExecutorSchema {
     packageName?: string;
     tsConfig: string;
     skipComponents?: boolean;
+    dependencyCemFiles?: string[];
 }
