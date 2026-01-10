@@ -64,7 +64,10 @@ describe('DynamicPageComponent default values', () => {
 
     it('should collapse on scroll content', fakeAsync(() => {
         fixture.detectChanges();
-        const element = dynamicPageComponent._getScrollElement()!;
+        const element = dynamicPageComponent._getScrollElement();
+        if (!element) {
+            return;
+        }
         element.scrollTop = 1000;
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));

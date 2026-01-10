@@ -18,7 +18,10 @@
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": false,
         "allowSyntheticDefaultImports": true,
-        "target": "es2022"
+        "target": "es2023",
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2023"]
     },
     "angularCompilerOptions": {
         "strictInjectionParameters": true,
