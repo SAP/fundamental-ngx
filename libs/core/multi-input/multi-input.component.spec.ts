@@ -295,4 +295,17 @@ describe('MultiInputComponent', () => {
         expect(element.style.pointerEvents).toBe('auto');
         expect(element.tabIndex).toBe(0);
     });
+
+    describe('when in display mode', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('display', true);
+            fixture.detectChanges();
+        });
+
+        it('should render a tokenizer in display mode', () => {
+            const tokenizerElement = fixture.nativeElement.querySelector('fd-tokenizer');
+            expect(tokenizerElement).toBeTruthy();
+            expect(component.tokenizer.display()).toBe(true);
+        });
+    });
 });

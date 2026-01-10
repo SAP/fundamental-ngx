@@ -77,7 +77,7 @@ export class CvaDirective<T = any>
     }
 
     /**
-     * readOnly Value to Mark component read only
+     * readOnly value to mark component read only
      */
     @Input()
     readonly: boolean;
