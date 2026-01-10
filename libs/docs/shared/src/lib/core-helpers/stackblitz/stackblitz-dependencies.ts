@@ -14,7 +14,6 @@ export class StackblitzDependencies {
     ];
 
     private static _ngDependencies: string[] = [
-        '@angular/animations',
         '@angular/cdk',
         '@angular/core',
         '@angular/compiler',

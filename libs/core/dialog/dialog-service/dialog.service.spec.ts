@@ -1,7 +1,5 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from '../dialog.module';
 import { DialogService } from './dialog.service';
 
@@ -34,9 +32,7 @@ describe('DialogService', () => {
     let fixture: ComponentFixture<DialogServiceTestComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [OverlayModule, NoopAnimationsModule, TemplateTestComponent, DialogServiceTestComponent]
-        }).compileComponents();
+        await TestBed.configureTestingModule({}).compileComponents();
     });
 
     beforeEach(() => {
@@ -63,7 +59,17 @@ describe('DialogService', () => {
 
         dialogRef.dismiss();
         fixture.detectChanges();
-        tick(200); // Wait for the closing animation or processing
+        tick();
+
+        // Manually trigger animationend since CSS animations don't fire in jsdom
+        const container = document.querySelector('.fd-dialog-container');
+        if (container) {
+            const event = new Event('animationend', { bubbles: true });
+            Object.defineProperty(event, 'target', { value: container, enumerable: true });
+            container.dispatchEvent(event);
+        }
+
+        tick();
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
@@ -78,7 +84,17 @@ describe('DialogService', () => {
 
         dialogRef.dismiss();
         fixture.detectChanges();
-        tick(200); // Wait for the closing animation or processing
+        tick();
+
+        // Manually trigger animationend since CSS animations don't fire in jsdom
+        const container = document.querySelector('.fd-dialog-container');
+        if (container) {
+            const event = new Event('animationend', { bubbles: true });
+            Object.defineProperty(event, 'target', { value: container, enumerable: true });
+            container.dispatchEvent(event);
+        }
+
+        tick();
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
@@ -91,7 +107,17 @@ describe('DialogService', () => {
         expect(service.hasOpenDialogs()).toBe(true);
         service.dismissAll();
         fixture.detectChanges();
-        tick(); // Wait for the closing animation or processing
+        tick();
+
+        // Manually trigger animationend for all containers since CSS animations don't fire in jsdom
+        const containers = document.querySelectorAll('.fd-dialog-container');
+        containers.forEach((container) => {
+            const event = new Event('animationend', { bubbles: true });
+            Object.defineProperty(event, 'target', { value: container, enumerable: true });
+            container.dispatchEvent(event);
+        });
+
+        tick();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
 });

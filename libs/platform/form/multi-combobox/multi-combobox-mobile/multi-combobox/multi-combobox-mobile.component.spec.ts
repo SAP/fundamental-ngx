@@ -1,9 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { MULTICOMBOBOX_COMPONENT } from '../../multi-combobox.interface';
 import { MultiComboboxComponent } from '../../multi-combobox/multi-combobox.component';
@@ -35,7 +33,6 @@ describe('MultiComboboxMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule, MultiComboboxMobileComponent],
             providers: [
                 DynamicComponentService,
                 {
