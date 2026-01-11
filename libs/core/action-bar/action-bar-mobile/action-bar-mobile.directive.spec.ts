@@ -1,28 +1,23 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActionBarModule } from '../action-bar.module';
+import { Component, ElementRef, viewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActionBarMobileDirective } from './action-bar-mobile.directive';
 
 @Component({
     template: ` <div #directiveElement fd-action-bar-mobile>Action Bar Mobile Test Text</div> `,
-    standalone: true,
-    imports: [ActionBarModule]
+    imports: [ActionBarMobileDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement')
-    ref: ElementRef;
+    readonly ref = viewChild.required<ElementRef>('directiveElement');
 }
 
-describe('ActionBarDescription', () => {
+describe('ActionBarMobileDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestComponent]
-        }).compileComponents();
-    }));
-
-    beforeEach(() => {
+        });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -30,5 +25,9 @@ describe('ActionBarDescription', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should assign class', () => {
+        expect(component.ref().nativeElement.classList.contains('fd-action-bar__mobile')).toBe(true);
     });
 });

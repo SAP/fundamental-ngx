@@ -1,28 +1,23 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActionBarModule } from '../action-bar.module';
+import { Component, ElementRef, viewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActionBarTitleComponent } from './action-bar-title.component';
 
 @Component({
     template: `<div #componentElement fd-action-bar-title>Action Bar Title Test Text</div> `,
-    standalone: true,
-    imports: [ActionBarModule]
+    imports: [ActionBarTitleComponent]
 })
 class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef })
-    ref: ElementRef;
+    readonly ref = viewChild.required('componentElement', { read: ElementRef });
 }
 
 describe('ActionBarTitleComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestComponent]
-        }).compileComponents();
-    }));
-
-    beforeEach(() => {
+        });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -33,6 +28,6 @@ describe('ActionBarTitleComponent', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-action-bar__title');
+        expect(component.ref().nativeElement.className).toBe('fd-action-bar__title');
     });
 });

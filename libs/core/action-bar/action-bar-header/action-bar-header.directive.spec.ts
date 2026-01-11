@@ -1,29 +1,23 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActionBarModule } from '../action-bar.module';
+import { Component, ElementRef, viewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActionBarHeaderDirective } from './action-bar-header.directive';
 
 @Component({
     template: ` <div #directiveElement fd-action-bar-header>Action Bar Header Test Text</div> `,
-    standalone: true,
-    imports: [ActionBarModule]
+    imports: [ActionBarHeaderDirective]
 })
 class TestComponent {
-    @ViewChild('directiveElement')
-    ref: ElementRef;
+    readonly ref = viewChild.required<ElementRef>('directiveElement');
 }
 
 describe('ActionBarHeaderDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestComponent]
-        }).compileComponents();
-    }));
-
-    beforeEach(() => {
+        });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -34,6 +28,6 @@ describe('ActionBarHeaderDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-action-bar__header');
+        expect(component.ref().nativeElement.className).toBe('fd-action-bar__header');
     });
 });
