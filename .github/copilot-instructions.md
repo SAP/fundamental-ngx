@@ -1,7 +1,7 @@
 <!--
 Document: Angular 20+ Development Guidelines for Fundamental NGX
-Last Updated: January 9, 2026
-Version: 2.1
+Last Updated: January 11, 2026
+Version: 2.2
 Purpose: Comprehensive guide for AI agents and developers working with Angular 20+ in NX monorepo
 -->
 
@@ -477,7 +477,7 @@ Follow strict member ordering as enforced by `@typescript-eslint/member-ordering
     - `input()` signal inputs
     - `output()` signal outputs
 
-3. **Other instance fields**:
+3. **Other instance fields** (in order of visibility):
     - Public instance fields
     - Protected instance fields
     - Private instance fields
@@ -506,16 +506,40 @@ export class MyExample {
     readonly minuteStep = input<number>(1);
     readonly itemSelected = output<string>();
 
-    // 3. Other instance fields
+    // 3. Other instance fields - PUBLIC first
     activeView: string = 'default';
 
+    // 4. PROTECTED fields after public
     protected items: string[] = [];
 
+    // 5. PRIVATE fields last
     private _cache: Map<string, any>;
 }
 ```
 
-**Important**: Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties to comply with member-ordering rules (as shown in the example above).
+**Critical member ordering rules:**
+
+1. Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint
+2. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties
+3. **Protected members MUST come before private members** - this is enforced by `@typescript-eslint/member-ordering`
+4. Order: public → protected → private (within each category)
+
+**Common mistake to avoid:**
+
+```typescript
+// ❌ WRONG - protected after private causes lint error
+export class MyComponent {
+    private readonly _service = inject(MyService);
+    protected readonly value = computed(() => this._service.getValue()); // ERROR!
+}
+
+// ✅ CORRECT - protected before private
+export class MyComponent {
+    protected readonly value = computed(() => this._service.getValue());
+
+    private readonly _service = inject(MyService);
+}
+```
 
 ---
 
