@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -11,13 +10,6 @@ import {
 @Component({
     selector: 'app-action-bar-header',
     templateUrl: './action-bar-header.component.html',
-    imports: [
-        DocPageComponent,
-        HeaderComponent,
-        MessageStripComponent,
-        DescriptionComponent,
-        ImportComponent,
-        HeaderTabsComponent
-    ]
+    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ActionBarHeaderComponent {}

@@ -15,7 +15,6 @@ import { Directive } from '@angular/core';
     selector: '[fd-action-bar-header]',
     host: {
         class: 'fd-action-bar__header'
-    },
-    standalone: true
+    }
 })
 export class ActionBarHeaderDirective {}

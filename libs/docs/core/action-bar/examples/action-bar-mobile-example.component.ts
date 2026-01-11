@@ -1,35 +1,54 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { AsyncPipe } from '@angular/common';
+import { Component, computed, inject, viewChild } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
+import {
+    ActionBarActionsDirective,
+    ActionBarBackDirective,
+    ActionBarComponent,
+    ActionBarDescriptionDirective,
+    ActionBarHeaderDirective,
+    ActionBarMobileDirective,
+    ActionBarTitleComponent
+} from '@fundamental-ngx/core/action-bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { MenuModule } from '@fundamental-ngx/core/menu';
+import {
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-action-bar-mobile-example',
     templateUrl: './action-bar-mobile-example.component.html',
-    imports: [ActionBarModule, ButtonComponent, MenuModule, AsyncPipe]
+    imports: [
+        ActionBarMobileDirective,
+        ActionBarComponent,
+        ActionBarHeaderDirective,
+        ActionBarBackDirective,
+        ActionBarTitleComponent,
+        ActionBarActionsDirective,
+        ActionBarDescriptionDirective,
+        ButtonComponent,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuTriggerDirective
+    ]
 })
-export class ActionBarMobileExampleComponent implements OnInit {
-    @ViewChild('menu')
-    menu: MenuComponent;
+export class ActionBarMobileExampleComponent {
+    protected readonly menu = viewChild.required<MenuComponent>('menu');
 
-    navigationArrow$: Observable<string>;
+    protected readonly navigationArrow = computed(() =>
+        this._isRtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
 
-    constructor(private _rtlService: RtlService) {}
+    private readonly _rtlService = inject(RtlService);
+    private readonly _isRtl = toSignal(this._rtlService.rtl, { initialValue: false });
 
-    ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
-        );
-    }
-
-    closeMenu(): void {
-        this.menu.close();
+    protected closeMenu(): void {
+        this.menu().close();
     }
 }

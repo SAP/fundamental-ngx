@@ -1,28 +1,23 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActionBarModule } from './action-bar.module';
+import { Component, ElementRef, viewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActionBarComponent } from './action-bar.component';
 
 @Component({
     template: ` <div #componentElement fd-action-bar>Action Bar Parent Test Text</div> `,
-    standalone: true,
-    imports: [ActionBarModule]
+    imports: [ActionBarComponent]
 })
 class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef })
-    ref: ElementRef;
+    readonly ref = viewChild.required('componentElement', { read: ElementRef });
 }
 
-describe('Action Bar Parent Component', () => {
+describe('ActionBarComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestComponent]
-        }).compileComponents();
-    }));
-
-    beforeEach(() => {
+        });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -33,6 +28,6 @@ describe('Action Bar Parent Component', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-action-bar');
+        expect(component.ref().nativeElement.className).toBe('fd-action-bar');
     });
 });
