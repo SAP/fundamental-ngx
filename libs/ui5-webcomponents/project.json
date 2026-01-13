@@ -11,8 +11,7 @@
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=ui5-webcomponents --verbose",
             "dependsOn": [
-                "ui5-webcomponents-base:build",
-                "^prepare"
+                "ui5-webcomponents-base:build"
             ]
         },
         "compile-typedoc": {
