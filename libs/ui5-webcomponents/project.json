@@ -3,11 +3,21 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "prefix": "ui5",
-    "tags": ["type:lib", "scope:ui5"],
+    "tags": [
+        "type:lib",
+        "scope:ui5"
+    ],
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=ui5-webcomponents --verbose",
-            "dependsOn": ["^prepare"]
+            "options": {
+                "env": {
+                    "FD_ENV_VERSION_PLACEHOLDER": "{env.FD_ENV_VERSION_PLACEHOLDER}"
+                }
+            },
+            "dependsOn": [
+                "^prepare"
+            ]
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
@@ -15,7 +25,9 @@
                 "outputPath": "libs/docs/typedoc/ui5-webcomponents",
                 "tsConfig": "libs/ui5-webcomponents/tsconfig.typedoc.json"
             },
-            "outputs": ["{options.outputPath}"]
+            "outputs": [
+                "{options.outputPath}"
+            ]
         },
         "generate": {
             "executor": "@fundamental-ngx/webc-generator:generate",
@@ -28,11 +40,19 @@
                 "skipComponents": false,
                 "_cacheBust": "2025-10-08-generate-utils"
             },
-            "outputs": ["{projectRoot}/index.ts", "{projectRoot}/**/index.ts", "{projectRoot}/types", "{projectRoot}/utils", "{options.outputPath}"]
+            "outputs": [
+                "{projectRoot}/index.ts",
+                "{projectRoot}/**/index.ts",
+                "{projectRoot}/types",
+                "{projectRoot}/utils",
+                "{options.outputPath}"
+            ]
         },
         "build": {
             "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "outputs": [
+                "{workspaceRoot}/dist/{projectRoot}"
+            ],
             "options": {
                 "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.json",
                 "project": "libs/ui5-webcomponents/ng-package.json"
@@ -42,16 +62,23 @@
                     "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.prod.json"
                 }
             },
-            "dependsOn": ["generate", "ui5-webcomponents-base:build"],
+            "dependsOn": [
+                "generate",
+                "ui5-webcomponents-base:build"
+            ],
             "defaultConfiguration": "production"
         },
         "test": {
             "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+            ],
             "options": {
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
     },
-    "implicitDependencies": ["ui5-webcomponents-base"]
+    "implicitDependencies": [
+        "ui5-webcomponents-base"
+    ]
 }
