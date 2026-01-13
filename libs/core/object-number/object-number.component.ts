@@ -1,14 +1,6 @@
 import { DecimalPipe } from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
-    ViewEncapsulation
-} from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -17,93 +9,67 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     templateUrl: './object-number.component.html',
     styleUrl: './object-number.component.scss',
     host: {
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
-        '[attr.aria-label]': 'ariaLabel'
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[class]': '_cssClass()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DecimalPipe]
 })
-export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {
+export class ObjectNumberComponent {
     /**
      * Numerical value of the object number.
      */
-    @Input()
-    number: number;
+    readonly number = input<number | undefined>(undefined);
 
     /**
      * Number of decimal places to show
      */
-    @Input()
-    decimal = 0;
+    readonly decimal = input(0);
 
     /** Sets unit of measure displayed. */
-    @Input()
-    unit: string;
+    readonly unit = input<string | undefined>(undefined);
 
     /** Set the value to true to display the object number in bold text */
-    @Input()
-    emphasized = false;
+    readonly emphasized = input(false);
 
     /** Set the value to true to display the object number in large text */
-    @Input()
-    large = false;
+    readonly large = input(false);
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
-    @Input()
-    status: ObjectStatus;
+    readonly status = input<ObjectStatus | undefined>(undefined);
 
     /** User's custom classes */
-    @Input()
-    class: string;
+    readonly class = input<string>('');
 
     /** Id of the element that labels object number. */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
+    readonly ariaLabelledBy = input<Nullable<string>>();
 
     /** Aria label for the object number. */
-    @Input()
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel = input<Nullable<string>>();
 
-    /** @hidden */
-    _numberPipeConfig = '';
+    /** @hidden Computed number pipe configuration */
+    protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
 
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    /** @hidden Computed CSS classes */
+    protected readonly _cssClass = computed(() => {
+        const classes: string[] = ['fd-object-number'];
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-object-number',
-            this.large ? 'fd-object-number--large' : '',
-            this.status ? `fd-object-number--${this.status}` : '',
-            this.class
-        ];
-    }
+        if (this.large()) {
+            classes.push('fd-object-number--large');
+        }
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this._onChanges();
-    }
+        const status = this.status();
+        if (status) {
+            classes.push(`fd-object-number--${status}`);
+        }
 
-    /** @hidden */
-    ngOnInit(): void {
-        this._onChanges();
-    }
+        const customClass = this.class();
+        if (customClass) {
+            classes.push(customClass);
+        }
 
-    /** @hidden */
-    private _onChanges(): void {
-        this.buildComponentCssClass();
-        this._buildNumberPipeConfig();
-    }
-
-    /** @hidden */
-    private _buildNumberPipeConfig(): void {
-        this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
-    }
+        return classes.join(' ');
+    });
 }
