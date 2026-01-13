@@ -8,7 +8,10 @@
         "prepare": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=btp --verbose"]
+                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=btp --verbose"],
+                "env": {
+                    "FD_ENV_VERSION_PLACEHOLDER": "{env.FD_ENV_VERSION_PLACEHOLDER}"
+                }
             }
         },
         "compile-typedoc": {
