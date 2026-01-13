@@ -7,11 +7,6 @@
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose",
-            "options": {
-                "env": {
-                    "FD_ENV_VERSION_PLACEHOLDER": "{env.FD_ENV_VERSION_PLACEHOLDER}"
-                }
-            },
             "dependsOn": ["platform-schematics:build", "^prepare"]
         },
         "compile-typedoc": {

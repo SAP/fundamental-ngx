@@ -10,11 +10,6 @@
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=ui5-webcomponents-ai --verbose",
-            "options": {
-                "env": {
-                    "FD_ENV_VERSION_PLACEHOLDER": "{env.FD_ENV_VERSION_PLACEHOLDER}"
-                }
-            },
             "dependsOn": [
                 "ui5-webcomponents:build",
                 "^prepare"
