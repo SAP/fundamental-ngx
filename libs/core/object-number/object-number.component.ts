@@ -1,6 +1,5 @@
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -21,7 +20,7 @@ export class ObjectNumberComponent {
     /**
      * Numerical value of the object number.
      */
-    readonly number = input<number | undefined>(undefined);
+    readonly number = input<number>();
 
     /**
      * Number of decimal places to show
@@ -29,7 +28,7 @@ export class ObjectNumberComponent {
     readonly decimal = input(0);
 
     /** Sets unit of measure displayed. */
-    readonly unit = input<string | undefined>(undefined);
+    readonly unit = input<string>();
 
     /** Set the value to true to display the object number in bold text */
     readonly emphasized = input(false);
@@ -38,16 +37,16 @@ export class ObjectNumberComponent {
     readonly large = input(false);
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
-    readonly status = input<ObjectStatus | undefined>(undefined);
+    readonly status = input<ObjectStatus>();
 
     /** User's custom classes */
     readonly class = input<string>('');
 
     /** Id of the element that labels object number. */
-    readonly ariaLabelledBy = input<Nullable<string>>();
+    readonly ariaLabelledBy = input<string | null>();
 
     /** Aria label for the object number. */
-    readonly ariaLabel = input<Nullable<string>>();
+    readonly ariaLabel = input<string | null>();
 
     /** @hidden Computed number pipe configuration */
     protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
