@@ -7,12 +7,7 @@
     "tags": ["type:lib", "scope:datetime-adapter"],
     "targets": {
         "prepare": {
-            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose",
-            "options": {
-                "env": {
-                    "FD_ENV_VERSION_PLACEHOLDER": "{env.FD_ENV_VERSION_PLACEHOLDER}"
-                }
-            }
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose"
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",

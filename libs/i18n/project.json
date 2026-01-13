@@ -7,12 +7,7 @@
     "tags": ["type:lib", "scope:i18n"],
     "targets": {
         "prepare": {
-            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=i18n --verbose",
-            "options": {
-                "env": {
-                    "FD_ENV_VERSION_PLACEHOLDER": "{env.FD_ENV_VERSION_PLACEHOLDER}"
-                }
-            }
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=i18n --verbose"
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
