@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
@@ -108,7 +108,7 @@ class TestKeyValueFacetComponent {
     standalone: true,
     imports: [
         ObjectStatusComponent,
-        ObjectNumberModule,
+        ObjectNumberComponent,
         AvatarComponent,
         FacetComponent,
         FacetContentComponent,
