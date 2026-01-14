@@ -1,7 +1,7 @@
 <!--
 Document: Angular 20+ Development Guidelines for Fundamental NGX
-Last Updated: January 11, 2026
-Version: 2.2
+Last Updated: January 14, 2026
+Version: 2.3
 Purpose: Comprehensive guide for AI agents and developers working with Angular 20+ in NX monorepo
 -->
 
@@ -264,6 +264,88 @@ All components MUST:
 - Prefer Reactive forms instead of Template-driven forms
 - Do NOT use `ngClass`; use `class` bindings instead
 - Do NOT use `ngStyle`; use `style` bindings instead
+
+#### Migrating from CssClassBuilder
+
+**Remove CssClassBuilder interface and @applyCssClass decorator** when migrating components to Angular 21+ signals.
+
+**Old pattern (deprecated):**
+
+```typescript
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+
+@Component({
+    selector: 'fd-example'
+    // ...
+})
+export class ExampleComponent implements CssClassBuilder {
+    @Input() class: string;
+    @Input() emphasized: boolean;
+
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-example', this.emphasized ? 'fd-example--emphasized' : '', this.class];
+    }
+
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+}
+```
+
+**New pattern (Angular 21+):**
+
+```typescript
+import { computed, input } from '@angular/core';
+
+@Component({
+    selector: 'fd-example',
+    host: {
+        '[class]': '_cssClass()'
+    }
+    // ...
+})
+export class ExampleComponent {
+    readonly class = input<string>('');
+    readonly emphasized = input(false);
+
+    protected readonly _cssClass = computed(() => {
+        const classes: string[] = ['fd-example'];
+
+        if (this.emphasized()) {
+            classes.push('fd-example--emphasized');
+        }
+
+        const customClass = this.class();
+        if (customClass) {
+            classes.push(customClass);
+        }
+
+        return classes.join(' ');
+    });
+}
+```
+
+**Migration steps:**
+
+1. Remove `CssClassBuilder` interface implementation
+2. Remove `@applyCssClass` decorator and `buildComponentCssClass()` method
+3. Convert `@Input()` properties to signal inputs using `input()`
+4. Create a `computed()` signal that builds the CSS class string
+5. Add `'[class]': '_cssClass()'` to the component's `host` property
+6. Remove lifecycle hooks (`ngOnChanges`, `ngOnInit`) that were only calling `buildComponentCssClass()`
+7. Remove `ChangeDetectorRef` if it was only used for manual change detection after class updates
+
+**Benefits of the new pattern:**
+
+- ✅ Automatic reactivity - classes update when inputs change
+- ✅ No manual change detection needed
+- ✅ Type-safe signal inputs
+- ✅ Cleaner code without decorators and lifecycle hooks
+- ✅ Better performance with computed signals (cached until dependencies change)
+- ✅ Host binding handles class merging automatically with Angular's reconciliation
+
+**Note:** Angular's `[class]` host binding automatically merges classes from multiple sources (static classes, directives, parent components) without the need for the complex tracking logic that `@applyCssClass` provided.
 
 #### Linked Signals
 
