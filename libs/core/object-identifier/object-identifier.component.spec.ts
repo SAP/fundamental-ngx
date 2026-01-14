@@ -1,72 +1,72 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, viewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectIdentifierComponent } from './object-identifier.component';
 
 @Component({
     selector: 'fd-test-object-identifier',
     template: `
-        <fd-object-identifier #objectRef [medium]="medium" [bold]="bold" [description]="description">
+        <fd-object-identifier #objectRef [medium]="medium()" [bold]="bold()" [description]="description()">
             <a #linkRef fd-link>Link</a>
         </fd-object-identifier>
     `,
-    standalone: true,
     imports: [LinkComponent, ObjectIdentifierComponent]
 })
 class TestObjectIdentifierComponent {
-    @ViewChild('objectRef', { read: ElementRef })
-    objectIdentifierElementRef: ElementRef;
+    readonly objectIdentifierElementRef = viewChild.required('objectRef', { read: ElementRef });
+    readonly linkElementRef = viewChild.required('linkRef', { read: ElementRef });
 
-    @ViewChild('linkRef', { read: ElementRef })
-    linkElementRef: ElementRef;
-
-    description: string;
-    bold: boolean;
-    medium: boolean;
-
-    getTitleElementClassList(): DOMTokenList {
-        const elements = document.getElementsByClassName('fd-object-identifier__title');
-        return elements.item(0)?.classList as DOMTokenList;
-    }
+    readonly description = signal<string | undefined>(undefined);
+    readonly bold = signal(false);
+    readonly medium = signal(false);
 }
 
 describe('ObjectIdentifierComponent', () => {
-    let testComponent: TestObjectIdentifierComponent;
+    let component: TestObjectIdentifierComponent;
     let fixture: ComponentFixture<TestObjectIdentifierComponent>;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestObjectIdentifierComponent]
-        }).compileComponents();
-    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectIdentifierComponent);
-        testComponent = fixture.componentInstance;
+        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
-    it('Should create', () => {
-        expect(testComponent).toBeTruthy();
+    it('should create', () => {
+        expect(component).toBeTruthy();
     });
 
-    it('Should add medium class', () => {
-        testComponent.medium = true;
+    it('should add medium class when medium input is true', () => {
+        component.medium.set(true);
         fixture.detectChanges();
-        expect(
-            testComponent.objectIdentifierElementRef.nativeElement.classList.contains('fd-object-identifier--medium')
-        ).toBe(true);
+
+        const element = component.objectIdentifierElementRef().nativeElement;
+        expect(element.classList.contains('fd-object-identifier--medium')).toBe(true);
     });
 
-    it('Should add classes to title', () => {
-        testComponent.bold = true;
+    it('should add bold class to title when bold input is true', () => {
+        component.bold.set(true);
         fixture.detectChanges();
-        expect(testComponent.getTitleElementClassList().contains('fd-object-identifier__title--bold')).toBe(true);
+
+        const titleElement = fixture.nativeElement.querySelector('.fd-object-identifier__title');
+        expect(titleElement?.classList.contains('fd-object-identifier__title--bold')).toBe(true);
     });
 
-    it('Should add class to fd-link', () => {
+    it('should render description when provided', () => {
+        const descriptionText = 'Test Description';
+        component.description.set(descriptionText);
         fixture.detectChanges();
-        expect(testComponent.linkElementRef.nativeElement.classList.contains('fd-object-identifier__link')).toBe(true);
+
+        const descriptionElement = fixture.nativeElement.querySelector('.fd-object-identifier__text');
+        expect(descriptionElement?.textContent.trim()).toBe(descriptionText);
+    });
+
+    it('should not render description element when description is not provided', () => {
+        const descriptionElement = fixture.nativeElement.querySelector('.fd-object-identifier__text');
+        expect(descriptionElement).toBeNull();
+    });
+
+    it('should add identifier class to projected fd-link', () => {
+        const linkElement = component.linkElementRef().nativeElement;
+        expect(linkElement.classList.contains('fd-object-identifier__link')).toBe(true);
     });
 });

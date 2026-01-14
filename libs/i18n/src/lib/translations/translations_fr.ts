@@ -625,5 +625,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Groupe de boutons segmentés',
         buttonRoleDescription: 'Bouton segmenté'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };
