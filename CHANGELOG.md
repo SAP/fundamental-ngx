@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.8...v0.57.9) (2026-01-14)
+
+
+### Bug Fixes
+
+* **platform:** pass platform select required to core select ([#13730](https://github.com/SAP/fundamental-ngx/issues/13730)) ([5338809](https://github.com/SAP/fundamental-ngx/commit/5338809097ecc1aca3d0fc59413b54f9495b9b8f))
+
+
+
+
+
 ## [0.57.8](https://github.com/SAP/fundamental-ngx/compare/v0.57.7...v0.57.8) (2025-12-11)
 
 

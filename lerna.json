@@ -1,7 +1,7 @@
 {
     "$schema": "node_modules/lerna/schemas/lerna-schema.json",
     "packages": ["libs/*"],
-    "version": "0.57.8",
+    "version": "0.57.9",
     "conventionalCommits": true,
     "tagVersionPrefix": "v",
     "message": "chore(release): publish %v",
