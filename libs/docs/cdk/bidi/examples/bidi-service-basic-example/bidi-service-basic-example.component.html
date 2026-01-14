@@ -1,0 +1,110 @@
+<div class="fd-bidi-example sapUiContentPaddingTopBottom">
+    <!-- Global Direction Status -->
+    <div class="sapUiSmallMarginBottom">
+        <h3>Global Direction State</h3>
+        <div
+            class="sapUiDisplayFlex sapUiContentPadding sapUiBaseBG sapUiBorderRadius"
+            style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+        >
+            <div class="sapUiDisplayFlex sapUiDisplayFlexDirectionColumn sapUiMediumMarginEnd">
+                <span class="sapUiFontWeightBold" style="color: var(--sapTextColor)">Direction:</span>
+                <span style="font-family: monospace; color: var(--sapHighlightColor); font-size: 1.1rem">{{
+                    direction()
+                }}</span>
+            </div>
+            <div class="sapUiDisplayFlex sapUiDisplayFlexDirectionColumn">
+                <span class="sapUiFontWeightBold" style="color: var(--sapTextColor)">Is RTL:</span>
+                <span style="font-family: monospace; color: var(--sapHighlightColor); font-size: 1.1rem">{{
+                    isRtl()
+                }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Direction Controls -->
+    <div class="sapUiSmallMarginBottom">
+        <h3 class="sapUiTinyMarginBottom">Global Direction Control</h3>
+        <p
+            class="fd-bidi-example__hint"
+            style="font-size: 0.875rem; color: var(--sapContent_LabelColor); margin: 0.25rem 0 1rem 0"
+        >
+            This controls the direction for the global container below (but not local containers)
+        </p>
+        <div class="sapUiDisplayFlex sapUiDisplayFlexAlignItemsCenter sapUiSmallMarginBottom">
+            <label fd-form-label class="sapUiSmallMarginEnd">Global RTL</label>
+            <fd-switch [(ngModel)]="globalSwitch" (ngModelChange)="onGlobalSwitchChange()" />
+        </div>
+        <button fd-button (click)="toggleGlobalDirection()">Toggle Global to {{ toggleLabel() }}</button>
+    </div>
+
+    <!-- Global Container -->
+    <div
+        id="globalContainer"
+        class="sapUiContentPadding sapUiSmallMarginTopBottom sapUiBorderRadius"
+        style="border: 2px solid var(--sapSuccessBorderColor); background-color: var(--sapSuccessBackground)"
+    >
+        <h3 class="sapUiNoMarginTop sapUiSmallMarginBottom" style="color: var(--sapSuccessColor)">
+            Global Container (Shared BidiService)
+        </h3>
+        <h4
+            class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+            style="font-size: 0.875rem; color: var(--sapContent_LabelColor)"
+        >
+            Whitespaces disabled
+        </h4>
+        <fd-text [text]="globalText" />
+
+        <h4
+            class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+            style="font-size: 0.875rem; color: var(--sapContent_LabelColor)"
+        >
+            Whitespaces enabled
+        </h4>
+        <fd-text [text]="globalText" [whitespaces]="true" />
+    </div>
+
+    <!-- Local Containers Section -->
+    <div class="sapUiMediumMarginTopBottom">
+        <h3 class="sapUiTinyMarginBottom">Local Containers (Independent BidiService Instances)</h3>
+        <p
+            class="fd-bidi-example__hint sapUiSmallMarginBottom"
+            style="font-size: 0.875rem; color: var(--sapContent_LabelColor); margin: 0.25rem 0 1rem 0"
+        >
+            Each container below has its own BidiService provider. They operate independently.
+        </p>
+
+        <fd-bidi-local-container />
+        <fd-bidi-local-container />
+        <fd-bidi-local-container />
+    </div>
+
+    <!-- Explanation Note -->
+    <div
+        class="fd-bidi-example__note sapUiContentPadding sapUiBorderRadius sapUiMediumMarginTop"
+        style="
+            background-color: var(--sapInformationBackground);
+            border-left: 4px solid var(--sapInformationBorderColor);
+        "
+    >
+        <p style="margin: 0.5rem 0; color: var(--sapTextColor)">
+            <strong style="color: var(--sapInformationColor)">Note:</strong> This example demonstrates two patterns:
+        </p>
+        <ul style="margin: 0.5rem 0; color: var(--sapTextColor)">
+            <li style="margin: 0.5rem 0">
+                <strong style="color: var(--sapInformationColor)">Global BidiService:</strong> Provided at component
+                level, shared by all elements in the "Global Container". The global switch and button control this
+                instance.
+            </li>
+            <li style="margin: 0.5rem 0">
+                <strong style="color: var(--sapInformationColor)">Local BidiService:</strong> Each "Local Container" has
+                its own provider, creating independent instances. Changes in one local container don't affect others or
+                the global container.
+            </li>
+        </ul>
+        <p style="margin: 0.5rem 0; color: var(--sapTextColor)">
+            The BidiService automatically detects RTL languages (Arabic, Hebrew, Persian, etc.) based on
+            <code style="background-color: var(--sapField_Background); border-radius: 0.125rem">navigator.language</code
+            >. You can manually override the direction at any level.
+        </p>
+    </div>
+</div>

@@ -44,7 +44,7 @@ export class RtlServiceDocsComponent {
 @NgModule({
     providers: [
         RtlService,
-        { provide: RTL_LANGUAGE, useValue: ['ar', 'he', 'fa', 'your-custom-lang'] }
+        { provide: RTL_LANGUAGE_DEPRECATED, useValue: ['ar', 'he', 'fa', 'your-custom-lang'] }
     ],
     ...
 })

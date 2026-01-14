@@ -1,0 +1,26 @@
+@import '@sap-ui/common-css/dist/sap-border-radius.css';
+@import '@sap-ui/common-css/dist/sap-colors.css';
+@import '@sap-ui/common-css/dist/sap-content-paddings.css';
+@import '@sap-ui/common-css/dist/sap-display.css';
+@import '@sap-ui/common-css/dist/sap-flex.css';
+@import '@sap-ui/common-css/dist/sap-margin.css';
+@import '@sap-ui/common-css/dist/sap-padding.css';
+@import '@sap-ui/common-css/dist/sap-typography.css';
+
+// Minimal custom styles where SAP UI Common CSS doesn't provide utilities
+.fd-bidi-example {
+    &__hint {
+        font-style: italic;
+    }
+
+    &__note {
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        code {
+            font-family: monospace;
+            padding: 0.125rem 0.25rem;
+        }
+    }
+}

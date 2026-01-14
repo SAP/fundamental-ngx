@@ -1,0 +1,41 @@
+<fd-docs-section-title id="basic" componentName="bidi"> BidiService Basic Example </fd-docs-section-title>
+<description>
+    The <code>BidiService</code> provides signal-based reactive state management for bidirectional text direction
+    (RTL/LTR). It integrates with Angular CDK's <code>Directionality</code> service and automatically detects RTL
+    languages based on browser settings.
+</description>
+<component-example>
+    <fd-bidi-service-basic-example></fd-bidi-service-basic-example>
+</component-example>
+<code-example [exampleFiles]="bidiServiceBasicExample" />
+
+<separator />
+
+<fd-docs-section-title id="features" componentName="bidi"> Features </fd-docs-section-title>
+<description>
+    <ul>
+        <li><strong>Signal-based reactivity:</strong> Uses Angular signals for reactive state management</li>
+        <li>
+            <strong>Automatic RTL detection:</strong> Detects RTL languages based on <code>navigator.language</code>
+        </li>
+        <li><strong>CDK integration:</strong> Works seamlessly with Angular CDK Directionality</li>
+        <li><strong>Customizable:</strong> Override RTL language list via <code>RTL_LANGUAGE</code> injection token</li>
+        <li><strong>Type-safe:</strong> Full TypeScript support with proper typing</li>
+    </ul>
+</description>
+
+<separator />
+
+<fd-docs-section-title id="usage" componentName="bidi"> Usage </fd-docs-section-title>
+<description>
+    <h3>Basic Usage</h3>
+    <pre><code>{{ basicUsageCode }}</code></pre>
+
+    <h3>Custom RTL Languages</h3>
+    <p>You can provide custom RTL language codes:</p>
+    <pre><code>{{ customLanguagesCode }}</code></pre>
+
+    <h3>Default RTL Languages</h3>
+    <p>The service includes these RTL languages by default:</p>
+    <code>{{ rtlLanguages }}</code>
+</description>

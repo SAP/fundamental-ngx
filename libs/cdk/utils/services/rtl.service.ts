@@ -4,7 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 
 /** Default RTL languages */
 const DefaultRtlLanguages = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ku', 'ps', 'ur', 'yi'];
-export const RTL_LANGUAGE = new InjectionToken<string[]>('RtlLanguage');
+/** @deprecated Use RTL_LANGUAGE from BidiService instead */
+export const RTL_LANGUAGE_DEPRECATED = new InjectionToken<string[]>('RtlLanguage');
 
 @Injectable()
 /**
@@ -20,7 +21,7 @@ export class RtlService {
     rtlSignal: Signal<boolean>;
 
     /** @hidden */
-    constructor(@Optional() @Inject(RTL_LANGUAGE) injectedRtlLanguages: string[]) {
+    constructor(@Optional() @Inject(RTL_LANGUAGE_DEPRECATED) injectedRtlLanguages: string[]) {
         injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages;
 
         const filtered = injectedRtlLanguages.filter((language) => navigator.language.includes(language));

@@ -53,6 +53,10 @@
     ],
     "utilities": [
         {
+            "url": "cdk/bidi-service",
+            "name": "Bidi Service"
+        },
+        {
             "url": "cdk/tabbable",
             "name": "Tabbable element"
         },

@@ -7,6 +7,7 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
+    bidiService: ['BidiService'],
     breakpoint: ['BreakpointDirective'],
     forms: ['CvaDirective'],
     dataSource: ['DataSourceDirective'],

@@ -1,3 +1,4 @@
+export * from './bidi.service';
 export * from './content-density.service';
 export * from './destroyed.service';
 export * from './focus-trap.service';

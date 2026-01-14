@@ -63,6 +63,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/cdk/initial-focus').then(configureLibRoutes)
     },
     {
+        path: 'bidi-service',
+        loadChildren: () => import('./bidi').then(configureLibRoutes)
+    },
+    {
         path: 'breakpoint',
         loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then(configureLibRoutes)
     },
