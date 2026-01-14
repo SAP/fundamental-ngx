@@ -1,7 +1,7 @@
 <!--
 Document: Angular 20+ Development Guidelines for Fundamental NGX
 Last Updated: January 14, 2026
-Version: 2.3
+Version: 2.4
 Purpose: Comprehensive guide for AI agents and developers working with Angular 20+ in NX monorepo
 -->
 
@@ -114,6 +114,7 @@ Here are the essential links for building Angular components. Use these to under
 | Deriving state from signals               | Use `computed()`                         | [State Management](#state-management)                                              |
 | Deriving local mutable state from inputs  | Use `linkedSignal()`                     | [Linked Signals](#linked-signals)                                                  |
 | Reacting to signal changes (side effects) | Use `effect()`                           | [Effect vs Observables](#effect-vs-observables)                                    |
+| Ordering component class members          | Follow strict ordering rules             | [Component Member Ordering](#component-member-ordering)                            |
 | Parent setting child defaults             | Use InjectionToken pattern               | [DI Pattern 1](#pattern-1-contextual-defaults-with-injectiontokens)                |
 | Querying child components by role         | Use InjectionToken pattern               | [DI Pattern 2](#pattern-2-component-composition-with-injectiontokens)              |
 | Querying view children/DOM elements       | Use `viewChild()`/`viewChildren()`       | [Queries](#queries)                                                                |
@@ -554,14 +555,15 @@ Follow strict member ordering as enforced by `@typescript-eslint/member-ordering
     - `@ViewChild()` / `@ViewChildren()` decorated properties
     - Other decorated properties
 
-2. **Signal inputs and outputs**:
+2. **Signal inputs and outputs** (properties created with `input()` and `output()` functions ONLY):
 
     - `input()` signal inputs
     - `output()` signal outputs
+    - `model()` two-way binding signals
 
 3. **Other instance fields** (in order of visibility):
     - Public instance fields
-    - Protected instance fields
+    - Protected instance fields (including signals, computed values, and injected services)
     - Private instance fields
 
 **Example**:
@@ -601,25 +603,46 @@ export class MyExample {
 
 **Critical member ordering rules:**
 
-1. Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint
-2. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties
-3. **Protected members MUST come before private members** - this is enforced by `@typescript-eslint/member-ordering`
-4. Order: public → protected → private (within each category)
+1. **Category 2 is ONLY for properties created with `input()`, `output()`, or `model()` function calls**
+2. Properties that hold Signal types but are NOT created with `input()`/`output()`/`model()` go in category 3 (Other instance fields)
+3. Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint
+4. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties
+5. **Protected members MUST come before private members** - this is enforced by `@typescript-eslint/member-ordering`
+6. Order: public → protected → private (within each category)
 
-**Common mistake to avoid:**
+**Common mistakes to avoid:**
 
 ```typescript
+// ❌ WRONG - regular Signal property in wrong category
+export class MyComponent {
+    // This is NOT a signal input - it's a regular property holding a Signal
+    readonly mySignal: Signal<string>; // Should be in category 3, not 2
+
+    private readonly _service = inject(MyService);
+}
+
 // ❌ WRONG - protected after private causes lint error
 export class MyComponent {
     private readonly _service = inject(MyService);
     protected readonly value = computed(() => this._service.getValue()); // ERROR!
 }
 
-// ✅ CORRECT - protected before private
+// ✅ CORRECT - signal input vs regular signal property
 export class MyComponent {
-    protected readonly value = computed(() => this._service.getValue());
+    // Category 2: Created with input() function
+    readonly userName = input<string>('');
+    readonly userChanged = output<User>();
+
+    // Category 3: Regular properties (including Signal types)
+    protected readonly displayName: Signal<string>;
+    protected readonly isActive = computed(() => this.userName().length > 0);
 
     private readonly _service = inject(MyService);
+
+    constructor() {
+        // Properties depending on injected services initialized here
+        this.displayName = this._service.getDisplayName();
+    }
 }
 ```
 
