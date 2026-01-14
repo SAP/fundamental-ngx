@@ -12,7 +12,7 @@ import { NestedListModule } from './nested-list.module';
     template: `
         <div fd-nested-list-title>Title</div>
         <button fd-nested-list-expand-icon></button>
-        <span fd-nested-list-icon></span>
+        <span fd-nested-list-icon [glyph]="iconGlyph"></span>
     `,
     standalone: true,
     imports: [NestedListModule]
@@ -26,6 +26,8 @@ class TestNestedContainerComponent {
 
     @ViewChild(NestedListIconComponent)
     iconElement: NestedListIconComponent;
+
+    iconGlyph = '';
 }
 
 describe('NestedListDirectives', () => {
@@ -70,8 +72,7 @@ describe('NestedListDirectives', () => {
     });
 
     it('Icon should have valid class', () => {
-        iconElement.glyph = 'custom-icon';
-        iconElement.buildComponentCssClass();
+        component.iconGlyph = 'custom-icon';
         fixture.detectChanges();
         const classList = (iconElement as any).elementRef.nativeElement.classList;
         expect(classList).toContain('sap-icon--' + 'custom-icon');

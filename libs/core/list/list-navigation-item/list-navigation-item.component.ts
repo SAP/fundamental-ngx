@@ -173,8 +173,8 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
             this._tabIndex = 0;
         }
         if (this._iconComponent) {
-            this._iconComponent._navigationItemIcon = true;
-            this._iconComponent.ariaHidden = true;
+            this._iconComponent._navigationItemIcon.set(true);
+            this._iconComponent.ariaHidden.set(true);
         }
         this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
         this._ariaLevel = 1;

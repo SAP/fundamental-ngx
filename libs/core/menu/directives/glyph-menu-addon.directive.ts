@@ -49,10 +49,11 @@ export class GlyphMenuAddonDirective implements OnDestroy {
                         return;
                     }
                     const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
-                    componentRef.instance.glyph = glyphName;
-                    componentRef.instance.elementRef.nativeElement.setAttribute('role', 'presentation');
+                    componentRef.setInput('glyph', glyphName);
+                    const nativeElement = componentRef.location.nativeElement;
+                    nativeElement.setAttribute('role', 'presentation');
                     if (this.isInToggleButton) {
-                        componentRef.instance.elementRef.nativeElement.classList.add('fd-menu__checkmark');
+                        nativeElement.classList.add('fd-menu__checkmark');
                     }
                     componentRef.changeDetectorRef.detectChanges();
                 }),
