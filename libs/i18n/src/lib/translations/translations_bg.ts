@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Средство за избор на месец',
         calendarYearsViewDescription: 'Средство за избор на година',
         calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Работен ден',
+        nonWorkDayLabel: 'Неработен ден'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Комбинирано поле с множество стойности',
         selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Заглавка на група'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Показана е позицията {itemNum} от {totalNum}',
         leftNavigationBtnLabel: 'Към предишната позиция',
         rightNavigationBtnLabel: 'Към следващата позиция'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Чернова'
     },
     coreMessageStrip: {
-        dismissLabel: 'Отхвърляне',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Затваряне',
+        announcementInfo: 'Лента с информационно съобщение',
+        announcementWarning: 'Лента с предупредително съобщение',
+        announcementError: 'Лента със съобщение за грешка',
+        announcementSuccess: 'Лента със съобщение за успешно изпълнение',
+        closable: 'Може да се затвори'
     },
     coreMultiInput: {
         countListResultsSingular: '1 позиция от списъка с резултати.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Път на навигацията'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Позиция от дърво {itemDetails}, {index} от {total}{selectedDescription}'
+        linkItemAriaLabel: 'Позиция от дърво {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'още {count}'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Настройки',
-        searchLabel: 'Търсене'
+        searchLabel: 'Търсене',
+        backButtonLabel: 'Назад'
     },
     platformSwitch: {
         ariaLabel: 'Въвеждане на превключвател'
@@ -605,10 +606,11 @@ export default {
         menuButtonAriaLabel: 'Бутон за меню'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'разгъване/свиване на подпозициите',
+        moreButtonAriaLabel:
+            'Показва допълнителни навигационни позиции, които са скрити поради ограничение на пространството на екрана',
+        overflowMenuAriaLabel: 'Допълнителни навигационни позиции',
+        snappedPopoverRoleDescription: 'Дърво на навигационен списък'
     },
     coreNotification: {
         groupHeaderTitle: 'Разгъване/свиване',
@@ -619,7 +621,7 @@ export default {
         triggerLessLabel: 'По-малко'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Група сегментирани бутони',
+        buttonRoleDescription: 'Сегментиран бутон'
     }
 };

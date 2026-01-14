@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: '月份选取器',
         calendarYearsViewDescription: '年度选取器',
         calendarYearsRangeViewDescription: '年度范围选取器',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: '工作日',
+        nonWorkDayLabel: '非工作日'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '多值组合框',
         selectAllLabel: '全选（已选 {selectedItems} 个，共 {totalItems} 个）',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: '组标题'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '显示 {itemNum}/{totalNum} 个项目',
         leftNavigationBtnLabel: '转到上一个项目',
         rightNavigationBtnLabel: '转到下一个项目'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: '草稿'
     },
     coreMessageStrip: {
-        dismissLabel: '屏蔽',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: '关闭',
+        announcementInfo: '信息消息条',
+        announcementWarning: '警告消息条',
+        announcementError: '错误消息条',
+        announcementSuccess: '成功消息条',
+        closable: '可关闭'
     },
     coreMultiInput: {
         countListResultsSingular: '1 个结果列表项目。',
@@ -92,7 +92,7 @@ export default {
         navigationPath: '导航路径'
     },
     coreNestedList: {
-        linkItemAriaLabel: '树项目 {itemDetails}，{index}，共 {total}{selectedDescription}'
+        linkItemAriaLabel: '树项目 {itemDetails}，{selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '另外 {count} 个'
@@ -376,7 +376,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: '设置',
-        searchLabel: '搜索'
+        searchLabel: '搜索',
+        backButtonLabel: '返回'
     },
     platformSwitch: {
         ariaLabel: '切换输入'
@@ -602,10 +603,10 @@ export default {
         menuButtonAriaLabel: '菜单按钮'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: '展开/折叠子项目',
+        moreButtonAriaLabel: '显示由于屏幕空间限制而隐藏的附加导航项目',
+        overflowMenuAriaLabel: '附加导航项目',
+        snappedPopoverRoleDescription: '导航列表树'
     },
     coreNotification: {
         groupHeaderTitle: '展开/折叠',
@@ -616,7 +617,7 @@ export default {
         triggerLessLabel: '更少'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: '分段式按钮组',
+        buttonRoleDescription: '分段式按钮'
     }
 };

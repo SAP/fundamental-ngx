@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Odabir mjeseca',
         calendarYearsViewDescription: 'Odabir godine',
         calendarYearsRangeViewDescription: 'Odabir raspona godina',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Radni dan',
+        nonWorkDayLabel: 'Neradni dan'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinirani okvir s više vrijednosti',
         selectAllLabel: 'Odaberi sve ({selectedItems} od {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Zaglavlje grupe'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Prikazana je stavka {itemNum} od {totalNum}',
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
         rightNavigationBtnLabel: 'Idi na sljedeću stavku'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Nacrt'
     },
     coreMessageStrip: {
-        dismissLabel: 'Odbaci',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Zatvori',
+        announcementInfo: 'Traka informativne poruke',
+        announcementWarning: 'Traka poruke upozorenja',
+        announcementError: 'Traka poruke o pogrešci',
+        announcementSuccess: 'Traka poruke o uspjehu',
+        closable: 'S mogućnošću zatvaranja'
     },
     coreMultiInput: {
         countListResultsSingular: 'Broj stavki popisa rezultata: 1.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Staza navigacije'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Stavka stabla {itemDetails}, {index} od {total} {selectedDescription}'
+        linkItemAriaLabel: 'Stavka stabla {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} više'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Postavke',
-        searchLabel: 'Pretraživanje'
+        searchLabel: 'Pretraživanje',
+        backButtonLabel: 'Natrag'
     },
     platformSwitch: {
         ariaLabel: 'Prebacivanje unosa'
@@ -605,10 +606,11 @@ export default {
         menuButtonAriaLabel: 'Gumb Izbornik'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'proširi/sažmi podstavke',
+        moreButtonAriaLabel:
+            'Prikazuje dodatne stavke navigacije koje su skrivene zbog ograničenog prostora na zaslonu',
+        overflowMenuAriaLabel: 'Dodane stavke navigacije',
+        snappedPopoverRoleDescription: 'Stablo popisa navigacije'
     },
     coreNotification: {
         groupHeaderTitle: 'Proširi/sažmi',
@@ -619,7 +621,7 @@ export default {
         triggerLessLabel: 'Manje'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Grupa segmentiranih gumbi',
+        buttonRoleDescription: 'Segmentirani gumbi'
     }
 };
