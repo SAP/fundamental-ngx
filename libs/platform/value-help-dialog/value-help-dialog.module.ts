@@ -7,6 +7,10 @@ import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help
 
 const components = [PlatformValueHelpDialogComponent, VhdFilterComponent, ContentDensityModule];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]

@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'أداة انتقاء الشهر',
         calendarYearsViewDescription: 'أداة انتقاء السنة',
         calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'يوم عمل',
+        nonWorkDayLabel: 'يوم عطلة'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'مربع تحرير وسرد متعدد القيم',
         selectAllLabel: 'تحديد الكل ({selectedItems} من {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'عنوان المجموعة'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'تم عرض البند {itemNum} من {totalNum}',
         leftNavigationBtnLabel: 'انتقال إلى البند السابق',
         rightNavigationBtnLabel: 'انتقال إلى البند التالي'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'أولي'
     },
     coreMessageStrip: {
-        dismissLabel: 'تجاهل',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'إغلاق',
+        announcementInfo: 'شريط رسائل المعلومات',
+        announcementWarning: 'شريط رسالة التحذير',
+        announcementError: 'شريط رسالة الخطأ',
+        announcementSuccess: 'شريط رسالة النجاح',
+        closable: 'قابل للإغلاق'
     },
     coreMultiInput: {
         countListResultsSingular: 'عنصر قائمة نتائج واحد.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'مسار التنقل'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'عنصر الشجرة {itemDetails}، {index} من {total}{selectedDescription}'
+        linkItemAriaLabel: 'عنصر الشجرة {itemDetails}، {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} إضافية'
@@ -377,7 +377,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',
-        searchLabel: 'بحث'
+        searchLabel: 'بحث',
+        backButtonLabel: 'رجوع'
     },
     platformSwitch: {
         ariaLabel: 'تبديل الإدخال'
@@ -604,10 +605,10 @@ export default {
         menuButtonAriaLabel: 'زر القائمة'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'توسيع/طي البنود الفرعية',
+        moreButtonAriaLabel: 'عرض بنود التنقل الإضافية المخفية بسبب مساحة الشاشة المحدودة',
+        overflowMenuAriaLabel: 'بنود التنقل الإضافية',
+        snappedPopoverRoleDescription: 'شجرة قائمة التنقل'
     },
     coreNotification: {
         groupHeaderTitle: 'توسيع/طي',
@@ -618,7 +619,7 @@ export default {
         triggerLessLabel: 'أقل'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'مجموعة الأزرار المقسَّمة',
+        buttonRoleDescription: 'زر مقسَّم'
     }
 };

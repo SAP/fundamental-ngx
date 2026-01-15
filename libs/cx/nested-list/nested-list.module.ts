@@ -20,6 +20,10 @@ import { NestedListStateService } from './nested-list-state.service';
 import { NestedListComponent } from './nested-list/nested-list.component';
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         NestedListComponent,

@@ -17,6 +17,10 @@ import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.compo
 import { MenuSeparatorDirective } from './menu-separator.directive';
 import { MenuComponent } from './menu.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         PopoverModule,

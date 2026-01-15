@@ -7,6 +7,10 @@ import { MenuComponent } from './menu.component';
 
 const components = [MenuComponent, MenuItemComponent, MenuTriggerDirective, ContentDensityModule];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]

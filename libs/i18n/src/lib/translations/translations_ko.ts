@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: '월 선택 도구',
         calendarYearsViewDescription: '연도 선택 도구',
         calendarYearsRangeViewDescription: '연도 범위 선택 도구',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: '근무일',
+        nonWorkDayLabel: '비근무일'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '다중 값 콤보 박스',
         selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: '그룹 헤더'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '항목 {itemNum}/{totalNum}개 표시됨',
         leftNavigationBtnLabel: '이전 항목으로 이동',
         rightNavigationBtnLabel: '다음 항목으로 이동'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: '초안'
     },
     coreMessageStrip: {
-        dismissLabel: '해제',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: '닫기',
+        announcementInfo: '정보 메시지 스트립',
+        announcementWarning: '경고 메시지 스트립',
+        announcementError: '오류 메시지 스트립',
+        announcementSuccess: '성공 메시지 스트립',
+        closable: '닫기 가능'
     },
     coreMultiInput: {
         countListResultsSingular: '1개의 결과 리스트 항목이 있습니다.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: '탐색 경로'
     },
     coreNestedList: {
-        linkItemAriaLabel: '트리 항목 {itemDetails}, {index}/ {total}{selectedDescription}'
+        linkItemAriaLabel: '트리 항목 {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count}개 더 보기'
@@ -377,7 +377,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: '설정',
-        searchLabel: '검색'
+        searchLabel: '검색',
+        backButtonLabel: '뒤로'
     },
     platformSwitch: {
         ariaLabel: '스위치 입력'
@@ -603,10 +604,10 @@ export default {
         menuButtonAriaLabel: '메뉴 버튼'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: '하위 항목 펼치기/접기',
+        moreButtonAriaLabel: '제한된 화면 공간으로 인해 숨겨진 추가 탐색 항목을 표시합니다.',
+        overflowMenuAriaLabel: '추가 탐색 항목',
+        snappedPopoverRoleDescription: '탐색 리스트 트리'
     },
     coreNotification: {
         groupHeaderTitle: '펼치기/접기',
@@ -617,7 +618,7 @@ export default {
         triggerLessLabel: '간단히'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: '세그멘테이션된 버튼 그룹',
+        buttonRoleDescription: '세그멘테이션된 버튼'
     }
 };

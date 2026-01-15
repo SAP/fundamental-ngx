@@ -4,7 +4,7 @@ import { BusyIndicatorComponent } from './busy-indicator.component';
 
 /**
  * @deprecated
- * Use direct import of `IconComponent`
+ * Use direct imports of components and directives.
  */
 @NgModule({
     exports: [BusyIndicatorComponent, BusyIndicatorExtendedDirective],

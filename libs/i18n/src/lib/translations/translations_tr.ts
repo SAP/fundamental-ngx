@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Ay seçici',
         calendarYearsViewDescription: 'Yıl seçici',
         calendarYearsRangeViewDescription: 'Yıl aralığı seçici',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'İş günü',
+        nonWorkDayLabel: 'Çalışılmayan gün'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Çoklu Değer Açılan Kutusu',
         selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Grup Üst Bilgisi'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Kalem {itemNum}/{totalNum} görüntülendi',
         leftNavigationBtnLabel: 'Önceki öğeye git',
         rightNavigationBtnLabel: 'Sonraki öğeye git'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Taslak'
     },
     coreMessageStrip: {
-        dismissLabel: 'Yoksay',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Kapat',
+        announcementInfo: 'Bilgi İletisi Satırı',
+        announcementWarning: 'Uyarı İletisi Satırı',
+        announcementError: 'Hata İletisi Satırı',
+        announcementSuccess: 'Başarı İletisi Satırı',
+        closable: 'Kapatılabilir'
     },
     coreMultiInput: {
         countListResultsSingular: '1 sonuç listesi öğesi.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Gezinme Yolu'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Ağaç öğesi {itemDetails}, {index}/{total}{selectedDescription}'
+        linkItemAriaLabel: 'Ağaç Öğesi {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} tane daha'
@@ -379,7 +379,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',
-        searchLabel: 'Ara'
+        searchLabel: 'Ara',
+        backButtonLabel: 'Geri'
     },
     platformSwitch: {
         ariaLabel: 'Geçiş girişi'
@@ -606,10 +607,10 @@ export default {
         menuButtonAriaLabel: 'Menü düğmesi'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'alt kalemleri genişlet/daralt',
+        moreButtonAriaLabel: 'Sınırlı ekran alanı nedeniyle gizlenen ek dolaşma öğelerini görüntüler',
+        overflowMenuAriaLabel: 'Ek Dolaşma Öğeleri',
+        snappedPopoverRoleDescription: 'Dolaşma Listesi Ağacı'
     },
     coreNotification: {
         groupHeaderTitle: 'Genişlet/Daralt',
@@ -620,7 +621,7 @@ export default {
         triggerLessLabel: 'Daha Az'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Segmentlere Ayrılmış Düğme Grubu',
+        buttonRoleDescription: 'Segmentlere Ayrılmış Düğme'
     }
 };

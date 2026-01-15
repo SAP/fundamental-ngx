@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Kuukausivalitsin',
         calendarYearsViewDescription: 'Vuosivalitsin',
         calendarYearsRangeViewDescription: 'Vuosialuevalitsin',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Työpäivä',
+        nonWorkDayLabel: 'Ei-työpäivä'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Moninkertaisen arvon yhdistelmäruutu',
         selectAllLabel: 'Valitse kaikki ({selectedItems} / {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Ryhmäotsikko'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Nimike {itemNum} / {totalNum} näytetty',
         leftNavigationBtnLabel: 'Siirry edelliseen kohteeseen',
         rightNavigationBtnLabel: 'SIirry seuraavaan kohteeseen'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Luonnos'
     },
     coreMessageStrip: {
-        dismissLabel: 'Hylkää',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Sulje',
+        announcementInfo: 'Informaatioilmoitusnauha',
+        announcementWarning: 'Varoitusilmoitusnauha',
+        announcementError: 'Virheilmoitusnauha',
+        announcementSuccess: 'Onnistumisilmoitusnauha',
+        closable: 'Suljettava'
     },
     coreMultiInput: {
         countListResultsSingular: '1 tulosluettelon kohde.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Navigointipolku'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Puun kohde {itemDetails}, {index} / {total}{selectedDescription}'
+        linkItemAriaLabel: 'Puun kohde {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} lisää'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Asetukset',
-        searchLabel: 'Haku'
+        searchLabel: 'Haku',
+        backButtonLabel: 'Paluu'
     },
     platformSwitch: {
         ariaLabel: 'Vaihda syöttö'
@@ -605,10 +606,10 @@ export default {
         menuButtonAriaLabel: 'Valikko-painike'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'Laajenna/tiivistä alirivit',
+        moreButtonAriaLabel: 'Näyttää navigoinnin lisärivit, jotka ovat piilossa rajatun näyttötilan vuoksi',
+        overflowMenuAriaLabel: 'Navigoinnin lisärivit',
+        snappedPopoverRoleDescription: 'Navigointiluettelopuu'
     },
     coreNotification: {
         groupHeaderTitle: 'Laajenna/tiivistä',
@@ -619,7 +620,7 @@ export default {
         triggerLessLabel: 'Vähemmän'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Segmentoitu painikeryhmä',
+        buttonRoleDescription: 'Segmentoitu painike'
     }
 };

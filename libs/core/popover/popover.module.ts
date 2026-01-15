@@ -10,6 +10,10 @@ import { PopoverContainerDirective } from './popover-container/popover-container
 import { PopoverTriggerDirective } from './popover-trigger.directive';
 import { PopoverComponent } from './popover.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         PopoverControlComponent,
