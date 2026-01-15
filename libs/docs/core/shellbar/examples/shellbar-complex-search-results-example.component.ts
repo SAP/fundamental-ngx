@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -76,7 +77,8 @@ import { Observable, of } from 'rxjs';
         SearchFieldComponent,
         ShellbarActionComponent,
         FormsModule,
-        SegmentedButtonComponent
+        SegmentedButtonComponent,
+        IllustratedMessageModule
     ]
 })
 export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
@@ -129,12 +131,20 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         actionButtonCallback: 'buttonCallback',
         actionButtonLabel: 'buttonLabel',
         showDeleteButton: 'canDelete',
-        deleteCallback: 'deleteFn'
+        deleteCallback: 'deleteFn',
+        groupBy: 'type'
     };
 
     mobileConfig: MobileModeConfig = {
         approveButtonText: 'OK',
         hasCloseButton: true
+    };
+
+    xsmallConfig: SvgConfig = {
+        xsmall: {
+            url: 'assets/images/sapIllus-Ice-Cream-Demo-ExtraSmall.svg',
+            id: 'sapIllus-Ice-Cream-Demo-ExtraSmall'
+        }
     };
 
     constructor(private _messageToastService: MessageToastService) {}
@@ -165,6 +175,10 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
 
     searchInScopeClicked(): void {
         alert('Search in scope clicked');
+    }
+
+    showAllSearchResultsClicked(): void {
+        this.shellSearchField.clearTextInput();
     }
 }
 
