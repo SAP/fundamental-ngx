@@ -4,7 +4,7 @@
     <button fd-button fdkFocusableItem label="Mobile" value="mobile"></button>
 </fd-segmented-button>
 
-<div [style.maxWidth]="exampleType === 'mobile' ? '320px' : '100%'">
+<div [style.maxWidth]="exampleType === 'mobile' ? '320px' : '100%'" style="height: 500px; background-color: white">
     <fd-shellbar>
         <fd-shellbar-branding [interactiveBranding]="true">
             <fd-shellbar-logo>
@@ -17,6 +17,7 @@
             placeholder="Search"
             fdCozy
             [dataSource]="dataSource"
+            [allowEmptySearch]="true"
             [categories]="exampleType === 'categories' ? categories : []"
             initialSuggestionTitle="Try this!"
             initialSuggestionSubline="Search for example 'All my open Objects'"
@@ -28,6 +29,7 @@
             [showAdvancedFilter]="exampleType === 'advancedFilter'"
             (advancedFilterButtonClick)="openMessageToast('advanced filter')"
             [mobile]="exampleType === 'mobile'"
+            [searchResultsEmptyTemplate]="emptyResultsTemplate"
             [mobileConfig]="mobileConfig"
         ></fdp-search-field>
 
@@ -183,7 +185,25 @@
 <ng-template #footerTemplate>
     <div fd-bar-middle>
         <div fd-bar-element>
-            <button fd-button fdType="transparent" class="fd-button--full-width">Show All Search Results</button>
+            <button
+                (click)="showAllSearchResultsClicked()"
+                fd-button
+                fdType="transparent"
+                class="fd-button--full-width"
+            >
+                Show All Search Results
+            </button>
         </div>
     </div>
+</ng-template>
+
+<ng-template #emptyResultsTemplate>
+    <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
+        <figcaption fd-illustrated-message-figcaption id="xsmall-description">
+            <h3 fd-illustrated-message-title>No Search Results</h3>
+            <p fd-illustrated-message-text>
+                There are no results to display based on your search terms. Please try another search.
+            </p>
+        </figcaption>
+    </figure>
 </ng-template>

@@ -101,13 +101,16 @@ export interface SearchResultsDataModel {
     actionButtonGlyph?: string;
     actionButtonCallback?: string;
     actionButtonLabel?: string;
+    actionButtonId?: string;
     showDeleteButton?: string;
     deleteCallback?: string;
+    groupBy?: string;
 }
 
 export interface SearchResultsActionButton {
     glyph?: string;
     label?: string;
+    id?: string;
     callback?: () => any;
 }
 
@@ -345,6 +348,9 @@ export class SearchFieldComponent
     /** Subline of the initial suggestion, if a suggestion list is displayed. */
     suggestionFooter = input<TemplateRef<any> | null>(null);
 
+    /** Template to display when the search results list has no items to display. */
+    searchResultsEmptyTemplate = input<TemplateRef<any> | null>(null);
+
     /** Configuration model which allows the developer to specify what properties from the data will be used for different parts of the search results. */
     searchResultsDataModel = input<SearchResultsDataModel>();
 
@@ -356,6 +362,9 @@ export class SearchFieldComponent
 
     /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
     showAdvancedFilter = input<boolean>(false);
+
+    /** Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty. This should only be used when there are few items in the datasource. */
+    allowEmptySearch = input<boolean>(false);
 
     /** @hidden Focus state */
     _isFocused = false;
@@ -530,7 +539,7 @@ export class SearchFieldComponent
 
         this.inputChange.emit(this.searchFieldValue);
         const inputStr: string = event.trim();
-        if (inputStr.length === 0) {
+        if (inputStr.length === 0 && !this.allowEmptySearch()) {
             this.closeSuggestionMenu();
             return;
         }
@@ -605,6 +614,9 @@ export class SearchFieldComponent
             );
 
         this.inputChange.emit(this.searchFieldValue);
+        if (this.isOpen) {
+            this.onValueChange(this.inputText);
+        }
     }
 
     /**
@@ -663,7 +675,15 @@ export class SearchFieldComponent
         this._isRefresh = true;
         this._isSearchDone = false;
 
-        this.closeSuggestionMenu(false);
+        if (!this.allowEmptySearch) {
+            this.closeSuggestionMenu(false);
+        } else if (this.dataSource) {
+            const match = new Map();
+            match.set('keyword', '');
+            match.set('category', this._currentCategory?.value || null);
+
+            this.dataSource.match(match);
+        }
         this.focus();
     }
 
@@ -674,7 +694,39 @@ export class SearchFieldComponent
             .open()
             .pipe(takeUntil(merge(destroyObservable(this._destroyRef), this._dataSourceChanged$)))
             .subscribe((data) => {
-                this._dropdownValues$ = of(data);
+                const groupBy = this.searchResultsDataModel()?.groupBy;
+                if (groupBy) {
+                    const groupedData = [...data.filter((obj) => !(obj.data && obj.data.isHeader))];
+                    groupedData.sort((a, b) => {
+                        const aGroup = a.data[groupBy];
+                        const bGroup = b.data[groupBy];
+                        const aLabel = this.categories.filter((category) => category.value === aGroup)[0]?.label;
+                        const bLabel = this.categories.filter((category) => category.value === bGroup)[0]?.label;
+                        if (aLabel < bLabel) {
+                            return -1;
+                        }
+                        if (aLabel > bLabel) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+                    this.categories.forEach((category) => {
+                        const firstFoundIndex = groupedData.map((e) => e.data[groupBy]).indexOf(category.value);
+                        const headerObj = {
+                            data: {
+                                isHeader: true
+                            },
+                            value: category.label
+                        };
+                        if (firstFoundIndex > -1) {
+                            groupedData.splice(firstFoundIndex, 0, headerObj);
+                        }
+                    });
+
+                    this._dropdownValues$ = of(groupedData);
+                } else {
+                    this._dropdownValues$ = of(data);
+                }
             });
         this._dataSource = dataSource;
     }
@@ -707,11 +759,13 @@ export class SearchFieldComponent
             const labelKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonLabel', true);
             const glyphKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonGlyph', true);
             const callbackKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonCallback', true);
+            const idKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonId', true);
             buttonData.forEach((button) => {
                 const parsedButton = {
                     label: button[labelKey],
                     glyph: button[glyphKey],
-                    callback: button[callbackKey]
+                    callback: button[callbackKey],
+                    id: button[idKey]
                 };
                 retVal.push(parsedButton);
             });
@@ -743,6 +797,18 @@ export class SearchFieldComponent
     /** @hidden */
     _advancedFilterButtonClicked(): void {
         this.advancedFilterButtonClick.emit();
+    }
+
+    /** @hidden */
+    _onlyHeadersFiltered(suggestions: SuggestionItem[]): boolean {
+        let retVal = true;
+        for (let i = 0; i < suggestions.length && retVal; i++) {
+            if (!suggestions[i].data || !suggestions[i].data?.isHeader) {
+                retVal = false;
+            }
+        }
+
+        return retVal;
     }
 
     /**
@@ -820,7 +886,7 @@ export class SuggestionMatchesPipe implements PipeTransform {
         const processedMatch = match.trim().toLowerCase();
         return suggestions.filter((suggestion) => {
             const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion.value;
-            return textToCheck.toLowerCase().indexOf(processedMatch) > -1;
+            return textToCheck.toLowerCase().indexOf(processedMatch) > -1 || suggestion.data?.isHeader;
         });
     }
 }
