@@ -619,5 +619,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: '分區按鈕群組',
         buttonRoleDescription: '分區按鈕'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

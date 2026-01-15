@@ -622,5 +622,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Segmentoitu painikeryhmä',
         buttonRoleDescription: 'Segmentoitu painike'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

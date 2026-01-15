@@ -629,5 +629,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ Ģŗŏűρ∙∙∙∙∙]]]',
         buttonRoleDescription: '[[[Ŝēğɱēŋţēƌ Ɓűţţŏŋ∙∙∙∙∙∙∙∙]]]'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };
