@@ -622,5 +622,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Segmenteret knapgruppe',
         buttonRoleDescription: 'Segmentknap'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

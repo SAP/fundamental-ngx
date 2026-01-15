@@ -623,5 +623,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Skupina segmentiranih gumbov',
         buttonRoleDescription: 'Segmentirani gumb'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

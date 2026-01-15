@@ -620,5 +620,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: '세그멘테이션된 버튼 그룹',
         buttonRoleDescription: '세그멘테이션된 버튼'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };
