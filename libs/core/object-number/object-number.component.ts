@@ -30,30 +30,30 @@ export class ObjectNumberComponent {
     /**
      * Numerical value of the object number.
      */
-    readonly number = input<number>();
+    protected readonly number = input<number>();
 
     /**
      * Number of decimal places to show
      */
-    readonly decimal = input(0);
+    protected readonly decimal = input(0);
 
     /** Sets unit of measure displayed. */
-    readonly unit = input<string>();
+    protected readonly unit = input<string>();
 
     /** Set the value to true to display the object number in bold text */
-    readonly emphasized = input(false);
+    protected readonly emphasized = input(false);
 
     /** Set the value to true to display the object number in large text */
-    readonly large = input(false);
+    protected readonly large = input(false);
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
-    readonly status = input<ObjectStatus>();
+    protected readonly status = input<ObjectStatus>();
 
     /** An optional status message for the object number */
-    readonly statusMessage = input<string>();
+    protected readonly statusMessage = input<string>();
 
     /** Status key to translate for screen readers */
-    readonly statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
+    protected readonly statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
         const status = this.status();
         if (this.isValidObjectStatus(status)) {
             return `coreObjectNumber.${status}`;
@@ -62,19 +62,19 @@ export class ObjectNumberComponent {
     });
 
     /** User's custom classes */
-    readonly class = input<string>('');
+    protected readonly class = input<string>('');
 
     /** Id of the element that labels object number. */
-    readonly ariaLabelledBy = input<string | null>();
+    protected readonly ariaLabelledBy = input<string | null>();
 
     /** Aria label for the object number. */
-    readonly ariaLabel = input<string | null>();
+    protected readonly ariaLabel = input<string | null>();
 
     /** Whether the object number is interactive */
-    readonly interactive = input(false, { transform: booleanAttribute });
+    protected readonly interactive = input(false, { transform: booleanAttribute });
 
     /** Whether the object number is inverted. */
-    readonly inverted = input(false, { transform: booleanAttribute });
+    protected readonly inverted = input(false, { transform: booleanAttribute });
 
     /** @hidden Computed number pipe configuration */
     protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
