@@ -18,36 +18,117 @@
 
 ## 1. Description
 
-`@fundamental-ngx/i18n` is a library that provides translation utilities for the Fundamental-ngx library.
-The library is tailored for the use in `fundamental-ngx` components and can be used for modifying the variety of the
-components' labels, hints, and descriptions.
+`@fundamental-ngx/i18n` provides centralized internationalization for Fundamental-ngx components with support for 37+ languages and runtime translation switching.
 
-Even though the library is tailored for the use in `fundamental-ngx` components, it can be used in any Angular application,
-where the simple translations are needed.
+### What's Included
 
-The library elements are for the runtime, which gives the possibility to swap the translations on the fly, without
-having to refresh the pages.
+- Pre-compiled translation data for 37+ languages (as `FD_LANGUAGE_*` constants)
+- Translation resolver utilities (signals, observables, and synchronous APIs)
+- `FdTranslatePipe` for template translations
+- Type-safe translation keys via `FdLanguage` interface
+
+### How It Works
+
+1. **Source**: Translation teams provide `.properties` files (Java-style format)
+2. **Build**: NX executor converts `.properties` → TypeScript modules
+3. **Export**: Language constants (`FD_LANGUAGE_ENGLISH`, `FD_LANGUAGE_GERMAN`, etc.)
+4. **Publish**: Compiled JavaScript (not source `.properties`) published to npm
+5. **Use**: Apps import language constants and translation utilities
+
+While designed for Fundamental-ngx components, this library works in any Angular application needing runtime-switchable translations.
+
+### Adding New Translation Keys
+
+> **This guide is for adding new translation keys (labels, ARIA attributes), NOT for adding new languages.**
+
+#### Quick Steps
+
+1. **Update interface**: Add key to [`FdLanguage`](src/lib/models/fd-language.ts) interface
+2. **Add to all .properties files**: Same key + English text in all 37+ language files
+3. **Run**: `nx run i18n:transform-translations`
+4. **Use**: Import and use in your component
+
+---
+
+#### Step 1: Update TypeScript Interface
+
+Add your key to `libs/i18n/src/lib/models/fd-language.ts`:
+
+```typescript
+export interface FdLanguage {
+    coreYourComponent: {
+        /** Description */
+        yourNewKey: FdLanguageKey;
+        keyWithParams: FdLanguageKey<{ count: number }>;
+    };
+}
+```
+
+> **Note**: `fd-language-key-identifier.ts` is auto-generated - don't edit it manually.
+
+#### Step 2: Add to ALL .properties Files
+
+Add to **all** files in `libs/i18n/src/lib/translations/` (use English text everywhere):
+
+```properties
+#XBUT: Button / #XFLD: Label / #XTIT: Title / #XACT: ARIA / #XMSG: Message
+coreYourComponent.yourNewKey = Your English text
+coreYourComponent.keyWithParams = Item {count}
+```
+
+**Why all files?** TypeScript requires identical keys across all languages. Translation teams will replace English placeholders later.
+
+#### Step 3: Generate TypeScript Files
+
+```bash
+nx run i18n:transform-translations
+```
+
+Auto-generates: `translations*.ts`, `fd-language-key-identifier.ts` (union type), test files
+
+#### Step 4: Use in Components
+
+**Template (pipe):**
+
+```typescript
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+@Component({
+    imports: [FdTranslatePipe],
+    template: `<button>{{ 'coreYourComponent.yourNewKey' | fdTranslate }}</button>`
+})
+```
+
+**TypeScript (signal):**
+
+```typescript
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
+
+protected readonly label = resolveTranslationSignal('coreYourComponent.yourNewKey');
+```
+
+**Post-merge**: Translation teams will provide proper translations in future releases.
 
 ## 2. Requirements
 
-To download and use Fundamental Library i18n package, you will first need to install
-the [node package manager](https://www.npmjs.com/get-npm). The library is intended for use with
-Angular 16.2 or newer. Prior knowledge of Angular is recommended, to use it fully library.
+- Node.js and npm
+- Angular 16.2 or newer
+- Prior Angular knowledge recommended
 
 ## 3. Versioning
 
-Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest patches changes.
+See [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest updates.
 
 ## 4. Known Issues
 
-Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
+See [Issues](https://github.com/SAP/fundamental-ngx/issues).
 
 ## 5. Support
 
-If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
+[Create a ticket](https://github.com/SAP/fundamental-ngx/issues) for issues or questions.
 
 ## 6. Contributing
 
-If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
+Check [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) for guidelines. Follow [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
 
-Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
+See [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) for creating new components.

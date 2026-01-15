@@ -11,6 +11,10 @@ import { TruncatePipe } from './truncate.pipe';
 import { TwoDigitsPipe } from './two-digits.pipe';
 import { ValueByPathPipe } from './value-by-path.pipe';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         DisplayFnPipe,

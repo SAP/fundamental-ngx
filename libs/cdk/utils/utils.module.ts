@@ -22,6 +22,10 @@ import {
 import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
 import { RtlService } from './services/rtl.service';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         FocusableItemModule,

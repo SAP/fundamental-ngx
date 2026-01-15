@@ -90,6 +90,10 @@ const EXPORTABLE_DECLARATIONS = [
     TableFooterRowComponent
 ];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule],
     exports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule]

@@ -12,6 +12,10 @@ import { QuickViewSubheaderComponent } from './quick-view-subheader/quick-view-s
 import { QuickViewTitleComponent } from './quick-view-title/quick-view-title.component';
 import { QuickViewComponent } from './quick-view/quick-view.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         QuickViewComponent,

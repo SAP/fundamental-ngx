@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Månadsväljare',
         calendarYearsViewDescription: 'Årsväljare',
         calendarYearsRangeViewDescription: 'Årsintervallväljare',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Arbetsdag',
+        nonWorkDayLabel: 'Arbetsfri dag'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinationsruta med flera värden',
         selectAllLabel: 'Välj alla ({selectedItems} av {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Gruppsidhuvud'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Artikel {itemNum} av {totalNum} visas',
         leftNavigationBtnLabel: 'Gå till föregående artikel',
         rightNavigationBtnLabel: 'Gå till nästa artikel'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Utkast'
     },
     coreMessageStrip: {
-        dismissLabel: 'Avvisa',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Stäng',
+        announcementInfo: 'Informationsmeddelanderad',
+        announcementWarning: 'Varningsmeddelanderad',
+        announcementError: 'Felmeddelanderad',
+        announcementSuccess: 'Resultatmeddelanderad',
+        closable: 'Kan stängas'
     },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlistobjekt.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Navigeringssökväg'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Trädelement {itemDetails}, {index} av {total}{selectedDescription}'
+        linkItemAriaLabel: 'Trädelement {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} fler'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Inställningar',
-        searchLabel: 'Sök'
+        searchLabel: 'Sök',
+        backButtonLabel: 'Tillbaka'
     },
     platformSwitch: {
         ariaLabel: 'Växla inmatning'
@@ -605,10 +606,10 @@ export default {
         menuButtonAriaLabel: 'Menyknapp'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'expandera/komprimera underpositioner',
+        moreButtonAriaLabel: 'Visa ytterligare navigeringspositioner som är dolda på grund av begränsat skärmutrymme',
+        overflowMenuAriaLabel: 'Ytterligare navigeringspositioner',
+        snappedPopoverRoleDescription: 'Träd i navigeringslista'
     },
     coreNotification: {
         groupHeaderTitle: 'Expandera/komprimera',
@@ -619,7 +620,7 @@ export default {
         triggerLessLabel: 'Mindre'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Segmenterad knappgrupp',
+        buttonRoleDescription: 'Segmenterad knapp'
     }
 };

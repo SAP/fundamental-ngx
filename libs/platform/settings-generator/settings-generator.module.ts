@@ -15,6 +15,10 @@ import { SettingsGeneratorLayoutAccessorService } from './settings-generator-lay
 import { SettingsGeneratorComponent } from './settings-generator.component';
 import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         PlatformFormGeneratorModule,

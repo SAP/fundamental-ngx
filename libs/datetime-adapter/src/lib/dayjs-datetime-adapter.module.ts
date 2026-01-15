@@ -4,6 +4,10 @@ import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/dateti
 import { DayjsDatetimeAdapter } from './dayjs-datetime-adapter';
 import { DAYJS_DATETIME_FORMATS } from './dayjs-datetime-formats';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     providers: [{ provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter }]
 })

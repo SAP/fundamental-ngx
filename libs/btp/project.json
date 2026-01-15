@@ -8,7 +8,7 @@
         "prepare": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=btp --verbose"]
+                "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=btp --verbose"
             }
         },
         "compile-typedoc": {

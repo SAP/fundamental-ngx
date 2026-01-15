@@ -10,6 +10,10 @@ import { SliderComponent } from './slider.component';
 
 const EXPORTS = [SliderComponent, SliderPositionDirective];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule, ...EXPORTS],
     exports: [...EXPORTS]

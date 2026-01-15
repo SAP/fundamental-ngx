@@ -12,6 +12,10 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list/approval-flow-user-list.component';
 import { ApprovalFlowComponent } from './approval-flow.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         ApprovalFlowComponent,

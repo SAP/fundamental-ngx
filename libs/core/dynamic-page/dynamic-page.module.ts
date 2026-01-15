@@ -28,6 +28,10 @@ const components = [
     DynamicPageBreadcrumbComponent
 ];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]

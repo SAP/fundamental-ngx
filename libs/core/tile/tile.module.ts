@@ -35,6 +35,10 @@ import {
 } from './directives/tile.directives';
 import { TileComponent } from './tile.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         TileComponent,

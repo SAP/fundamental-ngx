@@ -5,6 +5,10 @@ import { VariantManagementWrapperComponent } from './components/variant-manageme
 import { VariantManagementDirtyLabelDirective } from './directives/variant-management-dirty-label.directive';
 import { VariantManagementComponent } from './variant-management.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         VariantManagementComponent,

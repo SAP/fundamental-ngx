@@ -5,6 +5,10 @@ import { FacetGroupComponent } from './facet-group.component';
 import { FacetComponent } from './facet/facet.component';
 
 const components = [FacetComponent, FacetGroupComponent, FacetContentComponent, FacetContainerComponent];
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]
