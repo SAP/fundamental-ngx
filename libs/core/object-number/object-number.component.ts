@@ -18,9 +18,9 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[class]': '_cssClass()',
         '[attr.tabindex]': 'interactive() ? 0 : null',
-        '[attr.role]': 'interactive() ? "button" : null'
+        '[attr.role]': 'interactive() ? "button" : null',
+        '[class]': '_cssClass()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -106,6 +106,7 @@ export class ObjectNumberComponent {
         if (customClass) {
             classes.push(customClass);
         }
+        console.log('classes', classes.join(' '));
 
         return classes.join(' ');
     });
