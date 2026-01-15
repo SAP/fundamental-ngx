@@ -94,6 +94,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'ट्री वस्तु {itemDetails}, {index} का {total}{selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreOverflowLayout: {
         moreItemsButton: '{count} अधिक'
     },

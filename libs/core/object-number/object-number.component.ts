@@ -1,5 +1,13 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+    booleanAttribute,
+    computed,
+    input
+} from '@angular/core';
+import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -10,11 +18,13 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[class]': '_cssClass()'
+        '[class]': '_cssClass()',
+        '[attr.tabindex]': 'interactive() ? 0 : null',
+        '[attr.role]': 'interactive() ? "button" : null'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DecimalPipe]
+    imports: [DecimalPipe, FdTranslatePipe]
 })
 export class ObjectNumberComponent {
     /**
@@ -39,6 +49,18 @@ export class ObjectNumberComponent {
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
     readonly status = input<ObjectStatus>();
 
+    /** An optional status message for the object number */
+    readonly statusMessage = input<string>();
+
+    /** Status key to translate for screen readers */
+    readonly statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
+        const status = this.status();
+        if (this.isValidObjectStatus(status)) {
+            return `coreObjectNumber.${status}`;
+        }
+        return null;
+    });
+
     /** User's custom classes */
     readonly class = input<string>('');
 
@@ -47,6 +69,12 @@ export class ObjectNumberComponent {
 
     /** Aria label for the object number. */
     readonly ariaLabel = input<string | null>();
+
+    /** Whether the object number is interactive */
+    readonly interactive = input(false, { transform: booleanAttribute });
+
+    /** Whether the object number is inverted. */
+    readonly inverted = input(false, { transform: booleanAttribute });
 
     /** @hidden Computed number pipe configuration */
     protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
@@ -64,6 +92,16 @@ export class ObjectNumberComponent {
             classes.push(`fd-object-number--${status}`);
         }
 
+        const interactive = this.interactive();
+        if (interactive) {
+            classes.push('fd-object-number--interactive');
+        }
+
+        const inverted = this.inverted();
+        if (inverted) {
+            classes.push('fd-object-number--inverted');
+        }
+
         const customClass = this.class();
         if (customClass) {
             classes.push(customClass);
@@ -71,4 +109,12 @@ export class ObjectNumberComponent {
 
         return classes.join(' ');
     });
+
+    /**
+     * Type guard to check if the status is a valid ObjectStatus
+     * @hidden
+     */
+    private isValidObjectStatus(status: ObjectStatus | undefined): status is ObjectStatus {
+        return status === 'negative' || status === 'critical' || status === 'positive' || status === 'informative';
+    }
 }

@@ -1,45 +1,41 @@
-import { Component, ViewChild } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ObjectNumberComponent } from './object-number.component';
 
-@Component({
-    selector: 'fd-test-object-number',
-    template: ` <fd-object-number
-        [number]="1000.37"
-        [unit]="unit"
-        [decimal]="decimal"
-        [large]="large"
-        [status]="status"
-        [class]="class"
-    ></fd-object-number>`,
-    standalone: true,
-    imports: [ObjectNumberComponent]
+@Pipe({
+    name: 'fdTranslate',
+    standalone: true
 })
-class TestObjectNumberComponent {
-    @ViewChild(ObjectNumberComponent, { static: true })
-    objectNumberComponent: ObjectNumberComponent;
-    unit = 'EUR';
-    decimal = 0;
-    large = false;
-    status = '';
-    class = '';
+class MockFdTranslatePipe implements PipeTransform {
+    transform(value: string): string {
+        // For testing, just return the translation key itself
+        // This way we can verify the correct keys are being used
+        return value;
+    }
 }
 
 describe('ObjectNumberComponent', () => {
     let component: ObjectNumberComponent;
-    let fixture: ComponentFixture<TestObjectNumberComponent>;
+    let fixture: ComponentFixture<ObjectNumberComponent>;
+    const number = 1000.37;
     const numberTextEl = '.fd-object-number__text';
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestObjectNumberComponent]
-        }).compileComponents();
+            imports: [ObjectNumberComponent]
+        })
+            .overrideComponent(ObjectNumberComponent, {
+                remove: { imports: [FdTranslatePipe] },
+                add: { imports: [MockFdTranslatePipe] }
+            })
+            .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestObjectNumberComponent);
-        component = fixture.componentInstance.objectNumberComponent;
+        fixture = TestBed.createComponent(ObjectNumberComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
@@ -48,49 +44,96 @@ describe('ObjectNumberComponent', () => {
     });
 
     it('should apply large design', () => {
-        fixture.componentInstance.large = true;
+        fixture.componentRef.setInput('large', true);
         fixture.detectChanges();
-        expect(
-            fixture.nativeElement.querySelector('fd-object-number').classList.contains('fd-object-number--large')
-        ).toBe(true);
-    });
-
-    it('should add status', () => {
-        fixture.componentInstance.status = 'positive';
-        fixture.detectChanges();
-        expect(
-            fixture.nativeElement.querySelector('fd-object-number').classList.contains('fd-object-number--positive')
-        ).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-object-number--large')).toBe(true);
     });
 
     it('should add custom class', () => {
-        fixture.componentInstance.class = 'custom-class';
+        fixture.componentRef.setInput('class', 'custom-class');
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('fd-object-number').classList.contains('custom-class')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('custom-class')).toBe(true);
     });
 
     it('should display units', () => {
-        fixture.componentInstance.unit = 'TEST';
+        fixture.componentRef.setInput('unit', 'TEST');
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('fd-object-number').textContent.includes('TEST')).toBe(true);
+        expect(fixture.nativeElement.textContent.includes('TEST')).toBe(true);
     });
 
     it('should display decimals', () => {
-        fixture.componentInstance.decimal = 2;
+        fixture.componentRef.setInput('number', number);
+        fixture.componentRef.setInput('decimal', 2);
         fixture.detectChanges();
-        expect(
-            fixture.nativeElement
-                .querySelector('fd-object-number')
-                .querySelector(numberTextEl)
-                .textContent.includes('1,000.37')
-        ).toBeTruthy();
+        expect(fixture.nativeElement.querySelector(numberTextEl).textContent.includes('1,000.37')).toBeTruthy();
     });
 
     it('should not display decimals if [decimal] set to 0', () => {
-        fixture.componentInstance.decimal = 0;
+        fixture.componentRef.setInput('number', number);
+        fixture.componentRef.setInput('decimal', 0);
         fixture.detectChanges();
-        expect(
-            fixture.nativeElement.querySelector('fd-object-number').querySelector(numberTextEl).textContent.trim()
-        ).toEqual('1,000');
+        expect(fixture.nativeElement.querySelector(numberTextEl).textContent.trim()).toEqual('1,000');
+    });
+
+    it('should add translated screen reader "Emphasized" text when object number is emphasized', () => {
+        fixture.componentRef.setInput('emphasized', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
+            'coreObjectNumber.emphasized'
+        );
+    });
+
+    describe('when status is set', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('status', 'positive');
+            fixture.detectChanges();
+        });
+
+        it('should add the correct status class', () => {
+            expect(fixture.nativeElement.classList.contains('fd-object-number--positive')).toBe(true);
+        });
+
+        describe('when no statusMessage is provided', () => {
+            it('should add default translated screen reader status text', () => {
+                expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
+                    'coreObjectNumber.positive'
+                );
+            });
+        });
+
+        describe('when statusMessage is provided', () => {
+            it('should add the provided statusMessage as screen reader text', () => {
+                fixture.componentRef.setInput('statusMessage', 'Custom status message');
+                fixture.detectChanges();
+                expect(fixture.nativeElement.querySelector('.fd-object-number__sr-only').textContent).toEqual(
+                    'Custom status message'
+                );
+            });
+        });
+    });
+
+    describe('when interactive is true', () => {
+        beforeEach(() => {
+            fixture.componentRef.setInput('interactive', true);
+            fixture.detectChanges();
+        });
+
+        it('should add an "fd-object-number--interactive" class', () => {
+            expect(fixture.nativeElement.classList.contains('fd-object-number--interactive')).toBe(true);
+        });
+
+        it('should set tabindex on the host to 0', () => {
+            expect(fixture.nativeElement.tabIndex).toBe(0);
+        });
+
+        it('should set role on the host to "button"', () => {
+            expect(fixture.nativeElement.role).toBe('button');
+        });
+    });
+
+    it('should add an "fd-object-number--inverted" class when inverted is true', () => {
+        fixture.componentRef.setInput('inverted', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-object-number--inverted')).toBe(true);
     });
 });
