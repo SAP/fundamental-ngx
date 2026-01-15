@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'ตัวเลือกเดือน',
         calendarYearsViewDescription: 'ตัวเลือกปี',
         calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'วันทำงาน',
+        nonWorkDayLabel: 'วันหยุด'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'คอมโบบ็อกซ์แบบหลายค่า',
         selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'ส่วนหัวของกลุ่ม'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'แสดงไอเท็ม {itemNum} จาก {totalNum} รายการ',
         leftNavigationBtnLabel: 'ไปยังไอเท็มก่อนหน้า',
         rightNavigationBtnLabel: 'ไปยังไอเท็มถัดไป'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'แบบร่าง'
     },
     coreMessageStrip: {
-        dismissLabel: 'ยกเลิก',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'ปิด',
+        announcementInfo: 'แถบข้อความข้อมูล',
+        announcementWarning: 'แถบข้อความเตือน',
+        announcementError: 'แถบข้อความแสดงข้อผิดพลาด',
+        announcementSuccess: 'แถบข้อความแสดงความสำเร็จ',
+        closable: 'สามารถปิดได้'
     },
     coreMultiInput: {
         countListResultsSingular: 'ไอเท็มในรายการผลลัพธ์ 1 รายการ',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'พาธการเนวิเกต'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {index} จาก {total}{selectedDescription} รายการ'
+        linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'อีก {count} รายการ'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'การตั้งค่า',
-        searchLabel: 'ค้นหา'
+        searchLabel: 'ค้นหา',
+        backButtonLabel: 'ย้อนกลับ'
     },
     platformSwitch: {
         ariaLabel: 'อินพุทการสลับ'
@@ -605,10 +606,10 @@ export default {
         menuButtonAriaLabel: 'ปุ่มเมนู'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'ขยาย/ย่อรวมไอเท็มย่อย',
+        moreButtonAriaLabel: 'แสดงไอเท็มในการเนวิเกตเพิ่มเติมที่ถูกซ่อนเนื่องจากมีพื้นที่หน้าจอจำกัด',
+        overflowMenuAriaLabel: 'ไอเท็มในการเนวิเกตเพิ่มเติม',
+        snappedPopoverRoleDescription: 'ทรีรายการเนวิเกต'
     },
     coreNotification: {
         groupHeaderTitle: 'ขยาย/ยุบรวม',
@@ -619,7 +620,7 @@ export default {
         triggerLessLabel: 'น้อยลง'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'กลุ่มปุ่มที่แบ่งเซกเมนต์',
+        buttonRoleDescription: 'ปุ่มที่แบ่งเซกเมนต์'
     }
 };

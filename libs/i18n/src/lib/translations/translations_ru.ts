@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Выбор месяца',
         calendarYearsViewDescription: 'Выбор года',
         calendarYearsRangeViewDescription: 'Выбор диапазона годов',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Рабочий день',
+        nonWorkDayLabel: 'Нерабочий день'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Поле со списком значений',
         selectAllLabel: 'Выбрать все ({selectedItems} из {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Заголовок группы'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Отображается позиция {itemNum} из {totalNum}',
         leftNavigationBtnLabel: 'К предыдущей позиции',
         rightNavigationBtnLabel: 'К следующей позиции'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Черновик'
     },
     coreMessageStrip: {
-        dismissLabel: 'Игнорировать',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Закрыть',
+        announcementInfo: 'Строка информационного сообщения',
+        announcementWarning: 'Строка сообщения с предупреждением',
+        announcementError: 'Строка сообщения об ошибке',
+        announcementSuccess: 'Строка сообщения об успешном выполнении',
+        closable: 'Можно закрыть'
     },
     coreMultiInput: {
         countListResultsSingular: '1 позиция в списке результатов.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Путь навигации'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Элемент дерева {itemDetails}, {index} из {total}{selectedDescription}'
+        linkItemAriaLabel: 'Элемент дерева {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Еще {count}'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Настройки',
-        searchLabel: 'Поиск'
+        searchLabel: 'Поиск',
+        backButtonLabel: 'Назад'
     },
     platformSwitch: {
         ariaLabel: 'Ввод переключателя'
@@ -605,10 +606,11 @@ export default {
         menuButtonAriaLabel: 'Кнопка меню'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'развернуть/свернуть подчиненные элементы',
+        moreButtonAriaLabel:
+            'Показывает дополнительные элементы навигации, которые скрыты из-за ограниченного пространства экрана',
+        overflowMenuAriaLabel: 'Дополнительные элементы навигации',
+        snappedPopoverRoleDescription: 'Дерево списка навигации'
     },
     coreNotification: {
         groupHeaderTitle: 'Развернуть/свернуть',
@@ -619,7 +621,7 @@ export default {
         triggerLessLabel: 'Меньше'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Группа сегментированных кнопок',
+        buttonRoleDescription: 'Сегментированная кнопка'
     }
 };

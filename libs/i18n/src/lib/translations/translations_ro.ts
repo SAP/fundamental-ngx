@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Selector lună',
         calendarYearsViewDescription: 'Selector an',
         calendarYearsRangeViewDescription: 'Selector interval de ani',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Zi lucrătoare',
+        nonWorkDayLabel: 'Zi nelucrătoare'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Casetă combinată cu valori multiple',
         selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Antet de grup'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Se afișează articolul {itemNum} din {totalNum}',
         leftNavigationBtnLabel: 'Salt la articol anterior',
         rightNavigationBtnLabel: 'Salt la articol următor'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Schiță'
     },
     coreMessageStrip: {
-        dismissLabel: 'Respingere',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Închidere',
+        announcementInfo: 'Linie de mesaj de informații',
+        announcementWarning: 'Linie de mesaj de avertizare',
+        announcementError: 'Linie de mesaj de eroare',
+        announcementSuccess: 'Linie de mesaj de succes',
+        closable: 'Poate fi închis'
     },
     coreMultiInput: {
         countListResultsSingular: '1 articol în lista de rezultate.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Cale de navigare'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Element din arbore {itemDetails}, {index} din {total}{selectedDescription}'
+        linkItemAriaLabel: 'Element din arbore {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Încă {count}'
@@ -379,7 +379,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Setări',
-        searchLabel: 'Căutare'
+        searchLabel: 'Căutare',
+        backButtonLabel: 'Înapoi'
     },
     platformSwitch: {
         ariaLabel: 'Comutare intrare'
@@ -606,10 +607,11 @@ export default {
         menuButtonAriaLabel: 'Buton meniu'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'expandare/comprimare articole secundare',
+        moreButtonAriaLabel:
+            'Afișează articole de navigare suplimentare care sunt mascate din cauza spațiului limitat pe ecran',
+        overflowMenuAriaLabel: 'Articole de navigare suplimentare',
+        snappedPopoverRoleDescription: 'Arbore de listă de navigare'
     },
     coreNotification: {
         groupHeaderTitle: 'Extindere/Restrângere',
@@ -620,7 +622,7 @@ export default {
         triggerLessLabel: 'Mai puțin'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Grup de butoane segmentate',
+        buttonRoleDescription: 'Buton segmentat'
     }
 };

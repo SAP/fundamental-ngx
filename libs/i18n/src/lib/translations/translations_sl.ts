@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Izbirnik meseca',
         calendarYearsViewDescription: 'Izbirnik leta',
         calendarYearsRangeViewDescription: 'Izbirnik števila let',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Delovni dan',
+        nonWorkDayLabel: 'Dela prost dan'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinirani seznam z več vrednostmi',
         selectAllLabel: 'Izbira vseh ({selectedItems} od {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Glava skupine'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Prikazana postavka {itemNum} od {totalNum}',
         leftNavigationBtnLabel: 'Premik na prejšnjo postavko',
         rightNavigationBtnLabel: 'Premik na naslednjo postavko'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Osnutek'
     },
     coreMessageStrip: {
-        dismissLabel: 'Opusti',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Zapri',
+        announcementInfo: 'Vrstica z informativnim obvestilom',
+        announcementWarning: 'Vrstica z opozorilnim obvestilom',
+        announcementError: 'Vrstica z obvestilom o napaki',
+        announcementSuccess: 'Vrstica z obvestilom o uspehu',
+        closable: 'Je mogoče zapreti'
     },
     coreMultiInput: {
         countListResultsSingular: 'Seznam postavk z 1 rezultatom.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Pot krmarjenja'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Element drevesa {itemDetails}, {index} od {total} {selectedDescription}'
+        linkItemAriaLabel: 'Element drevesa {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Še {count}'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavitve',
-        searchLabel: 'Iskanje'
+        searchLabel: 'Iskanje',
+        backButtonLabel: 'Nazaj'
     },
     platformSwitch: {
         ariaLabel: 'Preklop vnosa'
@@ -605,10 +606,11 @@ export default {
         menuButtonAriaLabel: 'Menijski gumb'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'Razširitev/skrčitev podpostavk',
+        moreButtonAriaLabel:
+            'Prikaže dodatne elemente za krmarjenje, ki so skriti zaradi omejenega prostora na zaslonu',
+        overflowMenuAriaLabel: 'Dodatni elementi za krmarjenje',
+        snappedPopoverRoleDescription: 'Drevo seznama za krmarjenje'
     },
     coreNotification: {
         groupHeaderTitle: 'Razširitev/strnitev',
@@ -619,7 +621,7 @@ export default {
         triggerLessLabel: 'Manj'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Skupina segmentiranih gumbov',
+        buttonRoleDescription: 'Segmentirani gumb'
     }
 };

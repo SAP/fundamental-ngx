@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Айды таңдау құралы',
         calendarYearsViewDescription: 'Жылды таңдау құралы',
         calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Жұмыс күні',
+        nonWorkDayLabel: 'Демалыс күні'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Бірнеше мәннің құрама ұясы',
         selectAllLabel: 'Барлық ({selectedItems}/{totalItems}) таңдаңыз',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Топ тақырыбы'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '{totalNum} ішінен {itemNum}-тармақ көрсетілген',
         leftNavigationBtnLabel: 'Алдыңғы тармаққа өту',
         rightNavigationBtnLabel: 'Келесі тармаққа өту'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Нобай'
     },
     coreMessageStrip: {
-        dismissLabel: 'Бас тарту',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Жабу',
+        announcementInfo: 'Ақпараттық хабар жолағы',
+        announcementWarning: 'Ескерту хабарының жолағы',
+        announcementError: 'Қате туралы хабар жолағы',
+        announcementSuccess: 'Сәттілік туралы хабардың жолағы',
+        closable: 'Жабуға болады'
     },
     coreMultiInput: {
         countListResultsSingular: '1 нәтижелер тізімінің тармағы.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Навигация жолы'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Тармақты құрылым элементі: {itemDetails}, {index}/{total}{selectedDescription}'
+        linkItemAriaLabel: 'Тармақты құрылым тармағы {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'тағы {count}'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Параметрлер',
-        searchLabel: 'Іздеу'
+        searchLabel: 'Іздеу',
+        backButtonLabel: 'Артқа'
     },
     platformSwitch: {
         ariaLabel: 'Кірісті ауыстырып қосу'
@@ -605,10 +606,11 @@ export default {
         menuButtonAriaLabel: 'Мәзір түймесі'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'ішкі тармақтарды жаю/жию',
+        moreButtonAriaLabel:
+            'Экранның шектеулі бос орнына байланысты жасырылған қосымша навигация тармақтарын көрсетеді',
+        overflowMenuAriaLabel: 'Қосымша навигация тармақтары',
+        snappedPopoverRoleDescription: 'Навигация тізімінің тармақты құрылымы'
     },
     coreNotification: {
         groupHeaderTitle: 'Жаю/жию',
@@ -619,7 +621,7 @@ export default {
         triggerLessLabel: 'Азырақ'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Сегменттелген түймелер тобы',
+        buttonRoleDescription: 'Сегменттелген түйме'
     }
 };

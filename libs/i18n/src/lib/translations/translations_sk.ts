@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Výber mesiaca',
         calendarYearsViewDescription: 'Výber roka',
         calendarYearsRangeViewDescription: 'Výber rozsahu rokov',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Pracovný deň',
+        nonWorkDayLabel: 'Nepracovný deň'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Výklopný zoznam s viacerými hodnotami',
         selectAllLabel: 'Vybrať všetko ({selectedItems} z {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Hlavička skupiny'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Zobrazená položka {itemNum} z {totalNum}',
         leftNavigationBtnLabel: 'Prejsť na predchádzajúcu položku',
         rightNavigationBtnLabel: 'Prejsť na ďalšiu položku'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Koncept'
     },
     coreMessageStrip: {
-        dismissLabel: 'Odmietnuť',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Zavrieť',
+        announcementInfo: 'Riadok informačnej správy',
+        announcementWarning: 'Riadok upozorňujúcej správy',
+        announcementError: 'Riadok chybovej správy',
+        announcementSuccess: 'Riadok správy o úspešnosti',
+        closable: 'Možnosť zavrieť'
     },
     coreMultiInput: {
         countListResultsSingular: '1 položka zoznamu výsledkov.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Cesta navigácie'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Položka stromu {itemDetails}, {index} z {total}{selectedDescription}'
+        linkItemAriaLabel: 'Položka stromu {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} viac'
@@ -296,7 +296,7 @@ export default {
         searchButtonLabel: 'Spustiť',
         successButtonLabel: 'OK',
         cancelButtonLabel: 'Zrušiť',
-        selectedEmptyLabel: 'Nevybrané žiadne položky ani podmienky',
+        selectedEmptyLabel: 'Nevybraté žiadne položky ani podmienky',
         searchPlaceholder: 'Vyhľadávanie',
         searchAdvancedSearchLabel: 'Filtre',
         searchShowAdvancedSearchLabel: 'Zobraziť filtre',
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavenia',
-        searchLabel: 'Vyhľadať'
+        searchLabel: 'Vyhľadať',
+        backButtonLabel: 'Späť'
     },
     platformSwitch: {
         ariaLabel: 'Prepínač - zadanie'
@@ -605,10 +606,11 @@ export default {
         menuButtonAriaLabel: 'Tlačidlo ponuky'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'rozbaliť/zbaliť podpoložky',
+        moreButtonAriaLabel:
+            'Zobrazuje ďalšie navigačné položky, ktoré sú skryté kvôli obmedzenému priestoru na obrazovke',
+        overflowMenuAriaLabel: 'Ďalšie navigačné položky',
+        snappedPopoverRoleDescription: 'Strom navigačného zoznamu'
     },
     coreNotification: {
         groupHeaderTitle: 'Rozbaliť/zbaliť',
@@ -619,7 +621,7 @@ export default {
         triggerLessLabel: 'Menej'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Skupina segmentovaných tlačidiel',
+        buttonRoleDescription: 'Segmentované tlačidlo'
     }
 };
