@@ -24,6 +24,10 @@ import { WizardDialogGeneratorService } from './wizard-dialog-generator.service'
  * * Plain PlatformWizardGeneratorModule with default configuration
  * * With `withConfig()` method which allows passing custom default configuration.
  */
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         PlatformFormGeneratorModule,

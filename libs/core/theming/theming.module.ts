@@ -3,6 +3,10 @@ import { ThemingConfig } from './interfaces/theming-config.interface';
 import { provideTheming } from './provide-theming';
 import { ThemingService } from './theming.service';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [],
     providers: [ThemingService]

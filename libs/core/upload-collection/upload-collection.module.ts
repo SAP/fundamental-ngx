@@ -13,6 +13,10 @@ import {
 } from './upload-collection-simple.directives';
 import { UploadCollectionComponent } from './upload-collection.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         UploadCollectionComponent,

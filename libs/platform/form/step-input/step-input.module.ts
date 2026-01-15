@@ -4,6 +4,10 @@ import { StepInputControlDirective } from './step-input-control.directive';
 import { StepInputDecrementDirective } from './step-input-decrement.directive';
 import { StepInputIncrementDirective } from './step-input-increment.directive';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         StepInputDecrementDirective,

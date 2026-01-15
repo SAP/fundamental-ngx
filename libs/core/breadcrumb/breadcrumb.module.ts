@@ -7,6 +7,10 @@ import { BreadcrumbComponent } from './breadcrumb.component';
 
 const components = [BreadcrumbComponent, BreadcrumbItemComponent, LinkComponent, ContentDensityModule];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]

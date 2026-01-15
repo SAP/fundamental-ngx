@@ -22,6 +22,10 @@ const declarations = [
     MessageBoxTemplateDirective
 ];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [TemplateModule, InitialFocusModule, TitleComponent, declarations],
     exports: [declarations, TemplateModule, InitialFocusModule, TitleComponent],

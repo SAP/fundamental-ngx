@@ -47,6 +47,10 @@ import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-h
 import { VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [FormsModule],
     exports: [

@@ -8,6 +8,10 @@ import { MessageToastComponent } from './message-toast.component';
 import { MessageToastService } from './message-toast.service';
 import { provideMessageToastConfig } from './provide-config';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [PortalModule, OverlayModule, MessageToastComponent, MessageToastTextComponent],
     exports: [MessageToastComponent],
