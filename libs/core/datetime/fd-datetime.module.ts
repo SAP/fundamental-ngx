@@ -7,6 +7,10 @@ import { FD_DATETIME_FORMATS } from './fd-date-formats';
 import { FdDatetimeAdapter } from './fd-datetime-adapter';
 import { FdDatetimePipesModule } from './fd-datetime-pipes.module';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [PlatformModule],
     providers: [{ provide: DatetimeAdapter, useClass: FdDatetimeAdapter }]

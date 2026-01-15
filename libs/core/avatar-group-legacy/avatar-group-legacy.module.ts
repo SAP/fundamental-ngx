@@ -9,6 +9,10 @@ import { AvatarGroupLegacyOverflowButtonDirective } from './directives/avatar-gr
 import { AvatarGroupLegacyOverflowItemDirective } from './directives/avatar-group-legacy-overflow-item.directive';
 import { AvatarGroupLegacyPopoverControlDirective } from './directives/avatar-group-legacy-popover-control.directive';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         AvatarGroupLegacyComponent,

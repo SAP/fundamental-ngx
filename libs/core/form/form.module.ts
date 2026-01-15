@@ -9,6 +9,10 @@ import { FormLabelComponent } from './form-label/form-label.component';
 import { FormLegendDirective } from './form-legend/form-legend.directive';
 import { FormMessageComponent } from './form-message/form-message.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         FieldsetComponent,
