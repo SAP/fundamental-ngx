@@ -30,29 +30,47 @@ export class ObjectNumberComponent {
     /**
      * Numerical value of the object number.
      */
-    protected readonly number = input<number>();
+    readonly number = input<number>();
 
     /**
      * Number of decimal places to show
      */
-    protected readonly decimal = input(0);
+    readonly decimal = input(0);
 
     /** Sets unit of measure displayed. */
-    protected readonly unit = input<string>();
+    readonly unit = input<string>();
 
     /** Set the value to true to display the object number in bold text */
-    protected readonly emphasized = input(false);
+    readonly emphasized = input(false);
 
     /** Set the value to true to display the object number in large text */
-    protected readonly large = input(false);
+    readonly large = input(false);
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
-    protected readonly status = input<ObjectStatus>();
+    readonly status = input<ObjectStatus>();
 
     /** An optional status message for the object number */
-    protected readonly statusMessage = input<string>();
+    readonly statusMessage = input<string>();
 
-    /** Status key to translate for screen readers */
+    /** User's custom classes */
+    readonly class = input<string>('');
+
+    /** Id of the element that labels object number. */
+    readonly ariaLabelledBy = input<string | null>();
+
+    /** Aria label for the object number. */
+    readonly ariaLabel = input<string | null>();
+
+    /** Whether the object number is interactive */
+    readonly interactive = input(false, { transform: booleanAttribute });
+
+    /** Whether the object number is inverted. */
+    readonly inverted = input(false, { transform: booleanAttribute });
+
+    /** @hidden Computed number pipe configuration */
+    protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
+
+    /** @hidden Status key to translate for screen readers */
     protected readonly statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
         const status = this.status();
         if (this.isValidObjectStatus(status)) {
@@ -60,24 +78,6 @@ export class ObjectNumberComponent {
         }
         return null;
     });
-
-    /** User's custom classes */
-    protected readonly class = input<string>('');
-
-    /** Id of the element that labels object number. */
-    protected readonly ariaLabelledBy = input<string | null>();
-
-    /** Aria label for the object number. */
-    protected readonly ariaLabel = input<string | null>();
-
-    /** Whether the object number is interactive */
-    protected readonly interactive = input(false, { transform: booleanAttribute });
-
-    /** Whether the object number is inverted. */
-    protected readonly inverted = input(false, { transform: booleanAttribute });
-
-    /** @hidden Computed number pipe configuration */
-    protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
 
     /** @hidden Computed CSS classes */
     protected readonly _cssClass = computed(() => {
@@ -106,7 +106,6 @@ export class ObjectNumberComponent {
         if (customClass) {
             classes.push(customClass);
         }
-        console.log('classes', classes.join(' '));
 
         return classes.join(' ');
     });
