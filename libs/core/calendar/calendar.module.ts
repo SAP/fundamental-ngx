@@ -9,6 +9,10 @@ import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 import { CalendarComponent } from './calendar.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         CalendarComponent,

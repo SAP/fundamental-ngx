@@ -23,6 +23,10 @@ const EXPORTABLE_DECLARATIONS = [
     FormFieldErrorDescriptionDirective
 ];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...EXPORTABLE_DECLARATIONS],
     exports: [...EXPORTABLE_DECLARATIONS]

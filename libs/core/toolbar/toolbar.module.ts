@@ -22,6 +22,10 @@ const components = [
     DeprecatedToolbarSizeDirective
 ];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [ContentDensityModule, ...components],
     exports: [...components, ContentDensityModule]

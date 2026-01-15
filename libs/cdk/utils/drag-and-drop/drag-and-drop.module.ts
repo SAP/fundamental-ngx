@@ -5,6 +5,10 @@ import { DndKeyboardGroupDirective } from './dnd-keyboard-group/dnd-keyboard-gro
 import { DndKeyboardItemDirective } from './dnd-keyboard-item/dnd-keyboard-item.directive';
 import { DndListDirective } from './dnd-list/dnd-list.directive';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [DragDropModule, DndItemDirective, DndListDirective, DndKeyboardGroupDirective, DndKeyboardItemDirective],
     exports: [DndItemDirective, DndListDirective, DndKeyboardGroupDirective, DndKeyboardItemDirective]

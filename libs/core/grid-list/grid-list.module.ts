@@ -16,6 +16,10 @@ import { GridListComponent } from './components/grid-list/grid-list.component';
 import { GridListItemBodyDirective } from './directives/grid-list-item-body.directive';
 import { GridListItemImageDirective } from './directives/grid-list-item-image.directive';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         ToolbarModule,
