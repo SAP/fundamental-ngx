@@ -173,10 +173,6 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         });
     }
 
-    searchInScopeClicked(): void {
-        alert('Search in scope clicked');
-    }
-
     showAllSearchResultsClicked(): void {
         this.shellSearchField.resetCategory();
         this.shellSearchField.clearTextInput();
@@ -281,7 +277,12 @@ const SUGGESTIONS: SuggestionItem[] = [
                     type: 'fruit'
                 }
             }
-        ]
+        ],
+        searchInScopeText: 'Search in [Fruits]',
+        searchInScopeCounter: 1234,
+        searchInScopeCallback: () => {
+            alert('Search in scope callback clicked');
+        }
     },
     {
         value: 'Vegetables',
@@ -316,8 +317,5 @@ const SUGGESTIONS: SuggestionItem[] = [
                 }
             }
         ]
-    },
-    {
-        value: 'Stapler'
     }
 ];

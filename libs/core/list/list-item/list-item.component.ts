@@ -94,7 +94,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Counter on list item */
     @Input()
-    counter: number;
+    counter: number | undefined;
 
     /** Whether list item shows active indicator. Used only in List with Subline. */
     @Input()

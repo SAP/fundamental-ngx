@@ -84,6 +84,9 @@ export interface SuggestionItem {
     data?: any;
     isGroupHeader?: boolean;
     children?: SuggestionItem[];
+    searchInScopeText?: string;
+    searchInScopeCounter?: number;
+    searchInScopeCallback?: () => any;
 }
 
 export interface ValueLabelItem {
@@ -284,10 +287,6 @@ export class SearchFieldComponent
     @Input()
     disableSuggestionsFoundAnnouncer = false;
 
-    /** Function to call when the user clicks the search in scope list item. */
-    @Input()
-    searchInScopeCallback: () => void;
-
     /** Input change event. */
     @Output()
     inputChange: EventEmitter<SearchInput> = new EventEmitter();
@@ -358,12 +357,6 @@ export class SearchFieldComponent
 
     /** Configuration model which allows the developer to specify what properties from the data will be used for different parts of the search results. */
     searchResultsDataModel = input<SearchResultsDataModel>();
-
-    /** Text for the search results scope search list item. */
-    searchInScopeText = input<string>('');
-
-    /** Number for the search results scope list item. */
-    searchInScopeNumber = input<number>(0);
 
     /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
     showAdvancedFilter = input<boolean>(false);
@@ -863,18 +856,15 @@ export class SuggestionMatchesPipe implements PipeTransform {
             suggestions = [];
         }
         if (!match) {
-            return suggestions;
+            match = '';
         }
-        const flatSuggestions = suggestions.flatMap((item) => {
-            if (item.children && item.children.length > 0) {
-                const { children = [], ...parentProps } = item;
-                return [parentProps, ...children];
-            } else {
-                return item;
-            }
-        });
         const processedMatch = match.trim().toLowerCase();
-        return flatSuggestions.filter((suggestion) => {
+        return suggestions.filter((suggestion) => {
+            if (suggestion.children?.length) {
+                suggestion.children.forEach((child) => {
+                    child.data.hideChild = child.value.toLowerCase().indexOf(processedMatch) === -1;
+                });
+            }
             const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion.value;
             return textToCheck.toLowerCase().indexOf(processedMatch) > -1 || suggestion.isGroupHeader;
         });
