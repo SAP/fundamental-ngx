@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -35,7 +35,7 @@ import { FacetComponent } from './facet.component';
         </fd-facet>
     `,
     standalone: true,
-    imports: [IconModule, LinkModule, TextComponent, RouterTestingModule, FacetContentComponent, FacetComponent]
+    imports: [IconComponent, LinkModule, TextComponent, RouterTestingModule, FacetContentComponent, FacetComponent]
 })
 class TestFormFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -87,7 +87,7 @@ class TestRatingIndicatorFacetComponent {
         </fd-facet>
     `,
     standalone: true,
-    imports: [ObjectStatusComponent, FacetComponent, FacetContentComponent, IconModule]
+    imports: [ObjectStatusComponent, FacetComponent, FacetContentComponent, IconComponent]
 })
 class TestKeyValueFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -112,7 +112,7 @@ class TestKeyValueFacetComponent {
         AvatarComponent,
         FacetComponent,
         FacetContentComponent,
-        IconModule,
+        IconComponent,
         LinkModule,
         TextComponent
     ]

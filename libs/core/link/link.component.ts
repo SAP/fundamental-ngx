@@ -157,12 +157,12 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                             ? icons[icons.length - 1].elementRef.nativeElement
                             : null;
                     if (prefix) {
-                        this._prefixIconName = this.iconComponents.first.glyph;
+                        this._prefixIconName = this.iconComponents.first.glyph();
                     } else {
                         this._prefixIconName = '';
                     }
                     if (postfix) {
-                        this._postfixIconName = this.iconComponents.last.glyph;
+                        this._postfixIconName = this.iconComponents.last.glyph();
                     } else {
                         this._postfixIconName = '';
                     }

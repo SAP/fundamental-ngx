@@ -4,7 +4,7 @@ import { IconComponent } from './icon.component';
 
 /**
  * @deprecated
- * Use direct imports of components and directives.
+ * Use direct import of `IconComponent`
  */
 @NgModule({
     imports: [IconComponent],

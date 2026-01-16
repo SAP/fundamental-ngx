@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListNavigationItemComponent } from '../list-navigation-item/list-navigation-item.component';
 import { ListModule } from '../list.module';
 
@@ -21,7 +21,7 @@ import { ListModule } from '../list.module';
         </li>
     `,
     standalone: true,
-    imports: [ListModule, IconModule]
+    imports: [ListModule, IconComponent]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
