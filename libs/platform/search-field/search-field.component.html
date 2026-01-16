@@ -248,7 +248,7 @@
 </ng-template>
 
 <ng-template #suggestionItemTemplate let-filteredSuggestion="filteredSuggestion">
-    @let subline = _getDataFromSearchResultsModel(filteredSuggestion, 'subline');
+    @let subline = filteredSuggestion?.data?.subline;
     @if (!filteredSuggestion.data || !filteredSuggestion.data.hideChild) {
         <li
             fd-list-item
@@ -263,15 +263,15 @@
             (mouseenter)="_searchResultIsHoveredOrFocused(suggestionListItem)"
             (mouseleave)="_searchResultIsHoveredOrFocused(suggestionListItem)"
         >
-            @let listIconGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'listIconGlyph');
+            @let listIconGlyph = filteredSuggestion?.data?.listIconGlyph;
             @if (listIconGlyph) {
                 <span fd-list-thumbnail>
                     <i fd-list-icon [glyph]="listIconGlyph"></i>
                 </span>
             }
-            @let avatarGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarGlyph');
-            @let avatarImage = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarImage');
-            @let avatarLabel = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarLabel');
+            @let avatarGlyph = filteredSuggestion?.data?.avatarGlyph;
+            @let avatarImage = filteredSuggestion?.data?.avatarImage;
+            @let avatarLabel = filteredSuggestion?.data?.avatarLabel;
             @if (avatarGlyph || avatarImage || avatarLabel) {
                 <fd-avatar
                     [circle]="true"
@@ -281,7 +281,7 @@
                     [label]="avatarLabel"
                 ></fd-avatar>
             }
-            @let prefix = _getDataFromSearchResultsModel(filteredSuggestion, 'prefix');
+            @let prefix = filteredSuggestion?.data?.prefix;
             @if (prefix) {
                 <fd-info-label fd-list-info-label [label]="prefix" color="10"></fd-info-label>
             }
@@ -310,34 +310,34 @@
                     ></span>
                 }
 
-                @let actionButtons = _getButtonsFromSearchResultsModel(filteredSuggestion);
+                @let actionButtons = filteredSuggestion?.data?.actionButtons;
                 @if (actionButtons && actionButtons.length) {
                     @for (button of actionButtons; track $index) {
                         @if (button.id) {
                             <button
                                 fd-button
                                 fdType="transparent"
-                                [title]="button.label"
-                                [attr.aria-label]="button.label"
-                                [id]="button.id"
-                                [glyph]="button.glyph"
-                                (fdkClicked)="_performButtonClick($event, button.callback)"
+                                [title]="button.actionButtonLabel"
+                                [attr.aria-label]="button.actionButtonLabel"
+                                [id]="button.actionButtonId"
+                                [glyph]="button.actionButtonGlyph"
+                                (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
                             ></button>
                         } @else {
                             <button
                                 fd-button
                                 fdType="transparent"
-                                [title]="button.label"
-                                [attr.aria-label]="button.label"
-                                [glyph]="button.glyph"
-                                (fdkClicked)="_performButtonClick($event, button.callback)"
+                                [title]="button.actionButtonLabel"
+                                [attr.aria-label]="button.actionButtonLabel"
+                                [glyph]="button.actionButtonGlyph"
+                                (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
                             ></button>
                         }
                     }
                 }
 
-                @let showDeleteButton = _getDataFromSearchResultsModel(filteredSuggestion, 'showDeleteButton');
-                @let deleteCallback = _getDataFromSearchResultsModel(filteredSuggestion, 'deleteCallback');
+                @let showDeleteButton = filteredSuggestion?.data?.showDeleteButton;
+                @let deleteCallback = filteredSuggestion?.data?.deleteCallback;
                 @if (showDeleteButton && _searchResultIsHoveredOrFocused(suggestionListItem)) {
                     <button
                         fd-button

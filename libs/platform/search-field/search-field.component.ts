@@ -94,23 +94,6 @@ export interface ValueLabelItem {
     label: string;
 }
 
-export interface SearchResultsDataModel {
-    subline?: string;
-    listIconGlyph?: string;
-    prefix?: string;
-    counter?: string;
-    avatarGlyph?: string;
-    avatarImage?: string;
-    avatarLabel?: string;
-    actionButtons?: string;
-    actionButtonGlyph?: string;
-    actionButtonCallback?: string;
-    actionButtonLabel?: string;
-    actionButtonId?: string;
-    showDeleteButton?: string;
-    deleteCallback?: string;
-}
-
 export interface SearchResultsActionButton {
     glyph?: string;
     label?: string;
@@ -355,9 +338,6 @@ export class SearchFieldComponent
     /** Template to display when the search results list has no items to display. */
     searchResultsEmptyTemplate = input<TemplateRef<any> | null>(null);
 
-    /** Configuration model which allows the developer to specify what properties from the data will be used for different parts of the search results. */
-    searchResultsDataModel = input<SearchResultsDataModel>();
-
     /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
     showAdvancedFilter = input<boolean>(false);
 
@@ -432,9 +412,6 @@ export class SearchFieldComponent
 
     /** @hidden */
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
-
-    /** @hidden */
-    private _actionButtonKey = '';
 
     /** @hidden */
     private resolveTranslation = resolveTranslationSyncFn();
@@ -704,48 +681,6 @@ export class SearchFieldComponent
                 this._dropdownValues$ = of(data);
             });
         this._dataSource = dataSource;
-    }
-
-    /** @hidden gets the corresponding text for a given key based off the SearchResultsDataModel for a search suggestion */
-    _getDataFromSearchResultsModel(suggestion: SuggestionItem, key: string, isButton: boolean = false): any {
-        let retVal = '';
-        const dataModel = this.searchResultsDataModel();
-        if (dataModel) {
-            const keyToCheck = dataModel[key];
-            if (keyToCheck && suggestion.data) {
-                if (key === 'actionButtons') {
-                    this._actionButtonKey = keyToCheck;
-                }
-                if (!isButton && suggestion.data[keyToCheck]) {
-                    retVal = suggestion.data[keyToCheck];
-                } else if (isButton && suggestion.data[this._actionButtonKey]?.length) {
-                    retVal = keyToCheck;
-                }
-            }
-        }
-        return retVal;
-    }
-
-    /** @hidden gets the buttons for a given search suggestion */
-    _getButtonsFromSearchResultsModel(suggestion: SuggestionItem): SearchResultsActionButton[] {
-        const retVal: SearchResultsActionButton[] = [];
-        const buttonData = this._getDataFromSearchResultsModel(suggestion, 'actionButtons');
-        if (buttonData) {
-            const labelKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonLabel', true);
-            const glyphKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonGlyph', true);
-            const callbackKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonCallback', true);
-            const idKey = this._getDataFromSearchResultsModel(suggestion, 'actionButtonId', true);
-            buttonData.forEach((button) => {
-                const parsedButton = {
-                    label: button[labelKey],
-                    glyph: button[glyphKey],
-                    callback: button[callbackKey],
-                    id: button[idKey]
-                };
-                retVal.push(parsedButton);
-            });
-        }
-        return retVal;
     }
 
     /** @hidden helper function needed by template */

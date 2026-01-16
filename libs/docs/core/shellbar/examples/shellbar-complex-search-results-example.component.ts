@@ -34,12 +34,7 @@ import {
     UserMenuSublistComponent,
     UserMenuUserNameDirective
 } from '@fundamental-ngx/core/user-menu';
-import {
-    SearchFieldComponent,
-    SearchResultsDataModel,
-    SuggestionItem,
-    ValueLabelItem
-} from '@fundamental-ngx/platform/search-field';
+import { SearchFieldComponent, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 import { DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { Observable, of } from 'rxjs';
 
@@ -120,20 +115,6 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
             notificationLabel: 'Unread Notifications'
         }
     ];
-
-    dataModel: SearchResultsDataModel = {
-        subline: 'description',
-        listIconGlyph: 'icon',
-        prefix: 'antecedent',
-        avatarLabel: 'farmerName',
-        actionButtons: 'buttons',
-        actionButtonGlyph: 'buttonGlyph',
-        actionButtonCallback: 'buttonCallback',
-        actionButtonLabel: 'buttonLabel',
-        actionButtonId: 'buttonId',
-        showDeleteButton: 'canDelete',
-        deleteCallback: 'deleteFn'
-    };
 
     mobileConfig: MobileModeConfig = {
         approveButtonText: 'OK',
@@ -234,7 +215,7 @@ const SUGGESTIONS: SuggestionItem[] = [
                 value: 'Apple',
                 data: {
                     type: 'fruit',
-                    icon: 'globe'
+                    listIconGlyph: 'globe'
                 }
             },
             {
@@ -247,26 +228,26 @@ const SUGGESTIONS: SuggestionItem[] = [
                 value: 'Blueberry',
                 data: {
                     type: 'fruit',
-                    antecedent: 'Prefix text:',
-                    buttons: [
+                    prefix: 'Prefix text:',
+                    actionButtons: [
                         {
-                            buttonGlyph: 'refresh',
-                            buttonCallback: () => {
+                            actionButtonGlyph: 'refresh',
+                            actionButtonCallback: () => {
                                 alert('Blueberry refresh button clicked');
                             },
-                            buttonId: 'refresh-button-1',
-                            buttonLabel: 'Refresh Item'
+                            actionButtonId: 'refresh-button-1',
+                            actionButtonLabel: 'Refresh Item'
                         },
                         {
-                            buttonGlyph: 'settings',
-                            buttonCallback: () => {
+                            actionButtonGlyph: 'settings',
+                            actionButtonCallback: () => {
                                 alert('Blueberry settings button clicked');
                             },
-                            buttonLabel: 'Settings'
+                            actionButtonLabel: 'Settings'
                         }
                     ],
-                    canDelete: true,
-                    deleteFn: () => {
+                    showDeleteButton: true,
+                    deleteCallback: () => {
                         alert('Blueberry delete button clicked');
                     }
                 }
@@ -292,22 +273,22 @@ const SUGGESTIONS: SuggestionItem[] = [
                 value: 'Broccoli',
                 data: {
                     type: 'vegetable',
-                    description: 'Flower vegetable'
+                    subline: 'Flower vegetable'
                 }
             },
             {
                 value: 'Carrot',
                 data: {
                     type: 'vegetable',
-                    description: 'Root vegetable',
-                    icon: 'cart'
+                    subline: 'Root vegetable',
+                    listIconGlyph: 'cart'
                 }
             },
             {
                 value: 'Corn',
                 data: {
                     type: 'vegetable',
-                    farmerName: 'John Doe'
+                    avatarLabel: 'John Doe'
                 }
             },
             {
