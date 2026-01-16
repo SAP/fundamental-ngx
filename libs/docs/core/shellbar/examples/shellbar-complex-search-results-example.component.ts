@@ -130,9 +130,9 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         actionButtonGlyph: 'buttonGlyph',
         actionButtonCallback: 'buttonCallback',
         actionButtonLabel: 'buttonLabel',
+        actionButtonId: 'buttonId',
         showDeleteButton: 'canDelete',
-        deleteCallback: 'deleteFn',
-        groupBy: 'type'
+        deleteCallback: 'deleteFn'
     };
 
     mobileConfig: MobileModeConfig = {
@@ -178,6 +178,7 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
     }
 
     showAllSearchResultsClicked(): void {
+        this.shellSearchField.resetCategory();
         this.shellSearchField.clearTextInput();
     }
 }
@@ -188,92 +189,135 @@ export class ShellSearchFieldDataProvider extends DataProvider<SuggestionItem> {
     }
 
     fetch(params: Map<string, string>): Observable<SuggestionItem[]> {
-        let data = SUGGESTIONS;
+        const data = SUGGESTIONS;
         const name = params.get('keyword');
-        if (name) {
-            const keyword = name.toLowerCase();
-            data = data.filter((item) => item.value.toLowerCase().indexOf(keyword) > -1);
+        const category = params.get('category');
+        if (name === '' && !category) {
+            return of(data);
+        } else {
+            const filteredData = data.filter((suggestion) => {
+                let foundMatchingChild = false;
+                if (suggestion.children) {
+                    for (let i = 0; i < suggestion.children.length && !foundMatchingChild; i++) {
+                        foundMatchingChild = this._checkForMatches(suggestion.children[i], name, category);
+                    }
+                } else {
+                    foundMatchingChild = this._checkForMatches(suggestion, name, category);
+                }
+                return foundMatchingChild;
+            });
+            return of(filteredData);
         }
-        if (params.get('category')) {
-            data = data.filter((item) => item.data.type === params.get('category'));
+    }
+
+    private _checkForMatches(item: any, name: string | undefined, category: string | undefined): boolean {
+        let foundMatchingItem = false;
+        if (name && category) {
+            if (item.value.toLowerCase().indexOf(name.toLowerCase()) > -1 && item.data?.type === category) {
+                foundMatchingItem = true;
+            }
+        } else if (name) {
+            if (item.value.toLowerCase().indexOf(name.toLowerCase()) > -1) {
+                foundMatchingItem = true;
+            }
+        } else if (category) {
+            if (item.data?.type === category) {
+                foundMatchingItem = true;
+            }
         }
-        return of(data);
+        return foundMatchingItem;
     }
 }
 
 const SUGGESTIONS: SuggestionItem[] = [
     {
-        value: 'Apple',
-        data: {
-            type: 'fruit',
-            icon: 'globe'
-        }
-    },
-    {
-        value: 'Banana',
-        data: {
-            type: 'fruit'
-        }
-    },
-    {
-        value: 'Blueberry',
-        data: {
-            type: 'fruit',
-            antecedent: 'Prefix text:',
-            buttons: [
-                {
-                    buttonGlyph: 'refresh',
-                    buttonCallback: () => {
-                        alert('Blueberry refresh button clicked');
-                    },
-                    buttonLabel: 'Refresh Item'
-                },
-                {
-                    buttonGlyph: 'settings',
-                    buttonCallback: () => {
-                        alert('Blueberry settings button clicked');
-                    },
-                    buttonLabel: 'Settings'
+        value: 'Fruits',
+        isGroupHeader: true,
+        children: [
+            {
+                value: 'Apple',
+                data: {
+                    type: 'fruit',
+                    icon: 'globe'
                 }
-            ],
-            canDelete: true,
-            deleteFn: () => {
-                alert('Blueberry delete button clicked');
+            },
+            {
+                value: 'Banana',
+                data: {
+                    type: 'fruit'
+                }
+            },
+            {
+                value: 'Blueberry',
+                data: {
+                    type: 'fruit',
+                    antecedent: 'Prefix text:',
+                    buttons: [
+                        {
+                            buttonGlyph: 'refresh',
+                            buttonCallback: () => {
+                                alert('Blueberry refresh button clicked');
+                            },
+                            buttonId: 'refresh-button-1',
+                            buttonLabel: 'Refresh Item'
+                        },
+                        {
+                            buttonGlyph: 'settings',
+                            buttonCallback: () => {
+                                alert('Blueberry settings button clicked');
+                            },
+                            buttonLabel: 'Settings'
+                        }
+                    ],
+                    canDelete: true,
+                    deleteFn: () => {
+                        alert('Blueberry delete button clicked');
+                    }
+                }
+            },
+            {
+                value: 'Cherry',
+                data: {
+                    type: 'fruit'
+                }
             }
-        }
+        ]
     },
     {
-        value: 'Broccoli',
-        data: {
-            type: 'vegetable',
-            description: 'Flower vegetable'
-        }
+        value: 'Vegetables',
+        isGroupHeader: true,
+        children: [
+            {
+                value: 'Broccoli',
+                data: {
+                    type: 'vegetable',
+                    description: 'Flower vegetable'
+                }
+            },
+            {
+                value: 'Carrot',
+                data: {
+                    type: 'vegetable',
+                    description: 'Root vegetable',
+                    icon: 'cart'
+                }
+            },
+            {
+                value: 'Corn',
+                data: {
+                    type: 'vegetable',
+                    farmerName: 'John Doe'
+                }
+            },
+            {
+                value: 'Radish',
+                data: {
+                    type: 'vegetable'
+                }
+            }
+        ]
     },
     {
-        value: 'Carrot',
-        data: {
-            type: 'vegetable',
-            description: 'Root vegetable',
-            icon: 'cart'
-        }
-    },
-    {
-        value: 'Cherry',
-        data: {
-            type: 'fruit'
-        }
-    },
-    {
-        value: 'Corn',
-        data: {
-            type: 'vegetable',
-            farmerName: 'John Doe'
-        }
-    },
-    {
-        value: 'Radish',
-        data: {
-            type: 'vegetable'
-        }
+        value: 'Stapler'
     }
 ];

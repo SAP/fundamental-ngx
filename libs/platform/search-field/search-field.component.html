@@ -71,6 +71,7 @@
 </ng-template>
 <ng-template #searchCategorySelect>
     <fd-select
+        #categorySelectComponent
         [placeholder]="categoryLabel"
         [selectControlClass]="appearance?.categoryButtonClass"
         [selectDropdownButtonClass]="appearance?.categoryDropdownButtonClass"
@@ -210,100 +211,21 @@
         @if (suggestionsFiltered?.length && !_onlyHeadersFiltered(suggestionsFiltered)) {
             <ul fd-list [searchResultsList]="true" (keydown)="onKeydown($event)">
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
-                    @let subline = _getDataFromSearchResultsModel(filteredSuggestion, 'subline');
-                    @if (filteredSuggestion.data?.isHeader) {
+                    @if (filteredSuggestion?.isGroupHeader) {
                         <li fd-list-group-header class="fd-suggestion-header">
-                            <span fd-list-title>{{ filteredSuggestion.value }}</span>
+                            <span fd-list-title>{{ filteredSuggestion?.value }}</span>
                         </li>
+                        @for (childSuggestion of filteredSuggestion?.children; track childSuggestion) {
+                            <ng-template
+                                [ngTemplateOutlet]="suggestionItemTemplate"
+                                [ngTemplateOutletContext]="{ filteredSuggestion: childSuggestion }"
+                            ></ng-template>
+                        }
                     } @else {
-                        <li
-                            fd-list-item
-                            [interactive]="true"
-                            [suggestion]="true"
-                            fdpSearchFieldSuggestion
-                            (keydown.enter)="onItemClick(filteredSuggestion); $event.preventDefault()"
-                            (keyup.space)="onItemClick(filteredSuggestion); $event.stopPropagation()"
-                            (click)="onItemClick(filteredSuggestion)"
-                            [byline]="!!subline"
-                            #suggestionListItem
-                            (mouseenter)="_searchResultIsHoveredOrFocused(suggestionListItem)"
-                            (mouseleave)="_searchResultIsHoveredOrFocused(suggestionListItem)"
-                        >
-                            @let listIconGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'listIconGlyph');
-                            @if (listIconGlyph) {
-                                <span fd-list-thumbnail>
-                                    <i fd-list-icon [glyph]="listIconGlyph"></i>
-                                </span>
-                            }
-                            @let avatarGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarGlyph');
-                            @let avatarImage = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarImage');
-                            @let avatarLabel = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarLabel');
-                            @if (avatarGlyph || avatarImage || avatarLabel) {
-                                <fd-avatar
-                                    [circle]="true"
-                                    size="xs"
-                                    [glyph]="avatarGlyph"
-                                    [image]="avatarImage"
-                                    [label]="avatarLabel"
-                                ></fd-avatar>
-                            }
-                            @let prefix = _getDataFromSearchResultsModel(filteredSuggestion, 'prefix');
-                            @if (prefix) {
-                                <fd-info-label fd-list-info-label [label]="prefix" color="10"></fd-info-label>
-                            }
-                            <!-- previous API was built on suggestions only being strings, hence the need for the check. -->
-                            @if (_isString(filteredSuggestion)) {
-                                <!-- toString() below is for type safety -->
-                                <span
-                                    fd-list-title
-                                    [innerHTML]="filteredSuggestion.toString() | highlight: inputText : true : true"
-                                ></span>
-                            } @else {
-                                @if (subline) {
-                                    <div fd-list-content>
-                                        <span
-                                            fd-list-title
-                                            [innerHTML]="filteredSuggestion.value | highlight: inputText : true : true"
-                                        ></span>
-                                        <span fd-list-subline>
-                                            {{ subline }}
-                                        </span>
-                                    </div>
-                                } @else {
-                                    <span
-                                        fd-list-title
-                                        [innerHTML]="filteredSuggestion.value | highlight: inputText : true : true"
-                                    ></span>
-                                }
-
-                                @let actionButtons = _getButtonsFromSearchResultsModel(filteredSuggestion);
-                                @if (actionButtons && actionButtons.length) {
-                                    @for (button of actionButtons; track $index) {
-                                        <button
-                                            fd-button
-                                            fdType="transparent"
-                                            [title]="button.label"
-                                            [glyph]="button.glyph"
-                                            (fdkClicked)="_performButtonClick($event, button.callback)"
-                                        ></button>
-                                    }
-                                }
-
-                                @let showDeleteButton =
-                                    _getDataFromSearchResultsModel(filteredSuggestion, 'showDeleteButton');
-                                @let deleteCallback =
-                                    _getDataFromSearchResultsModel(filteredSuggestion, 'deleteCallback');
-                                @if (showDeleteButton && _searchResultIsHoveredOrFocused(suggestionListItem)) {
-                                    <button
-                                        fd-button
-                                        fdType="transparent"
-                                        title="('platformSearchField.deleteButtonLabel' | fdTranslate)"
-                                        glyph="decline"
-                                        (fdkClicked)="_performButtonClick($event, deleteCallback)"
-                                    ></button>
-                                }
-                            }
-                        </li>
+                        <ng-template
+                            [ngTemplateOutlet]="suggestionItemTemplate"
+                            [ngTemplateOutletContext]="{ filteredSuggestion: filteredSuggestion }"
+                        ></ng-template>
                     }
                 }
             </ul>
@@ -311,4 +233,104 @@
             <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate()"></ng-template>
         }
     }
+</ng-template>
+
+<ng-template #suggestionItemTemplate let-filteredSuggestion="filteredSuggestion">
+    @let subline = _getDataFromSearchResultsModel(filteredSuggestion, 'subline');
+    <li
+        fd-list-item
+        [interactive]="true"
+        [suggestion]="true"
+        fdpSearchFieldSuggestion
+        (keydown.enter)="onItemClick(filteredSuggestion); $event.preventDefault()"
+        (keyup.space)="onItemClick(filteredSuggestion); $event.stopPropagation()"
+        (click)="onItemClick(filteredSuggestion)"
+        [byline]="!!subline"
+        #suggestionListItem
+        (mouseenter)="_searchResultIsHoveredOrFocused(suggestionListItem)"
+        (mouseleave)="_searchResultIsHoveredOrFocused(suggestionListItem)"
+    >
+        @let listIconGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'listIconGlyph');
+        @if (listIconGlyph) {
+            <span fd-list-thumbnail>
+                <i fd-list-icon [glyph]="listIconGlyph"></i>
+            </span>
+        }
+        @let avatarGlyph = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarGlyph');
+        @let avatarImage = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarImage');
+        @let avatarLabel = _getDataFromSearchResultsModel(filteredSuggestion, 'avatarLabel');
+        @if (avatarGlyph || avatarImage || avatarLabel) {
+            <fd-avatar
+                [circle]="true"
+                size="xs"
+                [glyph]="avatarGlyph"
+                [image]="avatarImage"
+                [label]="avatarLabel"
+            ></fd-avatar>
+        }
+        @let prefix = _getDataFromSearchResultsModel(filteredSuggestion, 'prefix');
+        @if (prefix) {
+            <fd-info-label fd-list-info-label [label]="prefix" color="10"></fd-info-label>
+        }
+        <!-- previous API was built on suggestions only being strings, hence the need for the check. -->
+        @if (_isString(filteredSuggestion)) {
+            <!-- toString() below is for type safety -->
+            <span
+                fd-list-title
+                [innerHTML]="filteredSuggestion?.toString() | highlight: inputText : true : true"
+            ></span>
+        } @else {
+            @if (subline) {
+                <div fd-list-content>
+                    <span
+                        fd-list-title
+                        [innerHTML]="filteredSuggestion?.value | highlight: inputText : true : true"
+                    ></span>
+                    <span fd-list-subline>
+                        {{ subline }}
+                    </span>
+                </div>
+            } @else {
+                <span fd-list-title [innerHTML]="filteredSuggestion?.value | highlight: inputText : true : true"></span>
+            }
+
+            @let actionButtons = _getButtonsFromSearchResultsModel(filteredSuggestion);
+            @if (actionButtons && actionButtons.length) {
+                @for (button of actionButtons; track $index) {
+                    @if (button.id) {
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            [title]="button.label"
+                            [attr.aria-label]="button.label"
+                            [id]="button.id"
+                            [glyph]="button.glyph"
+                            (fdkClicked)="_performButtonClick($event, button.callback)"
+                        ></button>
+                    } @else {
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            [title]="button.label"
+                            [attr.aria-label]="button.label"
+                            [glyph]="button.glyph"
+                            (fdkClicked)="_performButtonClick($event, button.callback)"
+                        ></button>
+                    }
+                }
+            }
+
+            @let showDeleteButton = _getDataFromSearchResultsModel(filteredSuggestion, 'showDeleteButton');
+            @let deleteCallback = _getDataFromSearchResultsModel(filteredSuggestion, 'deleteCallback');
+            @if (showDeleteButton && _searchResultIsHoveredOrFocused(suggestionListItem)) {
+                <button
+                    fd-button
+                    fdType="transparent"
+                    title="('platformSearchField.deleteButtonLabel' | fdTranslate)"
+                    glyph="decline"
+                    (fdkClicked)="_performButtonClick($event, deleteCallback)"
+                ></button>
+            }
+        }
+    </li>
 </ng-template>
