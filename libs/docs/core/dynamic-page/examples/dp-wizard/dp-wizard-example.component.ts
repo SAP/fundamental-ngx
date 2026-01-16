@@ -6,7 +6,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -46,7 +45,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         FormLabelComponent,
         FormControlComponent,
         FormsModule,
-        LayoutGridModule,
         TitleComponent
     ]
 })

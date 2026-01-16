@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
@@ -24,7 +24,9 @@ import {
         PlatformButtonModule,
         ContentDensityDirective,
         TitleComponent,
-        LayoutGridModule,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
         FormLabelComponent,
         PlatformLinkModule,
         JsonPipe
