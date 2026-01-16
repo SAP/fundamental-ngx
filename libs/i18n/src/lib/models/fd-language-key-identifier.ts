@@ -512,4 +512,5 @@ export type FdLanguageKeyIdentifier =
     | 'coreNotification.triggerMoreLabel'
     | 'coreNotification.triggerLessLabel'
     | 'segmentedButton.groupRoleDescription'
-    | 'segmentedButton.buttonRoleDescription';
+    | 'segmentedButton.buttonRoleDescription'
+    | 'coreObjectIdentifier.srOnlyAriaLabel';

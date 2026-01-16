@@ -93,6 +93,10 @@ import { UploadCollectionModule } from '@fundamental-ngx/core/upload-collection'
 import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
 import { WizardModule } from '@fundamental-ngx/core/wizard';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [FormsModule],
     exports: [

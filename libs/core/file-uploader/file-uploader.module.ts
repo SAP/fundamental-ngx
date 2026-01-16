@@ -5,6 +5,10 @@ import { FileUploaderComponent } from './file-uploader.component';
 
 const components = [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]

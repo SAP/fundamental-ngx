@@ -1,4 +1,4 @@
-import { AfterContentInit, ContentChild, Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, contentChild, effect, inject } from '@angular/core';
 import { BusyIndicatorComponent } from '../busy-indicator.component';
 import { FD_BUSY_INDICATOR_COMPONENT } from '../tokens';
 
@@ -9,26 +9,32 @@ const messageToastClass = 'fd-message-toast';
     selector: '[fd-busy-indicator-extended]',
     standalone: true
 })
-export class BusyIndicatorExtendedDirective implements AfterContentInit {
+export class BusyIndicatorExtendedDirective {
     /** @hidden */
-    @ContentChild(FD_BUSY_INDICATOR_COMPONENT)
-    busyIndicator: BusyIndicatorComponent;
+    protected readonly busyIndicator = contentChild(FD_BUSY_INDICATOR_COMPONENT, {
+        read: BusyIndicatorComponent
+    });
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        this._appendCssToParent();
+    constructor() {
+        effect(() => {
+            const indicator = this.busyIndicator();
+            if (indicator) {
+                this._appendCssToParent();
+            }
+        });
     }
 
     /** @hidden */
     private _appendCssToParent(): void {
-        const hasLabel = this.busyIndicator.label;
+        const hasLabel = this.busyIndicator()?.label();
         if (!hasLabel) {
             return;
         }
-        const classList = this.elementRef.nativeElement.parentElement?.classList;
+        const classList = this._elementRef.nativeElement.parentElement?.classList;
         if (classList) {
             classList.add('fd-busy-indicator-extended');
             if (classList.contains(messageToastClass)) {

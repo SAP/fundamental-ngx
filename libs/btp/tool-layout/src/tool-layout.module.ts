@@ -5,6 +5,10 @@ import { ToolLayoutHeaderContainerDirective } from './directives/tool-layout-hea
 import { ToolLayoutNavigationContainerDirective } from './directives/tool-layout-navigation-container.directive';
 import { ToolLayoutComponent } from './tool-layout.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         ToolLayoutComponent,

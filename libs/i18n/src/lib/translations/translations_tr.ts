@@ -630,5 +630,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Segmentlere Ayrılmış Düğme Grubu',
         buttonRoleDescription: 'Segmentlere Ayrılmış Düğme'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

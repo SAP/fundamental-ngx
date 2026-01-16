@@ -628,5 +628,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'مجموعة الأزرار المقسَّمة',
         buttonRoleDescription: 'زر مقسَّم'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

@@ -627,5 +627,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'קבוצת סרגלי לחצנים',
         buttonRoleDescription: 'סרגל לחצנים'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

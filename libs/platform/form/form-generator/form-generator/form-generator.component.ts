@@ -34,7 +34,7 @@ import { FormGeneratorFieldComponent } from '../form-generator-field/form-genera
 
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
@@ -98,7 +98,7 @@ export interface SubmitFormEventResult {
         }
     ],
     imports: [
-        BusyIndicatorModule,
+        BusyIndicatorComponent,
         FdpFormGroupModule,
         FormsModule,
         ReactiveFormsModule,

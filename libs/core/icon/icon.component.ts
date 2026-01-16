@@ -2,14 +2,14 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    HostBinding,
-    Input,
     ViewEncapsulation,
     computed,
-    effect,
+    inject,
+    input,
+    model,
     signal
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT } from './tokens';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
@@ -84,110 +84,61 @@ export function fdBuildIconClass(
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    host: {
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.aria-hidden]': 'ariaHidden()',
+        '[class.fd-list__navigation-item-icon]': '_navigationItemIcon()',
+        '[class]': '_cssClasses()'
+    }
 })
-export class IconComponent implements CssClassBuilder {
+export class IconComponent implements HasElementRef {
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
-    @Input()
-    set glyph(value: any) {
-        this._glyph.set(value);
-    }
-    get glyph(): any {
-        return this._glyph();
-    }
+    readonly glyph = input<any>();
 
     /**
      * The icon font
      * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
      */
-    @Input()
-    set font(value: IconFont) {
-        this._font.set(value);
-    }
-
-    get font(): IconFont {
-        return this._font();
-    }
+    readonly font = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
     /** Icon color */
-    @Input()
-    set color(value: IconColor | null) {
-        this._color.set(value);
-    }
-
-    get color(): IconColor | null {
-        return this._color();
-    }
+    readonly color = input<IconColor | null>(null);
 
     /** Icon color */
-    @Input()
-    set background(value: IconColor | null) {
-        this._background.set(value);
-    }
-
-    get background(): IconColor | null {
-        return this._background();
-    }
+    readonly background = input<IconColor | null>(null);
 
     /** user's custom classes */
-    @Input()
-    class: string;
+    readonly class = input<string>();
 
     /** Aria-label for Icon. */
-    @Input()
-    @HostBinding('attr.aria-label')
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel = input<Nullable<string>>();
 
     /** Aria-hidden attribute for Icon element. */
-    @Input()
-    @HostBinding('attr.aria-hidden')
-    ariaHidden: Nullable<boolean>;
+    readonly ariaHidden = model<Nullable<boolean>>();
+
+    /** @hidden */
+    readonly elementRef = inject(ElementRef<HTMLElement>);
 
     /** Whether or not this icon is for a list navigation item. */
-    @HostBinding('class.fd-list__navigation-item-icon')
-    _navigationItemIcon = false;
+    readonly _navigationItemIcon = signal(false);
 
-    /** @hidden */
-    private readonly _glyph = signal<any>('');
-    /** @hidden */
-    private readonly _font = signal<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
+    /** @hidden Computed CSS classes */
+    protected readonly _cssClasses = computed<string>(() => {
+        const returnClass = [this.class()];
 
-    /** @hidden */
-    private readonly _color = signal<IconColor | null>(null);
-
-    /** @hidden */
-    private readonly _background = signal<IconColor | null>(null);
-
-    /** @hidden */
-    private readonly _fontIconClass = computed(() =>
-        fdBuildIconClass(this._font(), this._glyph(), this._color(), this._background())
-    );
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {
-        effect(() => {
-            this.buildComponentCssClass();
-        });
-    }
-
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        const returnClass = [this.class];
-
-        if (!this._glyph()) {
-            return returnClass;
+        if (!this.glyph()) {
+            return this.class() || '';
         }
 
         returnClass.push(this._fontIconClass());
 
-        return returnClass;
-    }
+        return returnClass.join(' ');
+    });
+
+    /** @hidden */
+    private readonly _fontIconClass = computed<string>(() =>
+        fdBuildIconClass(this.font(), this.glyph(), this.color(), this.background())
+    );
 }

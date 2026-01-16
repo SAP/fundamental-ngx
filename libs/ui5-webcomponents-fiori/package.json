@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-fiori",
-    "version": "0.58.0-rc.99",
+    "version": "0.58.0-rc.104",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - UI5 Webcomponents Fiori",
     "license": "Apache-2.0",

@@ -630,5 +630,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Ομάδα Τμηματοποιημένου Κουμπιού',
         buttonRoleDescription: 'Τμηματοποιημένο Κουμπί'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

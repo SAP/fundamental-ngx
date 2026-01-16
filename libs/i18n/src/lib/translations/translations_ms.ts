@@ -628,5 +628,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Kumpulan Butang Disegmenkan',
         buttonRoleDescription: 'Butang Disegmenkan'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

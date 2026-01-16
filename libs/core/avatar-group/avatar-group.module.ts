@@ -7,6 +7,10 @@ import { AvatarGroupItemDirective } from './directives/avatar-group-item.directi
 import { AvatarGroupOverflowBodyDirective } from './directives/avatar-group-overflow-body.directive';
 import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         AvatarGroupComponent,

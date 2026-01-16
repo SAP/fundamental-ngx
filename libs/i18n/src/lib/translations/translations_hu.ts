@@ -630,5 +630,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Szegmentált gombcsoport',
         buttonRoleDescription: 'Szegmentált gomb'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

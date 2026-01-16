@@ -24,7 +24,7 @@ import {
     applyCssClass,
     getRandomColorAccent
 } from '@fundamental-ngx/cdk/utils';
-import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { AvatarIconPipe } from './avatar-icon.pipe';
 import { AvatarValueStates } from './avatar-value-states.type';
 import { FD_AVATAR_COMPONENT } from './tokens';
@@ -90,7 +90,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** Font family of the icon. */
     @Input()
-    font: IconComponent['font'] = FD_DEFAULT_ICON_FONT_FAMILY;
+    font: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The glyph name. */
     @Input() glyph: Nullable<string> = null;

@@ -630,5 +630,8 @@ export default {
     segmentedButton: {
         groupRoleDescription: 'Skupina segmentovaných tlačidiel',
         buttonRoleDescription: 'Segmentované tlačidlo'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };
