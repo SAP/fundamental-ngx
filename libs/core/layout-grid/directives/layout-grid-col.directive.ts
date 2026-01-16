@@ -1,86 +1,79 @@
-import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Input, OnChanges, OnInit, booleanAttribute } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { booleanAttribute, computed, Directive, ElementRef, inject, input } from '@angular/core';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
 
 @Directive({
     selector: '[fd-layout-grid-col], [fdLayoutGridCol]',
-    standalone: true
+    host: {
+        '[class]': '_cssClass()'
+    }
 })
-export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChanges {
+export class LayoutGridColDirective {
     /** Defines the width of the element on the layout grid. */
-    @Input()
-    fdLayoutGridCol: NumberInput;
+    readonly fdLayoutGridCol = input<NumberInput>();
 
     /** Weather the column should take all available width */
-    @Input({ transform: booleanAttribute })
-    colGrow = false;
+    readonly colGrow = input(false, { transform: booleanAttribute });
 
     /** Defines the width of the element on the layout grid for middle-size screen devices. */
-    @Input()
-    colMd: number;
+    readonly colMd = input<number>();
 
     /** Defines the width of the element on the layout grid for large screen devices. */
-    @Input()
-    colLg: number;
+    readonly colLg = input<number>();
 
     /** Defines the width of the element on the layout grid for extra-large screen devices. */
-    @Input()
-    colXl: number;
+    readonly colXl = input<number>();
 
     /** Defines the offset width of the element on the layout grid. */
-    @Input()
-    colOffset: number;
+    readonly colOffset = input<number>();
 
     /** Defines the offset width of the element on the layout grid for middle-sized screen devices. */
-    @Input()
-    colOffsetMd: number;
+    readonly colOffsetMd = input<number>();
 
     /** Defines the offset width of the element on the layout grid for large screen devices. */
-    @Input()
-    colOffsetLg: number;
+    readonly colOffsetLg = input<number>();
 
     /** Defines the offset width of the element on the layout grid for extra-large screen devices. */
-    @Input()
-    colOffsetXl: number;
+    readonly colOffsetXl = input<number>();
 
     /** @hidden */
-    @Input()
-    class: string;
+    readonly class = input<string>();
+
+    /**
+     * @hidden
+     * Access to the host element's ElementRef.
+     *
+     * Use this for advanced scenarios like:
+     * - DOM measurements (dimensions, scroll position)
+     * - Focus management
+     * - Integration with third-party libraries requiring native elements
+     *
+     * For most use cases, prefer using directive inputs and outputs instead
+     * of direct DOM manipulation.
+     */
+    public readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
+    protected readonly _cssClass = computed(() => {
+        const classes: string[] = [
             CSS_CLASS_NAME.col,
-            this.colGrow ? CSS_CLASS_NAME.colGrow : '',
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.colSizePrefix, this.fdLayoutGridCol),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.mdColSizePrefix, this.colMd),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.lgColSizePrefix, this.colLg),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.xlColSizePrefix, this.colXl),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.colOffsetPrefix, this.colOffset),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.mdColOffsetPrefix, this.colOffsetMd),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.lgColOffsetPrefix, this.colOffsetLg),
-            this.getCssClassWithColWidth(CSS_CLASS_NAME.xlColOffsetPrefix, this.colOffsetXl),
-            this.class
+            this.colGrow() ? CSS_CLASS_NAME.colGrow : '',
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.colSizePrefix, this.fdLayoutGridCol()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.mdColSizePrefix, this.colMd()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.lgColSizePrefix, this.colLg()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.xlColSizePrefix, this.colXl()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.colOffsetPrefix, this.colOffset()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.mdColOffsetPrefix, this.colOffsetMd()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.lgColOffsetPrefix, this.colOffsetLg()),
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.xlColOffsetPrefix, this.colOffsetXl()),
+            this.class()
         ].filter((v): v is string => !!v);
-    }
+
+        return classes.join(' ');
+    });
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    getCssClassWithColWidth(classPrefix: string, colWidth: NumberInput): string | null {
+    private _getCssClassWithColWidth(classPrefix: string, colWidth: NumberInput): string | null {
         if (!colWidth) {
             return null;
         }

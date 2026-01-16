@@ -1,4 +1,4 @@
-@if (_rowsQueryList.length) {
+@if (_rowsQueryList().length) {
     <ng-template [ngTemplateOutlet]="content"></ng-template>
 } @else {
     <div fdLayoutGridRow>
