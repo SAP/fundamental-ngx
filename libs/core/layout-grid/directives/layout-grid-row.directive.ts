@@ -4,7 +4,6 @@ import { Directive } from '@angular/core';
     selector: '[fd-layout-grid-row], [fdLayoutGridRow]',
     host: {
         class: 'fd-row'
-    },
-    standalone: true
+    }
 })
 export class LayoutGridRowDirective {}

@@ -15,7 +15,7 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -41,7 +41,9 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         FormLabelComponent,
         FormControlComponent,
         FormsModule,
-        LayoutGridModule,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
         LinkComponent,
         RouterLink,
         BarModule
