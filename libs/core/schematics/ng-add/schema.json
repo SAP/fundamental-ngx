@@ -11,12 +11,6 @@
                 "$source": "projectName"
             }
         },
-        "animations": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether Angular browser animations should be set up.",
-            "x-prompt": "Set up browser animations for Fundamental Library for Angular?"
-        },
         "fonts": {
             "type": "boolean",
             "default": true,

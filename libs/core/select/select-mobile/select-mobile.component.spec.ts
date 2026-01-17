@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
@@ -42,7 +41,6 @@ describe('SelectComponent in mobile mode', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestWrapperComponent, NoopAnimationsModule],
             providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } });
     }));

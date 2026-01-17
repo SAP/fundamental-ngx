@@ -4,12 +4,6 @@
     "title": "Fundamental Library for Angular ng-add schematic",
     "type": "object",
     "properties": {
-        "animations": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether Angular browser animations should be set up.",
-            "x-prompt": "Set up browser animations for Fundamental Library for Angular?"
-        },
         "project": {
             "type": "string",
             "description": "The name of the project.",

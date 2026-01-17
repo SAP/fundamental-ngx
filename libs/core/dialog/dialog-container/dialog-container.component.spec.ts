@@ -1,7 +1,6 @@
 import { PortalModule } from '@angular/cdk/portal';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DialogContentType, DialogDefaultContent } from '../dialog.types';
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -22,12 +21,7 @@ describe('DialogContainerComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                PortalModule,
-                NoopAnimationsModule, // Properly imported
-                ContentTestComponent,
-                DialogContainerComponent
-            ],
+            imports: [PortalModule, ContentTestComponent, DialogContainerComponent],
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useClass: DialogRef }
