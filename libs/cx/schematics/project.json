@@ -1,0 +1,30 @@
+{
+    "name": "cx-schematics",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/cx/schematics",
+    "tags": ["type:schematics", "scope:cx"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{workspaceRoot}/dist/libs/cx/schematics"],
+            "options": {
+                "outputPath": "dist/libs/cx/schematics",
+                "main": "libs/cx/schematics/ng-add/index.ts",
+                "tsConfig": "libs/cx/schematics/tsconfig.json",
+                "assets": [
+                    {
+                        "input": "libs/cx/schematics",
+                        "glob": "**/*.json",
+                        "output": "."
+                    },
+                    {
+                        "input": "libs/cx/schematics",
+                        "glob": "**/schema.d.ts",
+                        "output": "."
+                    }
+                ]
+            }
+        }
+    }
+}
