@@ -10,7 +10,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
@@ -44,7 +44,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
         TextComponent,
         RatingIndicatorModule,
         ObjectStatusComponent,
-        ObjectNumberModule,
+        ObjectNumberComponent,
         IconComponent,
         InlineHelpModule,
         BarModule

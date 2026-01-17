@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 
 @Component({
     selector: 'fd-object-number-basic-example',
     templateUrl: './object-number-basic-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberBasicExampleComponent {}
 
@@ -13,7 +13,7 @@ export class ObjectNumberBasicExampleComponent {}
     selector: 'fd-object-number-bold-example',
     templateUrl: './object-number-bold-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberBoldExampleComponent {}
 
@@ -21,7 +21,7 @@ export class ObjectNumberBoldExampleComponent {}
     selector: 'fd-object-number-large-example',
     templateUrl: './object-number-large-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberLargeExampleComponent {}
 
@@ -29,7 +29,7 @@ export class ObjectNumberLargeExampleComponent {}
     selector: 'fd-object-number-units-example',
     templateUrl: './object-number-units-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberUnitsExampleComponent {}
 
@@ -37,7 +37,7 @@ export class ObjectNumberUnitsExampleComponent {}
     selector: 'fd-object-number-status-example',
     templateUrl: './object-number-status-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberStatusExampleComponent {}
 
@@ -45,7 +45,7 @@ export class ObjectNumberStatusExampleComponent {}
     selector: 'fd-object-number-decimal-example',
     templateUrl: './object-number-decimal-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberDecimalExampleComponent {}
 
@@ -53,6 +53,30 @@ export class ObjectNumberDecimalExampleComponent {}
     selector: 'fd-object-number-truncation-example',
     templateUrl: './object-number-truncation-example.component.html',
     styleUrls: ['./object-number-examples.component.scss'],
-    imports: [ObjectNumberModule]
+    imports: [ObjectNumberComponent]
 })
 export class ObjectNumberTruncationExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-interactive-example',
+    templateUrl: './object-number-interactive-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss'],
+    imports: [ObjectNumberComponent]
+})
+export class ObjectNumberInteractiveExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-inverted-example',
+    templateUrl: './object-number-inverted-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss'],
+    imports: [ObjectNumberComponent]
+})
+export class ObjectNumberInvertedExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-inverted-interactive-example',
+    templateUrl: './object-number-inverted-interactive-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss'],
+    imports: [ObjectNumberComponent]
+})
+export class ObjectNumberInvertedInteractiveExampleComponent {}

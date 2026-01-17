@@ -95,6 +95,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Позиция от дърво {itemDetails}, {selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreOverflowLayout: {
         moreItemsButton: 'още {count}'
     },

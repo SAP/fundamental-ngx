@@ -95,6 +95,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Træelement {itemDetails}, {selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreOverflowLayout: {
         moreItemsButton: '{count} mere'
     },

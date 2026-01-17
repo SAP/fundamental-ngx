@@ -2,13 +2,12 @@ import { DecimalPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute,
+    computed,
+    input
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -17,93 +16,105 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     templateUrl: './object-number.component.html',
     styleUrl: './object-number.component.scss',
     host: {
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
-        '[attr.aria-label]': 'ariaLabel'
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.tabindex]': 'interactive() ? 0 : null',
+        '[attr.role]': 'interactive() ? "button" : null',
+        '[class]': '_cssClass()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DecimalPipe]
+    imports: [DecimalPipe, FdTranslatePipe]
 })
-export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {
+export class ObjectNumberComponent {
     /**
      * Numerical value of the object number.
      */
-    @Input()
-    number: number;
+    readonly number = input<number>();
 
     /**
      * Number of decimal places to show
      */
-    @Input()
-    decimal = 0;
+    readonly decimal = input(0);
 
     /** Sets unit of measure displayed. */
-    @Input()
-    unit: string;
+    readonly unit = input<string>();
 
     /** Set the value to true to display the object number in bold text */
-    @Input()
-    emphasized = false;
+    readonly emphasized = input(false);
 
     /** Set the value to true to display the object number in large text */
-    @Input()
-    large = false;
+    readonly large = input(false);
 
     /** Sets status/semantic color  'negative' / 'critical' / 'positive' / 'informative' */
-    @Input()
-    status: ObjectStatus;
+    readonly status = input<ObjectStatus>();
+
+    /** An optional status message for the object number */
+    readonly statusMessage = input<string>();
 
     /** User's custom classes */
-    @Input()
-    class: string;
+    readonly class = input<string>('');
 
     /** Id of the element that labels object number. */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
+    readonly ariaLabelledBy = input<string | null>();
 
     /** Aria label for the object number. */
-    @Input()
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel = input<string | null>();
 
-    /** @hidden */
-    _numberPipeConfig = '';
+    /** Whether the object number is interactive */
+    readonly interactive = input(false, { transform: booleanAttribute });
 
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    /** Whether the object number is inverted. */
+    readonly inverted = input(false, { transform: booleanAttribute });
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
+    /** @hidden Computed number pipe configuration */
+    protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
+
+    /** @hidden Status key to translate for screen readers */
+    protected readonly statusKey = computed<FdLanguageKeyIdentifier | null>(() => {
+        const status = this.status();
+        if (this.isValidObjectStatus(status)) {
+            return `coreObjectNumber.${status}`;
+        }
+        return null;
+    });
+
+    /** @hidden Computed CSS classes */
+    protected readonly _cssClass = computed(() => {
+        const classes: string[] = ['fd-object-number'];
+
+        if (this.large()) {
+            classes.push('fd-object-number--large');
+        }
+
+        const status = this.status();
+        if (status) {
+            classes.push(`fd-object-number--${status}`);
+        }
+
+        const interactive = this.interactive();
+        if (interactive) {
+            classes.push('fd-object-number--interactive');
+        }
+
+        const inverted = this.inverted();
+        if (inverted) {
+            classes.push('fd-object-number--inverted');
+        }
+
+        const customClass = this.class();
+        if (customClass) {
+            classes.push(customClass);
+        }
+
+        return classes.join(' ');
+    });
+
+    /**
+     * Type guard to check if the status is a valid ObjectStatus
+     * @hidden
      */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-object-number',
-            this.large ? 'fd-object-number--large' : '',
-            this.status ? `fd-object-number--${this.status}` : '',
-            this.class
-        ];
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this._onChanges();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._onChanges();
-    }
-
-    /** @hidden */
-    private _onChanges(): void {
-        this.buildComponentCssClass();
-        this._buildNumberPipeConfig();
-    }
-
-    /** @hidden */
-    private _buildNumberPipeConfig(): void {
-        this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
+    private isValidObjectStatus(status: ObjectStatus | undefined): status is ObjectStatus {
+        return status === 'negative' || status === 'critical' || status === 'positive' || status === 'informative';
     }
 }

@@ -13,6 +13,9 @@ import {
     ObjectNumberBasicExampleComponent,
     ObjectNumberBoldExampleComponent,
     ObjectNumberDecimalExampleComponent,
+    ObjectNumberInteractiveExampleComponent,
+    ObjectNumberInvertedExampleComponent,
+    ObjectNumberInvertedInteractiveExampleComponent,
     ObjectNumberLargeExampleComponent,
     ObjectNumberStatusExampleComponent,
     ObjectNumberTruncationExampleComponent,
@@ -26,6 +29,9 @@ const unitsHtml = 'object-number-units-example.component.html';
 const statusHtml = 'object-number-status-example.component.html';
 const decimalHtml = 'object-number-decimal-example.component.html';
 const truncationHtml = 'object-number-truncation-example.component.html';
+const interactiveHtml = 'object-number-interactive-example.component.html';
+const invertedHtml = 'object-number-inverted-example.component.html';
+const invertedInteractiveHtml = 'object-number-inverted-interactive-example.component.html';
 
 @Component({
     selector: 'app-object-number',
@@ -42,7 +48,11 @@ const truncationHtml = 'object-number-truncation-example.component.html';
         ObjectNumberBoldExampleComponent,
         ObjectNumberUnitsExampleComponent,
         ObjectNumberDecimalExampleComponent,
-        ObjectNumberTruncationExampleComponent
+        ObjectNumberTruncationExampleComponent,
+        ObjectNumberTruncationExampleComponent,
+        ObjectNumberInteractiveExampleComponent,
+        ObjectNumberInvertedExampleComponent,
+        ObjectNumberInvertedInteractiveExampleComponent
     ]
 })
 export class ObjectNumberDocsComponent {
@@ -93,11 +103,36 @@ export class ObjectNumberDocsComponent {
             fileName: 'core-object-number-decimal-example'
         }
     ];
+
     truncation: ExampleFile[] = [
         {
             language: 'html',
             code: getAssetFromModuleAssets(truncationHtml),
             fileName: 'core-object-number-truncation-example'
+        }
+    ];
+
+    interactive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(interactiveHtml),
+            fileName: 'core-object-number-interactive-example'
+        }
+    ];
+
+    inverted: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(invertedHtml),
+            fileName: 'core-object-number-inverted-example'
+        }
+    ];
+
+    invertedInteractive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(invertedInteractiveHtml),
+            fileName: 'core-object-number-inverted-interactive-example'
         }
     ];
 }
