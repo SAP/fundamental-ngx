@@ -7,7 +7,8 @@
         "types": ["node"],
         "target": "ES2022",
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "module": "preserve"
     },
     "exclude": ["**/*.spec.ts"],
     "include": ["**/*.ts"]
