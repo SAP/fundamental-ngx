@@ -211,7 +211,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** @hidden */
     _getScrollElement(): HTMLElement | null {
-        return this._tabComponent?.scrollableElement?.nativeElement || this._scrollbar?.elementRef.nativeElement;
+        return this._tabComponent?.scrollableElement?.nativeElement || this._scrollbar?.elementRef?.nativeElement;
     }
 
     /** Set the positions of the tabs and content with respect to the window */

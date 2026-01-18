@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
-        "target": "es2022",
+        "target": "es2023",
         "useDefineForClassFields": false,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "noImplicitOverride": true,
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2023"]
     },
     "files": [],
     "include": [],
