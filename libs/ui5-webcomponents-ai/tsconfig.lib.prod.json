@@ -4,7 +4,18 @@
         "declarationMap": false,
         "target": "es2023",
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler"
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@fundamental-ngx/ui5-webcomponents-base": ["../../dist/libs/ui5-webcomponents-base"],
+            "@fundamental-ngx/ui5-webcomponents-base/theming": ["../../dist/libs/ui5-webcomponents-base/theming"],
+            "@fundamental-ngx/ui5-webcomponents-base/types": ["../../dist/libs/ui5-webcomponents-base/types"],
+            "@fundamental-ngx/ui5-webcomponents-base/*": ["../../dist/libs/ui5-webcomponents-base/*"],
+            "@fundamental-ngx/ui5-webcomponents": ["../../dist/libs/ui5-webcomponents"],
+            "@fundamental-ngx/ui5-webcomponents/theming": ["../../dist/libs/ui5-webcomponents/theming"],
+            "@fundamental-ngx/ui5-webcomponents/utils": ["../../dist/libs/ui5-webcomponents/utils"],
+            "@fundamental-ngx/ui5-webcomponents/*": ["../../dist/libs/ui5-webcomponents/*"]
+        }
     },
     "angularCompilerOptions": {
         "compilationMode": "partial"
