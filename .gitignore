@@ -68,6 +68,7 @@ sauce_connect.log
 
 .nx/cache
 .nx/workspace-data
+migrations.json
 
 .yarn/*
 !.yarn/patches
