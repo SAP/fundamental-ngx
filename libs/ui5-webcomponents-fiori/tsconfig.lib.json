@@ -8,16 +8,9 @@
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "skipLibCheck": true,
-        "module": "preserve",
-        "baseUrl": ".",
-        "paths": {
-            "@fundamental-ngx/ui5-webcomponents-base": ["../../dist/libs/ui5-webcomponents-base"],
-            "@fundamental-ngx/ui5-webcomponents-base/theming": ["../../dist/libs/ui5-webcomponents-base/theming"],
-            "@fundamental-ngx/ui5-webcomponents-base/types": ["../../dist/libs/ui5-webcomponents-base/types"],
-            "@fundamental-ngx/ui5-webcomponents-base/*": ["../../dist/libs/ui5-webcomponents-base/*"]
-        }
+        "module": "preserve"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
