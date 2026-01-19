@@ -15,6 +15,6 @@
         "strictMetadataEmit": true,
         "enableResourceInlining": true
     },
-    "exclude": ["**/*.spec.ts", "../../dist/out-tsc"],
+    "exclude": ["**/*.spec.ts", "../../dist/out-tsc", "jest.config.ts"],
     "include": ["./**/*.ts"]
 }

@@ -10,7 +10,12 @@
         "useDefineForClassFields": false,
         "moduleResolution": "bundler",
         "skipLibCheck": true,
-        "module": "preserve"
+        "module": "preserve",
+        "baseUrl": ".",
+        "paths": {
+            "@fundamental-ngx/ui5-webcomponents-base": ["../../dist/libs/ui5-webcomponents-base"],
+            "@fundamental-ngx/ui5-webcomponents-base/*": ["../../dist/libs/ui5-webcomponents-base/*"]
+        }
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

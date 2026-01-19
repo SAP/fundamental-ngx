@@ -4,7 +4,12 @@
         "declarationMap": false,
         "target": "es2023",
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "baseUrl": ".",
+        "paths": {
+            "@fundamental-ngx/ui5-webcomponents-base": ["../../dist/libs/ui5-webcomponents-base"],
+            "@fundamental-ngx/ui5-webcomponents-base/*": ["../../dist/libs/ui5-webcomponents-base/*"]
+        }
     },
     "angularCompilerOptions": {
         "compilationMode": "partial"
