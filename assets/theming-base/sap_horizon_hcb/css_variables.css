@@ -1,15 +1,15 @@
 /**
 * Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 16.0.13
-* data:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}
+* Theming Engine 16.1.14
+* data:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3_hcb", "Engine": {"Name": "theming-engine", "Version": "16.1.14"}, "Version": { "Build": "11.32.3.20251212060838", "Source": "11.32.3"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3_hcb", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3_hcb", "Engine": {"Name": "theming-engine", "Version": "16.1.14"}, "Version": { "Build": "11.32.3.20251212060838", "Source": "11.32.3"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3_hcb", "Engine": {"Name": "theming-engine", "Version": "16.1.14"}, "Version": { "Build": "11.32.3.20251212060838", "Source": "11.32.3"}};}
 
 /**
-* Base.baseLib.baseTheme.base (Version 11.31.1)
+* Base.baseLib.baseTheme.base (Version 11.32.3)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -239,7 +239,7 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.skeleton (Version 11.31.1)
+* Base.baseLib.baseTheme.skeleton (Version 11.32.3)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -1002,7 +1002,7 @@
   --sapTile_TitleTextColor: #fff;
   --sapTile_TextColor: #fff;
   --sapTile_IconColor: #fff;
-  --sapTile_SeparatorColor: #fff;
+  --sapTile_SeparatorColor: transparent;
   --sapTile_Interactive_BorderColor: #fff;
   --sapTile_OverlayBackground: #000;
   --sapTile_OverlayForegroundColor: #fff;
@@ -1245,6 +1245,10 @@
   --sapChart_Data_ContrastTextColor: #000;
   --sapChart_Data_InteractiveColor: #fff;
   --sapChart_Data_Active_Background: #795100;
+  --sapChart_IBCS_Actual: #f9f9f9;
+  --sapChart_IBCS_Previous: #969696;
+  --sapChart_IBCS_Good: #99cc99;
+  --sapChart_IBCS_Bad: #ff7878;
   --sapChart_OrderedColor_1: #8babcb;
   --sapChart_OrderedColor_2: #ed8859;
   --sapChart_OrderedColor_3: #9fb822;
@@ -1784,26 +1788,26 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.css_variables (Version 11.31.1)
+* Base.baseLib.baseTheme.css_variables (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_horizon.base (Version 11.31.1)
+* Base.baseLib.sap_horizon.base (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_horizon.css_variables (Version 11.31.1)
+* Base.baseLib.sap_horizon.css_variables (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_horizon_hcb.base (Version 11.31.1)
+* Base.baseLib.sap_horizon_hcb.base (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_horizon_hcb.css_variables (Version 11.31.1)
+* Base.baseLib.sap_horizon_hcb.css_variables (Version 11.32.3)
 */
 

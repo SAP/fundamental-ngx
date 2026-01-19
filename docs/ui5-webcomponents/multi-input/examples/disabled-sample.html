@@ -1,0 +1,23 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-margin-bottom--sm">
+            <p><strong>Disabled</strong></p>
+            <ui5-multi-input placeholder="Disabled input" [disabled]="true">
+                @for (token of disabledTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <p><strong>Read-only</strong></p>
+            <ui5-multi-input placeholder="Read-only input" [readonly]="true">
+                @for (token of readonlyTokens(); track token) {
+                <ui5-token slot="tokens" [text]="token" />
+                }
+            </ui5-multi-input>
+        </div>
+    </div>
+</div>

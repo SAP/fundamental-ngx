@@ -1,0 +1,31 @@
+<div class="fd-margin-bottom--md">
+    <ui5-segmented-button (ui5SelectionChange)="onSelectionModeChange($event)">
+        @for (mode of selectionModes(); track mode) {
+        <ui5-segmented-button-item [selected]="mode === selectionMode()"> {{ mode }} </ui5-segmented-button-item>
+        }
+    </ui5-segmented-button>
+</div>
+
+<ui5-tree [selectionMode]="selectionMode()" (ui5SelectionChange)="onSelectionChange($event)">
+    <ui5-tree-item text="Documents" [expanded]="true">
+        <ui5-tree-item text="Reports">
+            <ui5-tree-item text="Q1 Report"></ui5-tree-item>
+            <ui5-tree-item text="Q2 Report"></ui5-tree-item>
+            <ui5-tree-item text="Annual Report"></ui5-tree-item>
+        </ui5-tree-item>
+        <ui5-tree-item text="Presentations">
+            <ui5-tree-item text="Sales Deck"></ui5-tree-item>
+            <ui5-tree-item text="Product Overview"></ui5-tree-item>
+        </ui5-tree-item>
+    </ui5-tree-item>
+    <ui5-tree-item text="Images">
+        <ui5-tree-item text="Screenshots"></ui5-tree-item>
+        <ui5-tree-item text="Photos"></ui5-tree-item>
+    </ui5-tree-item>
+    <ui5-tree-item text="Videos"></ui5-tree-item>
+</ui5-tree>
+
+<div class="fd-margin-top--md">
+    <p><strong>Selection Mode:</strong> {{ selectionMode() }}</p>
+    <p><strong>Selected Items:</strong> {{ selectedItemsText() }}</p>
+</div>

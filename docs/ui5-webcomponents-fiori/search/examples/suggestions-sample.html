@@ -1,0 +1,18 @@
+<ui5-search
+    [value]="searchValue()"
+    placeholder="Type to search products..."
+    [showClearIcon]="true"
+    [noTypeahead]="false"
+    (ui5Input)="onInput($event)"
+    (ui5Search)="onSearch($event)"
+>
+    @if (filteredProducts().length === 0) {
+    <ui5-search-message-area
+        slot="messageArea"
+        text="Oh, there are no results"
+        description="You can try the following: ..."
+    ></ui5-search-message-area>
+    } @else { @for (product of filteredProducts(); track product.id) {
+    <ui5-search-item [text]="product.name" [icon]="product.icon"> </ui5-search-item>
+    } }
+</ui5-search>

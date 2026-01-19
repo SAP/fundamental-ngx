@@ -1,0 +1,39 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--3">
+            <ui5-button id="topOpener" (click)="openTopMenu()"> Menu on Top </ui5-button>
+            <ui5-menu opener="topOpener" [open]="topMenuOpen()" placement="Top" (ui5Close)="closeTopMenu()">
+                <ui5-menu-item text="Menu opens on top" icon="arrow-top" />
+                <ui5-menu-item text="Option 2" />
+                <ui5-menu-item text="Option 3" />
+            </ui5-menu>
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <ui5-button id="bottomOpener" (click)="openBottomMenu()"> Menu in the Bottom </ui5-button>
+            <ui5-menu opener="bottomOpener" [open]="bottomMenuOpen()" placement="Bottom" (ui5Close)="closeBottomMenu()">
+                <ui5-menu-item text="Menu opens on bottom" icon="arrow-bottom" />
+                <ui5-menu-item text="Option 2" />
+                <ui5-menu-item text="Option 3" />
+            </ui5-menu>
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <ui5-button id="leftOpener" (click)="openLeftMenu()"> Menu on the Left </ui5-button>
+            <ui5-menu opener="leftOpener" [open]="leftMenuOpen()" placement="Start" (ui5Close)="closeLeftMenu()">
+                <ui5-menu-item text="Menu opens on left" icon="arrow-left" />
+                <ui5-menu-item text="Option 2" />
+                <ui5-menu-item text="Option 3" />
+            </ui5-menu>
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <ui5-button id="rightOpener" (click)="openRightMenu()"> Menu on the Right </ui5-button>
+            <ui5-menu opener="rightOpener" [open]="rightMenuOpen()" placement="End" (ui5Close)="closeRightMenu()">
+                <ui5-menu-item text="Menu opens on right" icon="arrow-right" />
+                <ui5-menu-item text="Option 2" />
+                <ui5-menu-item text="Option 3" />
+            </ui5-menu>
+        </div>
+    </div>
+</div>

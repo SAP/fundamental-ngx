@@ -1,0 +1,208 @@
+<div>
+    <ui5-shellbar (ui5ProfileClick)="onProfileClick()">
+        <ui5-shellbar-branding slot="branding">
+            Corporate Portal
+            <img slot="logo" src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="Logo" />
+        </ui5-shellbar-branding>
+        <ui5-avatar slot="profile" id="menu-opener">
+            <img [src]="userAccount().avatarSrc" alt="User Avatar" />
+        </ui5-avatar>
+    </ui5-shellbar>
+
+    <ui5-user-menu id="userMenuShellBar" opener="menu-opener" [open]="menuOpen()" (ui5Close)="onMenuClose()">
+        <ui5-user-menu-account
+            slot="accounts"
+            [avatarSrc]="userAccount().avatarSrc"
+            [titleText]="userAccount().titleText"
+            [subtitleText]="userAccount().subtitleText"
+            [description]="userAccount().description"
+            [selected]="true"
+        >
+        </ui5-user-menu-account>
+        <ui5-user-menu-item icon="action-settings" text="Setting" (click)="onSettingsClick()"> </ui5-user-menu-item>
+    </ui5-user-menu>
+
+    <ui5-user-settings-dialog
+        id="settings"
+        headerText="Settings"
+        [showSearchField]="true"
+        [open]="settingsDialogOpen()"
+        (ui5Close)="onSettingsDialogClose()"
+    >
+        <ui5-user-settings-item
+            icon="user-settings"
+            text="User Account"
+            tooltip="User Account"
+            headerText="User Account"
+        >
+            <ui5-user-settings-account-view>
+                <ui5-user-menu-account
+                    slot="account"
+                    [avatarSrc]="userAccount().avatarSrc"
+                    [titleText]="userAccount().titleText"
+                    [subtitleText]="userAccount().subtitleText"
+                    [description]="userAccount().description"
+                >
+                </ui5-user-menu-account>
+                <ui5-label for="reset-all-button">Personalization</ui5-label>
+                <br />
+                <ui5-button id="reset-all-button">Reset All Personalization</ui5-button>
+                <ui5-panel [fixed]="true" class="ua-panel">
+                    <ui5-text>
+                        Reset your personalization settings for the launchpad (such as theme, language, user activities,
+                        and home page content).
+                    </ui5-text>
+                </ui5-panel>
+            </ui5-user-settings-account-view>
+        </ui5-user-settings-item>
+
+        <ui5-user-settings-item icon="palette" text="Appearance" tooltip="Appearance" headerText="Appearance">
+            <ui5-user-settings-view text="Themes" slot="tabs">
+                <ui5-list separators="Inner">
+                    @for (theme of themes(); track $index) {
+                    <ui5-li icon="palette">{{theme}}</ui5-li>
+                    }
+                </ui5-list>
+                <ui5-button class="save-btn" design="Emphasized" (ui5Click)="onThemeSave()">Save</ui5-button>
+                <ui5-toast design="Emphasized">Changes applied.</ui5-toast>
+            </ui5-user-settings-view>
+            <ui5-user-settings-view text="Display settings" slot="tabs">
+                <ui5-checkbox [checked]="true" text="Optimized for Touch Input"></ui5-checkbox>
+                <ui5-panel [fixed]="true">
+                    <ui5-label>
+                        Increases the size and spacing of controls to allow you to interact with them more easily using
+                        your fingertip. This is useful for hybrid devices that combine touch and mouse events.
+                    </ui5-label>
+                </ui5-panel>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+
+        <ui5-user-settings-item
+            text="Language and Region"
+            tooltip="Language and Region"
+            headerText="Language and Region"
+        >
+            <ui5-user-settings-view>
+                <div class="language-region-container">
+                    <ui5-label class="language-region-label">Display Language:</ui5-label>
+                    <ui5-combobox class="language-region-control" placeholder="Language" [value]="languages()[0].text">
+                        @for (language of languages(); track $index) {
+                        <ui5-cb-item [text]="language.text" [additionalText]="language.additionalText"></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+
+                    <ui5-label class="language-region-label">Region:</ui5-label>
+                    <ui5-combobox class="language-region-control" placeholder="Region" [value]="regions()[0].text">
+                        @for (region of regions(); track $index) {
+                        <ui5-cb-item [text]="region.text" [additionalText]="region.additionalText"></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+
+                    <ui5-label class="language-region-label">Date Format:</ui5-label>
+                    <ui5-combobox
+                        class="language-region-control"
+                        placeholder="Date Format"
+                        [value]="dateFormats()[0].text"
+                    >
+                        @for (dateFormat of dateFormats(); track $index) {
+                        <ui5-cb-item
+                            [text]="dateFormat.text"
+                            [additionalText]="dateFormat.additionalText"
+                        ></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+
+                    <ui5-label class="language-region-label">Time Format:</ui5-label>
+                    <ui5-combobox
+                        class="language-region-control"
+                        placeholder="Time Format"
+                        [value]="timeFormats()[0].text"
+                    >
+                        @for (timeFormat of timeFormats(); track $index) {
+                        <ui5-cb-item
+                            [text]="timeFormat.text"
+                            [additionalText]="timeFormat.additionalText"
+                        ></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+
+                    <ui5-label class="language-region-label">Time Zone:</ui5-label>
+                    <ui5-combobox class="language-region-control" placeholder="Time Zone" [value]="timeZones()[0].text">
+                        @for (timeZone of timeZones(); track $index) {
+                        <ui5-cb-item [text]="timeZone.text" [additionalText]="timeZone.additionalText"></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+
+                    <ui5-label class="language-region-label">Currency:</ui5-label>
+                    <ui5-combobox class="language-region-control" placeholder="Currency" [value]="currencies()[0].text">
+                        @for (currency of currencies(); track $index) {
+                        <ui5-cb-item [text]="currency.text" [additionalText]="currency.additionalText"></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+
+                    <ui5-label class="language-region-label">Number Format:</ui5-label>
+                    <ui5-combobox
+                        class="language-region-control"
+                        placeholder="Number Format"
+                        [value]="numberFormats()[0].text"
+                    >
+                        @for (numberFormat of numberFormats(); track $index) {
+                        <ui5-cb-item
+                            [text]="numberFormat.text"
+                            [additionalText]="numberFormat.additionalText"
+                        ></ui5-cb-item>
+                        }
+                    </ui5-combobox>
+                </div>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+
+        <ui5-user-settings-item
+            icon="iphone"
+            text="SAP Mobile Start Application"
+            tooltip="SAP Mobile Start Application"
+            headerText="SAP Mobile Start Application"
+            (ui5SelectionChange)="onMobileSelectionChange($event)"
+        >
+            <ui5-user-settings-view>
+                <ui5-button (ui5Click)="onSecondaryViewSelected('iOS')">iOS</ui5-button>
+                <ui5-button (ui5Click)="onSecondaryViewSelected('Android')">Android</ui5-button>
+            </ui5-user-settings-view>
+
+            <ui5-user-settings-view
+                [text]="secondaryViewText()"
+                [secondary]="true"
+                [selected]="mobileSecondaryViewSelected()"
+            >
+                <ui5-text>Enable access to your site from the SAP Mobile Start application.</ui5-text>
+                <ui5-button>Install</ui5-button>
+                <ui5-button>Register</ui5-button>
+                <ui5-text>Scan the QR Code to install the mobile application</ui5-text>
+                <ui5-icon name="qr-code" [style]="{ width: '20rem', height: '20rem' }"></ui5-icon>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+
+        <ui5-user-settings-item icon="bell" text="Notifications" tooltip="Notifications" headerText="Notifications">
+            <ui5-user-settings-view>
+                <ui5-checkbox [checked]="true" text="Show High-Priority Notification Alerts"></ui5-checkbox>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+
+        <ui5-user-settings-item
+            icon="reset"
+            slot="fixedItems"
+            text="Reset Settings"
+            tooltip="Reset Settings"
+            headerText="Reset Settings"
+        >
+            <ui5-user-settings-view text="Reset Personalization">
+                <ui5-button (ui5Click)="onResetPersonalization()">Reset Personalization content</ui5-button>
+                <ui5-toast design="Emphasized">Changes Reset.</ui5-toast>
+            </ui5-user-settings-view>
+            <ui5-user-settings-view text="Reset All Settings">
+                <ui5-button (ui5Click)="onResetAll()">Reset All Settings content</ui5-button>
+                <ui5-toast design="Emphasized">All changes Reset.</ui5-toast>
+            </ui5-user-settings-view>
+        </ui5-user-settings-item>
+    </ui5-user-settings-dialog>
+</div>

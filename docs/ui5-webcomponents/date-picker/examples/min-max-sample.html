@@ -1,0 +1,27 @@
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Current Month Only ({{ minDate() }} to {{ maxDate() }}):</label>
+    <ui5-date-picker
+        [minDate]="minDate()"
+        [maxDate]="maxDate()"
+        placeholder="Select a date in current month"
+    ></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Next 7 Days Only ({{ nextWeekMin() }} to {{ nextWeekMax() }}):</label>
+    <ui5-date-picker
+        [minDate]="nextWeekMin()"
+        [maxDate]="nextWeekMax()"
+        placeholder="Select a date in next 7 days"
+    ></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Only Future Dates (min: {{ nextWeekMin() }}):</label>
+    <ui5-date-picker [minDate]="nextWeekMin()" placeholder="Select a future date"></ui5-date-picker>
+</div>
+
+<div class="fd-margin-top--sm">
+    <label class="fd-margin-end--sm">Only Past Dates (max: {{ nextWeekMin() }}):</label>
+    <ui5-date-picker [maxDate]="nextWeekMin()" placeholder="Select a past date"></ui5-date-picker>
+</div>

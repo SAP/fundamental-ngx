@@ -1,0 +1,27 @@
+<div class="fd-form-group">
+    <label class="fd-form-label">Future Dates Only (Min: Today):</label>
+    <ui5-datetime-picker
+        [minDate]="minDateFuture()"
+        [placeholder]="'Select a future date/time'"
+        (ui5Change)="onValueChange($event)"
+    />
+</div>
+
+<div class="fd-form-group">
+    <label class="fd-form-label">Past Dates Only (Max: Today):</label>
+    <ui5-datetime-picker
+        [maxDate]="maxDatePast()"
+        [placeholder]="'Select a past date/time'"
+        (ui5Change)="onValueChange($event)"
+    />
+</div>
+
+<div class="fd-form-group">
+    <label class="fd-form-label">Date Range (Next 30 Days):</label>
+    <ui5-datetime-picker
+        [minDate]="minDateRange()"
+        [maxDate]="maxDateRange()"
+        [placeholder]="'Select within 30 days'"
+        (ui5Change)="onValueChange($event)"
+    />
+</div>

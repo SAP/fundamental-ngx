@@ -1,0 +1,308 @@
+<section aria-labelledby="card-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="card-basic" class="fd-section__title">Basic Cards</h2>
+    </div>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--4">
+                <ui5-card accessibleName="Simple information card" class="fd-margin-bottom--sm">
+                    <ui5-card-header titleText="Simple Card" subtitleText="Basic card example" [interactive]="false">
+                    </ui5-card-header>
+                    <div class="sap-padding">
+                        <p class="sap-text">
+                            This is a simple card with basic content. Cards are flexible containers for displaying
+                            structured information.
+                        </p>
+                        <ui5-button design="Emphasized" class="sap-margin-top-small"> Learn More </ui5-button>
+                    </div>
+                </ui5-card>
+            </div>
+
+            <div class="fd-col fd-col-md--4">
+                <ui5-card accessibleName="Interactive card with header" class="fd-margin-bottom--sm">
+                    <ui5-card-header
+                        titleText="Interactive Card"
+                        subtitleText="Click the header"
+                        additionalText="New"
+                        [interactive]="true"
+                        (ui5Click)="onCardHeaderClick('interactive')"
+                    >
+                        <ui5-icon slot="avatar" name="sap-icon://lightbulb"></ui5-icon>
+                        <div slot="action">
+                            <ui5-button design="Transparent" (ui5Click)="onActionButtonClick('settings')">
+                                <ui5-icon name="sap-icon://action-settings"></ui5-icon>
+                            </ui5-button>
+                        </div>
+                    </ui5-card-header>
+                    <div class="sap-padding">
+                        <p class="sap-text">
+                            This card has an interactive header. Click the header to trigger an action. The header can
+                            also contain avatar icons and action buttons.
+                        </p>
+                    </div>
+                </ui5-card>
+            </div>
+
+            <div class="fd-col fd-col-md--4">
+                <ui5-card
+                    accessibleName="Card with loading state"
+                    [loading]="showLoading()"
+                    [loadingDelay]="loadingDelay()"
+                    class="fd-margin-bottom--sm"
+                >
+                    <ui5-card-header titleText="Loading Card" subtitleText="Demonstrates loading states">
+                    </ui5-card-header>
+                    <div class="sap-padding">
+                        <p class="sap-text">
+                            This card can show loading states. Use the configuration panel below to toggle the loading
+                            indicator.
+                        </p>
+                        <ui5-button (ui5Click)="toggleLoading()">
+                            {{ showLoading() ? 'Stop Loading' : 'Start Loading' }}
+                        </ui5-button>
+                    </div>
+                </ui5-card>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="card-dashboard" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="card-dashboard" class="fd-section__title">Dashboard Cards</h2>
+    </div>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col-lg--3 fd-col-md--6">
+                <ui5-card accessibleName="Total sales metric card" class="fd-margin-bottom--sm">
+                    <ui5-card-header
+                        titleText="Total Sales"
+                        subtitleText="This Quarter"
+                        [interactive]="interactive()"
+                        (ui5Click)="onCardHeaderClick('sales')"
+                    >
+                        <ui5-icon
+                            slot="avatar"
+                            name="sap-icon://sales-document"
+                            style="color: var(--sapSuccessColor)"
+                        ></ui5-icon>
+                        <div slot="action">
+                            <ui5-button design="Transparent" (ui5Click)="refreshData()">
+                                <ui5-icon name="sap-icon://refresh"></ui5-icon>
+                            </ui5-button>
+                        </div>
+                    </ui5-card-header>
+                    <div class="sap-padding sap-text-align-center">
+                        <div
+                            class="sap-text-color-positive sap-margin-bottom-tiny"
+                            style="font-size: 2.5rem; font-weight: bold"
+                        >
+                            {{ formatCurrency(totalSales()) }}
+                        </div>
+                        <ui5-label class="sap-text-color-neutral" style="font-size: 0.875rem">
+                            <ui5-icon name="sap-icon://trend-up" style="color: var(--sapSuccessColor)"></ui5-icon>
+                            +12.5% from last quarter
+                        </ui5-label>
+                    </div>
+                </ui5-card>
+            </div>
+
+            <div class="fd-col fd-col-lg--3 fd-col-md--6">
+                <ui5-card
+                    accessibleName="Team members online card"
+                    [loading]="showLoading()"
+                    [loadingDelay]="loadingDelay()"
+                    class="fd-margin-bottom--sm"
+                >
+                    <ui5-card-header
+                        titleText="Team Online"
+                        subtitleText="{{ onlineMembers() }} of {{ teamMembers().length }}"
+                        [interactive]="interactive()"
+                        (ui5Click)="onCardHeaderClick('team')"
+                    >
+                        <ui5-icon
+                            slot="avatar"
+                            name="sap-icon://group"
+                            style="color: var(--sapInformationColor)"
+                        ></ui5-icon>
+                    </ui5-card-header>
+                    <div class="sap-padding sap-text-align-center">
+                        <div
+                            class="sap-text-color-information sap-margin-bottom-tiny"
+                            style="font-size: 2.5rem; font-weight: bold"
+                        >
+                            {{ onlineMembers() }}
+                        </div>
+                        <ui5-label class="sap-text-color-neutral" style="font-size: 0.875rem">
+                            Active team members
+                        </ui5-label>
+                    </div>
+                </ui5-card>
+            </div>
+
+            <div class="fd-col fd-col-lg--3 fd-col-md--6">
+                <ui5-card
+                    accessibleName="Average completion progress card"
+                    [loading]="showLoading()"
+                    [loadingDelay]="loadingDelay()"
+                    class="fd-margin-bottom--sm"
+                >
+                    <ui5-card-header
+                        titleText="Average Progress"
+                        subtitleText="Project completion"
+                        [interactive]="interactive()"
+                        (ui5Click)="onCardHeaderClick('progress')"
+                    >
+                        <ui5-icon
+                            slot="avatar"
+                            name="sap-icon://task"
+                            style="color: var(--sapChart_OrderedColor_1)"
+                        ></ui5-icon>
+                    </ui5-card-header>
+                    <div class="sap-padding sap-text-align-center">
+                        <div
+                            class="sap-margin-bottom-tiny"
+                            style="font-size: 2.5rem; font-weight: bold; color: var(--sapChart_OrderedColor_1)"
+                        >
+                            {{ averageProgress() }}%
+                        </div>
+                        <ui5-progress-indicator [value]="averageProgress()" class="sap-margin-top-small sap-width-full">
+                        </ui5-progress-indicator>
+                    </div>
+                </ui5-card>
+            </div>
+
+            <div class="fd-col fd-col-lg--3 fd-col-md--6">
+                <ui5-card accessibleName="Inventory alerts card" class="fd-margin-bottom--sm">
+                    <ui5-card-header
+                        titleText="Inventory Alerts"
+                        subtitleText="Low stock items"
+                        [interactive]="interactive()"
+                        (ui5Click)="onCardHeaderClick('inventory')"
+                    >
+                        <ui5-icon
+                            slot="avatar"
+                            name="sap-icon://warning"
+                            style="color: var(--sapCriticalColor)"
+                        ></ui5-icon>
+                        <div slot="action">
+                            <ui5-tag [colorScheme]="lowStockProducts() > 0 ? '1' : '8'">
+                                {{ lowStockProducts() }}
+                            </ui5-tag>
+                        </div>
+                    </ui5-card-header>
+                    <div class="sap-padding sap-text-align-center">
+                        <div
+                            class="sap-margin-bottom-tiny"
+                            style="font-size: 2.5rem; font-weight: bold"
+                            [style.color]="lowStockProducts() > 0 ? 'var(--sapCriticalColor)' : 'var(--sapSuccessColor)'"
+                        >
+                            {{ lowStockProducts() }}
+                        </div>
+                        <ui5-label class="sap-text-color-neutral" style="font-size: 0.875rem">
+                            Items need restocking
+                        </ui5-label>
+                    </div>
+                </ui5-card>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section aria-labelledby="card-content" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="card-content" class="fd-section__title">Content Cards</h2>
+    </div>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6">
+                <ui5-card accessibleName="Team members list card" class="fd-margin-bottom--sm">
+                    <ui5-card-header
+                        titleText="Team Members"
+                        subtitleText="{{ teamMembers().length }} members"
+                        [interactive]="interactive()"
+                        (ui5Click)="onCardHeaderClick('team-list')"
+                    >
+                        <ui5-icon slot="avatar" name="sap-icon://group"></ui5-icon>
+                        <div slot="action">
+                            <ui5-button design="Transparent">
+                                <ui5-icon name="sap-icon://add"></ui5-icon>
+                            </ui5-button>
+                        </div>
+                    </ui5-card-header>
+                    <div>
+                        @for (member of teamMembers(); track member.name) {
+                        <div
+                            class="sap-padding sap-flex sap-flex--align-items-center sap-flex--gap-small"
+                            style="border-bottom: 1px solid var(--sapList_BorderColor)"
+                        >
+                            <ui5-avatar initials="{{ member.avatar }}" size="S"></ui5-avatar>
+                            <div class="sap-flex-grow-1">
+                                <div class="sap-text sap-text-weight-bold">{{ member.name }}</div>
+                                <div class="sap-text sap-text-color-neutral" style="font-size: 0.75rem">
+                                    {{ member.role }}
+                                </div>
+                            </div>
+                            <span
+                                fd-object-status
+                                [status]="getStatusState(member.status)"
+                                [glyph]="getStatusIcon(member.status)"
+                                [label]="member.status"
+                                [title]="member.status"
+                            >
+                            </span>
+                        </div>
+                        }
+                    </div>
+                </ui5-card>
+            </div>
+
+            <div class="fd-col fd-col-md--6">
+                <ui5-card accessibleName="Tasks progress card" class="fd-margin-bottom--sm">
+                    <ui5-card-header
+                        titleText="Active Tasks"
+                        subtitleText="{{ tasks().length }} tasks in progress"
+                        [interactive]="interactive()"
+                        (ui5Click)="onCardHeaderClick('tasks')"
+                    >
+                        <ui5-icon slot="avatar" name="sap-icon://task"></ui5-icon>
+                        <div slot="action">
+                            <ui5-button design="Transparent">
+                                <ui5-icon name="sap-icon://filter"></ui5-icon>
+                            </ui5-button>
+                        </div>
+                    </ui5-card-header>
+                    <div>
+                        @for (task of tasks(); track task.title) {
+                        <div class="sap-padding" style="border-bottom: 1px solid var(--sapList_BorderColor)">
+                            <div
+                                class="sap-flex sap-flex--justify-space-between sap-flex--align-items-start sap-margin-bottom-tiny"
+                            >
+                                <div class="sap-text sap-text-weight-bold">{{ task.title }}</div>
+                                <ui5-tag
+                                    [colorScheme]="task.priority === 'high' ? '1' : task.priority === 'medium' ? '2' : '8'"
+                                    style="font-size: 0.75rem"
+                                >
+                                    {{ task.priority }}
+                                </ui5-tag>
+                            </div>
+                            <div class="sap-flex sap-flex--align-items-center sap-flex--gap-small">
+                                <ui5-progress-indicator
+                                    [value]="task.progress"
+                                    class="sap-flex-grow-1"
+                                    style="height: 6px"
+                                >
+                                </ui5-progress-indicator>
+                                <span class="sap-text sap-helper-text-small">{{ task.progress }}%</span>
+                            </div>
+                            <div class="sap-text sap-helper-text-small sap-margin-top-tiny">
+                                Assigned to {{ task.assignee }}
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </ui5-card>
+            </div>
+        </div>
+    </div>
+</section>

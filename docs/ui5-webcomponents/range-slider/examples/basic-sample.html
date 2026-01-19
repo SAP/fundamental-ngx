@@ -1,0 +1,20 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-range-slider
+                [startValue]="20"
+                [endValue]="80"
+                [min]="0"
+                [max]="100"
+                (ui5Input)="onInput($event)"
+                (ui5Change)="onChange($event)"
+            />
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <p><strong>Selected Range:</strong> {{ startValue() }} - {{ endValue() }}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+{
+	"id": 0,
+	"name": "@fundamental-ngx/ui5-webcomponents-base",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"children": [
+		{
+			"id": 1,
+			"name": "UI5WrapperCustomEvent",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 14,
+					"character": 12
+				}
+			],
+			"typeParameters": [
+				{
+					"id": 2,
+					"name": "T",
+					"variant": "typeParam",
+					"kind": 131072,
+					"flags": {}
+				},
+				{
+					"id": 3,
+					"name": "N",
+					"variant": "typeParam",
+					"kind": 131072,
+					"flags": {},
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
+							"qualifiedName": "OutputKeys"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": -1,
+								"name": "T",
+								"refersToTypeParameter": true
+							}
+						],
+						"name": "OutputKeys",
+						"package": "@fundamental-ngx/ui5-webcomponents-base"
+					}
+				}
+			],
+			"type": {
+				"type": "conditional",
+				"checkType": {
+					"type": "indexedAccess",
+					"indexType": {
+						"type": "reference",
+						"target": -1,
+						"name": "N",
+						"refersToTypeParameter": true
+					},
+					"objectType": {
+						"type": "reference",
+						"target": -1,
+						"name": "T",
+						"refersToTypeParameter": true
+					}
+				},
+				"extendsType": {
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+						"qualifiedName": "OutputEmitterRef"
+					},
+					"typeArguments": [
+						{
+							"type": "inferred",
+							"name": "E"
+						}
+					],
+					"name": "OutputEmitterRef",
+					"package": "@angular/core"
+				},
+				"trueType": {
+					"type": "reference",
+					"target": -1,
+					"name": "E",
+					"refersToTypeParameter": true
+				},
+				"falseType": {
+					"type": "intrinsic",
+					"name": "never"
+				}
+			}
+		}
+	],
+	"groups": [
+		{
+			"title": "Type Aliases",
+			"children": [
+				1
+			]
+		}
+	],
+	"packageName": "@fundamental-ngx/ui5-webcomponents-base",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# ui5-webcomponents-base\n\nBase utilities and types for UI5 Web Components Angular wrappers.\n\n## Overview\n\nThis library provides core utilities, TypeScript types, and common functionality used across all UI5 Web Components Angular wrapper libraries. It is typically installed automatically as a peer dependency of other "
+		},
+		{
+			"kind": "code",
+			"text": "`@fundamental-ngx/ui5-webcomponents-*`"
+		},
+		{
+			"kind": "text",
+			"text": " packages.\n\n- Common TypeScript types and interfaces\n- Shared utilities for UI5 Web Components integration\n- Theming support\n- Base configuration\n\n## Installation\n\nThis package is usually installed automatically as a dependency:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```bash\nnpm install @fundamental-ngx/ui5-webcomponents-base\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Usage\n\nThis package is primarily used internally by other UI5 Web Components packages. You typically don't need to import from it directly unless you're building custom wrappers or need access to shared types.\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\nimport { UI5CustomEvent } from '@ui5/webcomponents-base';\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Resources\n\n- [UI5 Web Components Documentation](https://ui5.github.io/webcomponents/)\n- [Fundamental NGX Documentation](https://sap.github.io/fundamental-ngx)\n- [GitHub Repository](https://github.com/SAP/fundamental-ngx)"
+		}
+	],
+	"symbolIdMap": {
+		"0": {
+			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
+			"qualifiedName": "UI5WrapperCustomEvent"
+		},
+		"2": {
+			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
+			"qualifiedName": "T"
+		},
+		"3": {
+			"sourceFileName": "libs/ui5-webcomponents-base/types/index.ts",
+			"qualifiedName": "N"
+		}
+	}
+}

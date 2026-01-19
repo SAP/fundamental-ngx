@@ -1,0 +1,81 @@
+<ui5-page [style]="{ height: '500px'}">
+    <ui5-shellbar design="Header" slot="header" secondary-title="The Best Run SAP">
+        <ui5-shellbar-branding slot="branding">UI5 Web Components</ui5-shellbar-branding>
+        <ui5-button icon="menu2" slot="startButton" id="menuBtn" (ui5Click)="togglePopover()"></ui5-button>
+    </ui5-shellbar>
+    <ui5-responsive-popover
+        id="respPopover"
+        opener="menuBtn"
+        placement="Bottom"
+        accessible-name="Main Navigation"
+        [open]="isPopoverOpen()"
+        (ui5Close)="isPopoverOpen.set(false)"
+    >
+        <ui5-side-navigation id="sideNavigation" (ui5SelectionChange)="onNavigationChange($event)">
+            <!-- Main navigation items -->
+            @for (item of mainNavigationItems(); track item.text) {
+            <ui5-side-navigation-item
+                [text]="item.text"
+                [icon]="item.icon"
+                [href]="item.href"
+                [selected]="item.selected"
+            >
+            </ui5-side-navigation-item>
+            }
+
+            <!-- Navigation groups -->
+            @for (group of navigationGroups(); track group.text) {
+            <ui5-side-navigation-group [text]="group.text" [expanded]="group.expanded">
+                @for (item of group.items; track item.text) {
+                <ui5-side-navigation-item
+                    [text]="item.text"
+                    [icon]="item.icon"
+                    [href]="item.href"
+                    [expanded]="item.expanded"
+                    [unselectable]="item.unselectable"
+                >
+                    @if (item.subItems) { @for (subItem of item.subItems; track subItem.text) {
+                    <ui5-side-navigation-sub-item
+                        [text]="subItem.text"
+                        [href]="subItem.href"
+                    ></ui5-side-navigation-sub-item>
+                    } }
+                </ui5-side-navigation-item>
+                }
+            </ui5-side-navigation-group>
+            }
+
+            <!-- Fixed Items -->
+            @for (item of fixedItems(); track item.text) {
+            <ui5-side-navigation-item
+                slot="fixedItems"
+                [text]="item.text"
+                [icon]="item.icon"
+                [href]="item.href"
+                [target]="item.target"
+                [design]="item.design"
+                [unselectable]="item.unselectable"
+                [attr.id]="item.id"
+                (ui5Click)="item.id === 'quickAction' ? openDialog() : null"
+            ></ui5-side-navigation-item>
+            }
+        </ui5-side-navigation>
+    </ui5-responsive-popover>
+    <div class="content">
+        @for (section of contentSections(); track section.id) {
+        <div [id]="section.id" class="contentItem" [class.contentItemVisible]="isContentVisible(section.id)">
+            <ui5-title>{{ section.title }}</ui5-title>
+            <br />
+            <ui5-text>{{ section.content }}</ui5-text>
+        </div>
+        }
+    </div>
+
+    <ui5-dialog headerText="Create New Item" id="quickActionDialog" [open]="isDialogOpen()">
+        <ui5-text>Create new item...</ui5-text>
+        <ui5-bar slot="footer" design="Footer">
+            <ui5-button slot="endContent" design="Emphasized" (ui5Click)="closeDialog()">Create</ui5-button>
+            <ui5-button slot="endContent" id="quickActionCloseBtn" (ui5Click)="closeDialog()">Close</ui5-button>
+        </ui5-bar>
+    </ui5-dialog>
+</ui5-page>

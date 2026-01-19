@@ -1,0 +1,24 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-2 fd-margin-end--lg">
+            <h4>Color Schemes Set 1:</h4>
+            @for (colorScheme of colorSchemesSet1(); track colorScheme.scheme) {
+            <div class="fd-margin-bottom--sm">
+                <ui5-tag [design]="colorScheme.design" [colorScheme]="colorScheme.scheme"
+                    >{{ colorScheme.label }}</ui5-tag
+                >
+            </div>
+            }
+        </div>
+        <div class="fd-col-2">
+            <h4>Color Schemes Set 2:</h4>
+            @for (colorScheme of colorSchemesSet2(); track colorScheme.scheme) {
+            <div class="fd-margin-bottom--sm">
+                <ui5-tag [design]="colorScheme.design" [colorScheme]="colorScheme.scheme"
+                    >{{ colorScheme.label }}</ui5-tag
+                >
+            </div>
+            }
+        </div>
+    </div>
+</div>

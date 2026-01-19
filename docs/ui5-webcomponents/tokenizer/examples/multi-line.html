@@ -1,0 +1,23 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--12" [style]="{ 'padding-top': '0' }">
+            <h4>Single Line (Default)</h4>
+            <ui5-tokenizer [style]="{ width: '100%' }" (ui5TokenDelete)="onSingleLineTokenDelete($event)">
+                @for (category of categories(); track category) {
+                <ui5-token [text]="category"></ui5-token>
+                }
+            </ui5-tokenizer>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col fd-col--12">
+            <h4>Multi-line</h4>
+            <ui5-tokenizer [multiLine]="true" (ui5TokenDelete)="onMultiLineTokenDelete($event)">
+                @for (category of categories(); track category) {
+                <ui5-token [text]="category"></ui5-token>
+                }
+            </ui5-tokenizer>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,14 @@
 <div class="hyphens-example-holder">
-    <h3>Without hyphenation</h3>
-    <fd-text [text]="text" hyphenation="none"></fd-text>
+    <h3>No hyphenation</h3>
+    <fd-text [text]="text" [hyphenation]="'none'"></fd-text>
 </div>
 
 <div class="hyphens-example-holder">
-    <h3>Hyphenation manual</h3>
-    <fd-text [text]="textSoftHyphens" hyphenation="manual"></fd-text>
+    <h3>Manual hyphenation (soft hyphens: \u00AD)</h3>
+    <fd-text [text]="textSoftHyphens" [hyphenation]="'manual'"></fd-text>
 </div>
 
 <div class="hyphens-example-holder">
-    <h3>Hyphenation auto</h3>
-    <fd-text [text]="text" hyphenation="auto"></fd-text>
+    <h3>Automatic hyphenation</h3>
+    <fd-text [text]="text" [hyphenation]="'auto'"></fd-text>
 </div>

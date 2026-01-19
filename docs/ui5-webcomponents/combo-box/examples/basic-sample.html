@@ -1,0 +1,7 @@
+<ui5-combobox placeholder="Select a country" (ui5Change)="onChange($event)">
+    @for (country of countries; track country) {
+    <ui5-cb-item [text]="country"></ui5-cb-item>
+    }
+</ui5-combobox>
+
+<div class="fd-margin-top--sm"><strong>Selected Value:</strong> {{ selectedValue() }}</div>

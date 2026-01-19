@@ -1,0 +1,9 @@
+<ui5-split-button id="split-button" (ui5Click)="onPrimaryClick()" (ui5ArrowClick)="onArrowClick()"
+    >Open Menu</ui5-split-button
+>
+
+<ui5-menu opener="split-button" [open]="isMenuOpen()">
+    <ui5-menu-item text="Edit" icon="add"></ui5-menu-item>
+    <ui5-menu-item text="Save" icon="save"></ui5-menu-item>
+    <ui5-menu-item text="Delete" icon="delete"></ui5-menu-item>
+</ui5-menu>

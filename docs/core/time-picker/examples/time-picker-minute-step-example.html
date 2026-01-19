@@ -1,0 +1,47 @@
+<style>
+    @import '@sap-ui/common-css/dist/sap-flex.css';
+    @import '@sap-ui/common-css/dist/sap-margin.css';
+    @import '@sap-ui/common-css/dist/sap-typography.css';
+</style>
+
+<div class="sap-flex sap-flex--column sap-flex--gap-small">
+    <div>
+        <label fd-form-label>Default (Every Minute):</label>
+        <fd-time-picker [(ngModel)]="timeEveryMinute" [minuteStep]="1"></fd-time-picker>
+        <div class="sap-margin-top-tiny sap-font-size-small">
+            Selected time: {{ timeEveryMinute.toDate() | date: 'HH:mm:ss' }}
+        </div>
+    </div>
+
+    <div>
+        <label fd-form-label>5-Minute Intervals:</label>
+        <fd-time-picker [(ngModel)]="time5Minutes" [minuteStep]="5"></fd-time-picker>
+        <div class="sap-margin-top-tiny sap-font-size-small">
+            Selected time: {{ time5Minutes.toDate() | date: 'HH:mm:ss' }}
+        </div>
+    </div>
+
+    <div>
+        <label fd-form-label>10-Minute Intervals:</label>
+        <fd-time-picker [(ngModel)]="time10Minutes" [minuteStep]="10"></fd-time-picker>
+        <div class="sap-margin-top-tiny sap-font-size-small">
+            Selected time: {{ time10Minutes.toDate() | date: 'HH:mm:ss' }}
+        </div>
+    </div>
+
+    <div>
+        <label fd-form-label>15-Minute Intervals:</label>
+        <fd-time-picker [(ngModel)]="time15Minutes" [minuteStep]="15"></fd-time-picker>
+        <div class="sap-margin-top-tiny sap-font-size-small">
+            Selected time: {{ time15Minutes.toDate() | date: 'HH:mm:ss' }}
+        </div>
+    </div>
+
+    <div>
+        <label fd-form-label>30-Minute Intervals:</label>
+        <fd-time-picker [(ngModel)]="time30Minutes" [minuteStep]="30"></fd-time-picker>
+        <div class="sap-margin-top-tiny sap-font-size-small">
+            Selected time: {{ time30Minutes.toDate() | date: 'HH:mm:ss' }}
+        </div>
+    </div>
+</div>

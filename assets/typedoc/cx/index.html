@@ -1,0 +1,51 @@
+<!DOCTYPE html><div class="fd-tsdoc-container"><div class="tsd-panel tsd-typography"><a id="md:fundamental-ngxcx" class="tsd-anchor"></a><h1><a href="#md:fundamental-ngxcx">@Fundamental-NGX/CX</a></h1><p><a href="//www.npmjs.com/package/@fundamental-ngx/cx"><img src="https://badge.fury.io/js/%40fundamental-ngx%2Fcx.svg" alt="npm version"></a>
+<img src="https://github.com/SAP/fundamental-ngx/actions/workflows/create-release.yml/badge.svg?branch=main" alt="Build Status">
+<img src="https://img.shields.io/npm/dm/@fundamental-ngx/cx?label=npm%20downloads" alt="npm">
+<a href="https://ui-fundamentals.slack.com"><img src="https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack" alt="Slack"></a>
+<a href="https://api.reuse.software/info/github.com/SAP/fundamental-ngx"><img src="https://api.reuse.software/badge/github.com/SAP/fundamental-ngx" alt="REUSE status"></a></p>
+<a id="md:content" class="tsd-anchor"></a><h2><a href="#md:content">Content</a></h2><ul>
+<li><a href="#md:1">1. Description</a></li>
+<li><a href="#md:2">2. Requirements</a></li>
+<li><a href="#md:3">3. Versioning</a></li>
+<li><a href="#md:4">4. Getting Started</a></li>
+<li><a href="#md:5">5. Known Issues</a></li>
+<li><a href="#md:6">6. Support</a></li>
+<li><a href="#md:7">7. Contributing</a></li>
+<li><a href="https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt">8. License</a></li>
+<li><a href="#md:8">9. Similar Projects</a></li>
+</ul>
+<a id="md:1-description" class="tsd-anchor"></a><h2><a href="#md:1-description"><a name="1"></a>1. Description</a></h2><p>The <code>@fundamental-ngx/cx</code> library is a set of <a href="https://angular.io/">Angular</a> components built using <a href="https://sap.github.io/fundamental-styles/">Fundamental Library Styles</a>.</p>
+<p>The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
+<p>See <a href="https://sap.github.io/fundamental-ngx/#/core/new-component">Component Documentation</a> for examples and API details.</p>
+<a id="md:2-requirements" class="tsd-anchor"></a><h2><a href="#md:2-requirements"><a name="2"></a>2. Requirements</a></h2><p>To download and use Fundamental Library for Angular, you will first need to install the <a href="https://www.npmjs.com/get-npm">node package manager</a>.</p>
+<p>Fundamental Library for Angular is intended for use with Angular 15 or newer.</p>
+<p>Prior knowledge of Angular is recommended, to use the fundamental-ngx library.</p>
+<a id="md:3-versioning" class="tsd-anchor"></a><h2><a href="#md:3-versioning"><a name="3"></a>3. Versioning</a></h2><p>Check the <a href="https://github.com/SAP/fundamental-ngx/wiki#breaking-changes">Breaking Changes</a> for the latest patches changes.</p>
+<a id="md:4-getting-started" class="tsd-anchor"></a><h2><a href="#md:4-getting-started"><a name="4"></a>4. Getting Started</a></h2><p>For an existing Angular CLI application,</p>
+<ol start="0">
+<li><p><strong>Video tutorial</strong>
+<a href="https://www.youtube.com/watch?v=i4VIiuzD2Fg">How to use the Fundamental Cx Library</a></p>
+</li>
+<li><p><strong>Install Fundamental-NGX.</strong>
+<code>ng add @fundamental-ngx/cx</code>
+For models prior to 0.10 use <code>fundamental-ngx</code></p>
+<p> <em>If you do not use the Angular CLI or if this command does not work for you, please see the <a href="https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide">full installation guide</a>.</em></p>
+</li>
+<li><p><strong>Edit your tsconfig.</strong>
+Edit the <code>target</code> in your <code>tsconfig.json</code> to <code>es5</code>. The library is incompatible with later versions.</p>
+</li>
+<li><p><strong>Import the modules you want to use.</strong></p>
+<p> To add the entire library, add the following import to your main application module.</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">FundamentalNgxCxModule</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;@fundamental-ngx/cx&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-1">@</span><span class="hl-4">NgModule</span><span class="hl-1">({</span><br/><span class="hl-1">    ...</span><br/><span class="hl-1">    </span><span class="hl-2">imports</span><span class="hl-1">: [</span><span class="hl-2">FundamentalNgxCxModule</span><span class="hl-1">],</span><br/><span class="hl-1">})</span><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1"> </span><span class="hl-6">DemoModule</span><span class="hl-1"> { }</span>
+</code><button>Copy</button></pre>
+<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
+<p> For example, to use Switchs, add the following import to your main application module.</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">CheckboxModule</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;@fundamental-ngx/cx&#39;</span><span class="hl-1">;</span>
+</code><button>Copy</button></pre>
+</li>
+</ol>
+<a id="md:5-known-issues" class="tsd-anchor"></a><h2><a href="#md:5-known-issues"><a name="5"></a>5. Known Issues</a></h2><p>Please see <a href="https://github.com/SAP/fundamental-ngx/issues">Issues</a>.</p>
+<a id="md:6-support" class="tsd-anchor"></a><h2><a href="#md:6-support"><a name="6"></a>6. Support</a></h2><p>If you encounter an issue, you can <a href="https://github.com/SAP/fundamental-ngx/issues">create a ticket</a>.</p>
+<a id="md:7-contributing" class="tsd-anchor"></a><h2><a href="#md:7-contributing"><a name="7"></a>7. Contributing</a></h2><p>If you want to contribute, please check the <a href="https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> documentation for contribution guidelines. Please follow the <a href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit">Angular commit message guidelines</a>.</p>
+<p>Check out the <a href="https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md">NEW_COMPONENT.md</a> guide on building a new component for the library and creating the necessary documentation for your new component.</p>
+</div></div>

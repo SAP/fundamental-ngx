@@ -17,6 +17,6 @@
 </div>
 <br />
 Selected Time:
-@if (time) {
+@if (time && time.isDateValid()) {
     {{ time.toDate() | date: 'shortTime' }}
 }

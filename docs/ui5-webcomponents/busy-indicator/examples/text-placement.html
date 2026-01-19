@@ -1,0 +1,14 @@
+<div class="text-placement-examples">
+    <ui5-button (click)="toggleBusyIndicator()"> {{ isActive() ? 'Hide' : 'Show' }} All Busy Indicators </ui5-button>
+
+    @for (placement of placements; track placement.value) {
+    <div class="placement-example">
+        <ui5-label>Text {{ placement.label }}</ui5-label>
+        <div class="example-content">
+            <ui5-busy-indicator [active]="isActive()" [textPlacement]="placement.value" text="Loading data...">
+                <ui5-label>Content Area</ui5-label>
+            </ui5-busy-indicator>
+        </div>
+    </div>
+    }
+</div>

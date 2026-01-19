@@ -1,0 +1,5790 @@
+{
+	"id": 0,
+	"name": "@fundamental-ngx/ui5-webcomponents-ai",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"children": [
+		{
+			"id": 2,
+			"name": "Button",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 3,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 4,
+							"name": "new Button",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 2,
+								"name": "Button",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							}
+						}
+					]
+				},
+				{
+					"id": 9,
+					"name": "accessibilityAttributes",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the additional accessibility attributes that will be applied to the component.\n\nThis property allows for fine-tuned control of ARIA attributes for screen reader support.\nIt accepts an object with the following optional fields:\n\n- **root**: Accessibility attributes that will be applied to the root element.\n- **hasPopup**: Indicates the availability and type of interactive popup element (such as a menu or dialog).\nAccepts string values: "
+							},
+							{
+								"kind": "code",
+								"text": "`\"dialog\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"grid\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"listbox\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"menu\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", or "
+							},
+							{
+								"kind": "code",
+								"text": "`\"tree\"`"
+							},
+							{
+								"kind": "text",
+								"text": ".\n- **roleDescription**: Defines a human-readable description for the button's role.\nAccepts any string value.\n- **title**: Specifies a tooltip or description for screen readers.\nAccepts any string value.\n- **ariaKeyShortcuts**: Defines keyboard shortcuts that activate or focus the button.\n\n- **arrowButton**: Accessibility attributes that will be applied to the arrow (split) button element.\n- **hasPopup**: Indicates the type of popup triggered by the arrow button.\nAccepts string values: "
+							},
+							{
+								"kind": "code",
+								"text": "`\"dialog\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"grid\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"listbox\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`\"menu\"`"
+							},
+							{
+								"kind": "text",
+								"text": ", or "
+							},
+							{
+								"kind": "code",
+								"text": "`\"tree\"`"
+							},
+							{
+								"kind": "text",
+								"text": ".\n- **expanded**: Indicates whether the popup controlled by the arrow button is currently expanded.\nAccepts boolean values: "
+							},
+							{
+								"kind": "code",
+								"text": "`true`"
+							},
+							{
+								"kind": "text",
+								"text": " or "
+							},
+							{
+								"kind": "code",
+								"text": "`false`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 79,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Button.d.ts",
+											"qualifiedName": "AIButtonAccessibilityAttributes"
+										},
+										"name": "AIButtonAccessibilityAttributes",
+										"package": "@ui5/webcomponents-ai"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 8,
+					"name": "arrowButtonPressed",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the active state of the arrow button in split mode.\nSet to true when the button is in split mode and a menu with additional options\nis opened by the arrow button. Set back to false when the menu is closed."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 56,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 5,
+					"name": "design",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the component design."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 37,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "literal",
+										"value": "Default"
+									},
+									{
+										"type": "literal",
+										"value": "Positive"
+									},
+									{
+										"type": "literal",
+										"value": "Negative"
+									},
+									{
+										"type": "literal",
+										"value": "Transparent"
+									},
+									{
+										"type": "literal",
+										"value": "Emphasized"
+									},
+									{
+										"type": "literal",
+										"value": "Attention"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 6,
+					"name": "disabled",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the component is disabled.\nA disabled component can't be pressed or\nfocused, and it is not in the tab chain."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 44,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 16,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 125,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/discovery.d.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Button.d.ts",
+									"qualifiedName": "Button"
+								},
+								"name": "Button",
+								"package": "@ui5/webcomponents-ai"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 17,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 126,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/chrome_dev_tools_performance.d.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 12,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **(default)**: Defines the available states of the component.\n*Note:** Although this slot accepts HTML Elements, it is strongly recommended that\nyou only use "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-ai-button-state`"
+							},
+							{
+								"kind": "text",
+								"text": " components in order to preserve the intended design."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-ai-button>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-ai-button>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 117,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reflection",
+							"declaration": {
+								"id": 13,
+								"name": "__type",
+								"variant": "declaration",
+								"kind": 65536,
+								"flags": {},
+								"children": [
+									{
+										"id": 15,
+										"name": "description",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/button/index.ts",
+												"line": 120,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"Defines the available states of the component.\\n**Note:** Although this slot accepts HTML Elements, it is strongly recommended that\\nyou only use `ui5-ai-button-state` components in order to preserve the intended design.\""
+									},
+									{
+										"id": 14,
+										"name": "name",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/button/index.ts",
+												"line": 119,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"default\""
+									}
+								],
+								"groups": [
+									{
+										"title": "Properties",
+										"children": [
+											15,
+											14
+										]
+									}
+								],
+								"sources": [
+									{
+										"fileName": "ui5-webcomponents-ai/button/index.ts",
+										"line": 118,
+										"character": 6
+									}
+								]
+							}
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 7,
+					"name": "state",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the current state of the component."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 49,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 11,
+					"name": "ui5ArrowButtonClick",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the component is in split mode and after the arrow button\nis activated either by clicking or tapping it or by using the [Arrow Up] / [Arrow Down],\n[Alt] + [Arrow Up]/ [Arrow Down], or [F4] keyboard keys."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 94,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Button.d.ts",
+											"qualifiedName": "Button"
+										},
+										"name": "Button",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "arrow-button-click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 10,
+					"name": "ui5Click",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the component is activated either with a\nmouse/tap or by using the Enter or Space key."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 87,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Button.d.ts",
+											"qualifiedName": "Button"
+										},
+										"name": "Button",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 18,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 128,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 19,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-ai/button/index.ts",
+								"line": 128,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Button.d.ts",
+								"qualifiedName": "Button"
+							},
+							"name": "Button",
+							"package": "@ui5/webcomponents-ai"
+						}
+					}
+				},
+				{
+					"id": 20,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button/index.ts",
+							"line": 132,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 21,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/button/index.ts",
+									"line": 132,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						3
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						9,
+						8,
+						5,
+						6,
+						16,
+						17,
+						12,
+						7,
+						11,
+						10
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						18
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						20
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/button/index.ts",
+					"line": 32,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/index.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 23,
+			"name": "ButtonState",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 24,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 25,
+							"name": "new ButtonState",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 23,
+								"name": "ButtonState",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							}
+						}
+					]
+				},
+				{
+					"id": 31,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 72,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/discovery.d.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/ButtonState.d.ts",
+									"qualifiedName": "ButtonState"
+								},
+								"name": "ButtonState",
+								"package": "@ui5/webcomponents-ai"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 29,
+					"name": "endIcon",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the icon to be displayed as graphical element within the component after the text.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html)."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 61,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 28,
+					"name": "icon",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the icon to be displayed as graphical element within the component before the text.\nThe SAP-icons font provides numerous options.\n\n*Example:**\n\nSee all the available icons in the [Icon Explorer](https://sdk.openui5.org/test-resources/sap/m/demokit/iconExplorer/webapp/index.html)."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 51,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 32,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 73,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/chrome_dev_tools_performance.d.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 26,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the name of the button state."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 36,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 30,
+					"name": "showArrowButton",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines if the component is in split button mode."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 66,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 27,
+					"name": "text",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the text of the button in this state."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 41,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 33,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 75,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 34,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+								"line": 75,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/ButtonState.d.ts",
+								"qualifiedName": "ButtonState"
+							},
+							"name": "ButtonState",
+							"package": "@ui5/webcomponents-ai"
+						}
+					}
+				},
+				{
+					"id": 35,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+							"line": 79,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 36,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+									"line": 79,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						24
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						31,
+						29,
+						28,
+						32,
+						26,
+						30,
+						27
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						33
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						35
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/button-state/index.ts",
+					"line": 31,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/index.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 131,
+			"name": "GenericControlValueAccessor",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 132,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 133,
+							"name": "new GenericControlValueAccessor",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 134,
+									"name": "ValueType",
+									"variant": "typeParam",
+									"kind": 131072,
+									"flags": {},
+									"default": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 131,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": -1,
+										"name": "ValueType",
+										"refersToTypeParameter": true
+									}
+								],
+								"name": "GenericControlValueAccessor",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							}
+						}
+					]
+				},
+				{
+					"id": 135,
+					"name": "onChange",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 16,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 136,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 16,
+									"character": 15
+								}
+							],
+							"signatures": [
+								{
+									"id": 137,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+											"line": 16,
+											"character": 15
+										}
+									],
+									"parameters": [
+										{
+											"id": 138,
+											"name": "val",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": -1,
+												"name": "ValueType",
+												"refersToTypeParameter": true
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 139,
+					"name": "onTouched",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 17,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 140,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 17,
+									"character": 16
+								}
+							],
+							"signatures": [
+								{
+									"id": 141,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+											"line": 17,
+											"character": 16
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 146,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 24,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 147,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 24,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				},
+				{
+					"id": 151,
+					"name": "registerOnChange",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 41,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 152,
+							"name": "registerOnChange",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 41,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 153,
+									"name": "fn",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 154,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+													"line": 41,
+													"character": 25
+												}
+											],
+											"signatures": [
+												{
+													"id": 155,
+													"name": "__type",
+													"variant": "signature",
+													"kind": 4096,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+															"line": 41,
+															"character": 25
+														}
+													],
+													"parameters": [
+														{
+															"id": 156,
+															"name": "newVal",
+															"variant": "param",
+															"kind": 32768,
+															"flags": {},
+															"type": {
+																"type": "reference",
+																"target": -1,
+																"name": "ValueType",
+																"refersToTypeParameter": true
+															}
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "ControlValueAccessor.registerOnChange"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "ControlValueAccessor.registerOnChange"
+					}
+				},
+				{
+					"id": 157,
+					"name": "registerOnTouched",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 45,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 158,
+							"name": "registerOnTouched",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 45,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 159,
+									"name": "fn",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 160,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+													"line": 45,
+													"character": 26
+												}
+											],
+											"signatures": [
+												{
+													"id": 161,
+													"name": "__type",
+													"variant": "signature",
+													"kind": 4096,
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+															"line": 45,
+															"character": 26
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "ControlValueAccessor.registerOnTouched"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "ControlValueAccessor.registerOnTouched"
+					}
+				},
+				{
+					"id": 148,
+					"name": "setDisabledState",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 32,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 149,
+							"name": "setDisabledState",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 32,
+									"character": 23
+								}
+							],
+							"parameters": [
+								{
+									"id": 150,
+									"name": "isDisabled",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "boolean"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "ControlValueAccessor.setDisabledState"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "ControlValueAccessor.setDisabledState"
+					}
+				},
+				{
+					"id": 162,
+					"name": "writeValue",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+							"line": 49,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 163,
+							"name": "writeValue",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+									"line": 49,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 164,
+									"name": "val",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": -1,
+										"name": "ValueType",
+										"refersToTypeParameter": true
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "ControlValueAccessor.writeValue"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "ControlValueAccessor.writeValue"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						132
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						135,
+						139
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						146,
+						151,
+						157,
+						148,
+						162
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+					"line": 15,
+					"character": 13
+				}
+			],
+			"typeParameters": [
+				{
+					"id": 170,
+					"name": "ValueType",
+					"variant": "typeParam",
+					"kind": 131072,
+					"flags": {},
+					"default": {
+						"type": "intrinsic",
+						"name": "any"
+					}
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/forms/index.d.ts",
+						"qualifiedName": "ControlValueAccessor"
+					},
+					"name": "ControlValueAccessor",
+					"package": "@angular/forms"
+				},
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/index.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 38,
+			"name": "Input",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 39,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 40,
+							"name": "new Input",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 38,
+								"name": "Input",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							}
+						}
+					]
+				},
+				{
+					"id": 41,
+					"name": "currentVersion",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Indicates the index of the currently displayed version."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 36,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 52,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 101,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/discovery.d.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Input.d.ts",
+									"qualifiedName": "Input"
+								},
+								"name": "Input",
+								"package": "@ui5/webcomponents-ai"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 53,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 102,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/chrome_dev_tools_performance.d.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 43,
+					"name": "loading",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the AI Writing Assistant is currently loading.\n\nWhen "
+							},
+							{
+								"kind": "code",
+								"text": "`true`"
+							},
+							{
+								"kind": "text",
+								"text": ", indicates that an AI action is in progress."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 50,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 48,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **actions**: Defines the items of the menu for the component."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-ai-input>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-ai-input>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 93,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reflection",
+							"declaration": {
+								"id": 49,
+								"name": "__type",
+								"variant": "declaration",
+								"kind": 65536,
+								"flags": {},
+								"children": [
+									{
+										"id": 51,
+										"name": "description",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/input/index.ts",
+												"line": 96,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"Defines the items of the menu for the component.\""
+									},
+									{
+										"id": 50,
+										"name": "name",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/input/index.ts",
+												"line": 95,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"actions\""
+									}
+								],
+								"groups": [
+									{
+										"title": "Properties",
+										"children": [
+											51,
+											50
+										]
+									}
+								],
+								"sources": [
+									{
+										"fileName": "ui5-webcomponents-ai/input/index.ts",
+										"line": 94,
+										"character": 6
+									}
+								]
+							}
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 42,
+					"name": "totalVersions",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Indicates the total number of result versions available.\n\nWhen not set or set to 0, the versioning will be hidden."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 43,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 44,
+					"name": "ui5ButtonClick",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the user selects the AI button."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 57,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Input.d.ts",
+											"qualifiedName": "Input"
+										},
+										"name": "Input",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "button-click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 45,
+					"name": "ui5ItemClick",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when an item from the AI actions menu is clicked."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 62,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Input.d.ts",
+											"qualifiedName": "Input"
+										},
+										"name": "Input",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "item-click"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 46,
+					"name": "ui5StopGeneration",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the user selects the \"Stop\" button to stop ongoing AI text generation."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 67,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Input.d.ts",
+											"qualifiedName": "Input"
+										},
+										"name": "Input",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "stop-generation"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 47,
+					"name": "ui5VersionChange",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the user selects the version navigation buttons."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 72,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Input.d.ts",
+											"qualifiedName": "Input"
+										},
+										"name": "Input",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "version-change"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 54,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 104,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 55,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-ai/input/index.ts",
+								"line": 104,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/Input.d.ts",
+								"qualifiedName": "Input"
+							},
+							"name": "Input",
+							"package": "@ui5/webcomponents-ai"
+						}
+					}
+				},
+				{
+					"id": 56,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/input/index.ts",
+							"line": 108,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 57,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/input/index.ts",
+									"line": 108,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						39
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						41,
+						52,
+						53,
+						43,
+						48,
+						42,
+						44,
+						45,
+						46,
+						47
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						54
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						56
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/input/index.ts",
+					"line": 31,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/index.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 59,
+			"name": "PromptInput",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 60,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 61,
+							"name": "new PromptInput",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 59,
+								"name": "PromptInput",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							}
+						}
+					]
+				},
+				{
+					"id": 67,
+					"name": "disabled",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the component is in disabled state.\n\n*Note:** A disabled component is completely noninteractive."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 70,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 84,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 159,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/discovery.d.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/PromptInput.d.ts",
+									"qualifiedName": "PromptInput"
+								},
+								"name": "PromptInput",
+								"package": "@ui5/webcomponents-ai"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 85,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 160,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/chrome_dev_tools_performance.d.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 64,
+					"name": "label",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the label of the input field."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 47,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 69,
+					"name": "maxlength",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Sets the maximum number of characters available in the input field."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 83,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 63,
+					"name": "placeholder",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines a short hint intended to aid the user with data entry when the\ncomponent has no value."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 42,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 68,
+					"name": "readonly",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the component is read-only.\n\n*Note:** A read-only component is not editable,\nbut still provides visual feedback upon user interaction."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 78,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 65,
+					"name": "showClearIcon",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the clear icon of the input will be shown."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 52,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 66,
+					"name": "showExceededText",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Determines whether the characters exceeding the maximum allowed character count are visible\nin the component.\n\nIf set to "
+							},
+							{
+								"kind": "code",
+								"text": "`false`"
+							},
+							{
+								"kind": "text",
+								"text": ", the user is not allowed to enter more characters than what is set in the\n"
+							},
+							{
+								"kind": "code",
+								"text": "`maxlength`"
+							},
+							{
+								"kind": "text",
+								"text": " property.\nIf set to "
+							},
+							{
+								"kind": "code",
+								"text": "`true`"
+							},
+							{
+								"kind": "text",
+								"text": " the characters exceeding the "
+							},
+							{
+								"kind": "code",
+								"text": "`maxlength`"
+							},
+							{
+								"kind": "text",
+								"text": " value are selected on\npaste and the counter below the component displays their number."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 63,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 71,
+					"name": "showSuggestions",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the component should show suggestions, if such are present."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 93,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 75,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **(default)**: Defines the suggestion items.\n\n*Note:** The suggestions would be displayed only if the "
+							},
+							{
+								"kind": "code",
+								"text": "`showSuggestions`"
+							},
+							{
+								"kind": "text",
+								"text": "\nproperty is set to "
+							},
+							{
+								"kind": "code",
+								"text": "`true`"
+							},
+							{
+								"kind": "text",
+								"text": ".\n\n*Note:** The "
+							},
+							{
+								"kind": "code",
+								"text": "`<ui5-suggestion-item>`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`<ui5-suggestion-item-group>`"
+							},
+							{
+								"kind": "text",
+								"text": " and "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-suggestion-item-custom`"
+							},
+							{
+								"kind": "text",
+								"text": " are recommended to be used as suggestion items.\n- **valueStateMessage**: Defines the value state message that will be displayed as pop up under the component.\nThe value state message slot should contain only one root element.\n\n*Note:** If not specified, a default text (in the respective language) will be displayed.\n\n*Note:** The "
+							},
+							{
+								"kind": "code",
+								"text": "`valueStateMessage`"
+							},
+							{
+								"kind": "text",
+								"text": " would be displayed,\nwhen the component is in "
+							},
+							{
+								"kind": "code",
+								"text": "`Information`"
+							},
+							{
+								"kind": "text",
+								"text": ", "
+							},
+							{
+								"kind": "code",
+								"text": "`Critical`"
+							},
+							{
+								"kind": "text",
+								"text": " or "
+							},
+							{
+								"kind": "code",
+								"text": "`Negative`"
+							},
+							{
+								"kind": "text",
+								"text": " value state."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-ai-prompt-input>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-ai-prompt-input>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 146,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "union",
+							"types": [
+								{
+									"type": "reflection",
+									"declaration": {
+										"id": 76,
+										"name": "__type",
+										"variant": "declaration",
+										"kind": 65536,
+										"flags": {},
+										"children": [
+											{
+												"id": 78,
+												"name": "description",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+														"line": 149,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"Defines the suggestion items.\\n\\n**Note:** The suggestions would be displayed only if the `showSuggestions`\\nproperty is set to `true`.\\n\\n**Note:** The `<ui5-suggestion-item>`, `<ui5-suggestion-item-group>` and `ui5-suggestion-item-custom` are recommended to be used as suggestion items.\""
+											},
+											{
+												"id": 77,
+												"name": "name",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+														"line": 148,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"default\""
+											},
+											{
+												"id": 79,
+												"name": "since",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {
+													"isOptional": true
+												},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+														"line": 154,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "undefined"
+												},
+												"defaultValue": "\"2.0.0\""
+											}
+										],
+										"groups": [
+											{
+												"title": "Properties",
+												"children": [
+													78,
+													77,
+													79
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+												"line": 147,
+												"character": 6
+											}
+										]
+									}
+								},
+								{
+									"type": "reflection",
+									"declaration": {
+										"id": 80,
+										"name": "__type",
+										"variant": "declaration",
+										"kind": 65536,
+										"flags": {},
+										"children": [
+											{
+												"id": 82,
+												"name": "description",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+														"line": 153,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"Defines the value state message that will be displayed as pop up under the component.\\nThe value state message slot should contain only one root element.\\n\\n**Note:** If not specified, a default text (in the respective language) will be displayed.\\n\\n**Note:** The `valueStateMessage` would be displayed,\\nwhen the component is in `Information`, `Critical` or `Negative` value state.\""
+											},
+											{
+												"id": 81,
+												"name": "name",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+														"line": 152,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"valueStateMessage\""
+											},
+											{
+												"id": 83,
+												"name": "since",
+												"variant": "declaration",
+												"kind": 1024,
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+														"line": 154,
+														"character": 10
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												},
+												"defaultValue": "\"2.0.0\""
+											}
+										],
+										"groups": [
+											{
+												"title": "Properties",
+												"children": [
+													82,
+													81,
+													83
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+												"line": 151,
+												"character": 6
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 74,
+					"name": "ui5Change",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the input operation has finished by pressing Enter\nor on focusout."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 113,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/PromptInput.d.ts",
+											"qualifiedName": "PromptInput"
+										},
+										"name": "PromptInput",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "change"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 73,
+					"name": "ui5Input",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the value of the component changes at each keystroke,\nand when a suggestion item has been selected."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 107,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/PromptInput.d.ts",
+											"qualifiedName": "PromptInput"
+										},
+										"name": "PromptInput",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "input"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 72,
+					"name": "ui5Submit",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the input operation has finished by pressing Enter\nor AI button is clicked."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 101,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/PromptInput.d.ts",
+											"qualifiedName": "PromptInput"
+										},
+										"name": "PromptInput",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "submit"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 62,
+					"name": "value",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the value of the component."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 36,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 70,
+					"name": "valueState",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the value state of the component."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 88,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "literal",
+										"value": "Positive"
+									},
+									{
+										"type": "literal",
+										"value": "Negative"
+									},
+									{
+										"type": "literal",
+										"value": "None"
+									},
+									{
+										"type": "literal",
+										"value": "Critical"
+									},
+									{
+										"type": "literal",
+										"value": "Information"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 86,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 162,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 87,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+								"line": 162,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/PromptInput.d.ts",
+								"qualifiedName": "PromptInput"
+							},
+							"name": "PromptInput",
+							"package": "@ui5/webcomponents-ai"
+						}
+					}
+				},
+				{
+					"id": 88,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+							"line": 166,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 89,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+									"line": 166,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						60
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						67,
+						84,
+						85,
+						64,
+						69,
+						63,
+						68,
+						65,
+						66,
+						71,
+						75,
+						74,
+						73,
+						72,
+						62,
+						70
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						86
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						88
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
+					"line": 31,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/index.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 91,
+			"name": "TextArea",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 92,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 93,
+							"name": "new TextArea",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 91,
+								"name": "TextArea",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							}
+						}
+					]
+				},
+				{
+					"id": 96,
+					"name": "currentVersion",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Indicates the index of the currently displayed version."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 46,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 104,
+					"name": "elementRef",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 95,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/discovery.d.d.ts",
+							"qualifiedName": "ElementRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/TextArea.d.ts",
+									"qualifiedName": "TextArea"
+								},
+								"name": "TextArea",
+								"package": "@ui5/webcomponents-ai"
+							}
+						],
+						"name": "ElementRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 105,
+					"name": "injector",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isPublic": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 96,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/chrome_dev_tools_performance.d.d.ts",
+							"qualifiedName": "Injector"
+						},
+						"name": "Injector",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 94,
+					"name": "loading",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines whether the "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-ai-textarea`"
+							},
+							{
+								"kind": "text",
+								"text": " is currently in a loading(processing) state."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 36,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignalWithTransform"
+						},
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "InputSignalWithTransform",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 95,
+					"name": "promptDescription",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Defines the prompt description of the current action."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 41,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 100,
+					"name": "slots",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Available slots for content projection in this component.\n\nSlots allow you to insert custom content into predefined areas of the web component.\nUse the "
+							},
+							{
+								"kind": "code",
+								"text": "`slot`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute on child elements to target specific slots.\n\n- **menu**: Defines a slot for "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-menu`"
+							},
+							{
+								"kind": "text",
+								"text": " integration. This slot allows you to pass a "
+							},
+							{
+								"kind": "code",
+								"text": "`ui5-menu`"
+							},
+							{
+								"kind": "text",
+								"text": " instance that will be associated with the assistant."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```html\n<ui5-ai-textarea>\n  <div slot=\"header\">Custom header content</div>\n  <p>Default slot content</p>\n</ui5-ai-textarea>\n```"
+									}
+								]
+							},
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "MDN Web Components Slots",
+										"target": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 87,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reflection",
+							"declaration": {
+								"id": 101,
+								"name": "__type",
+								"variant": "declaration",
+								"kind": 65536,
+								"flags": {},
+								"children": [
+									{
+										"id": 103,
+										"name": "description",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+												"line": 90,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"Defines a slot for `ui5-menu` integration. This slot allows you to pass a `ui5-menu` instance that will be associated with the assistant.\""
+									},
+									{
+										"id": 102,
+										"name": "name",
+										"variant": "declaration",
+										"kind": 1024,
+										"flags": {},
+										"sources": [
+											{
+												"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+												"line": 89,
+												"character": 10
+											}
+										],
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										},
+										"defaultValue": "\"menu\""
+									}
+								],
+								"groups": [
+									{
+										"title": "Properties",
+										"children": [
+											103,
+											102
+										]
+									}
+								],
+								"sources": [
+									{
+										"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+										"line": 88,
+										"character": 6
+									}
+								]
+							}
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 97,
+					"name": "totalVersions",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Indicates the total number of result versions available.\n\nNotes:\nVersioning is hidden if the value is "
+							},
+							{
+								"kind": "code",
+								"text": "`0`"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 54,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/index.d.ts",
+							"qualifiedName": "InputSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						],
+						"name": "InputSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 99,
+					"name": "ui5StopGeneration",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the user requests to stop AI text generation."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 66,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/TextArea.d.ts",
+											"qualifiedName": "TextArea"
+										},
+										"name": "TextArea",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "stop-generation"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 98,
+					"name": "ui5VersionChange",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fired when the user clicks on version navigation buttons."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 61,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+							"qualifiedName": "OutputEmitterRef"
+						},
+						"typeArguments": [
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/@ui5/webcomponents-base/dist/index.d.ts",
+									"qualifiedName": "UI5CustomEvent"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/TextArea.d.ts",
+											"qualifiedName": "TextArea"
+										},
+										"name": "TextArea",
+										"package": "@ui5/webcomponents-ai"
+									},
+									{
+										"type": "literal",
+										"value": "version-change"
+									}
+								],
+								"name": "UI5CustomEvent",
+								"package": "@ui5/webcomponents-base"
+							}
+						],
+						"name": "OutputEmitterRef",
+						"package": "@angular/core"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 106,
+					"name": "element",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 98,
+							"character": 6
+						}
+					],
+					"getSignature": {
+						"id": 107,
+						"name": "element",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+								"line": 98,
+								"character": 6
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": {
+								"sourceFileName": "node_modules/@ui5/webcomponents-ai/dist/TextArea.d.ts",
+								"qualifiedName": "TextArea"
+							},
+							"name": "TextArea",
+							"package": "@ui5/webcomponents-ai"
+						}
+					}
+				},
+				{
+					"id": 108,
+					"name": "ngAfterViewInit",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+							"line": 102,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 109,
+							"name": "ngAfterViewInit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+									"line": 102,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"target": -1,
+								"name": "AfterViewInit.ngAfterViewInit"
+							}
+						}
+					],
+					"implementationOf": {
+						"type": "reference",
+						"target": -1,
+						"name": "AfterViewInit.ngAfterViewInit"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						92
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						96,
+						104,
+						105,
+						94,
+						95,
+						100,
+						97,
+						99,
+						98
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						106
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						108
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/text-area/index.ts",
+					"line": 31,
+					"character": 13
+				}
+			],
+			"implementedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "node_modules/@angular/core/index.d.ts",
+						"qualifiedName": "AfterViewInit"
+					},
+					"name": "AfterViewInit",
+					"package": "@angular/core"
+				}
+			]
+		},
+		{
+			"id": 111,
+			"name": "Ui5WebcomponentsAiThemingService",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 112,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/theming/index.ts",
+							"line": 7,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 113,
+							"name": "new Ui5WebcomponentsAiThemingService",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-ai/theming/index.ts",
+									"line": 7,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 111,
+								"name": "Ui5WebcomponentsAiThemingService",
+								"package": "@fundamental-ngx/ui5-webcomponents-ai"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "WebcomponentsThemingProvider.constructor"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.constructor"
+					}
+				},
+				{
+					"id": 116,
+					"name": "_globalThemingService",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isProtected": true
+					},
+					"comment": {
+						"summary": [],
+						"blockTags": [
+							{
+								"tag": "@description",
+								"content": [
+									{
+										"kind": "text",
+										"text": "Reference to the global "
+									},
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "Ui5ThemingService",
+										"target": {
+											"sourceFileName": "libs/ui5-webcomponents-base/theming/ui5-theming-api.ts",
+											"qualifiedName": "Ui5ThemingService"
+										},
+										"tsLinkText": ""
+									},
+									{
+										"kind": "text",
+										"text": ", injected optionally.\nThe provider registers itself here if the global service is available."
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+							"line": 49,
+							"character": 12,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": null
+							},
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "libs/ui5-webcomponents-base/theming/ui5-theming-api.ts",
+									"qualifiedName": "Ui5ThemingService"
+								},
+								"name": "Ui5ThemingService",
+								"package": "@fundamental-ngx/ui5-webcomponents-base"
+							}
+						]
+					},
+					"defaultValue": "...",
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider._globalThemingService"
+					}
+				},
+				{
+					"id": 115,
+					"name": "availableThemes",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isProtected": true
+					},
+					"comment": {
+						"summary": [],
+						"blockTags": [
+							{
+								"tag": "@description",
+								"content": [
+									{
+										"kind": "text",
+										"text": "A signal containing the list of themes supported by this provider.\nIt is initialized with the themes loaded from the "
+									},
+									{
+										"kind": "code",
+										"text": "`supported-themes`"
+									},
+									{
+										"kind": "text",
+										"text": " file."
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+							"line": 42,
+							"character": 12,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@angular/core/chrome_dev_tools_performance.d.d.ts",
+							"qualifiedName": "WritableSignal"
+						},
+						"typeArguments": [
+							{
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							}
+						],
+						"name": "WritableSignal",
+						"package": "@angular/core"
+					},
+					"defaultValue": "...",
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.availableThemes"
+					}
+				},
+				{
+					"id": 114,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-ai/theming/index.ts",
+							"line": 6,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"defaultValue": "'ui-5-webcomponents--ai-theming-service'",
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.name"
+					}
+				},
+				{
+					"id": 117,
+					"name": "registerThemes",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isProtected": true
+					},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+							"line": 53,
+							"character": 14,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 118,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+									"line": 53,
+									"character": 30,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+								}
+							],
+							"signatures": [
+								{
+									"id": 119,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+											"line": 53,
+											"character": 30,
+											"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/typescript/lib/lib.es5.d.ts",
+											"qualifiedName": "Promise"
+										},
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "any"
+											}
+										],
+										"name": "Promise",
+										"package": "typescript"
+									}
+								}
+							]
+						}
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.registerThemes"
+					}
+				},
+				{
+					"id": 125,
+					"name": "getAvailableThemes",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+							"line": 80,
+							"character": 2,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+						}
+					],
+					"signatures": [
+						{
+							"id": 126,
+							"name": "getAvailableThemes",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [],
+								"blockTags": [
+									{
+										"tag": "@description",
+										"content": [
+											{
+												"kind": "text",
+												"text": "Retrieves the list of theme names supported by this provider."
+											}
+										]
+									},
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "An array of supported theme names."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+									"line": 80,
+									"character": 2,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "string"
+										}
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/typescript/lib/lib.es5.d.ts",
+											"qualifiedName": "Promise"
+										},
+										"typeArguments": [
+											{
+												"type": "array",
+												"elementType": {
+													"type": "intrinsic",
+													"name": "string"
+												}
+											}
+										],
+										"name": "Promise",
+										"package": "typescript"
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "WebcomponentsThemingProvider.getAvailableThemes"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.getAvailableThemes"
+					}
+				},
+				{
+					"id": 127,
+					"name": "setTheme",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+							"line": 94,
+							"character": 8,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+						}
+					],
+					"signatures": [
+						{
+							"id": 128,
+							"name": "setTheme",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [],
+								"blockTags": [
+									{
+										"tag": "@description",
+										"content": [
+											{
+												"kind": "text",
+												"text": "Attempts to set the given theme globally for all UI5 Web Components.\n\nThe theme is only applied if it is included in the list of available themes\nmanaged by this provider."
+											}
+										]
+									},
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A promise that resolves to "
+											},
+											{
+												"kind": "code",
+												"text": "`true`"
+											},
+											{
+												"kind": "text",
+												"text": " if the theme was applied, or "
+											},
+											{
+												"kind": "code",
+												"text": "`false`"
+											},
+											{
+												"kind": "text",
+												"text": " if the theme is not supported."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+									"line": 94,
+									"character": 8,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+								}
+							],
+							"parameters": [
+								{
+									"id": 129,
+									"name": "theme",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The name of the theme to apply."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "boolean"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "WebcomponentsThemingProvider.setTheme"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.setTheme"
+					}
+				},
+				{
+					"id": 122,
+					"name": "supportsTheme",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+							"line": 71,
+							"character": 2,
+							"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+						}
+					],
+					"signatures": [
+						{
+							"id": 123,
+							"name": "supportsTheme",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [],
+								"blockTags": [
+									{
+										"tag": "@description",
+										"content": [
+											{
+												"kind": "text",
+												"text": "Checks if a specific theme name is supported by this provider."
+											}
+										]
+									},
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "code",
+												"text": "`true`"
+											},
+											{
+												"kind": "text",
+												"text": " if the theme is supported, "
+											},
+											{
+												"kind": "code",
+												"text": "`false`"
+											},
+											{
+												"kind": "text",
+												"text": " otherwise."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+									"line": 71,
+									"character": 2,
+									"url": "https://github.com/SAP/fundamental-ngx/blob/90109fc/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+								}
+							],
+							"parameters": [
+								{
+									"id": 124,
+									"name": "theme",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The name of the theme to check (e.g., 'sap_horizon')."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "boolean"
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/typescript/lib/lib.es5.d.ts",
+											"qualifiedName": "Promise"
+										},
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										],
+										"name": "Promise",
+										"package": "typescript"
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "WebcomponentsThemingProvider.supportsTheme"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "WebcomponentsThemingProvider.supportsTheme"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						112
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						116,
+						115,
+						114,
+						117
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						125,
+						127,
+						122
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/theming/index.ts",
+					"line": 5,
+					"character": 6
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+						"qualifiedName": "WebcomponentsThemingProvider"
+					},
+					"name": "WebcomponentsThemingProvider",
+					"package": "@fundamental-ngx/ui5-webcomponents-base"
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Classes",
+			"children": [
+				2,
+				23,
+				131,
+				38,
+				59,
+				91,
+				111
+			]
+		}
+	],
+	"packageName": "@fundamental-ngx/ui5-webcomponents-ai",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# ui5-webcomponents-ai\n\nAngular component wrappers around the [@ui5/webcomponents-ai](https://www.npmjs.com/package/@ui5/webcomponents-ai) npm package.\n\n## Overview\n\nThis library provides Angular components that wrap UI5 AI Web Components, bringing AI-powered UI elements to your Angular applications. These components integrate AI features like prompt inputs and AI-enhanced buttons with Angular's change detection and template syntax.\n\n- Angular-friendly API (inputs, outputs, template syntax)\n- TypeScript type definitions\n- Full integration with Angular's change detection\n- Standalone components support\n\n## Installation\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```bash\nnpm install @fundamental-ngx/ui5-webcomponents-ai\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Usage\n\nImport the AI components you need:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```typescript\nimport { Button } from '@fundamental-ngx/ui5-webcomponents-ai/button';\nimport { PromptInput } from '@fundamental-ngx/ui5-webcomponents-ai/prompt-input';\n\n@Component({\n  selector: 'app-example',\n  standalone: true,\n  imports: [Button, PromptInput],\n  template: `\n    <ui5-ai-button (click)=\"handleAIAction()\">AI Action</ui5-ai-button>\n    <ui5-prompt-input [(value)]=\"prompt\"></ui5-prompt-input>\n  `\n})\nexport class ExampleComponent {\n  prompt = '';\n  \n  handleAIAction() {\n    console.log('AI button clicked!');\n  }\n}\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n### Using Angular Components Inside UI5 Components\n\nAngular components often use selectors with hyphens (e.g. "
+		},
+		{
+			"kind": "code",
+			"text": "`<app-item>`"
+		},
+		{
+			"kind": "text",
+			"text": ", "
+		},
+		{
+			"kind": "code",
+			"text": "`<app-value>`"
+		},
+		{
+			"kind": "text",
+			"text": ").\nUI5 interprets such tags as custom elements and may wait **up to 1 second** for their registration, causing delayed rendering inside components like "
+		},
+		{
+			"kind": "code",
+			"text": "`<ui5-table-cell>`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\nTo avoid this, configure UI5 to ignore Angular component prefixes:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```ts\n// ui5-init.ts\nimport { ignoreCustomElements } from '@ui5/webcomponents-base/dist/IgnoreCustomElements.js';\n\nignoreCustomElements('app-');\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nImport it before Angular bootstraps:\n"
+		},
+		{
+			"kind": "code",
+			"text": "```ts\n// main.ts\nimport './ui5-init';\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nThis prevents unnecessary waiting, ensures smooth rendering, and improves performance when mixing Angular components with UI5 Web Components.\n\n## Resources\n\n- [UI5 Web Components Documentation](https://ui5.github.io/webcomponents/)\n- [Fundamental NGX Documentation](https://sap.github.io/fundamental-ngx)\n- [GitHub Repository](https://github.com/SAP/fundamental-ngx)"
+		}
+	],
+	"symbolIdMap": {
+		"2": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button"
+		},
+		"5": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.design"
+		},
+		"6": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.disabled"
+		},
+		"7": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.state"
+		},
+		"8": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.arrowButtonPressed"
+		},
+		"9": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.accessibilityAttributes"
+		},
+		"10": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.ui5Click"
+		},
+		"11": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.ui5ArrowButtonClick"
+		},
+		"12": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.slots"
+		},
+		"13": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "__object"
+		},
+		"14": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"15": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"16": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.elementRef"
+		},
+		"17": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.injector"
+		},
+		"18": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.element"
+		},
+		"19": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.element"
+		},
+		"20": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.ngAfterViewInit"
+		},
+		"21": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button/index.ts",
+			"qualifiedName": "Button.ngAfterViewInit"
+		},
+		"23": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState"
+		},
+		"26": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.name"
+		},
+		"27": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.text"
+		},
+		"28": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.icon"
+		},
+		"29": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.endIcon"
+		},
+		"30": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.showArrowButton"
+		},
+		"31": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.elementRef"
+		},
+		"32": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.injector"
+		},
+		"33": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.element"
+		},
+		"34": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.element"
+		},
+		"35": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.ngAfterViewInit"
+		},
+		"36": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/button-state/index.ts",
+			"qualifiedName": "ButtonState.ngAfterViewInit"
+		},
+		"38": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input"
+		},
+		"41": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.currentVersion"
+		},
+		"42": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.totalVersions"
+		},
+		"43": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.loading"
+		},
+		"44": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.ui5ButtonClick"
+		},
+		"45": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.ui5ItemClick"
+		},
+		"46": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.ui5StopGeneration"
+		},
+		"47": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.ui5VersionChange"
+		},
+		"48": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.slots"
+		},
+		"49": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "__object"
+		},
+		"50": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"51": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"52": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.elementRef"
+		},
+		"53": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.injector"
+		},
+		"54": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.element"
+		},
+		"55": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.element"
+		},
+		"56": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.ngAfterViewInit"
+		},
+		"57": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/input/index.ts",
+			"qualifiedName": "Input.ngAfterViewInit"
+		},
+		"59": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput"
+		},
+		"62": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.value"
+		},
+		"63": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.placeholder"
+		},
+		"64": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.label"
+		},
+		"65": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.showClearIcon"
+		},
+		"66": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.showExceededText"
+		},
+		"67": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.disabled"
+		},
+		"68": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.readonly"
+		},
+		"69": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.maxlength"
+		},
+		"70": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.valueState"
+		},
+		"71": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.showSuggestions"
+		},
+		"72": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.ui5Submit"
+		},
+		"73": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.ui5Input"
+		},
+		"74": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.ui5Change"
+		},
+		"75": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.slots"
+		},
+		"76": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object"
+		},
+		"77": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"78": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"79": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object.since"
+		},
+		"80": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object"
+		},
+		"81": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"82": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"83": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "__object.since"
+		},
+		"84": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.elementRef"
+		},
+		"85": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.injector"
+		},
+		"86": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.element"
+		},
+		"87": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.element"
+		},
+		"88": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.ngAfterViewInit"
+		},
+		"89": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/prompt-input/index.ts",
+			"qualifiedName": "PromptInput.ngAfterViewInit"
+		},
+		"91": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea"
+		},
+		"94": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.loading"
+		},
+		"95": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.promptDescription"
+		},
+		"96": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.currentVersion"
+		},
+		"97": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.totalVersions"
+		},
+		"98": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.ui5VersionChange"
+		},
+		"99": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.ui5StopGeneration"
+		},
+		"100": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.slots"
+		},
+		"101": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "__object"
+		},
+		"102": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "__object.name"
+		},
+		"103": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "__object.description"
+		},
+		"104": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.elementRef"
+		},
+		"105": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.injector"
+		},
+		"106": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.element"
+		},
+		"107": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.element"
+		},
+		"108": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.ngAfterViewInit"
+		},
+		"109": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/text-area/index.ts",
+			"qualifiedName": "TextArea.ngAfterViewInit"
+		},
+		"111": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/theming/index.ts",
+			"qualifiedName": "Ui5WebcomponentsAiThemingService"
+		},
+		"112": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/theming/index.ts",
+			"qualifiedName": "Ui5WebcomponentsAiThemingService.__constructor"
+		},
+		"113": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/theming/index.ts",
+			"qualifiedName": "Ui5WebcomponentsAiThemingService"
+		},
+		"114": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/theming/index.ts",
+			"qualifiedName": "Ui5WebcomponentsAiThemingService.name"
+		},
+		"115": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.availableThemes"
+		},
+		"116": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider._globalThemingService"
+		},
+		"117": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.registerThemes"
+		},
+		"118": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "__type"
+		},
+		"119": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "__type"
+		},
+		"122": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.supportsTheme"
+		},
+		"123": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.supportsTheme"
+		},
+		"124": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "theme"
+		},
+		"125": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.getAvailableThemes"
+		},
+		"126": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.getAvailableThemes"
+		},
+		"127": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.setTheme"
+		},
+		"128": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "WebcomponentsThemingProvider.setTheme"
+		},
+		"129": {
+			"sourceFileName": "libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
+			"qualifiedName": "theme"
+		},
+		"131": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor"
+		},
+		"134": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.ValueType"
+		},
+		"135": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.onChange"
+		},
+		"136": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"137": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"138": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "val"
+		},
+		"139": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.onTouched"
+		},
+		"140": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"141": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"146": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
+		},
+		"147": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
+		},
+		"148": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
+		},
+		"149": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
+		},
+		"150": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "isDisabled"
+		},
+		"151": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
+		},
+		"152": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
+		},
+		"153": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "fn"
+		},
+		"154": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"155": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"156": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "newVal"
+		},
+		"157": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
+		},
+		"158": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
+		},
+		"159": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "fn"
+		},
+		"160": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"161": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"162": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.writeValue"
+		},
+		"163": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.writeValue"
+		},
+		"164": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "val"
+		},
+		"170": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.ValueType"
+		}
+	}
+}

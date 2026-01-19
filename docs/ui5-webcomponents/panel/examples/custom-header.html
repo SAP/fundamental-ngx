@@ -1,0 +1,16 @@
+<ui5-panel>
+    <div slot="header" class="header">
+        <ui5-title level="H4">User Information</ui5-title>
+        <div>
+            <ui5-button design="Emphasized">Add</ui5-button>
+            <ui5-button design="Negative">Remove</ui5-button>
+            <ui5-button>Edit</ui5-button>
+        </div>
+    </div>
+
+    <div>
+        @for (item of userInfo(); track item) {
+        <ui5-li>{{ item }}</ui5-li>
+        }
+    </div>
+</ui5-panel>

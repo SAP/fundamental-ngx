@@ -1,0 +1,39 @@
+<h4>Default behavior:</h4>
+<p>
+    When the toolbar doesn't have enough space to display all items, it automatically moves items to an overflow menu.
+    Resize the window to see the effect.
+</p>
+
+<ui5-toolbar>
+    @for (action of actions(); track action) {
+    <ui5-toolbar-button [text]="action" (ui5Click)="onActionClick(action)"> </ui5-toolbar-button>
+    }
+</ui5-toolbar>
+
+<h4>Never Overflowing Items:</h4>
+<p>
+    To force items to always stay visible and never overflow, set "overflow-priority='NeverOverflow'" on the Toolbar
+    items.
+</p>
+<div [style]="{ 'overflow': 'hidden', 'padding-inline': '10px' }">
+    <ui5-toolbar>
+        @for (action of actions(); track action) {
+        <ui5-toolbar-button [text]="action" overflowPriority="NeverOverflow" (ui5Click)="onActionClick(action)">
+        </ui5-toolbar-button>
+        }
+    </ui5-toolbar>
+</div>
+
+<h4>Always Overflowing Items:</h4>
+<p>To force items into the overflow, set "overflow-priority='AlwaysOverflow'" on the Toolbar items.</p>
+
+<ui5-toolbar>
+    @for (action of actions(); track action; let i = $index) {
+    <ui5-toolbar-button
+        [text]="action"
+        [overflowPriority]="i === 0 || i === 1 ? 'Default' : 'AlwaysOverflow'"
+        (ui5Click)="onActionClick(action)"
+    >
+    </ui5-toolbar-button>
+    }
+</ui5-toolbar>

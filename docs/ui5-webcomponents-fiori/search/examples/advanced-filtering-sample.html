@@ -1,0 +1,11 @@
+<ui5-search id="advancedFiltering" placeholder="Start typing ...">
+    <ui5-button id="advancedButton" slot="filterButton" icon="filter" (ui5Click)="onFilterButtonClick()"></ui5-button>
+    <ui5-search-message-area
+        slot="messageArea"
+        text="Oh, there are no results"
+        description="You can try the following: ..."
+    ></ui5-search-message-area>
+</ui5-search>
+<ui5-toast id="advancedFilterToast" placement="BottomCenter" [open]="showToast()" (ui5Close)="showToast.set(false)">
+    Search refined using advanced filters
+</ui5-toast>

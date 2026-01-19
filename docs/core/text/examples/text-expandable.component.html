@@ -1,14 +1,15 @@
-<h3>Expandable text</h3>
+<h3>Expandable text with 3 lines (collapsed by default)</h3>
 <fd-text [text]="text" [maxLines]="3" [expandable]="true"></fd-text>
 
-<h3>Expandable text opened</h3>
-<fd-text [text]="text" [maxLines]="3" [expandable]="true" [isCollapsed]="false"></fd-text>
+<h3>Expandable text with two-way binding</h3>
+<fd-text [text]="text" [maxLines]="3" [expandable]="true" [(isCollapsed)]="isCollapsed"></fd-text>
+<p>Current state: {{ isCollapsed() ? 'Collapsed' : 'Expanded' }}</p>
 
-<h3>Define more/less labels text</h3>
+<h3>Custom labels</h3>
 <fd-text
     [text]="text"
-    [maxLines]="3"
+    [maxLines]="2"
     [expandable]="true"
-    [fdPatchLanguage]="{ coreText: { moreLabel: 'more label', lessLabel: 'less label' } }"
+    [fdPatchLanguage]="{ coreText: { moreLabel: 'Show more', lessLabel: 'Show less' } }"
 >
 </fd-text>

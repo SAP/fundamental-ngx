@@ -1,15 +1,15 @@
 /**
 * Copyright (c) 2012-2025 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 16.0.13
-* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_belize_plus", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}
+* Theming Engine 16.1.14
+* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_belize_plus", "Engine": {"Name": "theming-engine", "Version": "16.1.14"}, "Version": { "Build": "11.32.3.20251212060838", "Source": "11.32.3"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_belize_plus", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_belize_plus", "Engine": {"Name": "theming-engine", "Version": "16.0.13"}, "Version": { "Build": "11.31.1.20250711075623", "Source": "11.31.1"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_belize_plus", "Engine": {"Name": "theming-engine", "Version": "16.1.14"}, "Version": { "Build": "11.32.3.20251212060838", "Source": "11.32.3"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_belize_plus", "Engine": {"Name": "theming-engine", "Version": "16.1.14"}, "Version": { "Build": "11.32.3.20251212060838", "Source": "11.32.3"}};}
 
 /**
-* Base.baseLib.baseTheme.base (Version 11.31.1)
+* Base.baseLib.baseTheme.base (Version 11.32.3)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -239,7 +239,7 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.skeleton (Version 11.31.1)
+* Base.baseLib.baseTheme.skeleton (Version 11.32.3)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -620,13 +620,13 @@
   --sapButton_Active_Background: #91c8f6;
   --sapButton_Active_BorderColor: #91c8f6;
   --sapButton_Active_TextColor: #29313a;
-  --sapButton_Emphasized_Background: #1b8dec;
-  --sapButton_Emphasized_BorderColor: #1b8dec;
+  --sapButton_Emphasized_Background: #1178ce;
+  --sapButton_Emphasized_BorderColor: #1178ce;
   --sapButton_Emphasized_BorderWidth: .0625rem;
   --sapButton_Emphasized_TextColor: #fff;
   --sapButton_Emphasized_FontFamily: "72-Bold", "72-Boldfull", "72", "72full", Arial, Helvetica, sans-serif;
-  --sapButton_Emphasized_Hover_Background: #2e96ee;
-  --sapButton_Emphasized_Hover_BorderColor: #2e96ee;
+  --sapButton_Emphasized_Hover_Background: #1383e1;
+  --sapButton_Emphasized_Hover_BorderColor: #1383e1;
   --sapButton_Emphasized_Hover_TextColor: #fafafa;
   --sapButton_Emphasized_Active_Background: #91c8f6;
   --sapButton_Emphasized_Active_BorderColor: #91c8f6;
@@ -1245,6 +1245,10 @@
   --sapChart_Data_ContrastTextColor: #000;
   --sapChart_Data_InteractiveColor: #fff;
   --sapChart_Data_Active_Background: #0d1013;
+  --sapChart_IBCS_Actual: #d5dadc;
+  --sapChart_IBCS_Previous: #6a757b;
+  --sapChart_IBCS_Good: #3c9d57;
+  --sapChart_IBCS_Bad: #dc0d0e;
   --sapChart_OrderedColor_1: #5899da;
   --sapChart_OrderedColor_2: #e66729;
   --sapChart_OrderedColor_3: #16976c;
@@ -1784,36 +1788,36 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.baseTheme.css_variables (Version 11.31.1)
+* Base.baseLib.baseTheme.css_variables (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.base (Version 11.31.1)
+* Base.baseLib.sap_base_fiori.base (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.css_variables (Version 11.31.1)
+* Base.baseLib.sap_base_fiori.css_variables (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3.base (Version 11.31.1)
+* Base.baseLib.sap_fiori_3.base (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3.css_variables (Version 11.31.1)
+* Base.baseLib.sap_fiori_3.css_variables (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3_dark.base (Version 11.31.1)
+* Base.baseLib.sap_fiori_3_dark.base (Version 11.32.3)
 */
 
 
 /**
-* Base.baseLib.sap_fiori_3_dark.css_variables (Version 11.31.1)
+* Base.baseLib.sap_fiori_3_dark.css_variables (Version 11.32.3)
 */
 

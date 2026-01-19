@@ -1,0 +1,406 @@
+<section aria-labelledby="carousel-basic" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="carousel-basic" class="fd-section__title">Basic Carousel</h2>
+    </div>
+    <ui5-carousel (ui5Navigate)="onBasicNavigate($event)" accessibleName="Basic carousel example">
+        <div
+            style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2rem;
+                font-weight: bold;
+            "
+        >
+            Slide 1
+        </div>
+        <div
+            style="
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2rem;
+                font-weight: bold;
+            "
+        >
+            Slide 2
+        </div>
+        <div
+            style="
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2rem;
+                font-weight: bold;
+            "
+        >
+            Slide 3
+        </div>
+        <div
+            style="
+                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2rem;
+                font-weight: bold;
+            "
+        >
+            Slide 4
+        </div>
+    </ui5-carousel>
+    <p class="fd-margin-top--sm"><strong>Current Page:</strong> {{ basicCurrentPage() + 1 }}</p>
+</section>
+
+<section aria-labelledby="carousel-configuration" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="carousel-configuration" class="fd-section__title">Carousel with Configuration</h2>
+    </div>
+
+    <div class="fd-container fd-margin-bottom--md">
+        <div class="fd-row">
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Display Options</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <div class="fd-margin-bottom--sm">
+                            <ui5-label>Page Indicator Type:</ui5-label>
+                            <ui5-segmented-button
+                                class="fd-margin-top--tiny"
+                                (ui5SelectionChange)="onPageIndicatorTypeChange($event)"
+                            >
+                                @for (type of pageIndicatorTypes(); track type) {
+                                <ui5-segmented-button-item [selected]="pageIndicatorType() === type">
+                                    {{ type }}
+                                </ui5-segmented-button-item>
+                                }
+                            </ui5-segmented-button>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm">
+                            <ui5-label>Arrows Placement:</ui5-label>
+                            <ui5-segmented-button
+                                class="fd-margin-top--tiny"
+                                (ui5SelectionChange)="onArrowsPlacementChange($event)"
+                            >
+                                @for (placement of arrowsPlacements(); track placement) {
+                                <ui5-segmented-button-item [selected]="arrowsPlacement() === placement">
+                                    {{ placement }}
+                                </ui5-segmented-button-item>
+                                }
+                            </ui5-segmented-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-col fd-col-md--6">
+                <div class="fd-panel fd-margin-bottom--sm">
+                    <div class="fd-panel__header">
+                        <h3 class="fd-panel__title">Behavior Options</h3>
+                    </div>
+                    <div class="fd-panel__content">
+                        <div class="fd-margin-bottom--sm" style="display: flex; align-items: center; gap: 0.5rem">
+                            <ui5-switch [checked]="cyclic()" (ui5Change)="toggleCyclic()"></ui5-switch>
+                            <ui5-label>Cyclic Navigation</ui5-label>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm" style="display: flex; align-items: center; gap: 0.5rem">
+                            <ui5-switch
+                                [checked]="hideNavigationArrows()"
+                                (ui5Change)="toggleNavigationArrows()"
+                            ></ui5-switch>
+                            <ui5-label>Hide Navigation Arrows</ui5-label>
+                        </div>
+
+                        <div class="fd-margin-bottom--sm" style="display: flex; align-items: center; gap: 0.5rem">
+                            <ui5-switch
+                                [checked]="hidePageIndicator()"
+                                (ui5Change)="togglePageIndicator()"
+                            ></ui5-switch>
+                            <ui5-label>Hide Page Indicator</ui5-label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Quick Presets</h3>
+    <div class="fd-margin-bottom--sm" style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+        <ui5-button (ui5Click)="setMobileConfiguration()">Mobile Optimized</ui5-button>
+        <ui5-button (ui5Click)="setDesktopConfiguration()">Desktop Optimized</ui5-button>
+        <ui5-button (ui5Click)="resetConfiguration()">Reset to Defaults</ui5-button>
+    </div>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Configurable Carousel</h3>
+    <ui5-carousel
+        [cyclic]="cyclic()"
+        [itemsPerPage]="itemsPerPage()"
+        [hideNavigationArrows]="hideNavigationArrows()"
+        [hidePageIndicator]="hidePageIndicator()"
+        [pageIndicatorType]="pageIndicatorType()"
+        [backgroundDesign]="backgroundDesign()"
+        [pageIndicatorBackgroundDesign]="pageIndicatorBackgroundDesign()"
+        [pageIndicatorBorderDesign]="pageIndicatorBorderDesign()"
+        [arrowsPlacement]="arrowsPlacement()"
+        (ui5Navigate)="onBasicNavigate($event)"
+        accessibleName="Configurable carousel"
+    >
+        @for (image of images(); track $index) {
+        <div style="padding: 1rem">
+            <ui5-card style="height: 400px">
+                <ui5-card-header [titleText]="image.title" [subtitleText]="image.description">
+                    <div slot="action">
+                        <ui5-tag [colorScheme]="getTagType('New')">Featured</ui5-tag>
+                    </div>
+                </ui5-card-header>
+                <div [style]="getCardImageStyle(image)">
+                    <div style="text-align: center; color: white; opacity: 0.2">
+                        <ui5-icon name="sap-icon://picture" style="font-size: 2rem"></ui5-icon>
+                    </div>
+                </div>
+                <div style="padding: 1rem">
+                    <p style="margin: 0; color: var(--sapNeutralTextColor)">{{ image.description }}</p>
+                </div>
+            </ui5-card>
+        </div>
+        }
+    </ui5-carousel>
+
+    <h3 class="fd-margin-top--sm fd-margin-bottom--tiny">Current Configuration:</h3>
+    <ul class="fd-margin-top--tiny">
+        <li><strong>Cyclic:</strong> {{ cyclic() ? 'Enabled' : 'Disabled' }}</li>
+        <li><strong>Items Per Page:</strong> {{ itemsPerPage() }}</li>
+        <li><strong>Navigation Arrows:</strong> {{ hideNavigationArrows() ? 'Hidden' : 'Visible' }}</li>
+        <li><strong>Page Indicator:</strong> {{ hidePageIndicator() ? 'Hidden' : 'Visible' }}</li>
+        <li><strong>Page Indicator Type:</strong> {{ pageIndicatorType() }}</li>
+        <li><strong>Arrows Placement:</strong> {{ arrowsPlacement() }}</li>
+    </ul>
+</section>
+
+<section aria-labelledby="carousel-products" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="carousel-products" class="fd-section__title">Product Showcase Carousel</h2>
+    </div>
+
+    <ui5-carousel
+        itemsPerPage="S1 M2 L3 XL4"
+        [cyclic]="true"
+        pageIndicatorType="Numeric"
+        arrowsPlacement="Navigation"
+        (ui5Navigate)="onProductNavigate($event)"
+        accessibleName="Product showcase carousel"
+    >
+        @for (product of products(); track $index) {
+        <div style="padding: 0.5rem">
+            <ui5-card style="height: 350px">
+                <ui5-card-header [titleText]="product.name" [subtitleText]="product.category">
+                    <div slot="action">
+                        <ui5-tag [colorScheme]="getTagType(product.status)">{{ product.status }}</ui5-tag>
+                    </div>
+                </ui5-card-header>
+                <div
+                    style="
+                        padding: 1rem;
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                    "
+                >
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem">
+                            <span style="color: var(--sapPositiveTextColor); font-size: 1.2rem">
+                                @for (star of getStarRating(product.rating); track $index) { {{ star }} }
+                            </span>
+                            <ui5-label>{{ product.rating }}/5</ui5-label>
+                        </div>
+                        <ui5-title level="H4" style="margin-bottom: 0.5rem">{{ product.price }}</ui5-title>
+                    </div>
+                    <ui5-button design="Emphasized" style="align-self: flex-start">Add to Cart</ui5-button>
+                </div>
+            </ui5-card>
+        </div>
+        }
+    </ui5-carousel>
+    <p class="fd-margin-top--sm">
+        <strong>Current Product:</strong> {{ currentProductPage() + 1 }} of {{ totalProducts() }}
+    </p>
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        This carousel shows multiple products per page based on screen size and uses numeric page indicators.
+    </p>
+</section>
+
+<section aria-labelledby="carousel-features" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="carousel-features" class="fd-section__title">Feature Highlight Carousel</h2>
+    </div>
+
+    <ui5-carousel
+        backgroundDesign="Solid"
+        pageIndicatorBackgroundDesign="Translucent"
+        hideNavigationArrows="false"
+        arrowsPlacement="Content"
+        (ui5Navigate)="onFeatureNavigate($event)"
+        accessibleName="Feature highlight carousel"
+    >
+        @for (feature of features(); track $index) {
+        <div
+            style="
+                padding: 2rem;
+                text-align: center;
+                min-height: 300px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: var(--sapObjectHeader_Background);
+            "
+        >
+            <ui5-icon
+                name="{{ feature.icon }}"
+                style="font-size: 4rem; margin-bottom: 1rem; color: var(--sapButton_Emphasized_Background)"
+            >
+            </ui5-icon>
+            <ui5-title level="H3" style="margin-bottom: 1rem">{{ feature.title }}</ui5-title>
+            <p style="max-width: 400px; margin-bottom: 1.5rem; color: var(--sapNeutralTextColor)">
+                {{ feature.description }}
+            </p>
+            <ui5-tag [colorScheme]="getTagType(feature.badge)">{{ feature.badge }}</ui5-tag>
+        </div>
+        }
+    </ui5-carousel>
+    <p class="fd-margin-top--sm">
+        <strong>Current Feature:</strong> {{ currentFeaturePage() + 1 }} of {{ totalFeatures() }}
+    </p>
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Feature carousel with solid background design and content-placed navigation arrows.
+    </p>
+</section>
+
+<section aria-labelledby="carousel-image-gallery" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="carousel-image-gallery" class="fd-section__title">Image Gallery Carousel</h2>
+    </div>
+
+    <ui5-carousel
+        [cyclic]="true"
+        hidePageIndicator="false"
+        pageIndicatorType="Default"
+        backgroundDesign="Translucent"
+        (ui5Navigate)="onImageNavigate($event)"
+        accessibleName="Image gallery carousel"
+    >
+        @for (image of images(); track $index) {
+        <div style="position: relative">
+            <div [style]="getImageStyle(image)">
+                <!-- Fallback content when image doesn't load -->
+                <div style="text-align: center; color: white; opacity: 0.3">
+                    <ui5-icon name="sap-icon://picture" style="font-size: 4rem; margin-bottom: 1rem"></ui5-icon>
+                    <p style="font-size: 1.2rem">{{ image.title }}</p>
+                </div>
+            </div>
+            <div
+                style="
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+                    padding: 2rem 1rem 1rem;
+                    color: white;
+                "
+            >
+                <ui5-title level="H4" style="color: white; margin-bottom: 0.5rem">{{ image.title }}</ui5-title>
+                <p style="margin: 0; opacity: 0.95">{{ image.description }}</p>
+            </div>
+        </div>
+        }
+    </ui5-carousel>
+    <p class="fd-margin-top--sm"><strong>Current Image:</strong> {{ currentImagePage() + 1 }} of {{ totalImages() }}</p>
+    <p class="fd-margin-top--tiny" style="color: var(--sapNeutralTextColor); font-style: italic">
+        Full-screen image gallery with overlay text and cyclic navigation enabled.
+    </p>
+</section>
+
+<section aria-labelledby="carousel-accessibility" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="carousel-accessibility" class="fd-section__title">Accessibility Features</h2>
+    </div>
+
+    <ui5-carousel accessibleName="Demonstration of carousel accessibility features">
+        <div
+            style="
+                padding: 2rem;
+                background: var(--sapNeutralBackground);
+                text-align: center;
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            "
+        >
+            <ui5-icon
+                name="sap-icon://accessibility"
+                style="font-size: 3rem; margin-bottom: 1rem; color: var(--sapButton_Emphasized_Background)"
+            ></ui5-icon>
+            <ui5-title level="H4">Keyboard Navigation</ui5-title>
+            <p style="color: var(--sapNeutralTextColor)">Use arrow keys to navigate between slides</p>
+        </div>
+        <div
+            style="
+                padding: 2rem;
+                background: var(--sapNeutralBackground);
+                text-align: center;
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            "
+        >
+            <ui5-icon
+                name="sap-icon--sound-loud"
+                style="font-size: 3rem; margin-bottom: 1rem; color: var(--sapButton_Emphasized_Background)"
+            ></ui5-icon>
+            <ui5-title level="H4">Screen Reader Support</ui5-title>
+            <p style="color: var(--sapNeutralTextColor)">Proper ARIA labels and live regions</p>
+        </div>
+        <div
+            style="
+                padding: 2rem;
+                background: var(--sapNeutralBackground);
+                text-align: center;
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            "
+        >
+            <ui5-icon
+                name="sap-icon://touch"
+                style="font-size: 3rem; margin-bottom: 1rem; color: var(--sapButton_Emphasized_Background)"
+            ></ui5-icon>
+            <ui5-title level="H4">Touch Support</ui5-title>
+            <p style="color: var(--sapNeutralTextColor)">Swipe gestures on touch devices</p>
+        </div>
+    </ui5-carousel>
+
+    <p class="fd-margin-top--sm" style="color: var(--sapNeutralTextColor); font-style: italic">
+        This carousel includes proper accessibility features including ARIA labeling, keyboard navigation, and screen
+        reader support.
+    </p>
+</section>

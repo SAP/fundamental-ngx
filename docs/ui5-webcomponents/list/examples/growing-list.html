@@ -1,0 +1,60 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col-md-4">
+            <ui5-label class="fd-margin--sm">Growing Mode:</ui5-label>
+            <ui5-button
+                [design]="growingMode() === 'Button' ? 'Emphasized' : 'Transparent'"
+                (ui5Click)="onModeChange('Button')"
+                class="fd-margin--sm"
+            >
+                Button Mode
+            </ui5-button>
+            <ui5-button
+                [design]="growingMode() === 'Scroll' ? 'Emphasized' : 'Transparent'"
+                (ui5Click)="onModeChange('Scroll')"
+                class="fd-margin--sm"
+            >
+                Scroll Mode
+            </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-list
+                headerText="Project Tasks"
+                [growing]="growingMode()"
+                [growingButtonText]="'Load More Tasks'"
+                [loading]="isLoading()"
+                [loadingDelay]="500"
+                (ui5LoadMore)="onLoadMore()"
+                style="max-height: 400px; overflow-y: auto"
+            >
+                @for (item of displayedItems(); track item.id) {
+                <ui5-li [description]="item.description" [additionalText]="item.status"> {{ item.name }} </ui5-li>
+                }
+            </ui5-list>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-button design="Transparent" (ui5Click)="resetList()"> Reset List </ui5-button>
+        </div>
+    </div>
+
+    <div class="fd-row">
+        <div class="fd-col">
+            <ui5-label class="fd-margin-bottom--sm">Growing Mode Information:</ui5-label>
+            <div class="fd-padding--sm">
+                @switch (growingMode()) { @case ('None') {
+                <ui5-text>Growing is disabled. All items are loaded at once.</ui5-text>
+                } @case ('Button') {
+                <ui5-text>Items are loaded when the "Load More" button is clicked.</ui5-text>
+                } @case ('Scroll') {
+                <ui5-text>Items are loaded automatically when scrolling to the bottom of the list.</ui5-text>
+                } }
+            </div>
+        </div>
+    </div>
+</div>

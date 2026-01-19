@@ -1,0 +1,17 @@
+<div class="fd-margin-top--sm">
+    <ui5-button (click)="openDialog()">Open Dialog</ui5-button>
+</div>
+
+<ui5-dialog #dialog headerText="Basic Dialog" [open]="isOpen()">
+    <div class="fd-margin--sm">
+        <ui5-title>Dialog Content</ui5-title>
+        <p class="fd-margin-top--sm">
+            This is a basic dialog with simple content. Dialogs are modal windows that overlay the page content and
+            require user interaction before returning to the main application.
+        </p>
+        <p class="fd-margin-top--sm">Click the button below to dismiss this dialog.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (click)="closeDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>

@@ -1,0 +1,10 @@
+<ui5-button id="btnOpenAdditionalText" endIcon="slim-arrow-down" (click)="openMenu()">Open Menu</ui5-button> <br />
+
+<ui5-menu id="menuAdditionalText" opener="btnOpenAdditionalText" [open]="isMenuOpen()" (ui5Close)="closeMenu()">
+    <ui5-menu-item text="New File" icon="add-document" additionalText="Ctrl+N"></ui5-menu-item>
+    <ui5-menu-item text="New Folder" icon="add-folder" additionalText="Ctrl+F" disabled></ui5-menu-item>
+    <ui5-menu-item text="Open" icon="open-folder"></ui5-menu-item>
+    <ui5-menu-item text="Close"></ui5-menu-item>
+    <ui5-menu-item text="Preferences" icon="action-settings"></ui5-menu-item>
+    <ui5-menu-item text="Exit" icon="journey-arrive" additionalText="Ctrl+X"></ui5-menu-item>
+</ui5-menu>

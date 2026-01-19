@@ -1,0 +1,21 @@
+<ui5-search
+    [value]="searchValue()"
+    placeholder="Search in selected scope..."
+    [showClearIcon]="true"
+    (ui5Input)="onInput($event)"
+    (ui5Close)="onClose($event)"
+    (ui5ScopeChange)="onScopeChange($event)"
+>
+    <ui5-search-scope text="All" slot="scopes"></ui5-search-scope>
+    <ui5-search-scope text="Products" slot="scopes"></ui5-search-scope>
+    <ui5-search-scope text="Customers" slot="scopes"></ui5-search-scope>
+    <ui5-search-scope text="Orders" slot="scopes"></ui5-search-scope>
+    @if (filteredItems().length === 0) {
+    <ui5-search-message-area
+        slot="messageArea"
+        text="Sorry, there are no results for your search"
+    ></ui5-search-message-area>
+    } @else { @for (item of filteredItems(); track item.id) {
+    <ui5-search-item [text]="item.name" [description]="item.description" [icon]="item.icon"> </ui5-search-item>
+    } }
+</ui5-search>

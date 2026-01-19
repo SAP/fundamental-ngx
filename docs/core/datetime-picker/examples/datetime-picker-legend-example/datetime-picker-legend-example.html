@@ -1,0 +1,17 @@
+<h4>Datetime Picker with Legend (Column Layout)</h4>
+<fd-datetime-picker
+    [(ngModel)]="selectedDateTime"
+    [specialDaysRules]="specialDaysRules"
+    [showCalendarLegend]="true"
+    [legendCol]="true"
+    placeholder="Select date and time"
+></fd-datetime-picker>
+
+<h4>Datetime Picker with Legend (Row Layout)</h4>
+<fd-datetime-picker
+    [(ngModel)]="selectedDateTime"
+    [specialDaysRules]="specialDaysRules"
+    [showCalendarLegend]="true"
+    [legendCol]="false"
+    placeholder="Select date and time"
+></fd-datetime-picker>

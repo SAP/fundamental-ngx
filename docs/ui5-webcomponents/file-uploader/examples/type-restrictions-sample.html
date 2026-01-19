@@ -1,0 +1,23 @@
+<div class="fd-container">
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="images-uploader" class="fd-col--2">Upload Images:</ui5-label>
+        <ui5-file-uploader id="images-uploader" accept=".png, .jpg, .jpeg, .gif" class="fd-col--10">
+        </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="pdf-uploader" class="fd-col--2">Upload PDFs:</ui5-label>
+        <ui5-file-uploader id="pdf-uploader" accept=".pdf" class="fd-col--10"> </ui5-file-uploader>
+    </div>
+
+    <div class="fd-row" [style]="{ 'align-items': 'center', 'margin-bottom': '1rem' }">
+        <ui5-label for="multiple-images-uploader" class="fd-col--2">Upload Multiple Images:</ui5-label>
+        <ui5-file-uploader
+            id="multiple-images-uploader"
+            [multiple]="true"
+            accept=".png, .jpg, .jpeg"
+            class="fd-col--10"
+        >
+        </ui5-file-uploader>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<ui5-side-navigation (ui5SelectionChange)="onSelectionChange($event)">
+    <ui5-side-navigation-item icon="home" [selected]="true" text="Home"></ui5-side-navigation-item>
+
+    <ui5-side-navigation-item icon="product" text="Products" [expanded]="true">
+        <ui5-side-navigation-sub-item text="Overview"></ui5-side-navigation-sub-item>
+        <ui5-side-navigation-sub-item text="Electronics"></ui5-side-navigation-sub-item>
+        <ui5-side-navigation-sub-item text="Accessories"></ui5-side-navigation-sub-item>
+        <ui5-side-navigation-sub-item text="Software"></ui5-side-navigation-sub-item>
+    </ui5-side-navigation-item>
+
+    <ui5-side-navigation-item icon="supplier" text="Suppliers" [unselectable]="true">
+        <ui5-side-navigation-sub-item text="All Suppliers"></ui5-side-navigation-sub-item>
+        <ui5-side-navigation-sub-item text="Verified Partners"></ui5-side-navigation-sub-item>
+        <ui5-side-navigation-sub-item text="Pending Approval"></ui5-side-navigation-sub-item>
+    </ui5-side-navigation-item>
+
+    <ui5-side-navigation-item icon="calendar" text="Calendar"></ui5-side-navigation-item>
+    <ui5-side-navigation-item icon="activities" text="Activities"></ui5-side-navigation-item>
+</ui5-side-navigation>

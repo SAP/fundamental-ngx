@@ -1,0 +1,8 @@
+@for (example of maxLinesExamples(); track example.maxLines) {
+<div style="max-width: 300px">
+    <h5>{{ example.description }}</h5>
+    <div>
+        <ui5-text [maxLines]="example.maxLines"> {{ longText() }} </ui5-text>
+    </div>
+</div>
+}

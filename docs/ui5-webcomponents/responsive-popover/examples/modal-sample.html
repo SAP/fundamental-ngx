@@ -1,0 +1,65 @@
+<div class="fd-container fd-padding--none">
+    <div class="fd-row">
+        <div class="fd-col fd-col--6">
+            <h4 class="fd-margin-top--none">Modal Popover:</h4>
+            <p class="fd-margin-top--xs" [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+                Blocks background interaction. Cannot click outside to close.
+            </p>
+            <ui5-button id="modal-opener" (ui5Click)="openModalPopover()" design="Emphasized" class="fd-margin-top--sm">
+                Open Modal Popover
+            </ui5-button>
+        </div>
+
+        <div class="fd-col fd-col--6">
+            <h4 class="fd-margin-top--none">Non-Modal Popover:</h4>
+            <p class="fd-margin-top--xs" [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+                Allows background interaction. Click outside to close.
+            </p>
+            <ui5-button
+                id="non-modal-opener"
+                (ui5Click)="openNonModalPopover()"
+                design="Emphasized"
+                class="fd-margin-top--sm"
+            >
+                Open Non-Modal Popover
+            </ui5-button>
+        </div>
+    </div>
+
+    <!-- Modal Popover -->
+    <ui5-responsive-popover
+        headerText="Modal Popover"
+        opener="modal-opener"
+        [modal]="true"
+        [open]="modalOpen()"
+        (ui5Close)="modalOpen.set(false)"
+    >
+        <div class="fd-margin--md">
+            <p>This is a modal popover.</p>
+            <p class="fd-margin-top--xs">Background interaction is blocked.</p>
+            <p class="fd-margin-top--xs">Press the Close button to close.</p>
+        </div>
+
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closeModalPopover()" design="Emphasized">Close</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+
+    <!-- Non-Modal Popover -->
+    <ui5-responsive-popover
+        headerText="Non-Modal Popover"
+        opener="non-modal-opener"
+        [modal]="false"
+        [open]="nonModalOpen()"
+        (ui5Close)="onNonModalClosed()"
+    >
+        <div class="fd-margin--md">
+            <p>This is a non-modal popover.</p>
+            <p class="fd-margin-top--xs">You can interact with the background.</p>
+            <p class="fd-margin-top--xs">Try clicking somewhere outside.</p>
+        </div>
+        <div slot="footer" class="fd-margin--sm">
+            <ui5-button (ui5Click)="closeNonModalPopover()" design="Emphasized">Close</ui5-button>
+        </div>
+    </ui5-responsive-popover>
+</div>

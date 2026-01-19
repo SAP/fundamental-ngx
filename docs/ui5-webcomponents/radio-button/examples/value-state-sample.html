@@ -1,0 +1,45 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <ui5-radio-button
+            name="state-group"
+            text="Default state"
+            valueState="None"
+            value="none"
+            (ui5Change)="onStateChange('none')"
+        />
+
+        <ui5-radio-button
+            name="state-group"
+            text="Success state"
+            valueState="Positive"
+            value="success"
+            (ui5Change)="onStateChange('success')"
+        />
+
+        <ui5-radio-button
+            name="state-group"
+            text="Warning state"
+            valueState="Critical"
+            value="warning"
+            (ui5Change)="onStateChange('warning')"
+        />
+
+        <ui5-radio-button
+            name="state-group"
+            text="Error state"
+            valueState="Negative"
+            value="error"
+            (ui5Change)="onStateChange('error')"
+        />
+
+        <ui5-radio-button
+            name="state-group"
+            text="Information state"
+            valueState="Information"
+            value="info"
+            (ui5Change)="onStateChange('info')"
+        />
+    </div>
+
+    <p class="fd-margin-top--md"><strong>Selected state:</strong> {{ selectedState() }}</p>
+</div>

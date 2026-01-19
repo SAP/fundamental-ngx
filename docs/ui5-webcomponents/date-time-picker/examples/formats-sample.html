@@ -1,0 +1,40 @@
+<div class="fddocs-container">
+    <div class="fd-form-group">
+        <label class="fd-form-label">Default Format (Locale-based):</label>
+        <ui5-datetime-picker
+            [value]="defaultFormatValue()"
+            [placeholder]="'Default format'"
+            (ui5Change)="onValueChange($event, defaultFormatValue.set.bind(defaultFormatValue))"
+        />
+    </div>
+
+    <div class="fd-form-group">
+        <label class="fd-form-label">Custom Format Pattern (dd/MM/yyyy, HH:mm:ss):</label>
+        <ui5-datetime-picker
+            [value]="customFormatValue()"
+            [formatPattern]="'dd/MM/yyyy, HH:mm:ss'"
+            [placeholder]="'dd/MM/yyyy, HH:mm:ss'"
+            (ui5Change)="onValueChange($event, customFormatValue.set.bind(customFormatValue))"
+        />
+    </div>
+
+    <div class="fd-form-group">
+        <label class="fd-form-label">ISO Format (yyyy-MM-dd'T'HH:mm):</label>
+        <ui5-datetime-picker
+            [value]="isoFormatValue()"
+            [formatPattern]="'yyyy-MM-dd\'T\'HH:mm'"
+            [placeholder]="'yyyy-MM-dd\'T\'HH:mm'"
+            (ui5Change)="onValueChange($event, isoFormatValue.set.bind(isoFormatValue))"
+        />
+    </div>
+
+    <div class="fd-form-group">
+        <label class="fd-form-label">Display format different from value format:</label>
+        <ui5-datetime-picker
+            [value]="differentFormats()"
+            [displayFormat]="'medium'"
+            [valueFormat]="'yyyy-MM-dd HH:mm:ss'"
+            (ui5Change)="onValueChange($event, isoFormatValue.set.bind(isoFormatValue))"
+        />
+    </div>
+</div>

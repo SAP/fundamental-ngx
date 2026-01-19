@@ -1,0 +1,51 @@
+<div class="fd-margin-top--sm">
+    <ui5-button (ui5Click)="openDraggableDialog()" class="fd-margin-end--sm">Draggable Dialog</ui5-button>
+    <ui5-button (ui5Click)="openResizableDialog()" class="fd-margin-end--sm">Resizable Dialog</ui5-button>
+    <ui5-button (ui5Click)="openDraggableResizableDialog()">Draggable & Resizable</ui5-button>
+</div>
+
+<ui5-dialog headerText="Draggable Dialog" [open]="isDraggableDialogOpen()" [draggable]="true">
+    <div class="fd-margin--sm">
+        <ui5-label>📌 Try dragging this dialog by its header!</ui5-label>
+        <p class="fd-margin-top--sm">
+            This dialog is draggable. Click and hold the header area to move it around the viewport.
+        </p>
+        <p class="fd-margin-top--sm"><strong>Note:</strong> Dragging only works in desktop mode.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeDraggableDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
+
+<ui5-dialog headerText="Resizable Dialog" [open]="isResizableDialogOpen()" [resizable]="true">
+    <div class="fd-margin--sm">
+        <ui5-label>↔️ Try resizing this dialog using the handle in the corner!</ui5-label>
+        <p class="fd-margin-top--sm">
+            This dialog is resizable. Look for the resize handle in the bottom-right corner (LTR) or bottom-left corner
+            (RTL).
+        </p>
+        <p class="fd-margin-top--sm"><strong>Note:</strong> Resizing only works in desktop mode.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeResizableDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>
+
+<ui5-dialog
+    headerText="Draggable & Resizable Dialog"
+    [open]="isDraggableResizableDialogOpen()"
+    [draggable]="true"
+    [resizable]="true"
+>
+    <div class="fd-margin--sm">
+        <ui5-label>✨ This dialog is both draggable and resizable!</ui5-label>
+        <p class="fd-margin-top--sm">
+            You can drag it by the header and resize it using the corner handle. This provides maximum flexibility for
+            users to position and size the dialog as needed.
+        </p>
+        <p class="fd-margin-top--sm"><strong>Note:</strong> Dragging and resizing only works in desktop mode.</p>
+    </div>
+    <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem">
+        <ui5-button design="Emphasized" (ui5Click)="closeDraggableResizableDialog()">Close</ui5-button>
+    </div>
+</ui5-dialog>

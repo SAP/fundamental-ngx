@@ -1,0 +1,31 @@
+<div class="fd-margin-top--sm">
+    <h4>Disabled</h4>
+    <ui5-combobox placeholder="Disabled ComboBox" [disabled]="true">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>
+
+<div class="fd-margin-top--sm">
+    <h4>Read-Only</h4>
+    <ui5-combobox value="Brazil" [readonly]="true">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>
+
+<div class="fd-margin-top--sm">
+    <h4>Required</h4>
+    <ui5-combobox placeholder="Required field" [required]="true">
+        @for (country of countries; track country) {
+        <ui5-cb-item [text]="country"></ui5-cb-item>
+        }
+    </ui5-combobox>
+</div>
+
+<div class="fd-margin-top--sm">
+    <h4>Loading</h4>
+    <ui5-combobox placeholder="Loading data..." [loading]="true"> </ui5-combobox>
+</div>

@@ -1,0 +1,27 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col fd-col--3">
+            <h4>Normal Wrapping (Default):</h4>
+            <p class="fd-margin-top--xs" [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+                Text wraps without breaking words based on hyphenation.
+            </p>
+            <ui5-radio-button
+                name="wrap-normal"
+                wrappingType="Normal"
+                text="This is a very long text that demonstrates how the Normal wrapping type behaves when there is not enough space to display all the text in a single line"
+            />
+        </div>
+
+        <div class="fd-col fd-col--3">
+            <h4>No Wrapping (None):</h4>
+            <p class="fd-margin-top--xs" [style]="{'font-size': '0.875rem', 'color': 'var(--sapContent_LabelColor)'}">
+                Text will be truncated with ellipsis.
+            </p>
+            <ui5-radio-button
+                name="wrap-none"
+                wrappingType="None"
+                text="This is a very long text that demonstrates how the None wrapping type behaves when there is not enough space to display all the text in a single line"
+            />
+        </div>
+    </div>
+</div>
