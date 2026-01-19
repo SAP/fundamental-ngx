@@ -9615,7 +9615,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/tooling-webc@npm:0.3.1":
+"@ui5/tooling-webc@npm:~0.3.1":
   version: 0.3.1
   resolution: "@ui5/tooling-webc@npm:0.3.1"
   dependencies:
@@ -9641,7 +9641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-ai@npm:2.18.1":
+"@ui5/webcomponents-ai@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-ai@npm:2.18.1"
   dependencies:
@@ -9653,7 +9653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-base@npm:2.18.1":
+"@ui5/webcomponents-base@npm:2.18.1, @ui5/webcomponents-base@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-base@npm:2.18.1"
   dependencies:
@@ -9663,7 +9663,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-fiori@npm:2.18.1":
+"@ui5/webcomponents-fiori@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-fiori@npm:2.18.1"
   dependencies:
@@ -9676,7 +9676,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-icons-business-suite@npm:2.18.1":
+"@ui5/webcomponents-icons-business-suite@npm:2.18.1, @ui5/webcomponents-icons-business-suite@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-icons-business-suite@npm:2.18.1"
   dependencies:
@@ -9685,7 +9685,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-icons-tnt@npm:2.18.1":
+"@ui5/webcomponents-icons-tnt@npm:2.18.1, @ui5/webcomponents-icons-tnt@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-icons-tnt@npm:2.18.1"
   dependencies:
@@ -9694,7 +9694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-icons@npm:2.18.1":
+"@ui5/webcomponents-icons@npm:2.18.1, @ui5/webcomponents-icons@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-icons@npm:2.18.1"
   dependencies:
@@ -9713,7 +9713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-theming@npm:2.18.1":
+"@ui5/webcomponents-theming@npm:2.18.1, @ui5/webcomponents-theming@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-theming@npm:2.18.1"
   dependencies:
@@ -9723,7 +9723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents-tools@npm:2.18.1":
+"@ui5/webcomponents-tools@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents-tools@npm:2.18.1"
   dependencies:
@@ -9786,7 +9786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ui5/webcomponents@npm:2.18.1":
+"@ui5/webcomponents@npm:2.18.1, @ui5/webcomponents@npm:~2.18.1":
   version: 2.18.1
   resolution: "@ui5/webcomponents@npm:2.18.1"
   dependencies:
@@ -17969,16 +17969,16 @@ __metadata:
     "@types/marked": "npm:5.0.2"
     "@types/node": "npm:22.10.2"
     "@typescript-eslint/utils": "npm:^8.29.0"
-    "@ui5/tooling-webc": "npm:0.3.1"
-    "@ui5/webcomponents": "npm:2.18.1"
-    "@ui5/webcomponents-ai": "npm:2.18.1"
-    "@ui5/webcomponents-base": "npm:2.18.1"
-    "@ui5/webcomponents-fiori": "npm:2.18.1"
-    "@ui5/webcomponents-icons": "npm:2.18.1"
-    "@ui5/webcomponents-icons-business-suite": "npm:2.18.1"
-    "@ui5/webcomponents-icons-tnt": "npm:2.18.1"
-    "@ui5/webcomponents-theming": "npm:2.18.1"
-    "@ui5/webcomponents-tools": "npm:2.18.1"
+    "@ui5/tooling-webc": "npm:~0.3.1"
+    "@ui5/webcomponents": "npm:~2.18.1"
+    "@ui5/webcomponents-ai": "npm:~2.18.1"
+    "@ui5/webcomponents-base": "npm:~2.18.1"
+    "@ui5/webcomponents-fiori": "npm:~2.18.1"
+    "@ui5/webcomponents-icons": "npm:~2.18.1"
+    "@ui5/webcomponents-icons-business-suite": "npm:~2.18.1"
+    "@ui5/webcomponents-icons-tnt": "npm:~2.18.1"
+    "@ui5/webcomponents-theming": "npm:~2.18.1"
+    "@ui5/webcomponents-tools": "npm:~2.18.1"
     "@wdio/allure-reporter": "npm:7.7.3"
     "@wdio/cli": "npm:7.16.16"
     "@wdio/jasmine-framework": "npm:7.0.0"
