@@ -18,7 +18,8 @@ import {
     ViewEncapsulation,
     booleanAttribute,
     forwardRef,
-    isDevMode
+    isDevMode,
+    signal
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
@@ -130,6 +131,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         if (this._numberFormat) {
             this._updateViewValue();
         }
+        this._updateButtonStates();
     }
 
     /** Control value */
@@ -244,6 +246,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     focused: boolean;
 
+    /** @hidden Signal to track if increment is allowed */
+    protected readonly _canIncrementSignal = signal(true);
+
+    /** @hidden Signal to track if decrement is allowed */
+    protected readonly _canDecrementSignal = signal(true);
+
     /** @hidden */
     private _value: number | null = null;
 
@@ -300,6 +308,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     ngAfterViewInit(): void {
         this._updateViewValue();
+        this._updateButtonStates();
         this._listenOnButtonsClick();
     }
 
@@ -331,12 +340,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     get canIncrement(): boolean {
-        return this.value == null || this.value + this.step <= this._max;
+        return this._canIncrementSignal();
     }
 
     /** @hidden */
     get canDecrement(): boolean {
-        return this.value == null || this.value - this.step >= this._min;
+        return this._canDecrementSignal();
     }
 
     /** @hidden */
@@ -346,11 +355,17 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Increment input value by step value */
     increment(): void {
+        if (!this._canChangeValue || (this.value != null && this.value + this.step > this._max)) {
+            return;
+        }
         this._incrementOrDecrement('increment');
     }
 
     /** Decrement input value by step value */
     decrement(): void {
+        if (!this._canChangeValue || (this.value != null && this.value - this.step < this._min)) {
+            return;
+        }
         this._incrementOrDecrement('decrement');
     }
 
@@ -408,36 +423,37 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             this._emitChangedValue();
         }
         this._updateViewValue();
+        this._updateButtonStates();
     }
 
     /** @hidden Track parsed value when user changes value of the input control. */
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
         this._value = parsedValue != null ? this._checkValueLimits(parsedValue) : null;
+        this._updateButtonStates();
     }
 
     /** @hidden */
     private _incrementOrDecrement(direction: 'increment' | 'decrement'): void {
-        if ((direction === 'increment' && this.canIncrement) || (direction === 'decrement' && this.canDecrement)) {
-            let newValue: number;
+        let newValue: number;
 
-            if (this.value == null) {
-                if (direction === 'increment') {
-                    newValue = !isNaN(this.min) ? this._min : 0;
-                } else {
-                    newValue = !isNaN(this.max) ? this._max : 0;
-                }
+        if (this.value == null) {
+            if (direction === 'increment') {
+                newValue = !isNaN(this.min) ? this._min : 0;
             } else {
-                newValue =
-                    direction === 'increment'
-                        ? this._cutFloatingNumberDistortion(this.value, this.step)
-                        : this._cutFloatingNumberDistortion(this.value, -this.step);
+                newValue = !isNaN(this.max) ? this._max : 0;
             }
-
-            this._value = this._checkValueLimits(newValue);
-            this._emitChangedValue();
-            this._updateViewValue();
+        } else {
+            newValue =
+                direction === 'increment'
+                    ? this._cutFloatingNumberDistortion(this.value, this.step)
+                    : this._cutFloatingNumberDistortion(this.value, -this.step);
         }
+
+        this._value = this._checkValueLimits(newValue);
+        this._emitChangedValue();
+        this._updateViewValue();
+        this._updateButtonStates();
     }
 
     /** @hidden */
@@ -503,29 +519,24 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             this._subscriptions.add(
                 this._setupButtonListener(this.incrementButton).subscribe(() => {
                     this.increment();
-                    this._updateButtonStates();
-                    this._changeDetectorRef.detectChanges();
                 })
             );
 
             this._subscriptions.add(
                 this._setupButtonListener(this.decrementButton).subscribe(() => {
                     this.decrement();
-                    this._updateButtonStates();
-                    this._changeDetectorRef.detectChanges();
                 })
             );
         }
     }
 
-    /** @hidden Update button disabled states directly */
+    /** @hidden Update button state signals based on current value */
     private _updateButtonStates(): void {
-        if (this.incrementButton) {
-            this.incrementButton.nativeElement.disabled = !this.canIncrement;
-        }
-        if (this.decrementButton) {
-            this.decrementButton.nativeElement.disabled = !this.canDecrement;
-        }
+        const canInc = this.value == null || this.value + this.step <= this._max;
+        const canDec = this.value == null || this.value - this.step >= this._min;
+        this._canIncrementSignal.set(canInc);
+        this._canDecrementSignal.set(canDec);
+        this._changeDetectorRef.detectChanges();
     }
 
     /**
@@ -535,16 +546,20 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
      * For long clicks will continuously emit event until "mouseup" event is detected
      */
     private _setupButtonListener(elementRef: ElementRef): Observable<any> {
-        const onMouseDown$ = fromEvent(elementRef.nativeElement, 'mousedown');
+        const onMouseDown$ = fromEvent(elementRef.nativeElement, 'mousedown').pipe(
+            filter(() => !elementRef.nativeElement.disabled)
+        );
         const onMouseUp$ = fromEvent(window, 'mouseup');
         const onKeyDown$ = fromEvent<KeyboardEvent>(elementRef.nativeElement, 'keydown').pipe(
-            filter((event) => KeyUtil.isKeyCode(event, [SPACE, ENTER]))
+            filter((event) => KeyUtil.isKeyCode(event, [SPACE, ENTER])),
+            filter(() => !elementRef.nativeElement.disabled)
         );
 
         const timerFactory$ = defer(() =>
             timer(500).pipe(
                 switchMap(() => interval(40)),
-                takeUntil(onMouseUp$)
+                takeUntil(onMouseUp$),
+                filter(() => !elementRef.nativeElement.disabled)
             )
         );
 
