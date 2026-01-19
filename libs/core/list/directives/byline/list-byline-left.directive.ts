@@ -1,16 +1,13 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { booleanAttribute, Directive, input } from '@angular/core';
 
 @Directive({
     selector: '[fdListBylineLeft], [fd-list-byline-left]',
-    standalone: true
+    host: {
+        class: 'fd-list__byline-left',
+        '[class.fd-list__byline-left--wrap]': 'wrap()'
+    }
 })
 export class ListBylineLeftDirective {
-    /** @hidden */
-    @HostBinding('class.fd-list__byline-left')
-    fdListBylineLeftClass = true;
-
     /** Whether or not this should be wrapped, when too much text. */
-    @Input()
-    @HostBinding('class.fd-list__byline-left--wrap')
-    wrap = false;
+    readonly wrap = input(false, { transform: booleanAttribute });
 }
