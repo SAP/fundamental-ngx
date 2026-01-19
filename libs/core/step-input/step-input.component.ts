@@ -503,14 +503,14 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             this._subscriptions.add(
                 this._setupButtonListener(this.incrementButton).subscribe(() => {
                     this.increment();
-                    this._changeDetectorRef.detectChanges();
+                    this._changeDetectorRef.markForCheck();
                 })
             );
 
             this._subscriptions.add(
                 this._setupButtonListener(this.decrementButton).subscribe(() => {
                     this.decrement();
-                    this._changeDetectorRef.detectChanges();
+                    this._changeDetectorRef.markForCheck();
                 })
             );
         }
