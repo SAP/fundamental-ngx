@@ -9,7 +9,7 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
         <div class="step-input-example-container" [style.justify-content]="'space-between'">
             <div class="step-input-example">
                 <label fd-form-label for="default-input">Default</label>
-                <fd-step-input inputId="default-input" [(value)]="value1"></fd-step-input>
+                <fd-step-input inputId="default-input" [(value)]="value1" [min]="1" [max]="2"></fd-step-input>
                 <small>Value: {{ value1 }}</small>
             </div>
 
@@ -37,7 +37,7 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
     imports: [FormLabelComponent, StepInputModule, ContentDensityDirective]
 })
 export class StepInputDefaultExampleComponent {
-    value1: number | null = 0;
+    value1: number | null = 1;
     value2: number | null = 0;
     value3: number | null = 0;
     value4: number | null = 0;
