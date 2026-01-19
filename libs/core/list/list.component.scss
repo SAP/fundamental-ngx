@@ -85,3 +85,11 @@
         white-space: normal;
     }
 }
+
+.fd-list--byline {
+    .fd-list__title.fd-list__title--wrap,
+    .fd-list__byline-left.fd-list__byline-left--wrap,
+    .fd-list__byline-right.fd-list__byline-right--wrap {
+        white-space: normal;
+    }
+}
