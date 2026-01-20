@@ -1,20 +1,20 @@
 <p
     class="fd-text"
     [class.fd-text--subline]="subline"
-    [class.fd-text--pre-wrap]="whitespaces"
-    [style.hyphens]="hyphenation"
+    [class.fd-text--pre-wrap]="whitespaces()"
+    [style.hyphens]="hyphenation()"
 >
     <span
         fdkLineClamp
         class="fd-text__lineclamp"
         #lineClamp="fdLineClamp"
-        [fdLineclampState]="_isCollapsed"
-        [fdLineClampLines]="maxLines"
+        [fdLineclampState]="_isCollapsed()"
+        [fdLineClampLines]="maxLines()"
         (lineCountUpdate)="checkLineCount($event)"
     >
-        <span fdkLineClampTarget [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
+        <span fdkLineClampTarget [fdLineClampTargetText]="text()" (update)="lineClamp.refreshTarget($event)"></span>
     </span>
-    @if (_expandable && _hasMore) {
+    @if (_expandable() && _hasMore()) {
         <a
             fd-link
             tabindex="0"
@@ -22,7 +22,7 @@
             (keydown.enter)="toggleTextView()"
             (click)="toggleTextView()"
         >
-            {{ isCollapsed ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate) }}
+            {{ isCollapsed() ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate) }}
         </a>
     }
 </p>

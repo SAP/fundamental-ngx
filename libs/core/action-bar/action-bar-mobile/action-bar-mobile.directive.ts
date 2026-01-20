@@ -13,6 +13,8 @@ import { Directive } from '@angular/core';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-action-bar-mobile]',
-    standalone: true
+    host: {
+        class: 'fd-action-bar__mobile'
+    }
 })
 export class ActionBarMobileDirective {}

@@ -4,12 +4,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    HostListener,
-    Input,
-    ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject,
+    input,
+    viewChild
 } from '@angular/core';
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { FD_BUSY_INDICATOR_COMPONENT } from './tokens';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
@@ -28,72 +28,66 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         }
     ],
     host: {
-        '[attr.role]': "loading ? 'progressbar' : 'presentation'",
-        '[attr.tabindex]': 'loading ? 0 : -1',
-        '[attr.aria-busy]': 'loading',
-        '[attr.aria-live]': 'ariaLive',
-        '[attr.aria-label]': 'ariaLabel',
-        '[attr.aria-valuetext]': 'ariaValueText',
+        '[attr.role]': "loading() ? 'progressbar' : 'presentation'",
+        '[attr.tabindex]': 'loading() ? 0 : -1',
+        '[attr.aria-busy]': 'loading()',
+        '[attr.aria-live]': 'ariaLive()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.aria-valuetext]': 'ariaValueText()',
         '[attr.aria-valuemin]': '0',
         '[attr.aria-valuemax]': '100',
-        '[attr.title]': 'title',
+        '[attr.title]': 'title()',
         '[class.fd-busy-indicator__container]': 'true',
-        '[class.fd-busy-indicator__container--inline]': '!block'
+        '[class.fd-busy-indicator__container--inline]': '!block()',
+        '(keydown)': 'hostFocusChangeHandler($event)'
     },
     imports: []
 })
 export class BusyIndicatorComponent {
     /** Whether to display the loading indicator animation. */
-    @Input()
-    loading: boolean;
+    readonly loading = input(false);
 
     /** The size of the loading indicator, default will be medium */
-    @Input()
-    size: BusyIndicatorSize = 'm';
+    readonly size = input<BusyIndicatorSize>('m');
 
     /** Whether to use loader as block element */
-    @Input()
-    block = false;
+    readonly block = input(false);
 
     /** Aria label attribute value. */
-    @Input()
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel = input<string | null>(null);
 
     /** Aria-valuetext attribute value. */
-    @Input()
-    ariaValueText: Nullable<string>;
+    readonly ariaValueText = input<string | null>(null);
 
     /** title attribute value for tooltip. */
-    @Input()
-    title: string;
+    readonly title = input<string | undefined>(undefined);
 
     /** add loading label value */
-    @Input()
-    label?: string;
+    readonly label = input<string | undefined>(undefined);
 
     /** Aria live attribute value. */
-    @Input()
-    ariaLive: Nullable<'assertive' | 'polite' | 'off'> = null;
+    readonly ariaLive = input<'assertive' | 'polite' | 'off' | null>(null);
 
     /** @hidden */
-    @ViewChild('fakeFocusElement')
-    fakeFocusElement: ElementRef;
+    protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden If focus escapes busy container focus element after wrapped content */
-    @HostListener('keydown', ['$event'])
-    hostFocusChangeHandler(event: KeyboardEvent): void {
-        if (this.loading && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
-            this.fakeFocusElement.nativeElement.focus();
+    protected hostFocusChangeHandler(event: KeyboardEvent): void {
+        if (this.loading() && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
+            const element = this.fakeFocusElement();
+            if (element) {
+                element.nativeElement.focus();
+            }
         }
     }
 
     /** @hidden If busy container is navigated as "previous focusable element",
      * focus busy indicator to prevent from focusing wrapped content */
-    fakeElementFocusHandler(event: FocusEvent): void {
-        if (this.loading && event.relatedTarget !== this._elementRef.nativeElement) {
+    protected fakeElementFocusHandler(event: FocusEvent): void {
+        if (this.loading() && event.relatedTarget !== this._elementRef.nativeElement) {
             event.stopPropagation();
             this._elementRef.nativeElement.focus();
         }

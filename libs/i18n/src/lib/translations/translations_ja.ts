@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: '月選択',
         calendarYearsViewDescription: '年選択',
         calendarYearsRangeViewDescription: '年範囲選択',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: '稼働日',
+        nonWorkDayLabel: '非稼働日'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '複数値コンボボックス',
         selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'グループヘッダー'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '項目{itemNum}/{totalNum}件を表示中',
         leftNavigationBtnLabel: '前の項目へ',
         rightNavigationBtnLabel: '次の項目へ'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'ドラフト'
     },
     coreMessageStrip: {
-        dismissLabel: '無視',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: '閉じる',
+        announcementInfo: '情報メッセージストリップ',
+        announcementWarning: '警告メッセージストリップ',
+        announcementError: 'エラーメッセージストリップ',
+        announcementSuccess: '正常終了メッセージストリップ',
+        closable: 'クローズ可能'
     },
     coreMultiInput: {
         countListResultsSingular: '結果の一覧項目は1件です。',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'ナビゲーションパス'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'ツリー項目: {itemDetails}、{index}/{total}{selectedDescription}'
+        linkItemAriaLabel: 'ツリー項目: {itemDetails}、{selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'ほか{count}件'
@@ -379,7 +379,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',
-        searchLabel: '検索'
+        searchLabel: '検索',
+        backButtonLabel: '戻る'
     },
     platformSwitch: {
         ariaLabel: '入力を切り替えます。'
@@ -606,10 +607,10 @@ export default {
         menuButtonAriaLabel: 'メニューボタン'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: '下位項目の展開/圧縮',
+        moreButtonAriaLabel: '画面領域の制限のために非表示となっている追加のナビゲーション項目が表示されます',
+        overflowMenuAriaLabel: '追加のナビゲーション項目',
+        snappedPopoverRoleDescription: 'ナビゲーション一覧ツリー'
     },
     coreNotification: {
         groupHeaderTitle: '展開/圧縮',
@@ -620,7 +621,10 @@ export default {
         triggerLessLabel: '表示を減らす'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'セグメントボタングループ',
+        buttonRoleDescription: 'セグメントボタン'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

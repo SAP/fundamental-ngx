@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Hónapválasztó',
         calendarYearsViewDescription: 'Évválasztó',
         calendarYearsRangeViewDescription: 'Évtartomány-választó',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Munkanap',
+        nonWorkDayLabel: 'Munkaszüneti nap'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Többértékes kombinált lista',
         selectAllLabel: 'Összes kiválasztása ({selectedItems} / {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Csoportfejléc'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '{itemNum} / {totalNum}. tétel megjelenítve',
         leftNavigationBtnLabel: 'Ugrás az előző elemre',
         rightNavigationBtnLabel: 'Ugrás a következő elemre'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Vázlat'
     },
     coreMessageStrip: {
-        dismissLabel: 'Elvetés',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Bezárás',
+        announcementInfo: 'Információsüzenet-sor',
+        announcementWarning: 'Figyelmeztető üzenetek sora',
+        announcementError: 'Hibaüzenetsor',
+        announcementSuccess: 'Sikerüzenetsor',
+        closable: 'Bezárható'
     },
     coreMultiInput: {
         countListResultsSingular: '1 listaelemet kapott eredményül.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Navigációs útvonal'
     },
     coreNestedList: {
-        linkItemAriaLabel: '{itemDetails} struktúraelem, indexszáma {index} a(z) {total}{selectedDescription} elemből'
+        linkItemAriaLabel: '{itemDetails} struktúraelem, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'További {count}'
@@ -379,7 +379,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Beállítások',
-        searchLabel: 'Keresés'
+        searchLabel: 'Keresés',
+        backButtonLabel: 'Vissza'
     },
     platformSwitch: {
         ariaLabel: 'Bemenetváltás'
@@ -606,10 +607,11 @@ export default {
         menuButtonAriaLabel: 'Menügomb'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'altételek kibontása/visszazárása',
+        moreButtonAriaLabel:
+            'Azokat a további navigációs elemeket jeleníti meg, amelyek a korlátozott képernyőterület miatt rejtettek',
+        overflowMenuAriaLabel: 'További navigációs elemek',
+        snappedPopoverRoleDescription: 'Navigációs lista struktúrája'
     },
     coreNotification: {
         groupHeaderTitle: 'Kibontás/visszazárás',
@@ -620,7 +622,10 @@ export default {
         triggerLessLabel: 'Kevesebb'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Szegmentált gombcsoport',
+        buttonRoleDescription: 'Szegmentált gomb'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

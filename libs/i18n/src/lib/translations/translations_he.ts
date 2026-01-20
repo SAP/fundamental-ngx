@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'בוחר חודש',
         calendarYearsViewDescription: 'בוחר שנה',
         calendarYearsRangeViewDescription: 'בוחר טווח שנים',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'יום עבודה',
+        nonWorkDayLabel: 'יום שאינו יום עבודה'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'תיבה משולבת עם ערכים מרובים',
         selectAllLabel: 'בחר הכול ({selectedItems} מתוך {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'כותרת קבוצה'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'פריט {itemNum} מתוך {totalNum} מוצג',
         leftNavigationBtnLabel: 'עבור לפריט הקודם',
         rightNavigationBtnLabel: 'עבור לפריט הבא'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'טיוטה'
     },
     coreMessageStrip: {
-        dismissLabel: 'בטל',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'סגור',
+        announcementInfo: 'רצועת הודעות מידע',
+        announcementWarning: 'רצועת הודעות אזהרה',
+        announcementError: 'רצועת הודעות שגיאה',
+        announcementSuccess: 'רצועת הודעות הצלחה',
+        closable: 'ניתן לסגירה'
     },
     coreMultiInput: {
         countListResultsSingular: 'פריט רשימת תוצאות אחד.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'נתיב ניווט'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'פריט עץ {itemDetails}, {index} מתוך {total}{selectedDescription}'
+        linkItemAriaLabel: 'פריט עץ {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} נוספים'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'הגדרות',
-        searchLabel: 'חפש'
+        searchLabel: 'חפש',
+        backButtonLabel: 'חזרה'
     },
     platformSwitch: {
         ariaLabel: 'החלף קלט'
@@ -604,10 +605,10 @@ export default {
         menuButtonAriaLabel: 'לחצן תפריט'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'הרחב/צמצם פריטי משנה',
+        moreButtonAriaLabel: 'מציג פריטי ניווט נוספים שהוסתרו עקב שטח מסך מוגבל',
+        overflowMenuAriaLabel: 'פריטי ניווט נוספים',
+        snappedPopoverRoleDescription: 'עץ של רשימת ניווט'
     },
     coreNotification: {
         groupHeaderTitle: 'הרחבה/כיווץ',
@@ -618,7 +619,10 @@ export default {
         triggerLessLabel: 'פחות'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'קבוצת סרגלי לחצנים',
+        buttonRoleDescription: 'סרגל לחצנים'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

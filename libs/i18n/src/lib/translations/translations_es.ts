@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Selector de mes',
         calendarYearsViewDescription: 'Selector de año',
         calendarYearsRangeViewDescription: 'Selector de rango de años',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Día laborable',
+        nonWorkDayLabel: 'Día no laborable'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Cuadro combinado de varios valores',
         selectAllLabel: 'Seleccionar todos ({selectedItems} de {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Cabecera de grupo'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Elemento {itemNum} de {totalNum} visualizado',
         leftNavigationBtnLabel: 'Ir a elemento anterior',
         rightNavigationBtnLabel: 'Ir a siguiente elemento'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Borrador'
     },
     coreMessageStrip: {
-        dismissLabel: 'Descartar',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Cerrar',
+        announcementInfo: 'Línea de mensajes informativos',
+        announcementWarning: 'Línea de mensajes de advertencia',
+        announcementError: 'Línea de mensajes de error',
+        announcementSuccess: 'Línea de mensajes de confirmación',
+        closable: 'Se puede cerrar'
     },
     coreMultiInput: {
         countListResultsSingular: '1 elemento de la lista de resultados',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Ruta de navegación'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Elemento de árbol {itemDetails}, {index} de {total}{selectedDescription}'
+        linkItemAriaLabel: 'Elemento de árbol {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} más'
@@ -120,7 +120,7 @@ export default {
         cancel: 'Cancelar',
         search: 'Buscar',
         assistiveTools: 'Herramientas de asistencia',
-        backButtonLabel: 'Atrás',
+        backButtonLabel: 'Volver',
         navigationButtonLabel: 'Navegación'
     },
     coreSlider: {
@@ -302,12 +302,12 @@ export default {
         searchAdvancedSearchLabel: 'Filtros',
         searchShowAdvancedSearchLabel: 'Mostrar filtros',
         searchHideAdvancedSearchLabel: 'Ocultar filtros',
-        searchShowAllAdvancedSearchLabel: 'Visualizar todos los filtros',
+        searchShowAllAdvancedSearchLabel: 'Mostrar todos los filtros',
         searchHideAllAdvancedSearchLabel: 'Ocultar todos los filtros',
         selectTabDisplayCountLabel: 'Elementos ({count})',
         selectTabMoreBtnLabel: 'Más',
         selectTabCountHiddenA11yLabel: 'contiene {rowCount} filas y {colCount} columnas',
-        selectMobileTabBackBtnTitle: 'Atrás',
+        selectMobileTabBackBtnTitle: 'Volver',
         selectMobileTabBtnOpenDialogLabel: 'Abrir cuadro de diálogo',
         selectMobileTabTitle: 'Pestaña {title}',
         selectMobileConditionEmpty: 'Vacía',
@@ -380,7 +380,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Configuración',
-        searchLabel: 'Buscar'
+        searchLabel: 'Buscar',
+        backButtonLabel: 'Volver'
     },
     platformSwitch: {
         ariaLabel: 'Entrada de Switch'
@@ -607,10 +608,11 @@ export default {
         menuButtonAriaLabel: 'Botón Menú'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'desplegar/ocultar subposiciones',
+        moreButtonAriaLabel:
+            'Muestra elementos de navegación adicionales que están ocultos por el espacio limitado de la pantalla',
+        overflowMenuAriaLabel: 'Elementos de navegación adicionales',
+        snappedPopoverRoleDescription: 'Árbol de la lista de navegación'
     },
     coreNotification: {
         groupHeaderTitle: 'Expandir/Contraer',
@@ -621,7 +623,10 @@ export default {
         triggerLessLabel: 'Menos'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Grupo de botones segmentados',
+        buttonRoleDescription: 'Botón segmentado'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

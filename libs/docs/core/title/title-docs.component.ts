@@ -6,7 +6,8 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
 import {
     TitleElisionExampleComponent,
@@ -31,7 +32,8 @@ const titleWrappingHtml = 'title-wrapping-example.component.html';
         CodeExampleComponent,
         TitleVisualExampleComponent,
         TitleElisionExampleComponent,
-        TitleWrappingExampleComponent
+        TitleWrappingExampleComponent,
+        SeparatorComponent
     ]
 })
 export class TitleDocsComponent {

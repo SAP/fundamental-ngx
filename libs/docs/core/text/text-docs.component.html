@@ -1,4 +1,5 @@
-<fd-docs-section-title id="text" componentName="text"> Text basic example </fd-docs-section-title>
+<fd-docs-section-title id="text" componentName="text">Basic Text</fd-docs-section-title>
+<description>Display text content with the text component.</description>
 <component-example>
     <fd-text-basic></fd-text-basic>
 </component-example>
@@ -6,15 +7,8 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="whitespaces" componentName="text"> Text whitespaces example </fd-docs-section-title>
-<component-example>
-    <fd-text-whitespaces></fd-text-whitespaces>
-</component-example>
-<code-example [exampleFiles]="textWhitespaces"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="max-lines" componentName="text"> Text Max lines example </fd-docs-section-title>
+<fd-docs-section-title id="max-lines" componentName="text">Line Clamping</fd-docs-section-title>
+<description>Limit the number of visible lines using the <code>maxLines</code> input.</description>
 <component-example>
     <fd-text-max-lines></fd-text-max-lines>
 </component-example>
@@ -22,22 +16,38 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="hyphenation" componentName="text"> Text Hyphenation example </fd-docs-section-title>
+<fd-docs-section-title id="expandable" componentName="text">Expandable Text</fd-docs-section-title>
 <description>
-    More info about hyphenation is available by this link
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens">MDN hyphens</a>
+    Add expand/collapse functionality with "more"/"less" links. Requires <code>maxLines</code> to be set. Use two-way
+    binding with <code>[(isCollapsed)]</code> to control or track the state.
+</description>
+<component-example>
+    <fd-text-expandable></fd-text-expandable>
+</component-example>
+<code-example [exampleFiles]="textExpandable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="whitespaces" componentName="text">Whitespace Preservation</fd-docs-section-title>
+<description>Preserve whitespace and line breaks using the <code>whitespaces</code> input.</description>
+<component-example>
+    <fd-text-whitespaces></fd-text-whitespaces>
+</component-example>
+<code-example [exampleFiles]="textWhitespaces"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="hyphenation" componentName="text">Hyphenation</fd-docs-section-title>
+<description>
+    Control word breaking with the <code>hyphenation</code> input. Supports <code>'none'</code>, <code>'manual'</code>,
+    and <code>'auto'</code>. Learn more at
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens" target="_blank" rel="noopener"
+        >MDN: CSS hyphens</a
+    >.
 </description>
 <component-example>
     <fd-text-hyphenation></fd-text-hyphenation>
 </component-example>
 <code-example [exampleFiles]="textHyphenation"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="expandable" componentName="text"> Text Expandable example </fd-docs-section-title>
-<component-example>
-    <fd-text-expandable></fd-text-expandable>
-</component-example>
-<code-example [exampleFiles]="textExpandable"></code-example>
 
 <separator></separator>

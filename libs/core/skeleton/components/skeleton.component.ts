@@ -1,110 +1,160 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    Input,
-    OnChanges,
-    SimpleChanges,
-    ViewEncapsulation
-} from '@angular/core';
-
-export type SkeletonType = 'rectangle' | 'circle' | 'text';
+/**
+ * Type of skeleton visualization.
+ * - `'rectangle'` - Rectangular skeleton with rounded corners
+ * - `'circle'` - Circular skeleton
+ * - `'text'` - Multi-line text skeleton
+ * - `null` - No predefined shape, allows custom SVG projection
+ */
+export type SkeletonType = 'rectangle' | 'circle' | 'text' | null;
 
 let skeletonUniqueId = 0;
 
+/**
+ * Skeleton component for displaying loading placeholders with animated pulse effect.
+ */
 @Component({
     selector: 'fd-skeleton',
     templateUrl: './skeleton.component.html',
     styleUrl: './skeleton.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fd-skeleton',
+        '[class.fd-skeleton--animated]': 'animated()',
+        '[style.width]': 'computedWidth()',
+        '[style.height]': 'computedHeight()'
+    },
     imports: []
 })
-export class SkeletonComponent implements OnChanges {
-    /** Whether the skeleton is animated. True by default. */
-    @Input()
-    @HostBinding('class.fd-skeleton--animated')
-    animated = true;
-
-    /** Type of the skeleton.
-     * Can be one of the following: 'rectangle' | 'circle' | 'text'.
-     * Default is not set, allowing to project any SVG elements to define own complex loading template.
+export class SkeletonComponent {
+    /**
+     * Whether the skeleton displays animated pulse effect.
+     *
+     * @type {boolean}
+     * @default true
      */
-    @Input()
-    type: SkeletonType;
+    readonly animated = input(true);
 
-    /** Number of lines when type is set to `text`. Default is 3. Last one is 60% in width if more than 1 line. */
-    @Input()
-    set textLines(value: NumberInput) {
-        this._textLines = coerceNumberProperty(value);
-    }
-    get textLines(): number {
-        return this._textLines;
-    }
+    /**
+     * Type of the skeleton visualization.
+     *
+     * Available types:
+     * - `'rectangle'` - Rectangular skeleton with rounded corners
+     * - `'circle'` - Circular skeleton
+     * - `'text'` - Multi-line text skeleton
+     * - `null` - No predefined shape, allows custom SVG projection
+     *
+     * @default null
+     */
+    readonly type = input<SkeletonType>(null);
 
-    /** Width of skeleton */
-    @Input()
-    set width(value: string) {
-        this._width = value;
-    }
-    get width(): string {
-        return this._width;
-    }
+    /**
+     * Number of lines when type is `'text'`. Last line is 60% width if more than 1 line.
+     *
+     * Accepts numbers or coercible number values (e.g., `'3'` will be coerced to `3`).
+     *
+     * @type {number}
+     * @default 3
+     */
+    readonly textLines = input<number, NumberInput>(3, {
+        transform: coerceNumberProperty
+    });
 
-    /** Height of skeleton */
-    @Input()
-    set height(value: string) {
-        this._height = value;
-    }
-    get height(): string {
-        return this._height;
-    }
+    /**
+     * Width of skeleton.
+     *
+     * Accepts any valid CSS width value (e.g., `'100px'`, `'50%'`, `'10rem'`).
+     * Auto-calculated for text and circle types if not provided.
+     *
+     * @type {string | null}
+     * @default null
+     */
+    readonly width = input<string | null>(null);
 
-    /** @hidden */
-    @HostBinding('class.fd-skeleton')
-    readonly _skeletonClass = true;
+    /**
+     * Height of skeleton.
+     *
+     * Accepts any valid CSS height value (e.g., `'100px'`, `'50%'`, `'10rem'`).
+     * Auto-calculated for text and circle types if not provided.
+     *
+     * @type {string | null}
+     * @default null
+     */
+    readonly height = input<string | null>(null);
 
-    /** @hidden */
-    @HostBinding('style.width')
-    _width: string;
+    /**
+     * Vertical spacing between text lines in pixels.
+     * Used for positioning lines in SVG and calculating total height.
+     * @hidden
+     */
+    protected readonly LINE_SPACING = 20;
 
-    /** @hidden */
-    @HostBinding('style.height')
-    _height: string;
+    /**
+     * Computed dimensions (width and height) based on skeleton type.
+     * @hidden
+     */
+    protected readonly dimensions = computed(() => {
+        const currentType = this.type();
+        const currentWidth = this.width();
+        const currentHeight = this.height();
 
-    /** @hidden */
-    _id = `fd-skeleton-${skeletonUniqueId++}`;
-
-    /** @hidden */
-    private _textLines = 3;
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['type'] && this.type === 'text') {
-            if (!this.width) {
-                this.width = '100%';
-            }
-
-            if (!this.height) {
-                const textLines = this.textLines || 1;
-                this.height = textLines > 1 ? 20 * textLines + 'px' : '8px';
-            }
-
-            return;
+        if (currentType === 'text') {
+            const lines = Math.max(1, this.textLines());
+            return {
+                width: currentWidth ?? '100%',
+                height: currentHeight ?? (lines > 1 ? `${this.LINE_SPACING * lines}px` : '8px')
+            };
         }
 
-        if (changes['type'] && this.type === 'circle') {
-            if (!this.width && this.height) {
-                this.width = this.height;
-                return;
+        if (currentType === 'circle') {
+            // Make circle square by mirroring the provided dimension
+            if (!currentWidth && currentHeight) {
+                return { width: currentHeight, height: currentHeight };
             }
-
-            if (!this.height && this.width) {
-                this.height = this.width;
-                return;
+            if (!currentHeight && currentWidth) {
+                return { width: currentWidth, height: currentWidth };
             }
         }
-    }
+
+        // Default: pass through provided values
+        return {
+            width: currentWidth,
+            height: currentHeight
+        };
+    });
+
+    /**
+     * Computed width value from dimensions.
+     * @hidden
+     */
+    protected readonly computedWidth = computed(() => this.dimensions().width);
+
+    /**
+     * Computed height value from dimensions.
+     * @hidden
+     */
+    protected readonly computedHeight = computed(() => this.dimensions().height);
+
+    /**
+     * Unique ID for SVG mask element.
+     * @hidden
+     */
+    protected readonly svgMaskId = `fd-skeleton-${skeletonUniqueId++}`;
+
+    /**
+     * Computed array of line widths for text type.
+     * Last line is 60% width when there are multiple lines.
+     * @hidden
+     */
+    protected readonly textLineWidths = computed(() => {
+        const totalLines = this.textLines();
+        return Array.from({ length: totalLines }, (_, i) => {
+            const isLastLine = i + 1 === totalLines;
+            const hasMultipleLines = i > 0;
+            return isLastLine && hasMultipleLines ? '60%' : '100%';
+        });
+    });
 }

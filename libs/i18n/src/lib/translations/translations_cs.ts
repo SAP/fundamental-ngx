@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Výběr měsíce',
         calendarYearsViewDescription: 'Výběr roku',
         calendarYearsRangeViewDescription: 'Výběr rozsahu let',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Pracovní den',
+        nonWorkDayLabel: 'Nepracovní den'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Vícehodnotový výklopný seznam',
         selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Záhlaví skupiny'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Položka {itemNum} z {totalNum} zobrazena',
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
         rightNavigationBtnLabel: 'Přejít na další položku'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Koncept'
     },
     coreMessageStrip: {
-        dismissLabel: 'Zrušit',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Zavřít',
+        announcementInfo: 'Pruh informačních zpráv',
+        announcementWarning: 'Pruh varovných zpráv',
+        announcementError: 'Pruh chybových zpráv',
+        announcementSuccess: 'Pruh zpráv o úspěšném provedení',
+        closable: 'Lze zavřít'
     },
     coreMultiInput: {
         countListResultsSingular: '1 položka v seznamu výsledků.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Navigační cesta'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Položka stromu {itemDetails}, {index} z {total}{selectedDescription}'
+        linkItemAriaLabel: 'Položka stromu {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'další(ch) {count}'
@@ -379,7 +379,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavení',
-        searchLabel: 'Hledat'
+        searchLabel: 'Hledat',
+        backButtonLabel: 'Zpět'
     },
     platformSwitch: {
         ariaLabel: 'Přepnout zadání'
@@ -606,10 +607,10 @@ export default {
         menuButtonAriaLabel: 'Tlačítko menu'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'Rozbalit/sbalit podpoložky',
+        moreButtonAriaLabel: 'Zobrazí další navigační položky, které jsou kvůli omezenému prostoru na obrazovce skryté',
+        overflowMenuAriaLabel: 'Další navigační položky',
+        snappedPopoverRoleDescription: 'Strom navigačního seznamu'
     },
     coreNotification: {
         groupHeaderTitle: 'Rozbalit/sbalit',
@@ -620,7 +621,10 @@ export default {
         triggerLessLabel: 'Méně'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Skupina segmentovaných tlačítek',
+        buttonRoleDescription: 'Segmentované tlačítko'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

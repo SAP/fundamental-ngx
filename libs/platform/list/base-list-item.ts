@@ -18,7 +18,7 @@ import {
 
 import { ColorAccent, KeyUtil, Nullable, Size, merge } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
@@ -35,16 +35,16 @@ export class ListIconConfig {
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
-    glyph: IconComponent['glyph'];
+    glyph: string;
     /** user's custom classes */
-    class: IconComponent['class'] = '';
+    class: string;
     /**
      * The icon font
      * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
      */
-    font: IconComponent['font'] = 'SAP-icons';
+    font: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
     /** Aria-label for Icon. */
-    ariaLabel: IconComponent['ariaLabel'];
+    ariaLabel: Nullable<string>;
 }
 
 export class ListAvatarConfig {

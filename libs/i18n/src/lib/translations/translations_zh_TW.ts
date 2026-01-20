@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: '月份選擇器',
         calendarYearsViewDescription: '年份選擇器',
         calendarYearsRangeViewDescription: '年份範圍選擇器',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: '工作天',
+        nonWorkDayLabel: '非工作天'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: '多重值下拉式清單方塊',
         selectAllLabel: '全選 ({selectedItems}/{totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: '群組標題'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: '已顯示項目 {itemNum}/{totalNum}',
         leftNavigationBtnLabel: '移至先前項目',
         rightNavigationBtnLabel: '移至下一個項目'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: '草稿'
     },
     coreMessageStrip: {
-        dismissLabel: '忽略',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: '關閉',
+        announcementInfo: '資訊訊息列',
+        announcementWarning: '警告訊息列',
+        announcementError: '錯誤訊息列',
+        announcementSuccess: '成功訊息列',
+        closable: '可關閉'
     },
     coreMultiInput: {
         countListResultsSingular: '1 個結果清單項目。',
@@ -92,7 +92,7 @@ export default {
         navigationPath: '瀏覽路徑'
     },
     coreNestedList: {
-        linkItemAriaLabel: '樹狀項目 {itemDetails}、{index}/{total}{selectedDescription}'
+        linkItemAriaLabel: '樹狀項目 {itemDetails}、{selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '還有 {count} 個'
@@ -377,7 +377,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',
-        searchLabel: '搜尋'
+        searchLabel: '搜尋',
+        backButtonLabel: '返回'
     },
     platformSwitch: {
         ariaLabel: '切換輸入'
@@ -603,10 +604,10 @@ export default {
         menuButtonAriaLabel: '功能表按鈕'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: '展開/折疊子項目',
+        moreButtonAriaLabel: '顯示因受限的畫面空間而隱藏的其他瀏覽項目',
+        overflowMenuAriaLabel: '其他瀏覽項目',
+        snappedPopoverRoleDescription: '瀏覽清單樹狀結構'
     },
     coreNotification: {
         groupHeaderTitle: '展開/摺疊',
@@ -617,7 +618,10 @@ export default {
         triggerLessLabel: '較少'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: '分區按鈕群組',
+        buttonRoleDescription: '分區按鈕'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

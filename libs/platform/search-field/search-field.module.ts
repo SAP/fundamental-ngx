@@ -6,6 +6,10 @@ import { SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatches
 
 const components = [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe, ContentDensityModule];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]

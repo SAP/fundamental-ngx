@@ -16,6 +16,10 @@ const EXPORTABLE_COMPONENTS = [
     ComboboxSecondaryItemDirective
 ];
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [...EXPORTABLE_COMPONENTS],
     exports: [...EXPORTABLE_COMPONENTS]

@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, input } from '@angular/core';
 
 /**
  * The action bar description.
@@ -15,13 +15,11 @@ import { Directive, HostBinding, Input } from '@angular/core';
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-action-bar-description]',
     host: {
-        class: 'fd-action-bar__description'
-    },
-    standalone: true
+        class: 'fd-action-bar__description',
+        '[class.fd-action-bar__description--back]': 'withBackBtn()'
+    }
 })
 export class ActionBarDescriptionDirective {
     /** Whether the action bar also has a back button. */
-    @Input()
-    @HostBinding('class.fd-action-bar__description--back')
-    withBackBtn = false;
+    readonly withBackBtn = input(false);
 }

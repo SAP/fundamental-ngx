@@ -1,18 +1,27 @@
 <fd-docs-section-title id="component" componentName="skeleton">Component</fd-docs-section-title>
 
 <description>
-    <h4>Input properties</h4>
+    Skeleton component displays loading placeholders with animated pulse effect while content loads.
 
+    <h4>Inputs</h4>
     <ul>
-        <li><b>type</b> - specifies the shape of a skeleton, <code>'rectangle' | 'circle' | 'text'</code></li>
-
-        <li><b>textLines</b> - specifies the number of lines, default is 3</li>
-
-        <li><b>width</b> - specifies the width of the skeleton, string</li>
-
-        <li><b>height</b> - specifies the height of the skeleton, string</li>
-
-        <li><b>animation</b> - specifies whether the skeleton is animated, boolean, default is true</li>
+        <li>
+            <code>type</code> - Shape of skeleton: <code>'rectangle' | 'circle' | 'text' | null</code>. Set to
+            <code>null</code> to project custom SVG elements. Default: <code>null</code>
+        </li>
+        <li>
+            <code>textLines</code> - Number of lines for text type. Last line is 60% width if more than 1 line. Accepts
+            numbers or coercible values. Default: <code>3</code>
+        </li>
+        <li>
+            <code>width</code> - CSS width value (e.g., <code>'100px'</code>, <code>'50%'</code>). Auto-calculated for
+            text/circle types. Default: <code>null</code>
+        </li>
+        <li>
+            <code>height</code> - CSS height value (e.g., <code>'100px'</code>, <code>'50%'</code>). Auto-calculated for
+            text/circle types. Default: <code>null</code>
+        </li>
+        <li><code>animated</code> - Enable pulse animation effect. Default: <code>true</code></li>
     </ul>
 </description>
 
@@ -24,16 +33,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="complex" componentName="skeleton">Complex templates</fd-docs-section-title>
+<fd-docs-section-title id="complex" componentName="skeleton">Custom Templates</fd-docs-section-title>
 
 <description>
-    It's possible to define complex loading templates by yourself. You can project any SVG elements in Skeleton
-    component, colors and animation will be applied automatically.
-
-    <br /><br />
-
-    Besides this, we provide predefined loading templates for components that most likely would need it, please see
-    components docs.
+    Project custom SVG elements to create complex loading templates. Colors and animation apply automatically.
 </description>
 
 <component-example>

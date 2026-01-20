@@ -10,6 +10,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { NavigationListDataSourceDirective } from './directives/navigation-list-data-source.directive';
 import { NavigationListItemRefDirective } from './directives/navigation-list-item-ref.directive';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         NavigationComponent,

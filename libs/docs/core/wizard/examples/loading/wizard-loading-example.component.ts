@@ -12,7 +12,7 @@ import {
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { WizardModule, WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard';
 
 @Component({
@@ -24,7 +24,7 @@ import { WizardModule, WizardService, WizardStepComponent } from '@fundamental-n
     host: {
         class: 'fd-wizard-example'
     },
-    imports: [ButtonComponent, A11yModule, WizardModule, RepeatDirective, SkeletonModule, BarModule]
+    imports: [ButtonComponent, A11yModule, WizardModule, RepeatDirective, SkeletonComponent, BarModule]
 })
 export class WizardLoadingExampleComponent {
     /**

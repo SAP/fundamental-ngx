@@ -7,11 +7,9 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     imports: [TextComponent]
 })
 export class TextWhitespacesComponent {
-    text = `    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididuntut labore et
-dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat.
+    protected readonly text = `    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    This text has leading spaces and line breaks.
 
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum.`;
+    It also contains multiple paragraphs to demonstrate
+    whitespace preservation behavior.`;
 }

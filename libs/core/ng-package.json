@@ -2,7 +2,7 @@
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../dist/libs/core",
     "deleteDestPath": true,
-    "assets": ["./assets/**/*", "./styles/*.*"],
+    "assets": ["./assets/**/*", "./styles/*.*", "./schematics/**/*.json"],
     "lib": {
         "entryFile": "./index.ts"
     },

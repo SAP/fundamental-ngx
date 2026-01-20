@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Maandenkiezer',
         calendarYearsViewDescription: 'Jaarkiezer',
         calendarYearsRangeViewDescription: 'Jarenbereikkiezer',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Werkdag',
+        nonWorkDayLabel: 'Geen werkdag'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Keuzelijst met invoerveld met meerdere waarden',
         selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Groepskop'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Item {itemNum} van {totalNum} weergegeven',
         leftNavigationBtnLabel: 'Naar vorige item',
         rightNavigationBtnLabel: 'Naar volgende item'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Concept'
     },
     coreMessageStrip: {
-        dismissLabel: 'Afwijzen',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Sluiten',
+        announcementInfo: 'Statusbalk informatiemelding',
+        announcementWarning: 'Statusbalk waarschuwingsmelding',
+        announcementError: 'Statusbalk foutmelding',
+        announcementSuccess: 'Statusbalk succesmelding',
+        closable: 'Sluitbaar'
     },
     coreMultiInput: {
         countListResultsSingular: '1 item in resultatenlijst',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Navigatiepad'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Structuuritem {itemDetails}, {index} van {total}{selectedDescription}'
+        linkItemAriaLabel: 'Structuuritem {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'nog {count}'
@@ -380,7 +380,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Instellingen',
-        searchLabel: 'Zoeken'
+        searchLabel: 'Zoeken',
+        backButtonLabel: 'Terug'
     },
     platformSwitch: {
         ariaLabel: 'Schakelen tussen invoer'
@@ -607,10 +608,11 @@ export default {
         menuButtonAriaLabel: 'Knop Menu'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'Subelementen weergeven/verbergen',
+        moreButtonAriaLabel:
+            'Geeft aanvullende navigatie-elementen weer die zijn verborgen vanwege beperkte schermruimte',
+        overflowMenuAriaLabel: 'Aanvullende navigatie-elementen',
+        snappedPopoverRoleDescription: 'Structuur navigatielijst'
     },
     coreNotification: {
         groupHeaderTitle: 'Uitvouwen/samenvouwen',
@@ -621,7 +623,10 @@ export default {
         triggerLessLabel: 'Minder'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Groep gesegmenteerde knoppen',
+        buttonRoleDescription: 'Gesegmenteerde knop'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

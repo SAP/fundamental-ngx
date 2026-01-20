@@ -32,6 +32,10 @@ import {
  * * Plain PlatformFormGeneratorModule with default configuration
  * * With `withConfig()` method which allows passing custom default configuration.
  */
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         FormGeneratorComponent,

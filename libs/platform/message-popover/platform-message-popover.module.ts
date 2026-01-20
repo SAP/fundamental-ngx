@@ -6,6 +6,10 @@ import { FDP_MESSAGE_POPOVER_CONFIG, FDP_MESSAGE_POPOVER_DEFAULT_CONFIG, Message
 import { MessagePopoverFormItemDirective } from './directives/message-popover-form-item.directive';
 import { MessagePopoverComponent } from './message-popover.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         MessagePopoverComponent,

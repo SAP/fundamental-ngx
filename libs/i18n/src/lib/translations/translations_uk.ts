@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Вибір місяця',
         calendarYearsViewDescription: 'Вибір року',
         calendarYearsRangeViewDescription: 'Вибір діапазону років',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Робочий день',
+        nonWorkDayLabel: 'Неробочий день'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Багатозначне поле зі списком',
         selectAllLabel: 'Вибрати всі ({selectedItems} з {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Заголовок групи'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Відображено елемент {itemNum} з {totalNum}',
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
         rightNavigationBtnLabel: 'Перейти до наступного елемента'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Чернетка'
     },
     coreMessageStrip: {
-        dismissLabel: 'Відхилити',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Закрити',
+        announcementInfo: 'Рядок інформаційних повідомлень',
+        announcementWarning: 'Рядок попереджувальних повідомлень',
+        announcementError: 'Рядок повідомлень про помилки',
+        announcementSuccess: 'Рядок повідомлень про успішне виконання',
+        closable: 'З можливістю закриття'
     },
     coreMultiInput: {
         countListResultsSingular: '1 елемент списку результатів.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Шлях навігації'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Елемент дерева {itemDetails}, {index} з {total}{selectedDescription}'
+        linkItemAriaLabel: 'Елемент дерева {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Ще {count}'
@@ -186,7 +186,7 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Введення для селектора часу',
-        timePickerButtonLabel: 'Відкрити комплектувальник'
+        timePickerButtonLabel: 'Відкрити засіб вибору'
     },
     coreToken: {
         deleteButtonLabel: 'Може бути видалено',
@@ -379,7 +379,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Налаштування',
-        searchLabel: 'Пошук'
+        searchLabel: 'Пошук',
+        backButtonLabel: 'Назад'
     },
     platformSwitch: {
         ariaLabel: 'Введення перемикача'
@@ -607,10 +608,10 @@ export default {
         menuButtonAriaLabel: 'Кнопка меню'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'розгорнути/згорнути підпозиції',
+        moreButtonAriaLabel: 'Відображає додаткові елементи навігації, які приховані через обмежений простір екрана',
+        overflowMenuAriaLabel: 'Додаткові елементи навігації',
+        snappedPopoverRoleDescription: 'Дерево навігаційного списку'
     },
     coreNotification: {
         groupHeaderTitle: 'Розгорнути/згорнути',
@@ -621,7 +622,10 @@ export default {
         triggerLessLabel: 'Менше'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Група сегментованих кнопок',
+        buttonRoleDescription: 'Сегментована кнопка'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

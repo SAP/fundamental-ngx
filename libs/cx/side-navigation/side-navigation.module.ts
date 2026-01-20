@@ -7,6 +7,10 @@ import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationComponent } from './side-navigation.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         ButtonComponent,

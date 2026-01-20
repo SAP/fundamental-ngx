@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Månedsvelger',
         calendarYearsViewDescription: 'Velger av år',
         calendarYearsRangeViewDescription: 'Velger av årsintervall',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Arbeidsdag',
+        nonWorkDayLabel: 'Ikke-arbeidsdag'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kombinasjonsboks for flere verdier',
         selectAllLabel: 'Merk alle ({selectedItems} av {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Gruppeoverskrift'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Element {itemNum} av {totalNum} vises',
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til neste element'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Utkast'
     },
     coreMessageStrip: {
-        dismissLabel: 'Avvis',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Lukk',
+        announcementInfo: 'Informasjonsmeldingslinje',
+        announcementWarning: 'Advarselsmeldingslinje',
+        announcementError: 'Feilmeldingslinje',
+        announcementSuccess: 'Bekreftelsesmeldingslinje',
+        closable: 'Kan lukkes'
     },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlisteelement.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Navigeringsbane'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Treelement {itemDetails}, {index} av {total}{selectedDescription}'
+        linkItemAriaLabel: 'Treelement {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} mer'
@@ -380,7 +380,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Innstillinger',
-        searchLabel: 'Søk'
+        searchLabel: 'Søk',
+        backButtonLabel: 'Tilbake'
     },
     platformSwitch: {
         ariaLabel: 'Bytt inndata'
@@ -607,10 +608,11 @@ export default {
         menuButtonAriaLabel: 'Menyknapp'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'Utvid/komprimer underelementer',
+        moreButtonAriaLabel:
+            'Viser ekstra navigeringselementer som er skjult på grunn av begrenset plass på skjermbildet',
+        overflowMenuAriaLabel: 'Flere navigeringselementer',
+        snappedPopoverRoleDescription: 'Navigeringsliste: Tre'
     },
     coreNotification: {
         groupHeaderTitle: 'Utvid/skjul',
@@ -621,7 +623,10 @@ export default {
         triggerLessLabel: 'Mindre'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Segmenteringsknapp-gruppe',
+        buttonRoleDescription: 'Segmenteringsknapp'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

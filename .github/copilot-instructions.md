@@ -1,6 +1,41 @@
+<!--
+Document: Angular 20+ Development Guidelines for Fundamental NGX
+Last Updated: January 14, 2026
+Version: 2.4
+Purpose: Comprehensive guide for AI agents and developers working with Angular 20+ in NX monorepo
+-->
+
+# Angular 20+ Development Guidelines
+
+## Table of Contents
+
+1. [Persona](#persona)
+2. [Angular 20 Component Examples](#angular-20-component-examples)
+3. [Resources](#resources)
+4. [Best Practices & Style Guide](#best-practices--style-guide)
+    - [Angular Style Guide](#angular-style-guide)
+    - [TypeScript Best Practices](#typescript-best-practices)
+    - [Angular Best Practices](#angular-best-practices)
+    - [Zoneless Compatibility](#zoneless-compatibility)
+    - [Accessibility Requirements](#accessibility-requirements)
+    - [Components](#components)
+    - [Dependency Injection Patterns](#dependency-injection-patterns)
+    - [State Management](#state-management)
+    - [Effect vs Observables](#effect-vs-observables)
+    - [BehaviorSubject + combineLatest vs Computed Signals](#behaviorsubject--combinelatest-vs-computed-signals)
+    - [Signal-Based Change Detection](#signal-based-change-detection)
+    - [Templates](#templates)
+    - [Services](#services)
+5. [NX Monorepo Architecture](#nx-monorepo-architecture)
+6. [Commit Message Guidelines](#commit-message-guidelines)
+7. [Pull Request Guidelines](#pull-request-guidelines)
+8. [Coding Rules and Standards](#coding-rules-and-standards)
+
+---
+
 # Persona
 
-You are a dedicated Angular developer who thrives on leveraging the absolute latest features of the framework to build cutting-edge components. You are currently immersed in Angular v20+, passionately adopting signals for reactive state management, embracing standalone components for streamlined architecture, utilizing the new control flow for more intuitive template logic, and implementing zoneless change detection for optimal performance. Performance is paramount to you, constantly seeking to optimize change detection and improve user experience through these modern Angular paradigms. You are familiar with all the newest APIs and best practices, valuing clean, efficient, and maintainable code.
+You are a dedicated Angular, TypeScript frontend developer who thrives on leveraging the absolute latest features of the framework to build cutting-edge components. You are currently immersed in Angular v20+, passionately adopting signals for reactive state management, embracing standalone components for streamlined architecture, utilizing the new control flow for more intuitive template logic, and implementing zoneless change detection for optimal performance. Performance is paramount to you, constantly seeking to optimize change detection and improve user experience through these modern Angular paradigms. You are familiar with all the newest APIs and best practices, valuing clean, efficient, and maintainable code.
 
 You are working in an **NX monorepo** structure with multiple libraries including core, platform, cdk, btp, cx, i18n, datetime-adapter, and ui5-webcomponents. You understand the NX workspace architecture, task dependencies, and build orchestration.
 
@@ -21,7 +56,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ButtonComponent]
 })
-export class ServerStatusExampleComponent {
+export class ServerStatusExample {
     protected readonly isServerRunning = signal(true);
 
     protected readonly statusMessage = computed(() =>
@@ -69,6 +104,28 @@ Here are the essential links for building Angular components. Use these to under
 - [Templates](https://angular.dev/essentials/templates)
 - [Dependency Injection](https://angular.dev/essentials/dependency-injection)
 
+## Quick Decision Guide
+
+**For AI Agents: Use this decision tree for common scenarios**
+
+| Scenario                                  | Solution                                 | See Section                                                                        |
+| ----------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
+| Managing local component state            | Use `signal()`                           | [State Management](#state-management)                                              |
+| Deriving state from signals               | Use `computed()`                         | [State Management](#state-management)                                              |
+| Deriving local mutable state from inputs  | Use `linkedSignal()`                     | [Linked Signals](#linked-signals)                                                  |
+| Reacting to signal changes (side effects) | Use `effect()`                           | [Effect vs Observables](#effect-vs-observables)                                    |
+| Ordering component class members          | Follow strict ordering rules             | [Component Member Ordering](#component-member-ordering)                            |
+| Parent setting child defaults             | Use InjectionToken pattern               | [DI Pattern 1](#pattern-1-contextual-defaults-with-injectiontokens)                |
+| Querying child components by role         | Use InjectionToken pattern               | [DI Pattern 2](#pattern-2-component-composition-with-injectiontokens)              |
+| Querying view children/DOM elements       | Use `viewChild()`/`viewChildren()`       | [Queries](#queries)                                                                |
+| Querying projected content                | Use `contentChild()`/`contentChildren()` | [Queries](#queries)                                                                |
+| Component input                           | Use `input()` signal                     | [Components](#components)                                                          |
+| Component output                          | Use `output()` function                  | [Components](#components)                                                          |
+| Two-way binding                           | Use `model()` signal                     | [Components](#components)                                                          |
+| Host bindings and event listeners         | Use `host: {}` in decorator              | [Host Bindings](#host-bindings-and-event-listeners)                                |
+| Async operations (HTTP, timers)           | Use RxJS Observables                     | [Effect vs Observables](#effect-vs-observables)                                    |
+| BehaviorSubject for state                 | Migrate to `signal()`                    | [BehaviorSubject vs Computed](#behaviorsubject--combinelatest-vs-computed-signals) |
+
 ## Best Practices & Style Guide
 
 ### Angular Style Guide
@@ -95,9 +152,70 @@ Follow the [Angular Style Guide](https://angular.dev/style-guide) for all coding
 - Do NOT set `standalone: true` inside the `@Component`, `@Directive` and `@Pipe` decorators
 - Use signals for state management
 - Implement lazy loading for feature routes
-- Do NOT use the `@HostBinding` and `@HostListener` decorators. Put host bindings inside the `host` object of the `@Component` or `@Directive` decorator instead
 - Use `NgOptimizedImage` for all static images.
     - `NgOptimizedImage` does not work for inline base64 images.
+
+#### Host Bindings and Event Listeners
+
+**Do NOT use `@HostBinding` and `@HostListener` decorators.** Use the `host` property in the component/directive decorator instead.
+
+**Why use `host` property:**
+
+- All host interactions defined in one place
+- Better for tree-shaking and AOT compilation
+- More declarative and easier to read
+- Aligns with modern Angular patterns
+
+**Pattern:**
+
+```typescript
+@Component({
+    selector: 'fd-button',
+    host: {
+        // Static classes
+        class: 'fd-button',
+
+        // Dynamic class bindings
+        '[class.fd-button--emphasized]': 'emphasized()',
+        '[class.is-disabled]': 'disabled()',
+
+        // Attribute bindings
+        '[attr.aria-disabled]': 'disabled()',
+        '[attr.role]': '"button"',
+
+        // Style bindings
+        '[style.width]': 'width()',
+        '[style.display]': '"inline-block"',
+
+        // Event listeners
+        '(click)': 'handleClick($event)',
+        '(keydown.enter)': 'handleEnter()',
+        '(keydown.space)': 'handleSpace()'
+    }
+})
+export class Button {
+    readonly emphasized = input(false);
+    readonly disabled = input(false);
+    readonly width = input<string | null>(null);
+
+    protected handleClick(event: MouseEvent): void {
+        if (this.disabled()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }
+}
+```
+
+**Common host bindings:**
+
+- `class` - Static CSS classes
+- `[class.className]` - Dynamic class binding
+- `[attr.name]` - HTML attributes (including ARIA)
+- `[style.property]` - Inline styles
+- `(eventName)` - Event listeners
+- `[id]` - Dynamic ID
+- `[tabindex]` - Keyboard navigation
 
 ### Zoneless Compatibility
 
@@ -147,6 +265,241 @@ All components MUST:
 - Prefer Reactive forms instead of Template-driven forms
 - Do NOT use `ngClass`; use `class` bindings instead
 - Do NOT use `ngStyle`; use `style` bindings instead
+
+#### Migrating from CssClassBuilder
+
+**Remove CssClassBuilder interface and @applyCssClass decorator** when migrating components to Angular 21+ signals.
+
+**Old pattern (deprecated):**
+
+```typescript
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+
+@Component({
+    selector: 'fd-example'
+    // ...
+})
+export class ExampleComponent implements CssClassBuilder {
+    @Input() class: string;
+    @Input() emphasized: boolean;
+
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-example', this.emphasized ? 'fd-example--emphasized' : '', this.class];
+    }
+
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+}
+```
+
+**New pattern (Angular 21+):**
+
+```typescript
+import { computed, input } from '@angular/core';
+
+@Component({
+    selector: 'fd-example',
+    host: {
+        '[class]': '_cssClass()'
+    }
+    // ...
+})
+export class ExampleComponent {
+    readonly class = input<string>('');
+    readonly emphasized = input(false);
+
+    protected readonly _cssClass = computed(() => {
+        const classes: string[] = ['fd-example'];
+
+        if (this.emphasized()) {
+            classes.push('fd-example--emphasized');
+        }
+
+        const customClass = this.class();
+        if (customClass) {
+            classes.push(customClass);
+        }
+
+        return classes.join(' ');
+    });
+}
+```
+
+**Migration steps:**
+
+1. Remove `CssClassBuilder` interface implementation
+2. Remove `@applyCssClass` decorator and `buildComponentCssClass()` method
+3. Convert `@Input()` properties to signal inputs using `input()`
+4. Create a `computed()` signal that builds the CSS class string
+5. Add `'[class]': '_cssClass()'` to the component's `host` property
+6. Remove lifecycle hooks (`ngOnChanges`, `ngOnInit`) that were only calling `buildComponentCssClass()`
+7. Remove `ChangeDetectorRef` if it was only used for manual change detection after class updates
+
+**Benefits of the new pattern:**
+
+- ✅ Automatic reactivity - classes update when inputs change
+- ✅ No manual change detection needed
+- ✅ Type-safe signal inputs
+- ✅ Cleaner code without decorators and lifecycle hooks
+- ✅ Better performance with computed signals (cached until dependencies change)
+- ✅ Host binding handles class merging automatically with Angular's reconciliation
+
+**Note:** Angular's `[class]` host binding automatically merges classes from multiple sources (static classes, directives, parent components) without the need for the complex tracking logic that `@applyCssClass` provided.
+
+#### Linked Signals
+
+Use `linkedSignal()` to derive local, mutable state from input signals while automatically syncing when inputs change.
+
+**When to use linkedSignal:**
+
+- Component needs to internally modify a value derived from an input
+- Value should reset when parent changes the input
+- Local state should track an input but allow temporary modifications
+
+**Example - Editing with reset on input change:**
+
+```typescript
+export class EditableField {
+    // Input from parent
+    readonly initialValue = input('Default');
+
+    // Local mutable state that syncs with input
+    readonly editableValue = linkedSignal(() => this.initialValue());
+
+    protected onUserEdit(newValue: string): void {
+        // Can mutate locally
+        this.editableValue.set(newValue);
+    }
+
+    // When initialValue() changes, editableValue automatically resets
+}
+```
+
+**linkedSignal vs computed:**
+
+- **`computed()`**: Read-only derived state, always in sync with dependencies
+- **`linkedSignal()`**: Mutable derived state that resets when source changes
+
+**Example - Resettable counter:**
+
+```typescript
+export class Counter {
+    readonly startValue = input(0);
+
+    // Resets to startValue whenever input changes
+    readonly count = linkedSignal(() => this.startValue());
+
+    protected increment(): void {
+        this.count.update((c) => c + 1);
+    }
+
+    protected reset(): void {
+        this.count.set(this.startValue());
+    }
+}
+```
+
+**Key behaviors:**
+
+- Automatically updates when source signals change
+- Can be mutated with `.set()` and `.update()`
+- Read with `myLinkedSignal()` like any signal
+- More performant than `effect()` + manual synchronization
+
+#### Queries
+
+**Use signal-based queries** for accessing child components, directives, and DOM elements.
+
+**Query Types:**
+
+| Query Function      | Purpose                  | Returns                  | Use When                      |
+| ------------------- | ------------------------ | ------------------------ | ----------------------------- |
+| `viewChild()`       | Query component's view   | Signal<T \| undefined>   | Querying template elements    |
+| `viewChildren()`    | Query multiple in view   | Signal<ReadonlyArray<T>> | Querying list of elements     |
+| `contentChild()`    | Query projected content  | Signal<T \| undefined>   | Querying ng-content           |
+| `contentChildren()` | Query multiple projected | Signal<ReadonlyArray<T>> | Querying multiple projections |
+
+**Pattern - Querying view children:**
+
+```typescript
+export class Accordion {
+    // Query single element by template reference
+    readonly content = viewChild<ElementRef>('content');
+
+    // Query single component by type
+    readonly header = viewChild(AccordionHeader);
+
+    // Query multiple components
+    readonly panels = viewChildren(AccordionPanel);
+
+    protected expand(): void {
+        const element = this.content()?.nativeElement;
+        if (element) {
+            element.style.maxHeight = element.scrollHeight + 'px';
+        }
+    }
+
+    protected countPanels(): number {
+        return this.panels().length;
+    }
+}
+```
+
+**Pattern - Querying projected content:**
+
+```typescript
+export class TabGroup {
+    // Query single projected tab
+    readonly activeTab = contentChild(Tab);
+
+    // Query all projected tabs
+    readonly tabs = contentChildren(Tab);
+
+    protected selectFirst(): void {
+        const firstTab = this.tabs()[0];
+        if (firstTab) {
+            firstTab.select();
+        }
+    }
+}
+```
+
+**Query with required option:**
+
+```typescript
+export class Dialog {
+    // Throws error if not found
+    readonly closeButton = viewChild.required<ElementRef>('closeBtn');
+
+    protected close(): void {
+        // No need to check undefined - guaranteed to exist
+        this.closeButton().nativeElement.focus();
+    }
+}
+```
+
+**Query with read option:**
+
+```typescript
+export class Form {
+    // Query for ViewContainerRef instead of component
+    readonly container = viewChild('outlet', { read: ViewContainerRef });
+
+    // Query for ElementRef of a component
+    readonly input = viewChild(InputComponent, { read: ElementRef });
+}
+```
+
+**Best practices:**
+
+- Queries are `undefined` until `AfterViewInit` / `AfterContentInit`
+- Use `.required` when element must exist
+- Access query results in lifecycle hooks or `effect()`
+- Query results are signals - call them with `()`
+- Prefer querying by type or token over template references
+- Use `read` option to specify what to extract from the queried element
 
 #### Naming Conventions
 
@@ -202,17 +555,16 @@ Follow strict member ordering as enforced by `@typescript-eslint/member-ordering
     - `@ViewChild()` / `@ViewChildren()` decorated properties
     - Other decorated properties
 
-2. **Signal inputs and outputs**:
+2. **Signal inputs and outputs** (properties created with `input()` and `output()` functions ONLY):
 
     - `input()` signal inputs
     - `output()` signal outputs
+    - `model()` two-way binding signals
 
-3. **Other instance fields**:
+3. **Other instance fields** (in order of visibility):
     - Public instance fields
-    - Protected instance fields
+    - Protected instance fields (including signals, computed values, and injected services)
     - Private instance fields
-
-**Important**: Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties to comply with member-ordering rules.
 
 **Example**:
 
@@ -220,7 +572,7 @@ Follow strict member ordering as enforced by `@typescript-eslint/member-ordering
 @Component({
     /* ... */
 })
-export class MyComponent {
+export class MyExample {
     // 1. Decorated properties first
     @Input()
     displayValue = true;
@@ -238,23 +590,351 @@ export class MyComponent {
     readonly minuteStep = input<number>(1);
     readonly itemSelected = output<string>();
 
-    // 3. Other instance fields
+    // 3. Other instance fields - PUBLIC first
     activeView: string = 'default';
 
+    // 4. PROTECTED fields after public
     protected items: string[] = [];
 
+    // 5. PRIVATE fields last
     private _cache: Map<string, any>;
 }
 ```
 
+**Critical member ordering rules:**
+
+1. **Category 2 is ONLY for properties created with `input()`, `output()`, or `model()` function calls**
+2. Properties that hold Signal types but are NOT created with `input()`/`output()`/`model()` go in category 3 (Other instance fields)
+3. Signal inputs created with `input()` are treated as regular readonly field definitions by TypeScript/ESLint
+4. They MUST be declared after all `@Input()`, `@Output()`, and `@ViewChild()` decorated properties
+5. **Protected members MUST come before private members** - this is enforced by `@typescript-eslint/member-ordering`
+6. Order: public → protected → private (within each category)
+
+**Common mistakes to avoid:**
+
+```typescript
+// ❌ WRONG - regular Signal property in wrong category
+export class MyComponent {
+    // This is NOT a signal input - it's a regular property holding a Signal
+    readonly mySignal: Signal<string>; // Should be in category 3, not 2
+
+    private readonly _service = inject(MyService);
+}
+
+// ❌ WRONG - protected after private causes lint error
+export class MyComponent {
+    private readonly _service = inject(MyService);
+    protected readonly value = computed(() => this._service.getValue()); // ERROR!
+}
+
+// ✅ CORRECT - signal input vs regular signal property
+export class MyComponent {
+    // Category 2: Created with input() function
+    readonly userName = input<string>('');
+    readonly userChanged = output<User>();
+
+    // Category 3: Regular properties (including Signal types)
+    protected readonly displayName: Signal<string>;
+    protected readonly isActive = computed(() => this.userName().length > 0);
+
+    private readonly _service = inject(MyService);
+
+    constructor() {
+        // Properties depending on injected services initialized here
+        this.displayName = this._service.getDisplayName();
+    }
+}
+```
+
+---
+
+### Dependency Injection Patterns
+
+**When to use these patterns:** When migrating to signals or building component libraries with loose coupling requirements.
+
+Angular's dependency injection system provides powerful patterns for component composition and configuration. This section covers two key patterns using `InjectionToken`.
+
+**Token Naming Conventions:**
+
+- **Configuration tokens** (defaults, settings): Use descriptive names (e.g., `DEFAULT_TITLE_SIZE`, `DEFAULT_BUTTON_TYPE`)
+- **Component identity tokens** (for queries): Use `FD_` prefix (e.g., `FD_TITLE`, `FD_CARD_TITLE`, `FD_BUTTON`)
+
+#### Pattern 1: Contextual Defaults with InjectionTokens
+
+Use `InjectionToken` to provide contextual defaults for child components. This pattern allows parent components to influence default values without directly manipulating child component inputs.
+
+**When to use:**
+
+- Parent components need to provide default configurations to unknown child components
+- Setting framework-level defaults (themes, sizes, behaviors)
+- Avoiding tight coupling between parent and child components
+- Providing optional configuration that children can override
+
+**Example - Providing default title size in dialogs:**
+
+```typescript
+// title.component.ts - Define the token
+import { InjectionToken } from '@angular/core';
+
+export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
+
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
+
+@Component({
+    selector: '[fd-title]'
+    /* ... */
+})
+export class Title {
+    readonly headerSize = input<HeaderSizes | null>(null);
+
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
+
+    constructor() {
+        effect(() => {
+            // Priority: explicit input > injected default > element tag name
+            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._detectSize();
+            this._applySize(size);
+        });
+    }
+}
+
+// dialog-header.ts - Provide the default
+@Component({
+    selector: 'fd-dialog-header',
+    providers: [
+        {
+            provide: DEFAULT_TITLE_SIZE,
+            useValue: 5
+        }
+    ]
+    /* ... */
+})
+export class DialogHeader {
+    // Any fd-title within this component will default to size 5
+}
+```
+
+**Benefits:**
+
+- ✅ No need to query and manipulate child components
+- ✅ Type-safe dependency injection
+- ✅ Works naturally with signal inputs
+- ✅ Testable (mock the token in tests)
+- ✅ Loosely coupled (parent doesn't need to know about child implementation)
+- ✅ Children can opt-out by providing explicit values
+
+**Best practices:**
+
+- Always use `{ optional: true }` when injecting contextual defaults
+- Document the token with JSDoc describing its purpose
+- Export tokens from the component file for reusability
+- Use descriptive token names (e.g., `DEFAULT_TITLE_SIZE` not `TITLE_CONFIG`)
+
+**Why Not @ContentChild with Signal Inputs?**
+
+When migrating components to signals, you may encounter situations where a parent component needs to set default values for child component inputs. The old pattern of querying and manipulating children **no longer works with signal inputs**.
+
+**❌ This pattern breaks with signal inputs:**
+
+```typescript
+// DOES NOT WORK - signal inputs are read-only from outside
+@ContentChild(TitleComponent)
+set title(titleComponent: TitleComponent) {
+    if (titleComponent) {
+        // ❌ Can't directly set signal inputs from outside the component
+        titleComponent.headerSize = 5; // This is read-only!
+
+        // ❌ ComponentRef doesn't exist on queried components
+        const componentRef = (titleComponent as any)._componentRef; // undefined!
+        componentRef.setInput('headerSize', 5); // Crashes!
+    }
+}
+```
+
+**Why it doesn't work:**
+
+1. **Signal inputs are read-only** - `input()` creates a read-only signal that can only be set by Angular's template binding system, not by external code
+2. **No ComponentRef on queries** - `@ContentChild` and `@ViewChild` return component instances, not `ComponentRef` objects. `ComponentRef.setInput()` only works on dynamically created components
+3. **Breaks encapsulation** - Parent should not reach into child internals and manipulate state
+4. **Fragile** - Relies on internal Angular mechanisms that may change
+
+**✅ Use InjectionToken instead:**
+
+```typescript
+// Define token in child component file
+export const DEFAULT_TITLE_SIZE = new InjectionToken<HeaderSizes>('DEFAULT_TITLE_SIZE');
+
+// Parent provides the default
+@Component({
+    providers: [{ provide: DEFAULT_TITLE_SIZE, useValue: 5 }]
+})
+export class DialogHeader {}
+
+// Child optionally injects and uses it
+@Component({
+    /* ... */
+})
+export class Title {
+    readonly headerSize = input<HeaderSizes | null>(null);
+    private readonly _defaultHeaderSize = inject(DEFAULT_TITLE_SIZE, { optional: true });
+
+    constructor() {
+        effect(() => {
+            // Priority: explicit input > injected default > fallback
+            const size = this.headerSize() ?? this._defaultHeaderSize ?? this._fallback();
+            this._applySize(size);
+        });
+    }
+}
+```
+
+**Key principle:** With signal inputs, the **child component is in control** of its own state. The parent provides context via DI, and the child decides what to do with it.
+
+#### Pattern 2: Component Composition with InjectionTokens
+
+Use `InjectionToken` for component composition and content queries to create loose coupling between parent and child components. This pattern allows querying for component roles rather than concrete implementations.
+
+**The Pattern:**
+
+1. Create a token representing a component role (not implementation)
+2. Register components/directives under that token using `providers`
+3. Query for the token (not the concrete class) using `contentChild()` or `contentChildren()`
+
+**Prefer simple InjectionToken over abstract classes:**
+
+```typescript
+// ✅ Good - Simple InjectionToken with typed interface
+// Use FD_ prefix for component identity tokens
+export const FD_TITLE = new InjectionToken<{ elementRef: ElementRef }>('FD_TITLE');
+
+@Component({
+    selector: '[fd-title]',
+    providers: [{ provide: FD_TITLE, useExisting: Title }]
+})
+export class Title {
+    readonly elementRef = inject(ElementRef<HTMLElement>);
+    // Component doesn't need to extend anything
+}
+
+// Parent queries using the token
+@ContentChild(FD_TITLE)
+set titleComponent(title: { elementRef: ElementRef } | null) {
+    // Works with any implementation that provides elementRef
+}
+```
+
+**Why simple tokens over abstract classes:**
+
+- ✅ No inheritance needed - components stay simple
+- ✅ More flexible - any object with matching shape works
+- ✅ Better testability - easy to provide mock objects
+- ✅ Clearer intent - token defines contract, not implementation
+
+**Example - Card Title:**
+
+```typescript
+// ========== token definition ==========
+export const FD_CARD_TITLE = new InjectionToken<{ id: Signal<string> }>('FdCardTitleDirective');
+
+// ========== card-title.directive.ts ==========
+@Directive({
+    selector: '[fd-card-title]',
+    providers: [{ provide: FD_CARD_TITLE, useExisting: CardTitleDirective }]
+})
+export class CardTitleDirective {
+    readonly id = input('fd-card-title-id-0');
+}
+
+// ========== card-header-main.ts (parent) ==========
+export class CardMainHeader {
+    // Query by TOKEN, not by class - enables loose coupling
+    readonly _cardTitle = contentChild(FD_CARD_TITLE);
+}
+
+// ========== Usage ==========
+<fd-card-main-header>
+    <h2 fd-card-title>My Title</h2>  <!-- Parent finds this via token -->
+</fd-card-main-header>
+```
+
+**Why use this pattern:**
+
+- **Decoupling:** Parent doesn't depend on concrete implementation classes
+- **Flexibility:** Multiple implementations can fulfill the same role without changing parent code
+- **Testability:** Easy to mock by providing alternative implementations under the same token
+- **Extensibility:** New directive variants can register under existing tokens
+- **Type safety:** Tokens can be typed for better IDE support
+
+**Provider options:**
+
+- **`useExisting`:** Reference an already-instantiated component/directive (most common for directives)
+- **`useClass`:** Create a new instance of the provided class
+- **`useValue`:** Use a specific value (object, string, number)
+- **`useFactory`:** Use a factory function to create the value
+
+**When to use this pattern:**
+
+- Component libraries where child elements need to be discovered by parent containers
+- Content projection scenarios with communication between projected content and host
+- Creating reusable component compositions with swappable implementations
+- Building extensible component architectures
+
+**Example - Form Control abstraction:**
+
+```typescript
+// Multiple controls register under the same token
+// Generic token name for shared interface
+export const FORM_CONTROL = new InjectionToken('FormControl');
+
+@Component({
+    selector: 'app-text-input',
+    providers: [{ provide: FORM_CONTROL, useExisting: TextInput }]
+})
+export class TextInput {}
+
+@Component({
+    selector: 'app-checkbox',
+    providers: [{ provide: FORM_CONTROL, useExisting: Checkbox }]
+})
+export class Checkbox {}
+
+// Parent works with ANY control type
+@Component({ selector: 'app-form-field' })
+export class FormField {
+    readonly control = contentChild(FORM_CONTROL); // Works with both!
+}
+```
+
+---
+
 ### State Management
+
+**Summary for AI Agents:**
+
+- **Local state** → `signal()`
+- **Derived state** → `computed()`
+- **Side effects** → `effect()`
+- **Async operations** → RxJS Observables
+
+**Guidelines:**
 
 - Use signals for local component state
 - Use `computed()` for derived state
 - Keep state transformations pure and predictable
 - Do NOT use `mutate` on signals, use `update` or `set` instead
 
+---
+
 ### Effect vs Observables
+
+**Decision Rule for AI Agents:**
+
+| Use `effect()` when:            | Use Observables when:                        |
+| ------------------------------- | -------------------------------------------- |
+| Reacting to signal changes      | Async events (HTTP, WebSocket, timers)       |
+| Synchronizing state with DOM    | Complex async operators (debounce, throttle) |
+| Third-party library integration | Existing RxJS-based APIs                     |
+| Automatic cleanup needed        | Multiple subscribers required                |
 
 **Use `effect()` for signal-reactive side effects instead of observables when:**
 
@@ -282,7 +962,7 @@ export class MyComponent {
 
 ```typescript
 // ❌ Before - using RxJS
-export class PopoverComponent implements OnDestroy {
+export class Popover implements OnDestroy {
     readonly isOpen = signal(false);
     private readonly triggerElement = viewChild<ElementRef>('trigger');
     private readonly popoverElement = viewChild<ElementRef>('popover');
@@ -308,7 +988,7 @@ export class PopoverComponent implements OnDestroy {
 }
 
 // ✅ After - using effect()
-export class PopoverComponent {
+export class Popover {
     readonly isOpen = signal(false);
     private readonly triggerElement = viewChild<ElementRef>('trigger');
     private readonly popoverElement = viewChild<ElementRef>('popover');
@@ -340,7 +1020,7 @@ export class PopoverComponent {
 Use `untracked()` when you need to read a signal's value inside an effect without creating a dependency on it. This prevents the effect from re-running when that signal changes.
 
 ```typescript
-export class TooltipComponent {
+export class Tooltip {
     readonly content = signal('');
     readonly animationDuration = signal(200);
 
@@ -389,7 +1069,7 @@ In this example, the effect should re-run whenever the tooltip content changes t
 By default, Angular prevents signal writes inside effects to avoid infinite loops. Use `allowSignalWrites: true` sparingly when you need to update signals as a side effect, but ensure you don't create cycles.
 
 ```typescript
-export class ValidationComponent {
+export class Validation {
     readonly inputValue = signal('');
     readonly validationError = signal<string | null>(null);
 
@@ -415,7 +1095,7 @@ export class ValidationComponent {
 
 ```typescript
 // ✅ Better - use computed() for derived state
-export class ValidationComponent {
+export class Validation {
     readonly inputValue = signal('');
 
     readonly validationError = computed(() => {
@@ -425,7 +1105,7 @@ export class ValidationComponent {
 }
 
 // ❌ Avoid - using effect with allowSignalWrites for derived state
-export class ValidationComponent {
+export class Validation {
     readonly inputValue = signal('');
     readonly validationError = signal<string | null>(null);
 
@@ -447,7 +1127,113 @@ export class ValidationComponent {
 - Updating signals based on imperative operations (DOM measurements, third-party library callbacks)
 - Complex state updates that require multiple signal writes based on conditions
 
+---
+
+### BehaviorSubject + combineLatest vs Computed Signals
+
+**Migration Rule for AI Agents:** If you see `BehaviorSubject` + `combineLatest` for synchronous state derivation → migrate to signals.
+
+**Replace RxJS state management patterns with computed signals.** When you see `BehaviorSubject` combined with `combineLatest` for deriving state, prefer `computed()` signals instead.
+
+**When to migrate from RxJS to signals:**
+
+- You have `BehaviorSubject` instances that represent component state
+- You're using `combineLatest` to derive values from multiple sources
+- You need manual subscription management with `takeUntil`/`unsubscribe`
+- The derived state is synchronous (no async operations like HTTP calls)
+
+**When to keep RxJS:**
+
+- Working with truly async streams (HTTP requests, WebSockets, timers)
+- Need RxJS operators for complex async workflows (debounce, throttle, retry)
+- Interfacing with existing RxJS-based APIs
+
+**Example - Price calculator with discount:**
+
+```typescript
+// ❌ Before - using BehaviorSubject + combineLatest
+export class PriceCalculator implements OnDestroy {
+    private readonly basePrice$ = new BehaviorSubject<number>(100);
+    private readonly quantity$ = new BehaviorSubject<number>(1);
+    private readonly discountPercent$ = new BehaviorSubject<number>(0);
+    private readonly destroy$ = new Subject<void>();
+
+    readonly totalPrice$ = combineLatest([this.basePrice$, this.quantity$, this.discountPercent$]).pipe(
+        map(([price, qty, discount]) => {
+            const subtotal = price * qty;
+            return subtotal - (subtotal * discount) / 100;
+        }),
+        takeUntil(this.destroy$)
+    );
+
+    updatePrice(price: number): void {
+        this.basePrice$.next(price);
+    }
+
+    updateQuantity(qty: number): void {
+        this.quantity$.next(qty);
+    }
+
+    updateDiscount(discount: number): void {
+        this.discountPercent$.next(discount);
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+}
+
+// ✅ After - using signals + computed()
+export class PriceCalculator {
+    readonly basePrice = signal(100);
+    readonly quantity = signal(1);
+    readonly discountPercent = signal(0);
+
+    // Automatically recomputes when any dependency changes
+    readonly totalPrice = computed(() => {
+        const subtotal = this.basePrice() * this.quantity();
+        return subtotal - (subtotal * this.discountPercent()) / 100;
+    });
+
+    protected updatePrice(price: number): void {
+        this.basePrice.set(price);
+    }
+
+    protected updateQuantity(qty: number): void {
+        this.quantity.set(qty);
+    }
+
+    protected updateDiscount(discount: number): void {
+        this.discountPercent.set(discount);
+    }
+
+    // No manual cleanup needed!
+}
+```
+
+**Benefits of the signal approach:**
+
+- **Less boilerplate:** No `BehaviorSubject`, `combineLatest`, `pipe`, `map`, or `takeUntil` needed
+- **Automatic cleanup:** No `ngOnDestroy` or subscription management required
+- **Better type inference:** Computed signals provide stronger typing without explicit annotations
+- **Simpler mental model:** Direct value access with `()` instead of observable streams
+- **Better performance:** Computed values are cached and only recalculate when dependencies change
+- **Easier testing:** Test signals directly without subscribing or using async patterns
+
+**Migration pattern:**
+
+1. Replace `BehaviorSubject<T>` with `signal<T>(initialValue)`
+2. Replace `combineLatest([...]).pipe(map(...))` with `computed(() => ...)`
+3. Replace `.next(value)` with `.set(value)` or `.update(fn)`
+4. Remove `takeUntil`, `destroy$`, and `ngOnDestroy` cleanup
+5. Remove `$` suffix from variable names (signals don't need the observable convention)
+
+---
+
 ### Signal-Based Change Detection
+
+**Critical Rule for AI Agents:** Do NOT call `ChangeDetectorRef.markForCheck()` after signal updates - signals automatically notify Angular.
 
 **Signals eliminate the need for manual change detection.** When migrating to signals, writing new signal-based components, or reviewing a change, follow these guidelines:
 
@@ -496,7 +1282,7 @@ When converting components from `@Input()`/`@Output()` to signals:
 **Example - Before (with manual change detection):**
 
 ```typescript
-export class MyComponent {
+export class MyExample {
     @Input() value: number;
     @Output() valueChange = new EventEmitter<number>();
 
@@ -513,7 +1299,7 @@ export class MyComponent {
 **Example - After (signal-based, no manual change detection):**
 
 ```typescript
-export class MyComponent {
+export class MyExample {
     readonly value = model<number>(0);
 
     // No ChangeDetectorRef needed!
@@ -551,7 +1337,18 @@ protected readonly _isEnabled = computed(() =>
 );
 ```
 
+---
+
 ### Templates
+
+**Template Best Practices Summary:**
+
+- Use new control flow: `@if`, `@for`, `@switch` (not `*ngIf`, `*ngFor`, `*ngSwitch`)
+- Use `class`/`style` bindings (not `ngClass`/`ngStyle`)
+- Refactor complex logic to TypeScript with `computed()`
+- Import pipes explicitly in component imports
+
+**Detailed Guidelines:**
 
 - Keep templates simple and avoid complex logic
 - When template code gets too complex, refactor logic into TypeScript code (typically with a `computed()`)
@@ -562,13 +1359,23 @@ protected readonly _isEnabled = computed(() =>
 - Use built-in pipes and import pipes when used in templates ([learn more](https://angular.dev/guide/templates/pipes))
 - When using external templates/styles, use paths relative to the component TS file
 
+---
+
 ### Services
+
+**Service Patterns:**
 
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
 
+---
+
+---
+
 ## NX Monorepo Architecture
+
+**Context:** This project uses NX for monorepo management with multiple library packages.
 
 ### Workspace Structure
 
@@ -608,7 +1415,11 @@ This project uses NX as a monorepo build system with the following library struc
 - Run `yarn start` to serve the documentation application
 - Run `yarn test` to run all unit tests
 
+---
+
 ## Commit Message Guidelines
+
+**Quick Format:** `<type>(<scope>): <subject>` - Both type AND scope are mandatory.
 
 This project follows **Conventional Commits** specification with strict validation via commitlint.
 
@@ -739,6 +1550,8 @@ Added a new emphasized button variant for better visual hierarchy.
 Closes #123
 ```
 
+---
+
 ## Pull Request Guidelines
 
 ### PR Title Format
@@ -798,7 +1611,16 @@ git branch -D my-fix-branch
 git pull --ff upstream main
 ```
 
+---
+
 ## Coding Rules and Standards
+
+**Non-Negotiable Requirements:**
+
+- All code must pass ESLint without errors
+- All features must have unit tests
+- All public APIs must have JSDoc
+- All components must pass AXE accessibility checks
 
 ### Code Quality Requirements
 
@@ -826,6 +1648,85 @@ The project uses ESLint with NX and TypeScript plugins. Key rules:
 - Use Jest as the test runner
 - Follow the testing patterns established in the codebase
 - Run `yarn test` before submitting PRs
+
+### Testing Patterns with Signals
+
+**Testing signal-based components:**
+
+```typescript
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
+
+describe('MySignal', () => {
+    let component: MySignal;
+    let fixture: ComponentFixture<MySignal>;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [MySignal] // Standalone component
+        });
+        fixture = TestBed.createComponent(MySignal);
+        component = fixture.componentInstance;
+    });
+
+    it('should update computed signal when input changes', () => {
+        // Set input signal
+        fixture.componentRef.setInput('value', 10);
+        fixture.detectChanges();
+
+        // Test computed value
+        expect(component.doubledValue()).toBe(20);
+    });
+
+    it('should react to signal updates', () => {
+        // Update signal directly (for internal state)
+        component.internalState.set('new value');
+        fixture.detectChanges();
+
+        // Verify DOM update
+        const element = fixture.nativeElement.querySelector('.state');
+        expect(element.textContent).toBe('new value');
+    });
+});
+```
+
+**Testing DI patterns with tokens:**
+
+```typescript
+import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { DEFAULT_TITLE_SIZE } from './title.component';
+
+@Component({
+    selector: 'fd-test-wrapper',
+    template: '<h1 fd-title>Test</h1>',
+    providers: [{ provide: DEFAULT_TITLE_SIZE, useValue: 3 }],
+    imports: [Title]
+})
+class TestWrapper {}
+
+describe('Title with injected default', () => {
+    it('should use injected default size', () => {
+        const fixture = TestBed.createComponent(TestWrapper);
+        fixture.detectChanges();
+
+        const title = fixture.nativeElement.querySelector('h1');
+        expect(title.classList.contains('fd-title--h3')).toBe(true);
+    });
+});
+```
+
+---
+
+## Document Maintenance
+
+**For AI Agents:** When this document is updated:
+
+1. Update the "Last Updated" date in the metadata header
+2. Increment version number if making structural changes
+3. Verify all internal anchor links still work
+4. Check that examples compile with current Angular version
+5. Update the Quick Decision Guide table if adding new patterns
 
 ## Code of Conduct
 

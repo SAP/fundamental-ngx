@@ -18,7 +18,7 @@ import { ActionBarMobileExampleComponent } from './examples/action-bar-mobile-ex
 @Component({
     selector: 'app-action-bar',
     templateUrl: './action-bar-docs.component.html',
-    styleUrls: ['action-bar-docs.component.scss'],
+    styleUrl: 'action-bar-docs.component.scss',
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
@@ -33,21 +33,27 @@ import { ActionBarMobileExampleComponent } from './examples/action-bar-mobile-ex
     ]
 })
 export class ActionBarDocsComponent {
-    backButtonExample = [
+    protected readonly backButtonExample = [
         getExampleFile('action-bar-back-example.component.html'),
         getExampleFile('action-bar-back-example.component.ts', {
             component: 'ActionBarBackExampleComponent'
         })
     ];
-    titleTruncationExample = [
+
+    protected readonly titleTruncationExample = [
         getExampleFile('action-bar-long-string-title-truncation-example.component.html'),
         getExampleFile('action-bar-long-string-title-truncation-example.component.ts', {
             component: 'ActionBarLongStringTitleTruncationExampleComponent'
         })
     ];
-    noBackButtonExample = [getExampleFile('action-bar-no-back-example.component.html')];
-    actionsContextualMenuHtml = [getExampleFile('action-bar-contextual-menu-example.component.html')];
-    mobileViewHtml = [
+
+    protected readonly noBackButtonExample = [getExampleFile('action-bar-no-back-example.component.html')];
+
+    protected readonly actionsContextualMenuHtml = [
+        getExampleFile('action-bar-contextual-menu-example.component.html')
+    ];
+
+    protected readonly mobileViewHtml = [
         getExampleFile('action-bar-mobile-example.component.html'),
         getExampleFile('action-bar-mobile-example.component.ts', {
             component: 'ActionBarMobileExampleComponent'

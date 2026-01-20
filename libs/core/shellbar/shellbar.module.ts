@@ -18,6 +18,10 @@ import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarUserMenuButtonDirective } from './user-menu/shellbar-user-menu-button.directive';
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 
+/**
+ * @deprecated
+ * Use direct imports of components and directives.
+ */
 @NgModule({
     imports: [
         ShellbarComponent,

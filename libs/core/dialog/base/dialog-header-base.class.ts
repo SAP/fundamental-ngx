@@ -1,7 +1,6 @@
 import {
     AfterContentInit,
     ChangeDetectorRef,
-    ContentChild,
     ContentChildren,
     Directive,
     QueryList,
@@ -10,19 +9,17 @@ import {
 } from '@angular/core';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
+import { DEFAULT_TITLE_SIZE } from '@fundamental-ngx/core/title';
 
-@Directive()
-export abstract class DialogHeaderBase implements AfterContentInit {
-    /** @hidden */
-    @ContentChild(TitleToken)
-    set defaultTitleSize(title: TitleComponent) {
-        if (title && !title.headerSize) {
-            title.headerSize = 5;
-            this._changeDetectorRef.detectChanges();
+@Directive({
+    providers: [
+        {
+            provide: DEFAULT_TITLE_SIZE,
+            useValue: 5
         }
-    }
-
+    ]
+})
+export abstract class DialogHeaderBase implements AfterContentInit {
     /** @hidden */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
@@ -53,6 +50,6 @@ export abstract class DialogHeaderBase implements AfterContentInit {
                     break;
             }
         });
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 }

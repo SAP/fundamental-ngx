@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Pemilih bulan',
         calendarYearsViewDescription: 'Pemilih tahun',
         calendarYearsRangeViewDescription: 'Pemilih julat tahun',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Hari bekerja',
+        nonWorkDayLabel: 'Hari Tidak Bekerja'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kotak Kombo Nilai Berbilang',
         selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Pengepala Kumpulan'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Item {itemNum} daripada {totalNum} dipaparkan',
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
         rightNavigationBtnLabel: 'Pergi ke item seterusnya'
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Draf'
     },
     coreMessageStrip: {
-        dismissLabel: 'Tolak',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Tutup',
+        announcementInfo: 'Jalur Mesej Maklumat',
+        announcementWarning: 'Jalur Mesej Amaran',
+        announcementError: 'Jalur Mesej Ralat',
+        announcementSuccess: 'Jalur Mesej Berjaya',
+        closable: 'Boleh Ditutup'
     },
     coreMultiInput: {
         countListResultsSingular: '1 item senarai hasil.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Laluan Navigasi'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Item Pepohon {itemDetails}, {index} daripada {total}{selectedDescription}'
+        linkItemAriaLabel: 'Item Pepohon {itemDetails}, {selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} selanjutnya'
@@ -378,7 +378,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Tetapan',
-        searchLabel: 'Carian'
+        searchLabel: 'Carian',
+        backButtonLabel: 'Kembali'
     },
     platformSwitch: {
         ariaLabel: 'Input suis'
@@ -605,10 +606,10 @@ export default {
         menuButtonAriaLabel: 'Butang menu'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'kembangkan/runtuhkan subitem',
+        moreButtonAriaLabel: 'Memaparkan item navigasi tambahan yang tersembunyi kerana ruang skrin terhad',
+        overflowMenuAriaLabel: 'Item Navigasi Tambahan',
+        snappedPopoverRoleDescription: 'Pepohon Senarai Navigasi'
     },
     coreNotification: {
         groupHeaderTitle: 'Kembangkan/Runtuhkan',
@@ -619,7 +620,10 @@ export default {
         triggerLessLabel: 'Kurang'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Kumpulan Butang Disegmenkan',
+        buttonRoleDescription: 'Butang Disegmenkan'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };

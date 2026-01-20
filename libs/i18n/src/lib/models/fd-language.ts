@@ -751,4 +751,7 @@ export interface FdLanguage {
         groupRoleDescription: FdLanguageKey;
         buttonRoleDescription: FdLanguageKey;
     };
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: FdLanguageKey;
+    };
 }

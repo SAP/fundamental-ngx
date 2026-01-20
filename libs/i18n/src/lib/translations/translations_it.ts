@@ -20,16 +20,16 @@ export default {
         calendarMonthViewDescription: 'Selettore mese',
         calendarYearsViewDescription: 'Selettore anno',
         calendarYearsRangeViewDescription: 'Selettore intervallo di anni',
-        workDayLabel: 'Work day',
-        nonWorkDayLabel: 'Non-Work day'
+        workDayLabel: 'Giorno lavorativo',
+        nonWorkDayLabel: 'Giorno non lavorativo'
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Casella combinata multivalore',
         selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})',
-        listGroupHeader: 'Group Header'
+        listGroupHeader: 'Intestazione gruppo'
     },
     coreCarousel: {
-        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed',
+        pageIndicatorLabel: 'Elemento {itemNum} di {totalNum} visualizzato',
         leftNavigationBtnLabel: "Vai all'elemento precedente",
         rightNavigationBtnLabel: "Vai all'elemento successivo"
     },
@@ -71,12 +71,12 @@ export default {
         listItemStatusDraft: 'Bozza'
     },
     coreMessageStrip: {
-        dismissLabel: 'Ignora',
-        announcementInfo: 'Information Message Strip',
-        announcementWarning: 'Warning Message Strip',
-        announcementError: 'Error Message Strip',
-        announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        dismissLabel: 'Chiudi',
+        announcementInfo: 'Riga messaggio informativo',
+        announcementWarning: 'Riga messaggio di avviso',
+        announcementError: 'Riga messaggio di errore',
+        announcementSuccess: 'Riga messaggio di corretta esecuzione',
+        closable: 'Chiudibile'
     },
     coreMultiInput: {
         countListResultsSingular: '1 voce elenco dei risultati.',
@@ -93,7 +93,7 @@ export default {
         navigationPath: 'Percorso di navigazione'
     },
     coreNestedList: {
-        linkItemAriaLabel: "Elemento dell'albero {itemDetails}, {index} di {total}{selectedDescription}"
+        linkItemAriaLabel: "Elemento dell'albero {itemDetails}, {selectedDescription}"
     },
     coreOverflowLayout: {
         moreItemsButton: 'Altri {count}'
@@ -154,10 +154,10 @@ export default {
         semanticDeclineLabel: 'Rifiuta'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Di più'
+        tabListExpandButtonText: 'Mostra di più'
     },
     coreText: {
-        moreLabel: 'Di più',
+        moreLabel: 'Mostra di più',
         lessLabel: 'Di meno'
     },
     coreTime: {
@@ -305,7 +305,7 @@ export default {
         searchShowAllAdvancedSearchLabel: 'Mostra tutti i filtri',
         searchHideAllAdvancedSearchLabel: 'Nascondi tutti i filtri',
         selectTabDisplayCountLabel: 'Voci ({count})',
-        selectTabMoreBtnLabel: 'Di più',
+        selectTabMoreBtnLabel: 'Mostra di più',
         selectTabCountHiddenA11yLabel: 'contiene {rowCount} righe e {colCount} colonne',
         selectMobileTabBackBtnTitle: 'Indietro',
         selectMobileTabBtnOpenDialogLabel: 'Apri finestra di dialogo',
@@ -380,7 +380,8 @@ export default {
     },
     platformSettingsGenerator: {
         settingsLabel: 'Impostazioni',
-        searchLabel: 'Cerca'
+        searchLabel: 'Cerca',
+        backButtonLabel: 'Indietro'
     },
     platformSwitch: {
         ariaLabel: 'Immissione Passaggio'
@@ -567,9 +568,9 @@ export default {
     platformVariantManagement: {
         manage: 'Gestisci',
         saveAs: 'Salva con nome',
-        saveView: 'Salva view',
+        saveView: 'Salva vista',
         save: 'Salva',
-        myViews: 'Le mie view',
+        myViews: 'Le mie viste',
         view: 'Visualizza',
         setAsDefault: 'Imposta come valore predefinito',
         public: 'Pubblico',
@@ -577,12 +578,12 @@ export default {
         requiredFieldError: 'Questo campo è obbligatorio.',
         nameTakenFieldError: 'Esiste già una variante con questo nome. Selezionare un nome differente.',
         cancel: 'Annulla',
-        manageViews: 'Gestisci view',
+        manageViews: 'Gestisci visualizzazioni',
         markAsFavourite: 'Contrassegna come preferito',
         sharing: 'In condivisione',
         default: 'Predefinita',
         createdBy: 'Autore',
-        removeVariant: 'Rimuovi view',
+        removeVariant: 'Rimuovi vista',
         search: 'Cerca',
         access: {
             public: 'Pubblico',
@@ -607,10 +608,11 @@ export default {
         menuButtonAriaLabel: 'Pulsante menu'
     },
     btpNavigation: {
-        expanderAriaLabel: 'expand/collapse sub-items',
-        moreButtonAriaLabel: 'Displays additional navigation items that are hidden due to limited screen space',
-        overflowMenuAriaLabel: 'Additional Navigation Items',
-        snappedPopoverRoleDescription: 'Navigation List Tree'
+        expanderAriaLabel: 'espandi/comprimi elementi secondari',
+        moreButtonAriaLabel:
+            'Visualizza elementi di navigazione supplementari nascosti a causa dello spazio limitato della videata',
+        overflowMenuAriaLabel: 'Elementi di navigazione supplementari',
+        snappedPopoverRoleDescription: 'Albero lista di navigazione'
     },
     coreNotification: {
         groupHeaderTitle: 'Espandi/comprimi',
@@ -621,7 +623,10 @@ export default {
         triggerLessLabel: 'Comprimi'
     },
     segmentedButton: {
-        groupRoleDescription: 'Segmented Button Group',
-        buttonRoleDescription: 'Segmented Button'
+        groupRoleDescription: 'Gruppo pulsanti segmentati',
+        buttonRoleDescription: 'Pulsante segmentato'
+    },
+    coreObjectIdentifier: {
+        srOnlyAriaLabel: 'Object Identifier'
     }
 };
