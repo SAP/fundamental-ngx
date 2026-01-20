@@ -1,0 +1,37 @@
+{
+    "name": "core-schematics",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/schematics",
+    "tags": ["type:schematics", "scope:core"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{workspaceRoot}/dist/libs/core/schematics"],
+            "options": {
+                "outputPath": "dist/libs/core/schematics",
+                "main": "libs/core/schematics/ng-add/index.ts",
+                "tsConfig": "libs/core/schematics/tsconfig.json",
+                "assets": [
+                    {
+                        "input": "libs/core/schematics",
+                        "glob": "**/*.json",
+                        "output": "."
+                    },
+                    {
+                        "input": "libs/core/schematics",
+                        "glob": "**/schema.d.ts",
+                        "output": "."
+                    }
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/schematics/jest.config.ts"
+            }
+        }
+    }
+}

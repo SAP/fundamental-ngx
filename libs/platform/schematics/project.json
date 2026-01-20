@@ -1,0 +1,30 @@
+{
+    "name": "platform-schematics",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/schematics",
+    "tags": ["type:schematics", "scope:platform"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{workspaceRoot}/dist/libs/platform/schematics"],
+            "options": {
+                "outputPath": "dist/libs/platform/schematics",
+                "main": "libs/platform/schematics/ng-add/index.ts",
+                "tsConfig": "libs/platform/schematics/tsconfig.json",
+                "assets": [
+                    {
+                        "input": "libs/platform/schematics",
+                        "glob": "**/*.json",
+                        "output": "."
+                    },
+                    {
+                        "input": "libs/platform/schematics",
+                        "glob": "**/schema.d.ts",
+                        "output": "."
+                    }
+                ]
+            }
+        }
+    }
+}
