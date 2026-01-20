@@ -56,10 +56,10 @@ export class ObjectNumberComponent {
     readonly class = input<string>('');
 
     /** Id of the element that labels object number. */
-    readonly ariaLabelledBy = input<string | null>();
+    readonly ariaLabelledBy = input<string>();
 
     /** Aria label for the object number. */
-    readonly ariaLabel = input<string | null>();
+    readonly ariaLabel = input<string>();
 
     /** Whether the object number is interactive */
     readonly interactive = input(false, { transform: booleanAttribute });
@@ -80,35 +80,18 @@ export class ObjectNumberComponent {
     });
 
     /** @hidden Computed CSS classes */
-    protected readonly _cssClass = computed(() => {
-        const classes: string[] = ['fd-object-number'];
-
-        if (this.large()) {
-            classes.push('fd-object-number--large');
-        }
-
-        const status = this.status();
-        if (status) {
-            classes.push(`fd-object-number--${status}`);
-        }
-
-        const interactive = this.interactive();
-        if (interactive) {
-            classes.push('fd-object-number--interactive');
-        }
-
-        const inverted = this.inverted();
-        if (inverted) {
-            classes.push('fd-object-number--inverted');
-        }
-
-        const customClass = this.class();
-        if (customClass) {
-            classes.push(customClass);
-        }
-
-        return classes.join(' ');
-    });
+    protected readonly _cssClass = computed(() =>
+        [
+            'fd-object-number',
+            this.large() ? 'fd-object-number--large' : '',
+            this.interactive() ? 'fd-object-number--interactive' : '',
+            this.inverted() ? 'fd-object-number--inverted' : '',
+            this.status() ? `fd-object-number--${this.status()}` : '',
+            this.class()
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
 
     /**
      * Type guard to check if the status is a valid ObjectStatus
