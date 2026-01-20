@@ -23,5 +23,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NotificationContainer {}
