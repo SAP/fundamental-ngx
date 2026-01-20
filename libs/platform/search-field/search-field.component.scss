@@ -44,3 +44,102 @@ fdp-search-field {
         display: block;
     }
 }
+
+// TODO: remove all from below this line after updating styles
+.fd-bar {
+    &--stack-contents-vertically {
+        flex-direction: column !important;
+    }
+
+    &--initial-suggestion-title,
+    &--initial-suggestion-subline {
+        height: auto !important;
+    }
+
+    &--initial-suggestion-title {
+        padding-block-start: 0.5rem !important;
+    }
+
+    &--initial-suggestion-subline {
+        --fdBar_Padding_Bottom: 0.5rem !important;
+
+        padding-block-start: 0.25rem !important;
+    }
+}
+
+.fd-list--search-results {
+    .fd-list__item {
+        .fd-list__title,
+        .fd-list__subline {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            white-space: normal;
+            text-overflow: ellipsis;
+
+            font-size: var(--sapFontSize);
+        }
+
+        &--byline {
+            height: auto;
+            padding-block: 0.5rem;
+
+            .fd-list__title {
+                font-size: var(--sapFontSize);
+                font-family: var(--sapFontSemiboldDuplexFamily);
+                font-weight: 700;
+            }
+
+            .fd-list__subline {
+                color: var(--sapContent_LabelColor);
+                margin-block-start: 0.25rem;
+            }
+
+            .fd-list__content {
+                overflow: hidden;
+            }
+        }
+
+        &--suggestion {
+            .fd-list__info-label {
+                margin-inline-end: 0.5rem;
+            }
+
+            .fd-list__icon [class*='sap-icon']:first-child,
+            .fd-list__icon[class*='sap-icon']:first-child {
+                margin-inline-start: -0.5rem;
+            }
+
+            .fd-list__title--scope {
+                color: var(--sapContent_LabelColor);
+            }
+        }
+
+        &--suggestion,
+        &--byline {
+            border-bottom: transparent; // TODO: replace with variable
+        }
+    }
+}
+
+.fd-text__subline {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+
+    font-size: var(--sapFontSmallSize);
+    color: var(--sapContent_LabelColor);
+}
+
+.fd-title--two-line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
