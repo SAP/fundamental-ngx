@@ -55,9 +55,6 @@ export class ObjectNumberComponent implements HasElementRef {
     /** An optional status message for the object number */
     readonly statusMessage = input<string>();
 
-    /** User's custom classes */
-    readonly class = input<string>('');
-
     /** Id of the element that labels object number. */
     readonly ariaLabelledBy = input<string>();
 
@@ -92,8 +89,7 @@ export class ObjectNumberComponent implements HasElementRef {
             this.large() ? 'fd-object-number--large' : '',
             this.interactive() ? 'fd-object-number--interactive' : '',
             this.inverted() ? 'fd-object-number--inverted' : '',
-            this.status() ? `fd-object-number--${this.status()}` : '',
-            this.class()
+            this.status() ? `fd-object-number--${this.status()}` : ''
         ]
             .filter(Boolean)
             .join(' ')

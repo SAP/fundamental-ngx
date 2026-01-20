@@ -49,12 +49,6 @@ describe('ObjectNumberComponent', () => {
         expect(fixture.nativeElement.classList.contains('fd-object-number--large')).toBe(true);
     });
 
-    it('should add custom class', () => {
-        fixture.componentRef.setInput('class', 'custom-class');
-        fixture.detectChanges();
-        expect(fixture.nativeElement.classList.contains('custom-class')).toBe(true);
-    });
-
     it('should display units', () => {
         fixture.componentRef.setInput('unit', 'TEST');
         fixture.detectChanges();
