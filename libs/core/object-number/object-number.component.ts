@@ -2,11 +2,14 @@ import { DecimalPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
+    ElementRef,
     ViewEncapsulation,
     booleanAttribute,
     computed,
+    inject,
     input
 } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
@@ -26,7 +29,7 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DecimalPipe, FdTranslatePipe]
 })
-export class ObjectNumberComponent {
+export class ObjectNumberComponent implements HasElementRef {
     /**
      * Numerical value of the object number.
      */
@@ -66,6 +69,9 @@ export class ObjectNumberComponent {
 
     /** Whether the object number is inverted. */
     readonly inverted = input(false, { transform: booleanAttribute });
+
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden Computed number pipe configuration */
     protected readonly _numberPipeConfig = computed(() => `0.${this.decimal()}-${this.decimal()}`);
