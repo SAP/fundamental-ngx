@@ -3,11 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CSS_CLASS_NAME } from './constants';
 import { LayoutGridComponent } from './layout-grid.component';
 
-const CUSTOM_CLASS = 'custom-class';
-
 @Component({
     template: `<fd-layout-grid
-        [class]="class()"
         [noGap]="noGap()"
         [noHorizontalGap]="noHorizontalGap()"
         [noVerticalGap]="noVerticalGap()"
@@ -16,7 +13,6 @@ const CUSTOM_CLASS = 'custom-class';
     imports: [LayoutGridComponent]
 })
 class TestNestedContainerComponent {
-    readonly class = input<string>(CUSTOM_CLASS);
     readonly noGap = input(false);
     readonly noHorizontalGap = input(false);
     readonly noVerticalGap = input(false);
@@ -51,11 +47,6 @@ describe('LayoutGridComponent', () => {
         expect(host.classList.contains(CSS_CLASS_NAME.layoutGrid)).toBeTruthy();
     });
 
-    it('should apply custom class from input', () => {
-        const host = getHostElement();
-        expect(host.classList.contains(CUSTOM_CLASS)).toBeTruthy();
-    });
-
     it('should apply noVerticalGap class when input is true', () => {
         fixture.componentRef.setInput('noVerticalGap', true);
         fixture.detectChanges();
@@ -68,6 +59,13 @@ describe('LayoutGridComponent', () => {
         fixture.detectChanges();
         const host = getHostElement();
         expect(host.classList.contains(CSS_CLASS_NAME.layoutGridNoHorizontalGap)).toBeTruthy();
+    });
+
+    it('should apply noGap class when input is true', () => {
+        fixture.componentRef.setInput('noGap', true);
+        fixture.detectChanges();
+        const host = getHostElement();
+        expect(host.classList.contains(CSS_CLASS_NAME.layoutGridNoGap)).toBeTruthy();
     });
 
     it('should not apply noGap class when input is false', () => {

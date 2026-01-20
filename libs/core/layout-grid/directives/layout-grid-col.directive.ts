@@ -1,5 +1,6 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { booleanAttribute, computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
 
 @Directive({
@@ -8,7 +9,7 @@ import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
         '[class]': '_cssClass()'
     }
 })
-export class LayoutGridColDirective {
+export class LayoutGridColDirective implements HasElementRef {
     /** Defines the width of the element on the layout grid. */
     readonly fdLayoutGridCol = input<NumberInput>();
 
@@ -36,22 +37,11 @@ export class LayoutGridColDirective {
     /** Defines the offset width of the element on the layout grid for extra-large screen devices. */
     readonly colOffsetXl = input<number>();
 
-    /** @hidden */
-    readonly class = input<string>();
-
     /**
      * @hidden
      * Access to the host element's ElementRef.
-     *
-     * Use this for advanced scenarios like:
-     * - DOM measurements (dimensions, scroll position)
-     * - Focus management
-     * - Integration with third-party libraries requiring native elements
-     *
-     * For most use cases, prefer using directive inputs and outputs instead
-     * of direct DOM manipulation.
      */
-    public readonly elementRef = inject(ElementRef);
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     protected readonly _cssClass = computed(() => {
@@ -65,8 +55,7 @@ export class LayoutGridColDirective {
             this._getCssClassWithColWidth(CSS_CLASS_NAME.colOffsetPrefix, this.colOffset()),
             this._getCssClassWithColWidth(CSS_CLASS_NAME.mdColOffsetPrefix, this.colOffsetMd()),
             this._getCssClassWithColWidth(CSS_CLASS_NAME.lgColOffsetPrefix, this.colOffsetLg()),
-            this._getCssClassWithColWidth(CSS_CLASS_NAME.xlColOffsetPrefix, this.colOffsetXl()),
-            this.class()
+            this._getCssClassWithColWidth(CSS_CLASS_NAME.xlColOffsetPrefix, this.colOffsetXl())
         ].filter((v): v is string => !!v);
 
         return classes.join(' ');

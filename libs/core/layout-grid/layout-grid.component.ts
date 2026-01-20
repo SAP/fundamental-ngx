@@ -1,6 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    ViewEncapsulation,
+    contentChildren,
+    inject,
+    input
+} from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CSS_CLASS_NAME } from './constants';
 import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
 
@@ -12,16 +21,16 @@ import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
     templateUrl: './layout-grid.component.html',
     styleUrl: './layout-grid.component.scss',
     host: {
-        '[class]': '_cssClass()'
+        class: CSS_CLASS_NAME.layoutGrid,
+        '[class.fd-container--no-gap]': 'noGap()',
+        '[class.fd-container--no-horizontal-gap]': 'noHorizontalGap()',
+        '[class.fd-container--no-vertical-gap]': 'noVerticalGap()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet, LayoutGridRowDirective]
 })
-export class LayoutGridComponent {
-    /** Custom classes */
-    readonly class = input<string>('');
-
+export class LayoutGridComponent implements HasElementRef {
     /** Whether the grid should have a gap. */
     readonly noGap = input(false);
 
@@ -34,27 +43,9 @@ export class LayoutGridComponent {
     /** @hidden */
     readonly _rowsQueryList = contentChildren(LayoutGridRowDirective);
 
-    /** @hidden */
-    protected readonly _cssClass = computed(() => {
-        const classes: string[] = [CSS_CLASS_NAME.layoutGrid];
-
-        if (this.noVerticalGap()) {
-            classes.push(CSS_CLASS_NAME.layoutGridNoVerticalGap);
-        }
-
-        if (this.noHorizontalGap()) {
-            classes.push(CSS_CLASS_NAME.layoutGridNoHorizontalGap);
-        }
-
-        if (this.noGap()) {
-            classes.push(CSS_CLASS_NAME.layoutGridNoGap);
-        }
-
-        const customClass = this.class();
-        if (customClass) {
-            classes.push(customClass);
-        }
-
-        return classes.join(' ');
-    });
+    /**
+     * @hidden
+     * Access to the host element's ElementRef.
+     */
+    public readonly elementRef = inject(ElementRef);
 }
