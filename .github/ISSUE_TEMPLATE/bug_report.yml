@@ -57,17 +57,17 @@ body:
       attributes:
           label: Priority
           description: |
-          The priority indicates the severity of the issue. To set the appropriate priority consider the following criteria:
+              The priority indicates the severity of the issue. To set the appropriate priority consider the following criteria:
               - Breaks entire application or system - High or Very High
               - Accessibility issue - Medium or High
               - Functional issue - Medium or High
               - Visual issue - Low or Medium
-      multiple: false
-      options:
-          - Low
-          - Medium
-          - High
-          - Very High
+          multiple: false
+          options:
+              - Low
+              - Medium
+              - High
+              - Very High
       validations:
           required: false
 
