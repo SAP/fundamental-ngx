@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { LinkComponent } from '@fundamental-ngx/platform/link';
@@ -15,7 +15,15 @@ import {
     templateUrl: './wizard-summary-section.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [TitleComponent, LayoutGridModule, FormLabelComponent, LinkComponent, FdTranslatePipe]
+    imports: [
+        TitleComponent,
+        LayoutGridColDirective,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        FormLabelComponent,
+        LinkComponent,
+        FdTranslatePipe
+    ]
 })
 export class WizardSummarySectionComponent {
     /**

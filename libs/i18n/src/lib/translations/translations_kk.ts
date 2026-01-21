@@ -1,5 +1,9 @@
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
+    coreBusyIndicator: {
+        defaultAriaValueText: 'Busy',
+        defaultTitle: 'Please wait'
+    },
     coreCalendar: {
         yearSelectionLabel: 'Жылды таңдау',
         yearsRangeSelectionLabel: 'Жылдар ауқымын таңдау',

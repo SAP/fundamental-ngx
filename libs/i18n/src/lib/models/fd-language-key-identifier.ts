@@ -3,6 +3,8 @@
  * This type is generated automatically. Please, do not change it manually.
  **/
 export type FdLanguageKeyIdentifier =
+    | 'coreBusyIndicator.defaultAriaValueText'
+    | 'coreBusyIndicator.defaultTitle'
     | 'coreCalendar.yearSelectionLabel'
     | 'coreCalendar.yearsRangeSelectionLabel'
     | 'coreCalendar.monthSelectionLabel'

@@ -31,5 +31,4 @@ import { Directive } from '@angular/core';
     selector: '[fd-split-button-action-title]',
     standalone: true
 })
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class SplitButtonActionTitle {}

@@ -1,5 +1,9 @@
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
+    coreBusyIndicator: {
+        defaultAriaValueText: 'Busy',
+        defaultTitle: 'Please wait'
+    },
     coreCalendar: {
         yearSelectionLabel: 'वर्ष चुनें',
         yearsRangeSelectionLabel: 'वर्षों की सीमा चुनें',
