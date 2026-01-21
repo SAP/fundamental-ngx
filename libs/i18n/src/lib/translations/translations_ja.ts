@@ -1,5 +1,9 @@
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
+    coreBusyIndicator: {
+        defaultAriaValueText: 'Busy',
+        defaultTitle: 'Please wait'
+    },
     coreCalendar: {
         yearSelectionLabel: '年を選択',
         yearsRangeSelectionLabel: '年範囲を選択',

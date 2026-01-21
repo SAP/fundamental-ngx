@@ -8,7 +8,6 @@ import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
     hostDirectives: [{ directive: GlyphMenuAddonDirective, inputs: ['glyph'] }],
     imports: [PortalModule]
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class MenuAddonDirective {
     /** Whether addon is used before or after text */
     // eslint-disable-next-line @angular-eslint/no-input-rename

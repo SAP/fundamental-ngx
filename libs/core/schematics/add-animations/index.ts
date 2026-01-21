@@ -63,7 +63,6 @@ async function addAnimationsModule(options: Schema, tree: Tree, context: Schemat
     if (options.animations) {
         if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
             context.logger.warn(
-                // eslint-disable-next-line max-len
                 `⚠️ Could not set up "${browserAnimationsModuleName} because "${noopAnimationsModuleName}" is already imported. Please manually set up browser animations.`
             );
 

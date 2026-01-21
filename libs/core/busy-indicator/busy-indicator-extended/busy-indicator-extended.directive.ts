@@ -1,4 +1,5 @@
 import { Directive, ElementRef, contentChild, effect, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '../busy-indicator.component';
 import { FD_BUSY_INDICATOR_COMPONENT } from '../tokens';
 
@@ -9,14 +10,14 @@ const messageToastClass = 'fd-message-toast';
     selector: '[fd-busy-indicator-extended]',
     standalone: true
 })
-export class BusyIndicatorExtendedDirective {
+export class BusyIndicatorExtendedDirective implements HasElementRef {
+    /** @hidden */
+    public readonly elementRef = inject(ElementRef);
+
     /** @hidden */
     protected readonly busyIndicator = contentChild(FD_BUSY_INDICATOR_COMPONENT, {
         read: BusyIndicatorComponent
     });
-
-    /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     constructor() {
@@ -34,7 +35,7 @@ export class BusyIndicatorExtendedDirective {
         if (!hasLabel) {
             return;
         }
-        const classList = this._elementRef.nativeElement.parentElement?.classList;
+        const classList = this.elementRef.nativeElement.parentElement?.classList;
         if (classList) {
             classList.add('fd-busy-indicator-extended');
             if (classList.contains(messageToastClass)) {

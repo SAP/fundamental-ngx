@@ -4,6 +4,12 @@ import { FdLanguageKey } from './fd-language-key';
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreBusyIndicator: {
+        /** Aria valuetext for the busy indicator */
+        defaultAriaValueText: FdLanguageKey;
+        /** Title for the busy indicator */
+        defaultTitle: FdLanguageKey;
+    };
     coreCalendar: {
         /** Year selection aria label. Used on the button to navigate to the years view. */
         yearSelectionLabel: FdLanguageKey;
