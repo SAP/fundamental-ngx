@@ -5,14 +5,13 @@ import {
     DOCUMENT,
     Directive,
     ElementRef,
-    HostBinding,
-    HostListener,
-    Input,
     OnDestroy,
     PLATFORM_ID,
     Renderer2,
     booleanAttribute,
-    inject
+    computed,
+    inject,
+    input
 } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
@@ -37,43 +36,23 @@ let styleSheet: HTMLStyleElement | null = null;
 @Directive({
     selector: '[fdScrollbar], [fd-scrollbar]',
     host: {
-        class: 'fd-scrollbar'
+        class: 'fd-scrollbar',
+        '[style.overflow-x]': '_overflowX()',
+        '[style.overflow-y]': '_overflowY()',
+        '(scroll)': 'onScroll($event)'
     },
     hostDirectives: [CdkScrollable],
     standalone: true
 })
 export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** Whether overflow horizontal content should be hidden. */
-    @Input({ transform: booleanAttribute })
-    noHorizontalScroll = false;
+    readonly noHorizontalScroll = input(false, { transform: booleanAttribute });
 
     /** Whether overflow vertical content should be hidden. */
-    @Input({ transform: booleanAttribute })
-    noVerticalScroll = false;
+    readonly noVerticalScroll = input(false, { transform: booleanAttribute });
 
     /** Whether scrollbars should be visible even if content fits. */
-    @Input({ transform: booleanAttribute })
-    alwaysVisible = false;
-
-    /** @hidden */
-    @HostBinding('style.overflow-x')
-    get _overflowX(): ScrollbarOverflowOptions {
-        if (this.noHorizontalScroll) {
-            return 'hidden';
-        }
-
-        return this._overflow;
-    }
-
-    /** @hidden */
-    @HostBinding('style.overflow-y')
-    get _overflowY(): ScrollbarOverflowOptions {
-        if (this.noVerticalScroll) {
-            return 'hidden';
-        }
-
-        return this._overflow;
-    }
+    readonly alwaysVisible = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     _inPopover = false;
@@ -82,11 +61,38 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
+    protected readonly _overflowX = computed<ScrollbarOverflowOptions>(() => {
+        if (this.noHorizontalScroll()) {
+            return 'hidden';
+        }
+
+        return this._overflow();
+    });
+
+    /** @hidden */
+    protected readonly _overflowY = computed<ScrollbarOverflowOptions>(() => {
+        if (this.noVerticalScroll()) {
+            return 'hidden';
+        }
+
+        return this._overflow();
+    });
+
+    /** @hidden */
     private _document: Document = inject(DOCUMENT);
 
     /** @hidden */
     private readonly _csp_nonce = inject(CSP_NONCE, {
         optional: true
+    });
+
+    /** @hidden */
+    private readonly _overflow = computed<ScrollbarOverflowOptions>(() => {
+        if (this.alwaysVisible()) {
+            return 'scroll';
+        }
+
+        return 'auto';
     });
 
     /**
@@ -106,7 +112,6 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
     }
 
     /** @hidden */
-    @HostListener('scroll', ['$event'])
     onScroll(event: Event): void {
         if (this._inPopover) {
             event.stopImmediatePropagation();
@@ -124,14 +129,5 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** method to invoke scroll */
     scroll(options: ScrollToOptions): void {
         this.elementRef.nativeElement.scroll(options);
-    }
-
-    /** @hidden */
-    private get _overflow(): ScrollbarOverflowOptions {
-        if (this.alwaysVisible) {
-            return 'scroll';
-        }
-
-        return 'auto';
     }
 }

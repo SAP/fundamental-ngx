@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     ShellbarActionComponent,
     ShellbarActionsComponent,
@@ -48,7 +48,7 @@ import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-fiel
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ButtonComponent,
-        ScrollbarModule,
+        ScrollbarDirective,
         I18nModule,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
