@@ -1,17 +1,15 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChildren,
     ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
-    QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    contentChildren,
+    inject,
+    input
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { CSS_CLASS_NAME } from './constants';
 import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
 
@@ -22,59 +20,32 @@ import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
     selector: 'fd-layout-grid, [fdLayoutGrid]',
     templateUrl: './layout-grid.component.html',
     styleUrl: './layout-grid.component.scss',
+    host: {
+        class: CSS_CLASS_NAME.layoutGrid,
+        '[class.fd-container--no-gap]': 'noGap()',
+        '[class.fd-container--no-horizontal-gap]': 'noHorizontalGap()',
+        '[class.fd-container--no-vertical-gap]': 'noVerticalGap()'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet, LayoutGridRowDirective]
 })
-export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
-    /** Custom classes */
-    @Input()
-    set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    }
-
+export class LayoutGridComponent implements HasElementRef {
     /** Whether the grid should have a gap. */
-    @Input()
-    noGap: boolean;
+    readonly noGap = input(false);
 
     /** Whether the grid should have a horizontal gap. */
-    @Input()
-    noHorizontalGap: boolean;
+    readonly noHorizontalGap = input(false);
 
     /** Whether the grid should have a vertical gap. */
-    @Input()
-    noVerticalGap: boolean;
+    readonly noVerticalGap = input(false);
 
     /** @hidden */
-    @ContentChildren(LayoutGridRowDirective)
-    _rowsQueryList: QueryList<LayoutGridRowDirective>;
+    readonly _rowsQueryList = contentChildren(LayoutGridRowDirective);
 
-    /** @hidden */
-    private _class = '';
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            CSS_CLASS_NAME.layoutGrid,
-            this.noVerticalGap ? CSS_CLASS_NAME.layoutGridNoVerticalGap : '',
-            this.noHorizontalGap ? CSS_CLASS_NAME.layoutGridNoHorizontalGap : '',
-            this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '',
-            this._class
-        ];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    /**
+     * @hidden
+     * Access to the host element's ElementRef.
+     */
+    public readonly elementRef = inject(ElementRef);
 }
