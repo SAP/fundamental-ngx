@@ -1,6 +1,6 @@
-name: Feature, Bug or Enhancement Report
-description: Report a bug, request an enhancement or feature.
-labels: []
+name: Bug Report
+description: Report a bug.
+labels: ['bug']
 body:
     - type: markdown
       attributes:
@@ -11,7 +11,7 @@ body:
       id: proposal-description
       attributes:
           label: Describe your proposal
-          description: Please provide a detailed description of your proposal, bug, or feature request.
+          description: Please provide a detailed description of your proposal, bug.
       validations:
           required: true
 
@@ -20,9 +20,16 @@ body:
       attributes:
           label: Which versions of Angular and Fundamental Library for Angular are affected?
           description: Specify the exact versions. (If requesting a feature, use current version.)
-          placeholder: 'Angular: x.y.z, Fundamental Library: x.y.z'
+          placeholder: 'Angular: x.y.z, Fundamental Library: x.y.z, UI5 Web Components: x.y.z'
       validations:
           required: true
+
+    - type: input
+      id: component
+      attributes:
+          label: Affected Component
+      validations:
+          required: false
 
     - type: textarea
       id: reproduction-steps
@@ -44,6 +51,32 @@ body:
           placeholder: 'https://stackblitz.com/...'
       validations:
           required: false
+
+    - type: dropdown
+      id: priority
+      attributes:
+          label: Priority
+          description: |
+              The priority indicates the severity of the issue. To set the appropriate priority consider the following criteria:
+              - Breaks entire application or system - High or Very High
+              - Accessibility issue - Medium or High
+              - Functional issue - Medium or High
+              - Visual issue - Low or Medium
+          multiple: false
+          options:
+              - Low
+              - Medium
+              - High
+              - Very High
+      validations:
+          required: false
+
+    - type: markdown
+      attributes:
+          value: |
+              ## Privacy Policy
+              Please don't disclose any internal or sensitive information like: internal urls, login credentials, screenshots of applications or features in development.
+              This is a public GitHub repository and all the information is publicly available.
 
     - type: checkboxes
       id: confirmation

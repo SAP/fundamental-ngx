@@ -1,0 +1,71 @@
+name: Feature or Enhancement Request
+description: Request an enhancement or feature.
+labels: []
+body:
+    - type: markdown
+      attributes:
+          value: |
+              **IMPORTANT:** Please refrain from providing any internal or sensitive information like: internal urls, login credentials, screenshots of applications or features in development, as this project is open-source, and its contents are accessible to anyone.
+
+    - type: textarea
+      id: proposal-description
+      attributes:
+          label: Describe your proposal
+          description: Please provide a detailed description of your proposal or feature request.
+      validations:
+          required: true
+
+    - type: textarea
+      id: solution
+      attributes:
+          label: Proposed Solution
+          description: A clear and concise description of the solution you would like to have.
+      validations:
+          required: true
+
+    - type: textarea
+      id: alternative
+      attributes:
+          label: Proposed Alternatives
+          description: A clear and concise description of any alternative solutions or features you've considered.
+      validations:
+          required: false
+
+    - type: input
+      id: org
+      attributes:
+          label: Organization
+          description: Add your organization name.
+      validations:
+          required: false
+
+    - type: input
+      id: stackblitz
+      attributes:
+          label: StackBlitz example(s)
+          description: If possible, provide a link to a minimal reproducible saved StackBlitz.
+          placeholder: 'https://stackblitz.com/...'
+      validations:
+          required: false
+
+    - type: dropdown
+      id: priority
+      attributes:
+          label: 'Priority'
+          multiple: false
+          options:
+              - Low
+              - Medium
+              - High
+              - Very High
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: confirmation
+      attributes:
+          label: Declaration
+          description: By submitting this issue, I confirm to follow the recommendation not to disclose any internal or sensitive information.
+          options:
+              - label: I'm not disclosing any internal or sensitive information.
+                required: true

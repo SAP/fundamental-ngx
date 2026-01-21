@@ -1,5 +1,9 @@
 // Do not modify, it's automatically created. Modify translations_bg.properties instead
 export default {
+    coreBusyIndicator: {
+        defaultAriaValueText: 'Busy',
+        defaultTitle: 'Please wait'
+    },
     coreCalendar: {
         yearSelectionLabel: 'Избор на година',
         yearsRangeSelectionLabel: 'Избор на диапазон от години',

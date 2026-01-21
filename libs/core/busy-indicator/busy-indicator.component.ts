@@ -9,7 +9,10 @@ import {
     input,
     viewChild
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { map } from 'rxjs';
 import { FD_BUSY_INDICATOR_COMPONENT } from './tokens';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
@@ -33,15 +36,14 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[attr.aria-busy]': 'loading()',
         '[attr.aria-live]': 'ariaLive()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[attr.aria-valuetext]': 'ariaValueText()',
+        '[attr.aria-valuetext]': 'ariaValueText() || _ariaValueText()',
         '[attr.aria-valuemin]': '0',
         '[attr.aria-valuemax]': '100',
-        '[attr.title]': 'title()',
+        '[attr.title]': 'title() || _titleValue()',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block()',
         '(keydown)': 'hostFocusChangeHandler($event)'
-    },
-    imports: []
+    }
 })
 export class BusyIndicatorComponent {
     /** Whether to display the loading indicator animation. */
@@ -70,6 +72,28 @@ export class BusyIndicatorComponent {
 
     /** @hidden */
     protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
+
+    /** @hidden */
+    protected readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    protected readonly _translationResolver = inject(TranslationResolver);
+
+    /** @hidden */
+    protected readonly _ariaValueText = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'coreBusyIndicator.defaultAriaValueText'))
+        ),
+        { initialValue: 'Busy' }
+    );
+
+    /** @hidden */
+    protected readonly _titleValue = toSignal(
+        this._lang$.pipe(
+            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'coreBusyIndicator.defaultTitle'))
+        ),
+        { initialValue: 'Please wait' }
+    );
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
