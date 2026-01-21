@@ -6,17 +6,15 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren,
     contentChildren,
     DestroyRef,
     ElementRef,
-    forwardRef,
     HostBinding,
     inject,
     Inject,
+    Injector,
     Input,
     Optional,
-    QueryList,
     signal,
     SkipSelf,
     ViewChild,
@@ -24,7 +22,7 @@ import {
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import {
     applyCssClass,
     CssClassBuilder,
@@ -43,7 +41,7 @@ import {
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
-import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { FD_TOOLBAR } from './tokens';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
@@ -173,8 +171,11 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     titleElement: ElementRef<HTMLHeadElement>;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => ToolbarItem))
-    toolbarItems: QueryList<ToolbarItem>;
+    @HostBinding('attr.role')
+    protected readonly _role = 'toolbar';
+
+    /** @hidden */
+    readonly toolbarItems = contentChildren(ToolbarItem, { descendants: true });
 
     /** @hidden */
     @ContentChild(TitleToken)
@@ -185,10 +186,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     get titleComponent(): TitleToken | null {
         return this._titleComponent$.value;
     }
-
-    /** @hidden */
-    @HostBinding('attr.role')
-    protected readonly _role = 'toolbar';
 
     /** @hidden */
     overflowItems$: Observable<ToolbarItem[]>;
@@ -238,6 +235,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroyRef: DestroyRef,
         private resizeObserverService: ResizeObserverService,
+        private readonly _injector: Injector,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {
         _contentDensityObserver.subscribe();
@@ -262,9 +260,8 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
         this.overflowItems$ = combineLatest([
             this.resizeObserverService.observe(this.elementRef.nativeElement).pipe(map(() => this._toolbarWidth)),
-            this.toolbarItems.changes.pipe(
-                startWith(this.toolbarItems),
-                map((toolbarItems) => toolbarItems.toArray())
+            toObservable(this.toolbarItems, { injector: this._injector }).pipe(
+                map((toolbarItems) => [...toolbarItems])
             ),
             this._titleComponent$.pipe(
                 map((titleComponent): HTMLElement | null => {
@@ -461,21 +458,24 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     private _getSortedByPriorityAndGroupItems(toolbarItems: ToolbarItem[]): ToolbarItem[] {
         const notSorted = toolbarItems.map((element, index) => ({ element, index }));
 
-        const groups = notSorted.reduce((gr, item) => {
-            let groupId = item.element.group;
-            const itemPrio = item.element.priority;
-            if (itemPrio === OverflowPriorityEnum.NEVER || itemPrio === OverflowPriorityEnum.ALWAYS) {
-                groupId = 0;
-            }
+        const groups = notSorted.reduce(
+            (gr, item) => {
+                let groupId = item.element.group;
+                const itemPrio = item.element.priority;
+                if (itemPrio === OverflowPriorityEnum.NEVER || itemPrio === OverflowPriorityEnum.ALWAYS) {
+                    groupId = 0;
+                }
 
-            if (!gr[groupId]) {
-                gr[groupId] = [];
-            }
+                if (!gr[groupId]) {
+                    gr[groupId] = [];
+                }
 
-            gr[groupId].push(item);
+                gr[groupId].push(item);
 
-            return gr;
-        }, {});
+                return gr;
+            },
+            {} as Record<number, Array<{ element: ToolbarItem; index: number }>>
+        );
 
         const groupIds = Object.keys(groups)
             .map((g) => parseInt(g, 10))
@@ -500,11 +500,11 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                     ? []
                     : groups[0].map((item) => ({
                           group: [item.element],
-                          maxPriority: OVERFLOW_PRIORITY_SCORE.get(item.element.priority),
+                          maxPriority: OVERFLOW_PRIORITY_SCORE.get(item.element.priority) ?? -Infinity,
                           minIndex: item.index
                       }))
             )
             .sort((a, b) => b.maxPriority - a.maxPriority || a.minIndex - b.minIndex)
-            .reduce((arr, i) => arr.concat(i.group), []);
+            .reduce((arr, i) => arr.concat(i.group), [] as ToolbarItem[]);
     }
 }
