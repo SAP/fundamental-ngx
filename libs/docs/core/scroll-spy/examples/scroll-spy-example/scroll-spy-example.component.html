@@ -6,7 +6,14 @@
         </div>
     }
 </div>
-<div class="list-container" fd-scrollbar fdScrollSpy [trackedTags]="['div']" (spyChange)="selectedSpy = $event.id">
+<div
+    class="list-container"
+    fd-scrollbar
+    fdScrollSpy
+    [trackedTags]="['div']"
+    [fireEmpty]="true"
+    (spyChange)="selectedSpy = $event?.id"
+>
     @for (item of items; track item) {
         <div class="item" [id]="item.id">{{ item.name }}</div>
     }

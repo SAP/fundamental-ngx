@@ -208,12 +208,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    scrollSpyChange($event: HTMLElement): void {
+    scrollSpyChange($event: HTMLElement | undefined): void {
         if (!_fromScrollToCurrentStep) {
             this.steps.forEach((step) => {
-                if (step._stepId.toString() === $event.children[0].children[0].id) {
+                const eventStepId = $event?.children[0].children[0].id;
+                if (step._stepId.toString() === eventStepId) {
                     step.status = CURRENT_STEP_STATUS;
-                } else if (step._stepId < parseInt($event.children[0].children[0].id, 10)) {
+                } else if (eventStepId && step._stepId < parseInt(eventStepId, 10)) {
                     step.status = COMPLETED_STEP_STATUS;
                 } else {
                     step.status = UPCOMING_STEP_STATUS;
