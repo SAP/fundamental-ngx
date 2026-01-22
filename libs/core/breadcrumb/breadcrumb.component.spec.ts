@@ -8,12 +8,12 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { Subject, takeUntil } from 'rxjs';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { BreadcrumbComponent } from './breadcrumb.component';
+import { BreadcrumbComponent, BreadcrumbSeparatorStyle } from './breadcrumb.component';
 
 @Component({
     selector: 'fd-breadcrumb-test-component',
     template: `
-        <fd-breadcrumb>
+        <fd-breadcrumb [separatorStyle]="separatorStyle">
             <fd-breadcrumb-item>
                 <a fd-link [routerLink]="'#'">Breadcrumb Level 1</a>
             </fd-breadcrumb-item>
@@ -30,6 +30,7 @@ import { BreadcrumbComponent } from './breadcrumb.component';
 })
 class BreadcrumbWrapperComponent {
     @ViewChild(BreadcrumbComponent) breadcrumb: BreadcrumbComponent;
+    separatorStyle: BreadcrumbSeparatorStyle = '';
 }
 
 describe('BreadcrumbComponent', () => {
@@ -54,6 +55,75 @@ describe('BreadcrumbComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should apply default separator style', () => {
+        const element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb')).toBe(true);
+        expect(element.classList.contains('fd-breadcrumb--backslash')).toBe(false);
+    });
+
+    it('should apply backslash separator style', async () => {
+        fixture.componentInstance.separatorStyle = 'backslash';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--backslash')).toBe(true);
+    });
+
+    it('should apply double-slash separator style', async () => {
+        fixture.componentInstance.separatorStyle = 'double-slash';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--double-slash')).toBe(true);
+    });
+
+    it('should apply double-backslash separator style', async () => {
+        fixture.componentInstance.separatorStyle = 'double-backslash';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--double-backslash')).toBe(true);
+    });
+
+    it('should apply greater-than separator style', async () => {
+        fixture.componentInstance.separatorStyle = 'greater-than';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--greater-than')).toBe(true);
+    });
+
+    it('should apply double-greater-than separator style', async () => {
+        fixture.componentInstance.separatorStyle = 'double-greater-than';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--double-greater-than')).toBe(true);
+    });
+
+    it('should update separator style when input changes', async () => {
+        fixture.componentInstance.separatorStyle = 'backslash';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        let element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--backslash')).toBe(true);
+        expect(element.classList.contains('fd-breadcrumb--greater-than')).toBe(false);
+
+        fixture.componentInstance.separatorStyle = 'greater-than';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        element = fixture.nativeElement.querySelector('.fd-breadcrumb');
+        expect(element.classList.contains('fd-breadcrumb--backslash')).toBe(false);
+        expect(element.classList.contains('fd-breadcrumb--greater-than')).toBe(true);
     });
 
     it('should handle onResize - enlarging the screen', (doneFn) => {
