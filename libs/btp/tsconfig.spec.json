@@ -2,9 +2,11 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "module": "commonjs",
-        "target": "es2020",
-        "types": ["jest", "node"]
+        "module": "preserve",
+        "target": "es2023",
+        "types": ["jest", "node"],
+        "moduleResolution": "bundler",
+        "isolatedModules": true
     },
     "files": ["./test-setup.ts"],
     "include": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/*.d.ts"]

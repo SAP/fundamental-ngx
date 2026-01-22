@@ -25,25 +25,29 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
     fdkReadonly = false;
 
     /** @hidden */
-    private readonly _viewModifiers$: BehaviorSubject<ReadonlyViewModifier[]> = new BehaviorSubject<
-        ReadonlyViewModifier[]
-    >(this._getInitialViewModifiers());
+    private readonly _viewModifiers$: BehaviorSubject<ReadonlyViewModifier[]>;
 
     /** @hidden */
-    private _readonlyChange$: Observable<boolean> = this._getReadonlyChange$();
+    private _readonlyChange$: Observable<boolean>;
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly readonlyObserver = inject(ReadonlyObserver);
+
+    /** @hidden */
     constructor(
         private ngZone: NgZone,
         private elementRef: ElementRef<Element>,
-        private readonlyObserver: ReadonlyObserver,
         @Optional() @Self() @Inject(FDK_READONLY_DIRECTIVE) private selfReadonly$: ReadonlyBehavior,
         @Optional() @SkipSelf() @Inject(FDK_READONLY_DIRECTIVE) private parentReadonly$: ReadonlyBehavior
     ) {
         super(1);
+
+        // Initialize properties that depend on injected services
+        this._viewModifiers$ = new BehaviorSubject<ReadonlyViewModifier[]>(this._getInitialViewModifiers());
+        this._readonlyChange$ = this._getReadonlyChange$();
 
         combineLatest([this._readonlyChange$, this._viewModifiers$])
             .pipe(

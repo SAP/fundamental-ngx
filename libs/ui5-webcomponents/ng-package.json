@@ -7,6 +7,7 @@
         "entryFile": "./index.ts"
     },
     "allowedNonPeerDependencies": [
+        "@fundamental-ngx/ui5-webcomponents-base",
         "@sap-theming/theming-base-content", 
         "compare-versions", 
         "fast-deep-equal", 
