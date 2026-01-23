@@ -84,7 +84,8 @@ act workflow_dispatch -W .github/workflows/create-release.yml -n
 ✅ `bumped-release` - Conventional commit bump calculation  
 ✅ `get-release-tag` - Release tag determination logic  
 ✅ `current-version` - Current version detection  
-✅ Jest unit tests for `get-release-tag` (5 scenarios)
+✅ Jest unit tests for `get-release-tag` (5 scenarios)  
+✅ Jest unit tests for `get-version` (16 scenarios: git tags, branch-specific versions, hotfix branches, and fallback logic)
 
 ## Limitations
 

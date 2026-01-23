@@ -94,7 +94,8 @@ describe('ToolbarComponent - Prioritization', () => {
 
         component = fixture.componentInstance;
         toolbar = component.toolbar;
-        toolbar.toolbarItems = component.children;
+        // In Angular 21, manually assigning QueryLists no longer works correctly
+        // The toolbarItems will be populated automatically via @ContentChildren
         resizeService = TestBed.inject(ResizeObserverService) as any as ResizeObservableServiceMock;
 
         await whenStable(fixture);

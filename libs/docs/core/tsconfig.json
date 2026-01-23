@@ -7,12 +7,15 @@
         "strict": true,
         "noImplicitReturns": false,
         "noFallthroughCasesInSwitch": true,
-        "target": "es2022",
+        "target": "es2023",
         "outDir": "../../dist/out-tsc",
         "declaration": true,
         "declarationMap": true,
         "inlineSources": true,
-        "types": []
+        "types": [],
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "lib": ["dom", "es2023"]
     },
     "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }

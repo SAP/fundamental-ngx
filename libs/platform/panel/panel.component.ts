@@ -93,13 +93,13 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
      * ARIA label for button when the Panel is collapsed
      */
     @Input()
-    expandLabel: string = this._panelConfig.expandLabel;
+    expandLabel: string;
 
     /**
      * ARIA label for button when the Panel is expanded
      */
     @Input()
-    collapseLabel: string = this._panelConfig.collapseLabel;
+    collapseLabel: string;
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
@@ -128,6 +128,8 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
         readonly contentDensityObserver: ContentDensityObserver
     ) {
         super();
+        this.expandLabel = this._panelConfig.expandLabel;
+        this.collapseLabel = this._panelConfig.collapseLabel;
     }
 
     /** @hidden */

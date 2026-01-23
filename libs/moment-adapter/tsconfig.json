@@ -13,11 +13,13 @@
     ],
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "target": "es2022",
+        "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
-        "lib": ["dom", "es2023"]
+        "lib": ["dom", "es2023"],
+        "module": "preserve",
+        "moduleResolution": "bundler"
     },
     "angularCompilerOptions": {
         "enableIvy": true,
