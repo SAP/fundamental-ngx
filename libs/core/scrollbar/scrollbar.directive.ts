@@ -41,8 +41,7 @@ let styleSheet: HTMLStyleElement | null = null;
         '[style.overflow-y]': '_overflowY()',
         '(scroll)': 'onScroll($event)'
     },
-    hostDirectives: [CdkScrollable],
-    standalone: true
+    hostDirectives: [CdkScrollable]
 })
 export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** Whether overflow horizontal content should be hidden. */
@@ -54,29 +53,21 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** Whether scrollbars should be visible even if content fits. */
     readonly alwaysVisible = input(false, { transform: booleanAttribute });
 
-    /** @hidden */
+    /** @hidden Whether the scrollbar is inside a popover and should stop scroll event propagation. */
     _inPopover = false;
 
     /** @hidden */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
-    protected readonly _overflowX = computed<ScrollbarOverflowOptions>(() => {
-        if (this.noHorizontalScroll()) {
-            return 'hidden';
-        }
-
-        return this._overflow();
-    });
+    protected readonly _overflowX = computed<ScrollbarOverflowOptions>(() =>
+        this.noHorizontalScroll() ? 'hidden' : this.alwaysVisible() ? 'scroll' : 'auto'
+    );
 
     /** @hidden */
-    protected readonly _overflowY = computed<ScrollbarOverflowOptions>(() => {
-        if (this.noVerticalScroll()) {
-            return 'hidden';
-        }
-
-        return this._overflow();
-    });
+    protected readonly _overflowY = computed<ScrollbarOverflowOptions>(() =>
+        this.noVerticalScroll() ? 'hidden' : this.alwaysVisible() ? 'scroll' : 'auto'
+    );
 
     /** @hidden */
     private _document: Document = inject(DOCUMENT);
@@ -84,15 +75,6 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** @hidden */
     private readonly _csp_nonce = inject(CSP_NONCE, {
         optional: true
-    });
-
-    /** @hidden */
-    private readonly _overflow = computed<ScrollbarOverflowOptions>(() => {
-        if (this.alwaysVisible()) {
-            return 'scroll';
-        }
-
-        return 'auto';
     });
 
     /**
