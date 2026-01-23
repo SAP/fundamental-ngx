@@ -562,16 +562,16 @@ export class SearchFieldComponent
             }
         }
 
-        if (!this.mobile) {
-            this.openSuggestionMenu();
-        }
-
         if (this.dataSource) {
             const match = new Map();
             match.set('keyword', inputStr);
             match.set('category', this._currentCategory?.value || null);
 
             this.dataSource.match(match);
+        }
+
+        if (!this.mobile && this._getSuggestionsLength() > 0) {
+            this.openSuggestionMenu();
         }
 
         this._updateSearchAnnouncementText();
