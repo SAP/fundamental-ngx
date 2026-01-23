@@ -26,10 +26,25 @@ module.exports = (branch = null) => {
 
     // For current branch, prefer git tags (NX Release standard)
     try {
-        const latestTag = execSync('git tag --sort=-v:refname | grep "^v[0-9]" | head -1', {
-            encoding: 'utf8',
-            stdio: ['pipe', 'pipe', 'pipe']
-        }).trim();
+        // Use --merged HEAD to only consider tags reachable from current HEAD
+        // This ensures hotfix branches on older versions work correctly
+        // First, try to get the latest stable (non-prerelease) version
+        // Exclude tags with "-" which indicates prerelease (rc, alpha, beta, etc.)
+        let latestTag = execSync(
+            'git tag --merged HEAD --sort=-v:refname | grep "^v[0-9]" | grep -v -- "-" | head -1',
+            {
+                encoding: 'utf8',
+                stdio: ['pipe', 'pipe', 'pipe']
+            }
+        ).trim();
+
+        // If no stable version exists, fall back to latest prerelease
+        if (!latestTag) {
+            latestTag = execSync('git tag --merged HEAD --sort=-v:refname | grep "^v[0-9]" | head -1', {
+                encoding: 'utf8',
+                stdio: ['pipe', 'pipe', 'pipe']
+            }).trim();
+        }
 
         if (latestTag) {
             // Remove 'v' prefix (e.g., "v0.58.0-rc.19" -> "0.58.0-rc.19")

@@ -357,7 +357,8 @@
                 "ui5-webcomponents-fiori:compile-typedoc",
                 "ui5-webcomponents-base:compile-typedoc",
                 "^transform-translations",
-                "^generate"
+                "^generate",
+                "^build"
             ]
         },
         "serve": {

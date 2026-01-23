@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { getNativeElement } from '../../helpers/get-native-element';
@@ -10,7 +10,7 @@ import { AttributeObserver } from '../../services/observers/attribute.observer';
 })
 export class DisabledObserver {
     /** @hidden */
-    constructor(private _attributeObserver: AttributeObserver) {}
+    private readonly _attributeObserver = inject(AttributeObserver);
 
     /** @hidden */
     static isDisabled(el: Element): boolean {

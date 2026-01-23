@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import { PlatformConfig } from '@fundamental-ngx/platform/shared';
@@ -21,19 +21,19 @@ export class PanelConfig {
     /**
      * Content Density of element. 'cozy' | 'compact'
      */
-    contentDensity: ContentDensity;
+    contentDensity?: ContentDensity;
 
     /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
+    constructor() {
+        const platformConfig = inject(PlatformConfig, { optional: true });
+        this.contentDensity = platformConfig?.contentDensity;
     }
 
     /**
      * Create Provider factory function
      */
-    static createProviderFactory(obj: Partial<PanelConfig>): (platformConfig: PlatformConfig) => PanelConfig {
-        const useFactory = (platformConfig: PlatformConfig): PanelConfig =>
-            Object.assign(new PanelConfig(platformConfig), obj);
+    static createProviderFactory(obj: Partial<PanelConfig>): () => PanelConfig {
+        const useFactory = (): PanelConfig => Object.assign(new PanelConfig(), obj);
         return useFactory;
     }
 }

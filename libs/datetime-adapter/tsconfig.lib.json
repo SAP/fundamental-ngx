@@ -6,7 +6,7 @@
         "declarationMap": true,
         "inlineSources": true,
         "types": [],
-        "target": "ES2022",
+        "target": "es2023",
         "useDefineForClassFields": false,
         "moduleResolution": "bundler"
     },
