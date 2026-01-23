@@ -1,4 +1,4 @@
-import baseConfig from '../../jest.config.base.ts';
+import baseConfig from '../../jest.config.base';
 
 export default {
     ...baseConfig,

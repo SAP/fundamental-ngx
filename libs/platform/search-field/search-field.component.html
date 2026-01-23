@@ -247,7 +247,7 @@
 <ng-template #suggestionMenuTemplate>
     @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestionsFiltered) {
         @if (suggestionsFiltered?.length && !_onlyHeadersFiltered(suggestionsFiltered)) {
-            <ul fd-list [searchResultsList]="true" (keydown)="onKeydown($event)">
+            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)">
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
                     @if (filteredSuggestion?.isGroupHeader) {
                         <li fd-list-group-header class="fd-suggestion-header">

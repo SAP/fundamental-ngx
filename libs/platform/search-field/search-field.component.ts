@@ -714,7 +714,7 @@ export class SearchFieldComponent
         this._isRefresh = true;
         this._isSearchDone = false;
 
-        if (!this.allowEmptySearch) {
+        if (!this.allowEmptySearch()) {
             this.closeSuggestionMenu(false);
         } else if (this.dataSource) {
             const match = new Map();
