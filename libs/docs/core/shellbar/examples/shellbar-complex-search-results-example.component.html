@@ -1,7 +1,16 @@
+<span>Shell search field example type:</span>
+<br />
 <fd-segmented-button [(ngModel)]="exampleType" style="margin-bottom: 1rem">
-    <button fd-button fdkFocusableItem label="Categories" value="categories"></button>
+    <button fd-button fdkFocusableItem label="Default" value="default"></button>
     <button fd-button fdkFocusableItem label="Advanced Filter" value="advancedFilter"></button>
     <button fd-button fdkFocusableItem label="Mobile" value="mobile"></button>
+</fd-segmented-button>
+<br />
+<span>Empty search results example type:</span>
+<br />
+<fd-segmented-button [(ngModel)]="emptyResultsType" style="margin-bottom: 1rem">
+    <button fd-button fdkFOcusableItem label="Illustrated Message" value="illustratedMessage"></button>
+    <button fd-button fdkFOcusableItem label="Suggestions List" value="customSuggestions"></button>
 </fd-segmented-button>
 
 <div [style.maxWidth]="exampleType === 'mobile' ? '320px' : '100%'" style="height: 500px; background-color: white">
@@ -14,19 +23,26 @@
         </fd-shellbar-branding>
 
         <fdp-search-field
+            #shellSearchField
             placeholder="Search"
             fdCozy
             [dataSource]="dataSource"
             [allowEmptySearch]="true"
-            [categories]="exampleType === 'categories' ? categories : []"
+            [categories]="categories"
             initialSuggestionTitle="Try this!"
             initialSuggestionSubline="Search for example 'All my open Objects'"
+            [initialSuggestionEmptyTitle]="emptyResultsType === 'customSuggestions' ? 'Oh, there are no results' : ''"
+            [initialSuggestionEmptySubline]="
+                emptyResultsType === 'customSuggestions' ? 'You can try the following' : ''
+            "
             [suggestionFooter]="footerTemplate"
             [showAdvancedFilter]="exampleType === 'advancedFilter'"
             (advancedFilterButtonClick)="openMessageToast('advanced filter')"
             [mobile]="exampleType === 'mobile'"
             [searchResultsEmptyTemplate]="emptyResultsTemplate"
             [mobileConfig]="mobileConfig"
+            [enableSelection]="true"
+            [suggestionsLoading]="suggestionsLoading"
         ></fdp-search-field>
 
         <fd-shellbar-actions>
@@ -38,7 +54,7 @@
                     [notificationLabel]="action.notificationLabel"
                 ></fd-shellbar-action>
             }
-            <fd-user-menu (isOpenChange)="isOpenChange($event)">
+            <fd-user-menu #userMenuComponent>
                 <fd-user-menu-control>
                     <fd-avatar
                         fd-user-menu-control-element
@@ -194,12 +210,20 @@
 </ng-template>
 
 <ng-template #emptyResultsTemplate>
-    <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
-        <figcaption fd-illustrated-message-figcaption id="xsmall-description">
-            <h3 fd-illustrated-message-title>No Search Results</h3>
-            <p fd-illustrated-message-text>
-                There are no results to display based on your search terms. Please try another search.
-            </p>
-        </figcaption>
-    </figure>
+    @if (emptyResultsType === 'illustratedMessage') {
+        <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
+            <figcaption fd-illustrated-message-figcaption id="xsmall-description">
+                <h3 fd-illustrated-message-title>No Search Results</h3>
+                <p fd-illustrated-message-text>
+                    There are no results to display based on your search terms. Please try another search.
+                </p>
+            </figcaption>
+        </figure>
+    } @else if (emptyResultsType === 'customSuggestions') {
+        <ul fd-list [searchResultsList]="true">
+            <li fd-list-item [suggestion]="true" fdpSearchFieldSuggestion><span fd-list-title>Apple</span></li>
+            <li fd-list-item [suggestion]="true" fdpSearchFieldSuggestion><span fd-list-title>Broccoli</span></li>
+            <li fd-list-item [suggestion]="true" fdpSearchFieldSuggestion><span fd-list-title>Carrot</span></li>
+        </ul>
+    }
 </ng-template>

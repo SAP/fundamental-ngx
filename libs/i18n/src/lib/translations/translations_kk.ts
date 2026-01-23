@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Синхрондау',
         searchSuggestionMessage: '{count} ұсыныс табылды.',
         searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Параметрлер',

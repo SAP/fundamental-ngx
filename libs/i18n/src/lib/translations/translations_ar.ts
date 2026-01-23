@@ -374,7 +374,8 @@ export default {
         synchronizeButtonTitle: 'مزامنة',
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
         searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',

@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Synkronisera',
         searchSuggestionMessage: '{count} förslag hittades.',
         searchSuggestionNavigateMessage: 'använd upp- och nedpilarna för att navigera',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Inställningar',

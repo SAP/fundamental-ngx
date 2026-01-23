@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -183,7 +184,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     settingsListTpl = input<TemplateRef<any>>();
 
     /** @hidden Whether this is a suggestion type list item. */
-    suggestion = input(false);
+    readonly suggestion = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _role = 'listitem'; // default for li elements

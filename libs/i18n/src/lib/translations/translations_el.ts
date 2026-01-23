@@ -376,7 +376,8 @@ export default {
         synchronizeButtonTitle: 'Συγχρονισμός',
         searchSuggestionMessage: '{count} προτάσεις βρέθηκαν.',
         searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ρυθμίσεις',

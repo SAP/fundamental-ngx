@@ -370,7 +370,8 @@ export default {
         synchronizeButtonTitle: 'Sinkronizo',
         searchSuggestionMessage: '{count} sugjerime u gjetën.',
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSwitch: {
         ariaLabel: 'Ndërprerësi'

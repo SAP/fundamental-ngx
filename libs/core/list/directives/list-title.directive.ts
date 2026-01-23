@@ -17,7 +17,7 @@ export class ListTitleDirective implements OnInit {
     readonly truncate = input(false, { transform: booleanAttribute });
 
     /** Whether this title is used for scope in the shell search results. */
-    scope = input(false);
+    readonly scope = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     readonly elRef = inject(ElementRef);

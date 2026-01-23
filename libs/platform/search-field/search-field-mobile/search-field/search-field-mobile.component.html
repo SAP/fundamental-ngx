@@ -1,19 +1,19 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-        <fd-dialog-header>
+        <fd-dialog-header [inShellbar]="_inShellbar" class="fdp-search-field__mobile-dialog-header">
             <ng-template fdkTemplate="header">
                 <div fd-bar-middle>
-                    <fd-bar-element [fullWidth]="true">
+                    <fd-bar-element>
                         @if (childContent?.inputFieldTemplate) {
                             <ng-template [ngTemplateOutlet]="childContent?.inputFieldTemplate!"></ng-template>
                         }
                     </fd-bar-element>
                     @if (mobileConfig.hasCloseButton) {
                         <button
-                            fd-dialog-close-button
+                            fd-button
                             fdkInitialFocus
-                            [mobile]="true"
                             (click)="_handleDismiss()"
+                            [label]="'platformSearchField.cancelLabel' | fdTranslate"
                         ></button>
                     }
                 </div>

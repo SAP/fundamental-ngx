@@ -374,7 +374,8 @@ export default {
         synchronizeButtonTitle: 'Segerakkan',
         searchSuggestionMessage: '{count} cadangan ditemui.',
         searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Tetapan',

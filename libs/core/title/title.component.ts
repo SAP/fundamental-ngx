@@ -4,6 +4,7 @@ import {
     ElementRef,
     InjectionToken,
     ViewEncapsulation,
+    booleanAttribute,
     effect,
     inject,
     input
@@ -70,7 +71,7 @@ export abstract class TitleToken {
 })
 export class TitleComponent extends TitleToken {
     /** Whether this title should clamp at two lines of text. */
-    twoLineClamp = input(false);
+    readonly twoLineClamp = input(false, { transform: booleanAttribute });
 
     /**
      * Explicit header size (1-6) for the title styling.

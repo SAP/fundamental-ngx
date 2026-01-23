@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule, BarRightDirective } from '@fundamental-ngx/core/bar';
@@ -77,18 +77,17 @@ import { Observable, of } from 'rxjs';
     ]
 })
 export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
-    @ViewChild(UserMenuComponent)
-    userMenuComponent: UserMenuComponent;
+    userMenuComponent = viewChild<UserMenuComponent>('userMenuComponent');
 
-    @ViewChild(SearchFieldComponent)
-    shellSearchField: SearchFieldComponent;
+    shellSearchField = viewChild<SearchFieldComponent>('shellSearchField');
 
     dataSource: SearchFieldDataSource<any>;
 
     expanded = true;
-    isOpen = false;
 
-    exampleType: 'categories' | 'advancedFilter' | 'mobile' = 'categories';
+    exampleType: 'default' | 'advancedFilter' | 'mobile' = 'default';
+
+    emptyResultsType: 'illustratedMessage' | 'customSuggestions' = 'illustratedMessage';
 
     categories: ValueLabelItem[] = [
         {
@@ -128,14 +127,12 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         }
     };
 
-    constructor(private _messageToastService: MessageToastService) {}
+    suggestionsLoading = false;
+
+    private _messageToastService = inject(MessageToastService);
 
     ngOnInit(): void {
         this.dataSource = new SearchFieldDataSource(new ShellSearchFieldDataProvider());
-    }
-
-    isOpenChange(isOpen: boolean): void {
-        this.isOpen = isOpen;
     }
 
     onZoomGlyphClick(): void {
@@ -144,7 +141,7 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
 
     actionPicked(action: string): void {
         this.openMessageToast(action);
-        this.userMenuComponent.close();
+        this.userMenuComponent()?.close();
     }
 
     openMessageToast(action: string): void {
@@ -155,8 +152,12 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
     }
 
     showAllSearchResultsClicked(): void {
-        this.shellSearchField.resetCategory();
-        this.shellSearchField.clearTextInput();
+        this.suggestionsLoading = true;
+        setTimeout(() => {
+            this.suggestionsLoading = false;
+            this.shellSearchField()?.resetCategory();
+            this.shellSearchField()?.clearTextInput();
+        }, 500);
     }
 }
 
@@ -169,7 +170,7 @@ export class ShellSearchFieldDataProvider extends DataProvider<SuggestionItem> {
         const data = SUGGESTIONS;
         const name = params.get('keyword');
         const category = params.get('category');
-        if (name === '' && !category) {
+        if ((!name || name.trim() === '') && !category) {
             return of(data);
         } else {
             const filteredData = data.filter((suggestion) => {

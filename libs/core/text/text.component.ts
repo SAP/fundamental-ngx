@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input, model, signal } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+    booleanAttribute,
+    computed,
+    input,
+    model,
+    signal
+} from '@angular/core';
 import { LineClampDirective, LineClampTargetDirective } from '@fundamental-ngx/cdk/utils';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -61,7 +70,7 @@ export class TextComponent {
     readonly isCollapsed = model(true);
 
     /** @hidden */
-    subline = input(false);
+    readonly subline = input(false, { transform: booleanAttribute });
 
     /**
      * Computed signal that checks if maxLines is set to a valid positive number.

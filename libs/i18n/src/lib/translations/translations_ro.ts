@@ -376,7 +376,8 @@ export default {
         synchronizeButtonTitle: 'Sincronizare',
         searchSuggestionMessage: '{count} sugestii găsite.',
         searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Setări',

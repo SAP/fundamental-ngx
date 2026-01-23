@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Synchronizovat',
         searchSuggestionMessage: 'Nalezené návrhy: {count}.',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavení',

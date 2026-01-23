@@ -3,6 +3,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
@@ -42,6 +43,8 @@ import { takeUntil } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
+    AutoCompleteDirective,
+    AutoCompleteEvent,
     ClickedDirective,
     destroyObservable,
     DynamicComponentService,
@@ -51,6 +54,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -60,7 +64,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
-import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
+import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
@@ -158,6 +162,8 @@ type Appearance = SearchComponent['appearance'] | undefined;
         ClickedDirective,
         AvatarComponent,
         ButtonComponent,
+        AutoCompleteDirective,
+        BusyIndicatorComponent,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -332,6 +338,12 @@ export class SearchFieldComponent
     /** Subline of the initial suggestion, if a suggestion list is displayed. */
     initialSuggestionSubline = input<string>('');
 
+    /** Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion title should be shown. */
+    initialSuggestionEmptyTitle = input<string>('');
+
+    /** Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion subline should be shown. */
+    initialSuggestionEmptySubline = input<string>('');
+
     /** Subline of the initial suggestion, if a suggestion list is displayed. */
     suggestionFooter = input<TemplateRef<any> | null>(null);
 
@@ -339,13 +351,25 @@ export class SearchFieldComponent
     searchResultsEmptyTemplate = input<TemplateRef<any> | null>(null);
 
     /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
-    showAdvancedFilter = input<boolean>(false);
+    showAdvancedFilter = input(false, { transform: booleanAttribute });
 
-    /** Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty. This should only be used when there are few items in the datasource. */
-    allowEmptySearch = input<boolean>(false);
+    /** Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty. */
+    allowEmptySearch = input(false, { transform: booleanAttribute });
 
     /** Whether to disable the default suggestion matching logic for search results. This may be helpful when the filtering logic is handled in the datasource. */
-    disableDefaultSuggestionMatches = input<boolean>(false);
+    disableDefaultSuggestionMatches = input(false, { transform: booleanAttribute });
+
+    /** Whether to display a suggestion item as selected after it has been clicked. */
+    enableSelection = input(false, { transform: booleanAttribute });
+
+    /** Whether to display the busy indicator over the suggestion list. */
+    suggestionsLoading = input(false, { transform: booleanAttribute });
+
+    /** Title for the busy indicator. */
+    busyIndicatorTitle = input<string>('');
+
+    /** Aria value text for the busy indicator. */
+    busyIndicatorAriaValueText = input<string>('');
 
     /** @hidden Focus state */
     _isFocused = false;
@@ -399,6 +423,12 @@ export class SearchFieldComponent
     _isOpen$ = signal(false);
 
     /** @hidden */
+    _autoCompleteSuggestions: string[] = [];
+
+    /** @hidden */
+    _selectedSuggestionItem: SuggestionItem | null;
+
+    /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
 
     /** @hidden */
@@ -437,7 +467,8 @@ export class SearchFieldComponent
         @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,
-        readonly contentDensityObserver: ContentDensityObserver
+        readonly contentDensityObserver: ContentDensityObserver,
+        @Optional() @Inject(FD_SHELLBAR_COMPONENT) private _shellbar: ShellbarComponent
     ) {
         super();
     }
@@ -458,6 +489,10 @@ export class SearchFieldComponent
         this._menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
         this._isRefresh = true;
+
+        if (this.dataSource && this._shellbar) {
+            this.onValueChange(this.inputText);
+        }
     }
 
     /** @hidden */
@@ -505,6 +540,9 @@ export class SearchFieldComponent
      * @hidden
      */
     onValueChange(event: string): void {
+        if (!event) {
+            event = '';
+        }
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
         setTimeout(() => (this._currentSearchSuggestionAnnouncementMessage = ''));
@@ -517,9 +555,11 @@ export class SearchFieldComponent
 
         this.inputChange.emit(this.searchFieldValue);
         const inputStr: string = event.trim();
-        if (inputStr.length === 0 && !this.allowEmptySearch()) {
-            this.closeSuggestionMenu();
-            return;
+        if (inputStr.length === 0) {
+            this._selectedSuggestionItem = null;
+            if (!this.allowEmptySearch()) {
+                this.closeSuggestionMenu();
+            }
         }
 
         if (!this.mobile) {
@@ -545,7 +585,15 @@ export class SearchFieldComponent
         if (typeof event === 'string') {
             this.inputText = event;
         } else if (event?.value) {
+            if (event.searchInScopeText || event.searchInScopeCounter) {
+                if (event.searchInScopeCallback) {
+                    const mockClick = new Event('click');
+                    this._performButtonClick(mockClick, event.searchInScopeCallback);
+                }
+                return;
+            }
             this.inputText = event.value;
+            this._selectedSuggestionItem = event;
         }
         this.inputChange.emit(this.searchFieldValue);
         this.searchSubmit.emit(this.searchFieldValue);
@@ -591,10 +639,10 @@ export class SearchFieldComponent
                 (category) => category.label === currentCategory.label && category.value === currentCategory.value
             );
 
-        this.inputChange.emit(this.searchFieldValue);
-        if (this.isOpen) {
+        if (this._isOpen$()) {
             this.onValueChange(this.inputText);
         }
+        this.inputChange.emit(this.searchFieldValue);
     }
 
     /**
@@ -613,6 +661,9 @@ export class SearchFieldComponent
 
     /** @hidden */
     openMobileMode(): void {
+        if (this._shellbar) {
+            this._mobileComponent.instance._inShellbar = true;
+        }
         this.showDialog(true);
     }
 
@@ -646,7 +697,9 @@ export class SearchFieldComponent
     /** Resets the current category to its initial state. */
     resetCategory(): void {
         this._currentCategory = undefined;
-        this.categorySelectComponent.value = undefined;
+        if (this.categorySelectComponent) {
+            this.categorySelectComponent.value = undefined;
+        }
     }
 
     /** @hidden */
@@ -655,6 +708,8 @@ export class SearchFieldComponent
         this.detectChanges();
         this.inputChange.emit(this.searchFieldValue);
         this.cancelSearch.emit(this.searchFieldValue);
+
+        this._selectedSuggestionItem = null;
 
         this._isRefresh = true;
         this._isSearchDone = false;
@@ -669,6 +724,17 @@ export class SearchFieldComponent
             this.dataSource.match(match);
         }
         this.focus();
+    }
+
+    /** @hidden Method that handles complete event from auto complete directive, setting the new value, and closing popover */
+    handleAutoComplete(event: AutoCompleteEvent): void {
+        if (this.inputText !== event.term) {
+            this.inputText = event.term;
+            this.onValueChange(this.inputText);
+        }
+        if (event.forceClose && this.inputText) {
+            this.closeSuggestionMenu();
+        }
     }
 
     /** @hidden */
@@ -721,6 +787,21 @@ export class SearchFieldComponent
         return retVal;
     }
 
+    /** @hidden */
+    _inputFocus(): void {
+        this._isFocused = true;
+        if (this._shellbar) {
+            this.openSuggestionMenu();
+        }
+    }
+
+    /** @hidden */
+    _handlePopoverKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this.focus();
+        }
+    }
+
     /**
      * @hidden return count for matching suggestion with input text
      * @returns number
@@ -728,10 +809,18 @@ export class SearchFieldComponent
     private _getSuggestionsLength(): number {
         let count = 0;
         this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
+            this._autoCompleteSuggestions = [];
             suggestions?.forEach((suggestion) => {
                 const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
                 if (this.inputText && textToCheck.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
+                }
+                if (!suggestion?.children && suggestion?.value) {
+                    this._autoCompleteSuggestions.push(suggestion.value);
+                } else if (suggestion?.children?.length) {
+                    suggestion.children.forEach((child) => {
+                        this._autoCompleteSuggestions.push(child.value);
+                    });
                 }
             });
         });

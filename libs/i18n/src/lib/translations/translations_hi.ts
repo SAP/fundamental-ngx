@@ -369,7 +369,8 @@ export default {
         synchronizeButtonTitle: 'सिंक्रनाइज़ करें',
         searchSuggestionMessage: '{count} सुझाव मिले',
         searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSwitch: {
         ariaLabel: 'स्विच'

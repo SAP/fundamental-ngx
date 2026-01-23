@@ -369,7 +369,8 @@ export default {
         synchronizeButtonTitle: 'სინქრონიზაცია',
         searchSuggestionMessage: 'ნაპოვნია {count} შემოთავაზება.',
         searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSwitch: {
         ariaLabel: 'გადამრთველი'

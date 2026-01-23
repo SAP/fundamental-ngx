@@ -1,4 +1,4 @@
-import { Directive, input } from '@angular/core';
+import { booleanAttribute, Directive, input } from '@angular/core';
 
 /**
  * The middle section of the Bar component.
@@ -14,5 +14,5 @@ import { Directive, input } from '@angular/core';
 })
 export class BarMiddleDirective {
     /** Whether to stack the contents of this portion of the bar vertically. */
-    stackContentsVertically = input(false);
+    readonly stackContentsVertically = input(false, { transform: booleanAttribute });
 }

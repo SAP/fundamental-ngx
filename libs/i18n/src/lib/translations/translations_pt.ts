@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Sincronizar',
         searchSuggestionMessage: '{count} sugestões encontradas.',
         searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Configurações',

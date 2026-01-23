@@ -35,6 +35,12 @@
     .fdp-search-field__advanced-filter-button {
         margin-inline-start: 0.625rem !important;
     }
+
+    &__footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
 }
 
 fdp-search-field {

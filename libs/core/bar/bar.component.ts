@@ -1,4 +1,5 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -79,10 +80,10 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     role = input('toolbar');
 
     /** Whether this bar is to be used for the search results initial suggestion title. */
-    initialSuggestionTitle = input(false);
+    readonly initialSuggestionTitle = input(false, { transform: booleanAttribute });
 
     /** Whether this bar is to be used for the search results initial suggestion subline. */
-    initialSuggestionSubline = input(false);
+    readonly initialSuggestionSubline = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _subscriptions = new Subscription();

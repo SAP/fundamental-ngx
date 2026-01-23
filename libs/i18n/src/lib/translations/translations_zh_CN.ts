@@ -373,7 +373,8 @@ export default {
         synchronizeButtonTitle: '同步',
         searchSuggestionMessage: '找到 {count} 个建议。',
         searchSuggestionNavigateMessage: '使用向上和向下箭头进行导航',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: '设置',

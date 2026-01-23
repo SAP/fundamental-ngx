@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Синхронизиране',
         searchSuggestionMessage: 'Намерени са {count} предложения.',
         searchSuggestionNavigateMessage: 'за придвижване, използвайте стрелките нагоре и надолу',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Настройки',

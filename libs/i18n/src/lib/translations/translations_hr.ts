@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Sinkroniziraj',
         searchSuggestionMessage: 'Pronađeno je {count} prijedloga.',
         searchSuggestionNavigateMessage: 'za navigiranje upotrijebite strelice Gore i Dolje',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Postavke',

@@ -378,7 +378,8 @@ export default {
         synchronizeButtonTitle: '[[[Ŝŷŋċĥŗŏŋįžē∙∙∙∙∙∙∙∙]]]',
         searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',

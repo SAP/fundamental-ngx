@@ -374,7 +374,8 @@ export default {
         synchronizeButtonTitle: 'סנכרן',
         searchSuggestionMessage: 'נמצאו {count} הצעות.',
         searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'הגדרות',

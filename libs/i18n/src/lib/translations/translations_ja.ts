@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: '同期',
         searchSuggestionMessage: '{count}件の候補が見つかりました。',
         searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

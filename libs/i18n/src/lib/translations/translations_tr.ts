@@ -376,7 +376,8 @@ export default {
         synchronizeButtonTitle: 'Eşitle',
         searchSuggestionMessage: '{count} öneri bulundu.',
         searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',

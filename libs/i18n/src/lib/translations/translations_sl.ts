@@ -375,7 +375,8 @@ export default {
         synchronizeButtonTitle: 'Sinhronizacija',
         searchSuggestionMessage: '{count} predlogov najdenih.',
         searchSuggestionNavigateMessage: 'za krmarjenje uporabite puščici navzgor in navzdol',
-        deleteButtonLabel: 'Delete'
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavitve',

@@ -1,10 +1,17 @@
 <ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
-    <fd-popover [isOpen]="_isOpen$()" (isOpenChange)="_isOpen$.set($event)" [triggers]="[]" fillControlMode="equal">
+    <fd-popover
+        [isOpen]="_isOpen$()"
+        (isOpenChange)="_isOpen$.set($event)"
+        [triggers]="[]"
+        fillControlMode="equal"
+        [focusTrapped]="true"
+    >
         <fd-popover-control>
             <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body
+            (keydown)="_handlePopoverKeydown($event)"
             [style.display]="
                 (_dropdownValues$ | async | suggestionMatches: inputText).length > 0 ||
                 initialSuggestionTitle() ||
@@ -14,36 +21,63 @@
                     : 'none'
             "
         >
-            @if (initialSuggestionTitle()) {
-                <div fd-popover-body-header>
-                    <div
-                        fd-bar
-                        [initialSuggestionTitle]="true"
-                        [barDesign]="initialSuggestionSubline() ? 'header-with-subheader' : 'header'"
-                    >
-                        <div fd-bar-left>
-                            <span fd-title [twoLineClamp]="true" [headerSize]="6">
-                                {{ initialSuggestionTitle() }}
-                            </span>
-                        </div>
-                    </div>
-                    @if (initialSuggestionSubline()) {
-                        <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
+            <fd-busy-indicator
+                [block]="true"
+                [loading]="suggestionsLoading()"
+                [title]="busyIndicatorTitle()"
+                [ariaValueText]="busyIndicatorAriaValueText()"
+            >
+                @if (
+                    initialSuggestionTitle()!.length > 0 &&
+                    (_dropdownValues$ | async | suggestionMatches: inputText).length > 0
+                ) {
+                    <div fd-popover-body-header>
+                        <div
+                            fd-bar
+                            [initialSuggestionTitle]="true"
+                            [barDesign]="initialSuggestionSubline() ? 'header-with-subheader' : 'header'"
+                        >
                             <div fd-bar-left>
-                                <fd-text [subline]="true" [text]="initialSuggestionSubline()"></fd-text>
+                                <span fd-title [twoLineClamp]="true" [headerSize]="6">
+                                    {{ initialSuggestionTitle() }}
+                                </span>
                             </div>
                         </div>
-                    }
-                </div>
-            }
-            <ng-template [ngTemplateOutlet]="suggestionMenuTemplate"></ng-template>
-            @if (suggestionFooter()) {
-                <div fd-popover-body-footer>
-                    <div fd-bar barDesign="footer">
-                        <ng-template [ngTemplateOutlet]="suggestionFooter()"></ng-template>
+                        @if (initialSuggestionSubline()) {
+                            <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
+                                <div fd-bar-left>
+                                    <fd-text [subline]="true" [text]="initialSuggestionSubline()"></fd-text>
+                                </div>
+                            </div>
+                        }
                     </div>
-                </div>
-            }
+                } @else if (
+                    initialSuggestionEmptyTitle()!.length > 0 &&
+                    (_dropdownValues$ | async | suggestionMatches: inputText).length === 0
+                ) {
+                    <div fd-popover-body-header>
+                        <div
+                            fd-bar
+                            [initialSuggestionTitle]="true"
+                            [barDesign]="initialSuggestionEmptySubline() ? 'header-with-subheader' : 'header'"
+                        >
+                            <div fd-bar-left>
+                                <span fd-title [twoLineClamp]="true" [headerSize]="6">
+                                    {{ initialSuggestionEmptyTitle() }}
+                                </span>
+                            </div>
+                        </div>
+                        @if (initialSuggestionEmptySubline()) {
+                            <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
+                                <div fd-bar-left>
+                                    <fd-text [subline]="true" [text]="initialSuggestionEmptySubline()"></fd-text>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                <ng-template [ngTemplateOutlet]="suggestionMenuTemplate"></ng-template>
+            </fd-busy-indicator>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
@@ -115,8 +149,12 @@
             }
             <input
                 #inputField
+                fdkAutoComplete
+                [options]="_autoCompleteSuggestions"
+                [inputText]="inputText"
+                (onComplete)="handleAutoComplete($event)"
                 type="search"
-                (focus)="_isFocused = true"
+                (focus)="_inputFocus()"
                 (blur)="_isFocused = false; (null)"
                 [attr.placeholder]="placeholder"
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
@@ -222,16 +260,10 @@
                             ></ng-template>
                         }
                         @if (filteredSuggestion?.searchInScopeText) {
-                            <li
-                                fd-list-item
-                                [interactive]="true"
-                                [suggestion]="true"
-                                fdpSearchFieldSuggestion
-                                [counter]="filteredSuggestion?.searchInScopeCounter"
-                                (fdkClicked)="_performButtonClick($event, filteredSuggestion?.searchInScopeCallback)"
-                            >
-                                <span fd-list-title>{{ filteredSuggestion?.searchInScopeText }}</span>
-                            </li>
+                            <ng-template
+                                [ngTemplateOutlet]="suggestionItemTemplate"
+                                [ngTemplateOutletContext]="{ filteredSuggestion: filteredSuggestion }"
+                            ></ng-template>
                         }
                     } @else {
                         <ng-template
@@ -241,6 +273,13 @@
                     }
                 }
             </ul>
+            @if (suggestionFooter() && (_dropdownValues$ | async | suggestionMatches: inputText).length > 0) {
+                <div fd-popover-body-footer class="fdp-search-field__footer">
+                    <div fd-bar barDesign="footer">
+                        <ng-template [ngTemplateOutlet]="suggestionFooter()"></ng-template>
+                    </div>
+                </div>
+            }
         } @else if (searchResultsEmptyTemplate()) {
             <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate()"></ng-template>
         }
@@ -262,6 +301,8 @@
             #suggestionListItem
             (mouseenter)="_searchResultIsHoveredOrFocused(suggestionListItem)"
             (mouseleave)="_searchResultIsHoveredOrFocused(suggestionListItem)"
+            [selected]="enableSelection() && filteredSuggestion === _selectedSuggestionItem"
+            [counter]="filteredSuggestion.searchInScopeCounter"
         >
             @let listIconGlyph = filteredSuggestion?.data?.listIconGlyph;
             @if (listIconGlyph) {
@@ -304,10 +345,14 @@
                         </span>
                     </div>
                 } @else {
-                    <span
-                        fd-list-title
-                        [innerHTML]="filteredSuggestion?.value | highlight: inputText : true : true"
-                    ></span>
+                    @if (filteredSuggestion.searchInScopeText) {
+                        <span fd-list-title>{{ filteredSuggestion.searchInScopeText }}</span>
+                    } @else {
+                        <span
+                            fd-list-title
+                            [innerHTML]="filteredSuggestion?.value | highlight: inputText : true : true"
+                        ></span>
+                    }
                 }
 
                 @let actionButtons = filteredSuggestion?.data?.actionButtons;
