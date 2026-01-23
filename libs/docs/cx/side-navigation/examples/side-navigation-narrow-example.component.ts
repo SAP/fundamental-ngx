@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     NestedItemComponent,
     NestedLinkComponent,
@@ -29,7 +29,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ButtonComponent,
-        ScrollbarModule,
+        ScrollbarDirective,
         I18nModule,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,

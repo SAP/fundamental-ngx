@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { getNativeElement } from '../../helpers/get-native-element';
@@ -12,7 +12,7 @@ import { isElementFocusableByDefault } from './is-element-focusable-by-default';
 })
 export class FocusableObserver {
     /** @hidden */
-    constructor(private _attributeObserver: AttributeObserver) {}
+    private readonly _attributeObserver = inject(AttributeObserver);
 
     /** @Hidden */
     static isFocusable(element: Element, respectTabIndex: boolean): boolean {

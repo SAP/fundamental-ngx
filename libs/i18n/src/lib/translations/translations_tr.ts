@@ -1,5 +1,9 @@
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
+    coreBusyIndicator: {
+        defaultAriaValueText: 'Busy',
+        defaultTitle: 'Please wait'
+    },
     coreCalendar: {
         yearSelectionLabel: 'Yıl seç',
         yearsRangeSelectionLabel: 'Yıl aralığı seç',

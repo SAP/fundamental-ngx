@@ -2,7 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "target": "ES2022",
+        "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
@@ -15,6 +15,6 @@
         "strictMetadataEmit": true,
         "enableResourceInlining": true
     },
-    "exclude": ["**/*.spec.ts", "../../dist/out-tsc"],
+    "exclude": ["**/*.spec.ts", "../../dist/out-tsc", "jest.config.ts"],
     "include": ["./**/*.ts"]
 }
