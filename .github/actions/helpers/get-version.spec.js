@@ -43,22 +43,37 @@ describe('get-version', () => {
 
     describe('when no branch is specified (current branch)', () => {
         describe('git tag resolution', () => {
-            it('should return latest stable version and ignore prerelease tags', () => {
-                // Simulate scenario: v0.58.0 exists, plus v0.58.0-rc.113, rc.114, rc.115
+            it('should return latest stable version when stable is newer than prereleases', () => {
+                // Simulate scenario: v0.58.0 exists (stable), plus older v0.58.0-rc.112
                 execSync.mockImplementation((cmd) => {
                     if (cmd.includes('grep -v -- "-"')) {
-                        // Return latest stable version
+                        // Latest stable version
                         return Buffer.from('v0.58.0\n');
                     }
-                    // Should not reach here in this test
-                    return Buffer.from('v0.58.0-rc.115\n');
+                    // Latest overall (could be old prerelease)
+                    return Buffer.from('v0.58.0-rc.112\n');
                 });
 
                 const result = getVersion();
 
                 expect(result).toBe('0.58.0');
                 expect(execSync).toHaveBeenCalledWith(expect.stringContaining('--merged HEAD'), expect.any(Object));
-                expect(execSync).toHaveBeenCalledWith(expect.stringContaining('grep -v -- "-"'), expect.any(Object));
+            });
+
+            it('should return latest prerelease when prerelease is newer than stable', () => {
+                // Scenario: v0.58.0 (stable) exists, but v0.59.0-rc.0 (prerelease) is newer
+                execSync.mockImplementation((cmd) => {
+                    if (cmd.includes('grep -v -- "-"')) {
+                        // Latest stable
+                        return Buffer.from('v0.58.0\n');
+                    }
+                    // Latest overall (newer prerelease)
+                    return Buffer.from('v0.59.0-rc.0\n');
+                });
+
+                const result = getVersion();
+
+                expect(result).toBe('0.59.0-rc.0');
             });
 
             it('should return latest prerelease when no stable version exists', () => {
@@ -74,21 +89,19 @@ describe('get-version', () => {
                 const result = getVersion();
 
                 expect(result).toBe('0.58.0-rc.5');
-                // Should call both commands
-                expect(execSync).toHaveBeenCalledTimes(2);
             });
 
-            it('should prefer v0.59.0 over v0.58.0-rc.200', () => {
+            it('should prefer v0.59.0-rc.0 over v0.58.0 when prerelease is newer', () => {
                 execSync.mockImplementation((cmd) => {
                     if (cmd.includes('grep -v -- "-"')) {
-                        return Buffer.from('v0.59.0\n');
+                        return Buffer.from('v0.58.0\n');
                     }
-                    return Buffer.from('v0.58.0-rc.200\n');
+                    return Buffer.from('v0.59.0-rc.0\n');
                 });
 
                 const result = getVersion();
 
-                expect(result).toBe('0.59.0');
+                expect(result).toBe('0.59.0-rc.0');
             });
 
             it('should handle version with v prefix correctly', () => {
@@ -189,26 +202,41 @@ describe('get-version', () => {
 
     describe('real-world scenarios', () => {
         it('should handle the v0.58.0 release bug scenario', () => {
-            // Scenario: v0.58.0 was released, but v0.58.0-rc.113, rc.114, rc.115 exist after it
-            // The bug would return rc.115, the fix should return 0.58.0
+            // Scenario: v0.58.0 was released, but v0.58.0-rc.113, rc.114, rc.115 exist
+            // Should return v0.58.0 (stable is newer than old rc tags)
             execSync.mockImplementation((cmd) => {
                 if (cmd.includes('grep -v -- "-"')) {
-                    // Return stable version
                     return Buffer.from('v0.58.0\n');
                 }
-                // Without the fix, this would be returned
                 return Buffer.from('v0.58.0-rc.115\n');
             });
 
             const result = getVersion();
 
-            // Should return stable version, not rc.115
             expect(result).toBe('0.58.0');
         });
 
+        it('should handle the v0.59.0-rc.0 after v0.58.0 scenario', () => {
+            // Scenario: v0.58.0 stable released, then PR with breaking change creates v0.59.0-rc.0
+            // Next PR should see v0.59.0-rc.0 as current (not v0.58.0)
+            execSync.mockImplementation((cmd) => {
+                if (cmd.includes('grep -v -- "-"')) {
+                    // Latest stable
+                    return Buffer.from('v0.58.0\n');
+                }
+                // Latest overall (newer prerelease)
+                return Buffer.from('v0.59.0-rc.0\n');
+            });
+
+            const result = getVersion();
+
+            // Should return prerelease because it's newer
+            expect(result).toBe('0.59.0-rc.0');
+            // This allows next version to be 0.59.0-rc.1 (not 0.58.2-rc.0)
+        });
+
         it('should correctly identify next version base after stable release', () => {
-            // After v0.58.0 is released, the version detector should see 0.58.0 as latest
-            // So the next version would be 0.58.1-rc.0 or 0.59.0-rc.0, not 0.58.0-rc.116
+            // After v0.58.0 is released with only old rc tags
             execSync.mockImplementation((cmd) => {
                 if (cmd.includes('grep -v -- "-"')) {
                     return Buffer.from('v0.58.0\n');
