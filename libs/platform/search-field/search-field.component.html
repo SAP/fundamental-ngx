@@ -108,7 +108,9 @@
         #categorySelectComponent
         [placeholder]="categoryLabel"
         [selectControlClass]="appearance?.categoryButtonClass"
-        [selectDropdownButtonClass]="appearance?.categoryDropdownButtonClass"
+        [selectDropdownButtonClass]="
+            appearance?.categoryDropdownButtonClass + (!!_currentCategory?.value ? ' is-selected' : '')
+        "
         (valueChange)="setCurrentCategory($event)"
     >
         @for (category of categories; track category) {

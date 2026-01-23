@@ -12,6 +12,7 @@
                         <button
                             fd-button
                             fdkInitialFocus
+                            fdType="transparent"
                             (click)="_handleDismiss()"
                             [label]="'platformSearchField.cancelLabel' | fdTranslate"
                         ></button>
@@ -24,11 +25,17 @@
                 <ng-template [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"></ng-template>
             }
         </fd-dialog-body>
-        <fd-dialog-footer>
-            @if (mobileConfig.approveButtonText) {
-                <fd-button-bar fdType="emphasized" [label]="mobileConfig.approveButtonText!" (click)="_handleApprove()">
-                </fd-button-bar>
-            }
-        </fd-dialog-footer>
+        @if (!_inShellbar) {
+            <fd-dialog-footer>
+                @if (mobileConfig.approveButtonText) {
+                    <fd-button-bar
+                        fdType="emphasized"
+                        [label]="mobileConfig.approveButtonText!"
+                        (click)="_handleApprove()"
+                    >
+                    </fd-button-bar>
+                }
+            </fd-dialog-footer>
+        }
     </fd-dialog>
 </ng-template>
