@@ -69,7 +69,7 @@ export class ScrollSpyDirective implements OnInit {
         const [firstChild] = children;
         const childrenLength = children.length;
         const targetScrollTop = target.scrollTop;
-        const targetOffsetTop = target.offsetTop + this.targetOffset() - (target.offsetTop - firstChild.offsetTop);
+        const targetOffsetTop = firstChild.offsetTop + this.targetOffset();
 
         for (let i = 0; i < childrenLength; i++) {
             const element = children[i];
