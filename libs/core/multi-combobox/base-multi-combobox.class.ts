@@ -11,7 +11,17 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { ChangeDetectorRef, DestroyRef, Directive, ElementRef, EventEmitter, inject } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    DestroyRef,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Injector,
+    afterNextRender,
+    inject,
+    viewChild
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataSourceDirective, MatchingBy, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
@@ -26,6 +36,7 @@ import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isStr
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subscription, skip, startWith, timer } from 'rxjs';
+import { PopoverComponent } from '../popover';
 import {
     FdMultiComboBoxDataSource,
     FdMultiComboboxAcceptableDataSource
@@ -102,7 +113,7 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     selectedShown$ = new BehaviorSubject(false);
 
-    /** @Hidden */
+    /** @hidden */
     protected readonly _elmRef = inject(ElementRef<HTMLElement>);
 
     /** @hidden */
@@ -111,8 +122,11 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     protected readonly _mapLimit = inject(FD_MAP_LIMIT);
 
-    /** @Hidden */
+    /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    protected readonly _injector = inject(Injector);
 
     /** @hidden */
     protected _dataSource: FdMultiComboboxAcceptableDataSource<T>;
@@ -167,6 +181,9 @@ export abstract class BaseMultiCombobox<T = any> {
     private _dataSourceChanged = false;
 
     /** @hidden */
+    private readonly popover = viewChild(PopoverComponent);
+
+    /** @hidden */
     writeValue(value: T[]): void {
         this.selectedItems = coerceArraySafe(value);
         this._cva.writeValue(this.selectedItems);
@@ -211,6 +228,14 @@ export abstract class BaseMultiCombobox<T = any> {
         const event = new MultiComboboxSelectionChangeEvent(this, this.selectedItems);
 
         this.selectionChange.emit(event);
+
+        // Wait for Angular to complete the current render cycle, then refresh popover position after selection changes
+        afterNextRender(
+            () => {
+                this.popover()?.refreshPosition();
+            },
+            { injector: this._injector }
+        );
     }
 
     /** @hidden */
