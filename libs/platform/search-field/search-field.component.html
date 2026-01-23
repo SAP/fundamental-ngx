@@ -383,7 +383,7 @@
 
                 @let showDeleteButton = filteredSuggestion?.data?.showDeleteButton;
                 @let deleteCallback = filteredSuggestion?.data?.deleteCallback;
-                @if (showDeleteButton && _searchResultIsHoveredOrFocused(suggestionListItem)) {
+                @if (showDeleteButton && _searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)) {
                     <button
                         fd-button
                         fdType="transparent"

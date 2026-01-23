@@ -763,8 +763,9 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    _searchResultIsHoveredOrFocused(suggestionEl: ListItemComponent): boolean {
+    _searchResultIsHoveredOrFocusedOrMobile(suggestionEl: ListItemComponent): boolean {
         return (
+            (this.mobile && this._selectedSuggestionItem === null) ||
             document.activeElement === suggestionEl.elementRef.nativeElement ||
             suggestionEl.elementRef.nativeElement.matches(':hover')
         );
