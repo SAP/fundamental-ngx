@@ -26,21 +26,24 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
     /** @Hidden */
     private readonly _destroyRef = inject(DestroyRef);
     /** @hidden */
-    private readonly _viewModifiers$: BehaviorSubject<DisabledViewModifier[]> = new BehaviorSubject<
-        DisabledViewModifier[]
-    >(this._getInitialViewModifiers());
+    private readonly disabledObserver = inject(DisabledObserver);
     /** @hidden */
-    private _disabledChange$: Observable<boolean> = this._getDisabledChange$();
+    private readonly _viewModifiers$: BehaviorSubject<DisabledViewModifier[]>;
+    /** @hidden */
+    private _disabledChange$: Observable<boolean>;
 
     /** @hidden */
     constructor(
         private ngZone: NgZone,
         private elementRef: ElementRef<HTMLElement>,
-        private disabledObserver: DisabledObserver,
         @Optional() @Self() @Inject(FDK_DISABLED_DIRECTIVE) private selfDisabled$?: DisabledBehavior,
         @Optional() @SkipSelf() @Inject(FDK_DISABLED_DIRECTIVE) private parentDisabled$?: DisabledBehavior
     ) {
         super(1);
+
+        // Initialize properties that depend on injected services
+        this._viewModifiers$ = new BehaviorSubject<DisabledViewModifier[]>(this._getInitialViewModifiers());
+        this._disabledChange$ = this._getDisabledChange$();
         combineLatest([this._disabledChange$, this._viewModifiers$])
             .pipe(
                 tap(([isDisabled]) => this.setDisabledState(isDisabled)),

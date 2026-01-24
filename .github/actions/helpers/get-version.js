@@ -1,12 +1,13 @@
 const getFileContents = require('./get-file-contents');
 const { execSync } = require('child_process');
+const semver = require('semver');
 
 /**
  * Get the version from git tags (NX Release compatible) or fall back to package.json.
  * This aligns with NX Release's currentVersionResolver: "git-tag" configuration.
  *
  * Priority:
- * 1. Git tags (latest semver tag, e.g., v0.58.0-rc.19)
+ * 1. Git tags (latest semver tag by semver comparison, including prereleases)
  * 2. libs/core/package.json (contains actual version)
  * 3. package.json (workspace root - fallback)
  *
@@ -26,14 +27,24 @@ module.exports = (branch = null) => {
 
     // For current branch, prefer git tags (NX Release standard)
     try {
-        const latestTag = execSync('git tag --sort=-v:refname | grep "^v[0-9]" | head -1', {
+        // Use --merged HEAD to only consider tags reachable from current HEAD
+        // This ensures hotfix branches on older versions work correctly
+        // Get ALL version tags (including prereleases) and use semver to find the latest
+        const validVersions = execSync('git tag --merged HEAD | grep "^v[0-9]"', {
             encoding: 'utf8',
             stdio: ['pipe', 'pipe', 'pipe']
-        }).trim();
+        })
+            .trim()
+            .split('\n')
+            .map((tag) => tag.trim().replace(/^v/, ''))
+            .filter((v) => semver.valid(v));
 
-        if (latestTag) {
-            // Remove 'v' prefix (e.g., "v0.58.0-rc.19" -> "0.58.0-rc.19")
-            return latestTag.replace(/^v/, '');
+        if (validVersions.length > 0) {
+            // Sort by semver (including prereleases) and get the highest version
+            // semver.rsort handles prerelease comparison correctly:
+            // e.g., 0.59.0-rc.0 > 0.58.1 (because 0.59.0 > 0.58.1)
+            const sortedVersions = semver.rsort(validVersions);
+            return sortedVersions[0];
         }
     } catch (e) {
         // Git command failed or no tags found, fall through to package.json

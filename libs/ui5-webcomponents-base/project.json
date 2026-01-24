@@ -64,7 +64,8 @@
                 "{workspaceRoot}/coverage/{projectRoot}"
             ],
             "options": {
-                "jestConfig": "{projectRoot}/jest.config.ts"
+                "jestConfig": "{projectRoot}/jest.config.ts",
+                "tsConfig": "libs/ui5-webcomponents-base/tsconfig.spec.json"
             }
         }
     }

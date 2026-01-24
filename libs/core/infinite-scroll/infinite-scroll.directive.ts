@@ -1,65 +1,56 @@
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, input, output } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
 /**
  * Tool directive used to achieve the infinite scroll mechanism.
  */
 @Directive({
-    selector: '[fdInfiniteScroll]',
-    standalone: true
+    selector: '[fdInfiniteScroll]'
 })
-export class InfiniteScrollDirective implements OnInit, OnDestroy {
+export class InfiniteScrollDirective {
     /** Scroll percentage at which the onScrollAction event is fired. */
-    @Input()
-    scrollPercent = 75;
+    readonly scrollPercent = input(75);
 
     /** Scroll PX at which the onScrollAction event is fired. */
-    @Input()
-    scrollOffset: Nullable<number> = null;
+    readonly scrollOffset = input<Nullable<number>>(null);
 
     /** Event emitted when the scrollPercent threshold is met. */
-    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onScrollAction = new EventEmitter<void>();
+    readonly onScrollAction = output<void>();
 
     /** @hidden */
-    private _subscription = new Subscription();
+    private readonly _element = inject(ElementRef);
 
     /** @hidden */
-    constructor(private _element: ElementRef) {}
+    private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
-    ngOnInit(): void {
+    constructor() {
         this._listenOnScroll();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
     }
 
     /** @hidden */
     shouldTriggerAction(): boolean {
         const element = this._element.nativeElement;
         const offset: number = element.scrollTop + element.offsetHeight;
-        if (this.scrollOffset) {
-            return offset > element.scrollHeight - this.scrollOffset;
+        const scrollOffsetValue = this.scrollOffset();
+        if (scrollOffsetValue) {
+            return offset > element.scrollHeight - scrollOffsetValue;
         } else {
-            return offset / element.scrollHeight > this.scrollPercent / 100;
+            return offset / element.scrollHeight > this.scrollPercent() / 100;
         }
     }
 
     /** @hidden */
     private _listenOnScroll(): void {
-        this._subscription.add(
-            fromEvent(this._element.nativeElement, 'scroll')
-                .pipe(
-                    debounceTime(50),
-                    filter(() => this.shouldTriggerAction())
-                )
-                .subscribe(() => this.onScrollAction.emit())
-        );
+        fromEvent(this._element.nativeElement, 'scroll')
+            .pipe(
+                debounceTime(50),
+                filter(() => this.shouldTriggerAction()),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => this.onScrollAction.emit());
     }
 }
