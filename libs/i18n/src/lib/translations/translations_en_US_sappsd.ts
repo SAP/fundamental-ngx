@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: '[[[Ɓűşŷ]]]',
+        defaultTitle: '[[[Ƥĺēąşē ŵąįţ∙∙∙∙∙∙∙∙]]]'
     },
     coreCalendar: {
         yearSelectionLabel: '[[[Ŝēĺēċţ ŷēąŗ∙∙∙∙∙∙∙∙]]]',

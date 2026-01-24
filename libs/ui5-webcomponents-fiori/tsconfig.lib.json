@@ -2,13 +2,20 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "target": "ES2022",
+        "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
         "lib": ["dom", "es2023"],
         "useDefineForClassFields": false,
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "skipLibCheck": true,
+        "module": "preserve",
+        "baseUrl": ".",
+        "paths": {
+            "@fundamental-ngx/ui5-webcomponents-base": ["../../dist/libs/ui5-webcomponents-base"],
+            "@fundamental-ngx/ui5-webcomponents-base/*": ["../../dist/libs/ui5-webcomponents-base/*"]
+        }
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

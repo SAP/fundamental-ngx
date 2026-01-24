@@ -2,7 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "target": "ES2022",
+        "target": "es2023",
         "declaration": true,
         "declarationMap": true,
         "types": [],
@@ -11,7 +11,12 @@
         "jsx": "react",
         "jsxFactory": "JSX.createElement",
         "jsxFragmentFactory": "JSX.Fragment",
-        "moduleResolution": "bundler"
+        "moduleResolution": "bundler",
+        "baseUrl": ".",
+        "paths": {
+            "@fundamental-ngx/ui5-webcomponents-base": ["../ui5-webcomponents-base/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-base/*": ["../ui5-webcomponents-base/*/index.ts"]
+        }
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

@@ -1,4 +1,4 @@
-import { virtualFs, workspaces } from '@angular-devkit/core';
+import { workspaces } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 
@@ -71,7 +71,7 @@ export function createHost(tree: Tree): workspaces.WorkspaceHost {
             if (!data) {
                 throw new SchematicsException('File not found.');
             }
-            return virtualFs.fileBufferToString(data);
+            return data.toString('utf-8');
         },
         async writeFile(path: string, data: string): Promise<void> {
             return tree.overwrite(path, data);
