@@ -6,6 +6,12 @@
         text-decoration: none;
     }
 
+    &__logo-icon {
+        height: 1.5rem;
+        width: auto;
+        vertical-align: middle;
+    }
+
     &__version {
         @media (max-width: 576px) {
             display: none;

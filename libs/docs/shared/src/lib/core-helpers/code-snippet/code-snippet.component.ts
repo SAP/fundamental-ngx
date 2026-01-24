@@ -51,27 +51,24 @@ export class CodeSnippetComponent {
         }
 
         // React to file changes and update highlighted code
-        effect(
-            (onCleanup) => {
-                const file = this.file();
-                if (!file) {
-                    this.highlightedCode.set(null);
-                    return;
-                }
+        effect((onCleanup) => {
+            const file = this.file();
+            if (!file) {
+                this.highlightedCode.set(null);
+                return;
+            }
 
-                if (isObservable(file.code)) {
-                    // Handle observable code with proper cleanup
-                    const subscription = file.code.subscribe((code) => {
-                        this.highlightedCode.set(this._highlight(code, file.language));
-                    });
-                    onCleanup(() => subscription.unsubscribe());
-                } else {
-                    // Handle static code directly
-                    this.highlightedCode.set(this._highlight(file.code, file.language));
-                }
-            },
-            { allowSignalWrites: true }
-        );
+            if (isObservable(file.code)) {
+                // Handle observable code with proper cleanup
+                const subscription = file.code.subscribe((code) => {
+                    this.highlightedCode.set(this._highlight(code, file.language));
+                });
+                onCleanup(() => subscription.unsubscribe());
+            } else {
+                // Handle static code directly
+                this.highlightedCode.set(this._highlight(file.code, file.language));
+            }
+        });
 
         // Handle content-based highlighting after view is ready
         afterNextRender(() => {

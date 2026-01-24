@@ -160,9 +160,13 @@ export class DocsNavigationService {
                     const linearItems = this._toLinearItems(filteredContent);
 
                     if (linearItems.length > 0) {
+                        // Sort items alphabetically by name
+                        const sortedItems = linearItems.sort((a, b) =>
+                            a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+                        );
                         packageContent.push({
                             name: section.header,
-                            subItems: linearItems
+                            subItems: sortedItems
                         });
                     }
                 }

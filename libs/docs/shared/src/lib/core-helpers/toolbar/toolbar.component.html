@@ -1,4 +1,4 @@
-<fd-shellbar [size]="size" class="fd-docs--toolbar">
+<fd-shellbar [size]="size()" class="fd-docs--toolbar">
     <button
         fd-shellbar-side-nav
         fd-button
@@ -8,20 +8,24 @@
         glyph="menu2"
         aria-label="Switch Navigation"
         fdCozy
-        (click)="this.btnClicked.emit()"
+        (click)="btnClicked.emit()"
     ></button>
     <fd-shellbar-logo>
         <a
             aria-label="Home"
             class="fd-shellbar__logo fd-docs--toolbar__home-logo sap-margin-begin-tiny sap-display-inline-block sap-color-shell_TextColor"
-            routerLink="/core/home"
+            routerLink="/home"
             id="toolbar-home-btn"
         >
-            Fundamental NGX
+            @if (size() === 's') {
+                <img src="assets/favicon.ico" alt="Fundamental NGX" class="fd-docs--toolbar__logo-icon" />
+            } @else {
+                Fundamental NGX
+            }
         </a>
     </fd-shellbar-logo>
     <fd-shellbar-actions [closePopoverOnSelect]="true">
-        @if (size === 's') {
+        @if (size() === 's') {
             <button
                 fd-button
                 fdType="transparent"
@@ -159,8 +163,8 @@
         </a>
     </fd-shellbar-actions>
 </fd-shellbar>
-@if (highlightJsThemeCss) {
-    <link rel="stylesheet" [href]="highlightJsThemeCss" />
+@if (highlightJsThemeCss()) {
+    <link rel="stylesheet" [href]="highlightJsThemeCss()" />
 }
 <ng-template #themesTemplate>
     @for (theme of themes; track theme) {
@@ -180,7 +184,7 @@
         <fd-icon glyph="message-information" class="sap-margin-end-tiny"></fd-icon>
         <span>Only applies to internal component translations</span>
     </li>
-    @for (translation of translations$ | async; track translation) {
+    @for (translation of translations(); track translation) {
         <li fd-menu-item>
             <div fd-menu-interactive (click)="selectTranslation(translation.value)">
                 <span fd-menu-title>{{ translation.name }}</span>
@@ -206,7 +210,7 @@
     </li>
 </ng-template>
 <ng-template #versionsTemplate>
-    @for (version of versions; track version) {
+    @for (version of allVersions(); track version) {
         <li fd-menu-item>
             <div fd-menu-interactive (click)="selectVersion(version)">
                 <span fd-menu-title>{{ version.id }}</span>
