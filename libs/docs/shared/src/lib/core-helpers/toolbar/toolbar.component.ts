@@ -13,6 +13,11 @@ import {
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 
+import '@sap-ui/common-css/dist/sap-colors.css';
+import '@sap-ui/common-css/dist/sap-display.css';
+import '@sap-ui/common-css/dist/sap-flex.css';
+import '@sap-ui/common-css/dist/sap-margin.css';
+
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';

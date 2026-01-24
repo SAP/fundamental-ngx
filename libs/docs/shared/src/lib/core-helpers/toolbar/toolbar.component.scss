@@ -1,28 +1,9 @@
 .fd-docs--toolbar {
     &__home-logo {
-        display: inline-block;
-        font-size: 20px;
-        line-height: 1.5;
+        font-size: var(--sapObjectHeader_Title_FontSize, 1.5rem);
         font-weight: 700;
-        margin: 0;
-        text-align: center;
-        color: #fff;
-        color: var(--sapShell_TextColor, #fff);
+        line-height: 1.5;
         text-decoration: none;
-        margin-left: 10px;
-
-        @media (min-width: 576px) {
-            font-size: 24px;
-        }
-
-        &-framework {
-            display: inline-block;
-            color: #61dafb;
-        }
-    }
-
-    &__spacer {
-        flex: 1 1 auto;
     }
 
     &__version {
@@ -30,56 +11,20 @@
             display: none;
         }
     }
-
-    &__lib {
-        margin-left: 10px;
-        display: flex;
-        height: 28px;
-        @media only screen and (max-width: 640px) {
-            display: none;
-        }
-    }
-}
-
-.fd-shellbar__button--menu.fd-docs--theme-menu {
-    margin: 0 0.5rem;
-    color: #fff;
-    color: var(--sapShell_TextColor, #fff);
-
-    &:hover {
-        color: #fff;
-        color: var(--sapShell_TextColor, #fff);
-    }
 }
 
 .logo-github {
     width: 1rem;
     height: 100%;
-    margin: 0 0.5rem;
-    fill: #fff;
     fill: var(--sapShell_TextColor, #fff);
-    vertical-align: middle;
 
     &:hover {
         cursor: pointer;
     }
 }
 
-.fd-docs__product-menu {
-    margin: 0 0.5rem;
-}
-
 .fd-docs--i18n-menu-tooltip {
     padding: 0.5rem 0.75rem;
-    position: relative;
     height: unset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     white-space: normal;
-    background-color: var(--sapInformationBackground);
-
-    fd-icon {
-        margin-right: 0.5rem;
-    }
 }

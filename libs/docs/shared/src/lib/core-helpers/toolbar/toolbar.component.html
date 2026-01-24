@@ -13,12 +13,11 @@
     <fd-shellbar-logo>
         <a
             aria-label="Home"
-            class="fd-shellbar__logo fd-docs--toolbar__home-logo"
+            class="fd-shellbar__logo fd-docs--toolbar__home-logo sap-margin-begin-tiny sap-display-inline-block sap-color-shell_TextColor"
             routerLink="/core/home"
             id="toolbar-home-btn"
         >
-            Fundamental
-            <span class="fd-docs--toolbar__home-logo-framework"> NGX </span>
+            Fundamental NGX
         </a>
     </fd-shellbar-logo>
     <fd-shellbar-actions [closePopoverOnSelect]="true">
@@ -26,7 +25,7 @@
             <button
                 fd-button
                 fdType="transparent"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 fdCozy
                 glyph="settings"
                 [fdMenuTrigger]="optionsMenu"
@@ -64,7 +63,7 @@
             <button
                 fd-button
                 fdType="transparent"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 [fdMenu]="true"
                 [fdMenuTrigger]="densityMenu"
             >
@@ -77,7 +76,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="palette"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 [fdMenu]="true"
                 [fdMenuTrigger]="themesMenu"
             ></button>
@@ -88,7 +87,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="translate"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 [fdMenu]="true"
                 [fdMenuTrigger]="i18nMenu"
             ></button>
@@ -105,7 +104,7 @@
                 fdType="transparent"
                 [fdMenu]="true"
                 [fdMenuTrigger]="versionsMenu"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version sap-margin-x-tiny sap-color-shell_TextColor"
             >
                 v{{ version.id }}
             </button>
@@ -121,7 +120,7 @@
             class="fd-button fd-shellbar__button fd-shellbar__button"
         >
             <svg
-                class="logo-github logo-github--white"
+                class="logo-github logo-github--white sap-margin-x-tiny"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -173,8 +172,12 @@
     }
 </ng-template>
 <ng-template #i18nTemplate>
-    <li class="fd-docs--i18n-menu-tooltip" role="presentation" type="information">
-        <fd-icon glyph="message-information"></fd-icon>
+    <li
+        class="fd-docs--i18n-menu-tooltip sap-flex--center sap-bg-color-informationBackground"
+        role="presentation"
+        type="information"
+    >
+        <fd-icon glyph="message-information" class="sap-margin-end-tiny"></fd-icon>
         <span>Only applies to internal component translations</span>
     </li>
     @for (translation of translations$ | async; track translation) {
