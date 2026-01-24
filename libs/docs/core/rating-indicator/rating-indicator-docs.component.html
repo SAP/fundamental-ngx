@@ -47,7 +47,7 @@
 <fd-docs-section-title id="playground-rating-indicator" componentName="rating-indicator">
     Playground Area
 </fd-docs-section-title>
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+<playground [schema]="schema" [schemaInitialValues]="data" (formChanges)="onSchemaValues($event)">
     <fd-rating-indicator
         [totalRatings]="1"
         [value]="3"

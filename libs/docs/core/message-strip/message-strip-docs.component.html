@@ -117,8 +117,8 @@
     [schema]="schema"
     [schemaInitialValues]="data"
     [resettable]="true"
-    (onReset)="reset()"
-    (onFormChanges)="onSchemaValues($event)"
+    (resetTriggered)="reset()"
+    (formChanges)="onSchemaValues($event)"
 >
     @if (shouldShow) {
         <fd-message-strip

@@ -1,20 +1,18 @@
-<div class="fd-playground">
-    <h3 class="fd-playground__title">Playground Example</h3>
+<h3 class="fd-playground__title sap-padding-top-large">Playground Example</h3>
 
-    <div class="fd-playground__row" [class.fd-playground__row--block]="displayBlock">
-        <div class="fd-playground__col fd-playground__content">
-            <ng-content></ng-content>
-        </div>
+<div class="sap-flex sap-flex-wrap" [class.sap-display-block]="displayBlock()">
+    <div class="fd-playground__col sap-padding-x-small sap-padding-bottom-small">
+        <ng-content></ng-content>
+    </div>
 
-        <div class="fd-playground__col">
-            <schema
-                class="fd-playground__schema"
-                [schema]="schema"
-                [resettable]="resettable"
-                [initialValues]="schemaInitialValues"
-                (onSchemaValues)="onSchemaValueChanges($event)"
-                (onReset)="reset()"
-            ></schema>
-        </div>
+    <div class="fd-playground__col sap-padding-x-small">
+        <schema
+            class="fd-playground__schema"
+            [schema]="schema()"
+            [resettable]="resettable()"
+            [initialValues]="schemaInitialValues()"
+            (schemaValues)="onSchemaValueChanges($event)"
+            (resetTriggered)="reset()"
+        ></schema>
     </div>
 </div>

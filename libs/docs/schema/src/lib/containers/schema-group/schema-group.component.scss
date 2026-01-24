@@ -1,60 +1,32 @@
-$sub-header--margin-left: 20px;
+@use '@sap-ui/common-css/dist/sap-margin.css';
+@use '@sap-ui/common-css/dist/sap-colors.css';
+@use '@sap-ui/common-css/dist/sap-display.css';
+@use '@sap-ui/common-css/dist/sap-typography.css';
+@use '@sap-ui/common-css/dist/sap-padding.css';
 
 :host {
     display: block;
-    padding: 20px;
-    border-width: 0.0625rem;
     border-width: var(--sapElement_BorderWidth, 0.0625rem);
-    border-color: #89919a;
     border-color: var(--sapField_BorderColor, #89919a);
     border-style: solid;
-    border-radius: 0.25rem;
     border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
-    background-color: #f7f7f7;
     background-color: var(--sapBackgroundColor, #f7f7f7);
 }
 
 .form-group {
     label {
         display: block;
-        margin: 8px 0 4px;
     }
+
     .form-control {
         width: 100%;
-
-        &:not(:last-child) {
-            margin-bottom: 15px;
-        }
-    }
-}
-
-.checkbox {
-    > label {
-        padding-left: 25px;
-        position: relative;
-        cursor: pointer;
-        display: inline;
-        > input {
-            position: absolute;
-            left: 0;
-            top: 5px;
-        }
     }
 }
 
 .schema--sub-header {
-    font-size: 1rem;
-    margin-left: $sub-header--margin-left;
-    margin-bottom: 10px;
-    color: #32363a;
     color: var(--sapTextColor, #32363a);
 }
 
 .schema--inner-group {
     margin: 0;
-
-    /** Starting from the second instance group should have vertical margin */
-    & + & {
-        margin-top: 15px;
-    }
 }

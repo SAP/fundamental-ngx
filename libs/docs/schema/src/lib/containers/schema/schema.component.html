@@ -1,6 +1,6 @@
 <schema-group
-    [schemaGroup]="schemaGroup"
-    [properties]="schema.properties"
-    [resettable]="resettable"
-    (onReset)="reset()"
+    [schemaGroup]="schemaGroup()"
+    [properties]="schema().properties"
+    [resettable]="resettable()"
+    (resetTriggered)="reset()"
 ></schema-group>
