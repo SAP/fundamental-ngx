@@ -16,9 +16,6 @@ import { ApiDocsService } from '../../services/api-docs.service';
 export class ApiComponent {
     protected readonly menu = viewChild<MenuComponent>('menu');
 
-    protected readonly _route = inject(ActivatedRoute);
-    protected readonly _apiService = inject(ApiDocsService);
-
     // Source of truth for which file to load
     protected readonly activeFile = signal<string>('');
 
@@ -45,6 +42,9 @@ export class ApiComponent {
         ),
         { initialValue: '' }
     );
+
+    private readonly _route = inject(ActivatedRoute);
+    private readonly _apiService = inject(ApiDocsService);
 
     constructor() {
         // Initialize with first file or empty state

@@ -7,7 +7,7 @@
             buttonType="transparent"
             [button]="true"
             [disabled]="false"
-            [ngModel]="search"
+            [ngModel]="search()"
             (ngModelChange)="onSearchChange($event)"
             (addOnButtonClicked)="onSearchChange('')"
         >
@@ -17,7 +17,7 @@
         <fd-side-nav>
             <div fd-side-nav-main fd-scrollbar>
                 <ul fd-nested-list [textOnly]="true">
-                    @for (section of displayedSections; track trackBySection($index, section)) {
+                    @for (section of displayedSections(); track trackBySection($index, section)) {
                         <li fd-nested-list-item [expanded]="true">
                             <div fd-nested-list-content>
                                 <a fd-nested-list-link>
