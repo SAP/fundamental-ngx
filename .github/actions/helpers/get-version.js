@@ -1,12 +1,13 @@
 const getFileContents = require('./get-file-contents');
 const { execSync } = require('child_process');
+const semver = require('semver');
 
 /**
  * Get the version from git tags (NX Release compatible) or fall back to package.json.
  * This aligns with NX Release's currentVersionResolver: "git-tag" configuration.
  *
  * Priority:
- * 1. Git tags (latest semver tag, e.g., v0.58.0-rc.19)
+ * 1. Git tags (latest semver tag by semver comparison, including prereleases)
  * 2. libs/core/package.json (contains actual version)
  * 3. package.json (workspace root - fallback)
  *
@@ -28,27 +29,22 @@ module.exports = (branch = null) => {
     try {
         // Use --merged HEAD to only consider tags reachable from current HEAD
         // This ensures hotfix branches on older versions work correctly
-        // First, try to get the latest stable (non-prerelease) version
-        // Exclude tags with "-" which indicates prerelease (rc, alpha, beta, etc.)
-        let latestTag = execSync(
-            'git tag --merged HEAD --sort=-v:refname | grep "^v[0-9]" | grep -v -- "-" | head -1',
-            {
-                encoding: 'utf8',
-                stdio: ['pipe', 'pipe', 'pipe']
-            }
-        ).trim();
+        // Get ALL version tags (including prereleases) and use semver to find the latest
+        const validVersions = execSync('git tag --merged HEAD | grep "^v[0-9]"', {
+            encoding: 'utf8',
+            stdio: ['pipe', 'pipe', 'pipe']
+        })
+            .trim()
+            .split('\n')
+            .map((tag) => tag.trim().replace(/^v/, ''))
+            .filter((v) => semver.valid(v));
 
-        // If no stable version exists, fall back to latest prerelease
-        if (!latestTag) {
-            latestTag = execSync('git tag --merged HEAD --sort=-v:refname | grep "^v[0-9]" | head -1', {
-                encoding: 'utf8',
-                stdio: ['pipe', 'pipe', 'pipe']
-            }).trim();
-        }
-
-        if (latestTag) {
-            // Remove 'v' prefix (e.g., "v0.58.0-rc.19" -> "0.58.0-rc.19")
-            return latestTag.replace(/^v/, '');
+        if (validVersions.length > 0) {
+            // Sort by semver (including prereleases) and get the highest version
+            // semver.rsort handles prerelease comparison correctly:
+            // e.g., 0.59.0-rc.0 > 0.58.1 (because 0.59.0 > 0.58.1)
+            const sortedVersions = semver.rsort(validVersions);
+            return sortedVersions[0];
         }
     } catch (e) {
         // Git command failed or no tags found, fall through to package.json
