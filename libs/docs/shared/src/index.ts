@@ -25,7 +25,6 @@ export * from './lib/getAsset';
 export * from './lib/router-utils';
 export * from './lib/services/api-docs.service';
 export * from './lib/services/copy.service';
-export * from './lib/services/docs-navigation.resolver';
 export * from './lib/services/docs-navigation.service';
 export * from './lib/services/docs-packages.config';
 export * from './lib/services/docs.service';

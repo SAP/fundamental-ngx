@@ -5,6 +5,7 @@ import {
     SectionInterfaceContentLinear,
     SectionInterfaceContentNested
 } from '../core-helpers/sections-toolbar/section.interface';
+import { getPackageOrderIndex } from './docs-packages.config';
 
 /**
  * Configuration for a documentation package
@@ -71,29 +72,14 @@ export class DocsNavigationService {
     }
 
     /**
-     * Get the home page entries from all packages for the unified Home section.
-     * @returns Array of home page content items
+     * Get the unified home page entry.
+     * @returns Single home page content item pointing to the unified docs home
      */
-    private _getHomePages(): SectionInterfaceContentLinear[] {
-        const homePages: SectionInterfaceContentLinear[] = [];
-
-        for (const pkg of this._packages()) {
-            // Find the "Guides" section and extract the "Home" entry
-            const guidesSection = pkg.sections.find((s) => s.header === 'Guides');
-            if (guidesSection) {
-                const homeEntry = guidesSection.content.find(
-                    (c): c is SectionInterfaceContentLinear => 'url' in c && c.url.endsWith('/home')
-                );
-                if (homeEntry) {
-                    homePages.push({
-                        name: pkg.name,
-                        url: homeEntry.url
-                    });
-                }
-            }
-        }
-
-        return homePages;
+    private _getHomePage(): SectionInterfaceContentLinear {
+        return {
+            name: 'Getting Started',
+            url: '/home'
+        };
     }
 
     /**
@@ -131,10 +117,9 @@ export class DocsNavigationService {
     /**
      * Build unified sections from all registered packages.
      * Structure:
-     * - Home (containing all packages' home pages)
-     * - Core (expandable, containing Core's sections as nested items)
-     * - Platform (expandable, containing Platform's sections as nested items)
-     * - ... (other packages)
+     * - Home (Getting Started)
+     * - Web Components, Web Components Fiori, Web Components AI
+     * - Core, Platform, BTP, CDK, i18n, CX
      */
     private _buildUnifiedSections(): SectionInterface[] {
         const packages = this._packages();
@@ -142,20 +127,23 @@ export class DocsNavigationService {
             return [];
         }
 
+        // Sort packages according to predefined order (cache indices to avoid repeated lookups)
+        const sortedPackages = [...packages]
+            .map((pkg) => ({ pkg, order: getPackageOrderIndex(pkg.id) }))
+            .sort((a, b) => a.order - b.order)
+            .map((item) => item.pkg);
+
         const sections: SectionInterface[] = [];
 
-        // Add unified Home section with all packages' home pages
-        const homePages = this._getHomePages();
-        if (homePages.length > 0) {
-            sections.push({
-                header: 'Home',
-                content: homePages
-            });
-        }
+        // Add unified Home section with single entry
+        sections.push({
+            header: 'Home',
+            content: [this._getHomePage()]
+        });
 
         // Add each package as a top-level section
         // The package's internal sections become nested content with subItems
-        for (const pkg of packages) {
+        for (const pkg of sortedPackages) {
             const packageContent: SectionInterfaceContentNested[] = [];
 
             for (const section of pkg.sections) {

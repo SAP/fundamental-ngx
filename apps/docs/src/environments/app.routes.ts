@@ -136,7 +136,12 @@ export const ROUTES: Routes = [
                         ];
                     })
             },
-            { path: '', redirectTo: 'core/home', pathMatch: 'full' }
+            {
+                path: 'home',
+                loadComponent: () =>
+                    import('@fundamental-ngx/docs/shared-pages').then((m) => m.UnifiedHomePageComponent)
+            },
+            { path: '', redirectTo: 'home', pathMatch: 'full' }
         ]
     }
 ];
