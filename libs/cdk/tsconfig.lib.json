@@ -16,6 +16,6 @@
         "enableResourceInlining": true
     },
     "files": ["./index.ts"],
-    "exclude": ["test.ts", "**/*.spec.ts"],
+    "exclude": ["test.ts", "**/*.spec.ts", "jest.config.ts"],
     "include": ["**/*.ts"]
 }

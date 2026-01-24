@@ -4,7 +4,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     NestedItemComponent,
     NestedLinkComponent,
@@ -35,7 +35,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         InputGroupModule,
         FormsModule,
         ButtonComponent,
-        ScrollbarModule,
+        ScrollbarDirective,
         I18nModule,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,

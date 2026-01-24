@@ -3,8 +3,9 @@
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
         "types": ["jest", "node"],
-        "target": "es2020",
-        "lib": ["es2023", "dom"]
+        "target": "es2023",
+        "lib": ["es2023", "dom"],
+        "isolatedModules": true
     },
     "include": ["**/*.spec.ts"]
 }
