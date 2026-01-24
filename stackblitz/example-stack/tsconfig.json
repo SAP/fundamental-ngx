@@ -11,7 +11,7 @@
         "module": "esnext",
         "moduleResolution": "node",
         "importHelpers": true,
-        "target": "es2022",
+        "target": "es2023",
         "typeRoots": ["node_modules/@types"],
         "lib": ["es2023", "dom"],
         "allowSyntheticDefaultImports": true,

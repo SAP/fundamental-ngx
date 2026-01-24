@@ -71,7 +71,7 @@
 				"extendsType": {
 					"type": "reference",
 					"target": {
-						"sourceFileName": "node_modules/@angular/core/api.d.d.ts",
+						"sourceFileName": "node_modules/@angular/core/types/_api-chunk.d.ts",
 						"qualifiedName": "OutputEmitterRef"
 					},
 					"typeArguments": [

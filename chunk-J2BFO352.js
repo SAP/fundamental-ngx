@@ -1,1 +1,0 @@
-var n=function(t){return t.End="End",t.StartAndEnd="StartAndEnd",t}(n||{}),a=n;var e=function(t){return t.Default="Default",t.Positive="Positive",t.Negative="Negative",t.Critical="Critical",t.Neutral="Neutral",t}(e||{}),u=e;var r=function(t){return t.Inline="Inline",t.Standard="Standard",t}(r||{}),f=r;export{a,u as b,f as c};
