@@ -85,7 +85,27 @@ act workflow_dispatch -W .github/workflows/create-release.yml -n
 ✅ `get-release-tag` - Release tag determination logic  
 ✅ `current-version` - Current version detection  
 ✅ Jest unit tests for `get-release-tag` (5 scenarios)  
-✅ Jest unit tests for `get-version` (16 scenarios: git tags, branch-specific versions, hotfix branches, and fallback logic)
+✅ Jest unit tests for `get-version` (20 scenarios: git tags, prerelease/RC handling, branch-specific versions, hotfix branches, and fallback logic)
+✅ Interactive playground for release scenarios (`release-scenario.playground.js`)
+
+### Release Scenario Playground
+
+Test and visualize version calculation logic interactively:
+
+```bash
+# Run the playground
+node .github/actions/helpers/release-scenario.playground.js
+```
+
+Edit `ACTIVE_SCENARIO` at the top of the file to test different cases:
+
+- `PR_13773_BUG` - The prerelease RC continuation bug fix
+- `CONTINUE_RC` - Continue RC releases on main
+- `FIRST_RC_AFTER_STABLE` - First RC after stable release
+- `STABLE_FROM_RC` - Graduate RC to stable
+- `HOTFIX_OLD_VERSION` - Hotfix on older version branch
+- `BREAKING_DURING_PATCH_RC` - Breaking change during patch RC
+- And more...
 
 ## Limitations
 
