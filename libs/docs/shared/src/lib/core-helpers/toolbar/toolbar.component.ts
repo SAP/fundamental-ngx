@@ -12,9 +12,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
-import { Libraries } from '../../utilities';
 
-import { AsyncPipe, LowerCasePipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -25,11 +24,9 @@ import {
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MenuComponent, MenuKeyboardService, MenuModule } from '@fundamental-ngx/core/menu';
 import {
-    ProductMenuComponent,
     ShellbarActionsComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
-    ShellbarMenuItem,
     ShellbarSidenavDirective,
     ShellbarSizes
 } from '@fundamental-ngx/core/shellbar';
@@ -63,12 +60,10 @@ type Version = {
         ContentDensityDirective,
         ShellbarLogoComponent,
         RouterLink,
-        ProductMenuComponent,
         ShellbarActionsComponent,
         MenuModule,
         NgTemplateOutlet,
         IconComponent,
-        LowerCasePipe,
         AsyncPipe
     ]
 })
@@ -86,8 +81,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     highlightJsThemeCss: SafeResourceUrl;
 
-    library: Libraries;
-
     size: ShellbarSizes = 'm';
 
     themes: CompleteThemeDefinition[];
@@ -99,63 +92,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     initialTheme = 'sap_horizon';
 
     translations$ = inject(Translations);
-
-    items: ShellbarMenuItem[] = [
-        {
-            name: 'Core Docs',
-            callback: () => {
-                this._routerService.navigate(['core/home']);
-            }
-        },
-        {
-            name: 'Platform Docs',
-            callback: () => {
-                this._routerService.navigate(['platform/home']);
-            }
-        },
-        {
-            name: 'CX',
-            callback: () => {
-                this._routerService.navigate(['cx/home']);
-            }
-        },
-        {
-            name: 'BTP',
-            callback: () => {
-                this._routerService.navigate(['btp/home']);
-            }
-        },
-        {
-            name: 'CDK',
-            callback: () => {
-                this._routerService.navigate(['cdk/home']);
-            }
-        },
-        {
-            name: 'i18n',
-            callback: () => {
-                this._routerService.navigate(['i18n/home']);
-            }
-        },
-        {
-            name: 'Web Components (Main)',
-            callback: () => {
-                this._routerService.navigate(['ui5-webcomponents/home']);
-            }
-        },
-        {
-            name: 'Web Components AI',
-            callback: () => {
-                this._routerService.navigate(['ui5-webcomponents-ai/home']);
-            }
-        },
-        {
-            name: 'Web Components Fiori',
-            callback: () => {
-                this._routerService.navigate(['ui5-webcomponents-fiori/home']);
-            }
-        }
-    ];
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -185,7 +121,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             id: this._docsService.getVersion(),
             url: ''
         };
-        this.library = this._route.snapshot.data['library'] || 'core';
 
         this._themingService.currentTheme
             .pipe(
