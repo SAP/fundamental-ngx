@@ -121,6 +121,7 @@ jobs:
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
+                  FD_ENV_ANGULAR_VER_PLACEHOLDER: ^${{ (fromJson(readFile('package.json')).dependencies['@angular/core']).split('.')[0] }}.0.0
 
             # Reset placeholders again after pack step
             # The sync-versions generator writes actual versions back to source package.json files during build
