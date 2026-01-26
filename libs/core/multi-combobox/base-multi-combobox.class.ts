@@ -34,9 +34,9 @@ import {
 } from '@fundamental-ngx/cdk/forms';
 import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subscription, skip, startWith, timer } from 'rxjs';
-import { PopoverComponent } from '../popover';
 import {
     FdMultiComboBoxDataSource,
     FdMultiComboboxAcceptableDataSource
@@ -558,6 +558,7 @@ export abstract class BaseMultiCombobox<T = any> {
             }
             return optionItem;
         });
+        console.log('this._suggestions', this._suggestions);
     }
 
     /** @hidden */
