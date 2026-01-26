@@ -50,7 +50,7 @@
         "@angular/platform-browser-dynamic": "21.1.0",
         "@angular/router": "21.1.0",
         "@fundamental-styles/cx": "0.40.1",
-        "@nx/angular": "22.3.3",
+        "@nx/angular": "22.4.1",
         "@sap-theming/theming-base-content": "11.32.3",
         "@stackblitz/sdk": "1.9.0",
         "@swc/helpers": "0.5.11",
@@ -92,13 +92,13 @@
         "@angular/language-service": "21.1.0",
         "@commitlint/cli": "18.6.1",
         "@commitlint/config-conventional": "18.6.1",
-        "@nx/devkit": "22.3.3",
-        "@nx/eslint": "22.3.3",
-        "@nx/eslint-plugin": "22.3.3",
-        "@nx/jest": "22.3.3",
-        "@nx/js": "22.3.3",
-        "@nx/plugin": "22.3.3",
-        "@nx/workspace": "22.3.3",
+        "@nx/devkit": "22.4.1",
+        "@nx/eslint": "22.4.1",
+        "@nx/eslint-plugin": "22.4.1",
+        "@nx/jest": "22.4.1",
+        "@nx/js": "22.4.1",
+        "@nx/plugin": "22.4.1",
+        "@nx/workspace": "22.4.1",
         "@sap-ui/common-css": "0.40.1",
         "@schematics/angular": "21.1.0",
         "@swc-node/register": "1.9.2",
@@ -165,7 +165,7 @@
         "webdriverio": "7.27.0"
     },
     "resolutions": {
-        "nx": "22.3.3",
+        "nx": "22.4.1",
         "parse5": "7.1.2"
     },
     "lint-staged": {
