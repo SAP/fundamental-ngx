@@ -99,6 +99,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreOverflowLayout: {
         moreItemsButton: 'อีก {count} รายการ'
     },
