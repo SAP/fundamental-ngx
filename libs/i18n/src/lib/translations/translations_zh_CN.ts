@@ -98,6 +98,13 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '树项目 {itemDetails}，{selectedDescription}'
     },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
     coreOverflowLayout: {
         moreItemsButton: '另外 {count} 个'
     },
