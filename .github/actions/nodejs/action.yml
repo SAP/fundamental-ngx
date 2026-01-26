@@ -19,15 +19,17 @@ runs:
           with:
               node-version: ${{ inputs.node-version }}
 
-        - name: Install Corepack and Enable Yarn
+        - name: Get Yarn path from .yarnrc.yml
+          id: yarn-path
           shell: bash
           run: |
-              npm install -g corepack
-              corepack enable yarn
+              YARN_PATH=$(grep '^yarnPath:' .yarnrc.yml | awk '{print $2}')
+              echo "path=$YARN_PATH" >> $GITHUB_OUTPUT
+              echo "Using Yarn at: $YARN_PATH"
 
         - name: Get yarn cache directory path
           id: yarn-cache-dir-path
-          run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+          run: echo "dir=$(node ${{ steps.yarn-path.outputs.path }} config get cacheFolder)" >> $GITHUB_OUTPUT
           shell: bash
 
         # Optimized cache strategy: Use Yarn cache only (not node_modules)
@@ -42,7 +44,7 @@ runs:
                   ${{ runner.os }}-yarn-
 
         - name: Install dependencies
-          run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
+          run: node ${{ steps.yarn-path.outputs.path }} install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
           shell: bash
 
         - name: Output nx build logs
