@@ -558,7 +558,6 @@ export abstract class BaseMultiCombobox<T = any> {
             }
             return optionItem;
         });
-        console.log('this._suggestions', this._suggestions);
     }
 
     /** @hidden */
