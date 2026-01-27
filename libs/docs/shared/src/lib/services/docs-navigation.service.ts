@@ -54,24 +54,6 @@ export class DocsNavigationService {
     }
 
     /**
-     * Register multiple documentation packages at once.
-     * @param configs Array of package configurations
-     */
-    registerPackages(configs: DocsPackageConfig[]): void {
-        configs.forEach((config) => this.registerPackage(config));
-    }
-
-    /**
-     * Check if all expected packages are registered.
-     * @param expectedPackageIds Array of expected package IDs
-     * @returns true if all packages are registered
-     */
-    areAllPackagesRegistered(expectedPackageIds: string[]): boolean {
-        const registeredIds = new Set(this._packages().map((p) => p.id));
-        return expectedPackageIds.every((id) => registeredIds.has(id));
-    }
-
-    /**
      * Get the unified home page entry.
      * @returns Single home page content item pointing to the unified docs home
      */

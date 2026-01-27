@@ -1,5 +1,4 @@
 import { SectionInterface } from '../core-helpers/sections-toolbar/section.interface';
-import { DocsPackageConfig } from './docs-navigation.service';
 
 /**
  * Helper function to build sections array from docs-data.json structure.
@@ -67,27 +66,4 @@ const PACKAGE_ORDER_MAP = new Map<string, number>(DOCS_PACKAGES_META.map((pkg, i
  */
 export function getPackageOrderIndex(packageId: string): number {
     return PACKAGE_ORDER_MAP.get(packageId) ?? 999;
-}
-
-/**
- * Create a DocsPackageConfig from package metadata and docs-data.json content.
- * @param meta Package metadata
- * @param docsData Content from docs-data.json
- * @returns Complete package configuration
- */
-export function createDocsPackageConfig(meta: DocsPackageMeta, docsData: Record<string, any>): DocsPackageConfig {
-    return {
-        id: meta.id,
-        name: meta.name,
-        sections: buildSectionsFromData(docsData)
-    };
-}
-
-/**
- * Get package metadata by ID.
- * @param packageId The package identifier
- * @returns Package metadata or undefined if not found
- */
-export function getDocsPackageMetaById(packageId: string): DocsPackageMeta | undefined {
-    return DOCS_PACKAGES_META.find((pkg) => pkg.id === packageId);
 }

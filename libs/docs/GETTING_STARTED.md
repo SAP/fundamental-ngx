@@ -116,7 +116,7 @@ import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 
 @Component({
     imports: [Button],
-    template: `<ui5-button (click)="handleClick()">Click Me</ui5-button>`
+    template: `<ui5-button (ui5Click)="handleClick()">Click Me</ui5-button>`
 })
 ```
 
