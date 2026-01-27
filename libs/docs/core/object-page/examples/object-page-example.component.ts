@@ -10,7 +10,7 @@ import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
@@ -50,7 +50,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         TextComponent,
         RatingIndicatorModule,
         ObjectStatusComponent,
-        ObjectNumberModule,
+        ObjectNumberComponent,
         CdkScrollable,
         BarModule
     ]
