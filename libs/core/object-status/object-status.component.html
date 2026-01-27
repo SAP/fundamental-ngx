@@ -1,0 +1,33 @@
+@if (glyph()) {
+    <fd-icon
+        class="fd-object-status__icon"
+        [glyph]="glyph()"
+        [font]="glyphFont()"
+        [attr.role]="glyphAriaLabel() ? 'presentation' : ''"
+        [ariaLabel]="glyphAriaLabel()"
+    >
+    </fd-icon>
+}
+@if (textTemplate()) {
+    <span class="fd-object-status__text" [class]="_textClass">
+        <ng-template [ngTemplateOutlet]="textTemplate()"></ng-template>
+    </span>
+}
+@if (label()) {
+    <span class="fd-object-status__text" [class]="_textClass">{{ label() }}</span>
+}
+@if (!clickable()) {
+    <span class="fd-object-status__sr-only">{{ ariaLabel() || ('coreObjectStatus.ariaLabel' | fdTranslate) }}</span>
+}
+@if (indicationColor()) {
+    <span class="fd-object-status__sr-only">{{
+        ('coreObjectStatus.indicationColor' | fdTranslate) + indicationColorCode()
+    }}</span>
+}
+@if (status()) {
+    @if (statusMessage()) {
+        <span class="fd-object-status__sr-only">{{ statusMessage() }}</span>
+    } @else {
+        <span class="fd-object-status__sr-only">{{ statusTranslateKey() | fdTranslate }}</span>
+    }
+}
