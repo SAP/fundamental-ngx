@@ -44,6 +44,73 @@ describe('InputGroupComponent', () => {
         });
         component._buttonClicked({} as any);
     });
+
+    it('should normalize comma to period for number inputs', () => {
+        component.type = 'number';
+        fixture.detectChanges();
+
+        const mockEvent = {
+            target: {
+                value: '123,45',
+                selectionStart: 6,
+                setSelectionRange: jest.fn()
+            }
+        } as any;
+
+        component._onInput(mockEvent);
+
+        expect(mockEvent.target.value).toBe('123.45');
+    });
+
+    it('should remove invalid characters from number input', () => {
+        component.type = 'number';
+        fixture.detectChanges();
+
+        const mockEvent = {
+            target: {
+                value: '12a3.4b5',
+                selectionStart: 8,
+                setSelectionRange: jest.fn()
+            }
+        } as any;
+
+        component._onInput(mockEvent);
+
+        expect(mockEvent.target.value).toBe('123.45');
+    });
+
+    it('should allow only one decimal point', () => {
+        component.type = 'number';
+        fixture.detectChanges();
+
+        const mockEvent = {
+            target: {
+                value: '123.45.67',
+                selectionStart: 9,
+                setSelectionRange: jest.fn()
+            }
+        } as any;
+
+        component._onInput(mockEvent);
+
+        expect(mockEvent.target.value).toBe('123.4567');
+    });
+
+    it('should not modify non-number inputs', () => {
+        component.type = 'text';
+        fixture.detectChanges();
+
+        const mockEvent = {
+            target: {
+                value: '123,abc',
+                selectionStart: 7
+            }
+        } as any;
+
+        component._onInput(mockEvent);
+
+        expect(mockEvent.target.value).toBe('123,abc');
+    });
 });
 
 describe('InputGroup component CVA', () => {
@@ -59,6 +126,7 @@ describe('InputGroup component CVA', () => {
         },
         hostTemplate: {
             hostComponent: InputGroupComponent,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             getTestingComponent: (fixture) => fixture.componentInstance._cvaControl.cvaDirective!
         },
         /** Whether component is able to track "onBlur" events separately */
