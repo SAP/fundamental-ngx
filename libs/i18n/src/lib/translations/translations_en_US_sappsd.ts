@@ -100,11 +100,11 @@ export default {
         linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
+        negative: '[[[Ʋąĺűē Ŝţąţē Ĕŗŗŏŗ∙∙∙∙∙∙∙]]]',
+        critical: '[[[Ʋąĺűē Ŝţąţē Ŵąŗŋįŋğ∙∙∙∙∙]]]',
+        positive: '[[[Ʋąĺűē Ŝţąţē Ŝűċċēşş∙∙∙∙∙]]]',
+        informative: '[[[Ʋąĺűē Ŝţąţē Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙]]]'
     },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
@@ -553,7 +553,7 @@ export default {
         deselectAllCheckboxLongLabel: '[[[Ĉĥēċķƃŏχ, ċĥēċķēƌ, ċĺįċķ ţŏ ƌēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         deselectSingleRow: '[[[Ţŏ ƌēşēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
-        loadMore: '[[[Ŝĥŏŵ ɱŏŗē∙∙∙∙∙]]]',
+        loadMore: '[[[Ŝĥŏŵ Μŏŗē∙∙∙∙∙]]]',
         toolbarActionButtonTitle: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
         settingsDialogHeader: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
         confirmBtnLabel: '[[[ŎĶ∙∙]]]',
