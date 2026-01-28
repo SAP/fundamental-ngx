@@ -9,6 +9,7 @@ import {
     forwardRef,
     HostListener,
     Injector,
+    input,
     Input,
     isDevMode,
     OnChanges,
@@ -417,6 +418,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
+
+    /** Whether the input is display-only */
+    display = input(false);
 
     /** @hidden */
     get _optionItems(): _OptionItem<ItemType, ValueType>[] {
