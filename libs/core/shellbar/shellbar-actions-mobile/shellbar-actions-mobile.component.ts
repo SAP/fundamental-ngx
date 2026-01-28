@@ -58,8 +58,9 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
 
     /** @hidden */
     actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {
-        if (item.callback) {
-            item.callback(event);
+        const callbackFn = item.callback();
+        if (callbackFn) {
+            callbackFn(event);
         }
     }
 
@@ -68,8 +69,9 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
         this.totalNotifications = 0;
 
         this.shellbarActions?.forEach((action) => {
-            if (action.notificationCount && typeof action.notificationCount === 'number') {
-                this.totalNotifications = this.totalNotifications + action.notificationCount;
+            const count = action.notificationCount();
+            if (count && typeof count === 'number') {
+                this.totalNotifications = this.totalNotifications + count;
             }
         });
     }
