@@ -182,6 +182,8 @@ export class ShellbarResponsiveExampleComponent {
             glyph: 'pool',
             callback: this.actionPoolCallback,
             label: 'Pool',
+            ariaLabel: 'Pool Action',
+            title: 'Pool',
             notificationCount: 3,
             notificationLabel: 'Pool Count'
         },
@@ -189,6 +191,8 @@ export class ShellbarResponsiveExampleComponent {
             glyph: 'bell',
             callback: this.actionNotificationCallback,
             label: 'Notifications',
+            ariaLabel: 'Notifications Action',
+            title: 'Notifications',
             notificationCount: 12,
             notificationLabel: 'Unread Notifications'
         }

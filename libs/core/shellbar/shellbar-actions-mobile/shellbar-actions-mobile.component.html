@@ -8,6 +8,7 @@
                     glyph="overflow"
                     class="fd-shellbar__button"
                     [attr.aria-label]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
+                    [title]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
                 >
                     @if (totalNotifications) {
                         <span class="fd-button__badge">
@@ -30,12 +31,12 @@
                     <li
                         fd-action-sheet-item
                         tabindex="-1"
-                        [glyph]="action.glyph"
-                        [label]="action.label"
+                        [glyph]="action.glyph() || ''"
+                        [label]="action.label()"
                         (click)="actionClicked(action, $event)"
                     >
-                        @if (action.notificationCount) {
-                            <span class="fd-button__badge">{{ action.notificationCount }}</span>
+                        @if (action.notificationCount()) {
+                            <span class="fd-button__badge">{{ action.notificationCount() }}</span>
                         }
                     </li>
                 }
