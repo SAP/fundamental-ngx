@@ -2,9 +2,16 @@
 <br />
 <div fd-form-item>
     <label fd-form-label [required]="true" for="fd-input-group-text-1" id="fd-input-group-label-1"
-        >Left Aligned Text Add-on</label
+        >Left Aligned Text Add-on (input type number)</label
     >
-    <fd-input-group id="fd-input-group-text-1" addOnText="$" placement="before" [required]="true" placeholder="Amount">
+    <fd-input-group
+        id="fd-input-group-text-1"
+        type="number"
+        addOnText="$"
+        placement="before"
+        [required]="true"
+        placeholder="Amount"
+    >
     </fd-input-group>
 </div>
 

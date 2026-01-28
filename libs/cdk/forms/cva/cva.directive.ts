@@ -401,7 +401,14 @@ export class CvaDirective<T = any>
         let coercedValue: any = value;
 
         if (this.type === 'number') {
-            coercedValue = value === '' || value === null || value === undefined ? null : Number(value);
+            if (value === '' || value === null || value === undefined) {
+                coercedValue = null;
+            } else {
+                // Keep as string to preserve user input format (e.g., "1e2" instead of converting to 100)
+                // This prevents the input from changing unexpectedly while typing
+                // The actual number conversion will happen when the form is submitted
+                coercedValue = value;
+            }
         }
 
         if (coercedValue !== this.value) {

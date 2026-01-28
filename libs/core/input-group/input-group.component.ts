@@ -283,6 +283,95 @@ export class InputGroupComponent implements AfterViewInit, FormItemControl, OnIn
     }
 
     /** @hidden */
+    _onInput(event: Event): void {
+        // For number inputs, normalize decimal separators and validate input
+        if (this.type === 'number') {
+            const input = event.target as HTMLInputElement;
+            const cursorPosition = input.selectionStart;
+            const value = input.value;
+
+            // Detect user's locale decimal separator
+            const localeDecimalSeparator = (1.1).toLocaleString().substring(1, 2);
+
+            // For validation, normalize to period internally
+            const normalizedValue = value.replace(/,/g, '.');
+
+            // Only keep valid number characters: digits, minus sign, decimal point, 'e' for scientific notation, and '+' for exponent
+            let cleaned = normalizedValue.replace(/[^\d.eE+-]/g, '');
+
+            // Ensure only one minus sign at the start (or after 'e'/'E' for scientific notation)
+            // Allow format like: -123.45e-10
+            const parts = cleaned.split(/([eE])/);
+            if (parts.length > 0) {
+                // Clean the mantissa part (before 'e')
+                let mantissa = parts[0];
+                const minusCount = (mantissa.match(/-/g) || []).length;
+                if (minusCount > 1) {
+                    mantissa = (mantissa.startsWith('-') ? '-' : '') + mantissa.replace(/-/g, '');
+                } else if (mantissa.includes('-') && !mantissa.startsWith('-')) {
+                    mantissa = mantissa.replace(/-/g, '');
+                }
+                parts[0] = mantissa;
+
+                // If there's an exponent part, clean it too
+                if (parts.length >= 3) {
+                    let exponent = parts[2];
+                    const expMinusCount = (exponent.match(/-/g) || []).length;
+                    const expPlusCount = (exponent.match(/\+/g) || []).length;
+                    // Allow one +/- at the start of exponent
+                    if (expMinusCount > 1 || expPlusCount > 1) {
+                        const sign = exponent.match(/^[+-]/)?.[0] || '';
+                        exponent = sign + exponent.replace(/[+-]/g, '');
+                    } else if ((exponent.includes('-') || exponent.includes('+')) && !/^[+-]/.test(exponent)) {
+                        exponent = exponent.replace(/[+-]/g, '');
+                    }
+                    parts[2] = exponent;
+                }
+                cleaned = parts.join('');
+            }
+
+            // Ensure only one 'e' or 'E'
+            const eCount = (cleaned.match(/[eE]/g) || []).length;
+            if (eCount > 1) {
+                const firstEIndex = cleaned.search(/[eE]/);
+                cleaned = cleaned.slice(0, firstEIndex + 1) + cleaned.slice(firstEIndex + 1).replace(/[eE]/g, '');
+            }
+
+            // Ensure only one decimal point in the mantissa (before 'e')
+            const eIndex = cleaned.search(/[eE]/);
+            if (eIndex >= 0) {
+                const mantissa = cleaned.slice(0, eIndex);
+                const exponent = cleaned.slice(eIndex);
+                const decimalCount = (mantissa.match(/\./g) || []).length;
+                if (decimalCount > 1) {
+                    const decimalParts = mantissa.split('.');
+                    cleaned = decimalParts[0] + '.' + decimalParts.slice(1).join('') + exponent;
+                }
+            } else {
+                const decimalCount = (cleaned.match(/\./g) || []).length;
+                if (decimalCount > 1) {
+                    const decimalParts = cleaned.split('.');
+                    cleaned = decimalParts[0] + '.' + decimalParts.slice(1).join('');
+                }
+            }
+
+            // Convert back to locale separator for display
+            // In comma locales, always display comma; in period locales, always display period
+            if (localeDecimalSeparator === ',') {
+                cleaned = cleaned.replace(/\./g, ',');
+            }
+
+            if (cleaned !== value) {
+                input.value = cleaned;
+                // Restore cursor position
+                if (cursorPosition !== null) {
+                    input.setSelectionRange(cursorPosition, cursorPosition);
+                }
+            }
+        }
+    }
+
+    /** @hidden */
     _preventFocus(event: MouseEvent): void {
         if (!this.buttonFocusable) {
             event.preventDefault();

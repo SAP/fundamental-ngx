@@ -74,12 +74,14 @@
         [attr.aria-labelledby]="ariaLabel ? null : _inputAriaLabelledBy"
         [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
-        [type]="type"
+        [type]="type === 'number' ? 'text' : type"
+        [attr.inputmode]="type === 'number' ? 'decimal' : null"
         [class.is-disabled]="!!_cvaControl.cvaDirective?.disabled"
         [disabled]="!!_cvaControl.cvaDirective?.disabled"
         [readonly]="_cvaControl.cvaDirective?.readonly"
         [attr.placeholder]="_cvaControl.cvaDirective?.placeholder || null"
         [attr.aria-required]="required"
+        (input)="_onInput($event)"
         (search)="_onSearchEvent($event)"
     />
 </ng-template>
