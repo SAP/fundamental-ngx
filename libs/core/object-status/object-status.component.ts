@@ -10,12 +10,14 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ColorAccent, HasElementRef, Nullable, NullableObject } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { FdLanguageKeyIdentifier, FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
+
+export const OBJECT_STATUS_CLASS_NAME = 'fd-object-status';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -126,7 +128,7 @@ export class ObjectStatusComponent implements HasElementRef {
     /** @hidden Computed CSS classes */
     protected readonly _cssClass = computed(() =>
         [
-            'fd-object-status',
+            OBJECT_STATUS_CLASS_NAME,
             this.inverted() ? 'fd-object-status--inverted' : '',
             this.large() ? 'fd-object-status--large' : '',
             this.status() ? `fd-object-status--${this.status()}` : '',
@@ -154,27 +156,3 @@ export class ObjectStatusComponent implements HasElementRef {
         return status === 'negative' || status === 'critical' || status === 'positive' || status === 'informative';
     }
 }
-
-type ObjectStatusData = NullableObject<{
-    status: ObjectStatus;
-    inverted: boolean;
-    large: boolean;
-    indicationColor: number;
-    clickable: boolean;
-    class: string;
-    iconOnly: boolean;
-    secondaryIndication: boolean;
-}>;
-
-export const buildObjectStatusCssClasses = (data: ObjectStatusData): string[] => [
-    'fd-object-status',
-    data.inverted ? 'fd-object-status--inverted' : '',
-    data.large ? 'fd-object-status--large' : '',
-    data.status ? `fd-object-status--${data.status}` : '',
-    data.indicationColor
-        ? `fd-object-status--indication-${data.indicationColor}${data.secondaryIndication ? 'b' : ''}`
-        : '',
-    data.clickable ? 'fd-object-status--link' : '',
-    data.iconOnly ? 'fd-object-status--icon-only' : '',
-    data.class || ''
-];
