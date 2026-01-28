@@ -5,24 +5,18 @@
         "fundamental-ngx-example": {
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "configurations": {
                         "production": {
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true
+                            "extractLicenses": true
                         },
                         "development": {
                             "optimization": false,
                             "sourceMap": true,
-                            "namedChunks": true,
-                            "extractLicenses": false,
-                            "vendorChunk": true,
-                            "buildOptimizer": false
+                            "extractLicenses": false
                         }
                     },
                     "defaultConfiguration": "development",
@@ -51,10 +45,9 @@
                             }
                         ],
                         "index": "src/index.html",
-                        "main": "src/main.ts",
+                        "browser": "src/main.ts",
                         "outputPath": "dist",
                         "polyfills": ["zone.js"],
-                        "scripts": [],
                         "styles": ["node_modules/fundamental-styles/dist/icon.css", "src/styles.scss"],
                         "tsConfig": "tsconfig.json"
                     }
