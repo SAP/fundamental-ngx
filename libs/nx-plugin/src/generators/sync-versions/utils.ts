@@ -61,7 +61,10 @@ const getVersions = () => {
             aboveMinorVersion(packageJson.dependencies['@sap-theming/theming-base-content']),
         MESSAGEFORMAT_VER_PLACEHOLDER:
             process.env.FD_ENV_MESSAGEFORMAT_VER_PLACEHOLDER ||
-            aboveMinorVersion(packageJson.dependencies['intl-messageformat'])
+            aboveMinorVersion(packageJson.dependencies['intl-messageformat']),
+        UI5_WEBCOMPONENTS_VER_PLACEHOLDER:
+            process.env.FD_ENV_UI5_WEBCOMPONENTS_VER_PLACEHOLDER ||
+            aboveMinorVersion(packageJson.dependencies['@ui5/webcomponents'])
     };
 };
 
