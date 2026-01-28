@@ -1,7 +1,7 @@
 <!--
 Document: Angular 20+ Development Guidelines for Fundamental NGX
-Last Updated: January 14, 2026
-Version: 2.4
+Last Updated: January 24, 2026
+Version: 2.5
 Purpose: Comprehensive guide for AI agents and developers working with Angular 20+ in NX monorepo
 -->
 
@@ -1064,34 +1064,40 @@ In this example, the effect should re-run whenever the tooltip content changes t
 - Breaking circular dependencies between signals
 - Reading the current value during initialization without tracking future changes
 
-**Using `allowSignalWrites: true` option:**
+**Signal Writes in Effects (Angular 20+):**
 
-By default, Angular prevents signal writes inside effects to avoid infinite loops. Use `allowSignalWrites: true` sparingly when you need to update signals as a side effect, but ensure you don't create cycles.
+In Angular 20+, signal writes are **always allowed** inside effects. The `allowSignalWrites` option is deprecated and no longer has any effect. If you see this option in existing code, remove it to avoid console warnings.
 
 ```typescript
+// ✅ Correct - no options needed, signal writes are allowed by default
 export class Validation {
     readonly inputValue = signal('');
     readonly validationError = signal<string | null>(null);
 
     constructor() {
-        effect(
-            () => {
-                const value = this.inputValue();
+        effect(() => {
+            const value = this.inputValue();
 
-                // Validate and update error signal
-                if (value.length < 3) {
-                    this.validationError.set('Minimum 3 characters required');
-                } else {
-                    this.validationError.set(null);
-                }
-            },
-            { allowSignalWrites: true }
-        );
+            // Signal writes are allowed by default in Angular 20+
+            if (value.length < 3) {
+                this.validationError.set('Minimum 3 characters required');
+            } else {
+                this.validationError.set(null);
+            }
+        });
     }
 }
+
+// ❌ Deprecated - causes console warning in Angular 20+
+effect(
+    () => {
+        /* ... */
+    },
+    { allowSignalWrites: true } // Remove this option
+);
 ```
 
-**Important:** Prefer using `computed()` over effects with `allowSignalWrites` when deriving state:
+**Important:** Prefer using `computed()` over effects when deriving state:
 
 ```typescript
 // ✅ Better - use computed() for derived state
@@ -1104,24 +1110,21 @@ export class Validation {
     });
 }
 
-// ❌ Avoid - using effect with allowSignalWrites for derived state
+// ❌ Avoid - using effect for derived state (even though it works)
 export class Validation {
     readonly inputValue = signal('');
     readonly validationError = signal<string | null>(null);
 
     constructor() {
-        effect(
-            () => {
-                const value = this.inputValue();
-                this.validationError.set(value.length < 3 ? 'Minimum 3 characters required' : null);
-            },
-            { allowSignalWrites: true }
-        );
+        effect(() => {
+            const value = this.inputValue();
+            this.validationError.set(value.length < 3 ? 'Minimum 3 characters required' : null);
+        });
     }
 }
 ```
 
-**Use cases for `allowSignalWrites: true`:**
+**When to use effects with signal writes:**
 
 - Synchronizing multiple related signals that can't be expressed as computed values
 - Updating signals based on imperative operations (DOM measurements, third-party library callbacks)

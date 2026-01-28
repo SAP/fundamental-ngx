@@ -1,94 +1,84 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, output, signal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { Properties, Schema } from '../../models/schema.model';
 import { SchemaGroupComponent } from '../schema-group/schema-group.component';
+
+import '@sap-ui/common-css/dist/sap-margin.css';
 
 @Component({
     selector: 'schema',
     templateUrl: 'schema.component.html',
     styleUrls: ['schema.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'sap-margin-bottom-small'
+    },
     imports: [SchemaGroupComponent]
 })
-export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
-    @Input() schema: Schema;
+export class SchemaComponent {
+    /** Schema definition for the form. */
+    readonly schema = input.required<Schema>();
 
-    @Input() initialValues: any;
-
-    /**
-     * Is current playground can be resetted.
-     */
-    @Input() resettable = false;
-
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onSchemaValues: EventEmitter<any> = new EventEmitter<any>();
+    /** Initial values for the form fields. */
+    readonly initialValues = input<unknown>();
 
     /**
-     * Emits when playground needs to be resetted.
+     * Whether the playground can be reset to default values.
      */
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
+    readonly resettable = input(false);
 
-    schemaGroup: FormGroup;
+    /** Emits form values when they change. */
+    readonly schemaValues = output<unknown>();
 
     /**
-     * @hidden
+     * Emits when playground needs to be reset.
      */
-    private _resetted = false;
+    readonly resetTriggered = output<void>();
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** The reactive form group built from the schema. */
+    protected readonly schemaGroup = computed(() => this._constructProperties(this.schema().properties));
 
-    /**
-     * @hidden
-     */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
+    /** Track whether a reset was triggered to handle initial values update. */
+    private readonly _resetted = signal(false);
 
-    /**
-     * @hidden
-     */
-    ngOnInit(): void {
-        this._constructSchemaGroup();
-    }
+    constructor() {
+        // Patch form with initial values and emit value changes
+        effect((onCleanup) => {
+            const group = this.schemaGroup();
+            const values = this.initialValues();
 
-    /**
-     * Resets the form and emits event.
-     */
-    reset(): void {
-        this._resetted = true;
-        this.onReset.emit();
-    }
+            if (values) {
+                group.patchValue(values as Record<string, unknown>);
+            }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (this._resetted && changes.initialValues) {
-            this.initialValues = changes.initialValues.currentValue;
-            this._resetted = false;
-            this.schemaGroup.patchValue(this.initialValues);
-        }
-    }
+            // Subscribe to value changes and emit
+            const subscription = group.valueChanges.subscribe((formValues) => {
+                this.schemaValues.emit(formValues);
+            });
 
-    /**
-     * @hidden
-     */
-    private _constructSchemaGroup(): void {
-        this.schemaGroup = this._constructProperties(this.schema.properties);
+            onCleanup(() => subscription.unsubscribe());
+        });
 
-        this.schemaGroup.patchValue(this.initialValues);
+        // Handle reset: patch form when initialValues change after reset
+        effect(() => {
+            const values = this.initialValues();
+            const wasResetted = this._resetted();
 
-        this.schemaGroup.valueChanges.pipe(takeUntil(this._onDestroy$)).subscribe((values) => {
-            this.onSchemaValues.emit(values);
+            if (wasResetted && values) {
+                this._resetted.set(false);
+                this.schemaGroup().patchValue(values as Record<string, unknown>);
+            }
         });
     }
 
-    /**
-     * @hidden
-     */
+    /** Resets the form and emits event. */
+    protected reset(): void {
+        this._resetted.set(true);
+        this.resetTriggered.emit();
+    }
+
     private _constructProperties(properties: Properties): FormGroup {
-        const formGroup = {};
+        const formGroup: Record<string, FormGroup | FormControl> = {};
         for (const property in properties) {
             if (properties[property].type === 'object') {
                 const innerProps = properties[property].properties;

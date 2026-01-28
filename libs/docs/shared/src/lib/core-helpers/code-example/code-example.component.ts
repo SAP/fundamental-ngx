@@ -47,25 +47,27 @@ enum ExampleEntityState {
     ]
 })
 export class CodeExampleComponent {
-    // Modern viewChildren query with signals
-    readonly codeElements = viewChildren(CodeSnippetComponent, { read: ElementRef });
-
     /**
      * List of files to display in this code example.
      */
     readonly exampleFiles = input<ExampleFile[]>([]);
 
+    // Expose enum for template
+    protected readonly states = ExampleEntityState;
+
+    // Modern viewChildren query with signals
+    protected readonly codeElements = viewChildren(CodeSnippetComponent, { read: ElementRef });
+
     // State signals
-    readonly states = ExampleEntityState;
-    readonly isOpen = signal(false);
-    readonly smallScreen = signal(false); // Initialize with false, will be set correctly in effect
-    readonly activeIndex = signal(0);
+    protected readonly isOpen = signal(false);
+    protected readonly smallScreen = signal(false);
+    protected readonly activeIndex = signal(0);
 
     // Computed signals
-    readonly expandIcon = computed(() => (this.isOpen() ? 'navigation-up-arrow' : 'navigation-down-arrow'));
+    protected readonly expandIcon = computed(() => (this.isOpen() ? 'navigation-up-arrow' : 'navigation-down-arrow'));
 
     // Convert observable to signal for template
-    readonly exampleFilesNetworkEntity = toSignal(
+    protected readonly exampleFilesNetworkEntity = toSignal(
         toObservable(this.exampleFiles).pipe(
             switchMap((exampleFiles) => {
                 if (!exampleFiles || exampleFiles.length === 0) {
@@ -120,9 +122,9 @@ export class CodeExampleComponent {
     );
 
     // Services
-    private readonly copyService = inject(CopyService);
-    private readonly messageStripAlertService = inject(MessageStripAlertService);
-    private readonly stackBlitzService = inject(StackblitzService);
+    private readonly _copyService = inject(CopyService);
+    private readonly _messageStripAlertService = inject(MessageStripAlertService);
+    private readonly _stackBlitzService = inject(StackblitzService);
 
     constructor() {
         // Listen to window resize with effect (zoneless-compatible)
@@ -140,19 +142,19 @@ export class CodeExampleComponent {
         }
     }
 
-    openStackBlitz(): void {
+    protected openStackBlitz(): void {
         const entity = this.exampleFilesNetworkEntity();
         if (entity?.exampleFiles) {
-            this.stackBlitzService.openCode(entity.exampleFiles);
+            this._stackBlitzService.openCode(entity.exampleFiles);
         }
     }
 
-    copyText(): void {
+    protected copyText(): void {
         const entity = this.exampleFilesNetworkEntity();
         const index = this.activeIndex();
         if (entity?.exampleFiles?.[index]) {
-            this.copyService.copyText(entity.exampleFiles[index].code);
-            this.messageStripAlertService.open({
+            this._copyService.copyText(entity.exampleFiles[index].code);
+            this._messageStripAlertService.open({
                 content: 'Code copied!',
                 messageStrip: { type: 'success', duration: 5000, mousePersist: true }
             });

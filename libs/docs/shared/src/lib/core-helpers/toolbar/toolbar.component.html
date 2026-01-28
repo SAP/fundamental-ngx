@@ -1,4 +1,4 @@
-<fd-shellbar [size]="size" class="fd-docs--toolbar">
+<fd-shellbar [size]="size()" class="fd-docs--toolbar">
     <button
         fd-shellbar-side-nav
         fd-button
@@ -8,27 +8,28 @@
         glyph="menu2"
         aria-label="Switch Navigation"
         fdCozy
-        (click)="this.btnClicked.emit()"
+        (click)="btnClicked.emit()"
     ></button>
     <fd-shellbar-logo>
         <a
             aria-label="Home"
-            class="fd-shellbar__logo fd-docs--toolbar__home-logo"
-            [routerLink]="'/' + library + '/home' | lowercase"
+            class="fd-shellbar__logo fd-docs--toolbar__home-logo sap-margin-begin-tiny sap-display-inline-block sap-color-shell_TextColor"
+            routerLink="/home"
             id="toolbar-home-btn"
         >
-            Fundamental
-            <span class="fd-docs--toolbar__home-logo-framework"> NGX </span>
+            @if (size() === 's') {
+                <img src="assets/favicon.ico" alt="Fundamental NGX" class="fd-docs--toolbar__logo-icon" />
+            } @else {
+                Fundamental NGX
+            }
         </a>
     </fd-shellbar-logo>
-    <fd-product-menu placement="bottom-start" [control]="library" [closePopoverOnSelect]="true" [items]="items">
-    </fd-product-menu>
     <fd-shellbar-actions [closePopoverOnSelect]="true">
-        @if (size === 's') {
+        @if (size() === 's') {
             <button
                 fd-button
                 fdType="transparent"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 fdCozy
                 glyph="settings"
                 [fdMenuTrigger]="optionsMenu"
@@ -66,7 +67,7 @@
             <button
                 fd-button
                 fdType="transparent"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 [fdMenu]="true"
                 [fdMenuTrigger]="densityMenu"
             >
@@ -79,7 +80,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="palette"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 [fdMenu]="true"
                 [fdMenuTrigger]="themesMenu"
             ></button>
@@ -90,7 +91,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="translate"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu sap-margin-x-tiny sap-color-shell_TextColor"
                 [fdMenu]="true"
                 [fdMenuTrigger]="i18nMenu"
             ></button>
@@ -107,7 +108,7 @@
                 fdType="transparent"
                 [fdMenu]="true"
                 [fdMenuTrigger]="versionsMenu"
-                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version sap-margin-x-tiny sap-color-shell_TextColor"
             >
                 v{{ version.id }}
             </button>
@@ -123,7 +124,7 @@
             class="fd-button fd-shellbar__button fd-shellbar__button"
         >
             <svg
-                class="logo-github logo-github--white"
+                class="logo-github logo-github--white sap-margin-x-tiny"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +163,8 @@
         </a>
     </fd-shellbar-actions>
 </fd-shellbar>
-@if (highlightJsThemeCss) {
-    <link rel="stylesheet" [href]="highlightJsThemeCss" />
+@if (highlightJsThemeCss()) {
+    <link rel="stylesheet" [href]="highlightJsThemeCss()" />
 }
 <ng-template #themesTemplate>
     @for (theme of themes; track theme) {
@@ -175,11 +176,15 @@
     }
 </ng-template>
 <ng-template #i18nTemplate>
-    <li class="fd-docs--i18n-menu-tooltip" role="presentation" type="information">
-        <fd-icon glyph="message-information"></fd-icon>
+    <li
+        class="fd-docs--i18n-menu-tooltip sap-flex--center sap-bg-color-informationBackground"
+        role="presentation"
+        type="information"
+    >
+        <fd-icon glyph="message-information" class="sap-margin-end-tiny"></fd-icon>
         <span>Only applies to internal component translations</span>
     </li>
-    @for (translation of translations$ | async; track translation) {
+    @for (translation of translations(); track translation) {
         <li fd-menu-item>
             <div fd-menu-interactive (click)="selectTranslation(translation.value)">
                 <span fd-menu-title>{{ translation.name }}</span>
@@ -205,7 +210,7 @@
     </li>
 </ng-template>
 <ng-template #versionsTemplate>
-    @for (version of versions; track version) {
+    @for (version of allVersions(); track version) {
         <li fd-menu-item>
             <div fd-menu-interactive (click)="selectVersion(version)">
                 <span fd-menu-title>{{ version.id }}</span>
