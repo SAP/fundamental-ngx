@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents",
-    "version": "0.59.1-rc.10",
+    "version": "0.59.1-rc.11",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - UI5 Webcomponents Base",
     "license": "Apache-2.0",
