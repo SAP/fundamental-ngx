@@ -20,7 +20,8 @@
         "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
         "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
         "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-        "fundamental-styles": "0.40.1",
+        "@ui5/webcomponents-base": "UI5_WEBCOMPONENTS_VER_PLACEHOLDER",
+        "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
         "rxjs": "^7.8.0"
     },
     "dependencies": {
