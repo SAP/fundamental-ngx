@@ -25,7 +25,9 @@ const getVersions = () => {
     }
 
     const aboveMinorVersion = (version) => {
-        const parsed = parse(version);
+        // Strip range prefixes (^, ~, >=, etc.) before parsing
+        const cleanVersion = version?.replace(/^[~^>=<]+/, '');
+        const parsed = parse(cleanVersion);
         return `^${parsed?.major}.${parsed?.minor}.0`;
     };
 

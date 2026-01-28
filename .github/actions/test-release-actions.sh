@@ -179,8 +179,67 @@ else
 fi
 echo ""
 
-# Test 3: Test bump-version action (manual mode - no actual bump)
-echo -e "${YELLOW}[3/14] Testing bump-version action (manual mode)...${NC}"
+# Test 3: Test placeholder resolution (sync-versions utility)
+echo -e "${YELLOW}[3/15] Testing placeholder resolution (sync-versions)...${NC}"
+cd "$REPO_ROOT"
+
+# Test that placeholders resolve to valid versions (not undefined)
+PLACEHOLDER_RESOLUTION_FAILED=false
+
+RESOLUTION_OUTPUT=$(node -e "
+    const { replaceInFile } = require('./libs/nx-plugin/src/generators/sync-versions/utils');
+    
+    const testCases = [
+        { name: 'VERSION_PLACEHOLDER', input: 'VERSION_PLACEHOLDER' },
+        { name: 'ANGULAR_VER_PLACEHOLDER', input: 'ANGULAR_VER_PLACEHOLDER' },
+        { name: 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER', input: 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER' },
+        { name: 'FDSTYLES_VER_PLACEHOLDER', input: 'FDSTYLES_VER_PLACEHOLDER' },
+        { name: 'FDCXSTYLES_VER_PLACEHOLDER', input: 'FDCXSTYLES_VER_PLACEHOLDER' },
+        { name: 'THEMING_VER_PLACEHOLDER', input: 'THEMING_VER_PLACEHOLDER' },
+        { name: 'RXJS_VER_PLACEHOLDER', input: 'RXJS_VER_PLACEHOLDER' }
+    ];
+    
+    let hasErrors = false;
+    
+    testCases.forEach(({ name, input }) => {
+        const result = replaceInFile('test.json', input);
+        
+        // Check for undefined or invalid versions
+        if (result.includes('undefined') || result.includes('NaN') || result === input) {
+            console.log('FAIL:' + name + ':' + result);
+            hasErrors = true;
+        } else {
+            console.log('PASS:' + name + ':' + result);
+        }
+    });
+    
+    process.exit(hasErrors ? 1 : 0);
+" 2>&1)
+
+if [ $? -ne 0 ]; then
+    PLACEHOLDER_RESOLUTION_FAILED=true
+fi
+
+# Parse and display results
+echo "$RESOLUTION_OUTPUT" | while IFS=: read -r status name value; do
+    if [ "$status" = "PASS" ]; then
+        echo -e "    ${GREEN}✓${NC} $name → $value"
+    elif [ "$status" = "FAIL" ]; then
+        echo -e "    ${RED}✗${NC} $name → $value (invalid!)"
+    fi
+done
+
+if [ "$PLACEHOLDER_RESOLUTION_FAILED" = "true" ]; then
+    echo -e "${RED}✗ Some placeholders resolved to invalid versions${NC}"
+    echo "  Check libs/nx-plugin/src/generators/sync-versions/utils.ts"
+    exit 1
+else
+    echo -e "${GREEN}✓ All placeholders resolve to valid versions${NC}"
+fi
+echo ""
+
+# Test 4: Test bump-version action (manual mode - no actual bump)
+echo -e "${YELLOW}[4/15] Testing bump-version action (manual mode)...${NC}"
 # Actions must run from repo root where package.json exists
 cd "$REPO_ROOT"
 
