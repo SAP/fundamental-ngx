@@ -383,7 +383,8 @@ export default {
         searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',

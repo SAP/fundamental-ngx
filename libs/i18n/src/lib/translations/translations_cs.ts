@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: 'Nalezené návrhy: {count}.',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavení',

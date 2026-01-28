@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: '{count} ұсыныс табылды.',
         searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Параметрлер',

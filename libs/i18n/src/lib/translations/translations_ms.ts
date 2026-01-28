@@ -379,7 +379,8 @@ export default {
         searchSuggestionMessage: '{count} cadangan ditemui.',
         searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Tetapan',

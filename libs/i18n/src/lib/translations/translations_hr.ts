@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: 'Pronađeno je {count} prijedloga.',
         searchSuggestionNavigateMessage: 'za navigiranje upotrijebite strelice Gore i Dolje',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Postavke',

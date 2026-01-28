@@ -375,7 +375,8 @@ export default {
         searchSuggestionMessage: '{count} sugjerime u gjetën.',
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSwitch: {
         ariaLabel: 'Ndërprerësi'

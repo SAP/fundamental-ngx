@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: '{count} javaslat található.',
         searchSuggestionNavigateMessage: 'a le és a fel nyíllal navigálhat',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Beállítások',

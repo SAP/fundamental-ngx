@@ -381,7 +381,8 @@ export default {
         searchSuggestionMessage: '{count} προτάσεις βρέθηκαν.',
         searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ρυθμίσεις',

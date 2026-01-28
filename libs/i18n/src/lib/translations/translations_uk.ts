@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: 'Знайдено пропозицій: {count}.',
         searchSuggestionNavigateMessage: 'використовуйте стрілки вгору і вниз для навігації',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Налаштування',

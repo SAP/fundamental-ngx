@@ -39,10 +39,14 @@
             [showAdvancedFilter]="exampleType === 'advancedFilter'"
             (advancedFilterButtonClick)="openMessageToast('advanced filter')"
             [mobile]="exampleType === 'mobile'"
-            [searchResultsEmptyTemplate]="emptyResultsTemplate"
+            [searchResultsEmptyTemplate]="emptyResultsType === 'illustratedMessage' ? emptyResultsTemplate : null"
+            [searchResultsEmptyDefaultSuggestions]="
+                emptyResultsType === 'customSuggestions' ? emptyDefaultSuggestions : null
+            "
             [mobileConfig]="mobileConfig"
             [enableSelection]="true"
             [suggestionsLoading]="suggestionsLoading"
+            (searchSubmit)="submit($event)"
         ></fdp-search-field>
 
         <fd-shellbar-actions>

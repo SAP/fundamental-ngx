@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: '{count} forslag blev fundet.',
         searchSuggestionNavigateMessage: 'brug pil op og pil ned til at navigere',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Indstillinger',

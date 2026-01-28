@@ -59,6 +59,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
@@ -91,6 +92,9 @@ export interface SuggestionItem {
     searchInScopeText?: string;
     searchInScopeCounter?: number;
     searchInScopeCallback?: () => any;
+    showMoreText?: string;
+    showMoreCounter?: number;
+    showMoreCallback?: () => any;
 }
 
 export interface ValueLabelItem {
@@ -164,6 +168,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
         ButtonComponent,
         AutoCompleteDirective,
         BusyIndicatorComponent,
+        LinkComponent,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -350,6 +355,9 @@ export class SearchFieldComponent
     /** Template to display when the search results list has no items to display. */
     searchResultsEmptyTemplate = input<TemplateRef<any> | null>(null);
 
+    /** Options to display when the user has entered a string into the input that returns no results. */
+    searchResultsEmptyDefaultSuggestions = input<SuggestionItem[] | null>(null);
+
     /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
     showAdvancedFilter = input(false, { transform: booleanAttribute });
 
@@ -384,7 +392,7 @@ export class SearchFieldComponent
      * Currently set category.
      * @hidden
      */
-    _currentCategory?: ValueLabelItem;
+    _currentCategory?: ValueLabelItem | null;
 
     /**
      * Whether or not to show category dropdown. This is dependent on length of `categoryValues` property.
@@ -591,6 +599,12 @@ export class SearchFieldComponent
                     this._performButtonClick(mockClick, event.searchInScopeCallback);
                 }
                 return;
+            } else if (event.showMoreText) {
+                if (event.showMoreCallback) {
+                    const mockClick = new Event('click');
+                    this._performButtonClick(mockClick, event.showMoreCallback);
+                }
+                return;
             }
             this.inputText = event.value;
             this._selectedSuggestionItem = event;
@@ -632,7 +646,7 @@ export class SearchFieldComponent
      * Sets current category.
      * @hidden
      */
-    setCurrentCategory(currentCategory: ValueLabelItem): void {
+    setCurrentCategory(currentCategory: ValueLabelItem | null): void {
         this._currentCategory =
             currentCategory &&
             this.categories?.find(
@@ -876,7 +890,7 @@ export class SearchFieldComponent
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     /** @hidden */
-    transform(suggestions: SuggestionItem[] | null, match: string): (SuggestionItem | undefined)[] {
+    transform(suggestions: SuggestionItem[] | null | undefined, match: string): (SuggestionItem | undefined)[] {
         if (!suggestions) {
             suggestions = [];
         }
@@ -885,11 +899,6 @@ export class SuggestionMatchesPipe implements PipeTransform {
         }
         const processedMatch = match.trim().toLowerCase();
         return suggestions.filter((suggestion) => {
-            if (suggestion.children?.length) {
-                suggestion.children.forEach((child) => {
-                    child.data.hideChild = child.value.toLowerCase().indexOf(processedMatch) === -1;
-                });
-            }
             const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion.value;
             return textToCheck.toLowerCase().indexOf(processedMatch) > -1 || suggestion.isGroupHeader;
         });

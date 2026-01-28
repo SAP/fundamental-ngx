@@ -374,7 +374,8 @@ export default {
         searchSuggestionMessage: 'ნაპოვნია {count} შემოთავაზება.',
         searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSwitch: {
         ariaLabel: 'გადამრთველი'

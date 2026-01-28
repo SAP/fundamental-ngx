@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: '{count} predloga nađeno.',
         searchSuggestionNavigateMessage: 'koristite strelice gore i dole za usmeravanje',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Podešavanja',

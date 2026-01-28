@@ -521,6 +521,7 @@ export interface FdLanguage {
         searchSuggestionNavigateMessage: FdLanguageKey;
         deleteButtonLabel: FdLanguageKey;
         cancelLabel: FdLanguageKey;
+        allButtonLabel: FdLanguageKey;
     };
     platformSwitch: {
         ariaLabel: FdLanguageKey;

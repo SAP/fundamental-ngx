@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: 'Liczba znalezionych podpowiedzi: {count}.',
         searchSuggestionNavigateMessage: 'użyj strzałek w górę i w dół do nawigacji',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ustawienia',

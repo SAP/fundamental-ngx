@@ -34,7 +34,12 @@ import {
     UserMenuSublistComponent,
     UserMenuUserNameDirective
 } from '@fundamental-ngx/core/user-menu';
-import { SearchFieldComponent, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
+import {
+    SearchFieldComponent,
+    SearchInput,
+    SuggestionItem,
+    ValueLabelItem
+} from '@fundamental-ngx/platform/search-field';
 import { DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { Observable, of } from 'rxjs';
 
@@ -89,6 +94,27 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
 
     emptyResultsType: 'illustratedMessage' | 'customSuggestions' = 'illustratedMessage';
 
+    emptyDefaultSuggestions: SuggestionItem[] = [
+        {
+            value: 'Peach',
+            data: {
+                type: 'fruit'
+            }
+        },
+        {
+            value: 'Pear',
+            data: {
+                type: 'fruit'
+            }
+        },
+        {
+            value: 'Plum',
+            data: {
+                type: 'fruit'
+            }
+        }
+    ];
+
     categories: ValueLabelItem[] = [
         {
             value: 'fruit',
@@ -133,6 +159,9 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
 
     ngOnInit(): void {
         this.dataSource = new SearchFieldDataSource(new ShellSearchFieldDataProvider());
+        SUGGESTIONS[0].children?.forEach((child) => {
+            this.emptyDefaultSuggestions.push(child);
+        });
     }
 
     onZoomGlyphClick(): void {
@@ -158,6 +187,11 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
             this.shellSearchField()?.resetCategory();
             this.shellSearchField()?.clearTextInput();
         }, 500);
+    }
+
+    submit(event: SearchInput): void {
+        alert('Search submitted. See developer console for event');
+        console.log(event);
     }
 }
 
@@ -298,6 +332,11 @@ const SUGGESTIONS: SuggestionItem[] = [
                     type: 'vegetable'
                 }
             }
-        ]
+        ],
+        showMoreText: 'Show More',
+        showMoreCounter: 1234,
+        showMoreCallback: () => {
+            alert('Show more callback clicked');
+        }
     }
 ];

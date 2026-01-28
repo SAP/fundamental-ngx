@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: '{count}件の候補が見つかりました。',
         searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

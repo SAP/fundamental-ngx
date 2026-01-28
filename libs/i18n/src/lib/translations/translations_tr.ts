@@ -381,7 +381,8 @@ export default {
         searchSuggestionMessage: '{count} öneri bulundu.',
         searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',

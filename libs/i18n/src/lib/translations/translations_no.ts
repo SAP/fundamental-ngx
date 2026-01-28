@@ -381,7 +381,8 @@ export default {
         searchSuggestionMessage: '{count} forslag funnet.',
         searchSuggestionNavigateMessage: 'bruk oppover og nedover piler til å navigere',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Innstillinger',

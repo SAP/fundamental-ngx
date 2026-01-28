@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: 'พบคำแนะนำ {count} รายการ',
         searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'การตั้งค่า',

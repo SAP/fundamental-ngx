@@ -381,7 +381,8 @@ export default {
         searchSuggestionMessage: '{count} sugestii găsite.',
         searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Setări',

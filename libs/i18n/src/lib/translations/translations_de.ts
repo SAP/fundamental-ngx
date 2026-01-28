@@ -381,7 +381,8 @@ export default {
         searchSuggestionMessage: '{count} Vorschläge gefunden.',
         searchSuggestionNavigateMessage: 'Pfeile nach oben und unten für Navigation verwenden',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Einstellungen',

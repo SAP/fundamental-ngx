@@ -379,7 +379,8 @@ export default {
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
         searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',

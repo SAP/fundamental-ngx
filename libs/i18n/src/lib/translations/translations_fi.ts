@@ -380,7 +380,8 @@ export default {
         searchSuggestionMessage: 'Löytyi {count} ehdotusta.',
         searchSuggestionNavigateMessage: 'navigoi ylä- ja alanuolilla',
         deleteButtonLabel: 'Delete',
-        cancelLabel: 'Cancel'
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Asetukset',
