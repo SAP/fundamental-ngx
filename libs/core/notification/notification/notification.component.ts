@@ -287,7 +287,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
 
         if (footer) {
-            footer.showTrigger.set(this._hasTruncation() || this._expanded());
+            footer._autoShowTrigger.set(this._hasTruncation() || this._expanded());
         }
 
         this._updateExpandedClass();
