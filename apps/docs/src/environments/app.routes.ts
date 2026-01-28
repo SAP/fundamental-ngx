@@ -1,68 +1,147 @@
 import { Routes } from '@angular/router';
 
+/**
+ * Application routes for the documentation site.
+ * Uses a unified shell that displays all packages in the side navigation.
+ * Each package's routes are loaded lazily and their providers are included.
+ */
 export const ROUTES: Routes = [
     {
-        path: 'core',
-        data: {
-            library: 'Core'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/core')
-    },
-    {
-        path: 'btp',
-        data: {
-            library: 'BTP'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/btp')
-    },
-    {
-        path: 'platform',
-        data: {
-            library: 'Platform'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/platform')
-    },
-    {
-        path: 'cx',
-        data: {
-            library: 'CX'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/cx')
-    },
-    {
-        path: 'cdk',
-        data: {
-            library: 'CDK'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/cdk')
-    },
-    {
-        path: 'i18n',
-        data: {
-            library: 'I18n'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/i18n')
-    },
-    {
-        path: 'ui5-webcomponents',
-        data: {
-            library: 'Web Components Main'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents')
-    },
-    {
-        path: 'ui5-webcomponents-ai',
-        data: {
-            library: 'Web Components AI'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-ai')
-    },
-    {
-        path: 'ui5-webcomponents-fiori',
-        data: {
-            library: 'Web Components Fiori'
-        },
-        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents-fiori')
-    },
-    { path: '', redirectTo: 'core', pathMatch: 'full' }
+        path: '',
+        loadComponent: () => import('@fundamental-ngx/docs/shared-pages').then((m) => m.UnifiedDocsShellPageComponent),
+        children: [
+            {
+                path: 'core',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/core').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'btp',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/btp').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'platform',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/platform').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'cx',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cx').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'cdk',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'i18n',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/i18n').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'ui5-webcomponents',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/ui5-webcomponents').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'ui5-webcomponents-ai',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/ui5-webcomponents-ai').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'ui5-webcomponents-fiori',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/ui5-webcomponents-fiori').then((m) => {
+                        const route = m.default[0];
+                        return [
+                            {
+                                path: '',
+                                providers: route.providers || [],
+                                children: route.children
+                            }
+                        ];
+                    })
+            },
+            {
+                path: 'home',
+                loadComponent: () =>
+                    import('@fundamental-ngx/docs/shared-pages').then((m) => m.UnifiedHomePageComponent)
+            },
+            { path: '', redirectTo: 'home', pathMatch: 'full' }
+        ]
+    }
 ];

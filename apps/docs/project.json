@@ -77,6 +77,11 @@
                         "output": "./assets"
                     },
                     {
+                        "input": "./libs/docs",
+                        "glob": "GETTING_STARTED.md",
+                        "output": "./assets/docs"
+                    },
+                    {
                         "input": "./libs/docs/shared",
                         "glob": "NEW_COMPONENT.md",
                         "output": "./assets"

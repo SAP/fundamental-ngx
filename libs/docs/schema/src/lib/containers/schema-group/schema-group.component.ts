@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -12,10 +12,17 @@ import {
 import { Properties } from '../../models/schema.model';
 import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pipe';
 
+import '@sap-ui/common-css/dist/sap-padding.css';
+import '@sap-ui/common-css/dist/sap-typography.css';
+
 @Component({
     selector: 'schema-group',
     templateUrl: 'schema-group.component.html',
     styleUrls: ['schema-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'sap-padding'
+    },
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -31,52 +38,51 @@ import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pip
         AsFormGroupPipe
     ]
 })
-export class SchemaGroupComponent implements OnInit {
-    @Input() schemaGroup: FormGroup;
-    @Input() properties: Properties;
+export class SchemaGroupComponent {
+    /** The form group for this schema section. */
+    readonly schemaGroup = input.required<FormGroup>();
 
-    /**
-     * Is current playground can be resetted.
-     */
-    @Input() resettable = false;
+    /** Properties definition for this schema section. */
+    readonly properties = input.required<Properties>();
 
-    /**
-     * Emits when playground needs to be resetted.
-     */
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
+    /** Whether the playground can be reset to default values. */
+    readonly resettable = input(false);
 
-    controls: Array<{
-        key: string;
-        control: AbstractControl;
-        type: string;
-        enum: any[] | undefined;
-    }> = [];
+    /** Emits when playground needs to be reset. */
+    readonly resetTriggered = output<void>();
 
-    ngOnInit(): void {
-        const controls = this.schemaGroup.controls;
+    /** Computed array of form controls with metadata. */
+    protected readonly controls = computed(() => {
+        const group = this.schemaGroup();
+        const props = this.properties();
+        const result: Array<{
+            key: string;
+            control: AbstractControl;
+            type: string;
+            enum: unknown[] | undefined;
+        }> = [];
 
-        for (const key in controls) {
-            if (Object.prototype.hasOwnProperty.call(controls, key)) {
-                this.controls.push({
+        for (const key in group.controls) {
+            if (Object.prototype.hasOwnProperty.call(group.controls, key)) {
+                result.push({
                     key,
-                    control: controls[key],
-                    type: this.properties[key].type,
-                    enum: this.properties[key].enum
+                    control: group.controls[key],
+                    type: props[key].type,
+                    enum: props[key].enum
                 });
             }
         }
-    }
+
+        return result;
+    });
 
     /** @hidden */
-    _isFormControl(form: AbstractControl): boolean {
+    protected _isFormControl(form: AbstractControl): boolean {
         return form instanceof FormControl;
     }
 
-    /**
-     * Emits reset event.
-     */
-    reset(): void {
-        this.onReset.emit();
+    /** Emits reset event. */
+    protected reset(): void {
+        this.resetTriggered.emit();
     }
 }
