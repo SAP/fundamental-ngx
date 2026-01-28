@@ -46,3 +46,18 @@ export class BreadcrumbHrefExampleComponent {
         window.alert(value);
     }
 }
+
+@Component({
+    selector: 'fd-breadcrumb-separator-example',
+    templateUrl: './breadcrumb-separator-example.component.html',
+    styles: [
+        `
+            :host {
+                display: block;
+                width: 100%;
+            }
+        `
+    ],
+    imports: [BreadcrumbModule, LinkComponent]
+})
+export class BreadcrumbSeparatorExampleComponent {}
