@@ -184,10 +184,6 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
             this._addScrollListeners();
         }
 
-        if (this._columnLayout && this.autoResponsive) {
-            this._listenToLayoutChange();
-        }
-
         setTimeout(() => this._setContainerPositions());
 
         this._cd.detectChanges();
@@ -225,18 +221,6 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
         this._propagateSizeToChildren();
     }
 
-    /** @hidden
-     * Functionality handling column layout changes,
-     * - recalculate height of content element
-     * - recheck size depending on width of DynamicPage
-     */
-    private _listenToLayoutChange(): void {
-        this._columnLayout.layoutChange.pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this.refreshSize();
-            this._sizeChangeHandle();
-        });
-    }
-
     /** @hidden */
     private _propagateSizeToChildren(): void {
         if (this._headerComponent) {
@@ -263,10 +247,23 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** @hidden */
     private _sizeChangeHandle(): void {
-        if (!this._elementRef || !this.autoResponsive) {
+        if (!this.autoResponsive) {
             return;
         }
-        const dynamicPageWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+
+        // Use the article element, not the host element
+        const element = this._dynamicPageElement?.nativeElement;
+        if (!element) {
+            return;
+        }
+
+        const dynamicPageWidth = element.getBoundingClientRect().width;
+
+        // Ignore zero-width measurements (element is hidden during layout transitions)
+        if (dynamicPageWidth === 0) {
+            return;
+        }
+
         this._dynamicPageService.pixelsSizeChanged.set(dynamicPageWidth);
         const size = dynamicPageWidthToSize(dynamicPageWidth);
 
@@ -293,12 +290,23 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** @hidden Listen for window resize and adjust tab and content positions accordingly */
     private _listenOnResize(): void {
-        const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
-
-        listener.pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._setContainerPositions();
-            this._sizeChangeHandle();
-        });
+        // When autoResponsive is enabled, observe the dynamic page article element itself
+        // This catches both manual resizes AND programmatic layout changes
+        if (this.autoResponsive && this._dynamicPageElement) {
+            resizeObservable(this._dynamicPageElement.nativeElement)
+                .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this._setContainerPositions();
+                    this._sizeChangeHandle();
+                });
+        } else {
+            // Fallback to window/wrapper resize for non-responsive mode
+            const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
+            listener.pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+                this._setContainerPositions();
+                this._sizeChangeHandle();
+            });
+        }
     }
 
     /** @hidden */

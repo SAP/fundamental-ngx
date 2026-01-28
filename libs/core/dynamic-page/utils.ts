@@ -9,11 +9,11 @@ export const addClassNameToElement = (renderer: Renderer2, element: Element, cla
  * @param width - dynamic page window width
  **/
 export function dynamicPageWidthToSize(width: number): DynamicPageResponsiveSize {
-    if (width < 599) {
+    if (width <= 599) {
         return 'small';
-    } else if (width < 1023) {
+    } else if (width <= 1023) {
         return 'medium';
-    } else if (width < 1439) {
+    } else if (width <= 1439) {
         return 'large';
     }
     return 'extra-large';
