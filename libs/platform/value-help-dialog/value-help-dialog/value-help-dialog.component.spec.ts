@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
@@ -79,7 +78,6 @@ describe('PlatformValueHelpDialogComponent', () => {
 
     beforeEach(async () => {
         TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, TestWrapperComponent],
             providers: [RtlService]
         }).overrideComponent(PlatformValueHelpDialogComponent, {
             set: {

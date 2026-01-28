@@ -1,10 +1,12 @@
-import { AnimationEvent } from '@angular/animations';
-import { Directive, HostBinding, HostListener, inject, NgZone, OnDestroy, signal } from '@angular/core';
-import { take } from 'rxjs';
+import { Directive, ElementRef, inject, OnDestroy, signal } from '@angular/core';
 import { BaseAnimatedToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 
-@Directive()
+@Directive({
+    host: {
+        '[class]': '_animationClasses'
+    }
+})
 export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimatedToastConfig>
     extends BaseToastContainerComponent<P>
     implements OnDestroy
@@ -13,66 +15,137 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * @hidden
      * The state of the Message Toast animations.
      */
-    @HostBinding('@state')
-    protected get _animationState(): string {
-        return this._animationStateSignal();
-    }
+    protected _animationStateSignal = signal<'void' | 'visible' | 'hidden'>('void');
+
+    /**
+     * @hidden
+     * Whether we're currently animating (used to apply animation classes)
+     */
+    protected _isAnimatingSignal = signal<boolean>(false);
+
     /**
      * @hidden
      * Whether the animations should be disabled.
      */
-    @HostBinding('@.disabled')
     protected _animationsDisabled = false;
 
     /** @hidden */
-    protected _ngZone = inject(NgZone);
+    private _elementRef = inject(ElementRef);
 
     /** @hidden */
-    private _animationStateSignal = signal('void');
+    private _animationEndListener?: (event: AnimationEvent) => void;
+
+    /** @hidden */
+    private _exitCompleted = false;
+
+    /**
+     * @hidden
+     * Host binding for animation state CSS classes
+     */
+    protected get _animationClasses(): string {
+        const state = this._animationStateSignal();
+        const isAnimating = this._isAnimatingSignal();
+        const classes = [this._baseClassName, `${this._baseClassName}--${state}`];
+
+        if (isAnimating) {
+            if (state === 'visible') {
+                classes.push(`${this._baseClassName}--entering`);
+            } else if (state === 'hidden') {
+                classes.push(`${this._baseClassName}--exiting`);
+            }
+        }
+
+        if (this._animationsDisabled) {
+            classes.push(`${this._baseClassName}--no-animation`);
+        }
+
+        return classes.join(' ');
+    }
+
+    /**
+     * @hidden
+     * Override in subclass to provide base CSS class name for animations
+     */
+    protected abstract get _baseClassName(): string;
 
     /** @hidden */
     constructor(config: P) {
         super(config);
         this._animationsDisabled = !config.animated;
-    }
-
-    /**
-     * @hidden
-     * Handle end of animations, updating the state of the Message Toast.
-     */
-    @HostListener('@state.done', ['$event'])
-    protected _onAnimationEnd(event: AnimationEvent): void {
-        const { fromState, toState } = event;
-
-        if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {
-            this._completeExit();
-        }
-
-        if (toState === 'visible') {
-            // Note: we shouldn't use `this` inside the zone callback,
-            // because it can cause a memory leak.
-            const onEnter = this.onEnter$;
-
-            this._ngZone.run(() => {
-                onEnter.next();
-                onEnter.complete();
-            });
-        }
+        this._setupAnimationEndListener();
     }
 
     /** Begin animation of Message Toast entrance into view. */
     enter(): void {
         this._animationStateSignal.set('visible');
+        this._isAnimatingSignal.set(!this._animationsDisabled);
+
+        // If animations are disabled, immediately complete the enter
+        // Use setTimeout to defer so subscriptions can be set up first
+        if (this._animationsDisabled) {
+            setTimeout(() => {
+                this.onEnter$.next();
+                this.onEnter$.complete();
+            }, 0);
+        }
     }
 
     /** Begin animation of Message Toast removal. */
     exit(): void {
         this._animationStateSignal.set('hidden');
+        this._isAnimatingSignal.set(!this._animationsDisabled);
+
+        // If animations are disabled, immediately complete the exit
+        if (this._animationsDisabled) {
+            this._completeExit();
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._removeAnimationEndListener();
         this._completeExit();
+    }
+
+    /**
+     * @hidden
+     * Set up native animationend event listener
+     */
+    private _setupAnimationEndListener(): void {
+        this._animationEndListener = (event: AnimationEvent) => {
+            // Only handle our own animations, not child animations
+            if (event.target !== this._elementRef.nativeElement) {
+                return;
+            }
+
+            const state = this._animationStateSignal();
+
+            // Clear the animating flag when animation completes
+            this._isAnimatingSignal.set(false);
+
+            if (state === 'hidden') {
+                this._completeExit();
+            } else if (state === 'visible') {
+                // Note: we shouldn't use `this` inside the zone callback,
+                // because it can cause a memory leak.
+                const onEnter = this.onEnter$;
+
+                onEnter.next();
+                onEnter.complete();
+            }
+        };
+
+        this._elementRef.nativeElement.addEventListener('animationend', this._animationEndListener);
+    }
+
+    /**
+     * @hidden
+     * Remove animation event listener
+     */
+    private _removeAnimationEndListener(): void {
+        if (this._animationEndListener) {
+            this._elementRef.nativeElement.removeEventListener('animationend', this._animationEndListener);
+        }
     }
 
     /**
@@ -81,13 +154,17 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * errors where we end up removing an element which is in the middle of an animation.
      */
     private _completeExit(): void {
+        // Prevent multiple completions
+        if (this._exitCompleted) {
+            return;
+        }
+        this._exitCompleted = true;
+
         // Note: we shouldn't use `this` inside the zone callback,
         // because it can cause a memory leak.
         const onExit = this.onExit$;
 
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
-            onExit.next();
-            onExit.complete();
-        });
+        onExit.next();
+        onExit.complete();
     }
 }

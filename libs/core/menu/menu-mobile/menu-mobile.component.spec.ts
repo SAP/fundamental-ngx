@@ -1,6 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -50,7 +49,6 @@ describe('MenuMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule, NoopAnimationsModule, TesNestedMenuItemComponent],
             providers: [
                 {
                     provide: MOBILE_CONFIG_TEST_TOKEN,
