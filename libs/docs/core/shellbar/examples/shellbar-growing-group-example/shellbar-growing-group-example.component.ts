@@ -118,6 +118,8 @@ export class ShellbarGrowingGroupExampleComponent {
             glyph: 'pool',
             callback: this.actionPoolCallback,
             label: 'Pool',
+            ariaLabel: 'Pool Action',
+            title: 'Pool',
             notificationCount: 3,
             notificationLabel: 'Pool Count'
         },
@@ -125,6 +127,8 @@ export class ShellbarGrowingGroupExampleComponent {
             glyph: 'bell',
             callback: this.actionNotificationCallback,
             label: 'Notifications',
+            ariaLabel: 'Notifications Action',
+            title: 'Notifications',
             notificationCount: 12,
             notificationLabel: 'Unread Notifications'
         }
