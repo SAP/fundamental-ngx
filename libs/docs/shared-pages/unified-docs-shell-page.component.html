@@ -4,7 +4,10 @@
     </button>
     <fd-docs-toolbar (btnClicked)="baseDocumentation.handleMenuCollapseClick()"></fd-docs-toolbar>
     <div class="fd-flex-row fd-sidebar-container">
-        <sections-toolbar [sections]="sections" [(sideCollapsed)]="baseDocumentation.sideCollapsed"></sections-toolbar>
+        <sections-toolbar
+            [sections]="sections()"
+            [(sideCollapsed)]="baseDocumentation.sideCollapsed"
+        ></sections-toolbar>
         <div tabindex="0" class="content" #content id="page-content" cdk-scrollable>
             <div class="content-margin">
                 <router-outlet (activate)="baseDocumentation.onActivate()"></router-outlet>

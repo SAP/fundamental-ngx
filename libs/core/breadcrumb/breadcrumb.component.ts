@@ -15,6 +15,7 @@ import {
     ViewEncapsulation,
     computed,
     inject,
+    input,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -41,6 +42,14 @@ import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
+export type BreadcrumbSeparatorStyle =
+    | ''
+    | 'backslash'
+    | 'double-slash'
+    | 'double-backslash'
+    | 'greater-than'
+    | 'double-greater-than';
+
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
  *
@@ -55,8 +64,8 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
 @Component({
     selector: 'fd-breadcrumb',
     host: {
-        class: 'fd-breadcrumb',
         role: 'navigation',
+        '[class]': '_cssClass()',
         '[attr.aria-label]': '_ariaLabel'
     },
     templateUrl: './breadcrumb.component.html',
@@ -120,6 +129,13 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
     @ViewChild(OverflowLayoutComponent)
     private readonly _overflowLayout: OverflowLayoutComponent;
 
+    /**
+     * Separator style for the breadcrumb items.
+     * Can be 'backslash' | 'double-slash' | 'double-backslash' | 'greater-than' | 'double-greater-than'
+     * Omit for default (slash)
+     */
+    separatorStyle = input<BreadcrumbSeparatorStyle>('');
+
     /** @hidden */
     _ariaLabel: string;
 
@@ -134,6 +150,16 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
 
     /** Element reference. */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    /** @hidden */
+    protected readonly _cssClass = computed(() => {
+        const classes = ['fd-breadcrumb'];
+        const style = this.separatorStyle();
+        if (style) {
+            classes.push(`fd-breadcrumb--${style}`);
+        }
+        return classes.join(' ');
+    });
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {

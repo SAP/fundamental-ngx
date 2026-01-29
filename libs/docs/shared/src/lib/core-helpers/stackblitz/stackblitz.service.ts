@@ -392,7 +392,7 @@ export class ${componentName} {}
         // Main component that will be added as a root, if there is no component with main flag, first is chosen
         const mainComponent = files.find((file) => file.main) || files[0];
 
-        return `import { ApplicationRef } from '@angular/core';
+        return `import { APP_INITIALIZER, inject } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
@@ -409,9 +409,17 @@ bootstrapApplication(${mainComponent.componentName}, {
             defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'
         }),
         provideDialogService(),
-        RtlService
+        RtlService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: () => {
+                const themingService = inject(ThemingService);
+                return () => themingService.init();
+            },
+            multi: true
+        }
     ]
-}).then((appRef: ApplicationRef) => appRef.injector.get(ThemingService).init());
+});
 `;
     }
 

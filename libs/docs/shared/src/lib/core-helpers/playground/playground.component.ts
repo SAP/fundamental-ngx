@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { Schema, SchemaComponent } from '@fundamental-ngx/docs/schema';
+
+import '@sap-ui/common-css/dist/sap-flex.css';
+import '@sap-ui/common-css/dist/sap-padding.css';
 
 @Component({
     selector: 'playground',
@@ -7,37 +10,35 @@ import { Schema, SchemaComponent } from '@fundamental-ngx/docs/schema';
     styleUrls: ['./playground.components.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [SchemaComponent]
+    imports: [SchemaComponent],
+    host: {
+        class: 'fd-playground'
+    }
 })
 export class PlayGroundComponent {
-    @Input() schema: Schema;
+    /** Schema definition for the playground form. */
+    readonly schema = input.required<Schema>();
 
-    @Input() schemaInitialValues: any;
+    /** Initial values for the schema form. */
+    readonly schemaInitialValues = input<unknown>();
 
-    @Input() displayBlock: boolean;
+    /** Whether to display the playground content as block. */
+    readonly displayBlock = input(false);
 
-    /**
-     * Is current playground can be reset to default.
-     */
-    @Input() resettable = false;
+    /** Whether the playground can be reset to default values. */
+    readonly resettable = input(false);
 
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();
+    /** Emits when form values change. */
+    readonly formChanges = output<unknown>();
 
-    /**
-     * Emits event when playground was reset.
-     */
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
+    /** Emits when playground is reset to defaults. */
+    readonly resetTriggered = output<void>();
 
-    onSchemaValueChanges($event: any): void {
-        this.onFormChanges.emit($event);
+    protected onSchemaValueChanges(event: unknown): void {
+        this.formChanges.emit(event);
     }
 
-    /**
-     * Emits event when playground was reset.
-     */
-    reset(): void {
-        this.onReset.emit();
+    protected reset(): void {
+        this.resetTriggered.emit();
     }
 }
