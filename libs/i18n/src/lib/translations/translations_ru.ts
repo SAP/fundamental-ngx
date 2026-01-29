@@ -394,7 +394,10 @@ export default {
         searchInputLabel: 'Поиск',
         synchronizeButtonTitle: 'Синхронизировать',
         searchSuggestionMessage: 'Найдено предложений: {count}',
-        searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз'
+        searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Настройки',

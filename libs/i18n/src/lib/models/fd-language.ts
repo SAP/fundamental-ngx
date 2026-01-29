@@ -535,6 +535,9 @@ export interface FdLanguage {
          */
         searchSuggestionMessage: FdLanguageKey<{ count: number }>;
         searchSuggestionNavigateMessage: FdLanguageKey;
+        deleteButtonLabel: FdLanguageKey;
+        cancelLabel: FdLanguageKey;
+        allButtonLabel: FdLanguageKey;
     };
     platformSwitch: {
         ariaLabel: FdLanguageKey;

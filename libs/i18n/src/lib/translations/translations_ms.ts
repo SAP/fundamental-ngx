@@ -393,7 +393,10 @@ export default {
         searchInputLabel: 'Cari',
         synchronizeButtonTitle: 'Segerakkan',
         searchSuggestionMessage: '{count} cadangan ditemui.',
-        searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi'
+        searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Tetapan',

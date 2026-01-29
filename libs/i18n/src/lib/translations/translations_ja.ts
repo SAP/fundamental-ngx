@@ -394,7 +394,10 @@ export default {
         searchInputLabel: '検索',
         synchronizeButtonTitle: '同期',
         searchSuggestionMessage: '{count}件の候補が見つかりました。',
-        searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。'
+        searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

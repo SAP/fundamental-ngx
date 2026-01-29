@@ -394,7 +394,10 @@ export default {
         searchInputLabel: 'Vyhľadávanie',
         synchronizeButtonTitle: 'Synchronizovať',
         searchSuggestionMessage: '{count} nájdených návrhov.',
-        searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol'
+        searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavenia',

@@ -395,7 +395,10 @@ export default {
         searchInputLabel: 'Αναζήτηση',
         synchronizeButtonTitle: 'Συγχρονισμός',
         searchSuggestionMessage: '{count} προτάσεις βρέθηκαν.',
-        searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση'
+        searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ρυθμίσεις',

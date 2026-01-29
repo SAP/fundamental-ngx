@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -47,7 +48,8 @@ let listItemUniqueId = 0;
     host: {
         class: 'fd-list__item',
         '[attr.tabindex]': '_normalizedTabIndex$()',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        '[class.fd-list__item--suggestion]': 'suggestion()'
     },
     providers: [
         {
@@ -93,7 +95,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Counter on list item */
     @Input()
-    counter: number;
+    counter: number | undefined;
 
     /** Whether list item shows active indicator. Used only in List with Subline. */
     @Input()
@@ -180,6 +182,9 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Template ref for Settings list item */
     settingsListTpl = input<TemplateRef<any>>();
+
+    /** @hidden Whether this is a suggestion type list item. */
+    readonly suggestion = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _role = 'listitem'; // default for li elements

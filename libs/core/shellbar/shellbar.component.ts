@@ -467,7 +467,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             this.branding.showTitle();
         }
         if (this._actions) {
-            this._actions._handleOverflow(false);
+            this._actions._handleOverflow(this._currentSize === 's');
         }
     }
 

@@ -389,7 +389,10 @@ export default {
         searchInputLabel: 'Kërko',
         synchronizeButtonTitle: 'Sinkronizo',
         searchSuggestionMessage: '{count} sugjerime u gjetën.',
-        searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar'
+        searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSwitch: {
         ariaLabel: 'Ndërprerësi'

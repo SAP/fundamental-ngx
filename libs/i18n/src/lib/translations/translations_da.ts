@@ -394,7 +394,10 @@ export default {
         searchInputLabel: 'Søg',
         synchronizeButtonTitle: 'Synkroniser',
         searchSuggestionMessage: '{count} forslag blev fundet.',
-        searchSuggestionNavigateMessage: 'brug pil op og pil ned til at navigere'
+        searchSuggestionNavigateMessage: 'brug pil op og pil ned til at navigere',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Indstillinger',

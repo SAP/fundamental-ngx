@@ -393,7 +393,10 @@ export default {
         searchInputLabel: 'חפש',
         synchronizeButtonTitle: 'סנכרן',
         searchSuggestionMessage: 'נמצאו {count} הצעות.',
-        searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט'
+        searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All'
     },
     platformSettingsGenerator: {
         settingsLabel: 'הגדרות',
