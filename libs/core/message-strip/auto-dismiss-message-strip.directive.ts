@@ -1,5 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { booleanAttribute, DestroyRef, Directive, ElementRef, inject, Input, isDevMode } from '@angular/core';
+import { booleanAttribute, DestroyRef, Directive, ElementRef, inject, Input, isDevMode, signal } from '@angular/core';
 import { destroyObservable } from '@fundamental-ngx/cdk/utils';
 import { fromEvent, map, merge, Observable, of, startWith, takeUntil } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { MessageStripComponent } from './message-strip.component';
     exportAs: 'fdAutoDismissMessageStrip',
     standalone: true,
     host: {
-        '[style.display]': '!opened ? "none" : null'
+        '[style.display]': '!_opened() ? "none" : null'
     }
 })
 export class AutoDismissMessageStripDirective {
@@ -30,8 +30,11 @@ export class AutoDismissMessageStripDirective {
     @Input({ transform: booleanAttribute })
     mousePersist: BooleanInput = false;
 
-    /** Whether the message strip is currently opened. */
-    opened = false;
+    /**
+     * Whether the message strip is currently opened.
+     * @hidden
+     */
+    protected readonly _opened = signal(false);
 
     /** @hidden */
     private messageStripComponent = inject(MessageStripComponent, { optional: false, host: true });
@@ -54,7 +57,7 @@ export class AutoDismissMessageStripDirective {
 
     /** @hidden */
     open(): void {
-        this.opened = true;
+        this._opened.set(true);
         this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.elementRef.nativeElement.classList.remove('fd-has-display-none');
         this.stopAutoDismiss();

@@ -191,8 +191,7 @@ export class MessageStripAlertService {
                             topSectionIsOpened = topSectionIsOpened || position.startsWith('top');
                             bottomSectionIsOpened = bottomSectionIsOpened || position.startsWith('bottom');
                             const { containerRef } = this.getOverlayRef(position);
-                            containerRef.instance.attachedElements = portals;
-                            containerRef.changeDetectorRef.detectChanges();
+                            containerRef.instance.attachedElements.set(portals);
                         });
                         this.syncExistingOverlays(messageAlertsByPosition, bottomSectionIsOpened, topSectionIsOpened);
                     }
@@ -208,11 +207,15 @@ export class MessageStripAlertService {
         topSectionIsOpened: boolean
     ): void {
         (Object.keys(this._overlayRefs) as MessageStripAlertPosition[]).forEach((position) => {
+            const overlayRef = this._overlayRefs[position];
+            if (!overlayRef) {
+                return;
+            }
             if (!messageAlertsByPosition[position]) {
-                this._overlayRefs[position]!.ref.dispose();
+                overlayRef.ref.dispose();
                 delete this._overlayRefs[position];
             } else {
-                const ref = this._overlayRefs[position]!.ref;
+                const ref = overlayRef.ref;
                 if (position.startsWith('top')) {
                     if (bottomSectionIsOpened) {
                         ref.overlayElement.classList.add('fd-message-strip-alert-overlay--bottom-opened');
@@ -256,6 +259,7 @@ export class MessageStripAlertService {
             );
             this._overlayRefs[position] = { ref: overlayRef, containerRef };
         }
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return this._overlayRefs[position]!;
     }
 
