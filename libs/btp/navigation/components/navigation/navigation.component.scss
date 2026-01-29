@@ -253,3 +253,7 @@ $block: fd-navigation;
         }
     }
 }
+
+.fd-navigation.fd-navigation--snapped .fd-navigation__list-container {
+    display: flex;
+}
