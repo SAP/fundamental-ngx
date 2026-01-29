@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { OBJECT_STATUS_CLASS_NAME, ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { CardCounterDirective } from './card-counter.directive';
 
 import { CLASS_NAME } from '../constants';
@@ -44,7 +44,7 @@ describe('CardCounterComponent', () => {
 
     describe('object status', () => {
         it('should add className to host', () => {
-            expect(debugElement.nativeElement.className.includes('fd-object-status')).toBe(true);
+            expect(debugElement.nativeElement.className.includes(OBJECT_STATUS_CLASS_NAME)).toBe(true);
         });
 
         it('should add corresponding status modifier', () => {
