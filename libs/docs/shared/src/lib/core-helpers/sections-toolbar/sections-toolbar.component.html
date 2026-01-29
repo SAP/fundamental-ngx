@@ -1,5 +1,5 @@
 <div class="sidebar" [class.sidebar-collapsed]="sideCollapsed()">
-    <div class="fd-docs-search">
+    <div class="fd-docs-search sap-flex">
         <fd-input-group
             glyph="decline"
             glyphAriaLabel="Clear"
@@ -12,18 +12,26 @@
             (addOnButtonClicked)="onSearchChange('')"
         >
         </fd-input-group>
+        <button
+            fd-button
+            [toggled]="true"
+            [glyph]="allExpanded() ? 'collapse' : 'expand'"
+            [ariaLabel]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
+            [title]="allExpanded() ? 'Collapse all sections' : 'Expand all sections'"
+            (click)="toggleAllSections()"
+        ></button>
     </div>
     <div class="fd-docs-sidebar-content">
         <fd-side-nav>
             <div fd-side-nav-main fd-scrollbar>
                 <ul fd-nested-list [textOnly]="true">
                     @for (section of displayedSections(); track trackBySection($index, section)) {
-                        <li fd-nested-list-item [expanded]="true">
+                        <li fd-nested-list-item [expanded]="isSectionExpanded(section.header)">
                             <div fd-nested-list-content>
-                                <a fd-nested-list-link>
+                                <a fd-nested-list-link (click)="toggleSection(section.header)">
                                     <span fd-nested-list-title>{{ section.header }}</span>
                                 </a>
-                                <button fd-nested-list-expand-icon></button>
+                                <button fd-nested-list-expand-icon (click)="toggleSection(section.header)"></button>
                             </div>
                             <ul fd-nested-list>
                                 @for (
