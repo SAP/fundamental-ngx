@@ -66,18 +66,26 @@ export class SectionsToolbarComponent {
             this.expandedSections.set(expandedMap);
         });
 
-        // Announce search results when search changes
+        // Expand sections when searching and announce results
         effect(() => {
             const searchTerm = this.search().trim().toLowerCase();
-            if (!searchTerm) {
-                return;
-            }
+            const sections = this.displayedSections();
 
-            const totalItemsCount = this.displayedSections().reduce(
-                (prevValue, currentValue) => prevValue + currentValue.content.length,
-                0
-            );
-            this._liveAnnouncer.announce(`${totalItemsCount} search results found.`);
+            if (searchTerm) {
+                // Expand all sections that have search results
+                const expandedMap = new Map<string, boolean>();
+                sections.forEach((section) => {
+                    expandedMap.set(section.header, true);
+                });
+                this.expandedSections.set(expandedMap);
+
+                // Announce search results
+                const totalItemsCount = sections.reduce(
+                    (prevValue, currentValue) => prevValue + currentValue.content.length,
+                    0
+                );
+                this._liveAnnouncer.announce(`${totalItemsCount} search results found.`);
+            }
         });
 
         // Handle initial activation
