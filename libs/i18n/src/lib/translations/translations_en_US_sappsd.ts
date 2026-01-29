@@ -106,6 +106,15 @@ export default {
         positive: '[[[Ʋąĺűē Ŝţąţē Ŝűċċēşş∙∙∙∙∙]]]',
         informative: '[[[Ʋąĺűē Ŝţąţē Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙]]]'
     },
+    coreObjectStatus: {
+        ariaLabel: '[[[Ŏƀĵēćţ Ŝţąţűŝ∙∙∙]]]',
+        ariaRoleDescription: '[[[Ŏƀĵēćţ Ŝţąţűŝ Ɓűţţŏŋ∙∙∙∙∙]]]',
+        indicationColor: '[[[Ĭŋďįćąţįŏŋ Ćŏĺŏŗ∙∙∙]]]',
+        negative: '[[[Ĭŋvąĺįď Ēŋţŗŷ∙∙]]]',
+        critical: '[[[Ŵąŗŋįŋğ įŝŝűēď∙∙∙]]]',
+        positive: '[[[Ēŋţŗŷ ŝűććēŝŝƒűĺĺŷ vąĺįďąţēď∙∙∙∙∙∙]]]',
+        informative: '[[[Ĭŋƒŏŗɱąţįvē ēŋţŗŷ∙∙∙]]]'
+    },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
     },

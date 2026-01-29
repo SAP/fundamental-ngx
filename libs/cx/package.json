@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/cx",
-    "version": "0.59.1-rc.12",
+    "version": "0.59.1-rc.15",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - cx",
     "license": "Apache-2.0",
@@ -25,12 +25,12 @@
         "rxjs": "^7.8.0"
     },
     "dependencies": {
-        "@fundamental-styles/cx": "0.40.1",
-        "@sap-theming/theming-base-content": "^11.31.0",
+        "@fundamental-styles/cx": "FDCXSTYLES_VER_PLACEHOLDER",
+        "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
         "compare-versions": "^6.1.0",
         "fast-deep-equal": "3.1.3",
         "focus-trap": "^7.1.0",
-        "fundamental-styles": "0.40.1",
+        "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
         "lodash-es": "^4.17.0",
         "tslib": "^2.0.0"
     },
