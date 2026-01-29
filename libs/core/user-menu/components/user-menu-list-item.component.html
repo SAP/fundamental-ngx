@@ -45,7 +45,7 @@
                     <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
                 </button>
             </fd-popover-control>
-            <fd-popover-body>
+            <fd-popover-body (keydown)="onPopoverBodyKeyDown($event)">
                 <ng-container *ngTemplateOutlet="submenu()"></ng-container>
             </fd-popover-body>
         </fd-popover>
