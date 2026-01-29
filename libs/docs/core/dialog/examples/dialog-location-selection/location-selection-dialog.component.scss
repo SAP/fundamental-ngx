@@ -1,0 +1,25 @@
+@import 'node_modules/@sap-ui/common-css/dist/sap-colors.css';
+@import 'node_modules/@sap-ui/common-css/dist/sap-container-type.css';
+@import 'node_modules/@sap-ui/common-css/dist/sap-content-paddings.css';
+@import 'node_modules/@sap-ui/common-css/dist/sap-display.css';
+@import 'node_modules/@sap-ui/common-css/dist/sap-flex.css';
+@import 'node_modules/@sap-ui/common-css/dist/sap-margin.css';
+@import 'node_modules/@sap-ui/common-css/dist/sap-typography.css';
+
+.location-list-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.location-details {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.location-icon {
+    font-size: 3rem;
+}
+
+.closing-time {
+    font-size: 0.875rem;
+}

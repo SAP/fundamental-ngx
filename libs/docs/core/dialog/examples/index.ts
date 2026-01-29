@@ -5,6 +5,8 @@ import { DialogBackdropContainerExampleComponent } from './dialog-backdrop-conta
 import { DialogComplexExampleComponent } from './dialog-complex/dialog-complex-example.component';
 import { DialogConfigurationExampleComponent } from './dialog-configuration/dialog-configuration-example.component';
 import { FormDialogExampleComponent } from './dialog-form/form-dialog-example.component';
+import { DialogLocationSelectionExampleComponent } from './dialog-location-selection/dialog-location-selection-example.component';
+import { LocationSelectionDialogComponent } from './dialog-location-selection/location-selection-dialog.component';
 import { DialogMobileExampleComponent } from './dialog-mobile/dialog-mobile-example.component';
 import { DialogObjectExampleComponent } from './dialog-object-example/dialog-object-example.component';
 import { DialogPositionExampleComponent } from './dialog-position/dialog-position-example.component';
@@ -20,6 +22,8 @@ export * from './dialog-backdrop-container/dialog-backdrop-container-example.com
 export * from './dialog-complex/dialog-complex-example.component';
 export * from './dialog-configuration/dialog-configuration-example.component';
 export * from './dialog-form/form-dialog-example.component';
+export * from './dialog-location-selection/dialog-location-selection-example.component';
+export * from './dialog-location-selection/location-selection-dialog.component';
 export * from './dialog-mobile/dialog-mobile-example.component';
 export * from './dialog-object-example/dialog-object-example.component';
 export * from './dialog-position/dialog-position-example.component';
@@ -34,6 +38,7 @@ export const examples = [
     DialogBackdropContainerExampleComponent,
     DialogComplexExampleComponent,
     DialogConfigurationExampleComponent,
+    DialogLocationSelectionExampleComponent,
     DialogMobileExampleComponent,
     DialogObjectExampleComponent,
     DialogPositionExampleComponent,
@@ -44,5 +49,6 @@ export const examples = [
     SecondDialogExampleComponent,
     FirstDialogExampleComponent,
     DialogExampleComponent,
+    LocationSelectionDialogComponent,
     AutoLabelDialogExampleComponent
 ];

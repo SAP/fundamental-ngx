@@ -1,0 +1,121 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdkTemplate="header">
+            <div fd-bar-left>
+                @if (showDetails()) {
+                    <fd-bar-element>
+                        <button
+                            fd-button
+                            glyph="navigation-left-arrow"
+                            fdType="transparent"
+                            (click)="backToList()"
+                            ariaLabel="Back to list"
+                            title="Back to list"
+                        ></button>
+                    </fd-bar-element>
+                }
+                <fd-bar-element>
+                    <h1 id="fd-location-dialog-title" fd-title>Location</h1>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fd-button-bar
+                        glyph="decline"
+                        fdType="transparent"
+                        (click)="cancel()"
+                        ariaLabel="Close dialog"
+                    ></fd-button-bar>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <div id="fd-location-dialog-description" class="sap-margin-bottom-small">
+            <!-- Search Bar (always visible) -->
+            <fd-input-group
+                [glyph]="'search'"
+                placeholder="Search"
+                [(ngModel)]="searchTerm"
+                ariaLabel="Search locations"
+            ></fd-input-group>
+        </div>
+
+        @if (!showDetails()) {
+            <!-- List View -->
+            <ul fd-list [noBorder]="true" class="location-list-container" cdkScrollable>
+                @for (location of filteredLocations(); track location.id) {
+                    <li
+                        fd-list-item
+                        style="cursor: pointer"
+                        (click)="selectLocation(location)"
+                        [tabindex]="0"
+                        (keydown.enter)="selectLocation(location)"
+                        (keydown.space)="selectLocation(location); $event.preventDefault()"
+                        [attr.aria-label]="'Select ' + location.name + ', ' + location.city"
+                    >
+                        <fd-icon fd-list-icon glyph="map"></fd-icon>
+                        <span fd-list-title>{{ location.name }}, {{ location.city }}</span>
+                    </li>
+                } @empty {
+                    <li fd-list-item>
+                        <span fd-list-title>No locations found</span>
+                    </li>
+                }
+            </ul>
+        } @else {
+            <!-- Details View -->
+            <div class="location-details" cdkScrollable>
+                <div class="location-header sap-display-flex sap-flex-align-items-start sap-margin-bottom-small">
+                    <fd-icon glyph="map" class="location-icon sap-flex-shrink-0"></fd-icon>
+                    <div class="location-info sap-flex-grow-1">
+                        <h3
+                            class="location-title sap-margin-bottom-tiny"
+                            style="margin-top: 0; font-size: 1rem; font-weight: 600"
+                        >
+                            {{ selectedLocation()?.name }}, {{ selectedLocation()?.city }}
+                        </h3>
+                        @if (selectedLocation()?.address) {
+                            <p class="location-address sap-color-neutral-text-2" style="margin: 0; font-size: 0.875rem">
+                                {{ selectedLocation()?.address }}
+                            </p>
+                        }
+                    </div>
+                </div>
+
+                @if (selectedLocation()?.isOpen !== undefined) {
+                    <div class="sap-display-flex sap-flex-align-items-center sap-flex-wrap">
+                        <span
+                            fd-object-status
+                            [status]="selectedLocation()?.isOpen ? 'positive' : 'negative'"
+                            [glyph]="selectedLocation()?.isOpen ? 'accept' : 'decline'"
+                            [label]="selectedLocation()?.isOpen ? 'Open' : 'Closed'"
+                        ></span>
+                        @if (selectedLocation()?.isOpen && selectedLocation()?.closingTime) {
+                            <span class="closing-time sap-color-neutral-text-1"
+                                >Will close at {{ selectedLocation()?.closingTime }}</span
+                            >
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-button-bar
+            fdType="emphasized"
+            label="OK"
+            (click)="confirmSelection()"
+            [disabled]="!selectedLocation()"
+            ariaLabel="Confirm selection"
+        ></fd-button-bar>
+        <fd-button-bar
+            fdType="transparent"
+            label="Cancel"
+            (click)="cancel()"
+            ariaLabel="Cancel and close dialog"
+        ></fd-button-bar>
+    </fd-dialog-footer>
+</fd-dialog>
