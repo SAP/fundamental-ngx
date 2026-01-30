@@ -66,7 +66,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="playground-pagination" componentName="pagination"> Playground Area </fd-docs-section-title>
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+<playground [schema]="schema" [schemaInitialValues]="data" (formChanges)="onSchemaValues($event)">
     <fd-pagination
         [totalItems]="data.properties.totalItems"
         [itemsPerPage]="data.properties.itemsPerPage"

@@ -1,15 +1,17 @@
-import { Directive, ElementRef, OnChanges, OnInit, input } from '@angular/core';
+import { Directive, ElementRef, computed, input } from '@angular/core';
 
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { ObjectStatus, buildObjectStatusCssClasses } from '@fundamental-ngx/core/object-status';
+import { OBJECT_STATUS_CLASS_NAME, ObjectStatus } from '@fundamental-ngx/core/object-status';
 
+import { HasElementRef } from '@fundamental-ngx/cdk';
 import { CLASS_NAME } from '../constants';
 import { FD_CARD_COUNTER } from '../token';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-counter]',
-    standalone: true,
+    host: {
+        '[class]': '_cssClass()'
+    },
     providers: [
         {
             provide: FD_CARD_COUNTER,
@@ -17,38 +19,19 @@ import { FD_CARD_COUNTER } from '../token';
         }
     ]
 })
-export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder {
+export class CardCounterDirective implements HasElementRef {
     /**
      * the status represented by the Object Status.
      * can be one of the following: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      */
-
-    statusInput = input<ObjectStatus>('neutral');
-
-    /** @hidden */
-    status: ObjectStatus;
+    readonly statusInput = input<ObjectStatus>('neutral');
 
     /** @hidden */
-    class: string;
+    protected readonly _cssClass = computed(() => {
+        const statusClass = this.statusInput() ? `fd-object-status--${this.statusInput()}` : '';
+        return [CLASS_NAME.cardCounter, OBJECT_STATUS_CLASS_NAME, statusClass].filter(Boolean).join(' ');
+    });
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        this.status = this.statusInput();
-        const objectStatusClasses = buildObjectStatusCssClasses(this);
-        return [CLASS_NAME.cardCounter, ...objectStatusClasses];
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
 }

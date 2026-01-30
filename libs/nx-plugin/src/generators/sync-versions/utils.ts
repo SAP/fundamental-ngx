@@ -25,7 +25,9 @@ const getVersions = () => {
     }
 
     const aboveMinorVersion = (version) => {
-        const parsed = parse(version);
+        // Strip range prefixes (^, ~, >=, etc.) before parsing
+        const cleanVersion = version?.replace(/^[~^>=<]+/, '');
+        const parsed = parse(cleanVersion);
         return `^${parsed?.major}.${parsed?.minor}.0`;
     };
 
@@ -61,7 +63,10 @@ const getVersions = () => {
             aboveMinorVersion(packageJson.dependencies['@sap-theming/theming-base-content']),
         MESSAGEFORMAT_VER_PLACEHOLDER:
             process.env.FD_ENV_MESSAGEFORMAT_VER_PLACEHOLDER ||
-            aboveMinorVersion(packageJson.dependencies['intl-messageformat'])
+            aboveMinorVersion(packageJson.dependencies['intl-messageformat']),
+        UI5_WEBCOMPONENTS_VER_PLACEHOLDER:
+            process.env.FD_ENV_UI5_WEBCOMPONENTS_VER_PLACEHOLDER ||
+            aboveMinorVersion(packageJson.dependencies['@ui5/webcomponents'])
     };
 };
 

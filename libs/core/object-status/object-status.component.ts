@@ -3,42 +3,26 @@ import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
+    inject,
+    input,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, ColorAccent, CssClassBuilder, Nullable, NullableObject } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
+import { FdLanguageKeyIdentifier, FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 
+export const OBJECT_STATUS_CLASS_NAME = 'fd-object-status';
+
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-status]',
-    template: `
-        @if (glyph) {
-            <fd-icon
-                class="fd-object-status__icon"
-                [glyph]="glyph"
-                [font]="glyphFont"
-                [attr.role]="glyphAriaLabel ? 'presentation' : ''"
-                [ariaLabel]="glyphAriaLabel"
-            >
-            </fd-icon>
-        }
-        @if (textTemplate) {
-            <span class="fd-object-status__text" [class]="_textClass">
-                <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
-            </span>
-        }
-        @if (label) {
-            <span class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
-        }
-    `,
+    templateUrl: 'object-status.component.html',
     styleUrl: './object-status.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,125 +33,126 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         }
     ],
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : null'
+        '[attr.tabindex]': 'clickable() ? 0 : null',
+        '[attr.role]': 'clickable() ? "button" : null',
+        '[attr.aria-roledescription]': 'clickable() ? _ariaRoleDescription() : null',
+        '[class]': '_cssClass()'
     },
-    imports: [IconComponent, NgTemplateOutlet]
+    imports: [IconComponent, NgTemplateOutlet, FdTranslatePipe]
 })
-export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
-    /** User's custom classes */
-    @Input()
-    class: string;
+export class ObjectStatusComponent implements HasElementRef {
+    /** @hidden */
+    _textClass: string;
+
+    /** @hidden Element reference */
+    public readonly elementRef = inject(ElementRef);
 
     /**
      * The status represented by the Object Status.
      * Can be one of the following: 'negative' | 'critical' | 'positive' | 'informative'
      * For default Object Status omit this property
      */
-    @Input()
-    status: Nullable<ObjectStatus>;
+    readonly status = input<Nullable<ObjectStatus>>();
+
+    /** An optional status message for the Object Status. */
+    readonly statusMessage = input<Nullable<string>>(null);
 
     /**
      * Glyph (icon) of the Object Status.
      */
-    @Input()
-    glyph: Nullable<string>;
+    readonly glyph = input<Nullable<string>>();
 
     /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
     /** Define the text content of the Object Status */
-    @Input()
-    label: Nullable<string>;
+    readonly label = input<Nullable<string>>();
+
+    /**
+     * Accessible label for screen readers.
+     * Used in the screen-reader-only span element to provide context for assistive technologies.
+     */
+    readonly ariaLabel = input<string>();
 
     /**
      * Label applied to glyph element, should be used when there is no text included
      */
-    @Input()
-    glyphAriaLabel: string;
+    readonly glyphAriaLabel = input<string>();
 
     /**
      * A number representing the indication color.
      * For non-inverted state available numbers are from 1 to 8.
      * For inverted state available numbers are from 1 to 10.
      */
-    @Input()
-    indicationColor: Nullable<ColorAccent>;
+    readonly indicationColor = input<Nullable<ColorAccent>>();
 
     /** Whether the Object Status is clickable. */
-    @Input()
-    clickable = false;
+    readonly clickable = input(false, { transform: booleanAttribute });
 
     /** Whether the Object Status is inverted. */
-    @Input({ transform: booleanAttribute })
-    inverted = false;
+    readonly inverted = input(false, { transform: booleanAttribute });
 
     /** Whether the Object Status is in Large Design. */
-    @Input()
-    large = false;
+    readonly large = input(false, { transform: booleanAttribute });
 
     /** Whether to use secondary set of indication colors. */
-    @Input()
-    secondaryIndication = false;
+    readonly secondaryIndication = input(false, { transform: booleanAttribute });
 
     /**
      * Template reference for complex object status texts.
      */
-    @Input()
-    textTemplate: Nullable<TemplateRef<any>>;
+    readonly textTemplate = input<Nullable<TemplateRef<any>>>();
+
+    /** Aria role description for the object status. */
+    readonly ariaRoleDescription = input<string>();
 
     /** @hidden */
-    _textClass: string;
+    protected readonly _ariaRoleDescription = computed(
+        () => this.ariaRoleDescription() || this.defaultAriaRoleDescription()
+    );
+
+    /** @hidden */
+    protected readonly indicationColorCode = computed<string>(
+        () => ` ${this.indicationColor() ?? ''}${this.secondaryIndication() ? 'b' : ''}`
+    );
+
+    /** @hidden */
+    protected readonly statusTranslateKey = computed<FdLanguageKeyIdentifier | null>(() => {
+        const status = this.status();
+        if (this.isValidObjectStatus(status) && status !== 'neutral') {
+            return `coreObjectStatus.${status}`;
+        }
+        return null;
+    });
+
+    /** @hidden Computed CSS classes */
+    protected readonly _cssClass = computed(() =>
+        [
+            OBJECT_STATUS_CLASS_NAME,
+            this.inverted() ? 'fd-object-status--inverted' : '',
+            this.large() ? 'fd-object-status--large' : '',
+            this.status() ? `fd-object-status--${this.status()}` : '',
+            this.indicationColor()
+                ? `fd-object-status--indication-${this.indicationColor()}${this.secondaryIndication() ? 'b' : ''}`
+                : '',
+            this.clickable() ? 'fd-object-status--link' : '',
+            this.iconOnly() ? 'fd-object-status--icon-only' : ''
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
+
+    /** @hidden */
+    private readonly defaultAriaRoleDescription = resolveTranslationSignal('coreObjectStatus.ariaRoleDescription');
 
     /** Whether the Object status is icon-only. */
-    get iconOnly(): boolean {
-        return !this.label && !this.textTemplate;
-    }
+    private readonly iconOnly = computed((): boolean => !this.label() && !this.textTemplate());
 
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
+    /**
+     * Type guard to check if the status is a valid ObjectStatus
+     * @hidden
      */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return buildObjectStatusCssClasses(this);
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
+    private isValidObjectStatus(status: Nullable<ObjectStatus>): status is ObjectStatus {
+        return status === 'negative' || status === 'critical' || status === 'positive' || status === 'informative';
     }
 }
-
-type ObjectStatusData = NullableObject<{
-    status: ObjectStatus;
-    inverted: boolean;
-    large: boolean;
-    indicationColor: number;
-    clickable: boolean;
-    class: string;
-    iconOnly: boolean;
-    secondaryIndication: boolean;
-}>;
-
-export const buildObjectStatusCssClasses = (data: ObjectStatusData): string[] => [
-    'fd-object-status',
-    data.inverted ? 'fd-object-status--inverted' : '',
-    data.large ? 'fd-object-status--large' : '',
-    data.status ? `fd-object-status--${data.status}` : '',
-    data.indicationColor
-        ? `fd-object-status--indication-${data.indicationColor}${data.secondaryIndication ? 'b' : ''}`
-        : '',
-    data.clickable ? 'fd-object-status--link' : '',
-    data.iconOnly ? 'fd-object-status--icon-only' : '',
-    data.class || ''
-];

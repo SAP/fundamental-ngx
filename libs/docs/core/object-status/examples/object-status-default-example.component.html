@@ -1,90 +1,29 @@
-<h3 fd-title>Object Status Icon Only</h3>
-<span fd-object-status glyphAriaLabel="Check for review" title="Default"></span>
-<span fd-object-status status="negative" glyph="error" glyphAriaLabel="Negative" title="Negative"></span>
-<span fd-object-status status="critical" glyph="alert" glyphAriaLabel="Critical" title="Critical"></span>
 <span fd-object-status status="positive" glyph="sys-enter-2" glyphAriaLabel="Positive" title="Positive"></span>
 <span fd-object-status status="informative" glyph="information" glyphAriaLabel="Show More" title="Informative"></span>
 <h3 fd-title>Object Status Text Only</h3>
-<span fd-object-status status="negative" label="Negative" title="Negative" aria-label="Object status Negative"></span>
-<span fd-object-status status="critical" label="Critical" title="Critical" aria-label="Object status Critical"></span>
-<span fd-object-status status="positive" label="Positive" title="Positive" aria-label="Object status Positive"></span>
-<span
-    fd-object-status
-    status="informative"
-    label="Informative"
-    title="Informative"
-    aria-label="Object status Informative"
-></span>
-<span fd-object-status label="Default" title="Default" aria-label="Object status Default"></span>
+<span fd-object-status status="negative" label="Negative" title="Negative"></span>
+<span fd-object-status status="critical" label="Critical" title="Critical"></span>
+<span fd-object-status status="positive" label="Positive" title="Positive"></span>
+<span fd-object-status status="informative" label="Informative" title="Informative"></span>
+<span fd-object-status label="Default" title="Default"></span>
 <h3 fd-title>Object Status Icon and Text</h3>
-<span fd-object-status status="negative" glyph="error" label="Negative" aria-label="Object status Negative"></span>
-<span fd-object-status status="critical" glyph="alert" label="Critical" aria-label="Object status Critical"></span>
-<span
-    fd-object-status
-    status="positive"
-    glyph="sys-enter-2"
-    label="Positive"
-    aria-label="Object status Positive"
-></span>
-<span
-    fd-object-status
-    status="informative"
-    glyph="information"
-    label="Informative"
-    aria-label="Object status Informative"
-></span>
-<span fd-object-status label="Default" aria-label="Object status Default"></span>
+<span fd-object-status status="negative" glyph="error" label="Negative"></span>
+<span fd-object-status status="critical" glyph="alert" label="Critical"></span>
+<span fd-object-status status="positive" glyph="sys-enter-2" label="Positive"></span>
+<span fd-object-status status="informative" glyph="information" label="Informative"></span>
+<span fd-object-status label="Default"></span>
 <h3 fd-title>Object Status with Indication Colors</h3>
 @for (item of indicators; track item) {
-    <span
-        fd-object-status
-        [indicationColor]="item"
-        label="Indication Color"
-        aria-label="Object status Indication Color"
-    ></span>
+    <span fd-object-status [indicationColor]="item" label="Indication Color"></span>
 }
 <h3 fd-title>Clickable Object Status</h3>
-<a
-    fd-object-status
-    status="negative"
-    glyph="error"
-    [clickable]="true"
-    label="Negative"
-    aria-label="Object Status Negative"
-></a>
-<a
-    fd-object-status
-    status="critical"
-    glyph="alert"
-    [clickable]="true"
-    label="Critical"
-    aria-label="Object Status Critical"
-></a>
-<a
-    fd-object-status
-    status="positive"
-    glyph="sys-enter-2"
-    [clickable]="true"
-    label="Positive"
-    aria-label="Object Status Positive"
-></a>
-<a
-    fd-object-status
-    status="informative"
-    glyph="information"
-    [clickable]="true"
-    label="Informative"
-    aria-label="Object Status Informative"
-></a>
-<a fd-object-status [clickable]="true" label="Default" aria-label="Object Status Default"></a>
+<div fd-object-status status="negative" glyph="error" [clickable]="true" label="Negative"></div>
+<div fd-object-status status="critical" glyph="alert" [clickable]="true" label="Critical"></div>
+<div fd-object-status status="positive" glyph="sys-enter-2" [clickable]="true" label="Positive"></div>
+<div fd-object-status status="informative" glyph="information" [clickable]="true" label="Informative"></div>
+<div fd-object-status [clickable]="true" label="Default"></div>
 <br />
 <br />
 @for (item of indicators; track item) {
-    <a
-        fd-object-status
-        [indicationColor]="item"
-        [clickable]="true"
-        label="Indication Color"
-        aria-label="Object Status Indication Color"
-    ></a>
+    <div fd-object-status [indicationColor]="item" [clickable]="true" label="Indication Color"></div>
 }

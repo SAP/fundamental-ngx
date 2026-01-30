@@ -1,8 +1,8 @@
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { AfterViewInit, Component, DestroyRef, Injector, Input, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, effect, inject, Injector, input, signal } from '@angular/core';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, map, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
 import { MessageStripAlertService } from '../message-strip-alert.service';
 import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition } from '../tokens';
@@ -16,7 +16,7 @@ import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition
  */
 @Component({
     selector: 'fd-message-strip-alert-container-footer',
-    template: ` <ng-template [cdkPortalOutlet]="footerComponentPortal"></ng-template> `,
+    template: ` <ng-template [cdkPortalOutlet]="_footerComponentPortal()"></ng-template> `,
     styles: [
         `
             :host {
@@ -26,59 +26,63 @@ import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition
     ],
     imports: [PortalModule]
 })
-export class MessageStripAlertContainerFooterComponent implements AfterViewInit {
+export class MessageStripAlertContainerFooterComponent {
     /** @hidden */
-    @Input()
-    set alertRefs(alertRefs: Nullable<MessageStripAlertRef[]>) {
-        this.alertRefs$.next(alertRefs);
-    }
+    readonly alertRefs = input<Nullable<MessageStripAlertRef[]>>([]);
 
     /**
      * Reference to the user provided component's portal.
+     * @hidden
      */
-    footerComponentPortal?: ComponentPortal<any>;
+    protected readonly _footerComponentPortal = signal<ComponentPortal<any> | undefined>(undefined);
 
     /**
      * Position of the overlay in which this component is rendered.
      */
-    private position = inject(MessageStripAlertContainerPosition);
+    private readonly position = inject(MessageStripAlertContainerPosition);
 
     /** @hidden */
-    private _destroyRef = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private messageStripAlertService = inject(MessageStripAlertService);
+    private readonly messageStripAlertService = inject(MessageStripAlertService);
 
     /**
-     * Observable that emits the alert references that are currently rendered in the container.
+     * Observable representation of the alertRefs input for use in injected components.
      */
-    private alertRefs$ = new BehaviorSubject<Nullable<MessageStripAlertRef[]>>([]);
+    private readonly _alertRefs$: Observable<Nullable<MessageStripAlertRef[]>>;
+
+    /**
+     * Footer component from service as signal.
+     */
+    private readonly _footerComponent = toSignal(this.messageStripAlertService.footerComponents$, { initialValue: {} });
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.messageStripAlertService.footerComponents$
-            .pipe(
-                map((components) => components[this.position]),
-                tap((footerComponent) => {
-                    if (footerComponent) {
-                        this.footerComponentPortal = new ComponentPortal(
-                            footerComponent,
-                            null,
-                            Injector.create({
-                                providers: [
-                                    {
-                                        provide: MessageStripAlertContainerAlertRefs,
-                                        useValue: this.alertRefs$.pipe(takeUntilDestroyed(this._destroyRef))
-                                    }
-                                ]
-                            })
-                        );
-                    } else {
-                        this.footerComponentPortal = undefined;
-                    }
-                }),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe();
+    constructor() {
+        // Convert alertRefs signal to observable in injection context
+        this._alertRefs$ = toObservable(this.alertRefs).pipe(takeUntilDestroyed(this._destroyRef));
+
+        effect(() => {
+            const footerComponent = this._footerComponent()[this.position];
+
+            if (footerComponent) {
+                this._footerComponentPortal.set(
+                    new ComponentPortal(
+                        footerComponent,
+                        null,
+                        Injector.create({
+                            providers: [
+                                {
+                                    provide: MessageStripAlertContainerAlertRefs,
+                                    useValue: this._alertRefs$
+                                }
+                            ]
+                        })
+                    )
+                );
+            } else {
+                this._footerComponentPortal.set(undefined);
+            }
+        });
     }
 }

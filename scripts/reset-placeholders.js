@@ -44,6 +44,26 @@ function resetDependencyPlaceholders(dependencies) {
                 dependencies[dep] = 'VERSION_PLACEHOLDER';
                 modified = true;
             }
+        } else if (dep.startsWith('@ui5/webcomponents')) {
+            if (dependencies[dep] !== 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER') {
+                dependencies[dep] = 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER';
+                modified = true;
+            }
+        } else if (dep === 'fundamental-styles') {
+            if (dependencies[dep] !== 'FDSTYLES_VER_PLACEHOLDER') {
+                dependencies[dep] = 'FDSTYLES_VER_PLACEHOLDER';
+                modified = true;
+            }
+        } else if (dep === '@fundamental-styles/cx') {
+            if (dependencies[dep] !== 'FDCXSTYLES_VER_PLACEHOLDER') {
+                dependencies[dep] = 'FDCXSTYLES_VER_PLACEHOLDER';
+                modified = true;
+            }
+        } else if (dep === '@sap-theming/theming-base-content') {
+            if (dependencies[dep] !== 'THEMING_VER_PLACEHOLDER') {
+                dependencies[dep] = 'THEMING_VER_PLACEHOLDER';
+                modified = true;
+            }
         }
     });
 

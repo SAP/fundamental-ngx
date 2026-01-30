@@ -1,8 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonBarComponent, MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core';
+import {
+    ButtonBarComponent,
+    ListComponent,
+    ListItemComponent,
+    MultiComboboxComponent,
+    MultiComboboxSelectionChangeEvent
+} from '@fundamental-ngx/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 import {
     DialogBodyComponent,
@@ -19,7 +24,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './multi-combobox-inside-dialog-example.component.html',
     imports: [
-        ComboboxComponent,
         TitleComponent,
         DialogTemplateDirective,
         DialogFooterComponent,
@@ -29,7 +33,9 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         DialogBodyComponent,
         DialogHeaderComponent,
         FormsModule,
-        MultiComboboxComponent
+        MultiComboboxComponent,
+        ListComponent,
+        ListItemComponent
     ]
 })
 export class MultiComboboxInsideDialogExampleComponent {
@@ -44,7 +50,7 @@ export class MultiComboboxInsideDialogExampleComponent {
 
     openDialog(dialog: TemplateRef<any>): void {
         const dialogRef = this._dialogService.open(dialog, {
-            responsivePadding: true,
+            width: '550px',
             focusTrapped: true
         });
 
