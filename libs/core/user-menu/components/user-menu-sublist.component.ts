@@ -28,6 +28,7 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [KeyboardSupportService],
     styles: [
         `
             [fd-user-menu-sublist] {
@@ -69,7 +70,7 @@ export class UserMenuSublistComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._keyboardSupportService.setKeyboardService(this._listItems, false, false);
+        this._keyboardSupportService.setKeyboardService(this._listItems, true, false);
 
         this._listItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._setupInteractionListeners();
