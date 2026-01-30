@@ -381,7 +381,10 @@ export default {
         searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

@@ -379,7 +379,10 @@ export default {
         searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

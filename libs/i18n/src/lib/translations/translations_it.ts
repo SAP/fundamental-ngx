@@ -382,7 +382,10 @@ export default {
         searchSuggestionNavigateMessage: 'utilizzare le frecce su e giù per navigare',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Impostazioni',

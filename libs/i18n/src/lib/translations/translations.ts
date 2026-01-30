@@ -380,7 +380,10 @@ export default {
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Settings',

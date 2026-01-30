@@ -382,7 +382,10 @@ export default {
         searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',

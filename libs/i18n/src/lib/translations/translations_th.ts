@@ -381,7 +381,10 @@ export default {
         searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'การตั้งค่า',

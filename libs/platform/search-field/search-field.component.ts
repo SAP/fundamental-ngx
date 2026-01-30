@@ -3,6 +3,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+    AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
@@ -60,7 +61,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
+import { ListComponent, ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
@@ -118,7 +119,7 @@ export interface SearchResultsActionButton {
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
     /** @hidden */
-    constructor(private element: ElementRef) {}
+    constructor(public element: ElementRef) {}
 
     /** @hidden */
     focus(): void {
@@ -174,7 +175,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
 })
 export class SearchFieldComponent
     extends BaseComponent
-    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent
+    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent, AfterViewInit
 {
     /** Type of component used to render the categories dropdown. */
     @Input()
@@ -324,6 +325,10 @@ export class SearchFieldComponent
     /** @hidden */
     @ViewChild('suggestionMenuTemplate', { static: false })
     suggestionMenuTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('suggestionListEl', { read: ElementRef })
+    suggestionListEl: ElementRef;
 
     /** @hidden */
     @ViewChildren(SearchFieldSuggestionDirective)
@@ -504,6 +509,13 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this.suggestionItems.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._resetKeyManager();
+        });
+    }
+
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('categories' in changes || 'currentCategory' in changes) {
             this.setCurrentCategory(this.currentCategory);
@@ -578,7 +590,7 @@ export class SearchFieldComponent
             this.dataSource.match(match);
         }
 
-        if (!this.mobile && this._getSuggestionsLength() > 0) {
+        if (!this.mobile && (this._getSuggestionsLength() > 0 || (this.allowEmptySearch() && !this.isOpen))) {
             this.openSuggestionMenu();
         }
 
@@ -664,8 +676,7 @@ export class SearchFieldComponent
      */
     openSuggestionMenu(): void {
         this._isOpen$.set(true);
-        this._suggestionkeyManager?.destroy();
-        this._suggestionkeyManager = new FocusKeyManager(this.suggestionItems);
+        this._resetKeyManager();
         if (this._isOpen$()) {
             return;
         }
@@ -730,12 +741,16 @@ export class SearchFieldComponent
 
         if (!this.allowEmptySearch()) {
             this.closeSuggestionMenu(false);
-        } else if (this.dataSource) {
-            const match = new Map();
-            match.set('keyword', '');
-            match.set('category', this._currentCategory?.value || null);
+        } else {
+            if (this.dataSource) {
+                const match = new Map();
+                match.set('keyword', '');
+                match.set('category', this._currentCategory?.value || null);
 
-            this.dataSource.match(match);
+                this.dataSource.match(match);
+            }
+
+            this.openSuggestionMenu();
         }
         this.focus();
     }
@@ -805,7 +820,7 @@ export class SearchFieldComponent
     /** @hidden */
     _inputFocus(): void {
         this._isFocused = true;
-        if (this._shellbar) {
+        if (this._shellbar && this.allowEmptySearch()) {
             this.openSuggestionMenu();
         }
     }
@@ -815,6 +830,33 @@ export class SearchFieldComponent
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this.focus();
         }
+    }
+
+    /** @hidden */
+    _getAriaOwnsForGroupHeader(groupHeaderList: ListComponent): string {
+        let retVal = '';
+        const suggestions = groupHeaderList.elementRef.nativeElement.querySelectorAll('.fd-list__item--suggestion');
+        suggestions.forEach((suggestion) => {
+            retVal += suggestion.id + ' ';
+        });
+        return retVal;
+    }
+
+    /** @hidden */
+    private _resetKeyManager(): void {
+        if (this.suggestionItems) {
+            const keyManagerParam = this.suggestionItems
+                .toArray()
+                .sort((a, b) => this._getDomRowOrderIndex(a) - this._getDomRowOrderIndex(b));
+            this._suggestionkeyManager?.destroy();
+            this._suggestionkeyManager = new FocusKeyManager(keyManagerParam);
+        }
+    }
+
+    /** @hidden */
+    private _getDomRowOrderIndex(row: SearchFieldSuggestionDirective): number {
+        const children = Array.prototype.slice.call(this.suggestionListEl.nativeElement.querySelectorAll('li'));
+        return children.indexOf(row.element.nativeElement);
     }
 
     /**

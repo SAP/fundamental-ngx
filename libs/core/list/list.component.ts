@@ -4,6 +4,7 @@ import {
     Component,
     ContentChildren,
     DestroyRef,
+    ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
@@ -168,6 +169,9 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden Whether the list is the shell search results list. */
     searchResultsList = input(false);
+
+    /** @hidden */
+    elementRef = inject(ElementRef);
 
     /**
      * @hidden

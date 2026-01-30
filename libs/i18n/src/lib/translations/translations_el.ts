@@ -382,7 +382,10 @@ export default {
         searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ρυθμίσεις',

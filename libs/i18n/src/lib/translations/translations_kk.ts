@@ -381,7 +381,10 @@ export default {
         searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Параметрлер',

@@ -380,7 +380,10 @@ export default {
         searchSuggestionNavigateMessage: '위쪽 및 아래쪽 화살표를 사용하여 탐색',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: '설정',

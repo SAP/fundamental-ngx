@@ -376,7 +376,10 @@ export default {
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSwitch: {
         ariaLabel: 'Ndërprerësi'

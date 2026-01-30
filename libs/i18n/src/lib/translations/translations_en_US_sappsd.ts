@@ -384,7 +384,10 @@ export default {
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',

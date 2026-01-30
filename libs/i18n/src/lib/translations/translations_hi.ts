@@ -375,7 +375,10 @@ export default {
         searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSwitch: {
         ariaLabel: 'स्विच'

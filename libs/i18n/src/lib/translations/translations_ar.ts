@@ -380,7 +380,10 @@ export default {
         searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
         deleteButtonLabel: 'Delete',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',

@@ -522,6 +522,9 @@ export interface FdLanguage {
         deleteButtonLabel: FdLanguageKey;
         cancelLabel: FdLanguageKey;
         allButtonLabel: FdLanguageKey;
+        groupHeader: FdLanguageKey;
+        counterLabel: FdLanguageKey<{ count: number }>;
+        searchResultsWrapperAriaLabel: FdLanguageKey;
     };
     platformSwitch: {
         ariaLabel: FdLanguageKey;

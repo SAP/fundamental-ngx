@@ -21,6 +21,7 @@
                     ? 'inherit'
                     : 'none'
             "
+            [attr.aria-label]="'platformSearchField.searchResultsWrapperAriaLabel' | fdTranslate"
         >
             <fd-busy-indicator
                 [block]="true"
@@ -271,21 +272,34 @@
 <ng-template #suggestionMenuTemplate>
     @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestionsFiltered) {
         @if (suggestionsFiltered?.length && !_onlyHeadersFiltered(suggestionsFiltered)) {
-            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)">
+            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)" #suggestionListEl>
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
                     @if (filteredSuggestion?.isGroupHeader) {
-                        <li fd-list-group-header class="fd-suggestion-header">
-                            <span fd-list-title>{{ filteredSuggestion?.value }}</span>
+                        <li role="group">
+                            <ul
+                                fd-list
+                                #groupHeaderList
+                                [searchResultsList]="true"
+                                [attr.aria-owns]="_getAriaOwnsForGroupHeader(groupHeaderList)"
+                            >
+                                <li
+                                    fd-list-group-header
+                                    aria-roledescription="'platformSearchField.groupHeader' | fdTranslate"
+                                    class="fd-suggestion-header"
+                                >
+                                    <span fd-list-title>{{ filteredSuggestion?.value }}</span>
+                                </li>
+                                @for (
+                                    childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText;
+                                    track childSuggestion
+                                ) {
+                                    <ng-template
+                                        [ngTemplateOutlet]="suggestionItemTemplate"
+                                        [ngTemplateOutletContext]="{ filteredSuggestion: childSuggestion }"
+                                    ></ng-template>
+                                }
+                            </ul>
                         </li>
-                        @for (
-                            childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText;
-                            track childSuggestion
-                        ) {
-                            <ng-template
-                                [ngTemplateOutlet]="suggestionItemTemplate"
-                                [ngTemplateOutletContext]="{ filteredSuggestion: childSuggestion }"
-                            ></ng-template>
-                        }
                         @if (filteredSuggestion?.searchInScopeText || filteredSuggestion?.showMoreText) {
                             <ng-template
                                 [ngTemplateOutlet]="suggestionItemTemplate"
@@ -331,6 +345,11 @@
             enableSelection() && filteredSuggestion === _selectedSuggestionItem && !filteredSuggestion.isGroupHeader
         "
         [counter]="filteredSuggestion.searchInScopeCounter"
+        [counterRole]="'tooltip'"
+        [counterAriaLabel]="
+            'platformSearchField.counterLabel' | fdTranslate: { count: filteredSuggestion.searchInScopeCounter }
+        "
+        [ariaRole]="'option'"
     >
         @let listIconGlyph = filteredSuggestion?.data?.listIconGlyph;
         @if (listIconGlyph) {
@@ -421,7 +440,7 @@
                 <button
                     fd-button
                     fdType="transparent"
-                    title="('platformSearchField.deleteButtonLabel' | fdTranslate)"
+                    title="'platformSearchField.deleteButtonLabel' | fdTranslate"
                     glyph="decline"
                     (fdkClicked)="_performButtonClick($event, deleteCallback)"
                 ></button>
