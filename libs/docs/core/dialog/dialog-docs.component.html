@@ -183,6 +183,27 @@
 </component-example>
 <code-example [exampleFiles]="dialogInnerPopover"></code-example>
 <separator></separator>
+<fd-docs-section-title id="location-selection-dialog" componentName="dialog">
+    Location Selection Dialog
+</fd-docs-section-title>
+<description>
+    This example demonstrates a dialog with dynamic content that transitions between list and detail views. It
+    showcases:
+    <ul>
+        <li>Search functionality with signal-based filtering</li>
+        <li>Conditional rendering using Angular 20+ control flow (<code>&#64;if</code>/<code>&#64;for</code>)</li>
+        <li>Location list with clickable items</li>
+        <li>Detailed view with address information and status indicators</li>
+        <li>Navigation between list and detail states within a single dialog</li>
+        <li>Signal-based state management with <code>computed()</code> for derived state</li>
+    </ul>
+    This pattern is useful for selection dialogs where users need to pick an item and see its details before confirming.
+</description>
+<component-example>
+    <fd-dialog-location-selection-example></fd-dialog-location-selection-example>
+</component-example>
+<code-example [exampleFiles]="locationSelectionDialog"></code-example>
+<separator></separator>
 <fd-docs-section-title id="full-screen-dialog" componentName="dialog"> Full screen toggler </fd-docs-section-title>
 <description>
     <p>Dialog suports being toggled between defined width and height constraints and full-screen mode.</p>

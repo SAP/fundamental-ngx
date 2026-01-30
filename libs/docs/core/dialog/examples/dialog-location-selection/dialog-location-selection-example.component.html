@@ -1,0 +1,21 @@
+<div>
+    <button fd-button label="Open Location Dialog" (click)="openLocationDialog()"></button>
+
+    @if (selectedLocation) {
+        <div style="margin-top: 1rem; padding: 1rem; background-color: #f4f4f4; border-radius: 4px">
+            <h3 style="margin-top: 0">Selected Location:</h3>
+            <p>
+                <strong>{{ selectedLocation.name }}, {{ selectedLocation.city }}</strong>
+            </p>
+            @if (selectedLocation.address) {
+                <p>{{ selectedLocation.address }}</p>
+            }
+            @if (selectedLocation.isOpen !== undefined) {
+                <p>Status: {{ selectedLocation.isOpen ? 'Open' : 'Closed' }}</p>
+            }
+            @if (selectedLocation.closingTime) {
+                <p>Will close at {{ selectedLocation.closingTime }}</p>
+            }
+        </div>
+    }
+</div>
