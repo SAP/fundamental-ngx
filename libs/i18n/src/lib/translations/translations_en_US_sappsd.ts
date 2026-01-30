@@ -107,13 +107,13 @@ export default {
         informative: '[[[Ʋąĺűē Ŝţąţē Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙]]]'
     },
     coreObjectStatus: {
-        ariaLabel: '[[[Ŏƀĵēćţ Ŝţąţűŝ∙∙∙]]]',
-        ariaRoleDescription: '[[[Ŏƀĵēćţ Ŝţąţűŝ Ɓűţţŏŋ∙∙∙∙∙]]]',
-        indicationColor: '[[[Ĭŋďįćąţįŏŋ Ćŏĺŏŗ∙∙∙]]]',
-        negative: '[[[Ĭŋvąĺįď Ēŋţŗŷ∙∙]]]',
-        critical: '[[[Ŵąŗŋįŋğ įŝŝűēď∙∙∙]]]',
-        positive: '[[[Ēŋţŗŷ ŝűććēŝŝƒűĺĺŷ vąĺįďąţēď∙∙∙∙∙∙]]]',
-        informative: '[[[Ĭŋƒŏŗɱąţįvē ēŋţŗŷ∙∙∙]]]'
+        ariaLabel: '[[[Ŏƃĵēċţ Ŝţąţűş∙∙∙∙∙∙]]]',
+        ariaRoleDescription: '[[[Ŏƃĵēċţ Ŝţąţűş Ɓűţţŏŋ∙∙∙∙]]]',
+        indicationColor: '[[[Ĭŋƌįċąţįŏŋ Ĉŏĺŏŗ∙∙∙∙∙∙∙∙]]]',
+        negative: '[[[Ĭŋʋąĺįƌ Ĕŋţŗŷ∙∙∙∙∙∙]]]',
+        critical: '[[[Ŵąŗŋįŋğ įşşűēƌ∙∙∙∙∙]]]',
+        positive: '[[[Ĕŋţŗŷ şűċċēşşƒűĺĺŷ ʋąĺįƌąţēƌ∙∙∙∙∙∙∙∙]]]',
+        informative: '[[[Ĭŋƒŏŗɱąţįʋē ēŋţŗŷ∙∙∙∙∙∙∙]]]'
     },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
