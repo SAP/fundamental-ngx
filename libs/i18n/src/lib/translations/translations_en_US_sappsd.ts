@@ -656,5 +656,8 @@ export default {
     },
     coreObjectIdentifier: {
         srOnlyAriaLabel: '[[[Ŏƃĵēċţ Ĭƌēŋţįƒįēŗ∙∙∙∙∙∙∙]]]'
+    },
+    coreInfoLabel: {
+        srOnlyText: '[[[Ĭŋƒŏ Ļàƀēļ∙∙∙∙]]]'
     }
 };
