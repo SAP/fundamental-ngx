@@ -74,13 +74,13 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     statusLabel: string;
 
     /**
-     * positioning of the status indicator image withing the defined height and width .
+     * positioning of the status indicator image within the defined height and width .
      */
     @Input()
     viewBox: string;
 
     /**
-     * boolean value to be marked as a clickable
+     * boolean value to be marked as clickable
      */
     @Input()
     clickable: boolean;
