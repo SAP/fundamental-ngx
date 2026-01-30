@@ -50,12 +50,15 @@
         "
     ></ng-template>
 </ng-template>
-<div class="fd-message-view">
+<div class="fdp-message-view">
     <section
-        class="fd-message-view__list"
+        #listSection
+        class="fdp-message-view__list"
+        [class.fdp-message-view__list--open]="currentScreen === 'list'"
+        [class.fdp-message-view__list--closed]="currentScreen !== 'list'"
+        [class.fdp-message-view__list--opening]="currentScreen === 'list' && _wasDetails"
+        [class.fdp-message-view__list--closing]="currentScreen !== 'list' && !_wasDetails"
         tabindex="-1"
-        [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'"
-        (@openCloseList.done)="_onListAnimationComplete($event)"
         fd-scrollbar
     >
         <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
@@ -109,7 +112,14 @@
             }
         </ul>
     </section>
-    <section class="fd-message-view__details" [@openCloseDetails]="currentScreen === 'details' ? 'open' : 'closed'">
+    <section
+        #detailsSection
+        class="fdp-message-view__details"
+        [class.fdp-message-view__details--open]="currentScreen === 'details'"
+        [class.fdp-message-view__details--closed]="currentScreen !== 'details'"
+        [class.fdp-message-view__details--opening]="currentScreen === 'details' && !_wasDetails"
+        [class.fdp-message-view__details--closing]="currentScreen !== 'details' && _wasDetails"
+    >
         <div #detailsView>
             @if (currentEntry) {
                 <span class="fd-message-view__details-title">
