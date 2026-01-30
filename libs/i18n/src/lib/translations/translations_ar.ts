@@ -99,6 +99,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'عنصر الشجرة {itemDetails}، {selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

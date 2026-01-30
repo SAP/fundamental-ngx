@@ -98,6 +98,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '树项目 {itemDetails}，{selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',
