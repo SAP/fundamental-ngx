@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -12,6 +12,8 @@ import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
  *                      [glyph]="action.glyph"
  *                      [callback]="action.callback"
  *                      [label]="action.label"
+ *                      [ariaLabel]="action.ariaLabel"
+ *                      [title]="action.title"
  *                      [notificationCount]="action.notificationCount"
  *                      [notificationLabel]="action.notificationLabel">
  *  </fd-shellbar-action>
@@ -31,30 +33,38 @@ import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
     imports: [ButtonComponent, ContentDensityDirective]
 })
 export class ShellbarActionComponent {
-    /** The glyph (icon) name */
-    @Input()
-    glyph: string;
+    /** Icon name for the button. */
+    readonly glyph = input<string>();
 
-    /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    /** Icon font family. */
+    readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
-    /** Callback that hanldles the response to clicks on any of the actions. */
-    @Input()
-    callback: Nullable<(event: MouseEvent) => void>;
+    /** Function to call when the action is clicked. */
+    readonly callback = input<Nullable<(event: MouseEvent) => void>>(null);
 
-    /** The action label. */
-    @Input()
-    label: string;
+    /** Accessible label for the action. */
+    readonly label = input<string>('');
 
-    /** The notification label. */
-    @Input()
-    notificationLabel: string;
+    /** ARIA label for screen readers. */
+    readonly ariaLabel = input<string>('');
 
-    /** Represents the number of notifications. */
-    @Input()
-    notificationCount: number;
+    /** Tooltip text shown on hover. */
+    readonly title = input<string>('');
+
+    /** ARIA label for the notification badge. */
+    readonly notificationLabel = input<string>();
+
+    /** Number of notifications to display in badge. */
+    readonly notificationCount = input<number>();
 
     /** @hidden */
     _elRef = inject(ElementRef);
+
+    /** @hidden */
+    protected _handleClick(event: MouseEvent): void {
+        const callbackFn = this.callback();
+        if (callbackFn) {
+            callbackFn(event);
+        }
+    }
 }

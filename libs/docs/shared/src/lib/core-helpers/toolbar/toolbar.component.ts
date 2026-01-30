@@ -2,19 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
+    computed,
+    effect,
     inject,
-    Inject,
-    OnDestroy,
-    OnInit,
-    Output,
-    ViewChild
+    output,
+    untracked,
+    viewChild
 } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
-import { Libraries } from '../../utilities';
 
-import { AsyncPipe, LowerCasePipe, NgTemplateOutlet } from '@angular/common';
+import '@sap-ui/common-css/dist/sap-colors.css';
+import '@sap-ui/common-css/dist/sap-display.css';
+import '@sap-ui/common-css/dist/sap-flex.css';
+import '@sap-ui/common-css/dist/sap-margin.css';
+
+import { NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -23,19 +27,26 @@ import {
     GlobalContentDensityService
 } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { MenuComponent, MenuKeyboardService, MenuModule } from '@fundamental-ngx/core/menu';
 import {
-    ProductMenuComponent,
+    MenuAddonDirective,
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuKeyboardService,
+    MenuTitleDirective,
+    MenuTriggerDirective,
+    SubmenuComponent
+} from '@fundamental-ngx/core/menu';
+import {
     ShellbarActionsComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
-    ShellbarMenuItem,
     ShellbarSidenavDirective,
     ShellbarSizes
 } from '@fundamental-ngx/core/shellbar';
 import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, filter, first, fromEvent, Subject, tap } from 'rxjs';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, filter, fromEvent } from 'rxjs';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
 import { Translations } from '../../tokens/translations.token';
 
@@ -53,7 +64,7 @@ type Version = {
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.scss'],
+    styleUrl: './toolbar.component.scss',
     providers: [MenuKeyboardService],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
@@ -63,157 +74,137 @@ type Version = {
         ContentDensityDirective,
         ShellbarLogoComponent,
         RouterLink,
-        ProductMenuComponent,
         ShellbarActionsComponent,
-        MenuModule,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuAddonDirective,
+        MenuTriggerDirective,
+        SubmenuComponent,
         NgTemplateOutlet,
-        IconComponent,
-        LowerCasePipe,
-        AsyncPipe
+        IconComponent
     ]
 })
-export class ToolbarDocsComponent implements OnInit, OnDestroy {
-    @Output()
-    btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
+export class ToolbarDocsComponent {
+    /** Event emitted when the menu button is clicked */
+    readonly btnClicked = output<void>();
 
-    @ViewChild('themeMenu')
-    themeMenu: MenuComponent;
+    /** Reference to the theme menu component */
+    protected readonly themeMenu = viewChild<MenuComponent>('themeMenu');
 
-    @ViewChild('i18nMenu')
-    i18nMenu: MenuComponent;
+    /** Reference to the i18n menu component */
+    protected readonly i18nMenu = viewChild<MenuComponent>('i18nMenu');
 
-    ContentDensityMode = ContentDensityMode;
+    /** Content density mode enum for template usage */
+    protected readonly ContentDensityMode = ContentDensityMode;
 
-    highlightJsThemeCss: SafeResourceUrl;
+    /** Translations for i18n menu as signal */
+    protected readonly translations = toSignal(inject(Translations), { initialValue: [] });
 
-    library: Libraries;
+    /** Available themes from theming service */
+    protected readonly themes: CompleteThemeDefinition[];
 
-    size: ShellbarSizes = 'm';
+    /** Current version information */
+    protected readonly version: Version;
 
-    themes: CompleteThemeDefinition[];
+    /** Available versions from GitHub - fetched lazily */
+    protected readonly versions = toSignal(
+        inject(HttpClient).get<Version[]>('https://raw.githubusercontent.com/SAP/fundamental-ngx/main/versions.json'),
+        { initialValue: [] }
+    );
 
-    version: Version;
-
-    versions: Version[];
-
-    initialTheme = 'sap_horizon';
-
-    translations$ = inject(Translations);
-
-    items: ShellbarMenuItem[] = [
-        {
-            name: 'Core Docs',
-            callback: () => {
-                this._routerService.navigate(['core/home']);
-            }
-        },
-        {
-            name: 'Platform Docs',
-            callback: () => {
-                this._routerService.navigate(['platform/home']);
-            }
-        },
-        {
-            name: 'CX',
-            callback: () => {
-                this._routerService.navigate(['cx/home']);
-            }
-        },
-        {
-            name: 'BTP',
-            callback: () => {
-                this._routerService.navigate(['btp/home']);
-            }
-        },
-        {
-            name: 'CDK',
-            callback: () => {
-                this._routerService.navigate(['cdk/home']);
-            }
-        },
-        {
-            name: 'i18n',
-            callback: () => {
-                this._routerService.navigate(['i18n/home']);
-            }
-        },
-        {
-            name: 'Web Components (Main)',
-            callback: () => {
-                this._routerService.navigate(['ui5-webcomponents/home']);
-            }
-        },
-        {
-            name: 'Web Components AI',
-            callback: () => {
-                this._routerService.navigate(['ui5-webcomponents-ai/home']);
-            }
-        },
-        {
-            name: 'Web Components Fiori',
-            callback: () => {
-                this._routerService.navigate(['ui5-webcomponents-fiori/home']);
-            }
+    /** Combined versions list including current version */
+    protected readonly allVersions = computed(() => {
+        const fetched = this.versions();
+        const current = this.version;
+        if (fetched.find((v) => v.id === current.id)) {
+            return fetched;
         }
-    ];
+        return [current, ...fetched];
+    });
 
-    /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** Initial theme to apply */
+    protected readonly initialTheme = 'sap_horizon';
 
-    constructor(
-        private _routerService: Router,
-        private _contentDensityService: GlobalContentDensityService,
-        private _themingService: ThemingService,
-        @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>,
-        private _route: ActivatedRoute,
-        private _domSanitizer: DomSanitizer,
-        private _docsService: DocsService,
-        private _http: HttpClient
-    ) {
-        this.translations$
-            .pipe(
-                first(),
-                tap((langs) => {
-                    const english = langs.find((lang) => lang.name === 'English');
-                    if (english) {
-                        this.langSubject$.next(english.value);
-                    }
-                })
-            )
-            .subscribe();
+    /** CSS URL for highlight.js theme - computed from current theme */
+    protected readonly highlightJsThemeCss = computed<SafeResourceUrl | null>(() => {
+        const theme = this._currentTheme();
+        if (!theme?.id) {
+            return null;
+        }
+        return this._getHighlightThemeCss(theme.id);
+    });
+
+    /** Current shellbar size - computed from window width */
+    protected readonly size = computed<ShellbarSizes>(() => {
+        // Track window resize events
+        this._windowWidth();
+        return window.innerWidth < 768 ? 's' : 'm';
+    });
+
+    private readonly _contentDensityService = inject(GlobalContentDensityService);
+    private readonly _themingService = inject(ThemingService);
+    private readonly _langSubject$ = inject<BehaviorSubject<FdLanguage>>(FD_LANGUAGE);
+    private readonly _domSanitizer = inject(DomSanitizer);
+    private readonly _docsService = inject(DocsService);
+
+    /** Current theme as a signal from the theming service */
+    private readonly _currentTheme = toSignal(this._themingService.currentTheme.pipe(filter((theme) => !!theme)));
+
+    /** Window resize events as a signal for triggering size recalculation */
+    private readonly _windowWidth = toSignal(fromEvent(window, 'resize').pipe(startWith(null), debounceTime(60)), {
+        initialValue: null
+    });
+
+    /** Flag to ensure translation is only set once */
+    private _translationInitialized = false;
+
+    constructor() {
+        // Initialize version from docs service (readonly after construction)
         this.version = {
             id: this._docsService.getVersion(),
             url: ''
         };
-        this.library = this._route.snapshot.data['library'] || 'core';
 
-        this._themingService.currentTheme
-            .pipe(
-                takeUntil(this._onDestroy$),
-                filter((theme) => !!theme)
-            )
-            .subscribe((theme) => {
-                this.updateHighlightTheme(theme?.id as string);
-            });
-    }
-
-    ngOnInit(): void {
+        // Initialize themes from theming service (readonly after construction)
         this.themes = this._themingService.getThemes();
         this._themingService.setTheme(this.initialTheme);
 
-        this._setVersions();
-
-        fromEvent(window, 'resize')
-            .pipe(startWith(1), debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => (this.size = this._getShellbarSize()));
+        // Set initial English translation once when translations are loaded
+        effect(() => {
+            const langs = this.translations();
+            if (langs.length > 0 && !this._translationInitialized) {
+                const english = langs.find((lang) => lang.name === 'English');
+                if (english) {
+                    // Use untracked to avoid creating dependency on _translationInitialized
+                    untracked(() => {
+                        this._translationInitialized = true;
+                        this._langSubject$.next(english.value);
+                    });
+                }
+            }
+        });
     }
 
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+    protected selectVersion(version: Version): void {
+        window.open(version.url, '_blank');
     }
 
-    updateHighlightTheme(themeName: string): void {
+    protected selectTheme(themeId: string): void {
+        this._themingService.setTheme(themeId);
+    }
+
+    protected selectTranslation(translation: FdLanguage): void {
+        this._langSubject$.next(translation);
+        this.i18nMenu()?.close();
+    }
+
+    protected selectDensity(density: ContentDensityMode): void {
+        this._contentDensityService.updateContentDensity(density);
+    }
+
+    private _getHighlightThemeCss(themeName: string): SafeResourceUrl {
         let theme = 'googlecode.css';
         if (isHcb(themeName)) {
             theme = 'a11y-dark.css';
@@ -222,47 +213,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         } else if (isDark(themeName)) {
             theme = 'tomorrow-night.css';
         }
-        this.highlightJsThemeCss = this.trustedResourceUrl(`assets/highlight-js-styles/${theme}`);
-    }
-
-    selectVersion(version: any): void {
-        window.open(version.url, '_blank');
-    }
-
-    selectTheme(themeId: string): void {
-        this._themingService.setTheme(themeId);
-        this.updateHighlightTheme(themeId);
-    }
-
-    selectTranslation(translation: FdLanguage): void {
-        this.langSubject$.next(translation);
-        this.i18nMenu.close();
-    }
-
-    selectDensity(density: ContentDensityMode): void {
-        this._contentDensityService.updateContentDensity(density);
-    }
-
-    private _setVersions(): void {
-        this._http
-            .get<Version[]>('https://raw.githubusercontent.com/SAP/fundamental-ngx/main/versions.json')
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((versions) => {
-                this.versions = versions;
-
-                if (this.versions.find((version) => version.id === this.version.id)) {
-                    return;
-                }
-
-                this.versions.unshift(this.version);
-            });
-    }
-
-    private trustedResourceUrl = (url: string): SafeResourceUrl =>
-        this._domSanitizer.bypassSecurityTrustResourceUrl(url);
-
-    private _getShellbarSize(): ShellbarSizes {
-        const width = window.innerWidth;
-        return width < 768 ? 's' : 'm';
+        return this._domSanitizer.bypassSecurityTrustResourceUrl(`assets/highlight-js-styles/${theme}`);
     }
 }

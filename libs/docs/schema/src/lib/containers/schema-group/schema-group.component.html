@@ -1,5 +1,5 @@
-<div [formGroup]="schemaGroup">
-    @for (control of controls; track control) {
+<div [formGroup]="schemaGroup()">
+    @for (control of controls(); track control) {
         @if (_isFormControl(control.control)) {
             @switch (control.type) {
                 @case ('string') {
@@ -108,17 +108,17 @@
             }
         } @else {
             <fieldset fd-fieldset class="schema--inner-group">
-                <legend fd-form-legend class="schema--sub-header">{{ control.key }}</legend>
+                <legend fd-form-legend class="schema--sub-header sap-font-size-medium">{{ control.key }}</legend>
 
                 <schema-group
                     [schemaGroup]="control.control | asFormGroup"
-                    [properties]="properties[control.key].properties!"
+                    [properties]="properties()[control.key].properties!"
                 ></schema-group>
             </fieldset>
         }
     }
 
-    @if (resettable) {
+    @if (resettable()) {
         <fieldset fd-fieldset class="schema--inner-group">
             <button fd-button (click)="reset()">Reset</button>
         </fieldset>

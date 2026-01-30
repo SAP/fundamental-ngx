@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
@@ -11,7 +11,7 @@ let componentExampleUniqueId = 0;
 @Component({
     selector: 'component-example',
     template: `
-        <div class="docs-tile docs-component" [class.docs-tile-example-background]="hasBackground" [id]="id">
+        <div class="docs-tile docs-component" [class.docs-tile-example-background]="hasBackground()" [id]="id">
             <div class="docs-tile__content docs-tile-content-example">
                 <div class="component-example__features" fdCompact>
                     <rtl-switch [label]="id2"></rtl-switch>
@@ -34,15 +34,15 @@ let componentExampleUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ContentDensityDirective, DirectionalityComponent, ExampleBackgroundComponent]
 })
-export class ComponentExampleComponent implements OnInit {
-    @Input()
-    hasBackground = true;
-    id: string;
-    id2: string;
+export class ComponentExampleComponent {
+    readonly hasBackground = input(true);
 
-    ngOnInit(): void {
-        const exampleName: string = 'ex' + componentExampleUniqueId++;
-        this.id = 'rtl-' + exampleName;
-        this.id2 = 'background-' + exampleName;
+    protected readonly id: string;
+    protected readonly id2: string;
+
+    constructor() {
+        const exampleName = `ex${componentExampleUniqueId++}`;
+        this.id = `rtl-${exampleName}`;
+        this.id2 = `background-${exampleName}`;
     }
 }
