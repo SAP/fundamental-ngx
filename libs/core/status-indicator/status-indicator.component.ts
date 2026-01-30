@@ -10,7 +10,7 @@ import {
     signal,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -49,7 +49,7 @@ export class Point {
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet]
 })
-export class StatusIndicatorComponent implements AfterViewInit {
+export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
     /**
      * value id defines the id of the object.
      */

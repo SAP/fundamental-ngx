@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
+import { StatusIndicatorComponent } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-status-indicator-circular-fill-clockwise',
     templateUrl: './status-indicator-circular-fill-clockwise.component.html',
-    imports: [StatusIndicatorModule]
+    imports: [StatusIndicatorComponent]
 })
 export class StatusIndicatorCircularFillClockwiseComponent {
     cerealImage = [
