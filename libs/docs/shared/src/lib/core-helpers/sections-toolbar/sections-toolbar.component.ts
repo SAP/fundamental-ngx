@@ -3,6 +3,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -23,6 +24,7 @@ const SMALL_SCREEN_BREAKPOINT = 992;
     styleUrls: ['./sections-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
+        ButtonComponent,
         InputGroupModule,
         FormsModule,
         SideNavigationModule,
@@ -40,6 +42,12 @@ export class SectionsToolbarComponent {
 
     protected readonly search = signal('');
     protected readonly displayedSections = computed(() => this._filterSections(this.sections(), this.search()));
+    protected readonly expandedSections = signal<Map<string, boolean>>(new Map());
+    protected readonly allExpanded = computed(() => {
+        const sections = this.displayedSections();
+        const expanded = this.expandedSections();
+        return sections.every((section) => expanded.get(section.header) === true);
+    });
 
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -48,18 +56,36 @@ export class SectionsToolbarComponent {
     }
 
     constructor() {
-        // Announce search results when search changes
+        // Initialize sections in collapsed state
+        effect(() => {
+            const sections = this.sections();
+            const expandedMap = new Map<string, boolean>();
+            sections.forEach((section) => {
+                expandedMap.set(section.header, false);
+            });
+            this.expandedSections.set(expandedMap);
+        });
+
+        // Expand sections when searching and announce results
         effect(() => {
             const searchTerm = this.search().trim().toLowerCase();
-            if (!searchTerm) {
-                return;
-            }
+            const sections = this.displayedSections();
 
-            const totalItemsCount = this.displayedSections().reduce(
-                (prevValue, currentValue) => prevValue + currentValue.content.length,
-                0
-            );
-            this._liveAnnouncer.announce(`${totalItemsCount} search results found.`);
+            if (searchTerm) {
+                // Expand all sections that have search results
+                const expandedMap = new Map<string, boolean>();
+                sections.forEach((section) => {
+                    expandedMap.set(section.header, true);
+                });
+                this.expandedSections.set(expandedMap);
+
+                // Announce search results
+                const totalItemsCount = sections.reduce(
+                    (prevValue, currentValue) => prevValue + currentValue.content.length,
+                    0
+                );
+                this._liveAnnouncer.announce(`${totalItemsCount} search results found.`);
+            }
         });
 
         // Handle initial activation
@@ -99,6 +125,28 @@ export class SectionsToolbarComponent {
         }
 
         this.onActivate();
+    }
+
+    protected toggleSection(sectionHeader: string): void {
+        const expandedMap = new Map(this.expandedSections());
+        const currentState = expandedMap.get(sectionHeader) ?? false;
+        expandedMap.set(sectionHeader, !currentState);
+        this.expandedSections.set(expandedMap);
+    }
+
+    protected toggleAllSections(): void {
+        const sections = this.displayedSections();
+        const expandedMap = new Map<string, boolean>();
+        const shouldExpand = !this.allExpanded();
+
+        sections.forEach((section) => {
+            expandedMap.set(section.header, shouldExpand);
+        });
+        this.expandedSections.set(expandedMap);
+    }
+
+    protected isSectionExpanded(sectionHeader: string): boolean {
+        return this.expandedSections().get(sectionHeader) ?? false;
     }
 
     protected trackBySection(index: number, section: SectionInterface): string {
