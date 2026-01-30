@@ -99,6 +99,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Stavka stabla {itemDetails}, {selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

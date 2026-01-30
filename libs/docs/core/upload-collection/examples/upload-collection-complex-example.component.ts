@@ -22,7 +22,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -72,7 +72,7 @@ interface FileItem {
         LinkComponent,
         UploadCollectionTitleDirective,
         UploadCollectionFormItemComponent,
-        ObjectMarkerModule,
+        ObjectMarkerComponent,
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,

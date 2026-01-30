@@ -99,6 +99,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
         negative: '[[[Ʋąĺűē Ŝţąţē Ĕŗŗŏŗ∙∙∙∙∙∙∙]]]',

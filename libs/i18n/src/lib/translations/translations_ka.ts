@@ -98,6 +98,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'სიის ელემენტი {itemDetails}, ინდექსით {index} {total}-დან {selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

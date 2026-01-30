@@ -98,6 +98,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'ट्री वस्तु {itemDetails}, {index} का {total}{selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',

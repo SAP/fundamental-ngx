@@ -2,7 +2,7 @@ import { Component, ContentChildren, QueryList } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import {
     UploadCollectionButtonGroupComponent,
@@ -31,7 +31,7 @@ import {
         LinkComponent,
         UploadCollectionTitleDirective,
         UploadCollectionFormItemComponent,
-        ObjectMarkerModule,
+        ObjectMarkerComponent,
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,

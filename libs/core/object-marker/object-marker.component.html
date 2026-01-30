@@ -1,0 +1,20 @@
+<span class="fd-object-marker__sr-only" [id]="srOnlyId()" [attr.aria-hidden]="true">{{ statusText$() }}</span>
+
+@if (glyph()) {
+    <fd-icon
+        [glyph]="glyph()"
+        [font]="glyphFont()"
+        class="fd-object-marker__icon"
+        [attr.role]="iconRole()"
+        [attr.title]="iconTitle()"
+        [ariaHidden]="true"
+    ></fd-icon>
+}
+@if (label()) {
+    <span class="fd-object-marker__text" [id]="labelId()">{{ label() }}</span>
+}
+
+@if (glyph() && !label()) {
+    <span class="fd-object-marker__sr-only" [id]="srOnlyIconOnlyId()" [attr.aria-hidden]="true">{{ iconTitle() }}</span>
+}
+<ng-content></ng-content>
