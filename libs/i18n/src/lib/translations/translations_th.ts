@@ -394,7 +394,13 @@ export default {
         searchInputLabel: 'ค้นหา',
         synchronizeButtonTitle: 'ซิงโครไนซ์',
         searchSuggestionMessage: 'พบคำแนะนำ {count} รายการ',
-        searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต'
+        searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'การตั้งค่า',

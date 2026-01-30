@@ -395,7 +395,13 @@ export default {
         searchInputLabel: 'Căutare',
         synchronizeButtonTitle: 'Sincronizare',
         searchSuggestionMessage: '{count} sugestii găsite.',
-        searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga'
+        searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Setări',

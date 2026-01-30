@@ -393,7 +393,13 @@ export default {
         searchInputLabel: 'بحث',
         synchronizeButtonTitle: 'مزامنة',
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
-        searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل'
+        searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',

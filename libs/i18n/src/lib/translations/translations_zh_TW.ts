@@ -392,7 +392,13 @@ export default {
         searchInputLabel: '搜尋',
         synchronizeButtonTitle: '同步',
         searchSuggestionMessage: '找到 {count} 個建議。',
-        searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽'
+        searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

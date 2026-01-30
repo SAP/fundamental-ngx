@@ -3,6 +3,7 @@
         fd-bar
         role="group"
         class="fd-dialog__header"
+        [class.fd-shellbar]="inShellbar()"
         [fdContentDensity]="dialogConfig.contentDensity ?? ''"
         [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
     >

@@ -394,7 +394,13 @@ export default {
         searchInputLabel: 'Hae',
         synchronizeButtonTitle: 'Synkronoi',
         searchSuggestionMessage: 'Löytyi {count} ehdotusta.',
-        searchSuggestionNavigateMessage: 'navigoi ylä- ja alanuolilla'
+        searchSuggestionNavigateMessage: 'navigoi ylä- ja alanuolilla',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Asetukset',

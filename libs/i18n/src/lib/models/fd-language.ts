@@ -535,6 +535,12 @@ export interface FdLanguage {
          */
         searchSuggestionMessage: FdLanguageKey<{ count: number }>;
         searchSuggestionNavigateMessage: FdLanguageKey;
+        deleteButtonLabel: FdLanguageKey;
+        cancelLabel: FdLanguageKey;
+        allButtonLabel: FdLanguageKey;
+        groupHeader: FdLanguageKey;
+        counterLabel: FdLanguageKey<{ count: number }>;
+        searchResultsWrapperAriaLabel: FdLanguageKey;
     };
     platformSwitch: {
         ariaLabel: FdLanguageKey;

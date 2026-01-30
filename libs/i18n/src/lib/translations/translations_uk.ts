@@ -394,7 +394,13 @@ export default {
         searchInputLabel: 'Пошук',
         synchronizeButtonTitle: 'Синхронізувати',
         searchSuggestionMessage: 'Знайдено пропозицій: {count}.',
-        searchSuggestionNavigateMessage: 'використовуйте стрілки вгору і вниз для навігації'
+        searchSuggestionNavigateMessage: 'використовуйте стрілки вгору і вниз для навігації',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Налаштування',

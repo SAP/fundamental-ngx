@@ -393,7 +393,13 @@ export default {
         searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronize',
         searchSuggestionMessage: '{count} suggestions found.',
-        searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
+        searchSuggestionNavigateMessage: 'use up and down arrows to navigate',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Settings',

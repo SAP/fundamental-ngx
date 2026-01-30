@@ -396,7 +396,13 @@ export default {
         searchInputLabel: 'Rechercher',
         synchronizeButtonTitle: 'Synchroniser',
         searchSuggestionMessage: '{count} suggestions trouvées',
-        searchSuggestionNavigateMessage: 'utiliser les flèches pointant vers le haut ou le bas pour naviguer'
+        searchSuggestionNavigateMessage: 'utiliser les flèches pointant vers le haut ou le bas pour naviguer',
+        deleteButtonLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        searchResultsWrapperAriaLabel: 'Search Results'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Paramètres',
