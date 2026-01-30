@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
+import { StatusIndicatorComponent } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-status-indicator-label',
     templateUrl: './status-indicator-label.component.html',
-    imports: [StatusIndicatorModule]
+    imports: [StatusIndicatorComponent]
 })
 export class StatusIndicatorLabelComponent {
     cerealImage = [
