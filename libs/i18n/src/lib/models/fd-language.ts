@@ -159,6 +159,10 @@ export interface FdLanguage {
             selectedDescription: string;
         }>;
     };
+    coreObjectMarker: {
+        active: FdLanguageKey;
+        inactive: FdLanguageKey;
+    };
     coreObjectNumber: {
         emphasized: FdLanguageKey;
         negative: FdLanguageKey;
