@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Låst',
         listItemStatusDraft: 'Udkast'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Luk',
         announcementInfo: 'Meddelelseslinje for oplysninger',

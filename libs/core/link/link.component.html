@@ -1,13 +1,23 @@
-@if (_prefixPortal) {
-    <span class="fd-link__icon-container">
-        <ng-container *cdkPortalOutlet="_prefixPortal"></ng-container>
+@if (_prefixPortal()) {
+    <span class="fd-link__icon-container" role="presentation" aria-hidden="true">
+        <ng-container *cdkPortalOutlet="_prefixPortal()"></ng-container>
     </span>
 }
-<span class="fd-link__content" #content [class.fd-link__content--icon-line-height]="_postfixPortal || _prefixPortal">
+<span
+    class="fd-link__content"
+    #content
+    [class.fd-link__content--icon-line-height]="_postfixPortal() || _prefixPortal()"
+>
     <ng-content></ng-content>
 </span>
-@if (_postfixPortal) {
-    <span class="fd-link__icon-container">
-        <ng-container *cdkPortalOutlet="_postfixPortal"></ng-container>
+@if (_postfixPortal()) {
+    <span class="fd-link__icon-container" role="presentation" aria-hidden="true">
+        <ng-container *cdkPortalOutlet="_postfixPortal()"></ng-container>
     </span>
+}
+@if (emphasized()) {
+    <span class="fd-link__sr-only">{{ 'coreLink.emphasized' | fdTranslate }}</span>
+}
+@if (subtle()) {
+    <span class="fd-link__sr-only">{{ 'coreLink.subtle' | fdTranslate }}</span>
 }

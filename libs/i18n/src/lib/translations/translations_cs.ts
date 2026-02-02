@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Blokováno',
         listItemStatusDraft: 'Koncept'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Zavřít',
         announcementInfo: 'Pruh informačních zpráv',

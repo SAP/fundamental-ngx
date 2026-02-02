@@ -94,8 +94,9 @@ export class BreadcrumbItemComponent implements AfterViewInit {
             return;
         }
 
-        if (this.breadcrumbLink && this.breadcrumbLink.contentSpan) {
-            this.linkContentPortal = new DomPortal<HTMLElement>(this.breadcrumbLink.contentSpan.nativeElement);
+        const contentSpan = this.breadcrumbLink.contentSpan();
+        if (this.breadcrumbLink && contentSpan) {
+            this.linkContentPortal = new DomPortal<HTMLElement>(contentSpan.nativeElement);
         }
 
         this.breadcrumbItemPortal = new DomPortal(this.elementRef.nativeElement.firstElementChild as Element);
