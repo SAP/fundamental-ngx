@@ -261,5 +261,40 @@ describe('get-version', () => {
 
             expect(result).toBe('0.59.0-rc.1');
         });
+
+        it('should use package.json version when it is ahead of git tags', () => {
+            // Scenario: Previous release bumped package.json but tag creation failed
+            // Git tags: v0.59.1-rc.19
+            // Package.json: 0.59.1-rc.20
+            // Should return package.json version (0.59.1-rc.20) as it's higher
+            mockedExecSync.mockReturnValue('v0.59.1-rc.19\nv0.59.1-rc.18\nv0.59.1-rc.17\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.59.1-rc.20' });
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.1-rc.20');
+        });
+
+        it('should use git tag when it is ahead of package.json', () => {
+            // Normal scenario: tags are created successfully, package.json may lag
+            mockedExecSync.mockReturnValue('v0.59.1-rc.20\nv0.59.1-rc.19\nv0.59.1-rc.18\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.59.1-rc.19' });
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.1-rc.20');
+        });
+
+        it('should handle package.json read errors gracefully', () => {
+            // If package.json can't be read, should still use git tag version
+            mockedExecSync.mockReturnValue('v0.59.1-rc.19\nv0.59.1-rc.18\n');
+            mockedGetFileContents.mockImplementation(() => {
+                throw new Error('File not found');
+            });
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.1-rc.19');
+        });
     });
 });
