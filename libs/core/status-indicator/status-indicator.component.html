@@ -1,5 +1,5 @@
 @if (labelPosition() === 'left' || labelPosition() === 'top') {
-    <span [class]="_labelCssClass()">{{ statusLabel() }} </span>
+    <span [class]="labelCssClass()">{{ statusLabel() }} </span>
 }
 <svg
     [attr.id]="id()"
@@ -13,7 +13,7 @@
     <ng-container [ngTemplateOutlet]="svgTemplate"></ng-container>
 </svg>
 @if (labelPosition() === 'right' || labelPosition() === 'bottom') {
-    <span [class]="_labelCssClass()">{{ statusLabel() }} </span>
+    <span [class]="labelCssClass()">{{ statusLabel() }} </span>
 }
 <ng-template #svgTemplate>
     @for (path of path(); track path; let i = $index) {

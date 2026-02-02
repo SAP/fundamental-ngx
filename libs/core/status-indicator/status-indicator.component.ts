@@ -11,7 +11,7 @@ import {
     signal,
     ViewEncapsulation
 } from '@angular/core';
-import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -90,22 +90,22 @@ export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
     readonly labelSize = input<StatusIndicatorSize>('sm');
 
     /** Aria label for the Status Indicator. */
-    readonly ariaLabel = input<Nullable<string>>();
+    readonly ariaLabel = input<string | null | undefined>();
 
     /** Aria defines role description for the Status Indicator. */
-    readonly ariaRoleDescription = input<Nullable<string>>();
+    readonly ariaRoleDescription = input<string | null | undefined>();
 
     /** Aria Focusable for the Status Indicator. */
     readonly focusable = input(false, { transform: booleanAttribute });
 
     /** Aria Role for the Status Indicator. */
-    readonly role = input<Nullable<string>>();
+    readonly role = input<string | null | undefined>();
 
     /** Aria Value Text for the Status Indicator. */
-    readonly ariaValueText = input<Nullable<string>>();
+    readonly ariaValueText = input<string | null | undefined>();
 
     /** Aria title for the status indicator. */
-    readonly title = input<Nullable<string>>();
+    readonly title = input<string | null | undefined>();
 
     /** defines the label position the value can be 'left' | 'right' | 'top' | 'bottom' */
     readonly labelPosition = input<LablePosition>();
@@ -173,7 +173,7 @@ export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
             .join(' ')
     );
 
-    protected readonly _labelCssClass = computed(() =>
+    protected readonly labelCssClass = computed(() =>
         [
             'fd-status-indicator__label',
             this.labelSize() ? `fd-status-indicator__label--${this.labelSize()}` : '',
