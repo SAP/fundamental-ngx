@@ -5,11 +5,11 @@ import {
     Inject,
     NgZone,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
     computed,
+    inject,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -81,8 +81,8 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     view$ = signal<TemplateRef<any> | null>(null);
 
     /** @hidden Navigation icon name based on RTL */
-    navigationIcon$ = computed(() =>
-        this._rtlService?.rtlSignal() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    protected readonly navigationIcon = computed(() =>
+        this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
     );
 
     /** @hidden */
@@ -94,12 +94,16 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     }
 
     /** @hidden */
-    constructor(
-        private _menuService: MenuService,
-        private _ngZone: NgZone,
-        @Optional() private _rtlService: RtlService,
-        @Inject(MENU_COMPONENT) menuComponent: MenuInterface
-    ) {
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _menuService = inject(MenuService);
+
+    /** @hidden */
+    private readonly _ngZone = inject(NgZone);
+
+    /** @hidden */
+    constructor(@Inject(MENU_COMPONENT) menuComponent: MenuInterface) {
         super(menuComponent, MobileModeControl.MENU);
     }
 

@@ -18,7 +18,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     Renderer2,
@@ -204,6 +203,9 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     private readonly _eventListeners: (() => void)[] = [];
 
     /** @hidden */
@@ -223,7 +225,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2,
         @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
@@ -389,7 +390,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number | undefined;
-        const rtl = !!this._rtlService?.rtlSignal();
+        const rtl = this._rtlService?.rtl() ?? false;
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
             const token = this.tokenList.find((_, index) => index === fromIndex);
             this.tokenList.forEach((shadowedToken) => {

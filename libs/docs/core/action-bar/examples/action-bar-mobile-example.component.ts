@@ -1,5 +1,4 @@
 import { Component, computed, inject, viewChild } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ActionBarActionsDirective,
@@ -42,11 +41,10 @@ export class ActionBarMobileExampleComponent {
     protected readonly menu = viewChild.required<MenuComponent>('menu');
 
     protected readonly navigationArrow = computed(() =>
-        this._isRtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+        this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
     );
 
-    private readonly _rtlService = inject(RtlService);
-    private readonly _isRtl = toSignal(this._rtlService.rtl, { initialValue: false });
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     protected closeMenu(): void {
         this.menu().close();

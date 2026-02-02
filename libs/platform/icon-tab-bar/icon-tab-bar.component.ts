@@ -187,9 +187,6 @@ export class IconTabBarComponent implements OnInit, TabList {
     readonly _tabRenderer$ = signal<IconTabBarItem | null>(null);
 
     /** @hidden */
-    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
-
-    /** @hidden */
     readonly _templateMap$ = computed(() =>
         // Access the template service signal to get all registered templates reactively
         this.templateService.getAllTemplatesSignal()()
@@ -216,6 +213,9 @@ export class IconTabBarComponent implements OnInit, TabList {
         return children.map((t) => this._generateTabConfig(t));
     });
 
+    /** @hidden */
+    protected readonly isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
     /** @hidden Initialize active tab when tabs change */
     private readonly _initActiveTabEffect = effect(() => {
         const flatTabs = this._flatTabs$();
@@ -239,10 +239,12 @@ export class IconTabBarComponent implements OnInit, TabList {
     private readonly _iconTabBarCmp = viewChild<Nullable<IconTabBarBase>>(IconTabBarBase);
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */

@@ -190,7 +190,7 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     });
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService, {
+    private readonly _rtlService = inject(RtlService, {
         optional: true
     });
 
@@ -257,7 +257,7 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
         // All navigation lists use the same swapped arrow logic:
         // RIGHT arrow = expand action, LEFT arrow = collapse/go back action
-        const isExpandAction = KeyUtil.isKeyCode(event, this._rtl?.rtl.value ? LEFT_ARROW : RIGHT_ARROW);
+        const isExpandAction = KeyUtil.isKeyCode(event, this._rtlService?.rtl() ? LEFT_ARROW : RIGHT_ARROW);
 
         if (!isExpandAction) {
             if (this.moreButtonRef) {

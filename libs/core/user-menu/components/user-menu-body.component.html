@@ -15,7 +15,7 @@
                     <fd-button-bar
                         fdkInitialFocus
                         ariaLabel="previous"
-                        [glyph]="navigationArrow$ | async"
+                        [glyph]="navigationArrow()"
                         (click)="clearSubmenu()"
                     >
                     </fd-button-bar>

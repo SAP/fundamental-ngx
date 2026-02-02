@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -85,11 +85,11 @@ export class TableNavigatableRowExampleComponent {
         }
     ];
 
-    get isRtl(): boolean {
-        return this._rtlService.rtl.getValue();
-    }
+    protected readonly navigationArrow = computed(() =>
+        this._rtlService?.rtl() ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'
+    );
 
-    constructor(private _rtlService: RtlService) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     alert(row: any): void {
         if (row.navigatable) {

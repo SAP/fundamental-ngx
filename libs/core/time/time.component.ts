@@ -200,13 +200,15 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        readonly _contentDensityObserver: ContentDensityObserver,
-        @Optional() private _rtlService: RtlService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -414,7 +416,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      */
     private _getVisibleColumnsWithRtl(): FdTimeActiveView[] {
         const columns = this._getVisibleColumns();
-        return this._rtlService?.rtl.value ? columns.reverse() : columns;
+        return this._rtlService?.rtl() ? columns.reverse() : columns;
     }
 
     /** @hidden */

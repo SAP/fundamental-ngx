@@ -208,9 +208,6 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     /** @hidden the total number of slides in the carousel */
     totalSlides = 0;
 
-    /** @hidden handles rtl service */
-    readonly _dir$ = computed<Direction>(() => (this._rtl$() ? 'rtl' : 'ltr'));
-
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
 
@@ -230,6 +227,9 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     get _contentSizePx(): string {
         return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
     }
+
+    /** @hidden handles rtl service */
+    protected readonly dir = computed<Direction>(() => (this._isRtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     private _visibleSlidesCount: number | 'auto' = 1;
@@ -261,7 +261,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     });
 
     /** @hidden */
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     constructor(
@@ -272,7 +272,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
         private readonly _zone: NgZone
     ) {
         effect(() => {
-            const isRtl = this._rtl$();
+            const isRtl = this._isRtl();
             this._carouselService.isRtl = isRtl;
             if (this._carouselService.items && this._carouselService.active) {
                 this._carouselService.goToItem(this._carouselService.active, false);
@@ -290,10 +290,10 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
             event.preventDefault();
 
             if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-                this._rtl$() ? this.next() : this.previous();
+                this._isRtl() ? this.next() : this.previous();
             }
             if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-                this._rtl$() ? this.previous() : this.next();
+                this._isRtl() ? this.previous() : this.next();
             }
             if (KeyUtil.isKeyCode(event, UP_ARROW)) {
                 this.previous();
@@ -586,8 +586,8 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
         if (
-            (!this._rtl$() && event.after) ||
-            (this._rtl$() && !event.after && !this.vertical) ||
+            (!this._isRtl() && event.after) ||
+            (this._isRtl() && !event.after && !this.vertical) ||
             (this.vertical && event.after)
         ) {
             if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
@@ -672,7 +672,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, After
         const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
         if (stepTaken > 0) {
             let slideDirection: SlideDirection;
-            if (!this._rtl$()) {
+            if (!this._isRtl()) {
                 slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
             } else {
                 // vertical carousel slide direction is same in ltr and rtl

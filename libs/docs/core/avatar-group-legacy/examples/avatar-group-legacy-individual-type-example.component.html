@@ -161,7 +161,7 @@
                                 @if (isDetailStage) {
                                     <fd-button-bar
                                         (click)="openOverflowMain()"
-                                        [glyph]="isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'"
+                                        [glyph]="navigationArrow()"
                                         fdType="transparent"
                                         aria-label="Back"
                                         title="Back"

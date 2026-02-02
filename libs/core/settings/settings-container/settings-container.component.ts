@@ -1,14 +1,13 @@
-import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    computed,
     contentChildren,
     HostListener,
     inject,
     input,
     OnDestroy,
-    OnInit,
     Renderer2,
     signal,
     viewChild,
@@ -20,7 +19,6 @@ import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamenta
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { map, Observable } from 'rxjs';
 import { SettingsDetailAreaDirective } from '../settings-detail-area/settings-detail-area.directive';
 import { SettingsHeaderButtonDirective } from '../settings-header-button/settings-header-button.directive';
 import { SettingsHeaderDirective } from '../settings-header/settings-header.directive';
@@ -44,9 +42,7 @@ export enum VIEW_MODE {
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-        AsyncPipe,
         BarComponent,
         BarElementDirective,
         BarLeftDirective,
@@ -58,7 +54,7 @@ export enum VIEW_MODE {
         InitialFocusDirective
     ]
 })
-export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SettingsContainerComponent implements OnDestroy, AfterViewInit {
     /**
      * Heading level for the title in the Details Area
      * Default value is 2
@@ -77,11 +73,6 @@ export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewI
      * aria-label and title value for the back button
      */
     readonly backBtnAriaLabel = input<string>('');
-
-    /**
-     * Handle the navigation icon (arrow) of the Back button in RTL mode
-     */
-    navigationArrow$: Observable<string>;
 
     /** @hidden */
     readonly viewContainer = viewChild('container', { read: ViewContainerRef });
@@ -107,11 +98,18 @@ export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewI
     /** @hidden */
     readonly activeTitle = signal<string>('');
 
+    /**
+     * Handle the navigation icon (arrow) of the Back button in RTL mode
+     */
+    protected readonly navigationArrow = computed(() =>
+        this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
+
     /** @hidden */
     private _eventUnlisteners: (() => void)[] = [];
 
     /** @hidden */
-    private _rtlService = inject(RtlService);
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     private _renderer = inject(Renderer2);
@@ -126,13 +124,6 @@ export class SettingsContainerComponent implements OnInit, OnDestroy, AfterViewI
     onWindowResize(): void {
         this.screenWidth.set(window.innerWidth);
         this._updateViewMode();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
-        );
     }
 
     /** @hidden */

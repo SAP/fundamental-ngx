@@ -2,20 +2,18 @@ import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     ChangeDetectorRef,
+    computed,
     ContentChildren,
-    DestroyRef,
     Directive,
+    effect,
     inject,
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     QueryList,
     SimpleChanges
 } from '@angular/core';
-import { filter } from 'rxjs/operators';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RtlService } from '../../services/rtl.service';
 import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
 
@@ -23,8 +21,7 @@ import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
  * To be used with FocusKeyManagerItemDirective
  */
 @Directive({
-    selector: `[fdkFocusKeyManagerList]`,
-    standalone: true
+    selector: `[fdkFocusKeyManagerList]`
 })
 export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record<any, any> & FocusableOption>
     implements OnChanges, AfterContentInit, OnDestroy
@@ -50,13 +47,26 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
     private _focusKeyManager: FocusKeyManager<TItem>;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    constructor(
-        @Optional() private readonly _rtlService: RtlService,
-        private readonly _cdr: ChangeDetectorRef
-    ) {}
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    constructor() {
+        // React to RTL changes for horizontal orientation
+        effect(() => {
+            // Read the RTL signal to track changes
+            this._isRtl();
+
+            if (this._focusKeyManager && this.orientation === 'horizontal') {
+                this._applyOrientation();
+            }
+        });
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -80,13 +90,6 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
         this._applyOrientation();
 
         this._cdr.detectChanges();
-
-        this._rtlService?.rtl
-            .pipe(
-                filter(() => this.orientation === 'horizontal'),
-                takeUntilDestroyed(this._onDestroy$)
-            )
-            .subscribe(() => this._applyOrientation());
     }
 
     /** @hidden */
@@ -107,7 +110,7 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
     private _applyOrientation(): void {
         switch (this.orientation) {
             case 'horizontal':
-                this._focusKeyManager.withHorizontalOrientation(this._rtlService?.rtl.value ? 'rtl' : 'ltr');
+                this._focusKeyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
                 break;
             case 'vertical':
                 this._focusKeyManager.withVerticalOrientation(true);

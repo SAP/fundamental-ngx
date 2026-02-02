@@ -2,10 +2,9 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectorRef,
+    computed,
     Directive,
     ElementRef,
-    HostBinding,
-    HostListener,
     inject,
     isDevMode,
     NgZone,
@@ -27,18 +26,18 @@ function coerceMetricValue(value: string | number | undefined): string | undefin
     return typeof value === 'number' ? `${value}px` : value;
 }
 
-@Directive()
+@Directive({
+    host: {
+        '[attr.dir]': 'dir()',
+        '(keydown)': 'closeDialogEsc($event)',
+        '(mousedown)': 'closeDialog($event.target)'
+    }
+})
 export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRefBase<T>>
     implements OnInit, AfterViewInit, OnDestroy, HasElementRef
 {
     /** @hidden Reference to dialog window element*/
     abstract dialogWindow: ElementRef;
-
-    /**
-     * @hidden
-     */
-    @HostBinding('attr.dir')
-    _dir: string;
 
     /** @hidden Dialog padding sizes */
     dialogPaddingSize: DialogSize;
@@ -55,6 +54,9 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
 
     /** @hidden */
     protected readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    protected readonly dir = computed(() => ((this._rtlService?.rtl() ?? false) ? 'rtl' : 'ltr'));
 
     /** @hidden */
     protected _focusTrapId: string;
@@ -80,7 +82,6 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     private readonly _zone = inject(NgZone);
 
     /** @hidden Listen and close dialog on Escape key */
-    @HostListener('keydown', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
         if (this._config.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE)) {
             this._ref.dismiss(FD_DIALOG_DISMISS_REASON.ESCAPE);
@@ -88,7 +89,6 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     }
 
     /** @hidden Listen and close dialog on Backdrop click */
-    @HostListener('mousedown', ['$event.target'])
     closeDialog(target: EventTarget | null): void {
         if (this._config.backdropClickCloseable && target === this.elementRef.nativeElement) {
             this._ref.dismiss(FD_DIALOG_DISMISS_REASON.BACKDROP);
@@ -98,12 +98,6 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     /** @hidden */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
-        this._subscriptions.add(
-            this._rtlService?.rtl.subscribe((isRtl) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-                this._changeDetectorRef.detectChanges();
-            })
-        );
     }
 
     /** @hidden */

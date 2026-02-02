@@ -5,10 +5,10 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
+    inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
@@ -63,9 +63,11 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private _viewportRuler: ViewportRuler,
-        @Optional() private readonly _rtlService: RtlService,
         private readonly _cdr: ChangeDetectorRef
     ) {}
 
@@ -149,8 +151,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
         if (
             i === this.products.length - 1 &&
-            (KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
-                (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._rtlService?.rtlSignal()))
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._rtlService?.rtl()))
         ) {
             while (<HTMLElement>target.previousElementSibling) {
                 target = <HTMLElement>target.previousElementSibling;
@@ -159,9 +160,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
 
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            this._rtlService?.rtlSignal() ? nextElementSibling?.focus() : previousElementSibling?.focus();
+            this._rtlService?.rtl() ? nextElementSibling?.focus() : previousElementSibling?.focus();
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            this._rtlService?.rtlSignal() ? previousElementSibling?.focus() : nextElementSibling?.focus();
+            this._rtlService?.rtl() ? previousElementSibling?.focus() : nextElementSibling?.focus();
         } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             if (this.products.length >= 7) {
                 this._handleNoListMoreThanSeven(event, target, i);

@@ -1,4 +1,4 @@
-import { DestroyRef, ElementRef, Injectable, OnDestroy, Optional, computed, inject, signal } from '@angular/core';
+import { DestroyRef, ElementRef, Injectable, OnDestroy, computed, inject, signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -101,13 +101,15 @@ export class TableColumnResizeService implements OnDestroy {
     private _tableRef: Table;
 
     /** @hidden */
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
-    constructor(
-        private readonly _tableScrollDispatcherService: TableScrollDispatcherService,
-        @Optional() private readonly _rtlService: RtlService
-    ) {
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    constructor(private readonly _tableScrollDispatcherService: TableScrollDispatcherService) {
         this._tableScrollDispatcherService
             ?.horizontallyScrolled()
             .pipe(takeUntilDestroyed(this._destroyed))
@@ -235,7 +237,7 @@ export class TableColumnResizeService implements OnDestroy {
         this.resizerPosition$.next(this.resizerPosition);
 
         if (resizerPosition != null) {
-            const scrollLeftOffset = this._scrollLeft * (this._rtl$() ? 1 : -1);
+            const scrollLeftOffset = this._scrollLeft * (this._isRtl() ? 1 : -1);
             this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
             this.resizerPosition$.next(this.resizerPosition);
         }
@@ -276,7 +278,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (this._startX != null) {
             const clientStartX = this._clientStartX ?? 0;
-            const diffX = this._rtl$() ? clientStartX - event.clientX : event.clientX - clientStartX;
+            const diffX = this._isRtl() ? clientStartX - event.clientX : event.clientX - clientStartX;
 
             this._processResize(diffX);
         }
@@ -351,7 +353,7 @@ export class TableColumnResizeService implements OnDestroy {
             .pipe(debounceTime(10))
             .subscribe((event) => {
                 const clientStartX = this._clientStartX ?? 0;
-                const diffX = this._rtl$() ? clientStartX - event.clientX : event.clientX - clientStartX;
+                const diffX = this._isRtl() ? clientStartX - event.clientX : event.clientX - clientStartX;
 
                 this._resizerPosition = (this._startX ?? 0) + diffX;
                 this.resizerPosition$.next(this.resizerPosition);

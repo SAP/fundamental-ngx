@@ -1,6 +1,6 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { ChangeDetectorRef, Directive, Input, Optional } from '@angular/core';
+import { ChangeDetectorRef, Directive, inject, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { RtlService } from '../../services/rtl.service';
@@ -29,10 +29,10 @@ export class DndKeyboardGroupDirective {
     _onDndItemFocus$ = new Subject<[number, number]>();
 
     /** @hidden */
-    constructor(
-        private readonly _cdr: ChangeDetectorRef,
-        @Optional() private readonly _rtlService: RtlService
-    ) {}
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** Custom function to call when moving item inside the group */
     @Input()
@@ -50,7 +50,7 @@ export class DndKeyboardGroupDirective {
             return;
         }
 
-        const isRtl = this._rtlService.rtl.value;
+        const isRtl = this._rtlService?.rtl() ?? false;
 
         const group = this.groups[groupIndex];
         const indexInNextGroup = this.orientation === 'vertical' ? 0 : itemIndex;

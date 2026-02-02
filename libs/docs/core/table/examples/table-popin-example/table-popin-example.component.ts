@@ -1,13 +1,10 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-table-popin-example',
@@ -25,14 +22,11 @@ import { map } from 'rxjs/operators';
         FormLabelComponent,
         ObjectStatusComponent,
         CheckboxComponent,
-        FormsModule,
-        AsyncPipe
+        FormsModule
     ]
 })
-export class TablePopinExampleComponent implements OnInit {
+export class TablePopinExampleComponent {
     masterCheckbox: boolean | null = false;
-
-    navigationArrow$: Observable<string>;
 
     fruits: any[] = [
         {
@@ -81,7 +75,7 @@ export class TablePopinExampleComponent implements OnInit {
         }
     ];
 
-    constructor(private _rtlService: RtlService) {}
+    constructor() {}
 
     select(index: number, checked: boolean): void {
         this.fruits[index].checked = checked;
@@ -93,12 +87,6 @@ export class TablePopinExampleComponent implements OnInit {
         checked ? this._selectAll() : this._deselectAll();
 
         this._handleMasterCheckboxState();
-    }
-
-    ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'slim-arrow-left' : 'slim-arrow-right'))
-        );
     }
 
     private _handleMasterCheckboxState(): void {

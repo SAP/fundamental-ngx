@@ -210,7 +210,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     private readonly _selectionService = inject(SelectionService);
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService, {
+    private readonly _rtlService = inject(RtlService, {
         optional: true
     });
 
@@ -352,7 +352,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             return;
         }
 
-        const isRtl = !!this._rtl?.rtlSignal();
+        const isRtl = this._rtlService?.rtl() ?? false;
         const expandKey = isRtl ? LEFT_ARROW : RIGHT_ARROW;
         const collapseKey = isRtl ? RIGHT_ARROW : LEFT_ARROW;
 
