@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
     DescriptionComponent,
@@ -17,7 +17,7 @@ import {
         DocPageComponent,
         HeaderComponent,
         MessageStripComponent,
-        InfoLabelModule,
+        InfoLabelComponent,
         DescriptionComponent,
         ImportComponent,
         HeaderTabsComponent
