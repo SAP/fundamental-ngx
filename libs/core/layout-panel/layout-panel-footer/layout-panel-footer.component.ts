@@ -1,13 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
-    ViewEncapsulation
-} from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 export type FooterPosition = 'start' | 'end';
 
@@ -16,39 +8,19 @@ export type FooterPosition = 'start' | 'end';
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    host: {
+        class: 'fd-layout-panel__footer',
+        '[class.fd-layout-panel__footer--start]': 'position() === "start"',
+        '[class.fd-layout-panel__footer--end]': 'position() === "end"'
+    }
 })
-export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
+export class LayoutPanelFooterComponent implements HasElementRef {
     /**
      * Footer variations, can be start (left aligned), end (right aligned) or null for default.
      * The default value will render the content of the footer in the middle.
      */
-    @Input() position: Nullable<FooterPosition>;
+    position = input<FooterPosition | null>(null);
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-layout-panel__footer',
-            this.position ? `fd-layout-panel__footer--${this.position}` : '',
-            this.class
-        ];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    readonly elementRef = inject(ElementRef);
 }

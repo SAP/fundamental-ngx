@@ -27,8 +27,14 @@ describe('LayoutPanelComponent', () => {
     });
 
     it('should apply transparent background', () => {
-        component.transparent = true;
+        fixture.componentRef.setInput('transparent', true);
         fixture.detectChanges();
         expect(fixture.nativeElement.className).toContain('fd-layout-panel--transparent');
+    });
+
+    it('should apply background image style', () => {
+        fixture.componentRef.setInput('backgroundImage', 'test-image.jpg');
+        fixture.detectChanges();
+        expect(fixture.nativeElement.style.backgroundImage).toBe('url("test-image.jpg")');
     });
 });
