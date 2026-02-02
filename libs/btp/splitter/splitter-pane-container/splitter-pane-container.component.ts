@@ -12,10 +12,8 @@ import {
     inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
-    SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -176,18 +174,20 @@ export class SplitterPaneContainerComponent
     }
 
     /** @hidden */
-    private get _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _parentSplitterPaneContainer = inject(SplitterPaneContainerComponent, {
+        optional: true,
+        skipSelf: true
+    });
 
     /** @hidden */
     constructor(
         private readonly _cdr: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _splitter: SplitterComponent,
-        private readonly _viewportRuler: ViewportRuler,
-        @Optional() private readonly _rtlService: RtlService,
-        @Optional() @SkipSelf() private readonly _parentSplitterPaneContainer: SplitterPaneContainerComponent
+        private readonly _viewportRuler: ViewportRuler
     ) {}
 
     /** @hidden */
@@ -273,7 +273,8 @@ export class SplitterPaneContainerComponent
             return;
         }
 
-        diff *= this._isRtl && this.orientation === SplitterPaneContainerOrientation.vertical ? -1 : 1;
+        const isRtl = this._rtlService?.rtl() ?? false;
+        diff *= isRtl && this.orientation === SplitterPaneContainerOrientation.vertical ? -1 : 1;
 
         const resizedPaneIndex =
             this._panesInRightOrderForResize.findIndex((pane) => pane.id === paneId) + (diff < 0 ? 1 : 0);

@@ -6,10 +6,10 @@ import {
     EventEmitter,
     Input,
     OnInit,
-    Optional,
     Output,
     ViewChild,
-    computed
+    computed,
+    inject
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -83,10 +83,6 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
      */
     public secondaryId: string;
 
-    /** handles rtl service
-     * @hidden */
-    readonly dir$ = computed<'ltr' | 'rtl'>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
-
     /** @hidden */
     primaryButtonWidth: string;
     /** Defined max width of Split menu button */
@@ -96,10 +92,12 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         return this.type ? `fd-button-split--${this.type}` : '';
     }
 
+    /** handles rtl service
+     * @hidden */
+    protected readonly dir = computed<'ltr' | 'rtl'>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+
     /** @hidden */
-    constructor(@Optional() private readonly _rtlService: RtlService) {
-        super();
-    }
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** Tabindex for button. */
     get tabindex(): number {

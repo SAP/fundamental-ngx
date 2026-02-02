@@ -12,7 +12,7 @@
                             fd-settings-header-button
                             fdkInitialFocus
                             fdType="transparent"
-                            [glyph]="navigationArrow$ | async"
+                            [glyph]="navigationArrow()"
                             [ariaLabel]="backBtnAriaLabel()"
                             [title]="backBtnAriaLabel()"
                             (click)="onHeaderBackClick()"

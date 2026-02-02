@@ -7,10 +7,10 @@ import {
     DestroyRef,
     ElementRef,
     HostListener,
-    OnInit,
     QueryList,
     TemplateRef,
     ViewEncapsulation,
+    computed,
     contentChild,
     inject,
     signal,
@@ -27,7 +27,7 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { Observable, Subject, map, startWith } from 'rxjs';
+import { Subject, startWith } from 'rxjs';
 import { UserMenuUserNameDirective } from '../directives/user-menu-user-name.directive';
 import { UserMenuListItemComponent } from './user-menu-list-item.component';
 
@@ -51,15 +51,10 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
     ],
     providers: [contentDensityObserverProviders()]
 })
-export class UserMenuBodyComponent implements OnInit, AfterViewInit {
+export class UserMenuBodyComponent implements AfterViewInit {
     /** @hidden */
     @ContentChildren(UserMenuListItemComponent, { descendants: true })
     readonly _listItems: QueryList<UserMenuListItemComponent>;
-
-    /**
-     * Handle the navigation icon (arrow) of the Back button in RTL mode
-     */
-    navigationArrow$: Observable<string>;
 
     /**
      * Template ref of the submenu
@@ -94,14 +89,21 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
      */
     readonly bodyHeader = viewChild<TemplateRef<any>>('bodyHeader');
 
+    /**
+     * Handle the navigation icon (arrow) of the Back button in RTL mode
+     */
+    protected readonly navigationArrow = computed(() =>
+        this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
+
     /** @hidden */
     protected readonly userNameEl = contentChild(UserMenuUserNameDirective, { read: ElementRef });
 
     /** @hidden */
-    private _rtlService = inject(RtlService);
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    private _refresh$ = new Subject<void>();
+    private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -110,13 +112,6 @@ export class UserMenuBodyComponent implements OnInit, AfterViewInit {
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
         event.stopPropagation();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
-        );
     }
 
     /** @hidden */

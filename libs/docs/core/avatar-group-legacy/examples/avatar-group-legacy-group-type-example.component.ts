@@ -1,5 +1,5 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
-import { Component, ViewChild } from '@angular/core';
+import { Component, computed, inject, ViewChild } from '@angular/core';
 
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -61,14 +61,11 @@ export class AvatarGroupLegacyGroupTypeExampleComponent {
         return this.overflowPopoverStage === 'detail';
     }
 
-    get isRtl(): boolean {
-        return this._rtlService.rtl.getValue();
-    }
+    protected readonly isRtl = computed(() => this._rtlService?.rtl ?? false);
 
-    constructor(
-        private readonly avatarGroupDataExampleService: AvatarGroupLegacyDataExampleService,
-        private _rtlService: RtlService
-    ) {
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    constructor(private readonly avatarGroupDataExampleService: AvatarGroupLegacyDataExampleService) {
         this.people = this.avatarGroupDataExampleService.generate();
     }
 

@@ -11,7 +11,7 @@ export class WizardService {
 
     /** @hidden */
     progressBarKeyHandler(event: any, steps: QueryList<WizardStepComponent>, index: number): void {
-        const rtlDirection = this._rtlService?.rtlSignal();
+        const rtlDirection = this._rtlService?.rtl();
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             if (
                 steps.get(index - 1)?.status === COMPLETED_STEP_STATUS ||

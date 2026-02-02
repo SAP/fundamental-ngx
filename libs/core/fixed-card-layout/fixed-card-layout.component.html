@@ -10,7 +10,7 @@
     [customTransferFn]="_customTransferFn"
     [disableKeyboardDragDrop]="disableDragDrop"
     [cdkDropListGroupDisabled]="disableDragDrop"
-    [attr.dir]="_dir$()"
+    [attr.dir]="dir()"
 >
     @for (card of _cardsArray; track card; let cardIndex = $index) {
         <div

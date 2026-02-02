@@ -1,10 +1,9 @@
-import { Directive, ElementRef, Input, OnChanges, Optional, Renderer2, computed, effect } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, Renderer2, computed, effect, inject } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-slider-position]',
-    standalone: true
+    selector: '[fd-slider-position]'
 })
 export class SliderPositionDirective implements OnChanges {
     /** Position of the slider */
@@ -15,16 +14,22 @@ export class SliderPositionDirective implements OnChanges {
     @Input()
     vertical = false;
 
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    /** @hidden */
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef<HTMLElement>,
-        private readonly _renderer: Renderer2,
-        @Optional() private readonly _rtlService: RtlService
-    ) {
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+
+    /** @hidden */
+    constructor() {
         effect(() => {
-            this._setPosition(this._rtl$());
+            this._setPosition(this._isRtl());
         });
     }
 
@@ -33,7 +38,7 @@ export class SliderPositionDirective implements OnChanges {
         this._setPosition();
     }
     /** @hidden */
-    private _setPosition(rtl = this._rtl$()): void {
+    private _setPosition(rtl = this._isRtl()): void {
         if (this.vertical) {
             this._renderer.setStyle(this._elementRef.nativeElement, 'bottom', `${this.position}%`);
             return;

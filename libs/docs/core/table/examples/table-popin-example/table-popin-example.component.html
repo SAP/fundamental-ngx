@@ -26,9 +26,7 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        @if (navigationArrow$ | async; as navigationArrow) {
-                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        }
+                        <i fd-table-icon glyph="slim-arrow-right" [navigation]="true" role="presentation"></i>
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true">
@@ -87,9 +85,7 @@
                         {{ fruit.dateOfExpire }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        @if (navigationArrow$ | async; as navigationArrow) {
-                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        }
+                        <i fd-table-icon glyph="slim-arrow-right" [navigation]="true" role="presentation"></i>
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true">
@@ -140,9 +136,7 @@
                         {{ fruit.description }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        @if (navigationArrow$ | async; as navigationArrow) {
-                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        }
+                        <i fd-table-icon glyph="slim-arrow-right" [navigation]="true" role="presentation"></i>
                     </td>
                 </tr>
             }
@@ -196,9 +190,7 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        @if (navigationArrow$ | async; as navigationArrow) {
-                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        }
+                        <i fd-table-icon glyph="slim-arrow-right" [navigation]="true" role="presentation"></i>
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true" [attr.aria-selected]="fruit.checked">

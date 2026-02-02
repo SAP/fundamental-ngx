@@ -88,7 +88,7 @@ export abstract class ToolHeaderComponentClass {
      * RTL signal
      * @hidden
      */
-    protected _rtl = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+    protected rtl = computed<boolean>(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });

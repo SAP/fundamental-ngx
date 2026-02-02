@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -34,7 +34,7 @@ export class CalendarService {
     focusEscapeFunction: EscapeFocusFunction;
 
     /** @hidden */
-    constructor(@Optional() private _rtlService: RtlService) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /**
      * Standardized method to calculate grid [x][y] to index number
@@ -51,7 +51,7 @@ export class CalendarService {
      * @param index which is number (0 - (rowAmount * colAmount))
      */
     onKeydownHandler(event: KeyboardEvent, index: number): void {
-        const rtl = !!this._rtlService?.rtlSignal();
+        const rtl = this._rtlService?.rtl() ?? false;
 
         switch (event.key) {
             case 'Spacebar':

@@ -74,7 +74,7 @@
                                     [attr.aria-label]="'platformApprovalFlow.prevButtonAriaLabel' | fdTranslate"
                                     (click)="nextSlide(-1)"
                                 >
-                                    <fd-icon [glyph]="'navigation-' + (_rtl ? 'right' : 'left') + '-arrow'"></fd-icon>
+                                    <fd-icon [glyph]="prevSlideArrowGlyph()"></fd-icon>
                                     {{ _carouselStepsLeft }}
                                 </button>
                             }
@@ -85,7 +85,7 @@
                                     (click)="nextSlide()"
                                 >
                                     {{ _carouselStepsRight }}
-                                    <fd-icon [glyph]="'navigation-' + (_rtl ? 'left' : 'right') + '-arrow'"></fd-icon>
+                                    <fd-icon [glyph]="nextSlideArrowGlyph()"></fd-icon>
                                 </button>
                             }
                         </div>

@@ -62,9 +62,9 @@ describe('NestedContentDirective', () => {
     });
 
     it('Should propagate expanded state to icon', () => {
-        expect(iconElement.expanded).toBeFalsy();
+        expect(iconElement.expanded()).toBeFalsy();
         directiveElement.changeExpandedState(true);
         fixture.detectChanges();
-        expect(iconElement.expanded).toBeTruthy();
+        expect(iconElement.expanded()).toBeTruthy();
     });
 });

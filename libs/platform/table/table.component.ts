@@ -21,7 +21,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     signal,
@@ -792,8 +791,6 @@ export class TableComponent<T = any>
     /** @hidden */
     _loadPreviousPages = false;
     /** @hidden */
-    _rtl = false;
-    /** @hidden */
     readonly _dataSourceDirective = inject<TableDataSourceDirective<T>>(TableDataSourceDirective);
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
@@ -875,13 +872,15 @@ export class TableComponent<T = any>
     private readonly _defaultTrackBy: TrackByFunction<number> = (index: number) => index;
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
         readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         public readonly _tableColumnResizeService: TableColumnResizeService,
-        @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
         readonly injector: Injector,
         private readonly _tabbableService: TabbableElementService
@@ -1481,7 +1480,7 @@ export class TableComponent<T = any>
     /** @hidden */
     _scrollToOverlappedCell(): void {
         this.tableScrollable.scrollToOverlappedCell(
-            !!this._rtlService?.rtlSignal(),
+            this._rtlService?.rtl() ?? false,
             this._freezableColumns.size,
             this._freezableEndColumns.size
         );

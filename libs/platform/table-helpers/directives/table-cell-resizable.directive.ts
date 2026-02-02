@@ -54,7 +54,7 @@ export class PlatformTableCellResizableDirective
     private _resizableSide: TableColumnResizableSide = 'both';
 
     /** @hidden */
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed(() => !!this._rtlService?.rtl());
 
     /** @hidden */
     private readonly _tableColumnResizeService = inject(TableColumnResizeService);
@@ -108,24 +108,24 @@ export class PlatformTableCellResizableDirective
             let resizerPosition: number | undefined;
             let resizedColumn: string | undefined;
 
-            const pointerOnLeft = this._rtl$()
+            const pointerOnLeft = this._isRtl()
                 ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX
                 : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
             if (pointerOnLeft && this._resizableSide !== 'end') {
-                resizerPosition = this._rtl$()
+                resizerPosition = this._isRtl()
                     ? el.parentElement!.offsetWidth - (el.offsetLeft + el.offsetWidth)
                     : el.offsetLeft;
 
                 resizedColumn = this._tableColumnResizeService.getPreviousColumnName(this.columnName);
             }
 
-            const pointerOnRight = this._rtl$()
+            const pointerOnRight = this._isRtl()
                 ? event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX
                 : elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
             if (pointerOnRight && this._resizableSide !== 'start') {
-                resizerPosition = this._rtl$()
+                resizerPosition = this._isRtl()
                     ? el.parentElement!.offsetWidth - el.offsetLeft
                     : el.offsetLeft + el.offsetWidth;
 

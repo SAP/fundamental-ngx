@@ -11,8 +11,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -20,7 +18,9 @@ import {
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
-    booleanAttribute
+    booleanAttribute,
+    effect,
+    inject
 } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Observable, Subscription, firstValueFrom } from 'rxjs';
@@ -85,7 +85,7 @@ let paginationUniqueId = 0;
         FdTranslatePipe
     ]
 })
-export class PaginationComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy {
     /** @hidden */
     @ViewChild(FocusKeyManagerListDirective)
     readonly _focusKeyManagerList: FocusKeyManagerListDirective;
@@ -254,14 +254,22 @@ export class PaginationComponent implements OnChanges, OnInit, AfterViewInit, On
     private _translationResolver = new TranslationResolver();
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private readonly paginationService: PaginationService,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
-        @Optional() private readonly _rtlService: RtlService,
         readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+    ) {
+        // React to RTL changes
+        effect(() => {
+            this._rtlService?.rtl();
+            this._refreshPages();
+        });
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -277,11 +285,6 @@ export class PaginationComponent implements OnChanges, OnInit, AfterViewInit, On
             }
         }
         this._refreshPages();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._refreshPages()));
     }
 
     /** @hidden */

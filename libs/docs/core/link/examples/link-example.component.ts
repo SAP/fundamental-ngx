@@ -1,26 +1,19 @@
-import { AsyncPipe, NgStyle } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgStyle } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { BehaviorSubject, of } from 'rxjs';
 
 @Component({
     selector: 'fd-link-example',
     templateUrl: './link-example.component.html',
-    imports: [LinkComponent, RouterLink, IconComponent, AsyncPipe, NgStyle]
+    imports: [LinkComponent, RouterLink, IconComponent, NgStyle]
 })
 export class LinkExampleComponent {
-    arrowRight$: BehaviorSubject<string> = new BehaviorSubject<string>('slim-arrow-right');
-    arrowLeft$: BehaviorSubject<string> = new BehaviorSubject<string>('slim-arrow-left');
+    readonly arrowRight = computed(() => (this._rtlService?.rtl() ? 'slim-arrow-left' : 'slim-arrow-right'));
 
-    constructor() {
-        const { rtl: rtl$ } = inject(RtlService, { optional: true }) || { rtl: of(false) };
-        rtl$.pipe(takeUntilDestroyed()).subscribe((value) => {
-            this.arrowRight$.next(value ? 'slim-arrow-left' : 'slim-arrow-right');
-            this.arrowLeft$.next(value ? 'slim-arrow-right' : 'slim-arrow-left');
-        });
-    }
+    readonly arrowLeft = computed(() => (this._rtlService?.rtl() ? 'slim-arrow-right' : 'slim-arrow-left'));
+
+    private readonly _rtlService = inject(RtlService, { optional: true });
 }

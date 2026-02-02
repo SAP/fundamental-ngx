@@ -44,7 +44,7 @@
 <ng-template #processType>
     <fdp-icon-tab-bar-process-type
         [tabs]="_tabs$()"
-        [isRtl]="_rtl$()"
+        [isRtl]="isRtl()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode()"
@@ -57,7 +57,7 @@
     <fdp-icon-tab-bar-filter-type
         [tabs]="_tabs$()"
         [showTotalTab]="showTotalTab()"
-        [isRtl]="_rtl$()"
+        [isRtl]="isRtl()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode()"
@@ -70,7 +70,7 @@
     <fdp-icon-tab-bar-icon-type
         [showLabel]="iconTabType() === 'icon'"
         [tabs]="_tabs$()"
-        [isRtl]="_rtl$()"
+        [isRtl]="isRtl()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode()"
@@ -85,7 +85,7 @@
         [tabs]="_tabs$()"
         [multiClick]="multiClick()"
         [layoutMode]="layoutMode()"
-        [isRtl]="_rtl$()"
+        [isRtl]="isRtl()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode()"

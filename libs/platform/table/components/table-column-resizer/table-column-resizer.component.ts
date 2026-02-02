@@ -9,7 +9,6 @@ import {
     Inject,
     NgZone,
     OnInit,
-    Optional,
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
@@ -40,7 +39,10 @@ export class PlatformTableColumnResizerComponent implements OnInit {
     private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     constructor(
@@ -48,8 +50,7 @@ export class PlatformTableColumnResizerComponent implements OnInit {
         private readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _renderer: Renderer2,
         private readonly _elmRef: ElementRef,
-        @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Inject(DOCUMENT) private readonly _document: Document | null
     ) {}
 
     /** @hidden */
@@ -75,12 +76,12 @@ export class PlatformTableColumnResizerComponent implements OnInit {
                     this._renderer.setStyle(
                         this._elmRef.nativeElement,
                         'left',
-                        this._rtl$() ? 'auto' : `${position}px`
+                        this._isRtl() ? 'auto' : `${position}px`
                     );
                     this._renderer.setStyle(
                         this._elmRef.nativeElement,
                         'right',
-                        !this._rtl$() ? 'auto' : `${position}px`
+                        !this._isRtl() ? 'auto' : `${position}px`
                     );
                 });
 

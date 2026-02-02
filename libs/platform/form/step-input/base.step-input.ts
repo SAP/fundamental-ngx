@@ -169,7 +169,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     readonly _textAlign$ = computed(() => {
         const align = this._align$();
 
-        const isRtl = !!this._rtlService?.rtlSignal();
+        const isRtl = this._rtlService?.rtl() ?? false;
 
         if (!ALIGN_INPUT_OPTIONS_LIST.includes(align!)) {
             return null;
