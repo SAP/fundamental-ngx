@@ -1,14 +1,5 @@
 @if (labelPosition() === 'left' || labelPosition() === 'top') {
-    <span
-        [class.fd-status-indicator__label--sm]="labelSize() === 'sm'"
-        [class.fd-status-indicator__label--md]="labelSize() === 'md'"
-        [class.fd-status-indicator__label--lg]="labelSize() === 'lg'"
-        [class.fd-status-indicator__label--xl]="labelSize() === 'xl'"
-        [class.fd-status-indicator__label--top]="labelPosition() === 'top'"
-        [class.fd-status-indicator__label--left]="labelPosition() === 'left'"
-        class="fd-status-indicator__label"
-        >{{ statusLabel() }}
-    </span>
+    <span [class]="_labelCssClass()">{{ statusLabel() }} </span>
 }
 <svg
     [attr.id]="id()"
@@ -22,16 +13,7 @@
     <ng-container [ngTemplateOutlet]="svgTemplate"></ng-container>
 </svg>
 @if (labelPosition() === 'right' || labelPosition() === 'bottom') {
-    <span
-        [class.fd-status-indicator__label--sm]="labelSize() === 'sm'"
-        [class.fd-status-indicator__label--md]="labelSize() === 'md'"
-        [class.fd-status-indicator__label--lg]="labelSize() === 'lg'"
-        [class.fd-status-indicator__label--xl]="labelSize() === 'xl'"
-        [class.fd-status-indicator__label--right]="labelPosition() === 'right'"
-        [class.fd-status-indicator__label--bottom]="labelPosition() === 'bottom'"
-        class="fd-status-indicator__label"
-        >{{ statusLabel() }}
-    </span>
+    <span [class]="_labelCssClass()">{{ statusLabel() }} </span>
 }
 <ng-template #svgTemplate>
     @for (path of path(); track path; let i = $index) {

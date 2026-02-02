@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -95,7 +96,7 @@ export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
     readonly ariaRoleDescription = input<Nullable<string>>();
 
     /** Aria Focusable for the Status Indicator. */
-    readonly focusable = input(false);
+    readonly focusable = input(false, { transform: booleanAttribute });
 
     /** Aria Role for the Status Indicator. */
     readonly role = input<Nullable<string>>();
@@ -167,6 +168,16 @@ export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
             this.labelPosition() === 'right' || this.labelPosition() === 'left'
                 ? 'fd-status-indicator--horizontal-label'
                 : ''
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
+
+    protected readonly _labelCssClass = computed(() =>
+        [
+            'fd-status-indicator__label',
+            this.labelSize() ? `fd-status-indicator__label--${this.labelSize()}` : '',
+            this.labelPosition() ? `fd-status-indicator__label--${this.labelPosition()}` : ''
         ]
             .filter(Boolean)
             .join(' ')
