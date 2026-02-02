@@ -1,65 +1,40 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnInit,
+    computed,
+    input,
     ViewEncapsulation
 } from '@angular/core';
 
 let layoutPanelUniqueId = 0;
 
-/**
- * Layout Panels are used to encapsulate part of the content, form elements, lists, collections, etc., on a page.
- */
 @Component({
     selector: 'fd-layout-panel',
     templateUrl: './layout-panel.component.html',
-    host: {
-        '[class.fd-has-display-block]': 'true'
-    },
     encapsulation: ViewEncapsulation.None,
     styleUrl: './layout-panel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    host: {
+        class: 'fd-layout-panel fd-has-display-block',
+        '[attr.id]': 'id()',
+        '[class.fd-layout-panel--transparent]': 'transparent()',
+        '[style.background-image]': 'backgroundImageUrl()'
+    }
 })
-export class LayoutPanelComponent implements OnChanges, OnInit {
-    /** @Input Background image of the panel. */
-    @Input()
-    backgroundImage: string;
+export class LayoutPanelComponent {
+    /** Background image of the panel. */
+    readonly backgroundImage = input<string | null>();
 
     /** Id for the layout panel element. */
-    @Input()
-    id: string = 'fd-layout-panel-' + layoutPanelUniqueId++;
-
-    /** @hidden */
-    @HostBinding('class.fd-layout-panel')
-    fdLayoutPanelClass = true;
+    readonly id = input('fd-layout-panel-' + ++layoutPanelUniqueId);
 
     /** Whether the background of the panel should be transparent. */
-    @Input()
-    @HostBinding('class.fd-layout-panel--transparent')
-    transparent = false;
+    readonly transparent = input(false, { transform: booleanAttribute });
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {}
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this._applyBackgroundImage();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._applyBackgroundImage();
-    }
-
-    /** @hidden */
-    private _applyBackgroundImage(): void {
-        if (this.backgroundImage) {
-            (this.elRef.nativeElement as HTMLElement).style['background-image'] = 'url("' + this.backgroundImage + '")';
-        }
-    }
+    protected readonly backgroundImageUrl = computed(() => {
+        const image = this.backgroundImage();
+        return image ? `url("${image}")` : null;
+    });
 }
