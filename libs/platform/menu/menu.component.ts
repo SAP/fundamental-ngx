@@ -5,18 +5,19 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ContentChildren,
     EventEmitter,
+    inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable, Subscription, merge } from 'rxjs';
+import { merge, Observable, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
@@ -42,8 +43,7 @@ let menuIdCounter = 0;
     styleUrl: './menu.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()],
-    standalone: true
+    providers: [contentDensityObserverProviders()]
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
     /** Menu ID */
@@ -90,11 +90,14 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     // eslint-disable-next-line @angular-eslint/no-output-native
     @Output() close: EventEmitter<MenuCloseMethod> = new EventEmitter();
 
-    /** Menu direction */
-    direction: 'ltr' | 'rtl' = 'ltr';
-
     /** @hidden */
     menuId: string;
+
+    /** @hidden */
+    readonly contentDensityObserver = inject(ContentDensityObserver);
+
+    /** Menu direction */
+    protected readonly direction = computed(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     private _id: string;
@@ -106,19 +109,10 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private _tabSubscription = Subscription.EMPTY;
 
     /** @hidden */
-    private _dirChangeSubscription = Subscription.EMPTY;
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    constructor(
-        @Optional() private _rtl: RtlService,
-        readonly contentDensityObserver: ContentDensityObserver
-    ) {
-        if (this._rtl) {
-            this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
-                this.direction = value ? 'rtl' : 'ltr';
-                this._setMenuItemCascadeDirection();
-            });
-        }
+    constructor() {
         warnOnce(`MenuComponent is deprecated. Use 'fd-menu' from '@fundamental-ngx/core/menu' instead.`);
     }
 
@@ -144,7 +138,6 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     ngOnDestroy(): void {
         this.close.complete();
         this._tabSubscription.unsubscribe();
-        this._dirChangeSubscription.unsubscribe();
         this._keyManager?.destroy();
     }
 
@@ -224,8 +217,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
      */
     _cascadesRight(): boolean {
         return (
-            (this.xPosition === 'after' && this.direction === 'ltr') ||
-            (this.xPosition === 'before' && this.direction === 'rtl')
+            (this.xPosition === 'after' && this.direction() === 'ltr') ||
+            (this.xPosition === 'before' && this.direction() === 'rtl')
         );
     }
 
@@ -235,8 +228,8 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
      */
     _cascadesLeft(): boolean {
         return (
-            (this.xPosition === 'after' && this.direction === 'rtl') ||
-            (this.xPosition === 'before' && this.direction === 'ltr')
+            (this.xPosition === 'after' && this.direction() === 'rtl') ||
+            (this.xPosition === 'before' && this.direction() === 'ltr')
         );
     }
 }

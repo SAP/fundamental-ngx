@@ -17,7 +17,7 @@
         (isOpenChange)="_onPopoverOpenChange($event)"
         [focusTrapped]="true"
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
-        [placement]="_popoverPlacement$()"
+        [placement]="popoverPlacement()"
     >
         <fd-popover-body [ngClass]="_navigation.classList$()" role="menu">
             <ul

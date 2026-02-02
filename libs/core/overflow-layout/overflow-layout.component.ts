@@ -3,31 +3,33 @@ import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
+    effect,
     ElementRef,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     NgZone,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
+    untracked,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation,
-    booleanAttribute
+    ViewEncapsulation
 } from '@angular/core';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subject, Subscription, debounceTime, filter, first, fromEvent, startWith } from 'rxjs';
+import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
 import { OverflowItemContainerRefDirective } from './directives/overflow-item-container-ref.directive';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowLayoutPopoverContentDirective } from './directives/overflow-layout-popover-content.directive';
@@ -212,12 +214,14 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     private _keyboardEventsManager: Nullable<FocusKeyManager<OverflowLayoutFocusableItem>>;
 
     /** @hidden */
+    private readonly _rtl = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _ngZone: NgZone,
         protected _cdr: ChangeDetectorRef,
-        protected _overflowLayoutService: OverflowLayoutService,
-        @Optional() private readonly _rtl: RtlService
+        protected _overflowLayoutService: OverflowLayoutService
     ) {
         this._subscription.add(
             this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => {
@@ -225,6 +229,21 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
                 this._overflowLayoutService.fitVisibleItems();
             })
         );
+
+        // React to RTL changes for keyboard navigation
+        effect(() => {
+            if (!this._rtl || !this.enableKeyboardNavigation) {
+                return;
+            }
+
+            const isRtl = this._rtl.rtl();
+            this._dir = isRtl ? 'rtl' : 'ltr';
+
+            // Use untracked to avoid tracking _keyboardEventsManager
+            untracked(() => {
+                this._keyboardEventsManager = this._keyboardEventsManager?.withHorizontalOrientation(this._dir);
+            });
+        });
     }
 
     /** Overflow Layout more button text */
@@ -285,7 +304,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         );
 
         this._setFocusKeyManager();
-        this._subscribeToRtl();
 
         // There might be cases when the elements are not rendered yet, but the component is initialized already.
         // It may happen when it's inside the components that are wrapping ng-content with ng-containers and so on.
@@ -372,27 +390,12 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         if (!this.enableKeyboardNavigation) {
             return;
         }
-        this._dir = this._rtl?.rtl.value ? 'rtl' : 'ltr';
+        this._dir = this._rtl?.rtl() ? 'rtl' : 'ltr';
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this._focusableOverflowItems)
             .withWrap()
             .withHorizontalOrientation(this._dir)
             .withVerticalOrientation()
             .skipPredicate((item) => !item.navigable || item.hidden);
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtl || !this.enableKeyboardNavigation) {
-            return;
-        }
-
-        this._subscription.add(
-            this._rtl.rtl.subscribe((isRtl) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-
-                this._keyboardEventsManager = this._keyboardEventsManager?.withHorizontalOrientation(this._dir);
-            })
-        );
     }
 }

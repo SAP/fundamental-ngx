@@ -4,17 +4,18 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostListener,
+    inject,
     Injector,
     Input,
     isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     SimpleChanges,
     TemplateRef,
@@ -98,6 +99,9 @@ function isOptionItemBase<ValueType = any>(candidate: unknown): candidate is Opt
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
+    host: {
+        '(focusout)': '_focusOut($event)'
+    },
     imports: [
         NgTemplateOutlet,
         PopoverComponent,
@@ -437,9 +441,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     readonly _viewModel$: Observable<ViewModel<ItemType, ValueType>> = this._getViewModel();
 
-    /** @hidden */
-    _dir: string;
-
     /** typeahead matcher function */
     get typeAheadMatcher(): (item: string, searchTerm: string) => boolean {
         if (this.includes) {
@@ -449,22 +450,48 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
+    readonly _contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    /** @hidden */
+    private readonly _dir = computed(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
-    constructor(
-        readonly _contentDensityObserver: ContentDensityObserver,
-        public readonly elementRef: ElementRef<HTMLElement>,
-        private readonly _changeDetRef: ChangeDetectorRef,
-        private readonly _dynamicComponentService: DynamicComponentService,
-        private readonly _injector: Injector,
-        private readonly _viewContainerRef: ViewContainerRef,
-        @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _focusTrapService: FocusTrapService
-    ) {}
+    private readonly _changeDetRef = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _dynamicComponentService = inject(DynamicComponentService);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _viewContainerRef = inject(ViewContainerRef);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _focusTrapService = inject(FocusTrapService, { optional: true });
+
+    /** @hidden */
+    constructor() {
+        // React to RTL changes - rebuild CSS class when direction changes
+        effect(() => {
+            const dir = this._dir();
+            if (dir) {
+                this.buildComponentCssClass();
+            }
+        });
+    }
 
     /** @hidden CssClassBuilder interface implementation
      * function must return single string
@@ -473,7 +500,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @applyCssClass
     buildComponentCssClass(): string[] {
         // TODO: this icon flip may be addressed in styles in the future
-        if (this.glyph === 'value-help' && this._dir === 'rtl') {
+        if (this.glyph === 'value-help' && this._dir() === 'rtl') {
             const icon = this.elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
             if (icon) {
                 icon.style.transform = 'scaleX(-1)';
@@ -481,14 +508,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
 
         return ['fd-multi-input', 'fd-multi-input-custom', this.class];
-    }
-
-    /** @hidden */
-    @HostListener('focusout', ['$event'])
-    protected _focusOut(event: FocusEvent): void {
-        if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
-            this.onTouched();
-        }
     }
 
     /** @hidden */
@@ -500,13 +519,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-
-        this._subscriptions.add(
-            this._rtlService?.rtl.subscribe((isRtl) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-                this.buildComponentCssClass();
-            })
-        );
 
         if (!this.inputId) {
             this.inputId = uuidv4();
@@ -821,6 +833,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     _close(): void {
         this.searchInputElement.nativeElement.focus();
         this.openChangeHandle(false);
+    }
+
+    /** @hidden */
+    protected _focusOut(event: FocusEvent): void {
+        if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
+            this.onTouched();
+        }
     }
 
     /** @hidden */

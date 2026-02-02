@@ -33,7 +33,7 @@
                     class="fd-shellbar__button"
                     fd-button
                     fdType="transparent"
-                    [glyph]="_rtl$() ? 'slim-arrow-right' : 'nav-back'"
+                    [glyph]="navigationIcon()"
                     (fdkClicked)="_backClicked($event)"
                     [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
                     [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"

@@ -10,7 +10,6 @@ import {
     ComponentRef,
     DestroyRef,
     EmbeddedViewRef,
-    HostListener,
     OnDestroy,
     OnInit,
     TemplateRef,
@@ -50,10 +49,11 @@ import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-level]': 'ariaLevel()',
         '[attr.role]': 'role()',
-        '[attr.dir]': '_dir$()',
+        '[attr.dir]': '_dir()',
         '[attr.id]': 'id',
         '[tabindex]': '0',
-        '[style.width]': 'width'
+        '[style.width]': 'width',
+        '(window:keyup)': '_closeNotificationEsc($event)'
     },
     providers: [
         {
@@ -61,8 +61,7 @@ import { FD_NOTIFICATION, FD_NOTIFICATION_FOOTER, FD_NOTIFICATION_PARAGRAPH, FD_
             useExisting: NotificationComponent
         }
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
@@ -75,7 +74,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     mobile = input(false);
 
     /** @hidden */
-    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
+    _dir = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** ID of the notification */
     id: string;
@@ -188,7 +187,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     }
 
     /** @hidden Listen and close notification on Escape key */
-    @HostListener('window:keyup', ['$event'])
     _closeNotificationEsc(event: KeyboardEvent): void {
         if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
             this._notificationRef.dismiss('escape');

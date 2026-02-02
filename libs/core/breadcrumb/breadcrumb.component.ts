@@ -146,10 +146,10 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
     _items$ = signal<BreadcrumbItemComponent[]>([]);
 
     /** @hidden */
-    _placement$ = computed<Placement>(() => (this._rtl$() ? 'bottom-end' : 'bottom-start'));
-
-    /** Element reference. */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    /** @hidden */
+    protected readonly placement = computed<Placement>(() => (this._rtlService?.rtl() ? 'bottom-end' : 'bottom-start'));
 
     /** @hidden */
     protected readonly _cssClass = computed(() => {
@@ -165,9 +165,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
-
-    /** @hidden */
-    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     private readonly _lang$ = inject(FD_LANGUAGE);

@@ -254,7 +254,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
 
     /** @hidden */
     protected _handleMenuLeftArrowKey(): void {
-        if (this._rtl()) {
+        if (this.rtl()) {
             this.menuExpand.emit();
         } else {
             this.menuCollapse.emit();
@@ -263,7 +263,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
 
     /** @hidden */
     protected _handleMenuRightArrowKey(): void {
-        if (this._rtl()) {
+        if (this.rtl()) {
             this.menuCollapse.emit();
         } else {
             this.menuExpand.emit();

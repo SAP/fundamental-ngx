@@ -37,7 +37,7 @@
                         <i
                             title="Navigate"
                             fd-table-icon
-                            [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
+                            glyph="slim-arrow-right"
                             [navigation]="true"
                             role="presentation"
                         ></i>
@@ -82,7 +82,7 @@
                         routerLink="/core/home"
                         aria-label="navigation"
                     >
-                        <i [class]="isRtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
+                        <i [class]="navigationArrow()"></i>
                     </button>
                 </td>
             </tr>
@@ -128,7 +128,7 @@
                             <i
                                 title="Navigate"
                                 fd-table-icon
-                                [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
+                                glyph="slim-arrow-right"
                                 [navigation]="true"
                                 role="presentation"
                             ></i>

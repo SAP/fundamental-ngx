@@ -25,14 +25,14 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
 export class DirectionalityComponent {
     readonly label = input<string>();
 
-    protected readonly isChecked = linkedSignal(() => this._rtlService.rtlSignal());
+    protected readonly isChecked = linkedSignal(() => this._rtlService?.rtl() ?? false);
 
     protected readonly id = computed(() => {
         const labelValue = this.label();
         return labelValue ? `${labelValue}${Date.now()}-rtl` : `${Date.now()}6`;
     });
 
-    private readonly _rtlService = inject(RtlService);
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     constructor() {
         effect(() => {
@@ -48,7 +48,6 @@ export class DirectionalityComponent {
     }
 
     protected onChange(checked: boolean): void {
-        this.isChecked.set(checked);
-        this._rtlService.rtl.next(checked);
+        this._rtlService?.rtl.set(checked);
     }
 }

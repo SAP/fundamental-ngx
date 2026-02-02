@@ -21,7 +21,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     Pipe,
     PipeTransform,
@@ -328,9 +327,6 @@ export class SearchFieldComponent
     _clearId = '';
 
     /** @hidden */
-    readonly _dir$ = computed<Direction>(() => (this._rtl?.rtlSignal() ? 'rtl' : 'ltr'));
-
-    /** @hidden */
     isOpen = false;
 
     /** @hidden */
@@ -341,6 +337,9 @@ export class SearchFieldComponent
 
     /** @hidden */
     _isOpen$ = signal(false);
+
+    /** @hidden */
+    protected readonly dir = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
@@ -369,12 +368,14 @@ export class SearchFieldComponent
     /** @hidden */
     private _appearance: Appearance;
 
+    /** hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,

@@ -9,7 +9,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -318,10 +317,6 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     /** @hidden */
     _mainSearch = '';
 
-    /** handles rtl service
-     * @hidden */
-    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
-
     /** @hidden */
     selectedTab: VhdTab | null = null;
 
@@ -337,6 +332,10 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
     _firstLoadingDone = false;
+
+    /** handles rtl service
+     * @hidden */
+    protected readonly dir = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     private _destroyed = inject(DestroyRef);
@@ -365,11 +364,15 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     private readonly _onDestroy$ = new Subject<void>();
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        private readonly _dialogService: DialogService,
-        @Optional() private readonly _rtlService: RtlService
+        private readonly _dialogService: DialogService
     ) {
         super();
         /** Default display function for define conditions */

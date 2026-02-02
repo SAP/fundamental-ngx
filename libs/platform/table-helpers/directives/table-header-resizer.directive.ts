@@ -1,6 +1,6 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { DOCUMENT, DestroyRef, Directive, ElementRef, NgZone, OnInit, inject } from '@angular/core';
+import { DOCUMENT, DestroyRef, Directive, ElementRef, NgZone, OnInit, computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FocusableCellPosition,
@@ -25,9 +25,12 @@ export class TableHeaderResizerDirective implements OnInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService, {
+    private readonly _rtlService = inject(RtlService, {
         optional: true
     });
+
+    /** @hidden */
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     private readonly _elmRef = inject(ElementRef);
@@ -59,7 +62,7 @@ export class TableHeaderResizerDirective implements OnInit {
                 .subscribe((event) => {
                     if (
                         (KeyUtil.isKeyCode(event, LEFT_ARROW) ||
-                            (this._rtl?.rtl.value && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
+                            (this._isRtl() && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
                         event.shiftKey &&
                         this._headerCellFocused
                     ) {
@@ -68,7 +71,7 @@ export class TableHeaderResizerDirective implements OnInit {
                         event.stopImmediatePropagation();
                     } else if (
                         (KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
-                            (this._rtl?.rtl.value && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
+                            (this._isRtl() && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
                         event.shiftKey &&
                         this._headerCellFocused
                     ) {

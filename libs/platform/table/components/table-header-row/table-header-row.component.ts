@@ -148,9 +148,6 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     }
 
     /** @hidden */
-    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
-
-    /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
 
     /** @hidden */
@@ -167,6 +164,9 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
 
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
+
+    /** @hidden */
+    protected readonly isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {

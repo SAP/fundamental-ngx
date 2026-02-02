@@ -1,8 +1,7 @@
 import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, inject, tick, waitForAsync } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { createKeyboardEvent, createMouseEvent } from '@fundamental-ngx/platform/shared';
@@ -813,7 +812,7 @@ describe('Cascading Menu - Position After, RTL', () => {
     let button: ElementRef<HTMLElement>;
 
     const dirProvider = {
-        rtl: of(true)
+        rtl: signal(true)
     };
 
     beforeEach(waitForAsync(() => {
@@ -943,7 +942,7 @@ describe('Cascading Menu - Position Before, RTL', () => {
     let button: ElementRef<HTMLElement>;
 
     const dirProvider = {
-        rtl: of(true)
+        rtl: signal(true)
     };
 
     beforeEach(waitForAsync(() => {
@@ -1064,7 +1063,7 @@ describe('Multiple triggers sharing same menu', () => {
     let overlayContainerEl: HTMLElement;
 
     const dirProvider = {
-        rtl: of(false)
+        rtl: signal(false)
     };
 
     beforeEach(waitForAsync(() => {

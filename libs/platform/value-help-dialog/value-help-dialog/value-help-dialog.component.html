@@ -1,11 +1,11 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #container>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-        <fd-dialog-header [attr.dir]="_dir$()">
+        <fd-dialog-header [attr.dir]="dir()">
             <ng-template fdkTemplate="header">
                 <ng-template [ngTemplateOutlet]="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-template>
             </ng-template>
         </fd-dialog-header>
-        <fd-dialog-body [attr.dir]="_dir$()">
+        <fd-dialog-body [attr.dir]="dir()">
             @if (!mobile) {
                 <ng-template [ngTemplateOutlet]="advancedSearchContent"></ng-template>
             }
@@ -21,7 +21,7 @@
                 }
             </div>
         </fd-dialog-body>
-        <fd-dialog-footer [attr.dir]="_dir$()">
+        <fd-dialog-footer [attr.dir]="dir()">
             <ng-template fdkTemplate="footer">
                 @if (!isMobileAdvancedSearchActive) {
                     <div

@@ -55,7 +55,7 @@ describe('NestedListDirectives', () => {
     });
 
     it('Expand Icon Element should have good classes and react on click', () => {
-        expect(expandIconElement.expanded).toBeFalsy();
+        expect(expandIconElement.expanded()).toBeFalsy();
 
         const spy = jest.spyOn((<any>expandIconElement)._itemService.toggle, 'next');
 
@@ -64,7 +64,7 @@ describe('NestedListDirectives', () => {
         fixture.detectChanges();
 
         expect(spy).toHaveBeenCalled();
-        expect(expandIconElement.expanded).toBeTruthy();
+        expect(expandIconElement.expanded()).toBeTruthy();
     });
 
     it('Title should give valid title string', () => {

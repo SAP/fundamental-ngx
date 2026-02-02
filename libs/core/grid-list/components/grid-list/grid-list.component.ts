@@ -117,18 +117,21 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _cd = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _elRef = inject(ElementRef);
+
+    /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
 
     /** @hidden */
-    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed<boolean>(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
-    constructor(
-        private readonly _cd: ChangeDetectorRef,
-        private _elRef: ElementRef
-    ) {
+    constructor() {
         super();
         this._selectedItems$ = this._selectedItemsSubject$.asObservable();
         const selectedItemsSub = this._selectedItems$
@@ -367,9 +370,9 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         const itemsPerRow = this._getItemsPerRow(
             this._gridListItems.toArray()[currentItemIndex]._gridListItem.nativeElement
         );
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._isRtl() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
             return currentItemIndex - 1;
-        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))) {
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._isRtl() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))) {
             return currentItemIndex + 1;
         } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             return currentItemIndex - itemsPerRow;

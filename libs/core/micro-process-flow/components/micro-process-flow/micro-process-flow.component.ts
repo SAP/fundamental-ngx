@@ -5,14 +5,14 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     ContentChildren,
+    effect,
     ElementRef,
-    HostListener,
     inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     QueryList,
     ViewChild,
     ViewEncapsulation
@@ -33,7 +33,8 @@ import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-micro-process-flow',
-        '[class.fd-micro-process-flow--independent-steps]': 'independentSteps'
+        '[class.fd-micro-process-flow--independent-steps]': 'independentSteps',
+        '(keydown)': 'handleKeyboardEvent($event)'
     },
     providers: [
         {
@@ -101,11 +102,11 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     }
 
     /** @hidden */
-    private _isRtl = false;
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     private get _paginationDirection(): number {
-        return this._isRtl ? 1 : -1;
+        return this._isRtl() ? 1 : -1;
     }
 
     /** @hidden */
@@ -121,15 +122,27 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     private _focusedElementIndex = -1;
 
     /** @hidden */
-    constructor(
-        private _cd: ChangeDetectorRef,
-        @Optional() private _rtl: RtlService
-    ) {
+    private readonly _cd = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    constructor() {
         inject(ContentDensityObserver).subscribe();
+
+        // React to RTL changes - re-paginate to adjust scroll direction
+        effect(() => {
+            const rtl = this._rtlService?.rtl();
+
+            // Only re-paginate when RTL service exists and content is scrolled
+            if (rtl !== undefined && this.showPreviousButton) {
+                this._paginate(0);
+            }
+        });
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, this._navigationKeys)) {
             const isRightKey = KeyUtil.isKeyCode(event, RIGHT_ARROW);
@@ -166,18 +179,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
                 }
             })
         );
-
-        if (this._rtl) {
-            this._subscriptions.add(
-                this._rtl.rtl.subscribe((value) => {
-                    this._isRtl = value;
-
-                    if (this.showPreviousButton) {
-                        this._paginate(0);
-                    }
-                })
-            );
-        }
     }
 
     /** @hidden */

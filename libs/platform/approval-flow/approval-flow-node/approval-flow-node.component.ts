@@ -10,7 +10,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     TemplateRef,
@@ -20,7 +19,6 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { GridListItemComponent } from '@fundamental-ngx/core/grid-list';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
@@ -268,8 +266,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     constructor(
         private readonly _elRef: ElementRef,
-        private readonly _cdr: ChangeDetectorRef,
-        @Optional() private readonly _rtlService: RtlService
+        private readonly _cdr: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -336,8 +333,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         this._checkNodeStatus();
-
-        this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._cdr.markForCheck()));
     }
 
     /** @hidden */

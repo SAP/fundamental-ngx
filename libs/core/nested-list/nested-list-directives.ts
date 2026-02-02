@@ -1,15 +1,13 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
+    computed,
     Directive,
     ElementRef,
-    HostBinding,
-    HostListener,
+    inject,
     Input,
-    Optional,
-    ViewEncapsulation,
-    computed
+    signal,
+    ViewEncapsulation
 } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -19,20 +17,18 @@ let uniqueId = 0;
 
 @Directive({
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]',
-    standalone: true
+    host: {
+        class: 'fd-nested-list__group-header',
+        '[attr.id]': 'id'
+    }
 })
 export class NestedListHeaderDirective {
     /** Id of the element. */
     @Input()
-    @HostBinding('attr.id')
     id: string | null = `fd-nested-list-group-header-${++uniqueId}`;
 
     /** @hidden */
-    @HostBinding('class.fd-nested-list__group-header')
-    fdNestedListHeaderClass = true;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
     /** Get the header title */
     get title(): string {
@@ -44,34 +40,30 @@ export class NestedListHeaderDirective {
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]',
     template: `<ng-content></ng-content>`,
-    standalone: true
+    host: {
+        class: 'fd-nested-list__icon',
+        '[attr.role]': 'role'
+    }
 })
 export class NestedListIconComponent extends IconComponent {
     /** Role attribute */
     @Input()
-    @HostBinding('attr.role')
     role = 'presentation';
-
-    /** @hidden */
-    @HostBinding('class.fd-nested-list__icon')
-    fdNestedListIconClass = true;
 }
 
 @Directive({
     selector: '[fdNestedDirectivesTitle], [fd-nested-list-title]',
-    standalone: true
+    host: {
+        class: 'fd-nested-list__title'
+    }
 })
 export class NestedListTitleDirective {
     /** @hidden */
-    @HostBinding('class.fd-nested-list__title')
-    fdNestedListTitleClass = true;
-
-    /** @hidden */
-    constructor(private elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
     /** Returns element's InnerText */
     getInnerText(): string {
-        return this.elementRef && this.elementRef.nativeElement.textContent;
+        return this._elementRef?.nativeElement.textContent;
     }
 }
 
@@ -80,66 +72,57 @@ export class NestedListTitleDirective {
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
     template: `
         <ng-content></ng-content>
-        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : sideArrowIcon$()"></fd-icon>
+        <fd-icon [glyph]="expandIcon()"></fd-icon>
     `,
     host: {
         'aria-haspopup': 'true',
-        tabindex: '-1'
+        tabindex: '-1',
+        class: 'fd-nested-list__button fd-button',
+        '[class.is-expanded]': 'expanded()',
+        '[attr.aria-expanded]': 'expanded()',
+        '[attr.aria-hidden]': 'true',
+        '(click)': 'onClick($event)',
+        '(focus)': 'onFocus()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [IconComponent]
 })
 export class NestedListExpandIconComponent {
-    /** @hidden */
-    @HostBinding('class.fd-nested-list__button')
-    fdNestedListTitleClass = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-button')
-    fdButtonClass = true;
-
     /**
      * @hidden
      * Attribute controlled by the parent `NestedItemDirective`
      */
-    @HostBinding('class.is-expanded')
-    @HostBinding('attr.aria-expanded')
-    expanded = false;
+    readonly expanded = signal(false);
 
     /** @hidden */
-    @HostBinding('attr.aria-hidden')
-    ariaHidden = true;
+    readonly expandIcon = computed(() => {
+        if (this.expanded()) {
+            return 'navigation-down-arrow';
+        }
+        return this._rtlService?.rtl() ? 'navigation-left-arrow' : 'navigation-right-arrow';
+    });
 
     /** @hidden */
-    sideArrowIcon$ = computed(() =>
-        this._rtlService?.rtlSignal() ? 'navigation-left-arrow' : 'navigation-right-arrow'
-    );
+    private readonly _itemService = inject(NestedItemService);
 
     /** @hidden */
-    constructor(
-        private _itemService: NestedItemService,
-        private _changeDetRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
-    ) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** Mouse event handler */
-    @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this.expanded = !this.expanded;
-        this._itemService.toggle.next(this.expanded);
+        this.expanded.update((v) => !v);
+        this._itemService.toggle.next(this.expanded());
         event.stopPropagation();
     }
 
     /** Handler for focus events */
-    @HostListener('focus')
     onFocus(): void {
         this._itemService.focus.next();
     }
 
     /** @hidden */
     changeExpandedState(expanded: boolean): void {
-        this.expanded = expanded;
-        this._changeDetRef.detectChanges();
+        this.expanded.set(expanded);
     }
 }

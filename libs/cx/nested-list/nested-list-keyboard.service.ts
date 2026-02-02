@@ -1,5 +1,5 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { Subject } from 'rxjs';
@@ -20,10 +20,10 @@ export class NestedListKeyboardService {
     readonly refresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(
-        @Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService,
-        @Optional() private _rtlService: RtlService | null
-    ) {}
+    private readonly keyboardService = inject(MenuKeyboardService);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /**
      * Function called after refresh$ event is triggered.
@@ -75,7 +75,7 @@ export class NestedListKeyboardService {
      */
     private _handleKeyDown(keyboardEvent: KeyboardEvent, index: number, items: NestedItemInterface[]): void {
         const item: NestedItemInterface = items[index];
-        const isRtl = !!this._rtlService?.rtlSignal();
+        const isRtl = this._rtlService?.rtl() ?? false;
 
         if (
             (!isRtl && KeyUtil.isKeyCode(keyboardEvent, RIGHT_ARROW)) ||

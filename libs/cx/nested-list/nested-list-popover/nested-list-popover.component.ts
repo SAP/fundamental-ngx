@@ -7,7 +7,8 @@ import {
     Optional,
     ViewChild,
     ViewEncapsulation,
-    computed
+    computed,
+    inject
 } from '@angular/core';
 
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
@@ -48,7 +49,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
     parentItemElement: NestedItemInterface;
 
     /** @hidden */
-    placement$ = computed(() => (this._rtlService?.rtlSignal() ? 'left-start' : 'right-start'));
+    placement = computed(() => (this._rtlService?.rtl() ? 'left-start' : 'right-start'));
 
     /** @hidden */
     open = false;
@@ -57,10 +58,12 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
     _closeScrollStrategy: ScrollStrategy;
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private _keyboardNestService: NestedListKeyboardService,
         @Optional() private _itemService: NestedItemService,
-        @Optional() private _rtlService: RtlService,
         private _overlay: Overlay
     ) {
         this._listenOnKeyboardRefresh();
