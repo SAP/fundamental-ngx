@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ObjectListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
 
@@ -31,7 +31,7 @@ export interface Product {
 @Component({
     selector: 'fdp-platform-object-list-item-border-less-example',
     templateUrl: './platform-object-list-item-border-less-example.component.html',
-    imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusComponent]
+    imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerComponent, ObjectStatusComponent]
 })
 export class PlatformObjectListItemBorderLessExampleComponent {
     items: Product[] = [

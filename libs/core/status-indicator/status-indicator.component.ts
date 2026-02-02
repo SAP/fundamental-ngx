@@ -74,12 +74,12 @@ export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
     readonly statusLabel = input<string>();
 
     /**
-     * positioning of the status indicator image withing the defined height and width .
+     * positioning of the status indicator image within the defined height and width .
      */
     readonly viewBox = input<string>();
 
     /**
-     * boolean value to be marked as a clickable
+     * boolean value to be marked as clickable
      */
     readonly clickable = input(false);
 
