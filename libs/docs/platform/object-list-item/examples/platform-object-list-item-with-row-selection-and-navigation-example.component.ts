@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FormsModule } from '@angular/forms';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
 import { ObjectListItemModule, PlatformListModule, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
@@ -150,7 +150,7 @@ export class ListDataProvider extends DataProvider<Product> {
         PlatformListModule,
         FormsModule,
         ObjectListItemModule,
-        ObjectMarkerModule,
+        ObjectMarkerComponent,
         ObjectStatusComponent
     ]
 })

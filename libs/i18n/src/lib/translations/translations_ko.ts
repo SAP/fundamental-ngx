@@ -99,6 +99,10 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '트리 항목 {itemDetails}, {selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
     coreObjectNumber: {
         emphasized: 'Emphasized',
         negative: 'Value State Error',
