@@ -1,26 +1,28 @@
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
-    NgZone,
-    Output,
-    TemplateRef,
-    ViewEncapsulation,
-    booleanAttribute,
     inject,
     input,
+    NgZone,
+    Output,
     signal,
-    viewChild
+    TemplateRef,
+    viewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
+import { KeyboardSupportItemInterface, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { Observable, Subject, asyncScheduler, observeOn, startWith, take } from 'rxjs';
+import { asyncScheduler, Observable, observeOn, startWith, Subject, take } from 'rxjs';
 
 let uniqueId = 0;
 let uniqueTextId = 0;
@@ -102,10 +104,60 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden */
     private _changeDetectionRef = inject(ChangeDetectorRef);
 
+    /** @hidden RTL service for direction detection */
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden Computed signal to track RTL state */
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
     /** @hidden */
     @HostListener('focusin')
     focusHandler(): void {
         this.focused.next(this);
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        if (!this.hasSubmenu() || this.mobile()) {
+            return;
+        }
+
+        const popoverInstance = this.popover();
+        if (!popoverInstance) {
+            return;
+        }
+
+        const isRtl = this._isRtl();
+
+        // In RTL mode, LEFT arrow opens submenu and RIGHT arrow closes it
+        // In LTR mode, RIGHT arrow opens submenu and LEFT arrow closes it
+        const openKey = isRtl ? LEFT_ARROW : RIGHT_ARROW;
+        const closeKey = isRtl ? RIGHT_ARROW : LEFT_ARROW;
+
+        if (KeyUtil.isKeyCode(event, openKey) && !this.isOpen()) {
+            event.preventDefault();
+            popoverInstance.open();
+        } else if (KeyUtil.isKeyCode(event, closeKey) && this.isOpen()) {
+            event.preventDefault();
+            popoverInstance.close();
+        }
+    }
+
+    /** @hidden Handle keyboard in popover body */
+    onPopoverBodyKeyDown(event: KeyboardEvent): void {
+        const isRtl = this._isRtl();
+        const closeKey = isRtl ? RIGHT_ARROW : LEFT_ARROW;
+
+        if (KeyUtil.isKeyCode(event, closeKey) && this.isOpen()) {
+            event.preventDefault();
+            const popoverInstance = this.popover();
+            if (popoverInstance) {
+                popoverInstance.close();
+            }
+        }
     }
 
     /** Handles submenu selection in mobile mode */

@@ -28,6 +28,7 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [KeyboardSupportService],
     styles: [
         `
             [fd-user-menu-sublist] {
