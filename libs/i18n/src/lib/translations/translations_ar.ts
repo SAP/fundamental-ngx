@@ -378,9 +378,14 @@ export default {
         synchronizeButtonTitle: 'مزامنة',
         searchSuggestionMessage: 'تم العثور على {count} من الاقتراحات.',
         searchSuggestionNavigateMessage: 'استخدم السهم المتجه لأعلى والسهم المتجه لأسفل للتنقل',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'الإعدادات',

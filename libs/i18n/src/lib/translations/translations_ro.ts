@@ -380,9 +380,14 @@ export default {
         synchronizeButtonTitle: 'Sincronizare',
         searchSuggestionMessage: '{count} sugestii găsite.',
         searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Setări',

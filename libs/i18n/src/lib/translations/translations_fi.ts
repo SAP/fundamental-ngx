@@ -379,9 +379,14 @@ export default {
         synchronizeButtonTitle: 'Synkronoi',
         searchSuggestionMessage: 'Löytyi {count} ehdotusta.',
         searchSuggestionNavigateMessage: 'navigoi ylä- ja alanuolilla',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Asetukset',

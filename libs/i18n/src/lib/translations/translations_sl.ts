@@ -379,9 +379,14 @@ export default {
         synchronizeButtonTitle: 'Sinhronizacija',
         searchSuggestionMessage: '{count} predlogov najdenih.',
         searchSuggestionNavigateMessage: 'za krmarjenje uporabite puščici navzgor in navzdol',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavitve',

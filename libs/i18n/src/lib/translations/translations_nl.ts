@@ -380,9 +380,14 @@ export default {
         synchronizeButtonTitle: 'Synchroniseren',
         searchSuggestionMessage: '{count} suggesties gevonden',
         searchSuggestionNavigateMessage: 'gebruik pijl-omhoog en pijl-omlaag om te bladeren',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Instellingen',

@@ -21,6 +21,10 @@
                     ? 'inherit'
                     : 'none'
             "
+            [attr.aria-label]="'platformSearchField.suggestionsWrapperAriaLabel' | fdTranslate"
+            aria-modal="false"
+            [attr.aria-describedby]="_popoverHeaderId + ' ' + _menuId + ' ' + _selectedSuggestionItemId"
+            [attr.id]="_popoverBodyId"
         >
             <fd-busy-indicator
                 [block]="true"
@@ -39,6 +43,7 @@
                             fd-bar
                             [initialSuggestionTitle]="true"
                             [barDesign]="initialSuggestionSubline() ? 'header-with-subheader' : 'header'"
+                            [attr.id]="_popoverHeaderId"
                         >
                             <div fd-bar-left>
                                 <span fd-title [twoLineClamp]="true" [headerSize]="6">
@@ -131,6 +136,8 @@
             appearance?.categoryDropdownButtonClass + (!!_currentCategory?.value ? ' is-selected' : '')
         "
         (valueChange)="setCurrentCategory($event)"
+        ariaHasPopup="dialog"
+        [ariaDescription]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : ''"
     >
         <li fd-option (itemSelect)="setCurrentCategory(null)">
             {{ 'platformSearchField.allButtonLabel' | fdTranslate }}
@@ -187,10 +194,11 @@
                 [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
                 [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
-                [attr.aria-controls]="!!_menuId ? _menuId : null"
+                [attr.aria-controls]="!!_popoverBodyId ? _popoverBodyId : null"
                 [attr.aria-expanded]="(_dropdownValues$ | async)?.length !== 0 ? (_isOpen$() ? 'true' : 'false') : null"
                 [attr.aria-haspopup]="(_dropdownValues$ | async)?.length !== 0"
                 autocomplete="off"
+                aria-autocomplete="both"
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit($event)"
                 [(ngModel)]="inputText"
@@ -271,21 +279,34 @@
 <ng-template #suggestionMenuTemplate>
     @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestionsFiltered) {
         @if (suggestionsFiltered?.length && !_onlyHeadersFiltered(suggestionsFiltered)) {
-            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)">
+            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)" #suggestionListEl>
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
                     @if (filteredSuggestion?.isGroupHeader) {
-                        <li fd-list-group-header class="fd-suggestion-header">
-                            <span fd-list-title>{{ filteredSuggestion?.value }}</span>
+                        <li role="group">
+                            <ul
+                                fd-list
+                                #groupHeaderList
+                                [searchResultsList]="true"
+                                [attr.aria-owns]="_getAriaOwnsForGroupHeader(groupHeaderList)"
+                            >
+                                <li
+                                    fd-list-group-header
+                                    [attr.aria-roledescription]="'platformSearchField.groupHeader' | fdTranslate"
+                                    class="fd-suggestion-header"
+                                >
+                                    <span fd-list-title>{{ filteredSuggestion?.value }}</span>
+                                </li>
+                                @for (
+                                    childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText;
+                                    track childSuggestion
+                                ) {
+                                    <ng-template
+                                        [ngTemplateOutlet]="suggestionItemTemplate"
+                                        [ngTemplateOutletContext]="{ filteredSuggestion: childSuggestion }"
+                                    ></ng-template>
+                                }
+                            </ul>
                         </li>
-                        @for (
-                            childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText;
-                            track childSuggestion
-                        ) {
-                            <ng-template
-                                [ngTemplateOutlet]="suggestionItemTemplate"
-                                [ngTemplateOutletContext]="{ filteredSuggestion: childSuggestion }"
-                            ></ng-template>
-                        }
                         @if (filteredSuggestion?.searchInScopeText || filteredSuggestion?.showMoreText) {
                             <ng-template
                                 [ngTemplateOutlet]="suggestionItemTemplate"
@@ -320,9 +341,11 @@
         [interactive]="true"
         [suggestion]="true"
         fdpSearchFieldSuggestion
-        (keydown.enter)="onItemClick(filteredSuggestion); $event.preventDefault()"
-        (keyup.space)="onItemClick(filteredSuggestion); $event.stopPropagation()"
-        (click)="onItemClick(filteredSuggestion)"
+        (keydown.enter)="onItemClick(filteredSuggestion, suggestionListItem); $event.preventDefault()"
+        (keyup.space)="onItemClick(filteredSuggestion, suggestionListItem); $event.stopPropagation()"
+        (keydown.f2)="_focusActionButton($event, suggestionListItem)"
+        (keydown.shift.f2)="_focusActionButton($event, suggestionListItem)"
+        (click)="onItemClick(filteredSuggestion, suggestionListItem)"
         [byline]="!!subline"
         #suggestionListItem
         (mouseenter)="_searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)"
@@ -331,6 +354,11 @@
             enableSelection() && filteredSuggestion === _selectedSuggestionItem && !filteredSuggestion.isGroupHeader
         "
         [counter]="filteredSuggestion.searchInScopeCounter"
+        [counterRole]="'tooltip'"
+        [counterAriaLabel]="
+            'platformSearchField.counterLabel' | fdTranslate: { count: filteredSuggestion.searchInScopeCounter }
+        "
+        [ariaRole]="'option'"
     >
         @let listIconGlyph = filteredSuggestion?.data?.listIconGlyph;
         @if (listIconGlyph) {
@@ -421,7 +449,8 @@
                 <button
                     fd-button
                     fdType="transparent"
-                    title="('platformSearchField.deleteButtonLabel' | fdTranslate)"
+                    [title]="'platformSearchField.deleteButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformSearchField.deleteButtonAriaLabel' | fdTranslate"
                     glyph="decline"
                     (fdkClicked)="_performButtonClick($event, deleteCallback)"
                 ></button>

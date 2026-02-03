@@ -379,9 +379,14 @@ export default {
         synchronizeButtonTitle: 'Szinkronizálás',
         searchSuggestionMessage: '{count} javaslat található.',
         searchSuggestionNavigateMessage: 'a le és a fel nyíllal navigálhat',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Beállítások',

@@ -378,9 +378,14 @@ export default {
         synchronizeButtonTitle: 'סנכרן',
         searchSuggestionMessage: 'נמצאו {count} הצעות.',
         searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'הגדרות',

@@ -372,15 +372,20 @@ export default {
         deleteActionAriaLabel: 'delete'
     },
     platformSearchField: {
-        clearButtonTitle: 'Clear',
-        submitButtonTitle: 'Search',
+        clearButtonTitle: 'Clear Search',
+        submitButtonTitle: 'Search (Enter)',
         searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronize',
         searchSuggestionMessage: '{count} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Settings',

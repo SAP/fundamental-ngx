@@ -380,9 +380,14 @@ export default {
         synchronizeButtonTitle: 'Συγχρονισμός',
         searchSuggestionMessage: '{count} προτάσεις βρέθηκαν.',
         searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ρυθμίσεις',

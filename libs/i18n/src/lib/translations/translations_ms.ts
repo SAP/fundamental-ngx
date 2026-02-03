@@ -378,9 +378,14 @@ export default {
         synchronizeButtonTitle: 'Segerakkan',
         searchSuggestionMessage: '{count} cadangan ditemui.',
         searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Tetapan',

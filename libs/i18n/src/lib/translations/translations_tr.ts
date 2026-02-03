@@ -380,9 +380,14 @@ export default {
         synchronizeButtonTitle: 'Eşitle',
         searchSuggestionMessage: '{count} öneri bulundu.',
         searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',

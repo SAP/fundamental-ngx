@@ -379,9 +379,14 @@ export default {
         synchronizeButtonTitle: 'Синхронизиране',
         searchSuggestionMessage: 'Намерени са {count} предложения.',
         searchSuggestionNavigateMessage: 'за придвижване, използвайте стрелките нагоре и надолу',
-        deleteButtonLabel: 'Delete',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
         cancelLabel: 'Cancel',
-        allButtonLabel: 'All'
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Настройки',

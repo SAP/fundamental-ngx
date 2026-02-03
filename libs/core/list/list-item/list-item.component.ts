@@ -97,6 +97,14 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @Input()
     counter: number | undefined;
 
+    /** Counter aria role */
+    @Input()
+    counterRole: string;
+
+    /** Counter aria label */
+    @Input()
+    counterAriaLabel: string;
+
     /** Whether list item shows active indicator. Used only in List with Subline. */
     @Input()
     active = false;
