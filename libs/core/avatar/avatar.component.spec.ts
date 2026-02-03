@@ -1,190 +1,142 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ColorAccent, Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarValueStates } from './avatar-value-states.type';
-import { AvatarComponent, IndicationColor } from './avatar.component';
-
-@Component({
-    selector: 'fd-test-object-status',
-    template: ` <fd-avatar
-        [size]="size"
-        [glyph]="glyph"
-        [circle]="circle"
-        [transparent]="transparent"
-        [placeholder]="placeholder"
-        [contain]="contain"
-        [tile]="tile"
-        [colorAccent]="colorAccent"
-        [colorIndication]="colorIndication"
-        [random]="random"
-        [zoomGlyph]="zoomGlyph"
-        [border]="border"
-        [label]="label"
-        [valueState]="valueState"
-    >
-    </fd-avatar>`,
-    standalone: true,
-    imports: [AvatarComponent]
-})
-class TestComponent {
-    @ViewChild(AvatarComponent)
-    avatarComponent: AvatarComponent;
-    size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
-    glyph: string | null = null;
-    circle = false;
-    transparent = false;
-    placeholder = false;
-    contain = false;
-    tile = false;
-    colorAccent: Nullable<ColorAccent> = null;
-    colorIndication: Nullable<IndicationColor> = null;
-    random = false;
-    zoomGlyph: string | null = null;
-    border = false;
-    label: string | null = null;
-    valueState: Nullable<AvatarValueStates>;
-}
+import { AvatarComponent } from './avatar.component';
 
 describe('AvatarComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestComponent]
-        })
-            .overrideComponent(AvatarComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
-            })
-            .compileComponents();
-    }));
+    let fixture: ComponentFixture<AvatarComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.debugElement.componentInstance;
-        fixture.detectChanges();
+        TestBed.configureTestingModule({
+            imports: [AvatarComponent]
+        });
+        fixture = TestBed.createComponent(AvatarComponent);
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        fixture.detectChanges();
+        expect(fixture.componentInstance).toBeTruthy();
     });
 
     it('Should Change Size', () => {
-        expect(fixture.nativeElement.querySelector('.fd-avatar--m')).toBeTruthy();
-
-        component.size = 'xs';
+        fixture.componentRef.setInput('size', 'm');
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--xs')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--m')).toBe(true);
 
-        component.size = 's';
+        fixture.componentRef.setInput('size', 'xs');
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--s')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--xs')).toBe(true);
 
-        component.size = 'l';
+        fixture.componentRef.setInput('size', 's');
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--l')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--s')).toBe(true);
 
-        component.size = 'xl';
+        fixture.componentRef.setInput('size', 'l');
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--xl')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--l')).toBe(true);
+
+        fixture.componentRef.setInput('size', 'xl');
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--xl')).toBe(true);
     });
 
     it('Should Add Glyph', () => {
-        component.glyph = 'group';
+        fixture.componentRef.setInput('glyph', 'group');
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.sap-icon--group')).toBeTruthy();
     });
 
     it('Should Add Circle Design', () => {
-        component.circle = true;
+        fixture.componentRef.setInput('circle', true);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--circle')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--circle')).toBe(true);
     });
 
     it('Should Add Transparent Background', () => {
-        component.transparent = true;
+        fixture.componentRef.setInput('transparent', true);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--transparent')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--transparent')).toBe(true);
     });
 
     it('Should Use background size contain option', () => {
-        component.contain = true;
+        fixture.componentRef.setInput('contain', true);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--background-contain')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--background-contain')).toBe(true);
     });
 
     it('Should Add Placeholder Background', () => {
-        component.placeholder = true;
+        fixture.componentRef.setInput('placeholder', true);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--placeholder')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--placeholder')).toBe(true);
     });
 
     it('Should Add Tile Background', () => {
-        component.tile = true;
+        fixture.componentRef.setInput('tile', true);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--tile')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--tile')).toBe(true);
     });
 
     it('Should Add Accent Color', () => {
-        component.colorAccent = 1;
+        fixture.componentRef.setInput('colorAccent', 1);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-1')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--accent-color-1')).toBe(true);
 
-        component.colorAccent = 5;
+        fixture.componentRef.setInput('colorAccent', 5);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-5')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--accent-color-5')).toBe(true);
 
-        component.colorAccent = 10;
+        fixture.componentRef.setInput('colorAccent', 10);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-10')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--accent-color-10')).toBe(true);
     });
 
     it('Should Add Indication Color', () => {
-        component.colorIndication = 1;
+        fixture.componentRef.setInput('colorIndication', 1);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--indication-color-1')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--indication-color-1')).toBe(true);
 
-        component.colorIndication = 5;
+        fixture.componentRef.setInput('colorIndication', 5);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--indication-color-5')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--indication-color-5')).toBe(true);
 
-        component.colorIndication = 10;
+        fixture.componentRef.setInput('colorIndication', 10);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--indication-color-10')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--indication-color-10')).toBe(true);
     });
 
     it('Should Add Random Accent Color', () => {
-        component.colorAccent = null;
-        component.random = true;
+        fixture.componentRef.setInput('colorAccent', null);
+        fixture.componentRef.setInput('random', true);
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('[class*="fd-avatar--accent-color-"]')).toBeTruthy();
+        const hasAccentColor = Array.from<string>(fixture.nativeElement.classList).some((cls) =>
+            cls.startsWith('fd-avatar--accent-color-')
+        );
+        expect(hasAccentColor).toBe(true);
     });
 
     it('Should Add Border', () => {
-        component.border = true;
+        fixture.componentRef.setInput('border', true);
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--border')).toBeTruthy();
+        expect(fixture.nativeElement.classList.contains('fd-avatar--border')).toBe(true);
     });
 
     it('Should Add Zoom Icon', () => {
-        component.zoomGlyph = 'edit';
+        fixture.componentRef.setInput('zoomGlyph', 'edit');
         fixture.detectChanges();
-        const zoomElement = fixture.debugElement.nativeElement;
-        expect(zoomElement.querySelector('.fd-avatar__zoom-icon')).toBeTruthy();
-        expect(zoomElement.querySelector('.sap-icon--edit')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-avatar__zoom-icon')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.sap-icon--edit')).toBeTruthy();
     });
 
     it('Should Add Abbreviate', async () => {
-        component.label = 'Jane Doe';
+        fixture.componentRef.setInput('label', 'Jane Doe');
         fixture.detectChanges();
         await fixture.whenRenderingDone();
-        expect(component.avatarComponent.abbreviate).toEqual('JD');
+        expect((fixture.componentInstance as any).abbreviate()).toEqual('JD');
 
-        component.label = 'Marjolein van Veen';
+        fixture.componentRef.setInput('label', 'Marjolein van Veen');
         fixture.detectChanges();
-        expect(component.avatarComponent.abbreviate).toEqual('MvV');
+        expect((fixture.componentInstance as any).abbreviate()).toEqual('MvV');
     });
 
     it('should add respective Value State Icons', () => {
@@ -196,9 +148,9 @@ describe('AvatarComponent', () => {
         };
 
         Object.keys(stateIcons).forEach((state) => {
-            component.valueState = state as AvatarValueStates;
+            fixture.componentRef.setInput('valueState', state as AvatarValueStates);
             fixture.detectChanges();
-            const badgeElementClassList = fixture.debugElement.query(By.css('.fd-avatar__zoom-icon')).nativeElement
+            const badgeElementClassList = fixture.debugElement.query(By.css('.fd-avatar__zoom-icon'))?.nativeElement
                 .classList;
             expect(badgeElementClassList).toContain(`fd-avatar__zoom-icon--${state}`);
             expect(badgeElementClassList).toContain(`sap-icon--${stateIcons[state]}`);

@@ -24,10 +24,10 @@
                 @if (product.avatar) {
                     <fd-avatar
                         size="s"
-                        [glyph]="product.avatar.glyph"
-                        [label]="product.avatar.label"
+                        [glyph]="product.avatar.glyph ?? null"
+                        [label]="product.avatar.label ?? null"
                         [circle]="!!product.avatar.circle"
-                        [image]="product.avatar.image"
+                        [image]="product.avatar.image ?? null"
                         [contain]="!!product.avatar.contain"
                         [transparent]="!!product.avatar.transparent"
                         [placeholder]="!!product.avatar.placeholder"
@@ -35,9 +35,9 @@
                         [colorAccent]="product.avatar.colorAccent"
                         [colorIndication]="product.avatar.colorIndication"
                         [border]="!!product.avatar.border"
-                        [alterIcon]="product.avatar.alterIcon"
-                        [backupImage]="product.avatar.backupImage"
-                        [ariaLabel]="product.avatar.ariaLabel"
+                        [alterIcon]="product.avatar.alterIcon ?? null"
+                        [backupImage]="product.avatar.backupImage ?? null"
+                        [ariaLabel]="product.avatar.ariaLabel ?? null"
                     >
                     </fd-avatar>
                 } @else {
