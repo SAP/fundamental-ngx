@@ -6,6 +6,7 @@
         stateMessage="Success message. This is a longer success message to provide more detailed feedback to the user about the successful state of the selection. Please ensure that you have selected the correct option and proceed with the next steps as required."
         [(value)]="selectedValue1"
         state="success"
+        fillControlMode="equal"
     >
         @for (option of options; track option) {
             <li fd-option [value]="option">{{ option }}</li>
