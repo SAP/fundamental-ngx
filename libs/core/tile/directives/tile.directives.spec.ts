@@ -121,9 +121,7 @@ describe('TileDirectives', () => {
         const profileImgEl = component.profileImg()?.nativeElement;
         expect(profileImgEl.className).toContain('fd-tile__profile-img');
         expect(profileImgEl.id).toContain('fd-profileTile-');
-        expect(profileImgEl.style.getPropertyValue('background-image')).toContain(
-            'url("https://picsum.photos/60/60")'
-        );
+        expect(profileImgEl.style.getPropertyValue('background-image')).toContain('url("https://picsum.photos/60/60")');
 
         // Background image
         const backgroundImgEl = component.backgroundImg()?.nativeElement;

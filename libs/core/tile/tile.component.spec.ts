@@ -31,7 +31,7 @@ describe('TileComponent', () => {
     it('should apply size class when size input is set', () => {
         fixture.componentRef.setInput('size', 's');
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         expect(hostElement.className).toContain('fd-tile--s');
     });
@@ -39,7 +39,7 @@ describe('TileComponent', () => {
     it('should apply double class when double input is true', () => {
         fixture.componentRef.setInput('double', true);
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         expect(hostElement.className).toContain('fd-tile--double');
     });
@@ -47,7 +47,7 @@ describe('TileComponent', () => {
     it('should apply type class when type input is set', () => {
         fixture.componentRef.setInput('type', 'kpi');
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         expect(hostElement.className).toContain('fd-tile--kpi');
     });
@@ -55,7 +55,7 @@ describe('TileComponent', () => {
     it('should apply action class when action input is true', () => {
         fixture.componentRef.setInput('action', true);
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         expect(hostElement.className).toContain('fd-tile--action');
     });
@@ -78,7 +78,7 @@ describe('TileComponent', () => {
     it('should set tabindex to 0 when clickable is true', () => {
         fixture.componentRef.setInput('clickable', true);
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         expect(hostElement.getAttribute('tabindex')).toBe('0');
     });
@@ -86,7 +86,7 @@ describe('TileComponent', () => {
     it('should set tabindex to -1 when clickable is false', () => {
         fixture.componentRef.setInput('clickable', false);
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         expect(hostElement.getAttribute('tabindex')).toBe('-1');
     });
@@ -94,61 +94,61 @@ describe('TileComponent', () => {
     it('should emit tileClick when clicked and clickable is true', () => {
         fixture.componentRef.setInput('clickable', true);
         fixture.detectChanges();
-        
+
         const emitSpy = jest.fn();
         component.tileClick.subscribe(emitSpy);
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         hostElement.click();
-        
+
         expect(emitSpy).toHaveBeenCalled();
     });
 
     it('should not emit tileClick when clicked and clickable is false', () => {
         fixture.componentRef.setInput('clickable', false);
         fixture.detectChanges();
-        
+
         const emitSpy = jest.fn();
         component.tileClick.subscribe(emitSpy);
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         hostElement.click();
-        
+
         expect(emitSpy).not.toHaveBeenCalled();
     });
 
     it('should emit tileClick on enter key when clickable is true', () => {
         fixture.componentRef.setInput('clickable', true);
         fixture.detectChanges();
-        
+
         const emitSpy = jest.fn();
         component.tileClick.subscribe(emitSpy);
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         const event = new KeyboardEvent('keyup', { key: 'Enter' });
         hostElement.dispatchEvent(event);
-        
+
         expect(emitSpy).toHaveBeenCalled();
     });
 
     it('should emit tileClick on space key when clickable is true', () => {
         fixture.componentRef.setInput('clickable', true);
         fixture.detectChanges();
-        
+
         const emitSpy = jest.fn();
         component.tileClick.subscribe(emitSpy);
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         const event = new KeyboardEvent('keyup', { key: ' ' });
         hostElement.dispatchEvent(event);
-        
+
         expect(emitSpy).toHaveBeenCalled();
     });
 
     it('should render overlay when action is true', () => {
         fixture.componentRef.setInput('action', true);
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         const overlay = hostElement.querySelector('.fd-tile__overlay');
         expect(overlay).toBeTruthy();
@@ -157,7 +157,7 @@ describe('TileComponent', () => {
     it('should not render overlay when action is false', () => {
         fixture.componentRef.setInput('action', false);
         fixture.detectChanges();
-        
+
         const hostElement = fixture.nativeElement as HTMLElement;
         const overlay = hostElement.querySelector('.fd-tile__overlay');
         expect(overlay).toBeFalsy();
@@ -199,9 +199,9 @@ describe('TileComponent', () => {
             const tileComponent = linkFixture.debugElement.children[0].componentInstance;
             const emitSpy = jest.fn();
             tileComponent.tileClick.subscribe(emitSpy);
-            
+
             linkElement.click();
-            
+
             expect(emitSpy).toHaveBeenCalled();
         });
     });

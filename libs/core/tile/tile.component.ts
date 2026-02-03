@@ -28,7 +28,7 @@ type TileSize = null | 's';
         '[attr.aria-label]': 'ariaLabel()',
         '[attr.aria-labelledby]': 'ariaLabelledby()',
         '[attr.id]': 'id()',
-        '(click)': 'tileClick.emit()',
+        '(click)': 'handleClick()',
         '(keyup.enter)': 'handleKeyboard()',
         '(keydown.space)': '$event.preventDefault()',
         '(keyup.space)': 'handleKeyboard()'
@@ -125,6 +125,15 @@ export class TileComponent {
                 );
             }
         });
+    }
+
+    /** @hidden Handle click events */
+    protected handleClick(): void {
+        // For native links, always emit (links are always interactive)
+        // For custom elements, only emit if clickable
+        if (this._isNativeLink() || this.clickable()) {
+            this.tileClick.emit();
+        }
     }
 
     /** @hidden Handle keyboard activation for non-link tiles */
