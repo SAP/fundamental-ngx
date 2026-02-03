@@ -1,11 +1,132 @@
 <fd-doc-page>
     <header>Tile</header>
     <description>
-        Generic Tiles can be used to represent an app similar to the SAP Fiori launchpad home page. They can display
-        different types of content, which are based on the data supplied by the app. They can contain an icon, a title,
-        an informative text, KPIs, counters and charts.
+        Tiles are container components used to display concise, relevant information in a structured and visually
+        appealing way. They are commonly used in dashboards and home screens to represent applications, KPIs, or other
+        content similar to the SAP Fiori launchpad.
+
+        <br /><br />
+        <b>Tiles can display various types of content:</b>
+        <ul>
+            <li>Launch tiles for application shortcuts</li>
+            <li>KPI tiles showing key performance indicators with numeric content</li>
+            <li>Feed tiles for notification updates</li>
+            <li>Generic tiles with custom content including icons, titles, text, counters, and charts</li>
+        </ul>
+
+        <br /><br />
+        <b>Tile as Link or Interactive Element</b>
+        <p>Tiles support two usage patterns based on your needs:</p>
+        <ul>
+            <li>
+                <b>Custom Element:</b> Use <code>&lt;fd-tile&gt;</code> for interactive buttons or cards. Enable
+                interactivity with <code>[clickable]="true"</code> and listen to <code>(tileClick)</code> events.
+            </li>
+            <li>
+                <b>Native Link:</b> Use <code>&lt;a fd-tile href="..."&gt;</code> to create tiles that act as native
+                hyperlinks. This approach provides native browser behavior including right-click context menus, keyboard
+                shortcuts, and better accessibility. All standard anchor attributes work: <code>href</code>,
+                <code>target</code>, <code>rel</code>, <code>hreflang</code>, etc.
+            </li>
+        </ul>
+
+        <br /><br />
+        <b>Accessibility</b>
+        <p>Tiles support comprehensive accessibility features. Use the following inputs to enhance accessibility:</p>
+        <ul>
+            <li><code>id</code> - Unique identifier for the tile</li>
+            <li><code>role</code> - ARIA role (automatically set for native links)</li>
+            <li><code>ariaLabel</code> - Descriptive label for screen readers</li>
+            <li><code>ariaLabelledby</code> - Reference to element(s) that label the tile</li>
+        </ul>
+
+        <br /><br />
+        <b>Tile Building Blocks</b>
+        <ul>
+            <li>
+                <code>fd-tile</code> or <code>[fd-tile]</code>: The main tile container component.
+                <ul>
+                    <li><code>size</code> - Size modifier: 's' for small tiles on smaller screens (default: large)</li>
+                    <li><code>double</code> - When true, doubles the tile width to 2×1 dimensions</li>
+                    <li><code>type</code> - Tile type: 'kpi', 'launch', or 'feed'</li>
+                    <li><code>action</code> - When true, places tile in action/edit mode with overlay</li>
+                    <li><code>clickable</code> - Makes the tile focusable and clickable (for custom elements only)</li>
+                </ul>
+            </li>
+            <li><code>fd-tile-header</code> directive - Container for the tile header section</li>
+            <li>
+                <code>fd-tile-header-content</code> directive - Wraps header content, can use
+                <code>[twoColumn]="true"</code> for 2-column layout
+            </li>
+            <li><code>fd-tile-title</code> directive - Displays the main tile title</li>
+            <li><code>fd-tile-subtitle</code> directive - Displays subtitle text</li>
+            <li><code>fd-tile-content</code> directive - Main content area of the tile</li>
+            <li>
+                <code>fd-tile-content-text</code> directive - Text content within the tile, can use
+                <code>[twoColumn]="true"</code> for 2-column layout
+            </li>
+            <li><code>fd-tile-footer</code> directive - Container for tile footer</li>
+            <li>
+                <code>fd-tile-footer-text</code> directive - Footer text content, can use
+                <code>[twoColumn]="true"</code> for 2-column layout
+            </li>
+            <li><code>fd-tile-logo</code> directive - Tile logo image (32×32px recommended)</li>
+            <li><code>fd-tile-profile-img</code> directive - Profile image within tile</li>
+            <li><code>fd-tile-background-img</code> directive - Background image for tile</li>
+            <li>
+                <code>fd-tile-refresh</code> directive - Refresh indicator with optional icon. Use
+                <code>glyph="icon-name"</code> to customize the icon
+            </li>
+            <li><code>fd-tile-section</code> directive - Wraps a section of tile content</li>
+            <li><code>fd-tile-page-indicator</code> directive - Page indicator for multi-page tiles</li>
+            <li><code>fd-tile-toggle</code> directive - Toggle control within tile</li>
+            <li><code>fd-tile-action-container</code> directive - Container for action mode controls</li>
+            <li><code>fd-tile-action-close</code> directive - Close button for action mode (auto-adds icon)</li>
+            <li><code>fd-tile-action-indicator</code> directive - Action indicator button (auto-adds icon)</li>
+            <li><code>fd-tile-title-container</code> directive - Container for complex title layouts</li>
+        </ul>
+
+        <br /><br />
+        <b>Numeric Content (KPI Tiles)</b>
+        <p>
+            KPI tiles use numeric content directives to display key performance indicators with values, scales, and
+            trend indicators:
+        </p>
+        <ul>
+            <li>
+                <code>fd-numeric-content</code> directive - Container for numeric content with scale and value. Supports
+                <code>state</code> ('positive', 'negative', 'critical', 'informative') and <code>size</code> ('s', 'm',
+                'l') inputs
+            </li>
+            <li><code>fd-numeric-content-kpi-container</code> directive - Container for KPI value and unit</li>
+            <li><code>fd-numeric-content-kpi</code> directive - The actual KPI numeric value</li>
+            <li><code>fd-numeric-content-scale-container</code> directive - Container for scale elements</li>
+            <li>
+                <code>fd-numeric-content-scale</code> directive - Scale value indicator with optional
+                <code>state</code> ('positive', 'negative', 'critical', 'informative')
+            </li>
+            <li><code>fd-numeric-content-scale-text</code> directive - Text label for scale</li>
+            <li>
+                <code>fd-numeric-content-scale-arrow</code> directive - Directional arrow indicator with optional
+                <code>state</code>
+            </li>
+            <li><code>fd-numeric-content-launch-icon-container</code> directive - Container for launch icon</li>
+            <li><code>fd-numeric-content-launch-icon</code> directive - Launch icon within numeric content</li>
+        </ul>
     </description>
-    <import module="TileModule" subPackage="tile"></import>
+    <import
+        module="TileComponent, TileActionCloseDirective, TileActionContainerDirective,
+        TileActionIndicatorDirective, TileBackgroundImgDirective, TileContainerDirective,
+        TileContentDirective, TileContentTextDirective, TileFooterDirective,
+        TileFooterTextDirective, TileHeaderContentDirective, TileHeaderDirective,
+        TileLogoDirective, TilePageIndicatorDirective, TileProfileImgDirective,
+        TileRefreshDirective, TileSectionDirective, TileSubtitleDirective,
+        TileTitleContainerDirective, TileTitleDirective, TileToggleDirective,
+        NumericContentDirective, NumericContentKpiContainerDirective, NumericContentKpiDirective,
+        NumericContentLaunchIconContainerDirective, NumericContentLaunchIconDirective, NumericContentScaleArrowDirective,
+        NumericContentScaleContainerDirective, NumericContentScaleDirective, NumericContentScaleTextDirective"
+        subPackage="tile"
+    ></import>
 
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

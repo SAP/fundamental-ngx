@@ -1,3 +1,13 @@
 @import 'fundamental-styles/dist/tile.css';
 @import 'fundamental-styles/dist/numeric-content.css';
 @import 'fundamental-styles/dist/badge.css';
+
+.fd-tile {
+    display: block;
+}
+
+// Ensure cursor pointer for native links
+a.fd-tile {
+    cursor: pointer;
+    text-decoration: none;
+}
