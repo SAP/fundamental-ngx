@@ -1,0 +1,23 @@
+<!-- This HTML is for documentation/reference purposes only.
+     The actual template is inline in the TypeScript component. -->
+<!-- Using Attribute Selectors with Scoping Suffix: "[ui5-avatar-demo]" -->
+<!-- This is the recommended approach - works with any element type -->
+<div ui5-card-demo>
+    <header ui5-card-header-demo slot="header">
+        <h2 ui5-title-demo>Scoped Components Demo</h2>
+    </header>
+
+    <div class="card-content">
+        <img ui5-avatar-demo initials="AC" colorScheme="Accent1" alt="card image" size="L" />
+
+        <div class="text-content">
+            <h3>Angular Wrapper Components</h3>
+            <p>These Angular wrapper components work seamlessly with scoped UI5 Web Components.</p>
+            <p>Notice: Scoping is applied to attributes (e.g., ui5-avatar-demo) not element names.</p>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button ui5-button-demo (click)="incrementCounter()">Click Me - Clicked: {{ clickCount() }} times</button>
+    </div>
+</div>

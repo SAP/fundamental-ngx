@@ -1,0 +1,29 @@
+<!-- This HTML is for documentation/reference purposes only.
+     The actual template is inline in the TypeScript component. -->
+<!-- Using Attribute Selectors with Scoping Suffix: "[ui5-input-mfe]" -->
+<!-- This library uses the "-mfe" suffix on attributes to avoid conflicts -->
+<form ui5-card-mfe class="form-container">
+    <header ui5-card-header-mfe slot="header">
+        <h4>Micro-Frontend Form (Scoped as "-mfe")</h4>
+    </header>
+
+    <div class="form-group">
+        <label ui5-label-mfe for="name">Name:</label>
+        <input ui5-input-mfe id="name" type="text" placeholder="Enter your name" />
+    </div>
+
+    <div class="form-group">
+        <label ui5-label-mfe for="email">Email:</label>
+        <input ui5-input-mfe id="email" type="email" placeholder="Enter your email" />
+    </div>
+
+    <div class="form-group">
+        <label ui5-label-mfe for="message">Message:</label>
+        <textarea ui5-input-mfe id="message" placeholder="Enter your message"> </textarea>
+    </div>
+
+    <div class="form-actions">
+        <button ui5-button-mfe type="submit">Submit</button>
+        <button ui5-button-mfe design="Transparent">Reset</button>
+    </div>
+</form>

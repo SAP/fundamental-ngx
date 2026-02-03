@@ -46,6 +46,7 @@ export const API_FILES = {
     rangeSlider: ['RangeSlider'],
     ratingIndicator: ['RatingIndicator'],
     responsivePopover: ['ResponsivePopover'],
+    scoping: [],
     segmentedButton: ['SegmentedButton', 'SegmentedButtonItem'],
     select: ['Option', 'OptionCustom', 'Select'],
     slider: ['Slider', 'RangeSlider'],

@@ -1,0 +1,165 @@
+<fd-docs-section-title id="overview" componentName="Scoping"> UI5 Web Components Scoping </fd-docs-section-title>
+
+<description>
+    Learn how to use the UI5 Web Components scoping feature to avoid naming conflicts when multiple versions coexist in
+    your application or when building micro-frontends.
+</description>
+
+<fd-docs-section-title id="what-is-scoping">
+    <h2>What is Scoping?</h2>
+</fd-docs-section-title>
+
+<description>
+    <p>
+        Scoping is an optional feature that lets you add a custom suffix to all UI5 Web Components' custom element
+        names. This is particularly useful when:
+    </p>
+    <ul>
+        <li><strong>Building Libraries:</strong> Prevent naming conflicts with host applications</li>
+        <li><strong>Micro-Frontends:</strong> Allow multiple independent applications to coexist</li>
+        <li><strong>Version Compatibility:</strong> Use different versions of UI5 Web Components simultaneously</li>
+        <li><strong>Third-Party Integration:</strong> Ensure your components work alongside other libraries</li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="setup">
+    <h2>Setup: Configuring Scoping</h2>
+</fd-docs-section-title>
+
+<description>
+    <p>
+        <strong>Important:</strong> Scoping configuration must be done before importing any UI5 Web Components. The
+        configuration is applied at the module level when components are imported.
+    </p>
+</description>
+
+<component-example>
+    <code-example [exampleFiles]="setupExample()"></code-example>
+</component-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="basic-example">
+    <h2>Basic Example: Using Scoped Components</h2>
+</fd-docs-section-title>
+
+<description>
+    <p>
+        This example demonstrates how Angular wrapper components work seamlessly with scoped UI5 Web Components. The
+        component selectors automatically support both standard and scoped tag names.
+    </p>
+</description>
+
+<component-example>
+    <ui5-scoping-basic-sample></ui5-scoping-basic-sample>
+</component-example>
+
+<code-example [exampleFiles]="basicExample()"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="advanced-example">
+    <h2>Advanced: Micro-Frontend Scenario</h2>
+</fd-docs-section-title>
+
+<description>
+    <p>
+        This example shows a realistic micro-frontend scenario where a library needs to coexist with a host application
+        and other libraries, all using potentially different versions of UI5 Web Components.
+    </p>
+</description>
+
+<component-example>
+    <ui5-scoping-micro-frontend-sample></ui5-scoping-micro-frontend-sample>
+</component-example>
+
+<code-example [exampleFiles]="microFrontendExample()"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="how-it-works">
+    <h2>How Scoping Works with Angular Wrappers</h2>
+</fd-docs-section-title>
+
+<description>
+    <h3>Why Angular Wrappers are Scoping-Compatible</h3>
+    <p>The Angular wrapper components are fully compatible with UI5 Web Components scoping:</p>
+    <ul>
+        <li>
+            <strong>Flexible Selectors:</strong> Components use both element and attribute selectors (e.g.,
+            <code>ui5-avatar, [ui5-avatar]</code>), so they work with any tag name variation
+        </li>
+        <li>
+            <strong>Native Element Reference:</strong> The wrapper gets the actual custom element via
+            <code>elementRef.nativeElement</code>, which works regardless of scoping
+        </li>
+        <li>
+            <strong>Template Projection:</strong> Components use <code>&lt;ng-content&gt;</code> for projection, making
+            them agnostic to the underlying tag names
+        </li>
+        <li>
+            <strong>Property Synchronization:</strong> Input/output synchronization works on the actual DOM element,
+            regardless of its tag name
+        </li>
+    </ul>
+
+    <h3>Example Component Structure</h3>
+    <p>Angular wrapper components use both element and attribute selectors to support scoped web components:</p>
+    <ul>
+        <li>Element selector: <code>ui5-avatar</code> or <code>ui5-avatar-myapp</code> (when scoped)</li>
+        <li>Attribute selector: <code>[ui5-avatar]</code> works with any element name</li>
+        <li>Template uses <code>ng-content</code> for projection, agnostic to tag names</li>
+        <li>Property/event synchronization works on the actual DOM element</li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="best-practices">
+    <h2>Best Practices</h2>
+</fd-docs-section-title>
+
+<description>
+    <ul>
+        <li>
+            <strong>Configure Early:</strong> Set up scoping in a separate configuration file imported before any
+            components
+        </li>
+        <li>
+            <strong>Use Unique Suffixes:</strong> Choose meaningful, unique suffixes to identify your library (e.g.,
+            organization name)
+        </li>
+        <li>
+            <strong>Document Your Suffix:</strong> Make it clear in your library's documentation which suffix is used
+        </li>
+        <li><strong>Scoping Rules:</strong> Use fine-grained scoping rules to exclude custom components if needed</li>
+        <li>
+            <strong>Version Management:</strong> Combine scoping with careful dependency versioning for complex
+            micro-frontend setups
+        </li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="resources">
+    <h2>Resources</h2>
+</fd-docs-section-title>
+
+<description>
+    <ul>
+        <li>
+            <a href="https://github.com/SAP/ui5-webcomponents/blob/main/docs/docs/SCOPING.md" target="_blank">
+                UI5 Web Components Scoping Documentation</a
+            >
+        </li>
+        <li>
+            <a href="https://github.com/SAP/ui5-webcomponents/blob/main/docs/docs/USAGE.md" target="_blank">
+                UI5 Web Components General Usage</a
+            >
+        </li>
+        <li><a href="https://sap.github.io/fundamental-ngx/" target="_blank"> Fundamental NGX Documentation</a></li>
+    </ul>
+</description>

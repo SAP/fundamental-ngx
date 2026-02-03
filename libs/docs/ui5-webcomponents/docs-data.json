@@ -163,6 +163,10 @@
             "name": "Responsive Popover"
         },
         {
+            "url": "ui5-webcomponents/scoping",
+            "name": "Scoping"
+        },
+        {
             "url": "ui5-webcomponents/segmented-button",
             "name": "Segmented Button"
         },

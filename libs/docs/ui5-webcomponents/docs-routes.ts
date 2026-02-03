@@ -253,6 +253,10 @@ const componentRoutes = [
     {
         path: 'tree',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/tree').then(configureLibRoutes)
+    },
+    {
+        path: 'scoping',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/scoping').then(configureLibRoutes)
     }
 ];
 
