@@ -9,7 +9,6 @@ import {
     ComponentRef,
     DestroyRef,
     Directive,
-    DOCUMENT,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -58,7 +57,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ListComponent, ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
+import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
@@ -486,7 +485,6 @@ export class SearchFieldComponent
         public elementRef: ElementRef<HTMLElement>,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,
         readonly contentDensityObserver: ContentDensityObserver,
@@ -883,16 +881,6 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    _getAriaOwnsForGroupHeader(groupHeaderList: ListComponent): string {
-        let retVal = '';
-        const suggestions = groupHeaderList.elementRef.nativeElement.querySelectorAll('.fd-list__item--suggestion');
-        suggestions.forEach((suggestion) => {
-            retVal += suggestion.id + ' ';
-        });
-        return retVal;
-    }
-
-    /** @hidden */
     private _resetKeyManager(): void {
         if (this.suggestionItems) {
             const keyManagerParam = this.suggestionItems
@@ -900,6 +888,8 @@ export class SearchFieldComponent
                 .sort((a, b) => this._getDomRowOrderIndex(a) - this._getDomRowOrderIndex(b));
             this._suggestionkeyManager?.destroy();
             this._suggestionkeyManager = new FocusKeyManager(keyManagerParam);
+
+            this._setAriaOwns();
         }
     }
 
@@ -930,9 +920,25 @@ export class SearchFieldComponent
                     });
                 }
             });
+
+            this._setAriaOwns();
         });
 
         return count;
+    }
+
+    /** @hidden */
+    private _setAriaOwns(): void {
+        this.detectChanges();
+        const parentListEl = this.suggestionListEl?.nativeElement;
+        parentListEl?.querySelectorAll('.fd-list').forEach((list: HTMLElement) => {
+            const visibleChildren = list.querySelectorAll('.fd-list__item--suggestion');
+            let childIds = '';
+            visibleChildren.forEach((child) => {
+                childIds += child.id + ' ';
+            });
+            list.setAttribute('aria-owns', childIds);
+        });
     }
 
     /** @hidden */

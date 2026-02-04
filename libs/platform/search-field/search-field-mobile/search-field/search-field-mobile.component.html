@@ -3,21 +3,18 @@
         <fd-dialog-header [inShellbar]="_inShellbar" class="fdp-search-field__mobile-dialog-header">
             <ng-template fdkTemplate="header">
                 <div fd-bar-middle>
-                    <fd-bar-element [fullWidth]="_inShellbar">
+                    <fd-bar-element [fullWidth]="true" class="fdp-search-field__mobile-bar-element">
                         @if (childContent?.inputFieldTemplate) {
                             <ng-template [ngTemplateOutlet]="childContent?.inputFieldTemplate!"></ng-template>
                         }
-                    </fd-bar-element>
-                    @if (mobileConfig.hasCloseButton) {
                         @if (_inShellbar) {
                             <button
                                 fd-button
-                                fdkInitialFocus
                                 fdType="transparent"
                                 (click)="_handleDismiss()"
                                 [label]="'platformSearchField.cancelLabel' | fdTranslate"
                             ></button>
-                        } @else {
+                        } @else if (mobileConfig.hasCloseButton) {
                             <button
                                 fd-dialog-close-button
                                 fdkInitialFocus
@@ -25,7 +22,7 @@
                                 (click)="_handleDismiss()"
                             ></button>
                         }
-                    }
+                    </fd-bar-element>
                 </div>
             </ng-template>
         </fd-dialog-header>

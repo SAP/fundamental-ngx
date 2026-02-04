@@ -51,6 +51,14 @@ fdp-search-field {
     }
 }
 
+.fdp-search-field__mobile-bar-element.fd-bar__element--full-width.fd-bar__element {
+    gap: 0.5rem;
+
+    .fd-input-group.fd-shellbar__search-field.fdp-search-field__input-group {
+        max-width: 100%;
+    }
+}
+
 // TODO: remove all from below this line after updating styles
 .fd-bar {
     &--stack-contents-vertically {
@@ -122,8 +130,8 @@ fdp-search-field {
             }
         }
 
-        &--suggestion,
-        &--byline {
+        &--suggestion:not(.is-selected),
+        &--byline:not(.is-selected) {
             border-bottom: transparent; // TODO: replace with variable
         }
     }

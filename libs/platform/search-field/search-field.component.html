@@ -139,6 +139,7 @@
         "
         (valueChange)="setCurrentCategory($event)"
         ariaHasPopup="dialog"
+        [ariaLabel]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : null"
         [ariaDescription]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : ''"
     >
         <li fd-option (itemSelect)="setCurrentCategory(null)">
@@ -285,12 +286,7 @@
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
                     @if (filteredSuggestion?.isGroupHeader) {
                         <li role="group">
-                            <ul
-                                fd-list
-                                #groupHeaderList
-                                [searchResultsList]="true"
-                                [attr.aria-owns]="_getAriaOwnsForGroupHeader(groupHeaderList)"
-                            >
+                            <ul fd-list [searchResultsList]="true">
                                 <li
                                     fd-list-group-header
                                     [attr.aria-roledescription]="'platformSearchField.groupHeader' | fdTranslate"
@@ -307,14 +303,14 @@
                                         [ngTemplateOutletContext]="{ filteredSuggestion: childSuggestion }"
                                     ></ng-template>
                                 }
+                                @if (filteredSuggestion?.searchInScopeText || filteredSuggestion?.showMoreText) {
+                                    <ng-template
+                                        [ngTemplateOutlet]="suggestionItemTemplate"
+                                        [ngTemplateOutletContext]="{ filteredSuggestion: filteredSuggestion }"
+                                    ></ng-template>
+                                }
                             </ul>
                         </li>
-                        @if (filteredSuggestion?.searchInScopeText || filteredSuggestion?.showMoreText) {
-                            <ng-template
-                                [ngTemplateOutlet]="suggestionItemTemplate"
-                                [ngTemplateOutletContext]="{ filteredSuggestion: filteredSuggestion }"
-                            ></ng-template>
-                        }
                     } @else {
                         <ng-template
                             [ngTemplateOutlet]="suggestionItemTemplate"
