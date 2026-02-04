@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IllustratedMessageModule } from '../../illustrated-message.module';
+import { IllustratedMessageTextDirective } from './illustrated-message-text.directive';
 
 @Component({
     template: ` <h3 #directiveElement fd-illustrated-message-text>Illustrated Message Text</h3> `,
     standalone: true,
-    imports: [IllustratedMessageModule]
+    imports: [IllustratedMessageTextDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement')

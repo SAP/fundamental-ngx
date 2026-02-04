@@ -1,11 +1,20 @@
 import { Component } from '@angular/core';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import {
+    IllustratedMessageComponent,
+    IllustratedMessageFigcaptionComponent,
+    IllustratedMessageTextDirective,
+    IllustratedMessageTitleDirective
+} from '@fundamental-ngx/core/illustrated-message';
 
 @Component({
     selector: 'fd-illustrated-message-inline-example',
     templateUrl: './illustrated-message-inline-example.component.html',
-    standalone: true,
-    imports: [IllustratedMessageModule]
+    imports: [
+        IllustratedMessageComponent,
+        IllustratedMessageFigcaptionComponent,
+        IllustratedMessageTitleDirective,
+        IllustratedMessageTextDirective
+    ]
 })
 export class IllustratedMessageInlineExampleComponent {
     xsmallConfig = {

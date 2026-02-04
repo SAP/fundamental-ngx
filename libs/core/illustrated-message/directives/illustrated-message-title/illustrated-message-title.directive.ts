@@ -1,13 +1,13 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive } from '@angular/core';
 
+/**
+ * Directive for the title element within an illustrated message figcaption.
+ */
 @Directive({
-    // TODO to be discussed
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-illustrated-message-title]',
-    standalone: true
+    host: {
+        class: 'fd-illustrated-message__title'
+    }
 })
-export class IllustratedMessageTitleDirective {
-    /** @hidden */
-    @HostBinding('class.fd-illustrated-message__title')
-    fdIllustratedMessageTitleClass = true;
-}
+export class IllustratedMessageTitleDirective {}

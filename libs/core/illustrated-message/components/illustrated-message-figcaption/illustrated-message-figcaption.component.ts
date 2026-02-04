@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+/**
+ * Component representing the figcaption section of an illustrated message.
+ * Contains title and text content slots.
+ */
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message-figcaption]',
@@ -10,7 +14,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-illustrated-message__figcaption'
-    },
-    standalone: true
+    }
 })
 export class IllustratedMessageFigcaptionComponent {}

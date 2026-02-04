@@ -1,11 +1,24 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import {
+    IllustratedMessageActionsComponent,
+    IllustratedMessageComponent,
+    IllustratedMessageFigcaptionComponent,
+    IllustratedMessageTextDirective,
+    IllustratedMessageTitleDirective
+} from '@fundamental-ngx/core/illustrated-message';
 
 @Component({
     selector: 'fd-illustrated-message-example',
     templateUrl: './illustrated-message-example.component.html',
-    imports: [IllustratedMessageModule, ButtonComponent]
+    imports: [
+        IllustratedMessageComponent,
+        IllustratedMessageFigcaptionComponent,
+        IllustratedMessageTitleDirective,
+        IllustratedMessageTextDirective,
+        IllustratedMessageActionsComponent,
+        ButtonComponent
+    ]
 })
 export class IllustratedMessageExampleComponent {
     largeConfig = {
