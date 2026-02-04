@@ -41,8 +41,6 @@ import { takeUntil } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
-    AutoCompleteDirective,
-    AutoCompleteEvent,
     ClickedDirective,
     destroyObservable,
     DynamicComponentService,
@@ -163,7 +161,6 @@ type Appearance = SearchComponent['appearance'] | undefined;
         ClickedDirective,
         AvatarComponent,
         ButtonComponent,
-        AutoCompleteDirective,
         BusyIndicatorComponent,
         LinkComponent,
         forwardRef(() => SuggestionMatchesPipe)
@@ -437,9 +434,6 @@ export class SearchFieldComponent
 
     /** @hidden */
     _isOpen$ = signal(false);
-
-    /** @hidden */
-    _autoCompleteSuggestions: string[] = [];
 
     /** @hidden */
     _selectedSuggestionItem: SuggestionItem | null;
@@ -776,17 +770,6 @@ export class SearchFieldComponent
         this.focus();
     }
 
-    /** @hidden Method that handles complete event from auto complete directive, setting the new value, and closing popover */
-    handleAutoComplete(event: AutoCompleteEvent): void {
-        if (this.inputText !== event.term) {
-            this.inputText = event.term;
-            this.onValueChange(this.inputText);
-        }
-        if (event.forceClose && this.inputText) {
-            this.closeSuggestionMenu();
-        }
-    }
-
     /** @hidden */
     _focusActionButton(event: Event, suggestion: ListItemComponent): void {
         event.preventDefault();
@@ -906,18 +889,10 @@ export class SearchFieldComponent
     private _getSuggestionsLength(): number {
         let count = 0;
         this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
-            this._autoCompleteSuggestions = [];
             suggestions?.forEach((suggestion) => {
                 const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
                 if (this.inputText && textToCheck.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
-                }
-                if (!suggestion?.children && suggestion?.value) {
-                    this._autoCompleteSuggestions.push(suggestion.value);
-                } else if (suggestion?.children?.length) {
-                    suggestion.children.forEach((child) => {
-                        this._autoCompleteSuggestions.push(child.value);
-                    });
                 }
             });
 

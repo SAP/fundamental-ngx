@@ -183,10 +183,6 @@
             }
             <input
                 #inputField
-                fdkAutoComplete
-                [options]="_autoCompleteSuggestions"
-                [inputText]="inputText"
-                (onComplete)="handleAutoComplete($event)"
                 type="search"
                 (focus)="_inputFocus()"
                 (blur)="_isFocused = false; (null)"
