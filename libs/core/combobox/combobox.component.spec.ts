@@ -424,4 +424,166 @@ describe('ComboboxComponent', () => {
         component.isOpenChangeHandle(false);
         expect((<any>component)._focusTrapService.unpauseCurrentFocusTrap).toHaveBeenCalled();
     });
+
+    describe('valueProperty', () => {
+        interface FruitItem {
+            displayedValue: string;
+            value: string;
+            code?: string;
+        }
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(ComboboxComponent<FruitItem>);
+            component = fixture.componentInstance;
+            const fruits: FruitItem[] = [
+                { displayedValue: 'Apple', value: 'AppleValue' },
+                { displayedValue: 'Apple 2', value: 'AppleValue2' },
+                { displayedValue: 'Banana', value: 'BananaValue' },
+                { displayedValue: 'Kiwi', value: 'KiwiValue' },
+                { displayedValue: 'Strawberry', value: 'StrawberryValue' },
+                { displayedValue: 'Tomato', value: 'TomatoValue' }
+            ];
+            component.dropdownValues = fruits;
+            component.communicateByObject = true;
+            component.displayFn = (item: FruitItem): string => item?.displayedValue ?? '';
+            fixture.detectChanges();
+        });
+
+        it('should extract property value when valueProperty is specified and item is selected', () => {
+            jest.spyOn(component, 'onChange');
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            const fruits: FruitItem[] = component.dropdownValues as FruitItem[];
+            component.onMenuClickHandler(fruits[0]);
+
+            expect(component.onChange).toHaveBeenCalledWith('AppleValue');
+            expect(component.getValue()).toBe('AppleValue');
+        });
+
+        it('should extract different property when valueProperty is specified', () => {
+            jest.spyOn(component, 'onChange');
+            const fruits: FruitItem[] = [
+                { displayedValue: 'Apple', value: 'AppleValue', code: 'A1' },
+                { displayedValue: 'Banana', value: 'BananaValue', code: 'B1' }
+            ];
+            component.dropdownValues = fruits;
+            fixture.componentRef.setInput('valueProperty', 'code');
+            fixture.detectChanges();
+
+            component.onMenuClickHandler(fruits[0]);
+
+            expect(component.onChange).toHaveBeenCalledWith('A1');
+            expect(component.getValue()).toBe('A1');
+        });
+
+        it('should return entire object when valueProperty is not specified', () => {
+            jest.spyOn(component, 'onChange');
+            fixture.detectChanges();
+            fixture.componentRef.setInput('valueProperty', null);
+
+            const fruits: FruitItem[] = component.dropdownValues as FruitItem[];
+            component.onMenuClickHandler(fruits[0]);
+
+            expect(component.onChange).toHaveBeenCalledWith(fruits[0]);
+            expect(component.getValue()).toBe(fruits[0]);
+        });
+
+        it('should find matching object when writeValue is called with property value', () => {
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            component.writeValue('StrawberryValue');
+
+            expect(component.inputText).toBe('Strawberry');
+            expect(component.getValue()).toBe('StrawberryValue');
+        });
+
+        it('should handle writeValue when no matching object found for property value', () => {
+            fixture.componentRef.setInput('valueProperty', 'value');
+            component.writeValue('NonExistentValue');
+
+            // Should use the value as-is when no match found
+            expect(component.getValue()).toBe('NonExistentValue');
+        });
+
+        it('should handle writeValue with different property name', () => {
+            const fruits: FruitItem[] = [
+                { displayedValue: 'Apple', value: 'AppleValue', code: 'A1' },
+                { displayedValue: 'Banana', value: 'BananaValue', code: 'B1' }
+            ];
+            component.dropdownValues = fruits;
+            fixture.componentRef.setInput('valueProperty', 'code');
+            fixture.detectChanges();
+
+            component.writeValue('B1');
+
+            expect(component.inputText).toBe('Banana');
+            expect(component.getValue()).toBe('B1');
+        });
+
+        it('should handle writeValue when valueProperty is null', () => {
+            fixture.componentRef.setInput('valueProperty', null);
+            fixture.detectChanges();
+
+            const fruits: FruitItem[] = component.dropdownValues as FruitItem[];
+            component.writeValue(fruits[0]);
+
+            expect(component.inputText).toBe('Apple');
+            expect(component.getValue()).toBe(fruits[0]);
+        });
+
+        it('should extract value during propagateChange when item is selected', () => {
+            jest.spyOn(component, 'onChange');
+            fixture.componentRef.setInput('valueProperty', 'value');
+            component.inputText = 'Strawberry';
+
+            (<any>component)._propagateChange();
+
+            expect(component.onChange).toHaveBeenCalledWith('StrawberryValue');
+        });
+
+        it('should work correctly with reactive forms pattern', () => {
+            jest.spyOn(component, 'onChange');
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            const fruits: FruitItem[] = component.dropdownValues as FruitItem[];
+            // Simulate selecting an item
+            component.onMenuClickHandler(fruits[4]); // Strawberry
+
+            // Verify the form gets the extracted value, not the entire object
+            expect(component.onChange).toHaveBeenCalledWith('StrawberryValue');
+            expect(component.getValue()).toBe('StrawberryValue');
+
+            // Simulate form value change from outside (e.g., patchValue)
+            component.writeValue('BananaValue');
+
+            // Should find the matching object and display it
+            expect(component.inputText).toBe('Banana');
+            expect(component.getValue()).toBe('BananaValue');
+        });
+
+        it('should handle null/undefined values gracefully', () => {
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            component.writeValue(null);
+            expect(component.getValue()).toBe(null);
+
+            component.writeValue(undefined);
+            expect(component.getValue()).toBe(undefined);
+        });
+
+        it('should ignore valueProperty when communicateByObject is false', () => {
+            jest.spyOn(component, 'onChange');
+            component.communicateByObject = false;
+            fixture.componentRef.setInput('valueProperty', 'value');
+            fixture.detectChanges();
+
+            component.inputText = 'someValue';
+
+            expect(component.getValue()).toBe('someValue');
+        });
+    });
 });
