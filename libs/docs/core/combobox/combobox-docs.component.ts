@@ -27,6 +27,7 @@ import { ComboboxOpenControlExampleComponent } from './examples/combobox-open-co
 import { ComboboxSearchFieldExampleComponent } from './examples/combobox-search-field-example.component';
 import { ComboboxSearchFunctionExampleComponent } from './examples/combobox-search-function-example.component';
 import { ComboboxTemplateExampleComponent } from './examples/combobox-template-example.component';
+import { ComboboxValuePropertyExampleComponent } from './examples/combobox-value-property-example.component';
 
 const comboboxScss = 'combobox-example.component.scss';
 
@@ -66,6 +67,8 @@ const comboboxBylineTs = 'combobox-byline-example.component.ts';
 
 const comboboxInsideDialogH = 'combobox-inside-dialog-example.component.html';
 const comboboxInsideDialogT = 'combobox-inside-dialog-example.component.ts';
+const comboboxValuePropertyH = 'combobox-value-property-example.component.html';
+const comboboxValuePropertyT = 'combobox-value-property-example.component.ts';
 
 @Component({
     selector: 'fd-combobox-docs',
@@ -93,7 +96,8 @@ const comboboxInsideDialogT = 'combobox-inside-dialog-example.component.ts';
         ComboboxFormsExampleComponent,
         ComboboxDisabledExampleComponent,
         ComboboxBylineExampleComponent,
-        ComboboxInsideDialogExampleComponent
+        ComboboxInsideDialogExampleComponent,
+        ComboboxValuePropertyExampleComponent
     ]
 })
 export class ComboboxDocsComponent {
@@ -333,6 +337,20 @@ export class ComboboxDocsComponent {
             component: 'ComboboxInsideDialogExampleComponent',
             code: getAssetFromModuleAssets(comboboxInsideDialogT),
             fileName: 'combobox-inside-dialog-example'
+        }
+    ];
+
+    comboboxValuePropertyExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(comboboxValuePropertyH),
+            fileName: 'combobox-value-property-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxValuePropertyExampleComponent',
+            code: getAssetFromModuleAssets(comboboxValuePropertyT),
+            fileName: 'combobox-value-property-example'
         }
     ];
 }
