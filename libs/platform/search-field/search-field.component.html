@@ -119,9 +119,11 @@
         }
     </button>
     <fdp-menu #categoryMenu>
-        <fdp-menu-item (itemSelect)="setCurrentCategory(null)">{{
-            'platformSearchField.allButtonLabel' | fdTranslate
-        }}</fdp-menu-item>
+        @if (showCategoryAllOption) {
+            <fdp-menu-item (itemSelect)="setCurrentCategory(null)">{{
+                'platformSearchField.allButtonLabel' | fdTranslate
+            }}</fdp-menu-item>
+        }
         @for (category of categories; track category) {
             <fdp-menu-item (itemSelect)="setCurrentCategory(category)">{{ category.label }} </fdp-menu-item>
         }

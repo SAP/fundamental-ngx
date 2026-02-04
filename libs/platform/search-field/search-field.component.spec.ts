@@ -1,7 +1,7 @@
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 
@@ -119,7 +119,7 @@ describe('SearchFieldComponent', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestComponent],
             providers: [RtlService]
@@ -128,7 +128,7 @@ describe('SearchFieldComponent', () => {
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
         })();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -758,7 +758,7 @@ describe('SearchFieldComponent with DataSource', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [DataSourceTestComponent],
             providers: [RtlService]
@@ -767,7 +767,7 @@ describe('SearchFieldComponent with DataSource', () => {
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
         })();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DataSourceTestComponent);

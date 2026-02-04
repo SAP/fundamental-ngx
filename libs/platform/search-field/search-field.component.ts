@@ -279,6 +279,10 @@ export class SearchFieldComponent
     @Input()
     disableSuggestionsFoundAnnouncer = false;
 
+    /** Whether to show the "All" option in the category select. */
+    @Input()
+    showCategoryAllOption = false;
+
     /** Input change event. */
     @Output()
     inputChange: EventEmitter<SearchInput> = new EventEmitter();
