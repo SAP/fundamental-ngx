@@ -7,7 +7,6 @@ import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illus
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
@@ -140,11 +139,6 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
             notificationLabel: 'Unread Notifications'
         }
     ];
-
-    mobileConfig: MobileModeConfig = {
-        approveButtonText: 'OK',
-        hasCloseButton: true
-    };
 
     xsmallConfig: SvgConfig = {
         xsmall: {

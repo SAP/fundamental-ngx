@@ -130,6 +130,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     @Input()
     backButtonLabel: string;
 
+    /** Whether to show the search when the shellbar size is set to small. */
+    @Input()
+    showSearchFieldOnSizeSmall = false;
+
     /** Emitted event when navigation button is clicked. */
     @Output()
     navigationButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
@@ -469,7 +473,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             this.branding.showTitle();
         }
         if (this._actions) {
-            this._actions._handleOverflow(this._currentSize === 's');
+            this._actions._handleOverflow(this.showSearchFieldOnSizeSmall);
         }
     }
 

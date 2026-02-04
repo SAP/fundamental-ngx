@@ -14,7 +14,7 @@
 </fd-segmented-button>
 
 <div [style.maxWidth]="exampleType === 'mobile' ? '320px' : '100%'" style="height: 500px; background-color: white">
-    <fd-shellbar>
+    <fd-shellbar [showSearchFieldOnSizeSmall]="true">
         <fd-shellbar-branding [interactiveBranding]="true">
             <fd-shellbar-logo>
                 <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
@@ -43,7 +43,6 @@
             [searchResultsEmptyDefaultSuggestions]="
                 emptyResultsType === 'customSuggestions' ? emptyDefaultSuggestions : null
             "
-            [mobileConfig]="mobileConfig"
             [enableSelection]="true"
             [suggestionsLoading]="suggestionsLoading"
             (searchSubmit)="submit($event)"

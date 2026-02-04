@@ -15,6 +15,7 @@ import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fu
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DialogBodyComponent,
+    DialogCloseButtonComponent,
     DialogComponent,
     DialogFooterComponent,
     DialogHeaderComponent
@@ -53,7 +54,8 @@ import {
         DialogFooterComponent,
         ButtonBarComponent,
         ButtonComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        DialogCloseButtonComponent
     ]
 })
 export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobileInterface> implements OnInit {
