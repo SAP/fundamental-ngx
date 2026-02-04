@@ -37,7 +37,7 @@
             [focusable]="true"
             [style]="
                 _contentDensityObserver.contentDensity$()
-                    | selectionCellStyles: _rtl$() : _fdpTableService._semanticHighlightingColumnWidth$()
+                    | selectionCellStyles: isRtl() : _fdpTableService._semanticHighlightingColumnWidth$()
             "
             [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
@@ -74,7 +74,7 @@
             [attr.aria-selected]="row.checked"
             [style]="
                 _contentDensityObserver.contentDensity$()
-                    | selectionCellStyles: _rtl$() : _fdpTableService._semanticHighlightingColumnWidth$()
+                    | selectionCellStyles: isRtl() : _fdpTableService._semanticHighlightingColumnWidth$()
             "
         >
             <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
@@ -126,7 +126,7 @@
         [ngStyle]="
             column
                 | tableCellStyles
-                    : _rtl$()
+                    : isRtl()
                     : _fdpTableService._semanticHighlightingColumnWidth$()
                     : selectionColumnWidth
                     : column._freezed
@@ -212,7 +212,7 @@
             <fd-icon
                 fd-table-icon
                 [navigation]="true"
-                [glyph]="_rtl$() ? 'slim-arrow-left' : 'slim-arrow-right'"
+                [glyph]="navigationIcon()"
                 class="fdp-table__navigation-indicator"
                 [attr.title]="'platformTable.rowNavigateButtonTitle' | fdTranslate"
             ></fd-icon>

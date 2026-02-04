@@ -1,22 +1,25 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
+    computed,
     ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
+    inject,
+    input,
+    signal,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
 export type LablePosition = 'left' | 'right' | 'top' | 'bottom';
 export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'linearleft';
 export type FillingDirection = 'clockwise' | 'counterclockwise';
+
+let statusIndicatorId = 0;
 
 export class Point {
     /** @hidden */
@@ -31,211 +34,181 @@ export class Point {
     templateUrl: './status-indicator.component.html',
     styleUrl: './status-indicator.component.scss',
     host: {
-        '[attr.aria-label]': 'ariaLabel',
-        '[attr.aria-roledescription]': 'ariaRoleDescription',
-        '[attr.focusable]': 'focusable',
-        '[attr.title]': 'title',
-        '[attr.role]': 'role',
-        '[attr.aria-valuetext]': 'ariaValueText',
-        '[attr.aria-valuenow]': 'fillPercentage ? fillPercentage : 0',
+        '[class]': '_cssClass()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.aria-roledescription]': 'ariaRoleDescription()',
+        '[attr.focusable]': 'focusable()',
+        '[attr.title]': 'title()',
+        '[attr.role]': 'role()',
+        '[attr.aria-valuetext]': 'ariaValueText()',
+        '[attr.aria-valuenow]': 'fillPercentage() || 0',
         '[attr.aria-valuemin]': '0',
         '[attr.aria-valuemax]': '100',
-        '[attr.tabindex]': 'focusable ? 0 : -1'
+        '[attr.tabindex]': 'focusable() ? 0 : -1'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet]
 })
-export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {
+export class StatusIndicatorComponent implements AfterViewInit, HasElementRef {
     /**
      * value id defines the id of the object.
      */
-    @Input()
-    id: string;
+    readonly id = input('fd-status-indicator-' + ++statusIndicatorId);
 
     /**
      * defines the size of the status indicator.
      * Can be one of the following: 'sm' | 'md' | 'lg' | 'xl'
      * Default size is Medium(md).
      */
-    @Input()
-    size: StatusIndicatorSize = 'md';
+    readonly size = input<StatusIndicatorSize>('md');
 
     /**
      * The status represented by the Status Indicator.
      * Can be one of the following: 'negative' | 'critical' | 'informative'
      * For default Object Status omit this property
      */
-    @Input()
-    status: StatusIndicatorColor;
+    readonly status = input<StatusIndicatorColor>();
 
     /** Define the text content of the Status indicator*/
-    @Input()
-    statusLabel: string;
+    readonly statusLabel = input<string>();
 
     /**
-     * positioning of the status indicator image withing the defined height and width .
+     * positioning of the status indicator image within the defined height and width .
      */
-    @Input()
-    viewBox: string;
+    readonly viewBox = input<string>();
 
     /**
-     * boolean value to be marked as a clickable
+     * boolean value to be marked as clickable
      */
-    @Input()
-    clickable: boolean;
+    readonly clickable = input(false);
 
     /**
      * defines the size of the status indicator.
      * Can be one of the following: 'sm' | 'md' | 'lg' | 'xl'
      */
-    @Input()
-    labelSize: StatusIndicatorSize = 'sm';
+    readonly labelSize = input<StatusIndicatorSize>('sm');
 
     /** Aria label for the Status Indicator. */
-    @Input()
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel = input<string | null | undefined>();
 
     /** Aria defines role description for the Status Indicator. */
-    @Input()
-    ariaRoleDescription: Nullable<string>;
+    readonly ariaRoleDescription = input<string | null | undefined>();
 
     /** Aria Focusable for the Status Indicator. */
-    @Input()
-    focusable: boolean;
+    readonly focusable = input(false, { transform: booleanAttribute });
 
     /** Aria Role for the Status Indicator. */
-    @Input()
-    role: Nullable<string>;
+    readonly role = input<string | null | undefined>();
 
     /** Aria Value Text for the Status Indicator. */
-    @Input()
-    ariaValueText: Nullable<string>;
+    readonly ariaValueText = input<string | null | undefined>();
 
     /** Aria title for the status indicator. */
-    @Input()
-    title: Nullable<string>;
+    readonly title = input<string | null | undefined>();
 
     /** defines the label position the value can be 'left' | 'right' | 'top' | 'bottom' */
-    @Input()
-    labelPosition: LablePosition;
+    readonly labelPosition = input<LablePosition>();
 
     /** Path for the status indicator */
-    @Input()
-    path: string[];
+    readonly path = input<string[]>();
 
     /**
      * Offset value to be filled under the give percentatge value.
      */
-    @Input()
-    fillPercentage: number;
+    readonly fillPercentage = input<number>();
 
     /**
      * value to define fill direction
      */
-    @Input()
-    fillDirection: FillingDirection = 'clockwise';
-
-    /** @hidden */
-    set _fillDirection(direction: FillingDirection) {
-        this.fillDirection = direction;
-    }
-    get _fillDirection(): FillingDirection {
-        return this.fillDirection;
-    }
+    readonly fillDirection = input<FillingDirection>('clockwise');
 
     /**
      * FillingType to represent the fill pattern of the component
      */
-    @Input()
-    fillingType: FillingType = 'lineardown';
+    readonly fillingType = input<FillingType>('lineardown');
 
     /** represent the degree of angle to project the filling of the component */
-    @Input()
-    angle: number;
+    readonly angle = input<number>();
 
     /** @hidden */
-    fillCalculator: number;
-    /** @hidden */
-    binaryString: string;
-    /** @hidden */
-    x1: string;
-    /** @hidden */
-    y1: string;
-    /** @hidden */
-    x2: string;
-    /** @hidden */
-    y2: string;
-    /** @hidden */
-    pointsArray: string[] = [];
+    readonly elementRef = inject(ElementRef<HTMLElement>);
 
     /** @hidden */
-    class: string;
-
+    protected readonly binaryString = signal<string>('');
     /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef<HTMLElement>,
-        private _cd: ChangeDetectorRef
-    ) {}
+    protected readonly x1 = signal<string>('');
+    /** @hidden */
+    protected readonly y1 = signal<string>('');
+    /** @hidden */
+    protected readonly x2 = signal<string>('');
+    /** @hidden */
+    protected readonly y2 = signal<string>('');
+    /** @hidden */
+    protected readonly pointsArray = signal<string[]>([]);
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
+    /** @hidden Computed fill calculator based on percentage and path length */
+    protected readonly fillCalculator = computed(() => {
+        const percentage = this.fillPercentage();
+        const pathLength = this.path()?.length || 0;
+
+        if (percentage === undefined || percentage < 0) {
+            return 0;
+        }
+        return (percentage * pathLength) / 100;
+    });
+
+    /** @hidden Computed CSS class */
+    protected readonly _cssClass = computed(() =>
+        [
             'fd-status-indicator',
-            this.size ? `fd-status-indicator--${this.size}` : '',
-            this.status ? `fd-status-indicator--${this.status}` : '',
-            this.clickable ? `fd-status-indicator--link` : '',
-            this.labelPosition === 'right' || this.labelPosition === 'left'
-                ? `fd-status-indicator--horizontal-label`
-                : '',
-            this.class
-        ];
-    }
+            this.size() ? `fd-status-indicator--${this.size()}` : '',
+            this.status() ? `fd-status-indicator--${this.status()}` : '',
+            this.clickable() ? 'fd-status-indicator--link' : '',
+            this.labelPosition() === 'right' || this.labelPosition() === 'left'
+                ? 'fd-status-indicator--horizontal-label'
+                : ''
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
+
+    protected readonly labelCssClass = computed(() =>
+        [
+            'fd-status-indicator__label',
+            this.labelSize() ? `fd-status-indicator__label--${this.labelSize()}` : '',
+            this.labelPosition() ? `fd-status-indicator__label--${this.labelPosition()}` : ''
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._angleCalculation();
-        this._cd.detectChanges();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this._calculateFilling();
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    public ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    private _calculateFilling(): void {
-        if (this.fillPercentage < 0 || this.fillPercentage === undefined) {
-            this.fillCalculator = 0;
-        } else {
-            this.fillCalculator = (this.fillPercentage * this.path.length) / 100;
-        }
     }
 
     /** @hidden */
     private _angleCalculation(): void {
         let sPointsAttributeValue: Array<Point>;
         let polygonPoints: string;
-        switch (this.fillingType) {
-            case 'angled':
-                this.binaryString = this._convertAngleToBinary(this.angle);
-                this._assignBinaryValue(this.binaryString);
+        const fillType = this.fillingType();
+
+        switch (fillType) {
+            case 'angled': {
+                const angleValue = this.angle();
+                if (angleValue !== undefined) {
+                    const binaryStr = this._convertAngleToBinary(angleValue);
+                    this.binaryString.set(binaryStr);
+                    this._assignBinaryValue(binaryStr);
+                }
                 break;
+            }
             case 'radial': {
-                const tempPercent = this.fillCalculator % 1;
+                const tempPercent = this.fillCalculator() % 1;
                 const fillNumber = Number(tempPercent.toFixed(2));
                 const element = this.elementRef.nativeElement.querySelectorAll('svg');
+                const points: string[] = [];
 
                 for (let i = 1; i < element.length; i++) {
                     sPointsAttributeValue = this._getPolygonPointsForCircularFilling(
@@ -243,24 +216,31 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
                         element[i].getBBox()
                     );
                     polygonPoints = sPointsAttributeValue.reduce((acc, item) => acc + item.x + ',' + item.y + ' ', '');
-                    this.pointsArray.push(polygonPoints);
+                    points.push(polygonPoints);
                 }
+                this.pointsArray.set(points);
                 break;
             }
-            case 'linearup':
-                this.binaryString = this._convertAngleToBinary(90);
-                this._assignBinaryValue(this.binaryString);
+            case 'linearup': {
+                const binaryStr = this._convertAngleToBinary(90);
+                this.binaryString.set(binaryStr);
+                this._assignBinaryValue(binaryStr);
                 break;
-            case 'lineardown':
-                this.binaryString = this._convertAngleToBinary(270);
-                this._assignBinaryValue(this.binaryString);
+            }
+            case 'lineardown': {
+                const binaryStr = this._convertAngleToBinary(270);
+                this.binaryString.set(binaryStr);
+                this._assignBinaryValue(binaryStr);
                 break;
-            case 'linearleft':
-                this.binaryString = this._convertAngleToBinary(180);
-                this._assignBinaryValue(this.binaryString);
+            }
+            case 'linearleft': {
+                const binaryStr = this._convertAngleToBinary(180);
+                this.binaryString.set(binaryStr);
+                this._assignBinaryValue(binaryStr);
                 break;
+            }
             default:
-                throw new Error(`fdStatusIndicator: No fillType found for ${this.fillingType}.`);
+                throw new Error(`fdStatusIndicator: No fillType found for ${fillType}.`);
         }
     }
 
@@ -292,10 +272,10 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     /** @hidden */
     private _assignBinaryValue(binaryString: string): void {
         const binaryValue = binaryString.split(',');
-        this.x1 = binaryValue[0];
-        this.y1 = binaryValue[1];
-        this.x2 = binaryValue[2];
-        this.y2 = binaryValue[3];
+        this.x1.set(binaryValue[0]);
+        this.y1.set(binaryValue[1]);
+        this.x2.set(binaryValue[2]);
+        this.y2.set(binaryValue[3]);
     }
 
     /** @hidden */
@@ -318,7 +298,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         const _adjustIfCounterClockwise = (oPoint: Point): Point => {
             const res = Object.assign({}, oPoint);
 
-            if (this._fillDirection === 'counterclockwise') {
+            if (this.fillDirection() === 'counterclockwise') {
                 const iXDistanceFromCentre = oPoint.x - oCentrePoint.x;
                 res.x = oCentrePoint.x - iXDistanceFromCentre;
             }

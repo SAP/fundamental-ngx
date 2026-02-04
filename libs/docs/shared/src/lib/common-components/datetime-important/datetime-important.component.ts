@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
@@ -9,6 +9,5 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     imports: [MessageStripComponent, RouterLink]
 })
 export class DatetimeImportantComponent {
-    @Input()
-    componentName: string;
+    readonly componentName = input<string>();
 }

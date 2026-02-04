@@ -27,7 +27,7 @@ describe('LayoutPanelBodyComponent', () => {
     });
 
     it('should support edge bleeding', () => {
-        component.bleed = true;
+        fixture.componentRef.setInput('bleed', true);
         fixture.detectChanges();
         expect(fixture.nativeElement.className).toContain('fd-layout-panel__body--bleed');
     });

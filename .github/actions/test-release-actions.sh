@@ -94,36 +94,50 @@ if [ -n "$RELEASE_PROJECTS" ]; then
                 const fs = require('fs');
                 const pkg = JSON.parse(fs.readFileSync('libs/$project/package.json', 'utf-8'));
                 
-                // Check peerDependencies
-                if (pkg.peerDependencies) {
-                    for (const [dep, version] of Object.entries(pkg.peerDependencies)) {
+                // Helper function to check dependencies
+                function checkDeps(deps) {
+                    if (!deps) return null;
+                    for (const [dep, version] of Object.entries(deps)) {
                         // Check @fundamental-ngx/* dependencies
                         if (dep.startsWith('@fundamental-ngx/') && version !== 'VERSION_PLACEHOLDER') {
-                            console.log('fundamental-ngx');
-                            process.exit(0);
+                            return 'fundamental-ngx';
                         }
                         // Check @angular/* dependencies
                         if (dep.startsWith('@angular/') && version !== 'ANGULAR_VER_PLACEHOLDER') {
-                            console.log('angular');
-                            process.exit(0);
+                            return 'angular';
+                        }
+                        // Check @ui5/webcomponents* dependencies
+                        if (dep.startsWith('@ui5/webcomponents') && version !== 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER') {
+                            return 'ui5-webcomponents';
+                        }
+                        // Check fundamental-styles dependency
+                        if (dep === 'fundamental-styles' && version !== 'FDSTYLES_VER_PLACEHOLDER') {
+                            return 'fundamental-styles';
+                        }
+                        // Check @fundamental-styles/cx dependency
+                        if (dep === '@fundamental-styles/cx' && version !== 'FDCXSTYLES_VER_PLACEHOLDER') {
+                            return 'fundamental-styles-cx';
+                        }
+                        // Check @sap-theming/theming-base-content dependency
+                        if (dep === '@sap-theming/theming-base-content' && version !== 'THEMING_VER_PLACEHOLDER') {
+                            return 'theming';
                         }
                     }
+                    return null;
+                }
+                
+                // Check peerDependencies
+                let result = checkDeps(pkg.peerDependencies);
+                if (result) {
+                    console.log(result);
+                    process.exit(0);
                 }
                 
                 // Check dependencies
-                if (pkg.dependencies) {
-                    for (const [dep, version] of Object.entries(pkg.dependencies)) {
-                        // Check @fundamental-ngx/* dependencies
-                        if (dep.startsWith('@fundamental-ngx/') && version !== 'VERSION_PLACEHOLDER') {
-                            console.log('fundamental-ngx');
-                            process.exit(0);
-                        }
-                        // Check @angular/* dependencies
-                        if (dep.startsWith('@angular/') && version !== 'ANGULAR_VER_PLACEHOLDER') {
-                            console.log('angular');
-                            process.exit(0);
-                        }
-                    }
+                result = checkDeps(pkg.dependencies);
+                if (result) {
+                    console.log(result);
+                    process.exit(0);
                 }
                 
                 console.log('ok');
@@ -134,6 +148,18 @@ if [ -n "$RELEASE_PROJECTS" ]; then
                 PLACEHOLDER_CHECK_FAILED=true
             elif [ "$HAS_ACTUAL_VERSIONS" = "angular" ]; then
                 echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @angular dependencies"
+                PLACEHOLDER_CHECK_FAILED=true
+            elif [ "$HAS_ACTUAL_VERSIONS" = "ui5-webcomponents" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @ui5/webcomponents dependencies"
+                PLACEHOLDER_CHECK_FAILED=true
+            elif [ "$HAS_ACTUAL_VERSIONS" = "fundamental-styles" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for fundamental-styles"
+                PLACEHOLDER_CHECK_FAILED=true
+            elif [ "$HAS_ACTUAL_VERSIONS" = "fundamental-styles-cx" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @fundamental-styles/cx"
+                PLACEHOLDER_CHECK_FAILED=true
+            elif [ "$HAS_ACTUAL_VERSIONS" = "theming" ]; then
+                echo -e "    ${RED}✗${NC} libs/$project/package.json - has actual versions for @sap-theming/theming-base-content"
                 PLACEHOLDER_CHECK_FAILED=true
             else
                 echo -e "    ${GREEN}✓${NC} libs/$project/package.json"
@@ -153,8 +179,67 @@ else
 fi
 echo ""
 
-# Test 3: Test bump-version action (manual mode - no actual bump)
-echo -e "${YELLOW}[3/14] Testing bump-version action (manual mode)...${NC}"
+# Test 3: Test placeholder resolution (sync-versions utility)
+echo -e "${YELLOW}[3/15] Testing placeholder resolution (sync-versions)...${NC}"
+cd "$REPO_ROOT"
+
+# Test that placeholders resolve to valid versions (not undefined)
+PLACEHOLDER_RESOLUTION_FAILED=false
+
+RESOLUTION_OUTPUT=$(node -e "
+    const { replaceInFile } = require('./libs/nx-plugin/src/generators/sync-versions/utils');
+    
+    const testCases = [
+        { name: 'VERSION_PLACEHOLDER', input: 'VERSION_PLACEHOLDER' },
+        { name: 'ANGULAR_VER_PLACEHOLDER', input: 'ANGULAR_VER_PLACEHOLDER' },
+        { name: 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER', input: 'UI5_WEBCOMPONENTS_VER_PLACEHOLDER' },
+        { name: 'FDSTYLES_VER_PLACEHOLDER', input: 'FDSTYLES_VER_PLACEHOLDER' },
+        { name: 'FDCXSTYLES_VER_PLACEHOLDER', input: 'FDCXSTYLES_VER_PLACEHOLDER' },
+        { name: 'THEMING_VER_PLACEHOLDER', input: 'THEMING_VER_PLACEHOLDER' },
+        { name: 'RXJS_VER_PLACEHOLDER', input: 'RXJS_VER_PLACEHOLDER' }
+    ];
+    
+    let hasErrors = false;
+    
+    testCases.forEach(({ name, input }) => {
+        const result = replaceInFile('test.json', input);
+        
+        // Check for undefined or invalid versions
+        if (result.includes('undefined') || result.includes('NaN') || result === input) {
+            console.log('FAIL:' + name + ':' + result);
+            hasErrors = true;
+        } else {
+            console.log('PASS:' + name + ':' + result);
+        }
+    });
+    
+    process.exit(hasErrors ? 1 : 0);
+" 2>&1)
+
+if [ $? -ne 0 ]; then
+    PLACEHOLDER_RESOLUTION_FAILED=true
+fi
+
+# Parse and display results
+echo "$RESOLUTION_OUTPUT" | while IFS=: read -r status name value; do
+    if [ "$status" = "PASS" ]; then
+        echo -e "    ${GREEN}✓${NC} $name → $value"
+    elif [ "$status" = "FAIL" ]; then
+        echo -e "    ${RED}✗${NC} $name → $value (invalid!)"
+    fi
+done
+
+if [ "$PLACEHOLDER_RESOLUTION_FAILED" = "true" ]; then
+    echo -e "${RED}✗ Some placeholders resolved to invalid versions${NC}"
+    echo "  Check libs/nx-plugin/src/generators/sync-versions/utils.ts"
+    exit 1
+else
+    echo -e "${GREEN}✓ All placeholders resolve to valid versions${NC}"
+fi
+echo ""
+
+# Test 4: Test bump-version action (manual mode - no actual bump)
+echo -e "${YELLOW}[4/15] Testing bump-version action (manual mode)...${NC}"
 # Actions must run from repo root where package.json exists
 cd "$REPO_ROOT"
 
@@ -472,7 +557,7 @@ if [ -f "scripts/reset-placeholders.js" ]; then
     BACKUP_FILE="/tmp/test-package.json.backup"
     cp "$TEST_PACKAGE" "$BACKUP_FILE"
     
-    # Temporarily modify it to have actual versions
+    # Temporarily modify it to have actual versions for all placeholder types
     node -e "
         const fs = require('fs');
         const pkg = JSON.parse(fs.readFileSync('$TEST_PACKAGE', 'utf-8'));
@@ -484,6 +569,31 @@ if [ -f "scripts/reset-placeholders.js" ]; then
                 if (dep.startsWith('@angular/')) {
                     pkg.peerDependencies[dep] = '^20.0.0';
                 }
+                if (dep === 'fundamental-styles') {
+                    pkg.peerDependencies[dep] = '0.40.1';
+                }
+                if (dep === '@sap-theming/theming-base-content') {
+                    pkg.peerDependencies[dep] = '^11.31.0';
+                }
+            });
+        }
+        if (pkg.dependencies) {
+            Object.keys(pkg.dependencies).forEach(dep => {
+                if (dep.startsWith('@fundamental-ngx/')) {
+                    pkg.dependencies[dep] = '0.58.0-rc.26';
+                }
+                if (dep === 'fundamental-styles') {
+                    pkg.dependencies[dep] = '0.40.1';
+                }
+                if (dep === '@fundamental-styles/cx') {
+                    pkg.dependencies[dep] = '0.40.1';
+                }
+                if (dep === '@sap-theming/theming-base-content') {
+                    pkg.dependencies[dep] = '^11.31.0';
+                }
+                if (dep.startsWith('@ui5/webcomponents')) {
+                    pkg.dependencies[dep] = '~2.18.1';
+                }
             });
         }
         fs.writeFileSync('$TEST_PACKAGE', JSON.stringify(pkg, null, 4) + '\n');
@@ -492,13 +602,32 @@ if [ -f "scripts/reset-placeholders.js" ]; then
     # Run the reset script
     RESET_OUTPUT=$(node scripts/reset-placeholders.js 2>&1)
     
-    # Check if placeholders were restored
-    if grep -q "VERSION_PLACEHOLDER" "$TEST_PACKAGE" && grep -q "ANGULAR_VER_PLACEHOLDER" "$TEST_PACKAGE"; then
-        echo -e "${GREEN}✓ reset-placeholders.js successfully restored placeholders${NC}"
+    # Check if all placeholders were restored
+    PLACEHOLDERS_OK=true
+    
+    if ! grep -q "VERSION_PLACEHOLDER" "$TEST_PACKAGE"; then
+        echo -e "    ${RED}✗${NC} VERSION_PLACEHOLDER not restored"
+        PLACEHOLDERS_OK=false
+    fi
+    if ! grep -q "ANGULAR_VER_PLACEHOLDER" "$TEST_PACKAGE"; then
+        echo -e "    ${RED}✗${NC} ANGULAR_VER_PLACEHOLDER not restored"
+        PLACEHOLDERS_OK=false
+    fi
+    if ! grep -q "FDSTYLES_VER_PLACEHOLDER" "$TEST_PACKAGE"; then
+        echo -e "    ${RED}✗${NC} FDSTYLES_VER_PLACEHOLDER not restored"
+        PLACEHOLDERS_OK=false
+    fi
+    if ! grep -q "THEMING_VER_PLACEHOLDER" "$TEST_PACKAGE"; then
+        echo -e "    ${RED}✗${NC} THEMING_VER_PLACEHOLDER not restored"
+        PLACEHOLDERS_OK=false
+    fi
+    
+    if [ "$PLACEHOLDERS_OK" = "true" ]; then
+        echo -e "${GREEN}✓ reset-placeholders.js successfully restored all placeholders${NC}"
         echo "  Script output:"
-        echo "$RESET_OUTPUT" | head -3 | sed 's/^/    /'
+        echo "$RESET_OUTPUT" | head -5 | sed 's/^/    /'
     else
-        echo -e "${RED}✗ reset-placeholders.js failed to restore placeholders${NC}"
+        echo -e "${RED}✗ reset-placeholders.js failed to restore some placeholders${NC}"
     fi
     
     # Restore backup

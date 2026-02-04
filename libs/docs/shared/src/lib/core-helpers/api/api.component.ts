@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal, viewChild } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -16,17 +16,11 @@ import { ApiDocsService } from '../../services/api-docs.service';
 export class ApiComponent {
     protected readonly menu = viewChild<MenuComponent>('menu');
 
-    protected readonly _route = inject(ActivatedRoute);
-    protected readonly _apiService = inject(ApiDocsService);
-
     // Source of truth for which file to load
     protected readonly activeFile = signal<string>('');
 
-    // Derived: sorted files from route data
-    protected readonly files = computed(() => {
-        const routeFiles = this._route.snapshot.data['content'] as string[] | undefined;
-        return routeFiles ? [...routeFiles].sort() : [];
-    });
+    // Sorted files from route data
+    protected readonly files = signal<string[]>([]);
 
     // Reactive: automatically fetches HTML when activeFile changes
     protected readonly result = toSignal(
@@ -46,17 +40,28 @@ export class ApiComponent {
         { initialValue: '' }
     );
 
+    private readonly _route = inject(ActivatedRoute);
+    private readonly _apiService = inject(ApiDocsService);
+
     constructor() {
-        // Initialize with first file or empty state
-        const initialFiles = this.files();
-        if (initialFiles.length > 0) {
-            this.activeFile.set(initialFiles[0]);
+        // Initialize files from route data
+        const routeFiles = this._route.snapshot.data['content'] as string[] | undefined;
+        if (routeFiles) {
+            const sortedFiles = [...routeFiles].sort();
+            this.files.set(sortedFiles);
+
+            if (sortedFiles.length > 0) {
+                this.activeFile.set(sortedFiles[0]);
+            }
         }
 
         // Close menu when file changes
         effect(() => {
             this.activeFile(); // Track dependency
-            this.menu()?.close();
+            const menuComponent = this.menu();
+            if (menuComponent?.isOpen) {
+                menuComponent.close();
+            }
         });
     }
 

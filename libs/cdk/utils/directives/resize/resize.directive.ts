@@ -7,10 +7,9 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     Output,
     SimpleChanges,
-    computed
+    inject
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { filter, map, pairwise, takeUntil, tap } from 'rxjs/operators';
@@ -33,7 +32,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
     @Input('fdkResizeBoundary') resizeBoundary: string | HTMLElement = 'body';
 
     /** Whether resizable behaviour should be disabled */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
+
     @Input('fdkResizeDisabled') disabled = false;
 
     /** Additional class to be applied to the Element ref during resize. */
@@ -83,13 +82,10 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _resizeSubscriptions = new Subscription();
 
     /** @hidden */
-    private readonly _direction$ = computed(() => (this._rtlService?.rtlSignal() ? -1 : 1));
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        @Optional() private _rtlService: RtlService
-    ) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -200,7 +196,8 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
 
         return (event1: MouseEvent, event2: MouseEvent) => {
-            const x = (event2.screenX - event1.screenX) * this._direction$();
+            const direction = this._rtlService?.rtl() ? -1 : 1;
+            const x = (event2.screenX - event1.screenX) * direction;
             const y = event2.screenY - event1.screenY;
 
             return {

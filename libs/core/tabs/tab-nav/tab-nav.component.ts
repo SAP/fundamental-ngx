@@ -12,9 +12,10 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     QueryList,
     ViewEncapsulation,
+    computed,
+    effect,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,8 +33,7 @@ import { TabModes, TabSizes } from '../tab-list.component';
     providers: [contentDensityObserverProviders()],
     styleUrl: './tab-nav.component.scss',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy, CssClassBuilder {
     /** Apply user custom styles */
@@ -60,25 +60,34 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     items: QueryList<TabItemDirective>;
 
     /** @hidden */
+    protected readonly _dir = computed(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
     private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
 
     /** @hidden */
-    private _dir: 'ltr' | 'rtl';
-
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private readonly _contentDensityObserver: ContentDensityObserver,
-        @Optional() private readonly _rtlService: RtlService
-    ) {
-        this._dir = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
+    constructor(public readonly elementRef: ElementRef) {
         this._contentDensityObserver.subscribe();
+
+        // React to RTL changes for keyboard navigation
+        effect(() => {
+            const dir = this._dir();
+            if (this._keyboardEventsManager) {
+                this._keyboardEventsManager.withHorizontalOrientation(dir);
+            }
+        });
     }
 
     /** @hidden
@@ -179,10 +188,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     /** @hidden */
     private _setupKeyManager(): void {
         this._keyboardEventsManager?.destroy();
-        this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir);
-
-        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl) => {
-            this._keyboardEventsManager.withHorizontalOrientation(isRtl ? 'rtl' : 'ltr');
-        });
+        this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir());
     }
 }

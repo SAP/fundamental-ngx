@@ -99,6 +99,26 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: 'Tree Item {itemDetails}, {selectedDescription}'
     },
+    coreObjectMarker: {
+        active: 'Status(active)',
+        inactive: 'Status'
+    },
+    coreObjectNumber: {
+        emphasized: 'Emphasized',
+        negative: 'Value State Error',
+        critical: 'Value State Warning',
+        positive: 'Value State Success',
+        informative: 'Value State Information'
+    },
+    coreObjectStatus: {
+        ariaLabel: 'Object Status',
+        ariaRoleDescription: 'Object Status Button',
+        indicationColor: 'Indication Color',
+        negative: 'Invalid Entry',
+        critical: 'Warning issued',
+        positive: 'Entry successfully validated',
+        informative: 'Informative entry'
+    },
     coreOverflowLayout: {
         moreItemsButton: '{count} more'
     },
@@ -549,7 +569,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        loadMore: 'Show more',
+        loadMore: 'Show More',
         toolbarActionButtonTitle: 'Settings',
         settingsDialogHeader: 'Settings',
         confirmBtnLabel: 'OK',

@@ -4,14 +4,17 @@
 <fd-notification-body>
     <fd-notification-content>
         <fd-notification-header>
-            <h4 fd-notification-title [unread]="true">
+            <h4 fd-notification-title [unread]="true" [class.is-expanded]="notificationRef.data.isExpanded()">
                 {{ notificationRef.data.title }}
             </h4>
         </fd-notification-header>
-        <p fd-notification-paragraph>
+        <p fd-notification-paragraph [class.is-expanded]="notificationRef.data.isExpanded()">
             {{ notificationRef.data.paragraph }}
         </p>
-        <fd-notification-footer>
+        <fd-notification-footer
+            [manualShowTrigger]="notificationRef.data.showTrigger()"
+            [(manualExpanded)]="notificationRef.data.isExpanded"
+        >
             <span fd-notification-footer-content>
                 {{ notificationRef.data.firstFooterContent }}
             </span>

@@ -12,11 +12,13 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    forwardRef
+    computed,
+    effect,
+    forwardRef,
+    inject
 } from '@angular/core';
 import { Subscription, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -42,8 +44,7 @@ let avatarGroupCount = 0;
             provide: AVATAR_GROUP_LEGACY_COMPONENT,
             useExisting: forwardRef(() => AvatarGroupLegacyComponent)
         }
-    ],
-    standalone: true
+    ]
 })
 export class AvatarGroupLegacyComponent
     implements AvatarGroupLegacyInterface, OnChanges, OnInit, AfterViewInit, OnDestroy
@@ -119,14 +120,23 @@ export class AvatarGroupLegacyComponent
     /** @hidden */
     private readonly _subscription = new Subscription();
 
-    /** @hidden handles rtl service */
-    private _dir: 'ltr' | 'rtl' | null = 'ltr';
+    /** @hidden */
+    private readonly _viewportRuler = inject(ViewportRuler);
 
     /** @hidden */
-    constructor(
-        private readonly _viewportRuler: ViewportRuler,
-        @Optional() private _rtlService: RtlService
-    ) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _dir = computed<'ltr' | 'rtl'>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+
+    /** @hidden */
+    constructor() {
+        // React to RTL changes and update keyboard manager orientation
+        effect(() => {
+            const dir = this._dir();
+            this._keyboardEventsManager?.withHorizontalOrientation(dir);
+        });
+    }
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -168,7 +178,6 @@ export class AvatarGroupLegacyComponent
 
         this._listenForItemChanges();
         this._setKeyboardEventsManager();
-        this._subscribeToRtl();
     }
 
     /** @hidden */
@@ -251,21 +260,6 @@ export class AvatarGroupLegacyComponent
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.mainItems)
             .withWrap()
-            .withHorizontalOrientation(this._dir);
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            return;
-        }
-
-        const rtlSub = this._rtlService.rtl.subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-
-            this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
-        });
-
-        this._subscription.add(rtlSub);
+            .withHorizontalOrientation(this._dir());
     }
 }

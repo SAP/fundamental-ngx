@@ -53,7 +53,7 @@
 <code-example [exampleFiles]="vertical"></code-example>
 
 <fd-docs-section-title id="playground-slider" componentName="slider"> Playground Area </fd-docs-section-title>
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+<playground [schema]="schema" [schemaInitialValues]="data" (formChanges)="onSchemaValues($event)">
     <fd-slider
         [(ngModel)]="value"
         [min]="+data.properties.min"

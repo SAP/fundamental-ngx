@@ -11,6 +11,7 @@ import {
     Renderer2,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
@@ -72,9 +73,10 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     }
 
     /** @hidden */
-    get isRtl(): boolean {
-        return !!this._rtlService?.rtl.value;
-    }
+    protected readonly navigationArrow = computed(() =>
+        this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
+
     /** @hidden */
     private _itemClickSubscription: Subscription;
 
@@ -121,7 +123,7 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     }
 
     /** @hidden */
-    _openOverflowMain(): void {
+    protected openOverflowMain(): void {
         this._overflowPopoverStage = 'main';
         this._changeDetectorRef.detectChanges();
     }

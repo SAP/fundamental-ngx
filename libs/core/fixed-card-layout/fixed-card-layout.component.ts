@@ -23,7 +23,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -196,7 +195,7 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
     _containerHeight = 0;
 
     /** @hidden handles rtl service */
-    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
+    readonly dir = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden first number is the CardDefinition rank, i.e. id */
     _groupIndexes = new Map<number, number>();
@@ -237,10 +236,10 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    constructor(
-        private readonly _changeDetector: ChangeDetectorRef,
-        @Optional() private readonly _rtlService: RtlService
-    ) {}
+    private readonly _changeDetector = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     @HostListener('keydown', ['$event'])

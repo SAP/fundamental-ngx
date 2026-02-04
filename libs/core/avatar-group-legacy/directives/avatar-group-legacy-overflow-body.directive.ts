@@ -1,13 +1,15 @@
-import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
+import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
+    computed,
     ContentChildren,
     Directive,
+    effect,
     HostListener,
+    inject,
     Input,
     OnDestroy,
-    Optional,
     QueryList
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -25,8 +27,7 @@ import { AVATAR_GROUP_LEGACY_FOCUSABLE_AVATAR_DIRECTIVE, FocusableWithElementRef
         '[class.fd-avatar-group-legacy__overflow-body--no-padding]': 'noPadding',
         '[class.fd-avatar-group-legacy__overflow-body--no-horizontal-scroll]': 'noHorizontalScroll',
         '[class.fd-avatar-group-legacy__overflow-body--no-vertical-scroll]': 'noVerticalScroll'
-    },
-    standalone: true
+    }
 })
 export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, OnDestroy {
     /** Remove the padding from the overflow body. */
@@ -51,11 +52,20 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
     /** @hidden */
     private readonly _subscription = new Subscription();
 
-    /** @hidden handles rtl service */
-    private _dir: 'ltr' | 'rtl' | null = 'ltr';
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    constructor(@Optional() private _rtlService: RtlService) {}
+    private readonly _dir = computed<'ltr' | 'rtl'>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+
+    /** @hidden */
+    constructor() {
+        // React to RTL changes and update keyboard manager orientation
+        effect(() => {
+            const dir = this._dir();
+            this._keyboardEventsManager?.withHorizontalOrientation(dir);
+        });
+    }
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -80,8 +90,6 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
         this._listenForItemChanges();
 
         this._setKeyboardEventsManager();
-
-        this._subscribeToRtl();
     }
 
     /** @hidden */
@@ -105,22 +113,8 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.overflowItems)
             .withWrap()
-            .withHorizontalOrientation(this._dir);
+            .withHorizontalOrientation(this._dir());
 
         this._keyboardEventsManager.setFirstItemActive();
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            return;
-        }
-
-        const rtlSub = this._rtlService.rtl.subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-            this._keyboardEventsManager.withHorizontalOrientation(this._dir);
-        });
-
-        this._subscription.add(rtlSub);
     }
 }

@@ -11,7 +11,7 @@
         [scrollStrategy]="scrollStrategy"
         [closeOnEscapeKey]="true"
         [fillControlMode]="fillControlMode"
-        [maxWidth]="600"
+        [maxWidth]="fillControlMode !== 'equal' ? 600 : null"
         [closeOnOutsideClick]="closeOnOutsideClick"
         (isOpenChange)="_popoverOpenChangeHandle($event)"
     >

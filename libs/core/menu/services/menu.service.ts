@@ -1,5 +1,5 @@
 import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { ElementRef, Injectable, OnDestroy, Optional, Renderer2 } from '@angular/core';
+import { ElementRef, inject, Injectable, OnDestroy, Renderer2 } from '@angular/core';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
@@ -36,15 +36,15 @@ export class MenuService implements OnDestroy {
     private _destroyKeyboardHandlerListener: () => void;
 
     /** @hidden */
-    get _isRtl(): boolean {
-        return this._rtlService?.rtl.value;
-    }
+    private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
-    constructor(
-        private _renderer: Renderer2,
-        @Optional() private readonly _rtlService: RtlService
-    ) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    get _isRtl(): boolean {
+        return this._rtlService?.rtl() ?? false;
+    }
 
     /** Reference to menu component */
     get menuComponent(): MenuComponent {

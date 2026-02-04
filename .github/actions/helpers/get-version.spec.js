@@ -1,103 +1,94 @@
-const { execSync } = require('child_process');
-const getFileContents = require('./get-file-contents');
-
-// Mock dependencies
+// Mock dependencies before requiring the module
 jest.mock('child_process');
 jest.mock('./get-file-contents');
 
 describe('get-version', () => {
     let getVersion;
+    let mockedExecSync;
+    let mockedGetFileContents;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        // Clear module cache to get fresh instance
+        // Clear module cache to get fresh instance that uses our mocks
         jest.resetModules();
+        // Re-require the mocked dependencies and store references
+        mockedExecSync = require('child_process').execSync;
+        mockedGetFileContents = require('./get-file-contents');
+        // Now require the module under test (it will use the mocked dependencies)
         getVersion = require('./get-version');
     });
 
     describe('when branch is specified', () => {
         it('should return version from libs/core/package.json for specific branch', () => {
-            getFileContents.mockReturnValue({ version: '0.57.0' });
-
-            const result = getVersion('main');
-
-            expect(result).toBe('0.57.0');
-            expect(getFileContents).toHaveBeenCalledWith('libs/core/package.json', 'main');
-        });
-
-        it('should fallback to root package.json if libs/core/package.json fails', () => {
-            getFileContents.mockImplementation((file) => {
-                if (file === 'libs/core/package.json') {
-                    throw new Error('File not found');
+            mockedGetFileContents.mockImplementation((file, branch) => {
+                if (file === 'libs/core/package.json' && branch === 'main') {
+                    return { version: '0.57.0' };
                 }
-                return { version: '0.57.0' };
+                throw new Error('Unexpected call');
             });
 
             const result = getVersion('main');
 
             expect(result).toBe('0.57.0');
-            expect(getFileContents).toHaveBeenCalledWith('libs/core/package.json', 'main');
-            expect(getFileContents).toHaveBeenCalledWith('package.json', 'main');
+            expect(mockedGetFileContents).toHaveBeenCalledWith('libs/core/package.json', 'main');
+        });
+
+        it('should fallback to root package.json if libs/core/package.json fails', () => {
+            mockedGetFileContents.mockImplementation((file, branch) => {
+                if (file === 'libs/core/package.json') {
+                    throw new Error('File not found');
+                }
+                if (file === 'package.json' && branch === 'main') {
+                    return { version: '0.57.0' };
+                }
+                throw new Error('Unexpected call');
+            });
+
+            const result = getVersion('main');
+
+            expect(result).toBe('0.57.0');
+            expect(mockedGetFileContents).toHaveBeenCalledWith('libs/core/package.json', 'main');
+            expect(mockedGetFileContents).toHaveBeenCalledWith('package.json', 'main');
         });
     });
 
     describe('when no branch is specified (current branch)', () => {
-        describe('git tag resolution', () => {
-            it('should return latest stable version and ignore prerelease tags', () => {
-                // Simulate scenario: v0.58.0 exists, plus v0.58.0-rc.113, rc.114, rc.115
-                execSync.mockImplementation((cmd) => {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        // Return latest stable version
-                        return Buffer.from('v0.58.0\n');
-                    }
-                    // Should not reach here in this test
-                    return Buffer.from('v0.58.0-rc.115\n');
-                });
+        describe('git tag resolution with semver sorting', () => {
+            it('should return the highest version using semver comparison', () => {
+                // Simulates: v0.58.0, v0.58.0-rc.113, v0.58.0-rc.114, v0.58.0-rc.115
+                // semver comparison: 0.58.0 > 0.58.0-rc.115 (stable > prerelease of same version)
+                mockedExecSync.mockReturnValue('v0.58.0\nv0.58.0-rc.115\nv0.58.0-rc.114\nv0.58.0-rc.113\n');
 
                 const result = getVersion();
 
                 expect(result).toBe('0.58.0');
-                expect(execSync).toHaveBeenCalledWith(expect.stringContaining('--merged HEAD'), expect.any(Object));
-                expect(execSync).toHaveBeenCalledWith(expect.stringContaining('grep -v -- "-"'), expect.any(Object));
+                expect(mockedExecSync).toHaveBeenCalledWith(
+                    expect.stringContaining('--merged HEAD'),
+                    expect.any(Object)
+                );
             });
 
-            it('should return latest prerelease when no stable version exists', () => {
-                execSync.mockImplementation((cmd) => {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        // No stable version found
-                        return Buffer.from('');
-                    }
-                    // Return latest prerelease
-                    return Buffer.from('v0.58.0-rc.5\n');
-                });
+            it('should return prerelease when it is higher than stable', () => {
+                // Simulates: v0.59.0-rc.0 exists alongside v0.58.1
+                // semver comparison: 0.59.0-rc.0 > 0.58.1 (because 0.59.0 > 0.58.1)
+                mockedExecSync.mockReturnValue('v0.59.0-rc.0\nv0.58.1\nv0.58.0\n');
+
+                const result = getVersion();
+
+                expect(result).toBe('0.59.0-rc.0');
+            });
+
+            it('should prefer higher prerelease number', () => {
+                // Simulates: multiple RC versions
+                mockedExecSync.mockReturnValue('v0.58.0-rc.5\nv0.58.0-rc.4\nv0.58.0-rc.3\n');
 
                 const result = getVersion();
 
                 expect(result).toBe('0.58.0-rc.5');
-                // Should call both commands
-                expect(execSync).toHaveBeenCalledTimes(2);
-            });
-
-            it('should prefer v0.59.0 over v0.58.0-rc.200', () => {
-                execSync.mockImplementation((cmd) => {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        return Buffer.from('v0.59.0\n');
-                    }
-                    return Buffer.from('v0.58.0-rc.200\n');
-                });
-
-                const result = getVersion();
-
-                expect(result).toBe('0.59.0');
             });
 
             it('should handle version with v prefix correctly', () => {
-                execSync.mockImplementation((cmd) => {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        return Buffer.from('v1.0.0\n');
-                    }
-                    return Buffer.from('');
-                });
+                mockedExecSync.mockReturnValue('v1.0.0\nv0.99.0\n');
 
                 const result = getVersion();
 
@@ -105,55 +96,68 @@ describe('get-version', () => {
             });
 
             it('should remove v prefix from prerelease versions', () => {
-                execSync.mockImplementation((cmd) => {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        return Buffer.from('');
-                    }
-                    return Buffer.from('v0.58.0-rc.0\n');
-                });
+                mockedExecSync.mockReturnValue('v0.58.0-rc.0\n');
 
                 const result = getVersion();
 
                 expect(result).toBe('0.58.0-rc.0');
             });
+
+            it('should correctly sort mixed stable and prerelease versions', () => {
+                // Complex scenario with mixed versions
+                mockedExecSync.mockReturnValue('v0.57.0\nv0.58.0-rc.1\nv0.58.0-rc.0\nv0.57.1\n');
+
+                const result = getVersion();
+
+                // 0.58.0-rc.1 > 0.58.0-rc.0 > 0.57.1 > 0.57.0
+                expect(result).toBe('0.58.0-rc.1');
+            });
         });
 
         describe('fallback to package.json', () => {
             it('should fallback to libs/core/package.json when git command fails', () => {
-                execSync.mockImplementation(() => {
+                mockedExecSync.mockImplementation(() => {
                     throw new Error('git command failed');
                 });
-                getFileContents.mockReturnValue({ version: '0.57.0' });
+                mockedGetFileContents.mockImplementation((file) => {
+                    if (file === 'libs/core/package.json') {
+                        return { version: '0.57.0' };
+                    }
+                    throw new Error('Unexpected call');
+                });
 
                 const result = getVersion();
 
                 expect(result).toBe('0.57.0');
-                expect(getFileContents).toHaveBeenCalledWith('libs/core/package.json');
+                expect(mockedGetFileContents).toHaveBeenCalledWith('libs/core/package.json');
             });
 
             it('should fallback to root package.json when libs/core/package.json fails', () => {
-                execSync.mockImplementation(() => {
+                mockedExecSync.mockImplementation(() => {
                     throw new Error('git command failed');
                 });
-                getFileContents.mockImplementation((file) => {
+                mockedGetFileContents.mockImplementation((file) => {
                     if (file === 'libs/core/package.json') {
                         throw new Error('File not found');
                     }
-                    return { version: '0.57.0' };
+                    if (file === 'package.json') {
+                        return { version: '0.57.0' };
+                    }
+                    throw new Error('Unexpected call');
                 });
 
                 const result = getVersion();
 
                 expect(result).toBe('0.57.0');
-                expect(getFileContents).toHaveBeenCalledWith('libs/core/package.json');
-                expect(getFileContents).toHaveBeenCalledWith('package.json');
+                expect(mockedGetFileContents).toHaveBeenCalledWith('libs/core/package.json');
+                expect(mockedGetFileContents).toHaveBeenCalledWith('package.json');
             });
 
             it('should throw error when all methods fail', () => {
-                execSync.mockImplementation(() => {
+                mockedExecSync.mockImplementation(() => {
                     throw new Error('git command failed');
                 });
-                getFileContents.mockImplementation(() => {
+                mockedGetFileContents.mockImplementation(() => {
                     throw new Error('File not found');
                 });
 
@@ -163,22 +167,30 @@ describe('get-version', () => {
 
         describe('edge cases', () => {
             it('should handle empty git tag output', () => {
-                execSync.mockImplementation((cmd) => Buffer.from(''));
-                getFileContents.mockReturnValue({ version: '0.57.0' });
+                mockedExecSync.mockReturnValue('');
+                mockedGetFileContents.mockImplementation((file) => {
+                    if (file === 'libs/core/package.json') {
+                        return { version: '0.57.0' };
+                    }
+                    throw new Error('Unexpected call');
+                });
 
                 const result = getVersion();
 
                 expect(result).toBe('0.57.0');
-                expect(getFileContents).toHaveBeenCalledWith('libs/core/package.json');
+                expect(mockedGetFileContents).toHaveBeenCalledWith('libs/core/package.json');
             });
 
             it('should handle tags with extra whitespace', () => {
-                execSync.mockImplementation((cmd) => {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        return Buffer.from('  v0.58.0  \n');
-                    }
-                    return Buffer.from('');
-                });
+                mockedExecSync.mockReturnValue('  v0.58.0  \n  v0.57.0  \n');
+
+                const result = getVersion();
+
+                expect(result).toBe('0.58.0');
+            });
+
+            it('should filter out invalid semver tags', () => {
+                mockedExecSync.mockReturnValue('v0.58.0\ninvalid-tag\nv0.57.0\nnot-a-version\n');
 
                 const result = getVersion();
 
@@ -188,75 +200,101 @@ describe('get-version', () => {
     });
 
     describe('real-world scenarios', () => {
-        it('should handle the v0.58.0 release bug scenario', () => {
-            // Scenario: v0.58.0 was released, but v0.58.0-rc.113, rc.114, rc.115 exist after it
-            // The bug would return rc.115, the fix should return 0.58.0
-            execSync.mockImplementation((cmd) => {
-                if (cmd.includes('grep -v -- "-"')) {
-                    // Return stable version
-                    return Buffer.from('v0.58.0\n');
-                }
-                // Without the fix, this would be returned
-                return Buffer.from('v0.58.0-rc.115\n');
-            });
+        it('should handle the PR #13773 bug scenario - prerelease should be highest', () => {
+            // Scenario: v0.59.0-rc.0 was created, then PR #13773 merged
+            // The bug was returning v0.58.1 because prereleases were excluded
+            // The fix should return v0.59.0-rc.0 as it's semantically higher
+            mockedExecSync.mockReturnValue('v0.59.0-rc.0\nv0.58.1\nv0.58.0\nv0.57.0\n');
 
             const result = getVersion();
 
-            // Should return stable version, not rc.115
+            // Should return 0.59.0-rc.0 because it's higher than 0.58.1
+            expect(result).toBe('0.59.0-rc.0');
+        });
+
+        it('should handle the v0.58.0 release scenario - stable higher than its prereleases', () => {
+            // Scenario: v0.58.0 was released, but v0.58.0-rc.113, rc.114, rc.115 exist
+            // In semver, 0.58.0 > 0.58.0-rc.115 (stable is higher than prerelease of same base)
+            mockedExecSync.mockReturnValue('v0.58.0\nv0.58.0-rc.115\nv0.58.0-rc.114\nv0.58.0-rc.113\n');
+
+            const result = getVersion();
+
+            // Should return 0.58.0 as stable is higher than prereleases of same version
             expect(result).toBe('0.58.0');
         });
 
         it('should correctly identify next version base after stable release', () => {
-            // After v0.58.0 is released, the version detector should see 0.58.0 as latest
-            // So the next version would be 0.58.1-rc.0 or 0.59.0-rc.0, not 0.58.0-rc.116
-            execSync.mockImplementation((cmd) => {
-                if (cmd.includes('grep -v -- "-"')) {
-                    return Buffer.from('v0.58.0\n');
-                }
-                return Buffer.from('v0.58.0-rc.112\n');
-            });
+            // After v0.58.0 is released, if no new prereleases exist,
+            // the version should be 0.58.0 so next can be 0.58.1-rc.0 or 0.59.0-rc.0
+            mockedExecSync.mockReturnValue('v0.58.0\nv0.57.0\nv0.56.0\n');
 
             const result = getVersion();
 
             expect(result).toBe('0.58.0');
-            // This would allow bumped-release.js to correctly calculate
-            // the next version as 0.58.1-rc.0 or 0.59.0-rc.0
         });
 
         it('should handle only prerelease tags (pre-1.0.0 scenario)', () => {
-            execSync.mockImplementation((cmd) => {
-                if (cmd.includes('grep -v -- "-"')) {
-                    // No stable versions yet
-                    return Buffer.from('');
-                }
-                return Buffer.from('v0.58.0-rc.0\n');
-            });
+            mockedExecSync.mockReturnValue('v0.58.0-rc.2\nv0.58.0-rc.1\nv0.58.0-rc.0\n');
 
             const result = getVersion();
 
-            expect(result).toBe('0.58.0-rc.0');
+            expect(result).toBe('0.58.0-rc.2');
         });
 
         it('should handle hotfix branches correctly', () => {
-            // Scenario: On branch docs/0.56 with v0.56.3 tag
-            // Main has v0.58.0, but hotfix should only see v0.56.3
+            // Scenario: On hotfix branch for 0.56.x, only tags merged to HEAD are visible
             // Using --merged HEAD ensures only tags reachable from current HEAD
-            execSync.mockImplementation((cmd) => {
-                if (cmd.includes('--merged HEAD')) {
-                    if (cmd.includes('grep -v -- "-"')) {
-                        // Return latest stable on this branch
-                        return Buffer.from('v0.56.3\n');
-                    }
-                    return Buffer.from('v0.56.3-rc.0\n');
-                }
-                // Should never reach here - not using global tags
-                return Buffer.from('v0.58.0\n');
-            });
+            mockedExecSync.mockReturnValue('v0.56.3\nv0.56.2\nv0.56.1\n');
 
             const result = getVersion();
 
             expect(result).toBe('0.56.3');
-            expect(execSync).toHaveBeenCalledWith(expect.stringContaining('--merged HEAD'), expect.any(Object));
+            expect(mockedExecSync).toHaveBeenCalledWith(expect.stringContaining('--merged HEAD'), expect.any(Object));
+        });
+
+        it('should return higher RC version over lower stable version', () => {
+            // Key fix scenario: 0.59.0-rc.1 should be recognized as higher than 0.58.1
+            // This ensures the next prerelease is 0.59.0-rc.2, not 0.58.2-rc.0
+            mockedExecSync.mockReturnValue('v0.59.0-rc.1\nv0.59.0-rc.0\nv0.58.1\nv0.58.0\n');
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.0-rc.1');
+        });
+
+        it('should use package.json version when it is ahead of git tags', () => {
+            // Scenario: Previous release bumped package.json but tag creation failed
+            // Git tags: v0.59.1-rc.19
+            // Package.json: 0.59.1-rc.20
+            // Should return package.json version (0.59.1-rc.20) as it's higher
+            mockedExecSync.mockReturnValue('v0.59.1-rc.19\nv0.59.1-rc.18\nv0.59.1-rc.17\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.59.1-rc.20' });
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.1-rc.20');
+        });
+
+        it('should use git tag when it is ahead of package.json', () => {
+            // Normal scenario: tags are created successfully, package.json may lag
+            mockedExecSync.mockReturnValue('v0.59.1-rc.20\nv0.59.1-rc.19\nv0.59.1-rc.18\n');
+            mockedGetFileContents.mockReturnValue({ version: '0.59.1-rc.19' });
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.1-rc.20');
+        });
+
+        it('should handle package.json read errors gracefully', () => {
+            // If package.json can't be read, should still use git tag version
+            mockedExecSync.mockReturnValue('v0.59.1-rc.19\nv0.59.1-rc.18\n');
+            mockedGetFileContents.mockImplementation(() => {
+                throw new Error('File not found');
+            });
+
+            const result = getVersion();
+
+            expect(result).toBe('0.59.1-rc.19');
         });
     });
 });

@@ -177,9 +177,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     _hasRowHeaderColumn$ = computed(() => this._fdpTableService.visibleColumns$().some((c) => c.role === 'rowheader'));
 
     /** @hidden */
-    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
-
-    /** @hidden */
     _rowSelectionHelperTextId = `rowSelectionHelper-${uuidv4()}`;
 
     /** @hidden */
@@ -205,6 +202,12 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
 
     /** @hidden */
     readonly _isTreeRow = isTreeRow;
+
+    /** @hidden */
+    protected readonly isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden */
+    protected readonly navigationIcon = computed(() => (this.isRtl() ? 'slim-arrow-left' : 'slim-arrow-right'));
 
     /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();

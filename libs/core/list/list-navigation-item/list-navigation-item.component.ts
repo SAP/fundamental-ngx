@@ -11,7 +11,6 @@ import {
     HostBinding,
     HostListener,
     Input,
-    Optional,
     QueryList,
     Renderer2,
     computed,
@@ -114,16 +113,19 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _isItemVisible = true;
 
     /** @hidden handles rtl service */
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     private readonly _renderer2 = inject(Renderer2);
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        @Optional() private _rtlService: RtlService
-    ) {
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    constructor() {
         effect(() => {
             if (this._condensed()) {
                 this._renderer2.addClass(this._elementRef.nativeElement, 'fd-list__navigation-item--condensed');
@@ -145,11 +147,11 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
             event.preventDefault();
-            this._handleExpandedChanges(!this._rtl$());
+            this._handleExpandedChanges(!this._isRtl());
         }
         if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
             event.preventDefault();
-            this._handleExpandedChanges(this._rtl$());
+            this._handleExpandedChanges(this._isRtl());
         }
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();

@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents",
-    "version": "0.58.2-rc.0",
+    "version": "0.59.1-rc.30",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - UI5 Webcomponents Base",
     "license": "Apache-2.0",
@@ -20,12 +20,13 @@
         "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
         "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
         "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-        "fundamental-styles": "0.40.1",
+        "@ui5/webcomponents": "UI5_WEBCOMPONENTS_VER_PLACEHOLDER",
+        "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
         "rxjs": "^7.8.0"
     },
     "dependencies": {
         "@fundamental-ngx/ui5-webcomponents-base": "VERSION_PLACEHOLDER",
-        "@sap-theming/theming-base-content": "^11.31.0",
+        "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
         "compare-versions": "^6.1.0",
         "fast-deep-equal": "3.1.3",
         "lodash-es": "^4.17.0",

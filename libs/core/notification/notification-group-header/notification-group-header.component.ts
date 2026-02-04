@@ -20,7 +20,7 @@ import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
     selector: 'fd-notification-group-header',
     template: `
         <span class="fd-notification-group__header-arrow">
-            <fd-icon [glyph]="_buttonIcon$()"></fd-icon>
+            <fd-icon [glyph]="_buttonIcon()"></fd-icon>
         </span>
         <ng-content select="fd-notification-group-header-title"></ng-content>
         <ng-content></ng-content>
@@ -61,8 +61,8 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     expanded = signal(false);
 
     /** @hidden */
-    readonly _buttonIcon$ = computed(() =>
-        this.expanded() ? 'slim-arrow-down' : this._rtlService?.rtlSignal() ? 'slim-arrow-left' : 'slim-arrow-right'
+    protected readonly _buttonIcon = computed(() =>
+        this.expanded() ? 'slim-arrow-down' : this._rtlService?.rtl() ? 'slim-arrow-left' : 'slim-arrow-right'
     );
 
     /** @hidden */

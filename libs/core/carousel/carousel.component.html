@@ -4,7 +4,7 @@
     tabindex="0"
     [style.height]="height"
     [style.width]="width"
-    [attr.dir]="_dir$()"
+    [attr.dir]="dir()"
     role="listbox"
     aria-roledescription="Carousel"
     [attr.aria-activedescendant]="ariaActivedescendant"
@@ -63,7 +63,7 @@
         </div>
     }
     @if (!numericIndicator && _showNavigationButtonInPageIndicatorContainer) {
-        <div class="fd-carousel__page-indicators" [attr.dir]="_dir$()">
+        <div class="fd-carousel__page-indicators" [attr.dir]="dir()">
             @if (pageIndicator) {
                 @for (item of pageIndicatorsCountArray; track item; let i = $index) {
                     <span

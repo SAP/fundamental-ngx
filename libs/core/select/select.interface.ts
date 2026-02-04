@@ -12,7 +12,8 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInter
  */
 export interface SelectInterface<TOption = any> extends MobileMode {
     typeaheadDebounceInterval: number;
-    rtl$: Signal<boolean>;
+    /** Whether the component is in RTL mode */
+    isRtl: Signal<boolean>;
     selected: OptionComponent;
     mobileConfig: MobileModeConfig;
     _options: QueryList<TOption>;

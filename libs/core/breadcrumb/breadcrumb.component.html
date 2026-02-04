@@ -16,7 +16,7 @@
         </div>
     }
     <ng-container *fdOverflowExpand="let breadcrumbs; items: _items$()">
-        <fd-menu #menu [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="_placement$()">
+        <fd-menu #menu [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="placement()">
             @for (breadcrumbItem of breadcrumbs; track breadcrumbItem) {
                 <li
                     fd-menu-item
@@ -69,6 +69,7 @@
                     ></fd-icon>
                     <fd-icon glyph="slim-arrow-down"></fd-icon>
                 </a>
+                <span class="fd-breadcrumb__separator" aria-hidden="true"></span>
             </span>
         }
     </ng-container>

@@ -32,11 +32,10 @@ import { ExampleFile } from '../code-example/example-file';
     `
 })
 export class CodeSnippetComponent {
-    protected readonly file = input<ExampleFile>();
-    protected readonly language = input<string>('');
+    readonly file = input<ExampleFile>();
+    readonly language = input<string>('');
 
     protected readonly contentBasedElementRef = viewChild<ElementRef<HTMLElement>>('contentBasedElement');
-
     protected readonly highlightedCode = signal<SafeHtml | null>(null);
 
     private readonly _sanitizer = inject(DomSanitizer);
@@ -62,24 +61,12 @@ export class CodeSnippetComponent {
             if (isObservable(file.code)) {
                 // Handle observable code with proper cleanup
                 const subscription = file.code.subscribe((code) => {
-                    this.highlightedCode.set(
-                        this._sanitizer.bypassSecurityTrustHtml(
-                            hljs.highlight(code, {
-                                language: file.language
-                            }).value
-                        )
-                    );
+                    this.highlightedCode.set(this._highlight(code, file.language));
                 });
                 onCleanup(() => subscription.unsubscribe());
             } else {
                 // Handle static code directly
-                this.highlightedCode.set(
-                    this._sanitizer.bypassSecurityTrustHtml(
-                        hljs.highlight(file.code, {
-                            language: file.language
-                        }).value
-                    )
-                );
+                this.highlightedCode.set(this._highlight(file.code, file.language));
             }
         });
 
@@ -90,5 +77,9 @@ export class CodeSnippetComponent {
                 hljs.highlightElement(elementRef.nativeElement);
             }
         });
+    }
+
+    private _highlight(code: string, language: string): SafeHtml {
+        return this._sanitizer.bypassSecurityTrustHtml(hljs.highlight(code, { language }).value);
     }
 }

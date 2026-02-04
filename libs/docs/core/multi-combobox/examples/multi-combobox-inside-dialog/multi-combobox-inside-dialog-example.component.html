@@ -9,12 +9,21 @@
                 <fd-multi-combobox
                     inputId="comboboxID"
                     placeholder="Type some text..."
+                    [showSelectAll]="true"
                     [dataSource]="dataSourceStrings"
                     [selectedItems]="selectedItems"
                     (selectionChange)="onSelect($event)"
                 >
                 </fd-multi-combobox>
             </div>
+            <p><strong>Selected Items:</strong></p>
+            <ul fd-list>
+                @for (item of selectedItems; track $index) {
+                    <li fd-list-item data-test="selected-country-name">
+                        {{ item }}
+                    </li>
+                }
+            </ul>
         </fd-dialog-body>
 
         <fd-dialog-footer>

@@ -23,7 +23,7 @@ export class SelectKeyManagerService {
         this._keyManager = new ActiveDescendantKeyManager<OptionsInterface>(this._component._options)
             .withTypeAhead(this._component.typeaheadDebounceInterval)
             .withVerticalOrientation()
-            .withHorizontalOrientation(this._component.rtl$() ? 'rtl' : 'ltr')
+            .withHorizontalOrientation(this._component.isRtl() ? 'rtl' : 'ltr')
             .withAllowedModifierKeys(['shiftKey']);
 
         this._keyManager.tabOut.pipe(takeUntilDestroyed(this._component._destroy)).subscribe(() => {

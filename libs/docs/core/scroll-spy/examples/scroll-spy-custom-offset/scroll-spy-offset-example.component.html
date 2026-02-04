@@ -12,7 +12,7 @@
     fdScrollSpy
     [trackedTags]="['div']"
     [targetOffset]="100"
-    (spyChange)="selectedSpy = $event.id"
+    (spyChange)="selectedSpy = $event?.id"
 >
     @for (item of items; track item) {
         <div class="item" [id]="item.id">{{ item.name }}</div>

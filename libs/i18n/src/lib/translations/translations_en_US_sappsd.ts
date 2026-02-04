@@ -99,6 +99,26 @@ export default {
     coreNestedList: {
         linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
+    coreObjectMarker: {
+        active: '[[[Ŝţąţűş(ąċţįʋē)∙∙∙∙∙]]]',
+        inactive: '[[[Ŝţąţűş∙∙∙∙∙∙∙∙]]]'
+    },
+    coreObjectNumber: {
+        emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
+        negative: '[[[Ʋąĺűē Ŝţąţē Ĕŗŗŏŗ∙∙∙∙∙∙∙]]]',
+        critical: '[[[Ʋąĺűē Ŝţąţē Ŵąŗŋįŋğ∙∙∙∙∙]]]',
+        positive: '[[[Ʋąĺűē Ŝţąţē Ŝűċċēşş∙∙∙∙∙]]]',
+        informative: '[[[Ʋąĺűē Ŝţąţē Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙]]]'
+    },
+    coreObjectStatus: {
+        ariaLabel: '[[[Ŏƃĵēċţ Ŝţąţűş∙∙∙∙∙∙]]]',
+        ariaRoleDescription: '[[[Ŏƃĵēċţ Ŝţąţűş Ɓűţţŏŋ∙∙∙∙]]]',
+        indicationColor: '[[[Ĭŋƌįċąţįŏŋ Ĉŏĺŏŗ∙∙∙∙∙∙∙∙]]]',
+        negative: '[[[Ĭŋʋąĺįƌ Ĕŋţŗŷ∙∙∙∙∙∙]]]',
+        critical: '[[[Ŵąŗŋįŋğ įşşűēƌ∙∙∙∙∙]]]',
+        positive: '[[[Ĕŋţŗŷ şűċċēşşƒűĺĺŷ ʋąĺįƌąţēƌ∙∙∙∙∙∙∙∙]]]',
+        informative: '[[[Ĭŋƒŏŗɱąţįʋē ēŋţŗŷ∙∙∙∙∙∙∙]]]'
+    },
     coreOverflowLayout: {
         moreItemsButton: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]'
     },
@@ -554,7 +574,7 @@ export default {
         deselectAllCheckboxLongLabel: '[[[Ĉĥēċķƃŏχ, ċĥēċķēƌ, ċĺįċķ ţŏ ƌēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         deselectSingleRow: '[[[Ţŏ ƌēşēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
-        loadMore: '[[[Ŝĥŏŵ ɱŏŗē∙∙∙∙∙]]]',
+        loadMore: '[[[Ŝĥŏŵ Μŏŗē∙∙∙∙∙]]]',
         toolbarActionButtonTitle: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
         settingsDialogHeader: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
         confirmBtnLabel: '[[[ŎĶ∙∙]]]',

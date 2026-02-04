@@ -1,28 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
-
-/**
- * Layout Panel level filters that is specific to the data being displayed within the panel.
- *
- * ```html
- * <fd-layout-panel>
- *     <fd-layout-panel-filters>
- *         Some text can go here!
- *     </fd-layout-panel-filters>
- * </fd-layout-panel>
- * ```
- */
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-layout-panel-filters',
     template: `<ng-content></ng-content>`,
     host: {
-        '[class.fd-has-display-block]': 'true'
+        class: 'fd-layout-panel__filters fd-has-display-block'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutPanelFiltersComponent {
-    /** @hidden */
-    @HostBinding('class.fd-layout-panel__filters')
-    fdLayoutPanelFiltersClass = true;
-}
+export class LayoutPanelFiltersComponent {}

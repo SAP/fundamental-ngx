@@ -1,5 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    inject,
+    input,
+    linkedSignal,
+    ViewEncapsulation
+} from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SwitchComponent } from '@fundamental-ngx/core/switch';
@@ -7,59 +15,39 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
 @Component({
     selector: 'rtl-switch',
     template: `
-        <label fd-form-label> Simulate RTL </label>
-        <fd-switch [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch>
+        <label fd-form-label for="fd-doc-rtl-switch">Simulate RTL</label>
+        <fd-switch id="fd-doc-rtl-switch" [checked]="isChecked()" (checkedChange)="onChange($event)"></fd-switch>
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [FormLabelComponent, SwitchComponent, FormsModule]
+    imports: [FormLabelComponent, SwitchComponent]
 })
-export class DirectionalityComponent implements OnInit {
-    @Input()
-    label: string;
-    @Input()
-    element: string;
+export class DirectionalityComponent {
+    readonly label = input<string>();
 
-    @Input()
-    className: string;
+    protected readonly isChecked = linkedSignal(() => this._rtlService?.rtl() ?? false);
 
-    id: string;
-    isChecked = false;
+    protected readonly id = computed(() => {
+        const labelValue = this.label();
+        return labelValue ? `${labelValue}${Date.now()}-rtl` : `${Date.now()}6`;
+    });
 
-    constructor(
-        private rtlService: RtlService,
-        private cdr: ChangeDetectorRef
-    ) {}
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
-    ngOnInit(): void {
-        if (this.label) {
-            this.id = this.label + Date.now() + '-rtl';
-        } else {
-            this.id = Date.now() + 6 + '';
-        }
-        this.rtlService.rtl.subscribe((rtl) => {
-            this.isChecked = rtl;
-            this.cdr.detectChanges();
+    constructor() {
+        effect(() => {
+            const dirValue = this.isChecked() ? 'rtl' : 'ltr';
+            const labelValue = this.label();
+            if (labelValue) {
+                const labelElement = document.getElementById(labelValue);
+                if (labelElement) {
+                    labelElement.dir = dirValue;
+                }
+            }
         });
     }
 
-    onChange(): void {
-        const dirValue = this.isChecked ? 'rtl' : 'ltr';
-        this.rtlService.rtl.next(this.isChecked);
-
-        if (this.className) {
-            Array.from(document.getElementsByClassName(this.className)).forEach(
-                (element) => ((<HTMLElement>element).dir = dirValue)
-            );
-        }
-        if (this.element) {
-            Array.from(document.getElementsByTagName(this.element)).forEach(
-                (element) => ((<HTMLElement>element).dir = dirValue)
-            );
-        }
-        if (this.label) {
-            const labelElement = document.getElementById(this.label);
-            labelElement && (labelElement.dir = dirValue);
-        }
+    protected onChange(checked: boolean): void {
+        this._rtlService?.rtl.set(checked);
     }
 }

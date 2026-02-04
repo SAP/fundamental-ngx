@@ -3,8 +3,8 @@
         <div fd-bar-left>
             @if (_isDetailStage) {
                 <fd-button-bar
-                    (click)="_openOverflowMain()"
-                    [glyph]="isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'"
+                    (click)="openOverflowMain()"
+                    [glyph]="navigationArrow()"
                     fdType="transparent"
                     aria-label="Back"
                     title="Back"

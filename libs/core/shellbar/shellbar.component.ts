@@ -169,8 +169,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     _showMobileSearch = false;
 
+    protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));
+
     /** @hidden */
-    readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+    private readonly isRtl = computed<boolean>(() => this._rtlService?.rtl() ?? false);
 
     /**
      * Search component placed inside the shellbar
@@ -344,9 +346,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     _getShellbarEnd(): number {
         const shellbarEl = this._shellbar.nativeElement;
-        const end = this._rtl$() ? shellbarEl.getBoundingClientRect().left : shellbarEl.getBoundingClientRect().right;
+        const end = this.isRtl() ? shellbarEl.getBoundingClientRect().left : shellbarEl.getBoundingClientRect().right;
         let shellbarPadding = parseInt(window.getComputedStyle(shellbarEl).paddingInline, 10);
-        if (this._rtl$()) {
+        if (this.isRtl()) {
             shellbarPadding = shellbarPadding * -1;
         }
         return end - shellbarPadding;
@@ -354,7 +356,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _getActionsEnd(): number {
-        const end = this._rtl$()
+        const end = this.isRtl()
             ? this._actions?._elRef.nativeElement.getBoundingClientRect().left
             : this._actions?._elRef.nativeElement.getBoundingClientRect().right;
         return end;
@@ -362,7 +364,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _actionsExceedShellbarWidth(): boolean {
-        return this._rtl$()
+        return this.isRtl()
             ? this._getActionsEnd() < this._getShellbarEnd()
             : this._getActionsEnd() > this._getShellbarEnd();
     }

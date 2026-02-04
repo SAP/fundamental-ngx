@@ -2,13 +2,12 @@ import {
     AfterContentInit,
     ChangeDetectionStrategy,
     Component,
+    computed,
     ContentChild,
-    HostBinding,
+    inject,
     Input,
-    Optional,
     ViewChild,
-    ViewEncapsulation,
-    computed
+    ViewEncapsulation
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -28,6 +27,9 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     styleUrl: './nested-list-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fd-nested-list__popover'
+    },
     imports: [
         PopoverComponent,
         PopoverControlComponent,
@@ -48,10 +50,6 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     popoverComponent: PopoverComponent;
 
     /** @hidden */
-    @HostBinding('class.fd-nested-list__popover')
-    popoverClass = true;
-
-    /** @hidden */
     @ContentChild(NestedLinkDirective)
     linkDirective: NestedLinkDirective;
 
@@ -66,17 +64,22 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     parentItemElement: NestedItemInterface;
 
     /** @hidden */
-    placement$ = computed<Placement>(() => (this._rtlService?.rtlSignal() ? 'left-start' : 'right-start'));
-
-    /** @hidden */
     open = false;
 
     /** @hidden */
-    constructor(
-        private _keyboardNestService: NestedListKeyboardService,
-        @Optional() private _itemService: NestedItemService,
-        @Optional() private _rtlService: RtlService
-    ) {
+    protected readonly placement = computed<Placement>(() => (this._rtlService?.rtl() ? 'left-start' : 'right-start'));
+
+    /** @hidden */
+    private readonly _keyboardNestService = inject(NestedListKeyboardService);
+
+    /** @hidden */
+    private readonly _itemService = inject(NestedItemService, { optional: true });
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    constructor() {
         this._listenOnKeyboardRefresh();
         if (this._itemService) {
             this._itemService.popover = this;

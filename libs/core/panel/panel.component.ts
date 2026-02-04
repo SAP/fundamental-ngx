@@ -66,10 +66,10 @@ export class PanelComponent {
     /** Whether the Panel Content is expanded */
     @Input()
     set expanded(value: boolean) {
-        this._expanded$.set(value);
+        this._expanded.set(value);
     }
     get expanded(): boolean {
-        return this._expanded$();
+        return this._expanded();
     }
 
     /** Output event triggered when the Expand button is clicked */
@@ -87,20 +87,17 @@ export class PanelComponent {
     noRadius = input(false, { transform: booleanAttribute });
 
     /** @hidden */
-    _buttonIcon$ = computed(() =>
-        this._expanded$() ? 'slim-arrow-down' : this._rtl$() ? 'slim-arrow-left' : 'slim-arrow-right'
+    protected readonly buttonIcon = computed(() =>
+        this._expanded() ? 'slim-arrow-down' : this._rtlService?.rtl() ? 'slim-arrow-left' : 'slim-arrow-right'
     );
 
     /** @hidden */
-    private readonly _expanded$ = signal(false);
+    private readonly _expanded = signal(false);
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
-
-    /** @hidden */
-    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     constructor(
@@ -110,7 +107,7 @@ export class PanelComponent {
 
     /** Methods that toggles the Panel Content */
     toggleExpand(): void {
-        this._expanded$.update((expanded) => !expanded);
+        this._expanded.update((expanded) => !expanded);
         this.expandedChange.emit(this.expanded);
     }
 }

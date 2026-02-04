@@ -8,9 +8,9 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
+    inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
@@ -272,10 +272,12 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
-        public readonly elementRef: ElementRef,
-        @Optional() private readonly _rtlService: RtlService
+        public readonly elementRef: ElementRef
     ) {}
 
     /**
@@ -574,12 +576,12 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
      */
     private _horizontalResizing(xPosition: number): void {
         const difference = this._prevX - xPosition;
-        this.cardWidth = this._rtlService?.rtlSignal() ? this.cardWidth + difference : this.cardWidth - difference;
+        this.cardWidth = this._rtlService?.rtl() ? this.cardWidth + difference : this.cardWidth - difference;
 
         const totalIndentation = (this._maxColumn - 1) * gap;
         const maxCardWidtWithoutIndentation = this._maxColumn * horizontalResizeStep;
 
-        const maxCardWidth = this._rtlService?.rtlSignal()
+        const maxCardWidth = this._rtlService?.rtl()
             ? maxCardWidtWithoutIndentation - totalIndentation
             : maxCardWidtWithoutIndentation + totalIndentation;
 

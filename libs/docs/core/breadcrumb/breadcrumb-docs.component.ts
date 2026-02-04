@@ -11,11 +11,13 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import {
     BreadcrumbHrefExampleComponent,
-    BreadcrumbRouterLinkExampleComponent
+    BreadcrumbRouterLinkExampleComponent,
+    BreadcrumbSeparatorExampleComponent
 } from './examples/breadcrumb-examples.component';
 
 const breadcrumbHrefExample = 'breadcrumb-href-example.component.html';
 const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.html';
+const breadcrumbSeparatorExample = 'breadcrumb-separator-example.component.html';
 
 @Component({
     selector: 'app-breadcrumb',
@@ -27,7 +29,8 @@ const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.htm
         BreadcrumbRouterLinkExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        BreadcrumbHrefExampleComponent
+        BreadcrumbHrefExampleComponent,
+        BreadcrumbSeparatorExampleComponent
     ]
 })
 export class BreadcrumbDocsComponent {
@@ -44,6 +47,14 @@ export class BreadcrumbDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(breadcrumbHrefExample),
             fileName: 'fd-breadcrumb-href-example'
+        }
+    ];
+
+    breadcrumbSeparatorHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(breadcrumbSeparatorExample),
+            fileName: 'breadcrumb-separator-example'
         }
     ];
 }

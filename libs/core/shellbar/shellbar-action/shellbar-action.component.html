@@ -4,13 +4,15 @@
         fdType="transparent"
         class="fd-shellbar__button"
         fdCozy
-        [glyph]="glyph"
-        [glyphFont]="glyphFont"
-        (click)="callback ? callback($event) : ''"
+        [ariaLabel]="ariaLabel()"
+        [title]="title() || ariaLabel()"
+        [glyph]="glyph()"
+        [glyphFont]="glyphFont()"
+        (click)="_handleClick($event)"
     >
-        @if (notificationCount) {
-            <span class="fd-button__badge" [attr.aria-label]="notificationLabel">
-                {{ notificationCount }}
+        @if (notificationCount()) {
+            <span class="fd-button__badge" [attr.aria-label]="notificationLabel()">
+                {{ notificationCount() }}
             </span>
         }
     </button>

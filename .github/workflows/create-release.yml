@@ -116,11 +116,18 @@ jobs:
                       npx nx run-many --target=lint --skip-nx-cache --projects=${{ env.RELEASE_PACKAGES }} --parallel=3
                       npx nx run-many --target=build --all --parallel=1
 
+            - name: Extract Angular version
+              id: angularVersion
+              run: |
+                  ANGULAR_VERSION=$(node -e "console.log(require('./package.json').dependencies['@angular/core'].split('.')[0])")
+                  echo "major=${ANGULAR_VERSION}" >> $GITHUB_OUTPUT
+
             - name: Pack libraries
               run: npx nx run-many --target=prepare --projects=${{ env.RELEASE_PACKAGES }} --parallel=3
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
+                  FD_ENV_ANGULAR_VER_PLACEHOLDER: ^${{ steps.angularVersion.outputs.major }}.0.0
 
             # Reset placeholders again after pack step
             # The sync-versions generator writes actual versions back to source package.json files during build
@@ -166,7 +173,11 @@ jobs:
             # This will NOT trigger the workflow again due to [ci skip] in commit message
             - name: Push changes and tags
               if: env.IS_MANUAL != 'true'
-              run: git push --follow-tags
+              run: |
+                  if ! git push --follow-tags; then
+                      echo "::error::Failed to push changes and tags"
+                      exit 1
+                  fi
 
             # This will delete locally some tags to properly generate the release notes, so it should go after the push to upstream
             - name: Generate Release Body

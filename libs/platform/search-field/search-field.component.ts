@@ -1,5 +1,4 @@
 import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
@@ -8,7 +7,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
-    computed,
     DestroyRef,
     Directive,
     DOCUMENT,
@@ -50,7 +48,6 @@ import {
     destroyObservable,
     DynamicComponentService,
     KeyUtil,
-    RtlService,
     SearchHighlightPipe
 } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -427,9 +424,6 @@ export class SearchFieldComponent
     _popoverBodyId = '';
 
     /** @hidden */
-    readonly _dir$ = computed<Direction>(() => (this._rtl?.rtlSignal() ? 'rtl' : 'ltr'));
-
-    /** @hidden */
     isOpen = false;
 
     /** @hidden */
@@ -488,7 +482,6 @@ export class SearchFieldComponent
         public elementRef: ElementRef<HTMLElement>,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,

@@ -21,7 +21,7 @@ import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
  */
 @Component({
     selector: 'fd-breadcrumb-item',
-    template: '<ng-content></ng-content>',
+    template: `<ng-content></ng-content> <span class="fd-breadcrumb__separator" aria-hidden="true"></span>`,
     host: {
         class: 'fd-breadcrumb__item'
     },
