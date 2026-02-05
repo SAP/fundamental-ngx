@@ -1,12 +1,9 @@
-import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-inline-help-example',
@@ -24,12 +21,10 @@ import { map } from 'rxjs/operators';
             }
         `
     ],
-    imports: [IconComponent, InlineHelpModule, FormControlComponent, AsyncPipe]
+    imports: [IconComponent, InlineHelpModule, FormControlComponent]
 })
 export class InlineHelpExampleComponent {
-    rtlDirection$: Observable<Placement>;
+    protected readonly rtlDirection = computed<Placement>(() => (this._rtlService?.rtl() ? 'left' : 'right'));
 
-    constructor(private _rtlService: RtlService) {
-        this.rtlDirection$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left' : 'right')));
-    }
+    private readonly _rtlService = inject(RtlService, { optional: true });
 }

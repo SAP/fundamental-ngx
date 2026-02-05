@@ -6,7 +6,7 @@
 	"flags": {},
 	"children": [
 		{
-			"id": 298,
+			"id": 295,
 			"name": "CxNestedListModule",
 			"variant": "declaration",
 			"kind": 128,
@@ -27,21 +27,21 @@
 			},
 			"children": [
 				{
-					"id": 299,
+					"id": 296,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 300,
+							"id": 297,
 							"name": "new CxNestedListModule",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 298,
+								"target": 295,
 								"name": "CxNestedListModule",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -53,7 +53,7 @@
 				{
 					"title": "Constructors",
 					"children": [
-						299
+						296
 					]
 				}
 			],
@@ -62,12 +62,12 @@
 					"fileName": "libs/cx/nested-list/nested-list.module.ts",
 					"line": 61,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list.module.ts#L61"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list.module.ts#L61"
 				}
 			]
 		},
 		{
-			"id": 439,
+			"id": 436,
 			"name": "CxSideNavigationModule",
 			"variant": "declaration",
 			"kind": 128,
@@ -88,21 +88,21 @@
 			},
 			"children": [
 				{
-					"id": 440,
+					"id": 437,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 441,
+							"id": 438,
 							"name": "new CxSideNavigationModule",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 439,
+								"target": 436,
 								"name": "CxSideNavigationModule",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -114,7 +114,7 @@
 				{
 					"title": "Constructors",
 					"children": [
-						440
+						437
 					]
 				}
 			],
@@ -123,7 +123,7 @@
 					"fileName": "libs/cx/side-navigation/side-navigation.module.ts",
 					"line": 26,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.module.ts#L26"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.module.ts#L26"
 				}
 			]
 		},
@@ -175,7 +175,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 87,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L87"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L87"
 						}
 					],
 					"type": {
@@ -203,7 +203,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 78,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L78"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L78"
 						}
 					],
 					"type": {
@@ -225,7 +225,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 161,
 							"character": 15,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L161"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L161"
 						}
 					],
 					"type": {
@@ -265,7 +265,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 60,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L60"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L60"
 						}
 					],
 					"type": {
@@ -304,7 +304,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 74,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L74"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L74"
 						}
 					],
 					"type": {
@@ -334,7 +334,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 64,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L64"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L64"
 						}
 					],
 					"type": {
@@ -375,7 +375,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 185,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L185"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L185"
 						}
 					],
 					"getSignature": {
@@ -397,7 +397,7 @@
 								"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 								"line": 185,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L185"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L185"
 							}
 						],
 						"type": {
@@ -435,7 +435,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 42,
 							"character": 17,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L42"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L42"
 						}
 					],
 					"setSignature": {
@@ -457,7 +457,7 @@
 								"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 								"line": 42,
 								"character": 17,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L42"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L42"
 							}
 						],
 						"parameters": [
@@ -500,7 +500,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 180,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L180"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L180"
 						}
 					],
 					"getSignature": {
@@ -522,7 +522,7 @@
 								"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 								"line": 180,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L180"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L180"
 							}
 						],
 						"type": {
@@ -552,7 +552,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 216,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L216"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L216"
 						}
 					],
 					"signatures": [
@@ -583,7 +583,7 @@
 									"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 									"line": 216,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L216"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L216"
 								}
 							],
 							"type": {
@@ -614,7 +614,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 236,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L236"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L236"
 						}
 					],
 					"signatures": [
@@ -637,7 +637,7 @@
 									"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 									"line": 236,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L236"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L236"
 								}
 							],
 							"parameters": [
@@ -681,7 +681,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 227,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L227"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L227"
 						}
 					],
 					"signatures": [
@@ -704,7 +704,7 @@
 									"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 									"line": 227,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L227"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L227"
 								}
 							],
 							"type": {
@@ -735,7 +735,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 210,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L210"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L210"
 						}
 					],
 					"signatures": [
@@ -758,7 +758,7 @@
 									"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 									"line": 210,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L210"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L210"
 								}
 							],
 							"type": {
@@ -779,7 +779,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 202,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L202"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L202"
 						}
 					],
 					"signatures": [
@@ -802,7 +802,7 @@
 									"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 									"line": 202,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L202"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L202"
 								}
 							],
 							"type": {
@@ -833,7 +833,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 							"line": 194,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L194"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L194"
 						}
 					],
 					"signatures": [
@@ -856,7 +856,7 @@
 									"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 									"line": 194,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L194"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L194"
 								}
 							],
 							"type": {
@@ -914,7 +914,7 @@
 					"fileName": "libs/cx/nested-list/nested-item/nested-item.component.ts",
 					"line": 40,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.component.ts#L40"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.component.ts#L40"
 				}
 			],
 			"implementedTypes": [
@@ -994,7 +994,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.service.ts",
 							"line": 19,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.service.ts#L19"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.service.ts#L19"
 						}
 					],
 					"type": {
@@ -1033,7 +1033,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.service.ts",
 							"line": 16,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.service.ts#L16"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.service.ts#L16"
 						}
 					],
 					"type": {
@@ -1072,7 +1072,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.service.ts",
 							"line": 22,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.service.ts#L22"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.service.ts#L22"
 						}
 					],
 					"type": {
@@ -1116,7 +1116,7 @@
 							"fileName": "libs/cx/nested-list/nested-item/nested-item.service.ts",
 							"line": 13,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.service.ts#L13"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.service.ts#L13"
 						}
 					],
 					"type": {
@@ -1159,7 +1159,7 @@
 					"fileName": "libs/cx/nested-list/nested-item/nested-item.service.ts",
 					"line": 6,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-item/nested-item.service.ts#L6"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-item/nested-item.service.ts#L6"
 				}
 			]
 		},
@@ -1183,7 +1183,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 99,
 							"character": 15,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L99"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L99"
 						}
 					],
 					"type": {
@@ -1207,7 +1207,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 53,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L53"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L53"
 						}
 					],
 					"type": {
@@ -1223,7 +1223,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 53,
 									"character": 21,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L53"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L53"
 								}
 							],
 							"signatures": [
@@ -1246,7 +1246,7 @@
 											"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 											"line": 53,
 											"character": 21,
-											"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L53"
+											"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L53"
 										}
 									],
 									"type": {
@@ -1277,7 +1277,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 59,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L59"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L59"
 						}
 					],
 					"type": {
@@ -1305,7 +1305,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 72,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L72"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L72"
 						}
 					],
 					"type": {
@@ -1336,7 +1336,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 136,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L136"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L136"
 						}
 					],
 					"signatures": [
@@ -1359,7 +1359,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 136,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L136"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L136"
 								}
 							],
 							"parameters": [
@@ -1393,7 +1393,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 147,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L147"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L147"
 						}
 					],
 					"signatures": [
@@ -1416,7 +1416,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 147,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L147"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L147"
 								}
 							],
 							"type": {
@@ -1437,7 +1437,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 142,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L142"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L142"
 						}
 					],
 					"signatures": [
@@ -1460,7 +1460,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 142,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L142"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L142"
 								}
 							],
 							"type": {
@@ -1481,7 +1481,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 152,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L152"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L152"
 						}
 					],
 					"signatures": [
@@ -1504,7 +1504,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 152,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L152"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L152"
 								}
 							],
 							"type": {
@@ -1525,7 +1525,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 118,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L118"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L118"
 						}
 					],
 					"signatures": [
@@ -1548,7 +1548,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 118,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L118"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L118"
 								}
 							],
 							"type": {
@@ -1569,7 +1569,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 131,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L131"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L131"
 						}
 					],
 					"signatures": [
@@ -1592,7 +1592,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 131,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L131"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L131"
 								}
 							],
 							"type": {
@@ -1613,7 +1613,7 @@
 							"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 							"line": 112,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L112"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L112"
 						}
 					],
 					"signatures": [
@@ -1636,7 +1636,7 @@
 									"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 									"line": 112,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L112"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L112"
 								}
 							],
 							"parameters": [
@@ -1693,7 +1693,7 @@
 					"fileName": "libs/cx/nested-list/nested-link/nested-link.component.ts",
 					"line": 50,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-link/nested-link.component.ts#L50"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-link/nested-link.component.ts#L50"
 				}
 			]
 		},
@@ -1740,7 +1740,7 @@
 					"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 					"line": 145,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L145"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L145"
 				}
 			],
 			"implementedTypes": [
@@ -1756,14 +1756,14 @@
 			]
 		},
 		{
-			"id": 301,
+			"id": 298,
 			"name": "NestedListComponent",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 313,
+					"id": 310,
 					"name": "ariaLabelSelected",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1781,7 +1781,7 @@
 							"fileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 							"line": 53,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list/nested-list.component.ts#L53"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list/nested-list.component.ts#L53"
 						}
 					],
 					"type": {
@@ -1791,7 +1791,7 @@
 					"defaultValue": "'Selected'"
 				},
 				{
-					"id": 312,
+					"id": 309,
 					"name": "ariaRoledescriptionMenuBar",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1809,7 +1809,7 @@
 							"fileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 							"line": 49,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list/nested-list.component.ts#L49"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list/nested-list.component.ts#L49"
 						}
 					],
 					"type": {
@@ -1819,7 +1819,7 @@
 					"defaultValue": "'Navigation List Menu Bar'"
 				},
 				{
-					"id": 311,
+					"id": 308,
 					"name": "ariaRoledescriptionTree",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1837,7 +1837,7 @@
 							"fileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 							"line": 45,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list/nested-list.component.ts#L45"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list/nested-list.component.ts#L45"
 						}
 					],
 					"type": {
@@ -1847,7 +1847,7 @@
 					"defaultValue": "'Navigation List Tree'"
 				},
 				{
-					"id": 310,
+					"id": 307,
 					"name": "textOnly",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1865,7 +1865,7 @@
 							"fileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 							"line": 41,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list/nested-list.component.ts#L41"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list/nested-list.component.ts#L41"
 						}
 					],
 					"type": {
@@ -1879,10 +1879,10 @@
 				{
 					"title": "Properties",
 					"children": [
-						313,
-						312,
-						311,
-						310
+						310,
+						309,
+						308,
+						307
 					]
 				}
 			],
@@ -1891,7 +1891,7 @@
 					"fileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 					"line": 37,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list/nested-list.component.ts#L37"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list/nested-list.component.ts#L37"
 				}
 			],
 			"implementedTypes": [
@@ -1935,7 +1935,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 78,
 							"character": 15,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L78"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L78"
 						}
 					],
 					"type": {
@@ -1969,7 +1969,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 52,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L52"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L52"
 						}
 					],
 					"type": {
@@ -2015,7 +2015,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 48,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L48"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L48"
 						}
 					],
 					"type": {
@@ -2059,7 +2059,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 32,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L32"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L32"
 						}
 					],
 					"type": {
@@ -2087,7 +2087,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 44,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L44"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L44"
 						}
 					],
 					"type": {
@@ -2118,7 +2118,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 103,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L103"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L103"
 						}
 					],
 					"signatures": [
@@ -2141,7 +2141,7 @@
 									"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 									"line": 103,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L103"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L103"
 								}
 							],
 							"parameters": [
@@ -2175,7 +2175,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 114,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L114"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L114"
 						}
 					],
 					"signatures": [
@@ -2198,7 +2198,7 @@
 									"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 									"line": 114,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L114"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L114"
 								}
 							],
 							"type": {
@@ -2219,7 +2219,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 109,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L109"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L109"
 						}
 					],
 					"signatures": [
@@ -2242,7 +2242,7 @@
 									"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 									"line": 109,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L109"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L109"
 								}
 							],
 							"type": {
@@ -2263,7 +2263,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 92,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L92"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L92"
 						}
 					],
 					"signatures": [
@@ -2286,7 +2286,7 @@
 									"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 									"line": 92,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L92"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L92"
 								}
 							],
 							"type": {
@@ -2307,7 +2307,7 @@
 							"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 							"line": 85,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L85"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L85"
 						}
 					],
 					"signatures": [
@@ -2330,7 +2330,7 @@
 									"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 									"line": 85,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L85"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L85"
 								}
 							],
 							"parameters": [
@@ -2386,7 +2386,7 @@
 					"fileName": "libs/cx/nested-list/nested-content/nested-list-content.directive.ts",
 					"line": 27,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L27"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-content/nested-list-content.directive.ts#L27"
 				}
 			],
 			"implementedTypes": [
@@ -2419,7 +2419,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 							"line": 123,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L123"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L123"
 						}
 					],
 					"signatures": [
@@ -2442,7 +2442,7 @@
 									"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 									"line": 123,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L123"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L123"
 								}
 							],
 							"parameters": [
@@ -2483,7 +2483,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 							"line": 131,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L131"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L131"
 						}
 					],
 					"signatures": [
@@ -2506,7 +2506,7 @@
 									"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 									"line": 131,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L131"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L131"
 								}
 							],
 							"type": {
@@ -2531,7 +2531,7 @@
 					"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 					"line": 86,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L86"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L86"
 				}
 			]
 		},
@@ -2561,7 +2561,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 							"line": 27,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L27"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L27"
 						}
 					],
 					"type": {
@@ -2590,7 +2590,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 							"line": 37,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L37"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L37"
 						}
 					],
 					"getSignature": {
@@ -2612,7 +2612,7 @@
 								"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 								"line": 37,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L37"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L37"
 							}
 						],
 						"type": {
@@ -2641,7 +2641,7 @@
 					"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 					"line": 23,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L23"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L23"
 				}
 			]
 		},
@@ -2705,7 +2705,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 125,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L125"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L125"
 						}
 					],
 					"type": {
@@ -2751,7 +2751,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 119,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L119"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L119"
 						}
 					],
 					"type": {
@@ -2808,7 +2808,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 116,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L116"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L116"
 						}
 					],
 					"type": {
@@ -2865,7 +2865,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 110,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L110"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L110"
 						}
 					],
 					"type": {
@@ -2925,7 +2925,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 113,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L113"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L113"
 						}
 					],
 					"type": {
@@ -2980,7 +2980,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 107,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L107"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L107"
 						}
 					],
 					"type": {
@@ -3040,7 +3040,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 104,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L104"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L104"
 						}
 					],
 					"type": {
@@ -3091,7 +3091,7 @@
 							"fileName": "libs/core/icon/icon.component.ts",
 							"line": 98,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/core/icon/icon.component.ts#L98"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/core/icon/icon.component.ts#L98"
 						}
 					],
 					"type": {
@@ -3135,7 +3135,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 							"line": 51,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L51"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L51"
 						}
 					],
 					"type": {
@@ -3172,7 +3172,7 @@
 					"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 					"line": 47,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L47"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L47"
 				}
 			],
 			"extendedTypes": [
@@ -3203,7 +3203,29 @@
 			},
 			"children": [
 				{
-					"id": 233,
+					"id": 229,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"signatures": [
+						{
+							"id": 230,
+							"name": "new NestedListKeyboardService",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 228,
+								"name": "NestedListKeyboardService",
+								"package": "@fundamental-ngx/cx"
+							}
+						}
+					]
+				},
+				{
+					"id": 231,
 					"name": "refresh$",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3223,7 +3245,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 							"line": 20,
 							"character": 13,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-keyboard.service.ts#L20"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-keyboard.service.ts#L20"
 						}
 					],
 					"type": {
@@ -3244,7 +3266,7 @@
 					"defaultValue": "..."
 				},
 				{
-					"id": 236,
+					"id": 234,
 					"name": "refreshItems",
 					"variant": "declaration",
 					"kind": 2048,
@@ -3254,12 +3276,12 @@
 							"fileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 							"line": 32,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-keyboard.service.ts#L32"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-keyboard.service.ts#L32"
 						}
 					],
 					"signatures": [
 						{
-							"id": 237,
+							"id": 235,
 							"name": "refreshItems",
 							"variant": "signature",
 							"kind": 4096,
@@ -3277,12 +3299,12 @@
 									"fileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 									"line": 32,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-keyboard.service.ts#L32"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-keyboard.service.ts#L32"
 								}
 							],
 							"parameters": [
 								{
-									"id": 238,
+									"id": 236,
 									"name": "lists",
 									"variant": "param",
 									"kind": 32768,
@@ -3311,15 +3333,21 @@
 			],
 			"groups": [
 				{
+					"title": "Constructors",
+					"children": [
+						229
+					]
+				},
+				{
 					"title": "Properties",
 					"children": [
-						233
+						231
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						236
+						234
 					]
 				}
 			],
@@ -3328,19 +3356,19 @@
 					"fileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 					"line": 15,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-keyboard.service.ts#L15"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-keyboard.service.ts#L15"
 				}
 			]
 		},
 		{
-			"id": 267,
+			"id": 265,
 			"name": "NestedListPopoverComponent",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 287,
+					"id": 284,
 					"name": "handleOpenChange",
 					"variant": "declaration",
 					"kind": 2048,
@@ -3348,14 +3376,14 @@
 					"sources": [
 						{
 							"fileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
-							"line": 80,
+							"line": 83,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts#L80"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts#L83"
 						}
 					],
 					"signatures": [
 						{
-							"id": 288,
+							"id": 285,
 							"name": "handleOpenChange",
 							"variant": "signature",
 							"kind": 4096,
@@ -3371,14 +3399,14 @@
 							"sources": [
 								{
 									"fileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
-									"line": 80,
+									"line": 83,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts#L80"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts#L83"
 								}
 							],
 							"parameters": [
 								{
-									"id": 289,
+									"id": 286,
 									"name": "open",
 									"variant": "param",
 									"kind": 32768,
@@ -3411,16 +3439,16 @@
 				{
 					"title": "Methods",
 					"children": [
-						287
+						284
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
-					"line": 31,
+					"line": 32,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts#L31"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts#L32"
 				}
 			],
 			"implementedTypes": [
@@ -3445,28 +3473,28 @@
 			]
 		},
 		{
-			"id": 292,
+			"id": 289,
 			"name": "NestedListStateService",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 293,
+					"id": 290,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 294,
+							"id": 291,
 							"name": "new NestedListStateService",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 292,
+								"target": 289,
 								"name": "NestedListStateService",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -3478,7 +3506,7 @@
 				{
 					"title": "Constructors",
 					"children": [
-						293
+						290
 					]
 				}
 			],
@@ -3487,7 +3515,7 @@
 					"fileName": "libs/cx/nested-list/nested-list-state.service.ts",
 					"line": 5,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-state.service.ts#L5"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-state.service.ts#L5"
 				}
 			]
 		},
@@ -3509,7 +3537,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 							"line": 70,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L70"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L70"
 						}
 					],
 					"signatures": [
@@ -3532,7 +3560,7 @@
 									"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 									"line": 70,
 									"character": 4,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L70"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L70"
 								}
 							],
 							"type": {
@@ -3556,12 +3584,12 @@
 					"fileName": "libs/cx/nested-list/nested-list-directives.ts",
 					"line": 61,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-directives.ts#L61"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-directives.ts#L61"
 				}
 			]
 		},
 		{
-			"id": 346,
+			"id": 343,
 			"name": "PreparedNestedListComponent",
 			"variant": "declaration",
 			"kind": 128,
@@ -3576,21 +3604,21 @@
 			},
 			"children": [
 				{
-					"id": 347,
+					"id": 344,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 348,
+							"id": 345,
 							"name": "new PreparedNestedListComponent",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 346,
+								"target": 343,
 								"name": "PreparedNestedListComponent",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -3598,7 +3626,7 @@
 					]
 				},
 				{
-					"id": 350,
+					"id": 347,
 					"name": "condensed",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3616,7 +3644,7 @@
 							"fileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 							"line": 50,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L50"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L50"
 						}
 					],
 					"type": {
@@ -3626,7 +3654,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 351,
+					"id": 348,
 					"name": "list",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3644,7 +3672,7 @@
 							"fileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 							"line": 54,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L54"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L54"
 						}
 					],
 					"type": {
@@ -3656,7 +3684,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 255,
+								"target": 253,
 								"name": "NestedListModel",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -3666,7 +3694,7 @@
 					}
 				},
 				{
-					"id": 353,
+					"id": 350,
 					"name": "nestedListComponent",
 					"variant": "declaration",
 					"kind": 262144,
@@ -3676,11 +3704,11 @@
 							"fileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 							"line": 66,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L66"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L66"
 						}
 					],
 					"getSignature": {
-						"id": 354,
+						"id": 351,
 						"name": "nestedListComponent",
 						"variant": "signature",
 						"kind": 524288,
@@ -3698,12 +3726,12 @@
 								"fileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 								"line": 66,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L66"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L66"
 							}
 						],
 						"type": {
 							"type": "reference",
-							"target": 301,
+							"target": 298,
 							"name": "NestedListComponent",
 							"package": "@fundamental-ngx/cx"
 						}
@@ -3714,20 +3742,20 @@
 				{
 					"title": "Constructors",
 					"children": [
-						347
+						344
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						350,
-						351
+						347,
+						348
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						353
+						350
 					]
 				}
 			],
@@ -3736,33 +3764,33 @@
 					"fileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 					"line": 39,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L39"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts#L39"
 				}
 			]
 		},
 		{
-			"id": 359,
+			"id": 356,
 			"name": "SideNavigationButtonDirective",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 360,
+					"id": 357,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 361,
+							"id": 358,
 							"name": "new SideNavigationButtonDirective",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 359,
+								"target": 356,
 								"name": "SideNavigationButtonDirective",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -3774,7 +3802,7 @@
 				{
 					"title": "Constructors",
 					"children": [
-						360
+						357
 					]
 				}
 			],
@@ -3783,12 +3811,12 @@
 					"fileName": "libs/cx/side-navigation/side-navigation-button.directive.ts",
 					"line": 7,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-button.directive.ts#L7"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-button.directive.ts#L7"
 				}
 			]
 		},
 		{
-			"id": 386,
+			"id": 383,
 			"name": "SideNavigationComponent",
 			"variant": "declaration",
 			"kind": 128,
@@ -3803,7 +3831,7 @@
 			},
 			"children": [
 				{
-					"id": 396,
+					"id": 393,
 					"name": "collapseWidth",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3821,7 +3849,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 93,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L93"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L93"
 						}
 					],
 					"type": {
@@ -3830,7 +3858,7 @@
 					}
 				},
 				{
-					"id": 395,
+					"id": 392,
 					"name": "dynamicWidth",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3848,7 +3876,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 87,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L87"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L87"
 						}
 					],
 					"type": {
@@ -3858,7 +3886,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 393,
+					"id": 390,
 					"name": "inShellbar",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3876,7 +3904,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 77,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L77"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L77"
 						}
 					],
 					"type": {
@@ -3886,7 +3914,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 398,
+					"id": 395,
 					"name": "mobile",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3904,7 +3932,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 103,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L103"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L103"
 						}
 					],
 					"type": {
@@ -3914,7 +3942,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 397,
+					"id": 394,
 					"name": "narrow",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3932,7 +3960,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 99,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L99"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L99"
 						}
 					],
 					"type": {
@@ -3942,7 +3970,7 @@
 					"defaultValue": "false"
 				},
 				{
-					"id": 399,
+					"id": 396,
 					"name": "showScrollButtons",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3960,7 +3988,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 107,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L107"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L107"
 						}
 					],
 					"type": {
@@ -3970,7 +3998,7 @@
 					"defaultValue": "true"
 				},
 				{
-					"id": 394,
+					"id": 391,
 					"name": "sideNavigationConfiguration",
 					"variant": "declaration",
 					"kind": 1024,
@@ -3988,7 +4016,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 83,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L83"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L83"
 						}
 					],
 					"type": {
@@ -4000,7 +4028,7 @@
 						"typeArguments": [
 							{
 								"type": "reference",
-								"target": 377,
+								"target": 374,
 								"name": "SideNavigationModel",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -4010,7 +4038,7 @@
 					}
 				},
 				{
-					"id": 389,
+					"id": 386,
 					"name": "condensed",
 					"variant": "declaration",
 					"kind": 262144,
@@ -4020,17 +4048,17 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 66,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L66"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L66"
 						},
 						{
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 71,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L71"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L71"
 						}
 					],
 					"getSignature": {
-						"id": 390,
+						"id": 387,
 						"name": "condensed",
 						"variant": "signature",
 						"kind": 524288,
@@ -4040,7 +4068,7 @@
 								"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 								"line": 71,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L71"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L71"
 							}
 						],
 						"type": {
@@ -4049,7 +4077,7 @@
 						}
 					},
 					"setSignature": {
-						"id": 391,
+						"id": 388,
 						"name": "condensed",
 						"variant": "signature",
 						"kind": 1048576,
@@ -4073,12 +4101,12 @@
 								"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 								"line": 66,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L66"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L66"
 							}
 						],
 						"parameters": [
 							{
-								"id": 392,
+								"id": 389,
 								"name": "value",
 								"variant": "param",
 								"kind": 32768,
@@ -4096,7 +4124,7 @@
 					}
 				},
 				{
-					"id": 400,
+					"id": 397,
 					"name": "selectable",
 					"variant": "declaration",
 					"kind": 262144,
@@ -4106,11 +4134,11 @@
 							"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 							"line": 111,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L111"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L111"
 						}
 					],
 					"setSignature": {
-						"id": 401,
+						"id": 398,
 						"name": "selectable",
 						"variant": "signature",
 						"kind": 1048576,
@@ -4128,12 +4156,12 @@
 								"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 								"line": 111,
 								"character": 8,
-								"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L111"
+								"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L111"
 							}
 						],
 						"parameters": [
 							{
-								"id": 402,
+								"id": 399,
 								"name": "selectable",
 								"variant": "param",
 								"kind": 32768,
@@ -4155,20 +4183,20 @@
 				{
 					"title": "Properties",
 					"children": [
-						396,
-						395,
 						393,
-						398,
-						397,
-						399,
-						394
+						392,
+						390,
+						395,
+						394,
+						396,
+						391
 					]
 				},
 				{
 					"title": "Accessors",
 					"children": [
-						389,
-						400
+						386,
+						397
 					]
 				}
 			],
@@ -4177,7 +4205,7 @@
 					"fileName": "libs/cx/side-navigation/side-navigation.component.ts",
 					"line": 60,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation.component.ts#L60"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation.component.ts#L60"
 				}
 			],
 			"implementedTypes": [
@@ -4229,7 +4257,7 @@
 			]
 		},
 		{
-			"id": 363,
+			"id": 360,
 			"name": "SideNavigationMainComponent",
 			"variant": "declaration",
 			"kind": 128,
@@ -4239,7 +4267,7 @@
 					"fileName": "libs/cx/side-navigation/side-navigation-main.component.ts",
 					"line": 26,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-main.component.ts#L26"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-main.component.ts#L26"
 				}
 			],
 			"implementedTypes": [
@@ -4255,28 +4283,28 @@
 			]
 		},
 		{
-			"id": 381,
+			"id": 378,
 			"name": "SideNavigationUtilityDirective",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 382,
+					"id": 379,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 383,
+							"id": 380,
 							"name": "new SideNavigationUtilityDirective",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"type": {
 								"type": "reference",
-								"target": 381,
+								"target": 378,
 								"name": "SideNavigationUtilityDirective",
 								"package": "@fundamental-ngx/cx"
 							}
@@ -4288,7 +4316,7 @@
 				{
 					"title": "Constructors",
 					"children": [
-						382
+						379
 					]
 				}
 			],
@@ -4297,19 +4325,19 @@
 					"fileName": "libs/cx/side-navigation/side-navigation-utility.directive.ts",
 					"line": 9,
 					"character": 13,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-utility.directive.ts#L9"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-utility.directive.ts#L9"
 				}
 			]
 		},
 		{
-			"id": 250,
+			"id": 248,
 			"name": "NestedListItem",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 254,
+					"id": 252,
 					"name": "expanded",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4321,7 +4349,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 5,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L5"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L5"
 						}
 					],
 					"type": {
@@ -4330,7 +4358,7 @@
 					}
 				},
 				{
-					"id": 251,
+					"id": 249,
 					"name": "headerTitle",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4342,7 +4370,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 2,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L2"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L2"
 						}
 					],
 					"type": {
@@ -4351,7 +4379,7 @@
 					}
 				},
 				{
-					"id": 253,
+					"id": 251,
 					"name": "link",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4363,18 +4391,18 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 4,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L4"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L4"
 						}
 					],
 					"type": {
 						"type": "reference",
-						"target": 258,
+						"target": 256,
 						"name": "NestedListLink",
 						"package": "@fundamental-ngx/cx"
 					}
 				},
 				{
-					"id": 252,
+					"id": 250,
 					"name": "list",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4386,12 +4414,12 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 3,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L3"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L3"
 						}
 					],
 					"type": {
 						"type": "reference",
-						"target": 255,
+						"target": 253,
 						"name": "NestedListModel",
 						"package": "@fundamental-ngx/cx"
 					}
@@ -4401,10 +4429,10 @@
 				{
 					"title": "Properties",
 					"children": [
-						254,
+						252,
+						249,
 						251,
-						253,
-						252
+						250
 					]
 				}
 			],
@@ -4413,19 +4441,19 @@
 					"fileName": "libs/cx/nested-list/nested-list-model.ts",
 					"line": 1,
 					"character": 17,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L1"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L1"
 				}
 			]
 		},
 		{
-			"id": 258,
+			"id": 256,
 			"name": "NestedListLink",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 261,
+					"id": 259,
 					"name": "callback",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4437,13 +4465,13 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 16,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L16"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L16"
 						}
 					],
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 262,
+							"id": 260,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
@@ -4453,12 +4481,12 @@
 									"fileName": "libs/cx/nested-list/nested-list-model.ts",
 									"line": 16,
 									"character": 15,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L16"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L16"
 								}
 							],
 							"signatures": [
 								{
-									"id": 263,
+									"id": 261,
 									"name": "__type",
 									"variant": "signature",
 									"kind": 4096,
@@ -4468,7 +4496,7 @@
 											"fileName": "libs/cx/nested-list/nested-list-model.ts",
 											"line": 16,
 											"character": 15,
-											"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L16"
+											"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L16"
 										}
 									],
 									"type": {
@@ -4481,7 +4509,7 @@
 					}
 				},
 				{
-					"id": 264,
+					"id": 262,
 					"name": "href",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4493,7 +4521,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 17,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L17"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L17"
 						}
 					],
 					"type": {
@@ -4502,7 +4530,7 @@
 					}
 				},
 				{
-					"id": 259,
+					"id": 257,
 					"name": "icon",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4514,7 +4542,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 14,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L14"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L14"
 						}
 					],
 					"type": {
@@ -4523,7 +4551,7 @@
 					}
 				},
 				{
-					"id": 265,
+					"id": 263,
 					"name": "routerLink",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4535,7 +4563,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 18,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L18"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L18"
 						}
 					],
 					"type": {
@@ -4544,7 +4572,7 @@
 					}
 				},
 				{
-					"id": 266,
+					"id": 264,
 					"name": "selected",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4556,7 +4584,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 19,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L19"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L19"
 						}
 					],
 					"type": {
@@ -4565,7 +4593,7 @@
 					}
 				},
 				{
-					"id": 260,
+					"id": 258,
 					"name": "title",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4575,7 +4603,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 15,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L15"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L15"
 						}
 					],
 					"type": {
@@ -4588,12 +4616,12 @@
 				{
 					"title": "Properties",
 					"children": [
-						261,
-						264,
 						259,
-						265,
-						266,
-						260
+						262,
+						257,
+						263,
+						264,
+						258
 					]
 				}
 			],
@@ -4602,19 +4630,19 @@
 					"fileName": "libs/cx/nested-list/nested-list-model.ts",
 					"line": 13,
 					"character": 17,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L13"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L13"
 				}
 			]
 		},
 		{
-			"id": 255,
+			"id": 253,
 			"name": "NestedListModel",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 257,
+					"id": 255,
 					"name": "items",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4624,21 +4652,21 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 10,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L10"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L10"
 						}
 					],
 					"type": {
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"target": 250,
+							"target": 248,
 							"name": "NestedListItem",
 							"package": "@fundamental-ngx/cx"
 						}
 					}
 				},
 				{
-					"id": 256,
+					"id": 254,
 					"name": "textOnly",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4650,7 +4678,7 @@
 							"fileName": "libs/cx/nested-list/nested-list-model.ts",
 							"line": 9,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L9"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L9"
 						}
 					],
 					"type": {
@@ -4663,8 +4691,8 @@
 				{
 					"title": "Properties",
 					"children": [
-						257,
-						256
+						255,
+						254
 					]
 				}
 			],
@@ -4673,19 +4701,19 @@
 					"fileName": "libs/cx/nested-list/nested-list-model.ts",
 					"line": 8,
 					"character": 17,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/nested-list/nested-list-model.ts#L8"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/nested-list/nested-list-model.ts#L8"
 				}
 			]
 		},
 		{
-			"id": 377,
+			"id": 374,
 			"name": "SideNavigationModel",
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
 			"children": [
 				{
-					"id": 378,
+					"id": 375,
 					"name": "condensed",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4697,7 +4725,7 @@
 							"fileName": "libs/cx/side-navigation/side-navigation-model.ts",
 							"line": 4,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-model.ts#L4"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-model.ts#L4"
 						}
 					],
 					"type": {
@@ -4706,7 +4734,7 @@
 					}
 				},
 				{
-					"id": 379,
+					"id": 376,
 					"name": "mainNavigation",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4716,18 +4744,18 @@
 							"fileName": "libs/cx/side-navigation/side-navigation-model.ts",
 							"line": 5,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-model.ts#L5"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-model.ts#L5"
 						}
 					],
 					"type": {
 						"type": "reference",
-						"target": 255,
+						"target": 253,
 						"name": "NestedListModel",
 						"package": "@fundamental-ngx/cx"
 					}
 				},
 				{
-					"id": 380,
+					"id": 377,
 					"name": "utilityNavigation",
 					"variant": "declaration",
 					"kind": 1024,
@@ -4739,12 +4767,12 @@
 							"fileName": "libs/cx/side-navigation/side-navigation-model.ts",
 							"line": 6,
 							"character": 4,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-model.ts#L6"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-model.ts#L6"
 						}
 					],
 					"type": {
 						"type": "reference",
-						"target": 255,
+						"target": 253,
 						"name": "NestedListModel",
 						"package": "@fundamental-ngx/cx"
 					}
@@ -4754,9 +4782,9 @@
 				{
 					"title": "Properties",
 					"children": [
-						378,
-						379,
-						380
+						375,
+						376,
+						377
 					]
 				}
 			],
@@ -4765,7 +4793,7 @@
 					"fileName": "libs/cx/side-navigation/side-navigation-model.ts",
 					"line": 3,
 					"character": 17,
-					"url": "https://github.com/SAP/fundamental-ngx/blob/26a9b92/libs/cx/side-navigation/side-navigation-model.ts#L3"
+					"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/cx/side-navigation/side-navigation-model.ts#L3"
 				}
 			]
 		}
@@ -4774,35 +4802,35 @@
 		{
 			"title": "Classes",
 			"children": [
-				298,
-				439,
+				295,
+				436,
 				41,
 				112,
 				121,
 				218,
-				301,
+				298,
 				3,
 				196,
 				164,
 				173,
 				228,
-				267,
-				292,
+				265,
+				289,
 				188,
-				346,
-				359,
-				386,
-				363,
-				381
+				343,
+				356,
+				383,
+				360,
+				378
 			]
 		},
 		{
 			"title": "Interfaces",
 			"children": [
-				250,
-				258,
-				255,
-				377
+				248,
+				256,
+				253,
+				374
 			]
 		}
 	],
@@ -5270,243 +5298,243 @@
 			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 			"qualifiedName": "NestedListKeyboardService"
 		},
-		"233": {
+		"231": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 			"qualifiedName": "NestedListKeyboardService.refresh$"
 		},
+		"234": {
+			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
+			"qualifiedName": "NestedListKeyboardService.refreshItems"
+		},
+		"235": {
+			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
+			"qualifiedName": "NestedListKeyboardService.refreshItems"
+		},
 		"236": {
-			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
-			"qualifiedName": "NestedListKeyboardService.refreshItems"
-		},
-		"237": {
-			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
-			"qualifiedName": "NestedListKeyboardService.refreshItems"
-		},
-		"238": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-keyboard.service.ts",
 			"qualifiedName": "lists"
 		},
-		"250": {
+		"248": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListItem"
 		},
-		"251": {
+		"249": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListItem.headerTitle"
 		},
-		"252": {
+		"250": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListItem.list"
 		},
-		"253": {
+		"251": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListItem.link"
 		},
-		"254": {
+		"252": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListItem.expanded"
 		},
-		"255": {
+		"253": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListModel"
 		},
-		"256": {
+		"254": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListModel.textOnly"
 		},
-		"257": {
+		"255": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListModel.items"
 		},
-		"258": {
+		"256": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink"
 		},
-		"259": {
+		"257": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink.icon"
 		},
-		"260": {
+		"258": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink.title"
 		},
-		"261": {
+		"259": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink.callback"
 		},
+		"260": {
+			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
+			"qualifiedName": "__type"
+		},
+		"261": {
+			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
+			"qualifiedName": "__type"
+		},
 		"262": {
-			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
-			"qualifiedName": "__type"
-		},
-		"263": {
-			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
-			"qualifiedName": "__type"
-		},
-		"264": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink.href"
 		},
-		"265": {
+		"263": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink.routerLink"
 		},
-		"266": {
+		"264": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-model.ts",
 			"qualifiedName": "NestedListLink.selected"
 		},
-		"267": {
+		"265": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
 			"qualifiedName": "NestedListPopoverComponent"
 		},
-		"287": {
+		"284": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
 			"qualifiedName": "NestedListPopoverComponent.handleOpenChange"
 		},
-		"288": {
+		"285": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
 			"qualifiedName": "NestedListPopoverComponent.handleOpenChange"
 		},
-		"289": {
+		"286": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-popover/nested-list-popover.component.ts",
 			"qualifiedName": "open"
 		},
-		"292": {
+		"289": {
 			"sourceFileName": "libs/cx/nested-list/nested-list-state.service.ts",
 			"qualifiedName": "NestedListStateService"
 		},
-		"298": {
+		"295": {
 			"sourceFileName": "libs/cx/nested-list/nested-list.module.ts",
 			"qualifiedName": "CxNestedListModule"
 		},
-		"301": {
+		"298": {
 			"sourceFileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 			"qualifiedName": "NestedListComponent"
 		},
-		"310": {
+		"307": {
 			"sourceFileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 			"qualifiedName": "NestedListComponent.textOnly"
 		},
-		"311": {
+		"308": {
 			"sourceFileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 			"qualifiedName": "NestedListComponent.ariaRoledescriptionTree"
 		},
-		"312": {
+		"309": {
 			"sourceFileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 			"qualifiedName": "NestedListComponent.ariaRoledescriptionMenuBar"
 		},
-		"313": {
+		"310": {
 			"sourceFileName": "libs/cx/nested-list/nested-list/nested-list.component.ts",
 			"qualifiedName": "NestedListComponent.ariaLabelSelected"
 		},
-		"346": {
+		"343": {
 			"sourceFileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 			"qualifiedName": "PreparedNestedListComponent"
 		},
-		"350": {
+		"347": {
 			"sourceFileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 			"qualifiedName": "PreparedNestedListComponent.condensed"
 		},
-		"351": {
+		"348": {
 			"sourceFileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 			"qualifiedName": "PreparedNestedListComponent.list"
 		},
-		"353": {
+		"350": {
 			"sourceFileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 			"qualifiedName": "PreparedNestedListComponent.nestedListComponent"
 		},
-		"354": {
+		"351": {
 			"sourceFileName": "libs/cx/nested-list/prepared-nested-list/prepared-nested-list.component.ts",
 			"qualifiedName": "PreparedNestedListComponent.nestedListComponent"
 		},
-		"359": {
+		"356": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-button.directive.ts",
 			"qualifiedName": "SideNavigationButtonDirective"
 		},
-		"363": {
+		"360": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-main.component.ts",
 			"qualifiedName": "SideNavigationMainComponent"
 		},
-		"377": {
+		"374": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-model.ts",
 			"qualifiedName": "SideNavigationModel"
 		},
-		"378": {
+		"375": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-model.ts",
 			"qualifiedName": "SideNavigationModel.condensed"
 		},
-		"379": {
+		"376": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-model.ts",
 			"qualifiedName": "SideNavigationModel.mainNavigation"
 		},
-		"380": {
+		"377": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-model.ts",
 			"qualifiedName": "SideNavigationModel.utilityNavigation"
 		},
-		"381": {
+		"378": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation-utility.directive.ts",
 			"qualifiedName": "SideNavigationUtilityDirective"
 		},
-		"386": {
+		"383": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent"
 		},
+		"386": {
+			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
+			"qualifiedName": "SideNavigationComponent.condensed"
+		},
+		"387": {
+			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
+			"qualifiedName": "SideNavigationComponent.condensed"
+		},
+		"388": {
+			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
+			"qualifiedName": "SideNavigationComponent.condensed"
+		},
 		"389": {
-			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
-			"qualifiedName": "SideNavigationComponent.condensed"
-		},
-		"390": {
-			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
-			"qualifiedName": "SideNavigationComponent.condensed"
-		},
-		"391": {
-			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
-			"qualifiedName": "SideNavigationComponent.condensed"
-		},
-		"392": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "value"
 		},
-		"393": {
+		"390": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.inShellbar"
 		},
-		"394": {
+		"391": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.sideNavigationConfiguration"
 		},
-		"395": {
+		"392": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.dynamicWidth"
 		},
-		"396": {
+		"393": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.collapseWidth"
 		},
-		"397": {
+		"394": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.narrow"
 		},
-		"398": {
+		"395": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.mobile"
 		},
-		"399": {
+		"396": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.showScrollButtons"
 		},
-		"400": {
+		"397": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.selectable"
 		},
-		"401": {
+		"398": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "SideNavigationComponent.selectable"
 		},
-		"402": {
+		"399": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.component.ts",
 			"qualifiedName": "selectable"
 		},
-		"439": {
+		"436": {
 			"sourceFileName": "libs/cx/side-navigation/side-navigation.module.ts",
 			"qualifiedName": "CxSideNavigationModule"
 		}

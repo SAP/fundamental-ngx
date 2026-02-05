@@ -1,5 +1,5 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
-import { Component, ViewChild } from '@angular/core';
+import { Component, computed, inject, ViewChild } from '@angular/core';
 
 import { SlicePipe } from '@angular/common';
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
@@ -66,15 +66,14 @@ export class AvatarGroupLegacyIndividualTypeExampleComponent {
         return this.overflowPopoverStage === 'detail';
     }
 
-    constructor(
-        private readonly avatarGroupDataExampleService: AvatarGroupLegacyDataExampleService,
-        private _rtlService: RtlService
-    ) {
-        this.people = this.avatarGroupDataExampleService.generate();
-    }
+    protected readonly navigationArrow = computed(() =>
+        this._rtlService?.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
 
-    get isRtl(): boolean {
-        return this._rtlService.rtl.getValue();
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    constructor(private readonly avatarGroupDataExampleService: AvatarGroupLegacyDataExampleService) {
+        this.people = this.avatarGroupDataExampleService.generate();
     }
 
     openOverflowDetails(idx: number): void {

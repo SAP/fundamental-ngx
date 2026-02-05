@@ -1,12 +1,12 @@
 import { Direction } from '@angular/cdk/bidi';
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonComponent, FormLabelComponent, RtlService, SwitchComponent, TextComponent } from '@fundamental-ngx/core';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent, TextComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-rtl-service-basic-example',
     templateUrl: 'rtl-service-basic-example.component.html',
-    imports: [TextComponent, ButtonComponent, FormLabelComponent, SwitchComponent, FormsModule],
+    imports: [TextComponent, ButtonComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RtlServiceBasicExampleComponent {
@@ -20,28 +20,24 @@ export class RtlServiceBasicExampleComponent {
     eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
     deserunt mollit anim id est laborum.`;
 
-    // Signal to track RTL state
-    rtl$ = computed(() => !!this._rtlService?.rtlSignal());
-    // Signal to track a direction
-    _dir$ = computed<Direction>(() => (this.rtl$() ? 'rtl' : 'ltr'));
+    protected readonly isRtl = computed(() => this._rtlService.rtl());
 
-    // Injecting the RtlService
-    private _rtlService = inject(RtlService);
+    protected readonly direction = computed<Direction>(() => (this.isRtl() ? 'rtl' : 'ltr'));
+
+    private readonly _rtlService = inject(RtlService);
 
     constructor() {
         effect(() => {
-            this._updateTextContainerDirection();
+            const dir = this.direction();
+            const labelElement = document.getElementById('exampleTextContainer');
+            if (labelElement) {
+                labelElement.dir = dir;
+            }
         });
     }
 
-    // Method to handle changes in RTL state
-    simulateRTL(): void {
-        this._rtlService.rtl.next(!this._rtlService.rtl.value);
-    }
-
-    // Method to update the direction of the text container
-    private _updateTextContainerDirection(): void {
-        const labelElement = document.getElementById('exampleTextContainer');
-        labelElement && (labelElement.dir = this._dir$());
+    // Method to toggle RTL state
+    protected simulateRTL(): void {
+        this._rtlService.rtl.update((current) => !current);
     }
 }

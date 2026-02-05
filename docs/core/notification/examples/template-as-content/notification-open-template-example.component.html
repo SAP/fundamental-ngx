@@ -7,10 +7,17 @@
         <fd-notification-content>
             <fd-notification-header>
                 <fd-icon glyph="error" color="negative"></fd-icon>
-                <h4 fd-notification-title [unread]="true">Notification Title (unread)</h4>
+                <h4 fd-notification-title [unread]="true" [class.is-expanded]="isExpanded()">
+                    This is a very long notification title that will be truncated after two lines to keep the
+                    notification compact and readable in the list view
+                </h4>
             </fd-notification-header>
-            <p fd-notification-paragraph>Description of notification topic.</p>
-            <fd-notification-footer>
+            <p fd-notification-paragraph [class.is-expanded]="isExpanded()">
+                This is a very long notification paragraph with multiple sentences. It contains important information
+                that the user should read. The text will be truncated after two lines by default, but the user can click
+                "Show More" to expand and read the full content.
+            </p>
+            <fd-notification-footer [manualShowTrigger]="showTrigger()" [(manualExpanded)]="isExpanded">
                 <span fd-notification-footer-content>Product Name</span>
                 <span fd-notification-separator></span>
                 <span fd-notification-footer-content>Feature Name</span>

@@ -13,6 +13,7 @@ import { ComboboxOpenControlExampleComponent } from './combobox-open-control-exa
 import { ComboboxSearchFieldExampleComponent } from './combobox-search-field-example.component';
 import { ComboboxSearchFunctionExampleComponent } from './combobox-search-function-example.component';
 import { ComboboxTemplateExampleComponent } from './combobox-template-example.component';
+import { ComboboxValuePropertyExampleComponent } from './combobox-value-property-example.component';
 
 export * from './combobox-async-example.component';
 export * from './combobox-columns-example.component';
@@ -28,6 +29,7 @@ export * from './combobox-open-control-example.component';
 export * from './combobox-search-field-example.component';
 export * from './combobox-search-function-example.component';
 export * from './combobox-template-example.component';
+export * from './combobox-value-property-example.component';
 
 export const examples = [
     ComboboxMobileExampleComponent,
@@ -44,5 +46,6 @@ export const examples = [
     ComboboxSearchFunctionExampleComponent,
     ComboboxTemplateExampleComponent,
     ComboboxIncludesExampleComponent,
-    ComboboxSearchFieldExampleComponent
+    ComboboxSearchFieldExampleComponent,
+    ComboboxValuePropertyExampleComponent
 ];
