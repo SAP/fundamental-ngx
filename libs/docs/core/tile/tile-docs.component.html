@@ -1,8 +1,16 @@
 <fd-docs-section-title id="generic" componentName="tile"> Generic Tile Sizes </fd-docs-section-title>
 <description>
-    The large (default) tiles are designed for screens larger than 374px. For smaller screens use the small tiles
-    <code>size="s"</code>. The generic tile also supports two tile dimensions - 1×1 (default) and 2×1
-    (<code>[double]="true"</code>).
+    Tiles are responsive and adapt to different screen sizes. The default large tiles are optimized for screens larger
+    than 374px. For smaller screens, use <code>size="s"</code> to display compact tiles that fit mobile viewports
+    better. <br /><br />
+    Tiles support two width dimensions:
+    <ul>
+        <li><b>1×1 (default):</b> Standard single-width tile</li>
+        <li>
+            <b>2×1:</b> Double-width tile using <code>[double]="true"</code> - useful for displaying more content or
+            creating visual hierarchy
+        </li>
+    </ul>
 </description>
 <component-example>
     <div class="grid">
@@ -13,8 +21,10 @@
 
 <fd-docs-section-title id="columns" componentName="tile"> Generic Tile Content Columns </fd-docs-section-title>
 <description>
-    The tiles header, content and footer can be split into two columns with a 0.25rem vertical padding. Use the
-    <code>[twoColumn]="true"</code> input to achieve the 2-col design.
+    Tile content areas (header, body, and footer) can be organized into two columns for better content layout. Use the
+    <code>[twoColumn]="true"</code> input on <code>fd-tile-header-content</code>, <code>fd-tile-content-text</code>, or
+    <code>fd-tile-footer-text</code> directives to split content into two columns with 0.25rem vertical spacing. This
+    layout is particularly useful for displaying label-value pairs or organizing related information side-by-side.
 </description>
 <component-example>
     <div class="grid">
@@ -24,7 +34,14 @@
 <code-example [exampleFiles]="columnsTile"></code-example>
 
 <fd-docs-section-title id="launch" componentName="tile"> Launch Tile </fd-docs-section-title>
-<description> Use <code>type="launch"</code> for launch tiles. </description>
+<description>
+    Launch tiles are used as shortcuts to applications or specific features within your application. They typically
+    display an icon, title, and subtitle to help users quickly identify and access functionality. Use
+    <code>type="launch"</code> to apply the launch tile styling. <br /><br />
+    <b>Usage as Link:</b> Launch tiles often navigate to other pages. Use the attribute selector on a native link for
+    optimal behavior: <code>&lt;a fd-tile type="launch" href="/dashboard"&gt;</code>. This provides native browser
+    navigation features including right-click context menu, keyboard shortcuts, and proper link semantics.
+</description>
 <component-example>
     <div class="grid">
         <fd-launch-tile-example></fd-launch-tile-example>
@@ -33,7 +50,18 @@
 <code-example [exampleFiles]="launch"></code-example>
 
 <fd-docs-section-title id="kpi" componentName="tile"> KPI Tile </fd-docs-section-title>
-<description> Use <code>type="kpi"</code> for KPI tiles. </description>
+<description>
+    KPI (Key Performance Indicator) tiles display important metrics and performance data in a prominent, easy-to-scan
+    format. Use <code>type="kpi"</code> to create KPI tiles. These tiles typically combine numeric content directives to
+    show values, trends, and comparisons. <br /><br />
+    KPI tiles leverage the <code>fd-numeric-content</code> directive family to display:
+    <ul>
+        <li>Primary KPI values with units</li>
+        <li>Scale indicators showing change (with positive, negative, critical, or informative states)</li>
+        <li>Trend arrows indicating direction</li>
+        <li>Launch icons for navigation to detailed views</li>
+    </ul>
+</description>
 <component-example>
     <div class="grid">
         <fd-kpi-tile-example></fd-kpi-tile-example>
@@ -41,17 +69,27 @@
 </component-example>
 <code-example [exampleFiles]="kpi"></code-example>
 
-<fd-docs-section-title id="misc" componentName="tile">Other Tile Types</fd-docs-section-title>
+<fd-docs-section-title id="misc" componentName="tile"
+    >Action Mode, Badges, Feed Tiles, and Interactivity</fd-docs-section-title
+>
 <description>
-    Use the <code>[action]</code> boolean input to place a tile in action mode. This will place an overlay over the
-    tile, and you should also provide <code>fd-tile-action-close</code> and <code>fd-tile-action-indicator</code> button
-    directives to handle the action functionality. Badges are used to display very short and important information. Use
-    a badge on a Tile if the Tile is new or has been newly added to a page. Tiles do not display badges in action/edit
-    mode. The Feed tile can be used to show new notification content in a news feed. If there are no new notifications,
-    the tile displays the most recent notification. To create a Feed tile, use the <code>type="feed"</code> input. Tile
-    clickable by the default, but you can change it behavior by providing <code>[clickable]</code> input property. When
-    tile is clickable it can get focus & event will be emitted on click, enter and space press, listen for
-    <code>(tileClick)</code>.
+    <b>Action Mode:</b> Use <code>[action]="true"</code> to place a tile in action/edit mode. This adds an overlay to
+    the tile with action controls. Provide <code>fd-tile-action-close</code> and
+    <code>fd-tile-action-indicator</code> directive-enhanced buttons to handle edit and close actions. Action mode is
+    useful for allowing users to reorder, remove, or configure tiles in a dashboard. <br /><br />
+    <b>Badges:</b> Badges display brief, important information like "New" status. Use badges to highlight tiles that
+    have been recently added or updated. Note that badges are not displayed when tiles are in action mode. <br /><br />
+    <b>Feed Tiles:</b> Feed tiles (<code>type="feed"</code>) are designed for notification streams and activity feeds.
+    They display the most recent notification when no new updates are available, and highlight new content when present.
+    <br /><br />
+    <b>Clickable Tiles:</b> Control tile interactivity with the <code>[clickable]</code> input. When
+    <code>[clickable]="true"</code>, tiles become keyboard-focusable (tabindex="0") and emit
+    <code>(tileClick)</code> events on click, Enter, and Space key presses. This is only applicable when using
+    <code>&lt;fd-tile&gt;</code> as a custom element. For link behavior, use
+    <code>&lt;a fd-tile href="..."&gt;</code> instead. <br /><br />
+    <b>Accessibility:</b> Enhance tile accessibility by setting <code>id</code>, <code>ariaLabel</code>,
+    <code>ariaLabelledby</code>, and <code>role</code> inputs as needed. These properties help screen reader users
+    understand tile purpose and content.
 </description>
 <component-example>
     <div class="grid">

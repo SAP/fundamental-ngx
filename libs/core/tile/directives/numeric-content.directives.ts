@@ -1,6 +1,6 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, inject } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont, fdBuildIconClass } from '@fundamental-ngx/core/icon';
+import { computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, fdBuildIconClass, IconFont } from '@fundamental-ngx/core/icon';
 
 export type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 export type NumericContentSize = 's' | 'm' | 'l';
@@ -8,279 +8,197 @@ export type NumericContentSize = 's' | 'm' | 'l';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content]',
-    standalone: true
+    host: {
+        '[class]': 'cssClass()'
+    }
 })
-export class NumericContentDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
-    /** Size of the numeric content */
-    @Input()
-    size: NumericContentSize | null;
+export class NumericContentDirective implements HasElementRef {
+    /** Size of the numeric content. Options are 's', 'm', or 'l'. */
+    readonly size = input<NumericContentSize | null>();
 
     /** @hidden */
-    @HostBinding('class.fd-numeric-content')
-    baseClass = true;
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-numeric-content'];
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-numeric-content',
-            this.size ? 'fd-numeric-content--' + this.size : '',
-            this.class,
-            this._isSmallTile() ? 'fd-numeric-content--small-tile' : ''
-        ];
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    private _isSmallTile(): boolean {
-        let retVal = false;
-        if (
-            this.elementRef.nativeElement.parentElement &&
-            this.elementRef.nativeElement.parentElement.parentElement &&
-            this.elementRef.nativeElement.parentElement.parentElement.classList.contains('fd-tile--s')
-        ) {
-            retVal = true;
+        const sizeValue = this.size();
+        if (sizeValue) {
+            classes.push(`fd-numeric-content--${sizeValue}`);
         }
-        return retVal;
-    }
+
+        if (this._isSmallTile()) {
+            classes.push('fd-numeric-content--small-tile');
+        }
+
+        return classes.join(' ');
+    });
+
+    /** @hidden */
+    private readonly _isSmallTile = computed(() => {
+        const grandparent = this.elementRef.nativeElement.parentElement?.parentElement;
+        return grandparent?.classList.contains('fd-tile--s') ?? false;
+    });
 }
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-launch-icon-container]',
-    standalone: true
+    host: {
+        class: 'fd-numeric-content__launch-icon-container'
+    }
 })
-export class NumericContentLaunchIconContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-numeric-content__launch-icon-container')
-    baseClass = true;
-}
+export class NumericContentLaunchIconContainerDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-launch-icon]',
-    standalone: true
+    host: {
+        '[attr.aria-label]': 'ariaLabel()',
+        '[class]': 'cssClass()'
+    }
 })
-export class NumericContentLaunchIconDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
-    @Input()
-    class: string;
+export class NumericContentLaunchIconDirective implements HasElementRef {
+    /** Glyph (icon) to display. */
+    readonly glyph = input<string>();
 
-    /** Glyph */
-    @Input()
-    glyph: string;
+    /** Glyph font family. */
+    readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
-    /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    /** Aria label for accessibility. */
+    readonly ariaLabel = input<string | null>(null);
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-numeric-content__launch-icon',
-            this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '',
-            this.class
-        ];
-    }
-
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-numeric-content__launch-icon'];
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        const glyphValue = this.glyph();
+        if (glyphValue) {
+            classes.push(fdBuildIconClass(this.glyphFont(), glyphValue));
+        }
+
+        return classes.join(' ');
+    });
 }
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-kpi-container]',
-    standalone: true
+    host: {
+        class: 'fd-numeric-content__kpi-container'
+    }
 })
-export class NumericContentKpiContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-numeric-content__kpi-container')
-    baseClass = true;
-}
+export class NumericContentKpiContainerDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-kpi]',
-    standalone: true
+    host: {
+        '[class]': 'cssClass()'
+    }
 })
-export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** State of the KPI. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
-    @Input()
-    state?: NumericContentState | null;
+export class NumericContentKpiDirective implements HasElementRef {
+    /** State of the KPI. Options are 'neutral' (default), 'positive', 'negative', 'critical', or 'informative'. */
+    readonly state = input<NumericContentState | null>();
 
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
-    /** Glyph */
-    @Input()
-    glyph: string;
+    /** Glyph (icon) to display. */
+    readonly glyph = input<string>();
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class];
-    }
-
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-numeric-content__kpi'];
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        const stateValue = this.state();
+        if (stateValue) {
+            classes.push(`fd-numeric-content__kpi--${stateValue}`);
+        }
+
+        return classes.join(' ');
+    });
 }
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale-container]',
-    standalone: true
+    host: {
+        class: 'fd-numeric-content__scale-container'
+    }
 })
-export class NumericContentScaleContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-numeric-content__scale-container')
-    baseClass = true;
-}
+export class NumericContentScaleContainerDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale-arrow]',
-    standalone: true
+    host: {
+        '[attr.aria-label]': 'ariaLabel()',
+        '[class]': 'cssClass()'
+    }
 })
-export class NumericContentScaleArrowDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
-    @Input()
-    class: string;
+export class NumericContentScaleArrowDirective implements HasElementRef {
+    /** Glyph (icon) to display. */
+    readonly glyph = input<string>();
 
-    /** Glyph */
-    @Input()
-    glyph: string;
+    /** Glyph font family. */
+    readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
-    /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    /** Aria label for accessibility. */
+    readonly ariaLabel = input<string | null>(null);
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-numeric-content__scale-arrow',
-            this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '',
-            this.class
-        ];
-    }
-
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-numeric-content__scale-arrow'];
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        const glyphValue = this.glyph();
+        if (glyphValue) {
+            classes.push(fdBuildIconClass(this.glyphFont(), glyphValue));
+        }
+
+        return classes.join(' ');
+    });
 }
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale]',
-    standalone: true
+    host: {
+        '[class]': 'cssClass()'
+    }
 })
-export class NumericContentScaleDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** State of the SCALE. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
-    @Input()
-    state?: NumericContentState | null;
-
-    /** Apply user custom styles */
-    @Input()
-    class: string;
+export class NumericContentScaleDirective implements HasElementRef {
+    /** State of the scale. Options are 'neutral' (default), 'positive', 'negative', 'critical', or 'informative'. */
+    readonly state = input<NumericContentState | null>();
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class];
-    }
-
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-numeric-content__scale'];
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        const stateValue = this.state();
+        if (stateValue) {
+            classes.push(`fd-numeric-content__scale--${stateValue}`);
+        }
+
+        return classes.join(' ');
+    });
 }
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale-text]',
-    standalone: true
+    host: {
+        class: 'fd-numeric-content__scale-text'
+    }
 })
-export class NumericContentScaleTextDirective {
-    /** @hidden */
-    @HostBinding('class.fd-numeric-content__scale-text')
-    baseClass = true;
-}
+export class NumericContentScaleTextDirective {}

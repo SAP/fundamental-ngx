@@ -1,165 +1,129 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont, fdBuildIconClass } from '@fundamental-ngx/core/icon';
+import { booleanAttribute, computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, fdBuildIconClass, IconFont } from '@fundamental-ngx/core/icon';
 
 @Directive({
     selector: '[fdTileContent], [fd-tile-content]',
-    standalone: true
+    host: {
+        class: 'fd-tile__content',
+        '[class.fd-tile__content--2-col]': 'twoColumn()'
+    }
 })
 export class TileContentDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__content')
-    baseClass = true;
-
     /** Divides the tile content in to two columns. */
-    @HostBinding('class.fd-tile__content--2-col')
-    @Input()
-    twoColumn = false;
+    readonly twoColumn = input(false, { transform: booleanAttribute });
 }
 @Directive({
     selector: '[fdTileContentText], [fd-tile-content-text]',
-    standalone: true
+    host: {
+        class: 'fd-tile__content-text'
+    }
 })
-export class TileContentTextDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__content-text')
-    baseClass = true;
-}
+export class TileContentTextDirective {}
 
 @Directive({
     selector: '[fdTileFooter], [fd-tile-footer]',
-    standalone: true
+    host: {
+        class: 'fd-tile__footer',
+        '[class.fd-tile__footer--2-col]': 'twoColumn()'
+    }
 })
 export class TileFooterDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__footer')
-    baseClass = true;
-
     /** Divides the tile footer in to two columns. */
-    @HostBinding('class.fd-tile__footer--2-col')
-    @Input()
-    twoColumn = false;
+    readonly twoColumn = input(false, { transform: booleanAttribute });
 }
 
 @Directive({
     selector: '[fdTileFooterText], [fd-tile-footer-text]',
-    standalone: true
+    host: {
+        class: 'fd-tile__footer-text'
+    }
 })
-export class TileFooterTextDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__footer-text')
-    baseClass = true;
-}
+export class TileFooterTextDirective {}
 
 @Directive({
     selector: '[fdTileHeader], [fd-tile-header]',
-    standalone: true
+    host: {
+        class: 'fd-tile__header',
+        '[class.fd-tile__header--2-col]': 'twoColumn()'
+    }
 })
 export class TileHeaderDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__header')
-    baseClass = true;
-
     /** Divides the tile header in to two columns. */
-    @HostBinding('class.fd-tile__header--2-col')
-    @Input()
-    twoColumn = false;
+    readonly twoColumn = input(false, { transform: booleanAttribute });
 }
 
 @Directive({
     selector: '[fdTileHeaderContent], [fd-tile-header-content]',
-    standalone: true
+    host: {
+        class: 'fd-tile__header-content'
+    }
 })
-export class TileHeaderContentDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__header-content')
-    baseClass = true;
-}
+export class TileHeaderContentDirective {}
 
 @Directive({
     selector: '[fdTileSection], [fd-tile-section]',
-    standalone: true
+    host: {
+        class: 'fd-tile__section'
+    }
 })
-export class TileSectionDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__section')
-    baseClass = true;
-}
+export class TileSectionDirective {}
 
 @Directive({
     selector: '[fdTileTitle], [fd-tile-subtitle]',
-    standalone: true
+    host: {
+        class: 'fd-tile__subtitle'
+    }
 })
-export class TileSubtitleDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__subtitle')
-    baseClass = true;
-}
+export class TileSubtitleDirective {}
 
 @Directive({
     selector: '[fdTileTitle], [fd-tile-title]',
-    standalone: true
+    host: {
+        class: 'fd-tile__title'
+    }
 })
-export class TileTitleDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__title')
-    baseClass = true;
-}
+export class TileTitleDirective {}
 
 @Directive({
     selector: '[fdTileTitleContainer], [fd-tile-title-container]',
-    standalone: true
+    host: {
+        class: 'fd-tile__title-container'
+    }
 })
-export class TileTitleContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__title-container')
-    baseClass = true;
-}
+export class TileTitleContainerDirective {}
 
 @Directive({
     selector: '[fdTileRefresh], [fd-tile-refresh]',
-    standalone: true
+    host: {
+        '[attr.aria-label]': 'ariaLabel()',
+        '[class]': 'cssClass()'
+    }
 })
-export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Glyph */
-    @Input()
-    glyph: string;
+export class TileRefreshDirective implements HasElementRef {
+    /** Glyph (icon) to display. */
+    readonly glyph = input<string>();
 
-    /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    /** Glyph font family. */
+    readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
-    /** Apply user custom styles */
-    @Input()
-    @HostBinding('attr.aria-label')
-    ariaLabel = 'Refresh';
+    /** Aria label for accessibility. */
+    readonly ariaLabel = input<string>('Refresh');
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-tile__refresh', this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '', this.class];
-    }
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-tile__refresh'];
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        const glyphValue = this.glyph();
+        if (glyphValue) {
+            classes.push(fdBuildIconClass(this.glyphFont(), glyphValue));
+        }
+
+        return classes.join(' ');
+    });
 }
 
 let profileTileUniqueId = 0;
@@ -167,195 +131,115 @@ let profileTileUniqueId = 0;
 @Directive({
     selector: '[fdTileProfileImg], [fd-tile-profile-img]',
     host: {
-        'attr.role': 'img'
-    },
-    standalone: true
+        'attr.role': 'img',
+        class: 'fd-tile__profile-img',
+        '[attr.id]': 'id()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.aria-labelledby]': 'ariaLabelledby()',
+        '[style.background-image]': '`url(${backgroundImage()})`'
+    }
 })
 export class TileProfileImgDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__profile-img')
-    baseClass = true;
+    /** Unique identifier for the tile. */
+    readonly id = input<string>(`fd-profileTile-${++profileTileUniqueId}`);
 
-    /** Id of the tile. */
-    @Input()
-    @HostBinding('attr.id')
-    id = `fd-profileTile-${profileTileUniqueId++}`;
+    /** Aria label for accessibility. */
+    readonly ariaLabel = input<string | null | undefined>(null);
 
-    /** Aria-label for tile. */
-    @Input()
-    @HostBinding('attr.aria-label')
-    ariaLabel: Nullable<string>;
+    /** Aria labelledby attribute referencing element(s) describing the tile. */
+    readonly ariaLabelledby = input<string | null | undefined>(null);
 
-    /** Aria-Labelledby for element describing tile. */
-    @Input()
-    @HostBinding('attr.aria-labelledby')
-    ariaLabelledby: Nullable<string>;
-
-    /** Background image url. */
-    @Input()
-    backgroundImage: Nullable<string>;
-
-    /** @hidden */
-    @HostBinding('style.background-image')
-    get image(): string {
-        return 'url(' + this.backgroundImage + ')';
-    }
+    /** Background image URL. */
+    readonly backgroundImage = input<string | null | undefined>(null);
 }
 
 @Directive({
     selector: '[fdTileLogo], [fd-tile-logo]',
-    standalone: true
+    host: {
+        class: 'fd-tile__logo'
+    }
 })
-export class TileLogoDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__logo')
-    baseClass = true;
-}
+export class TileLogoDirective {}
 
 @Directive({
     selector: '[fdTileToggle], [fd-tile-toggle]',
-    standalone: true
+    host: {
+        class: 'fd-tile__toggle'
+    }
 })
-export class TileToggleDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__toggle')
-    baseClass = true;
-}
+export class TileToggleDirective {}
 
 @Directive({
     selector: '[fdTileContainer], [fd-tile-container]',
-    standalone: true
+    host: {
+        class: 'fd-tile-container',
+        '[class.fd-tile-container--list]': 'list()'
+    }
 })
 export class TileContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile-container')
-    baseClass = true;
-
-    /** Whether or not the container is a 'list' type (used on screens smaller than 450px). */
-    @HostBinding('class.fd-tile-container--list')
-    @Input()
-    list = false;
+    /** Whether the container uses list layout (applies on screens smaller than 450px). */
+    readonly list = input(false, { transform: booleanAttribute });
 }
 
 @Directive({
     selector: '[fdTileBackgroundImg], [fd-tile-background-img]',
-    standalone: true
+    host: {
+        class: 'fd-tile__background-img',
+        '[style.background-image]': '`url(${backgroundImage()})`'
+    }
 })
 export class TileBackgroundImgDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__background-img')
-    baseClass = true;
-
-    /** Background image url. */
-    @Input()
-    backgroundImage: Nullable<string>;
-
-    /** @hidden */
-    @HostBinding('style.background-image')
-    get image(): string {
-        return 'url(' + this.backgroundImage + ')';
-    }
+    /** Background image URL. */
+    readonly backgroundImage = input<string | null | undefined>(null);
 }
 
 @Directive({
     selector: '[fdTilePageIndicator], [fd-tile-page-indicator]',
-    standalone: true
+    host: {
+        class: 'fd-tile__page-indicator'
+    }
 })
-export class TilePageIndicatorDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__page-indicator')
-    baseClass = true;
-}
+export class TilePageIndicatorDirective {}
 
 @Directive({
     selector: '[fdTileActionClose], [fd-tile-action-close]',
-    standalone: true
+    host: {
+        class: 'fd-tile__action-close'
+    }
 })
-export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
+export class TileActionCloseDirective {
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-tile__action-close', this.class];
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-        this._addCloseIcon();
-    }
-
-    /** @hidden */
-    private _addCloseIcon(): void {
+    constructor() {
         const element = generateIcon('decline');
-        this.elementRef.nativeElement.appendChild(element);
+        this._elementRef.nativeElement.appendChild(element);
     }
 }
 
 @Directive({
     selector: '[fdTileActionIndicator], [fd-tile-action-indicator]',
-    standalone: true
+    host: {
+        class: 'fd-tile__action-indicator'
+    }
 })
-export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
+export class TileActionIndicatorDirective {
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-tile__action-indicator', this.class];
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-        this._addIndicatorIcon();
-    }
-
-    /** @hidden */
-    private _addIndicatorIcon(): void {
+    constructor() {
         const element = generateIcon('overflow');
-        this.elementRef.nativeElement.appendChild(element);
+        this._elementRef.nativeElement.appendChild(element);
     }
 }
 
 @Directive({
     selector: '[fdTileActionContainer], [fd-tile-action-container]',
-    standalone: true
+    host: {
+        class: 'fd-tile__action-container'
+    }
 })
-export class TileActionContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__action-container')
-    baseClass = true;
-}
+export class TileActionContainerDirective {}
 
 function generateIcon(iconName: string): HTMLElement {
     const element = document.createElement('i');
