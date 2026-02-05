@@ -12,7 +12,7 @@ import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 import {
@@ -42,7 +42,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
         FacetModule,
         FormLabelComponent,
         TextComponent,
-        RatingIndicatorModule,
+        RatingIndicatorComponent,
         ObjectStatusComponent,
         ObjectNumberComponent,
         IconComponent,
