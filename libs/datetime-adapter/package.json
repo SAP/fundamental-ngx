@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/datetime-adapter",
-    "version": "0.59.1-rc.33",
+    "version": "0.59.1-rc.34",
     "description": "Datetime adapter for SAP Fundamentals, based on Day.js package",
     "license": "Apache-2.0",
     "homepage": "https://sap.github.io/fundamental-ngx",
