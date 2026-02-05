@@ -1,5 +1,4 @@
 import {
-    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -40,8 +39,8 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     ],
     host: {
         '[attr.role]': 'role()',
-        '[class.fd-bar--initial-suggestion-title]': 'initialSuggestionTitle()',
-        '[class.fd-bar--initial-suggestion-subline]': 'initialSuggestionSubline()'
+        '[class.fd-bar--initial-suggestion-title]': 'initialSuggestionTitle',
+        '[class.fd-bar--initial-suggestion-subline]': 'initialSuggestionSubline'
     },
     standalone: true
 })
@@ -74,16 +73,18 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     @Input()
     size: SizeType = '';
 
+    /** Whether this bar is to be used for the search results initial suggestion title. */
+    @Input()
+    initialSuggestionTitle = false;
+
+    /** Whether this bar is to be used for the search results initial suggestion subline. */
+    @Input()
+    initialSuggestionSubline = false;
+
     /** Aria role for the Bar
      * default is toolbar
      */
     role = input('toolbar');
-
-    /** Whether this bar is to be used for the search results initial suggestion title. */
-    readonly initialSuggestionTitle = input(false, { transform: booleanAttribute });
-
-    /** Whether this bar is to be used for the search results initial suggestion subline. */
-    readonly initialSuggestionSubline = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _subscriptions = new Subscription();

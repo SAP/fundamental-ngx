@@ -19,21 +19,6 @@ import {
     ShellbarTitleComponent
 } from '@fundamental-ngx/core/shellbar';
 import {
-    UserMenuBodyComponent,
-    UserMenuComponent,
-    UserMenuContentContainerComponent,
-    UserMenuControlComponent,
-    UserMenuControlElementDirective,
-    UserMenuFooterComponent,
-    UserMenuHeaderContainerDirective,
-    UserMenuHeaderDirective,
-    UserMenuListComponent,
-    UserMenuListItemComponent,
-    UserMenuSublineDirective,
-    UserMenuSublistComponent,
-    UserMenuUserNameDirective
-} from '@fundamental-ngx/core/user-menu';
-import {
     SearchFieldComponent,
     SearchInput,
     SuggestionItem,
@@ -51,19 +36,6 @@ import { Observable, of } from 'rxjs';
         ShellbarTitleComponent,
         ShellbarActionsComponent,
         ShellbarBrandingComponent,
-        UserMenuComponent,
-        UserMenuBodyComponent,
-        UserMenuControlComponent,
-        UserMenuFooterComponent,
-        UserMenuContentContainerComponent,
-        UserMenuHeaderContainerDirective,
-        UserMenuHeaderDirective,
-        UserMenuSublineDirective,
-        UserMenuUserNameDirective,
-        UserMenuListComponent,
-        UserMenuSublistComponent,
-        UserMenuListItemComponent,
-        UserMenuControlElementDirective,
         AvatarComponent,
         PopoverModule,
         ListModule,
@@ -81,8 +53,6 @@ import { Observable, of } from 'rxjs';
     ]
 })
 export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
-    userMenuComponent = viewChild<UserMenuComponent>('userMenuComponent');
-
     shellSearchField = viewChild<SearchFieldComponent>('shellSearchField');
 
     dataSource: SearchFieldDataSource<any>;
@@ -164,7 +134,6 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
 
     actionPicked(action: string): void {
         this.openMessageToast(action);
-        this.userMenuComponent()?.close();
     }
 
     openMessageToast(action: string): void {

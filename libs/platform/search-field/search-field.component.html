@@ -14,10 +14,10 @@
             (keydown)="_handlePopoverKeydown($event)"
             [style.display]="
                 (_dropdownValues$ | async | suggestionMatches: inputText).length > 0 ||
-                initialSuggestionTitle() ||
-                suggestionFooter() ||
-                searchResultsEmptyTemplate() ||
-                searchResultsEmptyDefaultSuggestions()?.length
+                initialSuggestionTitle ||
+                suggestionFooter ||
+                searchResultsEmptyTemplate ||
+                searchResultsEmptyDefaultSuggestions?.length
                     ? 'inherit'
                     : 'none'
             "
@@ -28,12 +28,12 @@
         >
             <fd-busy-indicator
                 [block]="true"
-                [loading]="suggestionsLoading()"
-                [title]="busyIndicatorTitle()"
-                [ariaValueText]="busyIndicatorAriaValueText()"
+                [loading]="suggestionsLoading"
+                [title]="busyIndicatorTitle"
+                [ariaValueText]="busyIndicatorAriaValueText"
             >
                 @if (
-                    initialSuggestionTitle()!.length > 0 &&
+                    initialSuggestionTitle!.length > 0 &&
                     (_dropdownValues$ | async | suggestionMatches: inputText).length > 0 &&
                     !_selectedSuggestionItem &&
                     !inputText
@@ -42,43 +42,43 @@
                         <div
                             fd-bar
                             [initialSuggestionTitle]="true"
-                            [barDesign]="initialSuggestionSubline() ? 'header-with-subheader' : 'header'"
+                            [barDesign]="initialSuggestionSubline ? 'header-with-subheader' : 'header'"
                             [attr.id]="_popoverHeaderId"
                         >
                             <div fd-bar-left>
                                 <span fd-title [twoLineClamp]="true" [headerSize]="6">
-                                    {{ initialSuggestionTitle() }}
+                                    {{ initialSuggestionTitle }}
                                 </span>
                             </div>
                         </div>
-                        @if (initialSuggestionSubline()) {
+                        @if (initialSuggestionSubline) {
                             <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
                                 <div fd-bar-left>
-                                    <fd-text [subline]="true" [text]="initialSuggestionSubline()"></fd-text>
+                                    <fd-text [subline]="true" [text]="initialSuggestionSubline"></fd-text>
                                 </div>
                             </div>
                         }
                     </div>
                 } @else if (
-                    initialSuggestionEmptyTitle()!.length > 0 &&
+                    initialSuggestionEmptyTitle!.length > 0 &&
                     (_dropdownValues$ | async | suggestionMatches: inputText).length === 0
                 ) {
                     <div fd-popover-body-header>
                         <div
                             fd-bar
                             [initialSuggestionTitle]="true"
-                            [barDesign]="initialSuggestionEmptySubline() ? 'header-with-subheader' : 'header'"
+                            [barDesign]="initialSuggestionEmptySubline ? 'header-with-subheader' : 'header'"
                         >
                             <div fd-bar-left>
                                 <span fd-title [twoLineClamp]="true" [headerSize]="6">
-                                    {{ initialSuggestionEmptyTitle() }}
+                                    {{ initialSuggestionEmptyTitle }}
                                 </span>
                             </div>
                         </div>
-                        @if (initialSuggestionEmptySubline()) {
+                        @if (initialSuggestionEmptySubline) {
                             <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
                                 <div fd-bar-left>
-                                    <fd-text [subline]="true" [text]="initialSuggestionEmptySubline()"></fd-text>
+                                    <fd-text [subline]="true" [text]="initialSuggestionEmptySubline"></fd-text>
                                 </div>
                             </div>
                         }
@@ -87,10 +87,10 @@
                 <ng-template [ngTemplateOutlet]="suggestionMenuTemplate"></ng-template>
                 @if (
                     (_dropdownValues$ | async | suggestionMatches: inputText).length === 0 &&
-                    searchResultsEmptyDefaultSuggestions()
+                    searchResultsEmptyDefaultSuggestions
                 ) {
                     <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)">
-                        @for (defaultSuggestion of searchResultsEmptyDefaultSuggestions(); track defaultSuggestion) {
+                        @for (defaultSuggestion of searchResultsEmptyDefaultSuggestions; track defaultSuggestion) {
                             <ng-template
                                 [ngTemplateOutlet]="suggestionItemTemplate"
                                 [ngTemplateOutletContext]="{ filteredSuggestion: defaultSuggestion }"
@@ -163,7 +163,7 @@
             class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
             [class.is-focus]="_isFocused"
         >
-            @if (showAdvancedFilter()) {
+            @if (showAdvancedFilter) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
                     <button
                         (fdkClicked)="_advancedFilterButtonClicked()"
@@ -282,12 +282,12 @@
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
                     @if (filteredSuggestion?.isGroupHeader) {
                         <li role="group">
-                            <ul fd-list [searchResultsList]="true">
-                                <li
-                                    fd-list-group-header
-                                    [attr.aria-roledescription]="'platformSearchField.groupHeader' | fdTranslate"
-                                    class="fd-suggestion-header"
-                                >
+                            <ul
+                                fd-list
+                                [searchResultsList]="true"
+                                [attr.aria-roledescription]="'platformSearchField.groupHeader' | fdTranslate"
+                            >
+                                <li fd-list-group-header class="fd-suggestion-header">
                                     <span fd-list-title>{{ filteredSuggestion?.value }}</span>
                                 </li>
                                 @for (
@@ -315,15 +315,15 @@
                     }
                 }
             </ul>
-            @if (suggestionFooter() && (_dropdownValues$ | async | suggestionMatches: inputText).length > 0) {
+            @if (suggestionFooter && (_dropdownValues$ | async | suggestionMatches: inputText).length > 0) {
                 <div fd-popover-body-footer class="fdp-search-field__footer">
                     <div fd-bar barDesign="footer">
-                        <ng-template [ngTemplateOutlet]="suggestionFooter()"></ng-template>
+                        <ng-template [ngTemplateOutlet]="suggestionFooter"></ng-template>
                     </div>
                 </div>
             }
-        } @else if (searchResultsEmptyTemplate()) {
-            <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate()"></ng-template>
+        } @else if (searchResultsEmptyTemplate) {
+            <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate"></ng-template>
         }
     }
 </ng-template>
@@ -345,7 +345,7 @@
         (mouseenter)="_searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)"
         (mouseleave)="_searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)"
         [selected]="
-            enableSelection() && filteredSuggestion === _selectedSuggestionItem && !filteredSuggestion.isGroupHeader
+            enableSelection && filteredSuggestion === _selectedSuggestionItem && !filteredSuggestion.isGroupHeader
         "
         [counter]="filteredSuggestion.searchInScopeCounter"
         [counterRole]="'tooltip'"

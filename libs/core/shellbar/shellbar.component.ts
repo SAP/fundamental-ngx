@@ -419,7 +419,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if ((size === 'xl' && !this.contextArea) || (size === 's' && this._showMobileSearch)) {
+        if (size === 's' && this._showMobileSearch) {
             this._attachSearch();
         } else {
             this._detachSearch();

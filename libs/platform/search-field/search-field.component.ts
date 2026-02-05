@@ -3,7 +3,6 @@ import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
-    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
@@ -16,7 +15,6 @@ import {
     inject,
     Inject,
     Injector,
-    input,
     Input,
     OnChanges,
     OnDestroy,
@@ -340,46 +338,56 @@ export class SearchFieldComponent
     }
 
     /** Title of the initial suggestion, if a suggestion list is displayed. */
-    initialSuggestionTitle = input<string>('');
+    @Input()
+    initialSuggestionTitle = '';
 
     /** Subline of the initial suggestion, if a suggestion list is displayed. */
-    initialSuggestionSubline = input<string>('');
+    @Input()
+    initialSuggestionSubline = '';
 
     /** Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion title should be shown. */
-    initialSuggestionEmptyTitle = input<string>('');
+    @Input()
+    initialSuggestionEmptyTitle = '';
 
     /** Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion subline should be shown. */
-    initialSuggestionEmptySubline = input<string>('');
+    @Input()
+    initialSuggestionEmptySubline = '';
 
     /** Subline of the initial suggestion, if a suggestion list is displayed. */
-    suggestionFooter = input<TemplateRef<any> | null>(null);
+    @Input()
+    suggestionFooter: TemplateRef<any> | null = null;
 
     /** Template to display when the search results list has no items to display. */
-    searchResultsEmptyTemplate = input<TemplateRef<any> | null>(null);
+    @Input()
+    searchResultsEmptyTemplate: TemplateRef<any> | null = null;
 
     /** Options to display when the user has entered a string into the input that returns no results. */
-    searchResultsEmptyDefaultSuggestions = input<SuggestionItem[] | null>(null);
+    @Input()
+    searchResultsEmptyDefaultSuggestions: SuggestionItem[] | null = null;
 
     /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
-    showAdvancedFilter = input(false, { transform: booleanAttribute });
+    @Input()
+    showAdvancedFilter = false;
 
     /** Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty. */
-    allowEmptySearch = input(false, { transform: booleanAttribute });
-
-    /** Whether to disable the default suggestion matching logic for search results. This may be helpful when the filtering logic is handled in the datasource. */
-    disableDefaultSuggestionMatches = input(false, { transform: booleanAttribute });
+    @Input()
+    allowEmptySearch = false;
 
     /** Whether to display a suggestion item as selected after it has been clicked. */
-    enableSelection = input(false, { transform: booleanAttribute });
+    @Input()
+    enableSelection = false;
 
     /** Whether to display the busy indicator over the suggestion list. */
-    suggestionsLoading = input(false, { transform: booleanAttribute });
+    @Input()
+    suggestionsLoading = false;
 
     /** Title for the busy indicator. */
-    busyIndicatorTitle = input<string>('');
+    @Input()
+    busyIndicatorTitle = '';
 
     /** Aria value text for the busy indicator. */
-    busyIndicatorAriaValueText = input<string>('');
+    @Input()
+    busyIndicatorAriaValueText = '';
 
     /** @hidden Focus state */
     _isFocused = false;
@@ -585,7 +593,7 @@ export class SearchFieldComponent
         if (inputStr.length === 0) {
             this._selectedSuggestionItem = null;
             this._selectedSuggestionItemId = '';
-            if (!this.allowEmptySearch()) {
+            if (!this.allowEmptySearch) {
                 this.closeSuggestionMenu();
             }
         }
@@ -754,7 +762,7 @@ export class SearchFieldComponent
         this._isRefresh = true;
         this._isSearchDone = false;
 
-        if (!this.allowEmptySearch()) {
+        if (!this.allowEmptySearch) {
             this.closeSuggestionMenu(false);
         } else {
             if (this.dataSource) {
@@ -851,7 +859,7 @@ export class SearchFieldComponent
     /** @hidden */
     _inputFocus(): void {
         this._isFocused = true;
-        if (this._shellbar && this.allowEmptySearch()) {
+        if (this._shellbar && this.allowEmptySearch) {
             this.openSuggestionMenu();
         }
     }
@@ -913,6 +921,10 @@ export class SearchFieldComponent
                 childIds += child.id + ' ';
             });
             list.setAttribute('aria-owns', childIds);
+            const headerText = (list.querySelector('.fd-suggestion-header') as HTMLElement).innerText;
+            if (headerText) {
+                list.setAttribute('aria-label', headerText);
+            }
         });
     }
 
