@@ -25,7 +25,6 @@ import {
     PlatformTimePickerModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
-import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
@@ -59,7 +58,6 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformButtonModule,
         PlatformDynamicPageModule,
         PlatformFeedInputModule,
-        PlatformInfoLabelModule,
         PlatformLinkModule,
         PlatformListModule,
         PlatformMenuModule,
@@ -75,7 +73,6 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformTableModule,
         PlatformValueHelpDialogModule,
         PlatformWizardGeneratorModule,
-
         FdpFormGroupModule,
         PlatformRadioGroupModule,
         PlatformCheckboxModule,

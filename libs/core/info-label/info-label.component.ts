@@ -1,21 +1,27 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
     inject,
-    Input,
-    isDevMode,
-    OnChanges,
-    OnInit,
-    SimpleChanges,
+    input,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
+/** Display type for the info label. */
 export type LabelType = 'numeric' | 'icon';
+
 const labelColorRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
+
+const defaultColor: InfoLabelColor = 7;
+
+/** Valid accent color values for info labels (1-10). */
 export type InfoLabelColor = (typeof labelColorRange)[number];
+
+/** Accent color input accepting both number and string representations. */
 export type InfoLabelColorInput = InfoLabelColor | `${InfoLabelColor}`;
 
 @Component({
@@ -24,89 +30,92 @@ export type InfoLabelColorInput = InfoLabelColor | `${InfoLabelColor}`;
     styleUrl: './info-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IconComponent]
+    imports: [IconComponent, FdTranslatePipe],
+    host: {
+        '[class]': 'cssClass()'
+    }
 })
-export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder, HasElementRef {
-    /** User's custom classes */
-    @Input()
-    class = '';
+export class InfoLabelComponent implements HasElementRef {
+    /**
+     * The type of the info label.
+     * - `'numeric'`: Displays the label as a number with special numeric styling
+     * - `'icon'`: Displays an icon alongside the label text
+     * - `undefined`: Default text-only label (omit this property for default)
+     * @default undefined
+     */
+    readonly type = input<LabelType>();
 
     /**
-     * The LabelType represented by the info label .
-     * For default info label omit this property
+     * The icon name to display when `type` is set to `'icon'`.
+     * @default null
      */
-    @Input()
-    type: LabelType;
-
-    /** The icon name to display. See the icon page for the list of icons
-     * here: https://sap.github.io/fundamental-ngx/icon
-     * */
-    @Input()
-    glyph: Nullable<string>;
+    readonly glyph = input<string | null>();
 
     /**
-     * The icon font
-     * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
+     * The icon font family to use for the icon.
+     * @default 'SAP-icons'
      */
-    @Input()
-    font: IconFont = 'SAP-icons';
+    readonly font = input<IconFont>('SAP-icons');
 
-    /** Define the colour of the info label starting form 1 to 10 */
-    @Input()
-    color: Nullable<InfoLabelColorInput> = 7;
+    /**
+     * Accent color of the info label, ranging from 1 to 10.
+     * Invalid values default to 7 with a console warning in development mode.
+     * @default 7
+     */
+    readonly color = input<InfoLabelColorInput | null | undefined>(defaultColor);
 
-    /** Define the text content of the info label */
-    @Input()
-    label: string;
+    /**
+     * The text content displayed in the info label.
+     */
+    readonly label = input<string>();
 
-    /** Define the tooltip content of the info label */
-    @Input()
-    title: string;
+    /**
+     * Tooltip text displayed on hover.
+     * Provides additional context about the label.
+     */
+    readonly title = input<string>();
 
-    /** Define the ariaLabel content of the info label */
-    @Input()
-    ariaLabel: Nullable<string>;
+    /**
+     * ARIA label for accessibility.
+     * Overrides the visible label for screen readers when provided.
+     */
+    readonly ariaLabel = input<string | null>();
 
-    /** Define the labelled by content of the info label */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
+    /**
+     * ARIA labelledby for accessibility.
+     * Used when the label is provided by another element.
+     */
+    readonly ariaLabelledBy = input<string | null>();
+
+    /**
+     * Screen reader only text for additional context.
+     * Defaults to translated "Info Label" if not provided.
+     */
+    readonly srText = input<string>();
 
     /** @hidden */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
+    /** @hidden Validated color with fallback to default */
+    protected readonly validatedColor = computed(() => {
+        const numericColor = Number(this.color() ?? defaultColor);
+
+        // Check if it's a valid integer in range 1-10
+        if (Number.isInteger(numericColor) && numericColor >= 1 && numericColor <= 10) {
+            return numericColor;
+        }
+
+        return defaultColor; // Default fallback for invalid values
+    });
+
     /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
+    protected readonly cssClass = computed(() =>
+        [
             'fd-info-label',
-            this.type ? `fd-info-label--${this.type}` : '',
-            this.color ? `fd-info-label--accent-color-${this.color}` : '',
-            this.class
-        ];
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._validateColorInput();
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.color) {
-            this._validateColorInput();
-        }
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    private _validateColorInput(): void {
-        const matchingColor = labelColorRange.find((color) => color === Number(this.color));
-        if (!matchingColor) {
-            if (isDevMode()) {
-                console.warn(`Invalid color input: ${this.color}. Please provide a number between 1 and 10`);
-            }
-            this.color = 7;
-        }
-    }
+            this.type() ? `fd-info-label--${this.type()}` : '',
+            `fd-info-label--accent-color-${this.validatedColor()}`
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
 }

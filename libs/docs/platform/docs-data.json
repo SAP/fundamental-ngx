@@ -31,10 +31,6 @@
             "name": "Datetime Picker"
         },
         {
-            "url": "platform/info-label",
-            "name": "Info Label"
-        },
-        {
             "url": "platform/input",
             "name": "Input"
         },
