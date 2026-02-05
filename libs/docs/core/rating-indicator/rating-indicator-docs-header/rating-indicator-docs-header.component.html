@@ -1,11 +1,66 @@
 <fd-doc-page>
     <header>Rating indicator</header>
     <description>
-        The rating indicator displays a group of icons or images (usually stars) that indicate a rating. It allows users
-        to rate content on a numeric scale, typically from 1 (lowest) to 5 (highest). Although the maximum amount is 7
-        for the icons or images, it is highly recommended to display the default amount of 5.
+        <p>
+            The rating indicator can be used to rate content or to indicate a rating. It enables users to rate an item
+            on a numeric scale. The most popular scale is 1 (lowest) to 5 (highest).
+        </p>
+
+        <h3>When to Use</h3>
+        <p><strong>Do</strong> use the rating indicator:</p>
+        <ul>
+            <li>
+                If you want to collect quantitative user feedback in the form of star ratings (for example, for user
+                satisfaction surveys or product reviews).
+            </li>
+            <li>
+                If you need a visually appealing way to showcase the popularity or quality of items, products, or
+                content.
+            </li>
+        </ul>
+
+        <p><strong>Don't</strong> use the rating indicator:</p>
+        <ul>
+            <li>
+                If the content you're presenting doesn't lend itself to user ratings (for example, legal documents,
+                terms of service, or non-interactive content).
+            </li>
+            <li>
+                If adding a rating indicator introduces unnecessary complexity to your UI, especially when you don't
+                anticipate much user interaction.
+            </li>
+        </ul>
+
+        <h3>Anatomy</h3>
+        <ul>
+            <li><strong>Selected icon:</strong> Indicates the rating. At least one element must be selected.</li>
+            <li><strong>Icon not selected:</strong> Indicates non-active rating states.</li>
+            <li><strong>Dynamic text:</strong> Dynamic text that shows the rating.</li>
+            <li><strong>Icon read-only:</strong> Indicates non-active rating states in read-only mode.</li>
+        </ul>
+
+        <h3>States</h3>
+        <ul>
+            <li>
+                <strong>Regular state:</strong> The active, editable state where users can select or change the rating.
+            </li>
+            <li>
+                <strong>Disabled state:</strong> The inactive state, in a faded style showing the rating cannot be
+                interacted with.
+            </li>
+            <li>
+                <strong>Read-only state:</strong> The fixed state where the rating is visible to users but cannot be
+                altered.
+            </li>
+        </ul>
+
+        <h3>Number of Rating Symbols</h3>
+        <p>
+            You can specify the total number of rating symbols (stars) using the <code>size</code> input, with 5
+            recommended but up to 7 possible.
+        </p>
     </description>
-    <import module="RatingIndicatorModule" subPackage="rating-indicator"></import>
+    <import componentName="RatingIndicatorComponent" subPackage="rating-indicator"></import>
 
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

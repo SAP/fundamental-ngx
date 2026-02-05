@@ -782,4 +782,10 @@ export interface FdLanguage {
     coreInfoLabel: {
         srOnlyText: FdLanguageKey;
     };
+    coreRatingIndicator: {
+        ariaLabelReset: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+        ariaLabelTotalRating: FdLanguageKey;
+        ariaLabelValue: FdLanguageKey;
+    };
 }
