@@ -419,7 +419,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if (size === 's' && this._showMobileSearch) {
+        if ((size === 'xl' && !this.contextArea) || (size === 's' && this._showMobileSearch)) {
             this._attachSearch();
         } else {
             this._detachSearch();
@@ -473,7 +473,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             this.branding.showTitle();
         }
         if (this._actions) {
-            this._actions._handleOverflow(this.showSearchFieldOnSizeSmall);
+            this._actions._handleOverflow(this._currentSize === 's' && this.showSearchFieldOnSizeSmall);
         }
     }
 
