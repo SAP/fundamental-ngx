@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { LinkModule } from '@fundamental-ngx/core/link';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
@@ -55,7 +55,7 @@ import {
         ListModule,
         UploadCollectionTitleDirective,
         IconComponent,
-        LinkModule,
+        LinkComponent,
         UploadCollectionFormItemComponent,
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
