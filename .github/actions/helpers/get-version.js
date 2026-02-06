@@ -44,7 +44,20 @@ module.exports = (branch = null) => {
             // semver.rsort handles prerelease comparison correctly:
             // e.g., 0.59.0-rc.0 > 0.58.1 (because 0.59.0 > 0.58.1)
             const sortedVersions = semver.rsort(validVersions);
-            return sortedVersions[0];
+            const tagVersion = sortedVersions[0];
+
+            // Also check package.json version - use whichever is higher
+            // This handles cases where a release commit bumped package.json but tag creation failed
+            try {
+                const packageVersion = getFileContents('libs/core/package.json', null).version;
+                if (semver.valid(packageVersion) && semver.gt(packageVersion, tagVersion)) {
+                    return packageVersion;
+                }
+            } catch (e) {
+                // Ignore errors reading package.json
+            }
+
+            return tagVersion;
         }
     } catch (e) {
         // Git command failed or no tags found, fall through to package.json

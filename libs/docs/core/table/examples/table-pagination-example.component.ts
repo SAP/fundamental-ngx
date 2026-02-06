@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'fd-table-pagination-example',
@@ -23,9 +22,6 @@ export class TablePaginationExampleComponent implements OnInit {
     itemsPerPage = 5;
     currentPage = 3;
     itemsPerPageOptions: number[] = [3, 5, 10];
-    rtl$: Observable<boolean>;
-
-    constructor(private _rtlService: RtlService) {}
 
     newPageClicked(pageNumber: number): void {
         this.currentPage = pageNumber;
@@ -42,7 +38,6 @@ export class TablePaginationExampleComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.rtl$ = this._rtlService.rtl;
         this.tableRows = [
             {
                 column1: 'Row 1',

@@ -7,9 +7,9 @@ import {
     Inject,
     Input,
     OnDestroy,
-    Optional,
     computed,
-    effect
+    effect,
+    inject
 } from '@angular/core';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
@@ -42,7 +42,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
                     .map((item) => item.overflowItem.focusableItem)
             )
                 .withWrap()
-                .withHorizontalOrientation(this._dir$());
+                .withHorizontalOrientation(this._dir());
         });
     }
 
@@ -57,17 +57,17 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     private _items: OverflowItemRef[];
 
     /** @hidden */
-    private readonly _dir$ = computed<'ltr' | 'rtl'>(() => (this._rtl?.rtlSignal() ? 'rtl' : 'ltr'));
+    private readonly _dir = computed<'ltr' | 'rtl'>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
-    constructor(
-        @Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer,
-        @Optional() private _rtl: RtlService
-    ) {
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    constructor(@Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer) {
         this._overflowContainer?.registerPopoverContent(this);
 
         effect(() => {
-            this._keyboardEventsManager = this._keyboardEventsManager?.withHorizontalOrientation(this._dir$());
+            this._keyboardEventsManager = this._keyboardEventsManager?.withHorizontalOrientation(this._dir());
         });
     }
 

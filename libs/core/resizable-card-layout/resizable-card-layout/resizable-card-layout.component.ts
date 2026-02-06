@@ -13,7 +13,6 @@ import {
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     ViewEncapsulation,
@@ -108,13 +107,15 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _layoutShifted = false;
 
     /** @hidden */
-    private _directionPosition$ = computed<'left' | 'right'>(() => (this._rtlService?.rtlSignal() ? 'right' : 'left'));
+    private _directionPosition = computed<'left' | 'right'>(() => (this._rtlService?.rtl() ? 'right' : 'left'));
+
+    /** @hidden */
+    private _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
-        public readonly elementRef: ElementRef,
-        @Optional() private readonly _rtlService: RtlService
+        public readonly elementRef: ElementRef
     ) {}
 
     /** @hidden handles keyboard accessibility */
@@ -470,7 +471,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param card {ResizableCardItemComponent}
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
-        const directionPosition = this._directionPosition$();
+        const directionPosition = this._directionPosition();
         const columnsStart =
             card[directionPosition] != null ? Math.floor(card[directionPosition]! / horizontalResizeStep) : 0;
 
@@ -500,7 +501,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param index value of card in array of ResizableCardItemComponent
      */
     private _setCardPositionValues(card: ResizableCardItemComponent, index: number): void {
-        const directionPosition = this._directionPosition$();
+        const directionPosition = this._directionPosition();
         if (index === 0) {
             card[directionPosition] = Number(this._paddingLeft);
             card.top = 0;
@@ -523,7 +524,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @returns It returns true when card position id found otherwise it returns false.
      */
     private _isPositionSetSuccess(height: number, card: ResizableCardItemComponent): boolean {
-        const directionPosition = this._directionPosition$();
+        const directionPosition = this._directionPosition();
         const columnPositions: number[] = [];
         let index = 0;
         for (const columnHeight of this._columnsHeight) {

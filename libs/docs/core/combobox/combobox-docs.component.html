@@ -200,6 +200,25 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="value-property" componentName="combobox">
+    Reactive Form with Value Property
+</fd-docs-section-title>
+<description>
+    When using <code>[communicateByObject]="true"</code> with custom objects, you can use the
+    <code>[valueProperty]</code>
+    input to specify which property of the selected object should be used as the form control value.
+</description>
+<description>
+    By default, the entire object is passed to the form control. With <code>[valueProperty]="'propertyName'"</code>,
+    only the specified property value is passed, making it easier to work with APIs and form submissions.
+</description>
+<component-example>
+    <fd-combobox-value-property-example></fd-combobox-value-property-example>
+</component-example>
+<code-example [exampleFiles]="comboboxValuePropertyExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="disabled" componentName="combobox"> Disabled Combobox </fd-docs-section-title>
 <description> This example shows how to use a disabled combobox in a reactive form. </description>
 <component-example>

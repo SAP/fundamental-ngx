@@ -173,7 +173,11 @@ jobs:
             # This will NOT trigger the workflow again due to [ci skip] in commit message
             - name: Push changes and tags
               if: env.IS_MANUAL != 'true'
-              run: git push --follow-tags
+              run: |
+                  if ! git push --follow-tags; then
+                      echo "::error::Failed to push changes and tags"
+                      exit 1
+                  fi
 
             # This will delete locally some tags to properly generate the release notes, so it should go after the push to upstream
             - name: Generate Release Body

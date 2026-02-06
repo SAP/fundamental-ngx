@@ -25,7 +25,7 @@
         class="fd-table__cell--checkbox"
         [style]="
             _contentDensityObserver.contentDensity$()
-                | selectionCellStyles: _rtl$() : _fdpTableService._semanticHighlightingColumnWidth$()
+                | selectionCellStyles: isRtl() : _fdpTableService._semanticHighlightingColumnWidth$()
         "
         (keydown.enter)="
             selectionMode === SELECTION_MODE.MULTIPLE && _tableRowService.toggleAllSelectableRows(!checkedState)
@@ -89,7 +89,7 @@
         [ngStyle]="
             column
                 | tableCellStyles
-                    : _rtl$()
+                    : isRtl()
                     : _fdpTableService._semanticHighlightingColumnWidth$()
                     : selectionColumnWidth
                     : column._freezed

@@ -628,5 +628,8 @@ export default {
     },
     coreObjectIdentifier: {
         srOnlyAriaLabel: 'Object Identifier'
+    },
+    coreInfoLabel: {
+        srOnlyText: 'Info Label'
     }
 };

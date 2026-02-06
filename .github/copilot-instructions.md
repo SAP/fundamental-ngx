@@ -1643,6 +1643,8 @@ The project uses ESLint with NX and TypeScript plugins. Key rules:
 - **TypeScript comments**: `@ts-expect-error` allowed with description (minimum 3 characters), `@ts-ignore` discouraged
 - **Accessibility**: All components must pass AXE checks and WCAG AA standards
 - **Console statements**: Remove all debug console statements before committing
+- **No unused variables**: All declared variables must be used
+- **Prefix private memvers**: Only private members must be prefixed with `_`
 
 ### Testing Requirements
 

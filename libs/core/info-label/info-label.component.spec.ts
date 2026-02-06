@@ -1,67 +1,59 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { InfoLabelComponent, LabelType } from './info-label.component';
-
-@Component({
-    selector: 'fd-test-info-label',
-    template: ` <fd-info-label [type]="type" [label]="label" [color]="color" [glyph]="glyph"> </fd-info-label> `,
-    standalone: true,
-    imports: [InfoLabelComponent]
-})
-class TestInfoLabelComponent {
-    @ViewChild(InfoLabelComponent, { static: true, read: ElementRef })
-    infoLabelElementRef: ElementRef;
-
-    type: LabelType;
-    label: string;
-    color: string;
-    glyph: string;
-}
+import { InfoLabelComponent } from './info-label.component';
 
 describe('InfoLabelComponent', () => {
-    let infoLabelElementRef: ElementRef;
-    let testComponent: TestInfoLabelComponent;
-    let fixture: ComponentFixture<TestInfoLabelComponent>;
+    let component: InfoLabelComponent;
+    let fixture: ComponentFixture<InfoLabelComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestInfoLabelComponent]
+            imports: [InfoLabelComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestInfoLabelComponent);
-        infoLabelElementRef = fixture.componentInstance.infoLabelElementRef;
-        testComponent = fixture.componentInstance;
+        fixture = TestBed.createComponent(InfoLabelComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
-    it('Should create', () => {
-        expect(testComponent).toBeTruthy();
-        expect(infoLabelElementRef).toBeTruthy();
+    it('should create', () => {
+        expect(component).toBeTruthy();
     });
 
-    it('Should add numeric label type', () => {
-        testComponent.type = 'numeric';
+    it('should have default classes', () => {
+        expect(fixture.nativeElement.classList.contains('fd-info-label')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-info-label--accent-color-7')).toBe(true);
+    });
+
+    it('should add numeric label type', () => {
+        fixture.componentRef.setInput('type', 'numeric');
         fixture.detectChanges();
-        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
     });
 
-    it('Should add icon label type', () => {
-        testComponent.type = 'icon';
+    it('should add icon label type', () => {
+        fixture.componentRef.setInput('type', 'icon');
         fixture.detectChanges();
-        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--icon')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-info-label--icon')).toBe(true);
     });
 
-    it('Should add accent color', () => {
-        testComponent.color = '2';
+    it('should add accent color', () => {
+        fixture.componentRef.setInput('color', '2');
         fixture.detectChanges();
-        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
     });
 
-    it('Should add icon', () => {
-        testComponent.glyph = 'future';
+    it('should default to color 7 for invalid color values', () => {
+        fixture.componentRef.setInput('color', '15');
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-info-label--accent-color-7')).toBe(true);
+    });
+
+    it('should add icon', () => {
+        fixture.componentRef.setInput('type', 'icon');
+        fixture.componentRef.setInput('glyph', 'future');
         fixture.detectChanges();
         const iconElement = fixture.nativeElement.querySelector('fd-icon');
 
@@ -69,9 +61,9 @@ describe('InfoLabelComponent', () => {
         expect(iconElement.classList.contains('sap-icon--future')).toBe(true);
     });
 
-    it('Should display label', () => {
+    it('should display label', () => {
         const label = 'Test label';
-        testComponent.label = label;
+        fixture.componentRef.setInput('label', label);
         fixture.detectChanges();
 
         const labelTextElement = fixture.nativeElement.querySelector('.fd-info-label__text');

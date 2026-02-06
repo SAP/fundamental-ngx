@@ -14,7 +14,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     QueryList,
     Renderer2,
     SimpleChanges,
@@ -74,7 +73,6 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             multi: true
         }
     ],
-    standalone: true,
     hostDirectives: [FocusableListDirective]
 })
 export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
@@ -131,17 +129,19 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     private renderer = inject(Renderer2);
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
     constructor(
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _destroyRef: DestroyRef,
         private readonly _ngZone: NgZone,
-        @Optional() @Host() private _focusableList: FocusableListDirective,
-        @Optional() private _rtlService: RtlService
+        @Host() private _focusableList: FocusableListDirective
     ) {
         this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
         effect(() => {
-            this._focusableList.contentDirection = this._rtlService?.rtlSignal() ? 'rtl' : 'ltr';
+            this._focusableList.contentDirection = this._rtlService?.rtl() ? 'rtl' : 'ltr';
         });
         this._focusableList.itemFocused.pipe(takeUntil(this._onDestroy$)).subscribe((item) => {
             this._focusedItemId.set(item.id);

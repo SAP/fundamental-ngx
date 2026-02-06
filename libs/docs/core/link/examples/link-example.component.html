@@ -5,17 +5,17 @@
 <br /><br />
 <a [routerLink]="['./']" fd-link aria-label="Icon right">
     Icon Right Link
-    <fd-icon [glyph]="arrowRight$ | async"></fd-icon>
+    <fd-icon [glyph]="arrowRight()"></fd-icon>
 </a>
 <br /><br />
 <a [routerLink]="['./']" fd-link aria-label="Icon left">
-    <fd-icon [glyph]="arrowLeft$ | async"></fd-icon>
+    <fd-icon [glyph]="arrowLeft()"></fd-icon>
     Icon Left Link
 </a>
 <br /><br />
 
 <a fd-link [subtle]="true" aria-label="Standard">Subtle Link</a> <br /><br />
 
-<div [ngStyle]="{ 'background-color': 'var(--sapShellColor)', padding: '10px' }">
+<div [ngStyle]="{ 'background-color': 'var(--sapShellColor)', padding: '1rem' }">
     <a fd-link [routerLink]="['./']" fragment="inverted" aria-label="Inverted" [inverted]="true">Inverted Link</a>
 </div>

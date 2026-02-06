@@ -6,20 +6,20 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    Inject,
     Injector,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
 import { Subject, Subscription, combineLatest, fromEvent, merge } from 'rxjs';
 import { distinctUntilChanged, map, mapTo, startWith, switchMap, throttleTime } from 'rxjs/operators';
@@ -311,16 +311,6 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    get _rtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
-
-    /** @hidden */
-    get _selectedNodes(): ApprovalGraphNode[] {
-        return getGraphNodes(this._graph).filter((node) => node.selected);
-    }
-
-    /** @hidden */
     _displayUserFn = displayUserFn;
 
     /** @hidden */
@@ -331,6 +321,24 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     readonly approvalFlowUniqueId = `fdp-approval-flow-${++defaultId}`;
+
+    /** @hidden */
+    protected readonly rtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden */
+    protected readonly prevSlideArrowGlyph = computed(() =>
+        this.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
+
+    /** @hidden */
+    protected readonly nextSlideArrowGlyph = computed(() =>
+        this.rtl() ? 'navigation-left-arrow' : 'navigation-right-arrow'
+    );
+
+    /** @hidden */
+    get _selectedNodes(): ApprovalGraphNode[] {
+        return getGraphNodes(this._graph).filter((node) => node.selected);
+    }
 
     /** @hidden */
     private _selectedWatchers: ApprovalUser[] = [];
@@ -345,12 +353,16 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     private _dataSourceChanged$ = new Subject<void>();
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly providers = inject<Map<string, DataProvider<any>>>(DATA_PROVIDERS, { optional: true });
+
+    /** @hidden */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef,
-        private readonly _injector: Injector,
-        @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        @Optional() private readonly _rtlService: RtlService
+        private readonly _injector: Injector
     ) {
         console.log('ApprovalFlowComponent is deprecated and will be removed in next release.');
     }
@@ -531,9 +543,9 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
                 nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'down');
             } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-                nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._rtl ? 'right' : 'left');
+                nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this.rtl() ? 'right' : 'left');
             } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-                nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._rtl ? 'left' : 'right');
+                nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this.rtl() ? 'left' : 'right');
             }
         }
 
@@ -1090,7 +1102,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             teamDataSource: this.teamDataSource,
             userDataSource: this.userDataSource,
             userDetailsTemplate: this.userDetailsTemplate,
-            rtl: this._rtl
+            rtl: this.rtl()
         };
     }
 

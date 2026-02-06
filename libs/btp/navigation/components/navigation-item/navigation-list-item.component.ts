@@ -202,14 +202,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** Type of the list item. Whether its a standard item or a "show more" button container. */
     readonly type: 'item' | 'showMore' = 'item';
 
-    /** @hidden */
-    readonly _toggleIcon$ = computed(() => {
-        if (this.expandedAttr$()) {
-            return 'slim-arrow-down';
-        }
-        return this._rtl$() ? 'slim-arrow-left' : 'slim-arrow-right';
-    });
-
     /** List item placement container. */
     readonly placementContainer =
         inject(FdbNavigationContentContainer, {
@@ -425,12 +417,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     readonly quickCreate$ = signal(false);
 
-    /**
-     * @hidden
-     * Popover position. Changes based on rtl value.
-     */
-    readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
-
     /** @hidden */
     readonly _moreButtonRef$ = computed(() => this._parentNavigationList?.moreButtonRef || null);
 
@@ -446,6 +432,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this._parentNavigationListItemDirective?.parentNavListItemDirective?._item || this.parentListItemComponent
         );
     }
+
+    /**
+     * @hidden
+     * Popover position. Changes based on rtl value.
+     */
+    protected readonly popoverPlacement = computed<Placement>(() => (this._isRtl() ? 'left-start' : 'right-start'));
 
     /** @hidden */
     private readonly _home$ = signal(false);
@@ -498,12 +490,10 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         { initialValue: 'expand/collapse sub-items' }
     );
 
-    private readonly _rtlService = inject(RtlService, {
-        optional: true
-    });
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /**
      * @hidden
@@ -666,7 +656,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return;
         }
 
-        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? LEFT_ARROW : RIGHT_ARROW);
+        const isGoBack = KeyUtil.isKeyCode(event, this._isRtl() ? LEFT_ARROW : RIGHT_ARROW);
 
         if (!isGoBack) {
             return;

@@ -5,6 +5,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     contentChild,
     contentChildren,
     DestroyRef,
@@ -12,15 +13,12 @@ import {
     ElementRef,
     inject,
     input,
-    OnInit,
     output,
     Renderer2,
     signal,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { KeyboardSupportService, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -68,7 +66,7 @@ import { UserMenuUserNameDirective } from './directives/user-menu-user-name.dire
     ],
     providers: [KeyboardSupportService, contentDensityObserverProviders()]
 })
-export class UserMenuComponent implements OnInit, AfterViewInit {
+export class UserMenuComponent implements AfterViewInit {
     /** Event thrown, when the user menu is opened or closed */
     isOpenChange = output<boolean>();
 
@@ -110,27 +108,29 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
     protected readonly userMenuBody = contentChild(UserMenuBodyComponent, { descendants: true });
 
     /** @hidden */
-    protected navigationArrow$: Observable<string>;
+    protected readonly navigationArrow = computed(() =>
+        this._rtlService.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
 
     /** @hidden */
-    private _listItems = contentChildren(UserMenuListItemComponent, { descendants: true });
+    private readonly _listItems = contentChildren(UserMenuListItemComponent, { descendants: true });
 
     /** @hidden */
-    private _rtlService = inject(RtlService);
+    private readonly _rtlService = inject(RtlService);
 
     /** @hidden */
-    private _dialogService = inject(DialogService);
+    private readonly _dialogService = inject(DialogService);
 
     /** @hidden */
-    private _changeDetectionRef = inject(ChangeDetectorRef);
+    private readonly _changeDetectionRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private _renderer = inject(Renderer2);
+    private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
     private _dialogRef: DialogRef | undefined;
 
-    private _destroyRef = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor() {
@@ -138,13 +138,6 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
             const isMobile = this.mobile();
             this._listItems()?.forEach((item) => item.mobile.set(isMobile));
         });
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
-        );
     }
 
     /** @hidden */

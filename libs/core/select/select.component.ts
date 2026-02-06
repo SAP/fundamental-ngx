@@ -338,9 +338,6 @@ export class SelectComponent<T = any>
     _calculatedMaxHeight: number;
 
     /** @hidden */
-    _rtl = false;
-
-    /** @hidden */
     _selectionModel: SelectionModel<OptionComponent>;
 
     /** @hidden */
@@ -447,8 +444,8 @@ export class SelectComponent<T = any>
     get calculatedMaxHeight(): number {
         return this._maxHeight || this._calculatedMaxHeight;
     }
-    /** @hidden */
-    readonly rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    /** Whether the component is in RTL mode */
+    readonly isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     private readonly _rtlService = inject(RtlService, {
         optional: true
@@ -586,7 +583,7 @@ export class SelectComponent<T = any>
                 this._keyManagerService._keyManager.activeItem?._selectViaInteraction();
             }
             this._isOpen = false;
-            this._keyManagerService._keyManager.withHorizontalOrientation(this.rtl$() ? 'rtl' : 'ltr');
+            this._keyManagerService._keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
             this.onTouched();
 

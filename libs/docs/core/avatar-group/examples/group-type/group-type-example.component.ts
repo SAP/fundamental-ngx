@@ -1,7 +1,7 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
 import { Component, inject } from '@angular/core';
-import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupComponent, AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -21,8 +21,6 @@ export class GroupTypeExampleComponent {
     personDetails: any = null;
     overflowPopoverStage: 'main' | 'detail' = 'main';
 
-    constructor(private _rtlService: RtlService) {}
-
     get isDetailStage(): boolean {
         return this.overflowPopoverStage === 'detail';
     }
@@ -35,10 +33,6 @@ export class GroupTypeExampleComponent {
             overflowItemsCount +
             ' avatars hidden, activate for complete list'
         );
-    }
-
-    get isRtl(): boolean {
-        return this._rtlService.rtl.getValue();
     }
 
     isOpenChanged(isOpened: boolean): void {

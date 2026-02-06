@@ -1,0 +1,50 @@
+<form [formGroup]="comparisonForm">
+    <div class="sap-margin-bottom-medium">
+        <h3>Without valueProperty (entire object as value)</h3>
+        <div fd-form-item>
+            <label fd-form-label>Select Fruit:</label>
+            <fd-combobox
+                placeholder="Select a fruit..."
+                [communicateByObject]="true"
+                [dropdownValues]="fruits"
+                [displayFn]="displayFn"
+                formControlName="fruitWithoutValueProperty"
+            >
+            </fd-combobox>
+            <small class="sap-margin-top-tiny sap-display-block">
+                Form value will contain entire object:
+                <code>{{ comparisonForm.get('fruitWithoutValueProperty')?.value | json }}</code>
+            </small>
+        </div>
+    </div>
+
+    <div class="sap-margin-bottom-medium">
+        <h3>With valueProperty="code" (only code property as value)</h3>
+        <div fd-form-item>
+            <label fd-form-label>Select Fruit:</label>
+            <fd-combobox
+                placeholder="Select a fruit..."
+                [communicateByObject]="true"
+                [dropdownValues]="fruits"
+                [displayFn]="displayFn"
+                [valueProperty]="'code'"
+                formControlName="fruitWithValueProperty"
+            >
+            </fd-combobox>
+            <small class="sap-margin-top-tiny sap-display-block">
+                Form value will contain only the code:
+                <code>{{ comparisonForm.get('fruitWithValueProperty')?.value }}</code>
+            </small>
+        </div>
+    </div>
+
+    <div class="sap-margin-bottom-medium">
+        <button fd-button label="Select Apple (A1)" (click)="selectAppleWithCode()"></button>
+        <button fd-button label="Reset Form" (click)="resetForm()"></button>
+    </div>
+
+    <div>
+        <h4>Complete Form Value:</h4>
+        <pre>{{ comparisonForm.value | json }}</pre>
+    </div>
+</form>

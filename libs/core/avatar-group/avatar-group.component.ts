@@ -56,8 +56,7 @@ import { AvatarGroupHostConfig } from './types';
         DefaultAvatarGroupOverflowBodyComponent,
         AvatarGroupInternalOverflowButtonDirective,
         ResizeObserverDirective
-    ],
-    standalone: true
+    ]
 })
 export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /**
@@ -111,7 +110,7 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
-    _contentDirection$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
+    protected readonly contentDirection = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -14,7 +14,7 @@ import {
     imports: [
         DocPageComponent,
         HeaderComponent,
-        InfoLabelModule,
+        InfoLabelComponent,
         DescriptionComponent,
         ImportComponent,
         HeaderTabsComponent

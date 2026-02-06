@@ -1,8 +1,12 @@
 <fd-docs-section-title id="large" componentName="illustrated-message"> Large </fd-docs-section-title>
-<description
-    >The configuration object passed to <code>[svgConfig]</code> should define values for all sizes: 'large', 'medium',
-    'small' and 'xsmall'. The appropriate size is applied automatically based on the container's width.</description
->
+<description>
+    Large illustrated messages are ideal for full-page scenarios such as empty states, error pages, or initial landing
+    screens. The illustration automatically scales responsively based on the container width.
+    <br /><br />
+    The <code>[svgConfig]</code> object should define SVG configurations for all sizes (<code>large</code>,
+    <code>medium</code>, <code>small</code>, and <code>xsmall</code>) to ensure proper responsive behavior as the
+    container resizes.
+</description>
 <component-example>
     <fd-illustrated-message-example></fd-illustrated-message-example>
 </component-example>
@@ -11,11 +15,14 @@
 <separator></separator>
 
 <fd-docs-section-title id="medium" componentName="illustrated-message"> Medium </fd-docs-section-title>
-<description
-    >Set the <code>type</code> property to <code>medium</code> for Illustration Message used in a Dialog or a Message
-    Box. The configuration object passed to <code>[svgConfig]</code> should contain values for 'medium', 'small' and
-    'xsmall'.</description
->
+<description>
+    Medium illustrated messages are designed for use in dialogs, message boxes, or page sections where space is more
+    constrained than full-page scenarios. Set the <code>type</code> property to <code>"medium"</code> to explicitly use
+    this size. <br /><br />
+    The <code>[svgConfig]</code> should include configurations for <code>medium</code>, <code>small</code>, and
+    <code>xsmall</code>
+    to support responsive scaling within the dialog or container.
+</description>
 <component-example>
     <fd-illustrated-message-dialog-example></fd-illustrated-message-dialog-example>
 </component-example>
@@ -24,11 +31,13 @@
 <separator></separator>
 
 <fd-docs-section-title id="small" componentName="illustrated-message"> Small </fd-docs-section-title>
-<description
-    >Set the <code>type</code> property to <code>small</code> for Illustration Message used in medium-sized cards or UI
-    elements smaller than full screen. The configuration object passed to <code>[svgConfig]</code> should contain values
-    for 'small' and 'xsmall'.</description
->
+<description>
+    Small illustrated messages work well in medium-sized cards, sidebars, panels, or other compact UI areas where you
+    need to communicate a state or message with limited space. Set <code>type="small"</code> to use this size
+    explicitly. <br /><br />
+    The <code>[svgConfig]</code> should provide configurations for <code>small</code> and <code>xsmall</code> to handle
+    responsive behavior as the container shrinks.
+</description>
 <component-example>
     <fd-illustrated-message-spot-example></fd-illustrated-message-spot-example>
 </component-example>
@@ -36,9 +45,11 @@
 
 <fd-docs-section-title id="xsmall" componentName="illustrated-message"> Extra Small </fd-docs-section-title>
 <description>
-    Set the <code>type</code> property to <code>xsmall</code> for Illustration Message used in small-sized cards or UI
-    elements smaller than full screen. The configuration object passed to <code>[svgConfig]</code> should contain values
-    for 'xsmall'.
+    Extra small illustrated messages are suited for very compact UI elements like small cards, list items with
+    illustrations, or narrow sidebars where space is highly constrained. Set <code>type="xsmall"</code> to explicitly
+    use this minimal size. <br /><br />
+    At this size, only the <code>xsmall</code> configuration is required in <code>[svgConfig]</code> since the container
+    won't scale to larger sizes.
 </description>
 <component-example>
     <fd-illustrated-message-dot-example></fd-illustrated-message-dot-example>
@@ -47,11 +58,15 @@
 
 <fd-docs-section-title id="inline" componentName="illustrated-message"> Inline SVG </fd-docs-section-title>
 <description>
-    <p>In some cases it's not applicable to use URLs for the SVG locations.</p>
     <p>
-        In this case developers can load SVG directly into their js code and pass it as a string to the component. The
-        configuration object passed to <code>[svgConfig]</code> should contain values for 'large', 'medium', 'small' and
-        'xsmall'.
+        In scenarios where external SVG URLs are not practical (such as offline applications, bundled assets, or when
+        avoiding external HTTP requests), you can provide inline SVG content directly as a string.
+    </p>
+    <p>
+        Use the <code>file</code> property in your <code>[svgConfig]</code> instead of <code>url</code> and
+        <code>id</code>. The component will render the inline SVG and automatically handle sizing and responsiveness.
+        Include file configurations for all responsive sizes (<code>large</code>, <code>medium</code>,
+        <code>small</code>, <code>xsmall</code>) for optimal responsive behavior.
     </p>
 </description>
 

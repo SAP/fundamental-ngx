@@ -212,6 +212,18 @@ const SCENARIOS = {
         packageJsonVersion: '0.1.0',
         conventionalBumpType: 'minor',
         expected: '0.2.0-rc.0 (uses package.json fallback)'
+    },
+
+    // Package.json ahead of tags (failed tag creation recovery)
+    PACKAGE_AHEAD_OF_TAGS: {
+        name: 'Package.json ahead of tags (failed tag creation)',
+        isPrerelease: true,
+        isHotfix: false,
+        isManual: false,
+        availableTags: ['v0.59.1-rc.19', 'v0.59.1-rc.18', 'v0.59.1-rc.17'],
+        packageJsonVersion: '0.59.1-rc.20', // Package was bumped but tag creation failed
+        conventionalBumpType: 'patch',
+        expected: '0.59.1-rc.21'
     }
 };
 
@@ -268,10 +280,18 @@ function getCurrentVersion(tags, fallbackVersion) {
     const sorted = semver.rsort(versions);
     console.log(`   📌 Sorted versions (top 5): ${sorted.slice(0, 5).join(', ')}`);
 
-    const highest = sorted[0];
-    console.log(`   ✅ Current version: ${highest}`);
+    const tagVersion = sorted[0];
 
-    return highest;
+    // Also check package.json version - use whichever is higher
+    // This handles cases where a release commit bumped package.json but tag creation failed
+    if (fallbackVersion && semver.valid(fallbackVersion) && semver.gt(fallbackVersion, tagVersion)) {
+        console.log(`   ⚠️  Package.json (${fallbackVersion}) is ahead of latest tag (${tagVersion})`);
+        console.log(`   ✅ Using package.json version (recovery from failed tag creation)`);
+        return fallbackVersion;
+    }
+
+    console.log(`   ✅ Current version: ${tagVersion}`);
+    return tagVersion;
 }
 
 const currentVersion = getCurrentVersion(SCENARIO.availableTags, SCENARIO.packageJsonVersion);

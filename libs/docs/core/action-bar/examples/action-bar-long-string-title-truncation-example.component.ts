@@ -1,5 +1,4 @@
 import { Component, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ActionBarActionsDirective,
@@ -26,9 +25,8 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 })
 export class ActionBarLongStringTitleTruncationExampleComponent {
     protected readonly navigationArrow = computed(() =>
-        this._isRtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+        this._rtlService.rtl() ? 'navigation-right-arrow' : 'navigation-left-arrow'
     );
 
     private readonly _rtlService = inject(RtlService);
-    private readonly _isRtl = toSignal(this._rtlService.rtl, { initialValue: false });
 }

@@ -13,7 +13,6 @@ import {
     ElementRef,
     Injectable,
     Injector,
-    Optional,
     Renderer2,
     TemplateRef,
     ViewContainerRef,
@@ -98,6 +97,12 @@ export class PopoverService extends BasePopoverClass {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _popoverContainer = inject(PopoverContainerDirective, { optional: true });
+
+    /** @hidden */
     private get _triggerHtmlElement(): HTMLElement {
         return this._triggerElement instanceof ElementRef ? this._triggerElement.nativeElement : this._triggerElement;
     }
@@ -107,9 +112,7 @@ export class PopoverService extends BasePopoverClass {
         private _overlay: Overlay,
         private _renderer: Renderer2,
         private _viewportRuler: ViewportRuler,
-        private _injector: Injector,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private readonly _popoverContainer: PopoverContainerDirective
+        private _injector: Injector
     ) {
         super();
 
@@ -401,11 +404,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _getDirection(): 'rtl' | 'ltr' {
-        if (!this._rtlService) {
-            return 'ltr';
-        }
-
-        return this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
+        return this._rtlService?.rtl() ? 'rtl' : 'ltr';
     }
 
     /** @hidden */

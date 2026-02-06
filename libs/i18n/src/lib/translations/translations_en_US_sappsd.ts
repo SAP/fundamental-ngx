@@ -104,8 +104,8 @@ export default {
         linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: '[[[Ŝţąţűş(ąċţįʋē)∙∙∙∙∙]]]',
+        inactive: '[[[Ŝţąţűş∙∙∙∙∙∙∙∙]]]'
     },
     coreObjectNumber: {
         emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
@@ -660,5 +660,8 @@ export default {
     },
     coreObjectIdentifier: {
         srOnlyAriaLabel: '[[[Ŏƃĵēċţ Ĭƌēŋţįƒįēŗ∙∙∙∙∙∙∙]]]'
+    },
+    coreInfoLabel: {
+        srOnlyText: '[[[Ĭŋƒŏ Ļàƀēļ∙∙∙∙]]]'
     }
 };

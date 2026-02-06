@@ -107,21 +107,19 @@ export class NavigationMoreButtonComponent {
      * @hidden
      * Popover position. Changes based on rtl value.
      */
-    readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
+    protected readonly popoverPlacement = computed<Placement>(() => (this._isRtl() ? 'left-start' : 'right-start'));
 
     /** @hidden */
     private _popoverClicked = false;
 
     /** @hidden */
-    private readonly _rtlService = inject(RtlService, {
-        optional: true
-    });
-
-    /** @hidden */
     private readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+    private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
     private readonly _lang$ = inject(FD_LANGUAGE);
@@ -251,7 +249,7 @@ export class NavigationMoreButtonComponent {
             return;
         }
 
-        const isRtl = this._rtl$() || false;
+        const isRtl = this._isRtl();
 
         if (KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW)) {
             // Open popover only if not already open

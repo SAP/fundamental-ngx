@@ -1,21 +1,21 @@
-@if (abbreviate) {
-    {{ abbreviate }}
+@if (abbreviate()) {
+    {{ abbreviate() }}
 }
-@if (zoomGlyph || valueState) {
+@if (zoomGlyph() || valueState()) {
     <i
         role="presentation"
         class="fd-avatar__zoom-icon"
-        [class]="valueState | fdAvatarIcon: zoomGlyph"
+        [class]="valueState() | fdAvatarIcon: zoomGlyph()"
         (mousedown)="zoomClicked($event)"
     >
     </i>
 }
-@if (glyph || showDefault) {
+@if (glyph() || showDefault()) {
     <fd-icon
         class="fd-avatar__icon"
         role="presentation"
-        [font]="font"
-        [glyph]="glyph || 'person-placeholder'"
+        [font]="font()"
+        [glyph]="glyph() || 'person-placeholder'"
     ></fd-icon>
 }
 <div #content [style.display]="'none'">

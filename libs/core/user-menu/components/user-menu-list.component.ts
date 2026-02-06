@@ -28,7 +28,7 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
 })
 export class UserMenuListComponent implements AfterViewInit {
     /** @hidden */
-    @ContentChildren(UserMenuListItemComponent, { descendants: true })
+    @ContentChildren(UserMenuListItemComponent, { descendants: false })
     readonly _listItems: QueryList<UserMenuListItemComponent>;
 
     /** @hidden */
