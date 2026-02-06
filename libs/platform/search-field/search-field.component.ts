@@ -39,6 +39,8 @@ import { takeUntil } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
+    AutoCompleteDirective,
+    AutoCompleteEvent,
     ClickedDirective,
     destroyObservable,
     DynamicComponentService,
@@ -159,6 +161,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
         ClickedDirective,
         AvatarComponent,
         ButtonComponent,
+        AutoCompleteDirective,
         BusyIndicatorComponent,
         LinkComponent,
         forwardRef(() => SuggestionMatchesPipe)
@@ -444,7 +447,13 @@ export class SearchFieldComponent
     _isOpen$ = signal(false);
 
     /** @hidden */
+    _autoCompleteSuggestions: SuggestionItem[] = [];
+
+    /** @hidden */
     _selectedSuggestionItem: SuggestionItem | null;
+
+    /** @hidden */
+    _autoCompleteMostRecentSuggestionItem: SuggestionItem;
 
     /** @hidden */
     _selectedSuggestionItemId: string;
@@ -778,6 +787,36 @@ export class SearchFieldComponent
         this.focus();
     }
 
+    /** @hidden Method that handles complete event from auto complete directive, setting the new value, and closing popover */
+    handleAutoComplete(event: AutoCompleteEvent): void {
+        if (this._inputValueMatchesFirstSuggestion()) {
+            this.inputText = event.term;
+            this._selectedSuggestionItem = this._autoCompleteMostRecentSuggestionItem;
+            this.onValueChange(this.inputText);
+            this.onSearchSubmit();
+            if (event.forceClose && this.inputText) {
+                this.closeSuggestionMenu();
+            }
+        }
+    }
+
+    /** @hidden */
+    _handleTabKey(event: Event): void {
+        if (this._inputValueMatchesFirstSuggestion()) {
+            event.preventDefault();
+            this.handleAutoComplete({ term: this.inputText, forceClose: false });
+            (this.inputField.nativeElement as HTMLInputElement).setSelectionRange(-1, -1);
+        }
+    }
+
+    /** @hidden */
+    _inputValueMatchesFirstSuggestion(): boolean {
+        const inputEl = this.inputField.nativeElement as HTMLInputElement;
+        return (
+            inputEl.value === this.suggestionListEl.nativeElement.querySelector('.fd-list__item--suggestion')?.innerText
+        );
+    }
+
     /** @hidden */
     _focusActionButton(event: Event, suggestion: ListItemComponent): void {
         event.preventDefault();
@@ -872,6 +911,12 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
+    _autoCompleteDisplayFn = (event: SuggestionItem): string => {
+        this._autoCompleteMostRecentSuggestionItem = event;
+        return event.value;
+    };
+
+    /** @hidden */
     private _resetKeyManager(): void {
         if (this.suggestionItems) {
             const keyManagerParam = this.suggestionItems
@@ -897,10 +942,18 @@ export class SearchFieldComponent
     private _getSuggestionsLength(): number {
         let count = 0;
         this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
+            this._autoCompleteSuggestions = [];
             suggestions?.forEach((suggestion) => {
                 const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
                 if (this.inputText && textToCheck.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
+                }
+                if (!suggestion?.children && suggestion?.value) {
+                    this._autoCompleteSuggestions.push(suggestion);
+                } else if (suggestion?.children?.length) {
+                    suggestion.children.forEach((child) => {
+                        this._autoCompleteSuggestions.push(child);
+                    });
                 }
             });
 

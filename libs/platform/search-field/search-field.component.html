@@ -183,6 +183,11 @@
             }
             <input
                 #inputField
+                fdkAutoComplete
+                [options]="_autoCompleteSuggestions"
+                [displayFn]="_autoCompleteDisplayFn"
+                [inputText]="inputText"
+                (onComplete)="handleAutoComplete($event)"
                 type="search"
                 (focus)="_inputFocus()"
                 (blur)="_isFocused = false; (null)"
@@ -200,6 +205,7 @@
                 aria-autocomplete="both"
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit($event)"
+                (keydown.tab)="_handleTabKey($event)"
                 [(ngModel)]="inputText"
                 (ngModelChange)="onValueChange($event)"
                 (click)="mobile && openMobileMode()"
