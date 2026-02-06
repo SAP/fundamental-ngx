@@ -1,14 +1,16 @@
 import { DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
 import {
-    AfterViewInit,
+    afterNextRender,
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     computed,
     contentChildren,
+    effect,
     ElementRef,
     inject,
     InjectionToken,
+    Injector,
     input,
     Optional,
     Self,
@@ -52,7 +54,7 @@ const LINK_ROUTER_TARGET = new InjectionToken<RouterLink | undefined>('linkRoute
     ],
     imports: [PortalModule, FdTranslatePipe]
 })
-export class LinkComponent implements HasElementRef, AfterViewInit {
+export class LinkComponent implements HasElementRef {
     /** @hidden */
     readonly iconComponents = contentChildren<IconComponent>(FD_ICON_COMPONENT, { descendants: false });
 
@@ -111,28 +113,44 @@ export class LinkComponent implements HasElementRef, AfterViewInit {
     );
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        const icons = this.iconComponents();
-        const contentEl = this.contentSpan()?.nativeElement;
+    private readonly _injector = inject(Injector);
 
-        if (!contentEl || icons.length === 0) {
-            this._detachPortals();
-            this._prefixPortal.set(null);
-            this._postfixPortal.set(null);
-            this._prefixIconName.set('');
-            this._postfixIconName.set('');
-            return;
-        }
+    constructor() {
+        // Effect that runs when icons or content changes
+        effect(() => {
+            const icons = this.iconComponents();
+            const contentEl = this.contentSpan()?.nativeElement;
 
-        if (icons.length === 0) {
-            this._detachPortals();
-            this._prefixPortal.set(null);
-            this._postfixPortal.set(null);
-            this._prefixIconName.set('');
-            this._postfixIconName.set('');
-            return;
-        }
+            if (!contentEl || icons.length === 0) {
+                afterNextRender(
+                    () => {
+                        this._clearPortals();
+                    },
+                    { injector: this._injector }
+                );
+                return;
+            }
 
+            afterNextRender(
+                () => {
+                    this._updatePortals(icons, contentEl);
+                },
+                { injector: this._injector }
+            );
+        });
+    }
+
+    /** @hidden */
+    private _clearPortals(): void {
+        this._detachPortals();
+        this._prefixPortal.set(null);
+        this._postfixPortal.set(null);
+        this._prefixIconName.set('');
+        this._postfixIconName.set('');
+    }
+
+    /** @hidden */
+    private _updatePortals(icons: readonly IconComponent[], contentEl: HTMLElement): void {
         // Determine prefix and postfix icons
         const firstIcon = icons[0];
         const lastIcon = icons[icons.length - 1];
@@ -145,17 +163,8 @@ export class LinkComponent implements HasElementRef, AfterViewInit {
                 : null;
 
         // Update icon names
-        if (prefix) {
-            this._prefixIconName.set(icons[0].glyph());
-        } else {
-            this._prefixIconName.set('');
-        }
-
-        if (postfix) {
-            this._postfixIconName.set(icons[icons.length - 1].glyph());
-        } else {
-            this._postfixIconName.set('');
-        }
+        this._prefixIconName.set(prefix ? firstIcon.glyph() : '');
+        this._postfixIconName.set(postfix ? lastIcon.glyph() : '');
 
         // Update portals
         this._detachPortals();
