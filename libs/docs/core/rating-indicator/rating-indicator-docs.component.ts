@@ -5,6 +5,7 @@ import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
+    DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
     PlayGroundComponent,
@@ -38,6 +39,7 @@ const displayModeTs = 'ri-display-mode-example.component.ts';
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
+        DescriptionComponent,
         RatingIndicatorExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,

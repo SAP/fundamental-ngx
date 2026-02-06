@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
 
 @Component({
     selector: 'fd-ri-custom-icon-example',
     templateUrl: './ri-custom-icon-example.component.html',
-    imports: [RatingIndicatorModule]
+    imports: [RatingIndicatorComponent]
 })
 export class RatingIndicatorCustomIconExampleComponent {
     config = {

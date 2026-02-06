@@ -9,8 +9,9 @@
         #rate1
     ></fd-rating-indicator>
     <p>
-        Rate average: {{ rate1.ratingAverage.toFixed(2) }} Total ratings: {{ rate1.totalRatings }} Select rate:
-        {{ rate1.viewValue }}
+        Rate average: {{ rate1.computedRatingAverage?.toFixed(2) }} Total ratings:
+        {{ rate1.computedTotalRatings }} Select rate:
+        {{ rate1.displayValue() }}
     </p>
 </div>
 <div class="base-row">
@@ -25,8 +26,9 @@
         #rate2
     ></fd-rating-indicator>
     <p>
-        Rate average: {{ rate2.ratingAverage.toFixed(2) }} Total ratings: {{ rate2.totalRatings }} Select rate:
-        {{ rate2.viewValue }}
+        Rate average: {{ rate2.computedRatingAverage?.toFixed(2) }} Total ratings:
+        {{ rate2.computedTotalRatings }} Select rate:
+        {{ rate2.displayValue() }}
     </p>
 </div>
 <div class="base-row">
@@ -40,8 +42,9 @@
         #rate3
     ></fd-rating-indicator>
     <p>
-        Rate average: {{ rate3.ratingAverage.toFixed(2) }} Total ratings: {{ rate3.totalRatings }} Select rate:
-        {{ rate3.viewValue }}
+        Rate average: {{ rate3.computedRatingAverage?.toFixed(2) }} Total ratings:
+        {{ rate3.computedTotalRatings }} Select rate:
+        {{ rate3.displayValue() }}
     </p>
 </div>
 <div class="base-row">
@@ -55,7 +58,8 @@
         #rate4
     ></fd-rating-indicator>
     <span>
-        Rate average: {{ rate4.ratingAverage.toFixed(2) }} Total ratings: {{ rate4.totalRatings }} Select rate:
-        {{ rate4.viewValue }}
+        Rate average: {{ rate4.computedRatingAverage?.toFixed(2) }} Total ratings:
+        {{ rate4.computedTotalRatings }} Select rate:
+        {{ rate4.displayValue() }}
     </span>
 </div>
