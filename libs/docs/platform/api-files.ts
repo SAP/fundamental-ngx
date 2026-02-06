@@ -26,7 +26,6 @@ export const API_FILES = {
         'DynamicPageContentComponent'
     ],
     formContainer: ['FormGroupComponent', 'FormFieldComponent', 'FormFieldGroupComponent'],
-    infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent'],
     link: ['LinkComponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],

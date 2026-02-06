@@ -1,12 +1,26 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import {
+    IllustratedMessageActionsComponent,
+    IllustratedMessageComponent,
+    IllustratedMessageFigcaptionComponent,
+    IllustratedMessageTextDirective,
+    IllustratedMessageTitleDirective
+} from '@fundamental-ngx/core/illustrated-message';
 
 @Component({
     selector: 'fd-illustrated-message-spot-example',
     templateUrl: './illustrated-message-spot-example.component.html',
-    imports: [CardModule, IllustratedMessageModule, ButtonComponent]
+    imports: [
+        CardModule,
+        IllustratedMessageComponent,
+        IllustratedMessageFigcaptionComponent,
+        IllustratedMessageTitleDirective,
+        IllustratedMessageTextDirective,
+        IllustratedMessageActionsComponent,
+        ButtonComponent
+    ]
 })
 export class IllustratedMessageSpotExampleComponent {
     smallConfig = {

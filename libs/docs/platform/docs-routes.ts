@@ -75,10 +75,6 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/platform/split-menu-button').then(configureLibRoutes)
     },
     {
-        path: 'info-label',
-        loadChildren: () => import('@fundamental-ngx/docs/platform/info-label').then(configureLibRoutes)
-    },
-    {
         path: 'table',
         loadChildren: () => import('@fundamental-ngx/docs/platform/table').then(configureLibRoutes)
     },

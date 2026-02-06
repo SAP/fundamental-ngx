@@ -1,41 +1,62 @@
 import {
-    AfterContentChecked,
+    afterNextRender,
+    booleanAttribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
+    computed,
+    effect,
     ElementRef,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    SimpleChanges,
+    inject,
+    input,
+    signal,
     ViewEncapsulation
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CssClassBuilder, Nullable, RequireOnlyOne, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { Subscription, debounceTime, fromEvent } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HasElementRef, RequireOnlyOne } from '@fundamental-ngx/cdk/utils';
+import { debounceTime, fromEvent } from 'rxjs';
 
+/**
+ * Configuration for an SVG item in the illustrated message.
+ */
 export interface SvgItemConfig {
+    /** URL to the SVG sprite file */
     url: string;
+    /** ID of the symbol within the SVG sprite */
     id: string;
+    /** Inline SVG file content */
     file: string;
 }
 
+/**
+ * Configuration for different SVG sizes in the illustrated message.
+ * Supports both modern (large, medium, small, xsmall) and legacy (scene, dialog, spot, dot) naming.
+ */
 export interface SvgConfig {
-    // New keys
+    /** Configuration for large/scene size (>= 682px) */
     large?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    /** Configuration for medium/dialog size (361px - 681px) */
     medium?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    /** Configuration for small/spot size (261px - 360px) */
     small?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    /** Configuration for extra small/dot size (161px - 260px) */
     xsmall?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
 
-    // Legacy keys
+    /** @deprecated Use 'large' instead */
     scene?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    /** @deprecated Use 'medium' instead */
     dialog?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    /** @deprecated Use 'small' instead */
     spot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    /** @deprecated Use 'xsmall' instead */
     dot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
 }
 
+/**
+ * Type of illustrated message based on container width or explicit configuration.
+ * Modern types: large, medium, small, xsmall, base
+ * Legacy types: scene, dialog, spot, dot
+ */
 export type IllustratedMessageType =
     | 'large'
     | 'medium'
@@ -47,20 +68,49 @@ export type IllustratedMessageType =
     | 'spot'
     | 'dot';
 
+/**
+ * Enumeration of illustrated message types with their string values.
+ */
 export enum IllustratedMessageTypes {
     LARGE = 'large',
     MEDIUM = 'medium',
     SMALL = 'small',
     EXTRA_SMALL = 'xsmall',
     BASE = 'base',
+    /** @deprecated Use LARGE instead */
     SCENE = 'scene',
+    /** @deprecated Use MEDIUM instead */
     DIALOG = 'dialog',
+    /** @deprecated Use SMALL instead */
     SPOT = 'spot',
+    /** @deprecated Use EXTRA_SMALL instead */
     DOT = 'dot'
 }
 
 let illustratedMessageUniqueId = 0;
 
+/**
+ * Component representing an illustrated message with responsive SVG illustration.
+ *
+ * The component automatically adjusts its illustration size based on container width:
+ * - Large (>= 682px)
+ * - Medium (361px - 681px)
+ * - Small (261px - 360px)
+ * - Extra Small (161px - 260px)
+ * - Base (< 161px)
+ *
+ * Supports both URL-based SVG sprites and inline SVG content.
+ *
+ * @example
+ * ```html
+ * <div fd-illustrated-message [svgConfig]="svgConfig">
+ *   <figcaption fd-illustrated-message-figcaption>
+ *     <h3>No Data Available</h3>
+ *     <p>Please check back later</p>
+ *   </figcaption>
+ * </div>
+ * ```
+ */
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message]',
@@ -68,89 +118,157 @@ let illustratedMessageUniqueId = 0;
     styleUrl: './illustrated-message.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: []
+    imports: [],
+    host: {
+        '[attr.id]': 'id()',
+        '[class]': 'cssClass()'
+    }
 })
-export class IllustratedMessageComponent implements AfterContentChecked, OnChanges, OnDestroy, OnInit, CssClassBuilder {
-    @Input()
-    type: IllustratedMessageType;
+export class IllustratedMessageComponent implements HasElementRef {
+    /**
+     * Explicitly set the illustration type. If not provided, type is determined by container width.
+     */
+    readonly type = input<IllustratedMessageType>();
 
-    @Input()
-    svgConfig: SvgConfig;
+    /**
+     * Configuration for SVG illustrations at different sizes.
+     */
+    readonly svgConfig = input<SvgConfig>();
 
-    @Input()
-    svgAriaLabel: Nullable<string>;
+    /**
+     * Accessible label for the SVG illustration.
+     */
+    readonly svgAriaLabel = input<string | null | undefined>(null);
 
-    @Input()
-    noSvg = false;
+    /**
+     * When true, hides the SVG illustration entirely.
+     */
+    readonly noSvg = input(false, { transform: booleanAttribute });
 
-    @Input()
-    @HostBinding('attr.id')
-    id: string = 'fd-illustrated-message-' + illustratedMessageUniqueId++;
+    /**
+     * Unique identifier for the illustrated message component.
+     */
+    readonly id = input<string>(`fd-illustrated-message-${++illustratedMessageUniqueId}`);
 
-    @Input()
-    class: string;
+    /**
+     * Reference to the host element.
+     */
+    readonly elementRef = inject(ElementRef);
 
-    _href: string;
-    _isSmallScreen: boolean;
-    _inlineSvg: SafeHtml | undefined;
-    _tempType: IllustratedMessageType;
+    /**
+     * Signal tracking container width for responsive behavior.
+     * @hidden
+     */
+    protected readonly containerWidth = signal<number>(0);
 
-    private _subscriptions = new Subscription();
+    /**
+     * Normalized illustration type from explicit input or legacy names.
+     * @hidden
+     */
+    protected readonly normalizedInputType = computed(() => {
+        const explicitType = this.type();
+        return explicitType ? this._normalizeType(explicitType) : undefined;
+    });
 
-    constructor(
-        public readonly elementRef: ElementRef,
-        private _cdRef: ChangeDetectorRef,
-        private _sanitizer: DomSanitizer
-    ) {}
+    /**
+     * Current illustration type based on explicit type or container width.
+     * @hidden
+     */
+    protected readonly currentType = computed(
+        () => this.normalizedInputType() || this._determineTypeByWidth(this.containerWidth())
+    );
 
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-illustrated-message',
-            this._tempType ? `fd-illustrated-message--${this._tempType}` : '',
-            this.class || ''
-        ].filter(Boolean);
+    /**
+     * Normalized SVG configuration with legacy keys mapped to modern keys.
+     * @hidden
+     */
+    protected readonly normalizedConfig = computed(() => {
+        const config = this.svgConfig();
+        return config ? this._normalizeSvgConfig(config) : null;
+    });
+
+    /**
+     * Inline SVG content for the current type.
+     * @hidden
+     */
+    protected readonly inlineSvg = computed(() => {
+        const config = this.normalizedConfig();
+        const type = this.currentType();
+        const inlineSvg = config?.[type]?.file;
+        return inlineSvg ? this._sanitizer.bypassSecurityTrustHtml(inlineSvg) : undefined;
+    });
+
+    /**
+     * SVG href attribute for the current type.
+     * @hidden
+     */
+    protected readonly href = computed(() => {
+        const config = this.normalizedConfig();
+        if (!config) {
+            return '';
+        }
+        return this._getHrefByType(this.currentType(), config);
+    });
+
+    /**
+     * Computed CSS class string for the component.
+     * @hidden
+     */
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = ['fd-illustrated-message'];
+
+        const currentTypeValue = this.currentType();
+        if (currentTypeValue && currentTypeValue !== 'base') {
+            classes.push(`fd-illustrated-message--${currentTypeValue}`);
+        }
+
+        return classes.join(' ');
+    });
+
+    /** @hidden */
+    private readonly _sanitizer = inject(DomSanitizer);
+
+    /** @hidden */
+    constructor() {
+        // Setup resize listener for responsive behavior with automatic cleanup
+        const resize$ = toSignal(fromEvent(window, 'resize').pipe(debounceTime(200)));
+
+        // Measure container width after render
+        afterNextRender(() => {
+            this._measureContainerWidth();
+        });
+
+        // React to resize events and input changes
+        effect(() => {
+            // Track resize events
+            resize$();
+            this.type();
+            this.svgConfig();
+
+            // Remeasure on changes
+            this._measureContainerWidth();
+        });
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('svgConfig' in changes) {
-            this._constructHref();
+    /**
+     * Measures and updates the container width.
+     * @private
+     */
+    private _measureContainerWidth(): void {
+        const width = this.elementRef.nativeElement.offsetWidth;
+
+        if (this.containerWidth() !== width) {
+            this.containerWidth.set(width);
         }
     }
 
-    ngOnInit(): void {
-        const resizeSubscription = fromEvent(window, 'resize')
-            .pipe(debounceTime(200))
-            .subscribe(() => this._constructHref());
-        this._subscriptions.add(resizeSubscription);
-    }
-
-    ngAfterContentChecked(): void {
-        this._constructHref();
-    }
-
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    private _constructHref(): void {
-        this._inlineSvg = undefined;
-        const containerWidth = this.elementRef.nativeElement.offsetWidth;
-        const normalizedType = this._normalizeType(this.type);
-        this._tempType = this.type ? normalizedType : this._determineIllustratedMessageType(containerWidth);
-
-        const normalizedConfig = this._normalizeSvgConfig(this.svgConfig);
-        const inlineSvg = normalizedConfig?.[this._tempType]?.file;
-        if (inlineSvg) {
-            this._inlineSvg = this._sanitizer.bypassSecurityTrustHtml(inlineSvg);
-        }
-
-        this._href = normalizedConfig ? this._getHrefByType(this._tempType, normalizedConfig) : '';
-        this.buildComponentCssClass();
-        this._cdRef.markForCheck();
-    }
-
-    private _determineIllustratedMessageType(width: number): IllustratedMessageType {
+    /**
+     * Determines the illustration type based on container width.
+     * @param width - Container width in pixels
+     * @returns Appropriate illustration type
+     * @private
+     */
+    private _determineTypeByWidth(width: number): IllustratedMessageType {
         if (width >= 682) {
             return IllustratedMessageTypes.LARGE;
         } else if (width >= 361) {
@@ -164,6 +282,12 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
         return IllustratedMessageTypes.BASE;
     }
 
+    /**
+     * Normalizes legacy type names to modern equivalents.
+     * @param type - Illustration type to normalize
+     * @returns Normalized illustration type
+     * @private
+     */
     private _normalizeType(type: IllustratedMessageType): IllustratedMessageType {
         switch (type) {
             case 'scene':
@@ -179,6 +303,12 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
         }
     }
 
+    /**
+     * Normalizes SVG configuration, mapping legacy keys to modern keys.
+     * @param config - SVG configuration to normalize
+     * @returns Normalized SVG configuration
+     * @private
+     */
     private _normalizeSvgConfig(config: SvgConfig): SvgConfig {
         return {
             large: config.large || config.scene,
@@ -188,6 +318,13 @@ export class IllustratedMessageComponent implements AfterContentChecked, OnChang
         };
     }
 
+    /**
+     * Constructs the SVG href attribute value for the given type.
+     * @param type - Illustration type
+     * @param svgConfig - Normalized SVG configuration
+     * @returns SVG href string
+     * @private
+     */
     private _getHrefByType(type: IllustratedMessageType, svgConfig: SvgConfig): string {
         switch (type) {
             case 'large':

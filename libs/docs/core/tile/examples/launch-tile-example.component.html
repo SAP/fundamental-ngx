@@ -1,8 +1,14 @@
 <h3 fd-title>Launch tile with numeric content and launch icon</h3>
 <div class="fddoc-container">
-    <fd-tile type="launch">
+    <fd-tile
+        type="launch"
+        clickable
+        role="button"
+        ariaLabel="Launch tile with numeric content and launch icon as a button"
+        (tileClick)="onLaunchTileClick()"
+    >
         <div fd-tile-header>
-            <div fd-tile-title>Launch Tile Title Text</div>
+            <div fd-tile-title>Launch Tile as Button</div>
             <div fd-tile-subtitle>Launch Tile Subtitle</div>
         </div>
         <div fd-tile-content>
@@ -31,9 +37,18 @@
             </div>
         </div>
     </fd-tile>
-    <fd-tile type="launch" size="s">
+    <a
+        fd-tile
+        type="launch"
+        size="s"
+        role="link"
+        rel="noopener noreferrer"
+        ariaLabel="Launch tile with numeric content and launch icon small as a link"
+        href="https://fundamental-ngx.netlify.app/#/core/tile"
+        target="_blank"
+    >
         <div fd-tile-header>
-            <div fd-tile-title>Launch Tile Title Text</div>
+            <div fd-tile-title>Launch Tile as Link</div>
             <div fd-tile-subtitle>Launch Tile Subtitle</div>
         </div>
         <div fd-tile-content>
@@ -49,7 +64,7 @@
         <div fd-tile-footer>
             <span fd-tile-footer-text>Unit, Notification</span>
         </div>
-    </fd-tile>
+    </a>
 </div>
 <h3 fd-title>Launch tile with combined header and content</h3>
 <div class="fddoc-container">

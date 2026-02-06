@@ -11,4 +11,8 @@ export class LaunchTileExampleComponent {
     tileClick(): void {
         alert('Refresh clicked!');
     }
+
+    onLaunchTileClick(): void {
+        alert('Launch Tile clicked!');
+    }
 }

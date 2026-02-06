@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { InfoLabelColor, InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { InfoLabelColor, InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { StatusIndicatorComponent } from '@fundamental-ngx/core/status-indicator';
 
@@ -8,7 +8,7 @@ import { StatusIndicatorComponent } from '@fundamental-ngx/core/status-indicator
     selector: 'fd-micro-process-flow-other-controls-example',
     templateUrl: './micro-process-flow-other-controls-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [MicroProcessFlowModule, StatusIndicatorComponent, AvatarComponent, InfoLabelModule]
+    imports: [MicroProcessFlowModule, StatusIndicatorComponent, AvatarComponent, InfoLabelComponent]
 })
 export class MicroProcessFlowOtherControlsExampleComponent {
     cerealImage = [

@@ -787,4 +787,7 @@ export interface FdLanguage {
     coreObjectIdentifier: {
         srOnlyAriaLabel: FdLanguageKey;
     };
+    coreInfoLabel: {
+        srOnlyText: FdLanguageKey;
+    };
 }

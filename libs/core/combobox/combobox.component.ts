@@ -33,7 +33,8 @@ import {
     ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    input
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription, fromEvent } from 'rxjs';
@@ -415,6 +416,14 @@ export class ComboboxComponent<T = any>
     @ViewChildren('item', { read: ElementRef })
     private readonly items: QueryList<ElementRef>;
 
+    /** When communicateByObject is true, specifies which property of the selected object
+     * should be used as the form control value. If not specified, the entire object is returned.
+     * Example: if dropdownValues = [{ displayedValue: 'Apple', code: 'A1' }] and valueProperty = 'code',
+     * the form control value will be 'A1' instead of the entire object.
+     * @default null
+     */
+    public readonly valueProperty = input<string | null>(null);
+
     /** Whether the matching string should be highlighted after combobox value is selected. */
     filterHighlight = true;
 
@@ -646,8 +655,21 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     writeValue(value: any): void {
-        this.inputTextValue = this.displayFn(value);
-        this.setValue(value);
+        // If valueProperty is specified, we need to find the object with matching property value
+        let valueToDisplay = value;
+        const valueProp = this.valueProperty();
+        if (this.communicateByObject && valueProp && value !== null && value !== undefined) {
+            // Find the object in dropdownValues that matches the given property value
+            const matchingObject = this.dropdownValues?.find(
+                (item) => item != null && (item as any)[valueProp] === value
+            );
+            if (matchingObject) {
+                valueToDisplay = matchingObject;
+            }
+        }
+
+        this.inputTextValue = this.displayFn(valueToDisplay);
+        this.setValue(valueToDisplay);
         this._cdRef.markForCheck();
     }
 
@@ -890,7 +912,9 @@ export class ComboboxComponent<T = any>
                 this.setValue(this.inputText);
             }
             const thisValue = this.getValue();
-            if (typeof thisValue === 'object') {
+            // If valueProperty is not specified and value is an object, emit the object
+            // If valueProperty is specified, the extracted value is already set by setValue
+            if (typeof thisValue === 'object' || this.valueProperty()) {
                 this.onChange(thisValue);
             }
         } else {
@@ -901,7 +925,13 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     private setValue(value: any): void {
         if (this.communicateByObject) {
-            this._value = value;
+            // If valueProperty is specified, extract that property from the selected object
+            const valueProp = this.valueProperty();
+            if (valueProp && typeof value === 'object' && value !== null) {
+                this._value = (value as any)[valueProp];
+            } else {
+                this._value = value;
+            }
         } else {
             this._value = this.displayFn(value);
         }

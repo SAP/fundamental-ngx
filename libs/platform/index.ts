@@ -7,7 +7,6 @@ export * from '@fundamental-ngx/platform/dynamic-page';
 export * from '@fundamental-ngx/platform/feed-input';
 export * from '@fundamental-ngx/platform/form';
 export * from '@fundamental-ngx/platform/icon-tab-bar';
-export * from '@fundamental-ngx/platform/info-label';
 export * from '@fundamental-ngx/platform/link';
 export * from '@fundamental-ngx/platform/list';
 export * from '@fundamental-ngx/platform/menu';

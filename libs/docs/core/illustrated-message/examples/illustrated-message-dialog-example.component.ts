@@ -4,7 +4,12 @@ import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import {
+    IllustratedMessageComponent,
+    IllustratedMessageFigcaptionComponent,
+    IllustratedMessageTextDirective,
+    IllustratedMessageTitleDirective
+} from '@fundamental-ngx/core/illustrated-message';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -16,7 +21,10 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         TitleComponent,
         CdkScrollable,
         ScrollbarDirective,
-        IllustratedMessageModule,
+        IllustratedMessageComponent,
+        IllustratedMessageFigcaptionComponent,
+        IllustratedMessageTitleDirective,
+        IllustratedMessageTextDirective,
         BarModule,
         InitialFocusDirective,
         ButtonComponent
