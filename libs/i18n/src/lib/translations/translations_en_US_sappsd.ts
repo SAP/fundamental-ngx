@@ -658,6 +658,6 @@ export default {
         srOnlyAriaLabel: '[[[Ŏƃĵēċţ Ĭƌēŋţįƒįēŗ∙∙∙∙∙∙∙]]]'
     },
     coreInfoLabel: {
-        srOnlyText: '[[[Ĭŋƒŏ Ļàƀēļ∙∙∙∙]]]'
+        srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
     }
 };
