@@ -398,7 +398,15 @@ export default {
         searchInputLabel: 'Keresés',
         synchronizeButtonTitle: 'Szinkronizálás',
         searchSuggestionMessage: '{count} javaslat található.',
-        searchSuggestionNavigateMessage: 'a le és a fel nyíllal navigálhat'
+        searchSuggestionNavigateMessage: 'a le és a fel nyíllal navigálhat',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Beállítások',

@@ -398,7 +398,15 @@ export default {
         searchInputLabel: 'Hledat',
         synchronizeButtonTitle: 'Synchronizovat',
         searchSuggestionMessage: 'Nalezené návrhy: {count}.',
-        searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů'
+        searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavení',

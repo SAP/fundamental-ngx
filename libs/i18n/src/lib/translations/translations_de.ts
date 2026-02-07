@@ -399,7 +399,15 @@ export default {
         searchInputLabel: 'Suchen',
         synchronizeButtonTitle: 'Synchronisieren',
         searchSuggestionMessage: '{count} Vorschläge gefunden.',
-        searchSuggestionNavigateMessage: 'Pfeile nach oben und unten für Navigation verwenden'
+        searchSuggestionNavigateMessage: 'Pfeile nach oben und unten für Navigation verwenden',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Einstellungen',

@@ -398,7 +398,15 @@ export default {
         searchInputLabel: 'Sök',
         synchronizeButtonTitle: 'Synkronisera',
         searchSuggestionMessage: '{count} förslag hittades.',
-        searchSuggestionNavigateMessage: 'använd upp- och nedpilarna för att navigera'
+        searchSuggestionNavigateMessage: 'använd upp- och nedpilarna för att navigera',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Inställningar',

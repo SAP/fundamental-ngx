@@ -12,6 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DialogBodyComponent,
     DialogCloseButtonComponent,
@@ -21,6 +22,7 @@ import {
 } from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldChildContent,
@@ -32,6 +34,13 @@ import {
     templateUrl: 'search-field-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    styles: [
+        `
+            .fdp-search-field__mobile-dialog-header .fd-select__text-content {
+                display: none;
+            }
+        `
+    ],
     imports: [
         DialogComponent,
         DialogHeaderComponent,
@@ -39,12 +48,14 @@ import {
         BarMiddleDirective,
         BarElementDirective,
         NgTemplateOutlet,
-        DialogCloseButtonComponent,
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
         DialogFooterComponent,
-        ButtonBarComponent
+        ButtonBarComponent,
+        ButtonComponent,
+        FdTranslatePipe,
+        DialogCloseButtonComponent
     ]
 })
 export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobileInterface> implements OnInit {
@@ -52,6 +63,8 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
     /** @hidden */
     childContent: SearchFieldChildContent | null = null;
+    /** @hidden */
+    _inShellbar = false;
 
     /** @hidden */
     constructor(@Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface) {
@@ -98,7 +111,9 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
             ...this.dialogConfig,
             backdropClickCloseable: false,
             escKeyCloseable: true,
-            container: this._elementRef.nativeElement
+            container: 'body',
+            minWidth: '100vw',
+            minHeight: '100vh'
         });
     }
 }

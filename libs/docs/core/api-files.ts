@@ -143,7 +143,8 @@ export const API_FILES = {
         'ListNavigationItemArrowDirective',
         'ListNavigationItemTextDirective',
         'ListNavigationItemComponent',
-        'ListSublineDirective'
+        'ListSublineDirective',
+        'ListInfoLabelDirective'
     ],
     menu: [
         'MenuAddonDirective',

@@ -1,7 +1,7 @@
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 
@@ -48,8 +48,8 @@ class SearchFieldDataProvider extends DataProvider<string> {
     }
 }
 
-function getDropdownItems(menu: Element): NodeList {
-    return menu.querySelectorAll('.fd-menu__item');
+function getSearchResultsListItems(menu: Element): NodeList {
+    return menu.querySelectorAll('.fd-list__item');
 }
 
 function mouseClickOnElement(el: Element): void {
@@ -119,7 +119,7 @@ describe('SearchFieldComponent', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestComponent],
             providers: [RtlService]
@@ -128,7 +128,7 @@ describe('SearchFieldComponent', () => {
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
         })();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -169,7 +169,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        const menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
+        const menuEl = overlayContainerEl.querySelector('.fd-list') as Element;
         expect(menuEl.id).toContain('fdp-search-field-menu-');
     });
 
@@ -186,10 +186,10 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
 
-        const items = getDropdownItems(menuEls[0]);
+        const items = getSearchResultsListItems(menuEls[0]);
         expect(items.length).toBe(3);
         expect(items[0].textContent).toBe('Apple');
         expect(items[1].textContent).toBe('Banana');
@@ -209,10 +209,10 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
 
-        const items = getDropdownItems(menuEls[0]);
+        const items = getSearchResultsListItems(menuEls[0]);
         expect(items.length).toBe(3);
         expect(items[0].textContent).toBe('Apple');
         expect(items[1].textContent).toBe('Banana');
@@ -232,7 +232,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'z' });
         fixture.detectChanges();
 
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
     });
 
@@ -298,7 +298,7 @@ describe('SearchFieldComponent', () => {
 
         // click on category item
         let menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
-        let items = getDropdownItems(menuEl);
+        let items = menuEl.querySelectorAll('.fd-menu__item');
         (items[2] as HTMLElement).click();
         fixture.detectChanges();
 
@@ -314,7 +314,7 @@ describe('SearchFieldComponent', () => {
 
         // click on category item
         menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
-        items = getDropdownItems(menuEl);
+        items = menuEl.querySelectorAll('.fd-menu__item');
         (items[1] as HTMLElement).click();
         fixture.detectChanges();
 
@@ -348,7 +348,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check to see that menu is "hidden"
-        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        let menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
 
         // simulate keyboard entry
@@ -358,7 +358,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
     });
@@ -370,7 +370,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check to see that menu is "hidden"
-        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        let menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
 
         // simulate keyboard entry
@@ -380,7 +380,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
 
@@ -389,7 +389,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'p' });
         fixture.detectChanges();
 
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
     });
@@ -401,7 +401,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check to see that menu is "hidden"
-        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        let menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
 
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
@@ -412,16 +412,16 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
 
         // click first item
-        const items = getDropdownItems(menuEls[0]);
+        const items = getSearchResultsListItems(menuEls[0]);
         (items[0] as HTMLElement).click();
         fixture.detectChanges();
 
         // check to see if dropdown is open
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
         expect(component._isOpen$()).toBeFalsy();
 
@@ -452,10 +452,10 @@ describe('SearchFieldComponent', () => {
         textInput.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
 
-        const items = getDropdownItems(menuEls[0]);
+        const items = getSearchResultsListItems(menuEls[0]);
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Apple');
         expect(items[1].textContent).toBe('Bell Pepper');
@@ -514,7 +514,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // select second item
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
+        const items = overlayContainerEl.querySelectorAll('.fd-list__item');
         (items[1] as HTMLElement).click();
         fixture.detectChanges();
         expect(host.submitValue).toEqual({ text: 'Banana', category: null });
@@ -540,7 +540,7 @@ describe('SearchFieldComponent', () => {
 
         expect(host.submitValue).toEqual({ text: 'appl', category: null });
 
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
         expect(component._isOpen$()).toBeFalsy();
     });
@@ -628,7 +628,7 @@ describe('SearchFieldComponent', () => {
         expect(component.inputText).toBe('');
 
         // check dropdown
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
         expect(component._isOpen$()).toBeFalsy();
 
@@ -653,14 +653,14 @@ describe('SearchFieldComponent', () => {
 
         // simulate keyboard enter
         keyboardEvent = createKeyboardEvent('keydown', ENTER, 'Enter');
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
+        const items = overlayContainerEl.querySelectorAll('.fd-list__item');
         items[0].dispatchEvent(keyboardEvent);
 
         // check input text
         expect(component.inputText).toBe('Apple');
 
         // check dropdown
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
         expect(component._isOpen$()).toBeFalsy();
     });
@@ -678,7 +678,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check dropdown
-        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        let menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
 
@@ -686,7 +686,7 @@ describe('SearchFieldComponent', () => {
         host.outsideButton.nativeElement.click();
 
         // check dropdown
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(0);
         expect(component._isOpen$()).toBeFalsy();
     });
@@ -758,7 +758,7 @@ describe('SearchFieldComponent with DataSource', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [DataSourceTestComponent],
             providers: [RtlService]
@@ -767,7 +767,7 @@ describe('SearchFieldComponent with DataSource', () => {
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
         })();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DataSourceTestComponent);
@@ -788,10 +788,10 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture.detectChanges();
 
         // check dropdown
-        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        let menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
-        let items = getDropdownItems(menuEls[0]);
+        let items = getSearchResultsListItems(menuEls[0]);
         expect(items.length).toBe(1);
         expect(items[0].textContent).toBe('Apple');
 
@@ -801,10 +801,10 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture.detectChanges();
 
         // check dropdown
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
-        items = getDropdownItems(menuEls[0]);
+        items = getSearchResultsListItems(menuEls[0]);
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Banana');
         expect(items[1].textContent).toBe('Orange');
@@ -823,10 +823,10 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture.detectChanges();
 
         // check dropdown
-        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-list');
         expect(menuEls.length).toBe(1);
         expect(component._isOpen$()).toBeTruthy();
-        const items = getDropdownItems(menuEls[0]);
+        const items = getSearchResultsListItems(menuEls[0]);
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Almond');
         expect(items[1].textContent).toBe('Walnut');

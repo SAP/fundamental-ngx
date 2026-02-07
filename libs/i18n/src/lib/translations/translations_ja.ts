@@ -398,7 +398,15 @@ export default {
         searchInputLabel: '検索',
         synchronizeButtonTitle: '同期',
         searchSuggestionMessage: '{count}件の候補が見つかりました。',
-        searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。'
+        searchSuggestionNavigateMessage: '上下の矢印でナビゲートします。',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

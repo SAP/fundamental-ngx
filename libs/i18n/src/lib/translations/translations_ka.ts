@@ -392,7 +392,15 @@ export default {
         searchInputLabel: 'ძებნა',
         synchronizeButtonTitle: 'სინქრონიზაცია',
         searchSuggestionMessage: 'ნაპოვნია {count} შემოთავაზება.',
-        searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები'
+        searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope'
     },
     platformSwitch: {
         ariaLabel: 'გადამრთველი'
