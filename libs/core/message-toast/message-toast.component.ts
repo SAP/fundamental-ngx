@@ -2,13 +2,11 @@ import { PortalModule } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BaseToastDurationDismissibleContainerComponent } from '@fundamental-ngx/cdk/utils';
 import { MessageToastConfig } from './config/message-toast.config';
-import { toastAnimation } from './constants/message-toast.animation';
 
 @Component({
     selector: 'fd-message-toast',
     template: `<ng-template cdkPortalOutlet></ng-template>`,
-    styleUrl: './message-toast.component.scss',
-    animations: [toastAnimation],
+    styleUrls: ['./message-toast.component.scss', './message-toast-animations.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -22,12 +20,19 @@ import { toastAnimation } from './constants/message-toast.animation';
         '[attr.aria-live]': '"polite"',
         '[attr.id]': 'id',
         role: 'alert',
-        tabindex: '-1',
-        class: 'fd-message-toast'
+        tabindex: '-1'
     },
     imports: [PortalModule]
 })
 export class MessageToastComponent extends BaseToastDurationDismissibleContainerComponent<MessageToastConfig> {
+    /**
+     * @hidden
+     * Override base class method to provide CSS class name
+     */
+    protected get _baseClassName(): string {
+        return 'fd-message-toast';
+    }
+
     /** @hidden */
     constructor(config: MessageToastConfig) {
         super(config);

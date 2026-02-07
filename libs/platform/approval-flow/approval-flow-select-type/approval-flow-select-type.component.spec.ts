@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type.component';
 
 describe('ApprovalFlowSelectTypeComponent', () => {
@@ -16,7 +14,6 @@ describe('ApprovalFlowSelectTypeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: DialogConfig, useValue: dialogConfig }

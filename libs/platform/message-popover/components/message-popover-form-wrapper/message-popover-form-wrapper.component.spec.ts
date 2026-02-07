@@ -9,7 +9,6 @@ import {
     ReactiveFormsModule,
     Validators
 } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PlatformMessagePopoverModule } from '../../platform-message-popover.module';
 
 import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapper.component';
@@ -60,9 +59,7 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
     let fixture: ComponentFixture<ReactiveFormTestComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [ReactiveFormTestComponent, NoopAnimationsModule]
-        }).compileComponents();
+        await TestBed.configureTestingModule({}).compileComponents();
 
         fixture = TestBed.createComponent(ReactiveFormTestComponent);
         component = fixture.componentInstance;
@@ -151,9 +148,7 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
     let fixture: ComponentFixture<TemplateFormTestComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [TemplateFormTestComponent, NoopAnimationsModule]
-        }).compileComponents();
+        await TestBed.configureTestingModule({}).compileComponents();
 
         fixture = TestBed.createComponent(TemplateFormTestComponent);
         component = fixture.componentInstance;
