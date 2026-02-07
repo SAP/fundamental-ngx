@@ -38,6 +38,7 @@ import { DialogConfigurationExampleComponent } from './examples/dialog-configura
 import { FormDialogExampleComponent } from './examples/dialog-form/form-dialog-example.component';
 import { DialogFullScreenExampleComponent } from './examples/dialog-full-screen/dialog-full-screen-example.component';
 import { DialogInnerPopoverComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import { DialogLocationSelectionExampleComponent } from './examples/dialog-location-selection/dialog-location-selection-example.component';
 import { DialogMobileExampleComponent } from './examples/dialog-mobile/dialog-mobile-example.component';
 import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
 import { DialogPositionExampleComponent } from './examples/dialog-position/dialog-position-example.component';
@@ -84,6 +85,12 @@ const autoLabelHtml = 'auto-label/auto-label-dialog-example.component.html';
 const formDialogTs = 'dialog-form/form-dialog-example.component.ts';
 const formDialogHtml = 'dialog-form/form-dialog-example.component.html';
 
+const locationSelectionDialogTs = 'dialog-location-selection/dialog-location-selection-example.component.ts';
+const locationSelectionDialogHtml = 'dialog-location-selection/dialog-location-selection-example.component.html';
+const locationSelectionDialogContentTs = 'dialog-location-selection/location-selection-dialog.component.ts';
+const locationSelectionDialogContentHtml = 'dialog-location-selection/location-selection-dialog.component.html';
+const locationSelectionDialogContentScss = 'dialog-location-selection/location-selection-dialog.component.scss';
+
 const dialogFullScreenTs = 'dialog-full-screen/dialog-full-screen-example.component.ts';
 const dialogFullScreenHtml = 'dialog-full-screen/dialog-full-screen-example.component.html';
 
@@ -107,6 +114,7 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
         DialogConfigurationExampleComponent,
         AutoLabelDialogExampleComponent,
         DialogPositionExampleComponent,
+        DialogLocationSelectionExampleComponent,
         DialogMobileExampleComponent,
         DialogComplexExampleComponent,
         DialogStackedExampleComponent,
@@ -375,6 +383,41 @@ export class DialogDocsComponent {
             code: getAssetFromModuleAssets(popoverDialogTs),
             fileName: 'dialog-inner-popover-example',
             component: 'DialogInnerPopoverComponent'
+        }
+    ];
+
+    locationSelectionDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(locationSelectionDialogHtml),
+            fileName: 'dialog-location-selection-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(locationSelectionDialogTs),
+            fileName: 'dialog-location-selection-example',
+            component: 'DialogLocationSelectionExampleComponent',
+            main: true
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(locationSelectionDialogContentHtml),
+            name: 'Dialog Content Template',
+            fileName: 'location-selection-dialog'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(locationSelectionDialogContentTs),
+            name: 'Dialog Content Component',
+            fileName: 'location-selection-dialog',
+            component: 'LocationSelectionDialogComponent',
+            entryComponent: true
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(locationSelectionDialogContentScss),
+            fileName: 'location-selection-dialog',
+            component: 'LocationSelectionDialogComponent'
         }
     ];
 
