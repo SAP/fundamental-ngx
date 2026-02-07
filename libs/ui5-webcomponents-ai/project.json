@@ -41,7 +41,8 @@
             },
             "outputs": [
                 "{options.outputPath}"
-            ]
+            ],
+            "dependsOn": ["generate"]
         },
         "build": {
             "executor": "@nx/angular:package",
