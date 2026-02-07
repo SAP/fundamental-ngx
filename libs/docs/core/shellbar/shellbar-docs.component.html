@@ -95,6 +95,14 @@
         not moved to an overflow menu. The order in which context area items are hidden can be configured using the
         <code>fdShellbarHidePriority</code> directive, as demonstrated below.
     </p>
+
+    <p>
+        Shellbar actions support toggle functionality, allowing them to display a pressed/selected state. To use this
+        feature, set the <code>[fdType]</code> input to specify the button styling (e.g., 'transparent', 'emphasized',
+        'positive', 'attention'), and bind the <code>[toggled]</code> input to control the toggle state. The toggle
+        state can be managed using signals for reactive updates, as shown in the example below where account, filter,
+        and cart actions demonstrate different button types with toggled states.
+    </p>
 </description>
 <component-example>
     <fd-shellbar-branding-context-area-example></fd-shellbar-branding-context-area-example>

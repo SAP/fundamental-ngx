@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
+    input,
     Input,
     Output,
     QueryList,
@@ -15,7 +16,7 @@ import {
     ActionSheetControlComponent,
     ActionSheetItemComponent
 } from '@fundamental-ngx/core/action-sheet';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonType, defaultButtonType } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 
@@ -55,6 +56,12 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
 
     /** @hidden */
     totalNotifications: number;
+
+    /** The button type for styling (e.g., 'transparent', 'emphasized'). */
+    readonly fdType = input<ButtonType>(defaultButtonType);
+
+    /** Whether the button is in toggled state. */
+    readonly toggled = input<boolean | undefined | null>();
 
     /** @hidden */
     actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {

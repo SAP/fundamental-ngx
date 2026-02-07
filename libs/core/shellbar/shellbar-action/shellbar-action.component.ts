@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
@@ -56,6 +56,12 @@ export class ShellbarActionComponent {
 
     /** Number of notifications to display in badge. */
     readonly notificationCount = input<number>();
+
+    /** The button type for styling (e.g., 'transparent', 'emphasized'). */
+    readonly fdType = input<ButtonType>('transparent');
+
+    /** Whether the button is in toggled state. */
+    readonly toggled = input<boolean | undefined | null>();
 
     /** @hidden */
     _elRef = inject(ElementRef);
