@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: '已鎖定',
         listItemStatusDraft: '草稿'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: '關閉',
         announcementInfo: '資訊訊息列',

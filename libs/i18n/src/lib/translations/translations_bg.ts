@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Заключено',
         listItemStatusDraft: 'Чернова'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Затваряне',
         announcementInfo: 'Лента с информационно съобщение',

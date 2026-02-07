@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'I kyçur',
         listItemStatusDraft: 'Draft'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Largoje',
         announcementInfo: 'Information Message Strip',

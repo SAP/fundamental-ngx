@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'مؤمَّن',
         listItemStatusDraft: 'أولي'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'إغلاق',
         announcementInfo: 'شريط رسائل المعلومات',

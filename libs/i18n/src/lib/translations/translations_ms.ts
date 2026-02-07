@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Dikunci',
         listItemStatusDraft: 'Draf'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Tutup',
         announcementInfo: 'Jalur Mesej Maklumat',

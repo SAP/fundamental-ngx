@@ -3,7 +3,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { LinkModule } from '@fundamental-ngx/core/link';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -30,7 +30,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         TitleComponent,
         ButtonComponent,
         IconComponent,
-        LinkModule,
+        LinkComponent,
         FormLabelComponent,
         TextComponent
     ]

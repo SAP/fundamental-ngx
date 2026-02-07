@@ -1,31 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinkComponent } from './link.component';
-
-@Component({
-    selector: 'fd-test-tabs',
-    template: ` <a fd-link>Test Link</a> `,
-    standalone: true,
-    imports: [LinkComponent]
-})
-class TestLinkComponent {
-    @ViewChild(LinkComponent, { static: true })
-    linkComponent: LinkComponent;
-}
 
 describe('LinkComponent', () => {
     let component: LinkComponent;
-    let fixture: ComponentFixture<TestLinkComponent>;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestLinkComponent]
-        }).compileComponents();
-    }));
+    let fixture: ComponentFixture<LinkComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestLinkComponent);
-        component = fixture.componentInstance.linkComponent;
+        fixture = TestBed.createComponent(LinkComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
@@ -33,24 +15,63 @@ describe('LinkComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Add emphasized class', () => {
-        component.emphasized = true;
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef.nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
+    it('should apply base fd-link class', () => {
+        expect(fixture.nativeElement.classList.contains('fd-link')).toBe(true);
     });
 
-    it('Should Add inverted class', () => {
-        component.inverted = true;
-        component.buildComponentCssClass();
+    it('should add emphasized class when emphasized input is true', () => {
+        fixture.componentRef.setInput('emphasized', true);
         fixture.detectChanges();
-        expect(component.elementRef.nativeElement.classList.contains('fd-link--inverted')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
     });
 
-    it('Should Add disabled class', () => {
-        component.disabled = true;
-        component.buildComponentCssClass();
+    it('should add inverted class when inverted input is true', () => {
+        fixture.componentRef.setInput('inverted', true);
         fixture.detectChanges();
-        expect(component.elementRef.nativeElement.classList.contains('is-disabled')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-link--inverted')).toBe(true);
+    });
+
+    it('should add disabled class when disabled input is true', () => {
+        fixture.componentRef.setInput('disabled', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('is-disabled')).toBe(true);
+    });
+
+    it('should add subtle class when subtle input is true', () => {
+        fixture.componentRef.setInput('subtle', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-link--subtle')).toBe(true);
+    });
+
+    it('should add undecorated class when undecorated input is true', () => {
+        fixture.componentRef.setInput('undecorated', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-link--undecorated')).toBe(true);
+    });
+
+    it('should add touch-target class when touchTarget input is true', () => {
+        fixture.componentRef.setInput('touchTarget', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-link--touch-target')).toBe(true);
+    });
+
+    it('should set aria-disabled to true when disabled', () => {
+        fixture.componentRef.setInput('disabled', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.getAttribute('aria-disabled')).toBe('true');
+    });
+
+    it('should set aria-disabled to false when not disabled', () => {
+        fixture.componentRef.setInput('disabled', false);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.getAttribute('aria-disabled')).toBe('false');
+    });
+
+    it('should apply multiple classes when multiple inputs are set', () => {
+        fixture.componentRef.setInput('emphasized', true);
+        fixture.componentRef.setInput('disabled', true);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('is-disabled')).toBe(true);
     });
 });

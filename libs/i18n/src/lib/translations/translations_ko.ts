@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: '잠김',
         listItemStatusDraft: '초안'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: '닫기',
         announcementInfo: '정보 메시지 스트립',

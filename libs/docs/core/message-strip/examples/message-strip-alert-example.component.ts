@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, TemplateRef, inject } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { LinkModule } from '@fundamental-ngx/core/link';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     MessageStripAlertContainerAlertRefs,
     MessageStripAlertRef,
@@ -31,7 +31,7 @@ class ExampleStripAlertComponent implements OnDestroy {
             }
         }
     `,
-    imports: [AsyncPipe, ButtonComponent, ContentDensityDirective, LinkModule],
+    imports: [AsyncPipe, ButtonComponent, ContentDensityDirective, LinkComponent],
     styles: [
         `
             :host {

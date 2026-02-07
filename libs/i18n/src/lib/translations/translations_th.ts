@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'ถูกล็อค',
         listItemStatusDraft: 'แบบร่าง'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'ปิด',
         announcementInfo: 'แถบข้อความข้อมูล',

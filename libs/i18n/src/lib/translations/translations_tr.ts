@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Kilitli',
         listItemStatusDraft: 'Taslak'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Kapat',
         announcementInfo: 'Bilgi İletisi Satırı',

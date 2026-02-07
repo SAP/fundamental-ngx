@@ -124,6 +124,10 @@ export interface FdLanguage {
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
     };
+    coreLink: {
+        emphasized: FdLanguageKey;
+        subtle: FdLanguageKey;
+    };
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
         announcementInfo: FdLanguageKey;

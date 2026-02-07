@@ -20,4 +20,23 @@ $block: fd-link;
             @include sap.sap-set-margin-begin(var(--fdLink_Icon_Spacing, 0));
         }
     }
+
+    // TO BE REMOVED WITH THE LATEST VERSION OF FUNDAMENTAL STYLES
+    &--touch-target {
+        --fdLink_Line_Height: 1.5rem;
+    }
+
+    &__sr-only {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        width: 1px;
+        border: 0;
+        margin-inline: -1px;
+        margin-block: -1px;
+        padding-inline: 0;
+        padding-block: 0;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 }

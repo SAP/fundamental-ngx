@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Gesperrt',
         listItemStatusDraft: 'Entwurf'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Schließen',
         announcementInfo: 'Informationsmeldungsleiste',

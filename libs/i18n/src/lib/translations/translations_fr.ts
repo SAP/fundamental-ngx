@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Verrouillé',
         listItemStatusDraft: 'Ébauche'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Fermer',
         announcementInfo: "Fermer la barre de message d'information",

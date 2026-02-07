@@ -1,21 +1,58 @@
-<a [routerLink]="['./']" fd-link aria-label="Standard">Standard Link</a> <br /><br />
-<a [routerLink]="['./']" fd-link [emphasized]="true" aria-label="Emphasized">Emphasized Link</a>
+<h4>Standard Links</h4>
+<a [routerLink]="['./']" fd-link>Standard Link</a>
 <br /><br />
+
+<a href="https://www.sap.com" fd-link target="_blank" rel="noopener noreferrer"> External Link (href) </a>
+<br /><br />
+
+<h4>Visual Modifiers</h4>
+<a [routerLink]="['./']" fd-link [emphasized]="true">Emphasized Link</a>
+<br /><br />
+
+<a [routerLink]="['./']" fd-link [subtle]="true">Subtle Link</a>
+<br /><br />
+
+<a [routerLink]="['./']" fd-link [undecorated]="true">Undecorated Link</a>
+<br /><br />
+
+<h4>Inverted</h4>
+<div [ngStyle]="{ 'background-color': 'var(--sapShellColor)', padding: '1rem', 'border-radius': '0.25rem' }">
+    <a fd-link [routerLink]="['./']" fragment="inverted" [inverted]="true"> Inverted Link </a>
+</div>
+<br /><br />
+
+<h4>States</h4>
 <a fd-link [disabled]="true" aria-disabled="true">Disabled Link</a>
 <br /><br />
-<a [routerLink]="['./']" fd-link aria-label="Icon right">
+
+<a fd-link [routerLink]="['./']" [touchTarget]="true">Touch Target Link</a>
+<br /><br />
+
+<h4>Icon Support</h4>
+<a [routerLink]="['./']" fd-link>
     Icon Right Link
     <fd-icon [glyph]="arrowRight()"></fd-icon>
 </a>
 <br /><br />
-<a [routerLink]="['./']" fd-link aria-label="Icon left">
+
+<a [routerLink]="['./']" fd-link>
     <fd-icon [glyph]="arrowLeft()"></fd-icon>
     Icon Left Link
 </a>
 <br /><br />
 
-<a fd-link [subtle]="true" aria-label="Standard">Subtle Link</a> <br /><br />
+<a [routerLink]="['./']" fd-link>
+    <fd-icon [glyph]="arrowLeft()"></fd-icon>
+    Link with Both Icons
+    <fd-icon [glyph]="arrowRight()"></fd-icon>
+</a>
+<br /><br />
 
-<div [ngStyle]="{ 'background-color': 'var(--sapShellColor)', padding: '1rem' }">
-    <a fd-link [routerLink]="['./']" fragment="inverted" aria-label="Inverted" [inverted]="true">Inverted Link</a>
-</div>
+<h4>Combined Features</h4>
+<a [routerLink]="['./']" fd-link [emphasized]="true">
+    <fd-icon [glyph]="arrowRight()"></fd-icon>
+    Emphasized Link with Icon
+</a>
+<br /><br />
+
+<a [routerLink]="['./']" fd-link [subtle]="true" [undecorated]="true"> Subtle Undecorated Link </a>

@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Zárolva',
         listItemStatusDraft: 'Vázlat'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Bezárás',
         announcementInfo: 'Információsüzenet-sor',

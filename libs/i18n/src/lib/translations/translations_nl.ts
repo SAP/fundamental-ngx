@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Vergrendeld',
         listItemStatusDraft: 'Concept'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Sluiten',
         announcementInfo: 'Statusbalk informatiemelding',

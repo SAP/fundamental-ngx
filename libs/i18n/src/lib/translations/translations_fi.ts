@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Lukittu',
         listItemStatusDraft: 'Luonnos'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Sulje',
         announcementInfo: 'Informaatioilmoitusnauha',
