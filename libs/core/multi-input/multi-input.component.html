@@ -6,6 +6,17 @@
                     [ngTemplateOutlet]="control"
                     [ngTemplateOutletContext]="{ displayAddonButton: displayAddonButton }"
                 ></ng-template>
+            } @else if (display()) {
+                <fd-tokenizer
+                    [display]="display()"
+                    [tokenizerFocusable]="false"
+                    [ariaLabelledBy]="ariaLabelledBy"
+                    class="fd-multi-input-tokenizer-custom"
+                >
+                    @for (token of viewModel.selectedOptions; track token; let last = $last) {
+                        <fd-token [display]="display()" [isLast]="last">{{ token.label }}</fd-token>
+                    }
+                </fd-tokenizer>
             } @else {
                 <fd-popover
                     additionalBodyClass="fd-popover-custom-list"

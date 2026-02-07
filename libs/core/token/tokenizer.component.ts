@@ -26,7 +26,8 @@ import {
     ViewContainerRef,
     ViewEncapsulation,
     forwardRef,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -49,6 +50,8 @@ import { BehaviorSubject, Observable, Subscription, firstValueFrom, fromEvent, m
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
 
+let tokenizerId = 0;
+
 @Component({
     selector: 'fd-tokenizer',
     templateUrl: './tokenizer.component.html',
@@ -66,7 +69,12 @@ import { TokenComponent } from './token.component';
         ListComponent,
         ListItemComponent,
         FdTranslatePipe
-    ]
+    ],
+    host: {
+        '[attr.id]': 'id()',
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
+        '[style.display]': 'this.display() ? "block" : null'
+    }
 })
 export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
     /** user's custom classes */
@@ -175,6 +183,16 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     _tokensContainerWidth = 'auto';
+
+    /** Whether the tokenizer is display-only */
+    display = input(false);
+
+    /** Tokenizer ID
+     *  Default value is provided if not set  */
+    id = input('fd-tokenizer-id-' + ++tokenizerId);
+
+    /** Tokenizer aria-labelledby attribute binding. */
+    ariaLabelledBy = input();
 
     /** @hidden */
     private _translationResolver = new TranslationResolver();
@@ -307,7 +325,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             });
         });
 
-        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse && !this.display()) {
             this._handleCozyTokenCount();
         }
         this._listenElementEvents();
@@ -381,7 +399,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
-            if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
+            if (!this._contentDensityObserver.isCompact && !this.compactCollapse && !this.display()) {
                 this._handleCozyTokenCount();
             }
         }
@@ -561,7 +579,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         if (this._forceAllTokensToDisplay) {
             return;
         }
-        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse && !this.display()) {
             this._getHiddenCozyTokenCount();
             return;
         }
@@ -625,7 +643,12 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _resetTokens(): void {
         this.moreTokensLeft = [];
         this.moreTokensRight = [];
-        if (this._contentDensityObserver.isCompact || this.compactCollapse || this._forceAllTokensToDisplay) {
+        if (
+            this._contentDensityObserver.isCompact ||
+            this.compactCollapse ||
+            this.display() ||
+            this._forceAllTokensToDisplay
+        ) {
             this.tokenList.forEach((token) => {
                 this._makeElementVisible(token.elementRef);
             });

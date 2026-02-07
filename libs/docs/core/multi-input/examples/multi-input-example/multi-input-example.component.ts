@@ -1,15 +1,17 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-multi-input-example',
     templateUrl: './multi-input-example.component.html',
-    imports: [MultiInputComponent, FormsModule, JsonPipe]
+    imports: [MultiInputComponent, FormsModule, FormItemComponent, JsonPipe]
 })
 export class MultiInputExampleComponent {
     selected = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry'];
+    displayOnlySelected = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry'];
     secondSelected = ['Pineapple'];
     thirdSelected = ['Kiwi'];
     selectedDisabledAutoComplete = ['Kiwi'];
