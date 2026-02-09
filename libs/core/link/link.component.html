@@ -1,18 +1,14 @@
-@if (_prefixPortal()) {
+@if (prefixPortal()) {
     <span class="fd-link__icon-container" role="presentation" aria-hidden="true">
-        <ng-container *cdkPortalOutlet="_prefixPortal()"></ng-container>
+        <ng-container *cdkPortalOutlet="prefixPortal()"></ng-container>
     </span>
 }
-<span
-    class="fd-link__content"
-    #content
-    [class.fd-link__content--icon-line-height]="_postfixPortal() || _prefixPortal()"
->
+<span class="fd-link__content" #content [class.fd-link__content--icon-line-height]="postfixPortal() || prefixPortal()">
     <ng-content></ng-content>
 </span>
-@if (_postfixPortal()) {
+@if (postfixPortal()) {
     <span class="fd-link__icon-container" role="presentation" aria-hidden="true">
-        <ng-container *cdkPortalOutlet="_postfixPortal()"></ng-container>
+        <ng-container *cdkPortalOutlet="postfixPortal()"></ng-container>
     </span>
 }
 @if (emphasized()) {

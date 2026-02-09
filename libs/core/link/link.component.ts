@@ -4,7 +4,6 @@ import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
-    computed,
     contentChildren,
     effect,
     ElementRef,
@@ -35,7 +34,13 @@ const LINK_ROUTER_TARGET = new InjectionToken<RouterLink | undefined>('linkRoute
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.aria-disabled]': 'disabled() ? true : false',
-        '[class]': '_cssClass()'
+        class: 'fd-link',
+        '[class.fd-link--emphasized]': 'emphasized()',
+        '[class.is-disabled]': 'disabled()',
+        '[class.fd-link--inverted]': 'inverted()',
+        '[class.fd-link--subtle]': 'subtle()',
+        '[class.fd-link--undecorated]': 'undecorated()',
+        '[class.fd-link--touch-target]': 'touchTarget()'
     },
     providers: [
         {
@@ -86,31 +91,16 @@ export class LinkComponent implements HasElementRef {
     readonly routerLink = inject<RouterLink>(LINK_ROUTER_TARGET);
 
     /** @hidden */
-    protected readonly _prefixPortal = signal<Portal<any> | null>(null);
+    protected readonly prefixPortal = signal<Portal<any> | null>(null);
 
     /** @hidden */
-    protected readonly _postfixPortal = signal<Portal<any> | null>(null);
+    protected readonly postfixPortal = signal<Portal<any> | null>(null);
 
     /** @hidden */
-    protected readonly _prefixIconName = signal<string>('');
+    protected readonly prefixIconName = signal<string>('');
 
     /** @hidden */
-    protected readonly _postfixIconName = signal<string>('');
-
-    /** @hidden */
-    protected readonly _cssClass = computed(() =>
-        [
-            'fd-link',
-            this.emphasized() ? 'fd-link--emphasized' : '',
-            this.disabled() ? 'is-disabled' : '',
-            this.inverted() ? 'fd-link--inverted' : '',
-            this.subtle() ? 'fd-link--subtle' : '',
-            this.undecorated() ? 'fd-link--undecorated' : '',
-            this.touchTarget() ? 'fd-link--touch-target' : ''
-        ]
-            .filter(Boolean)
-            .join(' ')
-    );
+    protected readonly postfixIconName = signal<string>('');
 
     /** @hidden */
     private readonly _injector = inject(Injector);
@@ -143,10 +133,10 @@ export class LinkComponent implements HasElementRef {
     /** @hidden */
     private _clearPortals(): void {
         this._detachPortals();
-        this._prefixPortal.set(null);
-        this._postfixPortal.set(null);
-        this._prefixIconName.set('');
-        this._postfixIconName.set('');
+        this.prefixPortal.set(null);
+        this.postfixPortal.set(null);
+        this.prefixIconName.set('');
+        this.postfixIconName.set('');
     }
 
     /** @hidden */
@@ -163,19 +153,19 @@ export class LinkComponent implements HasElementRef {
                 : null;
 
         // Update icon names
-        this._prefixIconName.set(prefix ? firstIcon.glyph() : '');
-        this._postfixIconName.set(postfix ? lastIcon.glyph() : '');
+        this.prefixIconName.set(prefix ? firstIcon.glyph() : '');
+        this.postfixIconName.set(postfix ? lastIcon.glyph() : '');
 
         // Update portals
         this._detachPortals();
-        this._prefixPortal.set(prefix ? new DomPortal(prefix) : null);
-        this._postfixPortal.set(postfix ? new DomPortal(postfix) : null);
+        this.prefixPortal.set(prefix ? new DomPortal(prefix) : null);
+        this.postfixPortal.set(postfix ? new DomPortal(postfix) : null);
     }
 
     /** @hidden */
     private _detachPortals(): void {
-        const prefix = this._prefixPortal();
-        const postfix = this._postfixPortal();
+        const prefix = this.prefixPortal();
+        const postfix = this.postfixPortal();
 
         if (prefix?.isAttached) {
             prefix.detach();
