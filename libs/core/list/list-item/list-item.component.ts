@@ -292,9 +292,8 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** @hidden */
     private _addClassToButtons(button: ButtonComponent): void {
-        button.class += ' fd-list__button';
-        button.buildComponentCssClass();
-        button.detectChanges();
+        const buttonElement = button.elementRef.nativeElement;
+        buttonElement.classList.add('fd-list__button');
     }
 
     /** @hidden */

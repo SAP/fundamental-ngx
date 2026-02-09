@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 import { Validators } from '@angular/forms';
 
 import { JsonPipe } from '@angular/common';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     DynamicFormValue,
@@ -22,7 +22,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     templateUrl: './platform-form-generator-grouping-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
+    imports: [PlatformFormGeneratorModule, ButtonComponent, JsonPipe]
 })
 export class PlatformFormGeneratorGroupingExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

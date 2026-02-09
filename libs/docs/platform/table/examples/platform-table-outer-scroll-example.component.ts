@@ -12,7 +12,7 @@ import {
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
 
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-platform-table-outer-scroll-example',
@@ -28,7 +28,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
         FdpTableCell,
         AsyncPipe,
         FdDatetimeModule,
-        PlatformButtonModule
+        ButtonComponent
     ]
 })
 export class PlatformTableOuterScrollExampleComponent {

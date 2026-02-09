@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, NgZone, TemplateRef, ViewChild } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormItem, PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 import { HintOptions } from '@fundamental-ngx/platform/shared';
 import { first } from 'rxjs';
@@ -8,7 +8,7 @@ import { first } from 'rxjs';
 @Component({
     selector: 'fdp-platform-form-generator-inline-help-example',
     templateUrl: './platform-form-generator-inline-help-example.component.html',
-    imports: [PlatformFormGeneratorModule, PlatformButtonModule, IconComponent]
+    imports: [PlatformFormGeneratorModule, ButtonComponent, IconComponent]
 })
 export class PlatformFormGeneratorInlineHelpExampleComponent implements AfterViewInit {
     @ViewChild('hintTemplate', { static: true })

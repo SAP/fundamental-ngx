@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { IconTabBarTabContentDirective } from '@fundamental-ngx/platform/icon-tab-bar';
@@ -43,7 +43,7 @@ import { PlatformDynamicPageModule } from './dynamic-page.module';
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [PlatformDynamicPageModule, ToolbarModule, ButtonModule]
+    imports: [PlatformDynamicPageModule, ToolbarModule, ButtonComponent]
 })
 class TestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -296,7 +296,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [PlatformDynamicPageModule, ToolbarModule, ButtonModule]
+    imports: [PlatformDynamicPageModule, ToolbarModule, ButtonComponent]
 })
 class HostTestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;

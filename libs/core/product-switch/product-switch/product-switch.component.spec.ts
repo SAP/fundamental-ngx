@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ProductSwitchModule } from '../product-switch.module';
 import { ProductSwitchComponent } from './product-switch.component';
@@ -13,7 +13,7 @@ describe('ProductSwitchComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule, ProductSwitchModule]
+            imports: [PopoverModule, ButtonComponent, DragAndDropModule, DragDropModule, ProductSwitchModule]
         }).compileComponents();
     }));
 

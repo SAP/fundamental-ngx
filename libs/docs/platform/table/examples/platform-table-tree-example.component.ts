@@ -3,7 +3,7 @@ import { DropPredicate } from '@fundamental-ngx/cdk/utils';
 import { Observable, of } from 'rxjs';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     PlatformTableModule,
     TableComponent,
@@ -34,7 +34,7 @@ import { delay, tap } from 'rxjs/operators';
         PlatformTableModule,
         TableInitialStateDirective,
         TableDraggableDirective,
-        PlatformButtonModule,
+        ButtonComponent,
         FdDatetimeModule
     ]
 })
