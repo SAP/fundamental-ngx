@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Bloccato',
         listItemStatusDraft: 'Bozza'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Chiudi',
         announcementInfo: 'Riga messaggio informativo',

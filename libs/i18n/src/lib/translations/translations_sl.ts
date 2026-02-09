@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Zaklenjeno',
         listItemStatusDraft: 'Osnutek'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Zapri',
         announcementInfo: 'Vrstica z informativnim obvestilom',
