@@ -1,7 +1,48 @@
 <fd-docs-section-title id="basic" componentName="link"> Links </fd-docs-section-title>
 <description>
-    Links can have multiple modifiers, to change the way how it looks. Also it deal with `is-visited` flag. Current
-    implementation allows to put any content inside `fd-link` component.
+    <p>
+        The Link component provides a semantic and accessible way to create hyperlinks with enhanced styling and
+        functionality. It supports standard anchor tag features like <code>href</code> and integrates seamlessly with
+        Angular Router.
+    </p>
+
+    <h3>Key Features</h3>
+    <ul>
+        <li>
+            <strong>Visual Modifiers:</strong> Multiple style variations including emphasized, subtle, inverted, and
+            undecorated modes
+        </li>
+        <li>
+            <strong>Icon Support:</strong> Automatically detects and positions icons projected as content, placing them
+            as prefix or postfix elements
+        </li>
+        <li>
+            <strong>Accessibility:</strong> Built-in ARIA support with screen reader announcements for emphasized and
+            subtle states
+        </li>
+        <li><strong>States:</strong> Handles disabled state with proper ARIA attributes and visual feedback</li>
+        <li><strong>Touch Target:</strong> Optional enlarged touch target for improved mobile usability</li>
+        <li><strong>Router Integration:</strong> Works with Angular RouterLink directive for SPA navigation</li>
+        <li>
+            <strong>Flexible Content:</strong> Accepts any content including text, icons, or custom elements via content
+            projection
+        </li>
+    </ul>
+
+    <h3>Available Inputs</h3>
+    <ul>
+        <li><code>emphasized</code> - Displays the link with emphasized styling and announces it to screen readers</li>
+        <li>
+            <code>subtle</code> - Applies subtle styling with reduced visual prominence and screen reader announcement
+        </li>
+        <li><code>inverted</code> - Inverts the color scheme for use on dark backgrounds</li>
+        <li>
+            <code>disabled</code> - Disables the link interaction and applies disabled styling with proper ARIA
+            attributes
+        </li>
+        <li><code>undecorated</code> - Removes the default underline decoration</li>
+        <li><code>touchTarget</code> - Enlarges the clickable area for better mobile accessibility</li>
+    </ul>
 </description>
 <component-example>
     <fd-link-example></fd-link-example>

@@ -1,29 +1,29 @@
 import { DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
 import {
-    AfterViewInit,
+    afterNextRender,
+    booleanAttribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ContentChildren,
-    DestroyRef,
+    contentChildren,
+    effect,
     ElementRef,
-    Inject,
-    Input,
-    OnChanges,
-    OnInit,
+    inject,
+    InjectionToken,
+    Injector,
+    input,
     Optional,
-    QueryList,
     Self,
-    ViewChild,
-    ViewEncapsulation,
-    inject
+    signal,
+    viewChild,
+    ViewEncapsulation
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
-import { map, startWith, tap } from 'rxjs';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FD_LINK_COMPONENT } from './tokens';
+
+const LINK_ROUTER_TARGET = new InjectionToken<RouterLink | undefined>('linkRouterTarget');
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -32,13 +32,23 @@ import { FD_LINK_COMPONENT } from './tokens';
     styleUrl: './link.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.aria-disabled]': 'disabled() ? true : false',
+        class: 'fd-link',
+        '[class.fd-link--emphasized]': 'emphasized()',
+        '[class.is-disabled]': 'disabled()',
+        '[class.fd-link--inverted]': 'inverted()',
+        '[class.fd-link--subtle]': 'subtle()',
+        '[class.fd-link--undecorated]': 'undecorated()',
+        '[class.fd-link--touch-target]': 'touchTarget()'
+    },
     providers: [
         {
             provide: FD_LINK_COMPONENT,
             useExisting: LinkComponent
         },
         {
-            provide: 'linkRouterTarget',
+            provide: LINK_ROUTER_TARGET,
             useFactory: (withHref?: RouterLink, routerLink?: RouterLink): RouterLink | undefined =>
                 withHref || routerLink,
             deps: [
@@ -47,144 +57,121 @@ import { FD_LINK_COMPONENT } from './tokens';
             ]
         }
     ],
-    imports: [PortalModule]
+    imports: [PortalModule, FdTranslatePipe]
 })
-export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit {
+export class LinkComponent implements HasElementRef {
     /** @hidden */
-    @ContentChildren(FD_ICON_COMPONENT)
-    iconComponents: QueryList<IconComponent>;
+    readonly iconComponents = contentChildren<IconComponent>(FD_ICON_COMPONENT, { descendants: false });
 
     /** @hidden */
-    @ViewChild('content')
-    contentSpan: ElementRef<HTMLSpanElement>;
-
-    /** user's custom classes */
-    @Input()
-    class: string;
+    readonly contentSpan = viewChild<ElementRef<HTMLSpanElement>>('content');
 
     /** Whether user wants to use emphasized mode */
-    @Input()
-    emphasized: boolean;
+    readonly emphasized = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to put disabled mode */
-    @Input()
-    disabled: boolean;
+    readonly disabled = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to use inverted mode */
-    @Input()
-    inverted: boolean;
+    readonly inverted = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to use subtle mode */
-    @Input()
-    subtle: boolean;
+    readonly subtle = input(false, { transform: booleanAttribute });
 
     /** Whether user wants to have a link without underline decoration */
-    @Input()
-    undecorated: boolean;
+    readonly undecorated = input(false, { transform: booleanAttribute });
+
+    /** Whether user wants to have a larger touch target */
+    readonly touchTarget = input(false, { transform: booleanAttribute });
 
     /** @hidden */
-    _prefixPortal: Portal<any> | null;
+    readonly elementRef = inject(ElementRef<HTMLElement>);
 
     /** @hidden */
-    _postfixPortal: Portal<any> | null;
+    readonly routerLink = inject<RouterLink>(LINK_ROUTER_TARGET);
 
     /** @hidden */
-    _prefixIconName: string;
-    /** @hidden */
-    _postfixIconName: string;
+    protected readonly prefixPortal = signal<Portal<any> | null>(null);
 
     /** @hidden */
-    private readonly _destroyed$ = inject(DestroyRef);
+    protected readonly postfixPortal = signal<Portal<any> | null>(null);
 
     /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef<HTMLElement>,
-        private changeDetectorRef: ChangeDetectorRef,
-        @Inject('linkRouterTarget') readonly routerLink: RouterLink
-    ) {}
+    protected readonly prefixIconName = signal<string>('');
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-link',
-            this.emphasized ? 'fd-link--emphasized' : '',
-            this.disabled ? 'is-disabled' : '',
-            this.inverted ? `fd-link--inverted` : '',
-            this.subtle ? 'fd-link--subtle' : '',
-            this.undecorated ? 'fd-link--undecorated' : '',
-            this.class
-        ];
+    /** @hidden */
+    protected readonly postfixIconName = signal<string>('');
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    constructor() {
+        // Effect that runs when icons or content changes
+        effect(() => {
+            const icons = this.iconComponents();
+            const contentEl = this.contentSpan()?.nativeElement;
+
+            if (!contentEl || icons.length === 0) {
+                afterNextRender(
+                    () => {
+                        this._clearPortals();
+                    },
+                    { injector: this._injector }
+                );
+                return;
+            }
+
+            afterNextRender(
+                () => {
+                    this._updatePortals(icons, contentEl);
+                },
+                { injector: this._injector }
+            );
+        });
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
+    private _clearPortals(): void {
+        this._detachPortals();
+        this.prefixPortal.set(null);
+        this.postfixPortal.set(null);
+        this.prefixIconName.set('');
+        this.postfixIconName.set('');
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
+    private _updatePortals(icons: readonly IconComponent[], contentEl: HTMLElement): void {
+        // Determine prefix and postfix icons
+        const firstIcon = icons[0];
+        const lastIcon = icons[icons.length - 1];
+
+        const prefix =
+            firstIcon.elementRef.nativeElement === contentEl.childNodes[0] ? firstIcon.elementRef.nativeElement : null;
+        const postfix =
+            lastIcon.elementRef.nativeElement === contentEl.childNodes[contentEl.childNodes.length - 1]
+                ? lastIcon.elementRef.nativeElement
+                : null;
+
+        // Update icon names
+        this.prefixIconName.set(prefix ? firstIcon.glyph() : '');
+        this.postfixIconName.set(postfix ? lastIcon.glyph() : '');
+
+        // Update portals
+        this._detachPortals();
+        this.prefixPortal.set(prefix ? new DomPortal(prefix) : null);
+        this.postfixPortal.set(postfix ? new DomPortal(postfix) : null);
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.iconComponents.changes
-            .pipe(
-                startWith(this.iconComponents),
-                map((c) => c.toArray()),
-                map((icons) =>
-                    // We are only interested in the first descendant of the content element
-                    icons.filter(
-                        (icon) => icon.elementRef.nativeElement.parentElement === this.contentSpan.nativeElement
-                    )
-                ),
-                map((icons) => {
-                    if (icons.length === 0) {
-                        return {};
-                    }
-                    const prefix =
-                        icons[0].elementRef.nativeElement === this.contentSpan.nativeElement.childNodes[0]
-                            ? icons[0].elementRef.nativeElement
-                            : null;
-                    const postfix =
-                        icons[icons.length - 1].elementRef.nativeElement ===
-                        this.contentSpan.nativeElement.childNodes[this.contentSpan.nativeElement.childNodes.length - 1]
-                            ? icons[icons.length - 1].elementRef.nativeElement
-                            : null;
-                    if (prefix) {
-                        this._prefixIconName = this.iconComponents.first.glyph();
-                    } else {
-                        this._prefixIconName = '';
-                    }
-                    if (postfix) {
-                        this._postfixIconName = this.iconComponents.last.glyph();
-                    } else {
-                        this._postfixIconName = '';
-                    }
-                    return { prefix, postfix };
-                }),
-                tap(() => {
-                    if (this._prefixPortal?.isAttached) {
-                        this._prefixPortal.detach();
-                    }
-                    if (this._postfixPortal?.isAttached) {
-                        this._postfixPortal.detach();
-                    }
-                }),
-                tap(({ prefix, postfix }) => {
-                    this._prefixPortal = prefix ? new DomPortal(prefix) : null;
-                    this._postfixPortal = postfix ? new DomPortal(postfix) : null;
-                }),
-                tap(() => {
-                    this.changeDetectorRef.detectChanges();
-                }),
-                takeUntilDestroyed(this._destroyed$)
-            )
-            .subscribe();
+    private _detachPortals(): void {
+        const prefix = this.prefixPortal();
+        const postfix = this.postfixPortal();
+
+        if (prefix?.isAttached) {
+            prefix.detach();
+        }
+        if (postfix?.isAttached) {
+            postfix.detach();
+        }
     }
 }
