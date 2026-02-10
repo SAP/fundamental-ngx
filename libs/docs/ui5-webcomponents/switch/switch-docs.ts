@@ -9,11 +9,14 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { BasicSwitchExample } from './examples/basic-sample';
 import { DesignSwitchExample } from './examples/design-switch';
+import { ReactiveFormSwitchExample } from './examples/reactive-forms-sample';
 
 const basicExampleHtml = 'basic-sample.html';
 const basicExampleTs = 'basic-sample.ts';
 const designExampleHtml = 'design-switch.html';
 const designExampleTs = 'design-switch.ts';
+const reactiveFormsExampleHtml = 'reactive-forms-sample.html';
+const reactiveFormsExampleTs = 'reactive-forms-sample.ts';
 
 @Component({
     selector: 'ui5-switch-docs',
@@ -25,7 +28,8 @@ const designExampleTs = 'design-switch.ts';
         CodeExampleComponent,
         DescriptionComponent,
         BasicSwitchExample,
-        DesignSwitchExample
+        DesignSwitchExample,
+        ReactiveFormSwitchExample
     ]
 })
 export class SwitchDocs {
@@ -57,6 +61,21 @@ export class SwitchDocs {
         }
     ]);
 
+    private readonly reactiveFormsExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(reactiveFormsExampleHtml),
+            originalFileName: 'reactive-forms-sample'
+        },
+        {
+            language: 'typescript',
+            component: 'ReactiveFormSwitchExample',
+            code: getAssetFromModuleAssets(reactiveFormsExampleTs),
+            originalFileName: 'reactive-forms-sample'
+        }
+    ]);
+
     readonly basicExamples = computed(() => this.basicExampleFiles());
     readonly designExamples = computed(() => this.designExampleFiles());
+    readonly reactiveFormsExamples = computed(() => this.reactiveFormsExampleFiles());
 }
