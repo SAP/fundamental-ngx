@@ -37,6 +37,21 @@ function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
     );
 }
 
+/** Checks if the component should host the Boolean CVA directive. */
+function hasBooleanCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
+    return (
+        data.members?.some(
+            (member) =>
+                member.kind === 'field' &&
+                !member.static &&
+                member.privacy === 'public' &&
+                !member.readonly &&
+                (member as any)._ui5formProperty === true &&
+                member.name === 'checked' // Specifically look for "checked" property which indicates need of boolean CVA
+        ) ?? false
+    );
+}
+
 function generateTypeImports(
     data: CEM.CustomElementDeclaration,
     allEnums: { name: string; members: string[] }[]
@@ -230,12 +245,12 @@ function generateSlotsDocumentation(data: CEM.CustomElementDeclaration): string 
     return `
   /**
    * Available slots for content projection in this component.
-   * 
+   *
    * Slots allow you to insert custom content into predefined areas of the web component.
    * Use the \`slot\` attribute on child elements to target specific slots.
-   * 
+   *
 ${slotDocs.join('\n')}
-   * 
+   *
    * @example
    * \`\`\`html
    * <${data.tagName}>
@@ -243,7 +258,7 @@ ${slotDocs.join('\n')}
    *   <p>Default slot content</p>
    * </${data.tagName}>
    * \`\`\`
-   * 
+   *
    * @readonly
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots | MDN Web Components Slots}
    */
@@ -298,15 +313,24 @@ export function componentTemplate(
     const typeExports = generateTypeExports(data, packageName);
     const { readonlyProperties, privateProperties } = generateProperties(data);
     const outputEvents = data.events || [];
-    const shouldHostCVA = hasCvaHostDirective(data); // false; // Temporarily disabled to validate build
+    const shouldHostBooleanCVA = hasBooleanCvaHostDirective(data);
+    const shouldHostCVA = hasCvaHostDirective(data);
 
-    // Add CVA hostDirective property only if needed
-    const cvaHostDirective = shouldHostCVA ? `  hostDirectives: [GenericControlValueAccessor],\n` : '';
+    // Add Boolean CVA or CVA hostDirective property only if needed
+    let cvaHostDirective = '';
+    if (shouldHostBooleanCVA) {
+        cvaHostDirective = `  hostDirectives: [BooleanControlValueAccessor],\n`;
+    } else if (shouldHostCVA) {
+        cvaHostDirective = `  hostDirectives: [GenericControlValueAccessor],\n`;
+    }
 
     // Add CVA import only if needed
-    const cvaImport = shouldHostCVA
-        ? `import { GenericControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`
-        : '';
+    let cvaImport = '';
+    if (shouldHostBooleanCVA) {
+        cvaImport = `import { BooleanControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`;
+    } else if (shouldHostCVA) {
+        cvaImport = `import { GenericControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`;
+    }
 
     const inputMembers = (data.members ?? []).filter(isField);
 
