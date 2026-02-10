@@ -94,11 +94,11 @@ describe('IllustratedMessageComponent', () => {
         );
     });
 
-    it('should not add base type class (base is default with no modifier)', () => {
+    it('should add base type class modifier', () => {
         testComponent.type.set('base');
         fixture.detectChanges();
         expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--base')).toBe(
-            false
+            true
         );
         expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message')).toBe(true);
     });
