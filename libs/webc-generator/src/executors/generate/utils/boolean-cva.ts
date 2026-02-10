@@ -80,7 +80,6 @@ export class BooleanControlValueAccessor implements ControlValueAccessor, AfterV
             element.addEventListener('change', (e: any) => {
                 if (this.onChange) {
                     // Read the checked state as boolean
-                    console.log('Change event detected, checked state:', e.target.checked, typeof e.target.checked);
                     const checked = e.target.checked ?? false;
                     this.onChange(checked);
                     // Manually trigger change detection for zoneless compatibility
