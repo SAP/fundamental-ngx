@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
+        subtle: '[[[Ŝűƃţĺē∙∙∙∙∙∙∙∙]]]'
     },
     coreMessageStrip: {
         dismissLabel: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]',
