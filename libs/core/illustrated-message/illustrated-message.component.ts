@@ -218,7 +218,7 @@ export class IllustratedMessageComponent implements HasElementRef {
         const classes: string[] = ['fd-illustrated-message'];
 
         const currentTypeValue = this.currentType();
-        if (currentTypeValue && currentTypeValue !== 'base') {
+        if (currentTypeValue) {
             classes.push(`fd-illustrated-message--${currentTypeValue}`);
         }
 

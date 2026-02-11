@@ -3,26 +3,15 @@
 // TO BE REMOVED WHEN LATEST FD STULES VERSION IS ADOPTED
 .fd-illustrated-message {
     --illustratedMessagePadding: 1rem;
-    --illustratedMessageMaxWidth: auto;
-    --actionsMarginInline: 0;
-    --actionsMarginBlock: 1rem;
-    --actionsPaddingInlineStart: 0;
-    --actionsPaddingInlineEnd: 0;
-    --illustrationMinWidth: 15rem;
+    --actionsMarginBlockStart: 0.5rem;
     --illustrationMaxWidth: 20rem;
-    --illustrationMinHeight: 11.25rem;
     --illustrationMaxHeight: 15rem;
-    --illustrationMarginBlock: 2rem;
-    --illustrationMarginInlineStart: 0;
-    --illustrationMarginInlineEnd: 0;
+    --illustrationMarginBlock: 1rem;
     --illustrationDisplay: flex;
-    --containerFlexDirection: column;
-    --figcaptionMaxWidth: 61.9375rem;
-    --titleMinWidth: auto;
+    --figcaptionMaxWidth: 20rem;
+    --titleFontSize: 2rem;
     --titleMarginBottom: 1rem;
-    --titleFontSize: var(--sapFontHeader2Size);
-    --textMinWidth: auto;
-    --textMarginBottom: 0.5rem;
+    --textFontSize: var(--sapFontLargeSize);
     font-size: var(--sapFontSize);
     line-height: normal;
     color: var(--sapTextColor);
@@ -48,7 +37,6 @@
     align-items: center;
     width: 100%;
     text-align: center;
-    max-width: var(--illustratedMessageMaxWidth);
     padding-block: var(--illustratedMessagePadding);
     padding-inline: var(--illustratedMessagePadding);
 }
@@ -113,11 +101,10 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row;
+    flex-direction: column;
     -webkit-box-align: var(--containerFlexAlignment, center);
     -ms-flex-align: var(--containerFlexAlignment, center);
     align-items: var(--containerFlexAlignment, center);
-    -ms-flex-direction: var(--containerFlexDirection);
-    flex-direction: var(--containerFlexDirection);
 }
 .fd-illustrated-message__container::before,
 .fd-illustrated-message__container::after {
@@ -139,15 +126,13 @@
     margin-inline: 0;
     margin-block: 0;
     border: 0;
-    width: auto;
-    height: auto;
     display: var(--illustrationDisplay);
-    min-width: var(--illustrationMinWidth);
-    min-height: var(--illustrationMinHeight);
+    width: var(--illustrationMaxWidth);
+    height: var(--illustrationMaxHeight);
     max-width: var(--illustrationMaxWidth);
     max-height: var(--illustrationMaxHeight);
-    margin-block: var(--illustrationMarginBlock);
-    margin-inline: var(--illustrationMarginInlineStart) var(--illustrationMarginInlineEnd);
+    -webkit-margin-after: var(--illustrationMarginBlock);
+    margin-block-end: var(--illustrationMarginBlock);
 }
 .fd-illustrated-message__illustration::before,
 .fd-illustrated-message__illustration::after {
@@ -206,7 +191,7 @@
     text-align: center;
     font-size: var(--titleFontSize);
     color: var(--sapGroup_TitleTextColor);
-    font-family: var(--sapFontHeaderFamily);
+    font-family: var(--sapFontBoldFamily);
     -webkit-margin-after: var(--titleMarginBottom);
     margin-block-end: var(--titleMarginBottom);
 }
@@ -232,9 +217,7 @@
     border: 0;
     text-wrap: wrap;
     text-align: center;
-    line-height: 1.5;
-    -webkit-margin-after: var(--textMarginBottom);
-    margin-block-end: var(--textMarginBottom);
+    font-size: var(--textFontSize);
 }
 .fd-illustrated-message__text::before,
 .fd-illustrated-message__text::after {
@@ -266,9 +249,8 @@
     -ms-flex-align: center;
     align-items: center;
     gap: 0.5rem;
-    margin-block: var(--actionsMarginBlock);
-    margin-inline: var(--actionsMarginInline);
-    padding-inline: var(--actionsPaddingInlineStart) var(--actionsPaddingInlineEnd);
+    -webkit-margin-before: var(--actionsMarginBlockStart);
+    margin-block-start: var(--actionsMarginBlockStart);
 }
 .fd-illustrated-message__actions::before,
 .fd-illustrated-message__actions::after {
@@ -278,112 +260,94 @@
 }
 .fd-illustrated-message--dialog,
 .fd-illustrated-message--medium {
-    --illustrationMinWidth: 10rem;
-    --illustrationMinHeight: 10rem;
     --illustrationMaxWidth: 10rem;
     --illustrationMaxHeight: 10rem;
-    --illustrationMarginBlock: 1rem;
+    --illustrationMarginBlock: 0.5rem;
+    --titleFontSize: 1.5rem;
     --titleMarginBottom: 0.5rem;
-    --titleFontSize: var(--sapFontHeader3Size);
-    --figcaptionMaxWidth: 40.5625rem;
-    --actionsMarginBlock: 0.5rem 1rem;
+    --textFontSize: var(--sapFontSize);
+    --figcaptionMaxWidth: 19.938rem;
+    --actionsMarginBlockStart: 0.5rem;
 }
 .fd-illustrated-message--spot,
 .fd-illustrated-message--small {
     --illustratedMessagePadding: 0.5rem;
-    --illustrationMinWidth: 8rem;
-    --illustrationMinHeight: 8rem;
     --illustrationMaxWidth: 8rem;
     --illustrationMaxHeight: 8rem;
-    --illustrationMarginBlock: 0 0.5rem;
+    --illustrationMarginBlock: 0.5rem;
     --titleMarginBottom: 0.5rem;
-    --titleFontSize: var(--sapFontHeader4Size);
-    --figcaptionMaxWidth: 21.5rem;
-    --actionsMarginBlock: 0.5rem;
+    --titleFontSize: 1.25rem;
+    --textFontSize: var(--sapFontSize);
+    --figcaptionMaxWidth: 10.938rem;
+    --actionsMarginBlockStart: 0.5rem;
 }
 .fd-illustrated-message--dot,
 .fd-illustrated-message--xsmall {
     --illustratedMessagePadding: 0.25rem;
-    --illustrationMinWidth: 2.8125rem;
     --illustrationMaxWidth: 2.8125rem;
-    --illustrationMinHeight: 2.8125rem;
     --illustrationMaxHeight: 2.8125rem;
-    --illustrationMarginBlock: 0 0.25rem;
-    --illustrationMarginInlineEnd: 0;
-    --figcaptionMaxWidth: 12.6875rem;
+    --illustrationMarginBlock: 0.25rem;
+    --figcaptionMaxWidth: 8.438rem;
     --titleMarginBottom: 0.25rem;
-    --titleFontSize: var(--sapFontHeader5Size);
-    --textMarginBottom: 0.313rem;
-    --actionsMarginBlock: 0.25rem;
-    --actionsMarginInline: auto;
+    --titleFontSize: 1rem;
+    --textFontSize: var(--sapFontSize);
+    --actionsMarginBlockStart: 0.25rem;
 }
 .fd-illustrated-message--base {
     --illustratedMessagePadding: 0.25rem;
-    --illustratedMessageMaxWidth: auto;
     --illustrationDisplay: none;
-    --figcaptionMaxWidth: 12.6875rem;
+    --figcaptionMaxWidth: 8.375rem;
     --titleMarginBottom: 0.25rem;
-    --titleFontSize: var(--sapFontHeader5Size);
-    --textMarginBottom: 0.313rem;
-    --actionsMarginBlock: 0.25rem;
-    --actionsMarginInline: auto;
-    --actionsPaddingInlineStart: 0;
+    --titleFontSize: 1rem;
+    --textFontSize: var(--sapFontSize);
+    --actionsMarginBlockStart: 0.25rem;
 }
-@container (width <= 681px) {
+@container (width < 22rem) {
     .fd-illustrated-message {
-        --illustrationMinWidth: 10rem;
-        --illustrationMinHeight: 10rem;
         --illustrationMaxWidth: 10rem;
         --illustrationMaxHeight: 10rem;
-        --illustrationMarginBlock: 1rem;
+        --illustrationMarginBlock: 0.5rem;
+        --titleFontSize: 1.5rem;
         --titleMarginBottom: 0.5rem;
-        --titleFontSize: var(--sapFontHeader3Size);
-        --figcaptionMaxWidth: 40.5625rem;
-        --actionsMarginBlock: 0.5rem 1rem;
+        --textFontSize: var(--sapFontSize);
+        --figcaptionMaxWidth: 19.938rem;
+        --actionsMarginBlockStart: 0.5rem;
     }
 }
-@container (width <= 360px) {
+@container (width < 21.938rem) {
     .fd-illustrated-message {
         --illustratedMessagePadding: 0.5rem;
-        --illustrationMinWidth: 8rem;
-        --illustrationMinHeight: 8rem;
         --illustrationMaxWidth: 8rem;
         --illustrationMaxHeight: 8rem;
-        --illustrationMarginBlock: 0 0.5rem;
+        --illustrationMarginBlock: 0.5rem;
         --titleMarginBottom: 0.5rem;
-        --titleFontSize: var(--sapFontHeader4Size);
-        --figcaptionMaxWidth: 21.5rem;
-        --actionsMarginBlock: 0.5rem;
+        --titleFontSize: 1.25rem;
+        --textFontSize: var(--sapFontSize);
+        --figcaptionMaxWidth: 10.938rem;
+        --actionsMarginBlockStart: 0.5rem;
     }
 }
-@container (width <= 260px) {
+@container (width < 11.938rem) {
     .fd-illustrated-message {
         --illustratedMessagePadding: 0.25rem;
-        --illustrationMinWidth: 2.8125rem;
         --illustrationMaxWidth: 2.8125rem;
-        --illustrationMinHeight: 2.8125rem;
         --illustrationMaxHeight: 2.8125rem;
-        --illustrationMarginBlock: 0 0.25rem;
-        --illustrationMarginInlineEnd: 0;
-        --figcaptionMaxWidth: 12.6875rem;
+        --illustrationMarginBlock: 0.25rem;
+        --figcaptionMaxWidth: 8.438rem;
         --titleMarginBottom: 0.25rem;
-        --titleFontSize: var(--sapFontHeader5Size);
-        --textMarginBottom: 0.313rem;
-        --actionsMarginBlock: 0.25rem;
-        --actionsMarginInline: auto;
+        --titleFontSize: 1rem;
+        --textFontSize: var(--sapFontSize);
+        --actionsMarginBlockStart: 0.25rem;
     }
 }
-@container (width <= 160px) {
+@container (width < 8.938rem) {
     .fd-illustrated-message {
         --illustratedMessagePadding: 0.25rem;
-        --illustratedMessageMaxWidth: auto;
         --illustrationDisplay: none;
-        --figcaptionMaxWidth: 12.6875rem;
+        --figcaptionMaxWidth: 8.375rem;
         --titleMarginBottom: 0.25rem;
-        --titleFontSize: var(--sapFontHeader5Size);
-        --textMarginBottom: 0.313rem;
-        --actionsMarginBlock: 0.25rem;
-        --actionsMarginInline: auto;
-        --actionsPaddingInlineStart: 0;
+        --titleFontSize: 1rem;
+        --textFontSize: var(--sapFontSize);
+        --actionsMarginBlockStart: 0.25rem;
     }
 }
