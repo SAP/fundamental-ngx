@@ -21,14 +21,13 @@
 <div class="base-row">
     <fd-rating-indicator
         ariaLabel="Rating indicator"
-        [totalRatings]="2"
         size="xs"
         name="ngmodel-rating"
         [(ngModel)]="modelValue"
         (ngModelChange)="onRatingChanged($event)"
         #rateWithModel
     ></fd-rating-indicator>
-    <span>View rate: {{ rateWithModel.viewValue }}</span>
+    <span>View rate: {{ rateWithModel.displayValue() }}</span>
     <div>
         <input type="number" min="0" max="10" step="0.1" name="example-rating2" [(ngModel)]="modelValue" />
     </div>
@@ -43,7 +42,7 @@
         #rate3
     ></fd-rating-indicator>
     Initial Rate: 0.51<br />
-    View rate: {{ rate3.viewValue }}
+    View rate: {{ rate3.displayValue() }}
 </div>
 <div class="base-row">
     <fd-rating-indicator
@@ -54,7 +53,7 @@
         #rate4
     ></fd-rating-indicator>
     Initial Rate: 2.51<br />
-    View rate: {{ rate4.viewValue }}
+    View rate: {{ rate4.displayValue() }}
 </div>
 <div class="base-row">
     <fd-rating-indicator
@@ -64,12 +63,12 @@
         [value]="4.99"
         #rate5
     ></fd-rating-indicator>
-    <span>Initial Rate: 4.99 View rate: {{ rate5.viewValue }}</span>
+    <span>Initial Rate: 4.99 View rate: {{ rate5.displayValue() }}</span>
 </div>
 <div class="base-row">
     <fd-rating-indicator ariaLabel="Rating indicator" [totalRatings]="2" size="xs" [value]="1231312312312313.99" #rate6>
     </fd-rating-indicator>
-    <span>Initial Rate: 1231312312312313.99 (Wrong value) View rate: {{ rate6.viewValue }}</span>
+    <span>Initial Rate: 1231312312312313.99 (Wrong value) View rate: {{ rate6.displayValue() }}</span>
 </div>
 <div class="base-row">
     <p><strong>Disabled Rating indicator</strong></p>

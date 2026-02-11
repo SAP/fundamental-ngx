@@ -527,4 +527,8 @@ export type FdLanguageKeyIdentifier =
     | 'segmentedButton.groupRoleDescription'
     | 'segmentedButton.buttonRoleDescription'
     | 'coreObjectIdentifier.srOnlyAriaLabel'
-    | 'coreInfoLabel.srOnlyText';
+    | 'coreInfoLabel.srOnlyText'
+    | 'coreRatingIndicator.ariaLabelReset'
+    | 'coreRatingIndicator.ariaRoleDescription'
+    | 'coreRatingIndicator.ariaLabelTotalRating'
+    | 'coreRatingIndicator.ariaLabelValue';

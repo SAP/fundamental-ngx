@@ -5,10 +5,11 @@
             <fd-rating-indicator
                 ariaLabel="Rating indicator"
                 [size]="size"
-                [totalRatings]="111"
+                [totalRatings]="size === 'xs' || size === 'sm' ? 111 : null"
+                [showDynamicText]="size === 'xs' || size === 'sm' ? true : false"
                 #sampleSize
             ></fd-rating-indicator>
-            <span>Selected Rate: {{ sampleSize.viewValue }}</span>
+            <span>Selected Rate: {{ sampleSize.displayValue() }}</span>
         </div>
         <div class="base-row">
             <strong>And same size = {{ size || 'default' }} with halves</strong>
@@ -16,10 +17,9 @@
                 ariaLabel="Rating indicator"
                 [size]="size"
                 [allowHalves]="true"
-                [totalRatings]="555"
                 #sizeWithHalves
             ></fd-rating-indicator>
-            <span>Selected Rate: {{ sizeWithHalves.viewValue }}</span>
+            <span>Selected Rate: {{ sizeWithHalves.displayValue() }}</span>
         </div>
     </div>
 }
