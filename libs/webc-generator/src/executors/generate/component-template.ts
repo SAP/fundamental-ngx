@@ -23,33 +23,81 @@ function isReadonlyField(member: CEM.ClassMember): member is CEM.ClassField {
     return member.kind === 'field' && member.privacy === 'public' && member.readonly === true;
 }
 
-/** Checks if the component should host the CVA directive. */
-function hasCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
+/** Gets CVA configuration based on the component's form property metadata */
+function getCvaConfig(data: CEM.CustomElementDeclaration): {
+    hostDirective: string;
+    import: string;
+    provider: string;
+} | null {
+    const formMember = getFormMember(data);
+
+    if (!formMember) {
+        return null;
+    }
+
+    const propertyName = formMember.name; // e.g., 'value', 'checked', 'selected'
+    const events = getFormMemberEvents(formMember);
+
+    const typeText = formMember.type?.text || 'string';
+    const isBoolean = typeText.includes('boolean');
+    // Radio buttons are special because they have both 'checked' and 'value' properties and we are interested in syncing the 'value' property while listening to 'change' events on the 'checked' state.
+    const isRadioButton = data.name === 'RadioButton';
+
+    // Build transformer based on type (not used for radio buttons)
+    const transformer = isBoolean
+        ? '(v) => !!v' // Boolean coercion
+        : typeText.includes('[]')
+          ? '(v) => v || []' // Array default
+          : "(v) => v || ''"; // String default
+
+    // Build the provider configuration
+    let providerConfig = `    {
+      provide: CVA_CONFIG,
+      useValue: {
+        property: '${propertyName}',
+        events: [${events}]`;
+
+    if (isRadioButton) {
+        providerConfig += `,\n        isRadioButton: true`;
+    } else {
+        providerConfig += `,\n        transformValue: ${transformer}`;
+    }
+
+    providerConfig += `
+      }
+    }`;
+
+    return {
+        hostDirective: 'GenericControlValueAccessor',
+        import: `import { GenericControlValueAccessor, CVA_CONFIG } from '@fundamental-ngx/ui5-webcomponents/utils';`,
+        provider: providerConfig
+    };
+}
+
+function getFormMember(data: CEM.CustomElementDeclaration): CEM.ClassField | undefined {
+    return data.members?.find(isFormField);
+}
+
+/** Type guard to check if a member is a form field. */
+function isFormField(member: CEM.ClassMember): member is CEM.ClassField {
     return (
-        data.members?.some(
-            (member) =>
-                member.kind === 'field' &&
-                !member.static &&
-                member.privacy === 'public' &&
-                !member.readonly &&
-                (member as any)._ui5formProperty === true
-        ) ?? false
+        member.kind === 'field' &&
+        !member.static &&
+        member.privacy === 'public' &&
+        !member.readonly &&
+        (member as any)._ui5formProperty === true
     );
 }
 
-/** Checks if the component should host the Boolean CVA directive. */
-function hasBooleanCvaHostDirective(data: CEM.CustomElementDeclaration): boolean {
-    return (
-        data.members?.some(
-            (member) =>
-                member.kind === 'field' &&
-                !member.static &&
-                member.privacy === 'public' &&
-                !member.readonly &&
-                (member as any)._ui5formProperty === true &&
-                member.name === 'checked' // Specifically look for "checked" property which indicates need of boolean CVA
-        ) ?? false
-    );
+function getFormMemberEvents(formMember: CEM.ClassField | undefined): string {
+    if (!formMember) {
+        return '';
+    }
+
+    return (formMember._ui5formEvents || 'change')
+        .split(',')
+        .map((e: string) => `'${e.trim()}'`)
+        .join(', ');
 }
 
 function generateTypeImports(
@@ -313,24 +361,14 @@ export function componentTemplate(
     const typeExports = generateTypeExports(data, packageName);
     const { readonlyProperties, privateProperties } = generateProperties(data);
     const outputEvents = data.events || [];
-    const shouldHostBooleanCVA = hasBooleanCvaHostDirective(data);
-    const shouldHostCVA = hasCvaHostDirective(data);
 
-    // Add Boolean CVA or CVA hostDirective property only if needed
-    let cvaHostDirective = '';
-    if (shouldHostBooleanCVA) {
-        cvaHostDirective = `  hostDirectives: [BooleanControlValueAccessor],\n`;
-    } else if (shouldHostCVA) {
-        cvaHostDirective = `  hostDirectives: [GenericControlValueAccessor],\n`;
-    }
+    // Get CVA configuration based on component metadata
+    const cvaConfig = getCvaConfig(data);
 
-    // Add CVA import only if needed
-    let cvaImport = '';
-    if (shouldHostBooleanCVA) {
-        cvaImport = `import { BooleanControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`;
-    } else if (shouldHostCVA) {
-        cvaImport = `import { GenericControlValueAccessor } from '@fundamental-ngx/ui5-webcomponents/utils';`;
-    }
+    // Add hostDirective and provider if CVA is needed
+    const cvaHostDirective = cvaConfig ? `  hostDirectives: [${cvaConfig.hostDirective}],\n` : '';
+    const cvaProvider = cvaConfig ? `  providers: [\n${cvaConfig.provider}\n  ],\n` : '';
+    const cvaImport = cvaConfig ? cvaConfig.import : '';
 
     const inputMembers = (data.members ?? []).filter(isField);
 
@@ -454,8 +492,7 @@ ${componentImports.join('\n')}
   selector: '${tagName}, [${tagName}]',
   template: '<ng-content></ng-content>',
   exportAs: 'ui5${className}',
-${cvaHostDirective}
-  changeDetection: ChangeDetectionStrategy.OnPush,
+${cvaHostDirective}${cvaProvider}  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
 ${generateInputs(data, componentEnums, className)} // className is now passed

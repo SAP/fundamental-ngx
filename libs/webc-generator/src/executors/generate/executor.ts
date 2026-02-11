@@ -15,7 +15,6 @@ const FILES = {
     INDEX_TS: 'index.ts',
     NG_PACKAGE_JSON: 'ng-package.json',
     CVA_TS: 'cva.ts',
-    BOOLEAN_CVA_TS: 'boolean-cva.ts',
     THEMING_TEMPLATE: 'utils/theming-service-template.tpl'
 };
 
@@ -225,22 +224,11 @@ async function generateCvaFile(targetDir: string): Promise<void> {
 }
 
 /**
- * Generates the Boolean Control Value Accessor (Boolean CVA) utility file.
- */
-async function generateBooleanCvaFile(targetDir: string): Promise<void> {
-    const booleanCvaTemplatePath = path.resolve(__dirname, 'utils', FILES.BOOLEAN_CVA_TS);
-    const booleanCvaContent = await readFile(booleanCvaTemplatePath, 'utf-8');
-
-    const booleanCvaFilePath = path.join(targetDir, SUBDIRS.UTILS, FILES.BOOLEAN_CVA_TS);
-    await ensureDirAndWriteFile(booleanCvaFilePath, booleanCvaContent);
-}
-
-/**
  * Generates the utils secondary entry point files (index.ts and ng-package.json).
  */
 async function generateUtilsFiles(targetDir: string): Promise<void> {
     // Generate utils/index.ts that exports the CVA directives
-    const utilsContent = `export { BooleanControlValueAccessor } from './boolean-cva';\nexport { GenericControlValueAccessor } from './cva';\n`;
+    const utilsContent = `export { CVA_CONFIG, GenericControlValueAccessor } from './cva';\n`;
 
     const utilsIndexPath = path.join(targetDir, SUBDIRS.UTILS, FILES.INDEX_TS);
     await ensureDirAndWriteFile(utilsIndexPath, utilsContent);
@@ -299,7 +287,6 @@ const runExecutor: PromiseExecutor<GenerateExecutorSchema> = async (options, con
 
             // Generate CVA Utility and Utils secondary entry point
             await generateCvaFile(targetDir);
-            await generateBooleanCvaFile(targetDir);
             await generateUtilsFiles(targetDir);
 
             exportsContent += `export * from './utils';\n`;
