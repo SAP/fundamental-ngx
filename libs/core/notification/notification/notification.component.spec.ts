@@ -2,7 +2,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { NotificationService } from '../notification-service/notification.service';
 import { NotificationModule } from '../notification.module';
 import { NotificationComponent } from './notification.component';
@@ -16,7 +16,7 @@ import { NotificationComponent } from './notification.component';
         </ng-template>
     `,
     standalone: true,
-    imports: [NotificationModule, ButtonModule]
+    imports: [NotificationModule, ButtonComponent]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
@@ -31,7 +31,7 @@ describe('NotificationComponent', () => {
             imports: [
                 NotificationModule,
                 RouterTestingModule.withRoutes([]),
-                ButtonModule,
+                ButtonComponent,
                 TemplateTestComponent, // Add TemplateTestComponent to imports
                 NotificationComponent // Add NotificationComponent to imports
             ],

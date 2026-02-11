@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ControlValueAccessor, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
@@ -29,7 +29,7 @@ const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
         </fdp-input-group>
     `,
     standalone: true,
-    imports: [PlatformButtonModule, PlatformInputGroupModule]
+    imports: [ButtonComponent, PlatformInputGroupModule]
 })
 class InputGroupHostComponent {
     @ViewChild(InputGroupComponent) inputGroupComponent: InputGroupComponent;
@@ -120,7 +120,7 @@ describe('InputGroup component', () => {
         </fdp-form-group>
     `,
     standalone: true,
-    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule]
+    imports: [ReactiveFormsModule, FdpFormGroupModule, ButtonComponent, PlatformInputGroupModule]
 })
 class InputGroupFormTestWrapperComponent {
     @ViewChild(InputGroupComponent)
@@ -229,7 +229,7 @@ describe('InputGroup component CVA', () => {
         },
         hostTemplate: {
             hostComponent: InputGroupComponent,
-            getTestingComponent: (fixture) => fixture.componentInstance._cvaControl.cvaDirective!
+            getTestingComponent: (fixture) => fixture.componentInstance._cvaControl.cvaDirective as any
         },
         /** Whether component is able to track "onBlur" events separately */
         supportsOnBlur: false,

@@ -3,17 +3,12 @@ import {
     Component,
     computed,
     ElementRef,
-    HostListener,
+    inject,
     input,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder, HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
 
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -40,11 +35,14 @@ let buttonId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.type]': 'type',
-        '[attr.disabled]': 'disabled || null',
+        '[attr.type]': 'type()',
+        '[attr.disabled]': '_disabledState() || null',
+        '[attr.aria-disabled]': 'ariaDisabled() || null',
         '[attr.aria-label]': 'buttonArialabel()',
         '[attr.aria-description]': 'buttonAriaDescription()',
-        '[attr.id]': 'id()'
+        '[attr.id]': 'id()',
+        '[class]': 'cssClass()',
+        '(click)': 'clicked($event)'
     },
     providers: [
         contentDensityObserverProviders(),
@@ -55,25 +53,21 @@ let buttonId = 0;
     ],
     imports: [IconComponent]
 })
-export class ButtonComponent
-    extends BaseButton
-    implements OnChanges, CssClassBuilder, OnInit, OnDestroy, HasElementRef
-{
-    /** The property allows user to pass additional css classes. */
-    @Input()
-    class = '';
-
+export class ButtonComponent extends BaseButton implements HasElementRef {
     /** Button ID - default value is provided if not set  */
-    id = input(`fd-button-${++buttonId}`);
+    readonly id = input(`fd-button-${++buttonId}`);
 
     /** @hidden */
-    specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
+    readonly specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
+
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
 
     /**
      * Calculate aria-label attribute
      * @hidden
      */
-    buttonArialabel = computed(() => {
+    protected readonly buttonArialabel = computed(() => {
         if (this.ariaLabel()) {
             return this.ariaLabel(); // return the input aria-label
         }
@@ -83,8 +77,8 @@ export class ButtonComponent
             return attrAriaLabel; // return the attribute aria-label
         }
 
-        if (this.specialButtonType.includes(this.fdType)) {
-            return this.label ?? this.glyph?.replace(/-/g, ' ') ?? null;
+        if (this.specialButtonType.includes(this.fdTypeState())) {
+            return this.label() ?? this.glyph()?.replace(/-/g, ' ') ?? null;
         }
 
         return null;
@@ -94,72 +88,50 @@ export class ButtonComponent
      * Calculate aria-description attribute
      * @hidden
      */
-    buttonAriaDescription = computed(() => {
+    protected readonly buttonAriaDescription = computed(() => {
         if (this.ariaDescription()) {
             return this.ariaDescription();
         }
 
-        if (this.specialButtonType.includes(this.fdType)) {
-            return this.fdType;
+        if (this.specialButtonType.includes(this.fdTypeState())) {
+            return this.fdTypeState();
         }
 
         return null;
     });
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        _contentDensityObserver: ContentDensityObserver
-    ) {
-        super();
-        _contentDensityObserver.subscribe();
-    }
-
-    /** Forces the focus outline around the button, which is not default behavior in Safari. */
-    @HostListener('click', ['$event'])
-    clicked(event: Event): void {
-        const target = event?.target as HTMLElement;
-        // Target can be empty during unit tests execution.
-        if (target && document.activeElement !== target) {
-            target.focus();
-        }
-    }
+    protected readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
+    protected readonly cssClass = computed(() =>
+        [
             'fd-button',
-            this.fdType ? `fd-button--${this.fdType}` : '',
-            this.fdMenu ? 'fd-button--menu' : '',
-            this.disabled || this.ariaDisabled ? 'is-disabled' : '',
-            this.toggled ? `fd-button--toggled` : '',
-            this.class
-        ];
-    }
-
-    /** Function runs when component is initialized
-     * function should build component css class
-     * function should build css style
-     */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+            this.fdTypeState() ? `fd-button--${this.fdTypeState()}` : '',
+            this.fdMenu() ? 'fd-button--menu' : '',
+            this._disabledState() || this.ariaDisabled() ? 'is-disabled' : '',
+            this.toggledState() ? 'fd-button--toggled' : ''
+        ]
+            .filter(Boolean)
+            .join(' ')
+    );
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
+    constructor() {
+        super();
+        this.contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+    /** Forces the focus outline around the button, which is not default behavior in Safari. */
+    protected clicked(event: Event): void {
+        const target = event?.target as HTMLElement;
+        // Target can be empty during unit tests execution.
+        if (target && document.activeElement !== target) {
+            target.focus();
+        }
     }
 }

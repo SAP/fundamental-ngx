@@ -1,22 +1,15 @@
-import { Directive, Input, OnChanges, booleanAttribute } from '@angular/core';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import { ButtonType } from '@fundamental-ngx/core/button';
 import { ButtonTypeGuard } from './button-type-guard';
 
 @Directive({
-    selector: '[fd-button][fdbNestedButton]',
-    standalone: true
+    selector: '[fd-button][fdbNestedButton]'
 })
-export class NestedButtonDirective extends ButtonTypeGuard implements OnChanges {
-    /** Type of the button. In case of fdbNestedButton it is always a `nested` */
-    @Input()
-    fdType: 'nested' | 'nested-square' = 'nested' as const;
-
+export class NestedButtonDirective extends ButtonTypeGuard {
     /** Whether the button should have squared form */
-    @Input({ transform: booleanAttribute })
-    square = false;
+    readonly square = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.fdType = this.square ? 'nested-square' : 'nested';
-        super.ngOnChanges();
-    }
+    /** Type of the button. In case of fdbNestedButton it is always `nested` or `nested-square` based on square input */
+    readonly fdType = computed(() => (this.square() ? 'nested-square' : 'nested') as ButtonType);
 }

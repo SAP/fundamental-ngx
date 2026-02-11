@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ToolbarLabelDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
     TableDataSourceDirective,
@@ -23,7 +23,7 @@ import {
         TableInitialStateDirective,
         ToolbarLabelDirective,
         ToolbarSeparatorComponent,
-        PlatformButtonModule,
+        ButtonComponent,
         FdDatetimeModule
     ]
 })

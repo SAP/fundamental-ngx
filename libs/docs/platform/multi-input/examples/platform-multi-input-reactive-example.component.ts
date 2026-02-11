@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 
 import { JsonPipe } from '@angular/common';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
@@ -17,7 +17,7 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
         FdpFormGroupModule,
         ReactiveFormsModule,
         PlatformMultiInputModule,
-        PlatformButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         JsonPipe
     ]

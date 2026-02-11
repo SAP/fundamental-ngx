@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     DynamicFormValue,
@@ -29,7 +29,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    imports: [BarModule, PlatformButtonModule, JsonPipe, PlatformFormGeneratorModule]
+    imports: [BarModule, ButtonComponent, JsonPipe, PlatformFormGeneratorModule]
 })
 export class PlatformFormGeneratorAdvancedExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEnca
 import { Observable, of } from 'rxjs';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
     FdpCellDef,
@@ -36,7 +36,7 @@ export interface ExampleItem {
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        PlatformButtonModule,
+        ButtonComponent,
         FdpCellDef,
         FdpTableCell,
         FdDatetimeModule

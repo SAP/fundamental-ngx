@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -14,7 +14,7 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
         ReactiveFormsModule,
         CheckboxComponent,
         LinkComponent,
-        PlatformButtonModule,
+        ButtonComponent,
         JsonPipe
     ]
 })
