@@ -39,11 +39,6 @@ export class TimePickerFormatPatternsSample {
             value: '02:30 PM'
         },
         {
-            pattern: 'mm:ss',
-            description: 'Minutes and seconds only (42:35)',
-            value: '30:25'
-        },
-        {
             pattern: 'HH',
             description: 'Hours only (14)',
             value: '14'
