@@ -30,6 +30,14 @@ import { DynamicPageResponsiveSize } from '../../constants';
             <ng-content></ng-content>
         </ng-template>
     `,
+    // TO BE REMOVED WITH THE LATEST VERSION OF FUNDAMENTAL STYLES
+    styles: [
+        `
+            .fd-dynamic-page__title-content {
+                padding-inline: 1rem 0.2rem;
+            }
+        `
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],
