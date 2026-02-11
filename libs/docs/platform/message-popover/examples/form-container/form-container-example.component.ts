@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import {
     FDP_MESSAGE_POPOVER_CONFIG,
@@ -34,7 +34,7 @@ interface MaxLengthErrorModel {
         PlatformTextAreaModule,
         BarModule,
         MessagePopoverComponent,
-        PlatformButtonModule
+        ButtonComponent
     ],
     providers: [
         {

@@ -5,7 +5,7 @@ import { delay } from 'rxjs/operators';
 
 import { JsonPipe } from '@angular/common';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     DynamicFormValue,
@@ -28,7 +28,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
+    imports: [PlatformFormGeneratorModule, ButtonComponent, JsonPipe]
 })
 export class PlatformFormGeneratorObservableExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

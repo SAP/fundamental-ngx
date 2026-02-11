@@ -101,8 +101,8 @@ export class InputGroupAddonComponent implements AfterContentInit {
             return;
         }
 
-        button.fdType = 'transparent';
-        button.disabled = this._disabled;
+        button.setFdType('transparent');
+        button.setDisabled(this._disabled);
 
         button.markForCheck();
     }

@@ -20,7 +20,7 @@ import {
     getAssetFromModuleAssets,
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     PlatformTableModule,
     TableColumnFreezeEvent,
@@ -132,7 +132,7 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         PlatformTableModule,
         TableInitialStateDirective,
         ContentDensityDirective,
-        PlatformButtonModule,
+        ButtonComponent,
         FdDatetimeModule
     ]
 })

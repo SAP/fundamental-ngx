@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     CheckboxGroupComponent,
     FdpFormGroupModule,
@@ -28,7 +28,7 @@ import {
         PlatformStepInputModule,
         CheckboxGroupComponent,
         PlatformInputGroupModule,
-        PlatformButtonModule,
+        ButtonComponent,
         PlatformRadioGroupModule
     ]
 })

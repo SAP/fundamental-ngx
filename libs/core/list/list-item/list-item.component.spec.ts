@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListModule } from '../list.module';
 
 @Component({
@@ -14,7 +14,7 @@ import { ListModule } from '../list.module';
         </li>
     `,
     standalone: true,
-    imports: [ListModule, ButtonModule]
+    imports: [ListModule, ButtonComponent]
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
