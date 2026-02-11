@@ -15,8 +15,8 @@ import { MultiComboBoxSelectAllItemsExample } from './examples/select-all-items'
 import { MultiComboBoxTextWrappingExample } from './examples/text-wrapping-sample';
 import { MultiComboBoxValueStateExample } from './examples/value-state-sample';
 
-const basicSampleHtml = 'multi-combobox-sample.html';
-const basicSampleTs = 'multi-combobox-sample.ts';
+const basicSampleHtml = 'basic-sample.html';
+const basicSampleTs = 'basic-sample.ts';
 const valueStateSampleHtml = 'value-state-sample.html';
 const valueStateSampleTs = 'value-state-sample.ts';
 const disabledAndReadonlySampleHtml = 'disabled-and-readonly-sample.html';
