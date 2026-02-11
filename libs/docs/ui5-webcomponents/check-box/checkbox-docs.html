@@ -38,13 +38,15 @@
 </component-example>
 <code-example [exampleFiles]="wrappingCheckBoxSamples"></code-example>
 
-<fd-docs-section-title id="in-form" componentName="In Form">Group of Checkboxes in a Form </fd-docs-section-title>
+<fd-docs-section-title id="reactive-forms" componentName="Reactive Forms"
+    >Reactive Forms Integration</fd-docs-section-title
+>
 <description
-    >Checkboxes can be logically grouped using the same name attribute to create a multi-selection form field. When the
-    form is submitted, each checked item will send its individual value to the server, allowing backend processing to
-    identify exactly which options the user selected.</description
+    >CheckBox components can be integrated with Angular Reactive Forms. This example demonstrates a nested form
+    structure with an "Accept all" checkbox that uses indeterminate state to reflect partial selection of
+    sub-checkboxes. The form state automatically syncs between parent and child checkboxes.</description
 >
 <component-example>
-    <ui5-form-checkbox-sample></ui5-form-checkbox-sample>
+    <ui5-checkbox-reactive-forms-sample></ui5-checkbox-reactive-forms-sample>
 </component-example>
-<code-example [exampleFiles]="formCheckBoxSamples"></code-example>
+<code-example [exampleFiles]="reactiveFormsCheckBoxSamples"></code-example>

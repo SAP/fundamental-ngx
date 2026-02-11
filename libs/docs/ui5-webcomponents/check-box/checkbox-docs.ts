@@ -8,7 +8,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { BasicCheckBoxSample } from './examples/basic-sample';
-import { InFormCheckBoxSample } from './examples/in-form';
+import { ReactiveFormsSample } from './examples/reactive-forms-sample';
 import { StatesCheckBoxSample } from './examples/states';
 import { ValueStatesCheckBoxSample } from './examples/value-states';
 import { WrappingCheckBoxSample } from './examples/wrapping';
@@ -28,7 +28,7 @@ const basicSampleTs = 'basic-sample.ts';
         StatesCheckBoxSample,
         ValueStatesCheckBoxSample,
         WrappingCheckBoxSample,
-        InFormCheckBoxSample
+        ReactiveFormsSample
     ]
 })
 export class CheckBoxDocs {
@@ -88,17 +88,17 @@ export class CheckBoxDocs {
         }
     ];
 
-    formCheckBoxSamples: ExampleFile[] = [
+    reactiveFormsCheckBoxSamples: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets('in-form.html'),
-            originalFileName: 'in-form'
+            code: getAssetFromModuleAssets('reactive-forms-sample.html'),
+            originalFileName: 'reactive-forms-sample'
         },
         {
             language: 'typescript',
-            component: 'InFormCheckBoxSample',
-            code: getAssetFromModuleAssets('in-form.ts'),
-            originalFileName: 'in-form'
+            component: 'ReactiveFormsSample',
+            code: getAssetFromModuleAssets('reactive-forms-sample.ts'),
+            originalFileName: 'reactive-forms-sample'
         }
     ];
 }
