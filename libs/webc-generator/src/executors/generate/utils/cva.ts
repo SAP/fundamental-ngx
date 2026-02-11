@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * Configuration for the CVA behavior
  */
 export interface CvaConfig {
-    /** The property to bind to (e.g., 'value', 'checked', 'selected') */
+    /** The property to bind to (e.g., 'value', 'checked') */
     property: string;
     /** The event(s) to listen to (e.g., 'change', 'input', or 'change,input') */
     events: string[];
