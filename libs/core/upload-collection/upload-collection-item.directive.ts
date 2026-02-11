@@ -181,8 +181,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     private _handleFormItemInputChangedSubscription(): void {
         this._subscriptions.add(
             this._formItemComponent.fileNameChanged.subscribe((event) => {
-                this._buttonGroupComponent._okButton.disabled = event === '';
-                this._buttonGroupComponent._okButton.buildComponentCssClass();
+                this._buttonGroupComponent._okButton.setDisabled(event === '');
             })
         );
     }

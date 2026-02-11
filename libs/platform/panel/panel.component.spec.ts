@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PanelActionsComponent } from './panel-actions.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
 import { PanelComponent, PanelExpandChangeEvent } from './panel.component';
@@ -73,7 +73,7 @@ describe('PanelComponent default values', () => {
         <fdp-panel-content [contentHeight]="contentHeight">Panel Content Text</fdp-panel-content>
     </fdp-panel>`,
     standalone: true,
-    imports: [PlatformPanelModule, PlatformButtonModule]
+    imports: [PlatformPanelModule, ButtonComponent]
 })
 class SimplePanelComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
@@ -199,7 +199,7 @@ describe('Simple PanelComponent', () => {
         toggleButton.click();
         fixture.detectChanges();
         expect(onExpandChangeSpy).toHaveBeenCalledTimes(2); // Use toHaveBeenCalledTimes
-        expect(changeEvent!.payload).toBe(true);
+        expect((changeEvent as PanelExpandChangeEvent).payload).toBe(true);
 
         expect(changeEvent instanceof PanelExpandChangeEvent).toBe(true);
     });

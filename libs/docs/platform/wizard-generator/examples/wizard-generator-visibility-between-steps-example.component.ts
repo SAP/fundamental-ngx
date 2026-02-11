@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormGroup, DynamicFormValue, FormGeneratorService } from '@fundamental-ngx/platform/form';
 import {
     WizardDialogGeneratorService,
@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'fdp-wizard-generator-visibility-between-steps-example',
     templateUrl: './wizard-generator-visibility-between-steps-example.component.html',
-    imports: [PlatformButtonModule, JsonPipe],
+    imports: [ButtonComponent, JsonPipe],
     providers: [WizardDialogGeneratorService, FormGeneratorService]
 })
 export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements OnDestroy {

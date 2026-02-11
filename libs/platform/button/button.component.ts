@@ -1,11 +1,13 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { Component, booleanAttribute, computed, effect, input, output } from '@angular/core';
 
-import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { ModuleDeprecation, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
-import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ButtonModel } from './button.model';
 import { FDP_BUTTON } from './tokens';
+
+let platformButtonId = 0;
 
 /**
  * @deprecated
@@ -23,147 +25,168 @@ import { FDP_BUTTON } from './tokens';
     ],
     imports: [CoreButtonComponent],
     host: {
-        role: 'button'
+        role: 'button',
+        '[attr.tabindex]': '-1'
     }
 })
-export class ButtonComponent extends BaseComponent implements ButtonModel {
+export class ButtonComponent implements ButtonModel {
+    /** Button ID - default value is provided if not set */
+    readonly id = input(`fdp-button-${++platformButtonId}`);
+
+    /** Name for the element */
+    readonly name = input<string>();
+
+    /** Width of the element */
+    readonly width = input<string>();
+
+    /** Disabled status of the element */
+    readonly disabled = input(false, { transform: booleanAttribute });
+
+    /** Sets the `aria-label` attribute to the element */
+    readonly ariaLabel = input<string>();
+
+    /** Sets the `aria-labelledby` attribute to the element */
+    readonly ariaLabelledBy = input<string>();
+
+    /** Sets the `aria-describedby` attribute to the element */
+    readonly ariaDescribedBy = input<string>();
+
     /** Position of glyph related to text */
-    @Input()
-    glyphPosition: GlyphPosition = 'before';
+    readonly glyphPosition = input<GlyphPosition>('before');
 
-    /**
-     * Text rendered inside button component
-     */
-    @Input()
-    label: string;
+    /** Text rendered inside button component */
+    readonly label = input<string>();
 
-    /** The icon to include in the button. See the icon page for the list of icons.
-     * Setter is used to control when css class have to be rebuilded.
-     * Default value is set to ''.
-     */
-    @Input()
-    glyph: string;
+    /** The icon to include in the button. See the icon page for the list of icons */
+    readonly glyph = input<string>();
 
     /** Glyph font family */
-    @Input()
-    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
+
+    /** The type of the button. Types include:
+     * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
+     * Leave empty for default (Standard button).
+     * Default value is set to 'standard'
+     */
+    readonly fdType = input<ButtonType>('standard');
 
     /**
      * @deprecated
      * Use `fdType` property.
      * The buttonType of the button. Types includes
-     'standard','positive', 'negative', 'attention', 'ghost',
-     'transparent', 'emphasized','menu'.
-     *Leave empty for default (standard button).'*/
-    @Input()
-    set buttonType(value: ButtonType) {
-        this.fdType = value;
-    }
-
-    get buttonType(): ButtonType {
-        return this.fdType;
-    }
-
-    /** The type of the button. Types include:
-     * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
-     * Leave empty for default (Standard button).'
-     * Default value is set to 'standard'
+     * 'standard','positive', 'negative', 'attention', 'ghost',
+     * 'transparent', 'emphasized','menu'.
+     * Leave empty for default (standard button).
      */
-    @Input()
-    fdType: ButtonType = 'standard';
+    readonly buttonType = input<ButtonType>();
 
-    /** Whether button is in toggled state. */
-    @Input()
-    toggled: Nullable<boolean>;
+    /** Whether button is in toggled state */
+    readonly toggled = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
     /** arialabel, tooltip for button, intended to be used when the button only contains an icon */
-    @Input()
-    title: Nullable<string>;
+    readonly title = input<string>();
 
     /** @deprecated use toggled input property instead
-     * aria-selected for acccesiblity to the native HTML button
+     * aria-selected for accessibility to the native HTML button
      */
-    @Input()
-    set ariaSelected(value: Nullable<boolean>) {
-        warnOnce('Property ariaSelected is deprecated. Use `toggled` input property instead.');
-        this._ariaSelected = value;
-    }
+    readonly ariaSelected = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
-    get ariaSelected(): Nullable<boolean> {
-        return this._ariaSelected;
-    }
+    /** aria-disabled for accessibility to the native HTML button */
+    readonly ariaDisabled = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
-    /** aria-disabled for acccesiblity to
-     *  the native HTML button*/
-    @Input()
-    ariaDisabled: Nullable<boolean>;
+    /** propagate aria-expanded for accessibility to the native HTML button */
+    readonly ariaExpanded = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
-    /**
-     * propagate aria-expanded for accessiblity to
-     * the native HTML button
-     */
-    @Input()
-    ariaExpanded: Nullable<boolean>;
-
-    /**
-     * propagate aria-controls for accessiblity to
-     * the native HTML button
-     */
-    @Input()
-    ariaControlsId: Nullable<string>;
+    /** propagate aria-controls for accessibility to the native HTML button */
+    readonly ariaControlsId = input<string>();
 
     /** @deprecated use toggled input property instead
-     * propagate aria-pressed for accessiblity to the native HTML button
+     * propagate aria-pressed for accessibility to the native HTML button
      */
-    @Input()
-    set ariaPressed(value: Nullable<boolean>) {
-        warnOnce('Property ariaPressed is deprecated. Use `toggled` input property instead.');
-        this._ariaPressed = value;
-    }
+    readonly ariaPressed = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
-    get ariaPressed(): Nullable<boolean> {
-        return this._ariaPressed;
-    }
+    /** Specifies the type to the native HTML button */
+    readonly type = input<string>();
 
-    /** Specifies the type to
-     *  the native HTML button */
-    @Input()
-    type: Nullable<string>;
-
-    /** Specifies an initial value to
-     *  the native HTML button */
-    @Input()
-    value: Nullable<string>;
+    /** Specifies an initial value to the native HTML button */
+    readonly value = input<string>();
 
     /** Event sent when button is clicked */
-    @Output()
-    buttonClicked: EventEmitter<any> = new EventEmitter();
+    readonly buttonClicked = output<any>();
 
-    /**
-     * Take host element out of tab order, so that child button can
-     * be properly focused on.
-     */
-    @HostBinding('attr.tabindex')
-    tabIndex = '-1';
+    /** @hidden Computed to determine effective fdType (buttonType overrides fdType if provided) */
+    protected readonly _effectiveFdType = computed(() => this.buttonType() || this.fdType());
 
-    /** @hidden */
-    private _ariaSelected: Nullable<boolean>;
-
-    /** @hidden */
-    private _ariaPressed: Nullable<boolean>;
+    /** @hidden Computed to determine effective toggled state */
+    protected readonly _effectiveToggled = computed(() => this.toggled() || this.ariaPressed() || this.ariaSelected());
 
     /** @hidden */
     constructor() {
-        super();
         warnOnce(
             "Platform's ButtonComponent is deprecated and will be removed in the next major release. Consider using Core's ButtonComponent instead."
         );
+
+        // Warn about deprecated inputs
+        effect(() => {
+            if (this.ariaSelected()) {
+                warnOnce('Property ariaSelected is deprecated. Use `toggled` input property instead.');
+            }
+        });
+
+        effect(() => {
+            if (this.ariaPressed()) {
+                warnOnce('Property ariaPressed is deprecated. Use `toggled` input property instead.');
+            }
+        });
     }
 
     /**
-     *  Handles button click
+     * Programmatically set the disabled state.
+     * Implements ButtonModel interface.
+     * Note: Cannot directly set signal inputs. This method exists for interface compatibility.
      */
-    public onBtnClick($event: any): void {
+    setDisabled(_value: boolean): void {
+        console.warn('setDisabled() cannot modify signal input. Use template binding [disabled]="value" instead.');
+    }
+
+    /**
+     * Get the current disabled state.
+     * Implements ButtonModel interface.
+     */
+    isDisabled(): boolean {
+        return this.disabled();
+    }
+
+    /**
+     * Programmatically set the button type.
+     * Implements ButtonModel interface.
+     * Note: Cannot directly set signal inputs. This method exists for interface compatibility.
+     */
+    setFdType(_value: ButtonType): void {
+        console.warn('setFdType() cannot modify signal input. Use template binding [fdType]="value" instead.');
+    }
+
+    /**
+     * Get the current button type.
+     * Implements ButtonModel interface.
+     */
+    getFdType(): ButtonType {
+        return this._effectiveFdType();
+    }
+
+    /**
+     * No-op method for interface compatibility.
+     * Implements ButtonModel interface.
+     * Signal-based components don't need manual change detection.
+     */
+    markForCheck(): void {
+        // No-op: signals automatically trigger change detection
+    }
+
+    /**
+     * Handles button click
+     */
+    protected onBtnClick($event: any): void {
         this.buttonClicked.emit($event);
     }
 }

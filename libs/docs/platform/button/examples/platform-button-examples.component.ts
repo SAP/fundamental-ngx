@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-button-types-example',
     templateUrl: './platform-button-types-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
-    imports: [PlatformButtonModule]
+    imports: [ButtonComponent]
 })
 export class PlatformButtonTypesExampleComponent {}
 
@@ -13,7 +13,7 @@ export class PlatformButtonTypesExampleComponent {}
     selector: 'fdp-button-icons-example',
     templateUrl: './platform-button-icons-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
-    imports: [PlatformButtonModule]
+    imports: [ButtonComponent]
 })
 export class PlatformButtonIconsExampleComponent {}
 
@@ -21,6 +21,6 @@ export class PlatformButtonIconsExampleComponent {}
     selector: 'fdp-button-truncate-example',
     templateUrl: './platform-button-truncate-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
-    imports: [PlatformButtonModule]
+    imports: [ButtonComponent]
 })
 export class PlatformButtonTruncateExampleComponent {}

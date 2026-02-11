@@ -6,6 +6,7 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { GenericTagComponent } from '@fundamental-ngx/core/generic-tag';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -42,6 +43,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ToolbarSeparatorComponent,
         CdkScrollable,
         IconComponent,
+        GenericTagComponent,
         InlineHelpModule,
         BarModule,
         MessageToastModule

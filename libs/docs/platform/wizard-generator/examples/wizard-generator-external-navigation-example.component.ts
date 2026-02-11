@@ -5,7 +5,7 @@ import { JsonPipe } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     PlatformWizardGeneratorModule,
     WizardGeneratorComponent,
@@ -17,7 +17,7 @@ import {
     selector: 'fdp-wizard-generator-external-navigation-example',
     templateUrl: './wizard-generator-external-navigation-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [PlatformWizardGeneratorModule, BarModule, PlatformButtonModule, ContentDensityDirective, JsonPipe]
+    imports: [PlatformWizardGeneratorModule, BarModule, ButtonComponent, ContentDensityDirective, JsonPipe]
 })
 export class WizardGeneratorExternalNavigationExampleComponent {
     @ViewChild(WizardGeneratorComponent)

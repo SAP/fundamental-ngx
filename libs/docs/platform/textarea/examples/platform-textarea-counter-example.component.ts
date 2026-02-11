@@ -1,21 +1,14 @@
 import { JsonPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-textarea-counter-example',
     templateUrl: './platform-textarea-counter-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        FdpFormGroupModule,
-        FormsModule,
-        ReactiveFormsModule,
-        PlatformTextAreaModule,
-        PlatformButtonModule,
-        JsonPipe
-    ]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule, ButtonComponent, JsonPipe]
 })
 export class PlatformTextareaCounterExampleComponent implements AfterViewInit {
     form: FormGroup;

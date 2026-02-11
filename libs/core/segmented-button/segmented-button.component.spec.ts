@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
@@ -16,7 +16,7 @@ import { SegmentedButtonModule } from './segmented-button.module';
         </fd-segmented-button>
     `,
     standalone: true,
-    imports: [ButtonModule, SegmentedButtonModule]
+    imports: [ButtonComponent, SegmentedButtonModule]
 })
 export class HostComponent {
     @ViewChild('first', { read: ElementRef }) firstButton: ElementRef;
@@ -87,7 +87,7 @@ describe('SegmentedButtonComponent', () => {
         component.segmentedButton.writeValue('first');
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('true');
-        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBe('false');
+        expect(component.secondButton.elementRef.nativeElement.getAttribute('aria-selected')).toBeNull();
     });
 
     // Toggle Example
@@ -110,7 +110,7 @@ describe('SegmentedButtonComponent', () => {
         // Deselect
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBe('false');
+        expect(component.firstButton.nativeElement.getAttribute('aria-selected')).toBeNull();
     });
 
     // Form Example
@@ -170,7 +170,7 @@ describe('Segmented button component CVA', () => {
             });
         },
         testModuleMetadata: {
-            imports: [SegmentedButtonModule, ButtonModule, HostComponent],
+            imports: [SegmentedButtonModule, ButtonComponent, HostComponent],
             providers: [RtlService]
         },
         hostTemplate: {

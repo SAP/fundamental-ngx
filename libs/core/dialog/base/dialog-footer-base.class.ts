@@ -11,7 +11,6 @@ import { startWith } from 'rxjs/operators';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent, FD_BUTTON_BAR_COMPONENT } from '@fundamental-ngx/core/bar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Directive()
 export abstract class DialogFooterBase implements AfterContentInit {
@@ -39,18 +38,21 @@ export abstract class DialogFooterBase implements AfterContentInit {
 
     /** @hidden */
     protected _listenForButtonChanges(className: string): void {
-        const addClassToButton = (button: ButtonComponent): void => {
-            if (button && !button.class.includes(className)) {
-                button.class = button.class + className;
-                button.buildComponentCssClass();
+        const addClassToButton = (buttonBar: ButtonBarComponent): void => {
+            const button = buttonBar.buttonComponent();
+            if (button) {
+                const buttonElement = button.elementRef.nativeElement;
+                if (!buttonElement.classList.contains(className)) {
+                    buttonElement.classList.add(className);
+                }
             }
         };
 
-        this.buttons.changes.pipe(startWith(1)).subscribe(() =>
-            this.buttons.forEach((button) => {
-                addClassToButton(button._buttonComponent);
-            })
-        );
+        this.buttons.changes.pipe(startWith(1)).subscribe(() => {
+            this.buttons.forEach((buttonBar) => {
+                addClassToButton(buttonBar);
+            });
+        });
     }
 
     /** @hidden Assign custom templates */
