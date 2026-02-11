@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     CollectionFilter,
     CollectionGroup,
@@ -43,7 +43,7 @@ import { SourceItem, TableDataProviderMock } from './helpers';
         </fdp-table>
     `,
     standalone: true,
-    imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule]
+    imports: [PlatformTableModule, ButtonComponent, RouterModule, RouterTestingModule]
 })
 class TableHostComponent {
     @ViewChild(TableComponent) table: TableComponent;
@@ -130,7 +130,7 @@ describe('TableComponent Host', () => {
 
             it('should be render using column.width option', () => {
                 const nameCell = tableRowCells2DArray[0][0];
-                expect(parseInt(nameCell.styles.width!, 10)).toBe(hostComponent.customColumnWidth);
+                expect(parseInt(nameCell.styles.width || '0', 10)).toBe(hostComponent.customColumnWidth);
             });
 
             it('should be render using column.key option', () => {

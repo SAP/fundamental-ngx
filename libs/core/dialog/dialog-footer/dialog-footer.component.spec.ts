@@ -88,9 +88,10 @@ describe('DialogFooterComponent', () => {
 
         fixture.detectChanges();
 
-        const buttonClassNames = dialogComponent.buttons.first._buttonComponent.class;
+        const buttonComponent = dialogComponent.buttons.first.buttonComponent();
+        const buttonElement = buttonComponent?.elementRef.nativeElement;
 
-        expect(buttonClassNames.includes(DialogButtonClass)).toBeTruthy();
+        expect(buttonElement?.classList.contains(DialogButtonClass)).toBeTruthy();
     });
 
     it('should use custom template', async () => {

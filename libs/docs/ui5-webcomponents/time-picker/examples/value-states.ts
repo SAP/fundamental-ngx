@@ -19,19 +19,19 @@ import 'fundamental-styles/dist/margins.css';
 })
 export class TimePickerValueStatesSample {
     readonly valueStates = signal([
-        { state: ValueState.None, label: 'None (Default)', description: 'Standard state', value: '10:30:00' },
-        { state: ValueState.Positive, label: 'Positive', description: 'Success state', value: '09:00:00' },
-        { state: ValueState.Critical, label: 'Critical', description: 'Warning state', value: '23:59:59' },
-        { state: ValueState.Negative, label: 'Negative', description: 'Error state', value: '25:00:00' },
-        { state: ValueState.Information, label: 'Information', description: 'Info state', value: '12:00:00' }
+        { state: ValueState.None, label: 'None (Default)', description: 'Standard state' },
+        { state: ValueState.Positive, label: 'Positive', description: 'Success state' },
+        { state: ValueState.Critical, label: 'Critical', description: 'Warning state' },
+        { state: ValueState.Negative, label: 'Negative', description: 'Error state' },
+        { state: ValueState.Information, label: 'Information', description: 'Info state' }
     ]);
 
     readonly stateValues = signal<{ [key: string]: string }>({
-        None: '10:30:00',
-        Positive: '09:00:00',
-        Critical: '23:59:59',
-        Negative: '25:00:00',
-        Information: '12:00:00'
+        None: '10:30:00 AM',
+        Positive: '09:00:00 AM',
+        Critical: '11:59:59 PM',
+        Negative: '01:00:00 AM',
+        Information: '12:00:00 PM'
     });
 
     onStateChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Change'>, state: string): void {

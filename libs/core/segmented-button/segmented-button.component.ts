@@ -364,22 +364,22 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     private _selectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.selected = true;
+        buttonComponent.setSelected(true);
     }
 
     /** @hidden */
     private _deselectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.selected = false;
+        buttonComponent.setSelected(false);
     }
 
     /** @hidden */
     private _isButtonSelected(buttonComponent: ButtonComponent): Nullable<boolean> {
-        return !!buttonComponent.selected;
+        return !!buttonComponent.isSelected();
     }
 
     /** @hidden */
     private _isButtonDisabled(buttonComponent: ButtonComponent): boolean {
-        return buttonComponent.disabled || buttonComponent.ariaDisabled;
+        return buttonComponent.isDisabled() || buttonComponent.ariaDisabled();
     }
 
     /** @hidden */
@@ -388,7 +388,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
             return;
         }
 
-        this._buttons.forEach((button) => (button.disabled = disable));
+        this._buttons.forEach((button) => button.setDisabled(disable));
 
         this._focusableItems.forEach((focusableItemDirective) => {
             focusableItemDirective.setTabbable(!disable);

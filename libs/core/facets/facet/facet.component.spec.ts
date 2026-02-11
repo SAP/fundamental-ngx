@@ -7,7 +7,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { FACET_CLASS_NAME } from '../constants';
 import { FacetContentComponent } from '../content/facet-content.component';
@@ -65,7 +65,7 @@ class TestImageFacetComponent {
         </fd-facet>
     `,
     standalone: true,
-    imports: [RatingIndicatorModule, FacetComponent, FacetContentComponent]
+    imports: [RatingIndicatorComponent, FacetComponent, FacetContentComponent]
 })
 class TestRatingIndicatorFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;

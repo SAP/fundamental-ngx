@@ -662,6 +662,12 @@ export default {
         srOnlyAriaLabel: '[[[Ŏƃĵēċţ Ĭƌēŋţįƒįēŗ∙∙∙∙∙∙∙]]]'
     },
     coreInfoLabel: {
-        srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
+        srOnlyText: '[[[Ĭŋƒŏ Ļàƀēļ∙∙∙∙]]]'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Reset to zero',
+        ariaRoleDescription: 'Rating indicator',
+        ariaLabelTotalRating: 'Total rating',
+        ariaLabelValue: 'of'
     }
 };

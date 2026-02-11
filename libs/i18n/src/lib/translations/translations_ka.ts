@@ -631,5 +631,11 @@ export default {
     },
     coreInfoLabel: {
         srOnlyText: 'Info Label'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Reset to zero',
+        ariaRoleDescription: 'Rating indicator',
+        ariaLabelTotalRating: 'Total rating',
+        ariaLabelValue: 'of'
     }
 };

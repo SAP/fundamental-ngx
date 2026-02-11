@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
@@ -17,7 +17,7 @@ describe('TimeComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule, TimeModule]
+            imports: [FormsModule, ButtonComponent, PipeModule, FdDatetimeModule, TimeModule]
         }).compileComponents();
     }));
 

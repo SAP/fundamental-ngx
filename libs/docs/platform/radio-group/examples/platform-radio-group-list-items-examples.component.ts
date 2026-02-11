@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -13,7 +13,7 @@ import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/p
         FdpFormGroupModule,
         ReactiveFormsModule,
         PlatformRadioGroupModule,
-        PlatformButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         MessageToastModule
     ]

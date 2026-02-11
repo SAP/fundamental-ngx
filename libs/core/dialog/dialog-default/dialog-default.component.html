@@ -49,7 +49,7 @@
                     [fdCozy]="_defaultDialogConfiguration.mobile"
                     (click)="_approveButtonClicked()"
                     [ariaLabel]="_defaultDialogContent?.approveButtonAriaLabel"
-                    [id]="_defaultDialogContent?.approveButtonId"
+                    [id]="_defaultDialogContent?.approveButtonId || ''"
                 >
                 </fd-button-bar>
             }
@@ -59,7 +59,7 @@
                     [fdCozy]="_defaultDialogConfiguration.mobile"
                     (click)="_cancelButtonClicked()"
                     [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel"
-                    [id]="_defaultDialogContent?.cancelButtonId"
+                    [id]="_defaultDialogContent?.cancelButtonId || ''"
                 >
                 </fd-button-bar>
             }

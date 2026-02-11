@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { JsonPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     BaseDynamicFormFieldItem,
     BaseDynamicFormGeneratorControl,
@@ -48,7 +48,7 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
 @Component({
     selector: 'fdp-platform-form-generator-custom-component-example',
     templateUrl: './platform-form-generator-custom-component-example.component.html',
-    imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
+    imports: [PlatformFormGeneratorModule, ButtonComponent, JsonPipe]
 })
 export class PlatformFormGeneratorCustomComponentExampleComponent {
     formCreated = false;

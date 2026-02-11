@@ -1,16 +1,16 @@
-@if (glyph && glyphPosition === 'before') {
-    <fd-icon [glyph]="glyph" [font]="glyphFont"></fd-icon>
+@if (glyph() && glyphPosition() === 'before') {
+    <fd-icon [glyph]="glyph()" [font]="glyphFont()"></fd-icon>
 }
-@if (label) {
+@if (label()) {
     <span class="fd-button__text">
-        {{ label }}
+        {{ label() }}
     </span>
 }
 <ng-content></ng-content>
 <ng-content select="fd-button-badge"></ng-content>
-@if (glyph && glyphPosition === 'after') {
-    <fd-icon [glyph]="glyph" [font]="glyphFont"></fd-icon>
+@if (glyph() && glyphPosition() === 'after') {
+    <fd-icon [glyph]="glyph()" [font]="glyphFont()"></fd-icon>
 }
-@if (fdMenu) {
+@if (fdMenu()) {
     <fd-icon glyph="slim-arrow-down"></fd-icon>
 }

@@ -1,25 +1,26 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnInit,
-    Output,
-    SimpleChanges,
     ViewEncapsulation,
-    forwardRef
+    booleanAttribute,
+    computed,
+    effect,
+    forwardRef,
+    inject,
+    input,
+    output,
+    signal
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { NgTemplateOutlet } from '@angular/common';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Observable } from 'rxjs';
 import {
     INDICATOR_CLASSES,
     INDICATOR_DEFAULT_CAPACITY,
@@ -54,231 +55,265 @@ interface RatingViewItem {
         },
         registerFormItemControl(RatingIndicatorComponent)
     ],
-    imports: [NgTemplateOutlet, PopoverTriggerDirective, PopoverComponent, RatingStarLabelPipe]
+    imports: [NgTemplateOutlet, PopoverTriggerDirective, PopoverComponent, RatingStarLabelPipe, FdTranslatePipe],
+    host: {
+        '[class]': 'cssClass()',
+        '[attr.aria-label]': 'ariaLabel()',
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
+        '[attr.disabled]': 'disabled()'
+    }
 })
-export class RatingIndicatorComponent
-    implements OnInit, OnChanges, CssClassBuilder, ControlValueAccessor, FormItemControl
-{
-    /** User's custom classes */
-    @Input()
-    class: string;
-
+export class RatingIndicatorComponent implements ControlValueAccessor, FormItemControl, HasElementRef {
     /** Sets [name] attribute of input. */
-    @Input()
-    name: string;
+    readonly name = input<string>();
 
     /**
      * Sets the aria-label attribute to the element.
      */
-    @Input()
-    @HostBinding('attr.aria-label')
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel = input<string | null>();
 
     /**
      * Sets the aria-labelledby attribute to the element.
      */
-    @Input()
-    @HostBinding('attr.aria-label')
-    ariaLabelledBy: Nullable<string>;
+    readonly ariaLabelledBy = input<string | null | undefined>();
 
     /**
+     * Sets the aria-roledescription attribute to the element.
+     */
+    readonly ariaRoledescription = input<string | null | undefined>();
+
+    /**
+     * Input for disabled state from parent component.
      * Sets the aria-disabled attribute to the element.
      * Sets the is-disabled class to the element.
-     * Whether the rating indicator is disabled
      */
-    @Input()
-    @HostBinding('class.is-disabled')
-    @HostBinding('attr.aria-disabled')
-    disabled = false;
+    readonly disabled = input(false, { transform: booleanAttribute });
 
     /**
      * Whether the rating indicator is in displayMode
      */
-    @Input()
-    @HostBinding('class.fd-rating-indicator--display-mode')
-    displayMode = false;
+    readonly displayMode = input(false, { transform: booleanAttribute });
 
     /**
      * Whether the rating indicator is in non-interactive state.
      */
-    @Input()
-    @HostBinding('class.fd-rating-indicator--non-interactive')
-    nonInteractive = false;
+    readonly nonInteractive = input(false, { transform: booleanAttribute });
 
     /**
      * Number of rates to display
      */
-    @Input()
-    set indicatorCapacity(value: number) {
-        const val = coerceNumberProperty(value, INDICATOR_DEFAULT_CAPACITY);
-        this._indicatorCapacity = val < 1 ? INDICATOR_DEFAULT_CAPACITY : val;
-    }
+    readonly indicatorCapacity = input(INDICATOR_DEFAULT_CAPACITY, {
+        transform: (value: number) => {
+            const val = coerceNumberProperty(value, INDICATOR_DEFAULT_CAPACITY);
+            return val < 1 ? INDICATOR_DEFAULT_CAPACITY : val;
+        }
+    });
 
     /**
      * Whether or not to display half values.
      */
-    @Input()
-    allowHalves = false;
+    readonly allowHalves = input(false, { transform: booleanAttribute });
 
     /**
      * User's value number of ratings. If provided, Overrides ratingAverage.
      */
-    @Input()
-    value = 0;
+    readonly value = input(0);
 
     /**
      * Total number of ratings. If provided, will display text showing the total number of ratings.
      */
-    @Input()
-    totalRatings: number;
+    readonly totalRatings = input<number | undefined | null>(undefined);
 
     /**
      * Rating average
      */
-    @Input()
-    ratingAverage: number;
+    readonly ratingAverage = input<number | undefined | null>(undefined);
 
     /**
      * Object containing key-value pairs where the key is the rating and the value is the total sum of those ratings.
      * Overrides totalRatings and ratingAverage.
      */
-    @Input()
-    ratings: NumberKey<number>;
+    readonly ratings = input<NumberKey<number> | undefined | null>(undefined);
 
     /**
      * Whether or not to display the popover that shows the sum of each rating. Requires [ratings] object.
      */
-    @Input()
-    displayAllRatings = false;
+    readonly displayAllRatings = input(false, { transform: booleanAttribute });
 
     /**
      * Icon class for rated icon from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes
      */
-    @Input()
-    ratedIcon: string;
+    readonly ratedIcon = input<string | undefined>(undefined);
+
     /**
      * Icon class for unrated icon from fundamental-styles lib https://sap.github.io/fundamental-styles/?path=/docs/components-icon--sizes
      */
-    @Input()
-    unratedIcon: string;
+    readonly unratedIcon = input<string | undefined>(undefined);
 
     /**
      * Possible values are 'xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'
      */
-    @Input()
-    size: RatingIndicatorSize = 'md';
+    readonly size = input<RatingIndicatorSize>('md');
 
     /**
      * Text divider label between view value and indicator count.
      */
-    @Input()
-    dynamicTextIndicator = 'of';
+    readonly dynamicTextIndicator = input('of');
+
+    /**
+     * Whether to display the dynamic text (rating value and count) after the rating indicator.
+     * When false, only the star rating UI is shown without any text.
+     */
+    readonly showDynamicText = input(true, { transform: booleanAttribute });
 
     /**
      * Fired when the user sets or changes their rating.
      */
-    @Output()
-    ratingChanged = new EventEmitter<number>();
+    readonly ratingChanged = output<number>();
 
     /** @hidden */
-    sizeClass = this._getSizeClass(this.size);
-    /** @hidden */
-    _rates: { id: string; value: number }[] = [];
-    /** @hidden */
-    _ratingItems: RatingViewItem[] = [];
+    readonly elementRef = inject(ElementRef<HTMLElement>);
 
-    /** @hidden */
-    get viewRatingUID(): number {
-        return this._ratingUID;
-    }
-    /** @hidden */
-    get indicatorCount(): number {
-        return this._indicatorCapacity;
-    }
-    /** @hidden */
-    get viewValue(): number {
-        return this._value;
-    }
+    /** Computed display value - returns the current internal value */
+    readonly displayValue = computed(() => this.internalValue());
 
-    /** @hidden */
-    private _ratingUID = ratingUID++;
-    /** @hidden */
-    private _indicatorCapacity = INDICATOR_DEFAULT_CAPACITY;
-    /** @hidden */
-    private _value = 0;
+    /** @hidden Current language signal for i18n */
+    protected readonly language = toSignal(inject<Observable<FdLanguage>>(FD_LANGUAGE), {
+        initialValue: {} as FdLanguage
+    });
 
-    /** @hidden */
-    private _hideDynamicText = false;
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef
-    ) {}
+    /** @hidden Internal mutable value for CVA and computed display value */
+    protected readonly internalValue = signal(0);
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
+    /**
+     * Internal mutable disabled state.
+     * Allows ControlValueAccessor to modify disabled state independently of input.
      */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        this.sizeClass = this._getSizeClass(this.size);
+    protected readonly internalDisabled = signal(false);
 
-        return [
+    /** @hidden Internal total ratings for computed state */
+    protected readonly internalTotalRatings = signal<number | undefined | null>(undefined);
+
+    /** @hidden Internal rating average for computed state */
+    protected readonly internalRatingAverage = signal<number | undefined | null>(undefined);
+
+    /** @hidden Rating items for popover content */
+    protected readonly ratingItems = signal<RatingViewItem[]>([]);
+
+    /** @hidden Unique ID for this rating indicator instance */
+    protected readonly ratingUID = ratingUID++;
+
+    /** @hidden Computed size class based on size input */
+    protected readonly sizeClass = computed(() => this._getSizeClass(this.size()));
+
+    /** @hidden Computed rates array based on capacity and halves setting */
+    protected readonly rates = computed(() => this._getRates());
+
+    /** @hidden Computed signal to determine if dynamic text should be hidden */
+    protected readonly hideDynamicText = computed(() => {
+        const value = this.displayValue();
+        const totalRatings = this.computedTotalRatings;
+        // Only hide if value is 0 AND we don't have total ratings to show
+        return !value && (totalRatings === undefined || totalRatings === null);
+    });
+
+    /** @hidden Computed CSS classes for host binding */
+    protected readonly cssClass = computed(() => {
+        const classes: string[] = [
             INDICATOR_PREFIX,
-            this.sizeClass,
-            this.allowHalves ? INDICATOR_CLASSES.halves : '',
-            !!this.ratedIcon && !!this.unratedIcon ? INDICATOR_CLASSES.icon : '',
-            this._hideDynamicText || !this._value ? INDICATOR_CLASSES.hideDynamicText : '',
-            this.class
+            this.sizeClass(),
+            this.allowHalves() ? INDICATOR_CLASSES.halves : '',
+            this.ratedIcon() && this.unratedIcon() ? INDICATOR_CLASSES.icon : '',
+            this.hideDynamicText() ? INDICATOR_CLASSES.hideDynamicText : '',
+            this.disabled() || this.internalDisabled() ? 'is-disabled' : '',
+            this.displayMode() ? 'fd-rating-indicator--display-mode' : '',
+            this.nonInteractive() ? 'fd-rating-indicator--non-interactive' : ''
         ];
-    }
+        return classes.filter(Boolean).join(' ');
+    });
 
     /** @hidden */
+    constructor() {
+        // Sync ratings input with internal state
+        effect(() => {
+            const ratingsInput = this.ratings();
+            if (ratingsInput) {
+                this._generateRatings(ratingsInput);
+            }
+        });
+
+        // Initialize internalValue from inputs once, then let CVA handle updates
+        let initialized = false;
+        effect(() => {
+            // Only run once for initialization
+            if (initialized) {
+                return;
+            }
+
+            // Read all potential sources
+            const inputValue = this.value();
+            const internalAvg = this.internalRatingAverage();
+            const avgValue = this.ratingAverage();
+
+            // Determine source value with proper priority
+            let sourceValue = 0;
+            if (inputValue && inputValue !== 0) {
+                sourceValue = inputValue;
+            } else if (internalAvg !== undefined && internalAvg !== null) {
+                sourceValue = internalAvg;
+            } else if (avgValue !== undefined && avgValue !== null) {
+                sourceValue = avgValue;
+            }
+
+            const parsedValue = this._parseValue(sourceValue);
+            this.internalValue.set(parsedValue);
+            initialized = true;
+        });
+    }
+
+    /** @hidden CVA onChange callback */
     onChange: (value: number) => void = () => {};
 
-    /** @hidden */
+    /** @hidden CVA onTouched callback */
     onTouched = (): void => {};
 
-    /** @hidden */
-    ngOnInit(): void {
-        this._value = this._convertToValue();
-        this._rates = this._getRates();
-        this.buildComponentCssClass();
-        this._generateRatings();
+    /**
+     * @deprecated Use `displayValue()` signal directly instead
+     * @hidden Backward compatibility getter
+     */
+    get viewValue(): number {
+        return this.displayValue();
     }
 
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (
-            'class' in changes ||
-            'size' in changes ||
-            'ratedIcon' in changes ||
-            'unratedIcon' in changes ||
-            'allowHalves' in changes
-        ) {
-            this.buildComponentCssClass();
-        }
-        if ('value' in changes) {
-            this._value = this._convertToValue();
-        }
-        if ('indicatorCapacity' in changes) {
-            this._rates = this._getRates();
-        }
-        if ('allowHalves' in changes) {
-            this._value = this._convertToValue();
-            this._rates = this._getRates();
-        }
-
-        if ('ratings' in changes) {
-            this._generateRatings();
-        }
+    /**
+     * @deprecated Use `ratingUID` property directly instead
+     * @hidden Backward compatibility getter
+     */
+    get viewRatingUID(): number {
+        return this.ratingUID;
     }
 
-    /** @hidden */
+    /**
+     * @deprecated Use `indicatorCapacity()` signal directly instead
+     * @hidden Backward compatibility getter
+     */
+    get indicatorCount(): number {
+        return this.indicatorCapacity();
+    }
+
+    /** Public getter for computed rating average value. */
+    get computedRatingAverage(): number | undefined | null {
+        return this.internalRatingAverage() ?? this.ratingAverage();
+    }
+
+    /** Public getter for computed total ratings value. */
+    get computedTotalRatings(): number | undefined | null {
+        return this.internalTotalRatings() ?? this.totalRatings();
+    }
+
+    /** @hidden CVA writeValue - updates internal value signal */
     writeValue(value: number): void {
-        this._value = this._parseValue(value);
-        this._changeDetectorRef.markForCheck();
+        this.internalValue.set(this._parseValue(value));
     }
 
     /** @hidden */
@@ -292,12 +327,12 @@ export class RatingIndicatorComponent
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
+        this.internalDisabled.set(isDisabled);
     }
 
-    /** @hidden */
-    onSelect(value: number): void {
-        this.value = this._value = value;
+    /** @hidden User selection handler */
+    protected onSelect(value: number): void {
+        this.internalValue.set(value);
         this.onChange(value);
         this.onTouched();
         this.ratingChanged.emit(value);
@@ -305,41 +340,34 @@ export class RatingIndicatorComponent
 
     /**
      * @hidden
-     * Generate rating items for popover content if rating object was defined
+     * Generate rating items for popover content from ratings object
      */
-    private _generateRatings(): void {
-        if (!this.ratings) {
-            return;
-        }
-        const ratings = Object.entries(this.ratings)
+    private _generateRatings(ratingsInput: NumberKey<number>): void {
+        const ratings = Object.entries(ratingsInput)
             .filter(([rate, vote]) => {
-                const _rate = +rate;
-                return !isNaN(_rate) && !isNaN(+vote) && _rate > 0;
+                const numRate = +rate;
+                const numVote = +vote;
+                return !isNaN(numRate) && !isNaN(numVote) && numRate > 0;
             })
             .map(([rate, votes]) => ({ rate: +rate, votes }));
+
         if (ratings.length === 0) {
             return;
         }
+
         const { totalVotes, totalRating } = ratings.reduce(
-            (total, rating) => ({
-                totalVotes: total.totalVotes + rating.votes,
-                totalRating: total.totalRating + rating.rate * rating.votes
+            (acc, rating) => ({
+                totalVotes: acc.totalVotes + rating.votes,
+                totalRating: acc.totalRating + rating.rate * rating.votes
             }),
             { totalVotes: 0, totalRating: 0 }
         );
 
-        this._ratingItems = ratings;
-        this.ratingAverage = totalRating / totalVotes;
-        this.totalRatings = totalVotes;
-        this._value = this._convertToValue();
+        this.ratingItems.set(ratings);
+        this.internalRatingAverage.set(totalRating / totalVotes);
+        this.internalTotalRatings.set(totalVotes);
     }
-    /**
-     * @hidden
-     * get converted viewValue for render in component template from original value if it still exists, or ratingAverage.
-     */
-    private _convertToValue(): number {
-        return this._parseValue(this.value || this.ratingAverage);
-    }
+
     /**
      * @hidden
      * get converted value from original to view value with depends on halves
@@ -355,22 +383,24 @@ export class RatingIndicatorComponent
         const fractional = value % 1;
         let v = integer;
 
-        if (this.allowHalves && fractional > 0.25 && fractional <= 0.5) {
+        if (this.allowHalves() && fractional > 0.25 && fractional <= 0.5) {
             v = integer + 0.5;
         } else if (fractional > 0.5) {
             v = integer + 1;
         }
 
-        return Math.min(this.indicatorCount, v);
+        return Math.min(this.indicatorCapacity(), v);
     }
+
     /**
      * @hidden
-     * get rating icons array with value and unic id
+     * get rating icons array with value and unique id
      */
     private _getRates(): { id: string; value: number }[] {
-        const withHalves = this.allowHalves ? 2 : 1;
-        return Array(this.indicatorCount * withHalves)
-            .fill(`rating-${this._ratingUID}`)
+        const withHalves = this.allowHalves() ? 2 : 1;
+        const capacity = this.indicatorCapacity();
+        return Array(capacity * withHalves)
+            .fill(`rating-${this.ratingUID}`)
             .map((name, index) => ({
                 id: `${name}-${index + 1}`,
                 value: (index + 1) / withHalves
@@ -379,7 +409,7 @@ export class RatingIndicatorComponent
 
     /**
      * @hidden
-     * get rating icons array with value and unic id
+     * Get size class for the rating indicator
      */
     private _getSizeClass(size: RatingIndicatorSize): string {
         return `${INDICATOR_PREFIX}--${size in RatingIndicatorSizeEnum ? size : 'md'}`;

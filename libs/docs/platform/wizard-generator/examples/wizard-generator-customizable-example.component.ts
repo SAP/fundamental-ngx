@@ -13,7 +13,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import {
     FormattedFormStep,
@@ -27,7 +27,7 @@ import {
     selector: 'fdp-wizard-generator-customizable-example',
     templateUrl: './wizard-generator-customizable-example.component.html',
     imports: [
-        PlatformButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         TitleComponent,
         LayoutGridColDirective,

@@ -13,7 +13,7 @@ import { ExpandableTextOverflowModePopoverExample } from './examples/overflow-mo
 const basicSampleHtml = 'basic-sample.html';
 const basicSampleTs = 'basic-sample.ts';
 const overflowModePopoverHtml = 'overflow-mode-popover.html';
-const overflowModesPopoverTs = 'overflow-modes.ts';
+const overflowModePopoverTs = 'overflow-mode-popover.ts';
 
 @Component({
     selector: 'ui5-expandable-text-docs',
@@ -33,13 +33,13 @@ export class ExpandableTextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            originalFileName: 'expandable-text-basic-example'
+            originalFileName: 'basic-sample'
         },
         {
             language: 'typescript',
             component: 'ExpandableTextBasicExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            originalFileName: 'expandable-text-basic-example'
+            originalFileName: 'basic-sample'
         }
     ]);
 
@@ -47,13 +47,13 @@ export class ExpandableTextDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(overflowModePopoverHtml),
-            originalFileName: 'expandable-text-overflow-mode-popover-example'
+            originalFileName: 'overflow-mode-popover'
         },
         {
             language: 'typescript',
-            component: 'ExpandableTextOverflowModesExample',
-            code: getAssetFromModuleAssets(overflowModesPopoverTs),
-            originalFileName: 'expandable-text-overflow-mode-popover-example'
+            component: 'ExpandableTextOverflowModePopoverExample',
+            code: getAssetFromModuleAssets(overflowModePopoverTs),
+            originalFileName: 'overflow-mode-popover'
         }
     ]);
 }
