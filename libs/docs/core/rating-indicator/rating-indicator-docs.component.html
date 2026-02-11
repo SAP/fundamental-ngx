@@ -1,4 +1,11 @@
 <fd-docs-section-title id="basic" componentName="rating-indicator"> Rating indicator examples </fd-docs-section-title>
+<description>
+    The Rating Indicator component displays a star-based rating system. Users can view and interact with ratings by
+    clicking on stars or using keyboard navigation. Use <code class="code-snippet">[value]</code> to set the rating
+    value, <code class="code-snippet">[indicatorCapacity]</code> to set the maximum number of stars (default is 5), and
+    <code class="code-snippet">[allowHalves]</code> to enable half-star ratings. For two-way binding with forms, use
+    <code class="code-snippet">[(ngModel)]</code>.
+</description>
 <component-example>
     <fd-rating-indicator-example></fd-rating-indicator-example>
 </component-example>
@@ -9,6 +16,10 @@
 <fd-docs-section-title id="display-mode" componentName="rating-indicator">
     Rating indicator with displayMode
 </fd-docs-section-title>
+<description>
+    Use <code class="code-snippet">[displayMode]="true"</code> to show the rating in a non-interactive, read-only state.
+    This is useful for displaying existing ratings without allowing user interaction.
+</description>
 <component-example>
     <fd-ri-display-mode-example></fd-ri-display-mode-example>
 </component-example>
@@ -17,6 +28,10 @@
 <separator></separator>
 
 <fd-docs-section-title id="custom" componentName="rating-indicator"> Custom icons </fd-docs-section-title>
+<description>
+    Customize the rating indicator appearance by using <code class="code-snippet">[ratedIcon]</code> and
+    <code class="code-snippet">[unratedIcon]</code> properties to specify custom icon classes.
+</description>
 <component-example>
     <fd-ri-custom-icon-example></fd-ri-custom-icon-example>
 </component-example>
@@ -24,9 +39,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="sizes" componentName="rating-indicator">
-    Rating indicator with all sizes and allowHalves
-</fd-docs-section-title>
+<fd-docs-section-title id="sizes" componentName="rating-indicator"> Rating indicator sizes </fd-docs-section-title>
+<description>
+    Control the rating indicator size using the <code class="code-snippet">[size]</code> property. Available sizes:
+    <code class="code-snippet">'xs' | 'sm' | 'md' | 'lg' | 'cozy' | 'compact' | 'condensed'</code>. The default size is
+    <code class="code-snippet">'md'</code>. Combine with <code class="code-snippet">[allowHalves]="true"</code>
+    to enable half-star increments for more precise ratings.
+</description>
 <component-example>
     <fd-rating-indicator-sizes></fd-rating-indicator-sizes>
 </component-example>
@@ -35,8 +54,15 @@
 <separator></separator>
 
 <fd-docs-section-title id="predefined" componentName="rating-indicator">
-    Rating indicator with predefined ratings object
+    Rating indicator with ratings data
 </fd-docs-section-title>
+<description>
+    Display aggregate rating data using the <code class="code-snippet">[ratings]</code> property with a key-value object
+    where keys are rating values and values are vote counts. Use
+    <code class="code-snippet">[displayAllRatings]="true"</code> to show a popover with the breakdown of all ratings.
+    Alternatively, use <code class="code-snippet">[ratingAverage]</code> and
+    <code class="code-snippet">[totalRatings]</code> to display summary statistics.
+</description>
 <component-example>
     <fd-rating-indicator-ratings></fd-rating-indicator-ratings>
 </component-example>
