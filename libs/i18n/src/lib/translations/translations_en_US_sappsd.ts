@@ -662,12 +662,12 @@ export default {
         srOnlyAriaLabel: '[[[Ŏƃĵēċţ Ĭƌēŋţįƒįēŗ∙∙∙∙∙∙∙]]]'
     },
     coreInfoLabel: {
-        srOnlyText: '[[[Ĭŋƒŏ Ļàƀēļ∙∙∙∙]]]'
+        srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: '[[[Řēşēţ ţŏ žēŗŏ∙∙∙∙∙∙]]]',
+        ariaRoleDescription: '[[[Řąţįŋğ įŋƌįċąţŏŗ∙∙∙∙∙∙∙∙]]]',
+        ariaLabelTotalRating: '[[[Ţŏţąĺ ŗąţįŋğ∙∙∙∙∙∙∙]]]',
+        ariaLabelValue: '[[[ŏƒ∙∙]]]'
     }
 };
