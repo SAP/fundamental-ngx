@@ -118,7 +118,7 @@ describe('DialogHeaderComponent', () => {
 
         expect(headerEl).toBeTruthy();
         expect(subheaderEl).toBeTruthy();
-        expect(component.dialogHeaderRef.customTemplates.length).toEqual(2);
+        expect(component.dialogHeaderRef.customTemplates().length).toEqual(2);
 
         const button = headerEl.querySelector('button');
         expect(button.textContent).toContain('Custom button');

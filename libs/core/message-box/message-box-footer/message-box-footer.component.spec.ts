@@ -94,7 +94,8 @@ describe('MessageBoxFooterComponent', () => {
 
         fixture.detectChanges();
 
-        const buttonComponent = dialogComponent.buttons.first.buttonComponent();
+        const buttonBars = dialogComponent.buttons();
+        const buttonComponent = buttonBars[0]?.buttonComponent();
         const buttonElement = buttonComponent?.elementRef.nativeElement;
 
         expect(buttonElement?.classList.contains(MessageBoxButtonClass)).toBeTruthy();
@@ -106,7 +107,7 @@ describe('MessageBoxFooterComponent', () => {
 
         const button = fixture.nativeElement.querySelector('button');
 
-        expect(component.messageBoxFooter.customTemplates.length).toEqual(1);
+        expect(component.messageBoxFooter.customTemplates().length).toEqual(1);
         expect(button.textContent).toContain('Custom button');
     });
 });

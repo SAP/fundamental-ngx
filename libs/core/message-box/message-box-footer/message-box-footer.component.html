@@ -1,5 +1,5 @@
 <footer fd-bar class="fd-message-box__footer" barDesign="footer" [fdCozy]="messageBoxConfig.mobile">
-    <ng-template [ngTemplateOutlet]="footerTemplate ? footerTemplate : defaultTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="footerTemplate() ? footerTemplate() : defaultTemplate"></ng-template>
     <ng-template #defaultTemplate>
         <div fd-bar-right>
             <ng-content></ng-content>

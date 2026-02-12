@@ -4,9 +4,9 @@
         role="group"
         class="fd-dialog__header"
         [fdContentDensity]="dialogConfig.contentDensity ?? ''"
-        [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
+        [barDesign]="subHeaderTemplate() ? 'header-with-subheader' : 'header'"
     >
-        <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="headerTemplate() ? headerTemplate() : defaultTemplate"></ng-template>
         <ng-template #defaultTemplate>
             <div fd-bar-left>
                 <fd-bar-element [fullWidth]="true">
@@ -23,14 +23,14 @@
             </div>
         </ng-template>
     </div>
-    @if (subHeaderTemplate) {
+    @if (subHeaderTemplate()) {
         <div
             fd-bar
             class="fd-dialog__subheader"
             barDesign="subheader"
             [fdContentDensity]="dialogConfig.contentDensity ?? ''"
         >
-            <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
+            <ng-template [ngTemplateOutlet]="subHeaderTemplate()"></ng-template>
         </div>
     }
 </header>

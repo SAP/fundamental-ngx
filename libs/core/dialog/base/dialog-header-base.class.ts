@@ -1,13 +1,4 @@
-import {
-    AfterContentInit,
-    ChangeDetectorRef,
-    ContentChildren,
-    Directive,
-    QueryList,
-    TemplateRef,
-    inject
-} from '@angular/core';
-
+import { Directive, TemplateRef, computed, contentChildren } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DEFAULT_TITLE_SIZE } from '@fundamental-ngx/core/title';
 
@@ -19,37 +10,29 @@ import { DEFAULT_TITLE_SIZE } from '@fundamental-ngx/core/title';
         }
     ]
 })
-export abstract class DialogHeaderBase implements AfterContentInit {
-    /** @hidden */
-    @ContentChildren(TemplateDirective)
-    customTemplates: QueryList<TemplateDirective>;
+export abstract class DialogHeaderBase {
+    /**
+     * @hidden
+     * Signal-based query for custom header/subheader templates.
+     * Templates are identified by their fdkTemplate name attribute.
+     */
+    readonly customTemplates = contentChildren(TemplateDirective);
 
-    /** @hidden */
-    headerTemplate: TemplateRef<any>;
+    /**
+     * @hidden
+     * Signal containing the custom header template, if provided.
+     * Returns the TemplateRef when a template with name='header' is projected.
+     */
+    readonly headerTemplate = computed<TemplateRef<any> | undefined>(
+        () => this.customTemplates().find((t) => t.name === 'header')?.templateRef
+    );
 
-    /** @hidden */
-    subHeaderTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._assignCustomTemplates();
-    }
-
-    /** @hidden Assign custom templates */
-    private _assignCustomTemplates(): void {
-        this.customTemplates.forEach((template) => {
-            switch (template.name) {
-                case 'header':
-                    this.headerTemplate = template.templateRef;
-                    break;
-                case 'subheader':
-                    this.subHeaderTemplate = template.templateRef;
-                    break;
-            }
-        });
-        this._changeDetectorRef.markForCheck();
-    }
+    /**
+     * @hidden
+     * Signal containing the custom subheader template, if provided.
+     * Returns the TemplateRef when a template with name='subheader' is projected.
+     */
+    readonly subHeaderTemplate = computed<TemplateRef<any> | undefined>(
+        () => this.customTemplates().find((t) => t.name === 'subheader')?.templateRef
+    );
 }
