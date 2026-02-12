@@ -3,6 +3,7 @@ import {
     AfterViewInit,
     Component,
     computed,
+    DestroyRef,
     effect,
     inject,
     Injector,
@@ -10,6 +11,7 @@ import {
     signal,
     ViewChild
 } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
@@ -76,14 +78,13 @@ export class InputExample implements AfterViewInit {
 
     // ViewChild references
     @ViewChild('basicInput') basicInput!: Input;
-    @ViewChild('validationInput') validationInput!: Input;
-    @ViewChild('reactiveInput') reactiveInput!: Input;
 
     // Signal to track when ViewChild is ready
     readonly viewInitialized = signal(false);
 
     // Injector for running effects in proper context
     private injector = inject(Injector);
+    private destroyRef = inject(DestroyRef);
 
     // Form Builder for reactive forms
     private fb = new FormBuilder();
@@ -100,82 +101,102 @@ export class InputExample implements AfterViewInit {
         bio: ['', [Validators.maxLength(500)]]
     });
 
-    // Form control signals for reactive access
-    readonly firstName = computed(() => this.userForm.get('firstName') as FormControl);
-    readonly lastName = computed(() => this.userForm.get('lastName') as FormControl);
-    readonly email = computed(() => this.userForm.get('email') as FormControl);
-    readonly phone = computed(() => this.userForm.get('phone') as FormControl);
-    readonly website = computed(() => this.userForm.get('website') as FormControl);
-    readonly age = computed(() => this.userForm.get('age') as FormControl);
-    readonly username = computed(() => this.userForm.get('username') as FormControl);
-    readonly bio = computed(() => this.userForm.get('bio') as FormControl);
+    // Form control references
+    readonly firstName = this.userForm.get('firstName') as FormControl;
+    readonly lastName = this.userForm.get('lastName') as FormControl;
+    readonly email = this.userForm.get('email') as FormControl;
+    readonly phone = this.userForm.get('phone') as FormControl;
+    readonly website = this.userForm.get('website') as FormControl;
+    readonly age = this.userForm.get('age') as FormControl;
+    readonly username = this.userForm.get('username') as FormControl;
+    readonly bio = this.userForm.get('bio') as FormControl;
 
     // Form validation signals that update reactively
     readonly isFormValid = signal(false);
     readonly isFormDirty = signal(false);
     readonly isFormTouched = signal(false);
+    readonly formValues = signal<Record<string, any>>({});
+    readonly formErrors = signal<Record<string, any>>({});
+
+    // Convert form control state to signals for reactivity
+    readonly firstNameStatus = toSignal(this.firstName.statusChanges, { initialValue: this.firstName.status });
+    readonly lastNameStatus = toSignal(this.lastName.statusChanges, { initialValue: this.lastName.status });
+    readonly emailStatus = toSignal(this.email.statusChanges, { initialValue: this.email.status });
+    readonly phoneStatus = toSignal(this.phone.statusChanges, { initialValue: this.phone.status });
+    readonly websiteStatus = toSignal(this.website.statusChanges, { initialValue: this.website.status });
+    readonly ageStatus = toSignal(this.age.statusChanges, { initialValue: this.age.status });
+    readonly usernameStatus = toSignal(this.username.statusChanges, { initialValue: this.username.status });
+    readonly bioStatus = toSignal(this.bio.statusChanges, { initialValue: this.bio.status });
 
     // Computed properties for individual field states
     readonly firstNameState = computed(() => {
-        const control = this.firstName();
-        if (!control.touched) {
+        this.firstNameStatus(); // Subscribe to changes
+        if (!this.firstName.touched) {
             return 'None';
         }
-        return control.valid ? 'Positive' : 'Negative';
+        return this.firstName.valid ? 'Positive' : 'Negative';
     });
 
     readonly lastNameState = computed(() => {
-        const control = this.lastName();
-        if (!control.touched) {
+        this.lastNameStatus(); // Subscribe to changes
+        if (!this.lastName.touched) {
             return 'None';
         }
-        return control.valid ? 'Positive' : 'Negative';
+        return this.lastName.valid ? 'Positive' : 'Negative';
     });
 
     readonly emailState = computed(() => {
-        const control = this.email();
-        if (!control.touched) {
+        this.emailStatus(); // Subscribe to changes
+        if (!this.email.touched) {
             return 'None';
         }
-        return control.valid ? 'Positive' : 'Negative';
+        return this.email.valid ? 'Positive' : 'Negative';
     });
 
     readonly phoneState = computed(() => {
-        const control = this.phone();
-        if (!control.touched) {
+        this.phoneStatus(); // Subscribe to changes
+        if (!this.phone.touched) {
             return 'None';
         }
-        if (control.value && !control.valid) {
+        if (this.phone.value && !this.phone.valid) {
             return 'Critical';
         }
-        return control.valid ? 'Positive' : 'None';
+        return this.phone.valid ? 'Positive' : 'None';
     });
 
     readonly websiteState = computed(() => {
-        const control = this.website();
-        if (!control.touched) {
+        this.websiteStatus(); // Subscribe to changes
+        if (!this.website.touched) {
             return 'None';
         }
-        if (control.value && !control.valid) {
+        if (this.website.value && !this.website.valid) {
             return 'Negative';
         }
-        return control.valid ? 'Positive' : 'None';
+        return this.website.valid ? 'Positive' : 'None';
     });
 
     readonly ageState = computed(() => {
-        const control = this.age();
-        if (!control.touched) {
+        this.ageStatus(); // Subscribe to changes
+        if (!this.age.touched) {
             return 'None';
         }
-        return control.valid ? 'Positive' : 'Negative';
+        return this.age.valid ? 'Positive' : 'Negative';
     });
 
     readonly usernameState = computed(() => {
-        const control = this.username();
-        if (!control.touched) {
+        this.usernameStatus(); // Subscribe to changes
+        if (!this.username.touched) {
             return 'None';
         }
-        return control.valid ? 'Positive' : 'Negative';
+        return this.username.valid ? 'Positive' : 'Negative';
+    });
+
+    readonly bioState = computed(() => {
+        this.bioStatus(); // Subscribe to changes
+        if (!this.bio.touched) {
+            return 'None';
+        }
+        return this.bio.valid ? 'Positive' : 'Negative';
     });
 
     // Event handling signals
@@ -207,10 +228,6 @@ export class InputExample implements AfterViewInit {
             .slice(0, 5);
     });
 
-    // Dynamic value state example
-    readonly dynamicStateValue = signal<string>('');
-    readonly dynamicStateMessage = signal<string>('');
-
     // Computed properties for display
     readonly basicValueDisplay = computed(() => {
         const value = this.basicValue();
@@ -232,31 +249,36 @@ export class InputExample implements AfterViewInit {
         valid: this.isFormValid(),
         dirty: this.isFormDirty(),
         touched: this.isFormTouched(),
-        values: this.userForm.value,
-        errors: this.getFormErrors()
+        values: this.formValues(),
+        errors: this.formErrors()
     }));
 
     ngAfterViewInit(): void {
         this.viewInitialized.set(true);
 
         // Subscribe to form status changes to update reactive signals
-        this.userForm.statusChanges.subscribe(() => {
+        this.userForm.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             this.isFormValid.set(this.userForm.valid);
             this.isFormDirty.set(this.userForm.dirty);
             this.isFormTouched.set(this.userForm.touched);
+            this.formErrors.set(this.getFormErrors());
         });
 
         // Subscribe to form value changes
-        this.userForm.valueChanges.subscribe(() => {
+        this.userForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             this.isFormValid.set(this.userForm.valid);
             this.isFormDirty.set(this.userForm.dirty);
             this.isFormTouched.set(this.userForm.touched);
+            this.formValues.set(this.userForm.value);
+            this.formErrors.set(this.getFormErrors());
         });
 
         // Initial update of form state signals
         this.isFormValid.set(this.userForm.valid);
         this.isFormDirty.set(this.userForm.dirty);
         this.isFormTouched.set(this.userForm.touched);
+        this.formValues.set(this.userForm.value);
+        this.formErrors.set(this.getFormErrors());
 
         // Demonstrate reactive selectedItems access after view init
         runInInjectionContext(this.injector, () => {
@@ -268,7 +290,7 @@ export class InputExample implements AfterViewInit {
 
             // Watch form changes reactively
             effect(() => {
-                const formValue = this.userForm.value;
+                const formValue = this.formValues();
                 console.log('Form value changed:', formValue);
             });
         });
@@ -375,6 +397,8 @@ export class InputExample implements AfterViewInit {
         this.isFormValid.set(this.userForm.valid);
         this.isFormDirty.set(this.userForm.dirty);
         this.isFormTouched.set(this.userForm.touched);
+        this.formValues.set(this.userForm.value);
+        this.formErrors.set(this.getFormErrors());
     }
 
     // Utility methods

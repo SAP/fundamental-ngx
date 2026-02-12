@@ -245,12 +245,14 @@
                             id="bio"
                             formControlName="bio"
                             placeholder="Tell us about yourself"
+                            [valueState]="bioState()"
                             [maxlength]="maxLengthExample()"
                         ></ui5-input>
                     </div>
                 </div>
             </div>
         </form>
+
         <div class="sap-flex sap-flex--row sap-margin-top-medium sap-flex--gap-small sap-padding-x-medium">
             <ui5-button type="Submit" design="Emphasized" [disabled]="!isFormValid()"> Submit </ui5-button>
             <ui5-button design="Transparent" (ui5Click)="resetForm()"> Reset </ui5-button>
