@@ -51,6 +51,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
     private config = inject(CVA_CONFIG, { optional: true });
 
     private _value: ValueType | null = null;
+    private _valueSet = false;
     private _initialized = false;
     private _disabled = false;
 
@@ -73,7 +74,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
         });
     }
 
-    setDisabledState = (isDisabled: boolean): void => {
+    setDisabledState(isDisabled: boolean): void {
         this._disabled = isDisabled;
         const element = this.elementRef.nativeElement;
         if (element && this._initialized) {
@@ -81,7 +82,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
             // Manually trigger change detection for zoneless compatibility
             this.cdr.markForCheck();
         }
-    };
+    }
 
     registerOnChange(fn: (newVal: ValueType) => void): void {
         this.onChange = fn;
@@ -93,6 +94,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
 
     writeValue(val: ValueType): void {
         this._value = val;
+        this._valueSet = true;
         if (this._initialized) {
             this.updateElementValue(val);
         }
@@ -111,12 +113,14 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
                 element.addEventListener(eventName, (e: any) => {
                     if (this.onChange) {
                         const valueToEmit = this.getValueToEmit(config, e);
-                        const transformedValue = config.transformValue
-                            ? config.transformValue(valueToEmit)
-                            : valueToEmit;
-                        this.onChange(transformedValue);
-                        // Manually trigger change detection for zoneless compatibility
-                        this.cdr.markForCheck();
+                        if (valueToEmit !== undefined) {
+                            const transformedValue = config.transformValue
+                                ? config.transformValue(valueToEmit)
+                                : valueToEmit;
+                            this.onChange(transformedValue);
+                            // Manually trigger change detection for zoneless compatibility
+                            this.cdr.markForCheck();
+                        }
                     }
                 });
             }
@@ -131,8 +135,9 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
             });
         }
 
-        // Set initial value if we have one pending
-        if (this._value !== null) {
+        // Only apply stored value if writeValue was called (form control exists).
+        // Without this check, we'd overwrite native element values (e.g., value="Hello") with null.
+        if (this._valueSet) {
             this.updateElementValue(this._value);
         }
 
@@ -142,7 +147,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
         }
     }
 
-    private getValueToEmit(config: CvaConfig, event: any): any {
+    private getValueToEmit(config: CvaConfig, event: any): ValueType | undefined {
         // For radio buttons, emit the element's value when checked
         // For other components, emit the property value
         if (config.isRadioButton) {
@@ -158,7 +163,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
         }
     }
 
-    private updateElementValue(value: ValueType): void {
+    private updateElementValue(value: ValueType | null): void {
         const element = this.elementRef.nativeElement;
         const config = this.effectiveConfig;
 
