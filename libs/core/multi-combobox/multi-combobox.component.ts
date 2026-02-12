@@ -469,22 +469,21 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** @hidden */
     _toggleSelection(item: SelectableOptionItem, fromTokenCloseClick = false): void {
-        const idx = getTokenIndexByIdlOrValue(item, this._selectedSuggestions);
+        const selectedSuggestions = this._selectedSuggestions();
+        const idx = getTokenIndexByIdlOrValue(item, selectedSuggestions);
         if (idx === -1) {
-            this._selectedSuggestions.push(item);
+            this._selectedSuggestions.set([...selectedSuggestions, item]);
         } else {
-            this._selectedSuggestions.splice(idx, 1);
+            this._selectedSuggestions.set(selectedSuggestions.filter((_, i) => i !== idx));
         }
 
         item.selected = !item.selected;
 
         this._propagateChange(fromTokenCloseClick);
 
-        if (!this._selectedSuggestions.length) {
+        if (!this._selectedSuggestions().length) {
             this._focusToSearchField();
         }
-
-        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -509,9 +508,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
     _handleSelectAllItems = (select: boolean): void => {
-        this._flatSuggestions.forEach((item) => (item.selected = select));
-        this._onEveryItem(this._suggestions, (item) => (item.selected = select));
-        this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
+        this._flatSuggestions.update((items) => items.map((item) => ({ ...item, selected: select })));
+        this._suggestions.update((items) => this._updateSelectionRecursive(items, select));
+        this._selectedSuggestions.set(select ? [...this._flatSuggestions()] : []);
         this._rangeSelector.reset();
         this.inputText = '';
 
@@ -530,7 +529,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._flatSuggestions.find((s) => s.value === token.value);
+        const optionItem = this._flatSuggestions().find((s) => s.value === token.value);
         if (optionItem) {
             this._toggleSelection(optionItem, true);
             this._rangeSelector.reset();
@@ -539,15 +538,17 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** @hidden */
     _moreClicked(): void {
-        this._suggestions = this.isGroup
-            ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
-            : this._suggestions.filter((value) =>
-                  this._selectedSuggestions.some((item) => equal(item.value, value.value))
-              );
+        const selectedSuggestions = this._selectedSuggestions();
+        this._suggestions.set(
+            this.isGroup
+                ? this._convertObjectsToGroupOptionItems(selectedSuggestions.map(({ value }) => value))
+                : this._suggestions().filter((value) =>
+                      selectedSuggestions.some((item) => equal(item.value, value.value))
+                  )
+        );
 
         this._showList(true);
-        this.selectedShown$.next(true);
-        this._cd.markForCheck();
+        this.selectedShown.set(true);
     }
 
     /** @hidden */
@@ -558,12 +559,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             if (isList) {
                 return;
             }
-            if (
-                this._suggestions?.length === 1 &&
-                this._suggestions[0].label === this.inputText &&
-                !this._suggestions[0].selected
-            ) {
-                this._toggleSelection(this._suggestions[0]);
+            const suggestions = this._suggestions();
+            if (suggestions?.length === 1 && suggestions[0].label === this.inputText && !suggestions[0].selected) {
+                this._toggleSelection(suggestions[0]);
             }
             this._showList(false);
             this.inputText = '';
@@ -602,10 +600,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Handle dialog dismissing, closes popover and sets backup data.
      */
     _dialogDismiss(backup: SelectableOptionItem[]): void {
-        this._selectedSuggestions = [...backup];
+        this._selectedSuggestions.set([...backup]);
         this.inputText = '';
         this._showList(false);
-        this.selectedShown$.next(false);
+        this.selectedShown.set(false);
     }
 
     /**
@@ -646,7 +644,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     close(): void {
         this._focusToSearchField();
         this._rangeSelector.reset();
-        this.selectedShown$.next(false);
+        this.selectedShown.set(false);
         this.inputText = '';
 
         this.isOpen = false;
@@ -803,20 +801,19 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /**
      * @hidden
-     * Iterate over every item and perform callback
+     * Recursively update selection state for items and their children (for grouped suggestions)
      */
-    private _onEveryItem(items: SelectableOptionItem[], callback: (item: SelectableOptionItem) => void): void {
-        items.forEach((item) => {
-            callback(item);
-            if (item.children && item.children.length > 0) {
-                this._onEveryItem(item.children, callback);
-            }
-        });
+    private _updateSelectionRecursive(items: SelectableOptionItem[], selected: boolean): SelectableOptionItem[] {
+        return items.map((item) => ({
+            ...item,
+            selected,
+            children: item.children ? this._updateSelectionRecursive(item.children, selected) : undefined
+        }));
     }
 
     /** @hidden */
     private _toggleSelectionByInputText(text = this.inputText): void {
-        const item = getSelectItemByInputValue<T>(this._fullFlatSuggestions, text);
+        const item = getSelectItemByInputValue<T>(this._fullFlatSuggestions(), text);
         if (item) {
             this._toggleSelection(item);
             this.inputText = '';
@@ -845,23 +842,38 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      */
     private _onListElementClicked(event: MouseEvent, index: number): void {
         // value has been changed at this point, so it can be safely used
-        const selectionState = this._flatSuggestions[index].selected;
+        const flatSuggestions = this._flatSuggestions();
+        const selectionState = flatSuggestions[index].selected;
         this._rangeSelector.onRangeElementToggled(index, event);
-        const toRemoveSet = new Set();
+
+        // Collect items to add/remove from selected suggestions
+        const toRemove = new Set<any>();
+        const toAdd: SelectableOptionItem[] = [];
+        const indicesToUpdate = new Set<number>();
+
         this._rangeSelector.applyValueToEachInRange((idx) => {
-            const current = this._flatSuggestions[idx];
-            if (current.selected !== selectionState) {
-                if (current.selected) {
-                    // removing from "_selectedSuggestions" list
-                    toRemoveSet.add(current.value);
+            const item = flatSuggestions[idx];
+            if (item.selected !== selectionState) {
+                indicesToUpdate.add(idx);
+                // Track what will change based on OLD state before the update
+                if (item.selected) {
+                    // Item is currently selected, will be deselected
+                    toRemove.add(item.value);
                 } else {
-                    // adding current item to "_selectedSuggestions"
-                    this._selectedSuggestions.push(current);
+                    // Item is currently not selected, will be selected
+                    toAdd.push({ ...item, selected: selectionState });
                 }
-                current.selected = selectionState;
             }
         });
-        this._selectedSuggestions = this._selectedSuggestions.filter((s) => !toRemoveSet.has(s.value));
+
+        // Update flat suggestions immutably
+        this._flatSuggestions.update((items) =>
+            items.map((item, idx) => (indicesToUpdate.has(idx) ? { ...item, selected: selectionState } : item))
+        );
+
+        // Update selected suggestions
+        this._selectedSuggestions.update((selected) => [...selected.filter((s) => !toRemove.has(s.value)), ...toAdd]);
+
         this._propagateChange();
 
         this._tokenizer.onResize();
@@ -899,21 +911,24 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Method that picks other value moved from current one by offset, called only when Multi Combobox is closed.
      */
     private _chooseOtherItem(offset: number): void {
-        if (this._selectedSuggestions?.length === this._flatSuggestions.length) {
+        const selectedSuggestions = this._selectedSuggestions();
+        const flatSuggestions = this._flatSuggestions();
+        if (selectedSuggestions?.length === flatSuggestions.length) {
             this.inputText = '';
             return;
         }
 
-        const activeValue = getSelectItemByInputValue<T>(this._fullFlatSuggestions, this.inputText);
-        const index = this._flatSuggestions.findIndex((value) => value === activeValue);
-        const position = !this.inputText && offset === -1 ? this._flatSuggestions.length - 1 : index + offset;
-        const item = this._flatSuggestions[position];
+        const fullFlatSuggestions = this._fullFlatSuggestions();
+        const activeValue = getSelectItemByInputValue<T>(fullFlatSuggestions, this.inputText);
+        const index = flatSuggestions.findIndex((value) => value === activeValue);
+        const position = !this.inputText && offset === -1 ? flatSuggestions.length - 1 : index + offset;
+        const item = flatSuggestions[position];
 
         if (item) {
             this._setInputTextFromOptionItem(item);
         }
 
-        const selectedIndex = this._selectedSuggestions.findIndex((value) => value.label === item?.label);
+        const selectedIndex = selectedSuggestions.findIndex((value) => value.label === item?.label);
         if (selectedIndex !== -1) {
             this._chooseOtherItem(offset);
         }

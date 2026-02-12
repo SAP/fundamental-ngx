@@ -32,7 +32,7 @@
             [glyph]="!_cva.readonly ? 'navigation-down-arrow' : ' '"
             [isControl]="true"
             [disabled]="_cva.disabled || _cva.readonly"
-            [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
+            [isExpanded]="!mobile && isOpen && _suggestions().length > 0"
             [attr.aria-disabled]="_cva.disabled || _cva.readonly"
             [attr.aria-readonly]="_cva.readonly"
             [glyphAriaLabel]="_cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
@@ -49,9 +49,9 @@
                 class="fd-multi-combobox-tokenizer-custom"
                 (moreClickedEvent)="_moreClicked()"
                 fdMultiAnnouncer
-                [multiAnnouncerOptions]="_suggestions"
+                [multiAnnouncerOptions]="_suggestions()"
             >
-                @for (token of _selectedSuggestions; track token.id) {
+                @for (token of _selectedSuggestions(); track token.id) {
                     <fd-token [readOnly]="_cva.disabled" (onCloseClick)="_removeToken(token, $event)">
                         {{ token.label }}
                     </fd-token>
@@ -60,7 +60,7 @@
                     #searchInputElement
                     fdkAutoComplete
                     (onComplete)="_onCompleteTerm($event)"
-                    [options]="_suggestions"
+                    [options]="_suggestions()"
                     [inputText]="inputText"
                     type="text"
                     role="combobox"
@@ -79,7 +79,7 @@
                     [disabled]="_cva.disabled"
                     [(ngModel)]="inputText"
                     (ngModelChange)="_searchTermChanged()"
-                    [attr.placeholder]="_selectedSuggestions.length ? null : _cva.placeholder"
+                    [attr.placeholder]="_selectedSuggestions().length ? null : _cva.placeholder"
                     (focus)="tokenizer._showAllTokens()"
                     (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
@@ -112,7 +112,7 @@
         <input
             fdkAutoComplete
             (onComplete)="_onCompleteTerm($event)"
-            [options]="_suggestions"
+            [options]="_suggestions()"
             [inputText]="inputText"
             type="text"
             role="combobox"
@@ -167,13 +167,13 @@
             <fd-multi-combobox-select-all-toggler
                 [selectAllHandler]="_handleSelectAllItems"
                 [valueChanges]="selectionChange"
-                [selectedItems]="_selectedSuggestions"
-                [flatItems]="_flatSuggestions"
+                [selectedItems]="_selectedSuggestions()"
+                [flatItems]="_flatSuggestions()"
             ></fd-multi-combobox-select-all-toggler>
         }
         <ng-content></ng-content>
         @if (isGroup) {
-            @for (group of _suggestions; track group.label; let groupIndex = $index) {
+            @for (group of _suggestions(); track group.label; let groupIndex = $index) {
                 @if (!groupItemTemplate) {
                     <li
                         fd-list-item
@@ -218,7 +218,7 @@
                 }
             }
         } @else {
-            @for (optionItem of _suggestions; track optionItem.id; let i = $index) {
+            @for (optionItem of _suggestions(); track optionItem.id; let i = $index) {
                 <li
                     fd-list-item
                     role="option"

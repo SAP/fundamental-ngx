@@ -81,7 +81,7 @@ describe('MultiComboBox component', () => {
         fixture.detectChanges();
 
         let toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
-        expect(toggleButton.length).toBe(component._suggestions.length);
+        expect(toggleButton.length).toBe(component._suggestions().length);
 
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
@@ -97,16 +97,16 @@ describe('MultiComboBox component', () => {
 
         const dsLength = (component.dataSourceDirective.dataSource as any[]).length;
 
-        expect(component._suggestions.length).toBe(dsLength);
+        expect(component._suggestions().length).toBe(dsLength);
 
         component._setLimitless(false);
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
         if (dsLength > component._getMapLimit()) {
-            expect(component._suggestions.length).toBeLessThan(dsLength);
+            expect(component._suggestions().length).toBeLessThan(dsLength);
         } else {
-            expect(component._suggestions.length).toBe(dsLength);
+            expect(component._suggestions().length).toBe(dsLength);
         }
     });
 
@@ -119,17 +119,17 @@ describe('MultiComboBox component', () => {
         fixture.detectChanges();
 
         const secondaryColumns = overlayContainerEl.querySelectorAll('.fd-list__secondary');
-        expect(secondaryColumns.length).toBe(component._suggestions.length);
+        expect(secondaryColumns.length).toBe(component._suggestions().length);
     });
 
     it('dataSource items should be converted to SelectableOptionItem', () => {
-        const item = component._suggestions[0];
+        const item = component._suggestions()[0];
 
         expect(isSelectableOptionItem(item)).toBeTruthy();
     });
 
     it('should select and unselect an item', () => {
-        const item = component._suggestions[0];
+        const item = component._suggestions()[0];
         const propagateChangeSpy = jest.spyOn(<any>component, '_propagateChange');
 
         expect(item.selected).toBe(false);
@@ -138,14 +138,14 @@ describe('MultiComboBox component', () => {
         fixture.detectChanges();
 
         expect(item.selected).toBe(true);
-        expect(component._selectedSuggestions.length).toEqual(1);
+        expect(component._selectedSuggestions().length).toEqual(1);
         expect(propagateChangeSpy).toHaveBeenCalled();
 
         component._toggleSelection(item);
         fixture.detectChanges();
 
         expect(item.selected).toBe(false);
-        expect(component._selectedSuggestions.length).toEqual(0);
+        expect(component._selectedSuggestions().length).toEqual(0);
         expect(propagateChangeSpy).toHaveBeenCalled();
     });
 
@@ -169,15 +169,15 @@ describe('MultiComboBox component', () => {
         const dsLength = (component.dataSourceDirective.dataSource as any[]).length;
 
         if (dsLength > component._getMapLimit()) {
-            expect(component._selectedSuggestions.length).toBeLessThan(dsLength);
+            expect(component._selectedSuggestions().length).toBeLessThan(dsLength);
         } else {
-            expect(component._selectedSuggestions.length).toBe(dsLength);
+            expect(component._selectedSuggestions().length).toBe(dsLength);
         }
 
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(unselectEvent);
         fixture.detectChanges();
 
-        expect(component._selectedSuggestions.length).toEqual(0);
+        expect(component._selectedSuggestions().length).toEqual(0);
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
@@ -200,7 +200,7 @@ describe('MultiComboBox component', () => {
                 relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement
             })
         );
-        expect(component._selectedSuggestions.length).toEqual(1);
+        expect(component._selectedSuggestions().length).toEqual(1);
     });
 
     it('should pause and unpause focus trap when opened and closed', () => {

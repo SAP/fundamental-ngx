@@ -20,6 +20,7 @@ import {
     Injector,
     afterNextRender,
     inject,
+    signal,
     viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -36,7 +37,7 @@ import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isStr
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, Subscription, skip, startWith, timer } from 'rxjs';
+import { Subscription, skip, startWith, timer } from 'rxjs';
 import {
     FdMultiComboBoxDataSource,
     FdMultiComboboxAcceptableDataSource
@@ -93,25 +94,25 @@ export abstract class BaseMultiCombobox<T = any> {
      * @hidden
      * List of selected suggestions
      */
-    _selectedSuggestions: SelectableOptionItem<T>[] = [];
+    _selectedSuggestions = signal<SelectableOptionItem<T>[]>([]);
 
     /**
      * @hidden
      * List of matched suggestions
      */
-    _suggestions: SelectableOptionItem[];
+    _suggestions = signal<SelectableOptionItem[]>([]);
 
     /**
      * @hidden
      * Grouped suggestions mapped to array.
      */
-    _flatSuggestions: SelectableOptionItem[] = [];
+    _flatSuggestions = signal<SelectableOptionItem[]>([]);
 
     /** @hidden */
-    _fullFlatSuggestions: SelectableOptionItem[] = [];
+    _fullFlatSuggestions = signal<SelectableOptionItem[]>([]);
 
     /** @hidden */
-    selectedShown$ = new BehaviorSubject(false);
+    selectedShown = signal(false);
 
     /** @hidden */
     protected readonly _elmRef = inject(ElementRef<HTMLElement>);
@@ -240,24 +241,28 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected _setSelectedSuggestions(): void {
-        this._selectedSuggestions = [];
+        this._selectedSuggestions.set([]);
 
         if (!this.selectedItems?.length) {
             return;
         }
 
+        const fullFlatSuggestions = this._fullFlatSuggestions();
+        const selectedSuggestions: SelectableOptionItem<T>[] = [];
+
         for (let i = 0; i <= this.selectedItems.length; i++) {
             const selectedItem = this.selectedItems[i];
-            const idx = this._fullFlatSuggestions.findIndex(
+            const idx = fullFlatSuggestions.findIndex(
                 (item) => item.label === selectedItem || item.value === selectedItem
             );
             if (idx !== -1) {
-                this._selectedSuggestions.push(this._fullFlatSuggestions[idx]);
-                this._fullFlatSuggestions[idx].selected = true;
+                selectedSuggestions.push(fullFlatSuggestions[idx]);
+                fullFlatSuggestions[idx].selected = true;
             }
         }
 
-        this._cd.detectChanges();
+        this._selectedSuggestions.set(selectedSuggestions);
+        this._fullFlatSuggestions.set(fullFlatSuggestions);
     }
 
     /**
@@ -432,7 +437,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected _mapAndUpdateModel(): void {
-        const selectedItems = this._selectedSuggestions.map(({ value }) => value);
+        const selectedItems = this._selectedSuggestions().map(({ value }) => value);
 
         const shouldEmitChangeEvent = !equal(this.selectedItems, selectedItems);
 
@@ -522,21 +527,21 @@ export abstract class BaseMultiCombobox<T = any> {
     protected _parseDataSourceValue(data: T[]): void {
         this._convertDataSourceSuggestions(data);
 
-        const selectedSuggestionsLength = this._selectedSuggestions.length;
-        if (selectedSuggestionsLength > 0) {
-            for (let i = 0; i < selectedSuggestionsLength; i++) {
-                const selectedSuggestion = this._selectedSuggestions[i];
-                const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
+        const selectedSuggestions = this._selectedSuggestions();
 
-                if (idx !== -1) {
-                    this._suggestions[idx].selected = true;
-                }
-            }
+        if (selectedSuggestions.length > 0) {
+            this._suggestions.update((suggestions) =>
+                suggestions.map((suggestion) => {
+                    const isSelected = selectedSuggestions.some((item) => equal(item.value, suggestion.value));
+                    return isSelected ? { ...suggestion, selected: true } : suggestion;
+                })
+            );
         }
 
         if (this._dataSourceChanged) {
-            this._flatSuggestions = this.isGroup ? flattenGroups(this._suggestions) : this._suggestions;
-            this._fullFlatSuggestions = this._flatSuggestions;
+            const currentSuggestions = this._suggestions();
+            this._flatSuggestions.set(this.isGroup ? flattenGroups(currentSuggestions) : currentSuggestions);
+            this._fullFlatSuggestions.set(this._flatSuggestions());
 
             this._setSelectedSuggestions();
 
@@ -551,13 +556,16 @@ export abstract class BaseMultiCombobox<T = any> {
      * @param data
      */
     protected _convertDataSourceSuggestions(data: T[]): void {
-        this._suggestions = this._convertToOptionItems(data).map((optionItem) => {
-            const selectedElement = this._selectedSuggestions.find((selectedItem) => selectedItem.id === optionItem.id);
-            if (selectedElement) {
-                optionItem.selected = selectedElement.selected;
-            }
-            return optionItem;
-        });
+        const selectedSuggestions = this._selectedSuggestions();
+        this._suggestions.set(
+            this._convertToOptionItems(data).map((optionItem) => {
+                const selectedElement = selectedSuggestions.find((selectedItem) => selectedItem.id === optionItem.id);
+                if (selectedElement) {
+                    optionItem.selected = selectedElement.selected;
+                }
+                return optionItem;
+            })
+        );
     }
 
     /** @hidden */
