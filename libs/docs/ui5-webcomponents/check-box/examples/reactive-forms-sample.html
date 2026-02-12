@@ -1,47 +1,18 @@
-<form [formGroup]="registrationForm" class="checkbox-form">
+<form [formGroup]="registrationForm">
     <ui5-checkbox formControlName="acceptAll" text="Accept all" indeterminate="true"></ui5-checkbox>
 
-    <fieldset formGroupName="agreements" class="agreements-fieldset">
+    <fieldset formGroupName="agreements">
         <ui5-checkbox formControlName="termsAndConditions" text="I accept Terms and Conditions"></ui5-checkbox>
         <ui5-checkbox formControlName="marketing" text="I want to receive Marketing Materials"></ui5-checkbox>
         <ui5-checkbox formControlName="newsletter" text="I want to sign up for a Newsletter"></ui5-checkbox>
     </fieldset>
 </form>
 
-<div class="form-debug">
-    <small>
-        <strong>Form value:</strong> {{ registrationForm.getRawValue() | json }}<br />
-        <strong>Form Touched:</strong> {{ registrationForm.touched }}<br />
-        <strong>Form Dirty:</strong> {{ registrationForm.dirty }}<br />
-        <strong>Form Valid:</strong> {{ registrationForm.valid }}<br />
-    </small>
-</div>
+<br />
 
-<style>
-    .checkbox-form {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .agreements-fieldset {
-        border: none;
-        padding-left: 1.5rem;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .form-debug {
-        padding: 1rem;
-        background-color: var(--sapBackgroundColor, #f7f7f7);
-        border-radius: 0.25rem;
-        margin-top: 1rem;
-    }
-
-    .form-debug small {
-        font-family: monospace;
-    }
-</style>
+<small>
+    <strong>Form value:</strong> {{ registrationForm.getRawValue() | json }}<br />
+    <strong>Form Touched:</strong> {{ registrationForm.touched }}<br />
+    <strong>Form Dirty:</strong> {{ registrationForm.dirty }}<br />
+    <strong>Form Valid:</strong> {{ registrationForm.valid }}<br />
+</small>
