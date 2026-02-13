@@ -1,0 +1,39 @@
+<h3 class="fd-margin-bottom--sm">Reactive Forms Example</h3>
+<form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="notifications" class="fd-form-label fd-margin-end--sm">Enable Notifications</ui5-label>
+        <ui5-switch id="notifications" formControlName="notifications"></ui5-switch>
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="darkMode" class="fd-form-label fd-margin-end--sm">Dark Mode</ui5-label>
+        <ui5-switch id="darkMode" formControlName="darkMode"></ui5-switch>
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="autoSave" class="fd-form-label fd-margin-end--sm">Auto-Save</ui5-label>
+        <ui5-switch id="autoSave" formControlName="autoSave"></ui5-switch>
+    </div>
+
+    <div class="fd-margin-bottom--sm">
+        <ui5-label for="shareData" class="fd-form-label fd-margin-end--sm">Share Analytics Data</ui5-label>
+        <ui5-switch id="shareData" formControlName="shareData"></ui5-switch>
+    </div>
+
+    <br />
+    <small>
+        Enable Notifications Switch: {{ settingsForm.controls.notifications.value }} <br />
+        Dark Mode Switch: {{ settingsForm.controls.darkMode.value }} <br />
+        Auto-Save Switch: {{ settingsForm.controls.autoSave.value }} <br />
+        Share Analytics Data Switch: {{ settingsForm.controls.shareData.value }} <br />
+
+        Form Touched: {{ settingsForm.touched }} <br />
+        Form Dirty: {{ settingsForm.dirty }} <br />
+        Form Valid: {{ settingsForm.valid }} <br />
+    </small>
+
+    <div class="fd-margin-top--sm">
+        <button type="submit" class="fd-margin-end--sm">Submit</button>
+        <button type="button" (click)="resetForm()">Reset</button>
+    </div>
+</form>
