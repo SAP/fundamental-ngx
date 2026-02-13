@@ -227,8 +227,8 @@ async function generateCvaFile(targetDir: string): Promise<void> {
  * Generates the utils secondary entry point files (index.ts and ng-package.json).
  */
 async function generateUtilsFiles(targetDir: string): Promise<void> {
-    // Generate utils/index.ts that exports the CVA
-    const utilsContent = `export { GenericControlValueAccessor } from './cva';\n`;
+    // Generate utils/index.ts that exports the CVA directives
+    const utilsContent = `export { CVA_CONFIG, GenericControlValueAccessor } from './cva';\n`;
 
     const utilsIndexPath = path.join(targetDir, SUBDIRS.UTILS, FILES.INDEX_TS);
     await ensureDirAndWriteFile(utilsIndexPath, utilsContent);
