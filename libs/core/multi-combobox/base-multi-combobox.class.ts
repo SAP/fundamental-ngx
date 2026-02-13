@@ -250,19 +250,26 @@ export abstract class BaseMultiCombobox<T = any> {
         const fullFlatSuggestions = this._fullFlatSuggestions();
         const selectedSuggestions: SelectableOptionItem<T>[] = [];
 
-        for (let i = 0; i <= this.selectedItems.length; i++) {
-            const selectedItem = this.selectedItems[i];
-            const idx = fullFlatSuggestions.findIndex(
-                (item) => item.label === selectedItem || item.value === selectedItem
+        // Update immutably
+        const updatedSuggestions = fullFlatSuggestions.map((item) => {
+            const isSelected = this.selectedItems.some(
+                (selectedItem) => item.label === selectedItem || item.value === selectedItem
             );
-            if (idx !== -1) {
-                selectedSuggestions.push(fullFlatSuggestions[idx]);
-                fullFlatSuggestions[idx].selected = true;
+
+            if (isSelected) {
+                selectedSuggestions.push({ ...item, selected: true });
+                return { ...item, selected: true };
+            } else if (item.selected) {
+                // Item was selected but is now deselected - must update to false
+                return { ...item, selected: false };
             }
-        }
+
+            // Item was not and is not selected - no change needed
+            return item;
+        });
 
         this._selectedSuggestions.set(selectedSuggestions);
-        this._fullFlatSuggestions.set(fullFlatSuggestions);
+        this._fullFlatSuggestions.set(updatedSuggestions);
     }
 
     /**
