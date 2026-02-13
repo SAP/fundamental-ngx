@@ -10,6 +10,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { BasicSample } from './examples/basic-sample';
 import { DisabledSample } from './examples/disabled-sample';
+import { ReactiveFormsSample } from './examples/reactive-forms-sample';
 import { TextWrappingSample } from './examples/text-wrapping-sample';
 import { ValueStateSample } from './examples/value-state-sample';
 
@@ -21,6 +22,8 @@ const disabledSampleTs = 'disabled-sample.ts';
 const disabledSampleHtml = 'disabled-sample.html';
 const textWrappingSampleTs = 'text-wrapping-sample.ts';
 const textWrappingSampleHtml = 'text-wrapping-sample.html';
+const reactiveFormsSampleTs = 'reactive-forms-sample.ts';
+const reactiveFormsSampleHtml = 'reactive-forms-sample.html';
 
 @Component({
     selector: 'ui5-doc-radio-button',
@@ -35,7 +38,8 @@ const textWrappingSampleHtml = 'text-wrapping-sample.html';
         BasicSample,
         ValueStateSample,
         DisabledSample,
-        TextWrappingSample
+        TextWrappingSample,
+        ReactiveFormsSample
     ]
 })
 export class RadioButtonDocs {
@@ -100,6 +104,22 @@ export class RadioButtonDocs {
             language: 'html',
             code: getAssetFromModuleAssets(textWrappingSampleHtml),
             originalFileName: 'text-wrapping-sample'
+        }
+    ]);
+
+    reactiveFormsExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(reactiveFormsSampleTs),
+            originalFileName: 'reactive-forms-sample',
+            component: 'ReactiveFormsSample',
+            typescriptFileCode: getAssetFromModuleAssets(reactiveFormsSampleTs),
+            scssFileCode: ''
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(reactiveFormsSampleHtml),
+            originalFileName: 'reactive-forms-sample'
         }
     ]);
 }
