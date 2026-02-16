@@ -35,7 +35,7 @@ import {
 import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { BehaviorSubject, Subscription, skip, startWith, timer } from 'rxjs';
 import {
     FdMultiComboBoxDataSource,
@@ -434,7 +434,7 @@ export abstract class BaseMultiCombobox<T = any> {
     protected _mapAndUpdateModel(): void {
         const selectedItems = this._selectedSuggestions.map(({ value }) => value);
 
-        const shouldEmitChangeEvent = !equal(this.selectedItems, selectedItems);
+        const shouldEmitChangeEvent = !shallowEqual(this.selectedItems, selectedItems);
 
         if (!shouldEmitChangeEvent) {
             return;
@@ -526,7 +526,7 @@ export abstract class BaseMultiCombobox<T = any> {
         if (selectedSuggestionsLength > 0) {
             for (let i = 0; i < selectedSuggestionsLength; i++) {
                 const selectedSuggestion = this._selectedSuggestions[i];
-                const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
+                const idx = this._suggestions.findIndex((item) => shallowEqual(item.value, selectedSuggestion.value));
 
                 if (idx !== -1) {
                     this._suggestions[idx].selected = true;

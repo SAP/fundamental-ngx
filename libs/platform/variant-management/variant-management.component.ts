@@ -38,7 +38,7 @@ import { HeaderSizes, TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FDP_DYNAMIC_PAGE } from '@fundamental-ngx/platform/dynamic-page';
 import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { BehaviorSubject } from 'rxjs';
 import { ManageVariantItemComponent } from './components/manage-variant-item/manage-variant-item.component';
 import { ManageVariantsDialogComponent } from './components/manage-variants-dialog/manage-variants-dialog.component';
@@ -254,7 +254,7 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
      */
     updateActivePreset(preset: T, componentName: string): void {
         const activeVariantData = this._originalActiveVariant.data[componentName];
-        this._variantChanged = activeVariantData && !equal(preset, activeVariantData);
+        this._variantChanged = activeVariantData && !shallowEqual(preset, activeVariantData);
         this.activeVariant.data[componentName] = preset;
         this._cdr.detectChanges();
     }
