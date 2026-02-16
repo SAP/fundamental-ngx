@@ -1,14 +1,13 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    computed,
     ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
-    ViewEncapsulation,
-    inject
+    inject,
+    input,
+    ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_GENERIC_TAG_COMPONENT } from './tokens';
 
@@ -29,76 +28,62 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
     ],
     host: {
         '[attr.tabindex]': '0',
-        '[attr.aria-roledescription]': 'ariaRoleDescription',
+        '[attr.aria-roledescription]': 'ariaRoleDescription()',
+        '[class]': 'cssClass()',
         role: 'button'
     },
     imports: [IconComponent]
 })
-export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
-    /** User's custom classes */
-    @Input()
-    class: string;
-
+export class GenericTagComponent implements HasElementRef {
     /**
      * The type of the Generic Tag.
      * Can be one of the following: 'error' | 'success' | 'warning' | 'information'.
      * For default Generic Tag omit this property.
      */
-    @Input()
-    type: Nullable<GenericTagType>;
+    readonly type = input<GenericTagType | null | undefined>();
 
     /**
      * Required input
      * The KPI Name of the Generic tag. Standard text.
      * Always use a meaningful title. Keep it simple and try to use no more than 3 words.
      */
-    @Input({ required: true })
-    name!: string;
+    readonly name = input.required<string>();
 
     /**
      * The KPI Value of the Generic tag.
      * The value represents the numeric (key) attribute and its unit.
      */
-    @Input()
-    value: Nullable<string>;
+    readonly value = input<string | null | undefined>();
 
     /**
      *  Aria defines role description for the Generic Tag
      */
-    @Input()
-    ariaRoleDescription: Nullable<string> = 'Generic Tag';
+    readonly ariaRoleDescription = input('Generic Tag');
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
+    /**
+     * Computed icon glyph based on type.
+     * @hidden
      */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return buildObjectStatusCssClasses(this);
-    }
+    protected readonly iconGlyph = computed(() => {
+        const tagType = this.type();
+        return tagType ? `message-${tagType}` : '';
+    });
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    /**
+     * Computed CSS class string for the component.
+     * @hidden
+     */
+    protected readonly cssClass = computed(() => {
+        const classes = ['fd-generic-tag'];
+        const tagType = this.type();
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+        if (tagType) {
+            classes.push(`fd-generic-tag--${tagType}`);
+        }
+
+        return classes.join(' ');
+    });
 }
-
-type GenericTagData = NullableObject<{
-    type: GenericTagType;
-    class: string;
-}>;
-
-const buildObjectStatusCssClasses = (data: GenericTagData): string[] => [
-    'fd-generic-tag',
-    data.type ? `fd-generic-tag--${data.type}` : '',
-    data.class || ''
-];
