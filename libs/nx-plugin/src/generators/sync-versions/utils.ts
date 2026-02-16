@@ -42,8 +42,6 @@ const getVersions = () => {
         ANGULAR_VER_PLACEHOLDER: process.env.FD_ENV_ANGULAR_VER_PLACEHOLDER || `^${major(angularVersion)}.0.0`,
         RXJS_VER_PLACEHOLDER:
             process.env.FD_ENV_RXJS_VER_PLACEHOLDER || aboveMinorVersion(packageJson.dependencies.rxjs),
-        FAST_DEEP_EQUAL_VER_PLACEHOLDER:
-            process.env.FD_ENV_FAST_DEEP_EQUAL_VER_PLACEHOLDER || packageJson.dependencies['fast-deep-equal'],
         FDSTYLES_VER_PLACEHOLDER:
             process.env.FD_ENV_FDSTYLES_VER_PLACEHOLDER || packageJson.dependencies['fundamental-styles'],
         FDCXSTYLES_VER_PLACEHOLDER:

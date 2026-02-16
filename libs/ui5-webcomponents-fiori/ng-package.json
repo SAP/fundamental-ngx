@@ -11,6 +11,6 @@
         "@sap-theming/theming-base-content",
         "lodash-es",
         "compare-versions",
-        "fast-deep-equal"
+        "fast-equals"
     ]
 }
