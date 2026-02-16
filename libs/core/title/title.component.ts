@@ -125,8 +125,19 @@ export class TitleComponent extends TitleToken {
      * @hidden
      */
     private _setHeaderSize(): void {
-        const headerSize =
-            this.headerSize() ?? this._defaultHeaderSize ?? this._elementRef.nativeElement.tagName.charAt(1);
+        let headerSize: HeaderSizes | string | null = this.headerSize() ?? this._defaultHeaderSize ?? null;
+
+        // If no explicit size provided, try to extract from element tag name
+        if (headerSize === null) {
+            const tagName = this._elementRef.nativeElement.tagName;
+            // Only extract from valid heading tags (H1-H6)
+            if (/^H[1-6]$/i.test(tagName)) {
+                headerSize = tagName.charAt(1);
+            } else {
+                // Default to h5 for non-heading elements (like div with role="heading")
+                headerSize = 5;
+            }
+        }
 
         if (this._appliedHeaderSize !== undefined) {
             this._elementRef.nativeElement.classList.remove(`fd-title--h${this._appliedHeaderSize}`);

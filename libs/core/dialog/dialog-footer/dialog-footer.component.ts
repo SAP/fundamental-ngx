@@ -1,11 +1,4 @@
-import {
-    AfterContentInit,
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ViewEncapsulation,
-    inject
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
@@ -35,14 +28,9 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     standalone: true,
     imports: [BarComponent, BarRightDirective, ContentDensityDirective, NgTemplateOutlet]
 })
-export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
+export class DialogFooterComponent extends DialogFooterBase implements AfterViewInit {
     /** @hidden */
     dialogConfig = inject(DialogConfig, { optional: true }) || {};
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        super.ngAfterContentInit();
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {
