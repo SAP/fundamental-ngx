@@ -1,11 +1,11 @@
 import {
-    AfterContentInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
-    ElementRef,
-    ViewEncapsulation,
-    inject
+    contentChild,
+    inject,
+    Injector,
+    ViewEncapsulation
 } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
@@ -18,36 +18,42 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     encapsulation: ViewEncapsulation.None,
     host: {
         role: 'toolbar'
-    },
-    standalone: true
+    }
 })
-export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
+export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions {
     /** @hidden */
-    @ContentChild(ToolbarComponent)
-    _toolbarComponent: ToolbarComponent;
+    readonly _toolbarComponent = contentChild(ToolbarComponent);
 
     /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
+    private readonly _injector = inject(Injector);
 
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
+    constructor() {
+        super();
+
+        // Add toolbar class after render when DOM is ready
+        afterNextRender(() => {
+            this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar);
+        });
     }
 
     /** @hidden */
     _setSize(size: DynamicPageResponsiveSize): void {
-        if (this._toolbarComponent) {
-            this._handleOverflow(size === 'small');
+        const toolbar = this._toolbarComponent();
+        if (toolbar) {
+            this._handleOverflow(toolbar, size === 'small');
         }
     }
 
     /** @hidden */
-    private _handleOverflow(shouldBeHidden: boolean): void {
-        this._toolbarComponent.forceOverflow = shouldBeHidden;
-        this._toolbarComponent.shouldOverflow = shouldBeHidden;
-        this._toolbarComponent.detectChanges();
-        setTimeout(() => {
-            this._toolbarComponent.updateCollapsibleItems();
-        });
+    private _handleOverflow(toolbar: ToolbarComponent, shouldBeHidden: boolean): void {
+        toolbar.forceOverflow = shouldBeHidden;
+        toolbar.shouldOverflow = shouldBeHidden;
+        toolbar.detectChanges();
+        afterNextRender(
+            () => {
+                toolbar.updateCollapsibleItems();
+            },
+            { injector: this._injector }
+        );
     }
 }

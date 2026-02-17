@@ -1,12 +1,4 @@
-import {
-    AfterContentInit,
-    ChangeDetectionStrategy,
-    Component,
-    ContentChild,
-    ElementRef,
-    ViewEncapsulation,
-    inject
-} from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, contentChild, ViewEncapsulation } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
@@ -19,20 +11,19 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     host: {
         role: 'toolbar',
         '[style.margin-inline-start]': '"auto"'
-    },
-    standalone: true
+    }
 })
-export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
+export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions {
     /** @hidden */
-    @ContentChild(ToolbarComponent)
-    toolbarComponent: ToolbarComponent;
+    readonly toolbarComponent = contentChild(ToolbarComponent);
 
-    /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
+    constructor() {
+        super();
 
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this._elementRef);
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
+        // Add toolbar classes after render when DOM is ready
+        afterNextRender(() => {
+            this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar);
+            this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar);
+        });
     }
 }
