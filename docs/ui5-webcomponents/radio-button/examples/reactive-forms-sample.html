@@ -1,0 +1,36 @@
+<form [formGroup]="customForm">
+    <fieldset class="fd-margin-bottom--md">
+        <legend><strong>Radio Button Group</strong></legend>
+        @for (value of radioInput.values; track value) {
+        <div class="fd-margin-bottom--sm">
+            <ui5-radio-button
+                [name]="radioInput.name"
+                [value]="value"
+                [formControlName]="radioInput.formControlName"
+                [text]="'Option ' + value"
+            />
+        </div>
+        }
+        <small>
+            Radio Button Value: {{ customForm.controls.radioInput.value }}<br />
+            Radio Button Touched: {{ customForm.controls.radioInput.touched }}<br />
+            Radio Button Dirty: {{ customForm.controls.radioInput.dirty }}<br />
+            Radio Button Valid: {{ customForm.controls.radioInput.valid }}
+        </small>
+    </fieldset>
+
+    <fieldset class="fd-margin-bottom--md">
+        <legend><strong>Disabled Radio Button Group</strong></legend>
+        @for (value of disabledRadio.values; track value) {
+        <div class="fd-margin-bottom--sm">
+            <ui5-radio-button
+                [name]="disabledRadio.name"
+                [value]="value"
+                [formControlName]="disabledRadio.formControlName"
+                [text]="'Option ' + value"
+            />
+        </div>
+        }
+        <small>Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}</small>
+    </fieldset>
+</form>

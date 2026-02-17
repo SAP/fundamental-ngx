@@ -12,7 +12,7 @@ import {
 } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
     FDP_MESSAGE_POPOVER_CONFIG,
@@ -37,7 +37,7 @@ import { Observable, delay, of } from 'rxjs';
         MessagePopoverFormItemDirective,
         BarModule,
         MessagePopoverComponent,
-        PlatformButtonModule,
+        ButtonComponent,
         ReactiveFormsModule
     ],
     providers: [

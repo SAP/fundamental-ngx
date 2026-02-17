@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { JsonPipe } from '@angular/common';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     WizardDialogGeneratorService,
     WizardGeneratorFormsValue,
@@ -15,7 +15,7 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-dialog-example',
     templateUrl: './wizard-generator-dialog-example.component.html',
-    imports: [PlatformButtonModule, JsonPipe],
+    imports: [ButtonComponent, JsonPipe],
     providers: [WizardDialogGeneratorService]
 })
 export class WizardGeneratorDialogExampleComponent implements OnDestroy {

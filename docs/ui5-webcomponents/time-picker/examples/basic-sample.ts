@@ -18,7 +18,7 @@ import 'fundamental-styles/dist/margins.css';
 export class TimePickerBasicSample {
     readonly basicValue = signal('');
     readonly placeholderValue = signal('');
-    readonly formattedValue = signal('14:30:00');
+    readonly formattedValue = signal('14:30:00 PM');
 
     onBasicValueChange(event: UI5WrapperCustomEvent<TimePicker, 'ui5Change'>): void {
         this.basicValue.set(event.detail.value);

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
 
 @Component({
     selector: 'fd-rating-indicator-example',
     templateUrl: './rating-indicator-example.component.html',
-    imports: [RatingIndicatorModule, FormsModule]
+    imports: [RatingIndicatorComponent, FormsModule]
 })
 export class RatingIndicatorExampleComponent {
     modelValue = 2.2;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -12,7 +12,7 @@ import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/pla
         FormsModule,
         ReactiveFormsModule,
         CheckboxGroupComponent,
-        PlatformButtonModule,
+        ButtonComponent,
         ContentDensityDirective
     ]
 })

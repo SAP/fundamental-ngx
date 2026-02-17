@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     DynamicFormItemValidationResult,
@@ -44,11 +44,10 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         PlatformFormGeneratorModule,
         BarModule,
         MessagePopoverComponent,
-        PlatformButtonModule,
+        ButtonComponent,
         JsonPipe
     ]
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class FormGeneratorComponentExample {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 

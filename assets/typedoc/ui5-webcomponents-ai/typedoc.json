@@ -147,7 +147,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 79,
+							"line": 78,
 							"character": 2
 						}
 					],
@@ -199,7 +199,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 56,
+							"line": 55,
 							"character": 2
 						}
 					],
@@ -241,7 +241,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 37,
+							"line": 36,
 							"character": 2
 						}
 					],
@@ -308,7 +308,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 44,
+							"line": 43,
 							"character": 2
 						}
 					],
@@ -344,7 +344,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 125,
+							"line": 124,
 							"character": 9
 						}
 					],
@@ -381,7 +381,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 126,
+							"line": 125,
 							"character": 9
 						}
 					],
@@ -453,7 +453,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 117,
+							"line": 116,
 							"character": 11
 						}
 					],
@@ -477,7 +477,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/button/index.ts",
-												"line": 120,
+												"line": 119,
 												"character": 10
 											}
 										],
@@ -496,7 +496,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/button/index.ts",
-												"line": 119,
+												"line": 118,
 												"character": 10
 											}
 										],
@@ -519,7 +519,7 @@
 								"sources": [
 									{
 										"fileName": "ui5-webcomponents-ai/button/index.ts",
-										"line": 118,
+										"line": 117,
 										"character": 6
 									}
 								]
@@ -545,7 +545,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 49,
+							"line": 48,
 							"character": 2
 						}
 					],
@@ -592,7 +592,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 94,
+							"line": 93,
 							"character": 2
 						}
 					],
@@ -650,7 +650,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 87,
+							"line": 86,
 							"character": 2
 						}
 					],
@@ -700,7 +700,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 128,
+							"line": 127,
 							"character": 6
 						}
 					],
@@ -713,7 +713,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-ai/button/index.ts",
-								"line": 128,
+								"line": 127,
 								"character": 6
 							}
 						],
@@ -737,7 +737,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button/index.ts",
-							"line": 132,
+							"line": 131,
 							"character": 2
 						}
 					],
@@ -751,7 +751,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/button/index.ts",
-									"line": 132,
+									"line": 131,
 									"character": 2
 								}
 							],
@@ -811,7 +811,7 @@
 			"sources": [
 				{
 					"fileName": "ui5-webcomponents-ai/button/index.ts",
-					"line": 32,
+					"line": 31,
 					"character": 13
 				}
 			],
@@ -867,7 +867,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 72,
+							"line": 71,
 							"character": 9
 						}
 					],
@@ -910,7 +910,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 61,
+							"line": 60,
 							"character": 2
 						}
 					],
@@ -957,7 +957,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 51,
+							"line": 50,
 							"character": 2
 						}
 					],
@@ -998,7 +998,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 73,
+							"line": 72,
 							"character": 9
 						}
 					],
@@ -1030,7 +1030,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 36,
+							"line": 35,
 							"character": 2
 						}
 					],
@@ -1077,7 +1077,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 66,
+							"line": 65,
 							"character": 2
 						}
 					],
@@ -1119,7 +1119,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 41,
+							"line": 40,
 							"character": 2
 						}
 					],
@@ -1158,7 +1158,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 75,
+							"line": 74,
 							"character": 6
 						}
 					],
@@ -1171,7 +1171,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-								"line": 75,
+								"line": 74,
 								"character": 6
 							}
 						],
@@ -1195,7 +1195,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-							"line": 79,
+							"line": 78,
 							"character": 2
 						}
 					],
@@ -1209,7 +1209,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-									"line": 79,
+									"line": 78,
 									"character": 2
 								}
 							],
@@ -1266,7 +1266,7 @@
 			"sources": [
 				{
 					"fileName": "ui5-webcomponents-ai/button-state/index.ts",
-					"line": 31,
+					"line": 30,
 					"character": 13
 				}
 			],
@@ -1283,28 +1283,28 @@
 			]
 		},
 		{
-			"id": 131,
+			"id": 132,
 			"name": "GenericControlValueAccessor",
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
 			"children": [
 				{
-					"id": 132,
+					"id": 133,
 					"name": "constructor",
 					"variant": "declaration",
 					"kind": 512,
 					"flags": {},
 					"signatures": [
 						{
-							"id": 133,
+							"id": 134,
 							"name": "new GenericControlValueAccessor",
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
 							"typeParameter": [
 								{
-									"id": 134,
+									"id": 135,
 									"name": "ValueType",
 									"variant": "typeParam",
 									"kind": 131072,
@@ -1317,7 +1317,7 @@
 							],
 							"type": {
 								"type": "reference",
-								"target": 131,
+								"target": 132,
 								"typeArguments": [
 									{
 										"type": "reference",
@@ -1333,7 +1333,7 @@
 					]
 				},
 				{
-					"id": 135,
+					"id": 136,
 					"name": "onChange",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1341,14 +1341,14 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 16,
+							"line": 46,
 							"character": 4
 						}
 					],
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 136,
+							"id": 137,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
@@ -1356,13 +1356,13 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 16,
+									"line": 46,
 									"character": 15
 								}
 							],
 							"signatures": [
 								{
-									"id": 137,
+									"id": 138,
 									"name": "__type",
 									"variant": "signature",
 									"kind": 4096,
@@ -1370,13 +1370,13 @@
 									"sources": [
 										{
 											"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-											"line": 16,
+											"line": 46,
 											"character": 15
 										}
 									],
 									"parameters": [
 										{
-											"id": 138,
+											"id": 139,
 											"name": "val",
 											"variant": "param",
 											"kind": 32768,
@@ -1399,7 +1399,7 @@
 					}
 				},
 				{
-					"id": 139,
+					"id": 140,
 					"name": "onTouched",
 					"variant": "declaration",
 					"kind": 1024,
@@ -1407,14 +1407,14 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 17,
+							"line": 47,
 							"character": 4
 						}
 					],
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 140,
+							"id": 141,
 							"name": "__type",
 							"variant": "declaration",
 							"kind": 65536,
@@ -1422,13 +1422,13 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 17,
+									"line": 47,
 									"character": 16
 								}
 							],
 							"signatures": [
 								{
-									"id": 141,
+									"id": 142,
 									"name": "__type",
 									"variant": "signature",
 									"kind": 4096,
@@ -1436,7 +1436,7 @@
 									"sources": [
 										{
 											"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-											"line": 17,
+											"line": 47,
 											"character": 16
 										}
 									],
@@ -1450,7 +1450,7 @@
 					}
 				},
 				{
-					"id": 146,
+					"id": 152,
 					"name": "ngAfterViewInit",
 					"variant": "declaration",
 					"kind": 2048,
@@ -1458,13 +1458,13 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 24,
+							"line": 69,
 							"character": 4
 						}
 					],
 					"signatures": [
 						{
-							"id": 147,
+							"id": 153,
 							"name": "ngAfterViewInit",
 							"variant": "signature",
 							"kind": 4096,
@@ -1472,7 +1472,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 24,
+									"line": 69,
 									"character": 4
 								}
 							],
@@ -1494,7 +1494,7 @@
 					}
 				},
 				{
-					"id": 151,
+					"id": 157,
 					"name": "registerOnChange",
 					"variant": "declaration",
 					"kind": 2048,
@@ -1502,13 +1502,13 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 41,
+							"line": 87,
 							"character": 4
 						}
 					],
 					"signatures": [
 						{
-							"id": 152,
+							"id": 158,
 							"name": "registerOnChange",
 							"variant": "signature",
 							"kind": 4096,
@@ -1516,13 +1516,13 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 41,
+									"line": 87,
 									"character": 4
 								}
 							],
 							"parameters": [
 								{
-									"id": 153,
+									"id": 159,
 									"name": "fn",
 									"variant": "param",
 									"kind": 32768,
@@ -1530,7 +1530,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 154,
+											"id": 160,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
@@ -1538,13 +1538,13 @@
 											"sources": [
 												{
 													"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-													"line": 41,
+													"line": 87,
 													"character": 25
 												}
 											],
 											"signatures": [
 												{
-													"id": 155,
+													"id": 161,
 													"name": "__type",
 													"variant": "signature",
 													"kind": 4096,
@@ -1552,13 +1552,13 @@
 													"sources": [
 														{
 															"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-															"line": 41,
+															"line": 87,
 															"character": 25
 														}
 													],
 													"parameters": [
 														{
-															"id": 156,
+															"id": 162,
 															"name": "newVal",
 															"variant": "param",
 															"kind": 32768,
@@ -1599,7 +1599,7 @@
 					}
 				},
 				{
-					"id": 157,
+					"id": 163,
 					"name": "registerOnTouched",
 					"variant": "declaration",
 					"kind": 2048,
@@ -1607,13 +1607,13 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 45,
+							"line": 91,
 							"character": 4
 						}
 					],
 					"signatures": [
 						{
-							"id": 158,
+							"id": 164,
 							"name": "registerOnTouched",
 							"variant": "signature",
 							"kind": 4096,
@@ -1621,13 +1621,13 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 45,
+									"line": 91,
 									"character": 4
 								}
 							],
 							"parameters": [
 								{
-									"id": 159,
+									"id": 165,
 									"name": "fn",
 									"variant": "param",
 									"kind": 32768,
@@ -1635,7 +1635,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 160,
+											"id": 166,
 											"name": "__type",
 											"variant": "declaration",
 											"kind": 65536,
@@ -1643,13 +1643,13 @@
 											"sources": [
 												{
 													"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-													"line": 45,
+													"line": 91,
 													"character": 26
 												}
 											],
 											"signatures": [
 												{
-													"id": 161,
+													"id": 167,
 													"name": "__type",
 													"variant": "signature",
 													"kind": 4096,
@@ -1657,7 +1657,7 @@
 													"sources": [
 														{
 															"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-															"line": 45,
+															"line": 91,
 															"character": 26
 														}
 													],
@@ -1689,7 +1689,7 @@
 					}
 				},
 				{
-					"id": 148,
+					"id": 154,
 					"name": "setDisabledState",
 					"variant": "declaration",
 					"kind": 2048,
@@ -1697,13 +1697,13 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 32,
+							"line": 77,
 							"character": 4
 						}
 					],
 					"signatures": [
 						{
-							"id": 149,
+							"id": 155,
 							"name": "setDisabledState",
 							"variant": "signature",
 							"kind": 4096,
@@ -1711,13 +1711,13 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 32,
-									"character": 23
+									"line": 77,
+									"character": 4
 								}
 							],
 							"parameters": [
 								{
-									"id": 150,
+									"id": 156,
 									"name": "isDisabled",
 									"variant": "param",
 									"kind": 32768,
@@ -1746,7 +1746,7 @@
 					}
 				},
 				{
-					"id": 162,
+					"id": 168,
 					"name": "writeValue",
 					"variant": "declaration",
 					"kind": 2048,
@@ -1754,13 +1754,13 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-							"line": 49,
+							"line": 95,
 							"character": 4
 						}
 					],
 					"signatures": [
 						{
-							"id": 163,
+							"id": 169,
 							"name": "writeValue",
 							"variant": "signature",
 							"kind": 4096,
@@ -1768,13 +1768,13 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-									"line": 49,
+									"line": 95,
 									"character": 4
 								}
 							],
 							"parameters": [
 								{
-									"id": 164,
+									"id": 170,
 									"name": "val",
 									"variant": "param",
 									"kind": 32768,
@@ -1809,37 +1809,37 @@
 				{
 					"title": "Constructors",
 					"children": [
-						132
+						133
 					]
 				},
 				{
 					"title": "Properties",
 					"children": [
-						135,
-						139
+						136,
+						140
 					]
 				},
 				{
 					"title": "Methods",
 					"children": [
-						146,
-						151,
+						152,
 						157,
-						148,
-						162
+						163,
+						154,
+						168
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "ui5-webcomponents-ai/utils/cva.ts",
-					"line": 15,
+					"line": 45,
 					"character": 13
 				}
 			],
 			"typeParameters": [
 				{
-					"id": 170,
+					"id": 180,
 					"name": "ValueType",
 					"variant": "typeParam",
 					"kind": 131072,
@@ -1917,7 +1917,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 36,
+							"line": 35,
 							"character": 2
 						}
 					],
@@ -1958,7 +1958,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 101,
+							"line": 100,
 							"character": 9
 						}
 					],
@@ -1995,7 +1995,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 102,
+							"line": 101,
 							"character": 9
 						}
 					],
@@ -2035,7 +2035,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 50,
+							"line": 49,
 							"character": 2
 						}
 					],
@@ -2109,7 +2109,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 93,
+							"line": 92,
 							"character": 11
 						}
 					],
@@ -2133,7 +2133,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/input/index.ts",
-												"line": 96,
+												"line": 95,
 												"character": 10
 											}
 										],
@@ -2152,7 +2152,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/input/index.ts",
-												"line": 95,
+												"line": 94,
 												"character": 10
 											}
 										],
@@ -2175,7 +2175,7 @@
 								"sources": [
 									{
 										"fileName": "ui5-webcomponents-ai/input/index.ts",
-										"line": 94,
+										"line": 93,
 										"character": 6
 									}
 								]
@@ -2201,7 +2201,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 43,
+							"line": 42,
 							"character": 2
 						}
 					],
@@ -2248,7 +2248,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 57,
+							"line": 56,
 							"character": 2
 						}
 					],
@@ -2306,7 +2306,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 62,
+							"line": 61,
 							"character": 2
 						}
 					],
@@ -2364,7 +2364,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 67,
+							"line": 66,
 							"character": 2
 						}
 					],
@@ -2422,7 +2422,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 72,
+							"line": 71,
 							"character": 2
 						}
 					],
@@ -2472,7 +2472,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 104,
+							"line": 103,
 							"character": 6
 						}
 					],
@@ -2485,7 +2485,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-ai/input/index.ts",
-								"line": 104,
+								"line": 103,
 								"character": 6
 							}
 						],
@@ -2509,7 +2509,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/input/index.ts",
-							"line": 108,
+							"line": 107,
 							"character": 2
 						}
 					],
@@ -2523,7 +2523,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/input/index.ts",
-									"line": 108,
+									"line": 107,
 									"character": 2
 								}
 							],
@@ -2583,7 +2583,7 @@
 			"sources": [
 				{
 					"fileName": "ui5-webcomponents-ai/input/index.ts",
-					"line": 31,
+					"line": 30,
 					"character": 13
 				}
 			],
@@ -2645,7 +2645,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 70,
+							"line": 69,
 							"character": 2
 						}
 					],
@@ -2681,7 +2681,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 159,
+							"line": 158,
 							"character": 9
 						}
 					],
@@ -2718,7 +2718,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 160,
+							"line": 159,
 							"character": 9
 						}
 					],
@@ -2750,7 +2750,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 47,
+							"line": 46,
 							"character": 2
 						}
 					],
@@ -2797,7 +2797,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 83,
+							"line": 82,
 							"character": 2
 						}
 					],
@@ -2844,7 +2844,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 42,
+							"line": 41,
 							"character": 2
 						}
 					],
@@ -2891,7 +2891,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 78,
+							"line": 77,
 							"character": 2
 						}
 					],
@@ -2933,7 +2933,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 52,
+							"line": 51,
 							"character": 2
 						}
 					],
@@ -3007,7 +3007,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 63,
+							"line": 62,
 							"character": 2
 						}
 					],
@@ -3049,7 +3049,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 93,
+							"line": 92,
 							"character": 2
 						}
 					],
@@ -3195,7 +3195,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 146,
+							"line": 145,
 							"character": 11
 						}
 					],
@@ -3222,7 +3222,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-														"line": 149,
+														"line": 148,
 														"character": 10
 													}
 												],
@@ -3241,7 +3241,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-														"line": 148,
+														"line": 147,
 														"character": 10
 													}
 												],
@@ -3262,7 +3262,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-														"line": 154,
+														"line": 153,
 														"character": 10
 													}
 												],
@@ -3286,7 +3286,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-												"line": 147,
+												"line": 146,
 												"character": 6
 											}
 										]
@@ -3310,7 +3310,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-														"line": 153,
+														"line": 152,
 														"character": 10
 													}
 												],
@@ -3329,7 +3329,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-														"line": 152,
+														"line": 151,
 														"character": 10
 													}
 												],
@@ -3348,7 +3348,7 @@
 												"sources": [
 													{
 														"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-														"line": 154,
+														"line": 153,
 														"character": 10
 													}
 												],
@@ -3372,7 +3372,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-												"line": 151,
+												"line": 150,
 												"character": 6
 											}
 										]
@@ -3400,7 +3400,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 113,
+							"line": 112,
 							"character": 2
 						}
 					],
@@ -3458,7 +3458,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 107,
+							"line": 106,
 							"character": 2
 						}
 					],
@@ -3516,7 +3516,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 101,
+							"line": 100,
 							"character": 2
 						}
 					],
@@ -3574,7 +3574,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 36,
+							"line": 35,
 							"character": 2
 						}
 					],
@@ -3621,7 +3621,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 88,
+							"line": 87,
 							"character": 2
 						}
 					],
@@ -3676,7 +3676,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 162,
+							"line": 161,
 							"character": 6
 						}
 					],
@@ -3689,7 +3689,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-								"line": 162,
+								"line": 161,
 								"character": 6
 							}
 						],
@@ -3713,7 +3713,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-							"line": 166,
+							"line": 165,
 							"character": 2
 						}
 					],
@@ -3727,7 +3727,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-									"line": 166,
+									"line": 165,
 									"character": 2
 								}
 							],
@@ -3793,7 +3793,7 @@
 			"sources": [
 				{
 					"fileName": "ui5-webcomponents-ai/prompt-input/index.ts",
-					"line": 31,
+					"line": 30,
 					"character": 13
 				}
 			],
@@ -3855,7 +3855,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 46,
+							"line": 45,
 							"character": 2
 						}
 					],
@@ -3896,7 +3896,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 95,
+							"line": 94,
 							"character": 9
 						}
 					],
@@ -3933,7 +3933,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 96,
+							"line": 95,
 							"character": 9
 						}
 					],
@@ -3973,7 +3973,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 36,
+							"line": 35,
 							"character": 2
 						}
 					],
@@ -4015,7 +4015,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 41,
+							"line": 40,
 							"character": 2
 						}
 					],
@@ -4110,7 +4110,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 87,
+							"line": 86,
 							"character": 11
 						}
 					],
@@ -4134,7 +4134,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-												"line": 90,
+												"line": 89,
 												"character": 10
 											}
 										],
@@ -4153,7 +4153,7 @@
 										"sources": [
 											{
 												"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-												"line": 89,
+												"line": 88,
 												"character": 10
 											}
 										],
@@ -4176,7 +4176,7 @@
 								"sources": [
 									{
 										"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-										"line": 88,
+										"line": 87,
 										"character": 6
 									}
 								]
@@ -4206,7 +4206,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 54,
+							"line": 53,
 							"character": 2
 						}
 					],
@@ -4253,7 +4253,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 66,
+							"line": 65,
 							"character": 2
 						}
 					],
@@ -4311,7 +4311,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 61,
+							"line": 60,
 							"character": 2
 						}
 					],
@@ -4361,7 +4361,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 98,
+							"line": 97,
 							"character": 6
 						}
 					],
@@ -4374,7 +4374,7 @@
 						"sources": [
 							{
 								"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-								"line": 98,
+								"line": 97,
 								"character": 6
 							}
 						],
@@ -4398,7 +4398,7 @@
 					"sources": [
 						{
 							"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-							"line": 102,
+							"line": 101,
 							"character": 2
 						}
 					],
@@ -4412,7 +4412,7 @@
 							"sources": [
 								{
 									"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-									"line": 102,
+									"line": 101,
 									"character": 2
 								}
 							],
@@ -4471,7 +4471,7 @@
 			"sources": [
 				{
 					"fileName": "ui5-webcomponents-ai/text-area/index.ts",
-					"line": 31,
+					"line": 30,
 					"character": 13
 				}
 			],
@@ -4581,7 +4581,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 49,
 							"character": 12,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L49"
 						}
 					],
 					"type": {
@@ -4644,7 +4644,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 42,
 							"character": 12,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L42"
 						}
 					],
 					"type": {
@@ -4709,7 +4709,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 53,
 							"character": 14,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 						}
 					],
 					"type": {
@@ -4725,7 +4725,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 53,
 									"character": 30,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 								}
 							],
 							"signatures": [
@@ -4740,7 +4740,7 @@
 											"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 											"line": 53,
 											"character": 30,
-											"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
+											"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L53"
 										}
 									],
 									"type": {
@@ -4779,7 +4779,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 80,
 							"character": 2,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
 						}
 					],
 					"signatures": [
@@ -4817,7 +4817,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 80,
 									"character": 2,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L80"
 								}
 							],
 							"type": {
@@ -4874,7 +4874,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 94,
 							"character": 8,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
 						}
 					],
 					"signatures": [
@@ -4928,7 +4928,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 94,
 									"character": 8,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L94"
 								}
 							],
 							"parameters": [
@@ -4991,7 +4991,7 @@
 							"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 							"line": 71,
 							"character": 2,
-							"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+							"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
 						}
 					],
 					"signatures": [
@@ -5041,7 +5041,7 @@
 									"fileName": "ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts",
 									"line": 71,
 									"character": 2,
-									"url": "https://github.com/SAP/fundamental-ngx/blob/2558982/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
+									"url": "https://github.com/SAP/fundamental-ngx/blob/4f1df79/libs/ui5-webcomponents-base/theming/base-webcomponents-theming-provider.ts#L71"
 								}
 							],
 							"parameters": [
@@ -5146,6 +5146,51 @@
 					"package": "@fundamental-ngx/ui5-webcomponents-base"
 				}
 			]
+		},
+		{
+			"id": 131,
+			"name": "CVA_CONFIG",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Injection token for CVA configuration"
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "ui5-webcomponents-ai/utils/cva.ts",
+					"line": 32,
+					"character": 13
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "node_modules/@angular/core/types/_chrome_dev_tools_performance-chunk.d.ts",
+					"qualifiedName": "InjectionToken"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+							"qualifiedName": "CvaConfig"
+						},
+						"name": "CvaConfig",
+						"package": "@fundamental-ngx/ui5-webcomponents-ai"
+					}
+				],
+				"name": "InjectionToken",
+				"package": "@angular/core"
+			},
+			"defaultValue": "..."
 		}
 	],
 	"groups": [
@@ -5154,11 +5199,17 @@
 			"children": [
 				2,
 				23,
-				131,
+				132,
 				38,
 				59,
 				91,
 				111
+			]
+		},
+		{
+			"title": "Variables",
+			"children": [
+				131
 			]
 		}
 	],
@@ -5672,19 +5723,19 @@
 		},
 		"131": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor"
+			"qualifiedName": "CVA_CONFIG"
 		},
-		"134": {
+		"132": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.ValueType"
+			"qualifiedName": "GenericControlValueAccessor"
 		},
 		"135": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.onChange"
+			"qualifiedName": "GenericControlValueAccessor.ValueType"
 		},
 		"136": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "__type"
+			"qualifiedName": "GenericControlValueAccessor.onChange"
 		},
 		"137": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
@@ -5692,71 +5743,51 @@
 		},
 		"138": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "val"
+			"qualifiedName": "__type"
 		},
 		"139": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.onTouched"
+			"qualifiedName": "val"
 		},
 		"140": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "__type"
+			"qualifiedName": "GenericControlValueAccessor.onTouched"
 		},
 		"141": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
 			"qualifiedName": "__type"
 		},
-		"146": {
+		"142": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
-		},
-		"147": {
-			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
-		},
-		"148": {
-			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
-		},
-		"149": {
-			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
-		},
-		"150": {
-			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "isDisabled"
-		},
-		"151": {
-			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
+			"qualifiedName": "__type"
 		},
 		"152": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
+			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
 		},
 		"153": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "fn"
+			"qualifiedName": "GenericControlValueAccessor.ngAfterViewInit"
 		},
 		"154": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "__type"
+			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
 		},
 		"155": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "__type"
+			"qualifiedName": "GenericControlValueAccessor.setDisabledState"
 		},
 		"156": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "newVal"
+			"qualifiedName": "isDisabled"
 		},
 		"157": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
+			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
 		},
 		"158": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
+			"qualifiedName": "GenericControlValueAccessor.registerOnChange"
 		},
 		"159": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
@@ -5772,17 +5803,41 @@
 		},
 		"162": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.writeValue"
+			"qualifiedName": "newVal"
 		},
 		"163": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "GenericControlValueAccessor.writeValue"
+			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
 		},
 		"164": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
-			"qualifiedName": "val"
+			"qualifiedName": "GenericControlValueAccessor.registerOnTouched"
+		},
+		"165": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "fn"
+		},
+		"166": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"167": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "__type"
+		},
+		"168": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.writeValue"
+		},
+		"169": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "GenericControlValueAccessor.writeValue"
 		},
 		"170": {
+			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
+			"qualifiedName": "val"
+		},
+		"180": {
 			"sourceFileName": "libs/ui5-webcomponents-ai/utils/cva.ts",
 			"qualifiedName": "GenericControlValueAccessor.ValueType"
 		}
