@@ -6,9 +6,14 @@
     [style.max-width]="_mobileSidebarVisible ? null : _sidebarWidth.maxWidth"
 >
     <div class="fdp-settings-generator__search-header">
-        <h5 fd-title class="fdp-settings-generator__title">
-            {{ 'platformSettingsGenerator.settingsLabel' | fdTranslate }}
-        </h5>
+        <div
+            role="heading"
+            [attr.aria-level]="headingLevel()"
+            class="fdp-settings-generator__title fd-title fd-title--h5"
+        >
+            {{ sidebarTitle() ?? ('platformSettingsGenerator.settingsLabel' | fdTranslate) }}
+        </div>
+
         <!-- TODO: implement search input
         @if (_displaySettingsSearchInput()) {
             <fd-input-group
