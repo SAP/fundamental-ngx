@@ -111,9 +111,7 @@ describe('MultiComboBox component', () => {
     });
 
     it('should be able to see Secondary Column', () => {
-        component.showSecondaryText = true;
-
-        fixture.detectChanges();
+        fixture.componentRef.setInput('showSecondaryText', true);
 
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
@@ -183,16 +181,18 @@ describe('MultiComboBox component', () => {
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
         const buttonSpy = jest.spyOn(component.addOnButtonClicked, 'emit');
         const showListSpy = jest.spyOn(component, '_showList');
-        component.openDropdownOnAddOnClicked = false;
+        fixture.componentRef.setInput('openDropdownOnAddOnClicked', false);
         component._addOnClicked(new MouseEvent('click'));
         expect(buttonSpy).toHaveBeenCalled();
         expect(showListSpy).not.toHaveBeenCalled();
     });
 
     it('should select item automatically if full match found', async () => {
-        component.displayKey = 'name';
-        component.inputText = dataSource[2].name;
-        component._searchTermChanged(component.inputText);
+        fixture.componentRef.setInput('displayKey', 'name');
+        const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+        input.value = dataSource[2].name;
+        input.dispatchEvent(new Event('input')); // triggers ngModelChange
+        component._searchTermChanged(component.inputText());
         fixture.detectChanges();
         await fixture.whenStable();
         component._onBlur(

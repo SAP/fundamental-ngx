@@ -1,18 +1,18 @@
-import { Signal, WritableSignal } from '@angular/core';
+import { InputSignal, Signal, WritableSignal } from '@angular/core';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { Subject } from 'rxjs';
 
 export interface MultiCombobox<T = any> {
-    selectedItems: T[];
-    displayKey: string;
-    lookupKey: string;
-    showSecondaryText: boolean;
-    secondaryKey: string;
-    groupKey: string;
-    isGroup: boolean;
+    selectedItems: Signal<T[]>;
+    displayKey: InputSignal<string>;
+    lookupKey: InputSignal<string>;
+    showSecondaryText: InputSignal<boolean>;
+    secondaryKey: InputSignal<string>;
+    groupKey: InputSignal<string>;
+    isGroup: Signal<boolean>;
     _suggestions: Signal<SelectableOptionItem[]>;
-    _selectedSuggestions: Signal<SelectableOptionItem[]>;
+    _selectedSuggestions: Signal<SelectableOptionItem<T>[]>;
 }
 
 /**
