@@ -76,12 +76,13 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         componentRef.instance.childContent = content;
         componentRef.instance.dialogConfig = dialogConfig;
-        this._dialogs.push(componentRef);
+
+        // Register dialog for tracking (replaces manual push)
+        this._registerDialog(componentRef);
 
         this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
         dialogRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._destroyDialog(componentRef);
-            componentRef.destroy();
             overlayRef.dispose();
             this.htmlElement && (this.htmlElement.style.overflow = '');
             if (dialogConfig?.focusTrapped && previouslyFocusedElement) {

@@ -1,12 +1,7 @@
-@if (type) {
-    <fd-icon
-        class="fd-generic-tag__icon"
-        [glyph]="type ? 'message-' + type : ''"
-        role="presentation"
-        aria-hidden="true"
-    ></fd-icon>
+@if (type()) {
+    <fd-icon class="fd-generic-tag__icon" [glyph]="iconGlyph()" role="presentation" aria-hidden="true"></fd-icon>
 }
-<span class="fd-generic-tag__name">{{ name }}</span>
-@if (value) {
-    <span class="fd-generic-tag__value">{{ value }}</span>
+<span class="fd-generic-tag__name">{{ name() }}</span>
+@if (value()) {
+    <span class="fd-generic-tag__value">{{ value() }}</span>
 }

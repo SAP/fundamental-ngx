@@ -128,7 +128,7 @@ describe('MessageBoxHeaderComponent', () => {
 
         expect(headerEl).toBeTruthy();
         expect(subheaderEl).toBeTruthy();
-        expect(component.messageBoxHeader.customTemplates.length).toEqual(2);
+        expect(component.messageBoxHeader.customTemplates().length).toEqual(2);
 
         const button = headerEl.querySelector('button');
         expect(button.textContent).toContain('Custom button');

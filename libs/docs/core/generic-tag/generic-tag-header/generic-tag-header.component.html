@@ -1,9 +1,35 @@
 <fd-doc-page>
     <header>Generic Tag</header>
     <description>
-        The generic tag controls displays complementary information related to the current page, such as key performance
-        indicators (KPI) and situations.
+        <p>
+            The Generic Tag component displays complementary information related to the current page, such as key
+            performance indicators (KPI) and situations. It combines a semantic decorator, KPI name, optional semantic
+            message icon, and KPI value in a compact, accessible layout.
+        </p>
+        <h3>Component Structure</h3>
+        <ul>
+            <li>
+                <strong>Semantic Decorator:</strong> Visual decoration designating the message status of the control
+            </li>
+            <li><strong>GenericTag Container:</strong> The layout container carrying all interaction states</li>
+            <li>
+                <strong>KPI Name:</strong> Standard text displaying the key performance indicator name (keep it simple,
+                use no more than 3 words)
+            </li>
+            <li><strong>Semantic Message Icon:</strong> Optional status icon (error, success, warning, information)</li>
+            <li><strong>KPI Value:</strong> The numeric (key) attribute and its unit</li>
+        </ul>
+        <h3>Key Properties</h3>
+        <ul>
+            <li>
+                <strong>type:</strong> Semantic status - 'error' | 'success' | 'warning' | 'information'. Omit for
+                default style.
+            </li>
+            <li><strong>name:</strong> Required. The KPI name displayed as standard text.</li>
+            <li><strong>value:</strong> Optional. The KPI value representing the numeric attribute and its unit.</li>
+            <li><strong>ariaRoleDescription:</strong> Accessible role description (defaults to 'Generic Tag').</li>
+        </ul>
     </description>
-    <import module="GenericTagModule" subPackage="generic-tag"></import>
+    <import componentName="GenericTagComponent" subPackage="generic-tag"></import>
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

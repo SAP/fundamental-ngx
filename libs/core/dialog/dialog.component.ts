@@ -12,6 +12,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 
@@ -181,7 +182,6 @@ export class DialogComponent
 
     /** @hidden */
     ngOnInit(): void {
-        super.ngOnInit();
         this._listenOnHidden();
         this.buildComponentCssClass();
     }
@@ -193,7 +193,6 @@ export class DialogComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        super.ngAfterViewInit();
         this._listenOnHidden();
         this._listenOnFullScreen();
     }
@@ -208,13 +207,10 @@ export class DialogComponent
 
     /** @hidden */
     private _listenOnFullScreen(): void {
-        this._subscriptions.add(
-            this._ref.fullScreen.subscribe((isFullScreen) => {
-                this._fullScreen = isFullScreen;
-                this._changeDetectorRef.detectChanges();
-                this.adjustResponsivePadding();
-            })
-        );
+        this._ref.fullScreen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isFullScreen) => {
+            this._fullScreen = isFullScreen;
+            this.adjustResponsivePadding();
+        });
     }
 
     /** @hidden Listen on Dialog visibility */

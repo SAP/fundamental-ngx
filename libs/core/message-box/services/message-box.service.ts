@@ -52,11 +52,11 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
         componentRef.instance.childContent = content;
         componentRef.instance.messageBoxConfig = config;
 
-        this._dialogs.push(componentRef);
+        // Register dialog for tracking (replaces manual push)
+        this._registerDialog(componentRef);
 
         messageBoxRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._destroyDialog(componentRef);
-            componentRef.destroy();
             overlayRef.dispose();
         });
 
