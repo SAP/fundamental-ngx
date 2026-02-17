@@ -493,7 +493,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Reference to the list component instance.
      * @hidden
      */
-    private readonly listComponent = viewChild.required(FD_LIST_COMPONENT);
+    private readonly listComponent = viewChild(FD_LIST_COMPONENT);
 
     /**
      * Collection of custom templates provided by content projection.
@@ -505,25 +505,25 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Template reference for the mobile mode control.
      * @hidden
      */
-    private readonly mobileControlTemplate = viewChild.required<TemplateRef<any>>('mobileControlTemplate');
+    private readonly mobileControlTemplate = viewChild<TemplateRef<any>>('mobileControlTemplate');
 
     /**
      * Template reference for the dropdown list.
      * @hidden
      */
-    private readonly listTemplate = viewChild.required<TemplateRef<any>>('listTemplate');
+    private readonly listTemplate = viewChild<TemplateRef<any>>('listTemplate');
 
     /**
      * Reference to the tokenizer component instance.
      * @hidden
      */
-    private readonly _tokenizer = viewChild.required<TokenizerComponent>(TokenizerComponent);
+    private readonly _tokenizer = viewChild<TokenizerComponent>(TokenizerComponent);
 
     /**
      * Reference to the input group element.
      * @hidden
      */
-    private readonly _inputGroup = viewChild.required('inputGroup', { read: ElementRef });
+    private readonly _inputGroup = viewChild('inputGroup', { read: ElementRef });
 
     /**
      * @hidden
@@ -632,7 +632,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     _navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
-            this.listComponent().items?.first.focus();
+            this.listComponent()?.items?.first.focus();
         }
     }
 
@@ -1025,10 +1025,11 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         this._propagateChange();
 
-        this._tokenizer().onResize();
-
-        this._tokenizer().tokenizerInnerEl.nativeElement.scrollLeft =
-            this._tokenizer().tokenizerInnerEl.nativeElement.scrollWidth;
+        const tokenizer = this._tokenizer();
+        if (tokenizer !== undefined) {
+            tokenizer.onResize();
+            tokenizer.tokenizerInnerEl.nativeElement.scrollLeft = tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
+        }
     }
 
     /** @hidden */
@@ -1091,7 +1092,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             return;
         }
 
-        resizeObservable(this._inputGroup().nativeElement)
+        resizeObservable(this._inputGroup()?.nativeElement)
             .pipe(debounceTime(30), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._getOptionsListWidth());
     }
@@ -1099,7 +1100,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     private _getOptionsListWidth(): void {
         const body = document.body;
-        const rect = this._inputGroup().nativeElement.getBoundingClientRect();
+        const rect = this._inputGroup()?.nativeElement.getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
         this.maxWidth = this.autoResize() ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
         this._cd.detectChanges();
