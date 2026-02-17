@@ -1,28 +1,33 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { inject, Injectable, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
  * Service for managing global content density state.
+ *
+ * Provides a signal-based API for reactive content density tracking.
  */
 @Injectable()
-export class GlobalContentDensityService implements OnDestroy {
+export class GlobalContentDensityService {
+    /** Current content density as a signal */
+    readonly currentDensitySignal: Signal<ContentDensityMode>;
+
+    private readonly _storage = inject(ContentDensityStorage);
+
     /**
      * Current content density.
+     * @deprecated Use currentDensitySignal() instead
      */
-    currentContentDensity: ContentDensityMode;
+    get currentContentDensity(): ContentDensityMode {
+        return this.currentDensitySignal();
+    }
 
-    /** @hidden */
-    private _subscription = new Subscription();
-
-    /** @hidden */
-    constructor(@Inject(ContentDensityStorage) private _storage: ContentDensityStorage) {
-        this._subscription.add(
-            this.contentDensityListener().subscribe((density) => {
-                this.currentContentDensity = density;
-            })
-        );
+    constructor() {
+        this.currentDensitySignal = toSignal(this._storage.getContentDensity(), {
+            initialValue: ContentDensityMode.COZY
+        });
     }
 
     /** Listen to current content density changes */
@@ -33,10 +38,5 @@ export class GlobalContentDensityService implements OnDestroy {
     /** Update content density */
     updateContentDensity(density: ContentDensityMode): Observable<void> {
         return this._storage.setContentDensity(density);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
     }
 }

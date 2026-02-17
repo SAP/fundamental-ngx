@@ -1,5 +1,4 @@
-import { Directive, Input, OnDestroy, booleanAttribute, forwardRef, isDevMode } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { booleanAttribute, Directive, forwardRef, Input, isDevMode, signal, Signal } from '@angular/core';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { isContentDensityMode } from '../helpers/density-type-checkers';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
@@ -7,7 +6,9 @@ import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
  * Directive to control the content density of the elements.
- * This Directive is used in density controllers and consumers
+ * This Directive is used in density controllers and consumers.
+ *
+ * Provides signal-based state management for reactive content density tracking.
  */
 @Directive({
     selector: `[fdContentDensity]:not([fdCompact]):not([fdCondensed]):not([fdCozy]),
@@ -23,7 +24,12 @@ import { ContentDensityMode } from '../types/content-density.mode';
     ],
     standalone: true
 })
-export class ContentDensityDirective extends BehaviorSubject<LocalContentDensityMode> implements OnDestroy {
+export class ContentDensityDirective {
+    /** Current content density mode as a signal */
+    readonly densityMode: Signal<LocalContentDensityMode>;
+
+    private readonly _densityMode = signal<LocalContentDensityMode>(ContentDensityGlobalKeyword);
+
     /**
      * Update the content density of the element on the fly
      */
@@ -39,7 +45,7 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
             }
             val = ContentDensityGlobalKeyword;
         }
-        this.next(val as LocalContentDensityMode);
+        this._densityMode.set(val as LocalContentDensityMode);
     }
 
     /**
@@ -48,7 +54,7 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      */
     @Input({ transform: booleanAttribute })
     set fdCompact(val: boolean) {
-        this.next(val ? ContentDensityMode.COMPACT : ContentDensityGlobalKeyword);
+        this._densityMode.set(val ? ContentDensityMode.COMPACT : ContentDensityGlobalKeyword);
     }
 
     /**
@@ -57,7 +63,7 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      */
     @Input({ transform: booleanAttribute })
     set fdCondensed(val: boolean) {
-        this.next(val ? ContentDensityMode.CONDENSED : ContentDensityGlobalKeyword);
+        this._densityMode.set(val ? ContentDensityMode.CONDENSED : ContentDensityGlobalKeyword);
     }
 
     /**
@@ -66,16 +72,18 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      */
     @Input({ transform: booleanAttribute })
     set fdCozy(val: boolean) {
-        this.next(val ? ContentDensityMode.COZY : ContentDensityGlobalKeyword);
+        this._densityMode.set(val ? ContentDensityMode.COZY : ContentDensityGlobalKeyword);
     }
 
-    /** @hidden */
+    /**
+     * Current density mode value
+     * @deprecated Use densityMode() signal instead
+     */
+    get value(): LocalContentDensityMode {
+        return this._densityMode();
+    }
+
     constructor() {
-        super(ContentDensityGlobalKeyword);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.complete();
+        this.densityMode = this._densityMode.asReadonly();
     }
 }

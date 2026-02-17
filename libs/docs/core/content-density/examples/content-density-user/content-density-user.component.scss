@@ -9,30 +9,24 @@
     margin: 10px 0;
     position: relative;
 
-    &[fdCozy] {
-        border: 3px solid var(--sapPositiveColor);
-    }
-
-    &[fdCompact] {
-        border: 3px solid var(--sapWarningColor);
-    }
-
-    &[fdCompact] {
-        border: 3px solid var(--sapNegativeColor);
-    }
-
     &__object-status {
         position: absolute !important;
         top: -5px;
         right: 5px;
     }
 
+    &.is-cozy {
+        border: 3px solid var(--sapPositiveColor);
+    }
+
     &.is-compact {
+        border: 3px solid var(--sapWarningColor);
         padding: 12px;
         font-size: var(--sapFontSmallSize);
     }
 
     &.is-condensed {
+        border: 3px solid var(--sapNegativeColor);
         padding: 7px;
         font-size: var(--sapFontSmallSize);
     }

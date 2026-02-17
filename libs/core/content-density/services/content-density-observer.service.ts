@@ -1,18 +1,22 @@
 import {
+    computed,
     DestroyRef,
+    effect,
     ElementRef,
     FactorySansProvider,
     inject,
     Injectable,
     Injector,
     Renderer2,
-    Signal
+    signal,
+    Signal,
+    WritableSignal
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 import { ContentDensityObserverTarget } from '../content-density.types';
-import { getChangesSource$ } from '../helpers/get-changes-source.provider';
+import { getChangesSource } from '../helpers/get-changes-source.provider';
 import { GlobalContentDensityService } from '../services/global-content-density.service';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityMode } from '../types/content-density.mode';
@@ -66,77 +70,65 @@ const initialContentDensity = (
     });
 };
 
+/**
+ * Service for observing and managing content density in components.
+ *
+ * Provides signal-based API for reactive content density tracking.
+ */
 @Injectable()
-export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
-    /** @hidden */
-    readonly contentDensity$ = toSignal(this);
-    /** @hidden */
-    readonly config: ContentDensityObserverSettings;
-    /** @hidden */
-    readonly isCompact$: Observable<boolean>;
-    /** @hidden */
-    readonly isCozy$: Observable<boolean>;
-    /** @hidden */
-    readonly isCondensed$: Observable<boolean>;
-    /** @hidden */
+export class ContentDensityObserver {
+    /** Current content density as a readonly signal */
+    readonly contentDensity: Signal<ContentDensityMode>;
+
+    /** Whether content density is compact (signal) */
     readonly isCompactSignal: Signal<boolean>;
 
-    /** @hidden */
+    /** Whether content density is cozy (signal) */
     readonly isCozySignal: Signal<boolean>;
 
-    /** @hidden */
+    /** Whether content density is condensed (signal) */
     readonly isCondensedSignal: Signal<boolean>;
 
-    /** @hidden */
-    get isCompact(): boolean {
-        return this._isCompact$.value;
-    }
-    /** @hidden */
-    get isCozy(): boolean {
-        return this._isCozy$.value;
-    }
-    /** @hidden */
-    get isCondensed(): boolean {
-        return this._isCondensed$.value;
-    }
-    /** @hidden */
-    private readonly _isCompact$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
-    private readonly _isCozy$ = new BehaviorSubject<boolean>(false);
+    /**
+     * Current content density signal
+     * @deprecated Use contentDensity() instead
+     */
+    readonly contentDensity$: Signal<ContentDensityMode>;
 
-    /** @hidden */
-    private readonly _isCondensed$ = new BehaviorSubject<boolean>(false);
+    /**
+     * Observable for compact state changes
+     * @deprecated Use isCompactSignal signal instead
+     */
+    readonly isCompact$: Observable<boolean>;
 
-    /** @hidden */
-    private _globalContentDensityService = inject(GlobalContentDensityService, {
-        optional: true
-    });
+    /**
+     * Observable for cozy state changes
+     * @deprecated Use isCozySignal signal instead
+     */
+    readonly isCozy$: Observable<boolean>;
 
-    /** @hidden */
-    private _contentDensityDirective = inject(CONTENT_DENSITY_DIRECTIVE, {
-        optional: true
-    });
+    /**
+     * Observable for condensed state changes
+     * @deprecated Use isCondensedSignal signal instead
+     */
+    readonly isCondensed$: Observable<boolean>;
 
-    /** @hidden */
-    private _parentContentDensityObserver = inject(ContentDensityObserver, {
-        optional: true,
-        skipSelf: true
-    });
+    /**
+     * Observable of content density changes
+     * @deprecated Use contentDensity signal instead
+     */
+    readonly contentDensity$$: Observable<ContentDensityMode>;
 
-    /** @hidden */
-    private _renderer: Renderer2 | null = inject(Renderer2);
+    /** Configuration for this observer */
+    readonly config: ContentDensityObserverSettings;
 
-    /** @hidden */
+    private readonly _contentDensity: WritableSignal<ContentDensityMode>;
+
+    private readonly _changesSource: Signal<ContentDensityMode>;
+
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
-    private _elementRef: ElementRef<any> | null = inject(ElementRef);
-
-    /** @hidden */
-    private _elements = [this._elementRef];
-
-    /** @hidden */
-    private _alternativeTo = {
+    private readonly _alternativeTo = {
         [ContentDensityMode.COMPACT]: (): ContentDensityMode =>
             this._isSupported(ContentDensityMode.CONDENSED) ? ContentDensityMode.CONDENSED : ContentDensityMode.COZY,
         [ContentDensityMode.CONDENSED]: (): ContentDensityMode =>
@@ -144,81 +136,178 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         [ContentDensityMode.COZY]: (): ContentDensityMode => ContentDensityMode.COZY // No alternative here, everyone should support it
     };
 
-    /** @hidden */
+    private _globalContentDensityService = inject(GlobalContentDensityService, {
+        optional: true
+    });
+
+    private _contentDensityDirective = inject(CONTENT_DENSITY_DIRECTIVE, {
+        optional: true
+    });
+
+    private _parentContentDensityObserver = inject(ContentDensityObserver, {
+        optional: true,
+        skipSelf: true
+    });
+
+    private _renderer: Renderer2 | null = inject(Renderer2);
+
+    private _elementRef: ElementRef<any> | null = inject(ElementRef);
+
+    private _elements = [this._elementRef];
+
+    /**
+     * Current content density value
+     * @deprecated Use contentDensity() signal instead
+     */
+    get value(): ContentDensityMode {
+        return this._contentDensity();
+    }
+
+    /**
+     * Whether content density is compact
+     * @deprecated Use isCompactSignal() signal instead
+     */
+    get isCompact(): boolean {
+        return this.isCompactSignal();
+    }
+
+    /**
+     * Whether content density is cozy
+     * @deprecated Use isCozySignal() signal instead
+     */
+    get isCozy(): boolean {
+        return this.isCozySignal();
+    }
+
+    /**
+     * Whether content density is condensed
+     * @deprecated Use isCondensedSignal() signal instead
+     */
+    get isCondensed(): boolean {
+        return this.isCondensedSignal();
+    }
+
     constructor(_injector: Injector, _providedConfig?: ContentDensityObserverSettings) {
-        super(initialContentDensity(_injector, _providedConfig));
-        this.isCompact$ = this._isCompact$.asObservable();
-        this.isCozy$ = this._isCozy$.asObservable();
-        this.isCondensed$ = this._isCondensed$.asObservable();
-        this.isCompactSignal = toSignal(this.isCompact$, { initialValue: this._isCompact$.value });
-        this.isCozySignal = toSignal(this.isCozy$, { initialValue: this._isCozy$.value });
-        this.isCondensedSignal = toSignal(this.isCondensed$, { initialValue: this._isCondensed$.value });
+        // Initialize internal signal with resolved initial density
+        const resolvedInitialDensity = initialContentDensity(_injector, _providedConfig);
+        this._contentDensity = signal<ContentDensityMode>(resolvedInitialDensity);
 
-        this._destroyRef.onDestroy(() => {
-            this.complete();
-            if (this.config.debug) {
-                console.log('ContentDensityObserver: destroyed');
-            }
-        });
+        // Public readonly signal
+        this.contentDensity = this._contentDensity.asReadonly();
 
+        // Computed boolean signals
+        this.isCompactSignal = computed(() => this._contentDensity() === ContentDensityMode.COMPACT);
+        this.isCozySignal = computed(() => this._contentDensity() === ContentDensityMode.COZY);
+        this.isCondensedSignal = computed(() => this._contentDensity() === ContentDensityMode.CONDENSED);
+
+        // Backward compatible signal aliases
+        this.contentDensity$ = this.contentDensity;
+
+        // Backward compatible observables
+        this.isCompact$ = toObservable(this.isCompactSignal, { injector: _injector });
+        this.isCozy$ = toObservable(this.isCozySignal, { injector: _injector });
+        this.isCondensed$ = toObservable(this.isCondensedSignal, { injector: _injector });
+        this.contentDensity$$ = toObservable(this._contentDensity, { injector: _injector });
+
+        // Set up config
         this.config = {
             ...defaultContentDensityObserverConfigs,
             ...(this._parentContentDensityObserver?.config ?? {}),
             ...(_providedConfig || {})
         };
 
-        getChangesSource$({
-            defaultContentDensity: this.value,
-            contentDensityDirective: this._contentDensityDirective ?? undefined,
+        // Get the changes source as a signal (fully signal-based now)
+        this._changesSource = getChangesSource({
+            defaultContentDensity: resolvedInitialDensity,
+            contentDensityDirective: this._contentDensityDirective?.densityMode,
             contentDensityService: this._globalContentDensityService ?? undefined,
-            parentContentDensityService: this.config.restrictChildContentDensity
-                ? (this._parentContentDensityObserver?.asObservable() ?? undefined)
+            parentContentDensityObserver: this.config.restrictChildContentDensity
+                ? this._parentContentDensityObserver?.contentDensity
                 : undefined
-        })
-            .pipe(
-                map((density) => {
-                    if (this.config.debug) {
-                        console.log(`ContentDensityObserver: density changed to ${density}`);
-                    }
-                    if (!this._isSupported(density)) {
-                        try {
-                            if (this.config.debug) {
-                                console.log(
-                                    `ContentDensityObserver: ${density} is not supported. Failing back to alternative one.`
-                                );
-                            }
-                            return this._alternativeTo[density]();
-                        } catch {
-                            throw new Error(`ContentDensityObserver: density ${density} is not supported`);
-                        }
-                    }
-                    return density;
-                }),
-                distinctUntilChanged(),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe((density) => {
-                this.next(density);
+        });
+
+        // React to changes with effect
+        effect(() => {
+            const rawDensity = this._changesSource();
+            const density = this._validateAndFallback(rawDensity);
+            if (density !== this._contentDensity()) {
+                this._contentDensity.set(density);
                 this._applyClass();
-                this._isCompact$.next(density === ContentDensityMode.COMPACT);
-                this._isCozy$.next(density === ContentDensityMode.COZY);
-                this._isCondensed$.next(density === ContentDensityMode.CONDENSED);
-            });
+            }
+        });
+
+        // Apply initial CSS class
+        this._applyClass();
+
+        // Register cleanup on destroy
+        this._destroyRef.onDestroy(() => {
+            this._cleanup();
+            if (this.config.debug) {
+                console.log('ContentDensityObserver: destroyed');
+            }
+        });
     }
 
-    /** @hidden */
+    /**
+     * Add consumers to observe content density changes
+     * @deprecated Use signal bindings instead
+     */
     consume(...consumers: ContentDensityObserverTarget[]): void {
         this._elements.concat(...consumers.map((c) => c.elementRef));
     }
 
     /**
-     * Completes the stream and closes all internal subscriptions.
+     * Completes the observer and cleans up resources
+     * @deprecated Cleanup is automatic via DestroyRef
      */
-    override complete(): void {
-        super.complete();
-        this._isCondensed$.complete();
-        this._isCozy$.complete();
-        this._isCompact$.complete();
+    complete(): void {
+        this._cleanup();
+    }
+
+    /**
+     * Returns an observable of content density changes
+     * @deprecated Use contentDensity signal instead
+     */
+    asObservable(): Observable<ContentDensityMode> {
+        return this.contentDensity$$;
+    }
+
+    /**
+     * Subscribe to content density changes
+     * @deprecated Use contentDensity signal instead
+     */
+    subscribe(observer?: Partial<Observer<ContentDensityMode>>): Subscription {
+        return this.contentDensity$$.subscribe(observer);
+    }
+
+    /**
+     * Remove a consumer from the observer
+     * @deprecated Use signal bindings instead
+     */
+    removeConsumer(consumer: ContentDensityObserverTarget): void {
+        this._elements.splice(this._elements.indexOf(consumer.elementRef), 1);
+    }
+
+    private _validateAndFallback(density: ContentDensityMode): ContentDensityMode {
+        if (this.config.debug) {
+            console.log(`ContentDensityObserver: density changed to ${density}`);
+        }
+        if (!this._isSupported(density)) {
+            try {
+                if (this.config.debug) {
+                    console.log(
+                        `ContentDensityObserver: ${density} is not supported. Failing back to alternative one.`
+                    );
+                }
+                return this._alternativeTo[density]();
+            } catch {
+                throw new Error(`ContentDensityObserver: density ${density} is not supported`);
+            }
+        }
+        return density;
+    }
+
+    private _cleanup(): void {
         this._parentContentDensityObserver = null;
         this._contentDensityDirective = null;
         this._globalContentDensityService = null;
@@ -227,19 +316,14 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         this._elements = [];
     }
 
-    /** @hidden */
-    removeConsumer(consumer: ContentDensityObserverTarget): void {
-        this._elements.splice(this._elements.indexOf(consumer.elementRef), 1);
-    }
-
-    /** @hidden */
     private _applyClass(): void {
         if (!this.config?.modifiers) {
             return;
         }
         const modifiers = this.config.modifiers;
+        const currentDensity = this._contentDensity();
 
-        const parentContentDensityEqual = this._parentContentDensityObserver?.value === this.value;
+        const parentContentDensityEqual = this._parentContentDensityObserver?.value === currentDensity;
 
         this._elements.forEach((element) => {
             Object.values(modifiers).forEach((className) => {
@@ -250,15 +334,14 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
             if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
                 return;
             }
-            const modifierClass = modifiers[this.value];
+            const modifierClass = modifiers[currentDensity];
             if (modifierClass) {
                 this._renderer?.addClass(element?.nativeElement, modifierClass);
             }
-            this._renderer?.addClass(element?.nativeElement, modifiers[this.value]!);
+            this._renderer?.addClass(element?.nativeElement, modifiers[currentDensity]!);
         });
     }
 
-    /** Check if the given density is supported */
     private _isSupported(density: ContentDensityMode): boolean {
         return this.config.supportedContentDensity?.includes(density) ?? false;
     }

@@ -1,24 +1,36 @@
+<fd-docs-section-title id="content-density-modes" componentName="content-density-modes">
+    Content Density Modes
+</fd-docs-section-title>
+<description>
+    <p>Content density controls the visual compactness of UI components. Three modes are available:</p>
+    <ul>
+        <li><code>compact</code> - Reduced spacing for dense data displays</li>
+        <li><code>cozy</code> - Default spacing, optimized for touch interactions</li>
+        <li><code>condensed</code> - Minimal spacing, similar to compact (some components fall back to compact)</li>
+    </ul>
+</description>
+
+<separator></separator>
+
 <fd-docs-section-title id="content-density-storage" componentName="content-density-storage">
     ContentDensityStorage
 </fd-docs-section-title>
 <description>
     <p>
         <code>provideContentDensity()</code> supports configurable storage of application content density preference.
-        Out of the box, 3 storage options are available:
+        Out of the box, three storage options are available:
     </p>
     <ul>
-        <li>LocalContentDensityStorage - mode gets saved and consumed in local storage</li>
-        <li>UrlContentDensityStorage - mode gets saved and consumed from URL</li>
+        <li>LocalContentDensityStorage - mode is saved and read from local storage</li>
+        <li>UrlContentDensityStorage - mode is saved and read from URL query parameters</li>
         <li>MemoryContentDensityStorage - mode is saved in memory</li>
     </ul>
     <p>
-        The documentation page uses LocalContentDensityStorage, so if you change content density preference from either
-        toolbar or from <code>GlobalContentDensityService</code> example, changes will be saved in local storage
+        This documentation page uses LocalContentDensityStorage, so if you change the content density preference from
+        the toolbar or from the <code>GlobalContentDensityService</code> example, changes will be saved in local
+        storage.
     </p>
-    <p>
-        Also, as an additional comfort, you can modify under which key does storage get saved in local storage or in url
-        query params
-    </p>
+    <p>Additionally, you can customize the storage key used in local storage or URL query parameters.</p>
 </description>
 <fd-code-snippet [file]="contentDensityStorageExampleFile"></fd-code-snippet>
 
@@ -28,17 +40,23 @@
     GlobalContentDensityService
 </fd-docs-section-title>
 <description>
-    Content Density can be maintained app-wide using the <code>GlobalContentDensityService</code>, and components can
-    use signals to reactively track changes to the content density. Before using it, you should add
-    <code>provideContentDensity()</code> to your application's providers.
-    <br />
-    Note that many components only come in one size, and others (such as the button) only have
-    <code>compact</code> and <code>cozy</code> sizes, so setting the size to <code>condensed</code>
-    will have same effect as compact.
-    <br />
-    All components that have content density options will first check to see if the developer has provided a
-    <code>fdContentDensity</code> directive, and if not, it will then refer to the value set in the
-    <code>GlobalContentDensityService</code>.
+    <p>
+        Content density can be maintained app-wide using the <code>GlobalContentDensityService</code>. The service
+        provides a signal-based API for reactive content density tracking. Before using it, add
+        <code>provideContentDensity()</code> to your application's providers.
+    </p>
+    <p>
+        <strong>Signal API:</strong>
+    </p>
+    <ul>
+        <li><code>currentDensitySignal</code> - A readonly signal containing the current content density mode</li>
+        <li><code>updateContentDensity(mode)</code> - Method to change the global content density</li>
+    </ul>
+    <p>
+        Note that many components only come in one size, and others (such as the button) only have
+        <code>compact</code> and <code>cozy</code> sizes, so setting the size to <code>condensed</code>
+        will have the same effect as compact.
+    </p>
 </description>
 <component-example>
     <fd-content-density-example></fd-content-density-example>
@@ -47,16 +65,73 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="content-density-observer" componentName="content-density-observer">
+    ContentDensityObserver
+</fd-docs-section-title>
+<description>
+    <p>
+        Components that need to react to content density changes can use <code>ContentDensityObserver</code>. This
+        service provides signal-based properties for reactive UI updates:
+    </p>
+    <ul>
+        <li><code>contentDensity()</code> - Signal with the current content density mode</li>
+        <li><code>isCompactSignal()</code> - Signal that returns true when compact</li>
+        <li><code>isCozySignal()</code> - Signal that returns true when cozy</li>
+        <li><code>isCondensedSignal()</code> - Signal that returns true when condensed</li>
+    </ul>
+    <p>Use <code>contentDensityObserverProviders()</code> to configure the observer:</p>
+    <ul>
+        <li><code>supportedContentDensity</code> - Array of modes the component supports</li>
+        <li><code>defaultContentDensity</code> - Fallback mode when no density is specified</li>
+        <li><code>restrictChildContentDensity</code> - Forces child components to inherit this component's density</li>
+    </ul>
+</description>
+
+<separator></separator>
+
 <fd-docs-section-title id="directives" componentName="directives">Directives</fd-docs-section-title>
 <description>
     <p>
-        You can use directives to make components explicitly use desired content density configuration. We have created
-        one directive called
-        <code>[fdContentDensity]</code>, which also has 3 other names <code>[fdCompact]</code>,
-        <code>[fdCozy]</code> and <code>[fdCondensed]</code>. Although these three names are just for ease of use and
-        writing less code.
-        <br />
-        You can check out their behavior in example below.
+        You can use directives to explicitly set the content density for components. The main directive is
+        <code>[fdContentDensity]</code>, which also has three shorthand aliases: <code>[fdCompact]</code>,
+        <code>[fdCozy]</code>, and <code>[fdCondensed]</code>. These aliases provide a more concise syntax.
+    </p>
+    <p>The directive accepts the following values:</p>
+    <ul>
+        <li><code>"compact"</code>, <code>"cozy"</code>, <code>"condensed"</code> - Explicit density modes</li>
+        <li>
+            <code>"global"</code> - Follow the global service value (default when using
+            <code>[fdContentDensity]</code> without a value)
+        </li>
+        <li><code>"default"</code> - Use the component's default density</li>
+    </ul>
+    <p>
+        The directive exposes a <code>densityMode</code> signal that child components can read via dependency injection.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="content-density-inheritance" componentName="content-density-inheritance">
+    Inheritance and Priority
+</fd-docs-section-title>
+<description>
+    <p>Content density follows a priority order when determining which value to use:</p>
+    <ol>
+        <li>
+            <strong>Parent with <code>restrictChildContentDensity</code></strong> - If a parent component restricts
+            child density, children inherit the parent's value
+        </li>
+        <li><strong>Local directive</strong> - The <code>[fdContentDensity]</code> directive on the component</li>
+        <li><strong>Global service</strong> - The value from <code>GlobalContentDensityService</code></li>
+        <li>
+            <strong>Component default</strong> - The default configured in
+            <code>contentDensityObserverProviders()</code>
+        </li>
+    </ol>
+    <p>
+        The example below demonstrates inheritance. Child components without a directive inherit from their parent.
+        Components with a directive override the inherited value.
     </p>
 </description>
 <component-example>

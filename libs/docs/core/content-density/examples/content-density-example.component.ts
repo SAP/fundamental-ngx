@@ -1,5 +1,4 @@
 import { Component, computed, inject, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
     ContentDensityMode,
@@ -17,7 +16,7 @@ import { ContentDensityUserComponent } from './content-density-user/content-dens
 })
 export class ContentDensityExampleComponent {
     /** Current content density as a signal */
-    protected readonly currentDensity: Signal<ContentDensityMode | undefined>;
+    protected readonly currentDensity: Signal<ContentDensityMode>;
 
     /** Computed signal for display label */
     protected readonly densityLabel: Signal<string>;
@@ -25,7 +24,7 @@ export class ContentDensityExampleComponent {
     private readonly _contentDensityService = inject(GlobalContentDensityService);
 
     constructor() {
-        this.currentDensity = toSignal(this._contentDensityService.contentDensityListener());
+        this.currentDensity = this._contentDensityService.currentDensitySignal;
         this.densityLabel = computed(() => {
             const density = this.currentDensity();
             return density ? density.charAt(0).toUpperCase() + density.slice(1) : '';
