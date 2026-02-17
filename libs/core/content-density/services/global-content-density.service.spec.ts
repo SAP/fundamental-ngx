@@ -36,17 +36,13 @@ describe('GlobalContentDensityService', () => {
         service = TestBed.inject(GlobalContentDensityService);
     });
 
-    afterEach(() => {
-        service.ngOnDestroy();
-    });
-
     describe('initialization', () => {
         it('should be created', () => {
             expect(service).toBeTruthy();
         });
 
         it('should initialize with default content density from storage', () => {
-            expect(service.currentContentDensity).toBe(ContentDensityMode.COZY);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
         });
 
         it('should initialize with compact density when storage provides compact', () => {
@@ -60,8 +56,29 @@ describe('GlobalContentDensityService', () => {
             });
 
             const compactService = TestBed.inject(GlobalContentDensityService);
-            expect(compactService.currentContentDensity).toBe(ContentDensityMode.COMPACT);
-            compactService.ngOnDestroy();
+            expect(compactService.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
+        });
+    });
+
+    describe('currentDensitySignal', () => {
+        it('should return a signal with the current density', () => {
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
+        });
+
+        it('should be callable as a signal', () => {
+            const density = service.currentDensitySignal;
+            expect(typeof density).toBe('function');
+            expect(density()).toBe(ContentDensityMode.COZY);
+        });
+    });
+
+    describe('currentContentDensity (deprecated getter)', () => {
+        it('should return the current density from signal', () => {
+            expect(service.currentContentDensity).toBe(ContentDensityMode.COZY);
+        });
+
+        it('should return the same value as currentDensitySignal', () => {
+            expect(service.currentContentDensity).toBe(service.currentDensitySignal());
         });
     });
 
@@ -97,14 +114,15 @@ describe('GlobalContentDensityService', () => {
     describe('updateContentDensity', () => {
         it('should update content density', (done) => {
             service.updateContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
-                expect(service.currentContentDensity).toBe(ContentDensityMode.COMPACT);
+                // Signal updates reactively
+                expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
                 done();
             });
         });
 
         it('should update to condensed density', (done) => {
             service.updateContentDensity(ContentDensityMode.CONDENSED).subscribe(() => {
-                expect(service.currentContentDensity).toBe(ContentDensityMode.CONDENSED);
+                expect(service.currentDensitySignal()).toBe(ContentDensityMode.CONDENSED);
                 done();
             });
         });
@@ -114,7 +132,7 @@ describe('GlobalContentDensityService', () => {
             service.updateContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
                 // Then set back to cozy
                 service.updateContentDensity(ContentDensityMode.COZY).subscribe(() => {
-                    expect(service.currentContentDensity).toBe(ContentDensityMode.COZY);
+                    expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
                     done();
                 });
             });
@@ -140,26 +158,20 @@ describe('GlobalContentDensityService', () => {
         });
     });
 
-    describe('currentContentDensity property', () => {
-        it('should reflect the current density value synchronously', () => {
-            expect(service.currentContentDensity).toBe(ContentDensityMode.COZY);
+    describe('reactive updates', () => {
+        it('should update signal when storage changes', (done) => {
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
+
+            // Subscribe to verify the change propagates
+            service.contentDensityListener().subscribe((density) => {
+                if (density === ContentDensityMode.COMPACT) {
+                    // Signal should have updated via toSignal
+                    expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
+                    done();
+                }
+            });
 
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
-            expect(service.currentContentDensity).toBe(ContentDensityMode.COMPACT);
-
-            mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
-            expect(service.currentContentDensity).toBe(ContentDensityMode.CONDENSED);
-        });
-    });
-
-    describe('cleanup', () => {
-        it('should unsubscribe on destroy', () => {
-            const subscription = (service as any)._subscription;
-            expect(subscription.closed).toBe(false);
-
-            service.ngOnDestroy();
-
-            expect(subscription.closed).toBe(true);
         });
     });
 });
