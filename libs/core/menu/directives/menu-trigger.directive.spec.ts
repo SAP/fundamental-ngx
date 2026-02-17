@@ -1,5 +1,5 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { Component, EventEmitter, signal, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { MenuComponent } from '../menu.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
 
@@ -25,12 +25,13 @@ describe('MenuTriggerDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
+        const isOpenSignal = signal(false);
         menu = {
-            id: 'menu-id',
-            isOpen: false,
+            id: () => 'menu-id',
+            isOpen: isOpenSignal,
             isOpenChange: new EventEmitter<boolean>(),
             set trigger(value) {}
-        };
+        } as any;
 
         fixture.detectChanges();
         directive = fixture.componentInstance.menuTrigger;
@@ -62,17 +63,18 @@ describe('MenuTriggerDirective', () => {
         directive.menu = menu as MenuComponent;
 
         tick();
+        fixture.detectChanges();
 
         expect(directive.ariaHasPopup).toBe(true);
         expect(directive.ariaExpanded).toBeFalsy();
         expect(directive.ariaControls).toBeFalsy();
 
-        menu.isOpen = true;
-        menu.isOpenChange!.emit(true);
-
+        (menu.isOpen as any).set(true);
+        fixture.detectChanges();
+        flushMicrotasks();
         tick();
 
         expect(directive.ariaExpanded).toBe(true);
-        expect(directive.ariaControls).toEqual(menu.id);
+        expect(directive.ariaControls).toEqual(menu.id!());
     }));
 });

@@ -7,6 +7,7 @@ import {
     HostListener,
     Input,
     Renderer2,
+    signal,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -101,7 +102,7 @@ export class PopoverBodyComponent implements AfterViewInit {
     _bodyRole: Nullable<string> = 'dialog';
 
     /** @hidden Aria role for the popover body. */
-    _bodyId: Nullable<string> = null;
+    readonly _bodyId = signal<string | null>(null);
 
     /** Classes added to arrow element. */
     _arrowClasses = '';

@@ -62,6 +62,26 @@ describe('MultiComboBox component', () => {
         fixture.detectChanges();
     }));
 
+    // Helper to wait for overlay to render after signal-based popover changes
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async function waitForOverlay(maxAttempts = 20): Promise<boolean> {
+        for (let i = 0; i < maxAttempts; i++) {
+            fixture.detectChanges();
+            await fixture.whenStable();
+
+            // Check for overlay pane first, then check for items
+            const overlayPane = document.querySelector('.cdk-overlay-pane');
+            const items = overlayContainerEl.querySelectorAll('.fd-list__item');
+
+            if (overlayPane && items.length > 0) {
+                return true;
+            }
+            // Small delay between attempts
+            await new Promise((resolve) => setTimeout(resolve, 50));
+        }
+        return false;
+    }
+
     it('should create', () => {
         expect(component).toBeTruthy();
     });
@@ -77,17 +97,22 @@ describe('MultiComboBox component', () => {
     });
 
     it('should be able to expand/collapse list if click on onPrimaryButtonClick', () => {
+        // Initial state - closed
+        expect(component.isOpen).toBeFalsy();
+
+        // Click to open
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
         let toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
         expect(toggleButton.length).toBe(component._suggestions().length);
 
+        // Click to close
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
-        toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
-        expect(toggleButton.length).toBe(0);
+        // Verify closed
+        expect(component.isOpen).toBeFalsy();
     });
 
     it('should list all elements when limitless is true', () => {

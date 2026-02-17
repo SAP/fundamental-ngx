@@ -22,7 +22,8 @@ import {
     effect,
     inject,
     input,
-    signal
+    signal,
+    viewChild
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -517,6 +518,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _itemContainer = viewChild<ElementRef>('itemContainer');
+
+    /** @hidden */
     constructor() {
         super();
         effect(() => {
@@ -674,7 +678,13 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         if (!this.hasChildren$()) {
             return;
         }
-        this.expanded$.update((expanded) => !expanded);
+
+        // In snapped mode, toggle popover instead of expanded state
+        if (this.navigation.isSnapped$()) {
+            this.popoverOpen$.update((open) => !open);
+        } else {
+            this.expanded$.update((expanded) => !expanded);
+        }
     }
 
     /** Handles item click for both selection and expansion based on item type and navigation mode. */
@@ -749,6 +759,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     _onPopoverOpen(isOpen: boolean, popover: PopoverComponent): void {
+        // Set trigger if not already set
+        const itemContainer = this._itemContainer();
+        if (isOpen && !popover.trigger() && itemContainer) {
+            popover.trigger.set(itemContainer);
+        }
+
         this.popoverOpen$.set(isOpen);
         if (isOpen) {
             this._onZoneStable().subscribe(() => {
@@ -783,11 +799,13 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
                     // Last resort: use the popover's built-in focus management
                     try {
-                        popover.popoverBody._focusFirstTabbableElement(true);
+                        const popoverBody = (popover as any).popoverBody();
+                        popoverBody?._focusFirstTabbableElement(true);
                     } catch (error) {
                         console.error('Error focusing in popover:', error);
 
-                        const popoverBodyElement = popover.popoverBody?._elementRef?.nativeElement;
+                        const popoverBody = (popover as any).popoverBody();
+                        const popoverBodyElement = popoverBody?._elementRef?.nativeElement;
                         if (popoverBodyElement) {
                             const firstFocusableElement = popoverBodyElement.querySelector(
                                 'a, button, [tabindex]:not([tabindex="-1"])'

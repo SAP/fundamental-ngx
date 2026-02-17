@@ -8,46 +8,6 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
     imports: [ButtonComponent, MenuModule]
 })
 export class MenuScrollbarExampleComponent {
-    options = [
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option',
-        'Option'
-    ];
+    /** Generate 40 options for scrollbar demonstration */
+    options = Array.from({ length: 40 }, () => 'Option');
 }

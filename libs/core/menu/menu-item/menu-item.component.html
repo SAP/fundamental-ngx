@@ -4,7 +4,7 @@
         class="fd-menu__sublist"
         role="menu"
         [attr.id]="itemId"
-        [attr.aria-hidden]="!submenuVisible"
+        [attr.aria-hidden]="!submenuVisible ? 'true' : 'false'"
         [attr.aria-label]="submenu.ariaLabel"
         [attr.aria-labelledby]="submenu.ariaLabelledby"
     >

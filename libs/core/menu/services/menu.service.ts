@@ -121,8 +121,8 @@ export class MenuService implements OnDestroy {
 
         const invalidFocusedElement = this.focusedNode && !this.menuMap.get(this.focusedNode.item);
         if (invalidFocusedElement) {
-            this.focusedNode =
-                this.activeNodePath[this.activeNodePath.length - 1] || this.menuMap.get(null)!.children[0];
+            const rootNode = this.menuMap.get(null);
+            this.focusedNode = this.activeNodePath[this.activeNodePath.length - 1] || rootNode?.children[0];
         }
     }
 
@@ -207,13 +207,13 @@ export class MenuService implements OnDestroy {
             return map;
         }
 
-        const rootItems = menu._menuItems.filter((rootItem) => !rootItem.parentSubmenu);
+        const rootItems = menu.menuItems.filter((rootItem: MenuItemComponent) => !rootItem.parentSubmenu);
 
         /** root item */
         const menuTree: MenuNode = {
             item: null,
             parent: null,
-            children: rootItems.map((item) => buildNode(item))
+            children: rootItems.map((item: MenuItemComponent) => buildNode(item))
         };
 
         setParents(menuTree, null);
@@ -286,7 +286,7 @@ export class MenuService implements OnDestroy {
             if (focusedNode.children.length) {
                 focusRight(focusedNode);
             }
-        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menuComponent.closeOnEscapeKey) {
+        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menuComponent.closeOnEscapeKey()) {
             this.menuComponent.close();
         } else {
             matched = false;
@@ -299,7 +299,7 @@ export class MenuService implements OnDestroy {
 
     /** @hidden Emits an array of active menu items */
     private _emitActivePath(): void {
-        this.menuComponent.activePath.emit(this.activeNodePath.map((node) => node.item) as MenuItemComponent[]);
+        this.menuComponent?.activePath.emit(this.activeNodePath.map((node) => node.item) as MenuItemComponent[]);
     }
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */
@@ -311,7 +311,7 @@ export class MenuService implements OnDestroy {
             const startIndex = siblings.indexOf(node) + 1;
 
             for (let i = startIndex; i < siblings.length; i++) {
-                if (siblings[i].item && !siblings[i].item!.disabled) {
+                if (siblings[i].item && !siblings[i].item?.disabled) {
                     return siblings[i];
                 }
             }

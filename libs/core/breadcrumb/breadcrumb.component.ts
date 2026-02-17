@@ -201,8 +201,9 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
 
         this._contentItems.changes.subscribe(() => this._setItems());
 
-        this._menuComponent._navContainerRole = 'dialog';
-        this._menuComponent._menuListContainerRole = 'menu';
+        // Set menu roles for breadcrumb context
+        (this._menuComponent as any)._navContainerRole = 'dialog';
+        (this._menuComponent as any)._menuListContainerRole = 'menu';
     }
 
     /** @hidden */

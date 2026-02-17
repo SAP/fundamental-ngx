@@ -1,25 +1,33 @@
 import {
     Directive,
+    effect,
     ElementRef,
     EmbeddedViewRef,
     Inject,
-    Input,
-    OnChanges,
+    input,
     OnInit,
     Optional,
     Renderer2,
     Self,
-    SimpleChanges,
     TemplateRef,
     Type,
     ViewContainerRef
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
-import { BasePopoverClass, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
+import { PopoverConfig, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-with-icon';
+
+/** Default trigger configuration for inline help */
+const DEFAULT_TRIGGERS: TriggerConfig[] = [
+    { trigger: 'mouseenter', openAction: true, closeAction: false },
+    { trigger: 'mouseleave', openAction: false, closeAction: true },
+    { trigger: 'focusin', openAction: true, closeAction: false },
+    { trigger: 'focusout', openAction: false, closeAction: true }
+];
 
 let inlineHelpId = 0;
 
@@ -36,43 +44,34 @@ let inlineHelpId = 0;
     },
     standalone: true
 })
-export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
-    /** The trigger events that will open/close the inline help component.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
-    @Input()
-    triggers: (string | TriggerConfig)[] = [
-        { trigger: 'mouseenter', openAction: true, closeAction: false },
-        { trigger: 'mouseleave', openAction: false, closeAction: true },
-        { trigger: 'focusin', openAction: true, closeAction: false },
-        { trigger: 'focusout', openAction: false, closeAction: true }
-    ];
+export class InlineHelpDirective implements OnInit {
+    /** Inline help text to display inside generated popover */
+    readonly inlineHelpContent = input<string | TemplateRef<any>>('', { alias: 'fd-inline-help' });
 
-    /** Whether the popover should have an arrow. */
-    @Input()
-    noArrow = false;
+    /** Popover placement */
+    readonly placement = input<Placement | null>(null);
 
-    /** Whether the popover should close when the escape key is pressed. */
-    @Input()
-    closeOnEscapeKey = false;
+    /**
+     * The trigger events that will open/close the inline help component.
+     * Accepts any HTML DOM Events or TriggerConfig objects.
+     * @default mouseenter/mouseleave and focusin/focusout
+     */
+    readonly triggers = input<(string | TriggerConfig)[]>(DEFAULT_TRIGGERS);
 
     /** Whether the popover should close when a click is made outside its boundaries. */
-    @Input()
-    closeOnOutsideClick = false;
+    readonly closeOnOutsideClick = input(false);
 
-    /** Inline help text to display inside generated popover */
-    @Input('fd-inline-help')
-    set inlineHelpContent(content: string | TemplateRef<any>) {
-        const { text, template } = {
-            text: typeof content === 'string' ? content : null,
-            template: content instanceof TemplateRef ? content : null
-        };
-        this._popoverService.updateContent(text, template);
-
-        this._setupScreenreaderElement(content);
-    }
+    /** @hidden Internal body ID for ARIA */
+    protected _bodyId = '';
 
     /** @hidden */
-    _describedBy = '';
+    protected _describedBy = '';
+
+    /** @hidden */
+    protected _bodyRole = 'tooltip';
+
+    /** @hidden */
+    private _additionalBodyClass = '';
 
     /** @hidden */
     private _srViewRef: EmbeddedViewRef<any>;
@@ -85,36 +84,77 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         private readonly _viewContainerRef: ViewContainerRef,
         @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
     ) {
-        super();
-    }
+        // Watch for placement changes and sync with popover service
+        effect(() => {
+            this._popoverService.placement.set(this.placement() ?? 'bottom');
+        });
 
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('additionalBodyClass' in changes) {
-            this._applyAdditionalInlineHelpClass();
-        }
-        this._popoverService.refreshConfiguration(this);
+        // Watch for triggers changes and sync with popover service
+        effect(() => {
+            this._popoverService.triggers.set(this.triggers());
+        });
+
+        // Watch for closeOnOutsideClick changes and sync with popover service
+        effect(() => {
+            this._popoverService.closeOnOutsideClick.set(this.closeOnOutsideClick());
+        });
+
+        // Watch for content changes
+        effect(() => {
+            const content = this.inlineHelpContent();
+            const text = typeof content === 'string' ? content : null;
+            const template = content instanceof TemplateRef ? content : null;
+
+            this._popoverService.updateContent(text, template);
+            this._setupScreenreaderElement(content);
+        });
+
+        // Set role and id for ARIA
+        const bodyId = `fd-inline-help-${inlineHelpId++}`;
+        this._bodyRole = 'tooltip';
+        this._bodyId = bodyId;
+        this._elementRef.nativeElement.setAttribute('aria-describedby', bodyId);
+        this._describedBy = bodyId;
+
+        // Apply additional inline help classes
+        this._applyAdditionalInlineHelpClass();
+
+        // Initialize popover configuration for inline help
+        // This ensures the proper configuration is set
+        this._popoverService.noArrow.set(false);
+        this._popoverService.closeOnEscapeKey.set(false);
+        this._popoverService.additionalBodyClass.set(this._additionalBodyClass);
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._bodyRole = 'tooltip';
-        this._describedBy = `fd-inline-help-${inlineHelpId++}`;
-        this._elementRef.nativeElement.setAttribute('aria-describedby', this._describedBy);
-        this._bodyId = this._describedBy;
-        this._applyAdditionalInlineHelpClass();
-        this._popoverService.initialise(this._elementRef, this);
+        // Initialize popover with element and config
+        const config: PopoverConfig = {
+            placement: this.placement() ?? 'bottom',
+            triggers: this.triggers(),
+            noArrow: false,
+            closeOnEscapeKey: false,
+            closeOnOutsideClick: this.closeOnOutsideClick(),
+            additionalBodyClass: this._additionalBodyClass,
+            bodyRole: this._bodyRole,
+            bodyId: this._bodyId
+        };
+
+        this._popoverService.initialise(this._elementRef, config);
     }
 
     /** @hidden */
     private _applyAdditionalInlineHelpClass(): void {
-        this.additionalBodyClass = INLINE_HELP_CLASS + ' ' + this.additionalBodyClass;
+        let classes = INLINE_HELP_CLASS;
 
         // If connected to the icon, but not button, then apply additional class
         // That will change the arrow's position a bit
         if (this._icon) {
-            this.additionalBodyClass += ' ' + INLINE_HELP_ICON_CLASS;
+            classes += ' ' + INLINE_HELP_ICON_CLASS;
         }
+
+        this._additionalBodyClass = classes;
+        this._popoverService.additionalBodyClass.set(classes);
     }
 
     /** @hidden */

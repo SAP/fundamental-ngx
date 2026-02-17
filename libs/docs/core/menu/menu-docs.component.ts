@@ -17,6 +17,7 @@ import {
     MenuSeparatorExampleComponent
 } from './examples/menu-examples.component';
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
+import { MenuProgrammaticExampleComponent } from './examples/menu-programmatic-example.component';
 import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
@@ -29,6 +30,7 @@ const menuScrollbarHtml = 'menu-scrollbar-example.component.html';
 const menuScrollbarTs = 'menu-scrollbar-example.component.ts';
 const menuWithSubmenuHtml = 'menu-with-submenu-example.component.html';
 const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
+const menuProgrammaticTs = 'menu-programmatic-example.component.ts';
 
 @Component({
     selector: 'app-menu',
@@ -46,7 +48,8 @@ const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
         MenuWithSubmenuExampleComponent,
         RouterLink,
         MenuMobileExampleComponent,
-        ExtendedMenuExampleComponent
+        ExtendedMenuExampleComponent,
+        MenuProgrammaticExampleComponent
     ]
 })
 export class MenuDocsComponent {
@@ -123,6 +126,15 @@ export class MenuDocsComponent {
             code: getAssetFromModuleAssets('extended-menu-example.component.ts'),
             fileName: 'extended-menu-example',
             component: 'ExtendedMenuExampleComponent'
+        }
+    ];
+
+    menuProgrammatic: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(menuProgrammaticTs),
+            fileName: 'menu-programmatic-example',
+            component: 'MenuProgrammaticExampleComponent'
         }
     ];
 }

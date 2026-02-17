@@ -87,7 +87,7 @@ export class FormInputMessageGroupComponent {
 
     /** @hidden */
     @ViewChild('popoverPlacementContainer', { static: false, read: ElementRef })
-    _popoverPlacementContainer: ElementRef | undefined;
+    _popoverPlacementContainer: ElementRef | null;
 
     /** @hidden */
     @ViewChild('popover')

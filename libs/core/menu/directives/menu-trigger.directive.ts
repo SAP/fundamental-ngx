@@ -1,4 +1,5 @@
-import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Injector, Input, OnDestroy } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
 
@@ -38,6 +39,9 @@ export class MenuTriggerDirective implements OnDestroy {
     private _menuSubscription: Subscription = new Subscription();
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -45,10 +49,13 @@ export class MenuTriggerDirective implements OnDestroy {
         this._unsubscribeFromMenu();
     }
 
-    /** @hidden */
     private _subscribeToMenu(menu: MenuComponent): void {
+        // toObservable requires injection context - pass injector explicitly
+        // Note: menu.isOpen is the model signal; isOpenChange is the output
+        const isOpen$ = toObservable(menu.isOpen, { injector: this._injector });
+
         this._menuSubscription.add(
-            menu.isOpenChange.subscribe(() => {
+            isOpen$.subscribe(() => {
                 this._setAriaAttributes(menu);
             })
         );
@@ -63,7 +70,7 @@ export class MenuTriggerDirective implements OnDestroy {
     /** @hidden */
     private _setAriaAttributes(menu?: MenuComponent): void {
         this.ariaHasPopup = !!menu;
-        this.ariaExpanded = menu?.isOpen;
-        this.ariaControls = menu?.isOpen ? menu.id : null;
+        this.ariaExpanded = menu?.isOpen();
+        this.ariaControls = menu?.isOpen() ? menu.id() : null;
     }
 }

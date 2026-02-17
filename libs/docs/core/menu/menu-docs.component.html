@@ -130,3 +130,22 @@
 <code-example [exampleFiles]="menuMobile"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="programmatic" componentName="menu">Programmatic Control</fd-docs-section-title>
+<description>
+    <p>Menu supports programmatic control through signals and methods. You can:</p>
+    <ul>
+        <li>Use <code>[(isOpen)]</code> for two-way binding with a signal</li>
+        <li>Call <code>open()</code>, <code>close()</code>, or <code>toggle()</code> methods directly</li>
+        <li>Use the <code>[config]</code> input to pass a configuration object instead of individual inputs</li>
+        <li>Listen to <code>(beforeOpen)</code> event which fires just before the menu opens</li>
+        <li>Listen to <code>(isOpenChange)</code> event for open state changes</li>
+        <li>Listen to <code>(activePath)</code> event for menu item selection</li>
+    </ul>
+</description>
+<component-example>
+    <fd-menu-programmatic-example></fd-menu-programmatic-example>
+</component-example>
+<code-example [exampleFiles]="menuProgrammatic"></code-example>
+
+<separator></separator>

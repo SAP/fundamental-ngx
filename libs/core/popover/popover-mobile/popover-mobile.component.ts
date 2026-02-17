@@ -3,8 +3,10 @@ import {
     ChangeDetectorRef,
     Component,
     Inject,
+    Injector,
     OnDestroy,
     OnInit,
+    runInInjectionContext,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -13,7 +15,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import {
     DialogBodyComponent,
@@ -71,6 +73,9 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden Observable of component isOpen state - created in constructor to preserve injection context */
+    private _isOpen$: ReturnType<typeof toObservable<boolean>>;
+
     /** @hidden */
     get titleId(): string {
         return this.id + '-title';
@@ -79,9 +84,12 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden */
     constructor(
         private _changeDetectorref: ChangeDetectorRef,
-        @Inject(POPOVER_COMPONENT) _popoverComponent: PopoverInterface
+        @Inject(POPOVER_COMPONENT) _popoverComponent: PopoverInterface,
+        private _injector: Injector
     ) {
         super(_popoverComponent, MobileModeControl.POPOVER);
+        // Create observable in constructor to preserve injection context for toObservable()
+        this._isOpen$ = runInInjectionContext(this._injector, () => toObservable(this._component.isOpen));
     }
 
     /** @hidden */
@@ -110,11 +118,11 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
-            this._component.isOpenChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
+            this._isOpen$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
                 if (isOpen) {
                     this._openDialog();
                 } else {
-                    this.dialogRef.hide(true);
+                    this.dialogRef?.hide(true);
                 }
             })
         );

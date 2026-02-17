@@ -12,7 +12,7 @@
     [style.min-width.px]="_popoverBodyMinWidth"
     [style.width.px]="_popoverBodyWidth"
     [attr.role]="_bodyRole"
-    [attr.id]="_bodyId"
+    [attr.id]="_bodyId()"
     fdkResize
     [fdkResizeDisabled]="!_resizable"
     [fdkResizeClass]="'fd-popover__body--disable-transitions'"
