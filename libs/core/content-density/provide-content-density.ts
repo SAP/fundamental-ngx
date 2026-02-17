@@ -1,12 +1,10 @@
 import { DOCUMENT, Provider } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ContentDensityService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityStorage } from './classes/abstract-content-density-storage';
 import { ContentDensityModuleConfig } from './content-density.types';
 import { LocalContentDensityStorage } from './providers/local-content-density-storage';
 import { MemoryContentDensityStorage } from './providers/memory-content-density-storage';
 import { UrlContentDensityStorage } from './providers/url-content-density-storage';
-import { DeprecatedContentDensityService } from './services/deprecated-content-density.service';
 import { GlobalContentDensityService } from './services/global-content-density.service';
 import { CONTENT_DENSITY_STORAGE_KEY } from './tokens/content-density-storage-key.token';
 import { DEFAULT_CONTENT_DENSITY } from './tokens/default-content-density.token';
@@ -61,10 +59,6 @@ export function provideContentDensity(config?: ContentDensityModuleConfig): Prov
         {
             provide: CONTENT_DENSITY_STORAGE_KEY,
             useValue: (conf as any).storageKey || '__ContentDensity__'
-        },
-        {
-            provide: ContentDensityService,
-            useClass: DeprecatedContentDensityService
         },
         GlobalContentDensityService,
         storage

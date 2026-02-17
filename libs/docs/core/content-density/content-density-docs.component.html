@@ -3,8 +3,8 @@
 </fd-docs-section-title>
 <description>
     <p>
-        <code>ContentDensityModule</code> has support for configurable storage of application content density
-        preference. Out of the box, 3 storage options are available:
+        <code>provideContentDensity()</code> supports configurable storage of application content density preference.
+        Out of the box, 3 storage options are available:
     </p>
     <ul>
         <li>LocalContentDensityStorage - mode gets saved and consumed in local storage</li>
@@ -29,9 +29,8 @@
 </fd-docs-section-title>
 <description>
     Content Density can be maintained app-wide using the <code>GlobalContentDensityService</code>, and components can
-    subscribe to a <code>Observable</code> managed by the service and use that to handle changes to the content density.
-    Before using it, you should add <code>ContentDensityModule</code> to imports array of <code>AppModule</code>, or
-    other root module in your application.
+    use signals to reactively track changes to the content density. Before using it, you should add
+    <code>provideContentDensity()</code> to your application's providers.
     <br />
     Note that many components only come in one size, and others (such as the button) only have
     <code>compact</code> and <code>cozy</code> sizes, so setting the size to <code>condensed</code>

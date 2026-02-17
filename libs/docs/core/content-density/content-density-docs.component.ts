@@ -14,7 +14,7 @@ import { DirectiveUsageExampleComponent } from './examples/directive-usage/direc
 
 const contentDensityUserComponentSrc = 'content-density-user/content-density-user.component.ts';
 const contentDensityUserComponentScssSrc = 'content-density-user/content-density-user.component.scss';
-const contentDensityStorageModule = 'content-density-storage-example.module';
+const contentDensityStorageModule = 'content-density-storage-example';
 
 const contentDensitySrc = 'content-density-example.component.ts';
 const contentDensityHTMLSrc = 'content-density-example.component.html';
