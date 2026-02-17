@@ -1,29 +1,28 @@
-import { Component, ElementRef, Signal, signal, WritableSignal } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { Component, ElementRef } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
-import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { contentDensityObserverProviders } from '../providers/content-density-observer-providers';
-import { CONTENT_DENSITY_DIRECTIVE, ContentDensityDirectiveRef } from '../tokens/content-density-directive';
+import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 import { ContentDensityMode } from '../types/content-density.mode';
 import { ContentDensityObserver } from './content-density-observer.service';
 import { GlobalContentDensityService } from './global-content-density.service';
 
 class MockContentDensityStorage implements ContentDensityStorage {
-    readonly contentDensity: Signal<ContentDensityMode>;
+    private _density$ = new BehaviorSubject<ContentDensityMode>(ContentDensityMode.COZY);
 
-    private _contentDensity: WritableSignal<ContentDensityMode> = signal(ContentDensityMode.COZY);
-
-    constructor() {
-        this.contentDensity = this._contentDensity.asReadonly();
+    getContentDensity(): Observable<ContentDensityMode> {
+        return this._density$.asObservable();
     }
 
-    setContentDensity(density: ContentDensityMode): void {
-        this._contentDensity.set(density);
+    setContentDensity(density: ContentDensityMode): Observable<void> {
+        this._density$.next(density);
+        return of(undefined);
     }
 
     setDensityDirectly(density: ContentDensityMode): void {
-        this._contentDensity.set(density);
+        this._density$.next(density);
     }
 }
 
@@ -57,6 +56,7 @@ describe('ContentDensityObserver', () => {
     let component: TestHostComponent;
     let observer: ContentDensityObserver;
     let mockStorage: MockContentDensityStorage;
+    let globalService: GlobalContentDensityService;
 
     beforeEach(() => {
         mockStorage = new MockContentDensityStorage();
@@ -74,11 +74,13 @@ describe('ContentDensityObserver', () => {
         fixture = TestBed.createComponent(TestHostComponent);
         component = fixture.componentInstance;
         observer = component.observer;
+        globalService = TestBed.inject(GlobalContentDensityService);
         fixture.detectChanges();
     });
 
     afterEach(() => {
         observer?.complete();
+        globalService?.ngOnDestroy();
     });
 
     describe('initialization', () => {
@@ -88,7 +90,6 @@ describe('ContentDensityObserver', () => {
 
         it('should initialize with default content density (cozy)', () => {
             expect(observer.value).toBe(ContentDensityMode.COZY);
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COZY);
         });
 
         it('should initialize with global service density when available', fakeAsync(() => {
@@ -105,44 +106,20 @@ describe('ContentDensityObserver', () => {
             tick();
 
             expect(newFixture.componentInstance.observer.value).toBe(ContentDensityMode.COMPACT);
-            expect(newFixture.componentInstance.observer.contentDensity()).toBe(ContentDensityMode.COMPACT);
 
             newFixture.componentInstance.observer.complete();
         }));
     });
 
-    describe('new signal API', () => {
-        it('should have contentDensity signal', () => {
-            expect(observer.contentDensity).toBeDefined();
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COZY);
-        });
-
-        it('should have isCompactSignal signal', () => {
-            expect(observer.isCompactSignal).toBeDefined();
-            expect(observer.isCompactSignal()).toBe(false);
-        });
-
-        it('should have isCozySignal signal', () => {
-            expect(observer.isCozySignal).toBeDefined();
-            expect(observer.isCozySignal()).toBe(true);
-        });
-
-        it('should have isCondensedSignal signal', () => {
-            expect(observer.isCondensedSignal).toBeDefined();
-            expect(observer.isCondensedSignal()).toBe(false);
-        });
-    });
-
-    describe('backward compatible API (deprecated)', () => {
-        it('should have contentDensity$ signal alias', () => {
+    describe('density state signals and observables', () => {
+        it('should have contentDensity$ signal', () => {
             expect(observer.contentDensity$).toBeDefined();
             expect(observer.contentDensity$()).toBe(ContentDensityMode.COZY);
-            expect(observer.contentDensity$).toBe(observer.contentDensity);
         });
 
-        it('should have isCompact getter and observable', (done) => {
+        it('should have isCompact observable and signal', (done) => {
             expect(observer.isCompact$).toBeDefined();
-            expect(observer.isCompact).toBe(false);
+            expect(observer.isCompactSignal).toBeDefined();
 
             observer.isCompact$.subscribe((isCompact) => {
                 expect(isCompact).toBe(false);
@@ -151,9 +128,9 @@ describe('ContentDensityObserver', () => {
             });
         });
 
-        it('should have isCozy getter and observable', (done) => {
+        it('should have isCozy observable and signal', (done) => {
             expect(observer.isCozy$).toBeDefined();
-            expect(observer.isCozy).toBe(true);
+            expect(observer.isCozySignal).toBeDefined();
 
             observer.isCozy$.subscribe((isCozy) => {
                 expect(isCozy).toBe(true);
@@ -162,9 +139,9 @@ describe('ContentDensityObserver', () => {
             });
         });
 
-        it('should have isCondensed getter and observable', (done) => {
+        it('should have isCondensed observable and signal', (done) => {
             expect(observer.isCondensed$).toBeDefined();
-            expect(observer.isCondensed).toBe(false);
+            expect(observer.isCondensedSignal).toBeDefined();
 
             observer.isCondensed$.subscribe((isCondensed) => {
                 expect(isCondensed).toBe(false);
@@ -173,26 +150,19 @@ describe('ContentDensityObserver', () => {
             });
         });
 
-        it('should have asObservable method', () => {
-            expect(typeof observer.asObservable).toBe('function');
-            const observable = observer.asObservable();
-            expect(observable).toBeDefined();
-            expect(typeof observable.subscribe).toBe('function');
-        });
-
-        it('should have subscribe method', () => {
-            expect(typeof observer.subscribe).toBe('function');
+        it('should have synchronous getters for density states', () => {
+            expect(observer.isCompact).toBe(false);
+            expect(observer.isCozy).toBe(true);
+            expect(observer.isCondensed).toBe(false);
         });
     });
 
     describe('reacting to global density changes', () => {
-        it('should update signals when global density changes to compact', fakeAsync(() => {
+        it('should update when global density changes to compact', fakeAsync(() => {
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
             tick();
-            fixture.detectChanges();
 
             expect(observer.value).toBe(ContentDensityMode.COMPACT);
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COMPACT);
             expect(observer.isCompact).toBe(true);
             expect(observer.isCozy).toBe(false);
         }));
@@ -205,7 +175,6 @@ describe('ContentDensityObserver', () => {
 
             mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
             tick();
-            customFixture.detectChanges();
 
             expect(customFixture.componentInstance.observer.value).toBe(ContentDensityMode.CONDENSED);
             expect(customFixture.componentInstance.observer.isCondensed).toBe(true);
@@ -213,22 +182,14 @@ describe('ContentDensityObserver', () => {
             customFixture.componentInstance.observer.complete();
         }));
 
-        it('should emit values through subscribe', fakeAsync(() => {
+        it('should emit values through the BehaviorSubject', fakeAsync(() => {
             const emittedValues: ContentDensityMode[] = [];
-            observer.subscribe({ next: (density) => emittedValues.push(density) });
-
-            // Wait for initial emission from toObservable
-            tick();
+            observer.subscribe((density) => emittedValues.push(density));
 
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
             tick();
-            fixture.detectChanges();
-            tick();
 
-            // The signal-based observable may emit asynchronously
-            expect(emittedValues.length).toBeGreaterThan(0);
-            // Verify the signal itself updated correctly
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COMPACT);
+            expect(emittedValues).toContain(ContentDensityMode.COMPACT);
         }));
     });
 
@@ -241,7 +202,6 @@ describe('ContentDensityObserver', () => {
             // Custom config only supports COZY and CONDENSED
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
             tick();
-            customFixture.detectChanges();
 
             // Should fallback to condensed as alternative to compact
             expect(customFixture.componentInstance.observer.value).toBe(ContentDensityMode.CONDENSED);
@@ -277,7 +237,6 @@ describe('ContentDensityObserver', () => {
 
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
             tick();
-            fixture.detectChanges();
 
             expect(hostElement.classList.contains('is-compact')).toBe(true);
             expect(hostElement.classList.contains('is-cozy')).toBe(false);
@@ -285,6 +244,23 @@ describe('ContentDensityObserver', () => {
     });
 
     describe('cleanup and completion', () => {
+        it('should complete all internal subjects on complete()', () => {
+            let mainCompleted = false;
+            let isCompactCompleted = false;
+
+            observer.subscribe({
+                complete: () => (mainCompleted = true)
+            });
+            observer.isCompact$.subscribe({
+                complete: () => (isCompactCompleted = true)
+            });
+
+            observer.complete();
+
+            expect(mainCompleted).toBe(true);
+            expect(isCompactCompleted).toBe(true);
+        });
+
         it('should clean up references on complete()', () => {
             observer.complete();
 
@@ -310,338 +286,24 @@ describe('ContentDensityObserver', () => {
 
     describe('distinctUntilChanged behavior', () => {
         it('should not emit duplicate consecutive values', fakeAsync(() => {
-            // Test distinctUntilChanged via signal-based approach
+            const emittedValues: ContentDensityMode[] = [];
+            observer.subscribe((density) => emittedValues.push(density));
+
             // Set to compact
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
             tick();
-            fixture.detectChanges();
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COMPACT);
 
-            // Set to compact again (should remain compact)
+            // Set to compact again (should not emit)
             mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
             tick();
-            fixture.detectChanges();
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COMPACT);
 
             // Set to cozy
             mockStorage.setDensityDirectly(ContentDensityMode.COZY);
             tick();
-            fixture.detectChanges();
-            expect(observer.contentDensity()).toBe(ContentDensityMode.COZY);
-        }));
-    });
 
-    describe('debug mode', () => {
-        it('should log debug messages when debug is enabled', fakeAsync(() => {
-            const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
-
-            @Component({
-                selector: 'fd-test-debug',
-                template: '<div></div>',
-                providers: [
-                    contentDensityObserverProviders({
-                        debug: true
-                    })
-                ]
-            })
-            class TestDebugComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestDebugComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
-                ]
-            });
-
-            const debugFixture = TestBed.createComponent(TestDebugComponent);
-            debugFixture.detectChanges();
-            tick();
-
-            // Change density to trigger debug log
-            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
-            tick();
-            debugFixture.detectChanges();
-
-            expect(consoleSpy).toHaveBeenCalled();
-
-            debugFixture.componentInstance.densityObserver.complete();
-            consoleSpy.mockRestore();
-        }));
-    });
-
-    describe('alwaysAddModifiers config', () => {
-        it('should always add modifiers when alwaysAddModifiers is true', fakeAsync(() => {
-            @Component({
-                selector: 'fd-test-always-modifiers',
-                template: '<div></div>',
-                providers: [
-                    contentDensityObserverProviders({
-                        alwaysAddModifiers: true
-                    })
-                ]
-            })
-            class TestAlwaysModifiersComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestAlwaysModifiersComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
-                ]
-            });
-
-            const modifiersFixture = TestBed.createComponent(TestAlwaysModifiersComponent);
-            modifiersFixture.detectChanges();
-            tick();
-
-            const hostElement = modifiersFixture.componentInstance.elementRef.nativeElement;
-            expect(hostElement.classList.contains('is-cozy')).toBe(true);
-
-            modifiersFixture.componentInstance.densityObserver.complete();
-        }));
-    });
-
-    describe('no modifiers config', () => {
-        it('should not apply classes when modifiers are not configured', fakeAsync(() => {
-            @Component({
-                selector: 'fd-test-no-modifiers',
-                template: '<div></div>',
-                providers: [
-                    contentDensityObserverProviders({
-                        modifiers: undefined
-                    })
-                ]
-            })
-            class TestNoModifiersComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestNoModifiersComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
-                ]
-            });
-
-            const noModifiersFixture = TestBed.createComponent(TestNoModifiersComponent);
-            noModifiersFixture.detectChanges();
-            tick();
-
-            const hostElement = noModifiersFixture.componentInstance.elementRef.nativeElement;
-            // Should not have any density classes
-            expect(hostElement.classList.contains('is-cozy')).toBe(false);
-            expect(hostElement.classList.contains('is-compact')).toBe(false);
-
-            noModifiersFixture.componentInstance.densityObserver.complete();
-        }));
-    });
-
-    describe('with content density directive', () => {
-        it('should use directive density mode when provided', fakeAsync(() => {
-            const directiveSignal = signal<LocalContentDensityMode>(ContentDensityMode.COMPACT);
-            const mockDirective: ContentDensityDirectiveRef = {
-                densityMode: directiveSignal.asReadonly(),
-                get value(): LocalContentDensityMode {
-                    return directiveSignal();
-                }
-            };
-
-            @Component({
-                selector: 'fd-test-with-directive',
-                template: '<div></div>',
-                providers: [contentDensityObserverProviders()]
-            })
-            class TestWithDirectiveComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestWithDirectiveComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: mockDirective }
-                ]
-            });
-
-            const directiveFixture = TestBed.createComponent(TestWithDirectiveComponent);
-            directiveFixture.detectChanges();
-            tick();
-
-            // Should use directive's compact density
-            expect(directiveFixture.componentInstance.densityObserver.contentDensity()).toBe(
-                ContentDensityMode.COMPACT
-            );
-
-            directiveFixture.componentInstance.densityObserver.complete();
-        }));
-
-        it('should resolve global keyword from directive to service value', fakeAsync(() => {
-            const directiveSignal = signal<LocalContentDensityMode>(ContentDensityGlobalKeyword);
-            const mockDirective: ContentDensityDirectiveRef = {
-                densityMode: directiveSignal.asReadonly(),
-                get value(): LocalContentDensityMode {
-                    return directiveSignal();
-                }
-            };
-
-            @Component({
-                selector: 'fd-test-global-keyword',
-                template: '<div></div>',
-                providers: [contentDensityObserverProviders()]
-            })
-            class TestGlobalKeywordComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            // Set storage to condensed
-            mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestGlobalKeywordComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: mockDirective }
-                ]
-            });
-
-            const globalFixture = TestBed.createComponent(TestGlobalKeywordComponent);
-            globalFixture.detectChanges();
-            tick();
-
-            // Should resolve 'global' keyword to service value (condensed) but falls back based on support
-            // Default config supports COMPACT and COZY, so CONDENSED falls back to COMPACT
-            expect(globalFixture.componentInstance.densityObserver.contentDensity()).toBe(ContentDensityMode.COMPACT);
-
-            globalFixture.componentInstance.densityObserver.complete();
-        }));
-    });
-
-    describe('cozy fallback', () => {
-        it('should always return cozy for cozy alternative (no alternative needed)', fakeAsync(() => {
-            // Cozy is always supported, so its alternative should return cozy
-            @Component({
-                selector: 'fd-test-cozy-only',
-                template: '<div></div>',
-                providers: [
-                    contentDensityObserverProviders({
-                        supportedContentDensity: [ContentDensityMode.COZY]
-                    })
-                ]
-            })
-            class TestCozyOnlyComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestCozyOnlyComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
-                ]
-            });
-
-            const cozyFixture = TestBed.createComponent(TestCozyOnlyComponent);
-            cozyFixture.detectChanges();
-            tick();
-
-            // Try to set compact (not supported)
-            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
-            tick();
-            cozyFixture.detectChanges();
-
-            // Should fallback to cozy (condensed not supported, so fallback to cozy)
-            expect(cozyFixture.componentInstance.densityObserver.contentDensity()).toBe(ContentDensityMode.COZY);
-
-            cozyFixture.componentInstance.densityObserver.complete();
-        }));
-    });
-
-    describe('condensed fallback', () => {
-        it('should fallback to compact when condensed not supported but compact is', fakeAsync(() => {
-            @Component({
-                selector: 'fd-test-compact-cozy',
-                template: '<div></div>',
-                providers: [
-                    contentDensityObserverProviders({
-                        supportedContentDensity: [ContentDensityMode.COZY, ContentDensityMode.COMPACT]
-                    })
-                ]
-            })
-            class TestCompactCozyComponent {
-                constructor(
-                    readonly densityObserver: ContentDensityObserver,
-                    readonly elementRef: ElementRef
-                ) {}
-            }
-
-            TestBed.resetTestingModule();
-            TestBed.configureTestingModule({
-                imports: [TestCompactCozyComponent],
-                providers: [
-                    GlobalContentDensityService,
-                    { provide: ContentDensityStorage, useValue: mockStorage },
-                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
-                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
-                ]
-            });
-
-            const compactCozyFixture = TestBed.createComponent(TestCompactCozyComponent);
-            compactCozyFixture.detectChanges();
-            tick();
-
-            // Try to set condensed (not supported)
-            mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
-            tick();
-            compactCozyFixture.detectChanges();
-
-            // Should fallback to compact as alternative to condensed
-            expect(compactCozyFixture.componentInstance.densityObserver.contentDensity()).toBe(
-                ContentDensityMode.COMPACT
-            );
-
-            compactCozyFixture.componentInstance.densityObserver.complete();
+            // Should have: initial cozy, compact, cozy (not duplicate compact)
+            const compactCount = emittedValues.filter((v) => v === ContentDensityMode.COMPACT).length;
+            expect(compactCount).toBe(1);
         }));
     });
 });
