@@ -37,7 +37,10 @@ export class MessageStripAlertContainerComponent {
      */
     protected readonly _alertRefs = computed(() =>
         this._portalOutlets()
-            .map((p) => (p.attachedRef as ComponentRef<MessageStripAlertComponent>)?.instance?.alertRef)
+            .map((outlet) => {
+                const componentRef = outlet.attachedRef as ComponentRef<MessageStripAlertComponent> | null;
+                return componentRef?.instance?.alertRef;
+            })
             .filter((ref): ref is MessageStripAlertRef => !!ref)
     );
 
