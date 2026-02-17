@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/i18n",
-    "version": "0.60.0-rc.13",
+    "version": "0.60.1-rc.0",
     "description": "Fundamental Library for Angular - i18n",
     "license": "Apache-2.0",
     "homepage": "https://sap.github.io/fundamental-ngx",
