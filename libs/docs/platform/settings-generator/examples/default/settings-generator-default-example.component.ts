@@ -107,6 +107,8 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                 width: '20rem',
                 maxWidth: '20rem'
             },
+            sidebarTitle: 'User Settings',
+            headingLevel: 2,
             items: [
                 {
                     title: this._userService.getUser().pipe(map((res) => `User Account (${res.name})`)),
