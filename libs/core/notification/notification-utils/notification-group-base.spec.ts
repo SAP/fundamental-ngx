@@ -9,8 +9,7 @@ import { NotificationGroupBaseDirective } from './notification-group-base';
  * Concrete implementation of the abstract NotificationGroupBaseDirective for testing
  */
 @Directive({
-    selector: '[fdTestNotificationGroupBase]',
-    standalone: true
+    selector: '[fdTestNotificationGroupBase]'
 })
 class TestNotificationGroupBaseDirective extends NotificationGroupBaseDirective {}
 
@@ -138,27 +137,28 @@ describe('NotificationGroupBaseDirective', () => {
             fixture.detectChanges();
         });
 
-        it('should query NotificationHeaderComponent via @ContentChildren', async () => {
-            await waitForAuditTime();
+        it('should query NotificationHeaderComponent via contentChildren signal', async () => {
+            await waitForRender();
             fixture.detectChanges();
 
-            expect(component.directive.notificationHeader).toBeTruthy();
-            expect(component.directive.notificationHeader.length).toBe(1);
+            // Signal-based content queries return arrays
+            expect(component.directive.notificationHeader()).toBeTruthy();
+            expect(component.directive.notificationHeader().length).toBe(1);
         });
 
-        it('should query NotificationActionsComponent via @ContentChildren', async () => {
-            await waitForAuditTime();
+        it('should query NotificationActionsComponent via contentChildren signal', async () => {
+            await waitForRender();
             fixture.detectChanges();
 
-            expect(component.directive.notificationActions).toBeTruthy();
-            expect(component.directive.notificationActions.length).toBe(1);
+            expect(component.directive.notificationActions()).toBeTruthy();
+            expect(component.directive.notificationActions().length).toBe(1);
         });
 
         it('should query buttons within NotificationActionsComponent', async () => {
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
-            const actionsComponent = component.directive.notificationActions.first;
+            const actionsComponent = component.directive.notificationActions()[0];
             expect(actionsComponent.buttons).toBeTruthy();
             expect(actionsComponent.buttons.length).toBe(2);
         });
@@ -171,7 +171,7 @@ describe('NotificationGroupBaseDirective', () => {
             }).createComponent(TestHostComponent);
             fixture.detectChanges();
 
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
             const btn1 = fixture.debugElement.query(By.css('#btn1'));
@@ -187,7 +187,7 @@ describe('NotificationGroupBaseDirective', () => {
             }).createComponent(TestMultipleHeadersComponent);
             fixture.detectChanges();
 
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
             const btn1 = fixture.debugElement.query(By.css('#btn1'));
@@ -201,11 +201,11 @@ describe('NotificationGroupBaseDirective', () => {
             }).createComponent(TestNoActionsComponent);
             fixture.detectChanges();
 
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
             // No buttons to check, but directive should not throw
-            expect(fixture.componentInstance.directive.notificationActions.length).toBe(0);
+            expect(fixture.componentInstance.directive.notificationActions().length).toBe(0);
         });
 
         it('should not set aria-describedby when no header component exists', async () => {
@@ -214,7 +214,7 @@ describe('NotificationGroupBaseDirective', () => {
             }).createComponent(TestNoHeaderComponent);
             fixture.detectChanges();
 
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
             const btn1 = fixture.debugElement.query(By.css('#btn1'));
@@ -228,11 +228,11 @@ describe('NotificationGroupBaseDirective', () => {
             }).createComponent(TestNoButtonsComponent);
             fixture.detectChanges();
 
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
             // Directive should not throw when no buttons exist
-            expect(fixture.componentInstance.directive.notificationActions.first.buttons.length).toBe(0);
+            expect(fixture.componentInstance.directive.notificationActions()[0].buttons.length).toBe(0);
         });
 
         it('should not overwrite existing aria-describedby attributes', async () => {
@@ -241,7 +241,7 @@ describe('NotificationGroupBaseDirective', () => {
             }).createComponent(TestExistingAriaComponent);
             fixture.detectChanges();
 
-            await waitForAuditTime();
+            await waitForRender();
             fixture.detectChanges();
 
             const btn1 = fixture.debugElement.query(By.css('#btn1'));
@@ -255,9 +255,12 @@ describe('NotificationGroupBaseDirective', () => {
     });
 });
 
+/** Time in ms to wait for afterNextRender and effects to complete */
+const RENDER_WAIT_TIME_MS = 50;
+
 /**
- * Helper to wait for auditTime(0) to complete
+ * Helper to wait for afterNextRender and effect to complete
  */
-function waitForAuditTime(): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, 50));
+function waitForRender(): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, RENDER_WAIT_TIME_MS));
 }
