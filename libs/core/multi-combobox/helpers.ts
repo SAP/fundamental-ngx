@@ -1,6 +1,6 @@
 import { isSelectItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 
 /** @hidden */
 export function lookupValue(item: unknown, lookupKey: string): string {
@@ -53,5 +53,5 @@ export function flattenGroups(items: SelectableOptionItem[]): SelectableOptionIt
 
 /** @hidden */
 export function getTokenIndexByIdlOrValue(item: SelectableOptionItem, suggestions: SelectableOptionItem[]): number {
-    return suggestions.findIndex((token) => token.id === item.id || equal(token.value, item.value));
+    return suggestions.findIndex((token) => token.id === item.id || shallowEqual(token.value, item.value));
 }

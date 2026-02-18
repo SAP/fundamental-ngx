@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, FilterType, TableColumn } from '@fundamental-ngx/platform/table-helpers';
-import equal from 'fast-deep-equal/es6';
+import { shallowEqual } from 'fast-equals';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
 import { ACTIVE_STEP, FiltersDialogData, FiltersDialogResultData } from '../table-view-settings.model';
 import { FilterStepComponent } from './filter-step.component';
@@ -161,7 +161,7 @@ export class FiltersComponent implements AfterViewInit, OnInit {
      * Enables or disables the reset button based on filter state comparison.
      */
     private _compareSelectedFilters(): void {
-        if (!equal(this.initialFilters(), this.filterBy())) {
+        if (!shallowEqual(this.initialFilters(), this.filterBy())) {
             this.resetAvailabilityChange.emit(true);
         } else {
             this.resetAvailabilityChange.emit(false);

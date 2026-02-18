@@ -39,6 +39,15 @@ export interface SidebarSettingsModel<TAdditionalControlTypes extends BaseDynami
      * Sidebar width configuration.
      */
     sidebarWidth: string | SidebarWidthConfiguration;
+    /**
+     * Sidebar title text. If not provided, defaults to translated 'Settings' label.
+     */
+    sidebarTitle?: string;
+    /**
+     * Heading level for the sidebar title (1-6, corresponding to h1-h6).
+     * Defaults to 5 (h5) if not provided.
+     */
+    headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export interface SettingsFormTab<TAdditionalControlTypes extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem> {

@@ -1,5 +1,5 @@
 import { Directive, Inject, Input, Optional } from '@angular/core';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { FdpColumnResponsiveState } from '../interfaces/column-responsive-state.interface';
 import { TableResponsiveService } from '../services/table-responsive.service';
 import { TableColumn } from '../table-column';
@@ -15,7 +15,7 @@ export class PlatformTableColumnResponsiveDirective {
      */
     @Input('fdpTableColumnResponsive')
     set breakpoints(value: Record<string, FdpColumnResponsiveState>) {
-        if (equal(value, this._breakpoints) || !this._column) {
+        if (shallowEqual(value, this._breakpoints) || !this._column) {
             return;
         }
         this._breakpoints = value;

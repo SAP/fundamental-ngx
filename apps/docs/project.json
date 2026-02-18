@@ -246,7 +246,7 @@
                     "includePaths": ["node_modules"]
                 },
                 "scripts": ["node_modules/marked/marked.min.js"],
-                "allowedCommonJsDependencies": ["moment", "highlight.js", "fast-deep-equal", "focus-trap", "dayjs"],
+                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "dayjs"],
                 "extractLicenses": false,
                 "buildOptimizer": false,
                 "sourceMap": true,
