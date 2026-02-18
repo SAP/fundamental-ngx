@@ -7,9 +7,10 @@
 >
     <div class="fdp-settings-generator__search-header">
         <div
+            fd-title
             role="heading"
             [attr.aria-level]="headingLevel()"
-            class="fdp-settings-generator__title fd-title fd-title--h5"
+            class="fdp-settings-generator__title fd-title--h5"
         >
             {{ sidebarTitle() ?? ('platformSettingsGenerator.settingsLabel' | fdTranslate) }}
         </div>

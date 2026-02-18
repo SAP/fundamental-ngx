@@ -47,7 +47,7 @@ export interface SidebarSettingsModel<TAdditionalControlTypes extends BaseDynami
      * Heading level for the sidebar title (1-6, corresponding to h1-h6).
      * Defaults to 5 (h5) if not provided.
      */
-    headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+    sidebarTitleHeadingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export interface SettingsFormTab<TAdditionalControlTypes extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem> {
@@ -83,6 +83,8 @@ export interface BaseSettingsItem {
     sectionTitle?: FdkAsyncProperty<string>;
     /** Whether to wrap the title text in the main section content. By default, the text will be truncated. */
     wrapSectionTitle?: boolean;
+    /** Heading level for the section title (1-6, corresponding to h1-h6). Defaults to 5 (h5) if not provided. */
+    sectionTitleHeadingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export interface IconBaseSettingsItem {

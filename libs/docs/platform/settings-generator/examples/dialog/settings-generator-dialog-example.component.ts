@@ -180,7 +180,7 @@ export class SettingsGeneratorDialogExampleComponent implements AfterViewInit {
         this.schema = {
             appearance: 'sidebar',
             sidebarTitle: 'User Settings',
-            headingLevel: 3,
+            sidebarTitleHeadingLevel: 3,
             items: [
                 {
                     title: this._userService.getUser().pipe(map((res) => `User Account (${res.name})`)),
