@@ -210,7 +210,7 @@ export class FormGeneratorService {
     ): Promise<DynamicFormValue> {
         await this._triggerFieldsOnchange(form);
 
-        const formValue = structuredClone(form.value);
+        const formValue = cloneDeep(form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
             const formItem = control.formItem;
@@ -285,7 +285,7 @@ export class FormGeneratorService {
      * @returns `Set` where key is item name, and boolean value if field needs to be shown.
      */
     async checkVisibleFormItems(form: DynamicFormGroup): Promise<{ [key: string]: boolean }> {
-        const formValue = this._getFormValueWithoutUngrouped(structuredClone(form.value));
+        const formValue = this._getFormValueWithoutUngrouped(cloneDeep(form.value));
         return await this._checkFormControlsVisibility(form, formValue);
     }
 
@@ -493,6 +493,12 @@ export class FormGeneratorService {
         );
 
         if (!defaultChoices) {
+            return [];
+        }
+
+        // Defensive check: ensure defaultChoices is an array
+        if (!Array.isArray(defaultChoices)) {
+            console.warn('Expected defaultChoices to be an array, got:', typeof defaultChoices, defaultChoices);
             return [];
         }
 

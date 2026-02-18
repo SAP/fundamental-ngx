@@ -124,10 +124,38 @@ describe('lodash-utils', () => {
         });
 
         it('should handle circular references gracefully', () => {
-            const obj: any = { a: 1 };
+            const obj: any = { a: 1, b: { c: 2 } };
             obj.self = obj;
-            // This will cause infinite recursion, but we're testing it doesn't crash immediately
-            expect(() => cloneDeep(obj)).toBeDefined();
+            obj.b.parent = obj;
+            
+            const cloned = cloneDeep(obj);
+            
+            // Should successfully clone without stack overflow
+            expect(cloned).toBeDefined();
+            expect(cloned.a).toBe(1);
+            expect(cloned.b.c).toBe(2);
+            
+            // Circular references should be preserved
+            expect(cloned.self).toBe(cloned);
+            expect(cloned.b.parent).toBe(cloned);
+            
+            // But the cloned object should not be the same as the original
+            expect(cloned).not.toBe(obj);
+            expect(cloned.b).not.toBe(obj.b);
+        });
+
+        it('should handle circular references in arrays', () => {
+            const arr: any[] = [1, 2, 3];
+            arr.push(arr);
+            
+            const cloned = cloneDeep(arr);
+            
+            expect(cloned).toBeDefined();
+            expect(cloned[0]).toBe(1);
+            expect(cloned[1]).toBe(2);
+            expect(cloned[2]).toBe(3);
+            expect(cloned[3]).toBe(cloned);
+            expect(cloned).not.toBe(arr);
         });
     });
 

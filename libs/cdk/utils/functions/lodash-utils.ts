@@ -59,11 +59,25 @@ export function set<T = any>(obj: T, path: string | string[], value: any): T {
  * Deep clones an object, handling functions and other non-cloneable values.
  * For objects with functions or class instances, it creates a new object and copies properties.
  * @param obj The object to clone
+ * @param _visited Internal parameter to track visited objects and prevent circular references
  * @returns The cloned object
  */
-export function cloneDeep<T>(obj: T): T {
+export function cloneDeep<T>(obj: T, _visited: WeakMap<any, any> = new WeakMap()): T {
     // Handle primitives, null, and undefined
     if (obj == null || typeof obj !== 'object') {
+        return obj;
+    }
+
+    // Check for circular reference
+    if (_visited.has(obj)) {
+        return _visited.get(obj);
+    }
+
+    // Handle DOM elements and nodes - return by reference, don't clone
+    if (typeof Element !== 'undefined' && obj instanceof Element) {
+        return obj;
+    }
+    if (typeof Node !== 'undefined' && obj instanceof Node) {
         return obj;
     }
 
@@ -74,7 +88,12 @@ export function cloneDeep<T>(obj: T): T {
 
     // Handle Array
     if (Array.isArray(obj)) {
-        return obj.map((item) => cloneDeep(item)) as any;
+        const clonedArray: any[] = [];
+        _visited.set(obj, clonedArray);
+        obj.forEach((item) => {
+            clonedArray.push(cloneDeep(item, _visited));
+        });
+        return clonedArray as any;
     }
 
     // Handle RegExp
@@ -85,8 +104,9 @@ export function cloneDeep<T>(obj: T): T {
     // Handle Map
     if (obj instanceof Map) {
         const clonedMap = new Map();
+        _visited.set(obj, clonedMap);
         obj.forEach((value, key) => {
-            clonedMap.set(cloneDeep(key), cloneDeep(value));
+            clonedMap.set(cloneDeep(key, _visited), cloneDeep(value, _visited));
         });
         return clonedMap as any;
     }
@@ -94,14 +114,22 @@ export function cloneDeep<T>(obj: T): T {
     // Handle Set
     if (obj instanceof Set) {
         const clonedSet = new Set();
+        _visited.set(obj, clonedSet);
         obj.forEach((value) => {
-            clonedSet.add(cloneDeep(value));
+            clonedSet.add(cloneDeep(value, _visited));
         });
         return clonedSet as any;
     }
 
+    // Handle Error objects
+    if (obj instanceof Error) {
+        return obj;
+    }
+
     // Handle plain objects
     const clonedObj = {} as T;
+    _visited.set(obj, clonedObj);
+
     for (const key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
             const value = obj[key];
@@ -109,7 +137,7 @@ export function cloneDeep<T>(obj: T): T {
             if (typeof value === 'function' || typeof value === 'symbol') {
                 (clonedObj as any)[key] = value;
             } else {
-                (clonedObj as any)[key] = cloneDeep(value);
+                (clonedObj as any)[key] = cloneDeep(value, _visited);
             }
         }
     }
