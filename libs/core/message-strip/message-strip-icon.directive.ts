@@ -1,10 +1,8 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, inject } from '@angular/core';
 
 @Directive({
-    selector: '[fdMessageStripIcon]',
-    standalone: true
+    selector: '[fdMessageStripIcon]'
 })
 export class MessageStripIconDirective {
-    /** @hidden */
-    constructor(readonly templateRef: TemplateRef<void>) {}
+    readonly templateRef = inject(TemplateRef);
 }
