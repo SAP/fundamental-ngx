@@ -2,13 +2,16 @@ import {
     afterNextRender,
     ChangeDetectionStrategy,
     Component,
+    computed,
     contentChild,
+    effect,
     inject,
     Injector,
     ViewEncapsulation
 } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
+import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
+import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
 @Component({
@@ -22,10 +25,16 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 })
 export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions {
     /** @hidden */
-    readonly _toolbarComponent = contentChild(ToolbarComponent);
+    protected readonly _toolbarComponent = contentChild(ToolbarComponent);
+
+    /** Whether the toolbar should show overflow (size is small). */
+    protected readonly shouldOverflow = computed(() => this._dynamicPageService?.responsiveSize() === 'small');
 
     /** @hidden */
     private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _dynamicPageService = inject(DynamicPageService, { optional: true });
 
     constructor() {
         super();
@@ -34,14 +43,15 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions {
         afterNextRender(() => {
             this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar);
         });
-    }
 
-    /** @hidden */
-    _setSize(size: DynamicPageResponsiveSize): void {
-        const toolbar = this._toolbarComponent();
-        if (toolbar) {
-            this._handleOverflow(toolbar, size === 'small');
-        }
+        // React to size changes
+        effect(() => {
+            const shouldOverflow = this.shouldOverflow();
+            const toolbar = this._toolbarComponent();
+            if (toolbar) {
+                this._handleOverflow(toolbar, shouldOverflow);
+            }
+        });
     }
 
     /** @hidden */

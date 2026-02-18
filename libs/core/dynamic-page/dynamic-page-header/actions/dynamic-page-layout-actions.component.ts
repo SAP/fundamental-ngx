@@ -1,5 +1,4 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, contentChild, ViewEncapsulation } from '@angular/core';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { afterNextRender, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
@@ -14,9 +13,6 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     }
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions {
-    /** @hidden */
-    readonly toolbarComponent = contentChild(ToolbarComponent);
-
     constructor() {
         super();
 

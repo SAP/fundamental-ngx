@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ToolbarComponent, ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 import { DynamicPageLayoutActionsComponent } from './dynamic-page-layout-actions.component';
 
@@ -64,12 +64,6 @@ describe('DynamicPageLayoutActionsComponent', () => {
             expect(hostElement.style.marginInlineStart).toBe('auto');
         });
 
-        it('should have toolbar component signal reference', () => {
-            const toolbar = layoutActions.toolbarComponent();
-            expect(toolbar).toBeTruthy();
-            expect(toolbar instanceof ToolbarComponent).toBe(true);
-        });
-
         it('should add dynamic page toolbar classes after render', fakeAsync(() => {
             // Wait for afterNextRender to execute
             tick();
@@ -99,10 +93,6 @@ describe('DynamicPageLayoutActionsComponent', () => {
 
         it('should create without toolbar', () => {
             expect(layoutActions).toBeTruthy();
-        });
-
-        it('should not have toolbar component reference', () => {
-            expect(layoutActions.toolbarComponent()).toBeFalsy();
         });
 
         it('should still have host attributes without toolbar', () => {

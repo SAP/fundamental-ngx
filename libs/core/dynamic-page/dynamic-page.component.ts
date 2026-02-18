@@ -7,6 +7,7 @@ import {
     ContentChild,
     ContentChildren,
     DestroyRef,
+    effect,
     ElementRef,
     inject,
     Inject,
@@ -30,7 +31,7 @@ import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
-import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
+import { addClassNameToElement } from './utils';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
@@ -92,7 +93,9 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     @Input()
     set size(size: DynamicPageResponsiveSize) {
         this._size = size;
-        this._propagateSizeToChildren();
+        // Set manual override so children react via signals
+        this._dynamicPageService.manualSizeOverride.set(size);
+        this._updateDynamicPageHeight();
     }
 
     get size(): DynamicPageResponsiveSize {
@@ -169,14 +172,19 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
         private _dynamicPageService: DynamicPageService,
         @Optional() @Inject(FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT) private _columnLayout: FlexibleColumnLayoutComponent,
         @Optional() private _dynamicPageWrapper: DynamicPageWrapperDirective
-    ) {}
+    ) {
+        // React to collapsed state changes
+        effect(() => {
+            this._dynamicPageService.collapsed();
+            this._updateDynamicPageHeight();
+        });
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
         this._listenOnResize();
-        this._listenOnCollapse();
         this._propagatePropertiesToChildren();
         this._setContentFooterSpacer();
 
@@ -184,7 +192,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
             this._addScrollListeners();
         }
 
-        setTimeout(() => this._setContainerPositions());
+        setTimeout(() => this._updateDynamicPageHeight());
 
         this._cd.detectChanges();
     }
@@ -201,7 +209,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
      * Triggers recheck for spacing and sizing of elements inside DynamicPage.
      */
     refreshSize(): void {
-        this._setContainerPositions();
+        this._updateDynamicPageHeight();
         this._sizeChangeHandle();
     }
 
@@ -210,30 +218,9 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
         return this._tabComponent?.scrollableElement?.nativeElement || this._scrollbar?.elementRef?.nativeElement;
     }
 
-    /** Set the positions of the tabs and content with respect to the window */
-    private _setContainerPositions(): void {
-        this._setDynamicPageHeight();
-    }
-
     /** @hidden */
     private _propagatePropertiesToChildren(): void {
         this._headerCollapsible = this._pageSubheaderComponent?.collapsible;
-        this._propagateSizeToChildren();
-    }
-
-    /** @hidden */
-    private _propagateSizeToChildren(): void {
-        if (this._headerComponent) {
-            this._headerComponent.size = this.size;
-        }
-        this._setContainerPositions();
-    }
-
-    /** @hidden */
-    private _listenOnCollapse(): void {
-        this._dynamicPageService.subheaderVisibilityChange
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => this._setContainerPositions());
     }
 
     /** @hidden */
@@ -265,7 +252,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
         }
 
         this._dynamicPageService.pixelsSizeChanged.set(dynamicPageWidth);
-        const size = dynamicPageWidthToSize(dynamicPageWidth);
+        const size = this._dynamicPageService.responsiveSize();
 
         if (size !== this.size) {
             this.size = size;
@@ -296,14 +283,14 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
             resizeObservable(this._dynamicPageElement.nativeElement)
                 .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
-                    this._setContainerPositions();
+                    this._updateDynamicPageHeight();
                     this._sizeChangeHandle();
                 });
         } else {
             // Fallback to window/wrapper resize for non-responsive mode
             const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
             listener.pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._setContainerPositions();
+                this._updateDynamicPageHeight();
                 this._sizeChangeHandle();
             });
         }
@@ -319,10 +306,8 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
         return fromEvent(window, 'resize').pipe(map(() => []));
     }
 
-    /** @hidden
-     * set top position of DynamicPage on scrolling
-     */
-    private _setDynamicPageHeight(): void {
+    /** @hidden Sets the dynamic page height to fill available viewport space. */
+    private _updateDynamicPageHeight(): void {
         if (!this._dynamicPageElement || !this.expandContent) {
             return;
         }

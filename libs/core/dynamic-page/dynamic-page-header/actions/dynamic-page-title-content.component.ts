@@ -1,13 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, ViewEncapsulation } from '@angular/core';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ToolbarComponent, ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { DynamicPageResponsiveSize } from '../../constants';
+import { DynamicPageService } from '../../dynamic-page.service';
 
 @Component({
     selector: 'fd-dynamic-page-title-content',
     template: `
-        @if (_size === 'small') {
+        @if (_isSmall()) {
             <fd-toolbar
                 fdType="transparent"
                 (click)="$event.stopPropagation()"
@@ -20,8 +20,7 @@ import { DynamicPageResponsiveSize } from '../../constants';
                     <ng-template [ngTemplateOutlet]="templateContentRef"></ng-template>
                 </div>
             </fd-toolbar>
-        }
-        @if (_size !== 'small') {
+        } @else {
             <div class="fd-dynamic-page__title-content">
                 <ng-template [ngTemplateOutlet]="templateContentRef"></ng-template>
             </div>
@@ -45,17 +44,11 @@ import { DynamicPageResponsiveSize } from '../../constants';
 })
 export class DynamicPageTitleContentComponent {
     /** @hidden */
-    _size: DynamicPageResponsiveSize;
+    protected readonly _contentDensityObserver = inject(ContentDensityObserver);
+
+    /** Whether the current size is small. */
+    protected readonly _isSmall = computed(() => this._dynamicPageService?.responsiveSize() === 'small');
 
     /** @hidden */
-    constructor(
-        private _changeDetRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
-
-    /** @hidden */
-    _setSize(size: DynamicPageResponsiveSize): void {
-        this._size = size;
-        this._changeDetRef.detectChanges();
-    }
+    private readonly _dynamicPageService = inject(DynamicPageService, { optional: true });
 }

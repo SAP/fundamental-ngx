@@ -1,13 +1,16 @@
 import { Directive, ElementRef, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 @Directive()
-export class DynamicPageBaseActions {
-    /** @hidden */
-    protected readonly elementRef = inject(ElementRef);
+export class DynamicPageBaseActions implements HasElementRef {
+    /** Element reference to the host element. */
+    readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
-    protected addClassToToolbar(_class: string): void {
-        // adds global actions classes to its toolbar
+    /**
+     * Adds a CSS class to the toolbar element within this component.
+     * @param _class The CSS class name to add to the toolbar.
+     */
+    addClassToToolbar(_class: string): void {
         const toolbarEl = this.elementRef.nativeElement.querySelector('.fd-toolbar');
         if (toolbarEl) {
             toolbarEl.classList.add(_class);

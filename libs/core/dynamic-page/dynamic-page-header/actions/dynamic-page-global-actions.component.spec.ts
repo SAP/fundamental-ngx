@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ToolbarComponent, ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
+import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageGlobalActionsComponent } from './dynamic-page-global-actions.component';
 
 @Component({
@@ -13,11 +14,14 @@ import { DynamicPageGlobalActionsComponent } from './dynamic-page-global-actions
             </fd-toolbar>
         </fd-dynamic-page-global-actions>
     `,
-    imports: [DynamicPageGlobalActionsComponent, ToolbarModule]
+    imports: [DynamicPageGlobalActionsComponent, ToolbarModule],
+    providers: [DynamicPageService]
 })
 class TestHostComponent {
     @ViewChild(DynamicPageGlobalActionsComponent)
     globalActions: DynamicPageGlobalActionsComponent;
+
+    constructor(public dynamicPageService: DynamicPageService) {}
 }
 
 @Component({
@@ -26,11 +30,14 @@ class TestHostComponent {
             <div class="custom-content">No toolbar here</div>
         </fd-dynamic-page-global-actions>
     `,
-    imports: [DynamicPageGlobalActionsComponent]
+    imports: [DynamicPageGlobalActionsComponent],
+    providers: [DynamicPageService]
 })
 class TestHostWithoutToolbarComponent {
     @ViewChild(DynamicPageGlobalActionsComponent)
     globalActions: DynamicPageGlobalActionsComponent;
+
+    constructor(public dynamicPageService: DynamicPageService) {}
 }
 
 describe('DynamicPageGlobalActionsComponent', () => {
@@ -39,13 +46,11 @@ describe('DynamicPageGlobalActionsComponent', () => {
         let component: TestHostComponent;
         let globalActions: DynamicPageGlobalActionsComponent;
 
-        beforeEach(waitForAsync(() => {
-            TestBed.configureTestingModule({
+        beforeEach(async () => {
+            await TestBed.configureTestingModule({
                 imports: [TestHostComponent]
             }).compileComponents();
-        }));
 
-        beforeEach(() => {
             fixture = TestBed.createComponent(TestHostComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
@@ -62,7 +67,7 @@ describe('DynamicPageGlobalActionsComponent', () => {
         });
 
         it('should have toolbar component signal reference', () => {
-            const toolbar = globalActions._toolbarComponent();
+            const toolbar = (globalActions as any)._toolbarComponent();
             expect(toolbar).toBeTruthy();
             expect(toolbar instanceof ToolbarComponent).toBe(true);
         });
@@ -76,45 +81,37 @@ describe('DynamicPageGlobalActionsComponent', () => {
             expect(toolbarEl.classList.contains(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar)).toBe(true);
         }));
 
-        describe('_setSize', () => {
-            it('should set forceOverflow and shouldOverflow to true when size is small', fakeAsync(() => {
-                const toolbar = globalActions._toolbarComponent()!;
-                const detectChangesSpy = jest.spyOn(toolbar, 'detectChanges');
+        describe('shouldOverflow signal', () => {
+            it('should return true when responsive size is small', () => {
+                // Set pixel width to trigger 'small' size (<=599px)
+                component.dynamicPageService.pixelsSizeChanged.set(500);
+                fixture.detectChanges();
 
-                globalActions._setSize('small');
-
-                expect(toolbar.forceOverflow).toBe(true);
-                expect(toolbar.shouldOverflow).toBe(true);
-                expect(detectChangesSpy).toHaveBeenCalled();
-            }));
-
-            it('should set forceOverflow and shouldOverflow to false when size is medium', fakeAsync(() => {
-                const toolbar = globalActions._toolbarComponent()!;
-                const detectChangesSpy = jest.spyOn(toolbar, 'detectChanges');
-
-                globalActions._setSize('medium');
-
-                expect(toolbar.forceOverflow).toBe(false);
-                expect(toolbar.shouldOverflow).toBe(false);
-                expect(detectChangesSpy).toHaveBeenCalled();
-            }));
-
-            it('should set forceOverflow and shouldOverflow to false when size is large', () => {
-                const toolbar = globalActions._toolbarComponent()!;
-
-                globalActions._setSize('large');
-
-                expect(toolbar.forceOverflow).toBe(false);
-                expect(toolbar.shouldOverflow).toBe(false);
+                expect((globalActions as any).shouldOverflow()).toBe(true);
             });
 
-            it('should set forceOverflow and shouldOverflow to false when size is extra-large', () => {
-                const toolbar = globalActions._toolbarComponent()!;
+            it('should return false when responsive size is medium', () => {
+                // Set pixel width to trigger 'medium' size (600-1023px)
+                component.dynamicPageService.pixelsSizeChanged.set(800);
+                fixture.detectChanges();
 
-                globalActions._setSize('extra-large');
+                expect((globalActions as any).shouldOverflow()).toBe(false);
+            });
 
-                expect(toolbar.forceOverflow).toBe(false);
-                expect(toolbar.shouldOverflow).toBe(false);
+            it('should return false when responsive size is large', () => {
+                // Set pixel width to trigger 'large' size (1024-1439px)
+                component.dynamicPageService.pixelsSizeChanged.set(1200);
+                fixture.detectChanges();
+
+                expect((globalActions as any).shouldOverflow()).toBe(false);
+            });
+
+            it('should return false when responsive size is extra-large', () => {
+                // Set pixel width to trigger 'extra-large' size (>=1440px)
+                component.dynamicPageService.pixelsSizeChanged.set(1600);
+                fixture.detectChanges();
+
+                expect((globalActions as any).shouldOverflow()).toBe(false);
             });
         });
     });
@@ -140,12 +137,13 @@ describe('DynamicPageGlobalActionsComponent', () => {
         });
 
         it('should not have toolbar component reference', () => {
-            expect(globalActions._toolbarComponent()).toBeFalsy();
+            expect((globalActions as any)._toolbarComponent()).toBeFalsy();
         });
 
-        it('should not throw when _setSize is called without toolbar', () => {
+        it('should not throw when size changes without toolbar', () => {
             expect(() => {
-                globalActions._setSize('small');
+                component.dynamicPageService.pixelsSizeChanged.set(500);
+                fixture.detectChanges();
             }).not.toThrow();
         });
     });

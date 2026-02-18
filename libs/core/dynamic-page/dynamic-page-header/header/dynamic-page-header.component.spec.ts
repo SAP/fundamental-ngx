@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
@@ -21,7 +21,6 @@ import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-
         <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
         <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
     </fd-dynamic-page-header>`,
-    standalone: true,
     imports: [DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonComponent],
     providers: [DynamicPageService]
 })
@@ -57,7 +56,6 @@ class TestComponent {
             <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
         </fd-dynamic-page-header>
     `,
-    standalone: true,
     imports: [DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DynamicPageService]
@@ -74,14 +72,12 @@ describe('DynamicPageTitleComponent', () => {
     let header: DynamicPageHeaderComponent;
     let component: TestComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [TestComponent],
             providers: [DynamicPageService]
         }).compileComponents();
-    }));
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -92,20 +88,15 @@ describe('DynamicPageTitleComponent', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('should call set size on depended components', fakeAsync(() => {
+    it('should react to size changes via service signal', () => {
         fixture.detectChanges();
-        const breadcrumbSpy = jest.spyOn(header._breadcrumbComponent, 'onResize');
-        const contentToolbarSpy = jest.spyOn(header._contentToolbar, '_setSize');
-        const globalActionsSpy = jest.spyOn(header._globalActions, '_setSize');
 
-        header.size = 'small';
+        // Trigger size change via service signal
+        component.dynamicPageService.pixelsSizeChanged.set(500);
+        fixture.detectChanges();
 
-        tick(50);
-
-        expect(breadcrumbSpy).toHaveBeenCalled();
-        expect(contentToolbarSpy).toHaveBeenCalledWith('small');
-        expect(globalActionsSpy).toHaveBeenCalledWith('small');
-    }));
+        expect(header._size).toBe('small');
+    });
 
     it('should squash actions, when pixels are below breakpoint', () => {
         fixture.detectChanges();
@@ -125,59 +116,51 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
     let header: DynamicPageHeaderComponent;
     let component: TestWithSubtitleTemplateComponent;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [TestWithSubtitleTemplateComponent],
             providers: [DynamicPageService]
         }).compileComponents();
-    });
 
-    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(TestWithSubtitleTemplateComponent);
         component = fixture.componentInstance;
-
         fixture.detectChanges();
-
-        fixture.whenRenderingDone().then(() => {
-            fixture.detectChanges();
-            header = component.header;
-        });
-    }));
+        await fixture.whenStable();
+        header = component.header;
+    });
 
     it('should create', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('should set title template correctly', fakeAsync(() => {
+    it('should set title template correctly', () => {
         expect(header._titleTemplate).toBeDefined();
         expect(header.title).toBeUndefined();
-    }));
+    });
 
-    it('should set subtitle template correctly', fakeAsync(() => {
+    it('should set subtitle template correctly', () => {
         expect(header._subtitleTemplate).toBeDefined();
         expect(header.subtitle).toBeUndefined();
-    }));
+    });
 
-    it('should set subtitle template properties correctly', waitForAsync(() => {
+    it('should set subtitle template properties correctly', async () => {
         fixture.detectChanges();
-        fixture.whenRenderingDone().then(() => {
-            component.dynamicPageService.collapsed.set(false);
-            fixture.detectChanges();
+        await fixture.whenStable();
 
-            const subtitle = fixture.nativeElement.querySelector('.my-custom-subtitle');
-            const title = fixture.nativeElement.querySelector('.my-custom-title');
+        component.dynamicPageService.collapsed.set(false);
+        fixture.detectChanges();
 
-            expect(subtitle).toBeDefined();
-            expect(subtitle.textContent).toEqual(`Subtitle expanded`);
-            expect(title.textContent).toEqual('Title expanded');
+        const subtitle = fixture.nativeElement.querySelector('.my-custom-subtitle');
+        const title = fixture.nativeElement.querySelector('.my-custom-title');
 
-            component.dynamicPageService.collapsed.set(true);
-            fixture.detectChanges();
+        expect(subtitle).toBeDefined();
+        expect(subtitle.textContent).toEqual(`Subtitle expanded`);
+        expect(title.textContent).toEqual('Title expanded');
 
-            expect(fixture.nativeElement.querySelector('.my-custom-subtitle').textContent).toEqual(
-                `Subtitle collapsed`
-            );
-            expect(fixture.nativeElement.querySelector('.my-custom-title').textContent).toEqual('Title collapsed');
-        });
-    }));
+        component.dynamicPageService.collapsed.set(true);
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.my-custom-subtitle').textContent).toEqual(`Subtitle collapsed`);
+        expect(fixture.nativeElement.querySelector('.my-custom-title').textContent).toEqual('Title collapsed');
+    });
 });
