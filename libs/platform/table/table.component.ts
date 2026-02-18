@@ -130,7 +130,7 @@ import {
     TableState,
     TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     debounceTime,
@@ -2110,7 +2110,7 @@ export class TableComponent<T = any>
 
             const updatedColumns = this._tableService.tableColumns$.value.map((column) => column.name);
 
-            if (!equal(updatedColumns, currentColumns)) {
+            if (!shallowEqual(updatedColumns, currentColumns)) {
                 this._tableService.stateChange$.next({
                     type: 'columns',
                     state: { previous: currentColumns, current: updatedColumns }

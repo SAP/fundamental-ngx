@@ -9,7 +9,7 @@
     "allowedNonPeerDependencies": [
         "focus-trap",
         "lodash-es",
-        "fast-deep-equal",
+        "fast-equals",
         "compare-versions",
         "@fundamental-ngx/i18n",
         "@fundamental-ngx/cdk"

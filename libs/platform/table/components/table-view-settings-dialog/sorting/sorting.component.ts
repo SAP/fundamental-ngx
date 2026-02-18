@@ -10,7 +10,7 @@ import {
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CollectionSort, SortDirection } from '@fundamental-ngx/platform/table-helpers';
-import equal from 'fast-deep-equal/es6';
+import { shallowEqual } from 'fast-equals';
 import {
     INITIAL_DIRECTION,
     NOT_SORTED_OPTION_VALUE,
@@ -143,7 +143,7 @@ export class SortingComponent implements OnInit {
             direction: this.direction()
         };
 
-        const isEqual = equal(this.initialSorting(), appliedSorting);
+        const isEqual = shallowEqual(this.initialSorting(), appliedSorting);
         if (!isEqual) {
             this.resetAvailabilityChange.emit(true);
         }

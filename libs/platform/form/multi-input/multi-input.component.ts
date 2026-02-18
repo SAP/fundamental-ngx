@@ -51,7 +51,7 @@ import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
 import { InputType } from '../input/input.component';
 import { BaseMultiInput } from './base-multi-input';
@@ -272,7 +272,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     _checkboxSelected(value: any, event: ModifyItemEvent): void {
         const isSelected = event.source._selected;
-        const index = this.selected.findIndex((selectvalue) => equal(selectvalue, value));
+        const index = this.selected.findIndex((selectvalue) => shallowEqual(selectvalue, value));
 
         if (isSelected && index > -1) {
             return;
@@ -283,7 +283,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     addToArray(value: any, focusOnInput = true): void {
-        const index = this.selected.findIndex((selectvalue) => equal(selectvalue, value));
+        const index = this.selected.findIndex((selectvalue) => shallowEqual(selectvalue, value));
         if (index === -1) {
             this.selected.push(value);
         } else {
@@ -407,7 +407,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      */
     _markListItemsAsSelected(): void {
         this._listItems?.forEach((listItem) => {
-            const isSelected = !!this._selected.find((value) => equal(value.value, listItem.value));
+            const isSelected = !!this._selected.find((value) => shallowEqual(value.value, listItem.value));
             listItem.setSelected(isSelected);
         });
     }
