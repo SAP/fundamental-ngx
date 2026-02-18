@@ -8,8 +8,9 @@
     },
     "allowedNonPeerDependencies": [
         "@fundamental-ngx/ui5-webcomponents-base",
-        "@sap-theming/theming-base-content", 
-        "compare-versions", 
-        "fast-deep-equal", 
-        "lodash-es"]
+        "@sap-theming/theming-base-content",
+        "compare-versions",
+        "fast-equals",
+        "lodash-es"
+    ]
 }

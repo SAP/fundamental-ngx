@@ -10,7 +10,7 @@ import {
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SortDirection } from '@fundamental-ngx/platform/table-helpers';
-import equal from 'fast-deep-equal/es6';
+import { shallowEqual } from 'fast-equals';
 import {
     INITIAL_DIRECTION,
     NOT_GROUPED_OPTION_VALUE,
@@ -139,7 +139,7 @@ export class GroupingComponent implements OnInit {
             direction: this.direction()
         };
 
-        if (!equal(this.initialGrouping(), appliedGrouping)) {
+        if (!shallowEqual(this.initialGrouping(), appliedGrouping)) {
             this.resetAvailabilityChange.emit(true);
         }
     }

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDP_PRESET_MANAGED_COMPONENT, PresetManagedComponent } from '@fundamental-ngx/platform/shared';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { filter, startWith, Subscription } from 'rxjs';
 import { VariantManagement } from '../../models/variant-management';
 import { FDP_VARIANT_MANAGEMENT, FDP_VARIANT_MANAGEMENT_WRAPPER } from '../../tokens';
@@ -111,7 +111,7 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
 
     /**
      * @hidden
-     * Listens to the preset change in Variant Management component and applies new configuration across projected components..
+     * Listens to the preset change in Variant Management component and applies new configuration across projected components.
      */
     private _setPresets(): void {
         this._activeVariantSubscription?.unsubscribe();
@@ -145,7 +145,7 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
                     .pipe(
                         filter((preset) => {
                             const prevPreset = this._getComponentPreset().get(component);
-                            return !equal(preset, prevPreset);
+                            return !shallowEqual(preset, prevPreset);
                         }),
                         takeUntilDestroyed(this._destroyRef)
                     )
