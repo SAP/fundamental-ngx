@@ -1,7 +1,7 @@
 import { AfterViewInit, ContentChildren, DestroyRef, Directive, QueryList, Renderer2, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, merge } from 'rxjs';
-import { debounceTime, filter, startWith, switchMap } from 'rxjs/operators';
+import { NEVER, Observable, merge } from 'rxjs';
+import { auditTime, filter, startWith, switchMap } from 'rxjs/operators';
 import { NotificationActionsComponent } from '../notification-actions/notification-actions.component';
 import { NotificationHeaderComponent } from '../notification-header/notification-header.component';
 
@@ -33,13 +33,23 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit {
                 const buttonsChanges$ = this.notificationActions
                     .toArray()
                     .reduce((acc, c) => acc.concat(c.buttons.changes), [] as Observable<any>[]);
-                return merge(buttonsChanges$).pipe(startWith(0));
+                // Use NEVER to prevent the inner observable from completing when buttonsChanges$ is empty
+                return merge(...buttonsChanges$, NEVER).pipe(startWith(0));
             })
         );
         merge(headersChanges$, actionsChanges$)
             .pipe(
-                debounceTime(10), // omitting extra emissions
-                filter(() => this.notificationHeader.length > 0 && this.notificationActions.length > 0),
+                auditTime(0), // batch emissions within the same tick
+                filter(() => {
+                    // Check that both header and actions exist, and at least one action has buttons
+                    const hasHeaders = this.notificationHeader.length > 0;
+                    const hasActions = this.notificationActions.length > 0;
+                    const hasButtons = this.notificationActions.some((a) => a.buttons.length > 0);
+                    if (!hasHeaders || !hasActions) {
+                        return false;
+                    }
+                    return hasButtons;
+                }),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
