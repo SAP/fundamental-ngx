@@ -26,7 +26,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { Subscription } from 'rxjs';
 import { FD_CHECKBOX_COMPONENT } from '../tokens';
 import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
@@ -380,11 +380,11 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
 
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
-        if (equal(this.checkboxValue, this.values.trueValue)) {
+        if (shallowEqual(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
-        } else if (equal(this.checkboxValue, this.values.falseValue)) {
+        } else if (shallowEqual(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
-        } else if (this.tristate && equal(this.checkboxValue, this.values.thirdStateValue)) {
+        } else if (this.tristate && shallowEqual(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         } else if (!this.checkboxValue) {
             this.checkboxState = 'unchecked';

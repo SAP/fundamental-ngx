@@ -39,7 +39,7 @@ export class StackblitzDependencies {
         'moment',
         'tslib',
         'typescript',
-        'fast-deep-equal',
+        'fast-equals',
         'zone.js',
         '@types/google.visualization',
         '@ui5/webcomponents',

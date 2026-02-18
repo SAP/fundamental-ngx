@@ -33,7 +33,7 @@ import {
     OptionItem,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
@@ -224,7 +224,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._suggestions = this.isGroup
             ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
             : this._suggestions.filter((value) =>
-                  this._selectedSuggestions.some((item) => equal(item.value, value.value))
+                  this._selectedSuggestions.some((item) => shallowEqual(item.value, value.value))
               );
 
         this.showList(true);
@@ -349,7 +349,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     private _getTokenIndexByIdlOrValue(item: SelectableOptionItem): number {
-        return this._selectedSuggestions.findIndex((token) => token.id === item.id || equal(token.value, item.value));
+        return this._selectedSuggestions.findIndex(
+            (token) => token.id === item.id || shallowEqual(token.value, item.value)
+        );
     }
 
     /** @hidden */
