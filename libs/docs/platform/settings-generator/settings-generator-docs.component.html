@@ -8,6 +8,28 @@
         <a routerLink="/core/icon">Icon</a> component configuration, or
         <a routerLink="/core/avatar">Avatar</a> configuration.
     </p>
+    <p>The sidebar can be customized using the following properties:</p>
+    <ul>
+        <li>
+            <code>sidebarWidth</code>: Configure sidebar width as a string (e.g., '300px') or as a
+            SidebarWidthConfiguration object with minWidth, maxWidth, width, and text wrapping options;
+        </li>
+        <li>
+            <code>sidebarTitle</code>: Custom title text for the sidebar header (defaults to translated 'Settings' label
+            if not provided);
+        </li>
+        <li>
+            <code>sidebarTitleHeadingLevel</code>: Heading level (1-6) for the sidebar title, corresponding to h1-h6
+            elements (defaults to 5 if not provided).
+        </li>
+    </ul>
+    <p>Each settings item can be customized with:</p>
+    <ul>
+        <li>
+            <code>sectionTitleHeadingLevel</code>: Heading level (1-6) for the section title, corresponding to h1-h6
+            elements (defaults to 5 if not provided).
+        </li>
+    </ul>
     <p>Content section can be configured in two ways:</p>
     <ul>
         <li><code>Form Generator</code> component, which can generate various types of forms and it's controls;</li>

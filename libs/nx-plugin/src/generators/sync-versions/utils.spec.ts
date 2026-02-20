@@ -9,7 +9,7 @@ jest.mock('fs', () => ({
                 dependencies: {
                     '@angular/core': '21.1.0',
                     rxjs: '^7.8.0',
-                    'fast-deep-equal': '3.1.3',
+                    'fast-equals': '^6.0.0',
                     'fundamental-styles': '0.40.1',
                     '@fundamental-styles/cx': '0.40.1',
                     'focus-trap': '7.1.0',

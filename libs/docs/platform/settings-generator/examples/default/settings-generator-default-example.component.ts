@@ -107,9 +107,12 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                 width: '20rem',
                 maxWidth: '20rem'
             },
+            sidebarTitle: 'User Settings',
+            sidebarTitleHeadingLevel: 2,
             items: [
                 {
                     title: this._userService.getUser().pipe(map((res) => `User Account (${res.name})`)),
+                    sectionTitleHeadingLevel: 3,
                     description: this._userService.getUser().pipe(map((res) => res.name)),
                     id: 'userAccount',
                     thumbnail: {
@@ -216,6 +219,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                 },
                 {
                     title: 'Appearance',
+                    sectionTitleHeadingLevel: 3,
                     description: 'Configure theme and language',
                     id: 'appearance',
                     thumbnail: {
@@ -265,6 +269,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                 },
                 {
                     title: 'Date & Time',
+                    sectionTitleHeadingLevel: 3,
                     description: 'Configure date and time formats',
                     id: 'dateTime',
                     thumbnail: {
@@ -289,6 +294,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                 },
                 {
                     title: 'Legal',
+                    sectionTitleHeadingLevel: 3,
                     thumbnail: {
                         icon: 'locked'
                     },

@@ -1,12 +1,12 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
-import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 import { DEFAULT_TABLE_STATE } from '../constants';
 
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { shallowEqual } from 'fast-equals';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from '../interfaces';
 import {
     ColumnsChange,
@@ -149,7 +149,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        if (!equal(prevSortRules, state.sortBy)) {
+        if (!shallowEqual(prevSortRules, state.sortBy)) {
             this.setTableState(setCurrentPageToState(state, 1));
             this.buildSortRulesMap();
             const evt = { current: state.sortBy, previous: prevSortRules };
@@ -173,7 +173,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        if (!equal(prevSortRules, state.sortBy)) {
+        if (!shallowEqual(prevSortRules, state.sortBy)) {
             this.setTableState(setCurrentPageToState(state, 1));
             const evt = { current: state.sortBy, previous: prevSortRules };
             this.buildSortRulesMap();
@@ -197,7 +197,7 @@ export class TableService {
             : [];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        if (!equal(prevFilterRules, state.filterBy)) {
+        if (!shallowEqual(prevFilterRules, state.filterBy)) {
             this.setTableState(setCurrentPageToState(state, 1));
             const evt = { current: state.filterBy, previous: prevFilterRules };
 
@@ -223,7 +223,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        if (!equal(prevFilterRules, state.filterBy)) {
+        if (!shallowEqual(prevFilterRules, state.filterBy)) {
             this.setTableState(setCurrentPageToState(state, 1));
             const evt = { current: state.filterBy, previous: prevFilterRules };
             this.buildFilterRulesMap();
@@ -262,7 +262,7 @@ export class TableService {
         const newGroups: CollectionGroup[] = groups ? [...groups] : [];
         const state: TableState = { ...prevState, groupBy: newGroups };
 
-        if (!equal(prevGroups, state.groupBy)) {
+        if (!shallowEqual(prevGroups, state.groupBy)) {
             this.setTableState(state);
             const evt = { current: state.groupBy, previous: prevGroups };
             this.buildGroupRulesMap();
@@ -284,7 +284,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, groupBy: newGroups };
 
-        if (!equal(prevGroups, state.groupBy)) {
+        if (!shallowEqual(prevGroups, state.groupBy)) {
             this.setTableState(state);
             this.buildGroupRulesMap();
 
@@ -322,7 +322,7 @@ export class TableService {
         const newColumnKeys = [...keys];
         const state: TableState = { ...prevState, columns: newColumns, columnKeys: newColumnKeys };
 
-        if (!equal(prevColumns, state.columns)) {
+        if (!shallowEqual(prevColumns, state.columns)) {
             this.setTableState(state);
 
             const evt = { current: state.columns, previous: prevColumns };
@@ -462,7 +462,7 @@ export class TableService {
         const newFilterRules: CollectionFilter[] = [];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        if (!equal(prevFilterRules, state.filterBy)) {
+        if (!shallowEqual(prevFilterRules, state.filterBy)) {
             this.setTableState(setCurrentPageToState(state, 1));
             const evt = { current: state.filterBy, previous: prevFilterRules };
 

@@ -1,4 +1,10 @@
-<h5 fd-title [wrap]="!!settings?.wrapSectionTitle" class="fdp-settings-generator__title">
+<div
+    fd-title
+    [wrap]="!!settings?.wrapSectionTitle"
+    role="heading"
+    class="fd-title--h5 fdp-settings-generator__title"
+    [attr.aria-level]="settings?.sectionTitleHeadingLevel || 5"
+>
     @if (mobile) {
         <button
             [attr.title]="backButtonLabel() || ('platformSettingsGenerator.backButtonLabel' | fdTranslate)"
@@ -14,7 +20,7 @@
     } @else {
         <fd-skeleton height="40px" type="rectangle" width="40%" textLines="1" [style.margin]="'auto 0'"></fd-skeleton>
     }
-</h5>
+</div>
 <ng-template #tabbedLayout>
     <fdp-icon-tab-bar
         class="fdp-settings-generator__tabs-container"

@@ -39,13 +39,13 @@ export class MessageStripAlertContainerFooterComponent {
     /**
      * Position of the overlay in which this component is rendered.
      */
-    private readonly position = inject(MessageStripAlertContainerPosition);
+    private readonly _position = inject(MessageStripAlertContainerPosition);
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly messageStripAlertService = inject(MessageStripAlertService);
+    private readonly _messageStripAlertService = inject(MessageStripAlertService);
 
     /**
      * Observable representation of the alertRefs input for use in injected components.
@@ -55,7 +55,9 @@ export class MessageStripAlertContainerFooterComponent {
     /**
      * Footer component from service as signal.
      */
-    private readonly _footerComponent = toSignal(this.messageStripAlertService.footerComponents$, { initialValue: {} });
+    private readonly _footerComponent = toSignal(this._messageStripAlertService.footerComponents$, {
+        initialValue: {}
+    });
 
     /** @hidden */
     constructor() {
@@ -63,7 +65,7 @@ export class MessageStripAlertContainerFooterComponent {
         this._alertRefs$ = toObservable(this.alertRefs).pipe(takeUntilDestroyed(this._destroyRef));
 
         effect(() => {
-            const footerComponent = this._footerComponent()[this.position];
+            const footerComponent = this._footerComponent()[this._position];
 
             if (footerComponent) {
                 this._footerComponentPortal.set(

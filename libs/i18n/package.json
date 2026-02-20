@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/i18n",
-    "version": "0.60.1-rc.1",
+    "version": "0.60.1-rc.6",
     "description": "Fundamental Library for Angular - i18n",
     "license": "Apache-2.0",
     "homepage": "https://sap.github.io/fundamental-ngx",
@@ -18,7 +18,7 @@
         "rxjs": "^7.8.0"
     },
     "dependencies": {
-        "fast-deep-equal": "3.1.3",
+        "fast-equals": "^6.0.0",
         "intl-messageformat": "^10.5.0",
         "lodash-es": "^4.17.0",
         "tslib": "^2.3.0"
