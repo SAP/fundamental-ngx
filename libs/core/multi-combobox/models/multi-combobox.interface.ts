@@ -4,7 +4,7 @@ import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { Subject } from 'rxjs';
 
 export interface MultiCombobox<T = any> {
-    selectedItems: Signal<T[]>;
+    selectedItems: T[];
     displayKey: InputSignal<string>;
     lookupKey: InputSignal<string>;
     showSecondaryText: InputSignal<boolean>;

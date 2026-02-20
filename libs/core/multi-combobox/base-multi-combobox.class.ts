@@ -57,11 +57,10 @@ export type TextAlignment = 'left' | 'right';
 @Directive()
 export abstract class BaseMultiCombobox<T = any> {
     /**
-     * Signal containing the currently selected items in the multi-combobox.
-     * This is a read-only signal that reflects the current selection state.
+     * Currently selected items in the multi-combobox.
      * To modify selections, use the `writeValue()` or `setValue()` methods.
      */
-    abstract selectedItems: Signal<T[]>;
+    abstract selectedItems: T[];
 
     /**
      * Determines whether items should be grouped in the dropdown.
@@ -380,7 +379,7 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     writeValue(value: T[]): void {
         this._setSelectedItems(coerceArraySafe(value));
-        this._cva.writeValue(this.selectedItems());
+        this._cva.writeValue(this._selectedItems());
         this._setSelectedSuggestions();
         this._emitChangeEvent();
     }
@@ -393,7 +392,7 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     setValue(value: T[], emitOnChange = true): void {
         this._setSelectedItems(coerceArraySafe(value));
-        this._cva.setValue(this.selectedItems(), emitOnChange);
+        this._cva.setValue(this._selectedItems(), emitOnChange);
         this._setSelectedSuggestions();
         this._emitChangeEvent();
     }
@@ -419,7 +418,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Method to emit change event
      */
     protected _emitChangeEvent(): void {
-        const event = new MultiComboboxSelectionChangeEvent(this, this.selectedItems());
+        const event = new MultiComboboxSelectionChangeEvent(this, this._selectedItems());
 
         this.selectionChange.emit(event);
 
@@ -436,7 +435,7 @@ export abstract class BaseMultiCombobox<T = any> {
     protected _setSelectedSuggestions(): void {
         this._selectedSuggestions.set([]);
 
-        const selectedItems = this.selectedItems();
+        const selectedItems = this._selectedItems();
         if (!selectedItems?.length) {
             return;
         }
@@ -551,7 +550,7 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     protected _convertObjectsToSecondaryOptionItems<K extends T>(items: K[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
-        const selectedItems = this.selectedItems();
+        const selectedItems = this._selectedItems();
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
@@ -573,7 +572,7 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     protected _convertPrimitiveToOptionItems(items: any[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
-        const selectedItems = this.selectedItems();
+        const selectedItems = this._selectedItems();
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
             selectItems.push({
@@ -593,7 +592,7 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     protected _convertObjectsToDefaultOptionItems(items: T[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
-        const selectedItems = this.selectedItems();
+        const selectedItems = this._selectedItems();
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
@@ -618,7 +617,8 @@ export abstract class BaseMultiCombobox<T = any> {
         this._cva.state = 'error';
 
         this._previousStateMessage = this._cva.stateMessage;
-        this._cva.stateMessage = this.invalidEntryMessage() ?? this._invalidEntryMessageOverride() ?? null;
+        const overrideMessage = this._invalidEntryMessageOverride();
+        this._cva.stateMessage = overrideMessage ?? this.invalidEntryMessage() ?? null;
 
         this._cd.markForCheck();
     }
@@ -643,7 +643,7 @@ export abstract class BaseMultiCombobox<T = any> {
     protected _mapAndUpdateModel(): void {
         const selectedItems = this._selectedSuggestions().map(({ value }) => value);
 
-        const shouldEmitChangeEvent = !shallowEqual(this.selectedItems(), selectedItems);
+        const shouldEmitChangeEvent = !shallowEqual(this._selectedItems(), selectedItems);
 
         if (!shouldEmitChangeEvent) {
             return;

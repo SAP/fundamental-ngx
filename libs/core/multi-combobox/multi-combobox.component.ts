@@ -8,7 +8,6 @@ import {
     Injector,
     Input,
     OnInit,
-    Signal,
     TemplateRef,
     ViewContainerRef,
     ViewEncapsulation,
@@ -152,11 +151,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * Readonly signal accessor for the currently selected items.
-     * @returns Signal<T[]> - A read-only signal containing the selected items array
+     * Read-only array of currently selected items (backward-compatible API).
      */
-    get selectedItems(): Signal<T[]> {
-        return this._selectedItems.asReadonly();
+    get selectedItems(): T[] {
+        return this._selectedItems();
     }
 
     /**
