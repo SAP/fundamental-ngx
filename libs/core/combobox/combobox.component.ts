@@ -646,6 +646,7 @@ export class ComboboxComponent<T = any>
         this.inputTextValue = '';
         this.inputTextChange.emit('');
         this.displayedValues = this.dropdownValues || [];
+        this.searchInputElement.nativeElement.value = '';
         this.searchInputElement.nativeElement.focus();
         if (!this.mobile) {
             this._propagateChange();

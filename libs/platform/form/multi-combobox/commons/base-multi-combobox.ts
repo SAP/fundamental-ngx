@@ -30,7 +30,6 @@ import {
     ViewChild
 } from '@angular/core';
 
-import equal from 'fast-deep-equal';
 import { fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
@@ -66,6 +65,7 @@ import {
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { shallowEqual } from 'fast-equals';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
@@ -830,7 +830,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
                 if (selectedSuggestionsLength > 0) {
                     for (let i = 0; i < selectedSuggestionsLength; i++) {
                         const selectedSuggestion = this._selectedSuggestions[i];
-                        const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
+                        const idx = this._suggestions.findIndex((item) =>
+                            shallowEqual(item.value, selectedSuggestion.value)
+                        );
 
                         if (idx !== -1) {
                             this._suggestions[idx].selected = true;

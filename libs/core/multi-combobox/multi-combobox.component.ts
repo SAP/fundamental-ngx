@@ -50,7 +50,6 @@ import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
-import equal from 'fast-deep-equal';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
@@ -67,6 +66,7 @@ import { FormControlComponent, FormInputMessageGroupComponent, FormMessageCompon
 import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { shallowEqual } from 'fast-equals';
 import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
 import { MultiAnnouncerDirective } from './multi-announcer/multi-announcer.directive';
@@ -542,7 +542,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._suggestions = this.isGroup
             ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
             : this._suggestions.filter((value) =>
-                  this._selectedSuggestions.some((item) => equal(item.value, value.value))
+                  this._selectedSuggestions.some((item) => shallowEqual(item.value, value.value))
               );
 
         this._showList(true);

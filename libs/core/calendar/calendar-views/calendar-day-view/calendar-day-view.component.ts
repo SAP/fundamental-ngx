@@ -21,7 +21,6 @@ import {
 
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import equal from 'fast-deep-equal';
 
 import { CalendarCurrent } from '../../models/calendar-current';
 import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, CalendarDay } from '../../models/calendar-day';
@@ -31,6 +30,7 @@ import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { shallowEqual } from 'fast-equals';
 import { CalendarLegendFocusingService } from '../../calendar-legend/calendar-legend-focusing.service';
 import { CalendarService } from '../../calendar.service';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
@@ -53,7 +53,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     /** Currently displayed month and year for days */
     @Input()
     set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
-        if (!equal(currentlyDisplayed, this._currentlyDisplayed)) {
+        if (!shallowEqual(currentlyDisplayed, this._currentlyDisplayed)) {
             this._currentlyDisplayed = currentlyDisplayed;
             this._buildDayViewGrid();
         }

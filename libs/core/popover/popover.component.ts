@@ -28,7 +28,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyDirective } from './popover-body.directive';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
@@ -81,7 +81,7 @@ export class PopoverComponent
     /** Reference to popover trigger element */
     @Input()
     set trigger(trigger: ElementRef | HTMLElement) {
-        if (equal(trigger, this._trigger)) {
+        if (shallowEqual(trigger, this._trigger)) {
             return;
         }
         this._trigger = trigger;

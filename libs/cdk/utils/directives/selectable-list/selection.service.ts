@@ -1,7 +1,7 @@
 import { coerceArray } from '@angular/cdk/coercion';
 import { ChangeDetectorRef, DestroyRef, Injectable, QueryList, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { Observable, ReplaySubject, Subject, combineLatest, isObservable, merge, of, switchMap } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import { destroyObservable } from '../../helpers/destroy-observable';
@@ -36,7 +36,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
     /** @hidden */
     constructor(private _cd: ChangeDetectorRef) {
         this._normalizedValue$ = this._value$.pipe(
-            distinctUntilChanged(equal),
+            distinctUntilChanged(shallowEqual),
             map((v) => coerceArray<ValueType>(v)),
             map((value) => (this._isMultipleMode ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))

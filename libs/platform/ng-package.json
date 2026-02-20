@@ -10,7 +10,7 @@
         "focus-trap",
         "xml2js",
         "lodash-es",
-        "fast-deep-equal",
+        "fast-equals",
         "@fundamental-ngx/i18n",
         "@fundamental-ngx/cdk"
     ]
