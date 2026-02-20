@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.56.9](https://github.com/SAP/fundamental-ngx/compare/v0.56.8...v0.56.9) (2026-02-20)
+
+
+### Bug Fixes
+
+* **core:** add a11y improvements to Shellbar actions ([#13795](https://github.com/SAP/fundamental-ngx/issues/13795)) ([31eeb52](https://github.com/SAP/fundamental-ngx/commit/31eeb521e6d43ac96966a352de5240b1da818d6d))
+
+
+
+
+
 ## [0.56.8](https://github.com/SAP/fundamental-ngx/compare/v0.56.7...v0.56.8) (2025-12-05)
 
 
