@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.10](https://github.com/SAP/fundamental-ngx/compare/v0.57.9...v0.57.10) (2026-02-20)
+
+
+### Bug Fixes
+
+* **core:** toolbar needs focusAutoCapture ([bcaefb3](https://github.com/SAP/fundamental-ngx/commit/bcaefb3dfed0f47130f7647c94ce0328d99acaa8))
+
+
+
+
+
 ## [0.57.9](https://github.com/SAP/fundamental-ngx/compare/v0.57.8...v0.57.9) (2026-01-14)
 
 **Note:** Version bump only for package @fundamental-ngx/core
