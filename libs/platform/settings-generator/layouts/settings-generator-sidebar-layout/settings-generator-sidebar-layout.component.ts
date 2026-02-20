@@ -90,8 +90,8 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     protected readonly headingLevel = computed(() => {
         const settings = this.settings;
-        if (this._isSidebarSettings(settings) && settings.headingLevel) {
-            return settings.headingLevel;
+        if (this._isSidebarSettings(settings) && settings.sidebarTitleHeadingLevel) {
+            return settings.sidebarTitleHeadingLevel;
         }
         return 5; // Default to h5
     });
