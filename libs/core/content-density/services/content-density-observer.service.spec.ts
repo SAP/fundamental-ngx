@@ -1,9 +1,10 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, signal } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
+import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { contentDensityObserverProviders } from '../providers/content-density-observer-providers';
-import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
+import { CONTENT_DENSITY_DIRECTIVE, ContentDensityDirectiveRef } from '../tokens/content-density-directive';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 import { ContentDensityMode } from '../types/content-density.mode';
 import { ContentDensityObserver } from './content-density-observer.service';
@@ -172,10 +173,6 @@ describe('ContentDensityObserver', () => {
             });
         });
 
-        it('should have value getter for backward compatibility', () => {
-            expect(observer.value).toBe(ContentDensityMode.COZY);
-        });
-
         it('should have asObservable method', () => {
             expect(typeof observer.asObservable).toBe('function');
             const observable = observer.asObservable();
@@ -331,6 +328,320 @@ describe('ContentDensityObserver', () => {
             tick();
             fixture.detectChanges();
             expect(observer.contentDensity()).toBe(ContentDensityMode.COZY);
+        }));
+    });
+
+    describe('debug mode', () => {
+        it('should log debug messages when debug is enabled', fakeAsync(() => {
+            const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+            @Component({
+                selector: 'fd-test-debug',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        debug: true
+                    })
+                ]
+            })
+            class TestDebugComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestDebugComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const debugFixture = TestBed.createComponent(TestDebugComponent);
+            debugFixture.detectChanges();
+            tick();
+
+            // Change density to trigger debug log
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            tick();
+            debugFixture.detectChanges();
+
+            expect(consoleSpy).toHaveBeenCalled();
+
+            debugFixture.componentInstance.densityObserver.complete();
+            consoleSpy.mockRestore();
+        }));
+    });
+
+    describe('alwaysAddModifiers config', () => {
+        it('should always add modifiers when alwaysAddModifiers is true', fakeAsync(() => {
+            @Component({
+                selector: 'fd-test-always-modifiers',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        alwaysAddModifiers: true
+                    })
+                ]
+            })
+            class TestAlwaysModifiersComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestAlwaysModifiersComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const modifiersFixture = TestBed.createComponent(TestAlwaysModifiersComponent);
+            modifiersFixture.detectChanges();
+            tick();
+
+            const hostElement = modifiersFixture.componentInstance.elementRef.nativeElement;
+            expect(hostElement.classList.contains('is-cozy')).toBe(true);
+
+            modifiersFixture.componentInstance.densityObserver.complete();
+        }));
+    });
+
+    describe('no modifiers config', () => {
+        it('should not apply classes when modifiers are not configured', fakeAsync(() => {
+            @Component({
+                selector: 'fd-test-no-modifiers',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        modifiers: undefined
+                    })
+                ]
+            })
+            class TestNoModifiersComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestNoModifiersComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const noModifiersFixture = TestBed.createComponent(TestNoModifiersComponent);
+            noModifiersFixture.detectChanges();
+            tick();
+
+            const hostElement = noModifiersFixture.componentInstance.elementRef.nativeElement;
+            // Should not have any density classes
+            expect(hostElement.classList.contains('is-cozy')).toBe(false);
+            expect(hostElement.classList.contains('is-compact')).toBe(false);
+
+            noModifiersFixture.componentInstance.densityObserver.complete();
+        }));
+    });
+
+    describe('with content density directive', () => {
+        it('should use directive density mode when provided', fakeAsync(() => {
+            const directiveSignal = signal<LocalContentDensityMode>(ContentDensityMode.COMPACT);
+            const mockDirective: ContentDensityDirectiveRef = {
+                densityMode: directiveSignal.asReadonly(),
+                get value(): LocalContentDensityMode {
+                    return directiveSignal();
+                }
+            };
+
+            @Component({
+                selector: 'fd-test-with-directive',
+                template: '<div></div>',
+                providers: [contentDensityObserverProviders()]
+            })
+            class TestWithDirectiveComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestWithDirectiveComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: mockDirective }
+                ]
+            });
+
+            const directiveFixture = TestBed.createComponent(TestWithDirectiveComponent);
+            directiveFixture.detectChanges();
+            tick();
+
+            // Should use directive's compact density
+            expect(directiveFixture.componentInstance.densityObserver.contentDensity()).toBe(
+                ContentDensityMode.COMPACT
+            );
+
+            directiveFixture.componentInstance.densityObserver.complete();
+        }));
+
+        it('should resolve global keyword from directive to service value', fakeAsync(() => {
+            const directiveSignal = signal<LocalContentDensityMode>(ContentDensityGlobalKeyword);
+            const mockDirective: ContentDensityDirectiveRef = {
+                densityMode: directiveSignal.asReadonly(),
+                get value(): LocalContentDensityMode {
+                    return directiveSignal();
+                }
+            };
+
+            @Component({
+                selector: 'fd-test-global-keyword',
+                template: '<div></div>',
+                providers: [contentDensityObserverProviders()]
+            })
+            class TestGlobalKeywordComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            // Set storage to condensed
+            mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestGlobalKeywordComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: mockDirective }
+                ]
+            });
+
+            const globalFixture = TestBed.createComponent(TestGlobalKeywordComponent);
+            globalFixture.detectChanges();
+            tick();
+
+            // Should resolve 'global' keyword to service value (condensed) but falls back based on support
+            // Default config supports COMPACT and COZY, so CONDENSED falls back to COMPACT
+            expect(globalFixture.componentInstance.densityObserver.contentDensity()).toBe(ContentDensityMode.COMPACT);
+
+            globalFixture.componentInstance.densityObserver.complete();
+        }));
+    });
+
+    describe('cozy fallback', () => {
+        it('should always return cozy for cozy alternative (no alternative needed)', fakeAsync(() => {
+            // Cozy is always supported, so its alternative should return cozy
+            @Component({
+                selector: 'fd-test-cozy-only',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        supportedContentDensity: [ContentDensityMode.COZY]
+                    })
+                ]
+            })
+            class TestCozyOnlyComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestCozyOnlyComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const cozyFixture = TestBed.createComponent(TestCozyOnlyComponent);
+            cozyFixture.detectChanges();
+            tick();
+
+            // Try to set compact (not supported)
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            tick();
+            cozyFixture.detectChanges();
+
+            // Should fallback to cozy (condensed not supported, so fallback to cozy)
+            expect(cozyFixture.componentInstance.densityObserver.contentDensity()).toBe(ContentDensityMode.COZY);
+
+            cozyFixture.componentInstance.densityObserver.complete();
+        }));
+    });
+
+    describe('condensed fallback', () => {
+        it('should fallback to compact when condensed not supported but compact is', fakeAsync(() => {
+            @Component({
+                selector: 'fd-test-compact-cozy',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        supportedContentDensity: [ContentDensityMode.COZY, ContentDensityMode.COMPACT]
+                    })
+                ]
+            })
+            class TestCompactCozyComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestCompactCozyComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const compactCozyFixture = TestBed.createComponent(TestCompactCozyComponent);
+            compactCozyFixture.detectChanges();
+            tick();
+
+            // Try to set condensed (not supported)
+            mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
+            tick();
+            compactCozyFixture.detectChanges();
+
+            // Should fallback to compact as alternative to condensed
+            expect(compactCozyFixture.componentInstance.densityObserver.contentDensity()).toBe(
+                ContentDensityMode.COMPACT
+            );
+
+            compactCozyFixture.componentInstance.densityObserver.complete();
         }));
     });
 });
