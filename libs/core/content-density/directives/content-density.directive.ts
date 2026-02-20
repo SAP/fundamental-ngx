@@ -21,8 +21,7 @@ import { ContentDensityMode } from '../types/content-density.mode';
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => ContentDensityDirective)
         }
-    ],
-    standalone: true
+    ]
 })
 export class ContentDensityDirective {
     /** Current content density mode as a signal */
@@ -38,7 +37,7 @@ export class ContentDensityDirective {
     set fdContentDensity(val: `${ContentDensityMode}` | LocalContentDensityMode | '') {
         if (!isContentDensityMode(val)) {
             if (isDevMode() && val !== '') {
-                console.log(
+                console.warn(
                     `The value "${val}" is not a valid content density mode.
                      Using "${ContentDensityGlobalKeyword}" instead.`
                 );

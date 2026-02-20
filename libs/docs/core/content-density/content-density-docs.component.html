@@ -138,3 +138,118 @@
     <fd-directive-usage-example></fd-directive-usage-example>
 </component-example>
 <code-example [exampleFiles]="directiveUsageExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="toggle-directive" componentName="toggle-directive">
+    Toggle Directive Behavior
+</fd-docs-section-title>
+<description>
+    <p>
+        The shorthand directives (<code>[fdCompact]</code>, <code>[fdCozy]</code>, <code>[fdCondensed]</code>) accept
+        boolean values. When set to <code>true</code>, they apply the specified density. When set to <code>false</code>,
+        the directive reverts to the <code>'global'</code> keyword, following the global service value.
+    </p>
+    <p>This is useful for conditionally applying density based on component state or user preferences.</p>
+</description>
+<component-example>
+    <fd-toggle-directive-example></fd-toggle-directive-example>
+</component-example>
+<code-example [exampleFiles]="toggleDirectiveExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="advanced-config" componentName="advanced-config">
+    Advanced Configuration
+</fd-docs-section-title>
+<description>
+    <p>
+        The <code>contentDensityObserverProviders()</code> function accepts additional configuration options for
+        advanced use cases:
+    </p>
+    <ul>
+        <li>
+            <code>debug: true</code> - Enables console logging for density changes. Useful for troubleshooting
+            inheritance issues.
+        </li>
+        <li>
+            <code>alwaysAddModifiers: true</code> - Always applies CSS modifier classes to the host element, even when
+            not strictly required by the density logic.
+        </li>
+        <li>
+            <code>modifiers</code> - Customize the CSS class names used for each density mode. Default classes are
+            <code>is-compact</code>, <code>is-cozy</code>, and <code>is-condensed</code>.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-advanced-config-example></fd-advanced-config-example>
+</component-example>
+<code-example [exampleFiles]="advancedConfigExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="deprecated-api" componentName="deprecated-api">
+    Deprecated APIs (Migration Guide)
+</fd-docs-section-title>
+<description>
+    <p>
+        The <code>ContentDensityObserver</code> provides both Signal-based and Observable-based APIs. The Observable
+        APIs are deprecated and will be removed in a future version. Please migrate to the Signal APIs for better
+        performance and simpler code.
+    </p>
+    <table class="fd-table">
+        <thead>
+            <tr>
+                <th>Deprecated API</th>
+                <th>Signal Alternative</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>isCompact$</code> (Observable)</td>
+                <td><code>isCompactSignal()</code></td>
+            </tr>
+            <tr>
+                <td><code>isCozy$</code> (Observable)</td>
+                <td><code>isCozySignal()</code></td>
+            </tr>
+            <tr>
+                <td><code>isCondensed$</code> (Observable)</td>
+                <td><code>isCondensedSignal()</code></td>
+            </tr>
+            <tr>
+                <td><code>contentDensity$$</code> (Observable)</td>
+                <td><code>contentDensity()</code></td>
+            </tr>
+            <tr>
+                <td><code>value</code> (getter)</td>
+                <td><code>contentDensity()</code></td>
+            </tr>
+            <tr>
+                <td><code>isCompact</code> (getter)</td>
+                <td><code>isCompactSignal()</code></td>
+            </tr>
+            <tr>
+                <td><code>isCozy</code> (getter)</td>
+                <td><code>isCozySignal()</code></td>
+            </tr>
+            <tr>
+                <td><code>isCondensed</code> (getter)</td>
+                <td><code>isCondensedSignal()</code></td>
+            </tr>
+            <tr>
+                <td><code>subscribe()</code></td>
+                <td>Use <code>effect()</code> with signals</td>
+            </tr>
+            <tr>
+                <td><code>asObservable()</code></td>
+                <td>Use <code>toObservable()</code> from <code>&#64;angular/core/rxjs-interop</code></td>
+            </tr>
+        </tbody>
+    </table>
+</description>
+<component-example>
+    <fd-docs-deprecated-api-example></fd-docs-deprecated-api-example>
+</component-example>
+<code-example [exampleFiles]="deprecatedApiExample"></code-example>

@@ -243,7 +243,7 @@ export class ContentDensityObserver {
         this._destroyRef.onDestroy(() => {
             this._cleanup();
             if (this.config.debug) {
-                console.log('ContentDensityObserver: destroyed');
+                console.warn('ContentDensityObserver: destroyed');
             }
         });
     }
@@ -290,12 +290,12 @@ export class ContentDensityObserver {
 
     private _validateAndFallback(density: ContentDensityMode): ContentDensityMode {
         if (this.config.debug) {
-            console.log(`ContentDensityObserver: density changed to ${density}`);
+            console.warn(`ContentDensityObserver: density changed to ${density}`);
         }
         if (!this._isSupported(density)) {
             try {
                 if (this.config.debug) {
-                    console.log(
+                    console.warn(
                         `ContentDensityObserver: ${density} is not supported. Failing back to alternative one.`
                     );
                 }
@@ -338,7 +338,6 @@ export class ContentDensityObserver {
             if (modifierClass) {
                 this._renderer?.addClass(element?.nativeElement, modifierClass);
             }
-            this._renderer?.addClass(element?.nativeElement, modifiers[currentDensity]!);
         });
     }
 

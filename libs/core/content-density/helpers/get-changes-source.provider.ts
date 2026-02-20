@@ -25,7 +25,8 @@ export const getChangesSource = (params: {
     contentDensityDirective?: Signal<LocalContentDensityMode>;
     contentDensityService?: GlobalContentDensityService;
     parentContentDensityObserver?: Signal<ContentDensityMode>;
-}): Signal<ContentDensityMode> => computed(() => {
+}): Signal<ContentDensityMode> =>
+    computed(() => {
         // Get the raw mode from the appropriate source (priority order)
         const rawMode: LocalContentDensityMode = params.parentContentDensityObserver
             ? params.parentContentDensityObserver()
