@@ -22,14 +22,11 @@ describe('MemoryContentDensityStorage', () => {
             expect(storage).toBeTruthy();
         });
 
-        it('should initialize with default content density', (done) => {
-            storage.getContentDensity().subscribe((density) => {
-                expect(density).toBe(ContentDensityMode.COZY);
-                done();
-            });
+        it('should initialize with default content density', () => {
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COZY);
         });
 
-        it('should initialize with compact when provided as default', (done) => {
+        it('should initialize with compact when provided as default', () => {
             TestBed.resetTestingModule();
             TestBed.configureTestingModule({
                 providers: [
@@ -40,86 +37,52 @@ describe('MemoryContentDensityStorage', () => {
 
             const compactStorage = TestBed.inject(MemoryContentDensityStorage);
 
-            compactStorage.getContentDensity().subscribe((density) => {
-                expect(density).toBe(ContentDensityMode.COMPACT);
-                done();
-            });
+            expect(compactStorage.contentDensity()).toBe(ContentDensityMode.COMPACT);
         });
     });
 
-    describe('getContentDensity', () => {
-        it('should return an observable', () => {
-            const result = storage.getContentDensity();
-            expect(result).toBeTruthy();
-            expect(typeof result.subscribe).toBe('function');
+    describe('contentDensity signal', () => {
+        it('should return a signal', () => {
+            expect(storage.contentDensity).toBeTruthy();
+            expect(typeof storage.contentDensity).toBe('function');
         });
 
-        it('should emit current density value', (done) => {
-            storage.getContentDensity().subscribe((density) => {
-                expect(density).toBe(ContentDensityMode.COZY);
-                done();
-            });
+        it('should return current density value', () => {
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COZY);
         });
     });
 
     describe('setContentDensity', () => {
-        it('should update density to compact', (done) => {
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
-                storage.getContentDensity().subscribe((density) => {
-                    expect(density).toBe(ContentDensityMode.COMPACT);
-                    done();
-                });
-            });
+        it('should update density to compact', () => {
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COMPACT);
         });
 
-        it('should update density to condensed', (done) => {
-            storage.setContentDensity(ContentDensityMode.CONDENSED).subscribe(() => {
-                storage.getContentDensity().subscribe((density) => {
-                    expect(density).toBe(ContentDensityMode.CONDENSED);
-                    done();
-                });
-            });
+        it('should update density to condensed', () => {
+            storage.setContentDensity(ContentDensityMode.CONDENSED);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.CONDENSED);
         });
 
-        it('should update density to cozy', (done) => {
+        it('should update density to cozy', () => {
             // First set to compact
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
-                // Then set back to cozy
-                storage.setContentDensity(ContentDensityMode.COZY).subscribe(() => {
-                    storage.getContentDensity().subscribe((density) => {
-                        expect(density).toBe(ContentDensityMode.COZY);
-                        done();
-                    });
-                });
-            });
-        });
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COMPACT);
 
-        it('should return observable of void', (done) => {
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe((result) => {
-                expect(result).toBeUndefined();
-                done();
-            });
+            // Then set back to cozy
+            storage.setContentDensity(ContentDensityMode.COZY);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COZY);
         });
     });
 
     describe('reactive updates', () => {
-        it('should notify subscribers when density changes', (done) => {
-            const emittedValues: ContentDensityMode[] = [];
+        it('should update signal value when density changes', () => {
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COZY);
 
-            storage.getContentDensity().subscribe((density) => {
-                emittedValues.push(density);
-                if (emittedValues.length === 3) {
-                    expect(emittedValues).toEqual([
-                        ContentDensityMode.COZY,
-                        ContentDensityMode.COMPACT,
-                        ContentDensityMode.CONDENSED
-                    ]);
-                    done();
-                }
-            });
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COMPACT);
 
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe();
-            storage.setContentDensity(ContentDensityMode.CONDENSED).subscribe();
+            storage.setContentDensity(ContentDensityMode.CONDENSED);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.CONDENSED);
         });
     });
 });

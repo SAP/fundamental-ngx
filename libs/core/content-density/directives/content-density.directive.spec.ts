@@ -234,4 +234,50 @@ describe('ContentDensityDirective', () => {
             expect(typeof injectedDirective.densityMode).toBe('function');
         });
     });
+
+    describe('programmatic density updates', () => {
+        let fixture: ComponentFixture<TestHostComponent>;
+        let directive: ContentDensityDirective;
+
+        beforeEach(() => {
+            TestBed.configureTestingModule({
+                imports: [TestHostComponent]
+            });
+
+            fixture = TestBed.createComponent(TestHostComponent);
+            fixture.detectChanges();
+
+            const directiveEl = fixture.debugElement.children[0];
+            directive = directiveEl.injector.get(ContentDensityDirective);
+        });
+
+        it('should allow programmatic density updates via setDensity()', () => {
+            expect(directive.densityMode()).toBe(ContentDensityMode.COZY);
+
+            directive.setDensity(ContentDensityMode.COMPACT);
+            expect(directive.densityMode()).toBe(ContentDensityMode.COMPACT);
+
+            directive.setDensity(ContentDensityMode.CONDENSED);
+            expect(directive.densityMode()).toBe(ContentDensityMode.CONDENSED);
+        });
+
+        it('should take precedence over input bindings when set programmatically', () => {
+            // Input is set to cozy
+            expect(directive.densityMode()).toBe(ContentDensityMode.COZY);
+
+            // Programmatic override
+            directive.setDensity(ContentDensityMode.COMPACT);
+            expect(directive.densityMode()).toBe(ContentDensityMode.COMPACT);
+        });
+
+        it('should clear programmatic override and return to input binding', () => {
+            expect(directive.densityMode()).toBe(ContentDensityMode.COZY);
+
+            directive.setDensity(ContentDensityMode.COMPACT);
+            expect(directive.densityMode()).toBe(ContentDensityMode.COMPACT);
+
+            directive.clearDensity();
+            expect(directive.densityMode()).toBe(ContentDensityMode.COZY);
+        });
+    });
 });

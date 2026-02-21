@@ -69,68 +69,52 @@ describe('LocalContentDensityStorage', () => {
                 ]
             });
 
-            TestBed.inject(LocalContentDensityStorage);
+            const newStorage = TestBed.inject(LocalContentDensityStorage);
             expect(presetStorage.get(storageKey)).toBe(ContentDensityMode.COMPACT);
+            expect(newStorage.contentDensity()).toBe(ContentDensityMode.COMPACT);
         });
     });
 
-    describe('getContentDensity', () => {
-        it('should return an observable', () => {
-            const result = storage.getContentDensity();
-            expect(result).toBeTruthy();
-            expect(typeof result.subscribe).toBe('function');
+    describe('contentDensity signal', () => {
+        it('should return a signal', () => {
+            expect(storage.contentDensity).toBeTruthy();
+            expect(typeof storage.contentDensity).toBe('function');
         });
 
-        it('should emit current density from localStorage', (done) => {
-            storage.getContentDensity().subscribe((density) => {
-                expect(density).toBe(ContentDensityMode.COZY);
-                done();
-            });
-        });
-
-        it('should clean up subscription on unsubscribe', () => {
-            const subscription = storage.getContentDensity().subscribe();
-            expect(subscription.closed).toBe(false);
-
-            subscription.unsubscribe();
-            expect(subscription.closed).toBe(true);
+        it('should return current density from localStorage', () => {
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COZY);
         });
     });
 
     describe('setContentDensity', () => {
-        it('should update density in localStorage', (done) => {
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
-                expect(mockLocalStorage.get(storageKey)).toBe(ContentDensityMode.COMPACT);
-                done();
-            });
+        it('should update density in localStorage', () => {
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(mockLocalStorage.get(storageKey)).toBe(ContentDensityMode.COMPACT);
         });
 
-        it('should return observable of void', (done) => {
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe((result) => {
-                expect(result).toBeUndefined();
-                done();
-            });
+        it('should update the signal value', () => {
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COMPACT);
         });
     });
 
     describe('reactive updates', () => {
-        it('should notify subscribers when density changes', (done) => {
-            const emittedValues: ContentDensityMode[] = [];
+        it('should update signal value when density changes', () => {
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COZY);
 
-            storage.getContentDensity().subscribe((density) => {
-                emittedValues.push(density);
-                if (emittedValues.length === 3) {
-                    expect(emittedValues).toEqual([
-                        ContentDensityMode.COZY,
-                        ContentDensityMode.COMPACT,
-                        ContentDensityMode.CONDENSED
-                    ]);
-                    done();
-                }
-            });
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.COMPACT);
 
-            storage.setContentDensity(ContentDensityMode.COMPACT).subscribe();
-            storage.setContentDensity(ContentDensityMode.CONDENSED).subscribe();
+            storage.setContentDensity(ContentDensityMode.CONDENSED);
+            expect(storage.contentDensity()).toBe(ContentDensityMode.CONDENSED);
+        });
+
+        it('should persist changes to localStorage', () => {
+            storage.setContentDensity(ContentDensityMode.COMPACT);
+            expect(mockLocalStorage.get(storageKey)).toBe(ContentDensityMode.COMPACT);
+
+            storage.setContentDensity(ContentDensityMode.CONDENSED);
+            expect(mockLocalStorage.get(storageKey)).toBe(ContentDensityMode.CONDENSED);
         });
     });
 });

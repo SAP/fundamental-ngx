@@ -9,7 +9,6 @@ import {
     Injector,
     Renderer2,
     signal,
-    Signal,
     WritableSignal
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -78,22 +77,22 @@ const initialContentDensity = (
 @Injectable()
 export class ContentDensityObserver {
     /** Current content density as a readonly signal */
-    readonly contentDensity: Signal<ContentDensityMode>;
+    readonly contentDensity: ReturnType<WritableSignal<ContentDensityMode>['asReadonly']>;
 
     /** Whether content density is compact (signal) */
-    readonly isCompactSignal: Signal<boolean>;
+    readonly isCompactSignal: ReturnType<typeof computed<boolean>>;
 
     /** Whether content density is cozy (signal) */
-    readonly isCozySignal: Signal<boolean>;
+    readonly isCozySignal: ReturnType<typeof computed<boolean>>;
 
     /** Whether content density is condensed (signal) */
-    readonly isCondensedSignal: Signal<boolean>;
+    readonly isCondensedSignal: ReturnType<typeof computed<boolean>>;
 
     /**
      * Current content density signal
      * @deprecated Use contentDensity() instead
      */
-    readonly contentDensity$: Signal<ContentDensityMode>;
+    readonly contentDensity$: ReturnType<WritableSignal<ContentDensityMode>['asReadonly']>;
 
     /**
      * Observable for compact state changes
@@ -124,7 +123,7 @@ export class ContentDensityObserver {
 
     private readonly _contentDensity: WritableSignal<ContentDensityMode>;
 
-    private readonly _changesSource: Signal<ContentDensityMode>;
+    private readonly _changesSource: ReturnType<typeof computed<ContentDensityMode>>;
 
     private readonly _destroyRef = inject(DestroyRef);
 

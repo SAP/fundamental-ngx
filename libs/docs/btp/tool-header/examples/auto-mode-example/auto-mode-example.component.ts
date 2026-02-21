@@ -17,6 +17,7 @@ import {
 import { ClickedDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import {
     MenuAddonDirective,
     MenuComponent,
@@ -71,6 +72,9 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
 })
 export class ToolHeaderAutoModeExampleComponent {
     searchValue: string;
+
+    /** Current content density, automatically derived from mode (desktop=COMPACT, tablet/phone=COZY) */
+    currentContentDensity: ContentDensityMode;
 
     actions: FdbToolHeaderActionButton[] = [
         {
