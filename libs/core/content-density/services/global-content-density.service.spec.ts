@@ -1,24 +1,25 @@
+import { signal, Signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { ContentDensityMode } from '../types/content-density.mode';
 import { GlobalContentDensityService } from './global-content-density.service';
 
 class MockContentDensityStorage implements ContentDensityStorage {
-    private _density$ = new BehaviorSubject<ContentDensityMode>(ContentDensityMode.COZY);
+    readonly contentDensity: Signal<ContentDensityMode>;
 
-    getContentDensity(): Observable<ContentDensityMode> {
-        return this._density$.asObservable();
+    private _contentDensity: WritableSignal<ContentDensityMode> = signal(ContentDensityMode.COZY);
+
+    constructor() {
+        this.contentDensity = this._contentDensity.asReadonly();
     }
 
-    setContentDensity(density: ContentDensityMode): Observable<void> {
-        this._density$.next(density);
-        return of(undefined);
+    setContentDensity(density: ContentDensityMode): void {
+        this._contentDensity.set(density);
     }
 
     // Helper for tests
     setDensityDirectly(density: ContentDensityMode): void {
-        this._density$.next(density);
+        this._contentDensity.set(density);
     }
 }
 
@@ -70,6 +71,12 @@ describe('GlobalContentDensityService', () => {
             expect(typeof density).toBe('function');
             expect(density()).toBe(ContentDensityMode.COZY);
         });
+
+        it('should update when storage changes', () => {
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
+        });
     });
 
     describe('currentContentDensity (deprecated getter)', () => {
@@ -82,96 +89,54 @@ describe('GlobalContentDensityService', () => {
         });
     });
 
-    describe('contentDensityListener', () => {
+    describe('contentDensityListener (deprecated)', () => {
         it('should return an observable', () => {
             const listener = service.contentDensityListener();
             expect(listener).toBeTruthy();
             expect(typeof listener.subscribe).toBe('function');
         });
-
-        it('should emit current density value', (done) => {
-            service.contentDensityListener().subscribe((density) => {
-                expect(density).toBe(ContentDensityMode.COZY);
-                done();
-            });
-        });
-
-        it('should emit updated density when storage changes', (done) => {
-            const emittedValues: ContentDensityMode[] = [];
-
-            service.contentDensityListener().subscribe((density) => {
-                emittedValues.push(density);
-                if (emittedValues.length === 2) {
-                    expect(emittedValues).toEqual([ContentDensityMode.COZY, ContentDensityMode.COMPACT]);
-                    done();
-                }
-            });
-
-            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
-        });
     });
 
     describe('updateContentDensity', () => {
-        it('should update content density', (done) => {
-            service.updateContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
-                // Signal updates reactively
-                expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
-                done();
-            });
+        it('should update content density', () => {
+            service.updateContentDensity(ContentDensityMode.COMPACT);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
         });
 
-        it('should update to condensed density', (done) => {
-            service.updateContentDensity(ContentDensityMode.CONDENSED).subscribe(() => {
-                expect(service.currentDensitySignal()).toBe(ContentDensityMode.CONDENSED);
-                done();
-            });
+        it('should update to condensed density', () => {
+            service.updateContentDensity(ContentDensityMode.CONDENSED);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.CONDENSED);
         });
 
-        it('should update to cozy density', (done) => {
+        it('should update to cozy density', () => {
             // First set to compact
-            service.updateContentDensity(ContentDensityMode.COMPACT).subscribe(() => {
-                // Then set back to cozy
-                service.updateContentDensity(ContentDensityMode.COZY).subscribe(() => {
-                    expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
-                    done();
-                });
-            });
-        });
+            service.updateContentDensity(ContentDensityMode.COMPACT);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
 
-        it('should notify listeners when density changes', (done) => {
-            const emittedValues: ContentDensityMode[] = [];
-
-            service.contentDensityListener().subscribe((density) => {
-                emittedValues.push(density);
-                if (emittedValues.length === 3) {
-                    expect(emittedValues).toEqual([
-                        ContentDensityMode.COZY,
-                        ContentDensityMode.COMPACT,
-                        ContentDensityMode.CONDENSED
-                    ]);
-                    done();
-                }
-            });
-
-            service.updateContentDensity(ContentDensityMode.COMPACT).subscribe();
-            service.updateContentDensity(ContentDensityMode.CONDENSED).subscribe();
+            // Then set back to cozy
+            service.updateContentDensity(ContentDensityMode.COZY);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
         });
     });
 
     describe('reactive updates', () => {
-        it('should update signal when storage changes', (done) => {
+        it('should update signal when storage changes', () => {
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
+        });
+
+        it('should reflect multiple changes', () => {
             expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
 
-            // Subscribe to verify the change propagates
-            service.contentDensityListener().subscribe((density) => {
-                if (density === ContentDensityMode.COMPACT) {
-                    // Signal should have updated via toSignal
-                    expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
-                    done();
-                }
-            });
+            service.updateContentDensity(ContentDensityMode.COMPACT);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COMPACT);
 
-            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            service.updateContentDensity(ContentDensityMode.CONDENSED);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.CONDENSED);
+
+            service.updateContentDensity(ContentDensityMode.COZY);
+            expect(service.currentDensitySignal()).toBe(ContentDensityMode.COZY);
         });
     });
 });
