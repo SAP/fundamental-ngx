@@ -1,6 +1,5 @@
-import { Component, ElementRef, signal } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Component, ElementRef, Signal, signal, WritableSignal } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { contentDensityObserverProviders } from '../providers/content-density-observer-providers';
@@ -11,19 +10,20 @@ import { ContentDensityObserver } from './content-density-observer.service';
 import { GlobalContentDensityService } from './global-content-density.service';
 
 class MockContentDensityStorage implements ContentDensityStorage {
-    private _density$ = new BehaviorSubject<ContentDensityMode>(ContentDensityMode.COZY);
+    readonly contentDensity: Signal<ContentDensityMode>;
 
-    getContentDensity(): Observable<ContentDensityMode> {
-        return this._density$.asObservable();
+    private _contentDensity: WritableSignal<ContentDensityMode> = signal(ContentDensityMode.COZY);
+
+    constructor() {
+        this.contentDensity = this._contentDensity.asReadonly();
     }
 
-    setContentDensity(density: ContentDensityMode): Observable<void> {
-        this._density$.next(density);
-        return of(undefined);
+    setContentDensity(density: ContentDensityMode): void {
+        this._contentDensity.set(density);
     }
 
     setDensityDirectly(density: ContentDensityMode): void {
-        this._density$.next(density);
+        this._contentDensity.set(density);
     }
 }
 
