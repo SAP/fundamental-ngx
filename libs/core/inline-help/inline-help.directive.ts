@@ -61,11 +61,11 @@ export class InlineHelpDirective implements OnInit {
     /** Whether the popover should close when a click is made outside its boundaries. */
     readonly closeOnOutsideClick = input(false);
 
+    /** @hidden */
+    _describedBy = '';
+
     /** @hidden Internal body ID for ARIA */
     protected _bodyId = '';
-
-    /** @hidden */
-    protected _describedBy = '';
 
     /** @hidden */
     protected _bodyRole = 'tooltip';
@@ -118,12 +118,6 @@ export class InlineHelpDirective implements OnInit {
 
         // Apply additional inline help classes
         this._applyAdditionalInlineHelpClass();
-
-        // Initialize popover configuration for inline help
-        // This ensures the proper configuration is set
-        this._popoverService.noArrow.set(false);
-        this._popoverService.closeOnEscapeKey.set(false);
-        this._popoverService.additionalBodyClass.set(this._additionalBodyClass);
     }
 
     /** @hidden */
@@ -154,7 +148,6 @@ export class InlineHelpDirective implements OnInit {
         }
 
         this._additionalBodyClass = classes;
-        this._popoverService.additionalBodyClass.set(classes);
     }
 
     /** @hidden */

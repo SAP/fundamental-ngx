@@ -2,6 +2,7 @@ import {
     AfterContentInit,
     afterNextRender,
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
@@ -95,7 +96,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     readonly id = input<string>(`fd-popover-${cdkPopoverUniqueId++}`);
 
     /** Whether the popover component should be displayed in mobile mode. */
-    readonly mobile = input(false);
+    readonly mobile = input(false, { transform: booleanAttribute });
 
     /** Config for the popover in mobile mode */
     readonly mobileConfig = input<MobileModeConfig>({ hasCloseButton: true });
@@ -103,7 +104,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     /**
      * Whether the popover should prevent page scrolling when space key is pressed.
      **/
-    readonly preventSpaceKeyScroll = input(true);
+    readonly preventSpaceKeyScroll = input(true, { transform: booleanAttribute });
 
     /** Popover placement */
     readonly placement = input<Placement>('bottom-start');
@@ -120,33 +121,33 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     readonly fillControlMode = input<PopoverFillMode | null>(null);
 
     /** Whether clicking outside popover should close it */
-    readonly closeOnOutsideClick = input(true);
+    readonly closeOnOutsideClick = input(true, { transform: booleanAttribute });
 
     /** Whether escape key should close the popover */
-    readonly closeOnEscapeKey = input(true);
+    readonly closeOnEscapeKey = input(true, { transform: booleanAttribute });
 
     /** Whether the popover is disabled */
-    readonly disabled = input(false);
+    readonly disabled = input(false, { transform: booleanAttribute });
 
     /** Popover trigger events configuration */
     readonly triggers = input<(string | TriggerConfig)[]>(['click']);
 
     /** Whether the popover should trap focus */
-    readonly focusTrapped = input(true);
+    readonly focusTrapped = input(true, { transform: booleanAttribute });
 
     /** Whether focus should be automatically captured when popover opens */
-    readonly focusAutoCapture = input(true);
+    readonly focusAutoCapture = input(true, { transform: booleanAttribute });
 
     /**
      * Whether to move the focus after popover is closed to the last focused element before popover was opened.
      */
-    readonly restoreFocusOnClose = input(true);
+    readonly restoreFocusOnClose = input(true, { transform: booleanAttribute });
 
     /** Whether the arrow should be hidden */
-    readonly noArrow = input(true);
+    readonly noArrow = input(true, { transform: booleanAttribute });
 
     /** Whether scrollbar should be disabled */
-    readonly disableScrollbar = input(false);
+    readonly disableScrollbar = input(false, { transform: booleanAttribute });
 
     /** The element to which the overlay is attached. By default it is body */
     readonly appendTo = input<ElementRef | Element | null>(null);
@@ -161,7 +162,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     readonly cdkPositions = input<ConnectedPosition[] | null>(null);
 
     /** Whether to apply a background overlay */
-    readonly applyOverlay = input(false);
+    readonly applyOverlay = input(false, { transform: booleanAttribute });
 
     /** Additional CSS class for the popover body container */
     readonly additionalBodyClass = input<string | null>(null);
@@ -170,13 +171,13 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     readonly additionalTriggerClass = input<string | null>(null);
 
     /** Whether to close the popover on router navigation start */
-    readonly closeOnNavigation = input(true);
+    readonly closeOnNavigation = input(true, { transform: booleanAttribute });
 
     /** Whether position shouldn't change when popover approaches the corner of page */
-    readonly fixedPosition = input(false);
+    readonly fixedPosition = input(false, { transform: booleanAttribute });
 
     /** Whether the popover body is resizable */
-    readonly resizable = input(false);
+    readonly resizable = input(false, { transform: booleanAttribute });
 
     /** Two-way binding for popover open state */
     readonly isOpen = model(false);
@@ -188,31 +189,31 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
     readonly beforeOpen = output<void>();
 
     /** @hidden */
-    protected readonly templateRef = viewChild('templateRef', { read: TemplateRef<any> });
+    readonly templateRef = viewChild('templateRef', { read: TemplateRef<any> });
 
     /** @hidden */
-    protected readonly container = viewChild('container', { read: ViewContainerRef });
+    readonly container = viewChild('container', { read: ViewContainerRef });
 
     /** @hidden */
-    protected readonly triggerOrigin = viewChild(CdkOverlayOrigin);
+    readonly triggerOrigin = viewChild(CdkOverlayOrigin);
 
     /** @hidden */
-    protected readonly popoverBody = contentChild(PopoverBodyComponent);
+    readonly popoverBody = contentChild(PopoverBodyComponent);
 
     /** @hidden */
-    protected readonly popoverBodyDirective = contentChild(PopoverBodyDirective);
+    readonly popoverBodyDirective = contentChild(PopoverBodyDirective);
 
     /** @hidden */
-    protected readonly popoverControl = contentChild(PopoverControlComponent);
+    readonly popoverControl = contentChild(PopoverControlComponent);
 
     /** @hidden - template for Dialog body content */
-    protected readonly popoverBodyContentTemplate = contentChild<TemplateRef<any>>('popoverBodyContent');
+    readonly popoverBodyContentTemplate = contentChild<TemplateRef<any>>('popoverBodyContent');
 
     /** @hidden - template for Dialog footer content */
-    protected readonly popoverFooterContentTemplate = contentChild<TemplateRef<any>>('popoverFooterContent');
+    readonly popoverFooterContentTemplate = contentChild<TemplateRef<any>>('popoverFooterContent');
 
     /** @hidden */
-    protected get _triggerElement(): HTMLElement | null {
+    get _triggerElement(): HTMLElement | null {
         const trigger = this.trigger();
         if (!trigger) {
             return null;
@@ -327,7 +328,10 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             const effectiveConfig = this._effectiveConfig();
             const triggerValue = this.trigger();
 
-            // Only sync if trigger exists (service is initialized)
+            // Always sync disabled state to service (for both trigger directive and control usage)
+            this._popoverService.disabled.set(effectiveConfig.disabled);
+
+            // Full sync only when trigger is set (for fdPopoverTrigger directive)
             if (triggerValue) {
                 this._syncToService(effectiveConfig, triggerValue);
             }
@@ -536,7 +540,11 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
 
         const triggerElement = this.trigger();
         if (triggerElement && this.mobile()) {
-            this._clickEventListener = this._renderer.listen(this._triggerElement, 'click', () => this.toggle());
+            this._clickEventListener = this._renderer.listen(this._triggerElement, 'click', () => {
+                if (!this.disabled()) {
+                    this.toggle();
+                }
+            });
         }
     }
 

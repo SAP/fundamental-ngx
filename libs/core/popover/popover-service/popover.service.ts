@@ -545,7 +545,7 @@ export class PopoverService {
             this._normalizeTriggers().forEach((trigger) => {
                 this._eventRef.push(
                     this._renderer.listen(this._triggerHtmlElement, trigger.trigger, (event: Event) => {
-                        if (this._ignoreTriggers) {
+                        if (this._ignoreTriggers || this.disabled()) {
                             return;
                         }
                         const closeAction = !!trigger.closeAction;

@@ -799,12 +799,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
                     // Last resort: use the popover's built-in focus management
                     try {
-                        const popoverBody = (popover as any).popoverBody();
+                        const popoverBody = popover.popoverBody();
                         popoverBody?._focusFirstTabbableElement(true);
                     } catch (error) {
                         console.error('Error focusing in popover:', error);
 
-                        const popoverBody = (popover as any).popoverBody();
+                        const popoverBody = popover.popoverBody();
                         const popoverBodyElement = popoverBody?._elementRef?.nativeElement;
                         if (popoverBodyElement) {
                             const firstFocusableElement = popoverBodyElement.querySelector(

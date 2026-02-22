@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { Component, TemplateRef } from '@angular/core';
+import { Component, inject, TemplateRef } from '@angular/core';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
@@ -25,9 +25,9 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     ]
 })
 export class PopoverDialogExampleComponent {
-    constructor(private _dialogService: DialogService) {}
+    private readonly _dialogService = inject(DialogService);
 
-    openDialog(template: TemplateRef<any>): void {
+    openDialog(template: TemplateRef<unknown>): void {
         this._dialogService.open(template, {
             width: '500px',
             responsivePadding: true,

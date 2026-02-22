@@ -66,4 +66,14 @@
             <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
         </fd-popover-body>
     </fd-popover>
+    <fd-popover [closeOnNavigation]="false">
+        <fd-popover-control>
+            <button fd-button>Keep Open on Navigation</button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div [style.padding.px]="12">
+                <p>This popover stays open during router navigation.</p>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
 </div>

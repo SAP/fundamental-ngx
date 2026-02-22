@@ -1,5 +1,6 @@
-import { Component, EventEmitter, signal, ViewChild } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { Subject } from 'rxjs';
 import { MenuComponent } from '../menu.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
 
@@ -16,6 +17,7 @@ describe('MenuTriggerDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: MenuTriggerDirective;
     let menu: Partial<MenuComponent>;
+    let isOpenChangeSubject: Subject<boolean>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -26,10 +28,16 @@ describe('MenuTriggerDirective', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         const isOpenSignal = signal(false);
+        isOpenChangeSubject = new Subject<boolean>();
+
+        // Mock the output() which internally uses OutputEmitterRef
+        // The directive subscribes via outputToObservable or similar pattern
         menu = {
             id: () => 'menu-id',
             isOpen: isOpenSignal,
-            isOpenChange: new EventEmitter<boolean>(),
+            isOpenChange: {
+                subscribe: (callback: (value: boolean) => void) => isOpenChangeSubject.subscribe(callback)
+            },
             set trigger(value) {}
         } as any;
 
@@ -70,6 +78,7 @@ describe('MenuTriggerDirective', () => {
         expect(directive.ariaControls).toBeFalsy();
 
         (menu.isOpen as any).set(true);
+        isOpenChangeSubject.next(true);
         fixture.detectChanges();
         flushMicrotasks();
         tick();

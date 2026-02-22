@@ -10,13 +10,12 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Inject,
+    inject,
     InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -111,18 +110,22 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     submenuVisible = false;
 
     /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    menuService = inject(MenuService, { optional: true });
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     private _hoverSubscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        @Optional() public menuService: MenuService | null,
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu | null
-    ) {}
+    private _submenu = inject<BaseSubmenu | null>(SUBMENU, { optional: true });
+
+    /** @hidden */
+    private _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
     ngOnInit(): void {

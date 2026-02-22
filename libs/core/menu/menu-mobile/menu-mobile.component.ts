@@ -1,20 +1,19 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
-    Inject,
-    Injector,
-    NgZone,
-    OnInit,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation,
     computed,
     effect,
     inject,
+    Injector,
+    OnInit,
     runInInjectionContext,
     signal,
-    untracked
+    TemplateRef,
+    untracked,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, RtlService, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
@@ -35,7 +34,7 @@ import {
 } from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { startWith, take } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import { MenuService } from '../services/menu.service';
@@ -105,32 +104,26 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     private readonly _menuService = inject(MenuService);
 
     /** @hidden */
-    private readonly _ngZone = inject(NgZone);
-
-    /** @hidden */
     private readonly _injector = inject(Injector);
 
     /** @hidden */
-    constructor(@Inject(MENU_COMPONENT) menuComponent: MenuInterface) {
-        super(menuComponent, MobileModeControl.MENU);
+    constructor() {
+        super(inject<MenuInterface>(MENU_COMPONENT), MobileModeControl.MENU);
 
         // Set up effect to watch isOpen changes and open/close dialog
         // This runs synchronously when the signal changes, avoiding timing issues
-        effect(
-            () => {
-                const isOpen = this._component.isOpen();
-                untracked(() => {
-                    if (isOpen && !this.dialogRef) {
-                        // Only open if not already open
-                        this._openDialog();
-                    } else if (!isOpen && this.dialogRef) {
-                        // Only close if currently open
-                        this.dialogRef.close();
-                    }
-                });
-            },
-            { injector: this._injector }
-        );
+        effect(() => {
+            const isOpen = this._component.isOpen();
+            untracked(() => {
+                if (isOpen && !this.dialogRef) {
+                    // Only open if not already open
+                    this._openDialog();
+                } else if (!isOpen && this.dialogRef) {
+                    // Only close if currently open
+                    this.dialogRef.close();
+                }
+            });
+        });
     }
 
     /** @hidden */
@@ -149,30 +142,27 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     backToParentLevel(): void {
         const menuItem = this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].item;
         this._menuService.setActive(false, menuItem);
-        this._executeOnStable(() => {
+        this._executeAfterNextRender(() => {
             menuItem?.focus();
         });
     }
 
     /** @hidden Opens the Dialog */
     private _openDialog(): void {
-        // Run inside NgZone to ensure proper change detection for dialog rendering
-        this._ngZone.run(() => {
-            const config = {
-                mobile: true,
-                disablePaddings: true,
-                ...this.dialogConfig,
-                escKeyCloseable: false,
-                backdropClickCloseable: false
-            };
+        const config = {
+            mobile: true,
+            disablePaddings: true,
+            ...this.dialogConfig,
+            escKeyCloseable: false,
+            backdropClickCloseable: false
+        };
 
-            // Only add container if it's valid (for tests, this might not be set up properly)
-            if (this._elementRef?.nativeElement) {
-                config.container = this._elementRef.nativeElement;
-            }
+        // Only add container if it's valid (for tests, this might not be set up properly)
+        if (this._elementRef?.nativeElement) {
+            config.container = this._elementRef.nativeElement;
+        }
 
-            this.dialogRef = this._dialogService.open(this.dialogTemplate, config);
-        });
+        this.dialogRef = this._dialogService.open(this.dialogTemplate, config);
     }
 
     /** @hidden Listens on Active Path changes and updates mobile view */
@@ -191,14 +181,10 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /**
      * @hidden
-     * Executes a function when the zone is stable.
+     * Executes a function after the next render cycle.
      */
-    private _executeOnStable(fn: () => any): void {
-        if (this._ngZone.isStable) {
-            fn();
-        } else {
-            this._ngZone.onStable.pipe(take(1)).subscribe(fn);
-        }
+    private _executeAfterNextRender(fn: () => void): void {
+        afterNextRender(fn, { injector: this._injector });
     }
 
     /** @hidden Sets menu view, title and isSubmenu flag */
@@ -207,7 +193,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         this.isSubmenu$.set(!!items.length);
         this.title$.set(this._getDialogTitle(lastItem));
         this.view$.set(this._getMenuView(lastItem));
-        this._executeOnStable(() => {
+        this._executeAfterNextRender(() => {
             this._menuService.focusedNode?.item?.focus();
         });
     }

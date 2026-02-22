@@ -1,4 +1,4 @@
-import { InjectionToken, InputSignal, ModelSignal, OutputEmitterRef } from '@angular/core';
+import { InjectionToken, InputSignal, InputSignalWithTransform, ModelSignal, OutputEmitterRef } from '@angular/core';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { MenuItemComponent } from './menu-item/menu-item.component';
@@ -13,7 +13,7 @@ export const MENU_COMPONENT = new InjectionToken<string[]>('MenuInterface');
  * through structural typing even though the types don't perfectly align with MobileMode base.
  */
 export interface MenuInterface extends Omit<MobileMode, 'mobile' | 'mobileConfig'> {
-    mobile: InputSignal<boolean>;
+    mobile: InputSignalWithTransform<boolean, unknown>;
     mobileConfig: InputSignal<MobileModeConfig>;
     activePath: OutputEmitterRef<MenuItemComponent[]>;
     dialogConfig: DialogConfig | null;

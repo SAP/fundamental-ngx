@@ -2,6 +2,7 @@ import {
     AfterContentInit,
     afterNextRender,
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
@@ -27,7 +28,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverConfig, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
@@ -72,10 +73,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     readonly openOnHoverTime = input(0);
 
     /** Aria-label for navigation */
-    readonly ariaLabel = input<Nullable<string>>(null);
+    readonly ariaLabel = input<string | null>(null);
 
     /** Aria-Labelledby for element describing navigation */
-    readonly ariaLabelledby = input<Nullable<string>>(null);
+    readonly ariaLabelledby = input<string | null>(null);
 
     /** Id of the control. */
     readonly id = input(`fd-menu-${menuUniqueId++}`);
@@ -88,7 +89,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     readonly config = input<PopoverConfig>({});
 
     /** Whether the menu should be displayed in mobile mode */
-    readonly mobile = input(false);
+    readonly mobile = input(false, { transform: booleanAttribute });
 
     /** Mobile mode configuration */
     readonly mobileConfig = input<MobileModeConfig>({
@@ -101,16 +102,16 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     readonly placement = input<Placement>('bottom-start');
 
     /** Whether to close popover on escape key */
-    readonly closeOnEscapeKey = input(true);
+    readonly closeOnEscapeKey = input(true, { transform: booleanAttribute });
 
     /** Whether to auto-capture focus when opened */
-    readonly focusAutoCapture = input(true);
+    readonly focusAutoCapture = input(true, { transform: booleanAttribute });
 
     /** Whether the menu/popover is disabled */
-    readonly disabled = input(false);
+    readonly disabled = input(false, { transform: booleanAttribute });
 
     /** Whether to disable scrollbar */
-    readonly disableScrollbar = input(false);
+    readonly disableScrollbar = input(false, { transform: booleanAttribute });
 
     /** Trigger events for opening/closing */
     readonly triggers = input<(string | TriggerConfig)[]>(['click']);
@@ -124,13 +125,13 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     readonly fillControlMode = input<PopoverFillMode | null>(null);
 
     /** Whether to close on outside click */
-    readonly closeOnOutsideClick = input(true);
+    readonly closeOnOutsideClick = input(true, { transform: booleanAttribute });
 
     /** Whether to hide the arrow */
-    readonly noArrow = input(true);
+    readonly noArrow = input(true, { transform: booleanAttribute });
 
     /** Whether the popover should trap focus within its boundaries */
-    readonly focusTrapped = input(true);
+    readonly focusTrapped = input(true, { transform: booleanAttribute });
 
     /** Additional CSS classes for the popover body container */
     readonly additionalBodyClass = input<string | null>(null);
@@ -157,6 +158,12 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         return this._menuItems() as readonly MenuItemComponent[];
     }
 
+    /** @hidden */
+    _navContainerRole = 'menu';
+
+    /** @hidden */
+    _menuListContainerRole = 'none';
+
     /** @hidden Reference to the menu root template */
     protected readonly _menuRootTemplate = viewChild<TemplateRef<any>>('menuRootTemplate');
 
@@ -168,12 +175,6 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     /** @hidden Menu item segmented item options */
     protected readonly _segmentedButtonOptions = contentChildren(SegmentedButtonOptionDirective);
-
-    /** @hidden */
-    protected _navContainerRole = 'menu';
-
-    /** @hidden */
-    protected _menuListContainerRole = 'none';
 
     /** @hidden */
     protected get hasAddons(): boolean {
