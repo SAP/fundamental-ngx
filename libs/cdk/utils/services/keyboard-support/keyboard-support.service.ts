@@ -1,8 +1,8 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, TAB, UP_ARROW, hasModifierKey } from '@angular/cdk/keycodes';
 import { DestroyRef, Injectable, OnDestroy, QueryList, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, merge } from 'rxjs';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, Subject, merge } from 'rxjs';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { KeyUtil } from '../../functions';
 import { destroyObservable } from '../../helpers/destroy-observable';
@@ -73,7 +73,10 @@ export class KeyboardSupportService<T> implements OnDestroy {
             onKeyCode: number,
             escapeDirection: FocusEscapeDirection
         ): void => {
-            listItem.keyDown
+            // Convert OutputEmitterRef to observable
+            const keyDown$: Observable<KeyboardEvent> = outputToObservable(listItem.keyDown);
+
+            keyDown$
                 .pipe(
                     takeUntil(unsubscribe$),
                     filter((event) => KeyUtil.isKeyCode(event, onKeyCode)),

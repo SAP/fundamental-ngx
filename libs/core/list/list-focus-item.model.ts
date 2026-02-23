@@ -1,11 +1,10 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, EventEmitter, HostListener, Input, computed, inject, signal } from '@angular/core';
+import { computed, Directive, ElementRef, HostListener, inject, Input, output, signal } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
 @Directive()
 export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInterface {
-    /** tab index attribute */
     @Input()
     set tabindex(value: number) {
         this._tabIndex$.set(coerceNumberProperty(value, -1));
@@ -22,7 +21,7 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     value: T;
 
     /** @hidden Implementation of KeyboardSupportItemInterface */
-    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+    readonly keyDown = output<KeyboardEvent>();
 
     /** @hidden */
     readonly elementRef: ElementRef = inject(ElementRef);
