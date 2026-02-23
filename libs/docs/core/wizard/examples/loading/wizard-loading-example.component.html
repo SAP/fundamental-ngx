@@ -9,12 +9,14 @@
             <fd-wizard>
                 <fd-wizard-navigation>
                     <ul fd-wizard-progress-bar size="lg" role="list" aria-label="Wizard Steps">
-                        <li *fdkRepeat="3; let i = index" fd-wizard-step [status]="i === 0 ? 'current' : 'upcoming'">
-                            <fd-skeleton type="rectangle" width="32px" height="32px"></fd-skeleton>
-                            <fd-wizard-content size="lg">
-                                <fd-skeleton type="text" width="60%"></fd-skeleton>
-                            </fd-wizard-content>
-                        </li>
+                        @for (i of loadingRange; track i) {
+                            <li fd-wizard-step [status]="i === 0 ? 'current' : 'upcoming'">
+                                <fd-skeleton type="rectangle" width="32px" height="32px"></fd-skeleton>
+                                <fd-wizard-content size="lg">
+                                    <fd-skeleton type="text" width="60%"></fd-skeleton>
+                                </fd-wizard-content>
+                            </li>
+                        }
                     </ul>
                 </fd-wizard-navigation>
                 <div fd-bar barDesign="footer">

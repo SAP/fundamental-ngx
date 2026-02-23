@@ -26,7 +26,7 @@ import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { debounceTime } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { range } from '@fundamental-ngx/cdk/utils';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TimelineNodeHeaderDirective } from './components/timeline-node-header/timeline-node-header.directive';
 import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
@@ -53,7 +53,6 @@ import { TimeLinePositionStrategy, TimelineAxis, TimelineSidePosition } from './
     imports: [
         TimelineFirstListOutletDirective,
         TimelineSecondListOutletDirective,
-        RepeatDirective,
         TimelineNodeComponent,
         TimelineNodeHeaderDirective,
         SkeletonComponent
@@ -111,6 +110,9 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /** @hidden */
     _loading = true;
+
+    /** @hidden */
+    readonly _loadingRange = range(3);
 
     /** @hidden
      * Differ used to find the changes in the data provided by the data source.

@@ -9,6 +9,7 @@ export * from './lodash-utils';
 export * from './module-deprecations-provider';
 export * from './parser-file-size';
 export * from './random-color-accent';
+export * from './range';
 export * from './resize-observable';
 export * from './scroll';
 export * from './uuidv4-generator';

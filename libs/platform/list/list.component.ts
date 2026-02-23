@@ -39,7 +39,7 @@ import { delay, tap } from 'rxjs/operators';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, Nullable, RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, range } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import {
@@ -104,7 +104,6 @@ let nextListId = 0;
         InfiniteScrollDirective,
         ListItemComponent,
         NgTemplateOutlet,
-        RepeatDirective,
         SkeletonComponent,
         FdTranslatePipe,
         AsyncPipe
@@ -318,6 +317,9 @@ export class ListComponent<T>
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
     _firstLoadingDone = false;
+
+    /** @hidden */
+    readonly _loadingRange = range(3);
 
     /**
      * @hidden

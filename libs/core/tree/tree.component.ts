@@ -30,13 +30,13 @@ import {
     CssClassBuilder,
     KeyUtil,
     Nullable,
-    RepeatDirective,
     RtlService,
     SelectComponentRootToken,
     SelectableItemDirective,
     SelectableListValueType,
     SelectionService,
-    applyCssClass
+    applyCssClass,
+    range
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
@@ -79,14 +79,7 @@ import { TreeService } from './tree.service';
             useClass: TreeDataSourceParser
         }
     ],
-    imports: [
-        NgTemplateOutlet,
-        RepeatDirective,
-        SkeletonComponent,
-        TreeItemDirective,
-        SelectableItemDirective,
-        FdTranslatePipe
-    ]
+    imports: [NgTemplateOutlet, SkeletonComponent, TreeItemDirective, SelectableItemDirective, FdTranslatePipe]
 })
 export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeItem = FdTreeItemType<P>>
     implements CssClassBuilder, OnInit, OnChanges, AfterViewInit, SelectComponentRootToken, OnDestroy
@@ -184,6 +177,9 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
      * Used for skeleton to appear before first meaningful data being loaded.
      */
     _initialDataLoaded = false;
+
+    /** @hidden */
+    readonly _loadingRange = range(5);
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);

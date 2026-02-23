@@ -1,12 +1,12 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
-import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE } from '@fundamental-ngx/cdk/utils';
+import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE, range } from '@fundamental-ngx/cdk/utils';
 
 import { FdLanguageKeyIdentifier } from '@fundamental-ngx/i18n';
 import { DatetimeAdapter } from './datetime-adapter';
 import { FdDate } from './fd-date';
-import { range, toIso8601 } from './fd-date.utils';
+import { toIso8601 } from './fd-date.utils';
 
 const AM_DAY_PERIOD_DEFAULT = 'AM';
 const PM_DAY_PERIOD_DEFAULT = 'PM';

@@ -28,9 +28,9 @@
                 }"
             >
                 <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
-                <fd-message-strip *fdkRepeat="10; let index = index">
-                    A new notification has arrived. {{ index }}
-                </fd-message-strip>
+                @for (index of notificationRange; track index) {
+                    <fd-message-strip> A new notification has arrived. {{ index }} </fd-message-strip>
+                }
             </div>
         </fd-popover>
     </ng-template>

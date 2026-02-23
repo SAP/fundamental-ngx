@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { range } from '@fundamental-ngx/cdk/utils';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
@@ -9,6 +9,8 @@ import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
     templateUrl: './card-loading-example.component.html',
     styleUrls: ['./card-loading-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CardModule, SkeletonComponent, ListModule, RepeatDirective]
+    imports: [CardModule, SkeletonComponent, ListModule]
 })
-export class CardLoadingExampleComponent {}
+export class CardLoadingExampleComponent {
+    readonly loadingRange = range(3);
+}

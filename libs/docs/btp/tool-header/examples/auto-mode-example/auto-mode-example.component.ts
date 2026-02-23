@@ -14,7 +14,7 @@ import {
     ToolHeaderProductSwitchComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
-import { ClickedDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, range } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
@@ -48,7 +48,6 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
         PopoverBodyHeaderDirective,
         PopoverComponent,
         PopoverControlComponent,
-        RepeatDirective,
         PopoverBodyDirective,
         NgStyle,
         ProductSwitchBodyComponent,
@@ -75,6 +74,7 @@ export class ToolHeaderAutoModeExampleComponent {
 
     /** Current content density, automatically derived from mode (desktop=COMPACT, tablet/phone=COZY) */
     currentContentDensity: ContentDensityMode;
+    readonly notificationRange = range(10);
 
     actions: FdbToolHeaderActionButton[] = [
         {
