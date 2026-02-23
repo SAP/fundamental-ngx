@@ -58,13 +58,20 @@ export function set<T = any>(obj: T, path: string | string[], value: any): T {
 /**
  * Deep clones an object, handling functions and other non-cloneable values.
  * For objects with functions or class instances, it creates a new object and copies properties.
+ * Observables and class instances are copied by reference to avoid circular reference issues.
  * @param obj The object to clone
+ * @param seen WeakSet to track visited objects and prevent infinite recursion
  * @returns The cloned object
  */
-export function cloneDeep<T>(obj: T): T {
+export function cloneDeep<T>(obj: T, seen = new WeakSet()): T {
     // Handle primitives, null, and undefined
     if (obj == null || typeof obj !== 'object') {
         return obj;
+    }
+
+    // Detect circular references FIRST
+    if (seen.has(obj as any)) {
+        return obj; // Return the object by reference if we've seen it before
     }
 
     // Handle Date
@@ -72,35 +79,51 @@ export function cloneDeep<T>(obj: T): T {
         return new Date(obj.getTime()) as any;
     }
 
-    // Handle Array
-    if (Array.isArray(obj)) {
-        return obj.map((item) => cloneDeep(item)) as any;
-    }
-
     // Handle RegExp
     if (obj instanceof RegExp) {
         return new RegExp(obj.source, obj.flags) as any;
     }
 
+    // Check if this is a plain object or array BEFORE processing
+    // If it's a class instance (like Observable), return by reference
+    const proto = Object.getPrototypeOf(obj);
+    const isPlainObject = proto === Object.prototype || proto === null;
+    const isArray = Array.isArray(obj);
+
+    // If it's not a plain object or array, and it's not one of the special types below,
+    // return by reference (handles Observables, class instances, etc.)
+    if (!isPlainObject && !isArray && !(obj instanceof Map) && !(obj instanceof Set)) {
+        return obj;
+    }
+
+    // Handle Array
+    if (isArray) {
+        seen.add(obj as any);
+        return (obj as any[]).map((item) => cloneDeep(item, seen)) as any;
+    }
+
     // Handle Map
     if (obj instanceof Map) {
+        seen.add(obj as any);
         const clonedMap = new Map();
         obj.forEach((value, key) => {
-            clonedMap.set(cloneDeep(key), cloneDeep(value));
+            clonedMap.set(cloneDeep(key, seen), cloneDeep(value, seen));
         });
         return clonedMap as any;
     }
 
     // Handle Set
     if (obj instanceof Set) {
+        seen.add(obj as any);
         const clonedSet = new Set();
         obj.forEach((value) => {
-            clonedSet.add(cloneDeep(value));
+            clonedSet.add(cloneDeep(value, seen));
         });
         return clonedSet as any;
     }
 
-    // Handle plain objects
+    // Handle plain objects only
+    seen.add(obj as any);
     const clonedObj = {} as T;
     for (const key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -109,7 +132,7 @@ export function cloneDeep<T>(obj: T): T {
             if (typeof value === 'function' || typeof value === 'symbol') {
                 (clonedObj as any)[key] = value;
             } else {
-                (clonedObj as any)[key] = cloneDeep(value);
+                (clonedObj as any)[key] = cloneDeep(value, seen);
             }
         }
     }
@@ -172,7 +195,7 @@ function deepMergeInto<T>(target: T, source: Partial<T>): void {
                 // Recursively merge plain objects
                 deepMergeInto(targetValue, sourceValue as any);
             } else {
-                // Clone plain objects
+                // Clone plain objects (cloneDeep handles class instances like Observables)
                 (target as any)[key] = cloneDeep(sourceValue);
             }
         }
@@ -210,6 +233,7 @@ export function mergeWith<T>(
                 if (targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
                     (result as any)[key] = mergeWith(targetValue, sourceValue as any, customizer);
                 } else {
+                    // cloneDeep handles class instances like Observables
                     (result as any)[key] = cloneDeep(sourceValue);
                 }
             } else {
