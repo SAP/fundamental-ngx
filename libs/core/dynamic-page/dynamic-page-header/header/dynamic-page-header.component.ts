@@ -1,20 +1,18 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
+    computed,
     ContentChild,
+    effect,
     ElementRef,
+    inject,
     Input,
-    OnDestroy,
+    input,
     OnInit,
     Renderer2,
-    ViewEncapsulation,
-    computed,
-    input
+    ViewEncapsulation
 } from '@angular/core';
-
-import { Subject } from 'rxjs';
 
 import { BreadcrumbComponent, FD_BREADCRUMB_COMPONENT } from '@fundamental-ngx/core/breadcrumb';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
@@ -51,7 +49,7 @@ let dynamicPageTitleId = 0;
     ],
     imports: [NgTemplateOutlet, IgnoreClickOnSelectionDirective]
 })
-export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
+export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, DynamicPageHeader {
     /** Title property for dynamic page */
     @Input()
     title: string;
@@ -121,16 +119,24 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** Dynamic page title id, it has some default value if not set,  */
     titleId = input('fd-dynamic-page-title-id-' + dynamicPageTitleId++);
 
-    /** @hidden **/
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    readonly _dynamicPageService = inject(DynamicPageService);
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        readonly _dynamicPageService: DynamicPageService,
-        private _changeDetRef: ChangeDetectorRef
-    ) {}
+    private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+
+    /** @hidden */
+    constructor() {
+        // React to size changes for breadcrumb resize
+        effect(() => {
+            const size = this._dynamicPageService.responsiveSize();
+            this._size = size;
+            this._breadcrumbComponent?.onResize();
+        });
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -143,37 +149,8 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    /**
-     * sets size which in turn adds corresponding padding for the size type.
-     * size can be `small`, `medium`, `large`, or `extra-large`.
-     */
-    set size(sizeType: DynamicPageResponsiveSize) {
-        this._setSize(sizeType);
-        this._size = sizeType;
-    }
-
-    /** @hidden */
     stopPropagation(event: MouseEvent): void {
         event.stopPropagation();
-    }
-
-    /**
-     * @hidden
-     * sets the padding classes
-     * @param sizeType
-     */
-    private _setSize(sizeType: DynamicPageResponsiveSize): void {
-        setTimeout(() => {
-            this._breadcrumbComponent?.onResize();
-            this._globalActions?._setSize(sizeType);
-            this._contentToolbar?._setSize(sizeType);
-            this._changeDetRef.detectChanges();
-        });
     }
 
     /** @hidden */

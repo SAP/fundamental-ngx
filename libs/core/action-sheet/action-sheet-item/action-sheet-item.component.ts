@@ -2,13 +2,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter,
     HostListener,
     Input,
-    Output,
     ViewChild,
     ViewEncapsulation,
     input,
+    output,
     signal
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
@@ -75,8 +74,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     buttonComponent: ElementRef;
 
     /** @hidden */
-    @Output()
-    keyDown = new EventEmitter<KeyboardEvent>();
+    readonly keyDown = output<KeyboardEvent>();
 
     /** The button type for styling (e.g., 'transparent', 'emphasized'). */
     readonly fdType = input<ButtonType>(defaultButtonType);
