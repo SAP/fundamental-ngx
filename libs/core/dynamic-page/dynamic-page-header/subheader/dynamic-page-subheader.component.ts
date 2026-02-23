@@ -55,7 +55,6 @@ export class DynamicPageSubheaderComponent {
     @Input()
     set collapsed(collapsed: boolean) {
         this._dynamicPageService.collapsed.set(collapsed);
-        this._dynamicPageService.subheaderVisibilityChange.next();
     }
 
     get collapsed(): boolean {
