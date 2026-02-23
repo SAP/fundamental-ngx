@@ -1,41 +1,35 @@
-import { coerceNumberProperty } from '@angular/cdk/coercion';
-import {
-    Directive,
-    ElementRef,
-    EventEmitter,
-    HostListener,
-    Input,
-    computed,
-    inject,
-    input,
-    signal
-} from '@angular/core';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { computed, Directive, ElementRef, inject, input, output, signal } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
-@Directive()
+@Directive({
+    host: {
+        '(focusin)': 'onFocus($event)'
+    }
+})
 export abstract class CardFocusItem<T = any> implements KeyboardSupportItemInterface {
     /**
-     * tab index attribute
+     * Tab index attribute
      */
-    @Input()
-    set tabindex(value: number) {
-        this._tabIndex$.set(coerceNumberProperty(value, -1));
-    }
-    get tabindex(): number {
-        return this._normalizedTabIndex$();
-    }
+    readonly tabindex = input<number | undefined, NumberInput>(undefined, {
+        // Preserve the "unset" state (null/undefined) so the first item can default
+        // to tabindex=0 only when no input was provided. If we coerced null/undefined
+        // to -1, an explicit "unset" would be indistinguishable from a real -1 value,
+        // which changes legacy behavior.
+        transform: (value: NumberInput) => (value == null ? undefined : coerceNumberProperty(value, -1))
+    });
 
     /**
-     * value of the list item.
+     * Value of the list item.
      */
-    value = input<T>();
+    readonly value = input<T>();
 
     /**
      * @hidden
-     * implementation of KeyboardSupportItemInterface
+     * Implementation of KeyboardSupportItemInterface
      */
-    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+    readonly keyDown = output<KeyboardEvent>();
 
     /** @hidden */
     readonly elementRef: ElementRef = inject(ElementRef);
@@ -50,22 +44,24 @@ export abstract class CardFocusItem<T = any> implements KeyboardSupportItemInter
     protected _isFirstItem$ = signal(false);
 
     /** @hidden */
-    protected _tabIndex$ = signal<number | undefined>(undefined);
-
-    /** @hidden */
     protected _normalizedTabIndex$ = computed(() => {
-        if (this._isFirstItem$() && isNaN(this._tabIndex$() as number)) {
+        const tabIndexValue = this.tabindex();
+
+        // If no explicit tabindex was set and this is the first item, default to 0.
+        if (this._isFirstItem$() && tabIndexValue == null) {
             return 0;
         }
-        return this._tabIndex$() ?? -1;
+
+        return tabIndexValue ?? -1;
     });
 
-    /** @hidden */
-    @HostListener('focusin', ['$event'])
-    protected onFocus(event: FocusEvent): void {
-        this._focused$.next({
-            focusedWithin: event.target !== this.elementRef?.nativeElement
-        });
+    /**
+     * Get the current tab index.
+     * Returns the internal tab index which may have been modified programmatically.
+     * This getter is a replacement for directly binding to the `tabindex` input, which may not reflect the actual tab index if it was left unset and defaulted to 0 for the first item.
+     */
+    getTabIndex(): number {
+        return this._normalizedTabIndex$();
     }
 
     /** @hidden */
@@ -81,5 +77,12 @@ export abstract class CardFocusItem<T = any> implements KeyboardSupportItemInter
     /** @hidden */
     setIsFirst(value: boolean): void {
         this._isFirstItem$.set(value);
+    }
+
+    /** @hidden */
+    protected onFocus(event: FocusEvent): void {
+        this._focused$.next({
+            focusedWithin: event.target !== this.elementRef?.nativeElement
+        });
     }
 }

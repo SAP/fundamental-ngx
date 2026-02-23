@@ -26,7 +26,6 @@ import { DynamicPageModule } from './dynamic-page.module';
             </fd-dynamic-page-content>
         }
     </fd-dynamic-page>`,
-    standalone: true,
     imports: [DynamicPageModule, TabsModule]
 })
 class TestComponent {
@@ -87,16 +86,19 @@ describe('DynamicPageComponent default values', () => {
     }));
 
     it('should handle collapse', () => {
-        const spy = jest.spyOn(<any>dynamicPageComponent, '_setContainerPositions');
+        const spy = jest.spyOn(<any>dynamicPageComponent, '_updateDynamicPageHeight');
 
-        (<any>dynamicPageComponent)._dynamicPageService.subheaderVisibilityChange.next();
+        // Trigger collapsed signal change
+        (<any>dynamicPageComponent)._dynamicPageService.collapsed.set(true);
+        fixture.detectChanges();
 
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should propagate sizes', () => {
-        const propagateSizeSpy = jest.spyOn(<any>dynamicPageComponent, '_propagateSizeToChildren');
+    it('should update size and update dynamic page height', () => {
+        const updateHeightSpy = jest.spyOn(<any>dynamicPageComponent, '_updateDynamicPageHeight');
         dynamicPageComponent.size = 'small';
-        expect(propagateSizeSpy).toHaveBeenCalled();
+        expect(dynamicPageComponent.size).toBe('small');
+        expect(updateHeightSpy).toHaveBeenCalled();
     });
 });
