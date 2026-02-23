@@ -11,6 +11,7 @@ import {
     TemplateRef,
     ViewContainerRef,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     contentChildren,
     inject,
@@ -177,7 +178,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Show select all checkbox
      * @defaultValue false
      */
-    readonly showSelectAll = input(false);
+    readonly showSelectAll = input(false, { transform: booleanAttribute });
 
     /**
      * Maximum height of the dropdown options panel.
@@ -189,19 +190,19 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Controls whether the addon button can receive keyboard focus.
      * @defaultValue false
      */
-    readonly buttonFocusable = input(false);
+    readonly buttonFocusable = input(false, { transform: booleanAttribute });
 
     /**
      *  Whether the autocomplete should be enabled; Enabled by default.
      * @defaultValue true
      */
-    readonly autoComplete = input(true);
+    readonly autoComplete = input(true, { transform: booleanAttribute });
 
     /**
      * Whether list item options should be rendered as byline.
      * @defaultValue false
      */
-    readonly byline = input(false);
+    readonly byline = input(false, { transform: booleanAttribute });
 
     /**
      * Max width of multi combobox dropdown body.
@@ -244,7 +245,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      *
      * @defaultValue false
      */
-    readonly mobile = input(false);
+    readonly mobile = input(false, { transform: booleanAttribute });
 
     /**
      * Controls whether items should be grouped in the dropdown.
@@ -253,7 +254,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      *
      * @defaultValue false
      */
-    group = input(false);
+    group = input(false, { transform: booleanAttribute });
 
     /**
      * Property path for grouping items.
@@ -282,7 +283,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      *
      * @defaultValue false
      */
-    showSecondaryText = input(false);
+    showSecondaryText = input(false, { transform: booleanAttribute });
 
     /**
      * Horizontally align text inside the second column (applicable for two columns layout).
@@ -298,13 +299,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      *
      * @defaultValue true
      */
-    readonly autoResize = input(true);
+    readonly autoResize = input(true, { transform: booleanAttribute });
 
     /**
      * Controls whether clicking the addon button opens the dropdown.
      * @defaultValue true
      */
-    readonly openDropdownOnAddOnClicked = input(true);
+    readonly openDropdownOnAddOnClicked = input(true, { transform: booleanAttribute });
 
     /**
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.

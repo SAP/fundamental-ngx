@@ -18,6 +18,7 @@ import {
     ElementRef,
     Injector,
     InputSignal,
+    InputSignalWithTransform,
     ModelSignal,
     OutputEmitterRef,
     Signal,
@@ -37,7 +38,7 @@ import {
     isOptionItem,
     isSelectableOptionItem
 } from '@fundamental-ngx/cdk/forms';
-import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
+import { RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -66,7 +67,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Determines whether items should be grouped in the dropdown.
      * When enabled, items will be organized into groups based on the `groupKey` property.
      */
-    abstract group: InputSignal<boolean>;
+    abstract group: InputSignalWithTransform<boolean, unknown>;
 
     /**
      * The property name used to group items when `group` is enabled.
@@ -102,7 +103,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Controls whether secondary text should be displayed for each item.
      * When enabled, uses the `secondaryKey` property to extract and display secondary text.
      */
-    abstract showSecondaryText: InputSignal<boolean>;
+    abstract showSecondaryText: InputSignalWithTransform<boolean, unknown>;
 
     /**
      * The property name used as a unique identifier for each item.
@@ -260,7 +261,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Writable signal for overriding the invalid entry message with i18n translations.
      * @hidden
      */
-    protected readonly _invalidEntryMessageOverride = signal<Nullable<string>>(null);
+    protected readonly _invalidEntryMessageOverride = signal<string | null>(null);
 
     /** @hidden */
     protected readonly _elmRef = inject(ElementRef<HTMLElement>);
@@ -347,7 +348,7 @@ export abstract class BaseMultiCombobox<T = any> {
     /**
      * Previous state message before displaying invalid entry error.
      */
-    protected _previousStateMessage: Nullable<string>;
+    protected _previousStateMessage: string | null | undefined;
 
     /**
      * Range selector utility for handling shift+click multi-selection.
