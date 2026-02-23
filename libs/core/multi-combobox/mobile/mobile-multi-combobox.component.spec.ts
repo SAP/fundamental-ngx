@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,6 +29,7 @@ describe('MobileMultiComboboxComponent', () => {
         },
         _dialogDismiss: () => {},
         _dialogApprove: () => {},
+        _selectedSuggestions: signal([]),
         openChange: new EventEmitter<boolean>()
     };
 
@@ -55,6 +56,7 @@ describe('MobileMultiComboboxComponent', () => {
             },
             _dialogDismiss: () => {},
             _dialogApprove: () => {},
+            _selectedSuggestions: signal([]),
             openChange: new EventEmitter<boolean>()
         };
         fixture = TestBed.createComponent(MobileMultiComboboxComponent);
