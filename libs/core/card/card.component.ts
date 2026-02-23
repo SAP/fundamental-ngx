@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter,
     HostListener,
     OnChanges,
     OnDestroy,
@@ -11,7 +10,8 @@ import {
     contentChild,
     forwardRef,
     input,
-    model
+    model,
+    output
 } from '@angular/core';
 import { ColorAccent, CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -205,7 +205,7 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements OnChange
      * @hidden
      * Implementation of KeyboardSupportItemInterface
      */
-    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+    readonly keyDown = output<KeyboardEvent>();
 
     /** @hidden */
     class: string;

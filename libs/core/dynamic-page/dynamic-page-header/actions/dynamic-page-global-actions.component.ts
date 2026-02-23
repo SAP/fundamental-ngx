@@ -1,14 +1,17 @@
 import {
-    AfterContentInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
-    ElementRef,
-    ViewEncapsulation,
-    inject
+    computed,
+    contentChild,
+    effect,
+    inject,
+    Injector,
+    ViewEncapsulation
 } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
+import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
+import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
 @Component({
@@ -18,36 +21,49 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     encapsulation: ViewEncapsulation.None,
     host: {
         role: 'toolbar'
-    },
-    standalone: true
+    }
 })
-export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
+export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions {
     /** @hidden */
-    @ContentChild(ToolbarComponent)
-    _toolbarComponent: ToolbarComponent;
+    protected readonly _toolbarComponent = contentChild(ToolbarComponent);
+
+    /** Whether the toolbar should show overflow (size is small). */
+    protected readonly shouldOverflow = computed(() => this._dynamicPageService?.responsiveSize() === 'small');
 
     /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
-    }
+    private readonly _dynamicPageService = inject(DynamicPageService, { optional: true });
 
-    /** @hidden */
-    _setSize(size: DynamicPageResponsiveSize): void {
-        if (this._toolbarComponent) {
-            this._handleOverflow(size === 'small');
-        }
-    }
+    constructor() {
+        super();
 
-    /** @hidden */
-    private _handleOverflow(shouldBeHidden: boolean): void {
-        this._toolbarComponent.forceOverflow = shouldBeHidden;
-        this._toolbarComponent.shouldOverflow = shouldBeHidden;
-        this._toolbarComponent.detectChanges();
-        setTimeout(() => {
-            this._toolbarComponent.updateCollapsibleItems();
+        // Add toolbar class after render when DOM is ready
+        afterNextRender(() => {
+            this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar);
         });
+
+        // React to size changes
+        effect(() => {
+            const shouldOverflow = this.shouldOverflow();
+            const toolbar = this._toolbarComponent();
+            if (toolbar) {
+                this._handleOverflow(toolbar, shouldOverflow);
+            }
+        });
+    }
+
+    /** @hidden */
+    private _handleOverflow(toolbar: ToolbarComponent, shouldBeHidden: boolean): void {
+        toolbar.forceOverflow = shouldBeHidden;
+        toolbar.shouldOverflow = shouldBeHidden;
+        toolbar.detectChanges();
+        afterNextRender(
+            () => {
+                toolbar.updateCollapsibleItems();
+            },
+            { injector: this._injector }
+        );
     }
 }
