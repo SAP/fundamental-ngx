@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { first } from 'rxjs/operators';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.component';
@@ -8,7 +7,6 @@ import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.componen
 @Component({
     template: ` <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,
     providers: [DynamicPageService],
-    standalone: true,
     imports: [DynamicPageModule]
 })
 class TestComponent {
@@ -47,14 +45,10 @@ describe('DynamicPageHeaderComponent', () => {
     });
 
     it('should toggle collapse', () => {
-        let visibilityChanged = false;
-        component.dynamicPageService.subheaderVisibilityChange
-            .pipe(first())
-            .subscribe(() => (visibilityChanged = true));
         subHeader.collapsed = false;
-        subHeader.collapsed = true;
+        expect(component.dynamicPageService.collapsed()).toBe(false);
 
-        expect(visibilityChanged).toBe(true);
+        subHeader.collapsed = true;
         expect(component.dynamicPageService.collapsed()).toBe(true);
     });
 

@@ -93,7 +93,7 @@ export class NotificationGroupComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.groupHeader()?.ariaControls.set(this.groupList()?.id());
+        this.groupHeader()?.ariaControls.set(this.groupList()?.id() ?? null);
         this.groupHeader()?.expanded.set(this.expanded());
     }
 
