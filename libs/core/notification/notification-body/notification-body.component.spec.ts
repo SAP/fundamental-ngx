@@ -1,10 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: ` <fd-notification-body #notificationBodyRef></fd-notification-body> `,
-    standalone: true,
+    template: `<fd-notification-body #notificationBodyRef></fd-notification-body>`,
     imports: [NotificationModule]
 })
 class TestComponent {
@@ -16,13 +15,11 @@ describe('NotificationBodyComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [TestComponent]
         }).compileComponents();
-    }));
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
@@ -32,7 +29,7 @@ describe('NotificationBodyComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should assign class', () => {
+    it('should assign fd-notification__body class', () => {
         expect(component.notificationBodyRef.nativeElement.className).toContain('fd-notification__body');
     });
 });

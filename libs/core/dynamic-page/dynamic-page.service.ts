@@ -1,22 +1,31 @@
-import { Injectable, signal } from '@angular/core';
-import { Subject } from 'rxjs';
+import { computed, Injectable, signal } from '@angular/core';
+import { DynamicPageResponsiveSize } from './constants';
+import { dynamicPageWidthToSize } from './utils';
 
 @Injectable()
 export class DynamicPageService {
     /** @hidden */
-    collapsed = signal(false);
+    readonly collapsed = signal(false);
 
     /** @hidden */
-    pinned = signal(false);
+    readonly pinned = signal(false);
 
     /** @hidden */
-    pixelsSizeChanged = signal(0);
+    readonly pixelsSizeChanged = signal(0);
 
-    /** @hidden */
-    subheaderVisibilityChange = new Subject<void>();
+    /**
+     * Manual size override. When set, takes precedence over auto-computed size.
+     * Used when autoResponsive is false and size is set manually via input.
+     */
+    readonly manualSizeOverride = signal<DynamicPageResponsiveSize | null>(null);
 
-    /** @hidden */
-    focusLayoutAction = new Subject<void>();
+    /**
+     * Computed responsive size based on pixel width or manual override.
+     * Returns 'small', 'medium', 'large', or 'extra-large'.
+     */
+    readonly responsiveSize = computed<DynamicPageResponsiveSize>(
+        () => this.manualSizeOverride() ?? dynamicPageWidthToSize(this.pixelsSizeChanged())
+    );
 
     /** @hidden */
     toggleCollapsed(): void {

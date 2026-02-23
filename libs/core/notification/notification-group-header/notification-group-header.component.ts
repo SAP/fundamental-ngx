@@ -1,18 +1,9 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostListener,
-    OnInit,
-    ViewEncapsulation,
-    computed,
-    inject,
-    signal
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, ViewEncapsulation } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
 
@@ -32,7 +23,8 @@ import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
         '[attr.title]': 'title()',
         '[attr.aria-controls]': 'ariaControls()',
         '[attr.aria-expanded]': 'expanded()',
-        '(click)': 'toggleExpand()'
+        '(click)': 'toggleExpand()',
+        '(keydown)': '_onKeydown($event)'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,21 +36,20 @@ import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
         }
     ]
 })
-export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit {
+export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective {
     /**
-     * Title for the group header
-     * default value: "Expand/Collapse"
+     * Title for the group header.
+     * Default value is set from i18n translations ("Expand/Collapse").
      */
-    title = signal<Nullable<string>>('');
+    readonly title = signal<string | null>('');
 
     /**
-     * id of the list element that the group header controls
-     * string value
+     * ID of the list element that the group header controls.
      */
-    ariaControls = signal<Nullable<string>>('');
+    readonly ariaControls = signal<string | null>('');
 
     /** @hidden */
-    expanded = signal(false);
+    readonly expanded = signal(false);
 
     /** @hidden */
     protected readonly _buttonIcon = computed(() =>
@@ -69,18 +60,22 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _lang = toSignal(inject(FD_LANGUAGE));
 
     /** @hidden */
-    private _translationResolver = new TranslationResolver();
+    private readonly _translationResolver = new TranslationResolver();
 
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            this.toggleExpand();
-            event.preventDefault();
-        }
+    constructor() {
+        super();
+
+        // Set up translation for title - only sets default if title is empty
+        effect(() => {
+            const lang = this._lang();
+            // Only set from i18n if title hasn't been set externally
+            if (lang && !this.title()) {
+                this.title.set(this._translationResolver.resolve(lang, 'coreNotification.groupHeaderTitle'));
+            }
+        });
     }
 
     /** Method that toggles the Notification list content */
@@ -89,9 +84,10 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
-            this.title.set(this._translationResolver.resolve(lang, 'coreNotification.groupHeaderTitle'));
-        });
+    protected _onKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.toggleExpand();
+            event.preventDefault();
+        }
     }
 }

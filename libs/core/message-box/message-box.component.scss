@@ -17,3 +17,7 @@
         margin-left: 0.5rem;
     }
 }
+
+.fd-message-box .fd-message-box__header .fd-title[class*='fd-title--h'] {
+    --fdTitle_Font_Size: var(--sapFontHeader5Size);
+}
