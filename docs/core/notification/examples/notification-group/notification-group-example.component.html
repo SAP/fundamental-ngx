@@ -28,11 +28,14 @@
                     <fd-message-strip type="warning"> A dismissible warning message strip. </fd-message-strip>
                 </div>
                 <ul fd-notification-list>
+                    <!-- Group with [expanded]="true" starts expanded -->
                     <fd-notification-group [expanded]="true">
+                        <!-- The group header automatically gets aria-controls linked to the group list -->
                         <fd-notification-group-header>
                             <span fd-notification-group-header-title>Today</span>
                         </fd-notification-group-header>
-                        <fd-notification-group-list>
+                        <!-- A custom id can be provided; it will be used for aria-controls on the header -->
+                        <fd-notification-group-list id="today-notifications">
                             <fd-notification>
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
@@ -180,11 +183,12 @@
                         </fd-notification-group-growing-item>
                     </fd-notification-group>
 
+                    <!-- Group without [expanded] starts collapsed -->
                     <fd-notification-group>
                         <fd-notification-group-header>
                             <span fd-notification-group-header-title>Yesterday</span>
                         </fd-notification-group-header>
-                        <fd-notification-group-list>
+                        <fd-notification-group-list id="yesterday-notifications">
                             <fd-notification>
                                 <fd-notification-body>
                                     <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
