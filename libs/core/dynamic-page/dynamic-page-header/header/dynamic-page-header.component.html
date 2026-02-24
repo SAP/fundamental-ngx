@@ -1,8 +1,8 @@
 <div class="fd-dynamic-page__main-container">
     <div class="fd-dynamic-page__breadcrumb-title-container">
-        @if (_dynamicPageBreadcrumbComponent || _actionsSquashed$()) {
+        @if (_dynamicPageBreadcrumbComponent() || _actionsSquashed()) {
             <div class="fd-dynamic-page__breadcrumb-container">
-                @if (_dynamicPageBreadcrumbComponent) {
+                @if (_dynamicPageBreadcrumbComponent()) {
                     <nav
                         aria-label="Breadcrumbs"
                         class="fd-dynamic-page__breadcrumb-wrapper"
@@ -12,7 +12,7 @@
                     </nav>
                 }
 
-                @if (_actionsSquashed$()) {
+                @if (_actionsSquashed()) {
                     <ng-template [ngTemplateOutlet]="dynamicPageLayoutActionsRef"></ng-template>
                 }
             </div>
@@ -28,29 +28,29 @@
                         class="fd-dynamic-page__title"
                         [attr.aria-level]="_headingLevel()"
                         [id]="titleId()"
-                        [class.fd-dynamic-page__title--wrap]="titleWrap"
+                        [class.fd-dynamic-page__title--wrap]="titleWrap()"
                         fdkIgnoreClickOnSelection
                     >
-                        <ng-template [ngTemplateOutlet]="_titleTemplate ? titleRef : defaultTitle"></ng-template>
+                        <ng-template [ngTemplateOutlet]="_titleTemplate() ? titleRef : defaultTitle"></ng-template>
                     </span>
                     <ng-content select="fd-dynamic-page-title-content"></ng-content>
                     <div class="fd-dynamic-page__toolbar-container" (click)="stopPropagation($event)">
                         <ng-template [ngTemplateOutlet]="dynamicPageGlobalActionsRef"></ng-template>
-                        @if (!_actionsSquashed$()) {
+                        @if (!_actionsSquashed()) {
                             <ng-template [ngTemplateOutlet]="dynamicPageLayoutActionsRef"></ng-template>
                         }
                     </div>
                 </div>
-                @if (_dynamicPageService.collapsed() && (subtitle || _subtitleTemplate)) {
+                @if (_dynamicPageService.collapsed() && (subtitle() || _subtitleTemplate())) {
                     <span
-                        role="heading"
-                        [attr.aria-level]="_headingLevel() + 1"
+                        [attr.role]="subtitleHeadingLevel() ? 'heading' : null"
+                        [attr.aria-level]="subtitleHeadingLevel()"
                         class="fd-dynamic-page__subtitle"
-                        [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
+                        [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap()"
                         fdkIgnoreClickOnSelection
                     >
                         <ng-template
-                            [ngTemplateOutlet]="_subtitleTemplate ? subtitleRef : defaultSubtitle"
+                            [ngTemplateOutlet]="_subtitleTemplate() ? subtitleRef : defaultSubtitle"
                         ></ng-template>
                     </span>
                 }
@@ -58,15 +58,15 @@
         </div>
     </div>
 </div>
-@if (!_dynamicPageService.collapsed() && (subtitle || _subtitleTemplate)) {
+@if (!_dynamicPageService.collapsed() && (subtitle() || _subtitleTemplate())) {
     <span
         class="fd-dynamic-page__subtitle"
-        role="heading"
-        [attr.aria-level]="_headingLevel() + 1"
-        [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
+        [attr.role]="subtitleHeadingLevel() ? 'heading' : null"
+        [attr.aria-level]="subtitleHeadingLevel()"
+        [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap()"
         fdkIgnoreClickOnSelection
     >
-        <ng-template [ngTemplateOutlet]="_subtitleTemplate ? subtitleRef : defaultSubtitle"></ng-template>
+        <ng-template [ngTemplateOutlet]="_subtitleTemplate() ? subtitleRef : defaultSubtitle"></ng-template>
     </span>
 }
 <ng-template #dynamicPageGlobalActionsRef>
@@ -77,25 +77,19 @@
 </ng-template>
 <ng-template #titleRef>
     <ng-template
-        [ngTemplateOutlet]="_titleTemplate!.templateRef"
+        [ngTemplateOutlet]="_titleTemplate()!.templateRef"
         [ngTemplateOutletContext]="{ $implicit: _dynamicPageService.collapsed() }"
     ></ng-template>
 </ng-template>
 <ng-template #subtitleRef>
     <ng-template
-        [ngTemplateOutlet]="_subtitleTemplate!.templateRef"
+        [ngTemplateOutlet]="_subtitleTemplate()!.templateRef"
         [ngTemplateOutletContext]="{ $implicit: _dynamicPageService.collapsed() }"
     ></ng-template>
 </ng-template>
 <ng-template #defaultSubtitle>
-    {{ subtitle }}
-</ng-template>
-<ng-template #titleRef>
-    <ng-template
-        [ngTemplateOutlet]="_titleTemplate!.templateRef"
-        [ngTemplateOutletContext]="{ $implicit: _dynamicPageService.collapsed() }"
-    ></ng-template>
+    {{ subtitle() }}
 </ng-template>
 <ng-template #defaultTitle>
-    {{ title }}
+    {{ title() }}
 </ng-template>

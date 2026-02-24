@@ -1,13 +1,13 @@
 import {
-    AfterViewInit,
+    afterNextRender,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     computed,
-    ContentChild,
+    contentChild,
     effect,
     ElementRef,
     inject,
-    Input,
     input,
     OnInit,
     Renderer2,
@@ -15,10 +15,10 @@ import {
 } from '@angular/core';
 
 import { BreadcrumbComponent, FD_BREADCRUMB_COMPONENT } from '@fundamental-ngx/core/breadcrumb';
-import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
+import { DYNAMIC_PAGE_HEADER_TOKEN } from '@fundamental-ngx/core/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { IgnoreClickOnSelectionDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { IgnoreClickOnSelectionDirective } from '@fundamental-ngx/cdk/utils';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
@@ -49,75 +49,106 @@ let dynamicPageTitleId = 0;
     ],
     imports: [NgTemplateOutlet, IgnoreClickOnSelectionDirective]
 })
-export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, DynamicPageHeader {
-    /** Title property for dynamic page */
-    @Input()
-    title: string;
+export class DynamicPageHeaderComponent implements OnInit {
+    /**
+     * The title text displayed in the dynamic page header.
+     * @default ''
+     */
+    readonly title = input('');
 
-    /** Whether title should wrap instead of truncation. */
-    @Input()
-    titleWrap = false;
+    /**
+     * Whether the title text should wrap to multiple lines instead of truncating with ellipsis.
+     * @default false
+     */
+    readonly titleWrap = input(false, { transform: booleanAttribute });
 
-    /** Subtitle property for dynamic page */
-    @Input()
-    subtitle: string;
+    /**
+     * The subtitle text displayed below the title in the dynamic page header.
+     * @default ''
+     */
+    readonly subtitle = input('');
 
-    /** Whether subtitle should wrap instead of truncation. */
-    @Input()
-    subtitleWrap = false;
+    /**
+     * Whether the subtitle text should wrap to multiple lines instead of truncating with ellipsis.
+     * @default false
+     */
+    readonly subtitleWrap = input(false, { transform: booleanAttribute });
+
+    /**
+     * The heading level (h1-h6) for the dynamic page title.
+     * Determines the semantic hierarchy for accessibility and SEO.
+     * @default 2
+     */
+    readonly headingLevel = input<HeadingLevel>(2);
+
+    /**
+     * The heading level (h1-h6) for the dynamic page subtitle.
+     * When provided, the subtitle will be rendered as a semantic heading with role="heading".
+     * When not provided (undefined/null), the subtitle is rendered as plain text without a heading role.
+     * @default undefined
+     */
+    readonly subtitleHeadingLevel = input<HeadingLevel | undefined | null>(undefined);
+
+    /**
+     * The unique ID for the dynamic page title element.
+     * Used for ARIA relationships and programmatic reference.
+     * @default 'fd-dynamic-page-title-id-{auto-increment}'
+     */
+    readonly titleId = input(`fd-dynamic-page-title-id-${++dynamicPageTitleId}`);
 
     /**
      * @hidden
-     * Template used to provide a custom content for the subtitle page header area.
+     * Content child query for custom subtitle template.
+     * When provided via fdDynamicPageHeaderSubtitle directive, overrides the subtitle text input.
      */
-    @ContentChild(DynamicPageHeaderSubtitleDirective)
-    _subtitleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
+    readonly _subtitleTemplate = contentChild(DynamicPageHeaderSubtitleDirective);
 
     /**
      * @hidden
-     * Template used to provide a custom content for the title page header area.
+     * Content child query for custom title template.
+     * When provided via fdDynamicPageHeaderTitle directive, overrides the title text input.
      */
-    @ContentChild(DynamicPageHeaderTitleDirective)
-    _titleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
+    readonly _titleTemplate = contentChild(DynamicPageHeaderTitleDirective);
 
     /** @hidden */
-    @ContentChild(FD_DYNAMIC_PAGE_BREADCRUMB_COMPONENT)
-    _dynamicPageBreadcrumbComponent: DynamicPageBreadcrumbComponent;
+    readonly _dynamicPageBreadcrumbComponent = contentChild(FD_DYNAMIC_PAGE_BREADCRUMB_COMPONENT, {
+        read: DynamicPageBreadcrumbComponent
+    });
 
     /** @hidden */
-    @ContentChild(FD_BREADCRUMB_COMPONENT)
-    _breadcrumbComponent: BreadcrumbComponent;
+    readonly _breadcrumbComponent = contentChild(FD_BREADCRUMB_COMPONENT, { read: BreadcrumbComponent });
 
     /** @hidden */
-    @ContentChild(DynamicPageGlobalActionsComponent)
-    _globalActions: DynamicPageGlobalActionsComponent;
+    readonly _globalActions = contentChild(DynamicPageGlobalActionsComponent);
 
     /** @hidden */
-    @ContentChild(DynamicPageLayoutActionsComponent)
-    _layoutActions: DynamicPageLayoutActionsComponent;
+    readonly _layoutActions = contentChild(DynamicPageLayoutActionsComponent);
 
     /** @hidden */
-    @ContentChild(DynamicPageTitleContentComponent)
-    _contentToolbar: DynamicPageTitleContentComponent;
-
-    /** @hidden */
-    _actionsSquashed$ = computed(() => this._dynamicPageService.pixelsSizeChanged() < ActionSquashBreakpointPx);
-
-    /** @hidden */
-    _size: DynamicPageResponsiveSize;
+    readonly _contentToolbar = contentChild(DynamicPageTitleContentComponent);
 
     /**
-     * Heading level of the dynamic page header title.
+     * @hidden
+     * Computed signal indicating whether actions should be displayed in collapsed/squashed mode.
+     * True when viewport width is below the ActionSquashBreakpointPx threshold (1280px).
      */
-    headingLevel = input<HeadingLevel>(2);
+    readonly _actionsSquashed = computed(() => this._dynamicPageService.pixelsSizeChanged() < ActionSquashBreakpointPx);
 
-    /** @hidden */
-    _headingLevel = computed(() =>
+    /**
+     * @hidden
+     * Computed numeric heading level extracted from the headingLevel input.
+     * Strips non-digit characters and returns integer value.
+     */
+    readonly _headingLevel = computed(() =>
         this.headingLevel() ? Number.parseInt(`${this.headingLevel()}`.replace(/\D/g, ''), 10) : 2
     );
 
-    /** Dynamic page title id, it has some default value if not set,  */
-    titleId = input('fd-dynamic-page-title-id-' + dynamicPageTitleId++);
+    /**
+     * @hidden
+     * Tracks the current responsive size of the dynamic page.
+     * Updated by effect when DynamicPageService.responsiveSize changes.
+     */
+    _size: DynamicPageResponsiveSize;
 
     /** @hidden */
     readonly _dynamicPageService = inject(DynamicPageService);
@@ -130,46 +161,48 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, Dynami
 
     /** @hidden */
     constructor() {
-        // React to size changes for breadcrumb resize
+        // React to size changes and update breadcrumb
         effect(() => {
             const size = this._dynamicPageService.responsiveSize();
             this._size = size;
-            this._breadcrumbComponent?.onResize();
+
+            const breadcrumb = this._breadcrumbComponent();
+
+            if (breadcrumb) {
+                // Add custom class on first render
+                addClassNameToElement(
+                    this._renderer,
+                    breadcrumb.elementRef.nativeElement,
+                    'fd-dynamic-page__breadcrumb'
+                );
+            }
+        });
+
+        // Trigger breadcrumb resize after view is fully initialized
+        afterNextRender(() => {
+            const breadcrumb = this._breadcrumbComponent();
+
+            if (breadcrumb && typeof breadcrumb.onResize === 'function') {
+                breadcrumb.onResize();
+            }
         });
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageTitleArea);
+        addClassNameToElement(
+            this._renderer,
+            this._elementRef.nativeElement,
+            DYNAMIC_PAGE_CLASS_NAME.dynamicPageTitleArea
+        );
     }
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._addCustomClassToBreadcrumb();
-    }
-
-    /** @hidden */
+    /**
+     * @hidden
+     * Prevents click events from bubbling up to parent elements.
+     * Used to stop the header collapse toggle when interacting with header content.
+     */
     stopPropagation(event: MouseEvent): void {
         event.stopPropagation();
-    }
-
-    /** @hidden */
-    private _addClassNameToHostElement(className: string): void {
-        addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
-    }
-
-    /** @hidden */
-    private _addClassNameToCustomElement(element: Element, className: string): void {
-        addClassNameToElement(this._renderer, element, className);
-    }
-
-    /** @hidden */
-    private _addCustomClassToBreadcrumb(): void {
-        if (this._breadcrumbComponent) {
-            this._addClassNameToCustomElement(
-                this._breadcrumbComponent.elementRef.nativeElement,
-                DYNAMIC_PAGE_CLASS_NAME.dynamicPageBreadcrumb
-            );
-        }
     }
 }

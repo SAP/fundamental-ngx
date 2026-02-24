@@ -15,8 +15,8 @@ import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 
 @Component({
     template: `
-        <fdp-dynamic-page>
-            <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [size]="size" [background]="background">
+        <fdp-dynamic-page [size]="size" [autoResponsive]="false">
+            <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [background]="background">
                 <fd-breadcrumb>
                     <fd-breadcrumb-item>
                         <a fd-link [attr.href]="'#'">Men</a>
@@ -150,8 +150,9 @@ describe('DynamicPageTitleComponent', () => {
             expect(keyInfoEl).toBeDefined();
         });
         it('should render key info content', async () => {
-            const keyInfoEl = componentDebugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
-            expect(keyInfoEl?.nativeElement.textContent?.trim()).toEqual('Key info content');
+            const keyInfoEl = fixture.debugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
+            expect(keyInfoEl).toBeTruthy();
+            expect(keyInfoEl.nativeElement.textContent?.trim()).toEqual('Key info content');
         });
     });
 });
