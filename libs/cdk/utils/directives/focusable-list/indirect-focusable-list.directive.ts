@@ -14,9 +14,19 @@ export class IndirectFocusableListDirective {
     /** @hidden */
     _focusableList = inject<FocusableListDirective>(FDK_FOCUSABLE_LIST_DIRECTIVE, { optional: true });
     /** @hidden */
-    _indirectChildren = signal<FocusableItem[]>([]);
+    _indirectChildren = signal<ReadonlyArray<FocusableItem>>([], {
+        equal: (a, b) => {
+            // Deep equality: only trigger updates if array contents actually change
+            if (a.length !== b.length) {
+                return false;
+            }
+            return a.every((item, index) => item === b[index]);
+        }
+    });
     /** @hidden */
     _indirectChildrenMap = new Map<FocusableItem, number | (() => number)>();
+    /** @hidden */
+    private _updateTimeout?: ReturnType<typeof setTimeout>;
 
     /** @hidden */
     constructor() {
@@ -41,14 +51,18 @@ export class IndirectFocusableListDirective {
 
     /** @hidden */
     protected _updateIndirectChildren(): void {
-        this._indirectChildren.set(
-            Array.from(this._indirectChildrenMap.entries())
-                .sort(([, orderA], [, orderB]) => {
-                    const orderAValue = typeof orderA === 'function' ? orderA() : orderA;
-                    const orderBValue = typeof orderB === 'function' ? orderB() : orderB;
-                    return orderAValue - orderBValue;
-                })
-                .map(([focusableItem]) => focusableItem)
-        );
+        // Debounce updates by 100ms (matches original RxJS debounceTime)
+        clearTimeout(this._updateTimeout);
+        this._updateTimeout = setTimeout(() => {
+            this._indirectChildren.set(
+                Array.from(this._indirectChildrenMap.entries())
+                    .sort(([, orderA], [, orderB]) => {
+                        const orderAValue = typeof orderA === 'function' ? orderA() : orderA;
+                        const orderBValue = typeof orderB === 'function' ? orderB() : orderB;
+                        return orderAValue - orderBValue;
+                    })
+                    .map(([focusableItem]) => focusableItem)
+            );
+        }, 100);
     }
 }
