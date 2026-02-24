@@ -329,6 +329,9 @@ export class ContentDensityObserver {
                 this._renderer?.removeClass(element?.nativeElement, className);
             });
 
+            // Apply/remove UI5 compact marker attribute
+            this._applyUi5Marker(element?.nativeElement, currentDensity, parentContentDensityEqual);
+
             // Simply remove all modifiers from current element. Content density state is covered by parent element.
             if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
                 return;
@@ -338,6 +341,40 @@ export class ContentDensityObserver {
                 this._renderer?.addClass(element?.nativeElement, modifierClass);
             }
         });
+    }
+
+    /**
+     * Apply or remove UI5 Web Components compact marker.
+     * UI5 Web Components only support cozy (default) and compact modes.
+     * Both COMPACT and CONDENSED fundamental-ngx modes map to UI5 compact.
+     */
+    private _applyUi5Marker(
+        nativeElement: HTMLElement | undefined,
+        currentDensity: ContentDensityMode,
+        parentContentDensityEqual: boolean
+    ): void {
+        if (!this.config.ui5Markers?.enabled || !nativeElement || !this._renderer) {
+            return;
+        }
+
+        const ui5CompactAttribute = 'data-ui5-compact-size';
+
+        // Remove attribute if parent already has the same density (unless alwaysAddModifiers)
+        if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
+            this._renderer.removeAttribute(nativeElement, ui5CompactAttribute);
+            return;
+        }
+
+        // UI5 only has cozy (default) and compact modes
+        // Map: COMPACT -> compact, CONDENSED -> compact, COZY -> remove attribute
+        const isUi5Compact =
+            currentDensity === ContentDensityMode.COMPACT || currentDensity === ContentDensityMode.CONDENSED;
+
+        if (isUi5Compact) {
+            this._renderer.setAttribute(nativeElement, ui5CompactAttribute, '');
+        } else {
+            this._renderer.removeAttribute(nativeElement, ui5CompactAttribute);
+        }
     }
 
     private _isSupported(density: ContentDensityMode): boolean {

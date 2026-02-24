@@ -180,12 +180,48 @@
             <code>modifiers</code> - Customize the CSS class names used for each density mode. Default classes are
             <code>is-compact</code>, <code>is-cozy</code>, and <code>is-condensed</code>.
         </li>
+        <li><code>ui5Markers</code> - Configure UI5 Web Components content density markers (enabled by default).</li>
     </ul>
 </description>
 <component-example>
     <fd-advanced-config-example></fd-advanced-config-example>
 </component-example>
 <code-example [exampleFiles]="advancedConfigExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="ui5-webcomponents" componentName="ui5-webcomponents">
+    UI5 Web Components Integration
+</fd-docs-section-title>
+<description>
+    <p>
+        The content density system automatically integrates with UI5 Web Components by applying the
+        <code>data-ui5-compact-size</code> attribute. This feature is <strong>enabled by default</strong>.
+    </p>
+    <p>
+        UI5 Web Components only support two density modes: <strong>cozy</strong> (default) and <strong>compact</strong>.
+        The mapping is:
+    </p>
+    <ul>
+        <li><code>cozy</code> → No attribute (UI5 default)</li>
+        <li><code>compact</code> → <code>data-ui5-compact-size</code> attribute applied</li>
+        <li><code>condensed</code> → <code>data-ui5-compact-size</code> attribute applied (maps to UI5 compact)</li>
+    </ul>
+    <p>
+        This allows you to use UI5 Web Component Angular wrappers (<code>&#64;fundamental-ngx/ui5-webcomponents</code>)
+        alongside fundamental-ngx components, and they will respond to the same content density settings.
+    </p>
+    <p><strong>Container Directive:</strong></p>
+    <p>
+        For containers that wrap UI5 Web Components, use the <code>fdUi5ContentDensity</code> directive. This directive
+        listens to the <code>GlobalContentDensityService</code> and applies the
+        <code>data-ui5-compact-size</code> attribute to its host element. UI5 components inside the container will
+        inherit the density setting by looking up the DOM tree.
+    </p>
+    <code>&lt;div fdUi5ContentDensity&gt;&lt;ui5-button&gt;Button&lt;/ui5-button&gt;&lt;/div&gt;</code>
+    <p><strong>Disable for specific components:</strong></p>
+    <code>contentDensityObserverProviders(&#123; ui5Markers: &#123; enabled: false &#125; &#125;)</code>
+</description>
 
 <separator></separator>
 

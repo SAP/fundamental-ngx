@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ContentDensityDirective, Ui5ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
 import { DirectionalityComponent } from '../directionality/directionality.component';
@@ -17,7 +17,7 @@ let componentExampleUniqueId = 0;
                     <rtl-switch [label]="id2"></rtl-switch>
                     <background-switch [label]="id"></background-switch>
                 </div>
-                <div class="fd-doc-component" [id]="id2">
+                <div class="fd-doc-component" [id]="id2" fdUi5ContentDensity>
                     <ng-content></ng-content>
                 </div>
             </div>
@@ -32,7 +32,7 @@ let componentExampleUniqueId = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ContentDensityDirective, DirectionalityComponent, ExampleBackgroundComponent]
+    imports: [ContentDensityDirective, Ui5ContentDensityDirective, DirectionalityComponent, ExampleBackgroundComponent]
 })
 export class ComponentExampleComponent {
     readonly hasBackground = input(true);
