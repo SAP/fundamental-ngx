@@ -78,13 +78,13 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
     /** Whether the whole list should be focusable, handy in grids. */
     @Input({ transform: booleanAttribute })
     set focusable(value: boolean) {
-        this._focusable = value;
+        this._focusable.set(value);
 
-        this.setTabbable(this._focusable);
+        this.setTabbable(this._focusable());
     }
 
     get focusable(): boolean {
-        return this._focusable;
+        return this._focusable();
     }
 
     /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
@@ -135,7 +135,7 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
     protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    protected _focusable = false;
+    protected _focusable = signal(false);
 
     /** @hidden */
     private readonly _gridPosition = signal<FocusableListPosition | null>(null);

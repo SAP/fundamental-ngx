@@ -61,12 +61,12 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
     @HostBinding('class.fd-table__row--focusable')
     @Input({ transform: booleanAttribute })
     set focusable(value: boolean) {
-        this._focusable = value;
+        this._focusable.set(value);
 
-        this.setTabbable(this._focusable);
+        this.setTabbable(this._focusable());
     }
     get focusable(): boolean {
-        return this._focusable;
+        return this._focusable();
     }
 
     /** Whether the table row is main row, it's concerned only on pop in mode */
