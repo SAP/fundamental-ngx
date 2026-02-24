@@ -11,7 +11,7 @@
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
                         <ng-template [ngTemplateOutlet]="childContent?.controlTemplate || null"></ng-template>
-                        @if (selectedShown$ | async) {
+                        @if (selectedShown()) {
                             <button
                                 fd-button
                                 glyph="multiselect-all"
@@ -22,7 +22,7 @@
                                 (click)="showSelected()"
                             ></button>
                         }
-                        @if ((selectedShown$ | async) === false) {
+                        @if (selectedShown() === false) {
                             <button
                                 fd-button
                                 glyph="multiselect-all"

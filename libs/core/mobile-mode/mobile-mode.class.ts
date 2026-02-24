@@ -31,10 +31,10 @@ export abstract class MobileModeBase<T extends MobileMode> {
     dialogRef: DialogRef;
 
     /** @hidden */
-    dialogConfig?: DialogConfig;
+    readonly dialogConfig?: DialogConfig;
 
     /** @hidden */
-    mobileConfig: MobileModeConfig;
+    readonly mobileConfig: MobileModeConfig;
 
     /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
@@ -45,6 +45,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
     /** @hidden */
     protected readonly _dialogService = inject(DialogService);
 
+    /** @hidden */
     private readonly _mobileModes = inject<MobileModeConfigToken[]>(MOBILE_MODE_CONFIG, { optional: true }) || [];
 
     /** @hidden */
@@ -59,24 +60,27 @@ export abstract class MobileModeBase<T extends MobileMode> {
     /** @hidden */
     private _getMobileModeConfig(): MobileModeConfig {
         const injectedConfig = this._mobileModes.find((mode) => mode.target === this.target);
+        const componentConfig = this._component.mobileConfig;
 
-        if (injectedConfig || this._component.mobileConfig) {
-            return injectedConfig
-                ? this._mergeConfigs(injectedConfig.config || {}, this._component.mobileConfig || {})
-                : this._component.mobileConfig;
-        } else {
+        if (!injectedConfig && !componentConfig) {
             throw new Error(MOBILE_CONFIG_ERROR);
         }
+
+        if (injectedConfig && componentConfig) {
+            return this._mergeConfigs(injectedConfig.config, componentConfig);
+        }
+
+        return (injectedConfig?.config || componentConfig)!;
     }
 
-    /** @hidden New mobile mode config as a merge of config1 and config2. */
+    /** @hidden Merges two mobile mode configs, with config2 taking precedence. */
     private _mergeConfigs(config1: MobileModeConfig, config2: MobileModeConfig): MobileModeConfig {
         return {
             ...config1,
             ...config2,
             dialogConfig: {
-                ...(config1.dialogConfig && config1.dialogConfig),
-                ...(config2.dialogConfig && config2.dialogConfig)
+                ...config1.dialogConfig,
+                ...config2.dialogConfig
             }
         };
     }
