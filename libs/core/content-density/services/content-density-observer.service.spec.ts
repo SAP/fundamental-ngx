@@ -644,4 +644,130 @@ describe('ContentDensityObserver', () => {
             compactCozyFixture.componentInstance.densityObserver.complete();
         }));
     });
+
+    describe('UI5 content density markers', () => {
+        it('should have ui5Markers enabled by default', () => {
+            expect(observer.config.ui5Markers).toBeDefined();
+            expect(observer.config.ui5Markers?.enabled).toBe(true);
+        });
+
+        it('should not have data-ui5-compact-size attribute when cozy', fakeAsync(() => {
+            tick();
+            const hostElement = component.elementRef.nativeElement;
+            expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(false);
+        }));
+
+        it('should apply data-ui5-compact-size attribute when compact', fakeAsync(() => {
+            const hostElement = component.elementRef.nativeElement;
+
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            tick();
+            fixture.detectChanges();
+
+            expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(true);
+        }));
+
+        it('should apply data-ui5-compact-size attribute when condensed (maps to UI5 compact)', fakeAsync(() => {
+            @Component({
+                selector: 'fd-test-condensed-ui5',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        supportedContentDensity: [ContentDensityMode.COZY, ContentDensityMode.CONDENSED]
+                    })
+                ]
+            })
+            class TestCondensedUi5Component {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestCondensedUi5Component],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const condensedFixture = TestBed.createComponent(TestCondensedUi5Component);
+            condensedFixture.detectChanges();
+            tick();
+
+            mockStorage.setDensityDirectly(ContentDensityMode.CONDENSED);
+            tick();
+            condensedFixture.detectChanges();
+
+            const hostElement = condensedFixture.componentInstance.elementRef.nativeElement;
+            expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(true);
+
+            condensedFixture.componentInstance.densityObserver.complete();
+        }));
+
+        it('should remove data-ui5-compact-size attribute when switching back to cozy', fakeAsync(() => {
+            const hostElement = component.elementRef.nativeElement;
+
+            // Set to compact
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            tick();
+            fixture.detectChanges();
+            expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(true);
+
+            // Set back to cozy
+            mockStorage.setDensityDirectly(ContentDensityMode.COZY);
+            tick();
+            fixture.detectChanges();
+            expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(false);
+        }));
+
+        it('should not apply data-ui5-compact-size attribute when ui5Markers disabled', fakeAsync(() => {
+            @Component({
+                selector: 'fd-test-ui5-disabled',
+                template: '<div></div>',
+                providers: [
+                    contentDensityObserverProviders({
+                        ui5Markers: { enabled: false }
+                    })
+                ]
+            })
+            class TestUi5DisabledComponent {
+                constructor(
+                    readonly densityObserver: ContentDensityObserver,
+                    readonly elementRef: ElementRef
+                ) {}
+            }
+
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [TestUi5DisabledComponent],
+                providers: [
+                    GlobalContentDensityService,
+                    { provide: ContentDensityStorage, useValue: mockStorage },
+                    { provide: DEFAULT_CONTENT_DENSITY, useValue: ContentDensityMode.COZY },
+                    { provide: CONTENT_DENSITY_DIRECTIVE, useValue: null }
+                ]
+            });
+
+            const disabledFixture = TestBed.createComponent(TestUi5DisabledComponent);
+            disabledFixture.detectChanges();
+            tick();
+
+            mockStorage.setDensityDirectly(ContentDensityMode.COMPACT);
+            tick();
+            disabledFixture.detectChanges();
+
+            const hostElement = disabledFixture.componentInstance.elementRef.nativeElement;
+            // CSS class should still be applied
+            expect(hostElement.classList.contains('is-compact')).toBe(true);
+            // But UI5 attribute should NOT be applied
+            expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(false);
+
+            disabledFixture.componentInstance.densityObserver.complete();
+        }));
+    });
 });

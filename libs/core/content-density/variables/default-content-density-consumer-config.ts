@@ -11,5 +11,8 @@ export const defaultContentDensityObserverConfigs: Required<ContentDensityObserv
     defaultContentDensity: ContentDensityMode.COZY,
     debug: false,
     alwaysAddModifiers: false,
-    restrictChildContentDensity: false
+    restrictChildContentDensity: false,
+    ui5Markers: {
+        enabled: true
+    }
 };
