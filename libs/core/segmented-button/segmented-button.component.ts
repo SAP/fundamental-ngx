@@ -24,6 +24,7 @@ import {
     inject,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
     FocusableItemDirective,
@@ -117,8 +118,6 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-    private readonly _onDestroy$ = new Subject<void>();
-
     /** @hidden */
     private readonly _lang$ = inject(FD_LANGUAGE);
 
@@ -139,13 +138,14 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
         private readonly _ngZone: NgZone,
         @Host() private _focusableList: FocusableListDirective
     ) {
-        this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
+        this._focusableList.navigationDirection.set(this.vertical ? 'vertical' : 'horizontal');
         effect(() => {
-            this._focusableList.contentDirection = this._rtlService?.rtl() ? 'rtl' : 'ltr';
+            this._focusableList.contentDirection.set(this._rtlService?.rtl() ? 'rtl' : 'ltr');
         });
-        this._focusableList.itemFocused.pipe(takeUntil(this._onDestroy$)).subscribe((item) => {
+        const itemFocusedSubscription = this._focusableList.itemFocused.subscribe((item) => {
             this._focusedItemId.set(item.id);
         });
+        this._destroyRef.onDestroy(() => itemFocusedSubscription.unsubscribe());
     }
 
     /** @hidden */
@@ -158,7 +158,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
     /** @hidden */
     ngOnInit(): void {
-        this._lang$.pipe(takeUntil(this._onDestroy$)).subscribe((lang: FdLanguage) => {
+        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
             this._groupRoleDescription = this._translationResolver.resolve(
                 lang,
                 'segmentedButton.groupRoleDescription'
@@ -186,15 +186,13 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.vertical) {
-            this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
+            this._focusableList.navigationDirection.set(this.vertical ? 'vertical' : 'horizontal');
         }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._onRefresh$.complete();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._buttons = null as any;
         this._focusableItems = null as any;
     }
@@ -250,7 +248,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
         this._onRefresh$.next();
 
         merge(this._buttons.changes ?? EMPTY, this._focusableItems.changes ?? EMPTY)
-            .pipe(startWith(1), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 if (!this._buttons || !this._focusableItems) {
                     return;

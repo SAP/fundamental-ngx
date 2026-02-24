@@ -102,7 +102,7 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
 
     /** @hidden */
     ngOnInit(): void {
-        this.navigationDirection = 'grid';
+        this.navigationDirection.set('grid');
         this._updateNavigationDirection();
     }
 

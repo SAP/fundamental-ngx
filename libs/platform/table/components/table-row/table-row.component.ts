@@ -160,7 +160,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
-        this.setItems(items);
+        this.setItems(items.toArray());
     }
 
     /** @hidden */
@@ -275,7 +275,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        super.ngOnChanges(changes);
         if ('row' in changes) {
             this._listenToRowExpansion();
         }

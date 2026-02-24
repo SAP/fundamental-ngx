@@ -144,7 +144,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableCellItems(items: QueryList<FocusableItemDirective>) {
-        this.setItems(items);
+        this.setItems(items.toArray());
     }
 
     /** @hidden */
