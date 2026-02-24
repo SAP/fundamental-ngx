@@ -28,8 +28,8 @@
                 }"
             >
                 <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
-                @for (index of notificationRange; track index) {
-                    <fd-message-strip> A new notification has arrived. {{ index }} </fd-message-strip>
+                @for (i of notificationRange; track i) {
+                    <fd-message-strip> A new notification has arrived. {{ i }} </fd-message-strip>
                 }
             </div>
         </fd-popover>

@@ -319,7 +319,7 @@ export class ListComponent<T>
     _firstLoadingDone = false;
 
     /** @hidden */
-    readonly _loadingRange = range(3);
+    readonly loadingRange = range(3);
 
     /**
      * @hidden

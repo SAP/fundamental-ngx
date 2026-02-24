@@ -4,7 +4,7 @@
         [ngTemplateOutletContext]="{ $implicit: 1 }"
     ></ng-template>
     <ng-template #loadingRenderer let-level>
-        @for (_ of _loadingRange; track $index) {
+        @for (_ of loadingRange; track $index) {
             <div role="treeitem" [attr.aria-level]="level" class="fd-tree__item">
                 <div class="fd-tree__item-container">
                     <div class="fd-tree__content">

@@ -112,7 +112,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     _loading = true;
 
     /** @hidden */
-    readonly _loadingRange = range(3);
+    readonly loadingRange = range(3);
 
     /** @hidden
      * Differ used to find the changes in the data provided by the data source.

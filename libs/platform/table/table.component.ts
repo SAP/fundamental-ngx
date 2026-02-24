@@ -762,9 +762,9 @@ export class TableComponent<T = any>
     /** @hidden */
     _tableColumnsLength = 0;
     /** @hidden */
-    readonly _loadingRowRange = range(3);
+    readonly loadingRowRange = range(3);
     /** @hidden */
-    get _loadingColumnsRange(): number[] {
+    get loadingColumnsRange(): number[] {
         return range(this._tableColumnsLength);
     }
     /** @hidden */

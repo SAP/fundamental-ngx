@@ -46,5 +46,5 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
     reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
-    protected readonly _loadingRange = range(3);
+    readonly loadingRange = range(3);
 }

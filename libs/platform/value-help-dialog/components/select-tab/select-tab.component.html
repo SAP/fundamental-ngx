@@ -132,9 +132,9 @@
             }
             @if (!displayedData.length) {
                 @if (loading) {
-                    @for (_ of _loadingRange; track $index) {
+                    @for (_ of loadingRange; track $index) {
                         <tr fd-table-row>
-                            @for (_ of _loadingRange; track $index) {
+                            @for (_ of loadingRange; track $index) {
                                 <td fd-table-cell>
                                     <fd-skeleton
                                         [style.margin]="'auto 0'"

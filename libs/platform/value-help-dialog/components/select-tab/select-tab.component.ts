@@ -77,7 +77,7 @@ let titleUniqueId = 0;
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
     /** @hidden */
-    readonly _loadingRange = range(3);
+    readonly loadingRange = range(3);
     protected defaultTitleId = `fd-select-tab-title-id-${titleUniqueId++}`;
     /** @hidden */
     protected defaultCountId = `fd-select-tab-title-count-id-${titleUniqueId++}`;

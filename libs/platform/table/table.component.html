@@ -152,9 +152,9 @@
                                 ></tr>
                             }
                             @if (row.children.length === 0 && (row.childItemsLoading$ | async)) {
-                                @for (_ of _loadingRowRange; track $index) {
+                                @for (_ of loadingRowRange; track $index) {
                                     <tr fd-table-row>
-                                        @for (_ of _loadingColumnsRange; track $index) {
+                                        @for (_ of loadingColumnsRange; track $index) {
                                             <td fd-table-cell>
                                                 <fd-skeleton
                                                     [style.margin]="'auto 0'"
@@ -192,9 +192,9 @@
             } @else {
                 @if (!_dataSourceDirective._firstLoadingDone) {
                     <tbody fd-table-body>
-                        @for (_ of _loadingRowRange; track $index) {
+                        @for (_ of loadingRowRange; track $index) {
                             <tr fd-table-row>
-                                @for (_ of _loadingColumnsRange; track $index) {
+                                @for (_ of loadingColumnsRange; track $index) {
                                     <td fd-table-cell>
                                         <fd-skeleton
                                             [style.margin]="'auto 0'"

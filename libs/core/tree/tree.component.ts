@@ -179,7 +179,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     _initialDataLoaded = false;
 
     /** @hidden */
-    readonly _loadingRange = range(5);
+    readonly loadingRange = range(5);
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
