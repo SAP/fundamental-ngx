@@ -1,12 +1,16 @@
-<fd-docs-section-title id="simple" componentName="menu"> Simple menu</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="menu"> Simple Menu</fd-docs-section-title>
 <description>
-    To create simple menu use following directives:
+    <p>
+        <strong>When to use:</strong> Use the menu component to display a list of actions or options that appear on
+        demand. Menus are ideal for context menus, action lists, and navigation dropdowns where space is limited.
+    </p>
+    <p>To create a simple menu, use the following directives:</p>
     <ul>
-        <li><code>fd-menu-item</code> - list element</li>
-        <li><code>fd-menu-interactive</code> - interactive element wrapping menu element content</li>
-        <li><code>fd-menu-title</code> - menu element title</li>
+        <li><code>fd-menu-item</code> - wraps each list item</li>
+        <li><code>fd-menu-interactive</code> - makes the content interactive (button or anchor)</li>
+        <li><code>fd-menu-title</code> - displays the menu item text</li>
     </ul>
-    Attach created menu to any HTML element using <code>fdMenuTrigger</code> directive.
+    <p>Attach the menu to any HTML element using the <code>fdMenuTrigger</code> directive.</p>
 </description>
 <component-example>
     <fd-menu-example></fd-menu-example>
@@ -15,15 +19,19 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-icons" componentName="menu"> Menu with icons</fd-docs-section-title>
+<fd-docs-section-title id="with-icons" componentName="menu"> Menu with Icons</fd-docs-section-title>
 <description>
-    Menu items can be extended with additional content using the following directives:
+    <p>
+        <strong>When to use:</strong> Add icons to menu items to provide visual cues that help users quickly identify
+        actions. Icons are especially useful for frequently used actions or when the menu contains many similar options.
+    </p>
+    <p>Menu items can be enhanced with additional visual elements:</p>
     <ul>
         <li>
-            <code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,
-            remember to add the <code>position="before"</code>
+            <code>fd-menu-addon</code> - adds an icon to the menu item. Use <code>position="before"</code>
+            to place the icon before the title
         </li>
-        <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>
+        <li><code>fd-menu-shortcut</code> - displays keyboard shortcut information for power users</li>
     </ul>
 </description>
 <component-example>
@@ -33,10 +41,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="separator" componentName="menu"> Menu with separator</fd-docs-section-title>
+<fd-docs-section-title id="separator" componentName="menu"> Menu with Separator</fd-docs-section-title>
 <description>
-    To add a visual separation line between menu items, use the <code>[hasSeparator]</code> input on the list item
-    component.
+    <p>
+        <strong>When to use:</strong> Use separators to group related menu items together. This improves scannability
+        when menus contain many items or distinct action categories.
+    </p>
+    <p>
+        Add a visual separation line between menu items using the <code>[hasSeparator]</code> input on the
+        <code>fd-menu-item</code> component.
+    </p>
 </description>
 <component-example>
     <fd-menu-separator-example></fd-menu-separator-example>
@@ -46,7 +60,16 @@
 <separator></separator>
 
 <fd-docs-section-title id="scrollbar" componentName="menu"> Menu with Scrollbar</fd-docs-section-title>
-<description>Menu handles overflow using <code>fd-scrollbar</code></description>
+<description>
+    <p>
+        <strong>When to use:</strong> When menus contain many items that exceed the viewport height, the component
+        automatically handles overflow with a scrollbar using <code>fd-scrollbar</code>.
+    </p>
+    <p>
+        This ensures users can access all options while maintaining a consistent viewport size. No additional
+        configuration is required.
+    </p>
+</description>
 <component-example>
     <fd-menu-scrollbar-example></fd-menu-scrollbar-example>
 </component-example>
@@ -54,20 +77,26 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with submenu</fd-docs-section-title>
+<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with Submenu</fd-docs-section-title>
 <description>
-    Each Menu item can have its submenu. To create a submenu, do the following:
+    <p>
+        <strong>When to use:</strong> Use submenus to organize hierarchical navigation or categorize actions into
+        logical groups. Submenus help reduce clutter in the main menu while keeping all options accessible.
+    </p>
+    <p>To create nested menus:</p>
     <ul>
-        <li>Create standard menu</li>
-        <li>Create submenus using <code>fd-submenu</code> component</li>
-        <li>Attach created submenus to <code>fd-menu-item</code> using <code>[submenu]</code> input</li>
+        <li>Create the main menu structure</li>
+        <li>Define submenus using the <code>fd-submenu</code> component</li>
+        <li>Connect submenus to parent items using the <code>[submenu]</code> input</li>
         <li>
-            You can use <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to add icon indicating
-            menu items with submenus
+            Add <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to show a visual indicator for
+            items with children
         </li>
     </ul>
-    Use <code>(activePath)</code> output to receive information about currently active items. Use
-    <code>(openOnHoverTime)</code> to specify after how much hover time menu item should expand.
+    <p>
+        Use <code>(activePath)</code> to track the currently hovered/selected item path. Customize hover expansion
+        timing with <code>[openOnHoverTime]</code>.
+    </p>
 </description>
 <component-example>
     <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
@@ -76,30 +105,25 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="extended-menu" componentName="menu">Extended menu</fd-docs-section-title>
+<fd-docs-section-title id="extended-menu" componentName="menu">Extended Menu Items</fd-docs-section-title>
 <description>
     <p>
-        Menu can have menu items as toggle button or as a segmented button. Menus also can include inputs as an
-        interactive element.
+        <strong>When to use:</strong> Use extended menu items when you need interactive controls within the menu, such
+        as toggles for quick settings, segmented buttons for mutually exclusive options, or input fields for filtering.
     </p>
     <p>
-        To use toggle button functionality, use <code>button[fd-menu-interactive][toggle]</code> element. It implements
-        control value accessor, so it can be used with both template-driven and reactive forms.
+        <strong>Toggle buttons:</strong> Use <code>button[fd-menu-interactive][toggle]</code> for on/off settings.
+        Supports template-driven and reactive forms via ControlValueAccessor.
     </p>
     <p>
-        To use segmented button functionality, use <code>li[fd-menu-item][fdMenuSegmentedButtonHeader]</code> and
-        <code>li[fd-menu-item][fdMenuSegmentedButtonOption]</code> elements.
-        <br />
-        <code>li[fd-menu-item][fdMenuSegmentedButtonHeader]</code> implements control value accessor, so it can be used
-        with both template-driven and reactive forms. The possible values for it are passed via
-        <code>li[fd-menu-item][fdMenuSegmentedButtonOption][value]</code> property and can be anything.
-        <br />
-        By default, the comparison is done using strict equality operator, but you can provide your own
-        <code>valueComparator</code> to the header element. The type for it is <code>(a, b) => boolean</code>
+        <strong>Segmented buttons:</strong> Use <code>li[fd-menu-item][fdMenuSegmentedButtonHeader]</code> as the group
+        container with <code>[(ngModel)]</code> binding. Each option uses
+        <code>li[fd-menu-item][fdMenuSegmentedButtonOption][value]</code>. Provide a custom
+        <code>valueComparator</code> function if you need non-strict equality comparison.
     </p>
     <p>
-        To use input as an menu item, use <code>input[fd-form-control][fd-menu-item-input]</code> element inside the
-        <code>div[fd-menu-interactive]</code> element.
+        <strong>Input fields:</strong> Use <code>input[fd-form-control][fd-menu-item-input]</code> inside
+        <code>div[fd-menu-interactive]</code> for inline text input.
     </p>
 </description>
 <component-example>
@@ -109,24 +133,101 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="mobile" componentName="menu"> Menu in mobile mode</fd-docs-section-title>
+<fd-docs-section-title id="mobile" componentName="menu"> Mobile Mode</fd-docs-section-title>
 <description>
-    To use Menu in mobile mode:
+    <p>
+        <strong>When to use:</strong> Enable mobile mode for touch-friendly interfaces where the menu should display as
+        a full-screen dialog. This provides better usability on small screens and touch devices.
+    </p>
+    <p>To enable mobile mode:</p>
     <ul>
-        <li>Set <code>[mobile]</code> property to true</li>
-        <li>
-            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
-            look of the control
-        </li>
+        <li>Set <code>[mobile]="true"</code> on the menu component</li>
+        <li>Optionally configure appearance with <code>[mobileConfig]</code> using <code>MobileModeConfig</code></li>
     </ul>
-
-    Menu Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
-    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
-    information.
+    <p>
+        Mobile mode can be configured globally using the <code>MOBILE_MODE_CONFIG</code> token. See the
+        <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a>
+        for details.
+    </p>
 </description>
 <component-example>
     <fd-menu-mobile-example></fd-menu-mobile-example>
 </component-example>
 <code-example [exampleFiles]="menuMobile"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="programmatic" componentName="menu">Programmatic Control</fd-docs-section-title>
+<description>
+    <p>
+        <strong>When to use:</strong> Use programmatic control when you need to open, close, or toggle the menu based on
+        application logic, or when building custom keyboard shortcuts or accessibility features.
+    </p>
+    <p>The menu component provides several ways to control it programmatically:</p>
+    <ul>
+        <li><code>[(isOpen)]</code> - two-way signal binding for reactive state management</li>
+        <li><code>open()</code>, <code>close()</code>, <code>toggle()</code> - imperative control methods</li>
+        <li><code>[config]</code> - pass a <code>PopoverConfig</code> object for consolidated configuration</li>
+    </ul>
+    <p>Available events:</p>
+    <ul>
+        <li><code>(beforeOpen)</code> - fires before the menu opens, useful for lazy loading content</li>
+        <li><code>(isOpenChange)</code> - fires when the open state changes</li>
+        <li><code>(activePath)</code> - fires when the active menu item path changes (for submenus)</li>
+    </ul>
+</description>
+<component-example>
+    <fd-menu-programmatic-example></fd-menu-programmatic-example>
+</component-example>
+<code-example [exampleFiles]="menuProgrammatic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="disabled" componentName="menu">Disabled States</fd-docs-section-title>
+<description>
+    <p>
+        <strong>When to use:</strong> Disable the entire menu when a triggering condition isn't met, or disable
+        individual menu items when specific actions are unavailable based on the current application state.
+    </p>
+    <p>
+        <strong>Disabled menu:</strong> Set <code>[disabled]="true"</code> on the <code>fd-menu</code> component to
+        prevent the menu from opening. The trigger button will appear disabled.
+    </p>
+    <p>
+        <strong>Disabled items:</strong> Set <code>[disabled]="true"</code> on individual <code>fd-menu-item</code>
+        elements. Disabled items are visible but not interactive and are skipped during keyboard navigation.
+    </p>
+</description>
+<component-example>
+    <fd-menu-disabled-example></fd-menu-disabled-example>
+</component-example>
+<code-example [exampleFiles]="menuDisabled"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="placement" componentName="menu">Placement & Triggers</fd-docs-section-title>
+<description>
+    <p>
+        <strong>When to use:</strong> Customize menu positioning and trigger behavior to fit your UI layout and
+        interaction patterns.
+    </p>
+    <p>
+        <strong>Placement:</strong> Use the <code>[placement]</code> input to control where the menu appears relative to
+        the trigger. Options include <code>bottom-start</code> (default), <code>top</code>, <code>left</code>,
+        <code>right</code>, and their <code>-start</code>/<code>-end</code> variants.
+    </p>
+    <p>
+        <strong>Fill mode:</strong> Use <code>[fillControlMode]</code> to match the menu width to the trigger:
+        <code>at-least</code> sets a minimum width, <code>equal</code> matches exactly.
+    </p>
+    <p>
+        <strong>Triggers:</strong> Use the <code>[triggers]</code> input to control how the menu opens. The default is
+        <code>['click']</code>. For hover behavior, pass a <code>TriggerConfig</code> array.
+    </p>
+</description>
+<component-example>
+    <fd-menu-placement-example></fd-menu-placement-example>
+</component-example>
+<code-example [exampleFiles]="menuPlacement"></code-example>
 
 <separator></separator>

@@ -11,7 +11,7 @@
 >
     <a fdb-navigation-link glyph="overflow">More Items</a>
     <fd-popover
-        [trigger]="trigger"
+        #popover
         [triggers]="[]"
         [isOpen]="popoverOpen$()"
         (isOpenChange)="_onPopoverOpenChange($event)"

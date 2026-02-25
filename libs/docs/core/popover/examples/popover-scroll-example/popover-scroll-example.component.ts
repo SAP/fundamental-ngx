@@ -1,5 +1,5 @@
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -20,7 +20,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
         FormsModule
     ]
 })
-export class PopoverScrollExampleComponent implements OnInit {
+export class PopoverScrollExampleComponent {
     /** Do nothing on scroll. */
     noopScrollStrategy: ScrollStrategy;
 
@@ -46,16 +46,16 @@ export class PopoverScrollExampleComponent implements OnInit {
      */
     repositionScrollStrategy: ScrollStrategy;
 
-    constructor(private _overlay: Overlay) {}
+    private readonly _overlay = inject(Overlay);
 
-    ngOnInit(): void {
+    constructor() {
+        this.noopScrollStrategy = this._overlay.scrollStrategies.noop();
+        this.closeScrollStrategy = this._overlay.scrollStrategies.close();
         this.blockScrollStrategy = this._overlay.scrollStrategies.block();
         this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({
             autoClose: this.autoClose,
             scrollThrottle: this.scrollThrottle
         });
-        this.noopScrollStrategy = this._overlay.scrollStrategies.noop();
-        this.closeScrollStrategy = this._overlay.scrollStrategies.close();
     }
 
     refreshRepositionScrollStrategy(): void {

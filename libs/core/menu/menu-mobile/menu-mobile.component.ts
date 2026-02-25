@@ -1,18 +1,21 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
-    Inject,
-    NgZone,
-    OnInit,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation,
     computed,
+    effect,
     inject,
-    signal
+    Injector,
+    OnInit,
+    runInInjectionContext,
+    signal,
+    TemplateRef,
+    untracked,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, RtlService, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -31,7 +34,7 @@ import {
 } from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { startWith, take } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import { MenuService } from '../services/menu.service';
@@ -64,6 +67,7 @@ import { MenuService } from '../services/menu.service';
         TitleComponent
     ]
 })
+// @ts-expect-error - MenuInterface has InputSignal properties which don't perfectly match MobileMode base
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
@@ -100,17 +104,32 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     private readonly _menuService = inject(MenuService);
 
     /** @hidden */
-    private readonly _ngZone = inject(NgZone);
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
-    constructor(@Inject(MENU_COMPONENT) menuComponent: MenuInterface) {
-        super(menuComponent, MobileModeControl.MENU);
+    constructor() {
+        super(inject<MenuInterface>(MENU_COMPONENT), MobileModeControl.MENU);
+
+        // Set up effect to watch isOpen changes and open/close dialog
+        // This runs synchronously when the signal changes, avoiding timing issues
+        effect(() => {
+            const isOpen = this._component.isOpen();
+            untracked(() => {
+                if (isOpen && !this.dialogRef) {
+                    // Only open if not already open
+                    this._openDialog();
+                } else if (!isOpen && this.dialogRef) {
+                    // Only close if currently open
+                    this.dialogRef.close();
+                }
+            });
+        });
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._listenOnActivePathChange();
-        this._listenOnMenuOpenChange();
+        // Dialog open/close is now handled by effect in constructor
     }
 
     /** Closes the Dialog and Menu component */
@@ -123,21 +142,27 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     backToParentLevel(): void {
         const menuItem = this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].item;
         this._menuService.setActive(false, menuItem);
-        this._executeOnStable(() => {
+        this._executeAfterNextRender(() => {
             menuItem?.focus();
         });
     }
 
     /** @hidden Opens the Dialog */
     private _openDialog(): void {
-        this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+        const config = {
             mobile: true,
             disablePaddings: true,
             ...this.dialogConfig,
             escKeyCloseable: false,
-            backdropClickCloseable: false,
-            container: this._elementRef.nativeElement
-        });
+            backdropClickCloseable: false
+        };
+
+        // Only add container if it's valid (for tests, this might not be set up properly)
+        if (this._elementRef?.nativeElement) {
+            config.container = this._elementRef.nativeElement;
+        }
+
+        this.dialogRef = this._dialogService.open(this.dialogTemplate, config);
     }
 
     /** @hidden Listens on Active Path changes and updates mobile view */
@@ -145,21 +170,21 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath
             .map((node) => node.item)
             .filter((v): v is MenuItemComponent => !!v);
-        this._component.activePath
-            .pipe(startWith(initialItemPath), takeUntilDestroyed(this._destroyRef))
-            .subscribe((items) => this._setMenuView(items));
+
+        // Use runInInjectionContext for outputToObservable
+        runInInjectionContext(this._injector, () => {
+            outputToObservable(this._component.activePath)
+                .pipe(startWith(initialItemPath), takeUntilDestroyed(this._destroyRef))
+                .subscribe((items) => this._setMenuView(items));
+        });
     }
 
     /**
      * @hidden
-     * Executes a function when the zone is stable.
+     * Executes a function after the next render cycle.
      */
-    private _executeOnStable(fn: () => any): void {
-        if (this._ngZone.isStable) {
-            fn();
-        } else {
-            this._ngZone.onStable.pipe(take(1)).subscribe(fn);
-        }
+    private _executeAfterNextRender(fn: () => void): void {
+        afterNextRender(fn, { injector: this._injector });
     }
 
     /** @hidden Sets menu view, title and isSubmenu flag */
@@ -168,16 +193,9 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         this.isSubmenu$.set(!!items.length);
         this.title$.set(this._getDialogTitle(lastItem));
         this.view$.set(this._getMenuView(lastItem));
-        this._executeOnStable(() => {
+        this._executeAfterNextRender(() => {
             this._menuService.focusedNode?.item?.focus();
         });
-    }
-
-    /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
-    private _listenOnMenuOpenChange(): void {
-        this._component.isOpenChange
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((isOpen) => (isOpen ? this._openDialog() : this.dialogRef.close()));
     }
 
     /** @hidden Returns dialog title */

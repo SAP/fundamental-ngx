@@ -1,7 +1,7 @@
-import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Injector, Input, OnDestroy } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
-import { startWith } from 'rxjs/operators';
 import { PopoverComponent } from './popover.component';
 
 @Directive({
@@ -13,7 +13,7 @@ export class PopoverTriggerDirective implements OnDestroy {
     @Input('fdPopoverTrigger')
     set popover(popover: Nullable<PopoverComponent>) {
         if (popover) {
-            popover.trigger = this._elementRef;
+            popover.trigger.set(this._elementRef);
             this._listenOnExpanded(popover);
         }
         this._setAriaAttributes(popover);
@@ -35,6 +35,9 @@ export class PopoverTriggerDirective implements OnDestroy {
     private _isExpandedSubscription: Subscription;
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -46,16 +49,16 @@ export class PopoverTriggerDirective implements OnDestroy {
     private _listenOnExpanded(popover: PopoverComponent): void {
         this._unsubscribeExpandedListener();
         if (popover) {
-            this._isExpandedSubscription = popover.isOpenChange
-                .pipe(startWith(popover.isOpen))
-                .subscribe((isOpen) => (this.ariaExpanded = isOpen));
+            // Convert signal to observable for reactive updates
+            const isOpen$ = toObservable(popover.isOpen, { injector: this._injector });
+            this._isExpandedSubscription = isOpen$.subscribe((isOpen) => (this.ariaExpanded = isOpen));
         }
     }
 
     /** @hidden */
     private _setAriaAttributes(popover: Nullable<PopoverComponent>): void {
         this.ariaHasPopup = !!popover;
-        this.ariaControls = popover ? popover.id : null;
+        this.ariaControls = popover ? popover.id() : null;
     }
 
     /** @hidden */
