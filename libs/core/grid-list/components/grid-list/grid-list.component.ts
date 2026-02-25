@@ -19,7 +19,14 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, KeyboardSupportService, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    KeyUtil,
+    KeyboardSupportService,
+    Nullable,
+    RangeSelector,
+    RtlService,
+    range
+} from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
@@ -212,7 +219,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         if (!state) {
             return;
         }
-        const itemIndexes = new Array(state.to - state.from + 1).fill(null).map((e, i) => state.from + i);
+        const itemIndexes = range(state.to - state.from + 1, (i) => state.from + i);
         const selectedItems = itemIndexes.map((idx) => this.gridListItems.get(idx)?.value).filter((v): v is T => !!v);
         const itemsSet = new Set<T>(selectedItems);
 

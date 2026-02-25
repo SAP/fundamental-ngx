@@ -1,5 +1,6 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { range } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Type of skeleton visualization.
@@ -151,7 +152,7 @@ export class SkeletonComponent {
      */
     protected readonly textLineWidths = computed(() => {
         const totalLines = this.textLines();
-        return Array.from({ length: totalLines }, (_, i) => {
+        return range(totalLines, (i) => {
             const isLastLine = i + 1 === totalLines;
             const hasMultipleLines = i > 0;
             return isLastLine && hasMultipleLines ? '60%' : '100%';
