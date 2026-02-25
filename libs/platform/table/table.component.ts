@@ -2068,7 +2068,7 @@ export class TableComponent<T = any>
     /** @hidden */
     private _listenToRowHeightChange(): void {
         this._subscriptions.add(
-            this.contentDensityObserver
+            this.contentDensityObserver.contentDensity$$
                 .pipe(
                     tap(() => {
                         this._setSelectionColumnWidth();

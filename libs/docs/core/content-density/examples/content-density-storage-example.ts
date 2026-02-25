@@ -1,20 +1,23 @@
-import { NgModule } from '@angular/core';
-import { ContentDensityMode, ContentDensityModule, ContentDensityStorage } from '@fundamental-ngx/core/content-density';
+import { ApplicationConfig } from '@angular/core';
+import {
+    ContentDensityMode,
+    ContentDensityStorage,
+    provideContentDensity
+} from '@fundamental-ngx/core/content-density';
 import { Observable, of } from 'rxjs';
 
-@NgModule({
-    imports: [
-        /**
-         * Usage with built-in storages
-         */
-        ContentDensityModule.forRoot({
+/**
+ * Usage with built-in storages in standalone application config
+ */
+export const appConfig: ApplicationConfig = {
+    providers: [
+        provideContentDensity({
             storage: 'localStorage', // can be 'url' or 'memory'
             storageKey: '__someStorage_name__',
             defaultGlobalContentDensity: ContentDensityMode.COMPACT
         })
     ]
-})
-export class RootModule {}
+};
 
 /**
  * This is a very simple example of providing your own ContentDensityStorage.
@@ -32,17 +35,16 @@ class CustomContentDensityStorage implements ContentDensityStorage {
     }
 }
 
-@NgModule({
-    imports: [
-        /**
-         * Usage with built-in storages
-         */
-        ContentDensityModule.forRoot({
+/**
+ * Usage with custom storage provider
+ */
+export const appConfigWithCustomStorage: ApplicationConfig = {
+    providers: [
+        provideContentDensity({
             storage: {
                 provide: ContentDensityStorage,
                 useClass: CustomContentDensityStorage
             }
         })
     ]
-})
-export class RootModuleWithCustomProvider {}
+};
