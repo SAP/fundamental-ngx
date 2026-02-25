@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { range } from '@fundamental-ngx/cdk/utils';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
@@ -11,6 +10,4 @@ import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CardModule, SkeletonComponent, ListModule]
 })
-export class CardLoadingExampleComponent {
-    readonly loadingRange = range(3);
-}
+export class CardLoadingExampleComponent {}

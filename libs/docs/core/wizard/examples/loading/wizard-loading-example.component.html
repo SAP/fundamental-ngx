@@ -9,7 +9,7 @@
             <fd-wizard>
                 <fd-wizard-navigation>
                     <ul fd-wizard-progress-bar size="lg" role="list" aria-label="Wizard Steps">
-                        @for (i of loadingRange; track i) {
+                        @for (i of [0, 1, 2]; track i) {
                             <li fd-wizard-step [status]="i === 0 ? 'current' : 'upcoming'">
                                 <fd-skeleton type="rectangle" width="32px" height="32px"></fd-skeleton>
                                 <fd-wizard-content size="lg">

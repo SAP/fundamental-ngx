@@ -1,13 +1,13 @@
 <button fd-button (click)="loading = !loading" [style.margin-bottom.rem]="1">Toggle loading</button>
 <ul fd-list>
     @if (!loading) {
-        @for (_ of loadingRange; track $index) {
+        @for (_ of [0, 1, 2]; track $index) {
             <li fd-list-item>
                 <span fd-list-title> List item 1 </span>
             </li>
         }
     } @else {
-        @for (_ of loadingRange; track $index) {
+        @for (_ of [0, 1, 2]; track $index) {
             <li fd-list-item>
                 <fd-skeleton type="text" width="40%" textLines="1" [style.margin]="'auto 0'"></fd-skeleton>
             </li>

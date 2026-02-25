@@ -1,7 +1,7 @@
 <button fd-button (click)="loading = !loading" [style.margin-bottom.rem]="1">Toggle loading</button>
 <ul fd-list [byline]="true">
     @if (!loading) {
-        @for (_ of loadingRange; track $index) {
+        @for (_ of [0, 1, 2]; track $index) {
             <li fd-list-item>
                 <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
                 <div fd-list-content>
@@ -21,7 +21,7 @@
             </li>
         }
     } @else {
-        @for (_ of loadingRange; track $index) {
+        @for (_ of [0, 1, 2]; track $index) {
             <li fd-list-item>
                 <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
                     <svg:rect x="0" y="0" width="48" height="48" rx="4" />

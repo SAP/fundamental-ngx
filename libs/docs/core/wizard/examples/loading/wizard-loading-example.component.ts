@@ -9,7 +9,6 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { range } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
@@ -43,8 +42,6 @@ export class WizardLoadingExampleComponent {
      * specifies if the doc example is rendered in fullscreen or not
      */
     fullscreen = false;
-
-    readonly loadingRange = range(3);
 
     constructor(private _wizardService: WizardService) {}
 

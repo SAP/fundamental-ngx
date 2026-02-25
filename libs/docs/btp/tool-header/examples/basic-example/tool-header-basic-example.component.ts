@@ -11,7 +11,6 @@ import {
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
-import { range } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -69,8 +68,6 @@ export class ToolHeaderBasicExampleComponent {
     viewMode: FdbViewMode = '';
 
     searchValue: string;
-
-    readonly notificationRange = range(10);
 
     actions: FdbToolHeaderActionButton[] = [
         {

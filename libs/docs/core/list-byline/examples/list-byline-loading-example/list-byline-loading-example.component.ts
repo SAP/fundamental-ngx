@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { range } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -12,5 +11,4 @@ import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 })
 export class ListBylineLoadingExampleComponent {
     loading = true;
-    readonly loadingRange = range(3);
 }

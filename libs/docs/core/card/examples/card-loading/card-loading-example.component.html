@@ -6,7 +6,7 @@
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [noBorder]="true">
-            @for (_ of loadingRange; track $index) {
+            @for (_ of [0, 1, 2]; track $index) {
                 <li fd-list-item>
                     <fd-skeleton type="text" width="30%" textLines="1" styles="margin: auto 0"></fd-skeleton>
                 </li>
@@ -48,7 +48,7 @@
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [noBorder]="true">
-            @for (_ of loadingRange; track $index) {
+            @for (_ of [0, 1, 2]; track $index) {
                 <li fd-list-item>
                     <fd-skeleton type="text" width="30%" textLines="1" styles="margin: auto 0"></fd-skeleton>
                 </li>
