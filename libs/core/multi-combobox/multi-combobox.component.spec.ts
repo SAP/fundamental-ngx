@@ -104,7 +104,7 @@ describe('MultiComboBox component', () => {
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
-        let toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
+        const toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
         expect(toggleButton.length).toBe(component._suggestions().length);
 
         // Click to close
