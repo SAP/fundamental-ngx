@@ -36,7 +36,6 @@ export interface FocusableItemPosition {
 
 @Directive({
     selector: '[fdkFocusableItem]',
-    standalone: true,
     providers: [
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
@@ -47,6 +46,7 @@ export interface FocusableItemPosition {
 export class FocusableItemDirective implements FocusableItem, HasElementRef {
     /** @hidden Input with booleanAttribute transform */
     readonly fdkFocusableItem = input(true, { transform: booleanAttribute });
+
     /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
     readonly cellFocusedEventAnnouncer = input<CellFocusedEventAnnouncer>(this._defaultItemFocusedEventAnnouncer);
 
