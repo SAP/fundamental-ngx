@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Занято',
+        defaultTitle: 'Подождите'
     },
     coreCalendar: {
         yearSelectionLabel: 'Выберите год',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Черновик'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Выделенная',
+        subtle: 'Незаметная'
     },
     coreMessageStrip: {
         dismissLabel: 'Закрыть',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Элемент дерева {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Статус (активно)',
+        inactive: 'Статус'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Выделено',
+        negative: 'Статус значения "Ошибка"',
+        critical: 'Статус значения "Предупреждение"',
+        positive: 'Статус значения "Успешно"',
+        informative: 'Статус значения "Информация"'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Статус объекта',
+        ariaRoleDescription: 'Кнопка статуса объекта',
+        indicationColor: 'Цвет индикации',
+        negative: 'Недействительная запись',
+        critical: 'Выведено предупреждение',
+        positive: 'Запись успешно проверена',
+        informative: 'Информативная запись'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Еще {count}'
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Сегментированная кнопка'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Идентификатор объекта'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Информационная метка'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Обнулить',
+        ariaRoleDescription: 'Индикатор оценки',
+        ariaLabelTotalRating: 'Общая оценка',
+        ariaLabelValue: 'из'
     }
 };

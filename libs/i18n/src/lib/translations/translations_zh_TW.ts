@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: '忙碌',
+        defaultTitle: '請稍候'
     },
     coreCalendar: {
         yearSelectionLabel: '選擇年份',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: '草稿'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: '強調',
+        subtle: '輕微'
     },
     coreMessageStrip: {
         dismissLabel: '關閉',
@@ -103,24 +103,24 @@ export default {
         linkItemAriaLabel: '樹狀項目 {itemDetails}、{selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: '狀態 (作用中)',
+        inactive: '狀態'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: '強調',
+        negative: '值狀態錯誤',
+        critical: '值狀態警告',
+        positive: '值狀態成功',
+        informative: '值狀態資訊'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: '物件狀態',
+        ariaRoleDescription: '物件狀態按鈕',
+        indicationColor: '表示顏色',
+        negative: '條目無效',
+        critical: '發出警告',
+        positive: '已成功驗證條目',
+        informative: '資訊條目'
     },
     coreOverflowLayout: {
         moreItemsButton: '還有 {count} 個'
@@ -649,15 +649,15 @@ export default {
         buttonRoleDescription: '分區按鈕'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: '物件識別碼'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: '資訊標籤'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: '重設為零',
+        ariaRoleDescription: '評級指示碼',
+        ariaLabelTotalRating: '總評級',
+        ariaLabelValue: '/'
     }
 };

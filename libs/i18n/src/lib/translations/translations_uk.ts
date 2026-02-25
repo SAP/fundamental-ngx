@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Зайнято',
+        defaultTitle: 'Зачекайте'
     },
     coreCalendar: {
         yearSelectionLabel: 'Виберіть рік',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Чернетка'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Підкреслено',
+        subtle: 'Приховано'
     },
     coreMessageStrip: {
         dismissLabel: 'Закрити',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Елемент дерева {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Стан (активний)',
+        inactive: 'Стан'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Підкреслено',
+        negative: 'Стан значення: помилка',
+        critical: 'Стан значення: попередження',
+        positive: 'Стан значення: успіх',
+        informative: 'Стан значення: інформація'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Стан об’єкта',
+        ariaRoleDescription: 'Кнопка стану об’єкта',
+        indicationColor: 'Колір індикації',
+        negative: 'Недійсний запис',
+        critical: 'Зроблено застереження',
+        positive: 'Запис успішно перевірено',
+        informative: 'Інформативний запис'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Ще {count}'
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Сегментована кнопка'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Ідентифікатор об’єкта'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Інформаційна мітка'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Скинути до нуля',
+        ariaRoleDescription: 'Індикатор рейтингу',
+        ariaLabelTotalRating: 'Загальний рейтинг',
+        ariaLabelValue: 'з'
     }
 };
