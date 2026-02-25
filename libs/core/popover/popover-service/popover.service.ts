@@ -31,7 +31,7 @@ import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operato
 import { Nullable, RtlService, destroyObservable, isOdd } from '@fundamental-ngx/cdk/utils';
 import { GetDefaultPosition, Placement, PopoverFillMode, PopoverPosition } from '@fundamental-ngx/core/shared';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PopoverConfig, TriggerConfig } from '../base/popover-config.interface';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { PopoverContainerDirective } from '../popover-container/popover-container.directive';
@@ -358,8 +358,6 @@ export class PopoverService {
             this.isOpen.set(true);
             this._programmaticChange = false;
 
-            this._detectChanges();
-
             this._listenOnClose();
             this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
@@ -649,10 +647,11 @@ export class PopoverService {
 
     /** Attach template containing popover body to overlay */
     private _attachTemplate(): void {
-        this._passVariablesToBody();
         if (this._templateData) {
             this._overlayRef.attach(new TemplatePortal(this._templateData.template, this._templateData.container));
         }
+        // Pass variables AFTER attaching to ensure CDK directives are properly initialized
+        this._passVariablesToBody();
     }
 
     /** Create PopoverBodyComponent and attach it into overlay */
@@ -678,7 +677,11 @@ export class PopoverService {
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
     private _listenOnClose(): void {
         const body = this._getPopoverBody();
-        const closeEvents$ = merge(this._overlayRef.detachments(), body.onClose, this._outsideClicks$());
+        const closeEvents$ = merge(
+            this._overlayRef.detachments(),
+            outputToObservable(body.onClose),
+            this._outsideClicks$()
+        );
         // Only use _stopCloseListening$ to stop listening, not _refresh$
         // _refresh$ can emit due to signal effects and would complete the subscription prematurely
         closeEvents$.pipe(takeUntil(this._stopCloseListening$), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -750,32 +753,30 @@ export class PopoverService {
         const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         const fillMode = this.fillControlMode();
         if (fillMode === 'at-least') {
-            this._getPopoverBody()._popoverBodyMinWidth = width;
+            this._getPopoverBody()._popoverBodyMinWidth.set(width);
         } else if (fillMode === 'equal') {
-            this._getPopoverBody()._popoverBodyWidth = width;
+            this._getPopoverBody()._popoverBodyWidth.set(width);
         }
-        this._detectChanges();
     }
 
     /** @hidden */
     private _passVariablesToBody(): void {
         const body = this._getPopoverBody();
-        body.text = this.stringContent;
-        body._additionalBodyClass = this.additionalBodyClass();
-        body._focusTrapped = this.focusTrapped();
-        body._maxWidth = this.maxWidth();
-        body._noArrow = this.noArrow();
-        body._focusAutoCapture = this.focusAutoCapture();
-        body._disableScrollbar = this.disableScrollbar();
+        body.text.set(this.stringContent);
+        body._additionalBodyClass.set(this.additionalBodyClass());
+        body._focusTrapped.set(this.focusTrapped());
+        body._maxWidth.set(this.maxWidth());
+        body._noArrow.set(this.noArrow());
+        body._focusAutoCapture.set(this.focusAutoCapture());
+        body._disableScrollbar.set(this.disableScrollbar());
         if (this.templateContent) {
-            body._templateToDisplay = this.templateContent;
+            body._templateToDisplay.set(this.templateContent);
         }
-        body._closeOnEscapeKey = this.closeOnEscapeKey();
-        body._bodyRole = this._bodyRole;
+        body._closeOnEscapeKey.set(this.closeOnEscapeKey());
+        body._bodyRole.set(this._bodyRole);
         body._bodyId.set(this._bodyId());
-        body._resizable = this.resizable();
+        body._resizable.set(this.resizable());
         body._setBodyComponentClasses(this.additionalBodyComponentClasses());
-        this._detectChanges();
     }
 
     /** @hidden */
@@ -786,13 +787,6 @@ export class PopoverService {
     /** @hidden */
     private _getPopoverBody(): PopoverBodyComponent {
         return this._templateData?.popoverBody || this._popoverBody;
-    }
-
-    /** @hidden */
-    private _detectChanges(): void {
-        if (this._getPopoverBody()) {
-            this._getPopoverBody().detectChanges();
-        }
     }
 
     /** @hidden */

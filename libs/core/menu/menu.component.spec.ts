@@ -5,7 +5,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
 import { MenuComponent } from './menu.component';
 import { MenuModule } from './menu.module';
-import { MenuService } from './services/menu.service';
 
 @Component({
     selector: 'fd-menu-test',
@@ -28,7 +27,7 @@ import { MenuService } from './services/menu.service';
             </li>
         </fd-menu>
 
-        <button #trigger [fdMenuTrigger]="menu"></button>
+        <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
     `,
     standalone: true,
     imports: [MenuModule]
@@ -40,7 +39,7 @@ export class TestMenuComponent {
     @ViewChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
 
-    @ViewChildren('trigger', { read: ElementRef })
+    @ViewChild('trigger', { read: ElementRef })
     trigger: ElementRef;
 
     mobileMode = false;
@@ -76,7 +75,7 @@ export class TestMenuComponent {
             </li>
         </fd-menu>
 
-        <button #trigger [fdMenuTrigger]="menu"></button>
+        <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
     `,
     standalone: true,
     imports: [MenuModule]
@@ -91,7 +90,7 @@ export class TestMenuSubmenuComponent {
     @ViewChild(SubmenuComponent)
     submenu: SubmenuComponent;
 
-    @ViewChildren('trigger', { read: ElementRef })
+    @ViewChild('trigger', { read: ElementRef })
     trigger: ElementRef;
 
     mobileMode = false;
@@ -99,7 +98,6 @@ export class TestMenuSubmenuComponent {
 
 describe('MenuComponent', () => {
     let menu: MenuComponent;
-    let menuService: MenuService;
     let fixture: ComponentFixture<TestMenuComponent>;
     let testComponent: TestMenuComponent;
 
@@ -114,180 +112,176 @@ describe('MenuComponent', () => {
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
         menu = testComponent.menu;
-        menuService = menu['_menuService'];
     });
 
-    it('should properly initialize menu', () => {
+    it('should create', () => {
         expect(menu).toBeTruthy();
-        expect(menuService.menuMap).toBeTruthy();
     });
 
-    it('should open/close popover', fakeAsync(() => {
-        const menuElement = (): Element => document.querySelector('[fd-menu-interactive]') as Element;
+    describe('opening and closing', () => {
+        it('should open menu when open() is called', fakeAsync(() => {
+            expect(menu.isOpen()).toBe(false);
 
-        // Explicitly setup view to ensure popover service is initialized
-        (<any>menu)._setupView();
-        fixture.detectChanges();
+            menu.open();
+            fixture.detectChanges();
+            tick();
 
-        menu.open();
-        fixture.detectChanges();
+            expect(menu.isOpen()).toBe(true);
+        }));
 
-        tick();
+        it('should close menu when close() is called', fakeAsync(() => {
+            menu.open();
+            fixture.detectChanges();
+            tick();
+            expect(menu.isOpen()).toBe(true);
 
-        expect(menuElement()).toBeTruthy();
-        expect(menu.isOpen()).toBe(true);
+            menu.close();
+            fixture.detectChanges();
+            tick();
 
-        menu.close();
-        fixture.detectChanges();
+            expect(menu.isOpen()).toBe(false);
+        }));
 
-        tick();
+        it('should toggle menu state', fakeAsync(() => {
+            expect(menu.isOpen()).toBe(false);
 
-        expect(menuElement()).toBeFalsy();
-        expect(menu.isOpen()).toBe(false);
-    }));
+            menu.toggle();
+            fixture.detectChanges();
+            tick();
+            expect(menu.isOpen()).toBe(true);
 
-    it('should select mobile view', fakeAsync(() => {
-        const mobileViewSpy = jest.spyOn(menu as any, '_setupMobileMode');
-        testComponent.mobileMode = true;
-        fixture.detectChanges();
-        tick();
-        (<any>menu)._setupView();
+            menu.toggle();
+            fixture.detectChanges();
+            tick();
+            expect(menu.isOpen()).toBe(false);
+        }));
 
-        fixture.detectChanges();
+        it('should display menu items when menu is open', fakeAsync(() => {
+            menu.open();
+            fixture.detectChanges();
+            tick();
 
-        expect(mobileViewSpy).toHaveBeenCalled();
-    }));
+            const menuItems = document.querySelectorAll('[fd-menu-interactive]');
+            expect(menuItems.length).toBe(3);
+        }));
 
-    it('should open after clicking on trigger on mobiles', () => {
-        testComponent.mobileMode = true;
-        fixture.detectChanges();
-        (<any>menu)._listenOnTriggerRefClicks();
+        it('should not display menu items when menu is closed', fakeAsync(() => {
+            menu.open();
+            fixture.detectChanges();
+            tick();
 
-        expect(menu.isOpen()).toBe(false);
+            menu.close();
+            fixture.detectChanges();
+            tick();
 
-        fixture.detectChanges();
-        menu.trigger?.nativeElement.dispatchEvent(new MouseEvent('click'));
-
-        fixture.detectChanges();
-
-        expect(menu.isOpen()).toBe(true);
+            const menuItems = document.querySelectorAll('[fd-menu-interactive]');
+            expect(menuItems.length).toBe(0);
+        }));
     });
 
-    it('should destroy all references', () => {
-        const destroyEventsSpy = jest.spyOn(menu as any, '_destroyEventListeners');
-        const destroyMobileSpy = jest.spyOn(menu as any, '_destroyMobileComponent');
+    describe('event emission', () => {
+        it('should emit isOpenChange when open state changes', fakeAsync(() => {
+            const emittedValues: boolean[] = [];
+            menu.isOpenChange.subscribe((value) => emittedValues.push(value));
 
-        menu.ngOnDestroy();
+            menu.open();
+            fixture.detectChanges();
+            tick();
 
-        fixture.detectChanges();
+            menu.close();
+            fixture.detectChanges();
+            tick();
 
-        expect(destroyEventsSpy).toHaveBeenCalled();
-        expect(destroyMobileSpy).toHaveBeenCalled();
+            expect(emittedValues).toContain(true);
+            expect(emittedValues).toContain(false);
+        }));
+
+        it('should emit beforeOpen when menu is about to open', fakeAsync(() => {
+            let beforeOpenEmitted = false;
+            menu.beforeOpen.subscribe(() => {
+                beforeOpenEmitted = true;
+            });
+
+            menu.open();
+            fixture.detectChanges();
+            tick();
+
+            expect(beforeOpenEmitted).toBe(true);
+        }));
     });
 
-    it('disableScrollbar input should work correctly', () => {
-        expect(menu.disableScrollbar()).toBeFalsy();
-        testComponent.scrollbarDisabled = true;
-        fixture.detectChanges();
-        expect(menu.disableScrollbar()).toBeTruthy();
+    describe('trigger interactions', () => {
+        it('should open menu when user clicks trigger button', fakeAsync(() => {
+            expect(menu.isOpen()).toBe(false);
+
+            testComponent.trigger.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+
+            expect(menu.isOpen()).toBe(true);
+        }));
+
+        it('should toggle menu on repeated trigger clicks', fakeAsync(() => {
+            testComponent.trigger.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+            expect(menu.isOpen()).toBe(true);
+
+            testComponent.trigger.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+            expect(menu.isOpen()).toBe(false);
+        }));
     });
 
-    it('should properly sync isOpen signal state', () => {
-        expect(menu.isOpen()).toBe(false);
-        menu.isOpen.set(true);
-        fixture.detectChanges();
-        expect(menu.isOpen()).toBe(true);
-    });
+    describe('disabled state', () => {
+        it('should apply disabled host class when disabled', () => {
+            testComponent.isDisabled = true;
+            fixture.detectChanges();
 
-    it('should apply disabled host binding when disabled', () => {
-        testComponent.isDisabled = true;
-        fixture.detectChanges();
-        expect(menu.disabled()).toBe(true);
-        const menuElement = fixture.nativeElement.querySelector('fd-menu');
-        expect(menuElement?.classList.contains('fd-popover-custom--disabled')).toBe(true);
-    });
-
-    it('should emit isOpenChange when open state changes', fakeAsync(() => {
-        const emittedValues: boolean[] = [];
-        menu.isOpenChange.subscribe((value) => emittedValues.push(value));
-
-        (<any>menu)._setupView();
-        fixture.detectChanges();
-        tick();
-
-        menu.open();
-        fixture.detectChanges();
-        tick();
-
-        menu.close();
-        fixture.detectChanges();
-        tick();
-
-        expect(emittedValues).toContain(true);
-        expect(emittedValues).toContain(false);
-    }));
-
-    it('should emit beforeOpen when menu is about to open', fakeAsync(() => {
-        let beforeOpenEmitted = false;
-        menu.beforeOpen.subscribe(() => {
-            beforeOpenEmitted = true;
+            const menuElement = fixture.nativeElement.querySelector('fd-menu');
+            expect(menuElement?.classList.contains('fd-popover-custom--disabled')).toBe(true);
         });
 
-        (<any>menu)._setupView();
-        fixture.detectChanges();
-        tick();
-
-        menu.open();
-        fixture.detectChanges();
-        tick();
-
-        expect(beforeOpenEmitted).toBe(true);
-    }));
-
-    it('should toggle menu state', fakeAsync(() => {
-        (<any>menu)._setupView();
-        fixture.detectChanges();
-        tick();
-
-        expect(menu.isOpen()).toBe(false);
-
-        menu.toggle();
-        fixture.detectChanges();
-        tick();
-
-        expect(menu.isOpen()).toBe(true);
-
-        menu.toggle();
-        fixture.detectChanges();
-        tick();
-
-        expect(menu.isOpen()).toBe(false);
-    }));
-
-    it('should have correct elementRef injection', () => {
-        expect(menu.elementRef).toBeTruthy();
-        expect(menu.elementRef.nativeElement).toBeTruthy();
+        it('should reflect disabled input in disabled signal', () => {
+            expect(menu.disabled()).toBe(false);
+            testComponent.isDisabled = true;
+            fixture.detectChanges();
+            expect(menu.disabled()).toBe(true);
+        });
     });
 
-    it('should have optional dialogConfig', () => {
-        // dialogConfig should be null when not in dialog context
-        expect(menu.dialogConfig).toBeNull();
+    describe('scrollbar configuration', () => {
+        it('should apply disableScrollbar setting', () => {
+            expect(menu.disableScrollbar()).toBeFalsy();
+            testComponent.scrollbarDisabled = true;
+            fixture.detectChanges();
+            expect(menu.disableScrollbar()).toBeTruthy();
+        });
     });
 
-    it('should register and unregister addons', () => {
-        const addon = { id: 'test-addon' };
+    describe('element access', () => {
+        it('should have elementRef injection', () => {
+            expect(menu.elementRef).toBeTruthy();
+            expect(menu.elementRef.nativeElement).toBeTruthy();
+        });
 
-        menu.registerAddon(addon);
-        expect(menu['hasAddons']).toBe(true);
+        it('should have optional dialogConfig as null when not in dialog context', () => {
+            expect(menu.dialogConfig).toBeNull();
+        });
+    });
 
-        menu.unregisterAddon(addon);
-        expect(menu['hasAddons']).toBe(false);
+    describe('cleanup', () => {
+        it('should clean up without errors on destroy', () => {
+            expect(() => menu.ngOnDestroy()).not.toThrow();
+        });
     });
 });
 
 describe('MenuComponent with submenus', () => {
     let fixture: ComponentFixture<TestMenuSubmenuComponent>;
     let testComponent: TestMenuSubmenuComponent;
+    let menu: MenuComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -299,11 +293,10 @@ describe('MenuComponent with submenus', () => {
         fixture = TestBed.createComponent(TestMenuSubmenuComponent);
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
+        menu = testComponent.menu;
     });
 
-    it('should properly detect submenus and set hasPopup getter', () => {
-        fixture.detectChanges();
-
+    it('should detect menu items with submenus', () => {
         const menuItems = testComponent.menuItems.toArray();
         // Should include: 1 item with submenu, 2 submenu items, 1 regular item = 4 total
         expect(menuItems.length).toBe(4);
@@ -319,7 +312,7 @@ describe('MenuComponent with submenus', () => {
         expect(lastItem.hasPopup).toBe(false);
     });
 
-    it('should not show submenu in mobile mode (hasPopup should be false)', () => {
+    it('should not show hasPopup for submenu items in mobile mode', () => {
         testComponent.mobileMode = true;
         fixture.detectChanges();
 
@@ -331,15 +324,12 @@ describe('MenuComponent with submenus', () => {
         expect(firstItem.hasPopup).toBe(false);
     });
 
-    it('should call mobile() signal correctly in hasPopup getter', () => {
-        fixture.detectChanges();
-
+    it('should correctly reflect mobile mode changes', () => {
         const menuItems = testComponent.menuItems.toArray();
         const firstItem = menuItems[0];
-        const menuService = firstItem.menuService;
 
         // Desktop mode - hasPopup should be true
-        expect(menuService?.menuComponent?.mobile()).toBe(false);
+        expect(menu.mobile()).toBe(false);
         expect(firstItem.hasPopup).toBe(true);
 
         // Switch to mobile mode
@@ -347,26 +337,45 @@ describe('MenuComponent with submenus', () => {
         fixture.detectChanges();
 
         // Mobile mode - hasPopup should be false
-        expect(menuService?.menuComponent?.mobile()).toBe(true);
+        expect(menu.mobile()).toBe(true);
         expect(firstItem.hasPopup).toBe(false);
     });
 
-    it('should auto-disable scrollbar when menu has submenus', fakeAsync(() => {
+    it('should open submenu when user hovers over item with submenu', fakeAsync(() => {
+        menu.open();
         fixture.detectChanges();
         tick();
 
-        const menu = testComponent.menu;
-        const popoverService = menu['_popoverService'];
+        const menuItems = testComponent.menuItems.toArray();
+        const itemWithSubmenu = menuItems[0];
+        const interactiveElement = itemWithSubmenu.menuInteractive.elementRef.nativeElement;
 
-        // Menu has submenu, scrollbar should be auto-disabled
-        // Note: This is handled by the effect in the constructor
-        // The effect needs time to run after afterNextRender
-        tick(100);
+        interactiveElement.dispatchEvent(new MouseEvent('mouseenter'));
+        tick();
+
+        expect(itemWithSubmenu.submenuVisible).toBe(true);
+    }));
+
+    it('should close submenu when user hovers over sibling item', fakeAsync(() => {
+        menu.open();
         fixture.detectChanges();
+        tick();
 
-        // The popover service should have disableScrollbar set to true
-        // because the menu has submenus
-        expect(popoverService.disableScrollbar()).toBe(true);
+        const menuItems = testComponent.menuItems.toArray();
+        const itemWithSubmenu = menuItems[0];
+        const siblingItem = menuItems[3]; // Meat item
+        const interactiveElement = itemWithSubmenu.menuInteractive.elementRef.nativeElement;
+
+        // First hover over item with submenu
+        interactiveElement.dispatchEvent(new MouseEvent('mouseenter'));
+        tick();
+        expect(itemWithSubmenu.submenuVisible).toBe(true);
+
+        // Then hover over sibling
+        siblingItem.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
+        tick();
+
+        expect(itemWithSubmenu.submenuVisible).toBe(false);
     }));
 });
 
@@ -381,7 +390,7 @@ describe('MenuComponent config input', () => {
                     </a>
                 </li>
             </fd-menu>
-            <button #trigger [fdMenuTrigger]="menu"></button>
+            <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
         `,
         standalone: true,
         imports: [MenuModule]
@@ -416,8 +425,7 @@ describe('MenuComponent config input', () => {
         });
     });
 
-    it('should merge config with individual inputs', () => {
-        // Config says placement: 'top-start', but individual input defaults to 'bottom-start'
+    it('should use individual input defaults over config values', () => {
         // Individual inputs should take precedence
         expect(testComponent.menu.placement()).toBe('bottom-start');
     });

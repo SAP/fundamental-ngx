@@ -409,7 +409,7 @@ export class PopoverComponent implements AfterViewInit, AfterContentInit, OnDest
             // In case if popover belongs to the element inside dialog
             event.preventDefault();
             event.stopImmediatePropagation();
-            this.popoverBody()?.onClose.next();
+            this.popoverBody()?.onClose.emit();
         }
     }
 
