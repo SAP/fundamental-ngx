@@ -6,13 +6,14 @@ import {
     DestroyRef,
     Directive,
     ElementRef,
-    EventEmitter,
-    Input,
     NgZone,
-    Output,
     Renderer2,
     booleanAttribute,
-    inject
+    effect,
+    inject,
+    input,
+    linkedSignal,
+    output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, fromEvent } from 'rxjs';
@@ -44,32 +45,19 @@ export interface FocusableItemPosition {
     ]
 })
 export class FocusableItemDirective implements FocusableItem, HasElementRef {
-    /** Whether the item is focusable. Default is true. */
-    @Input({ transform: booleanAttribute })
-    set fdkFocusableItem(val: boolean) {
-        this._focusable = val;
-        this.setTabbable(this._focusable);
-    }
-
-    get fdkFocusableItem(): boolean {
-        return this._focusable;
-    }
-
+    /** @hidden Input with booleanAttribute transform */
+    readonly fdkFocusableItem = input(true, { transform: booleanAttribute });
     /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
-    @Input()
-    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultItemFocusedEventAnnouncer;
+    readonly cellFocusedEventAnnouncer = input<CellFocusedEventAnnouncer>(this._defaultItemFocusedEventAnnouncer);
 
     /** Event emitted when the cell receives focus, not being emitted when focus moves between item's children. */
-    @Output()
-    readonly cellFocused = new EventEmitter<FocusableItemPosition>();
+    readonly cellFocused = output<FocusableItemPosition>();
 
     /** Event emitted when a focusable child element is focused. */
-    @Output()
-    readonly focusableChildElementFocused = new EventEmitter<void>();
+    readonly focusableChildElementFocused = output<void>();
 
     /** @hidden */
-    @Output()
-    readonly _parentFocusableItemFocused = new EventEmitter<void>();
+    readonly _parentFocusableItemFocused = output<void>();
 
     /** Element reference. */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -82,24 +70,31 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
+
     /** @hidden */
     protected readonly _zone = inject(NgZone);
 
-    /** @hidden */
-    private _focusable = true;
+    /**
+     * Internal _focusable state that can be mutated programmatically.
+     * Syncs with the fdkFocusableItem input but allows internal modification.
+     * @hidden
+     */
+    private readonly _focusable = linkedSignal(() => this.fdkFocusableItem());
 
     /** @hidden */
     private _tabbableElements = new Map<HTMLElement, number>();
 
     /** @hidden */
     private _tabbable = true;
+
     /** @hidden */
     private readonly _focusableObserver = inject(FocusableObserver);
+
     /** @hidden */
     private readonly _tabbableElementService = inject(TabbableElementService);
+
     /** @hidden */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
-
     /** @hidden */
     private readonly _renderer2 = inject(Renderer2);
 
@@ -111,12 +106,18 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     constructor() {
+        // Update tabbable state when focusable state changes
+        effect(() => {
+            const focusable = this.fdkFocusableItem();
+            this.setTabbable(focusable);
+        });
+
         this._focusableObserver
             .observe(this.elementRef, false)
             .pipe(takeUntilDestroyed())
             .subscribe((isFocusable) => {
-                if (isFocusable !== this.fdkFocusableItem) {
-                    this.fdkFocusableItem = isFocusable;
+                if (isFocusable !== this.isFocusable()) {
+                    this.setFocusable(isFocusable);
                 }
             });
 
@@ -138,9 +139,21 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
     /** @hidden */
     element = (): HTMLElement => this.elementRef.nativeElement;
 
-    /** @hidden */
+    /**
+     * Programmatically set the _focusable state.
+     * This allows parent components to update the _focusable state.
+     */
+    setFocusable(state: boolean): void {
+        this._focusable.set(state);
+    }
+
+    /**
+     * Interface method required by FocusableItem.
+     * Returns the current focusable state from the internal signal.
+     * @hidden
+     */
     isFocusable(): boolean {
-        return this._focusable;
+        return this._focusable();
     }
 
     /** @hidden */
@@ -180,16 +193,17 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     private async _onFocusin(): Promise<void> {
-        if (!this.fdkFocusableItem) {
+        if (!this.isFocusable()) {
             return;
         }
 
         if (this._position) {
-            this.cellFocused.next(this._position);
+            this.cellFocused.emit(this._position);
 
-            if (this.cellFocusedEventAnnouncer) {
+            const announcer = this.cellFocusedEventAnnouncer();
+            if (announcer) {
                 this._liveAnnouncer.clear();
-                await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+                await this._liveAnnouncer.announce(announcer(this._position));
             }
         }
 
@@ -204,7 +218,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     private _onKeydown(event: KeyboardEvent): void {
-        if (!this.fdkFocusableItem) {
+        if (!this.isFocusable()) {
             return;
         }
         const activeEl = this._document.activeElement;

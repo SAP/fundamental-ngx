@@ -392,7 +392,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
         this._focusableItems.forEach((focusableItemDirective) => {
             focusableItemDirective.setTabbable(!disable);
-            focusableItemDirective.fdkFocusableItem = !disable;
+            focusableItemDirective.setFocusable(!disable);
         });
         if (disable) {
             this._buttons.forEach((button) => {
