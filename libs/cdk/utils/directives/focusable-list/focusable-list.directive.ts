@@ -63,7 +63,7 @@ interface FocusableListConfig {
     exportAs: 'fdkFocusableList',
     standalone: true,
     host: {
-        '[attr.tabindex]': '_tabindex',
+        '[attr.tabindex]': 'tabindex()',
         '(keydown)': '_onKeydown($event)',
         '(focus)': '_onFocus()'
     },
@@ -132,6 +132,9 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
     readonly _isVisible = signal(false);
 
     /** @hidden */
+    protected readonly tabindex = computed(() => (this._tabbable() ? 0 : -1));
+
+    /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -164,11 +167,6 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
-
-    /** @hidden */
-    get _tabindex(): number {
-        return this._tabbable() ? 0 : -1;
-    }
 
     /** @hidden */
     constructor() {
