@@ -1,12 +1,6 @@
 <ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
-    <fd-popover
-        [isOpen]="_isOpen$()"
-        (isOpenChange)="_isOpen$.set($event)"
-        [triggers]="[]"
-        fillControlMode="equal"
-        [focusTrapped]="true"
-    >
+    <fd-popover [isOpen]="_isOpen$()" (isOpenChange)="_isOpen$.set($event)" [triggers]="[]" fillControlMode="equal">
         <fd-popover-control>
             <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
         </fd-popover-control>
@@ -29,7 +23,7 @@
             <fd-busy-indicator
                 [block]="true"
                 [loading]="suggestionsLoading"
-                [title]="busyIndicatorTitle"
+                [title]="suggestionsLoading ? busyIndicatorTitle : undefined"
                 [ariaValueText]="busyIndicatorAriaValueText"
             >
                 @if (
@@ -141,6 +135,9 @@
         ariaHasPopup="dialog"
         [ariaLabel]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : null"
         [ariaDescription]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : ''"
+        [mobile]="mobile && isOpen"
+        (click)="_categorySelectClicked($event)"
+        [mobileConfig]="{ hasCloseButton: true, title: ('platformSearchField.selectStateMessageLabel' | fdTranslate) }"
     >
         <li fd-option (itemSelect)="setCurrentCategory(null)">
             {{ 'platformSearchField.allButtonLabel' | fdTranslate }}
@@ -155,7 +152,7 @@
         class="fdp-search-field"
         [class.with-categories]="_showCategoryDropdown"
         [class.is-loading]="isLoading"
-        [class.is-compact]="contentDensityObserver.isCompactSignal()"
+        [class.is-compact]="!_shellbar && contentDensityObserver.isCompactSignal()"
         [class.hide-category-label]="hideCategoryLabel"
     >
         <div
@@ -205,7 +202,7 @@
                 aria-autocomplete="both"
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit($event)"
-                (keydown.tab)="_handleTabKey($event)"
+                (keydown.tab)="_handleInputTabKey($event)"
                 [(ngModel)]="inputText"
                 (ngModelChange)="onValueChange($event)"
                 (click)="mobile && openMobileMode()"
@@ -284,7 +281,7 @@
 <ng-template #suggestionMenuTemplate>
     @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestionsFiltered) {
         @if (suggestionsFiltered?.length && !_onlyHeadersFiltered(suggestionsFiltered)) {
-            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)" #suggestionListEl>
+            <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)" #suggestionList>
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
                     @if (filteredSuggestion?.isGroupHeader) {
                         <li role="group">
@@ -329,7 +326,9 @@
                 </div>
             }
         } @else if (searchResultsEmptyTemplate) {
-            <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate"></ng-template>
+            <div style="padding-top: 0.5rem; padding-bottom: 0.5rem">
+                <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate"></ng-template>
+            </div>
         }
     }
 </ng-template>
@@ -402,13 +401,13 @@
                 </div>
             } @else {
                 @if (filteredSuggestion.searchInScopeText) {
-                    <span fd-list-title>{{ filteredSuggestion.searchInScopeText }}</span>
+                    <span fd-list-title class="fd-list__title--scope">{{ filteredSuggestion.searchInScopeText }}</span>
                 } @else if (filteredSuggestion?.showMoreText) {
                     @let showMoreText =
                         filteredSuggestion?.showMoreCounter
                             ? filteredSuggestion?.showMoreText + ' (' + filteredSuggestion?.showMoreCounter + ')'
                             : filteredSuggestion?.showMoreText;
-                    <a fd-link [attr.aria-label]="showMoreText">{{ showMoreText }}</a>
+                    <span class="fdp-search-field__show-more" [attr.aria-label]="showMoreText">{{ showMoreText }}</span>
                 } @else {
                     <span
                         fd-list-title
@@ -429,6 +428,7 @@
                             [id]="button.actionButtonId"
                             [glyph]="button.actionButtonGlyph"
                             (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
+                            tabindex="-1"
                         ></button>
                     } @else {
                         <button
@@ -438,6 +438,7 @@
                             [attr.aria-label]="button.actionButtonLabel"
                             [glyph]="button.actionButtonGlyph"
                             (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
+                            tabindex="-1"
                         ></button>
                     }
                 }
@@ -453,6 +454,7 @@
                     [ariaLabel]="'platformSearchField.deleteButtonAriaLabel' | fdTranslate"
                     glyph="decline"
                     (fdkClicked)="_performButtonClick($event, deleteCallback)"
+                    tabindex="-1"
                 ></button>
             }
         }

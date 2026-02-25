@@ -32,6 +32,7 @@ import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ng
 import { Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { ListLinkDirective } from '../directives/list-link.directive';
+import { ListTitleDirective } from '../directives/list-title.directive';
 import { ListFocusItem } from '../list-focus-item.model';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
@@ -171,6 +172,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     get checkbox(): CheckboxComponent {
         return this._checkbox;
     }
+
+    /** @hidden */
+    @ContentChild(ListTitleDirective)
+    listTitle: ListTitleDirective;
 
     /** @hidden */
     @ContentChildren(FD_LIST_LINK_DIRECTIVE)

@@ -101,8 +101,6 @@ fdp-search-field {
 
             .fd-list__title {
                 font-size: var(--sapFontSize);
-                font-family: var(--sapFontSemiboldDuplexFamily);
-                font-weight: 700;
             }
 
             .fd-list__subline {
@@ -133,6 +131,10 @@ fdp-search-field {
         &--suggestion:not(.is-selected),
         &--byline:not(.is-selected) {
             border-bottom: transparent; // TODO: replace with variable
+        }
+
+        .fdp-search-field__show-more {
+            color: var(--sapLinkColor);
         }
     }
 }

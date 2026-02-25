@@ -12,6 +12,8 @@
     <button fd-button fdkFocusableItem label="Illustrated Message" value="illustratedMessage"></button>
     <button fd-button fdkFocusableItem label="Suggestions List" value="customSuggestions"></button>
 </fd-segmented-button>
+<br />
+<fd-checkbox label="Show category select" [(ngModel)]="showCategories"></fd-checkbox>
 
 <div [style.maxWidth]="exampleType === 'mobile' ? '320px' : '100%'" style="height: 500px; background-color: white">
     <fd-shellbar [showSearchFieldOnSizeSmall]="true">
@@ -25,10 +27,9 @@
         <fdp-search-field
             #shellSearchField
             placeholder="Search"
-            fdCozy
             [dataSource]="dataSource"
             [allowEmptySearch]="true"
-            [categories]="categories"
+            [categories]="showCategories ? categories : []"
             initialSuggestionTitle="Try this!"
             initialSuggestionSubline="Search for example 'All my open Objects'"
             [initialSuggestionEmptyTitle]="emptyResultsType === 'customSuggestions' ? 'Oh, there are no results' : ''"
@@ -48,6 +49,7 @@
             (searchSubmit)="submit($event)"
             aria-description="Search results will be shown in main area"
             [showCategoryAllOption]="true"
+            categoryLabel="All"
         ></fdp-search-field>
 
         <fd-shellbar-actions>
@@ -65,27 +67,18 @@
 
 <ng-template #footerTemplate>
     <div fd-bar-middle>
-        <div fd-bar-element>
-            <button
-                (click)="showAllSearchResultsClicked()"
-                fd-button
-                fdType="transparent"
-                class="fd-button--full-width"
-            >
-                Show All Search Results
-            </button>
-        </div>
+        <button (click)="showAllSearchResultsClicked()" fd-button fdType="transparent" class="fd-button--full-width">
+            Show All Search Results
+        </button>
     </div>
 </ng-template>
 
 <ng-template #emptyResultsTemplate>
     @if (emptyResultsType === 'illustratedMessage') {
-        <figure fd-illustrated-message type="xsmall" [svgConfig]="xsmallConfig">
-            <figcaption fd-illustrated-message-figcaption id="xsmall-description">
-                <h3 fd-illustrated-message-title>No Search Results</h3>
-                <p fd-illustrated-message-text>
-                    There are no results to display based on your search terms. Please try another search.
-                </p>
+        <figure fd-illustrated-message type="small" [svgConfig]="smallConfig">
+            <figcaption fd-illustrated-message-figcaption id="small-description">
+                <h3 fd-illustrated-message-title>Let's get some results</h3>
+                <p fd-illustrated-message-text>Start by proiding your search criteria.</p>
             </figcaption>
         </figure>
     }

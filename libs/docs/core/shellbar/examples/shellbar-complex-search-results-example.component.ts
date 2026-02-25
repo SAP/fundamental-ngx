@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
@@ -49,6 +50,7 @@ import { Observable, of } from 'rxjs';
         ShellbarActionComponent,
         FormsModule,
         SegmentedButtonComponent,
+        CheckboxComponent,
         IllustratedMessageModule
     ]
 })
@@ -110,12 +112,11 @@ export class ShellbarComplexSearchResultsExampleComponent implements OnInit {
         }
     ];
 
-    xsmallConfig: SvgConfig = {
-        xsmall: {
-            url: 'assets/images/sapIllus-Ice-Cream-Demo-ExtraSmall.svg',
-            id: 'sapIllus-Ice-Cream-Demo-ExtraSmall'
-        }
+    smallConfig: SvgConfig = {
+        small: { url: 'assets/images/sapIllus-Ice-Cream-Demo-Small.svg', id: 'sapIllus-Ice-Cream-Demo-Small' }
     };
+
+    showCategories = true;
 
     suggestionsLoading = false;
 
@@ -271,7 +272,8 @@ const SUGGESTIONS: SuggestionItem[] = [
                 value: 'Broccoli',
                 data: {
                     type: 'vegetable',
-                    subline: 'Flower vegetable'
+                    subline: 'Flower vegetable',
+                    avatarLabel: 'John Doe'
                 }
             },
             {
@@ -285,8 +287,7 @@ const SUGGESTIONS: SuggestionItem[] = [
             {
                 value: 'Corn',
                 data: {
-                    type: 'vegetable',
-                    avatarLabel: 'John Doe'
+                    type: 'vegetable'
                 }
             },
             {

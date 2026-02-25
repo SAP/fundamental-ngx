@@ -547,6 +547,7 @@ export interface FdLanguage {
         counterLabel: FdLanguageKey<{ count: number }>;
         suggestionsWrapperAriaLabel: FdLanguageKey;
         selectScopeLabel: FdLanguageKey;
+        selectStateMessageLabel: FdLanguageKey;
     };
     platformSwitch: {
         ariaLabel: FdLanguageKey;

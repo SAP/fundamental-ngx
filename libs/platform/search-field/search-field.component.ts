@@ -51,11 +51,14 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityDirective,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
+import { ListComponent, ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
@@ -163,7 +166,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
         ButtonComponent,
         AutoCompleteDirective,
         BusyIndicatorComponent,
-        LinkComponent,
+        ContentDensityDirective,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -325,12 +328,16 @@ export class SearchFieldComponent
     suggestionMenuTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChild('suggestionListEl', { read: ElementRef })
-    suggestionListEl: ElementRef;
+    @ViewChild('suggestionList')
+    suggestionList: ListComponent;
 
     /** @hidden */
     @ViewChildren(SearchFieldSuggestionDirective)
     suggestionItems: QueryList<SearchFieldSuggestionDirective>;
+
+    /** @hidden */
+    @ViewChildren(ListItemComponent)
+    listItems: QueryList<ListItemComponent>;
 
     /** @hidden */
     get searchFieldValue(): SearchInput {
@@ -632,14 +639,12 @@ export class SearchFieldComponent
         } else if (event?.value) {
             if (event.searchInScopeText || event.searchInScopeCounter) {
                 if (event.searchInScopeCallback) {
-                    const mockClick = new Event('click');
-                    this._performButtonClick(mockClick, event.searchInScopeCallback);
+                    this._performButtonClick(null, event.searchInScopeCallback);
                 }
                 return;
             } else if (event.showMoreText) {
                 if (event.showMoreCallback) {
-                    const mockClick = new Event('click');
-                    this._performButtonClick(mockClick, event.showMoreCallback);
+                    this._performButtonClick(null, event.showMoreCallback);
                 }
                 return;
             }
@@ -801,7 +806,16 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    _handleTabKey(event: Event): void {
+    _categorySelectClicked(event: MouseEvent): void {
+        if (this.mobile && !this.isOpen) {
+            event.preventDefault();
+            // event.stopImmediatePropagation();
+            this.openMobileMode();
+        }
+    }
+
+    /** @hidden */
+    _handleInputTabKey(event: Event): void {
         if (this._inputValueMatchesFirstSuggestion()) {
             event.preventDefault();
             this.handleAutoComplete({ term: this.inputText, forceClose: false });
@@ -812,9 +826,8 @@ export class SearchFieldComponent
     /** @hidden */
     _inputValueMatchesFirstSuggestion(): boolean {
         const inputEl = this.inputField.nativeElement as HTMLInputElement;
-        return (
-            inputEl.value === this.suggestionListEl.nativeElement.querySelector('.fd-list__item--suggestion')?.innerText
-        );
+        const firstListItem = this.listItems?.first;
+        return firstListItem?.listTitle && inputEl.value === firstListItem.listTitle.elRef.nativeElement.innerText;
     }
 
     /** @hidden */
@@ -823,7 +836,7 @@ export class SearchFieldComponent
         const keyboardEvent = event as KeyboardEvent;
         const suggestionEl = suggestion.elementRef.nativeElement;
         const actionButtons = suggestionEl.querySelectorAll('.fd-button');
-        if (actionButtons) {
+        if (actionButtons?.length) {
             if (document.activeElement === suggestionEl) {
                 actionButtons[0].focus();
             } else {
@@ -859,9 +872,11 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    _performButtonClick(event: Event, callbackFn: (() => any) | undefined): void {
-        event.preventDefault();
-        event.stopImmediatePropagation();
+    _performButtonClick(event: Event | null, callbackFn: (() => any) | undefined): void {
+        if (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
         if (callbackFn) {
             callbackFn();
         }
@@ -931,7 +946,9 @@ export class SearchFieldComponent
 
     /** @hidden */
     private _getDomRowOrderIndex(row: SearchFieldSuggestionDirective): number {
-        const children = Array.prototype.slice.call(this.suggestionListEl.nativeElement.querySelectorAll('li'));
+        const children = Array.prototype.slice.call(
+            this.suggestionList.elementRef.nativeElement.querySelectorAll('li')
+        );
         return children.indexOf(row.element.nativeElement);
     }
 
@@ -966,7 +983,7 @@ export class SearchFieldComponent
     /** @hidden */
     private _setAriaOwns(): void {
         this.detectChanges();
-        const parentListEl = this.suggestionListEl?.nativeElement;
+        const parentListEl = this.suggestionList?.elementRef.nativeElement;
         parentListEl?.querySelectorAll('.fd-list').forEach((list: HTMLElement) => {
             const visibleChildren = list.querySelectorAll('.fd-list__item--suggestion');
             let childIds = '';

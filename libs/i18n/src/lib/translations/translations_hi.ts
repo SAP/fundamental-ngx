@@ -400,7 +400,8 @@ export default {
         groupHeader: 'Group Header',
         counterLabel: 'Total results: {count}',
         suggestionsWrapperAriaLabel: 'Suggestions',
-        selectScopeLabel: 'Select scope'
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSwitch: {
         ariaLabel: 'स्विच'

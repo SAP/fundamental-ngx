@@ -318,6 +318,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformSearchField.counterLabel'
     | 'platformSearchField.suggestionsWrapperAriaLabel'
     | 'platformSearchField.selectScopeLabel'
+    | 'platformSearchField.selectStateMessageLabel'
     | 'platformSettingsGenerator.settingsLabel'
     | 'platformSettingsGenerator.searchLabel'
     | 'platformSettingsGenerator.backButtonLabel'
