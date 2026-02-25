@@ -1,4 +1,4 @@
-import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { CdkTrapFocus, FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
@@ -167,6 +167,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
         AutoCompleteDirective,
         BusyIndicatorComponent,
         ContentDensityDirective,
+        CdkTrapFocus,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -467,6 +468,9 @@ export class SearchFieldComponent
 
     /** @hidden */
     _categorySelectDescription: string;
+
+    /** @hidden */
+    _actionButtonTabIndex: -1 | 0 = -1;
 
     /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
@@ -833,25 +837,24 @@ export class SearchFieldComponent
     /** @hidden */
     _focusActionButton(event: Event, suggestion: ListItemComponent): void {
         event.preventDefault();
+        event.stopPropagation();
         const keyboardEvent = event as KeyboardEvent;
         const suggestionEl = suggestion.elementRef.nativeElement;
         const actionButtons = suggestionEl.querySelectorAll('.fd-button');
         if (actionButtons?.length) {
             if (document.activeElement === suggestionEl) {
+                this._actionButtonTabIndex = 0;
                 actionButtons[0].focus();
-            } else {
-                let focusedIndex = -1;
-                for (let i = 0; i < actionButtons.length; i++) {
-                    if (document.activeElement === actionButtons[i]) {
-                        focusedIndex = i;
-                    }
-                }
-                if (focusedIndex !== -1) {
-                    keyboardEvent.shiftKey ? (focusedIndex = focusedIndex - 1) : (focusedIndex = focusedIndex + 1);
-                    actionButtons[focusedIndex]?.focus();
-                }
             }
         }
+    }
+
+    /** @hidden */
+    _focusParentListItem(event: Event, suggestion: ListItemComponent): void {
+        event.preventDefault();
+        event.stopPropagation();
+        this._actionButtonTabIndex = -1;
+        suggestion.elementRef?.nativeElement?.focus();
     }
 
     /** @hidden */

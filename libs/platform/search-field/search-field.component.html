@@ -343,7 +343,6 @@
         (keydown.enter)="onItemClick(filteredSuggestion, suggestionListItem); $event.preventDefault()"
         (keyup.space)="onItemClick(filteredSuggestion, suggestionListItem); $event.stopPropagation()"
         (keydown.f2)="_focusActionButton($event, suggestionListItem)"
-        (keydown.shift.f2)="_focusActionButton($event, suggestionListItem)"
         (click)="onItemClick(filteredSuggestion, suggestionListItem)"
         [byline]="!!subline"
         #suggestionListItem
@@ -416,46 +415,53 @@
                 }
             }
 
+            @let showDeleteButton = filteredSuggestion?.data?.showDeleteButton;
             @let actionButtons = filteredSuggestion?.data?.actionButtons;
-            @if (actionButtons && actionButtons.length) {
-                @for (button of actionButtons; track $index) {
-                    @if (button.id) {
+            @if (showDeleteButton || actionButtons?.length) {
+                <div tabindex="-1" [cdkTrapFocus]="_actionButtonTabIndex === 0">
+                    @if (actionButtons && actionButtons.length) {
+                        @for (button of actionButtons; track $index) {
+                            @if (button.id) {
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    [title]="button.actionButtonLabel"
+                                    [attr.aria-label]="button.actionButtonLabel"
+                                    [id]="button.actionButtonId"
+                                    [glyph]="button.actionButtonGlyph"
+                                    (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
+                                    (keydown.f2)="_focusParentListItem($event, suggestionListItem)"
+                                    [attr.tabindex]="_actionButtonTabIndex"
+                                ></button>
+                            } @else {
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    [title]="button.actionButtonLabel"
+                                    [attr.aria-label]="button.actionButtonLabel"
+                                    [glyph]="button.actionButtonGlyph"
+                                    (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
+                                    (keydown.f2)="_focusParentListItem($event, suggestionListItem)"
+                                    [attr.tabindex]="_actionButtonTabIndex"
+                                ></button>
+                            }
+                        }
+                    }
+
+                    @let deleteCallback = filteredSuggestion?.data?.deleteCallback;
+                    @if (showDeleteButton && _searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)) {
                         <button
                             fd-button
                             fdType="transparent"
-                            [title]="button.actionButtonLabel"
-                            [attr.aria-label]="button.actionButtonLabel"
-                            [id]="button.actionButtonId"
-                            [glyph]="button.actionButtonGlyph"
-                            (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
-                            tabindex="-1"
-                        ></button>
-                    } @else {
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            [title]="button.actionButtonLabel"
-                            [attr.aria-label]="button.actionButtonLabel"
-                            [glyph]="button.actionButtonGlyph"
-                            (fdkClicked)="_performButtonClick($event, button.actionButtonCallback)"
-                            tabindex="-1"
+                            [title]="'platformSearchField.deleteButtonTitle' | fdTranslate"
+                            [ariaLabel]="'platformSearchField.deleteButtonAriaLabel' | fdTranslate"
+                            glyph="decline"
+                            (fdkClicked)="_performButtonClick($event, deleteCallback)"
+                            (keydown.f2)="_focusParentListItem($event, suggestionListItem)"
+                            [attr.tabindex]="_actionButtonTabIndex"
                         ></button>
                     }
-                }
-            }
-
-            @let showDeleteButton = filteredSuggestion?.data?.showDeleteButton;
-            @let deleteCallback = filteredSuggestion?.data?.deleteCallback;
-            @if (showDeleteButton && _searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)) {
-                <button
-                    fd-button
-                    fdType="transparent"
-                    [title]="'platformSearchField.deleteButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformSearchField.deleteButtonAriaLabel' | fdTranslate"
-                    glyph="decline"
-                    (fdkClicked)="_performButtonClick($event, deleteCallback)"
-                    tabindex="-1"
-                ></button>
+                </div>
             }
         }
     </li>
