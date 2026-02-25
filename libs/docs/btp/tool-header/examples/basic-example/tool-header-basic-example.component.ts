@@ -8,11 +8,9 @@ import {
     FdbToolHeaderActionButton,
     ToolHeaderActionButtonDirective,
     ToolHeaderActionDirective,
-    ToolHeaderActionSeparatorComponent,
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
-import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -53,13 +51,11 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyDirective,
-        RepeatDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,
         ContentDensityDirective,
         ToolHeaderActionDirective,
-        ToolHeaderActionSeparatorComponent,
         ButtonBadgeDirective,
         ToolHeaderActionButtonDirective,
         ToolHeaderButtonDirective

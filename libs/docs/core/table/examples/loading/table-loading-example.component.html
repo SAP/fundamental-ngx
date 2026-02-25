@@ -9,15 +9,23 @@
     </thead>
     <tbody fd-table-body>
         @if (!loading) {
-            <tr fd-table-row *fdkRepeat="3; let rowI = index">
-                <td fd-table-cell *fdkRepeat="3; let colI = index">Row {{ rowI + 1 }}, Col {{ colI + 1 }}</td>
-            </tr>
+            @for (rowI of loadingRange; track rowI) {
+                <tr fd-table-row>
+                    @for (colI of loadingRange; track colI) {
+                        <td fd-table-cell>Row {{ rowI + 1 }}, Col {{ colI + 1 }}</td>
+                    }
+                </tr>
+            }
         } @else {
-            <tr fd-table-row *fdkRepeat="3">
-                <td fd-table-cell *fdkRepeat="3">
-                    <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
-                </td>
-            </tr>
+            @for (_ of loadingRange; track $index) {
+                <tr fd-table-row>
+                    @for (_ of loadingRange; track $index) {
+                        <td fd-table-cell>
+                            <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
+                        </td>
+                    }
+                </tr>
+            }
         }
     </tbody>
 </table>
