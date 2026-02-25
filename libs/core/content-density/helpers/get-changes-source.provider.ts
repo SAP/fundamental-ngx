@@ -1,4 +1,4 @@
-import { Observable, of, switchMap } from 'rxjs';
+import { computed, Signal } from '@angular/core';
 import {
     ContentDensityDefaultKeyword,
     ContentDensityGlobalKeyword,
@@ -7,30 +7,40 @@ import {
 import { GlobalContentDensityService } from '../services/global-content-density.service';
 import { ContentDensityMode } from '../types/content-density.mode';
 
-export const getChangesSource$ = (params: {
+/**
+ * Creates a computed signal that resolves the content density from multiple sources.
+ *
+ * Priority order:
+ * 1. Parent content density observer (if restrictChildContentDensity is enabled)
+ * 2. Content density directive
+ * 3. Global content density service
+ * 4. Default content density
+ *
+ * Special keywords are resolved:
+ * - 'default' -> uses defaultContentDensity
+ * - 'global' -> uses global service value
+ */
+export const getChangesSource = (params: {
     defaultContentDensity: ContentDensityMode;
-    contentDensityDirective?: Observable<LocalContentDensityMode>;
+    contentDensityDirective?: Signal<LocalContentDensityMode>;
     contentDensityService?: GlobalContentDensityService;
-    parentContentDensityService?: Observable<ContentDensityMode>;
-}): Observable<ContentDensityMode> => {
-    const serviceValue$: Observable<ContentDensityMode> = params.contentDensityService
-        ? params.contentDensityService.contentDensityListener()
-        : of(params.defaultContentDensity);
-    const changesSource$ = params.parentContentDensityService
-        ? params.parentContentDensityService
-        : params.contentDensityDirective
-          ? params.contentDensityDirective
-          : serviceValue$;
+    parentContentDensityObserver?: Signal<ContentDensityMode>;
+}): Signal<ContentDensityMode> =>
+    computed(() => {
+        // Get the raw mode from the appropriate source (priority order)
+        const rawMode: LocalContentDensityMode = params.parentContentDensityObserver
+            ? params.parentContentDensityObserver()
+            : params.contentDensityDirective
+              ? params.contentDensityDirective()
+              : (params.contentDensityService?.currentDensitySignal() ?? params.defaultContentDensity);
 
-    return changesSource$.pipe(
-        switchMap((mode: LocalContentDensityMode) => {
-            if (mode === ContentDensityDefaultKeyword) {
-                return of(params.defaultContentDensity);
-            }
-            if (mode === ContentDensityGlobalKeyword) {
-                return serviceValue$;
-            }
-            return of(mode);
-        })
-    );
-};
+        // Resolve special keywords
+        if (rawMode === ContentDensityDefaultKeyword) {
+            return params.defaultContentDensity;
+        }
+        if (rawMode === ContentDensityGlobalKeyword) {
+            return params.contentDensityService?.currentDensitySignal() ?? params.defaultContentDensity;
+        }
+
+        return rawMode;
+    });

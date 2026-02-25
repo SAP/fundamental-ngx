@@ -117,6 +117,7 @@ describe('SliderComponent', () => {
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(sliders.length);
         setContentDensity(ContentDensityMode.COMPACT);
+        fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(1);
     });
 

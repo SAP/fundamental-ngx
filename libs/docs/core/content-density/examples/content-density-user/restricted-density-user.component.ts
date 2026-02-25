@@ -6,8 +6,12 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
+/**
+ * Example component that restricts child content density.
+ * Children will always inherit this component's density, regardless of their own directives.
+ */
 @Component({
-    selector: 'fd-docs-content-density-user',
+    selector: 'fd-docs-restricted-density-user',
     template: `
         <ng-content></ng-content>
         <span
@@ -19,7 +23,7 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     `,
     styleUrls: ['./content-density-user.component.scss'],
     host: {
-        class: 'example-component',
+        class: 'example-component example-component--restricted',
         '[class.is-compact]': '_contentDensityObserver.isCompactSignal()',
         '[class.is-cozy]': '_contentDensityObserver.isCozySignal()',
         '[class.is-condensed]': '_contentDensityObserver.isCondensedSignal()'
@@ -31,12 +35,13 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
                 ContentDensityMode.COZY,
                 ContentDensityMode.CONDENSED
             ],
-            defaultContentDensity: ContentDensityMode.COMPACT
+            defaultContentDensity: ContentDensityMode.COZY,
+            restrictChildContentDensity: true
         })
     ],
     encapsulation: ViewEncapsulation.None,
     imports: [ObjectStatusComponent]
 })
-export class ContentDensityUserComponent {
+export class RestrictedDensityUserComponent {
     constructor(readonly _contentDensityObserver: ContentDensityObserver) {}
 }

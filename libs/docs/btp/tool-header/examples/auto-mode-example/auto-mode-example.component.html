@@ -1,4 +1,10 @@
-<fdb-tool-header productName="Fundamental-ngx" secondTitle="Angular" fdbToolHeaderAutoMode #toolHeaderComponent>
+<fdb-tool-header
+    productName="Fundamental-ngx"
+    secondTitle="Angular"
+    fdbToolHeaderAutoMode
+    #toolHeaderComponent
+    (contentDensityChange)="currentContentDensity = $event"
+>
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
     <ng-template fdbToolHeaderAction [forceVisibility]="true">
         <fd-popover [noArrow]="false">
@@ -73,4 +79,5 @@
 <div [style.margin-top.rem]="2">
     <div>Current mode: {{ toolHeaderComponent.mode$() }}</div>
     <div>Current orientation: {{ toolHeaderComponent.orientation$() }}</div>
+    <div>Current content density: {{ currentContentDensity }} (desktop=compact, tablet/phone=cozy)</div>
 </div>

@@ -1,19 +1,28 @@
-import { Observable } from 'rxjs';
+import { Signal } from '@angular/core';
 import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
- * Abstract provider class for providing content density storage functionality
- * Default implementation is MemoryContentDensityStorage
+ * Abstract class for content density storage implementations.
+ * The default implementation is MemoryContentDensityStorage.
+ *
+ * Provides a signal-based API for reactive content density tracking.
+ *
+ * @example
+ * // Provide a custom storage implementation
+ * providers: [
+ *   { provide: ContentDensityStorage, useClass: LocalContentDensityStorage }
+ * ]
  */
 export abstract class ContentDensityStorage {
     /**
-     * Get listener for current density updates
+     * Current content density as a readonly signal.
+     * Read this signal to get the current density or react to changes.
      */
-    abstract getContentDensity(): Observable<ContentDensityMode>;
+    abstract readonly contentDensity: Signal<ContentDensityMode>;
 
     /**
-     * Save updated configuration
-     * @param density
+     * Updates the content density.
+     * @param density The new content density mode
      */
-    abstract setContentDensity(density: ContentDensityMode): Observable<void>;
+    abstract setContentDensity(density: ContentDensityMode): void;
 }
