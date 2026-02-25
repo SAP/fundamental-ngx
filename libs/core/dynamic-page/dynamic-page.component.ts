@@ -93,8 +93,11 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     @Input()
     set size(size: DynamicPageResponsiveSize) {
         this._size = size;
-        // Set manual override so children react via signals
-        this._dynamicPageService.manualSizeOverride.set(size);
+        // Only set manual override when autoResponsive is false
+        // When autoResponsive is true, size changes are driven by resize events
+        if (!this.autoResponsive) {
+            this._dynamicPageService.manualSizeOverride.set(size);
+        }
         this._updateDynamicPageHeight();
     }
 
@@ -254,8 +257,10 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
         this._dynamicPageService.pixelsSizeChanged.set(dynamicPageWidth);
         const size = this._dynamicPageService.responsiveSize();
 
-        if (size !== this.size) {
-            this.size = size;
+        if (size !== this._size) {
+            // Update internal size directly without triggering manual override
+            // Manual override should only be set when user explicitly sets the size input
+            this._size = size;
             this._cd.detectChanges();
         }
     }

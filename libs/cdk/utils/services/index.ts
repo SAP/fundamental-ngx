@@ -1,5 +1,4 @@
 export * from './content-density.service';
-export * from './destroyed.service';
 export * from './focus-trap.service';
 export * from './keyboard-support/keyboard-support.service';
 export * from './local-storage.service';
