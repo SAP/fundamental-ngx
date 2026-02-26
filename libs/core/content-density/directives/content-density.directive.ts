@@ -1,13 +1,23 @@
-import { Directive, Input, OnDestroy, booleanAttribute, forwardRef, isDevMode } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { booleanAttribute, computed, Directive, forwardRef, input, isDevMode, signal } from '@angular/core';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { isContentDensityMode } from '../helpers/density-type-checkers';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
- * Directive to control the content density of the elements.
- * This Directive is used in density controllers and consumers
+ * Directive to control the content density of elements.
+ * Used by density controllers and consumers.
+ *
+ * Provides signal-based state management for reactive content density tracking.
+ *
+ * @example
+ * // Using fdContentDensity input
+ * <fd-button [fdContentDensity]="'compact'">Button</fd-button>
+ *
+ * // Using shorthand inputs
+ * <fd-button fdCompact>Compact Button</fd-button>
+ * <fd-button fdCozy>Cozy Button</fd-button>
+ * <fd-button fdCondensed>Condensed Button</fd-button>
  */
 @Directive({
     selector: `[fdContentDensity]:not([fdCompact]):not([fdCondensed]):not([fdCozy]),
@@ -20,62 +30,120 @@ import { ContentDensityMode } from '../types/content-density.mode';
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => ContentDensityDirective)
         }
-    ],
-    standalone: true
+    ]
 })
-export class ContentDensityDirective extends BehaviorSubject<LocalContentDensityMode> implements OnDestroy {
+export class ContentDensityDirective {
     /**
-     * Update the content density of the element on the fly
+     * Sets the content density of the element dynamically.
+     * Accepts 'compact', 'cozy', 'condensed', or 'global'.
+     *
+     * @example
+     * <fd-button [fdContentDensity]="'compact'">Button</fd-button>
      */
-    @Input()
-    // `${ContentDensityMode}` is here to allow the user to pass a string literal
-    set fdContentDensity(val: `${ContentDensityMode}` | LocalContentDensityMode | '') {
+    readonly fdContentDensity = input<`${ContentDensityMode}` | LocalContentDensityMode | ''>('');
+
+    /**
+     * Shorthand for setting compact density.
+     * Equivalent to `[fdContentDensity]="'compact'"`.
+     *
+     * @example
+     * <fd-button fdCompact>Button</fd-button>
+     * <fd-button [fdCompact]="isCompact">Button</fd-button>
+     */
+    readonly fdCompact = input(false, { transform: booleanAttribute });
+
+    /**
+     * Shorthand for setting condensed density.
+     * Equivalent to `[fdContentDensity]="'condensed'"`.
+     *
+     * @example
+     * <fd-button fdCondensed>Button</fd-button>
+     * <fd-button [fdCondensed]="isCondensed">Button</fd-button>
+     */
+    readonly fdCondensed = input(false, { transform: booleanAttribute });
+
+    /**
+     * Shorthand for setting cozy density.
+     * Equivalent to `[fdContentDensity]="'cozy'"`.
+     *
+     * @example
+     * <fd-button fdCozy>Button</fd-button>
+     * <fd-button [fdCozy]="isCozy">Button</fd-button>
+     */
+    readonly fdCozy = input(false, { transform: booleanAttribute });
+
+    /**
+     * Current content density mode as a computed signal.
+     * Resolves the density based on shorthand inputs or fdContentDensity value.
+     *
+     * @returns The resolved content density mode
+     */
+    readonly densityMode: ReturnType<typeof computed<LocalContentDensityMode>> = computed(() => {
+        // Check programmatic override first
+        const programmaticDensity = this._programmaticDensity();
+        if (programmaticDensity !== null) {
+            return programmaticDensity;
+        }
+
+        // Check shorthand inputs
+        if (this.fdCompact()) {
+            return ContentDensityMode.COMPACT;
+        }
+        if (this.fdCondensed()) {
+            return ContentDensityMode.CONDENSED;
+        }
+        if (this.fdCozy()) {
+            return ContentDensityMode.COZY;
+        }
+
+        // Then check fdContentDensity input
+        const val = this.fdContentDensity();
+        if (val === '') {
+            return ContentDensityGlobalKeyword;
+        }
         if (!isContentDensityMode(val)) {
-            if (isDevMode() && val !== '') {
-                console.log(
-                    `The value "${val}" is not a valid content density mode.
-                     Using "${ContentDensityGlobalKeyword}" instead.`
+            if (isDevMode()) {
+                console.warn(
+                    `The value "${val}" is not a valid content density mode. Using "${ContentDensityGlobalKeyword}" instead.`
                 );
             }
-            val = ContentDensityGlobalKeyword;
+            return ContentDensityGlobalKeyword;
         }
-        this.next(val as LocalContentDensityMode);
+        return val as LocalContentDensityMode;
+    });
+
+    /**
+     * Current density mode value.
+     *
+     * @deprecated Use densityMode() signal instead
+     * @returns The current content density mode
+     */
+    get value(): LocalContentDensityMode {
+        return this.densityMode();
     }
 
     /**
-     * This input is basically syntax sugar, for not writing fdContentDensity="compact",
-     * instead you can just write fdCompact="true" or [fdCompact]
+     * Internal signal for programmatic density updates.
+     * Takes precedence over input bindings when set.
      */
-    @Input({ transform: booleanAttribute })
-    set fdCompact(val: boolean) {
-        this.next(val ? ContentDensityMode.COMPACT : ContentDensityGlobalKeyword);
+    private readonly _programmaticDensity = signal<LocalContentDensityMode | null>(null);
+
+    /**
+     * Sets the content density programmatically.
+     * Use this method when you need to update the density from code
+     * (e.g., in host directives or dynamic scenarios).
+     *
+     * @param density The content density mode to set
+     */
+    setDensity(density: LocalContentDensityMode): void {
+        this._programmaticDensity.set(density);
     }
 
     /**
-     * This input is basically syntax sugar, for not writing fdContentDensity="condensed",
-     * instead you can just write fdCondensed="true" or [fdCondensed]
+     * Clears the programmatic density override.
+     * After calling this, the density will be resolved from input bindings.
      */
-    @Input({ transform: booleanAttribute })
-    set fdCondensed(val: boolean) {
-        this.next(val ? ContentDensityMode.CONDENSED : ContentDensityGlobalKeyword);
-    }
-
-    /**
-     * This input is basically syntax sugar, for not writing fdContentDensity="cozy",
-     * instead you can just write fdCozy="true" or [fdCozy]
-     */
-    @Input({ transform: booleanAttribute })
-    set fdCozy(val: boolean) {
-        this.next(val ? ContentDensityMode.COZY : ContentDensityGlobalKeyword);
-    }
-
-    /** @hidden */
-    constructor() {
-        super(ContentDensityGlobalKeyword);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.complete();
+    clearDensity(): void {
+        this._programmaticDensity.set(null);
     }
 }

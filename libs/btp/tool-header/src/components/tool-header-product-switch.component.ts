@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { BasePopoverClass } from '@fundamental-ngx/core/popover';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
 import {
     FD_PRODUCT_SWITCH_COMPONENT,
     ProductSwitchButtonDirective,
@@ -21,17 +21,16 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     ],
     template: `
         <fd-product-switch
-            [placement]="placement"
-            [closeOnEscapeKey]="closeOnEscapeKey"
-            [closeOnOutsideClick]="closeOnOutsideClick"
+            [placement]="placement()"
+            [closeOnEscapeKey]="closeOnEscapeKey()"
+            [closeOnOutsideClick]="closeOnOutsideClick()"
             [(isOpen)]="isOpen"
-            (isOpenChange)="isOpenChange.emit($event)"
-            [disabled]="disabled"
-            [triggers]="triggers"
-            [focusTrapped]="false"
-            [focusAutoCapture]="true"
-            [noArrow]="noArrow"
-            [disableScrollbar]="true"
+            [disabled]="disabled()"
+            [triggers]="triggers()"
+            [focusTrapped]="focusTrapped()"
+            [focusAutoCapture]="focusAutoCapture()"
+            [noArrow]="noArrow()"
+            [disableScrollbar]="disableScrollbar()"
         >
             <button
                 *fdProductSwitchButton
@@ -49,14 +48,42 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
             provide: FD_PRODUCT_SWITCH_COMPONENT,
             useExisting: ToolHeaderProductSwitchComponent
         }
-    ]
+    ],
+    host: {
+        '[class.fd-popover-custom--disabled]': 'disabled()'
+    }
 })
-export class ToolHeaderProductSwitchComponent extends BasePopoverClass {
+export class ToolHeaderProductSwitchComponent {
     /** Placement of a popover. */
-    @Input()
-    override placement: Placement = 'bottom-end';
+    readonly placement = input<Placement>('bottom-end');
 
     /** Whether the product switch is disabled. */
-    @Input()
-    override disabled = false;
+    readonly disabled = input(false);
+
+    /** Whether the popover should close when the escape key is pressed. */
+    readonly closeOnEscapeKey = input(true);
+
+    /** Whether the popover should close when a click is made outside its boundaries. */
+    readonly closeOnOutsideClick = input(true);
+
+    /** Whether the popover should have an arrow. */
+    readonly noArrow = input(true);
+
+    /** Whether to wrap content with fd-scrollbar directive. */
+    readonly disableScrollbar = input(true);
+
+    /** The trigger events that will open/close the popover. */
+    readonly triggers = input<(string | TriggerConfig)[]>(['click']);
+
+    /** Whether the popover should be focusTrapped. */
+    readonly focusTrapped = input(false);
+
+    /** Whether the popover should automatically move focus into the trapped region. */
+    readonly focusAutoCapture = input(true);
+
+    /** Two-way binding for isOpen state */
+    readonly isOpen = model(false);
+
+    /** Event emitted right before the popover is being opened. */
+    readonly beforeOpen = output<void>();
 }
