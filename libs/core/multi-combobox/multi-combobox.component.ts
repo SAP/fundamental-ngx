@@ -33,7 +33,6 @@ import {
     FocusEscapeDirection,
     FocusTrapService,
     KeyUtil,
-    Nullable,
     SearchHighlightPipe,
     TemplateDirective,
     TruncatedTitleDirective,
@@ -218,7 +217,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Computed maximum width for the popover in pixels.
      * @hidden
      */
-    get _popoverMaxWidth(): Nullable<number> {
+    get _popoverMaxWidth(): number | null {
         const bodyMaxWidth = this.bodyMaxWidth();
         if (bodyMaxWidth === 'none') {
             return null;

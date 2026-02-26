@@ -1,31 +1,31 @@
 <div
     class="fd-popover__body fd-popover__body--static"
-    [class.fd-popover__body--no-arrow]="_noArrow"
-    [class.fd-popover__body--resizable]="_resizable"
-    [class]="_arrowClasses + ' ' + (_additionalBodyClass || '')"
-    [cdkTrapFocus]="_focusTrapped"
-    [style.min-width]="_popoverBodyMinWidth ? null : minWidth"
-    [style.max-width]="_maxWidth ? null : maxWidth"
-    [style.min-height]="minHeight"
-    [style.max-height]="maxHeight"
-    [style.max-width.px]="_maxWidth"
-    [style.min-width.px]="_popoverBodyMinWidth"
-    [style.width.px]="_popoverBodyWidth"
-    [attr.role]="_bodyRole"
-    [attr.id]="_bodyId"
+    [class.fd-popover__body--no-arrow]="_noArrow()"
+    [class.fd-popover__body--resizable]="_resizable()"
+    [class]="_arrowClasses() + ' ' + (_additionalBodyClass() || '')"
+    [cdkTrapFocus]="_focusTrapped()"
+    [style.min-width]="_popoverBodyMinWidth() ? null : minWidth()"
+    [style.max-width]="_maxWidth() ? null : maxWidth()"
+    [style.min-height]="minHeight()"
+    [style.max-height]="maxHeight()"
+    [style.max-width.px]="_maxWidth()"
+    [style.min-width.px]="_popoverBodyMinWidth()"
+    [style.width.px]="_popoverBodyWidth()"
+    [attr.role]="_bodyRole()"
+    [attr.id]="_bodyId()"
     fdkResize
-    [fdkResizeDisabled]="!_resizable"
+    [fdkResizeDisabled]="!_resizable()"
     [fdkResizeClass]="'fd-popover__body--disable-transitions'"
-    [fdkResizeHandleLocation]="_resizeHandleLocation"
+    [fdkResizeHandleLocation]="_resizeHandleLocation()"
 >
-    @if (!_disableScrollbar) {
+    @if (!_disableScrollbar()) {
         <div fd-scrollbar class="fd-popover__wrapper">
             <ng-template [ngTemplateOutlet]="renderer"></ng-template>
         </div>
     } @else {
         <ng-template [ngTemplateOutlet]="renderer"></ng-template>
     }
-    @if (_resizable) {
+    @if (_resizable()) {
         <span fdkResizeHandle class="fd-popover__resize-handle" role="presentation" aria-hidden="true"></span>
     }
 </div>
@@ -33,7 +33,9 @@
     <ng-content select="[fd-popover-body-header]"></ng-content>
     <ng-content select="[fd-popover-body-subheader]"></ng-content>
     <ng-content></ng-content>
-    {{ text }}
-    <ng-template [ngTemplateOutlet]="_templateToDisplay"></ng-template>
+    {{ text() }}
+    @if (_templateToDisplay()) {
+        <ng-template [ngTemplateOutlet]="_templateToDisplay()!"></ng-template>
+    }
     <ng-content select="[fd-popover-body-footer]"></ng-content>
 </ng-template>

@@ -202,8 +202,11 @@ describe('SelectComponent', () => {
             triggerControl.click();
             await wait(fixture);
 
-            const option1 = document.querySelector('.cdk-overlay-container #option-1') as HTMLElement;
-            option1.click();
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component._isOpen).toBeTruthy();
+
+            // Click first option using component API instead of DOM query
+            component._options.toArray()[0]._getHtmlElement().click();
             await wait(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeFalsy();
@@ -230,11 +233,10 @@ describe('SelectComponent', () => {
             component.open();
             await wait(fixture);
 
-            const options: NodeListOf<HTMLElement> = document.querySelectorAll(
-                '.cdk-overlay-container .fd-list .fd-list__item '
-            );
-            options[1].click();
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
 
+            // Click second option using component API instead of DOM query
+            component._options.toArray()[1]._getHtmlElement().click();
             await wait(fixture);
 
             expect(component.selected.value).toBe('value-2');

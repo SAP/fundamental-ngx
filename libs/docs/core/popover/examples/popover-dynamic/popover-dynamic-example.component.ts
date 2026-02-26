@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Component, signal, viewChild } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -9,16 +9,12 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, AvatarComponent]
 })
 export class PopoverDynamicExampleComponent {
-    @ViewChild('popoverComponent')
-    popoverComponent: PopoverComponent;
+    readonly popoverComponent = viewChild<PopoverComponent>('popoverComponent');
 
-    showAvatar = false;
-
-    constructor(private changeDetectionRef: ChangeDetectorRef) {}
+    showAvatar = signal(false);
 
     updatePopover(): void {
-        this.showAvatar = true;
-        this.popoverComponent.refreshPosition();
-        this.changeDetectionRef.detectChanges();
+        this.showAvatar.set(true);
+        this.popoverComponent()?.refreshPosition();
     }
 }

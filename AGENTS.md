@@ -1,6 +1,6 @@
 <!--
 Document: Angular 21+ Development Guidelines for Fundamental NGX
-Last Updated: February 21, 2026
+Last Updated: February 23, 2026
 Version: 3.1
 Purpose: Comprehensive guide for AI agents and developers working with Angular 21+ in NX monorepo
 -->
@@ -144,6 +144,9 @@ Here are the essential links for building Angular components. Use these to under
 | `contentChild()` returns undefined        | Use `?? null` for null-expecting signals | [Queries](#queries)                                                                |
 | Setting signal input programmatically     | Use setter method pattern                | [Programmatic Signal Input Updates](#programmatic-signal-input-updates)            |
 | Removing unused code                      | Verify no usages, check public API       | [Dead Code Removal](#dead-code-removal)                                            |
+| Class extending BehaviorSubject           | Remove inheritance, use internal signal  | [Migrating Classes](#migrating-classes-that-extend-behaviorsubject)                |
+| Observable-based token interface          | Update to Signal-based interface         | [Migrating Token Interfaces](#migrating-token-interfaces)                          |
+| Observable-returning helper function      | Use `computed()` returning Signal        | [Migrating Helper Functions](#migrating-helper-functions)                          |
 
 ## Common Mistakes to Avoid
 
@@ -1455,6 +1458,80 @@ export class PriceCalculator {
 3. Replace `.next(value)` with `.set(value)` or `.update(fn)`
 4. Remove `takeUntil`, `destroy$`, and `ngOnDestroy` cleanup
 5. Remove `$` suffix from variable names (signals don't need the observable convention)
+
+#### Migrating Classes That Extend BehaviorSubject
+
+**Anti-pattern:** Classes that `extend BehaviorSubject<T>` should use internal signals instead.
+
+```typescript
+// ❌ Before - extending BehaviorSubject
+@Injectable()
+export class StateObserver extends BehaviorSubject<StateMode> {
+    constructor() {
+        super(StateMode.DEFAULT);
+    }
+}
+
+// ✅ After - signal-based
+@Injectable()
+export class StateObserver {
+    readonly state: Signal<StateMode>;
+    readonly isDirty = computed(() => this._state() !== StateMode.DEFAULT);
+
+    private readonly _state = signal<StateMode>(StateMode.DEFAULT);
+
+    /** @deprecated Use state() instead */
+    get value(): StateMode {
+        return this._state();
+    }
+
+    constructor(injector: Injector) {
+        this.state = this._state.asReadonly();
+        // Backward compat: toObservable() for existing Observable consumers
+        this.state$ = toObservable(this._state, { injector });
+    }
+
+    /** @deprecated Use state signal instead */
+    asObservable(): Observable<StateMode> {
+        return this.state$;
+    }
+}
+```
+
+**Backward compatibility mapping:**
+
+| Old API               | Signal Replacement                 |
+| --------------------- | ---------------------------------- |
+| `.value`              | Getter → `signal()`                |
+| `.subscribe()`        | `toObservable(signal).subscribe()` |
+| `.asObservable()`     | `toObservable(signal)`             |
+| `derived$` Observable | `toObservable(computedSignal)`     |
+
+#### Migrating Token Interfaces
+
+Update injection token interfaces from Observable to Signal:
+
+```typescript
+// ❌ Before                              // ✅ After
+interface DirectiveRef {                  interface DirectiveRef {
+    changes$: Observable<Mode>;     →         mode: Signal<Mode>;
+    value: Mode;                              /** @deprecated */ value: Mode;
+}                                         }
+```
+
+#### Migrating Helper Functions
+
+Replace `merge`/`combineLatest` helpers with `computed()`:
+
+```typescript
+// ❌ Before - Observable helper
+const getSource$ = (a$: Observable<T>, b$: Observable<T>): Observable<T> =>
+    merge(a$, b$).pipe(startWith(default), distinctUntilChanged());
+
+// ✅ After - Signal helper
+const getSource = (a: Signal<T>, b: Signal<T>): Signal<T> =>
+    computed(() => a() ?? b() ?? defaultValue);
+```
 
 ---
 

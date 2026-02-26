@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 
-import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { range } from '@fundamental-ngx/cdk/utils';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
@@ -18,7 +18,7 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [WizardGeneratorService, FormGeneratorService],
-    imports: [WizardBodyComponent, WizardModule, RepeatDirective, SkeletonComponent]
+    imports: [WizardBodyComponent, WizardModule, SkeletonComponent]
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**
@@ -44,4 +44,7 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
      */
     @ContentChild(WizardGeneratorReviewButtonDirective, { read: TemplateRef })
     reviewButtonTemplate: TemplateRef<HTMLElement>;
+
+    /** @hidden */
+    readonly loadingRange = range(3);
 }

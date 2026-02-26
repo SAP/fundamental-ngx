@@ -1,4 +1,10 @@
-<fdb-tool-header productName="Fundamental-ngx" secondTitle="Angular" fdbToolHeaderAutoMode #toolHeaderComponent>
+<fdb-tool-header
+    productName="Fundamental-ngx"
+    secondTitle="Angular"
+    fdbToolHeaderAutoMode
+    #toolHeaderComponent
+    (contentDensityChange)="currentContentDensity = $event"
+>
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
     <ng-template fdbToolHeaderAction [forceVisibility]="true">
         <fd-popover [noArrow]="false">
@@ -17,9 +23,9 @@
                 }"
             >
                 <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
-                <fd-message-strip *fdkRepeat="10; let index = index">
-                    A new notification has arrived. {{ index }}
-                </fd-message-strip>
+                @for (i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; track i) {
+                    <fd-message-strip> A new notification has arrived. {{ i }} </fd-message-strip>
+                }
             </div>
         </fd-popover>
     </ng-template>
@@ -73,4 +79,5 @@
 <div [style.margin-top.rem]="2">
     <div>Current mode: {{ toolHeaderComponent.mode$() }}</div>
     <div>Current orientation: {{ toolHeaderComponent.orientation$() }}</div>
+    <div>Current content density: {{ currentContentDensity }} (desktop=compact, tablet/phone=cozy)</div>
 </div>

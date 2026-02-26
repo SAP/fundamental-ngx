@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_it.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Occupato',
+        defaultTitle: 'Attendere'
     },
     coreCalendar: {
         yearSelectionLabel: 'Seleziona anno',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Bozza'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Evidenziato',
+        subtle: 'Discreto'
     },
     coreMessageStrip: {
         dismissLabel: 'Chiudi',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: "Elemento dell'albero {itemDetails}, {selectedDescription}"
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Stato (attivo)',
+        inactive: 'Stato'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Evidenziato',
+        negative: 'Stato valore Errore',
+        critical: 'Stato valore Avviso',
+        positive: 'Stato valore Operazione completata',
+        informative: 'Stato valore Informazione'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Stato oggetto',
+        ariaRoleDescription: 'Pulsante Stato oggetto',
+        indicationColor: 'Colore indicazione',
+        negative: 'Immissione non valida',
+        critical: 'Avviso generato',
+        positive: "Convalida dell'immissione completata",
+        informative: 'Voce informativa'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Altri {count}'
@@ -654,15 +654,15 @@ export default {
         buttonRoleDescription: 'Pulsante segmentato'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Identificativo oggetto'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Etichetta informativa'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Reimposta su zero',
+        ariaRoleDescription: 'Indicatore di valutazione',
+        ariaLabelTotalRating: 'Valutazione totale',
+        ariaLabelValue: 'di'
     }
 };

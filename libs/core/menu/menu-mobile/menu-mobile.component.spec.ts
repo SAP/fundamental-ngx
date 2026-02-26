@@ -3,14 +3,36 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import * as MobileMode from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
 import { MenuModule } from '../menu.module';
 import { MenuMobileComponent } from './menu-mobile.component';
 
-const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
+const MOBILE_CONFIG: MobileMode.MobileModeConfig = { title: 'Test menu title' };
+
+// Helper to wait for mobile dialog to render after signal changes
+async function waitForMobileDialog(fixture: ComponentFixture<any>, maxAttempts = 10): Promise<boolean> {
+    // Signal-based rendering needs multiple cycles for effects to propagate
+    for (let i = 0; i < maxAttempts; i++) {
+        // Don't call TestBed.flushEffects() here - it causes recursive tick errors
+        // The effect in MenuMobileComponent will run automatically
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        // Check if dialog appeared
+        const dialogCount = document.querySelectorAll('.fd-dialog').length;
+
+        if (dialogCount > 0) {
+            return true;
+        }
+
+        // Small delay between attempts
+        await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+    return false;
+}
 
 @Component({
     template: `
@@ -39,13 +61,13 @@ class TesNestedMenuItemComponent {
 
     constructor(
         public elementRef: ElementRef,
-        @Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig
+        @Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileMode.MobileModeConfig
     ) {}
 }
 
 describe('MenuMobileComponent', () => {
     let menu: MenuComponent;
-    let menuMobile: MenuMobileComponent;
+    let menuMobile: MenuMobileComponent | undefined;
     let fixture: ComponentFixture<TesNestedMenuItemComponent>;
 
     beforeEach(waitForAsync(() => {
@@ -61,15 +83,23 @@ describe('MenuMobileComponent', () => {
         }).compileComponents();
     }));
 
-    async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {
+    async function setup(mobileConfig: MobileMode.MobileModeConfig = MOBILE_CONFIG): Promise<void> {
         TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });
         TestBed.compileComponents();
         fixture = TestBed.createComponent(TesNestedMenuItemComponent);
 
         await whenStable(fixture);
 
+        // Additional change detection cycles to ensure mobile mode setup completes
+        // Mobile mode uses afterNextRender with effects, so needs multiple cycles
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        fixture.detectChanges();
+        await whenStable(fixture);
+
         menu = fixture.componentInstance.menu;
-        menuMobile = fixture.componentInstance.menu['_mobileModeComponentRef'].instance;
+        menuMobile = fixture.componentInstance.menu['_mobileModeComponentRef']?.instance;
 
         fixture.detectChanges();
     }
@@ -104,9 +134,10 @@ describe('MenuMobileComponent', () => {
 
         menu.open();
 
-        await whenStable(fixture);
+        // Wait for signal-based dialog rendering
+        await waitForMobileDialog(fixture);
 
-        expect(fixture.nativeElement.querySelector('.' + customDialogClass)).toBeTruthy();
+        expect(document.querySelector('.' + customDialogClass)).toBeTruthy();
     });
 
     it('should open menu sub-level', async () => {
@@ -122,7 +153,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu$()).toBe(true);
+        expect(menuMobile!.isSubmenu$()).toBe(true);
     });
 
     it('should use correct menu title', async () => {
@@ -132,15 +163,18 @@ describe('MenuMobileComponent', () => {
 
         menu.open();
 
-        await whenStable(fixture);
+        // Wait for dialog to render
+        await waitForMobileDialog(fixture);
 
-        expect(menuMobile.title$()).toEqual(MOBILE_CONFIG.title as string);
+        expect(menuMobile!.title$()).toEqual(MOBILE_CONFIG.title as string);
 
         fixture.nativeElement.querySelector('[fd-menu-interactive]').click();
 
         await whenStable(fixture);
+        fixture.detectChanges();
+        await whenStable(fixture);
 
-        expect(menuMobile.title$()).toEqual(fixture.componentInstance.menuItemTitle);
+        expect(menuMobile!.title$()).toEqual(fixture.componentInstance.menuItemTitle);
     });
 
     it('should navigate back to parent level', async () => {
@@ -156,12 +190,12 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu$()).toBe(true);
+        expect(menuMobile!.isSubmenu$()).toBe(true);
         fixture.nativeElement.querySelector('#menu-mobile-navigate-back').click();
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu$()).toBe(false);
+        expect(menuMobile!.isSubmenu$()).toBe(false);
     });
 
     it('should properly render with empty MobileConfig', async () => {
@@ -171,7 +205,8 @@ describe('MenuMobileComponent', () => {
 
         menu.open();
 
-        await whenStable(fixture);
+        // Wait for dialog to render
+        await waitForMobileDialog(fixture);
 
         const mobileElements = getMobileModeViewElements(fixture);
         expect(mobileElements.dialogFooter).toBeFalsy();
@@ -186,13 +221,14 @@ describe('MenuMobileComponent', () => {
 
         menu.open();
 
-        await whenStable(fixture);
+        // Wait for dialog to render
+        await waitForMobileDialog(fixture);
 
         const mobileElements = getMobileModeViewElements(fixture);
         expect(mobileElements.dialogFooter).toBeFalsy();
         expect(mobileElements.dialogCloseBtn).toBeTruthy();
         expect(mobileElements.footerButtons.length).toEqual(0);
-        expect(mobileElements.dialogTitle.textContent).toContain(MOBILE_CONFIG.title);
+        expect(mobileElements.dialogTitle.textContent).toContain(MOBILE_CONFIG.title!);
     });
 
     it('should properly render approve and dismiss buttons based on MobileConfig', async () => {
@@ -202,7 +238,8 @@ describe('MenuMobileComponent', () => {
 
         menu.open();
 
-        await whenStable(fixture);
+        // Wait for dialog to render
+        await waitForMobileDialog(fixture);
 
         const mobileElements = getMobileModeViewElements(fixture);
         expect(mobileElements.dialogFooter).toBeTruthy();

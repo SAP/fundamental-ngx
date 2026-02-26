@@ -1,19 +1,18 @@
 <div class="fd-product-switch">
     <fd-popover
-        [placement]="placement"
-        [closeOnEscapeKey]="closeOnEscapeKey"
-        [closeOnOutsideClick]="closeOnOutsideClick"
+        [placement]="placement()"
+        [closeOnEscapeKey]="closeOnEscapeKey()"
+        [closeOnOutsideClick]="closeOnOutsideClick()"
         [(isOpen)]="isOpen"
-        (isOpenChange)="isOpenChange.emit($event)"
-        [disabled]="disabled"
-        [triggers]="triggers"
-        [focusTrapped]="false"
-        [focusAutoCapture]="true"
-        [noArrow]="noArrow"
-        [disableScrollbar]="true"
+        [disabled]="disabled()"
+        [triggers]="triggers()"
+        [focusTrapped]="focusTrapped()"
+        [focusAutoCapture]="focusAutoCapture()"
+        [noArrow]="noArrow()"
+        [disableScrollbar]="disableScrollbar()"
     >
         <fd-popover-control>
-            @if (!customProductSwitchButton) {
+            @if (!customProductSwitchButton()) {
                 <button
                     fd-button
                     [attr.aria-label]="'coreProductSwitch.ariaLabel' | fdTranslate"
@@ -23,7 +22,7 @@
                     fdType="transparent"
                 ></button>
             } @else {
-                <ng-template [ngTemplateOutlet]="customProductSwitchButton.templateRef"></ng-template>
+                <ng-template [ngTemplateOutlet]="customProductSwitchButton()!.templateRef"></ng-template>
             }
         </fd-popover-control>
         <fd-popover-body>

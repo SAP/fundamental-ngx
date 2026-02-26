@@ -8,12 +8,7 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
-import {
-    DeprecatedToolbarSizeDirective,
-    ToolbarComponent,
-    ToolbarItemDirective,
-    ToolbarSeparatorComponent
-} from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-dynamic-page-responsive-example',
@@ -42,7 +37,6 @@ import {
         ContentDensityDirective,
         LinkComponent,
         ToolbarComponent,
-        DeprecatedToolbarSizeDirective,
         ToolbarItemDirective,
         ToolbarSeparatorComponent,
         CdkScrollable,
