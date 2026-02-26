@@ -8,6 +8,7 @@
 <fd-busy-indicator
     [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
     [block]="true"
+    [title]="null"
 >
     <!-- Table Container -->
     <div class="fdp-table__container" #tableContainer>
