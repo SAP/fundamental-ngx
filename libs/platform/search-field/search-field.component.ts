@@ -69,7 +69,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldMobileInterface
@@ -182,7 +182,7 @@ export class SearchFieldComponent
     /** Additional appearance configuration. */
     @Input()
     set appearance(value: Appearance) {
-        if (equal(value, this.appearance)) {
+        if (shallowEqual(value, this.appearance)) {
             return;
         }
 

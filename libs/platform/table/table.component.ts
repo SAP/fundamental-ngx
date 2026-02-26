@@ -40,8 +40,8 @@ import {
     IntersectionSpyDirective,
     KeyUtil,
     Nullable,
+    range,
     RangeSelector,
-    RepeatDirective,
     resizeObservable,
     RtlService,
     TabbableElementService,
@@ -130,7 +130,7 @@ import {
     TableState,
     TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     debounceTime,
@@ -251,7 +251,6 @@ let tableUniqueId = 0;
         TableGroupRowComponent,
         TableRowComponent,
         TablePoppingRowComponent,
-        RepeatDirective,
         TableRowDirective,
         TableCellDirective,
         SkeletonComponent,
@@ -762,6 +761,12 @@ export class TableComponent<T = any>
     _freezableEndColumns: Map<string, number> = new Map();
     /** @hidden */
     _tableColumnsLength = 0;
+    /** @hidden */
+    readonly loadingRowRange = range(3);
+    /** @hidden */
+    get loadingColumnsRange(): number[] {
+        return range(this._tableColumnsLength);
+    }
     /** @hidden */
     _checkedState: boolean | null = false;
     /** @hidden */
@@ -2068,7 +2073,7 @@ export class TableComponent<T = any>
     /** @hidden */
     private _listenToRowHeightChange(): void {
         this._subscriptions.add(
-            this.contentDensityObserver
+            this.contentDensityObserver.contentDensity$$
                 .pipe(
                     tap(() => {
                         this._setSelectionColumnWidth();
@@ -2110,7 +2115,7 @@ export class TableComponent<T = any>
 
             const updatedColumns = this._tableService.tableColumns$.value.map((column) => column.name);
 
-            if (!equal(updatedColumns, currentColumns)) {
+            if (!shallowEqual(updatedColumns, currentColumns)) {
                 this._tableService.stateChange$.next({
                     type: 'columns',
                     state: { previous: currentColumns, current: updatedColumns }

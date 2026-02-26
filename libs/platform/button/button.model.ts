@@ -1,7 +1,2 @@
-import { ButtonType } from '@fundamental-ngx/core/button';
-
-export interface ButtonModel {
-    fdType: ButtonType;
-    disabled: boolean;
-    markForCheck(): void;
-}
+// Re-export ButtonModel from core to maintain backward compatibility
+export { ButtonModel } from '@fundamental-ngx/core/button';

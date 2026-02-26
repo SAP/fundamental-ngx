@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { TableCellActivateEvent } from '@fundamental-ngx/platform';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import {
     PlatformTableModule,
     TableDataProvider,
@@ -27,7 +27,7 @@ import {
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        PlatformButtonModule,
+        ButtonComponent,
         FdDatetimeModule
     ]
 })

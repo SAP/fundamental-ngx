@@ -1,4 +1,5 @@
 export * from './base/base-popover.class';
+export * from './base/popover-config.interface';
 export * from './popover-body.directive';
 export * from './popover-body/popover-body-directives/popover-body-footer.directive';
 export * from './popover-body/popover-body-directives/popover-body-header.directive';

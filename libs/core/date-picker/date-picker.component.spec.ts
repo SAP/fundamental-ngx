@@ -476,39 +476,47 @@ describe('DatePickerComponent', () => {
     });
 
     describe('Calendar Legend Feature', () => {
-        it('should pass showCalendarLegend to calendar component', () => {
+        it('should pass showCalendarLegend to calendar component', async () => {
             fixture.componentRef.setInput('showCalendarLegend', true);
-            component.isOpen = true;
-            component._showPopoverContents = true;
+            component.openCalendar();
             fixture.detectChanges();
+            await fixture.whenStable();
 
-            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
-            expect(calendarElement).toBeTruthy();
-            expect(calendarElement.componentInstance.showCalendarLegend).toBe(true);
+            // Access calendar via component property instead of DOM query
+            const calendars = component['_calendars'];
+            expect(calendars).toBeTruthy();
+            expect(calendars.length).toBeGreaterThan(0);
+            const calendar = calendars.first;
+            expect(calendar.showCalendarLegend).toBe(true);
         });
 
-        it('should pass legendCol to calendar component', () => {
+        it('should pass legendCol to calendar component', async () => {
             fixture.componentRef.setInput('legendCol', true);
-            component.isOpen = true;
-            component._showPopoverContents = true;
+            component.openCalendar();
             fixture.detectChanges();
+            await fixture.whenStable();
 
-            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
-            expect(calendarElement).toBeTruthy();
-            expect(calendarElement.componentInstance.legendCol).toBe(true);
+            // Access calendar via component property instead of DOM query
+            const calendars = component['_calendars'];
+            expect(calendars).toBeTruthy();
+            expect(calendars.length).toBeGreaterThan(0);
+            const calendar = calendars.first;
+            expect(calendar.legendCol).toBe(true);
         });
 
-        it('should render legend inside calendar when showCalendarLegend is true', () => {
+        it('should render legend inside calendar when showCalendarLegend is true', async () => {
             component.specialDaysRules = [{ specialDayNumber: 1, rule: () => true, legendText: 'Special Day' }];
             fixture.componentRef.setInput('showCalendarLegend', true);
-            component.isOpen = true;
-            component._showPopoverContents = true;
+            component.openCalendar();
             fixture.detectChanges();
+            await fixture.whenStable();
 
-            // Legend should be rendered by Calendar component internally
-            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
-            expect(calendarElement).toBeTruthy();
-            expect(calendarElement.componentInstance.showCalendarLegend).toBe(true);
+            // Access calendar via component property and verify showCalendarLegend is passed
+            const calendars = component['_calendars'];
+            expect(calendars).toBeTruthy();
+            expect(calendars.length).toBeGreaterThan(0);
+            const calendar = calendars.first;
+            expect(calendar.showCalendarLegend).toBe(true);
         });
 
         it('should not render separate legend in DatePicker template', () => {
@@ -523,19 +531,23 @@ describe('DatePickerComponent', () => {
             expect(datePickerLegends.length).toBe(0);
         });
 
-        it('should pass specialDaysRules to calendar component', () => {
+        it('should pass specialDaysRules to calendar component', async () => {
             const rules = [
                 { specialDayNumber: 1, rule: () => true, legendText: 'Day 1' },
                 { specialDayNumber: 2, rule: () => false, legendText: 'Day 2' }
             ];
             component.specialDaysRules = rules;
             fixture.componentRef.setInput('showCalendarLegend', true);
-            component.isOpen = true;
-            component._showPopoverContents = true;
+            component.openCalendar();
             fixture.detectChanges();
+            await fixture.whenStable();
 
-            const calendarElement = fixture.debugElement.query(By.css('fd-calendar'));
-            expect(calendarElement.componentInstance.specialDaysRules).toEqual(rules);
+            // Access calendar via component property instead of DOM query
+            const calendars = component['_calendars'];
+            expect(calendars).toBeTruthy();
+            expect(calendars.length).toBeGreaterThan(0);
+            const calendar = calendars.first;
+            expect(calendar.specialDaysRules).toEqual(rules);
         });
     });
 });

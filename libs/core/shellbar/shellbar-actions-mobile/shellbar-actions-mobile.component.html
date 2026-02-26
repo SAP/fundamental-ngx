@@ -4,9 +4,10 @@
             <fd-action-sheet-control>
                 <button
                     fd-button
-                    fdType="transparent"
+                    [fdType]="fdType()"
+                    [class.fd-shellbar__button]="fdType() === 'standard'"
+                    [toggled]="toggled()"
                     glyph="overflow"
-                    class="fd-shellbar__button"
                     [attr.aria-label]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
                     [title]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
                 >
@@ -31,6 +32,8 @@
                     <li
                         fd-action-sheet-item
                         tabindex="-1"
+                        [fdType]="action.fdType()"
+                        [toggled]="action.toggled()"
                         [glyph]="action.glyph() || ''"
                         [label]="action.label()"
                         (click)="actionClicked(action, $event)"

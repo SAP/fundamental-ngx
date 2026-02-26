@@ -2,6 +2,10 @@ import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerR
 
 /**
  * Directive to repeatably render template N times.
+ *
+ * @deprecated Use Angular's built-in `@for` control flow with the `range()` utility function instead.
+ * Example: `@for (i of range(3); track i) { <div>Item {{ i }}</div> }`
+ * This directive will be removed in a future major version.
  */
 @Directive({
     selector: '[fdkRepeat]',

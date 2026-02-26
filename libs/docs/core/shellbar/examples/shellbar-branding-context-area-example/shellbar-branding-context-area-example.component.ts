@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClickedDirective } from '@fundamental-ngx/cdk';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -11,7 +11,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
-import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
     ShellbarComponent,
     ShellbarMenuItem,
@@ -53,7 +52,6 @@ import {
         FormsModule,
         ProductSwitchModule,
         SearchFieldComponent,
-        SegmentedButtonComponent,
         ObjectStatusComponent,
         UserMenuComponent,
         UserMenuBodyComponent,
@@ -192,19 +190,41 @@ export class ShellbarBrandingContextAreaExampleComponent {
         }
     ];
 
+    accountToggledState = signal<boolean>(true);
+    filterToggledState = signal<boolean>(false);
+    cartToggledState = signal<boolean>(false);
+
     actions = [
         {
-            glyph: 'pool',
-            callback: this.actionPoolCallback,
-            label: 'Pool',
-            ariaLabel: 'Pool Action',
-            title: 'Pool',
-            notificationCount: 3,
-            notificationLabel: 'Pool Count'
+            glyph: 'account',
+            callback: () => this.actionAccountCallback(),
+            label: 'Account',
+            ariaLabel: 'Account Action',
+            title: 'Account',
+            type: 'transparent' as ButtonType,
+            toggled: this.accountToggledState
+        },
+        {
+            glyph: 'filter',
+            callback: () => this.actionFilterCallback(),
+            label: 'Filter',
+            ariaLabel: 'Filter Action',
+            title: 'Filter',
+            type: 'attention' as ButtonType,
+            toggled: this.filterToggledState
+        },
+        {
+            glyph: 'cart',
+            callback: () => this.actionCartCallback(),
+            label: 'Cart',
+            ariaLabel: 'Cart Action',
+            type: 'positive' as ButtonType,
+            title: 'Cart',
+            toggled: this.cartToggledState
         },
         {
             glyph: 'bell',
-            callback: this.actionNotificationCallback,
+            callback: (event: MouseEvent) => this.actionNotificationCallback(event),
             label: 'Notifications',
             ariaLabel: 'Notifications Action',
             title: 'Notifications',
@@ -307,9 +327,16 @@ export class ShellbarBrandingContextAreaExampleComponent {
         alert('Notification Action Clicked');
     }
 
-    actionPoolCallback($event): void {
-        console.log($event);
-        alert('Pool Action Clicked');
+    actionAccountCallback(): void {
+        this.accountToggledState.set(!this.accountToggledState());
+    }
+
+    actionFilterCallback(): void {
+        this.filterToggledState.set(!this.filterToggledState());
+    }
+
+    actionCartCallback(): void {
+        this.cartToggledState.set(!this.cartToggledState());
     }
 
     productSwitcherCallback(product): void {

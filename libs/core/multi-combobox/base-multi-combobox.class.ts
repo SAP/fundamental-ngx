@@ -16,10 +16,16 @@ import {
     DestroyRef,
     Directive,
     ElementRef,
-    EventEmitter,
     Injector,
+    InputSignal,
+    InputSignalWithTransform,
+    ModelSignal,
+    OutputEmitterRef,
+    Signal,
+    WritableSignal,
     afterNextRender,
     inject,
+    signal,
     viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,11 +38,12 @@ import {
     isOptionItem,
     isSelectableOptionItem
 } from '@fundamental-ngx/cdk/forms';
-import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
+import { RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import equal from 'fast-deep-equal';
-import { BehaviorSubject, Subscription, skip, startWith, timer } from 'rxjs';
+import { shallowEqual } from 'fast-equals';
+import { Subscription, skip, startWith, timer } from 'rxjs';
 import {
     FdMultiComboBoxDataSource,
     FdMultiComboboxAcceptableDataSource
@@ -50,30 +57,158 @@ export type TextAlignment = 'left' | 'right';
 
 @Directive()
 export abstract class BaseMultiCombobox<T = any> {
+    /**
+     * Currently selected items in the multi-combobox.
+     * To modify selections, use the `writeValue()` or `setValue()` methods.
+     */
     abstract selectedItems: T[];
-    abstract group: boolean;
-    abstract groupKey: string;
-    abstract displayKey: string;
-    abstract secondaryKey: string;
-    abstract showSecondaryText: boolean;
-    abstract lookupKey: string;
-    abstract invalidEntryMessage: Nullable<string>;
-    abstract invalidEntryDisplayTime: number;
-    abstract limitless: boolean;
-    abstract isGroup: boolean;
-    abstract inputText: string;
 
-    abstract searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
+    /**
+     * Determines whether items should be grouped in the dropdown.
+     * When enabled, items will be organized into groups based on the `groupKey` property.
+     */
+    abstract group: InputSignalWithTransform<boolean, unknown>;
 
-    abstract selectionChange: EventEmitter<MultiComboboxSelectionChangeEvent>;
-    abstract dataReceived: EventEmitter<boolean>;
-    abstract dataRequested: EventEmitter<boolean>;
-    // Injection section
+    /**
+     * The property name used to group items when `group` is enabled.
+     * This key is used to extract the grouping value from each item object.
+     *
+     * @example
+     * ```typescript
+     * // If items are: [{name: 'Apple', category: 'Fruit'}, {name: 'Carrot', category: 'Vegetable'}]
+     * groupKey = 'category'; // Groups by 'Fruit' and 'Vegetable'
+     * ```
+     */
+    abstract groupKey: InputSignal<string>;
 
-    /** @hidden */
+    /**
+     * The property name used to display item labels in the dropdown.
+     * For primitive types (strings, numbers), this is ignored and the value itself is displayed.
+     * For objects, this specifies which property to use as the display text.
+     *
+     * @example
+     * ```typescript
+     * displayKey = 'name'; // Displays item.name for each item
+     * ```
+     */
+    abstract displayKey: InputSignal<string>;
+
+    /**
+     * The property name used to display secondary text below the main label.
+     * Only displayed when `showSecondaryText` is enabled.
+     */
+    abstract secondaryKey: InputSignal<string>;
+
+    /**
+     * Controls whether secondary text should be displayed for each item.
+     * When enabled, uses the `secondaryKey` property to extract and display secondary text.
+     */
+    abstract showSecondaryText: InputSignalWithTransform<boolean, unknown>;
+
+    /**
+     * The property name used as a unique identifier for each item.
+     * Used for item comparison, deduplication, and tracking selections.
+     * If not specified, the entire object is compared.
+     */
+    abstract lookupKey: InputSignal<string>;
+
+    /**
+     * Signal containing the error message displayed when an invalid entry is detected.
+     * Displayed temporarily when the user enters text that doesn't match any available options.
+     */
+    abstract invalidEntryMessage: InputSignal<string | null | undefined>;
+
+    /**
+     * Signal containing the duration (in milliseconds) to display the invalid entry message.
+     * After this duration expires, the error message is automatically hidden.
+     */
+    abstract invalidEntryDisplayTime: Signal<number>;
+
+    /**
+     * Model signal controlling whether limitless mode is enabled.
+     * In limitless mode, all available items are loaded without pagination limits.
+     * Use with caution for large datasets as it may impact performance.
+     */
+    abstract limitless: ModelSignal<boolean>;
+
+    /**
+     * Signal indicating whether the current configuration uses grouped items.
+     *
+     * @remarks
+     * Computed based on whether both `group` and `groupKey` are defined.
+     * Used internally to determine rendering strategy.
+     */
+    abstract isGroup: Signal<boolean>;
+
+    /**
+     * Signal containing the current text in the search input field.
+     * Updates reactively as the user types. Used for filtering and autocomplete functionality.
+     */
+    abstract inputText: Signal<string>;
+
+    /**
+     * Signal containing a reference to the search input element.
+     */
+    abstract searchInputElement: Signal<FormControlComponent | undefined>;
+
+    /**
+     * Output emitter for selection change events.
+     */
+    abstract selectionChange: OutputEmitterRef<MultiComboboxSelectionChangeEvent>;
+
+    /**
+     * Output emitter for data received events.
+     */
+    abstract dataReceived: OutputEmitterRef<boolean>;
+
+    /**
+     * Output emitter for data request events.
+     */
+    abstract dataRequested: OutputEmitterRef<boolean>;
+
+    /**
+     * Internal writable signal for selected items.
+     * Must be implemented by subclass. Provides write access to the selection state.
+     * @hidden
+     */
+    protected abstract _selectedItems: WritableSignal<T[]>;
+
+    /**
+     * Internal writable signal for input text.
+     * Must be implemented by subclass. Provides write access to the input text.
+     *
+     * @hidden
+     */
+    protected abstract _inputText: WritableSignal<string>;
+
+    /**
+     * Protected method for internal writes to selectedItems with coercion.
+     * Ensures the value is properly coerced to an array before setting.
+     *
+     * @param value - The new array of selected items
+     * @hidden
+     */
+    protected abstract _setSelectedItems(value: T[]): void;
+
+    /**
+     * Protected method for setting input text with side effects.
+     * Triggers `onTouched()` callback to mark the control as touched.
+     *
+     * @param value - The new input text value
+     * @hidden
+     */
+    protected abstract _setInputText(value: string): void;
+
+    /**
+     * Control value accessor instance for forms integration.
+     * @hidden
+     */
     readonly cvaControl: CvaControl<T> = inject(CvaControl);
 
-    /** @hidden */
+    /**
+     * Data source directive instance for managing async data loading and filtering.
+     * @hidden
+     */
     readonly dataSourceDirective: DataSourceDirective<T, FdMultiComboBoxDataSource<T>> = inject(DataSourceDirective);
 
     /** Control Value Accessor directive for forms support. */
@@ -90,28 +225,43 @@ export abstract class BaseMultiCombobox<T = any> {
     readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /**
+     * Signal containing currently selected suggestion items.
      * @hidden
-     * List of selected suggestions
      */
-    _selectedSuggestions: SelectableOptionItem<T>[] = [];
+    _selectedSuggestions = signal<SelectableOptionItem<T>[]>([]);
 
     /**
+     * Signal containing currently matched suggestion items based on search text.
+     * Updates when the user types in the search field.
+     * Contains filtered options that match the current query.
      * @hidden
-     * List of matched suggestions
      */
-    _suggestions: SelectableOptionItem[];
+    _suggestions = signal<SelectableOptionItem[]>([]);
 
     /**
+     * Signal containing flattened suggestion items (groups expanded to flat list).
      * @hidden
-     * Grouped suggestions mapped to array.
      */
-    _flatSuggestions: SelectableOptionItem[] = [];
+    _flatSuggestions = signal<SelectableOptionItem[]>([]);
 
-    /** @hidden */
-    _fullFlatSuggestions: SelectableOptionItem[] = [];
+    /**
+     * Signal containing the complete flattened list of all available items.
+     * @hidden
+     */
+    _fullFlatSuggestions = signal<SelectableOptionItem[]>([]);
 
-    /** @hidden */
-    selectedShown$ = new BehaviorSubject(false);
+    /**
+     * Signal indicating whether the "show selected only" mode is active.
+     * In mobile mode, toggles between showing all items and showing only selected items.
+     * @hidden
+     */
+    selectedShown = signal(false);
+
+    /**
+     * Writable signal for overriding the invalid entry message with i18n translations.
+     * @hidden
+     */
+    protected readonly _invalidEntryMessageOverride = signal<string | null>(null);
 
     /** @hidden */
     protected readonly _elmRef = inject(ElementRef<HTMLElement>);
@@ -119,7 +269,11 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     protected readonly _cd = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /**
+     * Maximum number of items to load per page when limitless mode is disabled.
+     * Controls pagination size for large datasets.
+     * @hidden
+     */
     protected readonly _mapLimit = inject(FD_MAP_LIMIT);
 
     /** @hidden */
@@ -131,20 +285,32 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     protected _dataSource: FdMultiComboboxAcceptableDataSource<T>;
 
-    /** @hidden */
-    protected _inputTextValue: string;
-
-    /** @hidden */
+    /**
+     * Previous input text value before the last change.
+     * Used for restoring the input on invalid entry or cancellation.
+     * @hidden
+     */
     protected _previousInputText: string;
 
-    /** @hidden */
+    /**
+     * Matching strategy for filtering items based on user input.
+     * Determines how items are matched: starts with, contains, etc.
+     * Defaults to value from config or `MatchingStrategy.CONTAINS`.
+     * @hidden
+     */
     protected _matchingStrategy: MatchingStrategy =
         this._multiComboboxConfig?.matchingStrategy ?? MatchingStrategy.CONTAINS;
 
-    /** @hidden */
+    /**
+     * Subscription for data source events.
+     * @hidden
+     */
     protected _dsSubscription: Subscription | null = null;
 
-    /** @hidden */
+    /**
+     * Reference to the host element.
+     * @hidden
+     */
     protected _element: HTMLElement = this._elmRef.nativeElement;
 
     /**
@@ -165,28 +331,56 @@ export abstract class BaseMultiCombobox<T = any> {
         ALT
     ];
 
-    /** @hidden */
+    /**
+     * Timer subscription for displaying invalid entry message.
+     * Auto-hides the error message after the configured duration.
+     * @hidden
+     */
     protected _timerSub$: Subscription;
 
-    /** @hidden */
+    /**
+     * Previous form state before displaying invalid entry error.
+     * Stored to restore the original state after error is cleared.
+     * @hidden
+     */
     protected _previousState?: FormStates;
 
-    /** @hidden */
-    protected _previousStateMessage: Nullable<string>;
+    /**
+     * Previous state message before displaying invalid entry error.
+     */
+    protected _previousStateMessage: string | null | undefined;
 
-    /** @hidden */
+    /**
+     * Range selector utility for handling shift+click multi-selection.
+     */
     protected readonly _rangeSelector = new RangeSelector();
 
-    /** @hidden */
+    /**
+     * Flag indicating whether the data source has changed.
+     * Set to true when a new data source is assigned, triggering a refresh of suggestions.
+     * @hidden
+     */
     private _dataSourceChanged = false;
 
-    /** @hidden */
+    /**
+     * Signal reference to the popover component.
+     * Used for controlling popover visibility and position.
+     * @hidden
+     */
     private readonly popover = viewChild(PopoverComponent);
 
-    /** @hidden */
+    /**
+     * Writes a value to the control from the forms API.
+     *
+     * @param value - Array of items to set as selected
+     * @remarks
+     * Part of the ControlValueAccessor interface. Called by Angular forms
+     * when the form model changes.
+     * @hidden
+     */
     writeValue(value: T[]): void {
-        this.selectedItems = coerceArraySafe(value);
-        this._cva.writeValue(this.selectedItems);
+        this._setSelectedItems(coerceArraySafe(value));
+        this._cva.writeValue(this._selectedItems());
         this._setSelectedSuggestions();
         this._emitChangeEvent();
     }
@@ -198,21 +392,21 @@ export abstract class BaseMultiCombobox<T = any> {
      * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
      */
     setValue(value: T[], emitOnChange = true): void {
-        this.selectedItems = coerceArraySafe(value);
-        this._cva.setValue(this.selectedItems, emitOnChange);
+        this._setSelectedItems(coerceArraySafe(value));
+        this._cva.setValue(this._selectedItems(), emitOnChange);
         this._setSelectedSuggestions();
         this._emitChangeEvent();
     }
 
     /** @hidden */
-    protected _displayFn = (value: T): string => displayValue(value, this.displayKey);
+    protected _displayFn = (value: T): string => displayValue(value, this.displayKey());
 
     /** @hidden */
     protected _secondaryFn = (value: T): string => {
         if (isOptionItem(value)) {
             return value.secondaryText ?? '';
-        } else if (isJsObject(value) && this.secondaryKey) {
-            const currentItem = objectGet(value, this.secondaryKey);
+        } else if (isJsObject(value) && this.secondaryKey()) {
+            const currentItem = objectGet(value, this.secondaryKey());
 
             return isFunction(currentItem) ? currentItem() : currentItem;
         } else {
@@ -225,7 +419,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Method to emit change event
      */
     protected _emitChangeEvent(): void {
-        const event = new MultiComboboxSelectionChangeEvent(this, this.selectedItems);
+        const event = new MultiComboboxSelectionChangeEvent(this, this._selectedItems());
 
         this.selectionChange.emit(event);
 
@@ -240,24 +434,36 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected _setSelectedSuggestions(): void {
-        this._selectedSuggestions = [];
+        this._selectedSuggestions.set([]);
 
-        if (!this.selectedItems?.length) {
+        const selectedItems = this._selectedItems();
+        if (!selectedItems?.length) {
             return;
         }
 
-        for (let i = 0; i <= this.selectedItems.length; i++) {
-            const selectedItem = this.selectedItems[i];
-            const idx = this._fullFlatSuggestions.findIndex(
-                (item) => item.label === selectedItem || item.value === selectedItem
-            );
-            if (idx !== -1) {
-                this._selectedSuggestions.push(this._fullFlatSuggestions[idx]);
-                this._fullFlatSuggestions[idx].selected = true;
-            }
-        }
+        const fullFlatSuggestions = this._fullFlatSuggestions();
+        const selectedSuggestions: SelectableOptionItem<T>[] = [];
 
-        this._cd.detectChanges();
+        // Update immutably
+        const updatedSuggestions = fullFlatSuggestions.map((item) => {
+            const isSelected = selectedItems.some(
+                (selectedItem) => item.label === selectedItem || item.value === selectedItem
+            );
+
+            if (isSelected) {
+                selectedSuggestions.push({ ...item, selected: true });
+                return { ...item, selected: true };
+            } else if (item.selected) {
+                // Item was selected but is now deselected - must update to false
+                return { ...item, selected: false };
+            }
+
+            // Item was not and is not selected - no change needed
+            return item;
+        });
+
+        this._selectedSuggestions.set(selectedSuggestions);
+        this._fullFlatSuggestions.set(updatedSuggestions);
     }
 
     /**
@@ -290,9 +496,9 @@ export abstract class BaseMultiCombobox<T = any> {
      * @hidden
      */
     protected _convertObjectsToOptionItems(items: T[]): SelectableOptionItem<T>[] {
-        if (this.isGroup) {
+        if (this.isGroup()) {
             return this._convertObjectsToGroupOptionItems(items);
-        } else if (this.showSecondaryText && this.secondaryKey) {
+        } else if (this.showSecondaryText() && this.secondaryKey()) {
             return this._convertObjectsToSecondaryOptionItems(items);
         } else {
             return this._convertObjectsToDefaultOptionItems(items);
@@ -308,7 +514,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const keyValue = item[this.groupKey];
+            const keyValue = item[this.groupKey()];
             if (!keyValue) {
                 continue;
             }
@@ -329,7 +535,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
             const currentGroup = group[key];
 
-            if (this.showSecondaryText && this.secondaryKey) {
+            if (this.showSecondaryText() && this.secondaryKey()) {
                 selectItem.children = this._convertObjectsToSecondaryOptionItems(currentGroup);
             } else {
                 selectItem.children = this._convertObjectsToDefaultOptionItems(currentGroup);
@@ -345,15 +551,16 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     protected _convertObjectsToSecondaryOptionItems<K extends T>(items: K[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
+        const selectedItems = this._selectedItems();
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
             selectItems.push({
-                label: displayValue(value, this.displayKey),
-                id: lookupValue(value, this.lookupKey),
-                secondaryText: objectGet(value, this.secondaryKey),
+                label: displayValue(value, this.displayKey()),
+                id: lookupValue(value, this.lookupKey()),
+                secondaryText: objectGet(value, this.secondaryKey()),
                 value,
-                selected: this.selectedItems?.includes(value) || false
+                selected: selectedItems.includes(value) || false
             });
         }
 
@@ -366,13 +573,14 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     protected _convertPrimitiveToOptionItems(items: any[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
+        const selectedItems = this._selectedItems();
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
             selectItems.push({
                 label: value,
-                id: lookupValue(value, this.lookupKey),
+                id: lookupValue(value, this.lookupKey()),
                 value,
-                selected: this.selectedItems?.includes(value) || false
+                selected: selectedItems.includes(value) || false
             });
         }
 
@@ -385,14 +593,15 @@ export abstract class BaseMultiCombobox<T = any> {
      */
     protected _convertObjectsToDefaultOptionItems(items: T[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
+        const selectedItems = this._selectedItems();
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
             selectItems.push({
-                label: displayValue(value, this.displayKey),
-                id: lookupValue(value, this.lookupKey),
+                label: displayValue(value, this.displayKey()),
+                id: lookupValue(value, this.lookupKey()),
                 value,
-                selected: this.selectedItems?.includes(value) || false
+                selected: selectedItems.includes(value) || false
             });
         }
 
@@ -409,7 +618,8 @@ export abstract class BaseMultiCombobox<T = any> {
         this._cva.state = 'error';
 
         this._previousStateMessage = this._cva.stateMessage;
-        this._cva.stateMessage = this.invalidEntryMessage;
+        const overrideMessage = this._invalidEntryMessageOverride();
+        this._cva.stateMessage = overrideMessage ?? this.invalidEntryMessage() ?? null;
 
         this._cd.markForCheck();
     }
@@ -427,14 +637,14 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected _focusToSearchField(): void {
-        this.searchInputElement?.nativeElement.focus();
+        this.searchInputElement()?.elementRef.nativeElement.focus();
     }
 
     /** @hidden */
     protected _mapAndUpdateModel(): void {
-        const selectedItems = this._selectedSuggestions.map(({ value }) => value);
+        const selectedItems = this._selectedSuggestions().map(({ value }) => value);
 
-        const shouldEmitChangeEvent = !equal(this.selectedItems, selectedItems);
+        const shouldEmitChangeEvent = !shallowEqual(this._selectedItems(), selectedItems);
 
         if (!shouldEmitChangeEvent) {
             return;
@@ -458,14 +668,14 @@ export abstract class BaseMultiCombobox<T = any> {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
 
-        dataSourceProvider.limitless = this.limitless;
+        dataSourceProvider.limitless = this.limitless();
 
-        dataSourceProvider.dataProvider.setLookupKey(this.lookupKey);
+        dataSourceProvider.dataProvider.setLookupKey(this.lookupKey());
         const matchingBy: MatchingBy = {
             firstBy: this._displayFn
         };
 
-        if (this.secondaryKey) {
+        if (this.secondaryKey()) {
             matchingBy.secondaryBy = this._secondaryFn;
         }
 
@@ -476,7 +686,7 @@ export abstract class BaseMultiCombobox<T = any> {
         const map = new Map();
         map.set('query', '*');
 
-        if (!this.limitless) {
+        if (!this.limitless()) {
             map.set('limit', this._mapLimit);
         } else {
             dataSourceProvider.dataProvider['defaultLimit'] = Number.MAX_SAFE_INTEGER;
@@ -487,10 +697,14 @@ export abstract class BaseMultiCombobox<T = any> {
         this._dsSubscription = new Subscription();
 
         this._dsSubscription.add(
-            this.dataSourceDirective.dataSourceProvider?.dataRequested.subscribe(this.dataRequested)
+            this.dataSourceDirective.dataSourceProvider?.dataRequested.subscribe((value) =>
+                this.dataRequested.emit(value)
+            )
         );
         this._dsSubscription.add(
-            this.dataSourceDirective.dataSourceProvider?.dataReceived.subscribe(this.dataReceived)
+            this.dataSourceDirective.dataSourceProvider?.dataReceived.subscribe((value) =>
+                this.dataReceived.emit(value)
+            )
         );
 
         this.dataSourceDirective.dataSourceChanged
@@ -505,7 +719,7 @@ export abstract class BaseMultiCombobox<T = any> {
                 return;
             }
 
-            this._previousInputText = this.inputText;
+            this._previousInputText = this.inputText();
 
             this._parseDataSourceValue(data);
 
@@ -522,21 +736,20 @@ export abstract class BaseMultiCombobox<T = any> {
     protected _parseDataSourceValue(data: T[]): void {
         this._convertDataSourceSuggestions(data);
 
-        const selectedSuggestionsLength = this._selectedSuggestions.length;
-        if (selectedSuggestionsLength > 0) {
-            for (let i = 0; i < selectedSuggestionsLength; i++) {
-                const selectedSuggestion = this._selectedSuggestions[i];
-                const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
-
-                if (idx !== -1) {
-                    this._suggestions[idx].selected = true;
-                }
-            }
+        const selectedSuggestions = this._selectedSuggestions();
+        if (selectedSuggestions.length > 0) {
+            this._suggestions.update((suggestions) =>
+                suggestions.map((suggestion) => {
+                    const isSelected = selectedSuggestions.some((item) => shallowEqual(item.value, suggestion.value));
+                    return isSelected ? { ...suggestion, selected: true } : suggestion;
+                })
+            );
         }
 
         if (this._dataSourceChanged) {
-            this._flatSuggestions = this.isGroup ? flattenGroups(this._suggestions) : this._suggestions;
-            this._fullFlatSuggestions = this._flatSuggestions;
+            const currentSuggestions = this._suggestions();
+            this._flatSuggestions.set(this.isGroup() ? flattenGroups(currentSuggestions) : currentSuggestions);
+            this._fullFlatSuggestions.set(this._flatSuggestions());
 
             this._setSelectedSuggestions();
 
@@ -551,13 +764,16 @@ export abstract class BaseMultiCombobox<T = any> {
      * @param data
      */
     protected _convertDataSourceSuggestions(data: T[]): void {
-        this._suggestions = this._convertToOptionItems(data).map((optionItem) => {
-            const selectedElement = this._selectedSuggestions.find((selectedItem) => selectedItem.id === optionItem.id);
-            if (selectedElement) {
-                optionItem.selected = selectedElement.selected;
-            }
-            return optionItem;
-        });
+        const selectedSuggestions = this._selectedSuggestions();
+        this._suggestions.set(
+            this._convertToOptionItems(data).map((optionItem) => {
+                const selectedElement = selectedSuggestions.find((selectedItem) => selectedItem.id === optionItem.id);
+                if (selectedElement) {
+                    return { ...optionItem, selected: selectedElement.selected };
+                }
+                return optionItem;
+            })
+        );
     }
 
     /** @hidden */
@@ -573,9 +789,9 @@ export abstract class BaseMultiCombobox<T = any> {
                 this._timerSub$.unsubscribe();
             }
         }
-        this.inputText = this._previousInputText;
+        this._setInputText(this._previousInputText);
 
-        this._timerSub$ = timer(this.invalidEntryDisplayTime).subscribe(() => this._unsetInvalidEntry());
+        this._timerSub$ = timer(this.invalidEntryDisplayTime()).subscribe(() => this._unsetInvalidEntry());
 
         this._cd.detectChanges();
     }

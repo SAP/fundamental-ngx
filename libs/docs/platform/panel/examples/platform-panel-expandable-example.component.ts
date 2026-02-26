@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PanelConfig, PanelExpandChangeEvent, PlatformPanelModule } from '@fundamental-ngx/platform/panel';
 import { PlatformConfig } from '@fundamental-ngx/platform/shared';
 
@@ -27,7 +27,7 @@ import { PlatformConfig } from '@fundamental-ngx/platform/shared';
             deps: [PlatformConfig]
         }
     ],
-    imports: [PlatformButtonModule, PlatformPanelModule]
+    imports: [ButtonComponent, PlatformPanelModule]
 })
 export class PlatformPanelExpandableExampleComponent {
     public expanded = true;

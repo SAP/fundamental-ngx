@@ -1,5 +1,10 @@
 <fd-docs-section-title id="standard" componentName="notification"> Notification </fd-docs-section-title>
-<description></description>
+<description>
+    Notifications display information to users about events or actions. The component automatically handles
+    accessibility:
+    <code>aria-describedby</code> is set on action buttons inside <code>fd-notification-body</code>, linking them to the
+    notification header for screen reader context.
+</description>
 <component-example>
     <fd-notification-options-example></fd-notification-options-example>
 </component-example>
@@ -39,7 +44,21 @@
 
 <separator></separator>
 <fd-docs-section-title id="group" componentName="notification"> Notification Group </fd-docs-section-title>
-<description></description>
+<description>
+    Notification groups organize related notifications under collapsible headers. The group automatically handles
+    accessibility attributes:
+    <ul>
+        <li>
+            <code>aria-controls</code> is automatically set on the group header, linking it to the group list for screen
+            readers.
+        </li>
+        <li>
+            The group header supports keyboard navigation with <strong>Enter</strong> and <strong>Space</strong> keys to
+            toggle expansion.
+        </li>
+    </ul>
+    Use <code>[expanded]="true"</code> on <code>fd-notification-group</code> to set the initial expanded state.
+</description>
 <component-example>
     <fd-notification-group-example></fd-notification-group-example>
 </component-example>

@@ -68,7 +68,17 @@ export const API_FILES = {
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
     oldContentDensity: [],
-    contentDensity: ['ContentDensityDirective', 'GlobalContentDensityService', 'ContentDensityStorage'],
+    contentDensity: [
+        'ContentDensityDirective',
+        'ContentDensityObserver',
+        'ContentDensityObserverSettings',
+        'GlobalContentDensityService',
+        'ContentDensityStorage',
+        'MemoryContentDensityStorage',
+        'LocalContentDensityStorage',
+        'UrlContentDensityStorage',
+        'ContentDensityMode'
+    ],
     datePicker: ['DatePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     datetimePicker: ['DatetimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     dynamicPage: [

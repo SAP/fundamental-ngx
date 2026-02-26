@@ -1,4 +1,4 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
@@ -36,7 +36,6 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
         ButtonComponent,
         ButtonBarComponent,
         FdTranslatePipe,
-        AsyncPipe,
         DialogComponent,
         DialogHeaderComponent,
         DialogCloseButtonComponent,
@@ -59,7 +58,7 @@ export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComb
     }> = null;
 
     /** @hidden */
-    selectedShown$ = this._component.selectedShown$;
+    selectedShown = this._component.selectedShown;
 
     /** @hidden */
     private _selectedBackup: SelectableOptionItem[];
@@ -76,11 +75,11 @@ export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComb
 
     /** @hidden */
     showSelected(): void {
-        const isSelectedShown = this.selectedShown$.getValue();
+        const isSelectedShown = this.selectedShown();
 
         if (isSelectedShown) {
             this._component._searchTermChanged();
-            this.selectedShown$.next(false);
+            this.selectedShown.set(false);
             return;
         }
 
@@ -105,9 +104,8 @@ export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComb
             return;
         }
 
-        this._selectedBackup = this._component._selectedSuggestions?.length
-            ? [...this._component._selectedSuggestions]
-            : [];
+        const selectedSuggestions = this._component._selectedSuggestions();
+        this._selectedBackup = selectedSuggestions?.length ? [...selectedSuggestions] : [];
         if (!this._dialogService.hasOpenDialogs()) {
             this._open();
         }

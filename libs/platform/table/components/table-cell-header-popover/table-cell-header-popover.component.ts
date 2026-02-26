@@ -210,8 +210,9 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     _closePopover(): void {
         if (this.popover) {
             this.popover.close();
-            if (this.popover.trigger) {
-                (this.popover.trigger as ElementRef).nativeElement.focus();
+            const triggerElement = this.popover.trigger();
+            if (triggerElement) {
+                (triggerElement as ElementRef).nativeElement.focus();
             }
         }
     }

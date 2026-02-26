@@ -1,10 +1,10 @@
 <div class="fd-docs-flex-display-helper">
-    <fd-popover title="photo 1 in circle">
+    <fd-popover title="photo 1 in circle">
         <fd-popover-control>
             <fd-avatar
                 size="s"
                 [circle]="true"
-                ariaLabel="photo 1 in circle"
+                ariaLabel="photo 1 in circle"
                 image="https://picsum.photos/id/1018/400"
             ></fd-avatar>
         </fd-popover-control>
@@ -71,4 +71,51 @@
             <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
         </fd-popover-body>
     </fd-popover>
+
+    <fd-popover [disabled]="isDisabled" placement="bottom">
+        <fd-popover-control>
+            <button fd-button label="Disabled Popover" [disabled]="isDisabled"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div [style.padding.px]="12">This popover can be disabled</div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover additionalBodyClass="custom-popover-body" additionalTriggerClass="custom-popover-trigger">
+        <fd-popover-control>
+            <button fd-button label="Custom CSS Classes"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div [style.padding.px]="30">This popover has custom CSS classes applied</div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [disableScrollbar]="true">
+        <fd-popover-control>
+            <button fd-button label="No Scrollbar"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div [style.padding.px]="12" [style.height.px]="150">
+                <p>Internal scrollbar disabled.</p>
+                <p>Long content here...</p>
+                <p>More content...</p>
+                <p>Even more content...</p>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [config]="popoverConfig">
+        <fd-popover-control>
+            <button fd-button label="Using Config Object"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div [style.padding.px]="12">
+                <p>This popover uses [config] input instead of individual properties.</p>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</div>
+
+<div style="margin-top: 1rem">
+    <fd-checkbox [(ngModel)]="isDisabled">Disable popover</fd-checkbox>
 </div>

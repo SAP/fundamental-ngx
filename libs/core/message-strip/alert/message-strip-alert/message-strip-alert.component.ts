@@ -1,14 +1,14 @@
 import { ComponentPortal, DomPortal, Portal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import {
-    AfterViewInit,
+    afterNextRender,
     Component,
-    OnDestroy,
+    DestroyRef,
+    inject,
     Renderer2,
     TemplateRef,
     Type,
-    ViewChild,
-    ViewContainerRef,
-    inject
+    viewChild,
+    ViewContainerRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
@@ -35,40 +35,44 @@ export type MessageStripAlertPortalType<ComponentType> =
     templateUrl: `./message-strip-alert.component.html`,
     imports: [MessageStripComponent, PortalModule, AutoDismissMessageStripDirective]
 })
-export class MessageStripAlertComponent<ComponentType = unknown>
-    implements MessageStripAlert, OnDestroy, AfterViewInit
-{
+export class MessageStripAlertComponent<ComponentType = unknown> implements MessageStripAlert {
     /** @hidden */
-    @ViewChild(AutoDismissMessageStripDirective)
-    autoDismissMessageStripDirective: AutoDismissMessageStripDirective;
+    readonly autoDismissMessageStripDirective = viewChild.required(AutoDismissMessageStripDirective);
 
     /** User provided data. Full of it */
-    data = inject(MessageStripAlertComponentData);
+    readonly data = inject(MessageStripAlertComponentData);
+
     /** Configuration for the message strip appearance */
-    messageStripConfig: MessageStripConfiguration;
+    readonly messageStripConfig: MessageStripConfiguration;
+
     /** Portal, which is responsible for correctly rendering user provided content. It can be any type of the portal */
-    contentPortal: Portal<unknown>;
+    readonly contentPortal: Portal<unknown>;
 
     /**
      * Reference to the message strip alert, which is used to close it from the outside, or access the data and/or the component instance
      *  */
     readonly alertRef = inject(MessageStripAlertRef);
-    /** @hidden */
-    private viewContainerRef = inject(ViewContainerRef);
 
     /** @hidden */
-    private renderer2 = inject(Renderer2);
+    private readonly _viewContainerRef = inject(ViewContainerRef);
+
+    /** @hidden */
+    private readonly _renderer2 = inject(Renderer2);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /**
      * Timeout, which is responsible for auto-dismissing the message strip.
      * It should be properly cleared on component destroy.
      */
-    private autoDismissTimeout: ReturnType<typeof setTimeout>;
+    private _autoDismissTimeout?: ReturnType<typeof setTimeout>;
 
     /** @hidden */
     constructor() {
         this.messageStripConfig = this.data.messageStripConfig;
-        this.contentPortal = this.getPortal(this.data.content);
+        this.contentPortal = this._getPortal(this.data.content);
+
         if (this.data.closeOnNavigation) {
             inject(Router, { optional: true })
                 ?.events.pipe(
@@ -77,6 +81,18 @@ export class MessageStripAlertComponent<ComponentType = unknown>
                 )
                 .subscribe(() => this.onDismissHandler());
         }
+
+        // Open message strip after view initialization
+        afterNextRender(() => {
+            this.autoDismissMessageStripDirective().open();
+        });
+
+        // Cleanup timeout on destroy
+        this._destroyRef.onDestroy(() => {
+            if (this._autoDismissTimeout) {
+                clearTimeout(this._autoDismissTimeout);
+            }
+        });
     }
 
     /**
@@ -86,21 +102,11 @@ export class MessageStripAlertComponent<ComponentType = unknown>
         this.messageStripConfig.onDismiss();
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        clearTimeout(this.autoDismissTimeout);
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.autoDismissMessageStripDirective.open();
-    }
-
     /**
      * Method, which is responsible for generating the portal, which will be rendered inside the message strip.
      * It can be any type of the portal, depending on the user provided content.
      *  */
-    private getPortal(
+    private _getPortal(
         content:
             | string
             | TemplateRef<{
@@ -109,12 +115,12 @@ export class MessageStripAlertComponent<ComponentType = unknown>
             | Type<ComponentType>
     ): MessageStripAlertPortalType<ComponentType> {
         if (typeof content === 'string') {
-            const textEl = this.renderer2.createText(content);
-            this.renderer2.appendChild(this.viewContainerRef.element.nativeElement, textEl);
+            const textEl = this._renderer2.createText(content);
+            this._renderer2.appendChild(this._viewContainerRef.element.nativeElement, textEl);
             return new DomPortal(textEl);
         }
         if (content instanceof TemplateRef) {
-            return new TemplatePortal(content, this.viewContainerRef, { $implicit: this.alertRef });
+            return new TemplatePortal(content, this._viewContainerRef, { $implicit: this.alertRef });
         }
         return new ComponentPortal(content);
     }

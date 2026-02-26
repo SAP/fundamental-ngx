@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'עסוק',
+        defaultTitle: 'המתן'
     },
     coreCalendar: {
         yearSelectionLabel: 'בחר שנה',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'נעול',
         listItemStatusDraft: 'טיוטה'
     },
+    coreLink: {
+        emphasized: 'מודגש',
+        subtle: 'עדין'
+    },
     coreMessageStrip: {
         dismissLabel: 'סגור',
         announcementInfo: 'רצועת הודעות מידע',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'פריט עץ {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'סטאטוס(פעיל)',
+        inactive: 'סטאטוס'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'מודגש',
+        negative: 'מצב ערך – שגיאה',
+        critical: 'מצב הערך – אזהרה',
+        positive: 'מצב ערך – הצלחה',
+        informative: 'מידע על מצב ערך'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'סטאטוס אובייקט',
+        ariaRoleDescription: 'לחצן של סטאטוס אובייקט',
+        indicationColor: 'צבע אינדיקציה',
+        negative: 'הזנה לא חוקית',
+        critical: 'אזהרה הונפקה',
+        positive: 'הזנה אומתה בהצלחה',
+        informative: 'הזנה אינפורמטיבית'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} נוספים'
@@ -569,7 +573,7 @@ export default {
         deselectAllCheckboxLongLabel: 'תיבת סימון, סומנה, לחץ כדי לבטל את הבחירה של כולם',
         deselectSingleRow: 'על מנת לבטל בחירת שורה, הקש על מקש הרווח',
         selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
-        loadMore: 'הצג יותר',
+        loadMore: 'הצג עוד',
         toolbarActionButtonTitle: 'הגדרות',
         settingsDialogHeader: 'הגדרות',
         confirmBtnLabel: 'OK',
@@ -655,9 +659,15 @@ export default {
         buttonRoleDescription: 'סרגל לחצנים'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'מזהה אובייקט'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'תווית מידע'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'אפס לאפס',
+        ariaRoleDescription: 'סמן דירוג',
+        ariaLabelTotalRating: 'דירוג כולל',
+        ariaLabelValue: 'של'
     }
 };

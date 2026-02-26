@@ -4,10 +4,10 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { LinkModule } from '@fundamental-ngx/core/link';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { FACET_CLASS_NAME } from '../constants';
 import { FacetContentComponent } from '../content/facet-content.component';
@@ -35,7 +35,7 @@ import { FacetComponent } from './facet.component';
         </fd-facet>
     `,
     standalone: true,
-    imports: [IconComponent, LinkModule, TextComponent, RouterTestingModule, FacetContentComponent, FacetComponent]
+    imports: [IconComponent, LinkComponent, TextComponent, RouterTestingModule, FacetContentComponent, FacetComponent]
 })
 class TestFormFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -65,7 +65,7 @@ class TestImageFacetComponent {
         </fd-facet>
     `,
     standalone: true,
-    imports: [RatingIndicatorModule, FacetComponent, FacetContentComponent]
+    imports: [RatingIndicatorComponent, FacetComponent, FacetContentComponent]
 })
 class TestRatingIndicatorFacetComponent {
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
@@ -113,7 +113,7 @@ class TestKeyValueFacetComponent {
         FacetComponent,
         FacetContentComponent,
         IconComponent,
-        LinkModule,
+        LinkComponent,
         TextComponent
     ]
 })

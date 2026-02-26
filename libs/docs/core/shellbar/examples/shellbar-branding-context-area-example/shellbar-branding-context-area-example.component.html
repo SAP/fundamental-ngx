@@ -49,6 +49,8 @@
                 [label]="action.label"
                 [ariaLabel]="action.ariaLabel"
                 [title]="action.title"
+                [fdType]="action.type ?? 'transparent'"
+                [toggled]="action.toggled?.()"
                 [notificationCount]="action.notificationCount"
                 [notificationLabel]="action.notificationLabel"
             ></fd-shellbar-action>

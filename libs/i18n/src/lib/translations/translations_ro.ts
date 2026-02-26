@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ro.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Ocupat',
+        defaultTitle: 'Așteptați'
     },
     coreCalendar: {
         yearSelectionLabel: 'Selectați anul',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Blocat',
         listItemStatusDraft: 'Schiță'
     },
+    coreLink: {
+        emphasized: 'Evidențiat',
+        subtle: 'Discret'
+    },
     coreMessageStrip: {
         dismissLabel: 'Închidere',
         announcementInfo: 'Linie de mesaj de informații',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Element din arbore {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Situație (activă)',
+        inactive: 'Situație'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Evidențiat',
+        negative: 'Stare valoare Eroare',
+        critical: 'Stare valoare Avertizare',
+        positive: 'Stare valoare Reușită',
+        informative: 'Stare valoare Informații'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Stare obiect',
+        ariaRoleDescription: 'Buton de stare obiect',
+        indicationColor: 'Culoare indicație',
+        negative: 'Intrare nevalidă',
+        critical: 'Avertizare emisă',
+        positive: 'Intrare validată cu succes',
+        informative: 'Intrare informativă'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Încă {count}'
@@ -659,9 +663,15 @@ export default {
         buttonRoleDescription: 'Buton segmentat'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Identificator obiect'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Etichetă informații'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Resetare la zero',
+        ariaRoleDescription: 'Indicator de evaluare',
+        ariaLabelTotalRating: 'Evaluare totală',
+        ariaLabelValue: 'din'
     }
 };

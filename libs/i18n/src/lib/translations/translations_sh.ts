@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_sh.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Zauzeto',
+        defaultTitle: 'Sačekajte'
     },
     coreCalendar: {
         yearSelectionLabel: 'Odaberi godinu',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Zaključano',
         listItemStatusDraft: 'Nacrt'
     },
+    coreLink: {
+        emphasized: 'Naglašeno',
+        subtle: 'Suptilno'
+    },
     coreMessageStrip: {
         dismissLabel: 'Zatvori',
         announcementInfo: 'Statusna traka informacija',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Stavka stabla {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktivno)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Naglašeno',
+        negative: 'Status vrednosti Greška',
+        critical: 'Status vrednosti Upozorenje',
+        positive: 'Status vrednosti Uspeh',
+        informative: 'Status vrednosti Informacije'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Status objekta',
+        ariaRoleDescription: 'Dugme statusa objekta',
+        indicationColor: 'Boja indikacije',
+        negative: 'Nevažeći unos',
+        critical: 'Upozorenje izdato',
+        positive: 'Unos uspešno vrednovan',
+        informative: 'Informativni unos'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} više'
@@ -571,7 +575,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Kvadratić za potvrdu, označeno, kliknite da biste poništili sve odabire',
         deselectSingleRow: 'Da poništite odabir reda, pritisnite SPACEBAR',
         selectSingleRow: 'Da odaberete red, pritisnite SPACEBAR',
-        loadMore: 'Prikaži više',
+        loadMore: 'Pokaži više',
         toolbarActionButtonTitle: 'Podešavanja',
         settingsDialogHeader: 'Podešavanja',
         confirmBtnLabel: 'OK',
@@ -658,9 +662,15 @@ export default {
         buttonRoleDescription: 'Segmentirano dugme'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Identifikator objekta'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Info oznaka'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Ponovo postavi na nulu',
+        ariaRoleDescription: 'Pokazatelj vrednovanja',
+        ariaLabelTotalRating: 'Ukupna ocena',
+        ariaLabelValue: 'od'
     }
 };

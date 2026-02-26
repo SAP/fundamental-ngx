@@ -1,8 +1,25 @@
+/* Import SAP common-css utilities for spacing, padding, etc. */
+@import '@sap-ui/common-css/dist/sap-margin.css';
+@import '@sap-ui/common-css/dist/sap-padding.css';
+
+/* Import fundamental-styles for list and title components */
+@import 'fundamental-styles/dist/list.css';
+@import 'fundamental-styles/dist/title.css';
+
 :host {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: block;
 }
-.fd-button {
-    margin: 10px;
+
+/* Event log container - minimal styling that can't be done with utility classes */
+.event-log {
+    max-height: 9.375rem;
+    overflow-y: auto;
+    border: 1px solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+    background: var(--sapGroup_ContentBackground, #fff);
+
+    &__empty {
+        color: var(--sapContent_LabelColor, #6a6d70);
+        font-style: italic;
+    }
 }

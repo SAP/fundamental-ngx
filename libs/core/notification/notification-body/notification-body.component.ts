@@ -6,7 +6,6 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         class: 'fd-notification__body'
     }

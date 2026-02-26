@@ -2,13 +2,14 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    computed,
     DestroyRef,
     ElementRef,
     HostBinding,
+    inject,
     OnInit,
     ViewChild,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -76,6 +77,24 @@ export class SettingsGeneratorSidebarLayoutComponent
     _selectedIndex = -1;
     /** @hidden */
     _sidebarWidth: SidebarWidthConfiguration;
+
+    /** @hidden */
+    protected readonly sidebarTitle = computed(() => {
+        const settings = this.settings;
+        if (this._isSidebarSettings(settings) && settings.sidebarTitle) {
+            return settings.sidebarTitle;
+        }
+        return null;
+    });
+
+    /** @hidden */
+    protected readonly headingLevel = computed(() => {
+        const settings = this.settings;
+        if (this._isSidebarSettings(settings) && settings.sidebarTitleHeadingLevel) {
+            return settings.sidebarTitleHeadingLevel;
+        }
+        return 5; // Default to h5
+    });
 
     /** @hidden */
     protected _destroyRef = inject(DestroyRef);

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, Input, isDevMode, OnChanges } from '@angular/core';
+import { Directive, ElementRef, effect, inject, input, isDevMode } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BaseButton, ButtonType } from './base-button';
 import { FD_BUTTON_COMPONENT } from './tokens';
@@ -10,37 +10,43 @@ export const badgeEnabledButtonTypes: ButtonType[] = ['emphasized', 'standard', 
     selector: 'fd-button-badge',
     host: {
         class: 'fd-button__badge'
-    },
-    standalone: true
+    }
 })
-export class ButtonBadgeDirective implements OnChanges, HasElementRef {
+export class ButtonBadgeDirective implements HasElementRef {
     /**
      * Content, which should be shown inside the Badge.
      * It should not be longer than 4 characters.
      */
-    @Input()
-    content: string | number;
+    readonly content = input<string | number>();
 
     /** @hidden */
-    _buttonComponent = inject<BaseButton>(FD_BUTTON_COMPONENT, { host: true });
+    readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
-    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+    protected readonly buttonComponent = inject<BaseButton>(FD_BUTTON_COMPONENT, { host: true });
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.elementRef.nativeElement.innerHTML = `${this.content}` || '';
-        if (isDevMode()) {
-            if (this.content && this.content.toString().length > 4) {
-                console.warn('Badge content should not be longer than 4 characters');
+    constructor() {
+        // Automatically update badge content when content signal changes
+        effect(() => {
+            this.elementRef.nativeElement.innerHTML = `${this.content()}` || '';
+
+            if (isDevMode()) {
+                const contentValue = this.content();
+                if (contentValue) {
+                    if (contentValue.toString().length > 4) {
+                        console.warn('Badge content should not be longer than 4 characters');
+                    }
+                }
+
+                if (badgeEnabledButtonTypes.indexOf(this.buttonComponent.getFdType()) === -1) {
+                    console.warn(
+                        `Currently the ${JSON.stringify(
+                            badgeEnabledButtonTypes
+                        )} type of buttons are required for Badge enablement`
+                    );
+                }
             }
-            if (badgeEnabledButtonTypes.indexOf(this._buttonComponent.fdType) === -1) {
-                console.warn(
-                    `Currently the ${JSON.stringify(
-                        badgeEnabledButtonTypes
-                    )} type of buttons are required for Badge enablement`
-                );
-            }
-        }
+        });
     }
 }

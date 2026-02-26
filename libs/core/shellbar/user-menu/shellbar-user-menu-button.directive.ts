@@ -19,11 +19,15 @@ export class ShellbarUserMenuButtonDirective implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this._hostButton.fdType !== 'transparent' && this._hostButton.fdType !== defaultButtonType && isDevMode()) {
+        if (
+            this._hostButton.getFdType() !== 'transparent' &&
+            this._hostButton.getFdType() !== defaultButtonType &&
+            isDevMode()
+        ) {
             console.warn(
                 'ShellbarUserMenuButtonDirective should be used with transparent button type. Overriding button type to transparent.'
             );
         }
-        this._hostButton.fdType = 'transparent';
+        this._hostButton.setFdType('transparent');
     }
 }

@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'დაბლოკილი',
         listItemStatusDraft: 'დაუსრულებელი'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'გაუქმება',
         announcementInfo: 'Information Message Strip',
@@ -636,5 +640,11 @@ export default {
     },
     coreInfoLabel: {
         srOnlyText: 'Info Label'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Reset to zero',
+        ariaRoleDescription: 'Rating indicator',
+        ariaLabelTotalRating: 'Total rating',
+        ariaLabelValue: 'of'
     }
 };

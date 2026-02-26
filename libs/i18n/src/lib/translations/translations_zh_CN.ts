@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: '忙碌',
+        defaultTitle: '请等待'
     },
     coreCalendar: {
         yearSelectionLabel: '选择年度',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: '已锁定',
         listItemStatusDraft: '草稿'
     },
+    coreLink: {
+        emphasized: '已强调',
+        subtle: '隐蔽'
+    },
     coreMessageStrip: {
         dismissLabel: '关闭',
         announcementInfo: '信息消息条',
@@ -99,24 +103,24 @@ export default {
         linkItemAriaLabel: '树项目 {itemDetails}，{selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: '状态（活动）',
+        inactive: '状态'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: '已强调',
+        negative: '值状态错误',
+        critical: '值状态警告',
+        positive: '值状态成功',
+        informative: '值状态信息'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: '对象状态',
+        ariaRoleDescription: '对象状态按钮',
+        indicationColor: '指示颜色',
+        negative: '无效条目',
+        critical: '已发出警告',
+        positive: '输入已成功验证',
+        informative: '信息输入'
     },
     coreOverflowLayout: {
         moreItemsButton: '另外 {count} 个'
@@ -654,9 +658,15 @@ export default {
         buttonRoleDescription: '分段式按钮'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: '对象标识符'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: '信息标签'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: '重置为零',
+        ariaRoleDescription: '评级指示器',
+        ariaLabelTotalRating: '评级总计',
+        ariaLabelValue: '/'
     }
 };

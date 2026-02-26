@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: '사용 중',
+        defaultTitle: '기다려 주십시오.'
     },
     coreCalendar: {
         yearSelectionLabel: '연도 선택',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: '잠김',
         listItemStatusDraft: '초안'
     },
+    coreLink: {
+        emphasized: '강조됨',
+        subtle: '미약'
+    },
     coreMessageStrip: {
         dismissLabel: '닫기',
         announcementInfo: '정보 메시지 스트립',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: '트리 항목 {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: '상태(활성)',
+        inactive: '상태'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: '강조됨',
+        negative: '값 상태 오류',
+        critical: '값 상태 경고',
+        positive: '값 상태 성공',
+        informative: '값 상태 정보'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: '개체 상태',
+        ariaRoleDescription: '개체 상태 버튼',
+        indicationColor: '표시 색',
+        negative: '잘못된 항목',
+        critical: '경고 발생',
+        positive: '입력이 검증되었습니다.',
+        informative: '정보 항목'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count}개 더 보기'
@@ -655,9 +659,15 @@ export default {
         buttonRoleDescription: '세그멘테이션된 버튼'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: '개체 ID'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: '정보 레이블'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: '0으로 재설정',
+        ariaRoleDescription: '평가 지시자',
+        ariaLabelTotalRating: '총 평가 등급',
+        ariaLabelValue: '/'
     }
 };

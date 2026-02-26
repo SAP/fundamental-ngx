@@ -76,6 +76,49 @@ describe('TimelineComponent', () => {
     });
 });
 
+describe('TimelineComponentLoading', () => {
+    let component: TimelineLoadingTestComponent;
+    let fixture: ComponentFixture<TimelineLoadingTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [TimelineLoadingTestComponent],
+            providers: [TimelinePositionControlService]
+        }).compileComponents();
+    });
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TimelineLoadingTestComponent);
+        component = fixture.componentInstance;
+    });
+
+    it('should show loading skeleton with 3 repeated nodes when dataSource becomes null', () => {
+        // First initialize with data
+        component.data = [{ title: 'Title #1' }];
+        fixture.detectChanges();
+
+        // Then set to null to trigger loading state
+        component.data = null as any;
+        fixture.detectChanges();
+
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const skeletonNodes = hostEl.querySelectorAll('fd-timeline-node fd-skeleton');
+
+        // Each loading node has 2 skeletons (header and body), and there are 3 repeated nodes
+        expect(skeletonNodes.length).toBe(6);
+    });
+
+    it('should hide loading skeleton when dataSource is provided', () => {
+        component.data = [{ title: 'Title #1' }];
+        fixture.detectChanges();
+
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const actualNodes = hostEl.querySelectorAll('.fd-timeline__node-wrapper');
+
+        expect(actualNodes.length).toBe(1);
+    });
+});
+
 describe('TimelineComponentWithTrackBy', () => {
     let component: TimelineTestWithTrackByComponent;
     let fixture: ComponentFixture<TimelineTestWithTrackByComponent>;
@@ -155,6 +198,26 @@ class TimelineTestWithTrackByComponent extends TimelineTestComponent {
     trackBy(index: number, item: any): string {
         return item.title;
     }
+}
+
+@Component({
+    template: `
+        <div [style.width.px]="300">
+            <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
+                <fd-timeline-node *fdTimelineNodeDef="let node">
+                    {{ node.title }}
+                </fd-timeline-node>
+            </fd-timeline>
+        </div>
+    `,
+    standalone: true,
+    imports: [TimelineComponent, TimelineNodeDefDirective, TimelineNodeComponent]
+})
+class TimelineLoadingTestComponent {
+    data: { title: string }[] | null = null;
+
+    axis: TimelineAxis = 'vertical';
+    layout: TimelineSidePosition = 'right';
 }
 
 function getNodes(treeElement: Element): HTMLElement[] {

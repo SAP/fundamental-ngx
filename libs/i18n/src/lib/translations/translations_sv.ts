@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Upptagen',
+        defaultTitle: 'Vänta'
     },
     coreCalendar: {
         yearSelectionLabel: 'Välj år',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Låst',
         listItemStatusDraft: 'Utkast'
     },
+    coreLink: {
+        emphasized: 'Markerad',
+        subtle: 'Diskret'
+    },
     coreMessageStrip: {
         dismissLabel: 'Stäng',
         announcementInfo: 'Informationsmeddelanderad',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Trädelement {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktiv)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Markerad',
+        negative: 'Värdestatus Fel',
+        critical: 'Värdestatus Varning',
+        positive: 'Värdestatus OK',
+        informative: 'Värdestatus Information'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objektstatus',
+        ariaRoleDescription: 'Objektstatusknapp',
+        indicationColor: 'Indikeringsfärg 1',
+        negative: 'Ogiltig uppgift',
+        critical: 'Varning har utfärdats',
+        positive: 'Uppgift har validerats',
+        informative: 'Informativ uppgift'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} fler'
@@ -657,9 +661,15 @@ export default {
         buttonRoleDescription: 'Segmenterad knapp'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Objektidentifierare'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Infoetikett'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Återställ till noll',
+        ariaRoleDescription: 'Betygsindikator',
+        ariaLabelTotalRating: 'Totalbetyg',
+        ariaLabelValue: 'av'
     }
 };

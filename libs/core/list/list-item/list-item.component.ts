@@ -7,14 +7,13 @@ import {
     ContentChild,
     ContentChildren,
     DestroyRef,
-    EventEmitter,
     forwardRef,
     HostBinding,
     HostListener,
     inject,
     input,
     Input,
-    Output,
+    output,
     QueryList,
     TemplateRef,
     ViewEncapsulation
@@ -135,10 +134,6 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @Input()
     preventClick = false;
 
-    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
-    @Output()
-    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
     /** Whether list item contains link */
     @HostBinding('class.fd-list__item--link')
     link = false;
@@ -184,6 +179,9 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT, { descendants: true })
     buttons: QueryList<ButtonComponent>;
+
+    /** @hidden Implementation of KeyboardSupportItemInterface */
+    readonly keyDown = output<KeyboardEvent>();
 
     /** @hidden group header id, that is being set by parent list component */
     _relatedGroupHeaderId: string | null;
@@ -310,9 +308,8 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** @hidden */
     private _addClassToButtons(button: ButtonComponent): void {
-        button.class += ' fd-list__button';
-        button.buildComponentCssClass();
-        button.detectChanges();
+        const buttonElement = button.elementRef.nativeElement;
+        buttonElement.classList.add('fd-list__button');
     }
 
     /** @hidden */

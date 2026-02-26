@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: '[[[Ļŏċķēƌ∙∙∙∙∙∙∙∙]]]',
         listItemStatusDraft: '[[[Ďŗąƒţ∙∙∙∙∙∙∙∙∙]]]'
     },
+    coreLink: {
+        emphasized: '[[[Ĕɱρĥąşįžēƌ∙∙∙∙]]]',
+        subtle: '[[[Ŝűƃţĺē∙∙∙∙∙∙∙∙]]]'
+    },
     coreMessageStrip: {
         dismissLabel: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]',
         announcementInfo: '[[[Ĭŋƒŏŗɱąţįŏŋ Μēşşąğē Ŝţŗįρ∙∙∙∙∙∙∙]]]',
@@ -667,6 +671,12 @@ export default {
         srOnlyAriaLabel: '[[[Ŏƃĵēċţ Ĭƌēŋţįƒįēŗ∙∙∙∙∙∙∙]]]'
     },
     coreInfoLabel: {
-        srOnlyText: '[[[Ĭŋƒŏ Ļàƀēļ∙∙∙∙]]]'
+        srOnlyText: '[[[Ĭŋƒŏ Ļąƃēĺ∙∙∙∙]]]'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: '[[[Řēşēţ ţŏ žēŗŏ∙∙∙∙∙∙]]]',
+        ariaRoleDescription: '[[[Řąţįŋğ įŋƌįċąţŏŗ∙∙∙∙∙∙∙∙]]]',
+        ariaLabelTotalRating: '[[[Ţŏţąĺ ŗąţįŋğ∙∙∙∙∙∙∙]]]',
+        ariaLabelValue: '[[[ŏƒ∙∙]]]'
     }
 };

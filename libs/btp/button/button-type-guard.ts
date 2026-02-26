@@ -1,23 +1,22 @@
-import { Directive, inject, OnChanges, OnInit } from '@angular/core';
-import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { Directive, effect, inject, Signal } from '@angular/core';
+import { ButtonComponent, ButtonType, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 
 @Directive()
-export abstract class ButtonTypeGuard implements OnInit, OnChanges {
+export abstract class ButtonTypeGuard {
     /** Type of the button. */
-    abstract fdType: string;
+    abstract readonly fdType: Signal<ButtonType | undefined>;
 
     /** @hidden */
-    protected _buttonComponent = inject<ButtonComponent>(FD_BUTTON_COMPONENT, { host: true });
+    protected readonly buttonComponent = inject<ButtonComponent>(FD_BUTTON_COMPONENT, { host: true });
 
     /** @hidden */
-    ngOnInit(): void {
-        this._buttonComponent.fdType = this.fdType as any;
-        this._buttonComponent.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this._buttonComponent.fdType = this.fdType as any;
-        this._buttonComponent.buildComponentCssClass();
+    constructor() {
+        // Automatically update button type when fdType signal changes
+        effect(() => {
+            const type = this.fdType();
+            if (type) {
+                this.buttonComponent.setFdType(type);
+            }
+        });
     }
 }

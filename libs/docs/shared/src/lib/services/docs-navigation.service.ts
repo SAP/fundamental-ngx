@@ -2,8 +2,7 @@ import { Injectable, computed, signal } from '@angular/core';
 import {
     SectionInterface,
     SectionInterfaceContent,
-    SectionInterfaceContentLinear,
-    SectionInterfaceContentNested
+    SectionInterfaceContentLinear
 } from '../core-helpers/sections-toolbar/section.interface';
 import { getPackageOrderIndex } from './docs-packages.config';
 
@@ -72,31 +71,6 @@ export class DocsNavigationService {
     }
 
     /**
-     * Check if a content item is a nested item.
-     */
-    private _isNestedItem(item: SectionInterfaceContent): item is SectionInterfaceContentNested {
-        return 'subItems' in item;
-    }
-
-    /**
-     * Convert a content item to a linear item, handling nested content by flattening.
-     */
-    private _toLinearItems(items: SectionInterfaceContent[]): SectionInterfaceContentLinear[] {
-        const result: SectionInterfaceContentLinear[] = [];
-
-        for (const item of items) {
-            if (this._isLinearItem(item)) {
-                result.push(item);
-            } else if (this._isNestedItem(item)) {
-                // For nested items, include them all as linear items
-                result.push(...item.subItems);
-            }
-        }
-
-        return result;
-    }
-
-    /**
      * Build unified sections from all registered packages.
      * Structure:
      * - Home (Getting Started)
@@ -124,9 +98,9 @@ export class DocsNavigationService {
         });
 
         // Add each package as a top-level section
-        // The package's internal sections become nested content with subItems
+        // Merge all section content directly, preserving nested structure from docs-data.json
         for (const pkg of sortedPackages) {
-            const packageContent: SectionInterfaceContentNested[] = [];
+            const allContent: SectionInterfaceContent[] = [];
 
             for (const section of pkg.sections) {
                 // Filter out home pages from content
@@ -137,27 +111,18 @@ export class DocsNavigationService {
                     return true;
                 });
 
-                if (filteredContent.length > 0) {
-                    // Convert all content to linear items for the nested structure
-                    const linearItems = this._toLinearItems(filteredContent);
-
-                    if (linearItems.length > 0) {
-                        // Sort items alphabetically by name
-                        const sortedItems = linearItems.sort((a, b) =>
-                            a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
-                        );
-                        packageContent.push({
-                            name: section.header,
-                            subItems: sortedItems
-                        });
-                    }
-                }
+                allContent.push(...filteredContent);
             }
 
-            if (packageContent.length > 0) {
+            if (allContent.length > 0) {
+                // Sort items alphabetically by name, preserving nested structure
+                const sortedContent = allContent.sort((a, b) =>
+                    a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+                );
+
                 sections.push({
                     header: pkg.name,
-                    content: packageContent
+                    content: sortedContent
                 });
             }
         }

@@ -59,6 +59,8 @@ export type FdLanguageKeyIdentifier =
     | 'coreGridList.listItemStatusContainsErrors'
     | 'coreGridList.listItemStatusLocked'
     | 'coreGridList.listItemStatusDraft'
+    | 'coreLink.emphasized'
+    | 'coreLink.subtle'
     | 'coreMessageStrip.dismissLabel'
     | 'coreMessageStrip.announcementInfo'
     | 'coreMessageStrip.announcementWarning'
@@ -534,4 +536,8 @@ export type FdLanguageKeyIdentifier =
     | 'segmentedButton.groupRoleDescription'
     | 'segmentedButton.buttonRoleDescription'
     | 'coreObjectIdentifier.srOnlyAriaLabel'
-    | 'coreInfoLabel.srOnlyText';
+    | 'coreInfoLabel.srOnlyText'
+    | 'coreRatingIndicator.ariaLabelReset'
+    | 'coreRatingIndicator.ariaRoleDescription'
+    | 'coreRatingIndicator.ariaLabelTotalRating'
+    | 'coreRatingIndicator.ariaLabelValue';

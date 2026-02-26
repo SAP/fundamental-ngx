@@ -88,9 +88,11 @@ describe('DialogFooterComponent', () => {
 
         fixture.detectChanges();
 
-        const buttonClassNames = dialogComponent.buttons.first._buttonComponent.class;
+        const buttonBars = dialogComponent.buttons();
+        const buttonComponent = buttonBars[0]?.buttonComponent();
+        const buttonElement = buttonComponent?.elementRef.nativeElement;
 
-        expect(buttonClassNames.includes(DialogButtonClass)).toBeTruthy();
+        expect(buttonElement?.classList.contains(DialogButtonClass)).toBeTruthy();
     });
 
     it('should use custom template', async () => {
@@ -99,7 +101,7 @@ describe('DialogFooterComponent', () => {
 
         const button = fixture.nativeElement.querySelector('button');
 
-        expect(component.dialogFooterRef.customTemplates.length).toEqual(1);
+        expect(component.dialogFooterRef.customTemplates().length).toEqual(1);
         expect(button.textContent).toContain('Custom button');
     });
 });

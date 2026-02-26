@@ -73,6 +73,10 @@ export default {
         listItemStatusLocked: 'I kyçur',
         listItemStatusDraft: 'Draft'
     },
+    coreLink: {
+        emphasized: 'Emphasized',
+        subtle: 'Subtle'
+    },
     coreMessageStrip: {
         dismissLabel: 'Largoje',
         announcementInfo: 'Information Message Strip',
@@ -637,5 +641,11 @@ export default {
     },
     coreInfoLabel: {
         srOnlyText: 'Info Label'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Reset to zero',
+        ariaRoleDescription: 'Rating indicator',
+        ariaLabelTotalRating: 'Total rating',
+        ariaLabelValue: 'of'
     }
 };

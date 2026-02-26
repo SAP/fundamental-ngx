@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ms.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Sibuk',
+        defaultTitle: 'Sila tunggu'
     },
     coreCalendar: {
         yearSelectionLabel: 'Pilih tahun',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Dikunci',
         listItemStatusDraft: 'Draf'
     },
+    coreLink: {
+        emphasized: 'Diserlahkan',
+        subtle: 'Tak Ketara'
+    },
     coreMessageStrip: {
         dismissLabel: 'Tutup',
         announcementInfo: 'Jalur Mesej Maklumat',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Item Pepohon {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status(aktif)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Diserlahkan',
+        negative: 'Status Nilai Ralat',
+        critical: 'Status Nilai Amaran',
+        positive: 'Status Nilai Berjaya',
+        informative: 'Status Nilai Maklumat'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Status Objek',
+        ariaRoleDescription: 'Butang Status Objek',
+        indicationColor: 'Warna Petunjuk',
+        negative: 'Entri Tidak Sah',
+        critical: 'Amaran dikeluarkan',
+        positive: 'Entri berjaya disahkan',
+        informative: 'Entri maklumat'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} selanjutnya'
@@ -570,7 +574,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Kotak semak, ditanda, klik untuk nyahpilih semua',
         deselectSingleRow: 'Untuk nyahpilih baris, tekan BAR RUANG',
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
-        loadMore: 'Tunjukkan selanjutnya',
+        loadMore: 'Tunjukkan Selanjutnya',
         toolbarActionButtonTitle: 'Tetapan',
         settingsDialogHeader: 'Tetapan',
         confirmBtnLabel: 'OK',
@@ -656,9 +660,15 @@ export default {
         buttonRoleDescription: 'Butang Disegmenkan'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Pengenal Pasti Objek'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Label Maklumat'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Tetapkan semula kepada sifar',
+        ariaRoleDescription: 'Penunjuk penarafan',
+        ariaLabelTotalRating: 'Jumlah penarafan',
+        ariaLabelValue: 'daripada'
     }
 };

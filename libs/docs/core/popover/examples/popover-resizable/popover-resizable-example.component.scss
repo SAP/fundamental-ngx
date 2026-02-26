@@ -1,4 +1,4 @@
-@import 'fundamental-styles/dist/layout.css';
+/* Using SAP CSS variables for theming consistency */
 
 .docs-popover-container {
     display: flex;
@@ -8,9 +8,9 @@
 
 .docs-popover-container--horizontal {
     justify-content: space-evenly;
-    margin: 0 5rem;
+    margin: 0 var(--sapContent_PaddingXL, 5rem);
 }
 
 .docs-popover-element {
-    margin: 1rem;
+    margin: var(--sapContent_PaddingM, 1rem);
 }

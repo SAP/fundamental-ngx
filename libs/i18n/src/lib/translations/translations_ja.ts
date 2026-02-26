@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'ビジー',
+        defaultTitle: 'お待ちください'
     },
     coreCalendar: {
         yearSelectionLabel: '年を選択',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'ロック済み',
         listItemStatusDraft: 'ドラフト'
     },
+    coreLink: {
+        emphasized: '強調',
+        subtle: '淡色'
+    },
     coreMessageStrip: {
         dismissLabel: '閉じる',
         announcementInfo: '情報メッセージストリップ',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'ツリー項目: {itemDetails}、{selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: '状況 (アクティブ)',
+        inactive: '状況'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: '強調',
+        negative: '値の状況: エラー',
+        critical: '値の状況: 注意',
+        positive: '値の状況: 成功',
+        informative: '値の状況: 情報'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'オブジェクト状況',
+        ariaRoleDescription: 'オブジェクト状況ボタン',
+        indicationColor: '識別色',
+        negative: 'エントリが無効です。',
+        critical: '注意が表示されました。',
+        positive: 'エントリが検証されました。',
+        informative: '情報エントリ'
     },
     coreOverflowLayout: {
         moreItemsButton: 'ほか{count}件'
@@ -657,9 +661,15 @@ export default {
         buttonRoleDescription: 'セグメントボタン'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'オブジェクト識別子'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: '情報ラベル'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'ゼロにリセット',
+        ariaRoleDescription: '評価区分',
+        ariaLabelTotalRating: '総合評価',
+        ariaLabelValue: '/'
     }
 };

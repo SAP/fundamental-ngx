@@ -1,12 +1,4 @@
-import {
-    AfterContentInit,
-    ChangeDetectionStrategy,
-    Component,
-    ViewEncapsulation,
-    booleanAttribute,
-    inject,
-    input
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, inject, input } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { BarComponent, BarElementDirective, BarLeftDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
@@ -45,7 +37,7 @@ import { DialogConfig } from '../utils/dialog-config.class';
         NgTemplateOutlet
     ]
 })
-export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
+export class DialogHeaderComponent extends DialogHeaderBase {
     /** @hidden */
     dialogConfig = inject(DialogConfig, { optional: true }) || {};
     /** @hidden */

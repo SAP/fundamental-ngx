@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import {
     TableDataSourceDirective,
@@ -20,7 +20,7 @@ import {
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        PlatformButtonModule,
+        ButtonComponent,
         IllustratedMessageModule,
         FdDatetimeModule
     ]

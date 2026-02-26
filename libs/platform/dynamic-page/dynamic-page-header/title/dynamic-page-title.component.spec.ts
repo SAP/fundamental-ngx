@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DynamicPageHeaderComponent } from '@fundamental-ngx/core/dynamic-page';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
@@ -15,8 +15,8 @@ import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 
 @Component({
     template: `
-        <fdp-dynamic-page>
-            <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [size]="size" [background]="background">
+        <fdp-dynamic-page [size]="size" [autoResponsive]="false">
+            <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [background]="background">
                 <fd-breadcrumb>
                     <fd-breadcrumb-item>
                         <a fd-link [attr.href]="'#'">Men</a>
@@ -53,7 +53,7 @@ import { PlatformDynamicPageModule } from '../../dynamic-page.module';
         </fdp-dynamic-page>
     `,
     standalone: true,
-    imports: [PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule]
+    imports: [PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonComponent]
 })
 class TestComponent implements AfterViewInit {
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
@@ -150,8 +150,9 @@ describe('DynamicPageTitleComponent', () => {
             expect(keyInfoEl).toBeDefined();
         });
         it('should render key info content', async () => {
-            const keyInfoEl = componentDebugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
-            expect(keyInfoEl?.nativeElement.textContent?.trim()).toEqual('Key info content');
+            const keyInfoEl = fixture.debugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
+            expect(keyInfoEl).toBeTruthy();
+            expect(keyInfoEl.nativeElement.textContent?.trim()).toEqual('Key info content');
         });
     });
 });

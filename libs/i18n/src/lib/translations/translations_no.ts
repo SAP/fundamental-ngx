@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_no.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Opptatt',
+        defaultTitle: 'Vent litt'
     },
     coreCalendar: {
         yearSelectionLabel: 'Velg år',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Sperret',
         listItemStatusDraft: 'Utkast'
     },
+    coreLink: {
+        emphasized: 'Uthevet',
+        subtle: 'Subtil'
+    },
     coreMessageStrip: {
         dismissLabel: 'Lukk',
         announcementInfo: 'Informasjonsmeldingslinje',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Treelement {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktiv)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Uthevet',
+        negative: 'Verdistatus "feil"',
+        critical: 'Verdistatus "advarsel"',
+        positive: 'Verdistatus "utført"',
+        informative: 'Verdistatus "informasjon"'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objektstatus',
+        ariaRoleDescription: 'Objektstatusknapp',
+        indicationColor: 'Indikasjonsfarge',
+        negative: 'Ugyldige data',
+        critical: 'Advarsel er utstedt',
+        positive: 'Oppføringen er validert',
+        informative: 'Informativ oppføring'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} mer'
@@ -572,7 +576,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Avmerkingsboks, merket av, klikk for å oppheve merkingen av alle',
         deselectSingleRow: 'Trykk på mellomromstast for å oppheve merkingen',
         selectSingleRow: 'Trykk på mellomromstast for å merke rad',
-        loadMore: 'Vis mer',
+        loadMore: 'Vis flere',
         toolbarActionButtonTitle: 'Innstillinger',
         settingsDialogHeader: 'Innstillinger',
         confirmBtnLabel: 'OK',
@@ -659,9 +663,15 @@ export default {
         buttonRoleDescription: 'Segmenteringsknapp'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Objektidentifkator'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Infoetikett'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Tilbakestill til null',
+        ariaRoleDescription: 'Vurderingsindikator',
+        ariaLabelTotalRating: 'Samlet rangering',
+        ariaLabelValue: 'av'
     }
 };

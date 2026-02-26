@@ -124,6 +124,10 @@ export interface FdLanguage {
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
     };
+    coreLink: {
+        emphasized: FdLanguageKey;
+        subtle: FdLanguageKey;
+    };
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
         announcementInfo: FdLanguageKey;
@@ -790,5 +794,11 @@ export interface FdLanguage {
     };
     coreInfoLabel: {
         srOnlyText: FdLanguageKey;
+    };
+    coreRatingIndicator: {
+        ariaLabelReset: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+        ariaLabelTotalRating: FdLanguageKey;
+        ariaLabelValue: FdLanguageKey;
     };
 }

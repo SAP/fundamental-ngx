@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'ไม่ว่าง',
+        defaultTitle: 'กรุณารอสักครู่'
     },
     coreCalendar: {
         yearSelectionLabel: 'เลือกปี',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'ถูกล็อค',
         listItemStatusDraft: 'แบบร่าง'
     },
+    coreLink: {
+        emphasized: 'เน้น',
+        subtle: 'ไม่เน้น'
+    },
     coreMessageStrip: {
         dismissLabel: 'ปิด',
         announcementInfo: 'แถบข้อความข้อมูล',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'ไอเท็มแบบทรี {itemDetails} {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'สถานะ (แอคทีฟ)',
+        inactive: 'สถานะ'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'เน้น',
+        negative: 'สถานภาพของค่า - ข้อผิดพลาด',
+        critical: 'สถานภาพของค่า - คำเตือน',
+        positive: 'สถานภาพของค่า - สำเร็จ',
+        informative: 'สถานภาพของค่า - ข้อมูล'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'สถานะออบเจค',
+        ariaRoleDescription: 'ปุ่มสถานะออบเจค',
+        indicationColor: 'สีที่ระบุ',
+        negative: 'รายการไม่ถูกต้อง',
+        critical: 'ออกคำเตือนแล้ว',
+        positive: 'ตรวจสอบความถูกต้องของรายการได้สำเร็จ',
+        informative: 'รายการที่ให้ข้อมูล'
     },
     coreOverflowLayout: {
         moreItemsButton: 'อีก {count} รายการ'
@@ -657,9 +661,15 @@ export default {
         buttonRoleDescription: 'ปุ่มที่แบ่งเซกเมนต์'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'ตัวระบุออบเจค'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'ป้ายชื่อข้อมูล'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'รีเซ็ตเป็นศูนย์',
+        ariaRoleDescription: 'ตัวบ่งชี้การจัดอันดับ',
+        ariaLabelTotalRating: 'คะแนนรวม',
+        ariaLabelValue: 'จาก'
     }
 };

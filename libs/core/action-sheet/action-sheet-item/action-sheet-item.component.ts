@@ -2,16 +2,16 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter,
     HostListener,
     Input,
-    Output,
     ViewChild,
     ViewEncapsulation,
+    input,
+    output,
     signal
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonType, defaultButtonType } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
 
@@ -74,8 +74,13 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     buttonComponent: ElementRef;
 
     /** @hidden */
-    @Output()
-    keyDown = new EventEmitter<KeyboardEvent>();
+    readonly keyDown = output<KeyboardEvent>();
+
+    /** The button type for styling (e.g., 'transparent', 'emphasized'). */
+    readonly fdType = input<ButtonType>(defaultButtonType);
+
+    /** Whether the button is in toggled state. */
+    readonly toggled = input<boolean | undefined | null>();
 
     /** @hidden */
     readonly clicked = new Subject<ActionSheetClickEvent>();

@@ -16,8 +16,8 @@ import 'fundamental-styles/dist/margins.css';
     imports: [TimePicker]
 })
 export class TimePickerStatesSample {
-    readonly disabledValue = signal('10:15:30');
-    readonly readonlyValue = signal('16:45:00');
+    readonly disabledValue = signal('10:15:30 AM');
+    readonly readonlyValue = signal('04:45:00 PM');
 
     readonly stateExamples = signal([
         {

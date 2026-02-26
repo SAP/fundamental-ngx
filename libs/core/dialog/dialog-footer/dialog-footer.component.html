@@ -1,9 +1,9 @@
 <footer>
-    @if (customFooterTemplate) {
-        <ng-template [ngTemplateOutlet]="customFooterTemplate"></ng-template>
+    @if (customFooterTemplate()) {
+        <ng-template [ngTemplateOutlet]="customFooterTemplate()"></ng-template>
     } @else {
         <div fd-bar class="fd-dialog__footer" barDesign="footer" [fdContentDensity]="dialogConfig.contentDensity ?? ''">
-            <ng-template [ngTemplateOutlet]="footerTemplate ? footerTemplate : defaultTemplate"></ng-template>
+            <ng-template [ngTemplateOutlet]="footerTemplate() ? footerTemplate() : defaultTemplate"></ng-template>
 
             <ng-template #defaultTemplate>
                 <div fd-bar-right>

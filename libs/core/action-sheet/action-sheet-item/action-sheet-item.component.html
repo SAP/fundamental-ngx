@@ -1,8 +1,12 @@
 <button
     fd-button
-    [class]="negative ? 'fd-button--negative' : 'fd-button--transparent fd-button--text-alignment-left'"
-    role="menuitem"
     class="fd-button--full-width"
+    [class.fd-button--text-alignment-left]="!negative"
+    [class.fd-button--negative]="negative"
+    [class.fd-button--transparent]="!negative && fdType() === 'standard'"
+    role="menuitem"
+    [fdType]="fdType()"
+    [toggled]="toggled()"
     [label]="label"
     [glyph]="glyph"
     [glyphFont]="glyphFont"

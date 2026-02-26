@@ -1,0 +1,18 @@
+<form [formGroup]="registrationForm">
+    <ui5-checkbox formControlName="acceptAll" text="Accept all" indeterminate="true"></ui5-checkbox>
+
+    <fieldset formGroupName="agreements">
+        <ui5-checkbox formControlName="termsAndConditions" text="I accept Terms and Conditions"></ui5-checkbox>
+        <ui5-checkbox formControlName="marketing" text="I want to receive Marketing Materials"></ui5-checkbox>
+        <ui5-checkbox formControlName="newsletter" text="I want to sign up for a Newsletter"></ui5-checkbox>
+    </fieldset>
+</form>
+
+<br />
+
+<small>
+    <strong>Form value:</strong> {{ registrationForm.getRawValue() | json }}<br />
+    <strong>Form Touched:</strong> {{ registrationForm.touched }}<br />
+    <strong>Form Dirty:</strong> {{ registrationForm.dirty }}<br />
+    <strong>Form Valid:</strong> {{ registrationForm.valid }}<br />
+</small>

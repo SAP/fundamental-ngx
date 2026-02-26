@@ -29,7 +29,7 @@ import { ContentDensityMode, contentDensityObserverProviders } from '@fundamenta
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import equal from 'fast-deep-equal';
+import { shallowEqual } from 'fast-equals';
 import { BehaviorSubject, Subscription, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
@@ -94,7 +94,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
      */
     @Input()
     set groupFlex(value: Nullable<ShellbarGroupFlexOptions>) {
-        if (equal(value, this._groupFlex)) {
+        if (shallowEqual(value, this._groupFlex)) {
             return;
         }
 

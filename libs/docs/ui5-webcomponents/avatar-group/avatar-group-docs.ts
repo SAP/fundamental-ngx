@@ -9,8 +9,8 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { AvatarGroupExample } from './examples/avatar-group-sample';
 
-const basicSampleHtml = 'avatar-group-example.html';
-const basicSampleTs = 'avatar-group-example.ts';
+const basicSampleHtml = 'avatar-group-sample.html';
+const basicSampleTs = 'avatar-group-sample.ts';
 
 @Component({
     selector: 'ui5-avatar-group-docs',
@@ -29,13 +29,13 @@ export class AvatarGroupDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            originalFileName: 'avatar-group-example'
+            originalFileName: 'avatar-group-sample'
         },
         {
             language: 'typescript',
             component: 'AvatarGroupExample',
             code: getAssetFromModuleAssets(basicSampleTs),
-            originalFileName: 'avatar-group-example'
+            originalFileName: 'avatar-group-sample'
         }
     ];
 }

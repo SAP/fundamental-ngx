@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_bg.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Заето',
+        defaultTitle: 'Моля, изчакайте'
     },
     coreCalendar: {
         yearSelectionLabel: 'Избор на година',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Заключено',
         listItemStatusDraft: 'Чернова'
     },
+    coreLink: {
+        emphasized: 'Акцентирано',
+        subtle: 'Неясни'
+    },
     coreMessageStrip: {
         dismissLabel: 'Затваряне',
         announcementInfo: 'Лента с информационно съобщение',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Позиция от дърво {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Статус (активни)',
+        inactive: 'Статус'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Акцентирано',
+        negative: 'Статус за стойност "Грешка”',
+        critical: 'Статус за стойност „Предупреждение“',
+        positive: 'Статус за стойност „Успех"',
+        informative: 'Статус за стойност „Информация”'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Статус на обект',
+        ariaRoleDescription: 'Бутон за статус на обект',
+        indicationColor: 'Обозначителен цвят',
+        negative: 'Невалиден запис',
+        critical: 'Има предупреждение',
+        positive: 'Записът е успешно проверен',
+        informative: 'Информативен запис'
     },
     coreOverflowLayout: {
         moreItemsButton: 'още {count}'
@@ -571,7 +575,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Поле за отметка: с отметка. Кликнете, за да отмените избора на всичко',
         deselectSingleRow: 'За премахване на ред от избраните, натиснете ИНТЕРВАЛ',
         selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
-        loadMore: 'Виж повече',
+        loadMore: 'Покажи повече',
         toolbarActionButtonTitle: 'Настройки',
         settingsDialogHeader: 'Настройки',
         confirmBtnLabel: 'OK',
@@ -658,9 +662,15 @@ export default {
         buttonRoleDescription: 'Сегментиран бутон'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Идентификатор на обект'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Информационен етикет'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Нулиране',
+        ariaRoleDescription: 'Индикатор за рейтинг',
+        ariaLabelTotalRating: 'Общ рейтинг',
+        ariaLabelValue: 'от'
     }
 };

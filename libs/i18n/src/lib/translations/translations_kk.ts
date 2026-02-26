@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Бос емес',
+        defaultTitle: 'Күте тұрыңыз'
     },
     coreCalendar: {
         yearSelectionLabel: 'Жылды таңдау',
@@ -74,6 +74,10 @@ export default {
         listItemStatusLocked: 'Құлыпталды',
         listItemStatusDraft: 'Нобай'
     },
+    coreLink: {
+        emphasized: 'Ерекшеленген',
+        subtle: 'Білінбейтін'
+    },
     coreMessageStrip: {
         dismissLabel: 'Жабу',
         announcementInfo: 'Ақпараттық хабар жолағы',
@@ -100,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Тармақты құрылым тармағы {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Күй (белсенді)',
+        inactive: 'Күй'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Ерекшеленген',
+        negative: 'Мән күйі: Қате',
+        critical: 'Мән күйі: Ескерту',
+        positive: 'Мән күйі: Сәтті',
+        informative: 'Мән күйі туралы ақпарат'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Нысан күйі',
+        ariaRoleDescription: 'Нысан күйінің түймесі',
+        indicationColor: 'Индикация түсі',
+        negative: 'Енгізілім жарамсыз',
+        critical: 'Ескерту шығарылды',
+        positive: 'Енгізілім сәтті расталды',
+        informative: 'Ақпараттық енгізілім'
     },
     coreOverflowLayout: {
         moreItemsButton: 'тағы {count}'
@@ -658,9 +662,15 @@ export default {
         buttonRoleDescription: 'Сегменттелген түйме'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Нысан идентификаторы'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Ақпараттық белгі'
+    },
+    coreRatingIndicator: {
+        ariaLabelReset: 'Нөлге бастапқы қалпына келтіру',
+        ariaRoleDescription: 'Рейтинг индикаторы',
+        ariaLabelTotalRating: 'Жалпы рейтинг',
+        ariaLabelValue: '/'
     }
 };

@@ -1,5 +1,5 @@
 import { Directive, inject, Injector } from '@angular/core';
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { FocusableItem } from '../focusable-item/focusable.item';
 import { FocusableListDirective, ItemsQueryList } from './focusable-list.directive';

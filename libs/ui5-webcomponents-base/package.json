@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/ui5-webcomponents-base",
-    "version": "0.60.0-rc.0",
+    "version": "0.61.0-rc.4",
     "schematics": "./schematics/collection.json",
     "description": "Fundamental Library for Angular - UI5 Webcomponents Base",
     "license": "Apache-2.0",
@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "compare-versions": "^6.1.0",
-        "fast-deep-equal": "3.1.3",
+        "fast-equals": "^6.0.0",
         "lodash-es": "^4.17.0",
         "tslib": "^2.0.0"
     },

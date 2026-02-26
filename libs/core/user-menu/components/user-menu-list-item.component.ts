@@ -14,6 +14,7 @@ import {
     input,
     NgZone,
     Output,
+    output,
     signal,
     TemplateRef,
     viewChild,
@@ -42,10 +43,6 @@ let uniqueTextId = 0;
     imports: [PopoverBodyComponent, PopoverComponent, PopoverControlComponent, CommonModule]
 })
 export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
-    /** Event emitter for keyDown event */
-    @Output()
-    keyDown = new EventEmitter<KeyboardEvent>();
-
     /** Event emitter for isOpenChange event that controls the submenu popover body */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -55,6 +52,9 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
     /** Event emitter for updateTitle event */
     @Output() updateTitle: EventEmitter<string | null> = new EventEmitter();
+
+    /** Event emitter for keyDown event */
+    readonly keyDown = output<KeyboardEvent>();
 
     /** Unique id for the menu list item. Default is provided. */
     uniqueId = input(`fd-menu-list-item-${++uniqueId}`);
@@ -182,8 +182,9 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean, popover: PopoverComponent): void {
+        const popoverBodyEl = (popover as any).popoverBody?.();
         const firstTabbableElement: HTMLButtonElement =
-            popover.popoverBody._elementRef.nativeElement.querySelector('.fd-menu__link');
+            popoverBodyEl?._elementRef.nativeElement.querySelector('.fd-menu__link');
 
         const linkElement: HTMLButtonElement = this._elementRef.nativeElement.querySelector('.fd-menu__link');
 

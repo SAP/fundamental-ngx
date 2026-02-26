@@ -62,6 +62,26 @@ describe('MultiComboBox component', () => {
         fixture.detectChanges();
     }));
 
+    // Helper to wait for overlay to render after signal-based popover changes
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async function waitForOverlay(maxAttempts = 20): Promise<boolean> {
+        for (let i = 0; i < maxAttempts; i++) {
+            fixture.detectChanges();
+            await fixture.whenStable();
+
+            // Check for overlay pane first, then check for items
+            const overlayPane = document.querySelector('.cdk-overlay-pane');
+            const items = overlayContainerEl.querySelectorAll('.fd-list__item');
+
+            if (overlayPane && items.length > 0) {
+                return true;
+            }
+            // Small delay between attempts
+            await new Promise((resolve) => setTimeout(resolve, 50));
+        }
+        return false;
+    }
+
     it('should create', () => {
         expect(component).toBeTruthy();
     });
@@ -77,17 +97,22 @@ describe('MultiComboBox component', () => {
     });
 
     it('should be able to expand/collapse list if click on onPrimaryButtonClick', () => {
+        // Initial state - closed
+        expect(component.isOpen).toBeFalsy();
+
+        // Click to open
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
-        let toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
-        expect(toggleButton.length).toBe(component._suggestions.length);
+        const toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
+        expect(toggleButton.length).toBe(component._suggestions().length);
 
+        // Click to close
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
-        toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
-        expect(toggleButton.length).toBe(0);
+        // Verify closed
+        expect(component.isOpen).toBeFalsy();
     });
 
     it('should list all elements when limitless is true', () => {
@@ -97,39 +122,37 @@ describe('MultiComboBox component', () => {
 
         const dsLength = (component.dataSourceDirective.dataSource as any[]).length;
 
-        expect(component._suggestions.length).toBe(dsLength);
+        expect(component._suggestions().length).toBe(dsLength);
 
         component._setLimitless(false);
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
         if (dsLength > component._getMapLimit()) {
-            expect(component._suggestions.length).toBeLessThan(dsLength);
+            expect(component._suggestions().length).toBeLessThan(dsLength);
         } else {
-            expect(component._suggestions.length).toBe(dsLength);
+            expect(component._suggestions().length).toBe(dsLength);
         }
     });
 
     it('should be able to see Secondary Column', () => {
-        component.showSecondaryText = true;
-
-        fixture.detectChanges();
+        fixture.componentRef.setInput('showSecondaryText', true);
 
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
 
         const secondaryColumns = overlayContainerEl.querySelectorAll('.fd-list__secondary');
-        expect(secondaryColumns.length).toBe(component._suggestions.length);
+        expect(secondaryColumns.length).toBe(component._suggestions().length);
     });
 
     it('dataSource items should be converted to SelectableOptionItem', () => {
-        const item = component._suggestions[0];
+        const item = component._suggestions()[0];
 
         expect(isSelectableOptionItem(item)).toBeTruthy();
     });
 
     it('should select and unselect an item', () => {
-        const item = component._suggestions[0];
+        const item = component._suggestions()[0];
         const propagateChangeSpy = jest.spyOn(<any>component, '_propagateChange');
 
         expect(item.selected).toBe(false);
@@ -138,14 +161,14 @@ describe('MultiComboBox component', () => {
         fixture.detectChanges();
 
         expect(item.selected).toBe(true);
-        expect(component._selectedSuggestions.length).toEqual(1);
+        expect(component._selectedSuggestions().length).toEqual(1);
         expect(propagateChangeSpy).toHaveBeenCalled();
 
         component._toggleSelection(item);
         fixture.detectChanges();
 
         expect(item.selected).toBe(false);
-        expect(component._selectedSuggestions.length).toEqual(0);
+        expect(component._selectedSuggestions().length).toEqual(0);
         expect(propagateChangeSpy).toHaveBeenCalled();
     });
 
@@ -169,30 +192,32 @@ describe('MultiComboBox component', () => {
         const dsLength = (component.dataSourceDirective.dataSource as any[]).length;
 
         if (dsLength > component._getMapLimit()) {
-            expect(component._selectedSuggestions.length).toBeLessThan(dsLength);
+            expect(component._selectedSuggestions().length).toBeLessThan(dsLength);
         } else {
-            expect(component._selectedSuggestions.length).toBe(dsLength);
+            expect(component._selectedSuggestions().length).toBe(dsLength);
         }
 
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(unselectEvent);
         fixture.detectChanges();
 
-        expect(component._selectedSuggestions.length).toEqual(0);
+        expect(component._selectedSuggestions().length).toEqual(0);
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
         const buttonSpy = jest.spyOn(component.addOnButtonClicked, 'emit');
         const showListSpy = jest.spyOn(component, '_showList');
-        component.openDropdownOnAddOnClicked = false;
+        fixture.componentRef.setInput('openDropdownOnAddOnClicked', false);
         component._addOnClicked(new MouseEvent('click'));
         expect(buttonSpy).toHaveBeenCalled();
         expect(showListSpy).not.toHaveBeenCalled();
     });
 
     it('should select item automatically if full match found', async () => {
-        component.displayKey = 'name';
-        component.inputText = dataSource[2].name;
-        component._searchTermChanged(component.inputText);
+        fixture.componentRef.setInput('displayKey', 'name');
+        const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+        input.value = dataSource[2].name;
+        input.dispatchEvent(new Event('input')); // triggers ngModelChange
+        component._searchTermChanged(component.inputText());
         fixture.detectChanges();
         await fixture.whenStable();
         component._onBlur(
@@ -200,7 +225,7 @@ describe('MultiComboBox component', () => {
                 relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement
             })
         );
-        expect(component._selectedSuggestions.length).toEqual(1);
+        expect(component._selectedSuggestions().length).toEqual(1);
     });
 
     it('should pause and unpause focus trap when opened and closed', () => {
