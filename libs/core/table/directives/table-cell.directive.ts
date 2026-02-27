@@ -41,10 +41,10 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     @HostBinding('class.fd-table__cell--focusable')
     @Input({ transform: booleanAttribute })
     set focusable(value: boolean) {
-        this.fdkFocusableItem = value;
+        this.setFocusable(value);
     }
     get focusable(): boolean {
-        return this.fdkFocusableItem;
+        return this.isFocusable();
     }
 
     /** Whether the table cell is hoverable */
@@ -90,7 +90,7 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     /** @hidden */
     constructor() {
         super();
-        this.fdkFocusableItem = false;
+        this.setFocusable(false);
     }
 
     /** @hidden */
