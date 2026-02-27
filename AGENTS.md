@@ -1,7 +1,7 @@
 <!--
 Document: Angular 21+ Development Guidelines for Fundamental NGX
-Last Updated: February 23, 2026
-Version: 3.1
+Last Updated: February 26, 2026
+Version: 3.2
 Purpose: Comprehensive guide for AI agents and developers working with Angular 21+ in NX monorepo
 -->
 
@@ -14,7 +14,8 @@ Purpose: Comprehensive guide for AI agents and developers working with Angular 2
 3. [Resources](#resources)
 4. [Quick Decision Guide](#quick-decision-guide)
 5. [Common Mistakes to Avoid](#common-mistakes-to-avoid)
-6. [Best Practices & Style Guide](#best-practices--style-guide)
+6. [Development Workflow & Validation](#development-workflow--validation)
+7. [Best Practices & Style Guide](#best-practices--style-guide)
     - [Angular Style Guide](#angular-style-guide)
     - [TypeScript Best Practices](#typescript-best-practices)
     - [Angular Best Practices](#angular-best-practices)
@@ -37,12 +38,12 @@ Purpose: Comprehensive guide for AI agents and developers working with Angular 2
     - [Signal-Based Change Detection](#signal-based-change-detection)
     - [Templates](#templates)
     - [Services](#services)
-7. [NX Monorepo Architecture](#nx-monorepo-architecture)
-8. [Breaking Changes Guidelines](#breaking-changes-guidelines)
-9. [Dead Code Removal](#dead-code-removal)
-10. [Commit Message Guidelines](#commit-message-guidelines)
-11. [Pull Request Guidelines](#pull-request-guidelines)
-12. [Coding Rules and Standards](#coding-rules-and-standards)
+8. [NX Monorepo Architecture](#nx-monorepo-architecture)
+9. [Breaking Changes Guidelines](#breaking-changes-guidelines)
+10. [Dead Code Removal](#dead-code-removal)
+11. [Commit Message Guidelines](#commit-message-guidelines)
+12. [Pull Request Guidelines](#pull-request-guidelines)
+13. [Coding Rules and Standards](#coding-rules-and-standards)
 
 ---
 
@@ -166,6 +167,274 @@ Here are the essential links for building Angular components. Use these to under
 | Setting signal inputs externally     | Use InjectionToken or setter method           | Signal inputs are read-only              |
 | Protected after private members      | Protected before private                      | ESLint member ordering rule              |
 | `allowSignalWrites: true` in effect  | Remove the option                             | Deprecated in Angular 21+                |
+| Multiple changes without validation  | Validate after each logical step              | Catch errors early before they cascade   |
+| Assuming type inference works        | Verify inference with IDE or compilation      | TypeScript may infer `unknown`/`any`     |
+| Testing impossible scenarios         | Test realistic user scenarios only            | TypeScript/DI prevent many edge cases    |
+| Reusing variable names in tests      | Use unique descriptive names                  | Avoid ESLint no-shadow errors            |
+
+## Development Workflow & Validation
+
+**For AI Agents: Critical workflow patterns to prevent compilation errors and test failures**
+
+### The Build-Test-Lint Cycle
+
+After making ANY code changes, especially structural or type-related changes, follow this validation sequence:
+
+```bash
+# 1. Compile - catches type errors and syntax issues
+npx nx run <library>:build
+
+# 2. Lint - catches style violations, member ordering, and shadowing
+npx nx run <library>:lint
+
+# 3. Test - catches logic errors and broken functionality
+npx nx test <library>
+```
+
+**When to run validation:**
+
+| Change Type                     | When to Validate        | Why                                       |
+| ------------------------------- | ----------------------- | ----------------------------------------- |
+| Type annotation changes         | After each file         | TypeScript may not infer as expected      |
+| Adding/removing properties      | Immediately             | References may break                      |
+| Structural changes (reordering) | Before committing       | ESLint member ordering rules              |
+| New test suites                 | After writing           | Verify tests are realistic and pass       |
+| linkedSignal/computed changes   | After each change       | Complex type inference needs verification |
+| Multiple file refactoring       | After each logical step | Catch cascading errors early              |
+
+### Incremental Validation Pattern
+
+**✅ GOOD - Validate incrementally:**
+
+```typescript
+// 1. Make change
+readonly contentDensity = this._contentDensity.asReadonly();
+
+// 2. Run build immediately
+// $ npx nx run core:build
+
+// 3. If error, fix before next change
+// 4. Then proceed to next change
+```
+
+**❌ BAD - Make multiple changes before validating:**
+
+```typescript
+// Changed 5 files with type modifications
+// Added 20 new tests
+// Refactored class structure
+// NOW running build... (16 errors!)
+```
+
+### Type Safety Validation
+
+When working with complex types (linkedSignal, computed, generic signals):
+
+**Always verify:**
+
+1. ✅ The assigned value matches the declared type
+2. ✅ Type inference produces the expected type (hover in IDE)
+3. ✅ Source signals can be `undefined` or `unknown` - add guards
+4. ✅ Properties exist before referencing them
+
+**Example - linkedSignal with type guards:**
+
+```typescript
+// linkedSignal's computation may receive undefined/unknown source
+this._contentDensity = linkedSignal({
+    source: this._changesSource,
+    computation: (source) => {
+        // ✅ GOOD - Guard against undefined/null
+        if (!source || typeof source !== 'string') {
+            return ContentDensityMode.COZY; // Safe fallback
+        }
+        return this._validateAndFallback(source as ContentDensityMode);
+    }
+});
+
+// ❌ BAD - Assuming source is always valid
+this._contentDensity = linkedSignal({
+    source: this._changesSource,
+    computation: (source) => this._validateAndFallback(source) // Type error!
+});
+```
+
+### Test Writing Guidelines
+
+**Focus on User Scenarios, Not Edge Cases**
+
+When writing tests, ask: **"Can this actually happen in a real Angular application?"**
+
+**✅ Write tests for:**
+
+- User interactions (clicks, inputs, keyboard)
+- Valid configuration options
+- Component lifecycle (mount, update, unmount)
+- Accessibility requirements
+- Realistic error scenarios (unsupported enum values, optional services missing)
+
+**❌ Don't write tests for:**
+
+- TypeScript-prevented scenarios (`undefined` required parameters)
+- Angular DI-prevented scenarios (missing required dependencies)
+- Implementation details (internal signal updates, private methods)
+- Impossible states (null values in non-nullable fields)
+
+**Example - Realistic vs Unrealistic Tests:**
+
+```typescript
+// ✅ GOOD - Tests realistic user scenario
+it('should fallback to cozy when unsupported density is provided', () => {
+    const observer = new ContentDensityObserver(injector, {
+        supportedContentDensity: [ContentDensityMode.COZY],
+        defaultContentDensity: ContentDensityMode.COMPACT // User might try this
+    });
+    expect(observer.value).toBe(ContentDensityMode.COZY); // Fallback works
+});
+
+// ❌ BAD - Tests impossible scenario (TypeScript prevents this)
+it('should handle undefined defaultContentDensity', () => {
+    const observer = new ContentDensityObserver(injector, {
+        defaultContentDensity: undefined // TypeScript won't allow this!
+    });
+    expect(observer.value).toBe(ContentDensityMode.COZY);
+});
+```
+
+### ESLint Compliance
+
+**Member Ordering Rules**
+
+The project enforces strict member ordering via `@typescript-eslint/member-ordering`:
+
+**Correct order:**
+
+1. Static fields (public → protected → private)
+2. Instance fields - **public inputs first** (`input()`, `output()`)
+3. Instance fields - protected
+4. Instance fields - **private last**
+5. Constructors
+6. Methods (public → protected → private)
+
+**Example:**
+
+```typescript
+export class ContentDensityDirective {
+    // ✅ Public inputs FIRST
+    readonly fdContentDensity = input<string>('');
+    readonly fdCompact = input(false, { transform: booleanAttribute });
+
+    // ✅ Computed signals (public API)
+    readonly densityMode = computed(() => { ... });
+
+    // ✅ Getters
+    get value(): LocalContentDensityMode { ... }
+
+    // ✅ Private fields LAST
+    private readonly _elementRef = inject(ElementRef);
+    private readonly _renderer = inject(Renderer2);
+    private readonly _programmaticDensity = signal<LocalContentDensityMode | null>(null);
+
+    // ✅ Constructor
+    constructor() { ... }
+
+    // ✅ Public methods
+    setDensity(density: LocalContentDensityMode): void { ... }
+
+    // ✅ Private methods last
+    private _applyUi5Attribute(density: LocalContentDensityMode): void { ... }
+}
+```
+
+**Variable Shadowing**
+
+Avoid reusing common names like `observer`, `service`, `element` in nested scopes:
+
+```typescript
+// ❌ BAD - Shadowing error
+describe('ContentDensityObserver', () => {
+    let observer: ContentDensityObserver;
+
+    it('should work', () => {
+        @Component({ template: '' })
+        class TestComponent {
+            constructor(readonly observer: ContentDensityObserver) {} // Shadows!
+        }
+    });
+});
+
+// ✅ GOOD - Unique names
+describe('ContentDensityObserver', () => {
+    let observer: ContentDensityObserver;
+
+    it('should work', () => {
+        @Component({ template: '' })
+        class TestComponent {
+            constructor(readonly densityObserver: ContentDensityObserver) {}
+        }
+    });
+});
+```
+
+### Pre-Commit Checklist
+
+Before requesting code review or committing:
+
+- [ ] All modified files compile successfully
+- [ ] All affected library tests pass
+- [ ] No ESLint errors in modified files
+- [ ] No console.log statements (use console.warn/console.debug with guards)
+- [ ] Tests focus on user scenarios, not implementation details
+- [ ] Type annotations use inference where appropriate
+- [ ] All properties referenced actually exist
+- [ ] Member ordering follows ESLint rules
+- [ ] No variable shadowing
+
+### Common Validation Pitfalls
+
+**Pitfall 1: Assuming Type Inference Always Works**
+
+```typescript
+// Don't assume - verify with IDE hover or explicit compilation
+const mySignal = computed(() => complexCalculation());
+// Does TypeScript infer the correct type? Check before proceeding!
+```
+
+**Pitfall 2: Not Running Tests Immediately After Writing**
+
+```typescript
+// Write 20 tests → run once → 16 failures
+// Better: Write 2-3 tests → run → verify → write more
+```
+
+**Pitfall 3: Referencing Non-Existent Properties**
+
+```typescript
+// Always verify property exists in the class before using
+if (this._defaultContentDensity) {
+} // Does this property exist? Check!
+```
+
+**Pitfall 4: Forgetting ESLint Member Ordering**
+
+```typescript
+// Moving fields around? Run lint immediately:
+// $ npx nx run core:lint
+```
+
+### Lessons from Real Incidents
+
+These guidelines emerged from actual debugging sessions:
+
+1. **16 Test Failures**: Wrote tests for TypeScript-prevented scenarios instead of realistic user cases
+2. **Compilation Error**: Changed type annotations without verifying inference worked
+3. **Property Reference Error**: Used `_defaultContentDensity` property that didn't exist
+4. **ESLint Failures**: Moved class members without checking ordering rules
+5. **Variable Shadowing**: Reused `observer` name in nested test components
+
+**Key Takeaway**: Validate early, validate often. The cost of running build-lint-test is low compared to debugging cascading failures.
+
+---
 
 ## Best Practices & Style Guide
 
@@ -2130,10 +2399,12 @@ The project uses ESLint with NX and TypeScript plugins. Key rules:
 ### Testing Requirements
 
 - Write unit tests for all new features and bug fixes
+- **Focus on realistic user scenarios** - see [Development Workflow & Validation](#development-workflow--validation)
 - Maintain or improve code coverage
 - Use Jest as the test runner
 - Follow the testing patterns established in the codebase
-- Run `yarn test` before submitting PRs
+- Run `yarn test` or `npx nx test <library>` before submitting PRs
+- **Validate incrementally**: Run tests after writing each test suite, not all at once
 
 ### Testing Patterns with Signals
 
