@@ -25,7 +25,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ClickedDirective, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
-import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -45,20 +46,23 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 @Component({
     selector: 'fd-shellbar',
     templateUrl: './shellbar.component.html',
-    styleUrl: './shellbar.component.scss',
+    styleUrls: ['./shellbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        contentDensityObserverProviders({
-            supportedContentDensity: [ContentDensityMode.COZY],
-            restrictChildContentDensity: true
-        }),
         {
             provide: FD_SHELLBAR_COMPONENT,
             useExisting: ShellbarComponent
         }
     ],
-    imports: [PortalModule, FdTranslatePipe, ButtonComponent, ClickedDirective, NgTemplateOutlet]
+    imports: [
+        PortalModule,
+        FdTranslatePipe,
+        ButtonComponent,
+        ClickedDirective,
+        NgTemplateOutlet,
+        ContentDensityDirective
+    ]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
@@ -130,6 +134,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     @Input()
     backButtonLabel: string;
 
+    /** Whether to show the search when the shellbar size is set to small. */
+    @Input()
+    showSearchFieldOnSizeSmall = false;
+
     /** Emitted event when navigation button is clicked. */
     @Output()
     navigationButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
@@ -145,6 +153,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT, { read: ElementRef })
     buttons: QueryList<ElementRef>;
+
+    /** @hidden */
+    @ContentChildren(ProductSwitchComponent, { descendants: true })
+    productSwitches: QueryList<ProductSwitchComponent>;
 
     /** @hidden */
     @ContentChild(ShellbarContextAreaComponent)
@@ -195,8 +207,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         component.disableRefresh = true;
         component.forceSearchButton = true;
         component.appearance = {
-            searchClass: 'fd-shellbar__search-field',
-            searchFieldClass: 'fd-shellbar__search-field-input',
+            searchClass: 'fd-shellbar__search-field is-cozy',
+            searchFieldClass: 'fd-shellbar__search-field-input is-cozy',
             searchCategoryClass: 'fd-shellbar__search-field-category',
             searchSubmitClass: 'fd-shellbar__search-submit',
             buttonClass: 'fd-shellbar__button',
@@ -303,6 +315,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         requestAnimationFrame(() => this._setCurrentBreakpoint());
 
         this._setSearchComponentListeners();
+
+        this.productSwitches.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._setProductSwitchDensities();
+        });
+
+        this._setProductSwitchDensities();
     }
 
     /** @hidden */
@@ -469,7 +487,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             this.branding.showTitle();
         }
         if (this._actions) {
-            this._actions._handleOverflow(false);
+            this._actions._handleOverflow(this._currentSize === 's' && this.showSearchFieldOnSizeSmall);
         }
     }
 
@@ -515,5 +533,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._searchPortalOutlet.detach();
 
         this._actions?._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
+    }
+
+    /** @hidden */
+    private _setProductSwitchDensities(): void {
+        this.productSwitches.forEach((productSwitch) => {
+            productSwitch._contentDensity = ContentDensityMode.COZY;
+        });
     }
 }

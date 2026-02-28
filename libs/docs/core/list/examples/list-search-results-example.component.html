@@ -1,0 +1,98 @@
+<fd-popover title="photo 1 in circle">
+    <fd-popover-control>
+        <button fd-button>Click to open search results</button>
+    </fd-popover-control>
+    <fd-popover-body style="width: 400px">
+        <div fd-popover-body-header>
+            <div fd-bar [initialSuggestionTitle]="true" barDesign="header-with-subheader">
+                <div fd-bar-left>
+                    <span fd-title [twoLineClamp]="true" [headerSize]="6"
+                        >Try this! Try this! Try this! Try this! Try this! Try this! Try this! Try this! Try this! Try
+                        this! Try this! Try this! Try this! Try this! Try this! Try this! Try this!
+                    </span>
+                </div>
+            </div>
+            <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
+                <div fd-bar-left>
+                    <fd-text
+                        [subline]="true"
+                        text="Search for example 'All my open Objects' Search for example 'All my open Objects' Search for example 'All my open Objects' Search for example 'All my open Objects' Search for example 'All my open Objects' Search for example 'All my open Objects' Search for example 'All my open Objects'"
+                    ></fd-text>
+                </div>
+            </div>
+        </div>
+        <ul fd-list [searchResultsList]="true">
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <i fd-list-icon glyph="globe"></i>
+                <span fd-list-title>Viewed Element</span>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <i fd-list-icon glyph="reset"></i>
+                <span fd-list-title>Viewed Element - To Be Deleted</span>
+                <button fd-button fdType="transparent" glyph="refresh"></button>
+                <button fd-button fdType="transparent" glyph="delete"></button>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <span fd-list-thumbnail>
+                    <i fd-list-icon glyph="globe"></i>
+                </span>
+                <fd-info-label fd-list-info-label label="Prefix:" color="10"></fd-info-label>
+                <span fd-list-title>Viewed Element</span>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <i fd-list-icon glyph="search"></i>
+                <span fd-list-title>Search Term</span>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <i fd-list-icon glyph="globe"></i>
+                <span fd-list-title>Viewed Element</span>
+            </li>
+        </ul>
+        <ul fd-list [searchResultsList]="true">
+            <li fd-list-group-header>
+                <span fd-list-title>Group Header</span>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true" [byline]="true">
+                <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
+                <div fd-list-content>
+                    <span fd-list-title
+                        >List Item List Item List Item List Item List Item List Item List Item List Item List Item List
+                        Item List Item List Item List Item List Item List Item List Item
+                    </span>
+                    <span fd-list-subline
+                        >Byline Byline Byline Byline Byline Byline Byline Byline Byline Byline Byline Byline Byline
+                        Byline Byline Byline Byline Byline Byline Byline Byline Byline Byline
+                    </span>
+                </div>
+                <button fd-button fdType="transparent" glyph="decline"></button>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <span fd-list-thumbnail>
+                    <i fd-list-icon glyph="globe"></i>
+                </span>
+                <span fd-list-title>Viewed Element</span>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true">
+                <i fd-list-icon glyph="search"></i>
+                <span fd-list-title
+                    >View Element View Element View Element View Element View Element View Element View Element View
+                    Element View Element View Element View Element View Element View Element
+                </span>
+            </li>
+            <li fd-list-item [interactive]="true" [suggestion]="true" [counter]="12345">
+                <span fd-list-title>Search in [Scope]</span>
+            </li>
+        </ul>
+        <div fd-popover-body-footer>
+            <div fd-bar barDesign="footer">
+                <div fd-bar-middle>
+                    <div fd-bar-element>
+                        <button fd-button fdType="transparent" class="fd-button--full-width">
+                            Show All Search Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fd-popover-body>
+</fd-popover>

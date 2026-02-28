@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -30,6 +31,7 @@ import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ng
 import { Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { ListLinkDirective } from '../directives/list-link.directive';
+import { ListTitleDirective } from '../directives/list-title.directive';
 import { ListFocusItem } from '../list-focus-item.model';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
@@ -46,7 +48,8 @@ let listItemUniqueId = 0;
     host: {
         class: 'fd-list__item',
         '[attr.tabindex]': '_normalizedTabIndex$()',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        '[class.fd-list__item--suggestion]': 'suggestion()'
     },
     providers: [
         {
@@ -92,7 +95,15 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Counter on list item */
     @Input()
-    counter: number;
+    counter: number | undefined;
+
+    /** Counter aria role */
+    @Input()
+    counterRole: string;
+
+    /** Counter aria label */
+    @Input()
+    counterAriaLabel: string;
 
     /** Whether list item shows active indicator. Used only in List with Subline. */
     @Input()
@@ -158,6 +169,10 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     }
 
     /** @hidden */
+    @ContentChild(ListTitleDirective)
+    listTitle: ListTitleDirective;
+
+    /** @hidden */
     @ContentChildren(FD_LIST_LINK_DIRECTIVE)
     linkDirectives: QueryList<ListLinkDirective>;
 
@@ -178,6 +193,9 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Template ref for Settings list item */
     settingsListTpl = input<TemplateRef<any>>();
+
+    /** @hidden Whether this is a suggestion type list item. */
+    readonly suggestion = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     private _role = 'listitem'; // default for li elements

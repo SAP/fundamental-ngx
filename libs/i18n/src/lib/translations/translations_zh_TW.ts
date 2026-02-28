@@ -400,7 +400,16 @@ export default {
         searchInputLabel: '搜尋',
         synchronizeButtonTitle: '同步',
         searchSuggestionMessage: '找到 {count} 個建議。',
-        searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽'
+        searchSuggestionNavigateMessage: '使用向上和向下箭頭瀏覽',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: '設定',

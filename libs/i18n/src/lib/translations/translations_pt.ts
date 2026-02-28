@@ -402,7 +402,16 @@ export default {
         searchInputLabel: 'Pesquisar',
         synchronizeButtonTitle: 'Sincronizar',
         searchSuggestionMessage: '{count} sugestões encontradas.',
-        searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar'
+        searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Configurações',

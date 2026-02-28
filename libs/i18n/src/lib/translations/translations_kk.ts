@@ -402,7 +402,16 @@ export default {
         searchInputLabel: 'Іздеу',
         synchronizeButtonTitle: 'Синхрондау',
         searchSuggestionMessage: '{count} ұсыныс табылды.',
-        searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз'
+        searchSuggestionNavigateMessage: 'өту үшін жоғары және төмен көрсеткілерді пайдаланыңыз',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Параметрлер',

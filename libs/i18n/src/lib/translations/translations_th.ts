@@ -402,7 +402,16 @@ export default {
         searchInputLabel: 'ค้นหา',
         synchronizeButtonTitle: 'ซิงโครไนซ์',
         searchSuggestionMessage: 'พบคำแนะนำ {count} รายการ',
-        searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต'
+        searchSuggestionNavigateMessage: 'ใช้ลูกศรขึ้นและลูกศรลงเพื่อเนวิเกต',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'การตั้งค่า',

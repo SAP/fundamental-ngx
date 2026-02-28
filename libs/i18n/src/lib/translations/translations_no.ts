@@ -403,7 +403,16 @@ export default {
         searchInputLabel: 'Søk',
         synchronizeButtonTitle: 'Synkroniser',
         searchSuggestionMessage: '{count} forslag funnet.',
-        searchSuggestionNavigateMessage: 'bruk oppover og nedover piler til å navigere'
+        searchSuggestionNavigateMessage: 'bruk oppover og nedover piler til å navigere',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Innstillinger',

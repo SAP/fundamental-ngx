@@ -401,7 +401,16 @@ export default {
         searchInputLabel: 'Cari',
         synchronizeButtonTitle: 'Segerakkan',
         searchSuggestionMessage: '{count} cadangan ditemui.',
-        searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi'
+        searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Tetapan',

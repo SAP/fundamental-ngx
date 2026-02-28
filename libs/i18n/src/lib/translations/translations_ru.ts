@@ -402,7 +402,16 @@ export default {
         searchInputLabel: 'Поиск',
         synchronizeButtonTitle: 'Синхронизировать',
         searchSuggestionMessage: 'Найдено предложений: {count}',
-        searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз'
+        searchSuggestionNavigateMessage: 'для навигации используйте стрелки вверх и вниз',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Настройки',

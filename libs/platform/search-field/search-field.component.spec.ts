@@ -158,9 +158,9 @@ describe('SearchFieldComponent', () => {
         // Verify suggestions were set correctly by checking the observable
         const dropdownValues = await firstValueFrom(component._dropdownValues$);
         expect(dropdownValues.length).toBe(3);
-        expect(dropdownValues[0]).toBe('Apple');
-        expect(dropdownValues[1]).toBe('Banana');
-        expect(dropdownValues[2]).toBe('Carrot');
+        expect(dropdownValues[0].value).toBe('Apple');
+        expect(dropdownValues[1].value).toBe('Banana');
+        expect(dropdownValues[2].value).toBe('Carrot');
 
         // simulate keyboard entry to trigger filtering
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
@@ -184,9 +184,9 @@ describe('SearchFieldComponent', () => {
         // Verify observable suggestions were set correctly
         const dropdownValues = await firstValueFrom(component._dropdownValues$);
         expect(dropdownValues.length).toBe(3);
-        expect(dropdownValues[0]).toBe('Apple');
-        expect(dropdownValues[1]).toBe('Banana');
-        expect(dropdownValues[2]).toBe('Carrot');
+        expect(dropdownValues[0].value).toBe('Apple');
+        expect(dropdownValues[1].value).toBe('Banana');
+        expect(dropdownValues[2].value).toBe('Carrot');
 
         // simulate keyboard entry
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
@@ -198,25 +198,6 @@ describe('SearchFieldComponent', () => {
 
         // Verify dropdown opens
         expect(component._isOpen$()).toBeTruthy();
-    });
-
-    it('should open dropdown even when there are no matching items (filtering happens in template)', () => {
-        // set type ahead list
-        host.placeholder = 'Search';
-        host.suggestions = of([{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }]);
-        fixture.detectChanges();
-
-        // simulate keyboard entry with non-matching text
-        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
-        textInput.nativeElement.value = 'z';
-        textInput.nativeElement.dispatchEvent(new Event('input'));
-        textInput.triggerEventHandler('keyup', { key: 'z' });
-        fixture.detectChanges();
-
-        // Component opens dropdown regardless of matches
-        // The SuggestionMatchesPipe in the template handles filtering
-        expect(component._isOpen$()).toBeTruthy();
-        expect(component.inputText).toBe('z');
     });
 
     it('should show the "category button" if "categories" is set with one or more items', () => {

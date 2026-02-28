@@ -397,7 +397,16 @@ export default {
         searchInputLabel: 'Kërko',
         synchronizeButtonTitle: 'Sinkronizo',
         searchSuggestionMessage: '{count} sugjerime u gjetën.',
-        searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar'
+        searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSwitch: {
         ariaLabel: 'Ndërprerësi'

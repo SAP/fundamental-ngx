@@ -1,8 +1,7 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, map, switchMap } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 import { KeyUtil } from '../../functions';
 
 export interface AutoCompleteEvent {
@@ -74,24 +73,14 @@ export class AutoCompleteDirective {
          * By ensuring that we set all properties we can proceed with stable data.
          */
         this._zone.runOutsideAngular(() => {
-            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keydown');
+            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
             const compositionStartEvent = fromEvent<CompositionEvent>(
                 this._elementRef.nativeElement,
                 'compositionstart'
             );
             const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
 
-            keyupEvent
-                .pipe(
-                    switchMap((evt) =>
-                        this._zone.onStable.pipe(
-                            first(),
-                            map(() => evt)
-                        )
-                    ),
-                    takeUntilDestroyed()
-                )
-                .subscribe((evt) => this._handleKeyboardEvent(evt));
+            keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this._handleKeyboardEvent(evt));
 
             compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
                 this._isComposing = true;

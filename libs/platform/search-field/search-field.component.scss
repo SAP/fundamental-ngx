@@ -31,25 +31,131 @@
         // overriding background color in order to have outline displayed correctly
         background: transparent;
     }
-}
 
-.fdp-search-field__suggestion-dropdown {
-    .fd-menu--overflow {
-        background-color: var(--sapList_Background);
+    .fdp-search-field__advanced-filter-button {
+        margin-inline-start: 0.625rem !important;
     }
 
-    .fd-menu__list {
-        max-width: none;
-    }
-
-    .fd-menu__item {
-        max-width: none;
+    &__footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
     }
 }
 
 fdp-search-field {
     display: block;
+
     .fd-popover-custom {
         display: block;
     }
+}
+
+.fdp-search-field__mobile-bar-element.fd-bar__element--full-width.fd-bar__element {
+    gap: 0.5rem;
+
+    .fd-input-group.fd-shellbar__search-field.fdp-search-field__input-group {
+        max-width: 100%;
+    }
+}
+
+// TODO: remove all from below this line after updating styles
+.fd-bar {
+    &--stack-contents-vertically {
+        flex-direction: column !important;
+    }
+
+    &--initial-suggestion-title,
+    &--initial-suggestion-subline {
+        height: auto !important;
+    }
+
+    &--initial-suggestion-title {
+        padding-block-start: 0.5rem !important;
+    }
+
+    &--initial-suggestion-subline {
+        --fdBar_Padding_Bottom: 0.5rem !important;
+
+        padding-block-start: 0.25rem !important;
+    }
+}
+
+.fd-list--search-results {
+    .fd-list__item {
+        .fd-list__title,
+        .fd-list__subline {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            white-space: normal;
+            text-overflow: ellipsis;
+
+            font-size: var(--sapFontSize);
+        }
+
+        &--byline {
+            height: auto;
+            padding-block: 0.5rem;
+
+            .fd-list__title {
+                font-size: var(--sapFontSize);
+            }
+
+            .fd-list__subline {
+                color: var(--sapContent_LabelColor);
+                margin-block-start: 0.25rem;
+            }
+
+            .fd-list__content {
+                overflow: hidden;
+            }
+        }
+
+        &--suggestion {
+            .fd-list__info-label {
+                margin-inline-end: 0.5rem;
+            }
+
+            .fd-list__icon [class*='sap-icon']:first-child,
+            .fd-list__icon[class*='sap-icon']:first-child {
+                margin-inline-start: -0.5rem;
+            }
+
+            .fd-list__title--scope {
+                color: var(--sapContent_LabelColor);
+            }
+        }
+
+        &--suggestion:not(.is-selected),
+        &--byline:not(.is-selected) {
+            border-bottom: transparent; // TODO: replace with variable
+        }
+
+        .fdp-search-field__show-more {
+            color: var(--sapLinkColor);
+        }
+    }
+}
+
+.fd-text__subline {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+
+    font-size: var(--sapFontSmallSize);
+    color: var(--sapContent_LabelColor);
+}
+
+.fd-title--two-line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
 }

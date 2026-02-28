@@ -405,7 +405,16 @@ export default {
         searchInputLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
         synchronizeButtonTitle: '[[[Ŝŷŋċĥŗŏŋįžē∙∙∙∙∙∙∙∙]]]',
         searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
-        searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]'
+        searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: '[[[Ŝēţţįŋğş∙∙∙∙∙∙]]]',
