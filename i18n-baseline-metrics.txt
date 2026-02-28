@@ -1,0 +1,36 @@
+i18n Migration - Baseline Metrics
+═══════════════════════════════════════════════════════════════════
+
+Captured: 2026-02-28, 10:51:55 a.m.
+Version: pre-migration
+
+BUNDLE SIZE
+───────────────────────────────────────────────────────────────────
+Library (i18n package):
+  • Uncompressed:    1.12 MB
+  • Gzipped:         212.22 KB
+  • Main bundle:     fundamental-ngx-i18n.mjs
+
+Documentation App:
+  • Total size:      0 B
+  • Main bundle:     0 B
+
+BUILD PERFORMANCE
+───────────────────────────────────────────────────────────────────
+  • Cold build:      2.47s
+  • Incremental:     3.31s
+  • Type-check:      4.23s
+  • Test suite:      7.45s
+
+CODE METRICS
+───────────────────────────────────────────────────────────────────
+  • TypeScript files: 142
+  • Lines of code:    26,960
+  • Test coverage:    0.00%
+
+PERFORMANCE TESTS
+───────────────────────────────────────────────────────────────────
+  ⚠️  Performance benchmarks not included in automated run
+  → Run manually: nx test i18n --test-file=*performance*.spec.ts
+
+═══════════════════════════════════════════════════════════════════

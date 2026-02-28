@@ -1,0 +1,151 @@
+{
+    "date": "2026-02-28T16:00:49.848Z",
+    "version": "pre-migration-dual",
+    "cold": {
+        "runs": 5,
+        "bundleSize": {
+            "uncompressed": {
+                "median": 0,
+                "mean": 0,
+                "stdDev": 0,
+                "min": 0,
+                "max": 0,
+                "cv": 0
+            },
+            "gzipped": {
+                "median": 0,
+                "mean": 0,
+                "stdDev": 0,
+                "min": 0,
+                "max": 0,
+                "cv": 0
+            }
+        },
+        "coldBuildTime": {
+            "median": 3.631,
+            "mean": 3.6878,
+            "stdDev": 0.11100162160977645,
+            "min": 3.61,
+            "max": 3.905,
+            "cv": 3.009968588583341
+        },
+        "testExecutionTime": {
+            "median": 6.842,
+            "mean": 6.9336,
+            "stdDev": 0.18569932687007787,
+            "min": 6.754,
+            "max": 7.252,
+            "cv": 2.678252666292804
+        },
+        "typecheckTime": {
+            "median": 3.371,
+            "mean": 3.6314,
+            "stdDev": 0.3548659465206544,
+            "min": 3.34,
+            "max": 4.233,
+            "cv": 9.772152517504388
+        },
+        "code": {
+            "linesOfCode": 26960,
+            "numberOfFiles": 142
+        },
+        "rawData": [
+            {
+                "bundleSize": {
+                    "uncompressed": 0,
+                    "gzipped": 0
+                },
+                "coldBuildTime": 3.905,
+                "testExecutionTime": 7.252,
+                "typecheckTime": 4.233,
+                "linesOfCode": 26960,
+                "numberOfFiles": 142
+            },
+            {
+                "bundleSize": {
+                    "uncompressed": 0,
+                    "gzipped": 0
+                },
+                "coldBuildTime": 3.617,
+                "testExecutionTime": 6.842,
+                "typecheckTime": 3.845,
+                "linesOfCode": 26960,
+                "numberOfFiles": 142
+            },
+            {
+                "bundleSize": {
+                    "uncompressed": 0,
+                    "gzipped": 0
+                },
+                "coldBuildTime": 3.61,
+                "testExecutionTime": 7.031,
+                "typecheckTime": 3.368,
+                "linesOfCode": 26960,
+                "numberOfFiles": 142
+            },
+            {
+                "bundleSize": {
+                    "uncompressed": 0,
+                    "gzipped": 0
+                },
+                "coldBuildTime": 3.676,
+                "testExecutionTime": 6.754,
+                "typecheckTime": 3.371,
+                "linesOfCode": 26960,
+                "numberOfFiles": 142
+            },
+            {
+                "bundleSize": {
+                    "uncompressed": 0,
+                    "gzipped": 0
+                },
+                "coldBuildTime": 3.631,
+                "testExecutionTime": 6.789,
+                "typecheckTime": 3.34,
+                "linesOfCode": 26960,
+                "numberOfFiles": 142
+            }
+        ]
+    },
+    "warm": {
+        "runs": 5,
+        "incrementalBuildTime": {
+            "median": 2.79,
+            "mean": 2.8658,
+            "stdDev": 0.10047964968091794,
+            "min": 2.78,
+            "max": 3.022,
+            "cv": 3.5061640617251006
+        },
+        "testRerunTime": {
+            "median": 2.303,
+            "mean": 2.3134,
+            "stdDev": 0.03705455437594692,
+            "min": 2.255,
+            "max": 2.354,
+            "cv": 1.6017357299190336
+        },
+        "rawData": [
+            {
+                "incrementalBuildTime": 3.022,
+                "testRerunTime": 2.302
+            },
+            {
+                "incrementalBuildTime": 2.78,
+                "testRerunTime": 2.353
+            },
+            {
+                "incrementalBuildTime": 2.949,
+                "testRerunTime": 2.303
+            },
+            {
+                "incrementalBuildTime": 2.79,
+                "testRerunTime": 2.354
+            },
+            {
+                "incrementalBuildTime": 2.788,
+                "testRerunTime": 2.255
+            }
+        ]
+    }
+}
