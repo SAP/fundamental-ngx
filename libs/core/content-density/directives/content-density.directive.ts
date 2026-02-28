@@ -184,7 +184,8 @@ export class ContentDensityDirective {
      */
     private _applyUi5Attribute(density: LocalContentDensityMode): void {
         const nativeElement = this._elementRef?.nativeElement;
-        if (!nativeElement || !this._renderer) {
+        // Only apply to actual HTML elements, not comment/text nodes
+        if (!nativeElement || !this._renderer || !(nativeElement instanceof HTMLElement)) {
             return;
         }
 

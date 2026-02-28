@@ -380,7 +380,13 @@ export class ContentDensityObserver {
         currentDensity: ContentDensityMode,
         parentContentDensityEqual: boolean
     ): void {
-        if (!this.config.ui5Markers?.enabled || !nativeElement || !this._renderer) {
+        // Only apply to actual HTML elements, not comment/text nodes
+        if (
+            !this.config.ui5Markers?.enabled ||
+            !nativeElement ||
+            !this._renderer ||
+            !(nativeElement instanceof HTMLElement)
+        ) {
             return;
         }
 
