@@ -1,4 +1,5 @@
 import {
+    afterNextRender,
     computed,
     DestroyRef,
     effect,
@@ -7,9 +8,8 @@ import {
     inject,
     Injectable,
     Injector,
-    Renderer2,
-    signal,
-    WritableSignal
+    linkedSignal,
+    Renderer2
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable, Observer, Subscription } from 'rxjs';
@@ -73,11 +73,20 @@ const initialContentDensity = (
  * Service for observing and managing content density in components.
  *
  * Provides signal-based API for reactive content density tracking.
+ * Uses linkedSignal (Angular 21+) for derived state with validation.
  */
 @Injectable()
 export class ContentDensityObserver {
-    /** Current content density as a readonly signal */
-    readonly contentDensity: ReturnType<WritableSignal<ContentDensityMode>['asReadonly']>;
+    /** Configuration for this observer */
+    readonly config: ContentDensityObserverSettings;
+
+    /**
+     * Current content density as a readonly signal.
+     * Uses linkedSignal internally for reactive updates with validation.
+     */
+    readonly contentDensity: ReturnType<
+        ReturnType<typeof linkedSignal<ContentDensityMode, ContentDensityMode>>['asReadonly']
+    >;
 
     /** Whether content density is compact (signal) */
     readonly isCompactSignal: ReturnType<typeof computed<boolean>>;
@@ -92,7 +101,9 @@ export class ContentDensityObserver {
      * Current content density signal
      * @deprecated Use contentDensity() instead
      */
-    readonly contentDensity$: ReturnType<WritableSignal<ContentDensityMode>['asReadonly']>;
+    readonly contentDensity$: ReturnType<
+        ReturnType<typeof linkedSignal<ContentDensityMode, ContentDensityMode>>['asReadonly']
+    >;
 
     /**
      * Observable for compact state changes
@@ -118,10 +129,12 @@ export class ContentDensityObserver {
      */
     readonly contentDensity$$: Observable<ContentDensityMode>;
 
-    /** Configuration for this observer */
-    readonly config: ContentDensityObserverSettings;
-
-    private readonly _contentDensity: WritableSignal<ContentDensityMode>;
+    /**
+     * Internal linkedSignal for content density with validation.
+     * linkedSignal (Angular 21+) automatically tracks source changes
+     * and applies the computation (validation/fallback).
+     */
+    private readonly _contentDensity: ReturnType<typeof linkedSignal<ContentDensityMode, ContentDensityMode>>;
 
     private readonly _changesSource: ReturnType<typeof computed<ContentDensityMode>>;
 
@@ -187,9 +200,38 @@ export class ContentDensityObserver {
     }
 
     constructor(_injector: Injector, _providedConfig?: ContentDensityObserverSettings) {
-        // Initialize internal signal with resolved initial density
+        // Set up config first (needed for validation)
+        this.config = {
+            ...defaultContentDensityObserverConfigs,
+            ...(this._parentContentDensityObserver?.config ?? {}),
+            ...(_providedConfig || {})
+        };
+
+        // Resolve initial density
         const resolvedInitialDensity = initialContentDensity(_injector, _providedConfig);
-        this._contentDensity = signal<ContentDensityMode>(resolvedInitialDensity);
+
+        // Get the changes source as a computed signal
+        this._changesSource = getChangesSource({
+            defaultContentDensity: resolvedInitialDensity,
+            contentDensityDirective: this._contentDensityDirective?.densityMode,
+            contentDensityService: this._globalContentDensityService ?? undefined,
+            parentContentDensityObserver: this.config.restrictChildContentDensity
+                ? this._parentContentDensityObserver?.contentDensity
+                : undefined
+        });
+
+        // Use linkedSignal for derived state with validation (Angular 21+ pattern)
+        // linkedSignal automatically updates when source changes, applying the computation
+        this._contentDensity = linkedSignal({
+            source: this._changesSource,
+            computation: (source) => {
+                // Guard against undefined/null source values
+                if (!source || typeof source !== 'string') {
+                    return ContentDensityMode.COZY; // Safe fallback to default
+                }
+                return this._validateAndFallback(source as ContentDensityMode);
+            }
+        });
 
         // Public readonly signal
         this.contentDensity = this._contentDensity.asReadonly();
@@ -208,35 +250,19 @@ export class ContentDensityObserver {
         this.isCondensed$ = toObservable(this.isCondensedSignal, { injector: _injector });
         this.contentDensity$$ = toObservable(this._contentDensity, { injector: _injector });
 
-        // Set up config
-        this.config = {
-            ...defaultContentDensityObserverConfigs,
-            ...(this._parentContentDensityObserver?.config ?? {}),
-            ...(_providedConfig || {})
-        };
-
-        // Get the changes source as a signal (fully signal-based now)
-        this._changesSource = getChangesSource({
-            defaultContentDensity: resolvedInitialDensity,
-            contentDensityDirective: this._contentDensityDirective?.densityMode,
-            contentDensityService: this._globalContentDensityService ?? undefined,
-            parentContentDensityObserver: this.config.restrictChildContentDensity
-                ? this._parentContentDensityObserver?.contentDensity
-                : undefined
-        });
-
-        // React to changes with effect
+        // Effect purely for DOM side effects (CSS classes and UI5 attribute)
+        // This follows Angular 21 best practices: effects should only do side effects, not update signals
         effect(() => {
-            const rawDensity = this._changesSource();
-            const density = this._validateAndFallback(rawDensity);
-            if (density !== this._contentDensity()) {
-                this._contentDensity.set(density);
-                this._applyClass();
-            }
+            // Read the signal to track changes
+            const density = this._contentDensity();
+            // Apply DOM changes (side effect)
+            this._applyClass(density);
         });
 
-        // Apply initial CSS class
-        this._applyClass();
+        // Apply initial CSS class after first render (zoneless-compatible)
+        afterNextRender(() => {
+            this._applyClass(this._contentDensity());
+        });
 
         // Register cleanup on destroy
         this._destroyRef.onDestroy(() => {
@@ -272,8 +298,9 @@ export class ContentDensityObserver {
     }
 
     /**
-     * Subscribe to content density changes
-     * @deprecated Use contentDensity signal instead
+     * Subscribe to content density changes.
+     * @deprecated Use contentDensity signal with effect() instead.
+     * This method exists for backward compatibility.
      */
     subscribe(observer?: Partial<Observer<ContentDensityMode>>): Subscription {
         return this.contentDensity$$.subscribe(observer);
@@ -315,14 +342,14 @@ export class ContentDensityObserver {
         this._elements = [];
     }
 
-    private _applyClass(): void {
+    private _applyClass(currentDensity?: ContentDensityMode): void {
         if (!this.config?.modifiers) {
             return;
         }
         const modifiers = this.config.modifiers;
-        const currentDensity = this._contentDensity();
+        const density = currentDensity ?? this._contentDensity();
 
-        const parentContentDensityEqual = this._parentContentDensityObserver?.value === currentDensity;
+        const parentContentDensityEqual = this._parentContentDensityObserver?.value === density;
 
         this._elements.forEach((element) => {
             Object.values(modifiers).forEach((className) => {
@@ -330,13 +357,13 @@ export class ContentDensityObserver {
             });
 
             // Apply/remove UI5 compact marker attribute
-            this._applyUi5Marker(element?.nativeElement, currentDensity, parentContentDensityEqual);
+            this._applyUi5Marker(element?.nativeElement, density, parentContentDensityEqual);
 
             // Simply remove all modifiers from current element. Content density state is covered by parent element.
             if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
                 return;
             }
-            const modifierClass = modifiers[currentDensity];
+            const modifierClass = modifiers[density];
             if (modifierClass) {
                 this._renderer?.addClass(element?.nativeElement, modifierClass);
             }

@@ -1,0 +1,190 @@
+<fd-docs-section-title id="overview" componentName="Content Density">Overview</fd-docs-section-title>
+<description>
+    <p>
+        UI5 Web Components Angular wrappers from <code>@fundamental-ngx/ui5-webcomponents</code> fully integrate with
+        the content density system from <code>@fundamental-ngx/core/content-density</code>.
+    </p>
+    <p>
+        <strong>Key features:</strong>
+    </p>
+    <ul>
+        <li>Each UI5 wrapper component uses <code>ContentDensityObserver</code> internally</li>
+        <li>The <code>data-ui5-compact-size</code> attribute is automatically applied for compact/condensed modes</li>
+        <li>
+            Full support for local directive overrides (<code>fdCompact</code>, <code>fdCozy</code>,
+            <code>fdCondensed</code>)
+        </li>
+        <li>Seamless integration with <code>GlobalContentDensityService</code></li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="density-modes" componentName="Content Density">Density Modes</fd-docs-section-title>
+<description>
+    <p>UI5 Web Components support two density modes:</p>
+    <ul>
+        <li><strong>Cozy</strong> - Default mode with larger touch targets, no attribute needed</li>
+        <li>
+            <strong>Compact</strong> - Reduced spacing for desktop/mouse usage, uses <code>data-ui5-compact-size</code>
+        </li>
+    </ul>
+    <p>The fundamental-ngx content density system maps all three modes to UI5:</p>
+    <ul>
+        <li><code>cozy</code> → No attribute (UI5 default)</li>
+        <li><code>compact</code> → <code>data-ui5-compact-size</code> attribute applied</li>
+        <li><code>condensed</code> → <code>data-ui5-compact-size</code> attribute applied (maps to UI5 compact)</li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="basic-example" componentName="Content Density">Usage Examples</fd-docs-section-title>
+<description>
+    <p>
+        This example demonstrates all major content density patterns with UI5 Web Components. Use the selector to change
+        the global density and observe how different scenarios respond.
+    </p>
+
+    <h4>Demonstrated Scenarios:</h4>
+    <ul>
+        <li>
+            <strong>Scenario 1 - Global Density:</strong> Components automatically follow the global setting from
+            <code>GlobalContentDensityService</code>
+        </li>
+        <li>
+            <strong>Scenario 2 - Section-Level Override:</strong> Apply <code>fdCompact</code> or <code>fdCozy</code> to
+            container elements (forms, sections) to override global density for all contained components
+        </li>
+        <li>
+            <strong>Scenario 3 - Component-Level Override:</strong> Apply directives to individual components to mix
+            densities within the same section
+        </li>
+    </ul>
+
+    <h4>When to Use Each Pattern:</h4>
+    <ul>
+        <li><strong>Global Density:</strong> Most of your application should follow this for consistency</li>
+        <li><strong>Section-Level:</strong> Form sections needing better touch targets, sidebars, navigation areas</li>
+        <li>
+            <strong>Component-Level:</strong> Primary action buttons that need emphasis, specific inputs requiring
+            better accessibility
+        </li>
+    </ul>
+
+    <h4>Limitation</h4>
+    <div class="fd-message-strip fd-message-strip--warning" role="alert">
+        <p class="fd-message-strip__text">
+            <strong>Cannot override compact parent to cozy child.</strong>
+            If a parent is compact, all children will be compact.
+        </p>
+    </div>
+
+    <p>
+        <strong>Example:</strong> Compact toolbar → all buttons inside are compact (cannot make them cozy).<br />
+        <strong>Need this?</strong> Report at
+        <a href="https://github.com/UI5/webcomponents/issues" target="_blank" rel="noopener"
+            >github.com/UI5/webcomponents/issues</a
+        >
+    </p>
+
+    <h4>Dynamic Density (Bonus Pattern)</h4>
+    <p>You can also bind density dynamically using signals:</p>
+    <pre><code>// Component
+protected readonly userPrefersCozy = signal(false);
+
+// Template
+&lt;ui5-checkbox (ui5Change)="userPrefersCozy.set($event.target.checked)"&gt;
+    Large touch targets
+&lt;/ui5-checkbox&gt;
+&lt;section [fdContentDensity]="userPrefersCozy() ? 'cozy' : 'compact'"&gt;
+    &lt;ui5-button&gt;Adaptive Button&lt;/ui5-button&gt;
+&lt;/section&gt;</code></pre>
+
+    <h4>Key Principles</h4>
+    <ul>
+        <li>
+            <strong>Priority order:</strong> Component directive > Section directive > Global service > Default (cozy)
+        </li>
+        <li>
+            <strong>Container directives</strong> affect all descendant UI5 components via DOM attribute propagation
+        </li>
+        <li><strong>Component directives</strong> set the attribute directly on the component element</li>
+        <li><strong>Global changes</strong> update all components not overridden by local directives</li>
+    </ul>
+</description>
+<component-example>
+    <ui5-content-density-basic-sample></ui5-content-density-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="usage" componentName="Content Density">Setup</fd-docs-section-title>
+<description>
+    <p><strong>1. Provide content density at application level:</strong></p>
+    <pre><code>// app.config.ts
+import &#123; provideContentDensity &#125; from '@fundamental-ngx/core/content-density';
+
+export const appConfig = &#123;
+    providers: [
+        provideContentDensity()
+    ]
+&#125;;</code></pre>
+
+    <p><strong>2. Use GlobalContentDensityService to change density programmatically:</strong></p>
+    <pre><code>import &#123; GlobalContentDensityService &#125; from '@fundamental-ngx/core/content-density';
+
+constructor() &#123;
+    const service = inject(GlobalContentDensityService);
+
+    // Read current density
+    const density = service.currentDensitySignal();
+
+    // Update density
+    service.updateContentDensity('compact');
+&#125;</code></pre>
+
+    <p><strong>3. Use directives for local overrides:</strong></p>
+    <pre><code>&lt;!-- Force compact mode for this section --&gt;
+&lt;div fdCompact&gt;
+    &lt;ui5-button&gt;Compact Button&lt;/ui5-button&gt;
+    &lt;ui5-input placeholder="Compact Input"&gt;&lt;/ui5-input&gt;
+&lt;/div&gt;
+
+&lt;!-- Force cozy mode regardless of global setting --&gt;
+&lt;div fdCozy&gt;
+    &lt;ui5-button&gt;Cozy Button&lt;/ui5-button&gt;
+&lt;/div&gt;</code></pre>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="directive-inheritance" componentName="Content Density">Usage Patterns</fd-docs-section-title>
+<description>
+    <h4>Section-Level (Recommended)</h4>
+    <p>Apply to a section to override all components inside:</p>
+    <pre><code>&lt;section fdCozy&gt;
+    &lt;ui5-button&gt;Cozy&lt;/ui5-button&gt;
+    &lt;ui5-toolbar&gt;...&lt;/ui5-toolbar&gt;
+&lt;/section&gt;</code></pre>
+
+    <h4>Individual Components</h4>
+    <p>Mix densities (only in plain HTML containers like <code>&lt;div&gt;</code>):</p>
+    <pre><code>&lt;div&gt;
+    &lt;ui5-button fdCompact&gt;Compact&lt;/ui5-button&gt;
+    &lt;ui5-button fdCozy&gt;Cozy&lt;/ui5-button&gt;
+&lt;/div&gt;</code></pre>
+
+    <h4>What Doesn't Work</h4>
+    <pre><code>&lt;!-- ❌ Child cannot override parent --&gt;
+&lt;ui5-toolbar fdCompact&gt;
+    &lt;ui5-toolbar-button fdCozy&gt;Still Compact&lt;/ui5-toolbar-button&gt;
+&lt;/ui5-toolbar&gt;</code></pre>
+    <p>
+        Need this? Report at
+        <a href="https://github.com/UI5/webcomponents/issues" target="_blank" rel="noopener"
+            >github.com/UI5/webcomponents/issues</a
+        >
+    </p>
+</description>

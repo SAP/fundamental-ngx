@@ -23,7 +23,7 @@
                 "packageName": "@ui5/webcomponents-ai",
                 "outputPath": "libs/generated/ui5-webcomponents-ai",
                 "tsConfig": "libs/ui5-webcomponents-ai/tsconfig.lib.json",
-                "_cacheBust": "2025-10-08-generate-utils"
+                "_cacheBust": "2026-02-25-linkedsignal"
             },
             "outputs": [
                 "{projectRoot}/index.ts",

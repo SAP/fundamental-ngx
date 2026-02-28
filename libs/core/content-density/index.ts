@@ -4,7 +4,6 @@ export * from './content-density.types';
 export * from './classes/abstract-content-density-storage';
 
 export * from './directives/content-density.directive';
-export * from './directives/ui5-content-density.directive';
 
 export * from './providers/content-density-observer-providers';
 export * from './services/content-density-observer.service';
