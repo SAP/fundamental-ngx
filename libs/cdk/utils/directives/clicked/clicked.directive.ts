@@ -1,5 +1,5 @@
-import { DestroyRef, Directive, ElementRef, inject, Output, Renderer2 } from '@angular/core';
-import { fromEvent, merge, Observable, Subject } from 'rxjs';
+import { DestroyRef, Directive, ElementRef, inject, output, Renderer2 } from '@angular/core';
+import { fromEvent, merge, Subject } from 'rxjs';
 
 @Directive({
     selector: '[fdkClicked]',
@@ -15,7 +15,7 @@ export class ClickedDirective {
      * Event emitted when user either clicks with mouse, or
      * clicks on space or enter keys
      */
-    @Output() fdkClicked: Observable<MouseEvent | KeyboardEvent>;
+    readonly fdkClicked = output<MouseEvent | KeyboardEvent>();
 
     /** @hidden */
     constructor() {
@@ -33,6 +33,10 @@ export class ClickedDirective {
             space$.complete();
         });
 
-        this.fdkClicked = merge(fromEvent<MouseEvent>(element, 'click'), enter$, space$);
+        // Subscribe to merged events and emit through output
+        const subscription = merge(fromEvent<MouseEvent>(element, 'click'), enter$, space$).subscribe((event) => {
+            this.fdkClicked.emit(event);
+        });
+        destroyRef.onDestroy(() => subscription.unsubscribe());
     }
 }
