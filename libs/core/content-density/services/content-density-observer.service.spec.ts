@@ -1292,7 +1292,9 @@ describe('ContentDensityObserver', () => {
                 tick();
 
                 // Should fallback to COZY (the only supported density)
-                expect(unsupportedTestFixture.componentInstance.unsupportedObserver.contentDensity()).toBe(ContentDensityMode.COZY);
+                expect(unsupportedTestFixture.componentInstance.unsupportedObserver.contentDensity()).toBe(
+                    ContentDensityMode.COZY
+                );
 
                 fixture.componentInstance.observer.complete();
             }));
