@@ -14,6 +14,10 @@
         "moduleResolution": "bundler",
         "baseUrl": ".",
         "paths": {
+            "@fundamental-ngx/core": ["../core/index.ts"],
+            "@fundamental-ngx/core/*": ["../core/*/index.ts"],
+            "@fundamental-ngx/cdk": ["../cdk/index.ts"],
+            "@fundamental-ngx/cdk/*": ["../cdk/*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents": ["./index.ts"],
             "@fundamental-ngx/ui5-webcomponents/*": ["./*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-base": ["../ui5-webcomponents-base/index.ts"],

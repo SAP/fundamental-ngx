@@ -20,6 +20,7 @@
         "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
         "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
         "@angular/router": "ANGULAR_VER_PLACEHOLDER",
+        "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
         "@ui5/webcomponents": "UI5_WEBCOMPONENTS_VER_PLACEHOLDER",
         "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
         "rxjs": "^7.8.0"

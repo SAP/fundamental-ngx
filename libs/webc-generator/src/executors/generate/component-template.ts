@@ -365,10 +365,18 @@ export function componentTemplate(
     // Get CVA configuration based on component metadata
     const cvaConfig = getCvaConfig(data);
 
-    // Add hostDirective and provider if CVA is needed
+    // Add hostDirective if CVA is needed
     const cvaHostDirective = cvaConfig ? `  hostDirectives: [${cvaConfig.hostDirective}],\n` : '';
-    const cvaProvider = cvaConfig ? `  providers: [\n${cvaConfig.provider}\n  ],\n` : '';
     const cvaImport = cvaConfig ? cvaConfig.import : '';
+
+    // Build providers array - always includes content density, plus CVA if needed
+    const contentDensityProvider = `    contentDensityObserverProviders({
+      supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+    })`;
+
+    const providersArray = cvaConfig
+        ? `  providers: [\n${contentDensityProvider},\n${cvaConfig.provider}\n  ],\n`
+        : `  providers: [\n${contentDensityProvider}\n  ],\n`;
 
     const inputMembers = (data.members ?? []).filter(isField);
 
@@ -484,6 +492,11 @@ import {
 import '${packageName}/dist/${className}.js';
 import { default as _${className} } from '${packageName}/dist/${className}.js';
 import { UI5CustomEvent } from '@ui5/webcomponents-base';
+import {
+  ContentDensityObserver,
+  contentDensityObserverProviders,
+  ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 ${cvaImport}
 ${componentImports.join('\n')}
 
@@ -492,9 +505,16 @@ ${componentImports.join('\n')}
   selector: '${tagName}, [${tagName}]',
   template: '<ng-content></ng-content>',
   exportAs: 'ui5${className}',
-${cvaHostDirective}${cvaProvider}  changeDetection: ChangeDetectionStrategy.OnPush,
+${cvaHostDirective}${providersArray}  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
+  /**
+   * Content density observer is injected to activate automatic CSS class and
+   * UI5 attribute application. The observer self-initializes, no explicit subscribe() needed.
+   * @private
+   */
+  private readonly _contentDensityObserver = inject(ContentDensityObserver);
+
 ${generateInputs(data, componentEnums, className)} // className is now passed
 ${readonlyProperties}
 

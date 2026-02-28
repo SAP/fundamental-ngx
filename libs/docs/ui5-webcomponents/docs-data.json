@@ -67,6 +67,10 @@
             "name": "Combo Box"
         },
         {
+            "url": "ui5-webcomponents/content-density",
+            "name": "Content Density"
+        },
+        {
             "url": "ui5-webcomponents/date-picker",
             "name": "Date Picker"
         },

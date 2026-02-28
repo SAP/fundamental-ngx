@@ -29,7 +29,7 @@
                 "outputPath": "libs/generated/ui5-webcomponents",
                 "tsConfig": "libs/ui5-webcomponents/tsconfig.lib.json",
                 "skipComponents": false,
-                "_cacheBust": "2025-10-08-generate-utils"
+                "_cacheBust": "2026-02-25-linkedsignal"
             },
             "outputs": [
                 "{projectRoot}/index.ts",
@@ -55,6 +55,7 @@
             },
             "dependsOn": [
                 "generate",
+                "core:build",
                 "ui5-webcomponents-base:build"
             ],
             "defaultConfiguration": "production"
