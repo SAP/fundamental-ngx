@@ -2,16 +2,32 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgStyle } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { SelectComponent } from '@fundamental-ngx/core/select';
+import { ToolbarComponent, ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-flexible-column-layout-dynamic-page-example',
     templateUrl: './flexible-column-layout-dynamic-page-example.component.html',
     styleUrls: ['./flexible-column-layout-dynamic-page-example.component.scss'],
-    imports: [ButtonComponent, FlexibleColumnLayoutModule, DynamicPageModule, ToolbarComponent, NgStyle, CdkScrollable]
+    imports: [
+        ButtonComponent,
+        FlexibleColumnLayoutModule,
+        DynamicPageModule,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        NgStyle,
+        CdkScrollable,
+        ReactiveFormsModule,
+        DatePickerComponent,
+        SelectComponent,
+        FdDatetimeModule
+    ]
 })
 export class FlexibleColumnLayoutDynamicPageExampleComponent {
     /**
@@ -46,6 +62,24 @@ export class FlexibleColumnLayoutDynamicPageExampleComponent {
      * specifies if the doc example is rendered in fullscreen or not
      */
     fullscreen = false;
+
+    /**
+     * Form group containing filter controls for the dynamic page
+     * Contains period (date) and center (select) form controls
+     */
+    formFilters = new FormGroup({
+        period: new FormControl(null),
+        center: new FormControl('')
+    });
+
+    /**
+     * Retrieves and logs the current filter values from the form
+     * Used to demonstrate form submission in the dynamic page example
+     */
+    getData(): void {
+        const filters = this.formFilters.value;
+        console.log('Filters:', filters);
+    }
 
     /**
      * function set by the consuming application

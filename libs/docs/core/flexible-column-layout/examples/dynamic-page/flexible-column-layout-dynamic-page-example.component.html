@@ -15,6 +15,30 @@
                                 Open Column 2
                             </button>
                         </div>
+                        <fd-toolbar [shouldOverflow]="true">
+                            <button fd-toolbar-item fd-button label="Button"></button>
+                            <button fd-toolbar-item fd-button label="Button"></button>
+                            <button fd-toolbar-item fd-button label="Button"></button>
+                            <button fd-toolbar-item fd-button label="Button"></button>
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fd-toolbar-overflow-button
+                                fd-toolbar-overflow-button-menu
+                                label="Button"
+                                [fdMenu]="true"
+                            ></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                            <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
+                        </fd-toolbar>
                     </div>
                 </ng-template>
                 <ng-template #midColumn>
@@ -86,49 +110,22 @@
                     </fd-dynamic-page>
                 </ng-template>
                 <ng-template #endColumn>
-                    <fd-dynamic-page [autoResponsive]="true" ariaLabel="Example Dynamic Page">
-                        <fd-dynamic-page-header title="End Column">
-                            <fd-dynamic-page-layout-actions>
-                                <fd-toolbar fdType="transparent" [clearBorder]="true">
-                                    <button
-                                        fd-button
-                                        fdType="transparent"
-                                        [attr.aria-label]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
-                                        (click)="
-                                            isFullScreen
-                                                ? changeLayout('ThreeColumnsMidExpanded')
-                                                : changeLayout('OneColumnEndFullScreen')
-                                        "
-                                        [title]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
-                                    >
-                                        <i
-                                            [class.sap-icon--exitfullscreen]="isFullScreen"
-                                            [class.sap-icon--resize]="!isFullScreen"
-                                        ></i>
-                                    </button>
-                                    <button
-                                        fd-button
-                                        fdType="transparent"
-                                        aria-label="Close"
-                                        (click)="changeLayout('TwoColumnsMidExpanded')"
-                                        title="Close"
-                                    >
-                                        <i class="sap-icon--decline"></i>
-                                    </button>
-                                </fd-toolbar>
-                            </fd-dynamic-page-layout-actions>
-                        </fd-dynamic-page-header>
-                        <fd-dynamic-page-content cdkScrollable>
-                            <div class="fd-dynamic-page-section-example">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.
-                            </div>
-                        </fd-dynamic-page-content>
-                    </fd-dynamic-page>
+                    <form [formGroup]="formFilters">
+                        <fd-toolbar style="height: 50px" [shouldOverflow]="true">
+                            <fd-date-picker fd-toolbar-item type="range" formControlName="period"></fd-date-picker>
+                            <fd-select fd-toolbar-item formControlName="center">
+                                <li fd-option value="AB01">Celaya</li>
+                                <li fd-option value="AA02">Apaseo</li>
+                            </fd-select>
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                label="Consultar"
+                                type="button"
+                                (click)="getData()"
+                            ></button>
+                        </fd-toolbar>
+                    </form>
                 </ng-template>
             </fd-flexible-column-layout>
         </div>
