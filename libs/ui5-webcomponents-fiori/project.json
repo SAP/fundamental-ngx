@@ -34,7 +34,7 @@
                 "targetDir": ".",
                 "outputPath": "libs/generated/ui5-webcomponents-fiori",
                 "tsConfig": "libs/ui5-webcomponents-fiori/tsconfig.lib.json",
-                "_cacheBust": "2025-10-08-generate-utils"
+                "_cacheBust": "2026-02-25-linkedsignal"
             },
             "outputs": [
                 "{projectRoot}/index.ts",

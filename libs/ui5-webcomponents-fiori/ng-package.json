@@ -7,6 +7,7 @@
         "entryFile": "./index.ts"
     },
     "allowedNonPeerDependencies": [
+        "@fundamental-ngx/core",
         "@fundamental-ngx/ui5-webcomponents-base",
         "@sap-theming/theming-base-content",
         "lodash-es",

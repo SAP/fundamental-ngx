@@ -1,14 +1,30 @@
-import { booleanAttribute, computed, Directive, forwardRef, input, isDevMode, signal } from '@angular/core';
+import {
+    booleanAttribute,
+    computed,
+    Directive,
+    effect,
+    ElementRef,
+    forwardRef,
+    inject,
+    input,
+    isDevMode,
+    Renderer2,
+    signal
+} from '@angular/core';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { isContentDensityMode } from '../helpers/density-type-checkers';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityMode } from '../types/content-density.mode';
+
+/** UI5 attribute name for compact mode */
+const UI5_COMPACT_ATTRIBUTE = 'data-ui5-compact-size';
 
 /**
  * Directive to control the content density of elements.
  * Used by density controllers and consumers.
  *
  * Provides signal-based state management for reactive content density tracking.
+ * Also applies UI5 `data-ui5-compact-size` attribute for UI5 Web Components compatibility.
  *
  * @example
  * // Using fdContentDensity input
@@ -122,11 +138,24 @@ export class ContentDensityDirective {
         return this.densityMode();
     }
 
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+
     /**
      * Internal signal for programmatic density updates.
      * Takes precedence over input bindings when set.
      */
     private readonly _programmaticDensity = signal<LocalContentDensityMode | null>(null);
+
+    /** @hidden */
+    constructor() {
+        // Effect to apply UI5 attribute based on density mode
+        effect(() => {
+            this._applyUi5Attribute(this.densityMode());
+        });
+    }
 
     /**
      * Sets the content density programmatically.
@@ -145,5 +174,26 @@ export class ContentDensityDirective {
      */
     clearDensity(): void {
         this._programmaticDensity.set(null);
+    }
+
+    /**
+     * Applies or removes the UI5 compact attribute based on density mode.
+     * COMPACT and CONDENSED map to UI5 compact mode.
+     * COZY and 'global' do not apply the attribute (UI5 defaults to cozy).
+     * @hidden
+     */
+    private _applyUi5Attribute(density: LocalContentDensityMode): void {
+        const nativeElement = this._elementRef?.nativeElement;
+        if (!nativeElement || !this._renderer) {
+            return;
+        }
+
+        const isUi5Compact = density === ContentDensityMode.COMPACT || density === ContentDensityMode.CONDENSED;
+
+        if (isUi5Compact) {
+            this._renderer.setAttribute(nativeElement, UI5_COMPACT_ATTRIBUTE, '');
+        } else {
+            this._renderer.removeAttribute(nativeElement, UI5_COMPACT_ATTRIBUTE);
+        }
     }
 }

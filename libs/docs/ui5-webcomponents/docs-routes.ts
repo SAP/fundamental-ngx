@@ -80,6 +80,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/combo-box').then(configureLibRoutes)
     },
     {
+        path: 'content-density',
+        loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/content-density').then(configureLibRoutes)
+    },
+    {
         path: 'date-picker',
         loadChildren: () => import('@fundamental-ngx/docs/ui5-webcomponents/date-picker').then(configureLibRoutes)
     },

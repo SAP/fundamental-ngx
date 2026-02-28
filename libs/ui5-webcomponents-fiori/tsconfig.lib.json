@@ -11,10 +11,11 @@
         "moduleResolution": "bundler",
         "skipLibCheck": true,
         "module": "preserve",
-        "baseUrl": ".",
         "paths": {
-            "@fundamental-ngx/ui5-webcomponents-base": ["../../dist/libs/ui5-webcomponents-base"],
-            "@fundamental-ngx/ui5-webcomponents-base/*": ["../../dist/libs/ui5-webcomponents-base/*"]
+            "@fundamental-ngx/core": ["dist/libs/core"],
+            "@fundamental-ngx/core/*": ["dist/libs/core/*"],
+            "@fundamental-ngx/ui5-webcomponents-base": ["dist/libs/ui5-webcomponents-base"],
+            "@fundamental-ngx/ui5-webcomponents-base/*": ["dist/libs/ui5-webcomponents-base/*"]
         }
     },
     "angularCompilerOptions": {
