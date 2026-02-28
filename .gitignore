@@ -90,3 +90,5 @@ libs/ui5-webcomponents-fiori/**/
 libs/ui5-webcomponents-fiori/index.ts
 !libs/ui5-webcomponents-base/theming/
 
+/libs/i18n/docs
+/libs/i18n/test-typedoc.json
