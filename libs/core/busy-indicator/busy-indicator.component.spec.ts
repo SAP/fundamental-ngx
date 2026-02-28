@@ -158,6 +158,20 @@ describe('BusyIndicatorComponent', () => {
         expect(fixture.debugElement.nativeElement.getAttribute('title')).toBe('Custom title');
     });
 
+    it('should remove title attribute when title is null', () => {
+        fixture.componentRef.setInput('title', null);
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.nativeElement.hasAttribute('title')).toBe(false);
+    });
+
+    it('should use default title for undefined title', () => {
+        fixture.componentRef.setInput('title', undefined);
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.nativeElement.getAttribute('title')).toBe('Please wait');
+    });
+
     it('should set custom aria-live attribute', () => {
         fixture.componentRef.setInput('ariaLive', 'assertive');
         fixture.detectChanges();

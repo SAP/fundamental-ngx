@@ -5,6 +5,7 @@ import {
     Component,
     ElementRef,
     ViewEncapsulation,
+    computed,
     inject,
     input,
     viewChild
@@ -39,7 +40,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[attr.aria-valuetext]': 'ariaValueText() || _ariaValueText()',
         '[attr.aria-valuemin]': '0',
         '[attr.aria-valuemax]': '100',
-        '[attr.title]': 'title() || _titleValue()',
+        '[attr.title]': '_titleAttribute()',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block()',
         '(keydown)': 'hostFocusChangeHandler($event)'
@@ -62,7 +63,7 @@ export class BusyIndicatorComponent {
     readonly ariaValueText = input<string | null>(null);
 
     /** title attribute value for tooltip. */
-    readonly title = input<string | undefined>(undefined);
+    readonly title = input<string | null | undefined>(undefined);
 
     /** add loading label value */
     readonly label = input<string | undefined>(undefined);
@@ -94,6 +95,20 @@ export class BusyIndicatorComponent {
         ),
         { initialValue: 'Please wait' }
     );
+
+    /** @hidden Determines the value for the title attribute, allowing null to remove it. */
+    protected readonly _titleAttribute = computed(() => {
+        const title = this.title();
+        if (title === null) {
+            return null;
+        }
+
+        if (title === undefined) {
+            return this._titleValue();
+        }
+
+        return title;
+    });
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
