@@ -9,7 +9,6 @@ import {
     inject,
     input,
     output,
-    Renderer2,
     signal,
     viewChild,
     ViewEncapsulation
@@ -51,6 +50,7 @@ export type IndicationColor = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     ],
     host: {
         '[class]': 'cssClass()',
+        '[style.background-image]': 'bgImage()',
         '[attr.tabindex]': 'tabindex()',
         '[attr.id]': 'id()',
         '[attr.aria-label]': 'ariaLabel()',
@@ -212,17 +212,11 @@ export class AvatarComponent {
     /** @hidden Track the currently loading/loaded image URL to prevent duplicate requests */
     private _currentImageUrl: string | null = null;
 
-    /** @hidden Track if an image load is in progress to prevent duplicate requests */
-    private _isLoadingImage = false;
-
     /** @hidden Cache of successfully loaded image URLs to prevent re-requesting */
     private readonly _loadedImageCache = new Set<string>();
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
-
-    /** @hidden */
-    private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
     private readonly _hostTabindex = inject(new HostAttributeToken('tabindex'), { optional: true });
@@ -243,7 +237,6 @@ export class AvatarComponent {
             } else {
                 // Image input cleared
                 this._currentImageUrl = null;
-                this._isLoadingImage = false;
                 this._imageLoaded.set(false);
                 this._shouldShowDefaultIcon.set(false);
                 this._setBgImage(null);
@@ -268,12 +261,6 @@ export class AvatarComponent {
             if (this.random()) {
                 this._randomColorAccent.set(getRandomColorAccent());
             }
-        });
-
-        // Effect to apply background image to DOM
-        effect(() => {
-            const bgImage = this.bgImage();
-            this._renderer.setStyle(this._elementRef.nativeElement, 'background-image', bgImage);
         });
     }
 
@@ -330,30 +317,21 @@ export class AvatarComponent {
             this._setBgImage(srcValue);
             this._imageLoaded.set(true);
             this._currentImageUrl = srcValue;
-            this._isLoadingImage = false;
             return;
         }
 
-        // Prevent duplicate requests if this URL is already being loaded
-        if (this._isLoadingImage && this._currentImageUrl === srcValue) {
-            return;
-        }
-
-        // Track the current image URL and loading state
+        // Track the current image URL
         this._currentImageUrl = srcValue;
-        this._isLoadingImage = true;
 
         const img = new Image();
         img.onload = () => {
             // Only set background if image loads successfully
             this._setBgImage(srcValue);
             this._imageLoaded.set(true);
-            this._isLoadingImage = false;
             // Add to cache of successfully loaded images
             this._loadedImageCache.add(srcValue);
         };
         img.onerror = () => {
-            this._isLoadingImage = false;
             onErrorCallback();
         };
         img.src = srcValue;
