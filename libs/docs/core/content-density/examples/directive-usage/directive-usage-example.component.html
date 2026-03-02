@@ -22,10 +22,11 @@
 
 <h4 style="margin-top: 24px">Restricted Parent Example</h4>
 <p style="margin-bottom: 12px">
-    When a parent uses <code>restrictChildContentDensity: true</code>, children cannot override the density.
+    When a parent uses <code>restrictChildContentDensity: true</code>, children cannot override the density. The parent
+    below uses <code>fdCozy</code> to stay cozy, and children are forced to follow.
 </p>
-<fd-docs-restricted-density-user>
-    This parent restricts children to cozy
+<fd-docs-restricted-density-user fdCozy>
+    This parent restricts children to cozy (parent uses <code>fdCozy</code>)
     <fd-docs-content-density-user fdCompact>
         Still cozy! The <code>fdCompact</code> directive is ignored because parent restricts density
     </fd-docs-content-density-user>
