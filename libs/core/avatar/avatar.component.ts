@@ -209,6 +209,15 @@ export class AvatarComponent {
     /** @hidden Stored random color accent to prevent regeneration */
     private readonly _randomColorAccent = signal<ColorAccent>(getRandomColorAccent());
 
+    /** @hidden Track the currently loading/loaded image URL to prevent duplicate requests */
+    private _currentImageUrl: string | null = null;
+
+    /** @hidden Track if an image load is in progress to prevent duplicate requests */
+    private _isLoadingImage = false;
+
+    /** @hidden Cache of successfully loaded image URLs to prevent re-requesting */
+    private readonly _loadedImageCache = new Set<string>();
+
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
@@ -224,10 +233,17 @@ export class AvatarComponent {
         effect(() => {
             const imageValue = this.image();
             if (imageValue) {
-                this._imageLoaded.set(false);
-                this._shouldShowDefaultIcon.set(false); // Reset default icon flag
-                this._verifyImageUrl(imageValue, this._onErrorCallback.bind(this));
+                // Only reset loaded state if the URL actually changed
+                if (this._currentImageUrl !== imageValue) {
+                    this._imageLoaded.set(false);
+                    this._shouldShowDefaultIcon.set(false); // Reset default icon flag
+                    this._verifyImageUrl(imageValue, this._onErrorCallback.bind(this));
+                }
+                // If URL is the same and already loaded, do nothing (use cache)
             } else {
+                // Image input cleared
+                this._currentImageUrl = null;
+                this._isLoadingImage = false;
                 this._imageLoaded.set(false);
                 this._shouldShowDefaultIcon.set(false);
                 this._setBgImage(null);
@@ -308,20 +324,38 @@ export class AvatarComponent {
 
     /** @hidden */
     private _verifyImageUrl(srcValue: string, onErrorCallback: () => void): void {
-        const newBgImage = `url(${srcValue})`;
-
-        // Don't load the same image if it's already loaded successfully
-        if (this.bgImage() === newBgImage && this._imageLoaded()) {
+        // Check if this URL was previously loaded successfully (component-level cache)
+        if (this._loadedImageCache.has(srcValue)) {
+            // Image was loaded before, reuse it
+            this._setBgImage(srcValue);
+            this._imageLoaded.set(true);
+            this._currentImageUrl = srcValue;
+            this._isLoadingImage = false;
             return;
         }
+
+        // Prevent duplicate requests if this URL is already being loaded
+        if (this._isLoadingImage && this._currentImageUrl === srcValue) {
+            return;
+        }
+
+        // Track the current image URL and loading state
+        this._currentImageUrl = srcValue;
+        this._isLoadingImage = true;
 
         const img = new Image();
         img.onload = () => {
             // Only set background if image loads successfully
             this._setBgImage(srcValue);
             this._imageLoaded.set(true);
+            this._isLoadingImage = false;
+            // Add to cache of successfully loaded images
+            this._loadedImageCache.add(srcValue);
         };
-        img.onerror = onErrorCallback;
+        img.onerror = () => {
+            this._isLoadingImage = false;
+            onErrorCallback();
+        };
         img.src = srcValue;
     }
 
