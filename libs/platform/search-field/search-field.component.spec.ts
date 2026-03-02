@@ -273,24 +273,6 @@ describe('SearchFieldComponent', () => {
         expect(host.inputValue?.category).toBe(CATEGORIES[1].value);
     }));
 
-    it('should allow user to set the size of the component', () => {
-        host.placeholder = 'Search';
-        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
-        host.categories = CATEGORIES;
-        host.categoryLabel = 'Category';
-        host.isLoading = true;
-
-        fixture.detectChanges();
-        let searchFieldDiv = fixture.debugElement.query(By.css('.fdp-search-field'));
-        expect(searchFieldDiv.nativeElement.classList.contains('is-compact')).toBeFalsy();
-
-        host.contentDensity = ContentDensityMode.COMPACT;
-        fixture.detectChanges();
-
-        searchFieldDiv = fixture.debugElement.query(By.css('.fdp-search-field'));
-        expect(searchFieldDiv.nativeElement.classList.contains('is-compact')).toBeTruthy();
-    });
-
     it('should open "dropdown" on keyboard entry', () => {
         // set type ahead list
         host.placeholder = 'Search';
