@@ -2,6 +2,7 @@
 @import 'fundamental-styles/dist/info-label.css';
 @import 'fundamental-styles/dist/form-layout-grid.css';
 @import '@angular/cdk/overlay-prebuilt.css';
+@import '@sap-ui/common-css/dist/common-css.css';
 
 @include cdk.a11y-visually-hidden();
 
