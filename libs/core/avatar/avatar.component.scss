@@ -5,3 +5,57 @@
 .fd-avatar.fd-avatar--sm {
     --fdAvatarFontStretch: normal;
 }
+
+// Temporary until we adopt the latest version of fundamental-styles.
+:not(.fd-avatar-group--vertical) {
+    // Consolidated overflow styling for all avatar sizes
+    > [class*='fd-avatar--'].fd-avatar--overflow {
+        width: fit-content;
+        max-width: fit-content;
+        padding-inline: 0.5rem;
+    }
+
+    // Circle border radius and focus styles per size
+    > .fd-avatar--xs.fd-avatar--overflow.fd-avatar--circle {
+        --fdAvatarBorderRadius: 1rem;
+
+        &:focus::after {
+            border-radius: 1.25rem;
+        }
+    }
+
+    > .fd-avatar--s.fd-avatar--overflow.fd-avatar--circle,
+    > .fd-avatar--sm.fd-avatar--overflow.fd-avatar--circle {
+        --fdAvatarBorderRadius: 1.5rem;
+
+        &:focus::after {
+            border-radius: 1.75rem;
+        }
+    }
+
+    > .fd-avatar--m.fd-avatar--overflow.fd-avatar--circle,
+    > .fd-avatar--md.fd-avatar--overflow.fd-avatar--circle {
+        --fdAvatarBorderRadius: 2rem;
+
+        &:focus::after {
+            border-radius: 2.25rem;
+        }
+    }
+
+    > .fd-avatar--l.fd-avatar--overflow.fd-avatar--circle,
+    > .fd-avatar--lg.fd-avatar--overflow.fd-avatar--circle {
+        --fdAvatarBorderRadius: 2.5rem;
+
+        &:focus::after {
+            border-radius: 2.75rem;
+        }
+    }
+
+    > .fd-avatar--xl.fd-avatar--overflow.fd-avatar--circle {
+        --fdAvatarBorderRadius: 3.5rem;
+
+        &:focus::after {
+            border-radius: 3.75rem;
+        }
+    }
+}
