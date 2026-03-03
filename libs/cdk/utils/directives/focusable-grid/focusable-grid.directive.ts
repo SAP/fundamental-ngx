@@ -5,11 +5,14 @@ import {
     DestroyRef,
     Directive,
     EventEmitter,
+    Injector,
     Input,
     Output,
     QueryList,
     booleanAttribute,
-    inject
+    effect,
+    inject,
+    runInInjectionContext
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, startWith, switchMap } from 'rxjs';
@@ -17,6 +20,7 @@ import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
+    FocusableItem,
     FocusableItemDirective,
     FocusableItemPosition,
     FocusableListPosition
@@ -76,24 +80,29 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _listItemEffects = new WeakSet<FocusableListDirective>();
+
+    /** @hidden */
+    private readonly _subscribedItems = new WeakSet<FocusableItemDirective>();
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntilDestroyed(this._destroyRef))
             .subscribe((lists) => {
-                lists.forEach((list, index) => {
+                lists.forEach((list: FocusableListDirective, index: number) => {
                     list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
-                    list._focusableItems.changes
-                        .pipe(startWith(list._focusableItems), takeUntilDestroyed(this._destroyRef))
-                        .subscribe((items) => {
-                            this._handleItemSubscriptions(items);
-                        });
+                    this._watchListItems(list);
                 });
             });
 
         this._focusableItems.changes
             .pipe(startWith(this._focusableItems), takeUntilDestroyed(this._destroyRef))
             .subscribe((items) => {
-                this._handleItemSubscriptions(items);
+                this._handleItemSubscriptions(items.toArray());
             });
 
         this._focusableLists.changes
@@ -164,10 +173,10 @@ export class FocusableGridDirective implements AfterViewInit {
         let scrollIntoView: ScrollPosition;
 
         const isFirstItemLtr = activeItemIndex === 0 && this.contentDirection !== 'rtl';
-        const isLastItemRtl = activeItemIndex === list._focusableItems.length - 1 && this.contentDirection === 'rtl';
+        const isLastItemRtl = activeItemIndex === list._focusableItems().length - 1 && this.contentDirection === 'rtl';
 
         const isFirstItemRtl = activeItemIndex === 0 && this.contentDirection === 'rtl';
-        const isLastItemLtr = activeItemIndex === list._focusableItems.length - 1 && this.contentDirection !== 'rtl';
+        const isLastItemLtr = activeItemIndex === list._focusableItems().length - 1 && this.contentDirection !== 'rtl';
 
         switch (event.keyCode) {
             case UP_ARROW:
@@ -182,7 +191,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 if (this.wrapHorizontally && (isFirstItemLtr || isLastItemRtl)) {
                     event.preventDefault();
                     nextRowIndex = currentRowIndex - 1;
-                    nextRowItemIndex = lists[nextRowIndex]?._focusableItems.length - 1;
+                    nextRowItemIndex = lists[nextRowIndex]?._focusableItems().length - 1;
                 }
                 break;
             case RIGHT_ARROW:
@@ -220,7 +229,7 @@ export class FocusableGridDirective implements AfterViewInit {
 
     /** @hidden */
     private _getItemIndex(list: FocusableListDirective, activeIndex: number): Nullable<number> {
-        if (activeIndex >= 0 && activeIndex < list._focusableItems.length) {
+        if (activeIndex >= 0 && activeIndex < list._focusableItems().length) {
             return activeIndex;
         }
 
@@ -228,15 +237,20 @@ export class FocusableGridDirective implements AfterViewInit {
             return null;
         }
 
-        return this.shortRowFocus === 'first' ? 0 : list._focusableItems.length - 1;
+        return this.shortRowFocus === 'first' ? 0 : list._focusableItems().length - 1;
     }
 
     /** @hidden */
-    private _handleItemSubscriptions(items: QueryList<FocusableItemDirective>): void {
+    private _handleItemSubscriptions(items: ReadonlyArray<FocusableItem>): void {
         items.forEach((item) => {
+            if (!(item instanceof FocusableItemDirective) || this._subscribedItems.has(item)) {
+                return;
+            }
+
+            this._subscribedItems.add(item);
             item.focusableChildElementFocused.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._focusableLists.forEach((focusableList) => {
-                    focusableList._focusableItems.forEach((focusableItem) => {
+                    focusableList._focusableItems().forEach((focusableItem) => {
                         focusableItem.setTabbable(false);
                         (focusableItem as FocusableItemDirective).enableTabbableElements();
                     });
@@ -244,7 +258,7 @@ export class FocusableGridDirective implements AfterViewInit {
             });
             item._parentFocusableItemFocused.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._focusableLists.forEach((focusableList) => {
-                    focusableList._focusableItems.forEach((focusableItem) => {
+                    focusableList._focusableItems().forEach((focusableItem) => {
                         if (item !== focusableItem) {
                             (focusableItem as FocusableItemDirective).disableTabbableElements();
                         } else {
@@ -252,6 +266,20 @@ export class FocusableGridDirective implements AfterViewInit {
                         }
                     });
                 });
+            });
+        });
+    }
+
+    /** @hidden */
+    private _watchListItems(list: FocusableListDirective): void {
+        if (this._listItemEffects.has(list)) {
+            return;
+        }
+
+        this._listItemEffects.add(list);
+        runInInjectionContext(this._injector, () => {
+            effect(() => {
+                this._handleItemSubscriptions(list._focusableItems());
             });
         });
     }
