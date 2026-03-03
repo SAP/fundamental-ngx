@@ -9,7 +9,6 @@ import {
     inject,
     input,
     output,
-    Renderer2,
     signal,
     viewChild,
     ViewEncapsulation
@@ -51,6 +50,7 @@ export type IndicationColor = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     ],
     host: {
         '[class]': 'cssClass()',
+        '[style.background-image]': 'bgImage()',
         '[attr.tabindex]': 'tabindex()',
         '[attr.id]': 'id()',
         '[attr.aria-label]': 'ariaLabel()',
@@ -209,11 +209,14 @@ export class AvatarComponent {
     /** @hidden Stored random color accent to prevent regeneration */
     private readonly _randomColorAccent = signal<ColorAccent>(getRandomColorAccent());
 
-    /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
+    /** @hidden Track the currently loading/loaded image URL to prevent duplicate requests */
+    private _currentImageUrl: string | null = null;
+
+    /** @hidden Cache of successfully loaded image URLs to prevent re-requesting */
+    private readonly _loadedImageCache = new Set<string>();
 
     /** @hidden */
-    private readonly _renderer = inject(Renderer2);
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     private readonly _hostTabindex = inject(new HostAttributeToken('tabindex'), { optional: true });
@@ -224,10 +227,16 @@ export class AvatarComponent {
         effect(() => {
             const imageValue = this.image();
             if (imageValue) {
-                this._imageLoaded.set(false);
-                this._shouldShowDefaultIcon.set(false); // Reset default icon flag
-                this._verifyImageUrl(imageValue, this._onErrorCallback.bind(this));
+                // Only reset loaded state if the URL actually changed
+                if (this._currentImageUrl !== imageValue) {
+                    this._imageLoaded.set(false);
+                    this._shouldShowDefaultIcon.set(false); // Reset default icon flag
+                    this._verifyImageUrl(imageValue, this._onErrorCallback.bind(this));
+                }
+                // If URL is the same and already loaded, do nothing (use cache)
             } else {
+                // Image input cleared
+                this._currentImageUrl = null;
                 this._imageLoaded.set(false);
                 this._shouldShowDefaultIcon.set(false);
                 this._setBgImage(null);
@@ -252,12 +261,6 @@ export class AvatarComponent {
             if (this.random()) {
                 this._randomColorAccent.set(getRandomColorAccent());
             }
-        });
-
-        // Effect to apply background image to DOM
-        effect(() => {
-            const bgImage = this.bgImage();
-            this._renderer.setStyle(this._elementRef.nativeElement, 'background-image', bgImage);
         });
     }
 
@@ -308,20 +311,29 @@ export class AvatarComponent {
 
     /** @hidden */
     private _verifyImageUrl(srcValue: string, onErrorCallback: () => void): void {
-        const newBgImage = `url(${srcValue})`;
-
-        // Don't load the same image if it's already loaded successfully
-        if (this.bgImage() === newBgImage && this._imageLoaded()) {
+        // Check if this URL was previously loaded successfully (component-level cache)
+        if (this._loadedImageCache.has(srcValue)) {
+            // Image was loaded before, reuse it
+            this._setBgImage(srcValue);
+            this._imageLoaded.set(true);
+            this._currentImageUrl = srcValue;
             return;
         }
+
+        // Track the current image URL
+        this._currentImageUrl = srcValue;
 
         const img = new Image();
         img.onload = () => {
             // Only set background if image loads successfully
             this._setBgImage(srcValue);
             this._imageLoaded.set(true);
+            // Add to cache of successfully loaded images
+            this._loadedImageCache.add(srcValue);
         };
-        img.onerror = onErrorCallback;
+        img.onerror = () => {
+            onErrorCallback();
+        };
         img.src = srcValue;
     }
 
