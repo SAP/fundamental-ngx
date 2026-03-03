@@ -1112,7 +1112,7 @@ describe('ContentDensityObserver', () => {
                 expect(hostElement.classList.contains('is-cozy')).toBe(false);
                 expect(hostElement.hasAttribute('data-ui5-compact-size')).toBe(true);
 
-                ui5Fixture.componentInstance.observer.complete();
+                ui5Fixture.componentInstance.ui5Observer.complete();
             }));
         });
 
@@ -1174,7 +1174,7 @@ describe('ContentDensityObserver', () => {
                     (de) => de.componentInstance instanceof Ui5ButtonLikeComponent
                 );
                 const ui5HostElement = ui5Component.nativeElement;
-                const ui5Observer = ui5Component.componentInstance.observer;
+                const ui5Observer = ui5Component.componentInstance.buttonObserver;
 
                 // Even though global is COMPACT, the component should be COZY
                 // because it's inside a fdCozy directive
@@ -1236,7 +1236,7 @@ describe('ContentDensityObserver', () => {
                     (de) => de.componentInstance instanceof Ui5ButtonLikeComponent
                 );
                 const ui5HostElement = ui5Component.nativeElement;
-                const ui5Observer = ui5Component.componentInstance.observer;
+                const ui5Observer = ui5Component.componentInstance.buttonObserver;
 
                 // Even though global is COZY, the component should be COMPACT
                 // because it's inside a fdCompact directive

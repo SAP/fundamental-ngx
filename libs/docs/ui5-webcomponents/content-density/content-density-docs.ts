@@ -16,7 +16,6 @@ const basicSampleTs = 'content-density-basic-sample.ts';
 @Component({
     selector: 'ui5-content-density-docs',
     templateUrl: './content-density-docs.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

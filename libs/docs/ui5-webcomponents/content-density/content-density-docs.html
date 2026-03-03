@@ -20,21 +20,84 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="density-modes" componentName="Content Density">Density Modes</fd-docs-section-title>
+<fd-docs-section-title id="density-modes" componentName="Content Density"> Density Modes </fd-docs-section-title>
 <description>
-    <p>UI5 Web Components support two density modes:</p>
-    <ul>
-        <li><strong>Cozy</strong> - Default mode with larger touch targets, no attribute needed</li>
-        <li>
-            <strong>Compact</strong> - Reduced spacing for desktop/mouse usage, uses <code>data-ui5-compact-size</code>
-        </li>
-    </ul>
-    <p>The fundamental-ngx content density system maps all three modes to UI5:</p>
-    <ul>
-        <li><code>cozy</code> → No attribute (UI5 default)</li>
-        <li><code>compact</code> → <code>data-ui5-compact-size</code> attribute applied</li>
-        <li><code>condensed</code> → <code>data-ui5-compact-size</code> attribute applied (maps to UI5 compact)</li>
-    </ul>
+    <p>
+        Content density controls spacing and sizing to optimize for different interaction patterns and information
+        density needs.
+    </p>
+
+    <h4>The Three Modes</h4>
+
+    <div class="sap-margin-bottom-small">
+        <strong>Cozy (Default)</strong>
+        <p>
+            Larger controls and spacing optimized for touch interaction. Provides WCAG-compliant touch targets (44×44px
+            minimum).
+        </p>
+        <ul>
+            <li><strong>Best for:</strong> Mobile, tablets, touch-first applications</li>
+            <li><strong>UI5 mapping:</strong> No attribute (UI5 default)</li>
+        </ul>
+    </div>
+
+    <div class="sap-margin-bottom-small">
+        <strong>Compact</strong>
+        <p>Smaller controls optimized for mouse and keyboard. Displays more information while maintaining usability.</p>
+        <ul>
+            <li><strong>Best for:</strong> Desktop applications, data-heavy interfaces</li>
+            <li><strong>UI5 mapping:</strong> <code>data-ui5-compact-size</code> attribute</li>
+        </ul>
+    </div>
+
+    <div class="sap-margin-bottom-small">
+        <strong>Condensed</strong>
+        <div class="fd-message-strip fd-message-strip--information" role="alert" style="margin-top: 0.5rem">
+            <p class="fd-message-strip__text">
+                <strong>Important:</strong> Condensed is for <strong>tables only</strong> and must
+                <strong>always be used with Compact mode</strong>, never with Cozy.
+            </p>
+        </div>
+        <p>Further reduces row height for data-dense tables. Not suitable for touch or general UI components.</p>
+        <ul>
+            <li><strong>Best for:</strong> Tables, data grids, list views with many rows</li>
+            <li>
+                <strong>UI5 mapping:</strong> <code>data-ui5-compact-size</code> + <code>is-condensed</code> CSS class
+            </li>
+        </ul>
+    </div>
+
+    <h4>UI5 Mapping</h4>
+    <p>
+        UI5 Web Components support two modes (Cozy, Compact). Fundamental-ngx provides three by combining UI5 attributes
+        with CSS classes:
+    </p>
+    <table class="fd-table">
+        <thead>
+            <tr>
+                <th>Mode</th>
+                <th>UI5 Attribute</th>
+                <th>CSS Class</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>cozy</code></td>
+                <td>None</td>
+                <td><code>is-cozy</code></td>
+            </tr>
+            <tr>
+                <td><code>compact</code></td>
+                <td><code>data-ui5-compact-size</code></td>
+                <td><code>is-compact</code></td>
+            </tr>
+            <tr>
+                <td><code>condensed</code></td>
+                <td><code>data-ui5-compact-size</code></td>
+                <td><code>is-condensed</code></td>
+            </tr>
+        </tbody>
+    </table>
 </description>
 
 <separator></separator>

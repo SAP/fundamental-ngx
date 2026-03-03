@@ -9,7 +9,6 @@ import {
 @Component({
     selector: 'ui5-content-density-header',
     templateUrl: './content-density-header.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, HeaderTabsComponent]
 })
 export class ContentDensityHeader {
