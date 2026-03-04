@@ -180,12 +180,55 @@
             <code>modifiers</code> - Customize the CSS class names used for each density mode. Default classes are
             <code>is-compact</code>, <code>is-cozy</code>, and <code>is-condensed</code>.
         </li>
+        <li><code>ui5Markers</code> - Configure UI5 Web Components content density markers (enabled by default).</li>
     </ul>
 </description>
 <component-example>
     <fd-advanced-config-example></fd-advanced-config-example>
 </component-example>
 <code-example [exampleFiles]="advancedConfigExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="ui5-webcomponents" componentName="ui5-webcomponents">
+    UI5 Web Components Integration
+</fd-docs-section-title>
+<description>
+    <p>
+        The content density system automatically integrates with UI5 Web Components Angular wrappers
+        (<code>&#64;fundamental-ngx/ui5-webcomponents</code>, <code>&#64;fundamental-ngx/ui5-webcomponents-fiori</code>,
+        <code>&#64;fundamental-ngx/ui5-webcomponents-ai</code>).
+    </p>
+    <p>
+        <strong>How it works:</strong> Each UI5 wrapper component uses <code>ContentDensityObserver</code> internally,
+        applying the <code>data-ui5-compact-size</code> attribute directly to its host element. This gives you full
+        feature parity with fundamental-ngx components, including local directive overrides.
+    </p>
+    <p>
+        UI5 Web Components only support two density modes: <strong>cozy</strong> (default) and <strong>compact</strong>.
+        The mapping is:
+    </p>
+    <ul>
+        <li><code>cozy</code> → No attribute (UI5 default)</li>
+        <li><code>compact</code> → <code>data-ui5-compact-size</code> attribute applied</li>
+        <li><code>condensed</code> → <code>data-ui5-compact-size</code> attribute applied (maps to UI5 compact)</li>
+    </ul>
+    <p><strong>Mixed Components Example:</strong></p>
+    <p>Both fundamental-ngx and UI5 wrapper components respond to the same content density settings:</p>
+    <pre><code>&lt;!-- Global is COMPACT, this section overrides to COZY --&gt;
+&lt;div fdCozy&gt;
+    &lt;fd-button&gt;Cozy FD Button&lt;/fd-button&gt;
+    &lt;ui5-button&gt;Cozy UI5 Button&lt;/ui5-button&gt;
+&lt;/div&gt;</code></pre>
+    <p><strong>Local Overrides:</strong></p>
+    <p>
+        Unlike body-level density attributes, the component-level approach enables full local override support. A
+        <code>fdCozy</code> directive on a container will make both fundamental-ngx and UI5 components inside render in
+        cozy mode, even if the global setting is compact.
+    </p>
+    <p><strong>Disable UI5 markers for specific components:</strong></p>
+    <code>contentDensityObserverProviders(&#123; ui5Markers: &#123; enabled: false &#125; &#125;)</code>
+</description>
 
 <separator></separator>
 
