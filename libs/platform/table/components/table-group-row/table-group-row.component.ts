@@ -81,7 +81,7 @@ export class TableGroupRowComponent<T> extends TableRowDirective implements OnCh
     /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
-        this.setItems(items);
+        this.setItems(items.toArray());
     }
 
     /** @hidden */
@@ -89,8 +89,6 @@ export class TableGroupRowComponent<T> extends TableRowDirective implements OnCh
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        super.ngOnChanges(changes);
-
         if ('row' in changes || 'keyToColumnMap' in changes) {
             this._column = this.keyToColumnMap.get(this.row.value?.['field']);
         }

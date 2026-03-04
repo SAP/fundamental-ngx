@@ -1,7 +1,7 @@
 <!--
 Document: Angular 21+ Development Guidelines for Fundamental NGX
-Last Updated: February 26, 2026
-Version: 3.2
+Last Updated: February 27, 2026
+Version: 3.3
 Purpose: Comprehensive guide for AI agents and developers working with Angular 21+ in NX monorepo
 -->
 
@@ -301,6 +301,200 @@ it('should handle undefined defaultContentDensity', () => {
 });
 ```
 
+### Pre-Development Checklist
+
+Before starting implementation of a new feature, complete this checklist to avoid architectural rework:
+
+**✅ Research Phase:**
+
+- [ ] Review AGENTS.md for existing patterns and conventions
+- [ ] Search codebase for similar existing features (`nx graph`, global search)
+- [ ] Check if functionality exists in another library (core, platform, cdk)
+- [ ] Review related GitHub issues and discussions
+
+**✅ Design Phase:**
+
+- [ ] Sketch 2-3 architectural approaches on paper or in comments
+- [ ] Consider: New component vs. extend existing? Service vs. directive vs. function?
+- [ ] Evaluate opt-in (explicit) vs. opt-out (default) behavior
+- [ ] Document chosen approach and rationale in code comments or PR description
+
+**✅ Common Architecture Questions:**
+
+| Question                                        | Decision Factors                                                    |
+| ----------------------------------------------- | ------------------------------------------------------------------- |
+| **New component/directive or extend existing?** | Does existing serve similar purpose? Will extension complicate API? |
+| **Service vs. Directive vs. Function?**         | Need state → Service; Need DOM → Directive; Pure logic → Function   |
+| **Injectable token vs. @Input?**                | Reusable across components → Token; Component-specific → Input      |
+| **Global config vs. per-instance?**             | Library-wide behavior → Global; Component-specific → Per-instance   |
+| **Opt-in vs. opt-out?**                         | Breaking/risky behavior → Opt-in; Enhancement → Opt-out             |
+
+**Example - Avoiding Rework:**
+
+```typescript
+// ❌ BAD - Implement first approach without evaluation
+@Directive({ selector: '[fdUi5ContentDensity]' })
+export class Ui5ContentDensityDirective {
+    // Created full implementation + tests
+    // Later realized should extend existing ContentDensityDirective
+    // Result: Deleted 179 lines, wasted 4-6 hours
+}
+
+// ✅ GOOD - Evaluate approaches first
+/*
+Architecture Decision: UI5 Content Density Support
+
+Approach 1: New fdUi5ContentDensity directive
+  Pros: Separation of concerns, clear intent
+  Cons: Duplicate density logic, users need two directives
+
+Approach 2: Extend existing fdContentDensity directive
+  Pros: Single directive, shared logic, better DX
+  Cons: Adds complexity to existing directive
+
+Decision: Approach 2 - Extend existing directive
+Rationale: UI5 support is enhancement to core functionality,
+           users shouldn't need to know about implementation
+*/
+@Directive({ selector: '[fdContentDensity]' })
+export class ContentDensityDirective {
+    // Single directive handles both core + UI5
+}
+```
+
+### Documentation File Guidelines
+
+**Rule: Avoid creating `.md` files in library directories unless they are permanent user-facing documentation.**
+
+**✅ GOOD - Appropriate documentation locations:**
+
+```
+libs/core/button/README.md               # Public API documentation
+libs/docs/core/button/                   # User-facing examples
+docs/architecture/decisions/ADR-001.md   # Architecture Decision Records
+CHANGELOG.md                             # Release notes
+MIGRATION_GUIDE.md                       # Version migration guide (root)
+```
+
+**❌ BAD - Temporary documentation in library code:**
+
+```
+libs/core/content-density/UI5_MIGRATION.md        # Implementation plan
+libs/platform/table/REFACTORING_TODO.md           # Temporary notes
+libs/core/utils/DESIGN_DECISIONS.md               # Should be ADR or code comments
+```
+
+**Decision Matrix:**
+
+| Document Type                 | Where to Put It                                 | When to Delete              |
+| ----------------------------- | ----------------------------------------------- | --------------------------- |
+| **Implementation plan**       | PR description, GitHub Discussion               | After merging               |
+| **Design rationale**          | Code comments, ADR file in `docs/architecture/` | Never (archive if obsolete) |
+| **Migration guide for users** | Root `MIGRATION_GUIDE.md` or version docs       | Keep until version is EOL   |
+| **Temporary notes**           | Local file (not committed), PR description      | Immediately                 |
+| **API documentation**         | README.md in library root, JSDoc comments       | Keep, update as API evolves |
+| **Usage examples**            | `libs/docs/<library>/` directory                | Keep, update with features  |
+
+**Example - Implementation Planning Documentation:**
+
+During feature development, you may create planning documents with checklists and architecture notes. These are useful during development but should typically not be committed to the library code:
+
+```markdown
+# Implementation plan (useful during development)
+
+## Overview
+
+This document outlines the migration to extend fundamental-ngx's content density...
+
+### Phase 1: Core Changes
+
+- [x] Add UI5 marker support
+- [x] Update tests
+
+### Phase 2: Generator Changes
+
+- [x] Update component template
+```
+
+**Alternative locations for this content:**
+
+1. **PR description** - Provides context for reviewers
+2. **GitHub Project/Issue** - Tracks progress, visible to team
+3. **Code comments** - Documents architectural decisions in the code itself
+4. **Personal notes** - Keep locally, don't commit
+
+**Better approach - Document decisions in code:**
+
+```typescript
+// In code: libs/core/content-density/services/content-density-observer.service.ts
+
+/**
+ * Service for observing and managing content density in components.
+ *
+ * **Architecture Decision:** UI5 Web Components integration
+ *
+ * UI5 components support compact mode via `data-ui5-compact-size` attribute.
+ * This service automatically applies the attribute when density is COMPACT or CONDENSED.
+ *
+ * Design rationale:
+ * - Component-level application (not body-level) for better local override support
+ * - CONDENSED maps to UI5 compact (UI5 only has cozy/compact)
+ * - Enabled by default via `ui5Markers.enabled` configuration
+ *
+ * See: https://sap.github.io/ui5-webcomponents/docs/advanced/configuration/#compact-mode
+ */
+@Injectable()
+export class ContentDensityObserver {
+    // ...
+}
+```
+
+**When to commit planning documents:**
+
+- If it's permanent architectural documentation (ADR)
+- If it's a user-facing migration guide (root level)
+- If it documents public API usage (README.md)
+
+**When to keep them elsewhere:**
+
+- If it's a temporary implementation checklist
+- If it tracks task progress
+- If it's exploratory notes or brainstorming
+
+**When Implementation Plans Are Useful:**
+
+- Keep in PR description for reviewer context
+- Use GitHub Projects/Issues for tracking progress
+- Share in team discussions/RFC documents
+- Store in personal notes (don't commit if temporary)
+
+**Summary:** Planning documents are valuable during development. Consider where they provide the most value - in code comments for architectural decisions, in PR descriptions for reviewer context, or in project tracking tools for progress monitoring.
+
+### Continuous Validation Workflow
+
+**Run validation DURING development, not just at the end:**
+
+```bash
+# Option 1: Watch mode (recommended during active development)
+npx nx run <library>:lint --watch
+npx nx test <library> --watch
+
+# Option 2: Manual checks after each logical change
+npx nx run <library>:lint
+npx nx run <library>:test
+
+# Option 3: Check affected projects
+npx nx affected:lint
+npx nx affected:test
+```
+
+**Cost of Late Validation:**
+
+- Discover lint errors late → Fix → Re-run → Re-check (2-5 minutes)
+- Discover during development → Fix immediately (30 seconds)
+- **Time saved per issue: ~2-4 minutes**
+- **On 5 issues: Saves 10-20 minutes**
+
 ### ESLint Compliance
 
 **Member Ordering Rules**
@@ -458,7 +652,73 @@ Follow the [Angular Style Guide](https://angular.dev/style-guide) for all coding
 
 #### Precise Signal Type Annotations
 
-When exposing signals from services or components, use precise type annotations that match exactly what is assigned:
+When exposing signals from services or components, balance precision with readability:
+
+**For Public API Properties (Recommended Approach):**
+
+Use `Signal<T>` for simplicity and clarity:
+
+```typescript
+// ✅ GOOD - Clear, readable, sufficient for public API
+readonly contentDensity: Signal<ContentDensityMode>;
+readonly isCompact: Signal<boolean>;
+```
+
+**For Complex Signal Types (Use Type Aliases):**
+
+When you need precise types for `linkedSignal` or complex signals, create type aliases:
+
+```typescript
+// ✅ GOOD - Type alias makes complex types manageable
+type ReadonlyLinkedSignal<T> = ReturnType<ReturnType<typeof linkedSignal<T, T>>['asReadonly']>;
+type ReadonlyComputed<T> = ReturnType<typeof computed<T>>;
+
+// Clean usage
+readonly contentDensity: ReadonlyLinkedSignal<ContentDensityMode>;
+readonly isCompact: ReadonlyComputed<boolean>;
+```
+
+**❌ AVOID - Verbose inline ReturnType patterns:**
+
+```typescript
+// Hard to read and maintain
+readonly contentDensity: ReturnType<ReturnType<typeof linkedSignal<ContentDensityMode, ContentDensityMode>>['asReadonly']>;
+readonly isCompact: ReturnType<typeof computed<boolean>>;
+```
+
+**When to Use Each Approach:**
+
+| Context                     | Recommendation        | Reason                                      |
+| --------------------------- | --------------------- | ------------------------------------------- |
+| **Public class properties** | `Signal<T>`           | Simple, clear, sufficient for API contract  |
+| **Private implementation**  | Type inference        | TypeScript infers correctly from assignment |
+| **Complex signal chains**   | Type alias + explicit | Documents complex relationships             |
+| **Generic utilities**       | `ReturnType<...>`     | Ensures type matches generic parameters     |
+
+**Example - Balanced Approach:**
+
+```typescript
+@Injectable()
+export class ContentDensityObserver {
+    // Public API - Simple Signal<T> types
+    readonly contentDensity: Signal<ContentDensityMode>;
+    readonly isCompact: Signal<boolean>;
+
+    // Private - Let TypeScript infer
+    private readonly _contentDensity = linkedSignal({
+        source: this._changesSource,
+        computation: (source) => this._validate(source)
+    });
+
+    constructor() {
+        // Assign and let inference do its work
+        this.contentDensity = this._contentDensity.asReadonly();
+        this.isCompact = computed(() => this._contentDensity() === ContentDensityMode.COMPACT);
+    }
+}
+```
+
+**Legacy Pattern (Still Valid for WritableSignal):**
 
 ```typescript
 // For readonly signals from WritableSignal.asReadonly()
@@ -466,22 +726,70 @@ readonly contentDensity: ReturnType<WritableSignal<ContentDensityMode>['asReadon
 
 // For computed signals
 readonly isCompact: ReturnType<typeof computed<boolean>>;
-
-// Generic Signal type (simpler, also acceptable)
-readonly contentDensity: Signal<ContentDensityMode>;
 ```
 
-**Why use `ReturnType<...>` patterns:**
+**Why this pattern exists:**
 
 - `ReturnType<WritableSignal<T>['asReadonly']>` - Precisely matches the return type of `asReadonly()` method
 - `ReturnType<typeof computed<T>>` - Precisely matches the return type of `computed()` function
 - These ensure type annotations exactly match the assigned value
 
-**When to use each:**
+**Modern Recommendation:** Prefer `Signal<T>` for public APIs unless you have a specific need for the precise `ReturnType` pattern (e.g., complex generics, utility types, or documenting specific signal sources).
 
-- **`Signal<T>`**: General-purpose, works in most cases
-- **`ReturnType<WritableSignal<T>['asReadonly']>`**: When assigning from `signal().asReadonly()`
-- **`ReturnType<typeof computed<T>>`**: When assigning from `computed()`
+#### Type Annotations vs. Inference
+
+**When to use explicit type annotations:**
+
+- ✅ Public method return types (required by lint rules)
+- ✅ Public class properties (documents API contract)
+- ✅ Complex generic types (clarifies intent)
+- ✅ Function parameters (always required)
+
+**When to rely on type inference:**
+
+- ✅ Private properties initialized with typed values
+- ✅ Local variables with obvious types
+- ✅ Computed/linked signals where type flows from source
+- ✅ Constructor property injection
+
+**Examples:**
+
+```typescript
+// ✅ GOOD - Explicit for public API
+export class MyService {
+    // Public property - explicit type documents API
+    readonly status: Signal<string>;
+
+    // Private - inference works fine
+    private readonly _statusSource = signal('idle');
+
+    constructor() {
+        // Inference knows this is Signal<string>
+        this.status = computed(() => `Status: ${this._statusSource()}`);
+    }
+
+    // Public method - explicit return type required
+    getStatus(): string {
+        return this.status();
+    }
+
+    // Private method - inference acceptable
+    private updateStatus(newStatus: string) {
+        this._statusSource.set(newStatus);
+    }
+}
+
+// ❌ AVOID - Unnecessary verbosity
+export class MyService {
+    // Overly explicit private property
+    private readonly _statusSource: WritableSignal<string> = signal<string>('idle');
+
+    // Unnecessary explicit type on obvious inference
+    private readonly _isActive: Signal<boolean> = computed<boolean>(() => this._statusSource() === 'active');
+}
+```
+
+**Key Principle:** _Use types when they add clarity, omit them when they add noise._
 
 ### Angular Best Practices
 

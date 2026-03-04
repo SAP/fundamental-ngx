@@ -1,0 +1,113 @@
+<section class="sap-flex sap-flex-gap-small sap-flex--align-items-center sap-margin-bottom-medium">
+    <ui5-label>Select Global Density:</ui5-label>
+    <ui5-segmented-button>
+        <ui5-segmented-button-item
+            [selected]="currentDensity() === ContentDensityMode.COZY"
+            (click)="selectDensity(ContentDensityMode.COZY)"
+        >
+            Cozy
+        </ui5-segmented-button-item>
+        <ui5-segmented-button-item
+            [selected]="currentDensity() === ContentDensityMode.COMPACT"
+            (click)="selectDensity(ContentDensityMode.COMPACT)"
+        >
+            Compact
+        </ui5-segmented-button-item>
+        <ui5-segmented-button-item
+            [selected]="currentDensity() === ContentDensityMode.CONDENSED"
+            (click)="selectDensity(ContentDensityMode.CONDENSED)"
+        >
+            Condensed
+        </ui5-segmented-button-item>
+    </ui5-segmented-button>
+    <span>Current Global Density: <strong>{{ densityLabel() }}</strong></span>
+</section>
+
+<section
+    class="sap-margin-bottom-medium sap-padding sap-border-color-neutral"
+    style="border: 1px solid; border-radius: 4px"
+>
+    <h3 class="sap-margin-top-none sap-margin-bottom-small sap-text-size-small sap-text-color-textColor">
+        Scenario 1: Global Density (Default Behavior)
+    </h3>
+    <p>These components follow the global content density setting. Change the selector above to see them update:</p>
+    <div class="sap-flex sap-flex--wrap sap-flex--align-items-center">
+        <ui5-button class="sap-margin-end-small">Default Button</ui5-button>
+        <ui5-button class="sap-margin-end-small" design="Emphasized">Emphasized</ui5-button>
+        <ui5-button class="sap-margin-end-small" design="Positive">Positive</ui5-button>
+        <ui5-input class="sap-margin-end-small" placeholder="Input field"></ui5-input>
+        <ui5-switch></ui5-switch>
+    </div>
+</section>
+
+<section
+    class="sap-margin-bottom-medium sap-padding sap-border-color-neutral"
+    style="border: 1px solid; border-radius: 4px"
+    fdCompact
+>
+    <h3 class="sap-margin-top-none sap-margin-bottom-small sap-text-size-small sap-text-color-textColor">
+        Scenario 2: Section-Level Override - Forced Compact
+    </h3>
+    <p>
+        This entire section uses <code>fdCompact</code> directive. All components are compact, regardless of global
+        setting:
+    </p>
+    <div class="sap-flex sap-flex--wrap sap-flex--align-items-center">
+        <ui5-button class="sap-margin-end-small">Compact Button</ui5-button>
+        <ui5-button class="sap-margin-end-small" design="Emphasized">Emphasized</ui5-button>
+        <ui5-input class="sap-margin-end-small" placeholder="Compact Input"></ui5-input>
+        <ui5-switch></ui5-switch>
+    </div>
+</section>
+
+<section
+    class="sap-margin-bottom-medium sap-padding sap-border-color-neutral"
+    style="border: 1px solid; border-radius: 4px"
+    fdCozy
+>
+    <h3 class="sap-margin-top-none sap-margin-bottom-small sap-text-size-small sap-text-color-textColor">
+        Scenario 2: Section-Level Override - Forced Cozy Form
+    </h3>
+    <p>
+        <strong>Use case:</strong> A form that needs better touch targets for accessibility. This section uses
+        <code>fdCozy</code> directive - try changing global to Compact, this section stays Cozy!
+    </p>
+    <div class="sap-flex sap-flex--wrap sap-flex--align-items-center">
+        <ui5-label class="sap-margin-end-small">User Information</ui5-label>
+        <ui5-input class="sap-margin-end-small" placeholder="Name" required></ui5-input>
+        <ui5-input class="sap-margin-end-small" placeholder="Email" type="Email"></ui5-input>
+        <ui5-button design="Emphasized">Submit</ui5-button>
+    </div>
+</section>
+
+<section
+    class="sap-margin-bottom-medium sap-padding sap-border-color-neutral"
+    style="border: 1px solid; border-radius: 4px"
+>
+    <h3 class="sap-margin-top-none sap-margin-bottom-small sap-text-size-small sap-text-color-textColor">
+        Scenario 3: Component-Level - Mixing Densities
+    </h3>
+    <p><strong>Use case:</strong> Different densities in plain HTML containers.</p>
+    <p class="sap-text-color-critical sap-text-size-small">
+        ⚠️ Only works in &lt;div&gt;, NOT in ui5-toolbar or ui5-table
+    </p>
+    <div class="sap-flex sap-flex--wrap sap-flex--align-items-center">
+        <span
+            class="sap-padding-x-tiny sap-bg-color-negativeBackground sap-text-size-small sap-margin-end-small"
+            style="border-radius: 4px"
+        >
+            Compact:
+        </span>
+        <ui5-button class="sap-margin-end-small" fdCompact>Secondary</ui5-button>
+        <ui5-button class="sap-margin-end-small" fdCompact>Another</ui5-button>
+
+        <span
+            class="sap-padding-x-tiny sap-bg-color-positiveBackground sap-text-size-small sap-text-weight-bold sap-margin-end-small"
+            style="border-radius: 4px"
+        >
+            Cozy:
+        </span>
+        <ui5-button class="sap-margin-end-small" fdCozy design="Emphasized">Primary</ui5-button>
+        <ui5-input fdCozy placeholder="Important" style="width: 180px"></ui5-input>
+    </div>
+</section>
