@@ -11,7 +11,7 @@
         fd-list-group-header
         id="platformTableInternalFilterListGroupHeader"
     >
-        {{ 'platformTable.filterDialogFilterBy' | fdTranslate }}
+        {{ ('platformTable.filterDialogFilterBy' | fdTranslate)() }}
     </span>
     <ul fd-list aria-labelledby="platformTableInternalFilterListGroupHeader">
         @for (filter of filters; track filter) {

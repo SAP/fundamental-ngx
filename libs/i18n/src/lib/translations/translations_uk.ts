@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Рядок повідомлень про успішне виконання',
         closable: 'З можливістю закриття'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 елемент списку результатів.',
         countListResultsPlural: 'Елементів списку результатів: {count}.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Користувач'
+    },
+    platformIconTabBar: {
+        moreButton: 'Більше'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Вибрані елементи та умови',

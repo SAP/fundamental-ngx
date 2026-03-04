@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    DestroyRef,
     ElementRef,
     HostBinding,
     HostListener,
@@ -30,7 +31,7 @@ import {
     NestedListStateService,
     PreparedNestedListComponent
 } from '@fundamental-ngx/cx/nested-list';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SideNavigationButtonDirective } from './side-navigation-button.directive';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationModel } from './side-navigation-model';
@@ -46,7 +47,7 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     styleUrl: 'side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     imports: [
-        I18nModule,
+        FdTranslatePipe,
         NgTemplateOutlet,
         SideNavigationMainComponent,
         PreparedNestedListComponent,
@@ -151,10 +152,12 @@ export class SideNavigationComponent
     private readonly _nestedListState = inject(NestedListStateService);
     /** @hidden */
     private readonly _cdRef = inject(ChangeDetectorRef);
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor() {
-        this._keyboardService.refresh$.pipe(takeUntilDestroyed()).subscribe(() => {
+        this._keyboardService.refresh$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this._keyboardService.refreshItems(this.getLists());
         });

@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Statusbalk succesmelding',
         closable: 'Sluitbaar'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 item in resultatenlijst',
         countListResultsPlural: '{count} items in resultatenlijst',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Gebruiker'
+    },
+    platformIconTabBar: {
+        moreButton: 'Meer'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Geselecteerde items en condities',

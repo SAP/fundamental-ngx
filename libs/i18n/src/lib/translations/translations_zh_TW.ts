@@ -86,6 +86,9 @@ export default {
         announcementSuccess: '成功訊息列',
         closable: '可關閉'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 個結果清單項目。',
         countListResultsPlural: '{count} 個結果清單項目。',
@@ -314,6 +317,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: '使用者'
+    },
+    platformIconTabBar: {
+        moreButton: '更多'
     },
     platformVHD: {
         selectedAndConditionLabel: '所選項目和條件',

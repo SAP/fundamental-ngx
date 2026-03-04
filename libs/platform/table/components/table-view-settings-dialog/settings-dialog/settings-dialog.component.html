@@ -34,8 +34,8 @@
                             fdkFocusableItem
                             value="sort"
                             glyph="sort"
-                            [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
-                            [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                            [title]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()"
+                            [ariaLabel]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()"
                         ></button>
                     }
                     @if (filteringData()) {
@@ -44,8 +44,8 @@
                             fdkFocusableItem
                             value="filter"
                             glyph="filter"
-                            [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
-                            [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                            [title]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()"
+                            [ariaLabel]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()"
                         ></button>
                     }
                     @if (groupingData()) {
@@ -54,8 +54,8 @@
                             fdkFocusableItem
                             value="group"
                             glyph="group-2"
-                            [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
-                            [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                            [title]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()"
+                            [ariaLabel]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()"
                         ></button>
                     }
                 </fd-segmented-button>
@@ -99,11 +99,11 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [label]="'platformTable.confirmBtnLabel' | fdTranslate"
+            [label]="('platformTable.confirmBtnLabel' | fdTranslate)()"
             (click)="confirm()"
         ></fd-button-bar>
         <fd-button-bar
-            [label]="'platformTable.cancelBtnLabel' | fdTranslate"
+            [label]="('platformTable.cancelBtnLabel' | fdTranslate)()"
             fdkInitialFocus
             (click)="cancel()"
         ></fd-button-bar>

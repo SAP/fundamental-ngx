@@ -18,7 +18,7 @@
             [buttonFocusable]="buttonFocusable"
             [isControl]="true"
             [isExpanded]="isOpen"
-            [glyphAriaLabel]="timePickerButtonLabel || ('coreTimePicker.timePickerButtonLabel' | fdTranslate)"
+            [glyphAriaLabel]="timePickerButtonLabel || ('coreTimePicker.timePickerButtonLabel' | fdTranslate)()"
             glyph="fob-watch"
         >
             <input
@@ -32,7 +32,7 @@
                 [attr.id]="inputId"
                 [placeholder]="_placeholder"
                 [attr.aria-labelledby]="ariaLabelledBy"
-                [attr.aria-label]="timePickerInputLabel || ('coreTimePicker.timePickerInputLabel' | fdTranslate)"
+                [attr.aria-label]="timePickerInputLabel || ('coreTimePicker.timePickerInputLabel' | fdTranslate)()"
                 [attr.aria-describedby]="_formValueStateMessageId"
                 [attr.aria-required]="required"
             />

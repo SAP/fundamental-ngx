@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Resultatmeddelanderad',
         closable: 'Kan stängas'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlistobjekt.',
         countListResultsPlural: '{count} resultatlistobjekt.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Användare'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mer'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valda artiklar och villkor',

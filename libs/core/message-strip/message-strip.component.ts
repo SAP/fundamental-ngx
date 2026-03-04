@@ -7,20 +7,16 @@ import {
     computed,
     contentChild,
     DestroyRef,
-    effect,
     ElementRef,
     inject,
     input,
     output,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { FD_LANGUAGE, FdLanguage, I18nModule, TranslationResolver } from '@fundamental-ngx/i18n';
-import { map, of, withLatestFrom } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { MessageStripIconDirective } from './message-strip-icon.directive';
 import { MessageStripIndicationColor } from './message-strip-indication-color';
 import { MessageStripType } from './message-strip-type';
@@ -56,7 +52,7 @@ let messageStripUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent, AsyncPipe]
+    imports: [ButtonComponent, ContentDensityDirective, NgTemplateOutlet, IconComponent, AsyncPipe]
 })
 export class MessageStripComponent {
     /** Whether the message strip is dismissible. */
@@ -180,54 +176,63 @@ export class MessageStripComponent {
     });
 
     /** message strip information read by screen readers */
-    protected messageStripHiddenText$: Observable<string>;
+    protected messageStripHiddenText = computed(() => {
+        const currentType = this.type();
+        if (!currentType) {
+            return DEFAULT_HIDDEN_TEXT;
+        }
+
+        const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
+            [MessageStripTypeEnum.WARNING]: MessageStripAnnouncement.WARNING,
+            [MessageStripTypeEnum.SUCCESS]: MessageStripAnnouncement.SUCCESS,
+            [MessageStripTypeEnum.ERROR]: MessageStripAnnouncement.ERROR,
+            [MessageStripTypeEnum.INFORMATION]: MessageStripAnnouncement.INFORMATION
+        };
+
+        const announcementType = announcementMap[currentType];
+        if (!announcementType) {
+            return DEFAULT_HIDDEN_TEXT;
+        }
+
+        const lang = this._langSignal();
+        const announcement = this._translationResolver.resolve(lang, announcementType);
+        const closable = this.dismissible() ? this._translationResolver.resolve(lang, MESSAGE_STRIP_CLOSABLE) : '';
+        return `${announcement} ${closable}`;
+    });
 
     /** default dismiss button text read by screen readers */
-    protected defaultDismissButtonText$: Observable<string>;
+    protected defaultDismissButtonText = computed(() => {
+        const currentType = this.type();
+        if (!currentType) {
+            return DEFAULT_DISMISS_BUTTON_TEXT;
+        }
+
+        const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
+            [MessageStripTypeEnum.WARNING]: MessageStripAnnouncement.WARNING,
+            [MessageStripTypeEnum.SUCCESS]: MessageStripAnnouncement.SUCCESS,
+            [MessageStripTypeEnum.ERROR]: MessageStripAnnouncement.ERROR,
+            [MessageStripTypeEnum.INFORMATION]: MessageStripAnnouncement.INFORMATION
+        };
+
+        const announcementType = announcementMap[currentType];
+        if (!announcementType) {
+            return DEFAULT_DISMISS_BUTTON_TEXT;
+        }
+
+        const lang = this._langSignal();
+        const announcement = this._translationResolver.resolve(lang, announcementType);
+        const closeButtonText = this._translationResolver.resolve(lang, MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT);
+        return `${announcement} ${closeButtonText}`;
+    });
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private readonly _translationResolver = inject(TranslationResolver);
-
-    /** @hidden */
-    constructor() {
-        // Initialize with defaults
-        this.messageStripHiddenText$ = of(DEFAULT_HIDDEN_TEXT);
-        this.defaultDismissButtonText$ = of(DEFAULT_DISMISS_BUTTON_TEXT);
-
-        // Update when type changes
-        effect(() => {
-            const currentType = this.type();
-            if (!currentType) {
-                this.messageStripHiddenText$ = of(DEFAULT_HIDDEN_TEXT);
-                this.defaultDismissButtonText$ = of(DEFAULT_DISMISS_BUTTON_TEXT);
-                return;
-            }
-
-            const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
-                [MessageStripTypeEnum.WARNING]: MessageStripAnnouncement.WARNING,
-                [MessageStripTypeEnum.SUCCESS]: MessageStripAnnouncement.SUCCESS,
-                [MessageStripTypeEnum.ERROR]: MessageStripAnnouncement.ERROR,
-                [MessageStripTypeEnum.INFORMATION]: MessageStripAnnouncement.INFORMATION
-            };
-
-            const announcementType = announcementMap[currentType];
-
-            if (announcementType) {
-                const announcement$ = this._translateAnnouncement(announcementType);
-                this.messageStripHiddenText$ = this._buildMessageStripHiddenText(announcement$);
-                this.defaultDismissButtonText$ = this._getHiddenButtonText(announcement$);
-            } else {
-                this.messageStripHiddenText$ = of(DEFAULT_HIDDEN_TEXT);
-                this.defaultDismissButtonText$ = of(DEFAULT_DISMISS_BUTTON_TEXT);
-            }
-        });
-    }
 
     /**
      * Dismisses the message-strip.
@@ -236,40 +241,5 @@ export class MessageStripComponent {
         this.elementRef.nativeElement.classList.add('fd-has-display-none');
         this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.onDismiss.emit();
-    }
-
-    /** @hidden */
-    private _translateAnnouncement(announcementType: MessageStripAnnouncementType): Observable<string> {
-        return this._lang$.pipe(
-            takeUntilDestroyed(this._destroyRef),
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, announcementType))
-        );
-    }
-
-    /** @hidden */
-    private _buildMessageStripHiddenText(announcement$: Observable<string>): Observable<string> {
-        return this._lang$.pipe(
-            takeUntilDestroyed(this._destroyRef),
-            withLatestFrom(announcement$),
-            map(([lang, announcement]: [FdLanguage, string]) => {
-                const closable = this._translationResolver.resolve(lang, MESSAGE_STRIP_CLOSABLE);
-                return `${announcement} ${this.dismissible() ? closable : ''}`;
-            })
-        );
-    }
-
-    /** @hidden **/
-    private _getHiddenButtonText(announcement$: Observable<string>): Observable<string> {
-        return this._lang$.pipe(
-            takeUntilDestroyed(this._destroyRef),
-            withLatestFrom(announcement$),
-            map(([lang, announcement]: [FdLanguage, string]) => {
-                const closeButtonText = this._translationResolver.resolve(
-                    lang,
-                    MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT
-                );
-                return `${announcement} ${closeButtonText}`;
-            })
-        );
     }
 }

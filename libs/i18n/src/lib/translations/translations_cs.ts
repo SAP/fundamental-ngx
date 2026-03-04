@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Pruh zpráv o úspěšném provedení',
         closable: 'Lze zavřít'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 položka v seznamu výsledků.',
         countListResultsPlural: 'Počet položek v seznamu výsledků: {count}.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Uživatel'
+    },
+    platformIconTabBar: {
+        moreButton: 'Více'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Vybrané položky a podmínky',

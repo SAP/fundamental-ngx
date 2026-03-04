@@ -121,7 +121,7 @@
                                     <button
                                         fd-button
                                         fdType="transparent"
-                                        [label]="'platformVHD.selectTabMoreBtnLabel' | fdTranslate"
+                                        [label]="('platformVHD.selectTabMoreBtnLabel' | fdTranslate)()"
                                         (click)="_showMoreElements()"
                                     ></button>
                                 </fd-bar-element>
@@ -150,7 +150,7 @@
                     <tr fd-table-row>
                         <td fd-table-cell colspan="100%">
                             <div class="fdp-value-help-dialog__empty-message">
-                                {{ 'platformVHD.searchTableEmptyMessage' | fdTranslate }}
+                                {{ ('platformVHD.searchTableEmptyMessage' | fdTranslate)() }}
                             </div>
                         </td>
                     </tr>

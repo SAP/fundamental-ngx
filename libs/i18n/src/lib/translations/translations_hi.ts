@@ -85,6 +85,9 @@ export default {
         announcementSuccess: 'Success Message Strip',
         closable: 'Closable'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 परिणाम सूची आइटम',
         countListResultsPlural: '{count} परिणाम सूची आइटम',
@@ -310,6 +313,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'उपयोगकर्ता'
+    },
+    platformIconTabBar: {
+        moreButton: 'अधिक'
     },
     platformVHD: {
         selectedAndConditionLabel: 'चयनित आइटम और शर्तें',

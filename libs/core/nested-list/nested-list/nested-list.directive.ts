@@ -3,25 +3,26 @@ import {
     ChangeDetectorRef,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     Directive,
+    effect,
     ElementRef,
     forwardRef,
     HostBinding,
-    Inject,
-    INJECTOR,
+    inject,
     Injector,
     Input,
-    OnDestroy,
     Optional,
     Provider,
     QueryList
 } from '@angular/core';
-import { combineLatest, Observable, startWith, Subscription } from 'rxjs';
+import { startWith } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListHeaderDirective } from '../nested-list-directives';
@@ -33,9 +34,8 @@ function provideNestedListStateService(): Provider {
     // Nested list can be nested, and that will cause on each individual instance of NestedListStateService.
     return {
         provide: NestedListStateService,
-        useFactory: (injector: Injector) =>
-            injector.get(NestedListStateService, new NestedListStateService(), { skipSelf: true }),
-        deps: [INJECTOR]
+        useFactory: () =>
+            inject(NestedListStateService, { skipSelf: true, optional: true }) ?? new NestedListStateService()
     };
 }
 
@@ -56,7 +56,7 @@ function provideNestedListStateService(): Provider {
     ],
     standalone: true
 })
-export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
+export class NestedListDirective implements AfterContentInit, NestedListInterface {
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fd-nested-list--text-only')
@@ -111,10 +111,16 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     protected _tabindex = '-1';
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
     constructor(
@@ -123,18 +129,12 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
         private readonly _nestedListStateService: NestedListStateService,
-        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
         _contentDensityObserver: ContentDensityObserver
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
         }
         _contentDensityObserver.subscribe();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -147,14 +147,22 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
         this._setAccessibilityProperties(nestedLevel);
 
-        const sub = combineLatest([this._language$, this.nestedItems.changes.pipe(startWith(undefined))]).subscribe(
-            ([lang]) => {
+        // Register effect with explicit injector context
+        effect(
+            () => {
+                const lang = this._langSignal();
                 this._nestedListKeyboardService.refresh$.next();
                 this._setAriaAttributes(nestedLevel, lang);
-            }
+            },
+            { injector: this._injector }
         );
 
-        this._subscriptions.add(sub);
+        // React to nested items changes
+        this.nestedItems.changes.pipe(startWith(undefined), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            const lang = this._langSignal();
+            this._nestedListKeyboardService.refresh$.next();
+            this._setAriaAttributes(nestedLevel, lang);
+        });
 
         this._handleNestedLevel(nestedLevel);
     }

@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Success Message Strip',
         closable: 'Closable'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 result list item.',
         countListResultsPlural: '{count} result list items.',
@@ -315,6 +318,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'User'
+    },
+    platformIconTabBar: {
+        moreButton: 'More'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Selected Items and Conditions',

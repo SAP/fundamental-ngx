@@ -86,6 +86,9 @@ export default {
         announcementSuccess: '成功消息条',
         closable: '可关闭'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 个结果列表项目。',
         countListResultsPlural: '{0} 个结果列表项目。',
@@ -314,6 +317,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: '用户'
+    },
+    platformIconTabBar: {
+        moreButton: '更多'
     },
     platformVHD: {
         selectedAndConditionLabel: '所选项目和条件',

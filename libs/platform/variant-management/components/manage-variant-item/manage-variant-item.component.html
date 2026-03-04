@@ -1,13 +1,13 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-title>{{ 'platformVariantManagement.saveView' | fdTranslate }}</h1>
+        <h1 fd-title>{{ ('platformVariantManagement.saveView' | fdTranslate)() }}</h1>
     </fd-dialog-header>
 
     <fd-dialog-body>
         <fdp-form-group #formContainer [formGroup]="_form" [unifiedLayout]="false" [useForm]="true">
             <fdp-form-field
                 id="name"
-                [label]="'platformVariantManagement.view' | fdTranslate"
+                [label]="('platformVariantManagement.view' | fdTranslate)()"
                 [column]="1"
                 [rank]="1"
                 [required]="true"
@@ -28,7 +28,7 @@
                 <fdp-checkbox
                     name="isDefault"
                     formControlName="isDefault"
-                    [label]="'platformVariantManagement.setAsDefault' | fdTranslate"
+                    [label]="('platformVariantManagement.setAsDefault' | fdTranslate)()"
                 ></fdp-checkbox>
             </fdp-form-field>
             <fdp-form-field
@@ -42,7 +42,7 @@
                     [values]="{ trueValue: 'public', falseValue: 'private' }"
                     name="access"
                     formControlName="access"
-                    [label]="'platformVariantManagement.public' | fdTranslate"
+                    [label]="('platformVariantManagement.public' | fdTranslate)()"
                 ></fdp-checkbox>
             </fdp-form-field>
             <fdp-form-field
@@ -55,14 +55,14 @@
                 <fdp-checkbox
                     name="applyAutomatically"
                     formControlName="applyAutomatically"
-                    [label]="'platformVariantManagement.applyAutomatically' | fdTranslate"
+                    [label]="('platformVariantManagement.applyAutomatically' | fdTranslate)()"
                 ></fdp-checkbox>
             </fdp-form-field>
             <span *fdpFormFieldError="'required'">
-                {{ 'platformVariantManagement.requiredFieldError' | fdTranslate }}
+                {{ ('platformVariantManagement.requiredFieldError' | fdTranslate)() }}
             </span>
             <span *fdpFormFieldError="'nameTaken'">
-                {{ 'platformVariantManagement.nameTakenFieldError' | fdTranslate }}
+                {{ ('platformVariantManagement.nameTakenFieldError' | fdTranslate)() }}
             </span>
         </fdp-form-group>
     </fd-dialog-body>
@@ -70,13 +70,13 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [label]="'platformVariantManagement.save' | fdTranslate"
+            [label]="('platformVariantManagement.save' | fdTranslate)()"
             (click)="_submitForm()"
             ariaLabel="Interested Emphasized"
         ></fd-button-bar>
 
         <fd-button-bar
-            [label]="'platformVariantManagement.cancel' | fdTranslate"
+            [label]="('platformVariantManagement.cancel' | fdTranslate)()"
             (click)="dialog.dismiss('Cancel')"
             ariaLabel="Cancel"
         ></fd-button-bar>

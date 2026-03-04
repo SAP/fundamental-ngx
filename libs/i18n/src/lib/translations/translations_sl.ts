@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Vrstica z obvestilom o uspehu',
         closable: 'Je mogoče zapreti'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: 'Seznam postavk z 1 rezultatom.',
         countListResultsPlural: 'Seznam postavk s toliko rezultati: {count}.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Uporabnik'
+    },
+    platformIconTabBar: {
+        moreButton: 'Več'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Izbrani elementi in pogoji',

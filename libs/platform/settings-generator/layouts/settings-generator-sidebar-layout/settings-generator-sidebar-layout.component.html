@@ -12,7 +12,7 @@
             [attr.aria-level]="headingLevel()"
             class="fdp-settings-generator__title fd-title--h5"
         >
-            {{ sidebarTitle() ?? ('platformSettingsGenerator.settingsLabel' | fdTranslate) }}
+            {{ sidebarTitle() ?? ('platformSettingsGenerator.settingsLabel' | fdTranslate)() }}
         </div>
 
         <!-- TODO: implement search input
@@ -20,8 +20,8 @@
             <fd-input-group
                 type="search"
                 glyph="search"
-                [glyphAriaLabel]="'platformSettingsGenerator.searchLabel' | fdTranslate"
-                [attr.placeholder]="'platformSettingsGenerator.searchLabel' | fdTranslate"
+                [glyphAriaLabel]="('platformSettingsGenerator.searchLabel' | fdTranslate)()"
+                [attr.placeholder]="('platformSettingsGenerator.searchLabel' | fdTranslate)()"
                 [button]="true"
                 [disabled]="false"
                 [(ngModel)]="searchTerm"

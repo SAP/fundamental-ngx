@@ -3,7 +3,7 @@
         <div
             [attr.aria-hidden]="tokenList.length === 0"
             role="listbox"
-            [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
+            [attr.aria-label]="('coreTokenizer.tokenizerLabel' | fdTranslate)()"
             [style.width]="_tokensContainerWidth"
         >
             <ng-content select="fd-token"></ng-content>
@@ -54,7 +54,7 @@
                             <span
                                 class="fd-token__close"
                                 role="button"
-                                [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
+                                [attr.aria-label]="('coreToken.deleteButtonLabel' | fdTranslate)()"
                                 (click)="token.closeClickHandler($event)"
                             ></span>
                         }

@@ -5,7 +5,7 @@
         fd-button
         fdType="transparent"
         glyph="edit"
-        [ariaLabel]="'coreUploadCollection.menuEditAriaLabel' | fdTranslate"
+        [ariaLabel]="('coreUploadCollection.menuEditAriaLabel' | fdTranslate)()"
     ></button>
 }
 @if (!_editMode && allowFileDeletion) {
@@ -15,7 +15,7 @@
         fd-button
         fdType="transparent"
         glyph="decline"
-        [ariaLabel]="'coreUploadCollection.menuDeleteAriaLabel' | fdTranslate"
+        [ariaLabel]="('coreUploadCollection.menuDeleteAriaLabel' | fdTranslate)()"
     ></button>
 }
 <button
@@ -24,17 +24,17 @@
     (click)="_okButtonClicked($event)"
     fd-button
     fdType="transparent"
-    [ariaLabel]="'coreUploadCollection.menuOkAriaLabel' | fdTranslate"
+    [ariaLabel]="('coreUploadCollection.menuOkAriaLabel' | fdTranslate)()"
 >
-    {{ 'coreUploadCollection.menuOkText' | fdTranslate }}
+    {{ ('coreUploadCollection.menuOkText' | fdTranslate)() }}
 </button>
 @if (_editMode) {
     <button
         (click)="_cancelButtonClicked($event)"
         fd-button
         fdType="transparent"
-        [ariaLabel]="'coreUploadCollection.menuCancelAriaLabel' | fdTranslate"
+        [ariaLabel]="('coreUploadCollection.menuCancelAriaLabel' | fdTranslate)()"
     >
-        {{ 'coreUploadCollection.menuCancelText' | fdTranslate }}
+        {{ ('coreUploadCollection.menuCancelText' | fdTranslate)() }}
     </button>
 }

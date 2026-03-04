@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Barre de message de réussite',
         closable: 'Peut être fermé'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 élément dans la liste des résultats',
         countListResultsPlural: '{count} éléments dans la liste des résultats',
@@ -318,6 +321,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Utilisateur'
+    },
+    platformIconTabBar: {
+        moreButton: 'Plus'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Éléments sélectionnés et conditions',

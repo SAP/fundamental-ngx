@@ -85,6 +85,9 @@ export default {
         announcementSuccess: 'Success Message Strip',
         closable: 'Closable'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 რეზულტატი.',
         countListResultsPlural: '{count} რეზულტატი.',
@@ -310,6 +313,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'მომხმარებელი'
+    },
+    platformIconTabBar: {
+        moreButton: 'მეტი'
     },
     platformVHD: {
         selectedAndConditionLabel: 'არჩეული ელემენტები',

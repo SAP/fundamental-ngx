@@ -7,7 +7,6 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -23,7 +22,7 @@ import {
     inject
 } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
-import { Observable, Subscription, firstValueFrom } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 
@@ -33,7 +32,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
 
@@ -257,11 +256,13 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private readonly _languageSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    /** @hidden */
     constructor(
         private readonly paginationService: PaginationService,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
         // React to RTL changes
@@ -430,14 +431,10 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     private async _announcePage(page: number): Promise<void> {
         await this._liveAnnouncer.announce(
-            this._translationResolver.resolve(
-                await firstValueFrom(this._language),
-                'corePagination.currentPageAriaLabel',
-                {
-                    pageNumber: page,
-                    totalCount: this.totalItems
-                }
-            )
+            this._translationResolver.resolve(this._languageSignal(), 'corePagination.currentPageAriaLabel', {
+                pageNumber: page,
+                totalCount: this.totalItems
+            })
         );
     }
 }

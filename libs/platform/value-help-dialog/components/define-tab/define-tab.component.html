@@ -1,5 +1,5 @@
 <h5 [id]="titleId" role="heading" aria-level="5" fd-title class="define-condition-title">
-    {{ 'platformVHD.defineConditionTitle' | fdTranslate }}
+    {{ ('platformVHD.defineConditionTitle' | fdTranslate)() }}
 </h5>
 @for (item of _conditions; track _trackByKeyAndType(i, item); let i = $index) {
     <fd-layout-grid class="condition-row">
@@ -73,7 +73,7 @@
                                         fdp-condition-count-message
                                         [maxCharacters]="_rules.maxCharactersHintCount"
                                         type="text"
-                                        [placeholder]="'platformVHD.defineConditionFromPlaceholder' | fdTranslate"
+                                        [placeholder]="('platformVHD.defineConditionFromPlaceholder' | fdTranslate)()"
                                         placeholder="from"
                                         required
                                         [state]="fromModel.invalid ? 'error' : null"
@@ -95,7 +95,7 @@
                                         fdp-condition-count-message
                                         [maxCharacters]="_rules.maxCharactersHintCount"
                                         type="text"
-                                        [placeholder]="'platformVHD.defineConditionToPlaceholder' | fdTranslate"
+                                        [placeholder]="('platformVHD.defineConditionToPlaceholder' | fdTranslate)()"
                                         required
                                         [state]="toModel.invalid ? 'error' : null"
                                         [name]="uid + '-' + type + '-to-' + item.id"
@@ -117,7 +117,7 @@
                                         fdp-condition-count-message
                                         [maxCharacters]="_rules.maxCharactersHintCount"
                                         type="text"
-                                        [placeholder]="'platformVHD.defineConditionValuePlaceholder' | fdTranslate"
+                                        [placeholder]="('platformVHD.defineConditionValuePlaceholder' | fdTranslate)()"
                                         [state]="valueModel.invalid ? 'error' : null"
                                         [name]="uid + '-' + type + '-value-' + item.id"
                                         (blur)="_validateConditionValue(item, !!valueModel.valid)"
@@ -139,10 +139,10 @@
             <div class="action-col" fdLayoutGridCol colGrow>
                 <button
                     fd-button
-                    [ariaLabel]="'platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate"
+                    [ariaLabel]="('platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                     glyph="decline"
-                    [title]="'platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate"
+                    [title]="('platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate)()"
                     (click)="removeCondition(i)"
                 ></button>
             </div>
@@ -155,9 +155,9 @@
         <div fdLayoutGridCol class="action-col">
             <button
                 fd-button
-                [attr.aria-label]="'platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate"
-                [label]="'platformVHD.defineConditionAddConditionButtonLabel' | fdTranslate"
-                [title]="'platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate"
+                [attr.aria-label]="('platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate)()"
+                [label]="('platformVHD.defineConditionAddConditionButtonLabel' | fdTranslate)()"
+                [title]="('platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate)()"
                 (click)="addEmptyCondition()"
             ></button>
         </div>
@@ -166,40 +166,40 @@
 <ng-template #conditionStrategyOption let-type="type" let-strategy="strategy">
     @switch (strategy.key) {
         @case ('contains') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelContains' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelContains' | fdTranslate)() }}
         }
         @case ('equalTo') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelEqualTo' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelEqualTo' | fdTranslate)() }}
         }
         @case ('between') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelBetween' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelBetween' | fdTranslate)() }}
         }
         @case ('startsWith') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelStartsWith' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelStartsWith' | fdTranslate)() }}
         }
         @case ('endsWith') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelEndsWith' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelEndsWith' | fdTranslate)() }}
         }
         @case ('lessThan') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelLessThan' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelLessThan' | fdTranslate)() }}
         }
         @case ('lessThanEqual') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelLessThanEqual' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelLessThanEqual' | fdTranslate)() }}
         }
         @case ('greaterThan') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelGreaterThan' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelGreaterThan' | fdTranslate)() }}
         }
         @case ('greaterThanEqual') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelGreaterThanEqual' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelGreaterThanEqual' | fdTranslate)() }}
         }
         @case ('empty') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelEmpty' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelEmpty' | fdTranslate)() }}
         }
         @case ('not_equalTo') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelNotEqualTo' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelNotEqualTo' | fdTranslate)() }}
         }
         @case ('not_empty') {
-            {{ 'platformVHD.defineConditionConditionStrategyLabelNotEmpty' | fdTranslate }}
+            {{ ('platformVHD.defineConditionConditionStrategyLabelNotEmpty' | fdTranslate)() }}
         }
     }
 </ng-template>

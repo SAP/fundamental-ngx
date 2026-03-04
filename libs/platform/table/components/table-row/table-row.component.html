@@ -23,7 +23,7 @@
             display: 'block'
         }"
     >
-        {{ (row.checked ? 'platformTable.deselectSingleRow' : 'platformTable.selectSingleRow') | fdTranslate }}
+        {{ ((row.checked ? 'platformTable.deselectSingleRow' : 'platformTable.selectSingleRow') | fdTranslate)() }}
     </span>
 </ng-template>
 <!-- Row Selection Cell -->
@@ -177,7 +177,7 @@
                             display: 'block'
                         }"
                     >
-                        {{ 'platformTable.emptyCell' | fdTranslate }}
+                        {{ ('platformTable.emptyCell' | fdTranslate)() }}
                     </span>
                 }
                 @if (column?.columnCellTemplate) {
@@ -214,7 +214,7 @@
                 [navigation]="true"
                 [glyph]="navigationIcon()"
                 class="fdp-table__navigation-indicator"
-                [attr.title]="'platformTable.rowNavigateButtonTitle' | fdTranslate"
+                [attr.title]="('platformTable.rowNavigateButtonTitle' | fdTranslate)()"
             ></fd-icon>
         }
     </td>

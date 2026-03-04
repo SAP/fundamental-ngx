@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Riga messaggio di corretta esecuzione',
         closable: 'Chiudibile'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 voce elenco dei risultati.',
         countListResultsPlural: '{0} voci elenco dei risultati',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Utente'
+    },
+    platformIconTabBar: {
+        moreButton: 'Altro'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Voci e condizioni selezionate',

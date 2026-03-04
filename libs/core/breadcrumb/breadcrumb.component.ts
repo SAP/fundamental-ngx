@@ -8,17 +8,16 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnInit,
     Output,
     QueryList,
     ViewChild,
     ViewEncapsulation,
     computed,
+    effect,
     inject,
     input,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -38,7 +37,7 @@ import {
     OverflowLayoutItemDirective
 } from '@fundamental-ngx/core/overflow-layout';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
@@ -96,7 +95,7 @@ export type BreadcrumbSeparatorStyle =
         FdTranslatePipe
     ]
 })
-export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef {
+export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
     /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
     reverse = false;
@@ -167,13 +166,21 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
     });
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    constructor() {
+        effect(() => {
+            const lang = this._langSignal();
+            this._ariaLabel = this._translationResolver.resolve(lang, 'coreBreadcrumb.breadcrumbTrailLabel');
+        });
+    }
 
     /** @hidden */
     onResize(): void {
@@ -186,13 +193,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef
     itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: Event): void {
         $event.preventDefault();
         breadcrumbItem.breadcrumbLink.elementRef.nativeElement.click();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
-            this._ariaLabel = this._translationResolver.resolve(lang, 'coreBreadcrumb.breadcrumbTrailLabel');
-        });
     }
 
     /** @hidden */

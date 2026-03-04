@@ -27,7 +27,7 @@
                             >
                                 <button
                                     fd-button
-                                    [label]="'platformMessagePopover.allErrors' | fdTranslate"
+                                    [label]="('platformMessagePopover.allErrors' | fdTranslate)()"
                                     value="all"
                                 ></button>
                                 @for (type of _errorTypes$(); track type) {

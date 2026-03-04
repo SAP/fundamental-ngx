@@ -85,6 +85,9 @@ export default {
         announcementSuccess: 'Success Message Strip',
         closable: 'Closable'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 artikull i listës së rezultateve.',
         countListResultsPlural: '{count} artikujt e listës së rezultateve.',
@@ -311,6 +314,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Përdoruesi'
+    },
+    platformIconTabBar: {
+        moreButton: 'Më shumë'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Artikujt e zgjedhur dhe të gjendjes',

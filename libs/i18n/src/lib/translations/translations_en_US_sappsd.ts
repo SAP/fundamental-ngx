@@ -86,6 +86,9 @@ export default {
         announcementSuccess: '[[[Ŝűċċēşş Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
         closable: '[[[Ĉĺŏşąƃĺē∙∙∙∙∙∙]]]'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '[[[1 ŗēşűĺţ ĺįşţ įţēɱ.∙∙∙∙∙]]]',
         countListResultsPlural: '[[[{ċŏűŋţ} ŗēşűĺţ ĺįşţ įţēɱş.∙∙∙∙∙∙∙]]]',
@@ -319,6 +322,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: '[[[Ůşēŗ]]]'
+    },
+    platformIconTabBar: {
+        moreButton: '[[[Ṁŏŗē∙∙∙]]]'
     },
     platformVHD: {
         selectedAndConditionLabel: '[[[Ŝēĺēċţēƌ Ĭţēɱş ąŋƌ Ĉŏŋƌįţįŏŋş∙∙∙∙∙∙∙∙∙]]]',

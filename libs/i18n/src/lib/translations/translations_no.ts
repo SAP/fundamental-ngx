@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Bekreftelsesmeldingslinje',
         closable: 'Kan lukkes'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlisteelement.',
         countListResultsPlural: '{count} resultatlisteelementer.',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Bruker'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mer'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valgte elementer og betingelser',

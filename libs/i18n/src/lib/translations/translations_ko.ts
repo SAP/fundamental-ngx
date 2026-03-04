@@ -86,6 +86,9 @@ export default {
         announcementSuccess: '성공 메시지 스트립',
         closable: '닫기 가능'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1개의 결과 리스트 항목이 있습니다.',
         countListResultsPlural: '{count}개의 결과 리스트 항목이 있습니다.',
@@ -315,6 +318,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: '사용자'
+    },
+    platformIconTabBar: {
+        moreButton: '더보기'
     },
     platformVHD: {
         selectedAndConditionLabel: '선택한 항목과 조건',

@@ -1,0 +1,73 @@
+<div class="patch-provider-example">
+    <fd-message-strip [type]="'information'" [dismissible]="false">
+        <p>
+            <strong>Provider-based patching:</strong> This example uses <code>patchLanguage()</code> in the providers
+            array to override translations for the entire component scope. Notice how the textarea counter messages are
+            customized without using the <code>fdPatchLanguage</code> directive.
+        </p>
+    </fd-message-strip>
+
+    <div class="fd-margin-top--sm">
+        <h4>Textarea with Custom Counter Messages</h4>
+        <p>The character counter messages are customized via the <code>patchLanguage()</code> provider function.</p>
+
+        <!-- This textarea will use the patched translations -->
+        <fdp-textarea
+            [(ngModel)]="textValue"
+            [maxLength]="50"
+            [showExceededText]="true"
+            [counterMessageConfiguration]="{ disabled: false }"
+        >
+        </fdp-textarea>
+
+        <p class="fd-margin-top--sm">
+            <strong>Try typing:</strong> Watch how the character counter uses our custom messages instead of the default
+            ones.
+        </p>
+    </div>
+
+    <div class="fd-margin-top--lg fd-padding--md" style="background-color: var(--sapBackgroundColor)">
+        <h4>When to Use Provider vs. Directive</h4>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem" class="fd-margin-top--md">
+            <div>
+                <h5>Use patchLanguage() Provider When:</h5>
+                <ul>
+                    <li>✅ Multiple components need same patches</li>
+                    <li>✅ Want to patch entire module/route</li>
+                    <li>✅ Cleaner code (no template clutter)</li>
+                    <li>✅ Patches are static/known at compile time</li>
+                </ul>
+
+                <strong>Example use cases:</strong>
+                <ul>
+                    <li>Multi-tenant apps (per-customer wording)</li>
+                    <li>Feature modules with consistent terminology</li>
+                    <li>Locale variants (US vs. UK English)</li>
+                </ul>
+            </div>
+
+            <div>
+                <h5>Use [fdPatchLanguage] Directive When:</h5>
+                <ul>
+                    <li>✅ Only one specific element needs patching</li>
+                    <li>✅ Dynamic patches based on template data</li>
+                    <li>✅ Conditional patches (if/else)</li>
+                    <li>✅ Component-specific overrides</li>
+                </ul>
+
+                <strong>Example use cases:</strong>
+                <ul>
+                    <li>Context-specific wording for same component</li>
+                    <li>User preference-based translations</li>
+                    <li>A/B testing different copy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="fd-margin-top--md fd-padding--md" style="background-color: var(--sapInformationBackground)">
+            <strong>💡 Pro Tip:</strong> You can use both! Apply patchLanguage() for broad changes and [fdPatchLanguage]
+            for specific overrides. The directive takes precedence over the provider.
+        </div>
+    </div>
+</div>

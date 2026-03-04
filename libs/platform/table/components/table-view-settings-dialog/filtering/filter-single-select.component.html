@@ -7,7 +7,7 @@
             [ngModel]="_value"
             (ngModelChange)="_onValueChange($event)"
         ></fd-radio-button>
-        <span fd-list-title>{{ 'platformTable.filterDialogNotFilteredLabel' | fdTranslate }}</span>
+        <span fd-list-title>{{ ('platformTable.filterDialogNotFilteredLabel' | fdTranslate)() }}</span>
     </li>
     @for (option of options; track option) {
         <li fd-list-item [selected]="option.value === _value">

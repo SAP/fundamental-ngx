@@ -26,7 +26,7 @@
                 @if (!isMobileAdvancedSearchActive) {
                     <div
                         class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row"
-                        [attr.aria-label]="'platformVHD.selectedAndConditionLabel' | fdTranslate"
+                        [attr.aria-label]="('platformVHD.selectedAndConditionLabel' | fdTranslate)()"
                     >
                         <span
                             role="heading"
@@ -36,10 +36,10 @@
                             [id]="id + '-selected-item'"
                         >
                             @if (hasSelectedAndConditions) {
-                                {{ 'platformVHD.selectedAndConditionLabel' | fdTranslate }}
+                                {{ ('platformVHD.selectedAndConditionLabel' | fdTranslate)() }}
                                 ({{ selectedItems.length + validConditions.length }})
                             } @else {
-                                {{ 'platformVHD.selectedEmptyLabel' | fdTranslate }}
+                                {{ ('platformVHD.selectedEmptyLabel' | fdTranslate)() }}
                             }
                         </span>
                         <div class="fdp-value-help-dialog__tokens-wrapper">
@@ -89,9 +89,9 @@
                                 fd-button
                                 [disabled]="!hasSelectedAndConditions"
                                 fdType="transparent"
-                                [title]="'platformVHD.footerClearSelectedTitle' | fdTranslate"
+                                [title]="('platformVHD.footerClearSelectedTitle' | fdTranslate)()"
                                 glyph="decline"
-                                [ariaLabel]="'platformVHD.footerClearSelectedAriaLabel' | fdTranslate"
+                                [ariaLabel]="('platformVHD.footerClearSelectedAriaLabel' | fdTranslate)()"
                             ></button>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <button
                             fd-button
                             data-go-advanced
-                            [label]="'platformVHD.searchButtonLabel' | fdTranslate"
+                            [label]="('platformVHD.searchButtonLabel' | fdTranslate)()"
                             fdType="emphasized"
                             (click)="searchAdvanced()"
                         ></button>
@@ -111,7 +111,7 @@
                             fd-button
                             data-succes
                             [disabled]="loadingState"
-                            [label]="'platformVHD.successButtonLabel' | fdTranslate"
+                            [label]="('platformVHD.successButtonLabel' | fdTranslate)()"
                             fdType="emphasized"
                             (click)="success()"
                         ></button>
@@ -119,7 +119,7 @@
                     <button
                         fd-button
                         data-dismiss-dialog
-                        [label]="'platformVHD.cancelButtonLabel' | fdTranslate"
+                        [label]="('platformVHD.cancelButtonLabel' | fdTranslate)()"
                         fdType="transparent"
                         (click)="dismiss()"
                     ></button>
@@ -136,7 +136,7 @@
                     <div fdLayoutGridRow>
                         <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                             <fdp-search-field
-                                [placeholder]="'platformVHD.searchPlaceholder' | fdTranslate"
+                                [placeholder]="('platformVHD.searchPlaceholder' | fdTranslate)()"
                                 (searchSubmit)="search()"
                                 (inputChange)="_mainSearch = $event.text"
                             ></fdp-search-field>
@@ -157,12 +157,14 @@
                                             fd-button
                                             fdType="transparent"
                                             [label]="
-                                                (mobile
-                                                    ? 'platformVHD.searchAdvancedSearchLabel'
-                                                    : isOpenAdvanced
-                                                      ? 'platformVHD.searchHideAdvancedSearchLabel'
-                                                      : 'platformVHD.searchShowAdvancedSearchLabel'
-                                                ) | fdTranslate
+                                                (
+                                                    (mobile
+                                                        ? 'platformVHD.searchAdvancedSearchLabel'
+                                                        : isOpenAdvanced
+                                                          ? 'platformVHD.searchHideAdvancedSearchLabel'
+                                                          : 'platformVHD.searchShowAdvancedSearchLabel'
+                                                    ) | fdTranslate
+                                                )()
                                             "
                                             (click)="toggleAdvancedSearch()"
                                         ></button>
@@ -172,7 +174,7 @@
                                         type="submit"
                                         fd-button
                                         fdType="emphasized"
-                                        [label]="'platformVHD.searchButtonLabel' | fdTranslate"
+                                        [label]="('platformVHD.searchButtonLabel' | fdTranslate)()"
                                         (click)="filter()"
                                     ></button>
                                 </fd-toolbar>
@@ -232,10 +234,12 @@
                                                 fdType="transparent"
                                                 (click)="toggleShownFilters()"
                                                 [label]="
-                                                    (isShowAllFilters
-                                                        ? 'platformVHD.searchHideAllAdvancedSearchLabel'
-                                                        : 'platformVHD.searchShowAllAdvancedSearchLabel'
-                                                    ) | fdTranslate
+                                                    (
+                                                        (isShowAllFilters
+                                                            ? 'platformVHD.searchHideAllAdvancedSearchLabel'
+                                                            : 'platformVHD.searchShowAllAdvancedSearchLabel'
+                                                        ) | fdTranslate
+                                                    )()
                                                 "
                                             ></button>
                                         </div>
@@ -269,7 +273,7 @@
             [loading]="loadingState && !_firstLoadingDone"
             [uid]="id"
             [displayedData]="_displayedData"
-            [tabTitle]="'platformVHD.selectTabTitle' | fdTranslate"
+            [tabTitle]="('platformVHD.selectTabTitle' | fdTranslate)()"
             [mobile]="mobile"
             [selection]="searchSelection"
             [uniqueKey]="uniqueKey"
@@ -287,7 +291,7 @@
             [strategyLabels]="defineStrategyLabels"
             [conditions]="conditionItems"
             [uid]="id"
-            [tabTitle]="'platformVHD.defineTabTitle' | fdTranslate"
+            [tabTitle]="('platformVHD.defineTabTitle' | fdTranslate)()"
             [mobile]="mobile"
             (conditionChange)="onConditionChange($event)"
         ></fdp-define-tab>
@@ -303,7 +307,7 @@
             glyph="navigation-left-arrow"
             fdType="transparent"
             (click)="switchTab()"
-            [title]="'platformVHD.selectMobileTabBackBtnTitle' | fdTranslate"
+            [title]="('platformVHD.selectMobileTabBackBtnTitle' | fdTranslate)()"
         ></button>
         <span role="heading" [attr.aria-level]="_headingLevel()" fd-title>{{ title }}</span>
     }
@@ -311,7 +315,7 @@
         <a
             fd-list-link
             (click)="switchTab(type)"
-            [title]="'platformVHD.selectMobileTabBtnOpenDialogLabel' | fdTranslate"
+            [title]="('platformVHD.selectMobileTabBtnOpenDialogLabel' | fdTranslate)()"
         >
             <span fd-list-title>{{ title }}</span>
             <i fd-list-icon glyph="navigation-right-arrow"></i>
@@ -321,7 +325,7 @@
 <ng-template #advancedHeader>
     <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
     <span role="heading" [attr.aria-level]="_headingLevel()" fd-title>{{
-        'platformVHD.searchAdvancedSearchLabel' | fdTranslate
+        ('platformVHD.searchAdvancedSearchLabel' | fdTranslate)()
     }}</span>
 </ng-template>
 <ng-template #desktopDialogTitle>
@@ -349,7 +353,7 @@
                         fd-tab-link
                         [active]="selectedTab === _tabTypes.selectFromList"
                         [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
-                        ><span fd-tab-tag>{{ 'platformVHD.selectTabTitle' | fdTranslate }}</span></a
+                        ><span fd-tab-tag>{{ ('platformVHD.selectTabTitle' | fdTranslate)() }}</span></a
                     >
                 </div>
             }
@@ -359,7 +363,7 @@
                         fd-tab-link
                         [active]="selectedTab === _tabTypes.defineConditions"
                         [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
-                        ><span fd-tab-tag>{{ 'platformVHD.defineTabTitle' | fdTranslate }}</span></a
+                        ><span fd-tab-tag>{{ ('platformVHD.defineTabTitle' | fdTranslate)() }}</span></a
                     >
                 </div>
             }
@@ -373,7 +377,7 @@
                 <div fd-bar [inPage]="true">
                     <div fd-bar-left>
                         <fd-bar-element>
-                            {{ 'platformVHD.selectTabTitle' | fdTranslate }}
+                            {{ ('platformVHD.selectTabTitle' | fdTranslate)() }}
                         </fd-bar-element>
                     </div>
                     <div fd-bar-right>
@@ -382,8 +386,10 @@
                                 glyph="navigation-right-arrow"
                                 (click)="switchTab(_tabTypes.selectFromList)"
                                 [title]="
-                                    'platformVHD.selectMobileTabTitle'
-                                        | fdTranslate: { title: 'platformVHD.selectTabTitle' | fdTranslate }
+                                    (
+                                        'platformVHD.selectMobileTabTitle'
+                                        | fdTranslate: { title: ('platformVHD.selectTabTitle' | fdTranslate)() }
+                                    )()
                                 "
                             ></fd-button-bar>
                         </fd-bar-element>
@@ -394,7 +400,7 @@
                 <div fd-bar [inPage]="true">
                     <div fd-bar-left>
                         <fd-bar-element>
-                            {{ 'platformVHD.defineTabTitle' | fdTranslate }}
+                            {{ ('platformVHD.defineTabTitle' | fdTranslate)() }}
                         </fd-bar-element>
                     </div>
                     <div fd-bar-right>
@@ -402,8 +408,10 @@
                             <fd-button-bar
                                 glyph="navigation-right-arrow"
                                 [title]="
-                                    'platformVHD.selectMobileTabTitle'
-                                        | fdTranslate: { title: 'platformVHD.defineTabTitle' | fdTranslate }
+                                    (
+                                        'platformVHD.selectMobileTabTitle'
+                                        | fdTranslate: { title: ('platformVHD.defineTabTitle' | fdTranslate)() }
+                                    )()
                                 "
                                 (click)="switchTab(_tabTypes.defineConditions)"
                             >
@@ -449,8 +457,10 @@
         @if (item.strategy === 'not_empty') {
             !(<ng-template [ngTemplateOutlet]="emptyConditionText"></ng-template>)
         } @else {
-            &lt;{{ 'platformVHD.selectMobileConditionEmpty' | fdTranslate }}&gt;
+            &lt;{{ ('platformVHD.selectMobileConditionEmpty' | fdTranslate)() }}&gt;
         }
     }
 </ng-template>
-<ng-template #emptyConditionText> &lt;{{ 'platformVHD.selectMobileConditionEmpty' | fdTranslate }}&gt; </ng-template>
+<ng-template #emptyConditionText>
+    &lt;{{ ('platformVHD.selectMobileConditionEmpty' | fdTranslate)() }}&gt;
+</ng-template>

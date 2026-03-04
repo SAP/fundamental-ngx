@@ -3,7 +3,7 @@
         <ng-template fdkTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4">{{ 'platformTable.P13FilterDialogHeader' | fdTranslate }}</h4>
+                    <h4 fd-title [headerSize]="4">{{ ('platformTable.P13FilterDialogHeader' | fdTranslate)() }}</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -43,7 +43,7 @@
                                     [attr.aria-label]="
                                         'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
                                     "
-                                    [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                    [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
                                     (click)="_removeRule(rule, _includeRules)"
                                 ></button>
                                 @if (_includeRules.length - 1 === $index) {
@@ -54,7 +54,7 @@
                                         [attr.aria-label]="
                                             'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
                                         "
-                                        [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                        [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
                                         (click)="_addNewRule(_includeRules)"
                                     ></button>
                                 }
@@ -93,7 +93,7 @@
                                     [attr.aria-label]="
                                         'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
                                     "
-                                    [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                    [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
                                     (click)="_removeRule(rule, _excludeRules)"
                                 ></button>
                                 @if (_excludeRules.length - 1 === $index) {
@@ -104,7 +104,7 @@
                                         [attr.aria-label]="
                                             'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
                                         "
-                                        [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                        [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
                                         (click)="_addNewRule(_excludeRules)"
                                     ></button>
                                 }
@@ -118,12 +118,12 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [label]="'platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate"
+            [label]="('platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate)()"
             (click)="confirm()"
         ></fd-button-bar>
         <fd-button-bar
             fdType="transparent"
-            [label]="'platformTable.P13FilterDialogCancelBtnLabel' | fdTranslate"
+            [label]="('platformTable.P13FilterDialogCancelBtnLabel' | fdTranslate)()"
             (click)="cancel()"
         ></fd-button-bar>
     </fd-dialog-footer>

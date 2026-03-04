@@ -1,14 +1,82 @@
-<fd-segmented-button [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
-    <button fd-button label="English" value="en"></button>
-    <button fd-button label="Ukrainian" value="ua"></button>
-    <button fd-button label="Custom" value="custom"></button>
-</fd-segmented-button>
+<div class="language-change-example">
+    <div class="fd-margin-top--md">
+        <!-- Language selector -->
+        <label fd-form-label>Select Language:</label>
+        <fd-segmented-button [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
+            <button fd-button label="English" value="en"></button>
+            <button fd-button label="Ukrainian (Українська)" value="ua"></button>
+            <button fd-button label="Custom" value="custom"></button>
+        </fd-segmented-button>
 
-<label fd-form-label for="textarea-language-change">Use controls above to change language of this textarea</label>
-<fdp-textarea
-    [id]="'textarea-language-change'"
-    name="textarea-language-change"
-    [maxLength]="10"
-    [showExceededText]="true"
->
-</fdp-textarea>
+        <!-- Current language/locale info -->
+        <div class="fd-margin-top--md fd-padding--md" style="background-color: var(--sapBackgroundColor)">
+            <strong>Current Settings:</strong> {{ currentLanguageInfo() }}
+        </div>
+    </div>
+
+    <!-- Visual demonstration section -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Translated UI Elements (update automatically):</label>
+
+        <!-- Show multiple translated elements so language change is obvious -->
+        <div class="fd-margin-top--sm">
+            <!-- Translation 1: Date Input Label -->
+            <div
+                class="fd-padding--sm fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.dateInputLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateInputLabel() }}</div>
+            </div>
+
+            <!-- Translation 2: Date Range Label -->
+            <div
+                class="fd-padding--sm fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.dateRangeInputLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateRangeLabel() }}</div>
+            </div>
+
+            <!-- Translation 3: Calendar Toggle Label -->
+            <div
+                class="fd-padding--sm fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.displayCalendarToggleLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ calendarToggleLabel() }}</div>
+            </div>
+
+            <!-- Translation 4: Using pipe in button -->
+            <div class="fd-padding--sm" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+                <code>Using pipe in button label:</code>
+                <div class="fd-margin-top--sm">
+                    <button
+                        fd-button
+                        [label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
+                        [attr.aria-label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
+                    ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive textarea with counter (shows platform component translations) -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label for="textarea-language-change"
+            >Platform Textarea (counter messages translate automatically):</label
+        >
+        <fdp-textarea
+            [id]="'textarea-language-change'"
+            name="textarea-language-change"
+            [maxLength]="10"
+            [showExceededText]="true"
+            placeholder="Type more than 10 characters to see counter messages..."
+        >
+        </fdp-textarea>
+        <p class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
+            💡 <strong>Tip:</strong> Type text longer than 10 characters to see the counter messages update when you
+            change languages.
+        </p>
+    </div>
+</div>

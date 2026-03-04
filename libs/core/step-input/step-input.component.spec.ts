@@ -1,15 +1,14 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
-import { BehaviorSubject } from 'rxjs';
+import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { StepInputComponent } from './step-input.component';
 
 const initialValue = 100;
 
-const lang$ = new BehaviorSubject(FD_LANGUAGE_ENGLISH);
+const langSignal = signal(FD_LANGUAGE_ENGLISH);
 
 @Component({
     template: `
@@ -30,8 +29,8 @@ const lang$ = new BehaviorSubject(FD_LANGUAGE_ENGLISH);
     `,
     providers: [
         {
-            provide: FD_LANGUAGE,
-            useValue: lang$
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: langSignal
         }
     ],
     standalone: true,
@@ -203,9 +202,9 @@ describe('StepInputComponent', () => {
         const decrementButtonTitle = 'Dec Button Title';
 
         testComponent.inputTitle = inputTitle;
-        lang$.next({
-            ...lang$.value,
-            coreStepInput: { ...lang$.value.coreStepInput, incrementButtonTitle, decrementButtonTitle }
+        langSignal.set({
+            ...langSignal(),
+            coreStepInput: { ...langSignal().coreStepInput, incrementButtonTitle, decrementButtonTitle }
         });
 
         await whenStable(fixture);

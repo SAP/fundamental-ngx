@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Pasek komunikatów o powodzeniu',
         closable: 'Możliwy do zamknięcia'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 pozycja listy wyników.',
         countListResultsPlural: 'Pozycje listy wyników: {count}.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Użytkownik'
+    },
+    platformIconTabBar: {
+        moreButton: 'Więcej'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Wybrane pozycje i warunki',

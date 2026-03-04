@@ -14,7 +14,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { FD_LANGUAGE, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { patchHeaderI18nTexts } from '../../patch-header-i18n-texts';
@@ -28,7 +28,7 @@ let dynamicPageSubHeaderId = 0;
     imports: [ButtonComponent, IconComponent],
     providers: [
         {
-            provide: FD_LANGUAGE,
+            provide: FD_LANGUAGE_SIGNAL,
             useFactory: patchHeaderI18nTexts,
             deps: [[new Optional(), DynamicPageConfig]]
         }

@@ -86,6 +86,9 @@ export default {
         announcementSuccess: '正常終了メッセージストリップ',
         closable: 'クローズ可能'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '結果の一覧項目は1件です。',
         countListResultsPlural: '結果の一覧項目は{count}件です。',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'ユーザー'
+    },
+    platformIconTabBar: {
+        moreButton: '詳細'
     },
     platformVHD: {
         selectedAndConditionLabel: '選択済み項目および条件',

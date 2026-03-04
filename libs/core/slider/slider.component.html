@@ -81,8 +81,8 @@
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? singleSliderPopover : null"
-        [attr.aria-valuemin]="'coreSlider.singleValueminDetails' | fdTranslate: { value: minValue }"
-        [attr.aria-valuemax]="'coreSlider.singleValuemaxDetails' | fdTranslate: { value: maxValue }"
+        [attr.aria-valuemin]="('coreSlider.singleValueminDetails' | fdTranslate: { value: minValue })()"
+        [attr.aria-valuemax]="('coreSlider.singleValuemaxDetails' | fdTranslate: { value: maxValue })()"
         [attr.aria-valuenow]="
             _useSliderValuePrefix
                 ? ('coreSlider.singleValueNowDetails'
@@ -131,8 +131,8 @@
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover1 : null"
-        [attr.aria-valuemin]="'coreSlider.multipleHandle1ValueminDetails' | fdTranslate: { value: minValue }"
-        [attr.aria-valuemax]="'coreSlider.multipleHandle1ValuemaxDetails' | fdTranslate: { value: maxValue }"
+        [attr.aria-valuemin]="('coreSlider.multipleHandle1ValueminDetails' | fdTranslate: { value: minValue })()"
+        [attr.aria-valuemax]="('coreSlider.multipleHandle1ValuemaxDetails' | fdTranslate: { value: maxValue })()"
         [attr.aria-valuenow]="
             _useSliderValuePrefix
                 ? ('coreSlider.multipleHandle1ValueNowDetails'
@@ -164,8 +164,8 @@
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover2 : null"
-        [attr.aria-valuemin]="'coreSlider.multipleHandle2ValueminDetails' | fdTranslate: { value: minValue }"
-        [attr.aria-valuemax]="'coreSlider.multipleHandle2ValuemaxDetails' | fdTranslate: { value: maxValue }"
+        [attr.aria-valuemin]="('coreSlider.multipleHandle2ValueminDetails' | fdTranslate: { value: minValue })()"
+        [attr.aria-valuemax]="('coreSlider.multipleHandle2ValuemaxDetails' | fdTranslate: { value: maxValue })()"
         [attr.aria-valuenow]="
             _useSliderValuePrefix
                 ? ('coreSlider.multipleHandle2ValueNowDetails'

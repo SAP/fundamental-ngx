@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Onnistumisilmoitusnauha',
         closable: 'Suljettava'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 tulosluettelon kohde.',
         countListResultsPlural: '{count} tulosluettelon kohdetta.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Käyttäjä'
+    },
+    platformIconTabBar: {
+        moreButton: 'Lisää'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valitut kohteet ja ehdot',

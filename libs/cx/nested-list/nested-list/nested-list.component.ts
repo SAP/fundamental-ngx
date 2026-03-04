@@ -7,19 +7,20 @@ import {
     DestroyRef,
     ElementRef,
     HostBinding,
-    Inject,
+    Injector,
     Input,
     Optional,
     QueryList,
+    effect,
     forwardRef,
     inject
 } from '@angular/core';
-import { Observable, combineLatest, startWith } from 'rxjs';
+import { startWith } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NestedItemComponent } from '../nested-item/nested-item.component';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListHeaderDirective } from '../nested-list-directives';
@@ -99,13 +100,18 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(
         @Optional() private _nestedItemService: NestedItemService,
         private _nestedListStateService: NestedListStateService,
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
-        private _changeDetectionRef: ChangeDetectorRef,
-        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>
+        private _changeDetectionRef: ChangeDetectorRef
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
@@ -129,14 +135,24 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
 
         this._setAccessibilityProperties(nestedLevel);
 
-        combineLatest([this._language$, this.nestedItems.changes.pipe(startWith(undefined))])
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(([lang]) => {
+        // Register effect with explicit injector context
+        effect(
+            () => {
+                const lang = this._langSignal();
                 this._nestedListKeyboardService.refresh$.next();
                 this._setAriaAttributes(nestedLevel, lang);
-                /** Adding class with the nested level */
-                this._elementRef.nativeElement.classList.add('level-' + nestedLevel);
-            });
+            },
+            { injector: this._injector }
+        );
+
+        // React to nested items changes
+        this.nestedItems.changes.pipe(startWith(undefined), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            const lang = this._langSignal();
+            this._nestedListKeyboardService.refresh$.next();
+            this._setAriaAttributes(nestedLevel, lang);
+            /** Adding class with the nested level */
+            this._elementRef.nativeElement.classList.add('level-' + nestedLevel);
+        });
     }
 
     /**

@@ -1,6 +1,5 @@
-import { Component, computed, effect, inject, LOCALE_ID } from '@angular/core';
+import { Component, computed, inject, LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FdLanguage } from '../models';

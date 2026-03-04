@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Лента със съобщение за успешно изпълнение',
         closable: 'Може да се затвори'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 позиция от списъка с резултати.',
         countListResultsPlural: '{count} позиции от списъка с резултати.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Потребител'
+    },
+    platformIconTabBar: {
+        moreButton: 'Още'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Избрани позиции и условия',

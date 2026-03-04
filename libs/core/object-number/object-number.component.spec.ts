@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Signal, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -9,10 +9,10 @@ import { ObjectNumberComponent } from './object-number.component';
     standalone: true
 })
 class MockFdTranslatePipe implements PipeTransform {
-    transform(value: string): string {
-        // For testing, just return the translation key itself
+    transform(value: string): Signal<string> {
+        // For testing, return a signal that returns the translation key itself
         // This way we can verify the correct keys are being used
-        return value;
+        return signal(value);
     }
 }
 

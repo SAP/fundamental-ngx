@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FdLanguage, FdLanguagePatch } from '../models';
 import { patchedObj, patchLanguage } from './patch-language';
-import { FD_LANGUAGE } from './tokens';
+import { FD_LANGUAGE_SIGNAL } from './tokens';
 
 describe('patchLanguage', () => {
-    let lang$: BehaviorSubject<FdLanguage>;
+    let langSignal: ReturnType<typeof signal<FdLanguage>>;
 
     beforeEach(() => {
-        lang$ = new BehaviorSubject<FdLanguage>(FD_LANGUAGE_ENGLISH);
+        langSignal = signal<FdLanguage>(FD_LANGUAGE_ENGLISH);
     });
 
     describe('patchedObj helper', () => {
@@ -28,11 +27,13 @@ describe('patchLanguage', () => {
         });
 
         it('should call patch function and return result when patch is a function', () => {
-            const patchFn = jest.fn((lang: FdLanguage): FdLanguagePatch => ({
-                platformApprovalFlow: {
-                    defaultWatchersLabel: `Modified ${lang.platformApprovalFlow.defaultWatchersLabel}`
-                }
-            }));
+            const patchFn = jest.fn(
+                (lang: FdLanguage): FdLanguagePatch => ({
+                    platformApprovalFlow: {
+                        defaultWatchersLabel: `Modified ${lang.platformApprovalFlow.defaultWatchersLabel}`
+                    }
+                })
+            );
 
             const result = patchedObj(FD_LANGUAGE_ENGLISH, patchFn);
 
@@ -87,14 +88,14 @@ describe('patchLanguage', () => {
 
             const provider = patchLanguage(patch);
 
-            expect(provider.provide).toBe(FD_LANGUAGE);
+            expect(provider.provide).toBe(FD_LANGUAGE_SIGNAL);
             expect(provider.useFactory).toBeDefined();
             expect(typeof provider.useFactory).toBe('function');
             expect(provider.deps).toBeDefined();
             expect(Array.isArray(provider.deps)).toBe(true);
         });
 
-        it('should patch language with static object', async () => {
+        it('should patch language with static object', () => {
             const patch: FdLanguagePatch = {
                 platformApprovalFlow: {
                     defaultWatchersLabel: 'Patched Watchers'
@@ -113,23 +114,23 @@ describe('patchLanguage', () => {
                 imports: [TestComponent],
                 providers: [
                     {
-                        provide: FD_LANGUAGE,
-                        useValue: lang$
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
                     }
                 ]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            const patchedLang$ = fixture.debugElement.injector.get(FD_LANGUAGE);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
 
-            const language = await firstValueFrom(patchedLang$);
+            const language = patchedLangSignal();
 
             expect(language.platformApprovalFlow.defaultWatchersLabel).toBe('Patched Watchers');
             // Other values should remain
             expect(language.platformApprovalFlow.defaultTitle).toBe('Approval process');
         });
 
-        it('should patch language with function', async () => {
+        it('should patch language with function', () => {
             const patchFn = (lang: FdLanguage): FdLanguagePatch => ({
                 platformApprovalFlow: {
                     defaultWatchersLabel: `${lang.platformApprovalFlow.defaultWatchersLabel} (Modified)`
@@ -148,21 +149,21 @@ describe('patchLanguage', () => {
                 imports: [TestComponent],
                 providers: [
                     {
-                        provide: FD_LANGUAGE,
-                        useValue: lang$
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
                     }
                 ]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            const patchedLang$ = fixture.debugElement.injector.get(FD_LANGUAGE);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
 
-            const language = await firstValueFrom(patchedLang$);
+            const language = patchedLangSignal();
 
             expect(language.platformApprovalFlow.defaultWatchersLabel).toBe('Watchers (Modified)');
         });
 
-        it('should react to parent language changes', async () => {
+        it('should react to parent language changes', () => {
             const patch: FdLanguagePatch = {
                 platformApprovalFlow: {
                     defaultWatchersLabel: 'Always Patched'
@@ -181,23 +182,20 @@ describe('patchLanguage', () => {
                 imports: [TestComponent],
                 providers: [
                     {
-                        provide: FD_LANGUAGE,
-                        useValue: lang$
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
                     }
                 ]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            const patchedLang$ = fixture.debugElement.injector.get(FD_LANGUAGE);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
 
-            const emissions: FdLanguage[] = [];
-            patchedLang$.subscribe((lang) => emissions.push(lang));
-
-            // Initial emission
-            expect(emissions[0].platformApprovalFlow.defaultWatchersLabel).toBe('Always Patched');
+            // Initial value
+            expect(patchedLangSignal().platformApprovalFlow.defaultWatchersLabel).toBe('Always Patched');
 
             // Change parent language
-            lang$.next({
+            langSignal.set({
                 ...FD_LANGUAGE_ENGLISH,
                 platformApprovalFlow: {
                     ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
@@ -205,13 +203,13 @@ describe('patchLanguage', () => {
                 }
             });
 
-            // Should emit again with patch applied
-            expect(emissions.length).toBeGreaterThan(1);
-            expect(emissions[1].platformApprovalFlow.defaultWatchersLabel).toBe('Always Patched');
-            expect(emissions[1].platformApprovalFlow.defaultTitle).toBe('Changed Title');
+            // Should reactively update with patch applied
+            fixture.detectChanges();
+            expect(patchedLangSignal().platformApprovalFlow.defaultWatchersLabel).toBe('Always Patched');
+            expect(patchedLangSignal().platformApprovalFlow.defaultTitle).toBe('Changed Title');
         });
 
-        it('should not mutate original language object', async () => {
+        it('should not mutate original language object', () => {
             const originalLabel = FD_LANGUAGE_ENGLISH.platformApprovalFlow.defaultWatchersLabel;
             const patch: FdLanguagePatch = {
                 platformApprovalFlow: {
@@ -231,22 +229,22 @@ describe('patchLanguage', () => {
                 imports: [TestComponent],
                 providers: [
                     {
-                        provide: FD_LANGUAGE,
-                        useValue: lang$
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
                     }
                 ]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            const patchedLang$ = fixture.debugElement.injector.get(FD_LANGUAGE);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
 
-            await firstValueFrom(patchedLang$);
+            patchedLangSignal();
 
             // Original should be unchanged
             expect(FD_LANGUAGE_ENGLISH.platformApprovalFlow.defaultWatchersLabel).toBe(originalLabel);
         });
 
-        it('should handle partial patches without losing other translations', async () => {
+        it('should handle partial patches without losing other translations', () => {
             const patch: FdLanguagePatch = {
                 platformApprovalFlow: {
                     defaultWatchersLabel: 'Only This Changed'
@@ -266,16 +264,16 @@ describe('patchLanguage', () => {
                 imports: [TestComponent],
                 providers: [
                     {
-                        provide: FD_LANGUAGE,
-                        useValue: lang$
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
                     }
                 ]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            const patchedLang$ = fixture.debugElement.injector.get(FD_LANGUAGE);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
 
-            const language = await firstValueFrom(patchedLang$);
+            const language = patchedLangSignal();
 
             // Patched value
             expect(language.platformApprovalFlow.defaultWatchersLabel).toBe('Only This Changed');
@@ -285,7 +283,7 @@ describe('patchLanguage', () => {
             expect(language.platformApprovalFlow.nextButtonAriaLabel).toBe('Go to next slide');
         });
 
-        it('should handle function values in patch', async () => {
+        it('should handle function values in patch', () => {
             const customFn = jest.fn((params) => `Custom count: ${params.count}`);
             const patch: FdLanguagePatch = {
                 platformApprovalFlow: {
@@ -305,16 +303,16 @@ describe('patchLanguage', () => {
                 imports: [TestComponent],
                 providers: [
                     {
-                        provide: FD_LANGUAGE,
-                        useValue: lang$
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
                     }
                 ]
             });
 
             const fixture = TestBed.createComponent(TestComponent);
-            const patchedLang$ = fixture.debugElement.injector.get(FD_LANGUAGE);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
 
-            const language = await firstValueFrom(patchedLang$);
+            const language = patchedLangSignal();
 
             // Function should be callable
             const result = (language.platformApprovalFlow.nodeMembersCount as any)({ count: 42 });

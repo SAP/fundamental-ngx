@@ -1,4 +1,4 @@
-import { inject, InjectionToken, LOCALE_ID, signal, Signal, WritableSignal } from '@angular/core';
+import { inject, InjectionToken, isDevMode, LOCALE_ID, signal, Signal, WritableSignal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
@@ -18,8 +18,6 @@ import { FdLanguage } from '../models/fd-language';
  *   resolveTranslation(this.language(), 'coreButton.label')
  * );
  * ```
- *
- * @since v2.0
  */
 export const FD_LANGUAGE_SIGNAL = new InjectionToken<WritableSignal<FdLanguage>>(
     'Language signal for @fundamental-ngx packages',
@@ -40,8 +38,6 @@ export const FD_LANGUAGE_SIGNAL = new InjectionToken<WritableSignal<FdLanguage>>
  *   formatDate(this.date, this.locale())
  * );
  * ```
- *
- * @since v2.0
  */
 export const FD_LOCALE_SIGNAL = new InjectionToken<WritableSignal<string>>(
     'Locale signal for @fundamental-ngx packages',
@@ -58,7 +54,7 @@ export const FD_LOCALE_SIGNAL = new InjectionToken<WritableSignal<string>>(
 
 /**
  * @deprecated Use FD_LANGUAGE_SIGNAL instead for better performance and zoneless compatibility.
- * Observable-based language token (legacy). Will be removed in v3.0.
+ * Observable-based language token (legacy). Will be removed in a future version.
  *
  * Migration:
  * ```ts
@@ -76,6 +72,14 @@ export const FD_LANGUAGE = new InjectionToken<Observable<FdLanguage>>(
     {
         providedIn: 'root',
         factory: () => {
+            if (isDevMode()) {
+                console.warn(
+                    '[DEPRECATION] FD_LANGUAGE is deprecated and will be removed in a future version.\n' +
+                        'Use FD_LANGUAGE_SIGNAL instead for better performance and zoneless compatibility.\n' +
+                        'Migration: inject(FD_LANGUAGE_SIGNAL) instead of inject(FD_LANGUAGE)\n' +
+                        'See: https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/MIGRATION.md'
+                );
+            }
             // Automatically derives Observable from signal for backward compatibility
             const languageSignal = inject(FD_LANGUAGE_SIGNAL);
             return toObservable(languageSignal);
@@ -85,7 +89,7 @@ export const FD_LANGUAGE = new InjectionToken<Observable<FdLanguage>>(
 
 /**
  * @deprecated Use FD_LOCALE_SIGNAL instead for better performance and zoneless compatibility.
- * Observable-based locale token (legacy). Will be removed in v3.0.
+ * Observable-based locale token (legacy). Will be removed in a future version.
  *
  * Migration:
  * ```ts
@@ -103,6 +107,14 @@ export const FD_LOCALE = new InjectionToken<Observable<string>>(
     {
         providedIn: 'root',
         factory: () => {
+            if (isDevMode()) {
+                console.warn(
+                    '[DEPRECATION] FD_LOCALE is deprecated and will be removed in a future version.\n' +
+                        'Use FD_LOCALE_SIGNAL instead for better performance and zoneless compatibility.\n' +
+                        'Migration: inject(FD_LOCALE_SIGNAL) instead of inject(FD_LOCALE)\n' +
+                        'See: https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/MIGRATION.md'
+                );
+            }
             // Automatically derives Observable from signal for backward compatibility
             const localeSignal = inject(FD_LOCALE_SIGNAL);
             return toObservable(localeSignal);

@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Sikerüzenetsor',
         closable: 'Bezárható'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 listaelemet kapott eredményül.',
         countListResultsPlural: '{count} listaelemet kapott eredményül.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Felhasználó'
+    },
+    platformIconTabBar: {
+        moreButton: 'Több'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Kiválasztott elemek és feltételek',

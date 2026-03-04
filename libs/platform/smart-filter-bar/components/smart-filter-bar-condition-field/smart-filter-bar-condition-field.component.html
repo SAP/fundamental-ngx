@@ -9,7 +9,7 @@
             [placeholder]="formItem.placeholder || formItem.message"
             [validationStrategy]="['submitted']"
             displayKey="displayValue"
-            [glyphAriaLabel]="'platformSmartFilterBar.manageFieldConditions' | fdTranslate"
+            [glyphAriaLabel]="('platformSmartFilterBar.manageFieldConditions' | fdTranslate)()"
         >
         </fdp-multi-input>
     </ng-container>

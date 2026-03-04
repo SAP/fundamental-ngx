@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Başarı İletisi Satırı',
         closable: 'Kapatılabilir'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 sonuç listesi öğesi.',
         countListResultsPlural: '{0} sonuç listesi öğesi.',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Kullanıcı'
+    },
+    platformIconTabBar: {
+        moreButton: 'Daha Fazla'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Seçilen Öğeler ve Koşullar',

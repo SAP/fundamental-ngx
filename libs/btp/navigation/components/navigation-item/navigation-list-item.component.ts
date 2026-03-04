@@ -25,12 +25,12 @@ import {
     signal,
     viewChild
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { Observable, asyncScheduler, filter, map, observeOn, startWith, take } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
+import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -468,27 +468,19 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _translationResolver = inject(TranslationResolver);
 
     /** Translation signal for snapped popover role description. */
-    private readonly _snappedPopoverRoleDescription$ = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) =>
-                this._translationResolver.resolve(lang, 'btpNavigation.snappedPopoverRoleDescription')
-            )
-        ),
-        { initialValue: 'Navigation List Tree' }
+    private readonly _snappedPopoverRoleDescription$ = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'btpNavigation.snappedPopoverRoleDescription')
     );
 
     /** Translation signal for expander aria-label. */
-    private readonly _expanderAriaLabel$ = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.expanderAriaLabel'))
-        ),
-        { initialValue: 'expand/collapse sub-items' }
+    private readonly _expanderAriaLabel$ = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'btpNavigation.expanderAriaLabel')
     );
 
     private readonly _rtlService = inject(RtlService, { optional: true });

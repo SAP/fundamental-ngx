@@ -1,10 +1,9 @@
 import { ApplicationRef, computed, EnvironmentInjector, runInInjectionContext, signal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
 import { FD_LANGUAGE_ENGLISH } from '../../languages';
 import { FdLanguage } from '../../models';
-import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
+import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL } from '../tokens';
 import { resolveTranslationSignal, resolveTranslationSignalFn } from './resolve-translations-signal';
 
 const testLang: FdLanguage = {
@@ -16,23 +15,23 @@ const testLang: FdLanguage = {
 };
 
 describe('Signal-based Translation Resolution', () => {
-    let lang$: BehaviorSubject<FdLanguage>;
-    let locale$: BehaviorSubject<string>;
+    let langSignal: ReturnType<typeof signal<FdLanguage>>;
+    let localeSignal: ReturnType<typeof signal<string>>;
     let injector: EnvironmentInjector;
 
     beforeEach(() => {
-        lang$ = new BehaviorSubject<FdLanguage>(testLang);
-        locale$ = new BehaviorSubject<string>('en');
+        langSignal = signal<FdLanguage>(testLang);
+        localeSignal = signal<string>('en');
 
         TestBed.configureTestingModule({
             providers: [
                 {
-                    provide: FD_LANGUAGE,
-                    useValue: lang$
+                    provide: FD_LANGUAGE_SIGNAL,
+                    useValue: langSignal
                 },
                 {
-                    provide: FD_LOCALE,
-                    useValue: locale$
+                    provide: FD_LOCALE_SIGNAL,
+                    useValue: localeSignal
                 }
             ]
         });
@@ -74,7 +73,7 @@ describe('Signal-based Translation Resolution', () => {
             expect(translationSignal()).toBe('Approval process');
         });
 
-        it('should react to language changes via observable injection', (done) => {
+        it('should react to language changes via signal injection', () => {
             const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
             const translationSignal = runInInjectionContext(injector, () =>
                 translateFn('platformApprovalFlow.defaultWatchersLabel')
@@ -82,8 +81,8 @@ describe('Signal-based Translation Resolution', () => {
 
             expect(translationSignal()).toBe('Watchers');
 
-            // Change language
-            lang$.next({
+            // Change language signal
+            langSignal.set({
                 ...testLang,
                 platformApprovalFlow: {
                     ...testLang.platformApprovalFlow,
@@ -91,12 +90,8 @@ describe('Signal-based Translation Resolution', () => {
                 }
             });
 
-            // Signal should react to language change
-            TestBed.inject(ApplicationRef).tick();
-            setTimeout(() => {
-                expect(translationSignal()).toBe('Modified Watchers');
-                done();
-            }, 50);
+            // Signal should react immediately (no setTimeout needed)
+            expect(translationSignal()).toBe('Modified Watchers');
         });
 
         it('should work with context parameters', () => {
@@ -120,6 +115,25 @@ describe('Signal-based Translation Resolution', () => {
             // Change context
             ctxSignal.set({ count: 20 });
             expect(translationSignal()).toBe('20 members');
+        });
+
+        it('should work with both signal key and signal context', () => {
+            const keySignal = signal<
+                'platformApprovalFlow.nodeMembersCount' | 'platformApprovalFlow.defaultWatchersLabel'
+            >('platformApprovalFlow.nodeMembersCount');
+            const ctxSignal = signal({ count: 10 });
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () => translateFn(keySignal, ctxSignal));
+
+            expect(translationSignal()).toBe('10 members');
+
+            // Change context only
+            ctxSignal.set({ count: 15 });
+            expect(translationSignal()).toBe('15 members');
+
+            // Change key to one without context
+            keySignal.set('platformApprovalFlow.defaultWatchersLabel');
+            expect(translationSignal()).toBe('Watchers');
         });
 
         it('should use provided language signal option', () => {
@@ -266,8 +280,8 @@ describe('Signal-based Translation Resolution', () => {
 
             expect(upperCaseSignal()).toBe('WATCHERS');
 
-            // Change language
-            lang$.next({
+            // Change language using signal
+            langSignal.set({
                 ...testLang,
                 platformApprovalFlow: {
                     ...testLang.platformApprovalFlow,
@@ -276,10 +290,8 @@ describe('Signal-based Translation Resolution', () => {
             });
 
             TestBed.inject(ApplicationRef).tick();
-            // Computed should update
-            setTimeout(() => {
-                expect(upperCaseSignal()).toBe('NEW VALUE');
-            }, 50);
+            // Computed should update immediately with signals
+            expect(upperCaseSignal()).toBe('NEW VALUE');
         });
     });
 
@@ -332,12 +344,40 @@ describe('Signal-based Translation Resolution', () => {
             expect(translationSignal()).toBe('');
         });
 
-        it('should handle null/undefined gracefully', () => {
+        it('should handle null/undefined key gracefully', () => {
             const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
             // @ts-expect-error: testing null key
             const translationSignal = runInInjectionContext(injector, () => translateFn(null));
 
             expect(translationSignal()).toBe('');
+        });
+
+        it('should handle null context parameter gracefully', () => {
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () =>
+                // @ts-expect-error: testing null context
+                translateFn('platformApprovalFlow.defaultWatchersLabel', null)
+            );
+
+            expect(translationSignal()).toBe('Watchers');
+        });
+
+        it('should handle undefined context parameter gracefully', () => {
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () =>
+                translateFn('platformApprovalFlow.defaultWatchersLabel', undefined as any)
+            );
+
+            expect(translationSignal()).toBe('Watchers');
+        });
+
+        it('should handle empty context object', () => {
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () =>
+                translateFn('platformApprovalFlow.defaultWatchersLabel', {} as any)
+            );
+
+            expect(translationSignal()).toBe('Watchers');
         });
     });
 
@@ -348,7 +388,9 @@ describe('Signal-based Translation Resolution', () => {
             // Create multiple signals
             const signals = Array.from({ length: 100 }, (_, i) =>
                 runInInjectionContext(injector, () =>
-                    translateFn(i % 2 === 0 ? 'platformApprovalFlow.defaultWatchersLabel' : 'platformApprovalFlow.defaultTitle')
+                    translateFn(
+                        i % 2 === 0 ? 'platformApprovalFlow.defaultWatchersLabel' : 'platformApprovalFlow.defaultTitle'
+                    )
                 )
             );
 
@@ -359,6 +401,80 @@ describe('Signal-based Translation Resolution', () => {
 
             // No memory leak assertion (if test completes without hanging, memory is OK)
             expect(signals.length).toBe(100);
+        });
+    });
+
+    describe('edge cases and stress testing', () => {
+        it('should handle rapid language changes without issues', () => {
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () =>
+                translateFn('platformApprovalFlow.defaultWatchersLabel')
+            );
+
+            expect(translationSignal()).toBe('Watchers');
+
+            // Rapidly change language 10 times
+            for (let i = 0; i < 10; i++) {
+                langSignal.set({
+                    ...testLang,
+                    platformApprovalFlow: {
+                        ...testLang.platformApprovalFlow,
+                        defaultWatchersLabel: `Watchers ${i}`
+                    }
+                });
+                expect(translationSignal()).toBe(`Watchers ${i}`);
+            }
+        });
+
+        it('should handle rapid context changes without issues', () => {
+            const ctxSignal = signal({ count: 0 });
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () =>
+                translateFn('platformApprovalFlow.nodeMembersCount', ctxSignal)
+            );
+
+            // Rapidly change context 20 times
+            for (let i = 0; i < 20; i++) {
+                ctxSignal.set({ count: i });
+                expect(translationSignal()).toBe(`${i} members`);
+            }
+        });
+
+        it('should handle rapid key changes without issues', () => {
+            const keySignal = signal<'platformApprovalFlow.defaultWatchersLabel' | 'platformApprovalFlow.defaultTitle'>(
+                'platformApprovalFlow.defaultWatchersLabel'
+            );
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () => translateFn(keySignal));
+
+            // Rapidly alternate between keys
+            for (let i = 0; i < 20; i++) {
+                const key =
+                    i % 2 === 0 ? 'platformApprovalFlow.defaultWatchersLabel' : 'platformApprovalFlow.defaultTitle';
+                keySignal.set(key);
+                expect(translationSignal()).toBe(i % 2 === 0 ? 'Watchers' : 'Approval process');
+            }
+        });
+
+        it('should handle multiple simultaneous signal changes', () => {
+            const keySignal = signal<'platformApprovalFlow.nodeMembersCount'>('platformApprovalFlow.nodeMembersCount');
+            const ctxSignal = signal({ count: 5 });
+            const translateFn = runInInjectionContext(injector, () => resolveTranslationSignalFn());
+            const translationSignal = runInInjectionContext(injector, () => translateFn(keySignal, ctxSignal));
+
+            expect(translationSignal()).toBe('5 members');
+
+            // Change language and context simultaneously
+            langSignal.set({
+                ...testLang,
+                platformApprovalFlow: {
+                    ...testLang.platformApprovalFlow,
+                    nodeMembersCount: (params) => `${params['count']} updated members`
+                }
+            });
+            ctxSignal.set({ count: 10 });
+
+            expect(translationSignal()).toBe('10 updated members');
         });
     });
 });

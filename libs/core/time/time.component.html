@@ -3,7 +3,7 @@
     [class.is-compact]="_contentDensityObserver.isCompactSignal()"
     (keydown)="handleKeyDownEvent($event)"
     [class.fd-time--tablet]="tablet"
-    [attr.aria-label]="'coreTime.componentAriaName' | fdTranslate"
+    [attr.aria-label]="('coreTime.componentAriaName' | fdTranslate)()"
 >
     <fd-time-column
         [active]="isActive('hour')"

@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Statusna traka upozorenja',
         closable: 'Može se zatvoriti'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 stavka liste rezultata.',
         countListResultsPlural: '{count} stavki liste rezultata.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Korisnik'
+    },
+    platformIconTabBar: {
+        moreButton: 'Više'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Odabrane stavke i uslovi',

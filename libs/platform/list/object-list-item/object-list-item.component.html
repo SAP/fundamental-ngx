@@ -148,7 +148,7 @@
             fdType="transparent"
             glyph="edit"
             title="detail"
-            [attr.aria-label]="'platformObjectListItem.detailsActionAriaLabel' | fdTranslate"
+            [attr.aria-label]="('platformObjectListItem.detailsActionAriaLabel' | fdTranslate)()"
             (keydown)="_onKeyButtonClick($event, 'edit')"
             (click)="_onActionButtonClick('edit')"
             [attr.id]="'detail-' + id"
@@ -158,7 +158,7 @@
         <button
             fd-button
             role="button"
-            [attr.aria-label]="'platformObjectListItem.deleteActionAriaLabel' | fdTranslate"
+            [attr.aria-label]="('platformObjectListItem.deleteActionAriaLabel' | fdTranslate)()"
             title="delete"
             fdType="transparent"
             glyph="decline"

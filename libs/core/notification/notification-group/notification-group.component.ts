@@ -1,17 +1,6 @@
-import {
-    AfterViewInit,
-    Component,
-    DestroyRef,
-    OnInit,
-    computed,
-    contentChild,
-    inject,
-    input,
-    signal
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AfterViewInit, Component, computed, contentChild, effect, inject, input, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NotificationGroupHeaderTitleDirective } from '../directives/notification-group-header-title.directive';
 import { NotificationGroupHeaderComponent } from '../notification-group-header/notification-group-header.component';
 import { NotificationGroupListComponent } from '../notification-group-list/notification-group-list.component';
@@ -37,7 +26,7 @@ import { FD_NOTIFICATION_GROUP_HEADER, FD_NOTIFICATION_GROUP_HEADER_TITLE, FD_NO
         '[attr.aria-description]': 'ariaDescription()'
     }
 })
-export class NotificationGroupComponent implements OnInit, AfterViewInit {
+export class NotificationGroupComponent implements AfterViewInit {
     /**
      * Whether the group is expanded
      * default value is false
@@ -83,23 +72,15 @@ export class NotificationGroupComponent implements OnInit, AfterViewInit {
     private _collapsedString = signal<Nullable<string>>('');
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _translationResolver = new TranslationResolver();
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this.groupHeader()?.ariaControls.set(this.groupList()?.id() ?? null);
-        this.groupHeader()?.expanded.set(this.expanded());
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
+    constructor() {
+        effect(() => {
+            const lang = this._langSignal();
             this._expandedString.set(
                 this._translationResolver.resolve(lang, 'coreNotification.groupAriaDescriptionExpanded')
             );
@@ -112,5 +93,11 @@ export class NotificationGroupComponent implements OnInit, AfterViewInit {
                 this._translationResolver.resolve(lang, 'coreNotification.groupAriaDescription')
             );
         });
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.groupHeader()?.ariaControls.set(this.groupList()?.id() ?? null);
+        this.groupHeader()?.expanded.set(this.expanded());
     }
 }

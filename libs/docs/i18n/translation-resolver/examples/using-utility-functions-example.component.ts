@@ -1,116 +1,94 @@
-import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
-    FD_LANGUAGE,
     FD_LANGUAGE_ENGLISH,
-    resolveTranslationObservable,
-    resolveTranslationObservableFn,
+    FD_LANGUAGE_POLISH,
+    FD_LANGUAGE_SIGNAL,
+    FdLanguage,
     resolveTranslationSignal,
-    resolveTranslationSignalFn,
-    resolveTranslationSync,
-    resolveTranslationSyncFn
+    resolveTranslationSignalFn
 } from '@fundamental-ngx/i18n';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'fd-translation-resolver-using-utility-functions-example',
     template: `
-        <div>
-            <span id="translation_resolver_utility_async_descriptor"> Async resolve of the translation </span>
-            <br />
-            <span aria-describedby="translation_resolver_utility_async_descriptor">
-                {{ coreDatePickerDateInputLabel$ | async }}
-            </span>
-        </div>
-        <div>
-            <span id="translation_resolver_utility_sync_descriptor"> Sync resolve of the translation </span>
-            <br />
-            <span aria-describedby="translation_resolver_utility_sync_descriptor">
-                {{ coreDatePickerDateInputLabel }}
-            </span>
-        </div>
-        <div>
-            <span id="translation_resolver_utility_signal_descriptor"> Signal resolve of the translation </span>
-            <br />
-            <span aria-describedby="translation_resolver_utility_signal_descriptor">
-                {{ coreDatePickerDateInputLabelSignal() }}
-            </span>
+        <div class="fd-margin-bottom--md">
+            <label fd-form-label>Select Language:</label>
+            <fd-segmented-button [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
+                <button fd-button label="English" value="english"></button>
+                <button fd-button label="Polski (Polish)" value="polish"></button>
+            </fd-segmented-button>
         </div>
 
-        <div>
-            <span id="translation_resolver_utility_async_post_injection_context_descriptor">
-                Async resolve of the translation with a function call after injection context
-            </span>
-            <br />
-            <span aria-describedby="translation_resolver_utility_async_post_injection_context_descriptor">
-                {{ dateInputLabelObservable | async }}
-            </span>
-        </div>
+        <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-bottom--md">
+            <h4 class="fd-margin-top--none">Method 1: <code>resolveTranslationSignal()</code></h4>
+            <p class="fd-margin-bottom--sm">
+                <strong>Use in injection context.</strong> Simple one-liner that returns a reactive signal.
+            </p>
+            <div class="fd-padding--sm" style="background: var(--sapBackgroundColor); border-radius: 4px">
+                <code>coreDatePicker.dateInputLabel:</code>
+                <div class="fd-margin-top--tiny fd-text--bold" style="font-size: 1.1rem">
+                    {{ coreDatePickerDateInputLabelSignal() }}
+                </div>
+            </div>
+        </fd-message-strip>
 
-        <div>
-            <span id="translation_resolver_utility_sync_post_injection_context_descriptor">
-                Sync resolve of the translation with a function call after injection context
-            </span>
-            <br />
-            <span aria-describedby="translation_resolver_utility_sync_post_injection_context_descriptor">
-                {{ dateRangeInputLabelSync }}
-            </span>
-        </div>
+        <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-bottom--md">
+            <h4 class="fd-margin-top--none">Method 2: <code>resolveTranslationSignalFn()</code></h4>
+            <p class="fd-margin-bottom--sm">
+                <strong>Get a resolver function</strong> that can be used outside injection context (in methods,
+                callbacks, etc.).
+            </p>
+            <div class="fd-padding--sm" style="background: var(--sapBackgroundColor); border-radius: 4px">
+                <code>coreDatePicker.dateRangeInputLabel:</code>
+                <div class="fd-margin-top--tiny fd-text--bold" style="font-size: 1.1rem">
+                    {{ dateRangeInputLabelSignal() }}
+                </div>
+            </div>
+        </fd-message-strip>
 
-        <div>
-            <span id="translation_resolver_utility_signal_post_injection_context_descriptor">
-                signal resolve of the translation with a function call after injection context
-            </span>
-            <br />
-            <span aria-describedby="translation_resolver_utility_signal_post_injection_context_descriptor">
-                {{ dateRangeInputLabelSignal() }}
-            </span>
-        </div>
+        <fd-message-strip [type]="'information'" [dismissible]="false">
+            <strong>Tip:</strong> Switch languages to see both translations update automatically. These utility
+            functions are the recommended approach for most use cases!
+        </fd-message-strip>
     `,
-    imports: [AsyncPipe],
+    imports: [SegmentedButtonModule, FormsModule, ButtonComponent, FormLabelComponent, MessageStripComponent],
     providers: [
         {
-            provide: FD_LANGUAGE,
-            useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: signal(FD_LANGUAGE_ENGLISH)
         }
     ]
 })
 export class UsingUtilityFunctionsExampleComponent {
-    /**
-     * Async resolve of the translation
-     */
-    coreDatePickerDateInputLabel$ = resolveTranslationObservable('coreDatePicker.dateInputLabel');
-    /**
-     * Sync resolve of the translation
-     */
-
-    coreDatePickerDateInputLabel = resolveTranslationSync('coreDatePicker.dateInputLabel');
+    /** Track selected language */
+    selectedLanguage = 'english';
 
     /**
-     * Using signal to resolve the translation
+     * Using resolveTranslationSignal() - simplest approach
+     * Use this in injection context (class field initializers)
      */
     coreDatePickerDateInputLabelSignal = resolveTranslationSignal('coreDatePicker.dateInputLabel');
 
     /**
-     * You can also call a factory function to get the observable resolver
-     */
-    translationObservableResolver = resolveTranslationObservableFn();
-
-    /**
-     * You can also call a factory function to get the sync resolver,
-     * with this, you can use the resolver later on, without the need to
-     * call it in injection context
-     */
-    translationSyncResolver = resolveTranslationSyncFn();
-
-    /**
-     * You can also call a factory function to get the signal resolver
+     * Using resolveTranslationSignalFn() - for use outside injection context
+     * Get a factory function that can be called later in methods
      */
     translationSignalResolver = resolveTranslationSignalFn();
 
-    dateInputLabelObservable = this.translationObservableResolver('coreDatePicker.dateRangeInputLabel');
-
-    dateRangeInputLabelSync = this.translationSyncResolver('coreDatePicker.dateRangeInputLabel');
-
     dateRangeInputLabelSignal = this.translationSignalResolver('coreDatePicker.dateRangeInputLabel');
+
+    /** Inject the language signal (this is provided by the component) */
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL) as WritableSignal<FdLanguage>;
+
+    /**
+     * Change language to demonstrate reactivity
+     */
+    changeLanguage(language: 'english' | 'polish'): void {
+        this.langSignal.set(language === 'english' ? FD_LANGUAGE_ENGLISH : FD_LANGUAGE_POLISH);
+    }
 }

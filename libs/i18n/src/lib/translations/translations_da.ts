@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Meddelelseslinje for uden fejl',
         closable: 'Kan lukkes'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlisteelement.',
         countListResultsPlural: '{count} resultatlisteelementer.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Bruger'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mere'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valgte elementer og betingelser',

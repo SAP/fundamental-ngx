@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Riadok správy o úspešnosti',
         closable: 'Možnosť zavrieť'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 položka zoznamu výsledkov.',
         countListResultsPlural: '{count} položiek zoznamu výsledkov.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Používateľ'
+    },
+    platformIconTabBar: {
+        moreButton: 'Viac'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Vybraté položky a podmienky',

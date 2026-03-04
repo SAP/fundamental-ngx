@@ -1,7 +1,7 @@
 @if (_allSelectedUsers.length) {
     <div class="fdp-approval-flow-user-list__selected-count">
         @if (_allSelectedUsers.length === 1) {
-            {{ 'platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate }}
+            {{ ('platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate)() }}
         } @else {
             {{
                 'platformApprovalFlow.userListSelectedItemsCountPlural'

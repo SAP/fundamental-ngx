@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Ταινία Μηνύματος Επιτυχίας',
         closable: 'Δυνατότητα κλεισίματος'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 στοιχείο λίστας αποτελεσμάτων.',
         countListResultsPlural: '{count} στοιχεία λίστας αποτελεσμάτων.',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Χρήστης'
+    },
+    platformIconTabBar: {
+        moreButton: 'Περισσότερα'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Επιλεγμένα Στοιχεία ή Συνθήκες',

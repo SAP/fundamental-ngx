@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Сәттілік туралы хабардың жолағы',
         closable: 'Жабуға болады'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 нәтижелер тізімінің тармағы.',
         countListResultsPlural: '{count} нәтижелер тізімінің тармағы.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Пайдаланушы'
+    },
+    platformIconTabBar: {
+        moreButton: 'Тағы'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Таңдалған тармақтар мен шарттар',

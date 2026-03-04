@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Erfolgsmeldungsleiste',
         closable: 'Schließbar'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 Ergebnislistenelement.',
         countListResultsPlural: '{count} Ergebnislistenelemente.',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Benutzer'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mehr'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Ausgewählte Elemente und Bedingungen',

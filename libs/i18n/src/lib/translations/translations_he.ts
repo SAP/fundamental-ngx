@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'רצועת הודעות הצלחה',
         closable: 'ניתן לסגירה'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: 'פריט רשימת תוצאות אחד.',
         countListResultsPlural: '{count} פריטי רשימת תוצאות.',
@@ -315,6 +318,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'משתמש'
+    },
+    platformIconTabBar: {
+        moreButton: 'עוד'
     },
     platformVHD: {
         selectedAndConditionLabel: 'פריטים ותנאים שנבחרו',

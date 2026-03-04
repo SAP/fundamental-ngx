@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Строка сообщения об успешном выполнении',
         closable: 'Можно закрыть'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 позиция в списке результатов.',
         countListResultsPlural: '{count} поз. в списке результатов.',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Пользователь'
+    },
+    platformIconTabBar: {
+        moreButton: 'Ещё'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Выбранные позиции и условия',

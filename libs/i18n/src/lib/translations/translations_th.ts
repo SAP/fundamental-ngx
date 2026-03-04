@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'แถบข้อความแสดงความสำเร็จ',
         closable: 'สามารถปิดได้'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: 'ไอเท็มในรายการผลลัพธ์ 1 รายการ',
         countListResultsPlural: 'ไอเท็มในรายการผลลัพธ์ {count} รายการ',
@@ -316,6 +319,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'ผู้ใช้'
+    },
+    platformIconTabBar: {
+        moreButton: 'เพิ่มเติม'
     },
     platformVHD: {
         selectedAndConditionLabel: 'ไอเท็มและเงื่อนไขที่เลือก',

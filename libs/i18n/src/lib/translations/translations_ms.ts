@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Jalur Mesej Berjaya',
         closable: 'Boleh Ditutup'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 item senarai hasil.',
         countListResultsPlural: '{count} item senarai hasil.',
@@ -315,6 +318,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Pengguna'
+    },
+    platformIconTabBar: {
+        moreButton: 'Lagi'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Item dan Syarat Dipilih',

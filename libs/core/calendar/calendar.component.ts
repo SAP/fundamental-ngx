@@ -30,7 +30,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { CalendarLegendFocusingService } from './calendar-legend/calendar-legend-focusing.service';
@@ -88,7 +88,7 @@ let calendarUniqueId = 0;
         CalendarLegendFocusingService,
         contentDensityObserverProviders(),
         {
-            provide: FD_LANGUAGE,
+            provide: FD_LANGUAGE_SIGNAL,
             useFactory: patchDeprecatedI18nLabels
         }
     ],

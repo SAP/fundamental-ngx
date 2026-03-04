@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'Linie de mesaj de succes',
         closable: 'Poate fi închis'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: '1 articol în lista de rezultate.',
         countListResultsPlural: '{0} articole în lista de rezultate.',
@@ -317,6 +320,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'Utilizator'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mai mult'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Articole și condiții selectate',

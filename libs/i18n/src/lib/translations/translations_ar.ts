@@ -86,6 +86,9 @@ export default {
         announcementSuccess: 'شريط رسالة النجاح',
         closable: 'قابل للإغلاق'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreMultiInput: {
         countListResultsSingular: 'عنصر قائمة نتائج واحد.',
         countListResultsPlural: '{count} من عناصر قائمة النتائج.',
@@ -315,6 +318,9 @@ export default {
     },
     platformFeedInput: {
         userTitle: 'المستخدم'
+    },
+    platformIconTabBar: {
+        moreButton: 'المزيد'
     },
     platformVHD: {
         selectedAndConditionLabel: 'الشروط والبنود المحددة',

@@ -92,7 +92,7 @@
                     [attr.placeholder]="viewModel.selectedOptions.length ? null : placeholder"
                     [formControl]="_searchTermCtrl"
                     [attr.aria-required]="required"
-                    [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
+                    [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)()"
                     [ariaLabelledBy]="ariaLabelledBy"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"

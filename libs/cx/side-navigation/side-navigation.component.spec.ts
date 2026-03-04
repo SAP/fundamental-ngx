@@ -1,4 +1,4 @@
-/* eslint-disable @nx/enforce-module-boundaries */
+ 
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -10,7 +10,6 @@ import {
     NestedListTitleDirective
 } from '@fundamental-ngx/core/nested-list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { I18nModule } from '@fundamental-ngx/i18n';
 import { NestedItemComponent } from '../nested-list/nested-item/nested-item.component';
 import { NestedLinkComponent } from '../nested-list/nested-link/nested-link.component';
 import { NestedListComponent } from '../nested-list/nested-list/nested-list.component';
@@ -59,7 +58,6 @@ import { SideNavigationComponent } from './side-navigation.component';
     standalone: true,
     imports: [
         PopoverModule,
-        I18nModule,
         SideNavigationComponent,
         SideNavigationMainComponent,
         NestedListComponent,
