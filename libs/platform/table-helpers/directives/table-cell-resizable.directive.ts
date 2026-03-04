@@ -1,4 +1,4 @@
-import { AfterViewInit, computed, Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, computed, Directive, inject, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -63,6 +63,9 @@ export class PlatformTableCellResizableDirective
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
+
+    /** @hidden */
+    private readonly _zone = inject(NgZone);
 
     /** @hidden */
     ngOnInit(): void {

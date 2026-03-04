@@ -6,7 +6,6 @@ import {
     DestroyRef,
     Directive,
     ElementRef,
-    NgZone,
     Renderer2,
     booleanAttribute,
     effect,
@@ -16,7 +15,7 @@ import {
     output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, fromEvent } from 'rxjs';
+import { Subject } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 import { Nullable } from '../../models/nullable';
@@ -41,7 +40,11 @@ export interface FocusableItemPosition {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
         }
-    ]
+    ],
+    host: {
+        '(focusin)': '_onFocusin()',
+        '(keydown)': '_onKeydown($event)'
+    }
 })
 export class FocusableItemDirective implements FocusableItem, HasElementRef {
     /** @hidden Input with booleanAttribute transform */
@@ -70,9 +73,6 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    protected readonly _zone = inject(NgZone);
 
     /**
      * Internal _focusable state that can be mutated programmatically.
@@ -120,20 +120,6 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
                     this.setFocusable(isFocusable);
                 }
             });
-
-        this._zone.runOutsideAngular(() => {
-            fromEvent(this.elementRef.nativeElement, 'focusin')
-                .pipe(takeUntilDestroyed())
-                .subscribe(async () => {
-                    await this._onFocusin();
-                });
-
-            fromEvent<KeyboardEvent>(this.elementRef.nativeElement, 'keydown')
-                .pipe(takeUntilDestroyed())
-                .subscribe((event) => {
-                    this._onKeydown(event);
-                });
-        });
     }
 
     /** @hidden */
@@ -163,10 +149,8 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** Set tabbable state */
     setTabbable(state: boolean): void {
-        this._zone.runOutsideAngular(() => {
-            this._tabbable = state;
-            this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
-        });
+        this._tabbable = state;
+        this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
     }
 
     /** @hidden */
@@ -192,7 +176,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
     }
 
     /** @hidden */
-    private async _onFocusin(): Promise<void> {
+    protected async _onFocusin(): Promise<void> {
         if (!this.isFocusable()) {
             return;
         }
@@ -217,7 +201,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
     }
 
     /** @hidden */
-    private _onKeydown(event: KeyboardEvent): void {
+    protected _onKeydown(event: KeyboardEvent): void {
         if (!this.isFocusable()) {
             return;
         }
