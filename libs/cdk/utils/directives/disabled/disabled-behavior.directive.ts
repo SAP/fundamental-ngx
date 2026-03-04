@@ -29,7 +29,7 @@ export class DisabledBehaviorDirective
     /**
      * Whether to add `disabledClass` class to the element.
      */
-    readonly addDisabledClass = input(true);
+    readonly addDisabledClass = input(true, { transform: booleanAttribute });
 
     /**
      * Disabled css class to apply to the element.
