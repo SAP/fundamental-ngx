@@ -62,7 +62,7 @@ export class BusyIndicatorComponent {
     readonly ariaValueText = input<string | null>(null);
 
     /** title attribute value for tooltip. */
-    readonly title = input<string | null | undefined>(undefined);
+    readonly title = input<string | undefined>(undefined);
 
     /** add loading label value */
     readonly label = input<string | undefined>(undefined);
