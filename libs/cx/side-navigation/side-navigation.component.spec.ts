@@ -1,4 +1,3 @@
- 
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IconComponent } from '@fundamental-ngx/core/icon';
