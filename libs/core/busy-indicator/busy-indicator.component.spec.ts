@@ -121,12 +121,28 @@ describe('BusyIndicatorComponent', () => {
         expect(fixture.debugElement.nativeElement.getAttribute('aria-valuemax')).toBe('100');
     });
 
-    it('should set default aria-valuetext when not provided', () => {
+    it('should use custom ariaValueText when provided', () => {
+        fixture.componentRef.setInput('loading', true);
+        fixture.componentRef.setInput('ariaValueText', 'Custom value text');
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.nativeElement.getAttribute('aria-valuetext')).toBe('Custom value text');
+    });
+
+    it('should set default aria-valuetext when no custom one provided', () => {
         fixture.componentRef.setInput('loading', true);
         fixture.detectChanges();
 
         const ariaValueText = fixture.debugElement.nativeElement.getAttribute('aria-valuetext');
         expect(ariaValueText).toBeTruthy();
+    });
+
+    it('should not set default aria-valuetext when not loading', () => {
+        fixture.componentRef.setInput('loading', false);
+        fixture.detectChanges();
+
+        const ariaValueText = fixture.debugElement.nativeElement.getAttribute('aria-valuetext');
+        expect(ariaValueText).toBeNull();
     });
 
     it('should set default title when not provided', () => {
@@ -144,32 +160,28 @@ describe('BusyIndicatorComponent', () => {
         expect(fixture.debugElement.nativeElement.getAttribute('aria-label')).toBe('Custom loading label');
     });
 
-    it('should use custom ariaValueText when provided', () => {
-        fixture.componentRef.setInput('ariaValueText', 'Custom value text');
-        fixture.detectChanges();
-
-        expect(fixture.debugElement.nativeElement.getAttribute('aria-valuetext')).toBe('Custom value text');
-    });
-
     it('should use custom title when provided', () => {
+        fixture.componentRef.setInput('loading', true);
         fixture.componentRef.setInput('title', 'Custom title');
         fixture.detectChanges();
 
         expect(fixture.debugElement.nativeElement.getAttribute('title')).toBe('Custom title');
     });
 
-    it('should remove title attribute when title is null', () => {
-        fixture.componentRef.setInput('title', null);
-        fixture.detectChanges();
-
-        expect(fixture.debugElement.nativeElement.hasAttribute('title')).toBe(false);
-    });
-
-    it('should use default title for undefined title', () => {
+    it('should use default title when not provided', () => {
+        fixture.componentRef.setInput('loading', true);
         fixture.componentRef.setInput('title', undefined);
         fixture.detectChanges();
 
         expect(fixture.debugElement.nativeElement.getAttribute('title')).toBe('Please wait');
+    });
+
+    it('should remove title attribute when not loading', () => {
+        fixture.componentRef.setInput('title', 'Custom title');
+        fixture.componentRef.setInput('loading', false);
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.nativeElement.hasAttribute('title')).toBe(false);
     });
 
     it('should set custom aria-live attribute', () => {

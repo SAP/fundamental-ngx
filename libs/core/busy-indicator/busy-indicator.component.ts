@@ -5,7 +5,6 @@ import {
     Component,
     ElementRef,
     ViewEncapsulation,
-    computed,
     inject,
     input,
     viewChild
@@ -37,10 +36,10 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[attr.aria-busy]': 'loading()',
         '[attr.aria-live]': 'ariaLive()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[attr.aria-valuetext]': 'ariaValueText() || _ariaValueText()',
+        '[attr.aria-valuetext]': 'loading() ? ariaValueText() || _ariaValueText() : null',
         '[attr.aria-valuemin]': '0',
         '[attr.aria-valuemax]': '100',
-        '[attr.title]': '_titleAttribute()',
+        '[attr.title]': 'loading() ? title() || _titleValue() : null',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block()',
         '(keydown)': 'hostFocusChangeHandler($event)'
@@ -95,20 +94,6 @@ export class BusyIndicatorComponent {
         ),
         { initialValue: 'Please wait' }
     );
-
-    /** @hidden Determines the value for the title attribute, allowing null to remove it. */
-    protected readonly _titleAttribute = computed(() => {
-        const title = this.title();
-        if (title === null) {
-            return null;
-        }
-
-        if (title === undefined) {
-            return this._titleValue();
-        }
-
-        return title;
-    });
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
