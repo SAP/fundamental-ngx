@@ -105,6 +105,9 @@ export class UserMenuBodyComponent implements AfterViewInit {
     /** @hidden */
     private readonly _refresh$ = new Subject<void>();
 
+    /** @hidden Track the list item that opened the details view for focus restoration */
+    private _triggerItem: UserMenuListItemComponent | null = null;
+
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -123,6 +126,7 @@ export class UserMenuBodyComponent implements AfterViewInit {
                     item.showSubmenu
                         .pipe(takeUntilDestroyed(this._destroyRef))
                         .subscribe((submenuTpl: TemplateRef<any> | null) => {
+                            this._triggerItem = item;
                             this.selectItem(submenuTpl);
                         });
                     item.updateTitle.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((title: string | null) => {
@@ -186,8 +190,17 @@ export class UserMenuBodyComponent implements AfterViewInit {
      * Closes the submenu and returns to the main view
      */
     clearSubmenu(): void {
+        const itemToFocus = this._triggerItem;
         this.submenu.set(null);
         this.selectedItemTitle.set(null);
+        this._triggerItem = null;
+
+        if (itemToFocus) {
+            // Delay focus to allow the main view to render first
+            requestAnimationFrame(() => {
+                itemToFocus.focus();
+            });
+        }
     }
 
     /**
