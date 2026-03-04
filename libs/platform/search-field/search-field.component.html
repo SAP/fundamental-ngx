@@ -1,17 +1,23 @@
-<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
+<ng-template [ngTemplateOutlet]="mobile() ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
-    <fd-popover [isOpen]="_isOpen$()" (isOpenChange)="_isOpen$.set($event)" [triggers]="[]" fillControlMode="equal">
+    <fd-popover
+        [focusAutoCapture]="false"
+        [isOpen]="_isSuggestionMenuOpen$()"
+        (isOpenChange)="_isSuggestionMenuOpen$.set($event)"
+        [triggers]="[]"
+        fillControlMode="equal"
+    >
         <fd-popover-control>
             <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body
             (keydown)="_handlePopoverKeydown($event)"
             [style.display]="
-                (_dropdownValues$ | async | suggestionMatches: inputText).length > 0 ||
-                initialSuggestionTitle ||
-                suggestionFooter ||
-                searchResultsEmptyTemplate ||
-                searchResultsEmptyDefaultSuggestions?.length
+                (_dropdownValues$ | async | suggestionMatches: inputText()).length > 0 ||
+                initialSuggestionTitle() ||
+                suggestionFooter() ||
+                searchResultsEmptyTemplate() ||
+                searchResultsEmptyDefaultSuggestions()?.length
                     ? 'inherit'
                     : 'none'
             "
@@ -22,57 +28,57 @@
         >
             <fd-busy-indicator
                 [block]="true"
-                [loading]="suggestionsLoading"
-                [title]="suggestionsLoading ? busyIndicatorTitle : undefined"
-                [ariaValueText]="busyIndicatorAriaValueText"
+                [loading]="suggestionsLoading()"
+                [title]="suggestionsLoading() ? busyIndicatorTitle() : undefined"
+                [ariaValueText]="busyIndicatorAriaValueText()"
             >
                 @if (
-                    initialSuggestionTitle!.length > 0 &&
-                    (_dropdownValues$ | async | suggestionMatches: inputText).length > 0 &&
+                    initialSuggestionTitle()!.length > 0 &&
+                    (_dropdownValues$ | async | suggestionMatches: inputText()).length > 0 &&
                     !_selectedSuggestionItem &&
-                    !inputText
+                    !inputText()
                 ) {
                     <div fd-popover-body-header>
                         <div
                             fd-bar
                             [initialSuggestionTitle]="true"
-                            [barDesign]="initialSuggestionSubline ? 'header-with-subheader' : 'header'"
+                            [barDesign]="initialSuggestionSubline() ? 'header-with-subheader' : 'header'"
                             [attr.id]="_popoverHeaderId"
                         >
                             <div fd-bar-left>
                                 <span fd-title [twoLineClamp]="true" [headerSize]="6">
-                                    {{ initialSuggestionTitle }}
+                                    {{ initialSuggestionTitle() }}
                                 </span>
                             </div>
                         </div>
-                        @if (initialSuggestionSubline) {
+                        @if (initialSuggestionSubline()) {
                             <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
                                 <div fd-bar-left>
-                                    <fd-text [subline]="true" [text]="initialSuggestionSubline"></fd-text>
+                                    <fd-text [subline]="true" [text]="initialSuggestionSubline()"></fd-text>
                                 </div>
                             </div>
                         }
                     </div>
                 } @else if (
-                    initialSuggestionEmptyTitle!.length > 0 &&
-                    (_dropdownValues$ | async | suggestionMatches: inputText).length === 0
+                    initialSuggestionEmptyTitle()!.length > 0 &&
+                    (_dropdownValues$ | async | suggestionMatches: inputText()).length === 0
                 ) {
                     <div fd-popover-body-header>
                         <div
                             fd-bar
                             [initialSuggestionTitle]="true"
-                            [barDesign]="initialSuggestionEmptySubline ? 'header-with-subheader' : 'header'"
+                            [barDesign]="initialSuggestionEmptySubline() ? 'header-with-subheader' : 'header'"
                         >
                             <div fd-bar-left>
                                 <span fd-title [twoLineClamp]="true" [headerSize]="6">
-                                    {{ initialSuggestionEmptyTitle }}
+                                    {{ initialSuggestionEmptyTitle() }}
                                 </span>
                             </div>
                         </div>
-                        @if (initialSuggestionEmptySubline) {
+                        @if (initialSuggestionEmptySubline()) {
                             <div fd-bar [initialSuggestionSubline]="true" barDesign="subheader">
                                 <div fd-bar-left>
-                                    <fd-text [subline]="true" [text]="initialSuggestionEmptySubline"></fd-text>
+                                    <fd-text [subline]="true" [text]="initialSuggestionEmptySubline()"></fd-text>
                                 </div>
                             </div>
                         }
@@ -80,11 +86,11 @@
                 }
                 <ng-template [ngTemplateOutlet]="suggestionMenuTemplate"></ng-template>
                 @if (
-                    (_dropdownValues$ | async | suggestionMatches: inputText).length === 0 &&
-                    searchResultsEmptyDefaultSuggestions
+                    (_dropdownValues$ | async | suggestionMatches: inputText()).length === 0 &&
+                    searchResultsEmptyDefaultSuggestions()
                 ) {
                     <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)">
-                        @for (defaultSuggestion of searchResultsEmptyDefaultSuggestions; track defaultSuggestion) {
+                        @for (defaultSuggestion of searchResultsEmptyDefaultSuggestions(); track defaultSuggestion) {
                             <ng-template
                                 [ngTemplateOutlet]="suggestionItemTemplate"
                                 [ngTemplateOutletContext]="{ filteredSuggestion: defaultSuggestion }"
@@ -102,23 +108,23 @@
 <ng-template #searchCategoryMenu>
     <button
         class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--transparent fd-button--menu {{
-            appearance?.categoryButtonClass
+            appearance()?.categoryButtonClass
         }}"
         [fdpMenuTriggerFor]="categoryMenu"
     >
-        @if (!hideCategoryLabel) {
+        @if (!hideCategoryLabel()) {
             <span class="fdp-search-field__category-label">
-                {{ _currentCategory?.label || categoryLabel }}
+                {{ _currentCategory?.label || categoryLabel() }}
             </span>
         }
     </button>
     <fdp-menu #categoryMenu>
-        @if (showCategoryAllOption) {
+        @if (showCategoryAllOption()) {
             <fdp-menu-item (itemSelect)="setCurrentCategory(null)">{{
                 'platformSearchField.allButtonLabel' | fdTranslate
             }}</fdp-menu-item>
         }
-        @for (category of categories; track category) {
+        @for (category of categories(); track category) {
             <fdp-menu-item (itemSelect)="setCurrentCategory(category)">{{ category.label }} </fdp-menu-item>
         }
     </fdp-menu>
@@ -126,23 +132,23 @@
 <ng-template #searchCategorySelect>
     <fd-select
         #categorySelectComponent
-        [placeholder]="categoryLabel"
-        [selectControlClass]="appearance?.categoryButtonClass"
+        [placeholder]="categoryLabel()"
+        [selectControlClass]="appearance()?.categoryButtonClass"
         [selectDropdownButtonClass]="
-            appearance?.categoryDropdownButtonClass + (!!_currentCategory?.value ? ' is-selected' : '')
+            appearance()?.categoryDropdownButtonClass + (!!_currentCategory?.value ? ' is-selected' : '')
         "
         (valueChange)="setCurrentCategory($event)"
         ariaHasPopup="dialog"
         [ariaLabel]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : null"
         [ariaDescription]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : ''"
-        [mobile]="mobile && isOpen"
+        [mobile]="mobile() && isOpen"
         (click)="_categorySelectClicked($event)"
         [mobileConfig]="{ hasCloseButton: true, title: ('platformSearchField.selectStateMessageLabel' | fdTranslate) }"
     >
         <li fd-option (itemSelect)="setCurrentCategory(null)">
             {{ 'platformSearchField.allButtonLabel' | fdTranslate }}
         </li>
-        @for (category of categories; track category) {
+        @for (category of categories(); track category) {
             <li fd-option [value]="category">{{ category.label }}</li>
         }
     </fd-select>
@@ -151,29 +157,33 @@
     <div
         class="fdp-search-field"
         [class.with-categories]="_showCategoryDropdown"
-        [class.is-loading]="isLoading"
-        [class.hide-category-label]="hideCategoryLabel"
+        [class.is-loading]="isLoading()"
+        [class.hide-category-label]="hideCategoryLabel()"
     >
         <div
             #inputGroup
-            class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
+            class="fdp-search-field__input-group fd-input-group {{ appearance()?.searchClass }}"
             [class.is-focus]="_isFocused"
         >
-            @if (showAdvancedFilter) {
-                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
+            @if (showAdvancedFilter()) {
+                <span
+                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.searchCategoryClass }}"
+                >
                     <button
                         (fdkClicked)="_advancedFilterButtonClicked()"
                         class="fdp-search-field__category-button fdp-search-field__advanced-filter-button fd-input-group__button fd-button fd-button--transparent fd-button--menu {{
-                            appearance?.categoryButtonClass
+                            appearance()?.categoryButtonClass
                         }}"
                     >
                         <fd-icon glyph="filter"></fd-icon>
                     </button>
                 </span>
             } @else if (_showCategoryDropdown) {
-                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
+                <span
+                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.searchCategoryClass }}"
+                >
                     <ng-template
-                        [ngTemplateOutlet]="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
+                        [ngTemplateOutlet]="categoryMode() === 'select' ? searchCategorySelect : searchCategoryMenu"
                     ></ng-template>
                 </span>
             }
@@ -182,20 +192,22 @@
                 fdkAutoComplete
                 [options]="_autoCompleteSuggestions"
                 [displayFn]="_autoCompleteDisplayFn"
-                [inputText]="inputText"
+                [inputText]="inputText()"
                 (onComplete)="handleAutoComplete($event)"
                 type="search"
                 (focus)="_inputFocus()"
                 (blur)="_isFocused = false; (null)"
-                [attr.placeholder]="placeholder"
-                class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
+                [attr.placeholder]="placeholder()"
+                class="fdp-search-field__input fd-input fd-input-group__input {{ appearance()?.searchFieldClass }}"
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
                 [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
                 [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
                 [attr.aria-controls]="!!_popoverBodyId ? _popoverBodyId : null"
-                [attr.aria-expanded]="(_dropdownValues$ | async)?.length !== 0 ? (_isOpen$() ? 'true' : 'false') : null"
+                [attr.aria-expanded]="
+                    (_dropdownValues$ | async)?.length !== 0 ? (_isSuggestionMenuOpen$() ? 'true' : 'false') : null
+                "
                 [attr.aria-haspopup]="(_dropdownValues$ | async)?.length !== 0"
                 autocomplete="off"
                 aria-autocomplete="both"
@@ -204,17 +216,17 @@
                 (keydown.tab)="_handleInputTabKey($event)"
                 [(ngModel)]="inputText"
                 (ngModelChange)="onValueChange($event)"
-                (click)="mobile && openMobileMode()"
+                (click)="mobile() && openMobileMode()"
             />
-            @if (inputText && inputText.length > 0) {
-                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}">
+            @if (inputText() && inputText().length > 0) {
+                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.addonClass }}">
                     <button
                         tabindex="-1"
-                        [attr.aria-hidden]="!mobile"
+                        [attr.aria-hidden]="!mobile()"
                         [attr.title]="'platformSearchField.clearButtonTitle' | fdTranslate"
                         [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
-                        class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
-                        [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
+                        class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance()?.buttonClass }}"
+                        [class.fd-input-group__button]="!appearance()?.removeGroupButtonClass"
                         [attr.disabled]="disabled ? '' : null"
                         [attr.id]="_clearId"
                         (click)="clearTextInput()"
@@ -224,24 +236,24 @@
                 </span>
             } @else {
                 <!-- prevents width of search from changing when there is no text in the input -->
-                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}"></span>
+                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.addonClass }}"></span>
             }
-            @if (forceSearchButton || isLoading || (!isLoading && !_isSearchDone)) {
+            @if (forceSearchButton() || isLoading() || (!isLoading() && !_isSearchDone)) {
                 <span
-                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
-                        appearance?.searchSubmitClass
+                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.addonClass }} {{
+                        appearance()?.searchSubmitClass
                     }}"
                 >
-                    @if (!disableSearch) {
+                    @if (!disableSearch()) {
                         <button
                             tabindex="-1"
-                            [attr.aria-hidden]="!mobile"
+                            [attr.aria-hidden]="!mobile()"
                             [attr.title]="'platformSearchField.submitButtonTitle' | fdTranslate"
                             [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
                             class="fdp-search-field__submit fd-button fd-button--transparent {{
-                                appearance?.buttonClass
+                                appearance()?.buttonClass
                             }}"
-                            [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
+                            [class.fd-input-group__button]="!appearance()?.removeGroupButtonClass"
                             [attr.id]="_submitId"
                             [attr.disabled]="disabled ? '' : null"
                             (click)="onSearchSubmit()"
@@ -251,17 +263,17 @@
                     }
                 </span>
             }
-            @if (!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)) {
+            @if (!disableRefresh && !isLoading() && (_isRefresh || _isSearchDone)) {
                 <span
-                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
-                        appearance?.searchSubmitClass
+                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.addonClass }} {{
+                        appearance()?.searchSubmitClass
                     }}"
                 >
                     <button
                         [attr.aria-title]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
                         [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
                         class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
-                            appearance?.buttonClass
+                            appearance()?.buttonClass
                         }}"
                         [attr.disabled]="disabled ? '' : null"
                         [attr.id]="_refreshId"
@@ -271,14 +283,14 @@
                     </button>
                 </span>
             }
-            @if (appearance?.helperClass) {
-                <div [ngClass]="appearance?.helperClass"></div>
+            @if (appearance()?.helperClass) {
+                <div [ngClass]="appearance()?.helperClass"></div>
             }
         </div>
     </div>
 </ng-template>
 <ng-template #suggestionMenuTemplate>
-    @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestionsFiltered) {
+    @if (_dropdownValues$ | async | suggestionMatches: inputText(); as suggestionsFiltered) {
         @if (suggestionsFiltered?.length && !_onlyHeadersFiltered(suggestionsFiltered)) {
             <ul fd-list [attr.id]="_menuId" [searchResultsList]="true" (keydown)="onKeydown($event)" #suggestionList>
                 @for (filteredSuggestion of suggestionsFiltered; track filteredSuggestion) {
@@ -293,7 +305,7 @@
                                     <span fd-list-title>{{ filteredSuggestion?.value }}</span>
                                 </li>
                                 @for (
-                                    childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText;
+                                    childSuggestion of filteredSuggestion?.children | suggestionMatches: inputText();
                                     track childSuggestion
                                 ) {
                                     <ng-template
@@ -317,16 +329,16 @@
                     }
                 }
             </ul>
-            @if (suggestionFooter && (_dropdownValues$ | async | suggestionMatches: inputText).length > 0) {
+            @if (suggestionFooter() && (_dropdownValues$ | async | suggestionMatches: inputText()).length > 0) {
                 <div fd-popover-body-footer class="fdp-search-field__footer">
                     <div fd-bar barDesign="footer">
-                        <ng-template [ngTemplateOutlet]="suggestionFooter"></ng-template>
+                        <ng-template [ngTemplateOutlet]="suggestionFooter()"></ng-template>
                     </div>
                 </div>
             }
-        } @else if (searchResultsEmptyTemplate) {
+        } @else if (searchResultsEmptyTemplate()) {
             <div style="padding-top: 0.5rem; padding-bottom: 0.5rem">
-                <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate"></ng-template>
+                <ng-template [ngTemplateOutlet]="searchResultsEmptyTemplate()"></ng-template>
             </div>
         }
     }
@@ -348,7 +360,7 @@
         (mouseenter)="_searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)"
         (mouseleave)="_searchResultIsHoveredOrFocusedOrMobile(suggestionListItem)"
         [selected]="
-            enableSelection && filteredSuggestion === _selectedSuggestionItem && !filteredSuggestion.isGroupHeader
+            enableSelection() && filteredSuggestion === _selectedSuggestionItem && !filteredSuggestion.isGroupHeader
         "
         [counter]="filteredSuggestion.searchInScopeCounter"
         [counterRole]="'tooltip'"
@@ -384,14 +396,14 @@
             <!-- toString() below is for type safety -->
             <span
                 fd-list-title
-                [innerHTML]="filteredSuggestion?.toString() | highlight: inputText : true : true"
+                [innerHTML]="filteredSuggestion?.toString() | highlight: inputText() : true : true"
             ></span>
         } @else {
             @if (subline) {
                 <div fd-list-content>
                     <span
                         fd-list-title
-                        [innerHTML]="filteredSuggestion?.value | highlight: inputText : true : true"
+                        [innerHTML]="filteredSuggestion?.value | highlight: inputText() : true : true"
                     ></span>
                     <span fd-list-subline>
                         {{ subline }}
@@ -409,7 +421,7 @@
                 } @else {
                     <span
                         fd-list-title
-                        [innerHTML]="filteredSuggestion?.value | highlight: inputText : true : true"
+                        [innerHTML]="filteredSuggestion?.value | highlight: inputText() : true : true"
                     ></span>
                 }
             }

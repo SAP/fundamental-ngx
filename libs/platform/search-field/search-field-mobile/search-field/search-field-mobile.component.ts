@@ -9,7 +9,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -78,17 +78,19 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
 
     /** @hidden */
     listenChanges(): void {
-        this._component.isOpenChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
-            if (!isOpen) {
-                this._handleDismiss();
+        outputToObservable(this._component.isOpenChange)
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => {
+                if (!isOpen) {
+                    this._handleDismiss();
 
-                return;
-            }
+                    return;
+                }
 
-            if (!this._dialogService.hasOpenDialogs()) {
-                this._open();
-            }
-        });
+                if (!this._dialogService.hasOpenDialogs()) {
+                    this._open();
+                }
+            });
     }
 
     /** @hidden */
@@ -110,7 +112,6 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
             disablePaddings: true,
             ...this.dialogConfig,
             backdropClickCloseable: false,
-            escKeyCloseable: true,
             container: 'body',
             minWidth: '100vw',
             minHeight: '100vh'

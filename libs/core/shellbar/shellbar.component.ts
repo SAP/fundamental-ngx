@@ -21,7 +21,7 @@ import {
     computed,
     inject
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ClickedDirective, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
@@ -203,10 +203,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         }
 
         this._searchPortal = new DomPortal(component.elementRef.nativeElement);
-        component.categoryMode = 'select';
-        component.disableRefresh = true;
-        component.forceSearchButton = true;
-        component.appearance = {
+        component.categoryMode.set('select');
+        component.disableRefresh.set(true);
+        component.forceSearchButton.set(true);
+        component.appearance?.set({
             searchClass: 'fd-shellbar__search-field is-cozy',
             searchFieldClass: 'fd-shellbar__search-field-input is-cozy',
             searchCategoryClass: 'fd-shellbar__search-field-category',
@@ -217,11 +217,11 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             categoryDropdownButtonClass: 'fd-shellbar__search-dropdown',
             removeGroupButtonClass: true,
             helperClass: 'fd-shellbar__search-field-helper'
-        };
+        });
 
         this._searchSubmitSubscription?.unsubscribe();
 
-        this._searchSubmitSubscription = component.searchSubmit
+        this._searchSubmitSubscription = outputToObservable(component.searchSubmit)
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((state) => {
                 if (!state.text) {

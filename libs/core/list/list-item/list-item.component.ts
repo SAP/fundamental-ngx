@@ -95,7 +95,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** Counter on list item */
     @Input()
-    counter: number | undefined;
+    counter: number;
 
     /** Counter aria role */
     @Input()
