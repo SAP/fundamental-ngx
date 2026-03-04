@@ -1,7 +1,7 @@
 <!--
 Document: Angular 21+ Development Guidelines for Fundamental NGX
-Last Updated: February 23, 2026
-Version: 3.1
+Last Updated: February 27, 2026
+Version: 3.3
 Purpose: Comprehensive guide for AI agents and developers working with Angular 21+ in NX monorepo
 -->
 
@@ -14,7 +14,8 @@ Purpose: Comprehensive guide for AI agents and developers working with Angular 2
 3. [Resources](#resources)
 4. [Quick Decision Guide](#quick-decision-guide)
 5. [Common Mistakes to Avoid](#common-mistakes-to-avoid)
-6. [Best Practices & Style Guide](#best-practices--style-guide)
+6. [Development Workflow & Validation](#development-workflow--validation)
+7. [Best Practices & Style Guide](#best-practices--style-guide)
     - [Angular Style Guide](#angular-style-guide)
     - [TypeScript Best Practices](#typescript-best-practices)
     - [Angular Best Practices](#angular-best-practices)
@@ -37,12 +38,12 @@ Purpose: Comprehensive guide for AI agents and developers working with Angular 2
     - [Signal-Based Change Detection](#signal-based-change-detection)
     - [Templates](#templates)
     - [Services](#services)
-7. [NX Monorepo Architecture](#nx-monorepo-architecture)
-8. [Breaking Changes Guidelines](#breaking-changes-guidelines)
-9. [Dead Code Removal](#dead-code-removal)
-10. [Commit Message Guidelines](#commit-message-guidelines)
-11. [Pull Request Guidelines](#pull-request-guidelines)
-12. [Coding Rules and Standards](#coding-rules-and-standards)
+8. [NX Monorepo Architecture](#nx-monorepo-architecture)
+9. [Breaking Changes Guidelines](#breaking-changes-guidelines)
+10. [Dead Code Removal](#dead-code-removal)
+11. [Commit Message Guidelines](#commit-message-guidelines)
+12. [Pull Request Guidelines](#pull-request-guidelines)
+13. [Coding Rules and Standards](#coding-rules-and-standards)
 
 ---
 
@@ -166,6 +167,468 @@ Here are the essential links for building Angular components. Use these to under
 | Setting signal inputs externally     | Use InjectionToken or setter method           | Signal inputs are read-only              |
 | Protected after private members      | Protected before private                      | ESLint member ordering rule              |
 | `allowSignalWrites: true` in effect  | Remove the option                             | Deprecated in Angular 21+                |
+| Multiple changes without validation  | Validate after each logical step              | Catch errors early before they cascade   |
+| Assuming type inference works        | Verify inference with IDE or compilation      | TypeScript may infer `unknown`/`any`     |
+| Testing impossible scenarios         | Test realistic user scenarios only            | TypeScript/DI prevent many edge cases    |
+| Reusing variable names in tests      | Use unique descriptive names                  | Avoid ESLint no-shadow errors            |
+
+## Development Workflow & Validation
+
+**For AI Agents: Critical workflow patterns to prevent compilation errors and test failures**
+
+### The Build-Test-Lint Cycle
+
+After making ANY code changes, especially structural or type-related changes, follow this validation sequence:
+
+```bash
+# 1. Compile - catches type errors and syntax issues
+npx nx run <library>:build
+
+# 2. Lint - catches style violations, member ordering, and shadowing
+npx nx run <library>:lint
+
+# 3. Test - catches logic errors and broken functionality
+npx nx test <library>
+```
+
+**When to run validation:**
+
+| Change Type                     | When to Validate        | Why                                       |
+| ------------------------------- | ----------------------- | ----------------------------------------- |
+| Type annotation changes         | After each file         | TypeScript may not infer as expected      |
+| Adding/removing properties      | Immediately             | References may break                      |
+| Structural changes (reordering) | Before committing       | ESLint member ordering rules              |
+| New test suites                 | After writing           | Verify tests are realistic and pass       |
+| linkedSignal/computed changes   | After each change       | Complex type inference needs verification |
+| Multiple file refactoring       | After each logical step | Catch cascading errors early              |
+
+### Incremental Validation Pattern
+
+**✅ GOOD - Validate incrementally:**
+
+```typescript
+// 1. Make change
+readonly contentDensity = this._contentDensity.asReadonly();
+
+// 2. Run build immediately
+// $ npx nx run core:build
+
+// 3. If error, fix before next change
+// 4. Then proceed to next change
+```
+
+**❌ BAD - Make multiple changes before validating:**
+
+```typescript
+// Changed 5 files with type modifications
+// Added 20 new tests
+// Refactored class structure
+// NOW running build... (16 errors!)
+```
+
+### Type Safety Validation
+
+When working with complex types (linkedSignal, computed, generic signals):
+
+**Always verify:**
+
+1. ✅ The assigned value matches the declared type
+2. ✅ Type inference produces the expected type (hover in IDE)
+3. ✅ Source signals can be `undefined` or `unknown` - add guards
+4. ✅ Properties exist before referencing them
+
+**Example - linkedSignal with type guards:**
+
+```typescript
+// linkedSignal's computation may receive undefined/unknown source
+this._contentDensity = linkedSignal({
+    source: this._changesSource,
+    computation: (source) => {
+        // ✅ GOOD - Guard against undefined/null
+        if (!source || typeof source !== 'string') {
+            return ContentDensityMode.COZY; // Safe fallback
+        }
+        return this._validateAndFallback(source as ContentDensityMode);
+    }
+});
+
+// ❌ BAD - Assuming source is always valid
+this._contentDensity = linkedSignal({
+    source: this._changesSource,
+    computation: (source) => this._validateAndFallback(source) // Type error!
+});
+```
+
+### Test Writing Guidelines
+
+**Focus on User Scenarios, Not Edge Cases**
+
+When writing tests, ask: **"Can this actually happen in a real Angular application?"**
+
+**✅ Write tests for:**
+
+- User interactions (clicks, inputs, keyboard)
+- Valid configuration options
+- Component lifecycle (mount, update, unmount)
+- Accessibility requirements
+- Realistic error scenarios (unsupported enum values, optional services missing)
+
+**❌ Don't write tests for:**
+
+- TypeScript-prevented scenarios (`undefined` required parameters)
+- Angular DI-prevented scenarios (missing required dependencies)
+- Implementation details (internal signal updates, private methods)
+- Impossible states (null values in non-nullable fields)
+
+**Example - Realistic vs Unrealistic Tests:**
+
+```typescript
+// ✅ GOOD - Tests realistic user scenario
+it('should fallback to cozy when unsupported density is provided', () => {
+    const observer = new ContentDensityObserver(injector, {
+        supportedContentDensity: [ContentDensityMode.COZY],
+        defaultContentDensity: ContentDensityMode.COMPACT // User might try this
+    });
+    expect(observer.value).toBe(ContentDensityMode.COZY); // Fallback works
+});
+
+// ❌ BAD - Tests impossible scenario (TypeScript prevents this)
+it('should handle undefined defaultContentDensity', () => {
+    const observer = new ContentDensityObserver(injector, {
+        defaultContentDensity: undefined // TypeScript won't allow this!
+    });
+    expect(observer.value).toBe(ContentDensityMode.COZY);
+});
+```
+
+### Pre-Development Checklist
+
+Before starting implementation of a new feature, complete this checklist to avoid architectural rework:
+
+**✅ Research Phase:**
+
+- [ ] Review AGENTS.md for existing patterns and conventions
+- [ ] Search codebase for similar existing features (`nx graph`, global search)
+- [ ] Check if functionality exists in another library (core, platform, cdk)
+- [ ] Review related GitHub issues and discussions
+
+**✅ Design Phase:**
+
+- [ ] Sketch 2-3 architectural approaches on paper or in comments
+- [ ] Consider: New component vs. extend existing? Service vs. directive vs. function?
+- [ ] Evaluate opt-in (explicit) vs. opt-out (default) behavior
+- [ ] Document chosen approach and rationale in code comments or PR description
+
+**✅ Common Architecture Questions:**
+
+| Question                                        | Decision Factors                                                    |
+| ----------------------------------------------- | ------------------------------------------------------------------- |
+| **New component/directive or extend existing?** | Does existing serve similar purpose? Will extension complicate API? |
+| **Service vs. Directive vs. Function?**         | Need state → Service; Need DOM → Directive; Pure logic → Function   |
+| **Injectable token vs. @Input?**                | Reusable across components → Token; Component-specific → Input      |
+| **Global config vs. per-instance?**             | Library-wide behavior → Global; Component-specific → Per-instance   |
+| **Opt-in vs. opt-out?**                         | Breaking/risky behavior → Opt-in; Enhancement → Opt-out             |
+
+**Example - Avoiding Rework:**
+
+```typescript
+// ❌ BAD - Implement first approach without evaluation
+@Directive({ selector: '[fdUi5ContentDensity]' })
+export class Ui5ContentDensityDirective {
+    // Created full implementation + tests
+    // Later realized should extend existing ContentDensityDirective
+    // Result: Deleted 179 lines, wasted 4-6 hours
+}
+
+// ✅ GOOD - Evaluate approaches first
+/*
+Architecture Decision: UI5 Content Density Support
+
+Approach 1: New fdUi5ContentDensity directive
+  Pros: Separation of concerns, clear intent
+  Cons: Duplicate density logic, users need two directives
+
+Approach 2: Extend existing fdContentDensity directive
+  Pros: Single directive, shared logic, better DX
+  Cons: Adds complexity to existing directive
+
+Decision: Approach 2 - Extend existing directive
+Rationale: UI5 support is enhancement to core functionality,
+           users shouldn't need to know about implementation
+*/
+@Directive({ selector: '[fdContentDensity]' })
+export class ContentDensityDirective {
+    // Single directive handles both core + UI5
+}
+```
+
+### Documentation File Guidelines
+
+**Rule: Avoid creating `.md` files in library directories unless they are permanent user-facing documentation.**
+
+**✅ GOOD - Appropriate documentation locations:**
+
+```
+libs/core/button/README.md               # Public API documentation
+libs/docs/core/button/                   # User-facing examples
+docs/architecture/decisions/ADR-001.md   # Architecture Decision Records
+CHANGELOG.md                             # Release notes
+MIGRATION_GUIDE.md                       # Version migration guide (root)
+```
+
+**❌ BAD - Temporary documentation in library code:**
+
+```
+libs/core/content-density/UI5_MIGRATION.md        # Implementation plan
+libs/platform/table/REFACTORING_TODO.md           # Temporary notes
+libs/core/utils/DESIGN_DECISIONS.md               # Should be ADR or code comments
+```
+
+**Decision Matrix:**
+
+| Document Type                 | Where to Put It                                 | When to Delete              |
+| ----------------------------- | ----------------------------------------------- | --------------------------- |
+| **Implementation plan**       | PR description, GitHub Discussion               | After merging               |
+| **Design rationale**          | Code comments, ADR file in `docs/architecture/` | Never (archive if obsolete) |
+| **Migration guide for users** | Root `MIGRATION_GUIDE.md` or version docs       | Keep until version is EOL   |
+| **Temporary notes**           | Local file (not committed), PR description      | Immediately                 |
+| **API documentation**         | README.md in library root, JSDoc comments       | Keep, update as API evolves |
+| **Usage examples**            | `libs/docs/<library>/` directory                | Keep, update with features  |
+
+**Example - Implementation Planning Documentation:**
+
+During feature development, you may create planning documents with checklists and architecture notes. These are useful during development but should typically not be committed to the library code:
+
+```markdown
+# Implementation plan (useful during development)
+
+## Overview
+
+This document outlines the migration to extend fundamental-ngx's content density...
+
+### Phase 1: Core Changes
+
+- [x] Add UI5 marker support
+- [x] Update tests
+
+### Phase 2: Generator Changes
+
+- [x] Update component template
+```
+
+**Alternative locations for this content:**
+
+1. **PR description** - Provides context for reviewers
+2. **GitHub Project/Issue** - Tracks progress, visible to team
+3. **Code comments** - Documents architectural decisions in the code itself
+4. **Personal notes** - Keep locally, don't commit
+
+**Better approach - Document decisions in code:**
+
+```typescript
+// In code: libs/core/content-density/services/content-density-observer.service.ts
+
+/**
+ * Service for observing and managing content density in components.
+ *
+ * **Architecture Decision:** UI5 Web Components integration
+ *
+ * UI5 components support compact mode via `data-ui5-compact-size` attribute.
+ * This service automatically applies the attribute when density is COMPACT or CONDENSED.
+ *
+ * Design rationale:
+ * - Component-level application (not body-level) for better local override support
+ * - CONDENSED maps to UI5 compact (UI5 only has cozy/compact)
+ * - Enabled by default via `ui5Markers.enabled` configuration
+ *
+ * See: https://sap.github.io/ui5-webcomponents/docs/advanced/configuration/#compact-mode
+ */
+@Injectable()
+export class ContentDensityObserver {
+    // ...
+}
+```
+
+**When to commit planning documents:**
+
+- If it's permanent architectural documentation (ADR)
+- If it's a user-facing migration guide (root level)
+- If it documents public API usage (README.md)
+
+**When to keep them elsewhere:**
+
+- If it's a temporary implementation checklist
+- If it tracks task progress
+- If it's exploratory notes or brainstorming
+
+**When Implementation Plans Are Useful:**
+
+- Keep in PR description for reviewer context
+- Use GitHub Projects/Issues for tracking progress
+- Share in team discussions/RFC documents
+- Store in personal notes (don't commit if temporary)
+
+**Summary:** Planning documents are valuable during development. Consider where they provide the most value - in code comments for architectural decisions, in PR descriptions for reviewer context, or in project tracking tools for progress monitoring.
+
+### Continuous Validation Workflow
+
+**Run validation DURING development, not just at the end:**
+
+```bash
+# Option 1: Watch mode (recommended during active development)
+npx nx run <library>:lint --watch
+npx nx test <library> --watch
+
+# Option 2: Manual checks after each logical change
+npx nx run <library>:lint
+npx nx run <library>:test
+
+# Option 3: Check affected projects
+npx nx affected:lint
+npx nx affected:test
+```
+
+**Cost of Late Validation:**
+
+- Discover lint errors late → Fix → Re-run → Re-check (2-5 minutes)
+- Discover during development → Fix immediately (30 seconds)
+- **Time saved per issue: ~2-4 minutes**
+- **On 5 issues: Saves 10-20 minutes**
+
+### ESLint Compliance
+
+**Member Ordering Rules**
+
+The project enforces strict member ordering via `@typescript-eslint/member-ordering`:
+
+**Correct order:**
+
+1. Static fields (public → protected → private)
+2. Instance fields - **public inputs first** (`input()`, `output()`)
+3. Instance fields - protected
+4. Instance fields - **private last**
+5. Constructors
+6. Methods (public → protected → private)
+
+**Example:**
+
+```typescript
+export class ContentDensityDirective {
+    // ✅ Public inputs FIRST
+    readonly fdContentDensity = input<string>('');
+    readonly fdCompact = input(false, { transform: booleanAttribute });
+
+    // ✅ Computed signals (public API)
+    readonly densityMode = computed(() => { ... });
+
+    // ✅ Getters
+    get value(): LocalContentDensityMode { ... }
+
+    // ✅ Private fields LAST
+    private readonly _elementRef = inject(ElementRef);
+    private readonly _renderer = inject(Renderer2);
+    private readonly _programmaticDensity = signal<LocalContentDensityMode | null>(null);
+
+    // ✅ Constructor
+    constructor() { ... }
+
+    // ✅ Public methods
+    setDensity(density: LocalContentDensityMode): void { ... }
+
+    // ✅ Private methods last
+    private _applyUi5Attribute(density: LocalContentDensityMode): void { ... }
+}
+```
+
+**Variable Shadowing**
+
+Avoid reusing common names like `observer`, `service`, `element` in nested scopes:
+
+```typescript
+// ❌ BAD - Shadowing error
+describe('ContentDensityObserver', () => {
+    let observer: ContentDensityObserver;
+
+    it('should work', () => {
+        @Component({ template: '' })
+        class TestComponent {
+            constructor(readonly observer: ContentDensityObserver) {} // Shadows!
+        }
+    });
+});
+
+// ✅ GOOD - Unique names
+describe('ContentDensityObserver', () => {
+    let observer: ContentDensityObserver;
+
+    it('should work', () => {
+        @Component({ template: '' })
+        class TestComponent {
+            constructor(readonly densityObserver: ContentDensityObserver) {}
+        }
+    });
+});
+```
+
+### Pre-Commit Checklist
+
+Before requesting code review or committing:
+
+- [ ] All modified files compile successfully
+- [ ] All affected library tests pass
+- [ ] No ESLint errors in modified files
+- [ ] No console.log statements (use console.warn/console.debug with guards)
+- [ ] Tests focus on user scenarios, not implementation details
+- [ ] Type annotations use inference where appropriate
+- [ ] All properties referenced actually exist
+- [ ] Member ordering follows ESLint rules
+- [ ] No variable shadowing
+
+### Common Validation Pitfalls
+
+**Pitfall 1: Assuming Type Inference Always Works**
+
+```typescript
+// Don't assume - verify with IDE hover or explicit compilation
+const mySignal = computed(() => complexCalculation());
+// Does TypeScript infer the correct type? Check before proceeding!
+```
+
+**Pitfall 2: Not Running Tests Immediately After Writing**
+
+```typescript
+// Write 20 tests → run once → 16 failures
+// Better: Write 2-3 tests → run → verify → write more
+```
+
+**Pitfall 3: Referencing Non-Existent Properties**
+
+```typescript
+// Always verify property exists in the class before using
+if (this._defaultContentDensity) {
+} // Does this property exist? Check!
+```
+
+**Pitfall 4: Forgetting ESLint Member Ordering**
+
+```typescript
+// Moving fields around? Run lint immediately:
+// $ npx nx run core:lint
+```
+
+### Lessons from Real Incidents
+
+These guidelines emerged from actual debugging sessions:
+
+1. **16 Test Failures**: Wrote tests for TypeScript-prevented scenarios instead of realistic user cases
+2. **Compilation Error**: Changed type annotations without verifying inference worked
+3. **Property Reference Error**: Used `_defaultContentDensity` property that didn't exist
+4. **ESLint Failures**: Moved class members without checking ordering rules
+5. **Variable Shadowing**: Reused `observer` name in nested test components
+
+**Key Takeaway**: Validate early, validate often. The cost of running build-lint-test is low compared to debugging cascading failures.
+
+---
 
 ## Best Practices & Style Guide
 
@@ -189,7 +652,73 @@ Follow the [Angular Style Guide](https://angular.dev/style-guide) for all coding
 
 #### Precise Signal Type Annotations
 
-When exposing signals from services or components, use precise type annotations that match exactly what is assigned:
+When exposing signals from services or components, balance precision with readability:
+
+**For Public API Properties (Recommended Approach):**
+
+Use `Signal<T>` for simplicity and clarity:
+
+```typescript
+// ✅ GOOD - Clear, readable, sufficient for public API
+readonly contentDensity: Signal<ContentDensityMode>;
+readonly isCompact: Signal<boolean>;
+```
+
+**For Complex Signal Types (Use Type Aliases):**
+
+When you need precise types for `linkedSignal` or complex signals, create type aliases:
+
+```typescript
+// ✅ GOOD - Type alias makes complex types manageable
+type ReadonlyLinkedSignal<T> = ReturnType<ReturnType<typeof linkedSignal<T, T>>['asReadonly']>;
+type ReadonlyComputed<T> = ReturnType<typeof computed<T>>;
+
+// Clean usage
+readonly contentDensity: ReadonlyLinkedSignal<ContentDensityMode>;
+readonly isCompact: ReadonlyComputed<boolean>;
+```
+
+**❌ AVOID - Verbose inline ReturnType patterns:**
+
+```typescript
+// Hard to read and maintain
+readonly contentDensity: ReturnType<ReturnType<typeof linkedSignal<ContentDensityMode, ContentDensityMode>>['asReadonly']>;
+readonly isCompact: ReturnType<typeof computed<boolean>>;
+```
+
+**When to Use Each Approach:**
+
+| Context                     | Recommendation        | Reason                                      |
+| --------------------------- | --------------------- | ------------------------------------------- |
+| **Public class properties** | `Signal<T>`           | Simple, clear, sufficient for API contract  |
+| **Private implementation**  | Type inference        | TypeScript infers correctly from assignment |
+| **Complex signal chains**   | Type alias + explicit | Documents complex relationships             |
+| **Generic utilities**       | `ReturnType<...>`     | Ensures type matches generic parameters     |
+
+**Example - Balanced Approach:**
+
+```typescript
+@Injectable()
+export class ContentDensityObserver {
+    // Public API - Simple Signal<T> types
+    readonly contentDensity: Signal<ContentDensityMode>;
+    readonly isCompact: Signal<boolean>;
+
+    // Private - Let TypeScript infer
+    private readonly _contentDensity = linkedSignal({
+        source: this._changesSource,
+        computation: (source) => this._validate(source)
+    });
+
+    constructor() {
+        // Assign and let inference do its work
+        this.contentDensity = this._contentDensity.asReadonly();
+        this.isCompact = computed(() => this._contentDensity() === ContentDensityMode.COMPACT);
+    }
+}
+```
+
+**Legacy Pattern (Still Valid for WritableSignal):**
 
 ```typescript
 // For readonly signals from WritableSignal.asReadonly()
@@ -197,22 +726,70 @@ readonly contentDensity: ReturnType<WritableSignal<ContentDensityMode>['asReadon
 
 // For computed signals
 readonly isCompact: ReturnType<typeof computed<boolean>>;
-
-// Generic Signal type (simpler, also acceptable)
-readonly contentDensity: Signal<ContentDensityMode>;
 ```
 
-**Why use `ReturnType<...>` patterns:**
+**Why this pattern exists:**
 
 - `ReturnType<WritableSignal<T>['asReadonly']>` - Precisely matches the return type of `asReadonly()` method
 - `ReturnType<typeof computed<T>>` - Precisely matches the return type of `computed()` function
 - These ensure type annotations exactly match the assigned value
 
-**When to use each:**
+**Modern Recommendation:** Prefer `Signal<T>` for public APIs unless you have a specific need for the precise `ReturnType` pattern (e.g., complex generics, utility types, or documenting specific signal sources).
 
-- **`Signal<T>`**: General-purpose, works in most cases
-- **`ReturnType<WritableSignal<T>['asReadonly']>`**: When assigning from `signal().asReadonly()`
-- **`ReturnType<typeof computed<T>>`**: When assigning from `computed()`
+#### Type Annotations vs. Inference
+
+**When to use explicit type annotations:**
+
+- ✅ Public method return types (required by lint rules)
+- ✅ Public class properties (documents API contract)
+- ✅ Complex generic types (clarifies intent)
+- ✅ Function parameters (always required)
+
+**When to rely on type inference:**
+
+- ✅ Private properties initialized with typed values
+- ✅ Local variables with obvious types
+- ✅ Computed/linked signals where type flows from source
+- ✅ Constructor property injection
+
+**Examples:**
+
+```typescript
+// ✅ GOOD - Explicit for public API
+export class MyService {
+    // Public property - explicit type documents API
+    readonly status: Signal<string>;
+
+    // Private - inference works fine
+    private readonly _statusSource = signal('idle');
+
+    constructor() {
+        // Inference knows this is Signal<string>
+        this.status = computed(() => `Status: ${this._statusSource()}`);
+    }
+
+    // Public method - explicit return type required
+    getStatus(): string {
+        return this.status();
+    }
+
+    // Private method - inference acceptable
+    private updateStatus(newStatus: string) {
+        this._statusSource.set(newStatus);
+    }
+}
+
+// ❌ AVOID - Unnecessary verbosity
+export class MyService {
+    // Overly explicit private property
+    private readonly _statusSource: WritableSignal<string> = signal<string>('idle');
+
+    // Unnecessary explicit type on obvious inference
+    private readonly _isActive: Signal<boolean> = computed<boolean>(() => this._statusSource() === 'active');
+}
+```
+
+**Key Principle:** _Use types when they add clarity, omit them when they add noise._
 
 ### Angular Best Practices
 
@@ -2130,10 +2707,12 @@ The project uses ESLint with NX and TypeScript plugins. Key rules:
 ### Testing Requirements
 
 - Write unit tests for all new features and bug fixes
+- **Focus on realistic user scenarios** - see [Development Workflow & Validation](#development-workflow--validation)
 - Maintain or improve code coverage
 - Use Jest as the test runner
 - Follow the testing patterns established in the codebase
-- Run `yarn test` before submitting PRs
+- Run `yarn test` or `npx nx test <library>` before submitting PRs
+- **Validate incrementally**: Run tests after writing each test suite, not all at once
 
 ### Testing Patterns with Signals
 
