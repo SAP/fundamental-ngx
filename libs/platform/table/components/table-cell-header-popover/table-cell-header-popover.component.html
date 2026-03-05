@@ -70,19 +70,25 @@
         @if (!columnFrozen) {
             <div fd-list-link role="button" [focusable]="true" (click)="_freeze()" (keydown.enter)="_freeze()">
                 <span fd-list-title>{{
-                    (!column.endFreezable
-                        ? columnIndex > 0
-                            ? 'platformTable.headerMenuFreezePlural'
-                            : 'platformTable.headerMenuFreeze'
-                        : 'platformTable.headerMenuEndFreeze'
-                    ) | fdTranslate
+                    (
+                        (!column.endFreezable
+                            ? columnIndex > 0
+                                ? 'platformTable.headerMenuFreezePlural'
+                                : 'platformTable.headerMenuFreeze'
+                            : 'platformTable.headerMenuEndFreeze'
+                        ) | fdTranslate
+                    )()
                 }}</span>
             </div>
         } @else {
             <div fd-list-link role="button" [focusable]="true" (click)="_unFreeze()" (keydown.enter)="_unFreeze()">
                 <span fd-list-title>{{
-                    (columnIndex > 0 ? 'platformTable.headerMenuUnfreezePlural' : 'platformTable.headerMenuUnfreeze')
-                        | fdTranslate
+                    (
+                        (columnIndex > 0
+                            ? 'platformTable.headerMenuUnfreezePlural'
+                            : 'platformTable.headerMenuUnfreeze'
+                        ) | fdTranslate
+                    )()
                 }}</span>
             </div>
         }
@@ -94,7 +100,7 @@
             <i fd-list-icon glyph="filter"></i>
             <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
                 <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
-                    'platformTable.headerMenuFilter' | fdTranslate
+                    ('platformTable.headerMenuFilter' | fdTranslate)()
                 }}</label>
                 <input
                     fd-form-control

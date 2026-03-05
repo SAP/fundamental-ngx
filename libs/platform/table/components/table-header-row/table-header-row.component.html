@@ -37,15 +37,15 @@
         (cellFocused)="_tableRowService.cellFocused($event)"
         [attr.title]="
             !checkedState
-                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
-                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
+                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)()
+                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)()
         "
         [attr.aria-description]="
             checkedState
-                ? ('platformTable.deselectAllCheckboxLongLabel' | fdTranslate)
+                ? ('platformTable.deselectAllCheckboxLongLabel' | fdTranslate)()
                 : checkedState === null
-                  ? ('platformTable.selectAllCheckboxMixedLongLabel' | fdTranslate)
-                  : ('platformTable.selectAllCheckboxLongLabel' | fdTranslate)
+                  ? ('platformTable.selectAllCheckboxMixedLongLabel' | fdTranslate)()
+                  : ('platformTable.selectAllCheckboxLongLabel' | fdTranslate)()
         "
     >
         @if (selectionMode === SELECTION_MODE.MULTIPLE) {

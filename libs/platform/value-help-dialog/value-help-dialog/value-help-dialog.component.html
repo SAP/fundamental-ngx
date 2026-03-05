@@ -429,7 +429,7 @@
             <ng-template
                 [ngTemplateOutlet]="tabLink"
                 [ngTemplateOutletContext]="{
-                    title: 'platformVHD.selectTabTitle' | fdTranslate,
+                    title: ('platformVHD.selectTabTitle' | fdTranslate)(),
                     type: selectedTab
                 }"
             ></ng-template>
@@ -441,7 +441,7 @@
             <ng-template
                 [ngTemplateOutlet]="tabLink"
                 [ngTemplateOutletContext]="{
-                    title: 'platformVHD.defineTabTitle' | fdTranslate,
+                    title: ('platformVHD.defineTabTitle' | fdTranslate)(),
                     type: selectedTab
                 }"
             ></ng-template>

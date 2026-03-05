@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigoi valinnoissa ylä- ja alanuolilla.',
         escapeNavigateTokens:
             'Voit poistua syöttökentästä Escape-näppäimellä ja navigoida valituissa vaihtoehdoissa käyttämällä vasenta ja oikeaa nuolinäppäintä.',
-        tokensCountText: 'Sisältää tunnuksia yhteensä: {length}'
+        tokensCountText: 'Sisältää tunnuksia yhteensä: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Päänavigointi',

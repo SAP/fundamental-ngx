@@ -37,7 +37,10 @@
         >
             <span fd-list-title>
                 {{
-                    'platformTable.showingBlankOfBlank' | fdTranslate: { totalGrowingItemsCount: _table.loadedRows$() }
+                    (
+                        'platformTable.showingBlankOfBlank'
+                        | fdTranslate: { totalGrowingItemsCount: _table.loadedRows$() }
+                    )()
                 }}
             </span>
         </li>

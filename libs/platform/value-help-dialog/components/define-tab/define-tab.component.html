@@ -10,8 +10,10 @@
                 </label>
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
                     {{
-                        'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
+                        (
+                            'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
                             | fdTranslate: { value: item.strategy }
+                        )()
                     }}</label
                 >
                 <fd-select
@@ -33,7 +35,7 @@
                     @if (_includeStrategy.length) {
                         <li fd-list-group-header>
                             <span fd-list-title>{{
-                                'platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate
+                                ('platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate)()
                             }}</span>
                         </li>
                         @for (strategy of _includeStrategy; track strategy) {
@@ -48,7 +50,7 @@
                     @if (_excludeStrategy.length) {
                         <li fd-list-group-header>
                             <span fd-list-title>{{
-                                'platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate
+                                ('platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate)()
                             }}</span>
                         </li>
                         @for (strategy of _excludeStrategy; track strategy) {
@@ -206,7 +208,7 @@
 <ng-template #countError let-count>
     @if (count && count > 7) {
         <fd-form-message type="error">
-            {{ 'platformVHD.defineConditionMaxCountError' | fdTranslate: { count: 7 } }}
+            {{ ('platformVHD.defineConditionMaxCountError' | fdTranslate: { count: 7 })() }}
         </fd-form-message>
     }
 </ng-template>

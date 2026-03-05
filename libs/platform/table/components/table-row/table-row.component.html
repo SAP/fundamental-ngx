@@ -146,9 +146,9 @@
         (keydown.space)="_handleCellSpaceKey($index, tableCellElement, $event)"
         [attr.title]="
             _isTreeRowFirstCell($index, row) && row.expanded
-                ? ('platformTable.collapseRowButtonTitle' | fdTranslate)
+                ? ('platformTable.collapseRowButtonTitle' | fdTranslate)()
                 : _isTreeRowFirstCell($index, row) && !row.expanded
-                  ? ('platformTable.expandRowButtonTitle' | fdTranslate)
+                  ? ('platformTable.expandRowButtonTitle' | fdTranslate)()
                   : null
         "
     >

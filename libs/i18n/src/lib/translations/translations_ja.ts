@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: '上下の矢印で選択内容をナビゲートします。',
         escapeNavigateTokens:
             'Escape キーを押して入力フィールドを終了し、左右の矢印キーを使用して選択済みオプションをナビゲートします。',
-        tokensCountText: '含まれるトークンの合計: {length}'
+        tokensCountText: '含まれるトークンの合計: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'メインナビゲーション',

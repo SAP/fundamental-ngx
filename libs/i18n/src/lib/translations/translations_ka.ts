@@ -34,7 +34,8 @@ export default {
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',
-        rightNavigationBtnLabel: 'მომდევნო ელემენტზე გადასვლა'
+        rightNavigationBtnLabel: 'მომდევნო ელემენტზე გადასვლა',
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed'
     },
     coreDatePicker: {
         dateInputLabel: 'თარიღის ველი',
@@ -96,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'მთავარი ნავიგაცია',
@@ -208,7 +210,11 @@ export default {
         periodLabel: 'პერიოდი',
         decreasePeriodLabel: 'პერიოდის შემცირება',
         navigationInstruction:
-            'სიაში სამოძრაოდ დააჭირეთ ზედა და ქვედა ღილაკებს. სიებს შორის სამოძრაოდ - მარჯვენა და მარცხენა ღილაკებს.'
+            'სიაში სამოძრაოდ დააჭირეთ ზედა და ქვედა ღილაკებს. სიებს შორის სამოძრაოდ - მარჯვენა და მარცხენა ღილაკებს.',
+        nightLabel: 'at night',
+        morningLabel: 'in the morning',
+        afternoonLabel: 'in the afternoon',
+        eveningLabel: 'in the evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'დროის შესაყვანი ველი',
@@ -235,7 +241,8 @@ export default {
         ariaLabel: 'ოსტატი'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'მეტი'
+        overflowTitleMore: 'მეტი',
+        breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'დამკვირვებლები',
@@ -404,6 +411,11 @@ export default {
         searchSuggestionMessage: 'ნაპოვნია {count} შემოთავაზება.',
         searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search',
+        backButtonLabel: 'Back'
+    },
     platformSwitch: {
         ariaLabel: 'გადამრთველი'
     },
@@ -454,6 +466,8 @@ export default {
         headerMenuFreeze: 'გაყინვა',
         headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'მენიუს განბლოკვა',
+        headerMenuFreezePlural: 'Freeze columns',
+        headerMenuUnfreezePlural: 'Unfreeze columns',
         headerMenuFilter: 'ფილტრი',
         defaultEmptyMessage: 'მონაცემები ვერ მოიძებნა',
         emptyCell: 'ცარიელი',
@@ -529,6 +543,7 @@ export default {
         expandRowButtonTitle: 'Expand row',
         collapseRowButtonTitle: 'Collapse row',
         rowNavigateButtonTitle: 'Navigate',
+        filterDialogBackToColumns: 'Navigate back',
         filterDialogNotFilteredLabel: '(გაუფილტრავი)',
         filterDialogFilterByLabel: 'გაფილტრე: {filterLabel}',
         filterDialogFilterTitle: 'ფილტრი',
@@ -558,7 +573,14 @@ export default {
         deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        loadMore: 'Show More',
+        toolbarActionButtonTitle: 'Settings',
+        settingsDialogHeader: 'Settings',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Cancel',
+        filteredBy: 'Filtered by',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'შესწორება'
@@ -626,7 +648,11 @@ export default {
     },
     coreNotification: {
         triggerMoreLabel: 'More',
-        triggerLessLabel: 'Less'
+        triggerLessLabel: 'Less',
+        groupHeaderTitle: 'Expand/Collapse',
+        groupAriaDescription: 'Notification Group',
+        groupAriaDescriptionExpanded: 'expanded',
+        groupAriaDescriptionCollapsed: 'collapsed'
     },
     segmentedButton: {
         groupRoleDescription: 'Segmented Button Group',

@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigera urval med upp- och nedpilarna.',
         escapeNavigateTokens:
             'Tryck på Esc för att stänga inmatningsfältet och använd vänster- och högerpilarna för att navigera genom valda alternativ.',
-        tokensCountText: 'Innehåller totalt antal token: {length}.'
+        tokensCountText: 'Innehåller totalt antal token: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Huvudnavigering',

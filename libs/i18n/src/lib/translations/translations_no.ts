@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Naviger utvalg med oppover og nedover pilene.',
         escapeNavigateTokens:
             'Trykk på Escape for å avslutte inndatafeltet og bruk venstre og høyre piltastene til å navigere gjennom de valgte alternativene.',
-        tokensCountText: 'Totalt antall token: {length}'
+        tokensCountText: 'Totalt antall token: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigering',

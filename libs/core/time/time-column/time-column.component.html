@@ -1,5 +1,5 @@
 <label class="fd-time__slider-label">{{
-    timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.label | fdTranslate))
+    timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.label | fdTranslate)())
 }}</label>
 @if (active && spinners) {
     <button
@@ -59,7 +59,7 @@
         [attr.aria-labelledby]="currentIndicatorValueId"
         [attr.aria-description]="
             timeConfig?.navigationInstruction ||
-            (internalTranslationConfig && (internalTranslationConfig.navigationInstruction | fdTranslate))
+            (internalTranslationConfig && (internalTranslationConfig.navigationInstruction | fdTranslate)())
         "
         (focus)="_onFocusIndicator()"
     >
@@ -72,7 +72,8 @@
         >
             {{ activeValue?.label }}
             {{
-                timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.fullLabel | fdTranslate))
+                timeConfig?.label ||
+                    (internalTranslationConfig && (internalTranslationConfig.fullLabel | fdTranslate)())
             }}
         </span>
     </div>

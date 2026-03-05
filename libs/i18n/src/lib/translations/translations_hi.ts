@@ -34,7 +34,8 @@ export default {
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
-        rightNavigationBtnLabel: 'अगले वस्तु पर जाएं'
+        rightNavigationBtnLabel: 'अगले वस्तु पर जाएं',
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed'
     },
     coreDatePicker: {
         dateInputLabel: 'दिनांक इनपुट',
@@ -96,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
@@ -208,7 +210,11 @@ export default {
         periodLabel: 'अवधि',
         decreasePeriodLabel: 'अवधि घटाएं',
         navigationInstruction:
-            'इस सूची में वस्तुओं के बीच जाने के लिए, ऊपर तीर या निचला तीर दबाएं। सूचियों के बीच स्विच करने के लिए बायाँ तीर या दायाँ तीर दबाएँ।'
+            'इस सूची में वस्तुओं के बीच जाने के लिए, ऊपर तीर या निचला तीर दबाएं। सूचियों के बीच स्विच करने के लिए बायाँ तीर या दायाँ तीर दबाएँ।',
+        nightLabel: 'at night',
+        morningLabel: 'in the morning',
+        afternoonLabel: 'in the afternoon',
+        eveningLabel: 'in the evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'समय चुनने वाला इनपुट',
@@ -235,7 +241,8 @@ export default {
         ariaLabel: 'विज़ार्ड'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'और'
+        overflowTitleMore: 'और',
+        breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'नजर रखने वाले',
@@ -404,6 +411,11 @@ export default {
         searchSuggestionMessage: '{count} सुझाव मिले',
         searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search',
+        backButtonLabel: 'Back'
+    },
     platformSwitch: {
         ariaLabel: 'स्विच'
     },
@@ -454,6 +466,8 @@ export default {
         headerMenuFreeze: 'फ्रीज करें',
         headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'हैडर मेनू अनफ्रीज',
+        headerMenuFreezePlural: 'Freeze columns',
+        headerMenuUnfreezePlural: 'Unfreeze columns',
         headerMenuFilter: 'फिल्टर',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
         emptyCell: 'खाली',
@@ -529,6 +543,7 @@ export default {
         expandRowButtonTitle: 'Expand row',
         collapseRowButtonTitle: 'Collapse row',
         rowNavigateButtonTitle: 'Navigate',
+        filterDialogBackToColumns: 'Navigate back',
         filterDialogNotFilteredLabel: '(फ़िल्टर नहीं किया गया)',
         filterDialogFilterByLabel: 'के द्वारा छनित: {filterLabel}',
         filterDialogFilterTitle: 'फ़िल्टर',
@@ -558,7 +573,14 @@ export default {
         deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        loadMore: 'Show More',
+        toolbarActionButtonTitle: 'Settings',
+        settingsDialogHeader: 'Settings',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Cancel',
+        filteredBy: 'Filtered by',
+        clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'संपादित करें'
@@ -625,6 +647,10 @@ export default {
         snappedPopoverRoleDescription: 'Navigation List Tree'
     },
     coreNotification: {
+        groupHeaderTitle: 'Expand/Collapse',
+        groupAriaDescription: 'Notification Group',
+        groupAriaDescriptionExpanded: 'expanded',
+        groupAriaDescriptionCollapsed: 'collapsed',
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
     },

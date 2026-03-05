@@ -98,7 +98,8 @@ export default {
             "Naviguez entre les sélections à l'aide des flèches pointant vers le haut et le bas.",
         escapeNavigateTokens:
             'Appuyez sur Échap pour quitter le champ de saisie et utilisez les touches fléchées pointant vers la gauche ou la droite pour naviguer entre les options sélectionnées.',
-        tokensCountText: 'Contient ce nombre total de jetons : {length}.'
+        tokensCountText: 'Contient ce nombre total de jetons : {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Navigation principale',

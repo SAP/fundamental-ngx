@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'По выбранным позициям можно передвигаться с помощью стрелок вверх и вниз.',
         escapeNavigateTokens:
             'Нажмите Escape, чтобы выйти из поля ввода. По выбранным опциям можно передвигаться с помощью стрелок вверх и вниз.',
-        tokensCountText: 'Содержит токенов, всего: {length}.'
+        tokensCountText: 'Содержит токенов, всего: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Основная навигация',

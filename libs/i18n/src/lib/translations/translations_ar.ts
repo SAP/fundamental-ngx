@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'يمكنك التنقل بين التحديدات بالسهم المتجه لأعلى والسهم المتجه لأسفل.',
         escapeNavigateTokens:
             'يمكنك ضغط ’تجاهل‘ للخروج من حقل الإدخال، واستخدام مفتاح السهم لأعلى ومفتاح السهم لأسفل للتنقل بين الخيارات المحددة.',
-        tokensCountText: 'يحتوي على إجمالي الرموز المميزة: {length}.'
+        tokensCountText: 'يحتوي على إجمالي الرموز المميزة: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'التنقل الرئيسي',

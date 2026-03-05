@@ -5,7 +5,7 @@
                 @if (activeTab() !== 'filter') {
                     <fd-bar-element>
                         <span role="heading" [attr.aria-level]="headingLevel" fd-title [headerSize]="4">{{
-                            'platformTable.settingsDialogHeader' | fdTranslate
+                            ('platformTable.settingsDialogHeader' | fdTranslate)()
                         }}</span>
                     </fd-bar-element>
                 } @else {

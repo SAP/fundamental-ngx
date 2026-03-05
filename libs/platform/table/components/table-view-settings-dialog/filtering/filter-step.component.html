@@ -8,7 +8,7 @@
         (click)="back.emit()"
     ></button>
     <span role="heading" [attr.aria-level]="headingLevel" fd-title [headerSize]="4">
-        {{ 'platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label } }}
+        {{ ('platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label })() }}
     </span>
 </ng-template>
 

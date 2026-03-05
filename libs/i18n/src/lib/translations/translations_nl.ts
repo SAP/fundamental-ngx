@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Gebruik de pijl-omhoog en pijl-omlaag om door de selecties te bladeren.',
         escapeNavigateTokens:
             'Druk op Escape om het invoerveld te sluiten en gebruik pijl-links en pijl-rechts om door de geselecteerde opties te bladeren.',
-        tokensCountText: 'Totaal aantal tokens: {length}.'
+        tokensCountText: 'Totaal aantal tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hoofdnavigatie',

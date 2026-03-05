@@ -25,8 +25,10 @@ import { Observable } from 'rxjs';
             <div fd-form-item class="fd-multi-combobox-select-all__form-item">
                 <fd-checkbox tabIndexValue="-1" [ngModel]="checkboxValue" [tristate]="true">
                     {{
-                        'coreMultiComboBox.selectAllLabel'
+                        (
+                            'coreMultiComboBox.selectAllLabel'
                             | fdTranslate: { selectedItems: selectedItems.length, totalItems: flatItems.length }
+                        )()
                     }}
                 </fd-checkbox>
             </div>

@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Desplácese por las selecciones con las flechas de arriba y abajo.',
         escapeNavigateTokens:
             'Pulse Escape para salir del campo de entrada y utilice las teclas de flecha izquierda y derecha para desplazarse por las opciones seleccionadas.',
-        tokensCountText: 'Contiene tokens totales: {length}.'
+        tokensCountText: 'Contiene tokens totales: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Navegación principal',

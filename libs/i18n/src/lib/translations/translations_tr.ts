@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Aşağı ve yukarı okları kullanarak seçimler arasında gezinin.',
         escapeNavigateTokens:
             'Giriş alanından çıkmak için escape tuşuna basın ve belirlenen seçenekler arasında gezinmek için sol ve sağ ok tuşlarını kullanın.',
-        tokensCountText: 'Toplam belirteç sayısını içerir: {length}.'
+        tokensCountText: 'Toplam belirteç sayısını içerir: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Ana Gezinme Düzeni',

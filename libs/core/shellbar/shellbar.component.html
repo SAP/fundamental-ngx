@@ -23,7 +23,7 @@
                         (fdkClicked)="_navigationClicked($event)"
                         [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()"
                         [attr.aria-label]="
-                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)
+                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()
                         "
                     ></button>
                 }

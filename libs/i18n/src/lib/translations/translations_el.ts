@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Πλοήγηση επιλογών με τα βέλη πάνω και κάτω.',
         escapeNavigateTokens:
             'Πατήστε το πλήκτρο διαφυγής (escape) για να κλείσετε το πεδίο και χρησιμοποιήστε τα βέλη δεξιά και αριστερά για να πλοηγηθείτε μέσω των επιλεγμένων δυνατοτήτων.',
-        tokensCountText: 'Περιέχει συνολικά διακριτικά: {μήκος}.'
+        tokensCountText: 'Περιέχει συνολικά διακριτικά: {μήκος}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Κύρια Πλοήγηση',

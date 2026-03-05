@@ -4,8 +4,10 @@
             {{ ('platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate)() }}
         } @else {
             {{
-                'platformApprovalFlow.userListSelectedItemsCountPlural'
+                (
+                    'platformApprovalFlow.userListSelectedItemsCountPlural'
                     | fdTranslate: { count: _allSelectedUsers.length }
+                )()
             }}
         }
     </div>

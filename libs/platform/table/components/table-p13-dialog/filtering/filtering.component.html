@@ -18,10 +18,12 @@
         <fd-panel [expanded]="_includePanelExpanded">
             <div fd-panel-title>
                 {{
-                    (_validIncludeRulesCount > 0
-                        ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
-                        : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
-                    ) | fdTranslate: { count: _validIncludeRulesCount }
+                    (
+                        (_validIncludeRulesCount > 0
+                            ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
+                            : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
+                        ) | fdTranslate: { count: _validIncludeRulesCount }
+                    )()
                 }}
             </div>
             <div fd-panel-content>
@@ -41,7 +43,7 @@
                                     fdType="transparent"
                                     glyph="sys-cancel"
                                     [attr.aria-label]="
-                                        'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
+                                        ('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()
                                     "
                                     [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
                                     (click)="_removeRule(rule, _includeRules)"
@@ -52,7 +54,7 @@
                                         fdType="transparent"
                                         glyph="add"
                                         [attr.aria-label]="
-                                            'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
+                                            ('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()
                                         "
                                         [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
                                         (click)="_addNewRule(_includeRules)"
@@ -68,10 +70,12 @@
         <fd-panel [expanded]="_excludePanelExpanded">
             <div fd-panel-title>
                 {{
-                    (_validExcludeRulesCount > 0
-                        ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
-                        : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
-                    ) | fdTranslate: { count: _validExcludeRulesCount }
+                    (
+                        (_validExcludeRulesCount > 0
+                            ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
+                            : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
+                        ) | fdTranslate: { count: _validExcludeRulesCount }
+                    )()
                 }}
             </div>
             <div fd-panel-content>
@@ -91,7 +95,7 @@
                                     fdType="transparent"
                                     glyph="sys-cancel"
                                     [attr.aria-label]="
-                                        'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
+                                        ('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()
                                     "
                                     [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
                                     (click)="_removeRule(rule, _excludeRules)"
@@ -102,7 +106,7 @@
                                         fdType="transparent"
                                         glyph="add"
                                         [attr.aria-label]="
-                                            'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
+                                            ('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()
                                         "
                                         [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
                                         (click)="_addNewRule(_excludeRules)"

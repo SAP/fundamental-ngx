@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Odabirima navigirajte strelicama Gore i Dolje.',
         escapeNavigateTokens:
             'Za izlaz iz polja unosa pritisnite gumb Escape i upotrijebite gumbe sa strelicama Lijevo i Desno za navigiranje kroz odabrane mogućnosti.',
-        tokensCountText: 'Sadržava ukupno tokena: {length}.'
+        tokensCountText: 'Sadržava ukupno tokena: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Glavna navigacija',

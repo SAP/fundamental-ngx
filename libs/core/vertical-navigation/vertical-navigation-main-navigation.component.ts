@@ -5,7 +5,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 @Component({
     selector: 'fd-vertical-navigation-main-navigation',
     template: `<nav
-        [attr.aria-label]="'coreNavigation.mainNavigation' | fdTranslate"
+        [attr.aria-label]="('coreNavigation.mainNavigation' | fdTranslate)()"
         class="fd-vertical-nav__main-navigation"
     >
         <ng-content></ng-content>

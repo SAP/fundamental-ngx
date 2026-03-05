@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Переміщайтеся між виділеними елементами за допомогою стрілок вгору та вниз.',
         escapeNavigateTokens:
             'Натисніть клавішу escape, щоб вийти з поля введення, і використовуйте клавіші зі стрілками вліво й вправо для переходу між вибраними опціями.',
-        tokensCountText: 'Містить загалом токенів: {length}.'
+        tokensCountText: 'Містить загалом токенів: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Головна навігація',

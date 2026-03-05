@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Výběry procházejte šipkami nahoru a dolů.',
         escapeNavigateTokens:
             'Klávesou escape (Esc) opustíte vstupní pole. Vybrané možnosti procházejte šipkami nahoru a dolů.',
-        tokensCountText: 'Celkový počet obsažených tokenů: {length}.'
+        tokensCountText: 'Celkový počet obsažených tokenů: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hlavní navigace',

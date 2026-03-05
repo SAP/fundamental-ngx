@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Usmeravajte odabire strelicama gore i dole.',
         escapeNavigateTokens:
             'Pritisnite Escape da napustite polje unosa i koristite strelice levo i desno da usmeravate kroz odabrane opcije.',
-        tokensCountText: 'Sadrži ukupno tokena: {length}.'
+        tokensCountText: 'Sadrži ukupno tokena: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Glavno usmeravanje',

@@ -15,12 +15,14 @@
                 <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
                     @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                         {{
-                            'coreTokenizer.moreLabel'
+                            (
+                                'coreTokenizer.moreLabel'
                                 | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                            )()
                         }}
                     }
                     @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                        {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+                        {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
                     }
                 </span>
             }
@@ -68,10 +70,15 @@
     @if (_showMoreElement && _hiddenTokens.length > 0) {
         <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
             @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
-                {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
+                {{
+                    (
+                        'coreTokenizer.moreLabel'
+                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                    )()
+                }}
             }
             @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+                {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
             }
         </span>
     }

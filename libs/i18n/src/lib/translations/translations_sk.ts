@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Prechádzajte výbermi pomocou šípok nahor a nadol.',
         escapeNavigateTokens:
             'Stlačením klávesu Esc opustíte vstupné pole a pomocou klávesov so šípkou doľava a doprava môžete prechádzať vybranými možnosťami.',
-        tokensCountText: 'Obsahuje celkový počet tokenov: {length}.'
+        tokensCountText: 'Obsahuje celkový počet tokenov: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hlavná navigácia',

@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigieren Sie mit den Pfeilen nach oben und unten in der Auswahl.',
         escapeNavigateTokens:
             'Drücken Sie die Escape-Taste, um das Eingabefeld zu schließen, und verwenden Sie die Pfeile nach links und rechts, um zwischen den ausgewählten Optionen zu navigieren.',
-        tokensCountText: 'Enthält folgende Tokensumme: {length}.'
+        tokensCountText: 'Enthält folgende Tokensumme: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hauptnavigation',

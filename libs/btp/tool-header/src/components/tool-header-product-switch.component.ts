@@ -36,8 +36,8 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
                 *fdProductSwitchButton
                 fd-button
                 fdbToolHeaderButton
-                [attr.aria-label]="'coreProductSwitch.ariaLabel' | fdTranslate"
-                [attr.title]="'coreProductSwitch.ariaLabel' | fdTranslate"
+                [attr.aria-label]="('coreProductSwitch.ariaLabel' | fdTranslate)()"
+                [attr.title]="('coreProductSwitch.ariaLabel' | fdTranslate)()"
                 glyph="grid"
             ></button>
             <ng-content></ng-content>

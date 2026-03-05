@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Със стрелките нагоре и надолу може да преминавате през избора.',
         escapeNavigateTokens:
             'За изход от полето за въвеждане, натиснете Escape и използвайте клавишите със стрелки наляво и надясно, за да преминете през избраните опции.',
-        tokensCountText: 'Общ брой на съдържащите се токени: {length}.'
+        tokensCountText: 'Общ брой на съдържащите се токени: {length}.',
+        showAll: 'Покажи всички ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Основна навигация',

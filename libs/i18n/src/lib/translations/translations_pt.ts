@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navegue nas seleções com as setas para cima e para baixo.',
         escapeNavigateTokens:
             'Pressione escape para sair do campo de entrada e use as teclas para a esquerda e para a direita para navegar pelas opções selecionadas.',
-        tokensCountText: 'Contém total de tokens: {length}.'
+        tokensCountText: 'Contém total de tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Navegação principal',

@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: 'Contains total tokens: {length}.'
+        tokensCountText: 'Contains total tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

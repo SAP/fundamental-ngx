@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: '위쪽 및 아래쪽 화살표를 사용하여 선택항목을 탐색합니다.',
         escapeNavigateTokens:
             '입력 필드를 종료하려면 Esc 키를 누르고 왼쪽 및 오른쪽 화살표 키를 사용하여 선택한 옵션을 탐색합니다.',
-        tokensCountText: '총 토큰 수 포함: {length}.'
+        tokensCountText: '총 토큰 수 포함: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: '기본 탐색',

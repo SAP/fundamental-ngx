@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'A le és a fel nyíllal navigálhat a kiválasztott elemek között.',
         escapeNavigateTokens:
             'Az Esc billentyű lenyomásával léphet ki a beviteli mezőből, a jobb és a bal nyílbillentyűt lenyomva navigálhat a kiválasztott lehetőségek között.',
-        tokensCountText: 'Összesen {length} tokent tartalmaz.'
+        tokensCountText: 'Összesen {length} tokent tartalmaz.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Fő navigáció',

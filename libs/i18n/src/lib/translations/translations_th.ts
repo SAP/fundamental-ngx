@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'เนวิเกตไปยังรายการที่เลือกด้วยลูกศรขึ้นและลง',
         escapeNavigateTokens:
             'กด Escape เพื่อออกจากฟิลด์อินพุทและใช้แป้นลูกศรซ้ายและขวาเพื่อเนวิเกตไปยังตัวเลือกที่เลือก',
-        tokensCountText: 'มี Token ทั้งหมด: {length}'
+        tokensCountText: 'มี Token ทั้งหมด: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'การเนวิเกตหลัก',

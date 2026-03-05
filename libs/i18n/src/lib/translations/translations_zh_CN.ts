@@ -96,7 +96,8 @@ export default {
         noResults: '无结果。',
         navigateSelectionsWithArrows: '使用向上和向下箭头导航选择。',
         escapeNavigateTokens: '按 escape 退出输入字段并使用向左和向右箭头键浏览所选选项。',
-        tokensCountText: '包含的令牌总数：{length}。'
+        tokensCountText: '包含的令牌总数：{length}。',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: '主导航',

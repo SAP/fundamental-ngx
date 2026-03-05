@@ -96,7 +96,8 @@ export default {
         noResults: '無結果。',
         navigateSelectionsWithArrows: '使用向上和向下箭頭瀏覽選擇。',
         escapeNavigateTokens: '請按逸出離開輸入欄位，並使用向左和向右鍵瀏覽所選選項。',
-        tokensCountText: '包含總計權杖：{length}。'
+        tokensCountText: '包含總計權杖：{length}。',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: '主瀏覽',

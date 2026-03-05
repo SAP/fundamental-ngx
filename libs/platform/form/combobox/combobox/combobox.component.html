@@ -72,10 +72,12 @@
             <div class="fdp-combobox__count-list-results" role="status">
                 @if (_flatSuggestions.length || '0'; as count) {
                     {{
-                        (count === 1
-                            ? 'platformCombobox.countListResultsSingular'
-                            : 'platformCombobox.countListResultsPlural'
-                        ) | fdTranslate: { count: count }
+                        (
+                            (count === 1
+                                ? 'platformCombobox.countListResultsSingular'
+                                : 'platformCombobox.countListResultsPlural'
+                            ) | fdTranslate: { count: count }
+                        )()
                     }}
                 }
             </div>

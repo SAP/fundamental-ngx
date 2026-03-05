@@ -34,7 +34,8 @@ export default {
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
-        rightNavigationBtnLabel: 'Shko te artikulli tjetër'
+        rightNavigationBtnLabel: 'Shko te artikulli tjetër',
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed'
     },
     coreDatePicker: {
         dateInputLabel: 'Hyrja e datës',
@@ -96,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
@@ -208,7 +210,11 @@ export default {
         periodLabel: 'Periudha',
         decreasePeriodLabel: 'Periudha e zvogëlimit',
         navigationInstruction:
-            'Për të lëvizur midis artikujve në këtë listë, shtypni shigjetën lart ose shigjetën e poshtme. Për të kaluar midis listave, shtypni shigjetën majtas ose shigjetën djathtas.'
+            'Për të lëvizur midis artikujve në këtë listë, shtypni shigjetën lart ose shigjetën e poshtme. Për të kaluar midis listave, shtypni shigjetën majtas ose shigjetën djathtas.',
+        nightLabel: 'at night',
+        morningLabel: 'in the morning',
+        afternoonLabel: 'in the afternoon',
+        eveningLabel: 'in the evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Hyrja e zgjedhësit të kohës',
@@ -235,7 +241,8 @@ export default {
         ariaLabel: 'Magjistar'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Më shumë'
+        overflowTitleMore: 'Më shumë',
+        breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Vrojtuesit',
@@ -405,6 +412,11 @@ export default {
         searchSuggestionMessage: '{count} sugjerime u gjetën.',
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search',
+        backButtonLabel: 'Back'
+    },
     platformSwitch: {
         ariaLabel: 'Ndërprerësi'
     },
@@ -455,6 +467,8 @@ export default {
         headerMenuFreeze: 'Blloko',
         headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'Menuja "Shkrije"',
+        headerMenuFreezePlural: 'Freeze columns',
+        headerMenuUnfreezePlural: 'Unfreeze columns',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No data found',
         emptyCell: 'Bosh',
@@ -530,6 +544,7 @@ export default {
         expandRowButtonTitle: 'Expand row',
         collapseRowButtonTitle: 'Collapse row',
         rowNavigateButtonTitle: 'Navigate',
+        filterDialogBackToColumns: 'Navigate back',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filtro sipas: {filterLabel}',
         filterDialogFilterTitle: 'Filtro',
@@ -559,7 +574,14 @@ export default {
         deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        loadMore: 'Show More',
+        toolbarActionButtonTitle: 'Settings',
+        settingsDialogHeader: 'Settings',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Cancel',
+        filteredBy: 'Filtered by',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redakto'
@@ -626,6 +648,10 @@ export default {
         snappedPopoverRoleDescription: 'Navigation List Tree'
     },
     coreNotification: {
+        groupHeaderTitle: 'Expand/Collapse',
+        groupAriaDescription: 'Notification Group',
+        groupAriaDescriptionExpanded: 'expanded',
+        groupAriaDescriptionCollapsed: 'collapsed',
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
     },

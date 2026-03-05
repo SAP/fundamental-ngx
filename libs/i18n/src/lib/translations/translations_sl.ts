@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Krmarjenje po izbirah s puščičnima tipkama navzgor in navzdol.',
         escapeNavigateTokens:
             'Pritisnite Esc, da zapustite vnosno polje, in se s puščičnima tipkama levo in desno pomikate po izbranih možnostih.',
-        tokensCountText: 'Vsebuje skupno število žetonov: {dolžina}.'
+        tokensCountText: 'Vsebuje skupno število žetonov: {dolžina}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Glavno krmarjenje',

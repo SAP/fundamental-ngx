@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigați printre selecții cu săgețile în sus și în jos.',
         escapeNavigateTokens:
             'Apăsați tasta ESC pentru a ieși din câmpul de intrare și utilizați tastele săgeți la stânga și la dreapta pentru a naviga printre opțiunile selectate.',
-        tokensCountText: 'Conține tokenuri totale: {length}.'
+        tokensCountText: 'Conține tokenuri totale: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Meniul principal',

@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'נווט בבחירות עם החצים למעלה ולמטה.',
         escapeNavigateTokens:
             'הקש על Escape כדי לצאת משדה הקלט והשתמש במקשי החצים שמאלה וימינה כדי לנווט בין האפשרויות שנבחרו.',
-        tokensCountText: 'מכיל סה"כ tokens: {length}.'
+        tokensCountText: 'מכיל סה"כ tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'ניווט ראשי',

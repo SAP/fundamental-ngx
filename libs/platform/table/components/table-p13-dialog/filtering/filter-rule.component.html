@@ -23,8 +23,10 @@
                     @for (strategy of rule.strategies; track strategy) {
                         <li fd-option [value]="strategy">
                             {{
-                                strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
+                                (
+                                    strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
                                     | fdTranslate
+                                )()
                             }}
                         </li>
                     }

@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Naviger i valgene med pil op og pil ned.',
         escapeNavigateTokens:
             'Tryk på Escape for at afslutte inputfeltet, og brug venstre og højre piletast til at navigere gennem de valgte muligheder.',
-        tokensCountText: 'Indeholder samlet antal tokens: {length}.'
+        tokensCountText: 'Indeholder samlet antal tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigation',

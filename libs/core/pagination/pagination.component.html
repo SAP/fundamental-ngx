@@ -109,8 +109,10 @@
             />
             <label fd-form-label class="fd-pagination__label">
                 {{
-                    'corePagination.labelAfterInputMobile'
+                    (
+                        'corePagination.labelAfterInputMobile'
                         | fdTranslate: { pageNumber: currentPage, totalCount: _totalPages }
+                    )()
                 }}
             </label>
             <!-- Duplicated to preserve the items order for keyboard navigation -->

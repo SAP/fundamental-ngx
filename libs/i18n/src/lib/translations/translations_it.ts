@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigare tra le selezioni con le frecce su e giù',
         escapeNavigateTokens:
             'Premere Esc per chiudere il campo di immissione e utilizzare le frecce destra e sinistra per navigare tra le opzioni selezionate.',
-        tokensCountText: 'Contiene token totali: {length}.'
+        tokensCountText: 'Contiene token totali: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Navigazione principale',

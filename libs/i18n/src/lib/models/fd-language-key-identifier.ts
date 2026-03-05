@@ -75,6 +75,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreMultiInput.navigateSelectionsWithArrows'
     | 'coreMultiInput.escapeNavigateTokens'
     | 'coreMultiInput.tokensCountText'
+    | 'coreMultiInput.showAll'
     | 'coreNavigation.mainNavigation'
     | 'coreNavigation.navigationPath'
     | 'coreNestedList.linkItemAriaLabel'

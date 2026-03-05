@@ -97,7 +97,8 @@ export default {
         navigateSelectionsWithArrows: 'Жоғары және төмен көрсеткілерді пайдаланып, бөлімдерге өтіңіз.',
         escapeNavigateTokens:
             'Енгізу өрісінен шығу үшін escape пернесін басып, таңдалған опциялар арқылы өту үшін сол және оң жақ көрсеткі пернелерін пайдаланыңыз.',
-        tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.'
+        tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Негізгі навигация',

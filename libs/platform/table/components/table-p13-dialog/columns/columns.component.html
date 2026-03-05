@@ -47,12 +47,14 @@
                 ></fd-checkbox>
                 <span fd-list-title>
                     {{
-                        'platformTable.P13ColumnsDialogSelectAll'
+                        (
+                            'platformTable.P13ColumnsDialogSelectAll'
                             | fdTranslate
                                 : {
                                       selectedColumnsCount: _selectedColumnsCount,
                                       selectableColumnsCount: _selectableColumns.length
                                   }
+                        )()
                     }}
                 </span>
             </li>

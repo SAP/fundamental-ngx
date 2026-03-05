@@ -31,8 +31,10 @@
                                     fdType="transparent"
                                     glyph="decline"
                                     [title]="
-                                        'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle'
+                                        (
+                                            'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle'
                                             | fdTranslate
+                                        )()
                                     "
                                     type="button"
                                 ></button>

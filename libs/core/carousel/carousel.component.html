@@ -69,7 +69,10 @@
                     <span
                         role="img"
                         [attr.aria-label]="
-                            'coreCarousel.pageIndicatorLabel' | fdTranslate: { itemNum: i + 1, totalNum: totalSlides }
+                            (
+                                'coreCarousel.pageIndicatorLabel'
+                                | fdTranslate: { itemNum: i + 1, totalNum: totalSlides }
+                            )()
                         "
                         class="fd-carousel__page-indicator"
                         [class.fd-carousel__page-indicator--active]="i === currentActiveSlidesStartIndex"
