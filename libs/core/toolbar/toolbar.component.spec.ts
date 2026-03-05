@@ -269,3 +269,151 @@ class ToolbarOverflowGroupingTestComponent {
 
     width = '400px';
 }
+
+class MockIntersectionObserver implements IntersectionObserver {
+    root: Element | Document | null = null;
+    rootMargin = '';
+    thresholds: readonly number[] = [];
+    targets: Element[] = [];
+    constructor(public callbackFn: IntersectionObserverCallback) {}
+    disconnect(): void {}
+    observe(target: Element): void {
+        (target as any)._intersectionTrigger = (isIntersecting: boolean) => {
+            this.callbackFn(
+                [
+                    {
+                        target,
+                        isIntersecting,
+                        boundingClientRect: {} as DOMRectReadOnly,
+                        intersectionRatio: isIntersecting ? 1 : 0,
+                        intersectionRect: {} as DOMRectReadOnly,
+                        rootBounds: null,
+                        time: Date.now()
+                    }
+                ],
+                this
+            );
+        };
+        this.targets.push(target);
+    }
+    takeRecords(): IntersectionObserverEntry[] {
+        return [];
+    }
+    unobserve(): void {}
+}
+
+/* Toolbar for visibility detection testing */
+@Component({
+    template: `
+        <div [style.width]="width">
+            <fd-toolbar #toolbar [shouldOverflow]="true">
+                <button fd-toolbar-item>Button1</button>
+                <button fd-toolbar-item>Button2</button>
+                <button fd-toolbar-item>Button3</button>
+            </fd-toolbar>
+        </div>
+    `,
+    standalone: true,
+    imports: [ToolbarModule]
+})
+class ToolbarVisibilityTestComponent {
+    @ViewChild('toolbar') toolbar: ToolbarComponent;
+    width = '300px';
+}
+
+describe('ToolbarComponent - Visibility Detection', () => {
+    let toolbar: ToolbarComponent;
+    let component: ToolbarVisibilityTestComponent;
+    let fixture: ComponentFixture<ToolbarVisibilityTestComponent>;
+    let originalIntersectionObserver: typeof IntersectionObserver;
+
+    beforeEach(waitForAsync(() => {
+        // Store original IntersectionObserver and replace with mock
+        originalIntersectionObserver = global.window.IntersectionObserver;
+        global.window.IntersectionObserver = MockIntersectionObserver as any;
+
+        TestBed.configureTestingModule({
+            imports: [ToolbarVisibilityTestComponent],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ToolbarVisibilityTestComponent);
+
+        await whenStable(fixture);
+
+        component = fixture.componentInstance;
+        toolbar = component.toolbar;
+
+        await whenStable(fixture);
+    });
+
+    afterEach(() => {
+        // Restore original IntersectionObserver
+        global.window.IntersectionObserver = originalIntersectionObserver;
+    });
+
+    it('should trigger overflow recalculation when toolbar becomes visible', (doneFn) => {
+        fixture.whenRenderingDone().then(() => {
+            const refreshSubject = (toolbar as any)._refreshOverflow$;
+            const nextSpy = jest.spyOn(refreshSubject, 'next');
+
+            // Simulate the toolbar becoming visible via IntersectionObserver
+            const nativeElement = toolbar.elementRef.nativeElement;
+            if ((nativeElement as any)._intersectionTrigger) {
+                (nativeElement as any)._intersectionTrigger(true);
+            }
+
+            fixture.detectChanges();
+
+            // The refresh should have been triggered
+            expect(nextSpy).toHaveBeenCalled();
+            doneFn();
+        });
+    });
+
+    it('should not trigger overflow recalculation when toolbar is not visible', (doneFn) => {
+        fixture.whenRenderingDone().then(() => {
+            const refreshSubject = (toolbar as any)._refreshOverflow$;
+            const nextSpy = jest.spyOn(refreshSubject, 'next');
+
+            // Simulate the toolbar being not visible via IntersectionObserver
+            const nativeElement = toolbar.elementRef.nativeElement;
+            if ((nativeElement as any)._intersectionTrigger) {
+                (nativeElement as any)._intersectionTrigger(false);
+            }
+
+            fixture.detectChanges();
+
+            // The refresh should not have been triggered
+            expect(nextSpy).not.toHaveBeenCalled();
+            doneFn();
+        });
+    });
+
+    it('should not trigger overflow recalculation when it should not overflow', (doneFn) => {
+        fixture.whenRenderingDone().then(() => {
+            const refreshSubject = (toolbar as any)._refreshOverflow$;
+            const nextSpy = jest.spyOn(refreshSubject, 'next');
+
+            // Set shouldOverflow to false and trigger visibility change
+            toolbar.shouldOverflow = false;
+            const nativeElement = toolbar.elementRef.nativeElement;
+            if ((nativeElement as any)._intersectionTrigger) {
+                (nativeElement as any)._intersectionTrigger(true);
+            }
+
+            fixture.detectChanges();
+
+            // The refresh should not have been triggered since shouldOverflow is false
+            expect(nextSpy).not.toHaveBeenCalled();
+            doneFn();
+        });
+    });
+});
