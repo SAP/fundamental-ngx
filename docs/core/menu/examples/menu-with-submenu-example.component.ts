@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
 
@@ -9,11 +9,11 @@ import { MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
     imports: [ButtonComponent, MenuModule, NgTemplateOutlet]
 })
 export class MenuWithSubmenuExampleComponent {
-    activePath: MenuItemComponent[] = [];
+    activePath = signal<MenuItemComponent[]>([]);
 
-    complexActivePath: MenuItemComponent[] = [];
+    complexActivePath = signal<MenuItemComponent[]>([]);
 
-    complexMenuItems = [
+    readonly complexMenuItems = [
         {
             title: 'Menu Item 1',
             children: []

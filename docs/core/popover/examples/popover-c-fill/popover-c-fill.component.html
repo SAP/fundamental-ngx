@@ -1,12 +1,51 @@
+<p><strong>Fill Control Mode: Equal</strong></p>
+<p>The popover body width exactly matches the trigger control width.</p>
 <fd-popover [style.display]="'block'" [triggers]="['mouseenter', 'mouseleave']" fillControlMode="equal">
     <fd-popover-control>
         <div [style.border]="'1px dashed black'" [style.padding.px]="24">Control Element - Hover over me!</div>
     </fd-popover-control>
     <fd-popover-body>
         <div [style.padding.px]="12">
-            <p>This is a large popover!</p>
-            <br />
-            <p>It will try to match the width of the control element.</p>
+            <p>This popover matches the width of the control element.</p>
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br /><br />
+
+<p><strong>Fill Control Mode: At Least</strong></p>
+<p>The popover body has a minimum width equal to the control, but can expand if content is wider.</p>
+<fd-popover [triggers]="['mouseenter', 'mouseleave']" fillControlMode="at-least">
+    <fd-popover-control>
+        <div [style.border]="'1px dashed black'" [style.padding.px]="24" [style.width.px]="200">
+            Narrow Control (200px)
+        </div>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div [style.padding.px]="12" [style.white-space]="'nowrap'">
+            <p>This popover expands beyond the control because this content is wider.</p>
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br /><br />
+
+<p><strong>Fill Control Mode with Max Width</strong></p>
+<p>Use <code>maxWidth</code> to limit the popover body width when using <code>fillControlMode</code>.</p>
+<fd-popover
+    [style.display]="'block'"
+    [triggers]="['mouseenter', 'mouseleave']"
+    fillControlMode="equal"
+    [maxWidth]="200"
+>
+    <fd-popover-control>
+        <div [style.border]="'1px dashed black'" [style.padding.px]="24" [style.width.px]="400">
+            Wide Control Element (400px) - Hover over me!
+        </div>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div [style.padding.px]="12">
+            <p>Popover limited to 200px despite wider control.</p>
         </div>
     </fd-popover-body>
 </fd-popover>

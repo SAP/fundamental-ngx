@@ -80,9 +80,17 @@
                     fd-user-menu-list-item
                     icon="action-settings"
                     text="Settings"
+                    subtitle="Configure profile"
                     (click)="actionPicked('Settings')"
                 ></li>
-                <li fd-user-menu-list-item icon="card" text="Menu Item" hasSubmenu [submenu]="menuSublist"></li>
+                <li
+                    fd-user-menu-list-item
+                    icon="card"
+                    text="Menu Item"
+                    subtitle="Menu Item Subtitle"
+                    hasSubmenu
+                    [submenu]="menuSublist"
+                ></li>
                 @for (item of menuItems; track $index) {
                     <li fd-user-menu-list-item icon="card" [text]="item" (click)="actionPicked(item)"></li>
                 }
@@ -96,6 +104,9 @@
                         fd-user-menu-list-item
                         icon="card"
                         text="Sub-menu Item"
+                        subtitle="Sub-menu Item Subtitle"
+                        iconAfter="accept"
+                        iconAfterActive
                         (click)="actionPicked('Sub-menu Item 1')"
                     ></li>
                     <li fd-user-menu-list-item text="Sub-menu Item" (click)="actionPicked('Sub-menu Item 2')"></li>

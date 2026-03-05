@@ -3,8 +3,8 @@
     <fd-segmented-button
         [style.margin-right.px]="10"
         [style.margin-left.px]="10"
-        [ngModel]="originX"
-        (ngModelChange)="originX = $event; refresh()"
+        [ngModel]="originX()"
+        (ngModelChange)="originX.set($event); refresh()"
     >
         @for (option of xPositions; track option) {
             <button fd-button [attr.value]="option" [label]="option"></button>
@@ -15,8 +15,8 @@
     <fd-segmented-button
         [style.margin-right.px]="10"
         [style.margin-left.px]="10"
-        [ngModel]="originY"
-        (ngModelChange)="originY = $event; refresh()"
+        [ngModel]="originY()"
+        (ngModelChange)="originY.set($event); refresh()"
     >
         @for (option of yPositions; track option) {
             <button fd-button [attr.value]="option" [label]="option"></button>
@@ -27,8 +27,8 @@
     <fd-segmented-button
         [style.margin-right.px]="10"
         [style.margin-left.px]="10"
-        [ngModel]="overlayX"
-        (ngModelChange)="overlayX = $event; refresh()"
+        [ngModel]="overlayX()"
+        (ngModelChange)="overlayX.set($event); refresh()"
     >
         @for (option of xPositions; track option) {
             <button fd-button [attr.value]="option" [label]="option"></button>
@@ -39,8 +39,8 @@
     <fd-segmented-button
         [style.margin-right.px]="10"
         [style.margin-left.px]="10"
-        [ngModel]="overlayY"
-        (ngModelChange)="overlayY = $event; refresh()"
+        [ngModel]="overlayY()"
+        (ngModelChange)="overlayY.set($event); refresh()"
     >
         @for (option of yPositions; track option) {
             <button fd-button [attr.value]="option" [label]="option"></button>
@@ -56,7 +56,7 @@
     [style.justify-content]="'center'"
 >
     <fd-popover
-        [cdkPositions]="cdkPosition"
+        [cdkPositions]="cdkPosition()"
         [noArrow]="false"
         [isOpen]="true"
         [triggers]="[]"

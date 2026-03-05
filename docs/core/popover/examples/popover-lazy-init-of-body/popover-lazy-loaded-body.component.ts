@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 
 let componentConstructorCounter = 0;
 
@@ -11,13 +11,14 @@ let componentConstructorCounter = 0;
     `,
     standalone: true
 })
-export class PopoverLazyLoadedBodyComponent implements AfterViewInit {
+export class PopoverLazyLoadedBodyComponent {
     componentConstructorCounter = ++componentConstructorCounter;
+
     constructor() {
         console.log('constructed');
-    }
 
-    ngAfterViewInit(): void {
-        console.log('after view init');
+        afterNextRender(() => {
+            console.log('after next render');
+        });
     }
 }

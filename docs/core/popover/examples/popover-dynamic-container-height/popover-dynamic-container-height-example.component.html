@@ -1,5 +1,5 @@
 <div fdPopoverContainer>
-    @if (showOverflowContainer) {
+    @if (showOverflowContainer()) {
         <div [style.height.px]="200"></div>
     }
     <button fd-button (click)="resetOverflowContainer()">Change height in 2 seconds</button>

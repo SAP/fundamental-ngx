@@ -26,7 +26,11 @@
                 </fd-dynamic-page-breadcrumb>
                 <fd-dynamic-page-title-content [fdCompact]="compact"> Key Info </fd-dynamic-page-title-content>
                 <fd-dynamic-page-global-actions>
-                    <fd-toolbar fdType="transparent" [clearBorder]="true" [size]="compact ? 'compact' : 'cozy'">
+                    <fd-toolbar
+                        fdType="transparent"
+                        [clearBorder]="true"
+                        [fdContentDensity]="compact ? 'compact' : 'cozy'"
+                    >
                         <ng-container [fdCompact]="compact">
                             <button
                                 fd-toolbar-item
@@ -50,7 +54,11 @@
                 </fd-dynamic-page-global-actions>
                 <fd-dynamic-page-layout-actions>
                     <!-- layout actions -->
-                    <fd-toolbar fdType="transparent" [clearBorder]="true" [size]="compact ? 'compact' : 'cozy'">
+                    <fd-toolbar
+                        fdType="transparent"
+                        [clearBorder]="true"
+                        [fdContentDensity]="compact ? 'compact' : 'cozy'"
+                    >
                         <ng-container [fdCompact]="compact">
                             <button fd-button fdType="transparent" ariaLabel="Resize" title="Resize">
                                 <i class="sap-icon--resize"></i>

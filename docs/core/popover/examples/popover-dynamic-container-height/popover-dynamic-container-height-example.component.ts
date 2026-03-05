@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -32,15 +32,17 @@ import {
     ]
 })
 export class PopoverDynamicContainerHeightExampleComponent {
-    showOverflowContainer = false;
+    showOverflowContainer = signal(false);
 
-    overflowContainerTimeout: any;
+    private _overflowContainerTimeout: ReturnType<typeof setTimeout> | null = null;
 
     resetOverflowContainer(): void {
-        clearTimeout(this.overflowContainerTimeout);
-        this.showOverflowContainer = false;
-        this.overflowContainerTimeout = setTimeout(() => {
-            this.showOverflowContainer = true;
+        if (this._overflowContainerTimeout) {
+            clearTimeout(this._overflowContainerTimeout);
+        }
+        this.showOverflowContainer.set(false);
+        this._overflowContainerTimeout = setTimeout(() => {
+            this.showOverflowContainer.set(true);
         }, 2000);
     }
 }

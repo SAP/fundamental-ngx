@@ -1,12 +1,33 @@
+<p><strong>appendTo</strong></p>
+<p>Position the popover relative to a different element (the dashed box below).</p>
 <div [style.padding.px]="100" [style.text-align]="'center'">
     <fd-popover [appendTo]="element" [style.display]="'block'">
         <fd-popover-control>
             <button fd-button>Trigger</button>
         </fd-popover-control>
         <fd-popover-body>
-            <div [style.padding.px]="12">This popover is connected to other element</div>
+            <div [style.padding.px]="12">This popover is positioned relative to the container below</div>
         </fd-popover-body>
     </fd-popover>
 </div>
 
-<div [style.border]="'1px dashed black'" [style.padding.px]="10" #element>Container</div>
+<div [style.border]="'1px dashed black'" [style.padding.px]="10" #element>Container (appendTo target)</div>
+
+<br /><br />
+
+<p><strong>placementContainer</strong></p>
+<p>
+    Appends the overlay DOM element inside a container instead of body. Useful for z-index stacking contexts (e.g.,
+    inside modals/dialogs). The popover still appears at the trigger, but its DOM is inside the container.
+</p>
+<div #container [style.border]="'2px solid blue'" [style.padding.px]="20" [style.position]="'relative'">
+    <fd-popover [placementContainer]="container">
+        <fd-popover-control>
+            <button fd-button>Open Popover</button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div [style.padding.px]="12">Overlay DOM is inside the blue container</div>
+        </fd-popover-body>
+    </fd-popover>
+    <span [style.margin-left.px]="10">(Inspect DOM to see overlay inside this container)</span>
+</div>

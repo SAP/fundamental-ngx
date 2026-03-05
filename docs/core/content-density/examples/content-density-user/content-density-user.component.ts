@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
     ContentDensityMode,
@@ -15,12 +14,15 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
             fd-object-status
             class="example-component__object-status"
             [inverted]="true"
-            [label]="_contentDensityObserver | async"
+            [label]="_contentDensityObserver.contentDensity()"
         ></span>
     `,
     styleUrls: ['./content-density-user.component.scss'],
     host: {
-        class: 'example-component'
+        class: 'example-component',
+        '[class.is-compact]': '_contentDensityObserver.isCompactSignal()',
+        '[class.is-cozy]': '_contentDensityObserver.isCozySignal()',
+        '[class.is-condensed]': '_contentDensityObserver.isCondensedSignal()'
     },
     providers: [
         contentDensityObserverProviders({
@@ -33,10 +35,8 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
         })
     ],
     encapsulation: ViewEncapsulation.None,
-    imports: [ObjectStatusComponent, AsyncPipe]
+    imports: [ObjectStatusComponent]
 })
 export class ContentDensityUserComponent {
-    constructor(readonly _contentDensityObserver: ContentDensityObserver) {
-        _contentDensityObserver.subscribe();
-    }
+    constructor(readonly _contentDensityObserver: ContentDensityObserver) {}
 }
