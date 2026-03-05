@@ -1,4 +1,4 @@
-import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import {
     booleanAttribute,
@@ -27,6 +27,7 @@ import { asyncScheduler, Observable, observeOn, startWith, Subject, take } from 
 
 let uniqueId = 0;
 let uniqueTextId = 0;
+let uniqueSubtitleId = 0;
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -36,7 +37,9 @@ let uniqueTextId = 0;
         class: 'fd-menu__item',
         role: 'none',
         '[attr.id]': 'uniqueId()',
-        '[attr.aria-labelledby]': 'textId()'
+        '[attr.aria-labelledby]': 'textId()',
+        '(mouseenter)': 'onHostMouseEnter()',
+        '(mouseleave)': 'onHostMouseLeave()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,11 +65,29 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** Icon name for the menu list item (optional) */
     icon = input<string>();
 
+    /** Icon name for the menu list item (optional) */
+    iconAfter = input<string>();
+
+    /** Whether the icon after is in active state */
+    iconAfterActive = input(false, { transform: booleanAttribute });
+
     /** Required text for the menu list item */
     text = input.required<string>();
 
     /** Unique id for the title. Default is provided. */
     textId = input(`fd-menu-list-item-title-${++uniqueTextId}`);
+
+    /** Whether the text should be truncated */
+    truncateText = input(false, { transform: booleanAttribute });
+
+    /** Subtitle text for the menu list item */
+    subtitle = input<string | undefined>();
+
+    /** Unique id for the subtitle. Default is provided. */
+    subtitleId = input(`fd-menu-list-item-subtitle-${++uniqueSubtitleId}`);
+
+    /** Whether the subtitle should be truncated */
+    truncateSubtitle = input(false, { transform: booleanAttribute });
 
     /** Whether the item has a submenu */
     hasSubmenu = input(false, { transform: booleanAttribute });
@@ -112,6 +133,15 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
     /** @hidden Computed signal to track RTL state */
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
+    /** @hidden Track whether popover open/close was triggered by keyboard */
+    private _keyboardTriggered = false;
+
+    /** @hidden Timer for delayed close on mouseleave */
+    private _hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
+
+    /** @hidden Grace period in ms before closing submenu on mouseleave */
+    private readonly _hoverCloseDelay = 150;
+
     /** @hidden */
     @HostListener('focusin')
     focusHandler(): void {
@@ -139,9 +169,11 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
         if (KeyUtil.isKeyCode(event, openKey) && !this.isOpen()) {
             event.preventDefault();
+            this._keyboardTriggered = true;
             popoverInstance.open();
         } else if (KeyUtil.isKeyCode(event, closeKey) && this.isOpen()) {
             event.preventDefault();
+            this._keyboardTriggered = true;
             popoverInstance.close();
         }
     }
@@ -153,11 +185,48 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
         if (KeyUtil.isKeyCode(event, closeKey) && this.isOpen()) {
             event.preventDefault();
+            this._keyboardTriggered = true;
             const popoverInstance = this.popover();
             if (popoverInstance) {
                 popoverInstance.close();
             }
         }
+
+        // Escape is handled by the popover internally, but we need to set the flag
+        // so that focus returns to the trigger item
+        if (KeyUtil.isKeyCode(event, ESCAPE) && this.isOpen()) {
+            this._keyboardTriggered = true;
+        }
+    }
+
+    /** @hidden Open submenu on host mouseenter (non-mobile only) */
+    onHostMouseEnter(): void {
+        if (!this.hasSubmenu() || this.mobile()) {
+            return;
+        }
+        this._cancelHoverCloseTimer();
+        const popoverInstance = this.popover();
+        if (popoverInstance && !this.isOpen()) {
+            popoverInstance.open();
+        }
+    }
+
+    /** @hidden Schedule submenu close on host mouseleave */
+    onHostMouseLeave(): void {
+        if (!this.hasSubmenu() || this.mobile()) {
+            return;
+        }
+        this._scheduleHoverClose();
+    }
+
+    /** @hidden Cancel close when mouse enters the submenu popover body */
+    onSubmenuMouseEnter(): void {
+        this._cancelHoverCloseTimer();
+    }
+
+    /** @hidden Schedule close when mouse leaves the submenu popover body */
+    onSubmenuMouseLeave(): void {
+        this._scheduleHoverClose();
     }
 
     /** Handles submenu selection in mobile mode */
@@ -192,20 +261,44 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
             return;
         }
 
+        const keyboardTriggered = this._keyboardTriggered;
+        this._keyboardTriggered = false;
+
         this.isOpen.set(isOpen);
 
         this.isOpenChange.emit(isOpen);
 
         this._onZoneStable().subscribe(() => {
             this.isOpen() ? linkElement.classList.add('is-selected') : linkElement.classList.remove('is-selected');
-            firstTabbableElement.focus();
+            if (keyboardTriggered && firstTabbableElement && this.isOpen()) {
+                firstTabbableElement.focus();
+            }
         });
 
-        if (!this.isOpen()) {
+        if (!this.isOpen() && keyboardTriggered) {
             linkElement.focus();
         }
 
         this._changeDetectionRef.detectChanges();
+    }
+
+    /** @hidden Schedule a delayed close of the submenu popover */
+    private _scheduleHoverClose(): void {
+        this._cancelHoverCloseTimer();
+        this._hoverCloseTimer = setTimeout(() => {
+            const popoverInstance = this.popover();
+            if (popoverInstance && this.isOpen()) {
+                popoverInstance.close();
+            }
+        }, this._hoverCloseDelay);
+    }
+
+    /** @hidden Cancel any pending hover close timer */
+    private _cancelHoverCloseTimer(): void {
+        if (this._hoverCloseTimer !== null) {
+            clearTimeout(this._hoverCloseTimer);
+            this._hoverCloseTimer = null;
+        }
     }
 
     /** @hidden */

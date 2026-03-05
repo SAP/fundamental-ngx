@@ -5,8 +5,10 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { GlyphMenuAddonDirective } from './directives/glyph-menu-addon.directive';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
+import { MenuContentDirective } from './directives/menu-content.directive';
 import { MenuItemInputDirective } from './directives/menu-item-input.directive';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
+import { MenuSubtitleDirective } from './directives/menu-subtitle.directive';
 import { MenuTitleDirective } from './directives/menu-title.directive';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
@@ -35,6 +37,8 @@ import { MenuComponent } from './menu.component';
         MenuShortcutDirective,
         MenuInteractiveComponent,
         MenuTitleDirective,
+        MenuSubtitleDirective,
+        MenuContentDirective,
         SubmenuComponent,
         MenuTriggerDirective,
         ToggleButtonDirective,
@@ -50,6 +54,8 @@ import { MenuComponent } from './menu.component';
         MenuShortcutDirective,
         MenuInteractiveComponent,
         MenuTitleDirective,
+        MenuSubtitleDirective,
+        MenuContentDirective,
         MenuAddonDirective,
         MenuTriggerDirective,
         ContentDensityModule,

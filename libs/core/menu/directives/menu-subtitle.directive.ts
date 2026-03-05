@@ -5,14 +5,13 @@ import { booleanAttribute, Directive, ElementRef, inject, input } from '@angular
  */
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-menu-title]',
+    selector: '[fd-menu-subtitle]',
     host: {
-        class: 'fd-menu__title',
-        '[class.fd-menu__title--truncate]': 'truncate()',
-        '[attr.title]': 'title'
+        class: 'fd-menu__subtitle',
+        '[class.fd-menu__subtitle--truncate]': 'truncate()'
     }
 })
-export class MenuTitleDirective {
+export class MenuSubtitleDirective {
     /** Whether the title should truncate with ellipsis. */
     readonly truncate = input(false, { transform: booleanAttribute });
 
@@ -20,7 +19,7 @@ export class MenuTitleDirective {
     private readonly _elementRef = inject(ElementRef);
 
     /** Returns element title text */
-    get title(): string {
+    get subtitle(): string {
         return this._elementRef.nativeElement.textContent;
     }
 }
