@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zaneprázdněné',
         defaultTitle: 'Počkejte'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Rozbalit hlavičku',
         collapseLabel: 'Sbalit hlavičku',
         pinLabel: 'Připnout hlavičku',
-        unpinLabel: 'Odepnout hlavičku'
+        unpinLabel: 'Odepnout hlavičku',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'další(ch) {count}',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Pruh varovných zpráv',
         announcementError: 'Pruh chybových zpráv',
         announcementSuccess: 'Pruh zpráv o úspěšném provedení',
-        closable: 'Lze zavřít'
+        closable: 'Lze zavřít',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Více',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Více',
         lessLabel: 'Méně'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zadání výběru času',
-        timePickerButtonLabel: 'Otevřít nástroj pro výběr'
+        timePickerButtonLabel: 'Otevřít nástroj pro výběr',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Lze odstranit',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Průvodce'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Kliknutím nebo stisknutím enter zobrazíte další detaily',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'nazahájeno'
     },
     platformFeedInput: {
-        userTitle: 'Uživatel'
+        userTitle: 'Uživatel',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Více'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Vymazat filtry'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Upravit'
+        summarySectionEditStep: 'Upravit',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Vše',
@@ -597,7 +623,8 @@ export default {
             pattern: 'Hodnota pole je neplatná',
             required: 'Toto pole je povinné',
             requiredTrue: 'Toto pole je povinné'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Spravovat',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Vyberte možnost'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Rozbalit uzel',

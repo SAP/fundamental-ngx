@@ -62,16 +62,16 @@
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
         @switch (state) {
             @case ('success') {
-                {{ valueStateSuccessMessage }}
+                {{ ('coreTimePicker.valueStateSuccessMessage' | fdTranslate)() }}
             }
             @case ('information') {
-                {{ valueStateInformationMessage }}
+                {{ ('coreTimePicker.valueStateInformationMessage' | fdTranslate)() }}
             }
             @case ('warning') {
-                {{ valueStateWarningMessage }}
+                {{ ('coreTimePicker.valueStateWarningMessage' | fdTranslate)() }}
             }
             @case ('error') {
-                {{ valueStateErrorMessage }}
+                {{ ('coreTimePicker.valueStateErrorMessage' | fdTranslate)() }}
             }
         }
         {{ _message }}

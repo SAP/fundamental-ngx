@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_en_US_sappsd.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: '[[[Ɓűşŷ]]]',
         defaultTitle: '[[[Ƥĺēąşē ŵąįţ∙∙∙∙∙∙∙∙]]]'
@@ -58,7 +67,9 @@ export default {
         expandLabel: '[[[Ĕχρąŋƌ Ĥēąƌēŗ∙∙∙∙∙∙]]]',
         collapseLabel: '[[[Ĉŏĺĺąρşē Ĥēąƌēŗ∙∙∙∙]]]',
         pinLabel: '[[[Ƥįŋ Ĥēąƌēŗ∙∙∙∙]]]',
-        unpinLabel: '[[[Ůŋρįŋ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]'
+        unpinLabel: '[[[Ůŋρįŋ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '[[[{ċŏűŋţ} ɱŏŗē∙∙∙∙∙∙∙]]]',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: '[[[Ŵąŗŋįŋğ Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
         announcementError: '[[[Ĕŗŗŏŗ Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
         announcementSuccess: '[[[Ŝűċċēşş Μēşşąğē Ŝţŗįρ∙∙∙∙∙]]]',
-        closable: '[[[Ĉĺŏşąƃĺē∙∙∙∙∙∙]]]'
+        closable: '[[[Ĉĺŏşąƃĺē∙∙∙∙∙∙]]]',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -191,6 +204,9 @@ export default {
         tabListExpandButtonText: '[[[Μŏŗē]]]',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: '[[[Μŏŗē]]]',
         lessLabel: '[[[Ļēşş]]]'
@@ -221,7 +237,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: '[[[Ţįɱē ρįċķēŗ įŋρűţ∙∙∙∙∙∙∙]]]',
-        timePickerButtonLabel: '[[[Ŏρēŋ ρįċķēŗ∙∙∙∙∙∙∙∙]]]'
+        timePickerButtonLabel: '[[[Ŏρēŋ ρįċķēŗ∙∙∙∙∙∙∙∙]]]',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: '[[[Ďēĺēţąƃĺē∙∙∙∙∙]]]',
@@ -242,6 +262,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: '[[[Ŵįžąŗƌ∙∙∙∙∙∙∙∙]]]'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: '[[[Ĉĺįċķ ŏŗ ρŗēşş ēŋţēŗ ţŏ ʋįēŵ ɱŏŗē ƌēţąįĺş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
@@ -323,7 +347,8 @@ export default {
         statusNotStarted: '[[[ŋŏţ şţąŗţēƌ∙∙∙∙∙∙∙∙]]]'
     },
     platformFeedInput: {
-        userTitle: '[[[Ůşēŗ]]]'
+        userTitle: '[[[Ůşēŗ]]]',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: '[[[Ṁŏŗē∙∙∙]]]'
@@ -589,7 +614,8 @@ export default {
         clearFilters: '[[[Ĉĺēąŗ Ƒįĺţēŗş∙∙∙∙∙∙]]]'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: '[[[Ĕƌįţ]]]'
+        summarySectionEditStep: '[[[Ĕƌįţ]]]',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: '[[[Āĺĺ∙]]]',
@@ -602,7 +628,8 @@ export default {
             pattern: '[[[Ţĥē ƒįēĺƌ ʋąĺűē įş įŋʋąĺįƌ∙∙∙∙∙∙∙]]]',
             required: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]',
             requiredTrue: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: '[[[Μąŋąğē∙∙∙∙∙∙∙∙]]]',
@@ -632,6 +659,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '[[[Ŝēĺēċţ ąŋ Ŏρţįŏŋ∙∙∙∙∙∙∙∙]]]'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: '[[[Ĕχρąŋƌ ŋŏƌē∙∙∙∙∙∙∙∙]]]',

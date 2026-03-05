@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'ไม่ว่าง',
         defaultTitle: 'กรุณารอสักครู่'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'ขยายส่วนหัว',
         collapseLabel: 'ยุบรวมส่วนหัว',
         pinLabel: 'ปักหมุดส่วนหัว',
-        unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว'
+        unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'อีก {count} รายการ',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'แถบข้อความเตือน',
         announcementError: 'แถบข้อความแสดงข้อผิดพลาด',
         announcementSuccess: 'แถบข้อความแสดงความสำเร็จ',
-        closable: 'สามารถปิดได้'
+        closable: 'สามารถปิดได้',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'เพิ่มเติม',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'เพิ่มเติม',
         lessLabel: 'น้อยลง'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'อินพุทของตัวเลือกเวลา',
-        timePickerButtonLabel: 'เปิดตัวเลือก'
+        timePickerButtonLabel: 'เปิดตัวเลือก',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'สามารถลบได้',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Wizard'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'ยังไม่เริ่ม'
     },
     platformFeedInput: {
-        userTitle: 'ผู้ใช้'
+        userTitle: 'ผู้ใช้',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'เพิ่มเติม'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'เคลียร์ตัวกรอง'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'แก้ไข'
+        summarySectionEditStep: 'แก้ไข',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'ทั้งหมด',
@@ -597,7 +623,8 @@ export default {
             pattern: 'ค่าฟิลด์ไม่ถูกต้อง',
             required: 'ฟิลด์นี้เป็นฟิลด์บังคับ',
             requiredTrue: 'ฟิลด์นี้เป็นฟิลด์บังคับ'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'จัดการ',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'เลือกตัวเลือก'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'ขยายโหนด',

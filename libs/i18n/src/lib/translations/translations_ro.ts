@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ro.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupat',
         defaultTitle: 'Așteptați'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Extindere antet',
         collapseLabel: 'Restrângere antet',
         pinLabel: 'Fixare antet',
-        unpinLabel: 'Anulare fixare antet'
+        unpinLabel: 'Anulare fixare antet',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'Încă {count}',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Linie de mesaj de avertizare',
         announcementError: 'Linie de mesaj de eroare',
         announcementSuccess: 'Linie de mesaj de succes',
-        closable: 'Poate fi închis'
+        closable: 'Poate fi închis',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Mai mult',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Mai mult',
         lessLabel: 'Mai puțin'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Intrare selector oră',
-        timePickerButtonLabel: 'Deschidere selector'
+        timePickerButtonLabel: 'Deschidere selector',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Poate fi șters',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Aplicație-asistent'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Faceți clic sau apăsați pe Enter pentru a afișa mai multe detalii',
@@ -321,7 +345,8 @@ export default {
         statusNotStarted: 'neînceput'
     },
     platformFeedInput: {
-        userTitle: 'Utilizator'
+        userTitle: 'Utilizator',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Mai mult'
@@ -585,7 +610,8 @@ export default {
         clearFilters: 'Golire filtre'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Modificare'
+        summarySectionEditStep: 'Modificare',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Toate',
@@ -598,7 +624,8 @@ export default {
             pattern: 'Valoarea câmpului este nevalidă',
             required: 'Câmpul este obligatoriu',
             requiredTrue: 'Câmpul este obligatoriu'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Gestionare',
@@ -627,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Selectați o opțiune'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expandare nod',

@@ -27,6 +27,7 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject, startWith } from 'rxjs';
 import { UserMenuUserNameDirective } from '../directives/user-menu-user-name.directive';
 import { UserMenuListItemComponent } from './user-menu-list-item.component';
@@ -47,7 +48,8 @@ import { UserMenuListItemComponent } from './user-menu-list-item.component';
         BarRightDirective,
         ButtonBarComponent,
         BarElementDirective,
-        InitialFocusDirective
+        InitialFocusDirective,
+        FdTranslatePipe
     ],
     providers: [contentDensityObserverProviders()]
 })

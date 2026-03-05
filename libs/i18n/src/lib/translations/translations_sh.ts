@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_sh.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zauzeto',
         defaultTitle: 'Sačekajte'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Proširi zaglavlje',
         collapseLabel: 'Sažmi zaglavlje',
         pinLabel: 'Fiksiraj zaglavlje',
-        unpinLabel: 'Poništi fiksiranje zaglavlja'
+        unpinLabel: 'Poništi fiksiranje zaglavlja',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} više',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Statusna traka upozorenja',
         announcementError: 'Statusna traka greške',
         announcementSuccess: 'Statusna traka upozorenja',
-        closable: 'Može se zatvoriti'
+        closable: 'Može se zatvoriti',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Više',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Više',
         lessLabel: 'Manje'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Unos birača vremena',
-        timePickerButtonLabel: 'Otvori birač'
+        timePickerButtonLabel: 'Otvori birač',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Može se izbrisati',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Čarobnjak'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Kliknite ili pritisnite Enter da biste videli više detalja',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'nije započeto'
     },
     platformFeedInput: {
-        userTitle: 'Korisnik'
+        userTitle: 'Korisnik',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Više'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Obriši filtere'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Uredi'
+        summarySectionEditStep: 'Uredi',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Sve',
@@ -597,7 +623,8 @@ export default {
             pattern: 'Vrednost polja je nevažeća',
             required: 'Polje je obavezno',
             requiredTrue: 'Polje je obavezno'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Upravljaj',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Odaberi opciju'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Proširi čvor',

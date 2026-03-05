@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ko.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: '사용 중',
         defaultTitle: '기다려 주십시오.'
@@ -58,7 +67,9 @@ export default {
         expandLabel: '헤더 펼치기',
         collapseLabel: '헤더 접기',
         pinLabel: '헤더 고정',
-        unpinLabel: '헤더 고정 취소'
+        unpinLabel: '헤더 고정 취소',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count}자 더 보기',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: '경고 메시지 스트립',
         announcementError: '오류 메시지 스트립',
         announcementSuccess: '성공 메시지 스트립',
-        closable: '닫기 가능'
+        closable: '닫기 가능',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: '더 보기',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: '더 보기',
         lessLabel: '간단히'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: '시간 선택 도구 입력',
-        timePickerButtonLabel: '선택 도구 열기'
+        timePickerButtonLabel: '선택 도구 열기',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: '삭제 가능',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: '마법사'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: '클릭하거나 Enter를 눌러 자세한 내용을 확인할 수 있습니다.',
@@ -319,7 +343,8 @@ export default {
         statusNotStarted: '시작되지 않음'
     },
     platformFeedInput: {
-        userTitle: '사용자'
+        userTitle: '사용자',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: '더보기'
@@ -582,7 +607,8 @@ export default {
         clearFilters: '필터 지우기'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: '편집'
+        summarySectionEditStep: '편집',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: '모두',
@@ -595,7 +621,8 @@ export default {
             pattern: '필드 값이 유효하지 않습니다.',
             required: '필수 필드입니다.',
             requiredTrue: '필수 필드입니다.'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: '관리',
@@ -624,6 +651,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '옵션 선택'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: '노드 펼치기',

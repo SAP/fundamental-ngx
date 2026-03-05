@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_sq.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',
         defaultTitle: 'Please wait'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Zgjero titullin',
         collapseLabel: 'Tkurre titullin',
         pinLabel: 'Fikso titullin',
-        unpinLabel: 'Çlirimi i titullit'
+        unpinLabel: 'Çlirimi i titullit',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'Më shumë',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        closable: 'Closable',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Më shumë',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Më shumë',
         lessLabel: 'Më pak'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Hyrja e zgjedhësit të kohës',
-        timePickerButtonLabel: 'Zgjedhësi i hapur'
+        timePickerButtonLabel: 'Zgjedhësi i hapur',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'E fshishme',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Magjistar'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Më shumë',
@@ -321,7 +345,8 @@ export default {
         statusNotStarted: 'nuk ka filluar'
     },
     platformFeedInput: {
-        userTitle: 'Përdoruesi'
+        userTitle: 'Përdoruesi',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Më shumë'
@@ -585,7 +610,8 @@ export default {
         clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Redakto'
+        summarySectionEditStep: 'Redakto',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'All',
@@ -598,7 +624,8 @@ export default {
             pattern: 'The field value is invalid',
             required: 'The field is mandatory',
             requiredTrue: 'The field is mandatory'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Manage',
@@ -627,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Zgjidhni një opsion'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expand node',

@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Elfoglalt',
         defaultTitle: 'Kis türelmet'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Fejléc kibontása',
         collapseLabel: 'Fejléc visszazárása',
         pinLabel: 'Fejléc rögzítése',
-        unpinLabel: 'Fejléc feloldása'
+        unpinLabel: 'Fejléc feloldása',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'További {count}',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Figyelmeztető üzenetek sora',
         announcementError: 'Hibaüzenetsor',
         announcementSuccess: 'Sikerüzenetsor',
-        closable: 'Bezárható'
+        closable: 'Bezárható',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Továbbiak',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Több',
         lessLabel: 'Kevesebb'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Időpontválasztó szerinti bevitel',
-        timePickerButtonLabel: 'Választó megnyitása'
+        timePickerButtonLabel: 'Választó megnyitása',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Törölhető',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Varázsló'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Kattintson vagy nyomja le az entert a további részletek megjelenítéséhez',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'nincs elindítva'
     },
     platformFeedInput: {
-        userTitle: 'Felhasználó'
+        userTitle: 'Felhasználó',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Több'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Szűrők törlése'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Szerkesztés'
+        summarySectionEditStep: 'Szerkesztés',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Összes',
@@ -597,7 +623,8 @@ export default {
             pattern: 'A mezőben szereplő érték érvénytelen',
             required: 'Ez a mező kötelezően kitöltendő',
             requiredTrue: 'Ez a mező kötelezően kitöltendő'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Kezelés',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Válasszon a lehetőségek közül'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Csomópont kibontása',

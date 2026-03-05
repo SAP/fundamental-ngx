@@ -26,8 +26,8 @@
         fd-button
         class="fd-feed-input__submit-button"
         glyph="feeder-arrow"
-        title="Send"
-        ariaLabel="Send"
+        [title]="('platformFeedInput.sendButton' | fdTranslate)()"
+        [ariaLabel]="('platformFeedInput.sendButton' | fdTranslate)()"
         [disabled]="!value || disabled"
         (click)="onSubmit()"
     ></button>

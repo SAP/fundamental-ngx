@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_de.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ausgelastet',
         defaultTitle: 'Bitte warten'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Kopfbereich expandieren',
         collapseLabel: 'Kopfbereich komprimieren',
         pinLabel: 'Kopfbereich anheften',
-        unpinLabel: 'Kopfbereich lösen'
+        unpinLabel: 'Kopfbereich lösen',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'noch {count}',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Warnmeldungsleiste',
         announcementError: 'Fehlermeldungsleiste',
         announcementSuccess: 'Erfolgsmeldungsleiste',
-        closable: 'Schließbar'
+        closable: 'Schließbar',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Mehr',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Mehr',
         lessLabel: 'Weniger'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zeitauswahleingabe',
-        timePickerButtonLabel: 'Auswahl öffnen'
+        timePickerButtonLabel: 'Auswahl öffnen',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Löschbar',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Assistent'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Klicken Sie oder drücken Sie die Eingabetaste, um weitere Details zu sehen',
@@ -321,7 +345,8 @@ export default {
         statusNotStarted: 'nicht begonnen'
     },
     platformFeedInput: {
-        userTitle: 'Benutzer'
+        userTitle: 'Benutzer',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Mehr'
@@ -585,7 +610,8 @@ export default {
         clearFilters: 'Filter zurücksetzen'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Bearbeiten'
+        summarySectionEditStep: 'Bearbeiten',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Alle',
@@ -598,7 +624,8 @@ export default {
             pattern: 'Der Feldwert ist ungültig',
             required: 'Das Feld ist obligatorisch',
             requiredTrue: 'Das Feld ist obligatorisch'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Verwalten',
@@ -627,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Option auswählen'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Knoten erweitern',

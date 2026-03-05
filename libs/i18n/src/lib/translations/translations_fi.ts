@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_fi.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Varattu',
         defaultTitle: 'Odota'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Laajenna otsikko',
         collapseLabel: 'Tiivistä otsikko',
         pinLabel: 'Kiinnitä otsikko',
-        unpinLabel: 'Irrota otsikko'
+        unpinLabel: 'Irrota otsikko',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} enemmän',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Varoitusilmoitusnauha',
         announcementError: 'Virheilmoitusnauha',
         announcementSuccess: 'Onnistumisilmoitusnauha',
-        closable: 'Suljettava'
+        closable: 'Suljettava',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Enemmän',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Enemmän',
         lessLabel: 'Vähemmän'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Aikavalitsimen syöttö',
-        timePickerButtonLabel: 'Avaa valitsin'
+        timePickerButtonLabel: 'Avaa valitsin',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Poistettavissa',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Avustaja'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Napsauta tai paina Enter nähdäksesi lisätietoja',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'ei aloitettu'
     },
     platformFeedInput: {
-        userTitle: 'Käyttäjä'
+        userTitle: 'Käyttäjä',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Lisää'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Tyhjennä suodattimet'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Muokkaa'
+        summarySectionEditStep: 'Muokkaa',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Kaikki',
@@ -597,7 +623,8 @@ export default {
             pattern: 'Kentän arvo on virheellinen',
             required: 'Kenttä on pakollinen',
             requiredTrue: 'Kenttä on pakollinen'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Hallitse',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Valitse jokin vaihtoehto'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Laajenna solmu',

@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_zh_TW.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: '忙碌',
         defaultTitle: '請稍候'
@@ -58,7 +67,9 @@ export default {
         expandLabel: '展開表頭',
         collapseLabel: '摺疊表頭',
         pinLabel: '釘選表頭',
-        unpinLabel: '取消釘選表頭'
+        unpinLabel: '取消釘選表頭',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '還有 {count} 個',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: '警告訊息列',
         announcementError: '錯誤訊息列',
         announcementSuccess: '成功訊息列',
-        closable: '可關閉'
+        closable: '可關閉',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -188,6 +201,9 @@ export default {
         tabListExpandButtonText: '更多',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: '更多',
         lessLabel: '較少'
@@ -218,7 +234,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: '時間選擇器輸入',
-        timePickerButtonLabel: '開啟選擇器'
+        timePickerButtonLabel: '開啟選擇器',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: '可刪除',
@@ -239,6 +259,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: '精靈'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: '按一下或按下 Enter 以檢視更多詳細資訊',
@@ -318,7 +342,8 @@ export default {
         statusNotStarted: '未開始'
     },
     platformFeedInput: {
-        userTitle: '使用者'
+        userTitle: '使用者',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: '更多'
@@ -581,7 +606,8 @@ export default {
         clearFilters: '清除篩選器'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: '編輯'
+        summarySectionEditStep: '編輯',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: '全部',
@@ -594,7 +620,8 @@ export default {
             pattern: '欄位值無效',
             required: '欄位為必填',
             requiredTrue: '欄位為必填'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: '管理',
@@ -623,6 +650,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '選擇選項'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: '展開節點',

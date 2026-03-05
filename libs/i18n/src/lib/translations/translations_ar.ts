@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'مشغول',
         defaultTitle: 'يرجى الانتظار'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'توسيع المقدمة',
         collapseLabel: 'طي المقدمة',
         pinLabel: 'تثبيت المقدمة',
-        unpinLabel: 'إلغاء تثبيت المقدمة'
+        unpinLabel: 'إلغاء تثبيت المقدمة',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} إضافية',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'شريط رسالة التحذير',
         announcementError: 'شريط رسالة الخطأ',
         announcementSuccess: 'شريط رسالة النجاح',
-        closable: 'قابل للإغلاق'
+        closable: 'قابل للإغلاق',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'المزيد',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'المزيد',
         lessLabel: 'أقل'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'إدخال أداة انتقاء الوقت',
-        timePickerButtonLabel: 'فتح أداة الانتقاء'
+        timePickerButtonLabel: 'فتح أداة الانتقاء',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'قابل للحذف',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'المعالج'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'انقر أو اضغط ’Enter‘ لعرض مزيد من التفاصيل',
@@ -319,7 +343,8 @@ export default {
         statusNotStarted: 'غير مبدوء'
     },
     platformFeedInput: {
-        userTitle: 'المستخدم'
+        userTitle: 'المستخدم',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'المزيد'
@@ -583,7 +608,8 @@ export default {
         clearFilters: 'مسح عوامل التصفية'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'تحرير'
+        summarySectionEditStep: 'تحرير',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'الكل',
@@ -596,7 +622,8 @@ export default {
             pattern: 'قيمة الحقل غير صالحة',
             required: 'الحقل إلزامي',
             requiredTrue: 'الحقل إلزامي'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'إدارة',
@@ -625,6 +652,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'تحديد خيار'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'توسيع العقدة',

@@ -178,8 +178,10 @@ export class MessageStripComponent {
     /** message strip information read by screen readers */
     protected messageStripHiddenText = computed(() => {
         const currentType = this.type();
+        const lang = this._langSignal();
+
         if (!currentType) {
-            return DEFAULT_HIDDEN_TEXT;
+            return this._translationResolver.resolve(lang, DEFAULT_HIDDEN_TEXT);
         }
 
         const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
@@ -191,10 +193,9 @@ export class MessageStripComponent {
 
         const announcementType = announcementMap[currentType];
         if (!announcementType) {
-            return DEFAULT_HIDDEN_TEXT;
+            return this._translationResolver.resolve(lang, DEFAULT_HIDDEN_TEXT);
         }
 
-        const lang = this._langSignal();
         const announcement = this._translationResolver.resolve(lang, announcementType);
         const closable = this.dismissible() ? this._translationResolver.resolve(lang, MESSAGE_STRIP_CLOSABLE) : '';
         return `${announcement} ${closable}`;
@@ -203,8 +204,10 @@ export class MessageStripComponent {
     /** default dismiss button text read by screen readers */
     protected defaultDismissButtonText = computed(() => {
         const currentType = this.type();
+        const lang = this._langSignal();
+
         if (!currentType) {
-            return DEFAULT_DISMISS_BUTTON_TEXT;
+            return this._translationResolver.resolve(lang, DEFAULT_DISMISS_BUTTON_TEXT);
         }
 
         const announcementMap: Record<MessageStripTypeEnum, MessageStripAnnouncementType> = {
@@ -216,10 +219,9 @@ export class MessageStripComponent {
 
         const announcementType = announcementMap[currentType];
         if (!announcementType) {
-            return DEFAULT_DISMISS_BUTTON_TEXT;
+            return this._translationResolver.resolve(lang, DEFAULT_DISMISS_BUTTON_TEXT);
         }
 
-        const lang = this._langSignal();
         const announcement = this._translationResolver.resolve(lang, announcementType);
         const closeButtonText = this._translationResolver.resolve(lang, MESSAGE_STRIP_DEFAULT_DISMISS_BUTTON_TEXT);
         return `${announcement} ${closeButtonText}`;

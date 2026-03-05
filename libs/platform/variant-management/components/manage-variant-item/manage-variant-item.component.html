@@ -72,13 +72,13 @@
             fdType="emphasized"
             [label]="('platformVariantManagement.save' | fdTranslate)()"
             (click)="_submitForm()"
-            ariaLabel="Interested Emphasized"
+            [ariaLabel]="('platformVariantManagement.save' | fdTranslate)()"
         ></fd-button-bar>
 
         <fd-button-bar
             [label]="('platformVariantManagement.cancel' | fdTranslate)()"
             (click)="dialog.dismiss('Cancel')"
-            ariaLabel="Cancel"
+            [ariaLabel]="('platformVariantManagement.cancel' | fdTranslate)()"
         ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

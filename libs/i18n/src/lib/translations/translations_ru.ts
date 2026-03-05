@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ru.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Занято',
         defaultTitle: 'Подождите'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Развернуть заголовок',
         collapseLabel: 'Свернуть заголовок',
         pinLabel: 'Закрепить заголовок',
-        unpinLabel: 'Открепить заголовок'
+        unpinLabel: 'Открепить заголовок',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'Еще {count}',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Строка сообщения с предупреждением',
         announcementError: 'Строка сообщения об ошибке',
         announcementSuccess: 'Строка сообщения об успешном выполнении',
-        closable: 'Можно закрыть'
+        closable: 'Можно закрыть',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Больше',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Больше',
         lessLabel: 'Меньше'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Ввод средства выбора времени',
-        timePickerButtonLabel: 'Открыть средство выбора'
+        timePickerButtonLabel: 'Открыть средство выбора',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Можно удалить',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Ассистент'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Щелкните или нажмите Enter, чтобы просмотреть подробности',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: '- не начато'
     },
     platformFeedInput: {
-        userTitle: 'Пользователь'
+        userTitle: 'Пользователь',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Ещё'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Очистить фильтры'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Изменить'
+        summarySectionEditStep: 'Изменить',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Все',
@@ -597,7 +623,8 @@ export default {
             pattern: 'Недействительное значение поля',
             required: 'Это поле является обязательным',
             requiredTrue: 'Это поле является обязательным'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Управление',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Выберите опцию'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Развернуть узел',

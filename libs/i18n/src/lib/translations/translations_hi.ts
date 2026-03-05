@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',
         defaultTitle: 'Please wait'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'हेडर विस्तारित करें',
         collapseLabel: 'हेडर संकुचित करें',
         pinLabel: 'हेडर पिन करें',
-        unpinLabel: 'हेडर अनपिन करें'
+        unpinLabel: 'हेडर अनपिन करें',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'अधिक',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        closable: 'Closable',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'अधिक',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'अधिक',
         lessLabel: 'कम'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'समय चुनने वाला इनपुट',
-        timePickerButtonLabel: 'चुनने वाला खोलें'
+        timePickerButtonLabel: 'चुनने वाला खोलें',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'हटाने-योग्य',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'विज़ार्ड'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'और',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'शुरू नहीं हुआ'
     },
     platformFeedInput: {
-        userTitle: 'उपयोगकर्ता'
+        userTitle: 'उपयोगकर्ता',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'अधिक'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'संपादित करें'
+        summarySectionEditStep: 'संपादित करें',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'All',
@@ -597,7 +623,8 @@ export default {
             pattern: 'The field value is invalid',
             required: 'The field is mandatory',
             requiredTrue: 'The field is mandatory'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Manage',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'एक विकल्प चुनें'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expand node',

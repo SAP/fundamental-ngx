@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Meşgul',
         defaultTitle: 'Lütfen bekleyin'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Üst Bilgiyi Genişlet',
         collapseLabel: 'Üst Bilgiyi Daralt',
         pinLabel: 'Üst Bilgiyi Sabitle',
-        unpinLabel: 'Üst Bilgi İçin Sabitlemeyi Kaldır'
+        unpinLabel: 'Üst Bilgi İçin Sabitlemeyi Kaldır',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} tane daha',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Uyarı İletisi Satırı',
         announcementError: 'Hata İletisi Satırı',
         announcementSuccess: 'Başarı İletisi Satırı',
-        closable: 'Kapatılabilir'
+        closable: 'Kapatılabilir',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'Daha Fazla',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'Daha Fazla',
         lessLabel: 'Daha az'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Saat seçici girişi',
-        timePickerButtonLabel: 'Seçiciyi aç'
+        timePickerButtonLabel: 'Seçiciyi aç',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Silinebilir',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Sihirbaz'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: "Daha fazla ayrıntı görüntülemek için Enter'a tıklayın veya basın",
@@ -321,7 +345,8 @@ export default {
         statusNotStarted: 'başlamadı'
     },
     platformFeedInput: {
-        userTitle: 'Kullanıcı'
+        userTitle: 'Kullanıcı',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'Daha Fazla'
@@ -585,7 +610,8 @@ export default {
         clearFilters: 'Filtreleri Temizle'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Düzenle'
+        summarySectionEditStep: 'Düzenle',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Tümü',
@@ -598,7 +624,8 @@ export default {
             pattern: 'Alan değeri geçersiz',
             required: 'Bu alan zorunludur',
             requiredTrue: 'Bu alan zorunludur'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Yönet',
@@ -627,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Bir Seçenek Belirleyin'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Düğümü genişlet',

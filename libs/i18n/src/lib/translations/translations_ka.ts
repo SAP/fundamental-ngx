@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',
         defaultTitle: 'Please wait'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'სათაურის გაშლა',
         collapseLabel: 'სათაურის შეკუმშვა',
         pinLabel: 'სათაურის მიმაგრება',
-        unpinLabel: 'სათაურის მოხსნა'
+        unpinLabel: 'სათაურის მოხსნა',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'მეტი',
@@ -84,7 +95,9 @@ export default {
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        closable: 'Closable',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
     },
     coreCombobox: {
         clearButtonTitle: 'Clear input'
@@ -189,6 +202,9 @@ export default {
         tabListExpandButtonText: 'მაჩვენე მეტი',
         expandIconLabel: 'See More'
     },
+    coreToolbar: {
+        moreButton: 'More'
+    },
     coreText: {
         moreLabel: 'მეტი',
         lessLabel: 'ნაკლები'
@@ -219,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'დროის შესაყვანი ველი',
-        timePickerButtonLabel: 'ასარჩევის გახსნა'
+        timePickerButtonLabel: 'ასარჩევის გახსნა',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'წაშლადი',
@@ -240,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'ოსტატი'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'მეტი',
@@ -320,7 +344,8 @@ export default {
         statusNotStarted: 'არ დაწყებულა'
     },
     platformFeedInput: {
-        userTitle: 'მომხმარებელი'
+        userTitle: 'მომხმარებელი',
+        sendButton: 'Send'
     },
     platformIconTabBar: {
         moreButton: 'მეტი'
@@ -584,7 +609,8 @@ export default {
         clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'შესწორება'
+        summarySectionEditStep: 'შესწორება',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'ყველა',
@@ -597,7 +623,8 @@ export default {
             pattern: 'ველის მნიშვნელობა არასწორია',
             required: 'ველი სავალდებულოა',
             requiredTrue: 'ველის შეყვანა სავალდებულოა'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'მართვა',
@@ -626,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'აირჩიეთ ვარიანტი'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expand node',
