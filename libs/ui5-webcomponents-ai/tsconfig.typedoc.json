@@ -18,6 +18,8 @@
             "@fundamental-ngx/core/*": ["../core/*/index.ts"],
             "@fundamental-ngx/cdk": ["../cdk/index.ts"],
             "@fundamental-ngx/cdk/*": ["../cdk/*/index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-ai": ["./index.ts"],
+            "@fundamental-ngx/ui5-webcomponents-ai/*": ["./*/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-base": ["../ui5-webcomponents-base/index.ts"],
             "@fundamental-ngx/ui5-webcomponents-base/*": ["../ui5-webcomponents-base/*/index.ts"]
         }

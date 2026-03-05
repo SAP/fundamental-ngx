@@ -24,7 +24,10 @@ function isReadonlyField(member: CEM.ClassMember): member is CEM.ClassField {
 }
 
 /** Gets CVA configuration based on the component's form property metadata */
-function getCvaConfig(data: CEM.CustomElementDeclaration): {
+function getCvaConfig(
+    data: CEM.CustomElementDeclaration,
+    packageName: string
+): {
     hostDirective: string;
     import: string;
     provider: string;
@@ -69,7 +72,7 @@ function getCvaConfig(data: CEM.CustomElementDeclaration): {
 
     return {
         hostDirective: 'GenericControlValueAccessor',
-        import: `import { GenericControlValueAccessor, CVA_CONFIG } from '@fundamental-ngx/ui5-webcomponents/utils';`,
+        import: `import { GenericControlValueAccessor, CVA_CONFIG } from '${packageName.replace('@ui5/webcomponents', '@fundamental-ngx/ui5-webcomponents')}/utils';`,
         provider: providerConfig
     };
 }
@@ -363,7 +366,7 @@ export function componentTemplate(
     const outputEvents = data.events || [];
 
     // Get CVA configuration based on component metadata
-    const cvaConfig = getCvaConfig(data);
+    const cvaConfig = getCvaConfig(data, packageName);
 
     // Add hostDirective if CVA is needed
     const cvaHostDirective = cvaConfig ? `  hostDirectives: [${cvaConfig.hostDirective}],\n` : '';
