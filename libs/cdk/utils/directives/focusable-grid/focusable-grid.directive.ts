@@ -14,7 +14,7 @@ import {
     inject,
     runInInjectionContext
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
@@ -248,25 +248,30 @@ export class FocusableGridDirective implements AfterViewInit {
             }
 
             this._subscribedItems.add(item);
-            item.focusableChildElementFocused.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._focusableLists.forEach((focusableList) => {
-                    focusableList._focusableItems().forEach((focusableItem) => {
-                        focusableItem.setTabbable(false);
-                        (focusableItem as FocusableItemDirective).enableTabbableElements();
-                    });
-                });
-            });
-            item._parentFocusableItemFocused.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-                this._focusableLists.forEach((focusableList) => {
-                    focusableList._focusableItems().forEach((focusableItem) => {
-                        if (item !== focusableItem) {
-                            (focusableItem as FocusableItemDirective).disableTabbableElements();
-                        } else {
+
+            outputToObservable(item.focusableChildElementFocused)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this._focusableLists.forEach((focusableList) => {
+                        focusableList._focusableItems().forEach((focusableItem) => {
+                            focusableItem.setTabbable(false);
                             (focusableItem as FocusableItemDirective).enableTabbableElements();
-                        }
+                        });
                     });
                 });
-            });
+            outputToObservable(item._parentFocusableItemFocused)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this._focusableLists.forEach((focusableList) => {
+                        focusableList._focusableItems().forEach((focusableItem) => {
+                            if (item !== focusableItem) {
+                                (focusableItem as FocusableItemDirective).disableTabbableElements();
+                            } else {
+                                (focusableItem as FocusableItemDirective).enableTabbableElements();
+                            }
+                        });
+                    });
+                });
         });
     }
 
