@@ -117,4 +117,26 @@ describe('TimeColumnComponent', () => {
             after: false
         });
     });
+
+    it('should apply marginTop and marginBottom to first and last items when offset is 0', () => {
+        // Mock getHeight to return a positive value so the computed margin is non-zero
+        // (jsdom returns 0 for getBoundingClientRect, which would produce "0px" — indistinguishable from unset)
+        component.items.forEach((item) => jest.spyOn(item, 'getHeight').mockReturnValue(10));
+
+        // elementsAtOnce defaults to 7 → visibleButNotSelected = floor(7/2) = 3 → margin = 3 * 10 = 30px
+        component.offset = 0;
+
+        expect(component.items.first.element.style.marginTop).toBe('30px');
+        expect(component.items.last.element.style.marginBottom).toBe('30px');
+    });
+
+    it('should not apply marginTop and marginBottom to first and last items when offset is non-zero', () => {
+        // Mock getHeight
+        component.items.forEach((item) => jest.spyOn(item, 'getHeight').mockReturnValue(10));
+
+        component.offset = 3;
+
+        expect(component.items.first.element.style.marginTop).toBe('');
+        expect(component.items.last.element.style.marginBottom).toBe('');
+    });
 });

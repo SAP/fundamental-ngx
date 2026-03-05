@@ -232,7 +232,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
                             this.items.toArray().reduce((acc, next) => acc + next.getHeight(), 0) / this.items.length;
                         this.wrapperHeight = averageHeight * elementsAtOnce;
                         const visibleButNotSelectedElements = Math.floor(elementsAtOnce / 2);
-                        if (offset !== 3) {
+                        if (offset === 0) {
                             this.items.first.element.style.marginTop = `${
                                 visibleButNotSelectedElements * averageHeight
                             }px`;
