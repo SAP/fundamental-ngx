@@ -246,4 +246,33 @@ describe('MenuMobileComponent', () => {
         expect(mobileElements.dialogCloseBtn).toBeFalsy();
         expect(mobileElements.footerButtons.length).toEqual(2);
     });
+
+    it('should reopen dialog after closing', async () => {
+        await setup({ title: MOBILE_CONFIG.title, hasCloseButton: true });
+
+        await whenStable(fixture);
+
+        // First open
+        menu.open();
+        const dialogAppeared = await waitForMobileDialog(fixture);
+        expect(dialogAppeared).toBe(true);
+        expect(document.querySelector('.fd-dialog')).toBeTruthy();
+
+        // Close via the mobile component
+        menu.close();
+        await whenStable(fixture);
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        // Wait for dialog to be removed from the DOM
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        // Second open — this is the bug: dialog should reopen
+        menu.open();
+        const dialogReappeared = await waitForMobileDialog(fixture);
+        expect(dialogReappeared).toBe(true);
+        expect(document.querySelector('.fd-dialog')).toBeTruthy();
+    });
 });
