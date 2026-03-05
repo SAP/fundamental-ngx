@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_ar.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'مشغول',
+        defaultTitle: 'يرجى الانتظار'
     },
     coreCalendar: {
         yearSelectionLabel: 'تحديد السنة',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'أولي'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'مؤكَّد',
+        subtle: 'غامض'
     },
     coreMessageStrip: {
         dismissLabel: 'إغلاق',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'عنصر الشجرة {itemDetails}، {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'الحالة (نشط)',
+        inactive: 'الحالة'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'مؤكَّد',
+        negative: 'حالة القيمة ’خطأ‘',
+        critical: 'حالة القيمة ’تحذير‘',
+        positive: 'حالة القيمة ’ناجح‘',
+        informative: 'حالة القيمة ’معلومات‘'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'حالة الكائن',
+        ariaRoleDescription: 'زر حالة الكائن',
+        indicationColor: 'لون الإشارة',
+        negative: 'إدخال غير صالح',
+        critical: 'تم إصدار تحذير',
+        positive: 'تم التحقق من صحة الإدخال بنجاح',
+        informative: 'إدخال معلوماتي'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} إضافية'
@@ -651,15 +651,15 @@ export default {
         buttonRoleDescription: 'زر مقسَّم'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'معرف الكائن'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'تسمية المعلومات'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'إعادة تعيين إلى صفر',
+        ariaRoleDescription: 'مؤشر التصنيف',
+        ariaLabelTotalRating: 'إجمالي التقييم',
+        ariaLabelValue: 'من'
     }
 };

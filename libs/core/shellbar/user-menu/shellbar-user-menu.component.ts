@@ -8,7 +8,6 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -62,7 +61,7 @@ export class ShellbarUserMenuComponent {
      * * Leave blank for no effect.
      */
     @Input()
-    fillControlMode: Nullable<PopoverFillMode>;
+    fillControlMode: PopoverFillMode | null;
 
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */

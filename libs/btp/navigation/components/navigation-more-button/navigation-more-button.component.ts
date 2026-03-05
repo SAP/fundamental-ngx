@@ -1,6 +1,7 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { NgClass } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
@@ -11,7 +12,8 @@ import {
     ViewEncapsulation,
     computed,
     inject,
-    signal
+    signal,
+    viewChild
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
@@ -46,7 +48,7 @@ export interface NavigationMoreButtonRefContext {
         class: 'fd-navigation__list-item'
     }
 })
-export class NavigationMoreButtonComponent {
+export class NavigationMoreButtonComponent implements AfterViewInit {
     /** @hidden */
     @Input()
     listItems: FdbNavigationListItem[] = [];
@@ -110,6 +112,9 @@ export class NavigationMoreButtonComponent {
     protected readonly popoverPlacement = computed<Placement>(() => (this._isRtl() ? 'left-start' : 'right-start'));
 
     /** @hidden */
+    private readonly _triggerElement = viewChild<ElementRef>('trigger');
+
+    /** @hidden */
     private _popoverClicked = false;
 
     /** @hidden */
@@ -151,6 +156,15 @@ export class NavigationMoreButtonComponent {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        // Set popover trigger reference
+        const triggerElement = this._triggerElement();
+        if (this._popover?.trigger && triggerElement) {
+            this._popover.trigger.set(triggerElement);
+        }
+    }
+
+    /** @hidden */
     _onPopoverOpenChange(isOpen: boolean): void {
         this.popoverOpen$.set(isOpen);
 
@@ -184,7 +198,8 @@ export class NavigationMoreButtonComponent {
                 }
 
                 // Last resort fallback: if direct access fails, try to focus any focusable element in the popover
-                const popoverBodyElement = this._popover?.popoverBody?._elementRef?.nativeElement;
+                const popoverBody = (this._popover as any)?.popoverBody();
+                const popoverBodyElement = popoverBody?._elementRef?.nativeElement;
                 if (popoverBodyElement) {
                     const firstFocusableElement = popoverBodyElement.querySelector(
                         'a, button, [tabindex]:not([tabindex="-1"])'

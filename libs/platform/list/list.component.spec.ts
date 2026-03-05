@@ -148,3 +148,58 @@ describe('ListComponent with DataSource', () => {
         expect(listElement.length).toBe(4);
     });
 });
+
+@Component({
+    selector: 'fdp-list-loading-test',
+    template: `
+        <fdp-list #component [noBorder]="true" [dataSource]="dataSource">
+            <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name"> </fdp-standard-list-item>
+        </fdp-list>
+    `,
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+})
+class ListLoadingTestComponent {
+    @ViewChild(ListComponent, { static: true }) component: ListComponent<Address>;
+    public dataSource: ListDataSource<Address> | null = null;
+}
+
+describe('ListComponent loading state', () => {
+    let fixture: ComponentFixture<ListLoadingTestComponent>;
+    let component: ListLoadingTestComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ListLoadingTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ListLoadingTestComponent);
+        component = fixture.componentInstance;
+    });
+
+    it('should show loading skeleton with 3 repeated items when data is not loaded', () => {
+        fixture.detectChanges();
+
+        const listElement: HTMLElement = fixture.debugElement.nativeElement;
+        const skeletonItems = listElement.querySelectorAll('.fd-list__item fd-skeleton');
+
+        // There are 3 repeated skeleton items
+        expect(skeletonItems.length).toBe(3);
+    });
+
+    it('should hide loading skeleton when data source provides data', async () => {
+        component.dataSource = new ListDataSource<Address>(new ListDataProvider());
+        fixture.detectChanges();
+        await fixture.whenStable();
+        await fixture.whenRenderingDone();
+
+        const listElement: HTMLElement = fixture.debugElement.nativeElement;
+        const actualItems = listElement.querySelectorAll('.fd-list__item');
+        const skeletonItems = listElement.querySelectorAll('.fd-list__item fd-skeleton');
+
+        expect(actualItems.length).toBe(4);
+        expect(skeletonItems.length).toBe(0);
+    });
+});

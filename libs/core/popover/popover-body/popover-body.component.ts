@@ -1,22 +1,21 @@
 import {
-    AfterViewInit,
+    afterNextRender,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
-    HostListener,
-    Input,
+    inject,
+    input,
+    output,
     Renderer2,
+    signal,
     TemplateRef,
-    ViewChild,
+    viewChild,
     ViewEncapsulation
 } from '@angular/core';
 
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { CdkScrollable, ConnectionPositionPair } from '@angular/cdk/overlay';
-
-import { Subject } from 'rxjs';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { KeyUtil, Nullable, ResizeDirective, ResizeHandleDirective } from '@fundamental-ngx/cdk/utils';
@@ -40,112 +39,114 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     styleUrl: './popover-body.component.scss',
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
     imports: [A11yModule, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ResizeHandleDirective, ResizeDirective],
-    standalone: true
+    standalone: true,
+    host: {
+        '(keydown)': 'bodyKeyupHandler($event)'
+    }
 })
-export class PopoverBodyComponent implements AfterViewInit {
+export class PopoverBodyComponent {
     /** Minimum width of the popover body element. */
-    @Input()
-    minWidth: Nullable<string>;
+    readonly minWidth = input<Nullable<string>>();
 
     /** Maximum width of the popover body element. */
-    @Input()
-    maxWidth: Nullable<string>;
+    readonly maxWidth = input<Nullable<string>>();
 
     /** Minimum height of the popover body element. */
-    @Input()
-    minHeight: Nullable<string>;
+    readonly minHeight = input<Nullable<string>>();
 
     /** Maximum height of the popover body element. */
-    @Input()
-    maxHeight: Nullable<string>;
+    readonly maxHeight = input<Nullable<string>>();
 
     /** @hidden */
-    @ViewChild(CdkTrapFocus)
-    _cdkTrapFocus: CdkTrapFocus;
+    readonly _cdkTrapFocus = viewChild(CdkTrapFocus);
 
     /** @hidden */
-    @ViewChild(ScrollbarDirective)
-    _scrollbar: ScrollbarDirective;
+    readonly _scrollbar = viewChild(ScrollbarDirective);
 
-    /** Whether to wrap content with fd-scrollbar directive. */
-    _disableScrollbar = false;
+    /** @hidden Whether to wrap content with fd-scrollbar directive. */
+    readonly _disableScrollbar = signal(false);
 
-    /** Whether the popover should have an arrow. */
-    _noArrow = true;
+    /** @hidden Whether the popover should have an arrow. */
+    readonly _noArrow = signal(true);
 
-    /** Whether the popover container needs an extra class for styling. */
-    _additionalBodyClass: Nullable<string>;
+    /** @hidden Whether the popover container needs an extra class for styling. */
+    readonly _additionalBodyClass = signal<Nullable<string>>(null);
 
-    /** Whether the popover should be focusTrapped. */
-    _focusTrapped = false;
+    /** @hidden Whether the popover should be focusTrapped. */
+    readonly _focusTrapped = signal(false);
 
     /**
+     * @hidden
      * Whether the popover should automatically move focus into the trapped region upon
      * initialization and return focus to the previous activeElement upon destruction.
      */
-    _focusAutoCapture = false;
+    readonly _focusAutoCapture = signal(false);
 
     /** @hidden Property bind to popover's body. */
-    _popoverBodyWidth: number;
+    readonly _popoverBodyWidth = signal<number | undefined>(undefined);
 
     /** @hidden Property bind to popover's body. */
-    _popoverBodyMinWidth: number;
+    readonly _popoverBodyMinWidth = signal<number | undefined>(undefined);
 
     /** @hidden Property bind to popover's body. */
-    _maxWidth: Nullable<number>;
+    readonly _maxWidth = signal<Nullable<number>>(null);
 
     /** @hidden Property bind to popover's body. */
-    _closeOnEscapeKey = false;
+    readonly _closeOnEscapeKey = signal(false);
 
     /** @hidden Aria role for the popover body. */
-    _bodyRole: Nullable<string> = 'dialog';
+    readonly _bodyRole = signal<Nullable<string>>('dialog');
 
-    /** @hidden Aria role for the popover body. */
-    _bodyId: Nullable<string> = null;
+    /** @hidden ID for the popover body. */
+    readonly _bodyId = signal<string | null>(null);
 
-    /** Classes added to arrow element. */
-    _arrowClasses = '';
+    /** @hidden Classes added to arrow element. */
+    readonly _arrowClasses = signal('');
 
     /** @hidden text rendered inside popover's body. */
-    text: Nullable<string> = null;
+    readonly text = signal<Nullable<string>>(null);
 
     /** @hidden template rendered inside popover's body. */
-    _templateToDisplay: TemplateRef<any>;
+    readonly _templateToDisplay = signal<TemplateRef<any> | undefined>(undefined);
 
     /** @hidden Whether the popover body is resizable. */
-    _resizable = false;
+    readonly _resizable = signal(false);
 
     /** @hidden */
-    _resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'bottom-right';
+    readonly _resizeHandleLocation = signal<'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'>('bottom-right');
 
-    /** Close event from popover body */
-    onClose = new Subject<void>();
+    /** Event emitted when popover body requests to be closed (e.g., Escape key press) */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    readonly onClose = output<void>();
+
+    /** @hidden */
+    readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    readonly _contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
     private _bodyComponentClasses: string | null = null;
 
     /** @hidden */
-    constructor(
-        readonly _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
-        private readonly _renderer: Renderer2,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
-
-    /** Handler escape keydown */
-    @HostListener('keydown', ['$event'])
-    bodyKeyupHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, ESCAPE) && this._closeOnEscapeKey) {
-            // In case if popover belongs to the element inside dialog
-            event.stopPropagation();
-            this.onClose.next();
-        }
+    constructor() {
+        afterNextRender(() => {
+            const scrollbar = this._scrollbar();
+            if (scrollbar) {
+                scrollbar._inPopover = true;
+            }
+        });
     }
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        if (this._scrollbar) {
-            this._scrollbar._inPopover = true;
+    /** Handler escape keydown */
+    bodyKeyupHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE) && this._closeOnEscapeKey()) {
+            // In case if popover belongs to the element inside dialog
+            event.stopPropagation();
+            this.onClose.emit();
         }
     }
 
@@ -165,11 +166,11 @@ export class PopoverBodyComponent implements AfterViewInit {
 
     /** @hidden */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
-        this._resizeHandleLocation = `${position.overlayY === 'top' ? 'bottom' : 'top'}-${
-            position.overlayX === 'start' ? 'right' : 'left'
-        }`;
-        if (this._noArrow) {
-            this._arrowClasses = '';
+        this._resizeHandleLocation.set(
+            `${position.overlayY === 'top' ? 'bottom' : 'top'}-${position.overlayX === 'start' ? 'right' : 'left'}`
+        );
+        if (this._noArrow()) {
+            this._arrowClasses.set('');
             return;
         }
 
@@ -208,23 +209,14 @@ export class PopoverBodyComponent implements AfterViewInit {
             arrowClasses = ['fd-popover__body--no-arrow'];
         }
 
-        this._arrowClasses = arrowClasses.join(' ');
-
-        this.detectChanges();
-    }
-
-    /** @hidden */
-    detectChanges(): void {
-        if (!this._changeDetectorRef['destroyed']) {
-            this._changeDetectorRef.detectChanges();
-        }
+        this._arrowClasses.set(arrowClasses.join(' '));
     }
 
     /** @hidden */
     _focusFirstTabbableElement(forced = false): void {
-        if (forced || this._focusAutoCapture) {
+        if (forced || this._focusAutoCapture()) {
             requestAnimationFrame(() => {
-                this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
+                this._cdkTrapFocus()?.focusTrap.focusFirstTabbableElement();
             });
         }
     }

@@ -47,22 +47,26 @@
                 } @else {
                     @if (!listItems.length && !_firstLoadingDone) {
                         @if (!hasByLine) {
-                            <li fd-list-item *fdkRepeat="3">
-                                <fd-skeleton
-                                    [style.margin]="'auto 0'"
-                                    type="text"
-                                    textLines="1"
-                                    width="40%"
-                                ></fd-skeleton>
-                            </li>
+                            @for (_ of loadingRange; track $index) {
+                                <li fd-list-item>
+                                    <fd-skeleton
+                                        [style.margin]="'auto 0'"
+                                        type="text"
+                                        textLines="1"
+                                        width="40%"
+                                    ></fd-skeleton>
+                                </li>
+                            }
                         } @else {
-                            <li fd-list-item *fdkRepeat="3">
-                                <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
-                                    <svg:rect x="0" y="0" width="48" height="48" rx="4" />
-                                    <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
-                                    <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
-                                </fd-skeleton>
-                            </li>
+                            @for (_ of loadingRange; track $index) {
+                                <li fd-list-item>
+                                    <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
+                                        <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                                        <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                                        <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                                    </fd-skeleton>
+                                </li>
+                            }
                         }
                     }
                     <ng-content></ng-content>
@@ -82,17 +86,21 @@
         } @else {
             @if (!listItems.length && !_firstLoadingDone) {
                 @if (!hasByLine) {
-                    <li fd-list-item *fdkRepeat="3">
-                        <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="40%"></fd-skeleton>
-                    </li>
+                    @for (_ of loadingRange; track $index) {
+                        <li fd-list-item>
+                            <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="40%"></fd-skeleton>
+                        </li>
+                    }
                 } @else {
-                    <li fd-list-item *fdkRepeat="3">
-                        <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
-                            <svg:rect x="0" y="0" width="48" height="48" rx="4" />
-                            <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
-                            <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
-                        </fd-skeleton>
-                    </li>
+                    @for (_ of loadingRange; track $index) {
+                        <li fd-list-item>
+                            <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
+                                <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                                <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                                <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                            </fd-skeleton>
+                        </li>
+                    }
                 }
             }
             <ng-content></ng-content>

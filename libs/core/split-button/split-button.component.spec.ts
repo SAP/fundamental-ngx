@@ -76,17 +76,22 @@ describe('SplitButtonComponent', () => {
         jest.spyOn(componentInstance, 'selectMenuItem');
         componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
-        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu._menuItems.first);
-        expect(componentInstance.selected).toBe(componentInstance.menu._menuItems.first);
+        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(
+            componentInstance.menu.menuItems[0] as MenuItemComponent
+        );
+        expect(componentInstance.selected).toBe(componentInstance.menu.menuItems[0]);
     });
 
     it('should handle content init - selected item', () => {
         jest.spyOn(componentInstance, 'selectMenuItem');
-        componentInstance.selected = componentInstance.menu._menuItems.last;
+        const lastItem = componentInstance.menu.menuItems[
+            componentInstance.menu.menuItems.length - 1
+        ] as MenuItemComponent;
+        componentInstance.selected = lastItem;
         componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
-        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu._menuItems.last);
-        componentInstance.menu._menuItems.last.onSelect.emit();
+        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(lastItem);
+        lastItem.onSelect.emit();
         fixture.detectChanges();
         expect(componentInstance.mainActionTitle).toBe('Option 2');
     });
@@ -112,7 +117,7 @@ describe('SplitButtonComponent', () => {
         const mouseEvent = new MouseEvent('click');
         jest.spyOn(mouseEvent, 'stopPropagation');
         jest.spyOn(componentInstance.primaryButtonClicked, 'emit');
-        componentInstance.selected = componentInstance.menu._menuItems.first;
+        componentInstance.selected = componentInstance.menu.menuItems[0] as MenuItemComponent;
         jest.spyOn(componentInstance.selected.elementRef.nativeElement, 'click');
 
         componentInstance.onMainButtonClick(mouseEvent);

@@ -322,7 +322,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     bodyMaxWidth: 'none' | 'container' | number = 'none';
 
     /** @hidden */
-    get _popoverMaxWidth(): Nullable<number> {
+    get _popoverMaxWidth(): number | null {
         if (this.bodyMaxWidth === 'none') {
             return null;
         }
@@ -664,7 +664,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         option: _OptionItem<ItemType, ValueType>,
         event: MouseEvent | KeyboardEvent,
         index: number,
-        isListItem = false
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        _isListItem = false
     ): Promise<void> {
         const toggledSelection = !this._selectionModel.isSelected(option.id);
         this._rangeSelector.onRangeElementToggled(index, event);

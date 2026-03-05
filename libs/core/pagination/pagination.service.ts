@@ -1,5 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 
+import { range } from '@fundamental-ngx/cdk/utils';
 import { Pagination } from './pagination.model';
 
 /** Constant representing the number of pages which appear before and after current page. */
@@ -27,7 +28,7 @@ export class PaginationService {
         this.validate(pagination);
 
         const totalPages = this.getTotalPages(pagination);
-        const pages = new Array(totalPages).fill(undefined).map((_, i) => i + 1);
+        const pages = range(totalPages, (i) => i + 1);
 
         // +1 for current page, +2 for "more" elements - after start & before end pages
         const pagesToDisplay = CORNER_DISPLAY_PAGES * 2 + SIDE_CURRENT_DISPLAY_PAGES * 2 + 1 + 2;

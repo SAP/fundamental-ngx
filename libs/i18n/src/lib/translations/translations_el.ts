@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_el.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Απασχολημένο',
+        defaultTitle: 'Παρακαλώ περιμένετε'
     },
     coreCalendar: {
         yearSelectionLabel: 'Επιλογή έτους',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Πρόχειρο'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Τονισμένο',
+        subtle: 'Διακριτικό'
     },
     coreMessageStrip: {
         dismissLabel: 'Κλείσιμο',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Στοιχείο δέντρου {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Κατάσταση(ενεργή)',
+        inactive: 'Κατάσταση'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Τονισμένο',
+        negative: 'Σφάλμα Κατάστασης Τιμής',
+        critical: 'Προειδοποίηση Κατάστασης Τιμής',
+        positive: 'Επιτυχία Κατάστασης Τιμής',
+        informative: 'Πληροφορίες Κατάστασης Τιμής'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Κατάσταση Αντικειμένου',
+        ariaRoleDescription: 'Κουμπί Κατάστασης Αντικειμένου',
+        indicationColor: 'Χρώμα Ένδειξης',
+        negative: 'Άκυρη Καταχώριση',
+        critical: 'Προειδοποίηση εκδόθηκε',
+        positive: 'Καταχώριση επικυρώθηκε με επιτυχία',
+        informative: 'Πληροφοριακή καταχώριση'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} περισσότερα'
@@ -567,7 +567,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Πλαίσιο ελέγχου, επιλέχθηκε, κάντε κλικ για αποεπιλογή όλων',
         deselectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
         selectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
-        loadMore: 'Εμφάνιση περισσότερων',
+        loadMore: 'Εμφάνιση Περισσότερων',
         toolbarActionButtonTitle: 'Ρυθμίσεις',
         settingsDialogHeader: 'Ρυθμίσεις',
         confirmBtnLabel: 'OK',
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Τμηματοποιημένο Κουμπί'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Αναγνωριστικό Αντικειμένου'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Ετικέτα Πληροφοριών'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Επαναφορά σε μηδέν',
+        ariaRoleDescription: 'Δείκτης αξιολόγησης',
+        ariaLabelTotalRating: 'Συνολική αξιολόγηση',
+        ariaLabelValue: 'από'
     }
 };

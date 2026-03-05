@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import {
     BarComponent,
@@ -9,13 +10,13 @@ import {
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     PopoverBodyComponent,
     PopoverBodyFooterDirective,
     PopoverBodyHeaderDirective,
     PopoverComponent,
+    PopoverConfig,
     PopoverControlComponent
 } from '@fundamental-ngx/core/popover';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -26,11 +27,11 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     styleUrls: ['popover-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     imports: [
+        FormsModule,
         PopoverComponent,
         PopoverControlComponent,
         AvatarComponent,
         PopoverBodyComponent,
-        IconComponent,
         PopoverBodyHeaderDirective,
         BarComponent,
         ButtonBarComponent,
@@ -40,9 +41,16 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         BarRightDirective,
         ButtonComponent,
         TitleComponent,
-        ContentDensityDirective,
         PopoverBodyFooterDirective,
-        IconComponent
+        CheckboxComponent
     ]
 })
-export class PopoverExampleComponent {}
+export class PopoverExampleComponent {
+    isDisabled = false;
+
+    popoverConfig: PopoverConfig = {
+        placement: 'bottom',
+        noArrow: false,
+        focusTrapped: true
+    };
+}

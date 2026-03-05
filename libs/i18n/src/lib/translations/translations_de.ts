@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_de.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Ausgelastet',
+        defaultTitle: 'Bitte warten'
     },
     coreCalendar: {
         yearSelectionLabel: 'Jahr auswählen',
@@ -61,7 +61,7 @@ export default {
         unpinLabel: 'Kopfbereich lösen'
     },
     coreFeedListItem: {
-        moreLabel: '{count} mehr',
+        moreLabel: 'noch {count}',
         lessLabel: 'Weniger'
     },
     coreGridList: {
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Entwurf'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Hervorgehoben',
+        subtle: 'Subtil'
     },
     coreMessageStrip: {
         dismissLabel: 'Schließen',
@@ -104,27 +104,27 @@ export default {
         linkItemAriaLabel: 'Baumelement {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktiv)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Hervorgehoben',
+        negative: 'Wertzustand Fehler',
+        critical: 'Wertzustand Warnung',
+        positive: 'Wertzustand Erfolg',
+        informative: 'Wertzustand Information'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objektstatus',
+        ariaRoleDescription: 'Schaltfläche "Objektstatus"',
+        indicationColor: 'Anzeigefarbe',
+        negative: 'Ungültiger Eintrag',
+        critical: 'Warnung ausgegeben',
+        positive: 'Eintrag erfolgreich geprüft',
+        informative: 'Informationseintrag'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{count} mehr'
+        moreItemsButton: 'noch {count}'
     },
     corePagination: {
         pageLabel: 'Seite {pageNumber}',
@@ -221,7 +221,7 @@ export default {
         ariaRoleDescription: 'Token'
     },
     coreTokenizer: {
-        moreLabel: '{count} mehr',
+        moreLabel: 'noch {count}',
         tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
@@ -654,15 +654,15 @@ export default {
         buttonRoleDescription: 'Segmentierte Schaltfläche'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Objekt-ID'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Info-Label'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Auf Null zurücksetzen',
+        ariaRoleDescription: 'Bewertungsindikator',
+        ariaLabelTotalRating: 'Gesamtbewertung',
+        ariaLabelValue: 'von'
     }
 };

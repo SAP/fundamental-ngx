@@ -2,13 +2,13 @@
 <button fd-button label="Menu with submenu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
 <div [style.display]="'inline-block'">
     <span [style.padding-left.rem]="0.5">Active path:</span>
-    @for (active of activePath; track active) {
+    @for (active of activePath(); track active) {
         <span [style.padding.rem]="0.5">
             {{ active.menuItemTitle.title }}
         </span>
     }
 </div>
-<fd-menu #menu (activePath)="activePath = $event">
+<fd-menu #menu (activePath)="activePath.set($event)">
     <li fd-menu-item [submenu]="fruits">
         <div fd-menu-interactive>
             <span fd-menu-title>Fruits</span>
@@ -104,13 +104,13 @@
 <button fd-button label="Complex menu with submenu" [fdMenu]="true" [fdMenuTrigger]="complexMenu"></button>
 <div [style.display]="'inline-block'">
     <span [style.padding-left.rem]="0.5">Active path:</span>
-    @for (active of complexActivePath; track active) {
+    @for (active of complexActivePath(); track active) {
         <span [style.padding.rem]="0.5">
             {{ active.menuItemTitle.title }}
         </span>
     }
 </div>
-<fd-menu #complexMenu (activePath)="complexActivePath = $event">
+<fd-menu #complexMenu (activePath)="complexActivePath.set($event)">
     @for (item of complexMenuItems; track item) {
         <ng-container *ngTemplateOutlet="submenuTemplate; context: { item: item }"></ng-container>
     }

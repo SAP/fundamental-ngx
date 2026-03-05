@@ -22,6 +22,7 @@ export const API_FILES = {
     colorPalettePopover: ['ColorPalettePopover'],
     colorPicker: ['ColorPicker'],
     comboBox: ['ComboBox', 'ComboBoxItem', 'ComboBoxItemGroup'],
+    contentDensity: ['ContentDensityObserver', 'GlobalContentDensityService', 'ContentDensityDirective'],
     datePicker: ['DatePicker'],
     dateRangePicker: ['DateRangePicker'],
     dateTimePicker: ['DateTimePicker'],

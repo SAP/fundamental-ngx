@@ -60,17 +60,19 @@ export abstract class MobileModeBase<T extends MobileMode> {
     /** @hidden */
     private _getMobileModeConfig(): MobileModeConfig {
         const injectedConfig = this._mobileModes.find((mode) => mode.target === this.target);
-        const componentConfig = this._component.mobileConfig;
 
-        if (!injectedConfig && !componentConfig) {
+        // Handle both signal and plain property access for mobileConfig
+        const mobileConfigProp = this._component.mobileConfig;
+        const componentMobileConfig =
+            typeof mobileConfigProp === 'function' ? (mobileConfigProp as () => MobileModeConfig)() : mobileConfigProp;
+
+        if (injectedConfig || componentMobileConfig) {
+            return injectedConfig
+                ? this._mergeConfigs(injectedConfig.config || {}, componentMobileConfig || {})
+                : componentMobileConfig;
+        } else {
             throw new Error(MOBILE_CONFIG_ERROR);
         }
-
-        if (injectedConfig && componentConfig) {
-            return this._mergeConfigs(injectedConfig.config, componentConfig);
-        }
-
-        return (injectedConfig?.config || componentConfig)!;
     }
 
     /** @hidden Merges two mobile mode configs, with config2 taking precedence. */

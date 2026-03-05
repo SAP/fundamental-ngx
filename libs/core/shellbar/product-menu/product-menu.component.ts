@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -69,7 +68,7 @@ export class ProductMenuComponent {
      * * Leave blank for no effect.
      */
     @Input()
-    fillControlMode: Nullable<PopoverFillMode>;
+    fillControlMode: PopoverFillMode | null;
 
     /**
      * The control element to toggle the product menu,

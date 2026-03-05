@@ -14,8 +14,8 @@
                 [style.vertical-align]="'middle'"
                 [fd-inline-help]="hintOptions.content"
                 [glyph]="hintOptions.glyph"
-                [placement]="hintOptions.placement || null"
-                [triggers]="hintOptions.trigger || []"
+                [placement]="hintOptions.placement ?? null"
+                [triggers]="hintOptions.trigger ?? []"
                 tabindex="0"
             ></fd-icon>
         </span>

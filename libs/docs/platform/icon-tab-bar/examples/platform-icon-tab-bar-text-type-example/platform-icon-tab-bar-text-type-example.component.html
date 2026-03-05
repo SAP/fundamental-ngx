@@ -1,5 +1,195 @@
-<fdp-icon-tab-bar
-    [tabsConfig]="items"
-    [layoutMode]="textTypeLayoutMode"
-    [enableTabReordering]="enableTabReordering"
-></fdp-icon-tab-bar>
+<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+<div cdkScrollable class="docs-fcl-example-overlay" #overlay>
+    @if (fullscreen) {
+        <div class="docs-fcl-example-overlay-content">
+            <div class="docs-fcl-example-button">
+                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+            </div>
+            <!-- Flexible Column Layout -->
+            <fdp-icon-tab-bar layoutMode="row">
+                <fdp-icon-tab-bar-tab label="Reporte"></fdp-icon-tab-bar-tab>
+                <fdp-icon-tab-bar-tab label="Layout">
+                    <fd-flexible-column-layout [(layout)]="localLayout">
+                        <ng-template #startColumn>
+                            <div class="docs-fcl-example-section">
+                                <h2>Start Column</h2>
+                                <div>
+                                    <button class="fd-button" (click)="changeLayout('TwoColumnsMidExpanded')">
+                                        Open Column 2
+                                    </button>
+                                </div>
+                                <fd-toolbar [shouldOverflow]="true">
+                                    <button fd-toolbar-item fd-button label="Button"></button>
+                                    <button fd-toolbar-item fd-button label="Button"></button>
+                                    <button fd-toolbar-item fd-button label="Button"></button>
+                                    <button fd-toolbar-item fd-button label="Button"></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        fd-toolbar-overflow-button-menu
+                                        label="Button"
+                                        [fdMenu]="true"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        fd-toolbar-overflow-button
+                                        label="Button"
+                                    ></button>
+                                </fd-toolbar>
+                            </div>
+                        </ng-template>
+                        <ng-template #midColumn>
+                            <fd-dynamic-page [autoResponsive]="true" ariaLabel="Example Dynamic Page">
+                                <fd-dynamic-page-header title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                                    <fd-dynamic-page-layout-actions>
+                                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                                            @if (showMidColumnControls) {
+                                                <button
+                                                    fd-button
+                                                    fdType="transparent"
+                                                    [attr.aria-label]="
+                                                        isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'
+                                                    "
+                                                    (click)="
+                                                        isFullScreen
+                                                            ? changeLayout('TwoColumnsMidExpanded')
+                                                            : changeLayout('OneColumnMidFullScreen')
+                                                    "
+                                                    [title]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
+                                                >
+                                                    <i
+                                                        [class.sap-icon--exitfullscreen]="isFullScreen"
+                                                        [class.sap-icon--resize]="!isFullScreen"
+                                                    ></i>
+                                                </button>
+                                            }
+                                            @if (showMidColumnControls) {
+                                                <button
+                                                    fd-button
+                                                    fdType="transparent"
+                                                    aria-label="Close"
+                                                    (click)="changeLayout('OneColumnStartFullScreen')"
+                                                    title="Close"
+                                                >
+                                                    <i class="sap-icon--decline"></i>
+                                                </button>
+                                            }
+                                        </fd-toolbar>
+                                    </fd-dynamic-page-layout-actions>
+                                </fd-dynamic-page-header>
+                                <fd-dynamic-page-subheader [collapsible]="true" [pinnable]="true" [collapsed]="false">
+                                    <span>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus
+                                        corrupti architecto perspiciatis, delectus necessitatibus incidunt numquam
+                                        asperiores tenetur iure. Cum consequuntur impedit repellendus esse, facere autem
+                                        optio consequatur nobis?
+                                    </span>
+                                </fd-dynamic-page-subheader>
+                                <fd-dynamic-page-content cdkScrollable>
+                                    <div
+                                        class="fd-dynamic-page-section-example"
+                                        [ngStyle]="{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }"
+                                    >
+                                        <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
+                                            Open Column 3
+                                        </button>
+                                    </div>
+                                    <div class="fd-dynamic-page-section-example">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                </fd-dynamic-page-content>
+                            </fd-dynamic-page>
+                        </ng-template>
+                        <ng-template #endColumn>
+                            <form [formGroup]="formFilters">
+                                <fd-toolbar style="height: 50px" [shouldOverflow]="true">
+                                    <fd-date-picker
+                                        fd-toolbar-item
+                                        type="range"
+                                        formControlName="period"
+                                    ></fd-date-picker>
+                                    <fd-select fd-toolbar-item formControlName="center">
+                                        <li fd-option value="AB01">Celaya</li>
+                                        <li fd-option value="AA02">Apaseos</li>
+                                    </fd-select>
+                                    <button
+                                        fd-toolbar-item
+                                        fd-button
+                                        label="Consultar"
+                                        type="button"
+                                        (click)="getData()"
+                                    ></button>
+                                </fd-toolbar>
+                            </form>
+                        </ng-template>
+                    </fd-flexible-column-layout>
+                </fdp-icon-tab-bar-tab>
+            </fdp-icon-tab-bar>
+        </div>
+    }
+</div>

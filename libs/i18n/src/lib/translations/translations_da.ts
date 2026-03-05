@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Optaget',
+        defaultTitle: 'Vent venligst'
     },
     coreCalendar: {
         yearSelectionLabel: 'Vælg år',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Udkast'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Fremhævet',
+        subtle: 'Diskret'
     },
     coreMessageStrip: {
         dismissLabel: 'Luk',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Træelement {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktiv)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Fremhævet',
+        negative: 'Værditilstand Fejl',
+        critical: 'Værditilstand Advarsel',
+        positive: 'Værditilstand Lykkedes',
+        informative: 'Værditilstand Oplysninger'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objektstatus',
+        ariaRoleDescription: 'Knappen Objektstatus',
+        indicationColor: 'Indikationsfarve',
+        negative: 'Ugyldig indtastning',
+        critical: 'Advarsel udstedt',
+        positive: 'Indtastningen er valideret',
+        informative: 'Informativ indtastning'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} mere'
@@ -566,7 +566,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Afkrydsningsfelt, markeret, klik for at fravælge alle',
         deselectSingleRow: 'Tryk på mellemrumstasten for at slette markering af række',
         selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
-        loadMore: 'Vis flere',
+        loadMore: 'Vis mere',
         toolbarActionButtonTitle: 'Indstillinger',
         settingsDialogHeader: 'Indstillinger',
         confirmBtnLabel: 'OK',
@@ -652,15 +652,15 @@ export default {
         buttonRoleDescription: 'Segmentknap'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Objektidentifikator'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Oplysningsetiket'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Nulstil',
+        ariaRoleDescription: 'Vurderingsindikator',
+        ariaLabelTotalRating: 'Vurdering i alt',
+        ariaLabelValue: 'af'
     }
 };

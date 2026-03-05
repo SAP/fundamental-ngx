@@ -21,7 +21,7 @@ export class PopoverFormMessageService {
 
     /** @hidden */
     set triggers(triggers: string[]) {
-        this._popoverService.triggers = triggers;
+        this._popoverService.triggers.set(triggers);
         this._popoverService._refreshTriggerListeners();
     }
 
@@ -49,7 +49,7 @@ export class PopoverFormMessageService {
 
     /** @hidden */
     private _updatePopover(): void {
-        this._popoverService.additionalBodyClass = this._getAdditionalClass().join(' ');
+        this._popoverService.additionalBodyClass.set(this._getAdditionalClass().join(' '));
         this._popoverService.updateContent(this._message, null);
     }
 

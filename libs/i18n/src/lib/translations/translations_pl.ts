@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_pl.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Zajęty',
+        defaultTitle: 'Proszę czekać'
     },
     coreCalendar: {
         yearSelectionLabel: 'Wybierz rok',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Wersja robocza'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Wyróżniony',
+        subtle: 'Delikatny'
     },
     coreMessageStrip: {
         dismissLabel: 'Zamknij',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Pozycja drzewa {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktywny)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Wyróżniony',
+        negative: 'Status wartości Błąd',
+        critical: 'Status wartości Ostrzeżenie',
+        positive: 'Status wartości Powodzenie',
+        informative: 'Status wartości Informacja'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Status obiektu',
+        ariaRoleDescription: 'Status obiektu Przycisk',
+        indicationColor: 'Kolor wskazania',
+        negative: 'Nieprawidłowy wpis',
+        critical: 'Wygenerowano ostrzeżenie',
+        positive: 'Wpis został zweryfikowany',
+        informative: 'Wpis informacyjny'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} więcej'
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Przycisk podzielony na segmenty'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Identyfikator obiektu'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Etykieta informacyjna'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Resetuj do zera',
+        ariaRoleDescription: 'Wskaźnik punktacji',
+        ariaLabelTotalRating: 'Punktacja łączna',
+        ariaLabelValue: 'z'
     }
 };

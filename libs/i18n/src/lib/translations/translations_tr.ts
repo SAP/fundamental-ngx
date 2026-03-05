@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Meşgul',
+        defaultTitle: 'Lütfen bekleyin'
     },
     coreCalendar: {
         yearSelectionLabel: 'Yıl seç',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Taslak'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Vurgulu',
+        subtle: 'İnce'
     },
     coreMessageStrip: {
         dismissLabel: 'Kapat',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Ağaç Öğesi {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Durum (etkin)',
+        inactive: 'Durum'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Vurgulu',
+        negative: 'Hata Değer Durumu',
+        critical: 'Uyarı Değer Durumu',
+        positive: 'Başarı Değer Durumu',
+        informative: 'Bilgi Değer Durumu'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Nesne Durumu',
+        ariaRoleDescription: 'Nesne Durumu Düğmesi',
+        indicationColor: 'Gösterge Rengi',
+        negative: 'Geçersiz Giriş',
+        critical: 'Uyarı verildi',
+        positive: 'Giriş başarıyla doğrulandı',
+        informative: 'Bilgilendirici giriş'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} tane daha'
@@ -567,7 +567,7 @@ export default {
         deselectAllCheckboxLongLabel: 'Onay kutusu, seçildi, tümünün seçimini kaldırmak için tıklayın',
         deselectSingleRow: 'Satırın seçimi kaldırmak için boşluk tuşuna basın',
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
-        loadMore: 'Daha fazlasını göster',
+        loadMore: 'Daha Fazla Göster',
         toolbarActionButtonTitle: 'Ayarlar',
         settingsDialogHeader: 'Ayarlar',
         confirmBtnLabel: 'Tamam',
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Segmentlere Ayrılmış Düğme'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Nesne Tanımlayıcı'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Bilgi Etiketi'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Sıfırla',
+        ariaRoleDescription: 'Derecelendirme göstergesi',
+        ariaLabelTotalRating: 'Toplam derecelendirme',
+        ariaLabelValue: '/'
     }
 };

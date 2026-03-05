@@ -18,7 +18,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { FocusableGridDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective, range } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -69,7 +69,6 @@ let titleUniqueId = 0;
         BarMiddleDirective,
         BarElementDirective,
         ButtonComponent,
-        RepeatDirective,
         SkeletonComponent,
         SlicePipe,
         FdTranslatePipe,
@@ -78,6 +77,7 @@ let titleUniqueId = 0;
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
     /** @hidden */
+    readonly loadingRange = range(3);
     protected defaultTitleId = `fd-select-tab-title-id-${titleUniqueId++}`;
     /** @hidden */
     protected defaultCountId = `fd-select-tab-title-count-id-${titleUniqueId++}`;

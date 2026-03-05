@@ -1,5 +1,6 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { Component, signal, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { Subject } from 'rxjs';
 import { MenuComponent } from '../menu.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
 
@@ -16,6 +17,7 @@ describe('MenuTriggerDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: MenuTriggerDirective;
     let menu: Partial<MenuComponent>;
+    let isOpenChangeSubject: Subject<boolean>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -25,12 +27,19 @@ describe('MenuTriggerDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
+        const isOpenSignal = signal(false);
+        isOpenChangeSubject = new Subject<boolean>();
+
+        // Mock the output() which internally uses OutputEmitterRef
+        // The directive subscribes via outputToObservable or similar pattern
         menu = {
-            id: 'menu-id',
-            isOpen: false,
-            isOpenChange: new EventEmitter<boolean>(),
+            id: () => 'menu-id',
+            isOpen: isOpenSignal,
+            isOpenChange: {
+                subscribe: (callback: (value: boolean) => void) => isOpenChangeSubject.subscribe(callback)
+            },
             set trigger(value) {}
-        };
+        } as any;
 
         fixture.detectChanges();
         directive = fixture.componentInstance.menuTrigger;
@@ -62,17 +71,19 @@ describe('MenuTriggerDirective', () => {
         directive.menu = menu as MenuComponent;
 
         tick();
+        fixture.detectChanges();
 
         expect(directive.ariaHasPopup).toBe(true);
         expect(directive.ariaExpanded).toBeFalsy();
         expect(directive.ariaControls).toBeFalsy();
 
-        menu.isOpen = true;
-        menu.isOpenChange!.emit(true);
-
+        (menu.isOpen as any).set(true);
+        isOpenChangeSubject.next(true);
+        fixture.detectChanges();
+        flushMicrotasks();
         tick();
 
         expect(directive.ariaExpanded).toBe(true);
-        expect(directive.ariaControls).toEqual(menu.id);
+        expect(directive.ariaControls).toEqual(menu.id!());
     }));
 });

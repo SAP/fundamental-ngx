@@ -1,8 +1,8 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    Inject,
+    effect,
+    inject,
     OnDestroy,
     OnInit,
     TemplateRef,
@@ -10,10 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-
 import { NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import {
     DialogBodyComponent,
@@ -37,7 +34,6 @@ let mobilePopoverUniqueId = 0;
     imports: [
         TemplateModule,
         TitleComponent,
-        TitleComponent,
         NgTemplateOutlet,
         DialogComponent,
         DialogBodyComponent,
@@ -51,10 +47,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     @ViewChild('dialogTemplate')
     _dialogTemplate: TemplateRef<any>;
 
-    /** @hidden
-     * from mobile class can not prefix _,
-     * to avoid build issues
-     */
+    /** @hidden Cannot use _ prefix due to mobile class build constraints. */
     childContent?: PopoverChildContent = undefined;
 
     /** Current popover title */
@@ -69,58 +62,43 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     readonly id = 'fd-popover-mobile-' + mobilePopoverUniqueId++;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     get titleId(): string {
         return this.id + '-title';
     }
 
     /** @hidden */
-    constructor(
-        private _changeDetectorref: ChangeDetectorRef,
-        @Inject(POPOVER_COMPONENT) _popoverComponent: PopoverInterface
-    ) {
-        super(_popoverComponent, MobileModeControl.POPOVER);
+    constructor() {
+        super(inject<PopoverInterface>(POPOVER_COMPONENT), MobileModeControl.POPOVER);
+
+        // effect() automatically tracks _component.isOpen signal and cleans up on destroy
+        effect(() => {
+            if (this._component.isOpen()) {
+                this._openDialog();
+            } else {
+                this.dialogRef?.hide(true);
+            }
+        });
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._listenOnPopoverOpenChange();
-
         this.title = this.mobileConfig.title || '';
         this.viewBody = this.childContent?.popoverBodyContentTemplate ?? null;
         this.viewFooter = this.childContent?.popoverFooterContentTemplate ?? null;
-
-        this._changeDetectorref.markForCheck();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef?.close();
-        this._subscriptions.unsubscribe();
     }
 
-    /** Closes the Dialog and Popover component */
+    /** Closes the dialog and popover. */
     close(): void {
         this.dialogRef.close();
         this._component.close();
     }
 
-    /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
-    private _listenOnPopoverOpenChange(): void {
-        this._subscriptions.add(
-            this._component.isOpenChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
-                if (isOpen) {
-                    this._openDialog();
-                } else {
-                    this.dialogRef.hide(true);
-                }
-            })
-        );
-    }
-
-    /** @hidden Opens the Dialog */
+    /** @hidden Opens the dialog. */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             verticalPadding: true,

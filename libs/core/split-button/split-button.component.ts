@@ -6,8 +6,11 @@ import {
     Component,
     ContentChild,
     DestroyRef,
+    effect,
     ElementRef,
     EventEmitter,
+    inject,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -154,6 +157,9 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _menuActivePathSubscription = new Subscription();
 
     /** @hidden */
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
     constructor(
         private _cdRef: ChangeDetectorRef,
         private _destroyRef: DestroyRef,
@@ -174,7 +180,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.menu._menuItems.forEach((item) => {
+        this.menu.menuItems.forEach((item: MenuItemComponent) => {
             item.menuInteractive._fromSplitButton = true;
         });
         this._setupMenuSubscription();
@@ -182,7 +188,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._handleMainActionObject();
 
         if (!this.mainActionTitle && !this.titleTemplate && !this.selected) {
-            this.selectMenuItem(this.menu._menuItems.first);
+            this.selectMenuItem(this.menu.menuItems[0] as MenuItemComponent);
         } else if (!this.mainActionTitle && this.selected) {
             this.selectMenuItem(this.selected);
         }
@@ -248,7 +254,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     private _setupMenuItemSubscriptions(): void {
-        this.menu._menuItems.forEach((menuItem) => {
+        this.menu.menuItems.forEach((menuItem: MenuItemComponent) => {
             menuItem.onSelect.pipe(first()).subscribe(() => {
                 if (this.fixedWidth) {
                     this._getMainButtonWidth();
@@ -266,7 +272,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
         if (!this.mainAction || !this.mainAction.keepMainAction) {
             this.selected = menuItem;
-            this.menu._menuItems.forEach((item) => {
+            this.menu.menuItems.forEach((item: MenuItemComponent) => {
                 item.setSelected(false, true);
             });
             menuItem.setSelected(true, true);
@@ -278,11 +284,20 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     private _setupMenuSubscription(): void {
-        this._menuSubscription = this.menu._menuItems.changes.subscribe(() => {
-            this._menuItemSubscriptions.unsubscribe();
-            this._menuItemSubscriptions.closed = false;
-            this._setupMenuItemSubscriptions();
-        });
+        // React to menu items changes using effect with signal
+        effect(
+            () => {
+                // Read the signal to track it
+                const menuItems = this.menu.menuItems;
+                // Only rebuild subscriptions if menu items actually exist
+                if (menuItems.length > 0) {
+                    this._menuItemSubscriptions.unsubscribe();
+                    this._menuItemSubscriptions.closed = false;
+                    this._setupMenuItemSubscriptions();
+                }
+            },
+            { injector: this._injector }
+        );
         // call markForCheck once menu open state gets changed
         this._menuSubscription.add(this.menu.isOpenChange.subscribe(() => this._cdRef.markForCheck()));
     }

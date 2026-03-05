@@ -36,10 +36,10 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[attr.aria-busy]': 'loading()',
         '[attr.aria-live]': 'ariaLive()',
         '[attr.aria-label]': 'ariaLabel()',
-        '[attr.aria-valuetext]': 'ariaValueText() || _ariaValueText()',
+        '[attr.aria-valuetext]': 'loading() ? ariaValueText() || _ariaValueText() : null',
         '[attr.aria-valuemin]': '0',
         '[attr.aria-valuemax]': '100',
-        '[attr.title]': 'title() || _titleValue()',
+        '[attr.title]': 'loading() ? title() || _titleValue() : null',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block()',
         '(keydown)': 'hostFocusChangeHandler($event)'

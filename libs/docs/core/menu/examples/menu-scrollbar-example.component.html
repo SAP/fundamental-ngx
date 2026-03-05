@@ -1,9 +1,9 @@
 <button fd-button label="Menu" [fdMenuTrigger]="menu"></button>
 <fd-menu #menu>
-    @for (option of options; track option) {
+    @for (option of options; track $index) {
         <li fd-menu-item>
             <a href="#" fd-menu-interactive>
-                <span fd-menu-title>Option 1</span>
+                <span fd-menu-title>{{ option }} {{ $index + 1 }}</span>
             </a>
         </li>
     }

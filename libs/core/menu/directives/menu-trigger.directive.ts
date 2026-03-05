@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Input, OnDestroy } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
 
@@ -38,14 +38,13 @@ export class MenuTriggerDirective implements OnDestroy {
     private _menuSubscription: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     ngOnDestroy(): void {
         this._unsubscribeFromMenu();
     }
 
-    /** @hidden */
     private _subscribeToMenu(menu: MenuComponent): void {
         this._menuSubscription.add(
             menu.isOpenChange.subscribe(() => {
@@ -63,7 +62,7 @@ export class MenuTriggerDirective implements OnDestroy {
     /** @hidden */
     private _setAriaAttributes(menu?: MenuComponent): void {
         this.ariaHasPopup = !!menu;
-        this.ariaExpanded = menu?.isOpen;
-        this.ariaControls = menu?.isOpen ? menu.id : null;
+        this.ariaExpanded = menu?.isOpen();
+        this.ariaControls = menu?.isOpen() ? menu.id() : null;
     }
 }

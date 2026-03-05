@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_fi.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Varattu',
+        defaultTitle: 'Odota'
     },
     coreCalendar: {
         yearSelectionLabel: 'Valitse vuosi',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Luonnos'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Korostettu',
+        subtle: 'Hillitty'
     },
     coreMessageStrip: {
         dismissLabel: 'Sulje',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Puun kohde {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Tila(aktiivinen)',
+        inactive: 'Tila'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Korostettu',
+        negative: 'Arvon tila Virhe',
+        critical: 'Arvon tila Varoitus',
+        positive: 'Arvon tila Onnistuminen',
+        informative: 'Arvon tila Informaatio'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objektin tila',
+        ariaRoleDescription: 'Objektin tilan painike',
+        indicationColor: 'Merkinnän väri',
+        negative: 'Virheellinen merkintä',
+        critical: 'Varoitus annettu',
+        positive: 'Merkinnän validointi onnistui',
+        informative: 'Informatiivinen merkintä'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} lisää'
@@ -652,15 +652,15 @@ export default {
         buttonRoleDescription: 'Segmentoitu painike'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Objektitunnus'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Infoetiketti'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Palauta nollaksi',
+        ariaRoleDescription: 'Arviointitunnus',
+        ariaLabelTotalRating: 'Kokonaisarviointi',
+        ariaLabelValue: '/'
     }
 };

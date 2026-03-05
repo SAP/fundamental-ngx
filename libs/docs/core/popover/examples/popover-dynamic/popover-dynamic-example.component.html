@@ -11,7 +11,7 @@
     </fd-popover-control>
     <fd-popover-body>
         <button [style.margin.rem]="1" fd-button (click)="updatePopover()">Click me to show the avatar</button>
-        @if (showAvatar) {
+        @if (showAvatar()) {
             <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
         }
     </fd-popover-body>

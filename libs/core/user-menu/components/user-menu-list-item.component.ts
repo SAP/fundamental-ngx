@@ -182,8 +182,9 @@ export class UserMenuListItemComponent implements KeyboardSupportItemInterface {
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean, popover: PopoverComponent): void {
+        const popoverBodyEl = (popover as any).popoverBody?.();
         const firstTabbableElement: HTMLButtonElement =
-            popover.popoverBody._elementRef.nativeElement.querySelector('.fd-menu__link');
+            popoverBodyEl?._elementRef.nativeElement.querySelector('.fd-menu__link');
 
         const linkElement: HTMLButtonElement = this._elementRef.nativeElement.querySelector('.fd-menu__link');
 

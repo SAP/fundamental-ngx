@@ -1,8 +1,3 @@
-/** Generate range of given lengths using given function. */
-export function range<T>(length: number, mapFn: (index: number) => T): T[] {
-    return Array.from(new Array(length)).map((_, index) => mapFn(index));
-}
-
 /** Adds 0 if number is less then 10 */
 export function _leftPad(n: number): string {
     return n === n % 10 ? `0${n}` : `${n}`;

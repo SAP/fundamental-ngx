@@ -1,4 +1,4 @@
-import { EventEmitter, InjectionToken } from '@angular/core';
+import { EventEmitter, InjectionToken, ModelSignal } from '@angular/core';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 
@@ -10,6 +10,7 @@ export const POPOVER_COMPONENT = new InjectionToken<PopoverInterface>('PopoverIn
  */
 export interface PopoverInterface extends MobileMode {
     dialogConfig: DialogConfig;
+    isOpen: ModelSignal<boolean>;
     isOpenChange: EventEmitter<boolean>;
 
     close(): void;

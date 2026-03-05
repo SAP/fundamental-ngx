@@ -1,46 +1,61 @@
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
-import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Directive, ElementRef, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { TriggerConfig } from './popover-config.interface';
 
-@Directive()
+// Re-export for backward compatibility
+export { TriggerConfig };
+
+/**
+ * @deprecated Use the {@link PopoverConfig} interface instead of extending this class.
+ * This class will be removed in a future major version.
+ *
+ * Migration guide:
+ * - For components: Use regular `input()` signal properties and pass configuration to PopoverService
+ * - For services: Use the PopoverConfig interface to define configuration objects
+ * - See {@link PopoverComponent} and {@link MenuComponent} for modern implementation examples
+ *
+ * Configuration object for popover settings.
+ * This is used by PopoverService and was extended by PopoverComponent and MenuComponent.
+ *
+ * **For Components:** Use signal inputs with the `input()` function to declare these properties.
+ * Components should also define their own `isOpenChange = output<boolean>()` and `beforeOpen = output<void>()` outputs.
+ *
+ * **For Services:** Use regular signal instances to store these values.
+ */
+@Directive({
+    host: {
+        '[class.fd-popover-custom--disabled]': 'disabled()'
+    }
+})
 export class BasePopoverClass {
     /** Whether to close the popover on router navigation start. */
-    @Input()
-    closeOnNavigation = true;
+    closeOnNavigation = signal(true);
 
     /** Whether the popover is disabled. */
-    @Input()
-    @HostBinding('class.fd-popover-custom--disabled')
-    disabled = false;
+    disabled = signal(false);
 
     /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
-    @Input()
-    maxWidth: Nullable<number> = null;
+    maxWidth = signal<Nullable<number>>(null);
 
     /** Whether the popover should have an arrow. */
-    @Input()
-    noArrow = true;
+    noArrow = signal(true);
 
     /** Whether the popover container needs an extra class for styling. */
-    @Input()
-    additionalBodyClass: string | null = null;
+    additionalBodyClass = signal<string | null>(null);
 
     /** Classes that should be applied to fd-popover-body component directly. */
-    @Input()
-    additionalBodyComponentClasses: string | null = null;
+    additionalBodyComponentClasses = signal<string | null>(null);
 
     /** Whether the popover container needs an extra class for styling. */
-    @Input()
-    additionalTriggerClass: string | null = null;
+    additionalTriggerClass = signal<string | null>(null);
 
     /** Whether the popover should close when the escape key is pressed. */
-    @Input()
-    closeOnEscapeKey = true;
+    closeOnEscapeKey = signal(true);
 
     /** Whether to wrap content with fd-scrollbar directive. */
-    @Input()
-    disableScrollbar = false;
+    disableScrollbar = signal(false);
 
     /**
      * The placement of the popover.
@@ -48,8 +63,7 @@ export class BasePopoverClass {
      * top, top-start, top-end, bottom, bottom-start, bottom-end,
      * right, right-start, right-end, left, left-start, left-end.
      */
-    @Input()
-    placement: Placement | null = null;
+    placement = signal<Placement | null>(null);
 
     /**
      * The trigger events that will open/close the popover.
@@ -81,37 +95,30 @@ export class BasePopoverClass {
      *
      * @default ['click']
      */
-    @Input()
-    triggers: (string | TriggerConfig)[] = ['click'];
+    triggers = signal<(string | TriggerConfig)[]>(['click']);
 
     /** Whether the popover is open. Can be used through two-way binding. */
-    @Input()
-    isOpen = false;
+    isOpen = signal(false);
 
     /** Whether the popover should close when a click is made outside its boundaries. */
-    @Input()
-    closeOnOutsideClick = true;
+    closeOnOutsideClick = signal(true);
 
     /** Wether to apply a background overlay */
-    @Input()
-    applyOverlay = false;
+    applyOverlay = signal(false);
 
     /** Whether the popover should be focusTrapped. */
-    @Input()
-    focusTrapped = false;
+    focusTrapped = signal(false);
 
     /**
      * Whether the popover should automatically move focus into the trapped region upon
      * initialization and return focus to the previous activeElement upon destruction.
      */
-    @Input()
-    focusAutoCapture = false;
+    focusAutoCapture = signal(false);
 
     /**
      * Whether to move the focus after popover is closed to the last focused element before popover was opened.
      */
-    @Input()
-    restoreFocusOnClose = true;
+    restoreFocusOnClose = signal(true);
 
     /**
      * Scroll strategy, there are 4 accepted
@@ -120,8 +127,7 @@ export class BasePopoverClass {
      * - BlockScrollStrategy
      * - RepositionScrollStrategy ( default )
      */
-    @Input()
-    scrollStrategy: ScrollStrategy | null = null;
+    scrollStrategy = signal<ScrollStrategy | null>(null);
 
     /**
      * List of positions options for overlay defined by angular CDK.
@@ -129,8 +135,7 @@ export class BasePopoverClass {
      * another will be used
      * More information can be found in https://material.angular.io/cdk/overlay/api
      */
-    @Input()
-    cdkPositions: ConnectedPosition[] | null = null;
+    cdkPositions = signal<ConnectedPosition[] | null>(null);
 
     /**
      * Preset options for the popover body width.
@@ -138,48 +143,23 @@ export class BasePopoverClass {
      * * `equal` will apply a width to the body equivalent to the width of the control.
      * * Leave blank for no effect.
      */
-    @Input()
-    fillControlMode: Nullable<PopoverFillMode> = null;
+    fillControlMode = signal<Nullable<PopoverFillMode>>(null);
 
     /** The element to which  the overlay is attached. By default it is body */
-    @Input()
-    appendTo: Nullable<ElementRef | Element> = null;
+    appendTo = signal<Nullable<ElementRef | Element>>(null);
 
     /** Placement of the popover element. */
-    @Input()
-    placementContainer: Nullable<ElementRef | Element>;
+    placementContainer = signal<Nullable<ElementRef | Element>>(null);
 
     /** Whether position shouldn't change, when popover approach the corner of page */
-    @Input()
-    fixedPosition = false;
+    fixedPosition = signal(false);
 
     /** Whether the popover body is resizable. */
-    @Input()
-    resizable = false;
-
-    /** Event emitted when the state of the isOpen property changes. */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    /** Event emitted right before the popover is being opened.
-     * Useful for cases when component inside popover body needs to be initialized right BEFORE the opening of the popover. */
-    @Output()
-    beforeOpen = new EventEmitter();
+    resizable = signal(false);
 
     /** @hidden Aria role for the popover body. */
-    _bodyRole: string | null = 'dialog';
+    protected _bodyRole: string | null = 'dialog';
 
     /** @hidden ID for the popover body. */
-    _bodyId: string | null = null;
-}
-
-/**
- * Config for the trigger event, which allows to specify
- * whether an event should apply both for open and close actions or only some of them
- */
-export interface TriggerConfig {
-    trigger: string;
-    openAction: boolean;
-    closeAction: boolean;
-    stopPropagation?: boolean;
+    protected readonly _bodyId = signal<string | null>(null);
 }

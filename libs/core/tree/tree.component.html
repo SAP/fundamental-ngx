@@ -4,15 +4,17 @@
         [ngTemplateOutletContext]="{ $implicit: 1 }"
     ></ng-template>
     <ng-template #loadingRenderer let-level>
-        <div *fdkRepeat="5" role="treeitem" [attr.aria-level]="level" class="fd-tree__item">
-            <div class="fd-tree__item-container">
-                <div class="fd-tree__content">
-                    <span class="fd-tree__text">
-                        <fd-skeleton type="text" width="100px" textLines="1"></fd-skeleton>
-                    </span>
+        @for (_ of loadingRange; track $index) {
+            <div role="treeitem" [attr.aria-level]="level" class="fd-tree__item">
+                <div class="fd-tree__item-container">
+                    <div class="fd-tree__content">
+                        <span class="fd-tree__text">
+                            <fd-skeleton type="text" width="100px" textLines="1"></fd-skeleton>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </ng-template>
     <ng-template #dataLoadedTpl>
         @if (_items.length > 0 && treeItemDef) {

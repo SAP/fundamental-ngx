@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_sl.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Zasedeno',
+        defaultTitle: 'Počakajte'
     },
     coreCalendar: {
         yearSelectionLabel: 'Izbira leta',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Osnutek'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Izpostavljeno',
+        subtle: 'Neizpostavljeno'
     },
     coreMessageStrip: {
         dismissLabel: 'Zapri',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Element drevesa {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktivno)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Izpostavljeno',
+        negative: 'Status vrednosti: Napaka',
+        critical: 'Status vrednosti: Opozorilo',
+        positive: 'Status vrednosti: Uspeh',
+        informative: 'Status vrednosti: Informacije'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Status objekta',
+        ariaRoleDescription: 'Gumb statusa objekta',
+        indicationColor: 'Barva oznake',
+        negative: 'Neveljaven vnos',
+        critical: 'Opozorilo izdano',
+        positive: 'Veljavnost vnosa uspešno preverjena',
+        informative: 'Informativni vnos'
     },
     coreOverflowLayout: {
         moreItemsButton: 'Še {count}'
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Segmentirani gumb'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Identifikator objekta'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Infooznaka'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Ponastavitev na nič',
+        ariaRoleDescription: 'Oznaka ocene',
+        ariaLabelTotalRating: 'Skupna ocena',
+        ariaLabelValue: 'od'
     }
 };

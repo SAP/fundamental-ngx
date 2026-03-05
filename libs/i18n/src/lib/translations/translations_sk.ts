@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_sk.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Zaneprázdnené',
+        defaultTitle: 'Čakajte prosím'
     },
     coreCalendar: {
         yearSelectionLabel: 'Vybrať rok',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Koncept'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Zvýraznené',
+        subtle: 'Jednoduché'
     },
     coreMessageStrip: {
         dismissLabel: 'Zavrieť',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Položka stromu {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (aktívny)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Zvýraznené',
+        negative: 'Status hodnoty Chyba',
+        critical: 'Status hodnoty Upozornenie',
+        positive: 'Status hodnoty Úspešné',
+        informative: 'Status hodnoty Informácia'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Status objektu',
+        ariaRoleDescription: 'Tlačidlo statusu objektu',
+        indicationColor: 'Farba označenia',
+        negative: 'Neplatné zadanie',
+        critical: 'Upozornenie zobrazené',
+        positive: 'Zadanie úspešne overené',
+        informative: 'Informatívne zadanie'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} viac'
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Segmentované tlačidlo'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Identifikátor objektu'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Označenie s informáciami'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Resetovať na nulu',
+        ariaRoleDescription: 'Indikátor hodnotenia',
+        ariaLabelTotalRating: 'Celkové hodnotenie',
+        ariaLabelValue: 'z'
     }
 };

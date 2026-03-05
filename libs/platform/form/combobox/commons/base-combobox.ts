@@ -252,10 +252,10 @@ export abstract class BaseCombobox
     _suggestions: OptionItem[] = [];
 
     /** @hidden Max width of list container */
-    maxWidth?: number;
+    maxWidth: number | null = null;
 
     /** @hidden Min width of list container */
-    minWidth?: number;
+    minWidth: number | null = null;
 
     /** @hidden Need for opening mobile version */
     openChange = new Subject<boolean>();

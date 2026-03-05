@@ -10,13 +10,12 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Inject,
+    inject,
     InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -62,7 +61,7 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     host: {
         '[attr.role]': '"menuitem"',
         '[class.fd-menu__item]': 'true',
-        '[class.fd-menu--full-width]': 'menuService?.menuComponent?.mobile || false'
+        '[class.fd-menu--full-width]': 'menuService?.menuComponent?.mobile() ?? false'
     },
     imports: [NgTemplateOutlet],
     providers: [
@@ -111,18 +110,22 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     submenuVisible = false;
 
     /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    menuService = inject(MenuService, { optional: true });
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     private _hoverSubscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        @Optional() public menuService: MenuService | null,
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu | null
-    ) {}
+    private _submenu = inject<BaseSubmenu | null>(SUBMENU, { optional: true });
+
+    /** @hidden */
+    private _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
     ngOnInit(): void {
@@ -163,7 +166,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return !!this.submenu && (!this.menuService?.menuComponent || !this.menuService?.menuComponent.mobile);
+        return !!this.submenu && (!this.menuService?.menuComponent || !this.menuService?.menuComponent.mobile());
     }
 
     /** Focuses Menu Item interactive element */
@@ -214,7 +217,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         );
 
         const timerFactory$ = defer(() =>
-            timer(this.menuService ? this.menuService.menuComponent.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
+            timer(this.menuService ? this.menuService.menuComponent.openOnHoverTime() : 0).pipe(takeUntil(mouseLeave$))
         );
 
         // Set active on hover
@@ -255,12 +258,19 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
 
     /** @hidden Listen on menu mode and set proper mode listeners */
     private _listenOnMenuMode(): void {
-        this.menuService?.isMobileMode.subscribe((isMobile) => {
-            this._hoverSubscriptions.unsubscribe();
-            if (!isMobile) {
-                this._hoverSubscriptions = this._listenOnMenuLinkHover();
-            }
-        });
+        if (this.menuService) {
+            this._subscriptions.add(
+                this.menuService.isMobileMode.subscribe((isMobile) => {
+                    this._hoverSubscriptions.unsubscribe();
+                    if (!isMobile) {
+                        this._hoverSubscriptions = this._listenOnMenuLinkHover();
+                    } else {
+                        // In mobile mode, leave subscriptions closed (don't create a new empty one)
+                        // The closed state is used by tests to verify mobile mode behavior
+                    }
+                })
+            );
+        }
     }
 
     /** @hidden Updates focused menu item on outer focus */

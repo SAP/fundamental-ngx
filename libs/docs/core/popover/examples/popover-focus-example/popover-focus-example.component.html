@@ -1,6 +1,7 @@
+<p><strong>Focus Trapped & Auto Capture (default behavior)</strong></p>
 <fd-popover [closeOnEscapeKey]="true" [focusTrapped]="true" [focusAutoCapture]="true">
     <fd-popover-control>
-        <button fd-button>Trigger</button>
+        <button fd-button>Focus Trapped</button>
     </fd-popover-control>
     <fd-popover-body [style.min-width.px]="400">
         <div fd-popover-body-header>
@@ -19,6 +20,69 @@
                     <fd-button-bar label="Cancel"></fd-button-bar>
                 </div>
             </div>
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br /><br />
+
+<p><strong>Focus NOT Auto Captured</strong></p>
+<fd-popover [focusTrapped]="true" [focusAutoCapture]="false">
+    <fd-popover-control>
+        <button fd-button>No Auto Capture</button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div [style.padding.px]="12">
+            <p>Focus is not automatically moved to this popover when opened.</p>
+            <button fd-button fdType="transparent" label="Focusable button"></button>
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br /><br />
+
+<p><strong>Restore Focus On Close (default: true)</strong></p>
+<fd-popover #popoverRestore [focusTrapped]="true" [focusAutoCapture]="true" [restoreFocusOnClose]="true">
+    <fd-popover-control>
+        <button fd-button>Restore Focus</button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div [style.padding.px]="12">
+            <p>When closed, focus returns to the trigger button.</p>
+            <button fd-button fdType="transparent" label="Close me" (click)="popoverRestore.close()"></button>
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br /><br />
+
+<p><strong>Do NOT Restore Focus On Close</strong></p>
+<fd-popover #popoverNoRestore [focusTrapped]="true" [focusAutoCapture]="true" [restoreFocusOnClose]="false">
+    <fd-popover-control>
+        <button fd-button>No Restore Focus</button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div [style.padding.px]="12">
+            <p>When closed, focus does NOT return to the trigger.</p>
+            <button fd-button fdType="transparent" label="Close me" (click)="popoverNoRestore.close()"></button>
+        </div>
+    </fd-popover-body>
+</fd-popover>
+
+<br /><br />
+
+<p><strong>Prevent Space Key Scroll (default: true)</strong></p>
+<p>
+    By default, pressing Space on the trigger prevents page scrolling. Set
+    <code>[preventSpaceKeyScroll]="false"</code> to allow normal scroll behavior.
+</p>
+<fd-popover [preventSpaceKeyScroll]="false">
+    <fd-popover-control>
+        <button fd-button>Space Key Scrolls Page</button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div [style.padding.px]="12">
+            <p>When this popover's trigger is focused, pressing Space allows page scroll.</p>
         </div>
     </fd-popover-body>
 </fd-popover>

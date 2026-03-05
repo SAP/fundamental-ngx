@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_hu.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Elfoglalt',
+        defaultTitle: 'Kis türelmet'
     },
     coreCalendar: {
         yearSelectionLabel: 'Év kiválasztása',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Vázlat'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Kiemelt',
+        subtle: 'Nem kiemelt'
     },
     coreMessageStrip: {
         dismissLabel: 'Bezárás',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: '{itemDetails} struktúraelem, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
-        inactive: 'Status'
+        active: 'Állapot (aktív)',
+        inactive: 'Állapot'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Kiemelt',
+        negative: 'Értékállapot – hiba',
+        critical: 'Értékállapot – figyelmeztetés',
+        positive: 'Értékállapot – sikeres',
+        informative: 'Értékállapot – információ'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objektum állapota',
+        ariaRoleDescription: 'Objektum állapota gomb',
+        indicationColor: 'Jelzőszín',
+        negative: 'Érvénytelen bejegyzés',
+        critical: 'Figyelmeztetés kiadva',
+        positive: 'A bejegyzés sikeresen érvényesítve lett',
+        informative: 'Informatív bejegyzés'
     },
     coreOverflowLayout: {
         moreItemsButton: 'További {count}'
@@ -653,15 +653,15 @@ export default {
         buttonRoleDescription: 'Szegmentált gomb'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Objektumazonosító'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Infócímke'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Visszaállítás nullára',
+        ariaRoleDescription: 'Osztályozás jelölője',
+        ariaLabelTotalRating: 'Összes osztályozás',
+        ariaLabelValue: '/'
     }
 };

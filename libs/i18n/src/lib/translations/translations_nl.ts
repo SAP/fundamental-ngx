@@ -1,8 +1,8 @@
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     coreBusyIndicator: {
-        defaultAriaValueText: 'Busy',
-        defaultTitle: 'Please wait'
+        defaultAriaValueText: 'Bezet',
+        defaultTitle: 'Een ogenblik geduld'
     },
     coreCalendar: {
         yearSelectionLabel: 'Jaar selecteren',
@@ -75,8 +75,8 @@ export default {
         listItemStatusDraft: 'Concept'
     },
     coreLink: {
-        emphasized: 'Emphasized',
-        subtle: 'Subtle'
+        emphasized: 'Benadrukt',
+        subtle: 'Subtiel'
     },
     coreMessageStrip: {
         dismissLabel: 'Sluiten',
@@ -104,24 +104,24 @@ export default {
         linkItemAriaLabel: 'Structuuritem {itemDetails}, {selectedDescription}'
     },
     coreObjectMarker: {
-        active: 'Status(active)',
+        active: 'Status (actief)',
         inactive: 'Status'
     },
     coreObjectNumber: {
-        emphasized: 'Emphasized',
-        negative: 'Value State Error',
-        critical: 'Value State Warning',
-        positive: 'Value State Success',
-        informative: 'Value State Information'
+        emphasized: 'Benadrukt',
+        negative: 'Waardestatus Fout',
+        critical: 'Waardestatus Waarschuwing',
+        positive: 'Waardestatus Geslaagd',
+        informative: 'Waardestatus Informatie'
     },
     coreObjectStatus: {
-        ariaLabel: 'Object Status',
-        ariaRoleDescription: 'Object Status Button',
-        indicationColor: 'Indication Color',
-        negative: 'Invalid Entry',
-        critical: 'Warning issued',
-        positive: 'Entry successfully validated',
-        informative: 'Informative entry'
+        ariaLabel: 'Objectstatus',
+        ariaRoleDescription: 'Knop Objectstatus',
+        indicationColor: 'Indicatiekleur',
+        negative: 'Ongeldig gegeven',
+        critical: 'Waarschuwing opgetreden',
+        positive: 'Invoer is gevalideerd',
+        informative: 'Informatief gegeven'
     },
     coreOverflowLayout: {
         moreItemsButton: 'nog {count}'
@@ -654,15 +654,15 @@ export default {
         buttonRoleDescription: 'Gesegmenteerde knop'
     },
     coreObjectIdentifier: {
-        srOnlyAriaLabel: 'Object Identifier'
+        srOnlyAriaLabel: 'Object-identifier'
     },
     coreInfoLabel: {
-        srOnlyText: 'Info Label'
+        srOnlyText: 'Infolabel'
     },
     coreRatingIndicator: {
-        ariaLabelReset: 'Reset to zero',
-        ariaRoleDescription: 'Rating indicator',
-        ariaLabelTotalRating: 'Total rating',
-        ariaLabelValue: 'of'
+        ariaLabelReset: 'Terugzetten naar nul',
+        ariaRoleDescription: 'Waarderingsindicator',
+        ariaLabelTotalRating: 'Totale waardering',
+        ariaLabelValue: 'van'
     }
 };

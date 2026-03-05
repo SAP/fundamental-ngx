@@ -298,3 +298,81 @@ describe('Tree component with data source and tree item template', () => {
         expect(treeElement.nativeElement.querySelectorAll('.fd-tree__item').length).not.toEqual(0);
     });
 });
+
+describe('Tree component loading state', () => {
+    let component: LoadingTreeComponent;
+    let fixture: ComponentFixture<LoadingTreeComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [ClickedDirective, LoadingTreeComponent],
+            providers: [
+                TreeService,
+                {
+                    provide: FD_DATA_SOURCE_TRANSFORMER,
+                    useClass: TreeDataSourceParser
+                },
+                {
+                    provide: SelectionService,
+                    useClass: SelectionServiceMock
+                }
+            ]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(LoadingTreeComponent);
+        component = fixture.componentInstance;
+    });
+
+    it('should show loading skeleton with 5 repeated items when data is not loaded', () => {
+        fixture.detectChanges();
+
+        const treeElement: HTMLElement = fixture.debugElement.nativeElement;
+        const skeletonItems = treeElement.querySelectorAll('.fd-tree__item fd-skeleton');
+
+        // There are 5 repeated skeleton items
+        expect(skeletonItems.length).toBe(5);
+    });
+
+    it('should hide loading skeleton when data source provides data', async () => {
+        component.dataSource = of([
+            {
+                navigatable: true,
+                expanded: false,
+                data: { icon: 'e-care', title: 'Item 1', value: 'first' }
+            }
+        ]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const treeElement: HTMLElement = fixture.debugElement.nativeElement;
+        const actualItems = treeElement.querySelectorAll('.fd-tree__item');
+        const skeletonItems = treeElement.querySelectorAll('.fd-tree__item fd-skeleton');
+
+        expect(actualItems.length).toBe(1);
+        expect(skeletonItems.length).toBe(0);
+    });
+});
+
+@Component({
+    selector: 'fd-loading-tree',
+    template: `
+        <fd-tree [dataSource]="dataSource">
+            <fd-tree-item
+                *fdTreeItemDef="let item"
+                [level]="item.level"
+                [navigatable]="item.navigatable"
+                [childNodes]="item.children"
+                [expanded]="item.expanded"
+                [parentId]="item.parentId"
+                [id]="item.id"
+            >
+                <span fdTreeItemText>{{ item.data.title }}</span>
+            </fd-tree-item>
+        </fd-tree>
+    `,
+    standalone: true,
+    imports: [TreeComponent, TreeItemComponent, TreeItemDefDirective, TreeItemTextDirective]
+})
+class LoadingTreeComponent {
+    dataSource: Observable<Partial<TreeItem<TreeItemData>>[]> | null = null;
+}
