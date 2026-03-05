@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Odbij'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Više'
+        tabListExpandButtonText: 'Više',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Više',

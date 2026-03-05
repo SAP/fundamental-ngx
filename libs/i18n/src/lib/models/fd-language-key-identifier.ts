@@ -134,6 +134,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreSwitch.semanticAcceptLabel'
     | 'coreSwitch.semanticDeclineLabel'
     | 'coreTabs.tabListExpandButtonText'
+    | 'coreTabs.expandIconLabel'
     | 'coreText.moreLabel'
     | 'coreText.lessLabel'
     | 'coreTime.componentAriaName'

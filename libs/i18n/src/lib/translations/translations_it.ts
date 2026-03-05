@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Rifiuta'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Mostra di più'
+        tabListExpandButtonText: 'Mostra di più',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Mostra di più',

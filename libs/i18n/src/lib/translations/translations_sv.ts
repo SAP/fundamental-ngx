@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Avslå'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Fler'
+        tabListExpandButtonText: 'Fler',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Mer',

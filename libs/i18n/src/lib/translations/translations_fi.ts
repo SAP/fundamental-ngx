@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Hylkää'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Enemmän'
+        tabListExpandButtonText: 'Enemmän',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Enemmän',

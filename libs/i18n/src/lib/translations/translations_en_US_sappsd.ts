@@ -188,7 +188,8 @@ export default {
         semanticDeclineLabel: '[[[Ďēċĺįŋē∙∙∙∙∙∙∙]]]'
     },
     coreTabs: {
-        tabListExpandButtonText: '[[[Μŏŗē]]]'
+        tabListExpandButtonText: '[[[Μŏŗē]]]',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: '[[[Μŏŗē]]]',

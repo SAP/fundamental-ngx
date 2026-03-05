@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'अस्वीकार करें'
     },
     coreTabs: {
-        tabListExpandButtonText: 'अधिक'
+        tabListExpandButtonText: 'अधिक',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'अधिक',

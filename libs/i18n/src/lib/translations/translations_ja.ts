@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: '拒否'
     },
     coreTabs: {
-        tabListExpandButtonText: '表示を増やす'
+        tabListExpandButtonText: '表示を増やす',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: '表示を増やす',

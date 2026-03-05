@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Reddet'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Daha Fazla'
+        tabListExpandButtonText: 'Daha Fazla',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Daha Fazla',

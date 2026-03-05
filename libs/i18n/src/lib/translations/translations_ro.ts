@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Refuzare'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Mai mult'
+        tabListExpandButtonText: 'Mai mult',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Mai mult',

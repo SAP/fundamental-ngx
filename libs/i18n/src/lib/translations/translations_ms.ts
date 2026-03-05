@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Tolak'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Selanjutnya'
+        tabListExpandButtonText: 'Selanjutnya',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Selanjutnya',

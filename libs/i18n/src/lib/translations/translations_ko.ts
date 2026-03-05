@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: '거부'
     },
     coreTabs: {
-        tabListExpandButtonText: '더 보기'
+        tabListExpandButtonText: '더 보기',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: '더 보기',

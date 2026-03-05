@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Elutasítás'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Továbbiak'
+        tabListExpandButtonText: 'Továbbiak',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Több',

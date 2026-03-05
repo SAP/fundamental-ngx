@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Rënia'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Më shumë'
+        tabListExpandButtonText: 'Më shumë',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Më shumë',

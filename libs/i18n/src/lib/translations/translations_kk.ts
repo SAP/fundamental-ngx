@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Қабылдамау'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Көбірек'
+        tabListExpandButtonText: 'Көбірек',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Көбірек',

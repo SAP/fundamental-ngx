@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'דחה'
     },
     coreTabs: {
-        tabListExpandButtonText: 'עוד'
+        tabListExpandButtonText: 'עוד',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'עוד',

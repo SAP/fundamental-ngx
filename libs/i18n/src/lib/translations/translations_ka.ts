@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'უარყოფა'
     },
     coreTabs: {
-        tabListExpandButtonText: 'მაჩვენე მეტი'
+        tabListExpandButtonText: 'მაჩვენე მეტი',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'მეტი',

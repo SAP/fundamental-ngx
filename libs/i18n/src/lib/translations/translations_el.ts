@@ -186,7 +186,8 @@ export default {
         semanticDeclineLabel: 'Απόρριψη'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Περισσότερα'
+        tabListExpandButtonText: 'Περισσότερα',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Περισσότερα',

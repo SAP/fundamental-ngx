@@ -187,7 +187,8 @@ export default {
         semanticDeclineLabel: 'Refuser'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Plus'
+        tabListExpandButtonText: 'Plus',
+        expandIconLabel: 'See More'
     },
     coreText: {
         moreLabel: 'Plus',
