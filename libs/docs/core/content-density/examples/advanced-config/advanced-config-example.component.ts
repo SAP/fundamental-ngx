@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import { GlobalContentDensityService, provideContentDensity } from '@fundamental-ngx/core/content-density';
+import { Component, inject } from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityMode,
+    GlobalContentDensityService,
+    provideContentDensity
+} from '@fundamental-ngx/core/content-density';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { AlwaysModifiersExampleComponent } from './always-modifiers-example.component';
 import { CustomModifiersExampleComponent } from './custom-modifiers-example.component';
 import { DebugModeExampleComponent } from './debug-mode-example.component';
@@ -7,6 +13,17 @@ import { DebugModeExampleComponent } from './debug-mode-example.component';
 @Component({
     selector: 'fd-advanced-config-example',
     template: `
+        <div class="density-toggle">
+            <span>Toggle density:</span>
+            <fd-segmented-button>
+                <button fd-button value="cozy" (click)="selectDensity(ContentDensityMode.COZY)">Cozy</button>
+                <button fd-button value="compact" (click)="selectDensity(ContentDensityMode.COMPACT)">Compact</button>
+                <button fd-button value="condensed" (click)="selectDensity(ContentDensityMode.CONDENSED)">
+                    Condensed
+                </button>
+            </fd-segmented-button>
+        </div>
+
         <h4>Debug Mode</h4>
         <p class="description">Enable debug logging to troubleshoot density inheritance:</p>
         <fd-docs-debug-mode-example></fd-docs-debug-mode-example>
@@ -21,6 +38,12 @@ import { DebugModeExampleComponent } from './debug-mode-example.component';
     `,
     styles: [
         `
+            .density-toggle {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-bottom: 1.25rem;
+            }
             .description {
                 margin-bottom: 0.75rem;
                 color: var(--sapTextColor);
@@ -32,7 +55,20 @@ import { DebugModeExampleComponent } from './debug-mode-example.component';
             }
         `
     ],
-    imports: [DebugModeExampleComponent, AlwaysModifiersExampleComponent, CustomModifiersExampleComponent],
+    imports: [
+        DebugModeExampleComponent,
+        AlwaysModifiersExampleComponent,
+        CustomModifiersExampleComponent,
+        SegmentedButtonComponent,
+        ButtonComponent
+    ],
     providers: [GlobalContentDensityService, provideContentDensity()]
 })
-export class AdvancedConfigExampleComponent {}
+export class AdvancedConfigExampleComponent {
+    protected readonly ContentDensityMode = ContentDensityMode;
+    private readonly _densityService = inject(GlobalContentDensityService);
+
+    protected selectDensity(density: ContentDensityMode): void {
+        this._densityService.updateContentDensity(density);
+    }
+}
