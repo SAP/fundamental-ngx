@@ -508,13 +508,6 @@ ${componentImports.join('\n')}
 ${cvaHostDirective}${providersArray}  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ${className} implements AfterViewInit {
-  /**
-   * Content density observer is injected to activate automatic CSS class and
-   * UI5 attribute application. The observer self-initializes, no explicit subscribe() needed.
-   * @private
-   */
-  private readonly _contentDensityObserver = inject(ContentDensityObserver);
-
 ${generateInputs(data, componentEnums, className)} // className is now passed
 ${readonlyProperties}
 
@@ -523,6 +516,13 @@ ${generateSlotsDocumentation(data)}
 
   public elementRef: ElementRef<_${className}> = inject(ElementRef);
   public injector = inject(Injector);
+
+  /**
+   * Content density observer is injected to activate automatic CSS class and
+   * UI5 attribute application. The observer self-initializes, no explicit subscribe() needed.
+   * @private
+   */
+  private readonly _contentDensityObserver = inject(ContentDensityObserver);
 ${privateProperties}
   get element(): _${className} {
     return this.elementRef.nativeElement;
