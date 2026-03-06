@@ -10,6 +10,7 @@
                     glyph="overflow"
                     [attr.aria-label]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
                     [title]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
+                    fdCozy
                 >
                     @if (totalNotifications) {
                         <span class="fd-button__badge">
@@ -26,6 +27,7 @@
                         glyph="search"
                         [label]="'coreShellbar.search' | fdTranslate"
                         (click)="showSearch.emit(); actionSheet.close()"
+                        fdCozy
                     ></li>
                 }
                 @for (action of shellbarActions; track action) {
@@ -37,6 +39,7 @@
                         [glyph]="action.glyph() || ''"
                         [label]="action.label()"
                         (click)="actionClicked(action, $event)"
+                        fdCozy
                     >
                         @if (action.notificationCount()) {
                             <span class="fd-button__badge">{{ action.notificationCount() }}</span>
@@ -50,6 +53,7 @@
                         glyph="sys-help"
                         [label]="'coreShellbar.assistiveTools' | fdTranslate"
                         (click)="assistiveToolsCallback($event)"
+                        fdCozy
                     ></li>
                 }
             </fd-action-sheet-body>

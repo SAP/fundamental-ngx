@@ -403,7 +403,16 @@ export default {
         searchInputLabel: 'Căutare',
         synchronizeButtonTitle: 'Sincronizare',
         searchSuggestionMessage: '{count} sugestii găsite.',
-        searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga'
+        searchSuggestionNavigateMessage: 'utilizați săgețile în sus și în jos pentru a naviga',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Setări',

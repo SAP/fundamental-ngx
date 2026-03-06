@@ -1,66 +1,72 @@
-import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { Direction } from '@angular/cdk/bidi';
+import { CdkTrapFocus, FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
-    AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
-    computed,
+    ComponentRef,
     DestroyRef,
     Directive,
-    DOCUMENT,
+    effect,
     ElementRef,
-    EventEmitter,
     forwardRef,
-    HostListener,
     inject,
     Inject,
     Injector,
-    Input,
-    OnChanges,
+    input,
+    model,
     OnDestroy,
     OnInit,
-    Output,
+    Optional,
+    output,
     Pipe,
     PipeTransform,
-    QueryList,
     signal,
-    SimpleChanges,
     TemplateRef,
-    ViewChild,
-    ViewChildren,
+    viewChild,
+    viewChildren,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 
 import { isObservable, merge, Observable, of, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
+    AutoCompleteDirective,
+    AutoCompleteEvent,
+    ClickedDirective,
     destroyObservable,
     DynamicComponentService,
     KeyUtil,
-    RtlService,
     SearchHighlightPipe
 } from '@fundamental-ngx/cdk/utils';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityDirective,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
+import { ListComponent, ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
-import { SearchComponent } from '@fundamental-ngx/core/shared';
-import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
+import { Appearance, SearchComponent } from '@fundamental-ngx/core/shared';
+import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { TextComponent } from '@fundamental-ngx/core/text';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
-import { shallowEqual } from 'fast-equals';
-import {
-    SEARCH_FIELD_COMPONENT,
-    SearchFieldMobileInterface
-} from './search-field-mobile/search-field-mobile.interface';
+import { SEARCH_FIELD_COMPONENT } from './search-field-mobile/search-field-mobile.interface';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
@@ -69,14 +75,29 @@ export interface SearchInput {
 }
 
 export interface SuggestionItem {
-    value: string;
+    value: string; // main text of the suggestion
     isHistorical?: string;
     data?: any;
+    isGroupHeader?: boolean;
+    children?: SuggestionItem[];
+    searchInScopeText?: string;
+    searchInScopeCounter?: number;
+    searchInScopeCallback?: () => any;
+    showMoreText?: string;
+    showMoreCounter?: number;
+    showMoreCallback?: () => any;
 }
 
 export interface ValueLabelItem {
     value: string;
     label: string;
+}
+
+export interface SearchResultsActionButton {
+    glyph?: string;
+    label?: string;
+    id?: string;
+    callback?: () => any;
 }
 
 @Directive({
@@ -88,7 +109,7 @@ export interface ValueLabelItem {
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
     /** @hidden */
-    constructor(private element: ElementRef) {}
+    constructor(public element: ElementRef) {}
 
     /** @hidden */
     focus(): void {
@@ -97,8 +118,6 @@ export class SearchFieldSuggestionDirective implements FocusableOption {
 }
 
 let searchFieldIdCount = 0;
-
-type Appearance = SearchComponent['appearance'] | undefined;
 
 @Component({
     selector: 'fdp-search-field',
@@ -128,182 +147,179 @@ type Appearance = SearchComponent['appearance'] | undefined;
         SearchHighlightPipe,
         FdTranslatePipe,
         PopoverModule,
+        BarModule,
+        TitleComponent,
+        TextComponent,
+        ListModule,
+        InfoLabelComponent,
+        ClickedDirective,
+        AvatarComponent,
+        ButtonComponent,
+        AutoCompleteDirective,
+        BusyIndicatorComponent,
+        ContentDensityDirective,
+        CdkTrapFocus,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
-export class SearchFieldComponent
-    extends BaseComponent
-    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent, AfterViewInit
-{
-    /** Type of component used to render the categories dropdown. */
-    @Input()
-    categoryMode: 'menu' | 'select' = 'menu';
-
-    /** Additional appearance configuration. */
-    @Input()
-    set appearance(value: Appearance) {
-        if (shallowEqual(value, this.appearance)) {
-            return;
-        }
-
-        this._appearance = value;
-        this.detectChanges();
-    }
-
-    get appearance(): Appearance {
-        return this._appearance;
-    }
-
-    /** Placeholder text for search input field. */
-    @Input()
-    placeholder: string;
-
-    /** Set Mobile Mode */
-    @Input()
-    mobile: boolean;
-
-    /** Search Field Mobile configuration */
-    @Input()
-    mobileConfig: MobileModeConfig;
-
-    /** Whether display Refresh button */
-    @Input()
-    disableRefresh = false;
-
-    /** Whether display search button */
-    @Input()
-    disableSearch = false;
-
-    /** List of string values to populate suggestion dropdown selection. */
-    @Input()
-    set suggestions(value: SuggestionItem[] | Observable<SuggestionItem[]>) {
-        this._suggestions = value;
-        if (Array.isArray(value)) {
-            // convert suggestions to an array of string for "dropdown values"
-            const dropdownValues = value.map((suggestion: SuggestionItem) => suggestion.value);
-            this._dropdownValues$ = of(dropdownValues);
-        } else if (isObservable(value)) {
-            this._dropdownValues$ = value.pipe(
-                map((suggestions: SuggestionItem[]) => suggestions.map((suggestion) => suggestion.value))
-            );
-        } else {
-            this._dropdownValues$ = of([]);
-        }
-    }
-    get suggestions(): SuggestionItem[] | Observable<SuggestionItem[]> {
-        return this._suggestions;
-    }
-
-    /** Datasource for suggestion list */
-    @Input()
-    set dataSource(value: SearchFieldDataSource<any>) {
-        if (value) {
-            this._initializeDataSource(value);
-        }
-    }
-    get dataSource(): SearchFieldDataSource<any> {
-        return this._dataSource;
-    }
-
-    /** Initial input text. */
-    @Input()
-    inputText: string;
-
-    /** List of categories. */
-    @Input()
-    set categories(value: ValueLabelItem[]) {
-        this._categories = value;
-        this._showCategoryDropdown = Array.isArray(value) && value.length > 0;
-    }
-    get categories(): ValueLabelItem[] {
-        return this._categories;
-    }
-
-    /** Current category, value should be present in categories array */
-    @Input()
-    currentCategory: ValueLabelItem;
-
-    /** Set label for category dropdown button. */
-    @Input()
-    categoryLabel = 'Category';
-
-    /** Hide display of category label */
-    @Input()
-    hideCategoryLabel = false;
-
-    /** Toggle "loading" mode. */
-    @Input()
-    isLoading = false;
-
-    /** Whether to always show search button. */
-    @Input()
-    forceSearchButton = false;
-
-    /** Whether to disable the "suggestions found" live announcer. */
-    @Input()
-    disableSuggestionsFoundAnnouncer = false;
-
+export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy, SearchComponent {
     /** Input change event. */
-    @Output()
-    inputChange: EventEmitter<SearchInput> = new EventEmitter();
+    readonly inputChange = output<SearchInput>();
 
     /** Search submit event. */
-    @Output()
-    searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
+    readonly searchSubmit = output<SearchInput>();
 
     /** Cancel search event. */
-    @Output()
-    cancelSearch: EventEmitter<SearchInput> = new EventEmitter();
+    readonly cancelSearch = output<SearchInput>();
 
     /** Open mobile mode event. */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly isOpenChange = output<boolean>();
+
+    /** Event emitted when the advanced filter button is clicked. */
+    readonly advancedFilterButtonClick = output<void>();
 
     /** @hidden */
-    @ViewChild('categoryDropdown', { static: false })
-    categoryDropdown: PopoverComponent;
+    readonly categoryDropdown = viewChild<PopoverComponent>('categoryDropdown');
 
     /** @hidden */
-    @ViewChild('inputGroup', { static: false })
-    inputGroup: ElementRef<HTMLElement>;
+    readonly categorySelectComponent = viewChild<SelectComponent>('categorySelectComponent');
 
     /** @hidden */
-    @ViewChild('inputField', { static: false })
-    inputField: ElementRef<HTMLElement>;
+    readonly inputGroup = viewChild<ElementRef<HTMLElement>>('inputGroup');
 
     /** @hidden */
-    @ViewChild('inputFieldTemplate')
-    inputFieldTemplate: TemplateRef<any>;
+    readonly inputField = viewChild.required<ElementRef<HTMLElement>>('inputField');
 
     /** @hidden */
-    @ViewChild('suggestionMenuTemplate', { static: false })
-    suggestionMenuTemplate: TemplateRef<any>;
+    readonly inputFieldTemplate = viewChild<TemplateRef<any>>('inputFieldTemplate');
 
     /** @hidden */
-    @ViewChildren(SearchFieldSuggestionDirective)
-    suggestionItems: QueryList<SearchFieldSuggestionDirective>;
+    readonly suggestionMenuTemplate = viewChild<TemplateRef<any>>('suggestionMenuTemplate');
+
+    /** @hidden */
+    readonly suggestionList = viewChild<ListComponent>('suggestionList');
+
+    /** @hidden */
+    readonly suggestionItems = viewChildren(SearchFieldSuggestionDirective);
+
+    /** @hidden */
+    readonly listItems = viewChildren(ListItemComponent);
+
+    /** Type of component used to render the categories dropdown. */
+    readonly categoryMode = model<'menu' | 'select'>('menu');
+
+    /** Additional appearance configuration. */
+    readonly appearance = model<Appearance>();
+
+    /** Placeholder text for search input field. */
+    readonly placeholder = input<string>('');
+
+    /** Set Mobile Mode */
+    readonly mobile = input(false, { transform: booleanAttribute });
+
+    /** Search Field Mobile configuration */
+    readonly mobileConfig = input<MobileModeConfig | undefined>(undefined);
+
+    /** Whether display Refresh button */
+    readonly disableRefresh = model<boolean>(false);
+
+    /** Whether display search button */
+    readonly disableSearch = input(false, { transform: booleanAttribute });
+
+    /** List of string values to populate suggestion dropdown selection. */
+    readonly suggestions = input<SuggestionItem[] | Observable<SuggestionItem[]>>([]);
+
+    /** Datasource for suggestion list */
+    readonly dataSource = input<SearchFieldDataSource<any> | undefined>(undefined);
+
+    /** Initial input text. */
+    readonly inputText = model<string>('');
+
+    /** List of categories. */
+    readonly categories = input<ValueLabelItem[]>([]);
+
+    /** Current category, value should be present in categories array */
+    readonly currentCategory = input<ValueLabelItem | undefined>(undefined);
+
+    /** Set label for category dropdown button. */
+    readonly categoryLabel = input<string>('Category');
+
+    /** Hide display of category label */
+    readonly hideCategoryLabel = input(false, { transform: booleanAttribute });
+
+    /** Toggle "loading" mode. */
+    readonly isLoading = input(false, { transform: booleanAttribute });
+
+    /** Whether to always show search button. */
+    readonly forceSearchButton = model<boolean>(false);
+
+    /** Whether to disable the "suggestions found" live announcer. */
+    readonly disableSuggestionsFoundAnnouncer = input(false, { transform: booleanAttribute });
+
+    /** Whether to show the "All" option in the category select. */
+    readonly showCategoryAllOption = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     get searchFieldValue(): SearchInput {
         return {
-            text: this.inputText,
+            text: this.inputText(),
             category: this._currentCategory?.value || null
         };
     }
+
+    /** Title of the initial suggestion, if a suggestion list is displayed. */
+    readonly initialSuggestionTitle = input<string>('');
+
+    /** Subline of the initial suggestion, if a suggestion list is displayed. */
+    readonly initialSuggestionSubline = input<string>('');
+
+    /** Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion title should be shown. */
+    readonly initialSuggestionEmptyTitle = input<string>('');
+
+    /** Title of the initial suggestion if the user has entered some text and there are no results to display, and an initial suggestion subline should be shown. */
+    readonly initialSuggestionEmptySubline = input<string>('');
+
+    /** Subline of the initial suggestion, if a suggestion list is displayed. */
+    readonly suggestionFooter = input<TemplateRef<any> | null>(null);
+
+    /** Template to display when the search results list has no items to display. */
+    readonly searchResultsEmptyTemplate = input<TemplateRef<any> | null>(null);
+
+    /** Options to display when the user has entered a string into the input that returns no results. */
+    readonly searchResultsEmptyDefaultSuggestions = input<SuggestionItem[] | null>(null);
+
+    /** Whether to show the advanced filter button, which emits the event `advancedFilterButtonClick`. If this input is set to true, it will override any other category button settings. */
+    readonly showAdvancedFilter = input<boolean>(false);
+
+    /** Whether to allow empty searches when using a data source, meaning all results will be displayed when the search input is empty. */
+    readonly allowEmptySearch = input<boolean>(false);
+
+    /** Whether to display a suggestion item as selected after it has been clicked. */
+    readonly enableSelection = input<boolean>(false);
+
+    /** Whether to display the busy indicator over the suggestion list. */
+    readonly suggestionsLoading = input<boolean>(false);
+
+    /** Title for the busy indicator. */
+    readonly busyIndicatorTitle = input<string>('');
+
+    /** Aria value text for the busy indicator. */
+    readonly busyIndicatorAriaValueText = input<string>('');
+
     /** @hidden Focus state */
     _isFocused = false;
 
     /**
-     * Observable list of string values taken from `suggestions` to populate dropdown menu.
+     * Observable list of suggestion items to populate dropdown menu.
      * @hidden
      */
-    _dropdownValues$: Observable<string[]> = of([]);
+    _dropdownValues$: Observable<SuggestionItem[]> = of([]);
 
     /**
      * Currently set category.
      * @hidden
      */
-    _currentCategory?: ValueLabelItem;
+    _currentCategory?: ValueLabelItem | null;
 
     /**
      * Whether or not to show category dropdown. This is dependent on length of `categoryValues` property.
@@ -327,6 +343,12 @@ export class SearchFieldComponent
     _clearId = '';
 
     /** @hidden */
+    _popoverHeaderId = '';
+
+    /** @hidden */
+    _popoverBodyId = '';
+
+    /** @hidden */
     isOpen = false;
 
     /** @hidden */
@@ -336,19 +358,28 @@ export class SearchFieldComponent
     _isSearchDone = false;
 
     /** @hidden */
-    _isOpen$ = signal(false);
+    _isSuggestionMenuOpen$ = signal(false);
 
     /** @hidden */
-    protected readonly dir = computed<Direction>(() => (this._rtlService?.rtl() ? 'rtl' : 'ltr'));
+    _autoCompleteSuggestions: SuggestionItem[] = [];
+
+    /** @hidden */
+    _selectedSuggestionItem: SuggestionItem | null;
+
+    /** @hidden */
+    _autoCompleteMostRecentSuggestionItem: SuggestionItem;
+
+    /** @hidden */
+    _selectedSuggestionItemId: string;
+
+    /** @hidden */
+    _categorySelectDescription: string;
+
+    /** @hidden */
+    _actionButtonTabIndex: -1 | 0 = -1;
 
     /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
-
-    /** @hidden */
-    private _dataSource: SearchFieldDataSource<any>;
-
-    /** @hidden */
-    private _categories: ValueLabelItem[];
 
     /** @hidden */
     private _currentSearchSuggestionAnnouncementMessage = '';
@@ -366,30 +397,82 @@ export class SearchFieldComponent
     private readonly _dataSourceChanged$ = new Subject<void>();
 
     /** @hidden */
-    private _appearance: Appearance;
-
-    /** hidden */
-    private readonly _rtlService = inject(RtlService, { optional: true });
+    private _mobileComponent: ComponentRef<SearchFieldMobileComponent>;
 
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,
-        readonly contentDensityObserver: ContentDensityObserver
+        readonly contentDensityObserver: ContentDensityObserver,
+        @Optional() @Inject(FD_SHELLBAR_COMPONENT) protected _shellbar: ShellbarComponent
     ) {
         super();
-    }
 
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
-        if (this.mobile && this.isOpen && KeyUtil.isKeyCode(event, [ESCAPE])) {
-            this.showDialog(false);
-        }
+        // Effect to handle suggestions changes
+        effect(() => {
+            const suggestionsValue = this.suggestions();
+            if (Array.isArray(suggestionsValue)) {
+                this._dropdownValues$ = of(suggestionsValue);
+            } else if (isObservable(suggestionsValue)) {
+                this._dropdownValues$ = suggestionsValue;
+            } else {
+                this._dropdownValues$ = of([]);
+            }
+        });
+
+        // Effect to handle dataSource changes
+        effect(() => {
+            const ds = this.dataSource();
+            if (ds) {
+                this._initializeDataSource(ds);
+            }
+        });
+
+        // Effect to handle categories changes
+        effect(() => {
+            const cats = this.categories();
+            this._showCategoryDropdown = Array.isArray(cats) && cats.length > 0;
+        });
+
+        // Effect to handle currentCategory changes
+        effect(() => {
+            const currentCat = this.currentCategory();
+            if (currentCat) {
+                this.setCurrentCategory(currentCat);
+            }
+        });
+
+        // Effect to handle mobile changes - only setup when actually needed
+        effect(
+            () => {
+                const isMobile = this.mobile();
+                if (isMobile) {
+                    // Defer to next tick to avoid running during construction
+                    queueMicrotask(() => {
+                        this._setUpMobileMode();
+                    });
+                }
+            },
+            { allowSignalWrites: true }
+        );
+
+        // Watch for changes to suggestionItems using an effect
+        // Use afterNextRender to ensure view is initialized
+        effect(
+            () => {
+                const items = this.suggestionItems();
+                // Use queueMicrotask to defer execution after view initialization
+                queueMicrotask(() => {
+                    if (items.length > 0) {
+                        this._resetKeyManager();
+                    }
+                });
+            },
+            { allowSignalWrites: true }
+        );
     }
 
     /** @hidden */
@@ -398,21 +481,13 @@ export class SearchFieldComponent
         this._inputId = `${baseId}-input-${searchFieldIdCount++}`;
         this._submitId = `${baseId}-submit-${searchFieldIdCount++}`;
         this._menuId = `${baseId}-menu-${searchFieldIdCount++}`;
+        this._popoverHeaderId = `${baseId}-popover-header-${searchFieldIdCount++}`;
+        this._popoverBodyId = `${baseId}-popover-body-${searchFieldIdCount++}`;
 
         this._isRefresh = true;
-    }
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        if (this.mobile) {
-            this._setUpMobileMode();
-        }
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('categories' in changes || 'currentCategory' in changes) {
-            this.setCurrentCategory(this.currentCategory);
+        if (this.dataSource() && this._shellbar) {
+            this.onValueChange(this.inputText());
         }
     }
 
@@ -425,7 +500,7 @@ export class SearchFieldComponent
      * Focuses the search input field.
      */
     focus(): void {
-        this.inputField.nativeElement.focus();
+        this.inputField().nativeElement.focus();
         this.detectChanges();
     }
 
@@ -436,7 +511,11 @@ export class SearchFieldComponent
         }
 
         if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
-            if (this._suggestionkeyManager) {
+            if (event.altKey && this.categories().length > 0) {
+                this.closeSuggestionMenu(false);
+                this.categoryDropdown()?.open();
+                this.categorySelectComponent()?.open();
+            } else if (this._suggestionkeyManager) {
                 this._suggestionkeyManager.onKeydown(event);
             }
         } else if (KeyUtil.isKeyCode(event, [ESCAPE])) {
@@ -449,33 +528,40 @@ export class SearchFieldComponent
      * @hidden
      */
     onValueChange(event: string): void {
+        if (!event) {
+            event = '';
+        }
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
         setTimeout(() => (this._currentSearchSuggestionAnnouncementMessage = ''));
         this._isSearchDone = false;
         this._isRefresh = false;
 
-        if (this.mobile && !this.isOpen) {
+        if (this.mobile() && !this._mobileComponent?.instance?.dialogRef?.isOpen()) {
             this.openMobileMode();
         }
 
         this.inputChange.emit(this.searchFieldValue);
         const inputStr: string = event.trim();
         if (inputStr.length === 0) {
-            this.closeSuggestionMenu();
-            return;
+            this._selectedSuggestionItem = null;
+            this._selectedSuggestionItemId = '';
+            if (!this.allowEmptySearch()) {
+                this.closeSuggestionMenu();
+            }
         }
 
-        if (!this.mobile) {
-            this.openSuggestionMenu();
-        }
-
-        if (this.dataSource) {
+        const ds = this.dataSource();
+        if (ds) {
             const match = new Map();
             match.set('keyword', inputStr);
             match.set('category', this._currentCategory?.value || null);
 
-            this.dataSource.match(match);
+            ds.match(match);
+        }
+
+        if (!this.mobile() && this._getSuggestionsLength() > 0) {
+            this.openSuggestionMenu();
         }
 
         this._updateSearchAnnouncementText();
@@ -485,12 +571,31 @@ export class SearchFieldComponent
      * Capturing item selection from dropdown menu of combobox.
      * @hidden
      */
-    onItemClick(event: string): void {
-        this.inputText = event;
+    onItemClick(event: SuggestionItem | string, suggestionListItem?: ListItemComponent): void {
+        if (typeof event === 'string') {
+            this.inputText.set(event);
+        } else if (event?.value) {
+            if (event.searchInScopeText || event.searchInScopeCounter) {
+                if (event.searchInScopeCallback) {
+                    this._performButtonClick(null, event.searchInScopeCallback);
+                }
+                return;
+            } else if (event.showMoreText) {
+                if (event.showMoreCallback) {
+                    this._performButtonClick(null, event.showMoreCallback);
+                }
+                return;
+            }
+            this.inputText.set(event.value);
+            this._selectedSuggestionItem = event;
+            if (suggestionListItem?.id) {
+                this._selectedSuggestionItemId = suggestionListItem.id;
+            }
+        }
         this.inputChange.emit(this.searchFieldValue);
         this.searchSubmit.emit(this.searchFieldValue);
         this.closeSuggestionMenu();
-        if (this.mobile) {
+        if (this.mobile()) {
             this.showDialog(false);
         }
         this._isSearchDone = true;
@@ -504,8 +609,8 @@ export class SearchFieldComponent
     onSearchSubmit(event?: Event): void {
         event?.preventDefault();
 
-        if (this.isLoading) {
-            this.cancelSearch.emit();
+        if (this.isLoading()) {
+            this.cancelSearch.emit(this.searchFieldValue);
             return;
         }
 
@@ -513,24 +618,29 @@ export class SearchFieldComponent
 
         this._isRefresh = true;
 
-        if (this.inputText) {
+        if (this.inputText()) {
             this._isSearchDone = true;
         }
 
         this.closeSuggestionMenu(false);
+        (this.inputField().nativeElement as HTMLInputElement).setSelectionRange(-1, -1);
     }
 
     /**
      * Sets current category.
      * @hidden
      */
-    setCurrentCategory(currentCategory: ValueLabelItem): void {
+    setCurrentCategory(currentCategory: ValueLabelItem | null): void {
         this._currentCategory =
             currentCategory &&
-            this.categories?.find(
-                (category) => category.label === currentCategory.label && category.value === currentCategory.value
+            this.categories().find(
+                (category: ValueLabelItem) =>
+                    category.label === currentCategory.label && category.value === currentCategory.value
             );
 
+        if (this._isSuggestionMenuOpen$()) {
+            this.onValueChange(this.inputText());
+        }
         this.inputChange.emit(this.searchFieldValue);
     }
 
@@ -538,24 +648,26 @@ export class SearchFieldComponent
      * Open suggestion menu
      */
     openSuggestionMenu(): void {
-        this._isOpen$.set(true);
-        this._suggestionkeyManager?.destroy();
-        this._suggestionkeyManager = new FocusKeyManager(this.suggestionItems);
-        if (this._isOpen$()) {
+        this._isSuggestionMenuOpen$.set(true);
+        this._resetKeyManager();
+        if (this._isSuggestionMenuOpen$()) {
             return;
         }
 
-        this._isOpen$.set(true);
+        this._isSuggestionMenuOpen$.set(true);
     }
 
     /** @hidden */
     openMobileMode(): void {
+        if (this._shellbar) {
+            this._mobileComponent.instance._inShellbar = true;
+        }
         this.showDialog(true);
     }
 
     /** @hidden */
     dialogApprove(): void {
-        this.onItemClick(this.inputText);
+        this.onItemClick(this.inputText());
     }
 
     /** @hidden */
@@ -565,7 +677,10 @@ export class SearchFieldComponent
 
     /** @hidden */
     showDialog(isOpen: boolean): void {
-        if (this.isOpen !== isOpen) {
+        if (!isOpen) {
+            this.closeSuggestionMenu();
+        }
+        if (this._mobileComponent?.instance?.dialogRef?.isOpen() !== isOpen) {
             this.isOpen = isOpen;
 
             this.isOpenChange.emit(isOpen);
@@ -577,21 +692,107 @@ export class SearchFieldComponent
         if (focus) {
             this.focus();
         }
-        this._isOpen$.set(false);
+        this._isSuggestionMenuOpen$.set(false);
+    }
+
+    /** Resets the current category to its initial state. */
+    resetCategory(): void {
+        this._currentCategory = undefined;
+        const selectComp = this.categorySelectComponent();
+        if (selectComp) {
+            selectComp.value = undefined;
+        }
     }
 
     /** @hidden */
     clearTextInput(): void {
-        this.inputText = '';
+        this.inputText.set('');
         this.detectChanges();
         this.inputChange.emit(this.searchFieldValue);
         this.cancelSearch.emit(this.searchFieldValue);
 
+        this._selectedSuggestionItem = null;
+        this._selectedSuggestionItemId = '';
+
         this._isRefresh = true;
         this._isSearchDone = false;
 
-        this.closeSuggestionMenu(false);
+        if (!this.allowEmptySearch()) {
+            this.closeSuggestionMenu(false);
+        } else {
+            const ds = this.dataSource();
+            if (ds) {
+                const match = new Map();
+                match.set('keyword', '');
+                match.set('category', this._currentCategory?.value || null);
+
+                ds.match(match);
+            }
+
+            this.openSuggestionMenu();
+        }
         this.focus();
+    }
+
+    /** @hidden Method that handles complete event from auto complete directive, setting the new value, and closing popover */
+    handleAutoComplete(event: AutoCompleteEvent): void {
+        if (this._inputValueMatchesFirstSuggestion()) {
+            this.inputText.set(event.term);
+            this._selectedSuggestionItem = this._autoCompleteMostRecentSuggestionItem;
+            this.onValueChange(this.inputText());
+            this.onSearchSubmit();
+            if (event.forceClose && this.inputText()) {
+                this.closeSuggestionMenu();
+            }
+        }
+    }
+
+    /** @hidden */
+    _categorySelectClicked(event: MouseEvent): void {
+        if (this.mobile() && !this._mobileComponent?.instance?.dialogRef?.isOpen()) {
+            event.preventDefault();
+            // event.stopImmediatePropagation();
+            this.openMobileMode();
+        }
+    }
+
+    /** @hidden */
+    _handleInputTabKey(event: Event): void {
+        if (this._inputValueMatchesFirstSuggestion()) {
+            event.preventDefault();
+            this.handleAutoComplete({ term: this.inputText(), forceClose: false });
+            (this.inputField().nativeElement as HTMLInputElement).setSelectionRange(-1, -1);
+        }
+    }
+
+    /** @hidden */
+    _inputValueMatchesFirstSuggestion(): boolean {
+        const inputEl = this.inputField().nativeElement as HTMLInputElement;
+        const listItemsArray = this.listItems();
+        const firstListItem = listItemsArray[0];
+        return firstListItem?.listTitle && inputEl.value === firstListItem.listTitle.elRef.nativeElement.innerText;
+    }
+
+    /** @hidden */
+    _focusActionButton(event: Event, suggestion: ListItemComponent): void {
+        event.preventDefault();
+        event.stopPropagation();
+        const suggestionEl = suggestion.elementRef.nativeElement;
+        const firstButton = suggestionEl.querySelector('.fd-button') as HTMLElement;
+        if (firstButton) {
+            if (document.activeElement === suggestionEl) {
+                this._actionButtonTabIndex = 0;
+                firstButton.focus();
+            }
+        }
+    }
+
+    /** @hidden */
+    _focusParentListItem(event: Event, suggestion: ListItemComponent): void {
+        event.preventDefault();
+        event.stopPropagation();
+        this._actionButtonTabIndex = -1;
+        suggestion.elementRef?.nativeElement?.focus();
     }
 
     /** @hidden */
@@ -603,7 +804,95 @@ export class SearchFieldComponent
             .subscribe((data) => {
                 this._dropdownValues$ = of(data);
             });
-        this._dataSource = dataSource;
+    }
+
+    /** @hidden helper function needed by template */
+    _isString(suggestion: string | object): boolean {
+        return typeof suggestion === 'string';
+    }
+
+    /** @hidden */
+    _performButtonClick(event: Event | null, callbackFn: (() => any) | undefined): void {
+        if (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+        if (callbackFn) {
+            callbackFn();
+        }
+    }
+
+    /** @hidden */
+    _searchResultIsHoveredOrFocusedOrMobile(suggestion: ListItemComponent): boolean {
+        const suggestionEl = suggestion.elementRef.nativeElement;
+        return (
+            (this.mobile() && this._selectedSuggestionItem === null) ||
+            document.activeElement === suggestionEl ||
+            suggestionEl.contains(document.activeElement) ||
+            suggestionEl.matches(':hover')
+        );
+    }
+
+    /** @hidden */
+    _advancedFilterButtonClicked(): void {
+        this.advancedFilterButtonClick.emit();
+    }
+
+    /** @hidden */
+    _onlyHeadersFiltered(suggestions: (SuggestionItem | undefined)[]): boolean {
+        let retVal = true;
+        for (let i = 0; i < suggestions.length && retVal; i++) {
+            if (!suggestions[i]?.data || !suggestions[i]?.data?.isHeader) {
+                retVal = false;
+            }
+        }
+
+        return retVal;
+    }
+
+    /** @hidden */
+    _inputFocus(): void {
+        this._isFocused = true;
+        if (this._shellbar && this.allowEmptySearch()) {
+            this.openSuggestionMenu();
+        }
+    }
+
+    /** @hidden */
+    _handlePopoverKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this.focus();
+        }
+    }
+
+    /** @hidden */
+    _autoCompleteDisplayFn = (event: SuggestionItem): string => {
+        this._autoCompleteMostRecentSuggestionItem = event;
+        return event.value;
+    };
+
+    /** @hidden */
+    private _resetKeyManager(): void {
+        const items = this.suggestionItems();
+        if (items.length > 0) {
+            const keyManagerParam = [...items].sort(
+                (a, b) => this._getDomRowOrderIndex(a) - this._getDomRowOrderIndex(b)
+            );
+            this._suggestionkeyManager?.destroy();
+            this._suggestionkeyManager = new FocusKeyManager(keyManagerParam);
+
+            this._setAriaOwns();
+        }
+    }
+
+    /** @hidden */
+    private _getDomRowOrderIndex(row: SearchFieldSuggestionDirective): number {
+        const suggestionListRef = this.suggestionList();
+        if (!suggestionListRef) {
+            return -1;
+        }
+        const listItems = this.listItems();
+        return listItems.findIndex((item) => item.elementRef.nativeElement === row.element.nativeElement);
     }
 
     /**
@@ -613,14 +902,64 @@ export class SearchFieldComponent
     private _getSuggestionsLength(): number {
         let count = 0;
         this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
+            this._autoCompleteSuggestions = [];
             suggestions?.forEach((suggestion) => {
-                if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
+                const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
+                if (
+                    this.inputText() &&
+                    textToCheck.toLowerCase().indexOf(this.inputText()?.trim()?.toLowerCase()) > -1
+                ) {
                     count++;
                 }
+                if (!suggestion?.children && suggestion?.value) {
+                    this._autoCompleteSuggestions.push(suggestion);
+                } else if (suggestion?.children?.length) {
+                    suggestion.children.forEach((child) => {
+                        this._autoCompleteSuggestions.push(child);
+                    });
+                }
             });
+
+            this._setAriaOwns();
         });
 
         return count;
+    }
+
+    /** @hidden */
+    private _setAriaOwns(): void {
+        this.detectChanges();
+        const suggestionListRef = this.suggestionList();
+        const parentListEl = suggestionListRef?.elementRef.nativeElement;
+        if (!parentListEl) {
+            return;
+        }
+
+        // Use the already-queried listItems instead of querySelectorAll
+        const listItems = this.listItems();
+        const listItemsMap = new Map<HTMLElement, string>();
+
+        // Build a map of parent lists to their child IDs
+        listItems.forEach((item) => {
+            const itemEl = item.elementRef.nativeElement;
+            if (itemEl.classList.contains('fd-list__item--suggestion')) {
+                const parentList = itemEl.closest('.fd-list') as HTMLElement;
+                if (parentList) {
+                    const existing = listItemsMap.get(parentList) || '';
+                    listItemsMap.set(parentList, existing + itemEl.id + ' ');
+                }
+            }
+        });
+
+        // Set aria-owns on each parent list
+        listItemsMap.forEach((childIds, list) => {
+            list.setAttribute('aria-owns', childIds.trim());
+            const headerEl = list.querySelector('.fd-suggestion-header') as HTMLElement;
+            const headerText = headerEl?.innerText;
+            if (headerText) {
+                list.setAttribute('aria-label', headerText);
+            }
+        });
     }
 
     /** @hidden */
@@ -635,20 +974,27 @@ export class SearchFieldComponent
         );
         this._currentSearchSuggestionAnnouncementMessage =
             searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
-        if (this.inputText?.length > 0) {
+        if (this.inputText()?.length > 0) {
             await this._liveAnnouncer.announce(this._currentSearchSuggestionAnnouncementMessage);
         }
     }
 
     /** @hidden */
     private _setUpMobileMode(): void {
+        if (this._mobileComponent) {
+            this._mobileComponent.destroy();
+        }
+
         const injector = Injector.create({
             providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }],
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicComponent(
-            { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
+        this._mobileComponent = this._dynamicComponentService.createDynamicComponent(
+            {
+                inputFieldTemplate: this.inputFieldTemplate(),
+                suggestionMenuTemplate: this.suggestionMenuTemplate()
+            },
             SearchFieldMobileComponent,
             {
                 containerRef: this._viewContainerRef
@@ -666,14 +1012,17 @@ export class SearchFieldComponent
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     /** @hidden */
-    transform(values: string[] | null, match: string): string[] {
-        if (!values) {
-            values = [];
+    transform(suggestions: SuggestionItem[] | null | undefined, match: string): (SuggestionItem | undefined)[] {
+        if (!suggestions) {
+            suggestions = [];
         }
         if (!match) {
-            return values;
+            match = '';
         }
         const processedMatch = match.trim().toLowerCase();
-        return values.filter((value) => value.toLowerCase().indexOf(processedMatch) > -1);
+        return suggestions.filter((suggestion) => {
+            const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion.value;
+            return textToCheck.toLowerCase().indexOf(processedMatch) > -1 || suggestion.isGroupHeader;
+        });
     }
 }

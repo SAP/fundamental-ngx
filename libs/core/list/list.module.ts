@@ -7,6 +7,7 @@ import { ListThumbnailDirective } from './directives/byline/list-thumbnail.direc
 import { ListFooterDirective } from './directives/list-footer.directive';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListIconDirective } from './directives/list-icon.directive';
+import { ListInfoLabelDirective } from './directives/list-info-label.directive';
 import { ListLinkDirective } from './directives/list-link.directive';
 import { ListNavigationItemArrowDirective } from './directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from './directives/list-navigation-item-text.directive';
@@ -35,6 +36,7 @@ const components = [
     ListContentDirective,
     ListThumbnailDirective,
     ListTitleTextDirective,
+    ListInfoLabelDirective,
     ListNavigationItemComponent,
     ListNavigationItemArrowDirective,
     ListNavigationItemTextDirective,

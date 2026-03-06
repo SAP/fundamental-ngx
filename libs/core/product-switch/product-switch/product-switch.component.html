@@ -20,6 +20,7 @@
                     class="fd-shellbar__button"
                     glyph="grid"
                     fdType="transparent"
+                    [fdContentDensity]="_contentDensity"
                 ></button>
             } @else {
                 <ng-template [ngTemplateOutlet]="customProductSwitchButton()!.templateRef"></ng-template>

@@ -396,7 +396,16 @@ export default {
         searchInputLabel: 'खोज करें',
         synchronizeButtonTitle: 'सिंक्रनाइज़ करें',
         searchSuggestionMessage: '{count} सुझाव मिले',
-        searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें'
+        searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSwitch: {
         ariaLabel: 'स्विच'

@@ -403,7 +403,16 @@ export default {
         searchInputLabel: 'Αναζήτηση',
         synchronizeButtonTitle: 'Συγχρονισμός',
         searchSuggestionMessage: '{count} προτάσεις βρέθηκαν.',
-        searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση'
+        searchSuggestionNavigateMessage: 'χρήση βελών πάνω και κάτω για πλοήγηση',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ρυθμίσεις',

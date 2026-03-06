@@ -403,7 +403,16 @@ export default {
         searchInputLabel: 'Ara',
         synchronizeButtonTitle: 'Eşitle',
         searchSuggestionMessage: '{count} öneri bulundu.',
-        searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin'
+        searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Ayarlar',

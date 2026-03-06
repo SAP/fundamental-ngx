@@ -402,7 +402,16 @@ export default {
         searchInputLabel: 'Vyhľadávanie',
         synchronizeButtonTitle: 'Synchronizovať',
         searchSuggestionMessage: '{count} nájdených návrhov.',
-        searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol'
+        searchSuggestionNavigateMessage: 'na navigáciu použite šípky nahor a nadol',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'Nastavenia',

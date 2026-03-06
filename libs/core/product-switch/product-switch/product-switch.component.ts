@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, contentChild, input, model, output 
 
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import {
     PopoverBodyComponent,
     PopoverComponent,
@@ -30,7 +31,8 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
         ButtonComponent,
         PopoverBodyComponent,
         FdTranslatePipe,
-        NgTemplateOutlet
+        NgTemplateOutlet,
+        ContentDensityDirective
     ],
     host: {
         '[class.fd-popover-custom--disabled]': 'disabled()'
@@ -76,6 +78,9 @@ export class ProductSwitchComponent {
 
     /** Event emitted right before the popover is being opened. */
     readonly beforeOpen = output<void>();
+
+    /** @hidden */
+    _contentDensity: ContentDensityMode;
 
     /** @hidden */
     protected readonly customProductSwitchButton = contentChild(ProductSwitchButtonDirective);

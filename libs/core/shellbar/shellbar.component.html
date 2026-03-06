@@ -4,6 +4,7 @@
     [class.fd-shellbar--side-nav]="showNavigationButton === true"
     [class.fd-shellbar--has-context-area]="!!contextArea"
     #shellbar
+    fdCozy
 >
     @if (!_hideAllComponents) {
         <div
@@ -25,6 +26,7 @@
                         [attr.aria-label]="
                             navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)
                         "
+                        fdCozy
                     ></button>
                 }
             }
@@ -37,6 +39,7 @@
                     (fdkClicked)="_backClicked($event)"
                     [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
                     [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
+                    fdCozy
                 ></button>
             }
             <ng-content select="fd-shellbar-branding"></ng-content>
