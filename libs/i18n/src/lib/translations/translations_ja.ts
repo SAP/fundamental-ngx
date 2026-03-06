@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: '前の項目へ',
         rightNavigationBtnLabel: '次の項目へ'
     },
+    coreCombobox: {
+        clearButtonTitle: '入力をクリア'
+    },
     coreDatePicker: {
         dateInputLabel: '日付入力',
         dateRangeInputLabel: '日付範囲入力',
@@ -594,6 +597,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'オプションを選択'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: '詳細'
     },
     coreTree: {
         expand: 'ノードを展開',

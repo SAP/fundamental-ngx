@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: '移至先前項目',
         rightNavigationBtnLabel: '移至下一個項目'
     },
+    coreCombobox: {
+        clearButtonTitle: '清除輸入'
+    },
     coreDatePicker: {
         dateInputLabel: '日期輸入',
         dateRangeInputLabel: '日期範圍輸入',
@@ -591,6 +594,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '選擇選項'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: '更多'
     },
     coreTree: {
         expand: '展開節點',

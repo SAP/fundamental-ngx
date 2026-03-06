@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'Prejsť na predchádzajúcu položku',
         rightNavigationBtnLabel: 'Prejsť na ďalšiu položku'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Vymazať vstup'
+    },
     coreDatePicker: {
         dateInputLabel: 'Zadanie dátumu',
         dateRangeInputLabel: 'Zadanie rozsahu dátumov',
@@ -594,6 +597,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Vyberte možnosť'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Viac'
     },
     coreTree: {
         expand: 'Rozbaliť uzol',

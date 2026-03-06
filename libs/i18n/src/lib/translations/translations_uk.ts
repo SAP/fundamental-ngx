@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
         rightNavigationBtnLabel: 'Перейти до наступного елемента'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Очистити введення'
+    },
     coreDatePicker: {
         dateInputLabel: 'Введення дати',
         dateRangeInputLabel: 'Введення діапазону дат',
@@ -595,6 +598,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Вибрати опцію'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Більше'
     },
     coreTree: {
         expand: 'Розгорнути вузол',

@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: '이전 항목으로 이동',
         rightNavigationBtnLabel: '다음 항목으로 이동'
     },
+    coreCombobox: {
+        clearButtonTitle: '입력 지우기'
+    },
     coreDatePicker: {
         dateInputLabel: '날짜 입력',
         dateRangeInputLabel: '날짜 범위 입력',
@@ -592,6 +595,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '옵션 선택'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: '더보기'
     },
     coreTree: {
         expand: '노드 펼치기',

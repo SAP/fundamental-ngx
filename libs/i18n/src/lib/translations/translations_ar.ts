@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'انتقال إلى البند السابق',
         rightNavigationBtnLabel: 'انتقال إلى البند التالي'
     },
+    coreCombobox: {
+        clearButtonTitle: 'مسح الإدخال'
+    },
     coreDatePicker: {
         dateInputLabel: 'إدخال التاريخ',
         dateRangeInputLabel: 'إدخال نطاق التواريخ',
@@ -593,6 +596,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'تحديد خيار'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'المزيد'
     },
     coreTree: {
         expand: 'توسيع العقدة',

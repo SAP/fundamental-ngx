@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'ไปยังไอเท็มก่อนหน้า',
         rightNavigationBtnLabel: 'ไปยังไอเท็มถัดไป'
     },
+    coreCombobox: {
+        clearButtonTitle: 'ล้างข้อมูลที่ป้อน'
+    },
     coreDatePicker: {
         dateInputLabel: 'การป้อนข้อมูลวันที่',
         dateRangeInputLabel: 'การป้อนข้อมูลช่วงวันที่',
@@ -594,6 +597,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'เลือกตัวเลือก'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'เพิ่มเติม'
     },
     coreTree: {
         expand: 'ขยายโหนด',

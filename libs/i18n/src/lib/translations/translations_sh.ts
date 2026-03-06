@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
         rightNavigationBtnLabel: 'Idi na sledeću stavku'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Obriši unos'
+    },
     coreDatePicker: {
         dateInputLabel: 'Unos datuma',
         dateRangeInputLabel: 'Unos raspona datuma',
@@ -594,6 +597,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Odaberi opciju'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Više'
     },
     coreTree: {
         expand: 'Proširi čvor',

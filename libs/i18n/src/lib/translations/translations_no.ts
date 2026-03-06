@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til neste element'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Tøm inndata'
+    },
     coreDatePicker: {
         dateInputLabel: 'Datoregistrering',
         dateRangeInputLabel: 'Inndata for datointervall',
@@ -595,6 +598,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Velg et alternativ'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Mer'
     },
     coreTree: {
         expand: 'Utvid knutepunkt',

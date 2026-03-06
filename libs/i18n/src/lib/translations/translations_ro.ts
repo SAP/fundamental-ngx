@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: 'Salt la articol anterior',
         rightNavigationBtnLabel: 'Salt la articol următor'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Șterge intrarea'
+    },
     coreDatePicker: {
         dateInputLabel: 'Intrare dată',
         dateRangeInputLabel: 'Intrare interval de termene',
@@ -595,6 +598,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Selectați o opțiune'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Mai multe'
     },
     coreTree: {
         expand: 'Expandare nod',

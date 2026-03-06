@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: '[[[Ģŏ ţŏ ρŗēʋįŏűş įţēɱ∙∙∙∙∙]]]',
         rightNavigationBtnLabel: '[[[Ģŏ ţŏ ŋēχţ įţēɱ∙∙∙∙]]]'
     },
+    coreCombobox: {
+        clearButtonTitle: '[[[Ĉĺēąŗ įŋρűţ∙∙∙∙∙∙∙]]]'
+    },
     coreDatePicker: {
         dateInputLabel: '[[[Ďąţē įŋρűţ∙∙∙∙]]]',
         dateRangeInputLabel: '[[[Ďąţē ŗąŋğē įŋρűţ∙∙∙∙∙∙∙∙]]]',
@@ -600,6 +603,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '[[[Ŝēĺēċţ ąŋ Ŏρţįŏŋ∙∙∙∙∙∙∙∙]]]'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: '[[[Μŏŗē]]]'
     },
     coreTree: {
         expand: '[[[Ĕχρąŋƌ ŋŏƌē∙∙∙∙∙∙∙∙]]]',

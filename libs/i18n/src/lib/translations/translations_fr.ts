@@ -37,6 +37,9 @@ export default {
         leftNavigationBtnLabel: "Aller à l'élément précédent",
         rightNavigationBtnLabel: "Aller à l'élément suivant"
     },
+    coreCombobox: {
+        clearButtonTitle: 'Effacer la saisie'
+    },
     coreDatePicker: {
         dateInputLabel: 'Saisie de date',
         dateRangeInputLabel: 'Saisie de plage de dates',
@@ -596,6 +599,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Sélectionner une option'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Plus'
     },
     coreTree: {
         expand: 'Développer le nœud',
