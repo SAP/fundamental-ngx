@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Gå til forrige element',
         rightNavigationBtnLabel: 'Gå til næste element'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Ryd input'
+    },
     coreDatePicker: {
         dateInputLabel: 'Datoinput',
         dateRangeInputLabel: 'Datoområdeinput',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Vælg en mulighed'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Mere'
     },
     coreTree: {
         expand: 'Udvid node',

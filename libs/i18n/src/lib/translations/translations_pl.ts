@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Przejdź do poprzedniej pozycji',
         rightNavigationBtnLabel: 'Przejdź do następnej pozycji'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Wyczyść dane wejściowe'
+    },
     coreDatePicker: {
         dateInputLabel: 'Wpis daty',
         dateRangeInputLabel: 'Wpis zakresu dat',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Wybierz opcję'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Więcej'
     },
     coreTree: {
         expand: 'Rozwiń węzeł',

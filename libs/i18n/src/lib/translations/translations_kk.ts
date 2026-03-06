@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Алдыңғы тармаққа өту',
         rightNavigationBtnLabel: 'Келесі тармаққа өту'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Енгізуді тазалау'
+    },
     coreDatePicker: {
         dateInputLabel: 'Күнді енгізу',
         dateRangeInputLabel: 'Күндер ауқымын енгізу',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Опцияны таңдау'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Көбірек'
     },
     coreTree: {
         expand: 'Түйінді жаю',

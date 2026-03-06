@@ -79,6 +79,10 @@ export interface FdLanguage {
         leftNavigationBtnLabel: FdLanguageKey;
         rightNavigationBtnLabel: FdLanguageKey;
     };
+    coreCombobox: {
+        /** Title for the clear input button in combobox */
+        clearButtonTitle: FdLanguageKey;
+    };
     coreDatePicker: {
         dateInputLabel: FdLanguageKey;
         dateRangeInputLabel: FdLanguageKey;
@@ -722,6 +726,10 @@ export interface FdLanguage {
     };
     platformSelect: {
         selectOptionLabel: FdLanguageKey;
+    };
+    platformIconTabBar: {
+        /** Label for the overflow "More" button in icon tab bar */
+        moreButtonLabel: FdLanguageKey;
     };
     btpSearchField: {
         searchButtonLabel: FdLanguageKey;

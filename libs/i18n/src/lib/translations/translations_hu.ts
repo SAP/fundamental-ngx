@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Ugrás az előző elemre',
         rightNavigationBtnLabel: 'Ugrás a következő elemre'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Bemenet törlése'
+    },
     coreDatePicker: {
         dateInputLabel: 'Dátum bevitele',
         dateRangeInputLabel: 'Dátumtartomány bevitele',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Válasszon a lehetőségek közül'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Több'
     },
     coreTree: {
         expand: 'Csomópont kibontása',

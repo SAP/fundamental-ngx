@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: '转到上一个项目',
         rightNavigationBtnLabel: '转到下一个项目'
     },
+    coreCombobox: {
+        clearButtonTitle: '清除输入'
+    },
     coreDatePicker: {
         dateInputLabel: '日期输入',
         dateRangeInputLabel: '日期范围输入',
@@ -586,6 +589,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '选择选项'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: '更多'
     },
     coreTree: {
         expand: '展开节点',

@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Önceki öğeye git',
         rightNavigationBtnLabel: 'Sonraki öğeye git'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Girişi temizle'
+    },
     coreDatePicker: {
         dateInputLabel: 'Tarih girişi',
         dateRangeInputLabel: 'Tarih aralığı girişi',
@@ -590,6 +593,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Bir Seçenek Belirleyin'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Daha fazla'
     },
     coreTree: {
         expand: 'Düğümü genişlet',

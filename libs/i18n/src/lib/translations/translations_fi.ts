@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Siirry edelliseen kohteeseen',
         rightNavigationBtnLabel: 'SIirry seuraavaan kohteeseen'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Tyhjennä syöte'
+    },
     coreDatePicker: {
         dateInputLabel: 'Päivämäärän syöttö',
         dateRangeInputLabel: 'Päivämääräalueen syöttö',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Valitse jokin vaihtoehto'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Lisää'
     },
     coreTree: {
         expand: 'Laajenna solmu',

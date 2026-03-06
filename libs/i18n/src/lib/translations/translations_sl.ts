@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Premik na prejšnjo postavko',
         rightNavigationBtnLabel: 'Premik na naslednjo postavko'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Počisti vnos'
+    },
     coreDatePicker: {
         dateInputLabel: 'Vnos datuma',
         dateRangeInputLabel: 'Vnos datumskega obsega',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Izberi možnost'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Več'
     },
     coreTree: {
         expand: 'Razširitev vozlišča',

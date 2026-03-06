@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Gå till föregående artikel',
         rightNavigationBtnLabel: 'Gå till nästa artikel'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Rensa inmatning'
+    },
     coreDatePicker: {
         dateInputLabel: 'Datuminmatning',
         dateRangeInputLabel: 'Inmatning av datumintervall',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Välj ett alternativ'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Mer'
     },
     coreTree: {
         expand: 'Expandera nod',

@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Pergi ke item sebelumnya',
         rightNavigationBtnLabel: 'Pergi ke item seterusnya'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Kosongkan input'
+    },
     coreDatePicker: {
         dateInputLabel: 'Input tarikh',
         dateRangeInputLabel: 'Input julat tarikh',
@@ -588,6 +591,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Pilih Pilihan'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Lagi'
     },
     coreTree: {
         expand: 'Kembangkan nod',

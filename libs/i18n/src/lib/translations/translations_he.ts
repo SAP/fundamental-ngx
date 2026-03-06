@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'עבור לפריט הקודם',
         rightNavigationBtnLabel: 'עבור לפריט הבא'
     },
+    coreCombobox: {
+        clearButtonTitle: 'נקה קלט'
+    },
     coreDatePicker: {
         dateInputLabel: 'קלט של תאריך',
         dateRangeInputLabel: 'קלט של טווח תאריכים',
@@ -587,6 +590,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'בחר אפשרות'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'עוד'
     },
     coreTree: {
         expand: 'הרחב צומת',

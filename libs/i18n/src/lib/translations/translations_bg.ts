@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Към предишната позиция',
         rightNavigationBtnLabel: 'Към следващата позиция'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Изчистване на входа'
+    },
     coreDatePicker: {
         dateInputLabel: 'Въвеждане на дата',
         dateRangeInputLabel: 'Въвеждане на диапазон от дати',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Избор на опция'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Още'
     },
     coreTree: {
         expand: 'Разширяване на възела',

@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'К предыдущей позиции',
         rightNavigationBtnLabel: 'К следующей позиции'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Очистить ввод'
+    },
     coreDatePicker: {
         dateInputLabel: 'Ввод даты',
         dateRangeInputLabel: 'Ввод диапазона дат',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Выберите опцию'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Ещё'
     },
     coreTree: {
         expand: 'Развернуть узел',

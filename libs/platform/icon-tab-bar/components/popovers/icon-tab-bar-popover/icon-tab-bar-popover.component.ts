@@ -1,9 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, QueryList, Signal, ViewChildren, isSignal } from '@angular/core';
 import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 
 @Component({
@@ -33,9 +34,14 @@ export class IconTabBarPopoverComponent extends IconTabBarPopoverBase {
      * @description Label for button
      */
     @Input()
-    label = 'more';
+    label: string | Signal<string> = resolveTranslationSignal('platformIconTabBar.moreButtonLabel');
 
     /** Whether to display labels for tab items */
     @Input()
     showItemLabel: boolean;
+
+    /** @hidden */
+    protected get _labelText(): string {
+        return isSignal(this.label) ? this.label() : this.label;
+    }
 }

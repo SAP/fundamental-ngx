@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Go to previous item',
         rightNavigationBtnLabel: 'Go to next item'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
+    },
     coreDatePicker: {
         dateInputLabel: 'Date input',
         dateRangeInputLabel: 'Date range input',
@@ -589,6 +592,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Select an Option'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'More'
     },
     coreTree: {
         expand: 'Expand node',

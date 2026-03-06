@@ -23,6 +23,7 @@ import {
     PopoverControlComponent,
     TriggerConfig
 } from '@fundamental-ngx/core/popover';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { IconBarDndItemDirective } from '../../../directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndListDirective } from '../../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
@@ -103,6 +104,9 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     _popoverTriggers: TriggerConfig[] = [
         { trigger: 'click', openAction: true, closeAction: true, stopPropagation: true }
     ];
+
+    /** @hidden */
+    protected readonly _moreLabel = resolveTranslationSignal('platformIconTabBar.moreButtonLabel');
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

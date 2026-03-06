@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: "Vai all'elemento precedente",
         rightNavigationBtnLabel: "Vai all'elemento successivo"
     },
+    coreCombobox: {
+        clearButtonTitle: 'Cancella input'
+    },
     coreDatePicker: {
         dateInputLabel: 'Immissione data',
         dateRangeInputLabel: 'Immissione intervallo date',
@@ -590,6 +593,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: "Selezionare un'opzione"
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Altro'
     },
     coreTree: {
         expand: 'Espandi nodo',

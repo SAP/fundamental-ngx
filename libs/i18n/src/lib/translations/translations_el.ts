@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Προς προηγούμενο στοιχείο',
         rightNavigationBtnLabel: 'Προς επόμενο στοιχείο'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Εκκαθάριση εισόδου'
+    },
     coreDatePicker: {
         dateInputLabel: 'Είσοδος ημερομηνίας',
         dateRangeInputLabel: 'Είσοδος εύρους ημερομηνιών',
@@ -590,6 +593,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Επιλογή ως Ιδιότητα'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Περισσότερα'
     },
     coreTree: {
         expand: 'Επέκταση κόμβου',

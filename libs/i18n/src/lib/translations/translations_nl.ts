@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Naar vorige item',
         rightNavigationBtnLabel: 'Naar volgende item'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Invoer wissen'
+    },
     coreDatePicker: {
         dateInputLabel: 'Invoer datum',
         dateRangeInputLabel: 'Invoer datumbereik',
@@ -590,6 +593,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Selecteer een optie'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Meer'
     },
     coreTree: {
         expand: 'Knooppunt uitvouwen',

@@ -33,6 +33,9 @@ export default {
         leftNavigationBtnLabel: 'Zum vorherigen Element wechseln',
         rightNavigationBtnLabel: 'Zum nächsten Element wechseln'
     },
+    coreCombobox: {
+        clearButtonTitle: 'Eingabe löschen'
+    },
     coreDatePicker: {
         dateInputLabel: 'Datumseingabe',
         dateRangeInputLabel: 'Datumsbereichseingabe',
@@ -590,6 +593,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Option auswählen'
+    },
+    platformIconTabBar: {
+        moreButtonLabel: 'Mehr'
     },
     coreTree: {
         expand: 'Knoten erweitern',
