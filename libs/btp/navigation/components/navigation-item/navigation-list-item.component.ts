@@ -22,7 +22,8 @@ import {
     effect,
     inject,
     input,
-    signal
+    signal,
+    viewChild
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -447,6 +448,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         );
     }
 
+    /** @hidden Max-height for the overflow submenu, computed dynamically based on viewport position. */
+    protected readonly overflowSubmenuMaxHeight = signal<string | null>(null);
+
     /** @hidden */
     private readonly _home$ = signal(false);
 
@@ -527,6 +531,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _overflowSubmenuContainer = viewChild<ElementRef>('overflowSubmenuContainer');
+
     constructor() {
         super();
         effect(() => {
@@ -847,6 +853,36 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
         // All other items (leaf items and items with both links and children) can be selected
         return true;
+    }
+
+    /**
+     * @hidden
+     * Handles mouseenter on overflow items to dynamically adjust the submenu max-height.
+     * Uses requestAnimationFrame to ensure the browser has laid out the submenu
+     * (which transitions from display:none to display:block via CSS :hover)
+     * before measuring its viewport position.
+     */
+    onOverflowItemMouseEnter(): void {
+        if (!this.isOverflow$() || !this.hasChildren$()) {
+            return;
+        }
+
+        const submenuEl = this._overflowSubmenuContainer()?.nativeElement;
+        if (!submenuEl) {
+            return;
+        }
+
+        // Wait for the browser to complete layout after CSS :hover makes the submenu visible
+        requestAnimationFrame(() => {
+            const rect = submenuEl.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const margin = 16; // 1rem safety margin from viewport edge
+            const availableHeight = viewportHeight - rect.top - margin;
+
+            if (availableHeight > 0) {
+                this.overflowSubmenuMaxHeight.set(`${availableHeight}px`);
+            }
+        });
     }
 
     private _focusPopoverLink(): void {
