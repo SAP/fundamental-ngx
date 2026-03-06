@@ -93,10 +93,15 @@ export class FocusableGridDirective implements AfterViewInit {
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntilDestroyed(this._destroyRef))
             .subscribe((lists) => {
-                lists.forEach((list: FocusableListDirective, index: number) => {
-                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length });
-                    this._watchListItems(list);
-                });
+                const totalRows = this._focusableLists.length;
+                const listsLength = lists.length;
+                for (let i = 0; i < listsLength; i++) {
+                    const list = lists.get(i);
+                    if (list) {
+                        list._setGridPosition({ rowIndex: i, totalRows });
+                        this._watchListItems(list);
+                    }
+                }
             });
 
         this._focusableItems.changes
@@ -108,39 +113,52 @@ export class FocusableGridDirective implements AfterViewInit {
         this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
-                switchMap((queryList: QueryList<FocusableListDirective>) =>
-                    merge(...queryList.toArray().map((list) => list._gridListFocused$))
-                ),
+                switchMap((queryList: QueryList<FocusableListDirective>) => {
+                    const lists = queryList.toArray();
+                    return merge(...lists.map((list) => list._gridListFocused$));
+                }),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focusedEvent) => {
                 this.rowFocused.emit(focusedEvent);
 
-                this._focusableLists.forEach((list) => list.setTabbable(false));
-                this._focusableLists.forEach((list) => list._setItemsTabbable(false));
+                const lists = this._focusableLists.toArray();
+                const listsLength = lists.length;
+                for (let i = 0; i < listsLength; i++) {
+                    const list = lists[i];
+                    list.setTabbable(false);
+                    list._setItemsTabbable(false);
+                }
             });
 
         this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
-                switchMap((queryList: QueryList<FocusableListDirective>) =>
-                    merge(...queryList.toArray().map((list) => list._gridItemFocused$))
-                ),
+                switchMap((queryList: QueryList<FocusableListDirective>) => {
+                    const lists = queryList.toArray();
+                    return merge(...lists.map((list) => list._gridItemFocused$));
+                }),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focusedEvent) => {
                 this.itemFocused.emit(focusedEvent);
 
-                this._focusableLists.forEach((list) => list.setTabbable(false));
-                this._focusableLists.forEach((list) => list._setItemsTabbable(false));
+                const lists = this._focusableLists.toArray();
+                const listsLength = lists.length;
+                for (let i = 0; i < listsLength; i++) {
+                    const list = lists[i];
+                    list.setTabbable(false);
+                    list._setItemsTabbable(false);
+                }
             });
 
         this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
-                switchMap((queryList: QueryList<FocusableListDirective>) =>
-                    merge(...queryList.toArray().map((list) => list._keydown$))
-                ),
+                switchMap((queryList: QueryList<FocusableListDirective>) => {
+                    const lists = queryList.toArray();
+                    return merge(...lists.map((list) => list._keydown$));
+                }),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex));
@@ -172,11 +190,12 @@ export class FocusableGridDirective implements AfterViewInit {
         let nextRowItemIndex = activeItemIndex ?? 0;
         let scrollIntoView: ScrollPosition;
 
+        const listItemsLength = list._focusableItems().length;
         const isFirstItemLtr = activeItemIndex === 0 && this.contentDirection !== 'rtl';
-        const isLastItemRtl = activeItemIndex === list._focusableItems().length - 1 && this.contentDirection === 'rtl';
+        const isLastItemRtl = activeItemIndex === listItemsLength - 1 && this.contentDirection === 'rtl';
 
         const isFirstItemRtl = activeItemIndex === 0 && this.contentDirection === 'rtl';
-        const isLastItemLtr = activeItemIndex === list._focusableItems().length - 1 && this.contentDirection !== 'rtl';
+        const isLastItemLtr = activeItemIndex === listItemsLength - 1 && this.contentDirection !== 'rtl';
 
         switch (event.keyCode) {
             case UP_ARROW:
@@ -242,9 +261,11 @@ export class FocusableGridDirective implements AfterViewInit {
 
     /** @hidden */
     private _handleItemSubscriptions(items: ReadonlyArray<FocusableItem>): void {
-        items.forEach((item) => {
+        const itemsLength = items.length;
+        for (let i = 0; i < itemsLength; i++) {
+            const item = items[i];
             if (!(item instanceof FocusableItemDirective) || this._subscribedItems.has(item)) {
-                return;
+                continue;
             }
 
             this._subscribedItems.add(item);
@@ -252,27 +273,37 @@ export class FocusableGridDirective implements AfterViewInit {
             outputToObservable(item.focusableChildElementFocused)
                 .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
-                    this._focusableLists.forEach((focusableList) => {
-                        focusableList._focusableItems().forEach((focusableItem) => {
+                    const lists = this._focusableLists.toArray();
+                    const listsLength = lists.length;
+                    for (let j = 0; j < listsLength; j++) {
+                        const focusableItems = lists[j]._focusableItems();
+                        const focusableItemsLength = focusableItems.length;
+                        for (let k = 0; k < focusableItemsLength; k++) {
+                            const focusableItem = focusableItems[k];
                             focusableItem.setTabbable(false);
                             (focusableItem as FocusableItemDirective).enableTabbableElements();
-                        });
-                    });
+                        }
+                    }
                 });
             outputToObservable(item._parentFocusableItemFocused)
                 .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
-                    this._focusableLists.forEach((focusableList) => {
-                        focusableList._focusableItems().forEach((focusableItem) => {
+                    const lists = this._focusableLists.toArray();
+                    const listsLength = lists.length;
+                    for (let j = 0; j < listsLength; j++) {
+                        const focusableItems = lists[j]._focusableItems();
+                        const focusableItemsLength = focusableItems.length;
+                        for (let k = 0; k < focusableItemsLength; k++) {
+                            const focusableItem = focusableItems[k];
                             if (item !== focusableItem) {
                                 (focusableItem as FocusableItemDirective).disableTabbableElements();
                             } else {
                                 (focusableItem as FocusableItemDirective).enableTabbableElements();
                             }
-                        });
-                    });
+                        }
+                    }
                 });
-        });
+        }
     }
 
     /** @hidden */
