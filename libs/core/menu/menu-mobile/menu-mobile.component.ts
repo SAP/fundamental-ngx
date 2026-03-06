@@ -121,6 +121,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
                 } else if (!isOpen && this.dialogRef) {
                     // Only close if currently open
                     this.dialogRef.close();
+                    this.dialogRef = null!;
                 }
             });
         });
@@ -134,7 +135,8 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** Closes the Dialog and Menu component */
     close(): void {
-        this.dialogRef.close();
+        this.dialogRef?.close();
+        this.dialogRef = null!;
         this._component.close();
     }
 
