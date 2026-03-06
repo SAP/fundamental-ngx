@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.11](https://github.com/SAP/fundamental-ngx/compare/v0.57.10...v0.57.11) (2026-03-06)
+
+
+### Bug Fixes
+
+* localize labels in icon tab bar and core combo ([f2d7011](https://github.com/SAP/fundamental-ngx/commit/f2d70115fbf34325bfa2414b7e050f0e705eee4c))
+
+
+
+
+
 ## [0.57.10](https://github.com/SAP/fundamental-ngx/compare/v0.57.9...v0.57.10) (2026-02-20)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
