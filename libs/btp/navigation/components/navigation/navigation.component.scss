@@ -1,4 +1,5 @@
 @import 'fundamental-styles/dist/navigation.css';
+@import 'fundamental-styles/dist/menu.css';
 
 $block: fd-navigation;
 
@@ -118,6 +119,9 @@ $block: fd-navigation;
             }
 
             .#{$block}__list-container--submenu {
+                overflow-x: hidden;
+                overflow-y: auto;
+
                 &::before {
                     content: '';
                     position: absolute;
