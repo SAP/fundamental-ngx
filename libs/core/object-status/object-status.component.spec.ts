@@ -1,4 +1,4 @@
-import { Component, ElementRef, InjectionToken, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { Component, ElementRef, InjectionToken, Pipe, PipeTransform, Signal, ViewChild, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
@@ -10,10 +10,10 @@ import { ObjectStatusComponent } from './object-status.component';
     standalone: true
 })
 class MockFdTranslatePipe implements PipeTransform {
-    transform(value: string): string {
-        // For testing, just return the translation key itself
+    transform(value: string): Signal<string> {
+        // For testing, return a signal that returns the translation key itself
         // This way we can verify the correct keys are being used
-        return value;
+        return signal(value);
     }
 }
 

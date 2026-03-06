@@ -1,0 +1,130 @@
+<div class="pipe-parameters-example">
+    <fd-message-strip [type]="'information'" [dismissible]="false">
+        <p>
+            <strong>Pipe Parameters:</strong> This example demonstrates real-world usage of the fdTranslate pipe with
+            object parameters, default values, and null handling. Use the controls below to see how translations update
+            dynamically.
+        </p>
+    </fd-message-strip>
+
+    <div class="fd-margin-top--sm">
+        <!-- EXAMPLE 1: Simple translation without parameters -->
+        <div style="margin-bottom: 1.5rem">
+            <fd-form-label>1. Basic translation (no parameters):</fd-form-label>
+            <p>{{ ('coreDatePicker.dateInputLabel' | fdTranslate)() }}</p>
+            <code>{{ "{{ ('coreDatePicker.dateInputLabel' | fdTranslate)() }}" }}</code>
+        </div>
+
+        <!-- EXAMPLE 2: Translation with single parameter -->
+        <div style="margin-bottom: 1.5rem">
+            <fd-form-label>2. With object parameter (dynamic count):</fd-form-label>
+            <p style="font-size: 1.2rem">
+                {{ ('coreMultiInput.countListResultsPlural' | fdTranslate: { count: itemCount() })() }}
+            </p>
+            <div style="display: flex; gap: 0.5rem; align-items: center">
+                <button fd-button label="-" (click)="decrementItems()"></button>
+                <span>Item Count: {{ itemCount() }}</span>
+                <button fd-button label="+" (click)="incrementItems()"></button>
+            </div>
+            <code>
+                {{ "{{ ('coreMultiInput.countListResultsPlural' | fdTranslate: { count: itemCount() })() }}" }}
+            </code>
+        </div>
+
+        <!-- EXAMPLE 3: Translation with multiple parameters -->
+        <div style="margin-bottom: 1.5rem">
+            <fd-form-label>3. With multiple parameters:</fd-form-label>
+            <p>Simulated: "Welcome {{ userName() }}! You have {{ itemCount() }} items in your cart."</p>
+            <div style="display: flex; gap: 0.5rem">
+                <input type="text" [ngModel]="userName()" (ngModelChange)="userName.set($event)" />
+            </div>
+            <code>
+                {{
+                    "{{ ('welcome.message' | fdTranslate: { name: userName(), count: itemCount() })()
+
+
+
+
+
+                }}" }}</code
+            >
+        </div>
+
+        <!-- EXAMPLE 4: Default fallback value -->
+        <div style="margin-bottom: 1.5rem">
+            <fd-form-label>4. With default fallback (for missing translations):</fd-form-label>
+            <p>
+                {{
+                    (
+                        'nonExistent.translationKey'
+                        | fdTranslate: {} : 'This is the fallback text because the key does not exist'
+                    )()
+                }}
+            </p>
+            <code>
+                {{
+                    "{{ ('nonExistent.key' | fdTranslate: {}: 'Fallback text')()
+
+
+
+
+
+                }}" }}</code
+            >
+        </div>
+
+        <!-- EXAMPLE 5: Null key handling -->
+        <div style="margin-bottom: 1.5rem">
+            <fd-form-label>5. Null key handling (for optional translations):</fd-form-label>
+            <p>Promo code message: {{ (promoCode() | fdTranslate: {} : 'No active promo code')() }}</p>
+            <div style="display: flex; gap: 0.5rem">
+                <button fd-button label="Apply Promo" (click)="applyPromo()"></button>
+                <button fd-button label="Clear Promo" (click)="clearPromo()"></button>
+            </div>
+            <code>{{ "{{ (promoCode() | fdTranslate: {}: 'No promo code')() }}" }}</code>
+        </div>
+
+        <!-- EXAMPLE 6: In attribute bindings -->
+        <div style="margin-bottom: 1.5rem">
+            <fd-form-label>6. In attribute bindings (aria-label, title, etc.):</fd-form-label>
+            <button
+                fd-button
+                [label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
+                [attr.aria-label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
+                [title]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
+            ></button>
+            <code>{{ '&lt;button [attr.aria-label]="(\'coreButton.save\' | fdTranslate)()"&gt;&lt;/button&gt;' }}</code>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1rem; background-color: #f4f4f4">
+        <h4>Important Notes</h4>
+        <ul>
+            <li>
+                <strong>Always invoke with ():</strong> The pipe returns <code>Signal&lt;string&gt;</code>, so you must
+                call it like a function.
+            </li>
+            <li>
+                <strong>Parameters are reactive:</strong> When signal values change (like itemCount()), the translation
+                automatically updates.
+            </li>
+            <li>
+                <strong>Default values are optional:</strong> Use the third parameter to provide fallback text for
+                missing translations.
+            </li>
+            <li>
+                <strong>Null keys are safe:</strong> Passing null/undefined as the key will use the default value
+                instead of throwing an error.
+            </li>
+            <li>
+                <strong>Works everywhere:</strong> Use in interpolation, attribute bindings, property bindings, etc.
+            </li>
+        </ul>
+
+        <div style="margin-top: 1rem; padding: 1rem; background-color: #fff3cd">
+            <strong>💡 Pro Tip:</strong> For translations you use multiple times, consider using
+            <code>resolveTranslationSignal()</code> in your component instead. It's more efficient than repeating the
+            pipe in multiple places.
+        </div>
+    </div>
+</div>

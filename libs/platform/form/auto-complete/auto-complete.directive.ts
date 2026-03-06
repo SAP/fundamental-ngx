@@ -1,5 +1,15 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, EventEmitter, HostListener, Input, NgZone, Output, inject } from '@angular/core';
+import {
+    DestroyRef,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    NgZone,
+    Output,
+    inject
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
@@ -64,6 +74,9 @@ export class AutoCompleteDirective {
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor(private readonly _elementRef: ElementRef<HTMLInputElement>) {
         /**
          * Fixes #10710 / #12983
@@ -78,13 +91,13 @@ export class AutoCompleteDirective {
             );
             const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
 
-            keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this.handleKeyboardEvent(evt));
+            keyupEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((evt) => this.handleKeyboardEvent(evt));
 
-            compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+            compositionStartEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._isComposing = true;
             });
 
-            compositionEndEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+            compositionEndEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._isComposing = false;
                 this.inputText = this._elementRef.nativeElement.value;
             });

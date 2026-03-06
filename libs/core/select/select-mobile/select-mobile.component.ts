@@ -24,6 +24,7 @@ import {
 } from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
 
 /**
@@ -45,7 +46,8 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
         DialogHeaderComponent,
         DialogFooterComponent,
         DialogBodyComponent,
-        DialogCloseButtonComponent
+        DialogCloseButtonComponent,
+        FdTranslatePipe
     ]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {

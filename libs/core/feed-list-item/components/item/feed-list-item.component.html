@@ -68,9 +68,9 @@
     </span>
     @if (!isRichText && hasMore) {
         <a fd-link class="fd-feed-list__link--more" tabindex="0" (click)="toggleTextView()">{{
-            isCollapsed
+            (isCollapsed
                 ? ('coreFeedListItem.moreLabel' | fdTranslate: { count: (text ? text.length : 0) - maxChars })
-                : ('coreFeedListItem.lessLabel' | fdTranslate)
+                : ('coreFeedListItem.lessLabel' | fdTranslate))()
         }}</a>
     }
 </ng-template>

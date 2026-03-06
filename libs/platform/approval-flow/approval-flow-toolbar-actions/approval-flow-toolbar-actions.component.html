@@ -2,14 +2,14 @@
     @if (!graph?.columns?.length && !graph?.errors) {
         <button
             fd-button
-            [label]="'platformApprovalFlow.toolbarAddStepButton' | fdTranslate"
+            [label]="('platformApprovalFlow.toolbarAddStepButton' | fdTranslate)()"
             (click)="_addNode('empty')"
         ></button>
     }
     @if (!!graph?.columns?.length && !isEditMode) {
         <button
             fd-button
-            [label]="'platformApprovalFlow.toolbarEditButton' | fdTranslate"
+            [label]="('platformApprovalFlow.toolbarEditButton' | fdTranslate)()"
             (click)="enterEditMode.emit()"
         ></button>
     }
@@ -17,35 +17,35 @@
         @if (_canAddBefore) {
             <button
                 fd-button
-                [label]="'platformApprovalFlow.toolbarAddApproversBefore' | fdTranslate"
+                [label]="('platformApprovalFlow.toolbarAddApproversBefore' | fdTranslate)()"
                 (click)="_addNode('before')"
             ></button>
         }
         @if (_canAddAfter) {
             <button
                 fd-button
-                [label]="'platformApprovalFlow.toolbarAddApproversAfter' | fdTranslate"
+                [label]="('platformApprovalFlow.toolbarAddApproversAfter' | fdTranslate)()"
                 (click)="_addNode('after')"
             ></button>
         }
         @if (_canAddParallel) {
             <button
                 fd-button
-                [label]="'platformApprovalFlow.toolbarAddApproversParallel' | fdTranslate"
+                [label]="('platformApprovalFlow.toolbarAddApproversParallel' | fdTranslate)()"
                 (click)="_addNode('parallel')"
             ></button>
         }
         @if (_canRemoveSelectedNodes) {
             <button
                 fd-button
-                [label]="'platformApprovalFlow.toolbarRemove' | fdTranslate"
+                [label]="('platformApprovalFlow.toolbarRemove' | fdTranslate)()"
                 (click)="deleteSelectedNodes.emit()"
             ></button>
         }
         @if (_canEditNode) {
             <button
                 fd-button
-                [label]="'platformApprovalFlow.toolbarEditApprover' | fdTranslate"
+                [label]="('platformApprovalFlow.toolbarEditApprover' | fdTranslate)()"
                 (click)="_editSelectedNode()"
             ></button>
         }

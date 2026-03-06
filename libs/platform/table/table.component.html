@@ -216,14 +216,15 @@
                                     @if (!_noDataWrapper && _tableService.visibleColumnsLength() > 0) {
                                         <div>
                                             {{
-                                                emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate)
+                                                emptyTableMessage ||
+                                                    ('platformTable.defaultEmptyMessage' | fdTranslate)()
                                             }}
                                         </div>
                                     } @else if (_tableService.visibleColumnsLength() === 0) {
                                         <div>
                                             {{
                                                 noVisibleColumnsMessage ||
-                                                    ('platformTable.noVisibleColumnsMessage' | fdTranslate)
+                                                    ('platformTable.noVisibleColumnsMessage' | fdTranslate)()
                                             }}
                                         </div>
                                     }

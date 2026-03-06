@@ -1,6 +1,6 @@
 <div class="table-header">
     <h5 fd-title role="heading" aria-level="5">
-        {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
+        {{ ('platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length })() }}
     </h5>
 </div>
 <div
@@ -25,12 +25,14 @@
     >
         <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label">
             {{
-                'platformVHD.selectTabCountHiddenA11yLabel'
+                (
+                    'platformVHD.selectTabCountHiddenA11yLabel'
                     | fdTranslate: { rowCount: displayedData.length, colCount: _tableFilters.main.length }
+                )()
             }}
         </label>
         <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_label">
-            {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
+            {{ ('platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length })() }}
         </label>
         <thead fd-table-header>
             @if (displayedData.length && _tableFilters) {
@@ -121,7 +123,7 @@
                                     <button
                                         fd-button
                                         fdType="transparent"
-                                        [label]="'platformVHD.selectTabMoreBtnLabel' | fdTranslate"
+                                        [label]="('platformVHD.selectTabMoreBtnLabel' | fdTranslate)()"
                                         (click)="_showMoreElements()"
                                     ></button>
                                 </fd-bar-element>
@@ -150,7 +152,7 @@
                     <tr fd-table-row>
                         <td fd-table-cell colspan="100%">
                             <div class="fdp-value-help-dialog__empty-message">
-                                {{ 'platformVHD.searchTableEmptyMessage' | fdTranslate }}
+                                {{ ('platformVHD.searchTableEmptyMessage' | fdTranslate)() }}
                             </div>
                         </td>
                     </tr>

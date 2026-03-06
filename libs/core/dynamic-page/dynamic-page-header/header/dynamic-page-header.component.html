@@ -4,7 +4,7 @@
             <div class="fd-dynamic-page__breadcrumb-container">
                 @if (_dynamicPageBreadcrumbComponent()) {
                     <nav
-                        aria-label="Breadcrumbs"
+                        [attr.aria-label]="('coreDynamicPage.breadcrumbsLabel' | fdTranslate)()"
                         class="fd-dynamic-page__breadcrumb-wrapper"
                         (click)="stopPropagation($event)"
                     >

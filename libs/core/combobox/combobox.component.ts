@@ -75,7 +75,7 @@ import {
     ListTitleDirective
 } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { ComboboxItem } from './combobox-item';
 import { ComboboxItemDirective } from './combobox-item.directive';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
@@ -465,12 +465,15 @@ export class ComboboxComponent<T = any>
     clearInputBtnFocused = false;
 
     /** @hidden */
+    _itemMousedown = false;
+
+    /** @hidden */
+    protected readonly _clearButtonTitle = resolveTranslationSignal('coreCombobox.clearButtonTitle');
+
+    /** @hidden */
     get _customRenderer(): Nullable<TemplateRef<ComboboxItemDirectiveContext<T>>> {
         return this._comboboxItemRenderer?.templateRef || this.itemTemplate;
     }
-
-    /** @hidden */
-    _itemMousedown = false;
 
     /** @hidden */
     private _subscriptions = new Subscription();

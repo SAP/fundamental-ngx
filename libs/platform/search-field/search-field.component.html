@@ -72,8 +72,8 @@
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
-                [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
-                [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
+                [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)()"
+                [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)()"
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
                 [attr.aria-controls]="!!_menuId ? _menuId : null"
                 [attr.aria-expanded]="(_dropdownValues$ | async)?.length !== 0 ? (_isOpen$() ? 'true' : 'false') : null"
@@ -90,8 +90,8 @@
                     <button
                         tabindex="-1"
                         [attr.aria-hidden]="!mobile"
-                        [attr.title]="'platformSearchField.clearButtonTitle' | fdTranslate"
-                        [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
+                        [attr.title]="('platformSearchField.clearButtonTitle' | fdTranslate)()"
+                        [attr.aria-label]="('platformSearchField.clearButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
                         [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                         [attr.disabled]="disabled ? '' : null"
@@ -112,8 +112,8 @@
                         <button
                             tabindex="-1"
                             [attr.aria-hidden]="!mobile"
-                            [attr.title]="'platformSearchField.submitButtonTitle' | fdTranslate"
-                            [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
+                            [attr.title]="('platformSearchField.submitButtonTitle' | fdTranslate)()"
+                            [attr.aria-label]="('platformSearchField.submitButtonTitle' | fdTranslate)()"
                             class="fdp-search-field__submit fd-button fd-button--transparent {{
                                 appearance?.buttonClass
                             }}"
@@ -134,8 +134,8 @@
                     }}"
                 >
                     <button
-                        [attr.aria-title]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
-                        [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
+                        [attr.aria-title]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
+                        [attr.aria-label]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
                             appearance?.buttonClass
                         }}"

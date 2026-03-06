@@ -43,7 +43,7 @@ import {
     PopoverControlComponent,
     PopoverService
 } from '@fundamental-ngx/core/popover';
-import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
 import { NgTemplateOutlet } from '@angular/common';
@@ -253,30 +253,6 @@ export class TimePickerComponent<D>
      */
     @Input()
     parseFormat: unknown;
-
-    /**
-     * Value state "success" aria message.
-     */
-    @Input()
-    valueStateSuccessMessage: string = inject(ValueStateAriaMessageService).success;
-
-    /**
-     * Value state "information" aria message.
-     */
-    @Input()
-    valueStateInformationMessage: string = inject(ValueStateAriaMessageService).information;
-
-    /**
-     * Value state "warning" aria message.
-     */
-    @Input()
-    valueStateWarningMessage: string = inject(ValueStateAriaMessageService).warning;
-
-    /**
-     * Value state "error" aria message.
-     */
-    @Input()
-    valueStateErrorMessage: string = inject(ValueStateAriaMessageService).error;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()

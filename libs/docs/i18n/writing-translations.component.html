@@ -1,76 +1,146 @@
 <header>Writing translations</header>
 <description>
     <p>
-        Translations consist of two parts: the translation identifier and the translation itself. The translation
-        identifier is a string that is used to identify the translation. The translation itself is the string that is
-        displayed to the user.
+        Translations in fundamental-ngx consist of <strong>translation keys</strong> (identifiers) and
+        <strong>translation values</strong> (the actual text displayed to users). Understanding how to write effective
+        translations is essential for internationalizing your application.
     </p>
+    <p><strong>Translation values can be:</strong></p>
+    <ul>
+        <li><strong>Simple strings</strong> - Plain text without any dynamic content</li>
+        <li>
+            <strong>Strings with placeholders</strong> - Text with dynamic values using
+            <code>{{ '{' }}paramName{{ '}' }}</code>
+        </li>
+        <li>
+            <strong>ICU Message Syntax</strong> - Advanced formatting for pluralization, gender, date/time using
+            <a href="https://formatjs.io/docs/core-concepts/icu-syntax/" fd-link target="_blank">ICU expressions</a>
+        </li>
+        <li>
+            <strong>Internal references</strong> - Reusing other translations with
+            <code>{{ '{' }}@@keyName{{ '}' }}</code>
+        </li>
+        <li><strong>Functions</strong> - JavaScript functions for complex logic (when loading from JS objects)</li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="translation-formats" componentName="i18n">
+    Translation value formats
+</fd-docs-section-title>
+<description>
     <p>
-        The format in which the translation is written depends on the type of the loader. If you are loading
-        translations from a JavaScript object, then it can be a function too, along with a string.
+        Let's examine different translation formats using Platform Table as an example. The translation keys
+        use the prefix <code>platformTable</code>. You can find all available keys in the
+        <a routerLink="/platform/table/i18n" fd-link>table i18n documentation</a>.
     </p>
-    <p>
-        Let's take example from Platform Upload collection translation identifiers. They have a prefix
-        <code>platformUploadCollection</code>. Whole list of the identifiers can be found in the
-        <a routerLink="/platform/upload-collection/i18n" fd-link>upload collection i18n documentation page</a>. For the
-        sake of the example, let's take a small list of them from English translations file:
-    </p>
+
+    <h4>JSON/Properties Format (for external files):</h4>
     <fd-code-snippet [file]="jsonExample"></fd-code-snippet>
-    <p>
-        Here, in the list above, we see 4 translation variants: a simple string, a string with a placeholder, with
-        internal references and
-        <a href="https://support.crowdin.com/icu-message-syntax" fd-link target="_blank">ICU expression</a>
+
+    <p class="fd-margin-top--md">
+        This example shows <strong>4 translation patterns</strong>:
     </p>
+    <ol>
+        <li>
+            <strong>ICU Pluralization:</strong> <code>headerMenuFreezePlural</code> and
+            <code>headerMenuUnfreezePlural</code> use
+            <code>{{ '{' }}count, plural, ...{{ '}' }}</code> syntax for proper plural forms
+        </li>
+        <li><strong>Simple string:</strong> <code>headerMenuSortAsc</code> is plain text</li>
+        <li>
+            <strong>String with placeholder:</strong> <code>messageFilterSuccess</code> uses
+            <code>{{ '{' }}columnName{{ '}' }}</code> for dynamic values
+        </li>
+        <li>
+            <strong>Internal references:</strong> <code>messageNoDataWithFilter</code> reuses other
+            translations with
+            <code>{{ '{' }}@@platformTable.headerMenuFreezePlural{{ '}' }}</code>
+        </li>
+    </ol>
+
+    <h4 class="fd-margin-top--md">JavaScript Object Format (for programmatic loading):</h4>
     <p>
-        If you'd loaded translation strings using the JavaScript object, you'd have access to functions as well and
-        above example would take the following form:
+        When loading translations from JavaScript objects, you can use <strong>functions</strong> for more complex logic:
     </p>
     <fd-code-snippet [file]="jsExample"></fd-code-snippet>
-    <p>
-        The JavaScript object is a valid translation source, but it is not the most convenient one if you want to
-        translate your application using a translation service. For that, you need to use format, which is represented
-        by the raw strings in the example above. The format is called
-        <a href="https://formatjs.io/docs/core-concepts/icu-syntax/" fd-link target="_blank">ICU Message Syntax</a>, and
-        it is a standard for the translation strings. It is supported by most of the translation services, and it is the
-        recommended format for the translations.
-    </p>
-    <p>
-        Our translation interpolations are using
-        <a href="https://formatjs.io/" fd-link target="_blank">formatjs</a>
-        library, which is the most popular ICU Message Syntax implementation for JavaScript.
-    </p>
 </description>
+
+<separator></separator>
 <fd-docs-section-title id="internal-references" componentName="i18n">
-    How does internal references work?
+    Internal references (reusing translations)
 </fd-docs-section-title>
 <description>
     <p>
-        Internal references are used to reference other translations. When our translations resolver finds a reference,
-        it tries to find the translation for the reference and replace the reference with the translation, if it is
-        found. Then it assembles one big ICU Message Syntax string and passes it to the formatjs library for the
-        interpolation. One thing to note is that if referenced translation needs some context, then the context is also
-        needed for the referee translation. For example, if we have a translation
-        <code>platformUploadCollection.folderNamePluralization</code>
-        and it is referenced in another translation
-        <code>platformUploadCollection.messageRemoveFoldersAndFilesFailed</code>
-        , then the
-        <code>platformUploadCollection.messageRemoveFoldersAndFilesFailed</code>
-        translation needs to have minimum the same context as the
-        <code>platformUploadCollection.folderNamePluralization</code>
-        translation, otherwise the interpolation will fail.
+        Internal references allow you to <strong>reuse existing translations</strong> within other translations. This
+        helps maintain consistency and reduces duplication. Use the syntax
+        <code>{{ '{' }}@@translationKey{{ '}' }}</code> to reference another translation.
     </p>
+    <p><strong>How it works:</strong></p>
+    <ol>
+        <li>The translation resolver detects the <code>@@</code> prefix</li>
+        <li>It looks up the referenced translation key</li>
+        <li>If found, it replaces the reference with the resolved translation</li>
+        <li>The complete string is then processed through ICU Message Syntax interpolation</li>
+    </ol>
+
+    <p><strong>Example from the code above:</strong></p>
+    <fd-code-snippet [file]="internalReferenceExample"></fd-code-snippet>
+
+    <p class="fd-margin-top--sm">
+        <strong>Important:</strong> If a referenced translation requires parameters (context), the referencing
+        translation must also provide those same parameters. For example, if
+        <code>platformTable.headerMenuFreezePlural</code> needs <code>count</code>, then
+        <code>platformTable.messageNoDataWithFilter</code> must also receive
+        <code>count</code> in its context.
+    </p>
+
+    <fd-message-strip [type]="'warning'" [dismissible]="false" class="fd-margin-top--sm">
+        <strong>Warning:</strong> Internal references create tight coupling and maintenance risks. Avoid using this feature
+        when possible. <strong>Never reference translations from other components</strong> — if the referenced component is
+        deprecated or removed, your translations will break silently at runtime. If you must use internal references, keep
+        them within the same component and only for simple, reusable units like pluralization rules.
+    </fd-message-strip>
 </description>
-<fd-docs-section-title id="escaping-curly-braces">
-    How to escape <code>{{ '{' }}</code> and <code>{{ '}' }}</code> characters?
+
+<separator></separator>
+
+<fd-docs-section-title id="escaping-curly-braces" componentName="i18n">
+    Escaping curly braces
 </fd-docs-section-title>
 <description>
     <p>
-        If you need to use <code>{{ '{' }}</code> or <code>{{ '}' }}</code> characters in your translation, you need to
-        wrap them in single or double quotes.
+        Since ICU Message Syntax uses curly braces <code>{{ '{' }}</code> and <code>{{ '}' }}</code> for parameters and
+        expressions, you need to <strong>escape them</strong> if you want to display them as literal characters.
     </p>
+    <p><strong>Escaping rules:</strong></p>
+    <ul>
+        <li>
+            Wrap curly braces in <strong>single quotes</strong> <code>{{ "'" }}{{ '{' }}{{ "'" }}</code> or <code>{{ "'" }}{{ '}' }}{{ "'" }}</code>
+        </li>
+        <li>
+            Or use <strong>double quotes</strong> <code>{{ '"' }}{{ '{' }}{{ '"' }}</code> or <code>{{ '"' }}{{ '}' }}{{ '"' }}</code>
+        </li>
+    </ul>
+
+    <p><strong>Example:</strong> If you need to display <code>{{ fromToCodeTranslation }}</code> with parameters:</p>
+    <fd-code-snippet [file]="escapingExample"></fd-code-snippet>
+
+    <p class="fd-margin-top--sm">This will render as: <strong>{{ fromToCodeTranslation }}</strong></p>
+
+    <p class="fd-margin-top--sm"><strong>Common use cases:</strong></p>
+    <ul>
+        <li>Showing code examples in UI text</li>
+        <li>Displaying template syntax or placeholders</li>
+        <li>Technical documentation within translations</li>
+        <li>JSON or object literal examples</li>
+    </ul>
+
     <p>
-        For example, if your translation needs to be <code>{{ fromToCodeTranslation }}</code> and your contexts are
-        <code>from</code> and <code>to</code>, then your translation will look like this:
-        <code>{{ fromToCode }}</code>
+        <strong>Tip:</strong> For complex escaping scenarios, consider using Unicode escape sequences or breaking the
+        translation into multiple parts.
     </p>
 </description>
+
+<separator></separator>

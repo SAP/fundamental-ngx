@@ -1,10 +1,8 @@
-import { FactoryProvider, SkipSelf } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { computed, FactoryProvider, Signal, SkipSelf } from '@angular/core';
 import { FdLanguage, FdLanguagePatch, FlatFdLanguage } from '../models';
 import { flattenTranslations } from './flatten-translations';
 import { flatToHierarchy } from './load-json';
-import { FD_LANGUAGE } from './tokens';
+import { FD_LANGUAGE_SIGNAL } from './tokens';
 
 export const patchedObj = (
     lang: FdLanguage,
@@ -12,20 +10,24 @@ export const patchedObj = (
 ): FdLanguagePatch => (typeof patch === 'function' ? patch(lang) : patch);
 
 /**
- * DI utility function, that allows to override `FD_LANGUAGE` injection token with part of the language object, that is used globally
- * @param languagePatch part of the language object to be overriden, or a function that returns such object and receives existing language as a parameter
+ * DI utility function that allows overriding `FD_LANGUAGE_SIGNAL` injection token with a patched language.
+ *
+ * **Modern signal-based API** - Returns a computed signal that reacts to parent language changes.
+ *
+ * @param languagePatch - Part of the language object to be overridden, or a function that returns such object and receives existing language as a parameter
  *
  * @example
  * ```typescript
  * import { patchLanguage } from '@fundamental-ngx/i18n';
  *
  * @Component({
- *    ...
+ *    selector: 'my-component',
+ *    template: '{{ ('platformTextarea.label' | fdTranslate)() }}',
+ *    standalone: true,
  *    providers: [
  *         patchLanguage({
- *             // it's possible to partially override translations for component
- *             // overriding only 3 out of all translation strings for textarea here
- *             // also function can be used to provide complex translation logic
+ *             // Partially override translations for this component
+ *             // Overriding only 3 out of all translation strings for textarea here
  *             platformTextarea: {
  *                 counterMessageCharactersRemainingSingular: 'You can type 1 more character',
  *                 counterMessageCharactersRemainingPlural: 'You can type {{ count }} more characters',
@@ -41,23 +43,33 @@ export const patchedObj = (
  * })
  * export class SomeComponent {}
  * ```
+ *
+ * **Function patch for dynamic patching:**
+ * ```typescript
+ * providers: [
+ *     patchLanguage((lang) => ({
+ *         platformButton: {
+ *             save: lang.platformButton.save.toUpperCase() // Transform parent value
+ *         }
+ *     }))
+ * ]
+ * ```
  */
 export function patchLanguage(
     languagePatch: FdLanguagePatch | ((lang: FdLanguage) => FdLanguagePatch)
 ): FactoryProvider {
     return {
-        provide: FD_LANGUAGE,
-        useFactory: (lang$: Observable<FdLanguage>) =>
-            lang$.pipe(
-                map((lang) => {
-                    const original = flattenTranslations(lang) as FlatFdLanguage;
-                    const patch = flattenTranslations(patchedObj(lang, languagePatch));
-                    return flatToHierarchy({
-                        ...original,
-                        ...patch
-                    });
-                })
-            ),
-        deps: [[new SkipSelf(), FD_LANGUAGE]]
+        provide: FD_LANGUAGE_SIGNAL,
+        useFactory: (parentLangSignal: Signal<FdLanguage>) =>
+            computed(() => {
+                const lang = parentLangSignal();
+                const original = flattenTranslations(lang) as FlatFdLanguage;
+                const patch = flattenTranslations(patchedObj(lang, languagePatch));
+                return flatToHierarchy({
+                    ...original,
+                    ...patch
+                });
+            }),
+        deps: [[new SkipSelf(), FD_LANGUAGE_SIGNAL]]
     };
 }

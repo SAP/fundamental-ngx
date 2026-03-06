@@ -20,6 +20,7 @@ import { DYNAMIC_PAGE_HEADER_TOKEN } from '@fundamental-ngx/core/shared';
 import { NgTemplateOutlet } from '@angular/common';
 import { IgnoreClickOnSelectionDirective } from '@fundamental-ngx/cdk/utils';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
@@ -47,7 +48,7 @@ let dynamicPageTitleId = 0;
             useExisting: DynamicPageHeaderComponent
         }
     ],
-    imports: [NgTemplateOutlet, IgnoreClickOnSelectionDirective]
+    imports: [NgTemplateOutlet, IgnoreClickOnSelectionDirective, FdTranslatePipe]
 })
 export class DynamicPageHeaderComponent implements OnInit {
     /**

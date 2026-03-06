@@ -1,5 +1,11 @@
 // Do not modify, it's automatically created. Modify translations.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',
         defaultTitle: 'Please wait'
@@ -58,7 +64,9 @@ export default {
         expandLabel: 'Expand Header',
         collapseLabel: 'Collapse Header',
         pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        unpinLabel: 'Unpin Header',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} more',
@@ -84,7 +92,12 @@ export default {
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        closable: 'Closable',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 result list item.',
@@ -94,7 +107,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: 'Contains total tokens: {length}.'
+        tokensCountText: 'Contains total tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
@@ -143,6 +157,9 @@ export default {
     coreProductSwitch: {
         ariaLabel: 'Product Switch'
     },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreShellbar: {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
         cancel: 'Cancel',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Decline'
     },
     coreTabs: {
-        tabListExpandButtonText: 'More'
+        tabListExpandButtonText: 'More',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'More',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Time picker input',
-        timePickerButtonLabel: 'Open picker'
+        timePickerButtonLabel: 'Open picker',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Deletable',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Wizard'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Click or press enter to view more details',
@@ -314,7 +343,11 @@ export default {
         statusNotStarted: 'not started'
     },
     platformFeedInput: {
-        userTitle: 'User'
+        userTitle: 'User',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'More'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Selected Items and Conditions',
@@ -575,7 +608,8 @@ export default {
         clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Edit'
+        summarySectionEditStep: 'Edit',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'All',
@@ -588,7 +622,8 @@ export default {
             pattern: 'The field value is invalid',
             required: 'The field is mandatory',
             requiredTrue: 'The field is mandatory'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Manage',
@@ -617,6 +652,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Select an Option'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expand node',

@@ -44,8 +44,8 @@ import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/ico
 import { InputGroupAddOnDirective } from '@fundamental-ngx/core/input-group';
 import { ListComponent, ListItemComponent } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Observable, Subscription, firstValueFrom, fromEvent, merge, startWith } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { BehaviorSubject, Subscription, fromEvent, merge, startWith } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
 
@@ -221,14 +221,16 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _tokenElementFocusedSub: Nullable<Subscription>;
 
     /** @hidden */
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         private _renderer: Renderer2,
         @Inject(DOCUMENT) private readonly _document: Document,
-        private readonly _liveAnnouncer: LiveAnnouncer,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
+        private readonly _liveAnnouncer: LiveAnnouncer
     ) {
         this._eventListeners.push(
             this._renderer.listen('window', 'click', (e: Event) => {
@@ -703,7 +705,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     private async _makeTokenizerFocusCountAnnouncement(): Promise<void> {
-        const lang = await firstValueFrom(this._language$);
+        const lang = this._langSignal();
         const message = this._translationResolver.resolve(lang, 'coreMultiInput.tokensCountText', {
             length: this.tokenList.length ? this.tokenList.length : 0
         });

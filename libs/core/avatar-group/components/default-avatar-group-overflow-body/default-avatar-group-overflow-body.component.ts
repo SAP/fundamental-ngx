@@ -17,6 +17,7 @@ import {
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subscription, map, merge, startWith } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AvatarGroupItemRendererDirective } from '../../directives/avatar-group-item-renderer.directive';
@@ -34,7 +35,8 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
         BarComponent,
         ButtonBarComponent,
         BarElementDirective,
-        BarLeftDirective
+        BarLeftDirective,
+        FdTranslatePipe
     ],
     host: {
         class: 'fd-popover__wrapper',

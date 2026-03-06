@@ -1,5 +1,5 @@
 <label class="fd-time__slider-label">{{
-    timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.label | fdTranslate))
+    timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.label | fdTranslate)())
 }}</label>
 @if (active && spinners) {
     <button
@@ -9,11 +9,11 @@
         tabindex="-1"
         [title]="
             timeConfig?.decreaseLabel ||
-            (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
+            (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate)())
         "
         [ariaLabel]="
             timeConfig?.decreaseLabel ||
-            (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
+            (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate)())
         "
         (keyup)="spinnerButtonKeyupHandle($event, true)"
         (click)="scrollUp($event)"
@@ -59,7 +59,7 @@
         [attr.aria-labelledby]="currentIndicatorValueId"
         [attr.aria-description]="
             timeConfig?.navigationInstruction ||
-            (internalTranslationConfig && (internalTranslationConfig.navigationInstruction | fdTranslate))
+            (internalTranslationConfig && (internalTranslationConfig.navigationInstruction | fdTranslate)())
         "
         (focus)="_onFocusIndicator()"
     >
@@ -72,7 +72,8 @@
         >
             {{ activeValue?.label }}
             {{
-                timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.fullLabel | fdTranslate))
+                timeConfig?.label ||
+                    (internalTranslationConfig && (internalTranslationConfig.fullLabel | fdTranslate)())
             }}
         </span>
     </div>
@@ -90,11 +91,11 @@
         tabindex="-1"
         [title]="
             timeConfig?.increaseLabel ||
-            (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))
+            (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate)())
         "
         [ariaLabel]="
             timeConfig?.increaseLabel ||
-            (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))
+            (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate)())
         "
         (keyup)="spinnerButtonKeyupHandle($event)"
         (click)="scrollDown()"

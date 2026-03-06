@@ -30,7 +30,7 @@ let objectIdentifierId = 0;
             [attr.id]="descriptionId()"
             [attr.aria-hidden]="hasLinks() ? 'true' : null"
         >
-            {{ ariaLabel() || ('coreObjectIdentifier.srOnlyAriaLabel' | fdTranslate) }}
+            {{ ariaLabel() || ('coreObjectIdentifier.srOnlyAriaLabel' | fdTranslate)() }}
         </span>
     `,
     styleUrl: './object-identifier.component.scss',

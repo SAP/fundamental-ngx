@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_sl.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zasedeno',
         defaultTitle: 'Počakajte'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Razširitev glave',
         collapseLabel: 'Skrčitev glave',
         pinLabel: 'Pripenjanje glave',
-        unpinLabel: 'Odpenjanje glave'
+        unpinLabel: 'Odpenjanje glave',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'Še {count}',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Vrstica z opozorilnim obvestilom',
         announcementError: 'Vrstica z obvestilom o napaki',
         announcementSuccess: 'Vrstica z obvestilom o uspehu',
-        closable: 'Je mogoče zapreti'
+        closable: 'Je mogoče zapreti',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: 'Seznam postavk z 1 rezultatom.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Krmarjenje po izbirah s puščičnima tipkama navzgor in navzdol.',
         escapeNavigateTokens:
             'Pritisnite Esc, da zapustite vnosno polje, in se s puščičnima tipkama levo in desno pomikate po izbranih možnostih.',
-        tokensCountText: 'Vsebuje skupno število žetonov: {dolžina}.'
+        tokensCountText: 'Vsebuje skupno število žetonov: {dolžina}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Glavno krmarjenje',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Odkloni'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Več'
+        tabListExpandButtonText: 'Več',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Več',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Vnos izbirnika časa',
-        timePickerButtonLabel: 'Odpiranje izbirnika'
+        timePickerButtonLabel: 'Odpiranje izbirnika',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Z možnostjo izbrisa',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Čarovnik'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Za ogled več podrobnosti kliknite ali pritisnite Enter',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'ni začeto'
     },
     platformFeedInput: {
-        userTitle: 'Uporabnik'
+        userTitle: 'Uporabnik',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Več'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Izbrani elementi in pogoji',
@@ -576,7 +609,8 @@ export default {
         clearFilters: 'Počisti filtre'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Uredi'
+        summarySectionEditStep: 'Uredi',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Vse',
@@ -589,7 +623,8 @@ export default {
             pattern: 'Vrednost polja ni veljavna',
             required: 'Polje je obvezno',
             requiredTrue: 'Polje je obvezno'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Upravljaj',
@@ -618,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Izberi možnost'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Razširitev vozlišča',

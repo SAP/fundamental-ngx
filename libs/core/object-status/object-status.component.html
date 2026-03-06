@@ -17,17 +17,17 @@
     <span class="fd-object-status__text" [class]="_textClass">{{ label() }}</span>
 }
 @if (!clickable()) {
-    <span class="fd-object-status__sr-only">{{ ariaLabel() || ('coreObjectStatus.ariaLabel' | fdTranslate) }}</span>
+    <span class="fd-object-status__sr-only">{{ ariaLabel() || ('coreObjectStatus.ariaLabel' | fdTranslate)() }}</span>
 }
 @if (indicationColor()) {
     <span class="fd-object-status__sr-only">{{
-        ('coreObjectStatus.indicationColor' | fdTranslate) + indicationColorCode()
+        ('coreObjectStatus.indicationColor' | fdTranslate)() + indicationColorCode()
     }}</span>
 }
 @if (status()) {
     @if (statusMessage()) {
         <span class="fd-object-status__sr-only">{{ statusMessage() }}</span>
     } @else {
-        <span class="fd-object-status__sr-only">{{ statusTranslateKey() | fdTranslate }}</span>
+        <span class="fd-object-status__sr-only">{{ (statusTranslateKey() | fdTranslate)() }}</span>
     }
 }

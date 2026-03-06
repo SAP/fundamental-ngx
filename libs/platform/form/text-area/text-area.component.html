@@ -26,19 +26,23 @@
         @if (counterExcessOrRemaining === 'excess') {
             <span
                 [innerHtml]="
-                    (exceededCharCount === 1
-                        ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
-                        : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
-                    ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                    (
+                        (exceededCharCount === 1
+                            ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
+                            : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
+                        ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                    )()
                 "
             ></span>
         } @else {
             <span
                 [innerHtml]="
-                    (exceededCharCount === 1
-                        ? 'platformTextarea.counterMessageCharactersRemainingSingular'
-                        : 'platformTextarea.counterMessageCharactersRemainingPlural'
-                    ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                    (
+                        (exceededCharCount === 1
+                            ? 'platformTextarea.counterMessageCharactersRemainingSingular'
+                            : 'platformTextarea.counterMessageCharactersRemainingPlural'
+                        ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                    )()
                 "
             ></span>
         }

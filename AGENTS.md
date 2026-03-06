@@ -31,6 +31,7 @@ Purpose: Comprehensive guide for AI agents and developers working with Angular 2
         - [Pattern 2: Component Composition](#pattern-2-component-composition-with-injectiontokens)
         - [Programmatic Signal Input Updates](#programmatic-signal-input-updates)
     - [State Management](#state-management)
+    - [Internationalization (i18n) with Signals](#internationalization-i18n-with-signals)
     - [Render Lifecycle Hooks](#render-lifecycle-hooks)
     - [Resource API (Experimental)](#resource-api-experimental)
     - [Effect vs Observables](#effect-vs-observables)
@@ -1648,6 +1649,211 @@ export class FormField {
 - Use `computed()` for derived state
 - Keep state transformations pure and predictable
 - Do NOT use `mutate` on signals, use `update` or `set` instead
+
+---
+
+### Internationalization (i18n) with Signals
+
+**Summary for AI Agents:**
+
+The `@fundamental-ngx/i18n` library provides signal-based internationalization with zoneless compatibility.
+
+**Modern Signal-Based API:**
+
+- **Signal tokens** → `FD_LANGUAGE_SIGNAL`, `FD_LOCALE_SIGNAL`
+- **Signal resolution** → `resolveTranslationSignal()`, `resolveTranslationSignalFn()`
+- **Template usage** → `{{ translatedLabel() }}` (no async pipe needed)
+
+#### Basic Usage Pattern
+
+**1. Direct translation with signal:**
+
+```typescript
+import { Component, computed, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, resolveTranslationSignal } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'my-component',
+    template: '{{ label() }}',
+    standalone: true
+})
+export class MyComponent {
+    // Inject signal token
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    // Create computed translation signal
+    readonly label = computed(() => this.langSignal().coreButton.label);
+
+    // Alternative: use helper function for single translation
+    readonly tooltipSignal = resolveTranslationSignal('coreButton.tooltip');
+}
+```
+
+**Benefits:**
+
+- ✅ No `async` pipe in templates
+- ✅ Simpler template syntax
+- ✅ Better performance (no RxJS overhead)
+- ✅ Zoneless compatible
+- ✅ Automatic change detection
+
+**2. Translation factory for multiple keys:**
+
+```typescript
+import { Component, computed, inject } from '@angular/core';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'my-form',
+    template: `
+        <button>{{ submitLabel() }}</button>
+        <button>{{ cancelLabel() }}</button>
+    `,
+    standalone: true
+})
+export class MyForm {
+    // Create translation factory once
+    private readonly translate = resolveTranslationSignalFn();
+
+    // Use factory for multiple translations
+    readonly submitLabel = this.translate('coreForm.submit');
+    readonly cancelLabel = this.translate('coreForm.cancel');
+}
+```
+
+**When to use:**
+
+- Multiple translations in the same component
+- Want to avoid repeating inject() calls
+- Need consistent translation resolution logic
+
+**3. Translation with context/variables:**
+
+```typescript
+import { Component, computed, signal } from '@angular/core';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'user-greeting',
+    template: '{{ greeting() }}',
+    standalone: true
+})
+export class UserGreeting {
+    private readonly translate = resolveTranslationSignalFn();
+    readonly username = signal('John');
+
+    // Pass context object for variable substitution
+    readonly greeting = this.translate('coreMessages.welcome', {
+        name: this.username()
+    });
+}
+```
+
+**Translation key example:**
+
+```typescript
+// In language file:
+coreMessages: {
+    welcome: 'Welcome, {{name}}!';
+}
+```
+
+**4. Custom language/locale:**
+
+```typescript
+import { Component } from '@angular/core';
+import { resolveTranslationSignalFn, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'french-component',
+    standalone: true
+})
+export class FrenchComponent {
+    // Override default language
+    private readonly translate = resolveTranslationSignalFn({
+        fdLang: signal(FD_LANGUAGE_FRENCH),
+        fdLocale: signal('fr-FR')
+    });
+
+    readonly label = this.translate('coreButton.label');
+}
+```
+
+**When to use:**
+
+- Component needs a different language than global setting
+- Testing with specific language
+- Multi-language UI sections
+
+#### Changing Language Globally
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'language-switcher',
+    template: ` <button (click)="switchToGerman()">Deutsch</button> `,
+    standalone: true
+})
+export class LanguageSwitcher {
+    // Inject writable signal
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    switchToGerman(): void {
+        // Update the signal - all translations react automatically
+        this.langSignal.set(FD_LANGUAGE_GERMAN);
+    }
+}
+```
+
+**How it works:**
+
+- `FD_LANGUAGE_SIGNAL` is a `WritableSignal` provided at root level
+- All translation signals are `computed()` from this source
+- Changing the signal triggers automatic updates across the app
+
+#### Architecture Notes
+
+**Signal-first design:**
+
+- `FD_LANGUAGE_SIGNAL` is the source of truth (WritableSignal)
+- All translation signals are `computed()` from this source
+- Same pattern for `FD_LOCALE_SIGNAL` / `FD_LOCALE`
+
+**Why signals:**
+
+- Simpler mental model (just values that change)
+- Better performance (fine-grained reactivity)
+- Zoneless compatible
+- Less boilerplate (no pipe, map, async)
+- Type-safe by default
+
+**Testing with signals:**
+
+```typescript
+import { TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+
+describe('MyComponent', () => {
+    it('should translate label', () => {
+        const langSignal = signal(FD_LANGUAGE_ENGLISH);
+
+        TestBed.configureTestingModule({
+            providers: [{ provide: FD_LANGUAGE_SIGNAL, useValue: langSignal }]
+        });
+
+        const fixture = TestBed.createComponent(MyComponent);
+        expect(fixture.nativeElement.textContent).toContain('Submit');
+
+        // Test language change
+        langSignal.set(FD_LANGUAGE_GERMAN);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('Senden');
+    });
+});
+```
 
 ---
 

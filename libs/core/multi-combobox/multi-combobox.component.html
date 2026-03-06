@@ -35,8 +35,8 @@
             [isExpanded]="!mobile() && isOpen && _suggestions().length > 0"
             [attr.aria-disabled]="_cva.disabled || _cva.readonly"
             [attr.aria-readonly]="_cva.readonly"
-            [glyphAriaLabel]="_cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
-            [iconTitle]="addonIconTitle() || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
+            [glyphAriaLabel]="_cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)()"
+            [iconTitle]="addonIconTitle() || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)()"
             (addOnButtonClicked)="_addOnClicked($event)"
             (click)="mobile() && !isOpen && _onPrimaryButtonClick(false)"
             (keydown)="_navigateByTokens($event)"
@@ -65,7 +65,7 @@
                     type="text"
                     role="combobox"
                     autocomplete="off"
-                    [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
+                    [ariaLabel]="('coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate)()"
                     [attr.aria-labelledby]="_cva.ariaLabelledBy"
                     [attr.aria-autocomplete]="autoComplete() && !mobile() ? 'list' : null"
                     [attr.aria-owns]="autoComplete() && !mobile() ? _cva.id + '-result' : null"
@@ -117,7 +117,7 @@
             type="text"
             role="combobox"
             autocomplete="off"
-            [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
+            [ariaLabel]="('coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate)()"
             [attr.aria-labelledby]="_cva.ariaLabelledBy"
             [attr.aria-autocomplete]="autoComplete() && !mobile() ? 'list' : null"
             [attr.aria-owns]="autoComplete() && !mobile() ? _cva.id + '-result' : null"
@@ -179,7 +179,7 @@
                         fd-list-item
                         fd-list-group-header
                         ariaRole="group"
-                        [attr.aria-roledescription]="'coreMultiComboBox.listGroupHeader' | fdTranslate"
+                        [attr.aria-roledescription]="('coreMultiComboBox.listGroupHeader' | fdTranslate)()"
                         [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                         [attr.aria-label]="group.label"
                     >

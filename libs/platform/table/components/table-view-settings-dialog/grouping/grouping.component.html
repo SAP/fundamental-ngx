@@ -1,6 +1,6 @@
 <span role="heading" [attr.aria-level]="headingLevel() + 1" fd-list-group-header>
     <span fd-list-title [attr.id]="groupOrderHeaderId">
-        {{ 'platformTable.groupDialogGroupOrderHeader' | fdTranslate }}
+        {{ ('platformTable.groupDialogGroupOrderHeader' | fdTranslate)() }}
     </span>
 </span>
 <ul fd-list [selection]="true">
@@ -12,7 +12,7 @@
             [ngModel]="direction()"
             (ngModelChange)="_groupOrderChange($event)"
         ></fd-radio-button>
-        <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderAsc' | fdTranslate }}</span>
+        <span fd-list-title>{{ ('platformTable.groupDialogGroupOrderAsc' | fdTranslate)() }}</span>
     </li>
     <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="groupOrderHeaderId">
         <fd-radio-button
@@ -22,12 +22,12 @@
             [ngModel]="direction()"
             (ngModelChange)="_groupOrderChange($event)"
         ></fd-radio-button>
-        <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderDesc' | fdTranslate }}</span>
+        <span fd-list-title>{{ ('platformTable.groupDialogGroupOrderDesc' | fdTranslate)() }}</span>
     </li>
 </ul>
 <span role="heading" [attr.aria-level]="headingLevel() + 1" fd-list-group-header>
     <span fd-list-title [attr.id]="groupByHeaderId">
-        {{ 'platformTable.groupDialogGroupByHeader' | fdTranslate }}
+        {{ ('platformTable.groupDialogGroupByHeader' | fdTranslate)() }}
     </span>
 </span>
 <ul fd-list [selection]="true">
@@ -39,7 +39,7 @@
             [ngModel]="field()"
             (ngModelChange)="_groupFieldChange($event)"
         ></fd-radio-button>
-        <span fd-list-title>{{ 'platformTable.groupDialogNotGroupedLabel' | fdTranslate }}</span>
+        <span fd-list-title>{{ ('platformTable.groupDialogNotGroupedLabel' | fdTranslate)() }}</span>
     </li>
     @for (column of columns(); track column) {
         <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="groupByHeaderId">

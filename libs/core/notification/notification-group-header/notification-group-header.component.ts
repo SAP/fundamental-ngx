@@ -1,9 +1,8 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, ViewEncapsulation } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
 
@@ -60,7 +59,7 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
-    private readonly _lang = toSignal(inject(FD_LANGUAGE));
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
@@ -70,7 +69,7 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
 
         // Set up translation for title - only sets default if title is empty
         effect(() => {
-            const lang = this._lang();
+            const lang = this._langSignal();
             // Only set from i18n if title hasn't been set externally
             if (lang && !this.title()) {
                 this.title.set(this._translationResolver.resolve(lang, 'coreNotification.groupHeaderTitle'));
