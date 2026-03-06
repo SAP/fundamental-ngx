@@ -538,7 +538,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     private _setProductSwitchDensities(): void {
         this.productSwitches.forEach((productSwitch) => {
-            productSwitch._contentDensity = ContentDensityMode.COZY;
+            productSwitch.contentDensity.set(ContentDensityMode.COZY);
         });
     }
 }

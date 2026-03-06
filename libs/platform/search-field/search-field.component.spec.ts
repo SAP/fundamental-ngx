@@ -2,7 +2,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { firstValueFrom, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
@@ -155,8 +155,8 @@ describe('SearchFieldComponent', () => {
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
 
-        // Verify suggestions were set correctly by checking the observable
-        const dropdownValues = await firstValueFrom(component._dropdownValues$);
+        // Verify suggestions were set correctly by checking the signal
+        const dropdownValues = component.dropdownValues();
         expect(dropdownValues.length).toBe(3);
         expect(dropdownValues[0].value).toBe('Apple');
         expect(dropdownValues[1].value).toBe('Banana');
@@ -171,7 +171,7 @@ describe('SearchFieldComponent', () => {
         await fixture.whenStable();
 
         // Verify dropdown opens
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
     });
 
     it('should allow "dropdown" observable string list to be set', async () => {
@@ -182,7 +182,7 @@ describe('SearchFieldComponent', () => {
         await fixture.whenStable();
 
         // Verify observable suggestions were set correctly
-        const dropdownValues = await firstValueFrom(component._dropdownValues$);
+        const dropdownValues = component.dropdownValues();
         expect(dropdownValues.length).toBe(3);
         expect(dropdownValues[0].value).toBe('Apple');
         expect(dropdownValues[1].value).toBe('Banana');
@@ -197,7 +197,7 @@ describe('SearchFieldComponent', () => {
         await fixture.whenStable();
 
         // Verify dropdown opens
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
     });
 
     it('should show the "category button" if "categories" is set with one or more items', () => {
@@ -280,7 +280,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check to see that menu is closed
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
 
         // simulate keyboard entry
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
@@ -290,7 +290,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // Verify dropdown opened
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
     });
 
     it('should not create multiple overlays with subsequent keyboard entries', () => {
@@ -300,7 +300,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check to see that menu is closed
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
 
         // simulate keyboard entry
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
@@ -309,7 +309,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
 
         // Subsequent keyboard entry
         textInput.nativeElement.value = 'ap';
@@ -318,7 +318,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // Dropdown should still be open (not closed and reopened)
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
     });
 
     it('should set input text and close dropdown on select of item', async () => {
@@ -328,7 +328,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check to see that menu is closed
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
 
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
 
@@ -338,7 +338,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
 
         // Simulate selecting an item by calling the component method
         component.onItemClick('Apple');
@@ -346,7 +346,7 @@ describe('SearchFieldComponent', () => {
         await fixture.whenStable();
 
         // Verify dropdown closed and input text set
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
         expect(component.inputText()).toBe('Apple');
 
         expect(host.inputValue).toEqual({ text: 'Apple', category: null });
@@ -375,12 +375,12 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // Verify dropdown is open with filtered text
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
         expect(component.inputText()).toBe('pp');
 
         // The suggestionMatches pipe in the template filters based on inputText
         // Verify that all suggestions are available (filtering happens in template)
-        const allSuggestions = await firstValueFrom(component._dropdownValues$);
+        const allSuggestions = component.dropdownValues();
         expect(allSuggestions.length).toBe(8);
     });
 
@@ -463,7 +463,7 @@ describe('SearchFieldComponent', () => {
 
         expect(host.submitValue).toEqual({ text: 'appl', category: null });
 
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
     });
 
     it('should be able to be put into "isLoading" state', () => {
@@ -549,7 +549,7 @@ describe('SearchFieldComponent', () => {
         expect(component.inputText()).toBe('');
 
         // check dropdown
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
 
         expect(host.inputValue).toEqual({ text: '', category: null });
     });
@@ -567,7 +567,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // Verify dropdown opened
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
 
         // Simulate selecting first item via keyboard (test the component method)
         component.onItemClick('Apple');
@@ -577,7 +577,7 @@ describe('SearchFieldComponent', () => {
         expect(component.inputText()).toBe('Apple');
 
         // check dropdown closed
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
     });
 
     it('should close the suggestion dropdown on outside click', fakeAsync(() => {
@@ -593,7 +593,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // check dropdown is open
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
 
         // Test close behavior directly via component method
         // The popover handles outside clicks, but we test the close functionality
@@ -601,7 +601,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // Verify dropdown closed
-        expect(component._isSuggestionMenuOpen$()).toBeFalsy();
+        expect(component._isSuggestionMenuOpen()).toBeFalsy();
     }));
 });
 
@@ -695,7 +695,7 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture.detectChanges();
 
         // Verify dropdown opened
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
         expect(component.inputText()).toBe('apple');
 
         // simulate input entry with different keyword
@@ -704,7 +704,7 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture.detectChanges();
 
         // Verify dropdown still open with new filter
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
         expect(component.inputText()).toBe('an');
     });
 
@@ -720,7 +720,7 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture.detectChanges();
 
         // Verify dropdown opened with filtered text
-        expect(component._isSuggestionMenuOpen$()).toBeTruthy();
+        expect(component._isSuggestionMenuOpen()).toBeTruthy();
         expect(component.inputText()).toBe('al');
     });
 });

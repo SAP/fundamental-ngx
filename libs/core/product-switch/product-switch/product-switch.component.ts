@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, contentChild, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChild, input, model, output, signal } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -80,7 +80,7 @@ export class ProductSwitchComponent {
     readonly beforeOpen = output<void>();
 
     /** @hidden */
-    _contentDensity: ContentDensityMode;
+    contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
 
     /** @hidden */
     protected readonly customProductSwitchButton = contentChild(ProductSwitchButtonDirective);

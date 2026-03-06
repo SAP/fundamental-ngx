@@ -1,6 +1,6 @@
 import { CdkTrapFocus, FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
-import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     booleanAttribute,
     ChangeDetectionStrategy,
@@ -12,13 +12,11 @@ import {
     ElementRef,
     forwardRef,
     inject,
-    Inject,
     Injector,
     input,
     model,
     OnDestroy,
     OnInit,
-    Optional,
     output,
     Pipe,
     PipeTransform,
@@ -30,7 +28,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { isObservable, merge, Observable, of, Subject } from 'rxjs';
+import { isObservable, merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -60,7 +58,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { Appearance, SearchComponent } from '@fundamental-ngx/core/shared';
-import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT, Shellbar } from '@fundamental-ngx/core/shellbar';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
@@ -143,7 +141,6 @@ let searchFieldIdCount = 0;
         IconComponent,
         NgClass,
         SearchFieldSuggestionDirective,
-        AsyncPipe,
         SearchHighlightPipe,
         FdTranslatePipe,
         PopoverModule,
@@ -263,7 +260,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     get searchFieldValue(): SearchInput {
         return {
             text: this.inputText(),
-            category: this._currentCategory?.value || null
+            category: this._currentCategory()?.value || null
         };
     }
 
@@ -307,19 +304,19 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     readonly busyIndicatorAriaValueText = input<string>('');
 
     /** @hidden Focus state */
-    _isFocused = false;
+    _isFocused = signal(false);
 
     /**
-     * Observable list of suggestion items to populate dropdown menu.
+     * Signal list of suggestion items to populate dropdown menu.
      * @hidden
      */
-    _dropdownValues$: Observable<SuggestionItem[]> = of([]);
+    dropdownValues = signal<SuggestionItem[]>([]);
 
     /**
      * Currently set category.
      * @hidden
      */
-    _currentCategory?: ValueLabelItem | null;
+    _currentCategory = signal<ValueLabelItem | null | undefined>(undefined);
 
     /**
      * Whether or not to show category dropdown. This is dependent on length of `categoryValues` property.
@@ -346,7 +343,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     _popoverHeaderId = '';
 
     /** @hidden */
-    _popoverBodyId = '';
+    _popoverBodyId = signal('');
 
     /** @hidden */
     isOpen = false;
@@ -358,10 +355,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     _isSearchDone = false;
 
     /** @hidden */
-    _isSuggestionMenuOpen$ = signal(false);
+    _isSuggestionMenuOpen = signal(false);
 
     /** @hidden */
-    _autoCompleteSuggestions: SuggestionItem[] = [];
+    autoCompleteSuggestions: SuggestionItem[] = [];
 
     /** @hidden */
     _selectedSuggestionItem: SuggestionItem | null;
@@ -370,16 +367,19 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     _autoCompleteMostRecentSuggestionItem: SuggestionItem;
 
     /** @hidden */
-    _selectedSuggestionItemId: string;
+    _selectedSuggestionItemId = signal('');
 
     /** @hidden */
-    _categorySelectDescription: string;
+    _categorySelectDescription = signal('');
 
     /** @hidden */
-    _actionButtonTabIndex: -1 | 0 = -1;
+    _actionButtonTabIndex = signal<-1 | 0>(-1);
 
     /** @hidden */
-    private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
+    protected readonly contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    protected readonly _shellbar: Shellbar | null = inject(FD_SHELLBAR_COMPONENT, { optional: true });
 
     /** @hidden */
     private _currentSearchSuggestionAnnouncementMessage = '';
@@ -400,14 +400,15 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _mobileComponent: ComponentRef<SearchFieldMobileComponent>;
 
     /** @hidden */
+    private _suggestionsSubscription: Subscription;
+
+    /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        readonly _dynamicComponentService: DynamicComponentService,
-        readonly contentDensityObserver: ContentDensityObserver,
-        @Optional() @Inject(FD_SHELLBAR_COMPONENT) protected _shellbar: ShellbarComponent
+        readonly _dynamicComponentService: DynamicComponentService
     ) {
         super();
 
@@ -415,11 +416,17 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         effect(() => {
             const suggestionsValue = this.suggestions();
             if (Array.isArray(suggestionsValue)) {
-                this._dropdownValues$ = of(suggestionsValue);
+                this.dropdownValues.set(suggestionsValue);
             } else if (isObservable(suggestionsValue)) {
-                this._dropdownValues$ = suggestionsValue;
+                if (!this._suggestionsSubscription) {
+                    this._suggestionsSubscription = suggestionsValue
+                        .pipe(takeUntilDestroyed(this._destroyRef))
+                        .subscribe((values) => {
+                            this.dropdownValues.set(values);
+                        });
+                }
             } else {
-                this._dropdownValues$ = of([]);
+                this.dropdownValues.set([]);
             }
         });
 
@@ -446,33 +453,27 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         });
 
         // Effect to handle mobile changes - only setup when actually needed
-        effect(
-            () => {
-                const isMobile = this.mobile();
-                if (isMobile) {
-                    // Defer to next tick to avoid running during construction
-                    queueMicrotask(() => {
-                        this._setUpMobileMode();
-                    });
-                }
-            },
-            { allowSignalWrites: true }
-        );
+        effect(() => {
+            const isMobile = this.mobile();
+            if (isMobile) {
+                // Defer to next tick to avoid running during construction
+                queueMicrotask(() => {
+                    this._setUpMobileMode();
+                });
+            }
+        });
 
         // Watch for changes to suggestionItems using an effect
         // Use afterNextRender to ensure view is initialized
-        effect(
-            () => {
-                const items = this.suggestionItems();
-                // Use queueMicrotask to defer execution after view initialization
-                queueMicrotask(() => {
-                    if (items.length > 0) {
-                        this._resetKeyManager();
-                    }
-                });
-            },
-            { allowSignalWrites: true }
-        );
+        effect(() => {
+            const items = this.suggestionItems();
+            // Use queueMicrotask to defer execution after view initialization
+            queueMicrotask(() => {
+                if (items.length > 0) {
+                    this._resetKeyManager();
+                }
+            });
+        });
     }
 
     /** @hidden */
@@ -482,7 +483,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._submitId = `${baseId}-submit-${searchFieldIdCount++}`;
         this._menuId = `${baseId}-menu-${searchFieldIdCount++}`;
         this._popoverHeaderId = `${baseId}-popover-header-${searchFieldIdCount++}`;
-        this._popoverBodyId = `${baseId}-popover-body-${searchFieldIdCount++}`;
+        this._popoverBodyId.set(`${baseId}-popover-body-${searchFieldIdCount++}`);
 
         this._isRefresh = true;
 
@@ -493,6 +494,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._suggestionsSubscription?.unsubscribe();
+        this._mobileComponent?.destroy();
         this._suggestionkeyManager?.destroy();
     }
 
@@ -545,7 +548,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         const inputStr: string = event.trim();
         if (inputStr.length === 0) {
             this._selectedSuggestionItem = null;
-            this._selectedSuggestionItemId = '';
+            this._selectedSuggestionItemId.set('');
             if (!this.allowEmptySearch()) {
                 this.closeSuggestionMenu();
             }
@@ -555,7 +558,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (ds) {
             const match = new Map();
             match.set('keyword', inputStr);
-            match.set('category', this._currentCategory?.value || null);
+            match.set('category', this._currentCategory()?.value || null);
 
             ds.match(match);
         }
@@ -589,7 +592,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this.inputText.set(event.value);
             this._selectedSuggestionItem = event;
             if (suggestionListItem?.id) {
-                this._selectedSuggestionItemId = suggestionListItem.id;
+                this._selectedSuggestionItemId.set(suggestionListItem.id);
             }
         }
         this.inputChange.emit(this.searchFieldValue);
@@ -631,14 +634,15 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * @hidden
      */
     setCurrentCategory(currentCategory: ValueLabelItem | null): void {
-        this._currentCategory =
+        this._currentCategory.set(
             currentCategory &&
-            this.categories().find(
-                (category: ValueLabelItem) =>
-                    category.label === currentCategory.label && category.value === currentCategory.value
-            );
+                this.categories().find(
+                    (category: ValueLabelItem) =>
+                        category.label === currentCategory.label && category.value === currentCategory.value
+                )
+        );
 
-        if (this._isSuggestionMenuOpen$()) {
+        if (this._isSuggestionMenuOpen()) {
             this.onValueChange(this.inputText());
         }
         this.inputChange.emit(this.searchFieldValue);
@@ -648,13 +652,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Open suggestion menu
      */
     openSuggestionMenu(): void {
-        this._isSuggestionMenuOpen$.set(true);
+        this._isSuggestionMenuOpen.set(true);
         this._resetKeyManager();
-        if (this._isSuggestionMenuOpen$()) {
-            return;
-        }
-
-        this._isSuggestionMenuOpen$.set(true);
     }
 
     /** @hidden */
@@ -692,12 +691,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (focus) {
             this.focus();
         }
-        this._isSuggestionMenuOpen$.set(false);
+        this._isSuggestionMenuOpen.set(false);
     }
 
     /** Resets the current category to its initial state. */
     resetCategory(): void {
-        this._currentCategory = undefined;
+        this._currentCategory.set(undefined);
         const selectComp = this.categorySelectComponent();
         if (selectComp) {
             selectComp.value = undefined;
@@ -712,7 +711,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.cancelSearch.emit(this.searchFieldValue);
 
         this._selectedSuggestionItem = null;
-        this._selectedSuggestionItemId = '';
+        this._selectedSuggestionItemId.set('');
 
         this._isRefresh = true;
         this._isSearchDone = false;
@@ -724,7 +723,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             if (ds) {
                 const match = new Map();
                 match.set('keyword', '');
-                match.set('category', this._currentCategory?.value || null);
+                match.set('category', this._currentCategory()?.value || null);
 
                 ds.match(match);
             }
@@ -781,7 +780,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         const firstButton = suggestionEl.querySelector('.fd-button') as HTMLElement;
         if (firstButton) {
             if (document.activeElement === suggestionEl) {
-                this._actionButtonTabIndex = 0;
+                this._actionButtonTabIndex.set(0);
                 firstButton.focus();
             }
         }
@@ -791,7 +790,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     _focusParentListItem(event: Event, suggestion: ListItemComponent): void {
         event.preventDefault();
         event.stopPropagation();
-        this._actionButtonTabIndex = -1;
+        this._actionButtonTabIndex.set(-1);
         suggestion.elementRef?.nativeElement?.focus();
     }
 
@@ -802,7 +801,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             .open()
             .pipe(takeUntil(merge(destroyObservable(this._destroyRef), this._dataSourceChanged$)))
             .subscribe((data) => {
-                this._dropdownValues$ = of(data);
+                this.dropdownValues.set(data);
             });
     }
 
@@ -852,7 +851,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** @hidden */
     _inputFocus(): void {
-        this._isFocused = true;
+        this._isFocused.set(true);
         if (this._shellbar && this.allowEmptySearch()) {
             this.openSuggestionMenu();
         }
@@ -901,28 +900,24 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
-            this._autoCompleteSuggestions = [];
-            suggestions?.forEach((suggestion) => {
-                const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
-                if (
-                    this.inputText() &&
-                    textToCheck.toLowerCase().indexOf(this.inputText()?.trim()?.toLowerCase()) > -1
-                ) {
-                    count++;
-                }
-                if (!suggestion?.children && suggestion?.value) {
-                    this._autoCompleteSuggestions.push(suggestion);
-                } else if (suggestion?.children?.length) {
-                    suggestion.children.forEach((child) => {
-                        this._autoCompleteSuggestions.push(child);
-                    });
-                }
-            });
+        const suggestions = this.dropdownValues();
+        this.autoCompleteSuggestions = [];
 
-            this._setAriaOwns();
+        suggestions?.forEach((suggestion) => {
+            const textToCheck = typeof suggestion === 'string' ? suggestion : suggestion?.value;
+            if (this.inputText() && textToCheck.toLowerCase().indexOf(this.inputText()?.trim()?.toLowerCase()) > -1) {
+                count++;
+            }
+            if (!suggestion?.children && suggestion?.value) {
+                this.autoCompleteSuggestions.push(suggestion);
+            } else if (suggestion?.children?.length) {
+                suggestion.children.forEach((child) => {
+                    this.autoCompleteSuggestions.push(child);
+                });
+            }
         });
 
+        this._setAriaOwns();
         return count;
     }
 
