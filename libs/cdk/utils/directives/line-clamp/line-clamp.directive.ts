@@ -1,40 +1,44 @@
-import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
-    AfterViewInit,
+    afterNextRender,
     DestroyRef,
     Directive,
+    effect,
     ElementRef,
-    EventEmitter,
     inject,
-    Input,
-    OnChanges,
-    Output,
+    input,
+    numberAttribute,
+    output,
     Renderer2
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Nullable } from '../../models/nullable';
 import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
 
 @Directive({
     selector: '[fdkLineClampTarget], [fdLineClampTarget], [fd-lineclamp-target]',
-    exportAs: 'fdLineClampTarget',
-    standalone: true
+    exportAs: 'fdLineClampTarget'
 })
-export class LineClampTargetDirective implements OnChanges, AfterViewInit {
+export class LineClampTargetDirective {
     /**
      * Target text for clamping
      */
-    @Input()
-    fdLineClampTargetText: string;
+    readonly fdLineClampTargetText = input<string>('');
 
     /**
      * Event with target instance for clamping
      */
-    @Output() update = new EventEmitter<LineClampTargetDirective>();
+    readonly update = output<LineClampTargetDirective>();
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
+
+    /**
+     * @hidden
+     * Tracks whether the directive has completed its initial render.
+     * Used to prevent a double emission on startup: afterNextRender handles
+     * the first emit, so the effect must skip its own initial execution.
+     */
+    private _initialized = false;
 
     /**
      * Native element of clamping target
@@ -44,60 +48,69 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.update.emit(this);
-    }
+    constructor() {
+        // Skip the initial run — afterNextRender will emit once the view is ready.
+        // Only emit on subsequent text changes.
+        effect(() => {
+            this.fdLineClampTargetText(); // track signal
+            if (this._initialized) {
+                this.update.emit(this);
+            }
+        });
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.update.emit(this);
+        // Perform the initial emit after the first render and mark as initialized.
+        afterNextRender(() => {
+            this._initialized = true;
+            this.update.emit(this);
+        });
     }
 }
 
 @Directive({
     selector: '[fdkLineClamp]',
-    exportAs: 'fdLineClamp',
-    standalone: true
+    exportAs: 'fdLineClamp'
 })
-export class LineClampDirective implements OnChanges, AfterViewInit {
+export class LineClampDirective {
     /**
      * Count lines for clamping
      */
-    @Input()
-    set fdLineClampLines(value: Nullable<number>) {
-        this._lineCount = coerceNumberProperty(value);
-    }
+    readonly fdLineClampLines = input(0, { transform: numberAttribute });
 
     /**
      * Clamping state
      */
-    @Input()
-    fdLineclampState = false;
+    readonly fdLineclampState = input(false);
 
     /**
      * Event return count of lines from the target
      */
-    @Output()
-    lineCountUpdate = new EventEmitter<number>();
+    readonly lineCountUpdate = output<number>();
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private readonly _viewportSize$ = inject(ViewportSizeObservable);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _lineClampTarget: HTMLElement;
+
     /** @hidden */
     private _originalText: string;
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Determined once in the constructor — before effect() runs — so that
+     * the very first effect execution already has the correct value.
+     */
     private _isNativeSupport = true;
 
-    /** @hidden */
-    private _lineCount: number;
-
-    /** @hidden */
-    private viewportSize$ = inject(ViewportSizeObservable);
-
-    /** @hidden */
-    private _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
     /**
      * Root native element of clamping box
      */
@@ -106,31 +119,39 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     }
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef,
-        private readonly _renderer: Renderer2
-    ) {}
-
-    /** @hidden */
-    ngAfterViewInit(): void {
+    constructor() {
+        // Detect native support immediately so effect() reads the correct value
+        // on its first (synchronous) execution, before afterNextRender fires.
         this._isNativeSupport = typeof this.rootElement.style.webkitLineClamp !== 'undefined';
 
-        // need to use setTimeout to force recheck of parent elements
-        setTimeout(() => {
-            this._checkLineCount();
+        // React to input changes
+        effect(() => {
+            const state = this.fdLineclampState();
+            const lines = this.fdLineClampLines();
+
+            // Only process if we have the required values
+            if (Number.isFinite(lines) && lines > 0) {
+                this.reset();
+                this.refreshClamp(state, lines);
+            }
         });
 
-        this.viewportSize$
+        // Initialize after view is ready.
+        // _isNativeSupport is already set in the constructor; this only triggers
+        // the initial line-count check once the element has been laid out.
+        // setTimeout forces a recheck after parent elements have also rendered.
+        afterNextRender(() => {
+            setTimeout(() => {
+                this._checkLineCount();
+            });
+        });
+
+        // Subscribe to viewport changes
+        this._viewportSize$
             .pipe(distinctUntilChanged(), debounceTime(200), takeUntilDestroyed(this._destroyRef))
             .subscribe({
                 next: () => this._checkLineCount()
             });
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.reset();
-        this.refreshClamp();
     }
 
     /** @hidden */
@@ -146,16 +167,18 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     /** @hidden */
     refreshTarget(event: LineClampTargetDirective): void {
         this._lineClampTarget = event.targetElement;
-        this._originalText = event.fdLineClampTargetText;
+        this._originalText = event.fdLineClampTargetText();
         this._checkLineCount();
     }
 
-    /** @hidden */
-    refreshClamp(): void {
-        if (this.fdLineclampState && this._lineCount) {
-            this.native();
+    /** @hidden
+     * Refresh clamp styles based on state and line count
+     */
+    refreshClamp(state: boolean, lineCount: number): void {
+        if (state && lineCount) {
+            this._applyNative(lineCount);
             if (!this._isNativeSupport) {
-                this._truncate();
+                this._truncate(lineCount);
             }
         }
     }
@@ -163,11 +186,11 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     /** @hidden
      * Truncate text in the target box, if browser not support lineclamp style
      */
-    private _truncate(): void {
-        if (!this._lineClampTarget) {
+    private _truncate(lineCount: number): void {
+        if (!this._lineClampTarget || !this._originalText) {
             return;
         }
-        const lineClampHeight = Math.ceil(this.getLineHeight() * this._lineCount);
+        const lineClampHeight = Math.ceil(this._getLineHeight() * lineCount);
         const ellipsisTextArray = this._originalText.split(' ');
         const ellipsisText = (): void => {
             if (this.rootElement.scrollHeight > lineClampHeight) {
@@ -182,7 +205,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     /** @hidden
      * Get lineheight for rootelement, if browser not support lineclamp style
      */
-    private getLineHeight(): number {
+    private _getLineHeight(): number {
         const lineHeight = window.getComputedStyle(this.rootElement, null).getPropertyValue('line-height');
         if (lineHeight === 'normal') {
             return parseInt(window.getComputedStyle(this.rootElement, null).getPropertyValue('font-size'), 10) * 1.25;
@@ -194,13 +217,13 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     /** @hidden
      * Setup native styles for lineclamp text
      */
-    private native(): void {
+    private _applyNative(lineCount: number): void {
         if (this._isNativeSupport) {
             this._renderer.setStyle(this.rootElement, 'display', '-webkit-box');
             this._renderer.setStyle(this.rootElement, 'overflow', 'hidden');
             this._renderer.setStyle(this.rootElement, 'text-overflow', 'ellipsis');
             this._renderer.setStyle(this.rootElement, '-webkit-box-orient', 'vertical');
-            this._renderer.setStyle(this.rootElement, '-webkit-line-clamp', `${this._lineCount}`);
+            this._renderer.setStyle(this.rootElement, '-webkit-line-clamp', `${lineCount}`);
         }
     }
 
@@ -234,13 +257,13 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
             lineHeight = fontSize * 1.2;
         }
         if (boxSizing === 'border-box') {
-            const padding_top = parseInt(style.getPropertyValue('padding-top'), 10);
-            const padding_bottom = parseInt(style.getPropertyValue('padding-bottom'), 10);
-            const border_top = parseInt(style.getPropertyValue('border-top-width'), 10);
-            const border_bottom = parseInt(style.getPropertyValue('border-bottom-width'), 10);
-            height = height - padding_top - padding_bottom - border_top - border_bottom;
+            const paddingTop = parseInt(style.getPropertyValue('padding-top'), 10);
+            const paddingBottom = parseInt(style.getPropertyValue('padding-bottom'), 10);
+            const borderTop = parseInt(style.getPropertyValue('border-top-width'), 10);
+            const borderBottom = parseInt(style.getPropertyValue('border-bottom-width'), 10);
+            height = height - paddingTop - paddingBottom - borderTop - borderBottom;
         }
-        this.refreshClamp();
+        this.refreshClamp(this.fdLineclampState(), this.fdLineClampLines());
         this.lineCountUpdate.emit(Math.ceil(height / lineHeight));
     }
 }
