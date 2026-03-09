@@ -15,7 +15,7 @@
             (cancelSearch)="cancelSearch()"
             [disabled]="loading"
             [disableRefresh]="true"
-            [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
+            [placeholder]="('platformSmartFilterBar.searchPlaceholder' | fdTranslate)()"
         ></fdp-search-field>
         <fd-toolbar-spacer></fd-toolbar-spacer>
         @if (!liveUpdate) {
@@ -25,7 +25,7 @@
                 fdType="emphasized"
                 fd-toolbar-item
                 [disabled]="loading"
-                [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
+                [label]="('platformSmartFilterBar.submitButtonLabel' | fdTranslate)()"
             ></button>
         }
         <button
@@ -34,13 +34,13 @@
             fd-toolbar-item
             glyph="synchronize"
             [disabled]="loading"
-            [ariaLabel]="'platformSmartFilterBar.refreshButtonAriaLabel' | fdTranslate"
+            [ariaLabel]="('platformSmartFilterBar.refreshButtonAriaLabel' | fdTranslate)()"
         ></button>
         <button
             fd-button
             (click)="showFilteringSettings()"
             [label]="
-                'platformSmartFilterBar.filtersButtonLabel' | fdTranslate: { filtersCount: selectedFiltersCount$() }
+                ('platformSmartFilterBar.filtersButtonLabel' | fdTranslate: { filtersCount: selectedFiltersCount$() })()
             "
             fd-toolbar-item
             [disabled]="loading"
@@ -49,10 +49,12 @@
             fd-button
             (click)="toggleFilterBar()"
             [label]="
-                (showFilterBar$()
-                    ? 'platformSmartFilterBar.hideFiltersButtonLabel'
-                    : 'platformSmartFilterBar.showFiltersButtonLabel'
-                ) | fdTranslate
+                (
+                    (showFilterBar$()
+                        ? 'platformSmartFilterBar.hideFiltersButtonLabel'
+                        : 'platformSmartFilterBar.showFiltersButtonLabel'
+                    ) | fdTranslate
+                )()
             "
             fdType="transparent"
             fd-toolbar-item

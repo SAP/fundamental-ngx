@@ -5,14 +5,13 @@ import {
     Component,
     ElementRef,
     ViewEncapsulation,
+    computed,
     inject,
     input,
     viewChild
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { map } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { FD_BUSY_INDICATOR_COMPONENT } from './tokens';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
@@ -74,25 +73,19 @@ export class BusyIndicatorComponent {
     protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
 
     /** @hidden */
-    protected readonly _lang$ = inject(FD_LANGUAGE);
+    protected readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     protected readonly _translationResolver = inject(TranslationResolver);
 
     /** @hidden */
-    protected readonly _ariaValueText = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'coreBusyIndicator.defaultAriaValueText'))
-        ),
-        { initialValue: 'Busy' }
+    protected readonly _ariaValueText = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'coreBusyIndicator.defaultAriaValueText')
     );
 
     /** @hidden */
-    protected readonly _titleValue = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'coreBusyIndicator.defaultTitle'))
-        ),
-        { initialValue: 'Please wait' }
+    protected readonly _titleValue = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'coreBusyIndicator.defaultTitle')
     );
 
     /** @hidden */

@@ -12,7 +12,8 @@
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
-                "outputPath": "libs/docs/typedoc/datetime-adapter"
+                "outputPath": "libs/docs/typedoc/datetime-adapter",
+                "tsConfig": "libs/datetime-adapter/tsconfig.typedoc.json"
             },
             "outputs": ["{options.outputPath}"]
         },

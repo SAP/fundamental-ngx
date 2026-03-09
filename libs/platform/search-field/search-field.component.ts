@@ -53,7 +53,7 @@ import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
-import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { shallowEqual } from 'fast-equals';
@@ -357,7 +357,7 @@ export class SearchFieldComponent
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
     /** @hidden */
-    private resolveTranslation = resolveTranslationSyncFn();
+    private resolveTranslation = resolveTranslationSignalFn();
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -629,10 +629,10 @@ export class SearchFieldComponent
         const suggestionCount = this._getSuggestionsLength();
         const searchSuggestionMessage = this.resolveTranslation('platformSearchField.searchSuggestionMessage', {
             count: suggestionCount
-        });
+        })();
         const searchSuggestionNavigateMessage = this.resolveTranslation(
             'platformSearchField.searchSuggestionNavigateMessage'
-        );
+        )();
         this._currentSearchSuggestionAnnouncementMessage =
             searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
         if (this.inputText?.length > 0) {

@@ -28,7 +28,7 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
     const tsConfig: string =
         _options.tsConfig ||
         readTargetOptions({ project: context.projectName as string, target: 'build' }, context).tsConfig;
-    const ngPackageJsonFiles = fastGlobSync(projectPath + '/**/*/ng-package.json');
+    const ngPackageJsonFiles = fastGlobSync(projectPath + '/**/ng-package.json');
     const entryPoints = ngPackageJsonFiles.map((f) => {
         const json = JSON.parse(readFileSync(f, 'utf-8'));
         const main = json.lib.entryFile;

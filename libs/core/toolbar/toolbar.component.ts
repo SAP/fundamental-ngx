@@ -42,6 +42,7 @@ import {
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BehaviorSubject, combineLatest, EMPTY, filter, first, map, Observable, switchMap } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { FD_TOOLBAR } from './tokens';
@@ -86,7 +87,8 @@ export const enum OverflowPriorityEnum {
         PopoverModule,
         ButtonComponent,
         DynamicPortalComponent,
-        TitleComponent
+        TitleComponent,
+        FdTranslatePipe
     ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {

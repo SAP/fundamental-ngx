@@ -1,27 +1,80 @@
 <fd-docs-section-title id="basic" componentName="i18n"> Basic Usage </fd-docs-section-title>
 <description>
-    <code>&#64;fundamental-ngx/i18n</code> exports already translated messages for the {{ supportedLanguages }}. To use
-    them, you simply import <code>FD_LANGUAGE_{{ '{' }}upperCase(languageName){{ '}' }}</code> and provide it to the DI
-    context of your interest.
-    <fd-code-snippet [file]="basicUsageExample"></fd-code-snippet>
+    <p>
+        <code>&#64;fundamental-ngx/i18n</code> exports pre-translated messages for {{ supportedLanguages }}. To use
+        them, import <code>FD_LANGUAGE_{{ '{' }}LANGUAGE_NAME{{ '}' }}</code> (e.g., <code>FD_LANGUAGE_UKRAINIAN</code>)
+        and provide it using the <strong>signal-based</strong> token <code>FD_LANGUAGE_SIGNAL</code>.
+    </p>
+    <p>
+        Provide translations at the <strong>application level</strong> in <code>app.config.ts</code> to make them
+        available throughout your app, or at the <strong>component level</strong> for component-specific translations
+        (as shown in the example below).
+    </p>
+    <p>
+        The example below demonstrates switching between different built-in languages. Watch how all UI elements update
+        automatically when you select a different language.
+    </p>
+    <p>
+        <strong>Note:</strong> The old <code>FD_LANGUAGE</code> (Observable) token is deprecated and will be removed in
+        a future version. Use <code>FD_LANGUAGE_SIGNAL</code> instead.
+    </p>
 </description>
+<component-example>
+    <fd-basic-usage-example></fd-basic-usage-example>
+</component-example>
+<code-example [exampleFiles]="basicUsageExampleFiles"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title id="json" componentName="i18n"> Loading JSON </fd-docs-section-title>
+<fd-docs-section-title id="json" componentName="i18n"> Loading from JSON files </fd-docs-section-title>
 <description>
-    You can also load the language from a JSON file. In order to do this, you will need to use the
-    <code>loadJson</code> helper function to properly transform the JSON into the <code>FdLanguage</code> interface.
-    <fd-code-snippet [file]="jsonUsageExample"></fd-code-snippet>
+    <p>You can load translations dynamically from JSON files at runtime. This is useful for:</p>
+    <ul>
+        <li>Loading custom translations without bundling them in your application code</li>
+        <li>Supporting additional languages beyond the built-in ones</li>
+        <li>Allowing non-developers to manage translation files</li>
+        <li>Enabling dynamic language switching based on user preferences</li>
+    </ul>
+    <p>
+        Use the <code>loadJson</code> helper function to transform a JSON object into the
+        <code>FdLanguage</code> interface. The JSON keys should use dot notation (e.g.,
+        <code>"coreDatePicker.dateInputLabel"</code>).
+    </p>
+    <p>
+        The example below simulates loading a JSON file and demonstrates how <code>loadJson()</code> transforms the data
+        into translations. In a real application, you would load the JSON file using <code>HttpClient</code> as shown in
+        the source code.
+    </p>
 </description>
+<component-example>
+    <fd-json-loading-example></fd-json-loading-example>
+</component-example>
+<code-example [exampleFiles]="jsonLoadingExampleFiles"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title id="properties" componentName="i18n"> Loading Properties </fd-docs-section-title>
+<fd-docs-section-title id="properties" componentName="i18n"> Loading from .properties files </fd-docs-section-title>
 <description>
-    You can also load the language from a
-    <a href="https://en.wikipedia.org/wiki/.properties" target="_blank" fd-link>.properties file</a>. In order to do
-    this, you will need to use the <code>loadProperties</code> helper function to properly transform the properties into
-    the <code>FdLanguage</code> interface.
-    <fd-code-snippet [file]="propertiesUsageExample"></fd-code-snippet>
+    <p>
+        You can load translations from
+        <a href="https://en.wikipedia.org/wiki/.properties" target="_blank" fd-link>.properties files</a>, which are
+        commonly used in Java-based internationalization systems and SAP applications.
+    </p>
+    <p>
+        Use the <code>loadProperties</code> helper function to parse the properties file format into the
+        <code>FdLanguage</code> interface. Each line follows the format: <code>key = value</code>.
+    </p>
+    <p>
+        The example below simulates loading a .properties file and demonstrates how <code>loadProperties()</code> parses
+        the format into translations. In a real application, you would load the .properties file using
+        <code>HttpClient</code> with <code>responseType: 'text'</code> as shown in the source code.
+    </p>
+    <p>
+        <strong>Benefits of .properties files:</strong> Simple text format, easy to edit, widely supported by
+        translation tools, and commonly used in enterprise applications.
+    </p>
 </description>
+<component-example>
+    <fd-properties-loading-example></fd-properties-loading-example>
+</component-example>
+<code-example [exampleFiles]="propertiesLoadingExampleFiles"></code-example>

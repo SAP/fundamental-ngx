@@ -1,7 +1,207 @@
-<fd-docs-section-title id="basic" componentName="i18n"> Basic Usage </fd-docs-section-title>
+<fd-docs-section-title id="comparison" componentName="i18n">
+    Comparison: When to use what approach
+</fd-docs-section-title>
 <description>
-    You can resolve translations using the <code>TranslationResolver</code> class and a <code>FdLanguage</code>
-    object any time
+    <p>
+        There are multiple ways to use translations in fundamental-ngx. This comparison table helps you choose the right
+        approach for your situation.
+    </p>
+
+    <div class="fd-margin-top--sm" style="overflow-x: auto">
+        <table fd-table class="fd-table--compact">
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Approach</th>
+                    <th fd-table-cell>Best For</th>
+                    <th fd-table-cell>Key Info</th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <!-- fdTranslate Pipe -->
+                <tr fd-table-row>
+                    <td fd-table-cell>
+                        <div>
+                            <strong><code>fdTranslate</code> pipe</strong>
+                        </div>
+                        <span
+                            fd-object-status
+                            [status]="'positive'"
+                            [label]="'Recommended'"
+                            class="fd-margin-top--tiny"
+                        ></span>
+                    </td>
+                    <td fd-table-cell>
+                        Simple inline translations in templates (button labels, headings, one-off text)
+                    </td>
+                    <td fd-table-cell>
+                        <span
+                            fd-object-status
+                            [status]="'positive'"
+                            [label]="'Easy'"
+                            class="fd-margin-end--tiny"
+                        ></span>
+                        Very clean syntax, no TypeScript needed. Can't reuse across components or use in logic.
+                    </td>
+                </tr>
+
+                <!-- resolveTranslationSignal() -->
+                <tr fd-table-row>
+                    <td fd-table-cell>
+                        <div>
+                            <strong><code>resolveTranslationSignal()</code></strong>
+                        </div>
+                        <span
+                            fd-object-status
+                            [status]="'positive'"
+                            [label]="'Recommended'"
+                            class="fd-margin-top--tiny"
+                        ></span>
+                    </td>
+                    <td fd-table-cell>
+                        Reusable translations, TypeScript code, computed values, class field initializers
+                    </td>
+                    <td fd-table-cell>
+                        <span
+                            fd-object-status
+                            [status]="'positive'"
+                            [label]="'Easy'"
+                            class="fd-margin-end--tiny"
+                        ></span>
+                        Reusable signal, works in templates and code. Must call in injection context (not inside
+                        methods).
+                    </td>
+                </tr>
+
+                <!-- resolveTranslationSignalFn() -->
+                <tr fd-table-row>
+                    <td fd-table-cell>
+                        <strong><code>resolveTranslationSignalFn()</code></strong>
+                    </td>
+                    <td fd-table-cell>Translations inside methods, dynamic keys, callbacks, event handlers</td>
+                    <td fd-table-cell>
+                        <span
+                            fd-object-status
+                            [status]="'critical'"
+                            [label]="'Medium'"
+                            class="fd-margin-end--tiny"
+                        ></span>
+                        Works outside injection context and in methods. Slightly more complex (two-step process).
+                    </td>
+                </tr>
+
+                <!-- patchLanguage() -->
+                <tr fd-table-row>
+                    <td fd-table-cell>
+                        <div>
+                            <strong><code>patchLanguage()</code></strong>
+                        </div>
+                        <span
+                            fd-object-status
+                            [status]="'informative'"
+                            [label]="'Special Use'"
+                            class="fd-margin-top--tiny"
+                        ></span>
+                    </td>
+                    <td fd-table-cell>Override specific translations for one component, A/B testing, custom wording</td>
+                    <td fd-table-cell>
+                        <span
+                            fd-object-status
+                            [status]="'critical'"
+                            [label]="'Medium'"
+                            class="fd-margin-end--tiny"
+                        ></span>
+                        Component-scoped overrides. Not for general translation use, requires understanding providers.
+                    </td>
+                </tr>
+
+                <!-- TranslationResolver -->
+                <tr fd-table-row>
+                    <td fd-table-cell>
+                        <div>
+                            <strong><code>TranslationResolver</code></strong>
+                        </div>
+                        <span
+                            fd-object-status
+                            [status]="'informative'"
+                            [label]="'Advanced'"
+                            class="fd-margin-top--tiny"
+                        ></span>
+                    </td>
+                    <td fd-table-cell>Low-level control, one-time synchronous lookups, non-reactive scenarios</td>
+                    <td fd-table-cell>
+                        <span
+                            fd-object-status
+                            [status]="'negative'"
+                            [label]="'Hard'"
+                            class="fd-margin-end--tiny"
+                        ></span>
+                        Full control but requires manual signal management. More boilerplate, easy to use incorrectly.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4 class="fd-margin-top--md">Quick Decision Guide:</h4>
+    <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
+        <p class="fd-margin--none fd-margin-bottom--sm"><strong>Start here if you're unsure:</strong></p>
+        <ol class="fd-margin--none fd-padding-begin--md">
+            <li><strong>In templates for simple text?</strong> → Use <code>fdTranslate</code> pipe</li>
+            <li>
+                <strong>Need it in TypeScript code or reusable?</strong> → Use <code>resolveTranslationSignal()</code>
+            </li>
+            <li><strong>Need it inside a method?</strong> → Use <code>resolveTranslationSignalFn()</code></li>
+            <li><strong>Want to override specific translations?</strong> → Use <code>patchLanguage()</code></li>
+            <li><strong>Need low-level control?</strong> → Use <code>TranslationResolver</code> class</li>
+        </ol>
+    </fd-message-strip>
+
+    <h4 class="fd-margin-top--md">Example Scenarios:</h4>
+    <div class="fd-margin-top--sm">
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
+            <strong>Button label in template:</strong><br />
+            Use <code>fdTranslate</code> pipe:
+            <code>{{ '{' }}{{ '{' }} ('coreButton.close' | fdTranslate)() {{ '}' }}{{ '}' }}</code>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
+            <strong>Alert message in click handler:</strong><br />
+            Use <code>resolveTranslationSignal()</code>:
+            <code>alertMessage = resolveTranslationSignal('myApp.alert')</code>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
+            <strong>Dynamic error messages in method:</strong><br />
+            Use <code>resolveTranslationSignalFn()</code>: <code>resolver = resolveTranslationSignalFn()</code> then
+            call in method
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top--tiny">
+            <strong>Change "Upload" to "Upload File" for one component:</strong><br />
+            Use <code>patchLanguage()</code> in component providers
+        </fd-message-strip>
+    </div>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="basic" componentName="i18n"> Using TranslationResolver class </fd-docs-section-title>
+<description>
+    <p>
+        The <code>TranslationResolver</code> class is the low-level API for resolving translation keys to their
+        translated strings. It provides fine-grained control over translation resolution.
+    </p>
+    <p><strong>When to use TranslationResolver:</strong></p>
+    <ul>
+        <li>When you need direct control over translation resolution</li>
+        <li>For one-time synchronous translation lookups (non-reactive)</li>
+        <li>In advanced scenarios where utility functions don't fit</li>
+    </ul>
+    <p>
+        <strong>Note:</strong> For most use cases, prefer the simpler <code>resolveTranslationSignal()</code> utility
+        function (shown in the next section) which handles signal management automatically.
+    </p>
+    <p>
+        The example below shows both reactive (using <code>computed()</code>) and one-time synchronous translation
+        resolution.
+    </p>
 </description>
 <component-example>
     <fd-translation-resolver-basic-usage-example />
@@ -10,14 +210,31 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="withUtility" componentName="i18n"> Using utility functions </fd-docs-section-title>
+<fd-docs-section-title id="withUtility" componentName="i18n">
+    Using utility functions (Recommended)
+</fd-docs-section-title>
 <description>
     <p>
-        You can resolve translations using the utility functions as well, which are available globally and should be
-        used inside the
-        <a href="https://angular.io/guide/dependency-injection-context" fd-link target="_blank">
+        The <strong>recommended approach</strong> for most use cases is to use the signal-based utility functions. These
+        functions provide a simpler API while automatically handling signal management and cleanup.
+    </p>
+    <p><strong>Available utility functions:</strong></p>
+    <ul>
+        <li>
+            <code>resolveTranslationSignal(key)</code> - Use in injection context to get a reactive signal for a
+            translation key
+        </li>
+        <li>
+            <code>resolveTranslationSignalFn()</code> - Returns a resolver function that can be used outside injection
+            context
+        </li>
+    </ul>
+    <p>
+        These functions must be called within the
+        <a href="https://angular.dev/guide/di/dependency-injection-context" fd-link target="_blank">
             dependency injection context
         </a>
+        (constructor, class field initializers, or factories).
     </p>
 </description>
 <component-example>
@@ -29,7 +246,29 @@
 
 <fd-docs-section-title id="withPipe" componentName="i18n"> Using fdTranslate pipe </fd-docs-section-title>
 <description>
-    <p>You can resolve provided translations using the <code>fdTranslate</code> pipe</p>
+    <p>
+        The <code>fdTranslate</code> pipe provides a convenient way to resolve translations directly in templates. The
+        pipe returns a <code>Signal&lt;string&gt;</code>, so you must <strong>invoke it with <code>()</code></strong> in
+        your template.
+    </p>
+    <p><strong>When to use the pipe:</strong></p>
+    <ul>
+        <li>For simple inline translations in templates</li>
+        <li>For one-off labels and text that don't need to be reused</li>
+        <li>When you want a clean, declarative syntax</li>
+    </ul>
+    <p><strong>When NOT to use the pipe:</strong></p>
+    <ul>
+        <li>
+            If you need to reuse the same translation in multiple places (use <code>resolveTranslationSignal()</code>)
+        </li>
+        <li>For computed values based on translations (use <code>computed()</code> with signals)</li>
+        <li>In class methods or logic (use utility functions)</li>
+    </ul>
+    <p>
+        <strong>Important:</strong> The pipe is <strong>pure</strong> for better performance, meaning it only
+        re-evaluates when the language signal changes.
+    </p>
 </description>
 <component-example>
     <fd-using-translation-pipe-example />

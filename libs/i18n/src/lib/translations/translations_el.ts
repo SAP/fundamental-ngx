@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_el.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Απασχολημένο',
         defaultTitle: 'Παρακαλώ περιμένετε'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Επέκταση Κεφαλίδας',
         collapseLabel: 'Σύμπτηξη Κεφαλίδας',
         pinLabel: 'Καρφίτσωμα Κεφαλίδας',
-        unpinLabel: 'Ξεκαρφίτσωμα Κεφαλίδας'
+        unpinLabel: 'Ξεκαρφίτσωμα Κεφαλίδας',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} περισσότερα',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Ταινία Μηνύματος Προειδοποίησης',
         announcementError: 'Ταινία Μηνύματος Σφάλματος',
         announcementSuccess: 'Ταινία Μηνύματος Επιτυχίας',
-        closable: 'Δυνατότητα κλεισίματος'
+        closable: 'Δυνατότητα κλεισίματος',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 στοιχείο λίστας αποτελεσμάτων.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Πλοήγηση επιλογών με τα βέλη πάνω και κάτω.',
         escapeNavigateTokens:
             'Πατήστε το πλήκτρο διαφυγής (escape) για να κλείσετε το πεδίο και χρησιμοποιήστε τα βέλη δεξιά και αριστερά για να πλοηγηθείτε μέσω των επιλεγμένων δυνατοτήτων.',
-        tokensCountText: 'Περιέχει συνολικά διακριτικά: {μήκος}.'
+        tokensCountText: 'Περιέχει συνολικά διακριτικά: {μήκος}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Κύρια Πλοήγηση',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Απόρριψη'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Περισσότερα'
+        tabListExpandButtonText: 'Περισσότερα',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Περισσότερα',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Είσοδος επιλογέα χρόνου',
-        timePickerButtonLabel: 'Ανοιγμα επιλογέα'
+        timePickerButtonLabel: 'Ανοιγμα επιλογέα',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Διαγράψιμο',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Οδηγός'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Κάντε κλικ ή πατήστε enter για να δείτε περισσότερες λεπτομέρειες',
@@ -316,7 +345,11 @@ export default {
         statusNotStarted: 'δεν άρχισε'
     },
     platformFeedInput: {
-        userTitle: 'Χρήστης'
+        userTitle: 'Χρήστης',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Περισσότερα'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Επιλεγμένα Στοιχεία ή Συνθήκες',
@@ -577,7 +610,8 @@ export default {
         clearFilters: 'Εκκαθάριση Φίλτρων'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Επεξεργασία'
+        summarySectionEditStep: 'Επεξεργασία',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Όλοι',
@@ -590,7 +624,8 @@ export default {
             pattern: 'Η τιμή πεδίου είναι άκυρη',
             required: 'Το πεδίο είναι υποχρεωτικό',
             requiredTrue: 'Το πεδίο είναι υποχρεωτικό'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Διαχείριση',
@@ -619,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Επιλογή ως Ιδιότητα'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Επέκταση κόμβου',

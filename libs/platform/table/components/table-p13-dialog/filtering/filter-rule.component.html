@@ -23,8 +23,10 @@
                     @for (strategy of rule.strategies; track strategy) {
                         <li fd-option [value]="strategy">
                             {{
-                                strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
+                                (
+                                    strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
                                     | fdTranslate
+                                )()
                             }}
                         </li>
                     }
@@ -76,16 +78,16 @@
                         [required]="true"
                     >
                         <li fd-option [value]="undefined">
-                            {{ 'platformTable.P13FilterBooleanOptionNotDefined' | fdTranslate }}
+                            {{ ('platformTable.P13FilterBooleanOptionNotDefined' | fdTranslate)() }}
                         </li>
                         <li fd-option [value]="true">
-                            {{ 'platformTable.P13FilterBooleanOptionTrue' | fdTranslate }}
+                            {{ ('platformTable.P13FilterBooleanOptionTrue' | fdTranslate)() }}
                         </li>
                         <li fd-option [value]="false">
-                            {{ 'platformTable.P13FilterBooleanOptionFalse' | fdTranslate }}
+                            {{ ('platformTable.P13FilterBooleanOptionFalse' | fdTranslate)() }}
                         </li>
                     </fd-select>
-                } @else if (rule.filterSelectOptions?.length) {
+                } @else if (rule.filterSelectOptions.length) {
                     <!-- Filter options dropdown menu -->
                     <fd-select
                         [ngModel]="rule[valueKey]"

@@ -4,7 +4,7 @@
     [name]="name"
     [disabled]="disabled"
     [semantic]="semantic"
-    [ariaLabel]="ariaLabel || ('platformSwitch.ariaLabel' | fdTranslate)"
+    [ariaLabel]="ariaLabel || ('platformSwitch.ariaLabel' | fdTranslate)()"
     [ariaLabelledBy]="ariaLabelledBy"
     [checked]="switchCurrentValue"
     (checkedChange)="onValueChange($event)"

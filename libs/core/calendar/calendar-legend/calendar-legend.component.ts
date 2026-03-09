@@ -17,7 +17,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                     <fd-calendar-legend-item
                         fdkFocusableItem
                         class="fd-calendar-legend__item--today"
-                        [text]="'coreCalendar.todayLabel' | fdTranslate"
+                        [text]="('coreCalendar.todayLabel' | fdTranslate)()"
                         (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
@@ -26,7 +26,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                     <fd-calendar-legend-item
                         fdkFocusableItem
                         class="fd-calendar-legend__item--selected"
-                        [text]="'coreCalendar.dateSelectedLabel' | fdTranslate"
+                        [text]="('coreCalendar.dateSelectedLabel' | fdTranslate)()"
                         (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
@@ -35,7 +35,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                     <fd-calendar-legend-item
                         fdkFocusableItem
                         class="fd-calendar-legend__item--work"
-                        [text]="'coreCalendar.workDayLabel' | fdTranslate"
+                        [text]="('coreCalendar.workDayLabel' | fdTranslate)()"
                         (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>
@@ -44,7 +44,7 @@ import { CalendarLegendItemComponent } from './calendar-legend-item.component';
                     <fd-calendar-legend-item
                         fdkFocusableItem
                         class="fd-calendar-legend__item--non-work"
-                        [text]="'coreCalendar.nonWorkDayLabel' | fdTranslate"
+                        [text]="('coreCalendar.nonWorkDayLabel' | fdTranslate)()"
                         (focus)="_handleFocusedElementEvent(null)"
                         (blur)="_handleFocusedElementEvent(null)"
                     ></fd-calendar-legend-item>

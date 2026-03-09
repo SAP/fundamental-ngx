@@ -55,7 +55,7 @@
             <span class="fd-breadcrumb__item" [fdMenuTrigger]="menu">
                 <a
                     fd-link
-                    [attr.aria-label]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                    [attr.aria-label]="('coreBreadcrumb.overflowTitleMore' | fdTranslate)()"
                     aria-haspopup="menu"
                     tabindex="0"
                     class="fd-breadcrumb__collapsed"
@@ -64,8 +64,8 @@
                 >
                     <fd-icon
                         glyph="overflow"
-                        [title]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
-                        [ariaLabel]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                        [title]="('coreBreadcrumb.overflowTitleMore' | fdTranslate)()"
+                        [ariaLabel]="('coreBreadcrumb.overflowTitleMore' | fdTranslate)()"
                     ></fd-icon>
                     <fd-icon glyph="slim-arrow-down"></fd-icon>
                 </a>

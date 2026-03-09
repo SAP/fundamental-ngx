@@ -1,7 +1,7 @@
 <table
     class="fd-calendar__content fd-calendar__content--years"
     role="grid"
-    [attr.aria-roledescription]="'coreCalendar.calendarYearsRangeViewDescription' | fdTranslate"
+    [attr.aria-roledescription]="('coreCalendar.calendarYearsRangeViewDescription' | fdTranslate)()"
 >
     <tbody class="fd-calendar__group" role="rowgroup">
         @for (colYears of _calendarYearListGrid; track colYears + '' + rowIndex; let rowIndex = $index) {
@@ -48,6 +48,6 @@
 </table>
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
-    <div [attr.id]="_todayLabelId">{{ 'coreCalendar.todayLabel' | fdTranslate }}</div>
-    <div [attr.id]="_selectedDateLabelId">{{ 'coreCalendar.dateSelectedLabel' | fdTranslate }}</div>
+    <div [attr.id]="_todayLabelId">{{ ('coreCalendar.todayLabel' | fdTranslate)() }}</div>
+    <div [attr.id]="_selectedDateLabelId">{{ ('coreCalendar.dateSelectedLabel' | fdTranslate)() }}</div>
 </div>

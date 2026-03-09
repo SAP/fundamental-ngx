@@ -24,6 +24,7 @@
             (focusin)="_focusInHandler()"
             (click)="handleItemClick()"
             (keydown)="handleItemKeydown($event)"
+            (mouseenter)="onOverflowItemMouseEnter()"
             fdbNavigationListItemMarker
             #itemContainer
         >
@@ -106,7 +107,11 @@
 </ng-template>
 <!-- Template used for rendering sublist of items for the list item that is currently in overflow menu. -->
 <ng-template #overflowItemListRenderer>
-    <div class="fd-navigation__list-container fd-navigation__list-container--submenu fd-menu__sublist">
+    <div
+        #overflowSubmenuContainer
+        class="fd-navigation__list-container fd-navigation__list-container--submenu fd-menu__sublist"
+        [style.max-height]="overflowSubmenuMaxHeight()"
+    >
         <ng-template [ngTemplateOutlet]="wrapperRenderer" [ngTemplateOutletContext]="{ $implicit: true }"></ng-template>
     </div>
 </ng-template>

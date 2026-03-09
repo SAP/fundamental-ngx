@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, signal } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
@@ -12,9 +12,8 @@ import {
     provideUnifiedDocsNavigation,
     Translations
 } from '@fundamental-ngx/docs/shared';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { MarkdownModule } from 'ngx-markdown';
-import { BehaviorSubject } from 'rxjs';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import packageJson from '../../../package.json';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -56,8 +55,8 @@ export const appConfig: ApplicationConfig = {
             useValue: corePackageJson
         },
         {
-            provide: FD_LANGUAGE,
-            useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: signal(FD_LANGUAGE_ENGLISH)
         },
         {
             provide: Translations,

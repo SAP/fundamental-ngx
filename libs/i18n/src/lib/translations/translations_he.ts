@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_he.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'עסוק',
         defaultTitle: 'המתן'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'הרחב כותרת',
         collapseLabel: 'צמצם כותרת',
         pinLabel: 'הצמד כותרת',
-        unpinLabel: 'בטל הצמדת כותרת'
+        unpinLabel: 'בטל הצמדת כותרת',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} נוספים',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'רצועת הודעות אזהרה',
         announcementError: 'רצועת הודעות שגיאה',
         announcementSuccess: 'רצועת הודעות הצלחה',
-        closable: 'ניתן לסגירה'
+        closable: 'ניתן לסגירה',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: 'פריט רשימת תוצאות אחד.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'נווט בבחירות עם החצים למעלה ולמטה.',
         escapeNavigateTokens:
             'הקש על Escape כדי לצאת משדה הקלט והשתמש במקשי החצים שמאלה וימינה כדי לנווט בין האפשרויות שנבחרו.',
-        tokensCountText: 'מכיל סה"כ tokens: {length}.'
+        tokensCountText: 'מכיל סה"כ tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'ניווט ראשי',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'דחה'
     },
     coreTabs: {
-        tabListExpandButtonText: 'עוד'
+        tabListExpandButtonText: 'עוד',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'עוד',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'קלט בוחר שעות',
-        timePickerButtonLabel: 'פתח בוחר'
+        timePickerButtonLabel: 'פתח בוחר',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'ניתן למחיקה',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'אשף'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: "לחץ או הקש 'enter' כדי להציג פרטים נוספים",
@@ -314,7 +343,11 @@ export default {
         statusNotStarted: 'טרם התחיל'
     },
     platformFeedInput: {
-        userTitle: 'משתמש'
+        userTitle: 'משתמש',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'עוד'
     },
     platformVHD: {
         selectedAndConditionLabel: 'פריטים ותנאים שנבחרו',
@@ -574,7 +607,8 @@ export default {
         clearFilters: 'נקה מסננים'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'ערוך'
+        summarySectionEditStep: 'ערוך',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'הכול',
@@ -587,7 +621,8 @@ export default {
             pattern: 'ערך השדה אינו חוקי',
             required: 'השדה הוא חובה',
             requiredTrue: 'השדה הוא חובה'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'נהל',
@@ -616,6 +651,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'בחר אפשרות'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'הרחב צומת',

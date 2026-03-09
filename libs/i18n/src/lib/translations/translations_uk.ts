@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Зайнято',
         defaultTitle: 'Зачекайте'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Розгорнути заголовок',
         collapseLabel: 'Згорнути заголовок',
         pinLabel: 'Закріпити заголовок',
-        unpinLabel: 'Відкріпити заголовок'
+        unpinLabel: 'Відкріпити заголовок',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'Ще {count}',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Рядок попереджувальних повідомлень',
         announcementError: 'Рядок повідомлень про помилки',
         announcementSuccess: 'Рядок повідомлень про успішне виконання',
-        closable: 'З можливістю закриття'
+        closable: 'З можливістю закриття',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 елемент списку результатів.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Переміщайтеся між виділеними елементами за допомогою стрілок вгору та вниз.',
         escapeNavigateTokens:
             'Натисніть клавішу escape, щоб вийти з поля введення, і використовуйте клавіші зі стрілками вліво й вправо для переходу між вибраними опціями.',
-        tokensCountText: 'Містить загалом токенів: {length}.'
+        tokensCountText: 'Містить загалом токенів: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Головна навігація',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Відхилити'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Більше'
+        tabListExpandButtonText: 'Більше',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Більше',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Введення для селектора часу',
-        timePickerButtonLabel: 'Відкрити засіб вибору'
+        timePickerButtonLabel: 'Відкрити засіб вибору',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Може бути видалено',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Майстер'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Щоб переглянути докладнішу інформацію, клікніть або натисніть клавішу Enter',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'не розпочато'
     },
     platformFeedInput: {
-        userTitle: 'Користувач'
+        userTitle: 'Користувач',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Більше'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Вибрані елементи та умови',
@@ -577,7 +610,8 @@ export default {
         clearFilters: 'Очистити фільтри'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Редагувати'
+        summarySectionEditStep: 'Редагувати',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Все',
@@ -590,7 +624,8 @@ export default {
             pattern: 'Значення поля є недійсним',
             required: 'Поле є обов’язковим',
             requiredTrue: 'Поле є обов’язковим'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Керувати',
@@ -619,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Вибрати опцію'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Розгорнути вузол',

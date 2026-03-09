@@ -114,7 +114,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
         this._focusableObserver
             .observe(this.elementRef, false)
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isFocusable) => {
                 if (isFocusable !== this.isFocusable()) {
                     this.setFocusable(isFocusable);

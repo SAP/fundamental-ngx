@@ -1,10 +1,7 @@
-import { effect, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { effect, inject, isDevMode } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models';
-import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
+import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
 import { ResolveFnArgs, ResolveTranslationFn } from './common-types';
 
@@ -15,22 +12,52 @@ export interface ResolveTranslationsSyncOptions {
 
 /**
  * Get the options for the resolve translations sync
+ *
+ * @deprecated Use resolveTranslationSignalFn instead for better performance and zoneless compatibility.
+ * Sync resolution with Observable-based updates will be removed in a future version.
+ *
+ * Migration:
+ * ```ts
+ * // Before
+ * const translateFn = resolveTranslationSyncFn();
+ * const label = translateFn('coreButton.label');
+ *
+ * // After
+ * const translateFn = resolveTranslationSignalFn();
+ * const labelSignal = translateFn('coreButton.label');
+ * const label = labelSignal(); // Get current value
+ * ```
+ *
  * @param options
- * @param _stopUpdating$
+ * @param _stopUpdating$ - Deprecated, no longer used
  */
 export function resolveTranslationSyncFn(
     options?: ResolveTranslationsSyncOptions,
-    _stopUpdating$?: Subject<void>
+    _stopUpdating$?: any // eslint-disable-line @typescript-eslint/no-unused-vars -- Deprecated parameter, kept for backward compatibility
 ): ResolveTranslationFn<string> {
+    if (isDevMode()) {
+        console.warn(
+            '[DEPRECATION] resolveTranslationSyncFn() is deprecated and will be removed in a future version.\n' +
+                'Use resolveTranslationSignalFn() instead for better performance.\n' +
+                'Migration: resolveTranslationSignalFn() returns a function that returns Signal<string>\n' +
+                'See: https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/MIGRATION.md'
+        );
+    }
+
     let { fdLang, fdLocale } = options || {};
-    _stopUpdating$ = _stopUpdating$ || new Subject<void>();
+
+    // Use signal tokens directly instead of Observable tokens
     if (!fdLocale) {
-        const fdLocaleSignal = toSignal(inject(FD_LOCALE).pipe(takeUntil(_stopUpdating$)), { requireSync: true });
-        effect(() => (fdLocale = fdLocaleSignal()));
+        const fdLocaleSignal = inject(FD_LOCALE_SIGNAL, { optional: true });
+        if (fdLocaleSignal) {
+            effect(() => (fdLocale = fdLocaleSignal()));
+        }
     }
     if (!fdLang) {
-        const fdLangSignal = toSignal(inject(FD_LANGUAGE).pipe(takeUntil(_stopUpdating$)), { requireSync: true });
-        effect(() => (fdLang = fdLangSignal()));
+        const fdLangSignal = inject(FD_LANGUAGE_SIGNAL, { optional: true });
+        if (fdLangSignal) {
+            effect(() => (fdLang = fdLangSignal()));
+        }
     }
     const resolver = new TranslationResolver();
     return (...args) => {
@@ -46,14 +73,34 @@ type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> =
 
 /**
  * Helper utility function for getting translations
+ *
+ * @deprecated Use resolveTranslationSignal instead for better performance and zoneless compatibility.
+ * Sync resolution with Observable-based updates will be removed in a future version.
+ *
+ * Migration:
+ * ```ts
+ * // Before
+ * const label = resolveTranslationSync('coreButton.label');
+ *
+ * // After
+ * const labelSignal = resolveTranslationSignal('coreButton.label');
+ * const label = labelSignal(); // Get current value
+ * ```
  */
 export function resolveTranslationSync<Key extends FdLanguageKeyIdentifier>(
     ...args: ResolveTranslationArgs<Key>
 ): string {
+    if (isDevMode()) {
+        console.warn(
+            '[DEPRECATION] resolveTranslationSync() is deprecated and will be removed in a future version.\n' +
+                'Use resolveTranslationSignal() instead for better performance.\n' +
+                'Migration: resolveTranslationSignal() returns Signal<string>\n' +
+                'See: https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/MIGRATION.md'
+        );
+    }
+
     const [key, ctxOrOptions, options] = args;
-    const _stopUpdating$ = new Subject<void>();
-    const fn = resolveTranslationSyncFn({ ...(ctxOrOptions || {}), ...(options || {}) }, _stopUpdating$);
-    const result = fn<Key>(...([key, ctxOrOptions] as ResolveFnArgs<Key>));
-    _stopUpdating$.next();
-    return result;
+    // Note: _stopUpdating$ is no longer needed with signal-based implementation
+    const fn = resolveTranslationSyncFn({ ...(ctxOrOptions || {}), ...(options || {}) });
+    return fn<Key>(...([key, ctxOrOptions] as ResolveFnArgs<Key>));
 }

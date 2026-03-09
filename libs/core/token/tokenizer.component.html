@@ -3,7 +3,7 @@
         <div
             [attr.aria-hidden]="tokenList.length === 0"
             role="listbox"
-            [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
+            [attr.aria-label]="('coreTokenizer.tokenizerLabel' | fdTranslate)()"
             [style.width]="_tokensContainerWidth"
         >
             <ng-content select="fd-token"></ng-content>
@@ -15,12 +15,14 @@
                 <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
                     @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                         {{
-                            'coreTokenizer.moreLabel'
+                            (
+                                'coreTokenizer.moreLabel'
                                 | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                            )()
                         }}
                     }
                     @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                        {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+                        {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
                     }
                 </span>
             }
@@ -54,7 +56,7 @@
                             <span
                                 class="fd-token__close"
                                 role="button"
-                                [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
+                                [attr.aria-label]="('coreToken.deleteButtonLabel' | fdTranslate)()"
                                 (click)="token.closeClickHandler($event)"
                             ></span>
                         }
@@ -68,10 +70,15 @@
     @if (_showMoreElement && _hiddenTokens.length > 0) {
         <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
             @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
-                {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
+                {{
+                    (
+                        'coreTokenizer.moreLabel'
+                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                    )()
+                }}
             }
             @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
-                {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+                {{ ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount })() }}
             }
         </span>
     }

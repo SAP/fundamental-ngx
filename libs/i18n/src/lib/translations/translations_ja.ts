@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ja.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'ビジー',
         defaultTitle: 'お待ちください'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'ヘッダーを展開',
         collapseLabel: 'ヘッダーを圧縮',
         pinLabel: 'ヘッダーを固定',
-        unpinLabel: 'ヘッダーの固定を解除'
+        unpinLabel: 'ヘッダーの固定を解除',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'ほか{count}件',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: '警告メッセージストリップ',
         announcementError: 'エラーメッセージストリップ',
         announcementSuccess: '正常終了メッセージストリップ',
-        closable: 'クローズ可能'
+        closable: 'クローズ可能',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '結果の一覧項目は1件です。',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: '上下の矢印で選択内容をナビゲートします。',
         escapeNavigateTokens:
             'Escape キーを押して入力フィールドを終了し、左右の矢印キーを使用して選択済みオプションをナビゲートします。',
-        tokensCountText: '含まれるトークンの合計: {length}'
+        tokensCountText: '含まれるトークンの合計: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'メインナビゲーション',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: '拒否'
     },
     coreTabs: {
-        tabListExpandButtonText: '表示を増やす'
+        tabListExpandButtonText: '表示を増やす',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: '表示を増やす',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: '時刻選択の入力',
-        timePickerButtonLabel: '日付選択を開く'
+        timePickerButtonLabel: '日付選択を開く',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: '削除可能',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'ウィザード'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: '詳細を表示するにはクリックするか Enter を押してください',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: '未開始'
     },
     platformFeedInput: {
-        userTitle: 'ユーザー'
+        userTitle: 'ユーザー',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: '詳細'
     },
     platformVHD: {
         selectedAndConditionLabel: '選択済み項目および条件',
@@ -576,7 +609,8 @@ export default {
         clearFilters: 'フィルタをクリア'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: '編集'
+        summarySectionEditStep: '編集',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'すべて',
@@ -589,7 +623,8 @@ export default {
             pattern: 'このフィールドの値は無効です。',
             required: 'このフィールドは必須です。',
             requiredTrue: 'このフィールドは必須です。'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: '管理',
@@ -618,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'オプションを選択'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'ノードを展開',

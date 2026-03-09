@@ -2,7 +2,7 @@
     @switch (column.dataType) {
         @case ('number') {
             <fdp-input
-                [placeholder]="'platformTable.editableCellNumberPlaceholder' | fdTranslate"
+                [placeholder]="('platformTable.editableCellNumberPlaceholder' | fdTranslate)()"
                 [(ngModel)]="columnValue"
                 [name]="_controlUniqName"
                 type="number"
@@ -11,7 +11,7 @@
         @case ('date') {
             <fdp-date-picker
                 type="single"
-                [placeholder]="'platformTable.editableCellDatePlaceholder' | fdTranslate"
+                [placeholder]="('platformTable.editableCellDatePlaceholder' | fdTranslate)()"
                 [name]="_controlUniqName"
                 [allowNull]="false"
                 [(ngModel)]="columnValue"
@@ -22,7 +22,7 @@
         }
         @default {
             <fdp-input
-                [placeholder]="'platformTable.editableCellStringPlaceholder' | fdTranslate"
+                [placeholder]="('platformTable.editableCellStringPlaceholder' | fdTranslate)()"
                 [(ngModel)]="columnValue"
                 [name]="_controlUniqName"
                 type="text"

@@ -15,6 +15,7 @@ import {
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
@@ -33,7 +34,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     templateUrl: './split-menu-button.component.html',
     styleUrl: 'split-menu-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, MenuTriggerDirective]
+    imports: [ButtonComponent, MenuTriggerDirective, FdTranslatePipe]
 })
 export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit {
     /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */

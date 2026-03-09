@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_th.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'ไม่ว่าง',
         defaultTitle: 'กรุณารอสักครู่'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'ขยายส่วนหัว',
         collapseLabel: 'ยุบรวมส่วนหัว',
         pinLabel: 'ปักหมุดส่วนหัว',
-        unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว'
+        unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'อีก {count} รายการ',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'แถบข้อความเตือน',
         announcementError: 'แถบข้อความแสดงข้อผิดพลาด',
         announcementSuccess: 'แถบข้อความแสดงความสำเร็จ',
-        closable: 'สามารถปิดได้'
+        closable: 'สามารถปิดได้',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: 'ไอเท็มในรายการผลลัพธ์ 1 รายการ',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'เนวิเกตไปยังรายการที่เลือกด้วยลูกศรขึ้นและลง',
         escapeNavigateTokens:
             'กด Escape เพื่อออกจากฟิลด์อินพุทและใช้แป้นลูกศรซ้ายและขวาเพื่อเนวิเกตไปยังตัวเลือกที่เลือก',
-        tokensCountText: 'มี Token ทั้งหมด: {length}'
+        tokensCountText: 'มี Token ทั้งหมด: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'การเนวิเกตหลัก',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'ปฏิเสธ'
     },
     coreTabs: {
-        tabListExpandButtonText: 'เพิ่มเติม'
+        tabListExpandButtonText: 'เพิ่มเติม',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'เพิ่มเติม',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'อินพุทของตัวเลือกเวลา',
-        timePickerButtonLabel: 'เปิดตัวเลือก'
+        timePickerButtonLabel: 'เปิดตัวเลือก',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'สามารถลบได้',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Wizard'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'คลิกหรือกด Enter เพื่อดูรายละเอียดเพิ่มเติม',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'ยังไม่เริ่ม'
     },
     platformFeedInput: {
-        userTitle: 'ผู้ใช้'
+        userTitle: 'ผู้ใช้',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'เพิ่มเติม'
     },
     platformVHD: {
         selectedAndConditionLabel: 'ไอเท็มและเงื่อนไขที่เลือก',
@@ -576,7 +609,8 @@ export default {
         clearFilters: 'เคลียร์ตัวกรอง'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'แก้ไข'
+        summarySectionEditStep: 'แก้ไข',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'ทั้งหมด',
@@ -589,7 +623,8 @@ export default {
             pattern: 'ค่าฟิลด์ไม่ถูกต้อง',
             required: 'ฟิลด์นี้เป็นฟิลด์บังคับ',
             requiredTrue: 'ฟิลด์นี้เป็นฟิลด์บังคับ'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'จัดการ',
@@ -618,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'เลือกตัวเลือก'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'ขยายโหนด',
