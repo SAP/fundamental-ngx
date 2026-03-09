@@ -6,8 +6,8 @@
                     (click)="openOverflowMain()"
                     [glyph]="navigationArrow()"
                     fdType="transparent"
-                    aria-label="Back"
-                    title="Back"
+                    [attr.aria-label]="('coreAvatarGroup.backButton' | fdTranslate)()"
+                    [title]="('coreAvatarGroup.backButton' | fdTranslate)()"
                 ></fd-button-bar>
             }
             <fd-bar-element>

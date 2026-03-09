@@ -1,12 +1,12 @@
 <fd-dialog>
     <fd-dialog-header>
         <ng-template fdkTemplate="header">
-            <p>{{ 'platformApprovalFlow.selectTypeDialogMoveApproverAs' | fdTranslate }}</p>
+            <p>{{ ('platformApprovalFlow.selectTypeDialogMoveApproverAs' | fdTranslate)() }}</p>
         </ng-template>
     </fd-dialog-header>
     <fd-dialog-body fdCompact>
         <span class="fd-form-label">
-            {{ 'platformApprovalFlow.selectTypeDialogParallelOrSerial' | fdTranslate }}
+            {{ ('platformApprovalFlow.selectTypeDialogParallelOrSerial' | fdTranslate)() }}
         </span>
         <fd-form-group class="fdp-approval-flow-select-type__form">
             <div fd-form-item>
@@ -16,7 +16,7 @@
                     id="select-type-parallel"
                     name="select-type-parallel"
                 >
-                    {{ 'platformApprovalFlow.selectTypeDialogNodeTypeParallel' | fdTranslate }}
+                    {{ ('platformApprovalFlow.selectTypeDialogNodeTypeParallel' | fdTranslate)() }}
                 </fd-radio-button>
             </div>
             <div fd-form-item>
@@ -26,13 +26,13 @@
                     id="select-type-serial"
                     name="select-type-serial"
                 >
-                    {{ 'platformApprovalFlow.selectTypeDialogNodeTypeSerial' | fdTranslate }}
+                    {{ ('platformApprovalFlow.selectTypeDialogNodeTypeSerial' | fdTranslate)() }}
                 </fd-radio-button>
             </div>
             @if (_nodeType === _nodeTypes.PARALLEL) {
                 <div fd-form-item>
                     <fd-checkbox [(ngModel)]="_toNextSerial">
-                        {{ 'platformApprovalFlow.addNodeDialogAddToNext' | fdTranslate }}
+                        {{ ('platformApprovalFlow.addNodeDialogAddToNext' | fdTranslate)() }}
                     </fd-checkbox>
                 </div>
             }
@@ -41,13 +41,13 @@
     <fd-dialog-footer fdCompact>
         <fd-button-bar
             fdType="emphasized"
-            [label]="'platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate"
+            [label]="('platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate)()"
             (click)="_submit()"
         ></fd-button-bar>
         <fd-button-bar
             fdkInitialFocus
             fdType="transparent"
-            [label]="'platformApprovalFlow.selectTypeDialogCancelButton' | fdTranslate"
+            [label]="('platformApprovalFlow.selectTypeDialogCancelButton' | fdTranslate)()"
             (click)="_dialogRef.close()"
         ></fd-button-bar>
     </fd-dialog-footer>

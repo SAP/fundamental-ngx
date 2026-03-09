@@ -21,9 +21,9 @@
                         fdType="transparent"
                         glyph="menu2"
                         (fdkClicked)="_navigationClicked($event)"
-                        [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
+                        [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()"
                         [attr.aria-label]="
-                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)
+                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()
                         "
                     ></button>
                 }
@@ -35,8 +35,8 @@
                     fdType="transparent"
                     [glyph]="navigationIcon()"
                     (fdkClicked)="_backClicked($event)"
-                    [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
-                    [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)"
+                    [attr.title]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)()"
+                    [attr.aria-label]="backButtonLabel || ('coreShellbar.backButtonLabel' | fdTranslate)()"
                 ></button>
             }
             <ng-content select="fd-shellbar-branding"></ng-content>
@@ -66,7 +66,7 @@
             @if (_hideAllComponents) {
                 <div class="fd-shellbar__action fd-shellbar__action--mobile fd-shellbar__action--shrink">
                     <button class="fd-button fd-button--transparent" (click)="_closeMobileSearch()">
-                        {{ 'coreShellbar.cancel' | fdTranslate }}
+                        {{ ('coreShellbar.cancel' | fdTranslate)() }}
                     </button>
                 </div>
             }

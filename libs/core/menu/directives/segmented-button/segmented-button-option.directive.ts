@@ -1,5 +1,15 @@
 import { DomPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Directive, ElementRef, HostListener, inject, Input, NgZone, Renderer2 } from '@angular/core';
+import {
+    AfterViewInit,
+    DestroyRef,
+    Directive,
+    ElementRef,
+    HostListener,
+    inject,
+    Input,
+    NgZone,
+    Renderer2
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, delayWhen, Observable, Subject, tap } from 'rxjs';
@@ -39,6 +49,9 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElem
     private _selected$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor() {
         this.clicked = this._clicked.asObservable();
         const ngZone = inject(NgZone);
@@ -52,7 +65,7 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElem
                 tap(([, selected]) => {
                     selected ? this._showDot() : this._hideDot();
                 }),
-                takeUntilDestroyed()
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }

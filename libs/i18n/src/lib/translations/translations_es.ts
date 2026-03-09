@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_es.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Ocupado',
         defaultTitle: 'Espere'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Desplegar cabecera',
         collapseLabel: 'Contraer cabecera',
         pinLabel: 'Anclar cabecera',
-        unpinLabel: 'Desanclar cabecera'
+        unpinLabel: 'Desanclar cabecera',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} más',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Línea de mensajes de advertencia',
         announcementError: 'Línea de mensajes de error',
         announcementSuccess: 'Línea de mensajes de confirmación',
-        closable: 'Se puede cerrar'
+        closable: 'Se puede cerrar',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 elemento de la lista de resultados',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Desplácese por las selecciones con las flechas de arriba y abajo.',
         escapeNavigateTokens:
             'Pulse Escape para salir del campo de entrada y utilice las teclas de flecha izquierda y derecha para desplazarse por las opciones seleccionadas.',
-        tokensCountText: 'Contiene tokens totales: {length}.'
+        tokensCountText: 'Contiene tokens totales: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Navegación principal',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Declinar'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Más'
+        tabListExpandButtonText: 'Más',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Más',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Entrada de selector de tiempo',
-        timePickerButtonLabel: 'Abrir selector'
+        timePickerButtonLabel: 'Abrir selector',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Borrable',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Asistente'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Hacer clic o pulsar intro para ver más detalles',
@@ -316,7 +345,11 @@ export default {
         statusNotStarted: 'no iniciado'
     },
     platformFeedInput: {
-        userTitle: 'Usuario'
+        userTitle: 'Usuario',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Más'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Elementos seleccionados y condiciones',
@@ -577,7 +610,8 @@ export default {
         clearFilters: 'Borrar filtros'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Editar'
+        summarySectionEditStep: 'Editar',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Todos',
@@ -590,7 +624,8 @@ export default {
             pattern: 'El valor del campo no es válido',
             required: 'El campo es obligatorio',
             requiredTrue: 'El campo es obligatorio'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Gestionar',
@@ -619,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Seleccione una opción'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expandir nodo',

@@ -14,6 +14,7 @@ import {
     booleanAttribute,
     computed,
     contentChildren,
+    effect,
     inject,
     input,
     model,
@@ -67,7 +68,7 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { shallowEqual } from 'fast-equals';
 import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
@@ -532,7 +533,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Observable stream of the current language configuration.
      * @hidden
      */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /**
      * Helper for resolving translation keys to localized strings.
@@ -550,18 +551,20 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         super();
 
         this.contentDensityObserver.subscribe();
+
+        // Effect for language changes
+        effect(() => {
+            const lang = this._langSignal();
+            this._invalidEntryMessageOverride.set(
+                this._translationResolver.resolve(lang, 'platformMultiCombobox.invalidEntryError')
+            );
+        });
     }
 
     /** @hidden */
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
         this._openDataStream(this.matchingStrategy());
-
-        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
-            this._invalidEntryMessageOverride.set(
-                this._translationResolver.resolve(lang, 'platformMultiCombobox.invalidEntryError')
-            );
-        });
     }
 
     /** @hidden */

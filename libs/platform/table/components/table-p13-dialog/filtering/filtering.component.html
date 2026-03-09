@@ -3,7 +3,7 @@
         <ng-template fdkTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4">{{ 'platformTable.P13FilterDialogHeader' | fdTranslate }}</h4>
+                    <h4 fd-title [headerSize]="4">{{ ('platformTable.P13FilterDialogHeader' | fdTranslate)() }}</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -18,10 +18,12 @@
         <fd-panel [expanded]="_includePanelExpanded">
             <div fd-panel-title>
                 {{
-                    (_validIncludeRulesCount > 0
-                        ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
-                        : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
-                    ) | fdTranslate: { count: _validIncludeRulesCount }
+                    (
+                        (_validIncludeRulesCount > 0
+                            ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
+                            : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
+                        ) | fdTranslate: { count: _validIncludeRulesCount }
+                    )()
                 }}
             </div>
             <div fd-panel-content>
@@ -41,9 +43,9 @@
                                     fdType="transparent"
                                     glyph="sys-cancel"
                                     [attr.aria-label]="
-                                        'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
+                                        ('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()
                                     "
-                                    [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                    [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
                                     (click)="_removeRule(rule, _includeRules)"
                                 ></button>
                                 @if (_includeRules.length - 1 === $index) {
@@ -52,9 +54,9 @@
                                         fdType="transparent"
                                         glyph="add"
                                         [attr.aria-label]="
-                                            'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
+                                            ('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()
                                         "
-                                        [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                        [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
                                         (click)="_addNewRule(_includeRules)"
                                     ></button>
                                 }
@@ -68,10 +70,12 @@
         <fd-panel [expanded]="_excludePanelExpanded">
             <div fd-panel-title>
                 {{
-                    (_validExcludeRulesCount > 0
-                        ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
-                        : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
-                    ) | fdTranslate: { count: _validExcludeRulesCount }
+                    (
+                        (_validExcludeRulesCount > 0
+                            ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
+                            : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
+                        ) | fdTranslate: { count: _validExcludeRulesCount }
+                    )()
                 }}
             </div>
             <div fd-panel-content>
@@ -91,9 +95,9 @@
                                     fdType="transparent"
                                     glyph="sys-cancel"
                                     [attr.aria-label]="
-                                        'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
+                                        ('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()
                                     "
-                                    [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                    [title]="('platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate)()"
                                     (click)="_removeRule(rule, _excludeRules)"
                                 ></button>
                                 @if (_excludeRules.length - 1 === $index) {
@@ -102,9 +106,9 @@
                                         fdType="transparent"
                                         glyph="add"
                                         [attr.aria-label]="
-                                            'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
+                                            ('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()
                                         "
-                                        [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                        [title]="('platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate)()"
                                         (click)="_addNewRule(_excludeRules)"
                                     ></button>
                                 }
@@ -118,12 +122,12 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [label]="'platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate"
+            [label]="('platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate)()"
             (click)="confirm()"
         ></fd-button-bar>
         <fd-button-bar
             fdType="transparent"
-            [label]="'platformTable.P13FilterDialogCancelBtnLabel' | fdTranslate"
+            [label]="('platformTable.P13FilterDialogCancelBtnLabel' | fdTranslate)()"
             (click)="cancel()"
         ></fd-button-bar>
     </fd-dialog-footer>

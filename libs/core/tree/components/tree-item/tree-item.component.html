@@ -30,7 +30,7 @@
                 class="fd-tree__expander"
                 aria-hidden="true"
                 role="presentation"
-                [attr.aria-label]="(expanded ? 'coreTree.collapse' : 'coreTree.expand') | fdTranslate"
+                [attr.aria-label]="((expanded ? 'coreTree.collapse' : 'coreTree.expand') | fdTranslate)()"
                 [class.is-expanded]="expanded"
             >
                 <fd-icon

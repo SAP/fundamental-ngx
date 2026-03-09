@@ -15,12 +15,11 @@ import {
     signal,
     viewChild
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { map } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -127,25 +126,19 @@ export class NavigationMoreButtonComponent implements AfterViewInit {
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _translationResolver = inject(TranslationResolver);
 
     /** Translation signal for more button aria-label. */
-    private readonly _moreButtonAriaLabel$ = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.moreButtonAriaLabel'))
-        ),
-        { initialValue: 'Displays additional navigation items that are hidden due to limited screen space' }
+    private readonly _moreButtonAriaLabel$ = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'btpNavigation.moreButtonAriaLabel')
     );
 
     /** Translation signal for overflow menu aria-label. */
-    private readonly _overflowMenuAriaLabel$ = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.overflowMenuAriaLabel'))
-        ),
-        { initialValue: 'Additional Navigation Items' }
+    private readonly _overflowMenuAriaLabel$ = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'btpNavigation.overflowMenuAriaLabel')
     );
 
     /** @hidden */

@@ -47,9 +47,9 @@
 @if (assistiveTools && !_showMobileActions) {
     <fd-shellbar-action
         glyph="sys-help"
-        label="{{ 'coreShellbar.assistiveTools' | fdTranslate }}"
+        label="({{ ('coreShellbar.assistiveTools' | fdTranslate)() }})()"
         [notificationCount]="0"
-        notificationLabel="{{ 'coreShellbar.assistiveTools' | fdTranslate }}"
+        notificationLabel="({{ ('coreShellbar.assistiveTools' | fdTranslate)() }})()"
         [callback]="assistiveToolsCallback"
     >
     </fd-shellbar-action>

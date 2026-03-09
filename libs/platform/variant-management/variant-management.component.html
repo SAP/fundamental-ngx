@@ -40,7 +40,7 @@
                 <div fd-bar [barDesign]="displaySearch ? 'header-with-subheader' : 'header'">
                     <div fd-bar-left>
                         <fd-bar-element>
-                            <h5 fd-title>{{ 'platformVariantManagement.myViews' | fdTranslate }}</h5>
+                            <h5 fd-title>{{ ('platformVariantManagement.myViews' | fdTranslate)() }}</h5>
                         </fd-bar-element>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <div fd-bar-left>
                             <fd-bar-element>
                                 <fdp-search-field
-                                    [placeholder]="'platformVariantManagement.search' | fdTranslate"
+                                    [placeholder]="('platformVariantManagement.search' | fdTranslate)()"
                                     (searchSubmit)="_onSearchSubmit($event)"
                                     (cancelSearch)="_cancelSearch()"
                                     [disableRefresh]="true"
@@ -78,18 +78,18 @@
                             @if (!activeVariant.readonly && _variantChanged) {
                                 <fd-button-bar
                                     fdType="emphasized"
-                                    [label]="'platformVariantManagement.save' | fdTranslate"
+                                    [label]="('platformVariantManagement.save' | fdTranslate)()"
                                     (click)="saveCurrentVariant()"
                                 >
                                 </fd-button-bar>
                             }
                             <fd-button-bar
                                 [fdType]="activeVariant.readonly || !_variantChanged ? 'emphasized' : 'transparent'"
-                                [label]="'platformVariantManagement.saveAs' | fdTranslate"
+                                [label]="('platformVariantManagement.saveAs' | fdTranslate)()"
                                 (click)="_openSaveDialog()"
                             ></fd-button-bar>
                             <fd-button-bar
-                                [label]="'platformVariantManagement.manage' | fdTranslate"
+                                [label]="('platformVariantManagement.manage' | fdTranslate)()"
                                 (click)="_openManageDialog()"
                             ></fd-button-bar>
                         </div>

@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_sk.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Zaneprázdnené',
         defaultTitle: 'Čakajte prosím'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Rozbaliť hlavičku',
         collapseLabel: 'Zbaliť hlavičku',
         pinLabel: 'Pripnúť hlavičku',
-        unpinLabel: 'Zrušiť pripnutie hlavičky'
+        unpinLabel: 'Zrušiť pripnutie hlavičky',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} viac',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Riadok upozorňujúcej správy',
         announcementError: 'Riadok chybovej správy',
         announcementSuccess: 'Riadok správy o úspešnosti',
-        closable: 'Možnosť zavrieť'
+        closable: 'Možnosť zavrieť',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 položka zoznamu výsledkov.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Prechádzajte výbermi pomocou šípok nahor a nadol.',
         escapeNavigateTokens:
             'Stlačením klávesu Esc opustíte vstupné pole a pomocou klávesov so šípkou doľava a doprava môžete prechádzať vybranými možnosťami.',
-        tokensCountText: 'Obsahuje celkový počet tokenov: {length}.'
+        tokensCountText: 'Obsahuje celkový počet tokenov: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hlavná navigácia',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Zamietnuť'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Ďalšie'
+        tabListExpandButtonText: 'Ďalšie',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Ďalšie',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zadanie pre výber času',
-        timePickerButtonLabel: 'Otvoriť výber'
+        timePickerButtonLabel: 'Otvoriť výber',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Vymazateľné',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Sprievodca'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Kliknutím alebo stlačením klávesu Enter zobrazíte ďalšie podrobnosti',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'nespustené'
     },
     platformFeedInput: {
-        userTitle: 'Používateľ'
+        userTitle: 'Používateľ',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Viac'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Vybraté položky a podmienky',
@@ -576,7 +609,8 @@ export default {
         clearFilters: 'Vymazať filtre'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Upraviť'
+        summarySectionEditStep: 'Upraviť',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Všetko',
@@ -589,7 +623,8 @@ export default {
             pattern: 'Hodnota poľa je neplatná',
             required: 'Toto pole je povinné',
             requiredTrue: 'Toto pole je povinné'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Spravovať',
@@ -618,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Vyberte možnosť'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Rozbaliť uzol',

@@ -2,7 +2,7 @@
     class="fd-button-split"
     [class]="typeClass"
     role="group"
-    aria-label="split-button"
+    [attr.aria-label]="('platformSplitMenuButton.groupLabel' | fdTranslate)()"
     [attr.dir]="dir()"
     [style.max-width]="splitButtonMaxWidth"
 >

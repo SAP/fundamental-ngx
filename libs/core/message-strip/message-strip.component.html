@@ -4,9 +4,7 @@
             <ng-template [ngTemplateOutlet]="icon()!.templateRef"></ng-template>
         } @else {
             <fd-icon [glyph]="typeSpecificIconName()" role="presentation" aria-hidden="true"></fd-icon>
-            <span class="fd-message-strip__sr-only" id="{{ id() }}-hidden-text">{{
-                messageStripHiddenText$ | async
-            }}</span>
+            <span class="fd-message-strip__sr-only" id="{{ id() }}-hidden-text">{{ messageStripHiddenText() }}</span>
         }
     </div>
 }
@@ -22,7 +20,7 @@
         fdCompact
         (click)="dismiss()"
         [attr.aria-controls]="id()"
-        [attr.aria-label]="dismissBtnTitle() || (defaultDismissButtonText$ | async)"
-        [attr.title]="dismissBtnTitle() || (defaultDismissButtonText$ | async)"
+        [ariaLabel]="dismissBtnTitle() || defaultDismissButtonText()"
+        [attr.title]="dismissBtnTitle() || defaultDismissButtonText()"
     ></button>
 }

@@ -3,12 +3,12 @@
         fd-button
         fdType="transparent"
         glyph="navigation-left-arrow"
-        [title]="'platformTable.filterDialogBackToColumns' | fdTranslate"
-        [ariaLabel]="'platformTable.filterDialogBackToColumns' | fdTranslate"
+        [title]="('platformTable.filterDialogBackToColumns' | fdTranslate)()"
+        [ariaLabel]="('platformTable.filterDialogBackToColumns' | fdTranslate)()"
         (click)="back.emit()"
     ></button>
     <span role="heading" [attr.aria-level]="headingLevel" fd-title [headerSize]="4">
-        {{ 'platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label } }}
+        {{ ('platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label })() }}
     </span>
 </ng-template>
 

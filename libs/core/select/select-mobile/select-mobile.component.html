@@ -7,7 +7,7 @@
             @if (mobileConfig.hasCloseButton) {
                 <button
                     role="button"
-                    aria-label="close"
+                    [attr.aria-label]="('coreSelect.closeButton' | fdTranslate)()"
                     fd-dialog-close-button
                     [mobile]="true"
                     (click)="_cancel()"

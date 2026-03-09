@@ -25,7 +25,7 @@
             [loading]="_loading && _firstLoadingDone"
             role="alert"
             [attr.aria-busy]="_loading"
-            [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : null"
+            [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate)() : null"
         >
             <div
                 fd-list
@@ -137,7 +137,7 @@
                     [block]="true"
                     [loading]="_loading"
                     role="alert"
-                    [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : loadTitle"
+                    [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate)() : loadTitle"
                 >
                 </fd-busy-indicator>
                 {{ loadTitle }}

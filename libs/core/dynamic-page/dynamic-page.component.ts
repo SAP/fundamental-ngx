@@ -38,6 +38,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { asyncScheduler, fromEvent, Observable, startWith } from 'rxjs';
 import { debounceTime, map, observeOn } from 'rxjs/operators';
 import { DynamicPage } from './dynamic-page.interface';
@@ -56,7 +57,7 @@ import { FD_DYNAMIC_PAGE } from './dynamic-page.tokens';
             useExisting: DynamicPageComponent
         }
     ],
-    imports: [CdkScrollable, ScrollbarDirective]
+    imports: [CdkScrollable, ScrollbarDirective, FdTranslatePipe]
 })
 export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     /** Whether DynamicPage should snap on scroll */

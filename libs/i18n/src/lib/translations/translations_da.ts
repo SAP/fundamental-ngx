@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_da.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Optaget',
         defaultTitle: 'Vent venligst'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Udvid overskrift',
         collapseLabel: 'Skjul overskrift',
         pinLabel: 'Fastgør overskrift',
-        unpinLabel: 'Frigør overskrift'
+        unpinLabel: 'Frigør overskrift',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} mere',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Meddelelseslinje for advarsel',
         announcementError: 'Meddelelseslinje for fejl',
         announcementSuccess: 'Meddelelseslinje for uden fejl',
-        closable: 'Kan lukkes'
+        closable: 'Kan lukkes',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlisteelement.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Naviger i valgene med pil op og pil ned.',
         escapeNavigateTokens:
             'Tryk på Escape for at afslutte inputfeltet, og brug venstre og højre piletast til at navigere gennem de valgte muligheder.',
-        tokensCountText: 'Indeholder samlet antal tokens: {length}.'
+        tokensCountText: 'Indeholder samlet antal tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigation',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Afvis'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Flere'
+        tabListExpandButtonText: 'Flere',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Mere',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Input for tidsvælger',
-        timePickerButtonLabel: 'Åbn vælger'
+        timePickerButtonLabel: 'Åbn vælger',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Kan slettes',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Guide'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Klik eller tryk på Enter for at få vist flere detaljer',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'ikke startet'
     },
     platformFeedInput: {
-        userTitle: 'Bruger'
+        userTitle: 'Bruger',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mere'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valgte elementer og betingelser',
@@ -576,7 +609,8 @@ export default {
         clearFilters: 'Ryd filtre'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Rediger'
+        summarySectionEditStep: 'Rediger',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Alle',
@@ -589,7 +623,8 @@ export default {
             pattern: 'Feltværdien er ugyldig',
             required: 'Feltet er obligatorisk',
             requiredTrue: 'Feltet er obligatorisk'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Administrer',
@@ -618,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Vælg en mulighed'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Udvid node',

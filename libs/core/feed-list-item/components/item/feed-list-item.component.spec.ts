@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
-import { of } from 'rxjs';
+import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { FeedListItemComponent } from './feed-list-item.component';
 
 const componentClassPrefix = 'fd-feed-list__item';
@@ -19,8 +18,8 @@ describe('FeedListItemComponent', () => {
             imports: [FeedListItemComponent],
             providers: [
                 {
-                    provide: FD_LANGUAGE,
-                    useValue: of({
+                    provide: FD_LANGUAGE_SIGNAL,
+                    useValue: signal({
                         ...FD_LANGUAGE_ENGLISH,
                         coreFeedListItem: { ...FD_LANGUAGE_ENGLISH.coreFeedListItem, moreLabel, lessLabel }
                     })

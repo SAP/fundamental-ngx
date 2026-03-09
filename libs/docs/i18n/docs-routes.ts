@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { configureRoutes, CURRENT_LIB, StackblitzService } from '@fundamental-ngx/docs/shared';
-import { guides, utilities } from './docs-data.json';
+import { guides } from './docs-data.json';
 
 const configureLibRoutes = configureRoutes({});
 
@@ -13,25 +13,29 @@ export const ROUTES: Routes = [
                 {
                     header: 'Guides',
                     content: guides
-                },
-                {
-                    header: 'Utilities',
-                    content: utilities
                 }
             ]
         },
         providers: [StackblitzService, { provide: CURRENT_LIB, useValue: 'i18n' }],
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '', redirectTo: 'getting-started', pathMatch: 'full' },
             {
                 path: 'home',
                 loadComponent: () =>
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.LibraryReadmePageComponent)
             },
             {
+                path: 'getting-started',
+                loadChildren: () => import('./getting-started').then(configureLibRoutes)
+            },
+            {
                 path: 'writing-translations',
                 loadComponent: () =>
                     import('./writing-translations.component').then((m) => m.WritingTranslationsComponent)
+            },
+            {
+                path: 'troubleshooting',
+                loadChildren: () => import('./troubleshooting').then(configureLibRoutes)
             },
             {
                 path: 'loading-translations',

@@ -24,7 +24,7 @@ import {
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { FILTER_STRATEGY, FilterAllStrategy } from '@fundamental-ngx/platform/table';
@@ -100,7 +100,7 @@ export class SmartFilterBarConditionsDialogComponent {
     private _submittedForms: any[] = [];
 
     /** @hidden */
-    private resolveTranslation = resolveTranslationSyncFn();
+    private resolveTranslation = resolveTranslationSignalFn();
 
     /** @hidden */
     constructor(
@@ -199,7 +199,7 @@ export class SmartFilterBarConditionsDialogComponent {
             const translationKey = 'platformSmartFilterBar.' + labelsConfig[strategyItem];
             labelsConfig[strategyItem] = this.resolveTranslation(
                 translationKey as `platformSmartFilterBar.${SmartFilterBarStrategyLabels[SmartFilterBarStrategy]}`
-            );
+            )();
         }
 
         return strategy.map((s: FilterAllStrategy) => ({
@@ -244,7 +244,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValuePlaceholder'),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValuePlaceholder')(),
                 controlType: this.config.controlType,
                 when: (value) => value.operator !== FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -262,7 +262,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueFromPlaceholder'),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueFromPlaceholder')(),
                 controlType: this.config.controlType,
                 when: (value) => value.operator === FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -280,7 +280,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value2,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueToPlaceholder'),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueToPlaceholder')(),
                 required: true,
                 controlType: this.config.controlType,
                 when: (value) => value?.operator === FILTER_STRATEGY.BETWEEN,

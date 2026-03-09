@@ -19,7 +19,7 @@
                     role="button"
                     [attr.aria-expanded]="_isExpanded()"
                     [attr.aria-labelledby]="_headerComponent.titleId()"
-                    aria-label="Toggle header"
+                    [attr.aria-label]="('coreDynamicPage.toggleHeader' | fdTranslate)()"
                     tabindex="0"
                     (keydown.enter)="toggleCollapse()"
                     class="fd-dynamic-page__header-button"
