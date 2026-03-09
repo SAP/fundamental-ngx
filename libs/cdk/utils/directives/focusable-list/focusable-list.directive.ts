@@ -385,7 +385,6 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
                 }
                 this._keyManager?.setActiveItem(index);
             });
-            keydownObservables[index] = item.keydown;
         }
 
         merge(...keydownObservables)
