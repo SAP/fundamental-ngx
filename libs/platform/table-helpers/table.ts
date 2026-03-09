@@ -181,6 +181,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract clearTableRows(): void;
 
+    abstract loadNextPage(): void;
+
     /** Toolbar Sort Settings button click event */
     readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();
 

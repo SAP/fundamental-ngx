@@ -1717,6 +1717,11 @@ export class TableComponent<T = any>
         this.onTableRowsChanged();
     }
 
+    /** Programatically loads the next page, for use with pageScrolling. */
+    loadNextPage(): void {
+        this._onSpyIntersect(true);
+    }
+
     /** @hidden */
     _onSpyIntersect(intersected: boolean): void {
         if (!intersected) {
@@ -2049,6 +2054,11 @@ export class TableComponent<T = any>
         this.onTableRowsChanged();
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
+
+        // Automatically trigger a page load if pageScrolling and only first page is loaded
+        if (this.pageScrolling && rows.length === this.pageSize && this.getTableState().page.currentPage === 1) {
+            this._onSpyIntersect(true);
+        }
 
         this._shouldEmitRowsChange = true;
 

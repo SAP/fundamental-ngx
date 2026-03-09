@@ -14,6 +14,14 @@
         </li>
     </ul>
     <p>Consider that columns width automatically calculates only after the first set of data comes to the component.</p>
+    <p>
+        Page scrolling is triggered when the user scrolls to an invisible row that is placed at the end of the table by
+        the library. The invisible row must be out of the viewport and then scrolled in to the viewport to trigger a new
+        page load. There are some edge cases where this may be impossible - for example, if the initial load only gets a
+        small number of rows and the invisible row cannot leave the viewport, to be scrolled back to. In this case, page
+        scrolling can be handled programmatically in the application with the table component's `loadNextPage()`
+        function.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-page-scrolling-example></fdp-platform-table-page-scrolling-example>

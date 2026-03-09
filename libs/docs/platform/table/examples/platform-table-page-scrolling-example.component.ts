@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, finalize } from 'rxjs/operators';
 
 import { AsyncPipe } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     PlatformTableModule,
+    TableComponent,
     TableDataProvider,
     TableDataSource,
     TableRowSelectionChangeEvent,
@@ -32,10 +34,14 @@ import {
         FdpCellDef,
         FdpTableCell,
         AsyncPipe,
-        FdDatetimeModule
+        FdDatetimeModule,
+        ButtonComponent
     ]
 })
 export class PlatformTablePageScrollingExampleComponent {
+    @ViewChild(TableComponent)
+    tableComponent: TableComponent;
+
     sourceProvider = new TableDataProviderExample();
     source = new TableDataSource<ExampleItem>(this.sourceProvider);
 
@@ -59,6 +65,10 @@ export class PlatformTablePageScrollingExampleComponent {
             const storedItem = ALL_ITEMS.find((i) => i.name === item.name)!;
             storedItem.selected = true;
         });
+    }
+
+    newPageButtonClick(): void {
+        this.tableComponent.loadNextPage();
     }
 }
 
