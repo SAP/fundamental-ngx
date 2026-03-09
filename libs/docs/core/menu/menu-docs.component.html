@@ -6,9 +6,21 @@
     </p>
     <p>To create a simple menu, use the following directives:</p>
     <ul>
-        <li><code>fd-menu-item</code> - wraps each list item</li>
-        <li><code>fd-menu-interactive</code> - makes the content interactive (button or anchor)</li>
-        <li><code>fd-menu-title</code> - displays the menu item text</li>
+        <li><code>fd-menu-item</code> - wraps each list item.</li>
+        <li><code>fd-menu-interactive</code> - makes the content interactive (button or anchor).</li>
+        <li>
+            <code>fd-menu-title</code> - displays the menu item text. By default, long text wraps onto multiple lines.
+            Set <code>[truncate]="true"</code> to truncate with an ellipsis instead.
+        </li>
+        <li>
+            <code>fd-menu-subtitle</code> - displays optional secondary text below the title. Supports the same wrapping
+            and <code>[truncate]="true"</code> behavior as the title.
+        </li>
+        <li>
+            <code>fd-menu-content</code> - groups the title and subtitle together. Required when a menu item uses both
+            <code>fd-menu-title</code> and <code>fd-menu-subtitle</code>. Not needed when only
+            <code>fd-menu-title</code> is used.
+        </li>
     </ul>
     <p>Attach the menu to any HTML element using the <code>fdMenuTrigger</code> directive.</p>
 </description>

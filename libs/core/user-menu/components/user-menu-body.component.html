@@ -14,7 +14,7 @@
                 <fd-bar-element>
                     <fd-button-bar
                         fdkInitialFocus
-                        ariaLabel="previous"
+                        [ariaLabel]="('coreUserMenu.previousButton' | fdTranslate)()"
                         [glyph]="navigationArrow()"
                         (click)="clearSubmenu()"
                     >
@@ -43,7 +43,12 @@
             }
 
             <fd-bar-element>
-                <fd-button-bar ariaLabel="close" glyph="decline" (click)="closeDialog(dialogRef)"> </fd-button-bar>
+                <fd-button-bar
+                    [ariaLabel]="('coreUserMenu.closeButton' | fdTranslate)()"
+                    glyph="decline"
+                    (click)="closeDialog(dialogRef)"
+                >
+                </fd-button-bar>
             </fd-bar-element>
         </div>
     </div>

@@ -21,7 +21,6 @@ import {
     SideNavigationMainComponent,
     SideNavigationUtilityDirective
 } from '@fundamental-ngx/cx/side-navigation';
-import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fdx-side-navigation-overflow-example',
@@ -31,7 +30,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
     imports: [
         ButtonComponent,
         ScrollbarDirective,
-        I18nModule,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
         SideNavigationButtonDirective,

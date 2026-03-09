@@ -49,8 +49,8 @@
                 <span [id]="_semanticLabelId" aria-hidden="true" class="fd-switch__invisible-text">
                     {{
                         _cva.value
-                            ? ('coreSwitch.semanticAcceptLabel' | fdTranslate)
-                            : ('coreSwitch.semanticDeclineLabel' | fdTranslate)
+                            ? ('coreSwitch.semanticAcceptLabel' | fdTranslate)()
+                            : ('coreSwitch.semanticDeclineLabel' | fdTranslate)()
                     }}
                 </span>
             }

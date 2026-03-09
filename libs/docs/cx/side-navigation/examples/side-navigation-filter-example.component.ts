@@ -24,7 +24,6 @@ import {
     SideNavigationMainComponent,
     SideNavigationUtilityDirective
 } from '@fundamental-ngx/cx/side-navigation';
-import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fdx-side-navigation-filter-example',
@@ -36,7 +35,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         FormsModule,
         ButtonComponent,
         ScrollbarDirective,
-        I18nModule,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
         SideNavigationButtonDirective,

@@ -31,8 +31,10 @@
                                     fdType="transparent"
                                     glyph="decline"
                                     [title]="
-                                        'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle'
+                                        (
+                                            'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle'
                                             | fdTranslate
+                                        )()
                                     "
                                     type="button"
                                 ></button>
@@ -47,7 +49,9 @@
                             <button
                                 fd-button
                                 (click)="addCondition()"
-                                [label]="'platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate"
+                                [label]="
+                                    ('platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate)()
+                                "
                             ></button>
                         </div>
                     </div>
@@ -63,13 +67,13 @@
         <fd-button-bar
             (click)="applyConditions()"
             fdType="emphasized"
-            [label]="'platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate"
+            [label]="('platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate)()"
         >
         </fd-button-bar>
         <fd-button-bar
             (click)="_cancel()"
             fdType="transparent"
-            [label]="'platformSmartFilterBar.defineConditionsCancelButton' | fdTranslate"
+            [label]="('platformSmartFilterBar.defineConditionsCancelButton' | fdTranslate)()"
         ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

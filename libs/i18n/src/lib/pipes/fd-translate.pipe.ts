@@ -1,66 +1,66 @@
-import { ChangeDetectorRef, DestroyRef, Pipe, PipeTransform } from '@angular/core';
-import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, skip, switchMap } from 'rxjs';
-
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { computed, inject, Pipe, PipeTransform, Signal, untracked } from '@angular/core';
 import { FdLanguageKeyIdentifier } from '../models';
 import { FdLanguageKeyArgs } from '../models/fd-language-key';
-import { resolveTranslationObservableFn } from '../utils';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '../utils';
 
+/**
+ * Pure pipe that translates a key to a computed signal string.
+ *
+ * **IMPORTANT:** This pipe now returns a Signal<string> instead of a plain string.
+ * Templates must call the signal to get the value: `{{ ('key' | fdTranslate)() }}`
+ *
+ * @example
+ * ```html
+ * <!-- Modern signal-based usage -->
+ * <button>{{ ('coreButton.save' | fdTranslate)() }}</button>
+ *
+ * <!-- With arguments -->
+ * <span>{{ ('coreList.itemCount' | fdTranslate: { count: items.length })() }}</span>
+ * ```
+ *
+ * **Migration from Observable-based API:**
+ * ```html
+ * <!-- Before (Observable-based) -->
+ * {{ 'coreButton.save' | fdTranslate }}
+ *
+ * <!-- After (Signal-based) -->
+ * {{ ('coreButton.save' | fdTranslate)() }}
+ * ```
+ */
 @Pipe({
     name: 'fdTranslate',
-    pure: false, // required to update the value when the observable is resolved
+    pure: true, // Now pure - signal reactivity handles updates
     standalone: true
 })
 export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
-    private readonly _translationResolver = resolveTranslationObservableFn();
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
-    private readonly _key$ = new BehaviorSubject<FdLanguageKeyIdentifier | undefined>(undefined);
+    private readonly _resolver = new TranslationResolver();
 
-    /** @hidden */
-    private readonly _args$ = new BehaviorSubject<FdLanguageKeyArgs | undefined>(undefined);
-
-    /** @hidden */
-    private _value: string | undefined;
-
-    /** @hidden */
-    constructor(
-        private readonly _destroyRef: DestroyRef,
-        private _cdr: ChangeDetectorRef
-    ) {
-        this._instantiateSubscription();
-    }
-
-    /** Translate a key with arguments and, optionally, default value */
+    /**
+     * Translate a key with arguments and, optionally, default value.
+     *
+     * @returns A computed signal that updates when language or arguments change
+     */
     transform(
         key: FdLanguageKeyIdentifier | null,
         args?: FdLanguageKeyArgs | Record<string, any>,
         defaultValue = ''
-    ): string {
+    ): Signal<string> {
         if (!key) {
-            return defaultValue;
+            // Return constant signal for null key
+            return computed(() => defaultValue);
         }
 
-        this._key$.next(key);
-        this._args$.next(args);
+        // Capture args in untracked context to avoid over-reactivity
+        const capturedArgs = untracked(() => args);
 
-        return this._value || defaultValue;
-    }
-
-    /** @hidden */
-    private _instantiateSubscription(): void {
-        combineLatest([
-            this._key$.pipe(skip(1), filter(Boolean), distinctUntilChanged()),
-            this._args$.pipe(skip(1), distinctUntilChanged())
-        ])
-            .pipe(
-                switchMap(([key, args]) => this._translationResolver(key, args as any)),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe((value) => {
-                this._value = value;
-                this._cdr.markForCheck();
-            });
+        // Return computed signal that reacts to language changes
+        return computed(() => {
+            const lang = this._langSignal();
+            return this._resolver.resolve(lang, key, capturedArgs as any) || defaultValue;
+        });
     }
 }

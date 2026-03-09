@@ -2,12 +2,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     CodeExampleComponent,
-    CodeSnippetComponent,
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
-    SeparatorComponent
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { BasicUsageExampleComponent } from './examples/basic-usage-example/basic-usage-example.component';
+import { JsonLoadingExampleComponent } from './examples/json-loading-example/json-loading-example.component';
+import { PropertiesLoadingExampleComponent } from './examples/properties-loading-example/properties-loading-example.component';
 
 @Component({
     templateUrl: './loading-translations-docs.component.html',
@@ -15,94 +19,57 @@ import {
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        CodeSnippetComponent,
         SeparatorComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
-        LinkComponent
+        LinkComponent,
+        BasicUsageExampleComponent,
+        JsonLoadingExampleComponent,
+        PropertiesLoadingExampleComponent
     ]
 })
 export class LoadingTranslationsDocsComponent {
-    basicUsageExample = {
-        language: 'typescript',
-        code: `import { FD_LANGUAGE, FdLanguage, FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n';
-
-// app.module
-@NgModule({
-    // ...
-    providers: [
+    basicUsageExampleFiles: ExampleFile[] = [
         {
-            provide: FD_LANGUAGE,
-            useValue: of<FdLanguage>(FD_LANGUAGE_UKRAINIAN),
+            language: 'html',
+            code: getAssetFromModuleAssets('basic-usage-example/basic-usage-example.component.html'),
+            fileName: 'basic-usage-example'
         },
-    ],
-})
-export class AppModule {}`
-    };
-
-    jsonUsageExample = {
-        language: 'typescript',
-        code: `
-import { NgModule, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { of, map } from 'rxjs';
-import { FD_LANGUAGE, FdLanguage, loadJson } from '@fundamental-ngx/i18n';
-
-/**
- * uk.json content
-    {
-        ...other properties
-        "coreMultiComboBox.selectAllLabel": "Select all label custom"
-    }
-*/
-
-@NgModule({
-    // ...
-    providers: [
         {
-            provide: FD_LANGUAGE,
-            useFactory: () => {
-                return inject(HttpClient)
-                    .get<Record<string, string>>('./assets/i18n/uk.json')
-                    .pipe(map(loadJson))
-            }
-        },
-    ],
-})
-export class AppModule {}
-        `
-    };
+            language: 'typescript',
+            component: 'BasicUsageExampleComponent',
+            code: getAssetFromModuleAssets('basic-usage-example/basic-usage-example.component.ts'),
+            fileName: 'basic-usage-example'
+        }
+    ];
 
-    propertiesUsageExample = {
-        language: 'typescript',
-        code: `
-import { NgModule, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { of, map } from 'rxjs';
-import { FD_LANGUAGE, FdLanguage, loadProperties } from '@fundamental-ngx/i18n';
-
-/**
- * uk.properties content
-...other properties
-coreMultiComboBox.selectAllLabel = Select all label custom
-*/
-
-@NgModule({
-    // ...
-    providers: [
+    jsonLoadingExampleFiles: ExampleFile[] = [
         {
-            provide: FD_LANGUAGE,
-            useFactory: () => {
-                return inject(HttpClient) // Or any other way to get the file content
-                    .get('./assets/i18n/uk.properties', { responseType: 'text' })
-                    .pipe(map(loadProperties))
-            }
+            language: 'html',
+            code: getAssetFromModuleAssets('json-loading-example/json-loading-example.component.html'),
+            fileName: 'json-loading-example'
         },
-    ],
-})
-export class AppModule {}
-        `
-    };
+        {
+            language: 'typescript',
+            component: 'JsonLoadingExampleComponent',
+            code: getAssetFromModuleAssets('json-loading-example/json-loading-example.component.ts'),
+            fileName: 'json-loading-example'
+        }
+    ];
+
+    propertiesLoadingExampleFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets('properties-loading-example/properties-loading-example.component.html'),
+            fileName: 'properties-loading-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PropertiesLoadingExampleComponent',
+            code: getAssetFromModuleAssets('properties-loading-example/properties-loading-example.component.ts'),
+            fileName: 'properties-loading-example'
+        }
+    ];
 
     supportedLanguages = [
         'Albanian',
@@ -115,7 +82,6 @@ export class AppModule {}
         'Hindi',
         'Italian',
         'Polish',
-        'Russian',
         'Ukrainian'
     ].join(', ');
 }

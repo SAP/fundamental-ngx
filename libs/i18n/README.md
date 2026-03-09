@@ -9,6 +9,10 @@
 ## Content
 
 - [1. Description](#1-description)
+    - [Quick Start](#quick-start)
+    - [What's Included](#whats-included)
+    - [How It Works](#how-it-works)
+    - [Adding New Translation Keys](#adding-new-translation-keys)
 - [2. Requirements](#2-requirements)
 - [3. Versioning](#3-versioning)
 - [4. Known Issues](#4-known-issues)
@@ -20,12 +24,90 @@
 
 `@fundamental-ngx/i18n` provides centralized internationalization for Fundamental-ngx components with support for 37+ languages and runtime translation switching.
 
+### Quick Start
+
+**1. Provide a language in your app:**
+
+```typescript
+import { ApplicationConfig } from '@angular/core';
+import { signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        {
+            provide: FD_LANGUAGE_SIGNAL,
+            useValue: signal(FD_LANGUAGE_ENGLISH)
+        }
+    ]
+};
+```
+
+**2. Use translations in templates:**
+
+```typescript
+import { Component } from '@angular/core';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'my-component',
+    template: `<button>{{ ('coreButton.save' | fdTranslate)() }}</button>`,
+    imports: [FdTranslatePipe]
+})
+export class MyComponent {}
+```
+
+**3. Use translations in TypeScript:**
+
+```typescript
+import { Component } from '@angular/core';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'my-component',
+    template: `<button>{{ saveLabel() }}</button>`
+})
+export class MyComponent {
+    protected readonly saveLabel = resolveTranslationSignal('coreButton.save');
+}
+```
+
+**4. Change language at runtime:**
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'language-switcher'
+})
+export class LanguageSwitcher {
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    switchToGerman(): void {
+        this.langSignal.set(FD_LANGUAGE_GERMAN);
+        // All translations update automatically!
+    }
+}
+```
+
+> **📚 Full documentation:** Visit the [i18n documentation](https://sap.github.io/fundamental-ngx/docs/i18n/getting-started) for complete guides, examples, and API reference.
+
 ### What's Included
 
 - Pre-compiled translation data for 37+ languages (as `FD_LANGUAGE_*` constants)
-- Translation resolver utilities (signals, observables, and synchronous APIs)
-- `FdTranslatePipe` for template translations
+- **Signal-based** translation resolver utilities
+- `FdTranslatePipe` for template translations (returns `Signal<string>`)
 - Type-safe translation keys via `FdLanguage` interface
+
+### Signal-based Reactivity
+
+Built on Angular signals for optimal performance and developer experience:
+
+- ✅ Significantly better performance (fine-grained reactivity)
+- ✅ Automatic cleanup (no subscriptions)
+- ✅ Zoneless compatible
+- ✅ Simpler, cleaner API
 
 ### How It Works
 
@@ -39,34 +121,36 @@ While designed for Fundamental-ngx components, this library works in any Angular
 
 ### Adding New Translation Keys
 
-> **This guide is for adding new translation keys (labels, ARIA attributes), NOT for adding new languages.**
+> **Note:** This guide is for adding new translation keys (labels, ARIA attributes), NOT for adding new languages.
 
-#### Quick Steps
+**Quick Steps:**
 
-1. **Update interface**: Add key to [`FdLanguage`](src/lib/models/fd-language.ts) interface
-2. **Add to all .properties files**: Same key + English text in all 37+ language files
-3. **Run**: `nx run i18n:transform-translations`
-4. **Use**: Import and use in your component
+1. Add key to [`FdLanguage`](src/lib/models/fd-language.ts) interface
+2. Add same key + English text to all 37+ `.properties` files in `libs/i18n/src/lib/translations/`
+3. Run `nx run i18n:transform-translations`
+4. Use in your component
 
 ---
 
-#### Step 1: Update TypeScript Interface
+#### Detailed Guide
+
+**Step 1: Update TypeScript Interface**
 
 Add your key to `libs/i18n/src/lib/models/fd-language.ts`:
 
 ```typescript
 export interface FdLanguage {
     coreYourComponent: {
-        /** Description */
+        /** Description for translators */
         yourNewKey: FdLanguageKey;
         keyWithParams: FdLanguageKey<{ count: number }>;
     };
 }
 ```
 
-> **Note**: `fd-language-key-identifier.ts` is auto-generated - don't edit it manually.
+> **Note:** `fd-language-key-identifier.ts` is auto-generated - don't edit manually.
 
-#### Step 2: Add to ALL .properties Files
+**Step 2: Add to ALL .properties Files**
 
 Add to **all** files in `libs/i18n/src/lib/translations/` (use English text everywhere):
 
@@ -78,36 +162,48 @@ coreYourComponent.keyWithParams = Item {count}
 
 **Why all files?** TypeScript requires identical keys across all languages. Translation teams will replace English placeholders later.
 
-#### Step 3: Generate TypeScript Files
+**Step 3: Generate TypeScript Files**
 
 ```bash
 nx run i18n:transform-translations
 ```
 
-Auto-generates: `translations*.ts`, `fd-language-key-identifier.ts` (union type), test files
+This auto-generates: `translations*.ts`, `fd-language-key-identifier.ts`, and test files.
 
-#### Step 4: Use in Components
+**Step 4: Use in Components**
 
-**Template (pipe):**
+**In Templates:**
 
 ```typescript
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 @Component({
     imports: [FdTranslatePipe],
-    template: `<button>{{ 'coreYourComponent.yourNewKey' | fdTranslate }}</button>`
+    template: `<button>{{ ('coreYourComponent.yourNewKey' | fdTranslate)() }}</button>`
+    //                                                                   ^^
+    //                                                         Signal invocation!
 })
 ```
 
-**TypeScript (signal):**
+> **Important:** The pipe returns `Signal<string>`, invoke with `()`.
+
+**In TypeScript:**
 
 ```typescript
 import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 
-protected readonly label = resolveTranslationSignal('coreYourComponent.yourNewKey');
+export class MyComponent {
+    // Creates a computed signal that updates when language changes
+    protected readonly label = resolveTranslationSignal('coreYourComponent.yourNewKey');
+}
 ```
 
-**Post-merge**: Translation teams will provide proper translations in future releases.
+**With Parameters:**
+
+```typescript
+protected readonly message = resolveTranslationSignal('coreYourComponent.keyWithParams', { count: 5 });
+// {{ message() }} renders as: "Item 5"
+```
 
 ## 2. Requirements
 

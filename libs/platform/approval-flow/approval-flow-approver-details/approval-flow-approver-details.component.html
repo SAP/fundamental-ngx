@@ -15,12 +15,12 @@
                 @if (_isListMode && !_userToShowDetails) {
                     {{ _data.node?.description }} ({{ _data.node?.approvers?.length ?? 0 }})
                 } @else {
-                    {{ 'platformApprovalFlow.userDetailsHeader' | fdTranslate }}
+                    {{ ('platformApprovalFlow.userDetailsHeader' | fdTranslate)() }}
                 }
             </p>
             @if (!_userToShowDetails && _isListMode) {
                 <fdp-search-field
-                    [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
+                    [placeholder]="('platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate)()"
                     fdCompact
                     [suggestions]="[]"
                     (inputChange)="_onSearchStringChange($event.text)"
@@ -48,7 +48,7 @@
         @if (_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)) {
             <fd-button-bar
                 fdType="emphasized"
-                [label]="'platformApprovalFlow.userDetailsSendReminderBtnLabel' | fdTranslate"
+                [label]="('platformApprovalFlow.userDetailsSendReminderBtnLabel' | fdTranslate)()"
                 [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
                 (click)="_sendReminder()"
             ></fd-button-bar>
@@ -56,7 +56,7 @@
         <fd-button-bar
             fdkInitialFocus
             fdType="transparent"
-            [label]="'platformApprovalFlow.userDetailsCancelBtnLabel' | fdTranslate"
+            [label]="('platformApprovalFlow.userDetailsCancelBtnLabel' | fdTranslate)()"
             (click)="dialogRef.close('Cancel')"
         ></fd-button-bar>
     </fd-dialog-footer>

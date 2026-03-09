@@ -1,6 +1,6 @@
 <ng-template #zeroRate let-halves="halves">
     <input
-        [attr.aria-label]="'coreRatingIndicator.ariaLabelReset' | fdTranslate"
+        [attr.aria-label]="('coreRatingIndicator.ariaLabelReset' | fdTranslate)()"
         role="button"
         type="radio"
         class="fd-rating-indicator__input fd-rating-indicator__input--zero-rating"
@@ -16,7 +16,7 @@
 <div
     class="fd-rating-indicator__container"
     role="application"
-    [attr.aria-roledescription]="ariaRoledescription() || ('coreRatingIndicator.ariaRoleDescription' | fdTranslate)"
+    [attr.aria-roledescription]="ariaRoledescription() || ('coreRatingIndicator.ariaRoleDescription' | fdTranslate)()"
 >
     <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
     <ng-template [ngTemplateOutlet]="zeroRate"></ng-template>
@@ -48,7 +48,7 @@
 @if (showDynamicText()) {
     @if (displayAllRatings() && ratingItems().length) {
         <span [fdPopoverTrigger]="allRatingContent" class="fd-rating-indicator__dynamic-text">
-            (<span [attr.aria-label]="'coreRatingIndicator.ariaLabelTotalRating' | fdTranslate" fd-link>{{
+            (<span [attr.aria-label]="('coreRatingIndicator.ariaLabelTotalRating' | fdTranslate)()" fd-link>{{
                 computedTotalRatings
             }}</span
             >)

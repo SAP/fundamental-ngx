@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Bezet',
         defaultTitle: 'Een ogenblik geduld'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Kop uitvouwen',
         collapseLabel: 'Kop samenvouwen',
         pinLabel: 'Kop vastpinnen',
-        unpinLabel: 'Kop losmaken'
+        unpinLabel: 'Kop losmaken',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'nog {count}',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Statusbalk waarschuwingsmelding',
         announcementError: 'Statusbalk foutmelding',
         announcementSuccess: 'Statusbalk succesmelding',
-        closable: 'Sluitbaar'
+        closable: 'Sluitbaar',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 item in resultatenlijst',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Gebruik de pijl-omhoog en pijl-omlaag om door de selecties te bladeren.',
         escapeNavigateTokens:
             'Druk op Escape om het invoerveld te sluiten en gebruik pijl-links en pijl-rechts om door de geselecteerde opties te bladeren.',
-        tokensCountText: 'Totaal aantal tokens: {length}.'
+        tokensCountText: 'Totaal aantal tokens: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hoofdnavigatie',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Weigeren'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Meer'
+        tabListExpandButtonText: 'Meer',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Meer',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Invoer tijdkiezer',
-        timePickerButtonLabel: 'Kiezer openen'
+        timePickerButtonLabel: 'Kiezer openen',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Verwijderbaar',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Wizard'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Klik of druk op Enter om meer gegevens te bekijken',
@@ -316,7 +345,11 @@ export default {
         statusNotStarted: 'niet gestart'
     },
     platformFeedInput: {
-        userTitle: 'Gebruiker'
+        userTitle: 'Gebruiker',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Meer'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Geselecteerde items en condities',
@@ -577,7 +610,8 @@ export default {
         clearFilters: 'Filters wissen'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Bewerken'
+        summarySectionEditStep: 'Bewerken',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Alle',
@@ -590,7 +624,8 @@ export default {
             pattern: 'Veldwaarde is ongeldig',
             required: 'Dit is een verplicht veld',
             requiredTrue: 'Dit is een verplicht veld'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Beheren',
@@ -619,6 +654,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Selecteer een optie'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Knooppunt uitvouwen',

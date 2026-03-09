@@ -21,8 +21,8 @@
         <fd-popover-control>
             <button
                 fd-button
-                title="More"
-                aria-label="More"
+                [title]="('coreToolbar.moreButton' | fdTranslate)()"
+                [attr.aria-label]="('coreToolbar.moreButton' | fdTranslate)()"
                 aria-haspopup="true"
                 fdType="transparent"
                 glyph="overflow"

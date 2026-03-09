@@ -31,6 +31,7 @@ Purpose: Comprehensive guide for AI agents and developers working with Angular 2
         - [Pattern 2: Component Composition](#pattern-2-component-composition-with-injectiontokens)
         - [Programmatic Signal Input Updates](#programmatic-signal-input-updates)
     - [State Management](#state-management)
+    - [Internationalization (i18n) with Signals](#internationalization-i18n-with-signals)
     - [Render Lifecycle Hooks](#render-lifecycle-hooks)
     - [Resource API (Experimental)](#resource-api-experimental)
     - [Effect vs Observables](#effect-vs-observables)
@@ -122,55 +123,57 @@ Here are the essential links for building Angular components. Use these to under
 
 **For AI Agents: Use this decision tree for common scenarios**
 
-| Scenario                                  | Solution                                 | See Section                                                                        |
-| ----------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
-| Managing local component state            | Use `signal()`                           | [State Management](#state-management)                                              |
-| Deriving state from signals               | Use `computed()`                         | [State Management](#state-management)                                              |
-| Deriving local mutable state from inputs  | Use `linkedSignal()`                     | [Linked Signals](#linked-signals)                                                  |
-| Reacting to signal changes (side effects) | Use `effect()`                           | [Effect vs Observables](#effect-vs-observables)                                    |
-| DOM manipulation after rendering          | Use `afterRender()`/`afterNextRender()`  | [Render Lifecycle Hooks](#render-lifecycle-hooks)                                  |
-| Async data fetching with signals          | Use `resource()`                         | [Resource API](#resource-api-experimental)                                         |
-| Ordering component class members          | Follow strict ordering rules             | [Component Member Ordering](#component-member-ordering)                            |
-| Parent setting child defaults             | Use InjectionToken pattern               | [DI Pattern 1](#pattern-1-contextual-defaults-with-injectiontokens)                |
-| Querying child components by role         | Use InjectionToken pattern               | [DI Pattern 2](#pattern-2-component-composition-with-injectiontokens)              |
-| Querying view children/DOM elements       | Use `viewChild()`/`viewChildren()`       | [Queries](#queries)                                                                |
-| Querying projected content                | Use `contentChild()`/`contentChildren()` | [Queries](#queries)                                                                |
-| Component input                           | Use `input()` signal                     | [Components](#components)                                                          |
-| Component output                          | Use `output()` function                  | [Components](#components)                                                          |
-| Two-way binding                           | Use `model()` signal                     | [Components](#components)                                                          |
-| Host bindings and event listeners         | Use `host: {}` in decorator              | [Host Bindings](#host-bindings-and-event-listeners)                                |
-| Async operations (HTTP, timers)           | Use RxJS Observables                     | [Effect vs Observables](#effect-vs-observables)                                    |
-| BehaviorSubject for state                 | Migrate to `signal()`                    | [BehaviorSubject vs Computed](#behaviorsubject--combinelatest-vs-computed-signals) |
-| `Subject<void>` for notifications         | Replace with `effect()` on signal        | [Effect vs Observables](#effect-vs-observables)                                    |
-| `contentChild()` returns undefined        | Use `?? null` for null-expecting signals | [Queries](#queries)                                                                |
-| Setting signal input programmatically     | Use setter method pattern                | [Programmatic Signal Input Updates](#programmatic-signal-input-updates)            |
-| Removing unused code                      | Verify no usages, check public API       | [Dead Code Removal](#dead-code-removal)                                            |
-| Class extending BehaviorSubject           | Remove inheritance, use internal signal  | [Migrating Classes](#migrating-classes-that-extend-behaviorsubject)                |
-| Observable-based token interface          | Update to Signal-based interface         | [Migrating Token Interfaces](#migrating-token-interfaces)                          |
-| Observable-returning helper function      | Use `computed()` returning Signal        | [Migrating Helper Functions](#migrating-helper-functions)                          |
+| Scenario                                  | Solution                                 | See Section                                                                          |
+| ----------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------ |
+| Managing local component state            | Use `signal()`                           | [State Management](#state-management)                                                |
+| Deriving state from signals               | Use `computed()`                         | [State Management](#state-management)                                                |
+| Signal vs. plain property                 | Only use `signal()` if reactive consumer | [When to Use Signals vs. Plain Properties](#when-to-use-signals-vs-plain-properties) |
+| Deriving local mutable state from inputs  | Use `linkedSignal()`                     | [Linked Signals](#linked-signals)                                                    |
+| Reacting to signal changes (side effects) | Use `effect()`                           | [Effect vs Observables](#effect-vs-observables)                                      |
+| DOM manipulation after rendering          | Use `afterRender()`/`afterNextRender()`  | [Render Lifecycle Hooks](#render-lifecycle-hooks)                                    |
+| Async data fetching with signals          | Use `resource()`                         | [Resource API](#resource-api-experimental)                                           |
+| Ordering component class members          | Follow strict ordering rules             | [Component Member Ordering](#component-member-ordering)                              |
+| Parent setting child defaults             | Use InjectionToken pattern               | [DI Pattern 1](#pattern-1-contextual-defaults-with-injectiontokens)                  |
+| Querying child components by role         | Use InjectionToken pattern               | [DI Pattern 2](#pattern-2-component-composition-with-injectiontokens)                |
+| Querying view children/DOM elements       | Use `viewChild()`/`viewChildren()`       | [Queries](#queries)                                                                  |
+| Querying projected content                | Use `contentChild()`/`contentChildren()` | [Queries](#queries)                                                                  |
+| Component input                           | Use `input()` signal                     | [Components](#components)                                                            |
+| Component output                          | Use `output()` function                  | [Components](#components)                                                            |
+| Two-way binding                           | Use `model()` signal                     | [Components](#components)                                                            |
+| Host bindings and event listeners         | Use `host: {}` in decorator              | [Host Bindings](#host-bindings-and-event-listeners)                                  |
+| Async operations (HTTP, timers)           | Use RxJS Observables                     | [Effect vs Observables](#effect-vs-observables)                                      |
+| BehaviorSubject for state                 | Migrate to `signal()`                    | [BehaviorSubject vs Computed](#behaviorsubject--combinelatest-vs-computed-signals)   |
+| `Subject<void>` for notifications         | Replace with `effect()` on signal        | [Effect vs Observables](#effect-vs-observables)                                      |
+| `contentChild()` returns undefined        | Use `?? null` for null-expecting signals | [Queries](#queries)                                                                  |
+| Setting signal input programmatically     | Use setter method pattern                | [Programmatic Signal Input Updates](#programmatic-signal-input-updates)              |
+| Removing unused code                      | Verify no usages, check public API       | [Dead Code Removal](#dead-code-removal)                                              |
+| Class extending BehaviorSubject           | Remove inheritance, use internal signal  | [Migrating Classes](#migrating-classes-that-extend-behaviorsubject)                  |
+| Observable-based token interface          | Update to Signal-based interface         | [Migrating Token Interfaces](#migrating-token-interfaces)                            |
+| Observable-returning helper function      | Use `computed()` returning Signal        | [Migrating Helper Functions](#migrating-helper-functions)                            |
 
 ## Common Mistakes to Avoid
 
 **For AI Agents: Quick reference of anti-patterns to watch for**
 
-| ❌ Don't Do This                     | ✅ Do This Instead                            | Why                                      |
-| ------------------------------------ | --------------------------------------------- | ---------------------------------------- |
-| `@HostBinding()` / `@HostListener()` | Use `host: {}` in decorator                   | Better tree-shaking, AOT compilation     |
-| `@Input()` / `@Output()` decorators  | Use `input()` / `output()` functions          | Signal-based, automatic change detection |
-| `standalone: true` in decorator      | Omit it (default in Angular 21+)              | Cleaner code, implicit default           |
-| `ngClass` / `ngStyle`                | Use `class` / `style` bindings                | Direct binding is simpler                |
-| `*ngIf` / `*ngFor` / `*ngSwitch`     | Use `@if` / `@for` / `@switch`                | New control flow syntax                  |
-| `BehaviorSubject` for local state    | Use `signal()`                                | Simpler, automatic cleanup               |
-| `signal.set(); markForCheck();`      | Just `signal.set();`                          | Signals auto-notify Angular              |
-| Custom `DestroyedService`            | Use `DestroyRef` + `takeUntilDestroyed()`     | Built-in Angular pattern                 |
-| `CssClassBuilder` + `@applyCssClass` | Use `computed()` + `host: { '[class]': ... }` | Signal-based reactivity                  |
-| Setting signal inputs externally     | Use InjectionToken or setter method           | Signal inputs are read-only              |
-| Protected after private members      | Protected before private                      | ESLint member ordering rule              |
-| `allowSignalWrites: true` in effect  | Remove the option                             | Deprecated in Angular 21+                |
-| Multiple changes without validation  | Validate after each logical step              | Catch errors early before they cascade   |
-| Assuming type inference works        | Verify inference with IDE or compilation      | TypeScript may infer `unknown`/`any`     |
-| Testing impossible scenarios         | Test realistic user scenarios only            | TypeScript/DI prevent many edge cases    |
-| Reusing variable names in tests      | Use unique descriptive names                  | Avoid ESLint no-shadow errors            |
+| ❌ Don't Do This                     | ✅ Do This Instead                            | Why                                        |
+| ------------------------------------ | --------------------------------------------- | ------------------------------------------ |
+| `@HostBinding()` / `@HostListener()` | Use `host: {}` in decorator                   | Better tree-shaking, AOT compilation       |
+| `@Input()` / `@Output()` decorators  | Use `input()` / `output()` functions          | Signal-based, automatic change detection   |
+| `standalone: true` in decorator      | Omit it (default in Angular 21+)              | Cleaner code, implicit default             |
+| `ngClass` / `ngStyle`                | Use `class` / `style` bindings                | Direct binding is simpler                  |
+| `*ngIf` / `*ngFor` / `*ngSwitch`     | Use `@if` / `@for` / `@switch`                | New control flow syntax                    |
+| `BehaviorSubject` for local state    | Use `signal()`                                | Simpler, automatic cleanup                 |
+| `signal()` for internal bookkeeping  | Use plain property                            | No reactive consumer, unnecessary overhead |
+| `signal.set(); markForCheck();`      | Just `signal.set();`                          | Signals auto-notify Angular                |
+| Custom `DestroyedService`            | Use `DestroyRef` + `takeUntilDestroyed()`     | Built-in Angular pattern                   |
+| `CssClassBuilder` + `@applyCssClass` | Use `computed()` + `host: { '[class]': ... }` | Signal-based reactivity                    |
+| Setting signal inputs externally     | Use InjectionToken or setter method           | Signal inputs are read-only                |
+| Protected after private members      | Protected before private                      | ESLint member ordering rule                |
+| `allowSignalWrites: true` in effect  | Remove the option                             | Deprecated in Angular 21+                  |
+| Multiple changes without validation  | Validate after each logical step              | Catch errors early before they cascade     |
+| Assuming type inference works        | Verify inference with IDE or compilation      | TypeScript may infer `unknown`/`any`       |
+| Testing impossible scenarios         | Test realistic user scenarios only            | TypeScript/DI prevent many edge cases      |
+| Reusing variable names in tests      | Use unique descriptive names                  | Avoid ESLint no-shadow errors              |
 
 ## Development Workflow & Validation
 
@@ -1648,6 +1651,280 @@ export class FormField {
 - Use `computed()` for derived state
 - Keep state transformations pure and predictable
 - Do NOT use `mutate` on signals, use `update` or `set` instead
+
+#### When to Use Signals vs. Plain Properties
+
+The core principle: **signals exist to feed Angular's reactive graph.** If a value has no reactive consumer, making it a signal adds tracking overhead for no benefit.
+
+**Decision rule:**
+
+```
+Does anything REACTIVE read this value?
+│
+├─ YES (template, host binding, computed, effect)
+│   └─▶ Use signal()
+│
+└─ NO (only used in imperative methods, cleanup, caching)
+    └─▶ Use plain property
+```
+
+**✅ Use `signal()` when the value drives the UI:**
+
+```typescript
+// 1. Template reads it
+protected readonly count = signal(0);
+// <span>{{ count() }}</span>
+
+// 2. Host binding reads it
+protected readonly isActive = signal(false);
+// host: { '[class.active]': 'isActive()' }
+
+// 3. A computed() derives from it
+protected readonly price = signal(100);
+protected readonly quantity = signal(2);
+protected readonly total = computed(() => this.price() * this.quantity());
+
+// 4. An effect() should re-run when it changes
+protected readonly theme = signal<'light' | 'dark'>('light');
+// effect(() => { document.body.setAttribute('data-theme', this.theme()); });
+```
+
+**❌ Do NOT use `signal()` for internal bookkeeping:**
+
+```typescript
+// 1. One-time initialization flag — no reactive consumer
+private _initialized = false;
+
+// 2. Cached DOM measurement — used imperatively only
+private _cachedRect: DOMRect;
+
+// 3. Subscription/observer reference — just for cleanup
+private _resizeObserver: ResizeObserver | null = null;
+
+// 4. Intermediate calculation variable — method-scoped
+private _formatValue(raw: number): string {
+    const rounded = Math.round(raw * 100) / 100;
+    return `${rounded}%`;
+}
+```
+
+**Quick reference table:**
+
+| Scenario                           | Signal? | Reason                         |
+| ---------------------------------- | ------- | ------------------------------ |
+| Counter shown in template          | ✅ Yes  | Template needs reactive update |
+| CSS class toggled via host binding | ✅ Yes  | Host binding reads it          |
+| Derived display value              | ✅ Yes  | `computed()` depends on it     |
+| Value that triggers DOM sync       | ✅ Yes  | `effect()` re-runs on change   |
+| One-time initialization flag       | ❌ No   | No reactive consumer           |
+| Cached DOM measurement             | ❌ No   | Used imperatively only         |
+| Timer/observer reference           | ❌ No   | Just for cleanup               |
+| Loop counter inside a method       | ❌ No   | Temporary, method-scoped       |
+
+---
+
+### Internationalization (i18n) with Signals
+
+**Summary for AI Agents:**
+
+The `@fundamental-ngx/i18n` library provides signal-based internationalization with zoneless compatibility.
+
+**Modern Signal-Based API:**
+
+- **Signal tokens** → `FD_LANGUAGE_SIGNAL`, `FD_LOCALE_SIGNAL`
+- **Signal resolution** → `resolveTranslationSignal()`, `resolveTranslationSignalFn()`
+- **Template usage** → `{{ translatedLabel() }}` (no async pipe needed)
+
+#### Basic Usage Pattern
+
+**1. Direct translation with signal:**
+
+```typescript
+import { Component, computed, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, resolveTranslationSignal } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'my-component',
+    template: '{{ label() }}',
+    standalone: true
+})
+export class MyComponent {
+    // Inject signal token
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    // Create computed translation signal
+    readonly label = computed(() => this.langSignal().coreButton.label);
+
+    // Alternative: use helper function for single translation
+    readonly tooltipSignal = resolveTranslationSignal('coreButton.tooltip');
+}
+```
+
+**Benefits:**
+
+- ✅ No `async` pipe in templates
+- ✅ Simpler template syntax
+- ✅ Better performance (no RxJS overhead)
+- ✅ Zoneless compatible
+- ✅ Automatic change detection
+
+**2. Translation factory for multiple keys:**
+
+```typescript
+import { Component, computed, inject } from '@angular/core';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'my-form',
+    template: `
+        <button>{{ submitLabel() }}</button>
+        <button>{{ cancelLabel() }}</button>
+    `,
+    standalone: true
+})
+export class MyForm {
+    // Create translation factory once
+    private readonly translate = resolveTranslationSignalFn();
+
+    // Use factory for multiple translations
+    readonly submitLabel = this.translate('coreForm.submit');
+    readonly cancelLabel = this.translate('coreForm.cancel');
+}
+```
+
+**When to use:**
+
+- Multiple translations in the same component
+- Want to avoid repeating inject() calls
+- Need consistent translation resolution logic
+
+**3. Translation with context/variables:**
+
+```typescript
+import { Component, computed, signal } from '@angular/core';
+import { resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'user-greeting',
+    template: '{{ greeting() }}',
+    standalone: true
+})
+export class UserGreeting {
+    private readonly translate = resolveTranslationSignalFn();
+    readonly username = signal('John');
+
+    // Pass context object for variable substitution
+    readonly greeting = this.translate('coreMessages.welcome', {
+        name: this.username()
+    });
+}
+```
+
+**Translation key example:**
+
+```typescript
+// In language file:
+coreMessages: {
+    welcome: 'Welcome, {{name}}!';
+}
+```
+
+**4. Custom language/locale:**
+
+```typescript
+import { Component } from '@angular/core';
+import { resolveTranslationSignalFn, FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'french-component',
+    standalone: true
+})
+export class FrenchComponent {
+    // Override default language
+    private readonly translate = resolveTranslationSignalFn({
+        fdLang: signal(FD_LANGUAGE_FRENCH),
+        fdLocale: signal('fr-FR')
+    });
+
+    readonly label = this.translate('coreButton.label');
+}
+```
+
+**When to use:**
+
+- Component needs a different language than global setting
+- Testing with specific language
+- Multi-language UI sections
+
+#### Changing Language Globally
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n';
+
+@Component({
+    selector: 'language-switcher',
+    template: ` <button (click)="switchToGerman()">Deutsch</button> `,
+    standalone: true
+})
+export class LanguageSwitcher {
+    // Inject writable signal
+    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    switchToGerman(): void {
+        // Update the signal - all translations react automatically
+        this.langSignal.set(FD_LANGUAGE_GERMAN);
+    }
+}
+```
+
+**How it works:**
+
+- `FD_LANGUAGE_SIGNAL` is a `WritableSignal` provided at root level
+- All translation signals are `computed()` from this source
+- Changing the signal triggers automatic updates across the app
+
+#### Architecture Notes
+
+**Signal-first design:**
+
+- `FD_LANGUAGE_SIGNAL` is the source of truth (WritableSignal)
+- All translation signals are `computed()` from this source
+- Same pattern for `FD_LOCALE_SIGNAL` / `FD_LOCALE`
+
+**Why signals:**
+
+- Simpler mental model (just values that change)
+- Better performance (fine-grained reactivity)
+- Zoneless compatible
+- Less boilerplate (no pipe, map, async)
+- Type-safe by default
+
+**Testing with signals:**
+
+```typescript
+import { TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+
+describe('MyComponent', () => {
+    it('should translate label', () => {
+        const langSignal = signal(FD_LANGUAGE_ENGLISH);
+
+        TestBed.configureTestingModule({
+            providers: [{ provide: FD_LANGUAGE_SIGNAL, useValue: langSignal }]
+        });
+
+        const fixture = TestBed.createComponent(MyComponent);
+        expect(fixture.nativeElement.textContent).toContain('Submit');
+
+        // Test language change
+        langSignal.set(FD_LANGUAGE_GERMAN);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('Senden');
+    });
+});
+```
 
 ---
 

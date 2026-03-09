@@ -5,6 +5,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -210,6 +211,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     protected readonly navigationIcon = computed(() => (this.isRtl() ? 'slim-arrow-left' : 'slim-arrow-right'));
 
     /** @hidden */
+    protected readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();
 
     /** @hidden */
@@ -237,7 +241,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         this._tableColumnResizeService.resizeInProgress$
             .pipe(
                 switchMap(() => this._tableColumnResizeService.markForCheck),
-                takeUntilDestroyed()
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._cdr.markForCheck();
@@ -247,7 +251,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
                 .pipe(
                     filter(() => !!this._dndTableDirective),
-                    takeUntilDestroyed()
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe((event) => {
                     this._onKeyDown(event);

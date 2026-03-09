@@ -40,8 +40,8 @@
         [buttonFocusable]="buttonFocusable"
         glyph="appointment-2"
         [isExpanded]="isOpen"
-        [glyphAriaLabel]="'coreDatePicker.displayCalendarToggleLabel' | fdTranslate"
-        [iconTitle]="'coreDatePicker.displayCalendarToggleLabel' | fdTranslate"
+        [glyphAriaLabel]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
+        [iconTitle]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
         (addOnButtonClicked)="toggleCalendar()"
     >
         <input
@@ -55,7 +55,7 @@
             aria-autocomplete="none"
             [attr.aria-expanded]="isOpen"
             [attr.aria-labelledby]="ariaLabelledBy"
-            [attr.aria-label]="_dateInputArialLabelKey | fdTranslate"
+            [attr.aria-label]="(_dateInputArialLabelKey | fdTranslate)()"
             [attr.aria-required]="required"
             [attr.aria-describedby]="_formValueStateMessageId"
             [ngModel]="_inputFieldDate"
@@ -106,7 +106,7 @@
                 <fd-bar-element>
                     <button
                         fd-button
-                        [label]="'coreCalendar.todayLabel' | fdTranslate"
+                        [label]="('coreCalendar.todayLabel' | fdTranslate)()"
                         (click)="onTodayButtonClick()"
                     ></button>
                 </fd-bar-element>
@@ -118,16 +118,16 @@
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
         @switch (state) {
             @case ('success') {
-                {{ 'coreDatePicker.valueStateSuccessMessage' | fdTranslate }}
+                {{ ('coreDatePicker.valueStateSuccessMessage' | fdTranslate)() }}
             }
             @case ('information') {
-                {{ 'coreDatePicker.valueStateInformationMessage' | fdTranslate }}
+                {{ ('coreDatePicker.valueStateInformationMessage' | fdTranslate)() }}
             }
             @case ('warning') {
-                {{ 'coreDatePicker.valueStateWarningMessage' | fdTranslate }}
+                {{ ('coreDatePicker.valueStateWarningMessage' | fdTranslate)() }}
             }
             @case ('error') {
-                {{ 'coreDatePicker.valueStateErrorMessage' | fdTranslate }}
+                {{ ('coreDatePicker.valueStateErrorMessage' | fdTranslate)() }}
             }
         }
         {{ _message }}

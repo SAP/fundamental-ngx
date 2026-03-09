@@ -12,8 +12,8 @@
     </span>
 }
 @if (emphasized()) {
-    <span class="fd-link__sr-only">{{ 'coreLink.emphasized' | fdTranslate }}</span>
+    <span class="fd-link__sr-only">{{ ('coreLink.emphasized' | fdTranslate)() }}</span>
 }
 @if (subtle()) {
-    <span class="fd-link__sr-only">{{ 'coreLink.subtle' | fdTranslate }}</span>
+    <span class="fd-link__sr-only">{{ ('coreLink.subtle' | fdTranslate)() }}</span>
 }

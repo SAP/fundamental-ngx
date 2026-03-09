@@ -1,49 +1,63 @@
-import { DestroyRef, Directive, Inject, Input, Self, SkipSelf, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { computed, Directive, inject, input, Signal } from '@angular/core';
 import { merge } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
 import { FdLanguage, FdLanguagePatch } from '../models';
 import { patchedObj } from '../utils';
-import { FD_LANGUAGE } from '../utils/tokens';
+import { FD_LANGUAGE_SIGNAL } from '../utils/tokens';
 
+/**
+ * Directive that patches the language for child components using signal composition.
+ *
+ * @example
+ * ```html
+ * <!-- Partial override for specific translations -->
+ * <div [fdPatchLanguage]="{ platformButton: { save: 'Custom Save' } }">
+ *   <button>{{ ('platformButton.save' | fdTranslate)() }}</button>
+ * </div>
+ *
+ * <!-- Dynamic patch with function -->
+ * <div [fdPatchLanguage]="patchFn">
+ *   <!-- Child components get patched language -->
+ * </div>
+ * ```
+ *
+ * **How it works:**
+ * 1. Injects parent language signal with SkipSelf
+ * 2. Creates computed signal that merges parent + patch
+ * 3. Provides the computed signal to children
+ */
 @Directive({
     selector: '[fdPatchLanguage]',
     providers: [
         {
-            provide: FD_LANGUAGE,
-            useValue: new BehaviorSubject<FdLanguage>(FD_LANGUAGE_ENGLISH)
+            provide: FD_LANGUAGE_SIGNAL,
+            useFactory: () => {
+                const directive = inject(FdPatchLanguageDirective);
+                return directive._patchedLanguageSignal;
+            }
         }
     ],
     standalone: true
 })
 export class FdPatchLanguageDirective {
-    /** @hidden */
-    private readonly _languagePatch$ = new BehaviorSubject<FdLanguagePatch | null>(null);
-    /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
+    /** Part of the language object to be overridden */
+    readonly fdPatchLanguage = input.required<FdLanguagePatch | ((lang: FdLanguage) => FdLanguagePatch)>();
 
-    /** part of the language object to be overriden */
-    @Input('fdPatchLanguage') set languagePatch(value: FdLanguagePatch) {
-        this._languagePatch$.next(value);
-    }
+    /** @hidden Computed signal that merges parent language + patch */
+    readonly _patchedLanguageSignal: Signal<FdLanguage> = computed(() => {
+        const parentLang = this._parentLangSignal?.() || FD_LANGUAGE_ENGLISH;
+        const patch = this.fdPatchLanguage();
 
-    /** @hidden */
-    constructor(
-        @SkipSelf() @Inject(FD_LANGUAGE) parentFdLanguage$: Observable<FdLanguage>,
-        @Self() @Inject(FD_LANGUAGE) fdLanguageSubject$: BehaviorSubject<FdLanguage>
-    ) {
-        combineLatest([parentFdLanguage$, this._languagePatch$])
-            .pipe(
-                map(([parentLang, languagePatch]) =>
-                    merge(
-                        structuredClone(parentLang),
-                        patchedObj(parentLang, languagePatch || {}) as Partial<FdLanguage>
-                    )
-                ),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe((translation) => fdLanguageSubject$.next(translation));
-    }
+        // Clone parent to avoid mutations
+        const clonedParent = structuredClone(parentLang);
+
+        // Apply patch
+        const patchObj = patchedObj(parentLang, patch);
+
+        // Merge and return
+        return merge(clonedParent, patchObj as Partial<FdLanguage>);
+    });
+
+    /** @hidden Parent language signal (skip self to get parent's) */
+    private readonly _parentLangSignal = inject(FD_LANGUAGE_SIGNAL, { skipSelf: true, optional: true });
 }

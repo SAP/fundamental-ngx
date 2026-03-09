@@ -25,3 +25,8 @@ axe-reports
 
 /.nx/cache
 /.nx/workspace-data
+
+# Angular parser has issues with this file's heavy use of escaped curly braces
+libs/docs/i18n/writing-translations.component.html
+# Example file with deliberately formatted code snippets
+libs/docs/i18n/translation-resolver/examples/pipe-parameters-example/pipe-parameters-example.component.html

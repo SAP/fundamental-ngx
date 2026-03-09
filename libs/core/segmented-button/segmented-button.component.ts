@@ -13,7 +13,6 @@ import {
     NgZone,
     OnChanges,
     OnDestroy,
-    OnInit,
     QueryList,
     Renderer2,
     SimpleChanges,
@@ -35,7 +34,7 @@ import {
     destroyObservable
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { EMPTY, Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
@@ -76,7 +75,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     ],
     hostDirectives: [FocusableListDirective]
 })
-export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
+export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input({ transform: booleanAttribute })
     toggle = false;
@@ -119,7 +118,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _translationResolver = inject(TranslationResolver);
@@ -146,19 +145,10 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
             this._focusedItemId.set(item.id);
         });
         this._destroyRef.onDestroy(() => itemFocusedSubscription.unsubscribe());
-    }
 
-    /** @hidden */
-    @HostListener('click', ['$event'])
-    protected _click(event: MouseEvent): void {
-        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
-            this.onTouched();
-        }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
+        // Effect for language changes
+        effect(() => {
+            const lang = this._langSignal();
             this._groupRoleDescription = this._translationResolver.resolve(
                 lang,
                 'segmentedButton.groupRoleDescription'
@@ -170,6 +160,14 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
             this._updateButtonRoleDescriptions();
             this._changeDetRef.markForCheck();
         });
+    }
+
+    /** @hidden */
+    @HostListener('click', ['$event'])
+    protected _click(event: MouseEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
     }
 
     /** @hidden */
@@ -390,7 +388,7 @@ export class SegmentedButtonComponent implements OnInit, AfterViewInit, ControlV
 
         this._focusableItems.forEach((focusableItemDirective) => {
             focusableItemDirective.setTabbable(!disable);
-            focusableItemDirective.fdkFocusableItem = !disable;
+            focusableItemDirective.setFocusable(!disable);
         });
         if (disable) {
             this._buttons.forEach((button) => {

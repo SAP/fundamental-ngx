@@ -1,4 +1,14 @@
-import { computed, Directive, ElementRef, EventEmitter, inject, Input, Output, signal } from '@angular/core';
+import {
+    computed,
+    DestroyRef,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    inject,
+    Input,
+    Output,
+    signal
+} from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { HasElementRef, ResizeObserverService, ResponsiveBreakpoints } from '@fundamental-ngx/cdk/utils';
@@ -120,11 +130,16 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
     /**
      * @hidden
      */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /**
+     * @hidden
+     */
     constructor() {
         toObservable(this._currentMode)
             .pipe(
                 distinctUntilChanged((a, b) => a[0] === b[0] && a[1] === b[1]),
-                takeUntilDestroyed()
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((_mode) => {
                 const [mode, orientation = 'landscape'] = _mode;

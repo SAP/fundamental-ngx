@@ -6,16 +6,16 @@ import {
     DestroyRef,
     Directive,
     ElementRef,
-    EventEmitter,
-    Input,
-    NgZone,
-    Output,
     Renderer2,
     booleanAttribute,
-    inject
+    effect,
+    inject,
+    input,
+    linkedSignal,
+    output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, fromEvent } from 'rxjs';
+import { Subject } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 import { Nullable } from '../../models/nullable';
@@ -35,41 +35,32 @@ export interface FocusableItemPosition {
 
 @Directive({
     selector: '[fdkFocusableItem]',
-    standalone: true,
     providers: [
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
         }
-    ]
+    ],
+    host: {
+        '(focusin)': '_onFocusin()',
+        '(keydown)': '_onKeydown($event)'
+    }
 })
 export class FocusableItemDirective implements FocusableItem, HasElementRef {
-    /** Whether the item is focusable. Default is true. */
-    @Input({ transform: booleanAttribute })
-    set fdkFocusableItem(val: boolean) {
-        this._focusable = val;
-        this.setTabbable(this._focusable);
-    }
-
-    get fdkFocusableItem(): boolean {
-        return this._focusable;
-    }
+    /** @hidden Input with booleanAttribute transform */
+    readonly fdkFocusableItem = input(true, { transform: booleanAttribute });
 
     /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
-    @Input()
-    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultItemFocusedEventAnnouncer;
+    readonly cellFocusedEventAnnouncer = input<CellFocusedEventAnnouncer>(this._defaultItemFocusedEventAnnouncer);
 
     /** Event emitted when the cell receives focus, not being emitted when focus moves between item's children. */
-    @Output()
-    readonly cellFocused = new EventEmitter<FocusableItemPosition>();
+    readonly cellFocused = output<FocusableItemPosition>();
 
     /** Event emitted when a focusable child element is focused. */
-    @Output()
-    readonly focusableChildElementFocused = new EventEmitter<void>();
+    readonly focusableChildElementFocused = output<void>();
 
     /** @hidden */
-    @Output()
-    readonly _parentFocusableItemFocused = new EventEmitter<void>();
+    readonly _parentFocusableItemFocused = output<void>();
 
     /** Element reference. */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -82,24 +73,28 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
-    /** @hidden */
-    protected readonly _zone = inject(NgZone);
 
-    /** @hidden */
-    private _focusable = true;
+    /**
+     * Internal _focusable state that can be mutated programmatically.
+     * Syncs with the fdkFocusableItem input but allows internal modification.
+     * @hidden
+     */
+    private readonly _focusable = linkedSignal(() => this.fdkFocusableItem());
 
     /** @hidden */
     private _tabbableElements = new Map<HTMLElement, number>();
 
     /** @hidden */
     private _tabbable = true;
+
     /** @hidden */
     private readonly _focusableObserver = inject(FocusableObserver);
+
     /** @hidden */
     private readonly _tabbableElementService = inject(TabbableElementService);
+
     /** @hidden */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
-
     /** @hidden */
     private readonly _renderer2 = inject(Renderer2);
 
@@ -111,36 +106,40 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     constructor() {
+        // Update tabbable state when focusable state changes
+        effect(() => {
+            const focusable = this.fdkFocusableItem();
+            this.setTabbable(focusable);
+        });
+
         this._focusableObserver
             .observe(this.elementRef, false)
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isFocusable) => {
-                if (isFocusable !== this.fdkFocusableItem) {
-                    this.fdkFocusableItem = isFocusable;
+                if (isFocusable !== this.isFocusable()) {
+                    this.setFocusable(isFocusable);
                 }
             });
-
-        this._zone.runOutsideAngular(() => {
-            fromEvent(this.elementRef.nativeElement, 'focusin')
-                .pipe(takeUntilDestroyed())
-                .subscribe(async () => {
-                    await this._onFocusin();
-                });
-
-            fromEvent<KeyboardEvent>(this.elementRef.nativeElement, 'keydown')
-                .pipe(takeUntilDestroyed())
-                .subscribe((event) => {
-                    this._onKeydown(event);
-                });
-        });
     }
 
     /** @hidden */
     element = (): HTMLElement => this.elementRef.nativeElement;
 
-    /** @hidden */
+    /**
+     * Programmatically set the _focusable state.
+     * This allows parent components to update the _focusable state.
+     */
+    setFocusable(state: boolean): void {
+        this._focusable.set(state);
+    }
+
+    /**
+     * Interface method required by FocusableItem.
+     * Returns the current focusable state from the internal signal.
+     * @hidden
+     */
     isFocusable(): boolean {
-        return this._focusable;
+        return this._focusable();
     }
 
     /** @hidden */
@@ -150,10 +149,8 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** Set tabbable state */
     setTabbable(state: boolean): void {
-        this._zone.runOutsideAngular(() => {
-            this._tabbable = state;
-            this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
-        });
+        this._tabbable = state;
+        this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
     }
 
     /** @hidden */
@@ -179,17 +176,18 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
     }
 
     /** @hidden */
-    private async _onFocusin(): Promise<void> {
-        if (!this.fdkFocusableItem) {
+    protected async _onFocusin(): Promise<void> {
+        if (!this.isFocusable()) {
             return;
         }
 
         if (this._position) {
-            this.cellFocused.next(this._position);
+            this.cellFocused.emit(this._position);
 
-            if (this.cellFocusedEventAnnouncer) {
+            const announcer = this.cellFocusedEventAnnouncer();
+            if (announcer) {
                 this._liveAnnouncer.clear();
-                await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+                await this._liveAnnouncer.announce(announcer(this._position));
             }
         }
 
@@ -203,8 +201,8 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
     }
 
     /** @hidden */
-    private _onKeydown(event: KeyboardEvent): void {
-        if (!this.fdkFocusableItem) {
+    protected _onKeydown(event: KeyboardEvent): void {
+        if (!this.isFocusable()) {
             return;
         }
         const activeEl = this._document.activeElement;

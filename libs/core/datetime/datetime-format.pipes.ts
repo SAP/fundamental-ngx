@@ -1,7 +1,5 @@
-import { Inject, Optional, Pipe, PipeTransform, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FD_LANGUAGE, FdLanguage, FdLanguageKeyIdentifier, TranslationResolver } from '@fundamental-ngx/i18n';
-import { Observable } from 'rxjs';
+import { Inject, Optional, Pipe, PipeTransform, Signal, inject } from '@angular/core';
+import { FD_LANGUAGE_SIGNAL, FdLanguage, FdLanguageKeyIdentifier, TranslationResolver } from '@fundamental-ngx/i18n';
 import { DatetimeAdapter } from './datetime-adapter';
 import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
 
@@ -99,14 +97,8 @@ export class DayPeriodFormatPipe<D> implements PipeTransform {
 export class TranslateDayPeriodPipe implements PipeTransform {
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
-
-    /** Signal that will hold the current language */
-    private readonly _currentLanguageSignal: Signal<FdLanguage>;
-
     /** @hidden */
-    constructor(@Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>) {
-        this._currentLanguageSignal = toSignal(this._language$, { initialValue: {} as FdLanguage });
-    }
+    private readonly _currentLanguageSignal: Signal<FdLanguage> = inject(FD_LANGUAGE_SIGNAL);
 
     /** Format date object for day period */
     transform(value: string | null): string | null {

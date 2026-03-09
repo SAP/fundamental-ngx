@@ -223,8 +223,8 @@
             fdType="transparent"
             glyph="edit"
             (click)="_onActionButtonClick('edit')"
-            [attr.aria-label]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
-            [attr.title]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
+            [attr.aria-label]="('platformStandardListItem.detailsActionAriaLabel' | fdTranslate)()"
+            [attr.title]="('platformStandardListItem.detailsActionAriaLabel' | fdTranslate)()"
             (keydown)="_onKeyButtonClick($event, 'edit')"
         ></button>
     }
@@ -234,8 +234,8 @@
             #delete
             [attr.id]="'delete-' + id"
             role="button"
-            [attr.aria-label]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
-            [attr.title]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
+            [attr.aria-label]="('platformStandardListItem.deleteActionAriaLabel' | fdTranslate)()"
+            [attr.title]="('platformStandardListItem.deleteActionAriaLabel' | fdTranslate)()"
             fdType="transparent"
             glyph="decline"
             (click)="_onActionButtonClick('delete')"

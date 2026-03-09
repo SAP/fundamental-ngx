@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_kk.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Бос емес',
         defaultTitle: 'Күте тұрыңыз'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Тақырыпты жаю',
         collapseLabel: 'Тақырыпты жию',
         pinLabel: 'Тақырыпты бекіту',
-        unpinLabel: 'Тақырыпты босату'
+        unpinLabel: 'Тақырыпты босату',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'тағы {count}',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Ескерту хабарының жолағы',
         announcementError: 'Қате туралы хабар жолағы',
         announcementSuccess: 'Сәттілік туралы хабардың жолағы',
-        closable: 'Жабуға болады'
+        closable: 'Жабуға болады',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 нәтижелер тізімінің тармағы.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Жоғары және төмен көрсеткілерді пайдаланып, бөлімдерге өтіңіз.',
         escapeNavigateTokens:
             'Енгізу өрісінен шығу үшін escape пернесін басып, таңдалған опциялар арқылы өту үшін сол және оң жақ көрсеткі пернелерін пайдаланыңыз.',
-        tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.'
+        tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Негізгі навигация',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Қабылдамау'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Көбірек'
+        tabListExpandButtonText: 'Көбірек',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Көбірек',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Уақыт таңдау құралын енгізу',
-        timePickerButtonLabel: 'Таңдау құралын ашу'
+        timePickerButtonLabel: 'Таңдау құралын ашу',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Жоюға болатын',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Шебер'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Қосымша мәліметтерді көру үшін Enter пернесін басыңыз',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'басталмады'
     },
     platformFeedInput: {
-        userTitle: 'Пайдаланушы'
+        userTitle: 'Пайдаланушы',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Тағы'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Таңдалған тармақтар мен шарттар',
@@ -576,7 +609,8 @@ export default {
         clearFilters: 'Сүзгілерді тазарту'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Өңдеу'
+        summarySectionEditStep: 'Өңдеу',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Барлығы',
@@ -589,7 +623,8 @@ export default {
             pattern: 'Өріс мәніне жарамсыз',
             required: 'Бұл өріс міндетті',
             requiredTrue: 'Бұл өріс міндетті'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Басқару',
@@ -618,6 +653,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Опцияны таңдау'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Түйінді жаю',

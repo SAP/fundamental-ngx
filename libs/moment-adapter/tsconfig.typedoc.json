@@ -1,0 +1,24 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "target": "es2023",
+        "declaration": true,
+        "declarationMap": true,
+        "types": [],
+        "lib": ["dom", "es2023"],
+        "useDefineForClassFields": false,
+        "jsx": "react",
+        "jsxFactory": "JSX.createElement",
+        "jsxFragmentFactory": "JSX.Fragment",
+        "moduleResolution": "bundler"
+    },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    },
+    "files": ["./src/index.ts"],
+    "include": [],
+    "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"]
+}

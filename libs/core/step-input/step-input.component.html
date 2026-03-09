@@ -17,10 +17,10 @@
                 tabindex="-1"
                 type="button"
                 [disabled]="!canDecrement"
-                [title]="'coreStepInput.decrementButtonTitle' | fdTranslate"
+                [title]="('coreStepInput.decrementButtonTitle' | fdTranslate)()"
                 [glyph]="decrementButtonIcon"
                 (blur)="onTouched()"
-                [attr.aria-label]="'coreStepInput.decrementButtonTitle' | fdTranslate"
+                [attr.aria-label]="('coreStepInput.decrementButtonTitle' | fdTranslate)()"
                 [attr.aria-controls]="inputId"
             ></button>
         }
@@ -40,7 +40,7 @@
             role="spinbutton"
             [attr.aria-describedby]="canDisplayLabel ? inputId + '__description' : ''"
             [attr.aria-required]="required"
-            [attr.aria-roledescription]="ariaRoleDescription || ('coreStepInput.ariaRoleDescription' | fdTranslate)"
+            [attr.aria-roledescription]="ariaRoleDescription || ('coreStepInput.ariaRoleDescription' | fdTranslate)()"
             (focusin)="handleFocusIn()"
             (wheel)="!disableWheel && handleScroll($event)"
             (keydown)="handleKeyDown($event)"
@@ -60,10 +60,10 @@
                 tabindex="-1"
                 type="button"
                 [disabled]="!canIncrement"
-                [title]="'coreStepInput.incrementButtonTitle' | fdTranslate"
+                [title]="('coreStepInput.incrementButtonTitle' | fdTranslate)()"
                 [glyph]="incrementButtonIcon"
                 (blur)="onTouched()"
-                [attr.aria-label]="'coreStepInput.incrementButtonTitle' | fdTranslate"
+                [attr.aria-label]="('coreStepInput.incrementButtonTitle' | fdTranslate)()"
                 [attr.aria-controls]="inputId"
             ></button>
         }

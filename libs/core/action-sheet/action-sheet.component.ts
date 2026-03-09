@@ -32,6 +32,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 import { Placement } from '@fundamental-ngx/core/shared';
 
@@ -49,7 +50,7 @@ import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-m
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [KeyboardSupportService, DynamicComponentService],
-    imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
+    imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent, FdTranslatePipe]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Whether should be displayed in mobile mode */

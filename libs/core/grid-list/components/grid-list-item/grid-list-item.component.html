@@ -29,7 +29,7 @@
             [class.fd-grid-list__highlight--critical]="status === 'warning'"
             [class.fd-grid-list__highlight--negative]="status === 'error'"
             [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
-            [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate: { status: status }"
+            [attr.aria-label]="('coreGridList.listItemStatusAriaLabel' | fdTranslate: { status: status })()"
         ></span>
     }
     @if (selectionMode === 'singleSelect') {
@@ -57,7 +57,7 @@
             @if (counter) {
                 <span
                     class="fd-grid-list__item-counter"
-                    [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate: { count: counter }"
+                    [attr.aria-label]="('coreGridList.listItemCounterAriaLabel' | fdTranslate: { count: counter })()"
                     >{{ counter }}</span
                 >
             }
@@ -67,8 +67,8 @@
                     fdType="transparent"
                     glyph="edit"
                     class="fd-grid-list__action-button"
-                    [attr.aria-label]="'coreGridList.listItemButtonDetailsTitle' | fdTranslate"
-                    [title]="'coreGridList.listItemButtonDetailsTitle' | fdTranslate"
+                    [attr.aria-label]="('coreGridList.listItemButtonDetailsTitle' | fdTranslate)()"
+                    [title]="('coreGridList.listItemButtonDetailsTitle' | fdTranslate)()"
                     fdCompact
                     (click)="_onDetail($event)"
                 ></button>
@@ -79,8 +79,8 @@
                     fdType="transparent"
                     glyph="decline"
                     class="fd-grid-list__action-button"
-                    [attr.aria-label]="'coreGridList.listItemButtonDeleteTitle' | fdTranslate"
-                    [title]="'coreGridList.listItemButtonDeleteTitle' | fdTranslate"
+                    [attr.aria-label]="('coreGridList.listItemButtonDeleteTitle' | fdTranslate)()"
+                    [title]="('coreGridList.listItemButtonDeleteTitle' | fdTranslate)()"
                     title="Delete"
                     fdCompact
                     (click)="_onDelete($event)"
@@ -173,8 +173,8 @@
                     <span
                         fd-object-status
                         status="negative"
-                        [label]="'coreGridList.listItemStatusContainsErrors' | fdTranslate"
-                        [attr.aria-label]="'coreGridList.listItemStatusContainsErrors' | fdTranslate"
+                        [label]="('coreGridList.listItemStatusContainsErrors' | fdTranslate)()"
+                        [attr.aria-label]="('coreGridList.listItemStatusContainsErrors' | fdTranslate)()"
                     ></span>
                 }
                 @if (state === 'locked') {
@@ -183,9 +183,9 @@
                         fd-button
                         fdType="transparent"
                         glyph="private"
-                        [label]="'coreGridList.listItemStatusLocked' | fdTranslate"
-                        [attr.aria-label]="'coreGridList.listItemStatusLocked' | fdTranslate"
-                        [attr.data-test-id]="'coreGridList.listItemStatusLocked' | fdTranslate"
+                        [label]="('coreGridList.listItemStatusLocked' | fdTranslate)()"
+                        [attr.aria-label]="('coreGridList.listItemStatusLocked' | fdTranslate)()"
+                        [attr.data-test-id]="('coreGridList.listItemStatusLocked' | fdTranslate)()"
                         fdCompact
                         (click)="_clickOnLocked($event)"
                     ></button>
@@ -195,9 +195,9 @@
                         class="fd-grid-list__action-button"
                         fd-button
                         fdType="transparent"
-                        [attr.aria-label]="'coreGridList.listItemStatusDraft' | fdTranslate"
-                        [label]="'coreGridList.listItemStatusDraft' | fdTranslate"
-                        [attr.data-test-id]="'coreGridList.listItemStatusDraft' | fdTranslate"
+                        [attr.aria-label]="('coreGridList.listItemStatusDraft' | fdTranslate)()"
+                        [label]="('coreGridList.listItemStatusDraft' | fdTranslate)()"
+                        [attr.data-test-id]="('coreGridList.listItemStatusDraft' | fdTranslate)()"
                         fdCompact
                         (click)="_clickOnDraft($event)"
                     ></button>

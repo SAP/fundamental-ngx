@@ -23,6 +23,7 @@ import {
     PopoverControlComponent,
     TriggerConfig
 } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { IconBarDndItemDirective } from '../../../directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndListDirective } from '../../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
@@ -43,7 +44,8 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
         NgClass,
         ButtonComponent,
         IconComponent,
-        IconTabBarTextTypeTabItemComponent
+        IconTabBarTextTypeTabItemComponent,
+        FdTranslatePipe
     ]
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {

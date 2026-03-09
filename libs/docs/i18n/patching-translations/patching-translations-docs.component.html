@@ -1,20 +1,38 @@
 <fd-docs-section-title id="language-customization" componentName="i18n">
-    Customizing language per component
+    Patching translations (partial overrides)
 </fd-docs-section-title>
 <description>
     <p>
-        In order to provide language customizations on a component-by-component basis, use the
-        <code>fdLanguagePatch</code> directive. You will also need to import the
-        <code>&#64;fundamental-ngx/i18n</code> module.
+        Sometimes you need to override just a few translation keys for a specific component or section of your app,
+        rather than replacing the entire language. This is called <strong>patching</strong> or
+        <strong>partial override</strong>.
+    </p>
+    <p><strong>Common use cases for patching:</strong></p>
+    <ul>
+        <li>Customizing specific messages for a particular component or page</li>
+        <li>Providing domain-specific terminology (e.g., "Customer" instead of "User")</li>
+        <li>A/B testing different wording in specific areas</li>
+        <li>Overriding a few translations without maintaining a full language file</li>
+    </ul>
+    <p><strong>Two approaches for patching translations:</strong></p>
+    <ol>
+        <li>
+            <strong>Using <code>fdPatchLanguage</code> directive:</strong> Apply partial overrides directly to a
+            specific component in the template. Best for one-off customizations.
+        </li>
+        <li>
+            <strong>Using <code>patchLanguage()</code> provider function:</strong> Provide partial overrides in a
+            component's providers array. Best for wrapping multiple child components or creating reusable translation
+            scopes.
+        </li>
+    </ol>
+    <p>
+        The example below demonstrates both approaches. Type in each textarea to see how different translation patches
+        affect the character counter messages.
     </p>
     <p>
-        It is also possible to easily override the global language for a certain component by providing
-        <code>FD_LANGUAGE</code> token at any child scope. Use the <code>patchLanguage</code> utility function for this.
-    </p>
-    <p>
-        <b>Note:</b> you should understand that providing an injection token in a certain module will affect the scope
-        where this module is imported. Thus it's recommended to provide overrides on the level of components or lazy
-        loaded modules.
+        <strong>Note:</strong> Patching works with the signal-based <code>FD_LANGUAGE_SIGNAL</code> system. Only the
+        translations you specify are overridden; all other translations inherit from the parent scope.
     </p>
 </description>
 <component-example>

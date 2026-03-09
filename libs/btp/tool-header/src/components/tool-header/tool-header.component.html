@@ -14,8 +14,8 @@
             <button
                 fd-button
                 fdbToolHeaderButton
-                [title]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
-                [ariaLabel]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
+                [title]="('btpToolHeader.menuButtonAriaLabel' | fdTranslate)()"
+                [ariaLabel]="('btpToolHeader.menuButtonAriaLabel' | fdTranslate)()"
                 glyph="menu2"
                 (keydown.arrowLeft)="_handleMenuLeftArrowKey()"
                 (keydown.arrowRight)="_handleMenuRightArrowKey()"

@@ -77,7 +77,7 @@ export class MessageStripAlertComponent<ComponentType = unknown> implements Mess
             inject(Router, { optional: true })
                 ?.events.pipe(
                     filter((event) => event instanceof NavigationStart),
-                    takeUntilDestroyed()
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe(() => this.onDismissHandler());
         }

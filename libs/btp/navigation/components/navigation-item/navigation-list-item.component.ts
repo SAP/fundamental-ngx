@@ -25,12 +25,12 @@ import {
     signal,
     viewChild
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { Observable, asyncScheduler, filter, map, observeOn, startWith, take } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
+import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -440,6 +440,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     protected readonly popoverPlacement = computed<Placement>(() => (this._isRtl() ? 'left-start' : 'right-start'));
 
+    /** @hidden Max-height for the overflow submenu, computed dynamically based on viewport position. */
+    protected readonly overflowSubmenuMaxHeight = signal<string | null>(null);
+
     /** @hidden */
     private readonly _home$ = signal(false);
 
@@ -468,27 +471,19 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _translationResolver = inject(TranslationResolver);
 
     /** Translation signal for snapped popover role description. */
-    private readonly _snappedPopoverRoleDescription$ = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) =>
-                this._translationResolver.resolve(lang, 'btpNavigation.snappedPopoverRoleDescription')
-            )
-        ),
-        { initialValue: 'Navigation List Tree' }
+    private readonly _snappedPopoverRoleDescription$ = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'btpNavigation.snappedPopoverRoleDescription')
     );
 
     /** Translation signal for expander aria-label. */
-    private readonly _expanderAriaLabel$ = toSignal(
-        this._lang$.pipe(
-            map((lang: FdLanguage) => this._translationResolver.resolve(lang, 'btpNavigation.expanderAriaLabel'))
-        ),
-        { initialValue: 'expand/collapse sub-items' }
+    private readonly _expanderAriaLabel$ = computed(() =>
+        this._translationResolver.resolve(this._langSignal(), 'btpNavigation.expanderAriaLabel')
     );
 
     private readonly _rtlService = inject(RtlService, { optional: true });
@@ -519,6 +514,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     private readonly _itemContainer = viewChild<ElementRef>('itemContainer');
+
+    /** @hidden */
+    private readonly _overflowSubmenuContainer = viewChild<ElementRef>('overflowSubmenuContainer');
 
     /** @hidden */
     constructor() {
@@ -855,6 +853,36 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
         // All other items (leaf items and items with both links and children) can be selected
         return true;
+    }
+
+    /**
+     * @hidden
+     * Handles mouseenter on overflow items to dynamically adjust the submenu max-height.
+     * Uses requestAnimationFrame to ensure the browser has laid out the submenu
+     * (which transitions from display:none to display:block via CSS :hover)
+     * before measuring its viewport position.
+     */
+    onOverflowItemMouseEnter(): void {
+        if (!this.isOverflow$() || !this.hasChildren$()) {
+            return;
+        }
+
+        const submenuEl = this._overflowSubmenuContainer()?.nativeElement;
+        if (!submenuEl) {
+            return;
+        }
+
+        // Wait for the browser to complete layout after CSS :hover makes the submenu visible
+        requestAnimationFrame(() => {
+            const rect = submenuEl.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const margin = 16; // 1rem safety margin from viewport edge
+            const availableHeight = viewportHeight - rect.top - margin;
+
+            if (availableHeight > 0) {
+                this.overflowSubmenuMaxHeight.set(`${availableHeight}px`);
+            }
+        });
     }
 
     private _focusPopoverLink(): void {

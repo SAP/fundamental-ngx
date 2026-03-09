@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { TableModule } from '@fundamental-ngx/core/table';
 import {
     CodeExampleComponent,
-    CodeSnippetComponent,
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
@@ -20,14 +22,16 @@ import { UsingUtilityFunctionsExampleComponent } from './examples/using-utility-
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        CodeSnippetComponent,
         SeparatorComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
         BasicUsageExampleComponent,
         UsingUtilityFunctionsExampleComponent,
         LinkComponent,
-        UsingTranslationPipeExampleComponent
+        UsingTranslationPipeExampleComponent,
+        MessageStripComponent,
+        TableModule,
+        ObjectStatusComponent
     ]
 })
 export class TranslationResolverDocsComponent {

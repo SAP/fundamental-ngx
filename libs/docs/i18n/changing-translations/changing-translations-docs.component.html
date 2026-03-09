@@ -1,8 +1,30 @@
 <fd-docs-section-title id="language-change" componentName="i18n"> Changing languages at runtime </fd-docs-section-title>
 <description>
     <p>
-        In this particular example such capabilities are shown on the level of a component due to the limitations of the
-        example itself. The same scenario can and should be used in the root of your app.
+        You can change languages at runtime by calling <code>langSignal.set(newLanguage)</code> on the
+        <code>FD_LANGUAGE_SIGNAL</code> token. When you change the language, all UI elements—labels, buttons, messages,
+        and counters—update automatically without any manual subscriptions.
+    </p>
+    <p>
+        The example below demonstrates switching between English, Ukrainian, and a custom language. Watch how all
+        translations update instantly when you select a different language. This works because Angular's signal-based
+        reactivity automatically propagates changes to all dependent translations, whether they're created with
+        <code>resolveTranslationSignal()</code>, the <code>fdTranslate</code> pipe, or <code>computed()</code> signals.
+    </p>
+    <p>
+        <strong>Key concepts:</strong> <em>Language</em> controls UI text translations (like button labels and
+        messages), while <em>locale</em> controls date and number formatting. Both are often changed together, as shown
+        below. You can also provide custom translation objects that implement the
+        <code>FdLanguage</code> interface—useful for localization variants or overriding specific translations.
+    </p>
+    <p>
+        In a real application, provide <code>FD_LANGUAGE_SIGNAL</code> and <code>FD_LOCALE_SIGNAL</code> at the root
+        level (typically in <code>app.config.ts</code>) so language changes affect your entire app. This example shows
+        it at the component level for demonstration purposes only.
+    </p>
+    <p>
+        <strong>Note:</strong> Use <code>FD_LANGUAGE_SIGNAL</code> (the modern signal-based approach). The old
+        <code>FD_LANGUAGE</code> Observable token is deprecated and will be removed in a future version.
     </p>
 </description>
 <component-example>
@@ -18,11 +40,16 @@
         Translations have a concept of locale, which is a combination of language and region. For example, English
         language has different locales for US, UK, Australia, etc. The locale is used to determine the correct
         translations for the given language. For example, in English there are two plural forms: one for singular and
-        one for plural. In Russian, there are three plural forms: one for singular, one for few and one for plural.
+        one for plural. In Polish, there are three plural forms: one for singular, one for few and one for plural.
     </p>
     <p>
-        To control the locale, you can provide <code>FD_LOCALE</code> token with the locale you want to use. The locale
-        should be in the format of <code>language-region</code>. For example, <code>en-US</code> or <code>uk-UA</code>.
+        To control the locale, you can provide <code>FD_LOCALE_SIGNAL</code> token (recommended) with a WritableSignal
+        containing the locale you want to use. The locale should be in the format of <code>language-region</code>. For
+        example, <code>en-US</code> or <code>uk-UA</code>.
+    </p>
+    <p>
+        <strong>Note:</strong> The old <code>FD_LOCALE</code> (Observable) token is deprecated. Use
+        <code>FD_LOCALE_SIGNAL</code> instead.
     </p>
 </description>
 <component-example>
@@ -37,20 +64,43 @@
 </fd-docs-section-title>
 <description>
     <p>
-        Although <code>fundamental-ngx</code> library provides a rich set of languages to work with out of the box, it's
-        possible to also define your own languages when needed. The language object is just a set of key/values, that
-        are defined per component. This object should implement <code>FdLanguage</code> interface.
+        You can create your own custom language objects by implementing the <code>FdLanguage</code> interface. This is
+        useful for localization variants (e.g., US English vs UK English), testing with mock translations, or providing
+        domain-specific terminology for your application.
     </p>
     <p>
-        You may provide both strings with interpolation using double curly brackets (<code>
-            {{ '{{' }} paramName {{ "}}" }}</code
-        >) or functions as language values.
+        Translation values can be either <strong>strings with interpolation</strong> using single curly brackets (<code
+            >{{ '{' }}paramName{{ '}' }}</code
+        >) for simple parameter substitution, or <strong>functions</strong>
+        that receive a parameters object for complex logic like conditional pluralization or dynamic formatting.
     </p>
     <p>
-        The list of available keys can be found in the corresponding docs section of each component. The I18n section is
-        visible only for the components that have translations. The default English value for each translation is also
-        in this documentation.
+        <strong>Translation Approaches:</strong>
     </p>
-
-    <fd-code-snippet [file]="translationExample"></fd-code-snippet>
+    <ul>
+        <li>
+            <strong>Built-in (English):</strong> Standard translations provided by fundamental-ngx. Simple and ready to
+            use.
+        </li>
+        <li>
+            <strong>String Interpolation:</strong> Uses template strings like
+            <code>"{{ '{' }}count{{ '}' }} characters remaining"</code>. Best for simple parameter substitution. Values
+            are automatically inserted at runtime.
+        </li>
+        <li>
+            <strong>Function-based:</strong> Uses functions like
+            <code>(params) => `${{ '{' }}params.count{{ '}' }} items`</code>. Best for conditional logic, complex
+            pluralization, or when you need full JavaScript control. Notice how the counter messages in the example
+            below show warnings when count is low!
+        </li>
+    </ul>
+    <p>
+        To find available translation keys for each component, check the component's documentation—the I18n section
+        lists all translation keys with their default English values. You only need to provide translations for the keys
+        you want to customize; missing keys will fall back to empty strings.
+    </p>
 </description>
+<component-example>
+    <fd-custom-language-example></fd-custom-language-example>
+</component-example>
+<code-example [exampleFiles]="customLanguageExample"></code-example>

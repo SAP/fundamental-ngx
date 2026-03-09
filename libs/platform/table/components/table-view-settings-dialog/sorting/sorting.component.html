@@ -1,6 +1,6 @@
 <span role="heading" [attr.aria-level]="headingLevel() + 1" fd-list-group-header>
     <span fd-list-title [attr.id]="sortOrderHeaderId">
-        {{ 'platformTable.sortDialogSortOrderHeader' | fdTranslate }}
+        {{ ('platformTable.sortDialogSortOrderHeader' | fdTranslate)() }}
     </span>
 </span>
 <ul fd-list [selection]="true">
@@ -12,7 +12,7 @@
             [ngModel]="direction()"
             (ngModelChange)="_sortDirectionChange($event)"
         ></fd-radio-button>
-        <span fd-list-title>{{ 'platformTable.sortDialogSortOrderAsc' | fdTranslate }}</span>
+        <span fd-list-title>{{ ('platformTable.sortDialogSortOrderAsc' | fdTranslate)() }}</span>
     </li>
     <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="sortOrderHeaderId">
         <fd-radio-button
@@ -22,13 +22,13 @@
             [ngModel]="direction()"
             (ngModelChange)="_sortDirectionChange($event)"
         ></fd-radio-button>
-        <span fd-list-title>{{ 'platformTable.sortDialogSortOrderDesc' | fdTranslate }}</span>
+        <span fd-list-title>{{ ('platformTable.sortDialogSortOrderDesc' | fdTranslate)() }}</span>
     </li>
 </ul>
 
 <span role="heading" [attr.aria-level]="headingLevel() + 1" fd-list-group-header>
     <span fd-list-title [attr.id]="sortDialogSortByHeaderId">
-        {{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}
+        {{ ('platformTable.sortDialogSortByHeader' | fdTranslate)() }}
     </span>
 </span>
 <ul fd-list [selection]="true">
@@ -45,7 +45,7 @@
                 [ngModel]="field()"
                 (ngModelChange)="_sortFieldChange($event)"
             ></fd-radio-button>
-            <span fd-list-title>{{ 'platformTable.sortDialogNotSortedLabel' | fdTranslate }}</span>
+            <span fd-list-title>{{ ('platformTable.sortDialogNotSortedLabel' | fdTranslate)() }}</span>
         </li>
     }
     @for (column of columns(); track column) {

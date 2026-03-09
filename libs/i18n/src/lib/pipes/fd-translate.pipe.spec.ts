@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BehaviorSubject, delay } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
 import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models';
-import { FD_LANGUAGE } from '../utils/tokens';
+import { FD_LANGUAGE_SIGNAL } from '../utils/tokens';
 import { FdTranslatePipe } from './fd-translate.pipe';
 
 const lang: FdLanguage = {
@@ -15,7 +14,7 @@ const lang: FdLanguage = {
 };
 
 @Component({
-    template: `{{ testKey | fdTranslate: testArgs }}`,
+    template: `{{ (testKey | fdTranslate: testArgs)() }}`,
     standalone: true,
     imports: [FdTranslatePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,7 +25,7 @@ class TestComponent {
 }
 
 describe('FdTranslate pipe', () => {
-    let lang$: BehaviorSubject<FdLanguage>;
+    let langSignal: ReturnType<typeof signal<FdLanguage>>;
     let testComponentFixture: ComponentFixture<TestComponent>;
 
     function getTranslatedValue(): string {
@@ -44,13 +43,13 @@ describe('FdTranslate pipe', () => {
     }
 
     const beforeEachTest = (): void => {
-        lang$ = new BehaviorSubject<FdLanguage>(lang);
+        langSignal = signal<FdLanguage>(lang);
         TestBed.configureTestingModule({
             imports: [TestComponent],
             providers: [
                 {
-                    provide: FD_LANGUAGE,
-                    useValue: lang$
+                    provide: FD_LANGUAGE_SIGNAL,
+                    useValue: langSignal
                 }
             ]
         });
@@ -82,13 +81,14 @@ describe('FdTranslate pipe', () => {
 
         it('should work with function values', () => {
             const nodeMembersCount = jest.fn((params) => `${params['count']} function members`);
-            lang$.next({
+            langSignal.set({
                 ...FD_LANGUAGE_ENGLISH,
                 platformApprovalFlow: {
                     ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
                     nodeMembersCount
                 }
             });
+            testComponentFixture.detectChanges();
             setCtx('platformApprovalFlow.nodeMembersCount', { count: 15 });
             expectValueToBe('15 function members');
             expect(nodeMembersCount).toHaveBeenCalledWith({ count: 15 });
@@ -98,13 +98,14 @@ describe('FdTranslate pipe', () => {
             const nodeMembersCount = jest.fn(() => {
                 throw new Error('Oops');
             });
-            lang$.next({
+            langSignal.set({
                 ...FD_LANGUAGE_ENGLISH,
                 platformApprovalFlow: {
                     ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
                     nodeMembersCount
                 }
             });
+            testComponentFixture.detectChanges();
             setCtx('platformApprovalFlow.nodeMembersCount', { count: 15 });
             expectValueToBe('15 members');
             expect(nodeMembersCount).toHaveBeenCalled();
@@ -114,43 +115,50 @@ describe('FdTranslate pipe', () => {
                 ...FD_LANGUAGE_ENGLISH
             };
             delete (<any>customLang).platformApprovalFlow;
-            lang$.next(customLang);
+            langSignal.set(customLang);
+            testComponentFixture.detectChanges();
             setCtx('platformApprovalFlow.nodeMembersCount', { count: 15 });
             expectValueToBe('15 members');
         });
     });
 
-    describe('pipe functionality with async values', () => {
-        // cannot use fakeAsync, because rxjs delays are not taken into account with it
-        // https://github.com/angular/angular/issues/44351
-        const DELAY = 5;
+    describe('pipe reactivity with signal changes', () => {
         beforeEach(async () => {
             beforeEachTest();
-            TestBed.overrideProvider(FD_LANGUAGE, {
-                useValue: lang$.pipe(delay(DELAY))
-            });
             await TestBed.compileComponents();
             testComponentFixture = TestBed.createComponent(TestComponent);
         });
 
-        it('without params', (done) => {
+        it('should update translation when language signal changes', () => {
             setCtx('platformApprovalFlow.defaultWatchersLabel');
-            expectValueToBe('');
-            setTimeout(() => {
-                testComponentFixture.detectChanges();
-                expectValueToBe('Watchers');
-                done();
-            }, DELAY + 1);
+            expectValueToBe('Watchers');
+
+            // Change language
+            langSignal.set({
+                ...FD_LANGUAGE_ENGLISH,
+                platformApprovalFlow: {
+                    ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
+                    defaultWatchersLabel: 'Updated Watchers'
+                }
+            });
+            testComponentFixture.detectChanges();
+            expectValueToBe('Updated Watchers');
         });
 
-        it('with params', (done) => {
+        it('should update translation with params when language changes', () => {
             setCtx('platformApprovalFlow.nodeMembersCount', { count: 10 });
-            expectValueToBe('');
-            setTimeout(() => {
-                testComponentFixture.detectChanges();
-                expectValueToBe('10 members');
-                done();
-            }, DELAY + 1);
+            expectValueToBe('10 members');
+
+            // Change language
+            langSignal.set({
+                ...FD_LANGUAGE_ENGLISH,
+                platformApprovalFlow: {
+                    ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
+                    nodeMembersCount: (params) => `${params['count']} updated members`
+                }
+            });
+            testComponentFixture.detectChanges();
+            expectValueToBe('10 updated members');
         });
     });
 });
