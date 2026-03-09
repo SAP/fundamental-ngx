@@ -16,8 +16,8 @@
                                 fd-button
                                 glyph="multiselect-all"
                                 fdType="emphasized"
-                                [title]="'platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate"
-                                [attr.aria-label]="'platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate"
+                                [title]="('platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate)()"
+                                [attr.aria-label]="('platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate)()"
                                 class="fd-margin-begin--tiny"
                                 (click)="showSelected()"
                             ></button>
@@ -27,8 +27,10 @@
                                 fd-button
                                 glyph="multiselect-all"
                                 fdType="transparent"
-                                [title]="'platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate"
-                                [attr.aria-label]="'platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate"
+                                [title]="('platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate)()"
+                                [attr.aria-label]="
+                                    ('platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate)()
+                                "
                                 class="fd-margin-begin--tiny"
                                 (click)="showSelected()"
                             ></button>

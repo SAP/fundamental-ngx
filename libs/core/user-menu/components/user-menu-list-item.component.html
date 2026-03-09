@@ -13,7 +13,26 @@
                 </span>
             }
 
-            <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+            <div class="fd-menu__content">
+                <span class="fd-menu__title" [class.fd-menu__title--truncate]="truncateText()" [id]="textId()">{{
+                    text()
+                }}</span>
+                @if (subtitle()) {
+                    <span
+                        class="fd-menu__subtitle"
+                        [class.fd-menu__subtitle--truncate]="truncateSubtitle()"
+                        [id]="subtitleId()"
+                        >{{ subtitle() }}</span
+                    >
+                }
+            </div>
+
+            @if (iconAfter()) {
+                <span class="fd-menu__addon-after" [class.fd-menu__addon-after--active]="iconAfterActive()">
+                    <i [class]="'sap-icon--' + iconAfter()" role="presentation"></i>
+                </span>
+            }
+
             <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
         </button>
     } @else {
@@ -23,8 +42,9 @@
             style="width: 100%"
             placement="left-start"
             [focusTrapped]="true"
-            [focusAutoCapture]="true"
-            [restoreFocusOnClose]="false"
+            [focusAutoCapture]="false"
+            [restoreFocusOnClose]="true"
+            [closeOnOutsideClick]="false"
             [isOpen]="isOpen()"
             (isOpenChange)="isOpenChangeHandle($event, popover)"
         >
@@ -41,11 +61,35 @@
                         </span>
                     }
 
-                    <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+                    <div class="fd-menu__content">
+                        <span
+                            class="fd-menu__title"
+                            [class.fd-menu__title--truncate]="truncateText()"
+                            [id]="textId()"
+                            >{{ text() }}</span
+                        >
+                        @if (subtitle()) {
+                            <span
+                                class="fd-menu__subtitle"
+                                [class.fd-menu__subtitle--truncate]="truncateSubtitle()"
+                                [id]="subtitleId()"
+                                >{{ subtitle() }}</span
+                            >
+                        }
+                    </div>
+                    @if (iconAfter()) {
+                        <span class="fd-menu__addon-after" [class.fd-menu__addon-after--active]="iconAfterActive()">
+                            <i [class]="'sap-icon--' + iconAfter()" role="presentation"></i>
+                        </span>
+                    }
                     <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
                 </button>
             </fd-popover-control>
-            <fd-popover-body (keydown)="onPopoverBodyKeyDown($event)">
+            <fd-popover-body
+                (keydown)="onPopoverBodyKeyDown($event)"
+                (mouseenter)="onSubmenuMouseEnter()"
+                (mouseleave)="onSubmenuMouseLeave()"
+            >
                 <ng-container *ngTemplateOutlet="submenu()"></ng-container>
             </fd-popover-body>
         </fd-popover>
@@ -58,6 +102,24 @@
             </span>
         }
 
-        <span class="fd-menu__title" [id]="textId()">{{ text() }}</span>
+        <div class="fd-menu__content">
+            <span class="fd-menu__title" [class.fd-menu__title--truncate]="truncateText()" [id]="textId()">{{
+                text()
+            }}</span>
+            @if (subtitle()) {
+                <span
+                    class="fd-menu__subtitle"
+                    [class.fd-menu__subtitle--truncate]="truncateSubtitle()"
+                    [id]="subtitleId()"
+                    >{{ subtitle() }}</span
+                >
+            }
+        </div>
+
+        @if (iconAfter()) {
+            <span class="fd-menu__addon-after" [class.fd-menu__addon-after--active]="iconAfterActive()">
+                <i [class]="'sap-icon--' + iconAfter()" role="presentation"></i>
+            </span>
+        }
     </button>
 }

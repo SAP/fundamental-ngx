@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SideNavigationButtonDirective } from './side-navigation-button.directive';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
@@ -15,7 +15,7 @@ import { SideNavigationComponent } from './side-navigation.component';
     imports: [
         ButtonComponent,
         ScrollbarDirective,
-        I18nModule,
+        FdTranslatePipe,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
         SideNavigationButtonDirective,

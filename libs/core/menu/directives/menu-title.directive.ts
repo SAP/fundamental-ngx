@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, inject, input } from '@angular/core';
 
 /**
  * The directive that represents the menu title.
@@ -6,19 +6,21 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-menu-title]',
-    standalone: true
+    host: {
+        class: 'fd-menu__title',
+        '[class.fd-menu__title--truncate]': 'truncate()',
+        '[attr.title]': 'title'
+    }
 })
 export class MenuTitleDirective {
+    /** Whether the title should truncate with ellipsis. */
+    readonly truncate = input(false, { transform: booleanAttribute });
+
     /** @hidden */
-    @HostBinding('class.fd-menu__title')
-    fdMenuTitleClass = true;
+    private readonly _elementRef = inject(ElementRef);
 
     /** Returns element title text */
-    @HostBinding('attr.title')
     get title(): string {
         return this._elementRef.nativeElement.textContent;
     }
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
 }

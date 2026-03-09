@@ -31,7 +31,7 @@
             fdType="transparent"
             tabindex="0"
             glyph="overflow"
-            [title]="'platformApprovalFlow.nodeMenuButtonTitle' | fdTranslate"
+            [title]="('platformApprovalFlow.nodeMenuButtonTitle' | fdTranslate)()"
             fdCompact
             [fdMenuTrigger]="menu"
             [disabled]="_isEditActionsAvailable"
@@ -49,7 +49,7 @@
             @if (node.approvers.length === 1) {
                 {{ node.approvers[0].name }}
             } @else {
-                {{ 'platformApprovalFlow.nodeMembersCount' | fdTranslate: { count: node.approvers.length } }}
+                {{ ('platformApprovalFlow.nodeMembersCount' | fdTranslate: { count: node.approvers.length })() }}
             }
         </div>
         <div class="fdp-approval-flow-node__description">
@@ -62,9 +62,9 @@
                           : ''
                 }}
             } @else {
-                {{ 'platformApprovalFlow.nodeVariousTeams' | fdTranslate }}
+                {{ ('platformApprovalFlow.nodeVariousTeams' | fdTranslate)() }}
             }
-            <ng-template #variousTeams> {{ 'platformApprovalFlow.nodeVariousTeams' | fdTranslate }} </ng-template>
+            <ng-template #variousTeams> {{ ('platformApprovalFlow.nodeVariousTeams' | fdTranslate)() }} </ng-template>
         </div>
         <fdp-object-status [status]="_objectStatus" [inverted]="true">
             <ng-template fdpObjectStatusText>
@@ -82,34 +82,38 @@
                     @if (!checkDueDate || !_showDueDateWarning) {
                         @switch (node.status) {
                             @case ('approved') {
-                                {{ 'platformApprovalFlow.statusApproved' | fdTranslate }}
+                                {{ ('platformApprovalFlow.statusApproved' | fdTranslate)() }}
                             }
                             @case ('rejected') {
-                                {{ 'platformApprovalFlow.statusRejected' | fdTranslate }}
+                                {{ ('platformApprovalFlow.statusRejected' | fdTranslate)() }}
                             }
                             @case ('in progress') {
-                                {{ 'platformApprovalFlow.statusInProgress' | fdTranslate }}
+                                {{ ('platformApprovalFlow.statusInProgress' | fdTranslate)() }}
                             }
                             @case ('not started') {
-                                {{ 'platformApprovalFlow.statusNotStarted' | fdTranslate }}
+                                {{ ('platformApprovalFlow.statusNotStarted' | fdTranslate)() }}
                             }
                         }
                     }
                 }
                 @if (checkDueDate && _showDueDateWarning) {
                     @if (_dueIn === dueDateThreshold) {
-                        {{ 'platformApprovalFlow.nodeStatusDueToday' | fdTranslate }}
+                        {{ ('platformApprovalFlow.nodeStatusDueToday' | fdTranslate)() }}
                     }
                     @if (_dueIn < dueDateThreshold) {
                         {{
-                            'platformApprovalFlow.nodeStatusDueInXDays'
+                            (
+                                'platformApprovalFlow.nodeStatusDueInXDays'
                                 | fdTranslate: { count: dueDateThreshold - _dueIn }
+                            )()
                         }}
                     }
                     @if (_dueIn > dueDateThreshold) {
                         {{
-                            'platformApprovalFlow.nodeStatusXDaysOverdue'
+                            (
+                                'platformApprovalFlow.nodeStatusXDaysOverdue'
                                 | fdTranslate: { count: _dueIn - dueDateThreshold }
+                            )()
                         }}
                     }
                 }
@@ -147,7 +151,7 @@
         <button
             fd-button
             glyph="add"
-            [title]="'platformApprovalFlow.addNodeButtonTitle' | fdTranslate"
+            [title]="('platformApprovalFlow.addNodeButtonTitle' | fdTranslate)()"
             fdCompact
             class="fdp-approval-flow-node__add"
             [class.fdp-approval-flow-node__add--blank]="this._blank"
@@ -177,35 +181,35 @@
     @if (meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore) {
         <li fd-menu-item (click)="menu.close(); onAdd.emit('before')">
             <div fd-menu-interactive>
-                <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversBefore' | fdTranslate }}</span>
+                <span fd-menu-title>{{ ('platformApprovalFlow.nodeActionAddApproversBefore' | fdTranslate)() }}</span>
             </div>
         </li>
     }
     @if (meta?.canAddNodeAfter && !this.node?.actionsConfig?.disableAddAfter) {
         <li fd-menu-item (click)="menu.close(); onAdd.emit('after')">
             <div fd-menu-interactive>
-                <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversAfter' | fdTranslate }}</span>
+                <span fd-menu-title>{{ ('platformApprovalFlow.nodeActionAddApproversAfter' | fdTranslate)() }}</span>
             </div>
         </li>
     }
     @if (meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel) {
         <li fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
             <div fd-menu-interactive>
-                <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversParallel' | fdTranslate }}</span>
+                <span fd-menu-title>{{ ('platformApprovalFlow.nodeActionAddApproversParallel' | fdTranslate)() }}</span>
             </div>
         </li>
     }
     @if (_isNotStarted && !this.node?.actionsConfig?.disableEdit) {
         <li fd-menu-item (click)="menu.close(); onEdit.emit()">
             <div fd-menu-interactive>
-                <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionEditApprover' | fdTranslate }}</span>
+                <span fd-menu-title> {{ ('platformApprovalFlow.nodeActionEditApprover' | fdTranslate)() }}</span>
             </div>
         </li>
     }
     @if (!this.node?.actionsConfig?.disableRemove) {
         <li fd-menu-item (click)="menu.close(); onDelete.emit()">
             <div fd-menu-interactive>
-                <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionRemove' | fdTranslate }}</span>
+                <span fd-menu-title> {{ ('platformApprovalFlow.nodeActionRemove' | fdTranslate)() }}</span>
             </div>
         </li>
     }

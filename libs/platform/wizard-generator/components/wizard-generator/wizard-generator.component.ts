@@ -4,6 +4,7 @@ import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { range } from '@fundamental-ngx/cdk/utils';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
 import { WizardGeneratorFinishButtonDirective } from '../../directives/wizard-generator-finish-button.directive';
 import { WizardGeneratorGoNextButtonDirective } from '../../directives/wizard-generator-go-next-button.directive';
@@ -18,7 +19,7 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [WizardGeneratorService, FormGeneratorService],
-    imports: [WizardBodyComponent, WizardModule, SkeletonComponent]
+    imports: [WizardBodyComponent, WizardModule, SkeletonComponent, FdTranslatePipe]
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**

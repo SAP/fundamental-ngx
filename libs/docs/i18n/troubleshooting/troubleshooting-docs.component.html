@@ -1,0 +1,483 @@
+<fd-docs-section-title id="overview" componentName="i18n"> Common Issues and Solutions </fd-docs-section-title>
+<description>
+    <p>
+        This section covers common problems you might encounter when implementing i18n in your application, along with
+        their solutions. Use this guide to quickly diagnose and fix issues.
+    </p>
+</description>
+
+<separator></separator>
+
+<!-- Issue 1: Translations Don't Update -->
+<fd-docs-section-title id="not-updating" componentName="i18n">
+    🔴 Problem: Translations don't update when I change the language
+</fd-docs-section-title>
+<description>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        <strong>Symptom:</strong> You change the language using <code>FD_LANGUAGE_SIGNAL.set()</code>, but the UI still
+        shows the old language.
+    </fd-message-strip>
+
+    <h4>Common Causes and Solutions:</h4>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 1: Not updating a WritableSignal</h5>
+        <p>
+            You provided a <code>signal()</code> but you're trying to change it without getting a reference to the
+            writable signal.
+        </p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>// In providers
+{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
+
+// In component - can't modify this!
+private readonly lang = inject(FD_LANGUAGE_SIGNAL); // Signal&lt;FdLanguage&gt; (read-only)
+this.lang.set(newLang); // ❌ Error: set doesn't exist</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>// In providers
+{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
+
+// In component - cast to WritableSignal
+private readonly lang = inject(FD_LANGUAGE_SIGNAL) as WritableSignal&lt;FdLanguage&gt;;
+this.lang.set(newLang); // ✅ Works!</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 2: Provider scope issue</h5>
+        <p>
+            The language signal is provided in a component, but you're trying to change it from a different component
+            that doesn't share the same provider.
+        </p>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Solution:</strong> Provide the language signal at a higher level (app.config.ts or shared parent
+            component) so all components can access the same signal instance.
+            <pre><code>// app.config.ts
+export const appConfig: ApplicationConfig = {{ '{' }}{{ '{' }}
+  providers: [
+    {{ '{' }}{{ '{' }}
+      provide: FD_LANGUAGE_SIGNAL,
+      useValue: signal(FD_LANGUAGE_ENGLISH)
+    {{ '}' }}{{ '}' }}
+  ]
+{{ '}' }}{{ '}' }};</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 3: Not calling the signal in templates</h5>
+        <p>
+            When using <code>fdTranslate</code> pipe or <code>resolveTranslationSignal()</code>, you forgot to call the
+            signal with <code>()</code>.
+        </p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myKey' | fdTranslate) {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- Shows [Function] --&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} myLabel {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- Shows [Function] --&gt;</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myKey' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- ✅ Shows translated text --&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} myLabel() {{ '}' }}{{ '}' }}&lt;/div&gt;  &lt;!-- ✅ Shows translated text --&gt;</code></pre>
+        </fd-message-strip>
+    </div>
+</description>
+
+<separator></separator>
+
+<!-- Issue 2: Seeing English Instead of Target Language -->
+<fd-docs-section-title id="wrong-language" componentName="i18n">
+    🔴 Problem: I see English text instead of my target language
+</fd-docs-section-title>
+<description>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        <strong>Symptom:</strong> You've set up a language (e.g., Spanish, French), but the UI shows English
+        translations instead.
+    </fd-message-strip>
+
+    <h4>Common Causes and Solutions:</h4>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 1: Language not imported</h5>
+        <p>You're referencing a language constant without importing it.</p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>// No import for FD_LANGUAGE_SPANISH
+{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_SPANISH) {{ '}' }}{{ '}' }}</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>import {{ '{' }} FD_LANGUAGE_SPANISH {{ '}' }} from '&#64;fundamental-ngx/i18n';
+
+{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_SPANISH) {{ '}' }}{{ '}' }}</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 2: Translation key doesn't exist in target language</h5>
+        <p>The translation key exists in English but not in your custom language. The system falls back to English.</p>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Solution:</strong> When creating custom languages, always extend an existing language to inherit
+            missing keys:
+            <pre><code>import {{ '{' }} FD_LANGUAGE_ENGLISH {{ '}' }} from '&#64;fundamental-ngx/i18n';
+
+const MY_CUSTOM_LANGUAGE: FdLanguage = {{ '{' }}{{ '{' }}
+  ...FD_LANGUAGE_ENGLISH,  // ✅ Inherit all English translations as fallback
+  coreButton: {{ '{' }}{{ '{' }}
+    ...FD_LANGUAGE_ENGLISH.coreButton,
+    close: 'Cerrar'  // Override just this key
+  {{ '}' }}{{ '}' }}
+{{ '}' }}{{ '}' }};</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 3: Using wrong translation key</h5>
+        <p>The translation key you're using doesn't exist in any language.</p>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Solution:</strong> Check the available keys by looking at the <code>FdLanguage</code> interface or
+            examining <code>FD_LANGUAGE_ENGLISH</code> object structure. Use TypeScript autocomplete to find valid keys.
+        </fd-message-strip>
+    </div>
+</description>
+
+<separator></separator>
+
+<!-- Issue 3: Parameters Don't Work -->
+<fd-docs-section-title id="parameters-broken" componentName="i18n">
+    🔴 Problem: Parameters in translations don't work (showing {{ '{' }}paramName{{ '}' }} literally)
+</fd-docs-section-title>
+<description>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        <strong>Symptom:</strong> Your translation shows <code>{{ '{' }}count{{ '}' }}</code> or
+        <code>{{ '{' }}name{{ '}' }}</code> as literal text instead of the actual values.
+    </fd-message-strip>
+
+    <h4>Common Causes and Solutions:</h4>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 1: Using double curly braces instead of single</h5>
+        <p>
+            ICU Message Format uses single curly braces <code>{{ '{' }}param{{ '}' }}</code
+            >, not double.
+        </p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>// In your language object
+counterMessage: 'You have {{ '{' }}{{ '{' }} count {{ '}' }}{{ '}' }} items'  // ❌ Double braces</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>// In your language object
+counterMessage: 'You have {{ '{' }}count{{ '}' }} items'  // ✅ Single braces</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 2: Not passing parameters when resolving</h5>
+        <p>You defined parameters in the translation string but didn't pass them when resolving.</p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>// Translation: "Hello {{ '{' }}name{{ '}' }}"
+const greeting = resolveTranslationSignal('myApp.greeting');  // ❌ Missing parameters</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>// Translation: "Hello {{ '{' }}name{{ '}' }}"
+const greeting = resolveTranslationSignal('myApp.greeting', {{ '{' }} name: 'John' {{ '}' }});  // ✅ Pass parameters</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 3: Parameter name mismatch</h5>
+        <p>The parameter name in the translation doesn't match what you're passing.</p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>// Translation: "You have {{ '{' }}count{{ '}' }} items"
+const message = resolveTranslationSignal('myApp.items', {{ '{' }} total: 5 {{ '}' }});  // ❌ 'total' !== 'count'</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>// Translation: "You have {{ '{' }}count{{ '}' }} items"
+const message = resolveTranslationSignal('myApp.items', {{ '{' }} count: 5 {{ '}' }});  // ✅ Matches parameter name</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 4: Spaces inside parameter braces</h5>
+        <p>
+            ICU syntax requires no spaces: <code>{{ '{' }}count{{ '}' }}</code> not
+            <code>{{ '{' }} count {{ '}' }}</code
+            >.
+        </p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>counterMessage: 'You have {{ '{' }} count {{ '}' }} items'  // ❌ Spaces around 'count'</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct:</strong>
+            <pre><code>counterMessage: 'You have {{ '{' }}count{{ '}' }} items'  // ✅ No spaces</code></pre>
+        </fd-message-strip>
+    </div>
+</description>
+
+<separator></separator>
+
+<!-- Issue 4: TypeScript Errors -->
+<fd-docs-section-title id="typescript-errors" componentName="i18n">
+    🔴 Problem: TypeScript errors with translation keys
+</fd-docs-section-title>
+<description>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        <strong>Symptom:</strong> You get TypeScript errors like "Type 'string' is not assignable to type
+        'FdLanguageKeyIdentifier'".
+    </fd-message-strip>
+
+    <h4>Common Causes and Solutions:</h4>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 1: Using invalid translation key</h5>
+        <p>The key you're using doesn't exist in the <code>FdLanguage</code> interface.</p>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Solution:</strong> Use TypeScript autocomplete to find valid keys. Type the component or feature
+            name to see available keys:
+            <pre><code>// Type 'coreButton.' and let autocomplete show you valid keys
+resolveTranslationSignal('coreButton.close');  // ✅ Valid
+
+// Invalid key - TypeScript will catch this
+resolveTranslationSignal('coreButton.invalid');  // ❌ TypeScript error</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 2: Key stored in a variable without proper typing</h5>
+        <p>When storing keys in variables, TypeScript can't verify they're valid.</p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>const myKey = 'coreButton.close';  // Type: string
+resolveTranslationSignal(myKey);  // ❌ TypeScript error</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct (Option 1): Use 'as const'</strong>
+            <pre><code>const myKey = 'coreButton.close' as const;  // Type: 'coreButton.close'
+resolveTranslationSignal(myKey);  // ✅ Works</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct (Option 2): Type as FdLanguageKeyIdentifier</strong>
+            <pre><code>import {{ '{' }} FdLanguageKeyIdentifier {{ '}' }} from '&#64;fundamental-ngx/i18n';
+
+const myKey: FdLanguageKeyIdentifier = 'coreButton.close';
+resolveTranslationSignal(myKey);  // ✅ Works</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct (Option 3): Inline the key</strong>
+            <pre><code>resolveTranslationSignal('coreButton.close');  // ✅ Always works</code></pre>
+        </fd-message-strip>
+    </div>
+</description>
+
+<separator></separator>
+
+<!-- Issue 5: Injection Context Errors -->
+<fd-docs-section-title id="injection-errors" componentName="i18n">
+    🔴 Problem: "inject() must be called from an injection context"
+</fd-docs-section-title>
+<description>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        <strong>Symptom:</strong> Error when calling <code>resolveTranslationSignal()</code> or
+        <code>resolveTranslationSignalFn()</code>.
+    </fd-message-strip>
+
+    <h4>Common Causes and Solutions:</h4>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 1: Calling in a method</h5>
+        <p><code>resolveTranslationSignal()</code> can only be called during initialization, not inside methods.</p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>class MyComponent {{ '{' }}{{ '{' }}
+  onClick(): void {{ '{' }}{{ '{' }}
+    // ❌ Error: not in injection context
+    const label = resolveTranslationSignal('myApp.label');
+  {{ '}' }}{{ '}' }}
+{{ '}' }}{{ '}' }}</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct: Use resolveTranslationSignalFn() instead</strong>
+            <pre><code>class MyComponent {{ '{' }}{{ '{' }}
+  // ✅ Get the resolver function in injection context
+  private readonly getTranslation = resolveTranslationSignalFn();
+
+  onClick(): void {{ '{' }}{{ '{' }}
+    // ✅ Call it in the method
+    const label = this.getTranslation('myApp.label');
+    console.log(label());
+  {{ '}' }}{{ '}' }}
+{{ '}' }}{{ '}' }}</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 2: Calling in a callback or async context</h5>
+        <p>
+            Functions like <code>resolveTranslationSignal()</code> must be called during initialization, not in
+            callbacks or async contexts.
+        </p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong:</strong>
+            <pre><code>import {{ '{' }} afterNextRender {{ '}' }} from '&#64;angular/core';
+
+constructor() {{ '{' }}{{ '{' }}
+  afterNextRender(() => {{ '{' }}{{ '{' }}
+    // ❌ Error: not in injection context
+    const label = resolveTranslationSignal('myApp.label');
+  {{ '}' }}{{ '}' }});
+{{ '}' }}{{ '}' }}</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct: Create signal during initialization</strong>
+            <pre><code>import {{ '{' }} effect, afterNextRender {{ '}' }} from '&#64;angular/core';
+
+// ✅ Create the signal as a class field (in injection context)
+private readonly label = resolveTranslationSignal('myApp.label');
+
+constructor() {{ '{' }}{{ '{' }}
+  // ✅ Use effect() to react to signal changes
+  effect(() => {{ '{' }}{{ '{' }}
+    console.log('Label:', this.label());
+  {{ '}' }}{{ '}' }});
+
+  // ✅ Use afterNextRender() for DOM-related operations
+  afterNextRender(() => {{ '{' }}{{ '{' }}
+    // Signal was already created, just use it
+    document.title = this.label();
+  {{ '}' }}{{ '}' }});
+{{ '}' }}{{ '}' }}
+
+// ✅ Or use in any method/callback
+onClick() {{ '{' }}{{ '{' }}
+  alert(this.label());  // ✅ Works - signal created at initialization
+{{ '}' }}{{ '}' }}</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">❌ Cause 3: Calling outside a component/service class</h5>
+        <p>These functions require Angular's dependency injection.</p>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Solution:</strong> Use the <code>TranslationResolver</code> class directly for standalone functions
+            or pass the translation as a parameter from a component.
+        </fd-message-strip>
+    </div>
+</description>
+
+<separator></separator>
+
+<!-- Issue 6: Performance Issues -->
+<fd-docs-section-title id="performance" componentName="i18n">
+    🟡 Problem: Performance issues with translations
+</fd-docs-section-title>
+<description>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        <strong>Symptom:</strong> Your app feels slow or you notice excessive change detection cycles.
+    </fd-message-strip>
+
+    <h4>Best Practices for Performance:</h4>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">✅ Use signals, not Observables</h5>
+        <p>
+            The signal-based API (<code>FD_LANGUAGE_SIGNAL</code>) is more efficient than the deprecated
+            Observable-based API (<code>FD_LANGUAGE</code>) because it uses a pure pipe instead of an impure pipe,
+            resulting in significantly fewer change detection cycles.
+        </p>
+        <div class="fd-code fd-margin-top-bottom--tiny">
+            <pre><code>// ✅ Modern signal-based (fast)
+{{ '{' }}{{ '{' }} provide: FD_LANGUAGE_SIGNAL, useValue: signal(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}
+
+// ❌ Deprecated Observable-based (slow)
+{{ '{' }}{{ '{' }} provide: FD_LANGUAGE, useValue: of(FD_LANGUAGE_ENGLISH) {{ '}' }}{{ '}' }}</code></pre>
+        </div>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">✅ Reuse translation signals</h5>
+        <p>Create the signal once as a class field, don't recreate it multiple times.</p>
+        <fd-message-strip [type]="'error'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Wrong (inefficient):</strong>
+            <pre><code>&lt;div&gt;{{ '{' }}{{ '{' }} ('myApp.label' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} ('myApp.label' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} ('myApp.label' | fdTranslate)() {{ '}' }}{{ '}' }}&lt;/div&gt;</code></pre>
+        </fd-message-strip>
+        <fd-message-strip [type]="'success'" [dismissible]="false" class="fd-margin-top-bottom--tiny">
+            <strong>Correct (efficient):</strong>
+            <pre><code>// In TypeScript
+readonly label = resolveTranslationSignal('myApp.label');
+
+// In template
+&lt;div&gt;{{ '{' }}{{ '{' }} label() {{ '}' }}{{ '}' }}&lt;/div&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} label() {{ '}' }}{{ '}' }}&lt;/div&gt;
+&lt;div&gt;{{ '{' }}{{ '{' }} label() {{ '}' }}{{ '}' }}&lt;/div&gt;</code></pre>
+        </fd-message-strip>
+    </div>
+
+    <div class="sap-padding fd-margin-bottom--sm">
+        <h5 class="fd-margin-top--none">✅ Avoid calling TranslationResolver repeatedly</h5>
+        <p>
+            If you must use the <code>TranslationResolver</code> class directly, cache the result instead of calling
+            <code>resolve()</code> repeatedly.
+        </p>
+    </div>
+</description>
+
+<separator></separator>
+
+<!-- Quick Checklist -->
+<fd-docs-section-title id="checklist" componentName="i18n"> ✅ Quick Troubleshooting Checklist </fd-docs-section-title>
+<description>
+    <p>Use this checklist to quickly diagnose common i18n issues:</p>
+
+    <fd-message-strip [type]="'information'" [dismissible]="false" class="sap-padding">
+        <h4 class="fd-margin-top--none">Before asking for help, check:</h4>
+        <ul class="fd-margin-begin--none">
+            <li class="fd-margin-bottom--tiny">
+                Are you using <code>FD_LANGUAGE_SIGNAL</code> (not the deprecated <code>FD_LANGUAGE</code>)?
+            </li>
+            <li class="fd-margin-bottom--tiny">
+                Did you cast to <code>WritableSignal&lt;FdLanguage&gt;</code> when you need to change the language?
+            </li>
+            <li class="fd-margin-bottom--tiny">Are you calling signals with <code>()</code> in your templates?</li>
+            <li class="fd-margin-bottom--tiny">
+                Did you import the language constant you're using (e.g., <code>FD_LANGUAGE_SPANISH</code>)?
+            </li>
+            <li class="fd-margin-bottom--tiny">
+                Does your custom language extend an existing language with <code>...FD_LANGUAGE_ENGLISH</code>?
+            </li>
+            <li class="fd-margin-bottom--tiny">
+                Are you using single curly braces <code>{{ '{' }}param{{ '}' }}</code> in ICU syntax (not double)?
+            </li>
+            <li class="fd-margin-bottom--tiny">Are there no spaces inside parameter braces?</li>
+            <li class="fd-margin-bottom--tiny">
+                Are you passing the correct parameter object when resolving translations?
+            </li>
+            <li class="fd-margin-bottom--tiny">
+                Are translation keys valid according to <code>FdLanguageKeyIdentifier</code>?
+            </li>
+            <li class="fd-margin-bottom--tiny">
+                Are you using <code>resolveTranslationSignalFn()</code> for method-based translations?
+            </li>
+            <li class="fd-margin-bottom--tiny">
+                Is the language signal provided at the right level (app-wide or component-specific)?
+            </li>
+        </ul>
+    </fd-message-strip>
+
+    <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--md">
+        <strong>Still stuck?</strong> Check the <a href="#/i18n/getting-started" fd-link>Getting Started guide</a> for
+        complete setup instructions, or review the <a href="#/i18n/resolver" fd-link>comparison table</a> to ensure
+        you're using the right approach for your use case.
+    </fd-message-strip>
+</description>

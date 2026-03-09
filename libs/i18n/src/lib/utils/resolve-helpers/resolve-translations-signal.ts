@@ -1,8 +1,7 @@
 import { computed, inject, isSignal, signal, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models';
-import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
+import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
 
 type CanBeSignal<T> = T | Signal<T>;
@@ -21,7 +20,7 @@ function getFdLocaleSignal(fdLocale?: Nullable<CanBeSignal<string>>): Signal<str
         }
         return signal(fdLocale);
     }
-    return toSignal(inject(FD_LOCALE), { requireSync: true });
+    return inject(FD_LOCALE_SIGNAL);
 }
 
 function getFdLangSignal(fdLang?: Nullable<CanBeSignal<FdLanguage>>): Signal<FdLanguage> {
@@ -31,7 +30,7 @@ function getFdLangSignal(fdLang?: Nullable<CanBeSignal<FdLanguage>>): Signal<FdL
         }
         return signal(fdLang);
     }
-    return toSignal(inject(FD_LANGUAGE), { requireSync: true });
+    return inject(FD_LANGUAGE_SIGNAL);
 }
 
 interface ResolveTranslationsSignalOptions {

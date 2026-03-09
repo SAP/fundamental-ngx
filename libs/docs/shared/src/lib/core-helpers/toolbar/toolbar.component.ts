@@ -7,7 +7,8 @@ import {
     inject,
     output,
     untracked,
-    viewChild
+    viewChild,
+    WritableSignal
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -44,8 +45,8 @@ import {
     ShellbarSidenavDirective,
     ShellbarSizes
 } from '@fundamental-ngx/core/shellbar';
-import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, filter, fromEvent } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
+import { filter, fromEvent } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
 import { Translations } from '../../tokens/translations.token';
@@ -145,7 +146,7 @@ export class ToolbarDocsComponent {
 
     private readonly _contentDensityService = inject(GlobalContentDensityService);
     private readonly _themingService = inject(ThemingService);
-    private readonly _langSubject$ = inject<BehaviorSubject<FdLanguage>>(FD_LANGUAGE);
+    private readonly _langSignal = inject<WritableSignal<FdLanguage>>(FD_LANGUAGE_SIGNAL);
     private readonly _domSanitizer = inject(DomSanitizer);
     private readonly _docsService = inject(DocsService);
 
@@ -180,7 +181,7 @@ export class ToolbarDocsComponent {
                     // Use untracked to avoid creating dependency on _translationInitialized
                     untracked(() => {
                         this._translationInitialized = true;
-                        this._langSubject$.next(english.value);
+                        this._langSignal.set(english.value);
                     });
                 }
             }
@@ -196,7 +197,7 @@ export class ToolbarDocsComponent {
     }
 
     protected selectTranslation(translation: FdLanguage): void {
-        this._langSubject$.next(translation);
+        this._langSignal.set(translation);
         this.i18nMenu()?.close();
     }
 

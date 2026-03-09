@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_zh_CN.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: '忙碌',
         defaultTitle: '请等待'
@@ -58,7 +67,9 @@ export default {
         expandLabel: '展开标题',
         collapseLabel: '折叠标题',
         pinLabel: '固定标题',
-        unpinLabel: '取消固定标题'
+        unpinLabel: '取消固定标题',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '另外 {count} 个',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: '警告消息条',
         announcementError: '错误消息条',
         announcementSuccess: '成功消息条',
-        closable: '可关闭'
+        closable: '可关闭',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 个结果列表项目。',
@@ -93,7 +109,8 @@ export default {
         noResults: '无结果。',
         navigateSelectionsWithArrows: '使用向上和向下箭头导航选择。',
         escapeNavigateTokens: '按 escape 退出输入字段并使用向左和向右箭头键浏览所选选项。',
-        tokensCountText: '包含的令牌总数：{length}。'
+        tokensCountText: '包含的令牌总数：{length}。',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: '主导航',
@@ -181,7 +198,11 @@ export default {
         semanticDeclineLabel: '拒绝'
     },
     coreTabs: {
-        tabListExpandButtonText: '更多'
+        tabListExpandButtonText: '更多',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: '更多',
@@ -213,7 +234,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: '时间选取器输入',
-        timePickerButtonLabel: '打开选取器'
+        timePickerButtonLabel: '打开选取器',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: '可删除',
@@ -234,6 +259,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: '向导'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: '单击或按回车以查看更多详细信息',
@@ -313,7 +342,11 @@ export default {
         statusNotStarted: '尚未开始'
     },
     platformFeedInput: {
-        userTitle: '用户'
+        userTitle: '用户',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: '更多'
     },
     platformVHD: {
         selectedAndConditionLabel: '所选项目和条件',
@@ -582,7 +615,8 @@ export default {
         clearFilters: '清除过滤器'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: '编辑'
+        summarySectionEditStep: '编辑',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: '全部',
@@ -595,7 +629,8 @@ export default {
             pattern: '该字段值无效',
             required: '该字段为必填',
             requiredTrue: '该字段为必填'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: '管理',
@@ -624,6 +659,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: '选择选项'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: '展开节点',

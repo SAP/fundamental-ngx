@@ -4,7 +4,7 @@
             <div fd-bar-left>
                 <fd-bar-element>
                     <h4 fd-title [headerSize]="4">
-                        {{ 'platformTable.P13SortDialogHeader' | fdTranslate }}
+                        {{ ('platformTable.P13SortDialogHeader' | fdTranslate)() }}
                     </h4>
                 </fd-bar-element>
             </div>
@@ -22,7 +22,7 @@
                     class="sort-row__select"
                     [value]="rule.columnKey"
                     (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                    [placeholder]="'platformTable.P13SortDialogNoneSelectedColumn' | fdTranslate"
+                    [placeholder]="('platformTable.P13SortDialogNoneSelectedColumn' | fdTranslate)()"
                 >
                     @for (column of columns | getAvailableSortColumns: rules : rule.columnKey; track column) {
                         <li fd-option [value]="column.key">
@@ -34,13 +34,13 @@
                     class="sort-row__select"
                     [value]="rule.direction"
                     (valueChange)="_onRuleDirectionChange(rule, $event)"
-                    [placeholder]="'platformTable.P13SortDialogNoneSelectedSorting' | fdTranslate"
+                    [placeholder]="('platformTable.P13SortDialogNoneSelectedSorting' | fdTranslate)()"
                 >
                     <li fd-option [value]="SORT_DIRECTION.ASC">
-                        {{ 'platformTable.P13SortDialogSortOrderSelectOptionAsc' | fdTranslate }}
+                        {{ ('platformTable.P13SortDialogSortOrderSelectOptionAsc' | fdTranslate)() }}
                     </li>
                     <li fd-option [value]="SORT_DIRECTION.DESC">
-                        {{ 'platformTable.P13SortDialogSortOrderSelectOptionDesc' | fdTranslate }}
+                        {{ ('platformTable.P13SortDialogSortOrderSelectOptionDesc' | fdTranslate)() }}
                     </li>
                 </fd-select>
                 <div class="sort-row__actions">
@@ -48,8 +48,8 @@
                         fd-button
                         fdType="transparent"
                         glyph="sys-cancel"
-                        [attr.aria-label]="'platformTable.P13SortDialogRemoveSortBtnTitle' | fdTranslate"
-                        [title]="'platformTable.P13SortDialogRemoveSortBtnTitle' | fdTranslate"
+                        [attr.aria-label]="('platformTable.P13SortDialogRemoveSortBtnTitle' | fdTranslate)()"
+                        [title]="('platformTable.P13SortDialogRemoveSortBtnTitle' | fdTranslate)()"
                         (click)="_removeRule(rule)"
                     ></button>
                     <button
@@ -57,8 +57,8 @@
                         [fdkDisabled]="rules.length === columns.length"
                         fdType="transparent"
                         glyph="add"
-                        [attr.aria-label]="'platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate"
-                        [title]="'platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate"
+                        [attr.aria-label]="('platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate)()"
+                        [title]="('platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate)()"
                         (click)="_addNew(i)"
                     ></button>
                 </div>
@@ -68,12 +68,12 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [label]="'platformTable.P13SortDialogConfirmationBtnLabel' | fdTranslate"
+            [label]="('platformTable.P13SortDialogConfirmationBtnLabel' | fdTranslate)()"
             (click)="confirm()"
         ></fd-button-bar>
         <fd-button-bar
             fdType="transparent"
-            [label]="'platformTable.P13SortDialogCancelBtnLabel' | fdTranslate"
+            [label]="('platformTable.P13SortDialogCancelBtnLabel' | fdTranslate)()"
             (click)="cancel()"
         ></fd-button-bar>
     </fd-dialog-footer>

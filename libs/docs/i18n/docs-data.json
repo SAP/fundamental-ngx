@@ -1,30 +1,32 @@
 {
     "guides": [
         {
-            "name": "Home",
-            "url": "i18n/home"
+            "name": "Getting Started",
+            "url": "i18n/getting-started"
         },
         {
-            "name": "Writing translations",
+            "name": "Writing Translations",
             "url": "i18n/writing-translations"
-        }
-    ],
-    "utilities": [
+        },
         {
-            "name": "Loading translations",
+            "name": "Loading Translations",
             "url": "i18n/loading-translations"
         },
         {
-            "name": "Changing translations",
-            "url": "i18n/changing-translations"
-        },
-        {
-            "name": "Resolving translations",
+            "name": "Resolving Translations",
             "url": "i18n/resolver"
         },
         {
-            "name": "Patch translations",
+            "name": "Changing Translations",
+            "url": "i18n/changing-translations"
+        },
+        {
+            "name": "Overriding Translations",
             "url": "i18n/patch"
+        },
+        {
+            "name": "Troubleshooting",
+            "url": "i18n/troubleshooting"
         }
     ]
 }

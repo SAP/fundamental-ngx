@@ -22,9 +22,9 @@
                         fdType="transparent"
                         glyph="menu2"
                         (fdkClicked)="_navigationClicked($event)"
-                        [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)"
+                        [attr.title]="navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()"
                         [attr.aria-label]="
-                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)
+                            navigationButtonLabel || ('coreShellbar.navigationButtonLabel' | fdTranslate)()
                         "
                         fdCozy
                     ></button>
@@ -69,7 +69,7 @@
             @if (_hideAllComponents) {
                 <div class="fd-shellbar__action fd-shellbar__action--mobile fd-shellbar__action--shrink">
                     <button class="fd-button fd-button--transparent" (click)="_closeMobileSearch()">
-                        {{ 'coreShellbar.cancel' | fdTranslate }}
+                        {{ ('coreShellbar.cancel' | fdTranslate)() }}
                     </button>
                 </div>
             }

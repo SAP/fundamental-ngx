@@ -17,7 +17,8 @@
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
-                "outputPath": "libs/docs/typedoc/moment-adapter"
+                "outputPath": "libs/docs/typedoc/moment-adapter",
+                "tsConfig": "libs/moment-adapter/tsconfig.typedoc.json"
             },
             "outputs": ["{options.outputPath}"]
         },

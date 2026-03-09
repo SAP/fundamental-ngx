@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_hi.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Busy',
         defaultTitle: 'Please wait'
@@ -34,7 +43,8 @@ export default {
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
-        rightNavigationBtnLabel: 'अगले वस्तु पर जाएं'
+        rightNavigationBtnLabel: 'अगले वस्तु पर जाएं',
+        pageIndicatorLabel: 'Item {itemNum} of {totalNum} displayed'
     },
     coreDatePicker: {
         dateInputLabel: 'दिनांक इनपुट',
@@ -57,7 +67,9 @@ export default {
         expandLabel: 'हेडर विस्तारित करें',
         collapseLabel: 'हेडर संकुचित करें',
         pinLabel: 'हेडर पिन करें',
-        unpinLabel: 'हेडर अनपिन करें'
+        unpinLabel: 'हेडर अनपिन करें',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'अधिक',
@@ -83,7 +95,12 @@ export default {
         announcementWarning: 'Warning Message Strip',
         announcementError: 'Error Message Strip',
         announcementSuccess: 'Success Message Strip',
-        closable: 'Closable'
+        closable: 'Closable',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 परिणाम सूची आइटम',
@@ -93,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
@@ -181,7 +199,11 @@ export default {
         semanticDeclineLabel: 'अस्वीकार करें'
     },
     coreTabs: {
-        tabListExpandButtonText: 'अधिक'
+        tabListExpandButtonText: 'अधिक',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'अधिक',
@@ -205,11 +227,19 @@ export default {
         periodLabel: 'अवधि',
         decreasePeriodLabel: 'अवधि घटाएं',
         navigationInstruction:
-            'इस सूची में वस्तुओं के बीच जाने के लिए, ऊपर तीर या निचला तीर दबाएं। सूचियों के बीच स्विच करने के लिए बायाँ तीर या दायाँ तीर दबाएँ।'
+            'इस सूची में वस्तुओं के बीच जाने के लिए, ऊपर तीर या निचला तीर दबाएं। सूचियों के बीच स्विच करने के लिए बायाँ तीर या दायाँ तीर दबाएँ।',
+        nightLabel: 'at night',
+        morningLabel: 'in the morning',
+        afternoonLabel: 'in the afternoon',
+        eveningLabel: 'in the evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'समय चुनने वाला इनपुट',
-        timePickerButtonLabel: 'चुनने वाला खोलें'
+        timePickerButtonLabel: 'चुनने वाला खोलें',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'हटाने-योग्य',
@@ -231,8 +261,13 @@ export default {
     coreWizard: {
         ariaLabel: 'विज़ार्ड'
     },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
+    },
     coreBreadcrumb: {
-        overflowTitleMore: 'और'
+        overflowTitleMore: 'और',
+        breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'नजर रखने वाले',
@@ -309,7 +344,11 @@ export default {
         statusNotStarted: 'शुरू नहीं हुआ'
     },
     platformFeedInput: {
-        userTitle: 'उपयोगकर्ता'
+        userTitle: 'उपयोगकर्ता',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'अधिक'
     },
     platformVHD: {
         selectedAndConditionLabel: 'चयनित आइटम और शर्तें',
@@ -407,6 +446,11 @@ export default {
         selectScopeLabel: 'Select scope',
         selectStateMessageLabel: 'Select'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search',
+        backButtonLabel: 'Back'
+    },
     platformSwitch: {
         ariaLabel: 'स्विच'
     },
@@ -457,6 +501,8 @@ export default {
         headerMenuFreeze: 'फ्रीज करें',
         headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'हैडर मेनू अनफ्रीज',
+        headerMenuFreezePlural: 'Freeze columns',
+        headerMenuUnfreezePlural: 'Unfreeze columns',
         headerMenuFilter: 'फिल्टर',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
         emptyCell: 'खाली',
@@ -532,6 +578,7 @@ export default {
         expandRowButtonTitle: 'Expand row',
         collapseRowButtonTitle: 'Collapse row',
         rowNavigateButtonTitle: 'Navigate',
+        filterDialogBackToColumns: 'Navigate back',
         filterDialogNotFilteredLabel: '(फ़िल्टर नहीं किया गया)',
         filterDialogFilterByLabel: 'के द्वारा छनित: {filterLabel}',
         filterDialogFilterTitle: 'फ़िल्टर',
@@ -561,10 +608,18 @@ export default {
         deselectAllCheckboxLongLabel: 'Checkbox, checked, click to deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}',
+        loadMore: 'Show More',
+        toolbarActionButtonTitle: 'Settings',
+        settingsDialogHeader: 'Settings',
+        confirmBtnLabel: 'OK',
+        cancelBtnLabel: 'Cancel',
+        filteredBy: 'Filtered by',
+        clearFilters: 'Clear Filters'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'संपादित करें'
+        summarySectionEditStep: 'संपादित करें',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'All',
@@ -577,7 +632,8 @@ export default {
             pattern: 'The field value is invalid',
             required: 'The field is mandatory',
             requiredTrue: 'The field is mandatory'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Manage',
@@ -607,6 +663,9 @@ export default {
     platformSelect: {
         selectOptionLabel: 'एक विकल्प चुनें'
     },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
+    },
     coreTree: {
         expand: 'Expand node',
         collapse: 'Collapse node',
@@ -628,6 +687,10 @@ export default {
         snappedPopoverRoleDescription: 'Navigation List Tree'
     },
     coreNotification: {
+        groupHeaderTitle: 'Expand/Collapse',
+        groupAriaDescription: 'Notification Group',
+        groupAriaDescriptionExpanded: 'expanded',
+        groupAriaDescriptionCollapsed: 'collapsed',
         triggerMoreLabel: 'More',
         triggerLessLabel: 'Less'
     },

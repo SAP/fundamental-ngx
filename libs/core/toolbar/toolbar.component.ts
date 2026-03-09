@@ -27,6 +27,7 @@ import {
     applyCssClass,
     CssClassBuilder,
     DynamicPortalComponent,
+    intersectionObservable,
     Nullable,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
@@ -41,7 +42,8 @@ import {
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { BehaviorSubject, combineLatest, EMPTY, filter, first, map, Observable, switchMap } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { FD_TOOLBAR } from './tokens';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
@@ -85,7 +87,8 @@ export const enum OverflowPriorityEnum {
         PopoverModule,
         ButtonComponent,
         DynamicPortalComponent,
-        TitleComponent
+        TitleComponent,
+        FdTranslatePipe
     ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
@@ -323,6 +326,25 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             this._cd.detectChanges();
         });
         this.buildComponentCssClass();
+
+        // Use IntersectionObserver to detect when toolbar becomes visible
+        // (e.g., when rendered inside a tab that was initially hidden).
+        // This triggers a recalculation once the toolbar is visible and has proper dimensions.
+        this.shouldOverflow$
+            .pipe(
+                switchMap((shouldOverflow) =>
+                    shouldOverflow
+                        ? intersectionObservable(this.elementRef.nativeElement).pipe(
+                              filter((entries) => entries[0]?.isIntersecting),
+                              first()
+                          )
+                        : EMPTY
+                ),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this._refreshOverflow$.next();
+            });
     }
 
     /** @hidden */
@@ -348,7 +370,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         this._refreshOverflow$.next();
     }
 
-    /** hidden */
+    /** @hidden */
     private _updateSpacerUsed(): void {
         // do not render extra spacer if there is at least one passed by the application
         // and it is not fixed this.spacerUsed.set(this.spacer.length > 0 && this.spacer.some((spacer) => !spacer.fixed));

@@ -1,9 +1,9 @@
 <div class="fd-search-field">
     <fd-icon glyph="search" class="fd-search-field__icon" role="presentation" [ariaHidden]="true"></fd-icon>
     <input
-        [placeholder]="placeholder || ('btpSearchField.searchInputPlaceholder' | fdTranslate)"
+        [placeholder]="placeholder || ('btpSearchField.searchInputPlaceholder' | fdTranslate)()"
         type="search"
-        [attr.aria-label]="'btpSearchField.searchInputAriaLabel' | fdTranslate"
+        [attr.aria-label]="('btpSearchField.searchInputAriaLabel' | fdTranslate)()"
         class="fd-search-field__input"
         [ngModel]="_value"
         (ngModelChange)="updateValue($event)"
@@ -19,7 +19,7 @@
                 fd-button
                 fdbNestedButton
                 glyph="decline"
-                [ariaLabel]="'btpSearchField.clearButtonLabel' | fdTranslate"
+                [ariaLabel]="('btpSearchField.clearButtonLabel' | fdTranslate)()"
                 (click)="updateValue(''); searchInputField.focus()"
             ></button>
         </div>
@@ -30,7 +30,7 @@
                 glyph="slim-arrow-right"
                 fdbNestedButton
                 [class.is-focus]="_value && _inputFocused()"
-                [ariaLabel]="'btpSearchField.searchButtonLabel' | fdTranslate"
+                [ariaLabel]="('btpSearchField.searchButtonLabel' | fdTranslate)()"
                 [attr.aria-disabled]="!_value"
                 [attr.tabindex]="!_value ? -1 : 0"
             ></button>

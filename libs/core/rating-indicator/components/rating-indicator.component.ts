@@ -14,13 +14,11 @@ import {
     output,
     signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Observable } from 'rxjs';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
     INDICATOR_CLASSES,
     INDICATOR_DEFAULT_CAPACITY,
@@ -178,9 +176,7 @@ export class RatingIndicatorComponent implements ControlValueAccessor, FormItemC
     readonly displayValue = computed(() => this.internalValue());
 
     /** @hidden Current language signal for i18n */
-    protected readonly language = toSignal(inject<Observable<FdLanguage>>(FD_LANGUAGE), {
-        initialValue: {} as FdLanguage
-    });
+    protected readonly language = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden Internal mutable value for CVA and computed display value */
     protected readonly internalValue = signal(0);

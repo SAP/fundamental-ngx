@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_sv.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Upptagen',
         defaultTitle: 'Vänta'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Expandera huvud',
         collapseLabel: 'Komprimera huvud',
         pinLabel: 'Fäst huvud',
-        unpinLabel: 'Lossa huvud'
+        unpinLabel: 'Lossa huvud',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} mer',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Varningsmeddelanderad',
         announcementError: 'Felmeddelanderad',
         announcementSuccess: 'Resultatmeddelanderad',
-        closable: 'Kan stängas'
+        closable: 'Kan stängas',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlistobjekt.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigera urval med upp- och nedpilarna.',
         escapeNavigateTokens:
             'Tryck på Esc för att stänga inmatningsfältet och använd vänster- och högerpilarna för att navigera genom valda alternativ.',
-        tokensCountText: 'Innehåller totalt antal token: {length}.'
+        tokensCountText: 'Innehåller totalt antal token: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Huvudnavigering',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Avslå'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Fler'
+        tabListExpandButtonText: 'Fler',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Mer',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Inmatning för val av klockslag',
-        timePickerButtonLabel: 'Öppna väljare'
+        timePickerButtonLabel: 'Öppna väljare',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Kan tas bort',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Guide'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Klicka eller tryck på Retur för att se fler detaljer',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'ej påbörjad'
     },
     platformFeedInput: {
-        userTitle: 'Användare'
+        userTitle: 'Användare',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mer'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valda artiklar och villkor',
@@ -585,7 +618,8 @@ export default {
         clearFilters: 'Rensa filter'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Redigera'
+        summarySectionEditStep: 'Redigera',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Alla',
@@ -598,7 +632,8 @@ export default {
             pattern: 'Fältvärde är ogiltigt',
             required: 'Fältet är obligatoriskt',
             requiredTrue: 'Fältet är obligatoriskt'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Hantera',
@@ -627,6 +662,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Välj ett alternativ'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Expandera nod',

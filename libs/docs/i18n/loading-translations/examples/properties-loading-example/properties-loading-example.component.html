@@ -1,0 +1,80 @@
+<div class="properties-loading-example">
+    <div class="fd-margin-top--sm">
+        <label fd-form-label>Simulate loading translations from .properties file:</label>
+        <div class="fd-margin-top--sm">
+            <button
+                fd-button
+                label="Load Ukrainian .properties"
+                (click)="loadFromProperties()"
+                [disabled]="isLoading"
+            ></button>
+            <button class="fd-margin-begin--sm" fd-button label="Reset to English" (click)="resetToEnglish()"></button>
+        </div>
+        <div class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
+            Current language: <strong>{{ currentLanguage }}</strong>
+            @if (isLoading) {
+                <span> - Loading...</span>
+            }
+        </div>
+    </div>
+
+    <!-- Show the .properties structure -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Example .properties file structure (assets/i18n/uk.properties):</label>
+        <pre
+            class="fd-padding--md fd-margin-top--sm"
+            style="background-color: var(--sapBackgroundColor); overflow-x: auto; font-size: 0.875rem"
+        ><code>coreDatePicker.dateInputLabel = Введіть дату
+coreDatePicker.dateRangeInputLabel = Введіть діапазон дат
+coreDatePicker.displayCalendarToggleLabel = Відкрити календар
+platformTextarea.counterMessageCharactersRemainingPlural = {{'{count}'}} символів залишилось</code></pre>
+    </div>
+
+    <!-- Show translated labels -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label>Translated Labels:</label>
+        <div class="fd-margin-top--sm">
+            <div
+                class="fd-padding--md fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.dateInputLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateInputLabel() }}</div>
+            </div>
+
+            <div
+                class="fd-padding--md fd-margin-bottom--md"
+                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
+            >
+                <code>coreDatePicker.dateRangeInputLabel:</code>
+                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateRangeLabel() }}</div>
+            </div>
+
+            <div class="fd-padding--md" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+                <code>Using in button:</code>
+                <div class="fd-margin-top--sm">
+                    <button fd-button [label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive textarea -->
+    <div class="fd-margin-top--md">
+        <label fd-form-label for="textarea-properties-loading"
+            >Platform Textarea (counter messages from .properties):</label
+        >
+        <fdp-textarea
+            [id]="'textarea-properties-loading'"
+            name="textarea-properties-loading"
+            [maxLength]="15"
+            [showExceededText]="true"
+            placeholder="Введіть текст..."
+        >
+        </fdp-textarea>
+        <div class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
+            💡 <strong>Tip:</strong> Click "Load Ukrainian .properties" to see how loadProperties() parses .properties
+            format into translations!
+        </div>
+    </div>
+</div>

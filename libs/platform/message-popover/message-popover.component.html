@@ -27,7 +27,7 @@
                             >
                                 <button
                                     fd-button
-                                    [label]="'platformMessagePopover.allErrors' | fdTranslate"
+                                    [label]="('platformMessagePopover.allErrors' | fdTranslate)()"
                                     value="all"
                                 ></button>
                                 @for (type of _errorTypes$(); track type) {
@@ -48,7 +48,7 @@
                                 fdkInitialFocus
                                 fdType="transparent"
                                 glyph="navigation-left-arrow"
-                                title="Go back"
+                                [title]="('platformMessagePopover.backButton' | fdTranslate)()"
                                 (click)="_showList()"
                             ></button>
                         }

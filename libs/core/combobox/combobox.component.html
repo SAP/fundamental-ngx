@@ -53,8 +53,8 @@
         [isControl]="true"
         [isExpanded]="!mobile && open && displayedValues.length > 0"
         [showFocus]="!clearInputBtnFocused"
-        [glyphAriaLabel]="ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
-        [iconTitle]="title || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
+        [glyphAriaLabel]="ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)()"
+        [iconTitle]="title || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)()"
         (addOnButtonClicked)="onPrimaryButtonClick()"
         (click)="mobile && isOpenChangeHandle(true)"
     >
@@ -99,7 +99,7 @@
                     class="fd-input-group__button"
                     type="button"
                     [fdType]="inShellbar ? 'standard' : 'transparent'"
-                    title="Clear input"
+                    [title]="_clearButtonTitle()"
                     [class.fd-shellbar__button]="inShellbar"
                     [attr.tabindex]="clearButtonFocusable ? 0 : -1"
                     (focus)="clearInputBtnFocus()"
@@ -138,7 +138,7 @@
                     fd-list-item
                     fd-list-group-header
                     ariaRole="group"
-                    [attr.aria-roledescription]="'coreMultiComboBox.listGroupHeader' | fdTranslate"
+                    [attr.aria-roledescription]="('coreMultiComboBox.listGroupHeader' | fdTranslate)()"
                     [attr.aria-owns]="_getGroupItemIds(groupIndex)"
                     [attr.aria-label]="group.key"
                 >

@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_no.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Opptatt',
         defaultTitle: 'Vent litt'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Utvid overskrift',
         collapseLabel: 'Komprimer overskrift',
         pinLabel: 'Fest overskrift',
-        unpinLabel: 'Løsne overskrift'
+        unpinLabel: 'Løsne overskrift',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} mer',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Advarselsmeldingslinje',
         announcementError: 'Feilmeldingslinje',
         announcementSuccess: 'Bekreftelsesmeldingslinje',
-        closable: 'Kan lukkes'
+        closable: 'Kan lukkes',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 resultatlisteelement.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Naviger utvalg med oppover og nedover pilene.',
         escapeNavigateTokens:
             'Trykk på Escape for å avslutte inndatafeltet og bruk venstre og høyre piltastene til å navigere gjennom de valgte alternativene.',
-        tokensCountText: 'Totalt antall token: {length}'
+        tokensCountText: 'Totalt antall token: {length}',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigering',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Avvis'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Mer'
+        tabListExpandButtonText: 'Mer',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Mer',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Inndata for tidsvelger',
-        timePickerButtonLabel: 'Åpne velger'
+        timePickerButtonLabel: 'Åpne velger',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Kan slettes',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Veiviser'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Klikk eller trykk på Enter for å vise flere detaljer',
@@ -316,7 +345,11 @@ export default {
         statusNotStarted: 'ikke startet'
     },
     platformFeedInput: {
-        userTitle: 'Bruker'
+        userTitle: 'Bruker',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Mer'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Valgte elementer og betingelser',
@@ -586,7 +619,8 @@ export default {
         clearFilters: 'Tøm filtre'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Rediger'
+        summarySectionEditStep: 'Rediger',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Alle',
@@ -599,7 +633,8 @@ export default {
             pattern: 'Feltverdien er ugyldig',
             required: 'Feltet er obligatorisk',
             requiredTrue: 'Feltet er obligatorisk'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Administrer',
@@ -628,6 +663,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Velg et alternativ'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Utvid knutepunkt',

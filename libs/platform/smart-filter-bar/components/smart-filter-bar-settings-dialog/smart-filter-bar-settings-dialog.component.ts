@@ -4,13 +4,12 @@ import {
     ChangeDetectorRef,
     Component,
     DestroyRef,
-    Inject,
     ViewChild,
     ViewEncapsulation,
     inject,
     signal
 } from '@angular/core';
-import { Observable, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
+import { Subscription, asyncScheduler } from 'rxjs';
 import { observeOn } from 'rxjs/operators';
 
 import {
@@ -50,8 +49,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
-    FD_LANGUAGE,
-    FdLanguage,
+    FD_LANGUAGE_SIGNAL,
     FdLanguageKeyIdentifier,
     FdTranslatePipe,
     TranslationResolver
@@ -152,9 +150,11 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
+
+    /** @hidden */
     constructor(
         private _dialogRef: DialogRef<SmartFilterSettingsDialogConfig, string[]>,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _cdr: ChangeDetectorRef
     ) {
         this.setInitialTableState();
@@ -245,7 +245,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
      * Transforms visibility options into appropriate select item object.
      */
     private async _transformVisibilityLabels(): Promise<void> {
-        const lang = await firstValueFrom(this._language$);
+        const lang = this._langSignal();
         const labels = { ...this._categoryLabelKeys };
         for (const strategyItem in labels) {
             if (Object.prototype.hasOwnProperty.call(labels, strategyItem)) {

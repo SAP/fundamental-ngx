@@ -61,7 +61,7 @@ import { Appearance, SearchComponent } from '@fundamental-ngx/core/shared';
 import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT, Shellbar } from '@fundamental-ngx/core/shellbar';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { SEARCH_FIELD_COMPONENT } from './search-field-mobile/search-field-mobile.interface';
@@ -388,7 +388,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
     /** @hidden */
-    private resolveTranslation = resolveTranslationSyncFn();
+    private resolveTranslation = resolveTranslationSignalFn();
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -963,10 +963,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         const suggestionCount = this._getSuggestionsLength();
         const searchSuggestionMessage = this.resolveTranslation('platformSearchField.searchSuggestionMessage', {
             count: suggestionCount
-        });
+        })();
         const searchSuggestionNavigateMessage = this.resolveTranslation(
             'platformSearchField.searchSuggestionNavigateMessage'
-        );
+        )();
         this._currentSearchSuggestionAnnouncementMessage =
             searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
         if (this.inputText()?.length > 0) {

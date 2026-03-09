@@ -6,7 +6,7 @@
     [class.fdx-side-nav--narrow-animated-items]="_narrowAnimatedItems$()"
     [class.fdx-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed"
     [class.fdx-side-nav--mobile]="mobile"
-    [attr.aria-label]="'coreNavigation.mainNavigation' | fdTranslate"
+    [attr.aria-label]="('coreNavigation.mainNavigation' | fdTranslate)()"
 >
     @if (!sideNavigationConfiguration) {
         <ng-template [ngTemplateOutlet]="scrollUp"></ng-template>

@@ -22,7 +22,7 @@
                     ? 'inherit'
                     : 'none'
             "
-            [attr.aria-label]="'platformSearchField.suggestionsWrapperAriaLabel' | fdTranslate"
+            [attr.aria-label]="('platformSearchField.suggestionsWrapperAriaLabel' | fdTranslate)()"
             aria-modal="false"
             [attr.aria-describedby]="_popoverHeaderId + ' ' + _menuId + ' ' + _selectedSuggestionItemId()"
             [attr.id]="_popoverBodyId()"
@@ -116,7 +116,7 @@
     <fdp-menu #categoryMenu>
         @if (showCategoryAllOption()) {
             <fdp-menu-item (itemSelect)="setCurrentCategory(null)">{{
-                'platformSearchField.allButtonLabel' | fdTranslate
+                ('platformSearchField.allButtonLabel' | fdTranslate)()
             }}</fdp-menu-item>
         }
         @for (category of categories(); track category) {
@@ -134,14 +134,17 @@
         "
         (valueChange)="setCurrentCategory($event)"
         ariaHasPopup="dialog"
-        [ariaLabel]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : null"
-        [ariaDescription]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate) : ''"
+        [ariaLabel]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate)() : null"
+        [ariaDescription]="_shellbar ? ('platformSearchField.selectScopeLabel' | fdTranslate)() : ''"
         [mobile]="mobile() && isOpen"
         (click)="_categorySelectClicked($event)"
-        [mobileConfig]="{ hasCloseButton: true, title: ('platformSearchField.selectStateMessageLabel' | fdTranslate) }"
+        [mobileConfig]="{
+            hasCloseButton: true,
+            title: ('platformSearchField.selectStateMessageLabel' | fdTranslate)()
+        }"
     >
         <li fd-option (itemSelect)="setCurrentCategory(null)">
-            {{ 'platformSearchField.allButtonLabel' | fdTranslate }}
+            {{ ('platformSearchField.allButtonLabel' | fdTranslate)() }}
         </li>
         @for (category of categories(); track category) {
             <li fd-option [value]="category">{{ category.label }}</li>
@@ -196,8 +199,8 @@
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance()?.searchFieldClass }}"
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
-                [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
-                [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
+                [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)()"
+                [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)()"
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
                 [attr.aria-controls]="!!_popoverBodyId() ? _popoverBodyId() : null"
                 [attr.aria-expanded]="
@@ -218,8 +221,8 @@
                     <button
                         tabindex="-1"
                         [attr.aria-hidden]="!mobile()"
-                        [attr.title]="'platformSearchField.clearButtonTitle' | fdTranslate"
-                        [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
+                        [attr.title]="('platformSearchField.clearButtonTitle' | fdTranslate)()"
+                        [attr.aria-label]="('platformSearchField.clearButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance()?.buttonClass }}"
                         [class.fd-input-group__button]="!appearance()?.removeGroupButtonClass"
                         [attr.disabled]="disabled ? '' : null"
@@ -243,8 +246,8 @@
                         <button
                             tabindex="-1"
                             [attr.aria-hidden]="!mobile()"
-                            [attr.title]="'platformSearchField.submitButtonTitle' | fdTranslate"
-                            [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
+                            [attr.title]="('platformSearchField.submitButtonTitle' | fdTranslate)()"
+                            [attr.aria-label]="('platformSearchField.submitButtonTitle' | fdTranslate)()"
                             class="fdp-search-field__submit fd-button fd-button--transparent {{
                                 appearance()?.buttonClass
                             }}"
@@ -265,8 +268,8 @@
                     }}"
                 >
                     <button
-                        [attr.aria-title]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
-                        [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
+                        [attr.aria-title]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
+                        [attr.aria-label]="('platformSearchField.synchronizeButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
                             appearance()?.buttonClass
                         }}"
@@ -293,7 +296,7 @@
                         <ul
                             fd-list
                             [searchResultsList]="true"
-                            [attr.aria-roledescription]="'platformSearchField.groupHeader' | fdTranslate"
+                            [attr.aria-roledescription]="('platformSearchField.groupHeader' | fdTranslate)()"
                         >
                             <li fd-list-group-header class="fd-suggestion-header">
                                 <span fd-list-title>{{ filteredSuggestion?.value }}</span>
@@ -358,7 +361,7 @@
         [counter]="filteredSuggestion.searchInScopeCounter"
         [counterRole]="'tooltip'"
         [counterAriaLabel]="
-            'platformSearchField.counterLabel' | fdTranslate: { count: filteredSuggestion.searchInScopeCounter }
+            ('platformSearchField.counterLabel' | fdTranslate: { count: filteredSuggestion.searchInScopeCounter })()
         "
         [ariaRole]="'option'"
     >
@@ -457,8 +460,8 @@
                         <button
                             fd-button
                             fdType="transparent"
-                            [title]="'platformSearchField.deleteButtonTitle' | fdTranslate"
-                            [ariaLabel]="'platformSearchField.deleteButtonAriaLabel' | fdTranslate"
+                            [title]="('platformSearchField.deleteButtonTitle' | fdTranslate)()"
+                            [ariaLabel]="('platformSearchField.deleteButtonAriaLabel' | fdTranslate)()"
                             glyph="decline"
                             (fdkClicked)="_performButtonClick($event, deleteCallback)"
                             (keydown.f2)="_focusParentListItem($event, suggestionListItem)"

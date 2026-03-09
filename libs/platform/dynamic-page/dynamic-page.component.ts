@@ -46,7 +46,7 @@ import {
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { FD_TABLIST, HeadingLevel, TabList } from '@fundamental-ngx/core/shared';
-import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
@@ -80,7 +80,7 @@ export class DynamicPageTabChangeEvent {
     encapsulation: ViewEncapsulation.None,
     providers: [
         {
-            provide: FD_LANGUAGE,
+            provide: FD_LANGUAGE_SIGNAL,
             useFactory: patchHeaderI18nTexts,
             deps: [[new Optional(), DynamicPageConfig]]
         },

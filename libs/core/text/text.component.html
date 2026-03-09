@@ -22,7 +22,7 @@
             (keydown.enter)="toggleTextView()"
             (click)="toggleTextView()"
         >
-            {{ isCollapsed() ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate) }}
+            {{ (isCollapsed() ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate))() }}
         </a>
     }
 </p>

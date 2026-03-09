@@ -1,14 +1,14 @@
-/* eslint-disable max-len */
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
-    CodeExampleComponent,
     CodeSnippetComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
-    HeaderComponent
+    HeaderComponent,
+    SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
@@ -18,44 +18,73 @@ import {
         DescriptionComponent,
         RouterLink,
         LinkComponent,
-        CodeExampleComponent,
         CodeSnippetComponent,
-        DocsSectionTitleComponent
+        DocsSectionTitleComponent,
+        SeparatorComponent,
+        MessageStripComponent
     ]
 })
 export class WritingTranslationsComponent {
     fromToCode = "'{'{from}'}'-'{'{to}'}'";
     fromToCodeTranslation = '{0-12}';
+
     jsonExample: ExampleFile = {
         language: 'json',
         code: `{
-  "platformUploadCollection.folderNamePluralization": "{folderCount, plural, =1 {1 folder} other {# folders}}",
-  "platformUploadCollection.fileNamePluralization": "{filesCount, plural, =1 {1 file} other {# files}}",
-  "platformUploadCollection.removeBtnLabel": "Remove",
-  "platformUploadCollection.messageUpdateVersionSuccess": "{folderName} version has been updated.",
-  "platformUploadCollection.messageRemoveFoldersAndFilesFailed": "Failed to remove {@@platformUploadCollection.folderNamePluralization} and {@@platformUploadCollection.fileNamePluralization} files."
-}`
+  "platformTable.headerMenuFreezePlural": "{count, plural, =1 {Freeze 1 column} other {Freeze # columns}}",
+  "platformTable.headerMenuUnfreezePlural": "{count, plural, =1 {Unfreeze 1 column} other {Unfreeze # columns}}",
+  "platformTable.headerMenuSortAsc": "Sort Ascending",
+  "platformTable.messageFilterSuccess": "Filter applied to {columnName}.",
+  "platformTable.messageNoDataWithFilter": "No {@@platformTable.headerMenuFreezePlural} or {@@platformTable.headerMenuUnfreezePlural} available."
+}`,
+        fileName: 'translations'
     };
+
     jsExample: ExampleFile = {
-        language: 'js',
-        code: `const folderNamePluralization = ({folderCount}) => {
-    return folderCount === 1 ? '1 folder' : \`\${folderCount} folders\`;
+        language: 'typescript',
+        code: `const headerMenuFreezePlural = ({count}) => {
+    return count === 1 ? 'Freeze 1 column' : \`Freeze \${count} columns\`;
 };
 
-const fileNamePluralization = ({filesCount}) => {
-    return filesCount === 1 ? '1 file' : \`\${filesCount} files\`;
+const headerMenuUnfreezePlural = ({count}) => {
+    return count === 1 ? 'Unfreeze 1 column' : \`Unfreeze \${count} columns\`;
 };
 
-const platformUploadCollection = {
-    folderNamePluralization,
-    fileNamePluralization,
-    removeBtnLabel: 'Remove',
-    messageUpdateVersionSuccess: ({folderName}) => \`\${folderName} version has been updated.\`,
-    messageRemoveFoldersAndFilesFailed: ({folderName, fileName}) => {
-        const folders = folderNamePluralization({folderName});
-        const files = fileNamePluralization({fileName});
-        return \`Failed to remove \${folders} and \${files} files.\`;
+const platformTable = {
+    headerMenuFreezePlural,
+    headerMenuUnfreezePlural,
+    headerMenuSortAsc: 'Sort Ascending',
+    messageFilterSuccess: ({columnName}) => \`Filter applied to \${columnName}.\`,
+    messageNoDataWithFilter: ({freezeCount, unfreezeCount}) => {
+        const freeze = headerMenuFreezePlural({count: freezeCount});
+        const unfreeze = headerMenuUnfreezePlural({count: unfreezeCount});
+        return \`No \${freeze} or \${unfreeze} available.\`;
     }
-};`
+};`,
+        fileName: 'translations'
+    };
+
+    internalReferenceExample: ExampleFile = {
+        language: 'json',
+        code: `{
+  // Define reusable translations
+  "platformTable.headerMenuFreezePlural": "{count, plural, =1 {Freeze 1 column} other {Freeze # columns}}",
+  "platformTable.headerMenuUnfreezePlural": "{count, plural, =1 {Unfreeze 1 column} other {Unfreeze # columns}}",
+
+  // Reference them using @@keyName syntax
+  "platformTable.messageNoDataWithFilter": "No {@@platformTable.headerMenuFreezePlural} or {@@platformTable.headerMenuUnfreezePlural} available."
+}`,
+        fileName: 'internal-references-example'
+    };
+
+    escapingExample: ExampleFile = {
+        language: 'json',
+        code: `{
+  // To display literal {0-12}, escape the curly braces:
+  "myTranslationKey": "'{'{from}'}'-'{'{to}'}'"
+
+  // This will render as: {0-12} when from=0 and to=12
+}`,
+        fileName: 'escaping-example'
     };
 }

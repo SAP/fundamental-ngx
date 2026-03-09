@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { inject, isDevMode } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { combineLatest, isObservable, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -41,10 +41,35 @@ function getFdLangObservable(fdLang?: Nullable<FdLanguage | Observable<FdLanguag
 
 /**
  * Get observable creator for the resolve translations
+ *
+ * @deprecated Use resolveTranslationSignalFn instead for better performance and zoneless compatibility.
+ * Observable-based resolution will be removed in a future version.
+ *
+ * Migration:
+ * ```ts
+ * // Before
+ * const translateFn = resolveTranslationObservableFn();
+ * const label$ = translateFn('coreButton.label');
+ *
+ * // After
+ * const translateFn = resolveTranslationSignalFn();
+ * const labelSignal = translateFn('coreButton.label');
+ * // Or convert to Observable if needed:
+ * const label$ = toObservable(labelSignal);
+ * ```
  */
 export function resolveTranslationObservableFn(
     options?: ResolveTranslationsObservableOptions
 ): ResolveTranslationFn<Observable<string>> {
+    if (isDevMode()) {
+        console.warn(
+            '[DEPRECATION] resolveTranslationObservableFn() is deprecated and will be removed in a future version.\n' +
+                'Use resolveTranslationSignalFn() instead for better performance.\n' +
+                'Migration: Use toObservable() to convert signals to observables if needed.\n' +
+                'See: https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/MIGRATION.md'
+        );
+    }
+
     const { fdLang, fdLocale } = options || {};
     const langAndLocale$ = combineLatest([getFdLangObservable(fdLang), getFdLocaleObservable(fdLocale)]);
 
@@ -62,10 +87,33 @@ type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> =
 
 /**
  * Helper utility function for getting translations observable
+ *
+ * @deprecated Use resolveTranslationSignal instead for better performance and zoneless compatibility.
+ * Observable-based resolution will be removed in a future version.
+ *
+ * Migration:
+ * ```ts
+ * // Before
+ * const label$ = resolveTranslationObservable('coreButton.label');
+ *
+ * // After
+ * const labelSignal = resolveTranslationSignal('coreButton.label');
+ * // Or convert to Observable if needed:
+ * const label$ = toObservable(labelSignal);
+ * ```
  */
 export function resolveTranslationObservable<Key extends FdLanguageKeyIdentifier>(
     ...args: ResolveTranslationArgs<Key>
 ): Observable<string> {
+    if (isDevMode()) {
+        console.warn(
+            '[DEPRECATION] resolveTranslationObservable() is deprecated and will be removed in a future version.\n' +
+                'Use resolveTranslationSignal() instead for better performance.\n' +
+                'Migration: Use toObservable() to convert signals to observables if needed.\n' +
+                'See: https://github.com/SAP/fundamental-ngx/blob/main/libs/i18n/MIGRATION.md'
+        );
+    }
+
     const [key, ctxOrOptions, options] = args;
     const observableCreator = resolveTranslationObservableFn({ ...(ctxOrOptions || {}), ...(options || {}) });
     return observableCreator<Key>(...([key, ctxOrOptions] as ResolveFnArgs<Key>));

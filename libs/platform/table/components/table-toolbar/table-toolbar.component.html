@@ -32,7 +32,7 @@
                 [placeholder]="
                     searchFieldPlaceholder
                         ? searchFieldPlaceholder
-                        : ('platformTable.toolbarSearchPlaceholder' | fdTranslate)
+                        : ('platformTable.toolbarSearchPlaceholder' | fdTranslate)()
                 "
                 [inputText]="_searchInputText"
                 [disabled]="!!(tableLoading$ | async)"
@@ -51,7 +51,7 @@
             <button
                 fd-button
                 fd-toolbar-item
-                [label]="'platformTable.toolbarActionCreateButtonLabel' | fdTranslate"
+                [label]="('platformTable.toolbarActionCreateButtonLabel' | fdTranslate)()"
                 (click)="_addRow()"
             ></button>
             @if (_showSaveButton) {
@@ -59,7 +59,7 @@
                     <button
                         fd-button
                         fd-toolbar-item
-                        [label]="'platformTable.toolbarActionSaveButtonLabel' | fdTranslate"
+                        [label]="('platformTable.toolbarActionSaveButtonLabel' | fdTranslate)()"
                         (click)="_saveRows()"
                     ></button>
                 }
@@ -67,7 +67,7 @@
                 <button
                     fd-button
                     fd-toolbar-item
-                    [label]="'platformTable.toolbarActionCancelButtonLabel' | fdTranslate"
+                    [label]="('platformTable.toolbarActionCancelButtonLabel' | fdTranslate)()"
                     (click)="_cancelEditing()"
                     fdType="transparent"
                 ></button>
@@ -91,8 +91,8 @@
                     fd-toolbar-item
                     glyph="expand-all"
                     (click)="_expandAll()"
-                    [title]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                 ></button>
                 <button
@@ -100,8 +100,8 @@
                     fd-toolbar-item
                     glyph="collapse-all"
                     (click)="_collapseAll()"
-                    [title]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                 ></button>
             }
@@ -111,8 +111,8 @@
                     fd-toolbar-item
                     fdOverflowPriority="never"
                     glyph="action-settings"
-                    [title]="'platformTable.toolbarActionButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                     aria-haspopup="dialog"
                     (click)="openSorting()"
@@ -123,8 +123,8 @@
                     fd-button
                     fd-toolbar-item
                     glyph="sort"
-                    [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionSortButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                     aria-haspopup="dialog"
                     (click)="openSorting()"
@@ -135,8 +135,8 @@
                     fd-button
                     fd-toolbar-item
                     glyph="filter"
-                    [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionFilterButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                     aria-haspopup="dialog"
                     (click)="openFiltering()"
@@ -147,8 +147,8 @@
                     fd-button
                     fd-toolbar-item
                     glyph="group-2"
-                    [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionGroupButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                     aria-haspopup="dialog"
                     (click)="openGrouping()"
@@ -160,8 +160,8 @@
                     fd-toolbar-item
                     fdOverflowPriority="never"
                     glyph="action-settings"
-                    [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
+                    [title]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
+                    [ariaLabel]="('platformTable.toolbarActionColumnsButtonTitle' | fdTranslate)()"
                     fdType="transparent"
                     aria-haspopup="dialog"
                     (click)="openColumns()"
@@ -179,7 +179,7 @@
             [headingLevel]="headingLevel"
         >
             <label fd-toolbar-label>
-                {{ 'platformTable.filteredBy' | fdTranslate }}:
+                {{ ('platformTable.filteredBy' | fdTranslate)() }}:
                 {{ _formatAppliedFilters(appliedFilters()) }}
             </label>
             <fd-toolbar-spacer></fd-toolbar-spacer>
@@ -189,8 +189,8 @@
                 fd-button
                 fdType="transparent"
                 glyph="decline"
-                [title]="'platformTable.clearFilters' | fdTranslate"
-                [ariaLabel]="'platformTable.clearFilters' | fdTranslate"
+                [title]="('platformTable.clearFilters' | fdTranslate)()"
+                [ariaLabel]="('platformTable.clearFilters' | fdTranslate)()"
             ></button>
         </fd-toolbar>
     }

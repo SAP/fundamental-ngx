@@ -10,7 +10,6 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
-    Inject,
     Input,
     OnDestroy,
     OnInit,
@@ -18,7 +17,8 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
@@ -27,7 +27,6 @@ import {
     Subscription,
     asyncScheduler,
     filter,
-    firstValueFrom,
     isObservable,
     map,
     observeOn,
@@ -49,7 +48,7 @@ import {
     ListUnreadIndicator
 } from '@fundamental-ngx/core/list';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import {
     ArrayListDataSource,
     CollectionBaseInput,
@@ -414,18 +413,14 @@ export class ListComponent<T>
     private _dsSubscription: Nullable<Subscription>;
 
     /** @hidden */
-    private _language: FdLanguage;
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _afterViewInit$ = new BehaviorSubject(false);
 
     /** @hidden */
-    constructor(
-        private readonly _liveAnnouncer: LiveAnnouncer,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
-    ) {
+    constructor(private readonly _liveAnnouncer: LiveAnnouncer) {
         super();
-        this._init();
     }
 
     /**
@@ -480,9 +475,8 @@ export class ListComponent<T>
             loading: this._loading,
             loadingLabel: (() => {
                 if (this._loading) {
-                    return this._language$.pipe(
-                        map((language) => this._translationResolver.resolve(language, 'platformList.loadingAriaLabel'))
-                    );
+                    const lang = this._langSignal();
+                    return of(this._translationResolver.resolve(lang, 'platformList.loadingAriaLabel'));
                 }
                 return of(this.loadingLabel);
             })(),
@@ -629,10 +623,8 @@ export class ListComponent<T>
                     if (isBlank(data)) {
                         console.error('===Invalid Response received===');
                     }
-                    this.loadingLabel = this._translationResolver.resolve(
-                        this._language,
-                        'platformList.loadingAriaLabel'
-                    );
+                    const lang = this._langSignal();
+                    this.loadingLabel = this._translationResolver.resolve(lang, 'platformList.loadingAriaLabel');
                     await this._liveAnnouncer.announce(this.loadingLabel, 'assertive');
                 }),
                 delay(this.delayTime),
@@ -963,10 +955,5 @@ export class ListComponent<T>
                     )
                 )
             );
-    }
-
-    /** @hidden */
-    private async _init(): Promise<void> {
-        this._language = await firstValueFrom(this._language$);
     }
 }

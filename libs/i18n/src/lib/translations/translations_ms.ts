@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_ms.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Sibuk',
         defaultTitle: 'Sila tunggu'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Kembangkan Pengepala',
         collapseLabel: 'Runtuhkan Pengepala',
         pinLabel: 'Pinkan Pengepala',
-        unpinLabel: 'Nyahpin Pengepala'
+        unpinLabel: 'Nyahpin Pengepala',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: '{count} selanjutnya',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Jalur Mesej Amaran',
         announcementError: 'Jalur Mesej Ralat',
         announcementSuccess: 'Jalur Mesej Berjaya',
-        closable: 'Boleh Ditutup'
+        closable: 'Boleh Ditutup',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 item senarai hasil.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Navigasi pemilihan dengan anak panah atas dan bawah.',
         escapeNavigateTokens:
             'Tekan kekunci keluar untuk keluar daripada medan input dan gunakan kekunci anak panah kiri dan kanan untuk navigasi melalui pilihan yang dipilih.',
-        tokensCountText: 'Mengandungi jumlah token: {length}.'
+        tokensCountText: 'Mengandungi jumlah token: {length}.',
+        showAll: 'Show All ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Navigasi Utama',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Tolak'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Selanjutnya'
+        tabListExpandButtonText: 'Selanjutnya',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Selanjutnya',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Input pemilih masa',
-        timePickerButtonLabel: 'Buka pemilih'
+        timePickerButtonLabel: 'Buka pemilih',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'Boleh Padam',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Bestari'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Klik atau tekan enter untuk melihat butiran lanjut',
@@ -314,7 +343,11 @@ export default {
         statusNotStarted: 'belum dimulakan'
     },
     platformFeedInput: {
-        userTitle: 'Pengguna'
+        userTitle: 'Pengguna',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Lagi'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Item dan Syarat Dipilih',
@@ -584,7 +617,8 @@ export default {
         clearFilters: 'Kosongkan Penapis'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Edit'
+        summarySectionEditStep: 'Edit',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Semua',
@@ -597,7 +631,8 @@ export default {
             pattern: 'Nilai medan adalah tidak sah',
             required: 'Medan adalah wajib',
             requiredTrue: 'Medan adalah wajib'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Uruskan',
@@ -626,6 +661,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Pilih Pilihan'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Kembangkan nod',

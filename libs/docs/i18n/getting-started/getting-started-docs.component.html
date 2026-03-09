@@ -1,0 +1,232 @@
+<description>
+    <p>
+        <strong>What you'll learn:</strong>
+    </p>
+    <ul>
+        <li>Installing and setting up i18n</li>
+        <li>Providing a language to your application</li>
+        <li>Using translations in templates</li>
+        <li>Using translations in TypeScript code</li>
+        <li>Switching languages at runtime</li>
+    </ul>
+    <p>
+        <strong>Prerequisites:</strong> Basic Angular knowledge (components, templates). No deep Angular expertise
+        required!
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="step1-install" componentName="i18n"> Step 1: Installation </fd-docs-section-title>
+<description>
+    <p>The i18n package is part of fundamental-ngx. If you already have fundamental-ngx installed, you're all set!</p>
+    <p>If not, install it:</p>
+    <fd-code-snippet [file]="installExample"></fd-code-snippet>
+    <p>
+        The <code>&#64;fundamental-ngx/i18n</code> package includes pre-translated strings for 30+ languages including
+        English, Spanish, French, German, Chinese, Japanese, and many more.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="step2-provide" componentName="i18n">
+    Step 2: Provide a language to your app
+</fd-docs-section-title>
+<description>
+    <p>
+        To make translations available throughout your app, you need to <strong>provide a language</strong>. Think of
+        this as telling your app "use English translations" or "use Spanish translations".
+    </p>
+    <p>
+        Open your <code>app.config.ts</code> file (or <code>main.ts</code> if using bootstrapApplication) and add the
+        following:
+    </p>
+    <fd-code-snippet [file]="provideLanguageExample"></fd-code-snippet>
+
+    <p class="fd-margin-top--sm"><strong>What's happening here:</strong></p>
+    <ol>
+        <li>We import <code>signal</code> from Angular (signals are reactive values that auto-update)</li>
+        <li>We import the language constant (e.g., <code>FD_LANGUAGE_ENGLISH</code>)</li>
+        <li>
+            We import <code>FD_LANGUAGE_SIGNAL</code> - this is a special "token" that tells Angular what to provide
+        </li>
+        <li>
+            We add a provider that says: "When something asks for <code>FD_LANGUAGE_SIGNAL</code>, give them a signal
+            containing the English language"
+        </li>
+    </ol>
+
+    <p><strong>Available languages:</strong></p>
+    <p>
+        Import any of these: <code>FD_LANGUAGE_ENGLISH</code>, <code>FD_LANGUAGE_SPANISH</code>,
+        <code>FD_LANGUAGE_FRENCH</code>, <code>FD_LANGUAGE_GERMAN</code>, <code>FD_LANGUAGE_CHINESE</code>,
+        <code>FD_LANGUAGE_JAPANESE</code>, <code>FD_LANGUAGE_POLISH</code>, <code>FD_LANGUAGE_UKRAINIAN</code>, and 20+
+        more!
+    </p>
+
+    <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
+        <strong>Tip:</strong> Providing the language at the app level makes it available to all components. You can also
+        provide it at the component level if you need different languages in different parts of your app.
+    </fd-message-strip>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="step3-use-template" componentName="i18n">
+    Step 3: Use translations in your templates
+</fd-docs-section-title>
+<description>
+    <p>
+        Now that your app has a language, you can use translations! The easiest way is with the
+        <code>fdTranslate</code> pipe in your HTML templates.
+    </p>
+
+    <h4>Import the pipe:</h4>
+    <fd-code-snippet [file]="importPipeExample"></fd-code-snippet>
+
+    <h4 class="fd-margin-top--md">Use it in your template:</h4>
+    <fd-code-snippet [file]="usePipeExample"></fd-code-snippet>
+
+    <p class="fd-margin-top--sm"><strong>Important:</strong> Notice the <code>()</code> after the pipe!</p>
+    <p>
+        The pipe returns a <strong>signal</strong> (a reactive value), so you must invoke it with <code>()</code> to get
+        the actual string. Think of it like calling a function.
+    </p>
+
+    <p class="fd-margin-top--sm"><strong>Where to find translation keys:</strong></p>
+    <p>
+        fundamental-ngx provides pre-translated strings for all its components. You can discover available translation
+        keys in several ways:
+    </p>
+    <ul>
+        <li>
+            <strong>Component documentation:</strong> Each component has an i18n section listing all its translation
+            keys. For example, see <a routerLink="/core/date-picker/i18n" fd-link>Date Picker translation keys</a>.
+        </li>
+        <li>
+            <strong>TypeScript autocomplete:</strong> Type <code>'coreDatePicker.'</code> in your IDE and autocomplete
+            will show all available date picker translations like <code>dateInputLabel</code>,
+            <code>dateRangeInputLabel</code>, etc.
+        </li>
+        <li>
+            <strong>FdLanguage interface:</strong> Explore the <code>FdLanguage</code> type definition to see all
+            available keys across all components.
+        </li>
+    </ul>
+
+    <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
+        <strong>Common translation keys:</strong>
+        <ul class="fd-margin-bottom--none">
+            <li><code>coreDatePicker.dateInputLabel</code> - "Enter date"</li>
+            <li><code>coreFileUploader.browse</code> - "Browse"</li>
+            <li><code>platformTable.emptyTableMessage</code> - "No data"</li>
+        </ul>
+    </fd-message-strip>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="step4-use-code" componentName="i18n">
+    Step 4: Use translations in TypeScript code
+</fd-docs-section-title>
+<description>
+    <p>
+        Sometimes you need translations in your TypeScript code (for tooltips, alerts, dynamic messages, etc.). Use the
+        <code>resolveTranslationSignal()</code> function.
+    </p>
+
+    <fd-code-snippet [file]="useInCodeExample"></fd-code-snippet>
+
+    <p class="fd-margin-top--sm"><strong>What's happening here:</strong></p>
+    <ol>
+        <li>Import <code>resolveTranslationSignal</code> from <code>&#64;fundamental-ngx/i18n</code></li>
+        <li>
+            Call it with a translation key - this returns a signal (reactive value) containing the translated string
+        </li>
+        <li>Use <code>()</code> to invoke the signal and get the actual string value</li>
+        <li>The translation automatically updates if the language changes!</li>
+    </ol>
+
+    <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-top--sm">
+        <strong>Tip:</strong> <code>resolveTranslationSignal()</code> must be called in the "injection context" - that
+        means in class field initializers (like the example above) or in the constructor. It won't work inside methods.
+    </fd-message-strip>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="step5-switch" componentName="i18n">
+    Step 5: Switch languages at runtime
+</fd-docs-section-title>
+<description>
+    <p>Want to let users change the language? It's easy! Just update the language signal.</p>
+    <fd-code-snippet [file]="switchLanguageExample"></fd-code-snippet>
+
+    <p class="fd-margin-top--sm"><strong>What's happening here:</strong></p>
+    <ol>
+        <li>We inject <code>FD_LANGUAGE_SIGNAL</code> to get access to the language signal</li>
+        <li>We create a method that calls <code>.set()</code> to change the language</li>
+        <li>
+            When you call this method, ALL translations throughout your app automatically update - no manual work
+            needed!
+        </li>
+    </ol>
+
+    <p>See it in action:</p>
+</description>
+<component-example>
+    <fd-getting-started-example></fd-getting-started-example>
+</component-example>
+<code-example [exampleFiles]="gettingStartedExampleFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="next-steps" componentName="i18n"> Next Steps </fd-docs-section-title>
+<description>
+    <p>Congratulations! You now know the basics of i18n in fundamental-ngx. Here's what to explore next:</p>
+
+    <h4>📚 Learn More:</h4>
+    <ul>
+        <li>
+            <a routerLink="/i18n/writing-translations" fd-link>Writing Translations</a> - Learn the syntax for custom
+            translations
+        </li>
+        <li>
+            <a routerLink="/i18n/loading-translations" fd-link>Loading Translations</a> - Load translations from JSON or
+            .properties files
+        </li>
+        <li>
+            <a routerLink="/i18n/changing-translations" fd-link>Changing Translations</a> - Advanced language switching
+            patterns
+        </li>
+        <li>
+            <a routerLink="/i18n/resolver" fd-link>Using Translations</a> - All the different ways to use translations
+        </li>
+        <li>
+            <a routerLink="/i18n/patch" fd-link>Partial Overrides</a> - Override specific translations for certain
+            components
+        </li>
+    </ul>
+
+    <h4 class="fd-margin-top--md">🔧 Common Patterns:</h4>
+    <ul>
+        <li><strong>Remember user's choice:</strong> Save language preference to localStorage</li>
+        <li><strong>Detect browser language:</strong> Use <code>navigator.language</code> to auto-detect</li>
+        <li><strong>Language dropdown:</strong> Create a dropdown menu for language selection</li>
+        <li><strong>Custom translations:</strong> Create your own translation keys for app-specific text</li>
+    </ul>
+
+    <h4 class="fd-margin-top--md">❓ Need Help?</h4>
+    <ul>
+        <li>
+            Check the
+            <a href="https://github.com/SAP/fundamental-ngx/issues" fd-link target="_blank" rel="noopener noreferrer">
+                GitHub Issues
+            </a>
+            for questions and bug reports
+        </li>
+        <li>Review component-specific i18n documentation for available translation keys</li>
+        <li>See the troubleshooting section (coming soon) for common issues</li>
+    </ul>
+</description>

@@ -8,8 +8,8 @@
                     [class.fd-shellbar__button]="fdType() === 'standard'"
                     [toggled]="toggled()"
                     glyph="overflow"
-                    [attr.aria-label]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
-                    [title]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
+                    [attr.aria-label]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
+                    [title]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
                     fdCozy
                 >
                     @if (totalNotifications) {
@@ -25,7 +25,7 @@
                         fd-action-sheet-item
                         tabindex="-1"
                         glyph="search"
-                        [label]="'coreShellbar.search' | fdTranslate"
+                        [label]="('coreShellbar.search' | fdTranslate)()"
                         (click)="showSearch.emit(); actionSheet.close()"
                         fdCozy
                     ></li>
@@ -51,7 +51,7 @@
                         fd-action-sheet-item
                         tabindex="-1"
                         glyph="sys-help"
-                        [label]="'coreShellbar.assistiveTools' | fdTranslate"
+                        [label]="('coreShellbar.assistiveTools' | fdTranslate)()"
                         (click)="assistiveToolsCallback($event)"
                         fdCozy
                     ></li>

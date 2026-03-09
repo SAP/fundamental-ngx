@@ -9,25 +9,25 @@
             <span>
                 @switch (message.type) {
                     @case ('approverAddSuccess') {
-                        {{ 'platformApprovalFlow.messagesApproverAddedSuccess' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesApproverAddedSuccess' | fdTranslate)() }}
                     }
                     @case ('teamAddSuccess') {
-                        {{ 'platformApprovalFlow.messagesTeamAddedSuccess' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesTeamAddedSuccess' | fdTranslate)() }}
                     }
                     @case ('nodeEdit') {
-                        {{ 'platformApprovalFlow.messagesNodeEdited' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesNodeEdited' | fdTranslate)() }}
                     }
                     @case ('nodeRemove') {
-                        {{ 'platformApprovalFlow.messagesNodeRemovedSingular' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesNodeRemovedSingular' | fdTranslate)() }}
                     }
                     @case ('nodesRemove') {
-                        {{ 'platformApprovalFlow.messagesNodeRemovedPlural' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesNodeRemovedPlural' | fdTranslate)() }}
                     }
                     @case ('teamRemove') {
-                        {{ 'platformApprovalFlow.messagesTeamRemoved' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesTeamRemoved' | fdTranslate)() }}
                     }
                     @case ('error') {
-                        {{ 'platformApprovalFlow.messagesErrorBuildGraph' | fdTranslate }}
+                        {{ ('platformApprovalFlow.messagesErrorBuildGraph' | fdTranslate)() }}
                     }
                 }
             </span>
@@ -38,7 +38,7 @@
                     (keyup.enter)="_undoLastAction(i, $event)"
                     (keyup.space)="_undoLastAction(i, $event)"
                 >
-                    {{ 'platformApprovalFlow.messagesUndoAction' | fdTranslate }}
+                    {{ ('platformApprovalFlow.messagesUndoAction' | fdTranslate)() }}
                 </a>
             }
         </bdi>

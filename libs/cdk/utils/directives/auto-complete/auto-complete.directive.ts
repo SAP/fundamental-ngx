@@ -1,5 +1,5 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 import { KeyUtil } from '../../functions';
@@ -62,10 +62,13 @@ export class AutoCompleteDirective {
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
+    /** @hidden */
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
+    /** @hidden */
     constructor() {
         /**
          * Fixes #10710
@@ -82,11 +85,11 @@ export class AutoCompleteDirective {
 
             keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this._handleKeyboardEvent(evt));
 
-            compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+            compositionStartEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._isComposing = true;
             });
 
-            compositionEndEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+            compositionEndEvent.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._isComposing = false;
                 this.inputText = this._elementRef.nativeElement.value;
             });

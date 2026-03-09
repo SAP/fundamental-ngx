@@ -136,6 +136,9 @@ export interface FdLanguage {
         announcementSuccess: FdLanguageKey;
         closable: FdLanguageKey;
     };
+    coreCombobox: {
+        clearButtonTitle: FdLanguageKey;
+    };
     coreMultiInput: {
         multiInputAriaLabel: FdLanguageKey;
         tokensCountText: FdLanguageKey;
@@ -442,6 +445,9 @@ export interface FdLanguage {
     };
     platformFeedInput: {
         userTitle: FdLanguageKey;
+    };
+    platformIconTabBar: {
+        moreButton: FdLanguageKey;
     };
     platformVHD: {
         selectedAndConditionLabel: FdLanguageKey;

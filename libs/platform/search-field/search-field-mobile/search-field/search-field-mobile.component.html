@@ -12,7 +12,7 @@
                                 fd-button
                                 fdType="transparent"
                                 (click)="_handleDismiss()"
-                                [label]="'platformSearchField.cancelLabel' | fdTranslate"
+                                [label]="('platformSearchField.cancelLabel' | fdTranslate)()"
                             ></button>
                         } @else if (mobileConfig.hasCloseButton) {
                             <button

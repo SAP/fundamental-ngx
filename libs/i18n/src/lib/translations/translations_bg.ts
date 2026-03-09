@@ -1,5 +1,14 @@
 // Do not modify, it's automatically created. Modify translations_bg.properties instead
 export default {
+    coreActionSheet: {
+        toolbarLabel: 'Action Bar'
+    },
+    coreAvatarGroup: {
+        backButton: 'Back'
+    },
+    coreSelect: {
+        closeButton: 'Close'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: 'Заето',
         defaultTitle: 'Моля, изчакайте'
@@ -58,7 +67,9 @@ export default {
         expandLabel: 'Разширяване на заглавна област',
         collapseLabel: 'Свиване на заглавна област',
         pinLabel: 'Закачване на заглавна област',
-        unpinLabel: 'Откачване на заглавна област'
+        unpinLabel: 'Откачване на заглавна област',
+        toggleHeader: 'Toggle header',
+        breadcrumbsLabel: 'Breadcrumbs'
     },
     coreFeedListItem: {
         moreLabel: 'още {count}',
@@ -84,7 +95,12 @@ export default {
         announcementWarning: 'Лента с предупредително съобщение',
         announcementError: 'Лента със съобщение за грешка',
         announcementSuccess: 'Лента със съобщение за успешно изпълнение',
-        closable: 'Може да се затвори'
+        closable: 'Може да се затвори',
+        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Close'
+    },
+    coreCombobox: {
+        clearButtonTitle: 'Clear input'
     },
     coreMultiInput: {
         countListResultsSingular: '1 позиция от списъка с резултати.',
@@ -94,7 +110,8 @@ export default {
         navigateSelectionsWithArrows: 'Със стрелките нагоре и надолу може да преминавате през избора.',
         escapeNavigateTokens:
             'За изход от полето за въвеждане, натиснете Escape и използвайте клавишите със стрелки наляво и надясно, за да преминете през избраните опции.',
-        tokensCountText: 'Общ брой на съдържащите се токени: {length}.'
+        tokensCountText: 'Общ брой на съдържащите се токени: {length}.',
+        showAll: 'Покажи всички ({count})'
     },
     coreNavigation: {
         mainNavigation: 'Основна навигация',
@@ -182,7 +199,11 @@ export default {
         semanticDeclineLabel: 'Отхвърляне'
     },
     coreTabs: {
-        tabListExpandButtonText: 'Повече'
+        tabListExpandButtonText: 'Повече',
+        expandIconLabel: 'See More'
+    },
+    coreToolbar: {
+        moreButton: 'More'
     },
     coreText: {
         moreLabel: 'Повече',
@@ -214,7 +235,11 @@ export default {
     },
     coreTimePicker: {
         timePickerInputLabel: 'Въвеждане на средство за избор на време',
-        timePickerButtonLabel: 'Отваряне на средство за избор'
+        timePickerButtonLabel: 'Отваряне на средство за избор',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
     },
     coreToken: {
         deleteButtonLabel: 'За изтриване',
@@ -235,6 +260,10 @@ export default {
     },
     coreWizard: {
         ariaLabel: 'Асистент'
+    },
+    coreUserMenu: {
+        previousButton: 'Previous',
+        closeButton: 'Close'
     },
     coreBreadcrumb: {
         overflowTitleMore: 'Кликнете или натиснете Enter, за да видите повече подробности',
@@ -315,7 +344,11 @@ export default {
         statusNotStarted: 'незапочнато'
     },
     platformFeedInput: {
-        userTitle: 'Потребител'
+        userTitle: 'Потребител',
+        sendButton: 'Send'
+    },
+    platformIconTabBar: {
+        moreButton: 'Още'
     },
     platformVHD: {
         selectedAndConditionLabel: 'Избрани позиции и условия',
@@ -585,7 +618,8 @@ export default {
         clearFilters: 'Изчистване на филтрите'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Редактиране'
+        summarySectionEditStep: 'Редактиране',
+        stepsLabel: 'Wizard Steps'
     },
     platformMessagePopover: {
         allErrors: 'Всички',
@@ -598,7 +632,8 @@ export default {
             pattern: 'Стойността на полето е невалидна',
             required: 'Полето е задължително',
             requiredTrue: 'Полето е задължително'
-        }
+        },
+        backButton: 'Go back'
     },
     platformVariantManagement: {
         manage: 'Управление',
@@ -627,6 +662,9 @@ export default {
     },
     platformSelect: {
         selectOptionLabel: 'Избор на опция'
+    },
+    platformSplitMenuButton: {
+        groupLabel: 'Split button group'
     },
     coreTree: {
         expand: 'Разширяване на възела',

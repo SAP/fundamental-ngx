@@ -171,12 +171,12 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     constructor() {
         intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isVisible) => this._isVisible.set(isVisible[0]?.isIntersecting));
 
         this._focusableObserver
             .observe(this._elementRef, false)
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isFocusable) => {
                 if (!isFocusable && isFocusable !== this.focusable) {
                     this.focusable = isFocusable;

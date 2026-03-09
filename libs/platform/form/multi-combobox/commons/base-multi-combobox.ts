@@ -15,6 +15,7 @@ import {
     AfterViewInit,
     ContentChildren,
     Directive,
+    effect,
     ElementRef,
     EventEmitter,
     inject,
@@ -64,7 +65,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_SIGNAL, TranslationResolver } from '@fundamental-ngx/i18n';
 import { shallowEqual } from 'fast-equals';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
@@ -395,7 +396,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     private readonly _mapLimit = inject(MAP_LIMIT);
 
     /** @hidden */
-    private readonly _lang$ = inject(FD_LANGUAGE);
+    private readonly _langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     /** @hidden */
     private _translationResolver = new TranslationResolver();
@@ -404,6 +405,14 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected constructor() {
         super();
         this._contentDensity = this.multiComboboxConfig.contentDensity;
+
+        effect(() => {
+            const lang = this._langSignal();
+            this.invalidEntryMessage = this._translationResolver.resolve(
+                lang,
+                'platformMultiCombobox.invalidEntryError'
+            );
+        });
     }
 
     /** @hidden */
@@ -420,14 +429,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._initWindowResize();
         this._assignCustomTemplates();
         this._previousInputText = this.inputText;
-        this._subscriptions.add(
-            this._lang$.subscribe((lang: FdLanguage) => {
-                this.invalidEntryMessage = this._translationResolver.resolve(
-                    lang,
-                    'platformMultiCombobox.invalidEntryError'
-                );
-            })
-        );
         super.ngAfterViewInit();
     }
 

@@ -20,7 +20,11 @@
 }
 <ng-template #actionSheetBodyTemplate>
     @if (mobile && controlTitle) {
-        <div class="fd-bar fd-action-sheet__bar" role="toolbar" aria-label="Bar">
+        <div
+            class="fd-bar fd-action-sheet__bar"
+            role="toolbar"
+            [attr.aria-label]="('coreActionSheet.toolbarLabel' | fdTranslate)()"
+        >
             <div class="fd-bar__left">
                 <div class="fd-bar__element">
                     <div role="heading" [ariaLevel]="controlTitleHeading" class="fd-action-sheet__title">

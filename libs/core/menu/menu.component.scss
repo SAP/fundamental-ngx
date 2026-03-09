@@ -1,4 +1,5 @@
-@import 'fundamental-styles/dist/menu.css';
+// @import 'fundamental-styles/dist/menu.css';
+@import './menu-temp.component.scss';
 
 :host {
     display: inline;
@@ -9,4 +10,9 @@ fd-menu {
     .fd-menu__sublist {
         flex-wrap: nowrap;
     }
+}
+
+.fd-menu__title:not(.fd-menu__title--truncate),
+.fd-menu__subtitle:not(.fd-menu__subtitle--truncate) {
+    white-space: normal;
 }

@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ContentChildren, Directive, HostListener, inject, Input, QueryList } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { TokenComponent } from '@fundamental-ngx/core/token';
-import { FdLanguageKeyIdentifier, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
+import { FdLanguageKeyIdentifier, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 
 @Directive({
     selector: '[fdMultiAnnouncer]',
@@ -31,7 +31,7 @@ export class MultiAnnouncerDirective {
     private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
 
     /** @hidden */
-    private _resolveTranslation = resolveTranslationSyncFn();
+    private _resolveTranslation = resolveTranslationSignalFn();
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -40,21 +40,21 @@ export class MultiAnnouncerDirective {
             this._liveAnnouncer.clear();
             const count = this.multiAnnouncerOptions?.length;
             if (!count && !this._noResultsAnnounced) {
-                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.noResults'));
+                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.noResults')());
                 this._noResultsAnnounced = true;
                 this._resultsAnnounced = false;
             } else if (count) {
                 const trKey: FdLanguageKeyIdentifier =
                     count === 1 ? 'coreMultiInput.countListResultsSingular' : 'coreMultiInput.countListResultsPlural';
-                this._buildAnnouncement(this._resolveTranslation(trKey, { count }));
-                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.navigateSelectionsWithArrows'));
+                this._buildAnnouncement(this._resolveTranslation(trKey, { count })());
+                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.navigateSelectionsWithArrows')());
                 if (!this._resultsAnnounced) {
                     this._noResultsAnnounced = false;
                     this._resultsAnnounced = true;
                 }
             }
             if (this._tokens?.length) {
-                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.escapeNavigateTokens'));
+                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.escapeNavigateTokens')());
             }
             this._makeAnnouncement(this._announcement);
         }

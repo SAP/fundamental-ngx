@@ -4,6 +4,7 @@ import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 
 @Component({
@@ -33,9 +34,12 @@ export class IconTabBarPopoverComponent extends IconTabBarPopoverBase {
      * @description Label for button
      */
     @Input()
-    label = 'more';
+    label: string | undefined;
 
     /** Whether to display labels for tab items */
     @Input()
     showItemLabel: boolean;
+
+    /** @hidden */
+    protected readonly _defaultLabel = resolveTranslationSignal('platformIconTabBar.moreButton');
 }

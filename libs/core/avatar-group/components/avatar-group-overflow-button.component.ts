@@ -72,7 +72,7 @@ export class AvatarGroupOverflowButtonComponent
     /** @hidden */
     constructor() {
         super();
-        this.fdkFocusableItem = inject(AVATAR_GROUP_HOST_CONFIG).type === 'individual';
+        this.setFocusable(inject(AVATAR_GROUP_HOST_CONFIG).type === 'individual');
     }
 
     /** @hidden */

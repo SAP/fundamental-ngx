@@ -10,7 +10,7 @@
         [selectionMode]="_isEditMode ? 'multiSelect' : 'none'"
         (selectionChange)="_onNodeSelectionChange($event)"
     >
-        <fd-grid-list-title-bar [title]="title || ('platformApprovalFlow.defaultTitle' | fdTranslate)">
+        <fd-grid-list-title-bar [title]="title || ('platformApprovalFlow.defaultTitle' | fdTranslate)()">
             <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
             @if (isEditAvailable) {
                 <fdp-approval-flow-toolbar-actions
@@ -28,7 +28,7 @@
         @if (_approvalProcess.watchers?.length || _isEditMode) {
             <div class="fdp-approval-flow__watchers" [attr.aria-label]="watchersLabel">
                 <p class="fdp-approval-flow__watchers-title">
-                    {{ watchersLabel || ('platformApprovalFlow.defaultWatchersLabel' | fdTranslate) }}
+                    {{ watchersLabel || ('platformApprovalFlow.defaultWatchersLabel' | fdTranslate)() }}
                 </p>
                 @if (!_isEditMode) {
                     @for (watcher of _approvalProcess.watchers; track _trackByFn($index, watcher)) {
@@ -45,7 +45,7 @@
                     <div class="fdp-approval-flow__watchers-input-container">
                         <fd-multi-input
                             [dropdownValues]="_usersForWatchersList"
-                            [placeholder]="'platformApprovalFlow.watchersInputPlaceholder' | fdTranslate"
+                            [placeholder]="('platformApprovalFlow.watchersInputPlaceholder' | fdTranslate)()"
                             [displayFn]="_displayUserFn"
                             [valueFn]="_userValueFn"
                             [showAllButton]="true"
@@ -71,7 +71,7 @@
                             @if (_carouselStepsLeft > 0) {
                                 <button
                                     class="fdp-approval-flow-carousel-controls__button--prev-slide"
-                                    [attr.aria-label]="'platformApprovalFlow.prevButtonAriaLabel' | fdTranslate"
+                                    [attr.aria-label]="('platformApprovalFlow.prevButtonAriaLabel' | fdTranslate)()"
                                     (click)="nextSlide(-1)"
                                 >
                                     <fd-icon [glyph]="prevSlideArrowGlyph()"></fd-icon>
@@ -81,7 +81,7 @@
                             @if (_carouselStepsRight > 0) {
                                 <button
                                     class="fdp-approval-flow-carousel-controls__button--next-slide"
-                                    [attr.aria-label]="'platformApprovalFlow.nextButtonAriaLabel' | fdTranslate"
+                                    [attr.aria-label]="('platformApprovalFlow.nextButtonAriaLabel' | fdTranslate)()"
                                     (click)="nextSlide()"
                                 >
                                     {{ _carouselStepsRight }}
@@ -175,10 +175,10 @@
                 <figure fd-illustrated-message type="spot" [svgConfig]="_emptyApprovalFlowSpotConfig">
                     <figcaption fd-illustrated-message-figcaption>
                         <h3 fd-illustrated-message-title>
-                            {{ 'platformApprovalFlow.emptyTitle' | fdTranslate }}
+                            {{ ('platformApprovalFlow.emptyTitle' | fdTranslate)() }}
                         </h3>
                         <p fd-illustrated-message-text>
-                            {{ 'platformApprovalFlow.emptyHint' | fdTranslate }}
+                            {{ ('platformApprovalFlow.emptyHint' | fdTranslate)() }}
                         </p>
                     </figcaption>
                 </figure>
@@ -237,7 +237,7 @@
                 <fd-bar-element>
                     <button
                         fd-button
-                        [label]="'platformApprovalFlow.editModeSaveButtonLabel' | fdTranslate"
+                        [label]="('platformApprovalFlow.editModeSaveButtonLabel' | fdTranslate)()"
                         fdType="emphasized"
                         [disabled]="disableSaveButton"
                         (click)="_saveEditModeChanges()"
@@ -246,7 +246,7 @@
                 <fd-bar-element>
                     <button
                         fd-button
-                        [label]="'platformApprovalFlow.editModeExitButtonLabel' | fdTranslate"
+                        [label]="('platformApprovalFlow.editModeExitButtonLabel' | fdTranslate)()"
                         fdType="transparent"
                         [disabled]="disableExitButton"
                         (click)="_exitEditMode()"
