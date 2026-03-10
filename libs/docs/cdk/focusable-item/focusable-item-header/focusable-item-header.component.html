@@ -2,10 +2,15 @@
     <header [isDeprecated]="falseSignal">Focusable Item</header>
 
     <description>
-        <!-- TODO: description -->
+        <p>
+            The <code>[fdkFocusableItem]</code> directive is used to mark elements as focusable items within a focusable
+            list or grid. It manages focus states, keyboard navigation (Enter, F2, Escape), and integrates with screen
+            readers for accessibility announcements. Use it in combination with <code>[fdkFocusableList]</code> or
+            <code>[fdkFocusableGrid]</code> directives to build accessible, keyboard-navigable components.
+        </p>
     </description>
 
-    <import module="FocusableItemModule" subPackage="focusable-item"></import>
+    <import componentName="FocusableItemDirective" subPackage="focusable-item"></import>
 
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>
