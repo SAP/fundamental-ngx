@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TruncateDirective } from './truncate.directive';
@@ -7,17 +7,17 @@ import { TruncateDirective } from './truncate.directive';
     standalone: true,
     imports: [TruncateDirective],
     template: `
-        <span id="truncate-true" fdkTruncate [fdkTruncateState]="true" [fdkTruncateWidth]="pixLength">
+        <span id="truncate-true" fdkTruncate [fdkTruncateState]="true" [fdkTruncateWidth]="pixLength()">
             Truncated by width
         </span>
-        <span id="truncate-false" fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
+        <span id="truncate-false" fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength()">
             Not truncated
         </span>
         <span id="retain-color" [style.color]="'red'" fdkTruncate [fdkTruncateState]="true"> Retain color </span>
     `
 })
 class TestComponent {
-    pixLength = 100;
+    pixLength = signal(100);
 }
 
 describe('TruncateDirective', () => {
@@ -48,7 +48,7 @@ describe('TruncateDirective', () => {
     });
 
     it('should apply truncation style when fdkTruncateState is true', () => {
-        expect(truncateTrue.nativeElement.style.maxWidth).toBe(`${component.pixLength}px`);
+        expect(truncateTrue.nativeElement.style.maxWidth).toBe(`${component.pixLength()}px`);
     });
 
     it('should not apply truncation style when fdkTruncateState is false', () => {
