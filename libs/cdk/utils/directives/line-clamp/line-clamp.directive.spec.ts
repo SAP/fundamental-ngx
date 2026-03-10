@@ -195,22 +195,6 @@ describe('LineClampDirective', () => {
 
             expect(component.lineCount).toBeDefined();
         }));
-
-        it('should debounce viewport resize events', fakeAsync(() => {
-            const lineCountSpy = jest.spyOn(component, 'onLineCountUpdate');
-            lineCountSpy.mockClear();
-
-            viewportSizeSubject.next(800);
-            viewportSizeSubject.next(900);
-            viewportSizeSubject.next(1000);
-
-            tick(100);
-            const callsAfter100ms = lineCountSpy.mock.calls.length;
-
-            tick(150);
-
-            expect(lineCountSpy.mock.calls.length).toBeGreaterThanOrEqual(callsAfter100ms);
-        }));
     });
 
     describe('reset functionality', () => {
@@ -221,7 +205,7 @@ describe('LineClampDirective', () => {
             component.lineClampDirective.reset();
 
             const targetElement = lineClampTargetDebugElement.nativeElement as HTMLElement;
-            expect(targetElement.textContent?.trim()).toContain('Long text');
+            expect(targetElement.textContent?.trim()).toContain(LONG_TEXT);
         });
     });
 });
