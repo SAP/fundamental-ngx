@@ -1,0 +1,97 @@
+<!--
+  Minimal Angular reproduction of scrolling issue within a Tabbed interface.
+
+  ISSUE TO REPRODUCE:
+  1. Click "Open Full Screen" button
+  2. Start on Tab 1 (Todo - 100 items, scrollable)
+  3. Click on Tab 2 (Sent - 5 items, no scroll)
+  4. Click on Tab 3 (Done - 100 items)
+  5. OBSERVE: Tab 3 should have scroll but it doesn't appear until interaction
+-->
+
+<button fd-button (click)="openPage()">Click to open full screen</button>
+
+<div class="overlay" #overlay>
+    @if (fullscreen) {
+        <div class="scroll-issue-repro-page">
+            <!-- Page Header -->
+            <div class="scroll-issue-repro-header">
+                <div>
+                    <h2>Scroll Issue Reproduction</h2>
+                    <p>Demonstrates scrolling bug in tabbed interface</p>
+                </div>
+                <button fd-button fdType="transparent" aria-label="Close" (click)="closePage($event)" title="Close">
+                    <i class="sap-icon--decline"></i>
+                </button>
+            </div>
+
+            <!-- Icon Tab Bar for switching between tabs -->
+            <fdp-icon-tab-bar
+                (iconTabSelected)="tabChanged($event)"
+                [tabsConfig]="iconTypeConfig()"
+                iconTabType="icon"
+            />
+        </div>
+    }
+</div>
+
+<ng-template #dynamicPageContentTable>
+    <div class="scroll-issue-repro-content" cdkScrollable>
+        <ng-container *ngTemplateOutlet="tableTemplate"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #tableTemplate>
+    <fdp-table
+        #tableComponent
+        [dataSource]="dataSource"
+        emptyTableMessage="No items found"
+        [virtualScroll]="true"
+        [pageScrolling]="true"
+        [pageSize]="2"
+        bodyHeight="500px"
+    >
+        <!-- Table Toolbar -->
+        <fdp-table-toolbar [title]="tableTitle" [hideItemCount]="false"> </fdp-table-toolbar>
+
+        <!-- ID Column -->
+        <fdp-column name="id" key="id" label="ID" [sortable]="true">
+            <fdp-table-header *fdpHeaderCellDef>ID</fdp-table-header>
+            <fdp-table-cell *fdpCellDef="let row">
+                {{ row.id }}
+            </fdp-table-cell>
+        </fdp-column>
+
+        <!-- Name Column -->
+        <fdp-column name="name" key="name" label="Name" [sortable]="true">
+            <fdp-table-header *fdpHeaderCellDef>Name</fdp-table-header>
+            <fdp-table-cell *fdpCellDef="let row">
+                {{ row.name }}
+            </fdp-table-cell>
+        </fdp-column>
+
+        <!-- Description Column -->
+        <fdp-column name="description" key="description" label="Description" [sortable]="true">
+            <fdp-table-header *fdpHeaderCellDef>Description</fdp-table-header>
+            <fdp-table-cell *fdpCellDef="let row">
+                {{ row.description }}
+            </fdp-table-cell>
+        </fdp-column>
+
+        <!-- Status Column -->
+        <fdp-column name="status" key="status" label="Status" [sortable]="true">
+            <fdp-table-header *fdpHeaderCellDef>Status</fdp-table-header>
+            <fdp-table-cell *fdpCellDef="let row">
+                {{ row.status }}
+            </fdp-table-cell>
+        </fdp-column>
+
+        <!-- Created At Column -->
+        <fdp-column name="createdAt" key="createdAt" label="Created At" [sortable]="true">
+            <fdp-table-header *fdpHeaderCellDef>Created At</fdp-table-header>
+            <fdp-table-cell *fdpCellDef="let row">
+                {{ row.createdAt }}
+            </fdp-table-cell>
+        </fdp-column>
+    </fdp-table>
+</ng-template>
