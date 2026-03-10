@@ -1071,8 +1071,8 @@ export class TableComponent<T = any>
 
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
-        this._tableService.setTableState(state);
-        this._cdr.markForCheck();
+        this.setPreset(state);
+        this._cdr.detectChanges();
     }
 
     /** Get table columns definition list. */
