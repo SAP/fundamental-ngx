@@ -55,7 +55,6 @@ import { PlatformTableRowClassExampleComponent } from './examples/platform-table
 import { PlatformTableSemanticExampleComponent } from './examples/platform-table-semantic-example.component';
 import { PlatformTableTreeExampleComponent } from './examples/platform-table-tree-example.component';
 import { PlatformTableWrapExampleComponent } from './examples/platform-table-wrap-example.component';
-import { ScrollIssueReproComponent } from './examples/scroll-issue-repro/scroll-issue-repro.component';
 
 const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';
@@ -95,12 +94,6 @@ const platformTableNgForTsSrc = 'platform-table-columns-ngfor-example.component.
 const platformTableFooterSrc = 'platform-table-footer-example.component.html';
 const platformTableFooterTsSrc = 'platform-table-footer-example.component.ts';
 
-const scrollIssueReproHtmlSrc = 'scroll-issue-repro/scroll-issue-repro.component.html';
-const scrollIssueReproTsSrc = 'scroll-issue-repro/scroll-issue-repro.component.ts';
-const scrollIssueReproScssSrc = 'scroll-issue-repro/scroll-issue-repro.component.scss';
-const scrollIssueReproMockSrc = 'scroll-issue-repro/scroll-issue-repro.mock.ts';
-const scrollIssueReproDataProviderSrc = 'scroll-issue-repro/data-provider.ts';
-
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
 @Component({
@@ -133,7 +126,6 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         PlatformTableInitialLoadingExampleComponent,
         PlatformTableColumnsNgforExampleComponent,
         PlatformTableFooterExampleComponent,
-        ScrollIssueReproComponent,
         PlayGroundComponent,
         TableDataSourceDirective,
         TableHeaderResizerDirective,
@@ -450,40 +442,6 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-footer-example',
             component: 'PlatformTableFooterExampleComponent',
             name: 'platform-table-footer-example.component.ts'
-        }
-    ];
-
-    scrollIssueReproFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(scrollIssueReproHtmlSrc),
-            fileName: 'scroll-issue-repro',
-            name: 'scroll-issue-repro.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(scrollIssueReproTsSrc),
-            fileName: 'scroll-issue-repro',
-            component: 'ScrollIssueReproComponent',
-            name: 'scroll-issue-repro.component.ts'
-        },
-        {
-            language: 'scss',
-            code: getAssetFromModuleAssets(scrollIssueReproScssSrc),
-            fileName: 'scroll-issue-repro',
-            name: 'scroll-issue-repro.component.scss'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(scrollIssueReproMockSrc),
-            fileName: 'scroll-issue-repro.mock',
-            name: 'scroll-issue-repro.mock.ts'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(scrollIssueReproDataProviderSrc),
-            fileName: 'data-provider',
-            name: 'data-provider.ts'
         }
     ];
 

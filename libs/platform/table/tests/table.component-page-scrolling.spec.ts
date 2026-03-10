@@ -172,4 +172,101 @@ describe('TableComponent Page Scrolling', () => {
             expect(scrollTop).toBe(89);
         }));
     });
+
+    describe('Spy intersection recheck after data replacement', () => {
+        it('should call _onSpyIntersect when spy row is visible in container', fakeAsync(() => {
+            const spyIntersectSpy = jest.spyOn(hostComponent.table, '_onSpyIntersect');
+            // Reset call count from initial load
+            spyIntersectSpy.mockClear();
+
+            // Mock the spy row element as visible inside the container
+            const containerEl = hostComponent.table.tableContainer.nativeElement;
+            jest.spyOn(containerEl, 'getBoundingClientRect').mockReturnValue({
+                top: 0,
+                bottom: 500,
+                left: 0,
+                right: 800,
+                width: 800,
+                height: 500
+            } as DOMRect);
+
+            const spyRow = containerEl.querySelector('.fd-table__intersection-spy');
+            if (spyRow) {
+                jest.spyOn(spyRow, 'getBoundingClientRect').mockReturnValue({
+                    top: 400,
+                    bottom: 400,
+                    left: 0,
+                    right: 800,
+                    width: 800,
+                    height: 0
+                } as DOMRect);
+            }
+
+            // Trigger _recheckSpyIntersection via private access
+            (hostComponent.table as any)._recheckSpyIntersection();
+            tick(1); // flush setTimeout
+
+            expect(spyIntersectSpy).toHaveBeenCalledWith(true);
+        }));
+
+        it('should NOT call _onSpyIntersect when spy row is below container viewport', fakeAsync(() => {
+            const spyIntersectSpy = jest.spyOn(hostComponent.table, '_onSpyIntersect');
+            spyIntersectSpy.mockClear();
+
+            // Mock the spy row element as below the container viewport
+            const containerEl = hostComponent.table.tableContainer.nativeElement;
+            jest.spyOn(containerEl, 'getBoundingClientRect').mockReturnValue({
+                top: 0,
+                bottom: 500,
+                left: 0,
+                right: 800,
+                width: 800,
+                height: 500
+            } as DOMRect);
+
+            const spyRow = containerEl.querySelector('.fd-table__intersection-spy');
+            if (spyRow) {
+                jest.spyOn(spyRow, 'getBoundingClientRect').mockReturnValue({
+                    top: 600,
+                    bottom: 600,
+                    left: 0,
+                    right: 800,
+                    width: 800,
+                    height: 0
+                } as DOMRect);
+            }
+
+            (hostComponent.table as any)._recheckSpyIntersection();
+            tick(1);
+
+            expect(spyIntersectSpy).not.toHaveBeenCalled();
+        }));
+
+        it('should not error when spy row element does not exist', fakeAsync(() => {
+            const spyIntersectSpy = jest.spyOn(hostComponent.table, '_onSpyIntersect');
+            spyIntersectSpy.mockClear();
+
+            // Mock querySelector to return null (no spy row)
+            const containerEl = hostComponent.table.tableContainer.nativeElement;
+            jest.spyOn(containerEl, 'querySelector').mockReturnValue(null);
+
+            (hostComponent.table as any)._recheckSpyIntersection();
+            tick(1);
+
+            expect(spyIntersectSpy).not.toHaveBeenCalled();
+        }));
+
+        it('should trigger recheck after data source fetch when pageScrolling is enabled', fakeAsync(() => {
+            const recheckSpy = jest.spyOn(hostComponent.table as any, '_recheckSpyIntersection');
+            recheckSpy.mockClear();
+
+            // Manually trigger a fetch (simulates tab switch resetting to page 1)
+            hostComponent.table.setCurrentPage(1);
+            hostComponent.table.fetch();
+            fixture.detectChanges();
+            tick(1);
+
+            expect(recheckSpy).toHaveBeenCalled();
+        }));
+    });
 });

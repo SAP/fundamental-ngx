@@ -380,32 +380,6 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="scroll-issue-repro" componentName="table">
-    Scroll Issue Reproduction (Tabbed Interface)
-</fd-docs-section-title>
-<description>
-    <p>
-        This example demonstrates a scrolling bug that occurs when switching between tabs with different content
-        lengths.
-    </p>
-    <p>Steps to reproduce:</p>
-    <ol>
-        <li>Start on Tab 1 (Todo - 100 items, requires scrolling)</li>
-        <li>Click on Tab 2 (Sent - 5 items, no scroll needed)</li>
-        <li>Click on Tab 3 (Done - 100 items)</li>
-    </ol>
-    <p>
-        <b>Expected:</b> Tab 3 should show a scrollbar since it has 100 items.<br />
-        <b>Actual:</b> Tab 3 doesn't show the scrollbar until user interacts with the content.
-    </p>
-</description>
-<component-example>
-    <app-scroll-issue-repro></app-scroll-issue-repro>
-</component-example>
-<code-example [exampleFiles]="scrollIssueReproFiles"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title id="playground-table" componentName="table"> Playground Area </fd-docs-section-title>
 <playground [schema]="schema" [schemaInitialValues]="data" (formChanges)="onSchemaValues($event)">
     <fdp-table
