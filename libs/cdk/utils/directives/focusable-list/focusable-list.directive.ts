@@ -24,7 +24,7 @@ import {
     untracked
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, merge } from 'rxjs';
+import { Observable, Subject, merge } from 'rxjs';
 import { finalize, takeUntil, tap } from 'rxjs/operators';
 import { KeyUtil, intersectionObservable } from '../../functions';
 import { destroyObservable } from '../../helpers';
@@ -205,13 +205,14 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
             }
 
             const items = this._focusableItems();
-            items.forEach((item, index) => {
-                item._position = {
+            const totalCols = items.length;
+            for (let index = 0; index < totalCols; index++) {
+                items[index]._position = {
                     ...gridPosition,
                     colIndex: index,
-                    totalCols: items.length
+                    totalCols
                 };
-            });
+            }
         });
     }
 
@@ -322,7 +323,11 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     _setItemsTabbable(state: boolean): void {
-        this._focusableItems().forEach((item) => item.setTabbable(state));
+        const items = this._focusableItems();
+        const length = items.length;
+        for (let i = 0; i < length; i++) {
+            items[i].setTabbable(state);
+        }
     }
 
     /** @hidden */
@@ -351,8 +356,14 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
 
         this._keyManager = keyManager;
 
-        const focusListenerDestroyers = items.map((item, index) =>
-            this._renderer.listen(getItemElement(item), 'focus', () => {
+        const itemsLength = items.length;
+        const focusListenerDestroyers: Array<() => void> = new Array(itemsLength);
+        const keydownObservables: Array<Observable<KeyboardEvent>> = new Array(itemsLength);
+
+        for (let index = 0; index < itemsLength; index++) {
+            const item = items[index];
+            keydownObservables[index] = item.keydown;
+            focusListenerDestroyers[index] = this._renderer.listen(getItemElement(item), 'focus', () => {
                 const directiveItem = this._focusableItems()[index];
                 if (!directiveItem) {
                     return;
@@ -365,13 +376,18 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
                 }
 
                 const id = getItemElement(item)?.id ?? null;
-                this.itemFocused.emit({ index, total: items.length, id });
-                this._focusableItems().forEach((i) => i.setTabbable(i === directiveItem));
-                this._keyManager?.setActiveItem(index);
-            })
-        );
+                this.itemFocused.emit({ index, total: itemsLength, id });
 
-        merge(...items.map((item) => item.keydown))
+                const focusableItems = this._focusableItems();
+                const focusableItemsLength = focusableItems.length;
+                for (let i = 0; i < focusableItemsLength; i++) {
+                    focusableItems[i].setTabbable(focusableItems[i] === directiveItem);
+                }
+                this._keyManager?.setActiveItem(index);
+            });
+        }
+
+        merge(...keydownObservables)
             .pipe(
                 tap((event: KeyboardEvent) => {
                     // Already handled
@@ -382,7 +398,11 @@ export class FocusableListDirective implements AfterViewInit, OnDestroy {
                     this._keyManager?.onKeydown(event);
                 }),
                 takeUntil(merge(this._refreshItems$, destroyObservable(this._destroyRef))),
-                finalize(() => focusListenerDestroyers.forEach((d) => d()))
+                finalize(() => {
+                    for (let i = 0; i < focusListenerDestroyers.length; i++) {
+                        focusListenerDestroyers[i]();
+                    }
+                })
             )
             .subscribe();
     }
