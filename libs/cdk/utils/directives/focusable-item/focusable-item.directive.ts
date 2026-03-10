@@ -155,11 +155,14 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
 
     /** @hidden */
     enableTabbableElements(): void {
-        if (this._tabbableElements.size === 0) {
+        const size = this._tabbableElements.size;
+        if (size === 0) {
             return;
         }
 
-        this._tabbableElements.forEach((tabIndex, element) => (element.tabIndex = tabIndex));
+        for (const [element, tabIndex] of this._tabbableElements) {
+            element.tabIndex = tabIndex;
+        }
         this._tabbable = false;
     }
 
@@ -167,12 +170,15 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
     disableTabbableElements(): void {
         // Since we cannot select by tabindex attribute (links, inputs, buttons might not have one but still can be focusable),
         // Select all elements from the cell and filter by tabIndex property.
-        Array.from(this.elementRef.nativeElement.querySelectorAll<HTMLElement>('*'))
-            .filter((elm) => elm.tabIndex >= 0)
-            .forEach((elm) => {
+        const allElements = this.elementRef.nativeElement.querySelectorAll<HTMLElement>('*');
+        const length = allElements.length;
+        for (let i = 0; i < length; i++) {
+            const elm = allElements[i];
+            if (elm.tabIndex >= 0) {
                 this._tabbableElements.set(elm, elm.tabIndex);
                 elm.tabIndex = -1;
-            });
+            }
+        }
     }
 
     /** @hidden */
@@ -192,10 +198,11 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
         }
 
         const activeEl = this._document.activeElement as HTMLElement;
+        const nativeElement = this.elementRef.nativeElement;
 
-        if (activeEl === this.elementRef.nativeElement) {
+        if (activeEl === nativeElement) {
             this._parentFocusableItemFocused.emit();
-        } else if (activeEl && activeEl !== this.elementRef.nativeElement && this._checker.isFocusable(activeEl)) {
+        } else if (activeEl && this._checker.isFocusable(activeEl)) {
             this.focusableChildElementFocused.emit();
         }
     }
