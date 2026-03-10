@@ -31,6 +31,10 @@
             "name": "Focusable Grid"
         },
         {
+            "url": "cdk/focusable-item",
+            "name": "Focusable Item"
+        },
+        {
             "url": "cdk/selectable-list",
             "name": "Selectable List"
         },

@@ -1,28 +1,34 @@
-import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { AfterContentChecked, AfterViewInit, Directive, ElementRef, Input, OnChanges } from '@angular/core';
-import { Nullable } from '../../models/nullable';
+import {
+    AfterContentChecked,
+    AfterViewInit,
+    Directive,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    numberAttribute,
+    untracked
+} from '@angular/core';
+
+const DEFAULT_TRUNCATE_WIDTH = 200;
 
 @Directive({
     selector: '[fdkTruncate]',
     standalone: true
 })
-export class TruncateDirective implements OnChanges, AfterViewInit {
+export class TruncateDirective implements AfterViewInit {
     /**
-     * Width in pixel for truncation of an element , by default
+     * Width in pixel for truncation of an element, by default 200
      */
-    @Input()
-    set fdkTruncateWidth(value: Nullable<number>) {
-        this._customWidthCount = coerceNumberProperty(value);
-    }
+    readonly fdkTruncateWidth = input(DEFAULT_TRUNCATE_WIDTH, { transform: numberAttribute });
 
     /**
      * Truncating state
      */
-    @Input()
-    fdkTruncateState = false;
+    readonly fdkTruncateState = input(false);
 
     /** @hidden */
-    private _customWidthCount = 200;
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     private _truncateTarget: HTMLElement;
@@ -33,15 +39,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
     private _defaultStyle: string;
 
     /** @hidden */
-    private takeDefaultStyleOnce = true;
-
-    /** @hidden
-     * truncation style for truncating element
-     */
-    private _truncationStyle: string;
-
-    /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    private _defaultStyleCaptured = false;
 
     /**
      * Root native element
@@ -50,37 +48,42 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
         return this._elementRef.nativeElement;
     }
 
+    /** @hidden */
+    constructor() {
+        effect(() => {
+            const state = this.fdkTruncateState();
+            const width = this.fdkTruncateWidth();
+            untracked(() => this._truncate(state, width));
+        });
+    }
+
     /**
      * Method saves default style of target element before first truncate.
      */
     setDefaultStyle(): void {
-        if (this.takeDefaultStyleOnce) {
+        if (!this._defaultStyleCaptured) {
             this._defaultStyle = this._truncateTarget.style.cssText;
-            this.takeDefaultStyleOnce = false;
+            this._defaultStyleCaptured = true;
         }
     }
+
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.rootElement) {
-            this._truncate();
+            this._truncate(this.fdkTruncateState(), this.fdkTruncateWidth());
         }
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this._truncate();
-    }
-
-    /** @hidden */
-    private _truncate(): void {
+    private _truncate(state: boolean, width: number): void {
         this._truncateTarget = this.rootElement;
 
         if (!this._truncateTarget) {
             return;
         }
         this.setDefaultStyle();
-        this._truncationStyle = `${this._defaultStyle} max-width: ${this._customWidthCount}px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
-        this._truncateTarget.style.cssText = this.fdkTruncateState ? this._truncationStyle : this._defaultStyle;
+        const truncationStyle = `${this._defaultStyle} max-width: ${width}px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
+        this._truncateTarget.style.cssText = state ? truncationStyle : this._defaultStyle;
     }
 }
 
