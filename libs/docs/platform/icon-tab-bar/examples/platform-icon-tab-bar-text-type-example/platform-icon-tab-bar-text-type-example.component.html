@@ -1,5 +1,14 @@
+<div style="margin-bottom: 8px; display: flex; gap: 8px">
+    <button fd-button fdType="emphasized" (click)="toggleLabels()">
+        {{ useLongLabels ? 'Short Labels' : 'Long Labels' }}
+    </button>
+    <button fd-button (click)="addMoreTabs()">Add 5 Tabs</button>
+</div>
+
 <fdp-icon-tab-bar
+    iconTabSize="responsive-paddings"
     [tabsConfig]="items"
+    [multiClick]="true"
     [layoutMode]="textTypeLayoutMode"
     [enableTabReordering]="enableTabReordering"
 ></fdp-icon-tab-bar>
