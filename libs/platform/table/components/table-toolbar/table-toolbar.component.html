@@ -12,13 +12,28 @@
     <fd-toolbar
         fdType="transparent"
         [titleId]="tableToolbarTitleId"
-        [title]="title && !hideItemCount ? title + ' (' + counter() + ')' : title"
+        [title]="titleTemplate ? '' : title && !hideItemCount ? title + ' (' + counter() + ')' : title"
         [shouldOverflow]="shouldOverflow"
         [headingLevel]="headingLevel"
     >
+        @if (titleTemplate) {
+            <span
+                fd-title
+                role="heading"
+                [headerSize]="4"
+                [attr.aria-level]="headingLevel"
+                class="fd-toolbar__title"
+                [id]="tableToolbarTitleId"
+            >
+                <ng-template
+                    [ngTemplateOutlet]="titleTemplate"
+                    [ngTemplateOutletContext]="{ counter: counter }"
+                ></ng-template>
+            </span>
+        }
         @if (_tableToolbarLeftActionsComponent) {
             <div fd-toolbar-item class="fd-toolbar__group">
-                @if (!!title || !hideItemCount) {
+                @if (!!title || !!titleTemplate || !hideItemCount) {
                     <fd-toolbar-separator></fd-toolbar-separator>
                 }
                 <ng-template [ngTemplateOutlet]="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-template>

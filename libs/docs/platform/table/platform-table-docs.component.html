@@ -1,14 +1,13 @@
 <fd-docs-section-title id="default" componentName="table"> Simple Table</fd-docs-section-title>
 <description>
-    <p>This example shows simple table usage</p>
-    <p>Developers can pass additional content into tables' toolbar left side.</p>
     <p>
-        To do that, developers need to wrap needed content with <code>fdp-table-toolbar-left-actions</code> component.
+        The toolbar title can be a plain string (<code>title="Order Line Items"</code>) or a custom template
+        (<code>titleTemplate</code>) for rich content like icons with text. The heading level defaults to
+        <code>h2</code> and can be changed via the <code>headingLevel</code> input in both cases.
     </p>
-    <p>This example also shows the usage of the overflow functionality of the toolbar.</p>
     <p>
-        By default, the heading level of the table toolbar will be <code>h2</code>. This can be configured via the
-        <code>headingLevel</code> input, as demonstrated in the example below.
+        Use <code>fdp-table-toolbar-left-actions</code> to add custom content to the left side of the toolbar. The
+        toolbar also supports overflow for items that don't fit.
     </p>
 </description>
 <component-example>
