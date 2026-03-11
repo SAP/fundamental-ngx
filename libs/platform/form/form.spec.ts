@@ -465,7 +465,7 @@ describe('FdpFormField with Wrapper', () => {
             </fdp-form-group>
         `,
         standalone: true,
-        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, NgTemplateOutlet]
+        imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule, NgTemplateOutlet, WrapperComponent]
     })
     class HostFormComponent {}
 

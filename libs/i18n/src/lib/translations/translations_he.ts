@@ -434,7 +434,16 @@ export default {
         searchInputLabel: 'חפש',
         synchronizeButtonTitle: 'סנכרן',
         searchSuggestionMessage: 'נמצאו {count} הצעות.',
-        searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט'
+        searchSuggestionNavigateMessage: 'השתמש בחצים למעלה ולמטה כדי לנווט',
+        deleteButtonTitle: 'Remove Suggestion',
+        deleteButtonAriaLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        allButtonLabel: 'All',
+        groupHeader: 'Group Header',
+        counterLabel: 'Total results: {count}',
+        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Select scope',
+        selectStateMessageLabel: 'Select'
     },
     platformSettingsGenerator: {
         settingsLabel: 'הגדרות',
