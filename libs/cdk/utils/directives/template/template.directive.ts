@@ -1,19 +1,17 @@
-import { Directive, Input, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, inject, input } from '@angular/core';
 
 @Directive({
-    selector: '[fdkTemplate]',
-    standalone: true
+    selector: '[fdkTemplate]'
 })
 export class TemplateDirective {
     /** Name of the template */
-    @Input('fdkTemplate')
-    name: string;
+    readonly name = input('', { alias: 'fdkTemplate' });
 
     /** @hidden */
-    constructor(public templateRef: TemplateRef<any>) {}
+    readonly templateRef = inject<TemplateRef<any>>(TemplateRef);
 
     /** @hidden */
     getName(): string {
-        return this.name;
+        return this.name();
     }
 }

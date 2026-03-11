@@ -25,7 +25,7 @@ export abstract class DialogFooterBase {
      * This template uses the predefined Bar layout.
      */
     readonly footerTemplate = computed<TemplateRef<any> | undefined>(
-        () => this.customTemplates().find((t) => t.name === 'footer')?.templateRef
+        () => this.customTemplates().find((t) => t.name() === 'footer')?.templateRef
     );
 
     /**
@@ -35,7 +35,7 @@ export abstract class DialogFooterBase {
      * This template gives full control to the user without any predefined layout.
      */
     readonly customFooterTemplate = computed<TemplateRef<any> | undefined>(
-        () => this.customTemplates().find((t) => t.name === 'customFooter')?.templateRef
+        () => this.customTemplates().find((t) => t.name() === 'customFooter')?.templateRef
     );
 
     /** @hidden */
