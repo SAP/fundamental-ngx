@@ -3,6 +3,7 @@ import { addKey } from './operations/add-key';
 import { removeKey } from './operations/remove-key';
 import { renameKey } from './operations/rename-key';
 import { searchKeys } from './operations/search-keys';
+import { updateKey } from './operations/update-key';
 import { validate } from './operations/validate';
 import { I18nManageExecutorSchema } from './schema';
 
@@ -30,6 +31,8 @@ export default async function runExecutor(
                 return await handleSearch(options, context);
             case 'validate':
                 return await handleValidate(options, context);
+            case 'update':
+                return await handleUpdate(options, context);
             default:
                 throw new Error(`Unknown command: ${command}`);
         }
@@ -212,6 +215,46 @@ async function handleSearch(options: I18nManageExecutorSchema, context: Executor
         console.log('');
         return { success: false, error: result.error };
     }
+}
+
+async function handleUpdate(options: I18nManageExecutorSchema, context: ExecutorContext): Promise<I18nManageResult> {
+    const { key, value, propertiesPath } = options;
+
+    // Validation
+    if (!key || !value) {
+        return {
+            success: false,
+            error: 'Both --key and --value are required for update command'
+        };
+    }
+
+    if (!propertiesPath) {
+        return {
+            success: false,
+            error: '--propertiesPath is required. Configure it in project.json'
+        };
+    }
+
+    console.log(`\n🔧 Updating translation key: ${key}`);
+    console.log(`   New value: "${value}"`);
+    console.log('');
+
+    const result = await updateKey({
+        key,
+        value,
+        propertiesPath
+    });
+
+    if (result.success) {
+        console.log(`✅ Success! Modified ${result.filesModified.length} .properties files`);
+        console.log(`   Generated TypeScript files`);
+        console.log('');
+    } else {
+        console.error(`❌ Error: ${result.error}`);
+        console.log('');
+    }
+
+    return result;
 }
 
 async function handleValidate(options: I18nManageExecutorSchema, context: ExecutorContext): Promise<I18nManageResult> {

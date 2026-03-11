@@ -43,6 +43,21 @@ Removes a key from all language files.
 
 ---
 
+### Update
+
+```bash
+nx run i18n:i18n-manage --command=update --key=coreButton.save --value="Save Changes"
+```
+
+Updates the value of an existing key across all language files while preserving the comment.
+
+**Parameters:**
+
+- `--key` (required): Translation key to update
+- `--value` (required): New English translation text
+
+---
+
 ### Search
 
 ```bash

@@ -22,6 +22,10 @@ jest.mock('./operations/validate', () => ({
     validate: jest.fn()
 }));
 
+jest.mock('./operations/update-key', () => ({
+    updateKey: jest.fn()
+}));
+
 // Mock transform-translations executor to prevent Prettier import
 jest.mock('../transform-translations/executor', () => ({
     default: jest.fn()
@@ -29,6 +33,7 @@ jest.mock('../transform-translations/executor', () => ({
 
 import executor from './executor';
 import { addKey } from './operations/add-key';
+import { updateKey } from './operations/update-key';
 
 const mockContext: ExecutorContext = {
     root: '/test',
@@ -148,6 +153,49 @@ describe('I18nManage Executor', () => {
             const output = await executor(options, mockContext);
 
             expect(output.success).toBe(false); // Not implemented yet
+        });
+
+        it('should route to update handler', async () => {
+            (updateKey as jest.Mock).mockResolvedValue({
+                success: true,
+                filesModified: ['file1.properties', 'file2.properties']
+            });
+
+            const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
+            const options: I18nManageExecutorSchema = {
+                command: 'update',
+                key: 'coreButton.save',
+                value: 'Save Changes',
+                propertiesPath: 'libs/i18n/translations'
+            };
+
+            const output = await executor(options, mockContext);
+
+            expect(output.success).toBe(true);
+            expect(updateKey).toHaveBeenCalledWith({
+                key: 'coreButton.save',
+                value: 'Save Changes',
+                propertiesPath: 'libs/i18n/translations'
+            });
+            expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Updating translation key'));
+
+            consoleSpy.mockRestore();
+        });
+
+        it('should handle update command validation errors', async () => {
+            const options: I18nManageExecutorSchema = {
+                command: 'update',
+                key: 'test',
+                // Missing value
+                propertiesPath: 'libs/i18n/translations'
+            };
+
+            const output = await executor(options, mockContext);
+
+            expect(output.success).toBe(false);
+            expect(output.error).toContain('--key and --value are required');
+            expect(updateKey).not.toHaveBeenCalled();
         });
     });
 
