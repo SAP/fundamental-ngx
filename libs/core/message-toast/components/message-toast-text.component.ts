@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { ToastTextComponent } from '@fundamental-ngx/cdk/utils';
 import { MESSAGE_TOAST_DATA } from '../constants/message-toast.token';
 import { MessageToastRef } from '../ref/message-toast.ref';
@@ -7,13 +7,12 @@ import { MessageToastRef } from '../ref/message-toast.ref';
     selector: 'fd-message-toast-text',
     template: `{{ message }}`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: true
+    encapsulation: ViewEncapsulation.None
 })
 export class MessageToastTextComponent implements ToastTextComponent {
     /** @hidden */
-    constructor(
-        public toastRef: MessageToastRef<MessageToastTextComponent>,
-        @Inject(MESSAGE_TOAST_DATA) public message: string
-    ) {}
+    readonly toastRef = inject<MessageToastRef<MessageToastTextComponent>>(MessageToastRef);
+
+    /** @hidden */
+    readonly message = inject<string>(MESSAGE_TOAST_DATA);
 }

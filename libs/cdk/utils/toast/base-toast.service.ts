@@ -107,13 +107,13 @@ export abstract class BaseToastService<
     protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
 
     /** @hidden */
-    private _destroyRef = inject(DestroyRef);
+    protected readonly overlay = inject(Overlay);
 
     /** @hidden */
-    protected constructor(
-        public overlay: Overlay,
-        public injector: Injector
-    ) {}
+    protected readonly injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /**
      * Dismisses all Toasts.

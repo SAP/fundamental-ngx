@@ -1,34 +1,26 @@
-import { AnimationEvent } from '@angular/animations';
-import { Directive, HostBinding, HostListener, inject, NgZone, OnDestroy, signal } from '@angular/core';
-import { take } from 'rxjs';
-import { BaseAnimatedToastConfig } from './base-toast-config';
+import { Directive, OnDestroy, signal } from '@angular/core';
+import { BaseToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 
-@Directive()
-export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimatedToastConfig>
+@Directive({
+    host: {
+        '[@state]': '_animationStateSignal()',
+        '[@.disabled]': '_animationsDisabled',
+        '(@state.done)': '_onAnimationEnd($event)'
+    }
+})
+export abstract class BaseToastAnimatedContainerComponent<P extends BaseToastConfig>
     extends BaseToastContainerComponent<P>
     implements OnDestroy
 {
     /**
      * @hidden
-     * The state of the Message Toast animations.
-     */
-    @HostBinding('@state')
-    protected get _animationState(): string {
-        return this._animationStateSignal();
-    }
-    /**
-     * @hidden
      * Whether the animations should be disabled.
      */
-    @HostBinding('@.disabled')
-    protected _animationsDisabled = false;
+    protected _animationsDisabled: boolean;
 
     /** @hidden */
-    protected _ngZone = inject(NgZone);
-
-    /** @hidden */
-    private _animationStateSignal = signal('void');
+    protected readonly _animationStateSignal = signal('void');
 
     /** @hidden */
     constructor(config: P) {
@@ -40,8 +32,7 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * @hidden
      * Handle end of animations, updating the state of the Message Toast.
      */
-    @HostListener('@state.done', ['$event'])
-    protected _onAnimationEnd(event: AnimationEvent): void {
+    _onAnimationEnd(event: { fromState: string; toState: string }): void {
         const { fromState, toState } = event;
 
         if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {
@@ -49,14 +40,8 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
         }
 
         if (toState === 'visible') {
-            // Note: we shouldn't use `this` inside the zone callback,
-            // because it can cause a memory leak.
-            const onEnter = this.onEnter$;
-
-            this._ngZone.run(() => {
-                onEnter.next();
-                onEnter.complete();
-            });
+            this.onEnter$.next();
+            this.onEnter$.complete();
         }
     }
 
@@ -77,15 +62,13 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
 
     /**
      * @hidden
-     * Waits for the zone to settle before removing the element. Helps prevent
+     * Defers the exit notification to the next microtask. Helps prevent
      * errors where we end up removing an element which is in the middle of an animation.
      */
     private _completeExit(): void {
-        // Note: we shouldn't use `this` inside the zone callback,
-        // because it can cause a memory leak.
         const onExit = this.onExit$;
 
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+        queueMicrotask(() => {
             onExit.next();
             onExit.complete();
         });
