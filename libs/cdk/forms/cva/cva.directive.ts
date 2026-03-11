@@ -1,23 +1,25 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
+    booleanAttribute,
+    computed,
+    DestroyRef,
     Directive,
-    DoCheck,
+    effect,
     ElementRef,
-    EventEmitter,
-    Input,
+    inject,
+    input,
+    isDevMode,
     OnDestroy,
     OnInit,
-    Output,
-    ViewChild,
-    computed,
-    inject,
-    isDevMode,
-    signal
+    output,
+    signal,
+    untracked,
+    viewChild
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { isValidControlState } from '../helpers/state';
 import { BaseCVA } from '../models/cva';
 import { FormField, FormFieldControl } from '../models/form-field';
@@ -28,128 +30,80 @@ import { FD_FORM_FIELD } from '../tokens/form-field.token';
 let randomId = 0;
 
 @Directive({
-    selector: '[fdkCva]',
-    standalone: true
+    selector: '[fdkCva]'
 })
 export class CvaDirective<T = any>
-    implements HasElementRef, BaseCVA, FormFieldControl, OnInit, DoCheck, AfterViewInit, OnDestroy, ControlValueAccessor
+    implements HasElementRef, BaseCVA, FormFieldControl, OnInit, AfterViewInit, OnDestroy, ControlValueAccessor
 {
-    /** Input placeholder */
-    @Input()
-    placeholder: string;
-
-    /** Input type */
-    @Input()
-    type: string;
-
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be 'success', 'error', 'warning', 'default', 'information'.
-     *
-     * @default 'default'
-     */
-    @Input()
-    set state(state: Nullable<FormStates>) {
-        if (!state || isValidControlState(state)) {
-            this._state$.set(state);
-        } else if (isDevMode()) {
-            console.warn(`Provided value "${state}" is not a valid option for FormStates type`);
-        }
-    }
-    get state(): FormStates {
-        return this.normalizedState$();
-    }
-
-    /** Holds the message with respect to state */
-    @Input()
-    stateMessage: Nullable<string>;
-
-    /** Whether the input is disabled */
-    @Input()
-    set disabled(value: boolean) {
-        this.setDisabledState(value);
-    }
-    get disabled(): boolean {
-        if (this.ngControl && this.ngControl.disabled !== null) {
-            return this.ngControl.disabled;
-        }
-        return this._disabled;
-    }
-
-    /**
-     * readOnly Value to Mark component read only
-     */
-    @Input()
-    readonly: boolean;
-
-    /** Binds to control aria-labelledBy attribute */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
-
-    /** Sets control aria-label attribute value */
-    @Input()
-    ariaLabel: Nullable<string>;
-
-    /**
-     * Tell the component if we are in editing mode.
-     */
-    @Input()
-    set editable(value: BooleanInput) {
-        const newVal = coerceBooleanProperty(value);
-        if (this._editable !== newVal) {
-            this._editable = newVal;
-            this._markForCheck();
-            this.stateChanges.next('editable');
-        }
-    }
-    get editable(): boolean {
-        return this._editable;
-    }
-
-    /**
-     * Name of the control.
-     */
-    @Input()
-    name: string;
-
-    /**
-     * Emits when change detection is needed.
-     */
-    @Output()
-    detectChanges = new EventEmitter<void>();
-
-    /**
-     * Emits when mark for changes detection is needed.
-     */
-    @Output()
-    markForCheck = new EventEmitter<void>();
-
     /**
      * Reference to internal Input element
      */
-    @ViewChild('inputElementRef', { static: true, read: ElementRef })
-    protected _elementRef: ElementRef;
+    readonly inputElementRef = viewChild<ElementRef>('inputElementRef');
 
-    /** @hidden */
-    value: T;
+    // ============================================
+    // Signal inputs
+    // ============================================
 
-    /** set when input field is mandatory form field */
-    required: boolean;
+    /** Input placeholder */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly placeholderInput = input<string>('', { alias: 'placeholder' });
 
-    /**
-     * See @FormFieldControl
-     */
-    focused = false;
-
-    /** Whether control has errors */
-    get controlInvalid(): boolean {
-        return this._controlInvalid$();
-    }
+    /** Input type */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly typeInput = input<string>('', { alias: 'type' });
 
     /**
-     * See @FormFieldControl
+     * The state of the form control - applies css classes.
+     * Can be 'success', 'error', 'warning', 'default', 'information'.
      */
-    readonly stateChanges: Subject<any> = new Subject<any>();
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly stateInput = input<Nullable<FormStates>>(null, { alias: 'state' });
+
+    /** Holds the message with respect to state */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly stateMessageInput = input<Nullable<string>>(null, { alias: 'stateMessage' });
+
+    /** Whether the input is disabled (via input binding) */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly disabledInput = input(false, { alias: 'disabled', transform: booleanAttribute });
+
+    /** readOnly Value to Mark component read only */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly readonlyInput = input(false, { alias: 'readonly', transform: booleanAttribute });
+
+    /** Binds to control aria-labelledBy attribute */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly ariaLabelledByInput = input<Nullable<string>>(null, { alias: 'ariaLabelledBy' });
+
+    /** Sets control aria-label attribute value */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly ariaLabelInput = input<Nullable<string>>(null, { alias: 'ariaLabel' });
+
+    /** Tell the component if we are in editing mode (via input binding) */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly editableInput = input(true, { alias: 'editable', transform: booleanAttribute });
+
+    /** Name of the control. */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly nameInput = input<string>('', { alias: 'name' });
+
+    /** ID for the Element */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly idInput = input<string>(`fd-input-id-${randomId++}`, { alias: 'id' });
+
+    // ============================================
+    // Signal outputs
+    // ============================================
+
+    /** Emits when change detection is needed. */
+    readonly detectChanges = output<void>();
+
+    /** Emits when mark for changes detection is needed. */
+    readonly markForCheck = output<void>();
+
+    // ============================================
+    // Injected dependencies (public/readonly)
+    // ============================================
 
     /** @hidden */
     readonly formField: FormField | null = inject(FD_FORM_FIELD, {
@@ -157,77 +111,72 @@ export class CvaDirective<T = any>
         optional: true
     });
 
-    /**
-     * NgControl instance.
-     */
+    /** NgControl instance. */
     readonly ngControl = inject(NgControl, {
         optional: true,
         host: true
     });
 
-    /**
-     * Form container instance. Usually ngForm or FormGroup directives.
-     */
+    /** Form container instance. Usually ngForm or FormGroup directives. */
     readonly controlContainer = inject(ControlContainer, {
         optional: true,
         skipSelf: true
     });
 
-    /**
-     * Separate NgForm instance. For cases when formGroup is used with the form itself.
-     */
+    /** Separate NgForm instance. For cases when formGroup is used with the form itself. */
     readonly ngForm = inject(NgForm, {
         optional: true,
         skipSelf: true
     });
 
+    /** See @FormFieldControl */
+    readonly stateChanges: Subject<any> = new Subject<any>();
+
+    // ============================================
+    // Computed signals
+    // ============================================
+
     /** @hidden */
-    readonly normalizedState$ = computed(() => {
-        const storedState = this._state$();
+    readonly normalizedState = computed(() => {
+        const inputState = this.stateInput();
+        const storedState = this._state();
+
+        // Validate and use input state if provided
+        if (inputState) {
+            if (isValidControlState(inputState)) {
+                return inputState;
+            } else if (isDevMode()) {
+                console.warn(`Provided value "${inputState}" is not a valid option for FormStates type`);
+            }
+        }
+
+        // Fall back to stored state (set programmatically)
         if (storedState) {
             return storedState;
         }
 
-        if (!this._controlInvalid$()) {
+        if (!this._controlInvalid()) {
             return 'default';
         }
 
         return this.formField?.getPriorityState() || 'default';
     });
 
+    // ============================================
+    // Protected fields
+    // ============================================
+
     /** @hidden */
-    protected _subscriptions = new Subscription();
+    protected readonly _destroyRef = inject(DestroyRef);
+
+    // ============================================
+    // Private fields
+    // ============================================
 
     /**
      * A private property to hold the ElementRef which might be null
      */
-    private _elementRefOrNull: ElementRef | null = inject(ElementRef, { optional: true });
-
-    /**
-     * Element reference.
-     */
-    get elementRef(): ElementRef {
-        // Return a fallback ElementRef if _elementRefOrNull is null
-        return this._elementRefOrNull || (this._elementRef as ElementRef);
-    }
-
-    /** @hidden */
-    private _defaultId = `fd-input-id-${randomId++}`;
-
-    /** ID for the Element */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    @Input()
-    id: string = this._defaultId;
-
-    /** @hidden */
-    private _disabled: boolean;
-    /** @hidden */
-    private _editable = true;
-
-    /**
-     * @hidden
-     */
-    private readonly _controlInvalid$ = signal(false);
+    private readonly _elementRefOrNull: ElementRef | null = inject(ElementRef, { optional: true });
 
     /** @hidden */
     private readonly _parentControl = inject(FD_FORM_FIELD_CONTROL, {
@@ -235,19 +184,89 @@ export class CvaDirective<T = any>
         optional: true
     });
 
+    /** @hidden */
+    private readonly _controlInvalid = signal(false);
+
     /**
      * @hidden
-     * The state of the form control - applies css classes.
-     * Can be `success`, `error`, `warning`, `information` or 'default'
+     * Internal state storage for programmatic state changes.
      */
-    private readonly _state$ = signal<Nullable<FormStates>>(null);
+    private readonly _state = signal<Nullable<FormStates>>(null);
+
+    /** @hidden Internal signal for disabled state */
+    private readonly _disabled = signal(false);
+
+    /** @hidden Internal signal for editable state */
+    private readonly _editable = signal(true);
+
+    /** @hidden Internal signal for focused state */
+    private readonly _focused = signal(false);
+
+    /** @hidden Internal signal for value */
+    private readonly _value = signal<T | null>(null);
+
+    /** @hidden Internal signal for required state */
+    private readonly _required = signal(false);
+
+    /** @hidden Internal signal for ariaLabelledBy (can be modified after view init) */
+    private readonly _ariaLabelledBy = signal<Nullable<string>>(null);
+
+    /** @hidden Internal signal for stateMessage (can be modified programmatically) */
+    private readonly _stateMessage = signal<Nullable<string>>(null);
+
+    /** @hidden Internal signal for readonly (can be modified programmatically) */
+    private readonly _readonly = signal(false);
+
+    // ============================================
+    // Constructor
+    // ============================================
 
     /** @hidden */
     constructor() {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
+
+        // Effect to sync editable input to internal state and emit stateChanges
+        effect(() => {
+            const editableValue = this.editableInput();
+            untracked(() => {
+                if (this._editable() !== editableValue) {
+                    this._editable.set(editableValue);
+                    this._markForCheck();
+                    this.stateChanges.next('editable');
+                }
+            });
+        });
+
+        // Effect to sync disabled input to internal state
+        effect(() => {
+            const disabledValue = this.disabledInput();
+            untracked(() => {
+                if (disabledValue && !this._disabled()) {
+                    this._disabled.set(true);
+                    this.stateChanges.next('setDisabledState');
+                }
+            });
+        });
+
+        // Effect to update error state - replaces ngDoCheck for zoneless compatibility
+        effect(() => {
+            // Read signals to track dependencies
+            this._focused();
+            this._value();
+
+            untracked(() => {
+                if (this.ngControl) {
+                    this.updateErrorState();
+                }
+            });
+        });
     }
+
+    // ============================================
+    // CVA callbacks (public method properties)
+    // ============================================
 
     /** @hidden */
     onChange: (value: any) => void = () => {};
@@ -255,44 +274,191 @@ export class CvaDirective<T = any>
     /** @hidden */
     onTouched = (): void => {};
 
+    // ============================================
+    // FormFieldControl interface property accessors
+    // (setters before getters per ESLint rules)
+    // ============================================
+
+    /** Input placeholder - implements FormFieldControl */
+    get placeholder(): string {
+        return this.placeholderInput();
+    }
+
+    /** Input type */
+    get type(): string {
+        return this.typeInput();
+    }
+
+    /**
+     * The state of the form control.
+     * Can be 'success', 'error', 'warning', 'default', 'information'.
+     * Allows programmatic state changes.
+     */
+    set state(value: Nullable<FormStates>) {
+        if (!value || isValidControlState(value)) {
+            this._state.set(value);
+        } else if (isDevMode()) {
+            console.warn(`Provided value "${value}" is not a valid option for FormStates type`);
+        }
+    }
+
+    get state(): FormStates {
+        return this.normalizedState();
+    }
+
+    /** Allows programmatic stateMessage changes */
+    set stateMessage(value: Nullable<string>) {
+        this._stateMessage.set(value);
+    }
+
+    /** Holds the message with respect to state */
+    get stateMessage(): Nullable<string> {
+        return this._stateMessage() ?? this.stateMessageInput();
+    }
+
+    /** Allows programmatic disabled state changes */
+    set disabled(value: boolean) {
+        this.setDisabledState(value);
+    }
+
+    /** Whether the input is disabled - implements FormFieldControl */
+    get disabled(): boolean {
+        if (this.ngControl && this.ngControl.disabled !== null) {
+            return this.ngControl.disabled;
+        }
+        return this._disabled();
+    }
+
+    /** Allows programmatic readonly state changes */
+    set readonly(value: boolean) {
+        this._readonly.set(value);
+    }
+
+    /** readOnly Value to Mark component read only */
+    get readonly(): boolean {
+        return this._readonly() || this.readonlyInput();
+    }
+
+    /** Allows programmatic ariaLabelledBy changes */
+    set ariaLabelledBy(value: Nullable<string>) {
+        this._ariaLabelledBy.set(value);
+    }
+
+    /** Binds to control aria-labelledBy attribute */
+    get ariaLabelledBy(): Nullable<string> {
+        return this._ariaLabelledBy() ?? this.ariaLabelledByInput();
+    }
+
+    /** Sets control aria-label attribute value */
+    get ariaLabel(): Nullable<string> {
+        return this.ariaLabelInput();
+    }
+
+    /** Allows programmatic editable state changes */
+    set editable(value: boolean) {
+        if (this._editable() !== value) {
+            this._editable.set(value);
+            this._markForCheck();
+            this.stateChanges.next('editable');
+        }
+    }
+
+    /** Tell the component if we are in editing mode - implements FormFieldControl */
+    get editable(): boolean {
+        return this._editable();
+    }
+
+    /** Name of the control. */
+    get name(): string {
+        return this.nameInput();
+    }
+
+    set value(val: T | null) {
+        this._value.set(val);
+    }
+
+    /** @hidden */
+    get value(): T | null {
+        return this._value();
+    }
+
+    /** set when input field is mandatory form field - implements FormFieldControl */
+    set required(value: boolean) {
+        this._required.set(value);
+    }
+
+    get required(): boolean {
+        return this._required();
+    }
+
+    set focused(value: boolean) {
+        this._focused.set(value);
+    }
+
+    /** See @FormFieldControl */
+    get focused(): boolean {
+        return this._focused();
+    }
+
+    /** Whether control has errors - implements FormFieldControl */
+    get controlInvalid(): boolean {
+        return this._controlInvalid();
+    }
+
+    /** ID for the Element - implements FormFieldControl */
+    get id(): string {
+        return this.idInput();
+    }
+
+    /** Element reference - implements FormFieldControl */
+    get elementRef(): ElementRef {
+        // Return a fallback ElementRef if _elementRefOrNull is null
+        return this._elementRefOrNull || this.inputElementRef() || new ElementRef(null);
+    }
+
+    // ============================================
+    // Lifecycle hooks
+    // ============================================
+
     /** @hidden */
     ngOnInit(): void {
         // There may be cases when one form control is used as a base to build another form control.
         if (!this._parentControl) {
             this.formField?.registerFormFieldControl(this);
         }
-    }
 
-    /**
-     * Re-validate and emit event to parent container on every CD cycle as they are some errors
-     * that we can't subscribe to.
-     */
-    ngDoCheck(): void {
-        if (this.ngControl) {
-            this.updateErrorState();
+        // Subscribe to ngControl status changes for error state updates
+        if (this.ngControl?.statusChanges) {
+            this.ngControl.statusChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+                this.updateErrorState();
+                this._markForCheck();
+            });
         }
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.ngControl) {
-            this._subscriptions.add(
-                this.ngControl.statusChanges?.subscribe(() => {
-                    this._markForCheck();
-                })
-            );
-        }
-
         const labelAndHelpId = `fdp-form-label-content-${this.id}`;
         // if not specified, associate label and inline help ids with the input,
         // else add these ids to the specified ones
-        if (!this.ariaLabelledBy) {
-            this.ariaLabelledBy = labelAndHelpId;
+        const currentAriaLabelledBy = this.ariaLabelledBy;
+        if (!currentAriaLabelledBy) {
+            this._ariaLabelledBy.set(labelAndHelpId);
         } else {
-            this.ariaLabelledBy += ' ' + labelAndHelpId;
+            this._ariaLabelledBy.set(currentAriaLabelledBy + ' ' + labelAndHelpId);
         }
         this._markForCheck();
     }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.stateChanges.complete();
+        this.formField?.unregisterFormFieldControl(this);
+    }
+
+    // ============================================
+    // ControlValueAccessor implementation
+    // ============================================
 
     /** @hidden */
     registerOnChange(fn: (_: any) => void): void {
@@ -305,18 +471,10 @@ export class CvaDirective<T = any>
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-        this.stateChanges.complete();
-        this.formField?.unregisterFormFieldControl(this);
-    }
-
-    /** @hidden */
-    setDisabledState(isDisabled: BooleanInput): void {
-        const newState = coerceBooleanProperty(isDisabled);
+    setDisabledState(isDisabled: boolean): void {
         this._markForCheck();
-        if (newState !== this._disabled) {
-            this._disabled = newState;
+        if (isDisabled !== this._disabled()) {
+            this._disabled.set(isDisabled);
             this.stateChanges.next('setDisabledState');
         }
     }
@@ -326,18 +484,21 @@ export class CvaDirective<T = any>
      * @param value
      */
     writeValue(value: T): void {
-        this.value = value;
+        this._value.set(value);
         this.stateChanges.next('writeValue');
         this._markForCheck();
     }
 
+    // ============================================
+    // Public methods
+    // ============================================
+
     /**
-     *
      * Keeps track of element focus
      */
     _onFocusChanged(isFocused: boolean): void {
-        if (isFocused !== this.focused && (!this.disabled || !isFocused)) {
-            this.focused = isFocused;
+        if (isFocused !== this._focused() && (!this.disabled || !isFocused)) {
+            this._focused.set(isFocused);
             this.stateChanges.next('_onFocusChanged');
         }
 
@@ -363,11 +524,11 @@ export class CvaDirective<T = any>
      * ```
      *
      * and this default behavior used. For other cases implement focus.
-     *
      */
     focus(event?: MouseEvent): void {
-        if (this._elementRef && !this.focused) {
-            this._elementRef.nativeElement.focus(event);
+        const elementRef = this.inputElementRef();
+        if (elementRef && !this._focused()) {
+            elementRef.nativeElement.focus(event);
         }
     }
 
@@ -384,8 +545,8 @@ export class CvaDirective<T = any>
             (control.dirty || control.touched || parent?.submitted || (parentControlContainer as any)?.submitted)
         );
 
-        if (newStatusIsError !== this._controlInvalid$()) {
-            this._controlInvalid$.set(newStatusIsError);
+        if (newStatusIsError !== this._controlInvalid()) {
+            this._controlInvalid.set(newStatusIsError);
             this.stateChanges.next('updateErrorState');
             this._markForCheck();
         }
@@ -404,7 +565,7 @@ export class CvaDirective<T = any>
             coercedValue = value === '' || value === null || value === undefined ? null : Number(value);
         }
 
-        if (coercedValue !== this.value) {
+        if (coercedValue !== this._value()) {
             this.writeValue(coercedValue);
             if (emitOnChange) {
                 this.onChange(coercedValue);

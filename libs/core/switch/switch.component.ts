@@ -78,7 +78,7 @@ export class SwitchComponent implements OnInit, OnDestroy, FormItemControl {
         this._cva.value = value;
     }
     get checked(): boolean {
-        return this._cva.value;
+        return this._cva.value ?? false;
     }
 
     /** Whether the switch is semantic */
@@ -155,6 +155,6 @@ export class SwitchComponent implements OnInit, OnDestroy, FormItemControl {
         }, 100);
     }
     get isChecked(): boolean {
-        return this._cva.value;
+        return this._cva.value ?? false;
     }
 }

@@ -1,7 +1,7 @@
 <fd-input-group
     [disabled]="!!_cvaControl.cvaDirective?.disabled"
     [(ngModel)]="value"
-    [state]="_cvaControl?.cvaDirective?.normalizedState$() || 'default'"
+    [state]="_cvaControl?.cvaDirective?.normalizedState() || 'default'"
     [stateMessage]="_cvaControl.cvaDirective?.stateMessage"
 >
     <!-- Before input addons area -->
