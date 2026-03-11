@@ -1,19 +1,34 @@
 {
     "$schema": "http://json-schema.org/schema",
     "$id": "sap-component",
+    "title": "SAP Component Generator",
+    "description": "Generates a new Angular component with documentation, examples, and e2e tests as a sub-library of core, platform, cdk, cx, or btp",
     "type": "object",
     "properties": {
         "name": {
             "type": "string",
-            "description": "Component name",
+            "description": "Component name (kebab-case, e.g., 'my-button'). Used to generate component selector, class name, and file names.",
             "$default": {
                 "$source": "argv",
                 "index": 0
-            }
+            },
+            "x-prompt": "What is the component name? (use kebab-case, e.g., 'my-button')"
         },
         "project": {
             "type": "string",
-            "enum": ["core", "platform", "cx", "cdk", "btp"]
+            "description": "Target library to generate the component in. Each library has a specific selector prefix: core (fd-), platform (fdp-), cx (fdx-), cdk (fdk-), btp (fdb-)",
+            "enum": ["core", "platform", "cx", "cdk", "btp"],
+            "x-prompt": {
+                "message": "Which library should this component belong to?",
+                "type": "list",
+                "items": [
+                    { "value": "core", "label": "core - Core components (fd- prefix)" },
+                    { "value": "platform", "label": "platform - Platform components (fdp- prefix)" },
+                    { "value": "cx", "label": "cx - Customer Experience components (fdx- prefix)" },
+                    { "value": "cdk", "label": "cdk - Component Development Kit (fdk- prefix)" },
+                    { "value": "btp", "label": "btp - Business Technology Platform components (fdb- prefix)" }
+                ]
+            }
         }
     },
     "required": ["name", "project"]

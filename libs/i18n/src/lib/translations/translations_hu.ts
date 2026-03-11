@@ -614,7 +614,7 @@ export default {
         confirmBtnLabel: 'OK',
         cancelBtnLabel: 'Mégse',
         filteredBy: 'Alkalmazott szűrő:',
-        showingBlankOfBlank: 'totalGrowingItemsCount} megjelenítve ennyiből: {totalGrowingItemsCount}',
+        showingBlankOfBlank: '{totalGrowingItemsCount} megjelenítve ennyiből: {totalGrowingItemsCount}',
         clearFilters: 'Szűrők törlése'
     },
     platformWizardGenerator: {

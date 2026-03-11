@@ -20,6 +20,11 @@
             "implementation": "./src/executors/transform-translations/executor",
             "schema": "./src/executors/transform-translations/schema.json",
             "description": "Transforms properties to json"
+        },
+        "i18n-manage": {
+            "implementation": "./src/executors/i18n-manage/executor",
+            "schema": "./src/executors/i18n-manage/schema.json",
+            "description": "Manage i18n translation keys across all language files"
         }
     }
 }

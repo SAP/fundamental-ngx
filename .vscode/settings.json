@@ -1,4 +1,9 @@
 {
     "editor.formatOnSave": false,
-    "eslint.validate": ["json"]
+    "eslint.validate": ["json"],
+    // Disable Unicode warnings for translation files (Cyrillic, Greek, etc. are expected)
+    "[properties]": {
+        "editor.unicodeHighlight.ambiguousCharacters": false,
+        "editor.unicodeHighlight.invisibleCharacters": false
+    }
 }

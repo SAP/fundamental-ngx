@@ -169,7 +169,7 @@ export default {
         navigationButtonLabel: 'Πλοήγηση'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Ελάχιστη τιμή Slider είναι {min}, μέγιστη τιμή είναι (max}',
+        singleMinMaxDetails: 'Ελάχιστη τιμή Slider είναι {min}, μέγιστη τιμή είναι {max}',
         singleValueminDetails: 'Η τιμή είναι (τιμή)',
         singleValuemaxDetails: 'Η τιμή είναι (τιμή)',
         singleValueNowDetails: 'Η τρέχουσα τιμή είναι (τιμή)',

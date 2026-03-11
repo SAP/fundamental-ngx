@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "version": 2,
+    "title": "i18n-manage executor",
+    "description": "Manage i18n translation keys across all language files",
+    "type": "object",
+    "properties": {
+        "command": {
+            "type": "string",
+            "enum": ["add", "rename", "remove", "search", "validate"],
+            "description": "Operation to perform"
+        },
+        "key": {
+            "type": "string",
+            "description": "Translation key (e.g., coreButton.submit)"
+        },
+        "value": {
+            "type": "string",
+            "description": "English translation value"
+        },
+        "newKey": {
+            "type": "string",
+            "description": "New key name (for rename operation)"
+        },
+        "searchTerm": {
+            "type": "string",
+            "description": "Search term (for search operation)"
+        },
+        "comment": {
+            "type": "string",
+            "description": "Description for translators (optional, auto-generated if omitted)"
+        },
+        "commentType": {
+            "type": "string",
+            "enum": [
+                "XACT",
+                "XBUT",
+                "XCKL",
+                "XFLD",
+                "XMIT",
+                "XMSG",
+                "XRBL",
+                "XSEL",
+                "XTIT",
+                "XTOL",
+                "XLNK",
+                "YINS",
+                "NOTR"
+            ],
+            "description": "SAP text type per Language Experience Lab standards. XACT: Accessibility text, XBUT: Button, XCKL: Checkbox label, XFLD: Field label, XMIT: Menu item, XMSG: Message text, XRBL: Radio button, XSEL: Dropdown values, XTIT: Title/heading, XTOL: Tooltip, XLNK: Hyperlink, YINS: User instruction, NOTR: No translation needed"
+        },
+        "propertiesPath": {
+            "type": "string",
+            "description": "Path to translations directory"
+        },
+        "fdLanguagePath": {
+            "type": "string",
+            "description": "Path to FdLanguage interface file"
+        }
+    },
+    "required": ["command"]
+}
