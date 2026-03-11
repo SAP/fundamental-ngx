@@ -24,7 +24,7 @@ export abstract class DialogHeaderBase {
      * Returns the TemplateRef when a template with name='header' is projected.
      */
     readonly headerTemplate = computed<TemplateRef<any> | undefined>(
-        () => this.customTemplates().find((t) => t.name === 'header')?.templateRef
+        () => this.customTemplates().find((t) => t.name() === 'header')?.templateRef
     );
 
     /**
@@ -33,6 +33,6 @@ export abstract class DialogHeaderBase {
      * Returns the TemplateRef when a template with name='subheader' is projected.
      */
     readonly subHeaderTemplate = computed<TemplateRef<any> | undefined>(
-        () => this.customTemplates().find((t) => t.name === 'subheader')?.templateRef
+        () => this.customTemplates().find((t) => t.name() === 'subheader')?.templateRef
     );
 }
