@@ -3,6 +3,7 @@ import { addKey } from './operations/add-key';
 import { removeKey } from './operations/remove-key';
 import { renameKey } from './operations/rename-key';
 import { searchKeys } from './operations/search-keys';
+import { sortKeys } from './operations/sort-keys';
 import { updateKey } from './operations/update-key';
 import { validate } from './operations/validate';
 import { I18nManageExecutorSchema } from './schema';
@@ -33,6 +34,8 @@ export default async function runExecutor(
                 return await handleValidate(options, context);
             case 'update':
                 return await handleUpdate(options, context);
+            case 'sort':
+                return await handleSort(options, context);
             default:
                 throw new Error(`Unknown command: ${command}`);
         }
@@ -312,4 +315,39 @@ async function handleValidate(options: I18nManageExecutorSchema, context: Execut
         console.log('');
         return { success: false, error: `Found ${result.errors.length} validation error(s)` };
     }
+}
+
+async function handleSort(options: I18nManageExecutorSchema, context: ExecutorContext): Promise<I18nManageResult> {
+    const { propertiesPath } = options;
+
+    // Validation
+    if (!propertiesPath) {
+        return {
+            success: false,
+            error: '--propertiesPath is required. Configure it in project.json'
+        };
+    }
+
+    console.log(`\n🔧 Sorting .properties files...`);
+    console.log('');
+
+    const result = await sortKeys({ propertiesPath });
+
+    if (result.success) {
+        if (result.filesModified.length === 0) {
+            console.log('✅ All files already sorted');
+        } else {
+            console.log(`✅ Success! Sorted ${result.filesModified.length} file(s)`);
+            for (const file of result.filesModified) {
+                console.log(`   - ${file}`);
+            }
+            console.log(`   Generated TypeScript files`);
+        }
+        console.log('');
+    } else {
+        console.error(`❌ Error: ${result.error}`);
+        console.log('');
+    }
+
+    return result;
 }

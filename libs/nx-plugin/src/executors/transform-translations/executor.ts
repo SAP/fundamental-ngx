@@ -1,5 +1,4 @@
 import { formatFiles, workspaceRoot } from '@nx/devkit';
-import { execSync } from 'child_process';
 import { sync as fastGlobSync } from 'fast-glob';
 import { FsTree, flushChanges, printChanges } from 'nx/src/generators/tree';
 import { parse } from 'path';
@@ -54,12 +53,7 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
     await formatFiles(host);
     const changes = host.listChanges();
     printChanges(changes);
-    // need to call flushChanges because the files to git add have yet to actually change on the filesystem
     flushChanges(host.root, changes);
-    execSync(`git add libs/i18n/src/lib/models/fd-language-key-identifier.ts`);
-    for (const change of changes) {
-        execSync(`git add ${change.path}`);
-    }
     return {
         success: true
     };

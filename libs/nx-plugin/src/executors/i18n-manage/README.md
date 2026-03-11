@@ -82,6 +82,16 @@ Validates all `.properties` files for:
 
 ---
 
+### Sort
+
+```bash
+nx run i18n:i18n-manage --command=sort
+```
+
+Sorts keys in all `.properties` files by component name, then alphabetically within each component. Automatically regenerates TypeScript files after sorting.
+
+---
+
 ## SAP Text Types
 
 | Type     | Usage                           |
