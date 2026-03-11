@@ -1,0 +1,107 @@
+name: Test i18n Auto-Generate (Manual)
+
+# This is a test workflow for validating the i18n-auto-generate workflow
+# Run manually via GitHub Actions UI to test without creating a real PR
+
+on:
+    workflow_dispatch:
+        inputs:
+            test_scenario:
+                description: 'Test scenario to run'
+                required: true
+                type: choice
+                options:
+                    - 'dry-run'
+                    - 'validate-only'
+                default: 'dry-run'
+
+env:
+    NODE_VERSION: '22.x'
+
+jobs:
+    test_generation:
+        name: Test TypeScript file generation
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Test - Run transform-translations
+              run: |
+                  echo "Testing transform-translations executor..."
+                  yarn nx run i18n:transform-translations
+
+            - name: Test - Check git status
+              run: |
+                  echo "Checking for generated file changes..."
+                  git status
+
+                  if git diff --quiet -- libs/i18n/src/lib/translations/; then
+                      echo "✅ No changes detected (expected for clean repo)"
+                      echo "changes=false" >> $GITHUB_OUTPUT
+                  else
+                      echo "⚠️  Changes detected:"
+                      git diff --stat libs/i18n/src/lib/translations/
+                      echo "changes=true" >> $GITHUB_OUTPUT
+                  fi
+              id: check-changes
+
+            - name: Test - Verify .properties files exist
+              run: |
+                  echo "Verifying .properties files..."
+                  ls -la libs/i18n/src/lib/translations/*.properties | head -5
+                  echo ""
+                  echo "Total .properties files:"
+                  ls libs/i18n/src/lib/translations/*.properties | wc -l
+
+            - name: Test - Verify generated .ts files exist
+              run: |
+                  echo "Verifying generated .ts files..."
+                  ls -la libs/i18n/src/lib/translations/*.ts | head -5
+                  echo ""
+                  echo "Total .ts files:"
+                  ls libs/i18n/src/lib/translations/*.ts | wc -l
+
+            - name: Test - Validate git config would be set
+              run: |
+                  echo "Testing git config simulation..."
+                  if [ -z "${{ secrets.GH_NAME }}" ] || [ -z "${{ secrets.GH_EMAIL }}" ]; then
+                      echo "❌ ERROR: GH_NAME or GH_EMAIL secrets not configured"
+                      exit 1
+                  else
+                      echo "✅ Git secrets are configured"
+                      echo "   GH_NAME: [set]"
+                      echo "   GH_EMAIL: [set]"
+                  fi
+
+            - name: Test - Check GHACTIONS token
+              run: |
+                  if [ -z "${{ secrets.GHACTIONS }}" ]; then
+                      echo "❌ ERROR: GHACTIONS secret not configured"
+                      exit 1
+                  else
+                      echo "✅ GHACTIONS token is configured"
+                  fi
+
+            - name: Summary
+              run: |
+                  echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "✅ All test checks passed" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "### Validated:" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ transform-translations executor runs successfully" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ Git change detection works" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ Required .properties files exist" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ Generated .ts files exist" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ Git secrets configured" >> $GITHUB_STEP_SUMMARY
+                  echo "- ✅ GHACTIONS token configured" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "The i18n-auto-generate workflow is ready for use." >> $GITHUB_STEP_SUMMARY

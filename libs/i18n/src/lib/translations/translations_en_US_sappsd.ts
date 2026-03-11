@@ -6,6 +6,9 @@ export default {
     coreAvatarGroup: {
         backButton: '[[[Ɓąċķ]]]'
     },
+    coreSelect: {
+        closeButton: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]'
+    },
     coreBusyIndicator: {
         defaultAriaValueText: '[[[Ɓűşŷ]]]',
         defaultTitle: '[[[Ƥĺēąşē ŵąįţ∙∙∙∙∙∙∙∙]]]'
@@ -156,9 +159,6 @@ export default {
     },
     coreProductSwitch: {
         ariaLabel: '[[[Ƥŗŏƌűċţ Ŝŵįţċĥ∙∙∙∙∙]]]'
-    },
-    coreSelect: {
-        closeButton: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]'
     },
     coreShellbar: {
         collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',

@@ -169,6 +169,8 @@ nx run i18n:transform-translations
 
 **Build integration:** Runs automatically before `build` and `test` targets.
 
+**GitHub Action:** When `.properties` files are modified in a PR, the [i18n-auto-generate workflow](../../../../../.github/workflows/i18n-auto-generate.yml) automatically regenerates TypeScript files and commits them to the PR. This ensures translators can submit changes without needing local Node.js setup.
+
 ---
 
 ## Configuration
