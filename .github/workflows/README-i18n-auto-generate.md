@@ -5,7 +5,7 @@ Automatically generates TypeScript files when `.properties` files are modified i
 ## How It Works
 
 1. Triggers on PRs modifying `libs/i18n/src/lib/translations/*.properties`
-2. Runs `yarn nx run i18n:transform-translations`
+2. Runs `npx nx run i18n:transform-translations`
 3. Commits generated `.ts` files back to PR as `fundamental-bot`
 4. Posts PR comment notifying about auto-generation
 

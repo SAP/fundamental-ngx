@@ -95,7 +95,7 @@ jobs:
               if: github.event.pull_request.head.repo.full_name != github.repository
               run: |
                   echo "🔍 Validating .properties file syntax..."
-                  yarn nx run i18n:i18n-manage --command=validate
+                  npx nx run i18n:i18n-manage --command=validate
                   echo "✅ Syntax validation passed"
                   echo ""
 
@@ -109,7 +109,7 @@ jobs:
               id: generate
               run: |
                   echo "🔧 Generating TypeScript files..."
-                  if ! yarn nx run i18n:transform-translations; then
+                  if ! npx nx run i18n:transform-translations; then
                       echo "❌ Transform failed"
                       exit 1
                   fi

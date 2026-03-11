@@ -31,7 +31,7 @@ echo ""
 
 # Test transform-translations executor
 echo "2️⃣ Testing transform-translations executor..."
-yarn nx run i18n:transform-translations
+npx nx run i18n:transform-translations
 echo "✅ Executor ran successfully"
 echo ""
 

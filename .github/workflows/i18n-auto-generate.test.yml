@@ -36,7 +36,7 @@ jobs:
             - name: Test - Run transform-translations
               run: |
                   echo "Testing transform-translations executor..."
-                  yarn nx run i18n:transform-translations
+                  npx nx run i18n:transform-translations
 
             - name: Test - Check git status
               run: |
