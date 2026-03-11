@@ -7,7 +7,7 @@ export class ShellbarPo extends CoreBaseComponentPo {
     sideNavExample = 'fd-shellbar-side-nav-example ';
 
     // element selectors
-    suggestionsDropdown = '.fdp-search-field__suggestion-dropdown';
+    suggestionsDropdown = '.fd-list--search-results';
     popover = 'fd-popover-body ';
     shellbar = '.fd-shellbar';
     shellbarTitle = 'fd-shellbar-title';

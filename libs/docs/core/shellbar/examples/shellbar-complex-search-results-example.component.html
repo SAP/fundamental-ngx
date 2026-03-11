@@ -1,0 +1,85 @@
+<span>Shell search field example type:</span>
+<br />
+<fd-segmented-button [(ngModel)]="exampleType" style="margin-bottom: 1rem">
+    <button fd-button fdkFocusableItem label="Default" value="default"></button>
+    <button fd-button fdkFocusableItem label="Advanced Filter" value="advancedFilter"></button>
+    <button fd-button fdkFocusableItem label="Mobile" value="mobile"></button>
+</fd-segmented-button>
+<br />
+<span>Empty search results example type:</span>
+<br />
+<fd-segmented-button [(ngModel)]="emptyResultsType" style="margin-bottom: 1rem">
+    <button fd-button fdkFocusableItem label="Illustrated Message" value="illustratedMessage"></button>
+    <button fd-button fdkFocusableItem label="Suggestions List" value="customSuggestions"></button>
+</fd-segmented-button>
+<br />
+<fd-checkbox label="Show category select" [(ngModel)]="showCategories"></fd-checkbox>
+
+<div [style.maxWidth]="exampleType === 'mobile' ? '320px' : '100%'" style="height: 500px; background-color: white">
+    <fd-shellbar [showSearchFieldOnSizeSmall]="true">
+        <fd-shellbar-branding [interactiveBranding]="true">
+            <fd-shellbar-logo>
+                <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+            </fd-shellbar-logo>
+            <fd-shellbar-title>Product Identifier</fd-shellbar-title>
+        </fd-shellbar-branding>
+
+        <fdp-search-field
+            #shellSearchField
+            placeholder="Search"
+            [dataSource]="dataSource"
+            [allowEmptySearch]="true"
+            [categories]="showCategories ? categories : []"
+            initialSuggestionTitle="Try this!"
+            initialSuggestionSubline="Search for example 'All my open Objects'"
+            [initialSuggestionEmptyTitle]="emptyResultsType === 'customSuggestions' ? 'Oh, there are no results' : ''"
+            [initialSuggestionEmptySubline]="
+                emptyResultsType === 'customSuggestions' ? 'You can try the following' : ''
+            "
+            [suggestionFooter]="footerTemplate"
+            [showAdvancedFilter]="exampleType === 'advancedFilter'"
+            (advancedFilterButtonClick)="openMessageToast('advanced filter')"
+            [mobile]="exampleType === 'mobile'"
+            [searchResultsEmptyTemplate]="emptyResultsType === 'illustratedMessage' ? emptyResultsTemplate : null"
+            [searchResultsEmptyDefaultSuggestions]="
+                emptyResultsType === 'customSuggestions' ? emptyDefaultSuggestions : null
+            "
+            [enableSelection]="true"
+            [suggestionsLoading]="suggestionsLoading"
+            (searchSubmit)="submit($event)"
+            aria-description="Search results will be shown in main area"
+            [showCategoryAllOption]="true"
+            categoryLabel="All"
+        ></fdp-search-field>
+
+        <fd-shellbar-actions>
+            @for (action of actions; track action) {
+                <fd-shellbar-action
+                    [glyph]="action.glyph"
+                    [label]="action.label"
+                    [notificationCount]="action.notificationCount"
+                    [notificationLabel]="action.notificationLabel"
+                ></fd-shellbar-action>
+            }
+        </fd-shellbar-actions>
+    </fd-shellbar>
+</div>
+
+<ng-template #footerTemplate>
+    <div fd-bar-middle>
+        <button (click)="showAllSearchResultsClicked()" fd-button fdType="transparent" class="fd-button--full-width">
+            Show All Search Results
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #emptyResultsTemplate>
+    @if (emptyResultsType === 'illustratedMessage') {
+        <figure fd-illustrated-message type="small" [svgConfig]="smallConfig">
+            <figcaption fd-illustrated-message-figcaption id="small-description">
+                <h3 fd-illustrated-message-title>No Results</h3>
+                <p fd-illustrated-message-text>Start by proiding your search criteria.</p>
+            </figcaption>
+        </figure>
+    }
+</ng-template>
