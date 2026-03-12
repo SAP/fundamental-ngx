@@ -17,6 +17,7 @@ import {
     ActionSheetItemComponent
 } from '@fundamental-ngx/core/action-sheet';
 import { ButtonComponent, ButtonType, defaultButtonType } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 
@@ -32,6 +33,7 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
         ActionSheetItemComponent,
         ActionSheetBodyComponent,
         ButtonComponent,
+        ContentDensityDirective,
         FdTranslatePipe
     ]
 })

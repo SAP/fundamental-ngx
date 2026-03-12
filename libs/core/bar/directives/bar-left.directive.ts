@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { booleanAttribute, Directive, input } from '@angular/core';
 
 /**
  * The left side area of the Bar component.
@@ -7,8 +7,12 @@ import { Directive } from '@angular/core';
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-bar-left]',
     host: {
-        class: 'fd-bar__left'
+        class: 'fd-bar__left',
+        '[class.fd-bar__left--stack-contents-vertically]': 'stackContentsVertically()'
     },
     standalone: true
 })
-export class BarLeftDirective {}
+export class BarLeftDirective {
+    /** Whether to stack the contents of this portion of the bar vertically. */
+    readonly stackContentsVertically = input(false, { transform: booleanAttribute });
+}

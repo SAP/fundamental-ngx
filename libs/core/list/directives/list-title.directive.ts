@@ -5,6 +5,7 @@ import { booleanAttribute, Directive, ElementRef, inject, input, OnInit } from '
     host: {
         class: 'fd-list__title',
         '[class.fd-list__title--truncate]': 'truncate()',
+        '[class.fd-list__title--scope]': 'scope()',
         '[class.fd-list__title--wrap]': 'wrap()'
     }
 })
@@ -14,6 +15,9 @@ export class ListTitleDirective implements OnInit {
 
     /** Whether the text should truncate with ellipsis. */
     readonly truncate = input(false, { transform: booleanAttribute });
+
+    /** Whether this title is used for scope in the shell search results. */
+    readonly scope = input(false, { transform: booleanAttribute });
 
     /** @hidden */
     readonly elRef = inject(ElementRef);
