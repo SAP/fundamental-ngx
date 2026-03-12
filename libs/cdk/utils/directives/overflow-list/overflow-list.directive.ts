@@ -18,10 +18,7 @@ import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 @Directive({
     selector: '[fdkOverflowList]',
-    standalone: true,
-    host: {
-        style: 'overflow: hidden;'
-    }
+    standalone: true
 })
 export class OverflowListDirective implements AfterViewInit {
     /**
@@ -77,9 +74,6 @@ export class OverflowListDirective implements AfterViewInit {
         this._initResizeObserver();
         this._initMutationObserver();
         this.calculateOverflow();
-
-        // React to content children changes (items added/removed)
-        this.overflowItems.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.calculateOverflow());
 
         fromEvent(window, 'resize')
             .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))

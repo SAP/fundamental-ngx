@@ -64,28 +64,44 @@ class WrapperComponent {
 
 declare const global: any;
 
+// Capture callbacks so tests can trigger observers manually.
+let resizeObserverCallback: () => void;
+let mutationObserverCallback: () => void;
+let resizeDisconnectSpy: jest.Mock;
+let mutationDisconnectSpy: jest.Mock;
+
 describe('OverflowItemsDirective', () => {
     let component: WrapperComponent;
     let fixture: ComponentFixture<WrapperComponent>;
     let overflowListDir: OverflowListDirective;
 
     beforeEach(waitForAsync(() => {
+        resizeDisconnectSpy = jest.fn();
+        mutationDisconnectSpy = jest.fn();
+
+        // Mocking ResizeObserver – capture callback
+        global.ResizeObserver = class {
+            disconnect = resizeDisconnectSpy;
+            constructor(callback: () => void) {
+                resizeObserverCallback = callback;
+            }
+            observe(): void {}
+            unobserve(): void {}
+        };
+
+        // Mocking MutationObserver – capture callback
+        global.MutationObserver = class {
+            disconnect = mutationDisconnectSpy;
+            constructor(callback: () => void) {
+                mutationObserverCallback = callback;
+            }
+            observe(): void {}
+        };
+
         TestBed.configureTestingModule({
             imports: [WrapperComponent, TestComponent, OverflowListDirective, OverflowListItemDirective],
             providers: [ViewportRuler]
         }).compileComponents();
-
-        // Mocking ResizeObserver
-        global.ResizeObserver = class {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            constructor(callback: () => void) {}
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            observe() {}
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            unobserve() {}
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            disconnect() {}
-        };
     }));
 
     beforeEach(async () => {
@@ -122,5 +138,49 @@ describe('OverflowItemsDirective', () => {
         flush(); // drain the microtask from calculateOverflow
 
         expect(component.currentExtraItems).toBe(3);
+    }));
+
+    it('should recalculate when ResizeObserver fires', fakeAsync(() => {
+        jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(4);
+
+        // Simulate the ResizeObserver callback (e.g. container shrank)
+        resizeObserverCallback();
+        flush();
+
+        expect(component.currentExtraItems).toBe(4);
+    }));
+
+    it('should recalculate when MutationObserver detects changes (childList / characterData)', fakeAsync(() => {
+        jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(7);
+
+        // Simulate the MutationObserver callback (e.g. text content changed or items added)
+        mutationObserverCallback();
+        flush();
+
+        expect(component.currentExtraItems).toBe(7);
+    }));
+
+    it('should coalesce multiple calculateOverflow calls into one recalculation', fakeAsync(() => {
+        const spy = jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(2);
+
+        // Call calculateOverflow multiple times synchronously
+        overflowListDir.calculateOverflow();
+        overflowListDir.calculateOverflow();
+        overflowListDir.calculateOverflow();
+        flush();
+
+        // Only one actual recalculation should have occurred
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(component.currentExtraItems).toBe(2);
+    }));
+
+    it('should disconnect ResizeObserver and MutationObserver on destroy', fakeAsync(() => {
+        // Drain any pending microtasks from ngAfterViewInit
+        flush();
+
+        fixture.destroy();
+
+        expect(resizeDisconnectSpy).toHaveBeenCalled();
+        expect(mutationDisconnectSpy).toHaveBeenCalled();
     }));
 });
