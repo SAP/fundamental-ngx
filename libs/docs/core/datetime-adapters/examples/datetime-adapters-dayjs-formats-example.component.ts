@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DATE_TIME_FORMATS, DatetimeAdapter, FdDatetimeAdapterModule } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
-import { MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
-import moment, { Moment } from 'moment';
+import { DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
+import dayjs, { Dayjs } from 'dayjs';
 
 @Component({
-    selector: 'fd-moment-datetime-formats-example',
-    templateUrl: './moment-datetime-formats-example.component.html',
+    selector: 'fd-datetime-adapters-dayjs-formats-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './datetime-adapters-dayjs-formats-example.component.html',
     providers: [
         {
             provide: DATE_TIME_FORMATS,
@@ -28,13 +29,11 @@ import moment, { Moment } from 'moment';
                 rangeDelimiter: ' - '
             }
         },
-        {
-            provide: DatetimeAdapter,
-            useClass: MomentDatetimeAdapter
-        }
+        { provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter }
     ],
-    imports: [DatetimePickerComponent, FormsModule, FdDatetimeAdapterModule]
+    imports: [DatetimePickerComponent, FormsModule]
 })
-export class MomentDatetimeFormatsExampleComponent {
-    date: Moment = moment();
+export class DatetimeAdaptersDayjsFormatsExampleComponent {
+    date: Dayjs = dayjs();
+    dateCustom: Dayjs = dayjs();
 }

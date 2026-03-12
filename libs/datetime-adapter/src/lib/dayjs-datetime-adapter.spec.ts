@@ -1,12 +1,12 @@
 import { Platform } from '@angular/cdk/platform';
 import { LOCALE_ID } from '@angular/core';
-import { TestBed, inject, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import dayjs from 'dayjs';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { DAYJS_DATE_TIME_ADAPTER_OPTIONS, DayjsDatetimeAdapter } from './dayjs-datetime-adapter';
-import { DayjsDatetimeAdapterModule } from './dayjs-datetime-adapter.module';
+import { DayjsDatetimeAdapterModule, provideDayjsDatetimeAdapter } from './dayjs-datetime-adapter.module';
 
 // preload locales that are used in tests
 import 'dayjs/locale/ar-ma';
@@ -31,16 +31,16 @@ describe('DayjsDatetimeAdapter', () => {
     let platform: Platform;
     let adapter: DayjsDatetimeAdapter;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [DayjsDatetimeAdapterModule]
-        }).compileComponents();
-    }));
+            providers: [provideDayjsDatetimeAdapter()]
+        });
+    });
 
-    beforeEach(inject([DatetimeAdapter, Platform], (dateAdapter: DayjsDatetimeAdapter, _platform: Platform) => {
-        adapter = dateAdapter;
-        platform = _platform;
-    }));
+    beforeEach(() => {
+        adapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+        platform = TestBed.inject(Platform);
+    });
 
     it('should get year', () => {
         expect(adapter.getYear(dayjs(new Date(2017, JAN, 1)))).toBe(2017);
@@ -984,8 +984,8 @@ describe('DayjsDatetimeAdapter', () => {
             // Create a new adapter instance (simulating what DI does)
             TestBed.resetTestingModule();
             TestBed.configureTestingModule({
-                imports: [DayjsDatetimeAdapterModule]
-            }).compileComponents();
+                providers: [provideDayjsDatetimeAdapter()]
+            });
 
             const newAdapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
             expect(newAdapter).toBeTruthy();
@@ -998,11 +998,22 @@ describe('DayjsDatetimeAdapter', () => {
             extendSpy.mockRestore();
         });
 
-        // FLAW #8: DayjsDatetimeAdapterRawModule was a separate deprecated class.
-        // Now it's a backwards-compatible alias pointing to DayjsDatetimeAdapterModule.
-        it('should have DayjsDatetimeAdapterRawModule as an alias for DayjsDatetimeAdapterModule', () => {
-            const moduleExports = require('./dayjs-datetime-adapter.module');
-            expect(moduleExports.DayjsDatetimeAdapterRawModule).toBe(moduleExports.DayjsDatetimeAdapterModule);
+        it('should provide adapter via deprecated DayjsDatetimeAdapterModule', () => {
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [DayjsDatetimeAdapterModule]
+            });
+            const moduleAdapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+            expect(moduleAdapter).toBeInstanceOf(DayjsDatetimeAdapter);
+        });
+
+        it('should provide adapter via provideDayjsDatetimeAdapter()', () => {
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                providers: [provideDayjsDatetimeAdapter()]
+            });
+            const fnAdapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+            expect(fnAdapter).toBeInstanceOf(DayjsDatetimeAdapter);
         });
     });
 
@@ -1045,16 +1056,15 @@ describe('DayjsDatetimeAdapter', () => {
 describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
     let adapter: DayjsDatetimeAdapter;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [DayjsDatetimeAdapterModule],
-            providers: [{ provide: LOCALE_ID, useValue: 'da' }]
-        }).compileComponents();
-    }));
+            providers: [provideDayjsDatetimeAdapter(), { provide: LOCALE_ID, useValue: 'da' }]
+        });
+    });
 
-    beforeEach(inject([DatetimeAdapter], (_adapter: DayjsDatetimeAdapter) => {
-        adapter = _adapter;
-    }));
+    beforeEach(() => {
+        adapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+    });
 
     it('should take the default locale from the MOMENT_DATE_TIME_ADAPTER_OPTIONS injection token', () => {
         expect(adapter.getDayOfWeekNames('long')).toEqual([
@@ -1137,16 +1147,18 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
 describe('DayjsDatetimeAdapter with useUtc: true', () => {
     let adapter: DayjsDatetimeAdapter;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [DayjsDatetimeAdapterModule],
-            providers: [{ provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: false } }]
-        }).compileComponents();
-    }));
+            providers: [
+                provideDayjsDatetimeAdapter(),
+                { provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: false } }
+            ]
+        });
+    });
 
-    beforeEach(inject([DatetimeAdapter], (_adapter: DayjsDatetimeAdapter) => {
-        adapter = _adapter;
-    }));
+    beforeEach(() => {
+        adapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+    });
 
     it('should create dates in UTC mode when useUtc is true', () => {
         const created = adapter.createDate(2017, 1, 1);

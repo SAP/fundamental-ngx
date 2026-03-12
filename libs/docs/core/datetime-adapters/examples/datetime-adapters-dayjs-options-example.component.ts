@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
@@ -10,17 +10,16 @@ import {
 import dayjs, { Dayjs } from 'dayjs';
 
 @Component({
-    selector: 'fd-dayjs-adapter-options-example',
-    templateUrl: './dayjs-adapter-options-example.component.html',
+    selector: 'fd-datetime-adapters-dayjs-options-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './datetime-adapters-dayjs-options-example.component.html',
     providers: [
-        // Note that this is usually provided in the root of your application.
-        // Due to the limit of this example we must provide it on this level.
-        { provide: DATE_TIME_FORMATS, useValue: DAYJS_DATETIME_FORMATS },
         { provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter },
+        { provide: DATE_TIME_FORMATS, useValue: DAYJS_DATETIME_FORMATS },
         { provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } }
     ],
     imports: [DatetimePickerComponent, FormsModule]
 })
-export class DayjsAdapterOptionsExampleComponent {
+export class DatetimeAdaptersDayjsOptionsExampleComponent {
     date: Dayjs = dayjs();
 }

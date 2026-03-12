@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { RouterLink } from '@angular/router';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
@@ -13,27 +12,25 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'app-moment-datetime-adapter-header',
-    templateUrl: './moment-datetime-adapter-header.component.html',
+    selector: 'app-datetime-adapters-header',
+    templateUrl: './datetime-adapters-header.component.html',
     imports: [
         DocPageComponent,
         HeaderComponent,
-        MessageStripComponent,
-        RouterLink,
         DescriptionComponent,
         CodeSnippetComponent,
         ImportComponent,
-        HeaderTabsComponent
+        HeaderTabsComponent,
+        MessageStripComponent,
+        RouterLink
     ]
 })
-export class MomentDatetimeAdapterHeaderComponent {
+export class DatetimeAdaptersHeaderComponent {
     installSnippet: ExampleFile = {
-        code: `
-npm i @fundamental-ngx/moment-adapter
+        code: `npm i @fundamental-ngx/datetime-adapter
 
 # using yarn?
-# yarn add @fundamental-ngx/moment-adapter
-                    `,
+# yarn add @fundamental-ngx/datetime-adapter`,
         language: 'bash'
     };
 }

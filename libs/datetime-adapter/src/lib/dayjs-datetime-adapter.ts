@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
+import { inject, Injectable, InjectionToken, LOCALE_ID } from '@angular/core';
 import dayjs, { ConfigType, Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -62,12 +62,13 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     private _localeData: DateLocale;
 
     /** @hidden */
-    constructor(
-        @Optional() @Inject(LOCALE_ID) localeId: string,
-        @Optional() @Inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS) private _options?: DayjsDatetimeAdapterOptions
-    ) {
+    private readonly _options = inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS, { optional: true });
+
+    /** @hidden */
+    constructor() {
         super();
 
+        const localeId = inject(LOCALE_ID, { optional: true });
         this.setLocale(localeId || dayjs.locale());
     }
 
