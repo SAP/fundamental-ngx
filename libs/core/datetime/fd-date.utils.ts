@@ -3,7 +3,7 @@ export function _leftPad(n: number): string {
     return n === n % 10 ? `0${n}` : `${n}`;
 }
 
-/** Converts date to ISO8601 */
+/** Converts date to ISO 8601 date-time string without timezone designator (`YYYY-MM-DDTHH:mm:ss`). */
 export function toIso8601(fdDate: {
     year: number;
     month: number;

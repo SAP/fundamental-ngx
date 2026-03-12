@@ -356,7 +356,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this.toIso8601(date1) === this.toIso8601(date2);
     }
 
-    /** Format date object to ISO8601 string */
+    /** {@inheritDoc DatetimeAdapter.toIso8601} */
     toIso8601(fdDate: FdDate): string {
         return toIso8601(fdDate);
     }

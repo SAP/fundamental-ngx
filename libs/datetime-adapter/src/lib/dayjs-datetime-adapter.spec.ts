@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { DayjsDatetimeAdapter } from './dayjs-datetime-adapter';
+import { DAYJS_DATE_TIME_ADAPTER_OPTIONS, DayjsDatetimeAdapter } from './dayjs-datetime-adapter';
 import { DayjsDatetimeAdapterModule } from './dayjs-datetime-adapter.module';
 
 // preload locales that are used in tests
@@ -458,23 +458,23 @@ describe('DayjsDatetimeAdapter', () => {
     });
 
     it('should parse longDateFormats', () => {
-        expect(adapter._prepareFormat('L')).toBe('MM/DD/YYYY');
-        expect(adapter._prepareFormat('L LT')).toBe('MM/DD/YYYY h:mm A');
-        expect(adapter._prepareFormat('L LT MMMM.D.YY hh:mm:ss')).toBe('MM/DD/YYYY h:mm A MMMM.D.YY hh:mm:ss');
-        expect(adapter._prepareFormat('L LT randomtext')).toBe('MM/DD/YYYY h:mm A randomtext');
+        expect(adapter['_prepareFormat']('L')).toBe('MM/DD/YYYY');
+        expect(adapter['_prepareFormat']('L LT')).toBe('MM/DD/YYYY h:mm A');
+        expect(adapter['_prepareFormat']('L LT MMMM.D.YY hh:mm:ss')).toBe('MM/DD/YYYY h:mm A MMMM.D.YY hh:mm:ss');
+        expect(adapter['_prepareFormat']('L LT randomtext')).toBe('MM/DD/YYYY h:mm A randomtext');
     });
 
     it('should parse longDateFormats in other locales', () => {
         adapter.setLocale('ja');
-        expect(adapter._prepareFormat('L')).toBe('YYYY/MM/DD');
-        expect(adapter._prepareFormat('L LT')).toBe('YYYY/MM/DD HH:mm');
-        expect(adapter._prepareFormat('L LT MMMM.D.YY hh:mm:ss')).toBe('YYYY/MM/DD HH:mm MMMM.D.YY hh:mm:ss');
-        expect(adapter._prepareFormat('L LT randomtext')).toBe('YYYY/MM/DD HH:mm randomtext');
+        expect(adapter['_prepareFormat']('L')).toBe('YYYY/MM/DD');
+        expect(adapter['_prepareFormat']('L LT')).toBe('YYYY/MM/DD HH:mm');
+        expect(adapter['_prepareFormat']('L LT MMMM.D.YY hh:mm:ss')).toBe('YYYY/MM/DD HH:mm MMMM.D.YY hh:mm:ss');
+        expect(adapter['_prepareFormat']('L LT randomtext')).toBe('YYYY/MM/DD HH:mm randomtext');
         adapter.setLocale('ar-ma');
-        expect(adapter._prepareFormat('L')).toBe('DD/MM/YYYY');
-        expect(adapter._prepareFormat('L LT')).toBe('DD/MM/YYYY HH:mm');
-        expect(adapter._prepareFormat('L LT MMMM.D.YY hh:mm:ss')).toBe('DD/MM/YYYY HH:mm MMMM.D.YY hh:mm:ss');
-        expect(adapter._prepareFormat('L LT randomtext')).toBe('DD/MM/YYYY HH:mm randomtext');
+        expect(adapter['_prepareFormat']('L')).toBe('DD/MM/YYYY');
+        expect(adapter['_prepareFormat']('L LT')).toBe('DD/MM/YYYY HH:mm');
+        expect(adapter['_prepareFormat']('L LT MMMM.D.YY hh:mm:ss')).toBe('DD/MM/YYYY HH:mm MMMM.D.YY hh:mm:ss');
+        expect(adapter['_prepareFormat']('L LT randomtext')).toBe('DD/MM/YYYY HH:mm randomtext');
     });
 
     // Group 1: Time Manipulation
@@ -773,14 +773,14 @@ describe('DayjsDatetimeAdapter', () => {
         it('should convert a date to ISO 8601 string', () => {
             const date = dayjs(new Date(2017, JAN, 1));
             const iso = adapter.toIso8601(date);
-            // dayjs.toISOString() returns UTC with Z suffix
-            expect(iso).toBe(date.toISOString());
+            // Now uses format() instead of toISOString(), so reflects local date/time
+            expect(iso).toBe('2017-01-01T00:00:00');
         });
 
         it('should include time component in ISO 8601 string', () => {
             const date = dayjs(new Date(2017, JAN, 1, 14, 30, 45));
             const iso = adapter.toIso8601(date);
-            expect(iso).toBe(date.toISOString());
+            expect(iso).toBe('2017-01-01T14:30:45');
             expect(iso).toMatch(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/);
         });
     });
@@ -793,6 +793,14 @@ describe('DayjsDatetimeAdapter', () => {
 
         it('should return empty string for format(null, ...)', () => {
             expect(adapter.format(null as any, 'L')).toBe('');
+        });
+
+        it('should return null for parse(null)', () => {
+            expect(adapter.parse(null)).toBeNull();
+        });
+
+        it('should return null for parse(undefined)', () => {
+            expect(adapter.parse(undefined)).toBeNull();
         });
     });
 
@@ -886,6 +894,152 @@ describe('DayjsDatetimeAdapter', () => {
             adapter.setLocale('ja');
         });
     });
+
+    // Bug exposure tests: these expect CORRECT behavior and should FAIL if the bug is present
+    describe('bugs that should be fixed', () => {
+        // BUG #1: getDateNames() uses month 0 (line 176)
+        // createDate(2017, 0, ...) passes month=0 to dayjs which wraps to December of previous year.
+        // The correct call should use month=1 (January). This test verifies the method
+        // produces dates from a single consistent month (January), not December of the prior year.
+        it('should use a valid month (1-based) in getDateNames()', () => {
+            const spy = jest.spyOn(adapter, 'createDate');
+            adapter.getDateNames();
+            expect(spy).toHaveBeenCalled();
+            // Every call should use month 1 (January), not month 0
+            for (const call of spy.mock.calls) {
+                expect(call[1]).toBe(1);
+            }
+            spy.mockRestore();
+        });
+
+        // BUG #2: Parse/display format asymmetry in DAYJS_DATETIME_FORMATS
+        // parse.timeInput = 'h:mm' (no meridiem), display.timeInput = 'h:mm A' (with meridiem).
+        // User sees '2:30 PM', types it back, but parse drops the 'PM' → interprets as AM.
+        it('should parse time string with meridiem when display format includes meridiem', () => {
+            // The display format shows 'h:mm A', so parsing should also handle 'A' (meridiem)
+            const { DAYJS_DATETIME_FORMATS: formats } = require('./dayjs-datetime-formats');
+
+            // The parse format should be able to round-trip with the display format
+            const displayedTime = adapter.format(dayjs(new Date(2017, JAN, 1, 14, 30, 0)), formats.display.timeInput);
+            // displayedTime is something like '2:30 PM'
+            expect(displayedTime).toContain('PM');
+
+            // Now parse it back using the parse format
+            const parsed = adapter.parse(displayedTime, formats.parse.timeInput);
+            expect(parsed).not.toBeNull();
+            expect(parsed!.isValid()).toBe(true);
+            // BUG: parse format 'h:mm' cannot handle 'PM', so 2:30 PM parses as 2:30 AM
+            expect(parsed!.hour()).toBe(14); // Should be 14 (2 PM), not 2 (AM)
+        });
+
+        // BUG #3: Fallback parsing chain had hardcoded 'DD/MM/YYYY' format.
+        // '13/01/2026' in en locale (MM/DD/YYYY): month=13 is invalid.
+        // The removed 'DD/MM/YYYY' fallback would have caught it as Jan 13,
+        // contradicting the locale. Now the overflow validation rejects it.
+        it('should not parse locale-invalid dates via fallback formats', () => {
+            // Use 'L' (the standard locale format) — in en that's MM/DD/YYYY.
+            // '13/01/2026' has month=13 which is out of range.
+            const result = adapter.parse('13/01/2026', 'L');
+            expect(result!.isValid()).toBe(false);
+        });
+
+        // BUG #4: toIso8601() was returning UTC with Z suffix, shifting hours
+        it('should return ISO string matching the local date components', () => {
+            const date = adapter.createDate(2017, 1, 1);
+            const withTime = adapter.setTime(date, 14, 30, 45);
+            const iso = adapter.toIso8601(withTime);
+            // ISO string should reflect the date's local values, not UTC-shifted
+            expect(iso).toContain('2017-01-01');
+            expect(iso).toContain('14:30:45');
+        });
+
+        // BUG #5: clone() was returning null typed as Dayjs
+        it('should throw for null input to clone()', () => {
+            // clone() return type is Dayjs. Passing null should throw rather than
+            // returning null (which would cause runtime errors when callers call .year() etc.)
+            expect(() => adapter.clone(null as any)).toThrow();
+        });
+    });
+
+    // Architectural flaws: tests that expose design issues
+    describe('architectural flaws', () => {
+        // FLAW #6: setLocale() was throwing unrecoverably for missing locale
+        // Now it falls back to 'en' with a console.warn instead of throwing.
+        it('should gracefully handle missing locale instead of throwing', () => {
+            const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+            expect(() => adapter.setLocale('xx-nonexistent')).not.toThrow();
+            // After a failed setLocale, the adapter should still work
+            expect(adapter.today().isValid()).toBe(true);
+            // Should have warned about the failed locale
+            expect(warnSpy).toHaveBeenCalled();
+            warnSpy.mockRestore();
+        });
+
+        // FLAW #7: Plugins were loaded on every instantiation
+        // Now plugins are loaded at module level, so creating new adapter instances
+        // should NOT call dayjs.extend() again.
+        it('should not load plugins multiple times when creating multiple adapters', () => {
+            const extendSpy = jest.spyOn(dayjs, 'extend');
+
+            // Create a new adapter instance (simulating what DI does)
+            TestBed.resetTestingModule();
+            TestBed.configureTestingModule({
+                imports: [DayjsDatetimeAdapterModule]
+            }).compileComponents();
+
+            const newAdapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+            expect(newAdapter).toBeTruthy();
+
+            // Plugins are loaded at module level, not in the constructor
+            // so no extend calls should happen during DI construction
+            const extendCallCount = extendSpy.mock.calls.length;
+            expect(extendCallCount).toBe(0);
+
+            extendSpy.mockRestore();
+        });
+
+        // FLAW #8: DayjsDatetimeAdapterRawModule was a separate deprecated class.
+        // Now it's a backwards-compatible alias pointing to DayjsDatetimeAdapterModule.
+        it('should have DayjsDatetimeAdapterRawModule as an alias for DayjsDatetimeAdapterModule', () => {
+            const moduleExports = require('./dayjs-datetime-adapter.module');
+            expect(moduleExports.DayjsDatetimeAdapterRawModule).toBe(moduleExports.DayjsDatetimeAdapterModule);
+        });
+    });
+
+    // Missing features and gaps: tests that expose what's missing
+    describe('missing features and gaps', () => {
+        // GAP #9: fromNow is now implemented using dayjs relativeTime plugin
+        it('should have fromNow implemented', () => {
+            expect(typeof adapter.fromNow).toBe('function');
+            const pastDate = adapter.addCalendarDays(adapter.now(), -5);
+            const result = adapter.fromNow(pastDate);
+            expect(result).toBeTruthy();
+            expect(typeof result).toBe('string');
+        });
+
+        // GAP #10: Fallback chain now uses strict parsing to reject overflow values
+        it('should reject dates with out-of-range month/day in default mode', () => {
+            const result = adapter.parse('2026-13-45', 'YYYY-MM-DD');
+            expect(result).not.toBeNull();
+            // Month 13 and day 45 don't exist. Strict parsing in fallback chain rejects this.
+            expect(result!.isValid()).toBe(false);
+        });
+
+        // GAP #11: narrowMonths now uses Intl.DateTimeFormat instead of charAt(0)
+        // This provides proper locale-aware narrow names (important for non-Latin scripts)
+        it('should return locale-aware narrow month names from Intl', () => {
+            const narrowMonths = adapter.getMonthNames('narrow');
+            expect(narrowMonths.length).toBe(12);
+            // In English, narrow months from Intl are: J, F, M, A, M, J, J, A, S, O, N, D
+            // (duplicates are expected in narrow format — it's inherently compact)
+            expect(narrowMonths[0]).toBe('J'); // January
+            expect(narrowMonths[1]).toBe('F'); // February
+            expect(narrowMonths[8]).toBe('S'); // September
+            expect(narrowMonths[11]).toBe('D'); // December
+        });
+
+        // GAP #13: see dedicated 'DayjsDatetimeAdapter with useUtc: true' describe block below
+    });
 });
 
 describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
@@ -914,8 +1068,11 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
         ]);
     });
 
-    it('should throw an error if locale is not preloaded', async () => {
-        expect(() => adapter.setLocale('en-au')).toThrow();
+    it('should warn and fall back to en if locale is not preloaded', async () => {
+        const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+        expect(() => adapter.setLocale('en-au')).not.toThrow();
+        expect(warnSpy).toHaveBeenCalled();
+        warnSpy.mockRestore();
         await import('dayjs/locale/en-au');
         expect(() => adapter.setLocale('en-au')).not.toThrow();
     });
@@ -973,5 +1130,37 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
             expect(result.date()).toBe(25);
             expect(result.hour()).toBe(15);
         });
+    });
+});
+
+// GAP #13: createDate() ignores useUtc — needs a separate TestBed with useUtc: true
+describe('DayjsDatetimeAdapter with useUtc: true', () => {
+    let adapter: DayjsDatetimeAdapter;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DayjsDatetimeAdapterModule],
+            providers: [{ provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: false } }]
+        }).compileComponents();
+    }));
+
+    beforeEach(inject([DatetimeAdapter], (_adapter: DayjsDatetimeAdapter) => {
+        adapter = _adapter;
+    }));
+
+    it('should create dates in UTC mode when useUtc is true', () => {
+        const created = adapter.createDate(2017, 1, 1);
+        const today = adapter.today();
+
+        // today() uses _createDayjsDate() which respects useUtc → UTC mode
+        expect(today.isUTC()).toBe(true);
+        // createDate() now also respects useUtc
+        expect(created.isUTC()).toBe(true);
+        // Verify actual date values are correct (not shifted by timezone offset)
+        expect(created.year()).toBe(2017);
+        expect(created.month()).toBe(0); // dayjs month is 0-based
+        expect(created.date()).toBe(1);
+        expect(created.hour()).toBe(0);
+        expect(created.minute()).toBe(0);
     });
 });
