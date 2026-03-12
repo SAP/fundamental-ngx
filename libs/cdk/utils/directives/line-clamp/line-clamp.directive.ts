@@ -251,7 +251,10 @@ export class LineClampDirective {
 
         const fontSize = parseInt(style.getPropertyValue('font-size'), 10);
         const boxSizing = style.getPropertyValue('box-sizing');
-        let height = parseInt(style.getPropertyValue('height'), 10);
+        // Use offsetHeight instead of getComputedStyle('height') because
+        // computed height can return 'auto' for elements without explicit height.
+        let height = this.rootElement.offsetHeight;
+
         let lineHeight = parseFloat(style.getPropertyValue('line-height'));
         if (isNaN(lineHeight)) {
             lineHeight = fontSize * 1.2;
