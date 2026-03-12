@@ -517,6 +517,389 @@ describe('FdDatetimeAdapter', () => {
         adapter.setLocale('ar-EG');
         expect(adapter.getDayPeriodNames()).toEqual(['ص', 'م']);
     });
+
+    // Group 1: Time Manipulation
+    describe('time manipulation', () => {
+        it('should get hours from a date', () => {
+            expect(adapter.getHours(new FdDate(2017, 1, 1, 14, 30, 45))).toBe(14);
+        });
+
+        it('should get minutes from a date', () => {
+            expect(adapter.getMinutes(new FdDate(2017, 1, 1, 14, 30, 45))).toBe(30);
+        });
+
+        it('should get seconds from a date', () => {
+            expect(adapter.getSeconds(new FdDate(2017, 1, 1, 14, 30, 45))).toBe(45);
+        });
+
+        it('should set hours and return a new date', () => {
+            const date = new FdDate(2017, 1, 1, 0, 0, 0);
+            const result = adapter.setHours(date, 15);
+            expect(result.hour).toBe(15);
+        });
+
+        it('should set minutes and return a new date', () => {
+            const date = new FdDate(2017, 1, 1, 0, 0, 0);
+            const result = adapter.setMinutes(date, 45);
+            expect(result.minute).toBe(45);
+        });
+
+        it('should set seconds and return a new date', () => {
+            const date = new FdDate(2017, 1, 1, 0, 0, 0);
+            const result = adapter.setSeconds(date, 30);
+            expect(result.second).toBe(30);
+        });
+
+        it('should not mutate the original date when setting time', () => {
+            const date = new FdDate(2017, 1, 1, 10, 20, 30);
+            adapter.setHours(date, 15);
+            adapter.setMinutes(date, 45);
+            adapter.setSeconds(date, 55);
+            // setHours/setMinutes/setSeconds create new Date instances internally,
+            // so original FdDate fields should remain unchanged
+            expect(date.hour).toBe(10);
+            expect(date.minute).toBe(20);
+            expect(date.second).toBe(30);
+        });
+
+        it('should set hours, minutes, and seconds at once via setTime', () => {
+            const date = new FdDate(2017, 1, 1, 0, 0, 0);
+            const result = adapter.setTime(date, 10, 20, 30);
+            expect(adapter.getHours(result)).toBe(10);
+            expect(adapter.getMinutes(result)).toBe(20);
+            expect(adapter.getSeconds(result)).toBe(30);
+        });
+
+        it('should return a new date instance from setTime', () => {
+            const date = new FdDate(2017, 1, 1, 0, 0, 0);
+            const result = adapter.setTime(date, 10, 20, 30);
+            expect(result).not.toBe(date);
+        });
+    });
+
+    // Group 2: Date Equality and Comparison
+    describe('date equality and comparison', () => {
+        it('should return true for datesEqual when dates are the same day', () => {
+            expect(adapter.datesEqual(new FdDate(2017, 1, 1), new FdDate(2017, 1, 1))).toBe(true);
+        });
+
+        it('should return true for datesEqual when same day but different time', () => {
+            expect(adapter.datesEqual(new FdDate(2017, 1, 1, 10, 0, 0), new FdDate(2017, 1, 1, 22, 30, 0))).toBe(true);
+        });
+
+        it('should return false for datesEqual when dates are different days', () => {
+            expect(adapter.datesEqual(new FdDate(2017, 1, 1), new FdDate(2017, 1, 2))).toBe(false);
+        });
+
+        it('should return false for datesEqual when either date is null/falsy', () => {
+            expect(adapter.datesEqual(new FdDate(2017, 1, 1), null as any)).toBe(false);
+            expect(adapter.datesEqual(null as any, new FdDate(2017, 1, 1))).toBe(false);
+            expect(adapter.datesEqual(null as any, null as any)).toBe(false);
+        });
+
+        it('should return true for dateTimesEqual when date and time are identical', () => {
+            expect(adapter.dateTimesEqual(new FdDate(2017, 1, 1, 10, 30, 0), new FdDate(2017, 1, 1, 10, 30, 0))).toBe(
+                true
+            );
+        });
+
+        it('should return false for dateTimesEqual when same date but different time', () => {
+            expect(adapter.dateTimesEqual(new FdDate(2017, 1, 1, 10, 30, 0), new FdDate(2017, 1, 1, 10, 30, 1))).toBe(
+                false
+            );
+        });
+
+        it('should return false for dateTimesEqual when either date is null/falsy', () => {
+            expect(adapter.dateTimesEqual(new FdDate(2017, 1, 1), null as any)).toBe(false);
+            expect(adapter.dateTimesEqual(null as any, new FdDate(2017, 1, 1))).toBe(false);
+        });
+    });
+
+    // Group 3: Range Checking (isBetween)
+    describe('isBetween', () => {
+        it('should return true when date is strictly between start and end', () => {
+            expect(adapter.isBetween(new FdDate(2017, 1, 15), new FdDate(2017, 1, 1), new FdDate(2017, 1, 31))).toBe(
+                true
+            );
+        });
+
+        it('should return false when date equals start date (exclusive boundary)', () => {
+            expect(adapter.isBetween(new FdDate(2017, 1, 1), new FdDate(2017, 1, 1), new FdDate(2017, 1, 31))).toBe(
+                false
+            );
+        });
+
+        it('should return false when date equals end date (exclusive boundary)', () => {
+            expect(adapter.isBetween(new FdDate(2017, 1, 31), new FdDate(2017, 1, 1), new FdDate(2017, 1, 31))).toBe(
+                false
+            );
+        });
+
+        it('should return false when date is before the range', () => {
+            expect(adapter.isBetween(new FdDate(2016, 12, 31), new FdDate(2017, 1, 1), new FdDate(2017, 1, 31))).toBe(
+                false
+            );
+        });
+
+        it('should return false when date is after the range', () => {
+            expect(adapter.isBetween(new FdDate(2017, 2, 1), new FdDate(2017, 1, 1), new FdDate(2017, 1, 31))).toBe(
+                false
+            );
+        });
+
+        it('should return false when any argument is null/falsy', () => {
+            // Note: FdDatetimeAdapter.isBetween does not have null guards like DayjsDatetimeAdapter,
+            // but _createDateInstanceByFdDate handles invalid FdDate gracefully.
+            // We test with valid dates and null where possible.
+            const date = new FdDate(2017, 1, 15);
+            const start = new FdDate(2017, 1, 1);
+            const end = new FdDate(2017, 1, 31);
+            // Test with invalid FdDate (acts as falsy-like)
+            const invalid = new FdDate(NaN as any, NaN as any, NaN as any);
+            expect(adapter.isBetween(invalid, start, end)).toBe(false);
+            expect(adapter.isBetween(date, invalid, end)).toBe(false);
+            expect(adapter.isBetween(date, start, invalid)).toBe(false);
+        });
+    });
+
+    // Group 4: Calendar Helpers
+    describe('calendar helpers', () => {
+        it('should return 31 for January', () => {
+            expect(adapter.getNumDaysInMonth(new FdDate(2017, 1, 1))).toBe(31);
+        });
+
+        it('should return 28 for February in a non-leap year', () => {
+            expect(adapter.getNumDaysInMonth(new FdDate(2017, 2, 1))).toBe(28);
+        });
+
+        it('should return 29 for February in a leap year', () => {
+            expect(adapter.getNumDaysInMonth(new FdDate(2016, 2, 1))).toBe(29);
+        });
+
+        it('should return 30 for April', () => {
+            expect(adapter.getNumDaysInMonth(new FdDate(2017, 4, 1))).toBe(30);
+        });
+
+        it('should return correct week number for a known date', () => {
+            // FdDatetimeAdapter uses ISO week calculation.
+            // Jan 1 2017 is a Sunday — ISO week 52 of 2016
+            expect(adapter.getWeekNumber(new FdDate(2017, 1, 1))).toBe(52);
+            // Jan 5 2017 is a Thursday — ISO week 1 of 2017
+            expect(adapter.getWeekNumber(new FdDate(2017, 1, 5))).toBe(1);
+        });
+
+        it('should return week name as string for a known date', () => {
+            // Week 1 formatted via toLocaleString('en-US')
+            expect(adapter.getWeekName(new FdDate(2017, 1, 5))).toBe('1');
+        });
+
+        it('should return 5 weeks for a typical month', () => {
+            // October 2017 starts on Sunday, 31 days => 5 weeks (firstDayOfWeek=0)
+            expect(adapter.getAmountOfWeeks(2017, 10, 0)).toBe(5);
+        });
+
+        it('should return 6 weeks when month starts on Saturday with 31 days', () => {
+            // BUG: getAmountOfWeeks uses (day - firstDay + 8) % 7 instead of +7 in the dayOffset
+            // formula. July 2017 starts on Saturday (day 6), 31 days, firstDayOfWeek=0.
+            // Correct answer is 6 rows, but returns 5 due to dayOffset being 0 instead of 6.
+            expect(adapter.getAmountOfWeeks(2017, 7, 0)).toBe(6);
+        });
+
+        it('should return 4 weeks for February starting on Monday in non-leap year', () => {
+            // BUG: Same +8 off-by-one. February 2021 starts on Monday, 28 days, firstDayOfWeek=1.
+            // Correct answer is 4 weeks (perfect alignment), but returns 5.
+            expect(adapter.getAmountOfWeeks(2021, 2, 1)).toBe(4);
+        });
+
+        it('should account for different firstDayOfWeek values', () => {
+            // July 2017: 31 days, starts on Saturday
+            // Both firstDayOfWeek=0 and firstDayOfWeek=1 should yield 6 weeks
+            expect(adapter.getAmountOfWeeks(2017, 7, 0)).toBe(6);
+            expect(adapter.getAmountOfWeeks(2017, 7, 1)).toBe(6);
+        });
+    });
+
+    // Group 5: Time Name Lists
+    describe('time name lists', () => {
+        it('should return 60 minute names with step 1', () => {
+            const names = adapter.getMinuteNames({ twoDigit: false });
+            expect(names.length).toBe(60);
+            expect(names[0]).toBe('0');
+            expect(names[59]).toBe('59');
+        });
+
+        it('should return 12 minute names with step 5', () => {
+            const names = adapter.getMinuteNames({ twoDigit: false, minuteStep: 5 });
+            expect(names.length).toBe(12);
+            expect(names[0]).toBe('0');
+            expect(names[1]).toBe('5');
+            expect(names[11]).toBe('55');
+        });
+
+        it('should return 4 minute names with step 15', () => {
+            const names = adapter.getMinuteNames({ twoDigit: false, minuteStep: 15 });
+            expect(names.length).toBe(4);
+            expect(names[0]).toBe('0');
+            expect(names[1]).toBe('15');
+            expect(names[2]).toBe('30');
+            expect(names[3]).toBe('45');
+        });
+
+        it('should return two-digit minute names when twoDigit is true', () => {
+            const names = adapter.getMinuteNames({ twoDigit: true });
+            expect(names[0]).toBe('00');
+            expect(names[5]).toBe('05');
+            expect(names[10]).toBe('10');
+        });
+
+        it('should return 60 second names', () => {
+            const names = adapter.getSecondNames({ twoDigit: false });
+            expect(names.length).toBe(60);
+            expect(names[0]).toBe('0');
+            expect(names[59]).toBe('59');
+        });
+
+        it('should return two-digit second names when twoDigit is true', () => {
+            const names = adapter.getSecondNames({ twoDigit: true });
+            expect(names[0]).toBe('00');
+            expect(names[5]).toBe('05');
+            expect(names[10]).toBe('10');
+        });
+    });
+
+    // Group 6: Format Introspection (Intl format options)
+    describe('format introspection', () => {
+        it('should detect day period when hour12 is true', () => {
+            expect(adapter.isTimeFormatIncludesDayPeriod({ hour12: true })).toBe(true);
+        });
+
+        it('should not detect day period when hour12 is false', () => {
+            expect(adapter.isTimeFormatIncludesDayPeriod({ hour12: false })).toBe(false);
+        });
+
+        it('should detect hours when hour option is present', () => {
+            expect(adapter.isTimeFormatIncludesHours({ hour: 'numeric' })).toBe(true);
+        });
+
+        it('should not detect hours when hour option is absent', () => {
+            expect(adapter.isTimeFormatIncludesHours({ minute: '2-digit', second: '2-digit' })).toBe(false);
+        });
+
+        it('should detect minutes when minute option is present', () => {
+            expect(adapter.isTimeFormatIncludesMinutes({ minute: '2-digit' })).toBe(true);
+        });
+
+        it('should not detect minutes when minute option is absent', () => {
+            expect(adapter.isTimeFormatIncludesMinutes({ hour: 'numeric', second: '2-digit' })).toBe(false);
+        });
+
+        it('should detect seconds when second option is present', () => {
+            expect(adapter.isTimeFormatIncludesSeconds({ second: '2-digit' })).toBe(true);
+        });
+
+        it('should not detect seconds when second option is absent', () => {
+            expect(adapter.isTimeFormatIncludesSeconds({ hour: 'numeric', minute: '2-digit' })).toBe(false);
+        });
+    });
+
+    // Group 7: Serialization (toIso8601)
+    describe('toIso8601', () => {
+        it('should convert a date to ISO 8601 string', () => {
+            const iso = adapter.toIso8601(new FdDate(2017, 1, 1));
+            expect(iso).toBe('2017-01-01T00:00:00');
+        });
+
+        it('should include time component in ISO 8601 string', () => {
+            const iso = adapter.toIso8601(new FdDate(2017, 1, 1, 14, 30, 45));
+            expect(iso).toBe('2017-01-01T14:30:45');
+        });
+    });
+
+    // Group 8: Validity and Edge Cases
+    describe('validity edge cases', () => {
+        it('should return false for isValid(null)', () => {
+            expect(adapter.isValid(null)).toBe(false);
+        });
+
+        it('should return INVALID_DATE_ERROR for format with invalid date', () => {
+            const result = adapter.format(NaN as unknown as FdDate, {});
+            expect(result).toBe('Invalid Date');
+        });
+    });
+
+    // Group 10: Bug Exposure Tests — FdDatetimeAdapter
+    describe('bug exposure tests', () => {
+        it('should return locale-appropriate first day of week', () => {
+            // BUG: getFirstDayOfWeek() always returns 0 (Sunday) regardless of locale
+            // because FdDatetimeAdapter cannot retrieve this info from Intl.
+            // For de-DE the correct first day of week is 1 (Monday).
+            adapter.setLocale('de-DE');
+            expect(adapter.getFirstDayOfWeek()).toBe(1);
+        });
+
+        it('should correctly set minutes despite internal parameter naming bug', () => {
+            // BUG: setMinutes parameter is named 'hours' (line 187) but functions correctly
+            // because it passes to dateInstance.setMinutes().
+            const date = new FdDate(2017, 1, 1, 10, 0, 0);
+            const result = adapter.setMinutes(date, 45);
+            expect(result.minute).toBe(45);
+            // Verify hours were not affected
+            expect(result.hour).toBe(10);
+        });
+
+        it('should correctly set seconds despite internal parameter naming bug', () => {
+            // BUG: setSeconds parameter is named 'hours' (line 194) but functions correctly
+            // because it passes to dateInstance.setSeconds().
+            const date = new FdDate(2017, 1, 1, 10, 30, 0);
+            const result = adapter.setSeconds(date, 55);
+            expect(result.second).toBe(55);
+            // Verify hours and minutes were not affected
+            expect(result.hour).toBe(10);
+            expect(result.minute).toBe(30);
+        });
+
+        it('should parse time string in en-US format', () => {
+            // KNOWN LIMITATION: _parseTimeString only works with en-US format
+            const result = adapter.parse('10:30 PM', { hour: 'numeric', minute: '2-digit', hour12: true });
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(22);
+            expect(result!.minute).toBe(30);
+        });
+
+        it('should not have fromNow implemented', () => {
+            // KNOWN LIMITATION: fromNow is declared as optional abstract and not implemented
+            expect(adapter.fromNow).toBeUndefined();
+        });
+    });
+
+    // Group 10e: localeChanges observable emission
+    describe('localeChanges', () => {
+        it('should emit on localeChanges when setLocale is called', (done) => {
+            adapter.localeChanges.subscribe(() => {
+                done();
+            });
+            adapter.setLocale('ja-JP');
+        });
+    });
+
+    // Group 11: compareDate with Time Differences
+    describe('compareDate with time differences', () => {
+        it('should return 0 for same date and same time', () => {
+            expect(adapter.compareDate(new FdDate(2017, 1, 1, 10, 30, 0), new FdDate(2017, 1, 1, 10, 30, 0))).toBe(0);
+        });
+
+        it('should return negative when first date has earlier time on same day', () => {
+            expect(adapter.compareDate(new FdDate(2017, 1, 1, 8, 0, 0), new FdDate(2017, 1, 1, 14, 0, 0))).toBeLessThan(
+                0
+            );
+        });
+
+        it('should return positive when first date has later time on same day', () => {
+            expect(
+                adapter.compareDate(new FdDate(2017, 1, 1, 14, 0, 0), new FdDate(2017, 1, 1, 8, 0, 0))
+            ).toBeGreaterThan(0);
+        });
+    });
 });
 
 describe('FdDatetimeAdapter with LOCALE_ID override', () => {
