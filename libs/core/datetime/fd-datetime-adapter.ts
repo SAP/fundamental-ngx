@@ -27,6 +27,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
 
+    /** Cached Intl.RelativeTimeFormat instance, invalidated on locale change. */
+    private _relativeTimeFormatter: Intl.RelativeTimeFormat | null = null;
+
+    /** Cached result of _isFormatDayFirst(), invalidated on locale change. */
+    private _dayFirstCache: boolean | null = null;
+
     /** @hidden */
     constructor() {
         super();
@@ -37,8 +43,57 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** @hidden */
-    fromNow?(date: FdDate): string;
-    // FdDatetimeAdapter does not implement fromNow — native Date has no relative time API.
+    override setLocale(locale: string): void {
+        super.setLocale(locale);
+        this._relativeTimeFormatter = null;
+        this._dayFirstCache = null;
+    }
+
+    /** @hidden */
+    fromNow(date: FdDate): string {
+        if (!this.isValid(date)) {
+            return INVALID_DATE_ERROR;
+        }
+
+        const now = new Date();
+        const target = this._createDateInstanceByFdDate(date);
+        const diffMs = target.getTime() - now.getTime();
+        const absDiffSec = Math.abs(diffMs / 1000);
+
+        let value: number;
+        let unit: Intl.RelativeTimeFormatUnit;
+
+        if (absDiffSec < 60) {
+            value = Math.round(diffMs / 1000);
+            unit = 'second';
+        } else if (absDiffSec < 3600) {
+            value = Math.round(diffMs / 60000);
+            unit = 'minute';
+        } else if (absDiffSec < 86400) {
+            value = Math.round(diffMs / 3600000);
+            unit = 'hour';
+        } else if (absDiffSec < 2592000) {
+            value = Math.round(diffMs / 86400000);
+            unit = 'day';
+        } else if (absDiffSec < 31536000) {
+            value = Math.round(diffMs / 2592000000);
+            unit = 'month';
+        } else {
+            value = Math.round(diffMs / 31536000000);
+            unit = 'year';
+        }
+
+        try {
+            if (!this._relativeTimeFormatter) {
+                this._relativeTimeFormatter = new Intl.RelativeTimeFormat(this.locale, { numeric: 'auto' });
+            }
+            return this._relativeTimeFormatter.format(value, unit);
+        } catch {
+            const absValue = Math.abs(value);
+            const suffix = value < 0 ? 'ago' : 'from now';
+            return `${absValue} ${unit}${absValue !== 1 ? 's' : ''} ${suffix}`;
+        }
+    }
 
     /** Get year */
     getYear(date: FdDate): number {
@@ -270,6 +325,14 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             date = this._parseTimeString(value);
         }
 
+        // Fallback: try locale-aware date parsing when Date.parse() fails
+        if (Number.isNaN(date.valueOf()) && typeof value === 'string') {
+            const parsed = this._parseDateString(value);
+            if (parsed) {
+                date = parsed;
+            }
+        }
+
         return this._createFdDateFromDateInstance(date);
     }
 
@@ -497,7 +560,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param hours The hours as a number between 0 - 24
      * @param minutes The minutes as a number between 0 - 59
      * @param seconds The seconds as a number between 0 - 59
-     * @param milliseconds The milliseconds as a number between 0 - 59
+     * @param milliseconds The milliseconds as a number between 0 - 999
      */
     private _createUTCDateInstance(
         year: number,
@@ -529,21 +592,132 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /**
      * @hidden
      *
-     * Since FdDatetimeAdapter can parse only "en-US" locale
-     * there is no reason to create comprehensive time parse
-     * that can understand plenty of locales.
+     * Parse a time string into hours, minutes, seconds and apply to today's date.
+     * Supports: "14:30", "14:30:45", "10:30 PM", "10:30PM", "14.30" (dot separator).
      *
-     * @param timeStr Time string to parse (E.g. '10:30 PM')
-     * @returns date Native date instance
-     *
+     * @param timeStr Time string to parse
+     * @returns date Native date instance (Invalid Date if parsing fails)
      */
     private _parseTimeString(timeStr: string): Date {
-        /**
-         * Date.parse('10:30 AM') doesn't work so we need do a trick
-         * and prepend it by a date string.
-         */
-        const dateStr = new Intl.DateTimeFormat('en-US').format(new Date());
-        const dateTimeString = `${dateStr} ${timeStr}`;
-        return new Date(Date.parse(dateTimeString));
+        const match = timeStr.trim().match(/^(\d{1,2})[:.](\d{2})(?:[:.](\d{2}))?\s*([AaPp][Mm])?$/);
+        if (!match) {
+            return new Date(NaN);
+        }
+
+        let hours = parseInt(match[1], 10);
+        const minutes = parseInt(match[2], 10);
+        const seconds = match[3] ? parseInt(match[3], 10) : 0;
+        const period = match[4]?.toUpperCase();
+
+        if (period) {
+            // 12-hour format: hours must be 1-12
+            if (hours < 1 || hours > 12) {
+                return new Date(NaN);
+            }
+            if (period === 'AM') {
+                hours = hours === 12 ? 0 : hours;
+            } else {
+                hours = hours === 12 ? 12 : hours + 12;
+            }
+        }
+
+        if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) {
+            return new Date(NaN);
+        }
+
+        const now = new Date();
+        now.setHours(hours, minutes, seconds, 0);
+        return now;
+    }
+
+    /**
+     * @hidden
+     *
+     * Try to parse a date string with common separators (/, -, .)
+     * using locale awareness for day/month ordering.
+     *
+     * @param value Date string (e.g. "12.03.2026", "03/12/2026", "2026-03-12")
+     * @returns Native Date instance or null if parsing fails
+     */
+    private _parseDateString(value: string): Date | null {
+        const match = value.trim().match(/^(\d{1,4})([/\-.])(\d{1,2})\2(\d{1,4})$/);
+        if (!match) {
+            return null;
+        }
+
+        const g1 = parseInt(match[1], 10);
+        const g2 = parseInt(match[3], 10);
+        const g3 = parseInt(match[4], 10);
+
+        let year: number;
+        let month: number;
+        let day: number;
+
+        if (match[1].length === 4) {
+            // YYYY-MM-DD
+            year = g1;
+            month = g2;
+            day = g3;
+        } else if (match[4].length === 4) {
+            // DD/MM/YYYY or MM/DD/YYYY — use locale to disambiguate
+            year = g3;
+            if (this._isFormatDayFirst()) {
+                day = g1;
+                month = g2;
+            } else {
+                month = g1;
+                day = g2;
+            }
+        } else {
+            // Two-digit years are ambiguous — reject
+            return null;
+        }
+
+        // Validate ranges
+        if (month < 1 || month > 12 || day < 1) {
+            return null;
+        }
+
+        // Validate day for the given month/year (catches Feb 30, etc.)
+        const maxDay = new Date(year, month, 0).getDate();
+        if (day > maxDay) {
+            return null;
+        }
+
+        const date = new Date();
+        date.setFullYear(year, month - 1, day);
+        date.setHours(0, 0, 0, 0);
+        return date;
+    }
+
+    /**
+     * @hidden
+     *
+     * Detect whether the current locale formats dates with day before month.
+     * Uses Intl.DateTimeFormat.formatToParts to inspect the locale's ordering.
+     *
+     * @returns true if locale puts day before month (e.g. de-DE, en-GB)
+     */
+    private _isFormatDayFirst(): boolean {
+        if (this._dayFirstCache !== null) {
+            return this._dayFirstCache;
+        }
+        try {
+            const parts = new Intl.DateTimeFormat(this.locale).formatToParts(new Date(2020, 0, 2));
+            for (const part of parts) {
+                if (part.type === 'day') {
+                    this._dayFirstCache = true;
+                    return true;
+                }
+                if (part.type === 'month') {
+                    this._dayFirstCache = false;
+                    return false;
+                }
+            }
+        } catch {
+            // Fallback: month-first (US convention)
+        }
+        this._dayFirstCache = false;
+        return false;
     }
 }

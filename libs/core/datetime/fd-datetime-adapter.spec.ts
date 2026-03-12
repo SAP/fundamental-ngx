@@ -656,9 +656,6 @@ describe('FdDatetimeAdapter', () => {
         });
 
         it('should return false when any argument is null/falsy', () => {
-            // Note: FdDatetimeAdapter.isBetween does not have null guards like DayjsDatetimeAdapter,
-            // but _createDateInstanceByFdDate handles invalid FdDate gracefully.
-            // We test with valid dates and null where possible.
             const date = new FdDate(2017, 1, 15);
             const start = new FdDate(2017, 1, 1);
             const end = new FdDate(2017, 1, 31);
@@ -883,9 +880,10 @@ describe('FdDatetimeAdapter', () => {
             expect(result!.minute).toBe(30);
         });
 
-        it('should not have fromNow implemented', () => {
-            // FdDatetimeAdapter does not implement fromNow — native Date has no relative time API
-            expect(adapter.fromNow).toBeUndefined();
+        it('should have fromNow implemented', () => {
+            // FdDatetimeAdapter now implements fromNow using Intl.RelativeTimeFormat
+            expect(adapter.fromNow).toBeDefined();
+            expect(typeof adapter.fromNow).toBe('function');
         });
     });
 
@@ -915,6 +913,209 @@ describe('FdDatetimeAdapter', () => {
             expect(
                 adapter.compareDate(new FdDate(2017, 1, 1, 14, 0, 0), new FdDate(2017, 1, 1, 8, 0, 0))
             ).toBeGreaterThan(0);
+        });
+    });
+
+    // Group 12: fromNow
+    describe('fromNow', () => {
+        it('should return a string for a past date', () => {
+            const pastDate = adapter.addCalendarDays(adapter.today(), -3);
+            const result = adapter.fromNow(pastDate);
+            expect(typeof result).toBe('string');
+            expect(result.length).toBeGreaterThan(0);
+        });
+
+        it('should return a string for a future date', () => {
+            const futureDate = adapter.addCalendarDays(adapter.today(), 3);
+            const result = adapter.fromNow(futureDate);
+            expect(typeof result).toBe('string');
+            expect(result.length).toBeGreaterThan(0);
+        });
+
+        it('should return INVALID_DATE_ERROR for an invalid date', () => {
+            const invalid = new FdDate(NaN as any, NaN as any, NaN as any);
+            expect(adapter.fromNow(invalid)).toBe('Invalid Date');
+        });
+
+        it('should return a relative string for a date far in the past', () => {
+            const yearAgo = adapter.addCalendarYears(adapter.today(), -2);
+            const result = adapter.fromNow(yearAgo);
+            expect(typeof result).toBe('string');
+            expect(result.length).toBeGreaterThan(0);
+        });
+
+        it('should return a relative string for a date far in the future', () => {
+            const yearsAhead = adapter.addCalendarYears(adapter.today(), 2);
+            const result = adapter.fromNow(yearsAhead);
+            expect(typeof result).toBe('string');
+            expect(result.length).toBeGreaterThan(0);
+        });
+
+        it('should respect locale when formatting', () => {
+            adapter.setLocale('de-DE');
+            const pastDate = adapter.addCalendarDays(adapter.today(), -3);
+            const result = adapter.fromNow(pastDate);
+            expect(typeof result).toBe('string');
+            expect(result.length).toBeGreaterThan(0);
+        });
+    });
+
+    // Group 13: Time Parsing (enhanced _parseTimeString)
+    describe('time parsing', () => {
+        const parseTime = (val: string): FdDate | null => adapter.parse(val, { hour: 'numeric', minute: '2-digit' });
+
+        it('should parse 24-hour time "14:30"', () => {
+            const result = parseTime('14:30');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(14);
+            expect(result!.minute).toBe(30);
+        });
+
+        it('should parse 24-hour time with seconds "14:30:45"', () => {
+            const result = parseTime('14:30:45');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(14);
+            expect(result!.minute).toBe(30);
+            expect(result!.second).toBe(45);
+        });
+
+        it('should parse 12-hour time "10:30 PM"', () => {
+            const result = parseTime('10:30 PM');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(22);
+            expect(result!.minute).toBe(30);
+        });
+
+        it('should parse midnight "12:00 AM"', () => {
+            const result = parseTime('12:00 AM');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(0);
+            expect(result!.minute).toBe(0);
+        });
+
+        it('should parse noon "12:00 PM"', () => {
+            const result = parseTime('12:00 PM');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(12);
+            expect(result!.minute).toBe(0);
+        });
+
+        it('should parse European dot separator "14.30"', () => {
+            const result = parseTime('14.30');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(14);
+            expect(result!.minute).toBe(30);
+        });
+
+        it('should parse case-insensitive AM/PM "10:30 pm"', () => {
+            const result = parseTime('10:30 pm');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(22);
+            expect(result!.minute).toBe(30);
+        });
+
+        it('should parse no-space AM/PM "10:30PM"', () => {
+            const result = parseTime('10:30PM');
+            expect(result).not.toBeNull();
+            expect(result!.hour).toBe(22);
+            expect(result!.minute).toBe(30);
+        });
+
+        it('should reject invalid hours "25:00"', () => {
+            const result = parseTime('25:00');
+            expect(result).not.toBeNull();
+            expect(result!.isDateValid()).toBe(false);
+        });
+
+        it('should reject invalid 12-hour "13:00 PM"', () => {
+            const result = parseTime('13:00 PM');
+            expect(result).not.toBeNull();
+            expect(result!.isDateValid()).toBe(false);
+        });
+    });
+
+    // Group 14: Date Parsing (locale-aware fallback)
+    describe('date parsing', () => {
+        it('should parse ISO-style date via Date.parse (note: UTC interpretation)', () => {
+            // Date.parse("2026-03-12") interprets as UTC midnight.
+            // The adapter converts via local time, so the day may shift by ±1.
+            const result = adapter.parse('2026-03-12');
+            expect(result).not.toBeNull();
+            expect(result!.year).toBe(2026);
+            expect(result!.month).toBe(3);
+            expect(result!.day).toBeGreaterThanOrEqual(11);
+            expect(result!.day).toBeLessThanOrEqual(12);
+            expect(result!.isDateValid()).toBe(true);
+        });
+
+        it('should parse US-style "1/15/2026" (en-US)', () => {
+            adapter.setLocale('en-US');
+            const result = adapter.parse('1/15/2026');
+            expect(result).not.toBeNull();
+            expect(result!.year).toBe(2026);
+            expect(result!.month).toBe(1);
+            expect(result!.day).toBe(15);
+        });
+
+        it('should parse European dot "31.03.2026" as day-first (de-DE) via fallback', () => {
+            // Date.parse fails for "31.03.2026" because 31 is not a valid month
+            // so the locale-aware fallback kicks in and uses de-DE day-first ordering
+            adapter.setLocale('de-DE');
+            const result = adapter.parse('31.03.2026');
+            expect(result).not.toBeNull();
+            expect(result!.year).toBe(2026);
+            expect(result!.month).toBe(3);
+            expect(result!.day).toBe(31);
+        });
+
+        it('should parse UK slash "15/03/2026" as day-first (en-GB) via fallback', () => {
+            // Date.parse fails for "15/03/2026" because 15 is not a valid month
+            // so the locale-aware fallback kicks in and uses en-GB day-first ordering
+            adapter.setLocale('en-GB');
+            const result = adapter.parse('15/03/2026');
+            expect(result).not.toBeNull();
+            expect(result!.year).toBe(2026);
+            expect(result!.month).toBe(3);
+            expect(result!.day).toBe(15);
+        });
+
+        it('should parse YYYY-first "2026/03/12" in any locale', () => {
+            adapter.setLocale('de-DE');
+            const result = adapter.parse('2026/03/12');
+            expect(result).not.toBeNull();
+            expect(result!.year).toBe(2026);
+            expect(result!.month).toBe(3);
+            expect(result!.day).toBe(12);
+        });
+
+        it('should reject overflow dates like Feb 30 via fallback', () => {
+            // "30/02/2026" — Date.parse fails (30 not a valid month),
+            // fallback tries day=30 month=2, detects overflow, returns null,
+            // so _createFdDateFromDateInstance gets NaN → invalid FdDate
+            adapter.setLocale('en-GB');
+            const result = adapter.parse('30/02/2026');
+            expect(result).not.toBeNull();
+            expect(result!.isDateValid()).toBe(false);
+        });
+
+        it('should reject ambiguous two-digit years via fallback', () => {
+            // "31/03/26" — Date.parse fails (31 not a valid month),
+            // fallback sees two-digit year and rejects it
+            adapter.setLocale('en-GB');
+            const result = adapter.parse('31/03/26');
+            expect(result).not.toBeNull();
+            expect(result!.isDateValid()).toBe(false);
+        });
+
+        it('should parse single-digit day and month via fallback', () => {
+            // "15/3/2026" — Date.parse fails (15 not a valid month),
+            // fallback uses en-GB day-first: day=15, month=3
+            adapter.setLocale('en-GB');
+            const result = adapter.parse('15/3/2026');
+            expect(result).not.toBeNull();
+            expect(result!.year).toBe(2026);
+            expect(result!.month).toBe(3);
+            expect(result!.day).toBe(15);
         });
     });
 });
