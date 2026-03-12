@@ -1,0 +1,22 @@
+<fd-doc-page>
+    <header [isDeprecated]="falseSignal">Line Clamp</header>
+
+    <description>
+        <p>
+            <code>LineClampDirective</code> is used to truncate multiline text with an ellipsis after a specified number
+            of lines.
+        </p>
+        <p>
+            The directive uses CSS <code>-webkit-line-clamp</code> property when supported by the browser, with a
+            JavaScript fallback for older browsers.
+        </p>
+        <p>
+            Use <code>fdkLineClamp</code> on a container element and <code>fdLineClampTarget</code> on the text element
+            inside it.
+        </p>
+    </description>
+
+    <import module="LineClampModule" subPackage="utils"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>
