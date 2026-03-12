@@ -199,7 +199,18 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get first day of week */
     getFirstDayOfWeek(): number {
-        // can't retrieve this info from Intl object or Date object, default to Sunday.
+        try {
+            const locale = new Intl.Locale(this.locale);
+            const weekInfo: { firstDay: number } | undefined =
+                (locale as any).weekInfo ?? (locale as any).getWeekInfo?.();
+            if (weekInfo) {
+                // Intl.Locale weekInfo uses 1=Monday..7=Sunday
+                // Adapter convention is 0=Sunday..6=Saturday
+                return weekInfo.firstDay === 7 ? 0 : weekInfo.firstDay;
+            }
+        } catch {
+            // Fallback for environments without Intl.Locale.weekInfo
+        }
         return 0;
     }
 

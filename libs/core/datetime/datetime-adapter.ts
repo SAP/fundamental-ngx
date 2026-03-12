@@ -358,7 +358,7 @@ export abstract class DatetimeAdapter<D> {
         const firstOfMonth = new Date(year, month - 1, 1);
         const lastOfMonth = new Date(year, month, 0);
 
-        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
+        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 7) % 7;
         const used = dayOffset + lastOfMonth.getDate();
 
         return Math.ceil(used / 7);
