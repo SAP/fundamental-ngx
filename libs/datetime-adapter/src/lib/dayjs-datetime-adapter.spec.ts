@@ -811,17 +811,36 @@ describe('DayjsDatetimeAdapter', () => {
             }
         });
 
-        it('should parse an FdDate instance by converting to string', () => {
-            // BUG: DayjsDatetimeAdapter has direct dependency on FdDate (line 255-258).
-            // This documents the coupling between the two.
-            const { FdDate } = require('@fundamental-ngx/core/datetime');
-            const fdDate = new FdDate(2017, 1, 15, 10, 30, 0);
-            const result = adapter.parse(fdDate);
+        it('should parse a native Date via dayjs constructor', () => {
+            const result = adapter.parse(new Date(2017, 0, 15, 10, 30, 0));
+            expect(result).not.toBeNull();
+            expect(result!.isValid()).toBe(true);
+            expect(result!.year()).toBe(2017);
+            expect(result!.month()).toBe(0);
+            expect(result!.date()).toBe(15);
+        });
+
+        it('should parse an object with toString() by converting to string first', () => {
+            // Objects with a meaningful toString() (e.g. FdDate) are converted to string
+            // before passing to dayjs, avoiding objectSupport plugin misinterpretation
+            // (0-based month, 'date' vs 'day' field name mismatch).
+            const fdDateLike = {
+                year: 2017,
+                month: 1,
+                day: 15,
+                hour: 10,
+                minute: 30,
+                second: 0,
+                toString: () => '2017-01-15T10:30:00'
+            };
+            const result = adapter.parse(fdDateLike);
             expect(result).not.toBeNull();
             expect(result!.isValid()).toBe(true);
             expect(result!.year()).toBe(2017);
             expect(result!.month()).toBe(0); // dayjs month is 0-based
             expect(result!.date()).toBe(15);
+            expect(result!.hour()).toBe(10);
+            expect(result!.minute()).toBe(30);
         });
 
         it('should parse ambiguous date string with fallback chain', () => {

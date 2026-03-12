@@ -9,7 +9,7 @@ import utc from 'dayjs/plugin/utc';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -252,9 +252,22 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     parse(value: any, parseFormat: string = ''): Dayjs | null {
         if (value && typeof value === 'string') {
             return this._createDayjsDate(value, parseFormat);
-        } else if (value instanceof FdDate) {
-            // FdDate instance may be incorrectly parsed by DayJS
-            value = value.toString();
+        }
+
+        // If value is a non-Date object with a toString() method (e.g. FdDate),
+        // convert to string first to avoid misinterpretation by dayjs objectSupport plugin
+        // (which uses 0-based months and 'date' instead of 'day').
+        if (
+            value &&
+            typeof value === 'object' &&
+            !(value instanceof Date) &&
+            !dayjs.isDayjs(value) &&
+            typeof value.toString === 'function'
+        ) {
+            const str = value.toString();
+            if (str && str !== '[object Object]') {
+                return this._createDayjsDate(str).locale(this.locale);
+            }
         }
 
         return value ? this._createDayjsDate(value).locale(this.locale) : null;
