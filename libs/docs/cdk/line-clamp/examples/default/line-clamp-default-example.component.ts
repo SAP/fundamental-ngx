@@ -16,7 +16,17 @@ import { StepInputComponent } from '@fundamental-ngx/core/step-input';
         FormLabelComponent,
         FormsModule,
         StepInputComponent
-    ]
+    ],
+    styles: `
+        .fd-text {
+            font-size: var(--sapFontSize);
+            line-height: normal;
+            color: var(--sapTextColor);
+            font-family: var(--sapFontFamily);
+            font-weight: normal;
+            box-sizing: border-box;
+        }
+    `
 })
 export class LineClampDefaultExampleComponent {
     lineClampEnabled = signal(true);
