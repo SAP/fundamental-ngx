@@ -390,6 +390,14 @@ describe('FdDatetimeAdapter', () => {
         expect(adapter.clone(date)).not.toBe(date);
     });
 
+    it('should throw when cloning null', () => {
+        expect(() => adapter.clone(null as any)).toThrow('FdDatetimeAdapter: Cannot clone a null/undefined date.');
+    });
+
+    it('should throw when cloning undefined', () => {
+        expect(() => adapter.clone(undefined as any)).toThrow('FdDatetimeAdapter: Cannot clone a null/undefined date.');
+    });
+
     it('should compare dates', () => {
         expect(adapter.compareDate(new FdDate(2017, 1, 1), new FdDate(2017, 1, 2))).toBeLessThan(0);
         expect(adapter.compareDate(new FdDate(2017, 1, 1), new FdDate(2017, 2, 1))).toBeLessThan(0);
@@ -699,15 +707,13 @@ describe('FdDatetimeAdapter', () => {
         });
 
         it('should return 6 weeks when month starts on Saturday with 31 days', () => {
-            // BUG: getAmountOfWeeks uses (day - firstDay + 8) % 7 instead of +7 in the dayOffset
-            // formula. July 2017 starts on Saturday (day 6), 31 days, firstDayOfWeek=0.
-            // Correct answer is 6 rows, but returns 5 due to dayOffset being 0 instead of 6.
+            // Fixed: getAmountOfWeeks was using +8 instead of +7, causing off-by-one.
+            // July 2017 starts on Saturday (day 6), 31 days, firstDayOfWeek=0.
             expect(adapter.getAmountOfWeeks(2017, 7, 0)).toBe(6);
         });
 
         it('should return 4 weeks for February starting on Monday in non-leap year', () => {
-            // BUG: Same +8 off-by-one. February 2021 starts on Monday, 28 days, firstDayOfWeek=1.
-            // Correct answer is 4 weeks (perfect alignment), but returns 5.
+            // Fixed: Same +7 correction. February 2021 starts on Monday, 28 days, firstDayOfWeek=1.
             expect(adapter.getAmountOfWeeks(2021, 2, 1)).toBe(4);
         });
 
@@ -827,19 +833,31 @@ describe('FdDatetimeAdapter', () => {
         });
     });
 
-    // Group 10: Bug Exposure Tests — FdDatetimeAdapter
-    describe('bug exposure tests', () => {
+    // Group 9: isBetween null safety
+    describe('isBetween null safety', () => {
+        it('should return false when dateToCheck is null', () => {
+            expect(adapter.isBetween(null as any, new FdDate(2017, 1, 1), new FdDate(2017, 12, 31))).toBe(false);
+        });
+
+        it('should return false when startDate is null', () => {
+            expect(adapter.isBetween(new FdDate(2017, 6, 15), null as any, new FdDate(2017, 12, 31))).toBe(false);
+        });
+
+        it('should return false when endDate is null', () => {
+            expect(adapter.isBetween(new FdDate(2017, 6, 15), new FdDate(2017, 1, 1), null as any)).toBe(false);
+        });
+    });
+
+    // Group 10: Regression Tests — FdDatetimeAdapter (previously bugs, now fixed)
+    describe('regression tests', () => {
         it('should return locale-appropriate first day of week', () => {
-            // BUG: getFirstDayOfWeek() always returns 0 (Sunday) regardless of locale
-            // because FdDatetimeAdapter cannot retrieve this info from Intl.
-            // For de-DE the correct first day of week is 1 (Monday).
+            // Fixed: getFirstDayOfWeek() now uses Intl.Locale.weekInfo to respect locale
             adapter.setLocale('de-DE');
             expect(adapter.getFirstDayOfWeek()).toBe(1);
         });
 
-        it('should correctly set minutes despite internal parameter naming bug', () => {
-            // BUG: setMinutes parameter is named 'hours' (line 187) but functions correctly
-            // because it passes to dateInstance.setMinutes().
+        it('should correctly set minutes', () => {
+            // Fixed: setMinutes parameter renamed from 'hours' to 'minutes'
             const date = new FdDate(2017, 1, 1, 10, 0, 0);
             const result = adapter.setMinutes(date, 45);
             expect(result.minute).toBe(45);
@@ -847,9 +865,8 @@ describe('FdDatetimeAdapter', () => {
             expect(result.hour).toBe(10);
         });
 
-        it('should correctly set seconds despite internal parameter naming bug', () => {
-            // BUG: setSeconds parameter is named 'hours' (line 194) but functions correctly
-            // because it passes to dateInstance.setSeconds().
+        it('should correctly set seconds', () => {
+            // Fixed: setSeconds parameter renamed from 'hours' to 'seconds'
             const date = new FdDate(2017, 1, 1, 10, 30, 0);
             const result = adapter.setSeconds(date, 55);
             expect(result.second).toBe(55);
@@ -859,7 +876,7 @@ describe('FdDatetimeAdapter', () => {
         });
 
         it('should parse time string in en-US format', () => {
-            // KNOWN LIMITATION: _parseTimeString only works with en-US format
+            // Known limitation: _parseTimeString only works with en-US format
             const result = adapter.parse('10:30 PM', { hour: 'numeric', minute: '2-digit', hour12: true });
             expect(result).not.toBeNull();
             expect(result!.hour).toBe(22);
@@ -867,7 +884,7 @@ describe('FdDatetimeAdapter', () => {
         });
 
         it('should not have fromNow implemented', () => {
-            // KNOWN LIMITATION: fromNow is declared as optional abstract and not implemented
+            // FdDatetimeAdapter does not implement fromNow — native Date has no relative time API
             expect(adapter.fromNow).toBeUndefined();
         });
     });

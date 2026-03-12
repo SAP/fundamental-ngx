@@ -308,7 +308,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     }
 
     toIso8601(date: Moment): string {
-        return this.clone(date).toISOString();
+        return this.clone(date).format('YYYY-MM-DDTHH:mm:ss');
     }
 
     isTimeFormatIncludesDayPeriod(displayFormat: string): boolean {

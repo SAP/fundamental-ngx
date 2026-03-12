@@ -262,7 +262,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** Try to parse a string to a date object */
     parse(value: any, parseFormat: string = ''): Dayjs | null {
         if (value && typeof value === 'string') {
-            return this._createDayjsDate(value, parseFormat);
+            return this._createDayjsDate(value, parseFormat).locale(this.locale);
         }
 
         // If value is a non-Date object with a toString() method (e.g. FdDate),

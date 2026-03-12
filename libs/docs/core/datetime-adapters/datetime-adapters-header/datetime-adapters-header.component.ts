@@ -7,8 +7,7 @@ import {
     DocPageComponent,
     ExampleFile,
     HeaderComponent,
-    HeaderTabsComponent,
-    ImportComponent
+    HeaderTabsComponent
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
@@ -19,7 +18,6 @@ import {
         HeaderComponent,
         DescriptionComponent,
         CodeSnippetComponent,
-        ImportComponent,
         HeaderTabsComponent,
         MessageStripComponent,
         RouterLink

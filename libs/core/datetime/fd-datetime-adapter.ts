@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform';
-import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+import { inject, Injectable, LOCALE_ID } from '@angular/core';
 
 import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE, range } from '@fundamental-ngx/cdk/utils';
 
@@ -28,14 +28,17 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     private readonly _fixYearsRangeIssue: boolean;
 
     /** @hidden */
-    constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
+    constructor() {
         super();
-        super.setLocale(localeId);
+        const localeId = inject(LOCALE_ID, { optional: true });
+        const platform = inject(Platform);
+        super.setLocale(localeId || 'en-US');
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
     }
 
     /** @hidden */
     fromNow?(date: FdDate): string;
+    // FdDatetimeAdapter does not implement fromNow — native Date has no relative time API.
 
     /** Get year */
     getYear(date: FdDate): number {
@@ -184,16 +187,16 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** Set minutes */
-    setMinutes(date: FdDate, hours: number): FdDate {
+    setMinutes(date: FdDate, minutes: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
-        dateInstance.setMinutes(hours);
+        dateInstance.setMinutes(minutes);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
     /** Set seconds */
-    setSeconds(date: FdDate, hours: number): FdDate {
+    setSeconds(date: FdDate, seconds: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
-        dateInstance.setSeconds(hours);
+        dateInstance.setSeconds(seconds);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
@@ -318,6 +321,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Clone a date object */
     clone(date: FdDate): FdDate {
+        if (!date) {
+            throw new Error('FdDatetimeAdapter: Cannot clone a null/undefined date.');
+        }
         return new FdDate(date.year, date.month, date.day, date.hour, date.minute, date.second);
     }
 
@@ -331,6 +337,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Check if date between given dates */
     isBetween(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate): boolean {
+        if (!dateToCheck || !startDate || !endDate) {
+            return false;
+        }
         const date = this._createDateInstanceByFdDate(dateToCheck);
         const start = this._createDateInstanceByFdDate(startDate);
         const end = this._createDateInstanceByFdDate(endDate);

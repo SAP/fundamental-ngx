@@ -1,6 +1,6 @@
-/** Adds 0 if number is less then 10 */
-export function _leftPad(n: number): string {
-    return n === n % 10 ? `0${n}` : `${n}`;
+/** Pads a number to at least 2 digits. Years are padded to at least 4 digits. */
+export function _leftPad(n: number, minLength = 2): string {
+    return String(n).padStart(minLength, '0');
 }
 
 /** Converts date to ISO 8601 date-time string without timezone designator (`YYYY-MM-DDTHH:mm:ss`). */
@@ -13,7 +13,7 @@ export function toIso8601(fdDate: {
     second: number;
 }): string {
     return [
-        [fdDate.year, _leftPad(fdDate.month), _leftPad(fdDate.day)].join('-'),
+        [_leftPad(fdDate.year, 4), _leftPad(fdDate.month), _leftPad(fdDate.day)].join('-'),
         'T',
         [_leftPad(fdDate.hour), _leftPad(fdDate.minute), _leftPad(fdDate.second)].join(':')
     ].join('');
