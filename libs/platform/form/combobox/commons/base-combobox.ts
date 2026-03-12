@@ -832,7 +832,8 @@ export abstract class BaseCombobox
             )
             .subscribe((data) => {
                 data.forEach((template: FdpComboboxItemDef | TemplateDirective) => {
-                    switch (template.name) {
+                    const templateName = template instanceof TemplateDirective ? template.name() : template.name;
+                    switch (templateName) {
                         case 'optionItemTemplate':
                             this.optionItemTemplate = template.templateRef;
                             break;

@@ -282,6 +282,14 @@ export class SelectComponent<T = any>
     @Input()
     tabOutStrategy: 'close' | 'closeAndSelect' = 'close';
 
+    /** Value for aria-haspopup */
+    @Input()
+    ariaHasPopup = 'listbox';
+
+    /** Value for aria-description */
+    @Input()
+    ariaDescription: string;
+
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();

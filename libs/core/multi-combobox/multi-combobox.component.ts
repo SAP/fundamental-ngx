@@ -1113,7 +1113,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      */
     private _assignCustomTemplates(): void {
         this.customTemplates().forEach((template) => {
-            switch (template.name) {
+            switch (template.name()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;
