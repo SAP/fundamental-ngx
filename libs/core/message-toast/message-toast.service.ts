@@ -9,15 +9,15 @@ import { MessageToastRef } from './ref/message-toast.ref';
 
 @Injectable()
 export class MessageToastService<P = any> extends BaseDismissibleToastService<MessageToastConfig<P>> {
-    /** @Hidden */
+    /** @hidden */
     protected toastTextComponent = MessageToastTextComponent;
-    /** @Hidden */
+    /** @hidden */
     protected toastContainerComponent = MessageToastComponent;
-    /** @Hidden */
+    /** @hidden */
     protected toastDataInjectionToken = MESSAGE_TOAST_DATA;
-    /** @Hidden */
+    /** @hidden */
     protected toastPositionStrategy = ToastBottomCenterPosition;
-    /** @Hidden */
+    /** @hidden */
     protected override defaultConfig = inject(MESSAGE_TOAST_CONFIG);
 
     /**
