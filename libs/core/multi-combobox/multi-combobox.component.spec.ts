@@ -172,6 +172,29 @@ describe('MultiComboBox component', () => {
         expect(propagateChangeSpy).toHaveBeenCalled();
     });
 
+    it('should not move focus to search field when deselecting all items', () => {
+        const focusToSearchFieldSpy = jest.spyOn(<any>component, '_focusToSearchField');
+        const item = component._suggestions()[0];
+
+        // Select an item first
+        component._toggleSelection(item);
+        fixture.detectChanges();
+
+        expect(item.selected).toBe(true);
+        expect(component._selectedSuggestions().length).toEqual(1);
+
+        // Toggle selection to deselect the only item
+        component._toggleSelection(item);
+        fixture.detectChanges();
+
+        // Verify item was deselected
+        expect(item.selected).toBe(false);
+        expect(component._selectedSuggestions().length).toEqual(0);
+
+        // Verify that _focusToSearchField was NOT called
+        expect(focusToSearchFieldSpy).not.toHaveBeenCalled();
+    });
+
     it('should select and unselect all items', () => {
         const selectEvent = new KeyboardEvent('keydown', {
             keyCode: A,
