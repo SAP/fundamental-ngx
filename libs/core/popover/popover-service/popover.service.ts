@@ -502,6 +502,12 @@ export class PopoverService {
         if (config.resizable !== undefined) {
             this.resizable.set(unwrap(config.resizable));
         }
+        if (config.bodyRole !== undefined) {
+            this._bodyRole = unwrap(config.bodyRole);
+        }
+        if (config.bodyId !== undefined) {
+            this._bodyId.set(unwrap(config.bodyId));
+        }
 
         if (config.isOpen !== undefined) {
             const isOpenValue = unwrap(config.isOpen);

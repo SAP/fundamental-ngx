@@ -1,21 +1,19 @@
 import {
+    booleanAttribute,
+    computed,
     Directive,
     effect,
     ElementRef,
     EmbeddedViewRef,
-    Inject,
+    inject,
     input,
-    OnInit,
-    Optional,
     Renderer2,
-    Self,
     TemplateRef,
-    Type,
     ViewContainerRef
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
-import { PopoverConfig, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
+import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
@@ -40,11 +38,11 @@ let inlineHelpId = 0;
     selector: '[fd-inline-help]:not([fd-inline-help-template]), [fd-inline-help-template]:not([fd-inline-help])',
     providers: [PopoverService],
     host: {
-        '[class.fd-inline-help__trigger]': 'true'
-    },
-    standalone: true
+        '[class.fd-inline-help__trigger]': 'true',
+        '[attr.aria-describedby]': 'bodyId()'
+    }
 })
-export class InlineHelpDirective implements OnInit {
+export class InlineHelpDirective {
     /** Inline help text to display inside generated popover */
     readonly inlineHelpContent = input<string | TemplateRef<any>>('', { alias: 'fd-inline-help' });
 
@@ -61,45 +59,81 @@ export class InlineHelpDirective implements OnInit {
     /** Whether the popover should close when a click is made outside its boundaries. */
     readonly closeOnOutsideClick = input(false);
 
-    /** @hidden */
-    _describedBy = '';
+    /** Additional CSS class(es) to apply to the popover body. */
+    readonly additionalBodyClass = input<string | null>(null);
 
-    /** @hidden Internal body ID for ARIA */
-    protected _bodyId = '';
+    /** Whether the inline help is disabled. */
+    readonly disabled = input(false, { transform: booleanAttribute });
+
+    /** ID for the Inline Help Popover body */
+    readonly bodyId = input(`fd-inline-help-${inlineHelpId++}`);
+
+    /** aria-role for the Inline Help Popover body */
+    readonly bodyRole = input('tooltip');
+
+    /** @hidden Combined internal + user-provided body classes. */
+    readonly combinedBodyClass = computed(() => {
+        const parts = [this._additionalBodyClass];
+        const userClass = this.additionalBodyClass();
+        if (userClass) {
+            parts.push(userClass);
+        }
+        return parts.join(' ');
+    });
+
+    /** @hidden Popover configuration computed from all inputs. */
+    readonly popoverConfig = computed(() => ({
+        placement: this.placement() ?? 'bottom',
+        triggers: this.triggers(),
+        noArrow: false,
+        closeOnEscapeKey: false,
+        closeOnOutsideClick: this.closeOnOutsideClick(),
+        additionalBodyClass: this.combinedBodyClass(),
+        disabled: this.disabled(),
+        bodyRole: this.bodyRole(),
+        bodyId: this.bodyId()
+    }));
 
     /** @hidden */
-    protected _bodyRole = 'tooltip';
+    private readonly _popoverService = inject(PopoverService);
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private readonly _viewContainerRef = inject(ViewContainerRef);
+
+    /** @hidden */
+    private readonly _icon = inject(FD_ICON_COMPONENT, { optional: true, self: true });
 
     /** @hidden */
     private _additionalBodyClass = '';
 
     /** @hidden */
-    private _srViewRef: EmbeddedViewRef<any>;
+    private _srViewRef: EmbeddedViewRef<any> | null = null;
 
     /** @hidden */
-    constructor(
-        private _popoverService: PopoverService,
-        private _elementRef: ElementRef,
-        private _renderer: Renderer2,
-        private readonly _viewContainerRef: ViewContainerRef,
-        @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
-    ) {
-        // Watch for placement changes and sync with popover service
+    private _initialised = false;
+
+    /** @hidden */
+    constructor() {
+        this._applyAdditionalInlineHelpClass();
+
+        // Effect to initialise and reactively update the popover config
         effect(() => {
-            this._popoverService.placement.set(this.placement() ?? 'bottom');
+            const config = this.popoverConfig();
+            if (!this._initialised) {
+                this._popoverService.initialise(this._elementRef, config);
+                this._initialised = true;
+            } else {
+                this._popoverService.refreshConfiguration(config);
+            }
         });
 
-        // Watch for triggers changes and sync with popover service
-        effect(() => {
-            this._popoverService.triggers.set(this.triggers());
-        });
-
-        // Watch for closeOnOutsideClick changes and sync with popover service
-        effect(() => {
-            this._popoverService.closeOnOutsideClick.set(this.closeOnOutsideClick());
-        });
-
-        // Watch for content changes
+        // Effect to watch for content changes
         effect(() => {
             const content = this.inlineHelpContent();
             const text = typeof content === 'string' ? content : null;
@@ -108,33 +142,6 @@ export class InlineHelpDirective implements OnInit {
             this._popoverService.updateContent(text, template);
             this._setupScreenreaderElement(content);
         });
-
-        // Set role and id for ARIA
-        const bodyId = `fd-inline-help-${inlineHelpId++}`;
-        this._bodyRole = 'tooltip';
-        this._bodyId = bodyId;
-        this._elementRef.nativeElement.setAttribute('aria-describedby', bodyId);
-        this._describedBy = bodyId;
-
-        // Apply additional inline help classes
-        this._applyAdditionalInlineHelpClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        // Initialize popover with element and config
-        const config: PopoverConfig = {
-            placement: this.placement() ?? 'bottom',
-            triggers: this.triggers(),
-            noArrow: false,
-            closeOnEscapeKey: false,
-            closeOnOutsideClick: this.closeOnOutsideClick(),
-            additionalBodyClass: this._additionalBodyClass,
-            bodyRole: this._bodyRole,
-            bodyId: this._bodyId
-        };
-
-        this._popoverService.initialise(this._elementRef, config);
     }
 
     /** @hidden */
@@ -153,6 +160,13 @@ export class InlineHelpDirective implements OnInit {
     /** @hidden */
     private _setupScreenreaderElement(content: string | Nullable<TemplateRef<any>>): void {
         this._viewContainerRef.clear();
+
+        // Destroy previous embedded view if any
+        if (this._srViewRef) {
+            this._srViewRef.destroy();
+            this._srViewRef = null;
+        }
+
         let srElement = this._renderer.createElement('span');
         if (typeof content === 'string') {
             srElement.innerText = content;
