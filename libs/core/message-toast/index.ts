@@ -1,6 +1,5 @@
 export * from './components/message-toast-text.component';
 export * from './config/message-toast.config';
-export * from './constants/message-toast.animation';
 export * from './constants/message-toast.token';
 export * from './message-toast.component';
 export * from './message-toast.module';
