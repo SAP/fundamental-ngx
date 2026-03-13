@@ -1,14 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TemplateDirective } from './template.directive';
 
 @Component({
-    standalone: true,
     imports: [TemplateDirective],
     template: '<ng-template fdkTemplate="Header">Template content</ng-template>'
 })
 class TestComponent {
-    @ViewChild(TemplateDirective) templateDirectiveRef: TemplateDirective;
+    readonly templateDirectiveRef = viewChild.required(TemplateDirective);
 }
 
 describe('TemplateDirective', () => {
@@ -29,10 +28,10 @@ describe('TemplateDirective', () => {
 
     it('should create an instance of the component and directive', () => {
         expect(component).toBeTruthy();
-        expect(component.templateDirectiveRef).toBeTruthy();
+        expect(component.templateDirectiveRef()).toBeTruthy();
     });
 
     it('should return the name of the template', () => {
-        expect(component.templateDirectiveRef.getName()).toBe('Header');
+        expect(component.templateDirectiveRef().getName()).toBe('Header');
     });
 });

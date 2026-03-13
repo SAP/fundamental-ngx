@@ -592,10 +592,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         this._propagateChange(fromTokenCloseClick);
 
-        if (!this._selectedSuggestions().length) {
-            this._focusToSearchField();
-        }
-
         this._cd.detectChanges();
     }
 
@@ -1113,7 +1109,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      */
     private _assignCustomTemplates(): void {
         this.customTemplates().forEach((template) => {
-            switch (template.name) {
+            switch (template.name()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;

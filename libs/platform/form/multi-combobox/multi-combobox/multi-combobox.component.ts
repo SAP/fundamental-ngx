@@ -158,10 +158,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this._propagateChange();
 
-        if (!this._selectedSuggestions.length) {
-            this._focusToSearchField();
-        }
-
         this.detectChanges();
     }
 
