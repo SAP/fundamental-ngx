@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import {
     MenuComponent,
@@ -30,7 +31,7 @@ type PlacementOption =
     selector: 'fd-menu-placement-example',
     template: `
         <h4 class="fd-title fd-title--h5 fd-margin-bottom--sm">Placement Options</h4>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: 1rem;">
+        <div class="sap-flex sap-flex--gap-small sap-flex--wrap sap-flex--align-items-flex-end sap-margin-bottom-small">
             <div>
                 <label fd-form-label for="placement">Placement:</label>
                 <fd-select id="placement" [(ngModel)]="placement" style="width: 10rem;">
@@ -47,12 +48,18 @@ type PlacementOption =
                     <fd-option value="equal">equal</fd-option>
                 </fd-select>
             </div>
+            <fd-checkbox label="fixedPosition" [(ngModel)]="fixedPosition"></fd-checkbox>
         </div>
 
-        <div style="display: flex; justify-content: center; padding: 3rem;">
+        <div class="sap-flex sap-flex--justify-center sap-padding-x-large sap-margin-y-large">
             <button fd-button label="Open Menu" style="min-width: 200px;" [fdMenuTrigger]="placementMenu"></button>
 
-            <fd-menu #placementMenu [placement]="placement()" [fillControlMode]="fillMode()">
+            <fd-menu
+                #placementMenu
+                [placement]="placement()"
+                [fillControlMode]="fillMode()"
+                [fixedPosition]="fixedPosition"
+            >
                 <li fd-menu-item>
                     <a href="#" fd-menu-interactive>
                         <span fd-menu-title>Option 1</span>
@@ -75,7 +82,7 @@ type PlacementOption =
         <p class="fd-margin-bottom--sm">
             The <code>[triggers]</code> input controls how the menu opens. Default is <code>['click']</code>.
         </p>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div class="sap-flex sap-flex--gap-small sap-flex--wrap">
             <div>
                 <p class="fd-margin-bottom--xs"><strong>Click (default)</strong></p>
                 <button fd-button label="Click to open" [fdMenuTrigger]="clickMenu"></button>
@@ -109,6 +116,7 @@ type PlacementOption =
     `,
     imports: [
         ButtonComponent,
+        CheckboxComponent,
         MenuComponent,
         MenuItemComponent,
         MenuInteractiveComponent,
@@ -141,4 +149,7 @@ export class MenuPlacementExampleComponent {
 
     /** Current fill mode setting */
     fillMode = signal<PopoverFillMode | null>(null);
+
+    /** Whether to prevent position flipping at viewport edges */
+    fixedPosition = false;
 }
