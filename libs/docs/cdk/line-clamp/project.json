@@ -1,0 +1,8 @@
+{
+    "name": "docs-cdk-line-clamp",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/docs/cdk/line-clamp",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "tags": ["type:lib", "scope:docs"]
+}

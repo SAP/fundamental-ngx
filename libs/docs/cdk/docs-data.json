@@ -51,6 +51,10 @@
             "name": "Initial Focus"
         },
         {
+            "url": "cdk/line-clamp",
+            "name": "Line Clamp"
+        },
+        {
             "url": "cdk/breakpoint",
             "name": "Breakpoint"
         }

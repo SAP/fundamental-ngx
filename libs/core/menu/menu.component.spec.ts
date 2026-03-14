@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -215,21 +215,21 @@ describe('MenuComponent', () => {
             expect(menu.isOpen()).toBe(false);
 
             testComponent.trigger.nativeElement.click();
+            flush();
             fixture.detectChanges();
-            tick();
 
             expect(menu.isOpen()).toBe(true);
         }));
 
         it('should toggle menu on repeated trigger clicks', fakeAsync(() => {
             testComponent.trigger.nativeElement.click();
+            flush();
             fixture.detectChanges();
-            tick();
             expect(menu.isOpen()).toBe(true);
 
             testComponent.trigger.nativeElement.click();
+            flush();
             fixture.detectChanges();
-            tick();
             expect(menu.isOpen()).toBe(false);
         }));
     });
