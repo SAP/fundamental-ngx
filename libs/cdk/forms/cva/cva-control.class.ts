@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, DestroyRef, inject, Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CvaDirective } from './cva.directive';
 
 /**
@@ -28,12 +28,18 @@ export class CvaControl<T> {
 
     /** @hidden */
     listenToChanges(): void {
-        this.cvaDirective?.markForCheck.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._changeDetector.detectChanges();
-        });
+        if (this.cvaDirective) {
+            outputToObservable(this.cvaDirective.markForCheck)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this._changeDetector.detectChanges();
+                });
 
-        this.cvaDirective?.detectChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._changeDetector.detectChanges();
-        });
+            outputToObservable(this.cvaDirective.detectChanges)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this._changeDetector.detectChanges();
+                });
+        }
     }
 }
