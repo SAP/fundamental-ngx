@@ -98,16 +98,16 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         hasCloseButton: true
     });
 
-    /** Popover placement */
+    /** Menu placement */
     readonly placement = input<Placement>('bottom-start');
 
-    /** Whether to close popover on escape key */
+    /** Whether to close menu on escape key */
     readonly closeOnEscapeKey = input(true, { transform: booleanAttribute });
 
     /** Whether to auto-capture focus when opened */
     readonly focusAutoCapture = input(true, { transform: booleanAttribute });
 
-    /** Whether the menu/popover is disabled */
+    /** Whether the menu is disabled */
     readonly disabled = input(false, { transform: booleanAttribute });
 
     /** Whether to disable scrollbar */
@@ -117,7 +117,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     readonly triggers = input<(string | TriggerConfig)[]>(['click']);
 
     /**
-     * Preset options for the popover body width.
+     * Preset options for the menu body width.
      * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
      * * `equal` will apply a width to the body equivalent to the width of the control.
      * * Leave blank for no effect.
@@ -130,11 +130,23 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** Whether to hide the arrow */
     readonly noArrow = input(true, { transform: booleanAttribute });
 
-    /** Whether the popover should trap focus within its boundaries */
+    /** Whether the menu should trap focus within its boundaries */
     readonly focusTrapped = input(true, { transform: booleanAttribute });
 
-    /** Additional CSS classes for the popover body container */
+    /** Additional CSS classes for the menu body container */
     readonly additionalBodyClass = input<string | null>(null);
+
+    /** Whether to close the menu on router navigation start */
+    readonly closeOnNavigation = input(true, { transform: booleanAttribute });
+
+    /** Whether to move focus back to the trigger after the menu is closed */
+    readonly restoreFocusOnClose = input(true, { transform: booleanAttribute });
+
+    /** The element to which the menu overlay is attached */
+    readonly appendTo = input<ElementRef | Element | null>(null);
+
+    /** Whether position shouldn't change when the menu approaches the corner of the page */
+    readonly fixedPosition = input(false, { transform: booleanAttribute });
 
     /** Two-way binding for menu open state */
     readonly isOpen = model(false);
@@ -145,7 +157,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** Emits array of active menu items */
     readonly activePath = output<MenuItemComponent[]>();
 
-    /** Event emitted right before the popover is being opened. */
+    /** Event emitted right before the menu is being opened. */
     readonly beforeOpen = output<void>();
 
     /** @hidden Injected dependencies using inject() function */
@@ -254,6 +266,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
             this._popoverService.fillControlMode.set(this.fillControlMode() ?? cfg.fillControlMode ?? null);
             this._popoverService.closeOnOutsideClick.set(this.closeOnOutsideClick() ?? cfg.closeOnOutsideClick ?? true);
             this._popoverService.noArrow.set(this.noArrow() ?? cfg.noArrow ?? true);
+            this._popoverService.closeOnNavigation.set(this.closeOnNavigation() ?? cfg.closeOnNavigation ?? true);
+            this._popoverService.restoreFocusOnClose.set(this.restoreFocusOnClose() ?? cfg.restoreFocusOnClose ?? true);
+            this._popoverService.appendTo.set(this.appendTo() ?? cfg.appendTo ?? null);
+            this._popoverService.fixedPosition.set(this.fixedPosition() ?? cfg.fixedPosition ?? false);
 
             const bodyClass = this.additionalBodyClass() ?? cfg.additionalBodyClass ?? '';
             this._popoverService.additionalBodyClass.set(bodyClass + ' fd-popover--menu');
@@ -471,7 +487,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         this.isOpen() ? this.close() : this.open();
     }
 
-    /** Method called to refresh position of opened popover */
+    /** Method called to refresh position of opened menu */
     refreshPosition(): void {
         this._popoverService.refreshPosition();
     }
@@ -515,6 +531,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                 fillControlMode: this.fillControlMode() ?? cfg.fillControlMode,
                 closeOnOutsideClick: this.closeOnOutsideClick() ?? cfg.closeOnOutsideClick,
                 noArrow: this.noArrow() ?? cfg.noArrow,
+                closeOnNavigation: this.closeOnNavigation() ?? cfg.closeOnNavigation,
+                restoreFocusOnClose: this.restoreFocusOnClose() ?? cfg.restoreFocusOnClose,
+                appendTo: this.appendTo() ?? cfg.appendTo,
+                fixedPosition: this.fixedPosition() ?? cfg.fixedPosition,
                 additionalBodyClass: (
                     (this.additionalBodyClass() ?? cfg.additionalBodyClass ?? '') + ' fd-popover--menu'
                 ).trim()

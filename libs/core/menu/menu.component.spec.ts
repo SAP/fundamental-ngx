@@ -2,9 +2,11 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuTitleDirective } from './directives/menu-title.directive';
+import { MenuTriggerDirective } from './directives/menu-trigger.directive';
+import { MenuInteractiveComponent } from './menu-interactive.component';
 import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
 import { MenuComponent } from './menu.component';
-import { MenuModule } from './menu.module';
 
 @Component({
     selector: 'fd-menu-test',
@@ -30,7 +32,7 @@ import { MenuModule } from './menu.module';
         <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
     `,
     standalone: true,
-    imports: [MenuModule]
+    imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent, MenuTitleDirective, MenuTriggerDirective]
 })
 export class TestMenuComponent {
     @ViewChild(MenuComponent)
@@ -78,7 +80,14 @@ export class TestMenuComponent {
         <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
     `,
     standalone: true,
-    imports: [MenuModule]
+    imports: [
+        MenuComponent,
+        MenuItemComponent,
+        SubmenuComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuTriggerDirective
+    ]
 })
 export class TestMenuSubmenuComponent {
     @ViewChild(MenuComponent)
@@ -393,7 +402,7 @@ describe('MenuComponent config input', () => {
             <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
         `,
         standalone: true,
-        imports: [MenuModule]
+        imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent, MenuTitleDirective, MenuTriggerDirective]
     })
     class TestMenuConfigComponent {
         @ViewChild(MenuComponent) menu: MenuComponent;
@@ -428,5 +437,108 @@ describe('MenuComponent config input', () => {
     it('should use individual input defaults over config values', () => {
         // Individual inputs should take precedence
         expect(testComponent.menu.placement()).toBe('bottom-start');
+    });
+});
+
+describe('MenuComponent advanced options', () => {
+    @Component({
+        selector: 'fd-menu-advanced-test',
+        template: `
+            <fd-menu
+                #menu
+                [closeOnNavigation]="closeOnNavigation"
+                [restoreFocusOnClose]="restoreFocusOnClose"
+                [fixedPosition]="fixedPosition"
+                [appendTo]="useAppendTo ? appendTarget : null"
+            >
+                <li fd-menu-item>
+                    <a href="#" fd-menu-interactive>
+                        <span fd-menu-title>Option 1</span>
+                    </a>
+                </li>
+            </fd-menu>
+            <button #trigger [fdMenuTrigger]="menu">Open Menu</button>
+            <div #appendTarget></div>
+        `,
+        standalone: true,
+        imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent, MenuTitleDirective, MenuTriggerDirective]
+    })
+    class TestMenuAdvancedComponent {
+        @ViewChild(MenuComponent) menu: MenuComponent;
+        @ViewChild('appendTarget', { read: ElementRef }) appendTarget: ElementRef;
+        closeOnNavigation = true;
+        restoreFocusOnClose = true;
+        fixedPosition = false;
+        useAppendTo = false;
+    }
+
+    let menu: MenuComponent;
+    let fixture: ComponentFixture<TestMenuAdvancedComponent>;
+    let testComponent: TestMenuAdvancedComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestMenuAdvancedComponent, NoopAnimationsModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestMenuAdvancedComponent);
+        testComponent = fixture.componentInstance;
+        fixture.detectChanges();
+        menu = testComponent.menu;
+    });
+
+    describe('closeOnNavigation', () => {
+        it('should default to true', () => {
+            expect(menu.closeOnNavigation()).toBe(true);
+        });
+
+        it('should allow disabling close on navigation', () => {
+            testComponent.closeOnNavigation = false;
+            fixture.detectChanges();
+
+            expect(menu.closeOnNavigation()).toBe(false);
+        });
+    });
+
+    describe('restoreFocusOnClose', () => {
+        it('should default to true for accessibility', () => {
+            expect(menu.restoreFocusOnClose()).toBe(true);
+        });
+
+        it('should allow disabling focus restore', () => {
+            testComponent.restoreFocusOnClose = false;
+            fixture.detectChanges();
+
+            expect(menu.restoreFocusOnClose()).toBe(false);
+        });
+    });
+
+    describe('fixedPosition', () => {
+        it('should default to false', () => {
+            expect(menu.fixedPosition()).toBe(false);
+        });
+
+        it('should allow enabling fixed position', () => {
+            testComponent.fixedPosition = true;
+            fixture.detectChanges();
+
+            expect(menu.fixedPosition()).toBe(true);
+        });
+    });
+
+    describe('appendTo', () => {
+        it('should default to null', () => {
+            expect(menu.appendTo()).toBeNull();
+        });
+
+        it('should accept an element reference', () => {
+            testComponent.useAppendTo = true;
+            fixture.detectChanges();
+
+            expect(menu.appendTo()).toBeTruthy();
+            expect(menu.appendTo()).toBe(testComponent.appendTarget.nativeElement);
+        });
     });
 });

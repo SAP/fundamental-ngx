@@ -236,10 +236,13 @@
         <strong>Triggers:</strong> Use the <code>[triggers]</code> input to control how the menu opens. The default is
         <code>['click']</code>. For hover behavior, pass a <code>TriggerConfig</code> array.
     </p>
+    <p>
+        <strong>Fixed position:</strong> Use <code>[fixedPosition]="true"</code> to prevent the menu from flipping its
+        position when it reaches the edge of the viewport. By default, the menu automatically repositions to stay
+        visible.
+    </p>
 </description>
 <component-example>
     <fd-menu-placement-example></fd-menu-placement-example>
 </component-example>
 <code-example [exampleFiles]="menuPlacement"></code-example>
-
-<separator></separator>

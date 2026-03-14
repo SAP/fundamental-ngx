@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, contentChild, input, model, output, signal } from '@angular/core';
+import {
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    contentChild,
+    input,
+    model,
+    output,
+    signal
+} from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -6,7 +15,6 @@ import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/co
 import {
     PopoverBodyComponent,
     PopoverComponent,
-    PopoverConfig,
     PopoverControlComponent,
     TriggerConfig
 } from '@fundamental-ngx/core/popover';
@@ -39,45 +47,41 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
     }
 })
 export class ProductSwitchComponent {
-    /**
-     * Configuration object for popover settings.
-     * When provided, these settings will be merged with individual input properties.
-     * Individual inputs take precedence over config object values.
-     */
-    readonly config = input<PopoverConfig>({});
-
-    /** Placement of a popover. */
+    /** Placement of the product switch dropdown. */
     readonly placement = input<Placement>('bottom-end');
 
     /** Whether the product switch is disabled. */
-    readonly disabled = input(false);
+    readonly disabled = input(false, { transform: booleanAttribute });
 
-    /** Whether the popover should close when the escape key is pressed. */
-    readonly closeOnEscapeKey = input(true);
+    /** Whether the product switch should close when the escape key is pressed. */
+    readonly closeOnEscapeKey = input(true, { transform: booleanAttribute });
 
-    /** Whether the popover should close when a click is made outside its boundaries. */
-    readonly closeOnOutsideClick = input(true);
+    /** Whether the product switch should close when a click is made outside its boundaries. */
+    readonly closeOnOutsideClick = input(true, { transform: booleanAttribute });
 
-    /** Whether the popover should have an arrow. */
-    readonly noArrow = input(true);
+    /** Whether the product switch dropdown should have an arrow. */
+    readonly noArrow = input(true, { transform: booleanAttribute });
 
     /** Whether to wrap content with fd-scrollbar directive. */
-    readonly disableScrollbar = input(false);
+    readonly disableScrollbar = input(false, { transform: booleanAttribute });
 
-    /** The trigger events that will open/close the popover. */
+    /** The trigger events that will open/close the product switch. */
     readonly triggers = input<(string | TriggerConfig)[]>(['click']);
 
-    /** Whether the popover should be focusTrapped. */
-    readonly focusTrapped = input(false);
+    /** Whether the product switch should trap focus within its boundaries. */
+    readonly focusTrapped = input(false, { transform: booleanAttribute });
 
-    /** Whether the popover should automatically move focus into the trapped region. */
-    readonly focusAutoCapture = input(false);
+    /** Whether the product switch should automatically move focus into the trapped region. */
+    readonly focusAutoCapture = input(false, { transform: booleanAttribute });
 
-    /** Two-way binding for open state. */
+    /** Two-way binding for product switch open state. */
     readonly isOpen = model(false);
 
-    /** Event emitted right before the popover is being opened. */
+    /** Event emitted right before the product switch is being opened. */
     readonly beforeOpen = output<void>();
+
+    /** Event emitted when the product switch open state changes. */
+    readonly isOpenChange = output<boolean>();
 
     /** @hidden */
     contentDensity = signal<ContentDensityMode>(ContentDensityMode.COZY);
