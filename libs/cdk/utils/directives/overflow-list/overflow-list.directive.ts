@@ -11,6 +11,7 @@ import {
     QueryList,
     inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
@@ -54,7 +55,13 @@ export class OverflowListDirective implements AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private observer: ResizeObserver;
+    private _resizeObserver: ResizeObserver;
+
+    /** @hidden */
+    private _mutationObserver: MutationObserver;
+
+    /** @hidden Track whether a recalculation microtask is already scheduled. */
+    private _recalcScheduled = false;
 
     /** @hidden */
     constructor(
@@ -64,10 +71,12 @@ export class OverflowListDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.initResizeObserver();
+        this._initResizeObserver();
+        this._initMutationObserver();
         this.calculateOverflow();
+
         fromEvent(window, 'resize')
-            .pipe(debounceTime(100))
+            .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.calculateOverflow());
     }
 
@@ -91,36 +100,47 @@ export class OverflowListDirective implements AfterViewInit {
     }
 
     /**
-     * @description Ensuring that calculations run in the Angular zone
+     * @description Schedule overflow recalculation via microtask.
+     * Microtasks execute after DOM mutations but before the browser paints,
+     * so items are measured and hidden before the user ever sees them overflow.
+     * Multiple calls within the same task are coalesced by the _recalcScheduled flag.
      */
     public calculateOverflow(): void {
-        this._ngZone.run(() => {
-            setTimeout(() => {
-                const elements = this.overflowItems.map((item) => item.el.nativeElement);
-                const contentWidth = this._el.nativeElement.clientWidth;
-
-                let totalWidth = 0;
-                let overflowCount = 0;
-
-                elements.forEach((elm) => {
-                    const elmWidth = elm.offsetWidth;
-                    totalWidth += elmWidth;
-
-                    if (totalWidth > contentWidth) {
-                        overflowCount++;
-                    }
-                });
-
-                this._calculateAmountOfOverflowedItems();
-            }, 0);
+        if (this._recalcScheduled) {
+            return;
+        }
+        this._recalcScheduled = true;
+        Promise.resolve().then(() => {
+            this._recalcScheduled = false;
+            this._ngZone.run(() => this._calculateAmountOfOverflowedItems());
         });
     }
 
-    private initResizeObserver(): void {
-        this.observer = new ResizeObserver(() => {
+    /** @hidden */
+    private _initResizeObserver(): void {
+        this._resizeObserver = new ResizeObserver(() => {
             this._ngZone.run(() => this.calculateOverflow());
         });
-        this.observer.observe(this._el.nativeElement);
+        this._resizeObserver.observe(this._el.nativeElement);
+        this._destroyRef.onDestroy(() => this._resizeObserver.disconnect());
+    }
+
+    /**
+     * @hidden
+     * @description Watch for DOM content changes within items.
+     * - childList: detects items added/removed (e.g. new tabs rendered by @for)
+     * - characterData: detects text content changes (e.g. label updates, i18n)
+     * Does NOT watch attributes, so our own measurement (hidden/display toggles)
+     * and the consumer's CSS class changes won't cause infinite loops.
+     */
+    private _initMutationObserver(): void {
+        this._mutationObserver = new MutationObserver(() => this.calculateOverflow());
+        this._mutationObserver.observe(this._el.nativeElement, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+        this._destroyRef.onDestroy(() => this._mutationObserver.disconnect());
     }
 
     /** @hidden */

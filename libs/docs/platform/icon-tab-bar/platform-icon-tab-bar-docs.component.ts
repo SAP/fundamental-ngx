@@ -14,6 +14,7 @@ import {
 import { IconTabBarAsyncTabsExampleComponent } from './examples/async-tabs/icon-tab-bar-async-tabs-example.component';
 import { IconTabBarClosableTabsExampleComponent } from './examples/closable-tabs/icon-tab-bar-closable-tabs-example.component';
 import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
+import { PlatformIconTabBarDynamicOverflowExampleComponent } from './examples/platform-icon-tab-bar-dynamic-overflow-example/platform-icon-tab-bar-dynamic-overflow-example.component';
 import { PlatformIconTabBarFilterTypeExampleComponent } from './examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component';
 import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
 import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component';
@@ -70,6 +71,11 @@ const iconTabBarAsyncTs = 'async-tabs/icon-tab-bar-async-tabs-example.component.
 const iconTabBarTwoClickHtml = 'two-click-area/icon-tab-bar-two-click-area-example.component.html';
 const iconTabBarTwoClickTs = 'two-click-area/icon-tab-bar-two-click-area-example.component.ts';
 
+const iconTabBarDynamicOverflowHtml =
+    'platform-icon-tab-bar-dynamic-overflow-example/platform-icon-tab-bar-dynamic-overflow-example.component.html';
+const iconTabBarDynamicOverflowTs =
+    'platform-icon-tab-bar-dynamic-overflow-example/platform-icon-tab-bar-dynamic-overflow-example.component.ts';
+
 const iconTypeConfigs = 'config-for-examples/icon-type-config.ts';
 
 const textTypeConfigs = 'config-for-examples/text-type.config.ts';
@@ -105,7 +111,8 @@ export interface IconTabBarItem extends TabConfig {
         IconTabBarClosableTabsExampleComponent,
         IconTabBarTabsContentExampleComponent,
         IconTabBarTwoClickAreaExampleComponent,
-        IconTabBarAsyncTabsExampleComponent
+        IconTabBarAsyncTabsExampleComponent,
+        PlatformIconTabBarDynamicOverflowExampleComponent
     ]
 })
 export class PlatformIconTabBarDocsComponent {
@@ -315,6 +322,29 @@ export class PlatformIconTabBarDocsComponent {
             fileName: 'icon-tab-bar-async-tabs-example',
             component: 'IconTabBarAsyncTabsExampleComponent',
             path: 'example'
+        }
+    ];
+
+    iconTabBarDynamicOverflowFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarDynamicOverflowHtml),
+            fileName: 'platform-icon-tab-bar-dynamic-overflow-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarDynamicOverflowTs),
+            fileName: 'platform-icon-tab-bar-dynamic-overflow-example',
+            component: 'PlatformIconTabBarDynamicOverflowExampleComponent',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(textTypeConfigs),
+            fileName: 'text-type.config',
+            path: 'config-for-examples',
+            pure: true
         }
     ];
 
