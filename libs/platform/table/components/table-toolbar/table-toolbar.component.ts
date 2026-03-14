@@ -21,6 +21,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -49,6 +50,12 @@ export interface ToolbarContext {
     settings: Signal<boolean>;
     hasAnyActions: Signal<boolean>;
     appliedFilters: Signal<TableAppliedFilter[]>;
+}
+
+/** Context provided to the titleTemplate. */
+export interface TableToolbarTitleTemplateContext {
+    /** Item count signal. */
+    counter: Signal<number>;
 }
 
 export type EditMode = 'none' | 'inline';
@@ -101,7 +108,8 @@ export class TableToolbarTemplateDirective {
         FdTranslatePipe,
         TableToolbarTemplateDirective,
         ToolbarLabelDirective,
-        ContentDensityDirective
+        ContentDensityDirective,
+        TitleComponent
     ]
 })
 export class TableToolbarComponent implements TableToolbarInterface {
@@ -114,6 +122,21 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** Table title. */
     @Input()
     title: string;
+
+    /**
+     * Custom title template. When provided, it replaces the default string title.
+     * The template context provides a `counter` signal with the current item count.
+     *
+     * ```html
+     * <fdp-table-toolbar [titleTemplate]="customTitleTpl">
+     *   <ng-template #customTitleTpl let-counter="counter">
+     *     <fd-icon glyph="product"></fd-icon> Products ({{ counter() }})
+     *   </ng-template>
+     * </fdp-table-toolbar>
+     * ```
+     */
+    @Input()
+    titleTemplate: TemplateRef<TableToolbarTitleTemplateContext>;
 
     /** Aria label for the search field. */
     @Input()
