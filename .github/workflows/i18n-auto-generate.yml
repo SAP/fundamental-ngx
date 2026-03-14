@@ -1,0 +1,158 @@
+name: i18n Auto-Generate TypeScript Files
+
+on:
+    pull_request:
+        paths:
+            - 'libs/i18n/src/lib/translations/*.properties'
+
+env:
+    NODE_VERSION: '22.x'
+
+permissions:
+    contents: write
+    pull-requests: write
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
+jobs:
+    auto_generate:
+        name: Generate TypeScript files from .properties changes
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        # Security: Only run for same-repo PRs or trusted translation bot (service-tip-git)
+        if: |
+            github.event.pull_request.head.repo.full_name == github.repository ||
+            github.event.pull_request.head.repo.owner.login == 'service-tip-git'
+        steps:
+            - name: Checkout PR branch
+              uses: actions/checkout@v4.2.2
+              with:
+                  ref: ${{ github.event.pull_request.head.sha }}
+                  token: ${{ secrets.GHACTIONS }}
+                  fetch-depth: 0
+
+            # Security: Validate fork PRs only modify translation files (after checkout)
+            - name: Validate translation-only changes (fork PRs)
+              if: github.event.pull_request.head.repo.full_name != github.repository
+              run: |
+                  echo "🔍 Validating fork PR only modifies translation files..."
+
+                  # Fetch base branch for comparison
+                  git fetch origin ${{ github.event.pull_request.base.ref }}
+
+                  # Get list of changed files (using two-dot diff for direct comparison)
+                  FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}..HEAD)
+
+                  echo "Files changed in this PR:"
+                  echo "$FILES"
+                  echo ""
+
+                  # Validate file paths (more specific regex - no subdirectories)
+                  INVALID_FILES=""
+                  for file in $FILES; do
+                      if [[ ! "$file" =~ ^libs/i18n/src/lib/translations/[^/]+\.properties$ ]]; then
+                          INVALID_FILES="$INVALID_FILES\n  - $file"
+                      fi
+                  done
+
+                  if [ -n "$INVALID_FILES" ]; then
+                      echo "❌ ERROR: Fork PR modifies non-translation files:"
+                      echo -e "$INVALID_FILES"
+                      echo ""
+                      echo "For security reasons, fork PRs can only modify .properties files in:"
+                      echo "  libs/i18n/src/lib/translations/"
+                      exit 1
+                  fi
+
+                  echo "✅ Path validation passed"
+                  echo ""
+
+            # Security: Validate file sizes and content (fork PRs only)
+            - name: Validate file sizes and content (fork PRs)
+              if: github.event.pull_request.head.repo.full_name != github.repository
+              run: |
+                  echo "🔍 Validating file sizes and content..."
+
+                  # Check file sizes (500KB limit, current max is 86KB)
+                  LARGE_FILES=$(find libs/i18n/src/lib/translations -name "*.properties" -size +500k)
+                  if [ -n "$LARGE_FILES" ]; then
+                      echo "❌ ERROR: Files exceed 500KB limit:"
+                      echo "$LARGE_FILES"
+                      exit 1
+                  fi
+                  echo "✅ File size validation passed"
+                  echo ""
+
+            - name: Setup Node.js
+              uses: ./.github/actions/nodejs
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            # Security: Run syntax validation before generation (fork PRs only)
+            - name: Validate .properties syntax (fork PRs)
+              if: github.event.pull_request.head.repo.full_name != github.repository
+              run: |
+                  echo "🔍 Validating .properties file syntax..."
+                  npx nx run i18n:i18n-manage --command=validate
+                  echo "✅ Syntax validation passed"
+                  echo ""
+
+            - name: Setup git user
+              uses: ./.github/actions/set-up-git
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
+
+            - name: Generate TypeScript files
+              id: generate
+              run: |
+                  echo "🔧 Generating TypeScript files..."
+                  if ! npx nx run i18n:transform-translations; then
+                      echo "❌ Transform failed"
+                      exit 1
+                  fi
+                  echo "✅ Generation completed"
+
+            - name: Check for changes
+              id: git-check
+              run: |
+                  if git diff --quiet -- libs/i18n/src/lib/translations/; then
+                      echo "changed=false" >> $GITHUB_OUTPUT
+                  else
+                      echo "changed=true" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Commit and push if changed
+              if: steps.git-check.outputs.changed == 'true'
+              run: |
+                  set -e  # Exit on any error
+                  git add libs/i18n/src/lib/translations/
+
+                  if ! git commit -m "chore(i18n): auto-generate TypeScript files from .properties changes
+
+                  Generated by i18n-auto-generate workflow"; then
+                      echo "❌ Commit failed"
+                      exit 1
+                  fi
+
+                  if ! git push; then
+                      echo "❌ Push failed - possible conflict or network issue"
+                      exit 1
+                  fi
+
+                  echo "✅ Changes committed and pushed successfully"
+
+            - name: Comment on PR
+              if: steps.git-check.outputs.changed == 'true'
+              uses: actions/github-script@v7
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  script: |
+                      github.rest.issues.createComment({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          body: '✅ TypeScript translation files have been automatically generated and committed from your `.properties` file changes.'
+                      })

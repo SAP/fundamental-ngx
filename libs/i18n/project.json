@@ -48,6 +48,12 @@
                 "tsConfig": "libs/i18n/tsconfig.spec.json"
             },
             "dependsOn": ["transform-translations"]
+        },
+        "i18n-manage": {
+            "executor": "@fundamental-ngx/nx-plugin:i18n-manage",
+            "options": {
+                "propertiesPath": "{projectRoot}/src/lib/translations"
+            }
         }
     }
 }
