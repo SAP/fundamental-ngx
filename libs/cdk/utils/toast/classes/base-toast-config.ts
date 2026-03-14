@@ -53,12 +53,7 @@ export class BaseToastConfig<T = any> {
      * Toast ID.
      */
     id?: string;
-}
 
-/**
- * Base Configuration class used when opening an animated Toast.
- */
-export class BaseAnimatedToastConfig<T = any> extends BaseToastConfig<T> {
     /** Whether the toast should be animated. */
     animated? = true;
 }

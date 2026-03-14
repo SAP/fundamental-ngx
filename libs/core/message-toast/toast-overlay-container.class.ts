@@ -12,7 +12,7 @@ export class ToastOverlayContainer extends OverlayContainer {
      * the container in non-browser environments.
      * @returns the container element
      */
-    getContainerElement(): HTMLElement {
+    override getContainerElement(): HTMLElement {
         const containerElement = super.getContainerElement();
 
         containerElement.classList.add('fd-message-toast-container');
