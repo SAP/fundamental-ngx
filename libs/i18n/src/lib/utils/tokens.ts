@@ -1,4 +1,13 @@
-import { inject, InjectionToken, isDevMode, LOCALE_ID, signal, Signal, WritableSignal } from '@angular/core';
+import {
+    inject,
+    InjectionToken,
+    isDevMode,
+    linkedSignal,
+    LOCALE_ID,
+    signal,
+    Signal,
+    WritableSignal
+} from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
@@ -44,8 +53,9 @@ export const FD_LOCALE_SIGNAL = new InjectionToken<WritableSignal<string>>(
     {
         providedIn: 'root',
         factory: () => {
-            const localeId = inject(LOCALE_ID, { optional: true }) ?? 'en-US';
-            return signal(localeId);
+            const langSignal = inject(FD_LANGUAGE_SIGNAL);
+            const fallbackLocale = inject(LOCALE_ID, { optional: true }) ?? 'en-US';
+            return linkedSignal(() => langSignal().locale ?? fallbackLocale);
         }
     }
 );

@@ -1,7 +1,9 @@
-import { Component, computed, inject, LOCALE_ID } from '@angular/core';
+import { Component, computed, inject, LOCALE_ID, signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
+import { FD_LANGUAGE_FRENCH } from '../languages/french';
+import { FD_LANGUAGE_GERMAN } from '../languages/german';
 import { FdLanguage } from '../models';
 import { FD_LANGUAGE, FD_LANGUAGE_SIGNAL, FD_LOCALE, FD_LOCALE_SIGNAL } from './tokens';
 
@@ -170,7 +172,7 @@ describe('Injection Tokens', () => {
             const fixture = TestBed.createComponent(TestComponent);
             const localeSignal = fixture.componentInstance.localeSignal;
 
-            expect(localeSignal()).toBe('de-DE');
+            expect(localeSignal()).toBe('en');
         });
 
         it('should be writable signal', () => {
@@ -212,7 +214,142 @@ describe('Injection Tokens', () => {
 
             const fixture = TestBed.createComponent(TestComponent);
 
-            expect(fixture.componentInstance.upperLocale()).toBe('EN-US');
+            expect(fixture.componentInstance.upperLocale()).toBe('EN');
+        });
+
+        it('should derive locale from language', () => {
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true
+            })
+            class TestComponent {
+                langSignal = inject(FD_LANGUAGE_SIGNAL);
+                localeSignal = inject(FD_LOCALE_SIGNAL);
+            }
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            fixture.componentInstance.langSignal.set(FD_LANGUAGE_GERMAN);
+
+            expect(fixture.componentInstance.localeSignal()).toBe('de');
+        });
+
+        it('should update locale when language changes', () => {
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true
+            })
+            class TestComponent {
+                langSignal = inject(FD_LANGUAGE_SIGNAL);
+                localeSignal = inject(FD_LOCALE_SIGNAL);
+            }
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            fixture.componentInstance.langSignal.set(FD_LANGUAGE_GERMAN);
+            expect(fixture.componentInstance.localeSignal()).toBe('de');
+
+            fixture.componentInstance.langSignal.set(FD_LANGUAGE_FRENCH);
+            expect(fixture.componentInstance.localeSignal()).toBe('fr');
+        });
+
+        it('should allow locale override via set', () => {
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true
+            })
+            class TestComponent {
+                langSignal = inject(FD_LANGUAGE_SIGNAL);
+                localeSignal = inject(FD_LOCALE_SIGNAL);
+            }
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            fixture.componentInstance.langSignal.set(FD_LANGUAGE_GERMAN);
+            fixture.componentInstance.localeSignal.set('ja-JP');
+
+            expect(fixture.componentInstance.localeSignal()).toBe('ja-JP');
+        });
+
+        it('should reset locale on language change after override', () => {
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true
+            })
+            class TestComponent {
+                langSignal = inject(FD_LANGUAGE_SIGNAL);
+                localeSignal = inject(FD_LOCALE_SIGNAL);
+            }
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            fixture.componentInstance.langSignal.set(FD_LANGUAGE_GERMAN);
+            fixture.componentInstance.localeSignal.set('ja-JP');
+            expect(fixture.componentInstance.localeSignal()).toBe('ja-JP');
+
+            fixture.componentInstance.langSignal.set(FD_LANGUAGE_FRENCH);
+            expect(fixture.componentInstance.localeSignal()).toBe('fr');
+        });
+
+        it('should fall back to LOCALE_ID when language has no locale field', () => {
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true
+            })
+            class TestComponent {
+                langSignal = inject(FD_LANGUAGE_SIGNAL);
+                localeSignal = inject(FD_LOCALE_SIGNAL);
+            }
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent],
+                providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            // Set a language without locale field
+            const langWithoutLocale: FdLanguage = { ...FD_LANGUAGE_ENGLISH, locale: undefined };
+            fixture.componentInstance.langSignal.set(langWithoutLocale);
+
+            expect(fixture.componentInstance.localeSignal()).toBe('pt-BR');
+        });
+
+        it('should not override custom FD_LOCALE_SIGNAL provider', () => {
+            const customLocaleSignal: WritableSignal<string> = signal('custom-locale');
+
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true
+            })
+            class TestComponent {
+                localeSignal = inject(FD_LOCALE_SIGNAL);
+            }
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent],
+                providers: [{ provide: FD_LOCALE_SIGNAL, useValue: customLocaleSignal }]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            expect(fixture.componentInstance.localeSignal()).toBe('custom-locale');
         });
     });
 
@@ -439,7 +576,7 @@ describe('Injection Tokens', () => {
             expect(locale$).toBeInstanceOf(Observable);
 
             const locale = await firstValueFrom(locale$);
-            expect(locale).toBe('en-US');
+            expect(locale).toBe('en');
         });
 
         it('should be injectable in components', () => {
@@ -486,7 +623,7 @@ describe('Injection Tokens', () => {
             const locale$ = fixture.componentInstance.locale$;
 
             const locale = await firstValueFrom(locale$);
-            expect(locale).toBe('de-DE');
+            expect(locale).toBe('en');
         });
 
         it('should be overridable with custom provider', async () => {
@@ -559,7 +696,7 @@ describe('Injection Tokens', () => {
             });
         });
 
-        it('should work independently from FD_LANGUAGE', async () => {
+        it('should derive locale from FD_LANGUAGE', async () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
@@ -586,7 +723,7 @@ describe('Injection Tokens', () => {
             const locale = await firstValueFrom(fixture.componentInstance.locale$);
 
             expect(language).toBe(FD_LANGUAGE_ENGLISH);
-            expect(locale).toBe('ja-JP');
+            expect(locale).toBe('en');
         });
     });
 
@@ -618,7 +755,7 @@ describe('Injection Tokens', () => {
             const locale = await firstValueFrom(fixture.componentInstance.locale$);
 
             expect(language.platformApprovalFlow.defaultWatchersLabel).toBe('Watchers');
-            expect(locale).toBe('zh-CN');
+            expect(locale).toBe('en');
         });
 
         it('should support providedIn root behavior', () => {
