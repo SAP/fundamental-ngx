@@ -319,5 +319,79 @@ describe('patchLanguage', () => {
             expect(result).toBe('Custom count: 42');
             expect(customFn).toHaveBeenCalledWith({ count: 42 });
         });
+
+        it('should preserve locale from parent language', () => {
+            const patch: FdLanguagePatch = {
+                platformApprovalFlow: {
+                    defaultWatchersLabel: 'Patched'
+                }
+            };
+
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true,
+                providers: [patchLanguage(patch)]
+            })
+            class TestComponent {}
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent],
+                providers: [
+                    {
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
+                    }
+                ]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
+
+            const language = patchedLangSignal();
+
+            expect(language.locale).toBe('en');
+            expect(language.name).toBe('English');
+        });
+
+        it('should not allow patch to overwrite locale or name', () => {
+            const patch: FdLanguagePatch = {
+                platformApprovalFlow: {
+                    defaultWatchersLabel: 'Patched'
+                }
+            };
+
+            // Simulate a patch that includes locale/name in the flat representation
+            // by setting the parent to have metadata
+            const langWithMeta: FdLanguage = { ...FD_LANGUAGE_ENGLISH, locale: 'en', name: 'English' };
+            langSignal.set(langWithMeta);
+
+            @Component({
+                selector: 'fd-test',
+                template: '',
+                standalone: true,
+                providers: [patchLanguage(patch)]
+            })
+            class TestComponent {}
+
+            TestBed.configureTestingModule({
+                imports: [TestComponent],
+                providers: [
+                    {
+                        provide: FD_LANGUAGE_SIGNAL,
+                        useValue: langSignal
+                    }
+                ]
+            });
+
+            const fixture = TestBed.createComponent(TestComponent);
+            const patchedLangSignal = fixture.debugElement.injector.get(FD_LANGUAGE_SIGNAL);
+
+            const language = patchedLangSignal();
+
+            // Metadata should be preserved from parent, not overridden
+            expect(language.locale).toBe('en');
+            expect(language.name).toBe('English');
+        });
     });
 });

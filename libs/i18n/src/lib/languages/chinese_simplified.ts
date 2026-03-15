@@ -1,5 +1,9 @@
 import { FdLanguage } from '../models';
 import json from '../translations/translations_zh_CN';
 
-export const FD_LANGUAGE_CHINESE_SIMPLIFIED = json as FdLanguage;
-export const FD_LANGUAGE_CHINESE = json as FdLanguage;
+export const FD_LANGUAGE_CHINESE_SIMPLIFIED: FdLanguage = {
+    ...(json as FdLanguage),
+    locale: 'zh-Hans',
+    name: '简体中文'
+};
+export const FD_LANGUAGE_CHINESE: FdLanguage = { ...(json as FdLanguage), locale: 'zh-Hans', name: '简体中文' };

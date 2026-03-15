@@ -65,10 +65,18 @@ export function patchLanguage(
                 const lang = parentLangSignal();
                 const original = flattenTranslations(lang) as FlatFdLanguage;
                 const patch = flattenTranslations(patchedObj(lang, languagePatch));
-                return flatToHierarchy({
+                const merged = flatToHierarchy({
                     ...original,
                     ...patch
                 });
+                // Preserve language metadata from parent — patches should not override identity
+                if (lang.locale !== undefined) {
+                    merged.locale = lang.locale;
+                }
+                if (lang.name !== undefined) {
+                    merged.name = lang.name;
+                }
+                return merged;
             }),
         deps: [[new SkipSelf(), FD_LANGUAGE_SIGNAL]]
     };
