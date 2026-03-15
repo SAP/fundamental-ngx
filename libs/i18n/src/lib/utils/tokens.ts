@@ -13,12 +13,29 @@ import { Observable } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 
 import { FdLanguage } from '../models/fd-language';
+import { detectLanguage } from './detect-language';
 
 // ===== PRIMARY SIGNAL-BASED TOKENS (Angular 21+) =====
 
 /**
+ * Controls whether `FD_LANGUAGE_SIGNAL` auto-detects the user's language
+ * from Angular's `LOCALE_ID` at bootstrap time.
+ *
+ * Defaults to `true`. Set to `false` to always start with English
+ * (or whatever value you provide via a custom `FD_LANGUAGE_SIGNAL` provider).
+ */
+export const FD_LANGUAGE_AUTO_DETECT = new InjectionToken<boolean>(
+    'Whether to auto-detect language from browser locale',
+    { providedIn: 'root', factory: () => true }
+);
+
+/**
  * Signal-based language token for reactive translations.
  * Use this in new code for automatic change detection and zoneless compatibility.
+ *
+ * When `FD_LANGUAGE_AUTO_DETECT` is `true` (the default), the factory reads
+ * Angular's `LOCALE_ID` and picks the closest built-in language. Otherwise
+ * it starts with English.
  *
  * @example
  * ```ts
@@ -32,7 +49,14 @@ export const FD_LANGUAGE_SIGNAL = new InjectionToken<WritableSignal<FdLanguage>>
     'Language signal for @fundamental-ngx packages',
     {
         providedIn: 'root',
-        factory: () => signal(FD_LANGUAGE_ENGLISH)
+        factory: () => {
+            const autoDetect = inject(FD_LANGUAGE_AUTO_DETECT);
+            if (autoDetect) {
+                const localeId = inject(LOCALE_ID, { optional: true }) ?? 'en-US';
+                return signal(detectLanguage(localeId));
+            }
+            return signal(FD_LANGUAGE_ENGLISH);
+        }
     }
 );
 
