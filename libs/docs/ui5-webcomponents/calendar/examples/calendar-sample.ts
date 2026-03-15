@@ -21,9 +21,6 @@ import '@ui5/webcomponents-localization/dist/features/calendar/Islamic.js';
 import '@ui5/webcomponents-localization/dist/features/calendar/Japanese.js';
 import '@ui5/webcomponents-localization/dist/features/calendar/Persian.js';
 
-// Set language configuration
-import { setLanguage } from '@ui5/webcomponents-base/dist/config/Language.js';
-
 // Import Fundamental Styles
 import 'fundamental-styles/dist/layout-grid.css';
 import 'fundamental-styles/dist/margins.css';
@@ -66,9 +63,6 @@ export class CalendarExample {
     readonly formatPattern = signal('yyyy-MM-dd');
 
     constructor() {
-        // Set the language for UI5 Web Components
-        setLanguage('en');
-
         // Using Angular 20 effect for side effects
         effect(() => {
             console.log('Selection mode changed to:', this.currentSelectionMode());
