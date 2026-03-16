@@ -1,7 +1,6 @@
 import { signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL } from '@fundamental-ngx/i18n';
-import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_FRENCH, FD_LANGUAGE_SIGNAL, FD_LOCALE_SIGNAL } from '@fundamental-ngx/i18n';
 import { Ui5LanguageService } from './ui5-language.service';
 import { provideUi5LanguageBridge } from './ui5-language.initializer';
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, LOCALE_ID, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -17,16 +17,14 @@ import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 @Component({
     selector: 'fd-language-change-example',
     templateUrl: './language-change-example.component.html',
+    styleUrl: './language-change-example.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: FD_LANGUAGE_SIGNAL,
             useValue: signal(FD_LANGUAGE_ENGLISH)
-        },
-        {
-            provide: FD_LOCALE_SIGNAL,
-            useFactory: () => signal(inject(LOCALE_ID))
         }
+        // FD_LOCALE_SIGNAL auto-derives from language via linkedSignal — no manual provider needed
     ],
     imports: [
         SegmentedButtonModule,
@@ -51,61 +49,57 @@ export class LanguageChangeExampleComponent {
 
     /**
      * Computed signal showing current language and locale.
-     * Automatically updates when langSignal or fdLocaleSignal change.
+     * Locale auto-derives from the language's metadata — no manual coordination needed.
      */
     readonly currentLanguageInfo = computed(() => {
+        const lang = this.langSignal();
         const locale = this.fdLocaleSignal();
-        // Detect language type based on first translation
-        const firstTranslation = this.dateInputLabel();
-        if (firstTranslation.startsWith('Custom:')) {
-            return `Custom Language (Locale: ${locale})`;
-        } else if (locale === 'uk-UA') {
-            return `Ukrainian (Locale: ${locale})`;
-        } else {
-            return `English (Locale: ${locale})`;
-        }
+        const name = lang.name ?? 'Unknown';
+        return `${name} (Locale: ${locale})`;
     });
 
     /** Inject the language signal so we can change it */
     private readonly langSignal = inject(FD_LANGUAGE_SIGNAL) as WritableSignal<FdLanguage>;
 
-    /** Inject the locale signal (affects date/number formatting) */
-    private readonly fdLocaleSignal = inject(FD_LOCALE_SIGNAL) as WritableSignal<string>;
+    /** Inject the locale signal read-only for display */
+    private readonly fdLocaleSignal = inject(FD_LOCALE_SIGNAL);
 
     /**
      * Change the application language at runtime.
      *
      * How it works:
-     * 1. Call langSignal.set() to change the language
-     * 2. All translations automatically update (signals propagate changes)
-     * 3. No manual subscriptions needed - signals handle reactivity
-     * 4. Locale affects date/number formatting (separate from translations)
+     * 1. Call langSignal.set() — that's all you need
+     * 2. FD_LOCALE_SIGNAL auto-derives from language.locale (linkedSignal)
+     * 3. All translations automatically update (signals propagate changes)
+     * 4. If the UI5 bridge is active, UI5 components update too
      */
     changeLanguage(lang: 'custom' | 'en' | 'ua'): void {
         switch (lang) {
             case 'en':
-                // Switch to English - all UI elements update automatically
+                // One call — locale follows automatically
                 this.langSignal.set(FD_LANGUAGE_ENGLISH);
-                this.fdLocaleSignal.set('en-US');
                 break;
             case 'ua':
-                // Switch to Ukrainian - all UI elements update automatically
+                // One call — locale follows automatically
                 this.langSignal.set(FD_LANGUAGE_UKRAINIAN);
-                this.fdLocaleSignal.set('uk-UA');
                 break;
             case 'custom': {
                 // Create a custom language by prefixing all English translations
-                // This demonstrates you can provide any translation structure
                 const custom = Object.fromEntries(
                     Object.entries(FD_LANGUAGE_ENGLISH).map(([component, translations]) => {
+                        if (typeof translations !== 'object' || translations === null) {
+                            return [component, translations];
+                        }
                         const customTranslations = Object.fromEntries(
                             Object.entries(translations).map(([key, value]) => [key, 'Custom: ' + value])
                         );
                         return [component, customTranslations];
                     })
                 ) as any;
+                // Add locale and name metadata so linkedSignal can derive the locale
+                custom.locale = 'en';
+                custom.name = 'Custom English';
                 this.langSignal.set(custom);
-                this.fdLocaleSignal.set('en-US');
                 break;
             }
         }

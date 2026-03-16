@@ -13,6 +13,7 @@ import {
     Translations
 } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE_ENGLISH, FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import packageJson from '../../../package.json';
@@ -30,6 +31,7 @@ export const appConfig: ApplicationConfig = {
         themingInitializer(),
         provideContentDensity({ storage: 'localStorage' }),
         provideDialogService(),
+        provideUi5LanguageBridge(),
         provideUnifiedDocsNavigation({
             packages: {
                 core: () => import('@fundamental-ngx/docs/core').then((m) => m.DOCS_DATA),

@@ -1,0 +1,24 @@
+<div class="i18n-basic-sample">
+    <div class="fd-margin-bottom--md fd-padding--md example-info-panel">
+        <strong>Language:</strong> {{ languageName() }} | <strong>Locale:</strong> <code>{{ currentLocale() }}</code>
+    </div>
+
+    <div class="sap-flex sap-flex--gap-medium sap-flex--wrap">
+        <div class="fd-padding--md example-card">
+            <label fd-form-label>UI5 Date Picker (language updates via bridge):</label>
+            <div class="fd-margin-top--sm">
+                <ui5-date-picker></ui5-date-picker>
+            </div>
+        </div>
+        <div class="fd-padding--md example-card">
+            <label fd-form-label>FD translated label (language updates via signal):</label>
+            <div class="fd-margin-top--sm example-translated-value">{{ dateInputLabel() }}</div>
+        </div>
+    </div>
+
+    <p class="fd-margin-top--sm sap-font-size-small example-hint-text">
+        <strong>Try it:</strong> Use the <strong>toolbar language selector</strong> (translate icon, top-right) to
+        switch languages. Both the UI5 Date Picker and the FD translated label update together — the bridge calls UI5's
+        <code>setLanguage()</code> automatically when <code>FD_LOCALE_SIGNAL</code> changes.
+    </p>
+</div>

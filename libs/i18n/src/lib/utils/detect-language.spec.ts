@@ -18,15 +18,22 @@ import { FD_LANGUAGE_HINDI } from '../languages/hindi';
 import { FD_LANGUAGE_HUNGARIAN } from '../languages/hungarian';
 import { FD_LANGUAGE_ITALIAN } from '../languages/italian';
 import { FD_LANGUAGE_JAPANESE } from '../languages/japanese';
+import { FD_LANGUAGE_KAZAKH } from '../languages/kazakh';
 import { FD_LANGUAGE_KOREAN } from '../languages/korean';
+import { FD_LANGUAGE_MALAY } from '../languages/malay';
 import { FD_LANGUAGE_NORWEGIAN } from '../languages/norwegian';
 import { FD_LANGUAGE_POLISH } from '../languages/polish';
 import { FD_LANGUAGE_PORTUGUESE } from '../languages/portuguese';
+import { FD_LANGUAGE_ROMANIAN } from '../languages/romanian';
 import { FD_LANGUAGE_RUSSIAN } from '../languages/russian';
 import { FD_LANGUAGE_SERBIAN } from '../languages/serbian';
+import { FD_LANGUAGE_SLOVAK } from '../languages/slovak';
+import { FD_LANGUAGE_SLOVENIAN } from '../languages/slovenian';
 import { FD_LANGUAGE_SPANISH } from '../languages/spanish';
 import { FD_LANGUAGE_SWEDISH } from '../languages/swedish';
+import { FD_LANGUAGE_THAI } from '../languages/thai';
 import { FD_LANGUAGE_TURKISH } from '../languages/turkish';
+import { FD_LANGUAGE_UKRAINIAN } from '../languages/ukrainian';
 import { detectLanguage } from './detect-language';
 
 describe('detectLanguage', () => {
@@ -67,18 +74,26 @@ describe('detectLanguage', () => {
                 ['fi', FD_LANGUAGE_FINNISH],
                 ['ka', FD_LANGUAGE_GEORGIAN],
                 ['el', FD_LANGUAGE_GREEK],
+                ['he', FD_LANGUAGE_HEBREW],
                 ['hi', FD_LANGUAGE_HINDI],
                 ['hu', FD_LANGUAGE_HUNGARIAN],
                 ['it', FD_LANGUAGE_ITALIAN],
+                ['kk', FD_LANGUAGE_KAZAKH],
                 ['ko', FD_LANGUAGE_KOREAN],
+                ['ms', FD_LANGUAGE_MALAY],
                 ['no', FD_LANGUAGE_NORWEGIAN],
                 ['pl', FD_LANGUAGE_POLISH],
                 ['pt', FD_LANGUAGE_PORTUGUESE],
+                ['ro', FD_LANGUAGE_ROMANIAN],
                 ['ru', FD_LANGUAGE_RUSSIAN],
                 ['sr', FD_LANGUAGE_SERBIAN],
+                ['sk', FD_LANGUAGE_SLOVAK],
+                ['sl', FD_LANGUAGE_SLOVENIAN],
                 ['es', FD_LANGUAGE_SPANISH],
                 ['sv', FD_LANGUAGE_SWEDISH],
-                ['tr', FD_LANGUAGE_TURKISH]
+                ['th', FD_LANGUAGE_THAI],
+                ['tr', FD_LANGUAGE_TURKISH],
+                ['uk', FD_LANGUAGE_UKRAINIAN]
             ];
             for (const [locale, language] of expected) {
                 expect(detectLanguage(locale)).toBe(language);

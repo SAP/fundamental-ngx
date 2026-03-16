@@ -10,6 +10,10 @@
 - [Translation with Context/Variables](#translation-with-contextvariables)
 - [Custom Language/Locale](#custom-languagelocale)
 - [Changing Language Globally](#changing-language-globally)
+- [How Language and Locale Relate](#how-language-and-locale-relate)
+- [When to Set What — App Developer Guide](#when-to-set-what--app-developer-guide)
+- [Browser Auto-Detection](#browser-auto-detection)
+- [UI5 Web Components Integration](#ui5-web-components-integration)
 - [Testing with Signals](#testing-with-signals)
 
 ---
@@ -149,6 +153,8 @@ export class FrenchComponent {
 }
 ```
 
+> **Note:** Locale now auto-derives from the language's `locale` field via `linkedSignal`. You only need to provide `fdLocale` explicitly if you want a locale that differs from the language (e.g., French text with Japanese date formatting).
+
 **When to use:**
 
 - Component needs a different language than global setting
@@ -172,7 +178,7 @@ export class LanguageSwitcher {
     private readonly langSignal = inject(FD_LANGUAGE_SIGNAL);
 
     switchToGerman(): void {
-        // Update the signal - all translations react automatically
+        // One call — translations, locale, and UI5 all follow automatically
         this.langSignal.set(FD_LANGUAGE_GERMAN);
     }
 }
@@ -182,11 +188,116 @@ export class LanguageSwitcher {
 
 - `FD_LANGUAGE_SIGNAL` is a `WritableSignal` provided at root level
 - All translation signals are `computed()` from this source
+- `FD_LOCALE_SIGNAL` auto-derives via `linkedSignal` — no need to set it separately
+- If the UI5 bridge is active, `setLanguage()` is called automatically
 - Changing the signal triggers automatic updates across the app
 
 ---
 
-## Architecture Notes
+## How Language and Locale Relate
+
+`FD_LANGUAGE_SIGNAL` is the primary signal. `FD_LOCALE_SIGNAL` derives from it automatically via `linkedSignal`.
+
+```
+FD_LANGUAGE_SIGNAL  (WritableSignal<FdLanguage>)
+        │
+        │  derives via linkedSignal
+        ▼
+FD_LOCALE_SIGNAL    (WritableSignal<string>)
+        │
+        │  reads locale
+        ▼
+UI5 Bridge          (calls setLanguage())
+```
+
+**Default behavior:** When you set `FD_LANGUAGE_SIGNAL`, the locale auto-derives from `language.locale`. No need to set `FD_LOCALE_SIGNAL` manually.
+
+```typescript
+langSignal.set(FD_LANGUAGE_GERMAN);
+// FD_LOCALE_SIGNAL → 'de' (auto-derived from FD_LANGUAGE_GERMAN.locale)
+// UI5 → setLanguage('de') (if bridge is active)
+```
+
+**Override behavior:** You can still set `FD_LOCALE_SIGNAL` independently for edge cases (e.g., German text + Japanese date formatting). The override resets when the language changes next (linkedSignal behavior).
+
+```typescript
+langSignal.set(FD_LANGUAGE_GERMAN); // locale → 'de'
+localeSignal.set('ja-JP'); // locale → 'ja-JP' (override)
+langSignal.set(FD_LANGUAGE_FRENCH); // locale → 'fr' (override cleared)
+```
+
+**Each `FdLanguage` object carries metadata:**
+
+```typescript
+export interface FdLanguage {
+    locale?: string; // e.g., 'en', 'de', 'fr'
+    name?: string; // e.g., 'English', 'Deutsch', 'Français'
+    // ... translation keys
+}
+```
+
+---
+
+## When to Set What — App Developer Guide
+
+| Scenario                                       | What to do                                                                               | Tokens involved                           |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **Default (95% of apps)**                      | Nothing — language auto-detects from browser, locale derives, UI5 follows                | `FD_LANGUAGE_AUTO_DETECT` (default: true) |
+| **Explicit language at startup**               | Provide `FD_LANGUAGE_SIGNAL` with a `signal(FD_LANGUAGE_*)` in `app.config.ts`           | `FD_LANGUAGE_SIGNAL`                      |
+| **Switch language at runtime**                 | Call `langSignal.set(FD_LANGUAGE_*)` — locale and UI5 follow automatically               | `FD_LANGUAGE_SIGNAL`                      |
+| **Different formatting than language implies** | Call `localeSignal.set('ja-JP')` after setting language. Resets on next language change. | `FD_LOCALE_SIGNAL` (override)             |
+| **Disable auto-detection**                     | Provide `{ provide: FD_LANGUAGE_AUTO_DETECT, useValue: false }`                          | `FD_LANGUAGE_AUTO_DETECT`                 |
+| **UI5 web components**                         | Add `provideUi5LanguageBridge()` to app providers                                        | `Ui5LanguageService`                      |
+
+**Key principle:** Set `FD_LANGUAGE_SIGNAL` and let everything else derive. Only touch `FD_LOCALE_SIGNAL` for the rare case where formatting locale must differ from the language.
+
+---
+
+## Browser Auto-Detection
+
+By default, `FD_LANGUAGE_SIGNAL` auto-detects the user's language from Angular's `LOCALE_ID` at bootstrap:
+
+```
+navigator.language → Angular LOCALE_ID → detectLanguage() → FD_LANGUAGE_SIGNAL
+```
+
+**Resolution order:**
+
+1. Exact locale match (`'de'` → German)
+2. Base language match (`'pt-BR'` → Portuguese)
+3. Fallback to English
+
+**Opt out** by providing `FD_LANGUAGE_AUTO_DETECT`:
+
+```typescript
+providers: [{ provide: FD_LANGUAGE_AUTO_DETECT, useValue: false }];
+```
+
+When auto-detection is disabled, `FD_LANGUAGE_SIGNAL` defaults to English (or whatever you provide via a custom provider).
+
+---
+
+## UI5 Web Components Integration
+
+Apps using UI5 wrapper components (`@fundamental-ngx/ui5-webcomponents`, etc.) can activate the language bridge so UI5 components react to FD language changes.
+
+**Setup:**
+
+```typescript
+import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
+
+export const appConfig: ApplicationConfig = {
+    providers: [provideUi5LanguageBridge()]
+};
+```
+
+**How it works:**
+
+- `Ui5LanguageService` watches `FD_LOCALE_SIGNAL` via `effect()`
+- When locale changes, it calls UI5's `setLanguage()` automatically
+- Activated via `provideEnvironmentInitializer` — explicit opt-in by the app
+
+**Result:** Changing `FD_LANGUAGE_SIGNAL` updates FD translations, formatting locale, and UI5 component language — all with one call.
 
 ### Signal-first design
 

@@ -1,0 +1,30 @@
+<div class="auto-detect-example">
+    <div class="fd-padding--md example-bordered-card">
+        <div>
+            <strong>Browser locale (LOCALE_ID):</strong>
+            <code>{{ browserLocale }}</code>
+        </div>
+        <div class="fd-margin-top--sm">
+            <strong>Detected language:</strong>
+            {{ detectedInfo().name }}
+        </div>
+        <div class="fd-margin-top--sm">
+            <strong>Derived locale (FD_LOCALE_SIGNAL):</strong>
+            <code>{{ detectedInfo().locale }}</code>
+        </div>
+        <div class="fd-margin-top--md fd-padding--sm example-info-panel">
+            <span class="example-highlight-text">
+                Browser locale: <code>{{ browserLocale }}</code> &rarr; Detected:
+                <strong>{{ detectedInfo().name }}</strong> (locale: <code>{{ detectedInfo().locale }}</code
+                >)
+            </span>
+        </div>
+    </div>
+    <p class="fd-margin-top--sm sap-font-size-small example-hint-text">
+        <strong>How it works:</strong> At bootstrap, <code>FD_LANGUAGE_SIGNAL</code> reads Angular's
+        <code>LOCALE_ID</code> and picks the closest built-in language via <code>detectLanguage()</code>. The locale
+        then auto-derives from the language's <code>locale</code> field. To disable, provide
+        <code>{{ '{' }} provide: FD_LANGUAGE_AUTO_DETECT, useValue: false {{ '}' }}</code
+        >.
+    </p>
+</div>

@@ -1,0 +1,22 @@
+.example-info-panel {
+    background-color: var(--sapBackgroundColor);
+}
+
+.example-side-card {
+    flex: 1;
+    min-width: 200px;
+    border: 1px solid var(--sapGroup_ContentBorderColor);
+}
+
+.example-translated-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.example-warning-text {
+    color: var(--sapWarningColor);
+}
+
+.example-hint-text {
+    color: var(--sapContent_LabelColor);
+}

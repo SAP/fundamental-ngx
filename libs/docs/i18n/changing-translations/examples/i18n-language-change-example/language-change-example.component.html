@@ -9,7 +9,7 @@
         </fd-segmented-button>
 
         <!-- Current language/locale info -->
-        <div class="fd-margin-top--md fd-padding--md" style="background-color: var(--sapBackgroundColor)">
+        <div class="fd-margin-top--md fd-padding--md example-info-panel">
             <strong>Current Settings:</strong> {{ currentLanguageInfo() }}
         </div>
     </div>
@@ -21,34 +21,25 @@
         <!-- Show multiple translated elements so language change is obvious -->
         <div class="fd-margin-top--sm">
             <!-- Translation 1: Date Input Label -->
-            <div
-                class="fd-padding--sm fd-margin-bottom--md"
-                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
-            >
+            <div class="fd-padding--sm fd-margin-bottom--md example-bordered-card">
                 <code>coreDatePicker.dateInputLabel:</code>
-                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateInputLabel() }}</div>
+                <div class="fd-margin-top--tiny example-translated-value">{{ dateInputLabel() }}</div>
             </div>
 
             <!-- Translation 2: Date Range Label -->
-            <div
-                class="fd-padding--sm fd-margin-bottom--md"
-                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
-            >
+            <div class="fd-padding--sm fd-margin-bottom--md example-bordered-card">
                 <code>coreDatePicker.dateRangeInputLabel:</code>
-                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateRangeLabel() }}</div>
+                <div class="fd-margin-top--tiny example-translated-value">{{ dateRangeLabel() }}</div>
             </div>
 
             <!-- Translation 3: Calendar Toggle Label -->
-            <div
-                class="fd-padding--sm fd-margin-bottom--md"
-                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
-            >
+            <div class="fd-padding--sm fd-margin-bottom--md example-bordered-card">
                 <code>coreDatePicker.displayCalendarToggleLabel:</code>
-                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ calendarToggleLabel() }}</div>
+                <div class="fd-margin-top--tiny example-translated-value">{{ calendarToggleLabel() }}</div>
             </div>
 
             <!-- Translation 4: Using pipe in button -->
-            <div class="fd-padding--sm" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+            <div class="fd-padding--sm example-bordered-card">
                 <code>Using pipe in button label:</code>
                 <div class="fd-margin-top--sm">
                     <button
@@ -74,9 +65,9 @@
             placeholder="Type more than 10 characters to see counter messages..."
         >
         </fdp-textarea>
-        <p class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
-            💡 <strong>Tip:</strong> Type text longer than 10 characters to see the counter messages update when you
-            change languages.
+        <p class="fd-margin-top--sm sap-font-size-small example-hint-text">
+            <strong>Tip:</strong> Type text longer than 10 characters to see the counter messages update when you change
+            languages. Only <code>langSignal.set()</code> is needed — locale and UI5 follow automatically.
         </p>
     </div>
 </div>

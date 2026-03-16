@@ -93,14 +93,8 @@ const LOCALE_ALIASES: Record<string, string> = {
     iw: 'he'
 };
 
-let localeMap: Map<string, FdLanguage> | undefined;
-
-function getLocaleMap(): Map<string, FdLanguage> {
-    if (!localeMap) {
-        localeMap = new Map(ALL_LANGUAGES);
-    }
-    return localeMap;
-}
+/** Locale-code-to-language lookup built from ALL_LANGUAGES. */
+const LOCALE_MAP = new Map<string, FdLanguage>(ALL_LANGUAGES);
 
 /**
  * Maps a locale string (e.g. from Angular `LOCALE_ID`) to the best-matching
@@ -119,10 +113,8 @@ export function detectLanguage(locale: string): FdLanguage {
         return FD_LANGUAGE_ENGLISH;
     }
 
-    const map = getLocaleMap();
-
     // 1. Exact match
-    const exact = map.get(normalized);
+    const exact = LOCALE_MAP.get(normalized);
     if (exact) {
         return exact;
     }
@@ -133,19 +125,19 @@ export function detectLanguage(locale: string): FdLanguage {
         const region = parts[parts.length - 1];
         const script = CHINESE_REGION_TO_SCRIPT[region];
         if (script) {
-            return map.get(script) ?? FD_LANGUAGE_ENGLISH;
+            return LOCALE_MAP.get(script) ?? FD_LANGUAGE_ENGLISH;
         }
     }
 
     // 3. Alias resolution (nb→no, nn→no, iw→he)
     const alias = LOCALE_ALIASES[normalized];
     if (alias) {
-        return map.get(alias) ?? FD_LANGUAGE_ENGLISH;
+        return LOCALE_MAP.get(alias) ?? FD_LANGUAGE_ENGLISH;
     }
 
     // 4. Base language match (pt-BR → pt)
     const base = normalized.split('-')[0];
-    const baseMatch = map.get(base);
+    const baseMatch = LOCALE_MAP.get(base);
     if (baseMatch) {
         return baseMatch;
     }
@@ -153,7 +145,7 @@ export function detectLanguage(locale: string): FdLanguage {
     // 4b. Alias on base (e.g. nb-NO → nb → no)
     const baseAlias = LOCALE_ALIASES[base];
     if (baseAlias) {
-        return map.get(baseAlias) ?? FD_LANGUAGE_ENGLISH;
+        return LOCALE_MAP.get(baseAlias) ?? FD_LANGUAGE_ENGLISH;
     }
 
     // 5. Fallback

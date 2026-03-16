@@ -24,10 +24,10 @@ import { detectLanguage } from './detect-language';
  * Defaults to `true`. Set to `false` to always start with English
  * (or whatever value you provide via a custom `FD_LANGUAGE_SIGNAL` provider).
  */
-export const FD_LANGUAGE_AUTO_DETECT = new InjectionToken<boolean>(
-    'Whether to auto-detect language from browser locale',
-    { providedIn: 'root', factory: () => true }
-);
+export const FD_LANGUAGE_AUTO_DETECT = new InjectionToken<boolean>('Whether to auto-detect language from LOCALE_ID', {
+    providedIn: 'root',
+    factory: () => true
+});
 
 /**
  * Signal-based language token for reactive translations.
@@ -52,7 +52,7 @@ export const FD_LANGUAGE_SIGNAL = new InjectionToken<WritableSignal<FdLanguage>>
         factory: () => {
             const autoDetect = inject(FD_LANGUAGE_AUTO_DETECT);
             if (autoDetect) {
-                const localeId = inject(LOCALE_ID, { optional: true }) ?? 'en-US';
+                const localeId = inject(LOCALE_ID);
                 return signal(detectLanguage(localeId));
             }
             return signal(FD_LANGUAGE_ENGLISH);
@@ -78,7 +78,7 @@ export const FD_LOCALE_SIGNAL = new InjectionToken<WritableSignal<string>>(
         providedIn: 'root',
         factory: () => {
             const langSignal = inject(FD_LANGUAGE_SIGNAL);
-            const fallbackLocale = inject(LOCALE_ID, { optional: true }) ?? 'en-US';
+            const fallbackLocale = inject(LOCALE_ID);
             return linkedSignal(() => langSignal().locale ?? fallbackLocale);
         }
     }
