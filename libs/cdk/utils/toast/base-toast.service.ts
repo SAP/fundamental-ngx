@@ -18,7 +18,6 @@ import {
     StaticProvider,
     TemplateRef,
     Type,
-    ViewContainerRef,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -107,13 +106,13 @@ export abstract class BaseToastService<
     protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
 
     /** @hidden */
-    private _destroyRef = inject(DestroyRef);
+    protected readonly overlay = inject(Overlay);
 
     /** @hidden */
-    protected constructor(
-        public overlay: Overlay,
-        public injector: Injector
-    ) {}
+    protected readonly injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /**
      * Dismisses all Toasts.
@@ -160,9 +159,9 @@ export abstract class BaseToastService<
         toastRef._isAnchor = isAnchor;
 
         if (content instanceof TemplateRef) {
-            // TemplatePortal requires viewContainer ref
-            const viewRef = null as any as ViewContainerRef;
-            const portal = new TemplatePortal(content, viewRef, { $implicit: config, toastRef } as any);
+            // ViewContainerRef is not needed here as the portal is attached directly to the container's outlet
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const portal = new TemplatePortal(content, null!, { $implicit: config, toastRef } as any);
 
             toastRef.instance = containerRef.attachTemplatePortal(portal);
         } else {
