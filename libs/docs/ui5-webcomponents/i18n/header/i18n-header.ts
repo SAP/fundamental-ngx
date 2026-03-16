@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -9,6 +9,7 @@ import {
 @Component({
     selector: 'ui5-i18n-header',
     templateUrl: './i18n-header.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, HeaderTabsComponent]
 })
 export class I18nHeader {

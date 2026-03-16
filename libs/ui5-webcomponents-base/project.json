@@ -54,6 +54,7 @@
                 }
             },
             "dependsOn": [
+                "^build",
                 "generate"
             ],
             "defaultConfiguration": "production"

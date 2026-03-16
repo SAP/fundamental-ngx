@@ -71,7 +71,7 @@ const ALL_LANGUAGES: { constant: FdLanguage; expectedLocale: string; expectedNam
     { constant: FD_LANGUAGE_SLOVENIAN, expectedLocale: 'sl', expectedName: 'Slovenščina' },
     { constant: FD_LANGUAGE_SPANISH, expectedLocale: 'es', expectedName: 'Español' },
     { constant: FD_LANGUAGE_SWEDISH, expectedLocale: 'sv', expectedName: 'Svenska' },
-    { constant: FD_LANGUAGE_THAI, expectedLocale: 'th', expectedName: 'แบบไทย' },
+    { constant: FD_LANGUAGE_THAI, expectedLocale: 'th', expectedName: 'ไทย' },
     { constant: FD_LANGUAGE_TURKISH, expectedLocale: 'tr', expectedName: 'Türkçe' },
     { constant: FD_LANGUAGE_UKRAINIAN, expectedLocale: 'uk', expectedName: 'Українська' }
 ];

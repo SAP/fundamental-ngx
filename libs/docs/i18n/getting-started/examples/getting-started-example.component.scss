@@ -1,13 +1,4 @@
+// border requires custom class — no sap-* utility for border-color + border-width combo
 .example-bordered-card {
-    border: 1px solid var(--sapNeutralBorderColor);
-    border-radius: 4px;
-}
-
-.example-info-panel {
-    background: var(--sapBackgroundColor);
-    border-radius: 4px;
-}
-
-.example-highlight-text {
-    font-size: 1.1rem;
+    border: 0.0625rem solid var(--sapNeutralBorderColor);
 }

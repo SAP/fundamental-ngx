@@ -25,6 +25,5 @@ export class I18nBasicSampleComponent {
     protected readonly localeSignal = inject(FD_LOCALE_SIGNAL);
 
     protected readonly languageName = computed(() => this.langSignal().name ?? 'Unknown');
-    protected readonly currentLocale = computed(() => this.localeSignal());
     protected readonly dateInputLabel = resolveTranslationSignal('coreDatePicker.dateInputLabel');
 }

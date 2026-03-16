@@ -19,9 +19,9 @@ import {
 @Component({
     selector: 'fd-getting-started-example',
     template: `
-        <fd-message-strip [type]="'information'" [dismissible]="false" class="fd-margin-bottom--md">
-            <h4 class="fd-margin-top--none">Choose a Language:</h4>
-            <div class="fd-margin-bottom--sm sap-flex sap-flex--gap-small sap-flex--wrap">
+        <fd-message-strip [type]="'information'" [dismissible]="false" class="sap-margin-bottom-medium">
+            <h4 class="sap-margin-top-none">Choose a Language:</h4>
+            <div class="sap-margin-bottom-small sap-flex sap-flex--gap-small sap-flex--wrap">
                 <button fd-button (click)="switchLanguage('english')">English</button>
                 <button fd-button (click)="switchLanguage('spanish')">Español</button>
                 <button fd-button (click)="switchLanguage('french')">Français</button>
@@ -32,39 +32,39 @@ import {
             </div>
         </fd-message-strip>
 
-        <div class="fd-margin-bottom--md fd-padding--md example-bordered-card">
-            <h4 class="fd-margin-top--none">Using <code>fdTranslate</code> Pipe (in template):</h4>
-            <div class="fd-padding--sm example-info-panel">
-                <div class="fd-margin-bottom--sm">
+        <div class="sap-margin-block-medium fd-padding--md example-bordered-card sap-border-radius-element">
+            <h4 class="sap-margin-top-none">Using <code>fdTranslate</code> Pipe (in template):</h4>
+            <div class="sap-padding sap-bg-color-backgroundColor sap-border-radius-element">
+                <div class="sap-margin-bottom-small">
                     <code>{{ '{' }}{{ '{' }} ('coreDatePicker.dateInputLabel' | fdTranslate)() {{ '}' }}{{ '}' }}</code>
                 </div>
-                <div class="fd-text--bold example-highlight-text">
+                <div class="sap-font-family-bold sap-font-size-large">
                     {{ ('coreDatePicker.dateInputLabel' | fdTranslate)() }}
                 </div>
             </div>
         </div>
 
-        <div class="fd-margin-bottom--md fd-padding--md example-bordered-card">
-            <h4 class="fd-margin-top--none">Using <code>resolveTranslationSignal()</code> (in TypeScript):</h4>
-            <div class="fd-padding--sm example-info-panel">
-                <div class="fd-margin-bottom--sm">
+        <div class="sap-margin-bottom-medium fd-padding--md example-bordered-card sap-border-radius-element">
+            <h4 class="sap-margin-top-none">Using <code>resolveTranslationSignal()</code> (in TypeScript):</h4>
+            <div class="sap-padding sap-bg-color-backgroundColor sap-border-radius-element">
+                <div class="sap-margin-bottom-small">
                     <code>dateRangeLabel = resolveTranslationSignal('coreDatePicker.dateRangeInputLabel')</code>
                 </div>
-                <div class="fd-text--bold example-highlight-text">
+                <div class="sap-font-family-bold sap-font-size-large">
                     {{ dateRangeLabel() }}
                 </div>
             </div>
         </div>
 
-        <div class="fd-margin-bottom--md fd-padding--md example-bordered-card">
-            <h4 class="fd-margin-top--none">Multiple Translations Example:</h4>
-            <div class="fd-padding--sm fd-margin-bottom--sm example-info-panel">
+        <div class="sap-margin-bottom-medium fd-padding--md example-bordered-card sap-border-radius-element">
+            <h4 class="sap-margin-top-none">Multiple Translations Example:</h4>
+            <div class="sap-padding sap-margin-bottom-small sap-bg-color-backgroundColor sap-border-radius-element">
                 <strong>Date Input:</strong> {{ ('coreDatePicker.dateInputLabel' | fdTranslate)() }}
             </div>
-            <div class="fd-padding--sm fd-margin-bottom--sm example-info-panel">
+            <div class="sap-padding sap-margin-bottom-small sap-bg-color-backgroundColor sap-border-radius-element">
                 <strong>Calendar Button:</strong> {{ ('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)() }}
             </div>
-            <div class="fd-padding--sm example-info-panel">
+            <div class="sap-padding sap-bg-color-backgroundColor sap-border-radius-element">
                 <strong>Date Range:</strong> {{ ('coreDatePicker.dateRangeInputLabel' | fdTranslate)() }}
             </div>
         </div>

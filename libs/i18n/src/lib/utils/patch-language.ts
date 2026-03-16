@@ -23,7 +23,6 @@ export const patchedObj = (
  * @Component({
  *    selector: 'my-component',
  *    template: '{{ ('platformTextarea.label' | fdTranslate)() }}',
- *    standalone: true,
  *    providers: [
  *         patchLanguage({
  *             // Partially override translations for this component
@@ -70,13 +69,7 @@ export function patchLanguage(
                     ...patch
                 });
                 // Preserve language metadata from parent — patches should not override identity
-                if (lang.locale !== undefined) {
-                    merged.locale = lang.locale;
-                }
-                if (lang.name !== undefined) {
-                    merged.name = lang.name;
-                }
-                return merged;
+                return { ...merged, locale: lang.locale, name: lang.name };
             }),
         deps: [[new SkipSelf(), FD_LANGUAGE_SIGNAL]]
     };

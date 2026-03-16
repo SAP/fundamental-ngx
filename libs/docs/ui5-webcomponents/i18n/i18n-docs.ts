@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -16,6 +16,7 @@ const basicSampleTs = 'i18n-basic-sample.ts';
 @Component({
     selector: 'ui5-i18n-docs',
     templateUrl: './i18n-docs.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
@@ -30,13 +31,13 @@ export class I18nDocs {
         {
             language: 'html',
             code: getAssetFromModuleAssets(basicSampleHtml),
-            originalFileName: 'i18n-basic-sample'
+            fileName: 'i18n-basic-sample'
         },
         {
             language: 'typescript',
             component: 'I18nBasicSampleComponent',
             code: getAssetFromModuleAssets(basicSampleTs),
-            originalFileName: 'i18n-basic-sample'
+            fileName: 'i18n-basic-sample'
         }
     ];
 }

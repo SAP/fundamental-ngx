@@ -1,26 +1,26 @@
 <div class="auto-detect-example">
-    <div class="fd-padding--md example-bordered-card">
+    <div class="fd-padding--md example-bordered-card sap-border-radius-element">
         <div>
             <strong>Browser locale (LOCALE_ID):</strong>
             <code>{{ browserLocale }}</code>
         </div>
-        <div class="fd-margin-top--sm">
+        <div class="sap-margin-top-small">
             <strong>Detected language:</strong>
             {{ detectedInfo().name }}
         </div>
-        <div class="fd-margin-top--sm">
+        <div class="sap-margin-top-small">
             <strong>Derived locale (FD_LOCALE_SIGNAL):</strong>
             <code>{{ detectedInfo().locale }}</code>
         </div>
-        <div class="fd-margin-top--md fd-padding--sm example-info-panel">
-            <span class="example-highlight-text">
+        <div class="sap-margin-top-medium sap-padding sap-bg-color-backgroundColor sap-border-radius-element">
+            <span class="sap-font-size-large">
                 Browser locale: <code>{{ browserLocale }}</code> &rarr; Detected:
                 <strong>{{ detectedInfo().name }}</strong> (locale: <code>{{ detectedInfo().locale }}</code
                 >)
             </span>
         </div>
     </div>
-    <p class="fd-margin-top--sm sap-font-size-small example-hint-text">
+    <p class="sap-margin-top-small sap-font-size-small sap-color-content_LabelColor">
         <strong>How it works:</strong> At bootstrap, <code>FD_LANGUAGE_SIGNAL</code> reads Angular's
         <code>LOCALE_ID</code> and picks the closest built-in language via <code>detectLanguage()</code>. The locale
         then auto-derives from the language's <code>locale</code> field. To disable, provide

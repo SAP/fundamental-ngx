@@ -105,7 +105,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}
@@ -140,7 +139,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patchFn)]
             })
             class TestComponent {}
@@ -173,7 +171,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}
@@ -220,7 +217,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}
@@ -255,7 +251,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}
@@ -294,7 +289,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}
@@ -330,7 +324,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}
@@ -369,7 +362,6 @@ describe('patchLanguage', () => {
             @Component({
                 selector: 'fd-test',
                 template: '',
-                standalone: true,
                 providers: [patchLanguage(patch)]
             })
             class TestComponent {}

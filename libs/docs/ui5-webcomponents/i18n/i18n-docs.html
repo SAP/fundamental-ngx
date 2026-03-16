@@ -16,22 +16,20 @@
 import '&#64;ui5/webcomponents-localization/dist/Assets.js'; // CLDR data (date/number formatting)
 import '&#64;ui5/webcomponents/dist/Assets.js';              // Component i18n (tooltips, labels, aria-text)
 // If using Fiori components:
-// import '&#64;ui5/webcomponents-fiori/dist/Assets.js';
-</code></pre>
+// import '&#64;ui5/webcomponents-fiori/dist/Assets.js';</code></pre>
     <p>
         Without these imports, translated strings (tooltips, calendar labels) stay in English after a language switch.
         The actual locale data is loaded lazily on first use — no upfront bundle size impact.
     </p>
     <p><strong>Step 2:</strong> Add the language bridge to your app providers:</p>
     <pre><code>// app.config.ts
-import {{ '{' }} provideUi5LanguageBridge {{ '}' }} from '&#64;fundamental-ngx/ui5-webcomponents-base/i18n';
+import &#123; provideUi5LanguageBridge &#125; from '&#64;fundamental-ngx/ui5-webcomponents-base/i18n';
 
-export const appConfig: ApplicationConfig = {{ '{' }}
+export const appConfig: ApplicationConfig = &#123;
   providers: [
     provideUi5LanguageBridge(),
   ]
-{{ '}' }};
-</code></pre>
+&#125;;</code></pre>
     <p>Now <code>langSignal.set(FD_LANGUAGE_GERMAN)</code> updates all fundamental-ngx and UI5 components together.</p>
 </description>
 

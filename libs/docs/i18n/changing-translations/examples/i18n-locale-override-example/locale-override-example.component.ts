@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal, WritableS
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_FRENCH,
@@ -25,7 +25,7 @@ import {
             useValue: signal(FD_LANGUAGE_ENGLISH)
         }
     ],
-    imports: [ButtonComponent, SegmentedButtonModule, FormsModule, FormLabelComponent]
+    imports: [ButtonComponent, SegmentedButtonComponent, FormsModule, FormLabelComponent]
 })
 export class LocaleOverrideExampleComponent {
     /** Track selected language for segmented button */
@@ -44,15 +44,11 @@ export class LocaleOverrideExampleComponent {
     /** Current language name */
     protected readonly languageName = computed(() => this.langSignal().name ?? 'Unknown');
 
-    /** Current locale */
-    protected readonly currentLocale = computed(() => this.localeSignal());
-
     /** Sample date formatted according to current locale */
     protected readonly formattedDate = computed(() => {
         const locale = this.localeSignal();
         try {
-            const pipe = new DatePipe(locale);
-            return pipe.transform(new Date(2026, 2, 14), 'long') ?? '';
+            return this.datePipe.transform(new Date(2026, 2, 14), 'long', undefined, locale) ?? '';
         } catch {
             return new Date(2026, 2, 14).toLocaleDateString(locale, {
                 year: 'numeric',
@@ -62,8 +58,11 @@ export class LocaleOverrideExampleComponent {
         }
     });
 
+    /** Reusable DatePipe instance */
+    private readonly datePipe = new DatePipe('en-US');
+
     /** Change language — locale resets automatically (linkedSignal) */
-    changeLanguage(lang: string): void {
+    protected changeLanguage(lang: string): void {
         this.isOverridden.set(false);
         switch (lang) {
             case 'en':
@@ -79,7 +78,7 @@ export class LocaleOverrideExampleComponent {
     }
 
     /** Override locale to Japanese — demonstrates independent locale control */
-    overrideLocaleToJapanese(): void {
+    protected overrideLocaleToJapanese(): void {
         this.localeSignal.set('ja-JP');
         this.isOverridden.set(true);
     }

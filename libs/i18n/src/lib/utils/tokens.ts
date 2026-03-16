@@ -15,8 +15,6 @@ import { FD_LANGUAGE_ENGLISH } from '../languages/english';
 import { FdLanguage } from '../models/fd-language';
 import { detectLanguage } from './detect-language';
 
-// ===== PRIMARY SIGNAL-BASED TOKENS (Angular 21+) =====
-
 /**
  * Controls whether `FD_LANGUAGE_SIGNAL` auto-detects the user's language
  * from Angular's `LOCALE_ID` at bootstrap time.

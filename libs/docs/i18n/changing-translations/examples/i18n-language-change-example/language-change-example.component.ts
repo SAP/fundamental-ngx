@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal, WritableS
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import {
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_SIGNAL,
@@ -12,7 +12,7 @@ import {
     FdTranslatePipe,
     resolveTranslationSignal
 } from '@fundamental-ngx/i18n';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { TextAreaComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fd-language-change-example',
@@ -27,11 +27,11 @@ import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
         // FD_LOCALE_SIGNAL auto-derives from language via linkedSignal — no manual provider needed
     ],
     imports: [
-        SegmentedButtonModule,
+        SegmentedButtonComponent,
         FormsModule,
         ButtonComponent,
         FormLabelComponent,
-        PlatformTextAreaModule,
+        TextAreaComponent,
         FdTranslatePipe
     ]
 })
@@ -43,26 +43,26 @@ export class LanguageChangeExampleComponent {
      * Resolve translations that will automatically update when language changes.
      * These signals are reactive - when langSignal changes, these automatically re-evaluate.
      */
-    readonly dateInputLabel = resolveTranslationSignal('coreDatePicker.dateInputLabel');
-    readonly dateRangeLabel = resolveTranslationSignal('coreDatePicker.dateRangeInputLabel');
-    readonly calendarToggleLabel = resolveTranslationSignal('coreDatePicker.displayCalendarToggleLabel');
+    protected readonly dateInputLabel = resolveTranslationSignal('coreDatePicker.dateInputLabel');
+    protected readonly dateRangeLabel = resolveTranslationSignal('coreDatePicker.dateRangeInputLabel');
+    protected readonly calendarToggleLabel = resolveTranslationSignal('coreDatePicker.displayCalendarToggleLabel');
+
+    /** Inject the language signal so we can change it */
+    protected readonly langSignal = inject(FD_LANGUAGE_SIGNAL) as WritableSignal<FdLanguage>;
+
+    /** Inject the locale signal read-only for display */
+    protected readonly fdLocaleSignal = inject(FD_LOCALE_SIGNAL);
 
     /**
      * Computed signal showing current language and locale.
      * Locale auto-derives from the language's metadata — no manual coordination needed.
      */
-    readonly currentLanguageInfo = computed(() => {
+    protected readonly currentLanguageInfo = computed(() => {
         const lang = this.langSignal();
         const locale = this.fdLocaleSignal();
         const name = lang.name ?? 'Unknown';
         return `${name} (Locale: ${locale})`;
     });
-
-    /** Inject the language signal so we can change it */
-    private readonly langSignal = inject(FD_LANGUAGE_SIGNAL) as WritableSignal<FdLanguage>;
-
-    /** Inject the locale signal read-only for display */
-    private readonly fdLocaleSignal = inject(FD_LOCALE_SIGNAL);
 
     /**
      * Change the application language at runtime.

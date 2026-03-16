@@ -1,3 +1,6 @@
+// Known trade-off: eager imports of all 37 language constants means they are bundled
+// even if the app only uses a subset. A lazy-registry pattern (where only languages
+// the app explicitly imports are matchable) is planned as a follow-up.
 import { FD_LANGUAGE_ALBANIAN } from '../languages/albanian';
 import { FD_LANGUAGE_ARABIC } from '../languages/arabic';
 import { FD_LANGUAGE_BULGARIAN } from '../languages/bulgarian';

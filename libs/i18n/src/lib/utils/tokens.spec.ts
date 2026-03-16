@@ -17,8 +17,7 @@ describe('Injection Tokens', () => {
         it('should provide default factory with English language signal', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -38,8 +37,7 @@ describe('Injection Tokens', () => {
         it('should be writable signal', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -67,8 +65,7 @@ describe('Injection Tokens', () => {
         it('should work with computed', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -87,8 +84,7 @@ describe('Injection Tokens', () => {
         it('should be injectable as singleton across components', () => {
             @Component({
                 selector: 'fd-test1',
-                template: '',
-                standalone: true
+                template: ''
             })
             class Test1Component {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -96,8 +92,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test2',
-                template: '',
-                standalone: true
+                template: ''
             })
             class Test2Component {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -117,8 +112,7 @@ describe('Injection Tokens', () => {
         it('should react to signal changes', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -157,8 +151,7 @@ describe('Injection Tokens', () => {
         it('should provide default factory with LOCALE_ID signal', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 localeSignal = inject(FD_LOCALE_SIGNAL);
@@ -181,8 +174,7 @@ describe('Injection Tokens', () => {
         it('should be writable signal', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 localeSignal = inject(FD_LOCALE_SIGNAL);
@@ -202,8 +194,7 @@ describe('Injection Tokens', () => {
         it('should work with computed', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 localeSignal = inject(FD_LOCALE_SIGNAL);
@@ -223,8 +214,7 @@ describe('Injection Tokens', () => {
         it('should derive locale from language', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -244,8 +234,7 @@ describe('Injection Tokens', () => {
         it('should update locale when language changes', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -267,8 +256,7 @@ describe('Injection Tokens', () => {
         it('should allow locale override via set', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -289,8 +277,7 @@ describe('Injection Tokens', () => {
         it('should reset locale on language change after override', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -313,8 +300,7 @@ describe('Injection Tokens', () => {
         it('should fall back to LOCALE_ID when language has no locale field', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -339,8 +325,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 localeSignal = inject(FD_LOCALE_SIGNAL);
@@ -365,8 +350,7 @@ describe('Injection Tokens', () => {
         it('should provide default factory with English language', async () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 lang$ = inject(FD_LANGUAGE);
@@ -389,8 +373,7 @@ describe('Injection Tokens', () => {
         it('should be injectable in components', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 lang$ = inject(FD_LANGUAGE);
@@ -418,8 +401,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 lang$ = inject(FD_LANGUAGE);
@@ -447,8 +429,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 lang$ = inject(FD_LANGUAGE);
@@ -502,7 +483,6 @@ describe('Injection Tokens', () => {
             @Component({
                 selector: 'fd-child',
                 template: '',
-                standalone: true,
                 providers: [
                     {
                         provide: FD_LANGUAGE,
@@ -517,7 +497,6 @@ describe('Injection Tokens', () => {
             @Component({
                 selector: 'fd-parent',
                 template: '<fd-child />',
-                standalone: true,
                 imports: [ChildComponent]
             })
             class ParentComponent {
@@ -556,8 +535,7 @@ describe('Injection Tokens', () => {
         it('should provide default factory with LOCALE_ID', async () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 locale$ = inject(FD_LOCALE);
@@ -585,8 +563,7 @@ describe('Injection Tokens', () => {
         it('should be injectable in components', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 locale$ = inject(FD_LOCALE);
@@ -605,8 +582,7 @@ describe('Injection Tokens', () => {
         it('should use custom LOCALE_ID when provided', async () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 locale$ = inject(FD_LOCALE);
@@ -635,8 +611,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 locale$ = inject(FD_LOCALE);
@@ -664,8 +639,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 locale$ = inject(FD_LOCALE);
@@ -703,8 +677,7 @@ describe('Injection Tokens', () => {
         it('should derive locale from FD_LANGUAGE', async () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 lang$ = inject(FD_LANGUAGE);
@@ -736,8 +709,7 @@ describe('Injection Tokens', () => {
         it('should both tokens work together in same component', async () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 lang$ = inject(FD_LANGUAGE);
@@ -770,8 +742,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test1',
-                template: '',
-                standalone: true
+                template: ''
             })
             class Test1Component {
                 lang$ = inject(FD_LANGUAGE);
@@ -779,8 +750,7 @@ describe('Injection Tokens', () => {
 
             @Component({
                 selector: 'fd-test2',
-                template: '',
-                standalone: true
+                template: ''
             })
             class Test2Component {
                 lang$ = inject(FD_LANGUAGE);
@@ -802,8 +772,7 @@ describe('Injection Tokens', () => {
         it('should default to true', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 autoDetect = inject(FD_LANGUAGE_AUTO_DETECT);
@@ -820,8 +789,7 @@ describe('Injection Tokens', () => {
         it('should auto-detect German when LOCALE_ID is de-DE', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -839,8 +807,7 @@ describe('Injection Tokens', () => {
         it('should fall back to English for unsupported locale', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -858,8 +825,7 @@ describe('Injection Tokens', () => {
         it('should use English when auto-detect is disabled regardless of LOCALE_ID', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -880,8 +846,7 @@ describe('Injection Tokens', () => {
         it('should remain writable after auto-detection', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
@@ -902,8 +867,7 @@ describe('Injection Tokens', () => {
         it('should derive locale from auto-detected language end-to-end', () => {
             @Component({
                 selector: 'fd-test',
-                template: '',
-                standalone: true
+                template: ''
             })
             class TestComponent {
                 langSignal = inject(FD_LANGUAGE_SIGNAL);
