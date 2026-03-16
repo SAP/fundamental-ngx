@@ -1063,7 +1063,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
      */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.name) {
+            switch (template.name()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;

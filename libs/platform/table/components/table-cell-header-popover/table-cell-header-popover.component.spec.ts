@@ -70,7 +70,7 @@ describe('TableCellHeaderPopoverComponent', () => {
         fixture.detectChanges();
         tick(1000);
 
-        const renderedPopoverItems = component._popoverItems.toArray().map((item) => item.name);
+        const renderedPopoverItems = component._popoverItems.toArray().map((item) => item.name());
 
         Object.keys(columnPopoverItemsMapping).forEach((popoverItemName) => {
             const popoverItemConditionProperties = (

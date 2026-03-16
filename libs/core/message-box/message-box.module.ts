@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DynamicComponentService, InitialFocusModule, TemplateModule } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, InitialFocusModule, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { MessageBoxTemplateDirective } from './directives/message-box-template.directive';
 import { MessageBoxBodyComponent } from './message-box-body/message-box-body.component';
@@ -27,8 +27,8 @@ const declarations = [
  * Use direct imports of components and directives.
  */
 @NgModule({
-    imports: [TemplateModule, InitialFocusModule, TitleComponent, declarations],
-    exports: [declarations, TemplateModule, InitialFocusModule, TitleComponent],
+    imports: [TemplateDirective, InitialFocusModule, TitleComponent, declarations],
+    exports: [declarations, TemplateDirective, InitialFocusModule, TitleComponent],
     providers: [MessageBoxService, DynamicComponentService]
 })
 export class MessageBoxModule {}

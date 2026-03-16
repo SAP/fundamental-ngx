@@ -269,4 +269,24 @@ describe('MultiComboboxComponent default values', () => {
         expect(multiCombobox._suggestions.length).toEqual(component.dataSource.length);
         expect(multiCombobox._selectedSuggestions.length).toEqual(component.selectedItems.length);
     });
+
+    it('should not move focus to search field when deselecting all items', () => {
+        const focusToSearchFieldSpy = jest.spyOn(<any>multiCombobox, '_focusToSearchField');
+        const item = multiCombobox._suggestions[0];
+
+        // Ensure we start with a selected item
+        expect(item.selected).toBe(true);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(1);
+
+        // Toggle selection to deselect the only item
+        multiCombobox.toggleSelection(item);
+        fixture.detectChanges();
+
+        // Verify item was deselected
+        expect(item.selected).toBe(false);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(0);
+
+        // Verify that _focusToSearchField was NOT called
+        expect(focusToSearchFieldSpy).not.toHaveBeenCalled();
+    });
 });

@@ -20,6 +20,7 @@ import {
     ListComplexExampleComponent,
     ListExampleComponent,
     ListIconExampleComponent,
+    ListSearchResultsExampleComponent,
     ListSecondaryExampleComponent
 } from './examples/list-examples.component';
 import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
@@ -50,6 +51,7 @@ const infiniteScrollSrcTs = 'list-infinite-scroll-example.component.ts';
 const listInteractiveHtml = 'list-interactive-example/list-interactive-example.component.html';
 const listLoadingHtml = 'list-loading-example/list-loading-example.component.html';
 const listLoadingTs = 'list-loading-example/list-loading-example.component.ts';
+const listSearchResultsHtml = 'list-search-results-example.component.html';
 
 @Component({
     selector: 'app-list',
@@ -75,7 +77,8 @@ const listLoadingTs = 'list-loading-example/list-loading-example.component.ts';
         ListKeyboardExampleComponent,
         ListDndExampleComponent,
         ListInfiniteScrollExampleComponent,
-        ListLoadingExampleComponent
+        ListLoadingExampleComponent,
+        ListSearchResultsExampleComponent
     ]
 })
 export class ListDocsComponent {
@@ -234,5 +237,14 @@ export class ListDocsComponent {
             component: 'ListLoadingExampleComponent'
         }
     ];
+
+    searchResultsCode: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(listSearchResultsHtml),
+            fileName: 'list-search-results-example'
+        }
+    ];
+
     readonly _secondaryListItemTypes = _secondaryListItemTypes;
 }

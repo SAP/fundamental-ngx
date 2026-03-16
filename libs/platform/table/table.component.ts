@@ -1735,6 +1735,32 @@ export class TableComponent<T = any>
         });
     }
 
+    /**
+     * After rows are rendered, the IntersectionObserver on the spy row may not
+     * emit a new event if the spy was already visible before the data changed.
+     * This method waits for the DOM to settle, then checks whether the spy row
+     * is actually inside the scroll container's viewport and, if so, triggers
+     * the next page load.
+     *
+     * @hidden
+     */
+    private _recheckSpyIntersection(): void {
+        setTimeout(() => {
+            const container = this.tableContainer?.nativeElement;
+            const spy = container?.querySelector('.fd-table__intersection-spy:last-of-type') as HTMLElement | null;
+            if (!container || !spy) {
+                return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            const spyRect = spy.getBoundingClientRect();
+            // The spy is visible when its top edge is within or above the container's bottom edge
+            // (accounting for the pageScrollingThreshold offset applied via style.top).
+            if (spyRect.top <= containerRect.bottom) {
+                this._onSpyIntersect(true);
+            }
+        });
+    }
+
     /** @hidden */
     handleMouseEnter(rowIndex: number): void {
         this.hoveredRowIndex$.set(rowIndex);
@@ -1783,11 +1809,20 @@ export class TableComponent<T = any>
                     )
                 )
                 .subscribe((rows) => {
-                    rows =
-                        (this.pageScrolling || this.showGrowingButton) && this.getTableState().page.currentPage > 1
-                            ? [...this._tableRows, ...rows]
-                            : rows;
+                    const isAccumulating =
+                        (this.pageScrolling || this.showGrowingButton) && this.getTableState().page.currentPage > 1;
+                    rows = isAccumulating ? [...this._tableRows, ...rows] : rows;
                     this._setTableRows(rows);
+
+                    // After rows change, the intersection spy <tr> may already be visible
+                    // in the scroll container without the IntersectionObserver emitting a
+                    // new transition (e.g. after switching from a short dataset to a long
+                    // one, or when pageSize is small enough that accumulated rows still
+                    // don't fill the viewport). Schedule a visibility check and, if the
+                    // spy is within the viewport, manually trigger the next page load.
+                    if (this.pageScrolling) {
+                        this._recheckSpyIntersection();
+                    }
                 })
         );
 

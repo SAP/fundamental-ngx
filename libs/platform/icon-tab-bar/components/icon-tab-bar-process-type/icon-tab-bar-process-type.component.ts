@@ -71,8 +71,10 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
      * @hidden
      * @param selectedItem
      */
-    _selectItem(selectedItem: IconTabBarItem): void {
-        this._currentStepIndex = selectedItem.index;
+    _selectItem(selectedItem: IconTabBarItem | undefined): void {
+        if (selectedItem) {
+            this._currentStepIndex = selectedItem.index;
+        }
         super._selectItem(selectedItem);
     }
 

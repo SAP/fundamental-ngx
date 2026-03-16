@@ -347,7 +347,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     _onMenuOpen(): void {
-        this._menu.refreshPosition();
+        this._menu?.refreshPosition();
     }
 
     /** @hidden */
