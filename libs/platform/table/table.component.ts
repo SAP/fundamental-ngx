@@ -1070,8 +1070,18 @@ export class TableComponent<T = any>
     }
 
     /** Set current state/settings of the Table. */
-    setTableState(state: TableState): void {
-        this._tableService.setTableState(state);
+    setTableState(state: TableState | PlatformTableManagedPreset): void {
+        this._currentPreset = state;
+        const newState: TableState = Object.assign({}, this._tableService.getDefaultState(), state);
+        this._tableService.setSort(newState.sortBy);
+        this._tableService.setFilters(newState.filterBy);
+        this._tableService.setGroups(newState.groupBy);
+        this.setColumns(newState.columns);
+        this._tableService.search(newState.searchInput);
+        this._tableService.freezeTo(newState.freezeToColumn);
+        this.pageSize = newState.page.pageSize;
+        this._tableService.setCurrentPage(newState.page.currentPage);
+        this._tableService.setTableState(newState);
         this._cdr.markForCheck();
     }
 
@@ -1379,19 +1389,9 @@ export class TableComponent<T = any>
         this.save.emit(event);
     }
 
-    /** Sets current preset for the Table. */
+    /** @deprecated use 'setTableState' instead. Sets current preset for the Table. */
     setPreset(data: PlatformTableManagedPreset): void {
-        this._currentPreset = data;
-        const newState: TableState = Object.assign({}, this._tableService.getDefaultState(), data);
-        this._tableService.setSort(newState.sortBy);
-        this._tableService.setFilters(newState.filterBy);
-        this._tableService.setGroups(newState.groupBy);
-        this.setColumns(newState.columns);
-        this._tableService.search(newState.searchInput);
-        this._tableService.freezeTo(newState.freezeToColumn);
-        this.pageSize = newState.page.pageSize;
-        this._tableService.setCurrentPage(newState.page.currentPage);
-        this._tableService.setTableState(newState);
+        this.setTableState(data);
     }
 
     /** Returns current preset configuration. */
