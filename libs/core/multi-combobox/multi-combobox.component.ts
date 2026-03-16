@@ -592,10 +592,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         this._propagateChange(fromTokenCloseClick);
 
-        if (!this._selectedSuggestions().length) {
-            this._focusToSearchField();
-        }
-
         this._cd.detectChanges();
     }
 

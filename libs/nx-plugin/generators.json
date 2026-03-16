@@ -8,11 +8,6 @@
             "schema": "./src/generators/sap-component/schema.json",
             "description": "sap-component generator"
         },
-        "migrate-to-jest": {
-            "factory": "./src/generators/migrate-to-jest/generator",
-            "schema": "./src/generators/migrate-to-jest/schema.json",
-            "description": "migrate-to-jest generator"
-        },
         "sync-versions": {
             "factory": "./src/generators/sync-versions/generator",
             "schema": "./src/generators/sync-versions/schema.json",
