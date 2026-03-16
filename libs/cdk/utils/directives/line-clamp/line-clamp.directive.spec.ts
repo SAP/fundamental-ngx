@@ -1,4 +1,4 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, viewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
@@ -29,8 +29,8 @@ const LONG_TEXT =
     imports: [LineClampDirective, LineClampTargetDirective]
 })
 class TestComponent {
-    @ViewChild(LineClampDirective) lineClampDirective: LineClampDirective;
-    @ViewChild(LineClampTargetDirective) lineClampTargetDirective: LineClampTargetDirective;
+    readonly lineClampDirective = viewChild(LineClampDirective);
+    readonly lineClampTargetDirective = viewChild(LineClampTargetDirective);
 
     text = LONG_TEXT;
     rows = 2;
@@ -59,7 +59,7 @@ class DisabledClampTestComponent {
     imports: [LineClampTargetDirective]
 })
 class StandaloneTargetTestComponent {
-    @ViewChild(LineClampTargetDirective) targetDirective: LineClampTargetDirective;
+    readonly targetDirective = viewChild(LineClampTargetDirective);
     text = 'Sample text';
 }
 
@@ -88,21 +88,21 @@ describe('LineClampDirective', () => {
 
     it('should create LineClampDirective instance', () => {
         expect(lineClampDebugElement).toBeTruthy();
-        expect(component.lineClampDirective).toBeTruthy();
+        expect(component.lineClampDirective()).toBeTruthy();
     });
 
     it('should create LineClampTargetDirective instance', () => {
         expect(lineClampTargetDebugElement).toBeTruthy();
-        expect(component.lineClampTargetDirective).toBeTruthy();
+        expect(component.lineClampTargetDirective()).toBeTruthy();
     });
 
     it('should expose rootElement via getter', () => {
-        const rootElement = component.lineClampDirective.rootElement;
+        const rootElement = component.lineClampDirective()!.rootElement;
         expect(rootElement).toBe(lineClampDebugElement.nativeElement);
     });
 
     it('should expose targetElement via getter on LineClampTargetDirective', () => {
-        const targetElement = component.lineClampTargetDirective.targetElement;
+        const targetElement = component.lineClampTargetDirective()!.targetElement;
         expect(targetElement).toBe(lineClampTargetDebugElement.nativeElement);
     });
 
@@ -169,7 +169,7 @@ describe('LineClampDirective', () => {
         });
 
         it('should emit update event when target text changes', () => {
-            const updateSpy = jest.spyOn(component.lineClampTargetDirective.update, 'emit');
+            const updateSpy = jest.spyOn(component.lineClampTargetDirective()!.update, 'emit');
 
             component.text = 'Changed text';
             fixture.detectChanges();
@@ -202,7 +202,7 @@ describe('LineClampDirective', () => {
             component.clampState = true;
             fixture.detectChanges();
 
-            component.lineClampDirective.reset();
+            component.lineClampDirective()!.reset();
 
             const targetElement = lineClampTargetDebugElement.nativeElement as HTMLElement;
             expect(targetElement.textContent?.trim()).toContain(LONG_TEXT);
@@ -225,26 +225,26 @@ describe('LineClampTargetDirective (standalone)', () => {
     });
 
     it('should create standalone target directive', () => {
-        expect(component.targetDirective).toBeTruthy();
+        expect(component.targetDirective()).toBeTruthy();
     });
 
     it('should expose targetElement', () => {
-        const element = component.targetDirective.targetElement;
+        const element = component.targetDirective()!.targetElement;
         expect(element).toBeTruthy();
         expect(element.tagName).toBe('DIV');
     });
 
     it('should display the provided text in the target element', () => {
-        expect(component.targetDirective.targetElement.textContent?.trim()).toContain('Sample text');
+        expect(component.targetDirective()!.targetElement.textContent?.trim()).toContain('Sample text');
     });
 
     it('should emit update event on changes', () => {
-        const updateSpy = jest.spyOn(component.targetDirective.update, 'emit');
+        const updateSpy = jest.spyOn(component.targetDirective()!.update, 'emit');
 
         component.text = 'Updated text';
         fixture.detectChanges();
 
-        expect(updateSpy).toHaveBeenCalledWith(component.targetDirective);
+        expect(updateSpy).toHaveBeenCalledWith(component.targetDirective());
     });
 
     it('should emit update event after view init', () => {
@@ -254,7 +254,7 @@ describe('LineClampTargetDirective (standalone)', () => {
         const updateSpy = jest.fn();
         newFixture.detectChanges();
 
-        newComponent.targetDirective.update.subscribe(updateSpy);
+        newComponent.targetDirective()!.update.subscribe(updateSpy);
         newComponent.text = 'trigger change';
         newFixture.detectChanges();
 

@@ -548,8 +548,8 @@ export class PopoverService {
                         }
                         const closeAction = !!trigger.closeAction;
                         const openAction = !!trigger.openAction;
-                        // Defer toggle to avoid NG0600 error when triggered by focusout events
-                        // that occur during Angular's render cycle (e.g., when a button becomes disabled)
+                        // Defer toggle to next microtask to escape any reactive context.
+                        // This prevents NG0600 when events like focusout fire during Angular's render cycle.
                         queueMicrotask(() => this.toggle(openAction, closeAction));
 
                         if (trigger.stopPropagation) {

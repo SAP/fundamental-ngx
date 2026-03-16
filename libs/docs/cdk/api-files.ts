@@ -20,6 +20,6 @@ export const API_FILES = {
     focusableList: ['FocusableListDirective', 'FocusableItemDirective'],
     dnd: ['DndListDirective', 'DndItemDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective'],
     initialFocus: ['InitialFocusDirective'],
-    lineClamp: ['LineClampDirective'],
+    lineClamp: ['LineClampDirective', 'LineClampTargetDirective'],
     rtlService: ['RtlService']
 } as const;
