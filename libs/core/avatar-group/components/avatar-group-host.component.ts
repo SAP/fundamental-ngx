@@ -80,7 +80,7 @@ export class AvatarGroupHostComponent
     _portals: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
-    _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
+    _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resizeEvents$;
 
     /** The reference to the host element */
     readonly elementRef = inject(ElementRef);

@@ -730,7 +730,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      * */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.name) {
+            switch (template.name()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TemplateModule } from '@fundamental-ngx/cdk/utils';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarComponent,
     BarElementDirective,
@@ -51,7 +51,7 @@ const declarations = [
     imports: [
         declarations,
         // Keeping these two items for backwards compatibility.
-        TemplateModule,
+        TemplateDirective,
         BarComponent,
         BarLeftDirective,
         BarMiddleDirective,
@@ -63,7 +63,7 @@ const declarations = [
     exports: [
         declarations,
         // Keeping these two items for backwards compatibility.
-        TemplateModule,
+        TemplateDirective,
         BarComponent,
         BarLeftDirective,
         BarMiddleDirective,

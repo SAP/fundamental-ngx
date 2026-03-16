@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
-import { Nullable, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -23,7 +23,6 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
     templateUrl: './mobile-multi-combobox.component.html',
     styleUrl: './mobile-multi-combobox.component.scss',
     imports: [
-        TemplateModule,
         BarMiddleDirective,
         BarElementDirective,
         ButtonBarComponent,

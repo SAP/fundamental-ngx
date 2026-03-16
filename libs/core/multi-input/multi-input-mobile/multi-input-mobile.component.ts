@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -30,13 +30,12 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        TemplateModule,
+        TemplateDirective,
         BarMiddleDirective,
         BarElementDirective,
         ButtonBarComponent,
         TitleComponent,
         TitleComponent,
-        TemplateDirective,
         BarMiddleDirective,
         BarElementDirective,
         ButtonBarComponent,

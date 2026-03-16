@@ -9,7 +9,7 @@
 }
 <ng-content></ng-content>
 @if (counter || counter === 0) {
-    <span class="fd-list__item-counter">
+    <span class="fd-list__item-counter" [attr.role]="counterRole" [attr.aria-label]="counterAriaLabel">
         {{ counter | number: '1.0-2' }}
     </span>
 }

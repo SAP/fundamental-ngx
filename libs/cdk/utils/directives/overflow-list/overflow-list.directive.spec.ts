@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ViewportRuler } from '@angular/cdk/overlay';
@@ -53,7 +53,7 @@ class TestComponent {
     template: ` <test-component [items]="items" (selected)="onOverflowed($event)"></test-component> `
 })
 class WrapperComponent {
-    items: any[] = Array(100).fill(0);
+    items: any[] = Array.from({ length: 10 }, (_, i) => i);
 
     currentExtraItems = 0;
 
@@ -64,62 +64,55 @@ class WrapperComponent {
 
 declare const global: any;
 
+// Capture callbacks so tests can trigger observers manually.
+let resizeObserverCallback: () => void;
+let mutationObserverCallback: () => void;
+let resizeDisconnectSpy: jest.Mock;
+let mutationDisconnectSpy: jest.Mock;
+
 describe('OverflowItemsDirective', () => {
     let component: WrapperComponent;
     let fixture: ComponentFixture<WrapperComponent>;
+    let overflowListDir: OverflowListDirective;
 
     beforeEach(waitForAsync(() => {
+        resizeDisconnectSpy = jest.fn();
+        mutationDisconnectSpy = jest.fn();
+
+        // Mocking ResizeObserver – capture callback
+        global.ResizeObserver = class {
+            disconnect = resizeDisconnectSpy;
+            constructor(callback: () => void) {
+                resizeObserverCallback = callback;
+            }
+            observe(): void {}
+            unobserve(): void {}
+        };
+
+        // Mocking MutationObserver – capture callback
+        global.MutationObserver = class {
+            disconnect = mutationDisconnectSpy;
+            constructor(callback: () => void) {
+                mutationObserverCallback = callback;
+            }
+            observe(): void {}
+        };
+
         TestBed.configureTestingModule({
             imports: [WrapperComponent, TestComponent, OverflowListDirective, OverflowListItemDirective],
             providers: [ViewportRuler]
         }).compileComponents();
-
-        // Mocking ResizeObserver
-        global.ResizeObserver = class {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            constructor(callback: () => void) {}
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            observe() {}
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            unobserve() {}
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            disconnect() {}
-        };
     }));
 
     beforeEach(async () => {
-        Object.defineProperty(global.window.HTMLElement.prototype, 'clientWidth', {
-            configurable: true,
-            value: 500
-        });
-        Object.defineProperty(global.window.HTMLElement.prototype, 'offsetWidth', {
-            configurable: true,
-            value: 100
-        });
-        Object.defineProperty(global.window.HTMLElement.prototype, 'offsetLeft', {
-            configurable: true,
-            value: 0
-        });
-
         fixture = TestBed.createComponent(WrapperComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         await fixture.whenRenderingDone();
 
-        // Mock the overflow items' sizes
-        const items = fixture.debugElement.queryAll(By.css('.list-item'));
-        items.forEach((item) => {
-            Object.defineProperty(item.nativeElement, 'offsetWidth', {
-                configurable: true,
-                value: 120 // Ensure an overflow
-            });
-        });
-
-        // Trigger initial overflow calculation
-        const overflowListDir = fixture.debugElement
+        overflowListDir = fixture.debugElement
             .query(By.directive(OverflowListDirective))
             .injector.get(OverflowListDirective);
-        overflowListDir.calculateOverflow();
     });
 
     it('should create', () => {
@@ -127,38 +120,67 @@ describe('OverflowItemsDirective', () => {
     });
 
     it('should calculate extra items', fakeAsync(() => {
-        component.items = new Array(100).fill(0); // Ensure enough items to overflow
-        fixture.detectChanges();
-        tick(100); // Simulate time for calculations
+        // JSDOM doesn't compute layout, so we mock getAmountOfExtraItems
+        // to return a realistic overflow count.
+        jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(5);
 
-        // Re-trigger calculation to ensure it happens
-        const overflowListDir = fixture.debugElement
-            .query(By.directive(OverflowListDirective))
-            .injector.get(OverflowListDirective);
         overflowListDir.calculateOverflow();
+        flush();
 
-        fixture.detectChanges();
-        tick(100); // Wait for any async tasks to complete
-
-        fixture.whenStable().then(() => {
-            expect(component.currentExtraItems).not.toBe(0);
-        });
-    }), 10000); // Extend timeout in milliseconds
+        expect(component.currentExtraItems).toBe(5);
+    }));
 
     it('should recalculate on resize', fakeAsync(() => {
-        const initialStateOfExtraItems = component.currentExtraItems;
-
-        component.items.push(1231);
-        fixture.detectChanges();
-        tick(100); // Simulate time for calculations
+        jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(3);
 
         window.dispatchEvent(new Event('resize'));
-        fixture.detectChanges();
-        tick(60); // Simulate time for resize handling and recalculations
+        tick(100); // debounceTime(100) for resize handler
+        flush(); // drain the microtask from calculateOverflow
 
-        fixture.whenStable().then(() => {
-            const stateOfExtraItemsAfterResize = component.currentExtraItems;
-            expect(initialStateOfExtraItems).not.toBe(stateOfExtraItemsAfterResize);
-        });
-    }), 10000); // Extend timeout in milliseconds
+        expect(component.currentExtraItems).toBe(3);
+    }));
+
+    it('should recalculate when ResizeObserver fires', fakeAsync(() => {
+        jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(4);
+
+        // Simulate the ResizeObserver callback (e.g. container shrank)
+        resizeObserverCallback();
+        flush();
+
+        expect(component.currentExtraItems).toBe(4);
+    }));
+
+    it('should recalculate when MutationObserver detects changes (childList / characterData)', fakeAsync(() => {
+        jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(7);
+
+        // Simulate the MutationObserver callback (e.g. text content changed or items added)
+        mutationObserverCallback();
+        flush();
+
+        expect(component.currentExtraItems).toBe(7);
+    }));
+
+    it('should coalesce multiple calculateOverflow calls into one recalculation', fakeAsync(() => {
+        const spy = jest.spyOn(overflowListDir, 'getAmountOfExtraItems').mockReturnValue(2);
+
+        // Call calculateOverflow multiple times synchronously
+        overflowListDir.calculateOverflow();
+        overflowListDir.calculateOverflow();
+        overflowListDir.calculateOverflow();
+        flush();
+
+        // Only one actual recalculation should have occurred
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(component.currentExtraItems).toBe(2);
+    }));
+
+    it('should disconnect ResizeObserver and MutationObserver on destroy', fakeAsync(() => {
+        // Drain any pending microtasks from ngAfterViewInit
+        flush();
+
+        fixture.destroy();
+
+        expect(resizeDisconnectSpy).toHaveBeenCalled();
+        expect(mutationDisconnectSpy).toHaveBeenCalled();
+    }));
 });

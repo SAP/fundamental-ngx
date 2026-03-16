@@ -6,12 +6,13 @@ to the new project structure or to run the project's specific tasks.
 
 Plugin contains the following generators:
 
-- `sap-component` - Generates a new library, which will be a sub-library of the main Fundamental-ngx libraries(core, platform, cdk or cx).
-- `migrate-to-jest` - migrates existing component library to Jest from Karma.
+- `sap-component` - Scaffolds a new Angular component with full setup including the component file, documentation page, usage examples, and e2e tests. Creates a component within core (fd-), platform (fdp-), cx (fdx-), cdk (fdk-), or btp (fdb-) library.
+- `sync-versions` - Synchronizes version placeholders in build output files with actual version numbers for library publishing. See [sync-versions README](src/generators/sync-versions/README.md) for details.
 
 Plugin also contains the following executors:
 
 - `compile-typedoc` - compiles typedoc documentation for the library.
 - `e2e-test` - Custom WebdriverIO executor for running e2e tests in Nx environment.
 - `e2e-test-app` - Custom WebdriverIO executor for running e2e tests in Nx environment for the entire applications.
-- `prepare-library` - Post-build executor for preparing the library for publishing. Includes schematic builds, version syncs and packing the library.
+- `i18n-manage` - CLI for managing translation keys across all language files. See [i18n-manage README](src/executors/i18n-manage/README.md) for details.
+- `transform-translations` - Converts .properties translation files to TypeScript modules. Called automatically by i18n-manage commands.

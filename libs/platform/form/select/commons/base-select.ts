@@ -477,7 +477,7 @@ export abstract class BaseSelect
      * */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.name) {
+            switch (template.name()) {
                 case '_optionItemTemplate':
                     this._optionItemTemplate = template.templateRef;
                     break;

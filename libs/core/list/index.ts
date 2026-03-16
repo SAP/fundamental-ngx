@@ -6,6 +6,7 @@ export * from './directives/byline/list-thumbnail.directive';
 export * from './directives/list-footer.directive';
 export * from './directives/list-group-header.directive';
 export * from './directives/list-icon.directive';
+export * from './directives/list-info-label.directive';
 export * from './directives/list-link.directive';
 export * from './directives/list-navigation-item-arrow.directive';
 export * from './directives/list-navigation-item-text.directive';
