@@ -39,8 +39,10 @@
             "outputs": [
                 "{projectRoot}/index.ts",
                 "{projectRoot}/**/index.ts",
+                "{projectRoot}/**/ng-package.json",
                 "{projectRoot}/types",
                 "{projectRoot}/utils",
+                "{projectRoot}/theming",
                 "{options.outputPath}"
             ]
         },
@@ -48,6 +50,11 @@
             "executor": "@nx/angular:package",
             "outputs": [
                 "{workspaceRoot}/dist/{projectRoot}"
+            ],
+            "inputs": [
+                "production",
+                "^production",
+                { "dependentTasksOutputFiles": "**/*", "transitive": false }
             ],
             "options": {
                 "tsConfig": "libs/ui5-webcomponents-fiori/tsconfig.lib.json",
