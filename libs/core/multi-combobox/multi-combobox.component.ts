@@ -434,7 +434,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
-        private readonly _injector: Injector,
+        protected readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _focusTrapService: FocusTrapService
