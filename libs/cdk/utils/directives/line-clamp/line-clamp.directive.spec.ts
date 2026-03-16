@@ -20,7 +20,7 @@ const LONG_TEXT =
             <span
                 fdkLineClampTarget
                 [fdLineClampTargetText]="text"
-                (update)="lineClampDirective?.refreshTarget($event)"
+                (update)="lineClampDirective()?.refreshTarget($event)"
             >
                 {{ text }}
             </span>
