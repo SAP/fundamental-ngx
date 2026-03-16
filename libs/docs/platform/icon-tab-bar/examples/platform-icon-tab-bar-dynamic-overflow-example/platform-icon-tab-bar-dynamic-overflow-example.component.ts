@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconTabBarComponent, TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 import { textTypeConfig } from '../config-for-examples/text-type.config';
@@ -8,15 +8,11 @@ import { textTypeConfig } from '../config-for-examples/text-type.config';
     templateUrl: './platform-icon-tab-bar-dynamic-overflow-example.component.html',
     imports: [IconTabBarComponent, ButtonComponent]
 })
-export class PlatformIconTabBarDynamicOverflowExampleComponent implements OnInit {
-    items: TabConfig[];
+export class PlatformIconTabBarDynamicOverflowExampleComponent {
+    items: TabConfig[] = structuredClone(textTypeConfig);
 
     /** Whether the long labels variant is active. */
     useLongLabels = false;
-
-    ngOnInit(): void {
-        this.items = structuredClone(textTypeConfig);
-    }
 
     /** Toggle tab labels between short and long text to simulate a structure change (e.g. language switch). */
     toggleLabels(): void {
