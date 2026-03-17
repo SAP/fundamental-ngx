@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.12](https://github.com/SAP/fundamental-ngx/compare/v0.57.11...v0.57.12) (2026-03-17)
+
+
+### Bug Fixes
+
+* **platform:** table group row and no data message need colspan="100%" ([3929a7f](https://github.com/SAP/fundamental-ngx/commit/3929a7f7d78477eda241b543b97a9e6dd099d169))
+
+
+
+
+
 ## [0.57.11](https://github.com/SAP/fundamental-ngx/compare/v0.57.10...v0.57.11) (2026-03-06)
 
 
