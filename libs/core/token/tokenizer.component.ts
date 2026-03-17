@@ -19,6 +19,7 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    OutputRefSubscription,
     QueryList,
     Renderer2,
     ViewChild,
@@ -162,7 +163,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     tokenListChangesSubscription: Subscription;
 
     /** @hidden */
-    tokenListClickSubscriptions: Subscription[] = [];
+    tokenListClickSubscriptions: OutputRefSubscription[] = [];
 
     /** @hidden */
     hiddenCozyTokenCount = 0;
@@ -175,6 +176,9 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     _tokensContainerWidth = 'auto';
+
+    /** @hidden */
+    private _tokenOutputSubscriptions: OutputRefSubscription[] = [];
 
     /** @hidden */
     private _translationResolver = new TranslationResolver();
@@ -263,7 +267,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         ) {
             const selectedElements = this._getActiveTokens();
             const focusedTokenIndex = this._getFocusedTokenIndex();
-            selectedElements.forEach((element) => element.onCloseClick.emit());
+            selectedElements.forEach((element) => element.onCloseClick.emit(undefined));
             if (selectedElements.length > 0) {
                 if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
                     this._focusInput();
@@ -294,14 +298,15 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this.tokenList.changes.pipe(startWith(null)).subscribe(() => {
             this.tokenListChangesSubscription?.unsubscribe();
             this.tokenListChangesSubscription = new Subscription();
+            this._unsubscribeTokenOutputs();
             this._resetTokens();
             this.tokenList.forEach((token) => {
-                this.tokenListChangesSubscription.add(
+                this._tokenOutputSubscriptions.push(
                     token.onCloseClick.subscribe(() => {
                         this._resetTokens();
                     })
                 );
-                this.tokenListChangesSubscription.add(
+                this._tokenOutputSubscriptions.push(
                     token.elementFocused.subscribe((isFocused) => {
                         this._tokenElementFocused.next(isFocused);
                     })
@@ -323,6 +328,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this._tokenElementFocusedSub?.unsubscribe();
         this._eventListeners.forEach((e) => e());
         this._unsubscribeClicks();
+        this._unsubscribeTokenOutputs();
     }
 
     /** @hidden */
@@ -339,8 +345,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     handleTokenClickSubscriptions(): void {
         this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
-            if (token.tokenWrapperElement) {
-                token.tokenWrapperElement.nativeElement.tabIndex = -1;
+            if (token.tokenWrapperElement()) {
+                token.tokenWrapperElement()!.nativeElement.tabIndex = -1;
             }
             this.tokenListClickSubscriptions.push(
                 token.onTokenClick.subscribe((event) => {
@@ -369,7 +375,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         let elementToFocus: HTMLElement | undefined;
         const tokenListArray: TokenComponent[] = this.tokenList.toArray();
         if (tokenListArray[newIndex]) {
-            elementToFocus = tokenListArray[newIndex].tokenWrapperElement.nativeElement;
+            elementToFocus = tokenListArray[newIndex].tokenWrapperElement()!.nativeElement;
             // element needs tabindex in order to be focused
             elementToFocus!.focus();
         }
@@ -453,7 +459,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this._inputElementFocused = true;
         this.tokenList.forEach((token) => {
             this._makeElementVisible(token.elementRef);
-            token._viewContainer.createEmbeddedView(token._content);
+            token._viewContainer()!.createEmbeddedView(token._content()!);
         });
         this._tokensContainerWidth = 'auto';
         this._showMoreElement = false;
@@ -582,7 +588,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
         this._checkMoreElementVisibility();
 
-        this.tokenList.forEach((token) => token._viewContainer.createEmbeddedView(token._content));
+        this.tokenList.forEach((token) => token._viewContainer()!.createEmbeddedView(token._content()!));
 
         let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
         let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
@@ -617,8 +623,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this._cdRef.detectChanges();
         if (this.showOverflowPopover) {
             this._hiddenTokens.forEach((hiddenToken, index) => {
-                hiddenToken._viewContainer.clear();
-                this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content);
+                hiddenToken._viewContainer()?.clear();
+                this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content()!);
             });
         }
     }
@@ -648,8 +654,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this.hiddenCozyTokenCount = 0;
         this.tokenList.forEach((token) => {
             if (
-                token.tokenWrapperElement &&
-                token.tokenWrapperElement.nativeElement.getBoundingClientRect().right < elementLeft
+                token.tokenWrapperElement() &&
+                token.tokenWrapperElement()!.nativeElement.getBoundingClientRect().right < elementLeft
             ) {
                 this.hiddenCozyTokenCount += 1;
             }
@@ -682,7 +688,16 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             this.tokenListClickSubscriptions.forEach((subscription) => {
                 subscription.unsubscribe();
             });
+            this.tokenListClickSubscriptions = [];
         }
+    }
+
+    /** @hidden */
+    private _unsubscribeTokenOutputs(): void {
+        this._tokenOutputSubscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
+        this._tokenOutputSubscriptions = [];
     }
 
     /** @hidden */
@@ -810,7 +825,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     private _isTokenFocused(token: TokenComponent): boolean {
-        return token.tokenWrapperElement.nativeElement === this._document.activeElement;
+        return token.tokenWrapperElement()?.nativeElement === this._document.activeElement;
     }
 
     /** @hidden */
