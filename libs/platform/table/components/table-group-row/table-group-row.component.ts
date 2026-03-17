@@ -67,10 +67,6 @@ export class TableGroupRowComponent<T> extends TableRowDirective implements OnCh
     @Input()
     keyToColumnMap: Map<string, TableColumn>;
 
-    /** Table columns length. */
-    @Input()
-    tableColumnsLength: number;
-
     /** Event emitted when group row expansion state needs to be toggled. */
     @Output()
     toggleGroupRow = new EventEmitter<TableRow<T>>();
