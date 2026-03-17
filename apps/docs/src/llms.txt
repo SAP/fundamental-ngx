@@ -1,0 +1,181 @@
+# Fundamental Library for Angular
+
+> SAP Design System Angular component library for building modern product user experiences with the SAP look and feel.
+
+Fundamental Library for Angular (fundamental-ngx) is a comprehensive Angular component library that implements the SAP Fiori design language. It provides enterprise-ready UI components built with Angular 15+ and follows modern Angular patterns including signals, standalone components, and zoneless change detection.
+
+## Documentation
+
+- [Home](https://sap.github.io/fundamental-ngx/): Main documentation site with live examples with installation and setup guide
+- [Getting Started](https://sap.github.io/fundamental-ngx/#/core/new-component): Implementing A New Component For Fundamental Library For Angular
+- [GitHub Repository](https://github.com/SAP/fundamental-ngx): Source code and issue tracking
+
+## Packages
+
+The library is organized into multiple npm packages:
+
+### @fundamental-ngx/core
+The core package provides base Angular implementations of Fundamental Library Styles components. It offers a rich set of UI components with fine-grained customization at the HTML template level.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/core)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/core)
+- Install: `ng add @fundamental-ngx/core`
+
+### @fundamental-ngx/platform
+Built on top of core, the platform package provides enhanced functionality with higher abstraction. It hides internal implementation details while providing application-driven features that boost productivity.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/platform)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/platform)
+- Install: `ng add @fundamental-ngx/platform`
+
+### @fundamental-ngx/cdk
+A set of utilities and Angular directives for building custom UI components. Includes DataSource helpers, ControlValueAccessor utilities, focusable/selectable list helpers, and RxJS subscription management.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/cdk)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/cdk)
+- Install: `ng add @fundamental-ngx/cdk`
+
+### @fundamental-ngx/i18n
+Internationalization support with signal-based i18n API, translation factory patterns, and dynamic translations with context.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/i18n)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/i18n)
+
+### @fundamental-ngx/btp
+Business Technology Platform specific components and utilities.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/btp)
+
+### @fundamental-ngx/cx
+Customer experience components.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/cx)
+
+### Component Examples
+
+#### Core Components
+Common UI components including: Button, Checkbox, Dialog, Form, Icon, Input, List, Menu, Popover, Select, Switch, Table, Tabs, Toast, Toolbar, and many more.
+
+#### Platform Components
+Higher-level components including: Approval Flow, Dynamic Page, Search Field, Smart Filter Bar, Table with advanced features, Upload Collection, Value Help Dialog, and Wizard.
+
+### Installation
+
+```bash
+# Install core package
+ng add @fundamental-ngx/core
+
+# Install platform package (includes core)
+ng add @fundamental-ngx/platform
+```
+
+### Basic Usage
+
+```typescript
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+
+@Component({
+    selector: 'app-example',
+    imports: [ButtonComponent],
+    template: `<button fd-button label="Click me"></button>`
+})
+export class ExampleComponent {}
+```
+
+## UI5 Web Components Angular Wrappers
+
+These packages provide Angular wrappers around UI5 Web Components, offering an alternative approach to building SAP Fiori applications. They provide Angular-friendly APIs with full TypeScript support and seamless integration with Angular's change detection.
+
+### @fundamental-ngx/ui5-webcomponents
+Angular wrappers for the core UI5 Web Components. Provides fundamental UI elements like Button, Input, Dialog, List, Table, and more.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/ui5-webcomponents)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents)
+- Install: `npm install @fundamental-ngx/ui5-webcomponents`
+
+### @fundamental-ngx/ui5-webcomponents-fiori
+Angular wrappers for UI5 Fiori Web Components. Includes higher-level SAP Fiori patterns like ShellBar, DynamicPage, Timeline, Wizard, and other enterprise-specific components.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/ui5-webcomponents-fiori)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents-fiori)
+- Install: `npm install @fundamental-ngx/ui5-webcomponents-fiori`
+
+### @fundamental-ngx/ui5-webcomponents-ai
+Angular wrappers for UI5 AI Web Components. Provides AI-powered UI elements like PromptInput and AI-enhanced buttons for building AI-integrated applications.
+
+- [Documentation](https://sap.github.io/fundamental-ngx/#/ui5-webcomponents-ai)
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents-ai)
+- Install: `npm install @fundamental-ngx/ui5-webcomponents-ai`
+
+### @fundamental-ngx/ui5-webcomponents-base
+Base utilities and shared types for all UI5 Web Components Angular wrappers. Typically installed automatically as a dependency.
+
+- [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents-base)
+
+### Component Examples
+
+#### Core UI5 Components
+Common UI elements including: Button, Input, Dialog, List, Table, Card, Panel, DatePicker, TimePicker, Select, ComboBox, MultiComboBox, and more.
+
+#### Fiori Components
+Enterprise patterns including: ShellBar, DynamicPage, FlexibleColumnLayout, Timeline, Wizard, NotificationList, SideNavigation, and UploadCollection.
+
+#### AI Components
+AI-powered elements including: PromptInput, AI Button for building intelligent user interfaces.
+
+### Installation
+
+```bash
+# Install core UI5 wrappers
+npm install @fundamental-ngx/ui5-webcomponents
+
+# Install Fiori UI5 wrappers
+npm install @fundamental-ngx/ui5-webcomponents-fiori
+
+# Install AI UI5 wrappers
+npm install @fundamental-ngx/ui5-webcomponents-ai
+```
+
+### Basic Usage
+
+```typescript
+import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
+import { Input } from '@fundamental-ngx/ui5-webcomponents/input';
+import { ShellBar } from '@fundamental-ngx/ui5-webcomponents-fiori/shell-bar';
+
+@Component({
+    selector: 'app-example',
+    imports: [Button, Input, ShellBar],
+    template: `
+        <ui5-shellbar primary-title="My App"></ui5-shellbar>
+        <ui5-button (ui5Click)="handleClick()">Click Me</ui5-button>
+        <ui5-input [(value)]="inputValue"></ui5-input>
+    `
+})
+export class ExampleComponent {
+    inputValue = '';
+    handleClick() { console.log('Clicked!'); }
+}
+```
+
+## Key Features
+
+- **Angular 21+ Support**: Modern Angular with signals, standalone components, and new control flow (@if, @for, @switch)
+- **SAP Fiori Design**: Implements SAP Fiori design guidelines via Fundamental Library Styles
+- **Accessibility**: WCAG 2.1 compliant with full keyboard navigation and screen reader support
+- **RTL Support**: Right-to-left language support via RtlService
+- **Content Density**: Configurable compact, cozy, and condensed modes via ContentDensityService
+- **Theming**: Support for SAP Horizon and other SAP themes
+- **TypeScript**: Fully typed with comprehensive API documentation
+
+## Support
+
+- [GitHub Issues](https://github.com/SAP/fundamental-ngx/issues): Bug reports and feature requests
+- [Slack](https://ui-fundamentals.slack.com): Community support (channel: ui-fundamentals)
+- [Contributing Guide](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md): How to contribute
+
+## Related Projects
+
+- [Fundamental Library Styles](https://sap.github.io/fundamental-styles/): The underlying CSS framework
+- [Fundamental React](https://github.com/SAP/fundamental-react): React implementation
+- [UI5 Web Components](https://sap.github.io/ui5-webcomponents/): Web components implementation

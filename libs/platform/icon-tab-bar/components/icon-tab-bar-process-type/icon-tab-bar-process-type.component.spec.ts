@@ -1,13 +1,46 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { OverflowListDirective } from '@fundamental-ngx/cdk/utils';
+import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { of } from 'rxjs';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
 import { _generateTabBarItems, generateTestConfig } from '../../tests-helper';
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
 
 const AMOUNT_OF_EXTRA_TABS = 80;
+
+/**
+ * Mock OverflowListDirective that doesn't automatically trigger overflow calculations.
+ * This allows tests to control when overflow events are emitted.
+ */
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdkOverflowList]'
+})
+class MockOverflowListDirective {
+    @Input() overflowOffset = 0;
+    @Input() isRtl = false;
+    @Input() itemCssBlockValue = 'flex';
+    @Output() overflowChanged = new EventEmitter<number>();
+
+    getAmountOfExtraItems(): number {
+        return AMOUNT_OF_EXTRA_TABS;
+    }
+
+    calculateOverflow(): void {
+        // No-op in tests - we manually control overflow events
+    }
+}
+
+/**
+ * Mock OverflowListItemDirective - just a no-op placeholder.
+ */
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdkOverflowListItem]'
+})
+class MockOverflowListItemDirective {}
 
 describe('IconTabBarProcessTypeComponent', () => {
     const selectedTabIndex = 50;
@@ -18,10 +51,15 @@ describe('IconTabBarProcessTypeComponent', () => {
         await TestBed.configureTestingModule({
             imports: [IconTabBarProcessTypeComponent],
             providers: [{ provide: IconTabBarComponent, useValue: {} }]
-        }).compileComponents();
+        })
+            .overrideComponent(IconTabBarProcessTypeComponent, {
+                remove: { imports: [OverflowListDirective, OverflowListItemDirective] },
+                add: { imports: [MockOverflowListDirective, MockOverflowListItemDirective] }
+            })
+            .compileComponents();
     });
 
-    beforeEach(() => {
+    beforeEach(fakeAsync(() => {
         fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
         component = fixture.componentInstance;
         (component as any)['_ngZone'] = fakeNgZone as any;
@@ -29,12 +67,15 @@ describe('IconTabBarProcessTypeComponent', () => {
 
         component.tabs = _generateTabBarItems(generateTestConfig(100));
         fixture.detectChanges();
+        // Flush any pending microtasks
+        flush();
+
         component._selectItem(component.tabs[selectedTabIndex]); // Select random item
         component._lastVisibleTabIndex = 60; // Random big number
         component.overflowDirective = fakeOverflowDirective as OverflowListDirective;
         component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
         fixture.detectChanges();
-    });
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();

@@ -1,9 +1,8 @@
+import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { ComponentRef, Directive, EmbeddedViewRef, ViewChild } from '@angular/core';
+import { ComponentRef, Directive, EmbeddedViewRef, viewChild } from '@angular/core';
 import { Subject } from 'rxjs';
-import { coerceCssPixel } from '../../decorators';
-import { Nullable } from '../../models/nullable';
 import { ToastContainerComponent } from '../interfaces/toast-container-component.interface';
 import { BaseToastConfig } from './base-toast-config';
 
@@ -24,32 +23,25 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
      * @hidden
      * The portal outlet inside this container into which the Toast content will be loaded.
      */
-    @ViewChild(CdkPortalOutlet, { static: true })
-    _portalOutlet!: CdkPortalOutlet;
+    readonly _portalOutlet = viewChild.required(CdkPortalOutlet);
 
     /** Min width of the toast component. */
-    @coerceCssPixel
-    minWidth?: string | number | null;
+    readonly minWidth: string;
 
     /** Max width of the toast component. */
-    @coerceCssPixel
-    maxWidth?: string | number | null;
+    readonly maxWidth: string;
 
     /** Width of the toast component. */
-    @coerceCssPixel
-    width?: string | number | null;
+    readonly width: string;
 
     /** Min height of the toast component. */
-    @coerceCssPixel
-    minHeight?: string | number | null;
+    readonly minHeight: string;
 
     /** Max height of the toast component. */
-    @coerceCssPixel
-    maxHeight?: string | number | null;
+    readonly maxHeight: string;
 
     /** Height of the toast component. */
-    @coerceCssPixel
-    height?: string | number | null;
+    readonly height: string;
 
     /** Subject for notifying that the Toast has finished exiting from view. */
     readonly onExit$: Subject<void> = new Subject();
@@ -61,29 +53,29 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     overlayRef!: OverlayRef;
 
     /** Aria label. */
-    ariaLabel: Nullable<string>;
+    readonly ariaLabel: string | undefined | null;
 
     /** ID of the Toast. */
-    id: Nullable<string>;
+    readonly id: string | undefined | null;
 
     /** @hidden */
     protected constructor(public config: P) {
         super();
-        this.minWidth = this.config.minWidth;
-        this.maxWidth = this.config.maxWidth;
-        this.width = this.config.width;
-        this.minHeight = this.config.minHeight;
-        this.maxHeight = this.config.maxHeight;
-        this.height = this.config.height;
-        this.ariaLabel = this.config.ariaLabel;
-        this.id = this.config.id || 'fd-message-toast-' + toastUniqueId++;
+        this.minWidth = coerceCssPixelValue(config.minWidth);
+        this.maxWidth = coerceCssPixelValue(config.maxWidth);
+        this.width = coerceCssPixelValue(config.width);
+        this.minHeight = coerceCssPixelValue(config.minHeight);
+        this.maxHeight = coerceCssPixelValue(config.maxHeight);
+        this.height = coerceCssPixelValue(config.height);
+        this.ariaLabel = config.ariaLabel;
+        this.id = config.id || 'fd-message-toast-' + toastUniqueId++;
     }
 
     /**
      * Attaches component to the portal.
      */
     attachComponentPortal<C>(portal: ComponentPortal<C>): ComponentRef<C> {
-        return this._portalOutlet.attachComponentPortal(portal);
+        return this._portalOutlet().attachComponentPortal(portal);
     }
 
     /**
@@ -91,6 +83,6 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
      * @param portal
      */
     attachTemplatePortal<T>(portal: TemplatePortal<T>): EmbeddedViewRef<T> {
-        return this._portalOutlet.attachTemplatePortal(portal);
+        return this._portalOutlet().attachTemplatePortal(portal);
     }
 }

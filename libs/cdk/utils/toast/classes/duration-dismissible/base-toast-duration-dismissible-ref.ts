@@ -1,5 +1,3 @@
-import { OverlayRef } from '@angular/cdk/overlay';
-import { BaseToastPosition } from '../../base-toast-positions';
 import { BaseToastConfig } from '../base-toast-config';
 import { BaseToastRef } from '../base-toast-ref';
 import { BaseToastDurationDismissibleContainerComponent } from './base-toast-duration-dismissible-container.component';
@@ -7,6 +5,10 @@ import { BaseToastDurationDismissibleContainerComponent } from './base-toast-dur
 /** Maximum number of milliseconds that can be passed into setTimeout. */
 const MAX_TIMEOUT = Math.pow(2, 31) - 1;
 
+/**
+ * Base toast reference for toasts that can be dismissed after a duration and support mouse hover persistence.
+ * Extends BaseToastRef with timer management capabilities for auto-dismissing toasts.
+ */
 export abstract class BaseToastDurationDismissibleRef<
     T = any,
     P extends BaseToastConfig<T> = any,
@@ -17,11 +19,6 @@ export abstract class BaseToastDurationDismissibleRef<
      * dismissed before the duration passes.
      */
     protected durationTimeoutId!: ReturnType<typeof setTimeout>;
-
-    /** @hidden */
-    protected constructor(containerInstance: C, overlayRef: OverlayRef, positionStrategy: BaseToastPosition) {
-        super(containerInstance, overlayRef, positionStrategy);
-    }
 
     /** Dismisses the toast and clears the timeout. */
     override dismiss(): void {

@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { CdkDragPlaceholder } from '@angular/cdk/drag-drop';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
@@ -28,7 +30,9 @@ import {
         PlatformTableModule,
         TableInitialStateDirective,
         ButtonComponent,
-        FdDatetimeModule
+        FdDatetimeModule,
+        CdkDragPlaceholder,
+        IconComponent
     ]
 })
 export class PlatformTableDefaultExampleComponent {

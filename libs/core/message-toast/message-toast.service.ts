@@ -1,5 +1,5 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { EmbeddedViewRef, Inject, Injectable, Injector, StaticProvider, TemplateRef, Type } from '@angular/core';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { EmbeddedViewRef, Injectable, StaticProvider, TemplateRef, Type, inject } from '@angular/core';
 import { BaseDismissibleToastService, BaseToastPosition, ToastBottomCenterPosition } from '@fundamental-ngx/cdk/utils';
 import { MessageToastTextComponent } from './components/message-toast-text.component';
 import { MessageToastConfig } from './config/message-toast.config';
@@ -9,22 +9,16 @@ import { MessageToastRef } from './ref/message-toast.ref';
 
 @Injectable()
 export class MessageToastService<P = any> extends BaseDismissibleToastService<MessageToastConfig<P>> {
-    /** @Hidden */
-    protected toastTextComponent = MessageToastTextComponent;
-    /** @Hidden */
-    protected toastContainerComponent = MessageToastComponent;
-    /** @Hidden */
-    protected toastDataInjectionToken = MESSAGE_TOAST_DATA;
-    /** @Hidden */
-    protected toastPositionStrategy = ToastBottomCenterPosition;
-    /** @Hidden */
-    protected defaultConfig;
-
     /** @hidden */
-    constructor(overlay: Overlay, injector: Injector, @Inject(MESSAGE_TOAST_CONFIG) config: MessageToastConfig) {
-        super(overlay, injector);
-        this.defaultConfig = config;
-    }
+    protected toastTextComponent = MessageToastTextComponent;
+    /** @hidden */
+    protected toastContainerComponent = MessageToastComponent;
+    /** @hidden */
+    protected toastDataInjectionToken = MESSAGE_TOAST_DATA;
+    /** @hidden */
+    protected toastPositionStrategy = ToastBottomCenterPosition;
+    /** @hidden */
+    protected override defaultConfig = inject(MESSAGE_TOAST_CONFIG);
 
     /**
      * Opens toast with a provided message.
@@ -36,13 +30,12 @@ export class MessageToastService<P = any> extends BaseDismissibleToastService<Me
         message: string | Type<T> | TemplateRef<any>,
         config?: MessageToastConfig<P>
     ): MessageToastRef<MessageToastTextComponent | T | EmbeddedViewRef<any>> {
-        const mergedConfig = { ...this.defaultConfig, ...config };
         if (message instanceof TemplateRef) {
-            return this.openFromTemplate(message, mergedConfig);
+            return this.openFromTemplate(message, config ?? this.defaultConfig);
         } else if (typeof message === 'string') {
-            return this.openFromString(message, mergedConfig);
+            return this.openFromString(message, config);
         }
-        return this.openFromComponent(message, mergedConfig);
+        return this.openFromComponent(message, config ?? this.defaultConfig);
     }
 
     /**

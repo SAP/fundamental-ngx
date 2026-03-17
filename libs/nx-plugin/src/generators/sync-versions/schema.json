@@ -1,12 +1,13 @@
 {
     "$schema": "http://json-schema.org/schema",
     "$id": "SyncVersions",
-    "title": "",
+    "title": "Sync Versions Generator",
+    "description": "Synchronizes version placeholders in build output files with actual version numbers for library publishing",
     "type": "object",
     "properties": {
         "project": {
             "type": "string",
-            "description": "",
+            "description": "The name of the project to sync versions for (e.g., 'core', 'platform', 'cdk')",
             "$default": {
                 "$source": "argv",
                 "index": 0
@@ -15,7 +16,10 @@
         },
         "files": {
             "type": "array",
-            "description": "Which files do you want to sync versions for?"
+            "description": "Glob patterns for files to sync. If not provided, uses the project's build output directory automatically.",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "required": ["project"]
