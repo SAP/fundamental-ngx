@@ -240,7 +240,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             this._renderer.listen('window', 'click', (e: Event) => {
                 if (this.elementRef.nativeElement.contains(e.target) === false) {
                     this.tokenList.forEach((token) => {
-                        token.selected = false;
+                        token.selected.set(false);
                     });
                 }
             })
@@ -403,10 +403,10 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const token = this.tokenList.find((_, index) => index === fromIndex);
             this.tokenList.forEach((shadowedToken) => {
                 if (shadowedToken !== token) {
-                    shadowedToken.selected = false;
+                    shadowedToken.selected.set(false);
                 }
             });
-            token && (token.selected = !token.selected);
+            token && token.selected.set(!token.selected());
             event.preventDefault();
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this._focusInput();
@@ -420,7 +420,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             newIndex = fromIndex + 1;
         } else if (KeyUtil.isKeyCode(event, A) && !this._getInputValue() && this._isControlKey(event)) {
             event.preventDefault();
-            this.tokenList.forEach((token) => (token.selected = true));
+            this.tokenList.forEach((token) => token.selected.set(true));
         }
         if (newIndex === this.tokenList.length && this._goForwardRequested(event, rtl)) {
             this._focusInput();
@@ -731,18 +731,18 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _basicSelected(token: TokenComponent, index: number): void {
         this.tokenList.forEach((shadowedToken) => {
             if (shadowedToken !== token) {
-                shadowedToken.selected = false;
+                shadowedToken.selected.set(false);
             }
         });
         this._firstElementInSelection = index;
         this._lastElementInSelection = index;
-        token.selected = true;
+        token.selected.set(true);
         this._ctrlPrevious = false;
     }
 
     /** @hidden Restart first and last elements for shift selection.*/
     private resetFirstAndLastElement(): void {
-        const reset = !this.tokenList.some((token) => token.selected);
+        const reset = !this.tokenList.some((token) => token.selected());
         if (reset) {
             this._firstElementInSelection = null;
             this._lastElementInSelection = null;
@@ -777,11 +777,12 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
 
         this.tokenList.forEach((token, indexOfToken) => {
-            token.selected =
+            token.selected.set(
                 this._firstElementInSelection != null &&
-                this._lastElementInSelection != null &&
-                indexOfToken >= this._firstElementInSelection &&
-                indexOfToken <= this._lastElementInSelection;
+                    this._lastElementInSelection != null &&
+                    indexOfToken >= this._firstElementInSelection &&
+                    indexOfToken <= this._lastElementInSelection
+            );
         });
         this._ctrlPrevious = false;
     }
@@ -790,13 +791,13 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _ctrlSelected(token: TokenComponent, index: number): void {
         this._firstElementInSelection = null;
         this._lastElementInSelection = null;
-        const selected = token.selected;
-        token.selected = true;
+        const selected = token.selected();
+        token.selected.set(true);
         if (selected) {
-            token.selected = false;
+            token.selected.set(false);
             this.tokenList.forEach((element, indexOfToken) => {
                 if (!this._firstElementInSelection) {
-                    if (element.selected) {
+                    if (element.selected()) {
                         this._firstElementInSelection = indexOfToken;
                     }
                 } else {
@@ -815,7 +816,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** Get selected and focused tokens */
     private _getActiveTokens(): TokenComponent[] {
-        return this.tokenList.filter((item) => item.selected || this._isTokenFocused(item));
+        return this.tokenList.filter((item) => item.selected() || this._isTokenFocused(item));
     }
 
     /** @hidden */
@@ -835,7 +836,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     private _tokensSelected(): boolean {
-        return this.tokenList.some((t) => t.selected);
+        return this.tokenList.some((t) => t.selected());
     }
 
     /** @hidden */

@@ -126,8 +126,8 @@ describe('TokenizerComponent', () => {
             event
         );
 
-        expect(component.tokenList.first.selected).toBeTruthy();
-        expect(component.tokenList.last.selected).toBeTruthy();
+        expect(component.tokenList.first.selected()).toBeTruthy();
+        expect(component.tokenList.last.selected()).toBeTruthy();
     });
 
     it('should deselect using control or command', () => {
@@ -145,8 +145,8 @@ describe('TokenizerComponent', () => {
             event
         );
 
-        expect(component.tokenList.first.selected).toBeTruthy();
-        expect(component.tokenList.last.selected).toBeFalsy();
+        expect(component.tokenList.first.selected()).toBeTruthy();
+        expect(component.tokenList.last.selected()).toBeFalsy();
     });
 
     it('should select using shift', () => {
@@ -159,7 +159,7 @@ describe('TokenizerComponent', () => {
             event
         );
 
-        expect(component.tokenList.first.selected).toBeTruthy();
+        expect(component.tokenList.first.selected()).toBeTruthy();
     });
 
     it('should focus a token element', async () => {

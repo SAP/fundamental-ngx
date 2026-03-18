@@ -9,9 +9,9 @@
     [attr.aria-setsize]="_totalCount()"
     [attr.aria-posinset]="_itemPosition()"
     [class.fd-token__disabled]="disabled()"
-    [class.fd-token--selected]="_effectiveSelected()"
+    [class.fd-token--selected]="selected()"
     [class.fd-token--readonly]="readOnly()"
-    [attr.aria-selected]="_effectiveSelected()"
+    [attr.aria-selected]="selected()"
 >
     <span class="fd-token__text no-text-select">
         <ng-container #viewContainer></ng-container>

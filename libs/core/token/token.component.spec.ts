@@ -56,7 +56,7 @@ describe('TokenComponent', () => {
         });
 
         it('should have selected false by default', () => {
-            expect(component.selected).toBe(false);
+            expect(component.selected()).toBe(false);
         });
 
         it('should have readOnly false by default', () => {
@@ -74,7 +74,7 @@ describe('TokenComponent', () => {
             fixture.componentRef.setInput('selected', true);
             fixture.detectChanges();
             await fixture.whenStable();
-            expect(component.selected).toBe(true);
+            expect(component.selected()).toBe(true);
         });
 
         it('should update readOnly property via setInput', async () => {
@@ -85,8 +85,8 @@ describe('TokenComponent', () => {
         });
 
         it('should update selected property programmatically', () => {
-            component.selected = true;
-            expect(component.selected).toBe(true);
+            component.selected.set(true);
+            expect(component.selected()).toBe(true);
         });
     });
 
@@ -113,7 +113,7 @@ describe('TokenComponent', () => {
         });
 
         it('should apply fd-token--selected class when selected programmatically', async () => {
-            component.selected = true;
+            component.selected.set(true);
             fixture.detectChanges();
             await fixture.whenStable();
             const tokenElement = fixture.nativeElement.querySelector('.fd-token');
@@ -316,7 +316,7 @@ describe('TokenComponent', () => {
 
             expect(tokenElement.getAttribute('aria-selected')).toBe('false');
 
-            component.selected = true;
+            component.selected.set(true);
             fixture.detectChanges();
             await fixture.whenStable();
 
@@ -375,31 +375,29 @@ describe('TokenComponent', () => {
     });
 
     describe('Programmatic selected vs input selected', () => {
-        it('should prefer programmatic selected over input selected', async () => {
+        it('should allow programmatic update after input binding', async () => {
             // Set input to false
             fixture.componentRef.setInput('selected', false);
             fixture.detectChanges();
             await fixture.whenStable();
 
-            expect(component.selected).toBe(false);
+            expect(component.selected()).toBe(false);
 
             // Set programmatically to true
-            component.selected = true;
+            component.selected.set(true);
             fixture.detectChanges();
             await fixture.whenStable();
 
-            // Programmatic value should take precedence
-            expect(component.selected).toBe(true);
-            expect(component._effectiveSelected()).toBe(true);
+            // Programmatic value should update the model
+            expect(component.selected()).toBe(true);
         });
 
-        it('should use input value when programmatic is null', async () => {
+        it('should reflect input value', async () => {
             fixture.componentRef.setInput('selected', true);
             fixture.detectChanges();
             await fixture.whenStable();
 
-            expect(component.selected).toBe(true);
-            expect(component._selectedProgrammatic()).toBeNull();
+            expect(component.selected()).toBe(true);
         });
     });
 });

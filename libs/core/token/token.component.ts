@@ -9,15 +9,16 @@ import {
     TemplateRef,
     ViewContainerRef,
     ViewEncapsulation,
-    computed,
+    booleanAttribute,
     inject,
     input,
+    model,
     output,
     signal,
     viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { fromEvent } from 'rxjs';
@@ -38,7 +39,7 @@ import { fromEvent } from 'rxjs';
     },
     imports: [FdTranslatePipe]
 })
-export class TokenComponent implements AfterViewInit {
+export class TokenComponent implements AfterViewInit, HasElementRef {
     /** @hidden */
     readonly tokenWrapperElement = viewChild<ElementRef>('tokenWrapperElement');
 
@@ -68,32 +69,19 @@ export class TokenComponent implements AfterViewInit {
     readonly elementFocused = output<boolean>();
 
     /** Whether the token is disabled. */
-    readonly disabled = input(false);
+    readonly disabled = input(false, { transform: booleanAttribute });
 
-    /**
-     * Whether the token is selected.
-     * @hidden Internal signal input - use the `selected` property for programmatic access.
-     */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
-    readonly _selectedInput = input(false, { alias: 'selected' });
+    /** Whether the token is selected. Supports two-way binding via [(selected)]. */
+    readonly selected = model(false);
 
     /** Whether the token is read-only. */
     readonly readOnly = input(false);
-
-    /** @hidden Internal signal for programmatic selected updates (used by tokenizer) */
-    readonly _selectedProgrammatic = signal<boolean | null>(null);
 
     /** @hidden Internal signal for total count (set by tokenizer) */
     readonly _totalCount = signal<number | undefined>(undefined);
 
     /** @hidden Internal signal for item position (set by tokenizer) */
     readonly _itemPosition = signal<number | undefined>(undefined);
-
-    /** @hidden Effective selected state - combines input and programmatic value */
-    readonly _effectiveSelected = computed(() => {
-        const programmatic = this._selectedProgrammatic();
-        return programmatic !== null ? programmatic : this._selectedInput();
-    });
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
@@ -103,23 +91,6 @@ export class TokenComponent implements AfterViewInit {
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
-
-    /**
-     * @hidden
-     * Programmatically set the selected state.
-     * Used by tokenizer to manage token selection.
-     */
-    set selected(value: boolean) {
-        this._selectedProgrammatic.set(value);
-    }
-
-    /**
-     * Whether the token is selected.
-     * Use this property for programmatic access. For template binding, use [selected].
-     */
-    get selected(): boolean {
-        return this._effectiveSelected();
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {
