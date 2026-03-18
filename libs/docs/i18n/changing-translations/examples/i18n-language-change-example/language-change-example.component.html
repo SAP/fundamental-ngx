@@ -1,5 +1,5 @@
 <div class="language-change-example">
-    <div class="fd-margin-top--md">
+    <div class="sap-margin-top-medium">
         <!-- Language selector -->
         <label fd-form-label>Select Language:</label>
         <fd-segmented-button [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
@@ -9,48 +9,39 @@
         </fd-segmented-button>
 
         <!-- Current language/locale info -->
-        <div class="fd-margin-top--md fd-padding--md" style="background-color: var(--sapBackgroundColor)">
+        <div class="sap-margin-top-medium fd-padding--md sap-bg-color-backgroundColor">
             <strong>Current Settings:</strong> {{ currentLanguageInfo() }}
         </div>
     </div>
 
     <!-- Visual demonstration section -->
-    <div class="fd-margin-top--md">
+    <div class="sap-margin-top-medium">
         <label fd-form-label>Translated UI Elements (update automatically):</label>
 
         <!-- Show multiple translated elements so language change is obvious -->
-        <div class="fd-margin-top--sm">
+        <div class="sap-margin-top-small">
             <!-- Translation 1: Date Input Label -->
-            <div
-                class="fd-padding--sm fd-margin-bottom--md"
-                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
-            >
+            <div class="sap-padding sap-margin-bottom-medium example-bordered-card">
                 <code>coreDatePicker.dateInputLabel:</code>
-                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateInputLabel() }}</div>
+                <div class="sap-margin-top-tiny sap-font-family-bold">{{ dateInputLabel() }}</div>
             </div>
 
             <!-- Translation 2: Date Range Label -->
-            <div
-                class="fd-padding--sm fd-margin-bottom--md"
-                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
-            >
+            <div class="sap-padding sap-margin-bottom-medium example-bordered-card">
                 <code>coreDatePicker.dateRangeInputLabel:</code>
-                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ dateRangeLabel() }}</div>
+                <div class="sap-margin-top-tiny sap-font-family-bold">{{ dateRangeLabel() }}</div>
             </div>
 
             <!-- Translation 3: Calendar Toggle Label -->
-            <div
-                class="fd-padding--sm fd-margin-bottom--md"
-                style="border: 1px solid var(--sapGroup_ContentBorderColor)"
-            >
+            <div class="sap-padding sap-margin-bottom-medium example-bordered-card">
                 <code>coreDatePicker.displayCalendarToggleLabel:</code>
-                <div class="fd-margin-top--tiny" style="font-weight: bold">{{ calendarToggleLabel() }}</div>
+                <div class="sap-margin-top-tiny sap-font-family-bold">{{ calendarToggleLabel() }}</div>
             </div>
 
             <!-- Translation 4: Using pipe in button -->
-            <div class="fd-padding--sm" style="border: 1px solid var(--sapGroup_ContentBorderColor)">
+            <div class="sap-padding example-bordered-card">
                 <code>Using pipe in button label:</code>
-                <div class="fd-margin-top--sm">
+                <div class="sap-margin-top-small">
                     <button
                         fd-button
                         [label]="('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)()"
@@ -62,7 +53,7 @@
     </div>
 
     <!-- Interactive textarea with counter (shows platform component translations) -->
-    <div class="fd-margin-top--md">
+    <div class="sap-margin-top-medium">
         <label fd-form-label for="textarea-language-change"
             >Platform Textarea (counter messages translate automatically):</label
         >
@@ -74,9 +65,9 @@
             placeholder="Type more than 10 characters to see counter messages..."
         >
         </fdp-textarea>
-        <p class="fd-margin-top--sm" style="font-size: 0.875rem; color: var(--sapContent_LabelColor)">
-            💡 <strong>Tip:</strong> Type text longer than 10 characters to see the counter messages update when you
-            change languages.
+        <p class="sap-margin-top-small sap-font-size-small sap-color-content_LabelColor">
+            <strong>Tip:</strong> Type text longer than 10 characters to see the counter messages update when you change
+            languages. Only <code>langSignal.set()</code> is needed — locale and UI5 follow automatically.
         </p>
     </div>
 </div>

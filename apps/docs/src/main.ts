@@ -1,3 +1,8 @@
+// Register UI5 locale data (CLDR) and component i18n assets (tooltips, labels, aria-text)
+// so language switching works without CDN fallback
+import '@ui5/webcomponents-localization/dist/Assets.js';
+import '@ui5/webcomponents/dist/Assets.js';
+
 import { registerLocaleData } from '@angular/common';
 import localeKa from '@angular/common/locales/ka';
 import localeUk from '@angular/common/locales/uk';
