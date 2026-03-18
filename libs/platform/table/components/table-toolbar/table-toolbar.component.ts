@@ -11,7 +11,9 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
-    inject
+    computed,
+    inject,
+    input
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,6 +23,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -49,6 +52,12 @@ export interface ToolbarContext {
     settings: Signal<boolean>;
     hasAnyActions: Signal<boolean>;
     appliedFilters: Signal<TableAppliedFilter[]>;
+}
+
+/** Context provided to the titleTemplate. */
+export interface TableToolbarTitleTemplateContext {
+    /** Item count signal. */
+    counter: Signal<number>;
 }
 
 export type EditMode = 'none' | 'inline';
@@ -101,7 +110,8 @@ export class TableToolbarTemplateDirective {
         FdTranslatePipe,
         TableToolbarTemplateDirective,
         ToolbarLabelDirective,
-        ContentDensityDirective
+        ContentDensityDirective,
+        TitleComponent
     ]
 })
 export class TableToolbarComponent implements TableToolbarInterface {
@@ -150,12 +160,6 @@ export class TableToolbarComponent implements TableToolbarInterface {
     @Input()
     disableSearch = false;
 
-    /**
-     * Heading level of the table toolbar title.
-     */
-    @Input()
-    headingLevel: HeadingLevel = 2;
-
     /** Search field input text. */
     @Input()
     set searchFieldInputText(text: string) {
@@ -190,6 +194,36 @@ export class TableToolbarComponent implements TableToolbarInterface {
 
     /** @hidden */
     _searchInputText = '';
+
+    /**
+     * Custom title template. When provided, it replaces the default string title.
+     * The template context provides a `counter` signal with the current item count.
+     *
+     * ```html
+     * <fdp-table-toolbar [titleTemplate]="customTitleTpl">
+     *   <ng-template #customTitleTpl let-counter="counter">
+     *     <fd-icon glyph="product"></fd-icon> Products ({{ counter() }})
+     *   </ng-template>
+     * </fdp-table-toolbar>
+     * ```
+     */
+    titleTemplate = input<TemplateRef<TableToolbarTitleTemplateContext> | null>(null);
+
+    /**
+     * Heading level of the table toolbar title.
+     */
+    headingLevel = input<HeadingLevel>(2);
+
+    /** @hidden */
+    readonly headingLevelParsed = computed(() => {
+        const level = this.headingLevel();
+        if (typeof level === 'number') {
+            return level;
+        } else if (typeof level === 'string') {
+            return Number.parseInt(level.replace(/\D/g, ''), 10);
+        }
+        return 2;
+    });
 
     /** @hidden */
     readonly tableLoading$: Observable<boolean> = inject(TableService).tableLoading$;

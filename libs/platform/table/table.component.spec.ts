@@ -94,4 +94,160 @@ describe('TableComponent', () => {
             expect(component.tableBodyHeight).toEqual('100%');
         });
     });
+
+    describe('setTableState', () => {
+        it('should set all table state properties when called with full TableState', () => {
+            const mockState = {
+                sortBy: [{ field: 'name', direction: 'asc' }],
+                filterBy: [{ field: 'status', value: 'active' }],
+                groupBy: [{ field: 'category', direction: 'asc' }],
+                columns: ['col1', 'col2', 'col3'],
+                searchInput: 'test search',
+                freezeToColumn: 'col1',
+                page: { currentPage: 2, pageSize: 25 }
+            };
+
+            jest.spyOn(component['_tableService'], 'getDefaultState').mockReturnValue({});
+            jest.spyOn(component['_tableService'], 'setSort');
+            jest.spyOn(component['_tableService'], 'setFilters');
+            jest.spyOn(component['_tableService'], 'setGroups');
+            jest.spyOn(component, 'setColumns');
+            jest.spyOn(component['_tableService'], 'search');
+            jest.spyOn(component['_tableService'], 'freezeTo');
+            jest.spyOn(component['_tableService'], 'setCurrentPage');
+            jest.spyOn(component['_tableService'], 'setTableState');
+            jest.spyOn(component['_cdr'], 'markForCheck');
+
+            component.setTableState(mockState);
+
+            expect(component['_tableService'].setSort).toHaveBeenCalledWith(mockState.sortBy);
+            expect(component['_tableService'].setFilters).toHaveBeenCalledWith(mockState.filterBy);
+            expect(component['_tableService'].setGroups).toHaveBeenCalledWith(mockState.groupBy);
+            expect(component.setColumns).toHaveBeenCalledWith(mockState.columns);
+            expect(component['_tableService'].search).toHaveBeenCalledWith(mockState.searchInput);
+            expect(component['_tableService'].freezeTo).toHaveBeenCalledWith(mockState.freezeToColumn);
+            expect(component.pageSize).toBe(25);
+            expect(component['_tableService'].setCurrentPage).toHaveBeenCalledWith(2);
+            expect(component['_tableService'].setTableState).toHaveBeenCalled();
+            expect(component['_cdr'].markForCheck).toHaveBeenCalled();
+        });
+
+        it('should set table state with PlatformTableManagedPreset (partial state)', () => {
+            const mockPreset = {
+                sortBy: [{ field: 'name', direction: 'asc' }],
+                columns: ['col1', 'col2']
+            };
+
+            jest.spyOn(component['_tableService'], 'getDefaultState').mockReturnValue({
+                filterBy: [],
+                groupBy: [],
+                searchInput: '',
+                freezeToColumn: null,
+                page: { currentPage: 1, pageSize: 10 }
+            });
+            jest.spyOn(component['_tableService'], 'setSort');
+            jest.spyOn(component['_tableService'], 'setFilters');
+            jest.spyOn(component['_tableService'], 'setGroups');
+            jest.spyOn(component, 'setColumns');
+            jest.spyOn(component['_tableService'], 'search');
+            jest.spyOn(component['_tableService'], 'freezeTo');
+            jest.spyOn(component['_tableService'], 'setCurrentPage');
+            jest.spyOn(component['_tableService'], 'setTableState');
+            jest.spyOn(component['_cdr'], 'markForCheck');
+
+            component.setTableState(mockPreset);
+
+            expect(component['_tableService'].setSort).toHaveBeenCalledWith(mockPreset.sortBy);
+            expect(component.setColumns).toHaveBeenCalledWith(mockPreset.columns);
+            expect(component['_tableService'].setTableState).toHaveBeenCalled();
+            expect(component['_cdr'].markForCheck).toHaveBeenCalled();
+        });
+
+        it('should store the provided state in _currentPreset', () => {
+            const mockState = {
+                columns: ['col1', 'col2'],
+                page: { currentPage: 1, pageSize: 10 }
+            };
+
+            jest.spyOn(component['_tableService'], 'getDefaultState').mockReturnValue({});
+            jest.spyOn(component['_tableService'], 'setSort');
+            jest.spyOn(component['_tableService'], 'setFilters');
+            jest.spyOn(component['_tableService'], 'setGroups');
+            jest.spyOn(component, 'setColumns');
+            jest.spyOn(component['_tableService'], 'search');
+            jest.spyOn(component['_tableService'], 'freezeTo');
+            jest.spyOn(component['_tableService'], 'setCurrentPage');
+            jest.spyOn(component['_tableService'], 'setTableState');
+
+            component.setTableState(mockState);
+
+            expect(component['_currentPreset']).toBe(mockState);
+        });
+
+        it('should merge provided state with default state', () => {
+            const mockDefaultState = {
+                sortBy: [],
+                filterBy: [],
+                groupBy: [],
+                columns: [],
+                searchInput: '',
+                freezeToColumn: null,
+                page: { currentPage: 1, pageSize: 10 }
+            };
+
+            const mockProvidedState = {
+                sortBy: [{ field: 'name', direction: 'asc' }],
+                columns: ['col1']
+            };
+
+            jest.spyOn(component['_tableService'], 'getDefaultState').mockReturnValue(mockDefaultState);
+            jest.spyOn(component['_tableService'], 'setSort');
+            jest.spyOn(component['_tableService'], 'setFilters');
+            jest.spyOn(component['_tableService'], 'setGroups');
+            jest.spyOn(component, 'setColumns');
+            jest.spyOn(component['_tableService'], 'search');
+            jest.spyOn(component['_tableService'], 'freezeTo');
+            jest.spyOn(component['_tableService'], 'setCurrentPage');
+            jest.spyOn(component['_tableService'], 'setTableState');
+
+            component.setTableState(mockProvidedState);
+
+            expect(component['_tableService'].setSort).toHaveBeenCalledWith(mockProvidedState.sortBy);
+            expect(component['_tableService'].setFilters).toHaveBeenCalledWith(mockDefaultState.filterBy);
+            expect(component['_tableService'].setGroups).toHaveBeenCalledWith(mockDefaultState.groupBy);
+            expect(component.setColumns).toHaveBeenCalledWith(mockProvidedState.columns);
+        });
+    });
+
+    describe('setPreset', () => {
+        it('should call setTableState with the provided preset data', () => {
+            const mockPreset = {
+                sortBy: [{ field: 'name', direction: 'asc' }],
+                columns: ['col1', 'col2']
+            };
+
+            jest.spyOn(component, 'setTableState');
+
+            component.setPreset(mockPreset);
+
+            expect(component.setTableState).toHaveBeenCalledWith(mockPreset);
+        });
+
+        it('should delegate all preset logic to setTableState', () => {
+            const mockPreset = {
+                filterBy: [{ field: 'status', value: 'active' }],
+                page: { currentPage: 3, pageSize: 50 }
+            };
+
+            jest.spyOn(component, 'setTableState').mockImplementation(() => {});
+            jest.spyOn(component['_tableService'], 'setFilters');
+
+            component.setPreset(mockPreset);
+
+            expect(component.setTableState).toHaveBeenCalledTimes(1);
+            expect(component.setTableState).toHaveBeenCalledWith(mockPreset);
+            // Verify setPreset itself doesn't call table service methods directly
+            expect(component['_tableService'].setFilters).not.toHaveBeenCalled();
+        });
+    });
 });
