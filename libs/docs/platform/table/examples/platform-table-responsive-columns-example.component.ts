@@ -108,6 +108,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
+    semantic?: string;
 }
 
 /**
@@ -179,7 +180,8 @@ const ITEMS: ExampleItem[] = [
         status: 'Out of stock',
         statusColor: 'negative',
         date: new FdDate(2020, 2, 5),
-        verified: true
+        verified: true,
+        semantic: 'valid'
     },
     {
         id: 3,
