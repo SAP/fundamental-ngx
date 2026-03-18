@@ -46,6 +46,8 @@ import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 export const appConfig: ApplicationConfig = {
   providers: [
     // ... your other providers
+    // Optional — language auto-detects from browser by default.
+    // Only needed if you want to pin a specific language:
     {
       provide: FD_LANGUAGE_SIGNAL,
       useValue: signal(FD_LANGUAGE_ENGLISH)
@@ -130,10 +132,12 @@ export class MyComponent {
   private langSignal = inject(FD_LANGUAGE_SIGNAL) as WritableSignal<FdLanguage>;
 
   switchToEnglish() {
+    // One call — locale and UI5 follow automatically
     this.langSignal.set(FD_LANGUAGE_ENGLISH);
   }
 
   switchToSpanish() {
+    // One call — locale and UI5 follow automatically
     this.langSignal.set(FD_LANGUAGE_SPANISH);
   }
 }`,

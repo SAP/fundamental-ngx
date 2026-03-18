@@ -3,7 +3,8 @@
     <p>
         You can change languages at runtime by calling <code>langSignal.set(newLanguage)</code> on the
         <code>FD_LANGUAGE_SIGNAL</code> token. When you change the language, all UI elements—labels, buttons, messages,
-        and counters—update automatically without any manual subscriptions.
+        and counters—update automatically. The locale (<code>FD_LOCALE_SIGNAL</code>) and UI5 component language also
+        follow automatically — <strong>one call is all you need</strong>.
     </p>
     <p>
         The example below demonstrates switching between English, Ukrainian, and a custom language. Watch how all
@@ -13,14 +14,15 @@
     </p>
     <p>
         <strong>Key concepts:</strong> <em>Language</em> controls UI text translations (like button labels and
-        messages), while <em>locale</em> controls date and number formatting. Both are often changed together, as shown
-        below. You can also provide custom translation objects that implement the
-        <code>FdLanguage</code> interface—useful for localization variants or overriding specific translations.
+        messages), while <em>locale</em> controls date and number formatting. Locale auto-derives from the language's
+        <code>locale</code> field via <code>linkedSignal</code> — you no longer need to set both manually. You can also
+        provide custom translation objects that implement the <code>FdLanguage</code> interface—useful for localization
+        variants or overriding specific translations.
     </p>
     <p>
-        In a real application, provide <code>FD_LANGUAGE_SIGNAL</code> and <code>FD_LOCALE_SIGNAL</code> at the root
-        level (typically in <code>app.config.ts</code>) so language changes affect your entire app. This example shows
-        it at the component level for demonstration purposes only.
+        In a real application, provide <code>FD_LANGUAGE_SIGNAL</code> at the root level (typically in
+        <code>app.config.ts</code>) so language changes affect your entire app. This example shows it at the component
+        level for demonstration purposes only.
     </p>
     <p>
         <strong>Note:</strong> Use <code>FD_LANGUAGE_SIGNAL</code> (the modern signal-based approach). The old
@@ -34,18 +36,146 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="auto-detect" componentName="i18n"> Browser auto-detection </fd-docs-section-title>
+<description>
+    <p>
+        By default, <code>FD_LANGUAGE_SIGNAL</code> auto-detects the user's language from Angular's
+        <code>LOCALE_ID</code> at bootstrap. This means your app starts in the user's preferred language without any
+        explicit setup.
+    </p>
+    <p>
+        The detection resolves the browser locale against all 37 built-in languages: exact match first, then base
+        language fallback (e.g., <code>pt-BR</code> resolves to Portuguese), then English as the ultimate fallback.
+    </p>
+    <p>
+        To disable auto-detection, provide
+        <code>{{ '{' }} provide: FD_LANGUAGE_AUTO_DETECT, useValue: false {{ '}' }}</code> in your app config.
+    </p>
+</description>
+<component-example>
+    <fd-auto-detect-example></fd-auto-detect-example>
+</component-example>
+<code-example [exampleFiles]="autoDetectExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="locale-override" componentName="i18n"> Locale override (edge case) </fd-docs-section-title>
+<description>
+    <p>
+        <code>FD_LOCALE_SIGNAL</code> normally derives from the language's <code>locale</code> field via
+        <code>linkedSignal</code>. For the rare case where you need different formatting than the language implies
+        (e.g., German UI text with Japanese date formatting), you can override it explicitly with
+        <code>localeSignal.set('ja-JP')</code>.
+    </p>
+    <p>
+        <strong>Important:</strong> The override is contextual — when the language changes next,
+        <code>linkedSignal</code> resets the locale to the new language's default. This prevents stale locale overrides
+        from persisting across language switches.
+    </p>
+</description>
+<component-example>
+    <fd-locale-override-example></fd-locale-override-example>
+</component-example>
+<code-example [exampleFiles]="localeOverrideExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="when-to-set-what" componentName="i18n">
+    When to set what — quick reference
+</fd-docs-section-title>
+<description>
+    <table class="fd-margin-top--sm">
+        <thead>
+            <tr>
+                <th>Scenario</th>
+                <th>What to do</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Default (95% of apps)</strong></td>
+                <td>
+                    Nothing extra — language auto-detects from the browser, locale derives automatically, UI5 follows if
+                    the bridge is active.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Explicit language at startup</strong></td>
+                <td>
+                    Provide <code>FD_LANGUAGE_SIGNAL</code> with <code>signal(FD_LANGUAGE_*)</code> in
+                    <code>app.config.ts</code>.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Switch language at runtime</strong></td>
+                <td>Call <code>langSignal.set(FD_LANGUAGE_*)</code> — locale and UI5 follow automatically.</td>
+            </tr>
+            <tr>
+                <td><strong>Different formatting than language implies</strong></td>
+                <td>
+                    Call <code>localeSignal.set('ja-JP')</code> after setting the language. Resets on next language
+                    change (<code>linkedSignal</code> behavior).
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Disable auto-detection</strong></td>
+                <td>
+                    Provide
+                    <code>{{ '{' }} provide: FD_LANGUAGE_AUTO_DETECT, useValue: false {{ '}' }}</code
+                    >.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>UI5 web components</strong></td>
+                <td>Add <code>provideUi5LanguageBridge()</code> to your app providers.</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="fd-margin-top--sm">
+        <strong>Key principle:</strong> Set <code>FD_LANGUAGE_SIGNAL</code> and let everything else derive. Only touch
+        <code>FD_LOCALE_SIGNAL</code> for the rare case where the formatting locale must differ from the language.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="ui5-bridge" componentName="i18n"> UI5 Web Components integration </fd-docs-section-title>
+<description>
+    <p>
+        Apps using <code>&#64;fundamental-ngx/ui5-webcomponents</code> can activate the language bridge via
+        <code>provideUi5LanguageBridge()</code> from <code>&#64;fundamental-ngx/ui5-webcomponents-base/i18n</code>. This
+        ensures UI5 web components react to fundamental-ngx language changes by calling UI5's
+        <code>setLanguage()</code> reactively.
+    </p>
+    <p>
+        <strong>Setup:</strong> Add <code>provideUi5LanguageBridge()</code> to your application providers (in
+        <code>app.config.ts</code>). It uses <code>provideEnvironmentInitializer</code> to inject
+        <code>Ui5LanguageService</code>, which watches <code>FD_LOCALE_SIGNAL</code> via <code>effect()</code> and calls
+        <code>setLanguage()</code> whenever the locale changes.
+    </p>
+    <p>
+        <strong>Result:</strong> Changing <code>FD_LANGUAGE_SIGNAL</code> updates fundamental-ngx translations, the
+        formatting locale, and UI5 component language — all with one call.
+    </p>
+</description>
+
+<separator></separator>
+
 <fd-docs-section-title id="locale-change" componentName="i18n"> Changing locales at runtime </fd-docs-section-title>
 <description>
     <p>
         Translations have a concept of locale, which is a combination of language and region. For example, English
-        language has different locales for US, UK, Australia, etc. The locale is used to determine the correct
-        translations for the given language. For example, in English there are two plural forms: one for singular and
-        one for plural. In Polish, there are three plural forms: one for singular, one for few and one for plural.
+        language has different locales for US, UK, Australia, etc. The locale controls date, number, and currency
+        formatting as well as pluralization rules.
     </p>
     <p>
-        To control the locale, you can provide <code>FD_LOCALE_SIGNAL</code> token (recommended) with a WritableSignal
-        containing the locale you want to use. The locale should be in the format of <code>language-region</code>. For
-        example, <code>en-US</code> or <code>uk-UA</code>.
+        <strong>Note:</strong> In most cases you do not need to set the locale manually — it auto-derives from the
+        language via <code>linkedSignal</code>. This example demonstrates direct locale control for cases where you need
+        to explore formatting differences independently of language.
+    </p>
+    <p>
+        To control the locale directly, inject <code>FD_LOCALE_SIGNAL</code> and call <code>.set()</code>. The locale
+        should be in the format of <code>language-region</code> (e.g., <code>en-US</code> or <code>uk-UA</code>).
     </p>
     <p>
         <strong>Note:</strong> The old <code>FD_LOCALE</code> (Observable) token is deprecated. Use

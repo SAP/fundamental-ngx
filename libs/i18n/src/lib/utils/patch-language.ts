@@ -23,7 +23,6 @@ export const patchedObj = (
  * @Component({
  *    selector: 'my-component',
  *    template: '{{ ('platformTextarea.label' | fdTranslate)() }}',
- *    standalone: true,
  *    providers: [
  *         patchLanguage({
  *             // Partially override translations for this component
@@ -65,10 +64,12 @@ export function patchLanguage(
                 const lang = parentLangSignal();
                 const original = flattenTranslations(lang) as FlatFdLanguage;
                 const patch = flattenTranslations(patchedObj(lang, languagePatch));
-                return flatToHierarchy({
+                const merged = flatToHierarchy({
                     ...original,
                     ...patch
                 });
+                // Preserve language metadata from parent — patches should not override identity
+                return { ...merged, locale: lang.locale, name: lang.name };
             }),
         deps: [[new SkipSelf(), FD_LANGUAGE_SIGNAL]]
     };

@@ -26,7 +26,9 @@
 
 ### Quick Start
 
-**1. Provide a language in your app:**
+**1. Provide a language in your app (optional — auto-detects from browser by default):**
+
+By default, `FD_LANGUAGE_SIGNAL` reads the browser's locale via Angular's `LOCALE_ID` and picks the closest built-in language. An explicit provider is only needed if you want to override the default.
 
 ```typescript
 import { ApplicationConfig } from '@angular/core';
@@ -35,6 +37,7 @@ import { FD_LANGUAGE_SIGNAL, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 
 export const appConfig: ApplicationConfig = {
     providers: [
+        // Optional: override auto-detection with a specific language
         {
             provide: FD_LANGUAGE_SIGNAL,
             useValue: signal(FD_LANGUAGE_ENGLISH)
@@ -86,12 +89,57 @@ export class LanguageSwitcher {
 
     switchToGerman(): void {
         this.langSignal.set(FD_LANGUAGE_GERMAN);
-        // All translations update automatically!
+        // Locale + UI5 language update automatically — one call is all you need!
     }
 }
 ```
 
-> **📚 Full documentation:** Visit the [i18n documentation](https://sap.github.io/fundamental-ngx/docs/i18n/getting-started) for complete guides, examples, and API reference.
+> **Full documentation:** Visit the [i18n documentation](https://sap.github.io/fundamental-ngx/docs/i18n/getting-started) for complete guides, examples, and API reference.
+
+### Language & Locale Architecture
+
+`FD_LANGUAGE_SIGNAL` is the single entry point for language switching. When you set it, everything follows:
+
+```
+FD_LANGUAGE_SIGNAL  →  FD_LOCALE_SIGNAL (auto-derived via linkedSignal)
+                    →  UI5 setLanguage() (if bridge active)
+                    →  All translation signals
+```
+
+Each built-in language carries `locale` and `name` metadata:
+
+```typescript
+FD_LANGUAGE_GERMAN.locale; // 'de'
+FD_LANGUAGE_GERMAN.name; // 'Deutsch'
+```
+
+`FD_LOCALE_SIGNAL` derives from `language.locale` by default. You can still override it independently for edge cases (e.g., German text with Japanese date formatting), but the override clears when the language changes next.
+
+### UI5 Integration
+
+Apps using `@fundamental-ngx/ui5-webcomponents` can activate the language bridge:
+
+```typescript
+import { provideUi5LanguageBridge } from '@fundamental-ngx/ui5-webcomponents-base/i18n';
+
+export const appConfig: ApplicationConfig = {
+    providers: [provideUi5LanguageBridge()]
+};
+```
+
+The bridge watches `FD_LOCALE_SIGNAL` and calls UI5's `setLanguage()` reactively. Changing `FD_LANGUAGE_SIGNAL` updates both FD and UI5 components.
+
+### Opting Out of Auto-Detection
+
+To disable browser language auto-detection:
+
+```typescript
+import { FD_LANGUAGE_AUTO_DETECT } from '@fundamental-ngx/i18n';
+
+providers: [{ provide: FD_LANGUAGE_AUTO_DETECT, useValue: false }];
+```
+
+When disabled, `FD_LANGUAGE_SIGNAL` defaults to English unless you provide a custom value.
 
 ### What's Included
 
