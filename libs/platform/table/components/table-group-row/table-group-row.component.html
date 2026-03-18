@@ -4,7 +4,7 @@
     tabindex="0"
     role="gridcell"
     [focusable]="true"
-    [attr.colspan]="tableColumnsLength"
+    colspan="100%"
     [attr.aria-expanded]="row.expanded"
     [attr.data-nesting-level]="row.level + 1"
     (keydown.enter)="toggleGroupRow.emit(row)"

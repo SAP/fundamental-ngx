@@ -92,7 +92,6 @@
                                         [row]="row"
                                         [rowId]="id"
                                         [keyToColumnMap]="_keyToColumnMap"
-                                        [tableColumnsLength]="_tableColumnsLength"
                                         (toggleGroupRow)="_toggleGroupRow($event)"
                                         (click)="_emitRowActivate(row, $event.ctrlKey || $event.metaKey)"
                                     ></tr>
@@ -210,7 +209,7 @@
                 } @else {
                     <tbody fd-table-body class="fdp-table__empty">
                         <tr fd-table-row>
-                            <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
+                            <td fd-table-cell class="fd-table__cell--no-data" colspan="100%">
                                 <div class="fdp-table__empty-table-message">
                                     <ng-content select="fdp-table-no-data-wrapper"></ng-content>
                                     @if (!_noDataWrapper && _tableService.visibleColumnsLength() > 0) {
