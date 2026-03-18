@@ -10,6 +10,8 @@
         [focusAutoCapture]="focusAutoCapture()"
         [noArrow]="noArrow()"
         [disableScrollbar]="disableScrollbar()"
+        (beforeOpen)="beforeOpen.emit()"
+        (isOpenChange)="isOpenChange.emit($event)"
     >
         <fd-popover-control>
             @if (!customProductSwitchButton()) {
