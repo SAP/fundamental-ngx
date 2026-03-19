@@ -39,7 +39,7 @@ Flag inputs/outputs that exist in the component but are not documented anywhere.
 For each example file:
 
 - [ ] Individual component imports — no deprecated `*Module` classes
-- [ ] `@sap-ui/common-css` utility classes — no inline styles where avoidable
+- [ ] `@fundamental-styles/common-css` utility classes — no inline styles where avoidable
 - [ ] Every demonstrated feature is user-observable
 - [ ] No unnecessary standalone examples (consolidate where possible)
 - [ ] Example code matches current API (no removed/renamed inputs)

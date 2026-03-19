@@ -1,8 +1,8 @@
-@use '@sap-ui/common-css/dist/sap-margin.css';
-@use '@sap-ui/common-css/dist/sap-colors.css';
-@use '@sap-ui/common-css/dist/sap-display.css';
-@use '@sap-ui/common-css/dist/sap-typography.css';
-@use '@sap-ui/common-css/dist/sap-padding.css';
+@use '@fundamental-styles/common-css/dist/sap-margin.css';
+@use '@fundamental-styles/common-css/dist/sap-colors.css';
+@use '@fundamental-styles/common-css/dist/sap-display.css';
+@use '@fundamental-styles/common-css/dist/sap-typography.css';
+@use '@fundamental-styles/common-css/dist/sap-padding.css';
 
 :host {
     display: block;
