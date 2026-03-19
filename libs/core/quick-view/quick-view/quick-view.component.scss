@@ -4,3 +4,8 @@
 .fd-popover__body .fd-quick-view__content {
     border-radius: var(--sapElement_BorderCornerRadius);
 }
+.fd-quick-view fd-quick-view-group-title + fd-quick-view-group-item {
+    .fd-form-item {
+        padding-block-start: 0;
+    }
+}
