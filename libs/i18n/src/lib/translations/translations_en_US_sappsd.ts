@@ -135,7 +135,7 @@ export default {
     },
     coreNavigation: {
         mainNavigation: '[[[Μąįŋ Ńąʋįğąţįŏŋ∙∙∙∙]]]',
-        navigationPath: '[[[Ńąʋįğąţįŏŋ Ƥąţĥ∙∙∙∙]]]'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: '[[[Ţŗēē Ĭţēɱ {įţēɱĎēţąįĺş}, {şēĺēċţēƌĎēşċŗįρţįŏŋ}∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]'
@@ -430,20 +430,20 @@ export default {
         detailsActionAriaLabel: '[[[ƌēţąįĺ∙∙∙∙∙∙∙∙]]]'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: '[[[Ĉĺēąŗ∙∙∙∙∙∙∙∙∙]]]',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: '[[[Āĺĺ∙]]]',
+        cancelLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
+        clearButtonTitle: '[[[Ĉĺēąŗ Ŝēąŗċĥ∙∙∙∙∙∙∙]]]',
+        counterLabel: '[[[Ţŏţąĺ ŗēşűĺţş: {ċŏűŋţ}∙∙∙∙∙]]]',
+        deleteButtonAriaLabel: '[[[Řēɱŏʋē∙∙∙∙∙∙∙∙]]]',
+        deleteButtonTitle: '[[[Řēɱŏʋē Ŝűğğēşţįŏŋ∙∙∙∙∙∙∙]]]',
+        groupHeader: '[[[Ģŗŏűρ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]',
         searchInputLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
         searchSuggestionMessage: '[[[{ċŏűŋţ} şűğğēşţįŏŋş ƒŏűŋƌ.∙∙∙∙∙∙∙]]]',
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: '[[[Ŝēĺēċţ şċŏρē∙∙∙∙∙∙∙]]]',
+        selectStateMessageLabel: '[[[Ŝēĺēċţ∙∙∙∙∙∙∙∙]]]',
+        submitButtonTitle: '[[[Ŝēąŗċĥ (Ĕŋţēŗ)∙∙∙∙∙]]]',
+        suggestionsWrapperAriaLabel: '[[[Ŝűğğēşţįŏŋş∙∙∙∙∙∙∙∙]]]',
         synchronizeButtonTitle: '[[[Ŝŷŋċĥŗŏŋįžē∙∙∙∙∙∙∙∙]]]'
     },
     platformSelect: {
