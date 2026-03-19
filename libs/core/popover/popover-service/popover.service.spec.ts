@@ -411,4 +411,69 @@ describe('PopoverService', () => {
             document.body.removeChild(newTrigger);
         });
     });
+
+    describe('safe signal writes (NG0600 handling)', () => {
+        beforeEach(() => {
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+        });
+
+        it('should recover from NG0600 error during open by deferring signal write', fakeAsync(() => {
+            // Make first signal write throw NG0600, then succeed on retry
+            let firstCall = true;
+            const originalSet = service.isOpen.set.bind(service.isOpen);
+            spyOn(service.isOpen, 'set').and.callFake((value: boolean) => {
+                if (firstCall) {
+                    firstCall = false;
+                    throw new Error('NG0600: Writing to signals is not allowed');
+                }
+                originalSet(value);
+            });
+
+            service.open();
+            tick(); // Execute deferred retry
+
+            expect(service.isOpen()).toBe(true);
+        }));
+
+        it('should recover from NG0600 error during close by deferring signal write', fakeAsync(() => {
+            service.open();
+            fixture.detectChanges();
+
+            // Make first signal write throw NG0600, then succeed on retry
+            let firstCall = true;
+            const originalSet = service.isOpen.set.bind(service.isOpen);
+            spyOn(service.isOpen, 'set').and.callFake((value: boolean) => {
+                if (firstCall) {
+                    firstCall = false;
+                    throw new Error('NG0600: Writing to signals is not allowed');
+                }
+                originalSet(value);
+            });
+
+            service.close();
+            tick(); // Execute deferred retry
+
+            expect(service.isOpen()).toBe(false);
+        }));
+
+        it('should rethrow non-NG0600 errors', () => {
+            service.open();
+            fixture.detectChanges();
+
+            spyOn(service.isOpen, 'set').and.throwError('Some other error');
+
+            expect(() => service.close()).toThrowError('Some other error');
+        });
+
+        it('should set isOpen synchronously when no error occurs', () => {
+            expect(service.isOpen()).toBe(false);
+
+            service.open();
+            expect(service.isOpen()).toBe(true);
+
+            service.close();
+            expect(service.isOpen()).toBe(false);
+        });
+    });
 });
