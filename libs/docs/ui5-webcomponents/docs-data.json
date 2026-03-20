@@ -71,6 +71,10 @@
             "name": "Content Density"
         },
         {
+            "url": "ui5-webcomponents/i18n",
+            "name": "i18n"
+        },
+        {
             "url": "ui5-webcomponents/date-picker",
             "name": "Date Picker"
         },

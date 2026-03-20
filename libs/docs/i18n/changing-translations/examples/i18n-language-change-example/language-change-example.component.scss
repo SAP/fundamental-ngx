@@ -1,0 +1,4 @@
+// border requires custom class — no sap-* utility for border-color + border-width combo
+.example-bordered-card {
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+}

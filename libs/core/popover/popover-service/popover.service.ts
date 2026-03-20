@@ -554,7 +554,9 @@ export class PopoverService {
                         }
                         const closeAction = !!trigger.closeAction;
                         const openAction = !!trigger.openAction;
-                        this.toggle(openAction, closeAction);
+                        // Defer toggle to next microtask to escape any reactive context.
+                        // This prevents NG0600 when events like focusout fire during Angular's render cycle.
+                        queueMicrotask(() => this.toggle(openAction, closeAction));
 
                         if (trigger.stopPropagation) {
                             event.stopImmediatePropagation();

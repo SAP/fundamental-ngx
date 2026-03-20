@@ -4,6 +4,11 @@ import { FdLanguageKey } from './fd-language-key';
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    /** ISO 639-1 code or BCP 47 subtag (e.g., 'de', 'zh-Hans'). Used to derive FD_LOCALE_SIGNAL and UI5 setLanguage(). */
+    locale?: string;
+    /** Human-readable language name (e.g., 'English', 'Deutsch'). */
+    name?: string;
+
     coreBusyIndicator: {
         /** Aria valuetext for the busy indicator */
         defaultAriaValueText: FdLanguageKey;
