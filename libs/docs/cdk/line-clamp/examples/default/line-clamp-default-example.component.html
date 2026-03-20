@@ -1,0 +1,24 @@
+<div class="fd-margin-top--sm">
+    <p>
+        Actual line count (without clamping): <strong>{{ actualLineCount() }}</strong>
+    </p>
+    <button fd-button (click)="toggleClamp()">{{ lineClampEnabled() ? 'Disable' : 'Enable' }} Line Clamp</button>
+</div>
+
+<div class="fd-margin-top--sm fd-margin-bottom--sm">
+    <label fd-form-label>Max lines:</label>
+    <fd-step-input [value]="lineCount()" (valueChange)="updateLineCount($event)" [min]="1" [max]="9"></fd-step-input>
+</div>
+
+<p class="fd-text" style="max-width: 400px; border: 1px solid var(--sapGroup_ContentBorderColor); padding: 1rem">
+    <span
+        fdkLineClamp
+        style="display: block"
+        #lineClamp="fdLineClamp"
+        [fdLineclampState]="lineClampEnabled()"
+        [fdLineClampLines]="lineCount()"
+        (lineCountUpdate)="onLineCountUpdate($event)"
+    >
+        <span fdkLineClampTarget [fdLineClampTargetText]="sampleText" (update)="lineClamp.refreshTarget($event)"></span>
+    </span>
+</p>

@@ -1,0 +1,19 @@
+<fd-docs-section-title id="default" componentName="LineClamp"> Line Clamp Standard Usage </fd-docs-section-title>
+<description>
+    <p>
+        Use <code>fdkLineClamp</code> directive on a container element with <code>[fdLineClampLines]</code> to set the
+        maximum number of lines and <code>[fdLineclampState]</code> to enable/disable clamping.
+    </p>
+    <p>
+        Apply <code>fdLineClampTarget</code> to the text element inside the container and pass the text to
+        <code>[fdLineClampTargetText]</code>.
+    </p>
+    <p>
+        The <code>(lineCountUpdate)</code> event emits the actual number of lines the text would occupy without
+        clamping.
+    </p>
+</description>
+<component-example>
+    <fdk-line-clamp-default-example></fdk-line-clamp-default-example>
+</component-example>
+<code-example [exampleFiles]="lineClampDefaultExample"></code-example>

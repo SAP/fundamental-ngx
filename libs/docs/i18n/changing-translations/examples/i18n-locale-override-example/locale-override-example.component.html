@@ -1,0 +1,48 @@
+<div class="locale-override-example">
+    <div class="sap-margin-top-small">
+        <label fd-form-label>Select Language:</label>
+        <fd-segmented-button [(ngModel)]="lang" (ngModelChange)="changeLanguage($event)">
+            <button fd-button label="English" value="en"></button>
+            <button fd-button label="Deutsch" value="de"></button>
+            <button fd-button label="Français" value="fr"></button>
+        </fd-segmented-button>
+
+        <div class="sap-margin-top-small">
+            <button fd-button label="Override locale to ja-JP" (click)="overrideLocaleToJapanese()"></button>
+        </div>
+    </div>
+
+    <div class="sap-margin-top-medium fd-padding--md sap-bg-color-backgroundColor">
+        <div>
+            <strong>Language:</strong> {{ languageName() }} | <strong>Locale:</strong>
+            <code>{{ localeSignal() }}</code>
+            @if (isOverridden()) {
+                <span class="sap-color-warningColor"> (overridden)</span>
+            }
+        </div>
+    </div>
+
+    <!-- Side-by-side: translated label + formatted date -->
+    <div class="sap-margin-top-medium sap-flex sap-flex--gap-small sap-flex--wrap">
+        <div class="fd-padding--md example-side-card sap-border-radius-element">
+            <label fd-form-label>Translated label (follows language):</label>
+            <div class="sap-margin-top-small sap-font-family-bold">
+                {{ saveLabel() }}
+            </div>
+        </div>
+        <div class="fd-padding--md example-side-card sap-border-radius-element">
+            <label fd-form-label>Formatted date (follows locale):</label>
+            <div class="sap-margin-top-small sap-font-family-bold">
+                {{ formattedDate() }}
+            </div>
+        </div>
+    </div>
+
+    <p class="sap-margin-top-small sap-font-size-small sap-color-content_LabelColor">
+        <strong>Try this:</strong> Select "Deutsch", then click "Override locale to ja-JP" to see German text with
+        Japanese date formatting. Then switch to another language — the locale override resets automatically (<code
+            >linkedSignal</code
+        >
+        behavior).
+    </p>
+</div>

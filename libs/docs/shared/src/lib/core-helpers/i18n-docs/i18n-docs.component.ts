@@ -54,7 +54,7 @@ export class I18nDocsComponent {
             return componentTranslations?.type?.declaration?.children.map(
                 (c): TranslationProperty => ({
                     key: c.name,
-                    translation: lang[componentName][c.name],
+                    translation: lang[componentName]?.[c.name] ?? '',
                     params:
                         c.comment?.blockTags?.reduce((acc: string[], { tag, name }) => {
                             if (tag === '@param') {
