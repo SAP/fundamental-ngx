@@ -7,12 +7,12 @@ import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import 'dayjs/locale/bg';
-import 'dayjs/locale/de';
-import 'dayjs/locale/en-gb';
-import 'dayjs/locale/es';
-import 'dayjs/locale/fr';
-import 'dayjs/locale/pl';
+import 'dayjs/esm/locale/bg';
+import 'dayjs/esm/locale/de';
+import 'dayjs/esm/locale/en-gb';
+import 'dayjs/esm/locale/es';
+import 'dayjs/esm/locale/fr';
+import 'dayjs/esm/locale/pl';
 
 @Component({
     selector: 'fd-date-picker-complex-i18n-example',

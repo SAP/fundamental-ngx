@@ -1,20 +1,20 @@
 import { AfterViewInit, Component, inject, LOCALE_ID, ViewChild } from '@angular/core';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs/esm';
 
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
-import 'dayjs/locale/ar';
-import 'dayjs/locale/bg';
-import 'dayjs/locale/de';
-import 'dayjs/locale/en';
-import 'dayjs/locale/fa';
-import 'dayjs/locale/fr';
-import 'dayjs/locale/ja';
+import 'dayjs/esm/esm/locale/ar';
+import 'dayjs/esm/locale/bg';
+import 'dayjs/esm/locale/de';
+import 'dayjs/esm/locale/en';
+import 'dayjs/esm/locale/fa';
+import 'dayjs/esm/locale/fr';
+import 'dayjs/esm/locale/ja';
 
 @Component({
     selector: 'fd-date-picker-dayjs-adapter-example',

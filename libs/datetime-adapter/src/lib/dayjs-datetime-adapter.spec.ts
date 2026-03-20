@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { LOCALE_ID } from '@angular/core';
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
@@ -9,10 +9,10 @@ import { DayjsDatetimeAdapter } from './dayjs-datetime-adapter';
 import { DayjsDatetimeAdapterModule } from './dayjs-datetime-adapter.module';
 
 // preload locales that are used in tests
-import 'dayjs/locale/ar-ma';
-import 'dayjs/locale/da';
-import 'dayjs/locale/fr';
-import 'dayjs/locale/ja';
+import 'dayjs/esm/locale/ar-ma';
+import 'dayjs/esm/locale/da';
+import 'dayjs/esm/locale/fr';
+import 'dayjs/esm/locale/ja';
 
 export const JAN = 0,
     FEB = 1,
@@ -506,7 +506,7 @@ describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
 
     it('should throw an error if locale is not preloaded', async () => {
         expect(() => adapter.setLocale('en-au')).toThrow();
-        await import('dayjs/locale/en-au');
+        await import('dayjs/esm/locale/en-au');
         expect(() => adapter.setLocale('en-au')).not.toThrow();
     });
 

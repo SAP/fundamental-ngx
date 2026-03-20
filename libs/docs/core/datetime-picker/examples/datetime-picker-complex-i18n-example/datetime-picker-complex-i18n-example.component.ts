@@ -15,10 +15,10 @@ import {
     FD_LANGUAGE_POLISH,
     FdLanguage
 } from '@fundamental-ngx/i18n';
-import dayjs, { Dayjs } from 'dayjs';
-import 'dayjs/locale/en-gb';
-import 'dayjs/locale/pl';
-import 'dayjs/locale/zh';
+import dayjs, { Dayjs } from 'dayjs/esm';
+import 'dayjs/esm/locale/en-gb';
+import 'dayjs/esm/locale/pl';
+import 'dayjs/esm/locale/zh';
 import { BehaviorSubject } from 'rxjs';
 
 const placeholders = new Map([

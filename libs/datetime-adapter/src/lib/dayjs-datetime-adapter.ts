@@ -1,12 +1,12 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
-import dayjs, { ConfigType, Dayjs } from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-import isBetween from 'dayjs/plugin/isBetween';
-import localeData from 'dayjs/plugin/localeData';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import objectSupport from 'dayjs/plugin/objectSupport';
-import utc from 'dayjs/plugin/utc';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
+import dayjs, { ConfigType, Dayjs, GlobalLocaleDataReturn } from 'dayjs/esm';
+import customParseFormat from 'dayjs/esm/plugin/customParseFormat';
+import isBetween from 'dayjs/esm/plugin/isBetween';
+import localeData from 'dayjs/esm/plugin/localeData';
+import localizedFormat from 'dayjs/esm/plugin/localizedFormat';
+import objectSupport from 'dayjs/esm/plugin/objectSupport';
+import utc from 'dayjs/esm/plugin/utc';
+import weekOfYear from 'dayjs/esm/plugin/weekOfYear';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
@@ -45,7 +45,7 @@ export function DAYJS_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): DayjsDatetimeAdapterO
 @Injectable()
 export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** @hidden */
-    private _dayjsLocaleData: dayjs.GlobalLocaleDataReturn;
+    private _dayjsLocaleData: GlobalLocaleDataReturn;
 
     /** @hidden */
     private _localeData: DateLocale;
