@@ -422,7 +422,7 @@ describe('PopoverService', () => {
             // Make first signal write throw NG0600, then succeed on retry
             let firstCall = true;
             const originalSet = service.isOpen.set.bind(service.isOpen);
-            spyOn(service.isOpen, 'set').and.callFake((value: boolean) => {
+            jest.spyOn(service.isOpen, 'set').mockImplementation((value: boolean) => {
                 if (firstCall) {
                     firstCall = false;
                     throw new Error('NG0600: Writing to signals is not allowed');
@@ -443,7 +443,7 @@ describe('PopoverService', () => {
             // Make first signal write throw NG0600, then succeed on retry
             let firstCall = true;
             const originalSet = service.isOpen.set.bind(service.isOpen);
-            spyOn(service.isOpen, 'set').and.callFake((value: boolean) => {
+            jest.spyOn(service.isOpen, 'set').mockImplementation((value: boolean) => {
                 if (firstCall) {
                     firstCall = false;
                     throw new Error('NG0600: Writing to signals is not allowed');
@@ -461,9 +461,14 @@ describe('PopoverService', () => {
             service.open();
             fixture.detectChanges();
 
-            spyOn(service.isOpen, 'set').and.throwError('Some other error');
+            const spy = jest.spyOn(service.isOpen, 'set').mockImplementation(() => {
+                throw new Error('Some other error');
+            });
 
-            expect(() => service.close()).toThrowError('Some other error');
+            expect(() => service.close()).toThrow('Some other error');
+
+            // Restore spy to prevent afterEach cleanup from throwing
+            spy.mockRestore();
         });
 
         it('should set isOpen synchronously when no error occurs', () => {
