@@ -210,6 +210,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     ngAfterContentInit(): void {
         this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
         this._listenOnQueryChange();
+        this._listenOnActiveItemChange();
     }
 
     /** @hidden */
@@ -271,6 +272,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     private updateItemsProperties(): void {
+        const tabbableIndex = this._getTabbableItemIndex();
         let closestListHeader: ListGroupHeaderDirective | null = null;
         this._focusItems.forEach((item, index) => {
             if (item instanceof ListGroupHeaderDirective) {
@@ -278,8 +280,49 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
             } else if (item instanceof ListItemComponent && closestListHeader) {
                 item._relatedGroupHeaderId = closestListHeader.nativeElementId;
             }
-            item.setIsFirst(index === 0);
+            // Roving tabindex: only the tabbable item gets tabindex="0"
+            item.setIsFirst(index === tabbableIndex);
         });
+    }
+
+    /** @hidden */
+    private _listenOnActiveItemChange(): void {
+        this._keyboardSupportService.keyManager?.change.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._updateTabIndexes();
+        });
+    }
+
+    /** @hidden */
+    private _updateTabIndexes(): void {
+        const tabbableIndex = this._getTabbableItemIndex();
+        this._focusItems.forEach((item, index) => {
+            item.setIsFirst(index === tabbableIndex);
+        });
+    }
+
+    /**
+     * @hidden
+     * Determines which item should have tabindex="0".
+     * Priority: 1) Active item (keyboard focused), 2) First selected item, 3) First item
+     */
+    private _getTabbableItemIndex(): number {
+        // If keyManager has an active item, use that
+        const activeIndex = this._keyboardSupportService.keyManager?.activeItemIndex;
+        if (activeIndex != null && activeIndex >= 0) {
+            return activeIndex;
+        }
+
+        // Otherwise, find the first selected item
+        const focusItemsArray = this._focusItems.toArray();
+        const firstSelectedIndex = focusItemsArray.findIndex(
+            (item) => item instanceof ListItemComponent && item.selected
+        );
+        if (firstSelectedIndex >= 0) {
+            return firstSelectedIndex;
+        }
+
+        // Default to first item
+        return 0;
     }
 
     /** @hidden */
