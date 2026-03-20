@@ -1,7 +1,26 @@
 <fd-docs-section-title id="types" componentName="button"> Button Types </fd-docs-section-title>
 <description>
-    The button component follows fundamental-styles for button guidelines. The default button type is "Default button",
-    no modifier is required. Use the <code class="code-snippet">[fdType]=""</code> property to set the button type.
+    <p>
+        The button component provides seven distinct visual styles to convey different semantic meanings and importance
+        levels. Use the <code>[fdType]</code> input to set the button type.
+    </p>
+    <ul>
+        <li>
+            <strong>Standard</strong> (default): Primary actions without special semantic meaning. No
+            <code>fdType</code> needed.
+        </li>
+        <li><strong>Emphasized</strong>: The main call-to-action on a page, draws maximum attention.</li>
+        <li><strong>Ghost</strong>: Secondary actions with minimal visual weight, shows border on hover.</li>
+        <li><strong>Transparent</strong>: Tertiary actions with the least visual prominence.</li>
+        <li><strong>Positive</strong>: Successful or affirmative actions (e.g., approve, confirm).</li>
+        <li><strong>Negative</strong>: Destructive or rejecting actions (e.g., delete, cancel).</li>
+        <li><strong>Attention</strong>: Warning actions that require user attention.</li>
+    </ul>
+    <p>
+        <strong>Note:</strong> Positive, Negative, and Attention buttons automatically generate accessible
+        <code>aria-label</code> and <code>aria-description</code> attributes based on the button type for screen
+        readers.
+    </p>
 </description>
 <component-example>
     <fd-button-types-example></fd-button-types-example>
@@ -10,7 +29,21 @@
 <separator></separator>
 
 <fd-docs-section-title id="menu" componentName="button"> Menu Button </fd-docs-section-title>
-<description> In order to use menu button, use <code class="code-snippet">[fdMenu]="true"</code> </description>
+<description>
+    <p>
+        Menu buttons indicate that clicking will open a dropdown menu or popover. Setting <code>[fdMenu]="true"</code>
+        automatically adds a dropdown arrow icon to the right side of the button.
+    </p>
+    <p>
+        Menu styling works with all button types and can be combined with icons via the <code>[glyph]</code> input. This
+        is commonly used for:
+    </p>
+    <ul>
+        <li>Dropdown menus and action lists</li>
+        <li>Split buttons with multiple options</li>
+        <li>Filter and sort controls</li>
+    </ul>
+</description>
 <component-example>
     <fd-button-menu-example></fd-button-menu-example>
 </component-example>
@@ -18,7 +51,23 @@
 <separator></separator>
 
 <fd-docs-section-title id="sizes" componentName="button"> Button Sizes </fd-docs-section-title>
-<description> Use <code class="code-snippet">[fdCompact]</code> directive to explicitly set button size. </description>
+<description>
+    <p>
+        Buttons support two density modes to adapt to different screen sizes and use cases. Use the content density
+        directives to control button size:
+    </p>
+    <ul>
+        <li>
+            <code>[fdCozy]</code>: Default size, optimized for desktop and touch interfaces (recommended for most use
+            cases)
+        </li>
+        <li><code>[fdCompact]</code>: Reduced vertical padding for dense layouts like data tables or toolbars</li>
+    </ul>
+    <p>
+        Content density can also be set globally or inherited from parent containers using the
+        <code>fdContentDensity</code> directive.
+    </p>
+</description>
 <component-example>
     <fd-button-sizes-example></fd-button-sizes-example>
 </component-example>
@@ -27,8 +76,30 @@
 
 <fd-docs-section-title id="icons" componentName="button"> Button with Icons </fd-docs-section-title>
 <description>
-    Use
-    <code class="code-snippet">[glyph]="'{{ '{' }}icon-name&#125;'"</code> to add an icon to the button.
+    <p>
+        Buttons can display icons to provide visual context for actions. Use the <code>[glyph]</code> input with an icon
+        name from the SAP icon font to add an icon.
+    </p>
+    <h4>Icon Inputs:</h4>
+    <ul>
+        <li>
+            <code>[glyph]</code>: Icon name (e.g., <code>"cart"</code>, <code>"filter"</code>, <code>"accept"</code>)
+        </li>
+        <li>
+            <code>[glyphPosition]</code>: Icon placement - <code>"before"</code> (default) or <code>"after"</code> the
+            label
+        </li>
+        <li><code>[glyphFont]</code>: Custom icon font family (defaults to SAP icons)</li>
+    </ul>
+    <h4>Icon Patterns:</h4>
+    <ul>
+        <li><strong>Icon + Label:</strong> Best for clarity, combines visual and text cues</li>
+        <li>
+            <strong>Icon Only:</strong> Space-saving option for toolbars. Always provide <code>[ariaLabel]</code> for
+            accessibility
+        </li>
+    </ul>
+    <p><strong>Accessibility Note:</strong> Icon-only buttons require an <code>ariaLabel</code> for screen readers.</p>
 </description>
 <component-example>
     <fd-button-icons-example></fd-button-icons-example>
@@ -38,11 +109,45 @@
 
 <fd-docs-section-title id="state" componentName="button"> Button State </fd-docs-section-title>
 <description>
-    'disabled' and 'toggled' states can be achieved through native 'disabled' / 'aria-disabled' attributes and 'toggled'
-    input property. Regarding the disabled buttons there are 2 flavours reflecting two opinions how to make a button
-    disabled. Feel free to check Mozilla Doc for
-    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled">disabled attribiut</a> and for
-    <a href="https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-disabled">aria-disabled</a>.
+    <p>Buttons support multiple state inputs for different interaction patterns and accessibility needs:</p>
+
+    <h4>Disabled States:</h4>
+    <ul>
+        <li>
+            <code>[disabled]</code>: Native HTML disabled attribute. Prevents all interaction and is not focusable. Best
+            for temporarily unavailable actions.
+        </li>
+        <li>
+            <code>[aria-disabled]</code>: Indicates disabled state to screen readers while keeping the button focusable
+            and interactive. Useful for showing tooltips explaining why an action is disabled.
+        </li>
+    </ul>
+    <p>
+        Learn more about disabled vs aria-disabled:
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled">disabled attribute</a> |
+        <a href="https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-disabled">aria-disabled</a>
+    </p>
+
+    <h4>Toggled State:</h4>
+    <ul>
+        <li>
+            <code>[toggled]</code>: Visual and semantic toggled state. Sets <code>aria-pressed="true"</code> for screen
+            readers. Use for toggle buttons that maintain on/off state (e.g., bold/italic formatting, filter
+            activation).
+        </li>
+    </ul>
+
+    <h4>Other States:</h4>
+    <ul>
+        <li>
+            <code>[selected]</code>: Indicates selection in button groups or toolbars. Sets
+            <code>aria-selected="true"</code> for accessibility.
+        </li>
+        <li>
+            <code>[type]</code>: Native button type attribute. Defaults to <code>"button"</code> to prevent form
+            submission. Set to <code>"submit"</code> or <code>"reset"</code> for form buttons.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-button-state-example></fd-button-state-example>
@@ -51,8 +156,30 @@
 
 <fd-docs-section-title id="toggled" componentName="button"> Toggled Button </fd-docs-section-title>
 <description>
-    A toggle button switches between two actions. One of the actions is always active, one is inactive. Use the toggle
-    button for secondary actions. Use <code>toggled</code> input property to set the action to active.
+    <p>
+        Toggle buttons switch between two states (on/off) to control features or settings. The
+        <code>[toggled]</code> input controls the visual pressed state and sets <code>aria-pressed</code> for
+        accessibility.
+    </p>
+
+    <h4>When to Use Toggle Buttons:</h4>
+    <ul>
+        <li>Text formatting controls (bold, italic, underline)</li>
+        <li>View mode switches (list view vs. grid view)</li>
+        <li>Filter activation/deactivation</li>
+        <li>Feature toggles that persist during a session</li>
+    </ul>
+
+    <h4>Implementation:</h4>
+    <p>
+        Bind the <code>[toggled]</code> input to a boolean property and update it on click events. The button
+        automatically applies the toggled visual style and ARIA semantics.
+    </p>
+
+    <p>
+        <strong>Note:</strong> Toggle buttons work with all button types. Use emphasized, positive, or attention types
+        to indicate the importance or impact of the toggled state.
+    </p>
 </description>
 <component-example>
     <fd-button-toggled-example></fd-button-toggled-example>
@@ -61,15 +188,28 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="badged" componentName="button"> Badge buttons </fd-docs-section-title>
+<fd-docs-section-title id="badged" componentName="button"> Badge Buttons </fd-docs-section-title>
 <description>
     <p>
-        Button gets a badge in cases of collecting a number of items from various pages in order to trigger an action.
-        Currently the Emphasized, Standard, Ghost and Transparent type of buttons are <b>required</b> to be used with
-        Badge.
+        Badges display notification counts or status indicators on buttons. They're commonly used for shopping carts,
+        notification counters, or collecting items across multiple pages before triggering an action.
     </p>
+
+    <h4>Usage:</h4>
+    <p>
+        Project the <code>&lt;fd-button-badge&gt;</code> directive inside a button and use the
+        <code>[content]</code> input to set the badge value (number or short text).
+    </p>
+
+    <h4>Supported Button Types:</h4>
+    <p>
+        Badges work with: <strong>Emphasized</strong>, <strong>Standard</strong>, <strong>Ghost</strong>, and
+        <strong>Transparent</strong> button types.
+    </p>
+
     <fd-message-strip [dismissible]="false" type="warning">
-        Badges cannot contain more than 4 characters.
+        <strong>Constraint:</strong> Badge content must not exceed 4 characters to maintain visual clarity and avoid
+        layout issues.
     </fd-message-strip>
 </description>
 <component-example>
@@ -77,14 +217,6 @@
 </component-example>
 <code-example [exampleFiles]="buttonBadgeExample"></code-example>
 
-<separator></separator>
-
-<description
-    >The inputs for <code>button</code> will be translated into classes attributed to the fundamental-styles guidelines.
-    <br />For example: <br />if <code>positive</code> is passed for <code>fdType</code>, the
-    <code>fd-button--positive</code> class will be added to the element. <br />if <code>compact</code> is passed for
-    <code>size</code>, the class <code>fd-button--compact</code> will be added to the element.
-</description>
 <separator></separator>
 
 <fd-docs-section-title id="playground-button" componentName="button"> Playground Area </fd-docs-section-title>
