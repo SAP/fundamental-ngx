@@ -8,7 +8,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
-import 'dayjs/esm/esm/locale/ar';
+import 'dayjs/esm/locale/ar';
 import 'dayjs/esm/locale/bg';
 import 'dayjs/esm/locale/de';
 import 'dayjs/esm/locale/en';
