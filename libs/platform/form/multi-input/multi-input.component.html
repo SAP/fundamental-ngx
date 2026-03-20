@@ -10,6 +10,7 @@
         [focusTrapped]="true"
         [triggers]="triggers"
         [disabled]="disabled || readonly"
+        [maxWidth]="autoResize ? (maxWidth ?? null) : (minWidth ?? null)"
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
         <fd-popover-control>
