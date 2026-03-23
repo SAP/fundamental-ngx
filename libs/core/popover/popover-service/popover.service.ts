@@ -318,9 +318,7 @@ export class PopoverService {
             this._overlayRef.dispose();
         }
 
-        this._programmaticChange = true;
-        this.isOpen.set(false);
-        this._programmaticChange = false;
+        this._safeSetIsOpen(false);
 
         this.checkModalBackground();
         this._focusLastActiveElementBeforeOpen(focusActiveElement);
@@ -354,9 +352,7 @@ export class PopoverService {
                 this._listenOnResize();
             }
 
-            this._programmaticChange = true;
-            this.isOpen.set(true);
-            this._programmaticChange = false;
+            this._safeSetIsOpen(true);
 
             this._listenOnClose();
             this._focusFirstTabbableElement();
@@ -554,9 +550,7 @@ export class PopoverService {
                         }
                         const closeAction = !!trigger.closeAction;
                         const openAction = !!trigger.openAction;
-                        // Defer toggle to next microtask to escape any reactive context.
-                        // This prevents NG0600 when events like focusout fire during Angular's render cycle.
-                        queueMicrotask(() => this.toggle(openAction, closeAction));
+                        this.toggle(openAction, closeAction);
 
                         if (trigger.stopPropagation) {
                             event.stopImmediatePropagation();
@@ -574,6 +568,31 @@ export class PopoverService {
     updateTriggerElement(trigger: ElementRef | HTMLElement): void {
         this._triggerElement = trigger;
         this._refreshTriggerListeners();
+    }
+
+    /**
+     * @hidden
+     * Safely sets isOpen signal, deferring if called during Angular's render cycle.
+     * This prevents NG0600 errors when focus events fire during template evaluation.
+     */
+    private _safeSetIsOpen(value: boolean): void {
+        this._programmaticChange = true;
+        try {
+            this.isOpen.set(value);
+            this._programmaticChange = false;
+        } catch (e: unknown) {
+            this._programmaticChange = false;
+            // NG0600: Writing to signals during render - defer to next macrotask
+            if (e instanceof Error && e.message?.includes('NG0600')) {
+                setTimeout(() => {
+                    this._programmaticChange = true;
+                    this.isOpen.set(value);
+                    this._programmaticChange = false;
+                });
+            } else {
+                throw e;
+            }
+        }
     }
 
     /** @hidden */
