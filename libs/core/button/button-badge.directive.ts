@@ -5,6 +5,23 @@ import { FD_BUTTON_COMPONENT } from './tokens';
 
 export const badgeEnabledButtonTypes: ButtonType[] = ['emphasized', 'standard', 'ghost', 'transparent'];
 
+/**
+ * Directive to display a badge on a button.
+ *
+ * Badges are small status indicators that can be added to buttons to show
+ * notifications, counts, or other supplementary information.
+ *
+ * Usage:
+ * ```html
+ * <button fd-button>
+ *   Button Text
+ *   <fd-button-badge [content]="5" />
+ * </button>
+ * ```
+ *
+ * @note Badge content should not exceed 4 characters for optimal display.
+ * @note Badges are only supported on emphasized, standard, ghost, and transparent button types.
+ */
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-button-badge',
@@ -14,8 +31,9 @@ export const badgeEnabledButtonTypes: ButtonType[] = ['emphasized', 'standard', 
 })
 export class ButtonBadgeDirective implements HasElementRef {
     /**
-     * Content, which should be shown inside the Badge.
-     * It should not be longer than 4 characters.
+     * Content to display inside the badge.
+     * Should not exceed 4 characters for optimal display.
+     * Supports both string and numeric values.
      */
     readonly content = input<string | number>();
 
@@ -27,26 +45,36 @@ export class ButtonBadgeDirective implements HasElementRef {
 
     /** @hidden */
     constructor() {
-        // Automatically update badge content when content signal changes
+        // Single-purpose effect: Sync badge content to DOM
         effect(() => {
-            this.elementRef.nativeElement.innerHTML = `${this.content()}` || '';
-
-            if (isDevMode()) {
-                const contentValue = this.content();
-                if (contentValue) {
-                    if (contentValue.toString().length > 4) {
-                        console.warn('Badge content should not be longer than 4 characters');
-                    }
-                }
-
-                if (badgeEnabledButtonTypes.indexOf(this.buttonComponent.getFdType()) === -1) {
-                    console.warn(
-                        `Currently the ${JSON.stringify(
-                            badgeEnabledButtonTypes
-                        )} type of buttons are required for Badge enablement`
-                    );
-                }
-            }
+            this.elementRef.nativeElement.textContent = String(this.content() ?? '');
         });
+
+        // Validation effect only in development mode (zero overhead in production)
+        if (isDevMode()) {
+            effect(() => {
+                this._validateBadge();
+            });
+        }
+    }
+
+    /**
+     * Validates badge configuration in development mode.
+     * Checks content length and button type compatibility.
+     * @hidden
+     */
+    private _validateBadge(): void {
+        const contentValue = this.content();
+        if (contentValue && contentValue.toString().length > 4) {
+            console.warn('Badge content should not be longer than 4 characters');
+        }
+
+        if (!badgeEnabledButtonTypes.includes(this.buttonComponent.getFdType())) {
+            console.warn(
+                `Currently the ${JSON.stringify(
+                    badgeEnabledButtonTypes
+                )} type of buttons are required for Badge enablement`
+            );
+        }
     }
 }
