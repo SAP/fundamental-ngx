@@ -126,8 +126,8 @@ describe('TokenizerComponent', () => {
             event
         );
 
-        expect(component.tokenList.first.selected).toBeTruthy();
-        expect(component.tokenList.last.selected).toBeTruthy();
+        expect(component.tokenList.first.selected()).toBeTruthy();
+        expect(component.tokenList.last.selected()).toBeTruthy();
     });
 
     it('should deselect using control or command', () => {
@@ -145,8 +145,8 @@ describe('TokenizerComponent', () => {
             event
         );
 
-        expect(component.tokenList.first.selected).toBeTruthy();
-        expect(component.tokenList.last.selected).toBeFalsy();
+        expect(component.tokenList.first.selected()).toBeTruthy();
+        expect(component.tokenList.last.selected()).toBeFalsy();
     });
 
     it('should select using shift', () => {
@@ -159,7 +159,7 @@ describe('TokenizerComponent', () => {
             event
         );
 
-        expect(component.tokenList.first.selected).toBeTruthy();
+        expect(component.tokenList.first.selected()).toBeTruthy();
     });
 
     it('should focus a token element', async () => {
@@ -233,7 +233,9 @@ describe('TokenizerComponent', () => {
 
     it('should get the combined token width', () => {
         component.tokenList.forEach((token) => {
-            jest.spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+            jest.spyOn(token.tokenWrapperElement()!.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            });
         });
         jest.spyOn(component.input.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 } as DOMRect);
     });
@@ -251,7 +253,9 @@ describe('TokenizerComponent', () => {
 
         jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ left: 1 });
         component.tokenList.forEach((token) => {
-            jest.spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ right: 0 });
+            jest.spyOn(token.tokenWrapperElement()!.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                right: 0
+            });
         });
         jest.spyOn(component.tokenizerInnerEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(5);
 
