@@ -28,7 +28,8 @@ import {
     PlatformTableColumnResponsiveDirective,
     TableDataSourceDirective,
     TableHeaderResizerDirective,
-    TableInitialStateDirective
+    TableInitialStateDirective,
+    TableRowSemanticHighlight
 } from '@fundamental-ngx/platform/table-helpers';
 import { Observable, of } from 'rxjs';
 
@@ -108,7 +109,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    semantic?: string;
+    semantic?: TableRowSemanticHighlight;
 }
 
 /**

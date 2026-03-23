@@ -5,6 +5,8 @@ import { TableRowType } from '../enums';
 
 export type TableRowState = 'editable' | 'readonly';
 
+export type TableRowSemanticHighlight = 'valid' | 'warning' | 'information' | 'error';
+
 export interface TableRowKeyboardDrag {
     direction: 'up' | 'down';
     event: KeyboardEvent;
