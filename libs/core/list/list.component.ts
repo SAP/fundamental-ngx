@@ -281,7 +281,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
                 item._relatedGroupHeaderId = closestListHeader.nativeElementId;
             }
             // Roving tabindex: only the tabbable item gets tabindex="0"
-            item.setIsFirst(index === tabbableIndex);
+            item.setIsTabbable(index === tabbableIndex);
         });
     }
 
@@ -296,7 +296,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private _updateTabIndexes(): void {
         const tabbableIndex = this._getTabbableItemIndex();
         this._focusItems.forEach((item, index) => {
-            item.setIsFirst(index === tabbableIndex);
+            item.setIsTabbable(index === tabbableIndex);
         });
     }
 

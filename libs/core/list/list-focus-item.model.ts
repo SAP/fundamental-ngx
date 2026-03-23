@@ -33,14 +33,14 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     readonly _clicked$ = new Subject<MouseEvent>();
 
     /** @hidden */
-    protected _isFirstItem$ = signal(false);
+    protected _isTabbable$ = signal(false);
 
     /** @hidden */
     protected _tabIndex$ = signal<number | undefined>(undefined);
 
     /** @hidden */
     protected _normalizedTabIndex$ = computed(() => {
-        if (this._isFirstItem$() && isNaN(this._tabIndex$() as number)) {
+        if (this._isTabbable$() && isNaN(this._tabIndex$() as number)) {
             return 0;
         }
         return this._tabIndex$() ?? -1;
@@ -65,7 +65,7 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     }
 
     /** @hidden */
-    setIsFirst(value: boolean): void {
-        this._isFirstItem$.set(value);
+    setIsTabbable(value: boolean): void {
+        this._isTabbable$.set(value);
     }
 }
