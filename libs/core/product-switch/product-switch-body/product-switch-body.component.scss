@@ -77,6 +77,8 @@
 
 // TO DO: to be removed with the adoption of fundamental-styles v0.41.0+
 .fd-product-switch__item {
+    --fdProduct_Switch_Item_Border_Color: transparent;
+
     gap: 0.5rem;
 }
 
