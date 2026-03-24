@@ -7,10 +7,10 @@ import { Subject } from 'rxjs';
 export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInterface {
     @Input()
     set tabindex(value: number) {
-        this._tabIndex$.set(coerceNumberProperty(value, -1));
+        this._tabIndex.set(coerceNumberProperty(value, -1));
     }
     get tabindex(): number {
-        return this._normalizedTabIndex$();
+        return this._normalizedTabIndex();
     }
 
     /**
@@ -33,17 +33,17 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     readonly _clicked$ = new Subject<MouseEvent>();
 
     /** @hidden */
-    protected _isTabbable$ = signal(false);
+    protected _isTabbable = signal(false);
 
     /** @hidden */
-    protected _tabIndex$ = signal<number | undefined>(undefined);
+    protected _tabIndex = signal<number | undefined>(undefined);
 
     /** @hidden */
-    protected _normalizedTabIndex$ = computed(() => {
-        if (this._isTabbable$() && isNaN(this._tabIndex$() as number)) {
+    protected _normalizedTabIndex = computed(() => {
+        if (this._isTabbable() && isNaN(this._tabIndex() as number)) {
             return 0;
         }
-        return this._tabIndex$() ?? -1;
+        return this._tabIndex() ?? -1;
     });
 
     /** @hidden */
@@ -66,6 +66,6 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
 
     /** @hidden */
     setIsTabbable(value: boolean): void {
-        this._isTabbable$.set(value);
+        this._isTabbable.set(value);
     }
 }
