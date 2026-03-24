@@ -38,7 +38,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         super();
         const localeId = inject(LOCALE_ID, { optional: true });
         const platform = inject(Platform);
-        super.setLocale(localeId || 'en-US');
+        this.setLocale(localeId || 'en-US');
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
     }
 
@@ -85,7 +85,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
         try {
             if (!this._relativeTimeFormatter) {
-                this._relativeTimeFormatter = new Intl.RelativeTimeFormat(this.locale, { numeric: 'auto' });
+                this._relativeTimeFormatter = new Intl.RelativeTimeFormat(this.locale(), { numeric: 'auto' });
             }
             return this._relativeTimeFormatter.format(value, unit);
         } catch {
@@ -147,7 +147,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get month names */
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { month: style, timeZone: 'utc' });
         return range(12, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, i, 1)))
         );
@@ -155,7 +155,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get date names */
     getDateNames(): string[] {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { day: 'numeric', timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { day: 'numeric', timeZone: 'utc' });
         return range(31, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
@@ -163,7 +163,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get day of week names */
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { weekday: style, timeZone: 'utc' });
         return range(7, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
@@ -171,7 +171,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Get year name */
     getYearName(date: FdDate): string {
-        const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { year: 'numeric', timeZone: 'utc' });
+        const dateTimeFormat = new Intl.DateTimeFormat(this.locale(), { year: 'numeric', timeZone: 'utc' });
         const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(dateTimeFormat, dateInstance));
     }
@@ -179,7 +179,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Get week name */
     getWeekName(date: FdDate): string {
         const weekNumber = this.getWeekNumber(date);
-        return weekNumber.toLocaleString(this.locale);
+        return weekNumber.toLocaleString(this.locale());
     }
 
     /** Get hour names */
@@ -188,7 +188,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             if (meridian) {
                 hour = hour === 0 || hour === 12 ? 12 : hour % 12;
             }
-            return hour.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+            return hour.toLocaleString(this.locale(), { minimumIntegerDigits: twoDigit ? 2 : 1 });
         });
     }
 
@@ -197,20 +197,20 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const length = Math.ceil(60 / minuteStep);
         return range(length, (index) => {
             const minute = index * minuteStep;
-            return minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
+            return minute.toLocaleString(this.locale(), { minimumIntegerDigits: twoDigit ? 2 : 1 });
         });
     }
 
     /** Get second names */
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (second) => second.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
+        return range(60, (second) => second.toLocaleString(this.locale(), { minimumIntegerDigits: twoDigit ? 2 : 1 }));
     }
 
     /** Get day period names */
     getDayPeriodNames(): [string, string] {
         const DEFAULT_PERIODS: [string, string] = [AM_DAY_PERIOD_DEFAULT, PM_DAY_PERIOD_DEFAULT];
 
-        const formatter = new Intl.DateTimeFormat(this.locale, {
+        const formatter = new Intl.DateTimeFormat(this.locale(), {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true
@@ -258,7 +258,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Get first day of week */
     getFirstDayOfWeek(): number {
         try {
-            const locale = new Intl.Locale(this.locale);
+            const locale = new Intl.Locale(this.locale());
             const weekInfo: { firstDay: number } | undefined =
                 (locale as any).weekInfo ?? (locale as any).getWeekInfo?.();
             if (weekInfo) {
@@ -497,7 +497,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** Format date using Intl.DateTimeFormat */
     private _formatWithIntl(date: FdDate, displayFormat: any): string {
-        const formatter = new Intl.DateTimeFormat(this.locale, displayFormat);
+        const formatter = new Intl.DateTimeFormat(this.locale(), displayFormat);
         const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(formatter, dateInstance));
     }
@@ -703,7 +703,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             return this._dayFirstCache;
         }
         try {
-            const parts = new Intl.DateTimeFormat(this.locale).formatToParts(new Date(2020, 0, 2));
+            const parts = new Intl.DateTimeFormat(this.locale()).formatToParts(new Date(2020, 0, 2));
             for (const part of parts) {
                 if (part.type === 'day') {
                     this._dayFirstCache = true;

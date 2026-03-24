@@ -887,13 +887,11 @@ describe('FdDatetimeAdapter', () => {
         });
     });
 
-    // Group 10e: localeChanges observable emission
-    describe('localeChanges', () => {
-        it('should emit on localeChanges when setLocale is called', (done) => {
-            adapter.localeChanges.subscribe(() => {
-                done();
-            });
+    // Group 10e: locale signal update
+    describe('locale', () => {
+        it('should update locale signal when setLocale is called', () => {
             adapter.setLocale('ja-JP');
+            expect(adapter.locale()).toBe('ja-JP');
         });
     });
 

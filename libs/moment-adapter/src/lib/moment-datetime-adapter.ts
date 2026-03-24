@@ -156,7 +156,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     }
 
     getWeekName(date: Moment): string {
-        return this.clone(date).isoWeek().toLocaleString(this.locale);
+        return this.clone(date).isoWeek().toLocaleString(this.locale());
     }
 
     getHourNames({ meridian, twoDigit }: { twoDigit: boolean; meridian: boolean }): string[] {
@@ -202,13 +202,13 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
     parse(value: any, parseFormat: MomentFormatSpecification = ''): Moment | null {
         if (value && typeof value === 'string') {
-            return this._createMomentDate(value, parseFormat, this.locale);
+            return this._createMomentDate(value, parseFormat, this.locale());
         } else if (value instanceof FdDate) {
             // FdDate instance may be incorrectly parsed by Moment.js
             value = value.toString();
         }
 
-        return value ? this._createMomentDate(value).locale(this.locale) : null;
+        return value ? this._createMomentDate(value).locale(this.locale()) : null;
     }
 
     format(date: Moment, displayFormat: string): string {
@@ -242,7 +242,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
                       date
                   }
                 : `${year}`
-        ).locale(this.locale);
+        ).locale(this.locale());
 
         if (!result.isValid()) {
             throw Error(`Invalid date "${date}" for month with index "${month}".`);
@@ -252,11 +252,11 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     }
 
     today(): Moment {
-        return this._createMomentDate().locale(this.locale).startOf('day');
+        return this._createMomentDate().locale(this.locale()).startOf('day');
     }
 
     now(): Moment {
-        return this._createMomentDate().locale(this.locale);
+        return this._createMomentDate().locale(this.locale());
     }
 
     addCalendarYears(date: Moment, years: number): Moment {
@@ -276,7 +276,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             return moment();
         }
 
-        return date.clone().locale(this.locale);
+        return date.clone().locale(this.locale());
     }
 
     datesEqual(date1: Moment, date2: Moment): boolean {

@@ -1,5 +1,5 @@
+import { Signal, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Observable, Subject } from 'rxjs';
 
 /**
  * Datetime Adapter is an abstract class that must be implemented by each adapter.
@@ -322,25 +322,21 @@ export abstract class DatetimeAdapter<D> {
      */
     abstract fromNow?(date: D): string;
 
-    /** locale changes stream */
-    readonly localeChanges: Observable<void>;
-
-    /** current locale */
-    protected locale: string;
+    /** Current locale as a readonly signal. */
+    readonly locale: Signal<string>;
 
     /** @hidden */
-    private _localeChanges: Subject<void> = new Subject();
+    private readonly _locale = signal<string>('');
 
     protected constructor() {
-        this.localeChanges = this._localeChanges.asObservable();
+        this.locale = this._locale.asReadonly();
     }
     /**
      * Sets the locale used for all dates.
      * @param locale The new locale.
      */
     setLocale(locale: string): void {
-        this.locale = locale;
-        this._localeChanges.next();
+        this._locale.set(locale);
     }
 
     /**

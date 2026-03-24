@@ -7,6 +7,7 @@ import {
     Component,
     ComponentRef,
     DestroyRef,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -524,6 +525,12 @@ export class DatePickerComponent<D>
         if (!this._dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            this.formatInputDate(this.selectedDate);
+            this._changeDetectionRef.markForCheck();
+        });
     }
 
     /**
@@ -580,11 +587,6 @@ export class DatePickerComponent<D>
         } else if (this.dateRangeFormat === 'year') {
             this.activeView = FdCalendarViewEnum.Year;
         }
-
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this.formatInputDate(this.selectedDate);
-            this._changeDetectionRef.detectChanges();
-        });
     }
 
     /** @hidden */

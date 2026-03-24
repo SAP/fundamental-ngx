@@ -1,18 +1,16 @@
-import { Inject, Optional, Pipe, PipeTransform, Signal, inject } from '@angular/core';
+import { Pipe, PipeTransform, Signal, inject } from '@angular/core';
 import { FD_LANGUAGE_SIGNAL, FdLanguage, FdLanguageKeyIdentifier, TranslationResolver } from '@fundamental-ngx/i18n';
 import { DatetimeAdapter } from './datetime-adapter';
 import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
 
 @Pipe({
-    name: 'dateFormat',
-    standalone: true
+    name: 'dateFormat'
 })
 export class DateFormatPipe<D> implements PipeTransform {
     /** @hidden */
-    constructor(
-        private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {}
+    private readonly _dateTimeAdapter = inject(DatetimeAdapter) as DatetimeAdapter<D>;
+    /** @hidden */
+    private readonly _dateTimeFormats = inject(DATE_TIME_FORMATS) as DateTimeFormats;
 
     /** Format date object */
     transform(date: D, noDateMessage = ''): string {
@@ -25,15 +23,13 @@ export class DateFormatPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dateTimeFormat',
-    standalone: true
+    name: 'dateTimeFormat'
 })
 export class DateTimeFormatPipe<D> implements PipeTransform {
     /** @hidden */
-    constructor(
-        private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {}
+    private readonly _dateTimeAdapter = inject(DatetimeAdapter) as DatetimeAdapter<D>;
+    /** @hidden */
+    private readonly _dateTimeFormats = inject(DATE_TIME_FORMATS) as DateTimeFormats;
 
     /** Format date object */
     transform(date: D, noDateMessage = ''): string {
@@ -46,12 +42,11 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dateFromNow',
-    standalone: true
+    name: 'dateFromNow'
 })
 export class DateFromNowPipe<D> implements PipeTransform {
     /** @hidden */
-    constructor(private _dateTimeAdapter: DatetimeAdapter<D>) {}
+    private readonly _dateTimeAdapter = inject(DatetimeAdapter) as DatetimeAdapter<D>;
 
     /** Format date object */
     transform(date: D, noDateMessage = ''): string {
@@ -69,15 +64,11 @@ export class DateFromNowPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dayPeriodFormat',
-    standalone: true
+    name: 'dayPeriodFormat'
 })
 export class DayPeriodFormatPipe<D> implements PipeTransform {
     /** @hidden */
-    constructor(
-        private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {}
+    private readonly _dateTimeAdapter = inject(DatetimeAdapter) as DatetimeAdapter<D>;
 
     /** Format date object for day period */
     transform(date: D, customFormat: any = {}, noDateMessage = ''): string {
@@ -91,7 +82,6 @@ export class DayPeriodFormatPipe<D> implements PipeTransform {
 
 @Pipe({
     name: 'translateDayPeriod',
-    standalone: true,
     pure: false // required to update the value when the observable is resolved
 })
 export class TranslateDayPeriodPipe implements PipeTransform {

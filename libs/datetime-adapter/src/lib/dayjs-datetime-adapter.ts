@@ -74,7 +74,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     /** @hidden */
     fromNow(date: Dayjs): string {
-        return date.locale(this.locale).fromNow();
+        return date.locale(this.locale()).fromNow();
     }
 
     /** Set locale */
@@ -207,7 +207,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     /** Get week name */
     getWeekName(date: Dayjs): string {
-        return date.week().toLocaleString(this.locale);
+        return date.week().toLocaleString(this.locale());
     }
 
     /** Get hour names */
@@ -262,7 +262,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** Try to parse a string to a date object */
     parse(value: any, parseFormat: string = ''): Dayjs | null {
         if (value && typeof value === 'string') {
-            return this._createDayjsDate(value, parseFormat).locale(this.locale);
+            return this._createDayjsDate(value, parseFormat).locale(this.locale());
         }
 
         // If value is a non-Date object with a toString() method (e.g. FdDate),
@@ -277,11 +277,11 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         ) {
             const str = value.toString();
             if (str && str !== '[object Object]') {
-                return this._createDayjsDate(str, parseFormat || undefined).locale(this.locale);
+                return this._createDayjsDate(str, parseFormat || undefined).locale(this.locale());
             }
         }
 
-        return value ? this._createDayjsDate(value).locale(this.locale) : null;
+        return value ? this._createDayjsDate(value).locale(this.locale()) : null;
     }
 
     /** Format a date as a string */
@@ -321,12 +321,12 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     /** Get today */
     today(): Dayjs {
-        return this._createDayjsDate().locale(this.locale).startOf('day');
+        return this._createDayjsDate().locale(this.locale()).startOf('day');
     }
 
     /** Get now */
     now(): Dayjs {
-        return this._createDayjsDate().locale(this.locale);
+        return this._createDayjsDate().locale(this.locale());
     }
 
     /** Add years to date */
@@ -350,8 +350,8 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
             throw new Error('DayjsDatetimeAdapter: Cannot clone a null/undefined date.');
         }
 
-        if (this.locale) {
-            return date.clone().locale(this.locale);
+        if (this.locale()) {
+            return date.clone().locale(this.locale());
         }
 
         return date.clone();

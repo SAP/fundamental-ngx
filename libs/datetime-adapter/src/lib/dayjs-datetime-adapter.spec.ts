@@ -891,13 +891,11 @@ describe('DayjsDatetimeAdapter', () => {
         });
     });
 
-    // Group 10e: localeChanges observable emission
-    describe('localeChanges', () => {
-        it('should emit on localeChanges when setLocale is called', (done) => {
-            adapter.localeChanges.subscribe(() => {
-                done();
-            });
+    // Group 10e: locale signal update
+    describe('locale', () => {
+        it('should update locale signal when setLocale is called', () => {
             adapter.setLocale('ja');
+            expect(adapter.locale()).toBe('ja');
         });
     });
 
@@ -1150,10 +1148,9 @@ describe('DayjsDatetimeAdapter with LOCALE_ID override', () => {
     it('should parse date string even when time is missing and format expects time', () => {
         // simulate the input field edited by the user, with missing time
         const result = adapter['_createDayjsDate']('10/07/2025', 'L hh:mm A');
-        adapter.setLocale('fr');
         expect(result.isValid()).toBeTruthy();
         expect(result.year()).toBe(2025);
-        expect(result.month()).toBe(JUL); // month is 0-based
+        expect(result.month()).toBe(JUL); // month is 0-based in dayjs
         expect(result.date()).toBe(10);
     });
 
@@ -1212,6 +1209,77 @@ describe('DayjsDatetimeAdapter with LOCALE_ID override', () => {
             expect(result.month()).toBe(JUL);
             expect(result.date()).toBe(10);
         });
+    });
+});
+
+// Regression tests for https://github.com/SAP/fundamental-ngx/issues/13326
+// Bug: In fr locale, deleting the time portion from "03/06/2025 0:00" left "03/06/2025"
+// which was re-parsed as June 3 (US MDY order) instead of March 6 (French DMY order).
+describe('issue #13326 - deleting time should not swap day/month in non-en locales', () => {
+    let adapter: DayjsDatetimeAdapter;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [provideDayjsDatetimeAdapter()]
+        });
+        adapter = TestBed.inject(DatetimeAdapter) as DayjsDatetimeAdapter;
+    });
+
+    it('should preserve French date after time is deleted (DD/MM/YYYY)', () => {
+        adapter.setLocale('fr');
+        // French format is DD/MM/YYYY. "06/03/2025" = March 6 in fr locale.
+        // Bug #13326: after deleting time, this was re-parsed as MM/DD (US order) → June 3.
+        const result = adapter.parse('06/03/2025', 'L h:mm A');
+        expect(result).not.toBeNull();
+        expect(result!.isValid()).toBeTruthy();
+        expect(result!.year()).toBe(2025);
+        expect(result!.month()).toBe(MAR); // March (0-based: 2), not June
+        expect(result!.date()).toBe(6); // 6th, not 3rd
+    });
+
+    it('should preserve English date after time is deleted (MM/DD/YYYY)', () => {
+        adapter.setLocale('en');
+        // User selected March 6 2025, then deleted the time portion
+        const result = adapter.parse('03/06/2025', 'L h:mm A');
+        expect(result).not.toBeNull();
+        expect(result!.isValid()).toBeTruthy();
+        expect(result!.year()).toBe(2025);
+        expect(result!.month()).toBe(MAR); // March
+        expect(result!.date()).toBe(6);
+    });
+
+    it('should preserve Danish date after time is deleted (DD.MM.YYYY)', () => {
+        adapter.setLocale('da');
+        // Danish uses DD.MM.YYYY with dots, user typed with dots
+        const result = adapter.parse('06.03.2025', 'L HH:mm');
+        expect(result).not.toBeNull();
+        expect(result!.isValid()).toBeTruthy();
+        expect(result!.year()).toBe(2025);
+        expect(result!.month()).toBe(MAR); // March
+        expect(result!.date()).toBe(6);
+    });
+
+    it('should preserve Japanese date after time is deleted (YYYY/MM/DD)', () => {
+        adapter.setLocale('ja');
+        const result = adapter.parse('2025/03/06', 'L h:mm A');
+        expect(result).not.toBeNull();
+        expect(result!.isValid()).toBeTruthy();
+        expect(result!.year()).toBe(2025);
+        expect(result!.month()).toBe(MAR);
+        expect(result!.date()).toBe(6);
+    });
+
+    it('should handle French datetime with time present (no stripping needed)', () => {
+        adapter.setLocale('fr');
+        // French format DD/MM/YYYY: "06/03/2025 14:30" = March 6, 2:30 PM
+        const result = adapter.parse('06/03/2025 14:30', 'L HH:mm');
+        expect(result).not.toBeNull();
+        expect(result!.isValid()).toBeTruthy();
+        expect(result!.year()).toBe(2025);
+        expect(result!.month()).toBe(MAR);
+        expect(result!.date()).toBe(6);
+        expect(result!.hour()).toBe(14);
+        expect(result!.minute()).toBe(30);
     });
 });
 

@@ -12,6 +12,7 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
+    effect,
     inject
 } from '@angular/core';
 
@@ -136,6 +137,14 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
     ) {
         // default values
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
+
+        effect(() => {
+            this._dateTimeAdapter.locale();
+            if (this._initiated) {
+                this._constructYearsGrid();
+                this._changeDetectorRef.markForCheck();
+            }
+        });
     }
 
     /** @hidden */
@@ -147,11 +156,6 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
         this._firstYearInList = this.yearSelected - this._yearsInOnePeriod();
 
         this._constructYearsGrid();
-
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._constructYearsGrid();
-            this._changeDetectorRef.markForCheck();
-        });
     }
 
     /** @hidden */
