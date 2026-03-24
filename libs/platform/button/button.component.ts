@@ -120,6 +120,19 @@ export class ButtonComponent implements ButtonModel {
     /** @hidden Computed to determine effective toggled state */
     protected readonly _effectiveToggled = computed(() => this.toggled() || this.ariaPressed() || this.ariaSelected());
 
+    /**
+     * Computed accessible name for the button.
+     * Follows ARIA accessible name computation priority:
+     * 1. aria-label input
+     * 2. title input (commonly used for icon-only buttons)
+     * 3. label input (visible text)
+     * 4. glyph name as fallback (e.g., "decline" -> "decline")
+     * @hidden
+     */
+    protected readonly _accessibleName = computed(
+        () => this.ariaLabel() || this.title() || this.label() || this.glyph() || null
+    );
+
     /** @hidden */
     constructor() {
         warnOnce(
