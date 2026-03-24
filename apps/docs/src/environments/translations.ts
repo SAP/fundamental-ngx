@@ -53,7 +53,7 @@ export function translations(): Observable<Array<{ value: FdLanguage; name: stri
                 })
                 .pipe(
                     map((lang) => ({
-                        value: loadProperties(lang),
+                        value: { ...loadProperties(lang), locale, name: languages[locale] } as FdLanguage,
                         name: languages[locale]
                     }))
                 )

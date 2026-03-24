@@ -1,10 +1,12 @@
 import {
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
     ElementRef,
     inject,
     input,
+    signal,
     ViewEncapsulation
 } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
@@ -15,6 +17,8 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_BUTTON_COMPONENT } from './tokens';
 
 let buttonId = 0;
+
+const SPECIAL_BUTTON_TYPES = new Set(['emphasized', 'positive', 'negative', 'attention']);
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -58,10 +62,10 @@ export class ButtonComponent extends BaseButton implements HasElementRef {
     readonly id = input(`fd-button-${++buttonId}`);
 
     /** @hidden */
-    readonly specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    readonly elementRef = inject(ElementRef);
+    protected readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /**
      * Calculate aria-label attribute
@@ -72,13 +76,14 @@ export class ButtonComponent extends BaseButton implements HasElementRef {
             return this.ariaLabel(); // return the input aria-label
         }
 
-        const attrAriaLabel = this.elementRef.nativeElement.getAttribute('aria-label');
-        if (attrAriaLabel) {
-            return attrAriaLabel; // return the attribute aria-label
+        const nativeLabel = this._nativeAriaLabel();
+
+        if (nativeLabel) {
+            return nativeLabel; // return the native attribute aria-label
         }
 
-        if (this.specialButtonType.includes(this.fdTypeState())) {
-            return this.label() ?? this.glyph()?.replace(/-/g, ' ') ?? null;
+        if (SPECIAL_BUTTON_TYPES.has(this.fdTypeState())) {
+            return this.label() ?? this._glyphLabel() ?? null;
         }
 
         return null;
@@ -93,37 +98,69 @@ export class ButtonComponent extends BaseButton implements HasElementRef {
             return this.ariaDescription();
         }
 
-        if (this.specialButtonType.includes(this.fdTypeState())) {
+        if (SPECIAL_BUTTON_TYPES.has(this.fdTypeState())) {
             return this.fdTypeState();
         }
 
         return null;
     });
 
-    /** @hidden */
-    protected readonly contentDensityObserver = inject(ContentDensityObserver);
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
+    /**
+     * Computed CSS classes for the button.
+     * Built as a string to avoid array allocation overhead.
+     * @hidden
      */
-    protected readonly cssClass = computed(() =>
-        [
-            'fd-button',
-            this.fdTypeState() ? `fd-button--${this.fdTypeState()}` : '',
-            this.fdMenu() ? 'fd-button--menu' : '',
-            this._disabledState() || this.ariaDisabled() ? 'is-disabled' : '',
-            this.toggledState() ? 'fd-button--toggled' : ''
-        ]
-            .filter(Boolean)
-            .join(' ')
-    );
+    protected readonly cssClass = computed(() => {
+        let classes = 'fd-button';
+
+        const type = this.fdTypeState();
+        if (type) {
+            classes += ` fd-button--${type}`;
+        }
+
+        if (this.fdMenu()) {
+            classes += ' fd-button--menu';
+        }
+
+        if (this._disabledState() || this.ariaDisabled()) {
+            classes += ' is-disabled';
+        }
+
+        if (this.toggledState()) {
+            classes += ' fd-button--toggled';
+        }
+
+        return classes;
+    });
+
+    /**
+     * Memoized glyph label for aria-label fallback.
+     * Transforms glyph name (e.g., "slim-arrow-down") to readable text (e.g., "slim arrow down").
+     * @hidden
+     */
+    private readonly _glyphLabel = computed(() => {
+        const glyph = this.glyph();
+        return glyph ? glyph.replace(/-/g, ' ') : null;
+    });
+
+    /**
+     * Native aria-label attribute read from the DOM element.
+     * Captured once after render for use in aria-label computation.
+     * @hidden
+     */
+    private readonly _nativeAriaLabel = signal<string | null>(null);
 
     /** @hidden */
     constructor() {
         super();
-        this.contentDensityObserver.subscribe();
+
+        // Read native aria-label attribute once after render
+        afterNextRender(() => {
+            const nativeLabel = this.elementRef.nativeElement.getAttribute('aria-label');
+            if (nativeLabel) {
+                this._nativeAriaLabel.set(nativeLabel);
+            }
+        });
     }
 
     /** Forces the focus outline around the button, which is not default behavior in Safari. */

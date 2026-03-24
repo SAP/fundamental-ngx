@@ -1,0 +1,6 @@
+// border + min-width combo requires custom class — no sap-* utility for border-color + border-width
+.example-side-card {
+    flex: 1;
+    min-width: 12.5rem;
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+}

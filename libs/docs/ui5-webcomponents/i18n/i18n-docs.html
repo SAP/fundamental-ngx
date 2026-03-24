@@ -1,0 +1,73 @@
+<fd-docs-section-title id="overview" componentName="i18n"> Overview </fd-docs-section-title>
+<description>
+    <p>
+        Set <code>FD_LANGUAGE_SIGNAL</code> once and the bridge keeps fundamental-ngx translations, locale formatting,
+        and UI5 component language in sync automatically.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="setup" componentName="i18n"> Setup </fd-docs-section-title>
+<description>
+    <p>Two steps are required:</p>
+    <p><strong>Step 1:</strong> Register UI5 locale assets in <code>main.ts</code> (before Angular bootstrap):</p>
+    <pre><code>// main.ts
+import '&#64;ui5/webcomponents-localization/dist/Assets.js'; // CLDR data (date/number formatting)
+import '&#64;ui5/webcomponents/dist/Assets.js';              // Component i18n (tooltips, labels, aria-text)
+// If using Fiori components:
+// import '&#64;ui5/webcomponents-fiori/dist/Assets.js';</code></pre>
+    <p>
+        Without these imports, translated strings (tooltips, calendar labels) stay in English after a language switch.
+        The actual locale data is loaded lazily on first use — no upfront bundle size impact.
+    </p>
+    <p><strong>Step 2:</strong> Add the language bridge to your app providers:</p>
+    <pre><code>// app.config.ts
+import &#123; provideUi5LanguageBridge &#125; from '&#64;fundamental-ngx/ui5-webcomponents-base/i18n';
+
+export const appConfig: ApplicationConfig = &#123;
+  providers: [
+    provideUi5LanguageBridge(),
+  ]
+&#125;;</code></pre>
+    <p>Now <code>langSignal.set(FD_LANGUAGE_GERMAN)</code> updates all fundamental-ngx and UI5 components together.</p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="how-it-works" componentName="i18n"> How it works </fd-docs-section-title>
+<description>
+    <p>The signal flow:</p>
+    <pre><code>FD_LANGUAGE_SIGNAL  (set by your app)
+        |
+        |  linkedSignal derives locale
+        v
+FD_LOCALE_SIGNAL    ('de', 'fr', 'ja', ...)
+        |
+        |  Ui5LanguageService effect()
+        v
+UI5 setLanguage()   (UI5 components re-render)
+</code></pre>
+    <p>
+        <code>Ui5LanguageService</code> is an Angular service activated by <code>provideUi5LanguageBridge()</code>. It
+        watches <code>FD_LOCALE_SIGNAL</code> via an <code>effect()</code> and calls UI5's
+        <code>setLanguage()</code> whenever the locale changes. This is explicit opt-in — apps not using UI5 components
+        don't pay for this bridge.
+    </p>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="example" componentName="i18n"> Live example </fd-docs-section-title>
+<description>
+    <p>
+        The example below shows a UI5 Date Picker and a translated fundamental-ngx label reading from the app-level
+        language signal. Use the <strong>toolbar language selector</strong> (translate icon, top-right) to switch
+        languages — the date picker's built-in labels (placeholder, calendar navigation, month/day names) and the
+        fundamental-ngx label update together automatically via the bridge.
+    </p>
+</description>
+<component-example>
+    <ui5-i18n-basic-sample></ui5-i18n-basic-sample>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>

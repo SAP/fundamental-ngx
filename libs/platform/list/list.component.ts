@@ -543,6 +543,9 @@ export class ListComponent<T>
                 .subscribe(() => this._updateListItems())
         );
 
+        // Listen for active item changes to update roving tabindex
+        this._subscriptions.add(this._keyManager.change.subscribe(() => this._updateTabIndexes()));
+
         const indicator = this.elementRef.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
     }
@@ -895,9 +898,8 @@ export class ListComponent<T>
      * set values when passed via datasource
      */
     private _updateListItems(): void {
-        if (this.listItems.length !== 0) {
-            this.listItems.first.listItem.nativeElement.setAttribute('tabindex', '0');
-        }
+        // Update roving tabindex
+        this._updateTabIndexes();
 
         this._ariaSetSize = this.ariaSetsize
             ? of(this.ariaSetsize)
@@ -942,6 +944,45 @@ export class ListComponent<T>
         });
 
         this.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Updates tabindex on all list items based on the current tabbable index.
+     */
+    private _updateTabIndexes(): void {
+        if (this.listItems.length === 0) {
+            return;
+        }
+
+        const tabbableIndex = this._getTabbableItemIndex();
+
+        this.listItems.forEach((item, index) => {
+            item.listItem.nativeElement.setAttribute('tabindex', index === tabbableIndex ? '0' : '-1');
+        });
+    }
+
+    /**
+     * @hidden
+     * Determines which item should have tabindex="0".
+     * Priority: 1) Active item (keyboard focused), 2) First selected item, 3) First item
+     */
+    private _getTabbableItemIndex(): number {
+        // If keyManager has an active item, use that
+        const activeIndex = this._keyManager?.activeItemIndex;
+        if (activeIndex != null && activeIndex >= 0) {
+            return activeIndex;
+        }
+
+        // Otherwise, find the first selected item
+        const listItemsArray = this.listItems.toArray();
+        const firstSelectedIndex = listItemsArray.findIndex((item) => item._selected);
+        if (firstSelectedIndex >= 0) {
+            return firstSelectedIndex;
+        }
+
+        // Default to first item
+        return 0;
     }
 
     /** @hidden */

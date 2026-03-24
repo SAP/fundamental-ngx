@@ -57,7 +57,7 @@ export class InlineHelpDirective {
     readonly triggers = input<(string | TriggerConfig)[]>(DEFAULT_TRIGGERS);
 
     /** Whether the popover should close when a click is made outside its boundaries. */
-    readonly closeOnOutsideClick = input(false);
+    readonly closeOnOutsideClick = input(false, { transform: booleanAttribute });
 
     /** Additional CSS class(es) to apply to the popover body. */
     readonly additionalBodyClass = input<string | null>(null);

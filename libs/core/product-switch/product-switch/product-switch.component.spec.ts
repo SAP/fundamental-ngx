@@ -1,10 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { ProductSwitchModule } from '../product-switch.module';
 import { ProductSwitchComponent } from './product-switch.component';
 
 describe('ProductSwitchComponent', () => {
@@ -13,7 +8,7 @@ describe('ProductSwitchComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, ButtonComponent, DragAndDropModule, DragDropModule, ProductSwitchModule]
+            imports: [ProductSwitchComponent]
         }).compileComponents();
     }));
 
@@ -68,4 +63,20 @@ describe('ProductSwitchComponent', () => {
 
         expect(fixture.nativeElement.classList.contains('fd-popover-custom--disabled')).toBe(true);
     });
+
+    it('should emit isOpenChange when open state changes', fakeAsync(() => {
+        const emittedValues: boolean[] = [];
+        component.isOpenChange.subscribe((value: boolean) => emittedValues.push(value));
+
+        component.isOpen.set(true);
+        fixture.detectChanges();
+        tick();
+
+        component.isOpen.set(false);
+        fixture.detectChanges();
+        tick();
+
+        expect(emittedValues).toContain(true);
+        expect(emittedValues).toContain(false);
+    }));
 });

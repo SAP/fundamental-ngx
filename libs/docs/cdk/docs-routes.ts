@@ -63,6 +63,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/cdk/initial-focus').then(configureLibRoutes)
     },
     {
+        path: 'line-clamp',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/line-clamp').then(configureLibRoutes)
+    },
+    {
         path: 'breakpoint',
         loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then(configureLibRoutes)
     },
