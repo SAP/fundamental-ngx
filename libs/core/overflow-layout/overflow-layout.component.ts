@@ -15,7 +15,6 @@ import {
     HostBinding,
     inject,
     Input,
-    NgZone,
     OnDestroy,
     OnInit,
     Output,
@@ -29,7 +28,7 @@ import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, fromEvent, startWith, Subject, Subscription } from 'rxjs';
 import { OverflowItemContainerRefDirective } from './directives/overflow-item-container-ref.directive';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowLayoutPopoverContentDirective } from './directives/overflow-layout-popover-content.directive';
@@ -219,7 +218,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
-        private readonly _ngZone: NgZone,
         protected _cdr: ChangeDetectorRef,
         protected _overflowLayoutService: OverflowLayoutService
     ) {
@@ -305,12 +303,9 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
 
         this._setFocusKeyManager();
 
-        // There might be cases when the elements are not rendered yet, but the component is initialized already.
-        // It may happen when it's inside the components that are wrapping ng-content with ng-containers and so on.
-        // IntersectionObserver is a good solution for this case, but it's hardly manageable when testing.
-        this._ngZone.onStable.pipe(first()).subscribe(() => {
+        // Set up resize observers immediately after view init
+        Promise.resolve().then(() => {
             this._overflowLayoutService.startListening(this._config);
-
             this._canListenToResize = true;
         });
     }

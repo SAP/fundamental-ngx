@@ -56,6 +56,7 @@ $fd-block: 'fd-overflow-layout';
         @include fd-reset();
         display: block;
         white-space: normal;
+        max-width: 19.5rem;
     }
 
     &__item {

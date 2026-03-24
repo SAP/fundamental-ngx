@@ -21,7 +21,7 @@
                 <li
                     fd-menu-item
                     [disabled]="
-                        breadcrumbItem.item.breadcrumbLink ? breadcrumbItem.item.breadcrumbLink.disabled : false
+                        breadcrumbItem.item.breadcrumbLink ? breadcrumbItem.item.breadcrumbLink.disabled() : false
                     "
                 >
                     <a fd-menu-interactive (click)="itemClicked(breadcrumbItem.item, $event)">
