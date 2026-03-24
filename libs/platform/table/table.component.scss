@@ -651,6 +651,9 @@ fdk-dynamic-portal {
 .fdp-table--no-outer-border.fd-table--no-vertical-borders .fd-table__cell:last-child {
     border-left-style: none;
 }
+.fd-table--no-vertical-borders .fd-table__cell:first-child {
+    border-inline-start: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);
+}
 
 th.fd-table__cell .fd-table__inner {
     font-weight: 700;

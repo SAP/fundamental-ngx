@@ -1,3 +1,13 @@
+@if (_fdpTableService._semanticHighlighting$(); as semanticHighlighting) {
+    <td
+        fd-table-cell
+        fd-table-status-indicator
+        fdkDisabled
+        [addDisabledClass]="false"
+        [status]="row.value[semanticHighlighting]"
+    ></td>
+}
+
 @if (selectionMode !== SELECTION_MODE.NONE) {
     <td fd-table-cell fdkDisabled [addDisabledClass]="false"></td>
 }
