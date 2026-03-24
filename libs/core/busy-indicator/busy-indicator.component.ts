@@ -1,10 +1,14 @@
 import { TAB } from '@angular/cdk/keycodes';
 
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    OnChanges,
+    OnDestroy,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     inject,
     input,
@@ -44,7 +48,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '(keydown)': 'hostFocusChangeHandler($event)'
     }
 })
-export class BusyIndicatorComponent {
+export class BusyIndicatorComponent implements OnChanges, OnDestroy {
     /** Whether to display the loading indicator animation. */
     readonly loading = input(false);
 
@@ -69,6 +73,9 @@ export class BusyIndicatorComponent {
     /** Aria live attribute value. */
     readonly ariaLive = input<'assertive' | 'polite' | 'off' | null>(null);
 
+    /** Whether to stop mouse wheel events when the busy indicator is displayed via loading="true". */
+    preventWheelEvents = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+
     /** @hidden */
     protected readonly fakeFocusElement = viewChild<ElementRef>('fakeFocusElement');
 
@@ -91,6 +98,22 @@ export class BusyIndicatorComponent {
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
+    /** @hidden */
+    ngOnChanges(): void {
+        if (this.preventWheelEvents()) {
+            this._elementRef.nativeElement.addEventListener('wheel', this._wheelListener, {
+                passive: false
+            });
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._elementRef.nativeElement.removeEventListener('wheel', this._wheelListener, {
+            passive: false
+        });
+    }
+
     /** @hidden If focus escapes busy container focus element after wrapped content */
     protected hostFocusChangeHandler(event: KeyboardEvent): void {
         if (this.loading() && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
@@ -109,4 +132,12 @@ export class BusyIndicatorComponent {
             this._elementRef.nativeElement.focus();
         }
     }
+
+    /** @hidden */
+    private _wheelListener = (event: WheelEvent): void => {
+        if (this.preventWheelEvents() && this.loading()) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    };
 }
