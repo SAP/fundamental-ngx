@@ -165,6 +165,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     @HostListener('click', ['$event'])
     protected _click(event: MouseEvent): void {
+        if (this._isDisabled) {
+            return;
+        }
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }
@@ -390,12 +393,6 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
             focusableItemDirective.setTabbable(!disable);
             focusableItemDirective.setFocusable(!disable);
         });
-        if (disable) {
-            this._buttons.forEach((button) => {
-                button.elementRef.nativeElement.role = 'option';
-                this._listenToTriggerEvents(button);
-            });
-        }
 
         this._changeDetRef.markForCheck();
     }
