@@ -3,25 +3,25 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
-    EventEmitter,
-    Input,
-    OnDestroy,
-    Output,
     TemplateRef,
-    ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
-    inject
+    booleanAttribute,
+    inject,
+    input,
+    model,
+    output,
+    signal,
+    viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 
 /**
  * A token is used to represent contextualizing information.
@@ -39,136 +39,109 @@ import { Subscription, fromEvent } from 'rxjs';
     },
     imports: [FdTranslatePipe]
 })
-export class TokenComponent implements AfterViewInit, OnDestroy {
-    /** Whether the token is disabled. */
-    @Input()
-    disabled = false;
+export class TokenComponent implements AfterViewInit, HasElementRef {
+    /** @hidden */
+    readonly tokenWrapperElement = viewChild<ElementRef>('tokenWrapperElement');
 
     /** @hidden */
-    @ViewChild('tokenWrapperElement')
-    tokenWrapperElement: ElementRef;
+    readonly _content = viewChild<TemplateRef<unknown>>('content');
 
     /** @hidden */
-    @ViewChild('content')
-    readonly _content: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChild('viewContainer', { read: ViewContainerRef })
-    readonly _viewContainer: ViewContainerRef;
-
-    /** Whether the token is selected. */
-    @Input()
-    set selected(val: boolean) {
-        if (this._selected !== val) {
-            this._cdRef.markForCheck();
-        }
-        this._selected = val;
-    }
-
-    get selected(): boolean {
-        return this._selected;
-    }
-    /** Whether the token is read-only. */
-    @Input()
-    readOnly = false;
+    readonly _viewContainer = viewChild('viewContainer', { read: ViewContainerRef });
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
-    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    readonly onCloseClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    readonly onCloseClick = output<MouseEvent | undefined>();
 
     /** Emitted when token should be removed */
-    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    readonly onRemove: EventEmitter<void> = new EventEmitter<void>();
+    readonly onRemove = output<void>();
 
     /** Emitted when a token is clicked. */
-    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onTokenClick = new EventEmitter<MouseEvent>();
+    readonly onTokenClick = output<MouseEvent>();
 
     /** Emitted when a there's a keydown registered on the token. */
-    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onTokenKeydown = new EventEmitter<KeyboardEvent>();
+    readonly onTokenKeydown = output<KeyboardEvent>();
 
-    /**
-     * Emitted when token element received or lost focus.
-     */
-    @Output()
-    elementFocused = new EventEmitter<boolean>();
+    /** Emitted when token element received or lost focus. */
+    readonly elementFocused = output<boolean>();
+
+    /** Whether the token is disabled. */
+    readonly disabled = input(false, { transform: booleanAttribute });
+
+    /** Whether the token is selected. Supports two-way binding via [(selected)]. */
+    readonly selected = model(false);
+
+    /** Whether the token is read-only. */
+    readonly readOnly = input(false);
+
+    /** @hidden Internal signal for total count (set by tokenizer) */
+    readonly _totalCount = signal<number | undefined>(undefined);
+
+    /** @hidden Internal signal for item position (set by tokenizer) */
+    readonly _itemPosition = signal<number | undefined>(undefined);
 
     /** @hidden */
-    _totalCount: number;
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    _itemPosition: number;
-
-    /** @hidden */
-    private _selected = false;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
+    readonly _contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        private _cdRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
-
-    /** @hidden */
     ngAfterViewInit(): void {
-        this._viewContainer.createEmbeddedView(this._content);
+        const viewContainer = this._viewContainer();
+        const content = this._content();
+        if (viewContainer && content) {
+            viewContainer.createEmbeddedView(content);
+        }
 
-        fromEvent(this.tokenWrapperElement.nativeElement, 'focus')
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => {
-                this.elementFocused.emit(true);
-            });
+        const tokenWrapper = this.tokenWrapperElement();
+        if (tokenWrapper) {
+            fromEvent(tokenWrapper.nativeElement, 'focus')
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this.elementFocused.emit(true);
+                });
 
-        fromEvent(this.tokenWrapperElement.nativeElement, 'blur')
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => {
-                this.elementFocused.emit(false);
-            });
+            fromEvent(tokenWrapper.nativeElement, 'blur')
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this.elementFocused.emit(false);
+                });
+        }
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    closeClickHandler(event?): void {
+    closeClickHandler(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
-            if (!this.disabled) {
+            if (!this.disabled()) {
                 this.onCloseClick.emit(event);
             }
         }
     }
 
     /** @hidden */
-    tokenClickHandler(event): void {
+    tokenClickHandler(event: MouseEvent): void {
         this.onTokenClick.emit(event);
     }
 
     /** @hidden */
-    tokenKeydownHandler(event): void {
+    tokenKeydownHandler(event: KeyboardEvent): void {
         this.onTokenKeydown.emit(event);
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            this.onTokenClick.emit(event);
+            this.onTokenClick.emit(event as unknown as MouseEvent);
         }
     }
 
     /** @hidden */
     _setTotalCount(count: number, itemPosition: number): void {
-        this._totalCount = count;
-        this._itemPosition = itemPosition;
-        this._cdRef.markForCheck();
+        this._totalCount.set(count);
+        this._itemPosition.set(itemPosition);
     }
 }
