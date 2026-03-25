@@ -79,8 +79,8 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
         TableColumnSortingDirectionPipe,
         forwardRef(() => IsColumnHasHeaderMenuPipe)
     ],
+    // TODO: to be removed after bumping to latest styles and using the class from there
     styles: `
-        // TODO: to be removed after bumping to latest styles and using the class from there
         .fd-table__cell-sr-only {
             position: absolute;
             clip: rect(0, 0, 0, 0);
