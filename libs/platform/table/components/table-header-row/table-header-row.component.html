@@ -130,7 +130,11 @@
         }"
         class="fdp-table__cell--navigation is-last-child"
         role="columnheader"
-    ></th>
+    >
+        <span class="fd-table__cell-sr-only">
+            {{ ('platformTable.navigationColumnTitle' | fdTranslate)() }}
+        </span>
+    </th>
 }
 
 <th

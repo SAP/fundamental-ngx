@@ -78,7 +78,21 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
         ColumnResizableSidePipe,
         TableColumnSortingDirectionPipe,
         forwardRef(() => IsColumnHasHeaderMenuPipe)
-    ]
+    ],
+    styles: `
+        // TODO: to be removed after bumping to latest styles and using the class from there
+        .fd-table__cell-sr-only {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            width: 1px;
+            border: 0;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    `
 })
 export class TableHeaderRowComponent extends TableRowDirective implements OnInit {
     /** Table ID. */

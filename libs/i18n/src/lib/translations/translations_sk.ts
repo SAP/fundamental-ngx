@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Zrušiť fixovanie stĺpca',
         headerMenuUnfreezePlural: 'Zrušiť fixovanie stĺpcov',
         loadMore: 'Zobraziť viac',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Momentálne nie sú v tabuľke žiadne viditeľné stĺpce. Vyberte stĺpce, ktoré potrebujete, v nastaveniach tabuľky.',
         P13ColumnsDialogCancelBtnLabel: 'Zrušiť',

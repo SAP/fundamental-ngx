@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'Häv frysning av kolumn',
         headerMenuUnfreezePlural: 'Häv frysning av kolumner',
         loadMore: 'Visa mer',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Just nu finns inga synliga kolumner i tabellen. Välj de kolumner du behöver i tabellinställningarna.',
         P13ColumnsDialogCancelBtnLabel: 'Avbryt',
