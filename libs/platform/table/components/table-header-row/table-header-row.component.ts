@@ -81,7 +81,7 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
     ],
     // TODO: to be removed after bumping to latest styles and using the class from there
     styles: `
-        .fd-table__cell-sr-only {
+        .fd-table__sr-only {
             position: absolute;
             clip: rect(0, 0, 0, 0);
             height: 1px;
