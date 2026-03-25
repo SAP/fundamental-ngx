@@ -1,4 +1,5 @@
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { TableRowSemanticHighlight } from '@fundamental-ngx/platform';
 
 export interface ExampleItem {
     name: string;
@@ -11,7 +12,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    semantic?: string;
+    semantic?: TableRowSemanticHighlight;
 }
 
 // Example items
