@@ -234,7 +234,7 @@ let tableUniqueId = 0;
         class: 'fdp-table',
         '[class.fdp-table--outer-scroll]': 'outerScroll',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
-        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
+        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders',
         '[class.fd-table--group]': '_isGroupTable$()'
     },
     imports: [
@@ -329,7 +329,17 @@ export class TableComponent<T = any>
     outerScroll = false;
     /** Table without vertical borders. */
     @Input()
-    noVerticalBorders = false;
+    set noVerticalBorders(value: boolean) {
+        this._noVerticalBorders = value;
+    }
+
+    get noVerticalBorders(): boolean {
+        return this._noVerticalBorders || this.noBorders || this._tableService.poppingColumns$().length > 0;
+    }
+
+    /** @hidden */
+    private _noVerticalBorders = false;
+
     /** Table without borders. */
     @Input()
     noBorders = false;

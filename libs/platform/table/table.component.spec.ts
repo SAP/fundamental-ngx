@@ -250,4 +250,54 @@ describe('TableComponent', () => {
             expect(component['_tableService'].setFilters).not.toHaveBeenCalled();
         });
     });
+
+    describe('noVerticalBorders', () => {
+        it('should return false when _noVerticalBorders, noBorders, and poppingColumns are all false/empty', () => {
+            component.noVerticalBorders = false;
+            component.noBorders = false;
+            jest.spyOn(component['_tableService'], 'poppingColumns$').mockReturnValue([]);
+
+            expect(component.noVerticalBorders).toBe(false);
+        });
+
+        it('should return true when noVerticalBorders is set to true', () => {
+            component.noVerticalBorders = true;
+            component.noBorders = false;
+            jest.spyOn(component['_tableService'], 'poppingColumns$').mockReturnValue([]);
+
+            expect(component.noVerticalBorders).toBe(true);
+        });
+
+        it('should return true when noBorders is true, even if noVerticalBorders is false', () => {
+            component.noVerticalBorders = false;
+            component.noBorders = true;
+            jest.spyOn(component['_tableService'], 'poppingColumns$').mockReturnValue([]);
+
+            expect(component.noVerticalBorders).toBe(true);
+        });
+
+        it('should return true when there are popping columns, even if noVerticalBorders and noBorders are false', () => {
+            component.noVerticalBorders = false;
+            component.noBorders = false;
+            jest.spyOn(component['_tableService'], 'poppingColumns$').mockReturnValue([{ name: 'col1' }] as any);
+
+            expect(component.noVerticalBorders).toBe(true);
+        });
+
+        it('should return true when multiple conditions are true', () => {
+            component.noVerticalBorders = true;
+            component.noBorders = true;
+            jest.spyOn(component['_tableService'], 'poppingColumns$').mockReturnValue([{ name: 'col1' }] as any);
+
+            expect(component.noVerticalBorders).toBe(true);
+        });
+
+        it('should update _noVerticalBorders when setter is called', () => {
+            component.noVerticalBorders = true;
+            expect(component['_noVerticalBorders']).toBe(true);
+
+            component.noVerticalBorders = false;
+            expect(component['_noVerticalBorders']).toBe(false);
+        });
+    });
 });

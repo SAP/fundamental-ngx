@@ -7,7 +7,8 @@ import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } f
 import {
     TableDataSourceDirective,
     TableHeaderResizerDirective,
-    TableInitialStateDirective
+    TableInitialStateDirective,
+    TableRowSemanticHighlight
 } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
@@ -44,7 +45,7 @@ export interface ExampleItem {
         currency: string;
     };
     status: string;
-    semantic?: string;
+    semantic?: TableRowSemanticHighlight;
 }
 
 /**

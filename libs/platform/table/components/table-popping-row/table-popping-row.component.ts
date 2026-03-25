@@ -11,7 +11,12 @@ import {
 } from '@angular/core';
 import { DisabledBehaviorDirective, FDK_FOCUSABLE_LIST_DIRECTIVE, ValueByPathPipe } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { TableCellDirective, TableRowDirective, TableTextDirective } from '@fundamental-ngx/core/table';
+import {
+    TableCellDirective,
+    TableRowDirective,
+    TableStatusIndicatorDirective,
+    TableTextDirective
+} from '@fundamental-ngx/core/table';
 import {
     SelectionMode,
     SelectionModeValue,
@@ -43,7 +48,8 @@ import {
         TableTextDirective,
         FormLabelComponent,
         NgTemplateOutlet,
-        ValueByPathPipe
+        ValueByPathPipe,
+        TableStatusIndicatorDirective
     ]
 })
 export class TablePoppingRowComponent<T> extends TableRowDirective {
