@@ -43,7 +43,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, combineLatest, EMPTY, filter, first, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, EMPTY, filter, first, map, Observable, of, switchMap } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { FD_TOOLBAR } from './tokens';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
@@ -261,19 +261,24 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     ngAfterViewInit(): void {
         this._updateSpacerUsed();
 
+        // Observe title element size changes to trigger recalculation when title content changes
+        const titleElementResize$ = this._titleComponent$.pipe(
+            switchMap((titleComponent): Observable<HTMLElement | null> => {
+                const titleElement = titleComponent?.elementRef?.nativeElement ?? this.titleElement?.nativeElement;
+                if (!titleElement) {
+                    return of(null);
+                }
+                // When title element resizes (e.g., text content changes), emit
+                return this.resizeObserverService.observe(titleElement).pipe(map(() => titleElement));
+            })
+        );
+
         this.overflowItems$ = combineLatest([
             this.resizeObserverService.observe(this.elementRef.nativeElement).pipe(map(() => this._toolbarWidth)),
             toObservable(this.toolbarItems, { injector: this._injector }).pipe(
                 map((toolbarItems) => [...toolbarItems])
             ),
-            this._titleComponent$.pipe(
-                map((titleComponent): HTMLElement | null => {
-                    if (!titleComponent) {
-                        return this.titleElement?.nativeElement;
-                    }
-                    return titleComponent.elementRef?.nativeElement;
-                })
-            ),
+            titleElementResize$,
             this.shouldOverflow$,
             this._refreshOverflow$
         ]).pipe(
