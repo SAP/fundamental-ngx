@@ -129,7 +129,7 @@ export class ButtonComponent implements ButtonModel {
      * 4. glyph name as fallback (e.g., "decline" -> "decline")
      * @hidden
      */
-    protected readonly _accessibleName = computed(
+    protected readonly accessibleName = computed(
         () => this.ariaLabel() || this.title() || this.label() || this.glyph() || null
     );
 
