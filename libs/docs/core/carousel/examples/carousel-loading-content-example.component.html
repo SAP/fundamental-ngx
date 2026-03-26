@@ -1,11 +1,17 @@
 <div [style.display]="'flex'" [style.justify-content]="'center'">
     <fd-carousel width="300px" height="400px">
         <fd-carousel-item [loading]="loading">
-            <img src="https://picsum.photos/300/300?nature/1" alt="first image" />
+            <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%237eb8da' width='300' height='300'/%3E%3Ctext fill='%23fff' font-family='sans-serif' font-size='24' x='150' y='150' dominant-baseline='middle' text-anchor='middle'%3ESlide 1%3C/text%3E%3C/svg%3E"
+                alt="first image"
+            />
         </fd-carousel-item>
 
         <fd-carousel-item>
-            <img src="https://picsum.photos/300/300?nature/2" alt="second image" />
+            <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%2381c784' width='300' height='300'/%3E%3Ctext fill='%23fff' font-family='sans-serif' font-size='24' x='150' y='150' dominant-baseline='middle' text-anchor='middle'%3ESlide 2%3C/text%3E%3C/svg%3E"
+                alt="second image"
+            />
         </fd-carousel-item>
     </fd-carousel>
 </div>
