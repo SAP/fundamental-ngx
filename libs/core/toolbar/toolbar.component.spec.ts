@@ -1,5 +1,6 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
 import { OverflowPriority, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
@@ -415,5 +416,163 @@ describe('ToolbarComponent - Visibility Detection', () => {
             expect(nextSpy).not.toHaveBeenCalled();
             doneFn();
         });
+    });
+});
+
+/* Toolbar with title */
+@Component({
+    template: `
+        <fd-toolbar #toolbar [title]="title">
+            <button fd-toolbar-item>Button1</button>
+        </fd-toolbar>
+    `,
+    standalone: true,
+    imports: [ToolbarModule]
+})
+class ToolbarWithTitleTestComponent {
+    @ViewChild('toolbar') toolbar: ToolbarComponent;
+    title = 'Test Toolbar Title';
+}
+
+describe('ToolbarComponent - Title Accessibility', () => {
+    let toolbar: ToolbarComponent;
+    let component: ToolbarWithTitleTestComponent;
+    let fixture: ComponentFixture<ToolbarWithTitleTestComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ToolbarWithTitleTestComponent],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ToolbarWithTitleTestComponent);
+
+        await whenStable(fixture);
+
+        component = fixture.componentInstance;
+        toolbar = component.toolbar;
+
+        await whenStable(fixture);
+    });
+
+    it('should render title element with title attribute for tooltip', () => {
+        const titleElement = fixture.debugElement.query(By.css('.fd-toolbar__title'));
+        expect(titleElement).toBeTruthy();
+        expect(titleElement.nativeElement.getAttribute('title')).toBe('Test Toolbar Title');
+    });
+
+    it('should render title element with aria-label for screen readers', () => {
+        const titleElement = fixture.debugElement.query(By.css('.fd-toolbar__title'));
+        expect(titleElement).toBeTruthy();
+        expect(titleElement.nativeElement.getAttribute('aria-label')).toBe('Test Toolbar Title');
+    });
+
+    it('should apply truncate class to title element', () => {
+        const titleElement = fixture.debugElement.query(By.css('.fd-toolbar__title'));
+        expect(titleElement).toBeTruthy();
+        expect(titleElement.nativeElement.classList.contains('fd-toolbar__title--truncate')).toBe(true);
+    });
+
+    it('should update title and aria-label when title input changes', async () => {
+        component.title = 'Updated Title';
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const titleElement = fixture.debugElement.query(By.css('.fd-toolbar__title'));
+        expect(titleElement.nativeElement.getAttribute('title')).toBe('Updated Title');
+        expect(titleElement.nativeElement.getAttribute('aria-label')).toBe('Updated Title');
+    });
+
+    it('should have ViewChild reference to title element', () => {
+        expect(toolbar.titleElement).toBeTruthy();
+        expect(toolbar.titleElement.nativeElement).toBeTruthy();
+    });
+});
+
+/* Toolbar with title and overflow for resize testing */
+@Component({
+    template: `
+        <div [style.width]="width">
+            <fd-toolbar #toolbar [title]="title" [shouldOverflow]="true">
+                <button fd-toolbar-item>Button1</button>
+                <button fd-toolbar-item>Button2</button>
+                <button fd-toolbar-item>Button3</button>
+            </fd-toolbar>
+        </div>
+    `,
+    standalone: true,
+    imports: [ToolbarModule]
+})
+class ToolbarTitleResizeTestComponent {
+    @ViewChild('toolbar') toolbar: ToolbarComponent;
+    title = 'Test Title';
+    width = '500px';
+}
+
+describe('ToolbarComponent - Title Element Resize Observation', () => {
+    let toolbar: ToolbarComponent;
+    let component: ToolbarTitleResizeTestComponent;
+    let fixture: ComponentFixture<ToolbarTitleResizeTestComponent>;
+    let resizeService: ResizeObservableServiceMock;
+    let originalIntersectionObserver: typeof IntersectionObserver;
+
+    beforeEach(waitForAsync(() => {
+        // Mock IntersectionObserver
+        originalIntersectionObserver = global.window.IntersectionObserver;
+        global.window.IntersectionObserver = MockIntersectionObserver as any;
+
+        TestBed.configureTestingModule({
+            imports: [ToolbarTitleResizeTestComponent],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ToolbarTitleResizeTestComponent);
+
+        await whenStable(fixture);
+
+        component = fixture.componentInstance;
+        toolbar = component.toolbar;
+        resizeService = TestBed.inject(ResizeObserverService) as any as ResizeObservableServiceMock;
+
+        await whenStable(fixture);
+    });
+
+    afterEach(() => {
+        global.window.IntersectionObserver = originalIntersectionObserver;
+    });
+
+    it('should observe title element with ResizeObserverService', () => {
+        // The title element should be observed by the resize service
+        const titleElement = toolbar.titleElement?.nativeElement;
+        expect(titleElement).toBeTruthy();
+
+        // Verify that the observerMap in the mock contains the title element
+        const observerMap = (resizeService as any).observerMap as Map<Element, Subject<any>>;
+        expect(observerMap.has(titleElement)).toBe(true);
+    });
+
+    it('should observe both toolbar container and title element', () => {
+        const observerMap = (resizeService as any).observerMap as Map<Element, Subject<any>>;
+
+        // Should observe the toolbar container
+        expect(observerMap.has(toolbar.elementRef.nativeElement)).toBe(true);
+
+        // Should observe the title element
+        const titleElement = toolbar.titleElement?.nativeElement;
+        expect(observerMap.has(titleElement)).toBe(true);
     });
 });
