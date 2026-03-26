@@ -22,7 +22,15 @@ git diff --name-only HEAD~1
 
 Map changed file paths to library names (`libs/core/` → `core`, `libs/platform/` → `platform`, etc.).
 
-### 2. Build
+### 2. Format
+
+```bash
+yarn format
+```
+
+Ensure all code is formatted before running quality gates.
+
+### 3. Build
 
 ```bash
 nx run <library>:build
@@ -30,7 +38,7 @@ nx run <library>:build
 
 Report: PASS or FAIL with error summary.
 
-### 3. Lint
+### 4. Lint
 
 ```bash
 nx run <library>:lint
@@ -38,7 +46,7 @@ nx run <library>:lint
 
 Report: PASS or FAIL with violation count and top issues.
 
-### 4. Unit tests
+### 5. Unit tests
 
 ```bash
 nx run <library>:test --skip-nx-cache
@@ -46,11 +54,11 @@ nx run <library>:test --skip-nx-cache
 
 Report: PASS or FAIL with failing test names and error messages.
 
-### 5. Export check
+### 6. Export check
 
 For each changed component file, verify it is exported from the library's `public_api.ts` or `index.ts`. Flag any new public classes missing from exports.
 
-### 6. Breaking change check
+### 7. Breaking change check
 
 Run `git diff` on changed files. Flag:
 
@@ -68,6 +76,7 @@ If breaking changes found, verify the commit message contains `BREAKING CHANGE:`
 
 | Gate              | Status | Details          |
 |-------------------|--------|------------------|
+| Format            | PASS   |                  |
 | Build             | PASS   |                  |
 | Lint              | FAIL   | 3 violations     |
 | Unit Tests        | PASS   | 42 tests passed  |
