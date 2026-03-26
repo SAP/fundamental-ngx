@@ -32,6 +32,7 @@ let carouselItemCounter = 0;
     host: {
         role: 'option',
         class: 'fd-carousel__item fd-carousel__item--active',
+        '[style.visibility]': '_visibility()',
         '[attr.aria-setsize]': 'ariaSetsize()',
         '[attr.aria-posinset]': 'ariaPosinset()',
         '[attr.aria-selected]': 'ariaSelected()',
@@ -86,8 +87,7 @@ export class CarouselItemComponent<T = any> implements CarouselItemInterface {
     value: T;
 
     /** @hidden Hide/show slide, useful for managing tab order */
-    @HostBinding('style.visibility')
-    _visibility: Visibility = 'visible';
+    _visibility = signal<Visibility>('visible');
 
     /** @hidden value for aria-setsize attribute */
     ariaSetsize = signal<number>(0);
@@ -103,11 +103,11 @@ export class CarouselItemComponent<T = any> implements CarouselItemInterface {
 
     /** @hidden */
     set visibility(visibility: Visibility) {
-        this._visibility = visibility;
+        this._visibility.set(visibility);
     }
 
     get visibility(): Visibility {
-        return this._visibility;
+        return this._visibility();
     }
 
     /** @hidden */
