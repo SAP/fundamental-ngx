@@ -5,9 +5,12 @@ argument-hint: [component-path-or-folder]
 disable-model-invocation: true
 context: fork
 agent: general-purpose
+allowed-tools: Read, Grep, Glob
 ---
 
 # Accessibility Audit: $ARGUMENTS
+
+If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
 
 Audit the component(s) at `$ARGUMENTS` for WCAG AA compliance. Check both the component implementation and its documentation examples.
 

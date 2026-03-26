@@ -7,6 +7,8 @@ disable-model-invocation: true
 
 # Angular 21+ Migration: $ARGUMENTS
 
+If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
+
 ## Phase 1: Analyze
 
 Read all files in the target path. For each component, directive, or service, scan for migration items below. If a folder is given, process all `.ts` and `.html` files within it.
@@ -60,8 +62,8 @@ Read all files in the target path. For each component, directive, or service, sc
 
 **Decorator cleanup:**
 
-- Remove `standalone: true` (default in Angular 21+)
-- Remove `allowSignalWrites: true` in `effect()` (deprecated)
+- Remove `standalone: true` (default since Angular 19)
+- Remove `allowSignalWrites` option in `effect()` (the option no longer exists)
 
 **Imports:**
 
@@ -83,6 +85,10 @@ Do NOT convert these — they should stay as-is:
 - **BehaviorSubject with complex operators**: `switchMap`, `debounceTime`, `distinctUntilChanged`, `combineLatest` with async sources → keep as RxJS
 - **Plain properties with no reactive consumer**: If nothing in template, host binding, computed, or effect reads it → keep as plain property, do not wrap in `signal()`
 - **Signals for internal bookkeeping**: One-time flags, cached DOM measurements, counters with no reactive consumer → use plain property
+
+### Migration is optional for existing code
+
+The migration targets are recommendations, not mandatory fixes. Present all findings but let the user decide scope. Existing `@Input()` / `@Output()` decorators are valid — only migrate them if the user wants to or if the code is being substantially reworked.
 
 ## Phase 2: Present Plan
 

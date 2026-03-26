@@ -9,6 +9,8 @@ agent: general-purpose
 
 # Update Documentation: $ARGUMENTS
 
+If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
+
 Verify that documentation examples are in sync with the component's current public API. If a path to a component is given, find its corresponding docs. If a docs path is given, find the component it documents.
 
 ## Phase 1: Map component to docs
@@ -18,7 +20,7 @@ Docs locations: `libs/docs/core/<component>/` or `libs/docs/platform/<component>
 
 Read:
 
-- The component `.ts` file — extract all `input()`, `output()`, `model()` declarations
+- The component `.ts` file — extract all `input()`, `output()`, `model()`, `@Input()`, `@Output()` declarations
 - The docs component (e.g. `<component>-docs.component.ts` and `.html`)
 - All example files in the docs `examples/` folder
 
