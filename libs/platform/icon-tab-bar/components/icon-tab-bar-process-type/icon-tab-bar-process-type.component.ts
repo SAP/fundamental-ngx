@@ -1,5 +1,4 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { take } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
@@ -83,7 +82,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
      * @param selectedItem
      * @description select extra item inside popover
      */
-    async _selectExtraItem(selectedItem: IconTabBarItem): Promise<void> {
+    _selectExtraItem(selectedItem: IconTabBarItem): void {
         this._currentStepIndex = selectedItem.index;
         let amountOfPreviousSteps;
         let amountOfNextSteps;
@@ -104,7 +103,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         }
         this._selectItem(selectedItem);
 
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+        queueMicrotask(() => {
             if (this.overflowDirective) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 isPreviousStepsStrategy
