@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, provideZonelessChangeDetection, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
@@ -15,7 +15,6 @@ import { TabsModule } from './tabs.module';
             <fd-tab title="Disabled" id="tab4"> Disabled </fd-tab>
         }
     </fd-tab-list>`,
-    standalone: true,
     imports: [TabsModule]
 })
 class TestTabsComponent {
@@ -117,7 +116,6 @@ const NUMBER_OF_TABS = 10;
             }
         </fd-tab-list>
     `,
-    standalone: true,
     imports: [TabsModule]
 })
 class TestCollapsibleTabsComponent {
@@ -190,5 +188,112 @@ describe('TabListComponent', () => {
 
         const someTabActive = component._tabArray.some((tab) => tab.active);
         expect(someTabActive).toBe(false);
+    });
+});
+
+@Component({
+    template: `<fd-tab-list [stackContent]="true">
+        <fd-tab title="Tab 1" id="stacked-tab1"> Content 1 </fd-tab>
+        <fd-tab title="Tab 2" id="stacked-tab2"> Content 2 </fd-tab>
+        @if (showThirdTab) {
+            <fd-tab title="Tab 3" id="stacked-tab3"> Content 3 </fd-tab>
+        }
+    </fd-tab-list>`,
+    imports: [TabsModule]
+})
+class TestStackedTabsComponent {
+    @ViewChildren(TabPanelComponent)
+    tabs: QueryList<TabPanelComponent>;
+
+    @ViewChild(TabListComponent)
+    tabList: TabListComponent;
+
+    showThirdTab = false;
+}
+
+describe('TabListComponent (stacked content)', () => {
+    let component: TabListComponent;
+    let testComponent: TestStackedTabsComponent;
+    let fixture: ComponentFixture<TestStackedTabsComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestStackedTabsComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestStackedTabsComponent);
+        testComponent = fixture.componentInstance;
+        component = fixture.debugElement.children[0].componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should expand all tabs in stacked mode', async () => {
+        await whenStable(fixture);
+        testComponent.tabs.forEach((tab) => {
+            expect(tab.expanded).toBe(true);
+        });
+    });
+
+    it('should update tab count tracking when tabs change', async () => {
+        await whenStable(fixture);
+        expect(component._currentNumberOfTabs).toBe(2);
+
+        testComponent.showThirdTab = true;
+        await whenStable(fixture);
+
+        // queueMicrotask runs asynchronously — wait for it
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        expect(component._currentNumberOfTabs).toBe(3);
+    });
+});
+
+describe('TabListComponent (zoneless)', () => {
+    let component: TabListComponent;
+    let testComponent: TestTabsComponent;
+    let fixture: ComponentFixture<TestTabsComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestTabsComponent],
+            providers: [provideZonelessChangeDetection()]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestTabsComponent);
+        testComponent = fixture.componentInstance;
+        component = fixture.debugElement.children[0].componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should initially open first tab', async () => {
+        await whenStable(fixture);
+        expect(testComponent.tabs.first.expanded).toBe(true);
+    });
+
+    it('should apply is-expanded class to expanded tab', async () => {
+        await whenStable(fixture);
+        const firstTab = testComponent.tabs.first;
+        expect(firstTab.expanded).toBe(true);
+        expect(firstTab.elementRef.nativeElement.classList.contains('is-expanded')).toBe(true);
+    });
+
+    it('should select tab', async () => {
+        await whenStable(fixture);
+        const tabChangeSpy = jest.spyOn(component.selectedTabChange, 'emit');
+
+        testComponent.tabs.last.open(true);
+
+        await whenStable(fixture);
+
+        expect(tabChangeSpy).toHaveBeenCalled();
+        expect(testComponent.tabs.first.expanded).toBe(false);
+        expect(testComponent.tabs.last.expanded).toBe(true);
     });
 });
