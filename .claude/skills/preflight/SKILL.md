@@ -3,6 +3,8 @@ name: preflight
 description: Run local quality gates before creating a PR
 argument-hint: [library]
 disable-model-invocation: true
+context: fork
+agent: general-purpose
 ---
 
 # Preflight Check
