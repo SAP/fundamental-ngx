@@ -5,10 +5,8 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
-    HostBinding,
     Inject,
     Input,
-    NgZone,
     OnChanges,
     Optional,
     Output,
@@ -16,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Subject, first } from 'rxjs';
+import { Subject } from 'rxjs';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { TabListComponentInterface } from '../tab-list-component.interface';
 import { LIST_COMPONENT } from '../tab-list.token';
@@ -46,7 +44,8 @@ export class TabPanelStateChange {
         role: 'tabpanel',
         class: 'fd-tabs__panel',
         '[id]': '_panelId',
-        '[attr.aria-labelledby]': 'id'
+        '[attr.aria-labelledby]': 'id',
+        '[class.is-expanded]': '_expandedClass'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -101,12 +100,11 @@ export class TabPanelComponent implements OnChanges {
     @ContentChild(TabTitleDirective, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    @HostBinding('class.is-expanded')
-    _expandedClass = false;
-
     /** @hidden Event that is emitted when the tab panel . */
     _expandedStateChange = new Subject<TabPanelStateChange>();
+
+    /** @hidden */
+    _expandedClass = false;
 
     /** @hidden */
     _forcedVisibility = false;
@@ -123,7 +121,6 @@ export class TabPanelComponent implements OnChanges {
     constructor(
         public elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _ngZone: NgZone,
         @Optional() @Inject(LIST_COMPONENT) private readonly _tabsComponent: TabListComponentInterface | null
     ) {}
 
@@ -157,7 +154,10 @@ export class TabPanelComponent implements OnChanges {
 
             this._changeDetRef.detectChanges();
 
-            this._ngZone.onStable.pipe(first()).subscribe(() => this._updateHost());
+            queueMicrotask(() => {
+                this._expandedClass = this.expanded;
+                this._changeDetRef.markForCheck();
+            });
         }
     }
 
@@ -166,10 +166,5 @@ export class TabPanelComponent implements OnChanges {
         this.elementRef.nativeElement
             .querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
             ?.focus({ preventScroll: true });
-    }
-
-    /** @hidden */
-    private _updateHost(): void {
-        this._expandedClass = this.expanded;
     }
 }
