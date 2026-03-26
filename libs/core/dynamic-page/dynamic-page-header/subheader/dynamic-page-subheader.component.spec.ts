@@ -59,4 +59,34 @@ describe('DynamicPageHeaderComponent', () => {
 
         expect(subHeader.collapsed).toBe(true);
     });
+
+    it('should update toggle button aria-label based on collapsed state', () => {
+        // When expanded, should show "Collapse" label
+        subHeader.collapsed = false;
+        fixture.detectChanges();
+        expect(subHeader._toggleButtonAriaLabel).toContain('Collapse');
+
+        // When collapsed, should show "Expand" label
+        subHeader.collapsed = true;
+        fixture.detectChanges();
+        expect(subHeader._toggleButtonAriaLabel).toContain('Expand');
+    });
+
+    it('should emit correct collapsed value when toggleCollapse is called', () => {
+        const collapsedChangeSpy = jest.spyOn(subHeader.collapsedChange, 'emit');
+
+        // Start expanded
+        subHeader.collapsed = false;
+        fixture.detectChanges();
+
+        // Toggle to collapsed
+        subHeader.toggleCollapse();
+        fixture.detectChanges();
+        expect(collapsedChangeSpy).toHaveBeenCalledWith(true);
+
+        // Toggle back to expanded
+        subHeader.toggleCollapse();
+        fixture.detectChanges();
+        expect(collapsedChangeSpy).toHaveBeenCalledWith(false);
+    });
 });
