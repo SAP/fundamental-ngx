@@ -11,7 +11,6 @@ import {
     HostListener,
     Inject,
     Input,
-    NgZone,
     OnDestroy,
     Output,
     ViewEncapsulation
@@ -98,7 +97,6 @@ export class SplitterResizerComponent implements OnDestroy {
     constructor(
         private readonly _elementRef: ElementRef<Element>,
         private readonly _cdr: ChangeDetectorRef,
-        private readonly _ngZone: NgZone,
         @Inject(DOCUMENT) private readonly _document: Document
     ) {}
 
@@ -185,28 +183,22 @@ export class SplitterResizerComponent implements OnDestroy {
             return;
         }
 
-        this._ngZone.runOutsideAngular(() => {
-            fromEvent<MouseEvent>(this._document, 'mousemove')
-                .pipe(throttleTime(10), takeUntil(this._pointerMoveListener))
-                .subscribe((event) => {
-                    this._ngZone.run(() => {
-                        const newPosition = this._isHorizontal ? event.clientY : event.clientX;
+        fromEvent<MouseEvent>(this._document, 'mousemove')
+            .pipe(throttleTime(10), takeUntil(this._pointerMoveListener))
+            .subscribe((event) => {
+                const newPosition = this._isHorizontal ? event.clientY : event.clientX;
 
-                        this._emitResize(newPosition);
-                        this._cdr.markForCheck();
-                    });
-                });
+                this._emitResize(newPosition);
+                this._cdr.markForCheck();
+            });
 
-            fromEvent(this._document, 'mouseup')
-                .pipe(take(1), takeUntil(this._pointerMoveListener))
-                .subscribe(() => {
-                    this._ngZone.run(() => {
-                        this.endResize.emit();
-                        this._unsubscribe();
-                        this._cdr.markForCheck();
-                    });
-                });
-        });
+        fromEvent(this._document, 'mouseup')
+            .pipe(take(1), takeUntil(this._pointerMoveListener))
+            .subscribe(() => {
+                this.endResize.emit();
+                this._unsubscribe();
+                this._cdr.markForCheck();
+            });
     }
 
     /** @hidden */
