@@ -269,3 +269,129 @@ describe('WizardComponent', () => {
         expect(component.steps.last.status).toBe('upcoming');
     }));
 });
+
+@Component({
+    template: `
+        <fd-wizard>
+            <fd-wizard-navigation>
+                <ul fd-wizard-progress-bar>
+                    <li fd-wizard-step status="completed" label="Step 1">
+                        <fd-wizard-step-indicator>1</fd-wizard-step-indicator>
+                        <fd-wizard-content>
+                            Content 1
+                            <fd-wizard-next-step> <button>Next</button> </fd-wizard-next-step>
+                        </fd-wizard-content>
+                    </li>
+                    <li fd-wizard-step status="current" label="Step 2">
+                        <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                        <fd-wizard-content>
+                            Content 2
+                            <fd-wizard-next-step> <button>Next</button> </fd-wizard-next-step>
+                        </fd-wizard-content>
+                    </li>
+                    <li fd-wizard-step [isSummary]="true" label="Summary">
+                        <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                        <fd-wizard-content> Summary content </fd-wizard-content>
+                    </li>
+                </ul>
+            </fd-wizard-navigation>
+        </fd-wizard>
+    `,
+    standalone: true,
+    imports: [
+        WizardComponent,
+        WizardNavigationComponent,
+        WizardProgressBarDirective,
+        WizardStepComponent,
+        WizardStepIndicatorComponent,
+        WizardContentComponent,
+        WizardNextStepComponent
+    ]
+})
+class TestWizardWithSummaryComponent {
+    @ViewChild(WizardComponent, { static: true })
+    wizardComponent: WizardComponent;
+}
+
+describe('WizardComponent with summary step', () => {
+    let component: WizardComponent;
+    let fixture: ComponentFixture<TestWizardWithSummaryComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestWizardWithSummaryComponent]
+        })
+            .overrideComponent(WizardComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
+    }));
+
+    beforeEach(() => {
+        HTMLElement.prototype.scroll = () => {};
+        fixture = TestBed.createComponent(TestWizardWithSummaryComponent);
+        component = fixture.componentInstance.wizardComponent;
+        fixture.detectChanges();
+    });
+
+    it('should have progress bar visible initially', fakeAsync(() => {
+        component.ngAfterViewInit();
+        tick(500);
+
+        expect(component.progressBar.visible).toBe(true);
+    }));
+
+    it('should hide progress bar when current step is summary', fakeAsync(() => {
+        component.ngAfterViewInit();
+        tick(500);
+
+        // Make the summary step current
+        component.steps.toArray()[1].status = 'completed';
+        component.steps.last.status = 'current';
+        component.steps.last.statusChange.emit();
+        tick(500);
+
+        expect(component.progressBar.visible).toBe(false);
+    }));
+
+    it('should show progress bar when non-summary step is current', fakeAsync(() => {
+        component.ngAfterViewInit();
+        tick(500);
+
+        // Make the summary step current
+        component.steps.toArray()[1].status = 'completed';
+        component.steps.last.status = 'current';
+        component.steps.last.statusChange.emit();
+        tick(500);
+
+        expect(component.progressBar.visible).toBe(false);
+
+        // Go back to non-summary step
+        component.steps.last.status = 'upcoming';
+        component.steps.toArray()[1].status = 'current';
+        component.steps.toArray()[1].statusChange.emit();
+        tick(500);
+
+        expect(component.progressBar.visible).toBe(true);
+    }));
+
+    it('should reflect progress bar visibility in host style.display', fakeAsync(() => {
+        component.ngAfterViewInit();
+        tick(500);
+        fixture.detectChanges();
+
+        const progressBarEl = fixture.nativeElement.querySelector('[fd-wizard-progress-bar]');
+        expect(progressBarEl).toBeTruthy();
+        // Initially visible
+        expect(progressBarEl.style.display).not.toBe('none');
+
+        // Make the summary step current
+        component.steps.toArray()[1].status = 'completed';
+        component.steps.last.status = 'current';
+        component.steps.last.statusChange.emit();
+        tick(500);
+        fixture.detectChanges();
+
+        expect(progressBarEl.style.display).toBe('none');
+    }));
+});
