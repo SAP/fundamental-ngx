@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Odmrzni stupac',
         headerMenuUnfreezePlural: 'Odmrzni stupce',
         loadMore: 'Pokaži više',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Trenutačno nema vidljivih stupaca u tablici. Odaberite stupce koje trebate u postavkama tablice.',
         P13ColumnsDialogCancelBtnLabel: 'Otkaži',

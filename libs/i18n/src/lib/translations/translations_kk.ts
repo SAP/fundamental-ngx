@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Бағанды босату',
         headerMenuUnfreezePlural: 'Бағандарды босату',
         loadMore: 'Көбірек көрсету',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Дәл қазір кестеде көрінетін бағандар жоқ. Кесте параметрлерінде қажетті бағандарды таңдаңыз.',
         P13ColumnsDialogCancelBtnLabel: 'Болдырмау',

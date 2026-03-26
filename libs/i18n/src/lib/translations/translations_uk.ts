@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Розблокувати стовпець',
         headerMenuUnfreezePlural: 'Розблокувати стовпці',
         loadMore: 'Показати більше',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Наразі у таблиці немає видимих стовпців. Виберіть потрібні стовпці у налаштуваннях таблиці.',
         P13ColumnsDialogCancelBtnLabel: 'Скасувати',

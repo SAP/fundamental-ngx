@@ -538,6 +538,7 @@ export default {
         headerMenuUnfreeze: '取消冻结列',
         headerMenuUnfreezePlural: '取消冻结列',
         loadMore: '显示更多',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: '此刻，表中没有可见的列。请在表设置中选择所需的列。',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogConfirmationBtnLabel: '确定',

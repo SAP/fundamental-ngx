@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Fixering van kolom opheffen',
         headerMenuUnfreezePlural: 'Fixering van kolommen opheffen',
         loadMore: 'Meer weergeven',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'De tabel bevat momenteel geen zichtbare kolommen. Selecteer de kolommen die u nodig hebt in de tabelinstellingen.',
         P13ColumnsDialogCancelBtnLabel: 'Annuleren',

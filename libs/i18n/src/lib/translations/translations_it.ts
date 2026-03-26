@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Sblocca colonna',
         headerMenuUnfreezePlural: 'Sblocca colonne',
         loadMore: 'Espandi',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Al momento non esistono colonne visibili nella tabella. Selezionare le colonne necessarie nelle impostazioni tabella.',
         P13ColumnsDialogCancelBtnLabel: 'Annulla',

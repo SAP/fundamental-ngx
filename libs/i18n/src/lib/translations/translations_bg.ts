@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Отмяна на фиксирането на колоната',
         headerMenuUnfreezePlural: 'Отмяна на фиксирането на колоните',
         loadMore: 'Покажи повече',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'В момента в таблицата няма видими колони. Моля, изберете онези, които ви трябват, от настройките на таблицата.',
         P13ColumnsDialogCancelBtnLabel: 'Отказ',

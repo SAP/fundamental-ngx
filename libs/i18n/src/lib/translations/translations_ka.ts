@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'მენიუს განბლოკვა',
         headerMenuUnfreezePlural: 'Unfreeze columns',
         loadMore: 'Show More',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'ამჟამად, ცხრილში არ არის ხილული სვეტები. გთხოვთ, აირჩიოთ თქვენთვის საჭირო სვეტები ცხრილის პარამეტრებში.',
         P13ColumnsDialogCancelBtnLabel: 'გაუქმება',

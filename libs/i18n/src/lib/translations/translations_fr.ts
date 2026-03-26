@@ -543,6 +543,7 @@ export default {
         headerMenuUnfreeze: 'Débloquer la colonne',
         headerMenuUnfreezePlural: 'Débloquer les colonnes',
         loadMore: 'Afficher plus',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Aucune colonne visible actuellement dans la table. Sélectionnez les colonnes requises dans les paramètres de table.',
         P13ColumnsDialogCancelBtnLabel: 'Annuler',

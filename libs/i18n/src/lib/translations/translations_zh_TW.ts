@@ -538,6 +538,7 @@ export default {
         headerMenuUnfreeze: '取消凍結欄',
         headerMenuUnfreezePlural: '取消凍結欄',
         loadMore: '顯示更多',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: '現在表格中沒有可見的欄，請在表格設定中選擇您需要的欄。',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogConfirmationBtnLabel: '確定',
