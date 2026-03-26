@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Αποδέσμευση Στήλης',
         headerMenuUnfreezePlural: 'Αποδέσμευση στηλών',
         loadMore: 'Εμφάνιση Περισσότερων',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Τώρα δεν υπάρχουν ορατές στήλες στον πίνακα. Επιλέξτε τις στήλες που χρειάζεστε στις ρυθμίσεις πίνακα.',
         P13ColumnsDialogCancelBtnLabel: 'Ακύρωση',

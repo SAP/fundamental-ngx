@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: '列の固定を解除',
         headerMenuUnfreezePlural: '列の固定を解除',
         loadMore: '表示を増やす',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: '表に表示されている列はありません。必要な列を表の設定で選択してください。',
         P13ColumnsDialogCancelBtnLabel: 'キャンセル',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',

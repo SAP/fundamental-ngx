@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'Poista sarakkeen jäädytys',
         headerMenuUnfreezePlural: 'Poista sarakkeiden jäädytys',
         loadMore: 'Näytä enemmän',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Taulukossa ei ole tällä hetkellä näkyviä sarakkeita. Valitse tarvitsemasi sarakkeet taulukon asetuksissa.',
         P13ColumnsDialogCancelBtnLabel: 'Peruuta',

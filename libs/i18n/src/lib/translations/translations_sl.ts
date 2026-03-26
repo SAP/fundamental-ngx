@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Odmrznitev stolpca',
         headerMenuUnfreezePlural: 'Odmrznitev stolpcev',
         loadMore: 'Prikaži več',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Trenutno ni vidnih stolpcev v tabeli. V nastavitvah tabele izberite stolpce, ki jih potrebujete.',
         P13ColumnsDialogCancelBtnLabel: 'Prekliči',

@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Opphev frysing av kolonne',
         headerMenuUnfreezePlural: 'Opphev frysing av kolonner',
         loadMore: 'Vis flere',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Det er ingen synlige kolonner i tabellen akkurat nå. Velg kolonnene som du trenger, i tabellinnstillingene.',
         P13ColumnsDialogCancelBtnLabel: 'Avbryt',

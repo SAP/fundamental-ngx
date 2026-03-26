@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Fixierung der Spalte aufheben',
         headerMenuUnfreezePlural: 'Fixierung der Spalten aufheben',
         loadMore: 'Mehr anzeigen',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Es gibt gerade keine sichtbaren Spalten in der Tabelle. Wählen Sie die Spalten, die Sie benötigen, in den Tabelleneinstellungen aus.',
         P13ColumnsDialogCancelBtnLabel: 'Abbrechen',

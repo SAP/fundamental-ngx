@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'Uvolnit sloupec',
         headerMenuUnfreezePlural: 'Uvolnit sloupce',
         loadMore: 'Zobrazit více',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Momentálně nejsou v tabulce žádné viditelné sloupce. Vyberte potřebné sloupce v nastavení tabulky.',
         P13ColumnsDialogCancelBtnLabel: 'Zrušit',
