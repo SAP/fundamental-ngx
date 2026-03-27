@@ -65,6 +65,7 @@ For each issue found:
 ## Phase 4: Verify
 
 ```bash
+yarn format
 nx run docs:build
 ```
 
