@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Sütunu serbest bırak',
         headerMenuUnfreezePlural: 'Sütunları serbest bırak',
         loadMore: 'Daha Fazla Göster',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Şu anda tabloda görünür sütun yok. Lütfen tablo ayarlarında ihtiyacınız olan sütunları seçin.',
         P13ColumnsDialogCancelBtnLabel: 'İptal',

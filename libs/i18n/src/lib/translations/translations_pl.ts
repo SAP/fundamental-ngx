@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Odmroź kolumnę',
         headerMenuUnfreezePlural: 'Odmroź kolumny',
         loadMore: 'Pokaż więcej',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'W tej chwili nie ma widocznych kolumn w tabeli. Wybierz wymagane kolumny w ustawieniach tabeli.',
         P13ColumnsDialogCancelBtnLabel: 'Anuluj',

@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Oszlop rögzítésének feloldása',
         headerMenuUnfreezePlural: 'Oszlop rögzítésének feloldása',
         loadMore: 'Több megjelenítése',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Jelenleg nincs látható oszlop a táblában. Válassza ki a kívánt oszlopokat a táblabeállításokban.',
         P13ColumnsDialogCancelBtnLabel: 'Mégse',

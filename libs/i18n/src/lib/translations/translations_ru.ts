@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Отменить фиксацию столбца',
         headerMenuUnfreezePlural: 'Отменить фиксацию столбцов',
         loadMore: 'Показать больше',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'В настоящий момент в таблице нет видимых столбцов. Выберите нужные столбцы в настройках таблицы.',
         P13ColumnsDialogCancelBtnLabel: 'Отменить',

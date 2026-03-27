@@ -539,6 +539,7 @@ export default {
         headerMenuUnfreeze: '열 고정 해제',
         headerMenuUnfreezePlural: '열 고정 해제',
         loadMore: '자세히 표시',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: '현재는 테이블에 표시되는 열이 없습니다. 테이블 설정에서 필요한 열을 선택하십시오.',
         P13ColumnsDialogCancelBtnLabel: '취소',
         P13ColumnsDialogConfirmationBtnLabel: '확인',

@@ -12,15 +12,13 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    NgZone,
     OnDestroy,
     Output,
     QueryList,
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
-    forwardRef,
-    inject
+    forwardRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, scrollTop, warnOnce } from '@fundamental-ngx/cdk/utils';
@@ -43,7 +41,7 @@ import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
-import { debounceTime, delay, filter, first, map, startWith, switchMap, take, tap } from 'rxjs/operators';
+import { debounceTime, delay, filter, first, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
@@ -252,9 +250,6 @@ export class TabListComponent
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private readonly _zone = inject(NgZone);
-
-    /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver,
@@ -376,12 +371,12 @@ export class TabListComponent
                     tabPanels.map((el) => this._tabArray?.find((tabInfo) => tabInfo.panel === el) || new TabInfo(el))
                 ),
                 tap((tabs) => (this._tabArray = tabs)),
-                switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable))),
+                delay(0),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 if (this.stackContent && this._currentNumberOfTabs !== this._tabArray.length) {
-                    this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+                    queueMicrotask(() => {
                         this._scrollSpy?.onScroll(undefined, true);
                         this._currentNumberOfTabs = this._tabArray.length;
                     });

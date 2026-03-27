@@ -5,13 +5,14 @@ argument-hint: [PR-number]
 disable-model-invocation: true
 context: fork
 agent: general-purpose
+allowed-tools: Read, Grep, Glob, Bash(gh *), Bash(nx *)
 ---
 
 # PR Review: #$0
 
-## Context
+If `$0` is empty or not a number, ask the user for a PR number before proceeding.
 
-Review PR #$0 against the project's conventions documented in AGENTS.md and docs/agents/.
+## Context
 
 Fetch the PR details:
 
@@ -25,11 +26,11 @@ For each changed file, check the applicable sections below. Report findings grou
 
 ### 1. Angular 21+ Patterns
 
-- [ ] `input()` / `output()` / `model()` — no `@Input()` / `@Output()` decorators
+- [ ] **New code** uses `input()` / `output()` / `model()`. Existing `@Input()` / `@Output()` decorators being modified should prefer migration to signal functions, but it's not blocking.
 - [ ] `host: {}` in decorator — no `@HostBinding()` / `@HostListener()`
 - [ ] `@if` / `@for` / `@switch` — no `*ngIf` / `*ngFor` / `*ngSwitch`
-- [ ] No `standalone: true` in `@Component` (default in Angular 21+)
-- [ ] No `allowSignalWrites: true` in `effect()` (deprecated)
+- [ ] No `standalone: true` in `@Component` (default since Angular 19)
+- [ ] No `allowSignalWrites` option in `effect()` (the option no longer exists)
 - [ ] `DestroyRef` + `takeUntilDestroyed()` — no custom `DestroyedService`
 - [ ] `computed()` + `host: { '[class]': }` — no `CssClassBuilder` / `@applyCssClass`
 - [ ] Member ordering: decorated props → signal inputs/outputs → public → protected → private → constructor → methods

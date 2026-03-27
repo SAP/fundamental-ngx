@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'Frigør kolonne',
         headerMenuUnfreezePlural: 'Frigør kolonner',
         loadMore: 'Vis mere',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Der er i øjeblikket ingen synlige kolonner i tabellen. Vælg de kolonner, du har brug for i tabelindstillingerne.',
         P13ColumnsDialogCancelBtnLabel: 'Annuller',

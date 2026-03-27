@@ -539,6 +539,7 @@ export default {
         headerMenuUnfreeze: 'בטל הקפאת עמודה',
         headerMenuUnfreezePlural: 'בטל הקפאת עמודות',
         loadMore: 'הצג עוד',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage: 'כרגע, אין עמודות גלויות בטבלה. בחר את העמודות הנדרשות בהגדרות הטבלה.',
         P13ColumnsDialogCancelBtnLabel: 'בטל',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',

@@ -5,21 +5,24 @@ argument-hint: [component-path-or-folder]
 disable-model-invocation: true
 context: fork
 agent: general-purpose
+allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(wc *)
 ---
 
 # Best Practices Audit: $ARGUMENTS
 
-Audit the code at `$ARGUMENTS` against the project's conventions documented in AGENTS.md and docs/agents/. Unlike `/review-pr` which checks diffs, this audits existing code as-is.
+If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
+
+Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/review-pr` which checks diffs, this audits existing code as-is.
 
 ## Checklist
 
 ### 1. Angular 21+ Patterns
 
-- [ ] `input()` / `output()` / `model()` — no `@Input()` / `@Output()` decorators
+- [ ] **New code** uses `input()` / `output()` / `model()`. Existing `@Input()` / `@Output()` decorators are acceptable.
 - [ ] `host: {}` in decorator — no `@HostBinding()` / `@HostListener()`
 - [ ] `@if` / `@for` / `@switch` — no `*ngIf` / `*ngFor` / `*ngSwitch`
-- [ ] No `standalone: true` (default in Angular 21+)
-- [ ] No `allowSignalWrites: true` in `effect()` (deprecated)
+- [ ] No `standalone: true` (default since Angular 19)
+- [ ] No `allowSignalWrites` option in `effect()` (the option no longer exists)
 - [ ] `DestroyRef` + `takeUntilDestroyed()` — no custom `DestroyedService`
 - [ ] `computed()` + `host: { '[class]': }` — no `CssClassBuilder` / `@applyCssClass`
 - [ ] No `ngClass` / `ngStyle` (use direct bindings)

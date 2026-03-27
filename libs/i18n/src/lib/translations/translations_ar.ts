@@ -539,6 +539,7 @@ export default {
         headerMenuUnfreeze: 'إلغاء تجميد العمود',
         headerMenuUnfreezePlural: 'إلغاء تجميد الأعمدة',
         loadMore: 'إظهار المزيد',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'لا توجد الآن أعمدة مرئية في الجدول. يرجى تحديد الأعمدة التي تحتاج إليها في إعدادات الجدول.',
         P13ColumnsDialogCancelBtnLabel: 'إلغاء',

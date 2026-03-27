@@ -539,6 +539,7 @@ export default {
         headerMenuUnfreeze: 'Nyahbekukan lajur',
         headerMenuUnfreezePlural: 'Nyahbekukan lajur',
         loadMore: 'Tunjukkan Selanjutnya',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Kini, tiada lajur boleh dilihat dalam jadual. Sila pilih lajur yang anda perlukan dalam tetapan jadual.',
         P13ColumnsDialogCancelBtnLabel: 'Batal',
