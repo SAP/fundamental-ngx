@@ -1,7 +1,7 @@
 // Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'Rozbalit/sbalit podpoložky',
+        expanderAriaLabel: 'rozbalit/sbalit podpoložky',
         moreButtonAriaLabel: 'Zobrazí další navigační položky, které jsou kvůli omezenému prostoru na obrazovce skryté',
         overflowMenuAriaLabel: 'Další navigační položky',
         snappedPopoverRoleDescription: 'Strom navigačního seznamu'
@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Tlačítko menu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Panel akcí'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Zpět'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigační cesta',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'Přejít na další položku'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Vymazat vstup'
     },
     coreDatePicker: {
         dateInputLabel: 'Zadání datumu',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'Čas'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Navigační cesty',
         collapseLabel: 'Sbalit hlavičku',
         expandLabel: 'Rozbalit hlavičku',
         pinLabel: 'Připnout hlavičku',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Přepnout hlavičku',
         unpinLabel: 'Odepnout hlavičku'
     },
     coreFeedListItem: {
@@ -112,12 +112,12 @@ export default {
         announcementSuccess: 'Pruh zpráv o úspěšném provedení',
         announcementWarning: 'Pruh varovných zpráv',
         closable: 'Lze zavřít',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Zavřít',
+        defaultHiddenText: 'Pruh zpráv',
         dismissLabel: 'Zavřít'
     },
     coreMultiComboBox: {
-        listGroupHeader: 'Záhlaví skupiny',
+        listGroupHeader: 'Hlavička skupiny',
         multiComboBoxAriaLabel: 'Vícehodnotový výklopný seznam',
         selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})'
     },
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Vícehodnotový vstup',
         navigateSelectionsWithArrows: 'Výběry procházejte šipkami nahoru a dolů.',
         noResults: 'Žádné výsledky.',
-        showAll: 'Show All ({count})',
+        showAll: 'Zobrazit vše ({count})',
         tokensCountText: 'Celkový počet obsažených tokenů: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hlavní navigace',
-        navigationPath: 'Navigační cesta'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Položka stromu {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Indikátor hodnocení'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Zavřít'
     },
     coreShellbar: {
         assistiveTools: 'Pomocné nástroje',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Odmítnout'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Zobrazit více',
         tabListExpandButtonText: 'Více'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Otevřít nástroj pro výběr',
         timePickerInputLabel: 'Zadání výběru času',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Stav hodnoty: Chyba',
+        valueStateInformationMessage: 'Stav hodnoty: Informace',
+        valueStateSuccessMessage: 'Stav hodnoty: Úspěch',
+        valueStateWarningMessage: 'Stav hodnoty: Upozornění'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Tokenizér'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Více'
     },
     coreTree: {
         collapse: 'Sbalit uzel',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Zavřít',
+        previousButton: 'Předchozí'
     },
     coreWizard: {
         ariaLabel: 'Průvodce'
@@ -388,7 +388,7 @@ export default {
         countListResultsSingular: '1 položka v seznamu výsledků'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Odeslat',
         userTitle: 'Uživatel'
     },
     platformIconTabBar: {
@@ -402,7 +402,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Vše',
-        backButton: 'Go back',
+        backButton: 'Zpět',
         defaultErrors: {
             email: 'E-mail je neplatný',
             max: 'Hodnota pole je větší než maximální povolená hodnota',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: 'detail'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Vymazat',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Vše',
+        cancelLabel: 'Zrušit',
+        clearButtonTitle: 'Vymazat hledání',
+        counterLabel: 'Celkový počet výsledků: {count}',
+        deleteButtonAriaLabel: 'Odebrat',
+        deleteButtonTitle: 'Odebrat návrhy',
+        groupHeader: 'Hlavička skupiny',
         searchInputLabel: 'Hledat',
         searchSuggestionMessage: 'Nalezené návrhy: {count}.',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Hledat',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Vybrat rozsah',
+        selectStateMessageLabel: 'Vybrat',
+        submitButtonTitle: 'Hledat (zadat)',
+        suggestionsWrapperAriaLabel: 'Návrhy',
         synchronizeButtonTitle: 'Synchronizovat'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: 'Spustit'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Skupina tlačítek rozdělení'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'odstranit',
@@ -704,7 +704,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Kroky průvodce',
         summarySectionEditStep: 'Upravit'
     },
     segmentedButton: {

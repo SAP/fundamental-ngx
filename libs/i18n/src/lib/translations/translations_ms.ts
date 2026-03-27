@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Butang menu'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Bar Tindakan'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Kembali'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Jejak Tinggalan',
@@ -58,19 +58,19 @@ export default {
         rightNavigationBtnLabel: 'Pergi ke item seterusnya'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Kosongkan input'
     },
     coreDatePicker: {
         dateInputLabel: 'Input tarikh',
         dateRangeInputLabel: 'Input julat tarikh',
         displayCalendarToggleLabel: 'Buka pemilih',
-        valueStateErrorMessage: 'Status nilai Ralat',
+        valueStateErrorMessage: 'Ralat status nilai',
         valueStateInformationMessage: 'Status nilai Maklumat',
         valueStateSuccessMessage: 'Status nilai Berjaya',
         valueStateWarningMessage: 'Status nilai Amaran'
     },
     coreDatetimePicker: {
-        datetimeCancelLabel: 'Batal',
+        datetimeCancelLabel: 'Batalkan',
         datetimeInputLabel: 'Input masa tarikh',
         datetimeOkLabel: 'Ok',
         displayDatetimeToggleLabel: 'Paparkan togol kalendar',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'Masa'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Tinggalan',
         collapseLabel: 'Runtuhkan Pengepala',
         expandLabel: 'Kembangkan Pengepala',
         pinLabel: 'Pinkan Pengepala',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Pengepala togol',
         unpinLabel: 'Nyahpin Pengepala'
     },
     coreFeedListItem: {
@@ -90,7 +90,7 @@ export default {
         moreLabel: '{count} selanjutnya'
     },
     coreGridList: {
-        filterBarCancelButtonTitle: 'Batal',
+        filterBarCancelButtonTitle: 'Batalkan',
         listItemButtonDeleteTitle: 'Padam',
         listItemButtonDetailsTitle: 'Butiran',
         listItemCounterAriaLabel: 'Item mempunyai {count} anak.',
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Jalur Mesej Berjaya',
         announcementWarning: 'Jalur Mesej Amaran',
         closable: 'Boleh Ditutup',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Tutup',
+        defaultHiddenText: 'Jalur mesej',
         dismissLabel: 'Tutup'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Input Nilai Berbilang',
         navigateSelectionsWithArrows: 'Navigasi pemilihan dengan anak panah atas dan bawah.',
         noResults: 'Tiada hasil.',
-        showAll: 'Show All ({count})',
+        showAll: 'Tunjuk Semua ({count})',
         tokensCountText: 'Mengandungi jumlah token: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navigasi Utama',
-        navigationPath: 'Laluan Navigasi'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Item Pepohon {itemDetails}, {selectedDescription}'
@@ -197,12 +197,12 @@ export default {
         ariaRoleDescription: 'Penunjuk penarafan'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Tutup'
     },
     coreShellbar: {
         assistiveTools: 'Alat Bantuan',
         backButtonLabel: 'Kembali',
-        cancel: 'Batal',
+        cancel: 'Batalkan',
         collapsedItemMenuLabel: 'Menu Item yang Diruntuhkan',
         navigationButtonLabel: 'Navigasi',
         search: 'Cari'
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Tolak'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Lihat Lebih Lanjut',
         tabListExpandButtonText: 'Selanjutnya'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Buka pemilih',
         timePickerInputLabel: 'Input pemilih masa',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Ralat status nilai',
+        valueStateInformationMessage: 'Status nilai Maklumat',
+        valueStateSuccessMessage: 'Status nilai Berjaya',
+        valueStateWarningMessage: 'Status nilai Amaran'
     },
     coreToken: {
         ariaRoleDescription: 'token',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Pengawal Token'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Selanjutnya'
     },
     coreTree: {
         collapse: 'Runtuhkan nod',
@@ -295,16 +295,16 @@ export default {
     },
     coreUploadCollection: {
         formItemPlaceholder: 'Nama fail',
-        menuCancelAriaLabel: 'Batal',
-        menuCancelText: 'Batal',
+        menuCancelAriaLabel: 'Batalkan',
+        menuCancelText: 'Batalkan',
         menuDeleteAriaLabel: 'Padam',
         menuEditAriaLabel: 'Edit',
         menuOkAriaLabel: 'Edit',
         menuOkText: 'Ok'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Tutup',
+        previousButton: 'Sebelumnya'
     },
     coreWizard: {
         ariaLabel: 'Bestari'
@@ -313,8 +313,8 @@ export default {
         addNodeAddActionBtnLabel: 'Tambah',
         addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Tutup',
         addNodeButtonTitle: 'Tambah nod',
-        addNodeCancelActionBtnLabel: 'Batal',
-        addNodeCancelApproverSelectionActionBtnLabel: 'Batal',
+        addNodeCancelActionBtnLabel: 'Batalkan',
+        addNodeCancelApproverSelectionActionBtnLabel: 'Batalkan',
         addNodeDialogAddToNext: 'Tambah ke nod bersiri seterusnya',
         addNodeDialogApproverType: 'Jenis pelulus',
         addNodeDialogApproverTypeTeamAnyone: 'Sesiapa sahaja dalam pasukan',
@@ -358,7 +358,7 @@ export default {
         nodeStatusXDaysOverdue: '{count} hari lampau tempoh',
         nodeVariousTeams: 'Pelbagai pasukan',
         prevButtonAriaLabel: 'Pergi ke slaid sebelumnya',
-        selectTypeDialogCancelButton: 'Batal',
+        selectTypeDialogCancelButton: 'Batalkan',
         selectTypeDialogConfirmButton: 'Sahkan',
         selectTypeDialogMoveApproverAs: 'Pindahkan pelulus sebagai',
         selectTypeDialogNodeTypeParallel: 'Pelulus selari',
@@ -375,7 +375,7 @@ export default {
         toolbarEditApprover: 'Edit pelulus',
         toolbarEditButton: 'Edit',
         toolbarRemove: 'Keluarkan',
-        userDetailsCancelBtnLabel: 'Batal',
+        userDetailsCancelBtnLabel: 'Batalkan',
         userDetailsHeader: 'Butiran',
         userDetailsSendReminderBtnLabel: 'Hantar peringatan',
         userListSelectedItemsCountPlural: '{count} item dipilih',
@@ -387,11 +387,11 @@ export default {
         countListResultsSingular: '1 item senarai hasil'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Hantar',
         userTitle: 'Pengguna'
     },
     platformIconTabBar: {
-        moreButton: 'Lagi'
+        moreButton: 'Selanjutnya'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
@@ -401,7 +401,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Semua',
-        backButton: 'Go back',
+        backButton: 'Kembali',
         defaultErrors: {
             email: 'E-mel tidak sah',
             max: 'Medan melebihi nilai maksimum',
@@ -425,20 +425,20 @@ export default {
         detailsActionAriaLabel: 'butiran'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Kosongkan',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Semua',
+        cancelLabel: 'Batalkan',
+        clearButtonTitle: 'Kosongkan Carian',
+        counterLabel: 'Jumlah hasil: {count}',
+        deleteButtonAriaLabel: 'Keluarkan',
+        deleteButtonTitle: 'Keluarkan Cadangan',
+        groupHeader: 'Pengepala Kumpulan',
         searchInputLabel: 'Cari',
         searchSuggestionMessage: '{count} cadangan ditemui.',
         searchSuggestionNavigateMessage: 'gunakan anak panah atas dan bawah untuk navigasi',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Cari',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Pilih Skop',
+        selectStateMessageLabel: 'Pilih',
+        submitButtonTitle: 'Carian (Masuk)',
+        suggestionsWrapperAriaLabel: 'Cadangan',
         synchronizeButtonTitle: 'Segerakkan'
     },
     platformSelect: {
@@ -451,7 +451,7 @@ export default {
     },
     platformSmartFilterBar: {
         defineConditionsAddConditionButtonLabel: 'Tambah syarat',
-        defineConditionsCancelButton: 'Batal',
+        defineConditionsCancelButton: 'Batalkan',
         defineConditionsRemoveConditionButtonTitle: 'Keluarkan syarat',
         defineConditionsSubmitButtonLabel: 'Pergi',
         filterConditionAfter: 'selepas',
@@ -477,7 +477,7 @@ export default {
         searchPlaceholder: 'Cari',
         selectFiltersActiveColumnLabel: 'Aktif',
         selectFiltersAvailableFiltersText: 'Penapis tersedia',
-        selectFiltersCancelButton: 'Batal',
+        selectFiltersCancelButton: 'Batalkan',
         selectFiltersFilterColumnLabel: 'Penapis',
         selectFiltersHeader: 'Penapis',
         selectFiltersSubmitButtonLabel: 'Pergi',
@@ -490,7 +490,7 @@ export default {
         submitButtonLabel: 'Pergi'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Kumpulan butang pisahan'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'padam',
@@ -500,7 +500,7 @@ export default {
         ariaLabel: 'Input suis'
     },
     platformTable: {
-        cancelBtnLabel: 'Batal',
+        cancelBtnLabel: 'Batalkan',
         clearFilters: 'Kosongkan Penapis',
         collapseRowButtonTitle: 'Runtuhkan baris',
         confirmBtnLabel: 'OK',
@@ -514,14 +514,14 @@ export default {
         emptyCell: 'Kosong',
         expandRowButtonTitle: 'Kembangkan baris',
         filterDialogBackToColumns: 'Navigasi kembali',
-        filterDialogCancelBtnLabel: 'Batal',
+        filterDialogCancelBtnLabel: 'Batalkan',
         filterDialogConfirmBtnLabel: 'OK',
         filterDialogFilterBy: 'Tapis mengikut',
         filterDialogFilterByLabel: 'Tapis mengikut: {filterLabel}',
         filterDialogFilterTitle: 'Penapis',
         filterDialogNotFilteredLabel: '(Tidak Ditapis)',
         filteredBy: 'Ditapis mengikut',
-        groupDialogCancelBtnLabel: 'Batal',
+        groupDialogCancelBtnLabel: 'Batalkan',
         groupDialogConfirmBtnLabel: 'OK',
         groupDialogGroupByHeader: 'Kumpulkan mengikut',
         groupDialogGroupOrderAsc: 'Menaik',
@@ -542,7 +542,7 @@ export default {
         navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Kini, tiada lajur boleh dilihat dalam jadual. Sila pilih lajur yang anda perlukan dalam tetapan jadual.',
-        P13ColumnsDialogCancelBtnLabel: 'Batal',
+        P13ColumnsDialogCancelBtnLabel: 'Batalkan',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogHeader: 'Lajur',
         P13ColumnsDialogMoveDownBtn: 'Gerakkan ke Bawah',
@@ -557,7 +557,7 @@ export default {
         P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Ya',
         P13FilterDialogAddFilterBtnTitle: 'Tambah Penapis',
-        P13FilterDialogCancelBtnLabel: 'Batal',
+        P13FilterDialogCancelBtnLabel: 'Batalkan',
         P13FilterDialogConfirmationBtnLabel: 'OK',
         P13FilterDialogExcludePanelTitleWithCount: 'Tidak Termasuk ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Tidak termasuk',
@@ -580,14 +580,14 @@ export default {
         P13FilterStrategyLabelNotDefined: 'Tidak Ditakrifkan',
         P13FilterStrategyLabelOnOrAfter: 'pada atau selepas',
         P13GroupDialogAddNewGroupBtnTitle: 'Tambah yang baharu',
-        P13GroupDialogCancelBtnLabel: 'Batal',
+        P13GroupDialogCancelBtnLabel: 'Batalkan',
         P13GroupDialogConfirmationBtnLabel: 'OK',
         P13GroupDialogHeader: 'Kumpulan',
         P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(tiada)',
         P13GroupDialogRemoveGroupBtnTitle: 'Keluarkan',
         P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Tunjukkan Medan sebagai Lajur',
         P13SortDialogAddNewSortBtnTitle: 'Tambah yang baharu',
-        P13SortDialogCancelBtnLabel: 'Batal',
+        P13SortDialogCancelBtnLabel: 'Batalkan',
         P13SortDialogConfirmationBtnLabel: 'OK',
         P13SortDialogHeader: 'Isih',
         P13SortDialogNoneSelectedColumn: '(tiada)',
@@ -603,7 +603,7 @@ export default {
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
         settingsDialogHeader: 'Tetapan',
         showingBlankOfBlank: 'Menunjukkan {totalGrowingItemsCount} daripada {totalGrowingItemsCount}',
-        sortDialogCancelBtnLabel: 'Batal',
+        sortDialogCancelBtnLabel: 'Batalkan',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogHeader: 'Isih',
         sortDialogNotSortedLabel: '(Tidak Diisih)',
@@ -612,7 +612,7 @@ export default {
         sortDialogSortOrderDesc: 'Menurun',
         sortDialogSortOrderHeader: 'Urutan Isihan',
         toolbarActionButtonTitle: 'Tetapan',
-        toolbarActionCancelButtonLabel: 'Batal',
+        toolbarActionCancelButtonLabel: 'Batalkan',
         toolbarActionCollapseAllButtonTitle: 'Runtuhkan semua',
         toolbarActionColumnsButtonTitle: 'Lajur',
         toolbarActionCreateButtonLabel: 'Cipta',
@@ -635,7 +635,7 @@ export default {
             private: 'Persendirian'
         },
         applyAutomatically: 'Gunakan secara Automatik',
-        cancel: 'Batal',
+        cancel: 'Batalkan',
         createdBy: 'Dicipta oleh',
         default: 'Lalai',
         manage: 'Uruskan',
@@ -655,7 +655,7 @@ export default {
         view: 'Paparkan'
     },
     platformVHD: {
-        cancelButtonLabel: 'Batal',
+        cancelButtonLabel: 'Batalkan',
         defineConditionAddConditionButtonLabel: 'Tambah',
         defineConditionAddConditionButtonTitle: 'Tambah Syarat',
         defineConditionConditionsGroupHeaderExclude: 'Tidak termasuk',
@@ -703,7 +703,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Langkah Bestari',
         summarySectionEditStep: 'Edit'
     },
     segmentedButton: {

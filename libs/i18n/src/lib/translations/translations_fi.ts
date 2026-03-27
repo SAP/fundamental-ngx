@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Valikko-painike'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Toimintopalkki'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Paluu'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'Navigointipolku',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'SIirry seuraavaan kohteeseen'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Tyhjennä syöte'
     },
     coreDatePicker: {
         dateInputLabel: 'Päivämäärän syöttö',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'Aika'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'Navigointipolut',
         collapseLabel: 'Tiivistä otsikko',
         expandLabel: 'Laajenna otsikko',
         pinLabel: 'Kiinnitä otsikko',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Vaihda otsikko',
         unpinLabel: 'Irrota otsikko'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Onnistumisilmoitusnauha',
         announcementWarning: 'Varoitusilmoitusnauha',
         closable: 'Suljettava',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Sulje',
+        defaultHiddenText: 'Viestinauha',
         dismissLabel: 'Sulje'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Moniarvoinen syöttö',
         navigateSelectionsWithArrows: 'Navigoi valinnoissa ylä- ja alanuolilla.',
         noResults: 'Ei tuloksia.',
-        showAll: 'Show All ({count})',
+        showAll: 'Näytä kaikki ({count})',
         tokensCountText: 'Sisältää tunnuksia yhteensä: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Päänavigointi',
-        navigationPath: 'Navigointipolku'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Puun kohde {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Arviointitunnus'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Sulje'
     },
     coreShellbar: {
         assistiveTools: 'Avustavat työkalut',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Hylkää'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Näytä enemmän',
         tabListExpandButtonText: 'Enemmän'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Avaa valitsin',
         timePickerInputLabel: 'Aikavalitsimen syöttö',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Arvon tila Virhe',
+        valueStateInformationMessage: 'Arvon tila Informaatio',
+        valueStateSuccessMessage: 'Arvon tila Onnistuminen',
+        valueStateWarningMessage: 'Arvon tila Varoitus'
     },
     coreToken: {
         ariaRoleDescription: 'tunnus',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Jäsentäjä'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Lisää'
     },
     coreTree: {
         collapse: 'Tiivistä solmu',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Sulje',
+        previousButton: 'Edellinen'
     },
     coreWizard: {
         ariaLabel: 'Avustaja'
@@ -388,11 +388,11 @@ export default {
         countListResultsSingular: '1 tulosluettelon kohde'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Lähetä',
         userTitle: 'Käyttäjä'
     },
     platformIconTabBar: {
-        moreButton: 'Lisää'
+        moreButton: 'Enemmän'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Media: {media}'
@@ -402,7 +402,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Kaikki',
-        backButton: 'Go back',
+        backButton: 'Palaa',
         defaultErrors: {
             email: 'Sähköposti on virheellinen',
             max: 'Kenttä ylittää maksimiarvon',
@@ -426,20 +426,20 @@ export default {
         detailsActionAriaLabel: 'lisätieto'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Tyhjennä',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Kaikki',
+        cancelLabel: 'Peruuta',
+        clearButtonTitle: 'Tyhjennä haku',
+        counterLabel: 'Tuloksia yhteensä: {count}',
+        deleteButtonAriaLabel: 'Poista',
+        deleteButtonTitle: 'Poista ehdotus',
+        groupHeader: 'Ryhmäotsikko',
         searchInputLabel: 'Hae',
         searchSuggestionMessage: 'Löytyi {count} ehdotusta.',
         searchSuggestionNavigateMessage: 'navigoi ylä- ja alanuolilla',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Hae',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Valitse laajuus',
+        selectStateMessageLabel: 'Valitse',
+        submitButtonTitle: 'Hae (syötä)',
+        suggestionsWrapperAriaLabel: 'Ehdotukset',
         synchronizeButtonTitle: 'Synkronoi'
     },
     platformSelect: {
@@ -491,7 +491,7 @@ export default {
         submitButtonLabel: 'Siirry'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Jaa painikeryhmä'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'poista',
@@ -704,7 +704,7 @@ export default {
         successButtonLabel: 'OK'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Avustajan vaiheet',
         summarySectionEditStep: 'Muokkaa'
     },
     segmentedButton: {
