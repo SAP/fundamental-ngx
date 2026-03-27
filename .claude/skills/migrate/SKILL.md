@@ -151,7 +151,8 @@ Output a structured migration plan:
 After approval:
 
 1. Apply all migrations from the approved plan
-2. Run build: `nx run <library>:build`
-3. Run lint: `nx run <library>:lint`
-4. Run tests: `nx run <library>:test --testfile=<spec-file> --skip-nx-cache`
-5. Report results and any issues
+2. Format code: `yarn format`
+3. Run build: `nx run <library>:build`
+4. Run lint: `nx run <library>:lint`
+5. Run tests: `nx run <library>:test --testfile=<spec-file> --skip-nx-cache`
+6. Report results and any issues

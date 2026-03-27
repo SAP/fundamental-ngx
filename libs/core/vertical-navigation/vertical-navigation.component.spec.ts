@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -91,4 +91,22 @@ describe('VerticalNavigationComponent', () => {
         component.nav.ngAfterContentInit();
         expect(component.item._condensed).toBeTruthy();
     });
+
+    it('should set first item tabbable and non-first items not tabbable after init', fakeAsync(() => {
+        // Re-create fixture inside fakeAsync so the setTimeout in _listenOnQueryChange is captured
+        const fakeFixture = TestBed.createComponent(TestVerticalNavigationComponent);
+        fakeFixture.detectChanges();
+        tick();
+        fakeFixture.detectChanges();
+
+        const rootList = fakeFixture.nativeElement.querySelector('ul[fd-list][role="tree"]');
+        const topLevelNavItems = rootList.querySelectorAll(':scope > [fd-list-navigation-item]');
+
+        // First item should be tabbable (tabindex not -1)
+        expect(topLevelNavItems[0].getAttribute('tabindex')).not.toBe('-1');
+        // Non-first top-level items should be removed from tab order (tabindex=-1)
+        for (let i = 1; i < topLevelNavItems.length; i++) {
+            expect(topLevelNavItems[i].getAttribute('tabindex')).toBe('-1');
+        }
+    }));
 });

@@ -1,4 +1,5 @@
 import {
+    AfterViewChecked,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
@@ -13,7 +14,8 @@ import {
     ViewEncapsulation,
     computed,
     inject,
-    input
+    input,
+    signal
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -114,7 +116,7 @@ export class TableToolbarTemplateDirective {
         TitleComponent
     ]
 })
-export class TableToolbarComponent implements TableToolbarInterface {
+export class TableToolbarComponent implements TableToolbarInterface, AfterViewChecked {
     /**
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
@@ -228,6 +230,12 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** @hidden */
     readonly tableLoading$: Observable<boolean> = inject(TableService).tableLoading$;
 
+    /** @hidden Title text extracted from titleTemplate for accessibility. */
+    protected readonly titleText = signal<string>('');
+
+    /** @hidden */
+    private _titleObserver: MutationObserver | undefined;
+
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -237,6 +245,14 @@ export class TableToolbarComponent implements TableToolbarInterface {
         private readonly _table: Table
     ) {
         this._listenToTableEvents();
+    }
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
+        // Set up observer once the element exists in the DOM
+        if (!this._titleObserver) {
+            this._setupTitleObserver();
+        }
     }
 
     /** @hidden */
@@ -326,5 +342,28 @@ export class TableToolbarComponent implements TableToolbarInterface {
         this._table.presetChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
         });
+    }
+
+    /** @hidden Sets up a MutationObserver to watch for title content changes. */
+    private _setupTitleObserver(): void {
+        const titleElement = document.getElementById(this.tableToolbarTitleId);
+        if (titleElement) {
+            this._updateTitleText(titleElement);
+            this._titleObserver = new MutationObserver(() => this._updateTitleText(titleElement));
+            this._titleObserver.observe(titleElement, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+            this._destroyRef.onDestroy(() => this._titleObserver?.disconnect());
+        }
+    }
+
+    /** @hidden Updates the title text from the rendered title element. */
+    private _updateTitleText(titleElement: HTMLElement): void {
+        const text = titleElement.textContent?.trim() || '';
+        if (text !== this.titleText()) {
+            this.titleText.set(text);
+        }
     }
 }
