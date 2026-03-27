@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { InitialFocusDirective } from './initial-focus.directive';
 
 @Component({
@@ -28,7 +28,7 @@ describe('InitialFocusDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestComponent, InitialFocusDirective] // Use imports instead of declarations
+            imports: [TestComponent, InitialFocusDirective]
         }).compileComponents();
     }));
 
@@ -42,21 +42,21 @@ describe('InitialFocusDirective', () => {
         await fixture.whenStable();
     });
 
-    it('should focus element', fakeAsync(() => {
+    it('should focus element', async () => {
         const spy = jest.spyOn(component.elementToFocus.nativeElement, 'focus');
         component.enabled = true;
         fixture.detectChanges();
-        tick(10);
+        await fixture.whenStable();
         expect(spy).toHaveBeenCalledTimes(1);
-    }));
+    });
 
-    it('should focus nested element', fakeAsync(() => {
+    it('should focus nested element', async () => {
         const spy = jest.spyOn(component.nestedElementToFocus.nativeElement, 'focus');
         component.rootElementTabIndex = -1;
         fixture.detectChanges();
         component.enabled = true;
         fixture.detectChanges();
-        tick(10);
+        await fixture.whenStable();
         expect(spy).toHaveBeenCalledTimes(1);
-    }));
+    });
 });
