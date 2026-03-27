@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
@@ -143,5 +143,66 @@ describe('TableToolbarComponent', () => {
 
             expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
         });
+    });
+
+    describe('title text extraction for accessibility', () => {
+        let titleElement: HTMLSpanElement;
+
+        beforeEach(() => {
+            titleElement = document.createElement('span');
+            titleElement.id = component.tableToolbarTitleId;
+            document.body.appendChild(titleElement);
+        });
+
+        afterEach(() => {
+            if (document.body.contains(titleElement)) {
+                document.body.removeChild(titleElement);
+            }
+        });
+
+        it('should extract title text from DOM element when it exists', fakeAsync(() => {
+            titleElement.textContent = 'Test Title (10)';
+
+            // Trigger ngAfterViewChecked to set up the observer
+            component.ngAfterViewChecked();
+            tick();
+
+            expect(component['titleText']()).toBe('Test Title (10)');
+        }));
+
+        it('should update title text when DOM content changes via MutationObserver', async () => {
+            titleElement.textContent = 'Initial Title';
+
+            // Trigger ngAfterViewChecked to set up the observer
+            component.ngAfterViewChecked();
+
+            expect(component['titleText']()).toBe('Initial Title');
+
+            // Simulate content change
+            titleElement.textContent = 'Updated Title (20)';
+
+            // MutationObserver callback is async, wait for it
+            await new Promise((resolve) => setTimeout(resolve, 0));
+
+            expect(component['titleText']()).toBe('Updated Title (20)');
+        });
+
+        it('should disconnect observer on destroy', fakeAsync(() => {
+            titleElement.textContent = 'Test Title';
+
+            component.ngAfterViewChecked();
+            tick();
+
+            // Get reference to the observer
+            const observer = component['_titleObserver'];
+            expect(observer).toBeDefined();
+
+            const disconnectSpy = jest.spyOn(observer!, 'disconnect');
+
+            // Trigger destroy
+            fixture.destroy();
+
+            expect(disconnectSpy).toHaveBeenCalled();
+        }));
     });
 });

@@ -4,7 +4,9 @@
         role="heading"
         [headerSize]="4"
         [attr.aria-level]="_headingLevel"
-        class="fd-toolbar__title"
+        [attr.title]="title"
+        [attr.aria-label]="title"
+        class="fd-toolbar__title fd-toolbar__title--truncate"
         [id]="titleId"
         #titleElement
     >
