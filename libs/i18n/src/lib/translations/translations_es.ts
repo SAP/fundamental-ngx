@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Liberar columna',
         headerMenuUnfreezePlural: 'Liberar columnas',
         loadMore: 'Mostrar más',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'En estos momentos no hay columnas visibles en la tabla. Seleccione las columnas que necesita en las opciones de tabla.',
         P13ColumnsDialogCancelBtnLabel: 'Cancelar',

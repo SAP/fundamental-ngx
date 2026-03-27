@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'Descongelar coluna',
         headerMenuUnfreezePlural: 'Descongelar colunas',
         loadMore: 'Mostrar mais',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Neste momento, não existem colunas visíveis na tabela. Selecione as colunas de que você necessita nas configurações de tabela.',
         P13ColumnsDialogCancelBtnLabel: 'Cancelar',

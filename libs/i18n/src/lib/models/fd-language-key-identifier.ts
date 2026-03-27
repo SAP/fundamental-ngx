@@ -407,6 +407,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.headerMenuUnfreeze'
     | 'platformTable.headerMenuUnfreezePlural'
     | 'platformTable.loadMore'
+    | 'platformTable.navigationColumnTitle'
     | 'platformTable.noVisibleColumnsMessage'
     | 'platformTable.P13ColumnsDialogCancelBtnLabel'
     | 'platformTable.P13ColumnsDialogConfirmationBtnLabel'

@@ -9,12 +9,14 @@ agent: general-purpose
 
 # Create/Update Tests: $ARGUMENTS
 
+If `$ARGUMENTS` is empty, ask the user for a component path before proceeding.
+
 ## Phase 1: Analyze the component
 
 Read the component file at `$ARGUMENTS`. Extract:
 
-- All `input()` / `input.required()` declarations with types and defaults
-- All `output()` declarations with event types
+- All `input()` / `input.required()` and `@Input()` declarations with types and defaults
+- All `output()` and `@Output()` declarations with event types
 - All `model()` declarations
 - All public/protected methods
 - Template interactions (click handlers, form bindings, conditional rendering)
@@ -80,7 +82,8 @@ Generate the complete test file content. If updating an existing file, show only
 ## Phase 4: Verify
 
 ```bash
+yarn format
 nx run <library>:test --testfile=<spec-file> --skip-nx-cache
 ```
 
-Report test results. If failures occur, diagnose and fix.
+Format the code first, then run tests. Report test results. If failures occur, diagnose and fix.

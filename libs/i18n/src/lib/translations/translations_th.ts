@@ -540,6 +540,7 @@ export default {
         headerMenuUnfreeze: 'ยกเลิกการตรึงคอลัมน์',
         headerMenuUnfreezePlural: 'ยกเลิกการตรึงคอลัมน์',
         loadMore: 'แสดงเพิ่มเติม',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'ไม่มีคอลัมน์ที่มองเห็นได้ในตารางในขณะนี้ กรุณาเลือกคอลัมน์ที่คุณต้องการในการกำหนดค่าตาราง',
         P13ColumnsDialogCancelBtnLabel: 'ยกเลิก',

@@ -544,6 +544,7 @@ export default {
         headerMenuUnfreeze: '[[[Ůŋƒŗēēžē ċŏĺűɱŋ∙∙∙∙]]]',
         headerMenuUnfreezePlural: '[[[Ůŋƒŗēēžē ċŏĺűɱŋş∙∙∙∙∙∙∙∙]]]',
         loadMore: '[[[Ŝĥŏŵ Μŏŗē∙∙∙∙∙]]]',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             '[[[Řįğĥţ ŋŏŵ, ţĥēŗē ąŗē ŋŏ ʋįşįƃĺē ċŏĺűɱŋş įŋ ţĥē ţąƃĺē. Ƥĺēąşē şēĺēċţ ţĥē ċŏĺűɱŋş ŷŏű ŋēēƌ įŋ ţĥē ţąƃĺē şēţţįŋğş.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
         P13ColumnsDialogCancelBtnLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',

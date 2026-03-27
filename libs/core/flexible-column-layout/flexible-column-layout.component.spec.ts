@@ -12,6 +12,7 @@ import {
     ONE_COLUMN_MID_FULL_SCREEN,
     ONE_COLUMN_START_FULL_SCREEN,
     THREE_COLUMNS_END_EXPANDED,
+    THREE_COLUMNS_END_MINIMIZED,
     THREE_COLUMNS_MID_EXPANDED,
     THREE_COLUMNS_START_MINIMIZED,
     TWO_COLUMNS_END_EXPANDED,
@@ -297,5 +298,138 @@ describe('FlexibleColumnLayoutComponent', () => {
         // checks the number of separators
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(1);
+    });
+
+    describe('separator direction values', () => {
+        it('should have no separators for single-column layouts', async () => {
+            await whenStable(fixture);
+
+            testComponent.layout = ONE_COLUMN_START_FULL_SCREEN;
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBeNull();
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBeNull();
+        });
+
+        it('should set left separator to "left" for TWO_COLUMNS_START_EXPANDED', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('left');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBeNull();
+        });
+
+        it('should set left separator to "right" for TWO_COLUMNS_MID_EXPANDED', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('right');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBeNull();
+        });
+
+        it('should set both separators for THREE_COLUMNS_MID_EXPANDED', async () => {
+            await whenStable(fixture);
+            setViewport(1300);
+
+            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout._leftColumnSeparator).toBe('right');
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBe('left');
+        });
+
+        it('should set right separator to "right" for THREE_COLUMNS_END_EXPANDED', async () => {
+            await whenStable(fixture);
+            setViewport(1300);
+
+            testComponent.layout = THREE_COLUMNS_END_EXPANDED;
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout._rightColumnSeparator).toBe('right');
+        });
+    });
+
+    describe('layoutChange event emission', () => {
+        it('should emit layoutChange when separator is clicked', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            const layoutChangeSpy = jest.fn();
+            testComponent.flexibleColumnLayout.layoutChange.subscribe(layoutChangeSpy);
+
+            const separatorBtn = fixture.debugElement.query(By.css('.fd-flexible-column-layout__button'));
+            separatorBtn.nativeElement.click();
+            await whenStable(fixture);
+
+            expect(layoutChangeSpy).toHaveBeenCalledWith(TWO_COLUMNS_MID_EXPANDED);
+        });
+    });
+
+    describe('separator click handlers', () => {
+        it('should switch from TWO_COLUMNS_START_EXPANDED to TWO_COLUMNS_MID_EXPANDED on left separator click', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.layout = TWO_COLUMNS_START_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            testComponent.flexibleColumnLayout._handleLeftColumnSeparatorClick();
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout.layout).toBe(TWO_COLUMNS_MID_EXPANDED);
+        });
+
+        it('should switch from TWO_COLUMNS_MID_EXPANDED to TWO_COLUMNS_START_EXPANDED on left separator click', async () => {
+            await whenStable(fixture);
+            setViewport(1023);
+
+            testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            testComponent.flexibleColumnLayout._handleLeftColumnSeparatorClick();
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout.layout).toBe(TWO_COLUMNS_START_EXPANDED);
+        });
+
+        it('should switch from THREE_COLUMNS_MID_EXPANDED to THREE_COLUMNS_END_EXPANDED on right separator click', async () => {
+            await whenStable(fixture);
+            setViewport(1300);
+
+            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            testComponent.flexibleColumnLayout._handleRightColumnSeparatorClick();
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout.layout).toBe(THREE_COLUMNS_END_EXPANDED);
+        });
+
+        it('should switch from THREE_COLUMNS_MID_EXPANDED to THREE_COLUMNS_END_MINIMIZED on left separator click', async () => {
+            await whenStable(fixture);
+            setViewport(1300);
+
+            testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
+            fixture.detectChanges();
+            await whenStable(fixture);
+
+            testComponent.flexibleColumnLayout._handleLeftColumnSeparatorClick();
+            fixture.detectChanges();
+
+            expect(testComponent.flexibleColumnLayout.layout).toBe(THREE_COLUMNS_END_MINIMIZED);
+        });
     });
 });

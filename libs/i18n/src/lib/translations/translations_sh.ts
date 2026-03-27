@@ -541,6 +541,7 @@ export default {
         headerMenuUnfreeze: 'Odmrzni kolonu',
         headerMenuUnfreezePlural: 'Odmrzni kolone',
         loadMore: 'Pokaži više',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'Trenutno nema vidljivih kolona u tabeli. Odaberite kolone koje su vam potrebne u podešavanjima tabele.',
         P13ColumnsDialogCancelBtnLabel: 'Otkaži',

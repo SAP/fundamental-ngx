@@ -542,6 +542,7 @@ export default {
         headerMenuUnfreeze: 'Anulare înghețare coloană',
         headerMenuUnfreezePlural: 'Anulare înghețare coloane',
         loadMore: 'Afișare mai mult',
+        navigationColumnTitle: 'Row Actions',
         noVisibleColumnsMessage:
             'În acest moment, nu există coloane vizibile în tabel. Selectați coloanele de care aveți nevoie în setările tabelului.',
         P13ColumnsDialogCancelBtnLabel: 'Anulare',
