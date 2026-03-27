@@ -41,12 +41,17 @@ nx affected:build
 nx affected:lint
 nx affected:test
 
+# Format code (run after finishing code changes)
+yarn format
+
 # Serve docs app
 yarn start
 
 # Clear NX cache if stale
 nx reset
 ```
+
+**IMPORTANT:** Always run `yarn format` after finishing code changes, before running build/lint/test.
 
 ## Landmines
 

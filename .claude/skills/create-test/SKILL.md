@@ -82,7 +82,8 @@ Generate the complete test file content. If updating an existing file, show only
 ## Phase 4: Verify
 
 ```bash
+yarn format
 nx run <library>:test --testfile=<spec-file> --skip-nx-cache
 ```
 
-Report test results. If failures occur, diagnose and fix.
+Format the code first, then run tests. Report test results. If failures occur, diagnose and fix.

@@ -4,6 +4,15 @@
     flex-shrink: 0;
 }
 
+// Truncate title with ellipsis when it overflows
+.fd-toolbar__title--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 6.25rem; // 100px - ensure title doesn't completely disappear
+    flex-shrink: 1;
+}
+
 fdk-dynamic-portal {
     &:not(:last-of-type) {
         [fd-toolbar-item] {

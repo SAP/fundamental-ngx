@@ -172,6 +172,82 @@ describe('CarouselComponent', () => {
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(true);
     });
+
+    it('should set first slide visible and others hidden initially', async () => {
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(slides[0].visibility).toBe('visible');
+        for (let i = 1; i < slides.length; i++) {
+            expect(slides[i].visibility).toBe('hidden');
+        }
+    });
+
+    it('should set style.visibility on slide host elements', async () => {
+        await whenStable(fixture);
+
+        const slideElements = fixture.debugElement.queryAll(By.css('fd-carousel-item'));
+        expect(slideElements[0].nativeElement.style.visibility).toBe('visible');
+        expect(slideElements[1].nativeElement.style.visibility).toBe('hidden');
+    });
+
+    it('should update slide visibility after navigating to next slide', async () => {
+        await whenStable(fixture);
+
+        const rightBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
+        rightBtn.nativeElement.click();
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(slides[0].visibility).toBe('hidden');
+        expect(slides[1].visibility).toBe('visible');
+        expect(slides[2].visibility).toBe('hidden');
+    });
+
+    it('should update aria-hidden and aria-selected on slides after navigation', async () => {
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(slides[0].ariaHidden()).toBe(false);
+        expect(slides[0].ariaSelected()).toBe(true);
+        expect(slides[1].ariaHidden()).toBe(true);
+        expect(slides[1].ariaSelected()).toBe(false);
+
+        const rightBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
+        rightBtn.nativeElement.click();
+        await whenStable(fixture);
+
+        expect(slides[0].ariaHidden()).toBe(true);
+        expect(slides[0].ariaSelected()).toBe(false);
+        expect(slides[1].ariaHidden()).toBe(false);
+        expect(slides[1].ariaSelected()).toBe(true);
+    });
+
+    it('should update currentActiveSlidesIds after navigation', async () => {
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(component.carousel.currentActiveSlidesIds).toEqual([slides[0].id]);
+
+        const rightBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
+        rightBtn.nativeElement.click();
+        await whenStable(fixture);
+
+        expect(component.carousel.currentActiveSlidesIds).toEqual([slides[1].id]);
+    });
+
+    it('should update ariaActivedescendant after navigation', async () => {
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(component.carousel.ariaActivedescendant).toBe(slides[0].id);
+
+        const rightBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
+        rightBtn.nativeElement.click();
+        await whenStable(fixture);
+
+        expect(component.carousel.ariaActivedescendant).toBe(slides[1].id);
+    });
 });
 
 @Component({
@@ -305,6 +381,44 @@ describe('CarouselComponent Multiple Active Item', () => {
         await whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
+    });
+
+    it('should set first two slides visible and others hidden with visibleSlidesCount=2', async () => {
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(slides[0].visibility).toBe('visible');
+        expect(slides[1].visibility).toBe('visible');
+        for (let i = 2; i < slides.length; i++) {
+            expect(slides[i].visibility).toBe('hidden');
+        }
+    });
+
+    it('should update visibility range when navigating with multiple visible slides', async () => {
+        await whenStable(fixture);
+
+        const rightBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
+        rightBtn.nativeElement.click();
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(slides[0].visibility).toBe('hidden');
+        expect(slides[1].visibility).toBe('visible');
+        expect(slides[2].visibility).toBe('visible');
+        expect(slides[3].visibility).toBe('hidden');
+    });
+
+    it('should include multiple slide ids in currentActiveSlidesIds', async () => {
+        await whenStable(fixture);
+
+        const slides = component.carousel.slides.toArray();
+        expect(component.carousel.currentActiveSlidesIds).toEqual([slides[0].id, slides[1].id]);
+
+        const rightBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
+        rightBtn.nativeElement.click();
+        await whenStable(fixture);
+
+        expect(component.carousel.currentActiveSlidesIds).toEqual([slides[1].id, slides[2].id]);
     });
 });
 
