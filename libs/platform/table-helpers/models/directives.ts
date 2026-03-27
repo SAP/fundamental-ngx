@@ -38,6 +38,7 @@ export abstract class TableVirtualScroll {
     abstract virtualScrollTransform$: Observable<number>;
     abstract virtualScroll: boolean;
     abstract virtualScrollTotalHeight: number;
+    abstract scrollWholeRows: boolean;
     abstract setTable(table: Table): void;
     abstract listenOnVirtualScroll(): void;
     abstract calculateVirtualScrollRows(): void;

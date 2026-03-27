@@ -10,6 +10,7 @@ import {
     computed,
     ContentChild,
     ContentChildren,
+    effect,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -438,6 +439,10 @@ export class TableComponent<T = any>
     /** @hidden */
     _selectionMode: SelectionModeValue = SelectionMode.NONE;
 
+    /** @hidden */
+    @ViewChild(TableHeaderRowComponent)
+    _header: TableHeaderRowComponent;
+
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
     set selectionMode(value: SelectionModeValue) {
@@ -611,6 +616,12 @@ export class TableComponent<T = any>
     /** @hidden */
     @ViewChild(DndListDirective)
     private readonly _dndDirective: Nullable<DndListDirective<TableRow>>;
+    /** @hidden */
+    @ViewChild('tableScrollMockContainer')
+    readonly tableScrollMockContainer: ElementRef<HTMLDivElement>;
+    /** @hidden */
+    @ViewChild('tableBody', { read: ElementRef })
+    readonly tableBody: ElementRef<HTMLElement>;
     /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
@@ -814,9 +825,12 @@ export class TableComponent<T = any>
         optional: true
     });
     /** @hidden */
-    readonly _virtualScrollDirective = inject<TableVirtualScroll>(FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, {
-        optional: true
-    });
+    readonly _virtualScrollDirective: TableVirtualScroll | null = inject<TableVirtualScroll>(
+        FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE,
+        {
+            optional: true
+        }
+    );
     /** @hidden */
     readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
         optional: true
@@ -923,6 +937,10 @@ export class TableComponent<T = any>
             ),
             appliedFilters: this._appliedFilterNames
         };
+
+        effect(() => {
+            this._setMockScrollbarPosition(this._rtlService?.rtl());
+        });
 
         this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
 
@@ -1033,7 +1051,13 @@ export class TableComponent<T = any>
 
         this._listenToLoadingAndRefocusCell();
 
-        this._initScrollPosition();
+        if (
+            !this._virtualScrollDirective?.scrollWholeRows ||
+            !this._virtualScrollDirective ||
+            !this._virtualScrollDirective?.virtualScroll
+        ) {
+            this._initScrollPosition();
+        }
 
         this._listenToFixedColumnsWidth();
 
@@ -1041,16 +1065,22 @@ export class TableComponent<T = any>
             this.expandAll();
         }
 
-        this._subscriptions.add(
-            this._virtualScrollDirective?.virtualScrollTransform$
-                .pipe(filter(() => !!this._virtualScrollDirective?.virtualScroll && !!this._tableBody))
-                .subscribe((transform) => {
-                    this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
-                })
-        );
+        if (!this._virtualScrollDirective?.scrollWholeRows) {
+            this._subscriptions.add(
+                this._virtualScrollDirective?.virtualScrollTransform$
+                    .pipe(filter(() => !!this._virtualScrollDirective?.virtualScroll && !!this._tableBody))
+                    .subscribe((transform) => {
+                        this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
+                    })
+            );
+        }
 
         if (this._focusableGrid) {
             this._focusableGrid.shortRowFocus = 'first';
+        }
+
+        if (this._virtualScrollDirective?.scrollWholeRows) {
+            this._setMockScrollbarPosition(this._rtlService?.rtl());
         }
     }
 
@@ -1329,6 +1359,7 @@ export class TableComponent<T = any>
 
     /** Manually triggers column's width recalculation */
     recalculateTableColumnWidth(): void {
+        this._tableColumnResizeService._setInitialTableWidth();
         this._tableColumnResizeService.setColumnNames(this._visibleColumns.map((column) => column.name));
         this._setFreezableInfo();
     }
@@ -1704,6 +1735,10 @@ export class TableComponent<T = any>
         this._reIndexTableRows();
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
+
+        if (this._virtualScrollDirective) {
+            this._virtualScrollDirective.calculateVirtualScrollRows();
+        }
     }
 
     /** @hidden */
@@ -2292,12 +2327,15 @@ export class TableComponent<T = any>
     private _listenToPageScrolling(): void {
         this._subscriptions.add(
             this._tableScrollDispatcher.scrolled().subscribe((scrollable) => {
-                const scrollTop = scrollable.getScrollTop();
+                // this block is handled in the virtual scroll directive for scrollWholeRows
+                if (!this._virtualScrollDirective?.scrollWholeRows) {
+                    const scrollTop = scrollable.getScrollTop();
 
-                this.tableScrolled.emit(scrollTop);
+                    this.tableScrolled.emit(scrollTop);
 
-                // Instead of having two places to record this possition, we could just subscribe once.
-                this.getTableState().scrollTopPosition = scrollTop;
+                    // Instead of having two places to record this position, we could just subscribe once.
+                    this.getTableState().scrollTopPosition = scrollTop;
+                }
             })
         );
     }
@@ -2479,5 +2517,13 @@ export class TableComponent<T = any>
         this._lastFreezableColumnCalculation = false;
 
         this.freezeToColumn(freezedColumns[freezedColumns.length - 1]);
+    }
+
+    /** @hidden */
+    private _setMockScrollbarPosition(rtl: boolean | undefined): void {
+        if (this.tableScrollMockContainer) {
+            this.tableScrollMockContainer.nativeElement.style.left = rtl ? '0' : 'auto';
+            this.tableScrollMockContainer.nativeElement.style.right = rtl ? 'auto' : '0';
+        }
     }
 }
