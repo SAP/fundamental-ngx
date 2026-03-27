@@ -16,10 +16,10 @@ export default {
         menuButtonAriaLabel: 'Menü düğmesi'
     },
     coreActionSheet: {
-        toolbarLabel: 'Action Bar'
+        toolbarLabel: 'Eylem Çubuğu'
     },
     coreAvatarGroup: {
-        backButton: 'Back'
+        backButton: 'Geri'
     },
     coreBreadcrumb: {
         breadcrumbTrailLabel: 'İçerik Haritası Yolu',
@@ -58,7 +58,7 @@ export default {
         rightNavigationBtnLabel: 'Sonraki öğeye git'
     },
     coreCombobox: {
-        clearButtonTitle: 'Clear input'
+        clearButtonTitle: 'Girdiyi temizle'
     },
     coreDatePicker: {
         dateInputLabel: 'Tarih girişi',
@@ -78,11 +78,11 @@ export default {
         displayTypeTimeLabel: 'Saat'
     },
     coreDynamicPage: {
-        breadcrumbsLabel: 'Breadcrumbs',
+        breadcrumbsLabel: 'İçerik Haritaları',
         collapseLabel: 'Üst Bilgiyi Daralt',
         expandLabel: 'Üst Bilgiyi Genişlet',
         pinLabel: 'Üst Bilgiyi Sabitle',
-        toggleHeader: 'Toggle header',
+        toggleHeader: 'Üst bilgiyi değiştir',
         unpinLabel: 'Üst Bilgi İçin Sabitlemeyi Kaldır'
     },
     coreFeedListItem: {
@@ -112,8 +112,8 @@ export default {
         announcementSuccess: 'Başarı İletisi Satırı',
         announcementWarning: 'Uyarı İletisi Satırı',
         closable: 'Kapatılabilir',
-        defaultDismissButtonText: 'Close',
-        defaultHiddenText: 'Message strip',
+        defaultDismissButtonText: 'Kapat',
+        defaultHiddenText: 'Mesaj satırı',
         dismissLabel: 'Kapat'
     },
     coreMultiComboBox: {
@@ -129,12 +129,12 @@ export default {
         multiInputAriaLabel: 'Çoklu Değer Girdisi',
         navigateSelectionsWithArrows: 'Aşağı ve yukarı okları kullanarak seçimler arasında gezinin.',
         noResults: 'Sonuç yok.',
-        showAll: 'Show All ({count})',
+        showAll: 'Tümünü Göster ({count})',
         tokensCountText: 'Toplam belirteç sayısını içerir: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Ana Gezinme Düzeni',
-        navigationPath: 'Gezinme Yolu'
+        navigationPath: 'Navigation Path'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Ağaç Öğesi {itemDetails}, {selectedDescription}'
@@ -197,7 +197,7 @@ export default {
         ariaRoleDescription: 'Derecelendirme göstergesi'
     },
     coreSelect: {
-        closeButton: 'Close'
+        closeButton: 'Kapat'
     },
     coreShellbar: {
         assistiveTools: 'Yardımcı Araçlar',
@@ -238,7 +238,7 @@ export default {
         semanticDeclineLabel: 'Reddet'
     },
     coreTabs: {
-        expandIconLabel: 'See More',
+        expandIconLabel: 'Daha Fazla Göster',
         tabListExpandButtonText: 'Daha Fazla'
     },
     coreText: {
@@ -272,10 +272,10 @@ export default {
     coreTimePicker: {
         timePickerButtonLabel: 'Seçiciyi aç',
         timePickerInputLabel: 'Saat seçici girişi',
-        valueStateErrorMessage: 'Value state Error',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateWarningMessage: 'Value state Warning'
+        valueStateErrorMessage: 'Değer durumu Hata',
+        valueStateInformationMessage: 'Değer durumu Bilgi',
+        valueStateSuccessMessage: 'Değer durumu Başarılı',
+        valueStateWarningMessage: 'Değer durumu Uyarı'
     },
     coreToken: {
         ariaRoleDescription: 'belirteç',
@@ -286,7 +286,7 @@ export default {
         tokenizerLabel: 'Belirteç ayırıcı'
     },
     coreToolbar: {
-        moreButton: 'More'
+        moreButton: 'Diğer'
     },
     coreTree: {
         collapse: 'Düğümü daralt',
@@ -303,8 +303,8 @@ export default {
         menuOkText: 'Tamam'
     },
     coreUserMenu: {
-        closeButton: 'Close',
-        previousButton: 'Previous'
+        closeButton: 'Kapat',
+        previousButton: 'Önceki'
     },
     coreWizard: {
         ariaLabel: 'Sihirbaz'
@@ -389,11 +389,11 @@ export default {
         countListResultsSingular: '1 sonuç listesi öğesi'
     },
     platformFeedInput: {
-        sendButton: 'Send',
+        sendButton: 'Gönder',
         userTitle: 'Kullanıcı'
     },
     platformIconTabBar: {
-        moreButton: 'Daha Fazla'
+        moreButton: 'Diğer'
     },
     platformLink: {
         roleDescriptionWithMedia: 'Medya: {media}'
@@ -403,7 +403,7 @@ export default {
     },
     platformMessagePopover: {
         allErrors: 'Tümü',
-        backButton: 'Go back',
+        backButton: 'Geri git',
         defaultErrors: {
             email: 'E-posta geçersiz',
             max: 'Alan azami değeri aşıyor',
@@ -427,20 +427,20 @@ export default {
         detailsActionAriaLabel: 'ayrıntı'
     },
     platformSearchField: {
-        allButtonLabel: 'All',
-        cancelLabel: 'Cancel',
-        clearButtonTitle: 'Temizle',
-        counterLabel: 'Total results: {count}',
-        deleteButtonAriaLabel: 'Remove',
-        deleteButtonTitle: 'Remove Suggestion',
-        groupHeader: 'Group Header',
+        allButtonLabel: 'Tümü',
+        cancelLabel: 'İptal',
+        clearButtonTitle: 'Aramayı Temizle',
+        counterLabel: 'Toplam sonuç: {count}',
+        deleteButtonAriaLabel: 'Kaldır',
+        deleteButtonTitle: 'Öneriyi Kaldır',
+        groupHeader: 'Grup Üst Bilgisi',
         searchInputLabel: 'Ara',
         searchSuggestionMessage: '{count} öneri bulundu.',
         searchSuggestionNavigateMessage: 'yukarı ve aşağı okları kullanarak gezinin',
-        selectScopeLabel: 'Select scope',
-        selectStateMessageLabel: 'Select',
-        submitButtonTitle: 'Ara',
-        suggestionsWrapperAriaLabel: 'Suggestions',
+        selectScopeLabel: 'Kapsam seç',
+        selectStateMessageLabel: 'Seç',
+        submitButtonTitle: 'Ara (Enter)',
+        suggestionsWrapperAriaLabel: 'Öneriler',
         synchronizeButtonTitle: 'Eşitle'
     },
     platformSelect: {
@@ -492,7 +492,7 @@ export default {
         submitButtonLabel: 'Git'
     },
     platformSplitMenuButton: {
-        groupLabel: 'Split button group'
+        groupLabel: 'Düğme grubunu böl'
     },
     platformStandardListItem: {
         deleteActionAriaLabel: 'sil',
@@ -705,7 +705,7 @@ export default {
         successButtonLabel: 'Tamam'
     },
     platformWizardGenerator: {
-        stepsLabel: 'Wizard Steps',
+        stepsLabel: 'Sihirbaz Adımları',
         summarySectionEditStep: 'Düzenle'
     },
     segmentedButton: {
