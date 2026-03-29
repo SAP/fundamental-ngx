@@ -184,4 +184,38 @@ describe('InlineHelpDirective popover inputs', () => {
         expect(popoverService.appendTo()).toBe(container);
         document.body.removeChild(container);
     });
+
+    it('should close on escape key when closeOnEscapeKey is true', fakeAsync(() => {
+        const selector = '.fd-popover__body.fd-inline-help__content';
+        component.closeOnEscapeKey = true;
+        fixture.detectChanges();
+
+        // Open via focusin on the trigger
+        component.ref.nativeElement.dispatchEvent(new Event('focusin'));
+        expect(document.body.querySelector(selector)).toBeTruthy();
+
+        // Press Escape on the trigger element
+        component.ref.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+        tick(50);
+        expect(document.body.querySelector(selector)).toBeFalsy();
+    }));
+
+    it('should not close on escape key when closeOnEscapeKey is false', fakeAsync(() => {
+        const selector = '.fd-popover__body.fd-inline-help__content';
+        component.closeOnEscapeKey = false;
+        fixture.detectChanges();
+
+        // Open via focusin on the trigger
+        component.ref.nativeElement.dispatchEvent(new Event('focusin'));
+        expect(document.body.querySelector(selector)).toBeTruthy();
+
+        // Press Escape on the trigger element — should NOT close
+        component.ref.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+        tick(50);
+        expect(document.body.querySelector(selector)).toBeTruthy();
+
+        // Clean up
+        component.ref.nativeElement.dispatchEvent(new Event('focusout'));
+        tick(50);
+    }));
 });

@@ -39,7 +39,8 @@ let inlineHelpId = 0;
     providers: [PopoverService],
     host: {
         '[class.fd-inline-help__trigger]': 'true',
-        '[attr.aria-describedby]': 'bodyId()'
+        '[attr.aria-describedby]': 'bodyId()',
+        '(keydown.escape)': '_onEscapeKey($event)'
     }
 })
 export class InlineHelpDirective {
@@ -84,13 +85,13 @@ export class InlineHelpDirective {
     readonly restoreFocusOnClose = input(true, { transform: booleanAttribute });
 
     /** The element to which the overlay is attached. By default it is body. */
-    readonly appendTo = input<Nullable<ElementRef | Element>>(null);
+    readonly appendTo = input<ElementRef | Element | null | undefined>(null);
 
     /** Whether position should remain fixed when approaching page corners. */
     readonly fixedPosition = input(false, { transform: booleanAttribute });
 
     /** Maximum width of popover body in px. */
-    readonly maxWidth = input<Nullable<number>>(null);
+    readonly maxWidth = input<number | null | undefined>(null);
 
     /** @hidden Combined internal + user-provided body classes. */
     readonly combinedBodyClass = computed(() => {
@@ -168,6 +169,15 @@ export class InlineHelpDirective {
             this._popoverService.updateContent(text, template);
             this._setupScreenreaderElement(content);
         });
+    }
+
+    /** @hidden */
+    _onEscapeKey(event: Event): void {
+        if (this.closeOnEscapeKey() && this._popoverService.isOpen()) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this._popoverService.close();
+        }
     }
 
     /** @hidden */
