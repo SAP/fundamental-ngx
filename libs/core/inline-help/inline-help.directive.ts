@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
-import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
+import { buildPopoverConfig, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
@@ -71,6 +71,27 @@ export class InlineHelpDirective {
     /** aria-role for the Inline Help Popover body */
     readonly bodyRole = input('tooltip');
 
+    /** Whether the popover should have an arrow. */
+    readonly noArrow = input(false, { transform: booleanAttribute });
+
+    /** Whether the popover should close when the escape key is pressed. */
+    readonly closeOnEscapeKey = input(false, { transform: booleanAttribute });
+
+    /** Whether to close the popover on router navigation start. */
+    readonly closeOnNavigation = input(true, { transform: booleanAttribute });
+
+    /** Whether to restore focus to the previously focused element when the popover closes. */
+    readonly restoreFocusOnClose = input(true, { transform: booleanAttribute });
+
+    /** The element to which the overlay is attached. By default it is body. */
+    readonly appendTo = input<Nullable<ElementRef | Element>>(null);
+
+    /** Whether position should remain fixed when approaching page corners. */
+    readonly fixedPosition = input(false, { transform: booleanAttribute });
+
+    /** Maximum width of popover body in px. */
+    readonly maxWidth = input<Nullable<number>>(null);
+
     /** @hidden Combined internal + user-provided body classes. */
     readonly combinedBodyClass = computed(() => {
         const parts = [this._additionalBodyClass];
@@ -82,17 +103,22 @@ export class InlineHelpDirective {
     });
 
     /** @hidden Popover configuration computed from all inputs. */
-    readonly popoverConfig = computed(() => ({
-        placement: this.placement() ?? 'bottom',
-        triggers: this.triggers(),
-        noArrow: false,
-        closeOnEscapeKey: false,
-        closeOnOutsideClick: this.closeOnOutsideClick(),
-        additionalBodyClass: this.combinedBodyClass(),
-        disabled: this.disabled(),
-        bodyRole: this.bodyRole(),
-        bodyId: this.bodyId()
-    }));
+    readonly popoverConfig = buildPopoverConfig({
+        placement: () => this.placement() ?? 'bottom',
+        triggers: this.triggers,
+        noArrow: this.noArrow,
+        closeOnEscapeKey: this.closeOnEscapeKey,
+        closeOnOutsideClick: this.closeOnOutsideClick,
+        closeOnNavigation: this.closeOnNavigation,
+        restoreFocusOnClose: this.restoreFocusOnClose,
+        appendTo: this.appendTo,
+        fixedPosition: this.fixedPosition,
+        maxWidth: this.maxWidth,
+        additionalBodyClass: this.combinedBodyClass,
+        disabled: this.disabled,
+        bodyRole: this.bodyRole,
+        bodyId: this.bodyId
+    });
 
     /** @hidden */
     private readonly _popoverService = inject(PopoverService);
