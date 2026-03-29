@@ -43,7 +43,7 @@ import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { shallowEqual } from 'fast-equals';
-import { Subscription, skip, startWith, timer } from 'rxjs';
+import { Subscription, skip, timer } from 'rxjs';
 import {
     FdMultiComboBoxDataSource,
     FdMultiComboboxAcceptableDataSource
@@ -357,10 +357,11 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Flag indicating whether the data source has changed.
-     * Set to true when a new data source is assigned, triggering a refresh of suggestions.
+     * Guard flag: true while waiting for a new data source's first real data emission.
+     * Prevents the provider's initial empty emission from being treated as "no results."
      * @hidden
      */
-    private _dataSourceChanged = false;
+    private _dataSourceChanged = true;
 
     /**
      * Signal reference to the popover component.
@@ -662,60 +663,34 @@ export abstract class BaseMultiCombobox<T = any> {
      * Prepares the data stream and subscribes to it.
      */
     protected _openDataStream(matchingStrategy: MatchingStrategy): void {
-        const dataSourceProvider = this.dataSourceDirective.dataSourceProvider;
-
-        if (!dataSourceProvider) {
-            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
-        }
-
-        dataSourceProvider.limitless = this.limitless();
-
-        dataSourceProvider.dataProvider.setLookupKey(this.lookupKey());
-        const matchingBy: MatchingBy = {
-            firstBy: this._displayFn
-        };
-
-        if (this.secondaryKey()) {
-            matchingBy.secondaryBy = this._secondaryFn;
-        }
-
-        dataSourceProvider.dataProvider.setMatchingBy(matchingBy);
-        dataSourceProvider.dataProvider.setMatchingStrategy(matchingStrategy);
+        this._matchingStrategy = matchingStrategy;
+        this._configureDataSourceProvider(matchingStrategy);
 
         // initial data fetch
-        const map = new Map();
-        map.set('query', '*');
+        this._fetchInitialData();
 
-        if (!this.limitless()) {
-            map.set('limit', this._mapLimit);
-        } else {
-            dataSourceProvider.dataProvider['defaultLimit'] = Number.MAX_SAFE_INTEGER;
-        }
+        this._subscribeToDsEvents();
 
-        dataSourceProvider.match(map);
-
-        this._dsSubscription = new Subscription();
-
-        this._dsSubscription.add(
-            this.dataSourceDirective.dataSourceProvider?.dataRequested.subscribe((value) =>
-                this.dataRequested.emit(value)
-            )
-        );
-        this._dsSubscription.add(
-            this.dataSourceDirective.dataSourceProvider?.dataReceived.subscribe((value) =>
-                this.dataReceived.emit(value)
-            )
-        );
-
-        this.dataSourceDirective.dataSourceChanged
-            .pipe(startWith(true), takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => {
-                this._dataSourceChanged = true;
-            });
+        this.dataSourceDirective.dataSourceChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._dataSourceChanged = true;
+            this._subscribeToDsEvents();
+            this._configureDataSourceProvider(this._matchingStrategy);
+            this._fetchInitialData();
+        });
 
         this.dataSourceDirective.dataChanged$.pipe(skip(0), takeUntilDestroyed(this._destroyRef)).subscribe((data) => {
             if (data.length === 0) {
-                this._processingEmptyData();
+                if (this._dataSourceChanged) {
+                    // Data source transition: skip the invalid-entry handling (_processingEmptyData)
+                    // because the new provider's BehaviorSubject starts with [] before match('*') populates it.
+                    // But still clear stale suggestions and reset the flag.
+                    this._dataSourceChanged = false;
+                    this._suggestions.set([]);
+                    this._flatSuggestions.set([]);
+                    this._fullFlatSuggestions.set([]);
+                } else {
+                    this._processingEmptyData();
+                }
                 return;
             }
 
@@ -794,5 +769,75 @@ export abstract class BaseMultiCombobox<T = any> {
         this._timerSub$ = timer(this.invalidEntryDisplayTime()).subscribe(() => this._unsetInvalidEntry());
 
         this._cd.detectChanges();
+    }
+
+    /**
+     * @hidden
+     * Configures the data source provider with matching settings.
+     */
+    private _configureDataSourceProvider(matchingStrategy: MatchingStrategy): void {
+        const dataSourceProvider = this.dataSourceDirective.dataSourceProvider;
+
+        if (!dataSourceProvider) {
+            return;
+        }
+
+        dataSourceProvider.limitless = this.limitless();
+
+        dataSourceProvider.dataProvider.setLookupKey(this.lookupKey());
+        const matchingBy: MatchingBy = {
+            firstBy: this._displayFn
+        };
+
+        if (this.secondaryKey()) {
+            matchingBy.secondaryBy = this._secondaryFn;
+        }
+
+        dataSourceProvider.dataProvider.setMatchingBy(matchingBy);
+        dataSourceProvider.dataProvider.setMatchingStrategy(matchingStrategy);
+    }
+
+    /**
+     * @hidden
+     * Triggers the initial data fetch on the current data source provider.
+     */
+    private _fetchInitialData(): void {
+        const dataSourceProvider = this.dataSourceDirective.dataSourceProvider;
+
+        if (!dataSourceProvider) {
+            return;
+        }
+
+        const map = new Map();
+        map.set('query', '*');
+
+        if (!this.limitless()) {
+            map.set('limit', this._mapLimit);
+        } else {
+            dataSourceProvider.dataProvider['defaultLimit'] = Number.MAX_SAFE_INTEGER;
+        }
+
+        dataSourceProvider.match(map);
+    }
+
+    /**
+     * @hidden
+     * Subscribes to dataRequested/dataReceived events from the current data source provider.
+     * Unsubscribes from previous provider's events first.
+     */
+    private _subscribeToDsEvents(): void {
+        this._dsSubscription?.unsubscribe();
+        this._dsSubscription = new Subscription();
+
+        this._dsSubscription.add(
+            this.dataSourceDirective.dataSourceProvider?.dataRequested.subscribe((value) =>
+                this.dataRequested.emit(value)
+            )
+        );
+        this._dsSubscription.add(
+            this.dataSourceDirective.dataSourceProvider?.dataReceived.subscribe((value) =>
+                this.dataReceived.emit(value)
+            )
+        );
     }
 }
