@@ -5,7 +5,9 @@
 ## Table of Contents
 
 - [When to Use Signals vs Plain Properties](#when-to-use-signals-vs-plain-properties)
+- [Immutable Update Patterns for Signals](#immutable-update-patterns-for-signals)
 - [Effect vs Observables](#effect-vs-observables)
+- [linkedSignal for Mutable Derived State](#linkedsignal-for-mutable-derived-state)
 - [BehaviorSubject + combineLatest Migration](#behaviorsubject--combinelatest-migration)
 - [Migrating Classes That Extend BehaviorSubject](#migrating-classes-that-extend-behaviorsubject)
 - [Migrating Token Interfaces](#migrating-token-interfaces)
@@ -84,17 +86,66 @@ private _formatValue(raw: number): string {
 
 ---
 
+## Immutable Update Patterns for Signals
+
+Signals use **reference equality** (`===`) by default. Mutating an object in place then calling `set()` with the same reference is a **silent no-op** -- the signal sees the same reference and skips notification.
+
+### The trap
+
+```typescript
+// SILENT NO-OP: same reference, signal doesn't notify consumers
+const items = signal<string[]>([]);
+items().push('new item');
+items.set(items()); // nothing happens -- same array reference
+
+const user = signal<User>({ name: 'Alice', age: 30 });
+user().age = 31;
+user.set(user()); // nothing happens -- same object reference
+```
+
+### The fix: always create new references
+
+```typescript
+// Arrays: spread into a new array
+items.update((list) => [...list, 'new item']);
+
+// Objects: spread into a new object
+user.update((u) => ({ ...u, age: 31 }));
+
+// Removing from arrays
+items.update((list) => list.filter((item) => item !== target));
+
+// Updating an item in an array
+items.update((list) => list.map((item) => (item.id === targetId ? { ...item, active: true } : item)));
+```
+
+### Custom equality functions
+
+For signals holding complex objects, provide a custom equality function to control when notifications fire:
+
+```typescript
+// Only notify when relevant fields change
+readonly config = signal<Config>(defaultConfig, {
+    equal: (a, b) => a.mode === b.mode && a.density === b.density
+});
+```
+
+> **Note:** Custom equality for `input()` is not yet supported ([angular/angular#54111](https://github.com/angular/angular/issues/54111)). Use a private `signal()` with equality + `computed()` as a workaround.
+
+---
+
 ## Effect vs Observables
 
 ### Decision Rule
 
-| Use `effect()` when:            | Use Observables when:                        |
-| ------------------------------- | -------------------------------------------- |
-| Reacting to signal changes      | Async events (HTTP, WebSocket, timers)       |
-| Synchronizing state with DOM    | Complex async operators (debounce, throttle) |
-| Third-party library integration | Existing RxJS-based APIs                     |
-| Automatic cleanup needed        | Multiple subscribers required                |
-| DOM manipulation (focus, ARIA)  | Time-based operations                        |
+| Use `effect()` when:            | Use `linkedSignal` when:                         | Use Observables when:                        |
+| ------------------------------- | ------------------------------------------------ | -------------------------------------------- |
+| DOM side effects (focus, ARIA)  | Derived state that can be overridden locally     | Async events (HTTP, WebSocket, timers)       |
+| Logging / analytics             | State that resets when its source changes        | Complex async operators (debounce, throttle) |
+| Third-party library integration | Form fields with initial values from inputs      | Existing RxJS-based APIs                     |
+| External API calls              | Pagination, selection that resets on data change | Multiple subscribers required                |
+
+**Never use `effect()` to derive state.** If you're writing `effect(() => { someSignal.set(...) })`, you almost certainly want `computed()` or `linkedSignal` instead.
 
 ### Example: Managing Focus
 
@@ -141,6 +192,74 @@ export class Popover {
     }
     // No ngOnDestroy needed - automatic cleanup!
 }
+```
+
+---
+
+## linkedSignal for Mutable Derived State
+
+`linkedSignal` (stable since Angular 20) fills the gap between `computed()` (read-only derived) and `signal()` (independent writable). Use it when state is derived from a source but can also be locally overridden, resetting when the source changes.
+
+### When to use linkedSignal
+
+| Scenario                                                      | Use                       |
+| ------------------------------------------------------------- | ------------------------- |
+| Pure derivation (read-only)                                   | `computed()`              |
+| Derived state that user can override, resets on source change | `linkedSignal`            |
+| Independent writable state                                    | `signal()`                |
+| Derived state + imperative DOM side effect                    | `computed()` + `effect()` |
+
+### Example: Editable field that resets
+
+```typescript
+export class EditableField {
+    readonly initialValue = input('');
+
+    // Resets to initialValue when it changes, but can be edited locally
+    readonly editableValue = linkedSignal(() => this.initialValue());
+
+    protected onEdit(value: string): void {
+        this.editableValue.set(value);
+    }
+}
+```
+
+### Example: Pagination that resets on data source change
+
+```typescript
+export class DataTable {
+    readonly dataSource = input.required<string>();
+    readonly totalPages = input(1);
+
+    // Resets to page 1 when dataSource changes
+    readonly currentPage = linkedSignal(() => {
+        this.dataSource(); // track the source
+        return 1;
+    });
+
+    protected goToPage(page: number): void {
+        this.currentPage.set(Math.min(page, this.totalPages()));
+    }
+}
+```
+
+### Anti-pattern: effect() for derived mutable state
+
+```typescript
+// ANTI-PATTERN: using effect to sync state
+readonly currentPage = signal(1);
+constructor() {
+    effect(() => {
+        this.dataSource(); // track
+        this.currentPage.set(1); // reset -- DON'T DO THIS
+    });
+}
+
+// CORRECT: linkedSignal handles this declaratively
+readonly currentPage = linkedSignal(() => {
+    this.dataSource();
+    return 1;
+});
 ```
 
 ---
