@@ -1,0 +1,16 @@
+<div class="toggle-row">
+    <label>
+        <input type="checkbox" [ngModel]="readonly()" (ngModelChange)="readonly.set($event)" />
+        Toggle readonly
+    </label>
+</div>
+
+<div [fdkReadonly]="readonly()">
+    <div fdkSelectableList [selected]="selectedItemIndex" (selectedChange)="selectedItemIndex = $event">
+        @for (item of selectableItems; track item; let index = $index) {
+            <div fdkSelectableItem [value]="index + 1" [class.selected]="selectedItemIndex === index + 1">
+                selectable #{{ index + 1 }}
+            </div>
+        }
+    </div>
+</div>
